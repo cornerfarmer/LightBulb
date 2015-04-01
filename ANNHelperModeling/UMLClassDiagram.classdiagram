@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="2915d7ed-8ef9-4b57-97f9-ef3667468aaa" name="NeuralNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -43,8 +43,11 @@
             <elementDefinition Id="ea5065db-3abd-4fa9-9c05-91b9fbdf9803" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="7846e741-a1f1-4caa-86bd-fb75128204b8" name="NetworkTopology" direction="In" isUnique="false">
-                  <elementDefinition Id="bcca8daa-b512-4d8b-ab8b-a65de3f201f2" />
+                <parameter Id="88dc7ae3-b9c1-4096-a7b0-a046742e5ab1" name="networkTopology" direction="In" isUnique="false">
+                  <elementDefinition Id="c2e8232e-9e35-4a98-9735-ca449064102a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="035ce863-5d4f-409b-b0f6-e2351db97327" LastKnownName="NetworkTopology" />
+                  </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
@@ -77,6 +80,16 @@
           </operation>
           <operation Id="5e234874-41c8-42c7-919c-1118fdb66c5e" name="refreshAllNeurons" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="a8d2de90-293e-440a-b81a-a3bdd009c297" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="46388123-6379-441f-b956-fa6c4c8e25e7" name="activationOrder" direction="In" isUnique="false">
+                  <elementDefinition Id="fd7a55c7-2d45-46ac-889a-6ceadba1007e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" LastKnownName="ActivationOrder" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -240,6 +253,14 @@
             <elementDefinition Id="30f3eac5-ae58-4d03-b2b1-0ccb2ae07e3f" />
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="0bc40ec4-4028-404b-8c47-124fe4200108" name="threshold" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="50b72f78-7a8b-49a6-b8fb-8046290d9f0f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="04986386-f103-4768-99cd-abc7c3e6a659" name="StandardNeuron" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="e019e1ac-3779-4122-9d2e-5fe4ebc5e6d4" />
@@ -265,6 +286,27 @@
                   <elementDefinition Id="4b66d99f-f68d-404a-9a42-0969f6002b01" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="0e62e670-2767-4594-be6d-db5b38998103" LastKnownName="OutputFunction" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="4687bc7d-b90c-4a05-ab33-0bbd22f67615" name="addPrevNeuron" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2579de96-5e57-4b91-b8a6-4bea38207645" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f841ef02-5a56-4ced-ba44-2d104b0f5c67" name="newPrevNeuron" direction="In" isUnique="false">
+                  <elementDefinition Id="a8d2593b-8f54-457f-820c-cd16e1f34890" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="Neuron" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="06ae6b83-d670-45ad-965a-5d163bfb4c2f" name="weight" direction="In" isUnique="false">
+                  <elementDefinition Id="acd66276-1472-48d3-8aa4-6f1e1e5b4e01" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -342,48 +384,53 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="a70b60c2-88ab-40f9-a7a9-2ed65d41786a" />
           </association>
+          <association Id="a53700f2-4897-40df-abbe-18a17c547f14" isDerived="false" sourceEndRoleName="" targetEndRoleName="options" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5b27932e-59dc-41be-b7d2-730ca5529f70" LastKnownName="LayeredNetworkOptions" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e941b864-6438-4f61-bb0c-11ac8fe3e995" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ba06b693-75a3-4126-90e9-d885e9e249fb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="eccb443f-5be8-43ea-a98f-1ed16f57b745" name="options" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3e4633d8-75e8-47ed-b31c-cb78220dba52" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="646d7324-e380-497c-afec-5894794896e3" />
+          </association>
         </targetEnds>
         <ownedOperationsInternal>
-          <operation Id="49a74b6e-f48d-4d42-b0be-3cf2b2b53e69" name="FeedForwardNet" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="49a74b6e-f48d-4d42-b0be-3cf2b2b53e69" name="LayeredNet" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="e8695ddf-2c16-4ce8-a544-f5c554263290" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="2d5eae0d-cac7-41aa-b89b-cf4ecc785dad" name="neuronsPerLayerCount" direction="In" isUnique="false">
-                  <elementDefinition Id="9ad3ec0c-f6ff-4b59-99a5-8f1f2b6473fc" />
+                <parameter Id="41772a78-5e5a-4d07-8fd8-f887f0248022" name="options" direction="In" isUnique="false">
+                  <elementDefinition Id="4943c11f-c0c6-4a27-9b35-c16b84f704aa" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="bae3c96d-4e39-4780-845c-9902211981fa" LastKnownName="int[]" />
+                    <referencedTypeMoniker Id="7325e575-120a-4a23-a958-224dfcb2c331" LastKnownName="LayeredNetworkOptions" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="a13b7037-584a-41a7-9fb6-9ec71fa0a6dc" name="getNeuronsInLayer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="104dd41e-fd50-4d75-965f-827066415689" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8dbe8419-20f1-4a2d-8e53-aae916acf575" name="layerID" direction="In" isUnique="false">
+                  <elementDefinition Id="a1827ad3-334c-44a8-96ba-41f44b7e590b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="d3282935-ae6e-4803-a6c5-65e7c1135fab" name="enableShortcuts" direction="In" isUnique="false">
-                  <elementDefinition Id="bf9feeb4-cd6a-4f3e-88c2-87842de5f05d" />
+                <parameter Id="684175c4-e969-4d98-bd01-d33a419df170" direction="Return" isUnique="false">
+                  <elementDefinition Id="e781aca6-f383-4b59-9712-1a7ed53a970b" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="686416a8-7e15-496c-9115-d2e4a7b6ce49" name="enableLateralBackCoupling" direction="In" isUnique="false">
-                  <elementDefinition Id="a909ea2e-c777-4937-9295-082099e87935" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="6b11caa5-04cd-418d-bd5f-462c8a5a4517" name="enableIndirectBackCoupling" direction="In" isUnique="false">
-                  <elementDefinition Id="c1aeca3f-9a6a-4931-a511-ca0a4ede974c" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="aa5fd188-2b84-40d4-934a-560d145bfafb" name="enableDirectBackCoupling" direction="In" isUnique="false">
-                  <elementDefinition Id="ecde7531-d302-4678-be61-1d8db6900327" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
+                    <referencedTypeMoniker Id="653c5588-6e99-45e2-b3ff-2d34400777da" LastKnownName="Neuron[]" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -556,12 +603,6 @@
               <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
             </type_NamedElement>
           </property>
-          <property Id="ed55ca92-fd5b-4565-8ebd-571788c4236a" name="threshold" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="f77f3f4b-678b-4a0c-aa3f-ad548630f1d3" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="ebd342f7-1ab2-4177-b986-e869186b981e" LastKnownName="float" />
-            </type_NamedElement>
-          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="c6879b0d-0fe0-4a83-b374-e746ceca8b22" name="addNextNeuron" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -585,29 +626,11 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="13fde355-d051-4c3e-9b35-aeea7bc7734e" name="addPrevNeuron" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="3648d341-5a77-4b57-828b-ff31b0957843" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="dd56fee3-e992-4150-92de-67f1df391bed" name="newPrevNeuron" direction="In" isUnique="false">
-                  <elementDefinition Id="581e007f-4bb9-4f6e-aadd-dbc7bec7cc3d" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="Neuron" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="541076fb-8343-4189-94f1-191edccccef9" name="weight" direction="In" isUnique="false">
-                  <elementDefinition Id="b1019acc-5fbf-49e3-9a9e-94dd69075951" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
           <operation Id="6b385ad7-3f47-4a78-ad5e-1acfa5607c69" name="refreshActivation" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="72947e56-2414-4b9b-a0d1-37d84b312744" />
+          </operation>
+          <operation Id="04fec82d-3693-44e4-af32-987523303db8" name="getActivation:float" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="917d21f7-245c-4605-91ce-753b7e3e5d93" />
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -632,6 +655,29 @@
             <elementDefinition Id="4ef48d83-5889-434b-8ec6-237f4da223b6" />
           </generalization>
         </generalsInternal>
+        <ownedAttributesInternal>
+          <property Id="8a42b2d2-0ba4-4003-8385-9a062d2a0cae" name="input" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="15e42a8f-3803-4783-87c9-7318d3627ce1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="a347992b-43ea-4c3e-ac73-7ad25d299127" name="setInput" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2797ddd7-894d-4daa-93e3-b4c721946e66" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0d1a9e73-a2b4-43bd-8341-731e2ec34ec9" name="newInput" direction="In" isUnique="false">
+                  <elementDefinition Id="a973aa8f-bc55-4c1a-9ed2-73b21de8ba2e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -658,11 +704,6 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="ebd342f7-1ab2-4177-b986-e869186b981e" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
-        <elementDefinition Id="d6404abc-7c7f-44ae-b049-072594ff1cfe" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" name="Neuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron">
         <elementDefinition Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11" />
       </referencedType>
@@ -670,11 +711,6 @@
     <packageHasNamedElement>
       <referencedType Id="565ea664-1ee9-4bcf-b0e9-c74ab5c2ea0c" name="InputNeuron[]" isAbstract="false" isLeaf="false" cachedFullName="InputNeuron[]">
         <elementDefinition Id="ac4fa2b3-d50b-4315-adf3-0a2f26d5de1a" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="bae3c96d-4e39-4780-845c-9902211981fa" name="int[]" isAbstract="false" isLeaf="false" cachedFullName="int[]">
-        <elementDefinition Id="0a00ab8e-3fbf-492b-bd70-e8d01b6fea09" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -702,6 +738,127 @@
         <elementDefinition Id="9f930b9d-7b79-4dc1-83e7-5a148c474368" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c4409b0b-6e96-44a0-8c49-1131be123996" name="ActivationOrder" isAbstract="true" isLeaf="false" isActiveClass="true">
+        <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
+        <ownedOperationsInternal>
+          <operation Id="ee2464b3-fd27-4b07-b464-b5a3b5d46e88" name="executeActivation" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="96d517d9-3f54-4db2-bcc4-cbea9b7397cf" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="742364d2-1f80-4137-aa86-d3b8919659a8" name="networkTopology" direction="In" isUnique="false">
+                  <elementDefinition Id="f56dd9ee-995a-4bbc-985d-887b21bf1257" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="035ce863-5d4f-409b-b0f6-e2351db97327" LastKnownName="NetworkTopology" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="035ce863-5d4f-409b-b0f6-e2351db97327" name="NetworkTopology" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology">
+        <elementDefinition Id="4232794c-10fd-46a3-a8eb-50ab872b8253" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" name="ActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::ActivationOrder">
+        <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5b27932e-59dc-41be-b7d2-730ca5529f70" name="LayeredNetworkOptions" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c7be55b4-1061-4dbe-9378-89b17394e305" />
+        <ownedAttributesInternal>
+          <property Id="2cdf3ef7-eb06-4822-8597-336538ba866f" name="neuronsPerLayerCount" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="454aa698-a44c-4df4-adaa-9ef1dc1019ca" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="b12f0fda-633d-4fa0-be4b-3b934ee3c521" LastKnownName="int[]" />
+            </type_NamedElement>
+          </property>
+          <property Id="be50e1ed-54a0-4d97-9ec7-0074d47e2049" name="inputFunction" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c130f9f7-56e0-4da4-bebe-79ee5db0e08c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="90829668-cc8c-4313-97fd-4b7b83d18843" LastKnownName="InputFunction" />
+            </type_NamedElement>
+          </property>
+          <property Id="2f7221e3-64e6-4b8a-85bf-09a2e2a4a374" name="enableIndirectBackCoupling" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b39ea0c9-73ba-4550-abba-8cf3dd420534" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="7c2254a7-5c23-408f-bf1e-23d687205dba" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="1affd5d2-71f9-47ab-a2c7-1b93c918d502" name="enableDirectBackCoupling" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="1c21f367-2cd6-495b-b189-758a4d9a413d" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="334e2374-bf32-4e8c-b0de-b23b9b985e9c" name="enableLateralBackCoupling" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9d255631-317a-47f4-946b-0b22c55dda04" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="1437d7ab-a635-468b-81cf-ae6f8edd8133" name="enableShortcuts" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="008747aa-92b7-44ae-8c99-68d9a0f2f5a6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="218b0fc3-05aa-4510-a002-52329c041add" name="outputFunction" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="601ad4b1-eb9f-4d07-8bf0-2a13a42ec7d8" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="0e62e670-2767-4594-be6d-db5b38998103" LastKnownName="OutputFunction" />
+            </type_NamedElement>
+          </property>
+          <property Id="6b100976-5f84-4eb0-9d97-7f14f82fa612" name="activationFunction" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="64b09556-c2a4-48b2-8c35-99245e361ab5" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8a0d57f0-a010-475a-84d1-f176c10dd13f" LastKnownName="ActivationFunction," />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="7c2254a7-5c23-408f-bf1e-23d687205dba" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="b12f0fda-633d-4fa0-be4b-3b934ee3c521" name="int[]" isAbstract="false" isLeaf="false" cachedFullName="int[]">
+        <elementDefinition Id="0a00ab8e-3fbf-492b-bd70-e8d01b6fea09" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="8a0d57f0-a010-475a-84d1-f176c10dd13f" name="ActivationFunction," isAbstract="false" isLeaf="false" cachedFullName="ActivationFunction,">
+        <elementDefinition Id="a895053f-1f8e-4cab-bb2a-8e4bec90b41a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="7325e575-120a-4a23-a958-224dfcb2c331" name="LayeredNetworkOptions" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::LayeredNetworkOptions">
+        <elementDefinition Id="c7be55b4-1061-4dbe-9378-89b17394e305" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9f24202f-4ca8-48ff-bfbe-52a4938b2eda" name="TopologicalOrder" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b3ffe4f8-4e2c-4e5f-b8cb-57f80e868a43" />
+        <generalsInternal>
+          <generalization Id="43f10157-4d5c-42ef-8dce-42cbf9cba888" isSubstitutable="false">
+            <classMoniker Id="c4409b0b-6e96-44a0-8c49-1131be123996" LastKnownName="ActivationOrder" />
+            <elementDefinition Id="1048841e-ed60-4774-8c8c-05feb73b23aa" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />
