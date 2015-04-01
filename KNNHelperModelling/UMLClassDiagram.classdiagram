@@ -72,20 +72,6 @@
       </propertyInstances>
     </stereotypeInstance>
   </appliedStereotypesInternal>
-  <profileInstances>
-    <packageHasProfileInstances Id="f661612a-3812-4fef-8b1c-deb630022588">
-      <profileInstance Id="e5300adf-798f-436a-a2d3-c56b50a3ab04" name="CSharpProfile">
-        <elementDefinition Id="2c192dda-e180-4f66-9bdb-31984865877c" />
-      </profileInstance>
-      <elementDefinition Id="eeb816d9-5461-4cb2-930e-04a93f720a03" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="58d81840-1cc1-42b4-baa8-3b94a841027d">
-      <profileInstance Id="86b1c0ec-850a-48b6-8c88-d627485e5618" name="TextTemplateBindings">
-        <elementDefinition Id="e3fd9854-6757-4d74-9353-f701b37e5067" />
-      </profileInstance>
-      <elementDefinition Id="6d100a02-a626-4e95-a1fd-04ba98a5fc11" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="61e22c2e-fd08-4084-b016-2e2938716e2a" name="NeuralNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -106,6 +92,22 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="85738020-f18a-4a3f-9ae1-87560523d1b6" />
+          </association>
+          <association Id="9dfa2840-ab75-4455-ae97-21ada446c3f7" isDerived="false" sourceEndRoleName="NeuralNetwork" targetEndRoleName="Teacher" isLeaf="false" isAbstract="false">
+            <classMoniker Id="b5083968-f666-4c2c-8922-9f91d590aefb" LastKnownName="Teacher" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="46661387-b477-41e3-ae95-1af75efde3fc" name="NeuralNetwork" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="67a5daba-ff6b-47a9-ae3d-0aa39e1c6181" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2481f82f-9a3b-4c91-8ffd-42a12f3bd22b" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4da67c15-eb7b-4e2a-96f5-2986880e3d11" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="04f0004f-b69a-4225-9fb0-d8aaa4863081" />
           </association>
         </targetEnds>
       </class>
@@ -280,6 +282,93 @@
         </generalsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b5083968-f666-4c2c-8922-9f91d590aefb" name="Teacher" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="01ea3e55-0e47-477f-86ef-3f0edb75be62" />
+        <targetEnds>
+          <association Id="568aa097-9e88-4033-a78d-31c677af67ec" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="TeachingLesson" isLeaf="false" isAbstract="false">
+            <classMoniker Id="de8649a8-fae1-4753-8d98-01d04a74f068" LastKnownName="TeachingLesson" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5237919c-2f86-4f17-abb7-dd2d1358d197" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ff73ca88-6f56-49b6-8e34-aea934b38b1f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="727c852d-6120-44c0-9288-f0a200a73d1b" name="TeachingLesson" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="c192d410-28d9-459b-ace2-5f04a36d770d" name="Lower" value="0">
+                      <elementDefinition Id="6d94edca-694e-4d66-a1c9-ecc90a1c5eba" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="aa81cf1b-f8e7-4956-9e7b-0f75c40718ec" name="Upper" value="*">
+                      <elementDefinition Id="aa63a76b-a2fe-403d-800a-dbefaf412fc2" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="00e57541-3607-4ca8-bb1a-73de335bec51" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a38f591b-3f97-47e6-b6b9-68ee77bec72b" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b3fd2fb9-4e39-4559-9860-22dc5f79df44" name="TeachingPattern" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="51d8d2a3-e196-46da-b272-662083ff82e3" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="df1228b0-2657-45c8-a74b-45de911a0d7d" name="TeachingInput" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="06a4fd4e-9f95-4529-a187-30d133381584" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="de8649a8-fae1-4753-8d98-01d04a74f068" name="TeachingLesson" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4738a86b-c358-4090-aa69-d9458e551708" />
+        <targetEnds>
+          <association Id="1e265103-ec96-41e8-8f6f-caf2d9bbde2a" isDerived="false" sourceEndRoleName="TeachingLesson" targetEndRoleName="TeachingInput" isLeaf="false" isAbstract="false">
+            <classMoniker Id="df1228b0-2657-45c8-a74b-45de911a0d7d" LastKnownName="TeachingInput" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="39c70678-9c98-4c3a-955a-25dfc965245d" name="TeachingLesson" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="35c813c2-28b7-4c76-8d79-72a9f7fc5a7a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="72130a49-e2f3-48d8-93d3-29ca417ef4ef" name="TeachingInput" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c68bed8e-9f9b-4486-b75d-dfb9201e5501" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="70dc48e1-e65e-465d-98c0-f1308d092833" />
+          </association>
+          <association Id="6fa012e3-2b02-40a5-a643-3e60a11a7a48" isDerived="false" sourceEndRoleName="TeachingLesson" targetEndRoleName="TeachingPattern" isLeaf="false" isAbstract="false">
+            <classMoniker Id="b3fd2fb9-4e39-4559-9860-22dc5f79df44" LastKnownName="TeachingPattern" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4e516bce-62fa-48d8-be67-cecd5114ceb2" name="TeachingLesson" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="051e8440-bd5c-4b00-b950-ae36b5ed167f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f893a281-a18e-4bbf-a22c-dbeba7650ccf" name="TeachingPattern" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="422bf4be-e85d-4357-832c-334871cc6582" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="773902d9-dfaa-4377-9a5e-0de23936e43a" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7e148f48-70b9-41cd-807f-8e16f6926a79" name="LearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6f31c701-8a40-4b70-b9ad-0f9cd5f5cce3" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="5019ce28-5c56-420f-b1c4-683f9a608fe3" name="KNNHelperModelling">
     <elementDefinition Id="4e475811-04f2-4374-b90e-3f54e668a870" />
@@ -295,6 +384,18 @@
           <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
         </profileInstance>
         <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="f661612a-3812-4fef-8b1c-deb630022588">
+        <profileInstance Id="e5300adf-798f-436a-a2d3-c56b50a3ab04" name="CSharpProfile">
+          <elementDefinition Id="2c192dda-e180-4f66-9bdb-31984865877c" />
+        </profileInstance>
+        <elementDefinition Id="eeb816d9-5461-4cb2-930e-04a93f720a03" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="58d81840-1cc1-42b4-baa8-3b94a841027d">
+        <profileInstance Id="86b1c0ec-850a-48b6-8c88-d627485e5618" name="TextTemplateBindings">
+          <elementDefinition Id="e3fd9854-6757-4d74-9353-f701b37e5067" />
+        </profileInstance>
+        <elementDefinition Id="6d100a02-a626-4e95-a1fd-04ba98a5fc11" />
       </packageHasProfileInstances>
     </profileInstances>
   </package>

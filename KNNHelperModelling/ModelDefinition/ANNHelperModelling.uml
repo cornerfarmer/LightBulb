@@ -130,7 +130,7 @@
             <classMoniker
               Id="5dde5c26-4354-4403-a5f0-56efbd96aa6d"
               LastKnownName="NetworkTopology"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -149,6 +149,45 @@
                 <memberEnd
                   Id="b967bc01-3ab3-4f5a-91e2-cf882f7f0a29"
                   name="NetworkTopology"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="04f0004f-b69a-4225-9fb0-d8aaa4863081"
+            isDerived="false"
+            sourceEndRoleName="NeuralNetwork"
+            targetEndRoleName="Teacher"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="01ea3e55-0e47-477f-86ef-3f0edb75be62"
+              LastKnownName="Teacher"
+              LastKnownLocation="ANNHelperModelling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="67a5daba-ff6b-47a9-ae3d-0aa39e1c6181"
+                  name="NeuralNetwork"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4da67c15-eb7b-4e2a-96f5-2986880e3d11"
+                  name="Teacher"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -200,7 +239,7 @@
             <classMoniker
               Id="d32fde25-4730-4f67-886c-3958e4d3eb17"
               LastKnownName="InputFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
@@ -219,7 +258,7 @@
             <classMoniker
               Id="d3ea7ee4-c1ea-4332-8a6e-aa95e5e34aa3"
               LastKnownName="ActivationFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
@@ -238,7 +277,7 @@
             <classMoniker
               Id="d3ea7ee4-c1ea-4332-8a6e-aa95e5e34aa3"
               LastKnownName="ActivationFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
@@ -257,7 +296,7 @@
             <classMoniker
               Id="d3ea7ee4-c1ea-4332-8a6e-aa95e5e34aa3"
               LastKnownName="ActivationFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
@@ -276,7 +315,7 @@
             <classMoniker
               Id="61bc32b1-1f25-4e9b-bfcf-a004d0507af1"
               LastKnownName="OutputFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
@@ -299,7 +338,7 @@
             <classMoniker
               Id="61bc32b1-1f25-4e9b-bfcf-a004d0507af1"
               LastKnownName="OutputFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -338,7 +377,7 @@
             <classMoniker
               Id="d3ea7ee4-c1ea-4332-8a6e-aa95e5e34aa3"
               LastKnownName="ActivationFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -377,7 +416,7 @@
             <classMoniker
               Id="d32fde25-4730-4f67-886c-3958e4d3eb17"
               LastKnownName="InputFunction"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -427,7 +466,7 @@
             <classMoniker
               Id="28be5396-8f38-42c3-8486-24243c927f6a"
               LastKnownName="Neuron"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -473,7 +512,7 @@
             <classMoniker
               Id="5dde5c26-4354-4403-a5f0-56efbd96aa6d"
               LastKnownName="NetworkTopology"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
@@ -492,10 +531,186 @@
             <classMoniker
               Id="5dde5c26-4354-4403-a5f0-56efbd96aa6d"
               LastKnownName="NetworkTopology"
-              LastKnownLocation="KNNHelperModelling.uml" />
+              LastKnownLocation="ANNHelperModelling.uml" />
           </generalization>
         </generalsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="01ea3e55-0e47-477f-86ef-3f0edb75be62"
+        name="Teacher"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="a38f591b-3f97-47e6-b6b9-68ee77bec72b"
+            isDerived="false"
+            sourceEndRoleName="Teacher"
+            targetEndRoleName="TeachingLesson"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="4738a86b-c358-4090-aa69-d9458e551708"
+              LastKnownName="TeachingLesson"
+              LastKnownLocation="ANNHelperModelling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ff73ca88-6f56-49b6-8e34-aea934b38b1f"
+                  name="Teacher"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="00e57541-3607-4ca8-bb1a-73de335bec51"
+                  name="TeachingLesson"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="6d94edca-694e-4d66-a1c9-ecc90a1c5eba"
+                      name="Lower"
+                      value="0" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="aa63a76b-a2fe-403d-800a-dbefaf412fc2"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="51d8d2a3-e196-46da-b272-662083ff82e3"
+        name="TeachingPattern"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="06a4fd4e-9f95-4529-a187-30d133381584"
+        name="TeachingInput"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4738a86b-c358-4090-aa69-d9458e551708"
+        name="TeachingLesson"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="70dc48e1-e65e-465d-98c0-f1308d092833"
+            isDerived="false"
+            sourceEndRoleName="TeachingLesson"
+            targetEndRoleName="TeachingInput"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="06a4fd4e-9f95-4529-a187-30d133381584"
+              LastKnownName="TeachingInput"
+              LastKnownLocation="ANNHelperModelling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="35c813c2-28b7-4c76-8d79-72a9f7fc5a7a"
+                  name="TeachingLesson"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c68bed8e-9f9b-4486-b75d-dfb9201e5501"
+                  name="TeachingInput"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="773902d9-dfaa-4377-9a5e-0de23936e43a"
+            isDerived="false"
+            sourceEndRoleName="TeachingLesson"
+            targetEndRoleName="TeachingPattern"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="51d8d2a3-e196-46da-b272-662083ff82e3"
+              LastKnownName="TeachingPattern"
+              LastKnownLocation="ANNHelperModelling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="051e8440-bd5c-4b00-b950-ae36b5ed167f"
+                  name="TeachingLesson"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="422bf4be-e85d-4357-832c-334871cc6582"
+                  name="TeachingPattern"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6f31c701-8a40-4b70-b9ad-0f9cd5f5cce3"
+        name="LearningRule"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
