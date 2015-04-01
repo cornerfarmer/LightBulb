@@ -29,8 +29,8 @@
           <association
             Id="bfca1746-b23d-4596-a098-52eb1dd78e58"
             isDerived="false"
-            sourceEndRoleName="NeuralNetwork"
-            targetEndRoleName="NetworkTopology"
+            sourceEndRoleName=""
+            targetEndRoleName="networkTopology"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -41,7 +41,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="883186d1-c37c-4f5a-aaca-bf405d0e7b73"
-                  name="NeuralNetwork"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -54,7 +53,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="3cc62795-309a-4cdb-9031-7d581ccb294c"
-                  name="NetworkTopology"
+                  name="networkTopology"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -68,8 +67,8 @@
           <association
             Id="f2501194-f960-43cf-8aff-d70e3f9222df"
             isDerived="false"
-            sourceEndRoleName="NeuralNetwork"
-            targetEndRoleName="Teacher"
+            sourceEndRoleName=""
+            targetEndRoleName="teacher"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -80,7 +79,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="7056ca86-599e-4017-9832-98e4f9109e2a"
-                  name="NeuralNetwork"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -93,7 +91,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="fa1b9735-ac55-46ba-bff2-ad8d754cf9e2"
-                  name="Teacher"
+                  name="teacher"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -105,31 +103,108 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="ea5065db-3abd-4fa9-9c05-91b9fbdf9803"
+            name="NeuralNetwork"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="bcca8daa-b512-4d8b-ab8b-a65de3f201f2"
+                  name="NetworkTopology"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f1f9520e-64a6-4bc4-8ccb-8d72675a8b3a"
+            name="setInput"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a6cc880c-f366-4858-9a9a-9760a5e634f8"
+                  name="inputVector"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                      LastKnownName="float[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d08c6445-480b-4c95-824c-c78951e50bcb"
+            name="getOutput"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="70b5b60f-d90e-49ef-8e77-37522d93f02a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                      LastKnownName="float[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a8d2de90-293e-440a-b81a-a3bdd009c297"
+            name="refreshAllNeurons"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="2de5c842-f067-4154-a303-57f82bed7d64"
         name="InputFunction"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
-        isActiveClass="true" />
+        isActiveClass="false" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="49effd66-f0b4-426d-9168-a326f4137e83"
         name="ActivationFunction"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
-        isActiveClass="true" />
+        isActiveClass="false" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="0243159e-574e-461b-9f46-20857f611868"
         name="OutputFunction"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
-        isActiveClass="true" />
+        isActiveClass="false" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -223,22 +298,40 @@
               LastKnownName="OutputFunction"
               LastKnownLocation="ANNHelperModeling.uml" />
           </generalization>
+          <generalization
+            Id="51aca3ab-77d3-4ebe-9608-e047e2572b2b"
+            isSubstitutable="false">
+            <classMoniker
+              Id="49effd66-f0b4-426d-9168-a326f4137e83"
+              LastKnownName="ActivationFunction"
+              LastKnownLocation="ANNHelperModeling.uml" />
+          </generalization>
         </generalsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7"
-        name="Neuron"
+        name="StandardNeuron"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="33f334d2-80bb-4a2d-8b9a-6b96cca91c4b"
+            isSubstitutable="false">
+            <classMoniker
+              Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+              LastKnownName="Neuron"
+              LastKnownLocation="ANNHelperModeling.uml" />
+          </generalization>
+        </generalsInternal>
         <targetEnds>
           <association
             Id="b9f018d4-7498-4897-99e4-0df2f8454dba"
             isDerived="false"
-            sourceEndRoleName="Neuron"
-            targetEndRoleName="OutputFunction"
+            sourceEndRoleName=""
+            targetEndRoleName="outputFunction"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -249,7 +342,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="6b195da5-3dc2-4d5f-b6c4-03c2c6e142e0"
-                  name="Neuron"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -262,7 +354,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="02eb8c5b-4b1b-467a-9b90-bbfc8a03788a"
-                  name="OutputFunction"
+                  name="outputFunction"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -276,8 +368,8 @@
           <association
             Id="bc730fac-33fb-40ee-845d-74e30243d339"
             isDerived="false"
-            sourceEndRoleName="Neuron"
-            targetEndRoleName="ActivationFunction"
+            sourceEndRoleName=""
+            targetEndRoleName="activationFunction"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -288,7 +380,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="7089b409-6f4c-4ddb-9e17-6005a7c58efb"
-                  name="Neuron"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -301,7 +392,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="e1bd4dd7-bac8-4962-b8b4-66e3153051d1"
-                  name="ActivationFunction"
+                  name="activationFunction"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -315,8 +406,8 @@
           <association
             Id="72393ee7-19a5-4d79-bb7e-5f7645e52658"
             isDerived="false"
-            sourceEndRoleName="Neuron"
-            targetEndRoleName="InputFunction"
+            sourceEndRoleName=""
+            targetEndRoleName="inputFunction"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -327,7 +418,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="9f58b0cb-a80c-405d-b8a9-899a34fbb00a"
-                  name="Neuron"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -340,7 +430,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="58ce7197-efd0-4c73-8808-d21435c90e54"
-                  name="InputFunction"
+                  name="inputFunction"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -351,63 +441,177 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
+          <association
+            Id="30f3eac5-ae58-4d03-b2b1-0ccb2ae07e3f"
+            isDerived="false"
+            sourceEndRoleName="nextNeuron"
+            targetEndRoleName="afferentEdges"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="bab7a506-e079-4d64-8513-2b7a5a133fae"
+              LastKnownName="Edge"
+              LastKnownLocation="ANNHelperModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="000c7b21-007e-4b5c-be0a-cfd637edff4b"
+                  name="nextNeuron"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0a910c49-ea8d-44f7-8ace-857a34fd9cf9"
+                  name="afferentEdges"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7e1dcae6-a4c0-4abc-90ec-10b875a512d7"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="7c7c6e80-208b-4229-85d4-50df5392e798"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="e019e1ac-3779-4122-9d2e-5fe4ebc5e6d4"
+            name="StandardNeuron"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b650ab56-05d4-46d5-be05-ea118e7cc772"
+                  name="inputFunction"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="2de5c842-f067-4154-a303-57f82bed7d64"
+                      LastKnownName="InputFunction"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="965cb424-b162-4067-a983-852c62e89d54"
+                  name="activationFunction"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="49effd66-f0b4-426d-9168-a326f4137e83"
+                      LastKnownName="ActivationFunction"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4b66d99f-f68d-404a-9a42-0969f6002b01"
+                  name="outputFunction"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0243159e-574e-461b-9f46-20857f611868"
+                      LastKnownName="OutputFunction"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="4232794c-10fd-46a3-a8eb-50ab872b8253"
         name="NetworkTopology"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
-        isActiveClass="true">
-        <targetEnds>
-          <association
-            Id="53479361-f4a8-4eea-a256-e0033158993e"
-            isDerived="false"
-            sourceEndRoleName="NetworkTopology"
-            targetEndRoleName="Neuron"
+        isActiveClass="false">
+        <ownedOperationsInternal>
+          <operation
+            Id="d37053a8-a0e7-41de-bf31-f827ef048cf6"
+            name="getInputNeurons"
             isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7"
-              LastKnownName="Neuron"
-              LastKnownLocation="ANNHelperModeling.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="c0607d5a-6ded-439f-ad44-cb1b33a84249"
-                  name="NetworkTopology"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="e9f16e52-d78b-4261-8b6b-aae4bce6b74a"
-                  name="Neuron"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="033ae503-930a-4af2-b077-469c870ccb3f"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="ac4fa2b3-d50b-4315-adf3-0a2f26d5de1a"
+                      LastKnownName="InputNeuron[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="32890f71-0b59-4b2f-b4fa-df47b4444bc2"
+            name="getOutputNeurons"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="dd605356-1c2d-4fd7-a33a-6521c3065112"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5aea5f93-c52d-4987-a684-ea01ac6ce133"
+                      LastKnownName="Neuron[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-        name="FeedForwardNetwork"
+        name="LayeredNetwork"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -421,6 +625,142 @@
               LastKnownLocation="ANNHelperModeling.uml" />
           </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="a70b60c2-88ab-40f9-a7a9-2ed65d41786a"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="neurons"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+              LastKnownName="Neuron"
+              LastKnownLocation="ANNHelperModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="70edea3a-61be-40d4-89a3-a64b870a5244"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a370fbd2-a26f-4194-8630-6bc539d1345d"
+                  name="neurons"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="63bbe0ac-1088-44de-af3a-5b4141907854"
+                      name="Lower"
+                      value="0" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="60ab6c95-bfca-4fad-b6b6-7d3314b96aed"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="e8695ddf-2c16-4ce8-a544-f5c554263290"
+            name="FeedForwardNet"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9ad3ec0c-f6ff-4b59-99a5-8f1f2b6473fc"
+                  name="neuronsPerLayerCount"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="0a00ab8e-3fbf-492b-bd70-e8d01b6fea09"
+                      LastKnownName="int[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="bf9feeb4-cd6a-4f3e-88c2-87842de5f05d"
+                  name="enableShortcuts"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
+                      LastKnownName="bool"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a909ea2e-c777-4937-9295-082099e87935"
+                  name="enableLateralBackCoupling"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
+                      LastKnownName="bool"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c1aeca3f-9a6a-4931-a511-ca0a4ede974c"
+                  name="enableIndirectBackCoupling"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
+                      LastKnownName="bool"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ecde7531-d302-4678-be61-1d8db6900327"
+                  name="enableDirectBackCoupling"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
+                      LastKnownName="bool"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -440,6 +780,59 @@
               LastKnownLocation="ANNHelperModeling.uml" />
           </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="f126ef14-5885-48a1-a91c-15666ee2a3ec"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="neurons"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+              LastKnownName="Neuron"
+              LastKnownLocation="ANNHelperModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="303cc4e2-9f22-4040-9d77-7de28a7fceed"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a8faafc7-4b29-4132-9c48-da11cc649e0e"
+                  name="neurons"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="9d936323-0857-4b89-afa7-cab3d6e8c692"
+                      name="Lower"
+                      value="0" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="31d5a221-a8b4-40ee-b741-b3c0817d650a"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -453,8 +846,8 @@
           <association
             Id="7460f3b6-7407-4569-8e78-75bd5ae6cb03"
             isDerived="false"
-            sourceEndRoleName="Teacher"
-            targetEndRoleName="TeachingLesson"
+            sourceEndRoleName=""
+            targetEndRoleName="teachingLessons"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -465,7 +858,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="e5c560d4-0a38-4f64-bb28-8c280d86b40a"
-                  name="Teacher"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -478,7 +870,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="ea8d32a8-351e-40fc-bee5-3a2eaa6fce36"
-                  name="TeachingLesson"
+                  name="teachingLessons"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -532,8 +924,8 @@
           <association
             Id="3f79ec75-cd7a-419c-b86e-8f3c11bc567e"
             isDerived="false"
-            sourceEndRoleName="TeachingLesson"
-            targetEndRoleName="TeachingInput"
+            sourceEndRoleName=""
+            targetEndRoleName="teachingInput"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -544,7 +936,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="d042c70f-cf34-4cc1-b697-9f1231a25a7e"
-                  name="TeachingLesson"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -557,7 +948,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="7921d84a-86d4-4600-bc27-095901337a10"
-                  name="TeachingInput"
+                  name="teachingInput"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -571,8 +962,8 @@
           <association
             Id="c4484aad-4dfd-44ae-bc2f-afaeaff77ca2"
             isDerived="false"
-            sourceEndRoleName="TeachingLesson"
-            targetEndRoleName="TeachingPattern"
+            sourceEndRoleName=""
+            targetEndRoleName="teachingPattern"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -583,7 +974,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="204baccf-410b-4108-97ac-c4267fa487d7"
-                  name="TeachingLesson"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -596,7 +986,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="76e0e523-f955-43b0-9896-b33a34bed90a"
-                  name="TeachingPattern"
+                  name="teachingPattern"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -617,6 +1007,306 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="4d0532fa-f2f8-44cc-9dfe-45e4d0704d77"
+        name="int," />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+        name="Neuron"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="6bb4d694-2939-404b-98aa-d3fbefb952f9"
+            isDerived="false"
+            sourceEndRoleName="prevNeuron"
+            targetEndRoleName="efferentEdges"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="bab7a506-e079-4d64-8513-2b7a5a133fae"
+              LastKnownName="Edge"
+              LastKnownLocation="ANNHelperModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d3e45ecf-5f23-40cf-9037-d695823688f7"
+                  name="prevNeuron"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="db13ca08-dc02-425b-b8b5-d4f7624e2297"
+                  name="efferentEdges"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ff634aa3-9d24-439e-8aae-e9af8503ec72"
+                      name="Lower"
+                      value="0" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="056f52ee-3b61-47bd-9f24-eba1ae7d7217"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="865bf61f-db7b-4788-9c5b-a313fa28c5b6"
+            name="activation"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                LastKnownName="float"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="f77f3f4b-678b-4a0c-aa3f-ad548630f1d3"
+            name="threshold"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                LastKnownName="float"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="aa7addee-d98d-42f0-a670-626ad838e4bc"
+            name="addNextNeuron"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2a00750f-4df9-4284-a1fa-a0f49aa3abaa"
+                  name="newNextNeuron"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+                      LastKnownName="Neuron"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ae60b93d-1f82-4459-9169-8651d6f32cf1"
+                  name="weight"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                      LastKnownName="float"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3648d341-5a77-4b57-828b-ff31b0957843"
+            name="addPrevNeuron"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="581e007f-4bb9-4f6e-aadd-dbc7bec7cc3d"
+                  name="newPrevNeuron"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+                      LastKnownName="Neuron"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b1019acc-5fbf-49e3-9a9e-94dd69075951"
+                  name="weight"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                      LastKnownName="float"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="72947e56-2414-4b9b-a0d1-37d84b312744"
+            name="refreshActivation"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="630b9b3d-cc18-43dd-87f9-d8543ef4472c"
+        name="BiasNeuron"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="0974d235-a23f-4beb-b3d8-d31ef7f2de12"
+            isSubstitutable="false">
+            <classMoniker
+              Id="5899fa77-bee1-4c08-8c2f-2bd6f172da59"
+              LastKnownName="InputNeuron"
+              LastKnownLocation="ANNHelperModeling.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5899fa77-bee1-4c08-8c2f-2bd6f172da59"
+        name="InputNeuron"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="4ef48d83-5889-434b-8ec6-237f4da223b6"
+            isSubstitutable="false">
+            <classMoniker
+              Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
+              LastKnownName="Neuron"
+              LastKnownLocation="ANNHelperModeling.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="bab7a506-e079-4d64-8513-2b7a5a133fae"
+        name="Edge"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="e4d115f6-c0b1-428c-9e64-6aef80c6692b"
+            name="weight"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                LastKnownName="float"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+        name="float" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a895053f-1f8e-4cab-bb2a-8e4bec90b41a"
+        name="ActivationFunction," />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ac4fa2b3-d50b-4315-adf3-0a2f26d5de1a"
+        name="InputNeuron[]" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="5aea5f93-c52d-4987-a684-ea01ac6ce133"
+        name="Neuron[]" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="bfc3ff17-d0c7-4792-b1de-236804b123d0"
+        name="flaot" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="0a00ab8e-3fbf-492b-bd70-e8d01b6fea09"
+        name="int[]" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
+        name="bool" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+        name="float[]" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
