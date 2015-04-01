@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="ffb56298-21bd-4e92-9170-4a041b6ac509">
+      <profileInstance Id="c2f4265c-7b18-456e-a9bf-d47dc40b9bb1" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="4e4b6ecd-4e79-4952-969f-25d8a92573f4">
+      <profileInstance Id="808eff7a-ee78-438e-b15c-50f9daf5517e" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2915d7ed-8ef9-4b57-97f9-ef3667468aaa" name="NeuralNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="42a4c367-a6a4-4af4-bb70-6e801a44e1c9" />
+        <targetEnds>
+          <association Id="cd14a56b-d15d-4db4-a3be-6396297577ae" isDerived="false" sourceEndRoleName="NeuralNetwork" targetEndRoleName="NetworkTopology" isLeaf="false" isAbstract="false">
+            <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="NetworkTopology" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e81716c8-6b68-4f52-b801-2268201a1dd4" name="NeuralNetwork" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="883186d1-c37c-4f5a-aaca-bf405d0e7b73" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9ff4af3c-739d-4cb7-bf2e-7fc24ada7741" name="NetworkTopology" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3cc62795-309a-4cdb-9031-7d581ccb294c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="bfca1746-b23d-4596-a098-52eb1dd78e58" />
+          </association>
+          <association Id="32d8c5e8-cb0d-4971-b955-c94155efc89c" isDerived="false" sourceEndRoleName="NeuralNetwork" targetEndRoleName="Teacher" isLeaf="false" isAbstract="false">
+            <classMoniker Id="0486512e-9e35-448e-aafe-f1eedeca91ea" LastKnownName="Teacher" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="706d2dde-c5b3-4d2d-9214-e54adaceeb7f" name="NeuralNetwork" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7056ca86-599e-4017-9832-98e4f9109e2a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4018b376-9a51-4210-90b0-ccf57983e9bd" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="fa1b9735-ac55-46ba-bff2-ad8d754cf9e2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="f2501194-f960-43cf-8aff-d70e3f9222df" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" name="InputFunction" isAbstract="false" isLeaf="false" isActiveClass="true">
+        <elementDefinition Id="2de5c842-f067-4154-a303-57f82bed7d64" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" name="ActivationFunction" isAbstract="false" isLeaf="false" isActiveClass="true">
+        <elementDefinition Id="49effd66-f0b4-426d-9168-a326f4137e83" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="21c81844-e225-4d25-9532-4fc4efd33480" name="OutputFunction" isAbstract="false" isLeaf="false" isActiveClass="true">
+        <elementDefinition Id="0243159e-574e-461b-9f46-20857f611868" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="cc25991a-21c8-492c-b3e3-282ee4e86f07" name="WeightedSumFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="894fba75-eca8-40be-890f-ebff183f25bb" />
+        <generalsInternal>
+          <generalization Id="fb0720e1-3b0b-49d3-a0e1-ebe4607beb9c" isSubstitutable="false">
+            <classMoniker Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" LastKnownName="InputFunction" />
+            <elementDefinition Id="0cf2ac87-176e-4e8f-ad6e-402dc6529149" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="74a08a28-d4a0-457c-b390-7af406d85e34" name="HeavisideFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="45e9a569-3194-456e-932f-9299992d7572" />
+        <generalsInternal>
+          <generalization Id="cc49f1c2-4a47-479a-8362-640e59110ee8" isSubstitutable="false">
+            <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+            <elementDefinition Id="e8fedf7c-9c20-48a4-a040-37ec56569278" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e65765f0-ca4b-45d8-beda-4c9b0fd9c0c2" name="FermiFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e6b68d91-63b2-4dfb-a0b8-c02a02605ef4" />
+        <generalsInternal>
+          <generalization Id="b0d08601-8e5b-4fdb-b165-2fe9631d7e38" isSubstitutable="false">
+            <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+            <elementDefinition Id="69e06f51-0bfa-4e33-9f75-1c0f9062d8b6" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9ad3a013-6546-4cb2-b826-67ac28ee7cb4" name="TangusHyperbolicusFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2a43ee3e-52d7-4870-93bb-1c7b5ffb3592" />
+        <generalsInternal>
+          <generalization Id="287f03b8-1803-4ea0-b69c-2ec8abf9b00c" isSubstitutable="false">
+            <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+            <elementDefinition Id="9f6240c5-d8a6-48af-8d67-0961e5923d95" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="0cc149c7-7544-42d5-bb26-175a6edb59dc" name="IdentityFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e1a35be3-8014-491b-a53e-a78023dc1964" />
+        <generalsInternal>
+          <generalization Id="18e74d4a-d4b5-448a-b4a3-1536c768d3fe" isSubstitutable="false">
+            <classMoniker Id="21c81844-e225-4d25-9532-4fc4efd33480" LastKnownName="OutputFunction" />
+            <elementDefinition Id="67517293-9425-43f3-91d0-bca11ff033da" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="0ad75f8e-0021-4b9d-bc10-9aa704c877cb" name="Neuron" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7" />
+        <targetEnds>
+          <association Id="7d7ef7a1-9c4d-4efe-b215-038b3d3e6368" isDerived="false" sourceEndRoleName="Neuron" targetEndRoleName="OutputFunction" isLeaf="false" isAbstract="false">
+            <classMoniker Id="21c81844-e225-4d25-9532-4fc4efd33480" LastKnownName="OutputFunction" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fbffe6f7-78ea-4457-ac25-e7f52abbd994" name="Neuron" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6b195da5-3dc2-4d5f-b6c4-03c2c6e142e0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2fa094dc-c1d0-465e-9990-41c662faf851" name="OutputFunction" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="02eb8c5b-4b1b-467a-9b90-bbfc8a03788a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b9f018d4-7498-4897-99e4-0df2f8454dba" />
+          </association>
+          <association Id="1a30739b-f614-4e07-8aef-3f40668b043c" isDerived="false" sourceEndRoleName="Neuron" targetEndRoleName="ActivationFunction" isLeaf="false" isAbstract="false">
+            <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="deb44388-abc6-4768-8429-60cd890a3d7d" name="Neuron" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7089b409-6f4c-4ddb-9e17-6005a7c58efb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cf5928de-14fa-4be1-9a9c-1e4cc5b04399" name="ActivationFunction" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e1bd4dd7-bac8-4962-b8b4-66e3153051d1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="bc730fac-33fb-40ee-845d-74e30243d339" />
+          </association>
+          <association Id="5eba34a6-7036-49a7-84bc-ba3bb495ad4d" isDerived="false" sourceEndRoleName="Neuron" targetEndRoleName="InputFunction" isLeaf="false" isAbstract="false">
+            <classMoniker Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" LastKnownName="InputFunction" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7ef88e13-aba6-4e6d-8dbe-7e91972ab597" name="Neuron" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9f58b0cb-a80c-405d-b8a9-899a34fbb00a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="45939c5b-b30a-4fc9-a425-31ac2ea7a497" name="InputFunction" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="58ce7197-efd0-4c73-8808-d21435c90e54" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="72393ee7-19a5-4d79-bb7e-5f7645e52658" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" name="NetworkTopology" isAbstract="false" isLeaf="false" isActiveClass="true">
+        <elementDefinition Id="4232794c-10fd-46a3-a8eb-50ab872b8253" />
+        <targetEnds>
+          <association Id="9fae4951-6b1a-427c-a30f-76c8f4d0a6e7" isDerived="false" sourceEndRoleName="NetworkTopology" targetEndRoleName="Neuron" isLeaf="false" isAbstract="false">
+            <classMoniker Id="0ad75f8e-0021-4b9d-bc10-9aa704c877cb" LastKnownName="Neuron" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="820f7140-6ee4-4c5e-853f-5dde49e593d3" name="NetworkTopology" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c0607d5a-6ded-439f-ad44-cb1b33a84249" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9db4b460-7ad2-4e97-9a00-6552c31d1ea7" name="Neuron" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e9f16e52-d78b-4261-8b6b-aae4bce6b74a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="53479361-f4a8-4eea-a256-e0033158993e" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" name="FeedForwardNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe" />
+        <generalsInternal>
+          <generalization Id="af985c8c-4b18-40a3-86df-7dd31e794bf8" isSubstitutable="false">
+            <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="NetworkTopology" />
+            <elementDefinition Id="c761ee83-e9f3-4dc3-a1b6-0b804441d3d1" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="30d62892-2546-4b79-91e1-e850fa60b62f" name="FreeNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2d2d01df-0c42-45ed-a434-308402083b74" />
+        <generalsInternal>
+          <generalization Id="8a5605a5-f2de-4ba0-86e8-f1bff2c0b88f" isSubstitutable="false">
+            <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="NetworkTopology" />
+            <elementDefinition Id="7330117a-3288-4f82-a4de-ddb6ae1b16a1" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="0486512e-9e35-448e-aafe-f1eedeca91ea" name="Teacher" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2b901722-ff2c-4f3c-bd34-4b674129d848" />
+        <targetEnds>
+          <association Id="24bcbda0-a29b-4f89-8619-975dbc00193b" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="TeachingLesson" isLeaf="false" isAbstract="false">
+            <classMoniker Id="c7268ba9-6124-4da1-b00d-5a4e464e1819" LastKnownName="TeachingLesson" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1322976b-2d84-467f-82e8-9f2e50c08175" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e5c560d4-0a38-4f64-bb28-8c280d86b40a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="716e6116-c8d4-430e-93c7-8dd87bac3749" name="TeachingLesson" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="b98e79c3-6953-4f45-a81c-2060489c32b4" name="Lower" value="0">
+                      <elementDefinition Id="e750d55b-d28b-4a8a-a2a7-c1f6786350a8" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="643442f4-2355-4fbb-8bd8-6cd4ce6b9225" name="Upper" value="*">
+                      <elementDefinition Id="1046d870-0187-48fb-b6a7-7af3c1ef1c1f" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="ea8d32a8-351e-40fc-bee5-3a2eaa6fce36" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7460f3b6-7407-4569-8e78-75bd5ae6cb03" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5803b34e-2809-4789-bd20-dfdf1834ab60" name="TeachingPattern" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8aa55ece-021e-4db2-b0ff-ff978fb73dcc" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8d85c8c9-9165-4fc4-8ff8-4baa68494ac4" name="TeachingInput" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d6b0dcf7-087b-4cfa-af7d-e11d4f128d99" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c7268ba9-6124-4da1-b00d-5a4e464e1819" name="TeachingLesson" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3b2a52ef-f690-4396-8ee9-79714201c427" />
+        <targetEnds>
+          <association Id="6063fe76-9750-49c3-8dc2-3720ebc0973b" isDerived="false" sourceEndRoleName="TeachingLesson" targetEndRoleName="TeachingInput" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8d85c8c9-9165-4fc4-8ff8-4baa68494ac4" LastKnownName="TeachingInput" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="29c11b8f-648c-4a5b-b9ea-b2b93ca90ada" name="TeachingLesson" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d042c70f-cf34-4cc1-b697-9f1231a25a7e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="100b2c8e-d3c7-47e7-b064-cccc28cb188a" name="TeachingInput" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7921d84a-86d4-4600-bc27-095901337a10" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3f79ec75-cd7a-419c-b86e-8f3c11bc567e" />
+          </association>
+          <association Id="21526c36-d0d0-4623-a8f9-d3d235b9244d" isDerived="false" sourceEndRoleName="TeachingLesson" targetEndRoleName="TeachingPattern" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5803b34e-2809-4789-bd20-dfdf1834ab60" LastKnownName="TeachingPattern" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ce972f4a-a1af-4323-a253-800251310d47" name="TeachingLesson" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="204baccf-410b-4108-97ac-c4267fa487d7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="15cd90b9-9b8c-4647-bfb0-93491d5ab151" name="TeachingPattern" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="76e0e523-f955-43b0-9896-b33a34bed90a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c4484aad-4dfd-44ae-bc2f-afaeaff77ca2" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7d15d11a-de5d-442f-8a10-87bde8492d55" name="LearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f071b499-fa41-4f9a-858c-68ae81534a9c" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
+    <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />
+  </package>
+</logicalClassDesignerModel>
