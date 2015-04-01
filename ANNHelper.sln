@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ANNHelper", "ANNHelper\ANNHelper.vcxproj", "{8FEF3ECA-165D-4337-AF14-CEB70A0DCF76}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "KNNHelperModelling", "KNNHelperModelling\KNNHelperModelling.modelproj", "{ED18EEB8-316E-4D5B-8AAB-4049429E0060}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ANNHelperModelling", "KNNHelperModelling\ANNHelperModelling.modelproj", "{ED18EEB8-316E-4D5B-8AAB-4049429E0060}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
