@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="2915d7ed-8ef9-4b57-97f9-ef3667468aaa" name="NeuralNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -561,8 +561,23 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="7d15d11a-de5d-442f-8a10-87bde8492d55" name="LearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="7d15d11a-de5d-442f-8a10-87bde8492d55" name="LearningRule" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="f071b499-fa41-4f9a-858c-68ae81534a9c" />
+        <ownedOperationsInternal>
+          <operation Id="32f98d0f-0140-4ffd-965e-41f1c8a39992" name="doLearning" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="33de24cc-456b-4a91-b8a8-a327ae76609e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="6870f1ec-ea89-4aac-9665-3d3e86a3bfb9" name="neuralNetwork" direction="In" isUnique="false">
+                  <elementDefinition Id="e5295d4c-70dd-42c9-83aa-bbbe622841e8" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="bb5f38d6-0aee-47ff-ab05-97a1004fc025" LastKnownName="NeuralNetwork" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -859,6 +874,22 @@
         </generalsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2b8b2844-95df-4892-878a-a26970710ebe" name="PerceptronLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="78adb04b-cef5-4fb9-9760-aa47b77359e9" />
+        <generalsInternal>
+          <generalization Id="a4b5e92c-8150-4120-9dbb-c914a686047c" isSubstitutable="false">
+            <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+            <elementDefinition Id="09057933-8261-4727-9c66-3cc5374e3c42" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="bb5f38d6-0aee-47ff-ab05-97a1004fc025" name="NeuralNetwork" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NeuralNetwork">
+        <elementDefinition Id="42a4c367-a6a4-4af4-bb70-6e801a44e1c9" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />
