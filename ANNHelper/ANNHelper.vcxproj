@@ -60,7 +60,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActivationFunction.cpp" />
+    <ClCompile Include="ActivationOrder.cpp" />
+    <ClCompile Include="BiasNeuron.cpp" />
+    <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="IdentityFunction.cpp" />
+    <ClCompile Include="InputFunction.cpp" />
+    <ClCompile Include="InputNeuron.cpp" />
+    <ClCompile Include="LayeredNetwork.cpp" />
+    <ClCompile Include="LearningRule.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkTopology.cpp" />
+    <ClCompile Include="NeuralNetwork.cpp" />
+    <ClCompile Include="Neuron.cpp" />
+    <ClCompile Include="OutputFunction.cpp" />
+    <ClCompile Include="PerceptronLearningRule.cpp" />
+    <ClCompile Include="StandardNeuron.cpp" />
+    <ClCompile Include="TopologicalOrder.cpp" />
+    <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationFunction.hpp" />
