@@ -7,7 +7,7 @@ class InputFunction
 {
 private:
 public:
-	virtual float execute(float[]) = 0;
+	virtual float execute(float* input, int inputCount) = 0;
 };
 
 #endif

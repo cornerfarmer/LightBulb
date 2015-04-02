@@ -71,10 +71,12 @@
     <ClInclude Include="InputFunction.hpp" />
     <ClInclude Include="InputNeuron.hpp" />
     <ClInclude Include="LayeredNetwork.hpp" />
+    <ClInclude Include="LearningRule.hpp" />
     <ClInclude Include="NetworkTopology.hpp" />
     <ClInclude Include="NeuralNetwork.hpp" />
     <ClInclude Include="Neuron.hpp" />
     <ClInclude Include="OutputFunction.hpp" />
+    <ClInclude Include="PerceptronLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
     <ClInclude Include="TopologicalOrder.hpp" />
     <ClInclude Include="WeightedSumFunction.hpp" />

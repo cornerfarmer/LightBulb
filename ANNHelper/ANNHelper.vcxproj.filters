@@ -1,81 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Quelldateien">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Headerdateien">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Ressourcendateien">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Headerdateien\ActivationOrder">
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\ActivationOrder">
       <UniqueIdentifier>{c371cb1f-7969-4486-84ae-39d29d8ead5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\NetworkTopology">
+    <Filter Include="Quelldateien\NetworkTopology">
       <UniqueIdentifier>{54470349-f2cd-450a-b0e2-8f48c7690fb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Neuron">
+    <Filter Include="Quelldateien\Neuron">
       <UniqueIdentifier>{ff89ba63-a219-4cef-a96f-b63397b80bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Function">
+    <Filter Include="Quelldateien\Function">
       <UniqueIdentifier>{56f3d7c2-006d-45b6-b899-c7f0908202f5}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
+    <Filter Include="Quelldateien\NeuralNetwork">
+      <UniqueIdentifier>{cab1bad9-86a8-4c43-a90f-b407dadd336a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning">
+      <UniqueIdentifier>{a7efac7b-7060-4341-bd65-ee417a74389c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder.hpp">
-      <Filter>Headerdateien\ActivationOrder</Filter>
+      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
     <ClInclude Include="TopologicalOrder.hpp">
-      <Filter>Headerdateien\ActivationOrder</Filter>
+      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
     <ClInclude Include="LayeredNetwork.hpp">
-      <Filter>Headerdateien\NetworkTopology</Filter>
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTopology.hpp">
-      <Filter>Headerdateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuralNetwork.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="BiasNeuron.hpp">
-      <Filter>Headerdateien\Neuron</Filter>
+      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="InputNeuron.hpp">
-      <Filter>Headerdateien\Neuron</Filter>
+      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="Neuron.hpp">
-      <Filter>Headerdateien\Neuron</Filter>
+      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="StandardNeuron.hpp">
-      <Filter>Headerdateien\Neuron</Filter>
+      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="ActivationFunction.hpp">
-      <Filter>Headerdateien\Function</Filter>
+      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="InputFunction.hpp">
-      <Filter>Headerdateien\Function</Filter>
+      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="OutputFunction.hpp">
-      <Filter>Headerdateien\Function</Filter>
+      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="WeightedSumFunction.hpp">
-      <Filter>Headerdateien\Function</Filter>
+      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="IdentityFunction.hpp">
-      <Filter>Headerdateien\Function</Filter>
+      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="Edge.hpp">
-      <Filter>Headerdateien\Neuron</Filter>
+      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
+    <ClInclude Include="NeuralNetwork.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="PerceptronLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

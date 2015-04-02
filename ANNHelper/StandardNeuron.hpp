@@ -18,6 +18,7 @@ private:
 	OutputFunction* outputFunction;
 	std::list<Edge*> afferentEdges;
 public:
+	~StandardNeuron();
 	StandardNeuron();
 	StandardNeuron(InputFunction* inputFunction, ActivationFunction* activationFunction, OutputFunction* outputFunction);
 	void addPrevNeuron(Neuron* newPrevNeuron, float weight);

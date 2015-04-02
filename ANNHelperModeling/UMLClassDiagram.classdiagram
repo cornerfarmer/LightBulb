@@ -3048,54 +3048,6 @@
         <elementDefinition Id="408d4a92-1fe6-457f-b0f8-3a3c31d0f22f" />
         <packagedElements>
           <packageHasNamedElement>
-            <class Id="2b8b2844-95df-4892-878a-a26970710ebe" name="PerceptronLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <appliedStereotypesInternal>
-                <stereotypeInstance Id="2f270e31-bfb4-49de-aab3-9ca63f53fe23" name="class" profile="CSharpProfile">
-                  <elementDefinition Id="c2a7c4d2-9a67-4082-b254-0adb393afded" />
-                  <propertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="9446bab3-0455-4040-84fb-d2cf86150a3f">
-                      <propertyInstance Id="8c3bca76-a04b-4a37-86f0-e639cd4db0df" name="ClrAttributes">
-                        <elementDefinition Id="290eb231-001f-487a-b383-7439898204ce" />
-                      </propertyInstance>
-                      <elementDefinition Id="b7f04727-a695-42dd-8f89-9b459546ad33" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="83254f53-c5bc-40ec-9648-b4cead71ec6a">
-                      <propertyInstance Id="a16e1553-5443-4fd0-8b1c-4a4efd616270" name="IsPartial" value="false">
-                        <elementDefinition Id="e19ac8bb-577d-4ded-bb2e-09b4d34e3ad6" />
-                      </propertyInstance>
-                      <elementDefinition Id="9e7bed11-49dc-459f-a82b-7df9000dbd0e" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="6c9cb023-5266-487b-8173-b889757a73f3">
-                      <propertyInstance Id="3ddf03f9-974c-48ad-8229-35ccfaec1757" name="IsStatic" value="false">
-                        <elementDefinition Id="841d24da-e802-4e65-9641-38e594071f09" />
-                      </propertyInstance>
-                      <elementDefinition Id="4c53853c-fc22-490a-9383-3acffe1fd448" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="9f5ee9e5-613c-4acf-b19c-a00936e24364">
-                      <propertyInstance Id="4600e89c-76da-42df-9353-29fa8788cf79" name="IsUnsafe" value="false">
-                        <elementDefinition Id="cf59ac06-5b54-4339-ba3e-db1d024e10c5" />
-                      </propertyInstance>
-                      <elementDefinition Id="99dbc04d-9de5-4bf0-bf80-4d96bab49f24" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="8cd068a3-600f-47cf-9ac5-9ee369900a8e">
-                      <propertyInstance Id="643f6a6f-8ecd-4533-85c4-e393600255bd" name="PackageVisibility" value="internal">
-                        <elementDefinition Id="0b5d2feb-9ce1-4f5c-8f9a-7a67fecc170b" />
-                      </propertyInstance>
-                      <elementDefinition Id="a4dbc44f-5eea-445a-8c80-654ead05282c" />
-                    </stereotypeInstanceHasPropertyInstances>
-                  </propertyInstances>
-                </stereotypeInstance>
-              </appliedStereotypesInternal>
-              <elementDefinition Id="78adb04b-cef5-4fb9-9760-aa47b77359e9" />
-              <generalsInternal>
-                <generalization Id="a4b5e92c-8150-4120-9dbb-c914a686047c" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
-                  <elementDefinition Id="09057933-8261-4727-9c66-3cc5374e3c42" />
-                </generalization>
-              </generalsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
             <class Id="7d15d11a-de5d-442f-8a10-87bde8492d55" name="LearningRule" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="2badbfef-afec-4130-8875-3776de647f2f" name="class" profile="CSharpProfile">
@@ -3187,6 +3139,54 @@
                   </ownedParameters>
                 </operation>
               </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="2b8b2844-95df-4892-878a-a26970710ebe" name="PerceptronLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <appliedStereotypesInternal>
+                <stereotypeInstance Id="2f270e31-bfb4-49de-aab3-9ca63f53fe23" name="class" profile="CSharpProfile">
+                  <elementDefinition Id="c2a7c4d2-9a67-4082-b254-0adb393afded" />
+                  <propertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="9446bab3-0455-4040-84fb-d2cf86150a3f">
+                      <propertyInstance Id="8c3bca76-a04b-4a37-86f0-e639cd4db0df" name="ClrAttributes">
+                        <elementDefinition Id="290eb231-001f-487a-b383-7439898204ce" />
+                      </propertyInstance>
+                      <elementDefinition Id="b7f04727-a695-42dd-8f89-9b459546ad33" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="83254f53-c5bc-40ec-9648-b4cead71ec6a">
+                      <propertyInstance Id="a16e1553-5443-4fd0-8b1c-4a4efd616270" name="IsPartial" value="false">
+                        <elementDefinition Id="e19ac8bb-577d-4ded-bb2e-09b4d34e3ad6" />
+                      </propertyInstance>
+                      <elementDefinition Id="9e7bed11-49dc-459f-a82b-7df9000dbd0e" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="6c9cb023-5266-487b-8173-b889757a73f3">
+                      <propertyInstance Id="3ddf03f9-974c-48ad-8229-35ccfaec1757" name="IsStatic" value="false">
+                        <elementDefinition Id="841d24da-e802-4e65-9641-38e594071f09" />
+                      </propertyInstance>
+                      <elementDefinition Id="4c53853c-fc22-490a-9383-3acffe1fd448" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="9f5ee9e5-613c-4acf-b19c-a00936e24364">
+                      <propertyInstance Id="4600e89c-76da-42df-9353-29fa8788cf79" name="IsUnsafe" value="false">
+                        <elementDefinition Id="cf59ac06-5b54-4339-ba3e-db1d024e10c5" />
+                      </propertyInstance>
+                      <elementDefinition Id="99dbc04d-9de5-4bf0-bf80-4d96bab49f24" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="8cd068a3-600f-47cf-9ac5-9ee369900a8e">
+                      <propertyInstance Id="643f6a6f-8ecd-4533-85c4-e393600255bd" name="PackageVisibility" value="internal">
+                        <elementDefinition Id="0b5d2feb-9ce1-4f5c-8f9a-7a67fecc170b" />
+                      </propertyInstance>
+                      <elementDefinition Id="a4dbc44f-5eea-445a-8c80-654ead05282c" />
+                    </stereotypeInstanceHasPropertyInstances>
+                  </propertyInstances>
+                </stereotypeInstance>
+              </appliedStereotypesInternal>
+              <elementDefinition Id="78adb04b-cef5-4fb9-9760-aa47b77359e9" />
+              <generalsInternal>
+                <generalization Id="a4b5e92c-8150-4120-9dbb-c914a686047c" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+                  <elementDefinition Id="09057933-8261-4727-9c66-3cc5374e3c42" />
+                </generalization>
+              </generalsInternal>
             </class>
           </packageHasNamedElement>
         </packagedElements>

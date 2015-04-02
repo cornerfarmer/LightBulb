@@ -6,7 +6,6 @@
 #include <list>
 
 #include "Edge.hpp"
-#include "Neuron.hpp"
 
 class Neuron
 {
@@ -14,6 +13,7 @@ protected:
 	float activation;
 	std::list<Edge*> efferentEdges;
 public:	
+	~Neuron();
 	Neuron();
 	void addNextNeuron(Neuron* newNextNeuron, float weight);
 	float getActivation();
