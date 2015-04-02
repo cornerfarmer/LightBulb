@@ -62,6 +62,23 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActivationFunction.hpp" />
+    <ClInclude Include="ActivationOrder.hpp" />
+    <ClInclude Include="BiasNeuron.hpp" />
+    <ClInclude Include="Edge.hpp" />
+    <ClInclude Include="IdentityFunction.hpp" />
+    <ClInclude Include="InputFunction.hpp" />
+    <ClInclude Include="InputNeuron.hpp" />
+    <ClInclude Include="LayeredNetwork.hpp" />
+    <ClInclude Include="NetworkTopology.hpp" />
+    <ClInclude Include="NeuralNetwork.hpp" />
+    <ClInclude Include="Neuron.hpp" />
+    <ClInclude Include="OutputFunction.hpp" />
+    <ClInclude Include="StandardNeuron.hpp" />
+    <ClInclude Include="TopologicalOrder.hpp" />
+    <ClInclude Include="WeightedSumFunction.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
