@@ -14,6 +14,7 @@ StandardNeuron::StandardNeuron(InputFunction* inputFunction_, ActivationFunction
 	inputFunction = inputFunction_;
 	activationFunction = activationFunction_;
 	outputFunction = outputFunction_;
+	threshold = 0;
 }
 
 void StandardNeuron::addPrevNeuron(Neuron* newPrevNeuron, float weight)
