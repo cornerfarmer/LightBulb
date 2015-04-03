@@ -107,6 +107,70 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="7191f7f9-ccd4-4085-aec3-41fc49577746"
+            name="getTotalError"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2109d62e-190d-4172-8e85-05f1e39a601f"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                      LastKnownName="float"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8f31d859-681c-40e0-806a-666c80bed363"
+                  name="neuralNetwork"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e"
+                      LastKnownName="NeuralNetwork"
+                      LastKnownLocation="Package_1254.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3c24fccd-4ef6-4983-9e3c-d86d38c91f04"
+            name="getTeachingLessons"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2d8fe857-d247-41a7-937f-aa8bab3c76fc"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="60212edb-d195-4694-82c9-ce9d963ee5cb"
+                      LastKnownName="TeachinLesson[]"
+                      LastKnownLocation="Package_1254.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -237,6 +301,198 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="bc16a44c-2b42-4789-94cf-d7be57722444"
+            name="teachingInput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="cd1cb944-b4ab-457b-8b4d-2884861864e6"
+            name="teachingPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="9ca05e39-1b49-4e36-bc38-38137f5100b6"
+            name="getErrorvector"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="565a1ef8-4aeb-4a05-a6ee-fc7c87da2e4c"
+                  name="neuralNetwork"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e"
+                      LastKnownName="NeuralNetwork"
+                      LastKnownLocation="Package_1254.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0e22846e-0e01-4da6-ac5c-08e078e33660"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                      LastKnownName="float[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="aedf2672-ef94-4c10-b69f-febd63d31a0a"
+            name="getSpecificError"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8ac089ad-1e7e-46ac-a424-836bea970bea"
+                  name="neuralNetowork"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e"
+                      LastKnownName="NeuralNetwork"
+                      LastKnownLocation="Package_1254.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="782b81c1-b8a3-43f4-b245-05a46d4e4b5e"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                      LastKnownName="float"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="982b08d3-2d42-4721-aa2a-a41d916d0259"
+            name="getEuclidienDistanz"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2570f5e5-aad5-4222-ae9f-e20355f2e1e6"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                      LastKnownName="float"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8f0fbc55-08ae-4c5b-b135-34c345e651b1"
+                  name="neuralNetowork"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e"
+                      LastKnownName="NeuralNetwork"
+                      LastKnownLocation="Package_1254.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d223474b-827d-481c-8210-8cf313f9fc19"
+            name="getRMS"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4a262185-500a-4a45-939c-51210bc26232"
+                  name="neuralNetowork"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e"
+                      LastKnownName="NeuralNetwork"
+                      LastKnownLocation="Package_1254.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3b518b89-a80f-4781-9fa6-0a4a1a5954d8"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
+                      LastKnownName="float"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -342,6 +598,16 @@
           </stereotypeInstance>
         </appliedStereotypesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e"
+        name="NeuralNetwork" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="60212edb-d195-4694-82c9-ce9d963ee5cb"
+        name="TeachinLesson[]" />
     </packageHasNamedElement>
   </packagedElements>
 </package>

@@ -2878,6 +2878,42 @@
                   <elementDefinition Id="7460f3b6-7407-4569-8e78-75bd5ae6cb03" />
                 </association>
               </targetEnds>
+              <ownedOperationsInternal>
+                <operation Id="1489997d-d2ff-4805-a68e-b470b38883c6" name="getTotalError" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="7191f7f9-ccd4-4085-aec3-41fc49577746" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="b08a5c91-ec3c-4b7b-9335-eac356a89311" direction="Return" isUnique="false">
+                        <elementDefinition Id="2109d62e-190d-4172-8e85-05f1e39a601f" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="8dff2540-4ee8-46cd-9e1c-6a70a11daf8c" name="neuralNetwork" direction="In" isUnique="false">
+                        <elementDefinition Id="8f31d859-681c-40e0-806a-666c80bed363" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" LastKnownName="NeuralNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="4f01dfd9-4c24-4e82-bae4-296cdda2996e" name="getTeachingLessons" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="3c24fccd-4ef6-4983-9e3c-d86d38c91f04" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="3d226345-d255-4bce-9d0d-d556751a37dc" direction="Return" isUnique="false">
+                        <elementDefinition Id="2d8fe857-d247-41a7-937f-aa8bab3c76fc" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="6556db0f-860c-4b10-a9a1-2cceb0924949" LastKnownName="TeachinLesson[]" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
@@ -2920,124 +2956,106 @@
                 </stereotypeInstance>
               </appliedStereotypesInternal>
               <elementDefinition Id="3b2a52ef-f690-4396-8ee9-79714201c427" />
-              <targetEnds>
-                <association Id="6063fe76-9750-49c3-8dc2-3720ebc0973b" isDerived="false" sourceEndRoleName="" targetEndRoleName="teachingInput" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="8d85c8c9-9165-4fc4-8ff8-4baa68494ac4" LastKnownName="TeachingInput" />
-                  <relationshipOwnedElementsInternal>
-                    <associationHasOwnedEnds>
-                      <memberEnd Id="29c11b8f-648c-4a5b-b9ea-b2b93ca90ada" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                        <elementDefinition Id="d042c70f-cf34-4cc1-b697-9f1231a25a7e" />
-                      </memberEnd>
-                    </associationHasOwnedEnds>
-                    <associationHasOwnedEnds>
-                      <memberEnd Id="100b2c8e-d3c7-47e7-b064-cccc28cb188a" name="teachingInput" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                        <elementDefinition Id="7921d84a-86d4-4600-bc27-095901337a10" />
-                      </memberEnd>
-                    </associationHasOwnedEnds>
-                  </relationshipOwnedElementsInternal>
-                  <elementDefinition Id="3f79ec75-cd7a-419c-b86e-8f3c11bc567e" />
-                </association>
-                <association Id="21526c36-d0d0-4623-a8f9-d3d235b9244d" isDerived="false" sourceEndRoleName="" targetEndRoleName="teachingPattern" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="5803b34e-2809-4789-bd20-dfdf1834ab60" LastKnownName="TeachingPattern" />
-                  <relationshipOwnedElementsInternal>
-                    <associationHasOwnedEnds>
-                      <memberEnd Id="ce972f4a-a1af-4323-a253-800251310d47" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                        <elementDefinition Id="204baccf-410b-4108-97ac-c4267fa487d7" />
-                      </memberEnd>
-                    </associationHasOwnedEnds>
-                    <associationHasOwnedEnds>
-                      <memberEnd Id="15cd90b9-9b8c-4647-bfb0-93491d5ab151" name="teachingPattern" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                        <elementDefinition Id="76e0e523-f955-43b0-9896-b33a34bed90a" />
-                      </memberEnd>
-                    </associationHasOwnedEnds>
-                  </relationshipOwnedElementsInternal>
-                  <elementDefinition Id="c4484aad-4dfd-44ae-bc2f-afaeaff77ca2" />
-                </association>
-              </targetEnds>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="5803b34e-2809-4789-bd20-dfdf1834ab60" name="TeachingPattern" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <appliedStereotypesInternal>
-                <stereotypeInstance Id="c42138d2-f007-4fa6-a62d-722034ebfc95" name="class" profile="CSharpProfile">
-                  <elementDefinition Id="3ab24112-336c-4560-8627-dbcb47ec9d61" />
-                  <propertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="45d49937-1e1f-4f43-b47a-d65be99feb78">
-                      <propertyInstance Id="9fe64436-a51c-4089-bebd-c7cfd81a0d1b" name="ClrAttributes">
-                        <elementDefinition Id="f001ed95-5344-42a8-bb7c-34283345a8be" />
-                      </propertyInstance>
-                      <elementDefinition Id="628c747d-f840-488c-af9b-09ed0ffc4243" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="a81d6e0d-0fd0-4072-9a9b-8b61fdddc4a1">
-                      <propertyInstance Id="00666f68-6667-4ac8-abb3-bd0d5a69219f" name="IsPartial" value="false">
-                        <elementDefinition Id="c4e813f7-29fc-46a2-b9e5-a054c69eefdc" />
-                      </propertyInstance>
-                      <elementDefinition Id="d8a72f6c-0f2f-4ea8-ac23-7ca36de64fdf" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="5640f23d-9af6-4b76-8bb7-07851154655a">
-                      <propertyInstance Id="681c2895-1c72-4b78-9ba1-644b12a4d974" name="IsStatic" value="false">
-                        <elementDefinition Id="89c9b9ed-40b4-428a-b323-87b8da13937f" />
-                      </propertyInstance>
-                      <elementDefinition Id="7002d576-8fa9-46be-ad0a-f6d5b8f22aba" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="5d9b8520-d4f7-4623-a885-17c5484ad0dc">
-                      <propertyInstance Id="c6ceec6f-9470-4857-bbbc-e3620ab161c2" name="IsUnsafe" value="false">
-                        <elementDefinition Id="0052dda6-a28a-4579-b53d-0237af97dc75" />
-                      </propertyInstance>
-                      <elementDefinition Id="90a1da89-996c-48b4-8791-b7d8b70c7b63" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="573e21d0-b38d-4d4f-95d4-d6759046c0fc">
-                      <propertyInstance Id="c015eb3f-8880-4c36-b858-3b25bfdab091" name="PackageVisibility" value="internal">
-                        <elementDefinition Id="a6d7423b-02b1-4e2d-b01b-dc5d136ef5a6" />
-                      </propertyInstance>
-                      <elementDefinition Id="7832383f-80cd-46d4-b2e6-fe0aac1f7226" />
-                    </stereotypeInstanceHasPropertyInstances>
-                  </propertyInstances>
-                </stereotypeInstance>
-              </appliedStereotypesInternal>
-              <elementDefinition Id="8aa55ece-021e-4db2-b0ff-ff978fb73dcc" />
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="8d85c8c9-9165-4fc4-8ff8-4baa68494ac4" name="TeachingInput" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <appliedStereotypesInternal>
-                <stereotypeInstance Id="bf4e53dd-8336-4863-a143-c410aa16dfee" name="class" profile="CSharpProfile">
-                  <elementDefinition Id="644a1fae-c48f-4bbd-a588-c85925fc6ac7" />
-                  <propertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="6a55387b-df06-46a2-8aef-922b5b29b17e">
-                      <propertyInstance Id="a6df368c-ad84-4b4f-86e9-c12e3f2c1998" name="ClrAttributes">
-                        <elementDefinition Id="0e915ac1-10c3-40d9-a0d0-117764c02794" />
-                      </propertyInstance>
-                      <elementDefinition Id="ecd92c43-27ef-4e8b-83ed-ff0d033af4f7" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="acf45b43-e7c6-4d2a-8fdc-eaf4c953d636">
-                      <propertyInstance Id="a2871e01-ddcb-4f2f-be44-76b1dcb42110" name="IsPartial" value="false">
-                        <elementDefinition Id="c07ce5d0-299a-45be-8145-2557679d70fb" />
-                      </propertyInstance>
-                      <elementDefinition Id="e5cfc50d-6350-4d03-a4bc-88981903e002" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="19767e55-37a1-4004-8d30-073a2133cae8">
-                      <propertyInstance Id="63c42b83-bcd5-42c3-81b3-8296c9465fd5" name="IsStatic" value="false">
-                        <elementDefinition Id="5c005db0-083c-4e3e-aad9-4b051d5c8cf2" />
-                      </propertyInstance>
-                      <elementDefinition Id="da666658-53bd-41e8-90ba-5b169f9fcec5" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="567d81d3-a73d-46fd-a12f-c227dd5b3169">
-                      <propertyInstance Id="27c4a1fa-63ec-45a2-8f49-5fc6d5d9a033" name="IsUnsafe" value="false">
-                        <elementDefinition Id="b58cddec-2db0-4fd7-b271-fdba105cd5ec" />
-                      </propertyInstance>
-                      <elementDefinition Id="45de1269-32a7-45db-81f0-2815ab879926" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="21e38e22-408e-4156-8a3b-788bca66cbe5">
-                      <propertyInstance Id="8ef5ed63-d368-4e56-bc89-f309e881fb57" name="PackageVisibility" value="internal">
-                        <elementDefinition Id="c8482bb7-02d8-40d6-9e8d-3d135e48785d" />
-                      </propertyInstance>
-                      <elementDefinition Id="24f78096-5633-4f40-984b-0ec4e2441b9b" />
-                    </stereotypeInstanceHasPropertyInstances>
-                  </propertyInstances>
-                </stereotypeInstance>
-              </appliedStereotypesInternal>
-              <elementDefinition Id="d6b0dcf7-087b-4cfa-af7d-e11d4f128d99" />
+              <ownedAttributesInternal>
+                <property Id="5b828826-1b35-4e54-8c90-dcf64f6be9cc" name="teachingInput" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bc16a44c-2b42-4789-94cf-d7be57722444" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b047d3a3-72ce-410a-9436-ae0b413abfb1" LastKnownName="float[]" />
+                  </type_NamedElement>
+                </property>
+                <property Id="6c113780-6add-4a17-bfb3-aa81de5c617b" name="teachingPattern" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="cd1cb944-b4ab-457b-8b4d-2884861864e6" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b047d3a3-72ce-410a-9436-ae0b413abfb1" LastKnownName="float[]" />
+                  </type_NamedElement>
+                </property>
+              </ownedAttributesInternal>
+              <ownedOperationsInternal>
+                <operation Id="7929ef72-5239-47fd-8c64-ad61cb16d6a0" name="getErrorvector" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="9ca05e39-1b49-4e36-bc38-38137f5100b6" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="43bd70c8-2841-4acd-bb88-a28c615909fd" name="neuralNetwork" direction="In" isUnique="false">
+                        <elementDefinition Id="565a1ef8-4aeb-4a05-a6ee-fc7c87da2e4c" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" LastKnownName="NeuralNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="629bde9c-99af-4c65-a060-3b32f0e02488" direction="Return" isUnique="false">
+                        <elementDefinition Id="0e22846e-0e01-4da6-ac5c-08e078e33660" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b047d3a3-72ce-410a-9436-ae0b413abfb1" LastKnownName="float[]" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="4e448eb4-ab8e-4790-acdd-684659d2f99f" name="getSpecificError" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="aedf2672-ef94-4c10-b69f-febd63d31a0a" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="4ed802ed-24b2-4d29-8987-26721f96b57a" name="neuralNetowork" direction="In" isUnique="false">
+                        <elementDefinition Id="8ac089ad-1e7e-46ac-a424-836bea970bea" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" LastKnownName="NeuralNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="e2290892-0768-4d59-aecf-50311c922ddf" direction="Return" isUnique="false">
+                        <elementDefinition Id="782b81c1-b8a3-43f4-b245-05a46d4e4b5e" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="bcb714a7-0ccd-4b89-a39d-312baf9bf966" name="getEuclidienDistanz" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="982b08d3-2d42-4721-aa2a-a41d916d0259" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="9d512de8-782d-4c7e-a993-e5246c690afb" direction="Return" isUnique="false">
+                        <elementDefinition Id="2570f5e5-aad5-4222-ae9f-e20355f2e1e6" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="25b58bf6-3850-4284-be1e-a8b5f9e07829" name="neuralNetowork" direction="In" isUnique="false">
+                        <elementDefinition Id="8f0fbc55-08ae-4c5b-b135-34c345e651b1" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" LastKnownName="NeuralNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="0e55783b-c98b-433e-bc32-598dbe21baab" name="getRMS" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="d223474b-827d-481c-8210-8cf313f9fc19" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="1407a659-c0e5-4188-9299-d93efe1a62e2" name="neuralNetowork" direction="In" isUnique="false">
+                        <elementDefinition Id="4a262185-500a-4a45-939c-51210bc26232" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" LastKnownName="NeuralNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="c7b07cf5-7417-437f-9ffc-a0a0e26b6719" direction="Return" isUnique="false">
+                        <elementDefinition Id="3b518b89-a80f-4781-9fa6-0a4a1a5954d8" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -3192,6 +3210,16 @@
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" name="NeuralNetwork" isAbstract="false" isLeaf="false" cachedFullName="NeuralNetwork">
+        <elementDefinition Id="dc6a1c91-b0bc-4c16-abc4-9594f019dc9e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="6556db0f-860c-4b10-a9a1-2cceb0924949" name="TeachinLesson[]" isAbstract="false" isLeaf="false" cachedFullName="TeachinLesson[]">
+        <elementDefinition Id="60212edb-d195-4694-82c9-ce9d963ee5cb" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />
