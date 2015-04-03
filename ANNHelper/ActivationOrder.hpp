@@ -3,7 +3,7 @@
 #ifndef _ACTIVATIONORDER_H_
 #define _ACTIVATIONORDER_H_
 
-#include "NetworkTopology.hpp"
+class NetworkTopology;
 
 class ActivationOrder
 {

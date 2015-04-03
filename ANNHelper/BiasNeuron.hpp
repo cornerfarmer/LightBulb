@@ -10,6 +10,7 @@ class BiasNeuron : InputNeuron
 private:
 public:	
 	BiasNeuron();
+	void refreshActivation();
 };
 
 #endif

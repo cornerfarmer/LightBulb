@@ -9,3 +9,8 @@ void InputNeuron::setInput(float newInput)
 {
 
 }
+
+void InputNeuron::refreshActivation()
+{
+
+}

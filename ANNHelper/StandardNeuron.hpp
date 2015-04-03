@@ -4,10 +4,11 @@
 #define _STANDARDNEURON_H_
 
 #include "Neuron.hpp"
-#include "ActivationFunction.hpp"
-#include "InputFunction.hpp"
-#include "OutputFunction.hpp"
-#include "Edge.hpp"
+
+class ActivationFunction;
+class InputFunction;
+class OutputFunction;
+class Edge;
 
 class StandardNeuron : Neuron
 {
@@ -22,6 +23,7 @@ public:
 	StandardNeuron();
 	StandardNeuron(InputFunction* inputFunction, ActivationFunction* activationFunction, OutputFunction* outputFunction);
 	void addPrevNeuron(Neuron* newPrevNeuron, float weight);
+	void refreshActivation();
 };
 
 #endif

@@ -4,3 +4,8 @@ BiasNeuron::BiasNeuron()
 {
 
 }
+
+void BiasNeuron::refreshActivation()
+{
+
+}

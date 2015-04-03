@@ -5,8 +5,8 @@
 
 #include <list>
 
-#include "InputNeuron.hpp"
-#include "Neuron.hpp"
+class InputNeuron;
+class Neuron;
 
 class NetworkTopology
 {

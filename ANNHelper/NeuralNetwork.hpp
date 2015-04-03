@@ -5,8 +5,8 @@
 
 #include <vector>
 
-#include "NetworkTopology.hpp"
-#include "ActivationOrder.hpp"
+class NetworkTopology;
+class ActivationOrder;
 
 class NeuralNetwork 
 {

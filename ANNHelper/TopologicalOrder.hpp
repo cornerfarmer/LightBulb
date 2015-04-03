@@ -10,6 +10,7 @@ class TopologicalOrder : ActivationOrder
 private:
 public:
 	TopologicalOrder();
+	void executeActivation(NetworkTopology &networkTopology);
 };
 
 #endif

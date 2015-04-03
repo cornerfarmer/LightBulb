@@ -19,3 +19,8 @@ void StandardNeuron::addPrevNeuron(Neuron* newPrevNeuron, float weight)
 {
 
 }
+
+void StandardNeuron::refreshActivation()
+{
+
+}

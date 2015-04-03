@@ -3,18 +3,18 @@
 #ifndef _EDGE_H_
 #define _EDGE_H_
 
-#include "Neuron.hpp"
-#include "InputNeuron.hpp"
+class Neuron;
+class StandardNeuron;
 
 class Edge
 {
 private:
 	float weight;
 	Neuron* prevNeuron;
-	InputNeuron* nextNeuron;
+	StandardNeuron* nextNeuron;
 public:
 	Edge();
-	Edge(Neuron* prevNeuron_, InputNeuron* nextNeuron_, float weight_);	
+	Edge(Neuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_);	
 };
 
 #endif

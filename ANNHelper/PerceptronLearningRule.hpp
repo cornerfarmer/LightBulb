@@ -9,6 +9,7 @@ class PerceptronLearningRule : LearningRule
 {
 private:
 public:
+	void doLearning(NeuralNetwork &neuralNetwork);
 };
 
 #endif

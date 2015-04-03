@@ -12,6 +12,7 @@ private:
 public:	
 	InputNeuron();
 	void setInput(float newInput);
+	void refreshActivation();
 };
 
 #endif

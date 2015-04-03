@@ -6,11 +6,12 @@
 #include <vector>
 #include <list>
 
-#include "ActivationFunction.hpp"
-#include "InputFunction.hpp"
-#include "OutputFunction.hpp"
 #include "NetworkTopology.hpp"
 #include "Neuron.hpp"
+
+class ActivationFunction;
+class InputFunction;
+class OutputFunction;
 
 struct LayeredNetworkOptions
 {

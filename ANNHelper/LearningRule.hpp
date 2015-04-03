@@ -3,7 +3,7 @@
 #ifndef _LEARNINGRULE_H_
 #define _LEARNINGRULE_H_
 
-#include "NeuralNetwork.hpp"
+class NeuralNetwork;
 
 class LearningRule 
 {

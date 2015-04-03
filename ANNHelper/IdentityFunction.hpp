@@ -11,6 +11,7 @@ class IdentityFunction : ActivationFunction, OutputFunction
 private:
 public:
 	IdentityFunction();
+	float execute(float input);
 };
 
 #endif

@@ -10,6 +10,7 @@ class WeightedSumFunction : InputFunction
 private:
 public:
 	WeightedSumFunction();
+	float execute(std::list<Edge*> input);
 };
 
 #endif

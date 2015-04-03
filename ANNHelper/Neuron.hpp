@@ -5,7 +5,7 @@
 
 #include <list>
 
-#include "Edge.hpp"
+class Edge;
 
 class Neuron
 {
