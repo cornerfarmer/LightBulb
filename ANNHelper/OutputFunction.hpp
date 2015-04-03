@@ -8,7 +8,8 @@ class OutputFunction
 {
 private:
 public:
-	virtual float execute(float input) = 0;
+	// Calculate the output from the activation
+	virtual float execute(float activation) = 0;
 };
 
 #endif

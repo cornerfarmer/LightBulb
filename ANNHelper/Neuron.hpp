@@ -18,8 +18,11 @@ protected:
 public:	
 	~Neuron();
 	Neuron();
+	// Add a new efferent Edge which directs to the given neuron
 	void addNextNeuron(Neuron* newNextNeuron, float weight);
+	// Returns the current activation of the neuron
 	float getActivation();
+	// Recalculate the activation of the neuron
 	virtual void refreshActivation() = 0;
 };
 

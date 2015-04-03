@@ -11,6 +11,7 @@ class LearningRule
 {
 private:
 public:
+	// Execute the learning process on the given NeuralNetwork
 	virtual void doLearning(NeuralNetwork &neuralNetwork) = 0;
 };
 

@@ -11,7 +11,8 @@ class ActivationOrder
 {
 private:
 public:
-	 virtual void executeActivation(NetworkTopology &networkTopology) = 0;
+	// Activates all Neurons in the given topology in a special order
+	virtual void executeActivation(NetworkTopology &networkTopology) = 0;
 };
 
 #endif

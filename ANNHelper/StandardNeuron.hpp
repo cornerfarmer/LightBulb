@@ -26,7 +26,9 @@ public:
 	~StandardNeuron();
 	StandardNeuron();
 	StandardNeuron(InputFunction* inputFunction, ActivationFunction* activationFunction, OutputFunction* outputFunction);
+	// Add a new afferent Edge directing to the given neuron
 	void addPrevNeuron(Neuron* newPrevNeuron, float weight);
+	// Calculates a new activation with the help of its input-, activation- and outputFunction
 	void refreshActivation();
 };
 

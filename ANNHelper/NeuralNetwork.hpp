@@ -19,8 +19,11 @@ public:
 	~NeuralNetwork();
 	NeuralNetwork();	 
 	NeuralNetwork(NetworkTopology* networkTopology_);
+	// Recalculates the activation of all neurons is the given ActivationOrder
 	void refreshAllNeurons(ActivationOrder &activationOrder);
+	// Returns all output numbers of the network
 	std::vector<float>* getOutput();
+	// Sets all input neurons to the given numbers
 	void setInput(std::vector<float> &inputVector);
 };
 

@@ -8,6 +8,7 @@ class ActivationFunction
 {
 private:
 public:
+	// Calculate the activation from the given input
 	virtual float execute(float input) = 0;
 };
 

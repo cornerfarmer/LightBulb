@@ -11,6 +11,8 @@ class PerceptronLearningRule : LearningRule
 {
 private:
 public:
+	// Improves the given PerceptronNetwork with the help of its teaching stuff
+	// This learning method will always success
 	void doLearning(NeuralNetwork &neuralNetwork);
 };
 

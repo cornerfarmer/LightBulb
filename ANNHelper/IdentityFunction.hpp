@@ -13,6 +13,7 @@ class IdentityFunction : ActivationFunction, OutputFunction
 private:
 public:
 	IdentityFunction();
+	// Just returns the given input
 	float execute(float input);
 };
 

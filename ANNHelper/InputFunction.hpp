@@ -14,6 +14,7 @@ class InputFunction
 {
 private:
 public:
+	// Calculate the one value from all given afferent edges
 	virtual float execute(std::list<Edge*> input) = 0;
 };
 
