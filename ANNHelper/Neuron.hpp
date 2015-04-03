@@ -8,6 +8,7 @@
 
 // Forward declarations
 class Edge;
+class StandardNeuron;
 
 // Every neuron always has a activation and can have multiple efferent edges
 class Neuron
@@ -19,7 +20,8 @@ public:
 	~Neuron();
 	Neuron();
 	// Add a new efferent Edge which directs to the given neuron
-	void addNextNeuron(Neuron* newNextNeuron, float weight);
+	void addNextNeuron(StandardNeuron* newNextNeuron, float weight);
+	void addNextNeuron(Edge* newEdge);
 	// Returns the current activation of the neuron
 	float getActivation();
 	// Recalculate the activation of the neuron

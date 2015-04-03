@@ -27,12 +27,23 @@ struct LayeredNetworkOptions
 	bool enableLateralBackCoupling;
 	bool enableShortcuts;
 	std::vector<int> neuronsPerLayerCount;
+	LayeredNetworkOptions()
+	{
+		enableDirectBackCoupling = false;
+		enableIndirectBackCoupling = false;
+		enableLateralBackCoupling = false;
+		enableShortcuts = false;
+		activationFunction = NULL;
+		inputFunction = NULL;
+		outputFunction = NULL;
+		neuronsPerLayerCount = std::vector<int>();
+	}
 };
 
 typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
 
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
-class LayeredNetwork : NetworkTopology
+class LayeredNetwork : public NetworkTopology
 {
 private:
 	LayeredNetworkOptions_t options;
@@ -40,6 +51,14 @@ private:
 public:
 	~LayeredNetwork();
 	LayeredNetwork(const LayeredNetworkOptions_t &options_);	
+	// Returns all InputNeurons (first layer)
+	std::list<Neuron*>* getInputNeurons();
+	// Returns all OutputNeurons (last layer)
+	std::list<Neuron*>* getOutputNeurons();
+	// Returns all Neurons of the selected layer
+	std::list<Neuron*>* getNeuronsInLayer(int layerNr);
+	// Returns all Neurons
+	std::list<std::list<Neuron*>>* getNeurons();
 };
 
 #endif

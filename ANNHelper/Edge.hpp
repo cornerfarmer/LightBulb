@@ -16,6 +16,9 @@ private:
 	StandardNeuron* nextNeuron;
 public:
 	Edge(Neuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_);	
+	float getWeight();
+	Neuron* getPrevNeuron();
+	StandardNeuron* getNextNeuron();
 };
 
 #endif

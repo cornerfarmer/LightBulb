@@ -8,7 +8,7 @@
 #include "OutputFunction.hpp"
 
 // The IdentityFunction just returns the input without calculating anything
-class IdentityFunction : ActivationFunction, OutputFunction
+class IdentityFunction : public OutputFunction,public ActivationFunction
 {
 private:
 public:

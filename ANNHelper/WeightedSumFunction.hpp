@@ -6,8 +6,11 @@
 // Includes
 #include "InputFunction.hpp"
 
+//Forward declarations
+class Edge;
+
 // The WeightedSumFunction uses the weighted sum to calculate the input ;) 
-class WeightedSumFunction : InputFunction
+class WeightedSumFunction : public InputFunction
 {
 private:
 public:

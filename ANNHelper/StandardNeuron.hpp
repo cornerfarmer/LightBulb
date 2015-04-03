@@ -14,7 +14,7 @@ class Edge;
 
 // All neurons except of InputNeurons are StandardNeurons.
 // They have at least one afferent edge and 0..* efferent edges.
-class StandardNeuron : Neuron
+class StandardNeuron : public Neuron
 {
 private:
 	float threshold;
@@ -24,9 +24,10 @@ private:
 	std::list<Edge*> afferentEdges;
 public:
 	~StandardNeuron();
-	StandardNeuron(InputFunction* inputFunction, ActivationFunction* activationFunction, OutputFunction* outputFunction);
+	StandardNeuron(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_);
 	// Add a new afferent Edge directing to the given neuron
 	void addPrevNeuron(Neuron* newPrevNeuron, float weight);
+	void addPrevNeuron(Edge* newEdge);
 	// Calculates a new activation with the help of its input-, activation- and outputFunction
 	void refreshActivation();
 };

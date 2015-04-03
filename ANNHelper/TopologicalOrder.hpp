@@ -8,7 +8,7 @@
 
 // With this order, neurons will get activated layer by layer
 // This class is only compatible with a LayeredNetwork!
-class TopologicalOrder : ActivationOrder
+class TopologicalOrder : public ActivationOrder
 {
 private:
 public:

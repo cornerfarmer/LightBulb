@@ -7,7 +7,7 @@
 #include "LearningRule.hpp"
 
 // The PerceptronLearningRule can only be used to train PerceptronNetworks
-class PerceptronLearningRule : LearningRule
+class PerceptronLearningRule : public LearningRule
 {
 private:
 public:
