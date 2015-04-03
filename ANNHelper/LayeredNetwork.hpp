@@ -36,10 +36,9 @@ class LayeredNetwork : NetworkTopology
 {
 private:
 	LayeredNetworkOptions_t options;
-	std::list<std::list<Neuron>> neurons;
+	std::list<std::list<Neuron*>> neurons;
 public:
 	~LayeredNetwork();
-	LayeredNetwork();
 	LayeredNetwork(const LayeredNetworkOptions_t &options_);	
 };
 

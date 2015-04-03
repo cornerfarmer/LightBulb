@@ -5,11 +5,6 @@ StandardNeuron::~StandardNeuron()
 
 }
 
-StandardNeuron::StandardNeuron()
-{
-
-}
-
 StandardNeuron::StandardNeuron(InputFunction* inputFunction, ActivationFunction* activationFunction, OutputFunction* outputFunction)
 {
 

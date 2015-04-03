@@ -5,11 +5,6 @@ NeuralNetwork::~NeuralNetwork()
 
 }
 
-NeuralNetwork::NeuralNetwork()
-{
-
-}
-
 NeuralNetwork::NeuralNetwork(NetworkTopology* networkTopology_)
 {
 

@@ -24,7 +24,6 @@ private:
 	std::list<Edge*> afferentEdges;
 public:
 	~StandardNeuron();
-	StandardNeuron();
 	StandardNeuron(InputFunction* inputFunction, ActivationFunction* activationFunction, OutputFunction* outputFunction);
 	// Add a new afferent Edge directing to the given neuron
 	void addPrevNeuron(Neuron* newPrevNeuron, float weight);

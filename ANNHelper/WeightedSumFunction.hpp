@@ -11,7 +11,6 @@ class WeightedSumFunction : InputFunction
 {
 private:
 public:
-	WeightedSumFunction();
 	// Calculates Σ output * weight
 	float execute(std::list<Edge*> input);
 };

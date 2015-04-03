@@ -12,7 +12,6 @@ class TopologicalOrder : ActivationOrder
 {
 private:
 public:
-	TopologicalOrder();
 	// Activates all neurons in the given layered(!) topology in a topological order
 	void executeActivation(NetworkTopology &networkTopology);
 };

@@ -11,7 +11,6 @@ class BiasNeuron : InputNeuron
 {
 private:
 public:	
-	BiasNeuron();
 	// Sets its activation always to 1
 	void refreshActivation();
 };

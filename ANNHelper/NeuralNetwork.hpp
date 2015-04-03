@@ -17,7 +17,6 @@ private:
 	NetworkTopology* networkTopology;
 public:
 	~NeuralNetwork();
-	NeuralNetwork();	 
 	NeuralNetwork(NetworkTopology* networkTopology_);
 	// Recalculates the activation of all neurons is the given ActivationOrder
 	void refreshAllNeurons(ActivationOrder &activationOrder);

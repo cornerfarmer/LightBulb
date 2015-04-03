@@ -17,5 +17,5 @@ void Neuron::addNextNeuron(Neuron* newNextNeuron, float weight)
 
 float Neuron::getActivation()
 {
-
+	return 0.0;
 }
