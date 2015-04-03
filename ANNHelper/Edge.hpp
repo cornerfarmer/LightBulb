@@ -3,9 +3,11 @@
 #ifndef _EDGE_H_
 #define _EDGE_H_
 
+// Forward declarations
 class Neuron;
 class StandardNeuron;
 
+// A Edge connects two Neurons
 class Edge
 {
 private:

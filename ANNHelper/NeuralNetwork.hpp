@@ -3,11 +3,14 @@
 #ifndef _NEURALNETWORK_H_
 #define _NEURALNETWORK_H_
 
+// Includes
 #include <vector>
 
+// Forward declarations
 class NetworkTopology;
 class ActivationOrder;
 
+// This class contains all stuff needed to describe a NeuralNetwork
 class NeuralNetwork 
 {
 private:

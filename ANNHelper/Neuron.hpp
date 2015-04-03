@@ -3,10 +3,13 @@
 #ifndef _NEURON_H_
 #define _NEURON_H_
 
+// Includes
 #include <list>
 
+// Forward declarations
 class Edge;
 
+// Every neuron always has a activation and can have multiple efferent edges
 class Neuron
 {
 protected:
