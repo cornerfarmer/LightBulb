@@ -14,10 +14,11 @@ class TeachingLesson
 {
 private:
 	// The values the neural network should give back
-	std::vector<float> teachingInput;
+	std::vector<float>* teachingInput;
 	// The values we will put into the neural network
-	std::vector<float> teachingPattern;
+	std::vector<float>* teachingPattern;
 public:
+	TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_);
 	// Calculate the Errorvector
 	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
 	// Calculate the euclidient distance

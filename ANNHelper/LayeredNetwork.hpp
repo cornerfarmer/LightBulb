@@ -26,6 +26,7 @@ struct LayeredNetworkOptions
 	bool enableIndirectBackCoupling;
 	bool enableLateralBackCoupling;
 	bool enableShortcuts;
+	bool useBiasNeurons;
 	std::vector<int> neuronsPerLayerCount;
 	LayeredNetworkOptions()
 	{
@@ -37,6 +38,7 @@ struct LayeredNetworkOptions
 		inputFunction = NULL;
 		outputFunction = NULL;
 		neuronsPerLayerCount = std::vector<int>();
+		useBiasNeurons = false;
 	}
 };
 

@@ -1,22 +1,28 @@
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 
+TeachingLesson::TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_)
+{
+	teachingInput = teachingInput_;
+	teachingPattern = teachingPattern_;
+}
+
 std::unique_ptr<std::vector<float>> TeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder)
 {
 	// Create the errorVector with the right size
-	std::unique_ptr<std::vector<float>> errorVector(new std::vector<float>(teachingInput.size()));
+	std::unique_ptr<std::vector<float>> errorVector(new std::vector<float>(teachingInput->size()));
 
 	// Insert the input
-	neuralNetwork.setInput(teachingPattern);
+	neuralNetwork.setInput(*teachingPattern);
 	// Let the network calculate
 	neuralNetwork.refreshAllNeurons(activationOrder);
 	// Extract the output
 	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
 
 	// Calculate the error values (expected value - real value)
-	for (int i = 0; i < teachingInput.size(); i++)
+	for (int i = 0; i < teachingInput->size(); i++)
 	{
-		(*errorVector)[i] = teachingInput[i] - (*outputVector)[i];
+		(*errorVector)[i] = (*teachingInput)[i] - (*outputVector)[i];
 	}
 
 	return errorVector;

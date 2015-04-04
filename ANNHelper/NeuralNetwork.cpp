@@ -44,7 +44,7 @@ void NeuralNetwork::setInput(std::vector<float> &inputVector)
 
 	// Go through all neurons and copy the input values into the inputNeurons
 	int index = 0;
-	for (std::list<Neuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end(); neuron++, index++)
+	for (std::list<Neuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && index < inputVector.size(); neuron++, index++)
 	{
 		dynamic_cast<InputNeuron*>(*neuron)->setInput(inputVector[index]);
 	}

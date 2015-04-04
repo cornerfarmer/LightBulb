@@ -1,6 +1,7 @@
 #include "LayeredNetwork.hpp"
 #include "InputNeuron.hpp"
 #include "StandardNeuron.hpp"
+#include "BiasNeuron.hpp"
 
 LayeredNetwork::~LayeredNetwork()
 {
@@ -16,6 +17,10 @@ LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
 	{
 		// Add a new list for every layer
 		neurons.push_back(std::list<Neuron*>());
+
+		// If BiasNeurons are used, insert them in every layer except of the last one
+		if (options.useBiasNeurons && l < options.neuronsPerLayerCount.size() - 1)
+			neurons.back().push_front(new BiasNeuron());
 
 		// Add the neurons to the current layer
 		for (int i = 0; i < options.neuronsPerLayerCount[l]; i++)
