@@ -3160,7 +3160,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="2b8b2844-95df-4892-878a-a26970710ebe" name="PerceptronLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="2b8b2844-95df-4892-878a-a26970710ebe" name="SingleLayerPerceptronLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="2f270e31-bfb4-49de-aab3-9ca63f53fe23" name="class" profile="CSharpProfile">
                   <elementDefinition Id="c2a7c4d2-9a67-4082-b254-0adb393afded" />

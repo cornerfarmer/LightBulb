@@ -68,9 +68,6 @@
     <ClInclude Include="NeuralNetwork.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
-    <ClInclude Include="PerceptronLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="LearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
@@ -79,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="TopologicalOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleLayerPerceptronLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +124,6 @@
     <ClCompile Include="OutputFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
-    <ClCompile Include="PerceptronLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="StandardNeuron.cpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
@@ -135,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="WeightedSumFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleLayerPerceptronLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

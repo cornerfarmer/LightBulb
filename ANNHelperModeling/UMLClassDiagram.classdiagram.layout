@@ -349,7 +349,7 @@
         </classShape>
       </nestedChildShapes>
     </packageShape>
-    <associationConnector edgePoints="[(7.625 : 5.28125); (4.75 : 5.28125); (4.75 : 3.34799186448256)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(7.625 : 5.28125); (4.75 : 5.28125); (4.75 : 3.34799186448256)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="32d8c5e8-cb0d-4971-b955-c94155efc89c" />
       <relativeChildShapes />
       <nodes>
@@ -357,7 +357,7 @@
         <classShapeMoniker Id="831d90d2-43c4-441b-82de-d9e348a1764a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4 : 2.67399593224128); (2.375 : 2.67399593224128); (2.375 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="0..*">
+    <associationConnector edgePoints="[(4 : 2.67399593224128); (2.375 : 2.67399593224128); (2.375 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="0..*">
       <associationMoniker Id="24bcbda0-a29b-4f89-8619-975dbc00193b" />
       <relativeChildShapes />
       <nodes>
@@ -368,11 +368,11 @@
     <packageShape Id="e2ffbe8f-d215-49de-873c-31a0c729d1ca" absoluteBounds="2.375, 7.75, 4.375, 4.875" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="edbd35df-2107-4fb9-877e-c061993c716a" LastKnownName="Learning" />
       <nestedChildShapes>
-        <classShape Id="3f9ebc6f-7540-4787-a272-a0e4aaa2a164" absoluteBounds="4.125, 8.75, 1.5, 1.0184201206763586" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">
-          <classMoniker Id="2b8b2844-95df-4892-878a-a26970710ebe" LastKnownName="PerceptronLearningRule" />
+        <classShape Id="3f9ebc6f-7540-4787-a272-a0e4aaa2a164" absoluteBounds="4.25, 8.75, 1.5, 1.0276793744166692" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+          <classMoniker Id="2b8b2844-95df-4892-878a-a26970710ebe" LastKnownName="SingleLayerPerceptronLearningRule" />
           <nestedChildShapes>
-            <AttributeElementListCompartment Id="961bc67c-471c-4ed7-a941-35df2a2cc9aa" absoluteBounds="4.1400000000000006, 9.25607638557752, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-            <OperationElementListCompartment Id="b37e0c69-d7e9-404a-a18f-89fd1605dddf" absoluteBounds="4.1400000000000006, 9.46724825312694, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <AttributeElementListCompartment Id="961bc67c-471c-4ed7-a941-35df2a2cc9aa" absoluteBounds="4.265, 9.265335639317831, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="b37e0c69-d7e9-404a-a18f-89fd1605dddf" absoluteBounds="4.265, 9.47650750686725, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </classShape>
         <classShape Id="04f5c043-4f9a-482e-9b91-8b0b8cfbe4bc" absoluteBounds="3.25, 10.5, 1.5, 1.1878356194496154" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
@@ -384,7 +384,7 @@
         </classShape>
       </nestedChildShapes>
     </packageShape>
-    <generalizationConnector edgePoints="[(4.875 : 9.76842012067636); (4.875 : 10.125); (4 : 10.125); (4 : 10.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
+    <generalizationConnector edgePoints="[(5 : 9.77767937441667); (5 : 10.125); (4 : 10.125); (4 : 10.5)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
       <generalizationMoniker Id="a4b5e92c-8150-4120-9dbb-c914a686047c" />
       <relativeChildShapes />
       <nodes>

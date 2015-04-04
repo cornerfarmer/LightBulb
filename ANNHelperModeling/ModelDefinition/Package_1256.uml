@@ -7,7 +7,7 @@
     <packageHasNamedElement>
       <class
         Id="78adb04b-cef5-4fb9-9760-aa47b77359e9"
-        name="PerceptronLearningRule"
+        name="SingleLayerPerceptronLearningRule"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
