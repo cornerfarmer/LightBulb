@@ -24,6 +24,7 @@ public:
 	std::unique_ptr<std::vector<float>> getOutput();
 	// Sets all input neurons to the given numbers
 	void setInput(std::vector<float> &inputVector);
+	NetworkTopology* getNetworkTopology();
 };
 
 #endif

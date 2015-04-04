@@ -49,3 +49,8 @@ void NeuralNetwork::setInput(std::vector<float> &inputVector)
 		dynamic_cast<InputNeuron*>(*neuron)->setInput(inputVector[index]);
 	}
 }
+
+NetworkTopology* NeuralNetwork::getNetworkTopology()
+{
+	return networkTopology;
+}

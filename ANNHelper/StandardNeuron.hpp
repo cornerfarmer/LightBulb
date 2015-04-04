@@ -30,6 +30,7 @@ public:
 	void addPrevNeuron(Edge* newEdge);
 	// Calculates a new activation with the help of its input-, activation- and outputFunction
 	void refreshActivation();
+	std::list<Edge*>* getAfferentEdges();
 };
 
 #endif

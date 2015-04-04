@@ -418,7 +418,7 @@
           </operation>
           <operation
             Id="982b08d3-2d42-4721-aa2a-a41d916d0259"
-            name="getEuclidienDistanz"
+            name="getEuclidienDistance"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -440,7 +440,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="8f0fbc55-08ae-4c5b-b135-34c345e651b1"
+                  Id="901d60f2-32cf-49bb-8598-eb65f153e059"
                   name="neuralNetowork"
                   direction="In"
                   isUnique="false">

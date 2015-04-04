@@ -27,6 +27,9 @@
     <Filter Include="Quelldateien\Learning">
       <UniqueIdentifier>{a7efac7b-7060-4341-bd65-ee417a74389c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Teaching">
+      <UniqueIdentifier>{26cea91d-ef3e-4174-9869-b522f7d3f9ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LayeredNetwork.hpp">
@@ -79,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Teacher.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="TeachingLesson.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +144,12 @@
     </ClCompile>
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Teacher.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="TeachingLesson.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

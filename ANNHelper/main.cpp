@@ -15,11 +15,10 @@ int main()
 	layeredNetworkOptions.inputFunction = new WeightedSumFunction();
 	layeredNetworkOptions.activationFunction = new IdentityFunction();
 	layeredNetworkOptions.outputFunction = new IdentityFunction();
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(4);
-	layeredNetworkOptions.neuronsPerLayerCount[0]=3;
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(2);
+	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=1;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=4;
-	layeredNetworkOptions.neuronsPerLayerCount[3]=2;
+
 
 	LayeredNetwork layeredNetwork(layeredNetworkOptions);
 

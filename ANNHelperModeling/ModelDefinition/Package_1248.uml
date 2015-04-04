@@ -598,5 +598,24 @@
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="727e4611-78b1-44cd-97cb-79ad9c07a760"
+        name="BinaryFunction"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="149bbcfd-1fa8-4d4b-a5dc-aee4007b6bff"
+            isSubstitutable="false">
+            <classMoniker
+              Id="49effd66-f0b4-426d-9168-a326f4137e83"
+              LastKnownName="ActivationFunction"
+              LastKnownLocation="Package_1248.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

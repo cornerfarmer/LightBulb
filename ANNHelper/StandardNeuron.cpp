@@ -42,3 +42,8 @@ void StandardNeuron::refreshActivation()
 	// Calc the output activation from the activation
 	activation = outputFunction->execute(activation);
 }
+
+std::list<Edge*>* StandardNeuron::getAfferentEdges()
+{
+	return &afferentEdges;
+}

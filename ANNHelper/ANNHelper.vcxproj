@@ -76,6 +76,8 @@
     <ClCompile Include="OutputFunction.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
+    <ClCompile Include="Teacher.cpp" />
+    <ClCompile Include="TeachingLesson.cpp" />
     <ClCompile Include="TopologicalOrder.cpp" />
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
@@ -95,6 +97,8 @@
     <ClInclude Include="OutputFunction.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
+    <ClInclude Include="Teacher.hpp" />
+    <ClInclude Include="TeachingLesson.hpp" />
     <ClInclude Include="TopologicalOrder.hpp" />
     <ClInclude Include="WeightedSumFunction.hpp" />
   </ItemGroup>
