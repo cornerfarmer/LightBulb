@@ -38,7 +38,7 @@ void StandardNeuron::refreshActivation()
 	// Calc the input from all afferentEdges
 	activation = inputFunction->execute(afferentEdges);
 	// Calc the activation from the input
-	activation = activationFunction->execute(activation);
+	activation = activationFunction->execute(activation, threshold);
 	// Calc the output activation from the activation
 	activation = outputFunction->execute(activation);
 }

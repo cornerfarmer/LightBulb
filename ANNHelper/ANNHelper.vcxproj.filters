@@ -89,6 +89,9 @@
     <ClInclude Include="TeachingLesson.hpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="TeachingLesson.cpp">
       <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

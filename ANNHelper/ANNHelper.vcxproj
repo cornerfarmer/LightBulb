@@ -63,6 +63,7 @@
     <ClCompile Include="ActivationFunction.cpp" />
     <ClCompile Include="ActivationOrder.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
+    <ClCompile Include="BinaryFunction.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="IdentityFunction.cpp" />
     <ClCompile Include="InputFunction.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="ActivationFunction.hpp" />
     <ClInclude Include="ActivationOrder.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
+    <ClInclude Include="BinaryFunction.hpp" />
     <ClInclude Include="Edge.hpp" />
     <ClInclude Include="IdentityFunction.hpp" />
     <ClInclude Include="InputFunction.hpp" />

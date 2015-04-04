@@ -605,6 +605,49 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="ab208e90-9f6c-4735-973e-bf57f24d8b4f"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c945b117-b1ab-4f2b-8281-ae048f8cea54">
+                <propertyInstance
+                  Id="158d8b00-e03a-48cd-86be-fe09e06691a6"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="984722b0-a625-4112-a9e1-4a535261b480">
+                <propertyInstance
+                  Id="537ed713-3fee-47b0-b142-dae75cdc60d7"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="62e646c1-6c41-407c-8528-a05d43c0d006">
+                <propertyInstance
+                  Id="27112fc5-245b-40dd-a0ed-8d1f2fce763a"
+                  name="IsStatic"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="07a38919-84fa-4516-9c55-7cda480e4549">
+                <propertyInstance
+                  Id="4dd698cb-a294-45a3-b526-feebd1b106f1"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4720ca68-5221-446b-9a13-ca3e8dffdbce">
+                <propertyInstance
+                  Id="de38151d-3392-4a72-a555-661859305ec6"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
         <generalsInternal>
           <generalization
             Id="149bbcfd-1fa8-4d4b-a5dc-aee4007b6bff"
