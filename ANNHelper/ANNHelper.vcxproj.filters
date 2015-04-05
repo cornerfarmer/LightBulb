@@ -95,6 +95,9 @@
     <ClInclude Include="DeltaLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="BackpropagationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,6 +164,9 @@
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
     <ClCompile Include="DeltaLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="BackpropagationLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>

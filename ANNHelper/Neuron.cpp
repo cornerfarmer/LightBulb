@@ -18,7 +18,7 @@ void Neuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
 	// Create a new edge between this and the newPrevNeuron
 	Edge* newEdge = new Edge(this, newNextNeuron, weight);
 	// Add the newEdge to the afferentEdge list
-	efferentEdges.push_front(newEdge);
+	efferentEdges.push_back(newEdge);
 	// Add the newEdge also to the newPrevNeuron
 	newNextNeuron->addPrevNeuron(newEdge);	
 }
@@ -26,7 +26,7 @@ void Neuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
 void Neuron::addNextNeuron(Edge* newEdge)
 {
 	// Add the newEdge to the afferentEdge list
-	efferentEdges.push_front(newEdge);
+	efferentEdges.push_back(newEdge);
 }
 
 float Neuron::getActivation()

@@ -15,6 +15,8 @@ public:
 	// Just returns the given input
 	float execute(float input);
 	float execute(float input, float threshold);
+	// Returns always 0
+	float executeDerivation(float input, float threshold);
 };
 
 #endif

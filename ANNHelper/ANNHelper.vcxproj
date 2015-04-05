@@ -62,6 +62,7 @@
   <ItemGroup>
     <ClCompile Include="ActivationFunction.cpp" />
     <ClCompile Include="ActivationOrder.cpp" />
+    <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
     <ClCompile Include="BinaryFunction.cpp" />
     <ClCompile Include="DeltaLearningRule.cpp" />
@@ -86,6 +87,7 @@
   <ItemGroup>
     <ClInclude Include="ActivationFunction.hpp" />
     <ClInclude Include="ActivationOrder.hpp" />
+    <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
     <ClInclude Include="BinaryFunction.hpp" />
     <ClInclude Include="DeltaLearningRule.hpp" />

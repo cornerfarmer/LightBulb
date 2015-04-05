@@ -12,6 +12,8 @@ private:
 public:
 	// Returns 0 or 1
 	float execute(float input, float threshold);
+	// Error - No derivation available
+	float executeDerivation(float input, float threshold);
 };
 
 #endif

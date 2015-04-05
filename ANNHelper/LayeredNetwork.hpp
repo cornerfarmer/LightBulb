@@ -59,6 +59,8 @@ public:
 	std::list<Neuron*>* getOutputNeurons();
 	// Returns all Neurons of the selected layer
 	std::list<Neuron*>* getNeuronsInLayer(int layerNr);
+	// Calculates the layer count
+	int getLayerCount();
 	// Returns all Neurons
 	std::list<std::list<Neuron*>>* getNeurons();
 };

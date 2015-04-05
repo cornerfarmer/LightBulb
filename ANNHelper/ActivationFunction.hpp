@@ -10,6 +10,7 @@ private:
 public:
 	// Calculate the activation from the given input
 	virtual float execute(float input, float threshold) = 0;
+	virtual float executeDerivation(float input, float threshold) = 0;
 };
 
 #endif

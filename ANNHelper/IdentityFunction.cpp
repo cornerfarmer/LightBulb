@@ -9,3 +9,8 @@ float IdentityFunction::execute(float input, float threshold)
 {
 	return input;
 }
+
+float IdentityFunction::executeDerivation(float input, float threshold)
+{
+	return 0;
+}

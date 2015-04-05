@@ -73,6 +73,11 @@ std::list<Neuron*>* LayeredNetwork::getNeuronsInLayer(int layerNr)
 	return &(*layer);
 }
 
+int LayeredNetwork::getLayerCount()
+{
+	return options.neuronsPerLayerCount.size();
+}
+
 std::list<std::list<Neuron*>>* LayeredNetwork::getNeurons()
 {
 	return &neurons;

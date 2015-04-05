@@ -18,6 +18,7 @@ class StandardNeuron : public Neuron
 {
 private:
 	float threshold;
+	float netInput;
 	InputFunction* inputFunction;
 	ActivationFunction* activationFunction;
 	OutputFunction* outputFunction;
@@ -30,7 +31,10 @@ public:
 	void addPrevNeuron(Edge* newEdge);
 	// Calculates a new activation with the help of its input-, activation- and outputFunction
 	void refreshActivation();
+	// Calculates the value of the activation function derivation 
+	float executeDerivationOnActivationFunction(float input);
 	std::list<Edge*>* getAfferentEdges();
+	float getNetInput();
 };
 
 #endif
