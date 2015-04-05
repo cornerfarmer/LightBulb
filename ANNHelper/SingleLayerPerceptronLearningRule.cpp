@@ -9,11 +9,11 @@
 #include "Edge.hpp"
 
 void SingleLayerPerceptronLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
-{
+{	
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;
 
-	// Get all outpur neurons
+	// Get all output neurons
 	std::list<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
 	// Do while the totalError is not zero

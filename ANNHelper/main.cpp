@@ -11,6 +11,7 @@
 #include "TopologicalOrder.hpp"
 #include "BinaryFunction.hpp"
 #include "SingleLayerPerceptronLearningRule.hpp"
+#include "DeltaLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TeachingLesson.hpp"
 
@@ -18,7 +19,7 @@ int main()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.inputFunction = new WeightedSumFunction();
-	layeredNetworkOptions.activationFunction = new BinaryFunction();
+	layeredNetworkOptions.activationFunction = new IdentityFunction();
 	layeredNetworkOptions.outputFunction = new IdentityFunction();
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(2);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
@@ -30,6 +31,7 @@ int main()
 	NeuralNetwork neuralNetwork(&layeredNetwork);
 
 	SingleLayerPerceptronLearningRule singleLayerPerceptronLearningRule;
+	DeltaLearningRule deltaLearningRule;
 
 	Teacher teacher;
 	for (int i=0;i<2;i++)
@@ -40,11 +42,11 @@ int main()
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
 			std::vector<float>* teachingInput= new std::vector<float>(1);
-			(*teachingInput)[0] = (i == 1 || l == 1 ? 1 : 0);
+			(*teachingInput)[0] = 2 * i - l;
 			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 		}
 	}
-	singleLayerPerceptronLearningRule.doLearning(neuralNetwork, teacher);
+	deltaLearningRule.doLearning(neuralNetwork, teacher);
 
 	TopologicalOrder topologicalOrder;
 	neuralNetwork.refreshAllNeurons(topologicalOrder);
