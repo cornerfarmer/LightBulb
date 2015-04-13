@@ -60,6 +60,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractBackpropagationLearningRule.cpp" />
     <ClCompile Include="ActivationFunction.cpp" />
     <ClCompile Include="ActivationOrder.cpp" />
     <ClCompile Include="BackpropagationLearningRule.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractBackpropagationLearningRule.hpp" />
     <ClInclude Include="ActivationFunction.hpp" />
     <ClInclude Include="ActivationOrder.hpp" />
     <ClInclude Include="BackpropagationLearningRule.hpp" />
