@@ -8,6 +8,7 @@
 #include "LayeredNetwork.hpp"
 #include "WeightedSumFunction.hpp"
 #include "IdentityFunction.hpp"
+#include "FermiFunction.hpp"
 #include "TopologicalOrder.hpp"
 #include "BinaryFunction.hpp"
 #include "SingleLayerPerceptronLearningRule.hpp"
@@ -20,11 +21,11 @@ int main()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.inputFunction = new WeightedSumFunction();
-	layeredNetworkOptions.activationFunction = new IdentityFunction();
+	layeredNetworkOptions.activationFunction = new FermiFunction(1);
 	layeredNetworkOptions.outputFunction = new IdentityFunction();
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=1;
 	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 
@@ -34,23 +35,34 @@ int main()
 
 	SingleLayerPerceptronLearningRule singleLayerPerceptronLearningRule;
 	DeltaLearningRule deltaLearningRule;
-	BackpropagationLearningRule backpropagationLearningRule;
+	BackpropagationLearningRule backpropagationLearningRule(1000, 10, 0.01f, 0.45f, -5, 5);
 
 	Teacher teacher;
-	for (int i=0;i<2;i++)
+	for (int i=0;i<3;i++)
 	{
-		for (int l=0;l<2;l++)
+		for (int l=0;l<3;l++)
 		{
 			std::vector<float>* teachingPattern = new std::vector<float>(2);
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
 			std::vector<float>* teachingInput= new std::vector<float>(1);
-			(*teachingInput)[0] = (i != l ? 1 : 0);
+			(*teachingInput)[0] = (i > l ? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 		}
 	}
-	backpropagationLearningRule.doLearning(neuralNetwork, teacher);
 
+	bool success = backpropagationLearningRule.doLearning(neuralNetwork, teacher);
+
+	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
+
+	std::vector<float> teachingPattern(2);
+	teachingPattern[0] = 1;
+	teachingPattern[1] = 2;
+	neuralNetwork.setInput(teachingPattern);
+	neuralNetwork.refreshAllNeurons(TopologicalOrder());
+	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
+
+	
 	TopologicalOrder topologicalOrder;
 	neuralNetwork.refreshAllNeurons(topologicalOrder);
 	std::cout << "ANNHelper!";

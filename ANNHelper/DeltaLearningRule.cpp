@@ -8,7 +8,7 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
-void DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
+bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;
@@ -25,10 +25,6 @@ void DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 			// Calculate the errorvector 
 			std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);
 
-			// Create a vector which will contain all delta values of the neurons in the output layer
-			std::vector<float> deltaVectorOutputLayer(errorvector->size(), 0);
-
-			for (int l =0 
 			// Go through all error values and adjust the concerning neurons
 			std::list<Neuron*>::iterator outputNeuron = outputNeurons->begin();
 			for (std::vector<float>::iterator errorValue = errorvector->begin(); errorValue != errorvector->end(); errorValue++, outputNeuron++)
@@ -47,4 +43,8 @@ void DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 			}
 		}
 	}
+
+	
+	// This algorithm will always succeed
+	return true;
 }

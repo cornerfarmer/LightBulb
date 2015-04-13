@@ -98,6 +98,9 @@
     <ClInclude Include="BackpropagationLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="FermiFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="BackpropagationLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="FermiFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

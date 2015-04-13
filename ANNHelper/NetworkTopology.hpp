@@ -20,6 +20,8 @@ public:
 	virtual std::list<Neuron*>* getInputNeurons() = 0;
 	// Returns all OutputNeurons in the NeuralNetwork
 	virtual std::list<Neuron*>* getOutputNeurons() = 0;
+	// Set all weights to new random values between randStart and randEnd
+	virtual void randomizeWeights(float randStart, float randEnd) = 0;
 };
 
 #endif

@@ -9,7 +9,7 @@ float BinaryFunction::execute(float input, float threshold)
 		return 0;
 }
 
-float BinaryFunctionexecuteDerivation(float input, float threshold)
+float BinaryFunction::executeDerivation(float input, float threshold)
 {
 	// TODO: Throw error;
 	return 0;

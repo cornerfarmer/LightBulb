@@ -8,7 +8,7 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
-void SingleLayerPerceptronLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
+bool SingleLayerPerceptronLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {	
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;
@@ -46,4 +46,7 @@ void SingleLayerPerceptronLearningRule::doLearning(NeuralNetwork &neuralNetwork,
 			}
 		}
 	}
+
+	// This algorithm will always succeed
+	return true;
 }

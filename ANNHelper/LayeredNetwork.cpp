@@ -2,6 +2,7 @@
 #include "InputNeuron.hpp"
 #include "StandardNeuron.hpp"
 #include "BiasNeuron.hpp"
+#include "Edge.hpp"
 
 LayeredNetwork::~LayeredNetwork()
 {
@@ -81,4 +82,23 @@ int LayeredNetwork::getLayerCount()
 std::list<std::list<Neuron*>>* LayeredNetwork::getNeurons()
 {
 	return &neurons;
+}
+
+void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
+{
+	// Go through all layers
+	for (std::list<std::list<Neuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	{
+		// Go through all neurons in this layer
+		for (std::list<Neuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			// Go through all effernetEdges of this neuron
+			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
+			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+			{
+				// Set the weight to a new random value
+				(*edge)->setWeigt((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+			}
+		}
+	}
 }

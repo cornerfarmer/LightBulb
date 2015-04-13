@@ -13,7 +13,8 @@ class LearningRule
 private:
 public:
 	// Execute the learning process on the given NeuralNetwork
-	virtual void doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
+	// If the learning process succeded the method will return true
+	virtual bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
 };
 
 #endif

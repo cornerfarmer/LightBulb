@@ -14,10 +14,25 @@ class Teacher;
 class BackpropagationLearningRule : public LearningRule
 {
 private:
+	// Sets the maximum iterations per try
+	int maxIterationsPerTry;
+	// Sets the maximum number of tries, until the algorithm should abort
+	int maxTries;
+	// Sets the highest total error value, when the algorithm should finish successful
+	float totalErrorGoal;
+	// Sets the learning Rate
+	float learningRate;
+	// Sets the lower limit of the random generated weights
+	float minRandomWeightValue;
+	// Sets the higher limit of the random generated weights
+	float maxRandomWeightValue;
 public:
+	// Initializes all required values
+	BackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_, float learningRate_, float minRandomWeightValue_, float maxRandomWeightValue_);
 	// Improves the given PerceptronNetwork with the help of its teaching stuff
-	// This learning method will always success
-	void doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	// If the learning process succeded the method will return true
+	bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);
 };
 
 #endif
+

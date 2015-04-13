@@ -67,6 +67,7 @@
     <ClCompile Include="BinaryFunction.cpp" />
     <ClCompile Include="DeltaLearningRule.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="FermiFunction.cpp" />
     <ClCompile Include="IdentityFunction.cpp" />
     <ClCompile Include="InputFunction.cpp" />
     <ClCompile Include="InputNeuron.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="BinaryFunction.hpp" />
     <ClInclude Include="DeltaLearningRule.hpp" />
     <ClInclude Include="Edge.hpp" />
+    <ClInclude Include="FermiFunction.hpp" />
     <ClInclude Include="IdentityFunction.hpp" />
     <ClInclude Include="InputFunction.hpp" />
     <ClInclude Include="InputNeuron.hpp" />
