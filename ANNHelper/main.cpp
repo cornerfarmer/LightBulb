@@ -14,6 +14,7 @@
 #include "SingleLayerPerceptronLearningRule.hpp"
 #include "DeltaLearningRule.hpp"
 #include "BackpropagationLearningRule.hpp"
+#include "ResilientBackpropagationLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TeachingLesson.hpp"
 
@@ -25,7 +26,7 @@ int main()
 	layeredNetworkOptions.outputFunction = new IdentityFunction();
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=1;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
 	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 
@@ -35,29 +36,29 @@ int main()
 
 	SingleLayerPerceptronLearningRule singleLayerPerceptronLearningRule;
 	DeltaLearningRule deltaLearningRule;
-	BackpropagationLearningRule backpropagationLearningRule(1000, 10, 0.01f, 0.45f, -5, 5);
+	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(500, 20, 0.01f, -5, 5);
 
 	Teacher teacher;
-	for (int i=0;i<3;i++)
+	for (int i=0;i<6;i++)
 	{
-		for (int l=0;l<3;l++)
+		for (int l=0;l<6;l++)
 		{
 			std::vector<float>* teachingPattern = new std::vector<float>(2);
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
 			std::vector<float>* teachingInput= new std::vector<float>(1);
-			(*teachingInput)[0] = (i > l ? 1 : 0);
+			(*teachingInput)[0] = (i == l ? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 		}
 	}
 
-	bool success = backpropagationLearningRule.doLearning(neuralNetwork, teacher);
+	bool success = resilientBackpropagationLearningRule.doLearning(neuralNetwork, teacher);
 
 	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
 
 	std::vector<float> teachingPattern(2);
-	teachingPattern[0] = 1;
-	teachingPattern[1] = 2;
+	teachingPattern[0] = 100;
+	teachingPattern[1] = 99;
 	neuralNetwork.setInput(teachingPattern);
 	neuralNetwork.refreshAllNeurons(TopologicalOrder());
 	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();

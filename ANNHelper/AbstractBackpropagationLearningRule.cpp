@@ -18,24 +18,34 @@ AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(int max
 	maxRandomWeightValue = maxRandomWeightValue_;
 }
 
-float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder)
+float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning)
 {	
 	// Get all output neurons
 	std::list<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
+	std::vector<float> offlineLearningGradients(dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getEdgeCount());
+
+
 	int tryCounter = 0;
 	float totalError;
-
+	
 	// Start a new try
 	do
-	{		
+	{
 		// Randomize all weights
 		neuralNetwork.getNetworkTopology()->randomizeWeights(minRandomWeightValue, maxRandomWeightValue);
-
+		
 		int iteration = 0;
 		// Do while the totalError is not zero
 		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > totalErrorGoal && iteration++ < maxIterationsPerTry)
 		{
+			// If offlineLearning is activated, reset the offlineLearningGradients
+			if (offlineLearning)
+			{
+				for (std::vector<float>::iterator offlineLearningGradient = offlineLearningGradients.begin(); offlineLearningGradient != offlineLearningGradients.end(); offlineLearningGradient++)
+					*offlineLearningGradient = 0;
+			}
+
 			// Go through every TeachingLesson
 			for (std::list<TeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 			{
@@ -44,6 +54,9 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 
 				// Create a vector which will contain all delta values of the neurons in the output layer
 				std::vector<float> deltaVectorOutputLayer(errorvector->size(), 0);
+
+				// Create a edgeCounter, which will be used in offline learning
+				int edgeCounter = 0;
 
 				// Adjust the last and the second last layer
 				for (int l = 2; l > 0; l--)
@@ -56,24 +69,23 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 					{						
 						// If its the last layer
 						if (l == 2)
-						{
-							// If errorValue is not zero, we have to adjust something
-							if ((*errorvector)[neuronIndex] != 0)
-							{
-								std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-								// Go through all afferentEdges of the actual neuron
-								for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
-								{				
-									// Calculate the gradient
-									// Compute the delta value: activationFunction'(netInput) * errorValue
-									deltaVectorOutputLayer[neuronIndex] = (dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) * (*errorvector)[neuronIndex];
-									// Change the weight: deltaWeight = learningRate * Output(prevNeuron) * deltaValue
-									float gradient = (*edge)->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[neuronIndex];		
+						{							
+							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							// Go through all afferentEdges of the actual neuron
+							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+							{				
+								// Calculate the gradient
+								// Compute the delta value: activationFunction'(netInput) * errorValue
+								deltaVectorOutputLayer[neuronIndex] = (dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) * (*errorvector)[neuronIndex];
+								// Change the weight: deltaWeight = learningRate * Output(prevNeuron) * deltaValue
+								float gradient = -1 * (*edge)->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[neuronIndex];		
 
-									// Adjust the weight
+								// If offline learning is activated, add the gradient to the offlineLearningGradient, else adjust the weight right now
+								if (offlineLearning)
+									offlineLearningGradients[edgeCounter++] += gradient;
+								else
 									adjustWeight(*edge, gradient);
-								}
-							}
+							}							
 						}
 						else if (neuronIndex + 1 < neuronsInLayerCount) // If its the second last layer and not a BiasNeuron
 						{
@@ -95,10 +107,54 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 							{
 								// Calculate the gradient
 								// Change the weight: deltaWeight = learningRate * Output(prevNeuron) * activationFunction'(netInput) * nextLayerErrorValueFactor
-								float gradient = (*afferentEdge)->getPrevNeuron()->getActivation() * (dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) * nextLayerErrorValueFactor;		
+								float gradient = -1 * (*afferentEdge)->getPrevNeuron()->getActivation() * (dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) * nextLayerErrorValueFactor;		
 
-								// Adjust the weight
-								adjustWeight(*afferentEdge, gradient);
+								// If offline learning is activated, add the gradient to the offlineLearningGradient, else adjust the weight right now
+								if (offlineLearning)
+									offlineLearningGradients[edgeCounter++] += gradient;
+								else
+									adjustWeight(*afferentEdge, gradient);
+							}
+						}	
+					}
+				}
+			}
+
+			// If offline learning is activated, adjust all weights
+			if (offlineLearning)
+			{
+				// Create a edgeCounter
+				int edgeCounter = 0;
+
+				// Adjust the last and the second last layer
+				for (int l = 2; l > 0; l--)
+				{
+					// Go through all neurons in this layer
+					std::list<Neuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					int neuronsInLayerCount = neuronsInLayer->size();
+					int neuronIndex = 0;
+					for (std::list<Neuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
+					{						
+						// If its the last layer
+						if (l == 2)
+						{							
+							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							// Go through all afferentEdges of the actual neuron
+							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+							{	
+								// Adjust the weight depending on the sum of all calculated gradients
+								adjustWeight(*edge, offlineLearningGradients[edgeCounter++]);
+							}							
+						}
+						else if (neuronIndex + 1 < neuronsInLayerCount) // If its the second last layer and not a BiasNeuron
+						{
+							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							
+							// Go through all afferentEdges of the actual neuron
+							for (std::list<Edge*>::iterator afferentEdge = afferentEdges->begin(); afferentEdge != afferentEdges->end(); afferentEdge++)
+							{				
+								// Adjust the weight depending on the sum of all calculated gradients
+								adjustWeight(*afferentEdge, offlineLearningGradients[edgeCounter++]);
 							}
 						}	
 					}

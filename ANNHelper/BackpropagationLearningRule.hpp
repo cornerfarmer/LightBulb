@@ -9,7 +9,6 @@
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
-class ActivationOrder;
 class Edge;
 
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks

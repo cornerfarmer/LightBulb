@@ -102,3 +102,20 @@ void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 		}
 	}
 }
+
+int LayeredNetwork::getEdgeCount()
+{
+	int edgeCounter = 0;
+	// Go through all layers
+	for (std::list<std::list<Neuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	{
+		// Go through all neurons in this layer
+		for (std::list<Neuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			// Add the count of the efferent edges of the current neuron
+			edgeCounter += (*neuron)->getEfferentEdges()->size();
+		}
+	}
+
+	return edgeCounter;
+}

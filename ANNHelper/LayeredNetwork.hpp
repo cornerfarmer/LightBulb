@@ -65,6 +65,8 @@ public:
 	std::list<std::list<Neuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
+	// Calculates the Edge count
+	int getEdgeCount();
 };
 
 #endif

@@ -63,7 +63,6 @@
     <ClCompile Include="AbstractBackpropagationLearningRule.cpp" />
     <ClCompile Include="ActivationFunction.cpp" />
     <ClCompile Include="ActivationOrder.cpp" />
-    <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
     <ClCompile Include="BinaryFunction.cpp" />
     <ClCompile Include="DeltaLearningRule.cpp" />
@@ -79,7 +78,9 @@
     <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="OutputFunction.cpp" />
+    <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
+    <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="TeachingLesson.cpp" />
@@ -90,7 +91,6 @@
     <ClInclude Include="AbstractBackpropagationLearningRule.hpp" />
     <ClInclude Include="ActivationFunction.hpp" />
     <ClInclude Include="ActivationOrder.hpp" />
-    <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
     <ClInclude Include="BinaryFunction.hpp" />
     <ClInclude Include="DeltaLearningRule.hpp" />
@@ -105,7 +105,9 @@
     <ClInclude Include="NeuralNetwork.hpp" />
     <ClInclude Include="Neuron.hpp" />
     <ClInclude Include="OutputFunction.hpp" />
+    <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />
+    <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
     <ClInclude Include="Teacher.hpp" />
     <ClInclude Include="TeachingLesson.hpp" />

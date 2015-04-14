@@ -21,12 +21,12 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 	TopologicalOrder activationOrder;
 
 	// Start the algorithm
-	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder);
+	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, false);
 
 	return (totalError <= totalErrorGoal);
 }
 
 void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
-	edge->setWeigt(edge->getWeight() + learningRate * gradient);
+	edge->setWeigt(edge->getWeight() + -learningRate * gradient);
 }

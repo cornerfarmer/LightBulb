@@ -27,7 +27,7 @@ protected:
 	// Sets the higher limit of the random generated weights
 	float maxRandomWeightValue;
 	// Starts the main learning algorithm
-	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder);
+	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning);
 	// Adjusts the weights of an edge dependent on its gradient
 	virtual void adjustWeight(Edge* edge, float gradient) = 0;
 public:
