@@ -24,10 +24,11 @@ int main()
 	layeredNetworkOptions.inputFunction = new WeightedSumFunction();
 	layeredNetworkOptions.activationFunction = new FermiFunction(1);
 	layeredNetworkOptions.outputFunction = new IdentityFunction();
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(4);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=1;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=2;
+	layeredNetworkOptions.neuronsPerLayerCount[3]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 
 	LayeredNetwork layeredNetwork(layeredNetworkOptions);
@@ -58,7 +59,7 @@ int main()
 
 	std::vector<float> teachingPattern(2);
 	teachingPattern[0] = 100;
-	teachingPattern[1] = 99;
+	teachingPattern[1] = 100;
 	neuralNetwork.setInput(teachingPattern);
 	neuralNetwork.refreshAllNeurons(TopologicalOrder());
 	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
