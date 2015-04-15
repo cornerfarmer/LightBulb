@@ -8,6 +8,8 @@
 #include "NetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
+#include <iostream>
+#include <iomanip>
 
 AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_, float minRandomWeightValue_, float maxRandomWeightValue_)
 {
@@ -34,11 +36,12 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 	}	
 
 	int tryCounter = 0;
-	float totalError;
+	float totalError = 0;
 	
 	// Start a new try
 	do
 	{
+		std::cout << std::fixed << std::setprecision(5) << totalError << std::endl;
 		// Randomize all weights
 		neuralNetwork.getNetworkTopology()->randomizeWeights(minRandomWeightValue, maxRandomWeightValue);
 		
