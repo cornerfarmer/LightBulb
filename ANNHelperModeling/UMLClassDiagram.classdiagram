@@ -3259,6 +3259,125 @@
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="71989690-e989-40a9-8b67-5f3c72a26dc1" name="Graphics">
+        <elementDefinition Id="fbe657d8-e8fc-4026-8c97-366b98a692b9" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="6ee96c6f-42e3-41ac-b1ef-63548db714d5" name="GraphicObject" isAbstract="true" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="7eb0d6ed-7be1-46d9-94ea-96d784010675" />
+              <ownedAttributesInternal>
+                <property Id="db515e3a-3908-4f10-8a0f-2d3edf7d0c90" name="posX" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f991fa12-5935-4ddc-8d73-2f89189b673c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="71f627f3-7ad5-4c1f-a0f2-16a34a52a727" name="posY" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="564c5d16-ed4e-4c71-9a23-3aa37dc01a0b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+              </ownedAttributesInternal>
+              <ownedOperationsInternal>
+                <operation Id="91af02b8-1f88-46cb-a6b8-fd14a2080f83" name="draw" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="25713424-3d1e-4be9-8aa9-9f4c286d8829" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="9b933d5e-2e92-4a7c-a454-a83274b5d819" name="window" direction="In" isUnique="false">
+                        <elementDefinition Id="6b777f70-597b-4e42-9888-3d881cda0d39" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="bedd97a0-a155-43fd-8323-e65a58309fbc" LastKnownName="Window" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="d59da54f-1bc2-4180-bb07-24e924ed8576" name="NeuralNetworkResultChart" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="1b6658fc-2fda-445b-9d00-88d1896041b3" />
+              <generalsInternal>
+                <generalization Id="2157a444-3426-454d-87ef-76e192e38042" isSubstitutable="false">
+                  <classMoniker Id="6ee96c6f-42e3-41ac-b1ef-63548db714d5" LastKnownName="GraphicObject" />
+                  <elementDefinition Id="3f6dd406-7bae-4ab0-a8bd-239446b53a93" />
+                </generalization>
+              </generalsInternal>
+              <ownedAttributesInternal>
+                <property Id="6519ad0f-1111-4d3b-bc9e-ad2d445a2cec" name="neuralNetwork" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="aed83a13-10f2-4a83-ae84-ef22ba891fb7" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="ec644b42-1bd6-4bbf-aa9e-c491351b5e09" LastKnownName="NeuralNetwork" />
+                  </type_NamedElement>
+                </property>
+                <property Id="1a2d6db0-183e-4708-a1d5-c3e09c72ae71" name="width" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4daa840f-2135-4e28-84ca-fff840d8e0ca" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="96a62be7-7f5d-46c7-8e4f-b29a6fcb69c7" name="height" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7b2afe95-ed5f-4ada-a242-9fe0d5863b67" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="6ffdb904-3aaa-4436-ae64-1e87e87678db" name="xInputNeuronIndex" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bc310b22-e713-4df4-8d19-6a5812fa9a0e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="f5bd872a-0adc-45ae-8745-8b2b0d6ee06a" name="yInputNeuronIndex" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="97dabb50-cdba-4bef-b3a5-25316bbbc19b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="c344ebb8-f96f-4cf1-91ef-8f8266ce3d73" name="xRangeStart" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="9fe492b3-f483-4e88-9215-68fa8b561cde" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="12f0e2c7-d1b6-400c-a26d-0a423bb8662d" name="xRangeEnd" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1a465824-fa4c-4422-8985-9dddf093e5e3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="5c5148d1-8bba-44be-989a-cef773835494" name="yRangeStart" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f5b8e452-3b14-4e0b-972c-7ebab879e4df" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="c1e2b02c-a0ed-40dd-9f47-dbaa480d1037" name="yRangeEnd" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="5b20027f-d724-4ae1-ab79-8fef512d3e7c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="b7923540-f4d4-4e6a-b9d8-dde1b7a7c5bf" name="binaryInterpretation" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7eafd250-573f-4adb-b8ef-2ea9181fe847" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="80387b9e-8c18-4450-b9f1-14b6be3e4cd5" LastKnownName="bool" />
+                  </type_NamedElement>
+                </property>
+              </ownedAttributesInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="bedd97a0-a155-43fd-8323-e65a58309fbc" name="Window" isAbstract="false" isLeaf="false" cachedFullName="Window">
+        <elementDefinition Id="824409e4-d2e9-42d5-9876-d22036fba16a" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />

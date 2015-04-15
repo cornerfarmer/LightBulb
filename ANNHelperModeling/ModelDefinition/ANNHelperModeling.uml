@@ -234,6 +234,12 @@
         LastKnownName="NeuralNetwork"
         LastKnownLocation="Package_1151.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="fbe657d8-e8fc-4026-8c97-366b98a692b9"
+        LastKnownName="Graphic"
+        LastKnownLocation="Package_1803.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

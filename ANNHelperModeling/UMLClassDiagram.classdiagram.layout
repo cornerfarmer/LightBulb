@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 25.5, 20.875" name="UMLClassDiagram">
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 28.125, 20.875" name="UMLClassDiagram">
   <logicalClassDesignerModelMoniker Id="5899160e-7b69-4088-af67-f8a4feaef9bf" />
   <nestedChildShapes>
     <packageShape Id="43463828-666e-4d88-98e0-87ff2999101b" absoluteBounds="12.125, 15.5, 13.125, 5.125" customColor="255, 249, 230" hideQualifiedName="false">
@@ -206,7 +206,7 @@
         <classShapeMoniker Id="04811c22-7270-4ebb-9057-dd60657b5e7b" />
       </nodes>
     </generalizationConnector>
-    <generalizationConnector edgePoints="[(15.75 : 12.375); (15.75 : 11.2933043545485); (19.875 : 11.2933043545485); (19.875 : 10.9183043545485)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
+    <generalizationConnector edgePoints="[(15.75 : 12.375); (15.75 : 11.2933043545485); (19.2916666666667 : 11.2933043545485 : JumpStart); (19.4583333333333 : 11.2933043545485 : JumpEnd); (19.875 : 11.2933043545485); (19.875 : 10.9183043545485)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
       <generalizationMoniker Id="911a593f-a415-425c-b10c-9a6e7ca65713" />
       <relativeChildShapes />
       <nodes>
@@ -404,5 +404,32 @@
         <classShapeMoniker Id="76e788fd-f864-4286-87e4-bde75f4cbbda" />
       </nodes>
     </associationConnector>
+    <packageShape Id="263f341a-7db3-4a93-ba56-f7a815c927c0" absoluteBounds="22.25, 0.875, 5.625, 5.5" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="71989690-e989-40a9-8b67-5f3c72a26dc1" LastKnownName="Graphics" />
+      <nestedChildShapes>
+        <classShape Id="44c0a89f-e803-4f02-935d-dd1d64bf5ae2" absoluteBounds="22.875, 1.5, 2, 1.3828124701976776" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="6ee96c6f-42e3-41ac-b1ef-63548db714d5" LastKnownName="GraphicObject" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="5d0ce887-de22-4dea-8b0c-854fb997a5fb" absoluteBounds="22.89, 1.8900000000000001, 1.9700000000000002, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="6e5202b9-0ffd-4f81-8eed-9023c1cd8840" absoluteBounds="22.89, 2.421484357615312, 1.9700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <classShape Id="b41a4eee-e24f-4278-b3b7-1e7a5621c6fe" absoluteBounds="23.25, 3.625, 1.875, 2.5039061854283009" hideQualifiedName="false" showFullSignature="true" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="d59da54f-1bc2-4180-bb07-24e924ed8576" LastKnownName="NeuralNetworkResultChart" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="7c38a008-64c2-46a8-bf97-cda579a47c75" absoluteBounds="23.265, 4.015, 1.8450000000000002, 1.8027343178788819" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="b5cb6dc2-f155-4305-b605-4515be79c92a" absoluteBounds="23.265, 5.8277343178788819, 1.8450000000000002, 0.20117186754941985" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+      </nestedChildShapes>
+    </packageShape>
+    <generalizationConnector edgePoints="[(24.1875 : 3.625); (24.1875 : 3.25781247019768); (23.875 : 3.25781247019768); (23.875 : 2.88281247019768)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
+      <generalizationMoniker Id="2157a444-3426-454d-87ef-76e192e38042" />
+      <relativeChildShapes />
+      <nodes>
+        <classShapeMoniker Id="b41a4eee-e24f-4278-b3b7-1e7a5621c6fe" />
+        <classShapeMoniker Id="44c0a89f-e803-4f02-935d-dd1d64bf5ae2" />
+      </nodes>
+    </generalizationConnector>
   </nestedChildShapes>
 </logicalClassDesignerDiagram>
