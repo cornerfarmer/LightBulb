@@ -6,6 +6,8 @@
 // Includes
 #include "LearningRule.hpp"
 
+#define DEBUGOUTPUTINTERVAL 1000
+
 // Forward declarations
 class NeuralNetwork;
 class Teacher;

@@ -29,7 +29,7 @@ int main()
 																				new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=20;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=7;
 	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 
@@ -39,7 +39,7 @@ int main()
 
 	SingleLayerPerceptronLearningRule singleLayerPerceptronLearningRule;
 	DeltaLearningRule deltaLearningRule;
-	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(10000, 100, 0.1f, -0.5, 0.5);
+	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(100000, 100, 2.0f, -0.5, 0.5);
 
 	Teacher teacher;
 	for (float i=0;i<1;i+=0.1)
@@ -51,7 +51,7 @@ int main()
 			(*teachingPattern)[1] = l;
 			std::vector<float>* teachingInput= new std::vector<float>(1);
 			//(*teachingInput)[0] = (std::abs(i - 0.5) < 0.3 && std::abs(l - 0.5) < 0.3 ? 1 : 0);			
-			(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4? 1 : 0);
+			(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 		}
 	}

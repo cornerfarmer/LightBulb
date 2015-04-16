@@ -41,7 +41,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 	// Start a new try
 	do
 	{
-		std::cout << std::fixed << std::setprecision(5) << totalError << std::endl;
+		
 		// Randomize all weights
 		neuralNetwork.getNetworkTopology()->randomizeWeights(minRandomWeightValue, maxRandomWeightValue);
 		
@@ -49,6 +49,15 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 		// Do while the totalError is not zero
 		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > totalErrorGoal && iteration++ < maxIterationsPerTry)
 		{
+			if (iteration % DEBUGOUTPUTINTERVAL == 0)
+			{
+				std::cout << std::fixed << std::setprecision(8) << totalError << " Iteration: " << iteration << " " ;
+				float totalGradient = 0;
+				for (std::vector<float>::iterator offlineLearningGradient = offlineLearningGradients.begin(); offlineLearningGradient != offlineLearningGradients.end(); offlineLearningGradient++)
+					totalGradient += *offlineLearningGradient; 
+				std::cout << std::fixed << std::setprecision(10) << totalGradient << " ";
+				std::cout << std::endl;
+			}
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (offlineLearning)
 			{
