@@ -12,16 +12,12 @@
 #include "Neuron.hpp"
 
 // Forward declarations
-class ActivationFunction;
-class InputFunction;
-class OutputFunction;
+class AbstractNeuronFactory;
 
 // This struct contains all options needed to build a LayeredNetwork
 struct LayeredNetworkOptions
-{
-	ActivationFunction* activationFunction;
-	InputFunction* inputFunction;
-	OutputFunction* outputFunction;
+{	
+	AbstractNeuronFactory* neuronFactory;
 	bool enableDirectBackCoupling;
 	bool enableIndirectBackCoupling;
 	bool enableLateralBackCoupling;
@@ -34,9 +30,7 @@ struct LayeredNetworkOptions
 		enableIndirectBackCoupling = false;
 		enableLateralBackCoupling = false;
 		enableShortcuts = false;
-		activationFunction = NULL;
-		inputFunction = NULL;
-		outputFunction = NULL;
+		neuronFactory = NULL;
 		neuronsPerLayerCount = std::vector<int>();
 		useBiasNeurons = false;
 	}

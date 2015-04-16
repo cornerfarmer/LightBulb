@@ -69,11 +69,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractBackpropagationLearningRule.cpp" />
+    <ClCompile Include="AbstractNeuronFactory.cpp" />
     <ClCompile Include="ActivationFunction.cpp" />
     <ClCompile Include="ActivationOrder.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
     <ClCompile Include="BinaryFunction.cpp" />
     <ClCompile Include="DeltaLearningRule.cpp" />
+    <ClCompile Include="DifferentFunctionsNeuronFactory.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="FermiFunction.cpp" />
     <ClCompile Include="GraphicObject.cpp" />
@@ -89,6 +91,7 @@
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="OutputFunction.cpp" />
     <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
+    <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
     <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
@@ -99,11 +102,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractBackpropagationLearningRule.hpp" />
+    <ClInclude Include="AbstractNeuronFactory.hpp" />
     <ClInclude Include="ActivationFunction.hpp" />
     <ClInclude Include="ActivationOrder.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
     <ClInclude Include="BinaryFunction.hpp" />
     <ClInclude Include="DeltaLearningRule.hpp" />
+    <ClInclude Include="DifferentFunctionsNeuronFactory.hpp" />
     <ClInclude Include="Edge.hpp" />
     <ClInclude Include="FermiFunction.hpp" />
     <ClInclude Include="GraphicObject.hpp" />
@@ -118,6 +123,7 @@
     <ClInclude Include="Neuron.hpp" />
     <ClInclude Include="OutputFunction.hpp" />
     <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
+    <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />
     <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />

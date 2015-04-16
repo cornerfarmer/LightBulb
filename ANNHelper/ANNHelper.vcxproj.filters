@@ -116,6 +116,15 @@
     <ClInclude Include="GraphicObject.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractNeuronFactory.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="SameFunctionsNeuronFactory.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentFunctionsNeuronFactory.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -201,6 +210,15 @@
     </ClCompile>
     <ClCompile Include="GraphicObject.cpp">
       <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractNeuronFactory.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="SameFunctionsNeuronFactory.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentFunctionsNeuronFactory.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

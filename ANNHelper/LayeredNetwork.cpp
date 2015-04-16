@@ -3,6 +3,7 @@
 #include "StandardNeuron.hpp"
 #include "BiasNeuron.hpp"
 #include "Edge.hpp"
+#include "AbstractNeuronFactory.hpp"
 
 LayeredNetwork::~LayeredNetwork()
 {
@@ -28,14 +29,20 @@ LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
 		{
 			// If its the first layer, add InputNeurons, else StandardNeurons
 			if (l == 0)
-				neurons.back().push_front(new InputNeuron());
+				neurons.back().push_front(options.neuronFactory->createInputNeuron());
 			else
 			{
-				StandardNeuron* newNeuron = new StandardNeuron(options.inputFunction, options.activationFunction, options.outputFunction);
+				StandardNeuron* newNeuron;
+
+				// If its the last layer create a output neuron else an inner neuron
+				if (l == options.neuronsPerLayerCount.size() - 1)
+					newNeuron = options.neuronFactory->createOutputNeuron();
+				else
+					newNeuron = options.neuronFactory->createInnerNeuron();
+
 				neurons.back().push_front(newNeuron);
 
 				// If its not the first layer connect the neuron of the current layer to all neurons of the previous layer
-
 				// Get the last layer
 				std::list<std::list<Neuron*>>::iterator lastLayer = neurons.end();
 				lastLayer--;lastLayer--;

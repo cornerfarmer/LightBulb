@@ -19,13 +19,12 @@
 #include "Teacher.hpp"
 #include "TeachingLesson.hpp"
 #include "NeuralNetworkResultChart.hpp"
+#include "DifferentFunctionsNeuronFactory.hpp"
 
 int main()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.inputFunction = new WeightedSumFunction();
-	layeredNetworkOptions.activationFunction = new FermiFunction(1);
-	layeredNetworkOptions.outputFunction = new IdentityFunction();
+	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(5);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=6;
@@ -40,7 +39,7 @@ int main()
 
 	SingleLayerPerceptronLearningRule singleLayerPerceptronLearningRule;
 	DeltaLearningRule deltaLearningRule;
-	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(1000, 100, 0.1f, -5, 5);
+	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(1000, 100, 0.1f, -0.5, 0.5);
 
 	Teacher teacher;
 	for (float i=0;i<1;i+=0.2)
