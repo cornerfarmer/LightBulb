@@ -6,7 +6,7 @@
 // Includes
 #include "GraphicObject.hpp"
 #include <SFML\Graphics.hpp>
-
+#include <math.h>
 
 // Forward declarations
 class NeuralNetwork;

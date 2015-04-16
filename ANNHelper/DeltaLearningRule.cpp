@@ -37,7 +37,7 @@ bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 					for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 					{					
 						// Use the delta rule: deltaWeight = learningRate * Output(prevNeuron) * errorValue
-						(*edge)->setWeigt((*edge)->getWeight() + 0.5f * (*edge)->getPrevNeuron()->getActivation() * *errorValue);					
+						(*edge)->setWeight((*edge)->getWeight() + 0.5f * (*edge)->getPrevNeuron()->getActivation() * *errorValue);					
 					}
 				}
 			}

@@ -22,7 +22,7 @@ StandardNeuron* Edge::getNextNeuron()
 	return nextNeuron;
 }
 
-void Edge::setWeigt(float newWeight)
+void Edge::setWeight(float newWeight)
 {
 	weight = newWeight;
 }

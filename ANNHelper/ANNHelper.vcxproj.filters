@@ -125,6 +125,9 @@
     <ClInclude Include="DifferentFunctionsNeuronFactory.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
+    <ClInclude Include="HyperbolicTangentFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -219,6 +222,9 @@
     </ClCompile>
     <ClCompile Include="DifferentFunctionsNeuronFactory.cpp">
       <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="HyperbolicTangentFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -57,7 +57,7 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 
 		learningRate *= (gradient > 0 ? -1 : 1);
 
-		edge->setWeigt(edge->getWeight() + learningRate);
+		edge->setWeight(edge->getWeight() + learningRate);
 
 		(*previousLearningRates)[learningRateIndex] = learningRate;
 	}

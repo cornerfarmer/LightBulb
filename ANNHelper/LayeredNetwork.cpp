@@ -103,8 +103,10 @@ void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
 			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 			{
-				// Set the weight to a new random value
-				(*edge)->setWeigt((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+				do{
+					// Set the weight to a new random value
+					(*edge)->setWeight((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+				} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
 			}
 		}
 	}

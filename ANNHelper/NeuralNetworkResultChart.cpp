@@ -37,6 +37,9 @@ void NeuralNetworkResultChart::recalculateAllValues()
 			else
 				output = (output - options.ouputRangeStart) / (options.ouputRangeEnd - options.ouputRangeStart) * 255;
 
+			// Normalize the output
+			output = std::max(0.0f, std::min(255.0f, output));
+
 			// Set the calculated color value to the actual pixel 
 			pixels[(y * options.width + x) * 4]     = output; // R
 			pixels[(y * options.width + x) * 4 + 1] = output; // G

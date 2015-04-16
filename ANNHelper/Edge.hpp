@@ -17,7 +17,7 @@ private:
 public:
 	Edge(Neuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_);	
 	float getWeight();
-	void setWeigt(float newWeight);
+	void setWeight(float newWeight);
 	Neuron* getPrevNeuron();
 	StandardNeuron* getNextNeuron();	
 };

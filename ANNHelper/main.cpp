@@ -9,6 +9,7 @@
 #include "LayeredNetwork.hpp"
 #include "WeightedSumFunction.hpp"
 #include "IdentityFunction.hpp"
+#include "HyperbolicTangentFunction.hpp"
 #include "FermiFunction.hpp"
 #include "TopologicalOrder.hpp"
 #include "BinaryFunction.hpp"
@@ -24,13 +25,12 @@
 int main()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(5);
+	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction(), 
+																				new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=6;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=6;
-	layeredNetworkOptions.neuronsPerLayerCount[3]=6;
-	layeredNetworkOptions.neuronsPerLayerCount[4]=1;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=20;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 
 	LayeredNetwork layeredNetwork(layeredNetworkOptions);
@@ -39,18 +39,19 @@ int main()
 
 	SingleLayerPerceptronLearningRule singleLayerPerceptronLearningRule;
 	DeltaLearningRule deltaLearningRule;
-	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(1000, 100, 0.1f, -0.5, 0.5);
+	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(10000, 100, 0.1f, -0.5, 0.5);
 
 	Teacher teacher;
-	for (float i=0;i<1;i+=0.2)
+	for (float i=0;i<1;i+=0.1)
 	{
-		for (float l=0;l<1;l+=0.2)
+		for (float l=0;l<1;l+=0.1)
 		{
 			std::vector<float>* teachingPattern = new std::vector<float>(2);
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
 			std::vector<float>* teachingInput= new std::vector<float>(1);
-			(*teachingInput)[0] = (std::abs(i - 0.5) < 0.3 && std::abs(l - 0.5) < 0.3 ? 1 : 0);
+			//(*teachingInput)[0] = (std::abs(i - 0.5) < 0.3 && std::abs(l - 0.5) < 0.3 ? 1 : 0);			
+			(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 		}
 	}

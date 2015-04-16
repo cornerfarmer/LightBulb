@@ -38,9 +38,9 @@ bool SingleLayerPerceptronLearningRule::doLearning(NeuralNetwork &neuralNetwork,
 					{
 						// If the errorValue is positive add the activation to the weight, else substract the activation from the weight
 						if (*errorValue > 0)
-							(*edge)->setWeigt((*edge)->getWeight() + (*edge)->getPrevNeuron()->getActivation());
+							(*edge)->setWeight((*edge)->getWeight() + (*edge)->getPrevNeuron()->getActivation());
 						else
-							(*edge)->setWeigt((*edge)->getWeight() - (*edge)->getPrevNeuron()->getActivation());
+							(*edge)->setWeight((*edge)->getWeight() - (*edge)->getPrevNeuron()->getActivation());
 					}
 				}
 			}
