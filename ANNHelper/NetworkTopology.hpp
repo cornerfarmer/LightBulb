@@ -4,7 +4,7 @@
 #define _NETWORKTOPOLOGY_H_
 
 // Includes
-#include <list>
+#include <vector>
 
 // Forward declarations
 class InputNeuron;
@@ -17,9 +17,9 @@ private:
 public:	
 	virtual ~NetworkTopology() = 0;
 	// Returns all InputNeurons in the NeuralNetwork
-	virtual std::list<Neuron*>* getInputNeurons() = 0;
+	virtual std::vector<Neuron*>* getInputNeurons() = 0;
 	// Returns all OutputNeurons in the NeuralNetwork
-	virtual std::list<Neuron*>* getOutputNeurons() = 0;
+	virtual std::vector<Neuron*>* getOutputNeurons() = 0;
 	// Set all weights to new random values between randStart and randEnd
 	virtual void randomizeWeights(float randStart, float randEnd) = 0;
 };

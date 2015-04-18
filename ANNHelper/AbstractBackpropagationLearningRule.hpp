@@ -32,6 +32,8 @@ protected:
 	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning);
 	// Adjusts the weights of an edge dependent on its gradient
 	virtual void adjustWeight(Edge* edge, float gradient) = 0;
+	// Print the debug output
+	virtual void printDebugOutput() = 0;
 public:
 	// Initializes all required values
 	AbstractBackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_, float minRandomWeightValue_, float maxRandomWeightValue_);

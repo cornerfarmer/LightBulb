@@ -5,7 +5,7 @@
 
 // Libary includes
 #include <vector>
-#include <list>
+
 
 // Includes
 #include "NetworkTopology.hpp"
@@ -43,20 +43,20 @@ class LayeredNetwork : public NetworkTopology
 {
 private:
 	LayeredNetworkOptions_t options;
-	std::list<std::list<Neuron*>> neurons;
+	std::vector<std::vector<Neuron*>> neurons;
 public:
 	~LayeredNetwork();
 	LayeredNetwork(const LayeredNetworkOptions_t &options_);	
 	// Returns all InputNeurons (first layer)
-	std::list<Neuron*>* getInputNeurons();
+	std::vector<Neuron*>* getInputNeurons();
 	// Returns all OutputNeurons (last layer)
-	std::list<Neuron*>* getOutputNeurons();
+	std::vector<Neuron*>* getOutputNeurons();
 	// Returns all Neurons of the selected layer
-	std::list<Neuron*>* getNeuronsInLayer(int layerNr);
+	std::vector<Neuron*>* getNeuronsInLayer(int layerNr);
 	// Calculates the layer count
 	int getLayerCount();
 	// Returns all Neurons
-	std::list<std::list<Neuron*>>* getNeurons();
+	std::vector<std::vector<Neuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
 	// Calculates the Edge count

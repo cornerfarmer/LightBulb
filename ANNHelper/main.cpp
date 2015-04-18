@@ -29,7 +29,7 @@ int main()
 																				new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=7;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=10;
 	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 

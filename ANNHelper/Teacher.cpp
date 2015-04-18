@@ -5,10 +5,10 @@
 void Teacher::addTeachingLesson(TeachingLesson* newTeachingLesson)
 {
 	// Add the newTeachingLesson to the list
-	teachingLessons.push_front(newTeachingLesson);
+	teachingLessons.push_back(newTeachingLesson);
 }
 
-std::list<TeachingLesson*>* Teacher::getTeachingLessons()
+std::vector<TeachingLesson*>* Teacher::getTeachingLessons()
 {
 	return &teachingLessons;
 }
@@ -18,7 +18,7 @@ float Teacher::getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &acti
 	float totalError = 0;
 
 	// Add every specific error to the total error
-	for (std::list<TeachingLesson*>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+	for (std::vector<TeachingLesson*>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
 	{
 		totalError += (*teachingLesson)->getSpecificError(neuralNetwork, activationOrder);
 	}

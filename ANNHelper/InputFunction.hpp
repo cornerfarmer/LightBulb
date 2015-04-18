@@ -4,7 +4,7 @@
 #define _INPUTFUNCTION_H_
 
 // Includes
-#include <list>
+#include <vector>
 
 // Forward declarations
 class Edge;
@@ -15,7 +15,7 @@ class InputFunction
 private:
 public:
 	// Calculate the one value from all given afferent edges
-	virtual float execute(std::list<Edge*> input) = 0;
+	virtual float execute(std::vector<Edge*> &input) = 0;
 };
 
 #endif

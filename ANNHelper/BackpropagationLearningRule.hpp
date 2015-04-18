@@ -19,6 +19,7 @@ private:
 	float learningRate;	
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
+	void printDebugOutput();
 public:
 	BackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_, float minRandomWeightValue_, float maxRandomWeightValue_, float learningRate_);
 	// Improves the given PerceptronNetwork with the help of its teaching stuff

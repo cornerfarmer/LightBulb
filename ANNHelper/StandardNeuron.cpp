@@ -44,7 +44,7 @@ void StandardNeuron::refreshActivation()
 	activation = outputFunction->execute(activation);
 }
 
-std::list<Edge*>* StandardNeuron::getAfferentEdges()
+std::vector<Edge*>* StandardNeuron::getAfferentEdges()
 {
 	return &afferentEdges;
 }

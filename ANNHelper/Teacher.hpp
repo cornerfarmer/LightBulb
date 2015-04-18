@@ -4,7 +4,7 @@
 #define _TEACHER_H_
 
 // Library includes
-#include <list>
+#include <vector>
 
 // Forward declarations
 class TeachingLesson;
@@ -15,12 +15,12 @@ class ActivationOrder;
 class Teacher
 {
 private:
-	std::list<TeachingLesson*> teachingLessons;
+	std::vector<TeachingLesson*> teachingLessons;
 public:
 	// Adds a new TechingLessont to the teachingLessons list
 	void addTeachingLesson(TeachingLesson* newTeachingLesson);
 	// Get all techingLessons (Useful for online learning)
-	std::list<TeachingLesson*>* getTeachingLessons();
+	std::vector<TeachingLesson*>* getTeachingLessons();
 	// Calculate the total error (Useful for offline learning)
 	float getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
 };

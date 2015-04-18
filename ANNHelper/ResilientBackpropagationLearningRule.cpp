@@ -65,3 +65,11 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 	learningRateIndex++;
 	learningRateIndex %= previousLearningRates->size();
 }
+
+void ResilientBackpropagationLearningRule::printDebugOutput()
+{
+	float totalLearningRate = 0;
+	for (std::vector<float>::iterator previousLearningRate = (*previousLearningRates).begin(); previousLearningRate != (*previousLearningRates).end(); previousLearningRate++)
+		totalLearningRate += abs(*previousLearningRate); 
+	std::cout << std::fixed << std::setprecision(10) << totalLearningRate << " ";
+}

@@ -30,3 +30,8 @@ void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
 	edge->setWeight(edge->getWeight() + -learningRate * gradient);
 }
+
+void BackpropagationLearningRule::printDebugOutput()
+{
+
+}

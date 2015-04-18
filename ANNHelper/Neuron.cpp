@@ -34,7 +34,7 @@ float Neuron::getActivation()
 	return activation;
 }
 
-std::list<Edge*>* Neuron::getEfferentEdges()
+std::vector<Edge*>* Neuron::getEfferentEdges()
 {
 	return &efferentEdges;
 }
