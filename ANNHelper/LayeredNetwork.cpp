@@ -15,7 +15,7 @@ LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
 	options = options_;
 
 	// Add all neurons
-	for (int l = 0; l < options.neuronsPerLayerCount.size(); l++)
+	for (int l = 0; l < getLayerCount(); l++)
 	{
 		// Add a new list for every layer
 		neurons.push_back(std::vector<Neuron*>());
@@ -36,15 +36,10 @@ LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
 				else
 					newNeuron = options.neuronFactory->createInnerNeuron();
 
-				neurons.back().push_back(newNeuron);
-
-				// If its not the first layer connect the neuron of the current layer to all neurons of the previous layer
-				// Get the last layer
-				std::vector<std::vector<Neuron*>>::iterator lastLayer = neurons.end();
-				lastLayer--;lastLayer--;
+				neurons.back().push_back(newNeuron);				
 
 				// Add an edge to every neuron of the last layer
-				for (std::vector<Neuron*>::iterator prevNeuron = (*lastLayer).begin(); prevNeuron != (*lastLayer).end(); prevNeuron++)
+				for (std::vector<Neuron*>::iterator prevNeuron = getNeuronsInLayer(l - 1)->begin(); prevNeuron != getNeuronsInLayer(l - 1)->end(); prevNeuron++)
 				{
 					newNeuron->addPrevNeuron(*prevNeuron, 0);
 				}

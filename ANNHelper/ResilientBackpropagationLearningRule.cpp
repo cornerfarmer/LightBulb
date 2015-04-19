@@ -9,8 +9,8 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
-ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_,  float minRandomWeightValue_, float maxRandomWeightValue_) 
-	: AbstractBackpropagationLearningRule(maxIterationsPerTry_, maxTries_, totalErrorGoal_, minRandomWeightValue_, maxRandomWeightValue_)
+ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
+	: AbstractBackpropagationLearningRule(options_)
 {
 	learningRateGrowFac = 1.2;
 	learningRateShrinkFac = 0.5;
@@ -34,7 +34,7 @@ bool ResilientBackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwo
 	// Start the algorithm
 	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, true);
 
-	return (totalError <= totalErrorGoal);
+	return (totalError <= options.totalErrorGoal);
 }
 
 void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
@@ -72,4 +72,15 @@ void ResilientBackpropagationLearningRule::printDebugOutput()
 	for (std::vector<float>::iterator previousLearningRate = (*previousLearningRates).begin(); previousLearningRate != (*previousLearningRates).end(); previousLearningRate++)
 		totalLearningRate += abs(*previousLearningRate); 
 	std::cout << std::fixed << std::setprecision(10) << totalLearningRate << " ";
+}
+
+bool ResilientBackpropagationLearningRule::learningHasStopped()
+{
+	for (std::vector<float>::iterator previousLearningRate = (*previousLearningRates).begin(); previousLearningRate != (*previousLearningRates).end(); previousLearningRate++)
+	{
+		if (abs(*previousLearningRate) != 1.0000000e-006f)
+			return false;
+	}
+	return true;
+
 }

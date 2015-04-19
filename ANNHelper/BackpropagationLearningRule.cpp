@@ -9,8 +9,8 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
-BackpropagationLearningRule::BackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_,  float minRandomWeightValue_, float maxRandomWeightValue_ ,float learningRate_) 
-	: AbstractBackpropagationLearningRule(maxIterationsPerTry_, maxTries_, totalErrorGoal_, minRandomWeightValue_, maxRandomWeightValue_)
+BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_ ,float learningRate_) 
+	: AbstractBackpropagationLearningRule(options_)
 {
 	learningRate = learningRate_;
 }
@@ -23,7 +23,7 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 	// Start the algorithm
 	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, false);
 
-	return (totalError <= totalErrorGoal);
+	return (totalError <= options.totalErrorGoal);
 }
 
 void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
@@ -34,4 +34,9 @@ void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 void BackpropagationLearningRule::printDebugOutput()
 {
 
+}
+
+bool BackpropagationLearningRule::learningHasStopped()
+{
+	return false;
 }

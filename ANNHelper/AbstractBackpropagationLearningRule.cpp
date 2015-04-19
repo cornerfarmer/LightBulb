@@ -11,13 +11,9 @@
 #include <iostream>
 #include <iomanip>
 
-AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(int maxIterationsPerTry_, int maxTries_, float totalErrorGoal_, float minRandomWeightValue_, float maxRandomWeightValue_)
+AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(BackpropagationLearningRuleOptions options_)
 {
-	maxIterationsPerTry = maxIterationsPerTry_;
-	maxTries = maxTries_;
-	totalErrorGoal = totalErrorGoal_;
-	minRandomWeightValue = minRandomWeightValue_;
-	maxRandomWeightValue = maxRandomWeightValue_;
+	options = options_;
 }
 
 float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning)
@@ -43,18 +39,33 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 	{
 		
 		// Randomize all weights
-		neuralNetwork.getNetworkTopology()->randomizeWeights(minRandomWeightValue, maxRandomWeightValue);
+		neuralNetwork.getNetworkTopology()->randomizeWeights(options.minRandomWeightValue, options.maxRandomWeightValue);
 		
+		// If debug is enabled, print every n-th iteration a short debug info
+		if (options.enableDebugOutput)
+			std::cout << "--------------" << std::endl << "Start Try: " << tryCounter << std::endl;
+
 		int iteration = 0;
 		// Do while the totalError is not zero
-		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > totalErrorGoal && iteration++ < maxIterationsPerTry)
-		{
-			if (iteration % DEBUGOUTPUTINTERVAL == 0)
+		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > options.totalErrorGoal && iteration++ < options.maxIterationsPerTry && (iteration <= 1 || !learningHasStopped()))
+		{			
+			// If we had more iterations than minIterationsPerTry and the totalError is still greater than the maxTotalErrorValue, skip that try
+			if (iteration > options.minIterationsPerTry && totalError > options.maxTotalErrorValue)
 			{
-				std::cout << std::fixed << std::setprecision(8) << totalError << " Iteration: " << iteration << " " ;
+				// If debug is enabled, print every n-th iteration a short debug info
+				if (options.enableDebugOutput)
+					std::cout << "Skip that try (totalError: " << std::fixed << std::setprecision(8) << totalError << " > " << std::fixed << std::setprecision(8) << options.maxTotalErrorValue << ")" << std::endl;
+				break;
+			}
+
+			// If debug is enabled, print every n-th iteration a short debug info
+			if (options.enableDebugOutput && iteration % options.debugOutputInterval == 0)
+			{
+				std::cout << "TotalError: " << std::fixed << std::setprecision(8) << totalError << " Iteration: " << iteration << " " ;
 				printDebugOutput();
 				std::cout << std::endl;
 			}
+
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (offlineLearning)
 			{
@@ -67,9 +78,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 			{
 				// Calculate the errorvector 
 				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);
-
 				
-
 				// Create a edgeCounter, which will be used in offline learning
 				int edgeCounter = 0;
 
@@ -181,7 +190,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 				}
 			}
 		}
-	} while (totalError > totalErrorGoal && tryCounter++ < maxTries);
+	} while (totalError > options.totalErrorGoal && tryCounter++ < options.maxTries);
 
 	return totalError;
 }
