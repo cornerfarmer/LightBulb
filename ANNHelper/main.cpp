@@ -43,11 +43,11 @@ int main()
 	options.maxTotalErrorValue = 5;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 1000000;
-	options.totalErrorGoal = 0.001f;
+	options.totalErrorGoal = 0.01f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	BackpropagationLearningRule learningRule(options, 0.45, 0.7);
+	BackpropagationLearningRule learningRule(options, 0.45, 0.3);
 
 	Teacher teacher;
 	for (float i=0;i<1;i+=0.1)

@@ -181,7 +181,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 							for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 							{	
 								// Adjust the weight depending on the sum of all calculated gradients
-								adjustWeight(*edge, offlineLearningGradients[edgeCounter++]);							
+								adjustWeight(*edge, offlineLearningGradients[edgeCounter++] / offlineLearningGradients.size());							
 							}							
 						}
 						else if (neuronIndex + 1 < neuronsInLayerCount) // If its the second last layer and not a BiasNeuron
@@ -192,7 +192,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 							for (std::vector<Edge*>::iterator afferentEdge = afferentEdges->begin(); afferentEdge != afferentEdges->end(); afferentEdge++)
 							{				
 								// Adjust the weight depending on the sum of all calculated gradients
-								adjustWeight(*afferentEdge, offlineLearningGradients[edgeCounter++]);
+								adjustWeight(*afferentEdge, offlineLearningGradients[edgeCounter++] / offlineLearningGradients.size());
 							}
 						}	
 					}

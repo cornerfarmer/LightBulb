@@ -44,7 +44,7 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 	static int learningRateIndex = 0;
 
 	// Only do something if the gradient is not 0
-	if (gradient!=0)
+	if (gradient != 0)
 	{		
 		// Set the new learning rate from the last one
 		float learningRate = (*previousLearningRates)[learningRateIndex];

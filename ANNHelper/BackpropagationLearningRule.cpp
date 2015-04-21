@@ -21,8 +21,12 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;
 
-	// Initialize the learningRates vector with the size of the total edge count
-	previousDeltaWeights = std::unique_ptr<std::vector<float>>(new std::vector<float>((dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))->getEdgeCount()));
+	// If momentum is used
+	if (momentum > 0)
+	{
+		// Initialize the learningRates vector with the size of the total edge count
+		previousDeltaWeights = std::unique_ptr<std::vector<float>>(new std::vector<float>((dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))->getEdgeCount()));
+	}
 
 	// Start the algorithm
 	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, false);
@@ -32,22 +36,25 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 
 void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
-	// If momentum is used
-	if (momentum > 0)
-	{
-		static int edgeIndex = 0;
-		// Calc the delta weight and add the momentum term
-		(*previousDeltaWeights)[edgeIndex] = - learningRate * gradient + momentum * (*previousDeltaWeights)[edgeIndex];
-		// Add the new delta weight to the current weight
-		edge->setWeight(edge->getWeight() + (*previousDeltaWeights)[edgeIndex]);
+	// Only do something if the gradient is not 0
+	if (gradient!=0)
+	{	
+		// If momentum is used
+		if (momentum > 0)
+		{
+			static int edgeIndex = 0;
+			// Calc the delta weight and add the momentum term
+			(*previousDeltaWeights)[edgeIndex] = - learningRate * gradient + momentum * (*previousDeltaWeights)[edgeIndex];
+			// Add the new delta weight to the current weight
+			edge->setWeight(edge->getWeight() + (*previousDeltaWeights)[edgeIndex]);
 		
-		// Increase the edge counter
-		edgeIndex++;
-		edgeIndex %= previousDeltaWeights->size();
+			// Increase the edge counter
+			edgeIndex++;
+			edgeIndex %= previousDeltaWeights->size();
+		}
+		else // else just add the new delta weight
+			edge->setWeight(edge->getWeight() - learningRate * gradient);
 	}
-	else // else just add the new delta weight
-		edge->setWeight(edge->getWeight() - learningRate * gradient);
-
 }
 
 void BackpropagationLearningRule::printDebugOutput()
