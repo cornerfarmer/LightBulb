@@ -42,7 +42,7 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 	static int learningRateIndex = 0;
 
 	if (gradient!=0)
-	{
+	{		
 		float learningRate = (*previousLearningRates)[learningRateIndex];
 
 		if (learningRateIndex == 0)
@@ -57,10 +57,19 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 
 		learningRate *= (gradient > 0 ? -1 : 1);
 
-		edge->setWeight(edge->getWeight() + learningRate);
+		edge->setWeight(edge->getWeight() + learningRate);		
+
+		//// If the momentum is greater than 0
+		//if (options.momentum > 0)
+		//{
+		//	// Add the momentum term to the calculated weight: momentum * prevDeltaWeight
+		//	edge->setWeight(edge->getWeight() + options.momentum * (*previousLearningRates)[learningRateIndex]);
+		//}
 
 		(*previousLearningRates)[learningRateIndex] = learningRate;
 	}
+	else
+		(*previousLearningRates)[learningRateIndex] = 0;
 
 	learningRateIndex++;
 	learningRateIndex %= previousLearningRates->size();
@@ -78,7 +87,7 @@ bool ResilientBackpropagationLearningRule::learningHasStopped()
 {
 	for (std::vector<float>::iterator previousLearningRate = (*previousLearningRates).begin(); previousLearningRate != (*previousLearningRates).end(); previousLearningRate++)
 	{
-		if (abs(*previousLearningRate) != 1.0000000e-006f)
+		if (abs(*previousLearningRate) > 1.2000000e-006f)
 			return false;
 	}
 	return true;

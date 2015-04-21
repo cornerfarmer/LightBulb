@@ -16,8 +16,6 @@ float FermiFunction::execute(float input, float threshold)
 
 float FermiFunction::executeDerivation(float input, float threshold)
 {
-	// Consider the threshold
-	input -= threshold;
 	// Derivation of the Fermi function
-	return exp(-input / temperatureParameter) / (temperatureParameter * pow(1 + exp(-input / temperatureParameter), 2));
+	return execute(input, threshold) * (1 - execute(input, threshold));
 }

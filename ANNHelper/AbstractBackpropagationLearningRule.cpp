@@ -47,8 +47,15 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 
 		int iteration = 0;
 		// Do while the totalError is not zero
-		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > options.totalErrorGoal && iteration++ < options.maxIterationsPerTry && (iteration <= 1 || !learningHasStopped()))
+		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > options.totalErrorGoal && iteration++ < options.maxIterationsPerTry )
 		{			
+			if (iteration > 1 && learningHasStopped())
+			{	
+				if (options.enableDebugOutput)
+					std::cout << "Skip that try (learning has stopped)" << std::endl;		
+				break;
+			}
+
 			// If we had more iterations than minIterationsPerTry and the totalError is still greater than the maxTotalErrorValue, skip that try
 			if (iteration > options.minIterationsPerTry && totalError > options.maxTotalErrorValue)
 			{
@@ -82,7 +89,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 				// Create a edgeCounter, which will be used in offline learning
 				int edgeCounter = 0;
 
-				// Adjust the last and the second last layer
+				// Adjust all layers except the first one
 				for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
 				{			
 					// Go through all neurons in this layer
@@ -107,13 +114,13 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 								float gradient = -1 * (*edge)->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[l][neuronIndex];		
 
 								// If offline learning is activated, add the gradient to the offlineLearningGradient, else adjust the weight right now
-								if (offlineLearning)
+ 								if (offlineLearning)
 									offlineLearningGradients[edgeCounter++] += gradient;
 								else
 									adjustWeight(*edge, gradient);
 							}							
 						}
-						else if (neuronIndex + 1 < neuronsInLayerCount) // If its the second last layer and not a BiasNeuron
+						else if (neuronIndex + 1 < neuronsInLayerCount) // If its not the last layer and not a BiasNeuron
 						{
 							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
 							std::vector<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
@@ -137,7 +144,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 								// Calculate the gradient
 								// gradient = - Output(prevNeuron) * deltaValue
 								float gradient = -1 * (*afferentEdge)->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[l][neuronIndex];
-
+								
 								// If offline learning is activated, add the gradient to the offlineLearningGradient, else adjust the weight right now
 								if (offlineLearning)
 									offlineLearningGradients[edgeCounter++] += gradient;
@@ -172,7 +179,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 							for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 							{	
 								// Adjust the weight depending on the sum of all calculated gradients
-								adjustWeight(*edge, offlineLearningGradients[edgeCounter++]);
+								adjustWeight(*edge, offlineLearningGradients[edgeCounter++]);							
 							}							
 						}
 						else if (neuronIndex + 1 < neuronsInLayerCount) // If its the second last layer and not a BiasNeuron
@@ -191,6 +198,15 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 			}
 		}
 	} while (totalError > options.totalErrorGoal && tryCounter++ < options.maxTries);
-
+	
+	// Print, If goal has reached 
+	if (options.enableDebugOutput)
+	{
+		if (totalError <= options.totalErrorGoal)
+			std::cout << "Try was successful " << "(totalError: " << std::fixed << std::setprecision(8) << totalError << " < " << std::fixed << std::setprecision(8) << options.totalErrorGoal << ")" << std::endl;
+		else
+			std::cout << "All tries failed => stop learning" << std::endl;
+	}
 	return totalError;
 }
+

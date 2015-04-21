@@ -28,7 +28,7 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 
 void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
-	edge->setWeight(edge->getWeight() + -learningRate * gradient);
+	edge->setWeight(edge->getWeight() - learningRate * gradient);
 }
 
 void BackpropagationLearningRule::printDebugOutput()

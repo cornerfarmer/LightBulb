@@ -27,12 +27,10 @@ int main()
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction(), 
 																				new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(5);
-	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=4;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=4;
-	layeredNetworkOptions.neuronsPerLayerCount[3]=4;
-	layeredNetworkOptions.neuronsPerLayerCount[4]=1;
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=2;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
 	layeredNetworkOptions.useBiasNeurons = true;
 
 	LayeredNetwork layeredNetwork(layeredNetworkOptions);
@@ -41,28 +39,31 @@ int main()
 
 	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.maxTotalErrorValue = 2;
+	options.maxTotalErrorValue = 5;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 1000000;
-	options.totalErrorGoal = 0.01f;
-	ResilientBackpropagationLearningRule resilientBackpropagationLearningRule(options);
+	options.totalErrorGoal = 0.001f;
+	options.momentum = 0.9;
+	options.maxTries = 1000;
+	options.minRandomWeightValue = -1;
+	options.maxRandomWeightValue = 1;
+	ResilientBackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;
-	for (float i=0.3;i<0.9;i+=0.05)
+	for (int i=0;i<8;i+=1)
 	{
-		for (float l=0.3;l<0.9;l+=0.05)
-		{
-			std::vector<float>* teachingPattern = new std::vector<float>(2);
-			(*teachingPattern)[0] = i;
-			(*teachingPattern)[1] = l;
-			std::vector<float>* teachingInput= new std::vector<float>(1);
-			//(*teachingInput)[0] = (std::abs(i - 0.5) < 0.3 && std::abs(l - 0.5) < 0.3 ? 1 : 0);			
-			(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
-			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
+		std::vector<float>* teachingPattern = new std::vector<float>(8);
+		std::vector<float>* teachingInput= new std::vector<float>(8);
+		for (int l=0;l<8;l+=1)
+		{			
+			(*teachingPattern)[l] = (i == l ? 1 : 0);
+			(*teachingInput)[l] = (i == l ? 1 : -1);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 		}
+		teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 	}
 
-	bool success = resilientBackpropagationLearningRule.doLearning(neuralNetwork, teacher);
+	bool success = learningRule.doLearning(neuralNetwork, teacher);
 	//neuralNetwork.getNetworkTopology()->randomizeWeights(0,1);
 	
 
@@ -78,7 +79,7 @@ int main()
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
-	neuralNetworkResultChartOptions.binaryInterpretation = false;
+	neuralNetworkResultChartOptions.binaryInterpretation = true;
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
 
 	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);

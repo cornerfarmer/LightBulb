@@ -48,7 +48,7 @@ float TeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, ActivationO
 	// Add the square of every errorValue in the errorVector
 	for (std::vector<float>::iterator errorValue = errorVector->begin(); errorValue != errorVector->end(); errorValue++)
 	{
-		specificError = pow(*errorValue, 2);
+		specificError += pow(*errorValue, 2);
 	}
 
 	// Divide the specific error by two

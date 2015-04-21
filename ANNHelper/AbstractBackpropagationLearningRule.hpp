@@ -34,6 +34,8 @@ struct BackpropagationLearningRuleOptions
 	bool enableDebugOutput;
 	// Sets the debug output interval
 	int debugOutputInterval;
+	// Sets the momentum, which can improve learning speed
+	float momentum;
 
 	BackpropagationLearningRuleOptions()
 	{
@@ -46,6 +48,7 @@ struct BackpropagationLearningRuleOptions
 		maxTotalErrorValue = 2;
 		enableDebugOutput = false;
 		debugOutputInterval = 1000;
+		momentum = 0.7;
 	}
 };
 
