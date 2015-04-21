@@ -49,8 +49,10 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 		// Do while the totalError is not zero
 		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > options.totalErrorGoal && iteration++ < options.maxIterationsPerTry )
 		{			
+			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
 			{	
+				// If debug is enabled, print a short debug info
 				if (options.enableDebugOutput)
 					std::cout << "Skip that try (learning has stopped)" << std::endl;		
 				break;
@@ -59,7 +61,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 			// If we had more iterations than minIterationsPerTry and the totalError is still greater than the maxTotalErrorValue, skip that try
 			if (iteration > options.minIterationsPerTry && totalError > options.maxTotalErrorValue)
 			{
-				// If debug is enabled, print every n-th iteration a short debug info
+				// If debug is enabled, print a short debug info
 				if (options.enableDebugOutput)
 					std::cout << "Skip that try (totalError: " << std::fixed << std::setprecision(8) << totalError << " > " << std::fixed << std::setprecision(8) << options.maxTotalErrorValue << ")" << std::endl;
 				break;
@@ -203,7 +205,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 	if (options.enableDebugOutput)
 	{
 		if (totalError <= options.totalErrorGoal)
-			std::cout << "Try was successful " << "(totalError: " << std::fixed << std::setprecision(8) << totalError << " < " << std::fixed << std::setprecision(8) << options.totalErrorGoal << ")" << std::endl;
+			std::cout << "Try (No. " << tryCounter << ") was successful " << "(totalError: " << std::fixed << std::setprecision(8) << totalError << " < " << std::fixed << std::setprecision(8) << options.totalErrorGoal << ")" << std::endl;
 		else
 			std::cout << "All tries failed => stop learning" << std::endl;
 	}

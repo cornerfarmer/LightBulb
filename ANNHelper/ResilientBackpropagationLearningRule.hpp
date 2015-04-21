@@ -23,13 +23,18 @@ class ResilientBackpropagationLearningRule : public AbstractBackpropagationLearn
 private:
 	// Contains all previous learningRates
 	std::unique_ptr<std::vector<float>> previousLearningRates;	
+	// Sets the factor by which the learningRate can grow
 	float learningRateGrowFac;
+	// Sets the factor by which the learningRate can shrink
 	float learningRateShrinkFac;
+	// Sets the highest possible learningRate
 	float learningRateMax;
+	// Sets the lowest possible learningRate
 	float learningRateMin;
+	// Sets the start value of all learningRates
 	float learningRateStart;
-	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeight(Edge* edge, float gradient);
+	// Inherited:
+	void adjustWeight(Edge* edge, float gradient);	
 	void printDebugOutput();
 	bool learningHasStopped();
 public:

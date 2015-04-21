@@ -34,8 +34,7 @@ struct BackpropagationLearningRuleOptions
 	bool enableDebugOutput;
 	// Sets the debug output interval
 	int debugOutputInterval;
-	// Sets the momentum, which can improve learning speed
-	float momentum;
+
 
 	BackpropagationLearningRuleOptions()
 	{
@@ -48,7 +47,6 @@ struct BackpropagationLearningRuleOptions
 		maxTotalErrorValue = 2;
 		enableDebugOutput = false;
 		debugOutputInterval = 1000;
-		momentum = 0.7;
 	}
 };
 
@@ -61,9 +59,9 @@ protected:
 	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning);
 	// Adjusts the weights of an edge dependent on its gradient
 	virtual void adjustWeight(Edge* edge, float gradient) = 0;
-	// Print the debug output
+	// Prints a current summary of the status of the learning process
 	virtual void printDebugOutput() = 0;
-
+	// Calculate if it is sensible to continue learning
 	virtual bool learningHasStopped() = 0;
 public:
 	// Initializes all required values
