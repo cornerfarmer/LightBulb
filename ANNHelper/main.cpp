@@ -25,8 +25,8 @@
 int main()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
-																				new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction(), 
+																				new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=5;
@@ -40,14 +40,14 @@ int main()
 	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 100;
-	options.maxTotalErrorValue = 5;
+	options.maxTotalErrorValue = 50;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.01f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	BackpropagationLearningRule learningRule(options, 0.45, 0.3);
+	BackpropagationLearningRule learningRule(options, 0.45, 0.7, true);
 
 	Teacher teacher;
 	for (float i=0;i<1;i+=0.1)
@@ -59,7 +59,7 @@ int main()
 			(*teachingPattern)[1] = l;
 			std::vector<float>* teachingInput= new std::vector<float>(1);
 			//(*teachingInput)[0] = (std::abs(i - 0.5) < 0.3 && std::abs(l - 0.5) < 0.3 ? 1 : 0);			
-			(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
+			(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : -1);
 			teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));
 		}
 	}

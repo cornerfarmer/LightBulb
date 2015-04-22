@@ -24,13 +24,15 @@ private:
 	void adjustWeight(Edge* edge, float gradient);
 	// Sets the momentum, which can improve learning speed
 	float momentum;
+	// Is set, if offline learning should be used
+	bool offlineLearning;
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
 public:
-	BackpropagationLearningRule(BackpropagationLearningRuleOptions options_ ,float learningRate_, float momentum_);
+	BackpropagationLearningRule(BackpropagationLearningRuleOptions options_ ,float learningRate_, float momentum_, bool offlineLearning_);
 	// Improves the given PerceptronNetwork with the help of its teaching stuff
 	// If the learning process succeded the method will return true
 	bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);

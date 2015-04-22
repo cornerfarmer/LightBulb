@@ -34,7 +34,8 @@ struct BackpropagationLearningRuleOptions
 	bool enableDebugOutput;
 	// Sets the debug output interval
 	int debugOutputInterval;
-
+	// Sets the factor of the flat spot elimination, which will increase learning speed when having big weights
+	float flatSpotEliminationFac;
 
 	BackpropagationLearningRuleOptions()
 	{
@@ -47,6 +48,7 @@ struct BackpropagationLearningRuleOptions
 		maxTotalErrorValue = 2;
 		enableDebugOutput = false;
 		debugOutputInterval = 1000;
+		flatSpotEliminationFac = 0.1;
 	}
 };
 

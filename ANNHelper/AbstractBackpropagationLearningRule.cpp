@@ -102,10 +102,10 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 					{						
 						// If its the last layer
 						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1)
-						{						
+						{		 				
 							
 							// Compute the delta value: activationFunction'(netInput) * errorValue
-							deltaVectorOutputLayer[l][neuronIndex] = (dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) * (*errorvector)[neuronIndex];
+							deltaVectorOutputLayer[l][neuronIndex] = ((dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) + options.flatSpotEliminationFac) * (*errorvector)[neuronIndex];
 						
 							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
@@ -138,7 +138,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 							}
 
 							// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-							deltaVectorOutputLayer[l][neuronIndex] = (dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) * nextLayerErrorValueFactor;	
+							deltaVectorOutputLayer[l][neuronIndex] = ((dynamic_cast<StandardNeuron*>(*neuron))->executeDerivationOnActivationFunction((dynamic_cast<StandardNeuron*>(*neuron))->getNetInput()) + options.flatSpotEliminationFac) * nextLayerErrorValueFactor;	
 						
 							// Go through all afferentEdges of the actual neuron
 							for (std::vector<Edge*>::iterator afferentEdge = afferentEdges->begin(); afferentEdge != afferentEdges->end(); afferentEdge++)

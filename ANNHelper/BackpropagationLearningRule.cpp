@@ -9,11 +9,12 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
-BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_ ,float learningRate_, float momentum_) 
+BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_ ,float learningRate_, float momentum_, bool offlineLearning_) 
 	: AbstractBackpropagationLearningRule(options_)
 {
 	learningRate = learningRate_;
 	momentum = momentum_;
+	offlineLearning = offlineLearning_;
 }
 
 bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
@@ -29,7 +30,7 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 	}
 
 	// Start the algorithm
-	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, false);
+	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, offlineLearning);
 
 	return (totalError <= options.totalErrorGoal);
 }
