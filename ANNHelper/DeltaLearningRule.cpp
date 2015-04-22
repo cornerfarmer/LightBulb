@@ -17,7 +17,7 @@ bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 	std::vector<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
 	// Do while the totalError is not zero
-	while (teacher.getTotalError(neuralNetwork, activationOrder) > 0)
+	while (teacher.getTotalError(neuralNetwork, activationOrder, 0) > 0)
 	{
 		// Go through every TeachingLesson
 		for (std::vector<TeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)

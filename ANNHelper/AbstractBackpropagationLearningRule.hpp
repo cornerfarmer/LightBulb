@@ -36,6 +36,8 @@ struct BackpropagationLearningRuleOptions
 	int debugOutputInterval;
 	// Sets the factor of the flat spot elimination, which will increase learning speed when having big weights
 	float flatSpotEliminationFac;
+	// Sets the weight decay factor, which will be used avoid high weights
+	float weightDecayFac;
 
 	BackpropagationLearningRuleOptions()
 	{
@@ -49,6 +51,7 @@ struct BackpropagationLearningRuleOptions
 		enableDebugOutput = false;
 		debugOutputInterval = 1000;
 		flatSpotEliminationFac = 0.1;
+		weightDecayFac = 0.02;
 	}
 };
 

@@ -22,6 +22,8 @@ public:
 	virtual std::vector<Neuron*>* getOutputNeurons() = 0;
 	// Set all weights to new random values between randStart and randEnd
 	virtual void randomizeWeights(float randStart, float randEnd) = 0;
+	// Returns all Neurons
+	virtual std::vector<std::vector<Neuron*>>* getNeurons() = 0;
 };
 
 #endif

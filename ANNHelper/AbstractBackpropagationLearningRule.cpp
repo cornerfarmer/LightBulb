@@ -26,7 +26,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 	// Create a vector which will contain all delta values of the neurons in the output layer
 	std::vector<std::vector<float>> deltaVectorOutputLayer;
 	
-	for (std::vector<std::vector<Neuron*>>::iterator layer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeurons()->begin(); layer != dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeurons()->end(); layer++)
+	for (std::vector<std::vector<Neuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		deltaVectorOutputLayer.push_back(std::vector<float>((*layer).size()));
 	}	
@@ -47,7 +47,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 
 		int iteration = 0;
 		// Do while the totalError is not zero
-		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder)) > options.totalErrorGoal && iteration++ < options.maxIterationsPerTry )
+		while ((totalError = teacher.getTotalError(neuralNetwork, activationOrder, options.weightDecayFac)) > options.totalErrorGoal && iteration++ < options.maxIterationsPerTry )
 		{			
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
@@ -113,7 +113,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 							{			
 								// Calculate the gradient
 								// gradient = - Output(prevNeuron) * deltaValue
-								float gradient = -1 * (*edge)->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[l][neuronIndex];		
+								float gradient = -1 * (*edge)->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[l][neuronIndex];	
 
 								// If offline learning is activated, add the gradient to the offlineLearningGradient, else adjust the weight right now
  								if (offlineLearning)

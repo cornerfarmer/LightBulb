@@ -22,7 +22,7 @@ public:
 	// Get all techingLessons (Useful for online learning)
 	std::vector<TeachingLesson*>* getTeachingLessons();
 	// Calculate the total error (Useful for offline learning)
-	float getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
+	float getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder, float weightDecayfac);
 };
 
 #endif

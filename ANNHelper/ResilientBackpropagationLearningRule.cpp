@@ -64,8 +64,8 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 		// Set the sign of the learningRate to the sign of the gradient
 		learningRate *= (gradient > 0 ? 1 : -1);
 
-		// Add the learningRate to the weight
-		edge->setWeight(edge->getWeight() + learningRate);		
+		// Add the learningRate and the weight decay term to the weight
+		edge->setWeight(edge->getWeight() + learningRate  - options.weightDecayFac * edge->getWeight());		
 
 		// Save the new learningRate
 		(*previousLearningRates)[learningRateIndex] = learningRate;

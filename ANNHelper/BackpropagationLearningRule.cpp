@@ -37,25 +37,29 @@ bool BackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teach
 
 void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
-	// Only do something if the gradient is not 0
-	if (gradient!=0)
-	{	
-		// If momentum is used
-		if (momentum > 0)
-		{
-			static int edgeIndex = 0;
-			// Calc the delta weight and add the momentum term
-			(*previousDeltaWeights)[edgeIndex] = - learningRate * gradient + momentum * (*previousDeltaWeights)[edgeIndex];
-			// Add the new delta weight to the current weight
-			edge->setWeight(edge->getWeight() + (*previousDeltaWeights)[edgeIndex]);
+
+	// If momentum is used
+	if (momentum > 0)
+	{
+		static int edgeIndex = 0;
+
+		if (edgeIndex == 0)
+			edgeIndex = edgeIndex;
+
+		// Calc the delta weight, add the momentum term and the weight decay term
+		(*previousDeltaWeights)[edgeIndex] = - learningRate * gradient + momentum * (*previousDeltaWeights)[edgeIndex] - options.weightDecayFac * edge->getWeight();
+		// Add the new delta weight to the current weight
+		edge->setWeight(edge->getWeight() + (*previousDeltaWeights)[edgeIndex]);
+
+		// Increase the edge counter
+		edgeIndex++;
+		edgeIndex %= previousDeltaWeights->size();
 		
-			// Increase the edge counter
-			edgeIndex++;
-			edgeIndex %= previousDeltaWeights->size();
-		}
-		else // else just add the new delta weight
-			edge->setWeight(edge->getWeight() - learningRate * gradient);
 	}
+	else // else just add the new delta weight and the weight decay term
+		edge->setWeight(edge->getWeight() - learningRate * gradient - options.weightDecayFac * edge->getWeight());
+	
+	
 }
 
 void BackpropagationLearningRule::printDebugOutput()
