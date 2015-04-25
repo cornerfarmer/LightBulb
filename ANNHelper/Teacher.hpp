@@ -17,6 +17,7 @@ class Teacher
 private:
 	std::vector<TeachingLesson*> teachingLessons;
 public:
+	~Teacher();
 	// Adds a new TechingLessont to the teachingLessons list
 	void addTeachingLesson(TeachingLesson* newTeachingLesson);
 	// Get all techingLessons (Useful for online learning)

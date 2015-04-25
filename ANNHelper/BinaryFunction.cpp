@@ -14,3 +14,8 @@ float BinaryFunction::executeDerivation(float input, float threshold)
 	// TODO: Throw error;
 	return 0;
 }
+
+ActivationFunction* BinaryFunction::getActivationFunctionCopy()
+{
+	return new BinaryFunction(*this);
+}

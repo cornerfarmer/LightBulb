@@ -4,7 +4,10 @@
 
 Neuron::~Neuron()
 {
-
+	for (std::vector<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
+	{
+		delete(*edge);
+	}
 }
 
 Neuron::Neuron()

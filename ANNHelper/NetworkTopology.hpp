@@ -15,7 +15,7 @@ class NetworkTopology
 {
 private:
 public:	
-	virtual ~NetworkTopology() = 0;
+	virtual ~NetworkTopology() {};
 	// Returns all InputNeurons in the NeuralNetwork
 	virtual std::vector<Neuron*>* getInputNeurons() = 0;
 	// Returns all OutputNeurons in the NeuralNetwork

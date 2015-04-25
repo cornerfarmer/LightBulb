@@ -16,6 +16,7 @@ private:
 public:
 	// Calculates Σ output * weight
 	float execute(std::vector<Edge*> &input);
+	InputFunction* getInputFunctionCopy();
 };
 
 #endif

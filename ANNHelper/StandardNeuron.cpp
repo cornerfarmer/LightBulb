@@ -6,14 +6,16 @@
 
 StandardNeuron::~StandardNeuron()
 {
-
+	delete(inputFunction);
+	delete(activationFunction);
+	delete(outputFunction);
 }
 
 StandardNeuron::StandardNeuron(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_)
 {
-	inputFunction = inputFunction_;
-	activationFunction = activationFunction_;
-	outputFunction = outputFunction_;
+	inputFunction = inputFunction_->getInputFunctionCopy();
+	activationFunction = activationFunction_->getActivationFunctionCopy();
+	outputFunction = outputFunction_->getOutputFunctionCopy();
 	threshold = 0;
 	netInput = 0;
 }

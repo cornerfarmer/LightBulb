@@ -2,6 +2,13 @@
 #include "InputNeuron.hpp"
 #include "StandardNeuron.hpp"
 
+SameFunctionsNeuronFactory::~SameFunctionsNeuronFactory()
+{
+	delete(activationFunction);
+	delete(inputFunction);
+	delete(outputFunction);
+}
+
 SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_)
 {
 	activationFunction = activationFunction_;

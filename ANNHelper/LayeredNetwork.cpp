@@ -5,13 +5,41 @@
 #include "Edge.hpp"
 #include "AbstractNeuronFactory.hpp"
 
-LayeredNetwork::~LayeredNetwork()
+LayeredNetworkOptions::LayeredNetworkOptions()
 {
-
+	enableDirectBackCoupling = false;
+	enableIndirectBackCoupling = false;
+	enableLateralBackCoupling = false;
+	enableShortcuts = false;
+	neuronFactory = NULL;
+	neuronsPerLayerCount = std::vector<int>();
+	useBiasNeurons = false;
 }
 
-LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
+LayeredNetworkOptions::~LayeredNetworkOptions()
 {
+	delete(neuronFactory);
+}
+
+
+LayeredNetwork::~LayeredNetwork()
+{
+	delete(options);
+
+	// Go through all layers
+	for (std::vector<std::vector<Neuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	{
+		// Go through all neurons in this layer
+		for (std::vector<Neuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			delete(*neuron);
+		}
+	}
+}
+
+LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t *options_)
+{
+	// Copy all options
 	options = options_;
 
 	// Add all neurons
@@ -21,20 +49,20 @@ LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
 		neurons.push_back(std::vector<Neuron*>());
 
 		// Add the neurons to the current layer
-		for (int i = 0; i < options.neuronsPerLayerCount[l]; i++)
+		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
 		{
 			// If its the first layer, add InputNeurons, else StandardNeurons
 			if (l == 0)
-				neurons.back().push_back(options.neuronFactory->createInputNeuron());
+				neurons.back().push_back(options->neuronFactory->createInputNeuron());
 			else
 			{
 				StandardNeuron* newNeuron;
 
 				// If its the last layer create a output neuron else an inner neuron
-				if (l == options.neuronsPerLayerCount.size() - 1)
-					newNeuron = options.neuronFactory->createOutputNeuron();
+				if (l == options->neuronsPerLayerCount.size() - 1)
+					newNeuron = options->neuronFactory->createOutputNeuron();
 				else
-					newNeuron = options.neuronFactory->createInnerNeuron();
+					newNeuron = options->neuronFactory->createInnerNeuron();
 
 				neurons.back().push_back(newNeuron);				
 
@@ -47,7 +75,7 @@ LayeredNetwork::LayeredNetwork(const LayeredNetworkOptions_t &options_)
 		}		
 
 		// If BiasNeurons are used, insert them in every layer except of the last one
-		if (options.useBiasNeurons && l < options.neuronsPerLayerCount.size() - 1)
+		if (options->useBiasNeurons && l < options->neuronsPerLayerCount.size() - 1)
 			neurons.back().push_back(new BiasNeuron());
 	}
 
@@ -78,7 +106,7 @@ std::vector<Neuron*>* LayeredNetwork::getNeuronsInLayer(int layerNr)
 
 int LayeredNetwork::getLayerCount()
 {
-	return options.neuronsPerLayerCount.size();
+	return options->neuronsPerLayerCount.size();
 }
 
 std::vector<std::vector<Neuron*>>* LayeredNetwork::getNeurons()

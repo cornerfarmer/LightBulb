@@ -14,6 +14,7 @@ public:
 	float execute(float input, float threshold);
 	// Error - No derivation available
 	float executeDerivation(float input, float threshold);
+	ActivationFunction* getActivationFunctionCopy();
 };
 
 #endif

@@ -6,6 +6,14 @@
 #include "Neuron.hpp"
 #include "Edge.hpp"
 
+Teacher::~Teacher()
+{
+	for (int i = 0; i < teachingLessons.size(); i++)
+	{
+		delete (teachingLessons[i]);
+	}
+}
+
 void Teacher::addTeachingLesson(TeachingLesson* newTeachingLesson)
 {
 	// Add the newTeachingLesson to the list

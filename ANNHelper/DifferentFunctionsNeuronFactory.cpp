@@ -2,6 +2,17 @@
 #include "InputNeuron.hpp"
 #include "StandardNeuron.hpp"
 
+DifferentFunctionsNeuronFactory::~DifferentFunctionsNeuronFactory()
+{
+	delete(activationFunctionInnerNeuron);
+	delete(inputFunctionInnerNeuron);
+	delete(outputFunctionInnerNeuron);
+
+	delete(activationFunctionOutputNeuron);
+	delete(inputFunctionOutputNeuron);
+	delete(outputFunctionOutputNeuron);
+}
+
 DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(InputFunction* inputFunctionInnerNeuron_, ActivationFunction* activationFunctionInnerNeuron_, OutputFunction* outputFunctionInnerNeuron_, InputFunction* inputFunctionOutputNeuron_, ActivationFunction* activationFunctionOutputNeuron_, OutputFunction* outputFunctionOutputNeuron_)
 {
 	// Functions for inner neurons

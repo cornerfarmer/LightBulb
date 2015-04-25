@@ -12,6 +12,7 @@ class AbstractNeuronFactory
 {
 private:
 public:	
+	virtual ~AbstractNeuronFactory() {}
 	// Create a new input neuron
 	virtual InputNeuron* createInputNeuron() = 0;
 	// Create a new inner neuron

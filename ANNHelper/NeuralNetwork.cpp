@@ -6,7 +6,7 @@
 
 NeuralNetwork::~NeuralNetwork()
 {
-
+	delete(networkTopology);
 }
 
 NeuralNetwork::NeuralNetwork(NetworkTopology* networkTopology_)

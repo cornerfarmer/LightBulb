@@ -14,3 +14,8 @@ float WeightedSumFunction::execute(std::vector<Edge*> &input)
 	
 	return sum;
 }
+
+InputFunction* WeightedSumFunction::getInputFunctionCopy()
+{
+	return new WeightedSumFunction(*this);
+}

@@ -14,8 +14,11 @@ class InputFunction
 {
 private:
 public:
+	virtual ~InputFunction() {}
 	// Calculate the one value from all given afferent edges
 	virtual float execute(std::vector<Edge*> &input) = 0;
+	// Create a copy of the object
+	virtual InputFunction* getInputFunctionCopy() = 0;
 };
 
 #endif

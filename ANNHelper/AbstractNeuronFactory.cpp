@@ -1,4 +1,1 @@
 #include "AbstractNeuronFactory.hpp"
-
-
-

@@ -8,8 +8,11 @@ class OutputFunction
 {
 private:
 public:
+	virtual ~OutputFunction() {}
 	// Calculate the output from the activation
 	virtual float execute(float activation) = 0;
+	// Create a copy of the object
+	virtual OutputFunction* getOutputFunctionCopy() = 0;
 };
 
 #endif

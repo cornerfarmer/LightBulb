@@ -16,3 +16,8 @@ float HyperbolicTangentFunction::executeDerivation(float input, float threshold)
 	// Return the value of the derivation of the hyperbolic tangent: 1 / cosh^2
 	return 1 / pow(cosh(input), 2);
 }
+
+ActivationFunction* HyperbolicTangentFunction::getActivationFunctionCopy()
+{
+	return new HyperbolicTangentFunction(*this);
+}

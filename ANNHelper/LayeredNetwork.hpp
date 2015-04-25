@@ -24,16 +24,8 @@ struct LayeredNetworkOptions
 	bool enableShortcuts;
 	bool useBiasNeurons;
 	std::vector<int> neuronsPerLayerCount;
-	LayeredNetworkOptions()
-	{
-		enableDirectBackCoupling = false;
-		enableIndirectBackCoupling = false;
-		enableLateralBackCoupling = false;
-		enableShortcuts = false;
-		neuronFactory = NULL;
-		neuronsPerLayerCount = std::vector<int>();
-		useBiasNeurons = false;
-	}
+	LayeredNetworkOptions();
+	~LayeredNetworkOptions();
 };
 
 typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
@@ -42,11 +34,11 @@ typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
 class LayeredNetwork : public NetworkTopology
 {
 private:
-	LayeredNetworkOptions_t options;
+	LayeredNetworkOptions_t* options;
 	std::vector<std::vector<Neuron*>> neurons;
 public:
 	~LayeredNetwork();
-	LayeredNetwork(const LayeredNetworkOptions_t &options_);	
+	LayeredNetwork(LayeredNetworkOptions_t* options_);	
 	// Returns all InputNeurons (first layer)
 	std::vector<Neuron*>* getInputNeurons();
 	// Returns all OutputNeurons (last layer)

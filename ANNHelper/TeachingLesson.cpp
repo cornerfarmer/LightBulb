@@ -1,6 +1,12 @@
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 
+TeachingLesson::~TeachingLesson()
+{
+	delete(teachingInput);
+	delete(teachingPattern);
+}
+
 TeachingLesson::TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_)
 {
 	teachingInput = teachingInput_;

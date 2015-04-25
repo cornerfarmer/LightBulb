@@ -26,6 +26,7 @@ private:
 	InputFunction* inputFunctionOutputNeuron;
 	OutputFunction* outputFunctionOutputNeuron;
 public:	
+	~DifferentFunctionsNeuronFactory();
 	DifferentFunctionsNeuronFactory(InputFunction* inputFunctionInnerNeuron_, ActivationFunction* activationFunctionInnerNeuron_, OutputFunction* outputFunctionInnerNeuron_, InputFunction* inputFunctionOutputNeuron_, ActivationFunction* activationFunctionOutputNeuron_, OutputFunction* outputFunctionOutputNeuron_);
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();

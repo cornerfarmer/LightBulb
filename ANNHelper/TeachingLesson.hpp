@@ -18,6 +18,7 @@ private:
 	// The values we will put into the neural network
 	std::vector<float>* teachingPattern;
 public:
+	~TeachingLesson();
 	TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_);
 	// Calculate the Errorvector
 	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);

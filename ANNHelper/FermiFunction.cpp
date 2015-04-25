@@ -19,3 +19,8 @@ float FermiFunction::executeDerivation(float input, float threshold)
 	// Derivation of the Fermi function
 	return execute(input, threshold) * (1 - execute(input, threshold));
 }
+
+ActivationFunction* FermiFunction::getActivationFunctionCopy()
+{
+	return new FermiFunction(*this);
+}

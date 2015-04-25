@@ -14,3 +14,13 @@ float IdentityFunction::executeDerivation(float input, float threshold)
 {
 	return 0;
 }
+
+ActivationFunction* IdentityFunction::getActivationFunctionCopy()
+{
+	return new IdentityFunction(*this);
+}
+
+OutputFunction* IdentityFunction::getOutputFunctionCopy()
+{
+	return new IdentityFunction(*this);
+}

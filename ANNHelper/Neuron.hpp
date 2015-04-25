@@ -17,7 +17,7 @@ protected:
 	float activation;
 	std::vector<Edge*> efferentEdges;
 public:	
-	~Neuron();
+	virtual ~Neuron();
 	Neuron();
 	// Add a new efferent Edge which directs to the given neuron
 	void addNextNeuron(StandardNeuron* newNextNeuron, float weight);

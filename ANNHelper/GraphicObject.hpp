@@ -16,6 +16,7 @@ protected:
 	int posX;
 	int posY;
 public:
+	virtual ~GraphicObject() {}
 	GraphicObject(int posX_, int posY_);
 	// This method will be used to draw the whole graphics object on the given window
 	virtual void draw(sf::RenderWindow &window) = 0;

@@ -8,9 +8,12 @@ class ActivationFunction
 {
 private:
 public:
+	virtual ~ActivationFunction() {}
 	// Calculate the activation from the given input
 	virtual float execute(float input, float threshold) = 0;
 	virtual float executeDerivation(float input, float threshold) = 0;
+	// Create a copy of the object
+	virtual ActivationFunction* getActivationFunctionCopy() = 0;
 };
 
 #endif
