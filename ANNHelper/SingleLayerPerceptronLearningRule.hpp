@@ -10,7 +10,7 @@
 class NeuralNetwork;
 class Teacher;
 
-// The PerceptronLearningRule can only be used to train binary SinglePerceptronNetworks
+// The PerceptronLearningRule can only be used to train binary SingleLayerPerceptronNetworks
 class SingleLayerPerceptronLearningRule : public LearningRule
 {
 private:

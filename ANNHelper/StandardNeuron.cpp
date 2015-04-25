@@ -13,9 +13,9 @@ StandardNeuron::~StandardNeuron()
 
 StandardNeuron::StandardNeuron(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_)
 {
-	inputFunction = inputFunction_->getInputFunctionCopy();
-	activationFunction = activationFunction_->getActivationFunctionCopy();
-	outputFunction = outputFunction_->getOutputFunctionCopy();
+	inputFunction = inputFunction_;
+	activationFunction = activationFunction_;
+	outputFunction = outputFunction_;
 	threshold = 0;
 	netInput = 0;
 }
@@ -59,4 +59,9 @@ float StandardNeuron::getNetInput()
 float StandardNeuron::executeDerivationOnActivationFunction(float input)
 {
 	return activationFunction->executeDerivation(input, threshold);
+}
+
+ActivationFunction* StandardNeuron::getActivationFunction()
+{
+	return activationFunction;
 }

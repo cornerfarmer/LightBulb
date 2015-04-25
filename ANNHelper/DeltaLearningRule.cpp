@@ -7,9 +7,18 @@
 #include "NetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
+#include "LayeredNetwork.hpp"
 
 bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
+	// Check if all given parameters are correct
+	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+		throw std::exception();
+	if (dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
+		throw std::exception();
+	if (teacher.getTeachingLessons()->size() == 0)
+		throw std::exception();
+
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;
 

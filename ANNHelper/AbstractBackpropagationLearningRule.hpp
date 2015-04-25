@@ -17,9 +17,9 @@ class Edge;
 struct BackpropagationLearningRuleOptions
 {
 	// Sets the maximum iterations per try
-	int maxIterationsPerTry;
+	unsigned int maxIterationsPerTry;
 	// Sets the maximum number of tries, until the algorithm should abort
-	int maxTries;
+	unsigned int maxTries;
 	// Sets the highest total error value, when the algorithm should finish successful
 	float totalErrorGoal;
 	// Sets the lower limit of the random generated weights
@@ -27,13 +27,13 @@ struct BackpropagationLearningRuleOptions
 	// Sets the higher limit of the random generated weights
 	float maxRandomWeightValue;
 	// Sets the minium iterations per try
-	int minIterationsPerTry;
+	unsigned int minIterationsPerTry;
 	// Sets the maximum total error value (If a try has after its miniums iterations a greater total error value than the maxTotalErrorValue, skip that try)
-	int maxTotalErrorValue;
+	unsigned int maxTotalErrorValue;
 	// Enable debug output
 	bool enableDebugOutput;
 	// Sets the debug output interval
-	int debugOutputInterval;
+	unsigned int debugOutputInterval;
 	// Sets the factor of the flat spot elimination, which will increase learning speed when having big weights
 	float flatSpotEliminationFac;
 	// Sets the weight decay factor, which will be used avoid high weights

@@ -27,7 +27,7 @@ void doNNTest()
 	LayeredNetworkOptions* layeredNetworkOptions = new LayeredNetworkOptions();
 	layeredNetworkOptions->neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
 																				new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-	layeredNetworkOptions->neuronsPerLayerCount = std::vector<int>(3);
+	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions->neuronsPerLayerCount[0]=8;
 	layeredNetworkOptions->neuronsPerLayerCount[1]=3;
 	layeredNetworkOptions->neuronsPerLayerCount[2]=8;

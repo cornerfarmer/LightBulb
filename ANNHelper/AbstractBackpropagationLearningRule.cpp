@@ -10,14 +10,26 @@
 #include "Edge.hpp"
 #include <iostream>
 #include <iomanip>
+#include <exception>
 
 AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(BackpropagationLearningRuleOptions options_)
 {
 	options = options_;
+	// Check if all given options are correct
+	if (options.totalErrorGoal < 0)
+		throw std::exception();
+	if (options.maxTotalErrorValue <= options.totalErrorGoal)
+		throw std::exception();
 }
 
 float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning)
 {	
+	// Check if all given parameters are correct
+	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+		throw std::exception();
+	if (teacher.getTeachingLessons()->size() == 0)
+		throw std::exception();
+
 	// Get all output neurons
 	std::vector<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 

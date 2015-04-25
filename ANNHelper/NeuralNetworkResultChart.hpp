@@ -16,17 +16,17 @@ class ActivationOrder;
 struct NeuralNetworkResultChartOptions 
 {
 	bool binaryInterpretation;
-	int height;
-	int width;
+	unsigned int height;
+	unsigned int width;
 	NeuralNetwork* neuralNetwork;
 	ActivationOrder* activationOrder;	
-	int xInputNeuronIndex;
+	unsigned int xInputNeuronIndex;
 	float xRangeEnd;
 	float xRangeStart;
-	int yInputNeuronIndex;
+	unsigned int yInputNeuronIndex;
 	float yRangeEnd;
 	float yRangeStart;	
-	int OutputNeuronIndex;
+	unsigned int outputNeuronIndex;
 	float ouputRangeStart;
 	float ouputRangeEnd;
 	NeuralNetworkResultChartOptions()
@@ -42,7 +42,7 @@ struct NeuralNetworkResultChartOptions
 		yRangeStart = 0;
 		yRangeEnd = 1;
 		activationOrder = NULL;
-		OutputNeuronIndex = 0;
+		outputNeuronIndex = 0;
 		ouputRangeStart = 0;
 		ouputRangeEnd = 1;
 	}

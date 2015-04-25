@@ -4,6 +4,7 @@
 #include "BiasNeuron.hpp"
 #include "Edge.hpp"
 #include "AbstractNeuronFactory.hpp"
+#include <exception>
 
 LayeredNetworkOptions::LayeredNetworkOptions()
 {
@@ -12,7 +13,7 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 	enableLateralBackCoupling = false;
 	enableShortcuts = false;
 	neuronFactory = NULL;
-	neuronsPerLayerCount = std::vector<int>();
+	neuronsPerLayerCount = std::vector<unsigned int>();
 	useBiasNeurons = false;
 }
 
@@ -41,6 +42,15 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t *options_)
 {
 	// Copy all options
 	options = options_;
+
+	// Check if all given options are correct
+	if (getLayerCount() < 2)
+		throw std::exception();
+	for (int l = 0; l < getLayerCount(); l++)
+		if (options->neuronsPerLayerCount[l] == 0)
+			throw std::exception();
+	if (!options->neuronFactory)
+		throw std::exception();
 
 	// Add all neurons
 	for (int l = 0; l < getLayerCount(); l++)

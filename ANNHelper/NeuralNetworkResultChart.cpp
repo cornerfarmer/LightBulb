@@ -2,6 +2,7 @@
 #include "NeuralNetwork.hpp"
 #include "NetworkTopology.hpp"
 #include "TopologicalOrder.hpp"
+#include <exception>
 
 NeuralNetworkResultChart::~NeuralNetworkResultChart()
 {
@@ -16,6 +17,15 @@ NeuralNetworkResultChart::NeuralNetworkResultChart(int posX_, int posY_, NeuralN
 
 void NeuralNetworkResultChart::recalculateAllValues()
 {
+	// Check if all given options are correct
+	// Check if the output and input neuron indices are correct
+	if (options->xInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
+		throw std::exception();
+	if (options->yInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
+		throw std::exception();
+	if (options->outputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
+		throw std::exception();
+
 	// Create a new pixel array, which will contain all color informations
 	sf::Uint8* pixels = new sf::Uint8[options->width*options->height*4];
 	// Create a new inputVector with the size of the inputCount
@@ -34,7 +44,7 @@ void NeuralNetworkResultChart::recalculateAllValues()
 			// Let the NN comput
 			options->neuralNetwork->refreshAllNeurons(*options->activationOrder);
 			// Extract the output
-			float output = (*options->neuralNetwork->getOutput())[options->OutputNeuronIndex];
+			float output = (*options->neuralNetwork->getOutput())[options->outputNeuronIndex];
 
 			// If binaryInterpretation is selected, just use black or white, else interpret the output linear
 			if (options->binaryInterpretation)

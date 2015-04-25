@@ -10,7 +10,7 @@
 class NeuralNetwork;
 class Teacher;
 
-// The DeltaLearningRule can only be used to train SinglePerceptronNetworks
+// The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
 class DeltaLearningRule : public LearningRule
 {
 private:

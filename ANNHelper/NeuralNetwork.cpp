@@ -3,6 +3,7 @@
 #include "Neuron.hpp"
 #include "ActivationOrder.hpp"
 #include "InputNeuron.hpp"
+#include <exception>
 
 NeuralNetwork::~NeuralNetwork()
 {
@@ -11,6 +12,10 @@ NeuralNetwork::~NeuralNetwork()
 
 NeuralNetwork::NeuralNetwork(NetworkTopology* networkTopology_)
 {
+	// Check if all given options are correct
+	if (!networkTopology_)
+		throw std::exception();
+
 	networkTopology = networkTopology_;
 }
 

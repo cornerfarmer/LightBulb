@@ -35,6 +35,7 @@ public:
 	float executeDerivationOnActivationFunction(float input);
 	std::vector<Edge*>* getAfferentEdges();
 	float getNetInput();
+	ActivationFunction* getActivationFunction();
 };
 
 #endif
