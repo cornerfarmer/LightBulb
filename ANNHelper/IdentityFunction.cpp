@@ -1,4 +1,5 @@
 #include "IdentityFunction.hpp"
+#include <limits>
 
 float IdentityFunction::execute(float input)
 {
@@ -23,4 +24,19 @@ AbstractActivationFunction* IdentityFunction::getActivationFunctionCopy()
 AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
 {
 	return new IdentityFunction(*this);
+}
+
+float IdentityFunction::getMaximum()
+{
+	return std::numeric_limits<float>::infinity();
+}
+
+float IdentityFunction::getMinimum()
+{
+	return -std::numeric_limits<float>::infinity();
+}
+
+bool IdentityFunction::isLinear()
+{
+	return true;
 }

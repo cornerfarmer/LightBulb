@@ -19,3 +19,18 @@ AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy()
 {
 	return new BinaryFunction(*this);
 }
+
+float BinaryFunction::getMaximum()
+{
+	return 1;
+}
+
+float BinaryFunction::getMinimum()
+{
+	return 0;
+}
+
+bool BinaryFunction::isLinear()
+{
+	return false;
+}

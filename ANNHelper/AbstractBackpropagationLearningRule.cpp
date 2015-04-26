@@ -1,7 +1,7 @@
 #include "AbstractBackpropagationLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TopologicalOrder.hpp"
-#include "TeachingLesson.hpp"
+#include "AbstractTeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "LayeredNetwork.hpp"
 #include "AbstractNeuron.hpp"
@@ -95,7 +95,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 			}
 
 			// Go through every TeachingLesson
-			for (std::vector<TeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+			for (std::vector<AbstractTeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 			{
 				// Calculate the errorvector 
 				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);

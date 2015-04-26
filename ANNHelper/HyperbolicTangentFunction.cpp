@@ -23,3 +23,18 @@ AbstractActivationFunction* HyperbolicTangentFunction::getActivationFunctionCopy
 {
 	return new HyperbolicTangentFunction(*this);
 }
+
+float HyperbolicTangentFunction::getMaximum()
+{
+	return 1;
+}
+
+float HyperbolicTangentFunction::getMinimum()
+{
+	return -1;
+}
+
+bool HyperbolicTangentFunction::isLinear()
+{
+	return false;
+}

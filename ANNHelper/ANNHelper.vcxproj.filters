@@ -71,9 +71,6 @@
     <ClInclude Include="Teacher.hpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClInclude>
-    <ClInclude Include="TeachingLesson.hpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClInclude>
     <ClInclude Include="BinaryFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
@@ -131,6 +128,15 @@
     <ClInclude Include="AbstractActivationOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractTeachingLesson.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="TeachingLessonBooleanInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="TeachingLessonLinearInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,9 +173,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Teacher.cpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClCompile>
-    <ClCompile Include="TeachingLesson.cpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
     <ClCompile Include="BinaryFunction.cpp">
@@ -228,6 +231,15 @@
     </ClCompile>
     <ClCompile Include="AbstractActivationOrder.cpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractTeachingLesson.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="TeachingLessonBooleanInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="TeachingLessonLinearInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

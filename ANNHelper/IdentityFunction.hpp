@@ -19,6 +19,9 @@ public:
 	float executeDerivation(float input, float threshold);
 	AbstractOutputFunction* getOutputFunctionCopy();
 	AbstractActivationFunction* getActivationFunctionCopy();
+	float getMaximum();
+	float getMinimum();
+	bool isLinear();
 };
 
 #endif

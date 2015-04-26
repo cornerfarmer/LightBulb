@@ -252,6 +252,96 @@
         LastKnownName="NeuronFactory"
         LastKnownLocation="Package_1109.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="71ab5692-ccab-4128-861d-086cdbca2e0e"
+        name="TeachingLessonLinearPattern"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="d3f415d4-903a-427d-b62c-de6d9976d5e6"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="59cb5bf9-d853-4aa7-a7bc-5ea4d6c9affc">
+                <propertyInstance
+                  Id="5683c14f-608f-4f86-9562-300115edaec3"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="624f8695-aa72-48b3-8a01-7d75c429ebd7">
+                <propertyInstance
+                  Id="20e529d2-aac9-44c3-9539-ab706826bccd"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1fe1bffd-8cd0-4b3d-9ded-f9bb6a18d332">
+                <propertyInstance
+                  Id="ab21b574-524e-4581-86f9-2aeadacb55cd"
+                  name="IsStatic"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a7bf30c8-f621-4f6d-82ad-ae66053f32a3">
+                <propertyInstance
+                  Id="08153a22-ba3b-4d8a-bc25-217be1736e5b"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="fd36bac0-feff-4478-9645-986e84d6698d">
+                <propertyInstance
+                  Id="65002e09-3d51-487c-b264-9aab9f8d5549"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="d6075bb8-fa6f-4ee7-b959-817d14b94f5e"
+            name="teachingInput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="6f3a499c-d566-4f8b-9d5c-876f78401779"
+            name="teachingPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

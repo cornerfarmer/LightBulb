@@ -14,6 +14,9 @@ public:
 	virtual float executeDerivation(float input, float threshold) = 0;
 	// Create a copy of the object
 	virtual AbstractActivationFunction* getActivationFunctionCopy() = 0;
+	virtual float getMaximum() = 0;
+	virtual float getMinimum() = 0;
+	virtual bool isLinear() = 0;
 };
 
 #endif

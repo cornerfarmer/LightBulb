@@ -7,7 +7,7 @@
 #include <vector>
 
 // Forward declarations
-class TeachingLesson;
+class AbstractTeachingLesson;
 class NeuralNetwork;
 class AbstractActivationOrder;
 
@@ -15,13 +15,13 @@ class AbstractActivationOrder;
 class Teacher
 {
 private:
-	std::vector<TeachingLesson*> teachingLessons;
+	std::vector<AbstractTeachingLesson*> teachingLessons;
 public:
 	~Teacher();
 	// Adds a new TechingLessont to the teachingLessons list
-	void addTeachingLesson(TeachingLesson* newTeachingLesson);
+	void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson);
 	// Get all techingLessons (Useful for online learning)
-	std::vector<TeachingLesson*>* getTeachingLessons();
+	std::vector<AbstractTeachingLesson*>* getTeachingLessons();
 	// Calculate the total error (Useful for offline learning)
 	float getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, float weightDecayfac);
 };

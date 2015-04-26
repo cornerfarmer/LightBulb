@@ -15,6 +15,9 @@ public:
 	// Error - No derivation available
 	float executeDerivation(float input, float threshold);
 	AbstractActivationFunction* getActivationFunctionCopy();
+	float getMaximum();
+	float getMinimum();
+	bool isLinear();
 };
 
 #endif

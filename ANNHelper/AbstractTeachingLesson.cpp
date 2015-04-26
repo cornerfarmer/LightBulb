@@ -1,25 +1,18 @@
-#include "TeachingLesson.hpp"
+#include "AbstractTeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
+#include "AbstractNetworkTopology.hpp"
+#include "StandardNeuron.hpp"
 
-TeachingLesson::~TeachingLesson()
+std::unique_ptr<std::vector<float>> AbstractTeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
-	delete(teachingInput);
-	delete(teachingPattern);
-}
+	// Get the teachingInput
+	std::vector<float>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
 
-TeachingLesson::TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_)
-{
-	teachingInput = teachingInput_;
-	teachingPattern = teachingPattern_;
-}
-
-std::unique_ptr<std::vector<float>> TeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
-{
 	// Create the errorVector with the right size
 	std::unique_ptr<std::vector<float>> errorVector(new std::vector<float>(teachingInput->size()));
 
 	// Insert the input
-	neuralNetwork.setInput(*teachingPattern);
+	neuralNetwork.setInput(*getTeachingPattern());
 	// Let the network calculate
 	neuralNetwork.refreshAllNeurons(activationOrder);
 	// Extract the output
@@ -34,17 +27,17 @@ std::unique_ptr<std::vector<float>> TeachingLesson::getErrorvector(NeuralNetwork
 	return errorVector;
 }
 
-float TeachingLesson::getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+float AbstractTeachingLesson::getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	return 0;
 }
 
-float TeachingLesson::getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+float AbstractTeachingLesson::getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	return 0;
 }
 
-float TeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+float AbstractTeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	// Calculate the errorVector
 	std::unique_ptr<std::vector<float>> errorVector = getErrorvector(neuralNetwork, activationOrder);

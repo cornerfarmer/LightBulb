@@ -1,7 +1,7 @@
 #include "ResilientBackpropagationLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TopologicalOrder.hpp"
-#include "TeachingLesson.hpp"
+#include "AbstractTeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "LayeredNetwork.hpp"
 #include "AbstractNeuron.hpp"

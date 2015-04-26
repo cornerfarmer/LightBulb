@@ -97,7 +97,9 @@
     <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
     <ClCompile Include="Teacher.cpp" />
-    <ClCompile Include="TeachingLesson.cpp" />
+    <ClCompile Include="AbstractTeachingLesson.cpp" />
+    <ClCompile Include="TeachingLessonBooleanInput.cpp" />
+    <ClCompile Include="TeachingLessonLinearInput.cpp" />
     <ClCompile Include="TopologicalOrder.cpp" />
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
@@ -130,7 +132,9 @@
     <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
     <ClInclude Include="Teacher.hpp" />
-    <ClInclude Include="TeachingLesson.hpp" />
+    <ClInclude Include="AbstractTeachingLesson.hpp" />
+    <ClInclude Include="TeachingLessonBooleanInput.hpp" />
+    <ClInclude Include="TeachingLessonLinearInput.hpp" />
     <ClInclude Include="TopologicalOrder.hpp" />
     <ClInclude Include="WeightedSumFunction.hpp" />
   </ItemGroup>

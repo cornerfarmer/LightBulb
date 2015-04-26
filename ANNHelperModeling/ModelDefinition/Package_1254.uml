@@ -64,7 +64,7 @@
             isAbstract="false">
             <classMoniker
               Id="3b2a52ef-f690-4396-8ee9-79714201c427"
-              LastKnownName="TeachingLesson"
+              LastKnownName="AbstractTeachingLesson"
               LastKnownLocation="Package_1254.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -176,8 +176,8 @@
     <packageHasNamedElement>
       <class
         Id="3b2a52ef-f690-4396-8ee9-79714201c427"
-        name="TeachingLesson"
-        isAbstract="false"
+        name="AbstractTeachingLesson"
+        isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
         <appliedStereotypesInternal>
@@ -301,44 +301,6 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
-        <ownedAttributesInternal>
-          <property
-            Id="bc16a44c-2b42-4789-94cf-d7be57722444"
-            name="teachingInput"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
-                LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="cd1cb944-b4ab-457b-8b4d-2884861864e6"
-            name="teachingPattern"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
-                LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
-            </type_NamedElement>
-          </property>
-        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
             Id="9ca05e39-1b49-4e36-bc38-38137f5100b6"
@@ -492,6 +454,56 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="2f6badcc-0a35-4ea7-9f53-4e5fcbb026f9"
+            name="getTeachingInput"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5d409f93-717b-42d1-a9d7-58b1d41b6f78"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                      LastKnownName="float[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="e3eac2ec-e2b3-4aff-8c3a-9d688a0250a9"
+            name="getTeachingPattern"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="38e4f105-53e0-47e8-9605-a5b92c4d7fb9"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                      LastKnownName="float[]"
+                      LastKnownLocation="ANNHelperModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -608,6 +620,301 @@
       <undefinedType
         Id="60212edb-d195-4694-82c9-ce9d963ee5cb"
         name="TeachinLesson[]" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8c7a7813-4ce9-43b7-8690-ca2e02e08e32"
+        name="LinearTeachingLesson"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="c1645c6b-fef9-4847-9c41-77cef57df540"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bea8ba56-9e54-4fb9-add4-4cbd47770d9f">
+                <propertyInstance
+                  Id="fd19d001-43cd-4886-aa7a-8589df44d1cf"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e307c85c-0d4e-4e45-a4c9-9616fd890a10">
+                <propertyInstance
+                  Id="2dade226-7361-4fc8-8b05-bbfc8f22b0f5"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0082fe61-51ed-4ec8-bdbd-25f331e81181">
+                <propertyInstance
+                  Id="6962ff4c-8f42-4c5d-aeeb-2fe029715ea0"
+                  name="IsStatic"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0221ad2b-0b3e-487a-8f15-549e23ed390e">
+                <propertyInstance
+                  Id="16043b57-0580-41a5-ba87-b00aeda26d2c"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="126f4252-c4de-4858-bb79-af1812d14d84">
+                <propertyInstance
+                  Id="484f0be6-b887-47a2-b8c1-2f255c1c43f0"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="4cc86775-0ae1-4d24-aab4-eca761ccaf76"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3b2a52ef-f690-4396-8ee9-79714201c427"
+              LastKnownName="AbstractTeachingLesson"
+              LastKnownLocation="Package_1254.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="9892b227-9b2b-4344-a823-1b218806c5a7"
+            name="teachingInput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="61c0f85d-f48a-4fe2-9ab0-bf06dad15bd1"
+            name="teachingPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="d4044b77-9b76-49e5-900f-5e761567e34c"
+        name="BooleanTeachingLesson"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="b25f0aa2-6644-44b7-b282-6716eeb963e6"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b4acb326-9045-420d-a318-758dde8490dd">
+                <propertyInstance
+                  Id="c022f535-4228-4023-b924-5dce59c507c1"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3ba043d9-701d-4970-9c88-249688cd3b20">
+                <propertyInstance
+                  Id="f9934525-7c30-439e-a48c-251499967453"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c5c2a7f5-5bcb-4739-8ecf-d285ca957147">
+                <propertyInstance
+                  Id="6d242140-ec0a-4939-8b37-dac8ac0a4a29"
+                  name="IsStatic"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d2c9c336-b50d-4e9d-8281-892e54de6358">
+                <propertyInstance
+                  Id="18f377bc-ece4-4a2c-9a75-6c90756a610f"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ffbdb3f5-1db3-4397-a404-532a1eb69999">
+                <propertyInstance
+                  Id="f4b61e29-a469-4896-9327-6e4f4a4e273d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="580a582b-be86-4b91-9089-a7af4fb74d3f"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3b2a52ef-f690-4396-8ee9-79714201c427"
+              LastKnownName="AbstractTeachingLesson"
+              LastKnownLocation="Package_1254.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="6d6dad3a-c37e-4854-b799-ddc7824917e7"
+            name="teachingInput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="3f17b7a7-cc25-4952-9ad6-0ba0572da8a6"
+                LastKnownName="bool[]"
+                LastKnownLocation="Package_1254.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="2c5b571e-f3da-4640-b285-c26093450b4b"
+            name="teachingPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8f2a17c2-2ba8-4ff0-a06a-188da89d47da"
+        name="LinearTeachingLesson1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="140b909b-cb48-4b22-9dfa-2eefacc25f3e"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1884299a-03a2-49c9-9f87-5a3fc791616b">
+                <propertyInstance
+                  Id="c8acdeb5-4b0d-403a-afbe-5e05361f01fd"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7fb4b3a9-bdf4-42e0-ac04-3ddb1baf2bce">
+                <propertyInstance
+                  Id="384b940b-cd97-41e9-903e-6b040ba2b1a7"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f7f22fbc-0160-43f6-b02d-6dff36930d43">
+                <propertyInstance
+                  Id="fd2fcff9-df88-45e3-948e-92a3bf4a4f6f"
+                  name="IsStatic"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="55b635f0-438d-4f51-af8d-55e27d563e43">
+                <propertyInstance
+                  Id="d2a2e058-ba11-46c0-b044-8a71fab3aec1"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="fc7ec930-6daa-43da-8a10-bb46a5b6faa8">
+                <propertyInstance
+                  Id="cedea29a-f06c-412e-a047-9430fd7d0ea1"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="0426b856-6674-470b-b81b-025351f9bd78"
+            name="teachingInput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="ec45329b-0b61-4cba-abda-98291e26a11f"
+            name="teachingPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
+                LastKnownName="float[]"
+                LastKnownLocation="ANNHelperModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="3f17b7a7-cc25-4952-9ad6-0ba0572da8a6"
+        name="bool[]" />
     </packageHasNamedElement>
   </packagedElements>
 </package>

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _TEACHINGLESSON_H_
-#define _TEACHINGLESSON_H_
+#ifndef _ABSTRACTTEACHINGLESSON_H_
+#define _ABSTRACTTEACHINGLESSON_H_
 
 // Library Includes
 #include <vector>
@@ -9,17 +9,17 @@
 // Forward declarations
 class NeuralNetwork;
 class AbstractActivationOrder;
+class AbstractActivationFunction;
 
-class TeachingLesson
+class AbstractTeachingLesson
 {
-private:
-	// The values the neural network should give back
-	std::vector<float>* teachingInput;
-	// The values we will put into the neural network
-	std::vector<float>* teachingPattern;
+protected:
+	// This method should return a float vector of the teachingInput 
+	virtual std::vector<float>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
+	// This method should return a float vector of the teachingPattern
+	virtual std::vector<float>* getTeachingPattern() = 0;
 public:
-	~TeachingLesson();
-	TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_);
+	virtual ~AbstractTeachingLesson() {}
 	// Calculate the Errorvector
 	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the euclidient distance

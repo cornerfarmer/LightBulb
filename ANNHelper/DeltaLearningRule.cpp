@@ -1,7 +1,7 @@
 #include "DeltaLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TopologicalOrder.hpp"
-#include "TeachingLesson.hpp"
+#include "AbstractTeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "AbstractNeuron.hpp"
 #include "AbstractNetworkTopology.hpp"
@@ -29,7 +29,7 @@ bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 	while (teacher.getTotalError(neuralNetwork, activationOrder, 0) > 0)
 	{
 		// Go through every TeachingLesson
-		for (std::vector<TeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+		for (std::vector<AbstractTeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 		{
 			// Calculate the errorvector 
 			std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);

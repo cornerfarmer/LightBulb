@@ -1,6 +1,6 @@
 ﻿#include "Teacher.hpp"
 #include "AbstractActivationOrder.hpp"
-#include "TeachingLesson.hpp"
+#include "AbstractTeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "AbstractNetworkTopology.hpp"
 #include "AbstractNeuron.hpp"
@@ -14,13 +14,13 @@ Teacher::~Teacher()
 	}
 }
 
-void Teacher::addTeachingLesson(TeachingLesson* newTeachingLesson)
+void Teacher::addTeachingLesson(AbstractTeachingLesson* newTeachingLesson)
 {
 	// Add the newTeachingLesson to the list
 	teachingLessons.push_back(newTeachingLesson);
 }
 
-std::vector<TeachingLesson*>* Teacher::getTeachingLessons()
+std::vector<AbstractTeachingLesson*>* Teacher::getTeachingLessons()
 {
 	return &teachingLessons;
 }
@@ -30,7 +30,7 @@ float Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrd
 	float totalError = 0;
 
 	// Add every specific error to the total error
-	for (std::vector<TeachingLesson*>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+	for (std::vector<AbstractTeachingLesson*>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
 	{
 		totalError += (*teachingLesson)->getSpecificError(neuralNetwork, activationOrder);
 	}

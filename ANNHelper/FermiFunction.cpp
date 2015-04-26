@@ -26,3 +26,18 @@ AbstractActivationFunction* FermiFunction::getActivationFunctionCopy()
 {
 	return new FermiFunction(*this);
 }
+
+float FermiFunction::getMaximum()
+{
+	return 1;
+}
+
+float FermiFunction::getMinimum()
+{
+	return 0;
+}
+
+bool FermiFunction::isLinear()
+{
+	return false;
+}
