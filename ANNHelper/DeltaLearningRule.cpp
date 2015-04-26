@@ -13,11 +13,11 @@ bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 {
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
-		throw std::exception();
+		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	if (dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
-		throw std::exception();
+		throw std::invalid_argument("The given neuralNetwork has to contain exactly two layers");
 	if (teacher.getTeachingLessons()->size() == 0)
-		throw std::exception();
+		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
 
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;

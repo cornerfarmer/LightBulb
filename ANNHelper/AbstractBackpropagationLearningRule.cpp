@@ -17,18 +17,18 @@ AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(Backpro
 	options = options_;
 	// Check if all given options are correct
 	if (options.totalErrorGoal < 0)
-		throw std::exception();
+		throw std::invalid_argument("The totalErrorGoal has to be greater than or equal to 0");
 	if (options.maxTotalErrorValue <= options.totalErrorGoal)
-		throw std::exception();
+		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 }
 
 float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning)
 {	
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
-		throw std::exception();
+		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	if (teacher.getTeachingLessons()->size() == 0)
-		throw std::exception();
+		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
 
 	// Get all output neurons
 	std::vector<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();

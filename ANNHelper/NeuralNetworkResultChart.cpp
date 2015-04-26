@@ -20,11 +20,11 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	// Check if all given options are correct
 	// Check if the output and input neuron indices are correct
 	if (options->xInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
-		throw std::exception();
+		throw std::invalid_argument("Can't find any inputNeuron with index 'xInputNeuronIndex'");
 	if (options->yInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
-		throw std::exception();
-	if (options->outputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
-		throw std::exception();
+		throw std::invalid_argument("Can't find any inputNeuron with index 'yInputNeuronIndex'");
+	if (options->outputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getOutputNeurons()->size())
+		throw std::invalid_argument("Can't find any outputNeuron with index 'outputNeuronIndex'");
 
 	// Create a new pixel array, which will contain all color informations
 	sf::Uint8* pixels = new sf::Uint8[options->width*options->height*4];

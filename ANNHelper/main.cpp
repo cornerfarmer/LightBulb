@@ -25,8 +25,8 @@
 void doNNTest()
 {
 	LayeredNetworkOptions* layeredNetworkOptions = new LayeredNetworkOptions();
-	layeredNetworkOptions->neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
-																				new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	layeredNetworkOptions->neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction(), 
+																				new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions->neuronsPerLayerCount[0]=8;
 	layeredNetworkOptions->neuronsPerLayerCount[1]=3;
@@ -57,8 +57,8 @@ void doNNTest()
 		std::vector<float>* teachingInput= new std::vector<float>(8);
 		for (int l=0;l<8;l+=1)
 		{			
-			(*teachingPattern)[l] = (i == l ? 1 : 0);
-			(*teachingInput)[l] = (i == l ? 1 : 0);	
+			(*teachingPattern)[l] = (i == l ? 1 : -1);
+			(*teachingInput)[l] = (i == l ? 1 : -1);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 		}
 		teacher.addTeachingLesson(new TeachingLesson(teachingPattern, teachingInput));

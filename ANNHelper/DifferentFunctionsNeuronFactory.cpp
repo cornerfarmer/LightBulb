@@ -21,17 +21,17 @@ DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(InputFunction* 
 {
 	// Check if all given options are correct
 	if (!activationFunctionInnerNeuron_)
-		throw std::exception();
+		throw std::invalid_argument("The given activationFunctionInnerNeuron is not valid");
 	if (!inputFunctionInnerNeuron_)
-		throw std::exception();
+		throw std::invalid_argument("The given inputFunctionInnerNeuron is not valid");
 	if (!outputFunctionInnerNeuron_)
-		throw std::exception();
+		throw std::invalid_argument("The given outputFunctionInnerNeuron is not valid");
 	if (!activationFunctionOutputNeuron_)
-		throw std::exception();
+		throw std::invalid_argument("The given activationFunctionOutputNeuron is not valid");
 	if (!inputFunctionOutputNeuron_)
-		throw std::exception();
+		throw std::invalid_argument("The given inputFunctionOutputNeuron is not valid");
 	if (!outputFunctionOutputNeuron_)
-		throw std::exception();
+		throw std::invalid_argument("The given outputFunctionOutputNeuron is not valid");
 
 	// Functions for inner neurons
 	activationFunctionInnerNeuron = activationFunctionInnerNeuron_;

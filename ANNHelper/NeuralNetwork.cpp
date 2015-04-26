@@ -14,7 +14,7 @@ NeuralNetwork::NeuralNetwork(NetworkTopology* networkTopology_)
 {
 	// Check if all given options are correct
 	if (!networkTopology_)
-		throw std::exception();
+		throw std::invalid_argument("The given networkTopology is not valid");
 
 	networkTopology = networkTopology_;
 }

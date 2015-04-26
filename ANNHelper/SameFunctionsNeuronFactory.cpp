@@ -17,11 +17,11 @@ SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(InputFunction* inputFunct
 {
 	// Check if all given options are correct
 	if (!activationFunction_)
-		throw std::exception();
+		throw std::invalid_argument("The given activationFunction is not valid");
 	if (!inputFunction_)
-		throw std::exception();
+		throw std::invalid_argument("The given inputFunction is not valid");
 	if (!outputFunction_)
-		throw std::exception();
+		throw std::invalid_argument("The given outputFunction is not valid");
 
 	activationFunction = activationFunction_;
 	inputFunction = inputFunction_;

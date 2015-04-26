@@ -11,7 +11,7 @@ void TopologicalOrder::executeActivation(NetworkTopology &networkTopology)
 
 	// Check if the given networkTopology was a layeredNetwork, else throw a exception
 	if (!layeredNetwork)
-		throw std::exception();
+		throw std::invalid_argument("The given networkTopology has to be a layeredNetwork");
 
 	// Go through all layers
 	for (std::vector<std::vector<Neuron*>>::iterator layer = layeredNetwork->getNeurons()->begin(); layer != layeredNetwork->getNeurons()->end(); layer++)
