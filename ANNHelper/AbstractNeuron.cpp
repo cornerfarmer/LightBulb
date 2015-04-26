@@ -1,8 +1,8 @@
-#include "Neuron.hpp"
+#include "AbstractNeuron.hpp"
 #include "Edge.hpp"
 #include "StandardNeuron.hpp"
 
-Neuron::~Neuron()
+AbstractNeuron::~AbstractNeuron()
 {
 	for (std::vector<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
 	{
@@ -10,13 +10,13 @@ Neuron::~Neuron()
 	}
 }
 
-Neuron::Neuron()
+AbstractNeuron::AbstractNeuron()
 {
 	// Set the activation to 0
 	activation = 0;
 }
 
-void Neuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
+void AbstractNeuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
 {
 	// Create a new edge between this and the newPrevNeuron
 	Edge* newEdge = new Edge(this, newNextNeuron, weight);
@@ -26,18 +26,18 @@ void Neuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
 	newNextNeuron->addPrevNeuron(newEdge);	
 }
 
-void Neuron::addNextNeuron(Edge* newEdge)
+void AbstractNeuron::addNextNeuron(Edge* newEdge)
 {
 	// Add the newEdge to the afferentEdge list
 	efferentEdges.push_back(newEdge);
 }
 
-float Neuron::getActivation()
+float AbstractNeuron::getActivation()
 {
 	return activation;
 }
 
-std::vector<Edge*>* Neuron::getEfferentEdges()
+std::vector<Edge*>* AbstractNeuron::getEfferentEdges()
 {
 	return &efferentEdges;
 }

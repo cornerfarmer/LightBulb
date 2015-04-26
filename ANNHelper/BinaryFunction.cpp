@@ -15,7 +15,7 @@ float BinaryFunction::executeDerivation(float input, float threshold)
 	return 0;
 }
 
-ActivationFunction* BinaryFunction::getActivationFunctionCopy()
+AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy()
 {
 	return new BinaryFunction(*this);
 }

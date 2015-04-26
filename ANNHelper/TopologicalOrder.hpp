@@ -4,16 +4,16 @@
 #define _TOPOLOGICALORDER_H_
 
 // Includes
-#include "ActivationOrder.hpp"
+#include "AbstractActivationOrder.hpp"
 
 // With this order, neurons will get activated layer by layer
 // This class is only compatible with a LayeredNetwork!
-class TopologicalOrder : public ActivationOrder
+class TopologicalOrder : public AbstractActivationOrder
 {
 private:
 public:
 	// Activates all neurons in the given layered(!) topology in a topological order
-	void executeActivation(NetworkTopology &networkTopology);
+	void executeActivation(AbstractNetworkTopology &networkTopology);
 };
 
 #endif

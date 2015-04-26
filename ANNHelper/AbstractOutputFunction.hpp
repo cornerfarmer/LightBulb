@@ -1,18 +1,18 @@
 #pragma once
 
-#ifndef _OUTPUTFUNCTION_H_
-#define _OUTPUTFUNCTION_H_
+#ifndef _ABSTRACTOUTPUTFUNCTION_H_
+#define _ABSTRACTOUTPUTFUNCTION_H_
 
 // An OutputFunction calculates the output of a neuron from its activation
-class OutputFunction
+class AbstractOutputFunction
 {
 private:
 public:
-	virtual ~OutputFunction() {}
+	virtual ~AbstractOutputFunction() {}
 	// Calculate the output from the activation
 	virtual float execute(float activation) = 0;
 	// Create a copy of the object
-	virtual OutputFunction* getOutputFunctionCopy() = 0;
+	virtual AbstractOutputFunction* getOutputFunctionCopy() = 0;
 };
 
 #endif

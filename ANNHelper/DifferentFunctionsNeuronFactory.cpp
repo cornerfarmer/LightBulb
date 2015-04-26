@@ -1,9 +1,9 @@
 #include "DifferentFunctionsNeuronFactory.hpp"
 #include "InputNeuron.hpp"
 #include "StandardNeuron.hpp"
-#include "InputFunction.hpp"
-#include "ActivationFunction.hpp"
-#include "OutputFunction.hpp"
+#include "AbstractInputFunction.hpp"
+#include "AbstractActivationFunction.hpp"
+#include "AbstractOutputFunction.hpp"
 #include <exception>
 
 DifferentFunctionsNeuronFactory::~DifferentFunctionsNeuronFactory()
@@ -17,7 +17,7 @@ DifferentFunctionsNeuronFactory::~DifferentFunctionsNeuronFactory()
 	delete(outputFunctionOutputNeuron);
 }
 
-DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(InputFunction* inputFunctionInnerNeuron_, ActivationFunction* activationFunctionInnerNeuron_, OutputFunction* outputFunctionInnerNeuron_, InputFunction* inputFunctionOutputNeuron_, ActivationFunction* activationFunctionOutputNeuron_, OutputFunction* outputFunctionOutputNeuron_)
+DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_)
 {
 	// Check if all given options are correct
 	if (!activationFunctionInnerNeuron_)

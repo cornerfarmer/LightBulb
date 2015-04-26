@@ -60,7 +60,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
-              LastKnownName="LearningRule"
+              LastKnownName="AbstractLearningRule"
               LastKnownLocation="Package_1256.uml" />
           </generalization>
         </generalsInternal>
@@ -69,7 +69,7 @@
     <packageHasNamedElement>
       <class
         Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
-        name="LearningRule"
+        name="AbstractLearningRule"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -244,7 +244,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
-              LastKnownName="LearningRule"
+              LastKnownName="AbstractLearningRule"
               LastKnownLocation="Package_1256.uml" />
           </generalization>
         </generalsInternal>
@@ -301,7 +301,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
-              LastKnownName="LearningRule"
+              LastKnownName="AbstractLearningRule"
               LastKnownLocation="Package_1256.uml" />
           </generalization>
         </generalsInternal>

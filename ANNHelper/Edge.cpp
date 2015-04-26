@@ -1,6 +1,6 @@
 #include "Edge.hpp"
 
-Edge::Edge(Neuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_)
+Edge::Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_)
 {
 	prevNeuron = prevNeuron_;
 	nextNeuron = nextNeuron_;
@@ -12,7 +12,7 @@ float Edge::getWeight()
 	return weight;
 }
 
-Neuron* Edge::getPrevNeuron()
+AbstractNeuron* Edge::getPrevNeuron()
 {
 	return prevNeuron;
 }

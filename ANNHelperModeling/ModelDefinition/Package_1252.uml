@@ -187,7 +187,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="2de5c842-f067-4154-a303-57f82bed7d64"
-                LastKnownName="InputFunction"
+                LastKnownName="AbstractInputFunction"
                 LastKnownLocation="Package_1248.uml" />
             </type_NamedElement>
           </property>
@@ -527,7 +527,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="0243159e-574e-461b-9f46-20857f611868"
-                LastKnownName="OutputFunction"
+                LastKnownName="AbstractOutputFunction"
                 LastKnownLocation="Package_1248.uml" />
             </type_NamedElement>
           </property>
@@ -658,7 +658,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="4232794c-10fd-46a3-a8eb-50ab872b8253"
-              LastKnownName="NetworkTopology"
+              LastKnownName="AbstractNetworkTopology"
               LastKnownLocation="Package_1252.uml" />
           </generalization>
         </generalsInternal>
@@ -672,7 +672,7 @@
             isAbstract="false">
             <classMoniker
               Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-              LastKnownName="Neuron"
+              LastKnownName="AbstractNeuron"
               LastKnownLocation="Package_1250.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -929,7 +929,7 @@
     <packageHasNamedElement>
       <class
         Id="4232794c-10fd-46a3-a8eb-50ab872b8253"
-        name="NetworkTopology"
+        name="AbstractNetworkTopology"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -1169,7 +1169,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="4232794c-10fd-46a3-a8eb-50ab872b8253"
-              LastKnownName="NetworkTopology"
+              LastKnownName="AbstractNetworkTopology"
               LastKnownLocation="Package_1252.uml" />
           </generalization>
         </generalsInternal>
@@ -1183,7 +1183,7 @@
             isAbstract="false">
             <classMoniker
               Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-              LastKnownName="Neuron"
+              LastKnownName="AbstractNeuron"
               LastKnownLocation="Package_1250.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>

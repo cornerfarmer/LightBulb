@@ -19,7 +19,7 @@ float HyperbolicTangentFunction::executeDerivation(float input, float threshold)
 
 }
 
-ActivationFunction* HyperbolicTangentFunction::getActivationFunctionCopy()
+AbstractActivationFunction* HyperbolicTangentFunction::getActivationFunctionCopy()
 {
 	return new HyperbolicTangentFunction(*this);
 }

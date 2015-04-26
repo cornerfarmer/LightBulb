@@ -4,7 +4,7 @@
 #define _EDGE_H_
 
 // Forward declarations
-class Neuron;
+class AbstractNeuron;
 class StandardNeuron;
 
 // A Edge connects two Neurons
@@ -12,13 +12,13 @@ class Edge
 {
 private:
 	float weight;
-	Neuron* prevNeuron;
+	AbstractNeuron* prevNeuron;
 	StandardNeuron* nextNeuron;
 public:
-	Edge(Neuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_);	
+	Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_);	
 	float getWeight();
 	void setWeight(float newWeight);
-	Neuron* getPrevNeuron();
+	AbstractNeuron* getPrevNeuron();
 	StandardNeuron* getNextNeuron();	
 };
 

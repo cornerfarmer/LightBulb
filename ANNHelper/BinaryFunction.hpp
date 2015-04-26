@@ -4,9 +4,9 @@
 #define _BINARYFUNCTION_H_
 
 // Includes
-#include "ActivationFunction.hpp"
+#include "AbstractActivationFunction.hpp"
 
-class BinaryFunction : public ActivationFunction
+class BinaryFunction : public AbstractActivationFunction
 {
 private:
 public:
@@ -14,7 +14,7 @@ public:
 	float execute(float input, float threshold);
 	// Error - No derivation available
 	float executeDerivation(float input, float threshold);
-	ActivationFunction* getActivationFunctionCopy();
+	AbstractActivationFunction* getActivationFunctionCopy();
 };
 
 #endif

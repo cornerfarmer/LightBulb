@@ -4,8 +4,8 @@
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "LayeredNetwork.hpp"
-#include "Neuron.hpp"
-#include "NetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
+#include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 #include <iostream>
@@ -22,7 +22,7 @@ AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(Backpro
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 }
 
-float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning)
+float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool offlineLearning)
 {	
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
@@ -31,14 +31,14 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
 
 	// Get all output neurons
-	std::vector<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
+	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
 	std::vector<float> offlineLearningGradients(dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getEdgeCount());
 
 	// Create a vector which will contain all delta values of the neurons in the output layer
 	std::vector<std::vector<float>> deltaVectorOutputLayer;
 	
-	for (std::vector<std::vector<Neuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		deltaVectorOutputLayer.push_back(std::vector<float>((*layer).size()));
 	}	
@@ -107,10 +107,10 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 				for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
 				{			
 					// Go through all neurons in this layer
-					std::vector<Neuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
 					int neuronsInLayerCount = neuronsInLayer->size();
 					int neuronIndex = 0;
-					for (std::vector<Neuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
+					for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
 					{						
 						// If its the last layer
 						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1)
@@ -180,10 +180,10 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 				for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
 				{
 					// Go through all neurons in this layer
-					std::vector<Neuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
 					int neuronsInLayerCount = neuronsInLayer->size();
 					int neuronIndex = 0;
-					for (std::vector<Neuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
+					for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
 					{						
 						// If its the last layer
 						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1)

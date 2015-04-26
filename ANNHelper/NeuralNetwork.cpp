@@ -1,7 +1,7 @@
 #include "NeuralNetwork.hpp"
-#include "NetworkTopology.hpp"
-#include "Neuron.hpp"
-#include "ActivationOrder.hpp"
+#include "AbstractNetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
+#include "AbstractActivationOrder.hpp"
 #include "InputNeuron.hpp"
 #include <exception>
 
@@ -10,7 +10,7 @@ NeuralNetwork::~NeuralNetwork()
 	delete(networkTopology);
 }
 
-NeuralNetwork::NeuralNetwork(NetworkTopology* networkTopology_)
+NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 {
 	// Check if all given options are correct
 	if (!networkTopology_)
@@ -19,7 +19,7 @@ NeuralNetwork::NeuralNetwork(NetworkTopology* networkTopology_)
 	networkTopology = networkTopology_;
 }
 
-void NeuralNetwork::refreshAllNeurons(ActivationOrder &activationOrder)
+void NeuralNetwork::refreshAllNeurons(AbstractActivationOrder &activationOrder)
 {
 	// Pass the work to the activationOrder :)
 	activationOrder.executeActivation(*networkTopology);
@@ -28,13 +28,13 @@ void NeuralNetwork::refreshAllNeurons(ActivationOrder &activationOrder)
 std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
 {
 	// Get all output Neurons
-	std::vector<Neuron*>* outputNeurons = networkTopology->getOutputNeurons();
+	std::vector<AbstractNeuron*>* outputNeurons = networkTopology->getOutputNeurons();
 	
 	// Create a new float vector, which will contain all output values
 	std::unique_ptr<std::vector<float>> outputValues(new std::vector<float>());
 
 	// Go through all neurons and copy the activation values into the output vector
-	for (std::vector<Neuron*>::iterator neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
+	for (std::vector<AbstractNeuron*>::iterator neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
 	{
 		outputValues->push_back((*neuron)->getActivation());
 	}
@@ -45,17 +45,17 @@ std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
 void NeuralNetwork::setInput(std::vector<float> &inputVector)
 {
 	// Get all input Neurons
-	std::vector<Neuron*>* inputNeurons = networkTopology->getInputNeurons();
+	std::vector<AbstractNeuron*>* inputNeurons = networkTopology->getInputNeurons();
 
 	// Go through all neurons and copy the input values into the inputNeurons
 	int index = 0;
-	for (std::vector<Neuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && index < inputVector.size(); neuron++, index++)
+	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && index < inputVector.size(); neuron++, index++)
 	{
 		dynamic_cast<InputNeuron*>(*neuron)->setInput(inputVector[index]);
 	}
 }
 
-NetworkTopology* NeuralNetwork::getNetworkTopology()
+AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
 {
 	return networkTopology;
 }

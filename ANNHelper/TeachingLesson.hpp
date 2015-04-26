@@ -8,7 +8,7 @@
 
 // Forward declarations
 class NeuralNetwork;
-class ActivationOrder;
+class AbstractActivationOrder;
 
 class TeachingLesson
 {
@@ -21,13 +21,13 @@ public:
 	~TeachingLesson();
 	TeachingLesson(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_);
 	// Calculate the Errorvector
-	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
+	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the euclidient distance
-	float getEuclidienDistance(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
+	float getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the RootMeanSquare
-	float getRMS(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
+	float getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the specific error
-	float getSpecificError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder);
+	float getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 };
 
 #endif

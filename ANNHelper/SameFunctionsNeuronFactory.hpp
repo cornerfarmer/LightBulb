@@ -9,20 +9,20 @@
 // Forward declarations
 class InputNeuron;
 class StandardNeuron;
-class ActivationFunction;
-class InputFunction;
-class OutputFunction;
+class AbstractActivationFunction;
+class AbstractInputFunction;
+class AbstractOutputFunction;
 
 // This is the standard neuron factory, where every neuron has the same functions
 class SameFunctionsNeuronFactory : public AbstractNeuronFactory
 {
 private:
-	ActivationFunction* activationFunction;
-	InputFunction* inputFunction;
-	OutputFunction* outputFunction;
+	AbstractActivationFunction* activationFunction;
+	AbstractInputFunction* inputFunction;
+	AbstractOutputFunction* outputFunction;
 public:	
 	~SameFunctionsNeuronFactory();
-	SameFunctionsNeuronFactory(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_);
+	SameFunctionsNeuronFactory(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();
 	StandardNeuron* createOutputNeuron();

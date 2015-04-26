@@ -1,8 +1,8 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
-#include "InputFunction.hpp"
-#include "ActivationFunction.hpp"
-#include "OutputFunction.hpp"
+#include "AbstractInputFunction.hpp"
+#include "AbstractActivationFunction.hpp"
+#include "AbstractOutputFunction.hpp"
 
 StandardNeuron::~StandardNeuron()
 {
@@ -11,7 +11,7 @@ StandardNeuron::~StandardNeuron()
 	delete(outputFunction);
 }
 
-StandardNeuron::StandardNeuron(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_)
+StandardNeuron::StandardNeuron(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
 {
 	inputFunction = inputFunction_;
 	activationFunction = activationFunction_;
@@ -20,7 +20,7 @@ StandardNeuron::StandardNeuron(InputFunction* inputFunction_, ActivationFunction
 	netInput = 0;
 }
 
-void StandardNeuron::addPrevNeuron(Neuron* newPrevNeuron, float weight)
+void StandardNeuron::addPrevNeuron(AbstractNeuron* newPrevNeuron, float weight)
 {
 	// Create a new edge between this and the newPrevNeuron
 	Edge* newEdge = new Edge(newPrevNeuron, this, weight);
@@ -61,7 +61,7 @@ float StandardNeuron::executeDerivationOnActivationFunction(float input)
 	return activationFunction->executeDerivation(input, threshold);
 }
 
-ActivationFunction* StandardNeuron::getActivationFunction()
+AbstractActivationFunction* StandardNeuron::getActivationFunction()
 {
 	return activationFunction;
 }

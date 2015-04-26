@@ -28,10 +28,10 @@ LayeredNetwork::~LayeredNetwork()
 	delete(options);
 
 	// Go through all layers
-	for (std::vector<std::vector<Neuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<Neuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			delete(*neuron);
 		}
@@ -56,7 +56,7 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t *options_)
 	for (int l = 0; l < getLayerCount(); l++)
 	{
 		// Add a new list for every layer
-		neurons.push_back(std::vector<Neuron*>());
+		neurons.push_back(std::vector<AbstractNeuron*>());
 
 		// Add the neurons to the current layer
 		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
@@ -77,7 +77,7 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t *options_)
 				neurons.back().push_back(newNeuron);				
 
 				// Add an edge to every neuron of the last layer
-				for (std::vector<Neuron*>::iterator prevNeuron = getNeuronsInLayer(l - 1)->begin(); prevNeuron != getNeuronsInLayer(l - 1)->end(); prevNeuron++)
+				for (std::vector<AbstractNeuron*>::iterator prevNeuron = getNeuronsInLayer(l - 1)->begin(); prevNeuron != getNeuronsInLayer(l - 1)->end(); prevNeuron++)
 				{
 					newNeuron->addPrevNeuron(*prevNeuron, 0);
 				}
@@ -92,22 +92,22 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t *options_)
 		
 }
 
-std::vector<Neuron*>* LayeredNetwork::getInputNeurons()
+std::vector<AbstractNeuron*>* LayeredNetwork::getInputNeurons()
 {
 	// Return the first layer
 	return &neurons.front();
 }
 
-std::vector<Neuron*>* LayeredNetwork::getOutputNeurons()
+std::vector<AbstractNeuron*>* LayeredNetwork::getOutputNeurons()
 {
 	// Return the last layer
 	return &neurons.back();
 }
 
-std::vector<Neuron*>* LayeredNetwork::getNeuronsInLayer(int layerNr)
+std::vector<AbstractNeuron*>* LayeredNetwork::getNeuronsInLayer(int layerNr)
 {	
 	// Get the first layer
-	std::vector<std::vector<Neuron*>>::iterator layer = neurons.begin();
+	std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin();
 	// Go to the layer with nr
 	std::advance(layer, layerNr);
 
@@ -119,7 +119,7 @@ int LayeredNetwork::getLayerCount()
 	return options->neuronsPerLayerCount.size();
 }
 
-std::vector<std::vector<Neuron*>>* LayeredNetwork::getNeurons()
+std::vector<std::vector<AbstractNeuron*>>* LayeredNetwork::getNeurons()
 {
 	return &neurons;
 }
@@ -127,10 +127,10 @@ std::vector<std::vector<Neuron*>>* LayeredNetwork::getNeurons()
 void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 {
 	// Go through all layers
-	for (std::vector<std::vector<Neuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<Neuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Go through all effernetEdges of this neuron
 			std::vector<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
@@ -149,10 +149,10 @@ int LayeredNetwork::getEdgeCount()
 {
 	int edgeCounter = 0;
 	// Go through all layers
-	for (std::vector<std::vector<Neuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<Neuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Add the count of the efferent edges of the current neuron
 			edgeCounter += (*neuron)->getEfferentEdges()->size();

@@ -9,7 +9,7 @@
 // Forward declarations
 class TeachingLesson;
 class NeuralNetwork;
-class ActivationOrder;
+class AbstractActivationOrder;
 
 // A techer manages many techingLessons
 class Teacher
@@ -23,7 +23,7 @@ public:
 	// Get all techingLessons (Useful for online learning)
 	std::vector<TeachingLesson*>* getTeachingLessons();
 	// Calculate the total error (Useful for offline learning)
-	float getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder, float weightDecayfac);
+	float getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, float weightDecayfac);
 };
 
 #endif

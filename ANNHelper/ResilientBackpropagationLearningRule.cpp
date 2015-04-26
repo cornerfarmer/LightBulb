@@ -4,16 +4,16 @@
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "LayeredNetwork.hpp"
-#include "Neuron.hpp"
-#include "NetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
+#include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
 ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
 	: AbstractBackpropagationLearningRule(options_)
 {
-	learningRateGrowFac = 1.2;
-	learningRateShrinkFac = 0.5;
+	learningRateGrowFac = 1.2f;
+	learningRateShrinkFac = 0.5f;
 	learningRateMax = 50;
 	learningRateMin = 0.000001f;
 	learningRateStart = 0.2f;

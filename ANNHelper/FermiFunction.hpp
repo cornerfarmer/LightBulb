@@ -4,9 +4,9 @@
 #define _FERMIFUNCTION_H_
 
 // Includes
-#include "ActivationFunction.hpp"
+#include "AbstractActivationFunction.hpp"
 
-class FermiFunction : public ActivationFunction
+class FermiFunction : public AbstractActivationFunction
 {
 private:
 	float temperatureParameter;
@@ -14,7 +14,7 @@ public:
 	FermiFunction(float temperatureParameter_);
 	float execute(float input, float threshold);
 	float executeDerivation(float input, float threshold);
-	ActivationFunction* getActivationFunctionCopy();
+	AbstractActivationFunction* getActivationFunctionCopy();
 };
 
 #endif

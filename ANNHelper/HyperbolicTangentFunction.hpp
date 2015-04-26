@@ -7,10 +7,10 @@
 #include <math.h>
 
 // Includes
-#include "ActivationFunction.hpp"
+#include "AbstractActivationFunction.hpp"
 
 // The IdentityFunction just returns the input without calculating anything
-class HyperbolicTangentFunction : public ActivationFunction
+class HyperbolicTangentFunction : public AbstractActivationFunction
 {
 private:
 public:
@@ -18,7 +18,7 @@ public:
 	float execute(float input, float threshold);
 	// Returns always 0
 	float executeDerivation(float input, float threshold);
-	ActivationFunction* getActivationFunctionCopy();
+	AbstractActivationFunction* getActivationFunctionCopy();
 };
 
 #endif

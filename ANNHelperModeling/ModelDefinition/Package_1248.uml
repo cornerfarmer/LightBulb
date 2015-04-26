@@ -60,7 +60,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="49effd66-f0b4-426d-9168-a326f4137e83"
-              LastKnownName="ActivationFunction"
+              LastKnownName="AbstractActivationFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
         </generalsInternal>
@@ -122,7 +122,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="0243159e-574e-461b-9f46-20857f611868"
-              LastKnownName="OutputFunction"
+              LastKnownName="AbstractOutputFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
           <generalization
@@ -130,7 +130,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="49effd66-f0b4-426d-9168-a326f4137e83"
-              LastKnownName="ActivationFunction"
+              LastKnownName="AbstractActivationFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
         </generalsInternal>
@@ -192,7 +192,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="49effd66-f0b4-426d-9168-a326f4137e83"
-              LastKnownName="ActivationFunction"
+              LastKnownName="AbstractActivationFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
         </generalsInternal>
@@ -254,7 +254,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="49effd66-f0b4-426d-9168-a326f4137e83"
-              LastKnownName="ActivationFunction"
+              LastKnownName="AbstractActivationFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
         </generalsInternal>
@@ -316,7 +316,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="2de5c842-f067-4154-a303-57f82bed7d64"
-              LastKnownName="InputFunction"
+              LastKnownName="AbstractInputFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
         </generalsInternal>
@@ -325,7 +325,7 @@
     <packageHasNamedElement>
       <class
         Id="2de5c842-f067-4154-a303-57f82bed7d64"
-        name="InputFunction"
+        name="AbstractInputFunction"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -417,7 +417,7 @@
     <packageHasNamedElement>
       <class
         Id="49effd66-f0b4-426d-9168-a326f4137e83"
-        name="ActivationFunction"
+        name="AbstractActivationFunction"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -509,7 +509,7 @@
     <packageHasNamedElement>
       <class
         Id="0243159e-574e-461b-9f46-20857f611868"
-        name="OutputFunction"
+        name="AbstractOutputFunction"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -654,7 +654,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="49effd66-f0b4-426d-9168-a326f4137e83"
-              LastKnownName="ActivationFunction"
+              LastKnownName="AbstractActivationFunction"
               LastKnownLocation="Package_1248.uml" />
           </generalization>
         </generalsInternal>

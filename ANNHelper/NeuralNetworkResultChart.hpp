@@ -10,7 +10,7 @@
 
 // Forward declarations
 class NeuralNetwork;
-class ActivationOrder;
+class AbstractActivationOrder;
 
 // This structure describes all options of an NeuralNetworkResultChart
 struct NeuralNetworkResultChartOptions 
@@ -19,7 +19,7 @@ struct NeuralNetworkResultChartOptions
 	unsigned int height;
 	unsigned int width;
 	NeuralNetwork* neuralNetwork;
-	ActivationOrder* activationOrder;	
+	AbstractActivationOrder* activationOrder;	
 	unsigned int xInputNeuronIndex;
 	float xRangeEnd;
 	float xRangeStart;

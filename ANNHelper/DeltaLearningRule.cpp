@@ -3,8 +3,8 @@
 #include "TopologicalOrder.hpp"
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
-#include "Neuron.hpp"
-#include "NetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
+#include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 #include "LayeredNetwork.hpp"
@@ -23,7 +23,7 @@ bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 	TopologicalOrder activationOrder;
 
 	// Get all output neurons
-	std::vector<Neuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
+	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
 	// Do while the totalError is not zero
 	while (teacher.getTotalError(neuralNetwork, activationOrder, 0) > 0)
@@ -35,7 +35,7 @@ bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teache
 			std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);
 
 			// Go through all error values and adjust the concerning neurons
-			std::vector<Neuron*>::iterator outputNeuron = outputNeurons->begin();
+			std::vector<AbstractNeuron*>::iterator outputNeuron = outputNeurons->begin();
 			for (std::vector<float>::iterator errorValue = errorvector->begin(); errorValue != errorvector->end(); errorValue++, outputNeuron++)
 			{
 				// If errorValue is not zero, we have to adjust something

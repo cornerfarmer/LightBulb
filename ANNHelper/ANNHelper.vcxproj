@@ -70,8 +70,8 @@
   <ItemGroup>
     <ClCompile Include="AbstractBackpropagationLearningRule.cpp" />
     <ClCompile Include="AbstractNeuronFactory.cpp" />
-    <ClCompile Include="ActivationFunction.cpp" />
-    <ClCompile Include="ActivationOrder.cpp" />
+    <ClCompile Include="AbstractActivationFunction.cpp" />
+    <ClCompile Include="AbstractActivationOrder.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
     <ClCompile Include="BinaryFunction.cpp" />
     <ClCompile Include="DeltaLearningRule.cpp" />
@@ -81,16 +81,16 @@
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="HyperbolicTangentFunction.cpp" />
     <ClCompile Include="IdentityFunction.cpp" />
-    <ClCompile Include="InputFunction.cpp" />
+    <ClCompile Include="AbstractInputFunction.cpp" />
     <ClCompile Include="InputNeuron.cpp" />
     <ClCompile Include="LayeredNetwork.cpp" />
-    <ClCompile Include="LearningRule.cpp" />
+    <ClCompile Include="AbstractLearningRule.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NetworkTopology.cpp" />
+    <ClCompile Include="AbstractNetworkTopology.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetworkResultChart.cpp" />
-    <ClCompile Include="Neuron.cpp" />
-    <ClCompile Include="OutputFunction.cpp" />
+    <ClCompile Include="AbstractNeuron.cpp" />
+    <ClCompile Include="AbstractOutputFunction.cpp" />
     <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
     <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
@@ -104,8 +104,8 @@
   <ItemGroup>
     <ClInclude Include="AbstractBackpropagationLearningRule.hpp" />
     <ClInclude Include="AbstractNeuronFactory.hpp" />
-    <ClInclude Include="ActivationFunction.hpp" />
-    <ClInclude Include="ActivationOrder.hpp" />
+    <ClInclude Include="AbstractActivationFunction.hpp" />
+    <ClInclude Include="AbstractActivationOrder.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
     <ClInclude Include="BinaryFunction.hpp" />
     <ClInclude Include="DeltaLearningRule.hpp" />
@@ -115,15 +115,15 @@
     <ClInclude Include="GraphicObject.hpp" />
     <ClInclude Include="HyperbolicTangentFunction.hpp" />
     <ClInclude Include="IdentityFunction.hpp" />
-    <ClInclude Include="InputFunction.hpp" />
+    <ClInclude Include="AbstractInputFunction.hpp" />
     <ClInclude Include="InputNeuron.hpp" />
     <ClInclude Include="LayeredNetwork.hpp" />
-    <ClInclude Include="LearningRule.hpp" />
-    <ClInclude Include="NetworkTopology.hpp" />
+    <ClInclude Include="AbstractLearningRule.hpp" />
+    <ClInclude Include="AbstractNetworkTopology.hpp" />
     <ClInclude Include="NeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetworkResultChart.hpp" />
-    <ClInclude Include="Neuron.hpp" />
-    <ClInclude Include="OutputFunction.hpp" />
+    <ClInclude Include="AbstractNeuron.hpp" />
+    <ClInclude Include="AbstractOutputFunction.hpp" />
     <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
     <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />

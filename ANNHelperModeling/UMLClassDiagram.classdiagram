@@ -84,7 +84,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" name="Neuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron::Neuron">
+      <referencedType Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" name="AbstractNeuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron::AbstractNeuron">
         <elementDefinition Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11" />
       </referencedType>
     </packageHasNamedElement>
@@ -99,17 +99,17 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="90829668-cc8c-4313-97fd-4b7b83d18843" name="InputFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::InputFunction">
+      <referencedType Id="90829668-cc8c-4313-97fd-4b7b83d18843" name="AbstractInputFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::AbstractInputFunction">
         <elementDefinition Id="2de5c842-f067-4154-a303-57f82bed7d64" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="ee04e337-bb78-4b65-8e37-fd076d94c231" name="ActivationFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::ActivationFunction">
+      <referencedType Id="ee04e337-bb78-4b65-8e37-fd076d94c231" name="AbstractActivationFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::AbstractActivationFunction">
         <elementDefinition Id="49effd66-f0b4-426d-9168-a326f4137e83" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="0e62e670-2767-4594-be6d-db5b38998103" name="OutputFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::OutputFunction">
+      <referencedType Id="0e62e670-2767-4594-be6d-db5b38998103" name="AbstractOutputFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::AbstractOutputFunction">
         <elementDefinition Id="0243159e-574e-461b-9f46-20857f611868" />
       </referencedType>
     </packageHasNamedElement>
@@ -119,12 +119,12 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="035ce863-5d4f-409b-b0f6-e2351db97327" name="NetworkTopology" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology::NetworkTopology">
+      <referencedType Id="035ce863-5d4f-409b-b0f6-e2351db97327" name="AbstractNetworkTopology" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology::AbstractNetworkTopology">
         <elementDefinition Id="4232794c-10fd-46a3-a8eb-50ab872b8253" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" name="ActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::AcitvationOrder::ActivationOrder">
+      <referencedType Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" name="AbstractActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::AcitvationOrder::AbstractActivationOrder">
         <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
       </referencedType>
     </packageHasNamedElement>
@@ -214,11 +214,11 @@
               <elementDefinition Id="e1a35be3-8014-491b-a53e-a78023dc1964" />
               <generalsInternal>
                 <generalization Id="18e74d4a-d4b5-448a-b4a3-1536c768d3fe" isSubstitutable="false">
-                  <classMoniker Id="21c81844-e225-4d25-9532-4fc4efd33480" LastKnownName="OutputFunction" />
+                  <classMoniker Id="21c81844-e225-4d25-9532-4fc4efd33480" LastKnownName="AbstractOutputFunction" />
                   <elementDefinition Id="67517293-9425-43f3-91d0-bca11ff033da" />
                 </generalization>
                 <generalization Id="fced72ce-5fb5-4a68-b064-cf41d8d82bc7" isSubstitutable="false">
-                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="AbstractActivationFunction" />
                   <elementDefinition Id="51aca3ab-77d3-4ebe-9608-e047e2572b2b" />
                 </generalization>
               </generalsInternal>
@@ -266,7 +266,7 @@
               <elementDefinition Id="2a43ee3e-52d7-4870-93bb-1c7b5ffb3592" />
               <generalsInternal>
                 <generalization Id="287f03b8-1803-4ea0-b69c-2ec8abf9b00c" isSubstitutable="false">
-                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="AbstractActivationFunction" />
                   <elementDefinition Id="9f6240c5-d8a6-48af-8d67-0961e5923d95" />
                 </generalization>
               </generalsInternal>
@@ -314,7 +314,7 @@
               <elementDefinition Id="e6b68d91-63b2-4dfb-a0b8-c02a02605ef4" />
               <generalsInternal>
                 <generalization Id="b0d08601-8e5b-4fdb-b165-2fe9631d7e38" isSubstitutable="false">
-                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="AbstractActivationFunction" />
                   <elementDefinition Id="69e06f51-0bfa-4e33-9f75-1c0f9062d8b6" />
                 </generalization>
               </generalsInternal>
@@ -362,7 +362,7 @@
               <elementDefinition Id="45e9a569-3194-456e-932f-9299992d7572" />
               <generalsInternal>
                 <generalization Id="cc49f1c2-4a47-479a-8362-640e59110ee8" isSubstitutable="false">
-                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="AbstractActivationFunction" />
                   <elementDefinition Id="e8fedf7c-9c20-48a4-a040-37ec56569278" />
                 </generalization>
               </generalsInternal>
@@ -410,14 +410,14 @@
               <elementDefinition Id="894fba75-eca8-40be-890f-ebff183f25bb" />
               <generalsInternal>
                 <generalization Id="fb0720e1-3b0b-49d3-a0e1-ebe4607beb9c" isSubstitutable="false">
-                  <classMoniker Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" LastKnownName="InputFunction" />
+                  <classMoniker Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" LastKnownName="AbstractInputFunction" />
                   <elementDefinition Id="0cf2ac87-176e-4e8f-ad6e-402dc6529149" />
                 </generalization>
               </generalsInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" name="InputFunction" isAbstract="true" isLeaf="false" isActiveClass="false">
+            <class Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" name="AbstractInputFunction" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="3678a982-89b1-4c18-9c20-4907b64f0175" name="class" profile="CSharpProfile">
                   <elementDefinition Id="7b183824-441c-4a49-a6f5-cb37b568ea19" />
@@ -482,7 +482,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" name="ActivationFunction" isAbstract="true" isLeaf="false" isActiveClass="false">
+            <class Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" name="AbstractActivationFunction" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="a46a0704-f22c-43f8-b87f-58096f47b5ca" name="class" profile="CSharpProfile">
                   <elementDefinition Id="83e5882c-d4df-481b-a906-0958ccb70266" />
@@ -547,7 +547,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="21c81844-e225-4d25-9532-4fc4efd33480" name="OutputFunction" isAbstract="true" isLeaf="false" isActiveClass="false">
+            <class Id="21c81844-e225-4d25-9532-4fc4efd33480" name="AbstractOutputFunction" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="4a208466-d407-49a6-8d7d-6f0ed4bf98bc" name="class" profile="CSharpProfile">
                   <elementDefinition Id="75c4b0d2-09a1-4f7b-ba7a-61158a4edd64" />
@@ -653,7 +653,7 @@
               <elementDefinition Id="727e4611-78b1-44cd-97cb-79ad9c07a760" />
               <generalsInternal>
                 <generalization Id="c602b7b5-6649-4077-99cb-b939fbe0cb0a" isSubstitutable="false">
-                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="AbstractActivationFunction" />
                   <elementDefinition Id="149bbcfd-1fa8-4d4b-a5dc-aee4007b6bff" />
                 </generalization>
               </generalsInternal>
@@ -756,7 +756,7 @@
               <elementDefinition Id="5899fa77-bee1-4c08-8c2f-2bd6f172da59" />
               <generalsInternal>
                 <generalization Id="93322a0a-bc5e-4a8c-a251-fef002b542e8" isSubstitutable="false">
-                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="Neuron" />
+                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="AbstractNeuron" />
                   <elementDefinition Id="4ef48d83-5889-434b-8ec6-237f4da223b6" />
                 </generalization>
               </generalsInternal>
@@ -907,13 +907,13 @@
               <elementDefinition Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7" />
               <generalsInternal>
                 <generalization Id="911a593f-a415-425c-b10c-9a6e7ca65713" isSubstitutable="false">
-                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="Neuron" />
+                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="AbstractNeuron" />
                   <elementDefinition Id="33f334d2-80bb-4a2d-8b9a-6b96cca91c4b" />
                 </generalization>
               </generalsInternal>
               <targetEnds>
                 <association Id="7d7ef7a1-9c4d-4efe-b215-038b3d3e6368" isDerived="false" sourceEndRoleName="" targetEndRoleName="outputFunction" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="21c81844-e225-4d25-9532-4fc4efd33480" LastKnownName="OutputFunction" />
+                  <classMoniker Id="21c81844-e225-4d25-9532-4fc4efd33480" LastKnownName="AbstractOutputFunction" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="fbffe6f7-78ea-4457-ac25-e7f52abbd994" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -929,7 +929,7 @@
                   <elementDefinition Id="b9f018d4-7498-4897-99e4-0df2f8454dba" />
                 </association>
                 <association Id="1a30739b-f614-4e07-8aef-3f40668b043c" isDerived="false" sourceEndRoleName="" targetEndRoleName="activationFunction" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="ActivationFunction" />
+                  <classMoniker Id="bdfb32c5-d613-4f24-b805-e6bd88bcb824" LastKnownName="AbstractActivationFunction" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="deb44388-abc6-4768-8429-60cd890a3d7d" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -945,7 +945,7 @@
                   <elementDefinition Id="bc730fac-33fb-40ee-845d-74e30243d339" />
                 </association>
                 <association Id="5eba34a6-7036-49a7-84bc-ba3bb495ad4d" isDerived="false" sourceEndRoleName="" targetEndRoleName="inputFunction" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" LastKnownName="InputFunction" />
+                  <classMoniker Id="e95f6764-7ab9-49a0-9400-4193673cdc4b" LastKnownName="AbstractInputFunction" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="7ef88e13-aba6-4e6d-8dbe-7e91972ab597" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -1083,7 +1083,7 @@
                       <parameter Id="c0e7821b-29b9-45d6-8d0a-413196bd933f" name="inputFunction" direction="In" isUnique="false">
                         <elementDefinition Id="b650ab56-05d4-46d5-be05-ea118e7cc772" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="90829668-cc8c-4313-97fd-4b7b83d18843" LastKnownName="InputFunction" />
+                          <referencedTypeMoniker Id="90829668-cc8c-4313-97fd-4b7b83d18843" LastKnownName="AbstractInputFunction" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -1091,7 +1091,7 @@
                       <parameter Id="85a795ca-a7eb-45df-9b5b-a7b722c013a3" name="activationFunction" direction="In" isUnique="false">
                         <elementDefinition Id="965cb424-b162-4067-a983-852c62e89d54" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="ee04e337-bb78-4b65-8e37-fd076d94c231" LastKnownName="ActivationFunction" />
+                          <referencedTypeMoniker Id="ee04e337-bb78-4b65-8e37-fd076d94c231" LastKnownName="AbstractActivationFunction" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -1099,7 +1099,7 @@
                       <parameter Id="ed7cd417-526b-48c6-ac19-d4b20dd5c8a3" name="outputFunction" direction="In" isUnique="false">
                         <elementDefinition Id="4b66d99f-f68d-404a-9a42-0969f6002b01" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="0e62e670-2767-4594-be6d-db5b38998103" LastKnownName="OutputFunction" />
+                          <referencedTypeMoniker Id="0e62e670-2767-4594-be6d-db5b38998103" LastKnownName="AbstractOutputFunction" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -1149,7 +1149,7 @@
                       <parameter Id="f841ef02-5a56-4ced-ba44-2d104b0f5c67" name="newPrevNeuron" direction="In" isUnique="false">
                         <elementDefinition Id="a8d2593b-8f54-457f-820c-cd16e1f34890" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="Neuron" />
+                          <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="AbstractNeuron" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -1167,7 +1167,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" name="Neuron" isAbstract="true" isLeaf="false" isActiveClass="false">
+            <class Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" name="AbstractNeuron" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="b998ed7a-b4eb-486a-8a6a-b6c19bac7d82" name="class" profile="CSharpProfile">
                   <elementDefinition Id="dbe863fe-970b-48ec-9ade-7d6273463f33" />
@@ -1330,7 +1330,7 @@
                       <parameter Id="3a4c8b7b-ff69-45c9-b4e9-9333cfb2c0af" name="newNextNeuron" direction="In" isUnique="false">
                         <elementDefinition Id="2a00750f-4df9-4284-a1fa-a0f49aa3abaa" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="Neuron" />
+                          <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="AbstractNeuron" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -1526,7 +1526,7 @@
                       <parameter Id="17198434-1eee-4c73-b1fd-126dca24615e" name="prevNeuron_" direction="In" isUnique="false">
                         <elementDefinition Id="8f34b785-f3c2-490f-9b1a-301f011938db" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="Neuron" />
+                          <referencedTypeMoniker Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" LastKnownName="AbstractNeuron" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -1694,7 +1694,7 @@
                   </appliedStereotypesInternal>
                   <elementDefinition Id="c130f9f7-56e0-4da4-bebe-79ee5db0e08c" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="90829668-cc8c-4313-97fd-4b7b83d18843" LastKnownName="InputFunction" />
+                    <referencedTypeMoniker Id="90829668-cc8c-4313-97fd-4b7b83d18843" LastKnownName="AbstractInputFunction" />
                   </type_NamedElement>
                 </property>
                 <property Id="2f7221e3-64e6-4b8a-85bf-09a2e2a4a374" name="enableIndirectBackCoupling" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -1939,7 +1939,7 @@
                   </appliedStereotypesInternal>
                   <elementDefinition Id="601ad4b1-eb9f-4d07-8bf0-2a13a42ec7d8" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="0e62e670-2767-4594-be6d-db5b38998103" LastKnownName="OutputFunction" />
+                    <referencedTypeMoniker Id="0e62e670-2767-4594-be6d-db5b38998103" LastKnownName="AbstractOutputFunction" />
                   </type_NamedElement>
                 </property>
                 <property Id="6b100976-5f84-4eb0-9d97-7f14f82fa612" name="activationFunction" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -2036,13 +2036,13 @@
               <elementDefinition Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe" />
               <generalsInternal>
                 <generalization Id="af985c8c-4b18-40a3-86df-7dd31e794bf8" isSubstitutable="false">
-                  <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="NetworkTopology" />
+                  <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="AbstractNetworkTopology" />
                   <elementDefinition Id="c761ee83-e9f3-4dc3-a1b6-0b804441d3d1" />
                 </generalization>
               </generalsInternal>
               <targetEnds>
                 <association Id="a7b0c3ec-ad95-4648-8a82-40075007c5fa" isDerived="false" sourceEndRoleName="" targetEndRoleName="neurons" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="Neuron" />
+                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="AbstractNeuron" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="87de528e-d6f7-4975-b643-2bb891aeb8e7" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -2205,7 +2205,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" name="NetworkTopology" isAbstract="true" isLeaf="false" isActiveClass="false">
+            <class Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" name="AbstractNetworkTopology" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="b6eb7e21-11b3-4f8f-8c1f-8a1e01ef0db3" name="class" profile="CSharpProfile">
                   <elementDefinition Id="f9c3a938-a5a0-4559-927a-db05a3c2a690" />
@@ -2390,13 +2390,13 @@
               <elementDefinition Id="2d2d01df-0c42-45ed-a434-308402083b74" />
               <generalsInternal>
                 <generalization Id="8a5605a5-f2de-4ba0-86e8-f1bff2c0b88f" isSubstitutable="false">
-                  <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="NetworkTopology" />
+                  <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="AbstractNetworkTopology" />
                   <elementDefinition Id="7330117a-3288-4f82-a4de-ddb6ae1b16a1" />
                 </generalization>
               </generalsInternal>
               <targetEnds>
                 <association Id="313231ac-e9df-4f20-8967-6e9d5cf50fb5" isDerived="false" sourceEndRoleName="" targetEndRoleName="neurons" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="Neuron" />
+                  <classMoniker Id="0b46a595-13cc-4d7e-984d-079a8e40dce8" LastKnownName="AbstractNeuron" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="a656d9eb-739b-4186-bbb5-bedf225dbc8f" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -2473,14 +2473,14 @@
               <elementDefinition Id="b3ffe4f8-4e2c-4e5f-b8cb-57f80e868a43" />
               <generalsInternal>
                 <generalization Id="43f10157-4d5c-42ef-8dce-42cbf9cba888" isSubstitutable="false">
-                  <classMoniker Id="c4409b0b-6e96-44a0-8c49-1131be123996" LastKnownName="ActivationOrder" />
+                  <classMoniker Id="c4409b0b-6e96-44a0-8c49-1131be123996" LastKnownName="AbstractActivationOrder" />
                   <elementDefinition Id="1048841e-ed60-4774-8c8c-05feb73b23aa" />
                 </generalization>
               </generalsInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="c4409b0b-6e96-44a0-8c49-1131be123996" name="ActivationOrder" isAbstract="true" isLeaf="false" isActiveClass="true">
+            <class Id="c4409b0b-6e96-44a0-8c49-1131be123996" name="AbstractActivationOrder" isAbstract="true" isLeaf="false" isActiveClass="true">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="c109e443-9fe4-494f-938e-35a0afd52e5b" name="class" profile="CSharpProfile">
                   <elementDefinition Id="7e7ef7b5-72fb-488b-93c4-60c1a0440004" />
@@ -2564,7 +2564,7 @@
                       <parameter Id="742364d2-1f80-4137-aa86-d3b8919659a8" name="networkTopology" direction="In" isUnique="false">
                         <elementDefinition Id="f56dd9ee-995a-4bbc-985d-887b21bf1257" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="035ce863-5d4f-409b-b0f6-e2351db97327" LastKnownName="NetworkTopology" />
+                          <referencedTypeMoniker Id="035ce863-5d4f-409b-b0f6-e2351db97327" LastKnownName="AbstractNetworkTopology" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -2836,7 +2836,7 @@
         <elementDefinition Id="408d4a92-1fe6-457f-b0f8-3a3c31d0f22f" />
         <packagedElements>
           <packageHasNamedElement>
-            <class Id="7d15d11a-de5d-442f-8a10-87bde8492d55" name="LearningRule" isAbstract="true" isLeaf="false" isActiveClass="false">
+            <class Id="7d15d11a-de5d-442f-8a10-87bde8492d55" name="AbstractLearningRule" isAbstract="true" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="2badbfef-afec-4130-8875-3776de647f2f" name="class" profile="CSharpProfile">
                   <elementDefinition Id="e58e2e9d-52df-4627-9170-28c184fa3f14" />
@@ -2971,7 +2971,7 @@
               <elementDefinition Id="78adb04b-cef5-4fb9-9760-aa47b77359e9" />
               <generalsInternal>
                 <generalization Id="a4b5e92c-8150-4120-9dbb-c914a686047c" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
                   <elementDefinition Id="09057933-8261-4727-9c66-3cc5374e3c42" />
                 </generalization>
               </generalsInternal>
@@ -3019,7 +3019,7 @@
               <elementDefinition Id="bcc24ae6-a5bc-4a63-a55f-e3180e212a1a" />
               <generalsInternal>
                 <generalization Id="c694abb1-6749-452d-9219-507db747120d" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
                   <elementDefinition Id="87c847c8-ba61-46a6-bdc9-ebf6967d3c21" />
                 </generalization>
               </generalsInternal>
@@ -3052,7 +3052,7 @@
               <elementDefinition Id="d84ba14d-d03c-4baa-9a23-ff7d7f1295f3" />
               <generalsInternal>
                 <generalization Id="c13698df-e655-4d4d-97e3-c7bbfcb44689" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
                   <elementDefinition Id="6534749b-63c6-435c-b8ba-e5da0078cb2e" />
                 </generalization>
               </generalsInternal>
@@ -3117,7 +3117,7 @@
               <elementDefinition Id="42a4c367-a6a4-4af4-bb70-6e801a44e1c9" />
               <targetEnds>
                 <association Id="cd14a56b-d15d-4db4-a3be-6396297577ae" isDerived="false" sourceEndRoleName="" targetEndRoleName="networkTopology" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="NetworkTopology" />
+                  <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="AbstractNetworkTopology" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="e81716c8-6b68-4f52-b801-2268201a1dd4" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -3178,7 +3178,7 @@
                       <parameter Id="30f3ae38-2be8-4712-8d4a-23a03e88ccc9" name="networkTopology_" direction="In" isUnique="false">
                         <elementDefinition Id="7476d3ea-8f1d-4b2d-b04a-6262b87d93f4" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="035ce863-5d4f-409b-b0f6-e2351db97327" LastKnownName="NetworkTopology" />
+                          <referencedTypeMoniker Id="035ce863-5d4f-409b-b0f6-e2351db97327" LastKnownName="AbstractNetworkTopology" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -3328,7 +3328,7 @@
                       <parameter Id="46388123-6379-441f-b956-fa6c4c8e25e7" name="activationOrder" direction="In" isUnique="false">
                         <elementDefinition Id="fd7a55c7-2d45-46ac-889a-6ceadba1007e" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" LastKnownName="ActivationOrder" />
+                          <referencedTypeMoniker Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" LastKnownName="AbstractActivationOrder" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>

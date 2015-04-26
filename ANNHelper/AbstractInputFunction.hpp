@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _INPUTFUNCTION_H_
-#define _INPUTFUNCTION_H_
+#ifndef _ABSTRACTINPUTFUNCTION_H_
+#define _ABSTRACTINPUTFUNCTION_H_
 
 // Includes
 #include <vector>
@@ -10,15 +10,15 @@
 class Edge;
 
 // An InputFunction calculates one input value from the output of all previous neurons
-class InputFunction
+class AbstractInputFunction
 {
 private:
 public:
-	virtual ~InputFunction() {}
+	virtual ~AbstractInputFunction() {}
 	// Calculate the one value from all given afferent edges
 	virtual float execute(std::vector<Edge*> &input) = 0;
 	// Create a copy of the object
-	virtual InputFunction* getInputFunctionCopy() = 0;
+	virtual AbstractInputFunction* getInputFunctionCopy() = 0;
 };
 
 #endif

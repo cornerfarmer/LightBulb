@@ -1,6 +1,6 @@
 #include "NeuralNetworkResultChart.hpp"
 #include "NeuralNetwork.hpp"
-#include "NetworkTopology.hpp"
+#include "AbstractNetworkTopology.hpp"
 #include "TopologicalOrder.hpp"
 #include <exception>
 

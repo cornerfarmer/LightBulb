@@ -4,14 +4,14 @@
 #define _ABSTRACTBACKPROPAGATIONLEARNINGRULE_H_
 
 // Includes
-#include "LearningRule.hpp"
+#include "AbstractLearningRule.hpp"
 
 #define DEBUGOUTPUTINTERVAL 1000
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
-class ActivationOrder;
+class AbstractActivationOrder;
 class Edge;
 
 struct BackpropagationLearningRuleOptions
@@ -50,18 +50,18 @@ struct BackpropagationLearningRuleOptions
 		maxTotalErrorValue = 2;
 		enableDebugOutput = false;
 		debugOutputInterval = 1000;
-		flatSpotEliminationFac = 0.1;
-		weightDecayFac = 0.02;
+		flatSpotEliminationFac = 0.1f;
+		weightDecayFac = 0.02f;
 	}
 };
 
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
-class AbstractBackpropagationLearningRule : public LearningRule
+class AbstractBackpropagationLearningRule : public AbstractLearningRule
 {
 protected:	
 	BackpropagationLearningRuleOptions options;
 	// Starts the main learning algorithm
-	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, ActivationOrder &activationOrder, bool offlineLearning);
+	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool offlineLearning);
 	// Adjusts the weights of an edge dependent on its gradient
 	virtual void adjustWeight(Edge* edge, float gradient) = 0;
 	// Prints a current summary of the status of the learning process

@@ -4,19 +4,19 @@
 #define _WEIGHTEDSUMFUNCTION_H_
 
 // Includes
-#include "InputFunction.hpp"
+#include "AbstractInputFunction.hpp"
 
 //Forward declarations
 class Edge;
 
 // The WeightedSumFunction uses the weighted sum to calculate the input ;) 
-class WeightedSumFunction : public InputFunction
+class WeightedSumFunction : public AbstractInputFunction
 {
 private:
 public:
 	// Calculates Σ output * weight
 	float execute(std::vector<Edge*> &input);
-	InputFunction* getInputFunctionCopy();
+	AbstractInputFunction* getInputFunctionCopy();
 };
 
 #endif

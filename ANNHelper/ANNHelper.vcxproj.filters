@@ -41,29 +41,14 @@
     <ClInclude Include="LayeredNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkTopology.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
     <ClInclude Include="BiasNeuron.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="InputNeuron.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
-    <ClInclude Include="Neuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
     <ClInclude Include="StandardNeuron.hpp">
       <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="ActivationFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="InputFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="OutputFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="WeightedSumFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
@@ -76,12 +61,6 @@
     </ClInclude>
     <ClInclude Include="NeuralNetwork.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClInclude>
-    <ClInclude Include="LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="ActivationOrder.hpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
     <ClInclude Include="TopologicalOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
@@ -131,16 +110,31 @@
     <ClInclude Include="AbstractNeuronFactory.hpp">
       <Filter>Quelldateien\NeuronFactory</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractNeuron.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractActivationFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractOutputFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractInputFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractNetworkTopology.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractActivationOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClCompile>
-    <ClCompile Include="ActivationFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="ActivationOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
     <ClCompile Include="BiasNeuron.cpp">
       <Filter>Quelldateien\Neuron</Filter>
@@ -151,29 +145,14 @@
     <ClCompile Include="IdentityFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
-    <ClCompile Include="InputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
     <ClCompile Include="InputNeuron.cpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
     <ClCompile Include="LayeredNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
     <ClCompile Include="NeuralNetwork.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="OutputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
     <ClCompile Include="StandardNeuron.cpp">
       <Filter>Quelldateien\Neuron</Filter>
@@ -228,6 +207,27 @@
     </ClCompile>
     <ClCompile Include="AbstractNeuronFactory.cpp">
       <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractNeuron.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractActivationFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractOutputFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractInputFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractNetworkTopology.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractActivationOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

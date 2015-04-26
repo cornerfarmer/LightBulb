@@ -8,8 +8,8 @@
 
 
 // Includes
-#include "NetworkTopology.hpp"
-#include "Neuron.hpp"
+#include "AbstractNetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;
@@ -31,24 +31,24 @@ struct LayeredNetworkOptions
 typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
 
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
-class LayeredNetwork : public NetworkTopology
+class LayeredNetwork : public AbstractNetworkTopology
 {
 private:
 	LayeredNetworkOptions_t* options;
-	std::vector<std::vector<Neuron*>> neurons;
+	std::vector<std::vector<AbstractNeuron*>> neurons;
 public:
 	~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions_t* options_);	
 	// Returns all InputNeurons (first layer)
-	std::vector<Neuron*>* getInputNeurons();
+	std::vector<AbstractNeuron*>* getInputNeurons();
 	// Returns all OutputNeurons (last layer)
-	std::vector<Neuron*>* getOutputNeurons();
+	std::vector<AbstractNeuron*>* getOutputNeurons();
 	// Returns all Neurons of the selected layer
-	std::vector<Neuron*>* getNeuronsInLayer(int layerNr);
+	std::vector<AbstractNeuron*>* getNeuronsInLayer(int layerNr);
 	// Calculates the layer count
 	int getLayerCount();
 	// Returns all Neurons
-	std::vector<std::vector<Neuron*>>* getNeurons();
+	std::vector<std::vector<AbstractNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
 	// Calculates the Edge count

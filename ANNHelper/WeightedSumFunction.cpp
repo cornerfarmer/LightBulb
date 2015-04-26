@@ -1,6 +1,6 @@
 #include "WeightedSumFunction.hpp"
 #include "Edge.hpp"
-#include "Neuron.hpp"
+#include "AbstractNeuron.hpp"
 
 float WeightedSumFunction::execute(std::vector<Edge*> &input)
 {
@@ -15,7 +15,7 @@ float WeightedSumFunction::execute(std::vector<Edge*> &input)
 	return sum;
 }
 
-InputFunction* WeightedSumFunction::getInputFunctionCopy()
+AbstractInputFunction* WeightedSumFunction::getInputFunctionCopy()
 {
 	return new WeightedSumFunction(*this);
 }

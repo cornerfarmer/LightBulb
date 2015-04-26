@@ -1,9 +1,9 @@
 ﻿#include "Teacher.hpp"
-#include "ActivationOrder.hpp"
+#include "AbstractActivationOrder.hpp"
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
-#include "NetworkTopology.hpp"
-#include "Neuron.hpp"
+#include "AbstractNetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
 #include "Edge.hpp"
 
 Teacher::~Teacher()
@@ -25,7 +25,7 @@ std::vector<TeachingLesson*>* Teacher::getTeachingLessons()
 	return &teachingLessons;
 }
 
-float Teacher::getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder, float weightDecayfac)
+float Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, float weightDecayfac)
 {
 	float totalError = 0;
 
@@ -39,9 +39,9 @@ float Teacher::getTotalError(NeuralNetwork &neuralNetwork, ActivationOrder &acti
 	{
 		// Calculate the sum of all weights
 		float weightSum = 0;
-		for (std::vector<std::vector<Neuron*>>::const_iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+		for (std::vector<std::vector<AbstractNeuron*>>::const_iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 		{
-			for (std::vector<Neuron*>::const_iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+			for (std::vector<AbstractNeuron*>::const_iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 			{
 				for (std::vector<Edge*>::const_iterator edge = (*neuron)->getEfferentEdges()->begin(); edge != (*neuron)->getEfferentEdges()->end(); edge++)
 				{

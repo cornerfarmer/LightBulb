@@ -4,8 +4,8 @@
 #include "TeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
 #include "LayeredNetwork.hpp"
-#include "Neuron.hpp"
-#include "NetworkTopology.hpp"
+#include "AbstractNeuron.hpp"
+#include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 

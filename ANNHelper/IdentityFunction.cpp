@@ -15,12 +15,12 @@ float IdentityFunction::executeDerivation(float input, float threshold)
 	return 0;
 }
 
-ActivationFunction* IdentityFunction::getActivationFunctionCopy()
+AbstractActivationFunction* IdentityFunction::getActivationFunctionCopy()
 {
 	return new IdentityFunction(*this);
 }
 
-OutputFunction* IdentityFunction::getOutputFunctionCopy()
+AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
 {
 	return new IdentityFunction(*this);
 }

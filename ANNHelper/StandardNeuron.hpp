@@ -4,30 +4,30 @@
 #define _STANDARDNEURON_H_
 
 // Includes
-#include "Neuron.hpp"
+#include "AbstractNeuron.hpp"
 
 // Forward declarations
-class ActivationFunction;
-class InputFunction;
-class OutputFunction;
+class AbstractActivationFunction;
+class AbstractInputFunction;
+class AbstractOutputFunction;
 class Edge;
 
 // All neurons except of InputNeurons are StandardNeurons.
 // They have at least one afferent edge and 0..* efferent edges.
-class StandardNeuron : public Neuron
+class StandardNeuron : public AbstractNeuron
 {
 private:
 	float threshold;
 	float netInput;
-	InputFunction* inputFunction;
-	ActivationFunction* activationFunction;
-	OutputFunction* outputFunction;
+	AbstractInputFunction* inputFunction;
+	AbstractActivationFunction* activationFunction;
+	AbstractOutputFunction* outputFunction;
 	std::vector<Edge*> afferentEdges;
 public:
 	~StandardNeuron();
-	StandardNeuron(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_);
+	StandardNeuron(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
 	// Add a new afferent Edge directing to the given neuron
-	void addPrevNeuron(Neuron* newPrevNeuron, float weight);
+	void addPrevNeuron(AbstractNeuron* newPrevNeuron, float weight);
 	void addPrevNeuron(Edge* newEdge);
 	// Calculates a new activation with the help of its input-, activation- and outputFunction
 	void refreshActivation();
@@ -35,7 +35,7 @@ public:
 	float executeDerivationOnActivationFunction(float input);
 	std::vector<Edge*>* getAfferentEdges();
 	float getNetInput();
-	ActivationFunction* getActivationFunction();
+	AbstractActivationFunction* getActivationFunction();
 };
 
 #endif

@@ -4,14 +4,14 @@
 #define _DELTALEARNINGRULE_H_
 
 // Includes
-#include "LearningRule.hpp"
+#include "AbstractLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 
 // The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
-class DeltaLearningRule : public LearningRule
+class DeltaLearningRule : public AbstractLearningRule
 {
 private:
 public:

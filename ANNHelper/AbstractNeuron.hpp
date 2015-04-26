@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _NEURON_H_
-#define _NEURON_H_
+#ifndef _ABSTRACTNEURON_H_
+#define _ABSTRACTNEURON_H_
 
 // Includes
 #include <vector>
@@ -11,14 +11,14 @@ class Edge;
 class StandardNeuron;
 
 // Every neuron always has a activation and can have multiple efferent edges
-class Neuron
+class AbstractNeuron
 {
 protected:
 	float activation;
 	std::vector<Edge*> efferentEdges;
 public:	
-	virtual ~Neuron();
-	Neuron();
+	virtual ~AbstractNeuron();
+	AbstractNeuron();
 	// Add a new efferent Edge which directs to the given neuron
 	void addNextNeuron(StandardNeuron* newNextNeuron, float weight);
 	void addNextNeuron(Edge* newEdge);

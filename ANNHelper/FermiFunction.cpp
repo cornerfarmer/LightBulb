@@ -22,7 +22,7 @@ float FermiFunction::executeDerivation(float input, float threshold)
 	return execute(input, threshold) * (1 - execute(input, threshold));
 }
 
-ActivationFunction* FermiFunction::getActivationFunctionCopy()
+AbstractActivationFunction* FermiFunction::getActivationFunctionCopy()
 {
 	return new FermiFunction(*this);
 }

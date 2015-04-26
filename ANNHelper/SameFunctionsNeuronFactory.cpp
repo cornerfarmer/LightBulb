@@ -1,9 +1,9 @@
 #include "SameFunctionsNeuronFactory.hpp"
 #include "InputNeuron.hpp"
 #include "StandardNeuron.hpp"
-#include "InputFunction.hpp"
-#include "ActivationFunction.hpp"
-#include "OutputFunction.hpp"
+#include "AbstractInputFunction.hpp"
+#include "AbstractActivationFunction.hpp"
+#include "AbstractOutputFunction.hpp"
 #include <exception>
 
 SameFunctionsNeuronFactory::~SameFunctionsNeuronFactory()
@@ -13,7 +13,7 @@ SameFunctionsNeuronFactory::~SameFunctionsNeuronFactory()
 	delete(outputFunction);
 }
 
-SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(InputFunction* inputFunction_, ActivationFunction* activationFunction_, OutputFunction* outputFunction_)
+SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
 {
 	// Check if all given options are correct
 	if (!activationFunction_)

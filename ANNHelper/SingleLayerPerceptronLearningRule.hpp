@@ -4,14 +4,14 @@
 #define _SINGLELAYERPERCEPTRONLEARNINGRULE_H_
 
 // Includes
-#include "LearningRule.hpp"
+#include "AbstractLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 
 // The PerceptronLearningRule can only be used to train binary SingleLayerPerceptronNetworks
-class SingleLayerPerceptronLearningRule : public LearningRule
+class SingleLayerPerceptronLearningRule : public AbstractLearningRule
 {
 private:
 public:

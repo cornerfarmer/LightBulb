@@ -13,7 +13,7 @@ TeachingLesson::TeachingLesson(std::vector<float>* teachingPattern_, std::vector
 	teachingPattern = teachingPattern_;
 }
 
-std::unique_ptr<std::vector<float>> TeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder)
+std::unique_ptr<std::vector<float>> TeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	// Create the errorVector with the right size
 	std::unique_ptr<std::vector<float>> errorVector(new std::vector<float>(teachingInput->size()));
@@ -34,17 +34,17 @@ std::unique_ptr<std::vector<float>> TeachingLesson::getErrorvector(NeuralNetwork
 	return errorVector;
 }
 
-float TeachingLesson::getEuclidienDistance(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder)
+float TeachingLesson::getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	return 0;
 }
 
-float TeachingLesson::getRMS(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder)
+float TeachingLesson::getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	return 0;
 }
 
-float TeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, ActivationOrder &activationOrder)
+float TeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	// Calculate the errorVector
 	std::unique_ptr<std::vector<float>> errorVector = getErrorvector(neuralNetwork, activationOrder);

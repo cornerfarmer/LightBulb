@@ -122,7 +122,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-              LastKnownName="Neuron"
+              LastKnownName="AbstractNeuron"
               LastKnownLocation="Package_1250.uml" />
           </generalization>
         </generalsInternal>
@@ -324,7 +324,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-              LastKnownName="Neuron"
+              LastKnownName="AbstractNeuron"
               LastKnownLocation="Package_1250.uml" />
           </generalization>
         </generalsInternal>
@@ -338,7 +338,7 @@
             isAbstract="false">
             <classMoniker
               Id="0243159e-574e-461b-9f46-20857f611868"
-              LastKnownName="OutputFunction"
+              LastKnownName="AbstractOutputFunction"
               LastKnownLocation="Package_1248.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -376,7 +376,7 @@
             isAbstract="false">
             <classMoniker
               Id="49effd66-f0b4-426d-9168-a326f4137e83"
-              LastKnownName="ActivationFunction"
+              LastKnownName="AbstractActivationFunction"
               LastKnownLocation="Package_1248.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -414,7 +414,7 @@
             isAbstract="false">
             <classMoniker
               Id="2de5c842-f067-4154-a303-57f82bed7d64"
-              LastKnownName="InputFunction"
+              LastKnownName="AbstractInputFunction"
               LastKnownLocation="Package_1248.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -627,7 +627,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="2de5c842-f067-4154-a303-57f82bed7d64"
-                      LastKnownName="InputFunction"
+                      LastKnownName="AbstractInputFunction"
                       LastKnownLocation="Package_1248.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -641,7 +641,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="49effd66-f0b4-426d-9168-a326f4137e83"
-                      LastKnownName="ActivationFunction"
+                      LastKnownName="AbstractActivationFunction"
                       LastKnownLocation="Package_1248.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -655,7 +655,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="0243159e-574e-461b-9f46-20857f611868"
-                      LastKnownName="OutputFunction"
+                      LastKnownName="AbstractOutputFunction"
                       LastKnownLocation="Package_1248.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -723,7 +723,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-                      LastKnownName="Neuron"
+                      LastKnownName="AbstractNeuron"
                       LastKnownLocation="Package_1250.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -750,7 +750,7 @@
     <packageHasNamedElement>
       <class
         Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-        name="Neuron"
+        name="AbstractNeuron"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -982,7 +982,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-                      LastKnownName="Neuron"
+                      LastKnownName="AbstractNeuron"
                       LastKnownLocation="Package_1250.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -1249,7 +1249,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11"
-                      LastKnownName="Neuron"
+                      LastKnownName="AbstractNeuron"
                       LastKnownLocation="Package_1250.uml" />
                   </type_NamedElement>
                 </parameter>

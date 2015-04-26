@@ -1,14 +1,14 @@
 #pragma once
 
-#ifndef _LEARNINGRULE_H_
-#define _LEARNINGRULE_H_
+#ifndef _ABSTRACTLEARNINGRULE_H_
+#define _ABSTRACTLEARNINGRULE_H_
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 
 // A LearningRule is used to improve a NeuralNetwork
-class LearningRule 
+class AbstractLearningRule 
 {
 private:
 public:

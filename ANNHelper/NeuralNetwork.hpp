@@ -7,24 +7,24 @@
 #include <vector>
 
 // Forward declarations
-class NetworkTopology;
-class ActivationOrder;
+class AbstractNetworkTopology;
+class AbstractActivationOrder;
 
 // This class contains all stuff needed to describe a NeuralNetwork
 class NeuralNetwork 
 {
 private:
-	NetworkTopology* networkTopology;
+	AbstractNetworkTopology* networkTopology;
 public:
 	~NeuralNetwork();
-	NeuralNetwork(NetworkTopology* networkTopology_);
+	NeuralNetwork(AbstractNetworkTopology* networkTopology_);
 	// Recalculates the activation of all neurons is the given ActivationOrder
-	void refreshAllNeurons(ActivationOrder &activationOrder);
+	void refreshAllNeurons(AbstractActivationOrder &activationOrder);
 	// Returns all output numbers of the network
 	std::unique_ptr<std::vector<float>> getOutput();
 	// Sets all input neurons to the given numbers
 	void setInput(std::vector<float> &inputVector);
-	NetworkTopology* getNetworkTopology();
+	AbstractNetworkTopology* getNetworkTopology();
 };
 
 #endif
