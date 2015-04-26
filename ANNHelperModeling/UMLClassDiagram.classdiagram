@@ -225,7 +225,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="9ad3a013-6546-4cb2-b826-67ac28ee7cb4" name="TangusHyperbolicusFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="9ad3a013-6546-4cb2-b826-67ac28ee7cb4" name="HyperbolicTangentFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="04fd5ba2-7684-4350-9221-7ebf28064872" name="class" profile="CSharpProfile">
                   <elementDefinition Id="ff1967f9-783c-4921-bfea-bf654c243255" />
@@ -1549,6 +1549,74 @@
                   </ownedParameters>
                 </operation>
               </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="e645c3c2-a0f8-415b-8284-227f8f155a43" name="AbstractNeuronFactory" isAbstract="true" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="af5db3df-c3aa-408a-8a2a-d1975d7776d9" />
+              <ownedOperationsInternal>
+                <operation Id="2fbda2cb-7ab3-46b1-ada7-c5a2aca5674e" name="createInputNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="19062b00-2c5a-4f41-b534-58e80b81ce10" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="5355894c-9a45-4c53-a5eb-958f82c61ba3" direction="Return" isUnique="false">
+                        <elementDefinition Id="0474c859-8ec0-4ddc-bc46-7117c8efcd55" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b8841a47-8820-4a9c-9526-51ee6c445b42" LastKnownName="InputNeuron" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="de8fc592-df42-4bb5-b94b-b1bfbd3be630" name="createInnerNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="5149d6bb-05eb-45ad-8a24-8d49f29ce666" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="a80d0ed0-a70f-45c6-a71a-4bb8d075b397" direction="Return" isUnique="false">
+                        <elementDefinition Id="73949ca5-713f-44a7-8bd9-7585a30355d5" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="96f04254-36f1-448a-9d6a-006dec9639ef" LastKnownName="StandardNeuron" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="61deb7ea-d8a4-477f-9888-83de364c5d6e" name="createOutputNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="fc8bfb30-c6ce-4bee-9ba3-54d909fed7f0" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="3090dc4d-ed9e-4729-9c1e-33a251992efc" direction="Return" isUnique="false">
+                        <elementDefinition Id="321f4a49-8950-44f0-be07-77ce9f8b6b87" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="96f04254-36f1-448a-9d6a-006dec9639ef" LastKnownName="StandardNeuron" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="538543a9-3d65-4fcc-941c-8bb78c96b0c0" name="DifferentFunctionsNeuronFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="0e1c3d7f-8add-45e9-be1c-b47c4bca03ab" />
+              <generalsInternal>
+                <generalization Id="2c4a9b15-609b-432d-a012-4090829c74c8" isSubstitutable="false">
+                  <classMoniker Id="e645c3c2-a0f8-415b-8284-227f8f155a43" LastKnownName="AbstractNeuronFactory" />
+                  <elementDefinition Id="3532b439-57f6-41ed-9540-f79e92234976" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="2c6fb4c9-16e3-44be-b1e7-0d28dea67a8e" name="SameFunctionsNeuronFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="66260dc4-cbe9-4e06-b8fe-31236dd69fc7" />
+              <generalsInternal>
+                <generalization Id="f28ffd36-47fd-4bde-893a-e22c66cac379" isSubstitutable="false">
+                  <classMoniker Id="e645c3c2-a0f8-415b-8284-227f8f155a43" LastKnownName="AbstractNeuronFactory" />
+                  <elementDefinition Id="d44acd9d-3886-40e9-8cca-efcfdb2eaf95" />
+                </generalization>
+              </generalsInternal>
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -2977,6 +3045,87 @@
               </generalsInternal>
             </class>
           </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="f83ea69b-ee2f-4dea-8459-3e3b445a87bb" name="AbstractBackpropagationLearningRule" isAbstract="true" isLeaf="false" isActiveClass="false">
+              <appliedStereotypesInternal>
+                <stereotypeInstance Id="59944a0d-4312-4942-995b-9cb382e57d6d" name="class" profile="CSharpProfile">
+                  <elementDefinition Id="212c977b-3085-4668-aaf9-6cf29dfc5fe1" />
+                  <propertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="ad311f11-a858-47af-accc-44bbfd55ca07">
+                      <propertyInstance Id="ca41db6b-1d2b-4f37-b099-c0bc5b28b411" name="ClrAttributes">
+                        <elementDefinition Id="2962956b-1eca-4dc5-9010-7b2131e8ef53" />
+                      </propertyInstance>
+                      <elementDefinition Id="93c499bf-4288-4040-baa8-53c05e782986" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="b054024e-e3f4-475f-865e-d8633b5f6cfc">
+                      <propertyInstance Id="0a770fc0-7f1a-4698-a115-0e553ddb5b8d" name="IsPartial" value="false">
+                        <elementDefinition Id="5d5be463-9065-45b3-8e64-375d783a7d01" />
+                      </propertyInstance>
+                      <elementDefinition Id="a1c759a0-b963-4cf5-8a09-0740fc3e081c" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="b03fd656-4301-4997-8198-97449c053294">
+                      <propertyInstance Id="cbb450e8-7378-431f-86fd-b4de43753807" name="IsStatic" value="false">
+                        <elementDefinition Id="a4cd83c7-da02-4cc9-be6a-1a43fb752fe1" />
+                      </propertyInstance>
+                      <elementDefinition Id="c71ecdf5-ba6b-429b-b8b9-d1ba60b093fa" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="ae9c2810-e800-4876-a2b4-2e4304cdcf78">
+                      <propertyInstance Id="90222e45-4fcf-45ce-9815-8a7f75289dc6" name="IsUnsafe" value="false">
+                        <elementDefinition Id="208db78f-3fdb-4f0e-b4ef-540358f76b95" />
+                      </propertyInstance>
+                      <elementDefinition Id="5f8ff22c-520d-4d67-9af8-5b54b4348fb1" />
+                    </stereotypeInstanceHasPropertyInstances>
+                    <stereotypeInstanceHasPropertyInstances Id="fa0c1ba4-882c-41bd-9737-186142ca6e28">
+                      <propertyInstance Id="a69e88cd-ca8d-4359-b6ca-920fe8d7997d" name="PackageVisibility" value="internal">
+                        <elementDefinition Id="fdc5feab-4fed-4abc-b95e-178e499137af" />
+                      </propertyInstance>
+                      <elementDefinition Id="2544b0be-8116-4e8a-ac9a-72bbdcfa17ca" />
+                    </stereotypeInstanceHasPropertyInstances>
+                  </propertyInstances>
+                </stereotypeInstance>
+              </appliedStereotypesInternal>
+              <elementDefinition Id="bcc24ae6-a5bc-4a63-a55f-e3180e212a1a" />
+              <generalsInternal>
+                <generalization Id="c694abb1-6749-452d-9219-507db747120d" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+                  <elementDefinition Id="87c847c8-ba61-46a6-bdc9-ebf6967d3c21" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="84263b09-0f0b-4c00-b4d2-40cc69652afc" name="BackpropagationLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="8caf1f4e-8112-4e15-9aeb-544875d55f78" />
+              <generalsInternal>
+                <generalization Id="e58708aa-e56a-4b75-b759-b21a8e3f9aaf" isSubstitutable="false">
+                  <classMoniker Id="f83ea69b-ee2f-4dea-8459-3e3b445a87bb" LastKnownName="AbstractBackpropagationLearningRule" />
+                  <elementDefinition Id="c650095f-efd5-4f0e-9668-031b0adaee97" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="20060f95-a842-4871-8aa9-cebb68c50a88" name="ResilientBackpropagationLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="f514e967-9cc5-41c1-9368-05d9769a4d7e" />
+              <generalsInternal>
+                <generalization Id="34857f05-aadf-490b-a3f3-04daa319a81d" isSubstitutable="false">
+                  <classMoniker Id="f83ea69b-ee2f-4dea-8459-3e3b445a87bb" LastKnownName="AbstractBackpropagationLearningRule" />
+                  <elementDefinition Id="7197488f-704a-4037-b80e-3a94790c6fce" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" name="DeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="d84ba14d-d03c-4baa-9a23-ff7d7f1295f3" />
+              <generalsInternal>
+                <generalization Id="c13698df-e655-4d4d-97e3-c7bbfcb44689" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="LearningRule" />
+                  <elementDefinition Id="6534749b-63c6-435c-b8ba-e5da0078cb2e" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
@@ -3376,6 +3525,11 @@
     <packageHasNamedElement>
       <referencedType Id="bedd97a0-a155-43fd-8323-e65a58309fbc" name="Window" isAbstract="false" isLeaf="false" cachedFullName="Window">
         <elementDefinition Id="824409e4-d2e9-42d5-9876-d22036fba16a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="96f04254-36f1-448a-9d6a-006dec9639ef" name="StandardNeuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron::StandardNeuron">
+        <elementDefinition Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

@@ -237,8 +237,14 @@
     <packageHasNamedElement>
       <packageMoniker
         Id="fbe657d8-e8fc-4026-8c97-366b98a692b9"
-        LastKnownName="Graphic"
+        LastKnownName="Graphics"
         LastKnownLocation="Package_1803.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="3c4d966a-07bd-4407-a12c-b8ba8e797398"
+        LastKnownName="Package1"
+        LastKnownLocation="Package_1104.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

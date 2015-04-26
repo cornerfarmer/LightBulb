@@ -139,7 +139,7 @@
     <packageHasNamedElement>
       <class
         Id="2a43ee3e-52d7-4870-93bb-1c7b5ffb3592"
-        name="TangusHyperbolicusFunction"
+        name="HyperbolicTangentFunction"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
