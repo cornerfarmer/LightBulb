@@ -33,6 +33,9 @@
     <Filter Include="Quelldateien\Graphics">
       <UniqueIdentifier>{734068f5-0975-4e7f-b6aa-df7dbf3b849c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\NeuronFactory">
+      <UniqueIdentifier>{72294d96-7099-4cc7-bb29-7218ce5a24ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LayeredNetwork.hpp">
@@ -116,17 +119,17 @@
     <ClInclude Include="GraphicObject.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractNeuronFactory.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="SameFunctionsNeuronFactory.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="DifferentFunctionsNeuronFactory.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
     <ClInclude Include="HyperbolicTangentFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="SameFunctionsNeuronFactory.hpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="DifferentFunctionsNeuronFactory.hpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractNeuronFactory.hpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,17 +217,17 @@
     <ClCompile Include="GraphicObject.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractNeuronFactory.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="SameFunctionsNeuronFactory.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="DifferentFunctionsNeuronFactory.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
     <ClCompile Include="HyperbolicTangentFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="SameFunctionsNeuronFactory.cpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="DifferentFunctionsNeuronFactory.cpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractNeuronFactory.cpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

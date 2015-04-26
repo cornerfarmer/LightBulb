@@ -154,7 +154,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="bb5f38d6-0aee-47ff-ab05-97a1004fc025" name="NeuralNetwork" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Package1::NeuralNetwork">
+      <referencedType Id="bb5f38d6-0aee-47ff-ab05-97a1004fc025" name="NeuralNetwork" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NeuralNetwork::NeuralNetwork">
         <elementDefinition Id="42a4c367-a6a4-4af4-bb70-6e801a44e1c9" />
       </referencedType>
     </packageHasNamedElement>
@@ -1549,74 +1549,6 @@
                   </ownedParameters>
                 </operation>
               </ownedOperationsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="e645c3c2-a0f8-415b-8284-227f8f155a43" name="AbstractNeuronFactory" isAbstract="true" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="af5db3df-c3aa-408a-8a2a-d1975d7776d9" />
-              <ownedOperationsInternal>
-                <operation Id="2fbda2cb-7ab3-46b1-ada7-c5a2aca5674e" name="createInputNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-                  <elementDefinition Id="19062b00-2c5a-4f41-b534-58e80b81ce10" />
-                  <ownedParameters>
-                    <operationHasOwnedParameters>
-                      <parameter Id="5355894c-9a45-4c53-a5eb-958f82c61ba3" direction="Return" isUnique="false">
-                        <elementDefinition Id="0474c859-8ec0-4ddc-bc46-7117c8efcd55" />
-                        <type_NamedElement>
-                          <referencedTypeMoniker Id="b8841a47-8820-4a9c-9526-51ee6c445b42" LastKnownName="InputNeuron" />
-                        </type_NamedElement>
-                      </parameter>
-                    </operationHasOwnedParameters>
-                  </ownedParameters>
-                </operation>
-                <operation Id="de8fc592-df42-4bb5-b94b-b1bfbd3be630" name="createInnerNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-                  <elementDefinition Id="5149d6bb-05eb-45ad-8a24-8d49f29ce666" />
-                  <ownedParameters>
-                    <operationHasOwnedParameters>
-                      <parameter Id="a80d0ed0-a70f-45c6-a71a-4bb8d075b397" direction="Return" isUnique="false">
-                        <elementDefinition Id="73949ca5-713f-44a7-8bd9-7585a30355d5" />
-                        <type_NamedElement>
-                          <referencedTypeMoniker Id="96f04254-36f1-448a-9d6a-006dec9639ef" LastKnownName="StandardNeuron" />
-                        </type_NamedElement>
-                      </parameter>
-                    </operationHasOwnedParameters>
-                  </ownedParameters>
-                </operation>
-                <operation Id="61deb7ea-d8a4-477f-9888-83de364c5d6e" name="createOutputNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-                  <elementDefinition Id="fc8bfb30-c6ce-4bee-9ba3-54d909fed7f0" />
-                  <ownedParameters>
-                    <operationHasOwnedParameters>
-                      <parameter Id="3090dc4d-ed9e-4729-9c1e-33a251992efc" direction="Return" isUnique="false">
-                        <elementDefinition Id="321f4a49-8950-44f0-be07-77ce9f8b6b87" />
-                        <type_NamedElement>
-                          <referencedTypeMoniker Id="96f04254-36f1-448a-9d6a-006dec9639ef" LastKnownName="StandardNeuron" />
-                        </type_NamedElement>
-                      </parameter>
-                    </operationHasOwnedParameters>
-                  </ownedParameters>
-                </operation>
-              </ownedOperationsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="538543a9-3d65-4fcc-941c-8bb78c96b0c0" name="DifferentFunctionsNeuronFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="0e1c3d7f-8add-45e9-be1c-b47c4bca03ab" />
-              <generalsInternal>
-                <generalization Id="2c4a9b15-609b-432d-a012-4090829c74c8" isSubstitutable="false">
-                  <classMoniker Id="e645c3c2-a0f8-415b-8284-227f8f155a43" LastKnownName="AbstractNeuronFactory" />
-                  <elementDefinition Id="3532b439-57f6-41ed-9540-f79e92234976" />
-                </generalization>
-              </generalsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="2c6fb4c9-16e3-44be-b1e7-0d28dea67a8e" name="SameFunctionsNeuronFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="66260dc4-cbe9-4e06-b8fe-31236dd69fc7" />
-              <generalsInternal>
-                <generalization Id="f28ffd36-47fd-4bde-893a-e22c66cac379" isSubstitutable="false">
-                  <classMoniker Id="e645c3c2-a0f8-415b-8284-227f8f155a43" LastKnownName="AbstractNeuronFactory" />
-                  <elementDefinition Id="d44acd9d-3886-40e9-8cca-efcfdb2eaf95" />
-                </generalization>
-              </generalsInternal>
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -3532,6 +3464,81 @@
         <elementDefinition Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="7011d37d-6c66-4bb8-b493-3811994aa5d3" name="NeuronFactory">
+        <elementDefinition Id="e177c311-483d-4c9c-a400-8aceaaf6c962" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="538543a9-3d65-4fcc-941c-8bb78c96b0c0" name="DifferentFunctionsNeuronFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="0e1c3d7f-8add-45e9-be1c-b47c4bca03ab" />
+              <generalsInternal>
+                <generalization Id="2c4a9b15-609b-432d-a012-4090829c74c8" isSubstitutable="false">
+                  <classMoniker Id="e645c3c2-a0f8-415b-8284-227f8f155a43" LastKnownName="AbstractNeuronFactory" />
+                  <elementDefinition Id="3532b439-57f6-41ed-9540-f79e92234976" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="2c6fb4c9-16e3-44be-b1e7-0d28dea67a8e" name="SameFunctionsNeuronFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="66260dc4-cbe9-4e06-b8fe-31236dd69fc7" />
+              <generalsInternal>
+                <generalization Id="f28ffd36-47fd-4bde-893a-e22c66cac379" isSubstitutable="false">
+                  <classMoniker Id="e645c3c2-a0f8-415b-8284-227f8f155a43" LastKnownName="AbstractNeuronFactory" />
+                  <elementDefinition Id="d44acd9d-3886-40e9-8cca-efcfdb2eaf95" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="e645c3c2-a0f8-415b-8284-227f8f155a43" name="AbstractNeuronFactory" isAbstract="true" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="af5db3df-c3aa-408a-8a2a-d1975d7776d9" />
+              <ownedOperationsInternal>
+                <operation Id="2fbda2cb-7ab3-46b1-ada7-c5a2aca5674e" name="createInputNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="19062b00-2c5a-4f41-b534-58e80b81ce10" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="5355894c-9a45-4c53-a5eb-958f82c61ba3" direction="Return" isUnique="false">
+                        <elementDefinition Id="0474c859-8ec0-4ddc-bc46-7117c8efcd55" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="b8841a47-8820-4a9c-9526-51ee6c445b42" LastKnownName="InputNeuron" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="de8fc592-df42-4bb5-b94b-b1bfbd3be630" name="createInnerNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="5149d6bb-05eb-45ad-8a24-8d49f29ce666" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="a80d0ed0-a70f-45c6-a71a-4bb8d075b397" direction="Return" isUnique="false">
+                        <elementDefinition Id="73949ca5-713f-44a7-8bd9-7585a30355d5" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="96f04254-36f1-448a-9d6a-006dec9639ef" LastKnownName="StandardNeuron" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+                <operation Id="61deb7ea-d8a4-477f-9888-83de364c5d6e" name="createOutputNeuron" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="fc8bfb30-c6ce-4bee-9ba3-54d909fed7f0" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="3090dc4d-ed9e-4729-9c1e-33a251992efc" direction="Return" isUnique="false">
+                        <elementDefinition Id="321f4a49-8950-44f0-be07-77ce9f8b6b87" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="96f04254-36f1-448a-9d6a-006dec9639ef" LastKnownName="StandardNeuron" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />

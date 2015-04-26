@@ -246,6 +246,12 @@
         LastKnownName="Package1"
         LastKnownLocation="Package_1104.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="e177c311-483d-4c9c-a400-8aceaaf6c962"
+        LastKnownName="NeuronFactory"
+        LastKnownLocation="Package_1109.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"
