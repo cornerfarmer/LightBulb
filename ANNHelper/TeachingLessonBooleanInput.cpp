@@ -7,6 +7,7 @@ TeachingLessonBooleanInput::~TeachingLessonBooleanInput()
 {
 	delete(teachingInput);
 	delete(teachingPattern);
+	delete(teachingInputLinear);
 }
 
 TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<float>* teachingPattern_, std::vector<bool>* teachingInput_)
