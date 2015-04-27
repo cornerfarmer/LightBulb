@@ -23,3 +23,8 @@ void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopolog
 		}
 	}
 }
+
+AbstractActivationOrder* TopologicalOrder::getCopy()
+{
+	return new TopologicalOrder(*this);
+}

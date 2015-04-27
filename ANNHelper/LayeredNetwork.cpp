@@ -22,11 +22,16 @@ LayeredNetworkOptions::~LayeredNetworkOptions()
 	delete(neuronFactory);
 }
 
+LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj)
+{
+	*this = obj;
+	neuronFactory = obj.neuronFactory->getCopy();
+}
+
+
 
 LayeredNetwork::~LayeredNetwork()
 {
-	delete(options);
-
 	// Go through all layers
 	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
@@ -38,10 +43,10 @@ LayeredNetwork::~LayeredNetwork()
 	}
 }
 
-LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t *options_)
+LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 {
 	// Copy all options
-	options = options_;
+	options.reset(new LayeredNetworkOptions(options_));
 
 	// Check if all given options are correct
 	if (getLayerCount() < 2)

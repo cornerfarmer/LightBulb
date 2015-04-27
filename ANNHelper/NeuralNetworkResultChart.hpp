@@ -29,40 +29,22 @@ struct NeuralNetworkResultChartOptions
 	unsigned int outputNeuronIndex;
 	float ouputRangeStart;
 	float ouputRangeEnd;
-	NeuralNetworkResultChartOptions()
-	{
-		binaryInterpretation = true;
-		height = 300;
-		width = 300;
-		neuralNetwork = NULL;
-		xInputNeuronIndex = 0;
-		xRangeStart = 0;
-		xRangeEnd = 1;
-		yInputNeuronIndex = 1;
-		yRangeStart = 0;
-		yRangeEnd = 1;
-		activationOrder = NULL;
-		outputNeuronIndex = 0;
-		ouputRangeStart = 0;
-		ouputRangeEnd = 1;
-	}
 
-	~NeuralNetworkResultChartOptions()
-	{
-		delete(activationOrder);
-	}
+	NeuralNetworkResultChartOptions();	
+	~NeuralNetworkResultChartOptions();
+	NeuralNetworkResultChartOptions(const NeuralNetworkResultChartOptions &obj);
+
 };
 
 // A basic shape for an graphical component
 class NeuralNetworkResultChart : public GraphicObject
 {
 private:
-	NeuralNetworkResultChartOptions* options;
+	std::unique_ptr<NeuralNetworkResultChartOptions> options;
 	// This texture will contain the chart, calculated in recalculateAllValues
 	sf::Texture texture;
 public:
-	~NeuralNetworkResultChart();
-	NeuralNetworkResultChart(int posX_, int posY_, NeuralNetworkResultChartOptions* options_);
+	NeuralNetworkResultChart(int posX_, int posY_, NeuralNetworkResultChartOptions &options_);
 	// This method draws the calculated chart
 	void draw(sf::RenderWindow &window);
 	// This method recalculates the chart

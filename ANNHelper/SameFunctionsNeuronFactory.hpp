@@ -3,6 +3,9 @@
 #ifndef _SAMEFUNCTIONSNEURONFACTORY_H_
 #define _SAMEFUNCTIONSNEURONFACTORY_H_
 
+// Library Includes
+#include <memory>
+
 // Includes
 #include "AbstractNeuronFactory.hpp"
 
@@ -17,15 +20,16 @@ class AbstractOutputFunction;
 class SameFunctionsNeuronFactory : public AbstractNeuronFactory
 {
 private:
-	AbstractActivationFunction* activationFunction;
-	AbstractInputFunction* inputFunction;
-	AbstractOutputFunction* outputFunction;
+	std::unique_ptr<AbstractActivationFunction> activationFunction;
+	std::unique_ptr<AbstractInputFunction> inputFunction;
+	std::unique_ptr<AbstractOutputFunction> outputFunction;
 public:	
-	~SameFunctionsNeuronFactory();
 	SameFunctionsNeuronFactory(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
+	SameFunctionsNeuronFactory(const SameFunctionsNeuronFactory &obj);
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();
 	StandardNeuron* createOutputNeuron();
+	AbstractNeuronFactory* getCopy();
 };
 
 #endif

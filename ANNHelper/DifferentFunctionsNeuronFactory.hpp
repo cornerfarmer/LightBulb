@@ -3,6 +3,9 @@
 #ifndef _DIFFERENTFUNCTIONSNEURONFACTORY_H_
 #define _DIFFERENTFUNCTIONSNEURONFACTORY_H_
 
+// Library Includes
+#include <memory>
+
 // Includes
 #include "AbstractNeuronFactory.hpp"
 
@@ -18,19 +21,20 @@ class DifferentFunctionsNeuronFactory : public AbstractNeuronFactory
 {
 private:
 	// Functions for inner neurons
-	AbstractActivationFunction* activationFunctionInnerNeuron;
-	AbstractInputFunction* inputFunctionInnerNeuron;
-	AbstractOutputFunction* outputFunctionInnerNeuron;
+	std::unique_ptr<AbstractActivationFunction> activationFunctionInnerNeuron;
+	std::unique_ptr<AbstractInputFunction> inputFunctionInnerNeuron;
+	std::unique_ptr<AbstractOutputFunction> outputFunctionInnerNeuron;
 	// Functions for output neurons
-	AbstractActivationFunction* activationFunctionOutputNeuron;
-	AbstractInputFunction* inputFunctionOutputNeuron;
-	AbstractOutputFunction* outputFunctionOutputNeuron;
+	std::unique_ptr<AbstractActivationFunction> activationFunctionOutputNeuron;
+	std::unique_ptr<AbstractInputFunction> inputFunctionOutputNeuron;
+	std::unique_ptr<AbstractOutputFunction> outputFunctionOutputNeuron;
 public:	
-	~DifferentFunctionsNeuronFactory();
 	DifferentFunctionsNeuronFactory(AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_);
+	DifferentFunctionsNeuronFactory(const DifferentFunctionsNeuronFactory &obj);
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();
 	StandardNeuron* createOutputNeuron();
+	AbstractNeuronFactory* getCopy();
 };
 
 #endif

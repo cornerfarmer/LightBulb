@@ -14,6 +14,7 @@ private:
 public:
 	// Activates all neurons in the given layered(!) topology in a topological order
 	void executeActivation(AbstractNetworkTopology &networkTopology);
+	AbstractActivationOrder* getCopy(); 
 };
 
 #endif

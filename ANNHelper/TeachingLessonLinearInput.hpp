@@ -13,14 +13,13 @@ class TeachingLessonLinearInput : public AbstractTeachingLesson
 {
 private:
 	// The values the neural network should give back
-	std::vector<float>* teachingInput;
+	std::unique_ptr<std::vector<float>> teachingInput;
 	// The values we will put into the neural network
-	std::vector<float>* teachingPattern;
+	std::unique_ptr<std::vector<float>> teachingPattern;
 protected:	
 	std::vector<float>* getTeachingInput(AbstractActivationFunction* activationFunction);
 	std::vector<float>* getTeachingPattern();
 public:
-	~TeachingLessonLinearInput();
 	TeachingLessonLinearInput(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_);
 };
 

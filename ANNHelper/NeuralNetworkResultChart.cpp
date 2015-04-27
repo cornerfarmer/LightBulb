@@ -4,15 +4,40 @@
 #include "TopologicalOrder.hpp"
 #include <exception>
 
-NeuralNetworkResultChart::~NeuralNetworkResultChart()
+NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions()
 {
-	delete(options);
+	binaryInterpretation = true;
+	height = 300;
+	width = 300;
+	neuralNetwork = NULL;
+	xInputNeuronIndex = 0;
+	xRangeStart = 0;
+	xRangeEnd = 1;
+	yInputNeuronIndex = 1;
+	yRangeStart = 0;
+	yRangeEnd = 1;
+	activationOrder = NULL;
+	outputNeuronIndex = 0;
+	ouputRangeStart = 0;
+	ouputRangeEnd = 1;
 }
 
-NeuralNetworkResultChart::NeuralNetworkResultChart(int posX_, int posY_, NeuralNetworkResultChartOptions* options_)
+NeuralNetworkResultChartOptions::~NeuralNetworkResultChartOptions()
+{
+	delete(activationOrder);
+}
+
+NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions(const NeuralNetworkResultChartOptions &obj)
+{
+	*this = obj;
+	activationOrder = obj.activationOrder->getCopy();
+}
+
+
+NeuralNetworkResultChart::NeuralNetworkResultChart(int posX_, int posY_, NeuralNetworkResultChartOptions& options_)
 	: GraphicObject(posX_, posY_)
 {
-	options = options_;
+	options.reset(new NeuralNetworkResultChartOptions(options_));
 }
 
 void NeuralNetworkResultChart::recalculateAllValues()
@@ -27,7 +52,7 @@ void NeuralNetworkResultChart::recalculateAllValues()
 		throw std::invalid_argument("Can't find any outputNeuron with index 'outputNeuronIndex'");
 
 	// Create a new pixel array, which will contain all color informations
-	sf::Uint8* pixels = new sf::Uint8[options->width*options->height*4];
+	std::unique_ptr<sf::Uint8[]> pixels(new sf::Uint8[options->width*options->height*4]);
 	// Create a new inputVector with the size of the inputCount
 	std::vector<float> inputVector(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
 
@@ -66,9 +91,7 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	// Create a new Texture
 	texture.create(options->width, options->height); 
 	// Insert the pixelarray into the texture
-	texture.update(pixels);
-	// Free the used memory
-	delete[](pixels);
+	texture.update(pixels.get());
 }
 
 void NeuralNetworkResultChart::draw(sf::RenderWindow &window)
@@ -78,3 +101,4 @@ void NeuralNetworkResultChart::draw(sf::RenderWindow &window)
 	// Draw the sprite
 	window.draw(sprite);
 }
+

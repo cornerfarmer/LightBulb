@@ -14,9 +14,8 @@ class AbstractActivationOrder;
 class NeuralNetwork 
 {
 private:
-	AbstractNetworkTopology* networkTopology;
+	std::unique_ptr<AbstractNetworkTopology> networkTopology;
 public:
-	~NeuralNetwork();
 	NeuralNetwork(AbstractNetworkTopology* networkTopology_);
 	// Recalculates the activation of all neurons is the given ActivationOrder
 	void refreshAllNeurons(AbstractActivationOrder &activationOrder);

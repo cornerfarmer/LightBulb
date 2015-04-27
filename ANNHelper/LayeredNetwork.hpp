@@ -26,6 +26,7 @@ struct LayeredNetworkOptions
 	std::vector<unsigned int> neuronsPerLayerCount;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
+	LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj);
 };
 
 typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
@@ -34,11 +35,11 @@ typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
 class LayeredNetwork : public AbstractNetworkTopology
 {
 private:
-	LayeredNetworkOptions_t* options;
+	std::unique_ptr<LayeredNetworkOptions_t> options;
 	std::vector<std::vector<AbstractNeuron*>> neurons;
 public:
 	~LayeredNetwork();
-	LayeredNetwork(LayeredNetworkOptions_t* options_);	
+	LayeredNetwork(LayeredNetworkOptions_t &options_);	
 	// Returns all InputNeurons (first layer)
 	std::vector<AbstractNeuron*>* getInputNeurons();
 	// Returns all OutputNeurons (last layer)

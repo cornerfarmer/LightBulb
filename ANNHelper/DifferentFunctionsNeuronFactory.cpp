@@ -6,16 +6,6 @@
 #include "AbstractOutputFunction.hpp"
 #include <exception>
 
-DifferentFunctionsNeuronFactory::~DifferentFunctionsNeuronFactory()
-{
-	delete(activationFunctionInnerNeuron);
-	delete(inputFunctionInnerNeuron);
-	delete(outputFunctionInnerNeuron);
-
-	delete(activationFunctionOutputNeuron);
-	delete(inputFunctionOutputNeuron);
-	delete(outputFunctionOutputNeuron);
-}
 
 DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_)
 {
@@ -34,13 +24,24 @@ DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(AbstractInputFu
 		throw std::invalid_argument("The given outputFunctionOutputNeuron is not valid");
 
 	// Functions for inner neurons
-	activationFunctionInnerNeuron = activationFunctionInnerNeuron_;
-	inputFunctionInnerNeuron = inputFunctionInnerNeuron_;
-	outputFunctionInnerNeuron = outputFunctionInnerNeuron_;
+	activationFunctionInnerNeuron = std::unique_ptr<AbstractActivationFunction>(activationFunctionInnerNeuron_);
+	inputFunctionInnerNeuron = std::unique_ptr<AbstractInputFunction>(inputFunctionInnerNeuron_);
+	outputFunctionInnerNeuron = std::unique_ptr<AbstractOutputFunction>(outputFunctionInnerNeuron_);
 	// Functions for output neurons
-	activationFunctionOutputNeuron = activationFunctionOutputNeuron_;
-	inputFunctionOutputNeuron = inputFunctionOutputNeuron_;
-	outputFunctionOutputNeuron = outputFunctionOutputNeuron_;
+	activationFunctionOutputNeuron = std::unique_ptr<AbstractActivationFunction>(activationFunctionOutputNeuron_);
+	inputFunctionOutputNeuron = std::unique_ptr<AbstractInputFunction>(inputFunctionOutputNeuron_);
+	outputFunctionOutputNeuron = std::unique_ptr<AbstractOutputFunction>(outputFunctionOutputNeuron_);
+}
+
+DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(const DifferentFunctionsNeuronFactory &obj)
+{
+	activationFunctionInnerNeuron =std::unique_ptr<AbstractActivationFunction>(obj.activationFunctionInnerNeuron->getActivationFunctionCopy());
+	inputFunctionInnerNeuron = std::unique_ptr<AbstractInputFunction>(obj.inputFunctionInnerNeuron->getInputFunctionCopy());
+	outputFunctionInnerNeuron = std::unique_ptr<AbstractOutputFunction>(obj.outputFunctionInnerNeuron->getOutputFunctionCopy());
+
+	activationFunctionOutputNeuron =std::unique_ptr<AbstractActivationFunction>(obj.activationFunctionOutputNeuron->getActivationFunctionCopy());
+	inputFunctionOutputNeuron = std::unique_ptr<AbstractInputFunction>(obj.inputFunctionOutputNeuron->getInputFunctionCopy());
+	outputFunctionOutputNeuron = std::unique_ptr<AbstractOutputFunction>(obj.outputFunctionOutputNeuron->getOutputFunctionCopy());
 }
 
 InputNeuron* DifferentFunctionsNeuronFactory::createInputNeuron()
@@ -56,4 +57,9 @@ StandardNeuron* DifferentFunctionsNeuronFactory::createInnerNeuron()
 StandardNeuron* DifferentFunctionsNeuronFactory::createOutputNeuron()
 {
 	return new StandardNeuron(inputFunctionOutputNeuron->getInputFunctionCopy(), activationFunctionOutputNeuron->getActivationFunctionCopy(), outputFunctionOutputNeuron->getOutputFunctionCopy());
+}
+
+AbstractNeuronFactory* DifferentFunctionsNeuronFactory::getCopy()
+{
+	return new DifferentFunctionsNeuronFactory(*this);
 }

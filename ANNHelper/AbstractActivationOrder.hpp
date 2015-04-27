@@ -14,6 +14,7 @@ public:
 	virtual ~AbstractActivationOrder() {}
 	// Activates all Neurons in the given topology in a special order
 	virtual void executeActivation(AbstractNetworkTopology &networkTopology) = 0;
+	virtual AbstractActivationOrder* getCopy() = 0; 
 };
 
 #endif

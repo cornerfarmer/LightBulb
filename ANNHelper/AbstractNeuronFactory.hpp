@@ -19,6 +19,8 @@ public:
 	virtual StandardNeuron* createInnerNeuron() = 0;
 	// Create a new output neuron
 	virtual StandardNeuron* createOutputNeuron() = 0;
+	// Get a copy of the factory
+	virtual AbstractNeuronFactory* getCopy() = 0;
 };
 
 #endif

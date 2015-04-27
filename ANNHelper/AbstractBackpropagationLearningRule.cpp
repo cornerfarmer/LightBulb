@@ -95,7 +95,7 @@ float AbstractBackpropagationLearningRule::startAlgorithm(NeuralNetwork &neuralN
 			}
 
 			// Go through every TeachingLesson
-			for (std::vector<AbstractTeachingLesson*>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 			{
 				// Calculate the errorvector 
 				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);

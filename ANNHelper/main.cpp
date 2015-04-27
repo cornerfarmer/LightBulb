@@ -24,14 +24,14 @@
 
 void doNNTest()
 {
-	LayeredNetworkOptions* layeredNetworkOptions = new LayeredNetworkOptions();
-	layeredNetworkOptions->neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
+	LayeredNetworkOptions layeredNetworkOptions;
+	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
 																				new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions->neuronsPerLayerCount[0]=8;
-	layeredNetworkOptions->neuronsPerLayerCount[1]=3;
-	layeredNetworkOptions->neuronsPerLayerCount[2]=8;
-	layeredNetworkOptions->useBiasNeurons = true;
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
+	layeredNetworkOptions.useBiasNeurons = true;
 
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
 
@@ -79,10 +79,10 @@ void doNNTest()
 	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
 
 
-	NeuralNetworkResultChartOptions* neuralNetworkResultChartOptions = new NeuralNetworkResultChartOptions();
-	neuralNetworkResultChartOptions->neuralNetwork = &neuralNetwork;
-	neuralNetworkResultChartOptions->binaryInterpretation = false;
-	neuralNetworkResultChartOptions->activationOrder = new TopologicalOrder();
+	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
+	neuralNetworkResultChartOptions.binaryInterpretation = false;
+	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();

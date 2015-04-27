@@ -5,18 +5,13 @@
 #include "InputNeuron.hpp"
 #include <exception>
 
-NeuralNetwork::~NeuralNetwork()
-{
-	delete(networkTopology);
-}
-
 NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 {
 	// Check if all given options are correct
 	if (!networkTopology_)
 		throw std::invalid_argument("The given networkTopology is not valid");
 
-	networkTopology = networkTopology_;
+	networkTopology.reset(networkTopology_);
 }
 
 void NeuralNetwork::refreshAllNeurons(AbstractActivationOrder &activationOrder)
@@ -57,5 +52,5 @@ void NeuralNetwork::setInput(std::vector<float> &inputVector)
 
 AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
 {
-	return networkTopology;
+	return networkTopology.get();
 }

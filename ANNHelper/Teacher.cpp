@@ -6,21 +6,13 @@
 #include "AbstractNeuron.hpp"
 #include "Edge.hpp"
 
-Teacher::~Teacher()
-{
-	for (int i = 0; i < teachingLessons.size(); i++)
-	{
-		delete (teachingLessons[i]);
-	}
-}
-
 void Teacher::addTeachingLesson(AbstractTeachingLesson* newTeachingLesson)
 {
 	// Add the newTeachingLesson to the list
-	teachingLessons.push_back(newTeachingLesson);
+	teachingLessons.push_back(std::unique_ptr<AbstractTeachingLesson>(newTeachingLesson));
 }
 
-std::vector<AbstractTeachingLesson*>* Teacher::getTeachingLessons()
+std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLessons()
 {
 	return &teachingLessons;
 }
@@ -30,7 +22,7 @@ float Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrd
 	float totalError = 0;
 
 	// Add every specific error to the total error
-	for (std::vector<AbstractTeachingLesson*>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
 	{
 		totalError += (*teachingLesson)->getSpecificError(neuralNetwork, activationOrder);
 	}

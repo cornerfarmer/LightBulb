@@ -3,18 +3,11 @@
 #include "AbstractActivationFunction.hpp"
 #include <exception>
 
-TeachingLessonBooleanInput::~TeachingLessonBooleanInput()
-{
-	delete(teachingInput);
-	delete(teachingPattern);
-	delete(teachingInputLinear);
-}
-
 TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<float>* teachingPattern_, std::vector<bool>* teachingInput_)
 {
-	teachingInput = teachingInput_;
-	teachingPattern = teachingPattern_;
-	teachingInputLinear = new std::vector<float>(teachingInput->size());
+	teachingInput = std::unique_ptr<std::vector<bool>>(teachingInput_);	
+	teachingPattern = std::unique_ptr<std::vector<float>>(teachingPattern_);
+	teachingInputLinear = std::unique_ptr<std::vector<float>>(new std::vector<float>(teachingInput->size()));
 }
 
 std::vector<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
@@ -34,10 +27,10 @@ std::vector<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivat
 	}
 
 	// Return the vector with float values
-	return teachingInputLinear;
+	return teachingInputLinear.get();
 }
 
 std::vector<float>* TeachingLessonBooleanInput::getTeachingPattern()
 {
-	return teachingPattern;
+	return teachingPattern.get();
 }
