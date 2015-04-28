@@ -10,6 +10,7 @@
 class AbstractActivationFunction;
 class AbstractInputFunction;
 class AbstractOutputFunction;
+class AbstractThreshold;
 class Edge;
 
 // All neurons except of InputNeurons are StandardNeurons.
@@ -17,7 +18,7 @@ class Edge;
 class StandardNeuron : public AbstractNeuron
 {
 private:
-	float threshold;
+	AbstractThreshold* threshold;
 	float netInput;
 	AbstractInputFunction* inputFunction;
 	AbstractActivationFunction* activationFunction;
@@ -25,7 +26,7 @@ private:
 	std::vector<Edge*> afferentEdges;
 public:
 	~StandardNeuron();
-	StandardNeuron(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
+	StandardNeuron(AbstractThreshold* threshold_, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
 	// Add a new afferent Edge directing to the given neuron
 	void addPrevNeuron(AbstractNeuron* newPrevNeuron, float weight);
 	void addPrevNeuron(Edge* newEdge);

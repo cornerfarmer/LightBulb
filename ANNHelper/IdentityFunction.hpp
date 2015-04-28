@@ -14,9 +14,9 @@ private:
 public:
 	// Just returns the given input
 	float execute(float input);
-	float execute(float input, float threshold);
+	float execute(float input, AbstractThreshold* threshold);
 	// Returns always 0
-	float executeDerivation(float input, float threshold);
+	float executeDerivation(float input, AbstractThreshold* threshold);
 	AbstractOutputFunction* getOutputFunctionCopy();
 	AbstractActivationFunction* getActivationFunctionCopy();
 	float getMaximum();

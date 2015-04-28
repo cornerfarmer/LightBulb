@@ -12,8 +12,8 @@ private:
 	float temperatureParameter;
 public:
 	FermiFunction(float temperatureParameter_);
-	float execute(float input, float threshold);
-	float executeDerivation(float input, float threshold);
+	float execute(float input, AbstractThreshold* threshold);
+	float executeDerivation(float input, AbstractThreshold* threshold);
 	AbstractActivationFunction* getActivationFunctionCopy();
 	float getMaximum();
 	float getMinimum();

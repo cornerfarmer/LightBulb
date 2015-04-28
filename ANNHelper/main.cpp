@@ -21,12 +21,13 @@
 #include "TeachingLessonBooleanInput.hpp"
 #include "NeuralNetworkResultChart.hpp"
 #include "DifferentFunctionsNeuronFactory.hpp"
+#include "StandardThreshold.hpp"
 
 void doNNTest()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
-																				new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
+																				new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=3;

@@ -137,6 +137,15 @@
     <ClInclude Include="TeachingLessonLinearInput.hpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClInclude>
+    <ClInclude Include="RBFNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -240,6 +249,15 @@
     </ClCompile>
     <ClCompile Include="TeachingLessonLinearInput.cpp">
       <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="RBFNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -91,15 +91,18 @@
     <ClCompile Include="NeuralNetworkResultChart.cpp" />
     <ClCompile Include="AbstractNeuron.cpp" />
     <ClCompile Include="AbstractOutputFunction.cpp" />
+    <ClCompile Include="RBFNetwork.cpp" />
     <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
     <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
     <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
+    <ClCompile Include="StandardThreshold.cpp" />
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="AbstractTeachingLesson.cpp" />
     <ClCompile Include="TeachingLessonBooleanInput.cpp" />
     <ClCompile Include="TeachingLessonLinearInput.cpp" />
+    <ClCompile Include="AbstractThreshold.cpp" />
     <ClCompile Include="TopologicalOrder.cpp" />
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
@@ -126,15 +129,18 @@
     <ClInclude Include="NeuralNetworkResultChart.hpp" />
     <ClInclude Include="AbstractNeuron.hpp" />
     <ClInclude Include="AbstractOutputFunction.hpp" />
+    <ClInclude Include="RBFNetwork.hpp" />
     <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
     <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />
     <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
+    <ClInclude Include="StandardThreshold.hpp" />
     <ClInclude Include="Teacher.hpp" />
     <ClInclude Include="AbstractTeachingLesson.hpp" />
     <ClInclude Include="TeachingLessonBooleanInput.hpp" />
     <ClInclude Include="TeachingLessonLinearInput.hpp" />
+    <ClInclude Include="AbstractThreshold.hpp" />
     <ClInclude Include="TopologicalOrder.hpp" />
     <ClInclude Include="WeightedSumFunction.hpp" />
   </ItemGroup>

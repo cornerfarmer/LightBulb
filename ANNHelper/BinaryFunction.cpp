@@ -1,17 +1,24 @@
 #include "BinaryFunction.hpp"
+#include "StandardThreshold.hpp"
+#include <stdexcept>
 
-float BinaryFunction::execute(float input, float threshold)
+float BinaryFunction::execute(float input, AbstractThreshold* threshold)
 {
+	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
+	// Check if the given threshold was a StandardThreshold
+	if (!standardThreshold)
+		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
+
 	// If the input is greater than the threshold return 1 else 0
-	if (input > threshold)
+	if (input > standardThreshold->getThreshold())
 		return 1;
 	else
 		return 0;
 }
 
-float BinaryFunction::executeDerivation(float input, float threshold)
+float BinaryFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
-	// TODO: Throw error;
+	throw std::logic_error("There is no derivation of the binary function possible");
 	return 0;
 }
 

@@ -9,14 +9,16 @@ StandardNeuron::~StandardNeuron()
 	delete(inputFunction);
 	delete(activationFunction);
 	delete(outputFunction);
+	delete(threshold);
 }
 
-StandardNeuron::StandardNeuron(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
+StandardNeuron::StandardNeuron(AbstractThreshold* threshold_, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
 {
 	inputFunction = inputFunction_;
 	activationFunction = activationFunction_;
 	outputFunction = outputFunction_;
-	threshold = 0;
+
+	threshold = threshold_;
 	netInput = 0;
 }
 
@@ -39,7 +41,7 @@ void StandardNeuron::addPrevNeuron(Edge* newEdge)
 void StandardNeuron::refreshActivation()
 {
 	// Calc the input from all afferentEdges
-	netInput = inputFunction->execute(afferentEdges);
+	netInput = inputFunction->execute(afferentEdges, threshold);
 	// Calc the activation from the input
 	activation = activationFunction->execute(netInput, threshold);
 	// Calc the output activation from the activation

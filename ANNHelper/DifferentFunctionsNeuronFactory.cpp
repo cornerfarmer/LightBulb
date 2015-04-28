@@ -4,18 +4,24 @@
 #include "AbstractInputFunction.hpp"
 #include "AbstractActivationFunction.hpp"
 #include "AbstractOutputFunction.hpp"
+#include "AbstractThreshold.hpp"
 #include <exception>
 
 
-DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_)
+DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(AbstractThreshold* thresholdInnerNeuron_, AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractThreshold* thresholdOutputNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_)
 {
 	// Check if all given options are correct
+	if (!thresholdInnerNeuron_)
+		throw std::invalid_argument("The given thresholdInnerNeuron is not valid");
 	if (!activationFunctionInnerNeuron_)
 		throw std::invalid_argument("The given activationFunctionInnerNeuron is not valid");
 	if (!inputFunctionInnerNeuron_)
 		throw std::invalid_argument("The given inputFunctionInnerNeuron is not valid");
 	if (!outputFunctionInnerNeuron_)
 		throw std::invalid_argument("The given outputFunctionInnerNeuron is not valid");
+
+	if (!thresholdOutputNeuron_)
+		throw std::invalid_argument("The given thresholdOutputNeuron is not valid");
 	if (!activationFunctionOutputNeuron_)
 		throw std::invalid_argument("The given activationFunctionOutputNeuron is not valid");
 	if (!inputFunctionOutputNeuron_)
@@ -23,25 +29,30 @@ DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(AbstractInputFu
 	if (!outputFunctionOutputNeuron_)
 		throw std::invalid_argument("The given outputFunctionOutputNeuron is not valid");
 
-	// Functions for inner neurons
-	activationFunctionInnerNeuron = std::unique_ptr<AbstractActivationFunction>(activationFunctionInnerNeuron_);
-	inputFunctionInnerNeuron = std::unique_ptr<AbstractInputFunction>(inputFunctionInnerNeuron_);
-	outputFunctionInnerNeuron = std::unique_ptr<AbstractOutputFunction>(outputFunctionInnerNeuron_);
-	// Functions for output neurons
-	activationFunctionOutputNeuron = std::unique_ptr<AbstractActivationFunction>(activationFunctionOutputNeuron_);
-	inputFunctionOutputNeuron = std::unique_ptr<AbstractInputFunction>(inputFunctionOutputNeuron_);
-	outputFunctionOutputNeuron = std::unique_ptr<AbstractOutputFunction>(outputFunctionOutputNeuron_);
+	// Inner neurons
+	thresholdInnerNeuron.reset(thresholdInnerNeuron_);
+	activationFunctionInnerNeuron.reset(activationFunctionInnerNeuron_);
+	inputFunctionInnerNeuron.reset(inputFunctionInnerNeuron_);
+	outputFunctionInnerNeuron.reset(outputFunctionInnerNeuron_);
+	// Output neurons
+	thresholdOutputNeuron.reset(thresholdOutputNeuron_);
+	activationFunctionOutputNeuron.reset(activationFunctionOutputNeuron_);
+	inputFunctionOutputNeuron.reset(inputFunctionOutputNeuron_);
+	outputFunctionOutputNeuron.reset(outputFunctionOutputNeuron_);
 }
 
 DifferentFunctionsNeuronFactory::DifferentFunctionsNeuronFactory(const DifferentFunctionsNeuronFactory &obj)
 {
-	activationFunctionInnerNeuron =std::unique_ptr<AbstractActivationFunction>(obj.activationFunctionInnerNeuron->getActivationFunctionCopy());
-	inputFunctionInnerNeuron = std::unique_ptr<AbstractInputFunction>(obj.inputFunctionInnerNeuron->getInputFunctionCopy());
-	outputFunctionInnerNeuron = std::unique_ptr<AbstractOutputFunction>(obj.outputFunctionInnerNeuron->getOutputFunctionCopy());
-
-	activationFunctionOutputNeuron =std::unique_ptr<AbstractActivationFunction>(obj.activationFunctionOutputNeuron->getActivationFunctionCopy());
-	inputFunctionOutputNeuron = std::unique_ptr<AbstractInputFunction>(obj.inputFunctionOutputNeuron->getInputFunctionCopy());
-	outputFunctionOutputNeuron = std::unique_ptr<AbstractOutputFunction>(obj.outputFunctionOutputNeuron->getOutputFunctionCopy());
+	// Inner neurons
+	thresholdInnerNeuron.reset(obj.thresholdInnerNeuron->getCopy());
+	activationFunctionInnerNeuron.reset(obj.activationFunctionInnerNeuron->getActivationFunctionCopy());
+	inputFunctionInnerNeuron.reset(obj.inputFunctionInnerNeuron->getInputFunctionCopy());
+	outputFunctionInnerNeuron.reset(obj.outputFunctionInnerNeuron->getOutputFunctionCopy());
+	// Output neurons
+	thresholdOutputNeuron.reset(obj.thresholdOutputNeuron->getCopy());
+	activationFunctionOutputNeuron.reset(obj.activationFunctionOutputNeuron->getActivationFunctionCopy());
+	inputFunctionOutputNeuron.reset(obj.inputFunctionOutputNeuron->getInputFunctionCopy());
+	outputFunctionOutputNeuron.reset(obj.outputFunctionOutputNeuron->getOutputFunctionCopy());
 }
 
 InputNeuron* DifferentFunctionsNeuronFactory::createInputNeuron()
@@ -51,12 +62,12 @@ InputNeuron* DifferentFunctionsNeuronFactory::createInputNeuron()
 
 StandardNeuron* DifferentFunctionsNeuronFactory::createInnerNeuron()
 {
-	return new StandardNeuron(inputFunctionInnerNeuron->getInputFunctionCopy(), activationFunctionInnerNeuron->getActivationFunctionCopy(), outputFunctionInnerNeuron->getOutputFunctionCopy());
+	return new StandardNeuron(thresholdInnerNeuron->getCopy(), inputFunctionInnerNeuron->getInputFunctionCopy(), activationFunctionInnerNeuron->getActivationFunctionCopy(), outputFunctionInnerNeuron->getOutputFunctionCopy());
 }
 
 StandardNeuron* DifferentFunctionsNeuronFactory::createOutputNeuron()
 {
-	return new StandardNeuron(inputFunctionOutputNeuron->getInputFunctionCopy(), activationFunctionOutputNeuron->getActivationFunctionCopy(), outputFunctionOutputNeuron->getOutputFunctionCopy());
+	return new StandardNeuron(thresholdOutputNeuron->getCopy(), inputFunctionOutputNeuron->getInputFunctionCopy(), activationFunctionOutputNeuron->getActivationFunctionCopy(), outputFunctionOutputNeuron->getOutputFunctionCopy());
 }
 
 AbstractNeuronFactory* DifferentFunctionsNeuronFactory::getCopy()

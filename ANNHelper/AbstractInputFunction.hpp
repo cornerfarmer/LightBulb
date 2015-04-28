@@ -8,6 +8,7 @@
 
 // Forward declarations
 class Edge;
+class AbstractThreshold;
 
 // An InputFunction calculates one input value from the output of all previous neurons
 class AbstractInputFunction
@@ -16,7 +17,7 @@ private:
 public:
 	virtual ~AbstractInputFunction() {}
 	// Calculate the one value from all given afferent edges
-	virtual float execute(std::vector<Edge*> &input) = 0;
+	virtual float execute(std::vector<Edge*> &input, AbstractThreshold* threshold) = 0;
 	// Create a copy of the object
 	virtual AbstractInputFunction* getInputFunctionCopy() = 0;
 };

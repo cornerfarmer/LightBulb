@@ -1,19 +1,30 @@
 #include "HyperbolicTangentFunction.hpp"
+#include "StandardThreshold.hpp"
 #include <limits>
 #include <stdexcept>
 
-float HyperbolicTangentFunction::execute(float input, float threshold)
+float HyperbolicTangentFunction::execute(float input, AbstractThreshold* threshold)
 {
+	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
+	// Check if the given threshold was a StandardThreshold
+	if (!standardThreshold)
+		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
+
 	// Consider the threshold
-	input -= threshold;
+	input -= standardThreshold->getThreshold();
 	// Return the value of the hyperbolic tangent in this point
 	return tanh(input);
 }
 
-float HyperbolicTangentFunction::executeDerivation(float input, float threshold)
+float HyperbolicTangentFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
+	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
+	// Check if the given threshold was a StandardThreshold
+	if (!standardThreshold)
+		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
+
 	// Consider the threshold
-	input -= threshold;
+	input -= standardThreshold->getThreshold();
 	// Return the value of the derivation of the hyperbolic tangent: 1 / cosh^2
 	return 1 / pow(cosh(input), 2);
 

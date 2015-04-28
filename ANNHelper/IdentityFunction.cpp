@@ -6,12 +6,12 @@ float IdentityFunction::execute(float input)
 	return input;
 }
 
-float IdentityFunction::execute(float input, float threshold)
+float IdentityFunction::execute(float input, AbstractThreshold* threshold)
 {
 	return input;
 }
 
-float IdentityFunction::executeDerivation(float input, float threshold)
+float IdentityFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
 	return 0;
 }

@@ -2,7 +2,7 @@
 #include "Edge.hpp"
 #include "AbstractNeuron.hpp"
 
-float WeightedSumFunction::execute(std::vector<Edge*> &input)
+float WeightedSumFunction::execute(std::vector<Edge*> &input, AbstractThreshold* threshold)
 {
 	float sum = 0.0;
 

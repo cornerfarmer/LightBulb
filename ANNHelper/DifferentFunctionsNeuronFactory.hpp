@@ -15,21 +15,24 @@ class StandardNeuron;
 class AbstractActivationFunction;
 class AbstractInputFunction;
 class AbstractOutputFunction;
+class AbstractThreshold;
 
 // This factory makes it possible to use different functions for inner and output neurons
 class DifferentFunctionsNeuronFactory : public AbstractNeuronFactory
 {
 private:
-	// Functions for inner neurons
+	// Inner neurons
+	std::unique_ptr<AbstractThreshold> thresholdInnerNeuron;
 	std::unique_ptr<AbstractActivationFunction> activationFunctionInnerNeuron;
 	std::unique_ptr<AbstractInputFunction> inputFunctionInnerNeuron;
 	std::unique_ptr<AbstractOutputFunction> outputFunctionInnerNeuron;
-	// Functions for output neurons
+	// Output neurons
+	std::unique_ptr<AbstractThreshold> thresholdOutputNeuron;
 	std::unique_ptr<AbstractActivationFunction> activationFunctionOutputNeuron;
 	std::unique_ptr<AbstractInputFunction> inputFunctionOutputNeuron;
 	std::unique_ptr<AbstractOutputFunction> outputFunctionOutputNeuron;
 public:	
-	DifferentFunctionsNeuronFactory(AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_);
+	DifferentFunctionsNeuronFactory(AbstractThreshold* thresholdInnerNeuron_, AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractThreshold* thresholdOutputNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_);
 	DifferentFunctionsNeuronFactory(const DifferentFunctionsNeuronFactory &obj);
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();

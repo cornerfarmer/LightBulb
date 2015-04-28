@@ -4,11 +4,14 @@
 #include "AbstractInputFunction.hpp"
 #include "AbstractActivationFunction.hpp"
 #include "AbstractOutputFunction.hpp"
+#include "AbstractThreshold.hpp"
 #include <exception>
 
-SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
+SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(AbstractThreshold* threshold_, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
 {
 	// Check if all given options are correct
+	if (!threshold_)
+		throw std::invalid_argument("The given threshold is not valid");
 	if (!activationFunction_)
 		throw std::invalid_argument("The given activationFunction is not valid");
 	if (!inputFunction_)
@@ -16,9 +19,10 @@ SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(AbstractInputFunction* in
 	if (!outputFunction_)
 		throw std::invalid_argument("The given outputFunction is not valid");
 
-	activationFunction = std::unique_ptr<AbstractActivationFunction>(activationFunction_);
-	inputFunction = std::unique_ptr<AbstractInputFunction>(inputFunction_);
-	outputFunction = std::unique_ptr<AbstractOutputFunction>(outputFunction_);
+	threshold.reset(threshold_);
+	activationFunction.reset(activationFunction_);
+	inputFunction.reset(inputFunction_);
+	outputFunction.reset(outputFunction_);
 }
 
 SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(const SameFunctionsNeuronFactory &obj)
@@ -35,12 +39,12 @@ InputNeuron* SameFunctionsNeuronFactory::createInputNeuron()
 
 StandardNeuron* SameFunctionsNeuronFactory::createInnerNeuron()
 {
-	return new StandardNeuron(inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy(), outputFunction->getOutputFunctionCopy());
+	return new StandardNeuron(threshold->getCopy(), inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy(), outputFunction->getOutputFunctionCopy());
 }
 
 StandardNeuron* SameFunctionsNeuronFactory::createOutputNeuron()
 {
-	return new StandardNeuron(inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy(), outputFunction->getOutputFunctionCopy());
+	return new StandardNeuron(threshold->getCopy(), inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy(), outputFunction->getOutputFunctionCopy());
 }
 
 AbstractNeuronFactory* SameFunctionsNeuronFactory::getCopy()
