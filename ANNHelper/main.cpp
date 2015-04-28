@@ -22,8 +22,9 @@
 #include "NeuralNetworkResultChart.hpp"
 #include "DifferentFunctionsNeuronFactory.hpp"
 #include "StandardThreshold.hpp"
+#include "RBFNetwork.hpp"
 
-void doNNTest()
+void doPerceptronTest()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
@@ -105,8 +106,16 @@ void doNNTest()
 
 }
 
+void doRBFTest()
+{
+	RBFNetwork* rbfNetwork = new RBFNetwork(3, 2, 3);
+
+	NeuralNetwork neuralNetwork(rbfNetwork);
+}
+
 int main()
 {
-	doNNTest();
+	while (true)
+	doRBFTest();
     return 0;
 }

@@ -34,12 +34,14 @@ typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
 class LayeredNetwork : public AbstractNetworkTopology
 {
-private:
+protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
 	std::vector<std::vector<AbstractNeuron*>> neurons;
+	void LayeredNetwork::buildNetwork();
 public:
 	~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions_t &options_);	
+	LayeredNetwork();	
 	// Returns all InputNeurons (first layer)
 	std::vector<AbstractNeuron*>* getInputNeurons();
 	// Returns all OutputNeurons (last layer)

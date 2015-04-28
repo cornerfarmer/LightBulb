@@ -3,6 +3,7 @@
 #include "AbstractInputFunction.hpp"
 #include "AbstractActivationFunction.hpp"
 #include "AbstractOutputFunction.hpp"
+#include "AbstractThreshold.hpp"
 
 StandardNeuron::~StandardNeuron()
 {

@@ -77,7 +77,9 @@
     <ClCompile Include="DeltaLearningRule.cpp" />
     <ClCompile Include="DifferentFunctionsNeuronFactory.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="EuclideanDistance.cpp" />
     <ClCompile Include="FermiFunction.cpp" />
+    <ClCompile Include="GaussianRBFFunction.cpp" />
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="HyperbolicTangentFunction.cpp" />
     <ClCompile Include="IdentityFunction.cpp" />
@@ -92,6 +94,7 @@
     <ClCompile Include="AbstractNeuron.cpp" />
     <ClCompile Include="AbstractOutputFunction.cpp" />
     <ClCompile Include="RBFNetwork.cpp" />
+    <ClCompile Include="RBFThreshold.cpp" />
     <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
     <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
@@ -116,7 +119,9 @@
     <ClInclude Include="DeltaLearningRule.hpp" />
     <ClInclude Include="DifferentFunctionsNeuronFactory.hpp" />
     <ClInclude Include="Edge.hpp" />
+    <ClInclude Include="EuclideanDistance.hpp" />
     <ClInclude Include="FermiFunction.hpp" />
+    <ClInclude Include="GaussianRBFFunction.hpp" />
     <ClInclude Include="GraphicObject.hpp" />
     <ClInclude Include="HyperbolicTangentFunction.hpp" />
     <ClInclude Include="IdentityFunction.hpp" />
@@ -130,6 +135,7 @@
     <ClInclude Include="AbstractNeuron.hpp" />
     <ClInclude Include="AbstractOutputFunction.hpp" />
     <ClInclude Include="RBFNetwork.hpp" />
+    <ClInclude Include="RBFThreshold.hpp" />
     <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
     <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />

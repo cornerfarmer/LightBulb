@@ -43,19 +43,31 @@ LayeredNetwork::~LayeredNetwork()
 	}
 }
 
+LayeredNetwork::LayeredNetwork()
+{
+}
+
 LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 {
 	// Copy all options
 	options.reset(new LayeredNetworkOptions(options_));
 
+	buildNetwork();		
+}
+
+void LayeredNetwork::buildNetwork()
+{
 	// Check if all given options are correct
 	if (getLayerCount() < 2)
-		throw std::invalid_argument("A layered network must always contain two layers (one input and one output layer)");
+		throw std::invalid_argument("A layered network must always contain at least two layers (one input and one output layer)");
 	for (int l = 0; l < getLayerCount(); l++)
 		if (options->neuronsPerLayerCount[l] == 0)
 			throw std::invalid_argument("Every layer has to contain at least one neuron");
 	if (!options->neuronFactory)
 		throw std::invalid_argument("The given neuronFactory is not valid");
+
+	// Clear all neurons
+	neurons.clear();
 
 	// Add all neurons
 	for (int l = 0; l < getLayerCount(); l++)
@@ -94,7 +106,6 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 			neurons.back().push_back(new BiasNeuron());
 	}
 
-		
 }
 
 std::vector<AbstractNeuron*>* LayeredNetwork::getInputNeurons()

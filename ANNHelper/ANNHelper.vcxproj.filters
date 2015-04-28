@@ -146,6 +146,15 @@
     <ClInclude Include="StandardThreshold.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
+    <ClInclude Include="EuclideanDistance.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="RBFThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianRBFFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -258,6 +267,15 @@
     </ClCompile>
     <ClCompile Include="StandardThreshold.cpp">
       <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="EuclideanDistance.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="RBFThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianRBFFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
