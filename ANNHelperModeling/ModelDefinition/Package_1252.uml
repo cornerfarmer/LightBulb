@@ -1228,5 +1228,24 @@
         </targetEnds>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ca0edee0-aa65-40c9-991b-aa5151776c8c"
+        name="RBFNetwork"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="35054367-704a-4bea-b941-7d4d4b21bb57"
+            isSubstitutable="false">
+            <classMoniker
+              Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
+              LastKnownName="LayeredNetwork"
+              LastKnownLocation="Package_1252.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

@@ -13,12 +13,13 @@ class AbstractActivationFunction;
 
 class AbstractTeachingLesson
 {
-protected:
+public:
+	// Put the teachingPattern into the neuralNetwork and refresh the network
+	void tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// This method should return a float vector of the teachingInput 
 	virtual std::vector<float>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
 	// This method should return a float vector of the teachingPattern
 	virtual std::vector<float>* getTeachingPattern() = 0;
-public:
 	virtual ~AbstractTeachingLesson() {}
 	// Calculate the Errorvector
 	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);

@@ -37,6 +37,7 @@ public:
 	std::vector<Edge*>* getAfferentEdges();
 	float getNetInput();
 	AbstractActivationFunction* getActivationFunction();
+	AbstractThreshold* getThreshold();
 };
 
 #endif

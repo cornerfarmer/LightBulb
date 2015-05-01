@@ -3,6 +3,14 @@
 #include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 
+void AbstractTeachingLesson::tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+{
+	// Insert the input
+	neuralNetwork.setInput(*getTeachingPattern());
+	// Let the network calculate
+	neuralNetwork.refreshAllNeurons(activationOrder);
+}
+
 std::unique_ptr<std::vector<float>> AbstractTeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	// Get the teachingInput
@@ -11,10 +19,9 @@ std::unique_ptr<std::vector<float>> AbstractTeachingLesson::getErrorvector(Neura
 	// Create the errorVector with the right size
 	std::unique_ptr<std::vector<float>> errorVector(new std::vector<float>(teachingInput->size()));
 
-	// Insert the input
-	neuralNetwork.setInput(*getTeachingPattern());
-	// Let the network calculate
-	neuralNetwork.refreshAllNeurons(activationOrder);
+	// Try the lesson
+	tryLesson(neuralNetwork, activationOrder);
+
 	// Extract the output
 	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
 

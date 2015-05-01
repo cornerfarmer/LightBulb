@@ -23,6 +23,8 @@
 #include "DifferentFunctionsNeuronFactory.hpp"
 #include "StandardThreshold.hpp"
 #include "RBFNetwork.hpp"
+#include "RBFInterpolationLearningRule.hpp"
+#include "TeachingLessonLinearInput.hpp"
 
 void doPerceptronTest()
 {
@@ -59,7 +61,7 @@ void doPerceptronTest()
 		std::vector<bool>* teachingInput= new std::vector<bool>(8);
 		for (int l=0;l<8;l+=1)
 		{			
-			(*teachingPattern)[l] = (i == l ? 1 : 0);
+			(*teachingPattern)[l] = (i == l ? 1.0f : 0.0f);
 			(*teachingInput)[l] = (i == l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 		}
@@ -108,14 +110,60 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(3, 2, 3);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 4, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
+
+	Teacher teacher;
+	for (int i=0;i<2;i+=1)
+	{
+		for (int l=0;l<2;l+=1)
+		{	
+			std::vector<float>* teachingPattern = new std::vector<float>(2);
+			std::vector<float>* teachingInput= new std::vector<float>(1);
+
+			(*teachingPattern)[0] = i;
+			(*teachingPattern)[1] = l;
+			(*teachingInput)[0] = (i != l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+
+			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
+		}
+	}
+
+	
+	RBFInterpolationLearningRule learningRule;
+
+	learningRule.doLearning(neuralNetwork, teacher);
+	
+
+	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
+	neuralNetworkResultChartOptions.binaryInterpretation = false;
+	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+	
+	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);
+	neuralNetworkResultChart.recalculateAllValues();
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        neuralNetworkResultChart.draw(window);
+        window.display();
+    }
+
 }
 
 int main()
 {
-	while (true)
 	doRBFTest();
     return 0;
 }

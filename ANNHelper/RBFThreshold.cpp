@@ -8,7 +8,7 @@ RBFThreshold::RBFThreshold(std::vector<float> &centerVector_, float width_)
 
 std::vector<float>* RBFThreshold::getCenterVector()
 {
-	return NULL;
+	return &centerVector;
 }
 
 float RBFThreshold::getWidth()

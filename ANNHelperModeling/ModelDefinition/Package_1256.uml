@@ -307,5 +307,24 @@
         </generalsInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="18e677d8-d2a6-4c82-9225-838040b4cf32"
+        name="RBFInterpolationLearningRule"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="58485043-fa67-498a-a48c-1c6f71df9484"
+            isSubstitutable="false">
+            <classMoniker
+              Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
+              LastKnownName="AbstractLearningRule"
+              LastKnownLocation="Package_1256.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

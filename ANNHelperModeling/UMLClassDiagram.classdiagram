@@ -2424,6 +2424,17 @@
               </targetEnds>
             </class>
           </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="49671132-d9d6-4ae8-97ec-543466027ab0" name="RBFNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="ca0edee0-aa65-40c9-991b-aa5151776c8c" />
+              <generalsInternal>
+                <generalization Id="2751f255-92f9-4661-b174-8cf50080846d" isSubstitutable="false">
+                  <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="LayeredNetwork" />
+                  <elementDefinition Id="35054367-704a-4bea-b941-7d4d4b21bb57" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
@@ -3190,6 +3201,17 @@
                 <generalization Id="c13698df-e655-4d4d-97e3-c7bbfcb44689" isSubstitutable="false">
                   <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
                   <elementDefinition Id="6534749b-63c6-435c-b8ba-e5da0078cb2e" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="0911dac2-ab8a-4599-950d-dd2e1e2ea154" name="RBFInterpolationLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="18e677d8-d2a6-4c82-9225-838040b4cf32" />
+              <generalsInternal>
+                <generalization Id="cbd193dd-e1c1-4283-b24a-05aeb4cb4439" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
+                  <elementDefinition Id="58485043-fa67-498a-a48c-1c6f71df9484" />
                 </generalization>
               </generalsInternal>
             </class>

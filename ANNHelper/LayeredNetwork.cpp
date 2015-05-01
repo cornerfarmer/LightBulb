@@ -96,7 +96,7 @@ void LayeredNetwork::buildNetwork()
 				// Add an edge to every neuron of the last layer
 				for (std::vector<AbstractNeuron*>::iterator prevNeuron = getNeuronsInLayer(l - 1)->begin(); prevNeuron != getNeuronsInLayer(l - 1)->end(); prevNeuron++)
 				{
-					newNeuron->addPrevNeuron(*prevNeuron, 0);
+					newNeuron->addPrevNeuron(*prevNeuron, 1);
 				}
 			}
 		}		

@@ -68,3 +68,8 @@ AbstractActivationFunction* StandardNeuron::getActivationFunction()
 {
 	return activationFunction;
 }
+
+AbstractThreshold* StandardNeuron::getThreshold()
+{
+	return threshold;
+}
