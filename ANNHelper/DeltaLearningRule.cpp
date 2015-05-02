@@ -8,52 +8,46 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 #include "LayeredNetwork.hpp"
+#include "RBFNetwork.hpp"
 
-bool DeltaLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
+DeltaLearningRule::DeltaLearningRule(AbstractLearningRuleOptions &options_)
+	: AbstractLearningRule(*new AbstractLearningRuleOptions(options_)) 
+{
+
+}
+
+void DeltaLearningRule::adjustWeight(Edge* edge, float deltaWeight)
+{
+	// Just add the weight
+	edge->setWeight(edge->getWeight() + deltaWeight);
+}
+
+bool DeltaLearningRule::learningHasStopped()
+{
+	return false;
+}
+
+void DeltaLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
-	if (dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
+	if (!dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
 		throw std::invalid_argument("The given neuralNetwork has to contain exactly two layers");
-	if (teacher.getTeachingLessons()->size() == 0)
-		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
+}
 
-	// The TopologicalOrder will be our activationOrder
-	TopologicalOrder activationOrder;
+AbstractActivationOrder* DeltaLearningRule::getNewActivationOrder()
+{
+	return new TopologicalOrder();
+}
 
-	// Get all output neurons
-	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
-
-	// Do while the totalError is not zero
-	while (teacher.getTotalError(neuralNetwork, activationOrder, 0) > 0)
+float DeltaLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+{
+	if (layerIndex == layerCount - 1)
 	{
-		// Go through every TeachingLesson
-		for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
-		{
-			// Calculate the errorvector 
-			std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, activationOrder);
-
-			// Go through all error values and adjust the concerning neurons
-			std::vector<AbstractNeuron*>::iterator outputNeuron = outputNeurons->begin();
-			for (std::vector<float>::iterator errorValue = errorvector->begin(); errorValue != errorvector->end(); errorValue++, outputNeuron++)
-			{
-				// If errorValue is not zero, we have to adjust something
-				if (*errorValue != 0)
-				{
-					std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*outputNeuron))->getAfferentEdges();
-					// Go through all afferentEdges of the actual neuron
-					for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
-					{					
-						// Use the delta rule: deltaWeight = learningRate * Output(prevNeuron) * errorValue
-						(*edge)->setWeight((*edge)->getWeight() + 0.5f * (*edge)->getPrevNeuron()->getActivation() * *errorValue);					
-					}
-				}
-			}
-		}
+		// Use the delta rule: deltaWeight = learningRate * Output(prevNeuron) * errorValue
+		return 0.5f * edge->getPrevNeuron()->getActivation() * (*errorvector)[neuronIndex];			
 	}
-
-	
-	// This algorithm will always succeed
-	return true;
+	else
+		return 0;
 }

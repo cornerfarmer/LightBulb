@@ -3216,6 +3216,17 @@
               </generalsInternal>
             </class>
           </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="75dc5f59-c376-480e-a011-0b4a907e8ce5" name="RBFDeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="accc4070-0a4e-4413-b0e7-019f7593837c" />
+              <generalsInternal>
+                <generalization Id="215bb606-db4b-48b4-b2b5-dc9b349fa7ad" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
+                  <elementDefinition Id="1f1ac8ad-9d47-4271-89b7-126205f7a412" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>

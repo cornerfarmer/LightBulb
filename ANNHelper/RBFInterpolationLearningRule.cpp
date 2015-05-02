@@ -9,23 +9,45 @@
 #include "Edge.hpp"
 #include "RBFNetwork.hpp"
 #include "RBFThreshold.hpp"
-#include "EigenSrc\Dense"
-#include "EigenSrc\Jacobi"
+
 
 using namespace Eigen;
 
-
-bool RBFInterpolationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
+RBFInterpolationLearningRule::RBFInterpolationLearningRule(AbstractLearningRuleOptions &options_)
+	: AbstractLearningRule(*new AbstractLearningRuleOptions(options_)) 
 {
+	// Never do offlineLearning
+	options->offlineLearning = false;
+	// Do only one iteration
+	options->maxIterationsPerTry = 1;
+}
+
+void RBFInterpolationLearningRule::adjustWeight(Edge* edge, float deltaWeight)
+{
+	// Set the calculated weight as new weight
+	edge->setWeight(deltaWeight);
+}
+
+void RBFInterpolationLearningRule::printDebugOutput()
+{
+}
+
+bool RBFInterpolationLearningRule::learningHasStopped()
+{
+	return false;
+}
+
+void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+{
+	actTeacher = &teacher;
+
 	// Try to cast the given network as RBFNetwork
 	RBFNetwork* rbfNetwork = dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
 
 	// Check if all given parameters are correct
 	if (!rbfNetwork)
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
-	if (teacher.getTeachingLessons()->size() == 0)
-		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
-
+	
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;
 
@@ -33,14 +55,14 @@ bool RBFInterpolationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teac
 	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
 	// Initialize a matrix which will contain all outputValues from neurons in the second layer in every teachingLesson
-	MatrixXf m(teacher.getTeachingLessons()->size(), rbfNetwork->getNeuronsInLayer(1)->size());
-	// Initialize a new vector which will contain all teachingInput values from the current output neuron
-	VectorXf t(m.rows());
+	m.reset(new MatrixXf(teacher.getTeachingLessons()->size(), rbfNetwork->getNeuronsInLayer(1)->size()));
+	// Initialize a new matrx which will contain all teachingInput values from all output neurons
+	t.reset(new MatrixXf(m->rows(), neuralNetwork.getNetworkTopology()->getOutputNeurons()->size()));
 	// Initialize a new vector which will contain all calculated weights
-	VectorXf w(m.cols());
+	w.reset(new VectorXf(m->cols()));
 
 	// Go through every neuron in the second layer
-	for (int j = 0; j != m.cols(); j++)
+	for (int j = 0; j != m->cols(); j++)
 	{
 		// Extract the center vector
 		std::vector<float>* t = dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>((*rbfNetwork->getNeuronsInLayer(1))[j]))->getThreshold())->getCenterVector();
@@ -50,57 +72,60 @@ bool RBFInterpolationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teac
 	}
 	
 	// Go through every TeachingLesson
-	for (int i = 0; i < m.rows(); i++)
+	for (int i = 0; i < m->rows(); i++)
 	{
 		// Try the teachingLesson
 		(*teacher.getTeachingLessons())[i]->tryLesson(neuralNetwork, activationOrder);
 
 		// Go through every neuron in the second layer
-		for (int j = 0; j != m.cols(); j++)
+		for (int j = 0; j != m->cols(); j++)
 		{
 			// Store the output of the neuron into our matrix
-			m(i, j) = (*rbfNetwork->getNeuronsInLayer(1))[j]->getActivation();
+			(*m)(i, j) = (*rbfNetwork->getNeuronsInLayer(1))[j]->getActivation();
 		}
 	}
-	// This matrix will contain the inverse version of m
-	MatrixXf mInverse;
+	
 	// If our matrix is a square matrix
-	if (m.cols() == m.rows())
+	if (m->cols() == m->rows())
 	{
 		// Do a normal inversion
-		mInverse = m.inverse();
+		mInverse.reset(new MatrixXf(m->inverse()));
 	}
 	else
 	{
 		// Create a jacobiSVD object
-		Eigen::JacobiSVD<MatrixXf> jacobiSVD(m, ComputeThinU | ComputeThinV);	
+		Eigen::JacobiSVD<MatrixXf> jacobiSVD(*m, ComputeThinU | ComputeThinV);	
 		// Do a pseudo inverse
-		jacobiSVD.pinv(mInverse);
+		jacobiSVD.pinv(*mInverse);
 	}
+}
 
-	// Go through all output neurons
-	int outputNeuronIndex = 0;
-	for (std::vector<AbstractNeuron*>::iterator outputNeuron = outputNeurons->begin(); outputNeuron != outputNeurons->end(); outputNeuron++, outputNeuronIndex++)
+AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
+{
+	return new TopologicalOrder();
+}
+
+float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+{
+	// Only change weights in the last layer
+	if (layerIndex == layerCount - 1)
+		return (*w)[edgeIndex];
+	else
+		return 0;
+}
+
+void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+{
+	// Only change weights in the last layer
+	if (layerIndex == layerCount - 1)
 	{
-		// Go through every TeachingLesson
-		for (int i = 0; i < m.rows(); i++)
+		// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
+		(*t)(lessonIndex, neuronIndex) = (*(*actTeacher->getTeachingLessons())[lessonIndex]->getTeachingInput(neuron->getActivationFunction()))[neuronIndex];
+		
+		if (lessonIndex == t->rows() - 1)
 		{
-			// Put the teachingInput concerning current neuron into the our t-vector
-			t[i] = (*(*teacher.getTeachingLessons())[i]->getTeachingInput((dynamic_cast<StandardNeuron*>(*outputNeuron))->getActivationFunction()))[outputNeuronIndex];
+			// Do the magic: Multiplicate the inversed matrix with the techingInputs of the current neuron
+			w.reset(new VectorXf((*mInverse) * t->col(neuronIndex)));
 		}
-
-		// Do the magic: Multiplicate the inversed matrix with the techingInputs
-		w = mInverse * t;
-
-		std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*outputNeuron))->getAfferentEdges();
-		// Go through all afferentEdges of the actual neuron
-		int edgeIndex = 0;
-		for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
-		{					
-			// Insert the calculated weight
-			(*edge)->setWeight(w[edgeIndex]);					
-		}		
 	}
-
-	return true;
 }

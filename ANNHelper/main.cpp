@@ -25,6 +25,8 @@
 #include "RBFNetwork.hpp"
 #include "RBFInterpolationLearningRule.hpp"
 #include "TeachingLessonLinearInput.hpp"
+#include "RBFDeltaLearningRule.hpp"
+
 
 void doPerceptronTest()
 {
@@ -41,7 +43,7 @@ void doPerceptronTest()
 
 	NeuralNetwork neuralNetwork(layeredNetwork);
 
-	BackpropagationLearningRuleOptions options;
+	ResilientBackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 100;
 	options.maxTotalErrorValue = 50;
@@ -73,7 +75,7 @@ void doPerceptronTest()
 	////neuralNetwork.getNetworkTopology()->randomizeWeights(0,1);
 	//
 
-	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder(), 0);
+	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
 
 	std::vector<float> teachingPattern(2);
 	teachingPattern[0] = 100;
@@ -124,15 +126,17 @@ void doRBFTest()
 
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
-			(*teachingInput)[0] = (i != l);	
+			(*teachingInput)[0] = (i == l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
 			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
 		}
 	}
 
-	
-	RBFInterpolationLearningRule learningRule;
+	AbstractLearningRuleOptions learningRuleOptions;
+	learningRuleOptions.enableDebugOutput = true;
+	learningRuleOptions.offlineLearning = true;
+	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 
 	learningRule.doLearning(neuralNetwork, teacher);
 	

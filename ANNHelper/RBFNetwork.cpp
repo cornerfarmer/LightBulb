@@ -6,6 +6,7 @@
 #include "WeightedSumFunction.hpp"
 #include "IdentityFunction.hpp"
 #include "StandardThreshold.hpp"
+#include "Edge.hpp"
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)
 {
@@ -29,4 +30,21 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 
 	// Build the network
 	buildNetwork();
+}
+
+void RBFNetwork::randomizeWeights(float randStart, float randEnd)
+{	
+	// Go through all neurons in this layer
+	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
+	{
+		// Go through all effernetEdges of this neuron
+		std::vector<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
+		for (std::vector<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+		{
+			do{
+				// Set the weight to a new random value
+				(*edge)->setWeight((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+			} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
+		}
+	}	
 }

@@ -17,12 +17,8 @@ class NeuralNetwork;
 class Teacher;
 class Edge;
 
-// The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
-class ResilientBackpropagationLearningRule : public AbstractBackpropagationLearningRule
-{
-private:
-	// Contains all previous learningRates
-	std::unique_ptr<std::vector<float>> previousLearningRates;	
+struct ResilientBackpropagationLearningRuleOptions : AbstractBackpropagationLearningRuleOptions
+{	
 	// Sets the factor by which the learningRate can grow
 	float learningRateGrowFac;
 	// Sets the factor by which the learningRate can shrink
@@ -33,15 +29,33 @@ private:
 	float learningRateMin;
 	// Sets the start value of all learningRates
 	float learningRateStart;
+
+	ResilientBackpropagationLearningRuleOptions()
+	{
+		learningRateGrowFac = 1.2f;
+		learningRateShrinkFac = 0.5f;
+		learningRateMax = 50;
+		learningRateMin = 0.000001f;
+		learningRateStart = 0.2f;
+		offlineLearning = true;
+	}
+};
+
+// The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
+class ResilientBackpropagationLearningRule : public AbstractBackpropagationLearningRule
+{
+private:
+	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
+	std::unique_ptr<std::vector<float>> previousLearningRates;		
+protected:
+	ResilientBackpropagationLearningRuleOptions* getOptions();
 	// Inherited:
-	void adjustWeight(Edge* edge, float gradient);	
+	void adjustWeight(Edge* edge, float deltaWeight);	
 	void printDebugOutput();
 	bool learningHasStopped();
+	void initializeBackpropagationLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
 public:
-	ResilientBackpropagationLearningRule(BackpropagationLearningRuleOptions options_);
-	// Improves the given PerceptronNetwork with the help of its teaching stuff
-	// If the learning process succeded the method will return true
-	bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	ResilientBackpropagationLearningRule(ResilientBackpropagationLearningRuleOptions &options_);
 };
 
 #endif

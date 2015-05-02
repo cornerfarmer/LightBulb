@@ -10,14 +10,20 @@
 class NeuralNetwork;
 class Teacher;
 
-// The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
+// The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks or RBFNetworks
 class DeltaLearningRule : public AbstractLearningRule
 {
 private:
+protected:
+	// Inherited:
+	void adjustWeight(Edge* edge, float deltaWeight);
+	bool learningHasStopped();
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	AbstractActivationOrder* getNewActivationOrder();
+	float calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
 public:
-	// Improves the given PerceptronNetwork with the help of its teaching stuff
-	// If the learning process succeded the method will return true
-	bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	DeltaLearningRule(AbstractLearningRuleOptions &options_);
+
 };
 
 #endif

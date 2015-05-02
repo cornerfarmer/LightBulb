@@ -3,10 +3,11 @@
 #ifndef _ABSTRACTBACKPROPAGATIONLEARNINGRULE_H_
 #define _ABSTRACTBACKPROPAGATIONLEARNINGRULE_H_
 
+// Library includes
+#include <vector>
+
 // Includes
 #include "AbstractLearningRule.hpp"
-
-#define DEBUGOUTPUTINTERVAL 1000
 
 // Forward declarations
 class NeuralNetwork;
@@ -14,42 +15,14 @@ class Teacher;
 class AbstractActivationOrder;
 class Edge;
 
-struct BackpropagationLearningRuleOptions
-{
-	// Sets the maximum iterations per try
-	unsigned int maxIterationsPerTry;
-	// Sets the maximum number of tries, until the algorithm should abort
-	unsigned int maxTries;
-	// Sets the highest total error value, when the algorithm should finish successful
-	float totalErrorGoal;
-	// Sets the lower limit of the random generated weights
-	float minRandomWeightValue;
-	// Sets the higher limit of the random generated weights
-	float maxRandomWeightValue;
-	// Sets the minium iterations per try
-	unsigned int minIterationsPerTry;
-	// Sets the maximum total error value (If a try has after its miniums iterations a greater total error value than the maxTotalErrorValue, skip that try)
-	unsigned int maxTotalErrorValue;
-	// Enable debug output
-	bool enableDebugOutput;
-	// Sets the debug output interval
-	unsigned int debugOutputInterval;
-	// Sets the factor of the flat spot elimination, which will increase learning speed when having big weights
+struct AbstractBackpropagationLearningRuleOptions : AbstractLearningRuleOptions
+{	
 	float flatSpotEliminationFac;
 	// Sets the weight decay factor, which will be used avoid high weights
 	float weightDecayFac;
 
-	BackpropagationLearningRuleOptions()
+	AbstractBackpropagationLearningRuleOptions()
 	{
-		maxIterationsPerTry = 100000;
-		maxTries = 100;
-		totalErrorGoal = 1;
-		minRandomWeightValue = -0.5f;
-		maxRandomWeightValue = 0.5f;
-		minIterationsPerTry = 1000;
-		maxTotalErrorValue = 2;
-		enableDebugOutput = false;
-		debugOutputInterval = 1000;
 		flatSpotEliminationFac = 0.1f;
 		weightDecayFac = 0.02f;
 	}
@@ -58,22 +31,22 @@ struct BackpropagationLearningRuleOptions
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
 class AbstractBackpropagationLearningRule : public AbstractLearningRule
 {
+private:	
+	// This vector should hold all delta values
+	std::vector<std::vector<float>> deltaVectorOutputLayer;
 protected:	
-	BackpropagationLearningRuleOptions options;
-	// Starts the main learning algorithm
-	float startAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool offlineLearning);
-	// Adjusts the weights of an edge dependent on its gradient
-	virtual void adjustWeight(Edge* edge, float gradient) = 0;
-	// Prints a current summary of the status of the learning process
-	virtual void printDebugOutput() = 0;
-	// Calculate if it is sensible to continue learning
-	virtual bool learningHasStopped() = 0;
+	// This method can be used to do some extra initalization stuff
+	virtual void initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
+	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
+	AbstractBackpropagationLearningRuleOptions* getOptions();
+	// Inherited:	
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
+	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
+	AbstractActivationOrder* getNewActivationOrder();
 public:
 	// Initializes all required values
-	AbstractBackpropagationLearningRule(BackpropagationLearningRuleOptions options_);
-	// Improves the given PerceptronNetwork with the help of its teaching stuff
-	// If the learning process succeded the method will return true
-	virtual bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
+	AbstractBackpropagationLearningRule(AbstractBackpropagationLearningRuleOptions &options_);
 };
 
 #endif

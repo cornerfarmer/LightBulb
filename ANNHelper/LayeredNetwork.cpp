@@ -120,12 +120,12 @@ std::vector<AbstractNeuron*>* LayeredNetwork::getOutputNeurons()
 	return &neurons.back();
 }
 
-std::vector<AbstractNeuron*>* LayeredNetwork::getNeuronsInLayer(int layerNr)
+std::vector<AbstractNeuron*>* LayeredNetwork::getNeuronsInLayer(int layerIndex)
 {	
 	// Get the first layer
 	std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin();
 	// Go to the layer with nr
-	std::advance(layer, layerNr);
+	std::advance(layer, layerIndex);
 
 	return &(*layer);
 }
@@ -176,4 +176,9 @@ int LayeredNetwork::getEdgeCount()
 	}
 
 	return edgeCounter;
+}
+
+bool LayeredNetwork::usesBiasNeurons()
+{
+	return options->useBiasNeurons;
 }

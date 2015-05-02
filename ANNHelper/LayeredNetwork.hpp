@@ -37,7 +37,7 @@ class LayeredNetwork : public AbstractNetworkTopology
 protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
 	std::vector<std::vector<AbstractNeuron*>> neurons;
-	void LayeredNetwork::buildNetwork();
+	void LayeredNetwork::buildNetwork();	
 public:
 	~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions_t &options_);	
@@ -47,7 +47,7 @@ public:
 	// Returns all OutputNeurons (last layer)
 	std::vector<AbstractNeuron*>* getOutputNeurons();
 	// Returns all Neurons of the selected layer
-	std::vector<AbstractNeuron*>* getNeuronsInLayer(int layerNr);
+	std::vector<AbstractNeuron*>* getNeuronsInLayer(int layerIndex);
 	// Calculates the layer count
 	int getLayerCount();
 	// Returns all Neurons
@@ -56,6 +56,7 @@ public:
 	void randomizeWeights(float randStart, float randEnd);
 	// Calculates the Edge count
 	int getEdgeCount();
+	bool usesBiasNeurons();
 };
 
 #endif

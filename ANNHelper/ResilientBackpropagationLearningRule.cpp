@@ -9,33 +9,20 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
-ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
-	: AbstractBackpropagationLearningRule(options_)
+ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(ResilientBackpropagationLearningRuleOptions &options_) 
+	: AbstractBackpropagationLearningRule(*new ResilientBackpropagationLearningRuleOptions(options_))
 {
-	learningRateGrowFac = 1.2f;
-	learningRateShrinkFac = 0.5f;
-	learningRateMax = 50;
-	learningRateMin = 0.000001f;
-	learningRateStart = 0.2f;
+	
 }
 
-bool ResilientBackpropagationLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void ResilientBackpropagationLearningRule::initializeBackpropagationLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	// The TopologicalOrder will be our activationOrder
-	TopologicalOrder activationOrder;
-
 	// Initialize the learningRates vector with the size of the total edge count
 	previousLearningRates = std::unique_ptr<std::vector<float>>(new std::vector<float>((dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))->getEdgeCount()));
 
 	// Reset all learning rates to learningRateStart
 	for (std::vector<float>::iterator learningRate = previousLearningRates->begin(); learningRate != previousLearningRates->end(); learningRate++)
-		*learningRate = learningRateStart;
-
-	// Start the algorithm
-	float totalError = startAlgorithm(neuralNetwork, teacher, activationOrder, true);
-
-	// Return if learning was successful
-	return (totalError <= options.totalErrorGoal);
+		*learningRate = getOptions()->learningRateStart;
 }
 
 void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
@@ -54,18 +41,18 @@ void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradie
 
 		// If the sign of the gradient equals the sign of the last learning rate
 		if ((*previousLearningRates)[learningRateIndex] * gradient > 0)
-			learningRate *= learningRateGrowFac; // Increase the new learning rate
+			learningRate *= getOptions()->learningRateGrowFac; // Increase the new learning rate
 		else if ((*previousLearningRates)[learningRateIndex] * gradient < 0)
-			learningRate *= learningRateShrinkFac;	 // Decrease the new learning rate
+			learningRate *= getOptions()->learningRateShrinkFac;	 // Decrease the new learning rate
 	
 		// Make sure the new learningRate is between learningRateMin and learningRateMax
- 		learningRate = std::max(learningRateMin, std::min(learningRateMax, std::abs(learningRate)));
+ 		learningRate = std::max(getOptions()->learningRateMin, std::min(getOptions()->learningRateMax, std::abs(learningRate)));
 
 		// Set the sign of the learningRate to the sign of the gradient
 		learningRate *= (gradient > 0 ? 1 : -1);
 
 		// Add the learningRate and the weight decay term to the weight
-		edge->setWeight(edge->getWeight() + learningRate  - options.weightDecayFac * edge->getWeight());		
+		edge->setWeight(edge->getWeight() + learningRate  - getOptions()->weightDecayFac * edge->getWeight());		
 
 		// Save the new learningRate
 		(*previousLearningRates)[learningRateIndex] = learningRate;
@@ -98,4 +85,9 @@ bool ResilientBackpropagationLearningRule::learningHasStopped()
 	}
 	return true;
 
+}
+
+ResilientBackpropagationLearningRuleOptions* ResilientBackpropagationLearningRule::getOptions()
+{
+	return static_cast<ResilientBackpropagationLearningRuleOptions*>(options.get());
 }

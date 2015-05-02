@@ -326,5 +326,24 @@
         </generalsInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="accc4070-0a4e-4413-b0e7-019f7593837c"
+        name="RBFDeltaLearningRule"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="1f1ac8ad-9d47-4271-89b7-126205f7a412"
+            isSubstitutable="false">
+            <classMoniker
+              Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
+              LastKnownName="AbstractLearningRule"
+              LastKnownLocation="Package_1256.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>
