@@ -19,6 +19,10 @@ public:
 	RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer);		
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
+	// Set all neuron centers to new random values between randStart and randEnd
+	void randomizeCenters(float randStart, float randEnd);
+	// Set all neuron centers to new random values between randStart and randEnd
+	void randomizeWidths(float randStart, float randEnd);
 };
 
 #endif

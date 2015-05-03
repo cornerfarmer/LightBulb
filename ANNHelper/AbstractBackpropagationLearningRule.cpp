@@ -12,7 +12,7 @@
 #include <iomanip>
 #include <exception>
 
-AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(AbstractBackpropagationLearningRuleOptions &options_) 
+AbstractBackpropagationLearningRule::AbstractBackpropagationLearningRule(AbstractBackpropagationLearningRuleOptions *options_) 
 	: AbstractLearningRule(options_)
 {
 
@@ -93,4 +93,10 @@ AbstractBackpropagationLearningRuleOptions* AbstractBackpropagationLearningRule:
 AbstractActivationOrder* AbstractBackpropagationLearningRule::getNewActivationOrder()
 {
 	return new TopologicalOrder();
+}
+
+void AbstractBackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+{
+	// Randomize all weights
+	neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 }

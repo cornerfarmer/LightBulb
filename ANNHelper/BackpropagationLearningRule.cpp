@@ -10,7 +10,7 @@
 #include "Edge.hpp"
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
-	: AbstractBackpropagationLearningRule(*new BackpropagationLearningRuleOptions(options_))
+	: AbstractBackpropagationLearningRule(new BackpropagationLearningRuleOptions(options_))
 {
 
 }

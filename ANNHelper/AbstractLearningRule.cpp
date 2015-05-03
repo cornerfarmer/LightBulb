@@ -11,9 +11,9 @@
 #include <iomanip>
 #include <iostream>
 
-AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions& options_)
+AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 {
-	options.reset(&options_);
+	options.reset(options_);
 
 	// Check if all given options are correct
 	if (options->totalErrorGoal < 0)
@@ -45,8 +45,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	// Start a new try
 	do
 	{
-		// Randomize all weights
-		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+		// Initialize a new try
+		initializeTry(neuralNetwork, teacher);
 		
 		// If debug is enabled, print every n-th iteration a short debug info
 		if (options->enableDebugOutput)
@@ -61,7 +61,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			{	
 				// If debug is enabled, print a short debug info
 				if (options->enableDebugOutput)
-					std::cout << "Skip that try (learning has stopped)" << std::endl;		
+					std::cout << "Skip that try (learning has stopped with totalError: " << std::fixed << std::setprecision(8) << totalError << ")" << std::endl;		
 				break;
 			}
 
@@ -158,7 +158,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 								adjustWeight(*edge, offlineLearningWeights[edgeCounter++] / offlineLearningWeights.size());							
 							}							
 						}
-						else if (neuronIndex + 1 < neuronsInLayerCount) // If its the second last layer and not a BiasNeuron
+						else if (neuronIndex + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the second last layer and not a BiasNeuron
 						{
 							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
 							

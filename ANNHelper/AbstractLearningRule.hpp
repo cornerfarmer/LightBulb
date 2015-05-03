@@ -71,8 +71,11 @@ protected:
 	virtual AbstractActivationOrder* getNewActivationOrder() = 0;
 	// Prints a current summary of the status of the learning process
 	virtual void printDebugOutput() {};
+	// This method should do something like randomizing all weight
+	virtual void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
+
 public:	
-	AbstractLearningRule(AbstractLearningRuleOptions& options_);
+	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given NeuralNetwork
 	// If the learning process succeded the method will return true
 	bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);

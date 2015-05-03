@@ -7,6 +7,7 @@
 #include "IdentityFunction.hpp"
 #include "StandardThreshold.hpp"
 #include "Edge.hpp"
+#include "StandardNeuron.hpp"
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)
 {
@@ -34,7 +35,7 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 
 void RBFNetwork::randomizeWeights(float randStart, float randEnd)
 {	
-	// Go through all neurons in this layer
+	// Go through all neurons in the second layer
 	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
 	{
 		// Go through all effernetEdges of this neuron
@@ -47,4 +48,27 @@ void RBFNetwork::randomizeWeights(float randStart, float randEnd)
 			} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
 		}
 	}	
+}
+
+void RBFNetwork::randomizeCenters(float randStart, float randEnd)
+{
+	// Go through all neurons in the second layer
+	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
+	{
+		// Extract the center vector
+		std::vector<float>* t = dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>(*neuron))->getThreshold())->getCenterVector();
+		// Put in random values
+		(*t)[0] = (float)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+		(*t)[1] = (float)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+	}	
+}
+	
+void RBFNetwork::randomizeWidths(float randStart, float randEnd)
+{
+	// Go through all neurons in the second layer
+	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
+	{
+		// Set a new random value
+		dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>(*neuron))->getThreshold())->setWidth((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+	}
 }

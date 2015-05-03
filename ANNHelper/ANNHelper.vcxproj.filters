@@ -86,9 +86,6 @@
     <ClInclude Include="BackpropagationLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
-    <ClInclude Include="ResilientBackpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="NeuralNetworkResultChart.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
@@ -158,6 +155,18 @@
     <ClInclude Include="RBFInterpolationLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="ResilientBackpropagationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="ResilientLearningRateHelper.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="ResilientDeltaLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractDeltaLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -209,9 +218,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="BackpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="ResilientBackpropagationLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="NeuralNetworkResultChart.cpp">
@@ -281,6 +287,18 @@
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
     <ClCompile Include="RBFInterpolationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="ResilientBackpropagationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="ResilientLearningRateHelper.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="ResilientDeltaLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractDeltaLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>

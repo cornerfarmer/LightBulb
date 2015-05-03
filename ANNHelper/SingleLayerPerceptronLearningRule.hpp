@@ -20,6 +20,7 @@ private:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);
 	AbstractActivationOrder* getNewActivationOrder();
 	float calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
+	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	SingleLayerPerceptronLearningRule(AbstractLearningRuleOptions &options_);
 };

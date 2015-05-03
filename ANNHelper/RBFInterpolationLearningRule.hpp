@@ -38,6 +38,7 @@ protected:
 	AbstractActivationOrder* getNewActivationOrder();
 	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
+	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	RBFInterpolationLearningRule(AbstractLearningRuleOptions &options_);
 };

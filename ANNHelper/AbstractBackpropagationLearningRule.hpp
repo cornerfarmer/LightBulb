@@ -44,9 +44,10 @@ protected:
 	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
 	AbstractActivationOrder* getNewActivationOrder();
+	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	// Initializes all required values
-	AbstractBackpropagationLearningRule(AbstractBackpropagationLearningRuleOptions &options_);
+	AbstractBackpropagationLearningRule(AbstractBackpropagationLearningRuleOptions *options_);
 };
 
 #endif

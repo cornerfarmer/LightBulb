@@ -14,7 +14,7 @@
 using namespace Eigen;
 
 RBFInterpolationLearningRule::RBFInterpolationLearningRule(AbstractLearningRuleOptions &options_)
-	: AbstractLearningRule(*new AbstractLearningRuleOptions(options_)) 
+	: AbstractLearningRule(new AbstractLearningRuleOptions(options_)) 
 {
 	// Never do offlineLearning
 	options->offlineLearning = false;
@@ -61,15 +61,7 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	// Initialize a new vector which will contain all calculated weights
 	w.reset(new VectorXf(m->cols()));
 
-	// Go through every neuron in the second layer
-	for (int j = 0; j != m->cols(); j++)
-	{
-		// Extract the center vector
-		std::vector<float>* t = dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>((*rbfNetwork->getNeuronsInLayer(1))[j]))->getThreshold())->getCenterVector();
-		// Put in random values
-		(*t)[0] = (float)rand()/RAND_MAX * 1;
-		(*t)[1] = (float)rand()/RAND_MAX * 1;
-	}
+	rbfNetwork->randomizeCenters(0, 1);
 	
 	// Go through every TeachingLesson
 	for (int i = 0; i < m->rows(); i++)
@@ -129,4 +121,9 @@ void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeu
 			w.reset(new VectorXf((*mInverse) * t->col(neuronIndex)));
 		}
 	}
+}
+
+void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+{
+
 }

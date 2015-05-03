@@ -11,7 +11,7 @@
 #include "BinaryFunction.hpp"
 
 SingleLayerPerceptronLearningRule::SingleLayerPerceptronLearningRule(AbstractLearningRuleOptions &options_)
-	: AbstractLearningRule(*new AbstractLearningRuleOptions(options_)) 
+	: AbstractLearningRule(new AbstractLearningRuleOptions(options_)) 
 {
 
 }
@@ -52,4 +52,10 @@ float SingleLayerPerceptronLearningRule::calculateDeltaWeightFromEdge(Edge* edge
 		return -edge->getPrevNeuron()->getActivation();
 	else
 		return 0;
+}
+
+void SingleLayerPerceptronLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+{
+	// Randomize all weights
+	neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 }

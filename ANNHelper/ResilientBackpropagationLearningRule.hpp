@@ -11,32 +11,17 @@
 
 // Includes
 #include "AbstractBackpropagationLearningRule.hpp"
+#include "ResilientLearningRateHelper.hpp"
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 class Edge;
 
-struct ResilientBackpropagationLearningRuleOptions : AbstractBackpropagationLearningRuleOptions
+struct ResilientBackpropagationLearningRuleOptions : AbstractBackpropagationLearningRuleOptions, ResilientLearningRateHelperOptions
 {	
-	// Sets the factor by which the learningRate can grow
-	float learningRateGrowFac;
-	// Sets the factor by which the learningRate can shrink
-	float learningRateShrinkFac;
-	// Sets the highest possible learningRate
-	float learningRateMax;
-	// Sets the lowest possible learningRate
-	float learningRateMin;
-	// Sets the start value of all learningRates
-	float learningRateStart;
-
 	ResilientBackpropagationLearningRuleOptions()
 	{
-		learningRateGrowFac = 1.2f;
-		learningRateShrinkFac = 0.5f;
-		learningRateMax = 50;
-		learningRateMin = 0.000001f;
-		learningRateStart = 0.2f;
 		offlineLearning = true;
 	}
 };
@@ -45,8 +30,7 @@ struct ResilientBackpropagationLearningRuleOptions : AbstractBackpropagationLear
 class ResilientBackpropagationLearningRule : public AbstractBackpropagationLearningRule
 {
 private:
-	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
-	std::unique_ptr<std::vector<float>> previousLearningRates;		
+	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 protected:
 	ResilientBackpropagationLearningRuleOptions* getOptions();
 	// Inherited:
