@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="8b1b80e2-cc71-4c3f-868f-dabfce05880b"
+  name="ClusterAnalysis" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="b1992477-d96d-4619-8ee1-2c16a772255a"
+        name="AbstractRBFNeuronPlacer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="db53252e-507d-461e-b2fa-4feac7d7dfb9"
+        name="K-MeansClustering"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b05b20c6-26c3-4eb7-aec1-55695fafdd65"
+        name="K-MeansRBFNeuronPlacer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="7b2b5042-6d23-4778-8058-365c6ef7bf57"
+            isSubstitutable="false">
+            <classMoniker
+              Id="b1992477-d96d-4619-8ee1-2c16a772255a"
+              LastKnownName="AbstractRBFNeuronPlacer"
+              LastKnownLocation="Package_2116.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="0db2c6f0-ee10-4c88-8e3c-fab04040be67"
+            isDerived="false"
+            sourceEndRoleName=" "
+            targetEndRoleName="kMeansClustering"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="db53252e-507d-461e-b2fa-4feac7d7dfb9"
+              LastKnownName="K-MeansClustering"
+              LastKnownLocation="Package_2116.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="109ab6a6-bb78-4d0e-827b-b9ad7c55e50a"
+                  name=" "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="48fe56a8-b3d4-4f71-92ae-bdfaf70fb964"
+                      name="Lower" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="29f66051-f9e8-4f97-8301-1c65b1bcd884"
+                      name="Upper" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="95d2da63-8eec-47cb-bc4a-06f4d83e9104"
+                  name="kMeansClustering"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="352c9c8a-b50d-4777-b256-7cb6a9ceeeaa"
+        name="K-NearestClustering"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ca7a1a58-4f3d-453f-9617-0938ceb356a8"
+        name="K-NearestRBFNeuronPlacer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="c78e6f44-1325-4e15-86de-347097af5d8c"
+            isSubstitutable="false">
+            <classMoniker
+              Id="b1992477-d96d-4619-8ee1-2c16a772255a"
+              LastKnownName="AbstractRBFNeuronPlacer"
+              LastKnownLocation="Package_2116.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="f4f3e452-68c3-4aba-91bd-5ed9909b1263"
+            isDerived="false"
+            sourceEndRoleName=" "
+            targetEndRoleName="kNearestClustering"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="352c9c8a-b50d-4777-b256-7cb6a9ceeeaa"
+              LastKnownName="K-NearestClustering"
+              LastKnownLocation="Package_2116.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="29494af3-5234-4315-bac8-7458134c341b"
+                  name=" "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="82af23fb-dedb-4475-b289-4ec247dd9be4"
+                      name="Lower" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="74be743a-d1dd-4878-947c-5908705d4b3c"
+                      name="Upper" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="22a2f192-62d8-465f-8684-53f9e8b30b73"
+                  name="kNearestClustering"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1cffa5e6-d9fd-45e9-b9e7-3d301b85fe9c"
+        name="Epsilon-NearestClustering"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2e88876a-63a1-4d1a-b843-f23125b40fef"
+        name="Epsilon-NearestRBFNeuronPlacer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="0822b161-cbf5-4ea5-ba7e-1564e1ca46af"
+            isSubstitutable="false">
+            <classMoniker
+              Id="b1992477-d96d-4619-8ee1-2c16a772255a"
+              LastKnownName="AbstractRBFNeuronPlacer"
+              LastKnownLocation="Package_2116.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="31ea1179-f610-4af6-b3af-bde96bcba532"
+            isDerived="false"
+            sourceEndRoleName=" "
+            targetEndRoleName="eNearestClustering"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="1cffa5e6-d9fd-45e9-b9e7-3d301b85fe9c"
+              LastKnownName="Epsilon-NearestClustering"
+              LastKnownLocation="Package_2116.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="60bda979-d07b-489b-8533-1eda5ac9c969"
+                  name=" "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="30448a52-4a00-418a-b63b-faae65f434cd"
+                      name="Lower" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="36d29919-4255-468b-b08c-3df7c13b3e3d"
+                      name="Upper" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c538700c-4b1d-46ca-822b-97a79237f77a"
+                  name="eNearestClustering"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="45c25a75-d112-49b6-8703-d45c79f7f681"
+        name="AbstractClustering"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

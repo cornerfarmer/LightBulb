@@ -342,6 +342,12 @@
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="8b1b80e2-cc71-4c3f-868f-dabfce05880b"
+        LastKnownName="ClusterAnalysis"
+        LastKnownLocation="Package_2116.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

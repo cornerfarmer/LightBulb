@@ -3192,10 +3192,38 @@
                   <elementDefinition Id="7197488f-704a-4037-b80e-3a94790c6fce" />
                 </generalization>
               </generalsInternal>
+              <targetEnds>
+                <association Id="03e877f2-e253-4d9d-bf26-d15476339efe" isDerived="false" sourceEndRoleName="" targetEndRoleName="resilientLearningRateHelper" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="46746d4d-de53-4ba8-90b4-dec8221f233a" LastKnownName="ResilientLearningRateHelper" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="8d3ba477-1f6f-4876-8809-e3c0a8aa6289" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="9dc6fd56-10b8-41e4-be7e-8bd76c8bb9e4" name="Lower">
+                            <elementDefinition Id="5adfc9b3-fa82-4e34-a408-ddc834ea2968" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="5b9adc1e-7686-4baa-83a5-e3d79bbf9f12" name="Upper">
+                            <elementDefinition Id="5810cbea-ce31-4d42-a390-81fe03a63d33" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="25e5d7fb-a0cb-453d-abca-537ba83b3c8f" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="94401439-3787-4e2e-abc5-89753ef1f3a6" name="resilientLearningRateHelper" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="8e36016d-f631-4d52-a451-aae18f87fe26" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="ee6e7bfb-41e1-4d28-a3a0-27711691cbba" />
+                </association>
+              </targetEnds>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" name="DeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" name="AbstractDeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="d84ba14d-d03c-4baa-9a23-ff7d7f1295f3" />
               <generalsInternal>
                 <generalization Id="c13698df-e655-4d4d-97e3-c7bbfcb44689" isSubstitutable="false">
@@ -3217,14 +3245,58 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="75dc5f59-c376-480e-a011-0b4a907e8ce5" name="RBFDeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="accc4070-0a4e-4413-b0e7-019f7593837c" />
+            <class Id="426ab4b1-6340-4d17-89f0-f91e0c41affe" name="DeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="868e8327-ada7-44ef-a8a8-8bcebcfe13e5" />
               <generalsInternal>
-                <generalization Id="215bb606-db4b-48b4-b2b5-dc9b349fa7ad" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
-                  <elementDefinition Id="1f1ac8ad-9d47-4271-89b7-126205f7a412" />
+                <generalization Id="a1184271-73eb-4ace-93c6-68dba0d6c717" isSubstitutable="false">
+                  <classMoniker Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" LastKnownName="AbstractDeltaLearningRule" />
+                  <elementDefinition Id="be19b093-2054-4da5-9dc6-e3849a025c71" />
                 </generalization>
               </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="0aaa7108-01cb-4dab-a8fa-9b4a9fa863d0" name="ResilientDeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="b350dbc6-8867-4e43-bf02-cf056c4c12ac" />
+              <generalsInternal>
+                <generalization Id="0124e39f-9e6e-4532-ae6b-e02c8e024923" isSubstitutable="false">
+                  <classMoniker Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" LastKnownName="AbstractDeltaLearningRule" />
+                  <elementDefinition Id="3a96f5eb-d57c-4b19-aa10-d69e45551a42" />
+                </generalization>
+              </generalsInternal>
+              <targetEnds>
+                <association Id="2d93f27c-d84e-43de-8bb1-40a7cee51470" isDerived="false" sourceEndRoleName="" targetEndRoleName="resilientLearningRateHelper" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="46746d4d-de53-4ba8-90b4-dec8221f233a" LastKnownName="ResilientLearningRateHelper" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="e0740680-6120-4d9b-b3be-9abe62335847" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="e80174d2-4751-48fa-bb69-4bb1817f480e" name="Lower">
+                            <elementDefinition Id="476894b6-fdb4-4516-93cf-64638e682adf" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="b14b7df3-0b89-4dbd-a43a-3e931944a76f" name="Upper">
+                            <elementDefinition Id="ec5856b2-3394-4d0b-8737-feb2daa35ba4" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="08b4a489-aaeb-492b-930d-b77bccf7e523" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="11c3273c-37fd-4493-8bb8-6699a06359fd" name="resilientLearningRateHelper" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="b977e774-ee63-4ecd-a150-c4ef72fd133c" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="0d826389-681e-470d-bad0-75f6c8cabc5c" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="46746d4d-de53-4ba8-90b4-dec8221f233a" name="ResilientLearningRateHelper" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="0f7047f8-3966-4b64-ad15-7dc36fa5d9fe" />
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -3784,6 +3856,150 @@
         <elementDefinition Id="3f17b7a7-cc25-4952-9ad6-0ba0572da8a6" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="2db8add2-0d3a-491e-8658-b175938a450f" name="ClusterAnalysis">
+        <elementDefinition Id="8b1b80e2-cc71-4c3f-868f-dabfce05880b" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="48802d3c-a9db-48cb-b0b4-141ac15bc95a" name="AbstractRBFNeuronPlacer" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="b1992477-d96d-4619-8ee1-2c16a772255a" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="4ca9f515-20b4-4b76-a4a7-3e3b73e82b6f" name="K-MeansClustering" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="db53252e-507d-461e-b2fa-4feac7d7dfb9" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="2e5dee2f-314e-4aee-b788-4a5ac4dcc69b" name="K-MeansRBFNeuronPlacer" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="b05b20c6-26c3-4eb7-aec1-55695fafdd65" />
+              <generalsInternal>
+                <generalization Id="5b9c3fa3-a785-4c62-946c-1644121f9bee" isSubstitutable="false">
+                  <classMoniker Id="48802d3c-a9db-48cb-b0b4-141ac15bc95a" LastKnownName="AbstractRBFNeuronPlacer" />
+                  <elementDefinition Id="7b2b5042-6d23-4778-8058-365c6ef7bf57" />
+                </generalization>
+              </generalsInternal>
+              <targetEnds>
+                <association Id="876b6997-804f-4920-aad8-caecfec6f2a6" isDerived="false" sourceEndRoleName=" " targetEndRoleName="kMeansClustering" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="4ca9f515-20b4-4b76-a4a7-3e3b73e82b6f" LastKnownName="K-MeansClustering" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="165b65c9-b3a6-4994-a9f0-d4d1bbd23c07" name=" " isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="7bb1848c-6387-4ff2-ba56-058995632d56" name="Lower">
+                            <elementDefinition Id="48fe56a8-b3d4-4f71-92ae-bdfaf70fb964" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="0f2e7a05-05a1-4459-840c-6038738a34e1" name="Upper">
+                            <elementDefinition Id="29f66051-f9e8-4f97-8301-1c65b1bcd884" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="109ab6a6-bb78-4d0e-827b-b9ad7c55e50a" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="8f953242-ec25-434a-9bed-87c35ab6b5ef" name="kMeansClustering" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="95d2da63-8eec-47cb-bc4a-06f4d83e9104" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="0db2c6f0-ee10-4c88-8e3c-fab04040be67" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="63efa9be-c91f-4518-a059-3176da34e331" name="K-NearestClustering" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="352c9c8a-b50d-4777-b256-7cb6a9ceeeaa" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="9f96758e-671f-42e9-874d-e7ca481419b4" name="K-NearestRBFNeuronPlacer" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="ca7a1a58-4f3d-453f-9617-0938ceb356a8" />
+              <generalsInternal>
+                <generalization Id="a875a5c6-e68e-4e73-a014-462e9a9755bc" isSubstitutable="false">
+                  <classMoniker Id="48802d3c-a9db-48cb-b0b4-141ac15bc95a" LastKnownName="AbstractRBFNeuronPlacer" />
+                  <elementDefinition Id="c78e6f44-1325-4e15-86de-347097af5d8c" />
+                </generalization>
+              </generalsInternal>
+              <targetEnds>
+                <association Id="81d1f32e-f238-44d1-bfa5-0ca07b60c51f" isDerived="false" sourceEndRoleName=" " targetEndRoleName="kNearestClustering" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="63efa9be-c91f-4518-a059-3176da34e331" LastKnownName="K-NearestClustering" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="3f19c7a1-8da2-4fd7-aed7-5dbf56984088" name=" " isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="9fc24983-e726-45aa-b141-9af5cd46e10e" name="Lower">
+                            <elementDefinition Id="82af23fb-dedb-4475-b289-4ec247dd9be4" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="008cf0f3-edd8-412d-bc5b-19e7c44c6239" name="Upper">
+                            <elementDefinition Id="74be743a-d1dd-4878-947c-5908705d4b3c" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="29494af3-5234-4315-bac8-7458134c341b" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="e8206187-87e2-4277-8bcc-7dc1f5c560dc" name="kNearestClustering" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="22a2f192-62d8-465f-8684-53f9e8b30b73" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="f4f3e452-68c3-4aba-91bd-5ed9909b1263" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="bf635214-7bdc-4727-bf2e-31f0d9822c90" name="Epsilon-NearestClustering" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="1cffa5e6-d9fd-45e9-b9e7-3d301b85fe9c" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="6c5e17b4-1fcd-4aa8-b9fd-b4220f3f4bd3" name="Epsilon-NearestRBFNeuronPlacer" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="2e88876a-63a1-4d1a-b843-f23125b40fef" />
+              <generalsInternal>
+                <generalization Id="26124d4a-00af-44a8-807e-ac7502670bcc" isSubstitutable="false">
+                  <classMoniker Id="48802d3c-a9db-48cb-b0b4-141ac15bc95a" LastKnownName="AbstractRBFNeuronPlacer" />
+                  <elementDefinition Id="0822b161-cbf5-4ea5-ba7e-1564e1ca46af" />
+                </generalization>
+              </generalsInternal>
+              <targetEnds>
+                <association Id="7162a5c4-5471-4082-b886-4dad1e9b3aa7" isDerived="false" sourceEndRoleName=" " targetEndRoleName="eNearestClustering" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="bf635214-7bdc-4727-bf2e-31f0d9822c90" LastKnownName="Epsilon-NearestClustering" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="67555829-b1fa-4edd-9076-99d0f09bb0e4" name=" " isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="7e283046-1a8d-4ec1-8d7d-92726ad89ba2" name="Lower">
+                            <elementDefinition Id="30448a52-4a00-418a-b63b-faae65f434cd" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="e372d963-e519-4bb4-bfad-59dcd2de36b3" name="Upper">
+                            <elementDefinition Id="36d29919-4255-468b-b08c-3df7c13b3e3d" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="60bda979-d07b-489b-8533-1eda5ac9c969" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="f7270033-c7fe-4f44-8b18-a8ba5160349a" name="eNearestClustering" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="c538700c-4b1d-46ca-822b-97a79237f77a" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="31ea1179-f610-4af6-b3af-bde96bcba532" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />
