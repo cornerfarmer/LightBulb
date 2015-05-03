@@ -15,7 +15,7 @@ ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(Resil
 	
 }
 
-void ResilientBackpropagationLearningRule::initializeBackpropagationLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void ResilientBackpropagationLearningRule::initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// Initialize the learningRates vector with the size of the total edge count
 	previousLearningRates = std::unique_ptr<std::vector<float>>(new std::vector<float>((dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))->getEdgeCount()));

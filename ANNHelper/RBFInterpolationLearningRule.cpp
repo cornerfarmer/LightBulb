@@ -93,6 +93,7 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	}
 	else
 	{
+		mInverse.reset(new MatrixXf(m->rows(), m->cols()));
 		// Create a jacobiSVD object
 		Eigen::JacobiSVD<MatrixXf> jacobiSVD(*m, ComputeThinU | ComputeThinV);	
 		// Do a pseudo inverse

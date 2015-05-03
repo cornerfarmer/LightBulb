@@ -15,7 +15,7 @@ BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearning
 
 }
 
-void BackpropagationLearningRule::initializeBackpropagationLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void BackpropagationLearningRule::initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// If momentum is used
 	if (getOptions()->momentum > 0)

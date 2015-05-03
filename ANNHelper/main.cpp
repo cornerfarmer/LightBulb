@@ -25,7 +25,6 @@
 #include "RBFNetwork.hpp"
 #include "RBFInterpolationLearningRule.hpp"
 #include "TeachingLessonLinearInput.hpp"
-#include "RBFDeltaLearningRule.hpp"
 
 
 void doPerceptronTest()
@@ -112,7 +111,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 4, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 3, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 

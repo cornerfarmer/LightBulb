@@ -42,7 +42,7 @@ protected:
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
-	void initializeBackpropagationLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions options_);
 };
