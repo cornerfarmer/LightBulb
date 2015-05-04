@@ -23,6 +23,10 @@ public:
 	void randomizeCenters(float randStart, float randEnd);
 	// Set all neuron centers to new random values between randStart and randEnd
 	void randomizeWidths(float randStart, float randEnd);
+	// Sets the center of the RBFNeuron with the given index
+	void setCenterOfRBFNeuron(int neuronIndex, std::vector<float> &newCenterPosition);
+	// Sets the width of the RBFNeuron with the given index
+	void setWidthOfRBFNeuron(int neuronIndex, float newWidth);
 };
 
 #endif

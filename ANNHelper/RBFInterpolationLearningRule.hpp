@@ -9,11 +9,30 @@
 
 // Includes
 #include "AbstractLearningRule.hpp"
+#include "AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 
+struct RBFInterpolationLearningRuleOptions : AbstractLearningRuleOptions
+{	
+	// The neuronPlacer helps to replace all RBFNeurons before starting to learn
+	AbstractRBFNeuronPlacer* neuronPlacer;
+	RBFInterpolationLearningRuleOptions()
+	{
+		
+	}
+	~RBFInterpolationLearningRuleOptions()
+	{
+		delete(neuronPlacer);
+	}
+	RBFInterpolationLearningRuleOptions(const RBFInterpolationLearningRuleOptions &obj)
+	{
+		*this = obj;
+		neuronPlacer = obj.neuronPlacer->getCopy();
+	}
+};
 
 // The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
 class RBFInterpolationLearningRule : public AbstractLearningRule
@@ -30,6 +49,8 @@ private:
 	// Holds the actual teacher
 	Teacher* actTeacher;
 protected:
+	// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
+	RBFInterpolationLearningRuleOptions* getOptions();
 	// Inherited:
 	void adjustWeight(Edge* edge, float deltaWeight);
 	void printDebugOutput();
@@ -40,7 +61,7 @@ protected:
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
-	RBFInterpolationLearningRule(AbstractLearningRuleOptions &options_);
+	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);
 };
 
 #endif

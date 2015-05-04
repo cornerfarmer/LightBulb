@@ -73,6 +73,10 @@
     <ClCompile Include="AbstractNeuronFactory.cpp" />
     <ClCompile Include="AbstractActivationFunction.cpp" />
     <ClCompile Include="AbstractActivationOrder.cpp" />
+    <ClCompile Include="AbstractRBFNeuronPlacer.cpp" />
+    <ClCompile Include="Cluster.hpp" />
+    <ClCompile Include="KMeansClustering.cpp" />
+    <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="ResilientDeltaLearningRule.cpp" />
     <ClCompile Include="ResilientLearningRateHelper.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
@@ -121,6 +125,9 @@
     <ClInclude Include="AbstractNeuronFactory.hpp" />
     <ClInclude Include="AbstractActivationFunction.hpp" />
     <ClInclude Include="AbstractActivationOrder.hpp" />
+    <ClInclude Include="AbstractRBFNeuronPlacer.hpp" />
+    <ClInclude Include="KMeansClustering.hpp" />
+    <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="ResilientDeltaLearningRule.hpp" />
     <ClInclude Include="ResilientLearningRateHelper.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />

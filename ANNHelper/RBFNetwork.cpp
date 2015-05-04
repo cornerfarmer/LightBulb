@@ -53,22 +53,35 @@ void RBFNetwork::randomizeWeights(float randStart, float randEnd)
 void RBFNetwork::randomizeCenters(float randStart, float randEnd)
 {
 	// Go through all neurons in the second layer
-	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
+	for (int neuronIndex = 0; neuronIndex != getNeuronsInLayer(1)->size(); neuronIndex++)
 	{
-		// Extract the center vector
-		std::vector<float>* t = dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>(*neuron))->getThreshold())->getCenterVector();
-		// Put in random values
-		(*t)[0] = (float)rand() / RAND_MAX * (randEnd - randStart) + randStart;
-		(*t)[1] = (float)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+		// Create a new center vector and fill it with random values
+		std::vector<float> newCenter(getNeuronsInLayer(0)->size());
+		for (std::vector<float>::iterator centerCoordinate = newCenter.begin(); centerCoordinate != newCenter.end(); centerCoordinate++)
+			*centerCoordinate = (float)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+		// Set the new center vector to the neuron
+		setCenterOfRBFNeuron(neuronIndex, newCenter);
 	}	
 }
 	
 void RBFNetwork::randomizeWidths(float randStart, float randEnd)
 {
 	// Go through all neurons in the second layer
-	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
+	for (int neuronIndex = 0; neuronIndex != getNeuronsInLayer(1)->size(); neuronIndex++)
 	{
-		// Set a new random value
-		dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>(*neuron))->getThreshold())->setWidth((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+		// Set a new random width to the neuron
+		setWidthOfRBFNeuron(neuronIndex, (float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
 	}
+}
+
+void RBFNetwork::setCenterOfRBFNeuron(int neuronIndex, std::vector<float> &newCenterPosition)
+{
+	// Set the new center position to the neuron with neuronIndex
+	dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>((*getNeuronsInLayer(1))[neuronIndex]))->getThreshold())->setCenterVector(newCenterPosition);
+}
+
+void RBFNetwork::setWidthOfRBFNeuron(int neuronIndex, float newWidth)
+{
+	// Set the new width to the neuron with neuronIndex
+	dynamic_cast<RBFThreshold*>((dynamic_cast<StandardNeuron*>((*getNeuronsInLayer(1))[neuronIndex]))->getThreshold())->setWidth(newWidth);
 }

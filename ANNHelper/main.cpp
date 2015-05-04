@@ -26,6 +26,7 @@
 #include "RBFInterpolationLearningRule.hpp"
 #include "TeachingLessonLinearInput.hpp"
 #include "ResilientDeltaLearningRule.hpp"
+#include "KMeansRBFNeuronPlacer.hpp"
 
 void doPerceptronTest()
 {
@@ -111,7 +112,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 4, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 3, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
@@ -132,19 +133,23 @@ void doRBFTest()
 		}
 	}
 
-	AbstractLearningRuleOptions learningRuleOptions;
+	RBFInterpolationLearningRuleOptions learningRuleOptions;
 	learningRuleOptions.enableDebugOutput = true;
 	learningRuleOptions.offlineLearning = true;
+	learningRuleOptions.neuronPlacer = new KMeansRBFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 
-	learningRule.doLearning(neuralNetwork, teacher);	
+	//learningRule.doLearning(neuralNetwork, teacher);	
 	ResilientDeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
 	delteLearningRuleOptions.maxTries = 1000;
 	delteLearningRuleOptions.enableDebugOutput = true;
+	delteLearningRuleOptions.neuronPlacer = new KMeansRBFNeuronPlacer();
 	ResilientDeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
 
 	deltaLearningRule.doLearning(neuralNetwork, teacher);
+
+
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
 	neuralNetworkResultChartOptions.binaryInterpretation = false;

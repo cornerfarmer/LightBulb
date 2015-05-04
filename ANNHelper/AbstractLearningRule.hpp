@@ -50,6 +50,7 @@ struct AbstractLearningRuleOptions
 		debugOutputInterval = 1000;	
 		offlineLearning = false;
 	}
+	virtual ~AbstractLearningRuleOptions() {}
 };
 
 // A LearningRule is used to improve a NeuralNetwork

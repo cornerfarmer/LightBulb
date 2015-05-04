@@ -36,6 +36,9 @@
     <Filter Include="Quelldateien\NeuronFactory">
       <UniqueIdentifier>{72294d96-7099-4cc7-bb29-7218ce5a24ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\ClusterAnalysis">
+      <UniqueIdentifier>{4db96599-cd2c-4dce-8bd8-646c9b718330}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LayeredNetwork.hpp">
@@ -166,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="AbstractDeltaLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="KMeansRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="KMeansClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +312,18 @@
     </ClCompile>
     <ClCompile Include="AbstractDeltaLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="Cluster.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="KMeansRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="KMeansClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

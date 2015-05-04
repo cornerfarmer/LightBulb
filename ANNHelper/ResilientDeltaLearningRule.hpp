@@ -11,7 +11,7 @@
 class NeuralNetwork;
 class Teacher;
 
-struct ResilientDeltaLearningRuleOptions : AbstractLearningRuleOptions, ResilientLearningRateHelperOptions
+struct ResilientDeltaLearningRuleOptions : AbstractDeltaLearningRuleOptions, ResilientLearningRateHelperOptions
 {	
 	ResilientDeltaLearningRuleOptions()
 	{

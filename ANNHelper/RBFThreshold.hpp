@@ -19,6 +19,7 @@ private:
 	float width;
 public:
 	RBFThreshold(std::vector<float> &centerVector_, float width_);
+	void setCenterVector(std::vector<float> &newCenterVector);
 	std::vector<float>* getCenterVector();
 	float getWidth();
 	void setWidth(float newWidth);

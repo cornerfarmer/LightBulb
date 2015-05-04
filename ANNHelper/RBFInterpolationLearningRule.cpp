@@ -13,9 +13,13 @@
 
 using namespace Eigen;
 
-RBFInterpolationLearningRule::RBFInterpolationLearningRule(AbstractLearningRuleOptions &options_)
-	: AbstractLearningRule(new AbstractLearningRuleOptions(options_)) 
+RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_)
+	: AbstractLearningRule(new RBFInterpolationLearningRuleOptions(options_)) 
 {
+	// Check if all given parameters are correct
+	if (!getOptions()->neuronPlacer)
+		throw new std::invalid_argument("The neuronPlacer in the given options cannot be null");
+
 	// Never do offlineLearning
 	options->offlineLearning = false;
 	// Do only one iteration
@@ -48,9 +52,6 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	if (!rbfNetwork)
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	
-	// The TopologicalOrder will be our activationOrder
-	TopologicalOrder activationOrder;
-
 	// Get all output neurons
 	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
@@ -61,36 +62,7 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	// Initialize a new vector which will contain all calculated weights
 	w.reset(new VectorXf(m->cols()));
 
-	rbfNetwork->randomizeCenters(0, 1);
 	
-	// Go through every TeachingLesson
-	for (int i = 0; i < m->rows(); i++)
-	{
-		// Try the teachingLesson
-		(*teacher.getTeachingLessons())[i]->tryLesson(neuralNetwork, activationOrder);
-
-		// Go through every neuron in the second layer
-		for (int j = 0; j != m->cols(); j++)
-		{
-			// Store the output of the neuron into our matrix
-			(*m)(i, j) = (*rbfNetwork->getNeuronsInLayer(1))[j]->getActivation();
-		}
-	}
-	
-	// If our matrix is a square matrix
-	if (m->cols() == m->rows())
-	{
-		// Do a normal inversion
-		mInverse.reset(new MatrixXf(m->inverse()));
-	}
-	else
-	{
-		mInverse.reset(new MatrixXf(m->rows(), m->cols()));
-		// Create a jacobiSVD object
-		Eigen::JacobiSVD<MatrixXf> jacobiSVD(*m, ComputeThinU | ComputeThinV);	
-		// Do a pseudo inverse
-		jacobiSVD.pinv(*mInverse);
-	}
 }
 
 AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
@@ -125,5 +97,45 @@ void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeu
 
 void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
+	RBFNetwork* rbfNetwork = dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
 
+	// Replace all RBFNeurons with the help of the choosen neuronPlacer
+	getOptions()->neuronPlacer->doPlacing(*rbfNetwork, teacher);
+
+	// The TopologicalOrder will be our activationOrder
+	TopologicalOrder activationOrder;
+
+	// Go through every TeachingLesson
+	for (int i = 0; i < m->rows(); i++)
+	{
+		// Try the teachingLesson
+		(*teacher.getTeachingLessons())[i]->tryLesson(neuralNetwork, activationOrder);
+
+		// Go through every neuron in the second layer
+		for (int j = 0; j != m->cols(); j++)
+		{
+			// Store the output of the neuron into our matrix
+			(*m)(i, j) = (*rbfNetwork->getNeuronsInLayer(1))[j]->getActivation();
+		}
+	}
+	
+	// If our matrix is a square matrix
+	if (m->cols() == m->rows())
+	{
+		// Do a normal inversion
+		mInverse.reset(new MatrixXf(m->inverse()));
+	}
+	else
+	{
+		mInverse.reset(new MatrixXf(m->rows(), m->cols()));
+		// Create a jacobiSVD object
+		Eigen::JacobiSVD<MatrixXf> jacobiSVD(*m, ComputeThinU | ComputeThinV);	
+		// Do a pseudo inverse
+		jacobiSVD.pinv(*mInverse);
+	}
+}
+
+RBFInterpolationLearningRuleOptions* RBFInterpolationLearningRule::getOptions()
+{
+	return static_cast<RBFInterpolationLearningRuleOptions*>(options.get());
 }

@@ -6,6 +6,11 @@ RBFThreshold::RBFThreshold(std::vector<float> &centerVector_, float width_)
 	width = width_;
 }
 
+void RBFThreshold::setCenterVector(std::vector<float> &newCenterVector)
+{
+	centerVector = newCenterVector;
+}
+
 std::vector<float>* RBFThreshold::getCenterVector()
 {
 	return &centerVector;

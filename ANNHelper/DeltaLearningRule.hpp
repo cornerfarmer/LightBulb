@@ -18,7 +18,7 @@ protected:
 	void adjustWeight(Edge* edge, float deltaWeight);
 	bool learningHasStopped();
 public:
-	DeltaLearningRule(AbstractLearningRuleOptions &options_);
+	DeltaLearningRule(AbstractDeltaLearningRuleOptions &options_);
 
 };
 

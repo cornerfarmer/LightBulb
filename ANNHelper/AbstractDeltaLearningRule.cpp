@@ -11,7 +11,7 @@
 #include "RBFNetwork.hpp"
 
 
-AbstractDeltaLearningRule::AbstractDeltaLearningRule(AbstractLearningRuleOptions *options_)
+AbstractDeltaLearningRule::AbstractDeltaLearningRule(AbstractDeltaLearningRuleOptions *options_)
 	: AbstractLearningRule(options_) 
 {
 
@@ -24,7 +24,8 @@ void AbstractDeltaLearningRule::initializeLearningAlgoritm(NeuralNetwork &neural
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	if (!dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
 		throw std::invalid_argument("The given neuralNetwork has to contain exactly two layers");
-
+	if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && !getOptions()->neuronPlacer)
+		throw new std::invalid_argument("The neuronPlacer in the given options cannot be null");
 	initializeDeltaLearningAlgoritm(neuralNetwork, teacher);
 }
 
@@ -48,6 +49,13 @@ void AbstractDeltaLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teac
 {
 	// Randomize all weights
 	neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+
+	// If the given network is a rbfNetwork replace all RBFNeurons with the help of the choosen neuronPlacer
 	if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()))
-		dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology())->randomizeCenters(0, 1);
+		getOptions()->neuronPlacer->doPlacing(*dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()), teacher);
+}
+
+AbstractDeltaLearningRuleOptions* AbstractDeltaLearningRule::getOptions()
+{
+	return static_cast<AbstractDeltaLearningRuleOptions*>(options.get());
 }

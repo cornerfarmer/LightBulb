@@ -10,8 +10,8 @@
 #include "LayeredNetwork.hpp"
 #include "RBFNetwork.hpp"
 
-DeltaLearningRule::DeltaLearningRule(AbstractLearningRuleOptions &options_)
-	: AbstractDeltaLearningRule(new AbstractLearningRuleOptions(options_)) 
+DeltaLearningRule::DeltaLearningRule(AbstractDeltaLearningRuleOptions &options_)
+	: AbstractDeltaLearningRule(new AbstractDeltaLearningRuleOptions(options_)) 
 {
 
 }
