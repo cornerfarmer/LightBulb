@@ -56,7 +56,7 @@ std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector
 			}
 			// Increase the point counter of the choosen cluster
 			(*clusters)[clusterFromPoint[p]].pointCount++;
-			// Add the position of the pointer to the median of the choosen cluster
+			// Add the position of the point to the median of the choosen cluster
 			for (int i = 0; i < dimensionCount; i++)
 				clusterMedian[clusterFromPoint[p]][i] += (*points)[p][i];
 		}	
@@ -87,14 +87,4 @@ std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector
 	}
 
 	return clusters;
-}
-
-float KMeansClustering::getDistanceBetweenPoints(std::vector<float> &point1, std::vector<float> &point2)
-{
-	// Calculate the euclidean distance 
-	float distance = 0;
-	for (int p = 0; p < point1.size(); p++)
-		distance += pow(point1[p] - point2[p], 2);
-	distance = sqrt(distance);
-	return distance;
 }

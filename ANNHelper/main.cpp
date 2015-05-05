@@ -27,6 +27,7 @@
 #include "TeachingLessonLinearInput.hpp"
 #include "ResilientDeltaLearningRule.hpp"
 #include "KMeansRBFNeuronPlacer.hpp"
+#include "KNearestRBFNeuronPlacer.hpp"
 
 void doPerceptronTest()
 {
@@ -112,21 +113,21 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 3, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 4, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
 	Teacher teacher;
-	for (int i=0;i<2;i+=1)
+	for (float i=0;i<=1;i+=0.1)
 	{
-		for (int l=0;l<2;l+=1)
+		for (float l=0;l<=1;l+=0.1)
 		{	
 			std::vector<float>* teachingPattern = new std::vector<float>(2);
 			std::vector<float>* teachingInput= new std::vector<float>(1);
 
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
-			(*teachingInput)[0] = (i == l);	
+			(*teachingInput)[0] = (abs(i - 0.5) <= 0.3 &&  abs(l - 0.5) <= 0.3);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
 			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
@@ -136,18 +137,19 @@ void doRBFTest()
 	RBFInterpolationLearningRuleOptions learningRuleOptions;
 	learningRuleOptions.enableDebugOutput = true;
 	learningRuleOptions.offlineLearning = true;
-	learningRuleOptions.neuronPlacer = new KMeansRBFNeuronPlacer();
+	learningRuleOptions.totalErrorGoal = 1;
+	learningRuleOptions.neuronPlacer = new KNearestRBFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 
-	//learningRule.doLearning(neuralNetwork, teacher);	
+	learningRule.doLearning(neuralNetwork, teacher);	
 	ResilientDeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
 	delteLearningRuleOptions.maxTries = 1000;
 	delteLearningRuleOptions.enableDebugOutput = true;
-	delteLearningRuleOptions.neuronPlacer = new KMeansRBFNeuronPlacer();
+	delteLearningRuleOptions.neuronPlacer = new KNearestRBFNeuronPlacer();
 	ResilientDeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
 
-	deltaLearningRule.doLearning(neuralNetwork, teacher);
+	//deltaLearningRule.doLearning(neuralNetwork, teacher);
 
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;

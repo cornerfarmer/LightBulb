@@ -179,6 +179,15 @@
     <ClInclude Include="KMeansClustering.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="KNearestClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="KNearestRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -323,6 +332,15 @@
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
     <ClCompile Include="KMeansClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="KNearestRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="KNearestClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractClustering.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
   </ItemGroup>
