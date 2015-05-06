@@ -8,6 +8,7 @@
 
 // Includes
 #include "AbstractClustering.hpp"
+#include "Point.hpp"
 
 // Forward declarations
 struct Cluster;
@@ -17,11 +18,15 @@ class Teacher;
 class KNearestClustering : public AbstractClustering
 {
 private:
-	void addKNearestPointsToCluster(std::vector<std::vector<float>>& points, std::vector<int>& clusterFromPoint, std::vector<Cluster>& clusters, int pointIndex, int clusterIndex, int nearestPointsCount);
+	std::vector<std::vector<std::pair<int, float>>> distanceToPointCache;
+	void addKNearestPointsToCluster(std::vector<Point>& points, std::vector<int>& clusterFromPoint, std::vector<Cluster>& clusters, int pointIndex, int clusterIndex, int nearestPointsCount, bool useCache);
 	static bool KNearestClustering::pairCompare(const std::pair<int, float>& a ,const std::pair<int, float>& b);
+	
 public:
 	// Calculates from the given points a specified count of cluster
-	std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<std::vector<float>>* points, int clusterCount, int dimensionCount);
+	std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<Point>* points, int clusterCount, int dimensionCount);
+	std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<Point>* points, int nearestPointsCount, int dimensionCount, bool useCache);
+	void flushCache(int pointCount);
 };
 
 #endif

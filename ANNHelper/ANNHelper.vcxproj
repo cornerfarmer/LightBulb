@@ -134,6 +134,7 @@
     <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="KNearestClustering.hpp" />
     <ClInclude Include="KNearestRBFNeuronPlacer.hpp" />
+    <ClInclude Include="Point.hpp" />
     <ClInclude Include="ResilientDeltaLearningRule.hpp" />
     <ClInclude Include="ResilientLearningRateHelper.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />

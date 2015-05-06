@@ -2,8 +2,47 @@
 #include "Cluster.hpp"
 #include <algorithm>
 #include <map>
+#include "Point.hpp"
 
-std::unique_ptr<std::vector<Cluster>> KNearestClustering::doClustering(std::vector<std::vector<float>>* points, int nearestPointsCount, int dimensionCount)
+
+std::unique_ptr<std::vector<Cluster>> KNearestClustering::doClustering(std::vector<Point>* points, int clusterCount, int dimensionCount) 
+{
+	int intervalBegin = 0;
+	int intervalEnd = points->size() - 1;
+
+	std::unique_ptr<std::vector<Cluster>> clusters;
+	bool useCache = false;
+	flushCache(points->size());
+	do
+	{
+		clusters = doClustering(points, (intervalEnd - intervalBegin) / 2 + intervalBegin, dimensionCount, useCache);
+		if (clusters->size() == clusterCount)
+			break;
+		else 
+		{
+			if (clusters->size() > clusterCount)
+			{
+				if (intervalEnd - intervalBegin == 1)
+				{
+					intervalBegin++;
+					intervalEnd++;
+				}
+				else
+					intervalBegin = (intervalEnd - intervalBegin) / 2 + intervalBegin;
+			}
+			else
+			{
+				intervalEnd = (intervalEnd - intervalBegin) / 2 + intervalBegin;
+			}
+			
+		}
+		useCache = true;
+	} while(intervalBegin != intervalEnd);
+
+	return clusters;
+}
+
+std::unique_ptr<std::vector<Cluster>> KNearestClustering::doClustering(std::vector<Point>* points, int nearestPointsCount, int dimensionCount, bool useCache)
 {
 	// Create a new cluster vector
 	std::unique_ptr<std::vector<Cluster>> clusters(new std::vector<Cluster>());
@@ -22,7 +61,7 @@ std::unique_ptr<std::vector<Cluster>> KNearestClustering::doClustering(std::vect
 			newCluster.width = 0.5f;
 			newCluster.pointCount = 0;
 			clusters->push_back(newCluster);
-			addKNearestPointsToCluster(*points, clusterFromPoint, *clusters, p, clusters->size() - 1, nearestPointsCount);
+			addKNearestPointsToCluster(*points, clusterFromPoint, *clusters, p, clusters->size() - 1, nearestPointsCount, useCache);
 		}		
 	}
 
@@ -32,7 +71,7 @@ std::unique_ptr<std::vector<Cluster>> KNearestClustering::doClustering(std::vect
 	{			
 		// Add the position of the point to the median of the choosen cluster
 		for (int i = 0; i < dimensionCount; i++)
-			(*clusters)[clusterFromPoint[p]].position[i] += (*points)[p][i];
+			(*clusters)[clusterFromPoint[p]].position[i] += (*points)[p].position[i];
 	}	
 
 	// Calculate new cluster positions from their medians
@@ -50,24 +89,32 @@ std::unique_ptr<std::vector<Cluster>> KNearestClustering::doClustering(std::vect
 	return clusters;
 }
 
-void KNearestClustering::addKNearestPointsToCluster(std::vector<std::vector<float>>& points, std::vector<int>& clusterFromPoint, std::vector<Cluster>& clusters, int pointIndex, int clusterIndex, int nearestPointsCount)
+void KNearestClustering::addKNearestPointsToCluster(std::vector<Point>& points, std::vector<int>& clusterFromPoint, std::vector<Cluster>& clusters, int pointIndex, int clusterIndex, int nearestPointsCount, bool useCache)
 {
 	clusterFromPoint[pointIndex] = clusterIndex;
 	clusters[clusterFromPoint[pointIndex]].pointCount++;
 
-	std::vector<std::pair<int, float>> distanceToPoint;
-	for (int p = 0; p < points.size(); p++)
+	
+	if (!useCache)
 	{
-		distanceToPoint.push_back(std::pair<int, float>(p, getDistanceBetweenPoints(points[pointIndex], points[p])));
+		for (int p = 0; p < points.size(); p++)
+		{
+			distanceToPointCache[pointIndex].push_back(std::pair<int, float>(p, getDistanceBetweenPoints(points[pointIndex], points[p])));
+		}
+		std::sort(distanceToPointCache[pointIndex].begin(), distanceToPointCache[pointIndex].end(), pairCompare);
 	}
-
-	std::sort(distanceToPoint.begin(), distanceToPoint.end(), pairCompare);
 
 	for (int p = 1; p < nearestPointsCount + 1; p++)
 	{
-		if (clusterFromPoint[distanceToPoint[p].first] == -1)
-			addKNearestPointsToCluster(points, clusterFromPoint, clusters, distanceToPoint[p].first, clusterIndex, nearestPointsCount);
+		if (clusterFromPoint[distanceToPointCache[pointIndex][p].first] == -1)
+			addKNearestPointsToCluster(points, clusterFromPoint, clusters, distanceToPointCache[pointIndex][p].first, clusterIndex, nearestPointsCount, useCache);
 	}
+}
+
+void KNearestClustering::flushCache(int pointCount)
+{
+	distanceToPointCache.clear();
+	distanceToPointCache.resize(pointCount);
 }
 
 bool KNearestClustering::pairCompare(const std::pair<int, float>& a ,const std::pair<int, float>& b)

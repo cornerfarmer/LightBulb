@@ -1,7 +1,8 @@
 #include "KMeansClustering.hpp"
 #include "Cluster.hpp"
+#include "Point.hpp"
 
-std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector<std::vector<float>>* points, int clusterCount, int dimensionCount)
+std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector<Point>* points, int clusterCount, int dimensionCount)
 {
 	// Create a new cluster vector
 	std::unique_ptr<std::vector<Cluster>> clusters(new std::vector<Cluster>(clusterCount));
@@ -9,7 +10,7 @@ std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector
 	for (int c = 0; c < clusters->size(); c++)
 	{
 		// Set the position to one random point, so every cluster does now contain at least one point
-		(*clusters)[c].position = (*points)[c % points->size()];
+		(*clusters)[c].position = (*points)[c % points->size()].position;
 		// Set the width to a constant value (TODO: Make this value variable)
 		(*clusters)[c].width = 0.5f;
 	}
@@ -46,7 +47,7 @@ std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector
 			for (int c = 0; c < clusters->size(); c++)
 			{
 				// If the distance between the current point and this cluster is less than the nearestClusterDistance or if this is the first cluster
-				if (float currentDistance = getDistanceBetweenPoints((*points)[p], (*clusters)[c].position) < nearestClusterDistance || clusterFromPoint[p] == -1)
+				if (float currentDistance = getDistanceBetweenPositions((*points)[p].position, (*clusters)[c].position) < nearestClusterDistance || clusterFromPoint[p] == -1)
 				{
 					// Set the current cluster to the cluster of the current point
 					clusterFromPoint[p] = c;
@@ -58,7 +59,7 @@ std::unique_ptr<std::vector<Cluster>> KMeansClustering::doClustering(std::vector
 			(*clusters)[clusterFromPoint[p]].pointCount++;
 			// Add the position of the point to the median of the choosen cluster
 			for (int i = 0; i < dimensionCount; i++)
-				clusterMedian[clusterFromPoint[p]][i] += (*points)[p][i];
+				clusterMedian[clusterFromPoint[p]][i] += (*points)[p].position[i];
 		}	
 
 		// Calculate new cluster positions from their medians

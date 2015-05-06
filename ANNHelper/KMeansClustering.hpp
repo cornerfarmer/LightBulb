@@ -8,6 +8,7 @@
 
 // Includes
 #include "AbstractClustering.hpp"
+#include "Point.hpp"
 
 // Forward declarations
 struct Cluster;
@@ -17,9 +18,10 @@ class Teacher;
 class KMeansClustering : public AbstractClustering
 {
 private:
+
 public:
 	// Calculates from the given points a specified count of cluster
-	std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<std::vector<float>>* points, int clusterCount, int dimensionCount);
+	std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<Point>* points, int clusterCount, int dimensionCount);
 };
 
 #endif
