@@ -6,6 +6,7 @@
 // Library includes
 #include <memory>
 #include <vector>
+#include <list>
 
 // Forward declarations
 struct Cluster;
@@ -18,9 +19,9 @@ class AbstractRBFNeuronPlacer
 {
 protected:
 	// Extract all teachingPatterns from all teachingLessons and put them into a vector of points
-	std::unique_ptr<std::vector<Point>> getPointsFromTeachingLessons(Teacher &teacher, int inputDimension);
+	std::unique_ptr<std::list<Point*>> getPointsFromTeachingLessons(Teacher &teacher, int inputDimension);
 	// Replace all RBFNeurons of the given network with the help of the given clusters
-	void placeRBFNeuronsFromClusters(std::vector<Cluster>* clusters, RBFNetwork &neuralNetwork);
+	void placeRBFNeuronsFromClusters(std::list<Cluster>* clusters, RBFNetwork &neuralNetwork);
 public:
 	// This method should execute the placing process
 	virtual void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) = 0;

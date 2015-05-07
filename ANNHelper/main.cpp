@@ -113,7 +113,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 4, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 10, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
@@ -138,6 +138,7 @@ void doRBFTest()
 	learningRuleOptions.enableDebugOutput = true;
 	learningRuleOptions.offlineLearning = true;
 	learningRuleOptions.totalErrorGoal = 1;
+	learningRuleOptions.maxTries = 1;
 	learningRuleOptions.neuronPlacer = new KNearestRBFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 

@@ -5,6 +5,7 @@
 
 // Library includes
 #include <vector>
+#include <list>
 
 // Forward declarations
 struct Cluster;
@@ -17,9 +18,10 @@ protected:
 	// Calculates the distance between two points
 	float getDistanceBetweenPoints(Point &point1, Point &point2);
 	float getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2);
+	void calculateAllClusterWidths(std::list<Cluster> &clusters);
 public:
 	virtual ~AbstractClustering() {}
-	virtual std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<Point>* points, int clusterCount, int dimensionCount) = 0;
+	virtual std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount) = 0;
 };
 
 #endif

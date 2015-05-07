@@ -11,7 +11,7 @@ void KMeansRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teache
 	KMeansClustering clustering;
 
 	// Let the clustering algorithm calculate clusters from our teachingLessons
-	std::unique_ptr<std::vector<Cluster>> clusters = clustering.doClustering(getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size()).get(), clusterCount, neuralNetwork.getNeuronsInLayer(0)->size());
+	std::unique_ptr<std::list<Cluster>> clusters = clustering.doClustering(*getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size()).get(), clusterCount, neuralNetwork.getNeuronsInLayer(0)->size());
 
 	// Replace the RBFNeurons from given network with the help of the calculated clusters
 	placeRBFNeuronsFromClusters(clusters.get(), neuralNetwork);

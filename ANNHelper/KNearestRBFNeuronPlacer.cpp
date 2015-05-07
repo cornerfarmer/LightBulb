@@ -3,16 +3,15 @@
 #include "Cluster.hpp"
 #include "KNearestClustering.hpp"
 #include "Teacher.hpp"
+#include <list>
 
 void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
-
-	int nearestPointsCount = 3;
 	// Create a new KNearestClustering object which will do all hard work :)
 	KNearestClustering clustering;
 
 	// Let the clustering algorithm calculate clusters from our teachingLessons
-	std::unique_ptr<std::vector<Cluster>> clusters = clustering.doClustering(getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size()).get(), nearestPointsCount, neuralNetwork.getNeuronsInLayer(0)->size());
+	std::unique_ptr<std::list<Cluster>> clusters = clustering.doClustering(*getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size()).get(), neuralNetwork.getNeuronsInLayer(1)->size(), neuralNetwork.getNeuronsInLayer(0)->size());
 
 	if (clusters->size() > neuralNetwork.getNeuronsInLayer(1)->size())
 	{
@@ -22,7 +21,7 @@ void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teac
 	else if (clusters->size() < neuralNetwork.getNeuronsInLayer(1)->size())
 	{
 		for (int i = 0; i < neuralNetwork.getNeuronsInLayer(1)->size() - clusters->size(); i++)
-			clusters->push_back((*clusters)[i % clusters->size()]);
+			clusters->push_back((*clusters).front());
 	}
 
 	// Replace the RBFNeurons from given network with the help of the calculated clusters

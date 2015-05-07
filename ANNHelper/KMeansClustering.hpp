@@ -9,6 +9,7 @@
 // Includes
 #include "AbstractClustering.hpp"
 #include "Point.hpp"
+#include "Cluster.hpp"
 
 // Forward declarations
 struct Cluster;
@@ -21,7 +22,7 @@ private:
 
 public:
 	// Calculates from the given points a specified count of cluster
-	std::unique_ptr<std::vector<Cluster>> doClustering(std::vector<Point>* points, int clusterCount, int dimensionCount);
+	std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount);
 };
 
 #endif
