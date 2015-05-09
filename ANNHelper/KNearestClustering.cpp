@@ -8,15 +8,15 @@
 
 std::unique_ptr<std::list<Cluster>> KNearestClustering::doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount) 
 {
+	calculateDistances(points);
+
 	int intervalBegin = 0;
 	int intervalEnd = points.size() - 1;
-
+	
 	std::unique_ptr<std::list<Cluster>> clusters;
-	bool useCache = false;
-	flushCache(points.size());
 	do
 	{
-		clusters.reset(doClustering(points, (intervalEnd - intervalBegin) / 2 + intervalBegin, dimensionCount, useCache));
+		clusters.reset(doOriginalClustering(points, (intervalEnd - intervalBegin) / 2 + intervalBegin, dimensionCount));
 		if (clusters->size() == clusterCount)
 			break;
 		else 
@@ -37,7 +37,6 @@ std::unique_ptr<std::list<Cluster>> KNearestClustering::doClustering(std::list<P
 			}
 			
 		}
-		useCache = true;
 	} while(intervalBegin != intervalEnd);
 
 	
@@ -67,7 +66,7 @@ std::unique_ptr<std::list<Cluster>> KNearestClustering::doClustering(std::list<P
 	return clusters;
 }
 
-std::list<Cluster>* KNearestClustering::doClustering(std::list<Point*> &points, int nearestPointsCount, int dimensionCount, bool useCache)
+std::list<Cluster>* KNearestClustering::doOriginalClustering(std::list<Point*> &points, int nearestPointsCount, int dimensionCount)
 {
 	// Create a new cluster vector
 	std::list<Cluster>* clusters = new std::list<Cluster>();
@@ -86,7 +85,14 @@ std::list<Cluster>* KNearestClustering::doClustering(std::list<Point*> &points, 
 			newCluster.position.resize(dimensionCount);
 			newCluster.width = 0.5f;
 			clusters->push_back(newCluster);
-			addKNearestPointsToCluster(points, clusters->back(), *(*point), nearestPointsCount, useCache);
+			std::list<Point*> addedPoints;
+
+			(*point)->cluster = &clusters->back();
+			(*point)->cluster->points.push_back(*point);
+			addedPoints.push_back(*point);
+
+			for (std::list<Point*>::iterator addedPoint = addedPoints.begin(); addedPoint != addedPoints.end(); addedPoint++)
+				addKNearestPointsToCluster(points, clusters->back(), *(*addedPoint), nearestPointsCount, addedPoints);
 		}		
 	}
 
@@ -113,33 +119,40 @@ std::list<Cluster>* KNearestClustering::doClustering(std::list<Point*> &points, 
 
 	return clusters;
 }
-
-void KNearestClustering::addKNearestPointsToCluster(std::list<Point*>& points, Cluster& cluster, Point &pointToAdd, int nearestPointsCount, bool useCache)
+void KNearestClustering::calculateDistances(std::list<Point*>& points)
 {
-	pointToAdd.cluster = &cluster;
-	cluster.points.push_back(&pointToAdd);
+	for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
+		nthNearestPointToPoint[*point] = std::vector<std::pair<Point*, int>>();
 
-	
-	if (!useCache)
+	for (std::list<Point*>::iterator fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
 	{
-		distanceToPointCache[&pointToAdd] = std::vector<std::pair<Point*, float>>();
-		for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
+		std::vector<std::pair<Point*, float>> distanceToPoint;
+		for (std::list<Point*>::iterator toPoint = points.begin(); toPoint != points.end(); toPoint++)
 		{	
-			distanceToPointCache[&pointToAdd].push_back(std::make_pair((*point), getDistanceBetweenPoints(pointToAdd, *(*point))));
+			distanceToPoint.push_back(std::make_pair((*toPoint), getDistanceBetweenPoints(**fromPoint, **toPoint)));
 		}
-		std::sort(distanceToPointCache[&pointToAdd].begin(), distanceToPointCache[&pointToAdd].end(), pairCompare);
-	}
+		std::sort(distanceToPoint.begin(), distanceToPoint.end(), pairCompare);
 
-	for (int p = 1; p < nearestPointsCount + 1; p++)
-	{
-		if (distanceToPointCache[&pointToAdd][p].first->cluster == NULL)
-			addKNearestPointsToCluster(points, cluster, *distanceToPointCache[&pointToAdd][p].first, nearestPointsCount, useCache);
+		for (int i = 1, nth = 0; i < distanceToPoint.size(); i++)
+		{
+			if (distanceToPoint[i].second != distanceToPoint[i - 1].second)
+				nth++;
+			nthNearestPointToPoint[distanceToPoint[i].first].push_back(std::make_pair(*fromPoint, nth));			
+		}
 	}
 }
 
-void KNearestClustering::flushCache(int pointCount)
-{
-	distanceToPointCache.clear();
+void KNearestClustering::addKNearestPointsToCluster(std::list<Point*>& points, Cluster& cluster, Point &pointToAdd, int nearestPointsCount, std::list<Point*>& addedPoints)
+{	
+	for (int i = 0; i < nthNearestPointToPoint[&pointToAdd].size(); i++)
+	{
+		if (nthNearestPointToPoint[&pointToAdd][i].first->cluster == NULL && nthNearestPointToPoint[&pointToAdd][i].second <= nearestPointsCount)
+		{			
+			nthNearestPointToPoint[&pointToAdd][i].first->cluster = &cluster;
+			cluster.points.push_back(nthNearestPointToPoint[&pointToAdd][i].first);
+			addedPoints.push_back(nthNearestPointToPoint[&pointToAdd][i].first);			
+		}
+	}
 }
 
 bool KNearestClustering::pairCompare(const std::pair<Point*, float>& a ,const std::pair<Point*, float>& b)

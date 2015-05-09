@@ -20,14 +20,14 @@ class Teacher;
 class KNearestClustering : public AbstractClustering
 {
 private:
-	std::map<Point*, std::vector<std::pair<Point*, float>>> distanceToPointCache;
-	void addKNearestPointsToCluster(std::list<Point*>& points, Cluster& cluster, Point &pointToAdd, int nearestPointsCount, bool useCache);
+	std::map<Point*, std::vector<std::pair<Point*, int>>> nthNearestPointToPoint;
+	void addKNearestPointsToCluster(std::list<Point*>& points, Cluster& cluster, Point &pointToAdd, int nearestPointsCount, std::list<Point*>& addedPoints);
 	static bool KNearestClustering::pairCompare(const std::pair<Point*, float>& a ,const std::pair<Point*, float>& b);
-	
+	void KNearestClustering::calculateDistances(std::list<Point*>& points);
 public:
 	// Calculates from the given points a specified count of cluster
 	std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*>& points, int clusterCount, int dimensionCount);
-	std::list<Cluster>* doClustering(std::list<Point*>& points, int nearestPointsCount, int dimensionCount, bool useCache);
+	std::list<Cluster>* doOriginalClustering(std::list<Point*>& points, int nearestPointsCount, int dimensionCount);
 	void flushCache(int pointCount);
 };
 

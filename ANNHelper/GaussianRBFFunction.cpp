@@ -10,7 +10,7 @@ float GaussianRBFFunction::execute(float input, AbstractThreshold* threshold)
 	if (!rbfThreshold)
 		throw std::invalid_argument("The given threshold has to be a RBFThreshold");
 
-	// Return the value of the gaussian rbf: e^(-input^2/(2*width)^2)
+	// Return the value of the gaussian rbf: e^(-input^2/(2*width^2)
 	return exp(-pow(input, 2) / (2 * pow(rbfThreshold->getWidth(), 2)));
 }
 

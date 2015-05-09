@@ -113,21 +113,21 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 10, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 12, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
 	Teacher teacher;
-	for (float i=0;i<=1;i+=0.1)
+	for (int i=0;i<10;i+=1)
 	{
-		for (float l=0;l<=1;l+=0.1)
+		for (int l=0;l<10;l+=1)
 		{	
 			std::vector<float>* teachingPattern = new std::vector<float>(2);
 			std::vector<float>* teachingInput= new std::vector<float>(1);
 
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
-			(*teachingInput)[0] = (abs(i - 0.5) <= 0.3 &&  abs(l - 0.5) <= 0.3);	
+			(*teachingInput)[0] = (abs(i - 5) <= 2.5f &&  abs(l - 5) <= 2.5f);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
 			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
@@ -157,7 +157,8 @@ void doRBFTest()
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
 	neuralNetworkResultChartOptions.binaryInterpretation = false;
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
-	
+	neuralNetworkResultChartOptions.yRangeEnd = 10;
+	neuralNetworkResultChartOptions.xRangeEnd = 10;
 	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
 	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
