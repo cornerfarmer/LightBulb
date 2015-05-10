@@ -28,6 +28,7 @@
 #include "ResilientDeltaLearningRule.hpp"
 #include "KMeansRBFNeuronPlacer.hpp"
 #include "KNearestRBFNeuronPlacer.hpp"
+#include "RBFNetworkStructureChart.hpp"
 
 void doPerceptronTest()
 {
@@ -157,10 +158,19 @@ void doRBFTest()
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
 	neuralNetworkResultChartOptions.binaryInterpretation = false;
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
-	neuralNetworkResultChartOptions.yRangeEnd = 10;
-	neuralNetworkResultChartOptions.xRangeEnd = 10;
+	neuralNetworkResultChartOptions.yRangeEnd = 9;
+	neuralNetworkResultChartOptions.xRangeEnd = 9;
 	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
+
+	RBFNetworkStructureChartOptions rbfNetworkStructureChartOptions;
+	rbfNetworkStructureChartOptions.rbfNetwork = static_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
+	rbfNetworkStructureChartOptions.yRangeEnd = 9;
+	rbfNetworkStructureChartOptions.xRangeEnd = 9;
+	RBFNetworkStructureChart rbfNetworkStructureChart(300, 0, rbfNetworkStructureChartOptions);
+	rbfNetworkStructureChart.recalculateAllValues();
+
+
 	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
 
 	while (window.isOpen())
@@ -174,6 +184,7 @@ void doRBFTest()
 
         window.clear();
         neuralNetworkResultChart.draw(window);
+		rbfNetworkStructureChart.draw(window);
         window.display();
     }
 
