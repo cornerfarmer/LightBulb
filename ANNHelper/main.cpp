@@ -114,21 +114,22 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 12, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 10, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
 	Teacher teacher;
-	for (int i=0;i<10;i+=1)
+	for (int i=0;i<=20;i+=1)
 	{
-		for (int l=0;l<10;l+=1)
+		for (int l=0;l<=20;l+=1)
 		{	
 			std::vector<float>* teachingPattern = new std::vector<float>(2);
 			std::vector<float>* teachingInput= new std::vector<float>(1);
 
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
-			(*teachingInput)[0] = (abs(i - 5) <= 2.5f &&  abs(l - 5) <= 2.5f);	
+			//(*teachingInput)[0] = (abs(i - 10) <= 5.5f &&  abs(l - 10) <= 5.5f);	
+			(*teachingInput)[0] = (i > l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
 			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
@@ -156,17 +157,17 @@ void doRBFTest()
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
-	neuralNetworkResultChartOptions.binaryInterpretation = false;
+	neuralNetworkResultChartOptions.binaryInterpretation = true;
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
-	neuralNetworkResultChartOptions.yRangeEnd = 9;
-	neuralNetworkResultChartOptions.xRangeEnd = 9;
+	neuralNetworkResultChartOptions.yRangeEnd = 20;
+	neuralNetworkResultChartOptions.xRangeEnd = 20;
 	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
 
 	RBFNetworkStructureChartOptions rbfNetworkStructureChartOptions;
 	rbfNetworkStructureChartOptions.rbfNetwork = static_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
-	rbfNetworkStructureChartOptions.yRangeEnd = 9;
-	rbfNetworkStructureChartOptions.xRangeEnd = 9;
+	rbfNetworkStructureChartOptions.yRangeEnd = 20;
+	rbfNetworkStructureChartOptions.xRangeEnd = 20;
 	RBFNetworkStructureChart rbfNetworkStructureChart(300, 0, rbfNetworkStructureChartOptions);
 	rbfNetworkStructureChart.recalculateAllValues();
 

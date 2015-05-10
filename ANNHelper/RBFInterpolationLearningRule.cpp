@@ -29,7 +29,7 @@ RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearn
 void RBFInterpolationLearningRule::adjustWeight(Edge* edge, float deltaWeight)
 {
 	// Set the calculated weight as new weight
-	edge->setWeight(0.5);
+	edge->setWeight(deltaWeight);
 }
 
 void RBFInterpolationLearningRule::printDebugOutput()

@@ -19,6 +19,7 @@ protected:
 	float getDistanceBetweenPoints(Point &point1, Point &point2);
 	float getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2);
 	void calculateAllClusterWidths(std::list<Cluster> &clusters);
+	static const float minClusterWidth;
 public:
 	virtual ~AbstractClustering() {}
 	virtual std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount) = 0;

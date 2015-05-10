@@ -2,6 +2,8 @@
 #include "Point.hpp"
 #include "Cluster.hpp"
 
+const float AbstractClustering::minClusterWidth = 0.05f;
+
 float AbstractClustering::getDistanceBetweenPoints(Point &point1, Point &point2)
 {
 	return getDistanceBetweenPositions(point1.position, point2.position) * (1 + getDistanceBetweenPositions(point1.value, point2.value));
@@ -24,5 +26,6 @@ void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 		(*cluster).width = 0;
 		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
 			(*cluster).width = std::max((*cluster).width, getDistanceBetweenPositions((*point)->position, (*cluster).position));
+		(*cluster).width = std::max((*cluster).width, minClusterWidth);
 	}
 }
