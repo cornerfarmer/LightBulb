@@ -200,6 +200,15 @@
     <ClInclude Include="AbstractNonReliableRBFNeuronPlacer.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractNearestClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="ENearestClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="ENearestRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -362,6 +371,15 @@
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
     <ClCompile Include="AbstractNonReliableRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractNearestClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ENearestClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ENearestRBFNeuronPlacer.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,14 +1,17 @@
-#include "KNearestRBFNeuronPlacer.hpp"
+#include "ENearestRBFNeuronPlacer.hpp"
 #include "RBFNetwork.hpp"
 #include "Cluster.hpp"
-#include "KNearestClustering.hpp"
+#include "ENearestClustering.hpp"
 #include "Teacher.hpp"
 #include "Point.hpp"
 
-void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
+// Sets the minimum cluster width
+const float ENearestRBFNeuronPlacer::iterationEndPrecision = 0.1f;
+
+void ENearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
 	// Create a new KNearestClustering object which will do all hard work :)
-	KNearestClustering clustering;
+	ENearestClustering clustering;
 	// Calculate all points from the teaching lessons
 	std::unique_ptr<std::list<Point*>> points = getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size());
 	// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
@@ -23,9 +26,9 @@ void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teac
 
 	// First we have to set a interval, which will contain the right parameter
 	// Set the intervalBegin to 0. This would produce as many clusters as many points we have
-	int intervalBegin = 0;
+	float intervalBegin = 0;
 	// Set the intervalEnd to pointCount -1. This would always produce exactly one cluster
-	int intervalEnd = points->size() - 1;
+	float intervalEnd = clustering.getBiggestDistance(*points.get());
 	
 	// This pointer will contain the list of clusters
 	std::unique_ptr<std::list<Cluster>> clusters;
@@ -41,31 +44,24 @@ void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teac
 			// If the count of the calculated clusters is greater than the wished cluster count, we have to increase the parameter
 			if (clusters->size() > clusterCount)
 			{
-				// If the interval has the length 1, the normal calculation wouldn't change anything and would produce a endless loop
-				if (intervalEnd - intervalBegin == 1)
-				{
-					// So increase both interval ends, so after the next calculation the interval calculation will take the other way. 
-					intervalBegin++;
-					intervalEnd++;
-				}
-				else // Set the intervalBegin to the middle between intervalEnd and intervalBegin
-					intervalBegin = (intervalEnd - intervalBegin) / 2 + intervalBegin;
+				// Set the intervalBegin to the middle between intervalEnd and intervalBegin
+				intervalBegin = (intervalEnd - intervalBegin) / 2 + intervalBegin;
 			}
 			else
 			{
-				 // Set the intervalEnd to the middle between intervalEnd and intervalBegin
+				// Set the intervalEnd to the middle between intervalEnd and intervalBegin
 				intervalEnd = (intervalEnd - intervalBegin) / 2 + intervalBegin;
 			}			
 		}
 		// Do as long as we have not found the best parameter from the interval
-	} while(intervalBegin != intervalEnd);
+	} while(abs(intervalBegin -intervalEnd) > iterationEndPrecision);
 	
 	fillUpClusters(*points.get(), *clusters.get(), clusterCount, dimensionCount); 
 	// Replace the RBFNeurons from given network with the help of the calculated clusters
 	placeRBFNeuronsFromClusters(clusters.get(), neuralNetwork);
 }
 
-AbstractRBFNeuronPlacer* KNearestRBFNeuronPlacer::getCopy()
+AbstractRBFNeuronPlacer* ENearestRBFNeuronPlacer::getCopy()
 {
-	return new KNearestRBFNeuronPlacer(*this);
+	return new ENearestRBFNeuronPlacer(*this);
 }

@@ -28,6 +28,7 @@
 #include "ResilientDeltaLearningRule.hpp"
 #include "KMeansRBFNeuronPlacer.hpp"
 #include "KNearestRBFNeuronPlacer.hpp"
+#include "ENearestRBFNeuronPlacer.hpp"
 #include "RBFNetworkStructureChart.hpp"
 
 void doPerceptronTest()
@@ -114,7 +115,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 10, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 30, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
@@ -128,8 +129,8 @@ void doRBFTest()
 
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
-			//(*teachingInput)[0] = (abs(i - 10) <= 5.5f &&  abs(l - 10) <= 5.5f);	
-			(*teachingInput)[0] = (i > l);	
+			(*teachingInput)[0] = (abs(i - 10) <= 5.5f &&  abs(l - 10) <= 5.5f);	
+			//(*teachingInput)[0] = (i > l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
 			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
@@ -141,7 +142,7 @@ void doRBFTest()
 	learningRuleOptions.offlineLearning = true;
 	learningRuleOptions.totalErrorGoal = 1;
 	learningRuleOptions.maxTries = 1;
-	learningRuleOptions.neuronPlacer = new KNearestRBFNeuronPlacer();
+	learningRuleOptions.neuronPlacer = new ENearestRBFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 
 	learningRule.doLearning(neuralNetwork, teacher);	

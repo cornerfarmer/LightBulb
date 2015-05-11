@@ -71,6 +71,7 @@
     <ClCompile Include="AbstractBackpropagationLearningRule.cpp" />
     <ClCompile Include="AbstractClustering.cpp" />
     <ClCompile Include="AbstractDeltaLearningRule.cpp" />
+    <ClCompile Include="AbstractNearestClustering.cpp" />
     <ClCompile Include="AbstractNeuronFactory.cpp" />
     <ClCompile Include="AbstractActivationFunction.cpp" />
     <ClCompile Include="AbstractActivationOrder.cpp" />
@@ -78,6 +79,8 @@
     <ClCompile Include="AbstractRBFNeuronPlacer.cpp" />
     <ClCompile Include="AbstractReliableRBFNeuronPlacer.cpp" />
     <ClCompile Include="Cluster.hpp" />
+    <ClCompile Include="ENearestClustering.cpp" />
+    <ClCompile Include="ENearestRBFNeuronPlacer.cpp" />
     <ClCompile Include="KMeansClustering.cpp" />
     <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="KNearestClustering.cpp" />
@@ -129,12 +132,15 @@
     <ClInclude Include="AbstractBackpropagationLearningRule.hpp" />
     <ClInclude Include="AbstractClustering.hpp" />
     <ClInclude Include="AbstractDeltaLearningRule.hpp" />
+    <ClInclude Include="AbstractNearestClustering.hpp" />
     <ClInclude Include="AbstractNeuronFactory.hpp" />
     <ClInclude Include="AbstractActivationFunction.hpp" />
     <ClInclude Include="AbstractActivationOrder.hpp" />
     <ClInclude Include="AbstractNonReliableRBFNeuronPlacer.hpp" />
     <ClInclude Include="AbstractRBFNeuronPlacer.hpp" />
     <ClInclude Include="AbstractReliableRBFNeuronPlacer.hpp" />
+    <ClInclude Include="ENearestClustering.hpp" />
+    <ClInclude Include="ENearestRBFNeuronPlacer.hpp" />
     <ClInclude Include="KMeansClustering.hpp" />
     <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="KNearestClustering.hpp" />
