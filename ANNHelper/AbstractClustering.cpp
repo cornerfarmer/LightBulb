@@ -2,10 +2,13 @@
 #include "Point.hpp"
 #include "Cluster.hpp"
 
+// Sets the minimum cluster width
 const float AbstractClustering::minClusterWidth = 0.05f;
 
 float AbstractClustering::getDistanceBetweenPoints(Point &point1, Point &point2)
 {
+	// Returns the distance between the positions of the two given points and also consider value differences
+	// TODO: Improve value distance calculation
 	return getDistanceBetweenPositions(point1.position, point2.position) * (1 + getDistanceBetweenPositions(point1.value, point2.value));
 }
 
@@ -21,11 +24,13 @@ float AbstractClustering::getDistanceBetweenPositions(std::vector<float> &pos1, 
 
 void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 {
+	// Go through all clusters
 	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++)
 	{
-		(*cluster).width = 0;
+		// Set the radius to the minClusterWidth, so it will always be greater than 0
+		(*cluster).radius = minClusterWidth;
+		// Set the radius to the maximum distance between point and center of the cluster
 		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
-			(*cluster).width = std::max((*cluster).width, getDistanceBetweenPositions((*point)->position, (*cluster).position));
-		(*cluster).width = std::max((*cluster).width, minClusterWidth);
+			(*cluster).radius = std::max((*cluster).radius, getDistanceBetweenPositions((*point)->position, (*cluster).position));
 	}
 }

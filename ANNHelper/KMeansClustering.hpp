@@ -19,9 +19,8 @@ class Teacher;
 class KMeansClustering : public AbstractClustering
 {
 private:
-
 public:
-	// Calculates from the given points a specified count of cluster
+	// Execute the clustering algorithm and calculate n-th clusters in the given point set
 	std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount);
 };
 

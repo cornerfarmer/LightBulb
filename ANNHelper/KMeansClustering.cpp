@@ -12,19 +12,14 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 	{
 		if (point == points.end())
 			point = points.begin();
-
 		// Set the position to one random point, so every cluster does now contain at least one point
 		(*cluster).position = (*point)->position;
-		// Set the width to a constant value (TODO: Make this value variable)
-		(*cluster).width = 0.5f;		
 	}
 
 	// Create a boolean value that should indicate whether the process can be stopped
 	bool clusterHasChanged = true;
 	// This vector will help us to calculate the medians of our clusters
 	std::vector<std::vector<float>> clusterMedian(clusterCount, std::vector<float>(dimensionCount));
-	// This vector contains informations about which point referrs to which cluster
-	//std::vector<int> clusterFromPoint(points->size());
 	// Do as long as something has changed
 	while (clusterHasChanged)
 	{
@@ -33,6 +28,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 		int clusterIndex = 0;
 		for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 		{
+			// Clear the points list
 			(*cluster).points.clear();
 			// Set all medians to zero
 			for (int i = 0; i < dimensionCount; i++)
@@ -43,16 +39,20 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 		// Go through every point
 		for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
 		{
+			// Be sure the cluster of the point is null
 			(*point)->cluster = NULL;
 			// Set the current nearest cluster distance to zero
 			float nearestClusterDistance = 0;
+			// The nearestClusterIndex contains the index of the current nearest cluster
 			int nearestClusterIndex;
+
 			// Go through all clusters
 			clusterIndex = 0;
 			for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 			{
+				// Calculate the distance between the point and the current cluster
 				float currentDistance = getDistanceBetweenPositions((*point)->position, (*cluster).position);
-				// If the distance between the current point and this cluster is less than the nearestClusterDistance or if this is the first cluster
+				// If the currentDistance is less than the nearestClusterDistance or if this is the first cluster
 				if (currentDistance < nearestClusterDistance || (*point)->cluster == NULL)
 				{
 					// Set the current cluster to the cluster of the current point					
@@ -96,6 +96,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 		}
 	}
 
+	// Calculate the widths of all calculated clusters
 	calculateAllClusterWidths(*clusters.get());
 	return clusters;
 }

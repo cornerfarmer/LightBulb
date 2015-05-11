@@ -15,14 +15,17 @@ struct Point;
 class AbstractClustering 
 {
 protected:
-	// Calculates the distance between two points
-	float getDistanceBetweenPoints(Point &point1, Point &point2);
-	float getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2);
-	void calculateAllClusterWidths(std::list<Cluster> &clusters);
+	// Sets the minimum cluster width
 	static const float minClusterWidth;
+	// Calculates the (value and position) distance between two points
+	float getDistanceBetweenPoints(Point &point1, Point &point2);
+	// Calculates the distance between two positions
+	float getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2);
+	// Calculate the width of all given clusters based on their points
+	void calculateAllClusterWidths(std::list<Cluster> &clusters);
 public:
 	virtual ~AbstractClustering() {}
-	virtual std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount) = 0;
+
 };
 
 #endif

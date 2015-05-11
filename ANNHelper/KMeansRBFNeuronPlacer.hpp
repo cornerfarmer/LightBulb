@@ -6,14 +6,14 @@
 // Library includes
 
 // Includes
-#include "AbstractRBFNeuronPlacer.hpp"
+#include "AbstractReliableRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class RBFNetwork;
 class Teacher;
 
 // This class contains all stuff needed to describe a RBFNeuronPlacer 
-class KMeansRBFNeuronPlacer : public AbstractRBFNeuronPlacer
+class KMeansRBFNeuronPlacer : public AbstractReliableRBFNeuronPlacer
 {
 protected:
 public:

@@ -13,9 +13,12 @@ struct Point;
 // This class contains all stuff needed to describe a Cluster 
 struct Cluster
 {
+	// The position of the cluster
 	std::vector<float> position;
+	// All points contained by the cluster
 	std::list<Point*> points;
-	float width;
+	// The radius of the cluster
+	float radius;
 };
 
 #endif

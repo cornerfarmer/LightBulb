@@ -194,6 +194,12 @@
     <ClInclude Include="RBFNetworkStructureChart.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractReliableRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractNonReliableRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -351,6 +357,12 @@
     </ClCompile>
     <ClCompile Include="RBFNetworkStructureChart.cpp">
       <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractReliableRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractNonReliableRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
