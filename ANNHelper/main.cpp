@@ -30,6 +30,7 @@
 #include "KNearestRBFNeuronPlacer.hpp"
 #include "ENearestRBFNeuronPlacer.hpp"
 #include "RBFNetworkStructureChart.hpp"
+#include "ROLFNeuronPlacer.hpp"
 
 void doPerceptronTest()
 {
@@ -142,7 +143,7 @@ void doRBFTest()
 	learningRuleOptions.offlineLearning = true;
 	learningRuleOptions.totalErrorGoal = 1;
 	learningRuleOptions.maxTries = 1;
-	learningRuleOptions.neuronPlacer = new ENearestRBFNeuronPlacer();
+	learningRuleOptions.neuronPlacer = new ROLFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 
 	learningRule.doLearning(neuralNetwork, teacher);	

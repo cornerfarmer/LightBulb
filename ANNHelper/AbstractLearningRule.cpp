@@ -105,21 +105,20 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					// Go through all neurons in this layer
 					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
 					int neuronsInLayerCount = neuronsInLayer->size();
-					int neuronIndex = 0;
-					for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
-					{		
-						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1 || neuronIndex + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
+					for (int n = 0; n < neuronsInLayer->size(); n++)
+					{
+						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1 || n + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
 						{
 							// Let the algorithm do some work for the actual neuron
-							initializeNeuronWeightCalculation(dynamic_cast<StandardNeuron*>(*neuron), lessonIndex, l, neuronIndex, dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
+							initializeNeuronWeightCalculation(dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]), lessonIndex, l, n, dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
 
-							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]))->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
 							int edgeIndex = 0;
 							for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
 							{			
 								// Calculate the deltaWeight
-								float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, neuronIndex, edgeIndex, dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
+								float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
 
 								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
  								if (options->offlineLearning)

@@ -54,6 +54,7 @@ public:
 	std::vector<std::vector<AbstractNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
+	AbstractNeuron* addNeuronIntoLayer(int layerIndex);
 	// Calculates the Edge count
 	int getEdgeCount();
 	bool usesBiasNeurons();

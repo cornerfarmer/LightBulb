@@ -24,6 +24,8 @@ public:
 	virtual void randomizeWeights(float randStart, float randEnd) = 0;
 	// Returns all Neurons
 	virtual std::vector<std::vector<AbstractNeuron*>>* getNeurons() = 0;
+	// Add a new Neuron in the selected Layer
+	virtual AbstractNeuron* addNeuronIntoLayer(int layerIndex) = 0;
 };
 
 #endif

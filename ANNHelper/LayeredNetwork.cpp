@@ -78,27 +78,7 @@ void LayeredNetwork::buildNetwork()
 		// Add the neurons to the current layer
 		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
 		{
-			// If its the first layer, add InputNeurons, else StandardNeurons
-			if (l == 0)
-				neurons.back().push_back(options->neuronFactory->createInputNeuron());
-			else
-			{
-				StandardNeuron* newNeuron;
-
-				// If its the last layer create a output neuron else an inner neuron
-				if (l == options->neuronsPerLayerCount.size() - 1)
-					newNeuron = options->neuronFactory->createOutputNeuron();
-				else
-					newNeuron = options->neuronFactory->createInnerNeuron();
-
-				neurons.back().push_back(newNeuron);				
-
-				// Add an edge to every neuron of the last layer
-				for (std::vector<AbstractNeuron*>::iterator prevNeuron = getNeuronsInLayer(l - 1)->begin(); prevNeuron != getNeuronsInLayer(l - 1)->end(); prevNeuron++)
-				{
-					newNeuron->addPrevNeuron(*prevNeuron, 1);
-				}
-			}
+			addNeuronIntoLayer(l);
 		}		
 
 		// If BiasNeurons are used, insert them in every layer except of the last one
@@ -106,6 +86,36 @@ void LayeredNetwork::buildNetwork()
 			neurons.back().push_back(new BiasNeuron());
 	}
 
+}
+
+AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex)
+{
+	// If its the first layer, add InputNeurons, else StandardNeurons
+	if (layerIndex == 0)
+	{
+		InputNeuron* newNeuron = options->neuronFactory->createInputNeuron();
+		neurons[layerIndex].push_back(newNeuron);
+		return newNeuron;
+	}
+	else
+	{
+		StandardNeuron* newNeuron;
+
+		// If its the last layer create a output neuron else an inner neuron
+		if (layerIndex == options->neuronsPerLayerCount.size() - 1)
+			newNeuron = options->neuronFactory->createOutputNeuron();
+		else
+			newNeuron = options->neuronFactory->createInnerNeuron();
+
+		neurons[layerIndex].push_back(newNeuron);				
+
+		// Add an edge to every neuron of the last layer
+		for (std::vector<AbstractNeuron*>::iterator prevNeuron = getNeuronsInLayer(layerIndex - 1)->begin(); prevNeuron != getNeuronsInLayer(layerIndex - 1)->end(); prevNeuron++)
+		{
+			newNeuron->addPrevNeuron(*prevNeuron, 1);
+		}
+		return newNeuron;
+	}
 }
 
 std::vector<AbstractNeuron*>* LayeredNetwork::getInputNeurons()
