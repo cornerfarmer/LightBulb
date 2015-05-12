@@ -7,11 +7,11 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 	// Create a new cluster vector
 	std::unique_ptr<std::list<Cluster>> clusters(new std::list<Cluster>(clusterCount));
 	// Go through all clusters
-	std::list<Point*>::iterator point = points.begin();
-	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, point++)
+
+	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++)
 	{
-		if (point == points.end())
-			point = points.begin();
+		std::list<Point*>::iterator point = points.begin();
+		std::advance(point, (float)(rand() % RAND_MAX) / RAND_MAX * points.size());
 		// Set the position to one random point, so every cluster does now contain at least one point
 		(*cluster).position = (*point)->position;
 	}
