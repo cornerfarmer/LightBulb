@@ -172,7 +172,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				}
 			}
 		}
-	} while (totalError > options->totalErrorGoal && tryCounter++ < options->maxTries);
+	} while (totalError > options->totalErrorGoal && ++tryCounter < options->maxTries);
 	
 	// Print, If goal has reached 
 	if (options->enableDebugOutput)

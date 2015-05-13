@@ -3,7 +3,6 @@
 #include "Point.hpp"
 #include "RBFNetwork.hpp"
 #include "NeuralNetwork.hpp"
-#include "ROLFLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TeachingLessonLinearInput.hpp"
 #include "AbstractNeuron.hpp"
