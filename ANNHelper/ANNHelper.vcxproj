@@ -116,7 +116,6 @@
     <ClCompile Include="RBFThreshold.cpp" />
     <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
     <ClCompile Include="ROLFClustering.cpp" />
-    <ClCompile Include="ROLFLearningRule.cpp" />
     <ClCompile Include="ROLFNeuronPlacer.cpp" />
     <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
@@ -177,7 +176,6 @@
     <ClInclude Include="RBFThreshold.hpp" />
     <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
     <ClInclude Include="ROLFClustering.hpp" />
-    <ClInclude Include="ROLFLearningRule.hpp" />
     <ClInclude Include="ROLFNeuronPlacer.hpp" />
     <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />

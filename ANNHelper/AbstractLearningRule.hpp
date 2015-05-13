@@ -36,7 +36,7 @@ struct AbstractLearningRuleOptions
 	unsigned int debugOutputInterval;
 	// Enable offline learning
 	bool offlineLearning;
-
+	bool changeWeightsBeforeLearning;
 	AbstractLearningRuleOptions()
 	{
 		maxIterationsPerTry = 10000;
@@ -49,6 +49,7 @@ struct AbstractLearningRuleOptions
 		enableDebugOutput = false;
 		debugOutputInterval = 1000;	
 		offlineLearning = false;
+		changeWeightsBeforeLearning = true;
 	}
 	virtual ~AbstractLearningRuleOptions() {}
 };

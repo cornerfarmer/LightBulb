@@ -212,9 +212,6 @@
     <ClInclude Include="ROLFClustering.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
-    <ClInclude Include="ROLFLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="ROLFNeuronPlacer.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
@@ -393,9 +390,6 @@
     </ClCompile>
     <ClCompile Include="ROLFClustering.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ROLFLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="ROLFNeuronPlacer.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>

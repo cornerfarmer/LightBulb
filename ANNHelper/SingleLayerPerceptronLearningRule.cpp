@@ -56,6 +56,9 @@ float SingleLayerPerceptronLearningRule::calculateDeltaWeightFromEdge(Edge* edge
 
 void SingleLayerPerceptronLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	// Randomize all weights
-	neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+	if (options->changeWeightsBeforeLearning)
+	{
+		// Randomize all weights
+		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+	}
 }

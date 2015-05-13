@@ -17,7 +17,7 @@ struct AbstractDeltaLearningRuleOptions : AbstractLearningRuleOptions
 	AbstractRBFNeuronPlacer* neuronPlacer;
 	AbstractDeltaLearningRuleOptions()
 	{
-
+		neuronPlacer = NULL;
 	}
 	~AbstractDeltaLearningRuleOptions()
 	{

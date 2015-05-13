@@ -97,6 +97,9 @@ AbstractActivationOrder* AbstractBackpropagationLearningRule::getNewActivationOr
 
 void AbstractBackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	// Randomize all weights
-	neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+	if (options->changeWeightsBeforeLearning)
+	{
+		// Randomize all weights
+		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+	}
 }

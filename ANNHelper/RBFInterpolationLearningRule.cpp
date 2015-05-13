@@ -99,8 +99,11 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 {
 	RBFNetwork* rbfNetwork = dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
 
-	// Replace all RBFNeurons with the help of the choosen neuronPlacer
-	getOptions()->neuronPlacer->doPlacing(*rbfNetwork, teacher);
+	if (options->changeWeightsBeforeLearning)
+	{
+		// Replace all RBFNeurons with the help of the choosen neuronPlacer
+		getOptions()->neuronPlacer->doPlacing(*rbfNetwork, teacher);
+	}
 
 	// The TopologicalOrder will be our activationOrder
 	TopologicalOrder activationOrder;

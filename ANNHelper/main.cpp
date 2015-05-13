@@ -116,7 +116,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 20, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 50, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
@@ -149,12 +149,13 @@ void doRBFTest()
 	learningRule.doLearning(neuralNetwork, teacher);	
 	ResilientDeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
-	delteLearningRuleOptions.maxTries = 1000;
+	delteLearningRuleOptions.maxTries = 1;
+	delteLearningRuleOptions.maxTotalErrorValue = 10;
 	delteLearningRuleOptions.enableDebugOutput = true;
-	delteLearningRuleOptions.neuronPlacer = new KNearestRBFNeuronPlacer();
+	delteLearningRuleOptions.changeWeightsBeforeLearning = false;
 	ResilientDeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
 
-	//deltaLearningRule.doLearning(neuralNetwork, teacher);
+	deltaLearningRule.doLearning(neuralNetwork, teacher);
 
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;

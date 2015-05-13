@@ -24,7 +24,7 @@ void AbstractDeltaLearningRule::initializeLearningAlgoritm(NeuralNetwork &neural
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	if (!dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
 		throw std::invalid_argument("The given neuralNetwork has to contain exactly two layers");
-	if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && !getOptions()->neuronPlacer)
+	if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && (getOptions()->changeWeightsBeforeLearning && !getOptions()->neuronPlacer))
 		throw new std::invalid_argument("The neuronPlacer in the given options cannot be null");
 	initializeDeltaLearningAlgoritm(neuralNetwork, teacher);
 }
@@ -47,12 +47,15 @@ float AbstractDeltaLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int le
 
 void AbstractDeltaLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	// Randomize all weights
-	neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+	if (options->changeWeightsBeforeLearning)
+	{
+		// Randomize all weights
+		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 
-	// If the given network is a rbfNetwork replace all RBFNeurons with the help of the choosen neuronPlacer
-	if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()))
-		getOptions()->neuronPlacer->doPlacing(*dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()), teacher);
+		// If the given network is a rbfNetwork replace all RBFNeurons with the help of the choosen neuronPlacer
+		if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()))
+			getOptions()->neuronPlacer->doPlacing(*dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()), teacher);
+	}
 }
 
 AbstractDeltaLearningRuleOptions* AbstractDeltaLearningRule::getOptions()
