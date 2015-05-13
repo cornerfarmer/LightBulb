@@ -7,18 +7,27 @@
 #include <vector>
 #include <list>
 
-// Forward declarations
-struct Point;
+// Includes
+#include "Point.hpp"
 
 // This class contains all stuff needed to describe a Cluster 
 struct Cluster
 {
 	// The position of the cluster
-	std::vector<float> position;
+	Point position;
 	// All points contained by the cluster
 	std::list<Point*> points;
 	// The radius of the cluster
 	float radius;
+	Cluster()
+	{
+		radius = 0;
+	}
+	Cluster(Point &position_, float radius_)
+	{
+		position = position_;
+		radius = radius_;
+	}
 };
 
 #endif

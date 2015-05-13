@@ -22,6 +22,7 @@ protected:
 	virtual void addKNearestPointsToCluster(std::list<Point*>& points, Cluster& cluster, Point &pointToAdd, float parameter) = 0;
 	// Compares two pairs (Point, distance) (used to order points depending on their distance)
 	static bool pairCompare(const std::pair<Point*, float>& a ,const std::pair<Point*, float>& b);	
+
 public:
 	// Refresh cache
 	virtual void calculateCache(std::list<Point*>& points) = 0;

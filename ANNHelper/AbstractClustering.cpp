@@ -31,6 +31,72 @@ void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 		(*cluster).radius = minClusterWidth;
 		// Set the radius to the maximum distance between point and center of the cluster
 		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
-			(*cluster).radius = std::max((*cluster).radius, getDistanceBetweenPositions((*point)->position, (*cluster).position));
+			(*cluster).radius = std::max((*cluster).radius, getDistanceBetweenPositions((*point)->position, (*cluster).position.position));
 	}
+}
+
+bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &clusters, bool withValue)
+{
+	bool somethingHasChanged = false;
+	std::vector<std::vector<float>> clusterPositionMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->position.size()));
+	std::vector<std::vector<float>> clusterValueMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->value.size()));
+
+	int clusterIndex = 0;
+	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
+	{
+		// Go through every point
+		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
+		{				
+			// Add the position of the point to the median of the choosen cluster
+			for (int i = 0; i < (*point)->position.size(); i++)
+			{
+				clusterPositionMedian[clusterIndex][i] += (*point)->position[i];				
+			}
+			if (withValue)
+			{
+				// Add the position of the point to the median of the choosen cluster
+				for (int i = 0; i < (*point)->value.size(); i++)
+				{
+					clusterValueMedian[clusterIndex][i] += (*point)->value[i];	
+				}
+			}
+		}	
+	}
+
+	// Calculate new cluster positions from their medians
+	// Go through all clusters
+	clusterIndex = 0;
+	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
+	{
+		if ((*cluster).points.size() != 0)
+		{
+			// Go through all dimensions of the position vector
+			for (int i = 0; i < clusterPositionMedian[clusterIndex].size(); i++)
+			{
+				// Divide the sum of all points from this cluster by the point count, so now we have the median of the cluster
+				clusterPositionMedian[clusterIndex][i] /= (*cluster).points.size();	
+				if (clusterPositionMedian[clusterIndex][i] != (*cluster).position.position[i])
+				{
+					somethingHasChanged = true;
+					(*cluster).position.position[i] = clusterPositionMedian[clusterIndex][i];
+				}
+			}
+			if (withValue)
+			{
+				// Go through all dimensions of the position vector
+				for (int i = 0; i < clusterValueMedian[clusterIndex].size(); i++)
+				{
+					// Divide the sum of all points from this cluster by the point count, so now we have the median of the cluster
+					clusterValueMedian[clusterIndex][i] /= (*cluster).points.size();	
+					if (clusterValueMedian[clusterIndex][i] != (*cluster).position.value[i])
+					{
+						somethingHasChanged = true;
+						(*cluster).position.value[i] = clusterValueMedian[clusterIndex][i];
+					}
+				}
+			}
+		}
+	}	
+
+	return somethingHasChanged;
 }

@@ -23,6 +23,8 @@ protected:
 	float getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2);
 	// Calculate the width of all given clusters based on their points
 	void calculateAllClusterWidths(std::list<Cluster> &clusters);
+	
+	bool calculateClusterCentersFromMedians(std::list<Cluster> &clusters, bool withValue);
 public:
 	virtual ~AbstractClustering() {}
 

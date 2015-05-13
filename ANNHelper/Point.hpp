@@ -24,6 +24,12 @@ struct Point
 		value = value_;
 		cluster = NULL;
 	}
+	Point()
+	{
+		position = std::vector<float>();
+		value = std::vector<float>();
+		cluster = NULL;
+	}
 };
 
 #endif

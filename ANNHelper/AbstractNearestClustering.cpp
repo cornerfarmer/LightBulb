@@ -21,7 +21,7 @@ std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(std:
 			// Create a new Cluster for this point
 			Cluster newCluster;
 			// Set the position size to the given dimension
-			newCluster.position.resize(dimensionCount);
+			newCluster.position.position.resize(dimensionCount);
 			// Add the new cluster to the cluster list
 			clusters->push_back(newCluster);
 
@@ -36,25 +36,7 @@ std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(std:
 		}		
 	}
 		
-	// Go through every point
-	for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
-	{				
-		// Add the position of the point to the median of the choosen cluster
-		for (int i = 0; i < dimensionCount; i++)
-			(*point)->cluster->position[i] += (*point)->position[i];
-	}	
-
-	// Calculate new cluster positions from their medians
-	// Go through all clusters
-	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++)
-	{
-		// Go through all dimensions of the position vector
-		for (int i = 0; i < dimensionCount; i++)
-		{
-			// Divide the sum of all points from this cluster by the point count, so now we have the median of the cluster
-			(*cluster).position[i] /= (*cluster).points.size();	
-		}
-	}	
+	calculateClusterCentersFromMedians(*clusters, false);
 
 	// Calculate the widths of all calculated clusters
 	calculateAllClusterWidths(*clusters.get());
