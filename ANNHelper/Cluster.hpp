@@ -8,13 +8,16 @@
 #include <list>
 
 // Includes
-#include "Point.hpp"
+#include "ValuePosition.hpp"
+
+// Forward declaration
+struct Point;
 
 // This class contains all stuff needed to describe a Cluster 
 struct Cluster
 {
 	// The position of the cluster
-	Point position;
+	ValuePosition center;
 	// All points contained by the cluster
 	std::list<Point*> points;
 	// The radius of the cluster
@@ -23,9 +26,9 @@ struct Cluster
 	{
 		radius = 0;
 	}
-	Cluster(Point &position_, float radius_)
+	Cluster(ValuePosition &center_, float radius_)
 	{
-		position = position_;
+		center = center_;
 		radius = radius_;
 	}
 };

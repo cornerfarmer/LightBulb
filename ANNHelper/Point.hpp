@@ -6,6 +6,9 @@
 // Library includes
 #include <vector>
 
+// Includes
+#include "ValuePosition.hpp"
+
 // Forward declarations
 struct Cluster;
 
@@ -13,21 +16,16 @@ struct Cluster;
 struct Point
 {
 	// Position of the point
-	std::vector<float> position;
-	// Value of the point
-	std::vector<float> value;
+	ValuePosition valPos;
 	// Cluster which contains this point
 	Cluster* cluster;
 	Point(std::vector<float> &position_, std::vector<float> &value_)
+		: valPos(position_, value_)
 	{
-		position = position_;
-		value = value_;
 		cluster = NULL;
 	}
 	Point()
 	{
-		position = std::vector<float>();
-		value = std::vector<float>();
 		cluster = NULL;
 	}
 };

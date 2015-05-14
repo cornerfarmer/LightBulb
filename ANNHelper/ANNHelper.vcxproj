@@ -188,6 +188,7 @@
     <ClInclude Include="TeachingLessonLinearInput.hpp" />
     <ClInclude Include="AbstractThreshold.hpp" />
     <ClInclude Include="TopologicalOrder.hpp" />
+    <ClInclude Include="ValuePosition.hpp" />
     <ClInclude Include="WeightedSumFunction.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -21,7 +21,7 @@ std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(std:
 			// Create a new Cluster for this point
 			Cluster newCluster;
 			// Set the position size to the given dimension
-			newCluster.position.position.resize(dimensionCount);
+			newCluster.center.position.resize(dimensionCount);
 			// Add the new cluster to the cluster list
 			clusters->push_back(newCluster);
 

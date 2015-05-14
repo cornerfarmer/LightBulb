@@ -13,8 +13,8 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 		std::list<Point*>::iterator point = points.begin();
 		std::advance(point, (float)(rand() % RAND_MAX) / RAND_MAX * points.size());
 		// Set the position to one random point, so every cluster does now contain at least one point
-		(*cluster).position.position = (*point)->position;
-		(*cluster).position.value = (*point)->value;
+		(*cluster).center.position = (*point)->valPos.position;
+		(*cluster).center.value = (*point)->valPos.value;
 	}
 
 	// Create a boolean value that should indicate whether the process can be stopped
@@ -42,7 +42,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 			for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 			{
 				// Calculate the distance between the point and the current cluster
-				float currentDistance = getDistanceBetweenPoints(**point, (*cluster).position);
+				float currentDistance = getDistanceBetweenValuePositions((*point)->valPos, (*cluster).center);
 				// If the currentDistance is less than the nearestClusterDistance or if this is the first cluster
 				if (currentDistance < nearestClusterDistance || (*point)->cluster == NULL)
 				{

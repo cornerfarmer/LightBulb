@@ -16,7 +16,7 @@ std::unique_ptr<std::list<Point*>> AbstractRBFNeuronPlacer::getPointsFromTeachin
 		// Create a new point in the right dimension and with the same value as the current teachingInput
 		Point* newPoint = new Point(std::vector<float>(inputDimension), *(*teachingLesson)->getTeachingInput(NULL));
 		// Go through all coordinates of the point
-		std::vector<float>::iterator pointCoordinate = newPoint->position.begin();
+		std::vector<float>::iterator pointCoordinate = newPoint->valPos.position.begin();
 		for (std::vector<float>::const_iterator teachingPattern = (*teachingLesson)->getTeachingPattern()->begin(); teachingPattern != (*teachingLesson)->getTeachingPattern()->end(); teachingPattern++, pointCoordinate++)
 		{
 			// Set the the teachingPattern of the current teachingLesson to the pointCoordinate
@@ -36,7 +36,7 @@ void AbstractRBFNeuronPlacer::placeRBFNeuronsFromClusters(std::list<Cluster>* cl
 	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, neuronIndex++)
 	{
 		// The cluster position will be the new center position of the neuron
-		neuralNetwork.setCenterOfRBFNeuron(neuronIndex, (*cluster).position.position);
+		neuralNetwork.setCenterOfRBFNeuron(neuronIndex, (*cluster).center.position);
 		// The cluster radius will be the width of the neuron
 		neuralNetwork.setWidthOfRBFNeuron(neuronIndex, (*cluster).radius);
 	}

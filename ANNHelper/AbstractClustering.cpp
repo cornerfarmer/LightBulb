@@ -1,15 +1,16 @@
 #include "AbstractClustering.hpp"
-#include "Point.hpp"
+#include "ValuePosition.hpp"
 #include "Cluster.hpp"
+#include "Point.hpp"
 
 // Sets the minimum cluster width
 const float AbstractClustering::minClusterWidth = 0.05f;
 
-float AbstractClustering::getDistanceBetweenPoints(Point &point1, Point &point2)
+float AbstractClustering::getDistanceBetweenValuePositions(ValuePosition &valPos1, ValuePosition &valPos2)
 {
 	// Returns the distance between the positions of the two given points and also consider value differences
 	// TODO: Improve value distance calculation
-	return getDistanceBetweenPositions(point1.position, point2.position) * (1 + getDistanceBetweenPositions(point1.value, point2.value));
+	return getDistanceBetweenPositions(valPos1.position, valPos2.position) * (1 + getDistanceBetweenPositions(valPos1.value, valPos2.value));
 }
 
 float AbstractClustering::getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2)
@@ -31,15 +32,15 @@ void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 		(*cluster).radius = minClusterWidth;
 		// Set the radius to the maximum distance between point and center of the cluster
 		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
-			(*cluster).radius = std::max((*cluster).radius, getDistanceBetweenPositions((*point)->position, (*cluster).position.position));
+			(*cluster).radius = std::max((*cluster).radius, getDistanceBetweenPositions((*point)->valPos.position, (*cluster).center.position));
 	}
 }
 
 bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &clusters, bool withValue)
 {
 	bool somethingHasChanged = false;
-	std::vector<std::vector<float>> clusterPositionMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->position.size()));
-	std::vector<std::vector<float>> clusterValueMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->value.size()));
+	std::vector<std::vector<float>> clusterPositionMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->valPos.position.size()));
+	std::vector<std::vector<float>> clusterValueMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->valPos.value.size()));
 
 	int clusterIndex = 0;
 	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
@@ -48,16 +49,16 @@ bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &
 		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
 		{				
 			// Add the position of the point to the median of the choosen cluster
-			for (int i = 0; i < (*point)->position.size(); i++)
+			for (int i = 0; i < (*point)->valPos.position.size(); i++)
 			{
-				clusterPositionMedian[clusterIndex][i] += (*point)->position[i];				
+				clusterPositionMedian[clusterIndex][i] += (*point)->valPos.position[i];				
 			}
 			if (withValue)
 			{
 				// Add the position of the point to the median of the choosen cluster
-				for (int i = 0; i < (*point)->value.size(); i++)
+				for (int i = 0; i < (*point)->valPos.value.size(); i++)
 				{
-					clusterValueMedian[clusterIndex][i] += (*point)->value[i];	
+					clusterValueMedian[clusterIndex][i] += (*point)->valPos.value[i];	
 				}
 			}
 		}	
@@ -75,10 +76,10 @@ bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &
 			{
 				// Divide the sum of all points from this cluster by the point count, so now we have the median of the cluster
 				clusterPositionMedian[clusterIndex][i] /= (*cluster).points.size();	
-				if (clusterPositionMedian[clusterIndex][i] != (*cluster).position.position[i])
+				if (clusterPositionMedian[clusterIndex][i] != (*cluster).center.position[i])
 				{
 					somethingHasChanged = true;
-					(*cluster).position.position[i] = clusterPositionMedian[clusterIndex][i];
+					(*cluster).center.position[i] = clusterPositionMedian[clusterIndex][i];
 				}
 			}
 			if (withValue)
@@ -88,10 +89,10 @@ bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &
 				{
 					// Divide the sum of all points from this cluster by the point count, so now we have the median of the cluster
 					clusterValueMedian[clusterIndex][i] /= (*cluster).points.size();	
-					if (clusterValueMedian[clusterIndex][i] != (*cluster).position.value[i])
+					if (clusterValueMedian[clusterIndex][i] != (*cluster).center.value[i])
 					{
 						somethingHasChanged = true;
-						(*cluster).position.value[i] = clusterValueMedian[clusterIndex][i];
+						(*cluster).center.value[i] = clusterValueMedian[clusterIndex][i];
 					}
 				}
 			}

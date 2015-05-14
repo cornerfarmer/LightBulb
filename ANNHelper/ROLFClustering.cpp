@@ -30,7 +30,7 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 		for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
 		{
 			// Calculate the distance from the current point to the current cluster
-			float currentDistance = getDistanceBetweenPoints(**point, cluster->position);
+			float currentDistance = getDistanceBetweenValuePositions((*point)->valPos, cluster->center);
 			// If the distance is inside of the cluster radius and the distance is smaller than the current nearest cluster
 			if (currentDistance < nearestClusterDistance || (nearestCluster == NULL && currentDistance <= cluster->radius * options.widthMultiplier))			
 			{
@@ -45,8 +45,8 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 		{
 			// Create a new Cluster
 			Cluster newCluster;
-			// Set the position of the cluster to the point position
-			newCluster.position = **point;
+			// Set the center of the cluster to the point position
+			newCluster.center = (*point)->valPos;
 
 			// Set the radius
 			// If its the first small cluster or useConstantRadius has been selected, set the radius to a constant value
@@ -88,13 +88,13 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 			for (int i = 0; i < dimensionCount; i++)
 			{
 				// Adjust the position: position = position + centerLearningRate * (pointPosition - position)
-				nearestCluster->position.position[i] = nearestCluster->position.position[i] + options.centerLearningRate * ((*point)->position[i] - nearestCluster->position.position[i]);
+				nearestCluster->center.position[i] = nearestCluster->center.position[i] + options.centerLearningRate * ((*point)->valPos.position[i] - nearestCluster->center.position[i]);
 			}
 			// Go thourgh all value dimensions
-			for (int i = 0; i < nearestCluster->position.value.size(); i++)
+			for (int i = 0; i < nearestCluster->center.value.size(); i++)
 			{
 				// Adjust the position: value = value + centerLearningRate * (pointValue - value)
-				nearestCluster->position.value[i] = nearestCluster->position.value[i] + options.centerLearningRate * ((*point)->value[i] - nearestCluster->position.value[i]);
+				nearestCluster->center.value[i] = nearestCluster->center.value[i] + options.centerLearningRate * ((*point)->valPos.value[i] - nearestCluster->center.value[i]);
 			}
 
 			// Adjust the radius: radius = radius + widthLearningRate * (distanceClusterPoint - radius)
@@ -118,14 +118,14 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 		// Create a new big cluster which will contain the current small cluster and all its neighbour clusters
 		Cluster newBigCluster;
 		// Copy the small cluster position to the new big cluster
-		newBigCluster.position = currentCluster.position;
+		newBigCluster.center = currentCluster.center;
 		// Insert all points from the small cluster into the new big cluster point list
 		newBigCluster.points.insert(newBigCluster.points.end(), currentCluster.points.begin(), currentCluster.points.end());
 
 		// A list which holds all clusters which the new big cluster contains
 		std::list<Cluster> clustersFromBigCluster;
 		// Add the current small cluster to this list (only position and radius, we will not need the point list any more)
-		clustersFromBigCluster.push_back(Cluster(currentCluster.position, currentCluster.radius));
+		clustersFromBigCluster.push_back(Cluster(currentCluster.center, currentCluster.radius));
 
 		// Go through all small clusters which are part of the new big cluster
 		for (std::list<Cluster>::iterator clusterFromBigCluster = clustersFromBigCluster.begin(); clusterFromBigCluster != clustersFromBigCluster.end(); clusterFromBigCluster++)
@@ -134,12 +134,12 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 			for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end();)
 			{
 				// If the current small cluster has at least one point and it intersects with the current clusterFromBigCluster (dist(cluster1, cluster2) < cluster1Radius + cluster2Radius)
-				if (!cluster->points.empty() && getDistanceBetweenPoints((*clusterFromBigCluster).position, cluster->position) < ((*clusterFromBigCluster).radius + cluster->radius) * options.widthMultiplier)
+				if (!cluster->points.empty() && getDistanceBetweenValuePositions((*clusterFromBigCluster).center, cluster->center) < ((*clusterFromBigCluster).radius + cluster->radius) * options.widthMultiplier)
 				{
 					// Extract all points from the current small cluster and put them into the point list of the new big cluster
 					newBigCluster.points.insert(newBigCluster.points.end(), (*cluster).points.begin(), (*cluster).points.end());
 					// Insert the current small cluster in the list of the current big cluster
-					clustersFromBigCluster.push_back(Cluster((*cluster).position, (*cluster).radius));
+					clustersFromBigCluster.push_back(Cluster((*cluster).center, (*cluster).radius));
 
 					// Remove the current small cluster from the smallClusters list
 					std::list<Cluster>::iterator clusterToRemove = cluster;

@@ -215,6 +215,9 @@
     <ClInclude Include="ROLFNeuronPlacer.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="ValuePosition.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
