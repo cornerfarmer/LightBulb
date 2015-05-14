@@ -30,7 +30,7 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 		for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
 		{
 			// Calculate the distance from the current point to the current cluster
-			float currentDistance = getDistanceBetweenValuePositions((*point)->valPos, cluster->center);
+			float currentDistance = (*point)->valPos.getDistanceBetweenValuePositions(cluster->center);
 			// If the distance is inside of the cluster radius and the distance is smaller than the current nearest cluster
 			if (currentDistance < nearestClusterDistance || (nearestCluster == NULL && currentDistance <= cluster->radius * options.widthMultiplier))			
 			{
@@ -134,7 +134,7 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 			for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end();)
 			{
 				// If the current small cluster has at least one point and it intersects with the current clusterFromBigCluster (dist(cluster1, cluster2) < cluster1Radius + cluster2Radius)
-				if (!cluster->points.empty() && getDistanceBetweenValuePositions((*clusterFromBigCluster).center, cluster->center) < ((*clusterFromBigCluster).radius + cluster->radius) * options.widthMultiplier)
+				if (!cluster->points.empty() && (*clusterFromBigCluster).center.getDistanceBetweenValuePositions(cluster->center) < ((*clusterFromBigCluster).radius + cluster->radius) * options.widthMultiplier)
 				{
 					// Extract all points from the current small cluster and put them into the point list of the new big cluster
 					newBigCluster.points.insert(newBigCluster.points.end(), (*cluster).points.begin(), (*cluster).points.end());
@@ -157,6 +157,8 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 	
 	// Recalculate all centers of the bigClusters
 	calculateClusterCentersFromMedians(*bigClusters.get(), false);
+
+	calculateAllClusterWidths(*bigClusters);
 
 	return bigClusters;
 }

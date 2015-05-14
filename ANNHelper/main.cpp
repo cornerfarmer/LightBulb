@@ -116,7 +116,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 50, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 40, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
@@ -130,7 +130,7 @@ void doRBFTest()
 
 			(*teachingPattern)[0] = i;
 			(*teachingPattern)[1] = l;
-			(*teachingInput)[0] = (abs(i - 10) <= 5.5f &&  abs(l - 10) <= 5.5f);	
+			(*teachingInput)[0] = (abs(i - 0) <= 5.5f &&  abs(l - 0) <= 5.5f) || (abs(i - 20) <= 5.5f &&  abs(l - 20) <= 5.5f);	
 			//(*teachingInput)[0] = (i > l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 

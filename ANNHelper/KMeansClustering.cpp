@@ -42,7 +42,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 			for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 			{
 				// Calculate the distance between the point and the current cluster
-				float currentDistance = getDistanceBetweenValuePositions((*point)->valPos, (*cluster).center);
+				float currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center);
 				// If the currentDistance is less than the nearestClusterDistance or if this is the first cluster
 				if (currentDistance < nearestClusterDistance || (*point)->cluster == NULL)
 				{

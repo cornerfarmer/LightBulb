@@ -17,10 +17,7 @@ class AbstractClustering
 protected:
 	// Sets the minimum cluster width
 	static const float minClusterWidth;
-	// Calculates the (value and position) distance between two points
-	float getDistanceBetweenValuePositions(ValuePosition &point1, ValuePosition &point2);
-	// Calculates the distance between two positions
-	float getDistanceBetweenPositions(std::vector<float> &pos1, std::vector<float> &pos2);
+
 	// Calculate the width of all given clusters based on their points
 	void calculateAllClusterWidths(std::list<Cluster> &clusters);
 	

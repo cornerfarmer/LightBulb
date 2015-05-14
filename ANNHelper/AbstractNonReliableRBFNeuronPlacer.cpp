@@ -34,4 +34,43 @@ void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(std::list<Point*>& point
 			clusters.insert(clusters.end(), newSubClusters->begin(), newSubClusters->end());
 		}
 	}
+	else if (neededClustersLeft < 0)
+	{
+		// Create new kMeansclustering object, we will use this algorithm to merge two clusters to one
+		KMeansClustering kMeansclustering;	
+
+		for (int i = 0; i < abs(neededClustersLeft); i++)
+		{
+			float smallestMergedClusterRadius = -1;
+			std::list<Cluster>::iterator firstClusterForMerging;
+			std::list<Cluster>::iterator secondClusterForMerging;
+			for (std::list<Cluster>::iterator firstCluster = clusters.begin(); firstCluster != clusters.end(); firstCluster++)
+			{
+				for (std::list<Cluster>::iterator secondCluster = firstCluster; secondCluster != clusters.end(); secondCluster++)
+				{
+					if (secondCluster != firstCluster)
+					{
+						float mergedClusterRadius = (*firstCluster).center.getDistanceBetweenValuePositions((*secondCluster).center) + (*firstCluster).radius +(*secondCluster).radius;
+						if (smallestMergedClusterRadius == -1 || mergedClusterRadius < smallestMergedClusterRadius)
+						{
+							firstClusterForMerging = firstCluster;
+							secondClusterForMerging = secondCluster;
+							smallestMergedClusterRadius = mergedClusterRadius;
+						}
+					}
+				}
+			}
+
+			firstClusterForMerging->points.insert(firstClusterForMerging->points.end(), secondClusterForMerging->points.begin(), secondClusterForMerging->points.end());
+		
+			std::unique_ptr<std::list<Cluster>> mergedCluster = kMeansclustering.doClustering(firstClusterForMerging->points, 1, dimensionCount);
+
+			// Remove the original cluster
+			clusters.erase(firstClusterForMerging);
+			clusters.erase(secondClusterForMerging);
+
+			// Add all new subclusters to the cluster list
+			clusters.push_back(mergedCluster->front());
+		}
+	}
 }

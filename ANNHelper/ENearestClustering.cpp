@@ -16,7 +16,7 @@ void ENearestClustering::calculateCache(std::list<Point*>& points)
 		for (std::list<Point*>::iterator toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
 		{	
 			// Add a new entry in the distanceToPoint vector with the point and the distance
-			distanceToPoint[*fromPoint][pointIndex] = std::make_pair((*toPoint), getDistanceBetweenValuePositions((*fromPoint)->valPos, (*toPoint)->valPos));
+			distanceToPoint[*fromPoint][pointIndex] = std::make_pair((*toPoint), (*fromPoint)->valPos.getDistanceBetweenValuePositions((*toPoint)->valPos));
 		}
 		// Sort the distanceToPoint vector depending on the distance value
 		std::sort(distanceToPoint[*fromPoint].begin(), distanceToPoint[*fromPoint].end(), pairCompare);
