@@ -47,8 +47,35 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(std::list<Point
 			Cluster newCluster;
 			// Set the position of the cluster to the point position
 			newCluster.position = **point;
+
 			// Set the radius
-			newCluster.radius = 0.5f;
+			// If its the first small cluster or useConstantRadius has been selected, set the radius to a constant value
+			if (smallClusters->empty() || options.radiusInitMethod == useConstantRadius)
+				newCluster.radius = options.contantInitRadius;
+			else
+			{
+				// If the min or max method has been choosen, first set the radius to the radius if the first small cluster (so the radius will be comparable)
+				if (options.radiusInitMethod == useMaxRadius || options.radiusInitMethod == useMinRadius)
+					newCluster.radius = smallClusters->front().radius;
+				else if (options.radiusInitMethod == useMeanRadius) // If we should calculate the mean radius, set the radius to 0
+					newCluster.radius = 0;
+
+				for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
+				{
+					// If the max or min method is used, choose the max or min of the current new radius and the radius of the current cluster
+					if (options.radiusInitMethod == useMaxRadius)
+						newCluster.radius = std::max(newCluster.radius, (*cluster).radius);
+					else if (options.radiusInitMethod == useMinRadius)
+						newCluster.radius = std::min(newCluster.radius, (*cluster).radius);
+					else if (options.radiusInitMethod == useMeanRadius) // If we should calculate the mean radius, add every radius to our new radius
+						newCluster.radius += (*cluster).radius;
+				}
+
+				// If we should calculate the mean radius, we now only have to divide by the smallClusterCount 
+				if (options.radiusInitMethod == useMeanRadius)
+					newCluster.radius /= smallClusters->size();
+			}
+
 			// Add the current point to the cluster
 			newCluster.points.push_back(*point);
 			// Add the new cluster to the cluster list
