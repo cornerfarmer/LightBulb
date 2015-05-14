@@ -14,13 +14,15 @@ void ROLFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 	// Calculate all points from the teaching lessons
 	std::unique_ptr<std::list<Point*>> points = getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size());
 
+	// Create a ROLFClusteringOptions object which contains all standard options used by the clustering algorithm
 	ROLFClusteringOptions options;
-	// Create a new KMeansClustering object which will do all hard work :)
+	// Create a new ROLFClustering object which will do all hard work :)
 	ROLFClustering clustering(options);
 
 	// Let the clustering algorithm calculate clusters from our teachingLessons
-	std::unique_ptr<std::list<Cluster>> clusters = clustering.doClustering(*points.get(), clusterCount, dimensionCount);
+	std::unique_ptr<std::list<Cluster>> clusters = clustering.doClustering(*points.get(), dimensionCount);
 
+	// Fill up the calculated clusters to reach the right clusterCount
 	fillUpClusters(*points.get(), *clusters.get(), clusterCount, dimensionCount);
 
 	// Replace the RBFNeurons from given network with the help of the calculated clusters

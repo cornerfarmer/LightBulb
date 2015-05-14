@@ -13,11 +13,12 @@
 class RBFNetwork;
 class Teacher;
 
-// This class contains all stuff needed to describe a RBFNeuronPlacer 
+// This class contains all stuff needed to describe a ROLFNeuronPlacer 
 class ROLFNeuronPlacer : public AbstractNonReliableRBFNeuronPlacer
 {
 protected:
 public:
+	// Inherited:
 	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher);
 	AbstractRBFNeuronPlacer* getCopy();
 };
