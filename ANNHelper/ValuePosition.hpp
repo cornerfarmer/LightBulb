@@ -13,18 +13,21 @@ struct ValuePosition
 	std::vector<float> position;
 	// Value of the point
 	std::vector<float> value;	
+
 	ValuePosition(std::vector<float> &position_, std::vector<float> &value_)
 	{
 		position = position_;
 		value = value_;
 	}
+
 	ValuePosition()
 	{
 	}
+
 	// Calculates the (value and position) distance between two valuePositions
 	float getDistanceBetweenValuePositions(ValuePosition &otherValuePosition)
 	{
-		// Returns the distance between the positions of the two given points and also consider value differences
+		// Returns the distance between the positions of the own valuePosition and the given one and also consider value differences
 		// TODO: Improve value distance calculation
 		return getPositionDistance(otherValuePosition) * (1 + getValueDistance(otherValuePosition));
 	}
@@ -39,6 +42,8 @@ struct ValuePosition
 		distance = sqrt(distance);
 		return distance;
 	}
+
+	// Calculates the distance between two values
 	float getValueDistance(ValuePosition &otherValuePosition)
 	{
 		// Calculate the euclidean distance 

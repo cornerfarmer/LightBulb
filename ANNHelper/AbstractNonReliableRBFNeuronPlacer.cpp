@@ -39,20 +39,29 @@ void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(std::list<Point*>& point
 		// Create new kMeansclustering object, we will use this algorithm to merge two clusters to one
 		KMeansClustering kMeansclustering;	
 
+		// Do n-th times (n = neededClustersLeft)
 		for (int i = 0; i < abs(neededClustersLeft); i++)
 		{
+			// Create a variable which should hold the radius of current smallest merged cluster
 			float smallestMergedClusterRadius = -1;
+			// The first cluster for merging
 			std::list<Cluster>::iterator firstClusterForMerging;
+			// The second cluster for merging
 			std::list<Cluster>::iterator secondClusterForMerging;
+			// Go through all clusters
 			for (std::list<Cluster>::iterator firstCluster = clusters.begin(); firstCluster != clusters.end(); firstCluster++)
 			{
+				// Go through all other clusters
 				for (std::list<Cluster>::iterator secondCluster = firstCluster; secondCluster != clusters.end(); secondCluster++)
 				{
 					if (secondCluster != firstCluster)
 					{
-						float mergedClusterRadius = (*firstCluster).center.getDistanceBetweenValuePositions((*secondCluster).center) + (*firstCluster).radius +(*secondCluster).radius;
-						if (smallestMergedClusterRadius == -1 || mergedClusterRadius < smallestMergedClusterRadius)
+						// Compute the distance between the two centers and treat it like the mergedClusterRadius (sure its just a approximation ;) )
+						float mergedClusterRadius  = (*firstCluster).center.getDistanceBetweenValuePositions((*secondCluster).center);
+						// If there is no current smallestMergedClusterRadius or the clusterCentersDistance is smaller
+						if (smallestMergedClusterRadius == -1 || mergedClusterRadius  < smallestMergedClusterRadius)
 						{
+							// Set the current merging situation as the current best one
 							firstClusterForMerging = firstCluster;
 							secondClusterForMerging = secondCluster;
 							smallestMergedClusterRadius = mergedClusterRadius;
@@ -61,15 +70,17 @@ void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(std::list<Point*>& point
 				}
 			}
 
+			// Insert all points from the second cluster for merging into the first one
 			firstClusterForMerging->points.insert(firstClusterForMerging->points.end(), secondClusterForMerging->points.begin(), secondClusterForMerging->points.end());
 		
+			// Let the k-means clustering algorithm calculate a new cluster based on the points from the two choosen clusters for merging
 			std::unique_ptr<std::list<Cluster>> mergedCluster = kMeansclustering.doClustering(firstClusterForMerging->points, 1, dimensionCount);
 
-			// Remove the original cluster
+			// Remove the original clusters
 			clusters.erase(firstClusterForMerging);
 			clusters.erase(secondClusterForMerging);
 
-			// Add all new subclusters to the cluster list
+			// Add all the merged cluster to the cluster list
 			clusters.push_back(mergedCluster->front());
 		}
 	}

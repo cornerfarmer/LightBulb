@@ -116,7 +116,7 @@ void doPerceptronTest()
 
 void doRBFTest()
 {
-	RBFNetwork* rbfNetwork = new RBFNetwork(2, 40, 1);
+	RBFNetwork* rbfNetwork = new RBFNetwork(2, 2, 1);
 
 	NeuralNetwork neuralNetwork(rbfNetwork);
 
