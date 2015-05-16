@@ -38,9 +38,9 @@ void doPerceptronTest()
 	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
 																				new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
 	layeredNetworkOptions.useBiasNeurons = true;
 
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
@@ -50,10 +50,10 @@ void doPerceptronTest()
 	ResilientBackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 100;
-	options.maxTotalErrorValue = 50;
+	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 1000000;
-	options.totalErrorGoal = 0.01f;
+	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
@@ -63,17 +63,42 @@ void doPerceptronTest()
 	Teacher teacher;
 	for (int i=0;i<8;i+=1)
 	{
-		std::vector<float>* teachingPattern = new std::vector<float>(8);
-		std::vector<bool>* teachingInput= new std::vector<bool>(8);
+	
 		for (int l=0;l<8;l+=1)
 		{			
-			(*teachingPattern)[l] = (i == l ? 1.0f : 0.0f);
-			(*teachingInput)[l] = (i == l);	
-			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+			std::vector<float>* teachingPattern = new std::vector<float>(2);
+			std::vector<bool>* teachingInput= new std::vector<bool>(1);
+			(*teachingPattern)[0] = i;
+			(*teachingPattern)[1] = l;
+			(*teachingInput)[0] = (i == l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
-		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		
 	}
 
+	for (float i=0;i<1;i+=0.2)
+	{		
+		for (float l=0;l<1;l+=0.2)
+		{			
+			std::vector<float>* teachingPattern = new std::vector<float>(2);
+			std::vector<bool>* teachingInput= new std::vector<bool>(1);
+			(*teachingPattern)[0] = i;
+			(*teachingPattern)[1] = l;
+			(*teachingInput)[0] = (i == l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+			teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		}		
+	}
+	{
+	std::vector<float>* teachingPattern = new std::vector<float>(2);
+	std::vector<bool>* teachingInput= new std::vector<bool>(1);
+	(*teachingPattern)[0] = 100;
+	(*teachingPattern)[1] = 100;
+	(*teachingInput)[0] = true;	
+	//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+	teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+	}
 
 	bool success = learningRule.doLearning(neuralNetwork, teacher);
 	////neuralNetwork.getNetworkTopology()->randomizeWeights(0,1);
@@ -82,16 +107,18 @@ void doPerceptronTest()
 	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
 
 	std::vector<float> teachingPattern(2);
-	teachingPattern[0] = 100;
-	teachingPattern[1] = 100;
+	teachingPattern[0] = 8;
+	teachingPattern[1] = 8;
 	neuralNetwork.setInput(teachingPattern);
 	neuralNetwork.refreshAllNeurons(TopologicalOrder());
 	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
-
+	
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
-	neuralNetworkResultChartOptions.binaryInterpretation = false;
+	neuralNetworkResultChartOptions.binaryInterpretation = true;
+	neuralNetworkResultChartOptions.xRangeEnd = 100;
+	neuralNetworkResultChartOptions.yRangeEnd = 100;
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(0, 0, neuralNetworkResultChartOptions);
@@ -196,6 +223,6 @@ void doRBFTest()
 
 int main()
 {
-	doRBFTest();
+	doPerceptronTest();
     return 0;
 }
