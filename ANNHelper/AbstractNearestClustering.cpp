@@ -1,19 +1,20 @@
 #include "AbstractNearestClustering.hpp"
 #include "Cluster.hpp"
 #include "Point.hpp"
+#include "PointSet.hpp"
 
-std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(std::list<Point*> &points, float nearestPointsCount, int dimensionCount) 
+std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(PointSet &points, float nearestPointsCount, int dimensionCount) 
 {	
 	// Create a new cluster list
 	std::unique_ptr<std::list<Cluster>> clusters(new std::list<Cluster>());
 
 	// Go through every point and set the cluster to null
-	for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)		
+	for (PointSet::iterator point = points.begin(); point != points.end(); point++)		
 		(*point)->cluster = NULL;
 
 	// Group every point with its k nearest points
 	// Go through every point
-	for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
+	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
 	{		
 		// If the point does not have already a cluster
 		if ((*point)->cluster == NULL)
@@ -31,7 +32,7 @@ std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(std:
 			(*point)->cluster->points.push_back(*point);
 			
 			// Go through all points in this cluster and add all points, which have the pointInCluster in their k-nearest points list
-			for (std::list<Point*>::iterator pointInCluster = (*point)->cluster->points.begin(); pointInCluster != (*point)->cluster->points.end(); pointInCluster++)
+			for (PointSet::iterator pointInCluster = (*point)->cluster->points.begin(); pointInCluster != (*point)->cluster->points.end(); pointInCluster++)
 				addKNearestPointsToCluster(points, clusters->back(), *(*pointInCluster), nearestPointsCount);
 		}		
 	}

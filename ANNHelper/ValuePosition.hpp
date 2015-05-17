@@ -6,53 +6,25 @@
 // Library includes
 #include <vector>
 
-// This class contains all stuff needed to describe a Point 
+// This struct contains all stuff needed to describe a ValuePosition 
 struct ValuePosition
 {
 	// Position of the point
 	std::vector<float> position;
 	// Value of the point
 	std::vector<float> value;	
+	// Sets the relation between the position and the value distance 
+	static const float valuePositionRelation;
 
-	ValuePosition(std::vector<float> &position_, std::vector<float> &value_)
-	{
-		position = position_;
-		value = value_;
-	}
-
-	ValuePosition()
-	{
-	}
-
+	ValuePosition(std::vector<float> &position_, std::vector<float> &value_);
+	ValuePosition();
 	// Calculates the (value and position) distance between two valuePositions
-	float getDistanceBetweenValuePositions(ValuePosition &otherValuePosition)
-	{
-		// Returns the distance between the positions of the own valuePosition and the given one and also consider value differences
-		// TODO: Improve value distance calculation
-		return getPositionDistance(otherValuePosition) * (1 + getValueDistance(otherValuePosition));
-	}
-	
+	float getDistanceBetweenValuePositions(ValuePosition &otherValuePosition, float maxPositionDistance, float maxValueDistance);
 	// Calculates the distance between two positions
-	float getPositionDistance(ValuePosition &otherValuePosition)
-	{
-		// Calculate the euclidean distance 
-		float distance = 0;
-		for (int p = 0; p < position.size(); p++)
-			distance += pow(position[p] - otherValuePosition.position[p], 2);
-		distance = sqrt(distance);
-		return distance;
-	}
-
+	float getPositionDistance(ValuePosition &otherValuePosition);
 	// Calculates the distance between two values
-	float getValueDistance(ValuePosition &otherValuePosition)
-	{
-		// Calculate the euclidean distance 
-		float distance = 0;
-		for (int p = 0; p < value.size(); p++)
-			distance += pow(value[p] - otherValuePosition.value[p], 2);
-		distance = sqrt(distance);
-		return distance;
-	}
+	float getValueDistance(ValuePosition &otherValuePosition);
+
 };
 
 #endif

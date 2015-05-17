@@ -4,6 +4,7 @@
 #include "ROLFClustering.hpp"
 #include "Teacher.hpp"
 #include "Point.hpp"
+#include "PointSet.hpp"
 
 void ROLFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
@@ -12,7 +13,7 @@ void ROLFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 	// Set the dimensionCount to the neuron count in the first layer
 	int dimensionCount = neuralNetwork.getNeuronsInLayer(0)->size();
 	// Calculate all points from the teaching lessons
-	std::unique_ptr<std::list<Point*>> points = getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size());
+	std::unique_ptr<PointSet> points = getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size());
 
 	// Create a ROLFClusteringOptions object which contains all standard options used by the clustering algorithm
 	ROLFClusteringOptions options;

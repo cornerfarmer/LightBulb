@@ -14,6 +14,7 @@
 // Forward declarations
 struct Cluster;
 class Teacher;
+class PointSet;
 
 enum ROLFClusteringRadiusInitMethod
 {
@@ -45,7 +46,7 @@ struct ROLFClusteringOptions
 		centerLearningRate = 0.05;
 		widthLearningRate = 0.05;
 		radiusInitMethod = useMeanRadius;
-		contantInitRadius = 0.5f;
+		contantInitRadius = 0.01f;
 	}
 };
 
@@ -56,7 +57,7 @@ private:
 	ROLFClusteringOptions options;
 public:
 	// Execute the clustering algorithm and calculate a specified count clusters which depends on the given points
-	std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int dimensionCount);
+	std::unique_ptr<std::list<Cluster>> doClustering(PointSet &points, int dimensionCount);
 	ROLFClustering(ROLFClusteringOptions &options_);
 };
 

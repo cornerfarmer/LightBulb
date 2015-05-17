@@ -4,11 +4,12 @@
 #include "RBFNetwork.hpp"
 #include "Cluster.hpp"
 #include "Point.hpp"
+#include "PointSet.hpp"
 
-std::unique_ptr<std::list<Point*>> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(Teacher &teacher, int inputDimension)
+std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(Teacher &teacher, int inputDimension)
 {
 	// Create a new points list
-	std::unique_ptr<std::list<Point*>> points(new std::list<Point*>());
+	std::unique_ptr<PointSet> points(new PointSet());
 		
 	// Go through all teachingLessons and the corresponding points
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::const_iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
@@ -25,6 +26,9 @@ std::unique_ptr<std::list<Point*>> AbstractRBFNeuronPlacer::getPointsFromTeachin
 		// Add the point to the list
 		points->push_back(newPoint);
 	}
+
+	// Make sure the max distances are calculated
+	points->refreshMaxDistances();
 
 	return points;
 }

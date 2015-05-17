@@ -2,25 +2,26 @@
 #include "Cluster.hpp"
 #include <algorithm>
 #include "Point.hpp"
+#include "PointSet.hpp"
 
-void KNearestClustering::calculateCache(std::list<Point*>& points)
+void KNearestClustering::calculateCache(PointSet& points)
 {
 	// Create a map entry for every point in points
-	for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
+	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
 		nthNearestPointToPoint[*point] = std::vector<std::pair<Point*, int>>();
 
 	// Go through a ll points
-	for (std::list<Point*>::iterator fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
+	for (PointSet::iterator fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
 	{
 		// Create a vector which will contain all distances from the current point to all other points
 		std::vector<std::pair<Point*, float>> distanceToPoint(points.size());
 
 		int pointIndex = 0;
 		// Go through all points
-		for (std::list<Point*>::iterator toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
+		for (PointSet::iterator toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
 		{	
 			// Add a new entry in the distanceToPoint vector with the point and the distance
-			distanceToPoint[pointIndex] = std::make_pair((*toPoint), (*fromPoint)->valPos.getDistanceBetweenValuePositions((*toPoint)->valPos));
+			distanceToPoint[pointIndex] = std::make_pair((*toPoint), (*fromPoint)->valPos.getDistanceBetweenValuePositions((*toPoint)->valPos, points.getMaxPositionDistance(), points.getMaxValueDistance()));
 		}
 		// Sort the distanceToPoint vector depending on the distance value
 		std::sort(distanceToPoint.begin(), distanceToPoint.end(), pairCompare);
@@ -37,7 +38,7 @@ void KNearestClustering::calculateCache(std::list<Point*>& points)
 	}
 }
 
-void KNearestClustering::addKNearestPointsToCluster(std::list<Point*>& points, Cluster& cluster, Point &pointToAdd, float nearestPointsCount)
+void KNearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, float nearestPointsCount)
 {	
 	// Go through all nthNearestPointToPoint entries
 	for (int i = 0; i < nthNearestPointToPoint[&pointToAdd].size(); i++)

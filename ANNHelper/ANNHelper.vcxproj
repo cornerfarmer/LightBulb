@@ -85,6 +85,7 @@
     <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="KNearestClustering.cpp" />
     <ClCompile Include="KNearestRBFNeuronPlacer.cpp" />
+    <ClCompile Include="PointSet.cpp" />
     <ClCompile Include="RBFNetworkStructureChart.cpp" />
     <ClCompile Include="ResilientDeltaLearningRule.cpp" />
     <ClCompile Include="ResilientLearningRateHelper.cpp" />
@@ -128,6 +129,7 @@
     <ClCompile Include="TeachingLessonLinearInput.cpp" />
     <ClCompile Include="AbstractThreshold.cpp" />
     <ClCompile Include="TopologicalOrder.cpp" />
+    <ClCompile Include="ValuePosition.cpp" />
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +150,7 @@
     <ClInclude Include="KNearestClustering.hpp" />
     <ClInclude Include="KNearestRBFNeuronPlacer.hpp" />
     <ClInclude Include="Point.hpp" />
+    <ClInclude Include="PointSet.hpp" />
     <ClInclude Include="RBFNetworkStructureChart.hpp" />
     <ClInclude Include="ResilientDeltaLearningRule.hpp" />
     <ClInclude Include="ResilientLearningRateHelper.hpp" />

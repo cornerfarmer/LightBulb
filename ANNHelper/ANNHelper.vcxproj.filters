@@ -218,6 +218,9 @@
     <ClInclude Include="ValuePosition.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="PointSet.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -395,6 +398,12 @@
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
     <ClCompile Include="ROLFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="PointSet.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ValuePosition.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
   </ItemGroup>

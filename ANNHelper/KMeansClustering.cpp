@@ -1,8 +1,9 @@
 #include "KMeansClustering.hpp"
 #include "Cluster.hpp"
 #include "Point.hpp"
+#include "PointSet.hpp"
 
-std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount)
+std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &points, int clusterCount, int dimensionCount)
 {
 	// Create a new cluster vector
 	std::unique_ptr<std::list<Cluster>> clusters(new std::list<Cluster>(clusterCount));
@@ -10,7 +11,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 
 	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++)
 	{
-		std::list<Point*>::iterator point = points.begin();
+		PointSet::iterator point = points.begin();
 		std::advance(point, (float)(rand() % RAND_MAX) / RAND_MAX * points.size());
 		// Set the position to one random point, so every cluster does now contain at least one point
 		(*cluster).center.position = (*point)->valPos.position;
@@ -32,7 +33,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 
 		// Add every point to its nearest cluster
 		// Go through every point
-		for (std::list<Point*>::iterator point = points.begin(); point != points.end(); point++)
+		for (PointSet::iterator point = points.begin(); point != points.end(); point++)
 		{
 			// Be sure the cluster of the point is null
 			(*point)->cluster = NULL;
@@ -42,7 +43,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(std::list<Poi
 			for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 			{
 				// Calculate the distance between the point and the current cluster
-				float currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center);
+				float currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());
 				// If the currentDistance is less than the nearestClusterDistance or if this is the first cluster
 				if (currentDistance < nearestClusterDistance || (*point)->cluster == NULL)
 				{

@@ -14,6 +14,7 @@
 // Forward declarations
 struct Cluster;
 class Teacher;
+class PointSet;
 
 // This class contains all stuff needed to calculate clusters with the k-means cluster algorithm 
 class KMeansClustering : public AbstractClustering
@@ -21,7 +22,7 @@ class KMeansClustering : public AbstractClustering
 private:
 public:
 	// Execute the clustering algorithm and calculate n-th clusters in the given point set
-	std::unique_ptr<std::list<Cluster>> doClustering(std::list<Point*> &points, int clusterCount, int dimensionCount);
+	std::unique_ptr<std::list<Cluster>> doClustering(PointSet &points, int clusterCount, int dimensionCount);
 };
 
 #endif

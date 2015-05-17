@@ -9,6 +9,7 @@
 
 // Includes
 #include "ValuePosition.hpp"
+#include "PointSet.hpp"
 
 // Forward declaration
 struct Point;
@@ -19,7 +20,7 @@ struct Cluster
 	// The position of the cluster
 	ValuePosition center;
 	// All points contained by the cluster
-	std::list<Point*> points;
+	PointSet points;
 	// The radius of the cluster
 	float radius;
 	Cluster()

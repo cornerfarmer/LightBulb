@@ -223,6 +223,6 @@ void doRBFTest()
 
 int main()
 {
-	doPerceptronTest();
+	doRBFTest();
     return 0;
 }

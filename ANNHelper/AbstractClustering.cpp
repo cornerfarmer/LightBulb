@@ -2,6 +2,7 @@
 #include "ValuePosition.hpp"
 #include "Cluster.hpp"
 #include "Point.hpp"
+#include "PointSet.hpp"
 
 // Sets the minimum cluster width
 const float AbstractClustering::minClusterWidth = 0.05f;
@@ -14,7 +15,7 @@ void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 		// Set the radius to the minClusterWidth, so it will always be greater than 0
 		(*cluster).radius = minClusterWidth;
 		// Set the radius to the maximum distance between point and center of the cluster
-		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
+		for (PointSet::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
 			(*cluster).radius = std::max((*cluster).radius, (*point)->valPos.getPositionDistance((*cluster).center));
 	}
 }
@@ -29,7 +30,7 @@ bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &
 	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
 	{
 		// Go through every point
-		for (std::list<Point*>::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
+		for (PointSet::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
 		{				
 			// Add the position of the point to the median of the choosen cluster
 			for (int i = 0; i < (*point)->valPos.position.size(); i++)
