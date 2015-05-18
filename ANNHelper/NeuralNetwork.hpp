@@ -5,6 +5,7 @@
 
 // Includes
 #include <vector>
+#include "NeuralNetworkIO.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;
@@ -15,14 +16,13 @@ class NeuralNetwork
 {
 private:
 	std::unique_ptr<AbstractNetworkTopology> networkTopology;
-public:
-	NeuralNetwork(AbstractNetworkTopology* networkTopology_);
-	// Recalculates the activation of all neurons is the given ActivationOrder
-	void refreshAllNeurons(AbstractActivationOrder &activationOrder);
 	// Returns all output numbers of the network
 	std::unique_ptr<std::vector<float>> getOutput();
 	// Sets all input neurons to the given numbers
 	void setInput(std::vector<float> &inputVector);
+public:
+	NeuralNetwork(AbstractNetworkTopology* networkTopology_);
+	std::unique_ptr<NeuralNetworkIO> calculate(NeuralNetworkIO& input, AbstractActivationOrder &activationOrder);
 	AbstractNetworkTopology* getNetworkTopology();
 };
 

@@ -85,6 +85,7 @@
     <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="KNearestClustering.cpp" />
     <ClCompile Include="KNearestRBFNeuronPlacer.cpp" />
+    <ClCompile Include="NeuralNetworkIO.cpp" />
     <ClCompile Include="PointSet.cpp" />
     <ClCompile Include="RBFNetworkStructureChart.cpp" />
     <ClCompile Include="ResilientDeltaLearningRule.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="KNearestClustering.hpp" />
     <ClInclude Include="KNearestRBFNeuronPlacer.hpp" />
+    <ClInclude Include="NeuralNetworkIO.hpp" />
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="PointSet.hpp" />
     <ClInclude Include="RBFNetworkStructureChart.hpp" />

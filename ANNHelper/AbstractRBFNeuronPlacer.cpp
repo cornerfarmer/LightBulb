@@ -5,6 +5,7 @@
 #include "Cluster.hpp"
 #include "Point.hpp"
 #include "PointSet.hpp"
+#include "NeuralNetworkIO.hpp"
 
 std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(Teacher &teacher, int inputDimension)
 {
@@ -18,7 +19,7 @@ std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(
 		Point* newPoint = new Point(std::vector<float>(inputDimension), *(*teachingLesson)->getTeachingInput(NULL));
 		// Go through all coordinates of the point
 		std::vector<float>::iterator pointCoordinate = newPoint->valPos.position.begin();
-		for (std::vector<float>::const_iterator teachingPattern = (*teachingLesson)->getTeachingPattern()->begin(); teachingPattern != (*teachingLesson)->getTeachingPattern()->end(); teachingPattern++, pointCoordinate++)
+		for (std::vector<float>::const_iterator teachingPattern = (*teachingLesson)->getTeachingPattern()->front().begin(); teachingPattern != (*teachingLesson)->getTeachingPattern()->front().end(); teachingPattern++, pointCoordinate++)
 		{
 			// Set the the teachingPattern of the current teachingLesson to the pointCoordinate
 			*pointCoordinate = *teachingPattern;

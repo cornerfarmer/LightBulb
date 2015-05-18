@@ -1,12 +1,13 @@
 #include "TeachingLessonBooleanInput.hpp"
 #include "NeuralNetwork.hpp"
 #include "AbstractActivationFunction.hpp"
+#include "NeuralNetworkIO.hpp"
 #include <exception>
 
-TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<float>* teachingPattern_, std::vector<bool>* teachingInput_)
+TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO* teachingPattern_, std::vector<bool>* teachingInput_)
 {
 	teachingInput = std::unique_ptr<std::vector<bool>>(teachingInput_);	
-	teachingPattern = std::unique_ptr<std::vector<float>>(teachingPattern_);
+	teachingPattern = std::unique_ptr<NeuralNetworkIO>(teachingPattern_);
 	teachingInputLinear = std::unique_ptr<std::vector<float>>(new std::vector<float>(teachingInput->size()));
 }
 
@@ -30,7 +31,7 @@ std::vector<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivat
 	return teachingInputLinear.get();
 }
 
-std::vector<float>* TeachingLessonBooleanInput::getTeachingPattern()
+NeuralNetworkIO* TeachingLessonBooleanInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }

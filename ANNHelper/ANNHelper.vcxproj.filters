@@ -221,6 +221,9 @@
     <ClInclude Include="PointSet.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -405,6 +408,9 @@
     </ClCompile>
     <ClCompile Include="ValuePosition.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetworkIO.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

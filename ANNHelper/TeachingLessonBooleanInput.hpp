@@ -9,6 +9,9 @@
 // Includes
 #include "AbstractTeachingLesson.hpp"
 
+// Forward declarations
+class NeuralNetworkIO;
+
 class TeachingLessonBooleanInput : public AbstractTeachingLesson
 {
 private:
@@ -16,13 +19,13 @@ private:
 	std::unique_ptr<std::vector<bool>> teachingInput;
 	std::unique_ptr<std::vector<float>> teachingInputLinear;
 	// The values we will put into the neural network
-	std::unique_ptr<std::vector<float>> teachingPattern;	
+	std::unique_ptr<NeuralNetworkIO> teachingPattern;	
 protected:
 	// Converts our boolean teachingInput vector in a float vector depending on the used activationFunction
 	std::vector<float>* getTeachingInput(AbstractActivationFunction* activationFunction);
-	std::vector<float>* getTeachingPattern();
+	NeuralNetworkIO* getTeachingPattern();
 public:
-	TeachingLessonBooleanInput(std::vector<float>* teachingPattern_, std::vector<bool>* teachingInput_);
+	TeachingLessonBooleanInput(NeuralNetworkIO* teachingPattern_, std::vector<bool>* teachingInput_);
 };
 
 #endif

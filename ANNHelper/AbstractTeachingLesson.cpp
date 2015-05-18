@@ -2,13 +2,12 @@
 #include "NeuralNetwork.hpp"
 #include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
+#include "NeuralNetworkIO.hpp"
 
-void AbstractTeachingLesson::tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+std::unique_ptr<NeuralNetworkIO> AbstractTeachingLesson::tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
-	// Insert the input
-	neuralNetwork.setInput(*getTeachingPattern());
 	// Let the network calculate
-	neuralNetwork.refreshAllNeurons(activationOrder);
+	return neuralNetwork.calculate(*getTeachingPattern(), activationOrder);
 }
 
 std::unique_ptr<std::vector<float>> AbstractTeachingLesson::getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
@@ -19,16 +18,13 @@ std::unique_ptr<std::vector<float>> AbstractTeachingLesson::getErrorvector(Neura
 	// Create the errorVector with the right size
 	std::unique_ptr<std::vector<float>> errorVector(new std::vector<float>(teachingInput->size()));
 
-	// Try the lesson
-	tryLesson(neuralNetwork, activationOrder);
-
-	// Extract the output
-	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
+	// Try the lesson and extract the output
+	std::unique_ptr<NeuralNetworkIO> outputVector = tryLesson(neuralNetwork, activationOrder);
 
 	// Calculate the error values (expected value - real value)
 	for (int i = 0; i < teachingInput->size(); i++)
 	{
-		(*errorVector)[i] = (*teachingInput)[i] - (*outputVector)[i];
+		(*errorVector)[i] = (*teachingInput)[i] - outputVector->front()[i];
 	}
 
 	return errorVector;

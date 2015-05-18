@@ -2,6 +2,7 @@
 #include "NeuralNetwork.hpp"
 #include "AbstractNetworkTopology.hpp"
 #include "TopologicalOrder.hpp"
+#include "NeuralNetworkIO.hpp"
 #include <exception>
 
 NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions()
@@ -54,7 +55,8 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	// Create a new pixel array, which will contain all color informations
 	std::unique_ptr<sf::Uint8[]> pixels(new sf::Uint8[options->width*options->height*4]);
 	// Create a new inputVector with the size of the inputCount
-	std::vector<float> inputVector(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
+	NeuralNetworkIO input;
+	input.push_back(std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0));
 
 	// Go through every pixel
 	for(int x = 0; x < options->width; x++)
@@ -62,14 +64,11 @@ void NeuralNetworkResultChart::recalculateAllValues()
 		for(int y = 0; y < options->height; y++)
 		{	
 			// Compute the input values from the coordinates and the given range
-			inputVector[options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
-			inputVector[options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
-			// Insert the input values
-			options->neuralNetwork->setInput(inputVector);
-			// Let the NN comput
-			options->neuralNetwork->refreshAllNeurons(*options->activationOrder);
+			input.front()[options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
+			input.front()[options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
+
 			// Extract the output
-			float output = (*options->neuralNetwork->getOutput())[options->outputNeuronIndex];
+			float output = (*options->neuralNetwork->calculate(input, *options->activationOrder)).front()[options->outputNeuronIndex];
 
 			// If binaryInterpretation is selected, just use black or white, else interpret the output linear
 			if (options->binaryInterpretation)

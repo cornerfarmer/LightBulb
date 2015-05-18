@@ -1,10 +1,11 @@
 #include "TeachingLessonLinearInput.hpp"
+#include "NeuralNetworkIO.hpp"
 #include "NeuralNetwork.hpp"
 
-TeachingLessonLinearInput::TeachingLessonLinearInput(std::vector<float>* teachingPattern_, std::vector<float>* teachingInput_)
+TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO* teachingPattern_, std::vector<float>* teachingInput_)
 {
 	teachingInput = std::unique_ptr<std::vector<float>>(teachingInput_);
-	teachingPattern = std::unique_ptr<std::vector<float>>(teachingPattern_);
+	teachingPattern = std::unique_ptr<NeuralNetworkIO>(teachingPattern_);
 }
 
 std::vector<float>* TeachingLessonLinearInput::getTeachingInput(AbstractActivationFunction* activationFunction)
@@ -12,7 +13,7 @@ std::vector<float>* TeachingLessonLinearInput::getTeachingInput(AbstractActivati
 	return teachingInput.get();
 }
 
-std::vector<float>* TeachingLessonLinearInput::getTeachingPattern()
+NeuralNetworkIO* TeachingLessonLinearInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }

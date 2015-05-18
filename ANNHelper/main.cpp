@@ -31,6 +31,7 @@
 #include "ENearestRBFNeuronPlacer.hpp"
 #include "RBFNetworkStructureChart.hpp"
 #include "ROLFNeuronPlacer.hpp"
+#include "NeuralNetworkIO.hpp"
 
 void doPerceptronTest()
 {
@@ -66,10 +67,12 @@ void doPerceptronTest()
 	
 		for (int l=0;l<8;l+=1)
 		{			
-			std::vector<float>* teachingPattern = new std::vector<float>(2);
+			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
 			std::vector<bool>* teachingInput= new std::vector<bool>(1);
-			(*teachingPattern)[0] = i;
-			(*teachingPattern)[1] = l;
+
+			teachingPattern->push_back(std::vector<float>(2));
+			teachingPattern->back()[0] = i;
+			teachingPattern->back()[1] = l;
 			(*teachingInput)[0] = (i == l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
@@ -81,20 +84,24 @@ void doPerceptronTest()
 	{		
 		for (float l=0;l<1;l+=0.2)
 		{			
-			std::vector<float>* teachingPattern = new std::vector<float>(2);
+			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
 			std::vector<bool>* teachingInput= new std::vector<bool>(1);
-			(*teachingPattern)[0] = i;
-			(*teachingPattern)[1] = l;
+
+			teachingPattern->push_back(std::vector<float>(2));
+			teachingPattern->back()[0] = i;
+			teachingPattern->back()[1] = l;
 			(*teachingInput)[0] = (i == l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 			teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}		
 	}
 	{
-	std::vector<float>* teachingPattern = new std::vector<float>(2);
+	NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
 	std::vector<bool>* teachingInput= new std::vector<bool>(1);
-	(*teachingPattern)[0] = 100;
-	(*teachingPattern)[1] = 100;
+
+	teachingPattern->push_back(std::vector<float>(2));
+	teachingPattern->back()[0] = 100;
+	teachingPattern->back()[1] = 100;
 	(*teachingInput)[0] = true;	
 	//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 	teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
@@ -106,12 +113,12 @@ void doPerceptronTest()
 
 	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
 
-	std::vector<float> teachingPattern(2);
-	teachingPattern[0] = 8;
-	teachingPattern[1] = 8;
-	neuralNetwork.setInput(teachingPattern);
-	neuralNetwork.refreshAllNeurons(TopologicalOrder());
-	std::unique_ptr<std::vector<float>> outputVector = neuralNetwork.getOutput();
+	NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
+	teachingPattern->push_back(std::vector<float>(2));
+	teachingPattern->back()[0] = 8;
+	teachingPattern->back()[1] = 8;
+
+	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(*teachingPattern, TopologicalOrder());
 	
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
@@ -152,11 +159,12 @@ void doRBFTest()
 	{
 		for (int l=0;l<=20;l+=1)
 		{	
-			std::vector<float>* teachingPattern = new std::vector<float>(2);
+			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
 			std::vector<float>* teachingInput= new std::vector<float>(1);
 
-			(*teachingPattern)[0] = i;
-			(*teachingPattern)[1] = l;
+			teachingPattern->push_back(std::vector<float>(2));
+			teachingPattern->back()[0] = i;
+			teachingPattern->back()[1] = l;
 			(*teachingInput)[0] = (abs(i - 0) <= 5.5f &&  abs(l - 0) <= 5.5f) || (abs(i - 20) <= 5.5f &&  abs(l - 20) <= 5.5f);	
 			//(*teachingInput)[0] = (i > l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
@@ -223,6 +231,6 @@ void doRBFTest()
 
 int main()
 {
-	doRBFTest();
+	doPerceptronTest();
     return 0;
 }

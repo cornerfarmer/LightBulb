@@ -3,6 +3,7 @@
 #include "AbstractNeuron.hpp"
 #include "AbstractActivationOrder.hpp"
 #include "InputNeuron.hpp"
+#include "NeuralNetworkIO.hpp"
 #include <exception>
 
 NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
@@ -14,10 +15,21 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	networkTopology.reset(networkTopology_);
 }
 
-void NeuralNetwork::refreshAllNeurons(AbstractActivationOrder &activationOrder)
+std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input, AbstractActivationOrder &activationOrder)
 {
-	// Pass the work to the activationOrder :)
-	activationOrder.executeActivation(*networkTopology);
+	std::unique_ptr<NeuralNetworkIO> output(new NeuralNetworkIO());
+
+	for (NeuralNetworkIO::iterator singleInput = input.begin(); singleInput != input.end(); singleInput++)
+	{
+		setInput(*singleInput);
+
+		// Pass the work to the activationOrder
+		activationOrder.executeActivation(*networkTopology);
+
+		output->push_back(*getOutput());
+	}
+
+	return output;
 }
 
 std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
