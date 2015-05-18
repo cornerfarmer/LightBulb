@@ -1247,5 +1247,24 @@
         </generalsInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c15ca439-ee38-4dd7-94a1-54ab9d253bf3"
+        name="RecurrentNetwork"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="6075916f-20a7-4696-bac2-aa48f5e2e575"
+            isSubstitutable="false">
+            <classMoniker
+              Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
+              LastKnownName="LayeredNetwork"
+              LastKnownLocation="Package_1252.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

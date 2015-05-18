@@ -166,6 +166,7 @@
           <operation
             Id="f1f9520e-64a6-4bc4-8ccb-8d72675a8b3a"
             name="setInput"
+            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -217,15 +218,15 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="a6cc880c-f366-4858-9a9a-9760a5e634f8"
-                  name="inputVector"
+                  Id="0b44524f-cf6d-4399-a9f4-0532959a0c60"
+                  name="input"
                   direction="In"
                   isUnique="false">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
-                      LastKnownName="float[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                    <classMoniker
+                      Id="206ab277-fae0-45b4-b8f6-5b98137263a3"
+                      LastKnownName="NetworkIO"
+                      LastKnownLocation="Package_1151.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -234,6 +235,7 @@
           <operation
             Id="d08c6445-480b-4c95-824c-c78951e50bcb"
             name="getOutput"
+            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -289,70 +291,54 @@
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
-                      LastKnownName="float[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                    <classMoniker
+                      Id="206ab277-fae0-45b4-b8f6-5b98137263a3"
+                      LastKnownName="NetworkIO"
+                      LastKnownLocation="Package_1151.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
           <operation
-            Id="a8d2de90-293e-440a-b81a-a3bdd009c297"
-            name="refreshAllNeurons"
+            Id="29c2be60-1459-4d54-856e-cc274559bc74"
+            name="calculate"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false">
-            <appliedStereotypesInternal>
-              <stereotypeInstance
-                Id="fb9086b0-8559-441f-ac32-6d3ae8d6521a"
-                name="method"
-                profile="CSharpProfile">
-                <propertyInstances>
-                  <stereotypeInstanceHasPropertyInstances
-                    Id="cd146434-66da-4218-95b2-078afcf2b7e1">
-                    <propertyInstance
-                      Id="c8c9705b-2505-46d8-a609-1bd94b2a0f23"
-                      name="ClrAttributes" />
-                  </stereotypeInstanceHasPropertyInstances>
-                  <stereotypeInstanceHasPropertyInstances
-                    Id="b1a5ad68-dffe-4ba4-a9d9-3c4a1be4cd5d">
-                    <propertyInstance
-                      Id="2f68c1f8-e128-4772-ba76-11f74cbdf712"
-                      name="IsPartial"
-                      value="false" />
-                  </stereotypeInstanceHasPropertyInstances>
-                  <stereotypeInstanceHasPropertyInstances
-                    Id="112acb79-11da-4f3d-8021-ad089260b53a">
-                    <propertyInstance
-                      Id="41799fdc-d46c-441b-ab43-514039789fcd"
-                      name="IsUnsafe"
-                      value="false" />
-                  </stereotypeInstanceHasPropertyInstances>
-                  <stereotypeInstanceHasPropertyInstances
-                    Id="0e906cdd-5f84-4d8f-8cfd-cd342f25e49b">
-                    <propertyInstance
-                      Id="761907fc-2ddb-45e0-baed-1411a695def3"
-                      name="PackageVisibility"
-                      value="internal" />
-                  </stereotypeInstanceHasPropertyInstances>
-                  <stereotypeInstanceHasPropertyInstances
-                    Id="8e67c272-c4ec-4683-afa3-4eb37d2755d2">
-                    <propertyInstance
-                      Id="48460c43-7f7d-4456-8990-8be9a51e6500"
-                      name="params"
-                      value="false" />
-                  </stereotypeInstanceHasPropertyInstances>
-                </propertyInstances>
-              </stereotypeInstance>
-            </appliedStereotypesInternal>
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="fd7a55c7-2d45-46ac-889a-6ceadba1007e"
+                  Id="8e9d84ef-0b9b-4901-80f1-7021d1b00611"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="206ab277-fae0-45b4-b8f6-5b98137263a3"
+                      LastKnownName="NetworkIO"
+                      LastKnownLocation="Package_1151.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fd6fd572-9784-4b29-86fa-c91a50a6e3f2"
+                  name="input"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="206ab277-fae0-45b4-b8f6-5b98137263a3"
+                      LastKnownName="NetworkIO"
+                      LastKnownLocation="Package_1151.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ad7b14f8-fbb7-4fcb-81e5-2bf5d4196dec"
                   name="activationOrder"
                   direction="In"
                   isUnique="false">
@@ -367,6 +353,52 @@
             </ownedParameters>
           </operation>
         </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6c1fd336-4a26-4a17-92d6-4ec5df1cec3f"
+        name="AbstractNetworkIO"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f7ee6afa-762a-46bf-b5e3-a76c6312c46b"
+        name="SingleNetworkIO"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="ab6da5da-8946-4973-81d9-b94d6fd15636"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6c1fd336-4a26-4a17-92d6-4ec5df1cec3f"
+              LastKnownName="AbstractNetworkIO"
+              LastKnownLocation="Package_1151.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="206ab277-fae0-45b4-b8f6-5b98137263a3"
+        name="NetworkIO"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="69a37b2f-1e4e-4e2d-812b-2bac518402b2"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6c1fd336-4a26-4a17-92d6-4ec5df1cec3f"
+              LastKnownName="AbstractNetworkIO"
+              LastKnownLocation="Package_1151.uml" />
+          </generalization>
+        </generalsInternal>
       </class>
     </packageHasNamedElement>
   </packagedElements>

@@ -124,11 +124,6 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" name="AbstractActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::AcitvationOrder::AbstractActivationOrder">
-        <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="5fe876c7-82d2-45ac-8e91-20ba2956aa52" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
         <elementDefinition Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5" />
       </referencedType>
@@ -2435,6 +2430,17 @@
               </generalsInternal>
             </class>
           </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="a0ff69b2-1e77-4153-88a8-be3407345e79" name="RecurrentNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="c15ca439-ee38-4dd7-94a1-54ab9d253bf3" />
+              <generalsInternal>
+                <generalization Id="d6ae66e9-5081-47d6-8dfe-2b0ea46fc9c9" isSubstitutable="false">
+                  <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="LayeredNetwork" />
+                  <elementDefinition Id="6075916f-20a7-4696-bac2-aa48f5e2e575" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
@@ -2892,9 +2898,9 @@
               </appliedStereotypesInternal>
               <elementDefinition Id="8c7a7813-4ce9-43b7-8690-ca2e02e08e32" />
               <generalsInternal>
-                <generalization Id="5f708a05-116b-423b-9bcd-b195a28a8f63" isSubstitutable="false">
-                  <classMoniker Id="c7268ba9-6124-4da1-b00d-5a4e464e1819" LastKnownName="AbstractTeachingLesson" />
-                  <elementDefinition Id="4cc86775-0ae1-4d24-aab4-eca761ccaf76" />
+                <generalization Id="c11ecc04-1066-44e3-8149-a01b86ddad15" isSubstitutable="false">
+                  <classMoniker Id="a3ad0aa3-0a6e-48ef-becd-5b01f0e583f9" LastKnownName="AbstractSingleTeachingLesson" />
+                  <elementDefinition Id="2c98fb60-8170-4ca7-ba21-26237f486c61" />
                 </generalization>
               </generalsInternal>
               <ownedAttributesInternal>
@@ -2954,9 +2960,9 @@
               </appliedStereotypesInternal>
               <elementDefinition Id="d4044b77-9b76-49e5-900f-5e761567e34c" />
               <generalsInternal>
-                <generalization Id="f141d366-12fe-48ca-a307-723a200e1192" isSubstitutable="false">
-                  <classMoniker Id="c7268ba9-6124-4da1-b00d-5a4e464e1819" LastKnownName="AbstractTeachingLesson" />
-                  <elementDefinition Id="580a582b-be86-4b91-9089-a7af4fb74d3f" />
+                <generalization Id="b5c9ae86-312a-485b-a59f-fecd92ef65bf" isSubstitutable="false">
+                  <classMoniker Id="a3ad0aa3-0a6e-48ef-becd-5b01f0e583f9" LastKnownName="AbstractSingleTeachingLesson" />
+                  <elementDefinition Id="ac1bd4c7-eb4e-4e2e-93cc-ec6dec5fbfd2" />
                 </generalization>
               </generalsInternal>
               <ownedAttributesInternal>
@@ -2973,6 +2979,66 @@
                   </type_NamedElement>
                 </property>
               </ownedAttributesInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="7e036e44-d256-4be9-88a5-8b66389f2333" name="TeachingLessonSeries" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="249acc41-2d9e-411d-84e4-a3ea1f90cfa9" />
+              <generalsInternal>
+                <generalization Id="3e288579-50fb-4d5a-a45e-62ea846f1213" isSubstitutable="false">
+                  <classMoniker Id="c7268ba9-6124-4da1-b00d-5a4e464e1819" LastKnownName="AbstractTeachingLesson" />
+                  <elementDefinition Id="cec79e08-ce7c-4578-81ed-70fdb70d5d25" />
+                </generalization>
+              </generalsInternal>
+              <targetEnds>
+                <association Id="29240a1d-3e3d-4518-88e3-43d0e200ec34" isDerived="false" sourceEndRoleName="" targetEndRoleName="teachingLessons" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="a3ad0aa3-0a6e-48ef-becd-5b01f0e583f9" LastKnownName="AbstractSingleTeachingLesson" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="604660c2-7589-43de-a8ee-56896ac08f44" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <lowerValueInternal>
+                          <literalString Id="acfbf4db-a7d0-4285-a6f3-ef75a60c9ca0" name="Lower">
+                            <elementDefinition Id="5014f5ac-86ee-41e7-b505-ff74e2010dfc" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="65275658-e327-40cf-b5fe-4fe3544b1999" name="Upper">
+                            <elementDefinition Id="e7dcb76e-e62e-4b7b-9677-f8374db57d08" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="32614912-a123-4074-b56d-4c9da1fa2e7d" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="34a1364a-ccb2-4181-acbd-07c19a5651e2" name="teachingLessons" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <lowerValueInternal>
+                          <literalString Id="0fc8275f-d39b-4854-ad32-22feb6698739" name="Lower" value="1">
+                            <elementDefinition Id="5145340b-fd6f-4b44-bd9a-0436ab3ff7b5" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="7fe2f326-45e2-4e4f-919a-7fa60c3bfb5c" name="Upper" value="*">
+                            <elementDefinition Id="2b04411f-1c04-4f30-93f5-fbeb97e00524" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="7360b23b-1a6a-464d-bb84-7f7e2a442713" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="ebb7834e-b0ab-4aef-8255-9876da18da66" />
+                </association>
+              </targetEnds>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="a3ad0aa3-0a6e-48ef-becd-5b01f0e583f9" name="AbstractSingleTeachingLesson" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="60680a65-974f-4424-a2bc-f2b8c2b16419" />
+              <generalsInternal>
+                <generalization Id="ccd6b3d2-8a02-400b-aa38-6897fef632f1" isSubstitutable="false">
+                  <classMoniker Id="c7268ba9-6124-4da1-b00d-5a4e464e1819" LastKnownName="AbstractTeachingLesson" />
+                  <elementDefinition Id="be9d2286-20d8-4871-85cd-1689f74dc402" />
+                </generalization>
+              </generalsInternal>
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -3425,7 +3491,7 @@
                     </operationHasOwnedParameters>
                   </ownedParameters>
                 </operation>
-                <operation Id="6093a317-f895-48d6-8b71-abed32a521b2" name="setInput" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                <operation Id="6093a317-f895-48d6-8b71-abed32a521b2" name="setInput" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
                   <appliedStereotypesInternal>
                     <stereotypeInstance Id="1403a607-e6c6-47de-885d-f144b679fa48" name="method" profile="CSharpProfile">
                       <elementDefinition Id="39ec2337-03df-461a-92c5-7cd92ba84e7f" />
@@ -3466,16 +3532,16 @@
                   <elementDefinition Id="f1f9520e-64a6-4bc4-8ccb-8d72675a8b3a" />
                   <ownedParameters>
                     <operationHasOwnedParameters>
-                      <parameter Id="441d56bc-977b-476b-92c1-7410c80ae203" name="inputVector" direction="In" isUnique="false">
-                        <elementDefinition Id="a6cc880c-f366-4858-9a9a-9760a5e634f8" />
+                      <parameter Id="3bf5724d-dfe5-46cd-8a22-51dbdda51053" name="input" direction="In" isUnique="false">
+                        <elementDefinition Id="0b44524f-cf6d-4399-a9f4-0532959a0c60" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="b047d3a3-72ce-410a-9436-ae0b413abfb1" LastKnownName="float[]" />
+                          <referencedTypeMoniker Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" LastKnownName="NetworkIO" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
                   </ownedParameters>
                 </operation>
-                <operation Id="58c5c6ee-e92f-4a18-9c8b-5d073496d352" name="getOutput" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                <operation Id="58c5c6ee-e92f-4a18-9c8b-5d073496d352" name="getOutput" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
                   <appliedStereotypesInternal>
                     <stereotypeInstance Id="fd630567-630f-4d19-82f0-c4d727334891" name="method" profile="CSharpProfile">
                       <elementDefinition Id="e22e1ab4-b8d5-4073-bfeb-4372d5bdc7fd" />
@@ -3519,63 +3585,47 @@
                       <parameter Id="7f36befa-164e-43a3-9f13-86bf898ca3d2" direction="Return" isUnique="false">
                         <elementDefinition Id="70b5b60f-d90e-49ef-8e77-37522d93f02a" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="b047d3a3-72ce-410a-9436-ae0b413abfb1" LastKnownName="float[]" />
+                          <referencedTypeMoniker Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" LastKnownName="NetworkIO" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
                   </ownedParameters>
                 </operation>
-                <operation Id="5e234874-41c8-42c7-919c-1118fdb66c5e" name="refreshAllNeurons" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-                  <appliedStereotypesInternal>
-                    <stereotypeInstance Id="2d7dd554-6cdc-41b3-b02f-9e4fbc722597" name="method" profile="CSharpProfile">
-                      <elementDefinition Id="fb9086b0-8559-441f-ac32-6d3ae8d6521a" />
-                      <propertyInstances>
-                        <stereotypeInstanceHasPropertyInstances Id="4a28b9ca-44f5-44da-9018-9acef95beefc">
-                          <propertyInstance Id="1d44037b-c50e-4e43-aa6c-beb0d9314ec5" name="ClrAttributes">
-                            <elementDefinition Id="c8c9705b-2505-46d8-a609-1bd94b2a0f23" />
-                          </propertyInstance>
-                          <elementDefinition Id="cd146434-66da-4218-95b2-078afcf2b7e1" />
-                        </stereotypeInstanceHasPropertyInstances>
-                        <stereotypeInstanceHasPropertyInstances Id="1dafba2f-a695-41b9-8c4a-d772f93fe2b6">
-                          <propertyInstance Id="33986087-d533-403a-924b-040823e41506" name="IsPartial" value="false">
-                            <elementDefinition Id="2f68c1f8-e128-4772-ba76-11f74cbdf712" />
-                          </propertyInstance>
-                          <elementDefinition Id="b1a5ad68-dffe-4ba4-a9d9-3c4a1be4cd5d" />
-                        </stereotypeInstanceHasPropertyInstances>
-                        <stereotypeInstanceHasPropertyInstances Id="1f1369c5-5e88-41ab-9816-56e94abb836f">
-                          <propertyInstance Id="fe7322a1-130c-4001-a2e9-4d581c2d00ab" name="IsUnsafe" value="false">
-                            <elementDefinition Id="41799fdc-d46c-441b-ab43-514039789fcd" />
-                          </propertyInstance>
-                          <elementDefinition Id="112acb79-11da-4f3d-8021-ad089260b53a" />
-                        </stereotypeInstanceHasPropertyInstances>
-                        <stereotypeInstanceHasPropertyInstances Id="a3d83287-c985-407f-b855-ed025d447acd">
-                          <propertyInstance Id="e9cf0955-e1f7-4291-b488-394dac1ef3cd" name="PackageVisibility" value="internal">
-                            <elementDefinition Id="761907fc-2ddb-45e0-baed-1411a695def3" />
-                          </propertyInstance>
-                          <elementDefinition Id="0e906cdd-5f84-4d8f-8cfd-cd342f25e49b" />
-                        </stereotypeInstanceHasPropertyInstances>
-                        <stereotypeInstanceHasPropertyInstances Id="10321e2b-b67c-498b-ad22-bee3d5d5010f">
-                          <propertyInstance Id="c099f45c-2a07-4274-8118-40d8c92508e7" name="params" value="false">
-                            <elementDefinition Id="48460c43-7f7d-4456-8990-8be9a51e6500" />
-                          </propertyInstance>
-                          <elementDefinition Id="8e67c272-c4ec-4683-afa3-4eb37d2755d2" />
-                        </stereotypeInstanceHasPropertyInstances>
-                      </propertyInstances>
-                    </stereotypeInstance>
-                  </appliedStereotypesInternal>
-                  <elementDefinition Id="a8d2de90-293e-440a-b81a-a3bdd009c297" />
+                <operation Id="9a1dcca3-aa36-48df-a976-961f7016479e" name="calculate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="29c2be60-1459-4d54-856e-cc274559bc74" />
                   <ownedParameters>
                     <operationHasOwnedParameters>
-                      <parameter Id="46388123-6379-441f-b956-fa6c4c8e25e7" name="activationOrder" direction="In" isUnique="false">
-                        <elementDefinition Id="fd7a55c7-2d45-46ac-889a-6ceadba1007e" />
+                      <parameter Id="e38d4419-2e6a-46dd-ad4e-8d5a5e44b2a9" direction="Return" isUnique="false">
+                        <elementDefinition Id="8e9d84ef-0b9b-4901-80f1-7021d1b00611" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="5c6551c0-1479-47ee-9c95-63a61d10aa01" LastKnownName="AbstractActivationOrder" />
+                          <referencedTypeMoniker Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" LastKnownName="NetworkIO" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="99ed67f2-2d0e-43eb-9063-e7042c7d3c18" name="input" direction="In" isUnique="false">
+                        <elementDefinition Id="fd6fd572-9784-4b29-86fa-c91a50a6e3f2" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" LastKnownName="NetworkIO" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="d72cf5db-7b0d-492f-b602-13f93abb0170" name="activationOrder" direction="In" isUnique="false">
+                        <elementDefinition Id="ad7b14f8-fbb7-4fcb-81e5-2bf5d4196dec" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="c26707f9-b5c8-400a-8b8a-04f09d3c8860" LastKnownName="AbstractActivationOrder" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
                   </ownedParameters>
                 </operation>
               </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="2bd7b150-0c6b-4d06-81ee-247b8fc71540" name="NetworkIO" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="206ab277-fae0-45b4-b8f6-5b98137263a3" />
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -4000,6 +4050,16 @@
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" name="NetworkIO" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NeuralNetwork::NetworkIO">
+        <elementDefinition Id="206ab277-fae0-45b4-b8f6-5b98137263a3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c26707f9-b5c8-400a-8b8a-04f09d3c8860" name="AbstractActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::AcitvationOrder::AbstractActivationOrder">
+        <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />

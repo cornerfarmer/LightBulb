@@ -673,11 +673,11 @@
         </appliedStereotypesInternal>
         <generalsInternal>
           <generalization
-            Id="4cc86775-0ae1-4d24-aab4-eca761ccaf76"
+            Id="2c98fb60-8170-4ca7-ba21-26237f486c61"
             isSubstitutable="false">
             <classMoniker
-              Id="3b2a52ef-f690-4396-8ee9-79714201c427"
-              LastKnownName="AbstractTeachingLesson"
+              Id="60680a65-974f-4424-a2bc-f2b8c2b16419"
+              LastKnownName="AbstractSingleTeachingLesson"
               LastKnownLocation="Package_1254.uml" />
           </generalization>
         </generalsInternal>
@@ -773,11 +773,11 @@
         </appliedStereotypesInternal>
         <generalsInternal>
           <generalization
-            Id="580a582b-be86-4b91-9089-a7af4fb74d3f"
+            Id="ac1bd4c7-eb4e-4e2e-93cc-ec6dec5fbfd2"
             isSubstitutable="false">
             <classMoniker
-              Id="3b2a52ef-f690-4396-8ee9-79714201c427"
-              LastKnownName="AbstractTeachingLesson"
+              Id="60680a65-974f-4424-a2bc-f2b8c2b16419"
+              LastKnownName="AbstractSingleTeachingLesson"
               LastKnownLocation="Package_1254.uml" />
           </generalization>
         </generalsInternal>
@@ -915,6 +915,108 @@
       <undefinedType
         Id="3f17b7a7-cc25-4952-9ad6-0ba0572da8a6"
         name="bool[]" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="249acc41-2d9e-411d-84e4-a3ea1f90cfa9"
+        name="TeachingLessonSeries"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="cec79e08-ce7c-4578-81ed-70fdb70d5d25"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3b2a52ef-f690-4396-8ee9-79714201c427"
+              LastKnownName="AbstractTeachingLesson"
+              LastKnownLocation="Package_1254.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="ebb7834e-b0ab-4aef-8255-9876da18da66"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="teachingLessons"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="60680a65-974f-4424-a2bc-f2b8c2b16419"
+              LastKnownName="AbstractSingleTeachingLesson"
+              LastKnownLocation="Package_1254.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="32614912-a123-4074-b56d-4c9da1fa2e7d"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="5014f5ac-86ee-41e7-b505-ff74e2010dfc"
+                      name="Lower" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="e7dcb76e-e62e-4b7b-9677-f8374db57d08"
+                      name="Upper" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7360b23b-1a6a-464d-bb84-7f7e2a442713"
+                  name="teachingLessons"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="5145340b-fd6f-4b44-bd9a-0436ab3ff7b5"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="2b04411f-1c04-4f30-93f5-fbeb97e00524"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="60680a65-974f-4424-a2bc-f2b8c2b16419"
+        name="AbstractSingleTeachingLesson"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="be9d2286-20d8-4871-85cd-1689f74dc402"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3b2a52ef-f690-4396-8ee9-79714201c427"
+              LastKnownName="AbstractTeachingLesson"
+              LastKnownLocation="Package_1254.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
 </package>
