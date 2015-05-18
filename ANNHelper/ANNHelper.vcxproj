@@ -88,6 +88,7 @@
     <ClCompile Include="NeuralNetworkIO.cpp" />
     <ClCompile Include="PointSet.cpp" />
     <ClCompile Include="RBFNetworkStructureChart.cpp" />
+    <ClCompile Include="RecurrentNetwork.cpp" />
     <ClCompile Include="ResilientDeltaLearningRule.cpp" />
     <ClCompile Include="ResilientLearningRateHelper.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="PointSet.hpp" />
     <ClInclude Include="RBFNetworkStructureChart.hpp" />
+    <ClInclude Include="RecurrentNetwork.hpp" />
     <ClInclude Include="ResilientDeltaLearningRule.hpp" />
     <ClInclude Include="ResilientLearningRateHelper.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />

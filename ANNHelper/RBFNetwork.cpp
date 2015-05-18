@@ -14,10 +14,6 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 	// Create a new options object
 	options.reset(new LayeredNetworkOptions());
 	// Set all options
-	options->enableDirectBackCoupling = false;
-	options->enableDirectBackCoupling = false;
-	options->enableIndirectBackCoupling = false;
-	options->enableLateralBackCoupling = false;
 	options->enableShortcuts = false;
 	options->useBiasNeurons = false;
 	// Define thresholds and functions

@@ -18,9 +18,6 @@ class AbstractNeuronFactory;
 struct LayeredNetworkOptions
 {	
 	AbstractNeuronFactory* neuronFactory;
-	bool enableDirectBackCoupling;
-	bool enableIndirectBackCoupling;
-	bool enableLateralBackCoupling;
 	bool enableShortcuts;
 	bool useBiasNeurons;
 	std::vector<unsigned int> neuronsPerLayerCount;

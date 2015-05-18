@@ -224,6 +224,9 @@
     <ClInclude Include="NeuralNetworkIO.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
+    <ClInclude Include="RecurrentNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -411,6 +414,9 @@
     </ClCompile>
     <ClCompile Include="NeuralNetworkIO.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="RecurrentNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,9 +8,6 @@
 
 LayeredNetworkOptions::LayeredNetworkOptions()
 {
-	enableDirectBackCoupling = false;
-	enableIndirectBackCoupling = false;
-	enableLateralBackCoupling = false;
 	enableShortcuts = false;
 	neuronFactory = NULL;
 	neuronsPerLayerCount = std::vector<unsigned int>();
