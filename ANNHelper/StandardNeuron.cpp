@@ -39,6 +39,19 @@ void StandardNeuron::addPrevNeuron(Edge* newEdge)
 	afferentEdges.push_back(newEdge);
 }
 
+void StandardNeuron::removeAfferentEdge(Edge* edgeToRemove)
+{
+	// Go through all edges and delete edgeToRemove
+	for (std::vector<Edge*>::iterator edge = afferentEdges.begin(); edge != afferentEdges.end(); edge++)
+	{
+		if (*edge == edgeToRemove)
+		{
+			afferentEdges.erase(edge);
+			break;
+		}
+	}
+}
+
 void StandardNeuron::refreshActivation()
 {
 	// Calc the input from all afferentEdges

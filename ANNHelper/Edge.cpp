@@ -26,3 +26,13 @@ void Edge::setWeight(float newWeight)
 {
 	weight = newWeight;
 }
+
+void Edge::setPrevNeuron(AbstractNeuron* newPrevNeuron)
+{
+	prevNeuron = newPrevNeuron;
+}
+
+void Edge::setNextNeuron(StandardNeuron* newNextNeuron)
+{
+	nextNeuron = newNextNeuron;
+}

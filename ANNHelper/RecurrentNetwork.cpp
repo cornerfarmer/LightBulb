@@ -1,6 +1,7 @@
 #include "RecurrentNetwork.hpp"
 #include "StandardNeuron.hpp"
 #include "AbstractNeuron.hpp"
+#include "Edge.hpp"
 
 RecurrentNetwork::RecurrentNetwork(RecurrentNetworkOptions& options_)
 {
@@ -37,4 +38,49 @@ void RecurrentNetwork::buildRecurrentConnections()
 RecurrentNetworkOptions* RecurrentNetwork::getOptions()
 {
 	return static_cast<RecurrentNetworkOptions*>(options.get());
+}
+
+std::unique_ptr<LayeredNetwork> RecurrentNetwork::unfold(int instanceCount)
+{
+	// If ouput neurons are connected with input neurons
+	if (getOptions()->connectOutputWithInnerNeurons)
+	{
+		// Create a new options object and copy the current options into it
+		LayeredNetworkOptions layeredNetworkOptions(*options);
+		// Only change the neuronsPerLayerCount
+		layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(instanceCount * (getLayerCount() - 1) + 1);
+
+		// Set neuron count of the first layer to: original input neuron count * instanceCount
+		layeredNetworkOptions.neuronsPerLayerCount[0] = options->neuronsPerLayerCount[0] * instanceCount;
+		// Go through all other layers
+		for(int i = 1; i < layeredNetworkOptions.neuronsPerLayerCount.size(); i++)
+		{
+			// Set the neuron count to the corresponding one in the original settings
+			layeredNetworkOptions.neuronsPerLayerCount[i] = options->neuronsPerLayerCount[i % (options->neuronsPerLayerCount.size() - 1) + 1];
+		}
+
+		// Create a new unfoldedNetwork from the settings
+		std::unique_ptr<LayeredNetwork> unfoldedNetwork(new LayeredNetwork(layeredNetworkOptions));
+
+		// Extract all input neurons
+		std::vector<AbstractNeuron*>* inputNeurons = unfoldedNetwork->getInputNeurons();	
+		// Go through all input neurons that are not in the original network
+		for (int i = options->neuronsPerLayerCount[0]; i < inputNeurons->size() - 1; i++)
+		{
+			// Extract the neurons of the layer to which this input neuron should be connected
+			std::vector<AbstractNeuron*>* layerToConnect = unfoldedNetwork->getNeuronsInLayer((i / options->neuronsPerLayerCount[0] - 1) * (getLayerCount() - 1) + getLayerCount());
+			// Go through all edges of the current input neuron
+			std::vector<AbstractNeuron*>::iterator neuronToConnect = layerToConnect->begin();
+			for (std::vector<Edge*>::iterator edge = (*inputNeurons)[i]->getEfferentEdges()->begin(); edge != (*inputNeurons)[i]->getEfferentEdges()->end(); edge++, neuronToConnect++)
+			{
+				// Remove the edge from the first inner layer
+				(*edge)->getNextNeuron()->removeAfferentEdge(*edge);
+				// Set the edge to the corresponding neuron
+				(*edge)->setNextNeuron(dynamic_cast<StandardNeuron*>(*neuronToConnect));
+				dynamic_cast<StandardNeuron*>(*neuronToConnect)->addPrevNeuron(*edge);
+			}
+		}
+
+		return unfoldedNetwork;
+	}
 }

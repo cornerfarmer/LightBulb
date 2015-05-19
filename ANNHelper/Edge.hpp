@@ -20,6 +20,8 @@ public:
 	void setWeight(float newWeight);
 	AbstractNeuron* getPrevNeuron();
 	StandardNeuron* getNextNeuron();	
+	void setPrevNeuron(AbstractNeuron* newPrevNeuron);
+	void setNextNeuron(StandardNeuron* newNextNeuron);	
 };
 
 #endif

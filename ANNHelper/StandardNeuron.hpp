@@ -30,6 +30,8 @@ public:
 	// Add a new afferent Edge directing to the given neuron
 	void addPrevNeuron(AbstractNeuron* newPrevNeuron, float weight);
 	void addPrevNeuron(Edge* newEdge);
+	// Remove a afferent Edge
+	void removeAfferentEdge(Edge* edgeToRemove);
 	// Calculates a new activation with the help of its input-, activation- and outputFunction
 	void refreshActivation();
 	// Calculates the value of the activation function derivation 

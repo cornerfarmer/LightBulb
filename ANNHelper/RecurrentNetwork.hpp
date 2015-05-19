@@ -26,6 +26,7 @@ private:
 	RecurrentNetworkOptions* getOptions();
 public:
 	RecurrentNetwork(RecurrentNetworkOptions& options_);		
+	std::unique_ptr<LayeredNetwork> RecurrentNetwork::unfold(int instanceCount);
 };
 
 #endif

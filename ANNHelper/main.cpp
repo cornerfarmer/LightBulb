@@ -244,6 +244,8 @@ void doRecurrentNetworkTest()
 	RecurrentNetwork* recurrentNetwork = new RecurrentNetwork(options);
 
 	NeuralNetwork neuralNetwork(recurrentNetwork);
+
+	recurrentNetwork->unfold(3);
 }
 
 int main()
