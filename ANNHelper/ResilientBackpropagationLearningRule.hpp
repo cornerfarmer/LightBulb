@@ -37,7 +37,7 @@ protected:
 	void adjustWeight(Edge* edge, float deltaWeight);	
 	void printDebugOutput();
 	bool learningHasStopped();
-	void initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
 public:
 	ResilientBackpropagationLearningRule(ResilientBackpropagationLearningRuleOptions &options_);
 };

@@ -4,7 +4,7 @@
 #define _ABSTRACTNEURON_H_
 
 // Includes
-#include <vector>
+#include <list>
 
 // Forward declarations
 class Edge;
@@ -15,7 +15,7 @@ class AbstractNeuron
 {
 protected:
 	float activation;
-	std::vector<Edge*> efferentEdges;
+	std::list<Edge*> efferentEdges;
 public:	
 	virtual ~AbstractNeuron();
 	AbstractNeuron();
@@ -26,7 +26,8 @@ public:
 	float getActivation();
 	// Recalculate the activation of the neuron
 	virtual void refreshActivation() = 0;
-	std::vector<Edge*>* getEfferentEdges();
+	std::list<Edge*>* getEfferentEdges();
+	void resetActivation();
 };
 
 #endif

@@ -33,6 +33,7 @@
 #include "ROLFNeuronPlacer.hpp"
 #include "NeuralNetworkIO.hpp"
 #include "RecurrentNetwork.hpp"
+#include "BackpropagationThroughTimeLearningRule.hpp"
 
 void doPerceptronTest()
 {
@@ -232,20 +233,58 @@ void doRBFTest()
 
 void doRecurrentNetworkTest()
 {
-	RecurrentNetworkOptions options;
-	options.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
+	RecurrentNetworkOptions networkOptions;
+	networkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
 																	new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-	options.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	options.neuronsPerLayerCount[0]=2;
-	options.neuronsPerLayerCount[1]=3;
-	options.neuronsPerLayerCount[2]=1;
-	options.useBiasNeurons = true;
-	options.connectOutputWithInnerNeurons = true;
-	RecurrentNetwork* recurrentNetwork = new RecurrentNetwork(options);
+	networkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkOptions.neuronsPerLayerCount[0]=1;
+	networkOptions.neuronsPerLayerCount[1]=3;
+	networkOptions.neuronsPerLayerCount[2]=1;
+	networkOptions.useBiasNeurons = true;
+	networkOptions.connectOutputWithInnerNeurons = true;
+	RecurrentNetwork* recurrentNetwork = new RecurrentNetwork(networkOptions);
 
 	NeuralNetwork neuralNetwork(recurrentNetwork);
 
-	recurrentNetwork->unfold(3);
+	BackpropagationThroughTimeLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 100;
+	options.maxTotalErrorValue = 4;
+	options.minIterationsPerTry = 3000;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.001f;
+	options.maxTries = 1000;
+	options.minRandomWeightValue = -0.5;
+	options.maxRandomWeightValue = 0.5;
+  	options.weightDecayFac = 0;
+	options.maxTimeSteps = 2;
+	BackpropagationThroughTimeLearningRule learningRule(options);
+
+	Teacher teacher;
+	
+	for (int i=0;i<=10;i++)
+	{
+		NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
+		std::vector<bool>* teachingInput= new std::vector<bool>(1);
+
+		int lastPattern = -1;
+		for (int l = 0; l < 2; l++)
+		{
+			if (l != 0)
+				lastPattern = teachingPattern->back()[0];
+			teachingPattern->push_back(std::vector<float>(1));
+			teachingPattern->back()[0] = (int)((float)rand() / (RAND_MAX + 1) * 2);				
+		}
+
+		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	
+		
+		//(*teachingInput)[0] = (i > l);	
+		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+	}
+
+	learningRule.doLearning(neuralNetwork, teacher);
 }
 
 int main()

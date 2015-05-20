@@ -156,8 +156,8 @@ void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Go through all effernetEdges of this neuron
-			std::vector<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-			for (std::vector<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
+			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 			{
 				do{
 					// Set the weight to a new random value
@@ -188,4 +188,17 @@ int LayeredNetwork::getEdgeCount()
 bool LayeredNetwork::usesBiasNeurons()
 {
 	return options->useBiasNeurons;
+}
+
+void LayeredNetwork::resetActivation()
+{
+	// Go through all layers
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	{
+		// Go through all neurons in this layer
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			(*neuron)->resetActivation();
+		}
+	}
 }

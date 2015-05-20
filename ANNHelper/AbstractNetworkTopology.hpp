@@ -26,6 +26,10 @@ public:
 	virtual std::vector<std::vector<AbstractNeuron*>>* getNeurons() = 0;
 	// Add a new Neuron in the selected Layer
 	virtual AbstractNeuron* addNeuronIntoLayer(int layerIndex) = 0;
+	// Calculates the Edge count
+	virtual int getEdgeCount() = 0;
+
+	virtual void resetActivation() = 0;
 };
 
 #endif

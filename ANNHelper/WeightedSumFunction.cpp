@@ -2,14 +2,14 @@
 #include "Edge.hpp"
 #include "AbstractNeuron.hpp"
 
-float WeightedSumFunction::execute(std::vector<Edge*> &input, AbstractThreshold* threshold)
+float WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* threshold)
 {
 	float sum = 0.0;
 
 	// Calculate the product of weight and output of every neuron and add it to the sum
-	for (int i = 0; i < input.size(); i++)
+	for (std::list<Edge*>::iterator edge = input.begin(); edge != input.end(); edge++)
 	{
-		sum += input[i]->getWeight() * input[i]->getPrevNeuron()->getActivation();
+		sum += (*edge)->getWeight() * (*edge)->getPrevNeuron()->getActivation();
 	}
 	
 	return sum;

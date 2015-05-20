@@ -78,6 +78,7 @@
     <ClCompile Include="AbstractNonReliableRBFNeuronPlacer.cpp" />
     <ClCompile Include="AbstractRBFNeuronPlacer.cpp" />
     <ClCompile Include="AbstractReliableRBFNeuronPlacer.cpp" />
+    <ClCompile Include="BackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="Cluster.hpp" />
     <ClCompile Include="ENearestClustering.cpp" />
     <ClCompile Include="ENearestRBFNeuronPlacer.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="AbstractNonReliableRBFNeuronPlacer.hpp" />
     <ClInclude Include="AbstractRBFNeuronPlacer.hpp" />
     <ClInclude Include="AbstractReliableRBFNeuronPlacer.hpp" />
+    <ClInclude Include="BackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="ENearestClustering.hpp" />
     <ClInclude Include="ENearestRBFNeuronPlacer.hpp" />
     <ClInclude Include="KMeansClustering.hpp" />

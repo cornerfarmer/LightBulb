@@ -28,16 +28,19 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	if (teacher.getTeachingLessons()->size() == 0)
 		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
 
+	Teacher& initializedTeacher = *initializeTeacher(teacher);
+	NeuralNetwork& initializedNeuralNetwork = *initializeNeuralNetwork(neuralNetwork);
+
 	// Let the learning algorithm do stuff before starting
-	initializeLearningAlgoritm(neuralNetwork, teacher);
+	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher);
 
 	// Ask for the used activation order
 	std::unique_ptr<AbstractActivationOrder> activationOrder(getNewActivationOrder());
 
 	// Get all output neurons
-	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
+	std::vector<AbstractNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
 	// Create a vector which will contain all weights for offline learning
-	std::vector<float> offlineLearningWeights(dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getEdgeCount());
+	std::vector<float> offlineLearningWeights(dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getEdgeCount());
 
 	int tryCounter = 0;
 	float totalError = 0;
@@ -46,7 +49,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	do
 	{
 		// Initialize a new try
-		initializeTry(neuralNetwork, teacher);
+		initializeTry(initializedNeuralNetwork, initializedTeacher);
 		
 		// If debug is enabled, print every n-th iteration a short debug info
 		if (options->enableDebugOutput)
@@ -54,7 +57,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 		int iteration = 0;
 		// Do while the totalError is not zero
-		while ((totalError = teacher.getTotalError(neuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry )
+		while ((totalError = initializedTeacher.getTotalError(neuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry )
 		{			
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
@@ -91,8 +94,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 			// Go through every TeachingLesson
 			int lessonIndex = 0;
-			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
+			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
 			{
+				initializeTeachingLesson(initializedNeuralNetwork);
 				// Calculate the errorvector 
 				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, *activationOrder);
 				
@@ -100,25 +104,25 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				int edgeCounter = 0;
 
 				// Adjust all layers except the first one
-				for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
+				for (int l = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
 				{			
 					// Go through all neurons in this layer
-					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
 					int neuronsInLayerCount = neuronsInLayer->size();
 					for (int n = 0; n < neuronsInLayer->size(); n++)
 					{
-						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1 || n + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
+						if (l == dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1 || n + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
 						{
 							// Let the algorithm do some work for the actual neuron
-							initializeNeuronWeightCalculation(dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]), lessonIndex, l, n, dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
+							initializeNeuronWeightCalculation(dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]), lessonIndex, l, n, dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
 
-							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]))->getAfferentEdges();
+							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]))->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
 							int edgeIndex = 0;
-							for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
+							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
 							{			
 								// Calculate the deltaWeight
-								float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
+								float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errorvector.get());
 
 								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
  								if (options->offlineLearning)
@@ -129,6 +133,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						}
 					}
 				}
+
+				doCalculationAfterTeachingLesson(initializedNeuralNetwork);
 			}
 
 			// If offline learning is activated, adjust all weights
@@ -137,32 +143,32 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				// Create a edgeCounter
 				int edgeCounter = 0;
 
-				// Adjust the last and the second last layer
-				for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
+				// Adjust the every layer
+				for (int l = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
 				{
 					// Go through all neurons in this layer
-					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
 					int neuronsInLayerCount = neuronsInLayer->size();
 					int neuronIndex = 0;
 					for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
 					{						
 						// If its the last layer
-						if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1)
+						if (l == dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1)
 						{							
-							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
-							for (std::vector<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 							{	
 								// Adjust the weight depending on the sum of all calculated gradients
 								adjustWeight(*edge, offlineLearningWeights[edgeCounter++] / offlineLearningWeights.size());							
 							}							
 						}
-						else if (neuronIndex + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the second last layer and not a BiasNeuron
+						else if (neuronIndex + 1 < neuronsInLayerCount || !dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the second last layer and not a BiasNeuron
 						{
-							std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
 							
 							// Go through all afferentEdges of the actual neuron
-							for (std::vector<Edge*>::iterator afferentEdge = afferentEdges->begin(); afferentEdge != afferentEdges->end(); afferentEdge++)
+							for (std::list<Edge*>::iterator afferentEdge = afferentEdges->begin(); afferentEdge != afferentEdges->end(); afferentEdge++)
 							{				
 								// Adjust the weight depending on the sum of all calculated gradients
 								adjustWeight(*afferentEdge, offlineLearningWeights[edgeCounter++] / offlineLearningWeights.size());
@@ -182,6 +188,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 		else
 			std::cout << "All tries failed => stop learning" << std::endl;
 	}
+	
+	doCalculationAfterLearningProcess(initializedNeuralNetwork, teacher);
+
 	// Return if learning was successful
 	return (totalError <= options->totalErrorGoal);
 }
