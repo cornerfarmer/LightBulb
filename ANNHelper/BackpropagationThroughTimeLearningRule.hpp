@@ -44,6 +44,8 @@ protected:
 	NeuralNetwork* initializeNeuralNetwork(NeuralNetwork &neuralNetwork);
 	void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher);
 	void initializeTeachingLesson(NeuralNetwork &neuralNetwork);
+	Teacher* initializeTeacher(Teacher &teacher);
+	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	BackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_);
 };

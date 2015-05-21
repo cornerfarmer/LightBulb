@@ -239,7 +239,7 @@ void doRecurrentNetworkTest()
 	networkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	networkOptions.neuronsPerLayerCount[0]=1;
 	networkOptions.neuronsPerLayerCount[1]=3;
-	networkOptions.neuronsPerLayerCount[2]=1;
+	networkOptions.neuronsPerLayerCount[2]=2;
 	networkOptions.useBiasNeurons = true;
 	networkOptions.connectOutputWithInnerNeurons = true;
 	RecurrentNetwork* recurrentNetwork = new RecurrentNetwork(networkOptions);
@@ -249,23 +249,24 @@ void doRecurrentNetworkTest()
 	BackpropagationThroughTimeLearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 100;
-	options.maxTotalErrorValue = 4;
+	options.maxTotalErrorValue = 1;
 	options.minIterationsPerTry = 3000;
-	options.maxIterationsPerTry = 1000000;
+	options.maxIterationsPerTry = 10000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
+	options.momentum = 0;
 	options.maxTimeSteps = 2;
 	BackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
 	
-	for (int i=0;i<=10;i++)
+	for (int i=0;i<4;i++)
 	{
 		NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-		std::vector<bool>* teachingInput= new std::vector<bool>(1);
+		std::vector<bool>* teachingInput= new std::vector<bool>(2);
 
 		int lastPattern = -1;
 		for (int l = 0; l < 2; l++)
@@ -273,10 +274,11 @@ void doRecurrentNetworkTest()
 			if (l != 0)
 				lastPattern = teachingPattern->back()[0];
 			teachingPattern->push_back(std::vector<float>(1));
-			teachingPattern->back()[0] = (int)((float)rand() / (RAND_MAX + 1) * 2);				
+			teachingPattern->back()[0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));				
 		}
 
 		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	
+		(*teachingInput)[1] = teachingPattern->back()[0];	
 		
 		//(*teachingInput)[0] = (i > l);	
 		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
@@ -285,6 +287,18 @@ void doRecurrentNetworkTest()
 	}
 
 	learningRule.doLearning(neuralNetwork, teacher);
+
+	
+	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
+
+	NeuralNetworkIO teachingPattern;
+
+	teachingPattern.push_back(std::vector<float>(1));
+	teachingPattern.back()[0] = 0;		
+	teachingPattern.push_back(std::vector<float>(1));
+	teachingPattern.back()[0] = 1;		
+
+	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(teachingPattern, TopologicalOrder());
 }
 
 int main()

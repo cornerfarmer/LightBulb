@@ -17,3 +17,9 @@ NeuralNetworkIO* TeachingLessonLinearInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }
+
+AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
+{
+	TeachingLessonLinearInput* unfoldedTeachingLesson = new TeachingLessonLinearInput(teachingPattern->unfold() ,new std::vector<float>(*teachingInput));
+	return unfoldedTeachingLesson;
+}

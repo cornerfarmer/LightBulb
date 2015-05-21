@@ -52,7 +52,7 @@ std::unique_ptr<LayeredNetwork> RecurrentNetwork::unfold(int instanceCount)
 		layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(instanceCount * (getLayerCount() - 1) + 1);
 
 		// Set neuron count of the first layer to: original input neuron count * instanceCount
-		layeredNetworkOptions.neuronsPerLayerCount[0] = options->neuronsPerLayerCount[0] * instanceCount;
+		layeredNetworkOptions.neuronsPerLayerCount[0] = options->neuronsPerLayerCount[0] * instanceCount + options->neuronsPerLayerCount.back();
 		// Go through all other layers
 		for(int i = 0; i < layeredNetworkOptions.neuronsPerLayerCount.size() - 1; i++)
 		{
@@ -66,7 +66,7 @@ std::unique_ptr<LayeredNetwork> RecurrentNetwork::unfold(int instanceCount)
 		// Extract all input neurons
 		std::vector<AbstractNeuron*>* inputNeurons = unfoldedNetwork->getInputNeurons();	
 		// Go through all input neurons that are not in the original network
-		for (int i = options->neuronsPerLayerCount[0]; i < inputNeurons->size() - 1; i++)
+		for (int i = 0; i < inputNeurons->size() - 1 - options->neuronsPerLayerCount.back(); i++)
 		{
 			// Extract the neurons of the layer to which this input neuron should be connected
 			std::vector<AbstractNeuron*>* layerToConnect = unfoldedNetwork->getNeuronsInLayer((i / options->neuronsPerLayerCount[0] - 1) * (getLayerCount() - 1) + getLayerCount());
@@ -81,7 +81,7 @@ std::unique_ptr<LayeredNetwork> RecurrentNetwork::unfold(int instanceCount)
 				dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->pop_back();
 				// Set the edge to the corresponding neuron
 				(*edge)->setNextNeuron(dynamic_cast<StandardNeuron*>(*neuronToConnect));
-				dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->push_front(*edge);
+				dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->push_front(*edge);				
 			}
 		}
 

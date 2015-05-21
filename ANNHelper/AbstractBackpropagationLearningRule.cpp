@@ -40,8 +40,7 @@ float AbstractBackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* ed
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
 		float gradient = -1 * edge->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[layerIndex][neuronIndex];	
-		if (gradient == std::numeric_limits<double>::infinity())
-			gradient = gradient;
+
 		return gradient;
 	}
 	else if (neuronIndex + 1 < neuronsInLayerCount) // If its not the last layer and not a BiasNeuron
@@ -49,11 +48,10 @@ float AbstractBackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* ed
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
 		float gradient = -1 * edge->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[layerIndex][neuronIndex];
-								
-		if (gradient == std::numeric_limits<double>::infinity())
-			gradient = gradient;
+	
 		return gradient;
 	}	
+
 	return 0;
 }
 
@@ -82,8 +80,8 @@ void AbstractBackpropagationLearningRule::initializeNeuronWeightCalculation(Stan
 
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
 		deltaVectorOutputLayer[layerIndex][neuronIndex] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor;					
-		if (deltaVectorOutputLayer[layerIndex][neuronIndex] == std::numeric_limits<double>::infinity())
-			layerIndex = layerIndex;
+		if (deltaVectorOutputLayer[layerIndex][neuronIndex] > 10)
+			deltaVectorOutputLayer[layerIndex][neuronIndex] = deltaVectorOutputLayer[layerIndex][neuronIndex];		
 	}	
 }
 

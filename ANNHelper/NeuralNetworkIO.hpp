@@ -13,7 +13,8 @@
 // This class contains all stuff needed to describe a NeuralNetwork
 class NeuralNetworkIO : public std::list<std::vector<float>>
 {
-
+public:
+	NeuralNetworkIO* unfold();
 };
 
 #endif

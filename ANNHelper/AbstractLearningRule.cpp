@@ -57,7 +57,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 		int iteration = 0;
 		// Do while the totalError is not zero
-		while ((totalError = initializedTeacher.getTotalError(neuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry )
+		while ((totalError = initializedTeacher.getTotalError(initializedNeuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry )
 		{			
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
@@ -98,7 +98,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			{
 				initializeTeachingLesson(initializedNeuralNetwork);
 				// Calculate the errorvector 
-				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(neuralNetwork, *activationOrder);
+				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(initializedNeuralNetwork, *activationOrder);
 				
 				// Create a edgeCounter, which will be used in offline learning
 				int edgeCounter = 0;
@@ -189,7 +189,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			std::cout << "All tries failed => stop learning" << std::endl;
 	}
 	
-	doCalculationAfterLearningProcess(initializedNeuralNetwork, teacher);
+	doCalculationAfterLearningProcess(initializedNeuralNetwork, initializedTeacher);
 
 	// Return if learning was successful
 	return (totalError <= options->totalErrorGoal);

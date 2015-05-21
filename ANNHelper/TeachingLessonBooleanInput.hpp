@@ -26,6 +26,7 @@ protected:
 	NeuralNetworkIO* getTeachingPattern();
 public:
 	TeachingLessonBooleanInput(NeuralNetworkIO* teachingPattern_, std::vector<bool>* teachingInput_);
+	AbstractTeachingLesson* unfold();
 };
 
 #endif

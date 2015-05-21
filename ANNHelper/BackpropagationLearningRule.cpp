@@ -46,8 +46,6 @@ float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradie
 		// Set this to the delta weight
 		deltaWeight = (*previousDeltaWeights)[edgeIndex];
 
-		if ((*previousDeltaWeights)[edgeIndex] == std::numeric_limits<double>::infinity())
-			edgeIndex = edgeIndex;
 		// Increase the edge counter
 		edgeIndex++;
 		edgeIndex %= previousDeltaWeights->size();

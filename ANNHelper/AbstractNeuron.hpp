@@ -27,7 +27,7 @@ public:
 	// Recalculate the activation of the neuron
 	virtual void refreshActivation() = 0;
 	std::list<Edge*>* getEfferentEdges();
-	void resetActivation();
+	virtual void resetActivation();
 };
 
 #endif

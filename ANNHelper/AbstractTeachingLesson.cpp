@@ -24,7 +24,7 @@ std::unique_ptr<std::vector<float>> AbstractTeachingLesson::getErrorvector(Neura
 	// Calculate the error values (expected value - real value)
 	for (int i = 0; i < teachingInput->size(); i++)
 	{
-		(*errorVector)[i] = (*teachingInput)[i] - outputVector->front()[i];
+		(*errorVector)[i] = (*teachingInput)[i] - outputVector->back()[i];
 	}
 
 	return errorVector;

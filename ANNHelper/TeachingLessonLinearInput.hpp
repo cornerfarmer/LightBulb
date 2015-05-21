@@ -24,6 +24,7 @@ protected:
 	NeuralNetworkIO* getTeachingPattern();
 public:
 	TeachingLessonLinearInput(NeuralNetworkIO* teachingPattern_, std::vector<float>* teachingInput_);
+	AbstractTeachingLesson* unfold();
 };
 
 #endif
