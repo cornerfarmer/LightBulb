@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="8b1b80e2-cc71-4c3f-868f-dabfce05880b"
   name="ClusterAnalysis" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -15,15 +15,26 @@
     <packageHasNamedElement>
       <class
         Id="db53252e-507d-461e-b2fa-4feac7d7dfb9"
-        name="K-MeansClustering"
+        name="KMeansClustering"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="34e6fade-056d-4989-9d54-144fe0491d26"
+            isSubstitutable="false">
+            <classMoniker
+              Id="8be5e95d-54c6-402d-815a-f9ccd850fbb3"
+              LastKnownName="AbstractClustering"
+              LastKnownLocation="Package_2116.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="b05b20c6-26c3-4eb7-aec1-55695fafdd65"
-        name="K-MeansRBFNeuronPlacer"
+        name="KMeansRBFNeuronPlacer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -47,7 +58,7 @@
             isAbstract="false">
             <classMoniker
               Id="db53252e-507d-461e-b2fa-4feac7d7dfb9"
-              LastKnownName="K-MeansClustering"
+              LastKnownName="KMeansClustering"
               LastKnownLocation="Package_2116.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -94,15 +105,26 @@
     <packageHasNamedElement>
       <class
         Id="352c9c8a-b50d-4777-b256-7cb6a9ceeeaa"
-        name="K-NearestClustering"
+        name="KNearestClustering"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="758edb71-a048-46b4-8a5b-63ff7d1f7b6e"
+            isSubstitutable="false">
+            <classMoniker
+              Id="8be5e95d-54c6-402d-815a-f9ccd850fbb3"
+              LastKnownName="AbstractClustering"
+              LastKnownLocation="Package_2116.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="ca7a1a58-4f3d-453f-9617-0938ceb356a8"
-        name="K-NearestRBFNeuronPlacer"
+        name="KNearestRBFNeuronPlacer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -126,7 +148,7 @@
             isAbstract="false">
             <classMoniker
               Id="352c9c8a-b50d-4777-b256-7cb6a9ceeeaa"
-              LastKnownName="K-NearestClustering"
+              LastKnownName="KNearestClustering"
               LastKnownLocation="Package_2116.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -173,15 +195,26 @@
     <packageHasNamedElement>
       <class
         Id="1cffa5e6-d9fd-45e9-b9e7-3d301b85fe9c"
-        name="Epsilon-NearestClustering"
+        name="ENearestClustering"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="d882b514-af90-4b5d-a617-03c703246c9b"
+            isSubstitutable="false">
+            <classMoniker
+              Id="8be5e95d-54c6-402d-815a-f9ccd850fbb3"
+              LastKnownName="AbstractClustering"
+              LastKnownLocation="Package_2116.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
         Id="2e88876a-63a1-4d1a-b843-f23125b40fef"
-        name="Epsilon-NearestRBFNeuronPlacer"
+        name="ENearestRBFNeuronPlacer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -205,7 +238,7 @@
             isAbstract="false">
             <classMoniker
               Id="1cffa5e6-d9fd-45e9-b9e7-3d301b85fe9c"
-              LastKnownName="Epsilon-NearestClustering"
+              LastKnownName="ENearestClustering"
               LastKnownLocation="Package_2116.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -252,6 +285,14 @@
     <packageHasNamedElement>
       <class
         Id="45c25a75-d112-49b6-8703-d45c79f7f681"
+        name="AbstractClustering"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8be5e95d-54c6-402d-815a-f9ccd850fbb3"
         name="AbstractClustering"
         isAbstract="false"
         isLeaf="false"
