@@ -224,11 +224,11 @@
     <ClInclude Include="NeuralNetworkIO.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
-    <ClInclude Include="RecurrentNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
     <ClInclude Include="BackpropagationThroughTimeLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="RecurrentLayeredNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -418,11 +418,11 @@
     <ClCompile Include="NeuralNetworkIO.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClCompile>
-    <ClCompile Include="RecurrentNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
     <ClCompile Include="BackpropagationThroughTimeLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="RecurrentLayeredNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

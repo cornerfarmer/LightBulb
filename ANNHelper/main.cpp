@@ -32,7 +32,7 @@
 #include "RBFNetworkStructureChart.hpp"
 #include "ROLFNeuronPlacer.hpp"
 #include "NeuralNetworkIO.hpp"
-#include "RecurrentNetwork.hpp"
+#include "RecurrentLayeredNetwork.hpp"
 #include "BackpropagationThroughTimeLearningRule.hpp"
 
 void doPerceptronTest()
@@ -231,9 +231,9 @@ void doRBFTest()
 
 }
 
-void doRecurrentNetworkTest()
+void doRecurrentLayeredNetworkTest()
 {
-	RecurrentNetworkOptions networkOptions;
+	RecurrentLayeredNetworkOptions networkOptions;
 	networkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(), 
 																	new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
 	networkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
@@ -242,7 +242,7 @@ void doRecurrentNetworkTest()
 	networkOptions.neuronsPerLayerCount[2]=2;
 	networkOptions.useBiasNeurons = true;
 	networkOptions.connectOutputWithInnerNeurons = true;
-	RecurrentNetwork* recurrentNetwork = new RecurrentNetwork(networkOptions);
+	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
 
 	NeuralNetwork neuralNetwork(recurrentNetwork);
 
@@ -303,6 +303,6 @@ void doRecurrentNetworkTest()
 
 int main()
 {
-	doRecurrentNetworkTest();
+	doRecurrentLayeredNetworkTest();
     return 0;
 }

@@ -1,13 +1,13 @@
-#include "RecurrentNetwork.hpp"
+#include "RecurrentLayeredNetwork.hpp"
 #include "StandardNeuron.hpp"
 #include "AbstractNeuron.hpp"
 #include "Edge.hpp"
 #include <list>
 
-RecurrentNetwork::RecurrentNetwork(RecurrentNetworkOptions& options_)
+RecurrentLayeredNetwork::RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_)
 {
 	// Copy all options
-	options.reset(new RecurrentNetworkOptions(options_));
+	options.reset(new RecurrentLayeredNetworkOptions(options_));
 
 	// Build the network
 	buildNetwork();
@@ -16,7 +16,7 @@ RecurrentNetwork::RecurrentNetwork(RecurrentNetworkOptions& options_)
 	buildRecurrentConnections();
 }
 
-void RecurrentNetwork::buildRecurrentConnections()
+void RecurrentLayeredNetwork::buildRecurrentConnections()
 {
 	// If we should connect ouput neurons with input neurons
 	if (getOptions()->connectOutputWithInnerNeurons)
@@ -36,12 +36,12 @@ void RecurrentNetwork::buildRecurrentConnections()
 	}
 }
 
-RecurrentNetworkOptions* RecurrentNetwork::getOptions()
+RecurrentLayeredNetworkOptions* RecurrentLayeredNetwork::getOptions()
 {
-	return static_cast<RecurrentNetworkOptions*>(options.get());
+	return static_cast<RecurrentLayeredNetworkOptions*>(options.get());
 }
 
-std::unique_ptr<LayeredNetwork> RecurrentNetwork::unfold(int instanceCount)
+std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount)
 {
 	// If ouput neurons are connected with input neurons
 	if (getOptions()->connectOutputWithInnerNeurons)

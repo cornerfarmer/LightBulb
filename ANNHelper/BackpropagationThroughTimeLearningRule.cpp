@@ -3,7 +3,7 @@
 #include "TopologicalOrder.hpp"
 #include "AbstractTeachingLesson.hpp"
 #include "NeuralNetwork.hpp"
-#include "RecurrentNetwork.hpp"
+#include "RecurrentLayeredNetwork.hpp"
 #include "AbstractNeuron.hpp"
 #include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
@@ -19,7 +19,7 @@ BackpropagationThroughTimeLearningRule::BackpropagationThroughTimeLearningRule(B
 NeuralNetwork* BackpropagationThroughTimeLearningRule::initializeNeuralNetwork(NeuralNetwork &neuralNetwork)
 {
 	originalNeuralNetwork = &neuralNetwork;
-	return new NeuralNetwork(dynamic_cast<RecurrentNetwork*>(neuralNetwork.getNetworkTopology())->unfold(getOptions()->maxTimeSteps).release());
+	return new NeuralNetwork(dynamic_cast<RecurrentLayeredNetwork*>(neuralNetwork.getNetworkTopology())->unfold(getOptions()->maxTimeSteps).release());
 }
 
 Teacher* BackpropagationThroughTimeLearningRule::initializeTeacher(Teacher &teacher)
