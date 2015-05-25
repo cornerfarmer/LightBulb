@@ -57,19 +57,15 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterTeachingLesson(Ne
 	{
 		std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
 		// Go through all neurons
-		int neuronIndex = 0;
-		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++, neuronIndex++)
+		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 		{
-			if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1 || neuronIndex + 1 < neuronsInLayer->size() || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
-			{
-				std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-				// Go through all afferentEdges of the actual neuron
-				for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
-				{	
-					(*edge)->setWeight((*edge)->getWeight() + deltaWeightSums[edgeIndex] / getOptions()->maxTimeSteps);			
-					edgeIndex++;
-					edgeIndex %= deltaWeightSums.size();
-				}
+			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+			// Go through all afferentEdges of the actual neuron
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+			{	
+				(*edge)->setWeight((*edge)->getWeight() + deltaWeightSums[edgeIndex] / getOptions()->maxTimeSteps);			
+				edgeIndex++;
+				edgeIndex %= deltaWeightSums.size();
 			}
 		}
 	}
@@ -88,16 +84,13 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterLearningProcess(N
 		std::vector<AbstractNeuron*>::iterator neuronOriginal = neuronsInLayerOriginal->begin();
 		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end() && neuronOriginal != neuronsInLayerOriginal->end(); neuron++, neuronOriginal++, neuronIndex++)
 		{
-			if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1 || neuronIndex + 1 < neuronsInLayer->size() || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
-			{
-				std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-				std::list<Edge*>* afferentEdgesOriginal = (dynamic_cast<StandardNeuron*>(*neuronOriginal))->getAfferentEdges();
-				// Go through all afferentEdges of the actual neuron
-				std::list<Edge*>::iterator edgeOriginal = afferentEdgesOriginal->begin();
-				for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeOriginal++)
-				{	
-					(*edgeOriginal)->setWeight((*edge)->getWeight());
-				}
+			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+			std::list<Edge*>* afferentEdgesOriginal = (dynamic_cast<StandardNeuron*>(*neuronOriginal))->getAfferentEdges();
+			// Go through all afferentEdges of the actual neuron
+			std::list<Edge*>::iterator edgeOriginal = afferentEdgesOriginal->begin();
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeOriginal++)
+			{	
+				(*edgeOriginal)->setWeight((*edge)->getWeight());
 			}
 		}
 
@@ -133,16 +126,13 @@ void BackpropagationThroughTimeLearningRule::initializeTry(NeuralNetwork &neural
 		std::vector<AbstractNeuron*>::iterator neuronOriginal = neuronsInLayerOriginal->begin();
 		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end() && neuronOriginal != neuronsInLayerOriginal->end(); neuron++, neuronOriginal++, neuronIndex++)
 		{
-			if (l == dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1 || neuronIndex + 1 < neuronsInLayer->size() || !dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->usesBiasNeurons()) // If its the last layer or a BiasNeuron
-			{
-				std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-				std::list<Edge*>* afferentEdgesOriginal = (dynamic_cast<StandardNeuron*>(*neuronOriginal))->getAfferentEdges();
-				// Go through all afferentEdges of the actual neuron
-				std::list<Edge*>::iterator edgeOriginal = afferentEdgesOriginal->begin();
-				for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeOriginal++)
-				{	
-					(*edge)->setWeight((*edgeOriginal)->getWeight());
-				}
+			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+			std::list<Edge*>* afferentEdgesOriginal = (dynamic_cast<StandardNeuron*>(*neuronOriginal))->getAfferentEdges();
+			// Go through all afferentEdges of the actual neuron
+			std::list<Edge*>::iterator edgeOriginal = afferentEdgesOriginal->begin();
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeOriginal++)
+			{	
+				(*edge)->setWeight((*edgeOriginal)->getWeight());
 			}
 		}
 

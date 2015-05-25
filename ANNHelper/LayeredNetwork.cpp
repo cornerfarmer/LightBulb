@@ -11,7 +11,7 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 	enableShortcuts = false;
 	neuronFactory = NULL;
 	neuronsPerLayerCount = std::vector<unsigned int>();
-	useBiasNeurons = false;
+	useBiasNeuron = false;
 }
 
 LayeredNetworkOptions::~LayeredNetworkOptions()
@@ -77,10 +77,6 @@ void LayeredNetwork::buildNetwork()
 		{
 			addNeuronIntoLayer(l);
 		}		
-
-		// If BiasNeurons are used, insert them in every layer except of the last one
-		if (options->useBiasNeurons && l < options->neuronsPerLayerCount.size() - 1)
-			neurons.back().push_back(new BiasNeuron());
 	}
 
 }
@@ -111,6 +107,11 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex)
 		{
 			newNeuron->addPrevNeuron(*prevNeuron, 1);
 		}
+
+		// If bias neuron is used add a edge to it
+		if (options->useBiasNeuron)
+			newNeuron->addPrevNeuron(&biasNeuron, 1);
+
 		return newNeuron;
 	}
 }
@@ -166,6 +167,20 @@ void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 			}
 		}
 	}
+
+	// If a bias neuron is used also randomize its weights
+	if (options->useBiasNeuron)
+	{
+		// Go through all effernetEdges of the bias neuron
+		std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
+		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+		{
+			do{
+				// Set the weight to a new random value
+				(*edge)->setWeight((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+			} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
+		}		
+	}
 }
 
 int LayeredNetwork::getEdgeCount()
@@ -182,12 +197,15 @@ int LayeredNetwork::getEdgeCount()
 		}
 	}
 
+	// If a bias neuron is used add also its efferent edges
+	edgeCounter += biasNeuron.getEfferentEdges()->size();
+
 	return edgeCounter;
 }
 
-bool LayeredNetwork::usesBiasNeurons()
+bool LayeredNetwork::usesBiasNeuron()
 {
-	return options->useBiasNeurons;
+	return options->useBiasNeuron;
 }
 
 void LayeredNetwork::resetActivation()

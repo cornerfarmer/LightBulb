@@ -6,10 +6,10 @@
 // Libary includes
 #include <vector>
 
-
 // Includes
 #include "AbstractNetworkTopology.hpp"
 #include "AbstractNeuron.hpp"
+#include "BiasNeuron.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;
@@ -19,7 +19,7 @@ struct LayeredNetworkOptions
 {	
 	AbstractNeuronFactory* neuronFactory;
 	bool enableShortcuts;
-	bool useBiasNeurons;
+	bool useBiasNeuron;
 	std::vector<unsigned int> neuronsPerLayerCount;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
@@ -34,6 +34,7 @@ class LayeredNetwork : public AbstractNetworkTopology
 protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
 	std::vector<std::vector<AbstractNeuron*>> neurons;
+	BiasNeuron biasNeuron;
 	void LayeredNetwork::buildNetwork();	
 public:
 	~LayeredNetwork();
@@ -54,7 +55,7 @@ public:
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex);
 	// Calculates the Edge count
 	int getEdgeCount();
-	bool usesBiasNeurons();
+	bool usesBiasNeuron();
 	void resetActivation();
 };
 

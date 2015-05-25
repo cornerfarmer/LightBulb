@@ -43,7 +43,7 @@ float AbstractBackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* ed
 
 		return gradient;
 	}
-	else if (neuronIndex + 1 < neuronsInLayerCount) // If its not the last layer and not a BiasNeuron
+	else
 	{		
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue

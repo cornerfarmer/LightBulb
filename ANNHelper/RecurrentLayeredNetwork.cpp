@@ -25,15 +25,13 @@ void RecurrentLayeredNetwork::buildRecurrentConnections()
 		for (std::vector<AbstractNeuron*>::iterator outputNeuron = neurons.back().begin(); outputNeuron != neurons.back().end(); outputNeuron++)
 		{
 			// Go through all neurons in the first inner layer
-			int innerNeuronIndex = 0;
-			for (std::vector<AbstractNeuron*>::iterator innerNeuron = getNeuronsInLayer(1)->begin(); innerNeuron != getNeuronsInLayer(1)->end(); innerNeuron++, innerNeuronIndex++)
+			for (std::vector<AbstractNeuron*>::iterator innerNeuron = getNeuronsInLayer(1)->begin(); innerNeuron != getNeuronsInLayer(1)->end(); innerNeuron++)
 			{
-				// If this is no bias neuron
-				if (innerNeuronIndex + 1 < getNeuronsInLayer(1)->size() || !options->useBiasNeurons)
-					(*outputNeuron)->addNextNeuron(dynamic_cast<StandardNeuron*>(*innerNeuron), 1); // Add a connection from the output to the inner neuron
+				(*outputNeuron)->addNextNeuron(dynamic_cast<StandardNeuron*>(*innerNeuron), 1); // Add a connection from the output to the inner neuron
 			}
 		}
 	}
+
 }
 
 RecurrentLayeredNetworkOptions* RecurrentLayeredNetwork::getOptions()
@@ -66,7 +64,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 		// Extract all input neurons
 		std::vector<AbstractNeuron*>* inputNeurons = unfoldedNetwork->getInputNeurons();	
 		// Go through all input neurons that are not in the original network
-		for (int i = 0; i < inputNeurons->size() - 1 - options->neuronsPerLayerCount.back(); i++)
+		for (int i = 0; i < inputNeurons->size() - options->neuronsPerLayerCount.back(); i++)
 		{
 			// Extract the neurons of the layer to which this input neuron should be connected
 			std::vector<AbstractNeuron*>* layerToConnect = unfoldedNetwork->getNeuronsInLayer((i / options->neuronsPerLayerCount[0] - 1) * (getLayerCount() - 1) + getLayerCount());

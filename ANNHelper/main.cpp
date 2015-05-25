@@ -44,7 +44,7 @@ void doPerceptronTest()
 	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
 	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
-	layeredNetworkOptions.useBiasNeurons = true;
+	layeredNetworkOptions.useBiasNeuron = true;
 
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
 
@@ -66,7 +66,6 @@ void doPerceptronTest()
 	Teacher teacher;
 	for (int i=0;i<8;i+=1)
 	{
-	
 		for (int l=0;l<8;l+=1)
 		{			
 			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
@@ -79,7 +78,6 @@ void doPerceptronTest()
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
-		
 	}
 
 	for (float i=0;i<1;i+=0.2)
@@ -240,7 +238,7 @@ void doRecurrentLayeredNetworkTest()
 	networkOptions.neuronsPerLayerCount[0]=1;
 	networkOptions.neuronsPerLayerCount[1]=3;
 	networkOptions.neuronsPerLayerCount[2]=2;
-	networkOptions.useBiasNeurons = true;
+	networkOptions.useBiasNeuron = true;
 	networkOptions.connectOutputWithInnerNeurons = true;
 	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
 
