@@ -18,14 +18,14 @@ Thumbs.db
 *.ilk
 *.log
 [Bb]in
-[Dd]ebug*/
 *.lib
 *.sbr
 obj/
-[Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
 ANNHelper.sdf
 ANNHelper.opensdf
+ANNHelper/Debug/
+ANNHelper/Release/
