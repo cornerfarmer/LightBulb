@@ -34,9 +34,7 @@ class AbstractBackpropagationLearningRule : public AbstractLearningRule
 private:	
 	// This vector should hold all delta values
 	std::vector<std::vector<float>> deltaVectorOutputLayer;
-protected:	
-	// This method can be used to do some extra initalization stuff
-	virtual void initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
+protected:		
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	AbstractBackpropagationLearningRuleOptions* getOptions();
 	// Inherited:	

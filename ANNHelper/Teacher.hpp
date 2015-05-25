@@ -28,6 +28,7 @@ public:
 	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons();
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
 	float getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	std::unique_ptr<Teacher> unfold();
 };
 
 #endif

@@ -14,6 +14,7 @@ public:
 	BiasNeuron();
 	// Sets its activation always to 1
 	void refreshActivation();
+	void resetActivation() {};
 };
 
 #endif

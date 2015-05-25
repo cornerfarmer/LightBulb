@@ -35,3 +35,9 @@ NeuralNetworkIO* TeachingLessonBooleanInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }
+
+AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
+{
+	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold() ,new std::vector<bool>(*teachingInput));
+	return unfoldedTeachingLesson;
+}

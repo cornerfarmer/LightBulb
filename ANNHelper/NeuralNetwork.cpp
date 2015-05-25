@@ -19,6 +19,8 @@ std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input
 {
 	std::unique_ptr<NeuralNetworkIO> output(new NeuralNetworkIO());
 
+	networkTopology->resetActivation();
+
 	for (NeuralNetworkIO::iterator singleInput = input.begin(); singleInput != input.end(); singleInput++)
 	{
 		setInput(*singleInput);

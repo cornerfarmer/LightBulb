@@ -15,7 +15,7 @@ class EuclideanDistance : public AbstractInputFunction
 private:
 public:
 	// Calculates sqrt( Σ (output - center)^2 )
-	float execute(std::vector<Edge*> &input, AbstractThreshold* threshold);
+	float execute(std::list<Edge*> &input, AbstractThreshold* threshold);
 	AbstractInputFunction* getInputFunctionCopy();
 };
 

@@ -39,12 +39,14 @@ private:
 protected:
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
+	float calculateDeltaWeight(Edge* edge, float gradient);
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
-	void initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions options_);
+	BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_);
 };
 
 #endif

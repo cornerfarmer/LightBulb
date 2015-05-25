@@ -4,7 +4,7 @@
 
 AbstractNeuron::~AbstractNeuron()
 {
-	for (std::vector<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
+	for (std::list<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
 	{
 		delete(*edge);
 	}
@@ -37,7 +37,12 @@ float AbstractNeuron::getActivation()
 	return activation;
 }
 
-std::vector<Edge*>* AbstractNeuron::getEfferentEdges()
+std::list<Edge*>* AbstractNeuron::getEfferentEdges()
 {
 	return &efferentEdges;
+}
+
+void AbstractNeuron::resetActivation()
+{
+	activation = 0;
 }

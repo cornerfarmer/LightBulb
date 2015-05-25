@@ -55,6 +55,7 @@ public:
 	// Calculates the Edge count
 	int getEdgeCount();
 	bool usesBiasNeurons();
+	void resetActivation();
 };
 
 #endif

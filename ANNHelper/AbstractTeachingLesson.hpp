@@ -30,6 +30,8 @@ public:
 	float getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the specific error
 	float getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+
+	virtual AbstractTeachingLesson* unfold() = 0;
 };
 
 #endif

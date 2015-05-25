@@ -35,8 +35,8 @@ void RBFNetwork::randomizeWeights(float randStart, float randEnd)
 	for (std::vector<AbstractNeuron*>::iterator neuron = getNeuronsInLayer(1)->begin(); neuron != getNeuronsInLayer(1)->end(); neuron++)
 	{
 		// Go through all effernetEdges of this neuron
-		std::vector<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-		for (std::vector<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+		std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
+		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 		{
 			do{
 				// Set the weight to a new random value

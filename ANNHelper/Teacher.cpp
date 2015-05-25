@@ -41,3 +41,13 @@ float Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrd
 
 	return totalError;
 }
+
+std::unique_ptr<Teacher> Teacher::unfold()
+{
+	std::unique_ptr<Teacher> unfoldedTeacher(new Teacher());
+	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
+	{
+		unfoldedTeacher->addTeachingLesson((*originalTeachingLesson)->unfold());
+	}
+	return unfoldedTeacher;
+}

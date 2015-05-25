@@ -23,7 +23,7 @@ private:
 	AbstractInputFunction* inputFunction;
 	AbstractActivationFunction* activationFunction;
 	AbstractOutputFunction* outputFunction;
-	std::vector<Edge*> afferentEdges;
+	std::list<Edge*> afferentEdges;
 public:
 	~StandardNeuron();
 	StandardNeuron(AbstractThreshold* threshold_, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
@@ -36,7 +36,7 @@ public:
 	void refreshActivation();
 	// Calculates the value of the activation function derivation 
 	float executeDerivationOnActivationFunction(float input);
-	std::vector<Edge*>* getAfferentEdges();
+	std::list<Edge*>* getAfferentEdges();
 	float getNetInput();
 	AbstractActivationFunction* getActivationFunction();
 	AbstractThreshold* getThreshold();

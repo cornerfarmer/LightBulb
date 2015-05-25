@@ -30,9 +30,6 @@ void AbstractBackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwo
 	{
 		deltaVectorOutputLayer.push_back(std::vector<float>((*layer).size()));
 	}	
-
-	// Let the special backpropagation algorithm also do some work
-	initializeBackpropagationLearningAlgorithm(neuralNetwork, teacher);
 }
 
 float AbstractBackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
@@ -51,9 +48,10 @@ float AbstractBackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* ed
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
 		float gradient = -1 * edge->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[layerIndex][neuronIndex];
-								
+	
 		return gradient;
 	}	
+
 	return 0;
 }
 
@@ -67,21 +65,23 @@ void AbstractBackpropagationLearningRule::initializeNeuronWeightCalculation(Stan
 	}
 	else
 	{
-		std::vector<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(neuron))->getAfferentEdges();
-		std::vector<Edge*>* efferentEdges = neuron->getEfferentEdges();
+		std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(neuron))->getAfferentEdges();
+		std::list<Edge*>* efferentEdges = neuron->getEfferentEdges();
 
 		// Calc the nextLayerErrorValueFactor
 		float nextLayerErrorValueFactor = 0;
 
 		// Go through all efferentEdges of the actual neuron and add to the nextLayerErrorValueFactor: deltaValue * edgeWeight
 		int efferentEdgeIndex = 0;
-		for (std::vector<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++, efferentEdgeIndex++)
+		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++, efferentEdgeIndex++)
 		{
 			nextLayerErrorValueFactor += deltaVectorOutputLayer[layerIndex + 1][efferentEdgeIndex] * (*efferentEdge)->getWeight();
 		}
 
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
 		deltaVectorOutputLayer[layerIndex][neuronIndex] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor;					
+		if (deltaVectorOutputLayer[layerIndex][neuronIndex] > 10)
+			deltaVectorOutputLayer[layerIndex][neuronIndex] = deltaVectorOutputLayer[layerIndex][neuronIndex];		
 	}	
 }
 

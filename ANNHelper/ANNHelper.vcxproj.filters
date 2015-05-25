@@ -227,6 +227,9 @@
     <ClInclude Include="RecurrentNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
+    <ClInclude Include="BackpropagationThroughTimeLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -417,6 +420,9 @@
     </ClCompile>
     <ClCompile Include="RecurrentNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="BackpropagationThroughTimeLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -15,8 +15,9 @@ ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(Resil
 	resilientLearningRateHelper.reset(new ResilientLearningRateHelper(getOptions()));
 }
 
-void ResilientBackpropagationLearningRule::initializeBackpropagationLearningAlgorithm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void ResilientBackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
+	AbstractBackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher);
 	resilientLearningRateHelper->initialize(neuralNetwork);
 }
 
