@@ -35,7 +35,8 @@ protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
 	std::vector<std::vector<AbstractNeuron*>> neurons;
 	BiasNeuron biasNeuron;
-	void LayeredNetwork::buildNetwork();	
+	void buildNetwork();	
+	void refreshNeuronsPerLayerCounters();
 public:
 	~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions_t &options_);	
@@ -52,11 +53,13 @@ public:
 	std::vector<std::vector<AbstractNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
-	AbstractNeuron* addNeuronIntoLayer(int layerIndex);
+	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters);
 	// Calculates the Edge count
 	int getEdgeCount();
-	bool usesBiasNeuron();
+	// Reset all activations of all neurons
 	void resetActivation();
+	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
+	void mergeWith(LayeredNetwork& otherNetwork);	 
 };
 
 #endif

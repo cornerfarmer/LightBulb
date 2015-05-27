@@ -86,6 +86,7 @@
     <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="KNearestClustering.cpp" />
     <ClCompile Include="KNearestRBFNeuronPlacer.cpp" />
+    <ClCompile Include="NetworkTopologyDrawer.cpp" />
     <ClCompile Include="NeuralNetworkIO.cpp" />
     <ClCompile Include="PointSet.cpp" />
     <ClCompile Include="RBFNetworkStructureChart.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="KNearestClustering.hpp" />
     <ClInclude Include="KNearestRBFNeuronPlacer.hpp" />
+    <ClInclude Include="NetworkTopologyDrawer.hpp" />
     <ClInclude Include="NeuralNetworkIO.hpp" />
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="PointSet.hpp" />

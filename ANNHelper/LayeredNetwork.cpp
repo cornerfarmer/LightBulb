@@ -75,19 +75,24 @@ void LayeredNetwork::buildNetwork()
 		// Add the neurons to the current layer
 		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
 		{
-			addNeuronIntoLayer(l);
+			addNeuronIntoLayer(l, false);
 		}		
 	}
 
 }
 
-AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex)
+AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters)
 {
 	// If its the first layer, add InputNeurons, else StandardNeurons
 	if (layerIndex == 0)
 	{
 		InputNeuron* newNeuron = options->neuronFactory->createInputNeuron();
 		neurons[layerIndex].push_back(newNeuron);
+
+		// Refresh the neuron counters if needed
+		if (refreshNeuronCounters)
+			options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
+
 		return newNeuron;
 	}
 	else
@@ -111,6 +116,10 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex)
 		// If bias neuron is used add a edge to it
 		if (options->useBiasNeuron)
 			newNeuron->addPrevNeuron(&biasNeuron, 1);
+
+		// Refresh the neuron counters if needed
+		if (refreshNeuronCounters)
+			options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
 
 		return newNeuron;
 	}
@@ -203,11 +212,6 @@ int LayeredNetwork::getEdgeCount()
 	return edgeCounter;
 }
 
-bool LayeredNetwork::usesBiasNeuron()
-{
-	return options->useBiasNeuron;
-}
-
 void LayeredNetwork::resetActivation()
 {
 	// Go through all layers
@@ -218,5 +222,80 @@ void LayeredNetwork::resetActivation()
 		{
 			(*neuron)->resetActivation();
 		}
+	}
+}
+
+void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
+{
+	// If a bias neuron is used in the other network
+	if (otherNetwork.options->useBiasNeuron)
+	{
+		// Go through all efferent edges of the bias neuron of the other network
+		for (std::list<Edge*>::iterator edge = otherNetwork.biasNeuron.getEfferentEdges()->begin(); edge != otherNetwork.biasNeuron.getEfferentEdges()->end(); edge++)
+		{
+			// If the current network also uses a bias neuron
+			if (options->useBiasNeuron)
+			{
+				// Reconnect the edge to the bias neuron of the current network
+				(*edge)->setPrevNeuron(&biasNeuron);
+				// Add the edge to the bias neuron of the current network
+				biasNeuron.addNextNeuron(*edge);
+			}
+			else
+			{
+				// Else just delete the edge from the neuron which is connected with the bias neuron of the other network
+				(*edge)->getNextNeuron()->removeAfferentEdge(*edge);
+			}
+		}
+		// Clear all edges of the bias neuron of the other network, so they won't be deleted
+		otherNetwork.biasNeuron.getEfferentEdges()->clear();		
+	}
+	else
+	{
+		// Else if the other network does not have a bias neuron
+		// Go through all layers
+		for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+		{
+			// Go through all neurons in this layer
+			for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+			{
+				// Add a edge from our bias neuron to the current neuron in the other network
+				biasNeuron.addNextNeuron(static_cast<StandardNeuron*>(*neuron), 1);
+			}
+		}
+	}
+
+	// Insert all input neurons from the otherNetwork into the first layer of this network
+	neurons[0].insert(neurons[0].end(), otherNetwork.neurons[0].begin(), otherNetwork.neurons[0].end());
+
+	// Append every layer (except the first one) from the other network to the layer list of this network
+	for (int l = 1; l < otherNetwork.neurons.size(); l++)
+	{
+		neurons.push_back(otherNetwork.neurons[l]);
+	}
+
+	// Clear all neurons of other network so they won't be deleted
+	otherNetwork.neurons.clear();
+
+	// Refresh the counters
+	refreshNeuronsPerLayerCounters();
+}
+
+void LayeredNetwork::refreshNeuronsPerLayerCounters()
+{
+	// Go through all layers
+	std::vector<unsigned int>::iterator counter = options->neuronsPerLayerCount.begin();
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++, counter++)
+	{
+		// If there are more layers than counters
+		if (counter == options->neuronsPerLayerCount.end())
+		{
+			// Add a counter
+			options->neuronsPerLayerCount.push_back(0);
+			// Set the current counter to the new counter
+			counter = options->neuronsPerLayerCount.end() - 1;
+		}
+		// Set the counter to the current layer size
+		*counter = layer->size();		
 	}
 }

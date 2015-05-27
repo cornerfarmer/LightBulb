@@ -230,6 +230,9 @@
     <ClInclude Include="RecurrentLayeredNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopologyDrawer.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -423,6 +426,9 @@
     </ClCompile>
     <ClCompile Include="RecurrentLayeredNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopologyDrawer.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -30,5 +30,4 @@ public:
 	RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_);		
 	std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount);
 };
-
 #endif

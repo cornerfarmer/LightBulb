@@ -31,7 +31,25 @@ void RecurrentLayeredNetwork::buildRecurrentConnections()
 			}
 		}
 	}
-
+	
+	// If we should self connect all hidden layers
+	if (getOptions()->selfConnectHiddenLayers)
+	{
+		// Go through all hidden layers
+		for (int layerIndex = 1; layerIndex < neurons.size() - 1; layerIndex++)
+		{
+			// Go through all neurons in the current hidden layer
+			for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = getNeuronsInLayer(layerIndex)->begin(); hiddenNeuron != getNeuronsInLayer(layerIndex)->end(); hiddenNeuron++)
+			{
+				// Go through all other hidden neurons in the current layer (it can be the same)
+				for (std::vector<AbstractNeuron*>::iterator otherHiddenNeuron = getNeuronsInLayer(layerIndex)->begin(); otherHiddenNeuron != getNeuronsInLayer(layerIndex)->end(); otherHiddenNeuron++)
+				{
+					// Add a connection from the current hidden to the other one
+					(*hiddenNeuron)->addNextNeuron(dynamic_cast<StandardNeuron*>(*otherHiddenNeuron), 1); 
+				}
+			}
+		}
+	}
 }
 
 RecurrentLayeredNetworkOptions* RecurrentLayeredNetwork::getOptions()
@@ -41,48 +59,49 @@ RecurrentLayeredNetworkOptions* RecurrentLayeredNetwork::getOptions()
 
 std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount)
 {
-	// If ouput neurons are connected with input neurons
-	if (getOptions()->connectOutputWithInnerNeurons)
+	// Create a new layered network with the same options as we used for this recurrent network
+	std::unique_ptr<LayeredNetwork> unfoldedNetwork(new LayeredNetwork(*options));
+
+	// Do for every extra instance
+	for (int i = 0; i < instanceCount - 1; i++)
 	{
-		// Create a new options object and copy the current options into it
-		LayeredNetworkOptions layeredNetworkOptions(*options);
-		// Only change the neuronsPerLayerCount
-		layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(instanceCount * (getLayerCount() - 1) + 1);
-
-		// Set neuron count of the first layer to: original input neuron count * instanceCount
-		layeredNetworkOptions.neuronsPerLayerCount[0] = options->neuronsPerLayerCount[0] * instanceCount + options->neuronsPerLayerCount.back();
-		// Go through all other layers
-		for(int i = 0; i < layeredNetworkOptions.neuronsPerLayerCount.size() - 1; i++)
+		// Create a new layered network with the same options as we used for this recurrent network
+		LayeredNetwork layeredNetworkToMerge(*options);
+		// If output neurons are connected with inner neurons
+		if (getOptions()->connectOutputWithInnerNeurons)
 		{
-			// Set the neuron count to the corresponding one in the original settings
-			layeredNetworkOptions.neuronsPerLayerCount[i + 1] = options->neuronsPerLayerCount[i % (options->neuronsPerLayerCount.size() - 1) + 1];
-		}
-
-		// Create a new unfoldedNetwork from the settings
-		std::unique_ptr<LayeredNetwork> unfoldedNetwork(new LayeredNetwork(layeredNetworkOptions));
-
-		// Extract all input neurons
-		std::vector<AbstractNeuron*>* inputNeurons = unfoldedNetwork->getInputNeurons();	
-		// Go through all input neurons that are not in the original network
-		for (int i = 0; i < inputNeurons->size() - options->neuronsPerLayerCount.back(); i++)
-		{
-			// Extract the neurons of the layer to which this input neuron should be connected
-			std::vector<AbstractNeuron*>* layerToConnect = unfoldedNetwork->getNeuronsInLayer((i / options->neuronsPerLayerCount[0] - 1) * (getLayerCount() - 1) + getLayerCount());
-			// Go through all edges of the current input neuron
-			std::vector<AbstractNeuron*>::iterator neuronToConnect = layerToConnect->begin();
-			for (std::list<Edge*>::iterator edge = (*inputNeurons)[i]->getEfferentEdges()->begin(); edge != (*inputNeurons)[i]->getEfferentEdges()->end(); edge++, neuronToConnect++)
+			// Go through all current output neurons of the unfolded network
+			for (std::vector<AbstractNeuron*>::iterator outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
 			{
-				// Remove the edge from the first inner layer
-				(*edge)->getNextNeuron()->removeAfferentEdge(*edge);
-
-				dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->push_front(dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->back());
-				dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->pop_back();
-				// Set the edge to the corresponding neuron
-				(*edge)->setNextNeuron(dynamic_cast<StandardNeuron*>(*neuronToConnect));
-				dynamic_cast<StandardNeuron*>(*neuronToConnect)->getAfferentEdges()->push_front(*edge);				
+				// Go through all hidden neurons in the second layer of our new network
+				for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = (*layeredNetworkToMerge.getNeurons())[1].begin(); hiddenNeuron != (*layeredNetworkToMerge.getNeurons())[1].end(); hiddenNeuron++)
+				{
+					// Add a edge from the output to the hidden neuron
+					(*outputNeuron)->addNextNeuron(static_cast<StandardNeuron*>(*hiddenNeuron), 1);
+				}
 			}
 		}
-
-		return unfoldedNetwork;
+		// Merge the new network with our unfoldedNetwork
+		unfoldedNetwork->mergeWith(layeredNetworkToMerge);
 	}
+
+	// If output neurons are connected with inner neurons
+	if (getOptions()->connectOutputWithInnerNeurons)
+	{
+		// Do for every output neuron in the original recurrent network
+		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
+		{
+			// Create a new input neuron and add it to the input layer of the unfolded network
+			// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first hidden layer
+			AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
+			// Go through all hidden neurons of the second layer of our unfolded network
+			for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = (*unfoldedNetwork->getNeurons())[1].begin(); hiddenNeuron != (*unfoldedNetwork->getNeurons())[1].end(); hiddenNeuron++)
+			{
+				// Add a edge from the new input neuron to the hidden neuron
+				newInputNeuron->addNextNeuron(static_cast<StandardNeuron*>(*hiddenNeuron), 1);
+			}			
+		}
+	}
+
+	return unfoldedNetwork;
 }
