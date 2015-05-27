@@ -34,6 +34,7 @@
 #include "NeuralNetworkIO.hpp"
 #include "RecurrentLayeredNetwork.hpp"
 #include "BackpropagationThroughTimeLearningRule.hpp"
+#include "NetworkTopologyDrawer.hpp"
 
 void doPerceptronTest()
 {
@@ -241,6 +242,29 @@ void doRecurrentLayeredNetworkTest()
 	networkOptions.useBiasNeuron = true;
 	networkOptions.connectOutputWithInnerNeurons = true;
 	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
+
+	/*std::unique_ptr<LayeredNetwork> unfoldedNetwork = recurrentNetwork->unfold(2);
+	NetworkTopologyDrawerOptions networkTopologyDrawerOptions;
+	networkTopologyDrawerOptions.width = 700;
+	networkTopologyDrawerOptions.networkTopology = unfoldedNetwork.get();
+	NetworkTopologyDrawer networkTopologyDrawer(0, 0, networkTopologyDrawerOptions);
+	networkTopologyDrawer.refresh();
+
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        networkTopologyDrawer.draw(window);
+        window.display();
+    }*/
 
 	NeuralNetwork neuralNetwork(recurrentNetwork);
 
