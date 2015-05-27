@@ -240,7 +240,7 @@ void doRecurrentLayeredNetworkTest()
 	networkOptions.neuronsPerLayerCount[1]=3;
 	networkOptions.neuronsPerLayerCount[2]=2;
 	networkOptions.useBiasNeuron = true;
-	networkOptions.connectOutputWithInnerNeurons = true;
+	networkOptions.selfConnectHiddenLayers = true;
 	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
 
 	/*std::unique_ptr<LayeredNetwork> unfoldedNetwork = recurrentNetwork->unfold(2);

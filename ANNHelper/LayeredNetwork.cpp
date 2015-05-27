@@ -250,9 +250,9 @@ void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
 		// Clear all edges of the bias neuron of the other network, so they won't be deleted
 		otherNetwork.biasNeuron.getEfferentEdges()->clear();		
 	}
-	else
+	else if (options->useBiasNeuron)
 	{
-		// Else if the other network does not have a bias neuron
+		// Else if the other network does not have a bias neuron, but the current does
 		// Go through all layers
 		for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 		{
