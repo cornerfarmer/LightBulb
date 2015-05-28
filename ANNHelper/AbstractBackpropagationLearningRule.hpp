@@ -4,7 +4,7 @@
 #define _ABSTRACTBACKPROPAGATIONLEARNINGRULE_H_
 
 // Library includes
-#include <vector>
+#include <map>
 
 // Includes
 #include "AbstractLearningRule.hpp"
@@ -13,6 +13,7 @@
 class NeuralNetwork;
 class Teacher;
 class AbstractActivationOrder;
+class AbstractNeuron;
 class Edge;
 
 struct AbstractBackpropagationLearningRuleOptions : AbstractLearningRuleOptions
@@ -33,7 +34,7 @@ class AbstractBackpropagationLearningRule : public AbstractLearningRule
 {
 private:	
 	// This vector should hold all delta values
-	std::vector<std::vector<float>> deltaVectorOutputLayer;
+	std::map<AbstractNeuron*, float> deltaVectorOutputLayer;
 protected:		
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	AbstractBackpropagationLearningRuleOptions* getOptions();
