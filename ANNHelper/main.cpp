@@ -325,6 +325,6 @@ void doRecurrentLayeredNetworkTest()
 
 int main()
 {
-	doRecurrentLayeredNetworkTest();
+	doPerceptronTest();
     return 0;
 }

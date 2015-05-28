@@ -86,7 +86,7 @@ bool ResilientLearningRateHelper::learningHasStopped()
 	// If there is any learningRate, which can still change the totalError dont stop the learning process
 	for (std::vector<float>::iterator previousLearningRate = (*previousLearningRates).begin(); previousLearningRate != (*previousLearningRates).end(); previousLearningRate++)
 	{
-		if (abs(*previousLearningRate) > 1.0000000e-006f)
+		if (abs(*previousLearningRate) > options->learningRateMin)
 			return false;
 	}
 	return true;
