@@ -9,6 +9,7 @@
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
 
+
 ResilientLearningRateHelper::ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_) 
 {
 	options = options_;
@@ -86,9 +87,10 @@ bool ResilientLearningRateHelper::learningHasStopped()
 	// If there is any learningRate, which can still change the totalError dont stop the learning process
 	for (std::vector<float>::iterator previousLearningRate = (*previousLearningRates).begin(); previousLearningRate != (*previousLearningRates).end(); previousLearningRate++)
 	{
-		if (abs(*previousLearningRate) > options->learningRateMin)
+		if (abs(*previousLearningRate) > options->learningRateMin && abs(*previousLearningRate) < options->learningRateMax)
 			return false;
 	}
 	return true;
 
 }
+

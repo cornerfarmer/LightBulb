@@ -38,6 +38,7 @@ protected:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	ResilientBackpropagationLearningRule(ResilientBackpropagationLearningRuleOptions &options_);
 };

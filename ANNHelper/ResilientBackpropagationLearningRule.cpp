@@ -18,7 +18,7 @@ ResilientBackpropagationLearningRule::ResilientBackpropagationLearningRule(Resil
 void ResilientBackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	AbstractBackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher);
-	resilientLearningRateHelper->initialize(neuralNetwork);
+
 }
 
 void ResilientBackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
@@ -40,4 +40,10 @@ bool ResilientBackpropagationLearningRule::learningHasStopped()
 ResilientBackpropagationLearningRuleOptions* ResilientBackpropagationLearningRule::getOptions()
 {
 	return static_cast<ResilientBackpropagationLearningRuleOptions*>(options.get());
+}
+
+void ResilientBackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+{
+	AbstractBackpropagationLearningRule::initializeTry(neuralNetwork, teacher);
+	resilientLearningRateHelper->initialize(neuralNetwork);
 }
