@@ -54,12 +54,16 @@ void StandardNeuron::removeAfferentEdge(Edge* edgeToRemove)
 
 void StandardNeuron::refreshActivation()
 {
-	// Calc the input from all afferentEdges
-	netInput = inputFunction->execute(afferentEdges, threshold);
 	// Calc the activation from the input
 	activation = activationFunction->execute(netInput, threshold);
 	// Calc the output activation from the activation
 	activation = outputFunction->execute(activation);
+}
+
+void StandardNeuron::refreshNetInput()
+{
+	// Calc the input from all afferentEdges
+	netInput = inputFunction->execute(afferentEdges, threshold);
 }
 
 std::list<Edge*>* StandardNeuron::getAfferentEdges()

@@ -18,6 +18,8 @@ public:
 	void setInput(float newInput);
 	// Sets the activation of the neuron to its input value
 	void refreshActivation();
+	// Do nothing, a inputNeuron does not have a netInput
+	void refreshNetInput() {};
 };
 
 #endif

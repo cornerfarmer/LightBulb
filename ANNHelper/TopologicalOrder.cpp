@@ -16,11 +16,12 @@ void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopolog
 	// Go through all layers
 	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = layeredNetwork->getNeurons()->begin(); layer != layeredNetwork->getNeurons()->end(); layer++)
 	{
-		// Recalculate Activation of all neurons in the current layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
-		{
+		// First recalculate the netInput of all neurons in the current layer
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
+			(*neuron)->refreshNetInput();
+		// Then recalculate the activation of all neurons in the current layer
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
 			(*neuron)->refreshActivation();
-		}
 	}
 }
 

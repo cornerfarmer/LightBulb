@@ -238,7 +238,7 @@ void doRecurrentLayeredNetworkTest()
 	networkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	networkOptions.neuronsPerLayerCount[0]=1;
 	networkOptions.neuronsPerLayerCount[1]=3;
-	networkOptions.neuronsPerLayerCount[2]=2;
+	networkOptions.neuronsPerLayerCount[2]=1;
 	networkOptions.useBiasNeuron = true;
 	networkOptions.selfConnectHiddenLayers = true;
 	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
@@ -273,8 +273,8 @@ void doRecurrentLayeredNetworkTest()
 	options.debugOutputInterval = 100;
 	options.maxTotalErrorValue = 1;
 	options.minIterationsPerTry = 3000;
-	options.maxIterationsPerTry = 10000;
-	options.totalErrorGoal = 0.001f;
+	options.maxIterationsPerTry = 20000;
+	options.totalErrorGoal = 0.0001f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
@@ -288,7 +288,7 @@ void doRecurrentLayeredNetworkTest()
 	for (int i=0;i<4;i++)
 	{
 		NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-		std::vector<bool>* teachingInput= new std::vector<bool>(2);
+		std::vector<bool>* teachingInput= new std::vector<bool>(1);
 
 		int lastPattern = -1;
 		for (int l = 0; l < 2; l++)
@@ -300,7 +300,7 @@ void doRecurrentLayeredNetworkTest()
 		}
 
 		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	
-		(*teachingInput)[1] = teachingPattern->back()[0];	
+		//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
 		//(*teachingInput)[0] = (i > l);	
 		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
@@ -325,6 +325,6 @@ void doRecurrentLayeredNetworkTest()
 
 int main()
 {
-	doPerceptronTest();
+	doRecurrentLayeredNetworkTest();
     return 0;
 }

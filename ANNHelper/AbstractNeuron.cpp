@@ -12,8 +12,7 @@ AbstractNeuron::~AbstractNeuron()
 
 AbstractNeuron::AbstractNeuron()
 {
-	// Set the activation to 0
-	activation = 0;
+	resetActivation();
 }
 
 void AbstractNeuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
@@ -44,5 +43,6 @@ std::list<Edge*>* AbstractNeuron::getEfferentEdges()
 
 void AbstractNeuron::resetActivation()
 {
+	// Set the activation to 0
 	activation = 0;
 }

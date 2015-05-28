@@ -26,6 +26,8 @@ public:
 	float getActivation();
 	// Recalculate the activation of the neuron
 	virtual void refreshActivation() = 0;
+	// Recalculate the netInput of the neuron
+	virtual void refreshNetInput() = 0;
 	std::list<Edge*>* getEfferentEdges();
 	virtual void resetActivation();
 };
