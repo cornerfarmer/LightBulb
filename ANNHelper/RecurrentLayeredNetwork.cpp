@@ -21,7 +21,7 @@ void RecurrentLayeredNetwork::buildRecurrentConnections()
 	// If we should connect ouput neurons with input neurons
 	if (getOptions()->connectOutputWithInnerNeurons)
 	{
-		// Go through all outpur neurons
+		// Go through all output neurons
 		for (std::vector<AbstractNeuron*>::iterator outputNeuron = neurons.back().begin(); outputNeuron != neurons.back().end(); outputNeuron++)
 		{
 			// Go through all neurons in the first inner layer
@@ -44,11 +44,26 @@ void RecurrentLayeredNetwork::buildRecurrentConnections()
 				// Go through all other hidden neurons in the current layer (it can be the same)
 				for (std::vector<AbstractNeuron*>::iterator otherHiddenNeuron = getNeuronsInLayer(layerIndex)->begin(); otherHiddenNeuron != getNeuronsInLayer(layerIndex)->end(); otherHiddenNeuron++)
 				{
-					// Add a connection from the current hidden to the other one
+					// Add a connection from the current hidden neuron to the other one
 					(*hiddenNeuron)->addNextNeuron(dynamic_cast<StandardNeuron*>(*otherHiddenNeuron), 1); 
 				}
 			}
 		}
+	}
+	
+	// If we should self connect the output layer
+	if (getOptions()->selfConnectOutputLayers)
+	{
+		// Go through all output neurons
+		for (std::vector<AbstractNeuron*>::iterator outputNeuron = neurons.back().begin(); outputNeuron != neurons.back().end(); outputNeuron++)
+		{
+			// Go through all other output neurons in the same layer
+			for (std::vector<AbstractNeuron*>::iterator otherOutputNeuron = neurons.back().begin(); otherOutputNeuron != neurons.back().end(); otherOutputNeuron++)
+			{
+				// Add a connection from the current output neuron to the other one
+				(*outputNeuron)->addNextNeuron(dynamic_cast<StandardNeuron*>(*otherOutputNeuron), 1); 
+			}
+		}		
 	}
 }
 
@@ -83,22 +98,38 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 			}
 		}
 
-		// If output neurons are connected with inner neurons
+		// If we should self connect the hidden layers
 		if (getOptions()->selfConnectHiddenLayers)
 		{
-			// Go through all current output neurons of the unfolded network
-			std::vector<std::vector<AbstractNeuron*>>::iterator hiddenLayer = unfoldedNetwork->getNeurons()->begin() + 1;
+			// Go through all hidden layers of the current and the last layeredNetworkToMerge
+			std::vector<std::vector<AbstractNeuron*>>::iterator hiddenLayer = unfoldedNetwork->getNeurons()->begin() + 1 + i * (getOptions()->neuronsPerLayerCount.size() - 1);
 			for (std::vector<std::vector<AbstractNeuron*>>::iterator otherHiddenLayer = (*layeredNetworkToMerge.getNeurons()).begin() + 1; otherHiddenLayer + 1 != (*layeredNetworkToMerge.getNeurons()).end(); hiddenLayer++, otherHiddenLayer++)
 			{
-				// Go through all hidden neurons in the second layer of our new network
+				// Go through all hidden neurons in the unfolded Network
 				for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = hiddenLayer->begin(); hiddenNeuron != hiddenLayer->end(); hiddenNeuron++)
 				{
-					// Go through all hidden neurons in the second layer of our new network
+					// Go through all hidden neurons in the layeredNetworkToMerge
 					for (std::vector<AbstractNeuron*>::iterator otherHiddenNeuron = otherHiddenLayer->begin(); otherHiddenNeuron != otherHiddenLayer->end(); otherHiddenNeuron++)
 					{
-						// Add a edge from the output to the hidden neuron
+						// Add a edge from the hidden to the other hidden neuron
 						(*hiddenNeuron)->addNextNeuron(static_cast<StandardNeuron*>(*otherHiddenNeuron), 1);
 					}
+				}
+			}
+		}
+
+		
+		// If we should self connect the output layer
+		if (getOptions()->selfConnectOutputLayers)
+		{
+			// Go through all current output neurons of the unfolded network
+			for (std::vector<AbstractNeuron*>::iterator outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
+			{
+				// Go through all output neurons of the layeredNetworkToMerge
+				for (std::vector<AbstractNeuron*>::iterator outherOutputNeuron = layeredNetworkToMerge.getNeurons()->back().begin(); outherOutputNeuron != layeredNetworkToMerge.getNeurons()->back().end(); outherOutputNeuron++)
+				{
+					// Add a edge from the output to the other output neuron
+					(*outputNeuron)->addNextNeuron(static_cast<StandardNeuron*>(*outherOutputNeuron), 1);					
 				}
 			}
 		}
@@ -125,25 +156,43 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 		}
 	}
 
-	// If output neurons are connected with inner neurons
+	// If we should self connect the hidden layers
 	if (getOptions()->selfConnectHiddenLayers)
 	{
-		// Do for every output neuron in the original recurrent network
+		// Do for every hidden layer in the original recurrent network
 		for (int l = 1; l < options->neuronsPerLayerCount.size() - 1; l++)
 		{
-			// Do for every output neuron in the original recurrent network
+			// Do for every hidden neuron in this layer
 			for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
 			{
 				// Create a new input neuron and add it to the input layer of the unfolded network
-				// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first hidden layer
+				// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the current hidden layer
 				AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
-				// Go through all hidden neurons of the second layer of our unfolded network
+				// Go through all hidden neurons of the current hidden layer in our unfolded network
 				for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = (*unfoldedNetwork->getNeurons())[l].begin(); hiddenNeuron != (*unfoldedNetwork->getNeurons())[l].end(); hiddenNeuron++)
 				{
 					// Add a edge from the new input neuron to the hidden neuron
 					newInputNeuron->addNextNeuron(static_cast<StandardNeuron*>(*hiddenNeuron), 1);
 				}			
 			}
+		}
+	}
+
+	// If we should self connect the output layer
+	if (getOptions()->selfConnectOutputLayers)
+	{
+		// Do for every output neuron in the original recurrent network
+		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
+		{
+			// Create a new input neuron and add it to the input layer of the unfolded network
+			// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first output layer
+			AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
+			// Go through all output neurons of the first ouput layer of our unfolded network
+			for (std::vector<AbstractNeuron*>::iterator outputNeuron = (*unfoldedNetwork->getNeurons())[options->neuronsPerLayerCount.size() - 1].begin(); outputNeuron != (*unfoldedNetwork->getNeurons())[options->neuronsPerLayerCount.size() - 1].end(); outputNeuron++)
+			{
+				// Add a edge from the new input neuron to the hidden neuron
+				newInputNeuron->addNextNeuron(static_cast<StandardNeuron*>(*outputNeuron), 1);
+			}			
 		}
 	}
 

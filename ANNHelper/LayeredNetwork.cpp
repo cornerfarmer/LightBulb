@@ -299,3 +299,34 @@ void LayeredNetwork::refreshNeuronsPerLayerCounters()
 		*counter = layer->size();		
 	}
 }
+
+void LayeredNetwork::copyWeightsFrom(LayeredNetwork& otherNetwork)
+{
+	int lOther = otherNetwork.getLayerCount() - 1;
+	for (int l = getLayerCount() - 1; l > 0 && lOther > 0;)
+	{
+		std::vector<AbstractNeuron*>* neuronsInLayer = getNeuronsInLayer(l);
+		std::vector<AbstractNeuron*>* neuronsInLayerOther = otherNetwork.getNeuronsInLayer(lOther);
+		// Go through all neurons
+		int neuronIndex = 0;
+		std::vector<AbstractNeuron*>::iterator neuronOther = neuronsInLayerOther->begin();
+		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end() && neuronOther != neuronsInLayerOther->end(); neuron++, neuronOther++, neuronIndex++)
+		{
+			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+			std::list<Edge*>* afferentEdgesOther = (dynamic_cast<StandardNeuron*>(*neuronOther))->getAfferentEdges();
+			// Go through all afferentEdges of the actual neuron
+			std::list<Edge*>::iterator edgeOther = afferentEdgesOther->begin();
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end() && edgeOther != afferentEdges->end(); edge++, edgeOther++)
+			{	
+				(*edge)->setWeight((*edgeOther)->getWeight());
+			}
+		}
+
+		lOther--;
+		if (lOther == 0 && otherNetwork.getLayerCount() < getLayerCount())
+			lOther = otherNetwork.getLayerCount() - 1;
+		l--;
+		if (l == 0 && getLayerCount() < otherNetwork.getLayerCount())
+			l = getLayerCount() - 1;
+	}
+}

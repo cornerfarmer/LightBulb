@@ -11,10 +11,12 @@ struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
 {	
 	bool connectOutputWithInnerNeurons;
 	bool selfConnectHiddenLayers;
+	bool selfConnectOutputLayers;
 	RecurrentLayeredNetworkOptions()
 	{
 		connectOutputWithInnerNeurons = false;
 		selfConnectHiddenLayers = false;
+		selfConnectOutputLayers = false;
 	}
 };
 

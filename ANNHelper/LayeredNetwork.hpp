@@ -60,6 +60,8 @@ public:
 	void resetActivation();
 	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
 	void mergeWith(LayeredNetwork& otherNetwork);	 
+
+	void copyWeightsFrom(LayeredNetwork& otherNetwork);
 };
 
 #endif

@@ -69,36 +69,12 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterTeachingLesson(Ne
 			}
 		}
 	}
-
 }
 
 void BackpropagationThroughTimeLearningRule::doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	int lOriginal = dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->getLayerCount() - 1;
-	for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
-	{
-		std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
-		std::vector<AbstractNeuron*>* neuronsInLayerOriginal = dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->getNeuronsInLayer(lOriginal);
-		// Go through all neurons
-		int neuronIndex = 0;
-		std::vector<AbstractNeuron*>::iterator neuronOriginal = neuronsInLayerOriginal->begin();
-		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end() && neuronOriginal != neuronsInLayerOriginal->end(); neuron++, neuronOriginal++, neuronIndex++)
-		{
-			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-			std::list<Edge*>* afferentEdgesOriginal = (dynamic_cast<StandardNeuron*>(*neuronOriginal))->getAfferentEdges();
-			// Go through all afferentEdges of the actual neuron
-			std::list<Edge*>::iterator edgeOriginal = afferentEdgesOriginal->begin();
-			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeOriginal++)
-			{	
-				(*edgeOriginal)->setWeight((*edge)->getWeight());
-			}
-		}
-
-		lOriginal--;
-		if (lOriginal == 0)
-			lOriginal = dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->getLayerCount() - 1;
-	}
-
+	dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()));
+	
 	delete(&neuralNetwork);
 	delete(&teacher);
 }
@@ -116,28 +92,5 @@ void BackpropagationThroughTimeLearningRule::initializeTry(NeuralNetwork &neural
 		originalNeuralNetwork->getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 	}
 
-	int lOriginal = dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->getLayerCount() - 1;
-	for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
-	{
-		std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
-		std::vector<AbstractNeuron*>* neuronsInLayerOriginal = dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->getNeuronsInLayer(lOriginal);
-		// Go through all neurons
-		int neuronIndex = 0;
-		std::vector<AbstractNeuron*>::iterator neuronOriginal = neuronsInLayerOriginal->begin();
-		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end() && neuronOriginal != neuronsInLayerOriginal->end(); neuron++, neuronOriginal++, neuronIndex++)
-		{
-			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-			std::list<Edge*>* afferentEdgesOriginal = (dynamic_cast<StandardNeuron*>(*neuronOriginal))->getAfferentEdges();
-			// Go through all afferentEdges of the actual neuron
-			std::list<Edge*>::iterator edgeOriginal = afferentEdgesOriginal->begin();
-			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeOriginal++)
-			{	
-				(*edge)->setWeight((*edgeOriginal)->getWeight());
-			}
-		}
-
-		lOriginal--;
-		if (lOriginal == 0)
-			lOriginal = dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->getLayerCount() - 1;
-	}
+	dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology()));	
 }
