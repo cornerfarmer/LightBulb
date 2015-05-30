@@ -51,7 +51,7 @@ void doPerceptronTest()
 
 	NeuralNetwork neuralNetwork(layeredNetwork);
 
-	ResilientBackpropagationLearningRuleOptions options;
+	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 100;
 	options.maxTotalErrorValue = 4;
@@ -62,7 +62,8 @@ void doPerceptronTest()
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
-	ResilientBackpropagationLearningRule learningRule(options);
+	options.resilientLearningRate = true;
+	BackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;
 	for (int i=0;i<8;i+=1)
@@ -81,32 +82,32 @@ void doPerceptronTest()
 		}
 	}
 
-	for (float i=0;i<1;i+=0.2)
-	{		
-		for (float l=0;l<1;l+=0.2)
-		{			
-			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-			std::vector<bool>* teachingInput= new std::vector<bool>(1);
+	//for (float i=0;i<1;i+=0.2)
+	//{		
+	//	for (float l=0;l<1;l+=0.2)
+	//	{			
+	//		NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
+	//		std::vector<bool>* teachingInput= new std::vector<bool>(1);
 
-			teachingPattern->push_back(std::vector<float>(2));
-			teachingPattern->back()[0] = i;
-			teachingPattern->back()[1] = l;
-			(*teachingInput)[0] = (i == l);	
-			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
-			teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
-		}		
-	}
-	{
-	NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-	std::vector<bool>* teachingInput= new std::vector<bool>(1);
+	//		teachingPattern->push_back(std::vector<float>(2));
+	//		teachingPattern->back()[0] = i;
+	//		teachingPattern->back()[1] = l;
+	//		(*teachingInput)[0] = (i == l);	
+	//		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+	//		teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+	//	}		
+	//}
+	//{
+	//NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
+	//std::vector<bool>* teachingInput= new std::vector<bool>(1);
 
-	teachingPattern->push_back(std::vector<float>(2));
-	teachingPattern->back()[0] = 100;
-	teachingPattern->back()[1] = 100;
-	(*teachingInput)[0] = true;	
-	//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
-	teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
-	}
+	//teachingPattern->push_back(std::vector<float>(2));
+	//teachingPattern->back()[0] = 100;
+	//teachingPattern->back()[1] = 100;
+	//(*teachingInput)[0] = true;	
+	////(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+	//teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+	//}
 
 	bool success = learningRule.doLearning(neuralNetwork, teacher);
 	////neuralNetwork.getNetworkTopology()->randomizeWeights(0,1);
@@ -325,6 +326,6 @@ void doRecurrentLayeredNetworkTest()
 
 int main()
 {
-	doRecurrentLayeredNetworkTest();
+	doPerceptronTest();
     return 0;
 }

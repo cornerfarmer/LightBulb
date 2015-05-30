@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="408d4a92-1fe6-457f-b0f8-3a3c31d0f22f"
   name="Learning" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -266,7 +266,66 @@
               LastKnownName="AbstractBackpropagationLearningRule"
               LastKnownLocation="Package_1256.uml" />
           </generalization>
+          <generalization
+            Id="b03d6168-f44f-451e-9cee-98e414357901"
+            isSubstitutable="false">
+            <classMoniker
+              Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
+              LastKnownName="AbstractLearningRule"
+              LastKnownLocation="Package_1256.uml" />
+          </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="8c8b9fcb-abbf-4479-9f28-1495c4825ff2"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="ResilientLearningRateHelper"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="0f7047f8-3966-4b64-ad15-7dc36fa5d9fe"
+              LastKnownName="ResilientLearningRateHelper"
+              LastKnownLocation="Package_1256.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c10a3715-742f-444b-a7ae-5934cff11931"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="85126aac-7225-4d30-abe7-c781992e622a"
+                      name="Lower" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="10f70405-5bcf-4dd9-b45f-6b5a6b02c0cc"
+                      name="Upper" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="43004b9c-90c8-4f3f-ba22-8e9f4611714f"
+                  name="ResilientLearningRateHelper"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -412,7 +471,66 @@
               LastKnownName="AbstractDeltaLearningRule"
               LastKnownLocation="Package_1256.uml" />
           </generalization>
+          <generalization
+            Id="fabcb509-c61f-4e83-b681-d07cb376700b"
+            isSubstitutable="false">
+            <classMoniker
+              Id="f071b499-fa41-4f9a-858c-68ae81534a9c"
+              LastKnownName="AbstractLearningRule"
+              LastKnownLocation="Package_1256.uml" />
+          </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="04d5585b-3288-450a-b688-563b50c8a7c1"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="ResilientLearningRateHelper"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="0f7047f8-3966-4b64-ad15-7dc36fa5d9fe"
+              LastKnownName="ResilientLearningRateHelper"
+              LastKnownLocation="Package_1256.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8f483967-6044-4af7-94dd-130fa198ed1e"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="4281d7bb-1968-440a-b4a6-85400001abb9"
+                      name="Lower" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="a241ce5e-fbd2-41d1-8be0-8b82eeec478f"
+                      name="Upper" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6e302373-fdb7-479a-852e-ee0ee5c93b3d"
+                  name="ResilientLearningRateHelper"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>

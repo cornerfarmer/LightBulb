@@ -8,23 +8,29 @@
 
 // Includes
 #include "AbstractBackpropagationLearningRule.hpp"
+#include "ResilientLearningRateHelper.hpp"
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 class Edge;
 
-struct BackpropagationLearningRuleOptions : AbstractBackpropagationLearningRuleOptions
+struct BackpropagationLearningRuleOptions : public AbstractBackpropagationLearningRuleOptions
 {	
 	// Sets the momentum, which can improve learning speed
 	float momentum;
 	// Sets the learning Rate
 	float learningRate;	
+
+	bool resilientLearningRate;
+
+	ResilientLearningRateHelperOptions resilientLearningRateOptions;
 	BackpropagationLearningRuleOptions()
 	{
 		momentum = 0.7f;
 		learningRate = 0.45f;
 		offlineLearning = false;
+		resilientLearningRate = false;
 	}
 };
 
@@ -36,6 +42,8 @@ private:
 	void adjustWeight(Edge* edge, float gradient);
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
+	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
+	void initialize();
 protected:
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
@@ -44,6 +52,7 @@ protected:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions options_);
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_);

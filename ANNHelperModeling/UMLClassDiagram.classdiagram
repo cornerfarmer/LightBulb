@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5899160e-7b69-4088-af67-f8a4feaef9bf" name="UMLClassDiagram" linkedPackageId="98242eec-98ce-4b35-b56d-76888567c67f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <appliedStereotypesInternal>
     <stereotypeInstance Id="a93293ba-95bd-4507-b535-51cae960c7f0" name="namespace" profile="CSharpProfile">
       <elementDefinition Id="9ce1dfba-24b4-4943-bc8e-0f8be4f577aa" />
@@ -1541,25 +1541,6 @@
               </ownedOperationsInternal>
             </class>
           </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="abb95885-c5f8-4398-9b1a-7d3a68ed442d" name="ContextNeuron" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="47e9cdf5-40d1-4626-b8e4-8a81d55242f1" />
-              <generalsInternal>
-                <generalization Id="bd0ba98e-b805-43c9-a7e8-42bd10166e04" isSubstitutable="false">
-                  <classMoniker Id="0ad75f8e-0021-4b9d-bc10-9aa704c877cb" LastKnownName="StandardNeuron" />
-                  <elementDefinition Id="1271a1cc-18cf-456c-8156-bdaefe74fcbf" />
-                </generalization>
-              </generalsInternal>
-              <ownedAttributesInternal>
-                <property Id="8140b756-9c86-4ebe-a7fd-19fab2f8796f" name="selfInfluenceWeight" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="756f7f2e-5f5c-4074-b56d-8b6e6a352575" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="b7a37404-2ec6-42a0-a228-2c50e2a97d24" LastKnownName="float" />
-                  </type_NamedElement>
-                </property>
-              </ownedAttributesInternal>
-            </class>
-          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
@@ -3058,112 +3039,42 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="f83ea69b-ee2f-4dea-8459-3e3b445a87bb" name="AbstractBackpropagationLearningRule" isAbstract="true" isLeaf="false" isActiveClass="false">
-              <appliedStereotypesInternal>
-                <stereotypeInstance Id="59944a0d-4312-4942-995b-9cb382e57d6d" name="class" profile="CSharpProfile">
-                  <elementDefinition Id="212c977b-3085-4668-aaf9-6cf29dfc5fe1" />
-                  <propertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="ad311f11-a858-47af-accc-44bbfd55ca07">
-                      <propertyInstance Id="ca41db6b-1d2b-4f37-b099-c0bc5b28b411" name="ClrAttributes">
-                        <elementDefinition Id="2962956b-1eca-4dc5-9010-7b2131e8ef53" />
-                      </propertyInstance>
-                      <elementDefinition Id="93c499bf-4288-4040-baa8-53c05e782986" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="b054024e-e3f4-475f-865e-d8633b5f6cfc">
-                      <propertyInstance Id="0a770fc0-7f1a-4698-a115-0e553ddb5b8d" name="IsPartial" value="false">
-                        <elementDefinition Id="5d5be463-9065-45b3-8e64-375d783a7d01" />
-                      </propertyInstance>
-                      <elementDefinition Id="a1c759a0-b963-4cf5-8a09-0740fc3e081c" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="b03fd656-4301-4997-8198-97449c053294">
-                      <propertyInstance Id="cbb450e8-7378-431f-86fd-b4de43753807" name="IsStatic" value="false">
-                        <elementDefinition Id="a4cd83c7-da02-4cc9-be6a-1a43fb752fe1" />
-                      </propertyInstance>
-                      <elementDefinition Id="c71ecdf5-ba6b-429b-b8b9-d1ba60b093fa" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="ae9c2810-e800-4876-a2b4-2e4304cdcf78">
-                      <propertyInstance Id="90222e45-4fcf-45ce-9815-8a7f75289dc6" name="IsUnsafe" value="false">
-                        <elementDefinition Id="208db78f-3fdb-4f0e-b4ef-540358f76b95" />
-                      </propertyInstance>
-                      <elementDefinition Id="5f8ff22c-520d-4d67-9af8-5b54b4348fb1" />
-                    </stereotypeInstanceHasPropertyInstances>
-                    <stereotypeInstanceHasPropertyInstances Id="fa0c1ba4-882c-41bd-9737-186142ca6e28">
-                      <propertyInstance Id="a69e88cd-ca8d-4359-b6ca-920fe8d7997d" name="PackageVisibility" value="internal">
-                        <elementDefinition Id="fdc5feab-4fed-4abc-b95e-178e499137af" />
-                      </propertyInstance>
-                      <elementDefinition Id="2544b0be-8116-4e8a-ac9a-72bbdcfa17ca" />
-                    </stereotypeInstanceHasPropertyInstances>
-                  </propertyInstances>
-                </stereotypeInstance>
-              </appliedStereotypesInternal>
-              <elementDefinition Id="bcc24ae6-a5bc-4a63-a55f-e3180e212a1a" />
-              <generalsInternal>
-                <generalization Id="c694abb1-6749-452d-9219-507db747120d" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
-                  <elementDefinition Id="87c847c8-ba61-46a6-bdc9-ebf6967d3c21" />
-                </generalization>
-              </generalsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
             <class Id="84263b09-0f0b-4c00-b4d2-40cc69652afc" name="BackpropagationLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="8caf1f4e-8112-4e15-9aeb-544875d55f78" />
               <generalsInternal>
-                <generalization Id="e58708aa-e56a-4b75-b759-b21a8e3f9aaf" isSubstitutable="false">
-                  <classMoniker Id="f83ea69b-ee2f-4dea-8459-3e3b445a87bb" LastKnownName="AbstractBackpropagationLearningRule" />
-                  <elementDefinition Id="c650095f-efd5-4f0e-9668-031b0adaee97" />
-                </generalization>
-              </generalsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="20060f95-a842-4871-8aa9-cebb68c50a88" name="ResilientBackpropagationLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="f514e967-9cc5-41c1-9368-05d9769a4d7e" />
-              <generalsInternal>
-                <generalization Id="34857f05-aadf-490b-a3f3-04daa319a81d" isSubstitutable="false">
-                  <classMoniker Id="f83ea69b-ee2f-4dea-8459-3e3b445a87bb" LastKnownName="AbstractBackpropagationLearningRule" />
-                  <elementDefinition Id="7197488f-704a-4037-b80e-3a94790c6fce" />
+                <generalization Id="ffe965b3-d3ae-4fdb-9e02-fa10ceaaabfd" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
+                  <elementDefinition Id="b03d6168-f44f-451e-9cee-98e414357901" />
                 </generalization>
               </generalsInternal>
               <targetEnds>
-                <association Id="03e877f2-e253-4d9d-bf26-d15476339efe" isDerived="false" sourceEndRoleName="" targetEndRoleName="resilientLearningRateHelper" isLeaf="false" isAbstract="false">
+                <association Id="6bdbfc6b-2246-4d49-b754-70460e009460" isDerived="false" sourceEndRoleName="" targetEndRoleName="ResilientLearningRateHelper" isLeaf="false" isAbstract="false">
                   <classMoniker Id="46746d4d-de53-4ba8-90b4-dec8221f233a" LastKnownName="ResilientLearningRateHelper" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
-                      <memberEnd Id="8d3ba477-1f6f-4876-8809-e3c0a8aa6289" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                      <memberEnd Id="6d539c29-b62e-4ab7-b0d6-1bf685cead25" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                         <lowerValueInternal>
-                          <literalString Id="9dc6fd56-10b8-41e4-be7e-8bd76c8bb9e4" name="Lower">
-                            <elementDefinition Id="5adfc9b3-fa82-4e34-a408-ddc834ea2968" />
+                          <literalString Id="e55853c0-da60-426d-b1b6-90821c16b065" name="Lower">
+                            <elementDefinition Id="85126aac-7225-4d30-abe7-c781992e622a" />
                           </literalString>
                         </lowerValueInternal>
                         <upperValueInternal>
-                          <literalString Id="5b9adc1e-7686-4baa-83a5-e3d79bbf9f12" name="Upper">
-                            <elementDefinition Id="5810cbea-ce31-4d42-a390-81fe03a63d33" />
+                          <literalString Id="66bfd3af-6705-4c5a-a718-be09f16b68a8" name="Upper">
+                            <elementDefinition Id="10f70405-5bcf-4dd9-b45f-6b5a6b02c0cc" />
                           </literalString>
                         </upperValueInternal>
-                        <elementDefinition Id="25e5d7fb-a0cb-453d-abca-537ba83b3c8f" />
+                        <elementDefinition Id="c10a3715-742f-444b-a7ae-5934cff11931" />
                       </memberEnd>
                     </associationHasOwnedEnds>
                     <associationHasOwnedEnds>
-                      <memberEnd Id="94401439-3787-4e2e-abc5-89753ef1f3a6" name="resilientLearningRateHelper" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                        <elementDefinition Id="8e36016d-f631-4d52-a451-aae18f87fe26" />
+                      <memberEnd Id="ebf1ddcb-589c-49f9-9453-2b8d627e5ca9" name="ResilientLearningRateHelper" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="43004b9c-90c8-4f3f-ba22-8e9f4611714f" />
                       </memberEnd>
                     </associationHasOwnedEnds>
                   </relationshipOwnedElementsInternal>
-                  <elementDefinition Id="ee6e7bfb-41e1-4d28-a3a0-27711691cbba" />
+                  <elementDefinition Id="8c8b9fcb-abbf-4479-9f28-1495c4825ff2" />
                 </association>
               </targetEnds>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" name="AbstractDeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="d84ba14d-d03c-4baa-9a23-ff7d7f1295f3" />
-              <generalsInternal>
-                <generalization Id="c13698df-e655-4d4d-97e3-c7bbfcb44689" isSubstitutable="false">
-                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
-                  <elementDefinition Id="6534749b-63c6-435c-b8ba-e5da0078cb2e" />
-                </generalization>
-              </generalsInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
@@ -3181,48 +3092,37 @@
             <class Id="426ab4b1-6340-4d17-89f0-f91e0c41affe" name="DeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="868e8327-ada7-44ef-a8a8-8bcebcfe13e5" />
               <generalsInternal>
-                <generalization Id="a1184271-73eb-4ace-93c6-68dba0d6c717" isSubstitutable="false">
-                  <classMoniker Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" LastKnownName="AbstractDeltaLearningRule" />
-                  <elementDefinition Id="be19b093-2054-4da5-9dc6-e3849a025c71" />
-                </generalization>
-              </generalsInternal>
-            </class>
-          </packageHasNamedElement>
-          <packageHasNamedElement>
-            <class Id="0aaa7108-01cb-4dab-a8fa-9b4a9fa863d0" name="ResilientDeltaLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="b350dbc6-8867-4e43-bf02-cf056c4c12ac" />
-              <generalsInternal>
-                <generalization Id="0124e39f-9e6e-4532-ae6b-e02c8e024923" isSubstitutable="false">
-                  <classMoniker Id="7da36dd0-a7d8-4c66-8ce7-c39e67f6f950" LastKnownName="AbstractDeltaLearningRule" />
-                  <elementDefinition Id="3a96f5eb-d57c-4b19-aa10-d69e45551a42" />
+                <generalization Id="d5b0d0a9-02a9-4fba-9aeb-6f9e43668d1a" isSubstitutable="false">
+                  <classMoniker Id="7d15d11a-de5d-442f-8a10-87bde8492d55" LastKnownName="AbstractLearningRule" />
+                  <elementDefinition Id="fabcb509-c61f-4e83-b681-d07cb376700b" />
                 </generalization>
               </generalsInternal>
               <targetEnds>
-                <association Id="2d93f27c-d84e-43de-8bb1-40a7cee51470" isDerived="false" sourceEndRoleName="" targetEndRoleName="resilientLearningRateHelper" isLeaf="false" isAbstract="false">
+                <association Id="d63757ba-4b51-41ca-9623-e185d8389363" isDerived="false" sourceEndRoleName="" targetEndRoleName="ResilientLearningRateHelper" isLeaf="false" isAbstract="false">
                   <classMoniker Id="46746d4d-de53-4ba8-90b4-dec8221f233a" LastKnownName="ResilientLearningRateHelper" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
-                      <memberEnd Id="e0740680-6120-4d9b-b3be-9abe62335847" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                      <memberEnd Id="b41f5ca8-7744-434a-a988-578295183cf1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                         <lowerValueInternal>
-                          <literalString Id="e80174d2-4751-48fa-bb69-4bb1817f480e" name="Lower">
-                            <elementDefinition Id="476894b6-fdb4-4516-93cf-64638e682adf" />
+                          <literalString Id="86b3ba55-d3dd-4349-b745-3fbb47589fa8" name="Lower">
+                            <elementDefinition Id="4281d7bb-1968-440a-b4a6-85400001abb9" />
                           </literalString>
                         </lowerValueInternal>
                         <upperValueInternal>
-                          <literalString Id="b14b7df3-0b89-4dbd-a43a-3e931944a76f" name="Upper">
-                            <elementDefinition Id="ec5856b2-3394-4d0b-8737-feb2daa35ba4" />
+                          <literalString Id="1cc4422d-721c-4b18-abf6-1f3f3e9cce02" name="Upper">
+                            <elementDefinition Id="a241ce5e-fbd2-41d1-8be0-8b82eeec478f" />
                           </literalString>
                         </upperValueInternal>
-                        <elementDefinition Id="08b4a489-aaeb-492b-930d-b77bccf7e523" />
+                        <elementDefinition Id="8f483967-6044-4af7-94dd-130fa198ed1e" />
                       </memberEnd>
                     </associationHasOwnedEnds>
                     <associationHasOwnedEnds>
-                      <memberEnd Id="11c3273c-37fd-4493-8bb8-6699a06359fd" name="resilientLearningRateHelper" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                        <elementDefinition Id="b977e774-ee63-4ecd-a150-c4ef72fd133c" />
+                      <memberEnd Id="4f3df9fe-a70a-4ea8-b381-7e9fdf94c1bc" name="ResilientLearningRateHelper" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="6e302373-fdb7-479a-852e-ee0ee5c93b3d" />
                       </memberEnd>
                     </associationHasOwnedEnds>
                   </relationshipOwnedElementsInternal>
-                  <elementDefinition Id="0d826389-681e-470d-bad0-75f6c8cabc5c" />
+                  <elementDefinition Id="04d5585b-3288-450a-b688-563b50c8a7c1" />
                 </association>
               </targetEnds>
             </class>

@@ -8,17 +8,30 @@
 #include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
+#include "ResilientLearningRateHelper.hpp"
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
 	: AbstractBackpropagationLearningRule(new BackpropagationLearningRuleOptions(options_))
 {
 
+	initialize();
 }
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_) 
 	: AbstractBackpropagationLearningRule(options_)
 {
 
+	initialize();
+}
+
+void BackpropagationLearningRule::initialize()
+{
+	if (getOptions()->resilientLearningRate)
+	{
+		resilientLearningRateHelper.reset(new ResilientLearningRateHelper(&getOptions()->resilientLearningRateOptions));
+		getOptions()->momentum = 0;
+		getOptions()->offlineLearning = true;
+	}
 }
 
 void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
@@ -36,7 +49,7 @@ float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradie
 {
 	float deltaWeight;
 
-	// If momentum is used
+	// If momentum and not a resilientLearningRate is used
 	if (getOptions()->momentum > 0)
 	{
 		static int edgeIndex = 0;
@@ -51,8 +64,17 @@ float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradie
 		edgeIndex %= previousDeltaWeights->size();
 		
 	}
-	else // else just set it to the new delta weight and the weight decay term
-		deltaWeight = - getOptions()->learningRate * gradient - getOptions()->weightDecayFac * edge->getWeight();
+	else 
+	{
+		// If a resilientLearningRate is used, get the deltaWeight from the helper object, else calculate it the classical way: - learningRate * gradient
+		if (getOptions()->resilientLearningRate)
+			deltaWeight = resilientLearningRateHelper->getNextLearningRate(gradient);
+		else
+			deltaWeight = - getOptions()->learningRate * gradient;
+		
+		// Substract the weightDecay term
+		deltaWeight -= getOptions()->weightDecayFac * edge->getWeight();
+	}
 	
 	return deltaWeight;
 }
@@ -64,15 +86,26 @@ void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 
 void BackpropagationLearningRule::printDebugOutput()
 {
-
+	if (getOptions()->resilientLearningRate)
+		resilientLearningRateHelper->printDebugOutput();
 }
 
 bool BackpropagationLearningRule::learningHasStopped()
 {
-	return false;
+	if (getOptions()->resilientLearningRate)
+		return resilientLearningRateHelper->learningHasStopped();
+	else
+		return false;
 }
 
 BackpropagationLearningRuleOptions* BackpropagationLearningRule::getOptions()
 {
 	return static_cast<BackpropagationLearningRuleOptions*>(options.get());
+}
+
+void BackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+{
+	AbstractBackpropagationLearningRule::initializeTry(neuralNetwork, teacher);
+	if (getOptions()->resilientLearningRate)
+		resilientLearningRateHelper->initialize(neuralNetwork);
 }
