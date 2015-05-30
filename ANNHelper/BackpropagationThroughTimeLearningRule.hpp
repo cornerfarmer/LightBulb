@@ -39,11 +39,11 @@ protected:
 	// Returns our current options in form of a BackpropagationThroughTimeLearningRuleOptions object
 	BackpropagationThroughTimeLearningRuleOptions* getOptions();
 	// Inherited:
-	void doCalculationAfterTeachingLesson(NeuralNetwork &neuralNetwork);
+	void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork);
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
 	NeuralNetwork* initializeNeuralNetwork(NeuralNetwork &neuralNetwork);
 	void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher);
-	void initializeTeachingLesson(NeuralNetwork &neuralNetwork);
+	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);
 	Teacher* initializeTeacher(Teacher &teacher);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:

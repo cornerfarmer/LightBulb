@@ -52,9 +52,9 @@ private:
 	void adjustWeight(Edge* edge, float gradient);
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
-	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	void initialize();
 protected:
+	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
 	float calculateDeltaWeight(Edge* edge, float gradient);

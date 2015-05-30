@@ -13,7 +13,7 @@
 BackpropagationThroughTimeLearningRule::BackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_) 
 	: BackpropagationLearningRule(new BackpropagationThroughTimeLearningRuleOptions(options_))
 {
-	options->offlineLearning = false;
+
 }
 
 NeuralNetwork* BackpropagationThroughTimeLearningRule::initializeNeuralNetwork(NeuralNetwork &neuralNetwork)
@@ -43,13 +43,13 @@ void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, float grad
 	totalEdgeIndex %= deltaWeightSums.size();
 }
 
-void BackpropagationThroughTimeLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork)
+void BackpropagationThroughTimeLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
 	for (std::vector<float>::iterator deltaWeightSum = deltaWeightSums.begin(); deltaWeightSum != deltaWeightSums.end(); deltaWeightSum++)
 		*deltaWeightSum = 0;
 }
 
-void BackpropagationThroughTimeLearningRule::doCalculationAfterTeachingLesson(NeuralNetwork &neuralNetwork)
+void BackpropagationThroughTimeLearningRule::doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
 	int edgeIndex = 0;
 	// Go through all layers
@@ -91,6 +91,9 @@ void BackpropagationThroughTimeLearningRule::initializeTry(NeuralNetwork &neural
 		// Randomize all weights
 		originalNeuralNetwork->getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 	}
+
+	if (getOptions()->resilientLearningRate)
+		resilientLearningRateHelper->initialize(neuralNetwork);
 
 	dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology()));	
 }

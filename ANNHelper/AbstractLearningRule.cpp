@@ -96,7 +96,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			int lessonIndex = 0;
 			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
 			{
-				initializeTeachingLesson(initializedNeuralNetwork);
+				if (!options->offlineLearning)
+					initializeAllWeightAdjustments(initializedNeuralNetwork);
+
 				// Calculate the errorvector 
 				std::unique_ptr<std::vector<float>> errorvector = (*teachingLesson)->getErrorvector(initializedNeuralNetwork, *activationOrder);
 				
@@ -131,12 +133,15 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					}
 				}
 
-				doCalculationAfterTeachingLesson(initializedNeuralNetwork);
+				if (!options->offlineLearning)
+					doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
 
 			// If offline learning is activated, adjust all weights
 			if (options->offlineLearning)
 			{
+				initializeAllWeightAdjustments(initializedNeuralNetwork);
+
 				// Create a edgeCounter
 				int edgeCounter = 0;
 
@@ -172,6 +177,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						}	
 					}
 				}
+
+				doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
 		}
 	} while (totalError > options->totalErrorGoal && ++tryCounter < options->maxTries);

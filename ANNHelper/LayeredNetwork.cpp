@@ -316,7 +316,7 @@ void LayeredNetwork::copyWeightsFrom(LayeredNetwork& otherNetwork)
 			std::list<Edge*>* afferentEdgesOther = (dynamic_cast<StandardNeuron*>(*neuronOther))->getAfferentEdges();
 			// Go through all afferentEdges of the actual neuron
 			std::list<Edge*>::iterator edgeOther = afferentEdgesOther->begin();
-			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end() && edgeOther != afferentEdges->end(); edge++, edgeOther++)
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end() && edgeOther != afferentEdgesOther->end(); edge++, edgeOther++)
 			{	
 				(*edge)->setWeight((*edgeOther)->getWeight());
 			}

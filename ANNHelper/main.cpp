@@ -238,14 +238,14 @@ void doRecurrentLayeredNetworkTest()
 	networkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	networkOptions.neuronsPerLayerCount[0]=1;
 	networkOptions.neuronsPerLayerCount[1]=3;
-	networkOptions.neuronsPerLayerCount[2]=2;
+	networkOptions.neuronsPerLayerCount[2]=1;
 	networkOptions.useBiasNeuron = true;
-	networkOptions.selfConnectOutputLayers = true;
+	//networkOptions.selfConnectOutputLayers = true;
 	networkOptions.selfConnectHiddenLayers = true;
-	networkOptions.connectOutputWithInnerNeurons = true;
+	//networkOptions.connectOutputWithInnerNeurons = true;
 	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
 
-	std::unique_ptr<LayeredNetwork> unfoldedNetwork = recurrentNetwork->unfold(2);
+	/*std::unique_ptr<LayeredNetwork> unfoldedNetwork = recurrentNetwork->unfold(2);
 	NetworkTopologyDrawerOptions networkTopologyDrawerOptions;
 	networkTopologyDrawerOptions.width = 700;
 	networkTopologyDrawerOptions.height = 600;
@@ -267,7 +267,7 @@ void doRecurrentLayeredNetworkTest()
         window.clear();
         networkTopologyDrawer.draw(window);
         window.display();
-    }
+    }*/
 
 	NeuralNetwork neuralNetwork(recurrentNetwork);
 
@@ -284,6 +284,8 @@ void doRecurrentLayeredNetworkTest()
   	options.weightDecayFac = 0;
 	options.momentum = 0;
 	options.maxTimeSteps = 2;
+	options.offlineLearning = true;
+	options.resilientLearningRate = true;
 	BackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;

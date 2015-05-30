@@ -76,9 +76,9 @@ protected:
 	// This method should do something like randomizing all weight
 	virtual void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
 	// This method could be used to do some work after every teaching lesson
-	virtual void doCalculationAfterTeachingLesson(NeuralNetwork &neuralNetwork) { };
+	virtual void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
 	// 
-	virtual void initializeTeachingLesson(NeuralNetwork &neuralNetwork) { };
+	virtual void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
 	// This method could be used to do some prework on the neuralNetwork
 	virtual NeuralNetwork* initializeNeuralNetwork(NeuralNetwork &neuralNetwork) { return &neuralNetwork; };
 	// This method could be used to do some prework on the teacher
