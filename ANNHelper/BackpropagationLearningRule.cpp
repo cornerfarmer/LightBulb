@@ -11,14 +11,14 @@
 #include "ResilientLearningRateHelper.hpp"
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
-	: AbstractBackpropagationLearningRule(new BackpropagationLearningRuleOptions(options_))
+	: AbstractLearningRule(new BackpropagationLearningRuleOptions(options_))
 {
 
 	initialize();
 }
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_) 
-	: AbstractBackpropagationLearningRule(options_)
+	: AbstractLearningRule(options_)
 {
 
 	initialize();
@@ -36,13 +36,71 @@ void BackpropagationLearningRule::initialize()
 
 void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	AbstractBackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher);
+	// Check if all given parameters are correct
+	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
+
+	// Create a vector which will contain all delta values of the neurons in the output layer
+	deltaVectorOutputLayer.clear();		
+
 	// If momentum is used
 	if (getOptions()->momentum > 0)
 	{
 		// Initialize the learningRates vector with the size of the total edge count
 		previousDeltaWeights = std::unique_ptr<std::vector<float>>(new std::vector<float>((dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))->getEdgeCount()));
 	}
+}
+
+
+float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+{
+	// If its the last layer
+	if (layerIndex == layerCount - 1)
+	{		
+		// Calculate the gradient
+		// gradient = - Output(prevNeuron) * deltaValue
+		float gradient = -1 * edge->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge->getNextNeuron()];	
+
+		return gradient;
+	}
+	else
+	{		
+		// Calculate the gradient
+		// gradient = - Output(prevNeuron) * deltaValue
+		float gradient = -1 * edge->getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge->getNextNeuron()];
+	
+		return gradient;
+	}	
+
+	return 0;
+}
+
+void BackpropagationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+{
+	// If its the last layer
+	if (layerIndex == layerCount - 1)
+	{					
+		// Compute the delta value: activationFunction'(netInput) * errorValue
+		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errorvector)[neuronIndex];
+	}
+	else
+	{
+		std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(neuron))->getAfferentEdges();
+		std::list<Edge*>* efferentEdges = neuron->getEfferentEdges();
+
+		// Calc the nextLayerErrorValueFactor
+		float nextLayerErrorValueFactor = 0;
+
+		// Go through all efferentEdges of the actual neuron and add to the nextLayerErrorValueFactor: deltaValue * edgeWeight
+		int efferentEdgeIndex = 0;
+		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++, efferentEdgeIndex++)
+		{
+			nextLayerErrorValueFactor += deltaVectorOutputLayer[(*efferentEdge)->getNextNeuron()] * (*efferentEdge)->getWeight();
+		}
+
+		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
+		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor;					
+	}	
 }
 
 float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradient)
@@ -79,6 +137,12 @@ float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradie
 	return deltaWeight;
 }
 
+
+AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder()
+{
+	return new TopologicalOrder();
+}
+
 void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
 	edge->setWeight(edge->getWeight() + calculateDeltaWeight(edge, gradient));
@@ -105,7 +169,12 @@ BackpropagationLearningRuleOptions* BackpropagationLearningRule::getOptions()
 
 void BackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	AbstractBackpropagationLearningRule::initializeTry(neuralNetwork, teacher);
+	if (options->changeWeightsBeforeLearning)
+	{
+		// Randomize all weights
+		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+	}
+
 	if (getOptions()->resilientLearningRate)
 		resilientLearningRateHelper->initialize(neuralNetwork);
 }

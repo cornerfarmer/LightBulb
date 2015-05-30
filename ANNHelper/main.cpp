@@ -16,7 +16,6 @@
 #include "SingleLayerPerceptronLearningRule.hpp"
 #include "DeltaLearningRule.hpp"
 #include "BackpropagationLearningRule.hpp"
-#include "ResilientBackpropagationLearningRule.hpp"
 #include "Teacher.hpp"
 #include "TeachingLessonBooleanInput.hpp"
 #include "NeuralNetworkResultChart.hpp"

@@ -83,9 +83,6 @@
     <ClInclude Include="FermiFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractBackpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="BackpropagationLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
@@ -156,9 +153,6 @@
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="RBFInterpolationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="ResilientBackpropagationLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="ResilientLearningRateHelper.hpp">
@@ -280,9 +274,6 @@
     <ClCompile Include="FermiFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractBackpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="BackpropagationLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
@@ -353,9 +344,6 @@
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
     <ClCompile Include="RBFInterpolationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="ResilientBackpropagationLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="ResilientLearningRateHelper.cpp">

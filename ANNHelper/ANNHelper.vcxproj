@@ -68,7 +68,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractBackpropagationLearningRule.cpp" />
     <ClCompile Include="AbstractClustering.cpp" />
     <ClCompile Include="AbstractDeltaLearningRule.cpp" />
     <ClCompile Include="AbstractNearestClustering.cpp" />
@@ -119,7 +118,6 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SFML_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="RBFThreshold.cpp" />
-    <ClCompile Include="ResilientBackpropagationLearningRule.cpp" />
     <ClCompile Include="ROLFClustering.cpp" />
     <ClCompile Include="ROLFNeuronPlacer.cpp" />
     <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
@@ -137,7 +135,6 @@
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractBackpropagationLearningRule.hpp" />
     <ClInclude Include="AbstractClustering.hpp" />
     <ClInclude Include="AbstractDeltaLearningRule.hpp" />
     <ClInclude Include="AbstractNearestClustering.hpp" />
@@ -185,7 +182,6 @@
     <ClInclude Include="RBFInterpolationLearningRule.hpp" />
     <ClInclude Include="RBFNetwork.hpp" />
     <ClInclude Include="RBFThreshold.hpp" />
-    <ClInclude Include="ResilientBackpropagationLearningRule.hpp" />
     <ClInclude Include="ROLFClustering.hpp" />
     <ClInclude Include="ROLFNeuronPlacer.hpp" />
     <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
