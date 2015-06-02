@@ -5,6 +5,7 @@
 
 // Library Includes
 #include <vector>
+#include <map>
 
 // Forward declarations
 class NeuralNetwork;
@@ -13,6 +14,8 @@ class Neuron;
 class Edge;
 class StandardNeuron;
 class AbstractActivationOrder;
+class AbstractNeuron;
+class StandardNeuron;
 
 struct AbstractLearningRuleOptions
 {
@@ -60,15 +63,15 @@ class AbstractLearningRule
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
 	// This method will be called in front of the actual learning algorithm
-	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
+	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
-	virtual float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector) = 0;
+	virtual float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap) = 0;
 	// This method should adjust the weight of the current edge
 	virtual void adjustWeight(Edge* edge, float deltaWeight) = 0;
 	// Calculate if it is sensible to continue learning
 	virtual bool learningHasStopped() = 0;
 	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges
-	virtual void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector) {};
+	virtual void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap) {};
 	// This method should return the used activationOrder
 	virtual AbstractActivationOrder* getNewActivationOrder() = 0;
 	// Prints a current summary of the status of the learning process
@@ -85,6 +88,8 @@ protected:
 	virtual Teacher* initializeTeacher(Teacher &teacher) { return &teacher; };
 	// This method could be used to do something after the learning process
 	virtual void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
+	virtual std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime() { return NULL; }
+	virtual std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime() { return NULL; }
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given NeuralNetwork

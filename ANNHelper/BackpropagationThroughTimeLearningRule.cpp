@@ -27,9 +27,9 @@ Teacher* BackpropagationThroughTimeLearningRule::initializeTeacher(Teacher &teac
 	return teacher.unfold().release();
 }
 
-void BackpropagationThroughTimeLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void BackpropagationThroughTimeLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {	
-	BackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher);
+	BackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
 	deltaWeightSums = std::vector<float>(originalNeuralNetwork->getNetworkTopology()->getEdgeCount(), 0);
 }
 

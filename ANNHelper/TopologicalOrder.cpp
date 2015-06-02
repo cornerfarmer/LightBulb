@@ -29,3 +29,8 @@ AbstractActivationOrder* TopologicalOrder::getCopy()
 {
 	return new TopologicalOrder(*this);
 }
+
+std::unique_ptr<std::map<Edge*, bool>> TopologicalOrder::getSameTimestepEdges(AbstractNetworkTopology &networkTopology)
+{
+	return networkTopology.getNonRecurrentEdges();
+}

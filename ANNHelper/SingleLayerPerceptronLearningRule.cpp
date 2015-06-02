@@ -27,7 +27,7 @@ bool SingleLayerPerceptronLearningRule::learningHasStopped()
 	return false;
 }
 
-void SingleLayerPerceptronLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void SingleLayerPerceptronLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))

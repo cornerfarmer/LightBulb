@@ -62,6 +62,12 @@ public:
 	void mergeWith(LayeredNetwork& otherNetwork);	 
 
 	void copyWeightsFrom(LayeredNetwork& otherNetwork);
+
+	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
+	
+	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
+
+	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
 };
 
 #endif

@@ -5,25 +5,28 @@
 
 // Library Includes
 #include <vector>
+#include <map>
 
 // Forward declarations
 class NeuralNetwork;
 class AbstractActivationOrder;
 class AbstractActivationFunction;
 class NeuralNetworkIO;
+class AbstractNeuron;
+class StandardNeuron;
 
 class AbstractTeachingLesson
 {
 public:
 	// Put the teachingPattern into the neuralNetwork and refresh the network
-	std::unique_ptr<NeuralNetworkIO> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	std::unique_ptr<NeuralNetworkIO> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
 	// This method should return a float vector of the teachingInput 
 	virtual std::vector<float>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
 	// This method should return a float vector of the teachingPattern
 	virtual NeuralNetworkIO* getTeachingPattern() = 0;
 	virtual ~AbstractTeachingLesson() {}
-	// Calculate the Errorvector
-	std::unique_ptr<std::vector<float>> getErrorvector(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	// Calculate the Errormap
+	std::unique_ptr<std::map<StandardNeuron*, float>> getErrormap(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
 	// Calculate the euclidient distance
 	float getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the RootMeanSquare

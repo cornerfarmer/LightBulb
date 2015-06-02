@@ -15,13 +15,14 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	networkTopology.reset(networkTopology_);
 }
 
-std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input, AbstractActivationOrder &activationOrder)
+std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime)
 {
 	std::unique_ptr<NeuralNetworkIO> output(new NeuralNetworkIO());
 
 	networkTopology->resetActivation();
 
-	for (NeuralNetworkIO::iterator singleInput = input.begin(); singleInput != input.end(); singleInput++)
+	int timeStep = 0;
+	for (NeuralNetworkIO::iterator singleInput = input.begin(); singleInput != input.end(); singleInput++, timeStep++)
 	{
 		setInput(*singleInput);
 
@@ -29,6 +30,11 @@ std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input
 		activationOrder.executeActivation(*networkTopology);
 
 		output->push_back(*getOutput());
+
+		if (outputValuesInTime != NULL)
+			networkTopology->getAllNeuronOutputs((*outputValuesInTime)[timeStep]);
+		if (netInputValuesInTime != NULL)
+			networkTopology->getAllNeuronNetInputs((*netInputValuesInTime)[timeStep]);
 	}
 
 	return output;

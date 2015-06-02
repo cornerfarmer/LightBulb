@@ -46,24 +46,24 @@ struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
 class BackpropagationLearningRule : public AbstractLearningRule
 {
 private:	
-	// This vector should hold all delta values
-	std::map<AbstractNeuron*, float> deltaVectorOutputLayer;
-	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeight(Edge* edge, float gradient);
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
+	// This vector should hold all delta values
+	std::map<AbstractNeuron*, float> deltaVectorOutputLayer;
 	void initialize();
 protected:
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
+	// Adjusts the weights of an edge dependent on its gradient
+	void adjustWeight(Edge* edge, float gradient);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
 	float calculateDeltaWeight(Edge* edge, float gradient);
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
-	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
-	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
-	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
+	virtual float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
+	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
 	AbstractActivationOrder* getNewActivationOrder();
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:

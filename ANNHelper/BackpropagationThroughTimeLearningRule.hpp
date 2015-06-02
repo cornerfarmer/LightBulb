@@ -40,7 +40,7 @@ protected:
 	BackpropagationThroughTimeLearningRuleOptions* getOptions();
 	// Inherited:
 	void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork);
-	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
 	NeuralNetwork* initializeNeuralNetwork(NeuralNetwork &neuralNetwork);
 	void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher);
 	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);

@@ -34,6 +34,7 @@
 #include "RecurrentLayeredNetwork.hpp"
 #include "BackpropagationThroughTimeLearningRule.hpp"
 #include "NetworkTopologyDrawer.hpp"
+#include "TruncatedBackpropagationThroughTimeLearningRule.hpp"
 
 void doPerceptronTest()
 {
@@ -61,7 +62,8 @@ void doPerceptronTest()
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
-	options.resilientLearningRate = true;
+	options.resilientLearningRate = false;
+//	options.maxTimeSteps = 1;
 	BackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;
@@ -283,10 +285,9 @@ void doRecurrentLayeredNetworkTest()
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
 	options.momentum = 0;
+	options.offlineLearning = false;
 	options.maxTimeSteps = 2;
-	options.offlineLearning = true;
-	options.resilientLearningRate = true;
-	BackpropagationThroughTimeLearningRule learningRule(options);
+	TruncatedBackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
 	
@@ -301,7 +302,8 @@ void doRecurrentLayeredNetworkTest()
 			if (l != 0)
 				lastPattern = teachingPattern->back()[0];
 			teachingPattern->push_back(std::vector<float>(1));
-			teachingPattern->back()[0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));				
+			teachingPattern->back()[0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
+
 		}
 
 		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	

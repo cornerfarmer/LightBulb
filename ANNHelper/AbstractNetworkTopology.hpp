@@ -3,12 +3,14 @@
 #ifndef _ABSTRACTNETWORKTOPOLOGY_H_
 #define _ABSTRACTNETWORKTOPOLOGY_H_
 
-// Includes
+// Library includes
 #include <vector>
+#include <map>
 
 // Forward declarations
 class InputNeuron;
 class AbstractNeuron;
+class Edge;
 
 // A NetworkTopology is used to describe the structure of a NeuralNetwork
 class AbstractNetworkTopology
@@ -30,6 +32,12 @@ public:
 	virtual int getEdgeCount() = 0;
 
 	virtual void resetActivation() = 0;
+
+	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs) = 0;
+
+	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs) = 0;
+	
+	virtual std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges() = 0;
 };
 
 #endif

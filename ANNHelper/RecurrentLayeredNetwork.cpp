@@ -198,3 +198,41 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 
 	return unfoldedNetwork;
 }
+
+std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentEdges()
+{
+	std::unique_ptr<std::map<Edge*, bool>> nonRecurrentEdges(new std::map<Edge*, bool>());
+
+	// Go through all layers
+	int layerIndex = 0;
+	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++, layerIndex++)
+	{
+		// Go through all neurons in this layer
+		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			// Go through all effernetEdges of this neuron
+			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
+			int edgeIndex = 0;
+			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++, edgeIndex++)
+			{
+				if (layerIndex == getLayerCount() - 1 || edgeIndex >= getNeuronsInLayer(layerIndex + 1)->size())
+					(*nonRecurrentEdges)[*edge] = false;
+				else
+					(*nonRecurrentEdges)[*edge] = true;
+			}
+		}
+	}
+
+	// If a bias neuron is used also randomize its weights
+	if (options->useBiasNeuron)
+	{
+		// Go through all effernetEdges of the bias neuron
+		std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
+		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+		{
+			(*nonRecurrentEdges)[*edge] = true;
+		}		
+	}
+
+	return nonRecurrentEdges;
+}

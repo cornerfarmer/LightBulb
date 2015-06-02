@@ -41,7 +41,7 @@ bool RBFInterpolationLearningRule::learningHasStopped()
 	return false;
 }
 
-void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	actTeacher = &teacher;
 
@@ -70,7 +70,7 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
 	return new TopologicalOrder();
 }
 
-float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
 {
 	// Only change weights in the last layer
 	if (layerIndex == layerCount - 1)
@@ -79,7 +79,7 @@ float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int
 		return 0;
 }
 
-void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
 {
 	// Only change weights in the last layer
 	if (layerIndex == layerCount - 1)

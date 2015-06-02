@@ -34,7 +34,7 @@ void BackpropagationLearningRule::initialize()
 	}
 }
 
-void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
@@ -52,7 +52,7 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 }
 
 
-float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
 {
 	// If its the last layer
 	if (layerIndex == layerCount - 1)
@@ -75,17 +75,16 @@ float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int 
 	return 0;
 }
 
-void BackpropagationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector)
+void BackpropagationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
 {
 	// If its the last layer
 	if (layerIndex == layerCount - 1)
 	{					
 		// Compute the delta value: activationFunction'(netInput) * errorValue
-		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errorvector)[neuronIndex];
+		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errormap)[neuron];
 	}
 	else
 	{
-		std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(neuron))->getAfferentEdges();
 		std::list<Edge*>* efferentEdges = neuron->getEfferentEdges();
 
 		// Calc the nextLayerErrorValueFactor

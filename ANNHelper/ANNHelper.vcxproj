@@ -131,6 +131,7 @@
     <ClCompile Include="TeachingLessonLinearInput.cpp" />
     <ClCompile Include="AbstractThreshold.cpp" />
     <ClCompile Include="TopologicalOrder.cpp" />
+    <ClCompile Include="TruncatedBackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="ValuePosition.cpp" />
     <ClCompile Include="WeightedSumFunction.cpp" />
   </ItemGroup>
@@ -195,6 +196,7 @@
     <ClInclude Include="TeachingLessonLinearInput.hpp" />
     <ClInclude Include="AbstractThreshold.hpp" />
     <ClInclude Include="TopologicalOrder.hpp" />
+    <ClInclude Include="TruncatedBackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="ValuePosition.hpp" />
     <ClInclude Include="WeightedSumFunction.hpp" />
   </ItemGroup>

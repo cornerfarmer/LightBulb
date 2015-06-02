@@ -40,9 +40,9 @@ protected:
 	AbstractDeltaLearningRuleOptions* getOptions();
 	virtual void initializeDeltaLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
 	// Inherited:
-	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher);	
+	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
 	AbstractActivationOrder* getNewActivationOrder();
-	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorvector);
+	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	AbstractDeltaLearningRule(AbstractDeltaLearningRuleOptions *options_);
