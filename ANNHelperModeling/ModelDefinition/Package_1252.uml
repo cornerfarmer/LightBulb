@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="223df67c-c611-4d91-a070-355649ff96b7"
   name="NetworkTopology" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -959,6 +959,15 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="436806ae-4a29-4942-b912-67d8cc97040d">
+            <interfaceMoniker
+              Id="d5706054-ab94-4f32-8bf7-5b0baa03a142"
+              LastKnownName="RecurrentNetwork"
+              LastKnownLocation="Package_1252.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <generalsInternal>
           <generalization
             Id="7330117a-3288-4f82-a4de-ddb6ae1b16a1"
@@ -1022,6 +1031,32 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="1224f068-6424-4f3a-9085-5e615ceb253f"
+            name="unfold"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="71506942-eeaa-409d-9d03-02c5a3ccdfba"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
+                      LastKnownName="LayeredNetwork"
+                      LastKnownLocation="Package_1252.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1050,6 +1085,15 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="e43bd1ff-cef6-4d52-afff-d4ea3019c783">
+            <interfaceMoniker
+              Id="d5706054-ab94-4f32-8bf7-5b0baa03a142"
+              LastKnownName="RecurrentNetwork"
+              LastKnownLocation="Package_1252.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <generalsInternal>
           <generalization
             Id="6075916f-20a7-4696-bac2-aa48f5e2e575"
@@ -1060,7 +1104,67 @@
               LastKnownLocation="Package_1252.uml" />
           </generalization>
         </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="f7d3a8ae-a3c7-4e20-a40e-c94a08697bae"
+            name="unfold"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="987282b2-06b6-4e8a-b192-9d05615c8a9a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
+                      LastKnownName="LayeredNetwork"
+                      LastKnownLocation="Package_1252.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="d5706054-ab94-4f32-8bf7-5b0baa03a142"
+        name="RecurrentNetwork"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="2b9cdfc3-ba3a-4c4f-9d7e-272cad782c1b"
+            name="unfold"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="599fccd0-b0e7-4bfd-ae52-84c668089a22"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
+                      LastKnownName="LayeredNetwork"
+                      LastKnownLocation="Package_1252.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
     </packageHasNamedElement>
   </packagedElements>
 </package>

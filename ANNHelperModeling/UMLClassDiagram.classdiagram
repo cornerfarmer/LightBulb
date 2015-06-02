@@ -2231,6 +2231,12 @@
                 </stereotypeInstance>
               </appliedStereotypesInternal>
               <elementDefinition Id="2d2d01df-0c42-45ed-a434-308402083b74" />
+              <suppliersInternal>
+                <interfaceRealization Id="40b783e5-3eaf-4c76-b2d5-13aa0439938e">
+                  <interfaceMoniker Id="fbff7ee4-2072-46a9-864b-2705793589a0" LastKnownName="RecurrentNetwork" />
+                  <elementDefinition Id="436806ae-4a29-4942-b912-67d8cc97040d" />
+                </interfaceRealization>
+              </suppliersInternal>
               <generalsInternal>
                 <generalization Id="8a5605a5-f2de-4ba0-86e8-f1bff2c0b88f" isSubstitutable="false">
                   <classMoniker Id="15fc33e9-3f00-4f4c-89df-5d7a31805e9d" LastKnownName="AbstractNetworkTopology" />
@@ -2265,6 +2271,21 @@
                   <elementDefinition Id="f126ef14-5885-48a1-a91c-15666ee2a3ec" />
                 </association>
               </targetEnds>
+              <ownedOperationsInternal>
+                <operation Id="b4f61b85-4265-4d85-81fb-4144924f205f" name="unfold" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="1224f068-6424-4f3a-9085-5e615ceb253f" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="58532743-d2b2-462e-8e1f-67787c30b418" direction="Return" isUnique="false">
+                        <elementDefinition Id="71506942-eeaa-409d-9d03-02c5a3ccdfba" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="LayeredNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
@@ -2281,13 +2302,54 @@
           <packageHasNamedElement>
             <class Id="a0ff69b2-1e77-4153-88a8-be3407345e79" name="RecurrentLayeredNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="c15ca439-ee38-4dd7-94a1-54ab9d253bf3" />
+              <suppliersInternal>
+                <interfaceRealization Id="baec2b11-78e7-41f1-a81f-2616effd2810">
+                  <interfaceMoniker Id="fbff7ee4-2072-46a9-864b-2705793589a0" LastKnownName="RecurrentNetwork" />
+                  <elementDefinition Id="e43bd1ff-cef6-4d52-afff-d4ea3019c783" />
+                </interfaceRealization>
+              </suppliersInternal>
               <generalsInternal>
                 <generalization Id="d6ae66e9-5081-47d6-8dfe-2b0ea46fc9c9" isSubstitutable="false">
                   <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="LayeredNetwork" />
                   <elementDefinition Id="6075916f-20a7-4696-bac2-aa48f5e2e575" />
                 </generalization>
               </generalsInternal>
+              <ownedOperationsInternal>
+                <operation Id="47b6cbbe-9515-4877-8c0f-09794599a8dd" name="unfold" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="f7d3a8ae-a3c7-4e20-a40e-c94a08697bae" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="db4eb991-9200-4266-b639-23c0219ad236" direction="Return" isUnique="false">
+                        <elementDefinition Id="987282b2-06b6-4e8a-b192-9d05615c8a9a" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="LayeredNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperationsInternal>
             </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <Interface Id="fbff7ee4-2072-46a9-864b-2705793589a0" name="RecurrentNetwork" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="d5706054-ab94-4f32-8bf7-5b0baa03a142" />
+              <ownedOperations>
+                <operation Id="ae8390dc-c16d-4b58-9bea-491a339a970f" name="unfold" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="2b9cdfc3-ba3a-4c4f-9d7e-272cad782c1b" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="f152905e-3301-4ca4-8571-8f898bbea90d" direction="Return" isUnique="false">
+                        <elementDefinition Id="599fccd0-b0e7-4bfd-ae52-84c668089a22" />
+                        <type_NamedElement>
+                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="LayeredNetwork" />
+                        </type_NamedElement>
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperations>
+            </Interface>
           </packageHasNamedElement>
         </packagedElements>
       </package>
@@ -3859,6 +3921,11 @@
     <packageHasNamedElement>
       <referencedType Id="c26707f9-b5c8-400a-8b8a-04f09d3c8860" name="AbstractActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::AcitvationOrder::AbstractActivationOrder">
         <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="53ee496d-412c-4714-ba79-9b51c633217b" name="LayeredNetwork" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology::LayeredNetwork">
+        <elementDefinition Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

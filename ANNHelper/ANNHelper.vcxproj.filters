@@ -230,6 +230,9 @@
     <ClInclude Include="TruncatedBackpropagationThroughTimeLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="FreeNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -423,6 +426,9 @@
     </ClCompile>
     <ClCompile Include="TruncatedBackpropagationThroughTimeLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
