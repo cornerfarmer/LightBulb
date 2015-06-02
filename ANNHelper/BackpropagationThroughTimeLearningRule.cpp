@@ -18,18 +18,22 @@ BackpropagationThroughTimeLearningRule::BackpropagationThroughTimeLearningRule(B
 
 NeuralNetwork* BackpropagationThroughTimeLearningRule::initializeNeuralNetwork(NeuralNetwork &neuralNetwork)
 {
+	// Save the current neural network
 	originalNeuralNetwork = &neuralNetwork;
+	// Create a new neural network from the unfolded network topology of the original neural network and return it
 	return new NeuralNetwork(dynamic_cast<RecurrentLayeredNetwork*>(neuralNetwork.getNetworkTopology())->unfold(getOptions()->maxTimeSteps).release());
 }
 
 Teacher* BackpropagationThroughTimeLearningRule::initializeTeacher(Teacher &teacher)
 {
+	// Unfold the teacher and return it
 	return teacher.unfold().release();
 }
 
 void BackpropagationThroughTimeLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {	
 	BackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
+	// Create the delta weight sums vector in the size of the ORIGINAL network edge count
 	deltaWeightSums = std::vector<float>(originalNeuralNetwork->getNetworkTopology()->getEdgeCount(), 0);
 }
 
@@ -37,6 +41,7 @@ void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, float grad
 {
 	static int totalEdgeIndex = 0;
 
+	// Add the calculated delta weight to the corresponding edge in the original network
 	deltaWeightSums[totalEdgeIndex] += calculateDeltaWeight(edge, gradient);
 
 	totalEdgeIndex++;
@@ -45,6 +50,7 @@ void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, float grad
 
 void BackpropagationThroughTimeLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
+	// Reset all sums to zero
 	for (std::vector<float>::iterator deltaWeightSum = deltaWeightSums.begin(); deltaWeightSum != deltaWeightSums.end(); deltaWeightSum++)
 		*deltaWeightSum = 0;
 }
@@ -63,6 +69,7 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterAllWeightAdjustme
 			// Go through all afferentEdges of the actual neuron
 			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 			{	
+				// Add to the edge weight the corresponding delta weight sum
 				(*edge)->setWeight((*edge)->getWeight() + deltaWeightSums[edgeIndex] / getOptions()->maxTimeSteps);			
 				edgeIndex++;
 				edgeIndex %= deltaWeightSums.size();
@@ -73,8 +80,10 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterAllWeightAdjustme
 
 void BackpropagationThroughTimeLearningRule::doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
+	// Copy all weights from the unfolded network back into the orignal network
 	dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()));
 	
+	// Delete all temporary unfolded stuff
 	delete(&neuralNetwork);
 	delete(&teacher);
 }
@@ -86,14 +95,17 @@ BackpropagationThroughTimeLearningRuleOptions* BackpropagationThroughTimeLearnin
 
 void BackpropagationThroughTimeLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
+	// If we can change the weights before learning
 	if (options->changeWeightsBeforeLearning)
 	{
-		// Randomize all weights
+		// Randomize all weights from the original network
 		originalNeuralNetwork->getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 	}
 
+	// If needed, intialize the resilientLearningRateHelper
 	if (getOptions()->resilientLearningRate)
 		resilientLearningRateHelper->initialize(neuralNetwork);
 
+	// Copy all weights from the original network into the unfolded one
 	dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology()));	
 }

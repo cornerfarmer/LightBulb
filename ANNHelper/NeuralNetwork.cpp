@@ -19,20 +19,26 @@ std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input
 {
 	std::unique_ptr<NeuralNetworkIO> output(new NeuralNetworkIO());
 
+	// Reset all activations
 	networkTopology->resetActivation();
 
+	// Do for every time step
 	int timeStep = 0;
 	for (NeuralNetworkIO::iterator singleInput = input.begin(); singleInput != input.end(); singleInput++, timeStep++)
 	{
+		// Set the input into the neural network
 		setInput(*singleInput);
 
 		// Pass the work to the activationOrder
 		activationOrder.executeActivation(*networkTopology);
 
+		// Extract the output and save it into the output value
 		output->push_back(*getOutput());
 
+		// If the output values map is not null, fill it with all current output values 
 		if (outputValuesInTime != NULL)
 			networkTopology->getAllNeuronOutputs((*outputValuesInTime)[timeStep]);
+		// If the netInput values map is not null, fill it with all current netInput values 
 		if (netInputValuesInTime != NULL)
 			networkTopology->getAllNeuronNetInputs((*netInputValuesInTime)[timeStep]);
 	}

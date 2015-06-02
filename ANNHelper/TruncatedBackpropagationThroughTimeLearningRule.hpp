@@ -21,11 +21,15 @@ class Edge;
 class TruncatedBackpropagationThroughTimeLearningRule : public BackpropagationLearningRule
 {
 private:	
+	// Holds all output values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> outputValuesInTime;
+	// Holds all netInput values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
+	// Contains for every edge the information, if its neurons are in the same time step
 	std::unique_ptr<std::map<Edge*, bool>> sameTimestepEdges;
-	// This vector should hold all delta values
+	// This vector should hold all delta values in all timesteps (The boolean value holds the information, if the deltavalue is valid)
 	std::map<AbstractNeuron*, std::vector<std::pair<float, bool>>> deltaVectorOutputLayer;
+	// Returns and calculated (if needed) the delta value of a neuron in the given timestep
 	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, std::map<StandardNeuron*, float>* errormap);
 protected:
 	// Returns our current options in form of a BackpropagationThroughTimeLearningRuleOptions object

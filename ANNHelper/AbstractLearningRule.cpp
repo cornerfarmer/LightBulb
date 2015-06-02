@@ -99,7 +99,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				if (!options->offlineLearning)
 					initializeAllWeightAdjustments(initializedNeuralNetwork);
 
-				// Calculate the errorvector 
+				// Calculate the errorvector and also fill - if needed - the output and netInput values map
 				std::unique_ptr<std::map<StandardNeuron*, float>> errormap = (*teachingLesson)->getErrormap(initializedNeuralNetwork, *activationOrder, getOutputValuesInTime(), getNetInputValuesInTime());
 				
 				// Create a edgeCounter, which will be used in offline learning

@@ -17,7 +17,7 @@ class Edge;
 
 struct BackpropagationThroughTimeLearningRuleOptions : BackpropagationLearningRuleOptions
 {	
-	// 
+	// Sets the number of time step the algorithm should simulate (All teachingLessons should have exactly one pattern for every time step)
 	unsigned int maxTimeSteps;
 	BackpropagationThroughTimeLearningRuleOptions()
 	{
@@ -31,7 +31,7 @@ class BackpropagationThroughTimeLearningRule : public BackpropagationLearningRul
 private:	
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
-	// This vector should hold all delta weight sums
+	// This vector should hold all delta weight sums for every edge in the original network, which is the sum of all corresponding weights in the unfolded network
 	std::vector<float> deltaWeightSums;
 	// This variable contains the original network which is not unfolded
 	NeuralNetwork* originalNeuralNetwork;

@@ -275,7 +275,7 @@ void doRecurrentLayeredNetworkTest()
 
 	BackpropagationThroughTimeLearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.debugOutputInterval = 100;
+	options.debugOutputInterval = 1;
 	options.maxTotalErrorValue = 1;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 20000;
@@ -285,7 +285,8 @@ void doRecurrentLayeredNetworkTest()
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
 	options.momentum = 0;
-	options.offlineLearning = false;
+	options.offlineLearning = true;
+	options.resilientLearningRate = true;
 	options.maxTimeSteps = 2;
 	TruncatedBackpropagationThroughTimeLearningRule learningRule(options);
 

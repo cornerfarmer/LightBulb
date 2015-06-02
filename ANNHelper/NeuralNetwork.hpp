@@ -26,6 +26,7 @@ private:
 	void setInput(std::vector<float> &inputVector);
 public:
 	NeuralNetwork(AbstractNetworkTopology* networkTopology_);
+	// Calculates from the given input and activation order the output from neural network (If a not-NULL output value map or a netInput value map is given, the method will fill them)
 	std::unique_ptr<NeuralNetworkIO> calculate(NeuralNetworkIO& input, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
 	AbstractNetworkTopology* getNetworkTopology();
 };

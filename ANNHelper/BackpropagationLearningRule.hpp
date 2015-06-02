@@ -27,9 +27,9 @@ struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
 	float momentum;
 	// Sets the learning Rate
 	float learningRate;	
-
+	// Selects if a resilient learning rate should be used (This option can not be used at the same time with the momentum term)
 	bool resilientLearningRate;
-
+	// Holds all options which are needed for the resilient learning rate
 	ResilientLearningRateHelperOptions resilientLearningRateOptions;
 	BackpropagationLearningRuleOptions()
 	{
@@ -50,13 +50,16 @@ private:
 	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
 	// This vector should hold all delta values
 	std::map<AbstractNeuron*, float> deltaVectorOutputLayer;
+	// Check and adjust all given options
 	void initialize();
 protected:
+	// The resilient learning rate helper is used when resilientLearningRate is activated
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
+	// Calculate the delta weight value of the given edge
 	float calculateDeltaWeight(Edge* edge, float gradient);
 	// Inherited:
 	void printDebugOutput();

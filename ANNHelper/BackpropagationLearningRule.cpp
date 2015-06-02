@@ -26,10 +26,14 @@ BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearning
 
 void BackpropagationLearningRule::initialize()
 {
+	// If we should use a resilient learnig rate
 	if (getOptions()->resilientLearningRate)
 	{
+		// Create a new ResilientLearningRateHelper
 		resilientLearningRateHelper.reset(new ResilientLearningRateHelper(&getOptions()->resilientLearningRateOptions));
+		// Set the momentum to zero (Momentum is not compatible with a resilient learning rate
 		getOptions()->momentum = 0;
+		// A resilient learning rate can only be used offline
 		getOptions()->offlineLearning = true;
 	}
 }
@@ -155,6 +159,7 @@ void BackpropagationLearningRule::printDebugOutput()
 
 bool BackpropagationLearningRule::learningHasStopped()
 {
+	// TODO: Implement a learning has stopped algorithm if we use a normal learning rate
 	if (getOptions()->resilientLearningRate)
 		return resilientLearningRateHelper->learningHasStopped();
 	else
@@ -168,12 +173,14 @@ BackpropagationLearningRuleOptions* BackpropagationLearningRule::getOptions()
 
 void BackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
+	// If we can change the weights before learning
 	if (options->changeWeightsBeforeLearning)
 	{
 		// Randomize all weights
 		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 	}
 
+	// If used, initialize the learning rate helper
 	if (getOptions()->resilientLearningRate)
 		resilientLearningRateHelper->initialize(neuralNetwork);
 }

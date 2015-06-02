@@ -215,6 +215,7 @@ std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentE
 			int edgeIndex = 0;
 			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++, edgeIndex++)
 			{
+				// If the current layer is the last one or the current edge is not connected to the next layer, this is a recurrent edge
 				if (layerIndex == getLayerCount() - 1 || edgeIndex >= getNeuronsInLayer(layerIndex + 1)->size())
 					(*nonRecurrentEdges)[*edge] = false;
 				else
@@ -230,6 +231,7 @@ std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentE
 		std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
 		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 		{
+			// A bias neuron can not have any recurrent edges
 			(*nonRecurrentEdges)[*edge] = true;
 		}		
 	}

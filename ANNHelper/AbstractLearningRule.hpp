@@ -78,9 +78,9 @@ protected:
 	virtual void printDebugOutput() {};
 	// This method should do something like randomizing all weight
 	virtual void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
-	// This method could be used to do some work after every teaching lesson
+	// This method could be used to do some work after all weights has been adjusted
 	virtual void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
-	// 
+	// This method could be used to do some work befora all weights are adjusted
 	virtual void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
 	// This method could be used to do some prework on the neuralNetwork
 	virtual NeuralNetwork* initializeNeuralNetwork(NeuralNetwork &neuralNetwork) { return &neuralNetwork; };
@@ -88,7 +88,9 @@ protected:
 	virtual Teacher* initializeTeacher(Teacher &teacher) { return &teacher; };
 	// This method could be used to do something after the learning process
 	virtual void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
+	// This method can return a pointer to a output value map, which should be filled before weight calculation
 	virtual std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime() { return NULL; }
+	// This method can return a pointer to a netInput value map, which should be filled before weight calculation
 	virtual std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime() { return NULL; }
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);

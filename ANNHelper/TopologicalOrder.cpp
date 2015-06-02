@@ -32,5 +32,6 @@ AbstractActivationOrder* TopologicalOrder::getCopy()
 
 std::unique_ptr<std::map<Edge*, bool>> TopologicalOrder::getSameTimestepEdges(AbstractNetworkTopology &networkTopology)
 {
+	// Only recurrent edges are not in the same time step
 	return networkTopology.getNonRecurrentEdges();
 }

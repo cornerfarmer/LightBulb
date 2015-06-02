@@ -30,6 +30,7 @@ private:
 	RecurrentLayeredNetworkOptions* getOptions();
 public:
 	RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_);		
+	// Inherited:
 	std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount);
 	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 };

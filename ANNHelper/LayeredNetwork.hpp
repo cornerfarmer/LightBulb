@@ -60,13 +60,13 @@ public:
 	void resetActivation();
 	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
 	void mergeWith(LayeredNetwork& otherNetwork);	 
-
+	// Copies the weight from all matching edges from the other network into the current one
 	void copyWeightsFrom(LayeredNetwork& otherNetwork);
-
+	// Returns a map which holds for every edge the information if it is recurrent or not
 	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
-	
+	// Puts all current neuron outputs into the given map
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
-
+	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
 };
 
