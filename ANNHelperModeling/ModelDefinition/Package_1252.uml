@@ -964,7 +964,7 @@
             Id="436806ae-4a29-4942-b912-67d8cc97040d">
             <interfaceMoniker
               Id="d5706054-ab94-4f32-8bf7-5b0baa03a142"
-              LastKnownName="RecurrentNetwork"
+              LastKnownName="RecurrentNetworkInterface"
               LastKnownLocation="Package_1252.uml" />
           </interfaceRealization>
         </suppliersInternal>
@@ -1090,7 +1090,7 @@
             Id="e43bd1ff-cef6-4d52-afff-d4ea3019c783">
             <interfaceMoniker
               Id="d5706054-ab94-4f32-8bf7-5b0baa03a142"
-              LastKnownName="RecurrentNetwork"
+              LastKnownName="RecurrentNetworkInterface"
               LastKnownLocation="Package_1252.uml" />
           </interfaceRealization>
         </suppliersInternal>
@@ -1135,7 +1135,7 @@
     <packageHasNamedElement>
       <Interface
         Id="d5706054-ab94-4f32-8bf7-5b0baa03a142"
-        name="RecurrentNetwork"
+        name="RecurrentNetworkInterface"
         isAbstract="false"
         isLeaf="false">
         <ownedOperations>

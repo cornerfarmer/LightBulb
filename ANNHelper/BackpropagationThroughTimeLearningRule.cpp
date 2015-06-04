@@ -8,6 +8,7 @@
 #include "AbstractNetworkTopology.hpp"
 #include "StandardNeuron.hpp"
 #include "Edge.hpp"
+#include "RecurrentNetworkInterface.hpp"
 
 
 BackpropagationThroughTimeLearningRule::BackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_) 
@@ -20,8 +21,9 @@ NeuralNetwork* BackpropagationThroughTimeLearningRule::initializeNeuralNetwork(N
 {
 	// Save the current neural network
 	originalNeuralNetwork = &neuralNetwork;
+
 	// Create a new neural network from the unfolded network topology of the original neural network and return it
-	return new NeuralNetwork(dynamic_cast<RecurrentLayeredNetwork*>(neuralNetwork.getNetworkTopology())->unfold(getOptions()->maxTimeSteps).release());
+	return new NeuralNetwork(dynamic_cast<RecurrentNetworkInterface*>(neuralNetwork.getNetworkTopology())->unfold(getOptions()->maxTimeSteps).release());
 }
 
 Teacher* BackpropagationThroughTimeLearningRule::initializeTeacher(Teacher &teacher)
@@ -107,5 +109,5 @@ void BackpropagationThroughTimeLearningRule::initializeTry(NeuralNetwork &neural
 		resilientLearningRateHelper->initialize(neuralNetwork);
 
 	// Copy all weights from the original network into the unfolded one
-	dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology()));	
+	dynamic_cast<AbstractNetworkTopology*>(neuralNetwork.getNetworkTopology())->copyWeightsFrom(*dynamic_cast<AbstractNetworkTopology*>(originalNeuralNetwork->getNetworkTopology()));	
 }

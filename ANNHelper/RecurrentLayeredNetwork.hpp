@@ -1,10 +1,11 @@
 #pragma once
 
-#ifndef _RECURRENTNETWORK_H_
-#define _RECURRENTNETWORK_H_
+#ifndef _RECURRENTLAYEREDNETWORK_H_
+#define _RECURRENTLAYEREDNETWORK_H_
 
 // Includes
 #include "LayeredNetwork.hpp"
+#include "RecurrentNetworkInterface.hpp"
 
 // This struct contains all options needed to build a RecurrentLayeredNetwork
 struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
@@ -21,7 +22,7 @@ struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
 };
 
 // A RecurrentLayeredNetwork describes a LayeredNetwork with recurrent connections
-class RecurrentLayeredNetwork : public LayeredNetwork
+class RecurrentLayeredNetwork : public LayeredNetwork, public RecurrentNetworkInterface
 {
 private:	
 	// Build all recurrent connections
@@ -31,7 +32,7 @@ private:
 public:
 	RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_);		
 	// Inherited:
-	std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount);
+	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
 	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 };
 #endif

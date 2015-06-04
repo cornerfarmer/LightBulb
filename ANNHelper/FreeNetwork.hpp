@@ -10,6 +10,7 @@
 #include "AbstractNetworkTopology.hpp"
 #include "AbstractNeuron.hpp"
 #include "BiasNeuron.hpp"
+#include "RecurrentNetworkInterface.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;
@@ -22,7 +23,6 @@ struct FreeNetworkOptions
 	unsigned int neuronCount;
 	std::vector<unsigned int> inputNeuronsIndices;
 	std::vector<unsigned int> outputNeuronsIndices;
-
 	FreeNetworkOptions();
 	~FreeNetworkOptions();
 	FreeNetworkOptions(const FreeNetworkOptions &obj);
@@ -30,7 +30,7 @@ struct FreeNetworkOptions
 
 
 // 
-class FreeNetwork : public AbstractNetworkTopology
+class FreeNetwork : public AbstractNetworkTopology, public RecurrentNetworkInterface
 {
 protected:
 	std::unique_ptr<FreeNetworkOptions> options;
@@ -61,6 +61,8 @@ public:
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
 
 	AbstractNeuron* addNeuron(bool refreshNeuronCounters);
+	// Inherited:
+	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
 };
 
 #endif

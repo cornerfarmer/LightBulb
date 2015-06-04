@@ -21,6 +21,7 @@ struct LayeredNetworkOptions
 	bool enableShortcuts;
 	bool useBiasNeuron;
 	std::vector<unsigned int> neuronsPerLayerCount;
+	std::vector<unsigned int> outputNeuronsIndices;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
 	LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj);
@@ -35,8 +36,10 @@ protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
 	std::vector<std::vector<AbstractNeuron*>> neurons;
 	BiasNeuron biasNeuron;
+	std::vector<AbstractNeuron*> outputNeurons;
 	void buildNetwork();	
 	void refreshNeuronsPerLayerCounters();
+	void rebuildOutputNeurons();
 public:
 	~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions_t &options_);	
@@ -55,14 +58,18 @@ public:
 	void randomizeWeights(float randStart, float randEnd);
 
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters);
+
+	void removeNeuronFromLayer(int layerIndex, int neuronIndex);
+
+	void removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove);
+
+	void addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters);
 	// Calculates the Edge count
 	int getEdgeCount();
 	// Reset all activations of all neurons
 	void resetActivation();
 	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
 	void mergeWith(LayeredNetwork& otherNetwork);	 
-	// Copies the weight from all matching edges from the other network into the current one
-	void copyWeightsFrom(LayeredNetwork& otherNetwork);
 	// Returns a map which holds for every edge the information if it is recurrent or not
 	virtual std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 	// Puts all current neuron outputs into the given map

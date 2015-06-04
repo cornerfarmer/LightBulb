@@ -93,11 +93,14 @@ void LayeredNetwork::buildNetwork()
 	// Check if all given options are correct
 	if (getLayerCount() < 2)
 		throw std::invalid_argument("A layered network must always contain at least two layers (one input and one output layer)");
-	for (int l = 0; l < getLayerCount(); l++)
-		if (options->neuronsPerLayerCount[l] == 0)
-			throw std::invalid_argument("Every layer has to contain at least one neuron");
 	if (!options->neuronFactory)
 		throw std::invalid_argument("The given neuronFactory is not valid");
+
+	if (options->outputNeuronsIndices.empty())
+	{
+		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
+			options->outputNeuronsIndices.push_back(i);
+	}
 
 	// Clear all neurons
 	neurons.clear();
@@ -115,6 +118,33 @@ void LayeredNetwork::buildNetwork()
 		}		
 	}
 
+	rebuildOutputNeurons();
+}
+
+void LayeredNetwork::rebuildOutputNeurons()
+{
+	outputNeurons.clear();
+
+	// Set output neurons from given indices
+	for (std::vector<unsigned int>::iterator outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
+	{
+		if (*outputNeuronIndex < neurons.back().size())
+			outputNeurons.push_back(neurons.back()[*outputNeuronIndex]);
+	}
+}
+
+void LayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters)
+{
+	neurons[layerIndex].push_back(newNeuron);
+
+	// Refresh the neuron counters if needed
+	if (refreshNeuronCounters)
+	{
+		options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
+
+		if (layerIndex == options->neuronsPerLayerCount.size() - 1)
+			rebuildOutputNeurons();
+	}
 }
 
 AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters)
@@ -123,11 +153,8 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 	if (layerIndex == 0)
 	{
 		InputNeuron* newNeuron = options->neuronFactory->createInputNeuron();
-		neurons[layerIndex].push_back(newNeuron);
-
-		// Refresh the neuron counters if needed
-		if (refreshNeuronCounters)
-			options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
+	
+		addNeuronIntoLayer(layerIndex, newNeuron, refreshNeuronCounters);
 
 		return newNeuron;
 	}
@@ -139,9 +166,7 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 		if (layerIndex == options->neuronsPerLayerCount.size() - 1)
 			newNeuron = options->neuronFactory->createOutputNeuron();
 		else
-			newNeuron = options->neuronFactory->createInnerNeuron();
-
-		neurons[layerIndex].push_back(newNeuron);				
+			newNeuron = options->neuronFactory->createInnerNeuron();	
 
 		// Add an edge to every neuron of the last layer
 		for (std::vector<AbstractNeuron*>::iterator prevNeuron = getNeuronsInLayer(layerIndex - 1)->begin(); prevNeuron != getNeuronsInLayer(layerIndex - 1)->end(); prevNeuron++)
@@ -153,11 +178,24 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 		if (options->useBiasNeuron)
 			newNeuron->addPrevNeuron(&biasNeuron, 1);
 
-		// Refresh the neuron counters if needed
-		if (refreshNeuronCounters)
-			options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
+		addNeuronIntoLayer(layerIndex, newNeuron, refreshNeuronCounters);
 
 		return newNeuron;
+	}
+}
+
+void LayeredNetwork::removeNeuronFromLayer(int layerIndex, int neuronIndex)
+{
+	neurons[layerIndex].erase(neurons[layerIndex].begin() + neuronIndex);	
+	options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
+}
+
+void LayeredNetwork::removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove)
+{
+	for (int neuronIndex = 0; neuronIndex < getNeuronsInLayer(layerIndex)->size(); neuronIndex++)
+	{
+		if ((*getNeuronsInLayer(layerIndex))[neuronIndex] == neuronToRemove)
+			getNeuronsInLayer(layerIndex)->erase(getNeuronsInLayer(layerIndex)->begin() + neuronIndex);
 	}
 }
 
@@ -170,7 +208,7 @@ std::vector<AbstractNeuron*>* LayeredNetwork::getInputNeurons()
 std::vector<AbstractNeuron*>* LayeredNetwork::getOutputNeurons()
 {
 	// Return the last layer
-	return &neurons.back();
+	return &outputNeurons;
 }
 
 std::vector<AbstractNeuron*>* LayeredNetwork::getNeuronsInLayer(int layerIndex)
@@ -262,6 +300,8 @@ void LayeredNetwork::resetActivation()
 	}
 }
 
+
+
 void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
 {
 	// If a bias neuron is used in the other network
@@ -316,6 +356,8 @@ void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
 
 	// Refresh the counters
 	refreshNeuronsPerLayerCounters();
+
+	rebuildOutputNeurons();
 }
 
 void LayeredNetwork::refreshNeuronsPerLayerCounters()
@@ -334,46 +376,6 @@ void LayeredNetwork::refreshNeuronsPerLayerCounters()
 		}
 		// Set the counter to the current layer size
 		*counter = layer->size();		
-	}
-}
-
-void LayeredNetwork::copyWeightsFrom(LayeredNetwork& otherNetwork)
-{
-	// Go through all layers of the deeper network
-	int lOther = otherNetwork.getLayerCount() - 1;
-	for (int l = getLayerCount() - 1; l > 0 && lOther > 0;)
-	{
-		// Extract the neurons in the current layer of both networks
-		std::vector<AbstractNeuron*>* neuronsInLayer = getNeuronsInLayer(l);
-		std::vector<AbstractNeuron*>* neuronsInLayerOther = otherNetwork.getNeuronsInLayer(lOther);
-		// Go through all neurons in the current network
-		int neuronIndex = 0;
-		std::vector<AbstractNeuron*>::iterator neuronOther = neuronsInLayerOther->begin();
-		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end() && neuronOther != neuronsInLayerOther->end(); neuron++, neuronOther++, neuronIndex++)
-		{
-			// Extract all afferent edges of the current neurons
-			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
-			std::list<Edge*>* afferentEdgesOther = (dynamic_cast<StandardNeuron*>(*neuronOther))->getAfferentEdges();
-			// Go through all afferentEdges of the actual neurons
-			std::list<Edge*>::iterator edgeOther = afferentEdgesOther->begin();
-			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end() && edgeOther != afferentEdgesOther->end(); edge++, edgeOther++)
-			{	
-				// Copy the weight from the edge from the other network into the edge of the own one
-				(*edge)->setWeight((*edgeOther)->getWeight());
-			}
-		}
-
-		// Go one layer backwards in the other network
-		lOther--;
-		// If we reached the input layer and the otherNetwork is not as deep as the own one, then start from the last layer in the other network again
-		if (lOther == 0 && otherNetwork.getLayerCount() < getLayerCount())
-			lOther = otherNetwork.getLayerCount() - 1;
-
-		// Go one layer backwards in the own network
-		l--;
-		// If we reached the input layer and the own network is not as deep as the other one, then start from the last layer in the own network again
-		if (l == 0 && getLayerCount() < otherNetwork.getLayerCount())
-			l = getLayerCount() - 1;
 	}
 }
 

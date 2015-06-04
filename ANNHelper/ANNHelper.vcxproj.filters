@@ -233,6 +233,12 @@
     <ClInclude Include="FreeNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
+    <ClInclude Include="RecurrentNetworkInterface.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="SynchronousOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -429,6 +435,12 @@
     </ClCompile>
     <ClCompile Include="FreeNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="RecurrentNetworkInterface.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="SynchronousOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -58,8 +58,6 @@ float ResilientLearningRateHelper::getNextLearningRate(float gradient)
 
 		// Set the sign of the learningRate to the sign of the gradient
 		learningRate *= (gradient > 0 ? 1 : -1);
-		if (learningRateIndex==0)
-			learningRateIndex = learningRateIndex;
 	}
 
 	// Save the new learningRate

@@ -32,8 +32,10 @@ public:
 	virtual void resetActivation() = 0;
 
 	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs) = 0;
-
+	
 	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs) = 0;
+	// Copies the weight from all matching edges from the other network into the current one
+	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
 };
 
 #endif

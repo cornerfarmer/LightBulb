@@ -4,7 +4,7 @@
 #include "RBFThreshold.hpp"
 #include <stdexcept>
 
-float EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold)
+float EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
 

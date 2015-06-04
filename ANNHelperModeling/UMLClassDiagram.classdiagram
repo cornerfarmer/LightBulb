@@ -2233,7 +2233,7 @@
               <elementDefinition Id="2d2d01df-0c42-45ed-a434-308402083b74" />
               <suppliersInternal>
                 <interfaceRealization Id="40b783e5-3eaf-4c76-b2d5-13aa0439938e">
-                  <interfaceMoniker Id="fbff7ee4-2072-46a9-864b-2705793589a0" LastKnownName="RecurrentNetwork" />
+                  <interfaceMoniker Id="fbff7ee4-2072-46a9-864b-2705793589a0" LastKnownName="RecurrentNetworkInterface" />
                   <elementDefinition Id="436806ae-4a29-4942-b912-67d8cc97040d" />
                 </interfaceRealization>
               </suppliersInternal>
@@ -2304,7 +2304,7 @@
               <elementDefinition Id="c15ca439-ee38-4dd7-94a1-54ab9d253bf3" />
               <suppliersInternal>
                 <interfaceRealization Id="baec2b11-78e7-41f1-a81f-2616effd2810">
-                  <interfaceMoniker Id="fbff7ee4-2072-46a9-864b-2705793589a0" LastKnownName="RecurrentNetwork" />
+                  <interfaceMoniker Id="fbff7ee4-2072-46a9-864b-2705793589a0" LastKnownName="RecurrentNetworkInterface" />
                   <elementDefinition Id="e43bd1ff-cef6-4d52-afff-d4ea3019c783" />
                 </interfaceRealization>
               </suppliersInternal>
@@ -2332,7 +2332,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <Interface Id="fbff7ee4-2072-46a9-864b-2705793589a0" name="RecurrentNetwork" isAbstract="false" isLeaf="false">
+            <Interface Id="fbff7ee4-2072-46a9-864b-2705793589a0" name="RecurrentNetworkInterface" isAbstract="false" isLeaf="false">
               <elementDefinition Id="d5706054-ab94-4f32-8bf7-5b0baa03a142" />
               <ownedOperations>
                 <operation Id="ae8390dc-c16d-4b58-9bea-491a339a970f" name="unfold" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
@@ -3201,6 +3201,17 @@
                 <generalization Id="f9fac130-6ff2-431c-96b4-b68d0bb0cfae" isSubstitutable="false">
                   <classMoniker Id="84263b09-0f0b-4c00-b4d2-40cc69652afc" LastKnownName="BackpropagationLearningRule" />
                   <elementDefinition Id="ebd9e9d9-b4d1-456c-82bc-a42550d6e283" />
+                </generalization>
+              </generalsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="46221fba-5077-40e3-ae1c-6107d3151fb8" name="TruncatedBackpropagationThroughTimeLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="1b5af993-9657-48a2-ac76-0784458ad748" />
+              <generalsInternal>
+                <generalization Id="4d1077d5-eab7-408d-8b30-96d8a4fd759f" isSubstitutable="false">
+                  <classMoniker Id="84263b09-0f0b-4c00-b4d2-40cc69652afc" LastKnownName="BackpropagationLearningRule" />
+                  <elementDefinition Id="8d22e9cf-bcea-445d-a075-23bf0bca0045" />
                 </generalization>
               </generalsInternal>
             </class>

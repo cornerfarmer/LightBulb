@@ -630,5 +630,24 @@
         </generalsInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1b5af993-9657-48a2-ac76-0784458ad748"
+        name="TruncatedBackpropagationThroughTimeLearningRule"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="8d22e9cf-bcea-445d-a075-23bf0bca0045"
+            isSubstitutable="false">
+            <classMoniker
+              Id="8caf1f4e-8112-4e15-9aeb-544875d55f78"
+              LastKnownName="BackpropagationLearningRule"
+              LastKnownLocation="Package_1256.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

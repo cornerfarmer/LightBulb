@@ -4,6 +4,7 @@
 #include "AbstractActivationOrder.hpp"
 #include "InputNeuron.hpp"
 #include "NeuralNetworkIO.hpp"
+#include "StandardNeuron.hpp"
 #include <exception>
 
 NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
@@ -72,7 +73,17 @@ void NeuralNetwork::setInput(std::vector<float> &inputVector)
 	int index = 0;
 	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && index < inputVector.size(); neuron++, index++)
 	{
-		dynamic_cast<InputNeuron*>(*neuron)->setInput(inputVector[index]);
+		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
+		if (inputNeuron)
+			inputNeuron->setInput(inputVector[index]);
+		else
+		{
+			StandardNeuron* standardNeuron = dynamic_cast<StandardNeuron*>(*neuron);
+			if (standardNeuron)
+				standardNeuron->setAdditionalInput(inputVector[index]);
+			else
+				throw std::logic_error("Something went wrong while setting the input values");
+		}
 	}
 }
 

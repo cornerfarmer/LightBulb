@@ -4,6 +4,7 @@
 #include "BiasNeuron.hpp"
 #include "Edge.hpp"
 #include "AbstractNeuronFactory.hpp"
+#include "LayeredNetwork.hpp"
 #include <exception>
 
 FreeNetworkOptions::FreeNetworkOptions()
@@ -88,6 +89,17 @@ void FreeNetwork::buildNetwork()
 		addNeuron(false);			
 	}
 
+	// Set input neurons from given indices
+	for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+	{
+		inputNeurons.push_back(neurons[*inputNeuronIndex]);
+	}
+
+	// Set output neurons from given indices
+	for (std::vector<unsigned int>::iterator outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
+	{
+		outputNeurons.push_back(neurons[*outputNeuronIndex]);
+	}
 }
 
 AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters)
@@ -97,18 +109,22 @@ AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters)
 	// If its the last layer create a output neuron else an inner neuron
 	newNeuron = options->neuronFactory->createInnerNeuron();
 
-	// Add an edge to every neuron of the last layer
-	for (std::vector<AbstractNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
-	{
-		newNeuron->addPrevNeuron(*neuron, 1);
-	}
-
 	// If bias neuron is used add a edge to it
 	if (options->useBiasNeuron)
 		newNeuron->addPrevNeuron(&biasNeuron, 1);
 
+	// Add an edge to every neuron of the last layer
+	for (std::vector<AbstractNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	{
+		newNeuron->addNextNeuron(static_cast<StandardNeuron*>(*neuron), 1);
+		(*neuron)->addNextNeuron(newNeuron, 1);
+	}
+
+	newNeuron->addNextNeuron(newNeuron, 1);
+
 	// Add it to the neuronlist
 	neurons.push_back(newNeuron);
+	
 
 	// Refresh the neuron counters if needed
 	if (refreshNeuronCounters)
@@ -192,4 +208,69 @@ void FreeNetwork::resetActivation()
 		// Reset the activation of the current neuron
 		(*neuron)->resetActivation();
 	}
+}
+
+std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
+{
+	LayeredNetworkOptions layeredNetworkOptions;
+	layeredNetworkOptions.neuronFactory = options->neuronFactory;
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(2);
+	layeredNetworkOptions.neuronsPerLayerCount[0] = 0;
+	layeredNetworkOptions.neuronsPerLayerCount[1] = options->neuronCount;
+	layeredNetworkOptions.useBiasNeuron = options->useBiasNeuron;
+	layeredNetworkOptions.outputNeuronsIndices = options->outputNeuronsIndices;
+	std::unique_ptr<LayeredNetwork> unfoldedNetwork;
+
+	// Do for every instance
+	for (int i = 0; i < instanceCount; i++)
+	{ 
+	
+		LayeredNetwork* layeredNetworkToMerge = new LayeredNetwork(layeredNetworkOptions);	
+
+		
+		for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+		{
+			layeredNetworkToMerge->addNeuronIntoLayer(0, (*layeredNetworkToMerge->getNeurons())[1][*inputNeuronIndex], true);
+		}	
+		
+
+		if (i != 0)
+		{
+			// Go through all current output neurons of the unfolded network
+			for (std::vector<AbstractNeuron*>::iterator outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
+			{
+				// Go through all hidden neurons in the second layer of our new network
+				for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = (*layeredNetworkToMerge->getNeurons())[1].begin(); hiddenNeuron != (*layeredNetworkToMerge->getNeurons())[1].end(); hiddenNeuron++)
+				{
+					// Add a edge from the output to the hidden neuron
+					(*outputNeuron)->addNextNeuron(static_cast<StandardNeuron*>(*hiddenNeuron), 1);
+				}
+			}
+		}
+
+		if (i != 0)
+		{
+			// Merge the new network with our unfoldedNetwork
+			unfoldedNetwork->mergeWith(*layeredNetworkToMerge);
+			delete(layeredNetworkToMerge);
+		}
+		else
+			unfoldedNetwork.reset(layeredNetworkToMerge);
+	}
+
+	// Do for every hidden neuron in this layer
+	for (int i = 0; i < options->neuronCount; i++)
+	{
+		// Create a new input neuron and add it to the input layer of the unfolded network
+		// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the current hidden layer
+		AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
+		// Go through all hidden neurons of the first hidden layer in our unfolded network
+		for (std::vector<AbstractNeuron*>::iterator hiddenNeuron = (*unfoldedNetwork->getNeurons())[1].begin(); hiddenNeuron != (*unfoldedNetwork->getNeurons())[1].end(); hiddenNeuron++)
+		{
+			// Add a edge from the new input neuron to the hidden neuron
+			newInputNeuron->addNextNeuron(static_cast<StandardNeuron*>(*hiddenNeuron), 1);
+		}			
+	}
+		
+	return unfoldedNetwork;
 }

@@ -20,6 +20,7 @@ class StandardNeuron : public AbstractNeuron
 private:
 	AbstractThreshold* threshold;
 	float netInput;
+	float additionalInput;
 	AbstractInputFunction* inputFunction;
 	AbstractActivationFunction* activationFunction;
 	AbstractOutputFunction* outputFunction;
@@ -42,6 +43,7 @@ public:
 	float getNetInput();
 	AbstractActivationFunction* getActivationFunction();
 	AbstractThreshold* getThreshold();
+	void setAdditionalInput(float newAdditionalInput);
 };
 
 #endif

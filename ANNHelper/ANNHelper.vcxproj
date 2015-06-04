@@ -91,6 +91,7 @@
     <ClCompile Include="PointSet.cpp" />
     <ClCompile Include="RBFNetworkStructureChart.cpp" />
     <ClCompile Include="RecurrentLayeredNetwork.cpp" />
+    <ClCompile Include="RecurrentNetworkInterface.cpp" />
     <ClCompile Include="ResilientDeltaLearningRule.cpp" />
     <ClCompile Include="ResilientLearningRateHelper.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
     <ClCompile Include="StandardThreshold.cpp" />
+    <ClCompile Include="SynchronousOrder.cpp" />
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="AbstractTeachingLesson.cpp" />
     <ClCompile Include="TeachingLessonBooleanInput.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="PointSet.hpp" />
     <ClInclude Include="RBFNetworkStructureChart.hpp" />
     <ClInclude Include="RecurrentLayeredNetwork.hpp" />
+    <ClInclude Include="RecurrentNetworkInterface.hpp" />
     <ClInclude Include="ResilientDeltaLearningRule.hpp" />
     <ClInclude Include="ResilientLearningRateHelper.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
@@ -192,6 +195,7 @@
     <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
     <ClInclude Include="StandardThreshold.hpp" />
+    <ClInclude Include="SynchronousOrder.hpp" />
     <ClInclude Include="Teacher.hpp" />
     <ClInclude Include="AbstractTeachingLesson.hpp" />
     <ClInclude Include="TeachingLessonBooleanInput.hpp" />
