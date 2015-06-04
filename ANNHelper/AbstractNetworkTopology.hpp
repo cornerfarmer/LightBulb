@@ -26,8 +26,6 @@ public:
 	virtual void randomizeWeights(float randStart, float randEnd) = 0;
 	// Returns all Neurons
 	virtual std::vector<std::vector<AbstractNeuron*>>* getNeurons() = 0;
-	// Add a new Neuron in the selected Layer
-	virtual AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters) = 0;
 	// Calculates the Edge count
 	virtual int getEdgeCount() = 0;
 
@@ -36,8 +34,6 @@ public:
 	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs) = 0;
 
 	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs) = 0;
-	
-	virtual std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges() = 0;
 };
 
 #endif

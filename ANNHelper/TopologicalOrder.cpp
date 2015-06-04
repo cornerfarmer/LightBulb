@@ -32,6 +32,13 @@ AbstractActivationOrder* TopologicalOrder::getCopy()
 
 std::unique_ptr<std::map<Edge*, bool>> TopologicalOrder::getSameTimestepEdges(AbstractNetworkTopology &networkTopology)
 {
+	// Cast the network as an layeredNetwork
+	LayeredNetwork* layeredNetwork = dynamic_cast<LayeredNetwork*>(&networkTopology);
+
+	// Check if the given networkTopology was a layeredNetwork, else throw a exception
+	if (!layeredNetwork)
+		throw std::invalid_argument("The given networkTopology has to be a layeredNetwork");
+
 	// Only recurrent edges are not in the same time step
-	return networkTopology.getNonRecurrentEdges();
+	return layeredNetwork->getNonRecurrentEdges();
 }

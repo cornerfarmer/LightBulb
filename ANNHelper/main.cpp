@@ -20,6 +20,7 @@
 #include "TeachingLessonBooleanInput.hpp"
 #include "NeuralNetworkResultChart.hpp"
 #include "DifferentFunctionsNeuronFactory.hpp"
+#include "SameFunctionsNeuronFactory.hpp"
 #include "StandardThreshold.hpp"
 #include "RBFNetwork.hpp"
 #include "RBFInterpolationLearningRule.hpp"
@@ -35,6 +36,7 @@
 #include "BackpropagationThroughTimeLearningRule.hpp"
 #include "NetworkTopologyDrawer.hpp"
 #include "TruncatedBackpropagationThroughTimeLearningRule.hpp"
+#include "FreeNetwork.hpp"
 
 void doPerceptronTest()
 {
@@ -331,8 +333,45 @@ void doRecurrentLayeredNetworkTest()
 	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(teachingPattern, TopologicalOrder());
 }
 
+void doFreeNetworkTest()
+{
+	FreeNetworkOptions networkOptions;
+	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	networkOptions.neuronCount = 3;
+	networkOptions.inputNeuronsIndices.resize(1);
+	networkOptions.inputNeuronsIndices[0] = 0;
+	networkOptions.outputNeuronsIndices.resize(1);
+	networkOptions.outputNeuronsIndices[0] = 0;
+	networkOptions.useBiasNeuron = true;
+	
+	FreeNetwork* freeNetwork = new FreeNetwork(networkOptions);
+
+	NetworkTopologyDrawerOptions networkTopologyDrawerOptions;
+	networkTopologyDrawerOptions.width = 700;
+	networkTopologyDrawerOptions.height = 600;
+	networkTopologyDrawerOptions.networkTopology = freeNetwork;
+	NetworkTopologyDrawer networkTopologyDrawer(0, 0, networkTopologyDrawerOptions);
+	networkTopologyDrawer.refresh();
+
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        networkTopologyDrawer.draw(window);
+        window.display();
+    }
+}
+
 int main()
 {
-	doRecurrentLayeredNetworkTest();
+	doFreeNetworkTest();
     return 0;
 }

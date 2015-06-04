@@ -53,6 +53,7 @@ public:
 	std::vector<std::vector<AbstractNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
+
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters);
 	// Calculates the Edge count
 	int getEdgeCount();
@@ -63,7 +64,7 @@ public:
 	// Copies the weight from all matching edges from the other network into the current one
 	void copyWeightsFrom(LayeredNetwork& otherNetwork);
 	// Returns a map which holds for every edge the information if it is recurrent or not
-	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
+	virtual std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 	// Puts all current neuron outputs into the given map
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map

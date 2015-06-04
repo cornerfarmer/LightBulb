@@ -20,8 +20,9 @@ struct FreeNetworkOptions
 	AbstractNeuronFactory* neuronFactory;
 	bool useBiasNeuron;
 	unsigned int neuronCount;
-	unsigned int inputNeuronCount;
-	unsigned int outputNeuronCount;
+	std::vector<unsigned int> inputNeuronsIndices;
+	std::vector<unsigned int> outputNeuronsIndices;
+
 	FreeNetworkOptions();
 	~FreeNetworkOptions();
 	FreeNetworkOptions(const FreeNetworkOptions &obj);
@@ -33,9 +34,9 @@ class FreeNetwork : public AbstractNetworkTopology
 {
 protected:
 	std::unique_ptr<FreeNetworkOptions> options;
-	std::vector<StandardNeuron*> neurons;
-	std::vector<StandardNeuron*> inputNeurons;
-	std::vector<StandardNeuron*> outputNeurons;
+	std::vector<AbstractNeuron*> neurons;
+	std::vector<AbstractNeuron*> inputNeurons;
+	std::vector<AbstractNeuron*> outputNeurons;
 	BiasNeuron biasNeuron;
 	void buildNetwork();	
 public:
@@ -54,14 +55,12 @@ public:
 	int getEdgeCount();
 	// Reset all activations of all neurons
 	void resetActivation();
-	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
-	void mergeWith(LayeredNetwork& otherNetwork);	 
-	// Copies the weight from all matching edges from the other network into the current one
-	void copyWeightsFrom(LayeredNetwork& otherNetwork);
 	// Puts all current neuron outputs into the given map
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
+
+	AbstractNeuron* addNeuron(bool refreshNeuronCounters);
 };
 
 #endif

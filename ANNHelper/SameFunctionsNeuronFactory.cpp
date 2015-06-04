@@ -27,9 +27,10 @@ SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(AbstractThreshold* thresh
 
 SameFunctionsNeuronFactory::SameFunctionsNeuronFactory(const SameFunctionsNeuronFactory &obj)
 {
-	activationFunction =std::unique_ptr<AbstractActivationFunction>(obj.activationFunction->getActivationFunctionCopy());
-	inputFunction = std::unique_ptr<AbstractInputFunction>(obj.inputFunction->getInputFunctionCopy());
-	outputFunction = std::unique_ptr<AbstractOutputFunction>(obj.outputFunction->getOutputFunctionCopy());
+	threshold.reset(obj.threshold->getCopy());
+	activationFunction.reset(obj.activationFunction->getActivationFunctionCopy());
+	inputFunction.reset(obj.inputFunction->getInputFunctionCopy());
+	outputFunction.reset(obj.outputFunction->getOutputFunctionCopy());
 }
 
 InputNeuron* SameFunctionsNeuronFactory::createInputNeuron()
