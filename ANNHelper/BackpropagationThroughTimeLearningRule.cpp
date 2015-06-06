@@ -83,7 +83,7 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterAllWeightAdjustme
 void BackpropagationThroughTimeLearningRule::doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// Copy all weights from the unfolded network back into the orignal network
-	dynamic_cast<LayeredNetwork*>(originalNeuralNetwork->getNetworkTopology())->copyWeightsFrom(*dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()));
+	originalNeuralNetwork->getNetworkTopology()->copyWeightsFrom(*neuralNetwork.getNetworkTopology());
 	
 	// Delete all temporary unfolded stuff
 	delete(&neuralNetwork);

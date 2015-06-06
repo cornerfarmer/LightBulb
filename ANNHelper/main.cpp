@@ -338,11 +338,11 @@ void doFreeNetworkTest()
 {
 	FreeNetworkOptions networkOptions;
 	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-	networkOptions.neuronCount = 5;
+	networkOptions.neuronCount = 3;
 	networkOptions.inputNeuronsIndices.resize(1);
 	networkOptions.inputNeuronsIndices[0] = 0;
 	networkOptions.outputNeuronsIndices.resize(1);
-	networkOptions.outputNeuronsIndices[0] = 2;
+	networkOptions.outputNeuronsIndices[0] = 1;
 	networkOptions.useBiasNeuron = true;
 	
 	FreeNetwork* freeNetwork = new FreeNetwork(networkOptions);
@@ -381,6 +381,10 @@ void doFreeNetworkTest()
 
 	unfoldedNetwork->copyWeightsFrom(*freeNetwork);
 
+	freeNetwork->randomizeWeights(-0.5,0.5);
+
+	freeNetwork->copyWeightsFrom(*unfoldedNetwork);
+
 	NeuralNetworkIO teachingPattern;
 
 	teachingPattern.push_back(std::vector<float>(1));
@@ -398,15 +402,14 @@ void doFreeNetworkTest()
 	options.maxTotalErrorValue = 1;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 200000;
-	options.totalErrorGoal = 0.0001f;
+	options.totalErrorGoal = 0.01f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
 	options.momentum = 0;
-	options.offlineLearning = false;
 	options.resilientLearningRate = false;
-	options.maxTimeSteps = 2;
+	options.maxTimeSteps = 3;
 	BackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
@@ -426,7 +429,10 @@ void doFreeNetworkTest()
 
 		}
 
-		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	
+		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0] && lastPattern == 1);	
+
+		teachingPattern->push_back(std::vector<float>(1,0));
+
 		//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
 		//(*teachingInput)[0] = (i > l);	
@@ -436,6 +442,9 @@ void doFreeNetworkTest()
 	}
 
 	learningRule.doLearning(neuralNetwork, teacher);
+	float totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
+
+
 }
 
 int main()

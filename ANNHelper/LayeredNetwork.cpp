@@ -29,13 +29,18 @@ LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj)
 
 LayeredNetwork::~LayeredNetwork()
 {
+	std::map<AbstractNeuron*, bool> alreadyDeleted;
 	// Go through all layers
 	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
 		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
-			delete(*neuron);
+			if (!alreadyDeleted[*neuron])
+			{
+				delete(*neuron);
+				alreadyDeleted[*neuron] = true;
+			}
 		}
 	}
 }

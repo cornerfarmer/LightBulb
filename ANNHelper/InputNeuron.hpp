@@ -11,15 +11,15 @@
 class InputNeuron : public AbstractNeuron
 {
 private:
-	float input;
 public:	
 	InputNeuron();
 	// Set the input value of the neuron
 	void setInput(float newInput);
 	// Sets the activation of the neuron to its input value
-	void refreshActivation();
+	void refreshActivation() {};
 	// Do nothing, a inputNeuron does not have a netInput
 	void refreshNetInput() {};
+	void resetActivation() {};
 };
 
 #endif
