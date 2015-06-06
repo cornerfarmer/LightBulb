@@ -34,9 +34,9 @@ class FreeNetwork : public AbstractNetworkTopology, public RecurrentNetworkInter
 {
 protected:
 	std::unique_ptr<FreeNetworkOptions> options;
-	std::vector<AbstractNeuron*> neurons;
+	std::vector<StandardNeuron*> neurons;
 	std::vector<AbstractNeuron*> inputNeurons;
-	std::vector<AbstractNeuron*> outputNeurons;
+	std::vector<StandardNeuron*> outputNeurons;
 	BiasNeuron biasNeuron;
 	void buildNetwork();	
 public:
@@ -46,9 +46,9 @@ public:
 	// Returns all InputNeurons 
 	std::vector<AbstractNeuron*>* getInputNeurons();
 	// Returns all OutputNeurons 
-	std::vector<AbstractNeuron*>* getOutputNeurons();
+	std::vector<StandardNeuron*>* getOutputNeurons();
 	// Returns all Neurons
-	std::vector<std::vector<AbstractNeuron*>>* getNeurons();
+	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
 	// Calculates the Edge count

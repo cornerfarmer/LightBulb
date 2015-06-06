@@ -34,9 +34,10 @@ class LayeredNetwork : public AbstractNetworkTopology
 {
 protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
-	std::vector<std::vector<AbstractNeuron*>> neurons;
+	std::vector<std::vector<StandardNeuron*>> neurons;
 	BiasNeuron biasNeuron;
-	std::vector<AbstractNeuron*> outputNeurons;
+	std::vector<StandardNeuron*> outputNeurons;
+	std::vector<AbstractNeuron*> inputNeurons;
 	void buildNetwork();	
 	void refreshNeuronsPerLayerCounters();
 	void rebuildOutputNeurons();
@@ -47,13 +48,11 @@ public:
 	// Returns all InputNeurons (first layer)
 	std::vector<AbstractNeuron*>* getInputNeurons();
 	// Returns all OutputNeurons (last layer)
-	std::vector<AbstractNeuron*>* getOutputNeurons();
-	// Returns all Neurons of the selected layer
-	std::vector<AbstractNeuron*>* getNeuronsInLayer(int layerIndex);
+	std::vector<StandardNeuron*>* getOutputNeurons();
 	// Calculates the layer count
 	int getLayerCount();
 	// Returns all Neurons
-	std::vector<std::vector<AbstractNeuron*>>* getNeurons();
+	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
 

@@ -61,13 +61,13 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterAllWeightAdjustme
 {
 	int edgeIndex = 0;
 	// Go through all layers
-	for (int l = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
+	for (int l = neuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 	{
-		std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+		std::vector<StandardNeuron*>* neuronsInLayer = &(*neuralNetwork.getNetworkTopology()->getNeurons())[l];
 		// Go through all neurons
-		for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 		{
-			std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+			std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 			// Go through all afferentEdges of the actual neuron
 			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 			{	

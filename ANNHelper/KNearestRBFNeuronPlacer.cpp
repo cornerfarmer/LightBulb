@@ -7,14 +7,15 @@
 
 void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
+	// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
+	int clusterCount = neuralNetwork.getNeurons()->front().size();
+	// Set the dimensionCount to the neuron count in the first layer
+	int dimensionCount = neuralNetwork.getInputNeurons()->size();
+
 	// Create a new KNearestClustering object which will do all hard work :)
 	KNearestClustering clustering;
 	// Calculate all points from the teaching lessons
-	std::unique_ptr<PointSet> points = getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size());
-	// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
-	int clusterCount = neuralNetwork.getNeuronsInLayer(1)->size();
-	// Set the dimensionCount to the neuron count in the first layer
-	int dimensionCount = neuralNetwork.getNeuronsInLayer(0)->size();
+	std::unique_ptr<PointSet> points = getPointsFromTeachingLessons(teacher, dimensionCount);	
 
 	// Calculate the cache from the given points
 	clustering.calculateCache(*points.get());

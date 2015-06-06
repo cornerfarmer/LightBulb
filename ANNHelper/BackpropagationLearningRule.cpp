@@ -41,8 +41,8 @@ void BackpropagationLearningRule::initialize()
 void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
-	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
-		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
+	/*if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");*/
 
 	// Create a vector which will contain all delta values of the neurons in the output layer
 	deltaVectorOutputLayer.clear();		

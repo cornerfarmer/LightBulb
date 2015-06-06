@@ -5,6 +5,7 @@
 #include "AbstractActivationOrder.hpp"
 #include "AbstractNeuron.hpp"
 #include "StandardNeuron.hpp"
+#include "SynchronousOrder.hpp"
 
 
 TruncatedBackpropagationThroughTimeLearningRule::TruncatedBackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_) 
@@ -27,11 +28,11 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm
 	// Get all same timestep edges
 	sameTimestepEdges = activationOrder.getSameTimestepEdges(*neuralNetwork.getNetworkTopology());
 
-	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	// Go through all hidden/output layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Create a new delta vector for this neuron
 			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<float, bool>>(getOptions()->maxTimeSteps);
@@ -119,15 +120,20 @@ std::vector<std::map<AbstractNeuron*, float>>* TruncatedBackpropagationThroughTi
 
 void TruncatedBackpropagationThroughTimeLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
-	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	// Go through all hidden/output layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Set all deltaValues in all time steps to invalid
 			for (int t = 0; t < getOptions()->maxTimeSteps; t++) 
 				deltaVectorOutputLayer[*neuron][t].second = false;
 		}
 	}
+}
+
+AbstractActivationOrder* TruncatedBackpropagationThroughTimeLearningRule::getNewActivationOrder()
+{
+	return new SynchronousOrder();
 }

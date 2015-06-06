@@ -9,11 +9,11 @@
 void ROLFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
 	// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
-	int clusterCount = neuralNetwork.getNeuronsInLayer(1)->size();
-	// Set the dimensionCount to the neuron count in the first layer
-	int dimensionCount = neuralNetwork.getNeuronsInLayer(0)->size();
+	int clusterCount = neuralNetwork.getNeurons()->front().size();
+	// Set the dimensionCount to the neuron count in the input layer
+	int dimensionCount = neuralNetwork.getInputNeurons()->size();
 	// Calculate all points from the teaching lessons
-	std::unique_ptr<PointSet> points = getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronsInLayer(0)->size());
+	std::unique_ptr<PointSet> points = getPointsFromTeachingLessons(teacher, dimensionCount);
 
 	// Create a ROLFClusteringOptions object which contains all standard options used by the clustering algorithm
 	ROLFClusteringOptions options;

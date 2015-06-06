@@ -38,9 +38,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher, *activationOrder);
 
 	// Get all output neurons
-	std::vector<AbstractNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
+	std::vector<StandardNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
 	// Create a vector which will contain all weights for offline learning
-	std::vector<float> offlineLearningWeights(dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getEdgeCount());
+	std::vector<float> offlineLearningWeights(initializedNeuralNetwork.getNetworkTopology()->getEdgeCount());
 
 	int tryCounter = 0;
 	float totalError = 0;
@@ -105,24 +105,24 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				// Create a edgeCounter, which will be used in offline learning
 				int edgeCounter = 0;
 
-				// Adjust all layers except the first one
-				for (int l = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
+				// Adjust all hidden/output layers except 
+				for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 				{			
 					// Go through all neurons in this layer
-					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 					int neuronsInLayerCount = neuronsInLayer->size();
 					for (int n = 0; n < neuronsInLayer->size(); n++)
 					{					
 						// Let the algorithm do some work for the actual neuron
-						initializeNeuronWeightCalculation(dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]), lessonIndex, l, n, dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errormap.get());
+						initializeNeuronWeightCalculation((*neuronsInLayer)[n], lessonIndex, l, n, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
 
-						std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>((*neuronsInLayer)[n]))->getAfferentEdges();
+						std::list<Edge*>* afferentEdges = ((*neuronsInLayer)[n])->getAfferentEdges();
 						// Go through all afferentEdges of the actual neuron
 						int edgeIndex = 0;
 						for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
 						{			
 							// Calculate the deltaWeight
-							float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount(), neuronsInLayerCount, errormap.get());
+							float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
 
 							// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
  							if (options->offlineLearning)
@@ -139,15 +139,15 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					// Create a edgeCounter
 					int edgeCounter = 0;
 
-					// Adjust the every layer
-					for (int l = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
+					// Adjust the every hidden/output layer
+					for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 					{
 						// Go through all neurons in this layer
-						std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+						std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 						int neuronsInLayerCount = neuronsInLayer->size();
-						for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+						for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 						{						
-							std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+							std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
 							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 							{	
@@ -172,15 +172,15 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				// Create a edgeCounter
 				int edgeCounter = 0;
 
-				// Adjust the every layer
-				for (int l = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getLayerCount() - 1; l > 0; l--)
+				// Adjust the every hidden/output layer
+				for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 				{
 					// Go through all neurons in this layer
-					std::vector<AbstractNeuron*>* neuronsInLayer = dynamic_cast<LayeredNetwork*>(initializedNeuralNetwork.getNetworkTopology())->getNeuronsInLayer(l);
+					std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 					int neuronsInLayerCount = neuronsInLayer->size();
-					for (std::vector<AbstractNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+					for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 					{						
-						std::list<Edge*>* afferentEdges = (dynamic_cast<StandardNeuron*>(*neuron))->getAfferentEdges();
+						std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 						// Go through all afferentEdges of the actual neuron
 						for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 						{	

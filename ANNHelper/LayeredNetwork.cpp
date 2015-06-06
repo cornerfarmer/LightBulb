@@ -30,11 +30,22 @@ LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj)
 LayeredNetwork::~LayeredNetwork()
 {
 	std::map<AbstractNeuron*, bool> alreadyDeleted;
-	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+
+	// Go through all inputneurons
+	for (std::vector<AbstractNeuron*>::iterator neuron = getInputNeurons()->begin(); neuron != getInputNeurons()->end(); neuron++)
+	{
+		if (!alreadyDeleted[*neuron])
+		{
+			delete(*neuron);
+			alreadyDeleted[*neuron] = true;
+		}
+	}
+
+	// Go through all hidden output layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			if (!alreadyDeleted[*neuron])
 			{
@@ -60,11 +71,18 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 
 void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs)
 {
+	// Go through all inputneurons
+	for (std::vector<AbstractNeuron*>::iterator neuron = getInputNeurons()->begin(); neuron != getInputNeurons()->end(); neuron++)
+	{
+		// Set the value in the map to the current activation of the neuron
+		neuronOutputs[*neuron] = (*neuron)->getActivation();
+	}
+
 	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = getNeurons()->begin(); layer != getNeurons()->end(); layer++)
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = getNeurons()->begin(); layer != getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in the current layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = layer->begin(); neuron != layer->end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = layer->begin(); neuron != layer->end(); neuron++)
 		{
 			// Set the value in the map to the current activation of the neuron
 			neuronOutputs[*neuron] = (*neuron)->getActivation();
@@ -78,16 +96,12 @@ void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuro
 void LayeredNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs)
 {
 	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = getNeurons()->begin(); layer != getNeurons()->end(); layer++)
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = getNeurons()->begin(); layer != getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in the current layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = layer->begin(); neuron != layer->end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = layer->begin(); neuron != layer->end(); neuron++)
 		{
-			// Cast the neuron into a standard neuron
-			StandardNeuron* standardNeuron = dynamic_cast<StandardNeuron*>(*neuron);
-			// If the cast was successful and this is not a input neuron, set the value in the map to the current net input of the neuron
-			if (standardNeuron)
-				neuronNetInputs[*neuron] = standardNeuron->getNetInput();
+			neuronNetInputs[*neuron] = (*neuron)->getNetInput();
 		}
 	}
 }
@@ -106,15 +120,19 @@ void LayeredNetwork::buildNetwork()
 		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
 			options->outputNeuronsIndices.push_back(i);
 	}
-
+	
 	// Clear all neurons
 	neurons.clear();
 
 	// Add all neurons
 	for (int l = 0; l < getLayerCount(); l++)
 	{
-		// Add a new list for every layer
-		neurons.push_back(std::vector<AbstractNeuron*>());
+		// If it is a hidden layer
+		if (l != 0)
+		{
+			// Add a new list for every hidden layer
+			neurons.push_back(std::vector<StandardNeuron*>());
+		}
 
 		// Add the neurons to the current layer
 		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
@@ -140,7 +158,10 @@ void LayeredNetwork::rebuildOutputNeurons()
 
 void LayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters)
 {
-	neurons[layerIndex].push_back(newNeuron);
+	if (layerIndex == 0)
+		inputNeurons.push_back(newNeuron);
+	else
+		neurons[layerIndex - 1].push_back(dynamic_cast<StandardNeuron*>(newNeuron));
 
 	// Refresh the neuron counters if needed
 	if (refreshNeuronCounters)
@@ -165,6 +186,7 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 	}
 	else
 	{
+		int hiddenLayerIndex = layerIndex - 1;
 		StandardNeuron* newNeuron;
 
 		// If its the last layer create a output neuron else an inner neuron
@@ -174,9 +196,19 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 			newNeuron = options->neuronFactory->createInnerNeuron();	
 
 		// Add an edge to every neuron of the last layer
-		for (std::vector<AbstractNeuron*>::iterator prevNeuron = getNeuronsInLayer(layerIndex - 1)->begin(); prevNeuron != getNeuronsInLayer(layerIndex - 1)->end(); prevNeuron++)
+		if (hiddenLayerIndex == 0)
 		{
-			newNeuron->addPrevNeuron(*prevNeuron, 1);
+			for (std::vector<AbstractNeuron*>::iterator prevNeuron = inputNeurons.begin(); prevNeuron != inputNeurons.end(); prevNeuron++)
+			{
+				newNeuron->addPrevNeuron(*prevNeuron, 1);
+			}
+		}
+		else
+		{
+			for (std::vector<StandardNeuron*>::iterator prevNeuron = neurons[hiddenLayerIndex - 1].begin(); prevNeuron != neurons[hiddenLayerIndex - 1].end(); prevNeuron++)
+			{
+				newNeuron->addPrevNeuron(*prevNeuron, 1);
+			}
 		}
 
 		// If bias neuron is used add a edge to it
@@ -189,41 +221,17 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 	}
 }
 
-void LayeredNetwork::removeNeuronFromLayer(int layerIndex, int neuronIndex)
-{
-	neurons[layerIndex].erase(neurons[layerIndex].begin() + neuronIndex);	
-	options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
-}
-
-void LayeredNetwork::removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove)
-{
-	for (int neuronIndex = 0; neuronIndex < getNeuronsInLayer(layerIndex)->size(); neuronIndex++)
-	{
-		if ((*getNeuronsInLayer(layerIndex))[neuronIndex] == neuronToRemove)
-			getNeuronsInLayer(layerIndex)->erase(getNeuronsInLayer(layerIndex)->begin() + neuronIndex);
-	}
-}
 
 std::vector<AbstractNeuron*>* LayeredNetwork::getInputNeurons()
 {
 	// Return the first layer
-	return &neurons.front();
+	return &inputNeurons;
 }
 
-std::vector<AbstractNeuron*>* LayeredNetwork::getOutputNeurons()
+std::vector<StandardNeuron*>* LayeredNetwork::getOutputNeurons()
 {
 	// Return the last layer
 	return &outputNeurons;
-}
-
-std::vector<AbstractNeuron*>* LayeredNetwork::getNeuronsInLayer(int layerIndex)
-{	
-	// Get the first layer
-	std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin();
-	// Go to the layer with nr
-	std::advance(layer, layerIndex);
-
-	return &(*layer);
 }
 
 int LayeredNetwork::getLayerCount()
@@ -231,22 +239,22 @@ int LayeredNetwork::getLayerCount()
 	return options->neuronsPerLayerCount.size();
 }
 
-std::vector<std::vector<AbstractNeuron*>>* LayeredNetwork::getNeurons()
+std::vector<std::vector<StandardNeuron*>>* LayeredNetwork::getNeurons()
 {
 	return &neurons;
 }
 
 void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 {
-	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	// Go through hidden all layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
-			// Go through all effernetEdges of this neuron
-			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+			// Go through all affernetEdges to this neuron
+			std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 			{
 				do{
 					// Set the weight to a new random value
@@ -254,50 +262,33 @@ void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 				} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
 			}
 		}
-	}
-
-	// If a bias neuron is used also randomize its weights
-	if (options->useBiasNeuron)
-	{
-		// Go through all effernetEdges of the bias neuron
-		std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
-		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
-		{
-			do{
-				// Set the weight to a new random value
-				(*edge)->setWeight((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
-			} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
-		}		
-	}
+	}	
 }
 
 int LayeredNetwork::getEdgeCount()
 {
 	int edgeCounter = 0;
-	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	// Go through all hidden layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
-			// Add the count of the efferent edges of the current neuron
-			edgeCounter += (*neuron)->getEfferentEdges()->size();
+			// Add the count of the afferent edges of the current neuron
+			edgeCounter += (*neuron)->getAfferentEdges()->size();
 		}
 	}
-
-	// If a bias neuron is used add also its efferent edges
-	edgeCounter += biasNeuron.getEfferentEdges()->size();
 
 	return edgeCounter;
 }
 
 void LayeredNetwork::resetActivation()
 {
-	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	// Go through all hidden layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Reset the activation of the current neuron
 			(*neuron)->resetActivation();
@@ -335,28 +326,32 @@ void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
 	else if (options->useBiasNeuron)
 	{
 		// Else if the other network does not have a bias neuron, but the current does
-		// Go through all layers
-		for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+		// Go through all hidden layers
+		for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 		{
 			// Go through all neurons in this layer
-			for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+			for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 			{
 				// Add a edge from our bias neuron to the current neuron in the other network
-				biasNeuron.addNextNeuron(static_cast<StandardNeuron*>(*neuron), 1);
+				biasNeuron.addNextNeuron(*neuron, 1);
 			}
 		}
 	}
 
 	// Insert all input neurons from the otherNetwork into the first layer of this network
-	neurons[0].insert(neurons[0].end(), otherNetwork.neurons[0].begin(), otherNetwork.neurons[0].end());
+	inputNeurons.insert(inputNeurons.end(), otherNetwork.inputNeurons.begin(), otherNetwork.inputNeurons.end());
 
-	// Append every layer (except the first one) from the other network to the layer list of this network
-	for (int l = 1; l < otherNetwork.neurons.size(); l++)
+	// Append every hidden layer from the other network to the layer list of this network
+	for (int l = 0; l < otherNetwork.neurons.size(); l++)
 	{
 		neurons.push_back(otherNetwork.neurons[l]);
 	}
 
+	// The outputNeurons of the other network will be our new outputNeurons
+	options->outputNeuronsIndices = otherNetwork.options->outputNeuronsIndices;
+
 	// Clear all neurons of other network so they won't be deleted
+	otherNetwork.inputNeurons.clear();
 	otherNetwork.neurons.clear();
 
 	// Refresh the counters
@@ -369,7 +364,12 @@ void LayeredNetwork::refreshNeuronsPerLayerCounters()
 {
 	// Go through all layers
 	std::vector<unsigned int>::iterator counter = options->neuronsPerLayerCount.begin();
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++, counter++)
+
+	// The first counter is for the input layer
+	*counter = inputNeurons.size();	
+	counter++;
+
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++, counter++)
 	{
 		// If there are more layers than counters
 		if (counter == options->neuronsPerLayerCount.end())
@@ -390,32 +390,20 @@ std::unique_ptr<std::map<Edge*, bool>> LayeredNetwork::getNonRecurrentEdges()
 	std::unique_ptr<std::map<Edge*, bool>> nonRecurrentEdges(new std::map<Edge*, bool>());
 
 	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
-			// Go through all effernetEdges of this neuron
-			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+			// Go through all afferentEdges of this neuron
+			std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
+			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 			{
 				// In a feed forward layered network are only non recurrent edges, so always set the value to true
 				(*nonRecurrentEdges)[*edge] = true;
 			}
 		}
 	}
-
-	// If a bias neuron is used
-	if (options->useBiasNeuron)
-	{
-		// Go through all effernetEdges of the bias neuron
-		std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
-		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
-		{
-			// Also all edges from the bias neuron are non recurrent
-			(*nonRecurrentEdges)[*edge] = true;
-		}		
-	}
-
+	
 	return nonRecurrentEdges;
 }

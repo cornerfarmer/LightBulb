@@ -50,13 +50,13 @@ std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input
 std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
 {
 	// Get all output Neurons
-	std::vector<AbstractNeuron*>* outputNeurons = networkTopology->getOutputNeurons();
+	std::vector<StandardNeuron*>* outputNeurons = networkTopology->getOutputNeurons();
 	
 	// Create a new float vector, which will contain all output values
 	std::unique_ptr<std::vector<float>> outputValues(new std::vector<float>());
 
 	// Go through all neurons and copy the activation values into the output vector
-	for (std::vector<AbstractNeuron*>::iterator neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
+	for (std::vector<StandardNeuron*>::iterator neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
 	{
 		outputValues->push_back((*neuron)->getActivation());
 	}

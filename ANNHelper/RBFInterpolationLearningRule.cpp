@@ -53,10 +53,10 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	
 	// Get all output neurons
-	std::vector<AbstractNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
+	std::vector<StandardNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
-	// Initialize a matrix which will contain all outputValues from neurons in the second layer in every teachingLesson
-	m.reset(new MatrixXf(teacher.getTeachingLessons()->size(), rbfNetwork->getNeuronsInLayer(1)->size()));
+	// Initialize a matrix which will contain all outputValues from neurons in the first hidden layer in every teachingLesson
+	m.reset(new MatrixXf(teacher.getTeachingLessons()->size(), rbfNetwork->getNeurons()->front().size()));
 	// Initialize a new matrx which will contain all teachingInput values from all output neurons
 	t.reset(new MatrixXf(m->rows(), neuralNetwork.getNetworkTopology()->getOutputNeurons()->size()));
 	// Initialize a new vector which will contain all calculated weights
@@ -118,7 +118,7 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 		for (int j = 0; j != m->cols(); j++)
 		{
 			// Store the output of the neuron into our matrix
-			(*m)(i, j) = (*rbfNetwork->getNeuronsInLayer(1))[j]->getActivation();
+			(*m)(i, j) = rbfNetwork->getNeurons()->front()[j]->getActivation();
 		}
 	}
 	

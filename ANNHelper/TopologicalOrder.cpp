@@ -1,6 +1,6 @@
 #include "TopologicalOrder.hpp"
 #include "LayeredNetwork.hpp"
-#include "AbstractNeuron.hpp"
+#include "StandardNeuron.hpp"
 #include <exception>
 
 void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology)
@@ -14,13 +14,13 @@ void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopolog
 		throw std::invalid_argument("The given networkTopology has to be a layeredNetwork");
 
 	// Go through all layers
-	for (std::vector<std::vector<AbstractNeuron*>>::iterator layer = layeredNetwork->getNeurons()->begin() + 1; layer != layeredNetwork->getNeurons()->end(); layer++)
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = layeredNetwork->getNeurons()->begin(); layer != layeredNetwork->getNeurons()->end(); layer++)
 	{
 		// First recalculate the netInput of all neurons in the current layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
 			(*neuron)->refreshNetInput();
 		// Then recalculate the activation of all neurons in the current layer
-		for (std::vector<AbstractNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
 			(*neuron)->refreshActivation();
 	}
 }
