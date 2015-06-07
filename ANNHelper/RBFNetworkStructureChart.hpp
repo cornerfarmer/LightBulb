@@ -14,6 +14,8 @@ class RBFNetwork;
 // This structure describes all options of an RBFNetworkStructureChartOptions
 struct RBFNetworkStructureChartOptions 
 {
+	int posX;
+	int posY;
 	// The height of the chart
 	unsigned int height;
 	// The width of the chart
@@ -35,6 +37,8 @@ struct RBFNetworkStructureChartOptions
 	
 	RBFNetworkStructureChartOptions()
 	{
+		posX = 0;
+		posY = 0;
 		// Set all options to default values
 		xRangeStart = 0;
 		xRangeEnd = 1;
@@ -59,7 +63,7 @@ private:
 	std::list<sf::CircleShape> rbfNeuronShapes;
 	RBFNetworkStructureChartOptions options;
 public:
-	RBFNetworkStructureChart(int posX_, int posY_, RBFNetworkStructureChartOptions &options_);
+	RBFNetworkStructureChart(RBFNetworkStructureChartOptions &options_);
 	// This method draws the calculated chart
 	void draw(sf::RenderWindow &window);
 	// This method recalculates the chart and replaces all rbfNeuronShapes

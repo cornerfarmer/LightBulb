@@ -7,6 +7,8 @@
 
 NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions()
 {
+	posX = 0;
+	posY = 0;
 	binaryInterpretation = true;
 	height = 300;
 	width = 300;
@@ -35,8 +37,7 @@ NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions(const NeuralNet
 }
 
 
-NeuralNetworkResultChart::NeuralNetworkResultChart(int posX_, int posY_, NeuralNetworkResultChartOptions& options_)
-	: GraphicObject(posX_, posY_)
+NeuralNetworkResultChart::NeuralNetworkResultChart(NeuralNetworkResultChartOptions& options_)
 {
 	options.reset(new NeuralNetworkResultChartOptions(options_));
 }

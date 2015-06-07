@@ -71,12 +71,14 @@
     <ClCompile Include="AbstractClustering.cpp" />
     <ClCompile Include="AbstractDeltaLearningRule.cpp" />
     <ClCompile Include="AbstractNearestClustering.cpp" />
+    <ClCompile Include="AbstractNetworkTopologyDrawer.cpp" />
     <ClCompile Include="AbstractNeuronFactory.cpp" />
     <ClCompile Include="AbstractActivationFunction.cpp" />
     <ClCompile Include="AbstractActivationOrder.cpp" />
     <ClCompile Include="AbstractNonReliableRBFNeuronPlacer.cpp" />
     <ClCompile Include="AbstractRBFNeuronPlacer.cpp" />
     <ClCompile Include="AbstractReliableRBFNeuronPlacer.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="BackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="Cluster.hpp" />
     <ClCompile Include="ENearestClustering.cpp" />
@@ -86,7 +88,7 @@
     <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="KNearestClustering.cpp" />
     <ClCompile Include="KNearestRBFNeuronPlacer.cpp" />
-    <ClCompile Include="NetworkTopologyDrawer.cpp" />
+    <ClCompile Include="LayeredNetworkTopologyDrawer.cpp" />
     <ClCompile Include="NeuralNetworkIO.cpp" />
     <ClCompile Include="PointSet.cpp" />
     <ClCompile Include="RBFNetworkStructureChart.cpp" />
@@ -142,12 +144,14 @@
     <ClInclude Include="AbstractClustering.hpp" />
     <ClInclude Include="AbstractDeltaLearningRule.hpp" />
     <ClInclude Include="AbstractNearestClustering.hpp" />
+    <ClInclude Include="AbstractNetworkTopologyDrawer.hpp" />
     <ClInclude Include="AbstractNeuronFactory.hpp" />
     <ClInclude Include="AbstractActivationFunction.hpp" />
     <ClInclude Include="AbstractActivationOrder.hpp" />
     <ClInclude Include="AbstractNonReliableRBFNeuronPlacer.hpp" />
     <ClInclude Include="AbstractRBFNeuronPlacer.hpp" />
     <ClInclude Include="AbstractReliableRBFNeuronPlacer.hpp" />
+    <ClInclude Include="Arrow.hpp" />
     <ClInclude Include="BackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="ENearestClustering.hpp" />
     <ClInclude Include="ENearestRBFNeuronPlacer.hpp" />
@@ -156,7 +160,7 @@
     <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="KNearestClustering.hpp" />
     <ClInclude Include="KNearestRBFNeuronPlacer.hpp" />
-    <ClInclude Include="NetworkTopologyDrawer.hpp" />
+    <ClInclude Include="LayeredNetworkTopologyDrawer.hpp" />
     <ClInclude Include="NeuralNetworkIO.hpp" />
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="PointSet.hpp" />

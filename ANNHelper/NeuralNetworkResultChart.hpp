@@ -15,6 +15,8 @@ class AbstractActivationOrder;
 // This structure describes all options of an NeuralNetworkResultChart
 struct NeuralNetworkResultChartOptions 
 {
+	int posX;
+	int posY;
 	bool binaryInterpretation;
 	unsigned int height;
 	unsigned int width;
@@ -44,7 +46,7 @@ private:
 	// This texture will contain the chart, calculated in recalculateAllValues
 	sf::Texture texture;
 public:
-	NeuralNetworkResultChart(int posX_, int posY_, NeuralNetworkResultChartOptions &options_);
+	NeuralNetworkResultChart(NeuralNetworkResultChartOptions &options_);
 	// This method draws the calculated chart
 	void draw(sf::RenderWindow &window);
 	// This method recalculates the chart

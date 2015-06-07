@@ -4,8 +4,7 @@
 #include "StandardNeuron.hpp"
 #include "RBFThreshold.hpp"
 
-RBFNetworkStructureChart::RBFNetworkStructureChart(int posX_, int posY_, RBFNetworkStructureChartOptions &options_)
-	: GraphicObject(posX_, posY_)
+RBFNetworkStructureChart::RBFNetworkStructureChart(RBFNetworkStructureChartOptions &options_)
 {
 	options = options_;
 }
@@ -26,7 +25,7 @@ void RBFNetworkStructureChart::recalculateAllValues()
 		// Set the position to the wished coordinates of the neuron center converted into the view range
 		newCircle.setPosition(((*thresholdOfNeuron->getCenterVector())[options.xRBFNeuronCenterCoordinateIndex] - options.xRangeStart) / (options.xRangeEnd - options.xRangeStart) * options.width, ((*thresholdOfNeuron->getCenterVector())[options.yRBFNeuronCenterCoordinateIndex] - options.yRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height);
 		// Add the offset position of the chart
-		newCircle.move(posX, posY);
+		newCircle.move(options.posX, options.posY);
 		// Change the vertical scale depending of the view aspect ratio
 		newCircle.setScale(1.0f, 1.0f / options.width * (options.xRangeEnd - options.xRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height);
 
@@ -46,7 +45,7 @@ void RBFNetworkStructureChart::draw(sf::RenderWindow &window)
 {	
 		// Outline the part of the window which will contain our chart
 	sf::RectangleShape drawRect;
-	drawRect.setPosition(posX, posY);
+	drawRect.setPosition(options.posX, options.posY);
 	drawRect.setSize(sf::Vector2f(options.width, options.height));
 	drawRect.setFillColor(sf::Color::Transparent);
 	drawRect.setOutlineColor(sf::Color::White);

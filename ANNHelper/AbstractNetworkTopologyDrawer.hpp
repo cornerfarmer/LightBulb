@@ -1,13 +1,15 @@
 #pragma once
 
-#ifndef _NETWORKTOPOLOYDRAWEROPTIONS_H_
-#define _NETWORKTOPOLOYDRAWEROPTIONS_H_
+#ifndef _ABSTRACTNETWORKTOPOLOYDRAWEROPTIONS_H_
+#define _ABSTRACTNETWORKTOPOLOYDRAWEROPTIONS_H_
+
 
 // Includes
 #include "GraphicObject.hpp"
 #include <SFML\Graphics.hpp>
 #include <list>
 #include <map>
+#include "Arrow.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;
@@ -15,8 +17,10 @@ class AbstractActivationOrder;
 class AbstractNeuron;
 
 // This structure describes all options of an NeuralNetworkResultChart
-struct NetworkTopologyDrawerOptions 
+struct AbstractNetworkTopologyDrawerOptions 
 {
+	int posX;
+	int posY;
 	// Height of the drawing area
 	unsigned int height;
 	// Width of the drawing area
@@ -24,24 +28,28 @@ struct NetworkTopologyDrawerOptions
 	// The networkTopolohy
 	AbstractNetworkTopology* networkTopology;
 	
-	NetworkTopologyDrawerOptions();	
+	AbstractNetworkTopologyDrawerOptions();	
 };
 
 // A basic shape for an graphical component
-class NetworkTopologyDrawer : public GraphicObject
+class AbstractNetworkTopologyDrawer : public GraphicObject
 {
-private:
-	std::unique_ptr<NetworkTopologyDrawerOptions> options;
+private:	
 	// This map will hold a circle shape for every neuron
 	std::map<AbstractNeuron*, sf::CircleShape> neuronShapes;
 	// This list will hold a line for every edge
-	std::list<sf::VertexArray> edgeShapes;
+	std::list<Arrow> edgeShapes;
+	static const float angleDifferenceBetweenContraryEdges;
+
+protected:
+	std::unique_ptr<AbstractNetworkTopologyDrawerOptions> options;
+	void addShapeFromNeuron(AbstractNeuron* neuron, int posX, int posY);
+	void addEdgesToAllShapes();
 public:
-	NetworkTopologyDrawer(int posX_, int posY_, NetworkTopologyDrawerOptions &options_);
+	AbstractNetworkTopologyDrawer(AbstractNetworkTopologyDrawerOptions &options_);
 	// This method draws the calculated chart
 	void draw(sf::RenderWindow &window);
-	// This method refreshes the drawing
-	void refresh();
+
 };
 
 #endif

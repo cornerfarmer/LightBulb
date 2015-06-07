@@ -3,8 +3,11 @@
 #ifndef _GRAPHICOBJECT_H_
 #define _GRAPHICOBJECT_H_
 
+#define _USE_MATH_DEFINES
+
 // Includes
 #include <SFML\Graphics.hpp>
+#include <math.h>
 
 // Forward declarations
 
@@ -12,12 +15,12 @@
 class GraphicObject
 {
 protected:
-	// These standad variables will contain the position of the object in pixels
-	int posX;
-	int posY;
+	static sf::Font font;
+	sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, float radius, float angle);
+	float calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd);	
 public:
 	virtual ~GraphicObject() {}
-	GraphicObject(int posX_, int posY_);
+	GraphicObject();
 	// This method will be used to draw the whole graphics object on the given window
 	virtual void draw(sf::RenderWindow &window) = 0;
 };
