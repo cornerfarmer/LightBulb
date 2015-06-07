@@ -8,7 +8,7 @@ void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetw
 {
 	// Go through all neuron groups of the deeper network
 	int gOther = otherNetwork.getNeurons()->size() - 1;
-	for (int g = getNeurons()->size() - 1; g > 0 && gOther > 0;)
+	for (int g = getNeurons()->size() - 1; g >= 0 && gOther >= 0;)
 	{
 		// Extract the neurons in the current group of both networks
 		std::vector<StandardNeuron*>& neuronsInGroup = (*getNeurons())[g];
@@ -33,13 +33,13 @@ void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetw
 		// Go one group backwards in the other network
 		gOther--;
 		// If we reached the input layer and the otherNetwork is not as deep as the own one, then start from the last group in the other network again
-		if (gOther == 0 && otherNetwork.getNeurons()->size() < getNeurons()->size())
+		if (gOther == -1 && otherNetwork.getNeurons()->size() < getNeurons()->size())
 			gOther = otherNetwork.getNeurons()->size() - 1;
 
 		// Go one group backwards in the own network
 		g--;
 		// If we reached the input group and the own network is not as deep as the other one, then start from the last group in the own network again
-		if (g == 0 && getNeurons()->size() - 1 < otherNetwork.getNeurons()->size())
+		if (g == -1 && getNeurons()->size() - 1 < otherNetwork.getNeurons()->size())
 			g = getNeurons()->size() - 1;
 	}
 }

@@ -30,6 +30,35 @@ void NetworkTopologyDrawer::refresh()
 	int layerOffset = options->width / (options->networkTopology->getNeurons()->size() + 2);	
 	// Go through all layers in the given networkTopology
 	int layerIndex = 0;
+
+	{
+		// Calculate the offset between two neurons (The +1 is needed for a border)
+		int neuronOffset = options->height / (options->networkTopology->getInputNeurons()->size() + 1);
+		// Go through all neurons in this layer
+		int neuronIndex = 0;
+		for (std::vector<AbstractNeuron*>::iterator neuron = options->networkTopology->getInputNeurons()->begin(); neuron != options->networkTopology->getInputNeurons()->end(); neuron++, neuronIndex++)
+		{
+			// Create a new circle shape
+			sf::CircleShape newCircle;		
+
+			// Set the position (The +1 is needed for a border)
+			newCircle.setPosition((layerIndex + 1) * layerOffset, (neuronIndex + 1) * neuronOffset);	
+
+			// Set the style of the circle shape
+			newCircle.setFillColor(sf::Color::Transparent);
+			newCircle.setOutlineColor(sf::Color::White);
+			newCircle.setOutlineThickness(1);
+			newCircle.setRadius(20);
+			newCircle.setOrigin(newCircle.getRadius() , newCircle.getRadius());
+			newCircle.setPointCount(100);		
+
+			// Add the shape to the map
+			neuronShapes[*neuron] = newCircle;
+		}
+	}
+
+	layerIndex++;
+
 	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = options->networkTopology->getNeurons()->begin(); layer != options->networkTopology->getNeurons()->end(); layer++, layerIndex++)
 	{
 		// Calculate the offset between two neurons (The +1 is needed for a border)
