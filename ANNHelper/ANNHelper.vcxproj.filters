@@ -245,6 +245,9 @@
     <ClInclude Include="Arrow.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="FreeNetworkTopologyDrawer.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -452,6 +455,9 @@
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Arrow.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeNetworkTopologyDrawer.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>

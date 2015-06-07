@@ -193,7 +193,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
 		}
-	} while (totalError > options->totalErrorGoal && ++tryCounter < options->maxTries);
+	} while ((totalError > options->totalErrorGoal || abs(totalError) == std::numeric_limits<float>::infinity()) && ++tryCounter < options->maxTries);
 	
 	// Print, If goal has reached 
 	if (options->enableDebugOutput)

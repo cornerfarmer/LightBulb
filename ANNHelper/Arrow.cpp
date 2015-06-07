@@ -1,10 +1,10 @@
 #include "Arrow.hpp"
 
-Arrow::Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description)
+Arrow::Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description, sf::VertexArray extraLines)
 {
 	// Create a new VertexArray
 	lines = sf::VertexArray(sf::PrimitiveType::Lines, 6);
-
+	
 	// Set the start to the position of the prevNeuron shape
 	lines[0].position = startPos;
 	// Set the start to the position of the nextNeuron shape
@@ -16,6 +16,9 @@ Arrow::Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description
 
 	lines[4].position = endPos;
     lines[5].position = calcCartesianFromPolarCoordinates(endPos, 10, angle + M_PI - 0.6);
+
+	for (int i = 0; i < extraLines.getVertexCount(); i++)
+		lines.append(extraLines[i]);
 
 	text.setFont(font);
 	text.setString(description);

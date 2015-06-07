@@ -33,7 +33,12 @@ float GraphicObject::calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f line
 	return angle;
 }
 
+sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, float angle)
+{
+	return sf::Vector2f(center.x + radiusVector.x * cos(angle), center.y + radiusVector.y * sin(angle));
+}
+
 sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, float radius, float angle)
 {
-	return sf::Vector2f(center.x + radius * cos(angle), center.y + radius * sin(angle));
+	return calcCartesianFromPolarCoordinates(center, sf::Vector2f(radius, radius), angle);
 }

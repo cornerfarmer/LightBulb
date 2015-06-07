@@ -12,6 +12,7 @@ class InputNeuron;
 class AbstractNeuron;
 class StandardNeuron;
 class Edge;
+class BiasNeuron;
 
 // A NetworkTopology is used to describe the structure of a NeuralNetwork
 class AbstractNetworkTopology
@@ -37,6 +38,8 @@ public:
 	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs) = 0;
 	// Copies the weight from all matching edges from the other network into the current one
 	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
+
+	virtual BiasNeuron* getBiasNeuron() = 0;
 };
 
 #endif

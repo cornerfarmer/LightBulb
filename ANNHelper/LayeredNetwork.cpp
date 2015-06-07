@@ -68,6 +68,10 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 	buildNetwork();		
 }
 
+BiasNeuron* LayeredNetwork::getBiasNeuron()
+{
+	return &biasNeuron;
+}
 
 void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs)
 {

@@ -63,6 +63,7 @@ public:
 	AbstractNeuron* addNeuron(bool refreshNeuronCounters);
 	// Inherited:
 	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
+	BiasNeuron* getBiasNeuron();
 };
 
 #endif

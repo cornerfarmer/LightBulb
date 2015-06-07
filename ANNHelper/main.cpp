@@ -38,6 +38,7 @@
 #include "TruncatedBackpropagationThroughTimeLearningRule.hpp"
 #include "FreeNetwork.hpp"
 #include "SynchronousOrder.hpp"
+#include "FreeNetworkTopologyDrawer.hpp"
 
 void doPerceptronTest()
 {
@@ -341,7 +342,7 @@ void doFreeNetworkTest()
 {
 	FreeNetworkOptions networkOptions;
 	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-	networkOptions.neuronCount = 3;
+	networkOptions.neuronCount = 5;
 	networkOptions.inputNeuronsIndices.resize(1);
 	networkOptions.inputNeuronsIndices[0] = 0;
 	networkOptions.outputNeuronsIndices.resize(1);
@@ -350,29 +351,7 @@ void doFreeNetworkTest()
 	
 	FreeNetwork* freeNetwork = new FreeNetwork(networkOptions);
 
-	/*std::unique_ptr<LayeredNetwork> unfoldedNetwork = freeNetwork->unfold(2);
-	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
-	networkTopologyDrawerOptions.width = 700;
-	networkTopologyDrawerOptions.height = 600;
-	networkTopologyDrawerOptions.networkTopology = unfoldedNetwork.get();
-	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
-	networkTopologyDrawer.refresh();
-
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
-
-	while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        networkTopologyDrawer.draw(window);
-        window.display();
-    }*/
+	
 
 	NeuralNetwork neuralNetwork(freeNetwork);
 
@@ -404,7 +383,7 @@ void doFreeNetworkTest()
 	options.debugOutputInterval = 100;
 	options.maxTotalErrorValue = 1;
 	options.minIterationsPerTry = 3000;
-	options.maxIterationsPerTry = 2000000;
+	options.maxIterationsPerTry = 35000;
 	options.totalErrorGoal = 0.01f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
@@ -412,7 +391,7 @@ void doFreeNetworkTest()
   	options.weightDecayFac = 0;
 	options.momentum = 0;
 	options.resilientLearningRate = false;
-	options.maxTimeSteps = 5;
+	options.maxTimeSteps = 4;
 	BackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
@@ -436,7 +415,6 @@ void doFreeNetworkTest()
 
 		teachingPattern->push_back(std::vector<float>(1,0));
 		teachingPattern->push_back(std::vector<float>(1,0));
-		teachingPattern->push_back(std::vector<float>(1,0));
 
 		//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
@@ -449,6 +427,28 @@ void doFreeNetworkTest()
 	learningRule.doLearning(neuralNetwork, teacher);
 	float totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
 
+	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
+	networkTopologyDrawerOptions.width = 700;
+	networkTopologyDrawerOptions.height = 600;
+	networkTopologyDrawerOptions.networkTopology = freeNetwork;
+	FreeNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	networkTopologyDrawer.refresh();
+
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        networkTopologyDrawer.draw(window);
+        window.display();
+    }
 
 }
 

@@ -17,6 +17,7 @@ class GraphicObject
 protected:
 	static sf::Font font;
 	sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, float radius, float angle);
+	sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, float angle);
 	float calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd);	
 public:
 	virtual ~GraphicObject() {}

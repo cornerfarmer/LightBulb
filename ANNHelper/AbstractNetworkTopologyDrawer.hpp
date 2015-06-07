@@ -36,14 +36,14 @@ class AbstractNetworkTopologyDrawer : public GraphicObject
 {
 private:	
 	// This map will hold a circle shape for every neuron
-	std::map<AbstractNeuron*, sf::CircleShape> neuronShapes;
+	std::map<AbstractNeuron*, std::pair<sf::CircleShape, sf::Text>> neuronShapes;
 	// This list will hold a line for every edge
 	std::list<Arrow> edgeShapes;
 	static const float angleDifferenceBetweenContraryEdges;
 
 protected:
 	std::unique_ptr<AbstractNetworkTopologyDrawerOptions> options;
-	void addShapeFromNeuron(AbstractNeuron* neuron, int posX, int posY);
+	void addShapeFromNeuron(AbstractNeuron* neuron, sf::Vector2f position);
 	void addEdgesToAllShapes();
 public:
 	AbstractNetworkTopologyDrawer(AbstractNetworkTopologyDrawerOptions &options_);

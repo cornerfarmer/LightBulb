@@ -84,6 +84,7 @@
     <ClCompile Include="ENearestClustering.cpp" />
     <ClCompile Include="ENearestRBFNeuronPlacer.cpp" />
     <ClCompile Include="FreeNetwork.cpp" />
+    <ClCompile Include="FreeNetworkTopologyDrawer.cpp" />
     <ClCompile Include="KMeansClustering.cpp" />
     <ClCompile Include="KMeansRBFNeuronPlacer.cpp" />
     <ClCompile Include="KNearestClustering.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="ENearestClustering.hpp" />
     <ClInclude Include="ENearestRBFNeuronPlacer.hpp" />
     <ClInclude Include="FreeNetwork.hpp" />
+    <ClInclude Include="FreeNetworkTopologyDrawer.hpp" />
     <ClInclude Include="KMeansClustering.hpp" />
     <ClInclude Include="KMeansRBFNeuronPlacer.hpp" />
     <ClInclude Include="KNearestClustering.hpp" />

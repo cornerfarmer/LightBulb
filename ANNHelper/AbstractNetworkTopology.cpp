@@ -43,3 +43,4 @@ void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetw
 			g = getNeurons()->size() - 1;
 	}
 }
+

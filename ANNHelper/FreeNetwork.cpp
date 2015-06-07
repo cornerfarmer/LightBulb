@@ -191,6 +191,11 @@ void FreeNetwork::resetActivation()
 	}
 }
 
+BiasNeuron* FreeNetwork::getBiasNeuron()
+{
+	return &biasNeuron;
+}
+
 std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 {
 	LayeredNetworkOptions layeredNetworkOptions;

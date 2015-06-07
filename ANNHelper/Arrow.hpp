@@ -16,7 +16,7 @@ private:
 	sf::VertexArray lines;
 	sf::Text text;
 public:
-	Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description);
+	Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description, sf::VertexArray extraLines);
 	void draw(sf::RenderWindow &window);
 };
 

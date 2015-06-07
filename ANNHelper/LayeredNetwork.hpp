@@ -75,6 +75,7 @@ public:
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
+	BiasNeuron* getBiasNeuron();
 };
 
 #endif
