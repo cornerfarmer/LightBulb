@@ -39,6 +39,7 @@
 #include "FreeNetwork.hpp"
 #include "SynchronousOrder.hpp"
 #include "FreeNetworkTopologyDrawer.hpp"
+#include "StandardNeuron.hpp"
 
 void doPerceptronTest()
 {
@@ -341,7 +342,7 @@ void doRecurrentLayeredNetworkTest()
 void doFreeNetworkTest()
 {
 	FreeNetworkOptions networkOptions;
-	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(0.1), new IdentityFunction());
 	networkOptions.neuronCount = 5;
 	networkOptions.inputNeuronsIndices.resize(1);
 	networkOptions.inputNeuronsIndices[0] = 0;
@@ -392,7 +393,7 @@ void doFreeNetworkTest()
 	options.momentum = 0;
 	options.resilientLearningRate = false;
 	options.maxTimeSteps = 4;
-	BackpropagationThroughTimeLearningRule learningRule(options);
+	TruncatedBackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
 	
@@ -423,9 +424,24 @@ void doFreeNetworkTest()
 
 		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
 	}
+	
 
 	learningRule.doLearning(neuralNetwork, teacher);
 	float totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
+
+	
+	NeuralNetworkIO teachingPattern;
+
+	teachingPattern.push_back(std::vector<float>(1));
+	teachingPattern.back()[0] = 50;		
+	teachingPattern.push_back(std::vector<float>(1));
+	teachingPattern.back()[0] = 50;		
+	teachingPattern.push_back(std::vector<float>(1));
+	teachingPattern.back()[0] = 0;		
+	teachingPattern.push_back(std::vector<float>(1));
+	teachingPattern.back()[0] = 0;		
+
+	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder());
 
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
 	networkTopologyDrawerOptions.width = 700;
