@@ -99,69 +99,75 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				if (!options->offlineLearning)
 					initializeAllWeightAdjustments(initializedNeuralNetwork);
 
-				// Calculate the errorvector and also fill - if needed - the output and netInput values map
-				std::unique_ptr<std::map<StandardNeuron*, float>> errormap = (*teachingLesson)->getErrormap(initializedNeuralNetwork, *activationOrder, getOutputValuesInTime(), getNetInputValuesInTime());
-				
-				// Create a edgeCounter, which will be used in offline learning
-				int edgeCounter = 0;
+				int nextStartTime = -1;
+				int nextTimeStepCount = -1;
 
-				// Adjust all hidden/output layers except 
-				for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
-				{			
-					// Go through all neurons in this layer
-					std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
-					int neuronsInLayerCount = neuronsInLayer->size();
-					for (int n = 0; n < neuronsInLayer->size(); n++)
-					{					
-						// Let the algorithm do some work for the actual neuron
-						initializeNeuronWeightCalculation((*neuronsInLayer)[n], lessonIndex, l, n, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
-
-						std::list<Edge*>* afferentEdges = ((*neuronsInLayer)[n])->getAfferentEdges();
-						// Go through all afferentEdges of the actual neuron
-						int edgeIndex = 0;
-						for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
-						{			
-							// Calculate the deltaWeight
-							float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
-
-							// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
- 							if (options->offlineLearning)
-								offlineLearningWeights[edgeCounter++] += deltaWeight;
-							else
-								offlineLearningWeights[edgeCounter++] = deltaWeight;
-						}							
-					}
-				}
-
-				// If offline learning is activated, adjust all weights
-				if (!options->offlineLearning)
+				while(configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
 				{
-					// Create a edgeCounter
+					// Calculate the errormap and also fill - if needed - the output and netInput values map
+					std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(initializedNeuralNetwork, *activationOrder, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime());
+				
+					// Create a edgeCounter, which will be used in offline learning
 					int edgeCounter = 0;
 
-					// Adjust the every hidden/output layer
+					// Adjust all hidden/output layers except 
 					for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
-					{
+					{			
 						// Go through all neurons in this layer
 						std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 						int neuronsInLayerCount = neuronsInLayer->size();
-						for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
-						{						
-							std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
+						for (int n = 0; n < neuronsInLayer->size(); n++)
+						{					
+							// Let the algorithm do some work for the actual neuron
+							initializeNeuronWeightCalculation((*neuronsInLayer)[n], lessonIndex, l, n, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
+
+							std::list<Edge*>* afferentEdges = ((*neuronsInLayer)[n])->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
-							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
-							{	
-								// Adjust the weight depending on the sum of all calculated gradients
-								adjustWeight(*edge, offlineLearningWeights[edgeCounter++]);							
-							}					
+							int edgeIndex = 0;
+							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
+							{			
+								// Calculate the deltaWeight
+								float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
+
+								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
+ 								if (options->offlineLearning)
+									offlineLearningWeights[edgeCounter++] += deltaWeight;
+								else
+									offlineLearningWeights[edgeCounter++] = deltaWeight;
+							}							
 						}
 					}
-				}
+
+					// If offline learning is activated, adjust all weights
+					if (!options->offlineLearning)
+					{
+						// Create a edgeCounter
+						int edgeCounter = 0;
+
+						// Adjust the every hidden/output layer
+						for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
+						{
+							// Go through all neurons in this layer
+							std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
+							int neuronsInLayerCount = neuronsInLayer->size();
+							for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+							{						
+								std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
+								// Go through all afferentEdges of the actual neuron
+								for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+								{	
+									// Adjust the weight depending on the sum of all calculated gradients
+									adjustWeight(*edge, offlineLearningWeights[edgeCounter++]);							
+								}					
+							}
+						}
+					}
 
 			
 
-				if (!options->offlineLearning)
-					doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
+					if (!options->offlineLearning)
+						doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
+				}
 			}
 
 			// If offline learning is activated, adjust all weights
@@ -208,4 +214,16 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 	// Return if learning was successful
 	return (totalError <= options->totalErrorGoal);
+}
+
+bool AbstractLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+{
+	if (*nextTimeStepCount != -1)
+		return false;
+	else
+	{
+		*nextStartTime = 0;
+		*nextTimeStepCount = 0;
+		return true;
+	}
 }

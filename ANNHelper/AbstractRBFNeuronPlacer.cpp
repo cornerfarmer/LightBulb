@@ -16,10 +16,10 @@ std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::const_iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 	{
 		// Create a new point in the right dimension and with the same value as the current teachingInput
-		Point* newPoint = new Point(std::vector<float>(inputDimension), *(*teachingLesson)->getTeachingInput(NULL));
+		Point* newPoint = new Point(std::vector<float>(inputDimension), (*(*teachingLesson)->getTeachingInput(NULL))[0]);
 		// Go through all coordinates of the point
 		std::vector<float>::iterator pointCoordinate = newPoint->valPos.position.begin();
-		for (std::vector<float>::const_iterator teachingPattern = (*teachingLesson)->getTeachingPattern()->front().begin(); teachingPattern != (*teachingLesson)->getTeachingPattern()->front().end(); teachingPattern++, pointCoordinate++)
+		for (std::vector<float>::const_iterator teachingPattern = (*(*teachingLesson)->getTeachingPattern())[0].begin(); teachingPattern != (*(*teachingLesson)->getTeachingPattern())[0].end(); teachingPattern++, pointCoordinate++)
 		{
 			// Set the the teachingPattern of the current teachingLesson to the pointCoordinate
 			*pointCoordinate = *teachingPattern;

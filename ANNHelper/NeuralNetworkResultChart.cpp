@@ -56,8 +56,8 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	// Create a new pixel array, which will contain all color informations
 	std::unique_ptr<sf::Uint8[]> pixels(new sf::Uint8[options->width*options->height*4]);
 	// Create a new inputVector with the size of the inputCount
-	NeuralNetworkIO input;
-	input.push_back(std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0));
+	NeuralNetworkIO<float> input;
+	input[0] = std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
 
 	// Go through every pixel
 	for(int x = 0; x < options->width; x++)
@@ -65,11 +65,11 @@ void NeuralNetworkResultChart::recalculateAllValues()
 		for(int y = 0; y < options->height; y++)
 		{	
 			// Compute the input values from the coordinates and the given range
-			input.front()[options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
-			input.front()[options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
+			input[0][options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
+			input[0][options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
 
 			// Extract the output
-			float output = (*options->neuralNetwork->calculate(input, *options->activationOrder)).front()[options->outputNeuronIndex];
+			float output = (*options->neuralNetwork->calculate(input, *options->activationOrder))[0][options->outputNeuronIndex];
 
 			// If binaryInterpretation is selected, just use black or white, else interpret the output linear
 			if (options->binaryInterpretation)

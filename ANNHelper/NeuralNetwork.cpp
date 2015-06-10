@@ -16,25 +16,27 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	networkTopology.reset(networkTopology_);
 }
 
-std::unique_ptr<NeuralNetworkIO> NeuralNetwork::calculate(NeuralNetworkIO& input, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime)
+std::unique_ptr<NeuralNetworkIO<float>> NeuralNetwork::calculate(NeuralNetworkIO<float>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime)
 {
-	std::unique_ptr<NeuralNetworkIO> output(new NeuralNetworkIO());
+	std::unique_ptr<NeuralNetworkIO<float>> output(new NeuralNetworkIO<float>());
 
-	// Reset all activations
-	networkTopology->resetActivation();
+	if (startTime == 0)
+	{
+		// Reset all activations
+		networkTopology->resetActivation();
+	}
 
 	// Do for every time step
-	int timeStep = 0;
-	for (NeuralNetworkIO::iterator singleInput = input.begin(); singleInput != input.end(); singleInput++, timeStep++)
+	for (int timeStep = startTime; (timeStep <= input.getMaxTimeStep() && timeStepCount == 0) || timeStep < timeStepCount; timeStep++)
 	{
 		// Set the input into the neural network
-		setInput(*singleInput);
+		setInput(input.count(timeStep) != 0 ? &input.at(timeStep) : NULL);
 
 		// Pass the work to the activationOrder
 		activationOrder.executeActivation(*networkTopology);
 
 		// Extract the output and save it into the output value
-		output->push_back(*getOutput());
+		(*output)[timeStep] = *getOutput();
 
 		// If the output values map is not null, fill it with all current output values 
 		if (outputValuesInTime != NULL)
@@ -64,23 +66,23 @@ std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
 	return outputValues;
 }
 
-void NeuralNetwork::setInput(std::vector<float> &inputVector)
+void NeuralNetwork::setInput(std::vector<float>* inputVector)
 {
 	// Get all input Neurons
 	std::vector<AbstractNeuron*>* inputNeurons = networkTopology->getInputNeurons();
 
 	// Go through all neurons and copy the input values into the inputNeurons
 	int index = 0;
-	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && index < inputVector.size(); neuron++, index++)
+	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
 	{
 		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
 		if (inputNeuron)
-			inputNeuron->setInput(inputVector[index]);
+			inputNeuron->setInput(inputVector ? (*inputVector)[index] : 0);
 		else
 		{
 			StandardNeuron* standardNeuron = dynamic_cast<StandardNeuron*>(*neuron);
 			if (standardNeuron)
-				standardNeuron->setAdditionalInput(inputVector[index]);
+				standardNeuron->setAdditionalInput(inputVector ? (*inputVector)[index] : 0);
 			else
 				throw std::logic_error("Something went wrong while setting the input values");
 		}

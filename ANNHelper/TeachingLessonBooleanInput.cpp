@@ -4,40 +4,46 @@
 #include "NeuralNetworkIO.hpp"
 #include <exception>
 
-TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO* teachingPattern_, std::vector<bool>* teachingInput_)
+TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
 {
-	teachingInput = std::unique_ptr<std::vector<bool>>(teachingInput_);	
-	teachingPattern = std::unique_ptr<NeuralNetworkIO>(teachingPattern_);
-	teachingInputLinear = std::unique_ptr<std::vector<float>>(new std::vector<float>(teachingInput->size()));
+	teachingInput = std::unique_ptr<NeuralNetworkIO<bool>>(teachingInput_);	
+	teachingPattern = std::unique_ptr<NeuralNetworkIO<float>>(teachingPattern_);
+	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<float>>(new NeuralNetworkIO<float>());
 }
 
-std::vector<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
+NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
 {
 	// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
 	if (activationFunction->isLinear())
 		throw std::invalid_argument("The activationFunction of the outputNeurons is linear, but your teaching input is boolean.");
 
-	// Go through all  teaching input values
-	for (int i = 0; i < teachingInputLinear->size(); i++)
+
+		// Go through all  teaching input values
+	for (NeuralNetworkIO<bool>::iterator teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->begin(); teachingInputAtTime++)
 	{
-		// If the boolean value is true, set the maximum of the activationFunction, else the minimum
-		if ((*teachingInput)[i])
-			(*teachingInputLinear)[i] = activationFunction->getMaximum();
-		else
-			(*teachingInputLinear)[i] = activationFunction->getMinimum();
+		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<float>(teachingInputAtTime->second.size());
+		// Go through all  teaching input values
+		for (int i = 0; i < teachingInputAtTime->second.size(); i++)
+		{
+			// If the boolean value is true, set the maximum of the activationFunction, else the minimum
+			if (teachingInputAtTime->second[i])
+				(*teachingInputLinear)[teachingInputAtTime->first][i] = activationFunction->getMaximum();
+			else
+				(*teachingInputLinear)[teachingInputAtTime->first][i] = activationFunction->getMinimum();
+		}
 	}
 
 	// Return the vector with float values
 	return teachingInputLinear.get();
 }
 
-NeuralNetworkIO* TeachingLessonBooleanInput::getTeachingPattern()
+NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }
 
 AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
 {
-	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold() ,new std::vector<bool>(*teachingInput));
+	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold() ,new NeuralNetworkIO<bool>(*teachingInput));
 	return unfoldedTeachingLesson;
 }

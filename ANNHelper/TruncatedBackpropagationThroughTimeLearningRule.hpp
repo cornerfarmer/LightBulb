@@ -30,15 +30,15 @@ private:
 	// This vector should hold all delta values in all timesteps (The boolean value holds the information, if the deltavalue is valid)
 	std::map<AbstractNeuron*, std::vector<std::pair<float, bool>>> deltaVectorOutputLayer;
 	// Returns and calculated (if needed) the delta value of a neuron in the given timestep
-	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, std::map<StandardNeuron*, float>* errormap);
+	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap);
 protected:
 	// Returns our current options in form of a BackpropagationThroughTimeLearningRuleOptions object
 	BackpropagationThroughTimeLearningRuleOptions* getOptions();
 	// Inherited:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
+	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime();
-	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
+	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
 	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);
 	AbstractActivationOrder* getNewActivationOrder();

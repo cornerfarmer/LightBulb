@@ -42,7 +42,7 @@ protected:
 	// Inherited:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
 	AbstractActivationOrder* getNewActivationOrder();
-	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
+	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	AbstractDeltaLearningRule(AbstractDeltaLearningRuleOptions *options_);

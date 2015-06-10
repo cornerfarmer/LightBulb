@@ -7,26 +7,30 @@
 #include <vector>
 #include <map>
 
+// Includes
+#include "NeuralNetworkIO.hpp"
+
 // Forward declarations
 class NeuralNetwork;
 class AbstractActivationOrder;
 class AbstractActivationFunction;
-class NeuralNetworkIO;
 class AbstractNeuron;
 class StandardNeuron;
+
+typedef std::map<int, std::map<StandardNeuron*, float>> ErrorMap_t;
 
 class AbstractTeachingLesson
 {
 public:
 	// Put the teachingPattern into the neuralNetwork, refresh the network and fills (optional) the given output and netput values map
-	std::unique_ptr<NeuralNetworkIO> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
+	std::unique_ptr<NeuralNetworkIO<float>> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = 0, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
 	// This method should return a float vector of the teachingInput 
-	virtual std::vector<float>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
+	virtual NeuralNetworkIO<float>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
 	// This method should return a float vector of the teachingPattern
-	virtual NeuralNetworkIO* getTeachingPattern() = 0;
+	virtual NeuralNetworkIO<float>* getTeachingPattern() = 0;
 	virtual ~AbstractTeachingLesson() {}
 	// Calculate the Errormap and fills (optional) the given output and netput values map
-	std::unique_ptr<std::map<StandardNeuron*, float>> getErrormap(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
+	std::unique_ptr<ErrorMap_t> getErrormap(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = 0, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
 	// Calculate the euclidient distance
 	float getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the RootMeanSquare

@@ -70,7 +70,7 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
 	return new TopologicalOrder();
 }
 
-float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
+float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
 	if (layerIndex == layerCount - 1)
@@ -79,13 +79,13 @@ float RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int
 		return 0;
 }
 
-void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
+void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
 	if (layerIndex == layerCount - 1)
 	{
 		// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
-		(*t)(lessonIndex, neuronIndex) = (*(*actTeacher->getTeachingLessons())[lessonIndex]->getTeachingInput(neuron->getActivationFunction()))[neuronIndex];
+		(*t)(lessonIndex, neuronIndex) = (*(*actTeacher->getTeachingLessons())[lessonIndex]->getTeachingInput(neuron->getActivationFunction()))[0][neuronIndex];
 		
 		if (lessonIndex == t->rows() - 1)
 		{

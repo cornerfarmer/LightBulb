@@ -43,12 +43,12 @@ AbstractActivationOrder* SingleLayerPerceptronLearningRule::getNewActivationOrde
 	return new TopologicalOrder();
 }
 
-float SingleLayerPerceptronLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::vector<float>* errorVector)
+float SingleLayerPerceptronLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errorVector)
 {
 	// If the errorValue is positive add the activation to the weight, else substract the activation from the weight
-	if ((*errorVector)[neuronIndex] > 0)
+	if ((*errorVector)[0][edge->getNextNeuron()] > 0)
 		return edge->getPrevNeuron()->getActivation();
-	else if ((*errorVector)[neuronIndex] < 0)
+	else if ((*errorVector)[0][edge->getNextNeuron()] < 0)
 		return -edge->getPrevNeuron()->getActivation();
 	else
 		return 0;

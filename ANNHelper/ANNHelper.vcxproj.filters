@@ -248,6 +248,9 @@
     <ClInclude Include="FreeNetworkTopologyDrawer.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="RealTimeRecurrentLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -459,6 +462,9 @@
     </ClCompile>
     <ClCompile Include="FreeNetworkTopologyDrawer.cpp">
       <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="RealTimeRecurrentLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

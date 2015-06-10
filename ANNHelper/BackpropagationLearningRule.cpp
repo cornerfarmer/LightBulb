@@ -10,7 +10,7 @@
 #include "Edge.hpp"
 #include "ResilientLearningRateHelper.hpp"
 
-BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions options_) 
+BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_) 
 	: AbstractLearningRule(new BackpropagationLearningRuleOptions(options_))
 {
 
@@ -56,7 +56,7 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 }
 
 
-float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
+float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	// If its the last layer
 	if (layerIndex == layerCount - 1)
@@ -79,13 +79,13 @@ float BackpropagationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int 
 	return 0;
 }
 
-void BackpropagationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
+void BackpropagationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	// If its the last layer
 	if (layerIndex == layerCount - 1)
 	{					
 		// Compute the delta value: activationFunction'(netInput) * errorValue
-		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errormap)[neuron];
+		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errormap)[0][neuron];
 	}
 	else
 	{

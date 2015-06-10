@@ -65,12 +65,12 @@ protected:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	virtual float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
-	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap);
+	virtual float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
+	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder();
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
-	BackpropagationLearningRule(BackpropagationLearningRuleOptions options_);
+	BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_);
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_);
 };
 

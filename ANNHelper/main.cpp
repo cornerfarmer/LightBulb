@@ -40,6 +40,7 @@
 #include "SynchronousOrder.hpp"
 #include "FreeNetworkTopologyDrawer.hpp"
 #include "StandardNeuron.hpp"
+#include "RealTimeRecurrentLearningRule.hpp"
 
 void doPerceptronTest()
 {
@@ -76,13 +77,14 @@ void doPerceptronTest()
 	{
 		for (int l=0;l<8;l+=1)
 		{			
-			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-			std::vector<bool>* teachingInput= new std::vector<bool>(1);
+			NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
 
-			teachingPattern->push_back(std::vector<float>(2));
-			teachingPattern->back()[0] = i;
-			teachingPattern->back()[1] = l;
-			(*teachingInput)[0] = (i == l);	
+			(*teachingPattern)[0] = std::vector<float>(2);
+			(*teachingPattern)[0][0] = i;
+			(*teachingPattern)[0][1] = l;
+			(*teachingInput)[0] = std::vector<bool>(1);
+			(*teachingInput)[0][0] = (i == l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
@@ -121,12 +123,12 @@ void doPerceptronTest()
 
 	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
 
-	NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-	teachingPattern->push_back(std::vector<float>(2));
-	teachingPattern->back()[0] = 8;
-	teachingPattern->back()[1] = 8;
+	NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+	(*teachingPattern)[0] = std::vector<float>(2);
+	(*teachingPattern)[0][0] = 8;
+	(*teachingPattern)[0][1] = 8;
 
-	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(*teachingPattern, TopologicalOrder());
+	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(*teachingPattern, TopologicalOrder());
 	
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
@@ -167,13 +169,14 @@ void doRBFTest()
 	{
 		for (int l=0;l<=20;l+=1)
 		{	
-			NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-			std::vector<float>* teachingInput= new std::vector<float>(1);
+			NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+			NeuralNetworkIO<float>* teachingInput= new NeuralNetworkIO<float>();
 
-			teachingPattern->push_back(std::vector<float>(2));
-			teachingPattern->back()[0] = i;
-			teachingPattern->back()[1] = l;
-			(*teachingInput)[0] = (abs(i - 0) <= 5.5f &&  abs(l - 0) <= 5.5f) || (abs(i - 20) <= 5.5f &&  abs(l - 20) <= 5.5f);	
+			(*teachingPattern)[0] = std::vector<float>(2);
+			(*teachingPattern)[0][0] = i;
+			(*teachingPattern)[0][1] = l;
+			(*teachingInput)[0] = std::vector<float>(1);
+			(*teachingInput)[0][0] = (abs(i - 0) <= 5.5f &&  abs(l - 0) <= 5.5f) || (abs(i - 20) <= 5.5f &&  abs(l - 20) <= 5.5f);	
 			//(*teachingInput)[0] = (i > l);	
 			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
@@ -302,20 +305,21 @@ void doRecurrentLayeredNetworkTest()
 	
 	for (int i=0;i<4;i++)
 	{
-		NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-		std::vector<bool>* teachingInput= new std::vector<bool>(1);
+		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
 
 		int lastPattern = -1;
 		for (int l = 0; l < 2; l++)
 		{
 			if (l != 0)
-				lastPattern = teachingPattern->back()[0];
-			teachingPattern->push_back(std::vector<float>(1));
-			teachingPattern->back()[0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
+				lastPattern = (*teachingPattern)[l-1][0];
+			(*teachingPattern)[l] = std::vector<float>(1);
+			(*teachingPattern)[l][0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
 
 		}
 
-		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	
+		(*teachingInput)[1] = std::vector<bool>(1);
+		(*teachingInput)[1][0] = (lastPattern == (*teachingPattern)[1][0]);	
 		//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
 		//(*teachingInput)[0] = (i > l);	
@@ -329,14 +333,14 @@ void doRecurrentLayeredNetworkTest()
 	
 	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
 
-	NeuralNetworkIO teachingPattern;
+	NeuralNetworkIO<float> teachingPattern;
 
-	teachingPattern.push_back(std::vector<float>(1));
-	teachingPattern.back()[0] = 0;		
-	teachingPattern.push_back(std::vector<float>(1));
-	teachingPattern.back()[0] = 1;		
+	teachingPattern[0] = std::vector<float>(1);
+	teachingPattern[0][0] = 0;		
+	teachingPattern[1] = std::vector<float>(1);
+	teachingPattern[1][0] = 1;		
 
-	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(teachingPattern, TopologicalOrder());
+	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(teachingPattern, TopologicalOrder());
 }
 
 void doFreeNetworkTest()
@@ -399,23 +403,21 @@ void doFreeNetworkTest()
 	
 	for (int i=0;i<4;i++)
 	{
-		NeuralNetworkIO* teachingPattern = new NeuralNetworkIO();
-		std::vector<bool>* teachingInput = new std::vector<bool>(1);
+		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+		NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
 
 		int lastPattern = -1;
 		for (int l = 0; l < 2; l++)
 		{
 			if (l != 0)
-				lastPattern = teachingPattern->back()[0];
-			teachingPattern->push_back(std::vector<float>(1));
-			teachingPattern->back()[0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
+				lastPattern = (*teachingPattern)[l-1][0];
+			(*teachingPattern)[l] = std::vector<float>(1);
+			(*teachingPattern)[l][0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
 
 		}
 
-		(*teachingInput)[0] = (lastPattern == teachingPattern->back()[0]);	
-
-		teachingPattern->push_back(std::vector<float>(1,0));
-		teachingPattern->push_back(std::vector<float>(1,0));
+		(*teachingInput)[3] = std::vector<bool>(1);
+		(*teachingInput)[3][0] = (lastPattern == (*teachingPattern)[1][0]);	
 
 		//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
@@ -430,18 +432,14 @@ void doFreeNetworkTest()
 	float totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
 
 	
-	NeuralNetworkIO teachingPattern;
+	NeuralNetworkIO<float> teachingPattern;
 
-	teachingPattern.push_back(std::vector<float>(1));
-	teachingPattern.back()[0] = 50;		
-	teachingPattern.push_back(std::vector<float>(1));
-	teachingPattern.back()[0] = 50;		
-	teachingPattern.push_back(std::vector<float>(1));
-	teachingPattern.back()[0] = 0;		
-	teachingPattern.push_back(std::vector<float>(1));
-	teachingPattern.back()[0] = 0;		
+	teachingPattern[0] = std::vector<float>(1);
+	teachingPattern[0][0] = 50;		
+	teachingPattern[1] = std::vector<float>(1);
+	teachingPattern[1][0] = 50;		
 
-	std::unique_ptr<NeuralNetworkIO> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder());
+	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);
 
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
 	networkTopologyDrawerOptions.width = 700;
@@ -468,8 +466,82 @@ void doFreeNetworkTest()
 
 }
 
+
+void doRTRLTest()
+{
+	FreeNetworkOptions networkOptions;
+	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(0.1), new IdentityFunction());
+	networkOptions.neuronCount = 5;
+	networkOptions.inputNeuronsIndices.resize(1);
+	networkOptions.inputNeuronsIndices[0] = 0;
+	networkOptions.outputNeuronsIndices.resize(1);
+	networkOptions.outputNeuronsIndices[0] = 1;
+	networkOptions.useBiasNeuron = true;
+	
+	FreeNetwork* freeNetwork = new FreeNetwork(networkOptions);
+
+	
+
+	NeuralNetwork neuralNetwork(freeNetwork);
+	
+	RealTimeRecurrentLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 100;
+	options.maxTotalErrorValue = 1;
+	options.minIterationsPerTry = 3000;
+	options.maxIterationsPerTry = 35000;
+	options.totalErrorGoal = 0.01f;
+	options.maxTries = 1000;
+	options.minRandomWeightValue = -0.5;
+	options.maxRandomWeightValue = 0.5;
+	RealTimeRecurrentLearningRule learningRule(options);
+
+	Teacher teacher;
+	
+	for (int i=0;i<4;i++)
+	{
+		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+		NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
+
+		int lastPattern = -1;
+		for (int l = 0; l < 2; l++)
+		{
+			if (l != 0)
+				lastPattern = (*teachingPattern)[l-1][0];
+			(*teachingPattern)[l] = std::vector<float>(1);
+			(*teachingPattern)[l][0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
+
+		}
+
+		(*teachingInput)[3] = std::vector<bool>(1);
+		(*teachingInput)[3][0] = (lastPattern == (*teachingPattern)[1][0]);	
+
+		//(*teachingInput)[1] = teachingPattern->back()[0];	
+		
+		//(*teachingInput)[0] = (i > l);	
+		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+	}
+	
+
+	learningRule.doLearning(neuralNetwork, teacher);
+	float totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
+
+	
+	NeuralNetworkIO<float> teachingPattern;
+
+	teachingPattern[0] = std::vector<float>(1);
+	teachingPattern[0][0] = 50;		
+	teachingPattern[1] = std::vector<float>(1);
+	teachingPattern[1][0] = 50;		
+
+	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);
+
+}
+
 int main()
 {
-	doFreeNetworkTest();
+	doRTRLTest();
     return 0;
 }

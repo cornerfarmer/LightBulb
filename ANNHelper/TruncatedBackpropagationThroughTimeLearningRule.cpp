@@ -40,7 +40,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm
 	}
 }
 
-float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
+float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	// Calculate the gradient
 	float gradient = 0;
@@ -60,7 +60,7 @@ float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromE
 	return gradient / getOptions()->maxTimeSteps;
 }
 
-void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, std::map<StandardNeuron*, float>* errormap)
+void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	// Go through all timesteps
 	for (int t = 0; t < getOptions()->maxTimeSteps; t++)
@@ -70,7 +70,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalc
 	}
 }
 
-float TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, std::map<StandardNeuron*, float>* errormap)
+float TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
 {
 	// Only if the delta value has not calculated yet
 	if (deltaVectorOutputLayer[neuron][time].second == false)
@@ -80,8 +80,8 @@ float TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInT
 		// Create a new variable which should hold the complete error fac
 		float errorfac = 0;
 		// If the neuron has a own error value then add it to the error fac
-		if (errormap->count(neuron) > 0 && time == getOptions()->maxTimeSteps - 1)
-			errorfac = (*errormap)[neuron];
+		if (errormap->count(time) > 0 && (*errormap)[time].count(neuron) > 0)
+			errorfac = (*errormap)[time][neuron];
 		
 		// Go through all efferent edges
 		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
