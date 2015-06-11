@@ -67,7 +67,7 @@ protected:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
 	virtual float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
-	AbstractActivationOrder* getNewActivationOrder();
+	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_);

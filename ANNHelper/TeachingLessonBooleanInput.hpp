@@ -27,6 +27,7 @@ protected:
 public:
 	TeachingLessonBooleanInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
 	AbstractTeachingLesson* unfold();
+	int getMaxTimeStep();
 };
 
 #endif

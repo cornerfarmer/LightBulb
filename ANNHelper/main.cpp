@@ -299,7 +299,7 @@ void doRecurrentLayeredNetworkTest()
 	options.offlineLearning = false;
 	options.resilientLearningRate = false;
 	options.maxTimeSteps = 2;
-	BackpropagationThroughTimeLearningRule learningRule(options);
+	TruncatedBackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
 	
@@ -542,6 +542,6 @@ void doRTRLTest()
 
 int main()
 {
-	doRTRLTest();
+	doRecurrentLayeredNetworkTest();
     return 0;
 }

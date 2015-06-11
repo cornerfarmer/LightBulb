@@ -22,7 +22,7 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork &n
 	std::unique_ptr<NeuralNetworkIO<float>> outputVector = tryLesson(neuralNetwork, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
 
 	// Calculate the error values (expected value - real value)
-	for (NeuralNetworkIO<float>::iterator teachingInputValue = teachingInput->begin(); teachingInputValue != teachingInput->begin(); teachingInputValue++)
+	for (NeuralNetworkIO<float>::iterator teachingInputValue = teachingInput->begin(); teachingInputValue != teachingInput->end(); teachingInputValue++)
 	{
 		if ((*outputVector).count(teachingInputValue->first) != 0)
 		{
@@ -49,11 +49,11 @@ float AbstractTeachingLesson::getRMS(NeuralNetwork &neuralNetwork, AbstractActiv
 float AbstractTeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	// Calculate the errorVector
-	std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder);
+	std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder, 0, getMaxTimeStep() + 1);
 
 	float specificError = 0;
 
-	for (ErrorMap_t::iterator errorValues = errorMap->begin(); errorValues != errorMap->begin(); errorValues++)
+	for (ErrorMap_t::iterator errorValues = errorMap->begin(); errorValues != errorMap->end(); errorValues++)
 	{
 		// Add the square of every errorValue in the errorVector
 		for (std::map<StandardNeuron*, float>::iterator errorValue = errorValues->second.begin(); errorValue != errorValues->second.end(); errorValue++)

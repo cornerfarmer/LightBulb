@@ -19,7 +19,7 @@ NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractAct
 
 
 		// Go through all  teaching input values
-	for (NeuralNetworkIO<bool>::iterator teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->begin(); teachingInputAtTime++)
+	for (NeuralNetworkIO<bool>::iterator teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->end(); teachingInputAtTime++)
 	{
 		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<float>(teachingInputAtTime->second.size());
 		// Go through all  teaching input values
@@ -44,6 +44,13 @@ NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingPattern()
 
 AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
 {
-	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold() ,new NeuralNetworkIO<bool>(*teachingInput));
+	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>();
+	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
+	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold(), unfoldedTeachingInput);
 	return unfoldedTeachingLesson;
+}
+
+int TeachingLessonBooleanInput::getMaxTimeStep()
+{
+	return teachingInput->rbegin()->first;
 }

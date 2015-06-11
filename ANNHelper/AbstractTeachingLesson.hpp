@@ -39,6 +39,8 @@ public:
 	float getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Unfolds the teaching lesson
 	virtual AbstractTeachingLesson* unfold() = 0;
+
+	virtual int getMaxTimeStep() = 0;
 };
 
 #endif

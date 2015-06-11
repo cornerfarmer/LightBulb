@@ -20,6 +20,13 @@ NeuralNetworkIO<float>* TeachingLessonLinearInput::getTeachingPattern()
 
 AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 {
-	TeachingLessonLinearInput* unfoldedTeachingLesson = new TeachingLessonLinearInput(teachingPattern->unfold(), new NeuralNetworkIO<float>(*teachingInput));
+	NeuralNetworkIO<float>* unfoldedTeachingInput = new NeuralNetworkIO<float>();
+	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
+	TeachingLessonLinearInput* unfoldedTeachingLesson = new TeachingLessonLinearInput(teachingPattern->unfold(), unfoldedTeachingInput);
 	return unfoldedTeachingLesson;
+}
+
+int TeachingLessonLinearInput::getMaxTimeStep()
+{
+	return teachingInput->rbegin()->first;
 }

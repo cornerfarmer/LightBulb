@@ -111,7 +111,10 @@
     <ClCompile Include="IdentityFunction.cpp" />
     <ClCompile Include="AbstractInputFunction.cpp" />
     <ClCompile Include="InputNeuron.cpp" />
-    <ClCompile Include="LayeredNetwork.cpp" />
+    <ClCompile Include="LayeredNetwork.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SFML_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="AbstractLearningRule.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AbstractNetworkTopology.cpp" />

@@ -141,7 +141,7 @@ float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradie
 }
 
 
-AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder()
+AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }

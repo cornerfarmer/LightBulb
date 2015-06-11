@@ -50,7 +50,7 @@ void RealTimeRecurrentLearningRule::initializeNeuronWeightCalculation(StandardNe
 }
 
 
-AbstractActivationOrder* RealTimeRecurrentLearningRule::getNewActivationOrder()
+AbstractActivationOrder* RealTimeRecurrentLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
 	return new SynchronousOrder();
 }

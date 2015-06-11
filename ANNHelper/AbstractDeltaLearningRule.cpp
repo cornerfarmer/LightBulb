@@ -29,7 +29,7 @@ void AbstractDeltaLearningRule::initializeLearningAlgoritm(NeuralNetwork &neural
 	initializeDeltaLearningAlgoritm(neuralNetwork, teacher);
 }
 
-AbstractActivationOrder* AbstractDeltaLearningRule::getNewActivationOrder()
+AbstractActivationOrder* AbstractDeltaLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }

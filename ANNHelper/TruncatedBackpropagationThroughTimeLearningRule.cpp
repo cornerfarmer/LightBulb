@@ -6,6 +6,9 @@
 #include "AbstractNeuron.hpp"
 #include "StandardNeuron.hpp"
 #include "SynchronousOrder.hpp"
+#include "TopologicalOrder.hpp"
+#include "LayeredNetwork.hpp"
+#include "FreeNetwork.hpp"
 
 
 TruncatedBackpropagationThroughTimeLearningRule::TruncatedBackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_) 
@@ -17,6 +20,7 @@ TruncatedBackpropagationThroughTimeLearningRule::TruncatedBackpropagationThrough
 void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {	
 	BackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
+
 	// Remove all output values
 	outputValuesInTime.clear();
 	// Resize it to the new max time steps
@@ -133,7 +137,24 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeAllWeightAdjustm
 	}
 }
 
-AbstractActivationOrder* TruncatedBackpropagationThroughTimeLearningRule::getNewActivationOrder()
+AbstractActivationOrder* TruncatedBackpropagationThroughTimeLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
-	return new SynchronousOrder();
+	if (dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+		return new TopologicalOrder();
+	else if (dynamic_cast<FreeNetwork*>(neuralNetwork.getNetworkTopology()))
+		return new SynchronousOrder();
+	else
+		throw std::logic_error("Something went wrong while setting the activation order for the LearningRule");
+}
+
+bool TruncatedBackpropagationThroughTimeLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+{
+	if (*nextTimeStepCount != -1)
+		return false;
+	else
+	{
+		*nextStartTime = 0;
+		*nextTimeStepCount = getOptions()->maxTimeSteps;
+		return true;
+	}
 }

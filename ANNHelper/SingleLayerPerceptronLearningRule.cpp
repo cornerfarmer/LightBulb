@@ -38,7 +38,7 @@ void SingleLayerPerceptronLearningRule::initializeLearningAlgoritm(NeuralNetwork
 		throw std::invalid_argument("All outputNeurons have to use binary activationFunctions");
 }
 
-AbstractActivationOrder* SingleLayerPerceptronLearningRule::getNewActivationOrder()
+AbstractActivationOrder* SingleLayerPerceptronLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }

@@ -32,7 +32,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	NeuralNetwork& initializedNeuralNetwork = *initializeNeuralNetwork(neuralNetwork);
 	
 	// Ask for the used activation order
-	std::unique_ptr<AbstractActivationOrder> activationOrder(getNewActivationOrder());
+	std::unique_ptr<AbstractActivationOrder> activationOrder(getNewActivationOrder(initializedNeuralNetwork));
 
 	// Let the learning algorithm do stuff before starting
 	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher, *activationOrder);

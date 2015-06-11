@@ -77,7 +77,7 @@ protected:
 	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges
 	virtual void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap) {};
 	// This method should return the used activationOrder
-	virtual AbstractActivationOrder* getNewActivationOrder() = 0;
+	virtual AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork) = 0;
 	// Prints a current summary of the status of the learning process
 	virtual void printDebugOutput() {};
 	// This method should do something like randomizing all weight

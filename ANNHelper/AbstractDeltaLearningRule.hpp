@@ -41,7 +41,7 @@ protected:
 	virtual void initializeDeltaLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
 	// Inherited:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	AbstractActivationOrder* getNewActivationOrder();
+	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	float calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:

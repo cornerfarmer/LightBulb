@@ -41,7 +41,8 @@ protected:
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
 	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);
-	AbstractActivationOrder* getNewActivationOrder();
+	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
+	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 public:
 	TruncatedBackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_);
 };

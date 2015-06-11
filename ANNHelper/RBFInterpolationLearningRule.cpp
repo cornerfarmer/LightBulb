@@ -65,7 +65,7 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	
 }
 
-AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
+AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }

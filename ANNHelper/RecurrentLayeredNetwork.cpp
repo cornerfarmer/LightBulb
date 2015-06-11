@@ -210,7 +210,7 @@ std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentE
 		std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
 		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 		{
-			(*nonRecurrentEdges)[*edge] = false;
+			(*nonRecurrentEdges)[*edge] = true;
 		}
 	}
 

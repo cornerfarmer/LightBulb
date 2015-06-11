@@ -18,7 +18,7 @@ private:
 	void adjustWeight(Edge* edge, float deltaWeight);
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
-	AbstractActivationOrder* getNewActivationOrder();
+	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	float calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errorvector);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
