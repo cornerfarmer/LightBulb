@@ -161,13 +161,12 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 								}					
 							}
 						}
-					}
+					}		
 
-			
-
-					if (!options->offlineLearning)
-						doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 				}
+				
+				if (!options->offlineLearning)
+					doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
 
 			// If offline learning is activated, adjust all weights

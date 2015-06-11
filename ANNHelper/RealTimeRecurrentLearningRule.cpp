@@ -40,7 +40,7 @@ float RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(Edge* edge, in
 			outputNeuronsDependency += outputNeuron->second * getDynamicSystemValueOfEdgeAtTime(edge, outputNeuron->first, outputNeurons->first);
 		}
 	}
-	float returnValue =  getOptions()->learningRate * outputNeuronsDependency;
+	float returnValue = getOptions()->learningRate * outputNeuronsDependency;
 	return returnValue;
 }
 
@@ -98,10 +98,12 @@ float RealTimeRecurrentLearningRule::getDynamicSystemValueOfEdgeAtTime(Edge* edg
 
 		for (std::list<Edge*>::iterator afferentEdge = neuron->getAfferentEdges()->begin(); afferentEdge != neuron->getAfferentEdges()->end(); afferentEdge++)
 		{
-			previousValuesSum += (*afferentEdge)->getWeight() * getDynamicSystemValueOfEdgeAtTime(edge, dynamic_cast<StandardNeuron*>((*afferentEdge)->getPrevNeuron()), time - 1);
+			StandardNeuron* prevNeuron = dynamic_cast<StandardNeuron*>((*afferentEdge)->getPrevNeuron());
+			if (prevNeuron)
+				previousValuesSum += (*afferentEdge)->getWeight() * getDynamicSystemValueOfEdgeAtTime(edge, prevNeuron, time - 1);
 		}
 
-		float returnValue = neuron->executeDerivationOnActivationFunction(netInputValuesInTime[time - 1][neuron]) * (previousValuesSum + (edge->getNextNeuron() == neuron ? outputValuesInTime[time - 1][neuron] : 0));
+		float returnValue = neuron->executeDerivationOnActivationFunction(netInputValuesInTime[time][neuron]) * (previousValuesSum + (edge->getNextNeuron() == neuron ? outputValuesInTime[time - 1][edge->getPrevNeuron()] : 0));
 		return returnValue;
 	}
 	else
@@ -113,7 +115,7 @@ bool RealTimeRecurrentLearningRule::configureNextErroMapCalculation(int* nextSta
 	*nextTimeStepCount = 1;
 	(*nextStartTime)++;
 	currentTimeStep = *nextStartTime;
-	return (*nextStartTime < teachingLesson.getTeachingPattern()->size());
+	return (*nextStartTime < teachingLesson.getMaxTimeStep() + 1);
 }
 
 std::vector<std::map<AbstractNeuron*, float>>* RealTimeRecurrentLearningRule::getOutputValuesInTime()

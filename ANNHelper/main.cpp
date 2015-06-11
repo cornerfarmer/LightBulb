@@ -437,7 +437,7 @@ void doFreeNetworkTest()
 	teachingPattern[0] = std::vector<float>(1);
 	teachingPattern[0][0] = 50;		
 	teachingPattern[1] = std::vector<float>(1);
-	teachingPattern[1][0] = 50;		
+	teachingPattern[1][0] = 49;		
 
 	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);
 
@@ -471,7 +471,7 @@ void doRTRLTest()
 {
 	FreeNetworkOptions networkOptions;
 	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(0.1), new IdentityFunction());
-	networkOptions.neuronCount = 5;
+	networkOptions.neuronCount = 3;
 	networkOptions.inputNeuronsIndices.resize(1);
 	networkOptions.inputNeuronsIndices[0] = 0;
 	networkOptions.outputNeuronsIndices.resize(1);
@@ -490,7 +490,7 @@ void doRTRLTest()
 	options.maxTotalErrorValue = 1;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 35000;
-	options.totalErrorGoal = 0.01f;
+	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
@@ -534,7 +534,7 @@ void doRTRLTest()
 	teachingPattern[0] = std::vector<float>(1);
 	teachingPattern[0][0] = 50;		
 	teachingPattern[1] = std::vector<float>(1);
-	teachingPattern[1][0] = 50;		
+	teachingPattern[1][0] = 49;		
 
 	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);
 
@@ -542,6 +542,6 @@ void doRTRLTest()
 
 int main()
 {
-	doRecurrentLayeredNetworkTest();
+	doRTRLTest();
     return 0;
 }
