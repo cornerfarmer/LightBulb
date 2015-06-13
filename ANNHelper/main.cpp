@@ -288,8 +288,8 @@ void doRecurrentLayeredNetworkTest()
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 100;
 	options.maxTotalErrorValue = 1;
-	options.minIterationsPerTry = 3000;
-	options.maxIterationsPerTry = 20000;
+	options.minIterationsPerTry = 10000;
+	options.maxIterationsPerTry = 30000;
 	options.totalErrorGoal = 0.0001f;
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
@@ -305,42 +305,64 @@ void doRecurrentLayeredNetworkTest()
 	
 	for (int i=0;i<4;i++)
 	{
-		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
-		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
-
-		int lastPattern = -1;
-		for (int l = 0; l < 2; l++)
+		for (int j=0;j<4;j++)
 		{
-			if (l != 0)
-				lastPattern = (*teachingPattern)[l-1][0];
-			(*teachingPattern)[l] = std::vector<float>(1);
-			(*teachingPattern)[l][0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
+			NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
 
-		}
+			int lastPattern = -1;
+			for (int l = 0; l < 2; l++)
+			{
+				if (l != 0)
+					lastPattern = (*teachingPattern)[l-1][0];
+				(*teachingPattern)[l] = std::vector<float>(1);
+				(*teachingPattern)[l][0] = (l==0 ? i : j);		
 
-		(*teachingInput)[1] = std::vector<bool>(1);
-		(*teachingInput)[1][0] = (lastPattern == (*teachingPattern)[1][0]);	
-		//(*teachingInput)[1] = teachingPattern->back()[0];	
+			}
+
+			(*teachingInput)[1] = std::vector<bool>(1);
+			(*teachingInput)[1][0] = (lastPattern == (*teachingPattern)[1][0]);	
+			//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
-		//(*teachingInput)[0] = (i > l);	
-		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+			//(*teachingInput)[0] = (i > l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
-		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+		}
 	}
 
 	learningRule.doLearning(neuralNetwork, teacher);
-
 	
-	float totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
+	
 
-	NeuralNetworkIO<float> teachingPattern;
+	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
+	neuralNetworkResultChartOptions.binaryInterpretation = true;
+	neuralNetworkResultChartOptions.xRangeEnd = 101;
+	neuralNetworkResultChartOptions.yRangeEnd = 101;
+	neuralNetworkResultChartOptions.yInputNeuronIndex = 0;
+	neuralNetworkResultChartOptions.yTimeStep = 1;
+	neuralNetworkResultChartOptions.ouputTimeStep = 1;
 
-	teachingPattern[0] = std::vector<float>(1);
-	teachingPattern[0][0] = 0;		
-	teachingPattern[1] = std::vector<float>(1);
-	teachingPattern[1][0] = 1;		
+	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+	
+	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
+	neuralNetworkResultChart.recalculateAllValues();
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
 
-	std::unique_ptr<NeuralNetworkIO<float>> outputVector = neuralNetwork.calculate(teachingPattern, TopologicalOrder());
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        neuralNetworkResultChart.draw(window);
+        window.display();
+    }
 }
 
 void doFreeNetworkTest()
@@ -542,6 +564,6 @@ void doRTRLTest()
 
 int main()
 {
-	doRTRLTest();
+	doRecurrentLayeredNetworkTest();
     return 0;
 }

@@ -23,6 +23,9 @@ NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions()
 	outputNeuronIndex = 0;
 	ouputRangeStart = 0;
 	ouputRangeEnd = 1;
+	ouputTimeStep = 0;
+	xTimeStep = 0;
+	yTimeStep = 0;
 }
 
 NeuralNetworkResultChartOptions::~NeuralNetworkResultChartOptions()
@@ -57,7 +60,8 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	std::unique_ptr<sf::Uint8[]> pixels(new sf::Uint8[options->width*options->height*4]);
 	// Create a new inputVector with the size of the inputCount
 	NeuralNetworkIO<float> input;
-	input[0] = std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
+	input[options->xTimeStep] = std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
+	input[options->yTimeStep] = std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
 
 	// Go through every pixel
 	for(int x = 0; x < options->width; x++)
@@ -65,11 +69,11 @@ void NeuralNetworkResultChart::recalculateAllValues()
 		for(int y = 0; y < options->height; y++)
 		{	
 			// Compute the input values from the coordinates and the given range
-			input[0][options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
-			input[0][options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
+			input[options->xTimeStep][options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
+			input[options->yTimeStep][options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
 
 			// Extract the output
-			float output = (*options->neuralNetwork->calculate(input, *options->activationOrder))[0][options->outputNeuronIndex];
+			float output = (*options->neuralNetwork->calculate(input, *options->activationOrder, 0, options->ouputTimeStep + 1))[options->ouputTimeStep][options->outputNeuronIndex];
 
 			// If binaryInterpretation is selected, just use black or white, else interpret the output linear
 			if (options->binaryInterpretation)
