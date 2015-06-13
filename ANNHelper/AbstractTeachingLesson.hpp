@@ -26,6 +26,8 @@ public:
 	std::unique_ptr<NeuralNetworkIO<float>> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = 0, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
 	// This method should return a float vector of the teachingInput 
 	virtual NeuralNetworkIO<float>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
+
+	std::unique_ptr<ErrorMap_t> getTeachingInputMap(NeuralNetwork &neuralNetwork);
 	// This method should return a float vector of the teachingPattern
 	virtual NeuralNetworkIO<float>* getTeachingPattern() = 0;
 	virtual ~AbstractTeachingLesson() {}

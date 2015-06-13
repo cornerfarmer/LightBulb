@@ -23,10 +23,13 @@ struct RealTimeRecurrentLearningRuleOptions : public AbstractLearningRuleOptions
 	// Sets the learning Rate
 	float learningRate;	
 
+	bool teacherForcing;
+
 	RealTimeRecurrentLearningRuleOptions()
 	{
 		learningRate = 0.45f;
 		offlineLearning = false;
+		teacherForcing = true;
 	}
 };
 
@@ -34,13 +37,14 @@ struct RealTimeRecurrentLearningRuleOptions : public AbstractLearningRuleOptions
 class RealTimeRecurrentLearningRule : public AbstractLearningRule
 {
 private:	
+	std::unique_ptr<ErrorMap_t> currentTeachingInputMap;
 	// Holds all output values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> outputValuesInTime;
 	// Holds all netInput values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
 	// This vector should hold all delta values
 	std::map<Edge*, std::list<float>> dynamicSystemCache;
-	float getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time);
+	float getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap);
 	AbstractNetworkTopology* currentNetworkTopology;
 	int currentTimeStep;
 protected:
@@ -60,6 +64,7 @@ protected:
 	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 	std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime();
 	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
+	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 public:
 	RealTimeRecurrentLearningRule(RealTimeRecurrentLearningRuleOptions& options_);
 };

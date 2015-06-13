@@ -44,6 +44,7 @@ public:
 	AbstractActivationFunction* getActivationFunction();
 	AbstractThreshold* getThreshold();
 	void setAdditionalInput(float newAdditionalInput);
+	void injectActivation(float newActivation);
 };
 
 #endif

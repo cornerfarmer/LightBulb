@@ -96,3 +96,8 @@ void StandardNeuron::setAdditionalInput(float newAdditionalInput)
 {
 	additionalInput = newAdditionalInput;
 }
+
+void StandardNeuron::injectActivation(float newActivation)
+{
+	activation = newActivation;
+}

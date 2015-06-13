@@ -67,3 +67,20 @@ float AbstractTeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, Abs
 	
 	return specificError;
 }
+
+std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(NeuralNetwork &neuralNetwork)
+{
+	std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t());
+	NeuralNetworkIO<float>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
+	for (NeuralNetworkIO<float>::iterator teachingInputsInTimeStep = teachingInput->begin(); teachingInputsInTimeStep != teachingInput->end(); teachingInputsInTimeStep++)
+	{
+		(*teachingInputMap)[teachingInputsInTimeStep->first] = std::map<StandardNeuron*, float>();
+		std::vector<float>::iterator teachingInputValue = teachingInputsInTimeStep->second.begin();
+		for (std::vector<StandardNeuron*>::iterator outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end() && teachingInputValue != teachingInputsInTimeStep->second.end(); outputNeuron++, teachingInputValue++)
+		{
+			(*teachingInputMap)[teachingInputsInTimeStep->first][*outputNeuron] = *teachingInputValue;
+		}
+	}
+
+	return  teachingInputMap;
+}
