@@ -21,6 +21,8 @@ struct FreeNetworkOptions
 	AbstractNeuronFactory* neuronFactory;
 	bool useBiasNeuron;
 	unsigned int neuronCount;
+	bool realInputNeurons;
+	unsigned int inputNeuronCount;
 	std::vector<unsigned int> inputNeuronsIndices;
 	std::vector<unsigned int> outputNeuronsIndices;
 	FreeNetworkOptions();
@@ -60,7 +62,7 @@ public:
 	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
 
-	AbstractNeuron* addNeuron(bool refreshNeuronCounters);
+	AbstractNeuron* addNeuron(bool refreshNeuronCounters, bool inputNeuron = false);
 	// Inherited:
 	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
 	BiasNeuron* getBiasNeuron();

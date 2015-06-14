@@ -34,6 +34,14 @@ FreeNetwork::~FreeNetwork()
 	{
 		delete(*neuron);
 	}	
+	if (options->realInputNeurons)
+	{
+		// Go through all neurons 
+		for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
+		{
+			delete(*neuron);
+		}	
+	}
 }
 
 FreeNetwork::FreeNetwork()
@@ -56,6 +64,16 @@ void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOu
 	{
 		// Set the value in the map to the current activation of the neuron
 		neuronOutputs[*neuron] = (*neuron)->getActivation();
+	}
+
+	if (options->realInputNeurons)
+	{
+		// Go through all neurons 
+		for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
+		{
+			// Set the value in the map to the current activation of the neuron
+			neuronOutputs[*neuron] = (*neuron)->getActivation();
+		}	
 	}
 	
 	// Also consider the bias neuron!
@@ -82,17 +100,28 @@ void FreeNetwork::buildNetwork()
 
 	// Clear all neurons
 	neurons.clear();
+	
+	if (options->realInputNeurons)
+	{
+		for (int i = 0; i < options->inputNeuronCount; i++)
+		{
+			addNeuron(false, true);
+		}
+	}
 
 	// Add all neurons
 	for (int l = 0; l < options->neuronCount; l++)
 	{
 		addNeuron(false);			
-	}
+	}	
 
-	// Set input neurons from given indices
-	for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+	if (!options->realInputNeurons)
 	{
-		inputNeurons.push_back(neurons[*inputNeuronIndex]);
+		// Set input neurons from given indices
+		for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+		{
+			inputNeurons.push_back(neurons[*inputNeuronIndex]);
+		}
 	}
 
 	// Set output neurons from given indices
@@ -102,35 +131,74 @@ void FreeNetwork::buildNetwork()
 	}
 }
 
-AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters)
+AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters, bool inputNeuron)
 {
-	StandardNeuron* newNeuron;
-
-	// If its the last layer create a output neuron else an inner neuron
-	newNeuron = options->neuronFactory->createInnerNeuron();
-
-	// If bias neuron is used add a edge to it
-	if (options->useBiasNeuron)
-		newNeuron->addPrevNeuron(&biasNeuron, 1);
-
-	// Add an edge to every other neuron 
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	if (inputNeuron)
 	{
-		newNeuron->addNextNeuron(*neuron, 1);
-		(*neuron)->addNextNeuron(newNeuron, 1);
+		if (options->realInputNeurons)
+		{
+			InputNeuron* newNeuron;
+
+			// If its the last layer create a output neuron else an inner neuron
+			newNeuron = options->neuronFactory->createInputNeuron();
+
+			// Add an edge to every neuron 
+			for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+			{
+				newNeuron->addNextNeuron(*neuron, 1);
+			}
+
+			// Add it to the neuronlist
+			inputNeurons.push_back(newNeuron);	
+
+			// Refresh the neuron counters if needed
+			if (refreshNeuronCounters)
+				options->inputNeuronCount++;
+
+			return newNeuron;	
+		}
+		else
+			throw std::logic_error("You can not add a InputNeuron if the network does not use real InputNeurons!");
 	}
+	else
+	{
+		StandardNeuron* newNeuron;
 
-	newNeuron->addNextNeuron(newNeuron, 1);
+		// If its the last layer create a output neuron else an inner neuron
+		newNeuron = options->neuronFactory->createInnerNeuron();
 
-	// Add it to the neuronlist
-	neurons.push_back(newNeuron);
+		if (options->realInputNeurons)
+		{
+			// Go through all neurons 
+			for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
+			{
+				newNeuron->addPrevNeuron(*neuron, 1);
+			}
+		}
+
+		// If bias neuron is used add a edge to it
+		if (options->useBiasNeuron)
+			newNeuron->addPrevNeuron(&biasNeuron, 1);
+
+		// Add an edge to every other neuron 
+		for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+		{
+			newNeuron->addNextNeuron(*neuron, 1);
+			(*neuron)->addNextNeuron(newNeuron, 1);
+		}		
+
+		newNeuron->addNextNeuron(newNeuron, 1);
+
+		// Add it to the neuronlist
+		neurons.push_back(newNeuron);
 	
 
-	// Refresh the neuron counters if needed
-	if (refreshNeuronCounters)
-		options->neuronCount++;
+		// Refresh the neuron counters if needed
+		if (refreshNeuronCounters)
+			options->neuronCount++;
 
-	return newNeuron;	
+		return newNeuron;	
+	}
 }
 
 std::vector<AbstractNeuron*>* FreeNetwork::getInputNeurons()
@@ -193,7 +261,10 @@ void FreeNetwork::resetActivation()
 
 BiasNeuron* FreeNetwork::getBiasNeuron()
 {
-	return &biasNeuron;
+	if (options->useBiasNeuron)
+		return &biasNeuron;
+	else
+		return NULL;
 }
 
 std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
@@ -201,7 +272,10 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.neuronFactory = options->neuronFactory;
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(2);
-	layeredNetworkOptions.neuronsPerLayerCount[0] = 0;
+	if (!options->realInputNeurons)
+		layeredNetworkOptions.neuronsPerLayerCount[0] = 0;
+	else
+		layeredNetworkOptions.neuronsPerLayerCount[0] = options->inputNeuronCount;
 	layeredNetworkOptions.neuronsPerLayerCount[1] = options->neuronCount;
 	layeredNetworkOptions.useBiasNeuron = options->useBiasNeuron;
 	layeredNetworkOptions.outputNeuronsIndices = options->outputNeuronsIndices;
@@ -213,11 +287,13 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 	
 		LayeredNetwork* layeredNetworkToMerge = new LayeredNetwork(layeredNetworkOptions);	
 
-		
-		for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+		if (!options->realInputNeurons)
 		{
-			layeredNetworkToMerge->addNeuronIntoLayer(0, (*layeredNetworkToMerge->getNeurons()).front()[*inputNeuronIndex], true);
-		}	
+			for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+			{
+				layeredNetworkToMerge->addNeuronIntoLayer(0, (*layeredNetworkToMerge->getNeurons()).front()[*inputNeuronIndex], true);
+			}	
+		}
 		
 
 		if (i != 0)

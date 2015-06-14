@@ -96,7 +96,7 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 	sf::Text newText;
 
 	std::string thresholdString = "";
-	for (std::list<Edge*>::iterator edge = options->networkTopology->getBiasNeuron()->getEfferentEdges()->begin(); edge !=options->networkTopology->getBiasNeuron()->getEfferentEdges()->end(); edge++)
+	for (std::list<Edge*>::iterator edge = options->networkTopology->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->networkTopology->getBiasNeuron()->getEfferentEdges()->end(); edge++)
 	{
 		if ((*edge)->getNextNeuron() == neuron)
 		{
