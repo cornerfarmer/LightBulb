@@ -251,6 +251,9 @@
     <ClInclude Include="RealTimeRecurrentLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="SchmidhuberLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -464,6 +467,9 @@
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="RealTimeRecurrentLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="SchmidhuberLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>

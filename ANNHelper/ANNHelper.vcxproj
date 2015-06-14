@@ -130,6 +130,7 @@
     <ClCompile Include="ROLFClustering.cpp" />
     <ClCompile Include="ROLFNeuronPlacer.cpp" />
     <ClCompile Include="SameFunctionsNeuronFactory.cpp" />
+    <ClCompile Include="SchmidhuberLearningRule.cpp" />
     <ClCompile Include="SingleLayerPerceptronLearningRule.cpp" />
     <ClCompile Include="BackpropagationLearningRule.cpp" />
     <ClCompile Include="StandardNeuron.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="ROLFClustering.hpp" />
     <ClInclude Include="ROLFNeuronPlacer.hpp" />
     <ClInclude Include="SameFunctionsNeuronFactory.hpp" />
+    <ClInclude Include="SchmidhuberLearningRule.hpp" />
     <ClInclude Include="SingleLayerPerceptronLearningRule.hpp" />
     <ClInclude Include="BackpropagationLearningRule.hpp" />
     <ClInclude Include="StandardNeuron.hpp" />
