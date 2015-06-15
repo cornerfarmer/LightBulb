@@ -35,17 +35,20 @@ struct SchmidhuberLearningRuleOptions : public AbstractLearningRuleOptions
 class SchmidhuberLearningRule : public AbstractLearningRule
 {
 private:	
-	TruncatedBackpropagationThroughTimeLearningRule backpropagationThroughTimeLearningRule;
 	// Holds all output values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> outputValuesInTime;
 	// Holds all netInput values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
-	// This vector should hold all delta values
-	std::map<Edge*, std::list<float>> dynamicSystemCache;
+	// This vector should hold all delta values in all timesteps (The boolean value holds the information, if the deltavalue is valid)
+	std::map<AbstractNeuron*, std::vector<std::pair<float, bool>>> deltaVectorOutputLayer;
+	std::unique_ptr<std::map<StandardNeuron*, std::map<Edge*, float>>> currentDynamicSystemValues;
+	std::unique_ptr<std::map<StandardNeuron*, std::map<Edge*, float>>> oldDynamicSystemValues;
 	int currentBlockSize;
 	int currentBlockStart;
-	float getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap);
+	float getGammaOfNeuronsInTime(StandardNeuron* neuronj, StandardNeuron* neuronk, int time);
+	float getDynamicSystemValue(StandardNeuron* neuron, Edge* edge);
 	AbstractNetworkTopology* currentNetworkTopology;
+	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap);
 	int currentTimeStep;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient

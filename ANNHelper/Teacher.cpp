@@ -51,3 +51,13 @@ std::unique_ptr<Teacher> Teacher::unfold()
 	}
 	return unfoldedTeacher;
 }
+
+int Teacher::getMaxTimeStep()
+{
+	int maxTimeStep = 0;
+	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+	{
+		maxTimeStep = std::max(maxTimeStep, (*teachingLesson)->getMaxTimeStep());
+	}
+	return maxTimeStep;
+}

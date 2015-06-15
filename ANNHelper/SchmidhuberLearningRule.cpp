@@ -28,23 +28,92 @@ void SchmidhuberLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNe
 	// Resize it to the new max time steps
 	netInputValuesInTime.resize(10);
 
-	currentBlockSize = neuralNetwork.getNetworkTopology()->getInputNeurons()->size();
+	currentNetworkTopology = neuralNetwork.getNetworkTopology();
+
+	int maxTimeStep = teacher.getMaxTimeStep();
+	// Go through all hidden/output layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	{
+		// Go through all neurons in this layer
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			// Create a new delta vector for this neuron
+			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<float, bool>>(maxTimeStep + 2);
+		}
+	}
 }
 
 
 float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
-	float outputNeuronsDependency = 0;
-	for (ErrorMap_t::iterator outputNeurons = errormap->begin(); outputNeurons != errormap->end(); outputNeurons++)
+	if (time != 0)
 	{
-		for (std::map<StandardNeuron*, float>::iterator outputNeuron = outputNeurons->second.begin(); outputNeuron != outputNeurons->second.end(); outputNeuron++)
+		float gradient = 0;
+
+		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
-			outputNeuronsDependency += outputNeuron->second * getDynamicSystemValueOfEdgeAtTime(edge, outputNeuron->first, outputNeurons->first, true, errormap);
+			gradient -= getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart, errormap) * (*currentDynamicSystemValues)[*outputNeuron][edge];
 		}
+
+		for (int t = currentBlockStart + 1; t <= currentBlockStart + currentBlockSize; t++)
+		{
+			gradient -= getDeltaVectorOfNeuronInTime(edge->getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
+		}	
+
+		return gradient;
+	}
+	else
+		return 0;	
+}
+
+
+float SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
+{
+	// Only if the delta value has not calculated yet
+	if (deltaVectorOutputLayer[neuron][time].second == false)
+	{
+		std::list<Edge*>* efferentEdges = neuron->getEfferentEdges();
+
+		// Create a new variable which should hold the complete error fac
+		float errorfac = 0;
+		// If the neuron has a own error value then add it to the error fac
+		if (errormap->count(time) > 0 && (*errormap)[time].count(neuron) > 0)
+			errorfac = (*errormap)[time][neuron];
+		
+		// Go through all efferent edges
+		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
+		{
+			// If this is not the last timestep or the two neurons are in the same timestep
+			if (time < currentBlockStart + currentBlockSize)
+			{
+				// Add to the errorfac: deltaValueNextNeuron(sameTimestepEdge ? t : t + 1) * weight
+				errorfac += getDeltaVectorOfNeuronInTime((*efferentEdge)->getNextNeuron(), time + 1, errormap) * (*efferentEdge)->getWeight();
+			}
+		}
+
+		// Calulate the deltaValue: activationFunction'(netInput) * errorfac
+		deltaVectorOutputLayer[neuron][time].first = neuron->executeDerivationOnActivationFunction(netInputValuesInTime[time][neuron]) * errorfac;			
+		// Mark the delta value as valid
+		deltaVectorOutputLayer[neuron][time].second = true;
+	}
+	// Return the deltaValue
+	return deltaVectorOutputLayer[neuron][time].first;
+}
+
+float SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Edge* edge)
+{
+	float dynamicSystemValue = 0;
+	for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+	{
+		dynamicSystemValue += getGammaOfNeuronsInTime(*outputNeuron, neuron, currentBlockStart) * (*oldDynamicSystemValues)[*outputNeuron][edge];
 	}
 
-	float returnValue = getOptions()->learningRate * outputNeuronsDependency;
-	return returnValue;
+	for (int t = currentBlockStart + 1; t <= currentBlockStart + currentBlockSize; t++)
+	{
+		dynamicSystemValue += getGammaOfNeuronsInTime(edge->getNextNeuron(), neuron, t) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
+	}
+
+	return dynamicSystemValue;
 }
 
 void SchmidhuberLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
@@ -90,44 +159,87 @@ void SchmidhuberLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teache
 
 void SchmidhuberLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
-	dynamicSystemCache.clear();
+	// Go through all hidden/output layers
+	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	{
+		// Go through all neurons in this layer
+		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		{
+			// Set all deltaValues in all time steps to invalid
+			for (int t = 0; t < deltaVectorOutputLayer[*neuron].size(); t++) 
+				deltaVectorOutputLayer[*neuron][t].second = false;
+		}
+	}
 }
 
 void SchmidhuberLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
-{
-
+{	
+	currentBlockSize = neuralNetwork.getNetworkTopology()->getNeurons()->front().size();
 }
 
-float SchmidhuberLearningRule::getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap)
+
+float SchmidhuberLearningRule::getGammaOfNeuronsInTime(StandardNeuron* neuronj, StandardNeuron* neuronl, int time)
 {
-	if (time != 0)
+	float gamma = 0;
+
+	if (time == currentBlockStart + currentBlockSize)
 	{
-		float gradient = 0;
-
-		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
-		{
-			gradient -= backpropagationThroughTimeLearningRule.getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart, errormap) * getDynamicSystemValueOfEdgeAtTime(edge, *outputNeuron, currentBlockStart, true, errormap);
-		}
-
-		for (int t = currentBlockStart + 1; t < currentBlockStart + currentBlockSize; t++)
-		{
-			gradient -= backpropagationThroughTimeLearningRule.getDeltaVectorOfNeuronInTime(edge->getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
-		}	
-
-		return gradient;
+		gamma = (neuronj == neuronl);
 	}
 	else
-		return 0;
+	{
+		// Go through all efferent edges
+		for (std::list<Edge*>::iterator efferentEdge = neuronj->getEfferentEdges()->begin(); efferentEdge != neuronj->getEfferentEdges()->end(); efferentEdge++)
+		{			
+			// Add to the errorfac: deltaValueNextNeuron(sameTimestepEdge ? t : t + 1) * weight
+			gamma += getGammaOfNeuronsInTime((*efferentEdge)->getNextNeuron(), neuronl, time + 1) * (*efferentEdge)->getWeight();			
+		}
+
+		// Calulate the deltaValue: activationFunction'(netInput) * errorfac
+		gamma = neuronj->executeDerivationOnActivationFunction(netInputValuesInTime[time][neuronj]) * gamma;			
+	}
+
+	return gamma;
 }
 
 bool SchmidhuberLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
-{
-	*nextTimeStepCount = currentBlockSize;
+{	
 	if (*nextStartTime == -1)
 		*nextStartTime = 0;
 	else
 		*nextStartTime += currentBlockSize;
-	*nextTimeStepCount = std::min(currentBlockSize, teachingLesson.getMaxTimeStep() + 1 - *nextStartTime);
+
+	currentBlockStart = *nextStartTime;
+
+	*nextTimeStepCount = currentBlockSize;
+	*nextTimeStepCount = std::min(currentBlockSize, teachingLesson.getMaxTimeStep() + 1 - currentBlockStart);
+	currentBlockSize = *nextTimeStepCount;
+
+	oldDynamicSystemValues.reset(new std::map<StandardNeuron*, std::map<Edge*, float>>());
+
+	oldDynamicSystemValues.swap(currentDynamicSystemValues);
+
+	if (*nextStartTime < teachingLesson.getMaxTimeStep() + 1 && *nextStartTime > 0)
+	{	
+		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+		{
+			// Go through all neurons
+			for (std::vector<std::vector<StandardNeuron*>>::iterator neuronGroup = currentNetworkTopology->getNeurons()->begin(); neuronGroup != currentNetworkTopology->getNeurons()->end(); neuronGroup++)
+			{
+				// Go through all neurons
+				for (std::vector<StandardNeuron*>::iterator neuron = neuronGroup->begin(); neuron != neuronGroup->end(); neuron++)
+				{
+					// Go through all affernetEdges of this neuron
+					std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
+					for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+					{
+						(*currentDynamicSystemValues)[*outputNeuron][*edge] = getDynamicSystemValue(*outputNeuron, *edge);
+					}
+				}
+			}
+		}
+	}
+
 	return (*nextStartTime < teachingLesson.getMaxTimeStep() + 1);
 }
 

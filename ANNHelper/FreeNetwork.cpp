@@ -12,6 +12,8 @@ FreeNetworkOptions::FreeNetworkOptions()
 	neuronFactory = NULL;
 	useBiasNeuron = false;
 	neuronCount = 0;
+	realInputNeurons = false;
+	inputNeuronCount = 0;
 }
 
 FreeNetworkOptions::~FreeNetworkOptions()
