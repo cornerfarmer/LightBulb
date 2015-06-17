@@ -46,24 +46,24 @@ void SchmidhuberLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNe
 
 float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
-	if (time != 0)
-	{
-		float gradient = 0;
+	float gradient = lastGradients[edge];
 
+	if (currentBlockStart != 0)
+	{
 		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
-			gradient -= getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart, errormap) * (*currentDynamicSystemValues)[*outputNeuron][edge];
+			gradient -= getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart - 1, errormap) * (*currentDynamicSystemValues)[*outputNeuron][edge];
 		}
-
-		for (int t = currentBlockStart + 1; t <= currentBlockStart + currentBlockSize; t++)
-		{
-			gradient -= getDeltaVectorOfNeuronInTime(edge->getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
-		}	
-
-		return gradient;
 	}
-	else
-		return 0;	
+
+	for (int t = currentBlockStart + (currentBlockStart == 0 ? 1 : 0); t < currentBlockStart + currentBlockSize; t++)
+	{
+		gradient -= getDeltaVectorOfNeuronInTime(edge->getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
+	}	
+
+	lastGradients[edge] = gradient;
+
+	return gradient;
 }
 
 
@@ -84,7 +84,7 @@ float SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neur
 		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
 		{
 			// If this is not the last timestep or the two neurons are in the same timestep
-			if (time < currentBlockStart + currentBlockSize)
+			if (time < currentBlockStart + currentBlockSize - 1)
 			{
 				// Add to the errorfac: deltaValueNextNeuron(sameTimestepEdge ? t : t + 1) * weight
 				errorfac += getDeltaVectorOfNeuronInTime((*efferentEdge)->getNextNeuron(), time + 1, errormap) * (*efferentEdge)->getWeight();
@@ -103,12 +103,16 @@ float SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neur
 float SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Edge* edge)
 {
 	float dynamicSystemValue = 0;
-	for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+
+	if (currentBlockStart != 0)
 	{
-		dynamicSystemValue += getGammaOfNeuronsInTime(*outputNeuron, neuron, currentBlockStart) * (*oldDynamicSystemValues)[*outputNeuron][edge];
+		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+		{
+			dynamicSystemValue += getGammaOfNeuronsInTime(*outputNeuron, neuron, currentBlockStart - 1) * (*oldDynamicSystemValues)[*outputNeuron][edge];
+		}
 	}
 
-	for (int t = currentBlockStart + 1; t <= currentBlockStart + currentBlockSize; t++)
+	for (int t = currentBlockStart + (currentBlockStart == 0 ? 1 : 0); t < currentBlockStart + currentBlockSize; t++)
 	{
 		dynamicSystemValue += getGammaOfNeuronsInTime(edge->getNextNeuron(), neuron, t) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
 	}
@@ -129,7 +133,7 @@ AbstractActivationOrder* SchmidhuberLearningRule::getNewActivationOrder(NeuralNe
 
 void SchmidhuberLearningRule::adjustWeight(Edge* edge, float deltaWeight)
 {
-	edge->setWeight(edge->getWeight() + deltaWeight);
+	edge->setWeight(edge->getWeight() - getOptions()->learningRate * deltaWeight);
 }
 
 void SchmidhuberLearningRule::printDebugOutput()
@@ -175,6 +179,7 @@ void SchmidhuberLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neur
 void SchmidhuberLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {	
 	currentBlockSize = neuralNetwork.getNetworkTopology()->getNeurons()->front().size();
+	lastGradients.clear();
 }
 
 
@@ -182,7 +187,7 @@ float SchmidhuberLearningRule::getGammaOfNeuronsInTime(StandardNeuron* neuronj, 
 {
 	float gamma = 0;
 
-	if (time == currentBlockStart + currentBlockSize)
+	if (time == currentBlockStart + currentBlockSize - 1)
 	{
 		gamma = (neuronj == neuronl);
 	}

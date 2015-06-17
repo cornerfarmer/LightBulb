@@ -49,7 +49,7 @@ private:
 	float getDynamicSystemValue(StandardNeuron* neuron, Edge* edge);
 	AbstractNetworkTopology* currentNetworkTopology;
 	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap);
-	int currentTimeStep;
+	std::map<Edge*, float> lastGradients;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);

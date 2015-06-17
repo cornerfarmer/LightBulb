@@ -421,35 +421,35 @@ void doFreeNetworkTest()
   	options.weightDecayFac = 0;
 	options.momentum = 0;
 	options.resilientLearningRate = false;
-	options.maxTimeSteps = 4;
+	options.maxTimeSteps = 5;
 	TruncatedBackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
 	
-	for (int i=0;i<4;i++)
+	for (int i=0;i<=1;i++)
 	{
-		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
-		NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
-
-		int lastPattern = -1;
-		for (int l = 0; l < 2; l++)
+		for (int j=0;j<=1;j++)
 		{
-			if (l != 0)
-				lastPattern = (*teachingPattern)[l-1][0];
-			(*teachingPattern)[l] = std::vector<float>(1);
-			(*teachingPattern)[l][0] = (l==0 && (i==1 || i==2)) || (l==1 && (i==2 || i==3));		
+			for (int k=0;k<=1;k++)
+			{
+				NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
 
+				for (int l = 0; l < 3; l++)
+				{					
+					(*teachingPattern)[l] = std::vector<float>(1);
+					(*teachingPattern)[l][0] = (l==0 ? i : (l==1 ? j : k));		
+				}
+
+				(*teachingInput)[3] = std::vector<bool>(1);
+				(*teachingInput)[3][0] = (i == j);
+
+				(*teachingInput)[4] = std::vector<bool>(1);
+				(*teachingInput)[4][0] = (j == k);	
+
+				teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
+			}
 		}
-
-		(*teachingInput)[3] = std::vector<bool>(1);
-		(*teachingInput)[3][0] = (lastPattern == (*teachingPattern)[1][0]);	
-
-		//(*teachingInput)[1] = teachingPattern->back()[0];	
-		
-		//(*teachingInput)[0] = (i > l);	
-		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
-
-		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
 	}
 	
 
@@ -579,8 +579,10 @@ void doSchmidhuberTest()
 	FreeNetworkOptions networkOptions;
 	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(0.1), new IdentityFunction());
 	networkOptions.neuronCount = 5;
-	networkOptions.realInputNeurons = true;
-	networkOptions.inputNeuronCount = 1;
+	//networkOptions.realInputNeurons = true;
+	//networkOptions.inputNeuronCount = 1;
+	networkOptions.inputNeuronsIndices.resize(1);
+	networkOptions.inputNeuronsIndices[0] = 0;
 	networkOptions.outputNeuronsIndices.resize(1);
 	networkOptions.outputNeuronsIndices[0] = 1;
 	networkOptions.useBiasNeuron = true;
@@ -612,17 +614,17 @@ void doSchmidhuberTest()
 				NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
 				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
 
-				for (int l = 0; l < 3; l++)
+				for (int l = 0; l < 6; l++)
 				{					
 					(*teachingPattern)[l] = std::vector<float>(1);
-					(*teachingPattern)[l][0] = (l==0 ? i : (l==1 ? j : k));		
+					(*teachingPattern)[l][0] = (l%3==0 ? i : (l%3==1 ? j : k));		
 				}
 
-				(*teachingInput)[3] = std::vector<bool>(1);
-				(*teachingInput)[3][0] = (i == j);
+				(*teachingInput)[6] = std::vector<bool>(1);
+				(*teachingInput)[6][0] = (i == j);
 
-				(*teachingInput)[4] = std::vector<bool>(1);
-				(*teachingInput)[4][0] = (j == k);	
+				(*teachingInput)[7] = std::vector<bool>(1);
+				(*teachingInput)[7][0] = (j == k);	
 
 				teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
 			}
