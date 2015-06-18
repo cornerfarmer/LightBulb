@@ -44,6 +44,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 	int tryCounter = 0;
 	float totalError = 0;
+	int iteration = 0;
 	
 	// Start a new try
 	do
@@ -55,7 +56,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 		if (options->enableDebugOutput)
 			std::cout << "--------------" << std::endl << "Start Try: " << tryCounter << std::endl;
 
-		int iteration = 0;
+		
 		// Do while the totalError is not zero
 		while ((totalError = initializedTeacher.getTotalError(initializedNeuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry )
 		{			
@@ -206,7 +207,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	if (options->enableDebugOutput)
 	{
 		if (totalError <= options->totalErrorGoal)
-			std::cout << "Try (No. " << tryCounter << ") was successful " << "(totalError: " << std::fixed << std::setprecision(8) << totalError << " < " << std::fixed << std::setprecision(8) << options->totalErrorGoal << ")" << std::endl;
+			std::cout << "Try (No. " << tryCounter << ", " << iteration << " iterations needed) was successful " << "(totalError: " << std::fixed << std::setprecision(8) << totalError << " < " << std::fixed << std::setprecision(8) << options->totalErrorGoal << ")" << std::endl;
 		else
 			std::cout << "All tries failed => stop learning" << std::endl;
 	}

@@ -61,7 +61,8 @@ float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int less
 		gradient -= getDeltaVectorOfNeuronInTime(edge->getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
 	}	
 
-	lastGradients[edge] = gradient;
+	// todo: discuss if we should also add/remember the last gradient. The algorithm says to do that, but first experiences and my mind sayed not.
+	//lastGradients[edge] = gradient;
 
 	return gradient;
 }
@@ -124,7 +125,6 @@ void SchmidhuberLearningRule::initializeNeuronWeightCalculation(StandardNeuron* 
 {
 	
 }
-
 
 AbstractActivationOrder* SchmidhuberLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {

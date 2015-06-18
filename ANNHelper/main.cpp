@@ -421,7 +421,7 @@ void doFreeNetworkTest()
   	options.weightDecayFac = 0;
 	options.momentum = 0;
 	options.resilientLearningRate = false;
-	options.maxTimeSteps = 5;
+	options.maxTimeSteps = 8;
 	TruncatedBackpropagationThroughTimeLearningRule learningRule(options);
 
 	Teacher teacher;
@@ -435,10 +435,10 @@ void doFreeNetworkTest()
 				NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
 				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
 
-				for (int l = 0; l < 3; l++)
+				for (int l = 0; l < 6; l++)
 				{					
 					(*teachingPattern)[l] = std::vector<float>(1);
-					(*teachingPattern)[l][0] = (l==0 ? i : (l==1 ? j : k));		
+					(*teachingPattern)[l][0] = (l%3==0 ? i : (l%3==1 ? j : k));		
 				}
 
 				(*teachingInput)[3] = std::vector<bool>(1);
@@ -446,6 +446,15 @@ void doFreeNetworkTest()
 
 				(*teachingInput)[4] = std::vector<bool>(1);
 				(*teachingInput)[4][0] = (j == k);	
+
+				(*teachingInput)[5] = std::vector<bool>(1);
+				(*teachingInput)[5][0] = (k == i);	
+
+				(*teachingInput)[6] = std::vector<bool>(1);
+				(*teachingInput)[6][0] = (i == j);
+
+				(*teachingInput)[7] = std::vector<bool>(1);
+				(*teachingInput)[7][0] = (j == k);	
 
 				teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
 			}
@@ -519,7 +528,7 @@ void doRTRLTest()
 	options.maxTries = 1000;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	options.teacherForcing = true;
+	options.teacherForcing = false;
 	RealTimeRecurrentLearningRule learningRule(options);
 
 	Teacher teacher;
@@ -533,10 +542,10 @@ void doRTRLTest()
 				NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
 				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>();
 
-				for (int l = 0; l < 3; l++)
+				for (int l = 0; l < 6; l++)
 				{					
 					(*teachingPattern)[l] = std::vector<float>(1);
-					(*teachingPattern)[l][0] = (l==0 ? i : (l==1 ? j : k));		
+					(*teachingPattern)[l][0] = (l%3==0 ? i : (l%3==1 ? j : k));		
 				}
 
 				(*teachingInput)[3] = std::vector<bool>(1);
@@ -544,6 +553,15 @@ void doRTRLTest()
 
 				(*teachingInput)[4] = std::vector<bool>(1);
 				(*teachingInput)[4][0] = (j == k);	
+
+				(*teachingInput)[5] = std::vector<bool>(1);
+				(*teachingInput)[5][0] = (k == i);	
+
+				(*teachingInput)[6] = std::vector<bool>(1);
+				(*teachingInput)[6][0] = (i == j);
+
+				(*teachingInput)[7] = std::vector<bool>(1);
+				(*teachingInput)[7][0] = (j == k);	
 
 				teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
 			}
@@ -620,6 +638,15 @@ void doSchmidhuberTest()
 					(*teachingPattern)[l][0] = (l%3==0 ? i : (l%3==1 ? j : k));		
 				}
 
+				(*teachingInput)[3] = std::vector<bool>(1);
+				(*teachingInput)[3][0] = (i == j);
+
+				(*teachingInput)[4] = std::vector<bool>(1);
+				(*teachingInput)[4][0] = (j == k);	
+
+				(*teachingInput)[5] = std::vector<bool>(1);
+				(*teachingInput)[5][0] = (k == i);	
+
 				(*teachingInput)[6] = std::vector<bool>(1);
 				(*teachingInput)[6][0] = (i == j);
 
@@ -640,6 +667,6 @@ void doSchmidhuberTest()
 
 int main()
 {
-	doSchmidhuberTest();
+	doRTRLTest();
     return 0;
 }
