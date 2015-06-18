@@ -80,6 +80,7 @@
     <ClCompile Include="AbstractReliableRBFNeuronPlacer.cpp" />
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="BackpropagationThroughTimeLearningRule.cpp" />
+    <ClCompile Include="CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="CascadeCorrelationNetwork.cpp" />
     <ClCompile Include="Cluster.hpp" />
     <ClCompile Include="ENearestClustering.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="AbstractReliableRBFNeuronPlacer.hpp" />
     <ClInclude Include="Arrow.hpp" />
     <ClInclude Include="BackpropagationThroughTimeLearningRule.hpp" />
+    <ClInclude Include="CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="CascadeCorrelationNetwork.hpp" />
     <ClInclude Include="ENearestClustering.hpp" />
     <ClInclude Include="ENearestRBFNeuronPlacer.hpp" />

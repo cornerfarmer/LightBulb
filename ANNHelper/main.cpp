@@ -43,6 +43,7 @@
 #include "RealTimeRecurrentLearningRule.hpp"
 #include "SchmidhuberLearningRule.hpp"
 #include "CascadeCorrelationNetwork.hpp"
+#include "CascadeCorrelationLearningRule.hpp"
 
 void doPerceptronTest()
 {
@@ -670,31 +671,9 @@ void doSchmidhuberTest()
 void doCascadeCorrelationTest()
 {
 	CascadeCorrelationNetwork* ccn = new CascadeCorrelationNetwork(2, 1);
-	ccn->addNewLayer(1, 1);
+
 	NeuralNetwork neuralNetwork(ccn);
 
-	AbstractNetworkTopologyDrawerOptions neuralNetworkDrawerOptions;
-	neuralNetworkDrawerOptions.networkTopology = ccn;
-	neuralNetworkDrawerOptions.height = 700;
-	neuralNetworkDrawerOptions.width = 500;
-	
-	LayeredNetworkTopologyDrawer layeredNetworkTopologyDrawer(neuralNetworkDrawerOptions);
-	layeredNetworkTopologyDrawer.refresh();
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
-
-	while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        layeredNetworkTopologyDrawer.draw(window);
-        window.display();
-    }
 
 	Teacher teacher;
 	for (int i=0;i<8;i+=1)
@@ -714,6 +693,22 @@ void doCascadeCorrelationTest()
 		}
 	}
 
+	CascadeCorrelationLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 100;
+	options.maxTotalErrorValue = 4;
+	options.minIterationsPerTry = 300000;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.001f;
+	options.maxTries = 1;
+	options.minRandomWeightValue = -0.5;
+	options.maxRandomWeightValue = 0.5;
+	options.backpropagationLearningRuleOptions.resilientLearningRate = false;
+	options.backpropagationLearningRuleOptions.momentum = 0;
+	options.backpropagationLearningRuleOptions.learningRate = 0.01;
+	CascadeCorrelationLearningRule learningRule(options);
+
+	learningRule.doLearning(neuralNetwork, teacher);
 }
 
 int main()

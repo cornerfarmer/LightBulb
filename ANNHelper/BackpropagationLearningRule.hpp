@@ -34,7 +34,7 @@ struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
 	BackpropagationLearningRuleOptions()
 	{
 		flatSpotEliminationFac = 0.1f;
-		weightDecayFac = 0.02f;
+		weightDecayFac = 0;
 		momentum = 0.7f;
 		learningRate = 0.45f;
 		offlineLearning = false;
@@ -45,6 +45,7 @@ struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
 class BackpropagationLearningRule : public AbstractLearningRule
 {
+	friend class CascadeCorrelationLearningRule;
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
