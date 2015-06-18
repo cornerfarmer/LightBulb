@@ -43,7 +43,7 @@ private:
 	// Holds all netInput values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
 	// This vector should hold all delta values
-	std::map<Edge*, std::list<float>> dynamicSystemCache;
+	std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>> dynamicSystemCache;
 	float getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap);
 	AbstractNetworkTopology* currentNetworkTopology;
 	int currentTimeStep;

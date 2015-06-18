@@ -98,7 +98,16 @@ void RealTimeRecurrentLearningRule::initializeTry(NeuralNetwork &neuralNetwork, 
 
 void RealTimeRecurrentLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
-	dynamicSystemCache.clear();
+	for (std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>>::iterator edge = dynamicSystemCache.begin(); edge != dynamicSystemCache.end(); edge++)
+	{
+		for (std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>::iterator neuron = edge->second.begin(); neuron != edge->second.end(); neuron++)
+		{
+			for (std::map<int, std::pair<float, bool>>::iterator time = neuron->second.begin(); time != neuron->second.end(); time++)
+			{
+				time->second.second = false;
+			}
+		}
+	}
 }
 
 void RealTimeRecurrentLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
@@ -109,24 +118,28 @@ void RealTimeRecurrentLearningRule::initializeTeachingLesson(NeuralNetwork &neur
 
 float RealTimeRecurrentLearningRule::getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap)
 {
-	if (time != 0 && (isInFirstCalculationLayer || !getOptions()->teacherForcing || currentTeachingInputMap->count(time) == 0 || (*currentTeachingInputMap)[time].count(neuron) == 0))
+	if (!dynamicSystemCache[edge][neuron][time].second)
 	{
-		float previousValuesSum = 0;
-
-		for (std::list<Edge*>::iterator afferentEdge = neuron->getAfferentEdges()->begin(); afferentEdge != neuron->getAfferentEdges()->end(); afferentEdge++)
+		if (time != 0 && (isInFirstCalculationLayer || !getOptions()->teacherForcing || currentTeachingInputMap->count(time) == 0 || (*currentTeachingInputMap)[time].count(neuron) == 0))
 		{
-			StandardNeuron* prevNeuron = dynamic_cast<StandardNeuron*>((*afferentEdge)->getPrevNeuron());
-			if (prevNeuron)
-				previousValuesSum += (*afferentEdge)->getWeight() * getDynamicSystemValueOfEdgeAtTime(edge, prevNeuron, time - 1, false, errormap);
-		}
+			float previousValuesSum = 0;
 
-		float returnValue = neuron->executeDerivationOnActivationFunction(netInputValuesInTime[time][neuron]) * (previousValuesSum + (edge->getNextNeuron() == neuron ? outputValuesInTime[time - 1][edge->getPrevNeuron()] : 0));
-		return returnValue;
+			for (std::list<Edge*>::iterator afferentEdge = neuron->getAfferentEdges()->begin(); afferentEdge != neuron->getAfferentEdges()->end(); afferentEdge++)
+			{
+				StandardNeuron* prevNeuron = dynamic_cast<StandardNeuron*>((*afferentEdge)->getPrevNeuron());
+				if (prevNeuron)
+					previousValuesSum += (*afferentEdge)->getWeight() * getDynamicSystemValueOfEdgeAtTime(edge, prevNeuron, time - 1, false, errormap);
+			}
+
+			dynamicSystemCache[edge][neuron][time].first = neuron->executeDerivationOnActivationFunction(netInputValuesInTime[time][neuron]) * (previousValuesSum + (edge->getNextNeuron() == neuron ? outputValuesInTime[time - 1][edge->getPrevNeuron()] : 0));
+		}
+		else if (time == 0)
+			dynamicSystemCache[edge][neuron][time].first = 0;
+		else
+			dynamicSystemCache[edge][neuron][time].first = 0;
+		dynamicSystemCache[edge][neuron][time].second = true;
 	}
-	else if (time == 0)
-		return 0;
-	else
-		return 0;
+	return dynamicSystemCache[edge][neuron][time].first;
 }
 
 bool RealTimeRecurrentLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
