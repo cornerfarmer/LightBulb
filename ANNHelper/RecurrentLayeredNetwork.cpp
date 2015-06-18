@@ -146,13 +146,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 		{
 			// Create a new input neuron and add it to the input layer of the unfolded network
 			// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first hidden layer
-			AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
-			// Go through all hidden neurons of the first hidden layer of our unfolded network
-			for (std::vector<StandardNeuron*>::iterator hiddenNeuron = (*unfoldedNetwork->getNeurons()).front().begin(); hiddenNeuron != (*unfoldedNetwork->getNeurons()).front().end(); hiddenNeuron++)
-			{
-				// Add a edge from the new input neuron to the hidden neuron
-				newInputNeuron->addNextNeuron(*hiddenNeuron, 1);
-			}			
+			AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true, true);					
 		}
 	}
 
@@ -167,7 +161,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 			{
 				// Create a new input neuron and add it to the input layer of the unfolded network
 				// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the current hidden layer
-				AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
+				AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true, false);
 				// Go through all hidden neurons of the current hidden layer in our unfolded network
 				for (std::vector<StandardNeuron*>::iterator hiddenNeuron = (*unfoldedNetwork->getNeurons())[l].begin(); hiddenNeuron != (*unfoldedNetwork->getNeurons())[l].end(); hiddenNeuron++)
 				{
@@ -186,7 +180,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 		{
 			// Create a new input neuron and add it to the input layer of the unfolded network
 			// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first output layer
-			AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
+			AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true, false);
 			// Go through all output neurons of the first ouput layer of our unfolded network
 			for (std::vector<StandardNeuron*>::iterator outputNeuron = (*unfoldedNetwork->getNeurons())[options->neuronsPerLayerCount.size() - 2].begin(); outputNeuron != (*unfoldedNetwork->getNeurons())[options->neuronsPerLayerCount.size() - 2].end(); outputNeuron++)
 			{

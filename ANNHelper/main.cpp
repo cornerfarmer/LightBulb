@@ -42,6 +42,7 @@
 #include "StandardNeuron.hpp"
 #include "RealTimeRecurrentLearningRule.hpp"
 #include "SchmidhuberLearningRule.hpp"
+#include "CascadeCorrelationNetwork.hpp"
 
 void doPerceptronTest()
 {
@@ -665,8 +666,58 @@ void doSchmidhuberTest()
 
 }
 
+
+void doCascadeCorrelationTest()
+{
+	CascadeCorrelationNetwork* ccn = new CascadeCorrelationNetwork(2, 1);
+	ccn->addNewLayer(1, 1);
+	NeuralNetwork neuralNetwork(ccn);
+
+	AbstractNetworkTopologyDrawerOptions neuralNetworkDrawerOptions;
+	neuralNetworkDrawerOptions.networkTopology = ccn;
+	neuralNetworkDrawerOptions.height = 700;
+	neuralNetworkDrawerOptions.width = 500;
+	
+	LayeredNetworkTopologyDrawer layeredNetworkTopologyDrawer(neuralNetworkDrawerOptions);
+	layeredNetworkTopologyDrawer.refresh();
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        layeredNetworkTopologyDrawer.draw(window);
+        window.display();
+    }
+
+	Teacher teacher;
+	for (int i=0;i<8;i+=1)
+	{
+		for (int l=0;l<8;l+=1)
+		{			
+			NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
+
+			(*teachingPattern)[0] = std::vector<float>(2);
+			(*teachingPattern)[0][0] = i;
+			(*teachingPattern)[0][1] = l;
+			(*teachingInput)[0] = std::vector<bool>(1);
+			(*teachingInput)[0][0] = (i == l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		}
+	}
+
+}
+
 int main()
 {
-	doRTRLTest();
+	doCascadeCorrelationTest();
     return 0;
 }

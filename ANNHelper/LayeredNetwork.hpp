@@ -56,11 +56,13 @@ public:
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
 
-	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters);
+	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters, bool addEdgesToNextLayer);
 
 	void removeNeuronFromLayer(int layerIndex, int neuronIndex);
 
 	void removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove);
+
+	void addNewLayer(int layerIndex, int initialNeuronCount);
 
 	void addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters);
 	// Calculates the Edge count

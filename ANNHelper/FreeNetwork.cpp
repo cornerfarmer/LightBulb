@@ -327,13 +327,7 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 	{
 		// Create a new input neuron and add it to the input layer of the unfolded network
 		// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the current hidden layer
-		AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true);
-		// Go through all hidden neurons of the first hidden layer in our unfolded network
-		for (std::vector<StandardNeuron*>::iterator hiddenNeuron = (*unfoldedNetwork->getNeurons()).front().begin(); hiddenNeuron != (*unfoldedNetwork->getNeurons()).front().end(); hiddenNeuron++)
-		{
-			// Add a edge from the new input neuron to the hidden neuron
-			newInputNeuron->addNextNeuron(*hiddenNeuron, 1);
-		}			
+		AbstractNeuron* newInputNeuron = unfoldedNetwork->addNeuronIntoLayer(0, true, true);				
 	}
 		
 	return unfoldedNetwork;

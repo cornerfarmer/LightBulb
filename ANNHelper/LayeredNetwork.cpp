@@ -144,7 +144,7 @@ void LayeredNetwork::buildNetwork()
 		// Add the neurons to the current layer
 		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
 		{
-			addNeuronIntoLayer(l, false);
+			addNeuronIntoLayer(l, false, false);
 		}		
 	}
 
@@ -180,22 +180,17 @@ void LayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuro
 	}
 }
 
-AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters)
+AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters, bool addEdgesToNextLayer)
 {
+	AbstractNeuron* newNeuron;
+
 	// If its the first layer, add InputNeurons, else StandardNeurons
 	if (layerIndex == 0)
 	{
-		InputNeuron* newNeuron = options->neuronFactory->createInputNeuron();
-	
-		addNeuronIntoLayer(layerIndex, newNeuron, refreshNeuronCounters);
-
-		return newNeuron;
+		newNeuron = options->neuronFactory->createInputNeuron();
 	}
 	else
 	{
-		int hiddenLayerIndex = layerIndex - 1;
-		StandardNeuron* newNeuron;
-
 		// If its the last layer create a output neuron else an inner neuron
 		if (layerIndex == options->neuronsPerLayerCount.size() - 1)
 			newNeuron = options->neuronFactory->createOutputNeuron();
@@ -203,31 +198,51 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 			newNeuron = options->neuronFactory->createInnerNeuron();	
 
 		// Add an edge to every neuron of the last layer
-		if (hiddenLayerIndex == 0)
+		for (int l = layerIndex - 1; (l == layerIndex - 1 || options->enableShortcuts) && l >= 0; l--)
 		{
-			for (std::vector<AbstractNeuron*>::iterator prevNeuron = inputNeurons.begin(); prevNeuron != inputNeurons.end(); prevNeuron++)
+			if (l == 0)
 			{
-				newNeuron->addPrevNeuron(*prevNeuron, 1);
+				for (std::vector<AbstractNeuron*>::iterator prevNeuron = inputNeurons.begin(); prevNeuron != inputNeurons.end(); prevNeuron++)
+				{
+					static_cast<StandardNeuron*>(newNeuron)->addPrevNeuron(*prevNeuron, 1);
+				}
 			}
-		}
-		else
-		{
-			for (std::vector<StandardNeuron*>::iterator prevNeuron = neurons[hiddenLayerIndex - 1].begin(); prevNeuron != neurons[hiddenLayerIndex - 1].end(); prevNeuron++)
+			else
 			{
-				newNeuron->addPrevNeuron(*prevNeuron, 1);
+				for (std::vector<StandardNeuron*>::iterator prevNeuron = neurons[l - 1].begin(); prevNeuron != neurons[l - 1].end(); prevNeuron++)
+				{
+					static_cast<StandardNeuron*>(newNeuron)->addPrevNeuron(*prevNeuron, 1);
+				}
 			}
 		}
 
 		// If bias neuron is used add a edge to it
 		if (options->useBiasNeuron)
-			newNeuron->addPrevNeuron(&biasNeuron, 1);
-
-		addNeuronIntoLayer(layerIndex, newNeuron, refreshNeuronCounters);
-
-		return newNeuron;
+			static_cast<StandardNeuron*>(newNeuron)->addPrevNeuron(&biasNeuron, 1);
 	}
+
+	if (addEdgesToNextLayer)
+	{
+		for (int l = layerIndex + 1; (l == layerIndex + 1 || options->enableShortcuts) && l - 1 < neurons.size(); l++)
+		{			
+			for (std::vector<StandardNeuron*>::iterator nextNeuron = neurons[l - 1].begin(); nextNeuron != neurons[l - 1].end(); nextNeuron++)
+			{
+				newNeuron->addNextNeuron(*nextNeuron, 1);
+			}			
+		}
+	}
+	
+	addNeuronIntoLayer(layerIndex, newNeuron, refreshNeuronCounters);
+
+	return newNeuron;
 }
 
+void LayeredNetwork::addNewLayer(int layerIndex, int initialNeuronCount)
+{
+	neurons.insert(neurons.begin() + layerIndex - 1, std::vector<StandardNeuron*>());
+	for (int i = 0; i < initialNeuronCount; i++)
+		addNeuronIntoLayer(layerIndex, true, true);
+}
 
 std::vector<AbstractNeuron*>* LayeredNetwork::getInputNeurons()
 {
