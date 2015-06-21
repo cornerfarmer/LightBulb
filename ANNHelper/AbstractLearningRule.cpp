@@ -93,6 +93,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					*offlineLearningWeight = 0;
 			}
 
+			initializeIteration(initializedNeuralNetwork, initializedTeacher);
+
 			// Go through every TeachingLesson
 			int lessonIndex = 0;
 			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)

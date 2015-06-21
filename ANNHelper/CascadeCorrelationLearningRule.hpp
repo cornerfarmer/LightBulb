@@ -16,6 +16,7 @@ class NeuralNetwork;
 class Teacher;
 class Edge;
 class AbstractNeuron;
+class AbstractNetworkTopology;
 
 struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOptions
 {	
@@ -27,14 +28,24 @@ struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOption
 	}
 };
 
+enum Mode
+{
+	OUTPUTNEURONSLEARNINGMODE,
+	MEANCALCULATIONMODE,
+	CANDIDATEUNITLEARNINGMODE,
+};
+
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
 class CascadeCorrelationLearningRule : public AbstractLearningRule
 {
-private:	
-
-	bool outputNeuronsLearningMode;
-
+private:
+	Mode currentMode;
+	StandardNeuron* currentCandidateUnit;	
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
+	AbstractNetworkTopology* currentNetworkTopology;
+	std::map<StandardNeuron*, float> correlationSigns;
+	std::map<StandardNeuron*, float> meanOutputs;
+	std::map<StandardNeuron*, float> meanErrorValues;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
@@ -48,6 +59,8 @@ protected:
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
+	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	CascadeCorrelationLearningRule(CascadeCorrelationLearningRuleOptions& options_);
 };
