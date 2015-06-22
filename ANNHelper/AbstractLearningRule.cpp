@@ -40,11 +40,11 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	// Get all output neurons
 	std::vector<StandardNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
 	// Create a vector which will contain all weights for offline learning
-	std::vector<float> offlineLearningWeights(initializedNeuralNetwork.getNetworkTopology()->getEdgeCount());
+	std::map<Edge*, float> offlineLearningWeights;
 
-	int tryCounter = 0;
-	float totalError = 0;
-	int iteration = 0;
+	tryCounter = 0;
+	totalError = 0;
+	iteration = 0;
 	
 	// Start a new try
 	do
@@ -89,11 +89,11 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (options->offlineLearning)
 			{
-				for (std::vector<float>::iterator offlineLearningWeight = offlineLearningWeights.begin(); offlineLearningWeight != offlineLearningWeights.end(); offlineLearningWeight++)
-					*offlineLearningWeight = 0;
+				for (std::map<Edge*, float>::iterator offlineLearningWeight = offlineLearningWeights.begin(); offlineLearningWeight != offlineLearningWeights.end(); offlineLearningWeight++)
+					offlineLearningWeight->second = 0;
 			}
 
-			initializeIteration(initializedNeuralNetwork, initializedTeacher);
+			initializeIteration(initializedNeuralNetwork, initializedTeacher, *activationOrder);
 
 			// Go through every TeachingLesson
 			int lessonIndex = 0;
@@ -112,9 +112,6 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					// Calculate the errormap and also fill - if needed - the output and netInput values map
 					std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(initializedNeuralNetwork, *activationOrder, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime());
 				
-					// Create a edgeCounter, which will be used in offline learning
-					int edgeCounter = 0;
-
 					// Adjust all hidden/output layers except 
 					for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 					{			
@@ -136,9 +133,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
  								if (options->offlineLearning)
-									offlineLearningWeights[edgeCounter++] += deltaWeight;
+									offlineLearningWeights[*edge] += deltaWeight;
 								else
-									offlineLearningWeights[edgeCounter++] = deltaWeight;
+									offlineLearningWeights[*edge] = deltaWeight;
 							}							
 						}
 					}
@@ -146,9 +143,6 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					// If offline learning is activated, adjust all weights
 					if (!options->offlineLearning)
 					{
-						// Create a edgeCounter
-						int edgeCounter = 0;
-
 						// Adjust the every hidden/output layer
 						for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 						{
@@ -162,7 +156,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 								for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 								{	
 									// Adjust the weight depending on the sum of all calculated gradients
-									adjustWeight(*edge, offlineLearningWeights[edgeCounter++]);							
+									adjustWeight(*edge, offlineLearningWeights[*edge]);							
 								}					
 							}
 						}
@@ -179,9 +173,6 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			{
 				initializeAllWeightAdjustments(initializedNeuralNetwork);
 
-				// Create a edgeCounter
-				int edgeCounter = 0;
-
 				// Adjust the every hidden/output layer
 				for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 				{
@@ -195,7 +186,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 						{	
 							// Adjust the weight depending on the sum of all calculated gradients
-							adjustWeight(*edge, offlineLearningWeights[edgeCounter++] / offlineLearningWeights.size());							
+							adjustWeight(*edge, offlineLearningWeights[*edge] / offlineLearningWeights.size());							
 						}					
 					}
 				}

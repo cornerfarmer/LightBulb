@@ -705,7 +705,7 @@ void doCascadeCorrelationTest()
 	options.maxRandomWeightValue = 0.5;
 	options.backpropagationLearningRuleOptions.resilientLearningRate = false;
 	options.backpropagationLearningRuleOptions.momentum = 0;
-	options.backpropagationLearningRuleOptions.learningRate = 0.01;
+	options.backpropagationLearningRuleOptions.learningRate = 0.45;
 	CascadeCorrelationLearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);

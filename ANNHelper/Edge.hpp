@@ -22,6 +22,7 @@ public:
 	StandardNeuron* getNextNeuron();	
 	void setPrevNeuron(AbstractNeuron* newPrevNeuron);
 	void setNextNeuron(StandardNeuron* newNextNeuron);	
+	void randomizeWeight(float randStart, float randEnd);
 };
 
 #endif

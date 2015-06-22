@@ -231,7 +231,7 @@ void FreeNetwork::randomizeWeights(float randStart, float randEnd)
 		{
 			do{
 				// Set the weight to a new random value
-				(*edge)->setWeight((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+				(*edge)->randomizeWeight(randStart, randEnd);
 			} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
 		}
 	}	

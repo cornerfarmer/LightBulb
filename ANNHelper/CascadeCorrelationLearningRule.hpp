@@ -16,7 +16,7 @@ class NeuralNetwork;
 class Teacher;
 class Edge;
 class AbstractNeuron;
-class AbstractNetworkTopology;
+class CascadeCorrelationNetwork;
 
 struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOptions
 {	
@@ -30,8 +30,7 @@ struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOption
 
 enum Mode
 {
-	OUTPUTNEURONSLEARNINGMODE,
-	MEANCALCULATIONMODE,
+	OUTPUTNEURONSLEARNINGMODE,	
 	CANDIDATEUNITLEARNINGMODE,
 };
 
@@ -42,9 +41,8 @@ private:
 	Mode currentMode;
 	StandardNeuron* currentCandidateUnit;	
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
-	AbstractNetworkTopology* currentNetworkTopology;
-	std::map<StandardNeuron*, float> correlationSigns;
-	std::map<StandardNeuron*, float> meanOutputs;
+	CascadeCorrelationNetwork* currentNetworkTopology;
+	std::map<StandardNeuron*, int> correlationSigns;
 	std::map<StandardNeuron*, float> meanErrorValues;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
@@ -60,7 +58,7 @@ protected:
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
-	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 public:
 	CascadeCorrelationLearningRule(CascadeCorrelationLearningRuleOptions& options_);
 };

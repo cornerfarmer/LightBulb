@@ -66,6 +66,9 @@ class AbstractLearningRule
 {
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
+	float totalError;
+	int iteration;
+	int tryCounter;
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
@@ -83,7 +86,7 @@ protected:
 	// This method should do something like randomizing all weight
 	virtual void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
 
-	virtual void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher) { };
+	virtual void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) { };
 
 	virtual void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson) { };
 	// This method could be used to do some work after all weights has been adjusted

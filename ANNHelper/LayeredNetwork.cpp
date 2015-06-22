@@ -240,6 +240,9 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 void LayeredNetwork::addNewLayer(int layerIndex, int initialNeuronCount)
 {
 	neurons.insert(neurons.begin() + layerIndex - 1, std::vector<StandardNeuron*>());
+	
+	options->neuronsPerLayerCount.insert(options->neuronsPerLayerCount.begin() + layerIndex, 0);
+
 	for (int i = 0; i < initialNeuronCount; i++)
 		addNeuronIntoLayer(layerIndex, true, true);
 }
@@ -280,7 +283,7 @@ void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
 			{
 				do{
 					// Set the weight to a new random value
-					(*edge)->setWeight((float)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+					(*edge)->randomizeWeight(randStart, randEnd);
 				} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
 			}
 		}
@@ -429,3 +432,4 @@ std::unique_ptr<std::map<Edge*, bool>> LayeredNetwork::getNonRecurrentEdges()
 	
 	return nonRecurrentEdges;
 }
+
