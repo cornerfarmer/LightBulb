@@ -14,9 +14,10 @@ CascadeCorrelationLearningRule::CascadeCorrelationLearningRule(CascadeCorrelatio
 	: AbstractLearningRule(new CascadeCorrelationLearningRuleOptions(options_))
 {
 	options->offlineLearning = true;
+	options->maxTries = 1;
 	getOptions()->backpropagationLearningRuleOptions.offlineLearning = true;
 	// Create a new ResilientLearningRateHelper
-	backpropagationLearningRule.reset(new BackpropagationLearningRule(&getOptions()->backpropagationLearningRuleOptions));
+	backpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->backpropagationLearningRuleOptions));
 }
 
 
@@ -60,8 +61,6 @@ AbstractActivationOrder* CascadeCorrelationLearningRule::getNewActivationOrder(N
 
 void CascadeCorrelationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
-	if (gradient != 0)
-		gradient = gradient;
 	backpropagationLearningRule->adjustWeight(edge, gradient);
 }
 
@@ -93,7 +92,7 @@ void CascadeCorrelationLearningRule::initializeTeachingLesson(NeuralNetwork &neu
 
 void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) 
 {
-	if (iteration % 10000 == 0 && iteration != 0)
+	if (iteration % getOptions()->addNeuronAfterIterationInterval == 0 || (getOptions()->addNeuronAfterLearningHasStopped && backpropagationLearningRule->learningHasStopped()))
 	{
 		if (currentMode == OUTPUTNEURONSLEARNINGMODE)
 		{
@@ -141,10 +140,15 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 				}
 				correlationSigns[*outputNeuron] = (correlationSum > 0 ? 1 : (correlationSum < 0 ? -1 : 0));
 			}
+			std::cout << "Adds a new neuron and starts to train it:" << std::endl;
 		}
 		else if (currentMode == CANDIDATEUNITLEARNINGMODE)
 		{
 			currentMode = OUTPUTNEURONSLEARNINGMODE;
+			std::cout << "Stops neuron training and starts the training of the output layer:" << std::endl;
 		}
+		// If used, initialize the learning rate helper
+		if (backpropagationLearningRule->getOptions()->resilientLearningRate)
+			backpropagationLearningRule->resilientLearningRateHelper->initialize(neuralNetwork);
 	}
 }

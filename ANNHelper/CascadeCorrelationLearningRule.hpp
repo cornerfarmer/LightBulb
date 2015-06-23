@@ -22,9 +22,14 @@ struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOption
 {	
 
 	BackpropagationLearningRuleOptions backpropagationLearningRuleOptions;
+	
+	unsigned int addNeuronAfterIterationInterval;
+
+	bool addNeuronAfterLearningHasStopped;
 	CascadeCorrelationLearningRuleOptions()
 	{
-
+		addNeuronAfterIterationInterval = 100000;
+		addNeuronAfterLearningHasStopped = true;
 	}
 };
 

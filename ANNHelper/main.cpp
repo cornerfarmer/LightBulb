@@ -700,10 +700,9 @@ void doCascadeCorrelationTest()
 	options.minIterationsPerTry = 300000;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
-	options.maxTries = 1;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	options.backpropagationLearningRuleOptions.resilientLearningRate = false;
+	options.backpropagationLearningRuleOptions.resilientLearningRate = true;
 	options.backpropagationLearningRuleOptions.momentum = 0;
 	options.backpropagationLearningRuleOptions.learningRate = 0.45;
 	CascadeCorrelationLearningRule learningRule(options);
