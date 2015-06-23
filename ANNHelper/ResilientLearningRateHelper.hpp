@@ -44,10 +44,10 @@ struct ResilientLearningRateHelperOptions
 class ResilientLearningRateHelper
 {
 private:
-	std::unique_ptr<std::vector<float>> previousLearningRates;		
+	std::map<Edge*, float> previousLearningRates;		
 	ResilientLearningRateHelperOptions* options;
 public:
-	float getNextLearningRate(float deltaWeight);	
+	float getLearningRate(Edge* edge, float gradient);
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initialize(NeuralNetwork &neuralNetwork);	

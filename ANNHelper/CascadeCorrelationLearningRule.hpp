@@ -28,7 +28,7 @@ struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOption
 	bool addNeuronAfterLearningHasStopped;
 	CascadeCorrelationLearningRuleOptions()
 	{
-		addNeuronAfterIterationInterval = 100000;
+		addNeuronAfterIterationInterval = 20000;
 		addNeuronAfterLearningHasStopped = true;
 	}
 };

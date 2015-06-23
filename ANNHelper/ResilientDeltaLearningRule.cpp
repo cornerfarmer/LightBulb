@@ -24,7 +24,7 @@ void ResilientDeltaLearningRule::initializeDeltaLearningAlgoritm(NeuralNetwork &
 void ResilientDeltaLearningRule::adjustWeight(Edge* edge, float gradient)
 {
 	// Add the learningRate and the weight decay term to the weight
-	edge->setWeight(edge->getWeight() + resilientLearningRateHelper->getNextLearningRate(gradient));		
+	edge->setWeight(edge->getWeight() + resilientLearningRateHelper->getLearningRate(edge, gradient));		
 }
 
 void ResilientDeltaLearningRule::printDebugOutput()

@@ -50,8 +50,8 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 	// If momentum is used
 	if (getOptions()->momentum > 0)
 	{
-		// Initialize the learningRates vector with the size of the total edge count
-		previousDeltaWeights = std::unique_ptr<std::vector<float>>(new std::vector<float>((dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))->getEdgeCount()));
+		// Initialize the learningRates map
+		previousDeltaWeights.clear();
 	}
 }
 
@@ -113,23 +113,16 @@ float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradie
 	// If momentum and not a resilientLearningRate is used
 	if (getOptions()->momentum > 0)
 	{
-		static int edgeIndex = 0;
-
 		// Calc the delta weight, add the momentum term and the weight decay term
-		(*previousDeltaWeights)[edgeIndex] = - getOptions()->learningRate * gradient + getOptions()->momentum * (*previousDeltaWeights)[edgeIndex] - getOptions()->weightDecayFac * edge->getWeight();
+		previousDeltaWeights[edge] = - getOptions()->learningRate * gradient + getOptions()->momentum * previousDeltaWeights[edge] - getOptions()->weightDecayFac * edge->getWeight();
 		// Set this to the delta weight
-		deltaWeight = (*previousDeltaWeights)[edgeIndex];
-
-		// Increase the edge counter
-		edgeIndex++;
-		edgeIndex %= previousDeltaWeights->size();
-		
+		deltaWeight = previousDeltaWeights[edge];		
 	}
 	else 
 	{
 		// If a resilientLearningRate is used, get the deltaWeight from the helper object, else calculate it the classical way: - learningRate * gradient
 		if (getOptions()->resilientLearningRate)
-			deltaWeight = resilientLearningRateHelper->getNextLearningRate(gradient);
+			deltaWeight = resilientLearningRateHelper->getLearningRate(edge, gradient);
 		else
 			deltaWeight = - getOptions()->learningRate * gradient;
 		

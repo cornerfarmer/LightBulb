@@ -48,7 +48,7 @@ class BackpropagationLearningRule : public AbstractLearningRule
 	friend class CascadeCorrelationLearningRule;
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
-	std::unique_ptr<std::vector<float>> previousDeltaWeights;	
+	std::map<Edge*, float> previousDeltaWeights;	
 	// This vector should hold all delta values
 	std::map<AbstractNeuron*, float> deltaVectorOutputLayer;
 	// Check and adjust all given options
