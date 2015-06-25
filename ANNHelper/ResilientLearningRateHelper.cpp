@@ -68,7 +68,7 @@ void ResilientLearningRateHelper::printDebugOutput()
 	for (std::map<Edge*, float>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		totalLearningRate += abs(previousLearningRate->second); 
 	// Print the totalLearningRate
-	std::cout << std::fixed << std::setprecision(10) << totalLearningRate << " ";
+	std::cout << "totalLR :" << std::fixed << std::setprecision(10) << totalLearningRate << " ";
 }
 
 bool ResilientLearningRateHelper::learningHasStopped()

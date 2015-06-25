@@ -25,6 +25,7 @@ void CascadeCorrelationLearningRule::initializeLearningAlgoritm(NeuralNetwork &n
 {
 	backpropagationLearningRule->initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
 	currentNetworkTopology = dynamic_cast<CascadeCorrelationNetwork*>(neuralNetwork.getNetworkTopology());
+	currentTeacher = &teacher;
 }
 
 
@@ -38,10 +39,10 @@ float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, i
 
 		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
-			gradient = correlationSigns[*outputNeuron] * currentCandidateUnit->executeDerivationOnActivationFunction(currentCandidateUnit->getNetInput()) * edge->getPrevNeuron()->getActivation() * ((*errormap)[0][*outputNeuron] - meanErrorValues[*outputNeuron]);
+			gradient = (correlations[*outputNeuron] > 0 ? 1 : (correlations[*outputNeuron] < 0 ? -1 : 0)) * currentCandidateUnit->executeDerivationOnActivationFunction(candidateNetInputCache[(*currentTeacher->getTeachingLessons())[lessonIndex].get()]) * neuronOutputCache[(*currentTeacher->getTeachingLessons())[lessonIndex].get()][edge->getPrevNeuron()] * errorFactors[(*currentTeacher->getTeachingLessons())[lessonIndex].get()][*outputNeuron];
 		}
 
-		return gradient;
+		return -gradient;
 	}
 	else 
 		return 0;
@@ -67,6 +68,18 @@ void CascadeCorrelationLearningRule::adjustWeight(Edge* edge, float gradient)
 void CascadeCorrelationLearningRule::printDebugOutput()
 {
 	backpropagationLearningRule->printDebugOutput();
+	if (currentMode == CANDIDATEUNITLEARNINGMODE)
+		std::cout << "cor :" << std::fixed << std::setprecision(10) << getTotalCorrelation() << " ";
+}
+
+float CascadeCorrelationLearningRule::getTotalCorrelation()
+{
+	float totalCorrelation = 0;
+	for (std::map<StandardNeuron*, float>::iterator correlation = correlations.begin(); correlation != correlations.end(); correlation++)
+	{
+		totalCorrelation += std::abs(correlation->second);
+	}
+	return totalCorrelation;
 }
 
 bool CascadeCorrelationLearningRule::learningHasStopped()
@@ -90,6 +103,51 @@ void CascadeCorrelationLearningRule::initializeTeachingLesson(NeuralNetwork &neu
 	
 }
 
+void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool calcErrorFactor)
+{	
+	std::map<AbstractTeachingLesson*, std::unique_ptr<ErrorMap_t>> errorMaps;
+	std::map<AbstractTeachingLesson*, float> candidateOutputs;
+	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+	{
+		errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder);
+		candidateOutputs[teachingLesson->get()] = currentCandidateUnit->getActivation();
+		
+		neuralNetwork.getNetworkTopology()->getAllNeuronOutputs(neuronOutputCache[teachingLesson->get()]);
+		candidateNetInputCache[teachingLesson->get()] = currentCandidateUnit->getNetInput();
+	}
+
+	float meanCandidateOutput = 0;
+	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+	{
+		meanCandidateOutput += candidateOutputs[teachingLesson->get()];
+	}
+	meanCandidateOutput /= teacher.getTeachingLessons()->size();	
+
+	for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+	{
+		float meanErrorValue = 0;
+		if (calcErrorFactor)
+		{
+			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+			{
+				meanErrorValue += (*errorMaps[teachingLesson->get()])[0][*outputNeuron];
+			}
+			meanErrorValue /= teacher.getTeachingLessons()->size();	
+		}
+
+		correlations[*outputNeuron] = 0;
+		for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+		{
+			if (calcErrorFactor)
+			{
+				errorFactors[teachingLesson->get()][*outputNeuron] = ((*errorMaps[teachingLesson->get()])[0][*outputNeuron] - meanErrorValue);
+			}
+
+			correlations[*outputNeuron] += (candidateOutputs[teachingLesson->get()] - meanCandidateOutput) * errorFactors[teachingLesson->get()][*outputNeuron];
+		}
+	}
+}
+
 void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) 
 {
 	if (iteration % getOptions()->addNeuronAfterIterationInterval == 0 || (getOptions()->addNeuronAfterLearningHasStopped && backpropagationLearningRule->learningHasStopped()))
@@ -109,37 +167,8 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 				(*edge)->randomizeWeight(options->minRandomWeightValue, options->maxRandomWeightValue);
 			}
 
-			std::map<AbstractTeachingLesson*, std::unique_ptr<ErrorMap_t>> errorMaps;
-			std::map<AbstractTeachingLesson*, float> candidateOutputs;
-			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
-			{
-				errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder);
-				candidateOutputs[teachingLesson->get()] = currentCandidateUnit->getActivation();
-			}
+			calcAllCorrelations(neuralNetwork, teacher, activationOrder, true);
 
-			float meanCandidateOutput = 0;
-			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
-			{
-				meanCandidateOutput += candidateOutputs[teachingLesson->get()];
-			}
-			meanCandidateOutput /= teacher.getTeachingLessons()->size();	
-
-			for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
-			{
-				meanErrorValues[*outputNeuron] = 0;
-				for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
-				{
-					meanErrorValues[*outputNeuron] += (*errorMaps[teachingLesson->get()])[0][*outputNeuron];
-				}
-				meanErrorValues[*outputNeuron] /= teacher.getTeachingLessons()->size();	
-
-				float correlationSum = 0;
-				for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
-				{
-					correlationSum += (candidateOutputs[teachingLesson->get()] - meanCandidateOutput) *  ((*errorMaps[teachingLesson->get()])[0][*outputNeuron] - meanErrorValues[*outputNeuron]);
-				}
-				correlationSigns[*outputNeuron] = (correlationSum > 0 ? 1 : (correlationSum < 0 ? -1 : 0));
-			}
 			std::cout << "Adds a new neuron and starts to train it:" << std::endl;
 		}
 		else if (currentMode == CANDIDATEUNITLEARNINGMODE)
@@ -150,5 +179,24 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 		// If used, initialize the learning rate helper
 		if (backpropagationLearningRule->getOptions()->resilientLearningRate)
 			backpropagationLearningRule->resilientLearningRateHelper->initialize(neuralNetwork);
+	}
+	else if (currentMode == CANDIDATEUNITLEARNINGMODE)
+	{
+		calcAllCorrelations(neuralNetwork, teacher, activationOrder, false);
+	}
+}
+
+bool CascadeCorrelationLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+{
+	if (*nextStartTime != -1)
+		return false;
+	else
+	{
+		if (currentMode == CANDIDATEUNITLEARNINGMODE) 
+			*nextTimeStepCount = -1;
+		else
+			*nextTimeStepCount = 0;
+		*nextStartTime = 0;		
+		return true;
 	}
 }

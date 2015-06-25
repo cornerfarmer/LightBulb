@@ -15,20 +15,23 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork &n
 	// Get the teachingInput
 	NeuralNetworkIO<float>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
 
-	// Create the errorVector with the right size
+	// Create the errorMap
 	std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t());
 
-	// Try the lesson and extract the output
-	std::unique_ptr<NeuralNetworkIO<float>> outputVector = tryLesson(neuralNetwork, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
-
-	// Calculate the error values (expected value - real value)
-	for (NeuralNetworkIO<float>::iterator teachingInputValue = teachingInput->begin(); teachingInputValue != teachingInput->end(); teachingInputValue++)
+	if (timeStepCount != -1)
 	{
-		if ((*outputVector).count(teachingInputValue->first) != 0)
+		// Try the lesson and extract the output
+		std::unique_ptr<NeuralNetworkIO<float>> outputVector = tryLesson(neuralNetwork, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
+
+		// Calculate the error values (expected value - real value)
+		for (NeuralNetworkIO<float>::iterator teachingInputValue = teachingInput->begin(); teachingInputValue != teachingInput->end(); teachingInputValue++)
 		{
-			for (int i = 0; i < teachingInputValue->second.size(); i++)
+			if ((*outputVector).count(teachingInputValue->first) != 0)
 			{
-				(*errorMap)[teachingInputValue->first][static_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[i])] = teachingInputValue->second[i] - outputVector->at(teachingInputValue->first)[i];
+				for (int i = 0; i < teachingInputValue->second.size(); i++)
+				{
+					(*errorMap)[teachingInputValue->first][static_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[i])] = teachingInputValue->second[i] - outputVector->at(teachingInputValue->first)[i];
+				}
 			}
 		}
 	}
