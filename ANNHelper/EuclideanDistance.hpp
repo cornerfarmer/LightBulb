@@ -15,7 +15,7 @@ class EuclideanDistance : public AbstractInputFunction
 private:
 public:
 	// Calculates sqrt( Σ (output - center)^2 )
-	float execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput);
+	float execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput, std::map<AbstractNeuron*, float>* neuronOutputCache = NULL);
 	AbstractInputFunction* getInputFunctionCopy();
 };
 

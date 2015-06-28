@@ -5,10 +5,12 @@
 
 // Includes
 #include <list>
+#include <map>
 
 // Forward declarations
 class Edge;
 class StandardNeuron;
+class AbstractNeuron;
 
 // Every neuron always has a activation and can have multiple efferent edges
 class AbstractNeuron
@@ -27,7 +29,7 @@ public:
 	// Recalculate the activation of the neuron
 	virtual void refreshActivation() = 0;
 	// Recalculate the netInput of the neuron
-	virtual void refreshNetInput() = 0;
+	virtual void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL) = 0;
 	std::list<Edge*>* getEfferentEdges();
 	virtual void resetActivation();
 };

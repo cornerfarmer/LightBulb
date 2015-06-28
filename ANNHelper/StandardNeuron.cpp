@@ -61,10 +61,10 @@ void StandardNeuron::refreshActivation()
 	activation = outputFunction->execute(activation);
 }
 
-void StandardNeuron::refreshNetInput()
+void StandardNeuron::refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache)
 {
 	// Calc the input from all afferentEdges
-	netInput = inputFunction->execute(afferentEdges, threshold, additionalInput);
+	netInput = inputFunction->execute(afferentEdges, threshold, additionalInput, neuronOutputCache);
 }
 
 std::list<Edge*>* StandardNeuron::getAfferentEdges()

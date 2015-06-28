@@ -4,7 +4,7 @@
 #include "RBFThreshold.hpp"
 #include <stdexcept>
 
-float EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput)
+float EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput, std::map<AbstractNeuron*, float>* neuronOutputCache)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
 
@@ -18,7 +18,7 @@ float EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* thr
 	std::vector<float>::iterator centerCoordinate = (*rbfThreshold->getCenterVector()).begin();
 	for (std::list<Edge*>::iterator edge = input.begin(); edge != input.end(); edge++, centerCoordinate++)
 	{
-		euclideanDistance += pow((*edge)->getPrevNeuron()->getActivation() - (*centerCoordinate), 2);
+		euclideanDistance += pow((neuronOutputCache == NULL ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]) - (*centerCoordinate), 2);
 	}
 
 	// Sqrt

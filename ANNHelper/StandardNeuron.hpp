@@ -36,7 +36,7 @@ public:
 	// Calculates a new activation with the help of its activation- and outputFunction
 	void refreshActivation();
 	// Calculates a new netInput with the help of its inputFunction
-	void refreshNetInput();
+	void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL);
 	// Calculates the value of the activation function derivation 
 	float executeDerivationOnActivationFunction(float input);
 	std::list<Edge*>* getAfferentEdges();

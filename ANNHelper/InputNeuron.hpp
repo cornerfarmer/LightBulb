@@ -18,7 +18,7 @@ public:
 	// Sets the activation of the neuron to its input value
 	void refreshActivation() {};
 	// Do nothing, a inputNeuron does not have a netInput
-	void refreshNetInput() {};
+	void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL) {};
 	void resetActivation() {};
 };
 

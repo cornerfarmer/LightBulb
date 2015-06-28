@@ -106,20 +106,34 @@ void CascadeCorrelationLearningRule::initializeTeachingLesson(NeuralNetwork &neu
 void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool calcErrorFactor)
 {	
 	std::map<AbstractTeachingLesson*, std::unique_ptr<ErrorMap_t>> errorMaps;
-	std::map<AbstractTeachingLesson*, float> candidateOutputs;
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 	{
-		errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder);
-		candidateOutputs[teachingLesson->get()] = currentCandidateUnit->getActivation();
-		
-		neuralNetwork.getNetworkTopology()->getAllNeuronOutputs(neuronOutputCache[teachingLesson->get()]);
+		if (correlations.empty())
+		{
+			errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder);
+			neuralNetwork.getNetworkTopology()->getAllNeuronOutputs(neuronOutputCache[teachingLesson->get()]);
+		}
+		else
+		{
+			currentCandidateUnit->refreshNetInput(&neuronOutputCache[teachingLesson->get()]);
+			currentCandidateUnit->refreshActivation();
+			neuronOutputCache[teachingLesson->get()][currentCandidateUnit] = currentCandidateUnit->getActivation();	
+			NeuralNetworkIO<float> outputVector;
+			for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+			{
+				(*outputNeuron)->refreshNetInput(&neuronOutputCache[teachingLesson->get()]);
+				(*outputNeuron)->refreshActivation();
+				outputVector[0].push_back((*outputNeuron)->getActivation());
+			}
+			errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormapFromOutputVector(outputVector, neuralNetwork);
+		}
 		candidateNetInputCache[teachingLesson->get()] = currentCandidateUnit->getNetInput();
 	}
 
 	float meanCandidateOutput = 0;
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 	{
-		meanCandidateOutput += candidateOutputs[teachingLesson->get()];
+		meanCandidateOutput += neuronOutputCache[teachingLesson->get()][currentCandidateUnit];
 	}
 	meanCandidateOutput /= teacher.getTeachingLessons()->size();	
 
@@ -143,7 +157,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 				errorFactors[teachingLesson->get()][*outputNeuron] = ((*errorMaps[teachingLesson->get()])[0][*outputNeuron] - meanErrorValue);
 			}
 
-			correlations[*outputNeuron] += (candidateOutputs[teachingLesson->get()] - meanCandidateOutput) * errorFactors[teachingLesson->get()][*outputNeuron];
+			correlations[*outputNeuron] += (neuronOutputCache[teachingLesson->get()][currentCandidateUnit] - meanCandidateOutput) * errorFactors[teachingLesson->get()][*outputNeuron];
 		}
 	}
 }

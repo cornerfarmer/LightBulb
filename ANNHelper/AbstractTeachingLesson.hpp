@@ -33,6 +33,8 @@ public:
 	virtual ~AbstractTeachingLesson() {}
 	// Calculate the Errormap and fills (optional) the given output and netput values map
 	std::unique_ptr<ErrorMap_t> getErrormap(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = 0, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime = NULL);
+
+	std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(NeuralNetworkIO<float>& outputVector, NeuralNetwork &neuralNetwork);
 	// Calculate the euclidient distance
 	float getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Calculate the RootMeanSquare
