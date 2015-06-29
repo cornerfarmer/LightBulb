@@ -433,3 +433,22 @@ std::unique_ptr<std::map<Edge*, bool>> LayeredNetwork::getNonRecurrentEdges()
 	return nonRecurrentEdges;
 }
 
+void LayeredNetwork::removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove)
+{
+	for (int neuronIndex = 0; neuronIndex < neurons[layerIndex].size(); neuronIndex++)
+	{
+		if (neurons[layerIndex][neuronIndex] == neuronToRemove)
+		{
+			for (std::list<Edge*>::iterator edge = neurons[layerIndex][neuronIndex]->getAfferentEdges()->begin(); edge != neurons[layerIndex][neuronIndex]->getAfferentEdges()->end(); edge++)
+			{
+				(*edge)->getPrevNeuron()->removeEfferentEdge(*edge);
+			}
+			for (std::list<Edge*>::iterator edge = neurons[layerIndex][neuronIndex]->getEfferentEdges()->begin(); edge != neurons[layerIndex][neuronIndex]->getEfferentEdges()->end(); edge++)
+			{
+				(*edge)->getNextNeuron()->removeAfferentEdge(*edge);
+			}
+			neurons[layerIndex].erase(neurons[layerIndex].begin() + neuronIndex);
+		}
+	}
+	refreshNeuronsPerLayerCounters();
+}

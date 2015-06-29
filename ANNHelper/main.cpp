@@ -895,7 +895,7 @@ void doCascadeCorrelationTest()
 	options.totalErrorGoal = 0.01f;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	options.addNeuronAfterIterationInterval = 1500;
+	options.addNeuronAfterIterationInterval = 100;
 	options.backpropagationLearningRuleOptions.resilientLearningRate = true;
 	CascadeCorrelationLearningRule learningRule(options);
 

@@ -32,6 +32,8 @@ public:
 	virtual void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL) = 0;
 	std::list<Edge*>* getEfferentEdges();
 	virtual void resetActivation();
+	// Remove a efferent Edge
+	void removeEfferentEdge(Edge* edgeToRemove);
 };
 
 #endif

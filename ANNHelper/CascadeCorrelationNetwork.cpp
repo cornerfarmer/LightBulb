@@ -4,7 +4,7 @@
 #include "IdentityFunction.hpp"
 #include "StandardThreshold.hpp"
 #include "FermiFunction.hpp"
-
+#include "HyperbolicTangentFunction.hpp"
 CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount)
 {
 	// Create a new options object
@@ -13,7 +13,7 @@ CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCou
 	options->enableShortcuts = true;
 	options->useBiasNeuron = true;
 	// Define thresholds and functions
-	options->neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(0.1), new IdentityFunction());
+	options->neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 	// Set the neuronCounts in all three layers
 	options->neuronsPerLayerCount = std::vector<unsigned int>(2);
 	options->neuronsPerLayerCount[0] = inputNeuronCount;

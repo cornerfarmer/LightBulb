@@ -46,3 +46,16 @@ void AbstractNeuron::resetActivation()
 	// Set the activation to 0
 	activation = 0;
 }
+
+void AbstractNeuron::removeEfferentEdge(Edge* edgeToRemove)
+{
+	// Go through all edges and delete edgeToRemove
+	for (std::list<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
+	{
+		if (*edge == edgeToRemove)
+		{
+			efferentEdges.erase(edge);
+			break;
+		}
+	}
+}

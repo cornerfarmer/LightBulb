@@ -26,10 +26,13 @@ struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOption
 	unsigned int addNeuronAfterIterationInterval;
 
 	bool addNeuronAfterLearningHasStopped;
+
+	unsigned int candidateUnitCount;
 	CascadeCorrelationLearningRuleOptions()
 	{
 		addNeuronAfterIterationInterval = 20000;
 		addNeuronAfterLearningHasStopped = true;
+		candidateUnitCount = 8;
 	}
 };
 
@@ -44,13 +47,13 @@ class CascadeCorrelationLearningRule : public AbstractLearningRule
 {
 private:
 	Mode currentMode;
-	StandardNeuron* currentCandidateUnit;	
+	std::vector<StandardNeuron*> currentCandidateUnits;	
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
 	CascadeCorrelationNetwork* currentNetworkTopology;
 	Teacher* currentTeacher;
 	std::map<AbstractTeachingLesson*, std::map<AbstractNeuron*, float>> neuronOutputCache;
-	std::map<AbstractTeachingLesson*, float> candidateNetInputCache;
-	std::map<StandardNeuron*, float> correlations;
+	std::map<StandardNeuron*, std::map<AbstractTeachingLesson*, float>> candidatesNetInputCache;
+	std::map<StandardNeuron*, std::map<StandardNeuron*, float>> correlations;
 	std::map<AbstractTeachingLesson*, std::map<StandardNeuron*, float>> errorFactors;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
@@ -58,7 +61,7 @@ protected:
 	// Returns our current options in form of a CascadeCorrelationLearningRuleOptions object
 	CascadeCorrelationLearningRuleOptions* getOptions();
 
-	float getTotalCorrelation();
+	float getTotalCorrelationOfUnit(StandardNeuron* candidateUnit);
 	void calcAllCorrelations(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool calcErrorFactor);
 	// Inherited:
 	void printDebugOutput();
