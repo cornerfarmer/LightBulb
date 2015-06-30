@@ -16,15 +16,18 @@ CascadeCorrelationLearningRule::CascadeCorrelationLearningRule(CascadeCorrelatio
 {
 	options->offlineLearning = true;
 	options->maxTries = 1;
-	getOptions()->backpropagationLearningRuleOptions.offlineLearning = true;
+	getOptions()->outputNeuronsLearningRuleOptions.offlineLearning = true;
+	getOptions()->candidateUnitsLearningRuleOptions.offlineLearning = true;
 	// Create a new ResilientLearningRateHelper
-	backpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->backpropagationLearningRuleOptions));
+	outputNeuronsBackpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->outputNeuronsLearningRuleOptions));
+	candidateUnitsBackpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->candidateUnitsLearningRuleOptions));
 }
 
 
 void CascadeCorrelationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
-	backpropagationLearningRule->initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
+	outputNeuronsBackpropagationLearningRule->initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
+	candidateUnitsBackpropagationLearningRule->initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
 	currentNetworkTopology = dynamic_cast<CascadeCorrelationNetwork*>(neuralNetwork.getNetworkTopology());
 	currentTeacher = &teacher;
 	currentCandidateUnits.resize(getOptions()->candidateUnitCount);
@@ -34,7 +37,7 @@ void CascadeCorrelationLearningRule::initializeLearningAlgoritm(NeuralNetwork &n
 float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)
-		return backpropagationLearningRule->calculateDeltaWeightFromEdge(edge, lessonIndex, layerIndex, neuronIndex, edgeIndex, layerCount, neuronsInLayerCount, errormap);
+		return outputNeuronsBackpropagationLearningRule->calculateDeltaWeightFromEdge(edge, lessonIndex, layerIndex, neuronIndex, edgeIndex, layerCount, neuronsInLayerCount, errormap);
 	else if (currentMode == CANDIDATEUNITLEARNINGMODE && std::find(currentCandidateUnits.begin(), currentCandidateUnits.end(), edge->getNextNeuron()) != currentCandidateUnits.end())
 	{
 		float gradient = 0;
@@ -53,7 +56,7 @@ float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, i
 void CascadeCorrelationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)
-		backpropagationLearningRule->initializeNeuronWeightCalculation(neuron, lessonIndex, layerIndex, neuronIndex, layerCount, neuronsInLayerCount, errormap);
+		outputNeuronsBackpropagationLearningRule->initializeNeuronWeightCalculation(neuron, lessonIndex, layerIndex, neuronIndex, layerCount, neuronsInLayerCount, errormap);
 }
 
 
@@ -64,12 +67,19 @@ AbstractActivationOrder* CascadeCorrelationLearningRule::getNewActivationOrder(N
 
 void CascadeCorrelationLearningRule::adjustWeight(Edge* edge, float gradient)
 {
-	backpropagationLearningRule->adjustWeight(edge, gradient);
+	if (currentMode == OUTPUTNEURONSLEARNINGMODE)
+		outputNeuronsBackpropagationLearningRule->adjustWeight(edge, gradient);
+	else
+		candidateUnitsBackpropagationLearningRule->adjustWeight(edge, gradient);
+
 }
 
 void CascadeCorrelationLearningRule::printDebugOutput()
 {
-	backpropagationLearningRule->printDebugOutput();
+	if (currentMode == OUTPUTNEURONSLEARNINGMODE)
+		outputNeuronsBackpropagationLearningRule->printDebugOutput();
+	else
+		candidateUnitsBackpropagationLearningRule->printDebugOutput();
 	/*if (currentMode == CANDIDATEUNITLEARNINGMODE)
 		std::cout << "cor :" << std::fixed << std::setprecision(10) << getTotalCorrelation() << " ";*/
 }
@@ -98,7 +108,9 @@ CascadeCorrelationLearningRuleOptions* CascadeCorrelationLearningRule::getOption
 
 void CascadeCorrelationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	backpropagationLearningRule->initializeTry(neuralNetwork, teacher);
+	outputNeuronsBackpropagationLearningRule->initializeTry(neuralNetwork, teacher);	
+	candidateUnitsBackpropagationLearningRule->initializeTry(neuralNetwork, teacher);
+
 	currentMode = OUTPUTNEURONSLEARNINGMODE;
 }
 
@@ -188,7 +200,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 
 void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) 
 {
-	if (iteration % getOptions()->addNeuronAfterIterationInterval == 0 || (getOptions()->addNeuronAfterLearningHasStopped && backpropagationLearningRule->learningHasStopped()))
+	if ((getOptions()->addNeuronAfterIterationInterval != 0 && iteration % getOptions()->addNeuronAfterIterationInterval == 0) || (getOptions()->addNeuronAfterLearningHasStopped && (currentMode == OUTPUTNEURONSLEARNINGMODE ? outputNeuronsBackpropagationLearningRule->learningHasStopped() : candidateUnitsBackpropagationLearningRule->learningHasStopped())))
 	{
 		if (currentMode == OUTPUTNEURONSLEARNINGMODE)
 		{
@@ -240,8 +252,10 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 			std::cout << "Stops neuron training and starts the training of the output layer:" << std::endl;
 		}
 		// If used, initialize the learning rate helper
-		if (backpropagationLearningRule->getOptions()->resilientLearningRate)
-			backpropagationLearningRule->resilientLearningRateHelper->initialize(neuralNetwork);
+		if (candidateUnitsBackpropagationLearningRule->getOptions()->resilientLearningRate)
+			candidateUnitsBackpropagationLearningRule->resilientLearningRateHelper->initialize(neuralNetwork);
+		if (outputNeuronsBackpropagationLearningRule->getOptions()->resilientLearningRate)
+			outputNeuronsBackpropagationLearningRule->resilientLearningRateHelper->initialize(neuralNetwork);
 	}
 	else if (currentMode == CANDIDATEUNITLEARNINGMODE)
 	{

@@ -888,15 +888,19 @@ void doCascadeCorrelationTest()
 
 	CascadeCorrelationLearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.debugOutputInterval = 100;
+	options.debugOutputInterval = 10;
 	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 300000;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.01f;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	options.addNeuronAfterIterationInterval = 100;
-	options.backpropagationLearningRuleOptions.resilientLearningRate = true;
+	options.addNeuronAfterIterationInterval = 50;
+	options.candidateUnitCount = 8;
+	options.outputNeuronsLearningRuleOptions.resilientLearningRate = true;
+	options.outputNeuronsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 0.1;
+	options.candidateUnitsLearningRuleOptions.resilientLearningRate = true;
+	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 1;
 	CascadeCorrelationLearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);

@@ -30,6 +30,8 @@ struct ResilientLearningRateHelperOptions
 	// Sets the start value of all learningRates
 	float learningRateStart;
 
+	float minLearningRate;
+
 	ResilientLearningRateHelperOptions()
 	{
 		learningRateGrowFac = 1.2f;
@@ -37,6 +39,7 @@ struct ResilientLearningRateHelperOptions
 		learningRateMax = 50;
 		learningRateMin = 0.000001f;
 		learningRateStart = 0.2f;
+		minLearningRate = 0;
 	}
 };
 

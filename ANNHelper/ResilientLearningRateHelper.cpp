@@ -73,13 +73,25 @@ void ResilientLearningRateHelper::printDebugOutput()
 
 bool ResilientLearningRateHelper::learningHasStopped()
 {
-	// If there is any learningRate, which can still change the totalError dont stop the learning process
-	for (std::map<Edge*, float>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
+	if (!previousLearningRates.empty())
 	{
-		if (abs(previousLearningRate->second) > options->learningRateMin && abs(previousLearningRate->second) < options->learningRateMax)
-			return false;
-	}
-	return true;
+		bool learningHasStopped = true;
+		// If there is any learningRate, which can still change the totalError dont stop the learning process
+		float totalLearningRate = 0;
+		for (std::map<Edge*, float>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
+		{
+			if (abs(previousLearningRate->second) > options->learningRateMin && abs(previousLearningRate->second) < options->learningRateMax)
+				learningHasStopped = false;
+		
+			totalLearningRate += abs(previousLearningRate->second);
+		}
 
+		if (totalLearningRate < options->minLearningRate)
+			learningHasStopped = true;
+
+		return learningHasStopped;
+	}
+	else
+		return false;
 }
 

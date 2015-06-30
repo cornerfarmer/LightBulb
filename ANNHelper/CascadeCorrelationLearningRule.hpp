@@ -21,7 +21,9 @@ class CascadeCorrelationNetwork;
 struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOptions
 {	
 
-	BackpropagationLearningRuleOptions backpropagationLearningRuleOptions;
+	BackpropagationLearningRuleOptions outputNeuronsLearningRuleOptions;
+
+	BackpropagationLearningRuleOptions candidateUnitsLearningRuleOptions;
 	
 	unsigned int addNeuronAfterIterationInterval;
 
@@ -48,7 +50,8 @@ class CascadeCorrelationLearningRule : public AbstractLearningRule
 private:
 	Mode currentMode;
 	std::vector<StandardNeuron*> currentCandidateUnits;	
-	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
+	std::unique_ptr<BackpropagationLearningRule> candidateUnitsBackpropagationLearningRule;
+	std::unique_ptr<BackpropagationLearningRule> outputNeuronsBackpropagationLearningRule;
 	CascadeCorrelationNetwork* currentNetworkTopology;
 	Teacher* currentTeacher;
 	std::map<AbstractTeachingLesson*, std::map<AbstractNeuron*, float>> neuronOutputCache;
