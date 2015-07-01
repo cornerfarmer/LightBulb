@@ -44,13 +44,23 @@ float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, i
 
 		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
-			gradient = (correlations[edge->getNextNeuron()][*outputNeuron] > 0 ? 1 : (correlations[edge->getNextNeuron()][*outputNeuron] < 0 ? -1 : 0)) * edge->getNextNeuron()->executeDerivationOnActivationFunction(candidatesNetInputCache[edge->getNextNeuron()][(*currentTeacher->getTeachingLessons())[lessonIndex].get()]) * neuronOutputCache[(*currentTeacher->getTeachingLessons())[lessonIndex].get()][edge->getPrevNeuron()] * errorFactors[(*currentTeacher->getTeachingLessons())[lessonIndex].get()][*outputNeuron];
+			gradient = (correlations[edge->getNextNeuron()][*outputNeuron] > 0 ? 1 : (correlations[edge->getNextNeuron()][*outputNeuron] < 0 ? -1 : 0)) * getOutputGradient(edge, (*currentTeacher->getTeachingLessons())[lessonIndex]->getMaxTimeStep(), lessonIndex) * errorFactors[(*currentTeacher->getTeachingLessons())[lessonIndex].get()][*outputNeuron];
 		}
 
 		return -gradient;
 	}
 	else 
 		return 0;
+}
+
+float CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, int lessonIndex)
+{
+	float outputSum = 0;
+	if (edge->getNextNeuron() != edge->getPrevNeuron() || time != 0)
+		outputSum += neuronOutputCache[(*currentTeacher->getTeachingLessons())[lessonIndex].get()][edge->getNextNeuron() != edge->getPrevNeuron() ? time : time - 1][edge->getPrevNeuron()];
+	if (getOptions()->recurrent && time != 0)
+		outputSum += getOutputGradient(edge, time - 1, lessonIndex) * edge->getNextNeuron()->getEfferentEdges()->back()->getWeight();
+	return edge->getNextNeuron()->executeDerivationOnActivationFunction(candidatesNetInputCache[edge->getNextNeuron()][(*currentTeacher->getTeachingLessons())[lessonIndex].get()][time]) * outputSum;
 }
 
 void CascadeCorrelationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
@@ -126,16 +136,29 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 	{
 		if (correlations.empty())
 		{
-			errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder);
-			neuralNetwork.getNetworkTopology()->getAllNeuronOutputs(neuronOutputCache[teachingLesson->get()]);
+			neuronOutputCache[teachingLesson->get()].resize((*teachingLesson)->getMaxTimeStep() + 1);
+			std::vector<std::map<AbstractNeuron*, float>> neuronInputs((*teachingLesson)->getMaxTimeStep() + 1);
+			errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder, 0 , 0, &neuronOutputCache[teachingLesson->get()], &neuronInputs);
+						
+			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
+			{				
+				for (int t = 0; t <= (*teachingLesson)->getMaxTimeStep(); t++)
+				{
+					candidatesNetInputCache[*currentCandidateUnit][teachingLesson->get()][t] = neuronInputs[t][*currentCandidateUnit];
+				}
+			}
 		}
 		else
 		{
 			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 			{
-				(*currentCandidateUnit)->refreshNetInput(&neuronOutputCache[teachingLesson->get()]);
-				(*currentCandidateUnit)->refreshActivation();
-				neuronOutputCache[teachingLesson->get()][*currentCandidateUnit] = (*currentCandidateUnit)->getActivation();	
+				for (int t = 0; t <= (*teachingLesson)->getMaxTimeStep(); t++)
+				{
+					(*currentCandidateUnit)->refreshNetInput(&neuronOutputCache[teachingLesson->get()][t]);
+					(*currentCandidateUnit)->refreshActivation();
+					neuronOutputCache[teachingLesson->get()][t][*currentCandidateUnit] = (*currentCandidateUnit)->getActivation();	
+					candidatesNetInputCache[*currentCandidateUnit][teachingLesson->get()][t] = (*currentCandidateUnit)->getNetInput();	
+				}
 			}
 			
 			if (calcErrorFactor)
@@ -143,17 +166,16 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 				NeuralNetworkIO<float> outputVector;
 				for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 				{
-					(*outputNeuron)->refreshNetInput(&neuronOutputCache[teachingLesson->get()]);
-					(*outputNeuron)->refreshActivation();
-					outputVector[0].push_back((*outputNeuron)->getActivation());
+					for (int t = 0; t <= (*teachingLesson)->getMaxTimeStep(); t++)
+					{
+						(*outputNeuron)->refreshNetInput(&neuronOutputCache[teachingLesson->get()][t]);
+						(*outputNeuron)->refreshActivation();
+						outputVector[t].push_back((*outputNeuron)->getActivation());
+					}
 				}
 				errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormapFromOutputVector(outputVector, neuralNetwork);
 			}
-		}
-		for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
-		{
-			candidatesNetInputCache[*currentCandidateUnit][teachingLesson->get()] = (*currentCandidateUnit)->getNetInput();
-		}
+		}		
 	}
 
 	std::map<StandardNeuron*, float> meanCandidateOutput;
@@ -161,7 +183,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 	{		
 		for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 		{
-			meanCandidateOutput[*currentCandidateUnit] += neuronOutputCache[teachingLesson->get()][*currentCandidateUnit];
+			meanCandidateOutput[*currentCandidateUnit] += neuronOutputCache[teachingLesson->get()].back()[*currentCandidateUnit];
 		}
 		meanCandidateOutput[*currentCandidateUnit] /= teacher.getTeachingLessons()->size();	
 	}
@@ -187,12 +209,12 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 		{
 			if (calcErrorFactor)
 			{
-				errorFactors[teachingLesson->get()][*outputNeuron] = ((*errorMaps[teachingLesson->get()])[0][*outputNeuron] - meanErrorValue);
+				errorFactors[teachingLesson->get()][*outputNeuron] = ((*errorMaps[teachingLesson->get()]).rbegin()->second[*outputNeuron] - meanErrorValue);
 			}
 
 			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 			{
-				correlations[*currentCandidateUnit][*outputNeuron] += (neuronOutputCache[teachingLesson->get()][*currentCandidateUnit] - meanCandidateOutput[*currentCandidateUnit]) * errorFactors[teachingLesson->get()][*outputNeuron];
+				correlations[*currentCandidateUnit][*outputNeuron] += (neuronOutputCache[teachingLesson->get()].back()[*currentCandidateUnit] - meanCandidateOutput[*currentCandidateUnit]) * errorFactors[teachingLesson->get()][*outputNeuron];
 			}
 		}
 	}
@@ -207,10 +229,14 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 			currentMode = CANDIDATEUNITLEARNINGMODE;
 			int newLayerIndex = currentNetworkTopology->getNeurons()->size();
 			currentNetworkTopology->addNewLayer(newLayerIndex, 0);
+
+			correlations.clear();
+			candidatesNetInputCache.clear();
+
 			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 			{
 				*currentCandidateUnit = static_cast<StandardNeuron*>(currentNetworkTopology->addNeuronIntoLayer(newLayerIndex, true, true));
-			
+				(*currentCandidateUnit)->addNextNeuron(*currentCandidateUnit, 1);
 				for (std::list<Edge*>::iterator edge = (*currentCandidateUnit)->getEfferentEdges()->begin(); edge != (*currentCandidateUnit)->getEfferentEdges()->end(); edge++)
 				{
 					(*edge)->setWeight(0);
@@ -219,10 +245,12 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 				{
 					(*edge)->randomizeWeight(options->minRandomWeightValue, options->maxRandomWeightValue);
 				}
-			}
 
-			correlations.clear();
-			candidatesNetInputCache.clear();
+				for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+				{
+					candidatesNetInputCache[*currentCandidateUnit][teachingLesson->get()].resize((*teachingLesson)->getMaxTimeStep() + 1);
+				}
+			}
 
 			calcAllCorrelations(neuralNetwork, teacher, activationOrder, true);
 

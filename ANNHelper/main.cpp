@@ -936,8 +936,96 @@ void doCascadeCorrelationTest()
     }
 }
 
+void doRecurrentCascadeCorrelationTest()
+{
+	CascadeCorrelationNetwork* ccn = new CascadeCorrelationNetwork(1, 1);
+
+	NeuralNetwork neuralNetwork(ccn);
+
+	Teacher teacher;
+	for (int i=0;i<4;i++)
+	{
+		for (int j=0;j<4;j++)
+		{
+			NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
+
+			int lastPattern = -1;
+			for (int l = 0; l < 2; l++)
+			{
+				if (l != 0)
+					lastPattern = (*teachingPattern)[l-1][0];
+				(*teachingPattern)[l] = std::vector<float>(1);
+				(*teachingPattern)[l][0] = (l==0 ? i : j) / 4.0f;		
+
+			}
+
+			(*teachingInput)[1] = std::vector<bool>(1);
+			(*teachingInput)[1][0] = (i == j);	
+			//(*teachingInput)[1] = teachingPattern->back()[0];	
+		
+			//(*teachingInput)[0] = (i > l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+		}
+	}
+
+	CascadeCorrelationLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 10;
+	options.maxTotalErrorValue = 4;
+	options.minIterationsPerTry = 300000;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.01f;
+	options.minRandomWeightValue = -0.5;
+	options.maxRandomWeightValue = 0.5;
+	options.addNeuronAfterIterationInterval = 500;	
+	options.candidateUnitCount = 8;
+	options.recurrent = true;
+	options.outputNeuronsLearningRuleOptions.resilientLearningRate = true;
+	options.outputNeuronsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 0;
+	options.candidateUnitsLearningRuleOptions.resilientLearningRate = true;
+	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 0;
+	CascadeCorrelationLearningRule learningRule(options);
+
+	learningRule.doLearning(neuralNetwork, teacher);
+
+
+	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
+	neuralNetworkResultChartOptions.binaryInterpretation = true;
+	neuralNetworkResultChartOptions.xRangeStart = 0;
+	neuralNetworkResultChartOptions.yRangeStart = 0;
+	neuralNetworkResultChartOptions.xTimeStep = 0;
+	neuralNetworkResultChartOptions.xRangeEnd = 1;
+	neuralNetworkResultChartOptions.yRangeEnd = 1;
+	neuralNetworkResultChartOptions.yTimeStep = 0;
+	neuralNetworkResultChartOptions.width = 500;
+	neuralNetworkResultChartOptions.height = 500;
+	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+	
+	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
+	neuralNetworkResultChart.recalculateAllValues();
+	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        neuralNetworkResultChart.draw(window);
+        window.display();
+    }
+}
+
 int main()
 {
-	doCascadeCorrelationTest();
+	doRecurrentCascadeCorrelationTest();
     return 0;
 }

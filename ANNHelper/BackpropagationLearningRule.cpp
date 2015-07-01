@@ -85,7 +85,7 @@ void BackpropagationLearningRule::initializeNeuronWeightCalculation(StandardNeur
 	if (layerIndex == layerCount - 1)
 	{					
 		// Compute the delta value: activationFunction'(netInput) * errorValue
-		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errormap)[0][neuron];
+		deltaVectorOutputLayer[neuron] = (neuron->executeDerivationOnActivationFunction(neuron->getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errormap).rbegin()->second[neuron];
 	}
 	else
 	{
