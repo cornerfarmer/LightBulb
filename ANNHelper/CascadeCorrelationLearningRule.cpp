@@ -152,8 +152,10 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 		{
 			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 			{
+				(*currentCandidateUnit)->resetActivation();
 				for (int t = 0; t <= (*teachingLesson)->getMaxTimeStep(); t++)
 				{
+					neuronOutputCache[teachingLesson->get()][t].erase(*currentCandidateUnit);
 					(*currentCandidateUnit)->refreshNetInput(&neuronOutputCache[teachingLesson->get()][t]);
 					(*currentCandidateUnit)->refreshActivation();
 					neuronOutputCache[teachingLesson->get()][t][*currentCandidateUnit] = (*currentCandidateUnit)->getActivation();	
@@ -254,7 +256,7 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 
 			calcAllCorrelations(neuralNetwork, teacher, activationOrder, true);
 
-			std::cout << "Adds a new neuron and starts to train it:" << std::endl;
+			std::cout << "Adds " << newLayerIndex << ". new neuron and starts to train it:" << std::endl;
 		}
 		else if (currentMode == CANDIDATEUNITLEARNINGMODE)
 		{

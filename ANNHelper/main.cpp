@@ -942,34 +942,39 @@ void doRecurrentCascadeCorrelationTest()
 
 	NeuralNetwork neuralNetwork(ccn);
 
+
 	Teacher teacher;
-	for (int i=0;i<4;i++)
+
+
+
+	for (int i = 0; i < 6; i++)
 	{
-		for (int j=0;j<4;j++)
+		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
+
+		int lastPattern = -1;
+		for (int l = 0; l <= i; l++)
 		{
-			NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
-			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
-
-			int lastPattern = -1;
-			for (int l = 0; l < 2; l++)
-			{
-				if (l != 0)
-					lastPattern = (*teachingPattern)[l-1][0];
-				(*teachingPattern)[l] = std::vector<float>(1);
-				(*teachingPattern)[l][0] = (l==0 ? i : j) / 4.0f;		
-
-			}
-
-			(*teachingInput)[1] = std::vector<bool>(1);
-			(*teachingInput)[1][0] = (i == j);	
-			//(*teachingInput)[1] = teachingPattern->back()[0];	
-		
-			//(*teachingInput)[0] = (i > l);	
-			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
-
-			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+			(*teachingPattern)[l] = std::vector<float>(1);
+			(*teachingPattern)[l][0] = 1;
 		}
+		(*teachingInput)[i] = std::vector<bool>(1);
+		(*teachingInput)[i][0] = (i%2 == 0);	
+
+		//(*teachingInput)[1] = teachingPattern->back()[0];	
+		
+		//(*teachingInput)[0] = (i > l);	
+		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
 	}
+
+
+	//ccn->addNewLayer(1, 0);
+	//StandardNeuron* currentCandidateUnit = static_cast<StandardNeuron*>(ccn->addNeuronIntoLayer(1, true, true));
+	//currentCandidateUnit->addNextNeuron(currentCandidateUnit, 1);
+
+	//neuralNetwork.calculate(*teacher.getTeachingLessons()->front()->getTeachingPattern(), TopologicalOrder());
 
 	CascadeCorrelationLearningRuleOptions options;
 	options.enableDebugOutput = true;
@@ -980,29 +985,39 @@ void doRecurrentCascadeCorrelationTest()
 	options.totalErrorGoal = 0.01f;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
-	options.addNeuronAfterIterationInterval = 500;	
+	options.addNeuronAfterIterationInterval = 50;	
 	options.candidateUnitCount = 8;
 	options.recurrent = true;
 	options.outputNeuronsLearningRuleOptions.resilientLearningRate = true;
-	options.outputNeuronsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 0;
+	options.outputNeuronsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 0.1;
 	options.candidateUnitsLearningRuleOptions.resilientLearningRate = true;
-	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 0;
+	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 1;
 	CascadeCorrelationLearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
 
 
+	NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
+
+	int lastPattern = -1;
+	for (int l = 0; l < 16; l++)
+	{
+		(*teachingPattern)[l] = std::vector<float>(1);
+		(*teachingPattern)[l][0] = 1;
+	}
+
+	std::unique_ptr<NeuralNetworkIO<float>> output = neuralNetwork.calculate(*teachingPattern, TopologicalOrder());
+
+	
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
 	neuralNetworkResultChartOptions.binaryInterpretation = true;
-	neuralNetworkResultChartOptions.xRangeStart = 0;
-	neuralNetworkResultChartOptions.yRangeStart = 0;
-	neuralNetworkResultChartOptions.xTimeStep = 0;
 	neuralNetworkResultChartOptions.xRangeEnd = 1;
 	neuralNetworkResultChartOptions.yRangeEnd = 1;
-	neuralNetworkResultChartOptions.yTimeStep = 0;
-	neuralNetworkResultChartOptions.width = 500;
-	neuralNetworkResultChartOptions.height = 500;
+	neuralNetworkResultChartOptions.yInputNeuronIndex = 0;
+	neuralNetworkResultChartOptions.yTimeStep = 1;
+	neuralNetworkResultChartOptions.ouputTimeStep = 1;
+
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
