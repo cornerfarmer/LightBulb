@@ -5,7 +5,7 @@
 float BinaryFunction::execute(float input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
-	// Check if the given threshold was a StandardThreshold
+	// Check if the given threshold is a StandardThreshold
 	if (!standardThreshold)
 		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
 
@@ -18,6 +18,7 @@ float BinaryFunction::execute(float input, AbstractThreshold* threshold)
 
 float BinaryFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
+	// A binary function does not have a derivation => throw a exception
 	throw std::logic_error("There is no derivation of the binary function possible");
 	return 0;
 }

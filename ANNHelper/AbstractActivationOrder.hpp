@@ -18,6 +18,7 @@ public:
 	virtual ~AbstractActivationOrder() {}
 	// Activates all Neurons in the given topology in a special order
 	virtual void executeActivation(AbstractNetworkTopology &networkTopology) = 0;
+	// Retruns a copy of this activation order
 	virtual AbstractActivationOrder* getCopy() = 0; 
 	// Returns a map which holds for every edge, if its two neurons are refreshed in the same timestep (In a feed forward with topological acitvation order for example are all edges in the same timestep)
 	virtual std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) = 0;

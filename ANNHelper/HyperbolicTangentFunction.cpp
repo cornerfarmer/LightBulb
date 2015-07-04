@@ -6,7 +6,7 @@
 float HyperbolicTangentFunction::execute(float input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
-	// Check if the given threshold was a StandardThreshold
+	// Check if the given threshold is a StandardThreshold
 	if (!standardThreshold)
 		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
 
@@ -19,7 +19,7 @@ float HyperbolicTangentFunction::execute(float input, AbstractThreshold* thresho
 float HyperbolicTangentFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
-	// Check if the given threshold was a StandardThreshold
+	// Check if the given threshold is a StandardThreshold
 	if (!standardThreshold)
 		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
 

@@ -55,7 +55,7 @@ struct RBFNetworkStructureChartOptions
 	}
 };
 
-// A basic shape for an graphical component
+// A chart which shows the location of the rbf neurons inside a rbfNetwork
 class RBFNetworkStructureChart : public GraphicObject
 {
 private:

@@ -43,7 +43,7 @@ void RBFNetworkStructureChart::recalculateAllValues()
 
 void RBFNetworkStructureChart::draw(sf::RenderWindow &window)
 {	
-		// Outline the part of the window which will contain our chart
+	// Outline the part of the window which will contain our chart
 	sf::RectangleShape drawRect;
 	drawRect.setPosition(options.posX, options.posY);
 	drawRect.setSize(sf::Vector2f(options.width, options.height));

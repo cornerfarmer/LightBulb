@@ -12,10 +12,9 @@ class IdentityFunction : public AbstractOutputFunction, public AbstractActivatio
 {
 private:
 public:
-	// Just returns the given input
+	// Inherited: 
 	float execute(float input);
 	float execute(float input, AbstractThreshold* threshold);
-	// Returns always 0
 	float executeDerivation(float input, AbstractThreshold* threshold);
 	AbstractOutputFunction* getOutputFunctionCopy();
 	AbstractActivationFunction* getActivationFunctionCopy();

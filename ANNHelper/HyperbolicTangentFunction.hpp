@@ -9,14 +9,13 @@
 // Includes
 #include "AbstractActivationFunction.hpp"
 
-// The IdentityFunction just returns the input without calculating anything
+// The HyperbolicTangentFunction is a sigmoid function between -1 and 1
 class HyperbolicTangentFunction : public AbstractActivationFunction
 {
 private:
 public:
-	// Just returns the given input
+	// Inherited
 	float execute(float input, AbstractThreshold* threshold);
-	// Returns always 0
 	float executeDerivation(float input, AbstractThreshold* threshold);
 	AbstractActivationFunction* getActivationFunctionCopy();
 	float getMaximum();

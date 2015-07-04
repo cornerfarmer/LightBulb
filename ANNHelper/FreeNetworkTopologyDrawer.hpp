@@ -14,7 +14,7 @@ class AbstractNetworkTopology;
 class AbstractActivationOrder;
 class AbstractNeuron;
 
-// A basic shape for an graphical component
+// Drawer for FreeNetworkTopologies
 class FreeNetworkTopologyDrawer : public AbstractNetworkTopologyDrawer
 {
 private:

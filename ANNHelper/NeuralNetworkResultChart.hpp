@@ -41,7 +41,7 @@ struct NeuralNetworkResultChartOptions
 
 };
 
-// A basic shape for an graphical component
+// A chart which visalizes the calculation of a neural network
 class NeuralNetworkResultChart : public GraphicObject
 {
 private:

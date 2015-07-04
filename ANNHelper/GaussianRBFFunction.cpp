@@ -6,7 +6,7 @@
 float GaussianRBFFunction::execute(float input, AbstractThreshold* threshold)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
-	// Check if the given threshold was a StandardThreshold
+	// Check if the given threshold is a RBFThreshold
 	if (!rbfThreshold)
 		throw std::invalid_argument("The given threshold has to be a RBFThreshold");
 
@@ -17,7 +17,7 @@ float GaussianRBFFunction::execute(float input, AbstractThreshold* threshold)
 float GaussianRBFFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
-	// Check if the given threshold was a StandardThreshold
+	// Check if the given threshold was a RBFThreshold
 	if (!rbfThreshold)
 		throw std::invalid_argument("The given threshold has to be a RBFThreshold");
 

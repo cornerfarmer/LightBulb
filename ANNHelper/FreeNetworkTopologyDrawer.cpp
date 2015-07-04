@@ -15,10 +15,11 @@ FreeNetworkTopologyDrawer::FreeNetworkTopologyDrawer(AbstractNetworkTopologyDraw
 void FreeNetworkTopologyDrawer::refresh()
 {
 	// Check if all given options are correct
-	// Check if the given topology is valud
+	// Check if the given topology is valid
 	if (options->networkTopology == NULL)
 		throw std::invalid_argument("The given networkTopology is not valid!");
 
+	// Place all neurons on the border of a circle
 	float angleDistance = (M_PI * 2) / options->networkTopology->getNeurons()->front().size();
 	sf::Vector2f center(options->posX + options->width / 2, options->posY + options->height / 2);
 	sf::Vector2f radiusVector(options->width / 2 * 0.9, options->height / 2 * 0.9);

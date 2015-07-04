@@ -14,11 +14,15 @@ public:
 	virtual ~AbstractActivationFunction() {}
 	// Calculate the activation from the given input
 	virtual float execute(float input, AbstractThreshold* threshold) = 0;
+	// Calculate the derivated activation from the given input
 	virtual float executeDerivation(float input, AbstractThreshold* threshold) = 0;
 	// Create a copy of the object
 	virtual AbstractActivationFunction* getActivationFunctionCopy() = 0;
+	// Returns the maximum value of this function
 	virtual float getMaximum() = 0;
+	// Returns the minimum value of this function
 	virtual float getMinimum() = 0;
+	// Returns if the function is linear which does not have a minimum/maximum value
 	virtual bool isLinear() = 0;
 };
 

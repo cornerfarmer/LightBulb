@@ -15,9 +15,12 @@
 class GraphicObject
 {
 protected:
+	// A static default font which can be used in all graphic objects
 	static sf::Font font;
+	// Two helper functions to convert coordinates
 	sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, float radius, float angle);
 	sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, float angle);
+	// Calculate the angle of a line
 	float calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd);	
 public:
 	virtual ~GraphicObject() {}

@@ -41,7 +41,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	std::vector<StandardNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
 	// Create a vector which will contain all weights for offline learning
 	std::map<Edge*, float> offlineLearningWeights;
-
+	
+	// Reset all counter
 	tryCounter = 0;
 	totalError = 0;
 	iteration = 0;
@@ -93,20 +94,25 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					offlineLearningWeight->second = 0;
 			}
 
+			// Do some work before every iteration
 			initializeIteration(initializedNeuralNetwork, initializedTeacher, *activationOrder);
 
 			// Go through every TeachingLesson
 			int lessonIndex = 0;
 			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
 			{
+				// Do some work before every teaching lesson
 				initializeTeachingLesson(initializedNeuralNetwork, **teachingLesson);
 
+				// Do some work before all weights will be adjusted
 				if (!options->offlineLearning)
 					initializeAllWeightAdjustments(initializedNeuralNetwork);
 
+				// Set start and time counter to default values
 				int nextStartTime = -1;
 				int nextTimeStepCount = -1;
 
+				// While the learning rule wants do some calculation with the current teaching lesson
 				while(configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
 				{
 					// Calculate the errormap and also fill - if needed - the output and netInput values map
@@ -164,6 +170,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 				}
 				
+				// Do some work after all weights were adjusted
 				if (!options->offlineLearning)
 					doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
@@ -171,6 +178,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			// If offline learning is activated, adjust all weights
 			if (options->offlineLearning)
 			{
+				// Do some work before all weights will be adjusted
 				initializeAllWeightAdjustments(initializedNeuralNetwork);
 
 				// Adjust the every hidden/output layer
@@ -191,6 +199,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					}
 				}
 
+				// Do some work after all weights were adjusted
 				doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
 		}
@@ -213,6 +222,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 bool AbstractLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
 {
+	// Per default only calculate every teaching lesson once in all possible timesteps
 	if (*nextTimeStepCount != -1)
 		return false;
 	else

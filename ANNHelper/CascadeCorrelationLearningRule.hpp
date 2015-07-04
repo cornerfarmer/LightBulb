@@ -20,17 +20,17 @@ class CascadeCorrelationNetwork;
 
 struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOptions
 {	
-
+	// The backpropagation learning rule options for the training of the output neurons
 	BackpropagationLearningRuleOptions outputNeuronsLearningRuleOptions;
-
+	// The backpropagation learning rule options for the training of the candidate units
 	BackpropagationLearningRuleOptions candidateUnitsLearningRuleOptions;
-	
+	// Add a new neuron after every n-th iteration (0 disables this feature)
 	unsigned int addNeuronAfterIterationInterval;
-
+	// Add a new neuron after the learning process has stopped
 	bool addNeuronAfterLearningHasStopped;
-
+	// The size of the candidate unit group which will be trained at the same time
 	unsigned int candidateUnitCount;
-
+	// Create a recurrent network (Adds a self referencing edge to every cascade unit)
 	bool recurrent;
 	CascadeCorrelationLearningRuleOptions()
 	{
@@ -41,37 +41,47 @@ struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOption
 	}
 };
 
+// The different modes the learning rule can be into
 enum Mode
 {
 	OUTPUTNEURONSLEARNINGMODE,	
 	CANDIDATEUNITLEARNINGMODE,
 };
 
-// The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
+// The CascadeCorrelationLearningRule can be used to train CascadeCorrelationNetworks
 class CascadeCorrelationLearningRule : public AbstractLearningRule
 {
 private:
+	// Holds the current mode
 	Mode currentMode;
+	// Holds all current trained candidate units
 	std::vector<StandardNeuron*> currentCandidateUnits;	
+	// Holds the backpropagation learning rule for training of the candidate units
 	std::unique_ptr<BackpropagationLearningRule> candidateUnitsBackpropagationLearningRule;
+	// Holds the backpropagation learning rule for training of the output neurons
 	std::unique_ptr<BackpropagationLearningRule> outputNeuronsBackpropagationLearningRule;
+	// The current network toplogy
 	CascadeCorrelationNetwork* currentNetworkTopology;
+	// The current teacher
 	Teacher* currentTeacher;
+	// The cache of every output of every neuron in every timestep in every teaching lesson
 	std::map<AbstractTeachingLesson*, std::vector<std::map<AbstractNeuron*, float>>> neuronOutputCache;
+	// The cache of every net input of every candidate unit int every timestep in every teaching lesson
 	std::map<StandardNeuron*, std::map<AbstractTeachingLesson*, std::vector<float>>> candidatesNetInputCache;
+	// Holds all current correlation values of all output neurons corresponding to all candidate units
 	std::map<StandardNeuron*, std::map<StandardNeuron*, float>> correlations;
+	// Holds all current error factors of all output neurons in all teaching lessons
 	std::map<AbstractTeachingLesson*, std::map<StandardNeuron*, float>> errorFactors;
-
+	// Computes the output gradient of an edge in a given time and lesson
 	float getOutputGradient(Edge* edge, int time, int lessonIndex);
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
 	// Returns our current options in form of a CascadeCorrelationLearningRuleOptions object
-	CascadeCorrelationLearningRuleOptions* getOptions();
-
-	
-
+	CascadeCorrelationLearningRuleOptions* getOptions();	
+	// Computes the total correlation of a candidate unit
 	float getTotalCorrelationOfUnit(StandardNeuron* candidateUnit);
+	// Recalculates all correaltion of all candidate units
 	void calcAllCorrelations(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool calcErrorFactor);
 	// Inherited:
 	void printDebugOutput();
@@ -89,4 +99,3 @@ public:
 };
 
 #endif
-

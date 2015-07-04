@@ -43,6 +43,7 @@ struct AbstractLearningRuleOptions
 	unsigned int debugOutputInterval;
 	// Enable offline learning
 	bool offlineLearning;
+	// Can be used to prevent the learning rule to change the weights of the network before the learning begins
 	bool changeWeightsBeforeLearning;
 	AbstractLearningRuleOptions()
 	{
@@ -66,8 +67,11 @@ class AbstractLearningRule
 {
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
+	// Holds the current total error
 	float totalError;
+	// Holds the current iteration
 	int iteration;
+	// Holds the current try number
 	int tryCounter;
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
@@ -85,9 +89,9 @@ protected:
 	virtual void printDebugOutput() {};
 	// This method should do something like randomizing all weight
 	virtual void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
-
+	// This method can be used to do some work before every iteration
 	virtual void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) { };
-
+	// This method can be used to do some work before every teaching lesson
 	virtual void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson) { };
 	// This method could be used to do some work after all weights has been adjusted
 	virtual void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
@@ -103,7 +107,7 @@ protected:
 	virtual std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime() { return NULL; };
 	// This method can return a pointer to a netInput value map, which should be filled before weight calculation
 	virtual std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime() { return NULL; };
-
+	// This method should determine the start time and time step count of the next calculation
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);

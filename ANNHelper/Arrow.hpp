@@ -8,15 +8,18 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 
-// Forward declarations
-
+// A graphical arrow with a description
 class Arrow : public GraphicObject
 {
 private:
+	// Holds all lines that describe the arrow
 	sf::VertexArray lines;
+	// A description text
 	sf::Text text;
 public:
+	// Create a arrow from a start to an end position with optional extraLines and a description
 	Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description, sf::VertexArray extraLines);
+	// Inherited:
 	void draw(sf::RenderWindow &window);
 };
 

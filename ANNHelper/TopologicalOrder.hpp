@@ -14,6 +14,7 @@ private:
 public:
 	// Activates all neurons in the given layered(!) topology in a topological order
 	void executeActivation(AbstractNetworkTopology &networkTopology);
+	// Inherited:
 	AbstractActivationOrder* getCopy(); 
 	std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology);
 };

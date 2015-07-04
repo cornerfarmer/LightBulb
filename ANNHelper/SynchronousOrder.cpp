@@ -31,27 +31,33 @@ std::unique_ptr<std::map<Edge*, bool>> SynchronousOrder::getSameTimestepEdges(Ab
 {
 	std::unique_ptr<std::map<Edge*, bool>> sameTimestepEdges(new std::map<Edge*, bool>());
 
-	// Go through all neurons 
+	// Go through all input neurons 
 	for (std::vector<AbstractNeuron*>::iterator neuron = networkTopology.getInputNeurons()->begin(); neuron != networkTopology.getInputNeurons()->end(); neuron++)
 	{
+		// Only if this is a real inputNeuron
 		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
 		if (inputNeuron)
 		{
+			// Go through all edges
 			for (std::list<Edge*>::iterator edge = inputNeuron->getEfferentEdges()->begin(); edge != inputNeuron->getEfferentEdges()->end(); edge++)
 			{
+				// Set the sameTimestep value of this edge to true
 				(*sameTimestepEdges)[*edge] = true;
 			}
 		}
 	}	
 
+	// If this network has a bias neuron
 	if (networkTopology.getBiasNeuron())
 	{
+		// Go through all efferent edges of the bias neuron
 		for (std::list<Edge*>::iterator edge = networkTopology.getBiasNeuron()->getEfferentEdges()->begin(); edge != networkTopology.getBiasNeuron()->getEfferentEdges()->end(); edge++)
 		{
+			// Set the sameTimestep value of this edge to true
 			(*sameTimestepEdges)[*edge] = true;
 		}
 	}
 
-
+	// Return the calculated map
 	return sameTimestepEdges;
 }
