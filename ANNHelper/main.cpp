@@ -25,7 +25,7 @@
 #include "RBFNetwork.hpp"
 #include "RBFInterpolationLearningRule.hpp"
 #include "TeachingLessonLinearInput.hpp"
-#include "ResilientDeltaLearningRule.hpp"
+#include "DeltaLearningRule.hpp"
 #include "KMeansRBFNeuronPlacer.hpp"
 #include "KNearestRBFNeuronPlacer.hpp"
 #include "ENearestRBFNeuronPlacer.hpp"
@@ -196,13 +196,14 @@ void doRBFTest()
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 
 	learningRule.doLearning(neuralNetwork, teacher);	
-	ResilientDeltaLearningRuleOptions delteLearningRuleOptions;
+	DeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
 	delteLearningRuleOptions.maxTries = 1;
 	delteLearningRuleOptions.maxTotalErrorValue = 10;
 	delteLearningRuleOptions.enableDebugOutput = true;
 	delteLearningRuleOptions.changeWeightsBeforeLearning = false;
-	ResilientDeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
+	delteLearningRuleOptions.resilientLearningRate = true;
+	DeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
 
 	deltaLearningRule.doLearning(neuralNetwork, teacher);
 

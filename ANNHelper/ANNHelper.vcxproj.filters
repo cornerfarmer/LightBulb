@@ -77,9 +77,6 @@
     <ClInclude Include="BinaryFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
-    <ClInclude Include="DeltaLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="FermiFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
@@ -156,12 +153,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="ResilientLearningRateHelper.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="ResilientDeltaLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractDeltaLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="AbstractRBFNeuronPlacer.hpp">
@@ -260,6 +251,9 @@
     <ClInclude Include="CascadeCorrelationLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="DeltaLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -300,9 +294,6 @@
     </ClCompile>
     <ClCompile Include="BinaryFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="DeltaLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="FermiFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
@@ -380,12 +371,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="ResilientLearningRateHelper.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="ResilientDeltaLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="AbstractDeltaLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="AbstractRBFNeuronPlacer.cpp">
@@ -482,6 +467,9 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="CascadeCorrelationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>

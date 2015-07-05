@@ -69,7 +69,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractClustering.cpp" />
-    <ClCompile Include="AbstractDeltaLearningRule.cpp" />
+    <ClCompile Include="DeltaLearningRule.cpp" />
     <ClCompile Include="AbstractNearestClustering.cpp" />
     <ClCompile Include="AbstractNetworkTopologyDrawer.cpp" />
     <ClCompile Include="AbstractNeuronFactory.cpp" />
@@ -98,11 +98,9 @@
     <ClCompile Include="RealTimeRecurrentLearningRule.cpp" />
     <ClCompile Include="RecurrentLayeredNetwork.cpp" />
     <ClCompile Include="RecurrentNetworkInterface.cpp" />
-    <ClCompile Include="ResilientDeltaLearningRule.cpp" />
     <ClCompile Include="ResilientLearningRateHelper.cpp" />
     <ClCompile Include="BiasNeuron.cpp" />
     <ClCompile Include="BinaryFunction.cpp" />
-    <ClCompile Include="DeltaLearningRule.cpp" />
     <ClCompile Include="DifferentFunctionsNeuronFactory.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="EuclideanDistance.cpp" />
@@ -150,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractClustering.hpp" />
-    <ClInclude Include="AbstractDeltaLearningRule.hpp" />
+    <ClInclude Include="DeltaLearningRule.hpp" />
     <ClInclude Include="AbstractNearestClustering.hpp" />
     <ClInclude Include="AbstractNetworkTopologyDrawer.hpp" />
     <ClInclude Include="AbstractNeuronFactory.hpp" />
@@ -179,11 +177,9 @@
     <ClInclude Include="RealTimeRecurrentLearningRule.hpp" />
     <ClInclude Include="RecurrentLayeredNetwork.hpp" />
     <ClInclude Include="RecurrentNetworkInterface.hpp" />
-    <ClInclude Include="ResilientDeltaLearningRule.hpp" />
     <ClInclude Include="ResilientLearningRateHelper.hpp" />
     <ClInclude Include="BiasNeuron.hpp" />
     <ClInclude Include="BinaryFunction.hpp" />
-    <ClInclude Include="DeltaLearningRule.hpp" />
     <ClInclude Include="DifferentFunctionsNeuronFactory.hpp" />
     <ClInclude Include="Edge.hpp" />
     <ClInclude Include="EuclideanDistance.hpp" />
