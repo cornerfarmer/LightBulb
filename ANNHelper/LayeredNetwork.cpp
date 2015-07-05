@@ -122,6 +122,7 @@ void LayeredNetwork::buildNetwork()
 	if (!options->neuronFactory)
 		throw std::invalid_argument("The given neuronFactory is not valid");
 
+	// If the given outputNeuronsIndices vector was empty, fill it with the standard values
 	if (options->outputNeuronsIndices.empty())
 	{
 		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
@@ -148,6 +149,7 @@ void LayeredNetwork::buildNetwork()
 		}		
 	}
 
+	// Also build the output neurons vector
 	rebuildOutputNeurons();
 }
 
@@ -165,6 +167,7 @@ void LayeredNetwork::rebuildOutputNeurons()
 
 void LayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters)
 {
+	// Adds the given neurons to the selected layer
 	if (layerIndex == 0)
 		inputNeurons.push_back(newNeuron);
 	else
@@ -173,8 +176,9 @@ void LayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuro
 	// Refresh the neuron counters if needed
 	if (refreshNeuronCounters)
 	{
+		// Correct the size of the layer
 		options->neuronsPerLayerCount[layerIndex] = neurons[layerIndex].size();
-
+		// If this is the last layer, also rebuild the output neurons vector
 		if (layerIndex == options->neuronsPerLayerCount.size() - 1)
 			rebuildOutputNeurons();
 	}
@@ -221,17 +225,21 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 			static_cast<StandardNeuron*>(newNeuron)->addPrevNeuron(&biasNeuron, 1);
 	}
 
+	// If we should connect the neuron to the next layer
 	if (addEdgesToNextLayer)
 	{
+		// If shortcurts are enabled go through all next layers, else only through the next single layer
 		for (int l = layerIndex + 1; (l == layerIndex + 1 || options->enableShortcuts) && l - 1 < neurons.size(); l++)
 		{			
+			// Go through all neurons in this layer
 			for (std::vector<StandardNeuron*>::iterator nextNeuron = neurons[l - 1].begin(); nextNeuron != neurons[l - 1].end(); nextNeuron++)
 			{
+				// Add an edge to the neuron
 				newNeuron->addNextNeuron(*nextNeuron, 1);
 			}			
 		}
 	}
-	
+	// Put the created neuron into the layer
 	addNeuronIntoLayer(layerIndex, newNeuron, refreshNeuronCounters);
 
 	return newNeuron;
@@ -239,10 +247,13 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 
 void LayeredNetwork::addNewLayer(int layerIndex, int initialNeuronCount)
 {
+	// Adds a new layer into the neurons vector
 	neurons.insert(neurons.begin() + layerIndex - 1, std::vector<StandardNeuron*>());
 	
+	// Adds a new counter into the neuronsPerLayerCount vector
 	options->neuronsPerLayerCount.insert(options->neuronsPerLayerCount.begin() + layerIndex, 0);
 
+	// Add all default neurons
 	for (int i = 0; i < initialNeuronCount; i++)
 		addNeuronIntoLayer(layerIndex, true, true);
 }
@@ -435,20 +446,28 @@ std::unique_ptr<std::map<Edge*, bool>> LayeredNetwork::getNonRecurrentEdges()
 
 void LayeredNetwork::removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove)
 {
+	// Go through all neurons in this layer
 	for (int neuronIndex = 0; neuronIndex < neurons[layerIndex].size(); neuronIndex++)
 	{
+		// If the neuron matches the given neuron
 		if (neurons[layerIndex][neuronIndex] == neuronToRemove)
 		{
+			// Go through all afferent edges of this neuron
 			for (std::list<Edge*>::iterator edge = neurons[layerIndex][neuronIndex]->getAfferentEdges()->begin(); edge != neurons[layerIndex][neuronIndex]->getAfferentEdges()->end(); edge++)
 			{
+				// Remove the edge
 				(*edge)->getPrevNeuron()->removeEfferentEdge(*edge);
 			}
+			// Go through all efferent edges of this neuron
 			for (std::list<Edge*>::iterator edge = neurons[layerIndex][neuronIndex]->getEfferentEdges()->begin(); edge != neurons[layerIndex][neuronIndex]->getEfferentEdges()->end(); edge++)
 			{
+				// Remove the edge
 				(*edge)->getNextNeuron()->removeAfferentEdge(*edge);
 			}
+			// Erase the neuron from the layer
 			neurons[layerIndex].erase(neurons[layerIndex].begin() + neuronIndex);
 		}
 	}
+	// Refresh all neuron per layer counters
 	refreshNeuronsPerLayerCounters();
 }

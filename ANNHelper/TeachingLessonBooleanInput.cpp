@@ -18,7 +18,7 @@ NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractAct
 		throw std::invalid_argument("The activationFunction of the outputNeurons is linear, but your teaching input is boolean.");
 
 
-		// Go through all  teaching input values
+	// Go through all  teaching input values
 	for (NeuralNetworkIO<bool>::iterator teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->end(); teachingInputAtTime++)
 	{
 		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<float>(teachingInputAtTime->second.size());
@@ -44,8 +44,11 @@ NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingPattern()
 
 AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
 {
+	// Create a new teaching input
 	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>();
+	// Copy the teaching input
 	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
+	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
 	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold(), unfoldedTeachingInput);
 	return unfoldedTeachingLesson;
 }

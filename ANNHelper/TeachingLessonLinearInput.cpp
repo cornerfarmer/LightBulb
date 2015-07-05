@@ -20,8 +20,11 @@ NeuralNetworkIO<float>* TeachingLessonLinearInput::getTeachingPattern()
 
 AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 {
+	// Create a new teaching input
 	NeuralNetworkIO<float>* unfoldedTeachingInput = new NeuralNetworkIO<float>();
+	// Copy the teaching input
 	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
+	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
 	TeachingLessonLinearInput* unfoldedTeachingLesson = new TeachingLessonLinearInput(teachingPattern->unfold(), unfoldedTeachingInput);
 	return unfoldedTeachingLesson;
 }

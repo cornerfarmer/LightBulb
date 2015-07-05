@@ -5,6 +5,7 @@
 #include "StandardThreshold.hpp"
 #include "FermiFunction.hpp"
 #include "HyperbolicTangentFunction.hpp"
+
 CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount)
 {
 	// Create a new options object

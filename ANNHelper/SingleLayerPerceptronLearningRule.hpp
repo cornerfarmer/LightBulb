@@ -14,7 +14,7 @@ class Teacher;
 class SingleLayerPerceptronLearningRule : public AbstractLearningRule
 {
 private:
-// Inherited:
+	// Inherited:
 	void adjustWeight(Edge* edge, float deltaWeight);
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);

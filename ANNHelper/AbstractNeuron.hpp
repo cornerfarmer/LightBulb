@@ -16,7 +16,9 @@ class AbstractNeuron;
 class AbstractNeuron
 {
 protected:
+	// Holds the activation
 	float activation;
+	// Holds all efferent edges
 	std::list<Edge*> efferentEdges;
 public:	
 	virtual ~AbstractNeuron();
@@ -30,7 +32,9 @@ public:
 	virtual void refreshActivation() = 0;
 	// Recalculate the netInput of the neuron
 	virtual void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL) = 0;
+	// Returns all efferent edges
 	std::list<Edge*>* getEfferentEdges();
+	// Resets the activation of the neuron
 	virtual void resetActivation();
 	// Remove a efferent Edge
 	void removeEfferentEdge(Edge* edgeToRemove);

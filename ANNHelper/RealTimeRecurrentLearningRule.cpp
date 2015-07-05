@@ -34,25 +34,32 @@ void RealTimeRecurrentLearningRule::initializeLearningAlgoritm(NeuralNetwork &ne
 float RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
 {
 	float outputNeuronsDependency = 0;
+	// Go through all error maps
 	for (ErrorMap_t::iterator outputNeurons = errormap->begin(); outputNeurons != errormap->end(); outputNeurons++)
 	{
+		// Go through all output neurons
 		for (std::map<StandardNeuron*, float>::iterator outputNeuron = outputNeurons->second.begin(); outputNeuron != outputNeurons->second.end(); outputNeuron++)
 		{
+			// Add to the gradient: errorvalue * dynamicSystemValue
 			outputNeuronsDependency += outputNeuron->second * getDynamicSystemValueOfEdgeAtTime(edge, outputNeuron->first, outputNeurons->first, true, errormap);
 		}
 	}
+	// If teacher forcing is enabled
 	if (getOptions()->teacherForcing)
 	{
+		// If there are teaching inputs at the current time step
 		if (currentTeachingInputMap->count(currentTimeStep) != 0)
 		{
+			// Go through all output neurons
 			for (std::map<StandardNeuron*, float>::iterator outputNeuron = (*currentTeachingInputMap)[currentTimeStep].begin();  outputNeuron != (*currentTeachingInputMap)[currentTimeStep].end(); outputNeuron++)
 			{
+				// Inject the wished activation (teachingInput)
 				outputNeuron->first->injectActivation(outputNeuron->first->getActivation() + outputNeuron->second);
 			}
 		}
 	}
-	float returnValue = getOptions()->learningRate * outputNeuronsDependency;
-	return returnValue;
+	// Return the deltaWeight: learningRate * gradient
+	return getOptions()->learningRate * outputNeuronsDependency;
 }
 
 void RealTimeRecurrentLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
@@ -98,12 +105,14 @@ void RealTimeRecurrentLearningRule::initializeTry(NeuralNetwork &neuralNetwork, 
 
 void RealTimeRecurrentLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
+	// Go through the whole dynamic system cache
 	for (std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>>::iterator edge = dynamicSystemCache.begin(); edge != dynamicSystemCache.end(); edge++)
 	{
 		for (std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>::iterator neuron = edge->second.begin(); neuron != edge->second.end(); neuron++)
 		{
 			for (std::map<int, std::pair<float, bool>>::iterator time = neuron->second.begin(); time != neuron->second.end(); time++)
 			{
+				// Set the valid value to false
 				time->second.second = false;
 			}
 		}
@@ -112,41 +121,50 @@ void RealTimeRecurrentLearningRule::initializeAllWeightAdjustments(NeuralNetwork
 
 void RealTimeRecurrentLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {
+	// If we should use teacherForcing extract the teachingInputMap from the currentTeachingInputMap
 	if (getOptions()->teacherForcing)
 		currentTeachingInputMap = teachingLesson.getTeachingInputMap(neuralNetwork);
 }
 
 float RealTimeRecurrentLearningRule::getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap)
 {
+	// If the corresponding cache value is not valid
 	if (!dynamicSystemCache[edge][neuron][time].second)
 	{
+		// If this is not the first time step 
 		if (time != 0 && (isInFirstCalculationLayer || !getOptions()->teacherForcing || currentTeachingInputMap->count(time) == 0 || (*currentTeachingInputMap)[time].count(neuron) == 0))
 		{
 			float previousValuesSum = 0;
 
+			// Go through all afferent edges
 			for (std::list<Edge*>::iterator afferentEdge = neuron->getAfferentEdges()->begin(); afferentEdge != neuron->getAfferentEdges()->end(); afferentEdge++)
 			{
+				// If the prevNeuron is a standardNeuron (not a BiasNeuron/InputNeuron)
 				StandardNeuron* prevNeuron = dynamic_cast<StandardNeuron*>((*afferentEdge)->getPrevNeuron());
+				// Add the weighted dynamic system value of the previous neuron to the sum
 				if (prevNeuron)
 					previousValuesSum += (*afferentEdge)->getWeight() * getDynamicSystemValueOfEdgeAtTime(edge, prevNeuron, time - 1, false, errormap);
 			}
-
+			// Calculate the dynamic system value: activationFunction'(netInput) * (previousValue + output of the prev neuron, if the next neuron is the current one)
 			dynamicSystemCache[edge][neuron][time].first = neuron->executeDerivationOnActivationFunction(netInputValuesInTime[time][neuron]) * (previousValuesSum + (edge->getNextNeuron() == neuron ? outputValuesInTime[time - 1][edge->getPrevNeuron()] : 0));
 		}
-		else if (time == 0)
-			dynamicSystemCache[edge][neuron][time].first = 0;
 		else
 			dynamicSystemCache[edge][neuron][time].first = 0;
+		// Set the cache to valid
 		dynamicSystemCache[edge][neuron][time].second = true;
 	}
+	// Return the cached value
 	return dynamicSystemCache[edge][neuron][time].first;
 }
 
 bool RealTimeRecurrentLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
 {
+	// Always do one step
 	*nextTimeStepCount = 1;
+	// Increment the current starttime
 	(*nextStartTime)++;
 	currentTimeStep = *nextStartTime;
+	// Only continue if we have not reached the end of the teachingLesson
 	return (*nextStartTime < teachingLesson.getMaxTimeStep() + 1);
 }
 

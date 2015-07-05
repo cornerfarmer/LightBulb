@@ -19,10 +19,12 @@ private:
 	// The values we will put into the neural network
 	std::unique_ptr<NeuralNetworkIO<float>> teachingPattern;
 protected:	
+	// Inherited:
 	NeuralNetworkIO<float>* getTeachingInput(AbstractActivationFunction* activationFunction);
 	NeuralNetworkIO<float>* getTeachingPattern();
 public:
 	TeachingLessonLinearInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<float>* teachingInput_);
+	// Inherited:
 	AbstractTeachingLesson* unfold();
 	int getMaxTimeStep();
 };

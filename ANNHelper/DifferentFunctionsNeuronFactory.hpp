@@ -34,6 +34,7 @@ private:
 public:	
 	DifferentFunctionsNeuronFactory(AbstractThreshold* thresholdInnerNeuron_, AbstractInputFunction* inputFunctionInnerNeuron_, AbstractActivationFunction* activationFunctionInnerNeuron_, AbstractOutputFunction* outputFunctionInnerNeuron_, AbstractThreshold* thresholdOutputNeuron_, AbstractInputFunction* inputFunctionOutputNeuron_, AbstractActivationFunction* activationFunctionOutputNeuron_, AbstractOutputFunction* outputFunctionOutputNeuron_);
 	DifferentFunctionsNeuronFactory(const DifferentFunctionsNeuronFactory &obj);
+	// Inherited:
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();
 	StandardNeuron* createOutputNeuron();

@@ -18,12 +18,19 @@ class AbstractNeuronFactory;
 // This struct contains all options needed to build a FreeNetwork
 struct FreeNetworkOptions
 {	
+	// Specifies the neuron factory
 	AbstractNeuronFactory* neuronFactory;
+	// Enables the use of a bias neuron
 	bool useBiasNeuron;
+	// Sets the total neuron count
 	unsigned int neuronCount;
+	// Enables real input neurons
 	bool realInputNeurons;
+	// Sets the input neurons count (only if the network should use real input neurons)
 	unsigned int inputNeuronCount;
+	// Specifies the indices of the input neurons (only needed if the network should not use real input neurons)
 	std::vector<unsigned int> inputNeuronsIndices;
+	// Specifies the indices of the output neurons
 	std::vector<unsigned int> outputNeuronsIndices;
 	FreeNetworkOptions();
 	~FreeNetworkOptions();
@@ -31,15 +38,20 @@ struct FreeNetworkOptions
 };
 
 
-// 
+// A free network can have any kind of structure. There are no rules.
 class FreeNetwork : public AbstractNetworkTopology, public RecurrentNetworkInterface
 {
 protected:
 	std::unique_ptr<FreeNetworkOptions> options;
+	// Holds all neurons
 	std::vector<StandardNeuron*> neurons;
+	// Holds all input neurons
 	std::vector<AbstractNeuron*> inputNeurons;
+	// Holds all output neurons
 	std::vector<StandardNeuron*> outputNeurons;
+	// Holds the bias neurons
 	BiasNeuron biasNeuron;
+	// Builds the network from the given options
 	void buildNetwork();	
 public:
 	~FreeNetwork();
@@ -61,7 +73,7 @@ public:
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
-
+	// Adds a neuron to the network
 	AbstractNeuron* addNeuron(bool refreshNeuronCounters, bool inputNeuron = false);
 	// Inherited:
 	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);

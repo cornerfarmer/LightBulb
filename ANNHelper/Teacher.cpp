@@ -44,7 +44,9 @@ float Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrd
 
 std::unique_ptr<Teacher> Teacher::unfold()
 {
+	// Create a new teacher
 	std::unique_ptr<Teacher> unfoldedTeacher(new Teacher());
+	// Unfold all teaching lessons
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
 	{
 		unfoldedTeacher->addTeachingLesson((*originalTeachingLesson)->unfold());
@@ -55,6 +57,7 @@ std::unique_ptr<Teacher> Teacher::unfold()
 int Teacher::getMaxTimeStep()
 {
 	int maxTimeStep = 0;
+	// Find the biggest timestep of all teaching lessons
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
 	{
 		maxTimeStep = std::max(maxTimeStep, (*teachingLesson)->getMaxTimeStep());

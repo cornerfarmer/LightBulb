@@ -11,13 +11,13 @@
 // Forward declarations
 
 
-// A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
+// A CascadeCorrelationNetwork is layered network which has only one input and one output layer at the beginning. It grows while it learns.
 class CascadeCorrelationNetwork : public LayeredNetwork
 {
 private:	
 public:
-	CascadeCorrelationNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount);		
-	
+	// Create a new CascadeCorrelationNetwork with the given input and output size
+	CascadeCorrelationNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount);	
 };
 
 #endif

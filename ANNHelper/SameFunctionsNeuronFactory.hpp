@@ -28,6 +28,7 @@ private:
 public:	
 	SameFunctionsNeuronFactory(AbstractThreshold* threshold, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
 	SameFunctionsNeuronFactory(const SameFunctionsNeuronFactory &obj);
+	// Inherited:
 	InputNeuron* createInputNeuron();
 	StandardNeuron* createInnerNeuron();
 	StandardNeuron* createOutputNeuron();

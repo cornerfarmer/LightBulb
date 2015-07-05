@@ -39,11 +39,17 @@ public:
 	void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL);
 	// Calculates the value of the activation function derivation 
 	float executeDerivationOnActivationFunction(float input);
+	// Returns the afferent edges
 	std::list<Edge*>* getAfferentEdges();
+	// Returs the netInput
 	float getNetInput();
+	// Returns the activation function
 	AbstractActivationFunction* getActivationFunction();
+	// Returns the threshold
 	AbstractThreshold* getThreshold();
+	// Sets the additional input
 	void setAdditionalInput(float newAdditionalInput);
+	// Sets the current activation
 	void injectActivation(float newActivation);
 };
 

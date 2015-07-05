@@ -22,12 +22,13 @@ ResilientLearningRateHelper::ResilientLearningRateHelper()
 
 void ResilientLearningRateHelper::initialize(NeuralNetwork &neuralNetwork)
 {
-	// Initialize the learningRates vector with the size of the total edge count
+	// Make sure the previous learning rates map is empty
 	previousLearningRates.clear();
 }
 
 float ResilientLearningRateHelper::getLearningRate(Edge* edge, float gradient)
 {
+	// If there is no prevous learning rate, set it to the start value
 	if (previousLearningRates.count(edge) == 0)
 		previousLearningRates[edge] = options->learningRateStart;
 
@@ -73,6 +74,7 @@ void ResilientLearningRateHelper::printDebugOutput()
 
 bool ResilientLearningRateHelper::learningHasStopped()
 {
+	// If the previousLearningRates map is not empty (so we have done at least one iteration)
 	if (!previousLearningRates.empty())
 	{
 		bool learningHasStopped = true;
@@ -80,12 +82,14 @@ bool ResilientLearningRateHelper::learningHasStopped()
 		float totalLearningRate = 0;
 		for (std::map<Edge*, float>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		{
+			// If the learning rate is in the allowed range, continue learning
 			if (abs(previousLearningRate->second) > options->learningRateMin && abs(previousLearningRate->second) < options->learningRateMax)
 				learningHasStopped = false;
 		
 			totalLearningRate += abs(previousLearningRate->second);
 		}
 
+		// If the totalLearningRate is below the minium stop the learning process
 		if (totalLearningRate < options->minLearningRate)
 			learningHasStopped = true;
 

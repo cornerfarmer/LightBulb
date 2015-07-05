@@ -29,9 +29,8 @@ struct ResilientLearningRateHelperOptions
 	float learningRateMin;
 	// Sets the start value of all learningRates
 	float learningRateStart;
-
+	// The lowest total learning rate (if the current value is smaller than this value the learning process will stop)
 	float minLearningRate;
-
 	ResilientLearningRateHelperOptions()
 	{
 		learningRateGrowFac = 1.2f;
@@ -47,15 +46,20 @@ struct ResilientLearningRateHelperOptions
 class ResilientLearningRateHelper
 {
 private:
-	std::map<Edge*, float> previousLearningRates;		
+	// Holds for every edge its previous learning rate
+	std::map<Edge*, float> previousLearningRates;
 	ResilientLearningRateHelperOptions* options;
 public:
-	float getLearningRate(Edge* edge, float gradient);
-	void printDebugOutput();
-	bool learningHasStopped();
-	void initialize(NeuralNetwork &neuralNetwork);	
 	ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_);
 	ResilientLearningRateHelper();
+	// Computes the new learning rate of the given edge from the given gradient
+	float getLearningRate(Edge* edge, float gradient);
+	// Print a short debug output (totalLearningRate)
+	void printDebugOutput();
+	// Returns if the learning has stopped
+	bool learningHasStopped();
+	// Initializes the ResilientLearningRateHelper
+	void initialize(NeuralNetwork &neuralNetwork);	
 };
 
 #endif

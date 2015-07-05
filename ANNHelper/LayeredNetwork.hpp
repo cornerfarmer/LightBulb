@@ -17,10 +17,15 @@ class AbstractNeuronFactory;
 // This struct contains all options needed to build a LayeredNetwork
 struct LayeredNetworkOptions
 {	
+	// Specifies the neuron factory
 	AbstractNeuronFactory* neuronFactory;
+	// Enables shourtcut edges
 	bool enableShortcuts;
+	// Enables a bias neuron
 	bool useBiasNeuron;
+	// Specifies the neuron count of every layer
 	std::vector<unsigned int> neuronsPerLayerCount;
+	// Specifies which neurons of the last layer will be used as output neurons (if empty, the whole last layer will be used)
 	std::vector<unsigned int> outputNeuronsIndices;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
@@ -34,12 +39,19 @@ class LayeredNetwork : public AbstractNetworkTopology
 {
 protected:
 	std::unique_ptr<LayeredNetworkOptions_t> options;
+	// Holds all neurons
 	std::vector<std::vector<StandardNeuron*>> neurons;
+	// Holds the bias neuron
 	BiasNeuron biasNeuron;
+	// Holds all output neurons
 	std::vector<StandardNeuron*> outputNeurons;
+	// Holds all input neurons
 	std::vector<AbstractNeuron*> inputNeurons;
+	// Builds the network from the given options
 	void buildNetwork();	
+	// Refreshes the neuronPerLayerCounters
 	void refreshNeuronsPerLayerCounters();
+	// Rebuilds the output neurons vector from the outputNeuronsIndices option
 	void rebuildOutputNeurons();
 public:
 	~LayeredNetwork();
@@ -55,15 +67,15 @@ public:
 	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(float randStart, float randEnd);
-
+	// Adds a new neuron into the specified layer
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters, bool addEdgesToNextLayer);
-
+	// Removes the neuron with given index from a layer
 	void removeNeuronFromLayer(int layerIndex, int neuronIndex);
-
+	// Removes the givem neuron from a layer
 	void removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove);
-
+	// Adds a new layer
 	void addNewLayer(int layerIndex, int initialNeuronCount);
-
+	// Adds a given neuron to a layer
 	void addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters);
 	// Calculates the Edge count
 	int getEdgeCount();
@@ -77,6 +89,7 @@ public:
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
+	// Returns the bias neuron
 	BiasNeuron* getBiasNeuron();
 };
 

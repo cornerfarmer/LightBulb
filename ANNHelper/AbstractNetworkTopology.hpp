@@ -30,15 +30,15 @@ public:
 	virtual std::vector<std::vector<StandardNeuron*>>* getNeurons() = 0;
 	// Calculates the Edge count
 	virtual int getEdgeCount() = 0;
-
+	// Reset the activation of all neurons
 	virtual void resetActivation() = 0;
-
+	// Puts all current neuronOutputValues into the given map
 	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs) = 0;
-	
+	// Puts all current neuronNetInputValues into the given map
 	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs) = 0;
 	// Copies the weight from all matching edges from the other network into the current one
 	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
-
+	// Returns the biasNeuron
 	virtual BiasNeuron* getBiasNeuron() = 0;
 };
 

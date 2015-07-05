@@ -20,6 +20,7 @@ std::unique_ptr<NeuralNetworkIO<float>> NeuralNetwork::calculate(NeuralNetworkIO
 {
 	std::unique_ptr<NeuralNetworkIO<float>> output(new NeuralNetworkIO<float>());
 
+	// If the calculation start at time 0
 	if (startTime == 0)
 	{
 		// Reset all activations
@@ -76,11 +77,13 @@ void NeuralNetwork::setInput(std::vector<float>* inputVector)
 	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
 	{
 		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
+		// If its a real input neuron set the input as input of the neuron
 		if (inputNeuron)
 			inputNeuron->setInput(inputVector ? (*inputVector)[index] : 0);
 		else
 		{
 			StandardNeuron* standardNeuron = dynamic_cast<StandardNeuron*>(*neuron);
+			// If its a standard neuron, set the input as additional input
 			if (standardNeuron)
 				standardNeuron->setAdditionalInput(inputVector ? (*inputVector)[index] : 0);
 			else

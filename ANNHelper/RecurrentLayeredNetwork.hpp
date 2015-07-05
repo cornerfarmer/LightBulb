@@ -10,8 +10,11 @@
 // This struct contains all options needed to build a RecurrentLayeredNetwork
 struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
 {	
+	// Enables edges from the output neurons to the first hidden layer neurons 
 	bool connectOutputWithInnerNeurons;
+	// Enables edges between all neurons inside a hidden layer
 	bool selfConnectHiddenLayers;
+	// Enables edges between all neurons inside the output layer
 	bool selfConnectOutputLayers;
 	RecurrentLayeredNetworkOptions()
 	{

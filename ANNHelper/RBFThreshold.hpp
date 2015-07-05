@@ -23,6 +23,7 @@ public:
 	std::vector<float>* getCenterVector();
 	float getWidth();
 	void setWidth(float newWidth);
+	// Inherited:
 	AbstractThreshold* getCopy();
 };
 

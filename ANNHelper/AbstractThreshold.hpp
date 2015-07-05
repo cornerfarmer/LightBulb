@@ -9,6 +9,7 @@ class AbstractThreshold
 private:
 public:
 	virtual ~AbstractThreshold() {}
+	// Returns a copy of the threshold
 	virtual AbstractThreshold* getCopy() = 0;
 };
 

@@ -22,8 +22,7 @@ class StandardNeuron;
 struct SchmidhuberLearningRuleOptions : public AbstractLearningRuleOptions
 {	
 	// Sets the learning Rate
-	float learningRate;	
-
+	float learningRate;
 	SchmidhuberLearningRuleOptions()
 	{
 		learningRate = 0.45f;
@@ -31,7 +30,7 @@ struct SchmidhuberLearningRuleOptions : public AbstractLearningRuleOptions
 	}
 };
 
-// The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
+// The SchmidhuberLearningRule combines RTRL and BPTT to train recurrent networks faster
 class SchmidhuberLearningRule : public AbstractLearningRule
 {
 private:	
@@ -41,15 +40,25 @@ private:
 	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
 	// This vector should hold all delta values in all timesteps (The boolean value holds the information, if the deltavalue is valid)
 	std::map<AbstractNeuron*, std::vector<std::pair<float, bool>>> deltaVectorOutputLayer;
+	// Caches all current dynamic system values
 	std::unique_ptr<std::map<StandardNeuron*, std::map<Edge*, float>>> currentDynamicSystemValues;
+	// Caches all previous dynamic system values 
 	std::unique_ptr<std::map<StandardNeuron*, std::map<Edge*, float>>> oldDynamicSystemValues;
+	// Holds the size of the current computation block
 	int currentBlockSize;
+	// Holds the start of the current computation block
 	int currentBlockStart;
-	float getGammaOfNeuronsInTime(StandardNeuron* neuronj, StandardNeuron* neuronk, int time);
-	float getDynamicSystemValue(StandardNeuron* neuron, Edge* edge);
-	AbstractNetworkTopology* currentNetworkTopology;
-	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap);
+	// Holds all previous gradients
 	std::map<Edge*, float> lastGradients;
+	// Computes the gamma value of a neuron in a given timestep depending on another neuron
+	float getGammaOfNeuronsInTime(StandardNeuron* neuronj, StandardNeuron* neuronk, int time);
+	// Computes the dynamic system value of a the depending on a neuron (RTRL part of the algorithm)
+	float getDynamicSystemValue(StandardNeuron* neuron, Edge* edge);
+	// Holds the current network topology
+	AbstractNetworkTopology* currentNetworkTopology;
+	// Returns the delta vector/value of a neuron at a given timestep (BTTP part of the algorithm)
+	float getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap);
+
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);

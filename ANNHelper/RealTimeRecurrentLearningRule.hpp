@@ -22,9 +22,8 @@ struct RealTimeRecurrentLearningRuleOptions : public AbstractLearningRuleOptions
 {	
 	// Sets the learning Rate
 	float learningRate;	
-
+	// Enables teacherForcing which can speed up the learning progress
 	bool teacherForcing;
-
 	RealTimeRecurrentLearningRuleOptions()
 	{
 		learningRate = 0.45f;
@@ -33,10 +32,11 @@ struct RealTimeRecurrentLearningRuleOptions : public AbstractLearningRuleOptions
 	}
 };
 
-// The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
+// The RealTimeRecurrentLearningRule can be used to train any sort of recurrent network
 class RealTimeRecurrentLearningRule : public AbstractLearningRule
 {
 private:	
+	// Holds all teachingInputs for all neurons in all timesteps of the current teaching lesson (needed for teacherForcing)
 	std::unique_ptr<ErrorMap_t> currentTeachingInputMap;
 	// Holds all output values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> outputValuesInTime;
@@ -44,8 +44,11 @@ private:
 	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
 	// This vector should hold all delta values
 	std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>> dynamicSystemCache;
+	// Returns the value of the dynamic system of an edge at a specific time point
 	float getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap);
+	// The current network topology
 	AbstractNetworkTopology* currentNetworkTopology;
+	// The current time step
 	int currentTimeStep;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
