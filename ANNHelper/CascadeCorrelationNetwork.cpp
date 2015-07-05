@@ -8,6 +8,12 @@
 
 CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount)
 {
+	// Check if all given options are correct
+	if (inputNeuronCount == 0)
+		throw std::invalid_argument("The given inputNeuronCount has to be greater than 0");
+	if (outputNeuronCount == 0)
+		throw std::invalid_argument("The given outputNeuronCount has to be greater than 0");
+
 	// Create a new options object
 	options.reset(new LayeredNetworkOptions());
 	// Set all options

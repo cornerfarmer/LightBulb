@@ -14,6 +14,10 @@
 DeltaLearningRule::DeltaLearningRule(DeltaLearningRuleOptions &options_)
 	: AbstractLearningRule(new DeltaLearningRuleOptions(options_)) 
 {
+	// Check if all given options are correct
+	// Check if the given neuronPlacer is valid
+	if (getOptions()->neuronPlacer == NULL)
+		throw std::invalid_argument("The given neuronPlacer is not valid");
 	// If we should use a resilient learnig rate
 	if (getOptions()->resilientLearningRate)
 	{

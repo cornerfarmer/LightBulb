@@ -7,6 +7,15 @@
 RBFNetworkStructureChart::RBFNetworkStructureChart(RBFNetworkStructureChartOptions &options_)
 {
 	options = options_;
+	// Check if all given options are correct
+	// Check if the given neural network is valid
+	if (options.rbfNetwork == NULL)
+		throw std::invalid_argument("The given rbfNetwork is not valid");
+	// Check if the indices are correct
+	if (options.xRBFNeuronCenterCoordinateIndex >= options.rbfNetwork->getInputNeurons()->size())
+		throw std::invalid_argument("Can't find any coordinate with index 'xRBFNeuronCenterCoordinateIndex'");
+	if (options.yRBFNeuronCenterCoordinateIndex >= options.rbfNetwork->getInputNeurons()->size())
+		throw std::invalid_argument("Can't find any coordinate with index 'yRBFNeuronCenterCoordinateIndex'");
 }
 
 void RBFNetworkStructureChart::recalculateAllValues()

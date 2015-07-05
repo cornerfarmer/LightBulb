@@ -19,7 +19,7 @@ float BinaryFunction::execute(float input, AbstractThreshold* threshold)
 float BinaryFunction::executeDerivation(float input, AbstractThreshold* threshold)
 {
 	// A binary function does not have a derivation => throw a exception
-	throw std::logic_error("There is no derivation of the binary function possible");
+	throw std::logic_error("There is no derivation of the binary function");
 	return 0;
 }
 

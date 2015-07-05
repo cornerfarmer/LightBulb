@@ -3,6 +3,7 @@
 #include "StandardNeuron.hpp"
 #include "AbstractNetworkTopology.hpp"
 #include "Edge.hpp"
+#include "LayeredNetwork.hpp"
 #include <exception>
 
 
@@ -18,6 +19,9 @@ void LayeredNetworkTopologyDrawer::refresh()
 	// Check if the given topology is valud
 	if (options->networkTopology == NULL)
 		throw std::invalid_argument("The given networkTopology is not valid!");
+	// Check if the given topology is a LayeredNetwork
+	if (!dynamic_cast<LayeredNetwork*>(options->networkTopology))
+		throw std::invalid_argument("The given networkTopology has to be a LayeredNetwork!");
 
 	// Calculate the offset between two layers (The +2 is needed for input neurons and a border)
 	int layerOffset = options->width / (options->networkTopology->getNeurons()->size() + 2);	

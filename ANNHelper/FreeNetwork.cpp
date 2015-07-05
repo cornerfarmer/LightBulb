@@ -57,6 +57,23 @@ FreeNetwork::FreeNetwork(FreeNetworkOptions &options_)
 {
 	// Copy all options
 	options.reset(new FreeNetworkOptions(options_));
+
+	// Check if all given options are correct
+	if (!options->neuronFactory)
+		throw std::invalid_argument("The given neuronFactory is not valid");
+	if (options->realInputNeurons && options->inputNeuronCount == 0)
+		throw std::invalid_argument("The given inputNeuronCount has to be greater than 0");
+	if (!options->realInputNeurons && options->inputNeuronsIndices.size() == 0)
+		throw std::invalid_argument("There has to be at least one index inside the inputNeuronsIndices vector");
+	if (options->outputNeuronsIndices.size() == 0)
+		throw std::invalid_argument("There has to be at least one index inside the outputNeuronsIndices vector");
+	for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); !options->realInputNeurons && inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+		if (*inputNeuronIndex >= options->neuronCount)
+			throw std::invalid_argument("At least one inputNeuronIndex is not valid");
+	for (std::vector<unsigned int>::iterator outputNeuronIndex = options->outputNeuronsIndices.begin(); !options->realInputNeurons && outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
+		if (*outputNeuronIndex >= options->neuronCount)
+			throw std::invalid_argument("At least one outputNeuronIndex is not valid");
+
 	// Build the network
 	buildNetwork();		
 }

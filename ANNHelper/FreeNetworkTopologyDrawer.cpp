@@ -3,6 +3,7 @@
 #include "StandardNeuron.hpp"
 #include "AbstractNetworkTopology.hpp"
 #include "Edge.hpp"
+#include "FreeNetwork.hpp"
 #include <exception>
 
 
@@ -18,6 +19,9 @@ void FreeNetworkTopologyDrawer::refresh()
 	// Check if the given topology is valid
 	if (options->networkTopology == NULL)
 		throw std::invalid_argument("The given networkTopology is not valid!");
+	// Check if the given topology is a FreeNetwork
+	if (!dynamic_cast<FreeNetwork*>(options->networkTopology))
+		throw std::invalid_argument("The given networkTopology has to be a FreeNetwork!");
 
 	// Place all neurons on the border of a circle
 	float angleDistance = (M_PI * 2) / options->networkTopology->getNeurons()->front().size();
