@@ -1,5 +1,6 @@
 #include "IdentityFunction.hpp"
 #include <limits>
+#include <stdexcept>
 
 float IdentityFunction::execute(float input)
 {
@@ -28,15 +29,15 @@ AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
 
 float IdentityFunction::getMaximum()
 {
-	return std::numeric_limits<float>::infinity();
+	throw std::logic_error("A IdentityFunction does not have a maximum");
 }
 
 float IdentityFunction::getMinimum()
 {
-	return -std::numeric_limits<float>::infinity();
+	throw std::logic_error("A IdentityFunction does not have a maximum");
 }
 
-bool IdentityFunction::isLinear()
+bool IdentityFunction::hasAMaxAndMinimum()
 {
-	return true;
+	return false;
 }

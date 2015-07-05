@@ -20,7 +20,7 @@ public:
 	AbstractActivationFunction* getActivationFunctionCopy();
 	float getMaximum();
 	float getMinimum();
-	bool isLinear();
+	bool hasAMaxAndMinimum();
 };
 
 #endif

@@ -22,8 +22,8 @@ public:
 	virtual float getMaximum() = 0;
 	// Returns the minimum value of this function
 	virtual float getMinimum() = 0;
-	// Returns if the function is linear which does not have a minimum/maximum value
-	virtual bool isLinear() = 0;
+	// Returns if has a minimum/maximum value
+	virtual bool hasAMaxAndMinimum() = 0;
 };
 
 #endif

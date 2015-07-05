@@ -43,7 +43,7 @@ float FermiFunction::getMinimum()
 	return 0;
 }
 
-bool FermiFunction::isLinear()
+bool FermiFunction::hasAMaxAndMinimum()
 {
-	return false;
+	return true;
 }

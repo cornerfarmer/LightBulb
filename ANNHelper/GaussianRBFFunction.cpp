@@ -33,15 +33,15 @@ AbstractActivationFunction* GaussianRBFFunction::getActivationFunctionCopy()
 
 float GaussianRBFFunction::getMaximum()
 {
-	return exp(0.0);
+	throw std::logic_error("A GaussianRBFFunction does not have a maximum");
 }
 
 float GaussianRBFFunction::getMinimum()
 {
-	return 0;
+	throw std::logic_error("A GaussianRBFFunction does not have a minimum");
 }
 
-bool GaussianRBFFunction::isLinear()
+bool GaussianRBFFunction::hasAMaxAndMinimum()
 {
-	return false;
+	return true;
 }

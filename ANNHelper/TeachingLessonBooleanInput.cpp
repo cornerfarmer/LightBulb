@@ -14,7 +14,7 @@ TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<float>* t
 NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
 {
 	// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
-	if (activationFunction->isLinear())
+	if (!activationFunction->hasAMaxAndMinimum())
 		throw std::invalid_argument("The activationFunction of the outputNeurons is linear, but your teaching input is boolean.");
 
 

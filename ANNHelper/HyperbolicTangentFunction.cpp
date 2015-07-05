@@ -45,7 +45,7 @@ float HyperbolicTangentFunction::getMinimum()
 	return -1;
 }
 
-bool HyperbolicTangentFunction::isLinear()
+bool HyperbolicTangentFunction::hasAMaxAndMinimum()
 {
-	return false;
+	return true;
 }

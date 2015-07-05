@@ -38,7 +38,7 @@ float BinaryFunction::getMinimum()
 	return 0;
 }
 
-bool BinaryFunction::isLinear()
+bool BinaryFunction::hasAMaxAndMinimum()
 {
-	return false;
+	return true;
 }
