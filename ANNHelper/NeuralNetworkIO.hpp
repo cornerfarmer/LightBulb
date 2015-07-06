@@ -32,7 +32,10 @@ public:
 	// Returns the biggest timestep used in this IO
 	int getMaxTimeStep()
 	{
-		return rbegin()->first;
+		if (!empty())
+			return rbegin()->first;
+		else
+			return 0;
 	}
 };
 

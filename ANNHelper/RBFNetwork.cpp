@@ -11,6 +11,14 @@
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)
 {
+	// Check if all given options are correct
+	if (neuronCountFirstLayer == 0)
+		throw std::invalid_argument("The given neuronCountFirstLayer has to be greater than 0");
+	if (neuronCountSecondLayer == 0)
+		throw std::invalid_argument("The given neuronCountSecondLayer has to be greater than 0");
+	if (neuronCountThirdLayer == 0)
+		throw std::invalid_argument("The given neuronCountThirdLayer has to be greater than 0");
+
 	// Create a new options object
 	options.reset(new LayeredNetworkOptions());
 	// Set all options

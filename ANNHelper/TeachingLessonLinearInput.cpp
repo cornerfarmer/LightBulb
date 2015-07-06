@@ -4,6 +4,12 @@
 
 TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<float>* teachingInput_)
 {
+	// Check if all given options are correct
+	if (!teachingPattern_)
+		throw std::invalid_argument("The given teachingPattern is not valid");
+	if (!teachingInput_)
+		throw std::invalid_argument("The given teachingInput is not valid");
+
 	teachingInput = std::unique_ptr<NeuralNetworkIO<float>>(teachingInput_);
 	teachingPattern = std::unique_ptr<NeuralNetworkIO<float>>(teachingPattern_);
 }

@@ -58,12 +58,20 @@ LayeredNetwork::~LayeredNetwork()
 
 LayeredNetwork::LayeredNetwork()
 {
+	// TODO: Maybe remove this constructor
 }
 
 LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 {
 	// Copy all options
 	options.reset(new LayeredNetworkOptions(options_));
+
+	// Check if all given options are correct
+	if (getLayerCount() < 2)
+		throw std::invalid_argument("A layered network must always contain at least two layers (one input and one output layer)");
+	if (!options->neuronFactory)
+		throw std::invalid_argument("The given neuronFactory is not valid");
+
 	// Build the network
 	buildNetwork();		
 }
@@ -116,12 +124,6 @@ void LayeredNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neu
 
 void LayeredNetwork::buildNetwork()
 {
-	// Check if all given options are correct
-	if (getLayerCount() < 2)
-		throw std::invalid_argument("A layered network must always contain at least two layers (one input and one output layer)");
-	if (!options->neuronFactory)
-		throw std::invalid_argument("The given neuronFactory is not valid");
-
 	// If the given outputNeuronsIndices vector was empty, fill it with the standard values
 	if (options->outputNeuronsIndices.empty())
 	{

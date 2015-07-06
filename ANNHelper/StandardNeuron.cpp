@@ -15,6 +15,15 @@ StandardNeuron::~StandardNeuron()
 
 StandardNeuron::StandardNeuron(AbstractThreshold* threshold_, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_)
 {
+	if (!threshold_)
+		throw std::invalid_argument("The given threshold is not valid");
+	if (!inputFunction_)
+		throw std::invalid_argument("The given inputFunction is not valid");
+	if (!activationFunction_)
+		throw std::invalid_argument("The given activationFunction is not valid");
+	if (!outputFunction_)
+		throw std::invalid_argument("The given outputFunction is not valid");
+
 	inputFunction = inputFunction_;
 	activationFunction = activationFunction_;
 	outputFunction = outputFunction_;
