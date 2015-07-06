@@ -10,6 +10,7 @@
 // Includes
 #include "AbstractLearningRule.hpp"
 #include "BackpropagationLearningRule.hpp"
+#include "TruncatedBackpropagationThroughTimeLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;
@@ -21,7 +22,7 @@ class CascadeCorrelationNetwork;
 struct CascadeCorrelationLearningRuleOptions : public AbstractLearningRuleOptions
 {	
 	// The backpropagation learning rule options for the training of the output neurons
-	BackpropagationLearningRuleOptions outputNeuronsLearningRuleOptions;
+	BackpropagationThroughTimeLearningRuleOptions outputNeuronsLearningRuleOptions;
 	// The backpropagation learning rule options for the training of the candidate units
 	BackpropagationLearningRuleOptions candidateUnitsLearningRuleOptions;
 	// Add a new neuron after every n-th iteration (0 disables this feature)
@@ -59,11 +60,13 @@ private:
 	// Holds the backpropagation learning rule for training of the candidate units
 	std::unique_ptr<BackpropagationLearningRule> candidateUnitsBackpropagationLearningRule;
 	// Holds the backpropagation learning rule for training of the output neurons
-	std::unique_ptr<BackpropagationLearningRule> outputNeuronsBackpropagationLearningRule;
+	std::unique_ptr<TruncatedBackpropagationThroughTimeLearningRule> outputNeuronsBackpropagationLearningRule;
 	// The current network toplogy
 	CascadeCorrelationNetwork* currentNetworkTopology;
 	// The current teacher
 	Teacher* currentTeacher;
+
+	std::map<AbstractTeachingLesson*, std::map<Edge*, std::map<int, float>>> outputGradientCache;
 	// The cache of every output of every neuron in every timestep in every teaching lesson
 	std::map<AbstractTeachingLesson*, std::vector<std::map<AbstractNeuron*, float>>> neuronOutputCache;
 	// The cache of every net input of every candidate unit int every timestep in every teaching lesson
@@ -71,9 +74,9 @@ private:
 	// Holds all current correlation values of all output neurons corresponding to all candidate units
 	std::map<StandardNeuron*, std::map<StandardNeuron*, float>> correlations;
 	// Holds all current error factors of all output neurons in all teaching lessons
-	std::map<AbstractTeachingLesson*, std::map<StandardNeuron*, float>> errorFactors;
+	std::map<AbstractTeachingLesson*, std::map<int, std::map<StandardNeuron*, float>>> errorFactors;
 	// Computes the output gradient of an edge in a given time and lesson
-	float getOutputGradient(Edge* edge, int time, int lessonIndex);
+	float getOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson);
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
@@ -94,6 +97,9 @@ protected:
 	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
+	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);	
+	std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime();
+	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
 public:
 	CascadeCorrelationLearningRule(CascadeCorrelationLearningRuleOptions& options_);
 };

@@ -20,6 +20,7 @@ class Edge;
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
 class TruncatedBackpropagationThroughTimeLearningRule : public BackpropagationLearningRule
 {
+	friend class CascadeCorrelationLearningRule;
 private:	
 	// Holds all output values in every timestep
 	std::vector<std::map<AbstractNeuron*, float>> outputValuesInTime;

@@ -946,30 +946,28 @@ void doRecurrentCascadeCorrelationTest()
 
 	Teacher teacher;
 
-
-
-	for (int i = 0; i < 6; i++)
 	{
+		
 		NeuralNetworkIO<float>* teachingPattern = new NeuralNetworkIO<float>();
 		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
 
 		int lastPattern = -1;
-		for (int l = 0; l <= i; l++)
+		for (int l = 0; l < 6; l++)
 		{
 			(*teachingPattern)[l] = std::vector<float>(1);
 			(*teachingPattern)[l][0] = 1;
+			(*teachingInput)[l] = std::vector<bool>(1);
+			(*teachingInput)[l][0] = (l%2 == 0);	
 		}
-		(*teachingInput)[i] = std::vector<bool>(1);
-		(*teachingInput)[i][0] = (i%2 == 0);	
 
 		//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
 		//(*teachingInput)[0] = (i > l);	
 		//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
 
-		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));		
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
+	
 	}
-
 
 	//ccn->addNewLayer(1, 0);
 	//StandardNeuron* currentCandidateUnit = static_cast<StandardNeuron*>(ccn->addNeuronIntoLayer(1, true, true));
@@ -1042,6 +1040,6 @@ void doRecurrentCascadeCorrelationTest()
 
 int main()
 {
-	doRecurrentCascadeCorrelationTest();
+	doCascadeCorrelationTest();
     return 0;
 }
