@@ -46,12 +46,12 @@ AbstractActivationOrder* DeltaLearningRule::getNewActivationOrder(NeuralNetwork 
 	return new TopologicalOrder();
 }
 
-float DeltaLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+float DeltaLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
-	if (layerIndex == layerCount - 1)
+	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
 	{
 		// Use the delta rule: deltaWeight = Output(prevNeuron) * errorValue
-		return -edge->getPrevNeuron()->getActivation() * (*errormap)[0][edge->getNextNeuron()];	
+		return -edge.getPrevNeuron()->getActivation() * (*errormap)[0][edge.getNextNeuron()];	
 	}
 	else
 		return 0;

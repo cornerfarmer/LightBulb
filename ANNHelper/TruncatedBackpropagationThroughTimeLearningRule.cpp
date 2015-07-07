@@ -44,7 +44,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm
 	}
 }
 
-float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// Calculate the gradient
 	float gradient = 0;
@@ -53,10 +53,10 @@ float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromE
 	for (int t = 0; t < getOptions()->maxTimeSteps; t++)
 	{
 		// If this is not the first timestep or both neurons are in the same time step
-		if (t > 0 || (*sameTimestepEdges)[edge])
+		if (t > 0 || (*sameTimestepEdges)[&edge])
 		{
 			// Calulate and add the gradient of the current time step: - outputPrevNeuron(sameTimestepEdge ? t : t - 1) * deltaValueNextNeuron(t)
-			gradient += -1 * outputValuesInTime[(*sameTimestepEdges)[edge] ? t : t - 1][edge->getPrevNeuron()] * deltaVectorOutputLayer[edge->getNextNeuron()][t].first;
+			gradient += -1 * outputValuesInTime[(*sameTimestepEdges)[&edge] ? t : t - 1][edge.getPrevNeuron()] * deltaVectorOutputLayer[edge.getNextNeuron()][t].first;
 		}
 	}
 
@@ -64,13 +64,13 @@ float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromE
 	return gradient / getOptions()->maxTimeSteps;
 }
 
-void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// Go through all timesteps
 	for (int t = 0; t < getOptions()->maxTimeSteps; t++)
 	{
 		// Calculate the delta vector of the current neuron
-		getDeltaVectorOfNeuronInTime(neuron, t, errormap);
+		getDeltaVectorOfNeuronInTime(&neuron, t, errormap);
 	}
 }
 

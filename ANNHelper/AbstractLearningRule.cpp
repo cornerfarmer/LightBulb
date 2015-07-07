@@ -46,6 +46,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	tryCounter = 0;
 	totalError = 0;
 	iteration = 0;
+
+	currentNeuralNetwork = &initializedNeuralNetwork;
+	currentTeacher = &initializedTeacher;
 	
 	// Start a new try
 	do
@@ -127,7 +130,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						for (int n = 0; n < neuronsInLayer->size(); n++)
 						{					
 							// Let the algorithm do some work for the actual neuron
-							initializeNeuronWeightCalculation((*neuronsInLayer)[n], lessonIndex, l, n, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
+							initializeNeuronWeightCalculation(*teachingLesson->get(), *neuronsInLayer, *(*neuronsInLayer)[n], lessonIndex, l, n, errormap.get());
 
 							std::list<Edge*>* afferentEdges = ((*neuronsInLayer)[n])->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
@@ -135,7 +138,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
 							{			
 								// Calculate the deltaWeight
-								float deltaWeight = calculateDeltaWeightFromEdge(*edge, lessonIndex, l, n, edgeIndex, initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size(), neuronsInLayerCount, errormap.get());
+								float deltaWeight = calculateDeltaWeightFromEdge(*teachingLesson->get(), *neuronsInLayer, *(*neuronsInLayer)[n], **edge, lessonIndex, l, n, edgeIndex, errormap.get());
 
 								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
  								if (options->offlineLearning)

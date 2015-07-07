@@ -31,7 +31,7 @@ void RealTimeRecurrentLearningRule::initializeLearningAlgoritm(NeuralNetwork &ne
 }
 
 
-float RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+float RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	float outputNeuronsDependency = 0;
 	// Go through all error maps
@@ -41,7 +41,7 @@ float RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(Edge* edge, in
 		for (std::map<StandardNeuron*, float>::iterator outputNeuron = outputNeurons->second.begin(); outputNeuron != outputNeurons->second.end(); outputNeuron++)
 		{
 			// Add to the gradient: errorvalue * dynamicSystemValue
-			outputNeuronsDependency += outputNeuron->second * getDynamicSystemValueOfEdgeAtTime(edge, outputNeuron->first, outputNeurons->first, true, errormap);
+			outputNeuronsDependency += outputNeuron->second * getDynamicSystemValueOfEdgeAtTime(&edge, outputNeuron->first, outputNeurons->first, true, errormap);
 		}
 	}
 	// If teacher forcing is enabled
@@ -62,7 +62,7 @@ float RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(Edge* edge, in
 	return getOptions()->learningRate * outputNeuronsDependency;
 }
 
-void RealTimeRecurrentLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+void RealTimeRecurrentLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	
 }

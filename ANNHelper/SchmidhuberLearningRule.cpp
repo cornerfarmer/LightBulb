@@ -44,9 +44,9 @@ void SchmidhuberLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNe
 }
 
 
-float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
-	float gradient = lastGradients[edge];
+	float gradient = lastGradients[&edge];
 	// If this is not the first block
 	if (currentBlockStart != 0)
 	{
@@ -54,7 +54,7 @@ float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int less
 		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
 			// Add to the gradient: last delta vector * dynamicSystemValue
-			gradient -= getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart - 1, errormap) * (*currentDynamicSystemValues)[*outputNeuron][edge];
+			gradient -= getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart - 1, errormap) * (*currentDynamicSystemValues)[*outputNeuron][&edge];
 		}
 	}
 
@@ -62,7 +62,7 @@ float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int less
 	for (int t = currentBlockStart + (currentBlockStart == 0 ? 1 : 0); t < currentBlockStart + currentBlockSize; t++)
 	{
 		// Add to the gradient: deltaVector * previous output
-		gradient -= getDeltaVectorOfNeuronInTime(edge->getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge->getPrevNeuron()];
+		gradient -= getDeltaVectorOfNeuronInTime(edge.getNextNeuron(), t, errormap) * outputValuesInTime[t - 1][edge.getPrevNeuron()];
 	}	
 
 	// TODO: discuss if we should also add/remember the last gradient. The algorithm says to do that, but first experiences and my mind sayed not.
@@ -129,7 +129,7 @@ float SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Edg
 	return dynamicSystemValue;
 }
 
-void SchmidhuberLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+void SchmidhuberLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	
 }

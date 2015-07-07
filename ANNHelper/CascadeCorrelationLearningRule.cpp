@@ -40,30 +40,29 @@ void CascadeCorrelationLearningRule::initializeLearningAlgoritm(NeuralNetwork &n
 }
 
 
-float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// If the learning rule is in output neurons learning mode, let the backpropagation learning rule do the work
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)	
 	{
 		float gradient = 0;
 
-		gradient += outputNeuronsBackpropagationLearningRule->calculateDeltaWeightFromEdge(edge, lessonIndex, layerIndex, neuronIndex, edgeIndex, layerCount, neuronsInLayerCount, errormap);
+		gradient += outputNeuronsBackpropagationLearningRule->calculateDeltaWeightFromEdge(lesson, layer, neuron, edge, lessonIndex, layerIndex, neuronIndex, edgeIndex, errormap);
 
 		return gradient;
 	}
-	else if (currentMode == CANDIDATEUNITLEARNINGMODE && std::find(currentCandidateUnits.begin(), currentCandidateUnits.end(), edge->getNextNeuron()) != currentCandidateUnits.end())
+	else if (currentMode == CANDIDATEUNITLEARNINGMODE && std::find(currentCandidateUnits.begin(), currentCandidateUnits.end(), edge.getNextNeuron()) != currentCandidateUnits.end())
 	{
 		// If we are in candidate unit learning mode and the current edge points to a candidate unit
 		float gradient = 0;
-		AbstractTeachingLesson* teachingLesson = (*currentTeacher->getTeachingLessons())[lessonIndex].get();
-
-		for (std::map<int, std::map<StandardNeuron*, float>>::iterator errorFactor = errorFactors[teachingLesson].begin(); errorFactor != errorFactors[teachingLesson].end(); errorFactor++)
+	
+		for (std::map<int, std::map<StandardNeuron*, float>>::iterator errorFactor = errorFactors[&lesson].begin(); errorFactor != errorFactors[&lesson].end(); errorFactor++)
 		{
 			// Go through all output neurons  
 			for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 			{
 				// Add to the gradient: sign(correlation) * outputgradient * errorfac
-				gradient += (correlations[edge->getNextNeuron()][*outputNeuron] > 0 ? 1 : (correlations[edge->getNextNeuron()][*outputNeuron] < 0 ? -1 : 0)) * getOutputGradient(edge, errorFactor->first, teachingLesson) * errorFactor->second[*outputNeuron];
+				gradient += (correlations[edge.getNextNeuron()][*outputNeuron] > 0 ? 1 : (correlations[edge.getNextNeuron()][*outputNeuron] < 0 ? -1 : 0)) * getOutputGradient(&edge, errorFactor->first, &lesson) * errorFactor->second[*outputNeuron];
 			}			
 		}
 
@@ -105,11 +104,11 @@ float CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, Ab
 		return calcOutputGradient(edge, time, lesson);
 }
 
-void CascadeCorrelationLearningRule::initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap)
+void CascadeCorrelationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// If we are in output neurons learning mode, let the backpropagation learning rule do some work
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)
-		outputNeuronsBackpropagationLearningRule->initializeNeuronWeightCalculation(neuron, lessonIndex, layerIndex, neuronIndex, layerCount, neuronsInLayerCount, errormap);
+		outputNeuronsBackpropagationLearningRule->initializeNeuronWeightCalculation(lesson, layer, neuron, lessonIndex, layerIndex, neuronIndex, errormap);
 }
 
 
