@@ -66,7 +66,7 @@ private:
 	// The current teacher
 	Teacher* currentTeacher;
 
-	std::map<AbstractTeachingLesson*, std::map<Edge*, std::map<int, float>>> outputGradientCache;
+	std::map<AbstractTeachingLesson*, std::map<Edge*, std::map<int, std::pair<float, bool>>>> outputGradientCache;
 	// The cache of every output of every neuron in every timestep in every teaching lesson
 	std::map<AbstractTeachingLesson*, std::vector<std::map<AbstractNeuron*, float>>> neuronOutputCache;
 	// The cache of every net input of every candidate unit int every timestep in every teaching lesson
@@ -77,6 +77,8 @@ private:
 	std::map<AbstractTeachingLesson*, std::map<int, std::map<StandardNeuron*, float>>> errorFactors;
 	// Computes the output gradient of an edge in a given time and lesson
 	float getOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson);
+	float getOutputGradientCached(Edge* edge, int time, AbstractTeachingLesson* lesson);
+	float calcOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson);
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, float gradient);
@@ -97,7 +99,6 @@ protected:
 	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
-	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);	
 	std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime();
 	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
 public:

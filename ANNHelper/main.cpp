@@ -1040,6 +1040,6 @@ void doRecurrentCascadeCorrelationTest()
 
 int main()
 {
-	doCascadeCorrelationTest();
+	doRecurrentCascadeCorrelationTest();
     return 0;
 }

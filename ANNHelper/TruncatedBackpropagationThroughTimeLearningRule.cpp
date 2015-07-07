@@ -122,7 +122,7 @@ std::vector<std::map<AbstractNeuron*, float>>* TruncatedBackpropagationThroughTi
 	return &netInputValuesInTime;
 }
 
-void TruncatedBackpropagationThroughTimeLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
+void TruncatedBackpropagationThroughTimeLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {
 	// Go through all hidden/output layers
 	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)

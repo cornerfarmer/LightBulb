@@ -41,7 +41,7 @@ protected:
 	std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime();
 	void initializeNeuronWeightCalculation(StandardNeuron* neuron, int lessonIndex, int layerIndex, int neuronIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errormap);
 	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
-	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);
+	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 public:
