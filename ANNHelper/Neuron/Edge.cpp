@@ -1,4 +1,4 @@
-#include "Edge.hpp"
+#include "Neuron\Edge.hpp"
 #include <cstdlib>
 #include <stdexcept>
 

@@ -1,4 +1,4 @@
-#include "BiasNeuron.hpp"
+#include "Neuron\BiasNeuron.hpp"
 
 BiasNeuron::BiasNeuron()
 {

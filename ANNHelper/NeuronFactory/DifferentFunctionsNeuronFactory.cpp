@@ -1,10 +1,10 @@
-#include "DifferentFunctionsNeuronFactory.hpp"
-#include "InputNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "AbstractInputFunction.hpp"
-#include "AbstractActivationFunction.hpp"
-#include "AbstractOutputFunction.hpp"
-#include "AbstractThreshold.hpp"
+#include "NeuronFactory\DifferentFunctionsNeuronFactory.hpp"
+#include "Neuron\InputNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Function\AbstractInputFunction.hpp"
+#include "Function\AbstractActivationFunction.hpp"
+#include "Function\AbstractOutputFunction.hpp"
+#include "Neuron\AbstractThreshold.hpp"
 #include <exception>
 
 

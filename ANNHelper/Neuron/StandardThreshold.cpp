@@ -1,4 +1,4 @@
-#include "StandardThreshold.hpp"
+#include "Neuron\StandardThreshold.hpp"
 
 StandardThreshold::StandardThreshold(float value_)
 {

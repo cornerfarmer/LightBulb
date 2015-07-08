@@ -4,7 +4,7 @@
 #define _STANDARDTHRESHOLD_H_
 
 // Includes
-#include "AbstractThreshold.hpp"
+#include "Neuron\AbstractThreshold.hpp"
 
 // A StandardThreshold just consists of one float value
 class StandardThreshold : public AbstractThreshold

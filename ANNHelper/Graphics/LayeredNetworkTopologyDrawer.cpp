@@ -1,9 +1,9 @@
-#include "LayeredNetworkTopologyDrawer.hpp"
-#include "AbstractNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "Edge.hpp"
-#include "LayeredNetwork.hpp"
+#include "Graphics\LayeredNetworkTopologyDrawer.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\Edge.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
 #include <exception>
 
 

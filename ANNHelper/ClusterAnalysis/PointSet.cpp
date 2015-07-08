@@ -1,5 +1,5 @@
-#include "PointSet.hpp"
-#include "Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
+#include "ClusterAnalysis\Point.hpp"
 #include <math.h>
 
 void PointSet::refreshMaxDistances()

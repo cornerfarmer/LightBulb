@@ -1,13 +1,13 @@
-#include "RBFNetwork.hpp"
-#include "DifferentFunctionsNeuronFactory.hpp"
-#include "RBFThreshold.hpp"
-#include "EuclideanDistance.hpp"
-#include "GaussianRBFFunction.hpp"
-#include "WeightedSumFunction.hpp"
-#include "IdentityFunction.hpp"
-#include "StandardThreshold.hpp"
-#include "Edge.hpp"
-#include "StandardNeuron.hpp"
+#include "NetworkTopology\RBFNetwork.hpp"
+#include "NeuronFactory\DifferentFunctionsNeuronFactory.hpp"
+#include "Neuron\RBFThreshold.hpp"
+#include "Function\EuclideanDistance.hpp"
+#include "Function\GaussianRBFFunction.hpp"
+#include "Function\WeightedSumFunction.hpp"
+#include "Function\IdentityFunction.hpp"
+#include "Neuron\StandardThreshold.hpp"
+#include "Neuron\Edge.hpp"
+#include "Neuron\StandardNeuron.hpp"
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)
 {

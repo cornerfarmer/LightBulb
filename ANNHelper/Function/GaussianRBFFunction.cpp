@@ -1,5 +1,5 @@
-#include "GaussianRBFFunction.hpp"
-#include "RBFThreshold.hpp"
+#include "Function\GaussianRBFFunction.hpp"
+#include "Neuron\RBFThreshold.hpp"
 #include <limits>
 #include <stdexcept>
 

@@ -8,8 +8,8 @@
 #include <map>
 
 // Includes
-#include "BackpropagationLearningRule.hpp"
-#include "BackpropagationThroughTimeLearningRule.hpp"
+#include "Learning\BackpropagationLearningRule.hpp"
+#include "Learning\BackpropagationThroughTimeLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;

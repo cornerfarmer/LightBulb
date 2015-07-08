@@ -1,10 +1,10 @@
-#include "FreeNetwork.hpp"
-#include "InputNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "BiasNeuron.hpp"
-#include "Edge.hpp"
-#include "AbstractNeuronFactory.hpp"
-#include "LayeredNetwork.hpp"
+#include "NetworkTopology\FreeNetwork.hpp"
+#include "Neuron\InputNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\BiasNeuron.hpp"
+#include "Neuron\Edge.hpp"
+#include "NeuronFactory\AbstractNeuronFactory.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
 #include <exception>
 
 FreeNetworkOptions::FreeNetworkOptions()

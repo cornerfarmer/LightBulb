@@ -7,7 +7,7 @@
 #include <math.h>
 
 // Includes
-#include "AbstractActivationFunction.hpp"
+#include "Function\AbstractActivationFunction.hpp"
 
 class GaussianRBFFunction : public AbstractActivationFunction
 {

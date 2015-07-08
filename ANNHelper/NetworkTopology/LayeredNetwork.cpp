@@ -1,9 +1,9 @@
-#include "LayeredNetwork.hpp"
-#include "InputNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "BiasNeuron.hpp"
-#include "Edge.hpp"
-#include "AbstractNeuronFactory.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
+#include "Neuron\InputNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\BiasNeuron.hpp"
+#include "Neuron\Edge.hpp"
+#include "NeuronFactory\AbstractNeuronFactory.hpp"
 #include <exception>
 
 LayeredNetworkOptions::LayeredNetworkOptions()

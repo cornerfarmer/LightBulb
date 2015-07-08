@@ -1,4 +1,4 @@
-#include "ValuePosition.hpp"
+#include "ClusterAnalysis\ValuePosition.hpp"
 
 // Sets the relation between the position and the value distance 
 const float ValuePosition::valuePositionRelation = 0.2;

@@ -1,9 +1,9 @@
-#include "StandardNeuron.hpp"
-#include "Edge.hpp"
-#include "AbstractInputFunction.hpp"
-#include "AbstractActivationFunction.hpp"
-#include "AbstractOutputFunction.hpp"
-#include "AbstractThreshold.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\Edge.hpp"
+#include "Function\AbstractInputFunction.hpp"
+#include "Function\AbstractActivationFunction.hpp"
+#include "Function\AbstractOutputFunction.hpp"
+#include "Neuron\AbstractThreshold.hpp"
 
 StandardNeuron::~StandardNeuron()
 {

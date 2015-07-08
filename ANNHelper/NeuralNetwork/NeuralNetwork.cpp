@@ -1,10 +1,10 @@
-#include "NeuralNetwork.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "AbstractNeuron.hpp"
-#include "AbstractActivationOrder.hpp"
-#include "InputNeuron.hpp"
-#include "NeuralNetworkIO.hpp"
-#include "StandardNeuron.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "ActivationOrder\AbstractActivationOrder.hpp"
+#include "Neuron\InputNeuron.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
+#include "Neuron\StandardNeuron.hpp"
 #include <exception>
 
 NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)

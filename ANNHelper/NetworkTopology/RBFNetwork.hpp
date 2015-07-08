@@ -6,7 +6,7 @@
 // Libary includes
 
 // Includes
-#include "LayeredNetwork.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
 
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
 class RBFNetwork : public LayeredNetwork

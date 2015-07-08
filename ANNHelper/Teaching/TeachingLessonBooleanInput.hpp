@@ -8,7 +8,7 @@
 #include <list>
 
 // Includes
-#include "AbstractTeachingLesson.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
 
 // Forward declarations
 

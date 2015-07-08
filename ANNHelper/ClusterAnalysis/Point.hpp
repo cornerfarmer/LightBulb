@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "ValuePosition.hpp"
+#include "ClusterAnalysis\ValuePosition.hpp"
 
 // Forward declarations
 struct Cluster;

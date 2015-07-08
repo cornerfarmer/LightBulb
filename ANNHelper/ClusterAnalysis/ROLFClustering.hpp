@@ -7,9 +7,9 @@
 #include <vector>
 
 // Includes
-#include "AbstractClustering.hpp"
-#include "Point.hpp"
-#include "Cluster.hpp"
+#include "ClusterAnalysis\AbstractClustering.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
 
 // Forward declarations
 struct Cluster;

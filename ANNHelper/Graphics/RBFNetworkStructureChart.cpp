@@ -1,8 +1,8 @@
-#include "RBFNetworkStructureChart.hpp"
-#include "RBFNetwork.hpp"
-#include "AbstractNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "RBFThreshold.hpp"
+#include "Graphics\RBFNetworkStructureChart.hpp"
+#include "NetworkTopology\RBFNetwork.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\RBFThreshold.hpp"
 
 RBFNetworkStructureChart::RBFNetworkStructureChart(RBFNetworkStructureChartOptions &options_)
 {

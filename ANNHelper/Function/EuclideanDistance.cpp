@@ -1,7 +1,7 @@
-#include "EuclideanDistance.hpp"
-#include "Edge.hpp"
-#include "AbstractNeuron.hpp"
-#include "RBFThreshold.hpp"
+#include "Function\EuclideanDistance.hpp"
+#include "Neuron\Edge.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\RBFThreshold.hpp"
 #include <stdexcept>
 
 float EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput, std::map<AbstractNeuron*, float>* neuronOutputCache)

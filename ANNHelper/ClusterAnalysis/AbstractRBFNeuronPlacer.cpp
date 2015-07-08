@@ -1,11 +1,11 @@
-#include "AbstractRBFNeuronPlacer.hpp"
-#include "Teacher.hpp"
-#include "AbstractTeachingLesson.hpp"
-#include "RBFNetwork.hpp"
-#include "Cluster.hpp"
-#include "Point.hpp"
-#include "PointSet.hpp"
-#include "NeuralNetworkIO.hpp"
+#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
+#include "Teaching\Teacher.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
+#include "NetworkTopology\RBFNetwork.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
 
 std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(Teacher &teacher, int inputDimension)
 {

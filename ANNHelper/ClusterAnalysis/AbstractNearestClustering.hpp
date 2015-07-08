@@ -9,8 +9,8 @@
 #include <map>
 
 // Includes
-#include "AbstractClustering.hpp"
-#include "Point.hpp"
+#include "ClusterAnalysis\AbstractClustering.hpp"
+#include "ClusterAnalysis\Point.hpp"
 
 // Forward declarations
 struct Cluster;

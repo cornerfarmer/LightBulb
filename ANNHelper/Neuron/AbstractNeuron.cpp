@@ -1,6 +1,6 @@
-#include "AbstractNeuron.hpp"
-#include "Edge.hpp"
-#include "StandardNeuron.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\Edge.hpp"
+#include "Neuron\StandardNeuron.hpp"
 
 AbstractNeuron::~AbstractNeuron()
 {

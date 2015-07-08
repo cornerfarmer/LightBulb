@@ -4,7 +4,7 @@
 #define _RBFNETWORKSTRUCTURECHART_H_
 
 // Includes
-#include "GraphicObject.hpp"
+#include "Graphics\GraphicObject.hpp"
 #include <SFML\Graphics.hpp>
 #include <list>
 

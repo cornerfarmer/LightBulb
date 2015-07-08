@@ -4,7 +4,7 @@
 #define _INPUTNEURON_H_
 
 // Includes
-#include "AbstractNeuron.hpp"
+#include "Neuron\AbstractNeuron.hpp"
 
 // A InputNeuron is the interface between the NeuralNetwork and your input variables.
 // It just can have efferent edges, no afferent edges! 

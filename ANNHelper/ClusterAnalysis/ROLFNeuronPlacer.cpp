@@ -1,10 +1,10 @@
-#include "ROLFNeuronPlacer.hpp"
-#include "RBFNetwork.hpp"
-#include "Cluster.hpp"
-#include "ROLFClustering.hpp"
-#include "Teacher.hpp"
-#include "Point.hpp"
-#include "PointSet.hpp"
+#include "ClusterAnalysis\ROLFNeuronPlacer.hpp"
+#include "NetworkTopology\RBFNetwork.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
+#include "ClusterAnalysis\ROLFClustering.hpp"
+#include "Teaching\Teacher.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
 
 void ROLFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {

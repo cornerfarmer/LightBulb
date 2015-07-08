@@ -1,5 +1,5 @@
-#include "HyperbolicTangentFunction.hpp"
-#include "StandardThreshold.hpp"
+#include "Function\HyperbolicTangentFunction.hpp"
+#include "Neuron\StandardThreshold.hpp"
 #include <limits>
 #include <stdexcept>
 

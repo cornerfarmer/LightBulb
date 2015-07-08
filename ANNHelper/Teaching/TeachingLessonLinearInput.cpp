@@ -1,6 +1,6 @@
-#include "TeachingLessonLinearInput.hpp"
-#include "NeuralNetworkIO.hpp"
-#include "NeuralNetwork.hpp"
+#include "Teaching\TeachingLessonLinearInput.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
 
 TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<float>* teachingInput_)
 {

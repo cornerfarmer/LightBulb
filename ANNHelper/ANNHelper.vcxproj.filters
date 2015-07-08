@@ -469,5 +469,8 @@
     <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

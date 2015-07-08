@@ -8,7 +8,7 @@
 #include <map>
 
 // Includes
-#include "NeuralNetworkIO.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;

@@ -5,11 +5,11 @@
 
 
 // Includes
-#include "GraphicObject.hpp"
+#include "Graphics\GraphicObject.hpp"
 #include <SFML\Graphics.hpp>
 #include <list>
 #include <map>
-#include "Arrow.hpp"
+#include "Graphics\Arrow.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;

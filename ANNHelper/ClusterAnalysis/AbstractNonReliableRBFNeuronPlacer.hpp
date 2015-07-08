@@ -7,7 +7,7 @@
 #include <list>
 
 // Includes
-#include "AbstractRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 struct Cluster;

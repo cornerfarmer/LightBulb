@@ -1,7 +1,7 @@
-#include "RecurrentLayeredNetwork.hpp"
-#include "StandardNeuron.hpp"
-#include "AbstractNeuron.hpp"
-#include "Edge.hpp"
+#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\Edge.hpp"
 #include <list>
 
 RecurrentLayeredNetwork::RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_)

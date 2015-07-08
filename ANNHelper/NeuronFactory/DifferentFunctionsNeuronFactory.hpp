@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "AbstractNeuronFactory.hpp"
+#include "NeuronFactory\AbstractNeuronFactory.hpp"
 
 // Forward declarations
 class InputNeuron;

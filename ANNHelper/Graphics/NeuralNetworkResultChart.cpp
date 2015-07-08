@@ -1,8 +1,8 @@
-#include "NeuralNetworkResultChart.hpp"
-#include "NeuralNetwork.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "TopologicalOrder.hpp"
-#include "NeuralNetworkIO.hpp"
+#include "Graphics\NeuralNetworkResultChart.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "ActivationOrder\TopologicalOrder.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
 #include <exception>
 
 NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions()

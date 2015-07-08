@@ -4,7 +4,7 @@
 #define _SYNCHRONOUSORDER_H_
 
 // Includes
-#include "AbstractActivationOrder.hpp"
+#include "ActivationOrder\AbstractActivationOrder.hpp"
 
 // With this order, all neurons will get activated at the same timestep
 // This class is only compatible with every sort of network

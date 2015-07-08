@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "AbstractTeachingLesson.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
 
 // Forward declarations
 

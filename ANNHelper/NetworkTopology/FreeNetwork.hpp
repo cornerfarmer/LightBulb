@@ -7,10 +7,10 @@
 #include <vector>
 
 // Includes
-#include "AbstractNetworkTopology.hpp"
-#include "AbstractNeuron.hpp"
-#include "BiasNeuron.hpp"
-#include "RecurrentNetworkInterface.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\BiasNeuron.hpp"
+#include "NetworkTopology\RecurrentNetworkInterface.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;

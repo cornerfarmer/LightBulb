@@ -1,10 +1,10 @@
-#include "ENearestRBFNeuronPlacer.hpp"
-#include "RBFNetwork.hpp"
-#include "Cluster.hpp"
-#include "ENearestClustering.hpp"
-#include "Teacher.hpp"
-#include "Point.hpp"
-#include "PointSet.hpp"
+#include "ClusterAnalysis\ENearestRBFNeuronPlacer.hpp"
+#include "NetworkTopology\RBFNetwork.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
+#include "ClusterAnalysis\ENearestClustering.hpp"
+#include "Teaching\Teacher.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
 
 // Sets the minimum cluster width
 const float ENearestRBFNeuronPlacer::iterationEndPrecision = 0.1f;

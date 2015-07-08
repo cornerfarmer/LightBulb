@@ -6,7 +6,7 @@
 // Libary includes
 
 // Includes
-#include "LayeredNetwork.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
 
 // Forward declarations
 

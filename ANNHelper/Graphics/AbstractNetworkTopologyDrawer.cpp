@@ -1,10 +1,10 @@
-#include "AbstractNetworkTopologyDrawer.hpp"
-#include "AbstractNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "Edge.hpp"
-#include "Arrow.hpp"
-#include "BiasNeuron.hpp"
+#include "Graphics\AbstractNetworkTopologyDrawer.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\Edge.hpp"
+#include "Graphics\Arrow.hpp"
+#include "Neuron\BiasNeuron.hpp"
 #include <iomanip>
 #include <exception>
 #include <sstream>

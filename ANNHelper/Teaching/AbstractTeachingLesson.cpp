@@ -1,8 +1,8 @@
-#include "AbstractTeachingLesson.hpp"
-#include "NeuralNetwork.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "StandardNeuron.hpp"
-#include "NeuralNetworkIO.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
 
 std::unique_ptr<NeuralNetworkIO<float>> AbstractTeachingLesson::tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime)
 {

@@ -10,7 +10,7 @@
 #include <iomanip>
 
 // Includes
-#include "AbstractLearningRule.hpp"
+#include "Learning\AbstractLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;

@@ -1,10 +1,10 @@
-﻿#include "Teacher.hpp"
-#include "AbstractActivationOrder.hpp"
-#include "AbstractTeachingLesson.hpp"
-#include "NeuralNetwork.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "AbstractNeuron.hpp"
-#include "Edge.hpp"
+﻿#include "Teaching\Teacher.hpp"
+#include "ActivationOrder\AbstractActivationOrder.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\Edge.hpp"
 
 void Teacher::addTestingLesson(AbstractTeachingLesson* newTestingLesson)
 {

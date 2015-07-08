@@ -8,8 +8,8 @@
 #include "EigenSrc\Jacobi"
 
 // Includes
-#include "AbstractLearningRule.hpp"
-#include "AbstractRBFNeuronPlacer.hpp"
+#include "Learning\AbstractLearningRule.hpp"
+#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class NeuralNetwork;

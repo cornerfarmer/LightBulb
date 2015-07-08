@@ -1,7 +1,7 @@
-#include "TeachingLessonBooleanInput.hpp"
-#include "NeuralNetwork.hpp"
-#include "AbstractActivationFunction.hpp"
-#include "NeuralNetworkIO.hpp"
+#include "Teaching\TeachingLessonBooleanInput.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "Function\AbstractActivationFunction.hpp"
+#include "NeuralNetwork\NeuralNetworkIO.hpp"
 #include <exception>
 
 TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)

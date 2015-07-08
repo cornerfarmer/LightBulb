@@ -4,7 +4,7 @@
 #define _BINARYFUNCTION_H_
 
 // Includes
-#include "AbstractActivationFunction.hpp"
+#include "Function\AbstractActivationFunction.hpp"
 
 // A binary function always has the value 0 or 1
 class BinaryFunction : public AbstractActivationFunction

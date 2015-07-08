@@ -1,12 +1,12 @@
-#include "AbstractLearningRule.hpp"
+#include "Learning\AbstractLearningRule.hpp"
 #include <vector>
-#include "AbstractNeuron.hpp"
-#include "NeuralNetwork.hpp"
-#include "LayeredNetwork.hpp"
-#include "Teacher.hpp"
-#include "StandardNeuron.hpp"
-#include "AbstractTeachingLesson.hpp"
-#include "AbstractActivationOrder.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
+#include "Teaching\Teacher.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
+#include "ActivationOrder\AbstractActivationOrder.hpp"
 
 #include <iomanip>
 #include <iostream>

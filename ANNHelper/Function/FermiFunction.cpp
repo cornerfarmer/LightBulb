@@ -1,5 +1,5 @@
-#include "FermiFunction.hpp"
-#include "StandardThreshold.hpp"
+#include "Function\FermiFunction.hpp"
+#include "Neuron\StandardThreshold.hpp"
 #include <math.h>
 #include <limits>
 #include <stdexcept>

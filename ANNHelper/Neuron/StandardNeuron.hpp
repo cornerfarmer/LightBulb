@@ -4,7 +4,7 @@
 #define _STANDARDNEURON_H_
 
 // Includes
-#include "AbstractNeuron.hpp"
+#include "Neuron\AbstractNeuron.hpp"
 
 // Forward declarations
 class AbstractActivationFunction;

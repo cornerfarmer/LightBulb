@@ -8,7 +8,7 @@
 #include <map>
 
 // Includes
-#include "BackpropagationLearningRule.hpp"
+#include "Learning\BackpropagationLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;

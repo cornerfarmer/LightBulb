@@ -1,5 +1,5 @@
-#include "BinaryFunction.hpp"
-#include "StandardThreshold.hpp"
+#include "Function\BinaryFunction.hpp"
+#include "Neuron\StandardThreshold.hpp"
 #include <stdexcept>
 
 float BinaryFunction::execute(float input, AbstractThreshold* threshold)

@@ -1,7 +1,7 @@
-#include "KMeansRBFNeuronPlacer.hpp"
-#include "RBFNetwork.hpp"
-#include "Cluster.hpp"
-#include "KMeansClustering.hpp"
+#include "ClusterAnalysis\KMeansRBFNeuronPlacer.hpp"
+#include "NetworkTopology\RBFNetwork.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
+#include "ClusterAnalysis\KMeansClustering.hpp"
 
 void KMeansRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {

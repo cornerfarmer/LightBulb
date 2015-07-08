@@ -1,8 +1,8 @@
-#include "KNearestClustering.hpp"
-#include "Cluster.hpp"
+#include "ClusterAnalysis\KNearestClustering.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
 #include <algorithm>
-#include "Point.hpp"
-#include "PointSet.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
 
 void KNearestClustering::calculateCache(PointSet& points)
 {

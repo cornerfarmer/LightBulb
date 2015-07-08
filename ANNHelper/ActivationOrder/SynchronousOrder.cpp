@@ -1,6 +1,6 @@
-#include "SynchronousOrder.hpp"
-#include "LayeredNetwork.hpp"
-#include "StandardNeuron.hpp"
+#include "ActivationOrder\SynchronousOrder.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
+#include "Neuron\StandardNeuron.hpp"
 #include <exception>
 
 void SynchronousOrder::executeActivation(AbstractNetworkTopology &networkTopology)

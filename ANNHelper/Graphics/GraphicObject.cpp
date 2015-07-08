@@ -1,4 +1,4 @@
-#include "GraphicObject.hpp"
+#include "Graphics\GraphicObject.hpp"
 
 sf::Font GraphicObject::font = sf::Font();
 

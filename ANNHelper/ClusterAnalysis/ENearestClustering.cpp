@@ -1,8 +1,8 @@
-#include "ENearestClustering.hpp"
-#include "Cluster.hpp"
+#include "ClusterAnalysis\ENearestClustering.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
 #include <algorithm>
-#include "Point.hpp"
-#include "PointSet.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
 
 void ENearestClustering::calculateCache(PointSet& points)
 {

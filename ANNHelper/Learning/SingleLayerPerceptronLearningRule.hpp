@@ -4,7 +4,7 @@
 #define _SINGLELAYERPERCEPTRONLEARNINGRULE_H_
 
 // Includes
-#include "AbstractLearningRule.hpp"
+#include "Learning\AbstractLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;

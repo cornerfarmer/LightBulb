@@ -1,8 +1,8 @@
-#include "AbstractClustering.hpp"
-#include "ValuePosition.hpp"
-#include "Cluster.hpp"
-#include "Point.hpp"
-#include "PointSet.hpp"
+#include "ClusterAnalysis\AbstractClustering.hpp"
+#include "ClusterAnalysis\ValuePosition.hpp"
+#include "ClusterAnalysis\Cluster.hpp"
+#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis\PointSet.hpp"
 
 // Sets the minimum cluster width
 const float AbstractClustering::minClusterWidth = 0.05f;

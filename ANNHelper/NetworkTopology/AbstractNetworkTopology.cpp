@@ -1,8 +1,8 @@
-#include "AbstractNetworkTopology.hpp"
-#include "AbstractNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "Edge.hpp"
-#include "LayeredNetwork.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\Edge.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
 
 void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 {

@@ -1,9 +1,9 @@
-#include "FreeNetworkTopologyDrawer.hpp"
-#include "AbstractNeuron.hpp"
-#include "StandardNeuron.hpp"
-#include "AbstractNetworkTopology.hpp"
-#include "Edge.hpp"
-#include "FreeNetwork.hpp"
+#include "Graphics\FreeNetworkTopologyDrawer.hpp"
+#include "Neuron\AbstractNeuron.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\Edge.hpp"
+#include "NetworkTopology\FreeNetwork.hpp"
 #include <exception>
 
 
