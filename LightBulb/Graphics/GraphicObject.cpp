@@ -14,9 +14,9 @@ GraphicObject::GraphicObject()
 	}
 }
 
-float GraphicObject::calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd)
+double GraphicObject::calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd)
 {
-	float angle;
+	double angle;
 	// If the end and start position have the same x coordinate
 	if ((lineEnd.x - lineStart.x) == 0)
 	{
@@ -38,13 +38,13 @@ float GraphicObject::calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f line
 	return angle;
 }
 
-sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, float angle)
+sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, double angle)
 {
 	// Just use the unit circle calculation
 	return sf::Vector2f(center.x + radiusVector.x * cos(angle), center.y + radiusVector.y * sin(angle));
 }
 
-sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, float radius, float angle)
+sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, double radius, double angle)
 {
 	return calcCartesianFromPolarCoordinates(center, sf::Vector2f(radius, radius), angle);
 }

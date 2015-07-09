@@ -14,7 +14,7 @@ void KNearestClustering::calculateCache(PointSet& points)
 	for (PointSet::iterator fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
 	{
 		// Create a vector which will contain all distances from the current point to all other points
-		std::vector<std::pair<Point*, float>> distanceToPoint(points.size());
+		std::vector<std::pair<Point*, double>> distanceToPoint(points.size());
 
 		int pointIndex = 0;
 		// Go through all points
@@ -38,7 +38,7 @@ void KNearestClustering::calculateCache(PointSet& points)
 	}
 }
 
-void KNearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, float nearestPointsCount)
+void KNearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointsCount)
 {	
 	// Go through all nthNearestPointToPoint entries
 	for (int i = 0; i < nthNearestPointToPoint[&pointToAdd].size(); i++)

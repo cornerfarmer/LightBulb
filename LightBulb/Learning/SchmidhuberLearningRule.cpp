@@ -38,15 +38,15 @@ void SchmidhuberLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNe
 		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Create a new delta vector for this neuron
-			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<float, bool>>(maxTimeStep + 2);
+			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<double, bool>>(maxTimeStep + 2);
 		}
 	}
 }
 
 
-float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
-	float gradient = lastGradients[&edge];
+	double gradient = lastGradients[&edge];
 	// If this is not the first block
 	if (currentBlockStart != 0)
 	{
@@ -72,7 +72,7 @@ float SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLess
 }
 
 
-float SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
+double SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
 {
 	// Only if the delta value has not calculated yet
 	if (deltaVectorOutputLayer[neuron][time].second == false)
@@ -80,7 +80,7 @@ float SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neur
 		std::list<Edge*>* efferentEdges = neuron->getEfferentEdges();
 
 		// Create a new variable which should hold the complete error fac
-		float errorfac = 0;
+		double errorfac = 0;
 		// If the neuron has a own error value then add it to the error fac
 		if (errormap->count(time) > 0 && (*errormap)[time].count(neuron) > 0)
 			errorfac = (*errormap)[time][neuron];
@@ -105,9 +105,9 @@ float SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neur
 	return deltaVectorOutputLayer[neuron][time].first;
 }
 
-float SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Edge* edge)
+double SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Edge* edge)
 {
-	float dynamicSystemValue = 0;
+	double dynamicSystemValue = 0;
 
 	// If this is not the first block
 	if (currentBlockStart != 0)
@@ -139,7 +139,7 @@ AbstractActivationOrder* SchmidhuberLearningRule::getNewActivationOrder(NeuralNe
 	return new SynchronousOrder();
 }
 
-void SchmidhuberLearningRule::adjustWeight(Edge* edge, float deltaWeight)
+void SchmidhuberLearningRule::adjustWeight(Edge* edge, double deltaWeight)
 {
 	edge->setWeight(edge->getWeight() - getOptions()->learningRate * deltaWeight);
 }
@@ -191,9 +191,9 @@ void SchmidhuberLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetw
 }
 
 
-float SchmidhuberLearningRule::getGammaOfNeuronsInTime(StandardNeuron* neuronj, StandardNeuron* neuronl, int time)
+double SchmidhuberLearningRule::getGammaOfNeuronsInTime(StandardNeuron* neuronj, StandardNeuron* neuronl, int time)
 {
-	float gamma = 0;
+	double gamma = 0;
 
 	// If this is the last time step of the current block
 	if (time == currentBlockStart + currentBlockSize - 1)
@@ -232,7 +232,7 @@ bool SchmidhuberLearningRule::configureNextErroMapCalculation(int* nextStartTime
 	currentBlockSize = *nextTimeStepCount;
 
 	// Create a new map for the new dynamic system values
-	oldDynamicSystemValues.reset(new std::map<StandardNeuron*, std::map<Edge*, float>>());
+	oldDynamicSystemValues.reset(new std::map<StandardNeuron*, std::map<Edge*, double>>());
 
 	// Swap the two caches. So the new one will be the old one.
 	oldDynamicSystemValues.swap(currentDynamicSystemValues);
@@ -265,12 +265,12 @@ bool SchmidhuberLearningRule::configureNextErroMapCalculation(int* nextStartTime
 	return (*nextStartTime < teachingLesson.getMaxTimeStep() + 1);
 }
 
-std::vector<std::map<AbstractNeuron*, float>>* SchmidhuberLearningRule::getOutputValuesInTime()
+std::vector<std::map<AbstractNeuron*, double>>* SchmidhuberLearningRule::getOutputValuesInTime()
 {
 	return &outputValuesInTime;
 }
 
-std::vector<std::map<AbstractNeuron*, float>>* SchmidhuberLearningRule::getNetInputValuesInTime()
+std::vector<std::map<AbstractNeuron*, double>>* SchmidhuberLearningRule::getNetInputValuesInTime()
 {
 	return &netInputValuesInTime;
 }

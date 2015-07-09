@@ -22,12 +22,12 @@ struct Cluster
 	// All points contained by the cluster
 	PointSet points;
 	// The radius of the cluster
-	float radius;
+	double radius;
 	Cluster()
 	{
 		radius = 0;
 	}
-	Cluster(ValuePosition &center_, float radius_)
+	Cluster(ValuePosition &center_, double radius_)
 	{
 		center = center_;
 		radius = radius_;

@@ -65,9 +65,9 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	// Create a new pixel array, which will contain all color informations
 	std::unique_ptr<sf::Uint8[]> pixels(new sf::Uint8[options->width*options->height*4]);
 	// Create a new inputVector with the size of the inputCount
-	NeuralNetworkIO<float> input;
-	input[options->xTimeStep] = std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
-	input[options->yTimeStep] = std::vector<float>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
+	NeuralNetworkIO<double> input;
+	input[options->xTimeStep] = std::vector<double>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
+	input[options->yTimeStep] = std::vector<double>(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size(), 0);
 
 	// Go through every pixel
 	for(int x = 0; x < options->width; x++)
@@ -75,11 +75,11 @@ void NeuralNetworkResultChart::recalculateAllValues()
 		for(int y = 0; y < options->height; y++)
 		{	
 			// Compute the input values from the coordinates and the given range
-			input[options->xTimeStep][options->xInputNeuronIndex] = (float)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
-			input[options->yTimeStep][options->yInputNeuronIndex] = (float)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
+			input[options->xTimeStep][options->xInputNeuronIndex] = (double)x / options->width * (options->xRangeEnd - options->xRangeStart) + options->xRangeStart;
+			input[options->yTimeStep][options->yInputNeuronIndex] = (double)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart;
 
 			// Extract the output
-			float output = (*options->neuralNetwork->calculate(input, *options->activationOrder, 0, options->ouputTimeStep + 1))[options->ouputTimeStep][options->outputNeuronIndex];
+			double output = (*options->neuralNetwork->calculate(input, *options->activationOrder, 0, options->ouputTimeStep + 1))[options->ouputTimeStep][options->outputNeuronIndex];
 
 			// If binaryInterpretation is selected, just use black or white, else interpret the output linear
 			if (options->binaryInterpretation)
@@ -88,7 +88,7 @@ void NeuralNetworkResultChart::recalculateAllValues()
 				output = (output - options->ouputRangeStart) / (options->ouputRangeEnd - options->ouputRangeStart) * 255;
 
 			// Normalize the output
-			output = std::max(0.0f, std::min(255.0f, output));
+			output = std::max(0.0, std::min(255.0, output));
 
 			// Set the calculated color value to the actual pixel 
 			pixels[(y * options->width + x) * 4]     = output; // R

@@ -2,7 +2,7 @@
 #include "Neuron\StandardThreshold.hpp"
 #include <stdexcept>
 
-float BinaryFunction::execute(float input, AbstractThreshold* threshold)
+double BinaryFunction::execute(double input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
 	// Check if the given threshold is a StandardThreshold
@@ -16,7 +16,7 @@ float BinaryFunction::execute(float input, AbstractThreshold* threshold)
 		return 0;
 }
 
-float BinaryFunction::executeDerivation(float input, AbstractThreshold* threshold)
+double BinaryFunction::executeDerivation(double input, AbstractThreshold* threshold)
 {
 	// A binary function does not have a derivation => throw a exception
 	throw std::logic_error("There is no derivation of the binary function");
@@ -28,12 +28,12 @@ AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy()
 	return new BinaryFunction(*this);
 }
 
-float BinaryFunction::getMaximum()
+double BinaryFunction::getMaximum()
 {
 	return 1;
 }
 
-float BinaryFunction::getMinimum()
+double BinaryFunction::getMinimum()
 {
 	return 0;
 }

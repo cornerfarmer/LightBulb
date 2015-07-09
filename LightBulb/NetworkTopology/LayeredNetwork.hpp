@@ -66,7 +66,7 @@ public:
 	// Returns all Neurons
 	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
-	void randomizeWeights(float randStart, float randEnd);
+	void randomizeWeights(double randStart, double randEnd);
 	// Adds a new neuron into the specified layer
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters, bool addEdgesToNextLayer);
 	// Removes the neuron with given index from a layer
@@ -86,9 +86,9 @@ public:
 	// Returns a map which holds for every edge the information if it is recurrent or not
 	virtual std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 	// Puts all current neuron outputs into the given map
-	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
+	void getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
-	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
+	void getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs);
 	// Returns the bias neuron
 	BiasNeuron* getBiasNeuron();
 };

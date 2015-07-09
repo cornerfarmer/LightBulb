@@ -9,7 +9,7 @@
 #include <exception>
 #include <sstream>
 
-const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
+const double AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
 
 AbstractNetworkTopologyDrawerOptions::AbstractNetworkTopologyDrawerOptions()
 {
@@ -49,7 +49,7 @@ void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
 				}
 
 				// Calculate the angle of the line beetween the two neurons of this edge
-				float angle = calcAngleFromLine(neuronShapes[(*edge)->getPrevNeuron()].first.getPosition(), neuronShapes[(*edge)->getNextNeuron()].first.getPosition());
+				double angle = calcAngleFromLine(neuronShapes[(*edge)->getPrevNeuron()].first.getPosition(), neuronShapes[(*edge)->getNextNeuron()].first.getPosition());
 			      
 				// Calculate the start and end point of the arrow on the neuronShape border. Also consider if there is a contrary edge.
 				arrowStart = calcCartesianFromPolarCoordinates(neuronShapes[(*edge)->getPrevNeuron()].first.getPosition(), 30, angle - (aContraryEdgeExists ? angleDifferenceBetweenContraryEdges : 0));

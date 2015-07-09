@@ -10,15 +10,15 @@
 class FermiFunction : public AbstractActivationFunction
 {
 private:
-	float temperatureParameter;
+	double temperatureParameter;
 public:
-	FermiFunction(float temperatureParameter_);
+	FermiFunction(double temperatureParameter_);
 	// Inherited
-	float execute(float input, AbstractThreshold* threshold);
-	float executeDerivation(float input, AbstractThreshold* threshold);
+	double execute(double input, AbstractThreshold* threshold);
+	double executeDerivation(double input, AbstractThreshold* threshold);
 	AbstractActivationFunction* getActivationFunctionCopy();
-	float getMaximum();
-	float getMinimum();
+	double getMaximum();
+	double getMinimum();
 	bool hasAMaxAndMinimum();
 };
 

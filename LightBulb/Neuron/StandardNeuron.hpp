@@ -19,8 +19,8 @@ class StandardNeuron : public AbstractNeuron
 {
 private:
 	AbstractThreshold* threshold;
-	float netInput;
-	float additionalInput;
+	double netInput;
+	double additionalInput;
 	AbstractInputFunction* inputFunction;
 	AbstractActivationFunction* activationFunction;
 	AbstractOutputFunction* outputFunction;
@@ -29,28 +29,28 @@ public:
 	~StandardNeuron();
 	StandardNeuron(AbstractThreshold* threshold_, AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_, AbstractOutputFunction* outputFunction_);
 	// Add a new afferent Edge directing to the given neuron
-	void addPrevNeuron(AbstractNeuron* newPrevNeuron, float weight);
+	void addPrevNeuron(AbstractNeuron* newPrevNeuron, double weight);
 	void addPrevNeuron(Edge* newEdge);
 	// Remove a afferent Edge
 	void removeAfferentEdge(Edge* edgeToRemove);
 	// Calculates a new activation with the help of its activation- and outputFunction
 	void refreshActivation();
 	// Calculates a new netInput with the help of its inputFunction
-	void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL);
+	void refreshNetInput(std::map<AbstractNeuron*, double>* neuronOutputCache = NULL);
 	// Calculates the value of the activation function derivation 
-	float executeDerivationOnActivationFunction(float input);
+	double executeDerivationOnActivationFunction(double input);
 	// Returns the afferent edges
 	std::list<Edge*>* getAfferentEdges();
 	// Returs the netInput
-	float getNetInput();
+	double getNetInput();
 	// Returns the activation function
 	AbstractActivationFunction* getActivationFunction();
 	// Returns the threshold
 	AbstractThreshold* getThreshold();
 	// Sets the additional input
-	void setAdditionalInput(float newAdditionalInput);
+	void setAdditionalInput(double newAdditionalInput);
 	// Sets the current activation
-	void injectActivation(float newActivation);
+	void injectActivation(double newActivation);
 };
 
 #endif

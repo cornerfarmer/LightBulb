@@ -20,15 +20,15 @@ class PointSet;
 class AbstractNearestClustering : public AbstractClustering
 {
 protected:
-	virtual void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, float parameter) = 0;
+	virtual void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double parameter) = 0;
 	// Compares two pairs (Point, distance) (used to order points depending on their distance)
-	static bool pairCompare(const std::pair<Point*, float>& a ,const std::pair<Point*, float>& b);	
+	static bool pairCompare(const std::pair<Point*, double>& a ,const std::pair<Point*, double>& b);	
 
 public:
 	// Refresh cache
 	virtual void calculateCache(PointSet& points) = 0;
 	// Calculates from the given points a specified count of cluster depending on k (nearestPointsCount)
-	std::unique_ptr<std::list<Cluster>> doClustering(PointSet& points, float parameter, int dimensionCount);
+	std::unique_ptr<std::list<Cluster>> doClustering(PointSet& points, double parameter, int dimensionCount);
 };
 
 #endif

@@ -6,15 +6,15 @@
 // Includes
 #include "Neuron\AbstractThreshold.hpp"
 
-// A StandardThreshold just consists of one float value
+// A StandardThreshold just consists of one double value
 class StandardThreshold : public AbstractThreshold
 {
 private:
-	float value;
+	double value;
 public:
-	StandardThreshold(float value_);
-	float getThreshold();
-	void setThreshold(float threshold);
+	StandardThreshold(double value_);
+	double getThreshold();
+	void setThreshold(double threshold);
 	AbstractThreshold* getCopy();
 };
 

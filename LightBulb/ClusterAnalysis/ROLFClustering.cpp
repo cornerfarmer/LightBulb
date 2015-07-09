@@ -24,14 +24,14 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(PointSet &point
 	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
 	{
 		// Define a variable which should contain the distance to the nearest cluster that contains the current point
-		float nearestClusterDistance = 0;
+		double nearestClusterDistance = 0;
 		// A variable which holds the nearest cluster
 		Cluster* nearestCluster = NULL;
 		// Go through all clusters
 		for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
 		{
 			// Calculate the distance from the current point to the current cluster
-			float currentDistance = (*point)->valPos.getDistanceBetweenValuePositions(cluster->center, points.getMaxPositionDistance(), points.getMaxValueDistance());
+			double currentDistance = (*point)->valPos.getDistanceBetweenValuePositions(cluster->center, points.getMaxPositionDistance(), points.getMaxValueDistance());
 			// If the distance is inside of the cluster radius and the distance is smaller than the current nearest cluster
 			if (currentDistance < nearestClusterDistance || (nearestCluster == NULL && currentDistance <= cluster->radius * options.widthMultiplier))			
 			{

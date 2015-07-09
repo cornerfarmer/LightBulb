@@ -2,9 +2,9 @@
 #include "Neuron\Edge.hpp"
 #include "Neuron\AbstractNeuron.hpp"
 
-float WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput, std::map<AbstractNeuron*, float>* neuronOutputCache)
+double WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache)
 {
-	float sum = additionalInput;
+	double sum = additionalInput;
 
 	// Calculate the product of weight and output of every neuron and add it to the sum
 	for (std::list<Edge*>::iterator edge = input.begin(); edge != input.end(); edge++)

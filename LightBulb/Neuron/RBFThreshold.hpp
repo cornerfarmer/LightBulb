@@ -9,20 +9,20 @@
 // Includes
 #include "Neuron\AbstractThreshold.hpp"
 
-// A StandardThreshold just consists of one float value
+// A StandardThreshold just consists of one double value
 class RBFThreshold : public AbstractThreshold
 {
 private:
 	// The center of the RBF-Neuron
-	std::vector<float> centerVector;
+	std::vector<double> centerVector;
 	// The width of the RBF-Neuron
-	float width;
+	double width;
 public:
-	RBFThreshold(std::vector<float> &centerVector_, float width_);
-	void setCenterVector(std::vector<float> &newCenterVector);
-	std::vector<float>* getCenterVector();
-	float getWidth();
-	void setWidth(float newWidth);
+	RBFThreshold(std::vector<double> &centerVector_, double width_);
+	void setCenterVector(std::vector<double> &newCenterVector);
+	std::vector<double>* getCenterVector();
+	double getWidth();
+	void setWidth(double newWidth);
 	// Inherited:
 	AbstractThreshold* getCopy();
 };

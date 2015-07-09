@@ -1,16 +1,16 @@
 #include "Neuron\StandardThreshold.hpp"
 
-StandardThreshold::StandardThreshold(float value_)
+StandardThreshold::StandardThreshold(double value_)
 {
 	value = value_;
 }
 
-float StandardThreshold::getThreshold()
+double StandardThreshold::getThreshold()
 {
 	return value;
 }
 
-void StandardThreshold::setThreshold(float threshold)
+void StandardThreshold::setThreshold(double threshold)
 {
 	value = threshold;
 }

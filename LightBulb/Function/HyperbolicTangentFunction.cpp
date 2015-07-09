@@ -3,7 +3,7 @@
 #include <limits>
 #include <stdexcept>
 
-float HyperbolicTangentFunction::execute(float input, AbstractThreshold* threshold)
+double HyperbolicTangentFunction::execute(double input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
 	// Check if the given threshold is a StandardThreshold
@@ -16,7 +16,7 @@ float HyperbolicTangentFunction::execute(float input, AbstractThreshold* thresho
 	return tanh(input);
 }
 
-float HyperbolicTangentFunction::executeDerivation(float input, AbstractThreshold* threshold)
+double HyperbolicTangentFunction::executeDerivation(double input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
 	// Check if the given threshold is a StandardThreshold
@@ -35,12 +35,12 @@ AbstractActivationFunction* HyperbolicTangentFunction::getActivationFunctionCopy
 	return new HyperbolicTangentFunction(*this);
 }
 
-float HyperbolicTangentFunction::getMaximum()
+double HyperbolicTangentFunction::getMaximum()
 {
 	return 1;
 }
 
-float HyperbolicTangentFunction::getMinimum()
+double HyperbolicTangentFunction::getMinimum()
 {
 	return -1;
 }

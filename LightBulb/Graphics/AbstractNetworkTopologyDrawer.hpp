@@ -41,7 +41,7 @@ private:
 	// This list will hold a line for every edge
 	std::list<Arrow> edgeShapes;
 	// This constant value holds the angle difference beetween an incoming and an outcoming edge
-	static const float angleDifferenceBetweenContraryEdges;
+	static const double angleDifferenceBetweenContraryEdges;
 protected:
 	std::unique_ptr<AbstractNetworkTopologyDrawerOptions> options;
 	// Add a shape with the given position 

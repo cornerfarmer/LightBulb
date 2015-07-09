@@ -21,12 +21,12 @@ void PointSet::refreshMaxDistances()
 	}
 }
 
-float PointSet::getMaxPositionDistance()
+double PointSet::getMaxPositionDistance()
 {
 	return maxPositionDistance;
 }
 
-float PointSet::getMaxValueDistance()
+double PointSet::getMaxValueDistance()
 {
 	return maxValueDistance;
 }

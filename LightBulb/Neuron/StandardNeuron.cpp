@@ -33,7 +33,7 @@ StandardNeuron::StandardNeuron(AbstractThreshold* threshold_, AbstractInputFunct
 	additionalInput = 0;
 }
 
-void StandardNeuron::addPrevNeuron(AbstractNeuron* newPrevNeuron, float weight)
+void StandardNeuron::addPrevNeuron(AbstractNeuron* newPrevNeuron, double weight)
 {
 	// Create a new edge between this and the newPrevNeuron
 	Edge* newEdge = new Edge(newPrevNeuron, this, weight);
@@ -70,7 +70,7 @@ void StandardNeuron::refreshActivation()
 	activation = outputFunction->execute(activation);
 }
 
-void StandardNeuron::refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache)
+void StandardNeuron::refreshNetInput(std::map<AbstractNeuron*, double>* neuronOutputCache)
 {
 	// Calc the input from all afferentEdges
 	netInput = inputFunction->execute(afferentEdges, threshold, additionalInput, neuronOutputCache);
@@ -81,12 +81,12 @@ std::list<Edge*>* StandardNeuron::getAfferentEdges()
 	return &afferentEdges;
 }
 
-float StandardNeuron::getNetInput()
+double StandardNeuron::getNetInput()
 {
 	return netInput;
 }
 
-float StandardNeuron::executeDerivationOnActivationFunction(float input)
+double StandardNeuron::executeDerivationOnActivationFunction(double input)
 {
 	return activationFunction->executeDerivation(input, threshold);
 }
@@ -101,12 +101,12 @@ AbstractThreshold* StandardNeuron::getThreshold()
 	return threshold;
 }
 
-void StandardNeuron::setAdditionalInput(float newAdditionalInput)
+void StandardNeuron::setAdditionalInput(double newAdditionalInput)
 {
 	additionalInput = newAdditionalInput;
 }
 
-void StandardNeuron::injectActivation(float newActivation)
+void StandardNeuron::injectActivation(double newActivation)
 {
 	activation = newActivation;
 }

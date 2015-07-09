@@ -19,7 +19,7 @@ class StandardNeuron;
 class AbstractTeachingLesson;
 
 
-typedef std::map<int, std::map<StandardNeuron*, float>> ErrorMap_t;
+typedef std::map<int, std::map<StandardNeuron*, double>> ErrorMap_t;
 
 struct AbstractLearningRuleOptions
 {
@@ -28,15 +28,15 @@ struct AbstractLearningRuleOptions
 	// Sets the maximum number of tries, until the algorithm should abort
 	unsigned int maxTries;
 	// Sets the highest total error value, when the algorithm should finish successful
-	float totalErrorGoal;
+	double totalErrorGoal;
 	// Sets the lower limit of the random generated weights
-	float minRandomWeightValue;
+	double minRandomWeightValue;
 	// Sets the higher limit of the random generated weights
-	float maxRandomWeightValue;
+	double maxRandomWeightValue;
 	// Sets the minium iterations per try
 	unsigned int minIterationsPerTry;
 	// Sets the maximum total error value (If a try has after its miniums iterations a greater total error value than the maxTotalErrorValue, skip that try)
-	float maxTotalErrorValue;
+	double maxTotalErrorValue;
 	// Enable debug output
 	bool enableDebugOutput;
 	// Sets the debug output interval
@@ -68,7 +68,7 @@ class AbstractLearningRule
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
 	// Holds the current total error
-	float totalError;
+	double totalError;
 	// Holds the current iteration
 	int iteration;
 	// Holds the current try number
@@ -80,9 +80,9 @@ protected:
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
-	virtual float calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap) = 0;
+	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap) = 0;
 	// This method should adjust the weight of the current edge
-	virtual void adjustWeight(Edge* edge, float deltaWeight) = 0;
+	virtual void adjustWeight(Edge* edge, double deltaWeight) = 0;
 	// Calculate if it is sensible to continue learning
 	virtual bool learningHasStopped() = 0;
 	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges
@@ -108,9 +108,9 @@ protected:
 	// This method could be used to do something after the learning process
 	virtual void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
 	// This method can return a pointer to a output value map, which should be filled before weight calculation
-	virtual std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime() { return NULL; };
+	virtual std::vector<std::map<AbstractNeuron*, double>>* getOutputValuesInTime() { return NULL; };
 	// This method can return a pointer to a netInput value map, which should be filled before weight calculation
-	virtual std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime() { return NULL; };
+	virtual std::vector<std::map<AbstractNeuron*, double>>* getNetInputValuesInTime() { return NULL; };
 	// This method should determine the start time and time step count of the next calculation
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 public:	

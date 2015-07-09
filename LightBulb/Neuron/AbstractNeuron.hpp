@@ -17,21 +17,21 @@ class AbstractNeuron
 {
 protected:
 	// Holds the activation
-	float activation;
+	double activation;
 	// Holds all efferent edges
 	std::list<Edge*> efferentEdges;
 public:	
 	virtual ~AbstractNeuron();
 	AbstractNeuron();
 	// Add a new efferent Edge which directs to the given neuron
-	void addNextNeuron(StandardNeuron* newNextNeuron, float weight);
+	void addNextNeuron(StandardNeuron* newNextNeuron, double weight);
 	void addNextNeuron(Edge* newEdge);
 	// Returns the current activation of the neuron
-	float getActivation();
+	double getActivation();
 	// Recalculate the activation of the neuron
 	virtual void refreshActivation() = 0;
 	// Recalculate the netInput of the neuron
-	virtual void refreshNetInput(std::map<AbstractNeuron*, float>* neuronOutputCache = NULL) = 0;
+	virtual void refreshNetInput(std::map<AbstractNeuron*, double>* neuronOutputCache = NULL) = 0;
 	// Returns all efferent edges
 	std::list<Edge*>* getEfferentEdges();
 	// Resets the activation of the neuron

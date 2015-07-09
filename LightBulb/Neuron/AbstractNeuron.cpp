@@ -15,7 +15,7 @@ AbstractNeuron::AbstractNeuron()
 	resetActivation();
 }
 
-void AbstractNeuron::addNextNeuron(StandardNeuron* newNextNeuron, float weight)
+void AbstractNeuron::addNextNeuron(StandardNeuron* newNextNeuron, double weight)
 {
 	// Create a new edge between this and the newPrevNeuron
 	Edge* newEdge = new Edge(this, newNextNeuron, weight);
@@ -31,7 +31,7 @@ void AbstractNeuron::addNextNeuron(Edge* newEdge)
 	efferentEdges.push_back(newEdge);
 }
 
-float AbstractNeuron::getActivation()
+double AbstractNeuron::getActivation()
 {
 	return activation;
 }

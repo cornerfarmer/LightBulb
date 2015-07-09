@@ -79,7 +79,7 @@ FreeNetwork::FreeNetwork(FreeNetworkOptions &options_)
 }
 
 
-void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs)
+void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs)
 {
 	// Go through all neurons 
 	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
@@ -104,7 +104,7 @@ void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOu
 		neuronOutputs[&biasNeuron] = 1;
 }
 
-void FreeNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs)
+void FreeNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs)
 {
 	// Go through all neurons 
 	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
@@ -246,7 +246,7 @@ std::vector<std::vector<StandardNeuron*>>* FreeNetwork::getNeurons()
 	return &cachedNeurons;
 }
 
-void FreeNetwork::randomizeWeights(float randStart, float randEnd)
+void FreeNetwork::randomizeWeights(double randStart, double randEnd)
 {
 	// Go through all neurons
 	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)

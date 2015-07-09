@@ -1,9 +1,9 @@
 #include "ClusterAnalysis\ValuePosition.hpp"
 
 // Sets the relation between the position and the value distance 
-const float ValuePosition::valuePositionRelation = 0.2;
+const double ValuePosition::valuePositionRelation = 0.2;
 
-ValuePosition::ValuePosition(std::vector<float> &position_, std::vector<float> &value_)
+ValuePosition::ValuePosition(std::vector<double> &position_, std::vector<double> &value_)
 {
 	position = position_;
 	value = value_;
@@ -14,7 +14,7 @@ ValuePosition::ValuePosition()
 }
 
 // Calculates the (value and position) distance between two valuePositions
-float ValuePosition::getDistanceBetweenValuePositions(ValuePosition &otherValuePosition, float maxPositionDistance, float maxValueDistance)
+double ValuePosition::getDistanceBetweenValuePositions(ValuePosition &otherValuePosition, double maxPositionDistance, double maxValueDistance)
 {
 	// If a max distance is zero, return also zero
 	if (maxPositionDistance == 0 || maxValueDistance == 0)
@@ -27,10 +27,10 @@ float ValuePosition::getDistanceBetweenValuePositions(ValuePosition &otherValueP
 }
 	
 // Calculates the distance between two positions
-float ValuePosition::getPositionDistance(ValuePosition &otherValuePosition)
+double ValuePosition::getPositionDistance(ValuePosition &otherValuePosition)
 {
 	// Calculate the euclidean distance 
-	float distance = 0;
+	double distance = 0;
 	for (int p = 0; p < position.size(); p++)
 		distance += pow(position[p] - otherValuePosition.position[p], 2);
 	distance = sqrt(distance);
@@ -38,10 +38,10 @@ float ValuePosition::getPositionDistance(ValuePosition &otherValuePosition)
 }
 
 // Calculates the distance between two values
-float ValuePosition::getValueDistance(ValuePosition &otherValuePosition)
+double ValuePosition::getValueDistance(ValuePosition &otherValuePosition)
 {
 	// Calculate the euclidean distance 
-	float distance = 0;
+	double distance = 0;
 	for (int p = 0; p < value.size(); p++)
 		distance += pow(value[p] - otherValuePosition.value[p], 2);
 	distance = sqrt(distance);

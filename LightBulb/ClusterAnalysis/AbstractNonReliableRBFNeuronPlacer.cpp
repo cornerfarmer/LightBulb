@@ -47,7 +47,7 @@ void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(PointSet &points, std::l
 		for (int i = 0; i < abs(neededClustersLeft); i++)
 		{
 			// Create a variable which should hold the radius of current smallest merged cluster
-			float smallestMergedClusterRadius = -1;
+			double smallestMergedClusterRadius = -1;
 			// The first cluster for merging
 			std::list<Cluster>::iterator firstClusterForMerging;
 			// The second cluster for merging
@@ -61,7 +61,7 @@ void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(PointSet &points, std::l
 					if (secondCluster != firstCluster)
 					{
 						// Compute the distance between the two centers and treat it like the mergedClusterRadius (sure its just a approximation ;) )
-						float mergedClusterRadius  = (*firstCluster).center.getDistanceBetweenValuePositions((*secondCluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());
+						double mergedClusterRadius  = (*firstCluster).center.getDistanceBetweenValuePositions((*secondCluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());
 						// If there is no current smallestMergedClusterRadius or the clusterCentersDistance is smaller
 						if (smallestMergedClusterRadius == -1 || mergedClusterRadius  < smallestMergedClusterRadius)
 						{

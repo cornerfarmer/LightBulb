@@ -15,15 +15,15 @@ class TeachingLessonLinearInput : public AbstractTeachingLesson
 {
 private:
 	// The values the neural network should give back
-	std::unique_ptr<NeuralNetworkIO<float>> teachingInput;
+	std::unique_ptr<NeuralNetworkIO<double>> teachingInput;
 	// The values we will put into the neural network
-	std::unique_ptr<NeuralNetworkIO<float>> teachingPattern;
+	std::unique_ptr<NeuralNetworkIO<double>> teachingPattern;
 protected:	
 	// Inherited:
-	NeuralNetworkIO<float>* getTeachingInput(AbstractActivationFunction* activationFunction);
-	NeuralNetworkIO<float>* getTeachingPattern();
+	NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction);
+	NeuralNetworkIO<double>* getTeachingPattern();
 public:
-	TeachingLessonLinearInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<float>* teachingInput_);
+	TeachingLessonLinearInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<double>* teachingInput_);
 	// Inherited:
 	AbstractTeachingLesson* unfold();
 	int getMaxTimeStep();

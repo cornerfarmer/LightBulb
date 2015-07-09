@@ -4,12 +4,12 @@
 #include <limits>
 #include <stdexcept>
 
-FermiFunction::FermiFunction(float temperatureParameter_)
+FermiFunction::FermiFunction(double temperatureParameter_)
 {
 	temperatureParameter = temperatureParameter_;
 }
 
-float FermiFunction::execute(float input, AbstractThreshold* threshold)
+double FermiFunction::execute(double input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
 	// Check if the given threshold is a StandardThreshold
@@ -22,7 +22,7 @@ float FermiFunction::execute(float input, AbstractThreshold* threshold)
 	return  1 / (1 + exp(-input / temperatureParameter));
 }
 
-float FermiFunction::executeDerivation(float input, AbstractThreshold* threshold)
+double FermiFunction::executeDerivation(double input, AbstractThreshold* threshold)
 {
 	// Execute the derivation of the Fermi function		
 	return execute(input, threshold) * (1 - execute(input, threshold));
@@ -33,12 +33,12 @@ AbstractActivationFunction* FermiFunction::getActivationFunctionCopy()
 	return new FermiFunction(*this);
 }
 
-float FermiFunction::getMaximum()
+double FermiFunction::getMaximum()
 {
 	return 1;
 }
 
-float FermiFunction::getMinimum()
+double FermiFunction::getMinimum()
 {
 	return 0;
 }

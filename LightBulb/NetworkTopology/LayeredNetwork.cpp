@@ -84,7 +84,7 @@ BiasNeuron* LayeredNetwork::getBiasNeuron()
 		return NULL;
 }
 
-void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs)
+void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs)
 {
 	// Go through all inputneurons
 	for (std::vector<AbstractNeuron*>::iterator neuron = getInputNeurons()->begin(); neuron != getInputNeurons()->end(); neuron++)
@@ -108,7 +108,7 @@ void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuro
 		neuronOutputs[&biasNeuron] = 1;
 }
 
-void LayeredNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs)
+void LayeredNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs)
 {
 	// Go through all layers
 	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = getNeurons()->begin(); layer != getNeurons()->end(); layer++)
@@ -282,7 +282,7 @@ std::vector<std::vector<StandardNeuron*>>* LayeredNetwork::getNeurons()
 	return &neurons;
 }
 
-void LayeredNetwork::randomizeWeights(float randStart, float randEnd)
+void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
 {
 	// Go through hidden all layers
 	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++)

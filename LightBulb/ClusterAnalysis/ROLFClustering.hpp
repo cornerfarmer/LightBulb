@@ -31,15 +31,15 @@ enum ROLFClusteringRadiusInitMethod
 struct ROLFClusteringOptions 
 {
 	// A rate which describes how fast neuron centers will be adjusted
-	float centerLearningRate;
+	double centerLearningRate;
 	// A rate which describes how fast neuron widths will be adjusted
-	float widthLearningRate;
+	double widthLearningRate;
 	// A multiplier which will be used to increase widths
-	float widthMultiplier;
+	double widthMultiplier;
 	// Describes the way how the radius of a new cluster should be set
 	ROLFClusteringRadiusInitMethod radiusInitMethod;
 	// Sets the radius the first new cluster gets or - if 'useConstantRadius' is used - all new cluster get
-	float contantInitRadius;
+	double contantInitRadius;
 	ROLFClusteringOptions()
 	{
 		widthMultiplier = 2;

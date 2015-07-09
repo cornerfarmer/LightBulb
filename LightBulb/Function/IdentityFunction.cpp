@@ -2,17 +2,17 @@
 #include <limits>
 #include <stdexcept>
 
-float IdentityFunction::execute(float input)
+double IdentityFunction::execute(double input)
 {
 	return input;
 }
 
-float IdentityFunction::execute(float input, AbstractThreshold* threshold)
+double IdentityFunction::execute(double input, AbstractThreshold* threshold)
 {
 	return input;
 }
 
-float IdentityFunction::executeDerivation(float input, AbstractThreshold* threshold)
+double IdentityFunction::executeDerivation(double input, AbstractThreshold* threshold)
 {
 	return 0;
 }
@@ -27,12 +27,12 @@ AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
 	return new IdentityFunction(*this);
 }
 
-float IdentityFunction::getMaximum()
+double IdentityFunction::getMaximum()
 {
 	throw std::logic_error("A IdentityFunction does not have a maximum");
 }
 
-float IdentityFunction::getMinimum()
+double IdentityFunction::getMinimum()
 {
 	throw std::logic_error("A IdentityFunction does not have a maximum");
 }

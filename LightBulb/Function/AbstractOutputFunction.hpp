@@ -10,7 +10,7 @@ private:
 public:
 	virtual ~AbstractOutputFunction() {}
 	// Calculate the output from the activation
-	virtual float execute(float activation) = 0;
+	virtual double execute(double activation) = 0;
 	// Create a copy of the object
 	virtual AbstractOutputFunction* getOutputFunctionCopy() = 0;
 };

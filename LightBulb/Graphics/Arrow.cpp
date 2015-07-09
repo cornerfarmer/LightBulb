@@ -11,7 +11,7 @@ Arrow::Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description
 	lines[1].position = endPos;
 
 	// Calc the angle of the line between start and endpos
-	float angle = calcAngleFromLine(startPos, endPos);
+	double angle = calcAngleFromLine(startPos, endPos);
 	// Add the two lines which are located at the head if the line and which make the arrow look like an arrow
 	lines[2].position = endPos;
 	lines[3].position = calcCartesianFromPolarCoordinates(endPos, 10, angle + M_PI + 0.6);

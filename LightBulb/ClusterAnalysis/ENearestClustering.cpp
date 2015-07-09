@@ -24,7 +24,7 @@ void ENearestClustering::calculateCache(PointSet& points)
 	}
 }
 
-void ENearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, float nearestPointDistance)
+void ENearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointDistance)
 {	
 	// Go through all distanceToPoint entries while the distance between the pointToAdd and the point in the current distanceToPoint entry is less than nearestPointDistance
 	for (int i = 1; i < distanceToPoint[&pointToAdd].size() && distanceToPoint[&pointToAdd][i].second <= nearestPointDistance; i++)
@@ -40,9 +40,9 @@ void ENearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& c
 	}
 }
 
-float ENearestClustering::getBiggestDistance(PointSet& points)
+double ENearestClustering::getBiggestDistance(PointSet& points)
 {
-	float biggestDistance = 0;
+	double biggestDistance = 0;
 	// Go through all points
 	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
 		biggestDistance = std::max(biggestDistance, distanceToPoint[*point].back().second);

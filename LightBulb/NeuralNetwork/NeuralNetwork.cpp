@@ -16,9 +16,9 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	networkTopology.reset(networkTopology_);
 }
 
-std::unique_ptr<NeuralNetworkIO<float>> NeuralNetwork::calculate(NeuralNetworkIO<float>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, float>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, float>>* netInputValuesInTime)
+std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
-	std::unique_ptr<NeuralNetworkIO<float>> output(new NeuralNetworkIO<float>());
+	std::unique_ptr<NeuralNetworkIO<double>> output(new NeuralNetworkIO<double>());
 
 	// If the calculation start at time 0
 	if (startTime == 0)
@@ -50,13 +50,13 @@ std::unique_ptr<NeuralNetworkIO<float>> NeuralNetwork::calculate(NeuralNetworkIO
 	return output;
 }
 
-std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
+std::unique_ptr<std::vector<double>> NeuralNetwork::getOutput()
 {
 	// Get all output Neurons
 	std::vector<StandardNeuron*>* outputNeurons = networkTopology->getOutputNeurons();
 	
-	// Create a new float vector, which will contain all output values
-	std::unique_ptr<std::vector<float>> outputValues(new std::vector<float>());
+	// Create a new double vector, which will contain all output values
+	std::unique_ptr<std::vector<double>> outputValues(new std::vector<double>());
 
 	// Go through all neurons and copy the activation values into the output vector
 	for (std::vector<StandardNeuron*>::iterator neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
@@ -67,7 +67,7 @@ std::unique_ptr<std::vector<float>> NeuralNetwork::getOutput()
 	return outputValues;
 }
 
-void NeuralNetwork::setInput(std::vector<float>* inputVector)
+void NeuralNetwork::setInput(std::vector<double>* inputVector)
 {
 	// Get all input Neurons
 	std::vector<AbstractNeuron*>* inputNeurons = networkTopology->getInputNeurons();

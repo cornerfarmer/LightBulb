@@ -13,13 +13,13 @@ class IdentityFunction : public AbstractOutputFunction, public AbstractActivatio
 private:
 public:
 	// Inherited: 
-	float execute(float input);
-	float execute(float input, AbstractThreshold* threshold);
-	float executeDerivation(float input, AbstractThreshold* threshold);
+	double execute(double input);
+	double execute(double input, AbstractThreshold* threshold);
+	double executeDerivation(double input, AbstractThreshold* threshold);
 	AbstractOutputFunction* getOutputFunctionCopy();
 	AbstractActivationFunction* getActivationFunctionCopy();
-	float getMaximum();
-	float getMinimum();
+	double getMaximum();
+	double getMinimum();
 	bool hasAMaxAndMinimum();
 };
 

@@ -10,20 +10,20 @@
 struct ValuePosition
 {
 	// Position of the point
-	std::vector<float> position;
+	std::vector<double> position;
 	// Value of the point
-	std::vector<float> value;	
+	std::vector<double> value;	
 	// Sets the relation between the position and the value distance 
-	static const float valuePositionRelation;
+	static const double valuePositionRelation;
 
-	ValuePosition(std::vector<float> &position_, std::vector<float> &value_);
+	ValuePosition(std::vector<double> &position_, std::vector<double> &value_);
 	ValuePosition();
 	// Calculates the (value and position) distance between two valuePositions
-	float getDistanceBetweenValuePositions(ValuePosition &otherValuePosition, float maxPositionDistance, float maxValueDistance);
+	double getDistanceBetweenValuePositions(ValuePosition &otherValuePosition, double maxPositionDistance, double maxValueDistance);
 	// Calculates the distance between two positions
-	float getPositionDistance(ValuePosition &otherValuePosition);
+	double getPositionDistance(ValuePosition &otherValuePosition);
 	// Calculates the distance between two values
-	float getValueDistance(ValuePosition &otherValuePosition);
+	double getValueDistance(ValuePosition &otherValuePosition);
 
 };
 

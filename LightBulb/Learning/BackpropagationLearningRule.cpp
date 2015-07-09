@@ -56,14 +56,14 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 }
 
 
-float BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// If its the last layer
 	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
 	{		
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
-		float gradient = -1 * edge.getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge.getNextNeuron()];	
+		double gradient = -1 * edge.getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge.getNextNeuron()];	
 
 		return gradient;
 	}
@@ -71,7 +71,7 @@ float BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeaching
 	{		
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
-		float gradient = -1 * edge.getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge.getNextNeuron()];
+		double gradient = -1 * edge.getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge.getNextNeuron()];
 	
 		return gradient;
 	}	
@@ -92,7 +92,7 @@ void BackpropagationLearningRule::initializeNeuronWeightCalculation(AbstractTeac
 		std::list<Edge*>* efferentEdges = neuron.getEfferentEdges();
 
 		// Calc the nextLayerErrorValueFactor
-		float nextLayerErrorValueFactor = 0;
+		double nextLayerErrorValueFactor = 0;
 
 		// Go through all efferentEdges of the actual neuron and add to the nextLayerErrorValueFactor: deltaValue * edgeWeight
 		int efferentEdgeIndex = 0;
@@ -106,9 +106,9 @@ void BackpropagationLearningRule::initializeNeuronWeightCalculation(AbstractTeac
 	}	
 }
 
-float BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, float gradient)
+double BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, double gradient)
 {
-	float deltaWeight;
+	double deltaWeight;
 
 	// If momentum and not a resilientLearningRate is used
 	if (getOptions()->momentum > 0)
@@ -139,7 +139,7 @@ AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(Neur
 	return new TopologicalOrder();
 }
 
-void BackpropagationLearningRule::adjustWeight(Edge* edge, float gradient)
+void BackpropagationLearningRule::adjustWeight(Edge* edge, double gradient)
 {
 	edge->setWeight(edge->getWeight() + calculateDeltaWeight(edge, gradient));
 }

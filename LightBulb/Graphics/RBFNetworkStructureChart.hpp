@@ -23,15 +23,15 @@ struct RBFNetworkStructureChartOptions
 	// The selected rbfNetwork
 	RBFNetwork* rbfNetwork;
 	// The end of the displayed range in x-direction
-	float xRangeEnd;
+	double xRangeEnd;
 	// The start of the displayed range in x-direction
-	float xRangeStart;
+	double xRangeStart;
 	// The index of the coordinate in the center vector displayed in x-direction
 	unsigned int xRBFNeuronCenterCoordinateIndex;
 	// The end of the displayed range in y-direction
-	float yRangeEnd;
+	double yRangeEnd;
 	// The start of the displayed range in y-direction
-	float yRangeStart;	
+	double yRangeStart;	
 	// The index of the coordinate in the center vector displayed in y-direction
 	unsigned int yRBFNeuronCenterCoordinateIndex;
 	

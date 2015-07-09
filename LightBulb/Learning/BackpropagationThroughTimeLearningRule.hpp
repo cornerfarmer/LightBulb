@@ -30,9 +30,9 @@ class BackpropagationThroughTimeLearningRule : public BackpropagationLearningRul
 {
 private:	
 	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeight(Edge* edge, float gradient);
+	void adjustWeight(Edge* edge, double gradient);
 	// This vector should hold all delta weight sums for every edge in the original network, which is the sum of all corresponding weights in the unfolded network
-	std::vector<float> deltaWeightSums;
+	std::vector<double> deltaWeightSums;
 	// This variable contains the original network which is not unfolded
 	NeuralNetwork* originalNeuralNetwork;
 protected:

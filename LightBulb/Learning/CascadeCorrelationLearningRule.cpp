@@ -40,12 +40,12 @@ void CascadeCorrelationLearningRule::initializeLearningAlgoritm(NeuralNetwork &n
 }
 
 
-float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// If the learning rule is in output neurons learning mode, let the backpropagation learning rule do the work
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)	
 	{
-		float gradient = 0;
+		double gradient = 0;
 
 		gradient += outputNeuronsBackpropagationLearningRule->calculateDeltaWeightFromEdge(lesson, layer, neuron, edge, lessonIndex, layerIndex, neuronIndex, edgeIndex, errormap);
 
@@ -54,9 +54,9 @@ float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeach
 	else if (currentMode == CANDIDATEUNITLEARNINGMODE && std::find(currentCandidateUnits.begin(), currentCandidateUnits.end(), edge.getNextNeuron()) != currentCandidateUnits.end())
 	{
 		// If we are in candidate unit learning mode and the current edge points to a candidate unit
-		float gradient = 0;
+		double gradient = 0;
 	
-		for (std::map<int, std::map<StandardNeuron*, float>>::iterator errorFactor = errorFactors[&lesson].begin(); errorFactor != errorFactors[&lesson].end(); errorFactor++)
+		for (std::map<int, std::map<StandardNeuron*, double>>::iterator errorFactor = errorFactors[&lesson].begin(); errorFactor != errorFactors[&lesson].end(); errorFactor++)
 		{
 			// Go through all output neurons  
 			for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
@@ -73,9 +73,9 @@ float CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeach
 		return 0;
 }
 
-float CascadeCorrelationLearningRule::calcOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson)
+double CascadeCorrelationLearningRule::calcOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson)
 {
-	float outputSum = 0;
+	double outputSum = 0;
 	// Calculate the output gradient of the current time step
 	if (edge->getNextNeuron() != edge->getPrevNeuron() || time != 0)
 		outputSum += neuronOutputCache[lesson][edge->getNextNeuron() != edge->getPrevNeuron() ? time : time - 1][edge->getPrevNeuron()];
@@ -86,7 +86,7 @@ float CascadeCorrelationLearningRule::calcOutputGradient(Edge* edge, int time, A
 	return edge->getNextNeuron()->executeDerivationOnActivationFunction(candidatesNetInputCache[edge->getNextNeuron()][lesson][time]) * outputSum;
 }
 
-float CascadeCorrelationLearningRule::getOutputGradientCached(Edge* edge, int time, AbstractTeachingLesson* lesson)
+double CascadeCorrelationLearningRule::getOutputGradientCached(Edge* edge, int time, AbstractTeachingLesson* lesson)
 {
 	if (!outputGradientCache[lesson][edge][time].second)
 	{
@@ -96,7 +96,7 @@ float CascadeCorrelationLearningRule::getOutputGradientCached(Edge* edge, int ti
 	return outputGradientCache[lesson][edge][time].first;
 }
 
-float CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson)
+double CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson)
 {
 	if (getOptions()->recurrent)
 		return getOutputGradientCached(edge, time, lesson);
@@ -117,7 +117,7 @@ AbstractActivationOrder* CascadeCorrelationLearningRule::getNewActivationOrder(N
 	return new TopologicalOrder();
 }
 
-void CascadeCorrelationLearningRule::adjustWeight(Edge* edge, float gradient)
+void CascadeCorrelationLearningRule::adjustWeight(Edge* edge, double gradient)
 {
 	// Let the backpropagation learning rules adjust the weight
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE)
@@ -138,11 +138,11 @@ void CascadeCorrelationLearningRule::printDebugOutput()
 		std::cout << "cor :" << std::fixed << std::setprecision(10) << getTotalCorrelation() << " ";*/
 }
 
-float CascadeCorrelationLearningRule::getTotalCorrelationOfUnit(StandardNeuron* candidateUnit)
+double CascadeCorrelationLearningRule::getTotalCorrelationOfUnit(StandardNeuron* candidateUnit)
 {
-	float totalCorrelation = 0;
+	double totalCorrelation = 0;
 	// Go through all correlation values of the given candidate unit and add it
-	for (std::map<StandardNeuron*, float>::iterator correlation = correlations[candidateUnit].begin(); correlation != correlations[candidateUnit].end(); correlation++)
+	for (std::map<StandardNeuron*, double>::iterator correlation = correlations[candidateUnit].begin(); correlation != correlations[candidateUnit].end(); correlation++)
 	{
 		totalCorrelation += std::abs(correlation->second);
 	}
@@ -191,7 +191,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 			// Resize the cache to be able hold all values in all timesteps
 			neuronOutputCache[teachingLesson->get()].resize((*teachingLesson)->getMaxTimeStep() + 1);
 			// Create temporary vector for all neuronInputs
-			std::vector<std::map<AbstractNeuron*, float>> neuronInputs((*teachingLesson)->getMaxTimeStep() + 1);
+			std::vector<std::map<AbstractNeuron*, double>> neuronInputs((*teachingLesson)->getMaxTimeStep() + 1);
 			// Calculate the error map for the current teaching lesson
 			errorMaps[teachingLesson->get()] = (*teachingLesson)->getErrormap(neuralNetwork, activationOrder, 0 , 0, &neuronOutputCache[teachingLesson->get()], &neuronInputs);
 						
@@ -229,7 +229,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 			// If the error factors should be recalculated
 			if (calcErrorFactor)
 			{
-				NeuralNetworkIO<float> outputVector;
+				NeuralNetworkIO<double> outputVector;
 				// Go through all output neurons
 				for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 				{
@@ -247,7 +247,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 		}		
 	}
 
-	std::map<StandardNeuron*, float> meanCandidateOutput;
+	std::map<StandardNeuron*, double> meanCandidateOutput;
 	// Go through all candidate units
 	for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 	{		
@@ -264,7 +264,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 	// Go through all output neuons
 	for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 	{
-		float meanErrorValue = 0;
+		double meanErrorValue = 0;
 		// If we should recalculate the error factors
 		if (calcErrorFactor)
 		{
@@ -302,7 +302,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 			// Go through allo candidate units
 			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 			{
-				for (std::map<int, std::map<StandardNeuron*, float>>::iterator errorFactor = errorFactors[teachingLesson->get()].begin(); errorFactor != errorFactors[teachingLesson->get()].end(); errorFactor++)
+				for (std::map<int, std::map<StandardNeuron*, double>>::iterator errorFactor = errorFactors[teachingLesson->get()].begin(); errorFactor != errorFactors[teachingLesson->get()].end(); errorFactor++)
 				{
 					// Recalculate the correlation: (output - meanOutput) * errorFac
 					correlations[*currentCandidateUnit][*outputNeuron] += (neuronOutputCache[teachingLesson->get()][errorFactor->first][*currentCandidateUnit] - meanCandidateOutput[*currentCandidateUnit]) * errorFactor->second[*outputNeuron];
@@ -367,7 +367,7 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 			currentMode = OUTPUTNEURONSLEARNINGMODE;
 
 			// Determine the candidate unit with the biggest correlation
-			float maxCorrelation = 0;
+			double maxCorrelation = 0;
 			StandardNeuron* bestCandidateUnit = NULL;
 			for (std::vector<StandardNeuron*>::iterator currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 			{
@@ -399,11 +399,11 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 		// If we are not switching the mode and the current mode is candidate unit learning, recalculate the correlations
 		calcAllCorrelations(neuralNetwork, teacher, activationOrder, false);
 
-		for (std::map<AbstractTeachingLesson*, std::map<Edge*, std::map<int, std::pair<float, bool>>>>::iterator cacheOfLesson = outputGradientCache.begin(); cacheOfLesson != outputGradientCache.end(); cacheOfLesson++)
+		for (std::map<AbstractTeachingLesson*, std::map<Edge*, std::map<int, std::pair<double, bool>>>>::iterator cacheOfLesson = outputGradientCache.begin(); cacheOfLesson != outputGradientCache.end(); cacheOfLesson++)
 		{
-			for (std::map<Edge*, std::map<int, std::pair<float, bool>>>::iterator cacheOfEdge = cacheOfLesson->second.begin(); cacheOfEdge != cacheOfLesson->second.end(); cacheOfEdge++)
+			for (std::map<Edge*, std::map<int, std::pair<double, bool>>>::iterator cacheOfEdge = cacheOfLesson->second.begin(); cacheOfEdge != cacheOfLesson->second.end(); cacheOfEdge++)
 			{
-				for (std::map<int, std::pair<float, bool>>::iterator cacheOfTimestep = cacheOfEdge->second.begin(); cacheOfTimestep != cacheOfEdge->second.end(); cacheOfTimestep++)
+				for (std::map<int, std::pair<double, bool>>::iterator cacheOfTimestep = cacheOfEdge->second.begin(); cacheOfTimestep != cacheOfEdge->second.end(); cacheOfTimestep++)
 				{
 					cacheOfTimestep->second.second = false;
 				}
@@ -429,7 +429,7 @@ bool CascadeCorrelationLearningRule::configureNextErroMapCalculation(int* nextSt
 	}
 }
 
-std::vector<std::map<AbstractNeuron*, float>>* CascadeCorrelationLearningRule::getOutputValuesInTime()
+std::vector<std::map<AbstractNeuron*, double>>* CascadeCorrelationLearningRule::getOutputValuesInTime()
 {
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE) 
 		return outputNeuronsBackpropagationLearningRule->getOutputValuesInTime();
@@ -437,7 +437,7 @@ std::vector<std::map<AbstractNeuron*, float>>* CascadeCorrelationLearningRule::g
 		return NULL;
 }
 
-std::vector<std::map<AbstractNeuron*, float>>* CascadeCorrelationLearningRule::getNetInputValuesInTime()
+std::vector<std::map<AbstractNeuron*, double>>* CascadeCorrelationLearningRule::getNetInputValuesInTime()
 {
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE) 
 		return outputNeuronsBackpropagationLearningRule->getNetInputValuesInTime();

@@ -17,7 +17,7 @@ struct DeltaLearningRuleOptions : AbstractLearningRuleOptions
 	// The neuronPlacer helps to replace all RBFNeurons before starting to learn (Only needed when training RBFNetworks)
 	AbstractRBFNeuronPlacer* neuronPlacer;
 	// Sets the learning Rate
-	float learningRate;	
+	double learningRate;	
 	// Selects if a resilient learning rate should be used (This option can not be used at the same time with the momentum term)
 	bool resilientLearningRate;
 	// Holds all options which are needed for the resilient learning rate
@@ -49,9 +49,9 @@ private:
 	// Inherited:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
-	float calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
+	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
-	void adjustWeight(Edge* edge, float gradient);
+	void adjustWeight(Edge* edge, double gradient);
 	bool learningHasStopped();	
 	void printDebugOutput();
 public:

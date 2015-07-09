@@ -12,7 +12,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &poi
 	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++)
 	{
 		PointSet::iterator point = points.begin();
-		std::advance(point, (float)(rand() % RAND_MAX) / RAND_MAX * points.size());
+		std::advance(point, (double)(rand() % RAND_MAX) / RAND_MAX * points.size());
 		// Set the position to one random point, so every cluster does now contain at least one point
 		(*cluster).center.position = (*point)->valPos.position;
 		(*cluster).center.value = (*point)->valPos.value;
@@ -38,12 +38,12 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &poi
 			// Be sure the cluster of the point is null
 			(*point)->cluster = NULL;
 			// Set the current nearest cluster distance to zero
-			float nearestClusterDistance = 0;
+			double nearestClusterDistance = 0;
 
 			for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 			{
 				// Calculate the distance between the point and the current cluster
-				float currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());
+				double currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());
 				// If the currentDistance is less than the nearestClusterDistance or if this is the first cluster
 				if (currentDistance < nearestClusterDistance || (*point)->cluster == NULL)
 				{

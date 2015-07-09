@@ -3,7 +3,7 @@
 #include <limits>
 #include <stdexcept>
 
-float GaussianRBFFunction::execute(float input, AbstractThreshold* threshold)
+double GaussianRBFFunction::execute(double input, AbstractThreshold* threshold)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
 	// Check if the given threshold is a RBFThreshold
@@ -14,7 +14,7 @@ float GaussianRBFFunction::execute(float input, AbstractThreshold* threshold)
 	return exp(-pow(input, 2) / (2 * pow(rbfThreshold->getWidth(), 2)));
 }
 
-float GaussianRBFFunction::executeDerivation(float input, AbstractThreshold* threshold)
+double GaussianRBFFunction::executeDerivation(double input, AbstractThreshold* threshold)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
 	// Check if the given threshold was a RBFThreshold
@@ -31,12 +31,12 @@ AbstractActivationFunction* GaussianRBFFunction::getActivationFunctionCopy()
 	return new GaussianRBFFunction(*this);
 }
 
-float GaussianRBFFunction::getMaximum()
+double GaussianRBFFunction::getMaximum()
 {
 	throw std::logic_error("A GaussianRBFFunction does not have a maximum");
 }
 
-float GaussianRBFFunction::getMinimum()
+double GaussianRBFFunction::getMinimum()
 {
 	throw std::logic_error("A GaussianRBFFunction does not have a minimum");
 }

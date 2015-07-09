@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <stdexcept>
 
-Edge::Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_)
+Edge::Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, double weight_)
 {
 	// Check if the given neurons are correct
 	if (!prevNeuron_)
@@ -15,7 +15,7 @@ Edge::Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, float weigh
 	weight = weight_;
 }
 
-float Edge::getWeight()
+double Edge::getWeight()
 {
 	return weight;
 }
@@ -30,7 +30,7 @@ StandardNeuron* Edge::getNextNeuron()
 	return nextNeuron;
 }
 
-void Edge::setWeight(float newWeight)
+void Edge::setWeight(double newWeight)
 {
 	weight = newWeight;
 }
@@ -45,7 +45,7 @@ void Edge::setNextNeuron(StandardNeuron* newNextNeuron)
 	nextNeuron = newNextNeuron;
 }
 
-void Edge::randomizeWeight(float randStart, float randEnd)
+void Edge::randomizeWeight(double randStart, double randEnd)
 {
-	weight = (float)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+	weight = (double)rand() / RAND_MAX * (randEnd - randStart) + randStart;
 }

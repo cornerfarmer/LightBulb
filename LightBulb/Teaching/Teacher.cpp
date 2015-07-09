@@ -23,9 +23,9 @@ std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLesson
 	return &teachingLessons;
 }
 
-float Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+double Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
-	float totalError = 0;
+	double totalError = 0;
 
 	// Add every specific error of the teachingLessons to the total error
 	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)

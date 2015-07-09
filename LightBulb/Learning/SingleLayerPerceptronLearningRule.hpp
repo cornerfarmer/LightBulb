@@ -15,11 +15,11 @@ class SingleLayerPerceptronLearningRule : public AbstractLearningRule
 {
 private:
 	// Inherited:
-	void adjustWeight(Edge* edge, float deltaWeight);
+	void adjustWeight(Edge* edge, double deltaWeight);
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
-	float calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errorvector);
+	double calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errorvector);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	SingleLayerPerceptronLearningRule(AbstractLearningRuleOptions &options_);

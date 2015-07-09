@@ -5,7 +5,7 @@ InputNeuron::InputNeuron()
 
 }
 
-void InputNeuron::setInput(float newInput)
+void InputNeuron::setInput(double newInput)
 {
 	activation = newInput;
 }

@@ -16,7 +16,7 @@ SingleLayerPerceptronLearningRule::SingleLayerPerceptronLearningRule(AbstractLea
 
 }
 
-void SingleLayerPerceptronLearningRule::adjustWeight(Edge* edge, float deltaWeight)
+void SingleLayerPerceptronLearningRule::adjustWeight(Edge* edge, double deltaWeight)
 {
 	// Just add the weight
 	edge->setWeight(edge->getWeight() + deltaWeight);
@@ -43,7 +43,7 @@ AbstractActivationOrder* SingleLayerPerceptronLearningRule::getNewActivationOrde
 	return new TopologicalOrder();
 }
 
-float SingleLayerPerceptronLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errorVector)
+double SingleLayerPerceptronLearningRule::calculateDeltaWeightFromEdge(Edge* edge, int layerIndex, int neuronIndex, int edgeIndex, int layerCount, int neuronsInLayerCount, ErrorMap_t* errorVector)
 {
 	// If the errorValue is positive add the activation to the weight, else substract the activation from the weight
 	if ((*errorVector)[0][edge->getNextNeuron()] > 0)

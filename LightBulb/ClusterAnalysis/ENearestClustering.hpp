@@ -22,13 +22,13 @@ class ENearestClustering : public AbstractNearestClustering
 {
 private:
 	// Caches the orderd distance between all points
-	std::map<Point*, std::vector<std::pair<Point*, float>>> distanceToPoint;
+	std::map<Point*, std::vector<std::pair<Point*, double>>> distanceToPoint;
 	// Add all points of which the distance to pointToAdd is less than epsilon (nearestPointDistance)
-	void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, float nearestPointDistance);
+	void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointDistance);
 public:
 	// Refresh cache (nthNearestPointToPoint)
 	void calculateCache(PointSet& points);
-	float getBiggestDistance(PointSet& points);
+	double getBiggestDistance(PointSet& points);
 };
 
 #endif

@@ -27,7 +27,7 @@ public:
 	// Get all techingLessons (Useful for online learning)
 	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons();
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
-	float getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	double getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Returns a unfolded version of this teacher
 	std::unique_ptr<Teacher> unfold();
 	// Returns the biggest used timestep of all teaching lessons

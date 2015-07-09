@@ -5,7 +5,7 @@
 #include "ClusterAnalysis\PointSet.hpp"
 
 // Sets the minimum cluster width
-const float AbstractClustering::minClusterWidth = 0.05f;
+const double AbstractClustering::minClusterWidth = 0.05f;
 
 void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 {
@@ -23,8 +23,8 @@ void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &clusters, bool withValue)
 {
 	bool somethingHasChanged = false;
-	std::vector<std::vector<float>> clusterPositionMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->valPos.position.size()));
-	std::vector<std::vector<float>> clusterValueMedian(clusters.size(), std::vector<float>(clusters.front().points.front()->valPos.value.size()));
+	std::vector<std::vector<double>> clusterPositionMedian(clusters.size(), std::vector<double>(clusters.front().points.front()->valPos.position.size()));
+	std::vector<std::vector<double>> clusterValueMedian(clusters.size(), std::vector<double>(clusters.front().points.front()->valPos.value.size()));
 
 	int clusterIndex = 0;
 	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)

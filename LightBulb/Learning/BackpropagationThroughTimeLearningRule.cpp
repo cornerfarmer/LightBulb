@@ -36,10 +36,10 @@ void BackpropagationThroughTimeLearningRule::initializeLearningAlgoritm(NeuralNe
 {	
 	BackpropagationLearningRule::initializeLearningAlgoritm(neuralNetwork, teacher, activationOrder);
 	// Create the delta weight sums vector in the size of the ORIGINAL network edge count
-	deltaWeightSums = std::vector<float>(originalNeuralNetwork->getNetworkTopology()->getEdgeCount(), 0);
+	deltaWeightSums = std::vector<double>(originalNeuralNetwork->getNetworkTopology()->getEdgeCount(), 0);
 }
 
-void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, float gradient)
+void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, double gradient)
 {
 	static int totalEdgeIndex = 0;
 
@@ -53,7 +53,7 @@ void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, float grad
 void BackpropagationThroughTimeLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
 	// Reset all sums to zero
-	for (std::vector<float>::iterator deltaWeightSum = deltaWeightSums.begin(); deltaWeightSum != deltaWeightSums.end(); deltaWeightSum++)
+	for (std::vector<double>::iterator deltaWeightSum = deltaWeightSums.begin(); deltaWeightSum != deltaWeightSums.end(); deltaWeightSum++)
 		*deltaWeightSum = 0;
 }
 

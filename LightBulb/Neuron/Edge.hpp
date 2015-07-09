@@ -11,16 +11,16 @@ class StandardNeuron;
 class Edge
 {
 private:
-	float weight;
+	double weight;
 	AbstractNeuron* prevNeuron;
 	StandardNeuron* nextNeuron;
 public:
 	// Creates a new edge between the two given neurons with the given weight
-	Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, float weight_);	
+	Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, double weight_);	
 	// Returns the weight
-	float getWeight();
+	double getWeight();
 	// Sets the weight 
-	void setWeight(float newWeight);
+	void setWeight(double newWeight);
 	// Returns the prevneuron
 	AbstractNeuron* getPrevNeuron();
 	// Returns the next neuron
@@ -30,7 +30,7 @@ public:
 	// Sets the next neuron
 	void setNextNeuron(StandardNeuron* newNextNeuron);	
 	// Sets the weight to a new random value between randStart and randEnd
-	void randomizeWeight(float randStart, float randEnd);
+	void randomizeWeight(double randStart, double randEnd);
 };
 
 #endif

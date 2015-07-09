@@ -21,7 +21,7 @@ class StandardNeuron;
 struct RealTimeRecurrentLearningRuleOptions : public AbstractLearningRuleOptions
 {	
 	// Sets the learning Rate
-	float learningRate;	
+	double learningRate;	
 	// Enables teacherForcing which can speed up the learning progress
 	bool teacherForcing;
 	RealTimeRecurrentLearningRuleOptions()
@@ -39,34 +39,34 @@ private:
 	// Holds all teachingInputs for all neurons in all timesteps of the current teaching lesson (needed for teacherForcing)
 	std::unique_ptr<ErrorMap_t> currentTeachingInputMap;
 	// Holds all output values in every timestep
-	std::vector<std::map<AbstractNeuron*, float>> outputValuesInTime;
+	std::vector<std::map<AbstractNeuron*, double>> outputValuesInTime;
 	// Holds all netInput values in every timestep
-	std::vector<std::map<AbstractNeuron*, float>> netInputValuesInTime;
+	std::vector<std::map<AbstractNeuron*, double>> netInputValuesInTime;
 	// This vector should hold all delta values
-	std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<float, bool>>>> dynamicSystemCache;
+	std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<double, bool>>>> dynamicSystemCache;
 	// Returns the value of the dynamic system of an edge at a specific time point
-	float getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap);
+	double getDynamicSystemValueOfEdgeAtTime(Edge* edge, StandardNeuron* neuron, int time, bool isInFirstCalculationLayer, ErrorMap_t* errormap);
 	// The current network topology
 	AbstractNetworkTopology* currentNetworkTopology;
 	// The current time step
 	int currentTimeStep;
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeight(Edge* edge, float gradient);
+	void adjustWeight(Edge* edge, double gradient);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	RealTimeRecurrentLearningRuleOptions* getOptions();
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	virtual float calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
+	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
 	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 	void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork);
 	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
-	std::vector<std::map<AbstractNeuron*, float>>* getOutputValuesInTime();
-	std::vector<std::map<AbstractNeuron*, float>>* getNetInputValuesInTime();
+	std::vector<std::map<AbstractNeuron*, double>>* getOutputValuesInTime();
+	std::vector<std::map<AbstractNeuron*, double>>* getNetInputValuesInTime();
 	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 public:
 	RealTimeRecurrentLearningRule(RealTimeRecurrentLearningRuleOptions& options_);

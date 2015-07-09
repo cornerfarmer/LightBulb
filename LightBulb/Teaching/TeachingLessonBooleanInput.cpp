@@ -4,7 +4,7 @@
 #include "NeuralNetwork\NeuralNetworkIO.hpp"
 #include <exception>
 
-TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
+TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
 {
 	// Check if all given options are correct
 	if (!teachingPattern_)
@@ -13,11 +13,11 @@ TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<float>* t
 		throw std::invalid_argument("The given teachingInput is not valid");
 
 	teachingInput = std::unique_ptr<NeuralNetworkIO<bool>>(teachingInput_);	
-	teachingPattern = std::unique_ptr<NeuralNetworkIO<float>>(teachingPattern_);
-	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<float>>(new NeuralNetworkIO<float>());
+	teachingPattern = std::unique_ptr<NeuralNetworkIO<double>>(teachingPattern_);
+	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>());
 }
 
-NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
+NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
 {
 	// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
 	if (!activationFunction->hasAMaxAndMinimum())
@@ -27,7 +27,7 @@ NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractAct
 	// Go through all  teaching input values
 	for (NeuralNetworkIO<bool>::iterator teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->end(); teachingInputAtTime++)
 	{
-		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<float>(teachingInputAtTime->second.size());
+		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<double>(teachingInputAtTime->second.size());
 		// Go through all  teaching input values
 		for (int i = 0; i < teachingInputAtTime->second.size(); i++)
 		{
@@ -39,11 +39,11 @@ NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingInput(AbstractAct
 		}
 	}
 
-	// Return the vector with float values
+	// Return the vector with double values
 	return teachingInputLinear.get();
 }
 
-NeuralNetworkIO<float>* TeachingLessonBooleanInput::getTeachingPattern()
+NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }

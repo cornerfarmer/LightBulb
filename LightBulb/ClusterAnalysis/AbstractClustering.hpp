@@ -16,7 +16,7 @@ class AbstractClustering
 {
 protected:
 	// Sets the minimum cluster width
-	static const float minClusterWidth;
+	static const double minClusterWidth;
 
 	// Calculate the width of all given clusters based on their points
 	void calculateAllClusterWidths(std::list<Cluster> &clusters);

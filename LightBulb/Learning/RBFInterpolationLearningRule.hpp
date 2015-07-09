@@ -52,12 +52,12 @@ protected:
 	// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
 	RBFInterpolationLearningRuleOptions* getOptions();
 	// Inherited:
-	void adjustWeight(Edge* edge, float deltaWeight);
+	void adjustWeight(Edge* edge, double deltaWeight);
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
-	float calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
+	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
 	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:

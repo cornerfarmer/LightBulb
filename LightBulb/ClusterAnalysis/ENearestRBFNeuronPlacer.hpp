@@ -18,7 +18,7 @@ class ENearestRBFNeuronPlacer : public AbstractNonReliableRBFNeuronPlacer
 {
 protected:
 	// Sets the minimum cluster width
-	static const float iterationEndPrecision;
+	static const double iterationEndPrecision;
 public:
 	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher);
 	AbstractRBFNeuronPlacer* getCopy();

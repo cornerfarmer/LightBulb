@@ -64,15 +64,15 @@ public:
 	// Returns all Neurons
 	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
-	void randomizeWeights(float randStart, float randEnd);
+	void randomizeWeights(double randStart, double randEnd);
 	// Calculates the Edge count
 	int getEdgeCount();
 	// Reset all activations of all neurons
 	void resetActivation();
 	// Puts all current neuron outputs into the given map
-	void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs);
+	void getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
-	void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs);
+	void getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs);
 	// Adds a neuron to the network
 	AbstractNeuron* addNeuron(bool refreshNeuronCounters, bool inputNeuron = false);
 	// Inherited:

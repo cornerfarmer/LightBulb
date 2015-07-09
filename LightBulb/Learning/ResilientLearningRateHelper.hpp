@@ -20,17 +20,17 @@ class Edge;
 struct ResilientLearningRateHelperOptions
 {	
 	// Sets the factor by which the learningRate can grow
-	float learningRateGrowFac;
+	double learningRateGrowFac;
 	// Sets the factor by which the learningRate can shrink
-	float learningRateShrinkFac;
+	double learningRateShrinkFac;
 	// Sets the highest possible learningRate
-	float learningRateMax;
+	double learningRateMax;
 	// Sets the lowest possible learningRate
-	float learningRateMin;
+	double learningRateMin;
 	// Sets the start value of all learningRates
-	float learningRateStart;
+	double learningRateStart;
 	// The lowest total learning rate (if the current value is smaller than this value the learning process will stop)
-	float minLearningRate;
+	double minLearningRate;
 	ResilientLearningRateHelperOptions()
 	{
 		learningRateGrowFac = 1.2f;
@@ -47,13 +47,13 @@ class ResilientLearningRateHelper
 {
 private:
 	// Holds for every edge its previous learning rate
-	std::map<Edge*, float> previousLearningRates;
+	std::map<Edge*, double> previousLearningRates;
 	ResilientLearningRateHelperOptions* options;
 public:
 	ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_);
 	ResilientLearningRateHelper();
 	// Computes the new learning rate of the given edge from the given gradient
-	float getLearningRate(Edge* edge, float gradient);
+	double getLearningRate(Edge* edge, double gradient);
 	// Print a short debug output (totalLearningRate)
 	void printDebugOutput();
 	// Returns if the learning has stopped

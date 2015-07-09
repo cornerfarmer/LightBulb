@@ -19,7 +19,7 @@ struct Point
 	ValuePosition valPos;
 	// Cluster which contains this point
 	Cluster* cluster;
-	Point(std::vector<float> &position_, std::vector<float> &value_)
+	Point(std::vector<double> &position_, std::vector<double> &value_)
 		: valPos(position_, value_)
 	{
 		cluster = NULL;

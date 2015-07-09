@@ -3,7 +3,7 @@
 #include "ClusterAnalysis\Point.hpp"
 #include "ClusterAnalysis\PointSet.hpp"
 
-std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(PointSet &points, float nearestPointsCount, int dimensionCount) 
+std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(PointSet &points, double nearestPointsCount, int dimensionCount) 
 {	
 	// Create a new cluster list
 	std::unique_ptr<std::list<Cluster>> clusters(new std::list<Cluster>());
@@ -44,7 +44,7 @@ std::unique_ptr<std::list<Cluster>> AbstractNearestClustering::doClustering(Poin
 	return clusters;
 }
 
-bool AbstractNearestClustering::pairCompare(const std::pair<Point*, float>& a ,const std::pair<Point*, float>& b)
+bool AbstractNearestClustering::pairCompare(const std::pair<Point*, double>& a ,const std::pair<Point*, double>& b)
 {
 	return a.second < b.second;
 }

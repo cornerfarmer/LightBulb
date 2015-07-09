@@ -7,7 +7,7 @@
 #include "ClusterAnalysis\PointSet.hpp"
 
 // Sets the minimum cluster width
-const float ENearestRBFNeuronPlacer::iterationEndPrecision = 0.1f;
+const double ENearestRBFNeuronPlacer::iterationEndPrecision = 0.1f;
 
 void ENearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
@@ -28,9 +28,9 @@ void ENearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teac
 
 	// First we have to set a interval, which will contain the right parameter
 	// Set the intervalBegin to 0. This would produce as many clusters as many points we have
-	float intervalBegin = 0;
+	double intervalBegin = 0;
 	// Set the intervalEnd to pointCount -1. This would always produce exactly one cluster
-	float intervalEnd = clustering.getBiggestDistance(*points.get());
+	double intervalEnd = clustering.getBiggestDistance(*points.get());
 	
 	// This pointer will contain the list of clusters
 	std::unique_ptr<std::list<Cluster>> clusters;

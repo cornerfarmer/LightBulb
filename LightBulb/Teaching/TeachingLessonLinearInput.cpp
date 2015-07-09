@@ -2,7 +2,7 @@
 #include "NeuralNetwork\NeuralNetworkIO.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 
-TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<float>* teachingPattern_, NeuralNetworkIO<float>* teachingInput_)
+TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<double>* teachingInput_)
 {
 	// Check if all given options are correct
 	if (!teachingPattern_)
@@ -10,16 +10,16 @@ TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<float>* tea
 	if (!teachingInput_)
 		throw std::invalid_argument("The given teachingInput is not valid");
 
-	teachingInput = std::unique_ptr<NeuralNetworkIO<float>>(teachingInput_);
-	teachingPattern = std::unique_ptr<NeuralNetworkIO<float>>(teachingPattern_);
+	teachingInput = std::unique_ptr<NeuralNetworkIO<double>>(teachingInput_);
+	teachingPattern = std::unique_ptr<NeuralNetworkIO<double>>(teachingPattern_);
 }
 
-NeuralNetworkIO<float>* TeachingLessonLinearInput::getTeachingInput(AbstractActivationFunction* activationFunction)
+NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingInput(AbstractActivationFunction* activationFunction)
 {
 	return teachingInput.get();
 }
 
-NeuralNetworkIO<float>* TeachingLessonLinearInput::getTeachingPattern()
+NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingPattern()
 {
 	return teachingPattern.get();
 }
@@ -27,7 +27,7 @@ NeuralNetworkIO<float>* TeachingLessonLinearInput::getTeachingPattern()
 AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 {
 	// Create a new teaching input
-	NeuralNetworkIO<float>* unfoldedTeachingInput = new NeuralNetworkIO<float>();
+	NeuralNetworkIO<double>* unfoldedTeachingInput = new NeuralNetworkIO<double>();
 	// Copy the teaching input
 	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
 	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input

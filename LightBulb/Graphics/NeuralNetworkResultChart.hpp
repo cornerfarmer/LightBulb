@@ -24,15 +24,15 @@ struct NeuralNetworkResultChartOptions
 	AbstractActivationOrder* activationOrder;	
 	unsigned int xInputNeuronIndex;
 	unsigned int xTimeStep;
-	float xRangeEnd;
-	float xRangeStart;
+	double xRangeEnd;
+	double xRangeStart;
 	unsigned int yInputNeuronIndex;
 	unsigned int yTimeStep;
-	float yRangeEnd;
-	float yRangeStart;	
+	double yRangeEnd;
+	double yRangeStart;	
 	unsigned int outputNeuronIndex;
-	float ouputRangeStart;
-	float ouputRangeEnd;
+	double ouputRangeStart;
+	double ouputRangeEnd;
 	int ouputTimeStep;
 
 	NeuralNetworkResultChartOptions();	

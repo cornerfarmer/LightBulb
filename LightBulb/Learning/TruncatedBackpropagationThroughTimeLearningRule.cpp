@@ -39,15 +39,15 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm
 		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Create a new delta vector for this neuron
-			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<float, bool>>(getOptions()->maxTimeSteps);
+			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<double, bool>>(getOptions()->maxTimeSteps);
 		}
 	}
 }
 
-float TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// Calculate the gradient
-	float gradient = 0;
+	double gradient = 0;
 	
 	// Go through all time steps
 	for (int t = 0; t < getOptions()->maxTimeSteps; t++)
@@ -74,7 +74,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalc
 	}
 }
 
-float TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
+double TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
 {
 	// Only if the delta value has not calculated yet
 	if (deltaVectorOutputLayer[neuron][time].second == false)
@@ -82,7 +82,7 @@ float TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInT
 		std::list<Edge*>* efferentEdges = neuron->getEfferentEdges();
 
 		// Create a new variable which should hold the complete error fac
-		float errorfac = 0;
+		double errorfac = 0;
 		// If the neuron has a own error value then add it to the error fac
 		if (errormap->count(time) > 0 && (*errormap)[time].count(neuron) > 0)
 			errorfac = (*errormap)[time][neuron];
@@ -112,12 +112,12 @@ BackpropagationThroughTimeLearningRuleOptions* TruncatedBackpropagationThroughTi
 	return static_cast<BackpropagationThroughTimeLearningRuleOptions*>(options.get());
 }
 
-std::vector<std::map<AbstractNeuron*, float>>* TruncatedBackpropagationThroughTimeLearningRule::getOutputValuesInTime()
+std::vector<std::map<AbstractNeuron*, double>>* TruncatedBackpropagationThroughTimeLearningRule::getOutputValuesInTime()
 {
 	return &outputValuesInTime;
 }
 
-std::vector<std::map<AbstractNeuron*, float>>* TruncatedBackpropagationThroughTimeLearningRule::getNetInputValuesInTime()
+std::vector<std::map<AbstractNeuron*, double>>* TruncatedBackpropagationThroughTimeLearningRule::getNetInputValuesInTime()
 {
 	return &netInputValuesInTime;
 }

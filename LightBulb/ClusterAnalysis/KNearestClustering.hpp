@@ -24,7 +24,7 @@ private:
 	// Caches the ordered relative position between two points (e.q. A -> B, 2 means A is the second nearest point relative to B)
 	std::map<Point*, std::vector<std::pair<Point*, int>>> nthNearestPointToPoint;
 	// Add all points which have the pointToAdd in their k-nearest points list to the cluster
-	void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, float nearestPointsCount);
+	void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointsCount);
 public:
 	// Refresh cache (nthNearestPointToPoint)
 	void calculateCache(PointSet& points);

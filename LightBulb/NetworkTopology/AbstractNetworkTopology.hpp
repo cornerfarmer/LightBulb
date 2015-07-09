@@ -25,7 +25,7 @@ public:
 	// Returns all OutputNeurons in the NeuralNetwork
 	virtual std::vector<StandardNeuron*>* getOutputNeurons() = 0;
 	// Set all weights to new random values between randStart and randEnd
-	virtual void randomizeWeights(float randStart, float randEnd) = 0;
+	virtual void randomizeWeights(double randStart, double randEnd) = 0;
 	// Returns all Neurons
 	virtual std::vector<std::vector<StandardNeuron*>>* getNeurons() = 0;
 	// Calculates the Edge count
@@ -33,9 +33,9 @@ public:
 	// Reset the activation of all neurons
 	virtual void resetActivation() = 0;
 	// Puts all current neuronOutputValues into the given map
-	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, float>& neuronOutputs) = 0;
+	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs) = 0;
 	// Puts all current neuronNetInputValues into the given map
-	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, float>& neuronNetInputs) = 0;
+	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs) = 0;
 	// Copies the weight from all matching edges from the other network into the current one
 	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
 	// Returns the biasNeuron

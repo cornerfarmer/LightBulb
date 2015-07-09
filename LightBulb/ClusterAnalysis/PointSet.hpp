@@ -14,13 +14,13 @@ class PointSet : public std::list<Point*>
 {
 private:
 	// Holds the maximum position distance
-	float maxPositionDistance;
+	double maxPositionDistance;
 	// Holds the maximum value distance
-	float maxValueDistance;
+	double maxValueDistance;
 public:
 	PointSet();
-	float getMaxPositionDistance();
-	float getMaxValueDistance();
+	double getMaxPositionDistance();
+	double getMaxValueDistance();
 	// Recalculate the max distances
 	void refreshMaxDistances();
 };

@@ -26,13 +26,13 @@ void ResilientLearningRateHelper::initialize(NeuralNetwork &neuralNetwork)
 	previousLearningRates.clear();
 }
 
-float ResilientLearningRateHelper::getLearningRate(Edge* edge, float gradient)
+double ResilientLearningRateHelper::getLearningRate(Edge* edge, double gradient)
 {
 	// If there is no prevous learning rate, set it to the start value
 	if (previousLearningRates.count(edge) == 0)
 		previousLearningRates[edge] = options->learningRateStart;
 
-	float learningRate = 0;
+	double learningRate = 0;
 
 	// Only do something if the gradient is not 0
 	if (gradient != 0)
@@ -65,8 +65,8 @@ float ResilientLearningRateHelper::getLearningRate(Edge* edge, float gradient)
 void ResilientLearningRateHelper::printDebugOutput()
 {
 	// Calculate the absolute sum of all learningRates
-	float totalLearningRate = 0;
-	for (std::map<Edge*, float>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
+	double totalLearningRate = 0;
+	for (std::map<Edge*, double>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		totalLearningRate += abs(previousLearningRate->second); 
 	// Print the totalLearningRate
 	std::cout << "totalLR :" << std::fixed << std::setprecision(10) << totalLearningRate << " ";
@@ -79,8 +79,8 @@ bool ResilientLearningRateHelper::learningHasStopped()
 	{
 		bool learningHasStopped = true;
 		// If there is any learningRate, which can still change the totalError dont stop the learning process
-		float totalLearningRate = 0;
-		for (std::map<Edge*, float>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
+		double totalLearningRate = 0;
+		for (std::map<Edge*, double>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		{
 			// If the learning rate is in the allowed range, continue learning
 			if (abs(previousLearningRate->second) > options->learningRateMin && abs(previousLearningRate->second) < options->learningRateMax)

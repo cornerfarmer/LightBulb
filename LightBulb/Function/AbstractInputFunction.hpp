@@ -20,7 +20,7 @@ public:
 	virtual ~AbstractInputFunction() {}
 	// Calculate the one value from all given input edges and the additional input.
 	// The neuronOutputCache can be used do use a cached activation instead of the real/current one.
-	virtual float execute(std::list<Edge*> &input, AbstractThreshold* threshold, float additionalInput, std::map<AbstractNeuron*, float>* neuronOutputCache = NULL) = 0;
+	virtual double execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache = NULL) = 0;
 	// Create a copy of the object
 	virtual AbstractInputFunction* getInputFunctionCopy() = 0;
 };

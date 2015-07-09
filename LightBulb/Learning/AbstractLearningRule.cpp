@@ -40,7 +40,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	// Get all output neurons
 	std::vector<StandardNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
 	// Create a vector which will contain all weights for offline learning
-	std::map<Edge*, float> offlineLearningWeights;
+	std::map<Edge*, double> offlineLearningWeights;
 	
 	// Reset all counter
 	tryCounter = 0;
@@ -93,7 +93,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (options->offlineLearning)
 			{
-				for (std::map<Edge*, float>::iterator offlineLearningWeight = offlineLearningWeights.begin(); offlineLearningWeight != offlineLearningWeights.end(); offlineLearningWeight++)
+				for (std::map<Edge*, double>::iterator offlineLearningWeight = offlineLearningWeights.begin(); offlineLearningWeight != offlineLearningWeights.end(); offlineLearningWeight++)
 					offlineLearningWeight->second = 0;
 			}
 
@@ -138,7 +138,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
 							{			
 								// Calculate the deltaWeight
-								float deltaWeight = calculateDeltaWeightFromEdge(*teachingLesson->get(), *neuronsInLayer, *(*neuronsInLayer)[n], **edge, lessonIndex, l, n, edgeIndex, errormap.get());
+								double deltaWeight = calculateDeltaWeightFromEdge(*teachingLesson->get(), *neuronsInLayer, *(*neuronsInLayer)[n], **edge, lessonIndex, l, n, edgeIndex, errormap.get());
 
 								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
  								if (options->offlineLearning)
@@ -206,7 +206,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
 			}
 		}
-	} while ((totalError > options->totalErrorGoal || abs(totalError) == std::numeric_limits<float>::infinity()) && ++tryCounter < options->maxTries);
+	} while ((totalError > options->totalErrorGoal || abs(totalError) == std::numeric_limits<double>::infinity()) && ++tryCounter < options->maxTries);
 	
 	// Print, If goal has reached 
 	if (options->enableDebugOutput)
