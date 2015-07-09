@@ -126,7 +126,7 @@
                     <undefinedTypeMoniker
                       Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
                       LastKnownName="float"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -334,7 +334,7 @@
                     <undefinedTypeMoniker
                       Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                       LastKnownName="float[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -372,7 +372,7 @@
                     <undefinedTypeMoniker
                       Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
                       LastKnownName="float"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -396,7 +396,7 @@
                     <undefinedTypeMoniker
                       Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
                       LastKnownName="float"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -448,7 +448,7 @@
                     <undefinedTypeMoniker
                       Id="d6404abc-7c7f-44ae-b049-072594ff1cfe"
                       LastKnownName="float"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -473,7 +473,7 @@
                     <undefinedTypeMoniker
                       Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                       LastKnownName="float[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -498,7 +498,7 @@
                     <undefinedTypeMoniker
                       Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                       LastKnownName="float[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -697,7 +697,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -715,7 +715,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -815,7 +815,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -887,7 +887,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -905,7 +905,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>

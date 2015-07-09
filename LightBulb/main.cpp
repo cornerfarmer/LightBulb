@@ -143,7 +143,7 @@ void doPerceptronTest()
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {
@@ -227,7 +227,7 @@ void doRBFTest()
 	rbfNetworkStructureChart.recalculateAllValues();
 
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {
@@ -269,7 +269,7 @@ void doRecurrentLayeredNetworkTest()
 	NetworkTopologyDrawer networkTopologyDrawer(0, 0, networkTopologyDrawerOptions);
 	networkTopologyDrawer.refresh();
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {
@@ -352,7 +352,7 @@ void doRecurrentLayeredNetworkTest()
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {
@@ -485,7 +485,7 @@ void doFreeNetworkTest()
 	FreeNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
 	networkTopologyDrawer.refresh();
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {
@@ -920,7 +920,7 @@ void doCascadeCorrelationTest()
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {
@@ -1021,7 +1021,7 @@ void doRecurrentCascadeCorrelationTest()
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
 	neuralNetworkResultChart.recalculateAllValues();
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ANNHelper!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
 	while (window.isOpen())
     {

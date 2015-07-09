@@ -25,7 +25,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
-ANNHelper.sdf
-ANNHelper.opensdf
-ANNHelper/Debug/
-ANNHelper/Release/
+LightBulb.sdf
+LightBulb.opensdf
+LightBulb/Debug/
+LightBulb/Release/

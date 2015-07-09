@@ -2,7 +2,7 @@
 <modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="7473f7cd-2eff-49f5-bceb-5effd448c913"
-  name="ANNHelperModeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  name="LightBulbModeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
   <appliedStereotypesInternal>
     <stereotypeInstance
       Id="9ce1dfba-24b4-4943-bc8e-0f8be4f577aa"
@@ -53,7 +53,7 @@
           <propertyInstance
             Id="7996f729-60da-4978-af33-177b2c9c9dcd"
             name="ProjectPath"
-            value="ClassTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj|EnumTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj|InterfaceTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj|StructTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj" />
+            value="ClassTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj|EnumTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj|InterfaceTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj|StructTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj" />
         </stereotypeInstanceHasPropertyInstances>
         <stereotypeInstanceHasPropertyInstances
           Id="be974bb1-a63e-4713-94f7-728cd8dc53f5">
@@ -175,12 +175,12 @@
     <packageHasNamedElement>
       <undefinedType
         Id="479b7cab-9a78-40aa-a087-79b4e578caee"
-        name="ANNHelperModeling::OutputFunction,, ," />
+        name="LightBulbModeling::OutputFunction,, ," />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <undefinedType
         Id="796721be-288a-44ff-b3a1-798a42dd971b"
-        name="ANNHelperModeling::ActivationFunction, ,, ," />
+        name="LightBulbModeling::ActivationFunction, ,, ," />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <undefinedType
@@ -190,7 +190,7 @@
     <packageHasNamedElement>
       <undefinedType
         Id="79c9f6d5-65fa-4dbf-ac14-315dd8ec57e5"
-        name="ANNHelperModeling::ActivationFunction," />
+        name="LightBulbModeling::ActivationFunction," />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <packageMoniker
@@ -318,7 +318,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -336,7 +336,7 @@
               <undefinedTypeMoniker
                 Id="9f930b9d-7b79-4dc1-83e7-5a148c474368"
                 LastKnownName="float[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>

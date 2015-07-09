@@ -120,7 +120,7 @@
               <undefinedTypeMoniker
                 Id="0a00ab8e-3fbf-492b-bd70-e8d01b6fea09"
                 LastKnownName="int[]"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -256,7 +256,7 @@
               <undefinedTypeMoniker
                 Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
                 LastKnownName="bool"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -392,7 +392,7 @@
               <undefinedTypeMoniker
                 Id="a895053f-1f8e-4cab-bb2a-8e4bec90b41a"
                 LastKnownName="ActivationFunction,"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -700,7 +700,7 @@
                     <undefinedTypeMoniker
                       Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                       LastKnownName="int"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -713,7 +713,7 @@
                     <undefinedTypeMoniker
                       Id="5aea5f93-c52d-4987-a684-ea01ac6ce133"
                       LastKnownName="Neuron[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -833,7 +833,7 @@
                     <undefinedTypeMoniker
                       Id="ac4fa2b3-d50b-4315-adf3-0a2f26d5de1a"
                       LastKnownName="InputNeuron[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -900,7 +900,7 @@
                     <undefinedTypeMoniker
                       Id="5aea5f93-c52d-4987-a684-ea01ac6ce133"
                       LastKnownName="Neuron[]"
-                      LastKnownLocation="ANNHelperModeling.uml" />
+                      LastKnownLocation="LightBulbModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>

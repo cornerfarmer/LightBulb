@@ -40,7 +40,7 @@
           <elementDefinition Id="952f6424-f856-488b-bced-bf1e820af291" />
         </stereotypeInstanceHasPropertyInstances>
         <stereotypeInstanceHasPropertyInstances Id="8e1a95dd-1ec6-4182-b7c6-a6fb4e979b86">
-          <propertyInstance Id="b9d142b1-077d-48c9-8f76-dc0f4d55a511" name="ProjectPath" value="ClassTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj|EnumTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj|InterfaceTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj|StructTemplate=..\ANNHelperModelingLib\ANNHelperModelingLib.csproj">
+          <propertyInstance Id="b9d142b1-077d-48c9-8f76-dc0f4d55a511" name="ProjectPath" value="ClassTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj|EnumTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj|InterfaceTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj|StructTemplate=..\LightBulbModelingLib\LightBulbModelingLib.csproj">
             <elementDefinition Id="7996f729-60da-4978-af33-177b2c9c9dcd" />
           </propertyInstance>
           <elementDefinition Id="513ea30b-af2c-4b1e-9496-22ce060ef0ee" />
@@ -84,7 +84,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" name="AbstractNeuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron::AbstractNeuron">
+      <referencedType Id="a5d8139c-9c55-4891-9175-8d02dd4eb2fa" name="AbstractNeuron" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::Neuron::AbstractNeuron">
         <elementDefinition Id="cb6d953f-93b6-4a67-b1f9-bf3b0f973e11" />
       </referencedType>
     </packageHasNamedElement>
@@ -99,17 +99,17 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="90829668-cc8c-4313-97fd-4b7b83d18843" name="AbstractInputFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::AbstractInputFunction">
+      <referencedType Id="90829668-cc8c-4313-97fd-4b7b83d18843" name="AbstractInputFunction" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::Function::AbstractInputFunction">
         <elementDefinition Id="2de5c842-f067-4154-a303-57f82bed7d64" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="ee04e337-bb78-4b65-8e37-fd076d94c231" name="AbstractActivationFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::AbstractActivationFunction">
+      <referencedType Id="ee04e337-bb78-4b65-8e37-fd076d94c231" name="AbstractActivationFunction" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::Function::AbstractActivationFunction">
         <elementDefinition Id="49effd66-f0b4-426d-9168-a326f4137e83" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="0e62e670-2767-4594-be6d-db5b38998103" name="AbstractOutputFunction" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Function::AbstractOutputFunction">
+      <referencedType Id="0e62e670-2767-4594-be6d-db5b38998103" name="AbstractOutputFunction" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::Function::AbstractOutputFunction">
         <elementDefinition Id="0243159e-574e-461b-9f46-20857f611868" />
       </referencedType>
     </packageHasNamedElement>
@@ -119,7 +119,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="035ce863-5d4f-409b-b0f6-e2351db97327" name="AbstractNetworkTopology" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology::AbstractNetworkTopology">
+      <referencedType Id="035ce863-5d4f-409b-b0f6-e2351db97327" name="AbstractNetworkTopology" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::AbstractNetworkTopology">
         <elementDefinition Id="4232794c-10fd-46a3-a8eb-50ab872b8253" />
       </referencedType>
     </packageHasNamedElement>
@@ -139,12 +139,12 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="7325e575-120a-4a23-a958-224dfcb2c331" name="LayeredNetworkOptions" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology::LayeredNetworkOptions">
+      <referencedType Id="7325e575-120a-4a23-a958-224dfcb2c331" name="LayeredNetworkOptions" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::LayeredNetworkOptions">
         <elementDefinition Id="c7be55b4-1061-4dbe-9378-89b17394e305" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="bb5f38d6-0aee-47ff-ab05-97a1004fc025" name="NeuralNetwork" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NeuralNetwork::NeuralNetwork">
+      <referencedType Id="bb5f38d6-0aee-47ff-ab05-97a1004fc025" name="NeuralNetwork" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NeuralNetwork::NeuralNetwork">
         <elementDefinition Id="42a4c367-a6a4-4af4-bb70-6e801a44e1c9" />
       </referencedType>
     </packageHasNamedElement>
@@ -154,7 +154,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="b8841a47-8820-4a9c-9526-51ee6c445b42" name="InputNeuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron::InputNeuron">
+      <referencedType Id="b8841a47-8820-4a9c-9526-51ee6c445b42" name="InputNeuron" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::Neuron::InputNeuron">
         <elementDefinition Id="5899fa77-bee1-4c08-8c2f-2bd6f172da59" />
       </referencedType>
     </packageHasNamedElement>
@@ -3602,7 +3602,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="96f04254-36f1-448a-9d6a-006dec9639ef" name="StandardNeuron" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::Neuron::StandardNeuron">
+      <referencedType Id="96f04254-36f1-448a-9d6a-006dec9639ef" name="StandardNeuron" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::Neuron::StandardNeuron">
         <elementDefinition Id="e6ec86aa-6ea1-4818-9cf9-ee3fdd6779c7" />
       </referencedType>
     </packageHasNamedElement>
@@ -3925,22 +3925,22 @@
       </package>
     </logicalClassDesignerModelHasPackages>
     <packageHasNamedElement>
-      <referencedType Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" name="NetworkIO" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NeuralNetwork::NetworkIO">
+      <referencedType Id="a76e116d-ecd4-4f9e-9910-4d097c0028ff" name="NetworkIO" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NeuralNetwork::NetworkIO">
         <elementDefinition Id="206ab277-fae0-45b4-b8f6-5b98137263a3" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="c26707f9-b5c8-400a-8b8a-04f09d3c8860" name="AbstractActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::AcitvationOrder::AbstractActivationOrder">
+      <referencedType Id="c26707f9-b5c8-400a-8b8a-04f09d3c8860" name="AbstractActivationOrder" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::AcitvationOrder::AbstractActivationOrder">
         <elementDefinition Id="abcfe223-ed45-4c4e-a16f-8ea7b43340b0" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="53ee496d-412c-4714-ba79-9b51c633217b" name="LayeredNetwork" isAbstract="false" isLeaf="false" cachedFullName="ANNHelperModeling::NetworkTopology::LayeredNetwork">
+      <referencedType Id="53ee496d-412c-4714-ba79-9b51c633217b" name="LayeredNetwork" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::LayeredNetwork">
         <elementDefinition Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>
-  <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="ANNHelperModeling">
+  <package Id="98242eec-98ce-4b35-b56d-76888567c67f" name="LightBulbModeling">
     <elementDefinition Id="7473f7cd-2eff-49f5-bceb-5effd448c913" />
     <profileInstances>
       <packageHasProfileInstances Id="ffb56298-21bd-4e92-9170-4a041b6ac509">

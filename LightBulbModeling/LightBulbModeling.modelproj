@@ -6,8 +6,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{064f388d-4b77-481c-a1cf-bbf57c2d6470}</ProjectGuid>
     <ArchitectureToolsVersion>1.0.0.0</ArchitectureToolsVersion>
-    <Name>ANNHelperModeling</Name>
-    <RootNamespace>ANNHelperModeling</RootNamespace>
+    <Name>LightBulbModeling</Name>
+    <RootNamespace>LightBulbModeling</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -58,7 +58,7 @@
       <DependentUpon>UMLClassDiagram.classdiagram</DependentUpon>
     </Content>
     <Folder Include="ModelDefinition\" />
-    <Content Include="ModelDefinition\ANNHelperModeling.uml">
+    <Content Include="ModelDefinition\LightBulbModeling.uml">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

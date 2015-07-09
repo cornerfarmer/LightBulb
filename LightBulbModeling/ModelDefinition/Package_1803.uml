@@ -27,7 +27,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -45,7 +45,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -134,7 +134,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -152,7 +152,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -170,7 +170,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -188,7 +188,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -206,7 +206,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -224,7 +224,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -242,7 +242,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -260,7 +260,7 @@
               <undefinedTypeMoniker
                 Id="8ed9c5ea-7ea3-4d29-b7d2-980624410da5"
                 LastKnownName="int"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -278,7 +278,7 @@
               <undefinedTypeMoniker
                 Id="85198ddc-f7f9-4508-b5e9-9b6ecd19f70f"
                 LastKnownName="bool"
-                LastKnownLocation="ANNHelperModeling.uml" />
+                LastKnownLocation="LightBulbModeling.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>

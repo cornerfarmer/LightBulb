@@ -159,7 +159,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8FEF3ECA-165D-4337-AF14-CEB70A0DCF76}</ProjectGuid>
-    <RootNamespace>ANNHelper</RootNamespace>
+    <RootNamespace>LightBulb</RootNamespace>
+    <ProjectName>LightBulb</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
