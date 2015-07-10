@@ -31,7 +31,7 @@ double ValuePosition::getPositionDistance(ValuePosition &otherValuePosition)
 {
 	// Calculate the euclidean distance 
 	double distance = 0;
-	for (int p = 0; p < position.size(); p++)
+	for (unsigned int p = 0; p < position.size(); p++)
 		distance += pow(position[p] - otherValuePosition.position[p], 2);
 	distance = sqrt(distance);
 	return distance;
@@ -42,7 +42,7 @@ double ValuePosition::getValueDistance(ValuePosition &otherValuePosition)
 {
 	// Calculate the euclidean distance 
 	double distance = 0;
-	for (int p = 0; p < value.size(); p++)
+	for (unsigned int p = 0; p < value.size(); p++)
 		distance += pow(value[p] - otherValuePosition.value[p], 2);
 	distance = sqrt(distance);
 	return distance;

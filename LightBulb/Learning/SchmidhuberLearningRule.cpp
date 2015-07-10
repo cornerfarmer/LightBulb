@@ -178,7 +178,7 @@ void SchmidhuberLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neur
 		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Set all deltaValues in all time steps to invalid
-			for (int t = 0; t < deltaVectorOutputLayer[*neuron].size(); t++) 
+			for (unsigned int t = 0; t < deltaVectorOutputLayer[*neuron].size(); t++) 
 				deltaVectorOutputLayer[*neuron][t].second = false;
 		}
 	}

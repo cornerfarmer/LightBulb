@@ -31,7 +31,7 @@ private:
 	// This vector should hold all delta values in all timesteps (The boolean value holds the information, if the deltavalue is valid)
 	std::map<AbstractNeuron*, std::vector<std::pair<double, bool>>> deltaVectorOutputLayer;
 	// Returns and calculated (if needed) the delta value of a neuron in the given timestep
-	double getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap);
+	double getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, unsigned int time, ErrorMap_t* errormap);
 protected:
 	// Returns our current options in form of a BackpropagationThroughTimeLearningRuleOptions object
 	BackpropagationThroughTimeLearningRuleOptions* getOptions();

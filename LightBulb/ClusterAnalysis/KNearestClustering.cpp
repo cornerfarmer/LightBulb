@@ -27,7 +27,7 @@ void KNearestClustering::calculateCache(PointSet& points)
 		std::sort(distanceToPoint.begin(), distanceToPoint.end(), pairCompare);
 
 		// Go from the second nearest point through all points in the distanceToPoint vector in the new order (the first one will be the point itself ;) )
-		for (int i = 1, nth = 0; i < distanceToPoint.size(); i++)
+		for (unsigned int i = 1, nth = 0; i < distanceToPoint.size(); i++)
 		{
 			// If the distance has changed between the last element in the vector and the current one, increase the nth counter
 			if (distanceToPoint[i].second != distanceToPoint[i - 1].second)
@@ -41,7 +41,7 @@ void KNearestClustering::calculateCache(PointSet& points)
 void KNearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointsCount)
 {	
 	// Go through all nthNearestPointToPoint entries
-	for (int i = 0; i < nthNearestPointToPoint[&pointToAdd].size(); i++)
+	for (unsigned int i = 0; i < nthNearestPointToPoint[&pointToAdd].size(); i++)
 	{
 		// If the pointToAdd is in the n-th (nearestPointsCount) nearest points from the point in the nthNearestPointToPoint entry and this point has no cluster yet
 		if (nthNearestPointToPoint[&pointToAdd][i].first->cluster == NULL && nthNearestPointToPoint[&pointToAdd][i].second <= nearestPointsCount)

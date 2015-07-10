@@ -24,13 +24,13 @@ void FreeNetworkTopologyDrawer::refresh()
 		throw std::invalid_argument("The given networkTopology has to be a FreeNetwork!");
 
 	// Place all neurons on the border of a circle
-	double angleDistance = (M_PI * 2) / options->networkTopology->getNeurons()->front().size();
-	sf::Vector2f center(options->posX + options->width / 2, options->posY + options->height / 2);
-	sf::Vector2f radiusVector(options->width / 2 * 0.9, options->height / 2 * 0.9);
+    float angleDistance = ((float)M_PI * 2) / options->networkTopology->getNeurons()->front().size();
+	sf::Vector2f center(options->posX + options->width / 2.0f, options->posY + options->height / 2.0f);
+	sf::Vector2f radiusVector(options->width / 2 * 0.9f, options->height / 2 * 0.9f);
 	int neuronIndex = 0;
 	for (std::vector<StandardNeuron*>::iterator neuron = options->networkTopology->getNeurons()->front().begin(); neuron != options->networkTopology->getNeurons()->front().end(); neuron++, neuronIndex++)
 	{
-		addShapeFromNeuron(*neuron,	calcCartesianFromPolarCoordinates(center, radiusVector, (double)neuronIndex * angleDistance));		
+        addShapeFromNeuron(*neuron, calcCartesianFromPolarCoordinates(center, radiusVector, neuronIndex * angleDistance));        
 	}
 
 	addEdgesToAllShapes();

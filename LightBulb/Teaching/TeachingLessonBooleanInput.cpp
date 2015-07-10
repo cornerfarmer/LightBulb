@@ -29,7 +29,7 @@ NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractAc
 	{
 		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<double>(teachingInputAtTime->second.size());
 		// Go through all  teaching input values
-		for (int i = 0; i < teachingInputAtTime->second.size(); i++)
+		for (unsigned int i = 0; i < teachingInputAtTime->second.size(); i++)
 		{
 			// If the boolean value is true, set the maximum of the activationFunction, else the minimum
 			if (teachingInputAtTime->second[i])

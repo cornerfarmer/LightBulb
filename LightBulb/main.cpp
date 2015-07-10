@@ -314,14 +314,10 @@ void doRecurrentLayeredNetworkTest()
 			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>();
 			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>();
 
-			int lastPattern = -1;
 			for (int l = 0; l < 2; l++)
 			{
-				if (l != 0)
-					lastPattern = (*teachingPattern)[l-1][0];
 				(*teachingPattern)[l] = std::vector<double>(1);
-				(*teachingPattern)[l][0] = (l==0 ? i : j) / 4.0f;		
-
+				(*teachingPattern)[l][0] = (l==0 ? i : j) / 4.0f;
 			}
 
 			(*teachingInput)[1] = std::vector<bool>(1);
@@ -503,7 +499,6 @@ void doFreeNetworkTest()
 
 }
 
-
 void doRTRLTest()
 {
 	FreeNetworkOptions networkOptions;
@@ -594,7 +589,6 @@ void doRTRLTest()
 	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 8);
 }
 
-
 void doSchmidhuberTest()
 {
 	FreeNetworkOptions networkOptions;
@@ -667,7 +661,6 @@ void doSchmidhuberTest()
 
 
 }
-
 
 void doCascadeCorrelationTest()
 {

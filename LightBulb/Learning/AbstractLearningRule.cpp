@@ -62,7 +62,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 		
 		// Do while the totalError is not zero
-		while ((totalError = initializedTeacher.getTotalError(initializedNeuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry )
+		while ((totalError = initializedTeacher.getTotalError(initializedNeuralNetwork, *activationOrder)) > options->totalErrorGoal && iteration++ < options->maxIterationsPerTry)
 		{			
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
@@ -127,7 +127,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						// Go through all neurons in this layer
 						std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 						int neuronsInLayerCount = neuronsInLayer->size();
-						for (int n = 0; n < neuronsInLayer->size(); n++)
+						for (unsigned int n = 0; n < neuronsInLayer->size(); n++)
 						{					
 							// Let the algorithm do some work for the actual neuron
 							initializeNeuronWeightCalculation(*teachingLesson->get(), *neuronsInLayer, *(*neuronsInLayer)[n], lessonIndex, l, n, errormap.get());

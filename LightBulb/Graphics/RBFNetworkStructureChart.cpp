@@ -30,13 +30,13 @@ void RBFNetworkStructureChart::recalculateAllValues()
 		// Extract the threshold of the current neuron
 		RBFThreshold* thresholdOfNeuron = static_cast<RBFThreshold*>(static_cast<StandardNeuron*>(*neuron)->getThreshold());
 		// Set the radius to the width of the neuron converted into the view range
-		newCircle.setRadius(thresholdOfNeuron->getWidth() / (options.xRangeEnd - options.xRangeStart) * options.width);
+		newCircle.setRadius((float)(thresholdOfNeuron->getWidth() / (options.xRangeEnd - options.xRangeStart) * options.width));
 		// Set the position to the wished coordinates of the neuron center converted into the view range
-		newCircle.setPosition(((*thresholdOfNeuron->getCenterVector())[options.xRBFNeuronCenterCoordinateIndex] - options.xRangeStart) / (options.xRangeEnd - options.xRangeStart) * options.width, ((*thresholdOfNeuron->getCenterVector())[options.yRBFNeuronCenterCoordinateIndex] - options.yRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height);
+		newCircle.setPosition((float)(((*thresholdOfNeuron->getCenterVector())[options.xRBFNeuronCenterCoordinateIndex] - options.xRangeStart) / (options.xRangeEnd - options.xRangeStart) * options.width), (float)(((*thresholdOfNeuron->getCenterVector())[options.yRBFNeuronCenterCoordinateIndex] - options.yRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height));
 		// Add the offset position of the chart
-		newCircle.move(options.posX, options.posY);
+		newCircle.move((float)options.posX, (float)options.posY);
 		// Change the vertical scale depending of the view aspect ratio
-		newCircle.setScale(1.0f, 1.0f / options.width * (options.xRangeEnd - options.xRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height);
+		newCircle.setScale(1.0f, (float)(1.0f / options.width * (options.xRangeEnd - options.xRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height));
 
 		// Set the style of the circle shape
 		newCircle.setFillColor(sf::Color::Transparent);
@@ -54,8 +54,8 @@ void RBFNetworkStructureChart::draw(sf::RenderWindow &window)
 {	
 	// Outline the part of the window which will contain our chart
 	sf::RectangleShape drawRect;
-	drawRect.setPosition(options.posX, options.posY);
-	drawRect.setSize(sf::Vector2f(options.width, options.height));
+	drawRect.setPosition((float)options.posX, (float)options.posY);
+	drawRect.setSize(sf::Vector2f((float)options.width, (float)options.height));
 	drawRect.setFillColor(sf::Color::Transparent);
 	drawRect.setOutlineColor(sf::Color::White);
 	drawRect.setOutlineThickness(1);

@@ -128,14 +128,14 @@ void FreeNetwork::buildNetwork()
 	if (options->realInputNeurons)
 	{
 		// Create N input neurons
-		for (int i = 0; i < options->inputNeuronCount; i++)
+		for (unsigned int i = 0; i < options->inputNeuronCount; i++)
 		{
 			addNeuron(false, true);
 		}
 	}
 
 	// Add all neurons
-	for (int l = 0; l < options->neuronCount; l++)
+	for (unsigned int l = 0; l < options->neuronCount; l++)
 	{
 		addNeuron(false);			
 	}	
@@ -359,7 +359,7 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 	}
 
 	// Do for every neuron 
-	for (int i = 0; i < options->neuronCount; i++)
+	for (unsigned int i = 0; i < options->neuronCount; i++)
 	{
 		// Create a new input neuron and add it to the input layer of the unfolded network
 		// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the current hidden layer

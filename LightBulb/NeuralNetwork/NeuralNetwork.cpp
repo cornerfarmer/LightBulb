@@ -73,7 +73,7 @@ void NeuralNetwork::setInput(std::vector<double>* inputVector)
 	std::vector<AbstractNeuron*>* inputNeurons = networkTopology->getInputNeurons();
 
 	// Go through all neurons and copy the input values into the inputNeurons
-	int index = 0;
+	unsigned int index = 0;
 	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
 	{
 		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);

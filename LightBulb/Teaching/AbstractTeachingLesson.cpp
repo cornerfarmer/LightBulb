@@ -39,7 +39,7 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(
 	{
 		if (outputVector.count(teachingInputValue->first) != 0)
 		{
-			for (int i = 0; i < teachingInputValue->second.size(); i++)
+			for (unsigned int i = 0; i < teachingInputValue->second.size(); i++)
 			{
 				(*errorMap)[teachingInputValue->first][static_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[i])] = teachingInputValue->second[i] - outputVector.at(teachingInputValue->first)[i];
 			}

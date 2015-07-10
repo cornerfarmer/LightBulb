@@ -127,7 +127,7 @@ void LayeredNetwork::buildNetwork()
 	// If the given outputNeuronsIndices vector was empty, fill it with the standard values
 	if (options->outputNeuronsIndices.empty())
 	{
-		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
+		for (unsigned int i = 0; i < options->neuronsPerLayerCount.back(); i++)
 			options->outputNeuronsIndices.push_back(i);
 	}
 	
@@ -145,7 +145,7 @@ void LayeredNetwork::buildNetwork()
 		}
 
 		// Add the neurons to the current layer
-		for (int i = 0; i < options->neuronsPerLayerCount[l]; i++)
+		for (unsigned int i = 0; i < options->neuronsPerLayerCount[l]; i++)
 		{
 			addNeuronIntoLayer(l, false, false);
 		}		
@@ -231,7 +231,7 @@ AbstractNeuron* LayeredNetwork::addNeuronIntoLayer(int layerIndex, bool refreshN
 	if (addEdgesToNextLayer)
 	{
 		// If shortcurts are enabled go through all next layers, else only through the next single layer
-		for (int l = layerIndex + 1; (l == layerIndex + 1 || options->enableShortcuts) && l - 1 < neurons.size(); l++)
+		for (unsigned int l = layerIndex + 1; (l == layerIndex + 1 || options->enableShortcuts) && l - 1 < neurons.size(); l++)
 		{			
 			// Go through all neurons in this layer
 			for (std::vector<StandardNeuron*>::iterator nextNeuron = neurons[l - 1].begin(); nextNeuron != neurons[l - 1].end(); nextNeuron++)
@@ -380,7 +380,7 @@ void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
 	inputNeurons.insert(inputNeurons.end(), otherNetwork.inputNeurons.begin(), otherNetwork.inputNeurons.end());
 
 	// Append every hidden layer from the other network to the layer list of this network
-	for (int l = 0; l < otherNetwork.neurons.size(); l++)
+	for (unsigned int l = 0; l < otherNetwork.neurons.size(); l++)
 	{
 		neurons.push_back(otherNetwork.neurons[l]);
 	}
@@ -449,7 +449,7 @@ std::unique_ptr<std::map<Edge*, bool>> LayeredNetwork::getNonRecurrentEdges()
 void LayeredNetwork::removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove)
 {
 	// Go through all neurons in this layer
-	for (int neuronIndex = 0; neuronIndex < neurons[layerIndex].size(); neuronIndex++)
+	for (unsigned int neuronIndex = 0; neuronIndex < neurons[layerIndex].size(); neuronIndex++)
 	{
 		// If the neuron matches the given neuron
 		if (neurons[layerIndex][neuronIndex] == neuronToRemove)

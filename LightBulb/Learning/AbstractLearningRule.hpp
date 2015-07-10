@@ -70,9 +70,9 @@ protected:
 	// Holds the current total error
 	double totalError;
 	// Holds the current iteration
-	int iteration;
+	unsigned int iteration;
 	// Holds the current try number
-	int tryCounter;
+	unsigned int tryCounter;
 	// The current network toplogy
 	NeuralNetwork* currentNeuralNetwork;
 	// The current teacher

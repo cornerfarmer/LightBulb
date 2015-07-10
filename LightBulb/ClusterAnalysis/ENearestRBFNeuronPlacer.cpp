@@ -11,10 +11,10 @@ const double ENearestRBFNeuronPlacer::iterationEndPrecision = 0.1f;
 
 void ENearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
-		// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
-	int clusterCount = neuralNetwork.getNeurons()->front().size();
+	// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
+	unsigned int clusterCount = neuralNetwork.getNeurons()->front().size();
 	// Set the dimensionCount to the neuron count in the first layer
-	int dimensionCount = neuralNetwork.getInputNeurons()->size();
+	unsigned int dimensionCount = neuralNetwork.getInputNeurons()->size();
 
 	// Create a new KNearestClustering object which will do all hard work :)
 	ENearestClustering clustering;

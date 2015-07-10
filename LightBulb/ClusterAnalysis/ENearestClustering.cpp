@@ -27,7 +27,7 @@ void ENearestClustering::calculateCache(PointSet& points)
 void ENearestClustering::addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointDistance)
 {	
 	// Go through all distanceToPoint entries while the distance between the pointToAdd and the point in the current distanceToPoint entry is less than nearestPointDistance
-	for (int i = 1; i < distanceToPoint[&pointToAdd].size() && distanceToPoint[&pointToAdd][i].second <= nearestPointDistance; i++)
+	for (unsigned int i = 1; i < distanceToPoint[&pointToAdd].size() && distanceToPoint[&pointToAdd][i].second <= nearestPointDistance; i++)
 	{
 		// If this point has no cluster yet
 		if (distanceToPoint[&pointToAdd][i].first->cluster == NULL)

@@ -35,7 +35,7 @@ void LayeredNetworkTopologyDrawer::refresh()
 		int neuronIndex = 0;
 		for (std::vector<AbstractNeuron*>::iterator neuron = options->networkTopology->getInputNeurons()->begin(); neuron != options->networkTopology->getInputNeurons()->end(); neuron++, neuronIndex++)
 		{
-			addShapeFromNeuron(*neuron, sf::Vector2f((layerIndex + 1) * layerOffset, (neuronIndex + 1) * neuronOffset));
+			addShapeFromNeuron(*neuron, sf::Vector2f((float)((layerIndex + 1) * layerOffset), (float)((neuronIndex + 1) * neuronOffset)));
 		}
 	}
 
@@ -49,7 +49,7 @@ void LayeredNetworkTopologyDrawer::refresh()
 		int neuronIndex = 0;
 		for (std::vector<StandardNeuron*>::iterator neuron = layer->begin(); neuron != layer->end(); neuron++, neuronIndex++)
 		{
-			addShapeFromNeuron(*neuron,	sf::Vector2f((layerIndex + 1) * layerOffset, (neuronIndex + 1) * neuronOffset));
+			addShapeFromNeuron(*neuron,	sf::Vector2f((float)((layerIndex + 1) * layerOffset), (float)((neuronIndex + 1) * neuronOffset)));
 		}
 	}
 

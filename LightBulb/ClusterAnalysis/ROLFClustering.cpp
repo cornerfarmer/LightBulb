@@ -92,7 +92,7 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(PointSet &point
 				nearestCluster->center.position[i] = nearestCluster->center.position[i] + options.centerLearningRate * ((*point)->valPos.position[i] - nearestCluster->center.position[i]);
 			}
 			// Go thourgh all value dimensions
-			for (int i = 0; i < nearestCluster->center.value.size(); i++)
+			for (unsigned int i = 0; i < nearestCluster->center.value.size(); i++)
 			{
 				// Adjust the position: value = value + centerLearningRate * (pointValue - value)
 				nearestCluster->center.value[i] = nearestCluster->center.value[i] + options.centerLearningRate * ((*point)->valPos.value[i] - nearestCluster->center.value[i]);

@@ -36,7 +36,7 @@ void RecurrentLayeredNetwork::buildRecurrentConnections()
 	if (getOptions()->selfConnectHiddenLayers)
 	{
 		// Go through all hidden layers
-		for (int layerIndex = 0; layerIndex < neurons.size() - 1; layerIndex++)
+		for (unsigned int layerIndex = 0; layerIndex < neurons.size() - 1; layerIndex++)
 		{
 			// Go through all neurons in the current hidden layer
 			for (std::vector<StandardNeuron*>::iterator hiddenNeuron = neurons[layerIndex].begin(); hiddenNeuron != neurons[layerIndex].end(); hiddenNeuron++)
@@ -142,7 +142,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 	if (getOptions()->connectOutputWithInnerNeurons)
 	{
 		// Do for every output neuron in the original recurrent network
-		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
+		for (unsigned int i = 0; i < options->neuronsPerLayerCount.back(); i++)
 		{
 			// Create a new input neuron and add it to the input layer of the unfolded network
 			// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first hidden layer
@@ -154,10 +154,10 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 	if (getOptions()->selfConnectHiddenLayers)
 	{
 		// Do for every hidden layer in the original recurrent network
-		for (int l = 0; l < options->neuronsPerLayerCount.size() - 2; l++)
+		for (unsigned int l = 0; l < options->neuronsPerLayerCount.size() - 2; l++)
 		{
 			// Do for every hidden neuron in this layer
-			for (int i = 0; i < (*unfoldedNetwork->getNeurons())[l].size(); i++)
+			for (unsigned int i = 0; i < (*unfoldedNetwork->getNeurons())[l].size(); i++)
 			{
 				// Create a new input neuron and add it to the input layer of the unfolded network
 				// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the current hidden layer
@@ -176,7 +176,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 	if (getOptions()->selfConnectOutputLayers)
 	{
 		// Do for every output neuron in the original recurrent network
-		for (int i = 0; i < options->neuronsPerLayerCount.back(); i++)
+		for (unsigned int i = 0; i < options->neuronsPerLayerCount.back(); i++)
 		{
 			// Create a new input neuron and add it to the input layer of the unfolded network
 			// This neuron will always have a zero activation and is only used to simulate a recurrent edge for the first output layer
@@ -209,7 +209,7 @@ std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentE
 	}
 
 	// Go through all hidden/output layers
-	int layerIndex = 0;
+	unsigned int layerIndex = 0;
 	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neurons.begin(); layer != neurons.end(); layer++, layerIndex++)
 	{
 		// Go through all neurons in this layer
@@ -217,7 +217,7 @@ std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentE
 		{
 			// Go through all effernetEdges of this neuron
 			std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-			int edgeIndex = 0;
+			unsigned int edgeIndex = 0;
 			for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++, edgeIndex++)
 			{
 				// If the current layer is the last one or the current edge is not connected to the next layer, this is a recurrent edge

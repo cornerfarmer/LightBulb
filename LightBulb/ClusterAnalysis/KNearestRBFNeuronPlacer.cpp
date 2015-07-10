@@ -8,9 +8,9 @@
 void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {
 	// The clusterCount should be the count of RBFNeurons in the given RBFNetwork
-	int clusterCount = neuralNetwork.getNeurons()->front().size();
+	unsigned int clusterCount = neuralNetwork.getNeurons()->front().size();
 	// Set the dimensionCount to the neuron count in the first layer
-	int dimensionCount = neuralNetwork.getInputNeurons()->size();
+	unsigned int dimensionCount = neuralNetwork.getInputNeurons()->size();
 
 	// Create a new KNearestClustering object which will do all hard work :)
 	KNearestClustering clustering;

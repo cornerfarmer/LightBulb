@@ -50,7 +50,7 @@ double TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFrom
 	double gradient = 0;
 	
 	// Go through all time steps
-	for (int t = 0; t < getOptions()->maxTimeSteps; t++)
+	for (unsigned int t = 0; t < getOptions()->maxTimeSteps; t++)
 	{
 		// If this is not the first timestep or both neurons are in the same time step
 		if (t > 0 || (*sameTimestepEdges)[&edge])
@@ -67,14 +67,14 @@ double TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFrom
 void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// Go through all timesteps
-	for (int t = 0; t < getOptions()->maxTimeSteps; t++)
+	for (unsigned int t = 0; t < getOptions()->maxTimeSteps; t++)
 	{
 		// Calculate the delta vector of the current neuron
 		getDeltaVectorOfNeuronInTime(&neuron, t, errormap);
 	}
 }
 
-double TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, int time, ErrorMap_t* errormap)
+double TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neuron, unsigned int time, ErrorMap_t* errormap)
 {
 	// Only if the delta value has not calculated yet
 	if (deltaVectorOutputLayer[neuron][time].second == false)
@@ -131,7 +131,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeTeachingLesson(N
 		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Set all deltaValues in all time steps to invalid
-			for (int t = 0; t < getOptions()->maxTimeSteps; t++) 
+			for (unsigned int t = 0; t < getOptions()->maxTimeSteps; t++) 
 				deltaVectorOutputLayer[*neuron][t].second = false;
 		}
 	}

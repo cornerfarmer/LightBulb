@@ -9,7 +9,7 @@
 #include <exception>
 #include <sstream>
 
-const double AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
+const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
 
 AbstractNetworkTopologyDrawerOptions::AbstractNetworkTopologyDrawerOptions()
 {
@@ -49,11 +49,11 @@ void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
 				}
 
 				// Calculate the angle of the line beetween the two neurons of this edge
-				double angle = calcAngleFromLine(neuronShapes[(*edge)->getPrevNeuron()].first.getPosition(), neuronShapes[(*edge)->getNextNeuron()].first.getPosition());
+                float angle = calcAngleFromLine(neuronShapes[(*edge)->getPrevNeuron()].first.getPosition(), neuronShapes[(*edge)->getNextNeuron()].first.getPosition());
 			      
 				// Calculate the start and end point of the arrow on the neuronShape border. Also consider if there is a contrary edge.
 				arrowStart = calcCartesianFromPolarCoordinates(neuronShapes[(*edge)->getPrevNeuron()].first.getPosition(), 30, angle - (aContraryEdgeExists ? angleDifferenceBetweenContraryEdges : 0));
-				arrowEnd = calcCartesianFromPolarCoordinates(neuronShapes[(*edge)->getNextNeuron()].first.getPosition(), 30, angle + M_PI + (aContraryEdgeExists ? angleDifferenceBetweenContraryEdges : 0));
+				arrowEnd = calcCartesianFromPolarCoordinates(neuronShapes[(*edge)->getNextNeuron()].first.getPosition(), 30, angle + (float)M_PI + (aContraryEdgeExists ? angleDifferenceBetweenContraryEdges : 0));
       		}
 			else
 			{
@@ -64,9 +64,9 @@ void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
 				// Calculate all linepositions of the referencing edge
 				additionalLines.resize(4);
 				additionalLines[0] = arrowStart;
-				additionalLines[1] = calcCartesianFromPolarCoordinates(arrowStart, 30, 5.25 - M_PI / 2);
+				additionalLines[1] = calcCartesianFromPolarCoordinates(arrowStart, 30, 5.25f - (float)M_PI / 2);
 				additionalLines[2] = additionalLines[1];
-				additionalLines[3] = calcCartesianFromPolarCoordinates(additionalLines[2].position, 30, 5.25 - M_PI);
+				additionalLines[3] = calcCartesianFromPolarCoordinates(additionalLines[2].position, 30, 5.25f - (float)M_PI);
 			}
 
 			// Convert the edge weight to a string with 3 fractional digits
