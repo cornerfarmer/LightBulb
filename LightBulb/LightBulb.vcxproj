@@ -206,6 +206,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>SFML_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\SFML-2.1\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
