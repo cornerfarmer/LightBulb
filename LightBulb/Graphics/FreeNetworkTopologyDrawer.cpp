@@ -28,7 +28,7 @@ void FreeNetworkTopologyDrawer::refresh()
 	sf::Vector2f center(options->posX + options->width / 2.0f, options->posY + options->height / 2.0f);
 	sf::Vector2f radiusVector(options->width / 2 * 0.9f, options->height / 2 * 0.9f);
 	int neuronIndex = 0;
-	for (std::vector<StandardNeuron*>::iterator neuron = options->networkTopology->getNeurons()->front().begin(); neuron != options->networkTopology->getNeurons()->front().end(); neuron++, neuronIndex++)
+	for (auto neuron = options->networkTopology->getNeurons()->front().begin(); neuron != options->networkTopology->getNeurons()->front().end(); neuron++, neuronIndex++)
 	{
         addShapeFromNeuron(*neuron, calcCartesianFromPolarCoordinates(center, radiusVector, neuronIndex * angleDistance));        
 	}

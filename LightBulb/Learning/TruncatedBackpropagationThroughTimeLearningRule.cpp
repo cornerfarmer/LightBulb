@@ -33,10 +33,10 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm
 	sameTimestepEdges = activationOrder.getSameTimestepEdges(*neuralNetwork.getNetworkTopology());
 
 	// Go through all hidden/output layers
-	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	for (auto layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Create a new delta vector for this neuron
 			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<double, bool>>(getOptions()->maxTimeSteps);
@@ -88,7 +88,7 @@ double TruncatedBackpropagationThroughTimeLearningRule::getDeltaVectorOfNeuronIn
 			errorfac = (*errormap)[time][neuron];
 		
 		// Go through all efferent edges
-		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
+		for (auto efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
 		{
 			// If this is not the last timestep or the two neurons are in the same timestep
 			if (time < getOptions()->maxTimeSteps - 1 || (*sameTimestepEdges)[*efferentEdge])
@@ -125,10 +125,10 @@ std::vector<std::map<AbstractNeuron*, double>>* TruncatedBackpropagationThroughT
 void TruncatedBackpropagationThroughTimeLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {
 	// Go through all hidden/output layers
-	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	for (auto layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Set all deltaValues in all time steps to invalid
 			for (unsigned int t = 0; t < getOptions()->maxTimeSteps; t++) 

@@ -53,7 +53,7 @@ void BackpropagationThroughTimeLearningRule::adjustWeight(Edge* edge, double gra
 void BackpropagationThroughTimeLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
 	// Reset all sums to zero
-	for (std::vector<double>::iterator deltaWeightSum = deltaWeightSums.begin(); deltaWeightSum != deltaWeightSums.end(); deltaWeightSum++)
+	for (auto deltaWeightSum = deltaWeightSums.begin(); deltaWeightSum != deltaWeightSums.end(); deltaWeightSum++)
 		*deltaWeightSum = 0;
 }
 
@@ -65,11 +65,11 @@ void BackpropagationThroughTimeLearningRule::doCalculationAfterAllWeightAdjustme
 	{
 		std::vector<StandardNeuron*>* neuronsInLayer = &(*neuralNetwork.getNetworkTopology()->getNeurons())[l];
 		// Go through all neurons
-		for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+		for (auto neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 		{
 			std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 			// Go through all afferentEdges of the actual neuron
-			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+			for (auto edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 			{	
 				// Add to the edge weight the corresponding delta weight sum
 				(*edge)->setWeight((*edge)->getWeight() + deltaWeightSums[edgeIndex] / getOptions()->maxTimeSteps);			

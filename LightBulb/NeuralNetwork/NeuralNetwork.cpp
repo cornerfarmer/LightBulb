@@ -59,7 +59,7 @@ std::unique_ptr<std::vector<double>> NeuralNetwork::getOutput()
 	std::unique_ptr<std::vector<double>> outputValues(new std::vector<double>());
 
 	// Go through all neurons and copy the activation values into the output vector
-	for (std::vector<StandardNeuron*>::iterator neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
+	for (auto neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++)
 	{
 		outputValues->push_back((*neuron)->getActivation());
 	}
@@ -74,7 +74,7 @@ void NeuralNetwork::setInput(std::vector<double>* inputVector)
 
 	// Go through all neurons and copy the input values into the inputNeurons
 	unsigned int index = 0;
-	for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
+	for (auto neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
 	{
 		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
 		// If its a real input neuron set the input as input of the neuron

@@ -32,7 +32,7 @@ FreeNetworkOptions::FreeNetworkOptions(const FreeNetworkOptions &obj)
 FreeNetwork::~FreeNetwork()
 {
 	// Go through all neurons 
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 	{
 		// Delete the neuron
 		delete(*neuron);
@@ -41,7 +41,7 @@ FreeNetwork::~FreeNetwork()
 	if (options->realInputNeurons)
 	{
 		// Go through all input neurons 
-		for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
+		for (auto neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
 		{
 			// Delete the input neuron
 			delete(*neuron);
@@ -67,10 +67,10 @@ FreeNetwork::FreeNetwork(FreeNetworkOptions &options_)
 		throw std::invalid_argument("There has to be at least one index inside the inputNeuronsIndices vector");
 	if (options->outputNeuronsIndices.size() == 0)
 		throw std::invalid_argument("There has to be at least one index inside the outputNeuronsIndices vector");
-	for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); !options->realInputNeurons && inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+	for (auto inputNeuronIndex = options->inputNeuronsIndices.begin(); !options->realInputNeurons && inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
 		if (*inputNeuronIndex >= options->neuronCount)
 			throw std::invalid_argument("At least one inputNeuronIndex is not valid");
-	for (std::vector<unsigned int>::iterator outputNeuronIndex = options->outputNeuronsIndices.begin(); !options->realInputNeurons && outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
+	for (auto outputNeuronIndex = options->outputNeuronsIndices.begin(); !options->realInputNeurons && outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
 		if (*outputNeuronIndex >= options->neuronCount)
 			throw std::invalid_argument("At least one outputNeuronIndex is not valid");
 
@@ -82,7 +82,7 @@ FreeNetwork::FreeNetwork(FreeNetworkOptions &options_)
 void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs)
 {
 	// Go through all neurons 
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 	{
 		// Set the value in the map to the current activation of the neuron
 		neuronOutputs[*neuron] = (*neuron)->getActivation();
@@ -92,7 +92,7 @@ void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronO
 	if (options->realInputNeurons)
 	{
 		// Go through all input neurons 
-		for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
+		for (auto neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
 		{
 			// Set the value in the map to the current activation of the input neuron
 			neuronOutputs[*neuron] = (*neuron)->getActivation();
@@ -107,7 +107,7 @@ void FreeNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronO
 void FreeNetwork::getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs)
 {
 	// Go through all neurons 
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 	{
 		// Set the value in the map to the current netInput of the neuron
 		neuronNetInputs[*neuron] = (*neuron)->getNetInput();
@@ -144,14 +144,14 @@ void FreeNetwork::buildNetwork()
 	if (!options->realInputNeurons)
 	{
 		// Set input neurons from given indices
-		for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+		for (auto inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
 		{
 			inputNeurons.push_back(neurons[*inputNeuronIndex]);
 		}
 	}
 
 	// Set output neurons from given indices
-	for (std::vector<unsigned int>::iterator outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
+	for (auto outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
 	{
 		outputNeurons.push_back(neurons[*outputNeuronIndex]);
 	}
@@ -171,7 +171,7 @@ AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters, bool inputNeu
 			newNeuron = options->neuronFactory->createInputNeuron();
 
 			// Add an edge to every neuron 
-			for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+			for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 			{
 				newNeuron->addNextNeuron(*neuron, 1);
 			}
@@ -198,7 +198,7 @@ AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters, bool inputNeu
 		if (options->realInputNeurons)
 		{
 			// Go through all neurons 
-			for (std::vector<AbstractNeuron*>::iterator neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
+			for (auto neuron = inputNeurons.begin(); neuron != inputNeurons.end(); neuron++)
 			{
 				newNeuron->addPrevNeuron(*neuron, 1);
 			}
@@ -209,7 +209,7 @@ AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters, bool inputNeu
 			newNeuron->addPrevNeuron(&biasNeuron, 1);
 
 		// Add an edge to every other neuron 
-		for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+		for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 		{
 			newNeuron->addNextNeuron(*neuron, 1);
 			(*neuron)->addNextNeuron(newNeuron, 1);
@@ -249,11 +249,11 @@ std::vector<std::vector<StandardNeuron*>>* FreeNetwork::getNeurons()
 void FreeNetwork::randomizeWeights(double randStart, double randEnd)
 {
 	// Go through all neurons
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 	{
 		// Go through all affernetEdges of this neuron
 		std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
-		for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+		for (auto edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 		{
 			do{
 				// Set the weight to a new random value
@@ -268,7 +268,7 @@ int FreeNetwork::getEdgeCount()
 	int edgeCounter = 0;
 
 	// Go through all neurons
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 	{
 		// Add the count of the efferent edges of the current neuron
 		edgeCounter += (*neuron)->getAfferentEdges()->size();
@@ -280,7 +280,7 @@ int FreeNetwork::getEdgeCount()
 void FreeNetwork::resetActivation()
 {
 	// Go through all neurons 
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.begin(); neuron != neurons.end(); neuron++)
+	for (auto neuron = neurons.begin(); neuron != neurons.end(); neuron++)
 	{
 		// Reset the activation of the current neuron
 		(*neuron)->resetActivation();
@@ -326,7 +326,7 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 		if (!options->realInputNeurons)
 		{
 			// Copy every standard neuron which is also used as a input neuron into the input layer
-			for (std::vector<unsigned int>::iterator inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
+			for (auto inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
 			{
 				layeredNetworkToMerge->addNeuronIntoLayer(0, (*layeredNetworkToMerge->getNeurons()).front()[*inputNeuronIndex], true);
 			}	
@@ -336,10 +336,10 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 		if (i != 0)
 		{
 			// Go through all current output neurons of the unfolded network
-			for (std::vector<StandardNeuron*>::iterator outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
+			for (auto outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
 			{
 				// Go through all hidden neurons in the first hidden layer of our new network
-				for (std::vector<StandardNeuron*>::iterator hiddenNeuron = (*layeredNetworkToMerge->getNeurons()).front().begin(); hiddenNeuron != (*layeredNetworkToMerge->getNeurons()).front().end(); hiddenNeuron++)
+				for (auto hiddenNeuron = (*layeredNetworkToMerge->getNeurons()).front().begin(); hiddenNeuron != (*layeredNetworkToMerge->getNeurons()).front().end(); hiddenNeuron++)
 				{
 					// Add a edge from the output to the hidden neuron
 					(*outputNeuron)->addNextNeuron(*hiddenNeuron, 1);

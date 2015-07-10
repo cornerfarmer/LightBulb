@@ -16,7 +16,7 @@ double EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* th
 
 	// Calculate the square of the distance between the output and the center
 	std::vector<double>::iterator centerCoordinate = (*rbfThreshold->getCenterVector()).begin();
-	for (std::list<Edge*>::iterator edge = input.begin(); edge != input.end(); edge++, centerCoordinate++)
+	for (auto edge = input.begin(); edge != input.end(); edge++, centerCoordinate++)
 	{
 		euclideanDistance += pow((neuronOutputCache == NULL ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]) - (*centerCoordinate), 2);
 	}

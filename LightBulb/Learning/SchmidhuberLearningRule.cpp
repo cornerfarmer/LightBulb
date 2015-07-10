@@ -32,10 +32,10 @@ void SchmidhuberLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNe
 
 	int maxTimeStep = teacher.getMaxTimeStep();
 	// Go through all hidden/output layers
-	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	for (auto layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Create a new delta vector for this neuron
 			deltaVectorOutputLayer[*neuron] = std::vector<std::pair<double, bool>>(maxTimeStep + 2);
@@ -51,7 +51,7 @@ double SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLes
 	if (currentBlockStart != 0)
 	{
 		// Go through all output neurons
-		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+		for (auto outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
 			// Add to the gradient: last delta vector * dynamicSystemValue
 			gradient -= getDeltaVectorOfNeuronInTime(*outputNeuron, currentBlockStart - 1, errormap) * (*currentDynamicSystemValues)[*outputNeuron][&edge];
@@ -86,7 +86,7 @@ double SchmidhuberLearningRule::getDeltaVectorOfNeuronInTime(StandardNeuron* neu
 			errorfac = (*errormap)[time][neuron];
 		
 		// Go through all efferent edges
-		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
+		for (auto efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++)
 		{
 			// If this is not the last timestep or the two neurons are in the same timestep
 			if (time < currentBlockStart + currentBlockSize - 1)
@@ -113,7 +113,7 @@ double SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Ed
 	if (currentBlockStart != 0)
 	{
 		// Go through all output neurons
-		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+		for (auto outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
 			// Add to the dynamicSystemValue: gamma(outputNeuron) * previous dynamicSystemValue
 			dynamicSystemValue += getGammaOfNeuronsInTime(*outputNeuron, neuron, currentBlockStart - 1) * (*oldDynamicSystemValues)[*outputNeuron][edge];
@@ -172,10 +172,10 @@ void SchmidhuberLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teache
 void SchmidhuberLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
 	// Go through all hidden/output layers
-	for (std::vector<std::vector<StandardNeuron*>>::iterator layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
+	for (auto layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
 	{
 		// Go through all neurons in this layer
-		for (std::vector<StandardNeuron*>::iterator neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
 		{
 			// Set all deltaValues in all time steps to invalid
 			for (unsigned int t = 0; t < deltaVectorOutputLayer[*neuron].size(); t++) 
@@ -204,7 +204,7 @@ double SchmidhuberLearningRule::getGammaOfNeuronsInTime(StandardNeuron* neuronj,
 	else
 	{
 		// Go through all efferent edges
-		for (std::list<Edge*>::iterator efferentEdge = neuronj->getEfferentEdges()->begin(); efferentEdge != neuronj->getEfferentEdges()->end(); efferentEdge++)
+		for (auto efferentEdge = neuronj->getEfferentEdges()->begin(); efferentEdge != neuronj->getEfferentEdges()->end(); efferentEdge++)
 		{			
 			// Add to the sum: previous gammaValue * weight
 			gamma += getGammaOfNeuronsInTime((*efferentEdge)->getNextNeuron(), neuronl, time + 1) * (*efferentEdge)->getWeight();			
@@ -241,17 +241,17 @@ bool SchmidhuberLearningRule::configureNextErroMapCalculation(int* nextStartTime
 	if (*nextStartTime < teachingLesson.getMaxTimeStep() + 1 && *nextStartTime > 0)
 	{	
 		// Go through all output neurons
-		for (std::vector<StandardNeuron*>::iterator outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+		for (auto outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
 		{
 			// Go through all neuron groups
-			for (std::vector<std::vector<StandardNeuron*>>::iterator neuronGroup = currentNetworkTopology->getNeurons()->begin(); neuronGroup != currentNetworkTopology->getNeurons()->end(); neuronGroup++)
+			for (auto neuronGroup = currentNetworkTopology->getNeurons()->begin(); neuronGroup != currentNetworkTopology->getNeurons()->end(); neuronGroup++)
 			{
 				// Go through all neurons
-				for (std::vector<StandardNeuron*>::iterator neuron = neuronGroup->begin(); neuron != neuronGroup->end(); neuron++)
+				for (auto neuron = neuronGroup->begin(); neuron != neuronGroup->end(); neuron++)
 				{
 					// Go through all affernetEdges of this neuron
 					std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
-					for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+					for (auto edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 					{
 						// Compute the dynamicSystem value of this constellation
 						(*currentDynamicSystemValues)[*outputNeuron][*edge] = getDynamicSystemValue(*outputNeuron, *edge);

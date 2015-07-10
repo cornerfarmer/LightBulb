@@ -25,7 +25,7 @@ NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractAc
 
 
 	// Go through all  teaching input values
-	for (NeuralNetworkIO<bool>::iterator teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->end(); teachingInputAtTime++)
+	for (auto teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->end(); teachingInputAtTime++)
 	{
 		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<double>(teachingInputAtTime->second.size());
 		// Go through all  teaching input values

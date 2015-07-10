@@ -28,13 +28,13 @@ double Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOr
 	double totalError = 0;
 
 	// Add every specific error of the teachingLessons to the total error
-	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+	for (auto teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
 	{
 		totalError += (*teachingLesson)->getSpecificError(neuralNetwork, activationOrder);
 	}
 
 	// Add every specific error of the testingLessons to the total error
-	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator testinggLesson = testingLessons.begin(); testinggLesson != testingLessons.end(); testinggLesson++)
+	for (auto testinggLesson = testingLessons.begin(); testinggLesson != testingLessons.end(); testinggLesson++)
 	{
 		totalError += (*testinggLesson)->getSpecificError(neuralNetwork, activationOrder);
 	}
@@ -47,7 +47,7 @@ std::unique_ptr<Teacher> Teacher::unfold()
 	// Create a new teacher
 	std::unique_ptr<Teacher> unfoldedTeacher(new Teacher());
 	// Unfold all teaching lessons
-	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
+	for (auto originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
 	{
 		unfoldedTeacher->addTeachingLesson((*originalTeachingLesson)->unfold());
 	}
@@ -58,7 +58,7 @@ int Teacher::getMaxTimeStep()
 {
 	int maxTimeStep = 0;
 	// Find the biggest timestep of all teaching lessons
-	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+	for (auto teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
 	{
 		maxTimeStep = std::max(maxTimeStep, (*teachingLesson)->getMaxTimeStep());
 	}

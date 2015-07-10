@@ -35,10 +35,10 @@ double RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(AbstractTeach
 {
 	double outputNeuronsDependency = 0;
 	// Go through all error maps
-	for (ErrorMap_t::iterator outputNeurons = errormap->begin(); outputNeurons != errormap->end(); outputNeurons++)
+	for (auto outputNeurons = errormap->begin(); outputNeurons != errormap->end(); outputNeurons++)
 	{
 		// Go through all output neurons
-		for (std::map<StandardNeuron*, double>::iterator outputNeuron = outputNeurons->second.begin(); outputNeuron != outputNeurons->second.end(); outputNeuron++)
+		for (auto outputNeuron = outputNeurons->second.begin(); outputNeuron != outputNeurons->second.end(); outputNeuron++)
 		{
 			// Add to the gradient: errorvalue * dynamicSystemValue
 			outputNeuronsDependency += outputNeuron->second * getDynamicSystemValueOfEdgeAtTime(&edge, outputNeuron->first, outputNeurons->first, true, errormap);
@@ -51,7 +51,7 @@ double RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(AbstractTeach
 		if (currentTeachingInputMap->count(currentTimeStep) != 0)
 		{
 			// Go through all output neurons
-			for (std::map<StandardNeuron*, double>::iterator outputNeuron = (*currentTeachingInputMap)[currentTimeStep].begin();  outputNeuron != (*currentTeachingInputMap)[currentTimeStep].end(); outputNeuron++)
+			for (auto outputNeuron = (*currentTeachingInputMap)[currentTimeStep].begin();  outputNeuron != (*currentTeachingInputMap)[currentTimeStep].end(); outputNeuron++)
 			{
 				// Inject the wished activation (teachingInput)
 				outputNeuron->first->injectActivation(outputNeuron->first->getActivation() + outputNeuron->second);
@@ -106,11 +106,11 @@ void RealTimeRecurrentLearningRule::initializeTry(NeuralNetwork &neuralNetwork, 
 void RealTimeRecurrentLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork)
 {
 	// Go through the whole dynamic system cache
-	for (std::map<Edge*, std::map<StandardNeuron*, std::map<int, std::pair<double, bool>>>>::iterator edge = dynamicSystemCache.begin(); edge != dynamicSystemCache.end(); edge++)
+	for (auto edge = dynamicSystemCache.begin(); edge != dynamicSystemCache.end(); edge++)
 	{
-		for (std::map<StandardNeuron*, std::map<int, std::pair<double, bool>>>::iterator neuron = edge->second.begin(); neuron != edge->second.end(); neuron++)
+		for (auto neuron = edge->second.begin(); neuron != edge->second.end(); neuron++)
 		{
-			for (std::map<int, std::pair<double, bool>>::iterator time = neuron->second.begin(); time != neuron->second.end(); time++)
+			for (auto time = neuron->second.begin(); time != neuron->second.end(); time++)
 			{
 				// Set the valid value to false
 				time->second.second = false;
@@ -137,7 +137,7 @@ double RealTimeRecurrentLearningRule::getDynamicSystemValueOfEdgeAtTime(Edge* ed
 			double previousValuesSum = 0;
 
 			// Go through all afferent edges
-			for (std::list<Edge*>::iterator afferentEdge = neuron->getAfferentEdges()->begin(); afferentEdge != neuron->getAfferentEdges()->end(); afferentEdge++)
+			for (auto afferentEdge = neuron->getAfferentEdges()->begin(); afferentEdge != neuron->getAfferentEdges()->end(); afferentEdge++)
 			{
 				// If the prevNeuron is a standardNeuron (not a BiasNeuron/InputNeuron)
 				StandardNeuron* prevNeuron = dynamic_cast<StandardNeuron*>((*afferentEdge)->getPrevNeuron());

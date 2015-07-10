@@ -53,10 +53,10 @@ void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(PointSet &points, std::l
 			// The second cluster for merging
 			std::list<Cluster>::iterator secondClusterForMerging;
 			// Go through all clusters
-			for (std::list<Cluster>::iterator firstCluster = clusters.begin(); firstCluster != clusters.end(); firstCluster++)
+			for (auto firstCluster = clusters.begin(); firstCluster != clusters.end(); firstCluster++)
 			{
 				// Go through all other clusters
-				for (std::list<Cluster>::iterator secondCluster = firstCluster; secondCluster != clusters.end(); secondCluster++)
+				for (auto secondCluster = firstCluster; secondCluster != clusters.end(); secondCluster++)
 				{
 					if (secondCluster != firstCluster)
 					{

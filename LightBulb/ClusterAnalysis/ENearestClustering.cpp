@@ -7,14 +7,14 @@
 void ENearestClustering::calculateCache(PointSet& points)
 {
 	// Go through all points
-	for (PointSet::iterator fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
+	for (auto fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
 	{
 		// Bring the point list of the current point to the right size
 		distanceToPoint[*fromPoint].resize(points.size());
 
 		int pointIndex = 0;
 		// Go through all points
-		for (PointSet::iterator toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
+		for (auto toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
 		{	
 			// Add a new entry in the distanceToPoint vector with the point and the distance
 			distanceToPoint[*fromPoint][pointIndex] = std::make_pair((*toPoint), (*fromPoint)->valPos.getDistanceBetweenValuePositions((*toPoint)->valPos, points.getMaxPositionDistance(), points.getMaxValueDistance()));
@@ -44,7 +44,7 @@ double ENearestClustering::getBiggestDistance(PointSet& points)
 {
 	double biggestDistance = 0;
 	// Go through all points
-	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
+	for (auto point = points.begin(); point != points.end(); point++)
 		biggestDistance = std::max(biggestDistance, distanceToPoint[*point].back().second);
 
 	return biggestDistance;

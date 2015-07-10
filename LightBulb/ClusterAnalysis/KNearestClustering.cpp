@@ -7,18 +7,18 @@
 void KNearestClustering::calculateCache(PointSet& points)
 {
 	// Create a map entry for every point in points
-	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
+	for (auto point = points.begin(); point != points.end(); point++)
 		nthNearestPointToPoint[*point] = std::vector<std::pair<Point*, int>>();
 
 	// Go through a ll points
-	for (PointSet::iterator fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
+	for (auto fromPoint = points.begin(); fromPoint != points.end(); fromPoint++)
 	{
 		// Create a vector which will contain all distances from the current point to all other points
 		std::vector<std::pair<Point*, double>> distanceToPoint(points.size());
 
 		int pointIndex = 0;
 		// Go through all points
-		for (PointSet::iterator toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
+		for (auto toPoint = points.begin(); toPoint != points.end(); toPoint++, pointIndex++)
 		{	
 			// Add a new entry in the distanceToPoint vector with the point and the distance
 			distanceToPoint[pointIndex] = std::make_pair((*toPoint), (*fromPoint)->valPos.getDistanceBetweenValuePositions((*toPoint)->valPos, points.getMaxPositionDistance(), points.getMaxValueDistance()));

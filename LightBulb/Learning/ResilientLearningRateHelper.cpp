@@ -66,7 +66,7 @@ void ResilientLearningRateHelper::printDebugOutput()
 {
 	// Calculate the absolute sum of all learningRates
 	double totalLearningRate = 0;
-	for (std::map<Edge*, double>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
+	for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		totalLearningRate += abs(previousLearningRate->second); 
 	// Print the totalLearningRate
 	std::cout << "totalLR :" << std::fixed << std::setprecision(10) << totalLearningRate << " ";
@@ -80,7 +80,7 @@ bool ResilientLearningRateHelper::learningHasStopped()
 		bool learningHasStopped = true;
 		// If there is any learningRate, which can still change the totalError dont stop the learning process
 		double totalLearningRate = 0;
-		for (std::map<Edge*, double>::iterator previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
+		for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		{
 			// If the learning rate is in the allowed range, continue learning
 			if (abs(previousLearningRate->second) > options->learningRateMin && abs(previousLearningRate->second) < options->learningRateMax)

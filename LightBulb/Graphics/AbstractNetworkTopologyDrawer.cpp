@@ -29,10 +29,10 @@ AbstractNetworkTopologyDrawer::AbstractNetworkTopologyDrawer(AbstractNetworkTopo
 void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
 {
 	// Go through the whole neuronShape map
-	for (std::map<AbstractNeuron*, std::pair<sf::CircleShape, sf::Text>>::iterator neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
+	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
 	{	
 		// Go through all efferent edges of the current neuron
-		for (std::list<Edge*>::iterator edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
+		for (auto edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
 		{
 			sf::Vector2f arrowStart, arrowEnd;
 			sf::VertexArray additionalLines;
@@ -43,7 +43,7 @@ void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
 				bool aContraryEdgeExists = false;
 
 				// Go through all efferent edges of the current neuron and determin if there is a contrary edge
-				for (std::list<Edge*>::iterator otherEdge = (*edge)->getNextNeuron()->getEfferentEdges()->begin(); otherEdge != (*edge)->getNextNeuron()->getEfferentEdges()->end(); otherEdge++)
+				for (auto otherEdge = (*edge)->getNextNeuron()->getEfferentEdges()->begin(); otherEdge != (*edge)->getNextNeuron()->getEfferentEdges()->end(); otherEdge++)
 				{
 					aContraryEdgeExists |=  ((*otherEdge)->getNextNeuron() == neuronShape->first);
 				}
@@ -102,7 +102,7 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 
 	// TODO: Also consider networks without bias neurons
 	// Search the afferebt edge from the bias neuron
-	for (std::list<Edge*>::iterator edge = options->networkTopology->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->networkTopology->getBiasNeuron()->getEfferentEdges()->end(); edge++)
+	for (auto edge = options->networkTopology->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->networkTopology->getBiasNeuron()->getEfferentEdges()->end(); edge++)
 	{
 		if ((*edge)->getNextNeuron() == neuron)
 		{
@@ -131,7 +131,7 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 void AbstractNetworkTopologyDrawer::draw(sf::RenderWindow &window)
 {	
 	// Go through the whole neuronShape map
-	for (std::map<AbstractNeuron*, std::pair<sf::CircleShape, sf::Text>>::iterator neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
+	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
 	{
 		// Draw the neuron shape
 		window.draw(neuronShape->second.first);
@@ -139,7 +139,7 @@ void AbstractNetworkTopologyDrawer::draw(sf::RenderWindow &window)
 		window.draw(neuronShape->second.second);
 	}
 	// Go through the whole edgeShape list
-	for (std::list<Arrow>::iterator edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
+	for (auto edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
 	{
 		// Draw the edge shape
 		edgeShape->draw(window);

@@ -8,10 +8,10 @@ void PointSet::refreshMaxDistances()
 	maxPositionDistance = 0;
 	maxValueDistance = 0;
 	// Go through all points
-	for (std::list<Point*>::iterator point = this->begin(); point != this->end(); point++)
+	for (auto point = this->begin(); point != this->end(); point++)
 	{
 		// Go through all other points
-		for (std::list<Point*>::iterator otherPoint = point; otherPoint != this->end(); otherPoint++)
+		for (auto otherPoint = point; otherPoint != this->end(); otherPoint++)
 		{
 			// Calculate the position distance between point and otherPoint and set it as the maximum position distance, if it is greater than the current one
 			maxPositionDistance = std::max((*point)->valPos.getPositionDistance((*otherPoint)->valPos), maxPositionDistance);

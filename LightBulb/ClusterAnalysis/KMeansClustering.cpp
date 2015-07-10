@@ -9,7 +9,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &poi
 	std::unique_ptr<std::list<Cluster>> clusters(new std::list<Cluster>(clusterCount));
 	// Go through all clusters
 
-	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++)
+	for (auto cluster = clusters->begin(); cluster != clusters->end(); cluster++)
 	{
 		PointSet::iterator point = points.begin();
 		std::advance(point, (double)(rand() % RAND_MAX) / RAND_MAX * points.size());
@@ -25,7 +25,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &poi
 	{
 		// Go through every cluster
 		int clusterIndex = 0;
-		for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
+		for (auto cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 		{
 			// Clear the points list
 			(*cluster).points.clear();
@@ -33,14 +33,14 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &poi
 
 		// Add every point to its nearest cluster
 		// Go through every point
-		for (PointSet::iterator point = points.begin(); point != points.end(); point++)
+		for (auto point = points.begin(); point != points.end(); point++)
 		{
 			// Be sure the cluster of the point is null
 			(*point)->cluster = NULL;
 			// Set the current nearest cluster distance to zero
 			double nearestClusterDistance = 0;
 
-			for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
+			for (auto cluster = clusters->begin(); cluster != clusters->end(); cluster++, clusterIndex++)
 			{
 				// Calculate the distance between the point and the current cluster
 				double currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());

@@ -4,7 +4,7 @@
 
 AbstractNeuron::~AbstractNeuron()
 {
-	for (std::list<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
+	for (auto edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
 	{
 		delete(*edge);
 	}
@@ -50,7 +50,7 @@ void AbstractNeuron::resetActivation()
 void AbstractNeuron::removeEfferentEdge(Edge* edgeToRemove)
 {
 	// Go through all edges and delete edgeToRemove
-	for (std::list<Edge*>::iterator edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
+	for (auto edge = efferentEdges.begin(); edge != efferentEdges.end(); edge++)
 	{
 		if (*edge == edgeToRemove)
 		{

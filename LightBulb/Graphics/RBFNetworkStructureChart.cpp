@@ -23,7 +23,7 @@ void RBFNetworkStructureChart::recalculateAllValues()
 	// Clear the shape list
 	rbfNeuronShapes.clear();
 	// Go through all rbfNeurons in the rbfNetwork
-	for (std::vector<StandardNeuron*>::iterator neuron = options.rbfNetwork->getNeurons()->front().begin(); neuron != options.rbfNetwork->getNeurons()->front().end(); neuron++)
+	for (auto neuron = options.rbfNetwork->getNeurons()->front().begin(); neuron != options.rbfNetwork->getNeurons()->front().end(); neuron++)
 	{
 		// Create a new circle shape
 		sf::CircleShape newCircle;
@@ -62,7 +62,7 @@ void RBFNetworkStructureChart::draw(sf::RenderWindow &window)
 	window.draw(drawRect);
 
 	// Go through all neuron shapes
-	for (std::list<sf::CircleShape>::iterator neuronShape = rbfNeuronShapes.begin(); neuronShape != rbfNeuronShapes.end(); neuronShape++)
+	for (auto neuronShape = rbfNeuronShapes.begin(); neuronShape != rbfNeuronShapes.end(); neuronShape++)
 	{	
 		// Draw the circle shape
 		window.draw(*neuronShape);

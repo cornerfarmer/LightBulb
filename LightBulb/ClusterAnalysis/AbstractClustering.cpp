@@ -10,12 +10,12 @@ const double AbstractClustering::minClusterWidth = 0.05f;
 void AbstractClustering::calculateAllClusterWidths(std::list<Cluster> &clusters)
 {
 	// Go through all clusters
-	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++)
+	for (auto cluster = clusters.begin(); cluster != clusters.end(); cluster++)
 	{
 		// Set the radius to the minClusterWidth, so it will always be greater than 0
 		(*cluster).radius = minClusterWidth;
 		// Set the radius to the maximum distance between point and center of the cluster
-		for (PointSet::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
+		for (auto point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
 			(*cluster).radius = std::max((*cluster).radius, (*point)->valPos.getPositionDistance((*cluster).center));
 	}
 }
@@ -27,10 +27,10 @@ bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &
 	std::vector<std::vector<double>> clusterValueMedian(clusters.size(), std::vector<double>(clusters.front().points.front()->valPos.value.size()));
 
 	int clusterIndex = 0;
-	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
+	for (auto cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
 	{
 		// Go through every point
-		for (PointSet::iterator point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
+		for (auto point = (*cluster).points.begin(); point != (*cluster).points.end(); point++)
 		{				
 			// Add the position of the point to the median of the choosen cluster
 			for (unsigned int i = 0; i < (*point)->valPos.position.size(); i++)
@@ -51,7 +51,7 @@ bool AbstractClustering::calculateClusterCentersFromMedians(std::list<Cluster> &
 	// Calculate new cluster positions from their medians
 	// Go through all clusters
 	clusterIndex = 0;
-	for (std::list<Cluster>::iterator cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
+	for (auto cluster = clusters.begin(); cluster != clusters.end(); cluster++, clusterIndex++)
 	{
 		if ((*cluster).points.size() != 0)
 		{

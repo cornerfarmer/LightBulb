@@ -21,7 +21,7 @@ public:
 		NeuralNetworkIO<T>* unfoldedNetworkIO = new NeuralNetworkIO<T>();
 		(*unfoldedNetworkIO)[0] = std::vector<T>();
 		// Go through all ioSeries in the various timesteps
-		for (NeuralNetworkIO<T>::iterator ioSeries = begin(); ioSeries != end(); ioSeries++)
+		for (auto ioSeries = begin(); ioSeries != end(); ioSeries++)
 		{
 			// Add them at the end of the first timestep
 			(*unfoldedNetworkIO)[0].insert((*unfoldedNetworkIO)[0].end(), ioSeries->second.begin(), ioSeries->second.end());

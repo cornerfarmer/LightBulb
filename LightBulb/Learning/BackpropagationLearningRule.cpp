@@ -96,7 +96,7 @@ void BackpropagationLearningRule::initializeNeuronWeightCalculation(AbstractTeac
 
 		// Go through all efferentEdges of the actual neuron and add to the nextLayerErrorValueFactor: deltaValue * edgeWeight
 		int efferentEdgeIndex = 0;
-		for (std::list<Edge*>::iterator efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++, efferentEdgeIndex++)
+		for (auto efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++, efferentEdgeIndex++)
 		{
 			nextLayerErrorValueFactor += deltaVectorOutputLayer[(*efferentEdge)->getNextNeuron()] * (*efferentEdge)->getWeight();
 		}

@@ -40,11 +40,11 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 void RBFNetwork::randomizeWeights(double randStart, double randEnd)
 {	
 	// Go through all neurons in the first hidden layer
-	for (std::vector<StandardNeuron*>::iterator neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
+	for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
 	{
 		// Go through all effernetEdges of this neuron
 		std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-		for (std::list<Edge*>::iterator edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+		for (auto edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 		{
 			do{
 				// Set the weight to a new random value
@@ -61,7 +61,7 @@ void RBFNetwork::randomizeCenters(double randStart, double randEnd)
 	{
 		// Create a new center vector and fill it with random values
 		std::vector<double> newCenter(inputNeurons.size());
-		for (std::vector<double>::iterator centerCoordinate = newCenter.begin(); centerCoordinate != newCenter.end(); centerCoordinate++)
+		for (auto centerCoordinate = newCenter.begin(); centerCoordinate != newCenter.end(); centerCoordinate++)
 			*centerCoordinate = (double)rand() / RAND_MAX * (randEnd - randStart) + randStart;
 		// Set the new center vector to the neuron
 		setCenterOfRBFNeuron(neuronIndex, newCenter);

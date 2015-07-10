@@ -38,7 +38,7 @@ void AbstractRBFNeuronPlacer::placeRBFNeuronsFromClusters(std::list<Cluster>* cl
 {
 	// Go through all clusters
 	int neuronIndex = 0;
-	for (std::list<Cluster>::iterator cluster = clusters->begin(); cluster != clusters->end(); cluster++, neuronIndex++)
+	for (auto cluster = clusters->begin(); cluster != clusters->end(); cluster++, neuronIndex++)
 	{
 		// The cluster position will be the new center position of the neuron
 		neuralNetwork.setCenterOfRBFNeuron(neuronIndex, (*cluster).center.position);

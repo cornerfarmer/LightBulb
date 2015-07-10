@@ -7,7 +7,7 @@ double WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* 
 	double sum = additionalInput;
 
 	// Calculate the product of weight and output of every neuron and add it to the sum
-	for (std::list<Edge*>::iterator edge = input.begin(); edge != input.end(); edge++)
+	for (auto edge = input.begin(); edge != input.end(); edge++)
 	{
 		// Use the neuronOutputCache if possible else use the current activation
 		sum += (*edge)->getWeight() * (neuronOutputCache == NULL || neuronOutputCache->find((*edge)->getPrevNeuron()) == neuronOutputCache->end() ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]);

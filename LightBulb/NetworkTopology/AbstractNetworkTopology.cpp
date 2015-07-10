@@ -16,14 +16,14 @@ void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetw
 		// Go through all neurons in the current network
 		int neuronIndex = 0;
 		std::vector<StandardNeuron*>::iterator neuronOther = neuronsInGroupOther.begin();
-		for (std::vector<StandardNeuron*>::iterator neuron = neuronsInGroup.begin(); neuron != neuronsInGroup.end() && neuronOther != neuronsInGroupOther.end(); neuron++, neuronOther++, neuronIndex++)
+		for (auto neuron = neuronsInGroup.begin(); neuron != neuronsInGroup.end() && neuronOther != neuronsInGroupOther.end(); neuron++, neuronOther++, neuronIndex++)
 		{
 			// Extract all afferent edges of the current neurons
 			std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 			std::list<Edge*>* afferentEdgesOther = (*neuronOther)->getAfferentEdges();
 			// Go through all afferentEdges of the actual neurons
 			std::list<Edge*>::iterator edgeOther = afferentEdgesOther->begin();
-			for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end() && edgeOther != afferentEdgesOther->end(); edge++, edgeOther++)
+			for (auto edge = afferentEdges->begin(); edge != afferentEdges->end() && edgeOther != afferentEdgesOther->end(); edge++, edgeOther++)
 			{	
 				// Copy the weight from the edge from the other network into the edge of the own one
 				(*edge)->setWeight((*edgeOther)->getWeight());

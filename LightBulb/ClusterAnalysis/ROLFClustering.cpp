@@ -21,14 +21,14 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(PointSet &point
 	std::unique_ptr<std::list<Cluster>> smallClusters(new std::list<Cluster>());
 
 	// Go through all points
-	for (PointSet::iterator point = points.begin(); point != points.end(); point++)
+	for (auto point = points.begin(); point != points.end(); point++)
 	{
 		// Define a variable which should contain the distance to the nearest cluster that contains the current point
 		double nearestClusterDistance = 0;
 		// A variable which holds the nearest cluster
 		Cluster* nearestCluster = NULL;
 		// Go through all clusters
-		for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
+		for (auto cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
 		{
 			// Calculate the distance from the current point to the current cluster
 			double currentDistance = (*point)->valPos.getDistanceBetweenValuePositions(cluster->center, points.getMaxPositionDistance(), points.getMaxValueDistance());
@@ -61,7 +61,7 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(PointSet &point
 				else if (options.radiusInitMethod == useMeanRadius) // If we should calculate the mean radius, set the radius to 0
 					newCluster.radius = 0;
 
-				for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
+				for (auto cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
 				{
 					// If the max or min method is used, choose the max or min of the current new radius and the radius of the current cluster
 					if (options.radiusInitMethod == useMaxRadius)
@@ -129,10 +129,10 @@ std::unique_ptr<std::list<Cluster>> ROLFClustering::doClustering(PointSet &point
 		clustersFromBigCluster.push_back(Cluster(currentCluster.center, currentCluster.radius));
 
 		// Go through all small clusters which are part of the new big cluster
-		for (std::list<Cluster>::iterator clusterFromBigCluster = clustersFromBigCluster.begin(); clusterFromBigCluster != clustersFromBigCluster.end(); clusterFromBigCluster++)
+		for (auto clusterFromBigCluster = clustersFromBigCluster.begin(); clusterFromBigCluster != clustersFromBigCluster.end(); clusterFromBigCluster++)
 		{
 			// Go through all left small clusters
-			for (std::list<Cluster>::iterator cluster = smallClusters->begin(); cluster != smallClusters->end();)
+			for (auto cluster = smallClusters->begin(); cluster != smallClusters->end();)
 			{
 				// If the current small cluster has at least one point and it intersects with the current clusterFromBigCluster (dist(cluster1, cluster2) < cluster1Radius + cluster2Radius)
 				if (!cluster->points.empty() && (*clusterFromBigCluster).center.getDistanceBetweenValuePositions(cluster->center, points.getMaxPositionDistance(), points.getMaxValueDistance()) < ((*clusterFromBigCluster).radius + cluster->radius) * options.widthMultiplier)

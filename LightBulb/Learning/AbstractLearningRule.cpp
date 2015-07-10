@@ -93,7 +93,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (options->offlineLearning)
 			{
-				for (std::map<Edge*, double>::iterator offlineLearningWeight = offlineLearningWeights.begin(); offlineLearningWeight != offlineLearningWeights.end(); offlineLearningWeight++)
+				for (auto offlineLearningWeight = offlineLearningWeights.begin(); offlineLearningWeight != offlineLearningWeights.end(); offlineLearningWeight++)
 					offlineLearningWeight->second = 0;
 			}
 
@@ -102,7 +102,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 			// Go through every TeachingLesson
 			int lessonIndex = 0;
-			for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::iterator teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
+			for (auto teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
 			{
 				// Do some work before every teaching lesson
 				initializeTeachingLesson(initializedNeuralNetwork, **teachingLesson);
@@ -135,7 +135,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 							std::list<Edge*>* afferentEdges = ((*neuronsInLayer)[n])->getAfferentEdges();
 							// Go through all afferentEdges of the actual neuron
 							int edgeIndex = 0;
-							for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
+							for (auto edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++, edgeIndex++)
 							{			
 								// Calculate the deltaWeight
 								double deltaWeight = calculateDeltaWeightFromEdge(*teachingLesson->get(), *neuronsInLayer, *(*neuronsInLayer)[n], **edge, lessonIndex, l, n, edgeIndex, errormap.get());
@@ -158,11 +158,11 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 							// Go through all neurons in this layer
 							std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 							int neuronsInLayerCount = neuronsInLayer->size();
-							for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+							for (auto neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 							{						
 								std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 								// Go through all afferentEdges of the actual neuron
-								for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+								for (auto edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 								{	
 									// Adjust the weight depending on the sum of all calculated gradients
 									adjustWeight(*edge, offlineLearningWeights[*edge]);							
@@ -190,11 +190,11 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					// Go through all neurons in this layer
 					std::vector<StandardNeuron*>* neuronsInLayer = &(*initializedNeuralNetwork.getNetworkTopology()->getNeurons())[l];
 					int neuronsInLayerCount = neuronsInLayer->size();
-					for (std::vector<StandardNeuron*>::iterator neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
+					for (auto neuron = neuronsInLayer->begin(); neuron != neuronsInLayer->end(); neuron++)
 					{						
 						std::list<Edge*>* afferentEdges = (*neuron)->getAfferentEdges();
 						// Go through all afferentEdges of the actual neuron
-						for (std::list<Edge*>::iterator edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
+						for (auto edge = afferentEdges->begin(); edge != afferentEdges->end(); edge++)
 						{	
 							// Adjust the weight depending on the sum of all calculated gradients
 							adjustWeight(*edge, offlineLearningWeights[*edge] / offlineLearningWeights.size());							

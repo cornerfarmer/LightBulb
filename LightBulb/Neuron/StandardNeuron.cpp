@@ -52,7 +52,7 @@ void StandardNeuron::addPrevNeuron(Edge* newEdge)
 void StandardNeuron::removeAfferentEdge(Edge* edgeToRemove)
 {
 	// Go through all edges and delete edgeToRemove
-	for (std::list<Edge*>::iterator edge = afferentEdges.begin(); edge != afferentEdges.end(); edge++)
+	for (auto edge = afferentEdges.begin(); edge != afferentEdges.end(); edge++)
 	{
 		if (*edge == edgeToRemove)
 		{
