@@ -1,3 +1,4 @@
+// Includes
 #include "Neuron\InputNeuron.hpp"
 
 InputNeuron::InputNeuron()

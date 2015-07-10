@@ -1,3 +1,4 @@
+// Includes
 #include "Learning\SchmidhuberLearningRule.hpp"
 #include "Teaching\Teacher.hpp"
 #include "ActivationOrder\SynchronousOrder.hpp"

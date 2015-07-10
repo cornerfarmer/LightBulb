@@ -1,4 +1,6 @@
+// Includes
 #include "Neuron\Edge.hpp"
+// Library includes
 #include <cstdlib>
 #include <stdexcept>
 

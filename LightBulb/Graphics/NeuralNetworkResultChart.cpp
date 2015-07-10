@@ -1,8 +1,10 @@
+// Includes
 #include "Graphics\NeuralNetworkResultChart.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "ActivationOrder\TopologicalOrder.hpp"
 #include "NeuralNetwork\NeuralNetworkIO.hpp"
+// Library includes
 #include <exception>
 
 NeuralNetworkResultChartOptions::NeuralNetworkResultChartOptions()

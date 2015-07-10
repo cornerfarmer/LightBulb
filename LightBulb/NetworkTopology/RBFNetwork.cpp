@@ -1,3 +1,4 @@
+// Includes
 #include "NetworkTopology\RBFNetwork.hpp"
 #include "NeuronFactory\DifferentFunctionsNeuronFactory.hpp"
 #include "Neuron\RBFThreshold.hpp"

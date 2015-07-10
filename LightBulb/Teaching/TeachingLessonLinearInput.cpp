@@ -1,3 +1,4 @@
+// Includes
 #include "Teaching\TeachingLessonLinearInput.hpp"
 #include "NeuralNetwork\NeuralNetworkIO.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"

@@ -1,8 +1,10 @@
+// Includes
 #include "ClusterAnalysis\ENearestClustering.hpp"
 #include "ClusterAnalysis\Cluster.hpp"
-#include <algorithm>
 #include "ClusterAnalysis\Point.hpp"
 #include "ClusterAnalysis\PointSet.hpp"
+// Library includes
+#include <algorithm>
 
 void ENearestClustering::calculateCache(PointSet& points)
 {

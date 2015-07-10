@@ -1,3 +1,4 @@
+// Includes
 #include "NetworkTopology\CascadeCorrelationNetwork.hpp"
 #include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
 #include "Function\WeightedSumFunction.hpp"

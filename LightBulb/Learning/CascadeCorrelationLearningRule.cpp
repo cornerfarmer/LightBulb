@@ -1,3 +1,4 @@
+// Includes
 #include "Learning\CascadeCorrelationLearningRule.hpp"
 #include "Teaching\Teacher.hpp"
 #include "ActivationOrder\TopologicalOrder.hpp"
@@ -9,6 +10,7 @@
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\Edge.hpp"
 #include "NetworkTopology\CascadeCorrelationNetwork.hpp"
+// Library includes
 #include <algorithm>
 
 CascadeCorrelationLearningRule::CascadeCorrelationLearningRule(CascadeCorrelationLearningRuleOptions& options_) 

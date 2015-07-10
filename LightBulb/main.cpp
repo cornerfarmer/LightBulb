@@ -1,8 +1,4 @@
-#include <iostream>
-#include <exception>
-#include <vector>
-#include <SFML\Graphics.hpp>
-
+// Includes
 #include "Function\WeightedSumFunction.hpp"
 #include "Neuron\Edge.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
@@ -44,6 +40,11 @@
 #include "Learning\SchmidhuberLearningRule.hpp"
 #include "NetworkTopology\CascadeCorrelationNetwork.hpp"
 #include "Learning\CascadeCorrelationLearningRule.hpp"
+// Library includes
+#include <iostream>
+#include <exception>
+#include <vector>
+#include <SFML\Graphics.hpp>
 
 void doPerceptronTest()
 {

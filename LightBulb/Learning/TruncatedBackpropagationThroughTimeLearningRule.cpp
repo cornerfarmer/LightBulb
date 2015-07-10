@@ -1,3 +1,4 @@
+// Includes
 #include "Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"

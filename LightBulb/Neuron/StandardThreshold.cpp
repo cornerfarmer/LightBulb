@@ -1,3 +1,4 @@
+// Includes
 #include "Neuron\StandardThreshold.hpp"
 
 StandardThreshold::StandardThreshold(double value_)

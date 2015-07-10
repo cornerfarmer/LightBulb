@@ -1,3 +1,4 @@
+// Includes
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\Edge.hpp"
 #include "Function\AbstractInputFunction.hpp"

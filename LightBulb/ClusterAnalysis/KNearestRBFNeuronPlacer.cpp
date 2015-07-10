@@ -1,3 +1,4 @@
+// Includes
 #include "ClusterAnalysis\KNearestRBFNeuronPlacer.hpp"
 #include "NetworkTopology\RBFNetwork.hpp"
 #include "ClusterAnalysis\Cluster.hpp"

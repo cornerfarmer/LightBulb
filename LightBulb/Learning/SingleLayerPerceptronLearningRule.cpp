@@ -1,3 +1,4 @@
+// Includes
 #include "Learning\SingleLayerPerceptronLearningRule.hpp"
 #include "Teaching\Teacher.hpp"
 #include "ActivationOrder\TopologicalOrder.hpp"

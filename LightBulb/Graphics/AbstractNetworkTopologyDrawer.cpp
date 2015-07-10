@@ -1,3 +1,4 @@
+// Includes
 #include "Graphics\AbstractNetworkTopologyDrawer.hpp"
 #include "Neuron\AbstractNeuron.hpp"
 #include "Neuron\StandardNeuron.hpp"
@@ -5,6 +6,7 @@
 #include "Neuron\Edge.hpp"
 #include "Graphics\Arrow.hpp"
 #include "Neuron\BiasNeuron.hpp"
+// Library includes
 #include <iomanip>
 #include <exception>
 #include <sstream>

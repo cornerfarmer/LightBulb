@@ -1,3 +1,4 @@
+// Includes
 #include "Function\WeightedSumFunction.hpp"
 #include "Neuron\Edge.hpp"
 #include "Neuron\AbstractNeuron.hpp"

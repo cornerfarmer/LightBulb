@@ -1,7 +1,9 @@
+// Includes
 #include "Teaching\TeachingLessonBooleanInput.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "Function\AbstractActivationFunction.hpp"
 #include "NeuralNetwork\NeuralNetworkIO.hpp"
+// Library includes
 #include <exception>
 
 TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)

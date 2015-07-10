@@ -1,4 +1,6 @@
+// Includes
 #include "Function\IdentityFunction.hpp"
+// Library includes
 #include <limits>
 #include <stdexcept>
 

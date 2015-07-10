@@ -1,9 +1,11 @@
+// Includes
 #include "Graphics\FreeNetworkTopologyDrawer.hpp"
 #include "Neuron\AbstractNeuron.hpp"
 #include "Neuron\StandardNeuron.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "Neuron\Edge.hpp"
 #include "NetworkTopology\FreeNetwork.hpp"
+// Library includes
 #include <exception>
 
 

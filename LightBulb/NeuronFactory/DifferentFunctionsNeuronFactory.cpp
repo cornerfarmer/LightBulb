@@ -1,3 +1,4 @@
+// Includes
 #include "NeuronFactory\DifferentFunctionsNeuronFactory.hpp"
 #include "Neuron\InputNeuron.hpp"
 #include "Neuron\StandardNeuron.hpp"
@@ -5,6 +6,7 @@
 #include "Function\AbstractActivationFunction.hpp"
 #include "Function\AbstractOutputFunction.hpp"
 #include "Neuron\AbstractThreshold.hpp"
+// Library includes
 #include <exception>
 
 

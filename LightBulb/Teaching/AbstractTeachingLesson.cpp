@@ -1,3 +1,4 @@
+// Includes
 #include "Teaching\AbstractTeachingLesson.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"

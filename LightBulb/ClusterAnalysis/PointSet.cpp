@@ -1,5 +1,7 @@
+// Includes
 #include "ClusterAnalysis\PointSet.hpp"
 #include "ClusterAnalysis\Point.hpp"
+// Library includes
 #include <math.h>
 
 void PointSet::refreshMaxDistances()

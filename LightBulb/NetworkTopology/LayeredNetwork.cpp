@@ -1,9 +1,11 @@
+// Includes
 #include "NetworkTopology\LayeredNetwork.hpp"
 #include "Neuron\InputNeuron.hpp"
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\BiasNeuron.hpp"
 #include "Neuron\Edge.hpp"
 #include "NeuronFactory\AbstractNeuronFactory.hpp"
+// Library includes
 #include <exception>
 
 LayeredNetworkOptions::LayeredNetworkOptions()

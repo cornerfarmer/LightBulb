@@ -1,4 +1,5 @@
-﻿#include "Teaching\Teacher.hpp"
+﻿// Includes
+#include "Teaching\Teacher.hpp"
 #include "ActivationOrder\AbstractActivationOrder.hpp"
 #include "Teaching\AbstractTeachingLesson.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"

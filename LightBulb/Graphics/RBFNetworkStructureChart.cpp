@@ -1,3 +1,4 @@
+// Includes
 #include "Graphics\RBFNetworkStructureChart.hpp"
 #include "NetworkTopology\RBFNetwork.hpp"
 #include "Neuron\AbstractNeuron.hpp"

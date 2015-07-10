@@ -1,5 +1,7 @@
+// Includes
 #include "Function\GaussianRBFFunction.hpp"
 #include "Neuron\RBFThreshold.hpp"
+// Library includes
 #include <limits>
 #include <stdexcept>
 

@@ -1,3 +1,4 @@
+// Includes
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "Neuron\AbstractNeuron.hpp"
 #include "Neuron\StandardNeuron.hpp"

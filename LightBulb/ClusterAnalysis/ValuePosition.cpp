@@ -1,3 +1,4 @@
+// Includes
 #include "ClusterAnalysis\ValuePosition.hpp"
 
 // Sets the relation between the position and the value distance 

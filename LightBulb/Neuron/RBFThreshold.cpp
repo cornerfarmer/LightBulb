@@ -1,3 +1,4 @@
+// Includes
 #include "Neuron\RBFThreshold.hpp"
 
 RBFThreshold::RBFThreshold(std::vector<double> &centerVector_, double width_)
