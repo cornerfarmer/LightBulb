@@ -12,6 +12,10 @@
 #include <sstream>
 
 const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
+const sf::Color AbstractNetworkTopologyDrawer::fillColorStandardNeuron = sf::Color::Transparent;
+const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color::Color(0, 150, 0);
+const sf::Color AbstractNetworkTopologyDrawer::drawColorStandardNeuron = sf::Color::White;
+const sf::Color AbstractNetworkTopologyDrawer::fillColorOutputNeuron = sf::Color::Red;
 
 AbstractNetworkTopologyDrawerOptions::AbstractNetworkTopologyDrawerOptions()
 {
@@ -92,8 +96,16 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 	newCircle.setPosition(position.x, position.y);	
 
 	// Set the style of the circle shape
-	newCircle.setFillColor(sf::Color::Transparent);
-	newCircle.setOutlineColor(sf::Color::White);
+	// Select the fill color depending on if its an input neuron
+	if (options->networkTopology->isInputNeuron(neuron))
+		newCircle.setFillColor(sf::Color::Color(0, 150, 0));
+	else
+		newCircle.setFillColor(sf::Color::Transparent);
+	// Select the fill color depending on if its an output neuron
+	if (dynamic_cast<StandardNeuron*>(neuron) && options->networkTopology->isOutputNeuron(static_cast<StandardNeuron*>(neuron)))
+		newCircle.setOutlineColor(sf::Color::Red);
+	else
+		newCircle.setOutlineColor(sf::Color::White);
 	newCircle.setOutlineThickness(1);
 	newCircle.setRadius(30);
 	newCircle.setOrigin(newCircle.getRadius() , newCircle.getRadius());

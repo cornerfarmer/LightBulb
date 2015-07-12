@@ -40,6 +40,10 @@ public:
 	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
 	// Returns the biasNeuron
 	virtual BiasNeuron* getBiasNeuron() = 0;
+	// Returns is the given neuron is an InputNeuron of this networkTopology
+	bool isInputNeuron(AbstractNeuron* neuron);
+	// Returns is the given neuron is an OutputNeuron of this networkTopology
+	bool isOutputNeuron(StandardNeuron* neuron);
 };
 
 #endif

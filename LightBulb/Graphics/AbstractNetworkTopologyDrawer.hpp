@@ -42,6 +42,11 @@ private:
 	std::list<Arrow> edgeShapes;
 	// This constant value holds the angle difference beetween an incoming and an outcoming edge
     static const float angleDifferenceBetweenContraryEdges;
+	// Constants which hold the color values of the neuronShapes
+	static const sf::Color fillColorStandardNeuron;
+	static const sf::Color fillColorInputNeuron;
+	static const sf::Color drawColorStandardNeuron;
+	static const sf::Color fillColorOutputNeuron;
 protected:
 	std::unique_ptr<AbstractNetworkTopologyDrawerOptions> options;
 	// Add a shape with the given position 

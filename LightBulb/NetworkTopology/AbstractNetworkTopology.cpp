@@ -4,6 +4,8 @@
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\Edge.hpp"
 #include "NetworkTopology\LayeredNetwork.hpp"
+// Library includes
+#include <algorithm>
 
 void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 {
@@ -45,3 +47,15 @@ void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetw
 	}
 }
 
+
+bool AbstractNetworkTopology::isInputNeuron(AbstractNeuron* neuron)
+{
+	std::vector<AbstractNeuron*>* inputNeurons = getInputNeurons();
+	return std::find(inputNeurons->begin(), inputNeurons->end(), neuron) != inputNeurons->end();
+}
+
+bool AbstractNetworkTopology::isOutputNeuron(StandardNeuron* neuron)
+{
+	std::vector<StandardNeuron*>* outputNeurons = getOutputNeurons();
+	return std::find(outputNeurons->begin(), outputNeurons->end(), neuron) != outputNeurons->end();
+}
