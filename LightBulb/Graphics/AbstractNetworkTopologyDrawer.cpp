@@ -2,10 +2,11 @@
 #include "Graphics\AbstractNetworkTopologyDrawer.hpp"
 #include "Neuron\AbstractNeuron.hpp"
 #include "Neuron\StandardNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
 #include "Neuron\Edge.hpp"
 #include "Graphics\Arrow.hpp"
 #include "Neuron\BiasNeuron.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
 // Library includes
 #include <iomanip>
 #include <exception>
@@ -14,8 +15,9 @@
 const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
 const sf::Color AbstractNetworkTopologyDrawer::fillColorStandardNeuron = sf::Color::Transparent;
 const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color::Color(0, 150, 0);
-const sf::Color AbstractNetworkTopologyDrawer::drawColorStandardNeuron = sf::Color::White;
-const sf::Color AbstractNetworkTopologyDrawer::fillColorOutputNeuron = sf::Color::Red;
+const sf::Color AbstractNetworkTopologyDrawer::fillColorActivatedNeuron = sf::Color::Color(0, 200, 0);
+const sf::Color AbstractNetworkTopologyDrawer::outlineColorStandardNeuron = sf::Color::White;
+const sf::Color AbstractNetworkTopologyDrawer::outlineColorOutputNeuron = sf::Color::Red;
 
 AbstractNetworkTopologyDrawerOptions::AbstractNetworkTopologyDrawerOptions()
 {
@@ -23,13 +25,15 @@ AbstractNetworkTopologyDrawerOptions::AbstractNetworkTopologyDrawerOptions()
 	posY = 0;
 	height = 300;
 	width = 300;
-	networkTopology = NULL;	
+	network = NULL;	
 }
 
 
 AbstractNetworkTopologyDrawer::AbstractNetworkTopologyDrawer(AbstractNetworkTopologyDrawerOptions& options_)
 {
 	options.reset(new AbstractNetworkTopologyDrawerOptions(options_));
+
+	currentCalculationInput = NULL;
 }
 
 void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
@@ -75,13 +79,8 @@ void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
 				additionalLines[3] = calcCartesianFromPolarCoordinates(additionalLines[2].position, 30, 5.25f - (float)M_PI);
 			}
 
-			// Convert the edge weight to a string with 3 fractional digits
-			std::ostringstream ss;
-			ss << std::fixed << std::setprecision(3) << (*edge)->getWeight();
-			std::string weightString(ss.str());
-
 			// Add the shape to the list
-			edgeShapes.push_back(Arrow(arrowStart, arrowEnd, weightString, additionalLines));
+			edgeShapes[*edge].reset(new Arrow(arrowStart, arrowEnd, "", additionalLines));
 		}
 	}
 }
@@ -95,17 +94,12 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 	// Set the position to the shape
 	newCircle.setPosition(position.x, position.y);	
 
-	// Set the style of the circle shape
-	// Select the fill color depending on if its an input neuron
-	if (options->networkTopology->isInputNeuron(neuron))
-		newCircle.setFillColor(sf::Color::Color(0, 150, 0));
-	else
-		newCircle.setFillColor(sf::Color::Transparent);
+	// Set the style of the circle shape	
 	// Select the fill color depending on if its an output neuron
-	if (dynamic_cast<StandardNeuron*>(neuron) && options->networkTopology->isOutputNeuron(static_cast<StandardNeuron*>(neuron)))
-		newCircle.setOutlineColor(sf::Color::Red);
+	if (dynamic_cast<StandardNeuron*>(neuron) && options->network->getNetworkTopology()->isOutputNeuron(static_cast<StandardNeuron*>(neuron)))
+		newCircle.setOutlineColor(outlineColorOutputNeuron);
 	else
-		newCircle.setOutlineColor(sf::Color::White);
+		newCircle.setOutlineColor(outlineColorStandardNeuron);
 	newCircle.setOutlineThickness(1);
 	newCircle.setRadius(30);
 	newCircle.setOrigin(newCircle.getRadius() , newCircle.getRadius());
@@ -116,7 +110,7 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 
 	// TODO: Also consider networks without bias neurons
 	// Search the afferebt edge from the bias neuron
-	for (auto edge = options->networkTopology->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->networkTopology->getBiasNeuron()->getEfferentEdges()->end(); edge++)
+	for (auto edge = options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->end(); edge++)
 	{
 		if ((*edge)->getNextNeuron() == neuron)
 		{
@@ -129,14 +123,9 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 	}
 
 	// Set the style of the text
-	newText.setString(thresholdString);
 	newText.setFont(font);
 	newText.setCharacterSize(15);
 	newText.setPosition(position.x, position.y);
-
-	// Calculate the bounds of the text and set its origin to the center
-	sf::FloatRect textRect = newText.getLocalBounds();
-	newText.setOrigin(textRect.left + textRect.width/2.0f, textRect.top + textRect.height/2.0f);
 
 	// Add the shape to the map
 	neuronShapes[neuron] = std::pair<sf::CircleShape, sf::Text>(newCircle, newText);
@@ -156,7 +145,103 @@ void AbstractNetworkTopologyDrawer::draw(sf::RenderWindow &window)
 	for (auto edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
 	{
 		// Draw the edge shape
-		edgeShape->draw(window);
+		edgeShape->second->draw(window);
 	}
 }
 
+void AbstractNetworkTopologyDrawer::startNewCalculation(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder)
+{
+	currentCalculationInput = &input;
+	currentCalculationActivationOrder = &activationOrder;	
+	currentTimeStep = 0;
+
+	options->network->getNetworkTopology()->resetActivation();
+
+	refreshAllActivations();
+}
+
+void AbstractNetworkTopologyDrawer::nextCalculationStep()
+{
+	options->network->calculate(*currentCalculationInput ,*currentCalculationActivationOrder, currentTimeStep, 1);
+
+	refreshAllActivations();
+
+	currentTimeStep++;
+}
+
+void AbstractNetworkTopologyDrawer::resetCalculation()
+{
+	currentCalculationInput = NULL;
+
+	refreshAllActivations();
+}
+
+
+void AbstractNetworkTopologyDrawer::refreshAllValues()
+{
+	// Go through the whole neuronShape map
+	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
+	{
+		std::string thresholdString;
+
+		// TODO: Also consider networks without bias neurons
+		// Search the afferebt edge from the bias neuron
+		for (auto edge = options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->end(); edge++)
+		{
+			if ((*edge)->getNextNeuron() == neuronShape->first)
+			{
+				// The negative weight of this edge is the threshold of this neuron
+				std::ostringstream ss;
+				ss << std::fixed << std::setprecision(3) << -(*edge)->getWeight();
+				thresholdString = ss.str();
+				break;
+			}
+		}
+
+		// Set the style of the text
+		neuronShape->second.second.setString(thresholdString);
+		
+		// Calculate the bounds of the text and set its origin to the center
+		sf::FloatRect textRect = neuronShape->second.second.getLocalBounds();
+		neuronShape->second.second.setOrigin(textRect.left + textRect.width/2.0f, textRect.top + textRect.height/2.0f);
+	}
+
+	// Go through the whole edgeShape list
+	for (auto edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
+	{
+		// Convert the edge weight to a string with 3 fractional digits
+		std::ostringstream ss;
+		ss << std::fixed << std::setprecision(3) << edgeShape->first->getWeight();
+		std::string weightString(ss.str());
+
+		edgeShape->second->setDescription(weightString);
+	}
+}
+
+void AbstractNetworkTopologyDrawer::refreshAllActivations()
+{
+	// Go through the whole neuronShape map
+	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
+	{
+		if (currentCalculationInput)
+		{
+			neuronShape->second.first.setFillColor(sf::Color(fillColorActivatedNeuron.r, fillColorActivatedNeuron.g, fillColorActivatedNeuron.b, std::min(255.0, 255.0 * neuronShape->first->getActivation())));
+			for (auto edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
+			{
+				edgeShapes[*edge]->setColor(sf::Color((255 - fillColorActivatedNeuron.r) * (1 - neuronShape->first->getActivation()) + fillColorActivatedNeuron.r,  (255 - fillColorActivatedNeuron.r) * (1 - neuronShape->first->getActivation()) + fillColorActivatedNeuron.g, (255 - fillColorActivatedNeuron.r) * (1 - neuronShape->first->getActivation()) + fillColorActivatedNeuron.b));
+			}
+		}
+		else
+		{
+			// Select the fill color depending on if its an input neuron
+			if (options->network->getNetworkTopology()->isInputNeuron(neuronShape->first))
+				neuronShape->second.first.setFillColor(fillColorInputNeuron);
+			else
+				neuronShape->second.first.setFillColor(fillColorStandardNeuron);
+			for (auto edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
+			{
+				edgeShapes[*edge]->setColor(sf::Color::White);
+			}
+		}
+	}
+}

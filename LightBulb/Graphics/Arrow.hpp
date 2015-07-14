@@ -21,6 +21,10 @@ public:
 	Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description, sf::VertexArray extraLines);
 	// Inherited:
 	void draw(sf::RenderWindow &window);
+	// Sets a new description and recalculates the position of the text
+	void setDescription(std::string description);
+
+	void setColor(const sf::Color &color);
 };
 
 #endif

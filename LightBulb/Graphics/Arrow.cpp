@@ -25,16 +25,14 @@ Arrow::Arrow(sf::Vector2f startPos, sf::Vector2f endPos, std::string description
 		lines.append(extraLines[i]);
 
 	// Set the Style of the description text
-	text.setFont(font);
-	text.setString(description);
+	text.setFont(font);	
 	text.setCharacterSize(15);
 	text.setRotation((float)(angle / M_PI * 180));
+
 	// Set its position directly next to the middle of the line
 	text.setPosition(calcCartesianFromPolarCoordinates(startPos + sf::Vector2f((endPos.x - startPos.x) / 3, (endPos.y - startPos.y) / 3), 10, angle - (float)M_PI / 2));    
 	
-	// Calculate the bounds of the text and set its origin to the center
-	sf::FloatRect textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top + textRect.height/2.0f);
+	setDescription(description);
 }
 
 void Arrow::draw(sf::RenderWindow &window)
@@ -42,4 +40,20 @@ void Arrow::draw(sf::RenderWindow &window)
 	// Draw the lines and the text
 	window.draw(lines);
 	window.draw(text);
+}
+
+void Arrow::setDescription(std::string description)
+{
+	text.setString(description);
+	// Calculate the bounds of the text and set its origin to the center
+	sf::FloatRect textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width/2.0f, textRect.top + textRect.height/2.0f);
+}
+
+void Arrow::setColor(const sf::Color &color)
+{
+	for (int i = 0; i < lines.getVertexCount(); i++)
+	{
+		lines[i].color = color;
+	}
 }

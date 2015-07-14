@@ -5,6 +5,7 @@
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "Neuron\Edge.hpp"
 #include "NetworkTopology\LayeredNetwork.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
 // Library includes
 #include <exception>
 
@@ -19,23 +20,23 @@ void LayeredNetworkTopologyDrawer::refresh()
 {
 	// Check if all given options are correct
 	// Check if the given topology is valud
-	if (options->networkTopology == NULL)
-		throw std::invalid_argument("The given networkTopology is not valid!");
+	if (options->network == NULL)
+		throw std::invalid_argument("The given network is not valid!");
 	// Check if the given topology is a LayeredNetwork
-	if (!dynamic_cast<LayeredNetwork*>(options->networkTopology))
-		throw std::invalid_argument("The given networkTopology has to be a LayeredNetwork!");
+	if (!dynamic_cast<LayeredNetwork*>(options->network->getNetworkTopology()))
+		throw std::invalid_argument("The networkTopology of the given network has to be a LayeredNetwork!");
 
 	// Calculate the offset between two layers (The +2 is needed for input neurons and a border)
-	int layerOffset = options->width / (options->networkTopology->getNeurons()->size() + 2);	
+	int layerOffset = options->width / (options->network->getNetworkTopology()->getNeurons()->size() + 2);	
 	// Go through all layers in the given networkTopology
 	int layerIndex = 0;
 
 	{
 		// Calculate the offset between two neurons (The +1 is needed for a border)
-		int neuronOffset = options->height / (options->networkTopology->getInputNeurons()->size() + 1);
+		int neuronOffset = options->height / (options->network->getNetworkTopology()->getInputNeurons()->size() + 1);
 		// Go through all neurons in this layer
 		int neuronIndex = 0;
-		for (auto neuron = options->networkTopology->getInputNeurons()->begin(); neuron != options->networkTopology->getInputNeurons()->end(); neuron++, neuronIndex++)
+		for (auto neuron = options->network->getNetworkTopology()->getInputNeurons()->begin(); neuron != options->network->getNetworkTopology()->getInputNeurons()->end(); neuron++, neuronIndex++)
 		{
 			addShapeFromNeuron(*neuron, sf::Vector2f((float)((layerIndex + 1) * layerOffset), (float)((neuronIndex + 1) * neuronOffset)));
 		}
@@ -43,7 +44,7 @@ void LayeredNetworkTopologyDrawer::refresh()
 
 	layerIndex++;
 
-	for (auto layer = options->networkTopology->getNeurons()->begin(); layer != options->networkTopology->getNeurons()->end(); layer++, layerIndex++)
+	for (auto layer = options->network->getNetworkTopology()->getNeurons()->begin(); layer != options->network->getNetworkTopology()->getNeurons()->end(); layer++, layerIndex++)
 	{
 		// Calculate the offset between two neurons (The +1 is needed for a border)
 		int neuronOffset = options->height / (layer->size() + 1);

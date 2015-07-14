@@ -45,6 +45,7 @@
 #include <exception>
 #include <vector>
 #include <SFML\Graphics.hpp>
+#include <windows.h>
 
 void doPerceptronTest()
 {
@@ -466,24 +467,25 @@ void doFreeNetworkTest()
 	double totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
 
 	
-	/*NeuralNetworkIO<double> teachingPattern;
+	NeuralNetworkIO<double> teachingPattern;
 
 	teachingPattern[0] = std::vector<double>(1);
-	teachingPattern[0][0] = 50;		
+	teachingPattern[0][0] = 0;		
 	teachingPattern[1] = std::vector<double>(1);
-	teachingPattern[1][0] = 49;		
+	teachingPattern[1][0] = 1;		
 
-	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);*/
+	//std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);
 
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
 	networkTopologyDrawerOptions.width = 700;
 	networkTopologyDrawerOptions.height = 600;
-	networkTopologyDrawerOptions.networkTopology = freeNetwork;
+	networkTopologyDrawerOptions.network = &neuralNetwork;
 	FreeNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
 	networkTopologyDrawer.refresh();
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
+	int t = 0;
 	while (window.isOpen())
     {
         sf::Event event;
@@ -496,6 +498,18 @@ void doFreeNetworkTest()
         window.clear();
         networkTopologyDrawer.draw(window);
         window.display();
+		if (t == 0)
+			networkTopologyDrawer.startNewCalculation(teachingPattern, SynchronousOrder());
+		else if (t <= 4)
+			networkTopologyDrawer.nextCalculationStep();
+		else
+		{
+			networkTopologyDrawer.resetCalculation();
+			t = -1;
+		}
+		t++;
+
+		Sleep(2000);
     }
 
 }
@@ -1034,6 +1048,6 @@ void doRecurrentCascadeCorrelationTest()
 
 int main()
 {
-	doRecurrentLayeredNetworkTest();
+	doFreeNetworkTest();
     return 0;
 }
