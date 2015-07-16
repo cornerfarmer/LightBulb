@@ -11,7 +11,7 @@ GraphicObject::GraphicObject()
 	{
 		// Load the default font
 		font.loadFromFile("Quicksand-Regular.ttf");
-		fontIsEmpty = false;
+		fontIsEmpty = false;		
 	}
 }
 

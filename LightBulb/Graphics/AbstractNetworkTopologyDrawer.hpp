@@ -8,6 +8,8 @@
 #include <SFML\Graphics.hpp>
 #include "Graphics\Arrow.hpp"
 #include "NeuralNetwork\NeuralNetworkIO.hpp"
+#include "Function\HyperbolicTangentFunction.hpp"
+#include "Neuron\StandardThreshold.hpp"
 
 // Library includes
 #include <map>
@@ -44,10 +46,15 @@ private:
 	std::map<Edge*, std::unique_ptr<Arrow>> edgeShapes;
 	// This constant value holds the angle difference beetween an incoming and an outcoming edge
     static const float angleDifferenceBetweenContraryEdges;
+
+	std::unique_ptr<HyperbolicTangentFunction> activationFunction;
+
+	std::unique_ptr<StandardThreshold> threshold;
 	// Constants which hold the color values of the neuronShapes
 	static const sf::Color fillColorStandardNeuron;
 	static const sf::Color fillColorInputNeuron;
-	static const sf::Color fillColorActivatedNeuron;
+	static const sf::Color fillColorPositiveActivatedNeuron;
+	static const sf::Color fillColorNegativeActivatedNeuron;
 	static const sf::Color outlineColorStandardNeuron;
 	static const sf::Color outlineColorOutputNeuron;
 protected:
@@ -71,7 +78,9 @@ public:
 
 	void resetCalculation();
 
-	void refreshAllValues();
+	void refreshAllThresholds();
+
+	void refreshAllWeights();
 
 	void refreshAllActivations();
 };

@@ -37,7 +37,9 @@ void FreeNetworkTopologyDrawer::refresh()
 
 	addEdgesToAllShapes();
 
-	refreshAllValues();
+	refreshAllThresholds();
+
+	refreshAllWeights();
 
 	refreshAllActivations();
 }

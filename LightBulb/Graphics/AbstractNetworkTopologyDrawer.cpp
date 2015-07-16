@@ -7,6 +7,7 @@
 #include "Graphics\Arrow.hpp"
 #include "Neuron\BiasNeuron.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Function\AbstractActivationFunction.hpp"
 // Library includes
 #include <iomanip>
 #include <exception>
@@ -15,7 +16,8 @@
 const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
 const sf::Color AbstractNetworkTopologyDrawer::fillColorStandardNeuron = sf::Color::Transparent;
 const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color::Color(0, 150, 0);
-const sf::Color AbstractNetworkTopologyDrawer::fillColorActivatedNeuron = sf::Color::Color(0, 200, 0);
+const sf::Color AbstractNetworkTopologyDrawer::fillColorPositiveActivatedNeuron = sf::Color::Color(0, 255, 0);
+const sf::Color AbstractNetworkTopologyDrawer::fillColorNegativeActivatedNeuron = sf::Color::Color(255, 0, 0);
 const sf::Color AbstractNetworkTopologyDrawer::outlineColorStandardNeuron = sf::Color::White;
 const sf::Color AbstractNetworkTopologyDrawer::outlineColorOutputNeuron = sf::Color::Red;
 
@@ -34,6 +36,9 @@ AbstractNetworkTopologyDrawer::AbstractNetworkTopologyDrawer(AbstractNetworkTopo
 	options.reset(new AbstractNetworkTopologyDrawerOptions(options_));
 
 	currentCalculationInput = NULL;
+	
+	activationFunction.reset(new HyperbolicTangentFunction());
+	threshold.reset(new StandardThreshold(0));
 }
 
 void AbstractNetworkTopologyDrawer::addEdgesToAllShapes()
@@ -165,6 +170,7 @@ void AbstractNetworkTopologyDrawer::nextCalculationStep()
 	options->network->calculate(*currentCalculationInput ,*currentCalculationActivationOrder, currentTimeStep, 1);
 
 	refreshAllActivations();
+	refreshAllThresholds();
 
 	currentTimeStep++;
 }
@@ -174,10 +180,25 @@ void AbstractNetworkTopologyDrawer::resetCalculation()
 	currentCalculationInput = NULL;
 
 	refreshAllActivations();
+	refreshAllThresholds();
 }
 
 
-void AbstractNetworkTopologyDrawer::refreshAllValues()
+void AbstractNetworkTopologyDrawer::refreshAllWeights()
+{
+	// Go through the whole edgeShape list
+	for (auto edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
+	{
+		// Convert the edge weight to a string with 3 fractional digits
+		std::ostringstream ss;
+		ss << std::fixed << std::setprecision(3) << edgeShape->first->getWeight();
+		std::string weightString(ss.str());
+
+		edgeShape->second->setDescription(weightString);
+	}
+}
+
+void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 {
 	// Go through the whole neuronShape map
 	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
@@ -198,23 +219,27 @@ void AbstractNetworkTopologyDrawer::refreshAllValues()
 			}
 		}
 
+		if (currentCalculationInput)
+		{
+			std::ostringstream ss;
+			if (dynamic_cast<StandardNeuron*>(neuronShape->first))
+			{				
+				ss << std::fixed << std::setprecision(3) << static_cast<StandardNeuron*>(neuronShape->first)->getNetInput();
+				thresholdString = ss.str() + "/\n" + thresholdString;
+			}
+			else
+			{
+				ss << std::fixed << std::setprecision(3) << neuronShape->first->getActivation();
+				thresholdString = ss.str();
+			}
+		}
+
 		// Set the style of the text
 		neuronShape->second.second.setString(thresholdString);
 		
 		// Calculate the bounds of the text and set its origin to the center
 		sf::FloatRect textRect = neuronShape->second.second.getLocalBounds();
 		neuronShape->second.second.setOrigin(textRect.left + textRect.width/2.0f, textRect.top + textRect.height/2.0f);
-	}
-
-	// Go through the whole edgeShape list
-	for (auto edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
-	{
-		// Convert the edge weight to a string with 3 fractional digits
-		std::ostringstream ss;
-		ss << std::fixed << std::setprecision(3) << edgeShape->first->getWeight();
-		std::string weightString(ss.str());
-
-		edgeShape->second->setDescription(weightString);
 	}
 }
 
@@ -225,10 +250,24 @@ void AbstractNetworkTopologyDrawer::refreshAllActivations()
 	{
 		if (currentCalculationInput)
 		{
-			neuronShape->second.first.setFillColor(sf::Color(fillColorActivatedNeuron.r, fillColorActivatedNeuron.g, fillColorActivatedNeuron.b, std::min(255.0, 255.0 * neuronShape->first->getActivation())));
+			double activationFactor = neuronShape->first->getActivation();		
+
+			activationFactor = activationFunction->execute(activationFactor, threshold.get());
+			
+			if (activationFactor > 0)
+				neuronShape->second.first.setFillColor(sf::Color(fillColorPositiveActivatedNeuron.r, fillColorPositiveActivatedNeuron.g, fillColorPositiveActivatedNeuron.b,  255.0 * activationFactor));
+			else
+				neuronShape->second.first.setFillColor(sf::Color(fillColorNegativeActivatedNeuron.r, fillColorNegativeActivatedNeuron.g, fillColorNegativeActivatedNeuron.b,  255.0 * -activationFactor));
+
 			for (auto edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
 			{
-				edgeShapes[*edge]->setColor(sf::Color((255 - fillColorActivatedNeuron.r) * (1 - neuronShape->first->getActivation()) + fillColorActivatedNeuron.r,  (255 - fillColorActivatedNeuron.r) * (1 - neuronShape->first->getActivation()) + fillColorActivatedNeuron.g, (255 - fillColorActivatedNeuron.r) * (1 - neuronShape->first->getActivation()) + fillColorActivatedNeuron.b));
+				double edgeActivationFactor = (*edge)->getWeight() * activationFactor;
+				edgeActivationFactor = activationFunction->execute(edgeActivationFactor, threshold.get());
+
+				if (edgeActivationFactor > 0)
+					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorPositiveActivatedNeuron.r) * (1 - activationFactor) + fillColorPositiveActivatedNeuron.r,  (255 - fillColorPositiveActivatedNeuron.g) * (1 - activationFactor) + fillColorPositiveActivatedNeuron.g, (255 - fillColorPositiveActivatedNeuron.b) * (1 - activationFactor) + fillColorPositiveActivatedNeuron.b));
+				else
+					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorNegativeActivatedNeuron.r) * (1 + activationFactor) + fillColorNegativeActivatedNeuron.r,  (255 - fillColorNegativeActivatedNeuron.g) * (1 + activationFactor) + fillColorNegativeActivatedNeuron.g, (255 - fillColorNegativeActivatedNeuron.b) * (1 + activationFactor) + fillColorNegativeActivatedNeuron.b));
 			}
 		}
 		else
