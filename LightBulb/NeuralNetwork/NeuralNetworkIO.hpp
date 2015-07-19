@@ -14,6 +14,7 @@ template<typename T>
 class NeuralNetworkIO : public std::vector<std::pair<bool, std::vector<std::pair<bool, T>>>>
 {
 private:
+	// Holds the dimension (amount of neurons the NeuralNetworkIO can describe)
 	int dimension;
 public:
 	NeuralNetworkIO(int d)
@@ -46,51 +47,58 @@ public:
 			return 0;
 	}
 
+	// Returns the value of the neuron with the given index in the given timestep
 	T& get(int timestep, int index)
 	{
+		// Make sure the value is valid
 		if ((*this)[timestep].first && (*this)[timestep].second[index].first)
 			return (*this)[timestep].second[index].second;
 		else
-			throw new std::logic_error("");
+			throw new std::logic_error("There is no valid value in the given timestep with the given timestep.");
 	}
 
+	// Sets the value of the neuron with the given index in the given timestep
 	void set(int timestep, int index, T value)
 	{
+		// Resize the vector if necessary
 		if (size() <= timestep)
 			resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
+		// Make sure the timestep is set to valid
 		if (!(*this)[timestep].first)
 			(*this)[timestep].first = true;
+		// Make sure the index is set to valid
 		if (!(*this)[timestep].second[index].first)
 			(*this)[timestep].second[index].first = true;
+		// Finally set the value
 		(*this)[timestep].second[index].second = value;
 	}
-	void resizeToTimestep(int timestep)
-	{
-		if (size() <= timestep)
-			resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
-		if (!(*this)[timestep].first)
-			(*this)[timestep].first = true;
-	}
+
+	// Sets all values at the given timestep
 	void set(int timestep, std::vector<std::pair<bool, T>> values)
 	{
+		// Resize the vector if necessary
 		if (size() <= timestep)
 			resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
+		// Make sure the timestep is set to valid
 		if (!(*this)[timestep].first)
 			(*this)[timestep].first = true;
+		// Finally set the values
 		(*this)[timestep].second = values;		
 	}
 
+	// Returns if the value of the neuron with the given index in the given timestep is valid
 	bool exists(int timestep, int index)
 	{
 		return (size() > timestep && (*this)[timestep].second[index].first);
 	}
 
+	// Returns if the given timestep has at least one valid value
 	bool existsTimestep(int timestep)
 	{
 		return (size() > timestep && (*this)[timestep].first);
 	}
 
-
+	// Converts the values of a timestep into a vector (invalid values get the value 0)
 	std::vector<T> getRealVectorInTimestep(int timestep)
 	{
 		std::vector<T> realVector(dimension);
@@ -102,6 +110,7 @@ public:
 		return realVector;
 	}
 
+	// Returns the dimension of the io
 	int getDimension()
 	{
 		return dimension;
