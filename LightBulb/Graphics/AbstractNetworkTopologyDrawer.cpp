@@ -204,6 +204,7 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
 	{
 		std::string thresholdString;
+		double threshold = 0;
 
 		// TODO: Also consider networks without bias neurons
 		// Search the afferebt edge from the bias neuron
@@ -215,6 +216,7 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 				std::ostringstream ss;
 				ss << std::fixed << std::setprecision(3) << -(*edge)->getWeight();
 				thresholdString = ss.str();
+				threshold = -(*edge)->getWeight();
 				break;
 			}
 		}
@@ -224,7 +226,7 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 			std::ostringstream ss;
 			if (dynamic_cast<StandardNeuron*>(neuronShape->first))
 			{				
-				ss << std::fixed << std::setprecision(3) << static_cast<StandardNeuron*>(neuronShape->first)->getNetInput();
+				ss << std::fixed << std::setprecision(3) << (static_cast<StandardNeuron*>(neuronShape->first)->getNetInput() + threshold);
 				thresholdString = ss.str() + "/\n" + thresholdString;
 			}
 			else
@@ -261,13 +263,13 @@ void AbstractNetworkTopologyDrawer::refreshAllActivations()
 
 			for (auto edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
 			{
-				double edgeActivationFactor = (*edge)->getWeight() * activationFactor;
+				double edgeActivationFactor = (*edge)->getWeight() * neuronShape->first->getActivation();
 				edgeActivationFactor = activationFunction->execute(edgeActivationFactor, threshold.get());
 
 				if (edgeActivationFactor > 0)
-					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorPositiveActivatedNeuron.r) * (1 - activationFactor) + fillColorPositiveActivatedNeuron.r,  (255 - fillColorPositiveActivatedNeuron.g) * (1 - activationFactor) + fillColorPositiveActivatedNeuron.g, (255 - fillColorPositiveActivatedNeuron.b) * (1 - activationFactor) + fillColorPositiveActivatedNeuron.b));
+					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorPositiveActivatedNeuron.r) * (1 - edgeActivationFactor) + fillColorPositiveActivatedNeuron.r,  (255 - fillColorPositiveActivatedNeuron.g) * (1 - edgeActivationFactor) + fillColorPositiveActivatedNeuron.g, (255 - fillColorPositiveActivatedNeuron.b) * (1 - edgeActivationFactor) + fillColorPositiveActivatedNeuron.b));
 				else
-					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorNegativeActivatedNeuron.r) * (1 + activationFactor) + fillColorNegativeActivatedNeuron.r,  (255 - fillColorNegativeActivatedNeuron.g) * (1 + activationFactor) + fillColorNegativeActivatedNeuron.g, (255 - fillColorNegativeActivatedNeuron.b) * (1 + activationFactor) + fillColorNegativeActivatedNeuron.b));
+					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorNegativeActivatedNeuron.r) * (1 + edgeActivationFactor) + fillColorNegativeActivatedNeuron.r,  (255 - fillColorNegativeActivatedNeuron.g) * (1 + edgeActivationFactor) + fillColorNegativeActivatedNeuron.g, (255 - fillColorNegativeActivatedNeuron.b) * (1 + edgeActivationFactor) + fillColorNegativeActivatedNeuron.b));
 			}
 		}
 		else

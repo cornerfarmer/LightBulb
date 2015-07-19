@@ -28,9 +28,9 @@ NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingPattern()
 AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 {
 	// Create a new teaching input
-	NeuralNetworkIO<double>* unfoldedTeachingInput = new NeuralNetworkIO<double>();
+	NeuralNetworkIO<double>* unfoldedTeachingInput = new NeuralNetworkIO<double>(teachingInput->getDimension());
 	// Copy the teaching input
-	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
+	(*unfoldedTeachingInput).set(0, teachingInput->rbegin()->second);
 	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
 	TeachingLessonLinearInput* unfoldedTeachingLesson = new TeachingLessonLinearInput(teachingPattern->unfold(), unfoldedTeachingInput);
 	return unfoldedTeachingLesson;
@@ -38,5 +38,5 @@ AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 
 int TeachingLessonLinearInput::getMaxTimeStep()
 {
-	return teachingInput->rbegin()->first;
+	return teachingInput->getMaxTimeStep();
 }

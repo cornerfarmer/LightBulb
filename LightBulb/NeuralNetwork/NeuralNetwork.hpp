@@ -23,9 +23,9 @@ class NeuralNetwork
 private:
 	std::unique_ptr<AbstractNetworkTopology> networkTopology;
 	// Returns all output numbers of the network
-	std::unique_ptr<std::vector<double>> getOutput();
+	void getOutput(std::vector<std::pair<bool, double>> &outputVector);
 	// Sets all input neurons to the given numbers
-	void setInput(std::vector<double>* inputVector);
+	void setInput(std::vector<std::pair<bool, double>>* inputVector);
 public:
 	NeuralNetwork(AbstractNetworkTopology* networkTopology_);
 	// Calculates from the given input and activation order the output from neural network (If a not-NULL output value map or a netInput value map is given, the method will fill them)

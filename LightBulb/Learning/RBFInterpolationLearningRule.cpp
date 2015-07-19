@@ -86,7 +86,7 @@ void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(AbstractTea
 	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
 	{
 		// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
-		(*t)(lessonIndex, neuronIndex) = (float)(*lesson.getTeachingInput(neuron.getActivationFunction()))[0][neuronIndex];
+		(*t)(lessonIndex, neuronIndex) = (float)lesson.getTeachingInput(neuron.getActivationFunction())->get(0, neuronIndex);
 		
 		if (lessonIndex == t->rows() - 1)
 		{

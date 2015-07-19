@@ -231,16 +231,17 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 			// If the error factors should be recalculated
 			if (calcErrorFactor)
 			{
-				NeuralNetworkIO<double> outputVector;
+				NeuralNetworkIO<double> outputVector(currentNetworkTopology->getOutputNeurons()->size());
+				int outputNeuronIndex = 0;
 				// Go through all output neurons
-				for (auto outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++)
+				for (auto outputNeuron = currentNetworkTopology->getOutputNeurons()->begin(); outputNeuron != currentNetworkTopology->getOutputNeurons()->end(); outputNeuron++, outputNeuronIndex++)
 				{
 					for (int t = 0; t <= (*teachingLesson)->getMaxTimeStep(); t++)
 					{
 						// Refresh the activation and the netInput of the current output neuron
 						(*outputNeuron)->refreshNetInput(&neuronOutputCache[teachingLesson->get()][t]);
 						(*outputNeuron)->refreshActivation();
-						outputVector[t].push_back((*outputNeuron)->getActivation());
+						outputVector.set(t, outputNeuronIndex, (*outputNeuron)->getActivation());
 					}
 				}
 				// Recalculate the errorMap from the calculated output values

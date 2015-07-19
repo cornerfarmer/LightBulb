@@ -36,13 +36,16 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(
 	std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t());
 
 	// Calculate the error values (expected value - real value)
-	for (auto teachingInputValue = teachingInput->begin(); teachingInputValue != teachingInput->end(); teachingInputValue++)
+	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
-		if (outputVector.count(teachingInputValue->first) != 0)
+		if (teachingInput->existsTimestep(timestep))
 		{
-			for (unsigned int i = 0; i < teachingInputValue->second.size(); i++)
+			for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
 			{
-				(*errorMap)[teachingInputValue->first][static_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[i])] = teachingInputValue->second[i] - outputVector.at(teachingInputValue->first)[i];
+				if (teachingInput->exists(timestep, i))
+				{
+					(*errorMap)[timestep][static_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[i])] = teachingInput->get(timestep, i) - outputVector.get(timestep, i);
+				}
 			}
 		}
 	}
@@ -86,13 +89,16 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(NeuralNe
 {
 	std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t());
 	NeuralNetworkIO<double>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
-	for (auto teachingInputsInTimeStep = teachingInput->begin(); teachingInputsInTimeStep != teachingInput->end(); teachingInputsInTimeStep++)
+	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
-		(*teachingInputMap)[teachingInputsInTimeStep->first] = std::map<StandardNeuron*, double>();
-		std::vector<double>::iterator teachingInputValue = teachingInputsInTimeStep->second.begin();
-		for (auto outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end() && teachingInputValue != teachingInputsInTimeStep->second.end(); outputNeuron++, teachingInputValue++)
+		if (teachingInput->existsTimestep(timestep))
 		{
-			(*teachingInputMap)[teachingInputsInTimeStep->first][*outputNeuron] = *teachingInputValue;
+			(*teachingInputMap)[timestep] = std::map<StandardNeuron*, double>();
+			int outputNeuronIndex = 0;
+			for (auto outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end(); outputNeuron++, outputNeuronIndex++)
+			{
+				(*teachingInputMap)[timestep][*outputNeuron] = teachingInput->get(timestep, outputNeuronIndex);
+			}
 		}
 	}
 

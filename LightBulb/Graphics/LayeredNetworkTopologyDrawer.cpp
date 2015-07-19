@@ -57,5 +57,11 @@ void LayeredNetworkTopologyDrawer::refresh()
 	}
 
 	addEdgesToAllShapes();
+
+	refreshAllThresholds();
+
+	refreshAllWeights();
+
+	refreshAllActivations();
 }
 

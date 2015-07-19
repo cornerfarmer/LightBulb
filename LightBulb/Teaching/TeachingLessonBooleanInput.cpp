@@ -16,7 +16,7 @@ TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<double>* 
 
 	teachingInput = std::unique_ptr<NeuralNetworkIO<bool>>(teachingInput_);	
 	teachingPattern = std::unique_ptr<NeuralNetworkIO<double>>(teachingPattern_);
-	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>());
+	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
 }
 
 NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
@@ -27,17 +27,22 @@ NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractAc
 
 
 	// Go through all  teaching input values
-	for (auto teachingInputAtTime = teachingInput->begin(); teachingInputAtTime != teachingInput->end(); teachingInputAtTime++)
+	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
-		(*teachingInputLinear)[teachingInputAtTime->first] = std::vector<double>(teachingInputAtTime->second.size());
-		// Go through all  teaching input values
-		for (unsigned int i = 0; i < teachingInputAtTime->second.size(); i++)
-		{
-			// If the boolean value is true, set the maximum of the activationFunction, else the minimum
-			if (teachingInputAtTime->second[i])
-				(*teachingInputLinear)[teachingInputAtTime->first][i] = activationFunction->getMaximum();
-			else
-				(*teachingInputLinear)[teachingInputAtTime->first][i] = activationFunction->getMinimum();
+		if (teachingInput->existsTimestep(timestep))
+		{			
+			// Go through all  teaching input values
+			for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
+			{
+				if (teachingInput->exists(timestep, i))
+				{
+					// If the boolean value is true, set the maximum of the activationFunction, else the minimum
+					if (teachingInput->get(timestep, i))
+						teachingInputLinear->set(timestep, i, activationFunction->getMaximum());
+					else
+						teachingInputLinear->set(timestep, i, activationFunction->getMinimum());
+				}
+			}
 		}
 	}
 
@@ -53,9 +58,9 @@ NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingPattern()
 AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
 {
 	// Create a new teaching input
-	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>();
+	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>(teachingInput->getDimension());
 	// Copy the teaching input
-	(*unfoldedTeachingInput)[0] = teachingInput->rbegin()->second;
+	(*unfoldedTeachingInput).set(0, teachingInput->rbegin()->second);
 	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
 	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold(), unfoldedTeachingInput);
 	return unfoldedTeachingLesson;
@@ -63,5 +68,5 @@ AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
 
 int TeachingLessonBooleanInput::getMaxTimeStep()
 {
-	return teachingInput->rbegin()->first;
+	return teachingInput->getMaxTimeStep();
 }
