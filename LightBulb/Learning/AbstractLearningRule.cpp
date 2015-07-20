@@ -46,7 +46,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	// Reset all counter
 	tryCounter = 0;
 	totalError = 0;
-	iteration = 0;
+	
 
 	currentNeuralNetwork = &initializedNeuralNetwork;
 	currentTeacher = &initializedTeacher;
@@ -54,6 +54,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	// Start a new try
 	do
 	{
+		// Reset the iteration counter
+		iteration = 0;
+
 		// Initialize a new try
 		initializeTry(initializedNeuralNetwork, initializedTeacher);
 		
