@@ -14,6 +14,7 @@
 
 // Forward declarations
 class AbstractNeuronFactory;
+class FreeNetworkTopologyDrawer;
 
 // This struct contains all options needed to build a FreeNetwork
 struct FreeNetworkOptions
@@ -41,6 +42,7 @@ struct FreeNetworkOptions
 // A free network can have any kind of structure. There are no rules.
 class FreeNetwork : public AbstractNetworkTopology, public RecurrentNetworkInterface
 {
+	friend FreeNetworkTopologyDrawer;
 protected:
 	std::unique_ptr<FreeNetworkOptions> options;
 	// Holds all neurons

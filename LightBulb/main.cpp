@@ -378,10 +378,10 @@ void doFreeNetworkTest()
 	FreeNetworkOptions networkOptions;
 	networkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(0.1), new IdentityFunction());
 	networkOptions.neuronCount = 5;
-	networkOptions.realInputNeurons = false;
+	networkOptions.realInputNeurons = true;
 	networkOptions.inputNeuronCount = 1;
-	networkOptions.inputNeuronsIndices.resize(1);
-	networkOptions.inputNeuronsIndices[0] = 0;
+	/*networkOptions.inputNeuronsIndices.resize(1);
+	networkOptions.inputNeuronsIndices[0] = 0;*/
 	networkOptions.outputNeuronsIndices.resize(1);
 	networkOptions.outputNeuronsIndices[0] = 1;
 	networkOptions.useBiasNeuron = true;
@@ -422,7 +422,7 @@ void doFreeNetworkTest()
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 35000;
 	options.totalErrorGoal = 0.01f;
-	options.maxTries = 1000;
+	options.maxTries = 10;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
   	options.weightDecayFac = 0;
@@ -455,7 +455,7 @@ void doFreeNetworkTest()
 
 				(*teachingInput).set(6, 0, (i == j));
 
-				(*teachingInput).set(7, 0, (j == k));	
+				(*teachingInput).set(7, 0, (j == k));
 
 				teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
 			}
@@ -469,7 +469,7 @@ void doFreeNetworkTest()
 	
 	NeuralNetworkIO<double> teachingPattern(1);
 
-	teachingPattern.set(0, 0, 0);		
+	teachingPattern.set(0, 0, 1);		
 	teachingPattern.set(1, 0, 1);		
 
 	//std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 4);
@@ -1158,6 +1158,6 @@ void doRecurrentCascadeCorrelationMorseTest()
 
 int main()
 {
-	doRecurrentCascadeCorrelationMorseTest();
+	doFreeNetworkTest();
     return 0;
 }

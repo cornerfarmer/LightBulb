@@ -15,11 +15,11 @@
 
 const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
 const sf::Color AbstractNetworkTopologyDrawer::fillColorStandardNeuron = sf::Color::Transparent;
-const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color::Color(0, 150, 0);
+const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color::Color(0, 0, 150);
 const sf::Color AbstractNetworkTopologyDrawer::fillColorPositiveActivatedNeuron = sf::Color::Color(0, 255, 0);
 const sf::Color AbstractNetworkTopologyDrawer::fillColorNegativeActivatedNeuron = sf::Color::Color(255, 0, 0);
 const sf::Color AbstractNetworkTopologyDrawer::outlineColorStandardNeuron = sf::Color::White;
-const sf::Color AbstractNetworkTopologyDrawer::outlineColorOutputNeuron = sf::Color::Red;
+const sf::Color AbstractNetworkTopologyDrawer::outlineColorOutputNeuron = sf::Color::Yellow;
 
 AbstractNetworkTopologyDrawerOptions::AbstractNetworkTopologyDrawerOptions()
 {
