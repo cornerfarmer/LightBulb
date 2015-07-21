@@ -120,9 +120,7 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 		if ((*edge)->getNextNeuron() == neuron)
 		{
 			// The negative weight of this edge is the threshold of this neuron
-			std::ostringstream ss;
-			ss << std::fixed << std::setprecision(3) << -(*edge)->getWeight();
-			thresholdString = ss.str();
+			thresholdString = floatToString(-(*edge)->getWeight(), 3);
 			break;
 		}
 	}
@@ -190,11 +188,7 @@ void AbstractNetworkTopologyDrawer::refreshAllWeights()
 	for (auto edgeShape = edgeShapes.begin(); edgeShape != edgeShapes.end(); edgeShape++)
 	{
 		// Convert the edge weight to a string with 3 fractional digits
-		std::ostringstream ss;
-		ss << std::fixed << std::setprecision(3) << edgeShape->first->getWeight();
-		std::string weightString(ss.str());
-
-		edgeShape->second->setDescription(weightString);
+		edgeShape->second->setDescription(floatToString(edgeShape->first->getWeight(), 3));
 	}
 }
 
@@ -213,9 +207,7 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 			if ((*edge)->getNextNeuron() == neuronShape->first)
 			{
 				// The negative weight of this edge is the threshold of this neuron
-				std::ostringstream ss;
-				ss << std::fixed << std::setprecision(3) << -(*edge)->getWeight();
-				thresholdString = ss.str();
+				thresholdString = floatToString(-(*edge)->getWeight(), 3);
 				threshold = -(*edge)->getWeight();
 				break;
 			}
@@ -225,14 +217,12 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 		{
 			std::ostringstream ss;
 			if (dynamic_cast<StandardNeuron*>(neuronShape->first))
-			{				
-				ss << std::fixed << std::setprecision(3) << (static_cast<StandardNeuron*>(neuronShape->first)->getNetInput() + threshold);
-				thresholdString = ss.str() + "/\n" + thresholdString;
+			{
+				thresholdString = floatToString(static_cast<StandardNeuron*>(neuronShape->first)->getNetInput() + threshold, 3) + "/\n" + thresholdString;
 			}
 			else
 			{
-				ss << std::fixed << std::setprecision(3) << neuronShape->first->getActivation();
-				thresholdString = ss.str();
+				thresholdString = floatToString(neuronShape->first->getActivation(), 3);
 			}
 		}
 

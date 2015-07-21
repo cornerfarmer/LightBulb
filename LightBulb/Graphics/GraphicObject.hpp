@@ -22,11 +22,14 @@ protected:
     sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, float angle);
 	// Calculate the angle of a line
     float calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd);    
+
+	std::string floatToString(const double value, const int precision = 2);
 public:
 	virtual ~GraphicObject() {}
 	GraphicObject();
 	// This method will be used to draw the whole graphics object on the given window
 	virtual void draw(sf::RenderWindow &window) = 0;
+		
 };
 
 #endif

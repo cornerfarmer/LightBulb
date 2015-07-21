@@ -1,5 +1,7 @@
 // Includes
 #include "Graphics\GraphicObject.hpp"
+#include <iomanip>
+#include <sstream>
 
 sf::Font GraphicObject::font = sf::Font();
 
@@ -48,4 +50,11 @@ sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f cente
 sf::Vector2f GraphicObject::calcCartesianFromPolarCoordinates(sf::Vector2f center, float radius, float angle)
 {
 	return calcCartesianFromPolarCoordinates(center, sf::Vector2f(radius, radius), angle);
+}
+
+std::string GraphicObject::floatToString(const double value, const int precision)
+{
+	std::ostringstream out;
+	out << std::setprecision(precision) << value;
+	return out.str();
 }
