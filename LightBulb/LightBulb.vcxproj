@@ -40,6 +40,7 @@
     <ClInclude Include="Function\GaussianRBFFunction.hpp" />
     <ClInclude Include="Function\HyperbolicTangentFunction.hpp" />
     <ClInclude Include="Function\IdentityFunction.hpp" />
+    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
     <ClInclude Include="Graphics\Arrow.hpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp" />
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp" />
     <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\LVQNetwork.hpp" />
     <ClInclude Include="NetworkTopology\RBFNetwork.hpp" />
     <ClInclude Include="NetworkTopology\RecurrentLayeredNetwork.hpp" />
     <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp" />
@@ -76,6 +78,7 @@
     <ClInclude Include="Neuron\BiasNeuron.hpp" />
     <ClInclude Include="Neuron\Edge.hpp" />
     <ClInclude Include="Neuron\InputNeuron.hpp" />
+    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp" />
     <ClInclude Include="Neuron\RBFThreshold.hpp" />
     <ClInclude Include="Neuron\StandardNeuron.hpp" />
     <ClInclude Include="Neuron\StandardThreshold.hpp" />
@@ -112,6 +115,7 @@
     <ClCompile Include="Function\GaussianRBFFunction.cpp" />
     <ClCompile Include="Function\HyperbolicTangentFunction.cpp" />
     <ClCompile Include="Function\IdentityFunction.cpp" />
+    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
     <ClCompile Include="Graphics\Arrow.cpp" />
@@ -136,6 +140,7 @@
     <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp" />
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\LVQNetwork.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetwork.cpp" />
     <ClCompile Include="NetworkTopology\RecurrentLayeredNetwork.cpp" />
     <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp" />
@@ -149,6 +154,7 @@
     <ClCompile Include="Neuron\BiasNeuron.cpp" />
     <ClCompile Include="Neuron\Edge.cpp" />
     <ClCompile Include="Neuron\InputNeuron.cpp" />
+    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp" />
     <ClCompile Include="Neuron\RBFThreshold.cpp" />
     <ClCompile Include="Neuron\StandardNeuron.cpp" />
     <ClCompile Include="Neuron\StandardThreshold.cpp" />

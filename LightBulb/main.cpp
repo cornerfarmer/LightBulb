@@ -40,6 +40,7 @@
 #include "Learning\SchmidhuberLearningRule.hpp"
 #include "NetworkTopology\CascadeCorrelationNetwork.hpp"
 #include "Learning\CascadeCorrelationLearningRule.hpp"
+#include "NetworkTopology\LVQNetwork.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1156,8 +1157,15 @@ void doRecurrentCascadeCorrelationMorseTest()
     }
 }
 
+void doLVQTest()
+{
+	LVQNetwork* lvqNetwork = new LVQNetwork(2, 3);
+
+	NeuralNetwork neuralNetwork(lvqNetwork);
+}
+
 int main()
 {
-	doFreeNetworkTest();
+	doLVQTest();
     return 0;
 }

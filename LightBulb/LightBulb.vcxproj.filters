@@ -257,6 +257,15 @@
     <ClInclude Include="Teaching\Teacher.hpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClInclude>
+    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -471,6 +480,15 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
