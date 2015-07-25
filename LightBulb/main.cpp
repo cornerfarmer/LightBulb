@@ -41,6 +41,7 @@
 #include "NetworkTopology\CascadeCorrelationNetwork.hpp"
 #include "Learning\CascadeCorrelationLearningRule.hpp"
 #include "NetworkTopology\LVQNetwork.hpp"
+#include "Learning\LVQ1LearningRule.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -205,8 +206,9 @@ void doRBFTest()
 	learningRuleOptions.maxTries = 1;
 	learningRuleOptions.neuronPlacer = new ROLFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
-
+	
 	learningRule.doLearning(neuralNetwork, teacher);	
+
 	DeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
 	delteLearningRuleOptions.maxTries = 1;
@@ -1159,9 +1161,97 @@ void doRecurrentCascadeCorrelationMorseTest()
 
 void doLVQTest()
 {
-	LVQNetwork* lvqNetwork = new LVQNetwork(2, 3);
+	LVQNetwork* lvqNetwork = new LVQNetwork(2, 3, 2);
 
 	NeuralNetwork neuralNetwork(lvqNetwork);
+
+	Teacher teacher;
+
+	for (int i = 0; i <= 1; i++)
+	{
+		for (int l = 0; l <= 1; l++)
+		{
+		
+			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(2);
+
+			
+			(*teachingPattern).set(0, 0, i);
+			(*teachingPattern).set(0, 1, l);
+			(*teachingInput).set(0, 0, i == l);	
+			(*teachingInput).set(0, 1, i != l);	
+			
+
+			//(*teachingInput)[1] = teachingPattern->back()[0];	
+		
+			//(*teachingInput)[0] = (i > l);	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);			
+
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));	
+		}
+	}
+	
+
+	LVQ1LearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 10;
+	options.maxTotalErrorValue = 4;
+	options.minIterationsPerTry = 300000;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.01f;
+	options.minRandomWeightValue = -0.5;
+	options.maxRandomWeightValue = 0.5;
+
+	LVQ1LearningRule learningRule(options);
+
+	learningRule.doLearning(neuralNetwork, teacher);
+
+	NeuralNetworkIO<double> input(2);
+
+	input.set(0, 0, 1);
+	input.set(0, 1, 0);
+
+	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(input, TopologicalOrder());
+
+
+	
+	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
+	neuralNetworkResultChartOptions.binaryInterpretation = false;
+	neuralNetworkResultChartOptions.xRangeEnd = 1;
+	neuralNetworkResultChartOptions.yRangeEnd = 1;
+	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+	
+	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
+	neuralNetworkResultChart.recalculateAllValues();
+
+	
+	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
+	networkTopologyDrawerOptions.width = 700;
+	networkTopologyDrawerOptions.height = 600;
+	networkTopologyDrawerOptions.posY = 100;
+	networkTopologyDrawerOptions.network = &neuralNetwork;
+	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	networkTopologyDrawer.refresh();
+	networkTopologyDrawer.startNewCalculation(input, *new TopologicalOrder());
+	networkTopologyDrawer.nextCalculationStep();
+
+    sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        neuralNetworkResultChart.draw(window);
+		networkTopologyDrawer.draw(window);
+        window.display();
+    }
 }
 
 int main()

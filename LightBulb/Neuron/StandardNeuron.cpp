@@ -111,3 +111,16 @@ void StandardNeuron::injectActivation(double newActivation)
 {
 	activation = newActivation;
 }
+
+std::vector<double> StandardNeuron::getAfferentWeightsVector()
+{
+	std::vector<double> weightsVector(afferentEdges.size());
+
+	auto weight = weightsVector.begin();
+	for (auto edge = afferentEdges.begin(); edge != afferentEdges.end(); edge++, weight++)
+	{
+		*weight = (*edge)->getWeight();
+	}
+	
+	return weightsVector;
+}

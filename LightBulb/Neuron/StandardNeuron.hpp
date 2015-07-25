@@ -13,6 +13,9 @@ class AbstractOutputFunction;
 class AbstractThreshold;
 class Edge;
 
+// Library includes
+#include <vector>
+
 // All neurons except of InputNeurons are StandardNeurons.
 // They have at least one afferent edge and 0..* efferent edges.
 class StandardNeuron : public AbstractNeuron
@@ -51,6 +54,8 @@ public:
 	void setAdditionalInput(double newAdditionalInput);
 	// Sets the current activation
 	void injectActivation(double newActivation);
+
+	std::vector<double> getAfferentWeightsVector();
 };
 
 #endif

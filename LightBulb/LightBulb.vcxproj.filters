@@ -266,6 +266,9 @@
     <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\LVQ1LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -489,6 +492,9 @@
     </ClCompile>
     <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ1LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

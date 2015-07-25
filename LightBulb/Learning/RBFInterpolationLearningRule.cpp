@@ -30,7 +30,7 @@ RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearn
 void RBFInterpolationLearningRule::adjustWeight(Edge* edge, double deltaWeight)
 {
 	// Set the calculated weight as new weight
-	edge->setWeight(deltaWeight);
+	edge->setWeight(edge->getWeight() + deltaWeight);
 }
 
 void RBFInterpolationLearningRule::printDebugOutput()
@@ -74,7 +74,7 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(Neu
 double RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
+	if (lessonIndex == currentTeacher->getTeachingLessons()->size() - 1 && layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
 		return (*w)[edgeIndex];
 	else
 		return 0;
@@ -104,6 +104,14 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 	{
 		// Replace all RBFNeurons with the help of the choosen neuronPlacer
 		getOptions()->neuronPlacer->doPlacing(*rbfNetwork, teacher);
+
+		for (auto neuron = rbfNetwork->getNeurons()->back().begin(); neuron != rbfNetwork->getNeurons()->back().end(); neuron++)
+		{
+			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
+			{
+				(*edge)->setWeight(0);
+			}
+		}
 	}
 
 	// The TopologicalOrder will be our activationOrder

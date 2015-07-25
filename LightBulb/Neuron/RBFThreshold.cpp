@@ -1,20 +1,9 @@
 // Includes
 #include "Neuron\RBFThreshold.hpp"
 
-RBFThreshold::RBFThreshold(std::vector<double> &centerVector_, double width_)
+RBFThreshold::RBFThreshold(double width_)
 {
-	centerVector = centerVector_;
 	width = width_;
-}
-
-void RBFThreshold::setCenterVector(std::vector<double> &newCenterVector)
-{
-	centerVector = newCenterVector;
-}
-
-std::vector<double>* RBFThreshold::getCenterVector()
-{
-	return &centerVector;
 }
 
 double RBFThreshold::getWidth()

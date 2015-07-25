@@ -54,6 +54,7 @@
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
+    <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
     <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp" />
     <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp" />
     <ClInclude Include="Learning\ResilientLearningRateHelper.hpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
+    <ClCompile Include="Learning\LVQ1LearningRule.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp" />
     <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp" />
     <ClCompile Include="Learning\ResilientLearningRateHelper.cpp" />

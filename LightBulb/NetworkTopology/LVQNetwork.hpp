@@ -16,8 +16,12 @@ class LVQNetwork : public LayeredNetwork
 {
 private:	
 public:
-	// Create a new CascadeCorrelationNetwork with the given input and output size
-	LVQNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount);	
+	// Create a new CascadeCorrelationNetwork with the given counts
+	LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, unsigned int classCount);
+
+	int getClassCount();
+
+	int getCodebookVectorCount();
 };
 
 #endif

@@ -30,10 +30,11 @@ void RBFNetworkStructureChart::recalculateAllValues()
 		sf::CircleShape newCircle;
 		// Extract the threshold of the current neuron
 		RBFThreshold* thresholdOfNeuron = static_cast<RBFThreshold*>(static_cast<StandardNeuron*>(*neuron)->getThreshold());
+		std::vector<double> centerVector = static_cast<StandardNeuron*>(*neuron)->getAfferentWeightsVector();
 		// Set the radius to the width of the neuron converted into the view range
 		newCircle.setRadius((float)(thresholdOfNeuron->getWidth() / (options.xRangeEnd - options.xRangeStart) * options.width));
 		// Set the position to the wished coordinates of the neuron center converted into the view range
-		newCircle.setPosition((float)(((*thresholdOfNeuron->getCenterVector())[options.xRBFNeuronCenterCoordinateIndex] - options.xRangeStart) / (options.xRangeEnd - options.xRangeStart) * options.width), (float)(((*thresholdOfNeuron->getCenterVector())[options.yRBFNeuronCenterCoordinateIndex] - options.yRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height));
+		newCircle.setPosition((float)((centerVector[options.xRBFNeuronCenterCoordinateIndex] - options.xRangeStart) / (options.xRangeEnd - options.xRangeStart) * options.width), (float)((centerVector[options.yRBFNeuronCenterCoordinateIndex] - options.yRangeStart) / (options.yRangeEnd - options.yRangeStart) * options.height));
 		// Add the offset position of the chart
 		newCircle.move((float)options.posX, (float)options.posY);
 		// Change the vertical scale depending of the view aspect ratio

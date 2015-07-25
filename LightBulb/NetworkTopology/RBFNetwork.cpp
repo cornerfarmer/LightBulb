@@ -26,7 +26,7 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 	options->enableShortcuts = false;
 	options->useBiasNeuron = false;
 	// Define thresholds and functions
-	options->neuronFactory = new DifferentFunctionsNeuronFactory(new RBFThreshold(std::vector<double>(neuronCountFirstLayer, 0), 0.5), new EuclideanDistance(), new GaussianRBFFunction(), new IdentityFunction(),
+	options->neuronFactory = new DifferentFunctionsNeuronFactory(new RBFThreshold(0.5), new EuclideanDistance(), new GaussianRBFFunction(), new IdentityFunction(),
 																	new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 	// Set the neuronCounts in all three layers
 	options->neuronsPerLayerCount = std::vector<unsigned int>(3);
@@ -82,7 +82,11 @@ void RBFNetwork::randomizeWidths(double randStart, double randEnd)
 void RBFNetwork::setCenterOfRBFNeuron(int neuronIndex, std::vector<double> &newCenterPosition)
 {
 	// Set the new center position to the neuron with neuronIndex
-	dynamic_cast<RBFThreshold*>(neurons.front()[neuronIndex]->getThreshold())->setCenterVector(newCenterPosition);
+	auto centerCoordinate = newCenterPosition.begin();
+	for(auto edge = neurons.front()[neuronIndex]->getAfferentEdges()->begin(); edge != neurons.front()[neuronIndex]->getAfferentEdges()->end(); edge++, centerCoordinate++)
+	{
+		(*edge)->setWeight(*centerCoordinate);
+	}	
 }
 
 void RBFNetwork::setWidthOfRBFNeuron(int neuronIndex, double newWidth)
