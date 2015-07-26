@@ -43,6 +43,7 @@
 #include "NetworkTopology\LVQNetwork.hpp"
 #include "Learning\LVQ1LearningRule.hpp"
 #include "Learning\LVQ2LearningRule.hpp"
+#include "Learning\LVQ3LearningRule.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1193,7 +1194,7 @@ void doLVQTest()
 	}
 	
 
-	LVQ1LearningRuleOptions options;
+	LVQ2LearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 1;
 	options.maxTotalErrorValue = 4;
@@ -1203,7 +1204,7 @@ void doLVQTest()
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
 
-	LVQ1LearningRule learningRule(options);
+	LVQ2LearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
 
