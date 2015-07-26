@@ -42,6 +42,7 @@
 #include "Learning\CascadeCorrelationLearningRule.hpp"
 #include "NetworkTopology\LVQNetwork.hpp"
 #include "Learning\LVQ1LearningRule.hpp"
+#include "Learning\LVQ2LearningRule.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1161,7 +1162,7 @@ void doRecurrentCascadeCorrelationMorseTest()
 
 void doLVQTest()
 {
-	LVQNetwork* lvqNetwork = new LVQNetwork(2, 3, 2);
+	LVQNetwork* lvqNetwork = new LVQNetwork(2, 5, 2);
 
 	NeuralNetwork neuralNetwork(lvqNetwork);
 
@@ -1194,10 +1195,10 @@ void doLVQTest()
 
 	LVQ1LearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.debugOutputInterval = 10;
+	options.debugOutputInterval = 1;
 	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 300000;
-	options.maxIterationsPerTry = 1000000;
+	options.maxIterationsPerTry = 100;
 	options.totalErrorGoal = 0.01f;
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;

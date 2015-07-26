@@ -9,6 +9,8 @@
 #include "Function\WeightedSumFunction.hpp"
 #include "Function\BinaryFunction.hpp"
 #include "Neuron\StandardThreshold.hpp"
+#include "Teaching\AbstractTeachingLesson.hpp"
+#include "Neuron\Edge.hpp"
 
 LVQNetwork::LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, unsigned int classCount)
 {
@@ -52,4 +54,54 @@ int LVQNetwork::getClassCount()
 int LVQNetwork::getCodebookVectorCount()
 {
 	return neurons[1].size();
+}
+
+int LVQNetwork::getClassOfNeuron(AbstractNeuron* neuron)
+{
+	auto edgeIndex = 0;
+
+	for (auto edge = neuron->getEfferentEdges()->begin(); edge != neuron->getEfferentEdges()->end(); edge++, edgeIndex++)
+	{
+		if ((*edge)->getWeight() == 1)
+		{
+			return edgeIndex;
+		}
+	}
+
+	throw new std::logic_error("The network has not been configured right");
+}
+
+int LVQNetwork::getClassOfNeuronWithIndex(int neuronIndex)
+{
+	return getClassOfNeuron(neurons[0][neuronIndex]);
+}
+
+int LVQNetwork::getClassOfTeachingLesson(AbstractTeachingLesson& teachingLesson)
+{
+	NeuralNetworkIO<double>* teachingInput = teachingLesson.getTeachingInput(neurons.back()[0]->getActivationFunction());
+	for (int teachingInputValueIndex = 0; teachingInputValueIndex < teachingInput->getDimension(); teachingInputValueIndex++)
+	{
+		if (teachingInput->get(0, teachingInputValueIndex))
+			return teachingInputValueIndex;
+	}
+
+	throw new std::logic_error("The given teachingLesson is not valid");
+}
+
+void LVQNetwork::divideCodebookVectorsIntoClasses()
+{
+	double classesPerCodebookVector = (double)getClassCount() / getCodebookVectorCount();
+
+	int neuronIndex = 0;
+	for (auto neuron = neurons.back().begin(); neuron != neurons.back().end(); neuron++, neuronIndex++)
+	{
+		int edgeIndex = 0;
+		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, edgeIndex++)
+		{
+			if (edgeIndex >= neuronIndex * classesPerCodebookVector && edgeIndex < (neuronIndex + 1) * classesPerCodebookVector)
+				(*edge)->setWeight(1);
+			else
+				(*edge)->setWeight(0);
+		}
+	}
 }

@@ -9,7 +9,7 @@
 #include "NetworkTopology\LayeredNetwork.hpp"
 
 // Forward declarations
-
+class AbstractTeachingLesson;
 
 // A LVQNetwork is layered network which has only one input and one output layer.
 class LVQNetwork : public LayeredNetwork
@@ -22,6 +22,14 @@ public:
 	int getClassCount();
 
 	int getCodebookVectorCount();
+
+	int getClassOfNeuron(AbstractNeuron* neuron);
+
+	int getClassOfNeuronWithIndex(int neuronIndex);
+
+	int getClassOfTeachingLesson(AbstractTeachingLesson& teachingLesson);
+
+	void divideCodebookVectorsIntoClasses();
 };
 
 #endif

@@ -45,20 +45,7 @@ void LVQ1LearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, 
 		// Randomize all weights
 		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 		
-		double classesPerCodebookVector = (double)static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->getClassCount() / static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->getCodebookVectorCount();
-
-		int neuronIndex = 0;
-		for (auto neuron = neuralNetwork.getNetworkTopology()->getNeurons()->back().begin(); neuron != neuralNetwork.getNetworkTopology()->getNeurons()->back().end(); neuron++, neuronIndex++)
-		{
-			int edgeIndex = 0;
-			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, edgeIndex++)
-			{
-				if (edgeIndex >= neuronIndex * classesPerCodebookVector && edgeIndex < (neuronIndex + 1) * classesPerCodebookVector)
-					(*edge)->setWeight(1);
-				else
-					(*edge)->setWeight(0);
-			}
-		}
+		static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->divideCodebookVectorsIntoClasses();
 	}
 }
 
@@ -76,14 +63,8 @@ double LVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& le
 {
 	if (layerIndex == 0 && neuron.getActivation() == neuron.getActivationFunction()->getMaximum())
 	{	
-		bool sameClass = true;
-		for (auto errorValue = (*errormap)[0].begin(); errorValue != (*errormap)[0].end(); errorValue++)
-		{
-			if (errorValue->second != 0)
-				sameClass = false;
-		}
-		if (sameClass)
-		{
+		if (static_cast<LVQNetwork*>(currentNeuralNetwork->getNetworkTopology())->getClassOfNeuronWithIndex(neuronIndex) == static_cast<LVQNetwork*>(currentNeuralNetwork->getNetworkTopology())->getClassOfTeachingLesson(lesson))
+		{	
 			return getOptions()->learningRate * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());
 		}
 		else

@@ -114,14 +114,16 @@ void AbstractNetworkTopologyDrawer::addShapeFromNeuron(AbstractNeuron* neuron, s
 	std::string thresholdString = "";
 
 	// TODO: Also consider networks without bias neurons
-	// Search the afferebt edge from the bias neuron
-	for (auto edge = options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->end(); edge++)
-	{
-		if ((*edge)->getNextNeuron() == neuron)
+	if (false){
+		// Search the afferebt edge from the bias neuron
+		for (auto edge = options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->end(); edge++)
 		{
-			// The negative weight of this edge is the threshold of this neuron
-			thresholdString = floatToString(-(*edge)->getWeight(), 3);
-			break;
+			if ((*edge)->getNextNeuron() == neuron)
+			{
+				// The negative weight of this edge is the threshold of this neuron
+				thresholdString = floatToString(-(*edge)->getWeight(), 3);
+				break;
+			}
 		}
 	}
 
@@ -201,6 +203,8 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 		double threshold = 0;
 
 		// TODO: Also consider networks without bias neurons
+		if (false)
+		{
 		// Search the afferebt edge from the bias neuron
 		for (auto edge = options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->begin(); edge != options->network->getNetworkTopology()->getBiasNeuron()->getEfferentEdges()->end(); edge++)
 		{
@@ -211,7 +215,7 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 				threshold = -(*edge)->getWeight();
 				break;
 			}
-		}
+		}}
 
 		if (currentCalculationInput)
 		{
