@@ -20,7 +20,7 @@ struct LVQ2LearningRuleOptions : AbstractLearningRuleOptions
 	LVQ2LearningRuleOptions()
 	{
 		learningRate = 0.1;
-		relativeWindow = 0.5;
+		relativeWindow = 0.4;
 	}
 };
 // The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks

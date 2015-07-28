@@ -10,6 +10,7 @@
 
 // Forward declarations
 class AbstractTeachingLesson;
+class Teacher;
 
 // A LVQNetwork is layered network which has only one input and one output layer.
 class LVQNetwork : public LayeredNetwork
@@ -30,6 +31,8 @@ public:
 	int getClassOfTeachingLesson(AbstractTeachingLesson& teachingLesson);
 
 	void divideCodebookVectorsIntoClasses();
+
+	void placeCodebookVectorsOnTeachingLessons(Teacher& teacher);
 };
 
 #endif

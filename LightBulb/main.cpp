@@ -44,6 +44,7 @@
 #include "Learning\LVQ1LearningRule.hpp"
 #include "Learning\LVQ2LearningRule.hpp"
 #include "Learning\LVQ3LearningRule.hpp"
+#include "Graphics\LVQNetworkStructureChart.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1169,9 +1170,9 @@ void doLVQTest()
 
 	Teacher teacher;
 
-	for (int i = 0; i <= 1; i++)
+	for (double i = 0; i <= 1; i+=0.5)
 	{
-		for (int l = 0; l <= 1; l++)
+		for (double l = 0; l <= 1; l+=0.5)
 		{
 		
 			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
@@ -1194,19 +1195,23 @@ void doLVQTest()
 	}
 	
 
-	LVQ2LearningRuleOptions options;
+	LVQ1LearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 1;
 	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 300000;
-	options.maxIterationsPerTry = 100;
-	options.totalErrorGoal = 0.01f;
-	options.minRandomWeightValue = -0.5;
-	options.maxRandomWeightValue = 0.5;
+	options.maxIterationsPerTry = 1;
+	options.maxTries = 1;
+	options.totalErrorGoal = 0;
+	options.minRandomWeightValue = 0;
+	options.maxRandomWeightValue = 1;
 
-	LVQ2LearningRule learningRule(options);
+	LVQ1LearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
+
+	options.changeWeightsBeforeLearning = false;
+	LVQ1LearningRule learningRule2(options);
 
 	NeuralNetworkIO<double> input(2);
 
@@ -1214,8 +1219,35 @@ void doLVQTest()
 	input.set(0, 1, 0);
 
 	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(input, TopologicalOrder());
+	
+	LVQNetworkStructureChartOptions lvqetworkStructureChartOptions;
+	lvqetworkStructureChartOptions.lvqNetwork = lvqNetwork;
+	lvqetworkStructureChartOptions.yRangeEnd = 1;
+	lvqetworkStructureChartOptions.xRangeEnd = 1;
+	lvqetworkStructureChartOptions.posX = 300;
+	lvqetworkStructureChartOptions.posY = 300;
+	LVQNetworkStructureChart lvqNetworkStructureChart(lvqetworkStructureChartOptions);
+	lvqNetworkStructureChart.recalculateAllValues();
 
 
+	sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        lvqNetworkStructureChart.draw(window);
+        window.display();
+
+		learningRule2.doLearning(neuralNetwork, teacher);
+		lvqNetworkStructureChart.recalculateAllValues();
+    }
 	
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
@@ -1225,7 +1257,7 @@ void doLVQTest()
 	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
 	
 	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
-	neuralNetworkResultChart.recalculateAllValues();
+	neuralNetworkResultChart.recalculateAllValues();	
 
 	
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
@@ -1238,7 +1270,7 @@ void doLVQTest()
 	networkTopologyDrawer.startNewCalculation(input, *new TopologicalOrder());
 	networkTopologyDrawer.nextCalculationStep();
 
-    sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+    
 
 	while (window.isOpen())
     {

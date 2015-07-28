@@ -47,10 +47,9 @@ void LVQ3LearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teac
 	// If we can change the weights before learning
 	if (options->changeWeightsBeforeLearning)
 	{
-		// Randomize all weights
-		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
-
 		static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->divideCodebookVectorsIntoClasses();
+
+		static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->placeCodebookVectorsOnTeachingLessons(teacher);		
 	}
 }
 

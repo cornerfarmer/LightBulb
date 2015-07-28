@@ -11,6 +11,7 @@
 #include "Neuron\StandardThreshold.hpp"
 #include "Teaching\AbstractTeachingLesson.hpp"
 #include "Neuron\Edge.hpp"
+#include "Teaching\Teacher.hpp"
 
 LVQNetwork::LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, unsigned int classCount)
 {
@@ -102,6 +103,27 @@ void LVQNetwork::divideCodebookVectorsIntoClasses()
 				(*edge)->setWeight(1);
 			else
 				(*edge)->setWeight(0);
+		}
+	}
+}
+void LVQNetwork::placeCodebookVectorsOnTeachingLessons(Teacher &teacher)
+{
+	std::map<StandardNeuron*, bool> readyNeurons;
+
+	for (auto teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+	{
+		for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
+		{
+			if (!readyNeurons[*neuron] && getClassOfTeachingLesson(*teachingLesson->get()) == getClassOfNeuron(*neuron))
+			{
+				auto teachingPatternValue = (*(*teachingLesson)->getTeachingPattern())[0].second.begin();
+				for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, teachingPatternValue++)
+				{
+					(*edge)->setWeight(teachingPatternValue->second);
+				}
+				readyNeurons[*neuron] = true;
+				break;
+			}
 		}
 	}
 }

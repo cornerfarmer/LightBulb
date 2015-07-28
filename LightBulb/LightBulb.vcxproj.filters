@@ -206,9 +206,6 @@
     <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
-      <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
@@ -274,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="Learning\LVQ3LearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -507,6 +510,9 @@
     </ClCompile>
     <ClCompile Include="Learning\LVQ3LearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

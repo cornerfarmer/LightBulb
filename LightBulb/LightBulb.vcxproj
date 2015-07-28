@@ -47,6 +47,7 @@
     <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp" />
     <ClInclude Include="Graphics\GraphicObject.hpp" />
     <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp" />
+    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp" />
     <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
@@ -125,6 +126,7 @@
     <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp" />
     <ClCompile Include="Graphics\GraphicObject.cpp" />
     <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp" />
+    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp" />
     <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
