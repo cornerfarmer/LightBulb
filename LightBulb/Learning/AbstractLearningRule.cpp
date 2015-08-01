@@ -17,8 +17,7 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 	options.reset(options_);
 
 	// Check if all given options are correct
-	if (options->totalErrorGoal < 0)
-		throw std::invalid_argument("The totalErrorGoal has to be greater than or equal to 0");
+
 	if (options->maxTotalErrorValue <= options->totalErrorGoal)
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 }

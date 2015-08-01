@@ -127,7 +127,7 @@ void LVQNetwork::placeCodebookVectorsOnTeachingLessons(Teacher &teacher)
 				auto teachingPatternValue = (*(*teachingLesson)->getTeachingPattern())[0].second.begin();
 				for (auto edge = neurons.front()[*neuronIndex]->getAfferentEdges()->begin(); edge != neurons.front()[*neuronIndex]->getAfferentEdges()->end(); edge++, teachingPatternValue++)
 				{
-					(*edge)->setWeight(teachingPatternValue->second);
+					(*edge)->setWeight(teachingPatternValue->second + ((double)rand() / RAND_MAX - 0.5) / 1000);
 				}
 				readyNeurons[neurons.front()[*neuronIndex]] = true;
 				break;

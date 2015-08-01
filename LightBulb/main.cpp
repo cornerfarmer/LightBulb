@@ -1164,7 +1164,7 @@ void doRecurrentCascadeCorrelationMorseTest()
 
 void doLVQTest()
 {
-	LVQNetwork* lvqNetwork = new LVQNetwork(2,7, 3);
+	LVQNetwork* lvqNetwork = new LVQNetwork(2, 6, 3);
 
 	NeuralNetwork neuralNetwork(lvqNetwork);
 
@@ -1195,21 +1195,27 @@ void doLVQTest()
 	}
 	
 
-	LVQ2LearningRuleOptions options;
+	LVQ1LearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 1;
 	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 300000;
 	options.maxIterationsPerTry = 100;
-	options.maxTries = 10;
+	options.maxTries = 100;
 	options.totalErrorGoal = 0;
 	options.minRandomWeightValue = 0;
 	options.maxRandomWeightValue = 1;
-
-	LVQ2LearningRule learningRule(options);
+	options.offlineLearning = true;
+	options.learningRate = 0.1;
+	
+	LVQ1LearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
-	
+
+	options.learningRate = 0;
+	options.changeWeightsBeforeLearning = false;
+	LVQ1LearningRule learningRule2(options);
+
 	NeuralNetworkIO<double> input(2);
 
 	input.set(0, 0, 1);
@@ -1241,6 +1247,9 @@ void doLVQTest()
         window.clear();
         lvqNetworkStructureChart.draw(window);
         window.display();
+
+		learningRule2.doLearning(neuralNetwork, teacher);
+		lvqNetworkStructureChart.recalculateAllValues();
     }
 	
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
