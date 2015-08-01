@@ -1164,7 +1164,7 @@ void doRecurrentCascadeCorrelationMorseTest()
 
 void doLVQTest()
 {
-	LVQNetwork* lvqNetwork = new LVQNetwork(2, 5, 2);
+	LVQNetwork* lvqNetwork = new LVQNetwork(2,7, 3);
 
 	NeuralNetwork neuralNetwork(lvqNetwork);
 
@@ -1176,14 +1176,14 @@ void doLVQTest()
 		{
 		
 			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
-			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(2);
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(3);
 
 			
 			(*teachingPattern).set(0, 0, i);
 			(*teachingPattern).set(0, 1, l);
 			(*teachingInput).set(0, 0, i == l);	
-			(*teachingInput).set(0, 1, i != l);	
-			
+			(*teachingInput).set(0, 1, i > l);	
+			(*teachingInput).set(0, 2, i < l);	
 
 			//(*teachingInput)[1] = teachingPattern->back()[0];	
 		
@@ -1195,24 +1195,21 @@ void doLVQTest()
 	}
 	
 
-	LVQ1LearningRuleOptions options;
+	LVQ2LearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.debugOutputInterval = 1;
 	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 300000;
-	options.maxIterationsPerTry = 1;
-	options.maxTries = 1;
+	options.maxIterationsPerTry = 100;
+	options.maxTries = 10;
 	options.totalErrorGoal = 0;
 	options.minRandomWeightValue = 0;
 	options.maxRandomWeightValue = 1;
 
-	LVQ1LearningRule learningRule(options);
+	LVQ2LearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
-
-	options.changeWeightsBeforeLearning = false;
-	LVQ1LearningRule learningRule2(options);
-
+	
 	NeuralNetworkIO<double> input(2);
 
 	input.set(0, 0, 1);
@@ -1244,9 +1241,6 @@ void doLVQTest()
         window.clear();
         lvqNetworkStructureChart.draw(window);
         window.display();
-
-		learningRule2.doLearning(neuralNetwork, teacher);
-		lvqNetworkStructureChart.recalculateAllValues();
     }
 	
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;

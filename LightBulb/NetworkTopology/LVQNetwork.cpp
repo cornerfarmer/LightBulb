@@ -12,6 +12,8 @@
 #include "Teaching\AbstractTeachingLesson.hpp"
 #include "Neuron\Edge.hpp"
 #include "Teaching\Teacher.hpp"
+//  Library includes
+#include <algorithm>  
 
 LVQNetwork::LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, unsigned int classCount)
 {
@@ -109,19 +111,25 @@ void LVQNetwork::divideCodebookVectorsIntoClasses()
 void LVQNetwork::placeCodebookVectorsOnTeachingLessons(Teacher &teacher)
 {
 	std::map<StandardNeuron*, bool> readyNeurons;
+	std::vector<int> neuronOrder(neurons.front().size());
+	for (int i = 0; i < neuronOrder.size(); i++)
+	{
+		neuronOrder[i] = i;
+	}
+	std::random_shuffle(neuronOrder.begin(), neuronOrder.end());
 
 	for (auto teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 	{
-		for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
+		for (auto neuronIndex = neuronOrder.begin(); neuronIndex != neuronOrder.end(); neuronIndex++)
 		{
-			if (!readyNeurons[*neuron] && getClassOfTeachingLesson(*teachingLesson->get()) == getClassOfNeuron(*neuron))
+			if (!readyNeurons[neurons.front()[*neuronIndex]] && getClassOfTeachingLesson(*teachingLesson->get()) == getClassOfNeuron(neurons.front()[*neuronIndex]))
 			{
 				auto teachingPatternValue = (*(*teachingLesson)->getTeachingPattern())[0].second.begin();
-				for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, teachingPatternValue++)
+				for (auto edge = neurons.front()[*neuronIndex]->getAfferentEdges()->begin(); edge != neurons.front()[*neuronIndex]->getAfferentEdges()->end(); edge++, teachingPatternValue++)
 				{
 					(*edge)->setWeight(teachingPatternValue->second);
 				}
-				readyNeurons[*neuron] = true;
+				readyNeurons[neurons.front()[*neuronIndex]] = true;
 				break;
 			}
 		}
