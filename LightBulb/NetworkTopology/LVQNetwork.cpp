@@ -111,25 +111,26 @@ void LVQNetwork::divideCodebookVectorsIntoClasses()
 void LVQNetwork::placeCodebookVectorsOnTeachingLessons(Teacher &teacher)
 {
 	std::map<StandardNeuron*, bool> readyNeurons;
-	std::vector<int> neuronOrder(neurons.front().size());
-	for (int i = 0; i < neuronOrder.size(); i++)
+	std::vector<int> lessonOrder(teacher.getTeachingLessons()->size());
+	for (int i = 0; i < teacher.getTeachingLessons()->size(); i++)
 	{
-		neuronOrder[i] = i;
+		lessonOrder[i] = i;
 	}
-	std::random_shuffle(neuronOrder.begin(), neuronOrder.end());
+	std::random_shuffle(lessonOrder.begin(), lessonOrder.end());
 
-	for (auto teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+	for (auto teachingLessonIndex = lessonOrder.begin(); teachingLessonIndex != lessonOrder.end(); teachingLessonIndex++)
 	{
-		for (auto neuronIndex = neuronOrder.begin(); neuronIndex != neuronOrder.end(); neuronIndex++)
+		AbstractTeachingLesson* teachingLesson = (*teacher.getTeachingLessons())[*teachingLessonIndex].get();
+		for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
 		{
-			if (!readyNeurons[neurons.front()[*neuronIndex]] && getClassOfTeachingLesson(*teachingLesson->get()) == getClassOfNeuron(neurons.front()[*neuronIndex]))
+			if (!readyNeurons[*neuron] && getClassOfTeachingLesson(*teachingLesson) == getClassOfNeuron(*neuron))
 			{
-				auto teachingPatternValue = (*(*teachingLesson)->getTeachingPattern())[0].second.begin();
-				for (auto edge = neurons.front()[*neuronIndex]->getAfferentEdges()->begin(); edge != neurons.front()[*neuronIndex]->getAfferentEdges()->end(); edge++, teachingPatternValue++)
+				auto teachingPatternValue = (*teachingLesson->getTeachingPattern())[0].second.begin();
+				for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, teachingPatternValue++)
 				{
 					(*edge)->setWeight(teachingPatternValue->second + ((double)rand() / RAND_MAX - 0.5) / 1000);
 				}
-				readyNeurons[neurons.front()[*neuronIndex]] = true;
+				readyNeurons[*neuron] = true;
 				break;
 			}
 		}

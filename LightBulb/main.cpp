@@ -1201,12 +1201,12 @@ void doLVQTest()
 	options.debugOutputInterval = 10;
 	options.maxTotalErrorValue = 40;
 	options.minIterationsPerTry = 300000;
-	options.maxIterationsPerTry = 1000;
+	options.maxIterationsPerTry = 100000;
 	options.maxTries = 100;
-	options.totalErrorGoal = 4;
+	options.totalErrorGoal = 9;
 	options.minRandomWeightValue = 0;
 	options.maxRandomWeightValue = 1;
-	options.learningRateStart = 0.0001;
+	options.learningRateStart = 0.01;
 	OLVQ1LearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
