@@ -13,11 +13,11 @@ class Teacher;
 
 struct LVQ3LearningRuleOptions : AbstractLearningRuleOptions
 {	
-
+	// Sets the learning Rate
 	double learningRate;
-
+	// The relativeWindow describes the area where neurons will be moved
 	double relativeWindow;
-
+	// The learningRate if the two winner neurons and the teachingInput are in the same class
 	double sameClassesLearningRateFactor;
 	LVQ3LearningRuleOptions()
 	{
@@ -26,7 +26,8 @@ struct LVQ3LearningRuleOptions : AbstractLearningRuleOptions
 		sameClassesLearningRateFactor = 0.3;
 	}
 };
-// The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
+
+// The LVQ3LearningRule can only be used to train LVQNetworks
 class LVQ3LearningRule : public AbstractLearningRule
 {
 private:

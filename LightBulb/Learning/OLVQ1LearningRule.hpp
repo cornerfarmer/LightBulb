@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _LVQ1LEARNINGRULELEARNINGRULE_H_
-#define _LVQ1LEARNINGRULELEARNINGRULE_H_
+#ifndef _OLVQ1LEARNINGRULELEARNINGRULE_H_
+#define _OLVQ1LEARNINGRULELEARNINGRULE_H_
 
 // Includes
 #include "Learning\AbstractLearningRule.hpp"
@@ -11,24 +11,24 @@
 class NeuralNetwork;
 class Teacher;
 
-struct LVQ1LearningRuleOptions : AbstractLearningRuleOptions
+struct OLVQ1LearningRuleOptions : AbstractLearningRuleOptions
 {	
-	// Sets the learning Rate
-	double learningRate;
-	LVQ1LearningRuleOptions()
+
+	double learningRateStart;
+	OLVQ1LearningRuleOptions()
 	{
-		learningRate = 0.1;
+		learningRateStart = 0.3;
 	}
 };
 
-// The LVQ1LearningRule can only be used to train LVQNetworks
-class LVQ1LearningRule : public AbstractLearningRule
+// The LVQ1OLVQ1LearningRuleLearningRule can only be used to train LVQNetworks
+class OLVQ1LearningRule : public AbstractLearningRule
 {
 private:
-
+	std::map<StandardNeuron*, double> learningRates;
 protected:
 	// Returns our current options in form of a LVQ1LearningRuleOptions object
-	LVQ1LearningRuleOptions* getOptions();
+	OLVQ1LearningRuleOptions* getOptions();
 	// Inherited:
 	void adjustWeight(Edge* edge, double deltaWeight);
 	void printDebugOutput();
@@ -37,8 +37,9 @@ protected:
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
 public:
-	LVQ1LearningRule(LVQ1LearningRuleOptions &options_);
+	OLVQ1LearningRule(OLVQ1LearningRuleOptions &options_);
 };
 
 #endif

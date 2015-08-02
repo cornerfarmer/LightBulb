@@ -44,6 +44,7 @@
 #include "Learning\LVQ1LearningRule.hpp"
 #include "Learning\LVQ2LearningRule.hpp"
 #include "Learning\LVQ3LearningRule.hpp"
+#include "Learning\OLVQ1LearningRule.hpp"
 #include "Graphics\LVQNetworkStructureChart.hpp"
 // Library includes
 #include <iostream>
@@ -1164,15 +1165,15 @@ void doRecurrentCascadeCorrelationMorseTest()
 
 void doLVQTest()
 {
-	LVQNetwork* lvqNetwork = new LVQNetwork(2, 6, 3);
+	LVQNetwork* lvqNetwork = new LVQNetwork(2, 7, 3);
 
 	NeuralNetwork neuralNetwork(lvqNetwork);
 
 	Teacher teacher;
 
-	for (double i = 0; i <= 1; i+=0.5)
+	for (double i = 0; i <= 1; i+=0.1)
 	{
-		for (double l = 0; l <= 1; l+=0.5)
+		for (double l = 0; l <= 1; l+=0.1)
 		{
 		
 			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
@@ -1195,33 +1196,25 @@ void doLVQTest()
 	}
 	
 
-	LVQ1LearningRuleOptions options;
+	OLVQ1LearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.debugOutputInterval = 1;
-	options.maxTotalErrorValue = 4;
+	options.debugOutputInterval = 10;
+	options.maxTotalErrorValue = 40;
 	options.minIterationsPerTry = 300000;
-	options.maxIterationsPerTry = 100;
+	options.maxIterationsPerTry = 1000;
 	options.maxTries = 100;
-	options.totalErrorGoal = 0;
+	options.totalErrorGoal = 4;
 	options.minRandomWeightValue = 0;
 	options.maxRandomWeightValue = 1;
-	options.offlineLearning = true;
-	options.learningRate = 0.1;
-	
-	LVQ1LearningRule learningRule(options);
+	options.learningRateStart = 0.0001;
+	OLVQ1LearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
-
-	options.learningRate = 0;
-	options.changeWeightsBeforeLearning = false;
-	LVQ1LearningRule learningRule2(options);
-
+	
 	NeuralNetworkIO<double> input(2);
 
 	input.set(0, 0, 1);
 	input.set(0, 1, 0);
-
-	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(input, TopologicalOrder());
 	
 	LVQNetworkStructureChartOptions lvqetworkStructureChartOptions;
 	lvqetworkStructureChartOptions.lvqNetwork = lvqNetwork;
@@ -1247,9 +1240,6 @@ void doLVQTest()
         window.clear();
         lvqNetworkStructureChart.draw(window);
         window.display();
-
-		learningRule2.doLearning(neuralNetwork, teacher);
-		lvqNetworkStructureChart.recalculateAllValues();
     }
 	
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;

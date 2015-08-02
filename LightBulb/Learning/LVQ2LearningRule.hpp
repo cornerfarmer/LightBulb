@@ -13,9 +13,9 @@ class Teacher;
 
 struct LVQ2LearningRuleOptions : AbstractLearningRuleOptions
 {	
-
+	// Sets the learning Rate
 	double learningRate;
-
+	// The relativeWindow describes the area where neurons will be moved
 	double relativeWindow;
 	LVQ2LearningRuleOptions()
 	{
@@ -23,7 +23,8 @@ struct LVQ2LearningRuleOptions : AbstractLearningRuleOptions
 		relativeWindow = 0.4;
 	}
 };
-// The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
+
+// The LVQ2LearningRule can only be used to train LVQNetworks
 class LVQ2LearningRule : public AbstractLearningRule
 {
 private:

@@ -42,8 +42,9 @@ void LVQ1LearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, 
 	// If we can change the weights before learning
 	if (options->changeWeightsBeforeLearning)
 	{
+		// Divide neurons into classes
 		static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->divideCodebookVectorsIntoClasses();
-
+		// Place them on random teaching lessons
 		static_cast<LVQNetwork*>(neuralNetwork.getNetworkTopology())->placeCodebookVectorsOnTeachingLessons(teacher);		
 	}
 }
@@ -62,6 +63,7 @@ double LVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& le
 {
 	if (layerIndex == 0 && neuron.getActivation() == neuron.getActivationFunction()->getMaximum())
 	{	
+		// If the neuron is in the right class move it nearer to the teachingLesson, else move it further away
 		if (static_cast<LVQNetwork*>(currentNeuralNetwork->getNetworkTopology())->getClassOfNeuronWithIndex(neuronIndex) == static_cast<LVQNetwork*>(currentNeuralNetwork->getNetworkTopology())->getClassOfTeachingLesson(lesson))
 		{	
 			return getOptions()->learningRate * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());

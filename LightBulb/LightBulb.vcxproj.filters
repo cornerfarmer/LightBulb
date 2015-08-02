@@ -278,6 +278,9 @@
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -513,6 +516,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp">
       <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

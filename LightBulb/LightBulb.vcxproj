@@ -58,6 +58,7 @@
     <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ2LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ3LearningRule.hpp" />
+    <ClInclude Include="Learning\OLVQ1LearningRule.hpp" />
     <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp" />
     <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp" />
     <ClInclude Include="Learning\ResilientLearningRateHelper.hpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="Learning\LVQ1LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ2LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ3LearningRule.cpp" />
+    <ClCompile Include="Learning\OLVQ1LearningRule.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp" />
     <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp" />
     <ClCompile Include="Learning\ResilientLearningRateHelper.cpp" />
