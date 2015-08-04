@@ -39,7 +39,7 @@ void AbstractNetworkStructureChart::recalculateAllValues()
 		newCircle.setPointCount(100);
 
 		// Add the circle shape to the list
-		neuronShapes.push_back(newCircle);
+		neuronShapes[*neuron] = newCircle;
 	}
 }
 
@@ -58,7 +58,7 @@ void AbstractNetworkStructureChart::draw(sf::RenderWindow &window)
 	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
 	{	
 		// Draw the circle shape
-		window.draw(*neuronShape);
+		window.draw(neuronShape->second);
 	}
 
 }

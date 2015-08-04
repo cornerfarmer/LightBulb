@@ -51,6 +51,7 @@
     <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp" />
     <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp" />
+    <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp" />
     <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp" />
+    <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />

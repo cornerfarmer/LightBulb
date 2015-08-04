@@ -48,6 +48,7 @@
 #include "Graphics\LVQNetworkStructureChart.hpp"
 #include "NetworkTopology\SOMNetwork.hpp"
 #include "NetworkTopology\LineStructure.hpp"
+#include "Graphics\SOMNetworkStructureChart.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1286,14 +1287,37 @@ void doLVQTest()
 void doSOMTest()
 {
 	SOMNetwork* somNetwork = new SOMNetwork(2, 7, new LineStructure());
+	somNetwork->placeCodebookVectorsRandom(0, 1);
 
 	NeuralNetwork neuralNetwork(somNetwork);
 
+	SOMNetworkStructureChartOptions somNetworkStructureChartOptions;
+	somNetworkStructureChartOptions.somNetwork = somNetwork;
+	somNetworkStructureChartOptions.posX = 300;
+	somNetworkStructureChartOptions.posY = 300;
+	SOMNetworkStructureChart somNetworkStructureChart(somNetworkStructureChartOptions);
+	somNetworkStructureChart.recalculateAllValues();
 
+
+	sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        somNetworkStructureChart.draw(window);
+        window.display();
+    }
 }
 
 int main()
 {
-	doLVQTest();
+	doSOMTest();
     return 0;
 }

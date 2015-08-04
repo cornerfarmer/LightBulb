@@ -54,10 +54,10 @@ struct AbstractNetworkStructureChartOptions
 // A chart which shows the location of neurons
 class AbstractNetworkStructureChart : public GraphicObject
 {
-private:
-	// A list of all circleShapes which represent the location of the neurons
-	std::list<sf::CircleShape> neuronShapes;	
 protected:
+	// A list of all circleShapes which represent the location of the neurons
+	std::map<StandardNeuron*, sf::CircleShape> neuronShapes;	
+
 	AbstractNetworkStructureChartOptions* options;
 	virtual std::vector<StandardNeuron*>* getNeurons() = 0;
 	virtual double getRadiusOfNeuron(StandardNeuron& neuron) = 0;
@@ -65,9 +65,9 @@ protected:
 public:
 	AbstractNetworkStructureChart(AbstractNetworkStructureChartOptions* options_);
 	// This method draws the calculated chart
-	void draw(sf::RenderWindow &window);
+	virtual void draw(sf::RenderWindow &window);
 	// This method recalculates the chart and replaces all neuronShapes
-	void recalculateAllValues();
+	virtual void recalculateAllValues();
 };
 
 #endif

@@ -27,6 +27,7 @@ public:
 
 	void placeCodebookVectorsRandom(double randStart, double randEnd);
 
+	AbstractSOMStructure* getStructure();
 };
 
 #endif

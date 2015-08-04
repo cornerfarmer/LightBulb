@@ -11,11 +11,15 @@ void LineStructure::initialize(SOMNetwork &somNetwork)
 		int d = 0;
 		for (auto otherNeuron = neuron; otherNeuron != somNetwork.getNeurons()->front().end(); otherNeuron++)
 		{
+			if (d == 1) 
+			{
+				neighborhoodNeurons[*neuron].push_back(*otherNeuron);
+				neighborhoodNeurons[*otherNeuron].push_back(*neuron);
+			}
 			neighborhoodDistances[*neuron][*otherNeuron] = d;
 			neighborhoodDistances[*otherNeuron][*neuron] = d;
 			d++;
 		}
 		pos += 0.1;
 	}
-
 }

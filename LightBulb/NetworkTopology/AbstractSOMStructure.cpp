@@ -10,3 +10,9 @@ std::map<StandardNeuron*, std::vector<float>>* AbstractSOMStructure::getNeuronPo
 {
 	return &neuronPositionsInStructure;
 }
+
+std::map<StandardNeuron*, std::list<StandardNeuron*>>*  AbstractSOMStructure::getNeighborhoodNeurons()
+{
+	return &neighborhoodNeurons;
+}
+

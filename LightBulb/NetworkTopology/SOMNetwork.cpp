@@ -66,3 +66,8 @@ void SOMNetwork::placeCodebookVectorsRandom(double randStart, double randEnd)
 		}			
 	}
 }
+
+AbstractSOMStructure* SOMNetwork::getStructure()
+{
+	return structure;
+}
