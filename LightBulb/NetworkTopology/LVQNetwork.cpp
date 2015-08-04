@@ -50,13 +50,13 @@ LVQNetwork::LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVecto
 }
 
 int LVQNetwork::getClassCount()
-{
-	return neurons[0].size();
+{	
+	return neurons[1].size();
 }
 
 int LVQNetwork::getCodebookVectorCount()
 {
-	return neurons[1].size();
+	return neurons[0].size();
 }
 
 int LVQNetwork::getClassOfNeuron(AbstractNeuron* neuron)
@@ -93,7 +93,7 @@ int LVQNetwork::getClassOfTeachingLesson(AbstractTeachingLesson& teachingLesson)
 
 void LVQNetwork::divideCodebookVectorsIntoClasses()
 {
-	double classesPerCodebookVector = (double)getClassCount() / getCodebookVectorCount();
+	double codebookVectorsPerClass = (double)getCodebookVectorCount() / getClassCount();
 
 	int neuronIndex = 0;
 	for (auto neuron = neurons.back().begin(); neuron != neurons.back().end(); neuron++, neuronIndex++)
@@ -101,7 +101,7 @@ void LVQNetwork::divideCodebookVectorsIntoClasses()
 		int edgeIndex = 0;
 		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, edgeIndex++)
 		{
-			if (edgeIndex >= neuronIndex * classesPerCodebookVector && edgeIndex < (neuronIndex + 1) * classesPerCodebookVector)
+			if (edgeIndex >= neuronIndex * codebookVectorsPerClass && edgeIndex < (neuronIndex + 1) * codebookVectorsPerClass)
 				(*edge)->setWeight(1);
 			else
 				(*edge)->setWeight(0);
