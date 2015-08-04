@@ -281,6 +281,18 @@
     <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LineStructure.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -519,6 +531,18 @@
     </ClCompile>
     <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LineStructure.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

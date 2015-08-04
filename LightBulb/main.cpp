@@ -46,6 +46,8 @@
 #include "Learning\LVQ3LearningRule.hpp"
 #include "Learning\OLVQ1LearningRule.hpp"
 #include "Graphics\LVQNetworkStructureChart.hpp"
+#include "NetworkTopology\SOMNetwork.hpp"
+#include "NetworkTopology\LineStructure.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1279,6 +1281,15 @@ void doLVQTest()
 		networkTopologyDrawer.draw(window);
         window.display();
     }
+}
+
+void doSOMTest()
+{
+	SOMNetwork* somNetwork = new SOMNetwork(2, 7, new LineStructure());
+
+	NeuralNetwork neuralNetwork(somNetwork);
+
+
 }
 
 int main()

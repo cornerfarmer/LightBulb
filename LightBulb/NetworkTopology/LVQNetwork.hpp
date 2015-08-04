@@ -12,12 +12,12 @@
 class AbstractTeachingLesson;
 class Teacher;
 
-// A LVQNetwork is layered network which has only one input and one output layer.
+// A LVQNetwork is layered network which has only one input, one hidden and one output layer.
 class LVQNetwork : public LayeredNetwork
 {
 private:	
 public:
-	// Create a new CascadeCorrelationNetwork with the given counts
+	// Create a new LVQNetwork with the given counts
 	LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, unsigned int classCount);
 
 	int getClassCount();
