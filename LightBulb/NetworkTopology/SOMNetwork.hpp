@@ -25,8 +25,6 @@ public:
 
 	int getCodebookVectorCount();
 
-	void placeCodebookVectorsRandom(double randStart, double randEnd);
-
 	AbstractSOMStructure* getStructure();
 };
 

@@ -56,17 +56,6 @@ int SOMNetwork::getCodebookVectorCount()
 	return neurons[0].size();
 }
 
-void SOMNetwork::placeCodebookVectorsRandom(double randStart, double randEnd)
-{
-	for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
-	{
-		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
-		{
-			(*edge)->setWeight((double)rand() / RAND_MAX * (randEnd - randStart) + randStart);
-		}			
-	}
-}
-
 AbstractSOMStructure* SOMNetwork::getStructure()
 {
 	return structure;

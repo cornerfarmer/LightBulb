@@ -49,6 +49,8 @@
 #include "NetworkTopology\SOMNetwork.hpp"
 #include "NetworkTopology\LineStructure.hpp"
 #include "Graphics\SOMNetworkStructureChart.hpp"
+#include "Learning\SOMLearningRule.hpp"
+#include "Function\GaussianRBFFunction.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1286,15 +1288,45 @@ void doLVQTest()
 
 void doSOMTest()
 {
-	SOMNetwork* somNetwork = new SOMNetwork(2, 7, new LineStructure());
-	somNetwork->placeCodebookVectorsRandom(0, 1);
+	SOMNetwork* somNetwork = new SOMNetwork(2, 7, new LineStructure());	
 
 	NeuralNetwork neuralNetwork(somNetwork);
+
+	Teacher teacher;
+
+	for (double a = 0; a < M_PI * 2; a += 0.3)
+	{
+		NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(0);
+			
+		(*teachingPattern).set(0, 0, cos(a));
+		(*teachingPattern).set(0, 1, sin(a));
+
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));			
+	}
+	
+	SOMLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 10;
+	options.maxTotalErrorValue = 40;
+	options.minIterationsPerTry = 300000;
+	options.maxIterationsPerTry = 10000;
+	options.maxTries = 1;
+	options.totalErrorGoal = -1;
+	options.minRandomWeightValue = -1;
+	options.maxRandomWeightValue = 1;
+	options.learningRate  = 0.01;
+	options.neighborhoodFunction = new GaussianRBFFunction();
+	SOMLearningRule learningRule(options);
+
+	learningRule.doLearning(neuralNetwork, teacher);
 
 	SOMNetworkStructureChartOptions somNetworkStructureChartOptions;
 	somNetworkStructureChartOptions.somNetwork = somNetwork;
 	somNetworkStructureChartOptions.posX = 300;
 	somNetworkStructureChartOptions.posY = 300;
+	somNetworkStructureChartOptions.xRangeStart = -1;
+	somNetworkStructureChartOptions.yRangeStart = -1;
 	SOMNetworkStructureChart somNetworkStructureChart(somNetworkStructureChartOptions);
 	somNetworkStructureChart.recalculateAllValues();
 

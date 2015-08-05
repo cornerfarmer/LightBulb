@@ -33,6 +33,7 @@
     <ClInclude Include="ClusterAnalysis\ValuePosition.hpp" />
     <ClInclude Include="Function\AbstractActivationFunction.hpp" />
     <ClInclude Include="Function\AbstractInputFunction.hpp" />
+    <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
     <ClInclude Include="Function\AbstractOutputFunction.hpp" />
     <ClInclude Include="Function\BinaryFunction.hpp" />
     <ClInclude Include="Function\EuclideanDistance.hpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="Learning\ResilientLearningRateHelper.hpp" />
     <ClInclude Include="Learning\SchmidhuberLearningRule.hpp" />
     <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp" />
+    <ClInclude Include="Learning\SOMLearningRule.hpp" />
     <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
@@ -118,6 +120,7 @@
     <ClCompile Include="ClusterAnalysis\ValuePosition.cpp" />
     <ClCompile Include="Function\AbstractActivationFunction.cpp" />
     <ClCompile Include="Function\AbstractInputFunction.cpp" />
+    <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
     <ClCompile Include="Function\AbstractOutputFunction.cpp" />
     <ClCompile Include="Function\BinaryFunction.cpp" />
     <ClCompile Include="Function\EuclideanDistance.cpp" />
@@ -151,6 +154,7 @@
     <ClCompile Include="Learning\ResilientLearningRateHelper.cpp" />
     <ClCompile Include="Learning\SchmidhuberLearningRule.cpp" />
     <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp" />
+    <ClCompile Include="Learning\SOMLearningRule.cpp" />
     <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />

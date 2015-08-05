@@ -1,6 +1,9 @@
 // Includes
 #include "Function\GaussianRBFFunction.hpp"
 #include "Neuron\RBFThreshold.hpp"
+#include "Neuron\NeuronCompareThreshold.hpp"
+#include "NetworkTopology\AbstractSOMStructure.hpp"
+#include "Neuron\StandardNeuron.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>
@@ -46,4 +49,18 @@ double GaussianRBFFunction::getMinimum()
 bool GaussianRBFFunction::hasAMaxAndMinimum()
 {
 	return true;
+}
+
+double GaussianRBFFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, int timeStep)
+{
+	StandardNeuron* activatedNeuron = NULL;
+	for (auto neuron = threshold->getNeurons()->begin(); neuron != threshold->getNeurons()->end(); neuron++)
+	{
+		if ((*neuron)->getActivation() == (*neuron)->getActivationFunction()->getMaximum())
+		{
+			activatedNeuron = *neuron;
+			break;
+		}
+	}
+	return exp(-pow((*structure->getNeighborhoodDistances())[neuron][activatedNeuron], 2) / (2 * pow(2.0 / ((timeStep - 1) / 100 + 1), 2))); 
 }

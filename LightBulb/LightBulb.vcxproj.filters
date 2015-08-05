@@ -296,6 +296,12 @@
     <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\SOMLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -549,6 +555,12 @@
     </ClCompile>
     <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp">
       <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\SOMLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

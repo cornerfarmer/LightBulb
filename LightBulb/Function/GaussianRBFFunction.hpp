@@ -8,8 +8,9 @@
 
 // Includes
 #include "Function\AbstractActivationFunction.hpp"
+#include "Function\AbstractNeighborhoodFunction.hpp"
 
-class GaussianRBFFunction : public AbstractActivationFunction
+class GaussianRBFFunction : public AbstractActivationFunction, public AbstractNeighborhoodFunction
 {
 private:
 public:
@@ -20,6 +21,7 @@ public:
 	double getMaximum();
 	double getMinimum();
 	bool hasAMaxAndMinimum();
+	double execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, int timeStep);
 };
 
 #endif
