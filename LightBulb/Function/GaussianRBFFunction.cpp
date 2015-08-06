@@ -8,6 +8,11 @@
 #include <limits>
 #include <stdexcept>
 
+GaussianRBFFunction::GaussianRBFFunction(double neighborhoodTimeFac_)
+{
+	neighborhoodTimeFac = neighborhoodTimeFac_;
+}
+
 double GaussianRBFFunction::execute(double input, AbstractThreshold* threshold)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);
@@ -51,7 +56,7 @@ bool GaussianRBFFunction::hasAMaxAndMinimum()
 	return true;
 }
 
-double GaussianRBFFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, int timeStep)
+double GaussianRBFFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
 {
 	StandardNeuron* activatedNeuron = NULL;
 	for (auto neuron = threshold->getNeurons()->begin(); neuron != threshold->getNeurons()->end(); neuron++)
@@ -62,5 +67,10 @@ double GaussianRBFFunction::execute(StandardNeuron* neuron, AbstractSOMStructure
 			break;
 		}
 	}
-	return exp(-pow((*structure->getNeighborhoodDistances())[neuron][activatedNeuron], 2) / (2 * pow(2.0 / ((timeStep - 1) / 100 + 1), 2))); 
+	return exp(-pow((*structure->getNeighborhoodDistances())[neuron][activatedNeuron], 2) / (2 * pow(maxDistance, 2))); 
+}
+
+AbstractNeighborhoodFunction* GaussianRBFFunction::getNeighborhoodFunctionCopy()
+{
+	return new GaussianRBFFunction(*this);
 }

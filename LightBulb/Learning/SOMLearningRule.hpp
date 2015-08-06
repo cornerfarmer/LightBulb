@@ -11,6 +11,7 @@
 class NeuralNetwork;
 class Teacher;
 class AbstractNeighborhoodFunction;
+class AbstractShrinkFunction;
 
 struct SOMLearningRuleOptions : AbstractLearningRuleOptions
 {	
@@ -19,12 +20,16 @@ struct SOMLearningRuleOptions : AbstractLearningRuleOptions
 
 	AbstractNeighborhoodFunction* neighborhoodFunction;
 
-	// TODO: Add copy constructor!
+	AbstractShrinkFunction* distanceShrinkFunction;
+
 	SOMLearningRuleOptions()
 	{
 		learningRate = 0.1;
 		neighborhoodFunction = NULL;
+		distanceShrinkFunction = NULL;
 	}
+	~SOMLearningRuleOptions();
+	SOMLearningRuleOptions::SOMLearningRuleOptions(const SOMLearningRuleOptions &obj);
 };
 
 // The LVQ1LearningRule can only be used to train LVQNetworks

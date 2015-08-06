@@ -302,6 +302,15 @@
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="Function\CylinderFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractShrinkFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ExponentialShrinkFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -560,6 +569,15 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\CylinderFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractShrinkFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ExponentialShrinkFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>

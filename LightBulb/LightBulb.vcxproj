@@ -35,8 +35,11 @@
     <ClInclude Include="Function\AbstractInputFunction.hpp" />
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
     <ClInclude Include="Function\AbstractOutputFunction.hpp" />
+    <ClInclude Include="Function\AbstractShrinkFunction.hpp" />
     <ClInclude Include="Function\BinaryFunction.hpp" />
+    <ClInclude Include="Function\CylinderFunction.hpp" />
     <ClInclude Include="Function\EuclideanDistance.hpp" />
+    <ClInclude Include="Function\ExponentialShrinkFunction.hpp" />
     <ClInclude Include="Function\FermiFunction.hpp" />
     <ClInclude Include="Function\GaussianRBFFunction.hpp" />
     <ClInclude Include="Function\HyperbolicTangentFunction.hpp" />
@@ -122,8 +125,11 @@
     <ClCompile Include="Function\AbstractInputFunction.cpp" />
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
     <ClCompile Include="Function\AbstractOutputFunction.cpp" />
+    <ClCompile Include="Function\AbstractShrinkFunction.cpp" />
     <ClCompile Include="Function\BinaryFunction.cpp" />
+    <ClCompile Include="Function\CylinderFunction.cpp" />
     <ClCompile Include="Function\EuclideanDistance.cpp" />
+    <ClCompile Include="Function\ExponentialShrinkFunction.cpp" />
     <ClCompile Include="Function\FermiFunction.cpp" />
     <ClCompile Include="Function\GaussianRBFFunction.cpp" />
     <ClCompile Include="Function\HyperbolicTangentFunction.cpp" />

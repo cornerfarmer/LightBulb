@@ -13,7 +13,21 @@
 #include "Neuron\NeuronCompareThreshold.hpp"
 #include "Function\AbstractActivationFunction.hpp"
 #include "Function\AbstractNeighborhoodFunction.hpp"
+#include "Function\AbstractShrinkFunction.hpp"
 #include "NetworkTopology\SOMNetwork.hpp"
+
+SOMLearningRuleOptions::~SOMLearningRuleOptions()
+{
+	delete(neighborhoodFunction);
+	delete(distanceShrinkFunction);
+}
+
+SOMLearningRuleOptions::SOMLearningRuleOptions(const SOMLearningRuleOptions &obj)
+{
+	*this = obj;
+	neighborhoodFunction = obj.neighborhoodFunction->getNeighborhoodFunctionCopy();
+	distanceShrinkFunction = obj.distanceShrinkFunction->getShrinkFunctionCopy();
+}
 
 
 SOMLearningRule::SOMLearningRule(SOMLearningRuleOptions &options_)
@@ -65,7 +79,7 @@ AbstractActivationOrder* SOMLearningRule::getNewActivationOrder(NeuralNetwork &n
 
 double SOMLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
-	return getOptions()->learningRate * getOptions()->neighborhoodFunction->execute(&neuron, static_cast<SOMNetwork*>(currentNeuralNetwork->getNetworkTopology())->getStructure(), static_cast<NeuronCompareThreshold*>(neuron.getThreshold()), currentTimestep) * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());
+	return getOptions()->learningRate * getOptions()->neighborhoodFunction->execute(&neuron, static_cast<SOMNetwork*>(currentNeuralNetwork->getNetworkTopology())->getStructure(), static_cast<NeuronCompareThreshold*>(neuron.getThreshold()), getOptions()->distanceShrinkFunction->execute(currentTimestep)) * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());
 }
 
 SOMLearningRuleOptions* SOMLearningRule::getOptions()

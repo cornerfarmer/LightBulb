@@ -14,7 +14,9 @@ class AbstractNeighborhoodFunction
 private:
 public:
 	// Calculate the neighborhood factor
-	virtual double execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, int timeStep) = 0;
+	virtual double execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance) = 0;
+	// Create a copy of the object
+	virtual AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy() = 0;
 };
 
 #endif

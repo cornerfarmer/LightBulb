@@ -13,7 +13,9 @@
 class GaussianRBFFunction : public AbstractActivationFunction, public AbstractNeighborhoodFunction
 {
 private:
+	double neighborhoodTimeFac;
 public:
+	GaussianRBFFunction(double neighborhoodTimeFac_ = 5);
 	// Inherited:
 	double execute(double input, AbstractThreshold* threshold);
 	double executeDerivation(double input, AbstractThreshold* threshold);
@@ -21,7 +23,8 @@ public:
 	double getMaximum();
 	double getMinimum();
 	bool hasAMaxAndMinimum();
-	double execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, int timeStep);
+	double execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance);
+	AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy();
 };
 
 #endif

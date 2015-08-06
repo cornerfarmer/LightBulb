@@ -51,6 +51,8 @@
 #include "Graphics\SOMNetworkStructureChart.hpp"
 #include "Learning\SOMLearningRule.hpp"
 #include "Function\GaussianRBFFunction.hpp"
+#include "Function\CylinderFunction.hpp"
+#include "Function\ExponentialShrinkFunction.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1310,13 +1312,14 @@ void doSOMTest()
 	options.debugOutputInterval = 10;
 	options.maxTotalErrorValue = 40;
 	options.minIterationsPerTry = 300000;
-	options.maxIterationsPerTry = 10000;
+	options.maxIterationsPerTry = 1000;
 	options.maxTries = 1;
 	options.totalErrorGoal = -1;
 	options.minRandomWeightValue = -1;
 	options.maxRandomWeightValue = 1;
 	options.learningRate  = 0.01;
-	options.neighborhoodFunction = new GaussianRBFFunction();
+	options.neighborhoodFunction = new CylinderFunction();
+	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
 	SOMLearningRule learningRule(options);
 
 	learningRule.doLearning(neuralNetwork, teacher);
