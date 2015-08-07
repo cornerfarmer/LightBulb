@@ -13,9 +13,7 @@
 class GaussianRBFFunction : public AbstractActivationFunction, public AbstractNeighborhoodFunction
 {
 private:
-	double neighborhoodTimeFac;
 public:
-	GaussianRBFFunction(double neighborhoodTimeFac_ = 5);
 	// Inherited:
 	double execute(double input, AbstractThreshold* threshold);
 	double executeDerivation(double input, AbstractThreshold* threshold);

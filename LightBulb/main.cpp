@@ -52,6 +52,7 @@
 #include "Learning\SOMLearningRule.hpp"
 #include "Function\GaussianRBFFunction.hpp"
 #include "Function\CylinderFunction.hpp"
+#include "Function\ConeFunction.hpp"
 #include "Function\ExponentialShrinkFunction.hpp"
 // Library includes
 #include <iostream>
@@ -1035,7 +1036,6 @@ void doRecurrentCascadeCorrelationTest()
     }
 }
 
-
 void doRecurrentCascadeCorrelationMorseTest()
 {
 	CascadeCorrelationNetwork* ccn = new CascadeCorrelationNetwork(1, 27);
@@ -1318,7 +1318,7 @@ void doSOMTest()
 	options.minRandomWeightValue = -1;
 	options.maxRandomWeightValue = 1;
 	options.learningRate  = 0.01;
-	options.neighborhoodFunction = new CylinderFunction();
+	options.neighborhoodFunction = new ConeFunction();
 	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
 	SOMLearningRule learningRule(options);
 

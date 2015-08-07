@@ -1,12 +1,12 @@
 // Includes
-#include "Function\CylinderFunction.hpp"
+#include "Function\ConeFunction.hpp"
 #include "Function\AbstractActivationFunction.hpp"
 #include "Neuron\NeuronCompareThreshold.hpp"
 #include "NetworkTopology\AbstractSOMStructure.hpp"
 #include "Neuron\StandardNeuron.hpp"
 // Library includes
 
-double CylinderFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
+double ConeFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
 {
 	StandardNeuron* activatedNeuron = NULL;
 	for (auto neuron = threshold->getNeurons()->begin(); neuron != threshold->getNeurons()->end(); neuron++)
@@ -17,10 +17,10 @@ double CylinderFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* s
 			break;
 		}
 	}
-	return (*structure->getNeighborhoodDistances())[neuron][activatedNeuron] < maxDistance; 
+	return std::max(0.0, 1 - (*structure->getNeighborhoodDistances())[neuron][activatedNeuron] / maxDistance); 
 }
 
-AbstractNeighborhoodFunction* CylinderFunction::getNeighborhoodFunctionCopy()
+AbstractNeighborhoodFunction* ConeFunction::getNeighborhoodFunctionCopy()
 {
-	return new CylinderFunction(*this);
+	return new ConeFunction(*this);
 }

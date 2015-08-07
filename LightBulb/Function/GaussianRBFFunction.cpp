@@ -8,11 +8,6 @@
 #include <limits>
 #include <stdexcept>
 
-GaussianRBFFunction::GaussianRBFFunction(double neighborhoodTimeFac_)
-{
-	neighborhoodTimeFac = neighborhoodTimeFac_;
-}
-
 double GaussianRBFFunction::execute(double input, AbstractThreshold* threshold)
 {
 	RBFThreshold* rbfThreshold = dynamic_cast<RBFThreshold*>(threshold);

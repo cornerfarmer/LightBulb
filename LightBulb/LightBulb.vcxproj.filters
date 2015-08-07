@@ -311,6 +311,9 @@
     <ClInclude Include="Function\ExponentialShrinkFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="Function\ConeFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -578,6 +581,9 @@
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
     <ClCompile Include="Function\ExponentialShrinkFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ConeFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>

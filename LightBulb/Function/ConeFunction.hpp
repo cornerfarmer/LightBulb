@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _CYLINDERFUNCTION_H_
-#define _CYLINDERFUNCTION_H_
+#ifndef _CONEFUNCTION_H_
+#define _CONEFUNCTION_H_
 
 // Library includes
 #include <math.h>
@@ -9,7 +9,7 @@
 // Includes
 #include "Function\AbstractNeighborhoodFunction.hpp"
 
-class CylinderFunction : public AbstractNeighborhoodFunction
+class ConeFunction : public AbstractNeighborhoodFunction
 {
 private:
 public:
