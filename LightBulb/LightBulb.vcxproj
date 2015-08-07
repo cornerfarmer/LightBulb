@@ -38,6 +38,7 @@
     <ClInclude Include="Function\AbstractShrinkFunction.hpp" />
     <ClInclude Include="Function\BinaryFunction.hpp" />
     <ClInclude Include="Function\ConeFunction.hpp" />
+    <ClInclude Include="Function\CosinusFunction.hpp" />
     <ClInclude Include="Function\CylinderFunction.hpp" />
     <ClInclude Include="Function\EuclideanDistance.hpp" />
     <ClInclude Include="Function\ExponentialShrinkFunction.hpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Function\AbstractShrinkFunction.cpp" />
     <ClCompile Include="Function\BinaryFunction.cpp" />
     <ClCompile Include="Function\ConeFunction.cpp" />
+    <ClCompile Include="Function\CosinusFunction.cpp" />
     <ClCompile Include="Function\CylinderFunction.cpp" />
     <ClCompile Include="Function\EuclideanDistance.cpp" />
     <ClCompile Include="Function\ExponentialShrinkFunction.cpp" />

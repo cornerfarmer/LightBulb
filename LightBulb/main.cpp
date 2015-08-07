@@ -53,6 +53,7 @@
 #include "Function\GaussianRBFFunction.hpp"
 #include "Function\CylinderFunction.hpp"
 #include "Function\ConeFunction.hpp"
+#include "Function\CosinusFunction.hpp"
 #include "Function\ExponentialShrinkFunction.hpp"
 // Library includes
 #include <iostream>
@@ -1318,7 +1319,7 @@ void doSOMTest()
 	options.minRandomWeightValue = -1;
 	options.maxRandomWeightValue = 1;
 	options.learningRate  = 0.01;
-	options.neighborhoodFunction = new ConeFunction();
+	options.neighborhoodFunction = new CosinusFunction();
 	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
 	SOMLearningRule learningRule(options);
 
