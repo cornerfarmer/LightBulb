@@ -46,6 +46,7 @@
     <ClInclude Include="Function\GaussianRBFFunction.hpp" />
     <ClInclude Include="Function\HyperbolicTangentFunction.hpp" />
     <ClInclude Include="Function\IdentityFunction.hpp" />
+    <ClInclude Include="Function\MexicanHatFunction.hpp" />
     <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Function\GaussianRBFFunction.cpp" />
     <ClCompile Include="Function\HyperbolicTangentFunction.cpp" />
     <ClCompile Include="Function\IdentityFunction.cpp" />
+    <ClCompile Include="Function\MexicanHatFunction.cpp" />
     <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />

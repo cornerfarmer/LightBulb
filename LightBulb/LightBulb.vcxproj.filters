@@ -317,6 +317,9 @@
     <ClInclude Include="Function\CosinusFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="Function\MexicanHatFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -590,6 +593,9 @@
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
     <ClCompile Include="Function\CosinusFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\MexicanHatFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
