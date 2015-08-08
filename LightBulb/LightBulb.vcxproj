@@ -79,6 +79,7 @@
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
     <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp" />
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\GridStructure.hpp" />
     <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
     <ClInclude Include="NetworkTopology\LineStructure.hpp" />
     <ClInclude Include="NetworkTopology\LVQNetwork.hpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
     <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp" />
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\GridStructure.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />
     <ClCompile Include="NetworkTopology\LineStructure.cpp" />
     <ClCompile Include="NetworkTopology\LVQNetwork.cpp" />

@@ -48,6 +48,7 @@
 #include "Graphics\LVQNetworkStructureChart.hpp"
 #include "NetworkTopology\SOMNetwork.hpp"
 #include "NetworkTopology\LineStructure.hpp"
+#include "NetworkTopology\GridStructure.hpp"
 #include "Graphics\SOMNetworkStructureChart.hpp"
 #include "Learning\SOMLearningRule.hpp"
 #include "Function\GaussianRBFFunction.hpp"
@@ -1292,7 +1293,7 @@ void doLVQTest()
 
 void doSOMTest()
 {
-	SOMNetwork* somNetwork = new SOMNetwork(2, 7, new LineStructure());	
+	SOMNetwork* somNetwork = new SOMNetwork(2, 20, new GridStructure());	
 
 	NeuralNetwork neuralNetwork(somNetwork);
 
@@ -1320,7 +1321,7 @@ void doSOMTest()
 	options.minRandomWeightValue = -1;
 	options.maxRandomWeightValue = 1;
 	options.learningRate  = 0.01;
-	options.neighborhoodFunction = new MexicanHatFunction();
+	options.neighborhoodFunction = new GaussianRBFFunction();
 	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
 	SOMLearningRule learningRule(options);
 

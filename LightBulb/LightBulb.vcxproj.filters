@@ -320,6 +320,9 @@
     <ClInclude Include="Function\MexicanHatFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopology\GridStructure.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -597,6 +600,9 @@
     </ClCompile>
     <ClCompile Include="Function\MexicanHatFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\GridStructure.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
