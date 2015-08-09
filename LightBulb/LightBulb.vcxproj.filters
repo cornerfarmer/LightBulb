@@ -323,6 +323,9 @@
     <ClInclude Include="NetworkTopology\GridStructure.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\SOMMappingChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -603,6 +606,9 @@
     </ClCompile>
     <ClCompile Include="NetworkTopology\GridStructure.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SOMMappingChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

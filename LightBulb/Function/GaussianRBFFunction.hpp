@@ -21,7 +21,7 @@ public:
 	double getMaximum();
 	double getMinimum();
 	bool hasAMaxAndMinimum();
-	double execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance);
+	double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance);
 	AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy();
 };
 

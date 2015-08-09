@@ -51,17 +51,8 @@ bool GaussianRBFFunction::hasAMaxAndMinimum()
 	return true;
 }
 
-double GaussianRBFFunction::execute(StandardNeuron* neuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
+double GaussianRBFFunction::execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
 {
-	StandardNeuron* activatedNeuron = NULL;
-	for (auto neuron = threshold->getNeurons()->begin(); neuron != threshold->getNeurons()->end(); neuron++)
-	{
-		if ((*neuron)->getActivation() == (*neuron)->getActivationFunction()->getMaximum())
-		{
-			activatedNeuron = *neuron;
-			break;
-		}
-	}
 	return exp(-pow((*structure->getNeighborhoodDistances())[neuron][activatedNeuron], 2) / (2 * pow(maxDistance, 2))); 
 }
 

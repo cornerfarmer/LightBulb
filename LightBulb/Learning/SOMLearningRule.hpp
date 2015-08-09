@@ -37,6 +37,7 @@ class SOMLearningRule : public AbstractLearningRule
 {
 private:
 	int currentTimestep;
+	StandardNeuron* currentActivatedNeuron;
 protected:
 	// Returns our current options in form of a SOMLearningRuleOptions object
 	SOMLearningRuleOptions* getOptions();
@@ -49,6 +50,7 @@ protected:
 	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
+	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 public:
 	SOMLearningRule(SOMLearningRuleOptions &options_);
 };

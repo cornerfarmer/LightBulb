@@ -77,9 +77,25 @@ AbstractActivationOrder* SOMLearningRule::getNewActivationOrder(NeuralNetwork &n
 	return new TopologicalOrder();
 }
 
+void SOMLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
+{
+	currentActivatedNeuron = NULL;
+}
+
 double SOMLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
-	return getOptions()->learningRate * getOptions()->neighborhoodFunction->execute(&neuron, static_cast<SOMNetwork*>(currentNeuralNetwork->getNetworkTopology())->getStructure(), static_cast<NeuronCompareThreshold*>(neuron.getThreshold()), getOptions()->distanceShrinkFunction->execute(currentTimestep)) * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());
+	if (currentActivatedNeuron == NULL)
+	{
+		for (auto neuron = currentNeuralNetwork->getNetworkTopology()->getNeurons()->front().begin(); neuron != currentNeuralNetwork->getNetworkTopology()->getNeurons()->front().end(); neuron++)
+		{
+			if ((*neuron)->getActivation() == (*neuron)->getActivationFunction()->getMaximum())
+			{
+				currentActivatedNeuron = *neuron;
+				break;
+			}
+		}
+	}
+	return getOptions()->learningRate * getOptions()->neighborhoodFunction->execute(&neuron, currentActivatedNeuron, static_cast<SOMNetwork*>(currentNeuralNetwork->getNetworkTopology())->getStructure(), static_cast<NeuronCompareThreshold*>(neuron.getThreshold()), getOptions()->distanceShrinkFunction->execute(currentTimestep)) * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());
 }
 
 SOMLearningRuleOptions* SOMLearningRule::getOptions()

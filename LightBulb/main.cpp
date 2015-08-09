@@ -57,6 +57,7 @@
 #include "Function\CosinusFunction.hpp"
 #include "Function\MexicanHatFunction.hpp"
 #include "Function\ExponentialShrinkFunction.hpp"
+#include "Graphics\SOMMappingChart.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1293,21 +1294,29 @@ void doLVQTest()
 
 void doSOMTest()
 {
-	SOMNetwork* somNetwork = new SOMNetwork(2, 20, new GridStructure());	
+	SOMNetwork* somNetwork = new SOMNetwork(2, 36, new GridStructure());	
 
 	NeuralNetwork neuralNetwork(somNetwork);
 
 	Teacher teacher;
 
-	for (double a = 0; a < M_PI * 2; a += 0.3)
+	for (int i = 0; i < 200; i++)
 	{
-		NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
-		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(0);
-			
-		(*teachingPattern).set(0, 0, cos(a));
-		(*teachingPattern).set(0, 1, sin(a));
+		double x = (double)rand() / RAND_MAX * 2 - 1;
+		double y = (double)rand() / RAND_MAX * 2 - 1;
 
-		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));			
+		if (sqrt(x * x + y * y) < 1)
+		{
+			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(0);
+			
+			(*teachingPattern).set(0, 0, x);
+			(*teachingPattern).set(0, 1, y);
+
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));			
+		}
+		else
+			i--;
 	}
 	
 	SOMLearningRuleOptions options;
@@ -1354,8 +1363,81 @@ void doSOMTest()
     }
 }
 
+
+
+void doSOMColorTest()
+{
+	SOMNetwork* somNetwork = new SOMNetwork(3, 1600, new GridStructure());	
+
+	NeuralNetwork neuralNetwork(somNetwork);
+
+	Teacher teacher;
+
+	for (int i = 0; i < 200; i++)
+	{
+		double r = (double)rand() / RAND_MAX * 255;
+		double g = (double)rand() / RAND_MAX * 255;
+		double b = (double)rand() / RAND_MAX * 255;
+
+		NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(3);
+		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(0);
+			
+		(*teachingPattern).set(0, 0, r);
+		(*teachingPattern).set(0, 1, g);
+		(*teachingPattern).set(0, 2, b);
+
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));			
+
+	}
+	
+	SOMLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 10;
+	options.maxTotalErrorValue = 40;
+	options.minIterationsPerTry = 300000;
+	options.maxIterationsPerTry = 1000;
+	options.maxTries = 1;
+	options.totalErrorGoal = -1;
+	options.minRandomWeightValue = -1;
+	options.maxRandomWeightValue = 1;
+	options.learningRate  = 0.01;
+	options.neighborhoodFunction = new GaussianRBFFunction();
+	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
+	SOMLearningRule learningRule(options);
+
+	learningRule.doLearning(neuralNetwork, teacher);
+
+	SOMMappingChartOptions somMappingChartOptions;
+	somMappingChartOptions.somNetwork = somNetwork;
+	somMappingChartOptions.posX = 300;
+	somMappingChartOptions.posY = 300;
+	somMappingChartOptions.rRangeEnd = 255;
+	somMappingChartOptions.gRangeEnd = 255;
+	somMappingChartOptions.bRangeEnd = 255;
+	SOMMappingChart somMappingChart(somMappingChartOptions);
+	somMappingChart.recalculateAllValues();
+
+
+	sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        somMappingChart.draw(window);
+        window.display();
+    }
+}
+
+
 int main()
 {
-	doSOMTest();
+	doSOMColorTest();
     return 0;
 }
