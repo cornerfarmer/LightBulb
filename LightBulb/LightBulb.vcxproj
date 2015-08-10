@@ -52,6 +52,7 @@
     <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
     <ClInclude Include="Graphics\Arrow.hpp" />
+    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp" />
     <ClInclude Include="Graphics\GraphicObject.hpp" />
     <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
+    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
     <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ2LearningRule.hpp" />
@@ -79,6 +81,7 @@
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
     <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp" />
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp" />
     <ClInclude Include="NetworkTopology\GridStructure.hpp" />
     <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
@@ -147,6 +150,7 @@
     <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
     <ClCompile Include="Graphics\Arrow.cpp" />
+    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp" />
     <ClCompile Include="Graphics\GraphicObject.cpp" />
     <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp" />
@@ -159,6 +163,7 @@
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
+    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
     <ClCompile Include="Learning\LVQ1LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ2LearningRule.cpp" />
@@ -175,6 +180,7 @@
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
     <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp" />
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp" />
     <ClCompile Include="NetworkTopology\GridStructure.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />

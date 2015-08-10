@@ -326,6 +326,15 @@
     <ClInclude Include="Graphics\SOMMappingChart.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -608,6 +617,15 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\SOMMappingChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>

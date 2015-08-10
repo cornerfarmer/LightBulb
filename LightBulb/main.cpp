@@ -58,6 +58,9 @@
 #include "Function\MexicanHatFunction.hpp"
 #include "Function\ExponentialShrinkFunction.hpp"
 #include "Graphics\SOMMappingChart.hpp"
+#include "NetworkTopology\CounterpropagationNetwork.hpp"
+#include "Learning\CounterpropagationLearningRule.hpp"
+#include "Graphics\CounterpropagationNetworkStructureChart.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1363,8 +1366,6 @@ void doSOMTest()
     }
 }
 
-
-
 void doSOMColorTest()
 {
 	SOMNetwork* somNetwork = new SOMNetwork(3, 1600, new GridStructure());	
@@ -1435,9 +1436,73 @@ void doSOMColorTest()
     }
 }
 
+void doCounterpropagationTest()
+{
+	CounterpropagationNetwork* cpNetwork = new CounterpropagationNetwork(2, 4, 1);	
+
+	NeuralNetwork neuralNetwork(cpNetwork);
+
+	CounterpropagationLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.debugOutputInterval = 100;
+	options.maxTotalErrorValue = 4;
+	options.minIterationsPerTry = 3000;
+	options.maxIterationsPerTry = 10000;
+	options.totalErrorGoal = 0.001f;
+	options.maxTries = 1;
+	options.minRandomWeightValue = -0.5;
+	options.maxRandomWeightValue = 0.5;
+	
+	CounterpropagationLearningRule learningRule(options);
+
+	Teacher teacher;
+	for (int i=0;i<2;i+=1)
+	{
+		for (int l=0;l<2;l+=1)
+		{			
+			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+			NeuralNetworkIO<double>* teachingInput= new NeuralNetworkIO<double>(1);
+
+			(*teachingPattern).set(0, 0, i);
+			(*teachingPattern).set(0, 1, l);
+			(*teachingInput).set(0, 0, (i == l));	
+			//(*teachingInput)[0] = (i > 0.4 && i < 0.8  && l> 0.4 && l< 0.8 ? 1 : 0);
+			teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));
+		}
+	}
+
+	learningRule.doLearning(neuralNetwork, teacher);
+
+	
+	CounterpropagationNetworkStructureChartOptions counterpropagationNetworkStructureChartOptions;
+	counterpropagationNetworkStructureChartOptions.network = cpNetwork;
+	counterpropagationNetworkStructureChartOptions.yRangeEnd = 2;
+	counterpropagationNetworkStructureChartOptions.xRangeEnd = 2;
+	counterpropagationNetworkStructureChartOptions.posX = 300;
+	counterpropagationNetworkStructureChartOptions.posY = 300;
+	CounterpropagationNetworkStructureChart counterpropagationNetworkStructureChart(counterpropagationNetworkStructureChartOptions);
+	counterpropagationNetworkStructureChart.recalculateAllValues();
+
+
+	sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        counterpropagationNetworkStructureChart.draw(window);
+        window.display();
+    }
+}
 
 int main()
 {
-	doSOMColorTest();
+	doCounterpropagationTest();
     return 0;
 }
