@@ -150,7 +150,7 @@ AbstractActivationOrder* TruncatedBackpropagationThroughTimeLearningRule::getNew
 
 bool TruncatedBackpropagationThroughTimeLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
 {
-	if (*nextTimeStepCount != -1)
+	if (*nextStartTime != -1)
 		return false;
 	else
 	{

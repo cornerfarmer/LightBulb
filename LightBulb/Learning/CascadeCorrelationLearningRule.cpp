@@ -424,9 +424,9 @@ bool CascadeCorrelationLearningRule::configureNextErroMapCalculation(int* nextSt
 	{
 		// Do not calculate anything. We do that inside the correaltion calculation
 		if (currentMode == CANDIDATEUNITLEARNINGMODE) 
-			*nextTimeStepCount = -1;
-		else
 			*nextTimeStepCount = 0;
+		else
+			*nextTimeStepCount = -1;
 		*nextStartTime = 0;		
 		return true;
 	}

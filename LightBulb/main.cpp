@@ -63,6 +63,7 @@
 #include "Graphics\CounterpropagationNetworkStructureChart.hpp"
 #include "NetworkTopology\HopfieldNetwork.hpp"
 #include "ActivationOrder\AsynchronousOrder.hpp"
+#include "Learning\HopfieldLearningRule.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1510,13 +1511,31 @@ void doHopfieldTest()
 
 	NeuralNetwork neuralNetwork(hopfieldNetwork);
 
-	hopfieldNetwork->getNeurons()->front()[0]->getAfferentEdges()->front()->setWeight(-1);
-	hopfieldNetwork->getNeurons()->front()[1]->getAfferentEdges()->front()->setWeight(-1);
+	
+	HopfieldLearningRuleOptions options;
+	options.enableDebugOutput = true;
+
+	HopfieldLearningRule learningRule(options);
+
+
+	Teacher teacher;
+	for (int i=-1;i<2;i+=2)
+	{
+		NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+		NeuralNetworkIO<double>* teachingInput= new NeuralNetworkIO<double>(0);
+
+		(*teachingPattern).set(0, 0, i);
+		(*teachingPattern).set(0, 1, i);
+
+		teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));		
+	}
+
+	learningRule.doLearning(neuralNetwork, teacher);
 
 	NeuralNetworkIO<double> teachingPattern(2);
 
-	teachingPattern.set(0, 0, 1);
-	teachingPattern.set(0, 1, 1);
+	teachingPattern.set(0, 0, -4.1);
+	teachingPattern.set(0, 1, 5.1);
 
 	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, AsynchronousOrder(), 0, 4);
 

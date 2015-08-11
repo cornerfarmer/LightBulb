@@ -341,6 +341,9 @@
     <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\HopfieldLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -639,6 +642,9 @@
     </ClCompile>
     <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\HopfieldLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

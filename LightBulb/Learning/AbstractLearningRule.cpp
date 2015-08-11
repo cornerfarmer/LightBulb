@@ -229,12 +229,12 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 bool AbstractLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
 {
 	// Per default only calculate every teaching lesson once in all possible timesteps
-	if (*nextTimeStepCount != -1)
+	if (*nextStartTime != -1)
 		return false;
 	else
 	{
 		*nextStartTime = 0;
-		*nextTimeStepCount = 0;
+		*nextTimeStepCount = -1;
 		return true;
 	}
 }

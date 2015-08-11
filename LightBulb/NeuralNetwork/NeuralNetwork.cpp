@@ -29,7 +29,7 @@ std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkI
 	}
 
 	// Do for every time step
-	for (int timeStep = startTime; (timeStep <= input.getMaxTimeStep() && timeStepCount == 0) || timeStep - startTime < timeStepCount; timeStep++)
+	for (int timeStep = startTime; (timeStep <= input.getMaxTimeStep() && timeStepCount == -1) || timeStep - startTime < timeStepCount; timeStep++)
 	{
 		// Set the input into the neural network
 		setInput(input.existsTimestep(timeStep) ? &input[timeStep].second : NULL);

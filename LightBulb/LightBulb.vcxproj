@@ -68,6 +68,7 @@
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
+    <ClInclude Include="Learning\HopfieldLearningRule.hpp" />
     <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ2LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ3LearningRule.hpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
+    <ClCompile Include="Learning\HopfieldLearningRule.cpp" />
     <ClCompile Include="Learning\LVQ1LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ2LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ3LearningRule.cpp" />
