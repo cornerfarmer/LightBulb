@@ -16,6 +16,7 @@ FreeNetworkOptions::FreeNetworkOptions()
 	neuronCount = 0;
 	realInputNeurons = false;
 	inputNeuronCount = 0;
+	selfReferencingEdges = true;
 }
 
 FreeNetworkOptions::~FreeNetworkOptions()
@@ -217,8 +218,11 @@ AbstractNeuron* FreeNetwork::addNeuron(bool refreshNeuronCounters, bool inputNeu
 			(*neuron)->addNextNeuron(newNeuron, 1);
 		}		
 
-		// Add a self referencing edge
-		newNeuron->addNextNeuron(newNeuron, 1);
+		if (options->selfReferencingEdges)
+		{
+			// Add a self referencing edge
+			newNeuron->addNextNeuron(newNeuron, 1);
+		}
 
 		// Add it to the neuronlist
 		neurons.push_back(newNeuron);	

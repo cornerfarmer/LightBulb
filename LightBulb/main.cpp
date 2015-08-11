@@ -61,6 +61,8 @@
 #include "NetworkTopology\CounterpropagationNetwork.hpp"
 #include "Learning\CounterpropagationLearningRule.hpp"
 #include "Graphics\CounterpropagationNetworkStructureChart.hpp"
+#include "NetworkTopology\HopfieldNetwork.hpp"
+#include "ActivationOrder\AsynchronousOrder.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1501,8 +1503,27 @@ void doCounterpropagationTest()
     }
 }
 
+
+void doHopfieldTest()
+{
+	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(2);	
+
+	NeuralNetwork neuralNetwork(hopfieldNetwork);
+
+	hopfieldNetwork->getNeurons()->front()[0]->getAfferentEdges()->front()->setWeight(-1);
+	hopfieldNetwork->getNeurons()->front()[1]->getAfferentEdges()->front()->setWeight(-1);
+
+	NeuralNetworkIO<double> teachingPattern(2);
+
+	teachingPattern.set(0, 0, 1);
+	teachingPattern.set(0, 1, 1);
+
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, AsynchronousOrder(), 0, 4);
+
+}
+
 int main()
 {
-	doCounterpropagationTest();
+	doHopfieldTest();
     return 0;
 }

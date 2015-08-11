@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp" />
+    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp" />
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp" />
     <ClInclude Include="ActivationOrder\TopologicalOrder.hpp" />
     <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp" />
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp" />
     <ClInclude Include="NetworkTopology\GridStructure.hpp" />
+    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp" />
     <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
     <ClInclude Include="NetworkTopology\LineStructure.hpp" />
     <ClInclude Include="NetworkTopology\LVQNetwork.hpp" />
@@ -112,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp" />
+    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp" />
     <ClCompile Include="ActivationOrder\SynchronousOrder.cpp" />
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp" />
     <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp" />
@@ -183,6 +186,7 @@
     <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp" />
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp" />
     <ClCompile Include="NetworkTopology\GridStructure.cpp" />
+    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />
     <ClCompile Include="NetworkTopology\LineStructure.cpp" />
     <ClCompile Include="NetworkTopology\LVQNetwork.cpp" />

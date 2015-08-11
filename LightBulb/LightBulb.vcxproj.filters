@@ -335,6 +335,12 @@
     <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -627,6 +633,12 @@
     </ClCompile>
     <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp">
       <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

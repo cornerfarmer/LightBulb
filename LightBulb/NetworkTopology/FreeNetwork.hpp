@@ -29,6 +29,8 @@ struct FreeNetworkOptions
 	bool realInputNeurons;
 	// Sets the input neurons count (only if the network should use real input neurons)
 	unsigned int inputNeuronCount;
+	// Enables self referencing edges
+	bool selfReferencingEdges;
 	// Specifies the indices of the input neurons (only needed if the network should not use real input neurons)
 	std::vector<unsigned int> inputNeuronsIndices;
 	// Specifies the indices of the output neurons

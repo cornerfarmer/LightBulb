@@ -10,7 +10,10 @@
 class BinaryFunction : public AbstractActivationFunction
 {
 private:
+	double minValue;
+	double maxValue;
 public:
+	BinaryFunction(double minValue_ = 0, double maxValue_ = 1);
 	// Returns 0 (input < threshold) or 1 (input > threshold)
 	double execute(double input, AbstractThreshold* threshold);
 	// Error - No derivation available

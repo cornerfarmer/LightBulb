@@ -4,6 +4,12 @@
 // Library includes
 #include <stdexcept>
 
+BinaryFunction::BinaryFunction(double minValue_, double maxValue_)
+{
+	minValue = minValue_;
+	maxValue = maxValue_;
+}
+
 double BinaryFunction::execute(double input, AbstractThreshold* threshold)
 {
 	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
@@ -13,16 +19,15 @@ double BinaryFunction::execute(double input, AbstractThreshold* threshold)
 
 	// If the input is greater than the threshold return 1 else 0
 	if (input > standardThreshold->getThreshold())
-		return 1;
+		return maxValue;
 	else
-		return 0;
+		return minValue;
 }
 
 double BinaryFunction::executeDerivation(double input, AbstractThreshold* threshold)
 {
 	// A binary function does not have a derivation => throw a exception
 	throw std::logic_error("There is no derivation of the binary function");
-	return 0;
 }
 
 AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy()
@@ -32,12 +37,12 @@ AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy()
 
 double BinaryFunction::getMaximum()
 {
-	return 1;
+	return maxValue;
 }
 
 double BinaryFunction::getMinimum()
 {
-	return 0;
+	return minValue;
 }
 
 bool BinaryFunction::hasAMaxAndMinimum()
