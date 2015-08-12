@@ -14,11 +14,11 @@ class AbstractTeachingLesson;
 
 struct HopfieldLearningRuleOptions : AbstractLearningRuleOptions
 {	
-	// Sets the learning Rate
+	bool trainHeteroassociation;
 
 	HopfieldLearningRuleOptions()
 	{
-
+		trainHeteroassociation = false;
 	}
 };
 

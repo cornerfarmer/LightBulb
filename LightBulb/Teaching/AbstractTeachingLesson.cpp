@@ -38,7 +38,7 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(
 	// Calculate the error values (expected value - real value)
 	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
-		if (teachingInput->existsTimestep(timestep))
+		if (teachingInput->existsTimestep(timestep) && outputVector.existsTimestep(timestep))
 		{
 			for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
 			{

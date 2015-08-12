@@ -1507,7 +1507,7 @@ void doCounterpropagationTest()
 
 void doHopfieldTest()
 {
-	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(2, false);	
+	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(2, true);	
 
 	NeuralNetwork neuralNetwork(hopfieldNetwork);
 
@@ -1541,8 +1541,66 @@ void doHopfieldTest()
 
 }
 
+void doAssociativHopfieldTest()
+{
+	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(3, true);	
+
+	NeuralNetwork neuralNetwork(hopfieldNetwork);
+
+	
+	HopfieldLearningRuleOptions options;
+	options.enableDebugOutput = true;
+	options.trainHeteroassociation = true;
+	HopfieldLearningRule learningRule(options);
+
+
+	Teacher teacher;
+	for (int i=0;i<3;i+=1)
+	{
+		NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(3);
+		NeuralNetworkIO<double>* teachingInput= new NeuralNetworkIO<double>(3);
+
+		(*teachingPattern).set(0, 0, i == 0 ? 1 : -1);
+		(*teachingPattern).set(0, 1, i == 1 ? 1 : -1);
+		(*teachingPattern).set(0, 2, i == 2 ? 1 : -1);
+
+		if (i == 0)
+		{
+			(*teachingInput).set(0, 0, 1);
+			(*teachingInput).set(0, 1, -1);
+			(*teachingInput).set(0, 2, -1);
+		}
+		else if (i == 1)
+		{
+			(*teachingInput).set(0, 0, 1);
+			(*teachingInput).set(0, 1, 1);
+			(*teachingInput).set(0, 2, -1);
+		}
+		else if (i == 2)
+		{
+			(*teachingInput).set(0, 0, 1);
+			(*teachingInput).set(0, 1, -1);
+			(*teachingInput).set(0, 2, 1);
+		}
+
+		teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));		
+	}
+
+	learningRule.doLearning(neuralNetwork, teacher);
+
+	NeuralNetworkIO<double> teachingPattern(3);
+
+	teachingPattern.set(0, 0, 0);
+	teachingPattern.set(0, 1, 1);
+	teachingPattern.set(0, 2, 0);
+
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, AsynchronousOrder(), 0, 4);
+
+}
+
+
 int main()
 {
-	doHopfieldTest();
+	doAssociativHopfieldTest();
     return 0;
 }

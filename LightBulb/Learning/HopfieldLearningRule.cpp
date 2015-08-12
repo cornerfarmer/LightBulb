@@ -64,7 +64,11 @@ AbstractActivationOrder* HopfieldLearningRule::getNewActivationOrder(NeuralNetwo
 
 double HopfieldLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
-	return edge.getNextNeuron()->getNetInput() * static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput();
+	double res = edge.getNextNeuron()->getNetInput() * static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput();
+
+	if (getOptions()->trainHeteroassociation)
+		res += static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput() * lesson.getTeachingInput(neuron.getActivationFunction())->get(0, neuronIndex);
+	return res;
 }
 
 HopfieldLearningRuleOptions* HopfieldLearningRule::getOptions()
@@ -80,7 +84,7 @@ bool HopfieldLearningRule::configureNextErroMapCalculation(int* nextStartTime, i
 		return false;
 	else
 	{
-		*nextTimeStepCount = 0;
+		*nextTimeStepCount = 1;
 		*nextStartTime = 0;		
 		return true;
 	}
