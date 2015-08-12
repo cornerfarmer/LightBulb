@@ -1507,7 +1507,7 @@ void doCounterpropagationTest()
 
 void doHopfieldTest()
 {
-	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(2);	
+	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(2, false);	
 
 	NeuralNetwork neuralNetwork(hopfieldNetwork);
 

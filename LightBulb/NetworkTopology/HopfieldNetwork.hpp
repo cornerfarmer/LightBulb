@@ -18,7 +18,7 @@ class HopfieldNetwork : public FreeNetwork
 private:	
 public:
 	// Create a new HopfieldNetwork with the given counts
-	HopfieldNetwork(unsigned int neuronCount);
+	HopfieldNetwork(unsigned int neuronCount, bool binaryActivationFunction);
 
 };
 
