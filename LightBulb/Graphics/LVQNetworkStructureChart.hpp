@@ -26,6 +26,7 @@ class LVQNetworkStructureChart : public AbstractNetworkStructureChart
 private:
 	LVQNetworkStructureChartOptions* getOptions();
 protected:
+	// Inherited:
 	std::vector<StandardNeuron*>* getNeurons();
 	double getRadiusOfNeuron(StandardNeuron& neuron);
 	std::vector<double> getPositionOfNeuron(StandardNeuron& neuron);

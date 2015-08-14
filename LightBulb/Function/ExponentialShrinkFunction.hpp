@@ -9,6 +9,7 @@
 // Includes
 #include "Function\AbstractShrinkFunction.hpp"
 
+// Describes a value which shrinks exponential
 class ExponentialShrinkFunction : public AbstractShrinkFunction
 {
 private:

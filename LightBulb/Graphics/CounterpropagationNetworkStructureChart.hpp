@@ -9,7 +9,7 @@
 // Forward declarations
 class CounterpropagationNetwork;
 
-// This structure describes all options of an LVQNetworkStructureChart
+// This structure describes all options of an CounterpropagationNetworkStructureChart
 struct CounterpropagationNetworkStructureChartOptions : public AbstractNetworkStructureChartOptions
 {
 	// The selected lvqNetwork
@@ -20,12 +20,13 @@ struct CounterpropagationNetworkStructureChartOptions : public AbstractNetworkSt
 	}
 };
 
-// A chart which shows the location of the lvq neurons inside a lvqNetwork
+// A chart which shows the location of the neurons inside a counterpropagation network
 class CounterpropagationNetworkStructureChart : public AbstractNetworkStructureChart
 {
 private:
 	CounterpropagationNetworkStructureChartOptions* getOptions();
 protected:
+	// Inherited:
 	std::vector<StandardNeuron*>* getNeurons();
 	double getRadiusOfNeuron(StandardNeuron& neuron);
 	std::vector<double> getPositionOfNeuron(StandardNeuron& neuron);

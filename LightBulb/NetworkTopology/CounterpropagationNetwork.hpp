@@ -19,7 +19,7 @@ private:
 public:
 	// Create a new CounterpropagationNetwork with the given counts
 	CounterpropagationNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, unsigned int outputNeuronCount);
-	
+	// Place all codebook vectors in the hidden layer on teaching lessons (random)
 	void placeCodebookVectorsOnTeachingLessons(Teacher& teacher);
 };
 

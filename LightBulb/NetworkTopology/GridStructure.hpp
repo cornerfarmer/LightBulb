@@ -11,6 +11,7 @@
 
 // Forward declarations
 
+// Describes a grid som structure  
 class GridStructure : public AbstractSOMStructure
 {
 private:	

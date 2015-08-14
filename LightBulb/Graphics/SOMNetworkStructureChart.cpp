@@ -52,11 +52,14 @@ void SOMNetworkStructureChart::recalculateAllValues()
 	// Go through all neuron shapes
 	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
 	{		
+		// Connect the neuronshape with all neighborhood neurons
 		visitedNeurons[neuronShape->first] = true;
 		for (auto connectedNeuron = (*neighborhoodNeurons)[neuronShape->first].begin(); connectedNeuron != (*neighborhoodNeurons)[neuronShape->first].end(); connectedNeuron++)
 		{
+			// If the other neuron has not been visited yet
 			if (!visitedNeurons[*connectedNeuron])
 			{
+				// Connect the two current neurons with a line
 				lines.append(sf::Vertex(neuronShape->second.getPosition()));
 				lines.append(sf::Vertex(neuronShapes[*connectedNeuron].getPosition()));
 			}
@@ -68,6 +71,6 @@ void SOMNetworkStructureChart::recalculateAllValues()
 void SOMNetworkStructureChart::draw(sf::RenderWindow &window)
 {
 	AbstractNetworkStructureChart::draw(window);
-
+	// Draw all lines
 	window.draw(lines);
 }

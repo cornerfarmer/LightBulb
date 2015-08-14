@@ -14,20 +14,20 @@ class AbstractTeachingLesson;
 
 struct HopfieldLearningRuleOptions : AbstractLearningRuleOptions
 {	
+	// Train a the network as a hetero associated hopfield network (Not working yet!)
 	bool trainHeteroassociation;
-
 	HopfieldLearningRuleOptions()
 	{
 		trainHeteroassociation = false;
 	}
 };
 
-// The CounterpropagationLearningRule can only be used to train CounterpropagationNetworks
+// The HopfieldLearningRule can only be used to train HopfieldNetworks
 class HopfieldLearningRule : public AbstractLearningRule
 {
 private:
 protected:
-	// Returns our current options in form of a CounterpropagationLearningRuleOptions object
+	// Returns our current options in form of a HopfieldLearningRuleOptions object
 	HopfieldLearningRuleOptions* getOptions();
 	// Inherited:
 	void adjustWeight(Edge* edge, double deltaWeight);

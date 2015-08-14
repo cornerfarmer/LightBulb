@@ -12,7 +12,7 @@ class SynchronousOrder : public AbstractActivationOrder
 {
 private:
 public:
-	// Activates all neurons in the given layered(!) topology in a topological order
+	// Activates all neurons in the given topology 
 	void executeActivation(AbstractNetworkTopology &networkTopology);
 	// Inherited:
 	AbstractActivationOrder* getCopy(); 

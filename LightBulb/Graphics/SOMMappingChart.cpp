@@ -31,12 +31,16 @@ SOMMappingChart::SOMMappingChart(SOMMappingChartOptions& options_)
 void SOMMappingChart::recalculateAllValues()
 {	
 	AbstractSOMStructure* structure = options->somNetwork->getStructure();
+	// Go through all neurons
 	for (auto neuron = options->somNetwork->getNeurons()->front().begin(); neuron != options->somNetwork->getNeurons()->front().end(); neuron++)
 	{
+		// Set the position from the position of the neurons in the structure
 		rectangles[*neuron].setPosition((*structure->getNeuronPositionsInStructure())[*neuron][0] * options->scalingX, (*structure->getNeuronPositionsInStructure())[*neuron].size() > 1 ? (*structure->getNeuronPositionsInStructure())[*neuron][1] * options->scalingY : 0);
+		// Sets the size of the rectangle depending of the zoom
 		rectangles[*neuron].setSize(sf::Vector2f(options->scalingX, (int)options->scalingY));
+		// Calculate the color
 		sf::Color color;
-		std::vector<double> weightVector = (*neuron)->getAfferentWeightsVector();
+		std::vector<double> weightVector = (*neuron)->getAfferentWeightsVector();		
 		color.r = (char)((weightVector[options->rInputNeuronIndex] - options->rRangeStart) / (options->rRangeEnd - options->rRangeStart) * 255);
 		color.g = (char)((weightVector[options->gInputNeuronIndex] - options->gRangeStart) / (options->gRangeEnd - options->gRangeStart) * 255);
 		color.b = (char)((weightVector[options->bInputNeuronIndex] - options->bRangeStart) / (options->bRangeEnd - options->bRangeStart) * 255);
@@ -46,6 +50,7 @@ void SOMMappingChart::recalculateAllValues()
 
 void SOMMappingChart::draw(sf::RenderWindow &window)
 {	
+	// Go through all rectangles and draw them
 	for (auto rectangle = rectangles.begin(); rectangle != rectangles.end(); rectangle++)
 	{
 		window.draw(rectangle->second);

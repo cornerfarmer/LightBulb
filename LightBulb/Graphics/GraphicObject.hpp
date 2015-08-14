@@ -22,7 +22,7 @@ protected:
     sf::Vector2f calcCartesianFromPolarCoordinates(sf::Vector2f center, sf::Vector2f radiusVector, float angle);
 	// Calculate the angle of a line
     float calcAngleFromLine(sf::Vector2f lineStart, sf::Vector2f lineEnd);    
-
+	// Converts a float value to a string
 	std::string floatToString(const double value, const int precision = 2);
 public:
 	virtual ~GraphicObject() {}

@@ -16,17 +16,23 @@ class StandardNeuron;
 // This structure describes all options of an NeuralNetworkResultChart
 struct SOMMappingChartOptions 
 {
+	// Position
 	int posX;
 	int posY;
+	// Zoom
 	float scalingX;
 	float scalingY;
+	// Network
 	SOMNetwork* somNetwork;
+	// Red part of the output
 	unsigned int rInputNeuronIndex;
     float rRangeEnd;
     float rRangeStart;
+	// Green part of the output
 	unsigned int gInputNeuronIndex;
     float gRangeEnd;
     float gRangeStart;    
+	// Blue part of the output
 	unsigned int bInputNeuronIndex;
     float bRangeEnd;
     float bRangeStart;   
@@ -50,7 +56,7 @@ struct SOMMappingChartOptions
 	}
 };
 
-// A chart which visalizes the calculation of a neural network
+// A chart which visualizes the output of a som
 class SOMMappingChart : public GraphicObject
 {
 private:

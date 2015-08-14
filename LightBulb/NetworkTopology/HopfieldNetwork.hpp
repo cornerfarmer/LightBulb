@@ -12,7 +12,7 @@
 class AbstractTeachingLesson;
 class Teacher;
 
-// A HopfieldNetwork is 
+// A HopfieldNetwork is special free network
 class HopfieldNetwork : public FreeNetwork
 {
 private:	

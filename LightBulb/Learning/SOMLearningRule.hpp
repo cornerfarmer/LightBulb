@@ -17,11 +17,10 @@ struct SOMLearningRuleOptions : AbstractLearningRuleOptions
 {	
 	// Sets the learning Rate
 	double learningRate;
-
+	// The neighbohood function
 	AbstractNeighborhoodFunction* neighborhoodFunction;
-
+	// The function which shrinks the max influence distance
 	AbstractShrinkFunction* distanceShrinkFunction;
-
 	SOMLearningRuleOptions()
 	{
 		learningRate = 0.1;
@@ -32,7 +31,7 @@ struct SOMLearningRuleOptions : AbstractLearningRuleOptions
 	SOMLearningRuleOptions::SOMLearningRuleOptions(const SOMLearningRuleOptions &obj);
 };
 
-// The LVQ1LearningRule can only be used to train LVQNetworks
+// The SOMLearningRule can only be used to train SOMs
 class SOMLearningRule : public AbstractLearningRule
 {
 private:

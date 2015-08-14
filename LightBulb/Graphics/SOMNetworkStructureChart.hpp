@@ -20,19 +20,19 @@ struct SOMNetworkStructureChartOptions : public AbstractNetworkStructureChartOpt
 	}
 };
 
-// A chart which shows the location of the lvq neurons inside a lvqNetwork
+// A chart which shows the structure of a som in the input space
 class SOMNetworkStructureChart : public AbstractNetworkStructureChart
 {
 private:
 	SOMNetworkStructureChartOptions* getOptions();
 	sf::VertexArray lines;
 protected:
+	// Inherited
 	std::vector<StandardNeuron*>* getNeurons();
 	double getRadiusOfNeuron(StandardNeuron& neuron);
 	std::vector<double> getPositionOfNeuron(StandardNeuron& neuron);
 public:
 	SOMNetworkStructureChart(SOMNetworkStructureChartOptions &options_);
-
 	void draw(sf::RenderWindow &window);
 	void recalculateAllValues();
 };

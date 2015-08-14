@@ -56,6 +56,7 @@ void CounterpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork,
 
 void CounterpropagationLearningRule::initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
+	// Switch to the second mode depending on the current iteration
 	if (iteration >= getOptions()->iterationsToChangeMode)
 		mode = 1;
 }

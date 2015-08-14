@@ -46,12 +46,10 @@ void FreeNetworkTopologyDrawer::refresh()
 		}
 	}
 
+	// Recalculate all data
 	addEdgesToAllShapes();
-
 	refreshAllThresholds();
-
 	refreshAllWeights();
-
 	refreshAllActivations();
 }
 

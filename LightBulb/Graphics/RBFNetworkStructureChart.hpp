@@ -26,6 +26,7 @@ class RBFNetworkStructureChart : public AbstractNetworkStructureChart
 private:
 	RBFNetworkStructureChartOptions* getOptions();
 protected:
+	// Inherited:
 	std::vector<StandardNeuron*>* getNeurons();
 	double getRadiusOfNeuron(StandardNeuron& neuron);
 	std::vector<double> getPositionOfNeuron(StandardNeuron& neuron);

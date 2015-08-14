@@ -11,6 +11,7 @@
 
 // Forward declarations
 
+// Describes a line som structure
 class LineStructure : public AbstractSOMStructure
 {
 private:	

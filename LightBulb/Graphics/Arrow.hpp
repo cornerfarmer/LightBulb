@@ -23,7 +23,7 @@ public:
 	void draw(sf::RenderWindow &window);
 	// Sets a new description and recalculates the position of the text
 	void setDescription(std::string description);
-
+	// Sets the color of the arrow
 	void setColor(const sf::Color &color);
 };
 

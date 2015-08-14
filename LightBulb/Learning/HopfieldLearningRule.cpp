@@ -42,6 +42,7 @@ bool HopfieldLearningRule::learningHasStopped()
 
 void HopfieldLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
+	// Reset al weights
 	for (auto neuron = neuralNetwork.getNetworkTopology()->getNeurons()->front().begin(); neuron != neuralNetwork.getNetworkTopology()->getNeurons()->front().end(); neuron++)
 	{
 		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
@@ -64,8 +65,10 @@ AbstractActivationOrder* HopfieldLearningRule::getNewActivationOrder(NeuralNetwo
 
 double HopfieldLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
+	// Multiplicate the netInput (= teachingPattern) of the two connected neurons
 	double res = edge.getNextNeuron()->getNetInput() * static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput();
 
+	// If heteroassociation is activated, also consider teachingInput
 	if (getOptions()->trainHeteroassociation)
 		res += static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput() * lesson.getTeachingInput(neuron.getActivationFunction())->get(0, neuronIndex);
 	return res;
@@ -84,6 +87,7 @@ bool HopfieldLearningRule::configureNextErroMapCalculation(int* nextStartTime, i
 		return false;
 	else
 	{
+		// Always calculate only one timestep
 		*nextTimeStepCount = 1;
 		*nextStartTime = 0;		
 		return true;

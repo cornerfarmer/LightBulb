@@ -84,6 +84,7 @@ void SOMLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, Abs
 
 double SOMLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
+	// If needed calcualte the current activated neuron
 	if (currentActivatedNeuron == NULL)
 	{
 		for (auto neuron = currentNeuralNetwork->getNetworkTopology()->getNeurons()->front().begin(); neuron != currentNeuralNetwork->getNetworkTopology()->getNeurons()->front().end(); neuron++)
@@ -95,6 +96,7 @@ double SOMLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& les
 			}
 		}
 	}
+	// Change the weight depending on the distance between the current neuron and the current activated one
 	return getOptions()->learningRate * getOptions()->neighborhoodFunction->execute(&neuron, currentActivatedNeuron, static_cast<SOMNetwork*>(currentNeuralNetwork->getNetworkTopology())->getStructure(), static_cast<NeuronCompareThreshold*>(neuron.getThreshold()), getOptions()->distanceShrinkFunction->execute(currentTimestep)) * (lesson.getTeachingPattern()->get(0, edgeIndex) - edge.getWeight());
 }
 

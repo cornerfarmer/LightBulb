@@ -22,9 +22,9 @@ private:
 public:
 	// Create a new SOMNetwork with the given counts
 	SOMNetwork(unsigned int inputNeuronCount, unsigned int codebookVectorCount, AbstractSOMStructure* somStructure);
-
+	// Returns the count of all codebook vectors
 	int getCodebookVectorCount();
-
+	// Returns the structure
 	AbstractSOMStructure* getStructure();
 };
 

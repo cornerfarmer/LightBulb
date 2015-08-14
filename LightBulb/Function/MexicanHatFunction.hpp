@@ -9,6 +9,7 @@
 // Includes
 #include "Function\AbstractNeighborhoodFunction.hpp"
 
+// Describes a neighborhood relation in form of a mexican hat
 class MexicanHatFunction : public AbstractNeighborhoodFunction
 {
 private:

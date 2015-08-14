@@ -15,21 +15,28 @@ class AbstractActivationOrder;
 // This structure describes all options of an NeuralNetworkResultChart
 struct NeuralNetworkResultChartOptions 
 {
+	// Position
 	int posX;
 	int posY;
+	// Dont print grey output only black and white
 	bool binaryInterpretation;
+	// Size
 	unsigned int height;
 	unsigned int width;
+	// Network
 	NeuralNetwork* neuralNetwork;
 	AbstractActivationOrder* activationOrder;	
+	// x-Axis
 	unsigned int xInputNeuronIndex;
 	unsigned int xTimeStep;
     float xRangeEnd;
     float xRangeStart;
+	// y-Axis
 	unsigned int yInputNeuronIndex;
 	unsigned int yTimeStep;
     float yRangeEnd;
     float yRangeStart;    
+	// output
 	unsigned int outputNeuronIndex;
     float ouputRangeStart;
     float ouputRangeEnd;
@@ -41,7 +48,7 @@ struct NeuralNetworkResultChartOptions
 
 };
 
-// A chart which visalizes the calculation of a neural network
+// A chart which visualizes the calculation of a neural network
 class NeuralNetworkResultChart : public GraphicObject
 {
 private:

@@ -11,16 +11,14 @@ void AsynchronousOrder::executeActivation(AbstractNetworkTopology &networkTopolo
 {
 	// Go through all layers
 	for (auto layer = networkTopology.getNeurons()->begin(); layer != networkTopology.getNeurons()->end(); layer++)
-	{
-		
+	{		
 		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
 		{
 			// First recalculate the netInput of all neurons in the current layer
 			(*neuron)->refreshNetInput();
 			// Then recalculate the activation of all neurons in the current layer
 			(*neuron)->refreshActivation();
-		}
-	
+		}	
 	}	
 }
 
