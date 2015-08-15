@@ -39,6 +39,9 @@
     <Filter Include="Quelldateien\ClusterAnalysis">
       <UniqueIdentifier>{4db96599-cd2c-4dce-8bd8-646c9b718330}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Examples">
+      <UniqueIdentifier>{56971003-78c0-48eb-90c8-ff0587fb1275}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
@@ -344,6 +347,27 @@
     <ClInclude Include="Learning\HopfieldLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\EvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\EvolutionWorldInterface.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\EvolutionObjectInterface.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Animal.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractCreationCommand.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\ConstantCreationCommand.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -556,9 +580,6 @@
     <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
@@ -644,6 +665,30 @@
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
     <ClCompile Include="Learning\HopfieldLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\EvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\EvolutionWorldInterface.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\EvolutionObjectInterface.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Animal.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractCreationCommand.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\ConstantCreationCommand.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>

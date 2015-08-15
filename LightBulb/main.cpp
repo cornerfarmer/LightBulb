@@ -64,6 +64,9 @@
 #include "NetworkTopology\HopfieldNetwork.hpp"
 #include "ActivationOrder\AsynchronousOrder.hpp"
 #include "Learning\HopfieldLearningRule.hpp"
+#include "Examples\Nature.hpp"
+#include "Learning\EvolutionLearningRule.hpp"
+#include "Learning\ConstantCreationCommand.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1598,9 +1601,20 @@ void doAssociativHopfieldTest()
 
 }
 
+void doEvolutionTest()
+{
+	Nature nature;
+
+	EvolutionLearningRuleOptions options;
+	options.creationCommands.push_back(new ConstantCreationCommand(3));
+
+	EvolutionLearningRule learningRule(options);
+
+	learningRule.doLearning(nature);
+}
 
 int main()
 {
-	doAssociativHopfieldTest();
+	doEvolutionTest();
     return 0;
 }
