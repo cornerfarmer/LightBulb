@@ -34,6 +34,7 @@
     <ClInclude Include="ClusterAnalysis\ValuePosition.hpp" />
     <ClInclude Include="Examples\Animal.hpp" />
     <ClInclude Include="Examples\Nature.hpp" />
+    <ClInclude Include="Examples\NatureDrawer.hpp" />
     <ClInclude Include="Function\AbstractActivationFunction.hpp" />
     <ClInclude Include="Function\AbstractInputFunction.hpp" />
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="ClusterAnalysis\ValuePosition.cpp" />
     <ClCompile Include="Examples\Animal.cpp" />
     <ClCompile Include="Examples\Nature.cpp" />
+    <ClCompile Include="Examples\NatureDrawer.cpp" />
     <ClCompile Include="Function\AbstractActivationFunction.cpp" />
     <ClCompile Include="Function\AbstractInputFunction.cpp" />
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
@@ -231,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8FEF3ECA-165D-4337-AF14-CEB70A0DCF76}</ProjectGuid>

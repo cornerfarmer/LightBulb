@@ -36,14 +36,36 @@ Nature::Nature()
 			plants[x][y] = true;
 		}
 	}
+
+	window.create(sf::VideoMode(800, 700), "LightBulb!");
+	NatureDrawerOptions options;
+	options.nature = this;
+	
+	drawer.reset(new NatureDrawer(options));
 }
 
 
 void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 {
-	for (auto animal = animals.begin(); animal != animals.end(); animal++)
+	while (window.isOpen())
 	{
-		(*animal)->doNNCalculation(learningRule);
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		drawer->recalculateAllValues();
+		drawer->draw(window);
+		window.display();
+
+		for (auto animal = animals.begin(); animal != animals.end(); animal++)
+		{
+			(*animal)->doNNCalculation(learningRule);
+		}
+		sf::sleep(sf::milliseconds(100));
 	}
 }
 
@@ -79,7 +101,8 @@ std::vector<bool> Nature::getSight(int posX, int posY, int dirX, int dirY)
 
 void Nature::tryToEat(int posX, int posY)
 {
-	plants[posX][posY] = false;
+	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
+		plants[posX][posY] = false;
 }
 
 bool Nature::isTileFree(int posX, int posY)
@@ -99,4 +122,19 @@ bool Nature::isTileFree(int posX, int posY)
 bool Nature::getViewValueOfPos(int posX, int posY)
 {
 	return (posX >= 0 && posY >= 0 && posX < width && posY < height && plants[posX][posY]);
+}
+
+int Nature::getWidth()
+{
+	return width;
+}
+
+int Nature::getHeight()
+{
+	return height;
+}
+
+std::vector<std::vector<bool>>* Nature::getPlants()
+{
+	return &plants;
 }

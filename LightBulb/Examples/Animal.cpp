@@ -27,6 +27,8 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	std::unique_ptr<NeuralNetworkIO<double>> output = brain->calculate(input, TopologicalOrder());
 	if (output->get(0, 0) > 0.5)
 		rotate(1);
+	if (output->get(0, 2) > 0.5)
+		rotate(-1);
 	if (output->get(0, 1) > 0.5)
 	{
 		if (nature->isTileFree(posX + dirX, posY + dirY))
@@ -35,8 +37,7 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 			posY += dirY;
 		}
 	}
-	if (output->get(0, 2) > 0.5)
-		rotate(-1);
+	
 	if (output->get(0, 3) > 0.5)
 		nature->tryToEat(posX + dirX, posY + dirY);
 }

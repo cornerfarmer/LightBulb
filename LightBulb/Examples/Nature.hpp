@@ -5,9 +5,11 @@
 
 // Library Includes
 #include <vector>
+#include <SFML\Graphics.hpp>
 
 // Include
 #include "Learning\EvolutionWorldInterface.hpp"
+#include "Examples\NatureDrawer.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -21,6 +23,8 @@ class Nature : public EvolutionWorldInterface
 	int width;
 	int height;
 	bool getViewValueOfPos(int posX, int posY);
+	sf::RenderWindow window;
+	std::unique_ptr<NatureDrawer> drawer;
 public:
 	Nature();
 	EvolutionObjectInterface* addNewObject();
@@ -28,6 +32,9 @@ public:
 	std::vector<bool> getSight(int posX, int posY, int dirX, int dirY);
 	void tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);
+	int getWidth();
+	int getHeight();
+	std::vector<std::vector<bool>>* getPlants();
 };
 
 #endif
