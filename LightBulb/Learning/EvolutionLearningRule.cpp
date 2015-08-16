@@ -3,6 +3,10 @@
 #include "Learning\EvolutionObjectInterface.hpp"
 #include "Learning\EvolutionWorldInterface.hpp"
 #include "Learning\AbstractCreationCommand.hpp"
+#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\Edge.hpp"
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 {
@@ -11,7 +15,26 @@ EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& optio
 
 void EvolutionLearningRule::doMutation(EvolutionObjectInterface& object)
 {
-
+	int randEdgeIndex = (double)rand() / RAND_MAX * object.getNeuralNetwork()->getNetworkTopology()->getEdgeCount();
+	int edgeIndex = 0;
+	for (auto layer = object.getNeuralNetwork()->getNetworkTopology()->getNeurons()->begin(); layer != object.getNeuralNetwork()->getNetworkTopology()->getNeurons()->end(); layer++)
+	{
+		for (auto neuron = layer->begin(); neuron != layer->end(); neuron++)
+		{
+			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
+			{
+				if (edgeIndex++ == randEdgeIndex)
+				{
+					double d = exp((double)rand() / RAND_MAX * 6 - 4);
+					if ((double)rand() / RAND_MAX > 0.5)
+						(*edge)->setWeight((*edge)->getWeight() + d);
+					else
+						(*edge)->setWeight((*edge)->getWeight() - d);
+					return;
+				}
+			}
+		}
+	}
 }
 
 EvolutionObjectInterface* EvolutionLearningRule::doRecombination(std::vector<EvolutionObjectInterface*> object)

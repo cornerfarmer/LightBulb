@@ -24,12 +24,16 @@ protected:
 	int posY;
 	int dirX;
 	int dirY;
+	int health;
+	bool dead;
 	void rotate(int dir);
 public:	
-	Animal(Nature* nature_, RecurrentLayeredNetworkOptions& options, int posX_, int posY_, int dirX_, int dirY_);
+	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();
 	void doNNCalculation(EvolutionLearningRule& learningRule);
 	int getPosX();
 	int getPosY();
+	bool isDead();
+	NeuralNetwork* getNeuralNetwork();
 };
 #endif

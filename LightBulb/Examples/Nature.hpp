@@ -30,7 +30,7 @@ public:
 	EvolutionObjectInterface* addNewObject();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	std::vector<bool> getSight(int posX, int posY, int dirX, int dirY);
-	void tryToEat(int posX, int posY);
+	bool tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);
 	int getWidth();
 	int getHeight();

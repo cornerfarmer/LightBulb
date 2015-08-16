@@ -1,31 +1,19 @@
 // Includes
 #include "Examples\Nature.hpp"
 #include "Examples\Animal.hpp"
-#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
-#include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
-#include "Neuron\StandardThreshold.hpp"
-#include "Function\WeightedSumFunction.hpp"
-#include "Function\FermiFunction.hpp"
-#include "Function\IdentityFunction.hpp"
+
 
 EvolutionObjectInterface* Nature::addNewObject()
 {
-	RecurrentLayeredNetworkOptions options;
-
-	options.neuronsPerLayerCount.push_back(3);
-	options.neuronsPerLayerCount.push_back(10);
-	options.neuronsPerLayerCount.push_back(4);
-	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-
-	animals.push_back(new Animal(this, options, (int)((float)rand() / RAND_MAX * width), (int)((float)rand() / RAND_MAX * height), 0, 1));
+	animals.push_back(new Animal(this, (int)((float)rand() / RAND_MAX * width), (int)((float)rand() / RAND_MAX * height), 0, 1));
 	
 	return animals.back();
 }
 
 Nature::Nature()
 {
-	width = 40;
-	height = 40;
+	width = 60;
+	height = 60;
 
 	plants.resize(width);
 	for (int x = 0; x < width; x++)
@@ -44,7 +32,6 @@ Nature::Nature()
 	drawer.reset(new NatureDrawer(options));
 }
 
-
 void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 {
 	while (window.isOpen())
@@ -61,10 +48,21 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 		drawer->draw(window);
 		window.display();
 
-		for (auto animal = animals.begin(); animal != animals.end(); animal++)
+		for (int i = 0; i < animals.size(); i++)
 		{
-			(*animal)->doNNCalculation(learningRule);
+			animals[i]->doNNCalculation(learningRule);
+			if (animals[i]->isDead())
+			{
+				animals.erase(animals.begin() + i);
+				if (i != 0)
+					i--;
+				if (animals.size() == 0)
+					break;
+			}
 		}
+
+		if (animals.size() < 5)
+			addNewObject();
 		sf::sleep(sf::milliseconds(100));
 	}
 }
@@ -99,10 +97,17 @@ std::vector<bool> Nature::getSight(int posX, int posY, int dirX, int dirY)
 	return sight;
 }
 
-void Nature::tryToEat(int posX, int posY)
+bool Nature::tryToEat(int posX, int posY)
 {
 	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
-		plants[posX][posY] = false;
+	{
+		if (plants[posX][posY])
+		{
+			plants[posX][posY] = false;
+			return true;
+		}
+	}
+	return false;
 }
 
 bool Nature::isTileFree(int posX, int posY)

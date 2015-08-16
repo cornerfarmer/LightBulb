@@ -1606,7 +1606,7 @@ void doEvolutionTest()
 	Nature nature;
 
 	EvolutionLearningRuleOptions options;
-	options.creationCommands.push_back(new ConstantCreationCommand(3));
+	options.creationCommands.push_back(new ConstantCreationCommand(20));
 
 	EvolutionLearningRule learningRule(options);
 
