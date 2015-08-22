@@ -12,6 +12,7 @@ EvolutionObjectInterface* Nature::addNewObject()
 
 Nature::Nature()
 {
+	missingPlants = 0;
 	width = 60;
 	height = 60;
 
@@ -28,7 +29,8 @@ Nature::Nature()
 	window.create(sf::VideoMode(800, 700), "LightBulb!");
 	NatureDrawerOptions options;
 	options.nature = this;
-	
+	options.scalingX = 10;
+	options.scalingY = 10;
 	drawer.reset(new NatureDrawer(options));
 }
 
@@ -61,15 +63,33 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 			}
 		}
 
-		if (animals.size() < 5)
+		if (animals.size() < 20)
 			addNewObject();
-		sf::sleep(sf::milliseconds(100));
+
+		for (int i = 0; i < 1 && rand() < RAND_MAX / 20; i++)
+			addRandomPlant();
+
+		sf::sleep(sf::milliseconds(25));
 	}
 }
 
-std::vector<bool> Nature::getSight(int posX, int posY, int dirX, int dirY)
+void Nature::addRandomPlant()
 {
-	std::vector<bool> sight;
+	if (missingPlants > 0)
+	{
+		int posX, posY;
+		do {
+			posX = (float)rand() / RAND_MAX * (width - 1);
+			posY = (float)rand() / RAND_MAX * (height - 1);
+		} while (plants[posX][posY]);
+		plants[posX][posY] = true;
+		missingPlants--;
+	}
+}
+
+std::vector<double> Nature::getSight(int posX, int posY, int dirX, int dirY)
+{
+	std::vector<double> sight;
 	if (dirX == 1 && dirY == 0)
 	{
 		sight.push_back(getViewValueOfPos(posX + dirX, posY - 1));
@@ -104,6 +124,7 @@ bool Nature::tryToEat(int posX, int posY)
 		if (plants[posX][posY])
 		{
 			plants[posX][posY] = false;
+			missingPlants++;
 			return true;
 		}
 	}
@@ -112,21 +133,39 @@ bool Nature::tryToEat(int posX, int posY)
 
 bool Nature::isTileFree(int posX, int posY)
 {
-	bool free = true;
-	for (auto animal = animals.begin(); animal != animals.end(); animal++)
+	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
 	{
-		if ((*animal)->getPosX() == posX && (*animal)->getPosY() == posY)
+		bool free = true;
+		for (auto animal = animals.begin(); animal != animals.end(); animal++)
 		{
-			free = false;
-			break;
+			if ((*animal)->getPosX() == posX && (*animal)->getPosY() == posY)
+			{
+				free = false;
+				break;
+			}
 		}
+
+		return free;
 	}
-	return free;
+	else
+	{
+		return false;
+	}
 }
 
-bool Nature::getViewValueOfPos(int posX, int posY)
+double Nature::getViewValueOfPos(int posX, int posY)
 {
-	return (posX >= 0 && posY >= 0 && posX < width && posY < height && plants[posX][posY]);
+	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
+	{
+		if (plants[posX][posY])
+			return 1;
+		else if (!isTileFree(posX, posY))
+			return 0.5;
+		else
+			return 0;
+	}
+	else
+		return 0;
 }
 
 int Nature::getWidth()

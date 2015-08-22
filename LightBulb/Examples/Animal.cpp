@@ -8,6 +8,7 @@
 #include "Neuron\StandardThreshold.hpp"
 #include "Function\WeightedSumFunction.hpp"
 #include "Function\FermiFunction.hpp"
+#include "Function\HyperbolicTangentFunction.hpp"
 #include "Function\IdentityFunction.hpp"
 #include "Learning\EvolutionLearningRule.hpp"
 
@@ -19,7 +20,7 @@ Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 	options.neuronsPerLayerCount.push_back(3);
 	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(5);
-	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 
 	brain = new NeuralNetwork(new RecurrentLayeredNetwork(options));
 	brain->getNetworkTopology()->randomizeWeights(-0.5, 0.5);
@@ -29,7 +30,7 @@ Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 	posY = posY_;
 	dirX = dirX_;
 	dirY = dirY_;
-	health = 50;
+	health = 1000;
 	dead = false;
 }
 
@@ -40,18 +41,18 @@ NeuralNetwork* Animal::getNeuralNetwork()
 
 void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 {
-	std::vector<bool> sight = nature->getSight(posX, posY, dirX, dirY);
+	std::vector<double> sight = nature->getSight(posX, posY, dirX, dirY);
 	NeuralNetworkIO<double> input(3);
 	for (int i = 0; i < sight.size(); i++)
 	{
 		input.set(0, i, sight[i]);
 	}
 	std::unique_ptr<NeuralNetworkIO<double>> output = brain->calculate(input, TopologicalOrder());
-	if (output->get(0, 0) > 0.5)
+	if (output->get(0, 0) > 0)
 		rotate(1);
-	if (output->get(0, 2) > 0.5)
+	if (output->get(0, 2) > 0)
 		rotate(-1);
-	if (output->get(0, 1) > 0.5)
+	if (output->get(0, 1) > 0)
 	{
 		if (nature->isTileFree(posX + dirX, posY + dirY))
 		{
@@ -60,17 +61,17 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 		}
 	}
 	
-	if (output->get(0, 3) > 0.5)
+	if (output->get(0, 3) > 0)
 	{
-		if (nature->tryToEat(posX + dirX, posY + dirY))
-			health = std::min(100, health + 10);
+		if (health < 2000 && nature->tryToEat(posX + dirX, posY + dirY))
+			health = std::min(2000, health + 30);
 	}
 
 	
-	if (health >= 80 && nature->isTileFree(posX - dirX, posY - dirY))
+	if (health >= 1500 && nature->isTileFree(posX - dirX, posY - dirY))
 	{
 		Animal* newAnimal = static_cast<Animal*>(nature->addNewObject());
-		health /= 2;
+		health /= 3;
 		newAnimal->health = health;
 		newAnimal->posX = posX - dirX;
 		newAnimal->posY = posY - dirY;
@@ -80,7 +81,7 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	}
 	
 
-	health -= 5;
+	health -= 1;
 	if (health <= 0)
 		dead = true;
 }

@@ -22,18 +22,20 @@ class Nature : public EvolutionWorldInterface
 	std::vector<std::vector<bool>> plants;
 	int width;
 	int height;
-	bool getViewValueOfPos(int posX, int posY);
+	double getViewValueOfPos(int posX, int posY);
 	sf::RenderWindow window;
 	std::unique_ptr<NatureDrawer> drawer;
+	int missingPlants;
 public:
 	Nature();
 	EvolutionObjectInterface* addNewObject();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
-	std::vector<bool> getSight(int posX, int posY, int dirX, int dirY);
+	std::vector<double> getSight(int posX, int posY, int dirX, int dirY);
 	bool tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);
 	int getWidth();
 	int getHeight();
+	void addRandomPlant();
 	std::vector<std::vector<bool>>* getPlants();
 };
 
