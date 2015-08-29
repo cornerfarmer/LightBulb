@@ -44,8 +44,7 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	{
 		input.set(0, i, sight[i]);
 	}
-	std::unique_ptr<NeuralNetworkIO<double>> output = brain->calculate(input, TopologicalOrder());
-	
+	std::unique_ptr<NeuralNetworkIO<double>> output = brain->calculate(input, TopologicalOrder(), 0, -1, NULL, NULL, false);	
 	
 	if (output->get(0, 3) > 0)
 	{
@@ -173,4 +172,5 @@ void Animal::reset(int posX_, int posY_, int dirX_, int dirY_)
 	dirX = dirX_;
 	dirY = dirY_;
 
+	brain->getNetworkTopology()->resetActivation();
 }

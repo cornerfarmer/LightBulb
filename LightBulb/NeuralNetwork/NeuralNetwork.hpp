@@ -27,7 +27,7 @@ private:
 public:
 	NeuralNetwork(AbstractNetworkTopology* networkTopology_);	
 	// Calculates from the given input and activation order the output from neural network (If a not-NULL output value map or a netInput value map is given, the method will fill them)
-	std::unique_ptr<NeuralNetworkIO<double>> calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
+	std::unique_ptr<NeuralNetworkIO<double>> calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL, bool resetActivations = true);
 	AbstractNetworkTopology* getNetworkTopology();
 };
 
