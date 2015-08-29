@@ -3,6 +3,7 @@
 #include "Learning\EvolutionObjectInterface.hpp"
 #include "Learning\EvolutionWorldInterface.hpp"
 #include "Learning\AbstractCreationCommand.hpp"
+#include "Learning\AbstractSelectionCommand.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "Neuron\StandardNeuron.hpp"
@@ -44,12 +45,21 @@ EvolutionObjectInterface* EvolutionLearningRule::doRecombination(std::vector<Evo
 
 bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 {
-	for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
+	while (true)
 	{
-		(*creationCommand)->execute(world);
+		for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
+		{
+			(*creationCommand)->execute(world);
+		}
+
+		world.doSimulationStep(*this);
+
+		for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
+		{
+			(*selectionCommand)->execute(world);
+		}
+
+		world.reset();
 	}
-
-	world.doSimulationStep(*this);
-
 	return true;
 }

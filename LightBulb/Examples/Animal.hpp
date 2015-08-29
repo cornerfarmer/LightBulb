@@ -26,6 +26,7 @@ protected:
 	int dirY;
 	int health;
 	bool dead;
+	int stepsSurvived;
 	void rotate(int dir);
 public:	
 	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
@@ -34,6 +35,8 @@ public:
 	int getPosX();
 	int getPosY();
 	bool isDead();
+	int getStepsSurvived();
 	NeuralNetwork* getNeuralNetwork();
+	void reset(int posX_, int posY_, int dirX_, int dirY_);
 };
 #endif

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _ABSTRACTCREATIONCOMMAND_H_
-#define _ABSTRACTCREATIONCOMMAND_H_
+#ifndef _ABSTRACTSELECTIONCOMMAND_H_
+#define _ABSTRACTSELECTIONCOMMAND_H_
 
 // Library Includes
 
@@ -9,7 +9,7 @@
 
 class EvolutionWorldInterface;
 
-class AbstractCreationCommand
+class AbstractSelectionCommand
 {
 public:
 	virtual void execute(EvolutionWorldInterface& world) = 0;

@@ -10,10 +10,12 @@
 class EvolutionObjectInterface;
 class EvolutionWorldInterface;
 class AbstractCreationCommand;
+class AbstractSelectionCommand;
 
 struct EvolutionLearningRuleOptions
 {
 	std::vector<AbstractCreationCommand*> creationCommands;
+	std::vector<AbstractSelectionCommand*> selectionCommands;
 	EvolutionLearningRuleOptions()
 	{
 

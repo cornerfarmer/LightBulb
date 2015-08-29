@@ -37,6 +37,11 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<bool>>* getPlants();
+	void removeEvolutionObject(EvolutionObjectInterface* evolutionObject);
+	bool isBetterThan(EvolutionObjectInterface* first, EvolutionObjectInterface* second);
+	int getEvolutionObjectCount();
+	EvolutionObjectInterface* getEvolutionObject(int index);
+	void reset();
 };
 
 #endif

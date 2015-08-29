@@ -67,8 +67,10 @@
     <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp" />
     <ClInclude Include="Learning\AbstractCreationCommand.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
+    <ClInclude Include="Learning\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
+    <ClInclude Include="Learning\BestSelectionCommand.hpp" />
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="Learning\ConstantCreationCommand.hpp" />
     <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
@@ -176,8 +178,10 @@
     <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp" />
     <ClCompile Include="Learning\AbstractCreationCommand.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
+    <ClCompile Include="Learning\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
+    <ClCompile Include="Learning\BestSelectionCommand.cpp" />
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="Learning\ConstantCreationCommand.cpp" />
     <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />

@@ -5,7 +5,6 @@
 
 // Library Includes
 
-
 // Forward declarations
 class EvolutionLearningRule;
 class NeuralNetwork;
@@ -19,5 +18,6 @@ public:
 	virtual void doNNCalculation(EvolutionLearningRule& learningRule) = 0;
 	virtual NeuralNetwork* getNeuralNetwork() = 0;
 	virtual ~EvolutionObjectInterface() {};
+
 };
 #endif

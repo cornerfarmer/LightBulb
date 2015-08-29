@@ -67,6 +67,7 @@
 #include "Examples\Nature.hpp"
 #include "Learning\EvolutionLearningRule.hpp"
 #include "Learning\ConstantCreationCommand.hpp"
+#include "Learning\BestSelectionCommand.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1606,7 +1607,8 @@ void doEvolutionTest()
 	Nature nature;
 
 	EvolutionLearningRuleOptions options;
-	options.creationCommands.push_back(new ConstantCreationCommand(20));
+	options.creationCommands.push_back(new ConstantCreationCommand(5));
+	options.selectionCommands.push_back(new BestSelectionCommand(2));
 
 	EvolutionLearningRule learningRule(options);
 

@@ -36,7 +36,8 @@ Nature::Nature()
 
 void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 {
-	while (window.isOpen())
+	int deadAnimals = 0;
+	while (animals.size() - deadAnimals > 0)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -52,24 +53,55 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 
 		for (int i = 0; i < animals.size(); i++)
 		{
-			animals[i]->doNNCalculation(learningRule);
-			if (animals[i]->isDead())
+			if (!animals[i]->isDead())
 			{
-				animals.erase(animals.begin() + i);
-				if (i != 0)
-					i--;
-				if (animals.size() == 0)
-					break;
+				animals[i]->doNNCalculation(learningRule);
+				if (animals[i]->isDead())
+				{
+					deadAnimals++;
+				}
 			}
 		}
 
-		if (animals.size() < 20)
-			addNewObject();
-
-		for (int i = 0; i < 1 && rand() < RAND_MAX / 20; i++)
-			addRandomPlant();
+		/*for (int i = 0; i < 3 && rand() < RAND_MAX / 20; i++)
+			addRandomPlant();*/
 
 		sf::sleep(sf::milliseconds(25));
+	}
+}
+
+EvolutionObjectInterface* Nature::getEvolutionObject(int index)
+{
+	return animals[index];
+}
+
+void Nature::removeEvolutionObject(EvolutionObjectInterface* evolutionObject)
+{
+	animals.erase(std::remove(animals.begin(), animals.end(), evolutionObject), animals.end());
+}
+
+bool Nature::isBetterThan(EvolutionObjectInterface* first, EvolutionObjectInterface* second)
+{
+	return static_cast<Animal*>(first)->getStepsSurvived() > static_cast<Animal*>(second)->getStepsSurvived();
+}
+
+int Nature::getEvolutionObjectCount()
+{
+	return animals.size();
+}
+
+void Nature::reset()
+{
+	for (auto animal = animals.begin(); animal != animals.end(); animal++)
+	{
+		(*animal)->reset((int)((float)rand() / RAND_MAX * width), (int)((float)rand() / RAND_MAX * height), 0, 1);
+	}
+	for (int x = 0; x < width; x++)
+	{
+		for (int y = 0; y < height; y++)
+		{
+			plants[x][y] = true;
+		}
 	}
 }
 
@@ -138,7 +170,7 @@ bool Nature::isTileFree(int posX, int posY)
 		bool free = true;
 		for (auto animal = animals.begin(); animal != animals.end(); animal++)
 		{
-			if ((*animal)->getPosX() == posX && (*animal)->getPosY() == posY)
+			if (!(*animal)->isDead() && (*animal)->getPosX() == posX && (*animal)->getPosY() == posY)
 			{
 				free = false;
 				break;
@@ -160,12 +192,12 @@ double Nature::getViewValueOfPos(int posX, int posY)
 		if (plants[posX][posY])
 			return 1;
 		else if (!isTileFree(posX, posY))
-			return 0.5;
-		else
 			return 0;
+		else
+			return -1;
 	}
 	else
-		return 0;
+		return -1;
 }
 
 int Nature::getWidth()
