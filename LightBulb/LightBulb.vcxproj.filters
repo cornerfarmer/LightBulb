@@ -377,6 +377,15 @@
     <ClInclude Include="Learning\BestSelectionCommand.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\AbstractTile.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\EarthTile.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\RockTile.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -708,6 +717,15 @@
     </ClCompile>
     <ClCompile Include="Learning\BestSelectionCommand.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\AbstractTile.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\EarthTile.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\RockTile.cpp">
+      <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

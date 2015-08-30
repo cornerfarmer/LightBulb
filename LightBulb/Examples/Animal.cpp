@@ -11,6 +11,7 @@
 #include "Function\HyperbolicTangentFunction.hpp"
 #include "Function\IdentityFunction.hpp"
 #include "Learning\EvolutionLearningRule.hpp"
+#include "Examples\AbstractTile.hpp"
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 {
@@ -48,12 +49,11 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	
 	if (output->get(0, 3) > 0)
 	{
-		if (health < 200 && nature->tryToEat(posX + dirX, posY + dirY))
-			health = std::min(200, health + 20);
+		health = std::min(200.0, health + nature->tryToEat(posX + dirX, posY + dirY));
 	}
 
 	
-	if (health >= 200 && nature->isTileFree(posX - dirX, posY - dirY))
+	if (false && health >= 200 && nature->isTileFree(posX - dirX, posY - dirY))
 	{
 		Animal* newAnimal = static_cast<Animal*>(nature->addNewObject());
 		health /= 2;
@@ -71,7 +71,7 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 		rotate(-1);
 	if (output->get(0, 1) > 0)
 	{
-		if (nature->isTileFree(posX + dirX, posY + dirY))
+		if (nature->getTile(posX + dirX, posY + dirY)->isWalkable())
 		{
 			posX += dirX;
 			posY += dirY;
@@ -79,7 +79,7 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	}
 	
 
-	health -= 3;
+	health -= 1;
 	if (health <= 0)
 		dead = true;
 

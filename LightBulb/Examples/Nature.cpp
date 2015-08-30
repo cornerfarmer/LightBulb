@@ -1,11 +1,19 @@
 // Includes
 #include "Examples\Nature.hpp"
 #include "Examples\Animal.hpp"
+#include "Examples\EarthTile.hpp"
+#include "Examples\RockTile.hpp"
 
 
 EvolutionObjectInterface* Nature::addNewObject()
 {
-	animals.push_back(new Animal(this, (int)((float)rand() / RAND_MAX * width), (int)((float)rand() / RAND_MAX * height), 0, 1));
+	int posX = 0;
+	int posY = 0;
+	do {
+		posX = (int)((float)rand() / RAND_MAX * (width - 1));
+		posY = (int)((float)rand() / RAND_MAX * (height - 1));
+	} while (!tiles[posX][posY]->isWalkable());
+	animals.push_back(new Animal(this, posX, posY, 0, 1));
 	
 	return animals.back();
 }
@@ -13,24 +21,22 @@ EvolutionObjectInterface* Nature::addNewObject()
 Nature::Nature()
 {
 	missingPlants = 0;
-	width = 60;
-	height = 60;
+	width = 120;
+	height = 120;
 
-	plants.resize(width);
+	tiles.resize(width);
 	for (int x = 0; x < width; x++)
 	{
-		plants[x].resize(height);
-		for (int y = 0; y < height; y++)
-		{
-			plants[x][y] = true;
-		}
+		tiles[x].resize(height);
 	}
+	reset();
+
 
 	window.create(sf::VideoMode(800, 700), "LightBulb!");
 	NatureDrawerOptions options;
 	options.nature = this;
-	options.scalingX = 10;
-	options.scalingY = 10;
+	options.scalingX =  60.0 / width * 10;
+	options.scalingY =  60.0 / height * 10;
 	drawer.reset(new NatureDrawer(options));
 }
 
@@ -66,7 +72,7 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 		/*for (int i = 0; i < 3 && rand() < RAND_MAX / 20; i++)
 			addRandomPlant();*/
 
-		sf::sleep(sf::milliseconds(25));
+		sf::sleep(sf::milliseconds(5));
 	}
 }
 
@@ -94,29 +100,43 @@ void Nature::reset()
 {
 	for (auto animal = animals.begin(); animal != animals.end(); animal++)
 	{
-		(*animal)->reset((int)((float)rand() / RAND_MAX * width), (int)((float)rand() / RAND_MAX * height), 0, 1);
+		int posX = 0;
+		int posY = 0;
+		do {
+			posX = (int)((float)rand() / RAND_MAX * (width - 1));
+			posY = (int)((float)rand() / RAND_MAX * (height - 1));
+		} while (!tiles[posX][posY]->isWalkable());
+		(*animal)->reset(posX, posY, 0, 1);
 	}
 	for (int x = 0; x < width; x++)
 	{
 		for (int y = 0; y < height; y++)
 		{
-			plants[x][y] = true;
+			if (x == 0 || y == 0 || x == width - 1 || y == height - 1)
+				tiles[x][y].reset(new RockTile());
+			else
+			{
+				if (abs(sin((double)x / width * 35) * height / 3 + height / 2 - y) < height / 10)
+					tiles[x][y].reset(new RockTile());
+				else
+					tiles[x][y].reset(new EarthTile());
+			}
 		}
 	}
 }
 
 void Nature::addRandomPlant()
 {
-	if (missingPlants > 0)
+	/*if (missingPlants > 0)
 	{
 		int posX, posY;
 		do {
 			posX = (float)rand() / RAND_MAX * (width - 1);
 			posY = (float)rand() / RAND_MAX * (height - 1);
-		} while (plants[posX][posY]);
+		} while (tiles[posX][posY]);
 		plants[posX][posY] = true;
 		missingPlants--;
-	}
+	}*/
 }
 
 std::vector<double> Nature::getSight(int posX, int posY, int dirX, int dirY)
@@ -149,18 +169,13 @@ std::vector<double> Nature::getSight(int posX, int posY, int dirX, int dirY)
 	return sight;
 }
 
-bool Nature::tryToEat(int posX, int posY)
+double Nature::tryToEat(int posX, int posY)
 {
 	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
 	{
-		if (plants[posX][posY])
-		{
-			plants[posX][posY] = false;
-			missingPlants++;
-			return true;
-		}
+		return tiles[posX][posY]->tryToEat();
 	}
-	return false;
+	return 0;
 }
 
 bool Nature::isTileFree(int posX, int posY)
@@ -189,12 +204,7 @@ double Nature::getViewValueOfPos(int posX, int posY)
 {
 	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
 	{
-		if (plants[posX][posY])
-			return 1;
-		else if (!isTileFree(posX, posY))
-			return 0;
-		else
-			return -1;
+		return tiles[posX][posY]->getViewValue();
 	}
 	else
 		return -1;
@@ -210,7 +220,12 @@ int Nature::getHeight()
 	return height;
 }
 
-std::vector<std::vector<bool>>* Nature::getPlants()
+std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles()
 {
-	return &plants;
+	return &tiles;
+}
+
+AbstractTile* Nature::getTile(int posX, int posY)
+{
+	return tiles[posX][posY].get();
 }

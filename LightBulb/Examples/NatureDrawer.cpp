@@ -1,6 +1,7 @@
 // Includes
 #include "Examples\NatureDrawer.hpp"
 #include "Examples\Nature.hpp"
+#include "Examples\AbstractTile.hpp"
 // Library includes
 #include <exception>
 #include <vector>
@@ -36,10 +37,8 @@ void NatureDrawer::recalculateAllValues()
 		{
 			if (!options->nature->isTileFree(x, y))
 				rectangles[x][y].setFillColor(sf::Color::Red);
-			else if ((*options->nature->getPlants())[x][y])
-				rectangles[x][y].setFillColor(sf::Color::Green);
 			else
-				rectangles[x][y].setFillColor(sf::Color::Black);
+				rectangles[x][y].setFillColor(options->nature->getTile(x, y)->getColor());
 		}
 	}
 }

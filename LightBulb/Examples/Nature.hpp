@@ -10,38 +10,41 @@
 // Include
 #include "Learning\EvolutionWorldInterface.hpp"
 #include "Examples\NatureDrawer.hpp"
+#include "Examples\AbstractTile.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
 class EvolutionObjectInterface;
 class Animal;
+class AbstractTile;
 
 class Nature : public EvolutionWorldInterface
 {
 	std::vector<Animal*> animals;
-	std::vector<std::vector<bool>> plants;
+	std::vector<std::vector<std::unique_ptr<AbstractTile>>> tiles;
 	int width;
 	int height;
 	double getViewValueOfPos(int posX, int posY);
 	sf::RenderWindow window;
 	std::unique_ptr<NatureDrawer> drawer;
-	int missingPlants;
+	int missingPlants;	
 public:
 	Nature();
 	EvolutionObjectInterface* addNewObject();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	std::vector<double> getSight(int posX, int posY, int dirX, int dirY);
-	bool tryToEat(int posX, int posY);
+	double tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);
 	int getWidth();
 	int getHeight();
 	void addRandomPlant();
-	std::vector<std::vector<bool>>* getPlants();
+	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles();
 	void removeEvolutionObject(EvolutionObjectInterface* evolutionObject);
 	bool isBetterThan(EvolutionObjectInterface* first, EvolutionObjectInterface* second);
 	int getEvolutionObjectCount();
 	EvolutionObjectInterface* getEvolutionObject(int index);
 	void reset();
+	AbstractTile* getTile(int posX, int posY);
 };
 
 #endif

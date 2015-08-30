@@ -32,9 +32,12 @@
     <ClInclude Include="ClusterAnalysis\ROLFClustering.hpp" />
     <ClInclude Include="ClusterAnalysis\ROLFNeuronPlacer.hpp" />
     <ClInclude Include="ClusterAnalysis\ValuePosition.hpp" />
+    <ClInclude Include="Examples\AbstractTile.hpp" />
     <ClInclude Include="Examples\Animal.hpp" />
+    <ClInclude Include="Examples\EarthTile.hpp" />
     <ClInclude Include="Examples\Nature.hpp" />
     <ClInclude Include="Examples\NatureDrawer.hpp" />
+    <ClInclude Include="Examples\RockTile.hpp" />
     <ClInclude Include="Function\AbstractActivationFunction.hpp" />
     <ClInclude Include="Function\AbstractInputFunction.hpp" />
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
@@ -143,9 +146,12 @@
     <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp" />
     <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp" />
     <ClCompile Include="ClusterAnalysis\ValuePosition.cpp" />
+    <ClCompile Include="Examples\AbstractTile.cpp" />
     <ClCompile Include="Examples\Animal.cpp" />
+    <ClCompile Include="Examples\EarthTile.cpp" />
     <ClCompile Include="Examples\Nature.cpp" />
     <ClCompile Include="Examples\NatureDrawer.cpp" />
+    <ClCompile Include="Examples\RockTile.cpp" />
     <ClCompile Include="Function\AbstractActivationFunction.cpp" />
     <ClCompile Include="Function\AbstractInputFunction.cpp" />
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
