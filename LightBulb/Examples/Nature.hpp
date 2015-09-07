@@ -20,7 +20,7 @@ class AbstractTile;
 
 class Nature : public EvolutionWorldInterface
 {
-	std::vector<Animal*> animals;
+	std::vector<EvolutionObjectInterface*> animals;
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>> tiles;
 	int width;
 	int height;
@@ -39,10 +39,9 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles();
-	void removeEvolutionObject(EvolutionObjectInterface* evolutionObject);
-	bool isBetterThan(EvolutionObjectInterface* first, EvolutionObjectInterface* second);
-	int getEvolutionObjectCount();
-	EvolutionObjectInterface* getEvolutionObject(int index);
+	int getScore(EvolutionObjectInterface* object);
+	std::vector<EvolutionObjectInterface*>* getEvolutionObjects();
+	void setEvolutionObjects(std::vector<EvolutionObjectInterface*>& newObjects);
 	void reset();
 	AbstractTile* getTile(int posX, int posY);
 };

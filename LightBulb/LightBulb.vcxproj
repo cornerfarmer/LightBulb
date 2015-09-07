@@ -55,6 +55,7 @@
     <ClInclude Include="Function\IdentityFunction.hpp" />
     <ClInclude Include="Function\MexicanHatFunction.hpp" />
     <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp" />
+    <ClInclude Include="Function\RankBasedRandomFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
@@ -70,12 +71,14 @@
     <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp" />
     <ClInclude Include="Learning\AbstractCreationCommand.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
+    <ClInclude Include="Learning\AbstractMutationCommand.hpp" />
     <ClInclude Include="Learning\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="Learning\BestSelectionCommand.hpp" />
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="Learning\ConstantCreationCommand.hpp" />
+    <ClInclude Include="Learning\ConstantMutationCommand.hpp" />
     <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
     <ClInclude Include="Learning\EvolutionLearningRule.hpp" />
@@ -169,6 +172,7 @@
     <ClCompile Include="Function\IdentityFunction.cpp" />
     <ClCompile Include="Function\MexicanHatFunction.cpp" />
     <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp" />
+    <ClCompile Include="Function\RankBasedRandomFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
@@ -184,12 +188,14 @@
     <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp" />
     <ClCompile Include="Learning\AbstractCreationCommand.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
+    <ClCompile Include="Learning\AbstractMutationCommand.cpp" />
     <ClCompile Include="Learning\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="Learning\BestSelectionCommand.cpp" />
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="Learning\ConstantCreationCommand.cpp" />
+    <ClCompile Include="Learning\ConstantMutationCommand.cpp" />
     <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
     <ClCompile Include="Learning\EvolutionLearningRule.cpp" />

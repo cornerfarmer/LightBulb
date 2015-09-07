@@ -1,23 +1,24 @@
 // Includes
 #include "Learning\BestSelectionCommand.hpp"
 #include "Learning\EvolutionWorldInterface.hpp"
+//Library includes
+#include <iostream>
 
 BestSelectionCommand::BestSelectionCommand(int objectCount_)
 {
 	objectCount = objectCount_;
 }
 
-void BestSelectionCommand::execute(EvolutionWorldInterface& world)
+void BestSelectionCommand::execute(std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector)
 {
-	int objectsToRemove = world.getEvolutionObjectCount() - objectCount;
-	for (int i = 0; i < objectsToRemove; i++)
+	std::cout << "Selected " << objectCount << " best one:";
+	
+	int entryIndex = 0;
+	for (auto entry = highscore->begin(); entry != highscore->end() && entryIndex < objectCount; entry++, entryIndex++)
 	{
-		EvolutionObjectInterface* badest = 0;
-		for (int o = 0; o < world.getEvolutionObjectCount(); o++)
-		{
-			if (badest == 0 || world.isBetterThan(badest, world.getEvolutionObject(o)))
-				badest = world.getEvolutionObject(o);
-		}
-		world.removeEvolutionObject(badest);
+		newObjectVector->push_back(entry->second);
+		std::cout << (int)entry->first << ", ";		
 	}
+
+	std::cout << std::endl;
 }

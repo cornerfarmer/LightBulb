@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _ABSTRACTSELECTIONCOMMAND_H_
-#define _ABSTRACTSELECTIONCOMMAND_H_
+#ifndef _ABSTRACTMUTATIONCOMMAND_H_
+#define _ABSTRACTMUTATIONCOMMAND_H_
 
 // Library Includes
 #include <vector>
@@ -10,7 +10,7 @@
 class EvolutionObjectInterface;
 class EvolutionWorldInterface;
 
-class AbstractSelectionCommand
+class AbstractMutationCommand
 {
 public:
 	virtual void execute(std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector) = 0;

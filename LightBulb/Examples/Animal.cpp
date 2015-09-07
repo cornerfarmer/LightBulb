@@ -53,7 +53,7 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	}
 
 	
-	if (false && health >= 200 && nature->isTileFree(posX - dirX, posY - dirY))
+	if (false && health >= 200 && nature->getTile(posX - dirX, posY - dirY)->isWalkable())
 	{
 		Animal* newAnimal = static_cast<Animal*>(nature->addNewObject());
 		health /= 2;

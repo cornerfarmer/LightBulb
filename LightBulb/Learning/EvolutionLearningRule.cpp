@@ -45,6 +45,7 @@ EvolutionObjectInterface* EvolutionLearningRule::doRecombination(std::vector<Evo
 
 bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 {
+	int step = 1;
 	while (true)
 	{
 		for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
@@ -54,11 +55,15 @@ bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 
 		world.doSimulationStep(*this);
 
+		std::unique_ptr<std::vector<std::pair<double, EvolutionObjectInterface*>>> highscore = world.getHighscoreList();
+		std::vector<EvolutionObjectInterface*> newObjectVector;
+
 		for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 		{
-			(*selectionCommand)->execute(world);
+			(*selectionCommand)->execute(highscore.get(), &newObjectVector);
 		}
 
+		world.setEvolutionObjects(newObjectVector);
 		world.reset();
 	}
 	return true;

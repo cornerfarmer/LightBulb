@@ -1,22 +1,22 @@
 #pragma once
 
-#ifndef _BESTSELECTIONCOMMAND_H_
-#define _BESTSELECTIONCOMMAND_H_
+#ifndef _CONSTANTMUTATIONCOMMAND_H_
+#define _CONSTANTMUTATIONCOMMAND_H_
 
 // Library Includes
 
 // Includes
-#include "Learning\AbstractSelectionCommand.hpp"
+#include "Learning\AbstractMutationCommand.hpp"
 
 // Forward declarations
 
 
-class BestSelectionCommand : public AbstractSelectionCommand
+class ConstantMutationCommand : public AbstractMutationCommand
 {
 private:
 	int objectCount;
 public:
-	BestSelectionCommand(int objectCount_);
+	ConstantMutationCommand(int objectCount_);
 	void execute(std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector);
 };
 

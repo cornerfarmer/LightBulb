@@ -13,6 +13,7 @@ EvolutionObjectInterface* Nature::addNewObject()
 		posX = (int)((float)rand() / RAND_MAX * (width - 1));
 		posY = (int)((float)rand() / RAND_MAX * (height - 1));
 	} while (!tiles[posX][posY]->isWalkable());
+
 	animals.push_back(new Animal(this, posX, posY, 0, 1));
 	
 	return animals.back();
@@ -57,12 +58,12 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 		drawer->draw(window);
 		window.display();
 
-		for (int i = 0; i < animals.size(); i++)
+		for (auto animal = animals.begin(); animal != animals.end(); animal++)
 		{
-			if (!animals[i]->isDead())
+			if (!static_cast<Animal*>(*animal)->isDead())
 			{
-				animals[i]->doNNCalculation(learningRule);
-				if (animals[i]->isDead())
+				static_cast<Animal*>(*animal)->doNNCalculation(learningRule);
+				if (static_cast<Animal*>(*animal)->isDead())
 				{
 					deadAnimals++;
 				}
@@ -72,28 +73,23 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 		/*for (int i = 0; i < 3 && rand() < RAND_MAX / 20; i++)
 			addRandomPlant();*/
 
-		sf::sleep(sf::milliseconds(5));
+		//sf::sleep(sf::milliseconds(5));
 	}
 }
 
-EvolutionObjectInterface* Nature::getEvolutionObject(int index)
+std::vector<EvolutionObjectInterface*>* Nature::getEvolutionObjects()
 {
-	return animals[index];
+	return &animals;
 }
 
-void Nature::removeEvolutionObject(EvolutionObjectInterface* evolutionObject)
+void Nature::setEvolutionObjects(std::vector<EvolutionObjectInterface*>& newObjects)
 {
-	animals.erase(std::remove(animals.begin(), animals.end(), evolutionObject), animals.end());
+	animals = newObjects;
 }
 
-bool Nature::isBetterThan(EvolutionObjectInterface* first, EvolutionObjectInterface* second)
+int Nature::getScore(EvolutionObjectInterface* object)
 {
-	return static_cast<Animal*>(first)->getStepsSurvived() > static_cast<Animal*>(second)->getStepsSurvived();
-}
-
-int Nature::getEvolutionObjectCount()
-{
-	return animals.size();
+	return static_cast<Animal*>(object)->getStepsSurvived();
 }
 
 void Nature::reset()
@@ -106,7 +102,7 @@ void Nature::reset()
 			posX = (int)((float)rand() / RAND_MAX * (width - 1));
 			posY = (int)((float)rand() / RAND_MAX * (height - 1));
 		} while (!tiles[posX][posY]->isWalkable());
-		(*animal)->reset(posX, posY, 0, 1);
+		static_cast<Animal*>(*animal)->reset(posX, posY, 0, 1);
 	}
 	for (int x = 0; x < width; x++)
 	{
@@ -185,7 +181,7 @@ bool Nature::isTileFree(int posX, int posY)
 		bool free = true;
 		for (auto animal = animals.begin(); animal != animals.end(); animal++)
 		{
-			if (!(*animal)->isDead() && (*animal)->getPosX() == posX && (*animal)->getPosY() == posY)
+			if (!static_cast<Animal*>(*animal)->isDead() && static_cast<Animal*>(*animal)->getPosX() == posX && static_cast<Animal*>(*animal)->getPosY() == posY)
 			{
 				free = false;
 				break;
@@ -227,5 +223,8 @@ std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles()
 
 AbstractTile* Nature::getTile(int posX, int posY)
 {
-	return tiles[posX][posY].get();
+	if (posX < width && posY < height)
+		return tiles[posX][posY].get();
+	else
+		throw std::exception();
 }

@@ -386,6 +386,15 @@
     <ClInclude Include="Examples\RockTile.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="Function\RankBasedRandomFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractMutationCommand.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\ConstantMutationCommand.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -726,6 +735,15 @@
     </ClCompile>
     <ClCompile Include="Examples\RockTile.cpp">
       <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RankBasedRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractMutationCommand.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\ConstantMutationCommand.cpp">
+      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
