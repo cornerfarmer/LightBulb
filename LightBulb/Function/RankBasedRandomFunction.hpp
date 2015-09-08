@@ -11,7 +11,7 @@ class RankBasedRandomFunction
 private:
 public:
 	// Inherited:	
-	double execute(int elementCount);
+	int execute(int elementCount);
 };
 
 #endif

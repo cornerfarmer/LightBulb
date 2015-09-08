@@ -38,5 +38,6 @@ public:
 	int getStepsSurvived();
 	NeuralNetwork* getNeuralNetwork();
 	void reset(int posX_, int posY_, int dirX_, int dirY_);
+	EvolutionObjectInterface* clone();
 };
 #endif

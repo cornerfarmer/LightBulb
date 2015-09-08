@@ -68,6 +68,7 @@
 #include "Learning\EvolutionLearningRule.hpp"
 #include "Learning\ConstantCreationCommand.hpp"
 #include "Learning\BestSelectionCommand.hpp"
+#include "Learning\ConstantMutationCommand.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1608,7 +1609,8 @@ void doEvolutionTest()
 
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
-	options.selectionCommands.push_back(new BestSelectionCommand(16));
+	options.selectionCommands.push_back(new BestSelectionCommand(10));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(20));
 
 	EvolutionLearningRule learningRule(options);
 

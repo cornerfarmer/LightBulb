@@ -4,6 +4,7 @@
 #include "Learning\EvolutionWorldInterface.hpp"
 #include "Learning\AbstractCreationCommand.hpp"
 #include "Learning\AbstractSelectionCommand.hpp"
+#include "Learning\AbstractMutationCommand.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "Neuron\StandardNeuron.hpp"
@@ -61,6 +62,11 @@ bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 		for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 		{
 			(*selectionCommand)->execute(highscore.get(), &newObjectVector);
+		}
+
+		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
+		{
+			(*mutationCommand)->execute(this, highscore.get(), &newObjectVector);
 		}
 
 		world.setEvolutionObjects(newObjectVector);

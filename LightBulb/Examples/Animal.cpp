@@ -55,13 +55,12 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 	
 	if (false && health >= 200 && nature->getTile(posX - dirX, posY - dirY)->isWalkable())
 	{
-		Animal* newAnimal = static_cast<Animal*>(nature->addNewObject());
+		Animal* newAnimal = static_cast<Animal*>(clone());
 		health /= 2;
 		newAnimal->health = health;
 		newAnimal->posX = posX - dirX;
 		newAnimal->posY = posY - dirY;
 		newAnimal->rotate(1);
-		newAnimal->brain->getNetworkTopology()->copyWeightsFrom(*brain->getNetworkTopology());
 		learningRule.doMutation(*newAnimal);
 	}
 
@@ -173,4 +172,11 @@ void Animal::reset(int posX_, int posY_, int dirX_, int dirY_)
 	dirY = dirY_;
 
 	brain->getNetworkTopology()->resetActivation();
+}
+
+EvolutionObjectInterface* Animal::clone()
+{
+	Animal* newAnimal = static_cast<Animal*>(nature->addNewObject());
+	newAnimal->brain->getNetworkTopology()->copyWeightsFrom(*brain->getNetworkTopology());
+	return newAnimal;
 }
