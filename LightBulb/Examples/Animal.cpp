@@ -19,9 +19,8 @@ Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 
 	options.useBiasNeuron = true;
 	options.selfConnectHiddenLayers = true;
-	options.neuronsPerLayerCount.push_back(3);
-	options.neuronsPerLayerCount.push_back(5);
-	options.neuronsPerLayerCount.push_back(5);
+	options.neuronsPerLayerCount.push_back(6);
+	options.neuronsPerLayerCount.push_back(20);
 	options.neuronsPerLayerCount.push_back(5);
 	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 
@@ -41,11 +40,12 @@ NeuralNetwork* Animal::getNeuralNetwork()
 void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 {
 	std::vector<double> sight = nature->getSight(posX, posY, dirX, dirY);
-	NeuralNetworkIO<double> input(3);
+	NeuralNetworkIO<double> input(brain->getNetworkTopology()->getInputNeurons()->size());
 	for (int i = 0; i < sight.size(); i++)
 	{
 		input.set(0, i, sight[i]);
 	}
+	input.set(0, sight.size(), health / 200.0);
 	std::unique_ptr<NeuralNetworkIO<double>> output = brain->calculate(input, TopologicalOrder(), 0, -1, NULL, NULL, false);	
 	
 	if (output->get(0, 3) > 0)

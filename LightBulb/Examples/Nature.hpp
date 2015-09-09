@@ -28,6 +28,7 @@ class Nature : public EvolutionWorldInterface
 	sf::RenderWindow window;
 	std::unique_ptr<NatureDrawer> drawer;
 	int missingPlants;	
+	bool displayMode;
 public:
 	Nature();
 	EvolutionObjectInterface* addNewObject();

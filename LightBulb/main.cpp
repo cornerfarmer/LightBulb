@@ -1510,7 +1510,6 @@ void doCounterpropagationTest()
     }
 }
 
-
 void doHopfieldTest()
 {
 	HopfieldNetwork* hopfieldNetwork = new HopfieldNetwork(2, true);	
@@ -1610,9 +1609,9 @@ void doEvolutionTest()
 
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
-	options.selectionCommands.push_back(new BestSelectionCommand(10));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(10));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(10));
+	options.selectionCommands.push_back(new BestSelectionCommand(5));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(9));
 
 	EvolutionLearningRule learningRule(options);
 
