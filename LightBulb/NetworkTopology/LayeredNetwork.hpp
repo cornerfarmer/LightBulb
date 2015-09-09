@@ -83,6 +83,8 @@ public:
 	void resetActivation();
 	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
 	void mergeWith(LayeredNetwork& otherNetwork);	 
+	// Merge this network with another one
+	virtual void horizontalMergeWith(LayeredNetwork& otherNetwork);
 	// Returns a map which holds for every edge the information if it is recurrent or not
 	virtual std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 	// Puts all current neuron outputs into the given map

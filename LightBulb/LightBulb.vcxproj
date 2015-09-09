@@ -72,6 +72,7 @@
     <ClInclude Include="Learning\AbstractCreationCommand.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
     <ClInclude Include="Learning\AbstractMutationCommand.hpp" />
+    <ClInclude Include="Learning\AbstractRecombinationCommand.hpp" />
     <ClInclude Include="Learning\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="Learning\ConstantCreationCommand.hpp" />
     <ClInclude Include="Learning\ConstantMutationCommand.hpp" />
+    <ClInclude Include="Learning\ConstantRecombinationCommand.hpp" />
     <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
     <ClInclude Include="Learning\EvolutionLearningRule.hpp" />
@@ -189,6 +191,7 @@
     <ClCompile Include="Learning\AbstractCreationCommand.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractMutationCommand.cpp" />
+    <ClCompile Include="Learning\AbstractRecombinationCommand.cpp" />
     <ClCompile Include="Learning\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
@@ -196,6 +199,7 @@
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="Learning\ConstantCreationCommand.cpp" />
     <ClCompile Include="Learning\ConstantMutationCommand.cpp" />
+    <ClCompile Include="Learning\ConstantRecombinationCommand.cpp" />
     <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
     <ClCompile Include="Learning\EvolutionLearningRule.cpp" />

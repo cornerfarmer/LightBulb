@@ -37,5 +37,6 @@ public:
 	// Inherited:
 	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
 	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
+	void horizontalMergeWith(RecurrentLayeredNetwork& otherNetwork);
 };
 #endif

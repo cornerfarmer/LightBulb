@@ -5,8 +5,10 @@
 #include "Learning\AbstractCreationCommand.hpp"
 #include "Learning\AbstractSelectionCommand.hpp"
 #include "Learning\AbstractMutationCommand.hpp"
+#include "Learning\AbstractRecombinationCommand.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "NetworkTopology\LayeredNetwork.hpp"
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\Edge.hpp"
 
@@ -39,9 +41,22 @@ void EvolutionLearningRule::doMutation(EvolutionObjectInterface& object)
 	}
 }
 
-EvolutionObjectInterface* EvolutionLearningRule::doRecombination(std::vector<EvolutionObjectInterface*> object)
+EvolutionObjectInterface* EvolutionLearningRule::doRecombination(EvolutionObjectInterface* object1, EvolutionObjectInterface* object2)
 {
-	return NULL;
+	LayeredNetwork* network1 = dynamic_cast<LayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology());
+	LayeredNetwork* network2 = dynamic_cast<LayeredNetwork*>(object2->getNeuralNetwork()->getNetworkTopology());
+	if (!network1 || !network2)
+		throw std::logic_error("The network has to be a layered network to do recombination!");
+	network1->horizontalMergeWith(*network2);
+	for (int layerIndex = 0; layerIndex < network1->getNeurons()->size() - 1; layerIndex++)
+	{
+		int neuronsToRemove = (*network1->getNeurons())[layerIndex].size() / 2;
+		for (int i = 0; i < neuronsToRemove; i++)
+		{
+			int randomIndex = (float)rand() / RAND_MAX * (*network1->getNeurons())[layerIndex].size();
+			network1->removeNeuronFromLayer(layerIndex, randomIndex);
+		}
+	}
 }
 
 bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
@@ -67,6 +82,12 @@ bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
 		{
 			(*mutationCommand)->execute(this, highscore.get(), &newObjectVector);
+		}
+
+
+		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
+		{
+			(*recombinationCommand)->execute(this, highscore.get(), &newObjectVector);
 		}
 
 		world.setEvolutionObjects(newObjectVector);

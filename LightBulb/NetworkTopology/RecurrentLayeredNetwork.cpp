@@ -74,6 +74,29 @@ RecurrentLayeredNetworkOptions* RecurrentLayeredNetwork::getOptions()
 	return static_cast<RecurrentLayeredNetworkOptions*>(options.get());
 }
 
+void RecurrentLayeredNetwork::horizontalMergeWith(RecurrentLayeredNetwork& otherNetwork)
+{
+	if (otherNetwork.getOptions()->selfConnectHiddenLayers != getOptions()->selfConnectHiddenLayers)
+		throw std::logic_error("The two networks must have the same configuration");
+	if (otherNetwork.getOptions()->connectOutputWithInnerNeurons || getOptions()->connectOutputWithInnerNeurons)
+		throw std::logic_error("ConnectOutputWithInnerNeurons is not supported yet");
+	if (otherNetwork.getOptions()->selfConnectOutputLayers || getOptions()->selfConnectOutputLayers)
+		throw std::logic_error("selfConnectOutputLayers is not supported yet");
+	LayeredNetwork::horizontalMergeWith(otherNetwork);
+
+	for (auto layer = neurons.begin(); layer + 1 != neurons.end(); layer++)
+	{
+		for (int n = 0; n < layer->size() / 2; n++)
+		{
+			for (int on = layer->size() / 2; on < layer->size(); on++)
+			{
+				(*layer)[n]->addNextNeuron((*layer)[on], 1);
+				(*layer)[on]->addNextNeuron((*layer)[n], 1);
+			}
+		}
+	}
+}
+
 std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount)
 {
 	// Create a new layered network with the same options as we used for this recurrent network

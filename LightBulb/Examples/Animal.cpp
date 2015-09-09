@@ -17,6 +17,7 @@ Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 {
 	RecurrentLayeredNetworkOptions options;
 
+	options.useBiasNeuron = true;
 	options.selfConnectHiddenLayers = true;
 	options.neuronsPerLayerCount.push_back(3);
 	options.neuronsPerLayerCount.push_back(5);

@@ -336,7 +336,85 @@ void LayeredNetwork::resetActivation()
 	}
 }
 
+void LayeredNetwork::horizontalMergeWith(LayeredNetwork& otherNetwork)
+{
+	if (otherNetwork.options->useBiasNeuron != options->useBiasNeuron || otherNetwork.options->neuronsPerLayerCount != options->neuronsPerLayerCount)
+		throw std::logic_error("The two networks must have the same configuration");
+	if (otherNetwork.options->enableShortcuts || options->enableShortcuts)
+		throw std::logic_error("Shortcuts are not supported yet.");
 
+
+	// If a bias neuron is used in the other network
+	if (otherNetwork.options->useBiasNeuron)
+	{
+		// Go through all efferent edges of the bias neuron of the other network
+		for (auto edge = otherNetwork.biasNeuron.getEfferentEdges()->begin(); edge != otherNetwork.biasNeuron.getEfferentEdges()->end(); edge++)
+		{		
+			if ((*edge)->getNextNeuron()->getEfferentEdges()->size() > 0)
+			{
+				// Reconnect the edge to the bias neuron of the current network
+				(*edge)->setPrevNeuron(&biasNeuron);
+				// Add the edge to the bias neuron of the current network
+				biasNeuron.addNextNeuron(*edge);
+			}
+		}
+		// Clear all edges of the bias neuron of the other network, so they won't be deleted
+		otherNetwork.biasNeuron.getEfferentEdges()->clear();
+	}
+
+	
+	// 
+	for (auto otherNeuron = otherNetwork.getNeurons()->front().begin(); otherNeuron != otherNetwork.getNeurons()->front().end(); otherNeuron++)
+	{
+		auto inputNeuron = inputNeurons.begin();
+		// 
+		for (auto edge = (*otherNeuron)->getAfferentEdges()->begin(); edge != (*otherNeuron)->getAfferentEdges()->end() && inputNeuron != inputNeurons.end(); edge++, inputNeuron++)
+		{
+			// 
+			(*edge)->setPrevNeuron(*inputNeuron);
+			// 
+			(*inputNeuron)->addNextNeuron(*edge);
+		}
+	}
+
+	// 
+	for (auto otherInputNeuron = otherNetwork.getInputNeurons()->begin(); otherInputNeuron != otherNetwork.getInputNeurons()->end(); otherInputNeuron++)
+	{
+		(*otherInputNeuron)->getEfferentEdges()->clear();
+	}
+
+	auto lastHiddenLayer = otherNetwork.getNeurons()->end();
+	lastHiddenLayer--; lastHiddenLayer--;
+	// 
+	for (auto otherNeuron = lastHiddenLayer->begin(); otherNeuron != lastHiddenLayer->end(); otherNeuron++)
+	{
+		auto outputNeuron = outputNeurons.begin();
+		// 
+		for (auto edge = (*otherNeuron)->getEfferentEdges()->begin(); edge != (*otherNeuron)->getEfferentEdges()->end() && outputNeuron != outputNeurons.end(); edge++, outputNeuron++)
+		{
+			// 
+			(*edge)->setNextNeuron(*outputNeuron);
+			// 
+			(*outputNeuron)->addPrevNeuron(*edge);
+		}
+	}
+
+	// 
+	for (auto otherOutputNeuron = otherNetwork.getOutputNeurons()->begin(); otherOutputNeuron != otherNetwork.getOutputNeurons()->end(); otherOutputNeuron++)
+	{
+		(*otherOutputNeuron)->getAfferentEdges()->clear();
+	}
+
+	auto otherLayer = otherNetwork.getNeurons()->begin();
+	for (auto layer = neurons.begin(); layer + 1 != neurons.end(); layer++, otherLayer++)
+	{
+		layer->insert(layer->end(), otherLayer->begin(), otherLayer->end());
+		otherLayer->clear();
+	}
+
+	// Refresh all neuron per layer counters
+	refreshNeuronsPerLayerCounters();
+}
 
 void LayeredNetwork::mergeWith(LayeredNetwork& otherNetwork)
 {
@@ -446,6 +524,11 @@ std::unique_ptr<std::map<Edge*, bool>> LayeredNetwork::getNonRecurrentEdges()
 	}
 	
 	return nonRecurrentEdges;
+}
+
+void LayeredNetwork::removeNeuronFromLayer(int layerIndex, int neuronIndex)
+{
+	removeNeuronFromLayer(layerIndex, neurons[layerIndex][neuronIndex]);
 }
 
 void LayeredNetwork::removeNeuronFromLayer(int layerIndex, AbstractNeuron* neuronToRemove)
