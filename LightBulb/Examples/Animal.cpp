@@ -1,59 +1,37 @@
 // Includes
 #include "Examples\Animal.hpp"
-#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
 #include "Examples\Nature.hpp"
 #include "ActivationOrder\TopologicalOrder.hpp"
-#include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
-#include "Neuron\StandardThreshold.hpp"
-#include "Function\WeightedSumFunction.hpp"
-#include "Function\FermiFunction.hpp"
-#include "Function\HyperbolicTangentFunction.hpp"
-#include "Function\IdentityFunction.hpp"
 #include "Learning\EvolutionLearningRule.hpp"
 #include "Examples\AbstractTile.hpp"
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
+	: AbstractSimpleEvolutionObject(nature_, 6, 5)
 {
-	RecurrentLayeredNetworkOptions options;
-
-	options.useBiasNeuron = true;
-	options.selfConnectHiddenLayers = true;
-	options.neuronsPerLayerCount.push_back(6);
-	options.neuronsPerLayerCount.push_back(20);
-	options.neuronsPerLayerCount.push_back(5);
-	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
-
-	brain = new NeuralNetwork(new RecurrentLayeredNetwork(options));
-	brain->getNetworkTopology()->randomizeWeights(-0.5, 0.5);
-
 	nature = nature_;
 
 	reset(posX_, posY_, dirX_, dirY_);
 }
 
-NeuralNetwork* Animal::getNeuralNetwork()
-{
-	return brain;
-}
-
-void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
+NeuralNetworkIO<double> Animal::getNNInput()
 {
 	std::vector<double> sight = nature->getSight(posX, posY, dirX, dirY);
-	NeuralNetworkIO<double> input(brain->getNetworkTopology()->getInputNeurons()->size());
+	NeuralNetworkIO<double> input(6);
 	for (int i = 0; i < sight.size(); i++)
 	{
 		input.set(0, i, sight[i]);
 	}
 	input.set(0, sight.size(), health / 200.0);
-	std::unique_ptr<NeuralNetworkIO<double>> output = brain->calculate(input, TopologicalOrder(), 0, -1, NULL, NULL, false);	
-	
+	return input;
+}
+
+void Animal::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output)
+{
 	if (output->get(0, 3) > 0)
 	{
 		health = std::min(200.0, health + nature->tryToEat(posX + dirX, posY + dirY));
 	}
 
-	
 	if (false && health >= 200 && nature->getTile(posX - dirX, posY - dirY)->isWalkable())
 	{
 		Animal* newAnimal = static_cast<Animal*>(clone());
@@ -77,7 +55,6 @@ void Animal::doNNCalculation(EvolutionLearningRule& learningRule)
 			posY += dirY;
 		}
 	}
-	
 
 	health -= 1;
 	if (health <= 0)
@@ -148,7 +125,6 @@ void Animal::rotate(int dir)
 
 Animal::~Animal()
 {
-	delete(brain);
 }
 
 int Animal::getPosX()
@@ -171,13 +147,4 @@ void Animal::reset(int posX_, int posY_, int dirX_, int dirY_)
 	posY = posY_;
 	dirX = dirX_;
 	dirY = dirY_;
-
-	brain->getNetworkTopology()->resetActivation();
-}
-
-EvolutionObjectInterface* Animal::clone()
-{
-	Animal* newAnimal = static_cast<Animal*>(nature->addNewObject());
-	newAnimal->brain->getNetworkTopology()->copyWeightsFrom(*brain->getNetworkTopology());
-	return newAnimal;
 }

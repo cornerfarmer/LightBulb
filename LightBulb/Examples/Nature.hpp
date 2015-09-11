@@ -8,7 +8,7 @@
 #include <SFML\Graphics.hpp>
 
 // Include
-#include "Learning\EvolutionWorldInterface.hpp"
+#include "Learning\AbstractSimpleEvolutionWorld.hpp"
 #include "Examples\NatureDrawer.hpp"
 #include "Examples\AbstractTile.hpp"
 
@@ -18,9 +18,9 @@ class EvolutionObjectInterface;
 class Animal;
 class AbstractTile;
 
-class Nature : public EvolutionWorldInterface
+class Nature : public AbstractSimpleEvolutionWorld
 {
-	std::vector<EvolutionObjectInterface*> animals;
+protected:
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>> tiles;
 	int width;
 	int height;
@@ -29,9 +29,10 @@ class Nature : public EvolutionWorldInterface
 	std::unique_ptr<NatureDrawer> drawer;
 	int missingPlants;	
 	bool displayMode;
+	EvolutionObjectInterface* createNewObject();
+	void resetWorld();
 public:
 	Nature();
-	EvolutionObjectInterface* addNewObject();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	std::vector<double> getSight(int posX, int posY, int dirX, int dirY);
 	double tryToEat(int posX, int posY);
@@ -40,10 +41,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles();
-	int getScore(EvolutionObjectInterface* object);
-	std::vector<EvolutionObjectInterface*>* getEvolutionObjects();
-	void setEvolutionObjects(std::vector<EvolutionObjectInterface*>& newObjects);
-	void reset();
+	int getScore(EvolutionObjectInterface* object);	
 	AbstractTile* getTile(int posX, int posY);
 };
 

@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-EvolutionObjectInterface* Nature::addNewObject()
+EvolutionObjectInterface* Nature::createNewObject()
 {
 	int posX = 0;
 	int posY = 0;
@@ -16,9 +16,7 @@ EvolutionObjectInterface* Nature::addNewObject()
 		posY = (int)((float)rand() / RAND_MAX * (height - 1));
 	} while (!tiles[posX][posY]->isWalkable());
 
-	animals.push_back(new Animal(this, posX, posY, 0, 1));
-	
-	return animals.back();
+	return new Animal(this, posX, posY, 0, 1);
 }
 
 Nature::Nature()
@@ -32,7 +30,7 @@ Nature::Nature()
 	{
 		tiles[x].resize(height);
 	}
-	reset();
+	resetWorld();
 
 
 	window.create(sf::VideoMode(800, 700), "LightBulb!");
@@ -45,13 +43,11 @@ Nature::Nature()
 }
 
 void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
-{
-	
+{	
 	int deadAnimals = 0;
 
-	while (animals.size() - deadAnimals > 0)
+	while (objects.size() - deadAnimals > 0)
 	{
-
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -68,7 +64,7 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 			window.display();
 		}
 
-		for (auto animal = animals.begin(); animal != animals.end(); animal++)
+		for (auto animal = objects.begin(); animal != objects.end(); animal++)
 		{
 			if (!static_cast<Animal*>(*animal)->isDead())
 			{
@@ -88,24 +84,14 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 	std::cout << "Animals ate " << missingPlants << " plants" << std::endl;
 }
 
-std::vector<EvolutionObjectInterface*>* Nature::getEvolutionObjects()
-{
-	return &animals;
-}
-
-void Nature::setEvolutionObjects(std::vector<EvolutionObjectInterface*>& newObjects)
-{
-	animals = newObjects;
-}
-
 int Nature::getScore(EvolutionObjectInterface* object)
 {
 	return static_cast<Animal*>(object)->getStepsSurvived();
 }
 
-void Nature::reset()
+void Nature::resetWorld()
 {
-	for (auto animal = animals.begin(); animal != animals.end(); animal++)
+	for (auto animal = objects.begin(); animal != objects.end(); animal++)
 	{
 		int posX = 0;
 		int posY = 0;
@@ -202,7 +188,7 @@ bool Nature::isTileFree(int posX, int posY)
 	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
 	{
 		bool free = true;
-		for (auto animal = animals.begin(); animal != animals.end(); animal++)
+		for (auto animal = objects.begin(); animal != objects.end(); animal++)
 		{
 			if (!static_cast<Animal*>(*animal)->isDead() && static_cast<Animal*>(*animal)->getPosX() == posX && static_cast<Animal*>(*animal)->getPosY() == posY)
 			{

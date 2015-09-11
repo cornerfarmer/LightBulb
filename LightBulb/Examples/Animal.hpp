@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "Learning\EvolutionObjectInterface.hpp"
+#include "Learning\AbstractSimpleEvolutionObject.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -15,10 +15,9 @@ class NeuralNetwork;
 class RecurrentLayeredNetworkOptions;
 class Nature;
 
-class Animal : public EvolutionObjectInterface 
+class Animal : public AbstractSimpleEvolutionObject
 {
 protected:
-	NeuralNetwork* brain;
 	Nature* nature;
 	int posX;
 	int posY;
@@ -28,16 +27,15 @@ protected:
 	bool dead;
 	int stepsSurvived;
 	void rotate(int dir);
+	NeuralNetworkIO<double> getNNInput();
+	void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output);
 public:	
 	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();
-	void doNNCalculation(EvolutionLearningRule& learningRule);
 	int getPosX();
 	int getPosY();
 	bool isDead();
 	int getStepsSurvived();
-	NeuralNetwork* getNeuralNetwork();
 	void reset(int posX_, int posY_, int dirX_, int dirY_);
-	EvolutionObjectInterface* clone();
 };
 #endif

@@ -401,6 +401,21 @@
     <ClInclude Include="Learning\ConstantRecombinationCommand.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\AbstractSimpleEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractSimpleEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeKI.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToe.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeDrawer.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -756,6 +771,21 @@
     </ClCompile>
     <ClCompile Include="Learning\ConstantRecombinationCommand.cpp">
       <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractSimpleEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractSimpleEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeKI.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToe.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

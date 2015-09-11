@@ -38,6 +38,9 @@
     <ClInclude Include="Examples\Nature.hpp" />
     <ClInclude Include="Examples\NatureDrawer.hpp" />
     <ClInclude Include="Examples\RockTile.hpp" />
+    <ClInclude Include="Examples\TicTacToe.hpp" />
+    <ClInclude Include="Examples\TicTacToeDrawer.hpp" />
+    <ClInclude Include="Examples\TicTacToeKI.hpp" />
     <ClInclude Include="Function\AbstractActivationFunction.hpp" />
     <ClInclude Include="Function\AbstractInputFunction.hpp" />
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
@@ -74,6 +77,8 @@
     <ClInclude Include="Learning\AbstractMutationCommand.hpp" />
     <ClInclude Include="Learning\AbstractRecombinationCommand.hpp" />
     <ClInclude Include="Learning\AbstractSelectionCommand.hpp" />
+    <ClInclude Include="Learning\AbstractSimpleEvolutionObject.hpp" />
+    <ClInclude Include="Learning\AbstractSimpleEvolutionWorld.hpp" />
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
     <ClInclude Include="Learning\BestSelectionCommand.hpp" />
@@ -157,6 +162,9 @@
     <ClCompile Include="Examples\Nature.cpp" />
     <ClCompile Include="Examples\NatureDrawer.cpp" />
     <ClCompile Include="Examples\RockTile.cpp" />
+    <ClCompile Include="Examples\TicTacToe.cpp" />
+    <ClCompile Include="Examples\TicTacToeDrawer.cpp" />
+    <ClCompile Include="Examples\TicTacToeKI.cpp" />
     <ClCompile Include="Function\AbstractActivationFunction.cpp" />
     <ClCompile Include="Function\AbstractInputFunction.cpp" />
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
@@ -193,6 +201,8 @@
     <ClCompile Include="Learning\AbstractMutationCommand.cpp" />
     <ClCompile Include="Learning\AbstractRecombinationCommand.cpp" />
     <ClCompile Include="Learning\AbstractSelectionCommand.cpp" />
+    <ClCompile Include="Learning\AbstractSimpleEvolutionObject.cpp" />
+    <ClCompile Include="Learning\AbstractSimpleEvolutionWorld.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
     <ClCompile Include="Learning\BestSelectionCommand.cpp" />

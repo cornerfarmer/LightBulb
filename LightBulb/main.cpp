@@ -70,6 +70,7 @@
 #include "Learning\BestSelectionCommand.hpp"
 #include "Learning\ConstantMutationCommand.hpp"
 #include "Learning\ConstantRecombinationCommand.hpp"
+#include "Examples\TicTacToe.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1618,8 +1619,23 @@ void doEvolutionTest()
 	learningRule.doLearning(nature);
 }
 
+void doTicTacToeTest()
+{
+	TicTacToe ticTacToe;
+
+	EvolutionLearningRuleOptions options;
+	options.creationCommands.push_back(new ConstantCreationCommand(40));
+	options.selectionCommands.push_back(new BestSelectionCommand(5));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(9));
+
+	EvolutionLearningRule learningRule(options);
+
+	learningRule.doLearning(ticTacToe);
+}
+
 int main()
 {
-	doEvolutionTest();
+	doTicTacToeTest();
     return 0;
 }
