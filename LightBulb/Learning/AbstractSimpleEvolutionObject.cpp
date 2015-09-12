@@ -18,9 +18,10 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(EvolutionWorldInter
 	RecurrentLayeredNetworkOptions options;
 
 	options.useBiasNeuron = true;
-	options.selfConnectHiddenLayers = true;
+//	options.selfConnectHiddenLayers = true;
 	options.neuronsPerLayerCount.push_back(inputDimension);
 	options.neuronsPerLayerCount.push_back(20);
+	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(outputDimension);
 	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 

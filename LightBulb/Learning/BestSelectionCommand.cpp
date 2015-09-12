@@ -1,6 +1,7 @@
 // Includes
 #include "Learning\BestSelectionCommand.hpp"
 #include "Learning\EvolutionWorldInterface.hpp"
+#include "Learning\EvolutionObjectInterface.hpp"
 //Library includes
 #include <iostream>
 
@@ -16,7 +17,7 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, EvolutionObject
 	int entryIndex = 0;
 	for (auto entry = highscore->begin(); entry != highscore->end() && entryIndex < objectCount; entry++, entryIndex++)
 	{
-		newObjectVector->push_back(entry->second);
+		newObjectVector->push_back(entry->second->clone());
 		std::cout << (int)entry->first << ", ";		
 	}
 

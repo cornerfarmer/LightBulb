@@ -84,10 +84,14 @@ bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 			(*mutationCommand)->execute(this, highscore.get(), &newObjectVector);
 		}
 
-
 		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
 		{
 			(*recombinationCommand)->execute(this, highscore.get(), &newObjectVector);
+		}
+
+		for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
+		{
+			delete(oldObject->second);
 		}
 
 		world.setEvolutionObjects(newObjectVector);

@@ -42,8 +42,21 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 			if (*ki != *otherKI)
 			{
 				resetWorld();
+				(*ki)->resetNN();
+				(*otherKI)->resetNN();
 				for (int i = 0; i < 9; i++)
 				{
+					if (i % 2 == 0)
+					{
+						currentPlayer = 1;
+						(*ki)->doNNCalculation(learningRule);
+					}
+					else
+					{
+						currentPlayer = -1;
+						(*otherKI)->doNNCalculation(learningRule);
+					}
+
 					sf::Event event;
 					while (window.pollEvent(event))
 					{
@@ -59,17 +72,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 						drawer->draw(window);
 						window.display();
 					}
-
-					if (i % 2 == 0)
-					{
-						currentPlayer = 1;
-						(*ki)->doNNCalculation(learningRule);
-					}
-					else
-					{
-						currentPlayer = -1;
-						(*otherKI)->doNNCalculation(learningRule);
-					}
+					
 					if (whoHasWon() != 0)
 						break;
 				}				
