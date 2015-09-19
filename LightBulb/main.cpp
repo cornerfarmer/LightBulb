@@ -1625,8 +1625,8 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
-	options.selectionCommands.push_back(new BestSelectionCommand(8));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(15));
+	options.selectionCommands.push_back(new BestSelectionCommand(5));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(20));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule learningRule(options);

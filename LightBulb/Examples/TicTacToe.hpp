@@ -30,6 +30,7 @@ protected:
 	int whoHasWon();
 	int currentPlayer;
 	bool displayMode;
+	bool illegalMove;
 public:
 	TicTacToe();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
@@ -38,6 +39,8 @@ public:
 	int getScore(EvolutionObjectInterface* object);	
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
+	void rateBestKI(EvolutionLearningRule& learningRule);
+	void setIllegalMove(bool illegalMove_);
 };
 
 #endif

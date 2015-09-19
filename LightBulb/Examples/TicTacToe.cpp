@@ -41,6 +41,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		{
 			if (*ki != *otherKI)
 			{
+				illegalMove = false;
 				resetWorld();
 				(*ki)->resetNN();
 				(*otherKI)->resetNN();
@@ -72,18 +73,82 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 						drawer->draw(window);
 						window.display();
 					}
-					
-					if (whoHasWon() != 0)
+
+					if (whoHasWon() != 0 || illegalMove)
 						break;
-				}				
-				if (whoHasWon() == 1)
+				}
+				//if (whoHasWon() == 1)
+				//	points[static_cast<TicTacToeKI*>(*ki)]++;
+				if (illegalMove)
+				{
+					if (currentPlayer == 1)
+						points[static_cast<TicTacToeKI*>(*ki)]-=2;
+					else 
+						points[static_cast<TicTacToeKI*>(*otherKI)]-=2;
+				}
+				else if (whoHasWon() == 0)
+				{					
 					points[static_cast<TicTacToeKI*>(*ki)]++;
-				else if (whoHasWon() == -1)
 					points[static_cast<TicTacToeKI*>(*otherKI)]++;
+				}
+				else if (whoHasWon() == 1)
+					points[static_cast<TicTacToeKI*>(*ki)] += 2;
+				else if (whoHasWon() == -1)
+					points[static_cast<TicTacToeKI*>(*otherKI)] += 2;
 			}
 		}
 	}
+	//rateBestKI(learningRule);
 }
+
+void TicTacToe::setIllegalMove(bool illegalMove_)
+{
+	illegalMove = illegalMove_;
+}
+
+void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
+{
+	auto highscoreList = getHighscoreList();
+	TicTacToeKI* bestKI = dynamic_cast<TicTacToeKI*>(highscoreList->front().second);
+
+	
+	int wins = 0;
+	int games = 1000;
+	for (int g = 0; g < games; g++)
+	{
+		resetWorld();
+		
+		for (int i = 0; i < 9; i++)
+		{
+			bestKI->resetNN();
+			if (i % 2 == 0)
+			{
+				currentPlayer = 1;
+				bestKI->doNNCalculation(learningRule);
+			}
+			else
+			{
+				currentPlayer = -1;
+				int x, y;
+				do {
+					x = std::min(2, (int)((float)rand() / RAND_MAX * 3));
+					y = std::min(2, (int)((float)rand() / RAND_MAX * 3));
+				} while (!isFree(x, y));
+				setField(x, y);
+			}
+			if (whoHasWon() != 0)
+				break;
+		}
+
+		if (whoHasWon() == 1)
+			wins++;
+	}
+
+	std::cout << "Best KI: " << wins << "/" << games << std::endl;
+}
+
+
+
 
 bool TicTacToe::isFree(int x, int y)
 {
@@ -117,7 +182,10 @@ int TicTacToe::whoHasWon()
 
 void TicTacToe::setField(int x, int y)
 {
-	fields[x][y] = currentPlayer;
+	if (!isFree(x, y))
+		illegalMove = true;
+	else
+		fields[x][y] = currentPlayer;
 }
 
 int TicTacToe::getScore(EvolutionObjectInterface* object)
@@ -140,7 +208,7 @@ void TicTacToe::resetWorld()
 std::vector<double> TicTacToe::getSight()
 {
 	std::vector<double> sight;
-	for (auto column = fields.begin(); column != fields.begin(); column++)
+	for (auto column = fields.begin(); column != fields.end(); column++)
 	{
 		for (auto field = column->begin(); field != column->end(); field++)
 		{

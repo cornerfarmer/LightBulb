@@ -26,13 +26,14 @@ void TicTacToeKI::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralN
 	{
 		int x = i / 3;
 		int y = i % 3;
-		if (output->get(0, i) > 0 && ticTacToe->isFree(x, y))
+		if (output->get(0, i) > 0)
 		{
 			ticTacToe->setField(x, y);
 			return;
 		}
 	}
-
+	ticTacToe->setIllegalMove(true);
+	return;
 	for (int x = 0; x < 3; x++)
 	{
 		for (int y = 0; y < 3; y++)
