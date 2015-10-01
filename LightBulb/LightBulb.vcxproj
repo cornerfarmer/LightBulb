@@ -35,8 +35,10 @@
     <ClInclude Include="Examples\AbstractTile.hpp" />
     <ClInclude Include="Examples\Animal.hpp" />
     <ClInclude Include="Examples\EarthTile.hpp" />
+    <ClInclude Include="Examples\FunctionSimulator.hpp" />
     <ClInclude Include="Examples\Nature.hpp" />
     <ClInclude Include="Examples\NatureDrawer.hpp" />
+    <ClInclude Include="Examples\Position.hpp" />
     <ClInclude Include="Examples\RockTile.hpp" />
     <ClInclude Include="Examples\TicTacToe.hpp" />
     <ClInclude Include="Examples\TicTacToeDrawer.hpp" />
@@ -159,8 +161,10 @@
     <ClCompile Include="Examples\AbstractTile.cpp" />
     <ClCompile Include="Examples\Animal.cpp" />
     <ClCompile Include="Examples\EarthTile.cpp" />
+    <ClCompile Include="Examples\FunctionSimulator.cpp" />
     <ClCompile Include="Examples\Nature.cpp" />
     <ClCompile Include="Examples\NatureDrawer.cpp" />
+    <ClCompile Include="Examples\Position.cpp" />
     <ClCompile Include="Examples\RockTile.cpp" />
     <ClCompile Include="Examples\TicTacToe.cpp" />
     <ClCompile Include="Examples\TicTacToeDrawer.cpp" />

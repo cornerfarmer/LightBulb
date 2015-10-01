@@ -19,7 +19,7 @@ public:
 	virtual std::vector<EvolutionObjectInterface*>* getEvolutionObjects() = 0;
 	virtual void setEvolutionObjects(std::vector<EvolutionObjectInterface*>& newObjects) = 0;
 	std::unique_ptr<std::vector<std::pair<double, EvolutionObjectInterface*>>> getHighscoreList();
-	virtual int getScore(EvolutionObjectInterface* object) = 0;
+	virtual double getScore(EvolutionObjectInterface* object) = 0;
 	virtual void reset() = 0;
 };
 

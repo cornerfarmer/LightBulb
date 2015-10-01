@@ -25,7 +25,7 @@ protected:
 	virtual NeuralNetworkIO<double> getNNInput() = 0;
 	virtual void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output) = 0;
 public:	
-	AbstractSimpleEvolutionObject(EvolutionWorldInterface* world, int inputDimension, int outputDimension);
+	AbstractSimpleEvolutionObject(EvolutionWorldInterface* world, int inputDimension, int outputDimension, bool biasNeuron = true);
 	~AbstractSimpleEvolutionObject();
 	void doNNCalculation(EvolutionLearningRule& learningRule);
 	NeuralNetwork* getNeuralNetwork();

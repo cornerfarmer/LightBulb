@@ -71,6 +71,8 @@
 #include "Learning\ConstantMutationCommand.hpp"
 #include "Learning\ConstantRecombinationCommand.hpp"
 #include "Examples\TicTacToe.hpp"
+#include "Examples\FunctionSimulator.hpp"
+#include "Examples\Position.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1621,21 +1623,70 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {
+	{
+		LayeredNetworkOptions options;
+		options.useBiasNeuron = true;
+		options.neuronsPerLayerCount.push_back(18);
+		options.neuronsPerLayerCount.push_back(9);
+		options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+
+		LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
+
+		int n = 0;
+		for (auto neuron = layeredNetwork->getNeurons()->front().begin(); neuron != layeredNetwork->getNeurons()->front().end(); neuron++, n++)
+		{
+			int e = 0;
+			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, e++)
+			{
+				if (n * 2 == e || n * 2 + 1 == e)
+					(*edge)->setWeight(-100);
+				else if (e == 18)
+					(*edge)->setWeight(50);
+				else
+					(*edge)->setWeight(0);
+			}
+		}
+
+		NeuralNetwork network(layeredNetwork);
+
+		NeuralNetworkIO<double> input(18);
+		input.set(0, 0, 1);
+		input.set(0, 5, 1);
+
+		std::unique_ptr<NeuralNetworkIO<double>> output = network.calculate(input, TopologicalOrder(), 0 , 1);
+
+	}
+
 	TicTacToe ticTacToe;
 
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(20));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(25));
+	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule learningRule(options);
 
 	learningRule.doLearning(ticTacToe);
 }
 
+void doFunctionEvolutionTest()
+{
+	FunctionSimulator simulator;
+
+	EvolutionLearningRuleOptions options;
+	options.creationCommands.push_back(new ConstantCreationCommand(40));
+	options.selectionCommands.push_back(new BestSelectionCommand(5));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(9));
+
+	EvolutionLearningRule learningRule(options);
+
+	learningRule.doLearning(simulator);
+}
+
 int main()
 {
-	doTicTacToeTest();
+	doFunctionEvolutionTest();
     return 0;
 }

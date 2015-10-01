@@ -383,19 +383,23 @@ void LayeredNetwork::horizontalMergeWith(LayeredNetwork& otherNetwork)
 		(*otherInputNeuron)->getEfferentEdges()->clear();
 	}
 
-	auto lastHiddenLayer = otherNetwork.getNeurons()->end();
-	lastHiddenLayer--; lastHiddenLayer--;
-	// 
-	for (auto otherNeuron = lastHiddenLayer->begin(); otherNeuron != lastHiddenLayer->end(); otherNeuron++)
+
+	if (otherNetwork.getLayerCount() > 2)
 	{
-		auto outputNeuron = outputNeurons.begin();
+		auto lastHiddenLayer = otherNetwork.getNeurons()->end();
+		lastHiddenLayer--; lastHiddenLayer--;
 		// 
-		for (auto edge = (*otherNeuron)->getEfferentEdges()->begin(); edge != (*otherNeuron)->getEfferentEdges()->end() && outputNeuron != outputNeurons.end(); edge++, outputNeuron++)
+		for (auto otherNeuron = lastHiddenLayer->begin(); otherNeuron != lastHiddenLayer->end(); otherNeuron++)
 		{
+			auto outputNeuron = outputNeurons.begin();
 			// 
-			(*edge)->setNextNeuron(*outputNeuron);
-			// 
-			(*outputNeuron)->addPrevNeuron(*edge);
+			for (auto edge = (*otherNeuron)->getEfferentEdges()->begin(); edge != (*otherNeuron)->getEfferentEdges()->end() && outputNeuron != outputNeurons.end(); edge++, outputNeuron++)
+			{
+				// 
+				(*edge)->setNextNeuron(*outputNeuron);
+				// 
+				(*outputNeuron)->addPrevNeuron(*edge);
+			}
 		}
 	}
 

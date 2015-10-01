@@ -18,7 +18,7 @@ class AbstractSimpleEvolutionWorld : public EvolutionWorldInterface
 protected:
 	std::vector<EvolutionObjectInterface*> objects;
 	virtual EvolutionObjectInterface* createNewObject() = 0;
-	virtual void resetWorld() = 0;
+	virtual void resetWorld() {};
 public:
 	AbstractSimpleEvolutionWorld();
 	EvolutionObjectInterface* addNewObject();

@@ -4,7 +4,7 @@
 #include "Learning\EvolutionLearningRule.hpp"
 
 TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
-	: AbstractSimpleEvolutionObject(ticTacToe_, 9, 9)
+	: AbstractSimpleEvolutionObject(ticTacToe_, 18, 9)
 {
 	ticTacToe = ticTacToe_;
 }
@@ -12,7 +12,7 @@ TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
 NeuralNetworkIO<double> TicTacToeKI::getNNInput()
 {
 	std::vector<double> sight = ticTacToe->getSight();
-	NeuralNetworkIO<double> input(9);
+	NeuralNetworkIO<double> input(18);
 	for (int i = 0; i < sight.size(); i++)
 	{
 		input.set(0, i, sight[i]);
@@ -26,7 +26,7 @@ void TicTacToeKI::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralN
 	{
 		int x = i / 3;
 		int y = i % 3;
-		if (output->get(0, i) > 0)
+		if (output->get(0, i) > 0.5)
 		{
 			ticTacToe->setField(x, y);
 			return;

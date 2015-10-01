@@ -41,7 +41,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles();
-	int getScore(EvolutionObjectInterface* object);	
+	double getScore(EvolutionObjectInterface* object);
 	AbstractTile* getTile(int posX, int posY);
 };
 

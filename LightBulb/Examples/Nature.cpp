@@ -84,7 +84,7 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 	std::cout << "Animals ate " << missingPlants << " plants" << std::endl;
 }
 
-int Nature::getScore(EvolutionObjectInterface* object)
+double Nature::getScore(EvolutionObjectInterface* object)
 {
 	return static_cast<Animal*>(object)->getStepsSurvived();
 }

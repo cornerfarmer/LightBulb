@@ -36,7 +36,7 @@ public:
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	std::vector<double> getSight();
 	void setField(int x, int y);
-	int getScore(EvolutionObjectInterface* object);	
+	double getScore(EvolutionObjectInterface* object);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
 	void rateBestKI(EvolutionLearningRule& learningRule);

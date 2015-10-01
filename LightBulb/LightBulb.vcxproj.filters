@@ -416,6 +416,12 @@
     <ClInclude Include="Examples\TicTacToeDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\Position.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\FunctionSimulator.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -785,6 +791,12 @@
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
     <ClCompile Include="Examples\TicTacToeDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\FunctionSimulator.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Position.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
   </ItemGroup>

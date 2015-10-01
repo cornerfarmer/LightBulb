@@ -12,21 +12,45 @@
 #include "Function\IdentityFunction.hpp"
 #include "Learning\EvolutionLearningRule.hpp"
 #include "Examples\AbstractTile.hpp"
+#include "Neuron\StandardNeuron.hpp"
+#include "Neuron\Edge.hpp"
 
-AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(EvolutionWorldInterface* world_, int inputDimension, int outputDimension)
+AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(EvolutionWorldInterface* world_, int inputDimension, int outputDimension, bool biasNeuron)
 {
-	RecurrentLayeredNetworkOptions options;
-
-	options.useBiasNeuron = true;
-//	options.selfConnectHiddenLayers = true;
+	LayeredNetworkOptions options;
+	if (biasNeuron) {
+		options.useBiasNeuron = true;
+	}
 	options.neuronsPerLayerCount.push_back(inputDimension);
-	options.neuronsPerLayerCount.push_back(10);
-	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(outputDimension);
-	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
+	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 
-	neuralNetwork = new NeuralNetwork(new RecurrentLayeredNetwork(options));
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5, 0.5);
+	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
+
+	int n = 0;
+	for (auto neuron = layeredNetwork->getNeurons()->front().begin(); neuron != layeredNetwork->getNeurons()->front().end(); neuron++, n++)
+	{
+		int e = 0;
+		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, e++)
+		{
+			if (n * 2 == e || n * 2 + 1 == e)
+				(*edge)->setWeight(-0.5);
+			else if (e == 18)
+				(*edge)->setWeight(0.25);
+			else
+				(*edge)->setWeight(0);
+		}
+	}
+
+	
+	neuralNetwork = new NeuralNetwork(layeredNetwork);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-1, 1);
+
+	/*NeuralNetworkIO<double> input(18);
+	input.set(0, 0, 1);
+	input.set(0, 5, 1);
+
+	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, TopologicalOrder(), 0, 1);	*/
 
 	world = world_;
 }
