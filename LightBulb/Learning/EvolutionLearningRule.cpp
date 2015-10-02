@@ -6,11 +6,14 @@
 #include "Learning\AbstractSelectionCommand.hpp"
 #include "Learning\AbstractMutationCommand.hpp"
 #include "Learning\AbstractRecombinationCommand.hpp"
+#include "Learning\AbstractExitCondition.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "NetworkTopology\LayeredNetwork.hpp"
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\Edge.hpp"
+// Library includes
+#include <iostream>
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 {
@@ -73,6 +76,16 @@ bool EvolutionLearningRule::doLearning(EvolutionWorldInterface& world)
 
 		std::unique_ptr<std::vector<std::pair<double, EvolutionObjectInterface*>>> highscore = world.getHighscoreList();
 		std::vector<EvolutionObjectInterface*> newObjectVector;
+
+		bool exit = true;
+		for (auto exitCondition = options->exitConditions.begin(); exitCondition != options->exitConditions.end(); exitCondition++)
+		{
+			exit &= (*exitCondition)->evaluate(highscore.get());
+		}
+		if (exit) {
+			std::cout << "All conditions are true => exit" << std::endl;
+			break;
+		}
 
 		for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 		{

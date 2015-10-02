@@ -75,6 +75,7 @@
     <ClInclude Include="Graphics\SOMMappingChart.hpp" />
     <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp" />
     <ClInclude Include="Learning\AbstractCreationCommand.hpp" />
+    <ClInclude Include="Learning\AbstractExitCondition.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
     <ClInclude Include="Learning\AbstractMutationCommand.hpp" />
     <ClInclude Include="Learning\AbstractRecombinationCommand.hpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="Learning\LVQ2LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ3LearningRule.hpp" />
     <ClInclude Include="Learning\OLVQ1LearningRule.hpp" />
+    <ClInclude Include="Learning\RateDifferenceCondition.hpp" />
     <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp" />
     <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp" />
     <ClInclude Include="Learning\ResilientLearningRateHelper.hpp" />
@@ -201,6 +203,7 @@
     <ClCompile Include="Graphics\SOMMappingChart.cpp" />
     <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp" />
     <ClCompile Include="Learning\AbstractCreationCommand.cpp" />
+    <ClCompile Include="Learning\AbstractExitCondition.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractMutationCommand.cpp" />
     <ClCompile Include="Learning\AbstractRecombinationCommand.cpp" />
@@ -224,6 +227,7 @@
     <ClCompile Include="Learning\LVQ2LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ3LearningRule.cpp" />
     <ClCompile Include="Learning\OLVQ1LearningRule.cpp" />
+    <ClCompile Include="Learning\RateDifferenceCondition.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp" />
     <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp" />
     <ClCompile Include="Learning\ResilientLearningRateHelper.cpp" />

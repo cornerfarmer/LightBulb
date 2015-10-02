@@ -13,9 +13,11 @@ class AbstractCreationCommand;
 class AbstractSelectionCommand;
 class AbstractMutationCommand;
 class AbstractRecombinationCommand;
+class AbstractExitCondition;
 
 struct EvolutionLearningRuleOptions
 {
+	std::vector<AbstractExitCondition*> exitConditions;
 	std::vector<AbstractCreationCommand*> creationCommands;
 	std::vector<AbstractSelectionCommand*> selectionCommands;
 	std::vector<AbstractMutationCommand*> mutationsCommands;

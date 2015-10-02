@@ -73,6 +73,7 @@
 #include "Examples\TicTacToe.hpp"
 #include "Examples\FunctionSimulator.hpp"
 #include "Examples\Position.hpp"
+#include "Learning\RateDifferenceCondition.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1675,6 +1676,7 @@ void doFunctionEvolutionTest()
 	FunctionSimulator simulator;
 
 	EvolutionLearningRuleOptions options;
+	options.exitConditions.push_back(new RateDifferenceCondition(0.0001, 100));
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(23));

@@ -4,6 +4,7 @@
 #include "Learning\EvolutionObjectInterface.hpp"
 //Library includes
 #include <iostream>
+#include <iomanip>
 
 BestSelectionCommand::BestSelectionCommand(int objectCount_)
 {
@@ -18,7 +19,7 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, EvolutionObject
 	for (auto entry = highscore->begin(); entry != highscore->end() && entryIndex < objectCount; entry++, entryIndex++)
 	{
 		newObjectVector->push_back(entry->second->clone());
-		std::cout << (int)entry->first << ", ";		
+		std::cout << std::fixed << std::setprecision(7) << entry->first << ", ";
 	}
 
 	std::cout << std::endl;
