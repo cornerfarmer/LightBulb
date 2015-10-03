@@ -18,8 +18,8 @@ private:
 	int objectCount;
 	RankBasedRandomFunction rankBasedRandomFunction;
 public:
-	ConstantRecombinationCommand(int objectCount_);
-	void execute(EvolutionLearningRule* learningRule, std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector);
+	ConstantRecombinationCommand(AbstractRecombination* recombination, int objectCount_);
+	void execute(std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector);
 };
 
 #endif

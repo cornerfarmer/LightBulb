@@ -20,8 +20,10 @@ class AbstractSimpleEvolutionObject : public EvolutionObjectInterface
 {
 private:
 protected:
+	std::vector<double> mutationStrength;
 	NeuralNetwork* neuralNetwork;
 	EvolutionWorldInterface* world;
+	void randomizeMutationStrength();
 	virtual NeuralNetworkIO<double> getNNInput() = 0;
 	virtual void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output) = 0;
 public:	
@@ -31,5 +33,6 @@ public:
 	NeuralNetwork* getNeuralNetwork();
 	void resetNN();
 	EvolutionObjectInterface* clone();
+	std::vector<double>* getMutationStrength();
 };
 #endif

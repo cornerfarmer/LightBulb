@@ -78,6 +78,7 @@
     <ClInclude Include="Learning\AbstractExitCondition.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
     <ClInclude Include="Learning\AbstractMutationCommand.hpp" />
+    <ClInclude Include="Learning\AbstractRecombination.hpp" />
     <ClInclude Include="Learning\AbstractRecombinationCommand.hpp" />
     <ClInclude Include="Learning\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\AbstractSimpleEvolutionObject.hpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
     <ClInclude Include="Learning\EvolutionLearningRule.hpp" />
     <ClInclude Include="Learning\EvolutionObjectInterface.hpp" />
+    <ClInclude Include="Learning\EvolutionStrategyRecombination.hpp" />
     <ClInclude Include="Learning\EvolutionWorldInterface.hpp" />
     <ClInclude Include="Learning\HopfieldLearningRule.hpp" />
     <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
@@ -206,6 +208,7 @@
     <ClCompile Include="Learning\AbstractExitCondition.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractMutationCommand.cpp" />
+    <ClCompile Include="Learning\AbstractRecombination.cpp" />
     <ClCompile Include="Learning\AbstractRecombinationCommand.cpp" />
     <ClCompile Include="Learning\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\AbstractSimpleEvolutionObject.cpp" />
@@ -221,6 +224,7 @@
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
     <ClCompile Include="Learning\EvolutionLearningRule.cpp" />
     <ClCompile Include="Learning\EvolutionObjectInterface.cpp" />
+    <ClCompile Include="Learning\EvolutionStrategyRecombination.cpp" />
     <ClCompile Include="Learning\EvolutionWorldInterface.cpp" />
     <ClCompile Include="Learning\HopfieldLearningRule.cpp" />
     <ClCompile Include="Learning\LVQ1LearningRule.cpp" />

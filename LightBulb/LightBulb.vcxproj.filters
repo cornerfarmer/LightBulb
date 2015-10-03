@@ -428,6 +428,12 @@
     <ClInclude Include="Learning\RateDifferenceCondition.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\EvolutionStrategyRecombination.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractRecombination.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -809,6 +815,12 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\RateDifferenceCondition.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\EvolutionStrategyRecombination.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractRecombination.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
   </ItemGroup>

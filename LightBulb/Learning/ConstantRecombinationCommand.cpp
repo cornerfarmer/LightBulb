@@ -8,12 +8,13 @@
 //Library includes
 #include <iostream>
 
-ConstantRecombinationCommand::ConstantRecombinationCommand(int objectCount_)
+ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombination* recombination, int objectCount_)
+	: AbstractRecombinationCommand(recombination)
 {
 	objectCount = objectCount_;
 }
 
-void ConstantRecombinationCommand::execute(EvolutionLearningRule* learningRule, std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector)
+void ConstantRecombinationCommand::execute(std::vector<std::pair<double, EvolutionObjectInterface*>>* highscore, std::vector<EvolutionObjectInterface*>* newObjectVector)
 {
 	std::cout << "Recombinated " << objectCount << " random ones" << std::endl;
 	
@@ -24,7 +25,7 @@ void ConstantRecombinationCommand::execute(EvolutionLearningRule* learningRule, 
 		int recombinationnIndex2 = rankBasedRandomFunction.execute(highscore->size());
 		newObjectVector->push_back((*highscore)[recombinationnIndex1].second->clone());
 		EvolutionObjectInterface* secondClone = (*highscore)[recombinationnIndex2].second->clone();
-		learningRule->doRecombination(newObjectVector->back(), secondClone);
+		recombination->execute(newObjectVector->back(), secondClone);
 	}
 
 }

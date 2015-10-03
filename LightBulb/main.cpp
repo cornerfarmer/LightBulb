@@ -74,6 +74,7 @@
 #include "Examples\FunctionSimulator.hpp"
 #include "Examples\Position.hpp"
 #include "Learning\RateDifferenceCondition.hpp"
+#include "Learning\EvolutionStrategyRecombination.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1615,7 +1616,7 @@ void doEvolutionTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(9));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new EvolutionStrategyRecombination(), 9));
 
 	EvolutionLearningRule learningRule(options);
 
@@ -1680,7 +1681,7 @@ void doFunctionEvolutionTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(9));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new EvolutionStrategyRecombination(), 9));
 
 	EvolutionLearningRule learningRule(options);
 

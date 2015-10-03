@@ -53,6 +53,23 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(EvolutionWorldInter
 	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, TopologicalOrder(), 0, 1);	*/
 
 	world = world_;
+
+	mutationStrength.resize(neuralNetwork->getNetworkTopology()->getEdgeCount());
+
+	randomizeMutationStrength();
+}
+
+void AbstractSimpleEvolutionObject::randomizeMutationStrength()
+{
+	for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++) 
+	{
+		*mutationStrengthValue = (float)rand() / RAND_MAX * 2 - 1;
+	}
+}
+
+std::vector<double>* AbstractSimpleEvolutionObject::getMutationStrength()
+{
+	return &mutationStrength;
 }
 
 NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
