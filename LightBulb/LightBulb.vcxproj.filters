@@ -42,6 +42,12 @@
     <Filter Include="Quelldateien\Examples">
       <UniqueIdentifier>{56971003-78c0-48eb-90c8-ff0587fb1275}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Learning\Evolution">
+      <UniqueIdentifier>{60c39e0e-ff9c-44f2-9640-7865c9a69dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Evolution\EvolutionStrategy">
+      <UniqueIdentifier>{3570f652-a4bb-44a6-b6c4-e3dee7583104}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
@@ -347,35 +353,14 @@
     <ClInclude Include="Learning\HopfieldLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\EvolutionLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\EvolutionWorldInterface.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\EvolutionObjectInterface.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\Animal.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\Nature.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\AbstractCreationCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\ConstantCreationCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\NatureDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\AbstractSelectionCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\BestSelectionCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Examples\AbstractTile.hpp">
       <Filter>Quelldateien\Examples</Filter>
@@ -388,24 +373,6 @@
     </ClInclude>
     <ClInclude Include="Function\RankBasedRandomFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\AbstractMutationCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\ConstantMutationCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\AbstractRecombinationCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\ConstantRecombinationCommand.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\AbstractSimpleEvolutionWorld.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\AbstractSimpleEvolutionObject.hpp">
-      <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TicTacToeKI.hpp">
       <Filter>Quelldateien\Examples</Filter>
@@ -422,17 +389,56 @@
     <ClInclude Include="Examples\FunctionSimulator.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\AbstractExitCondition.hpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\RateDifferenceCondition.hpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\EvolutionStrategyRecombination.hpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\AbstractRecombination.hpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantMutationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantRecombinationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -733,15 +739,6 @@
     <ClCompile Include="Learning\HopfieldLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\EvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\EvolutionWorldInterface.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\EvolutionObjectInterface.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
@@ -751,20 +748,8 @@
     <ClCompile Include="Examples\Animal.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\AbstractCreationCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\ConstantCreationCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\NatureDrawer.cpp">
       <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\AbstractSelectionCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\BestSelectionCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Examples\AbstractTile.cpp">
       <Filter>Quelldateien\Examples</Filter>
@@ -777,24 +762,6 @@
     </ClCompile>
     <ClCompile Include="Function\RankBasedRandomFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\AbstractMutationCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\ConstantMutationCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\AbstractRecombinationCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\ConstantRecombinationCommand.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\AbstractSimpleEvolutionWorld.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\AbstractSimpleEvolutionObject.cpp">
-      <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Examples\TicTacToeKI.cpp">
       <Filter>Quelldateien\Examples</Filter>
@@ -811,17 +778,56 @@
     <ClCompile Include="Examples\Position.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\AbstractExitCondition.cpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\RateDifferenceCondition.cpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\EvolutionStrategyRecombination.cpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\AbstractRecombination.cpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantMutationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

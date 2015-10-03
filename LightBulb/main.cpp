@@ -65,16 +65,16 @@
 #include "ActivationOrder\AsynchronousOrder.hpp"
 #include "Learning\HopfieldLearningRule.hpp"
 #include "Examples\Nature.hpp"
-#include "Learning\EvolutionLearningRule.hpp"
-#include "Learning\ConstantCreationCommand.hpp"
-#include "Learning\BestSelectionCommand.hpp"
-#include "Learning\ConstantMutationCommand.hpp"
-#include "Learning\ConstantRecombinationCommand.hpp"
+#include "Learning\Evolution\EvolutionLearningRule.hpp"
+#include "Learning\Evolution\ConstantCreationCommand.hpp"
+#include "Learning\Evolution\BestSelectionCommand.hpp"
+#include "Learning\Evolution\ConstantMutationCommand.hpp"
+#include "Learning\Evolution\ConstantRecombinationCommand.hpp"
 #include "Examples\TicTacToe.hpp"
 #include "Examples\FunctionSimulator.hpp"
 #include "Examples\Position.hpp"
-#include "Learning\RateDifferenceCondition.hpp"
-#include "Learning\EvolutionStrategyRecombination.hpp"
+#include "Learning\Evolution\RateDifferenceCondition.hpp"
+#include "Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1616,7 +1616,7 @@ void doEvolutionTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new EvolutionStrategyRecombination(), 9));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
 
 	EvolutionLearningRule learningRule(options);
 
@@ -1681,7 +1681,7 @@ void doFunctionEvolutionTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new EvolutionStrategyRecombination(), 9));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
 
 	EvolutionLearningRule learningRule(options);
 

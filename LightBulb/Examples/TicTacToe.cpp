@@ -1,14 +1,14 @@
 // Includes
 #include "Examples\TicTacToe.hpp"
 #include "Examples\TicTacToeKI.hpp"
-#include "Learning\EvolutionObjectInterface.hpp"
+#include "Learning\Evolution\AbstractEvolutionObject.hpp"
 //Library includes
 #include <iostream>
 
 #define RANDOM_KI true
 
 
-EvolutionObjectInterface* TicTacToe::createNewObject()
+AbstractEvolutionObject* TicTacToe::createNewObject()
 {
 	return new TicTacToeKI(this);
 }
@@ -224,7 +224,7 @@ void TicTacToe::setField(int x, int y)
 		fields[x][y] = currentPlayer;
 }
 
-double TicTacToe::getScore(EvolutionObjectInterface* object)
+double TicTacToe::getScore(AbstractEvolutionObject* object)
 {
 	return points[static_cast<TicTacToeKI*>(object)];
 }

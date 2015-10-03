@@ -8,21 +8,21 @@
 #include <map>
 
 // Include
-#include "Learning\AbstractSimpleEvolutionWorld.hpp"
+#include "Learning\Evolution\AbstractSimpleEvolutionWorld.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
-class EvolutionObjectInterface;
+class AbstractEvolutionObject;
 class AbstractTile;
 
 class FunctionSimulator : public AbstractSimpleEvolutionWorld
 {
 protected:
-	EvolutionObjectInterface* createNewObject();
+	AbstractEvolutionObject* createNewObject();
 public:
 	FunctionSimulator();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
-	double getScore(EvolutionObjectInterface* object);
+	double getScore(AbstractEvolutionObject* object);
 };
 
 #endif

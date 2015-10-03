@@ -8,13 +8,13 @@
 #include <SFML\Graphics.hpp>
 
 // Include
-#include "Learning\AbstractSimpleEvolutionWorld.hpp"
+#include "Learning\Evolution\AbstractSimpleEvolutionWorld.hpp"
 #include "Examples\NatureDrawer.hpp"
 #include "Examples\AbstractTile.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
-class EvolutionObjectInterface;
+class AbstractEvolutionObject;
 class Animal;
 class AbstractTile;
 
@@ -29,7 +29,7 @@ protected:
 	std::unique_ptr<NatureDrawer> drawer;
 	int missingPlants;	
 	bool displayMode;
-	EvolutionObjectInterface* createNewObject();
+	AbstractEvolutionObject* createNewObject();
 	void resetWorld();
 public:
 	Nature();
@@ -41,7 +41,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles();
-	double getScore(EvolutionObjectInterface* object);
+	double getScore(AbstractEvolutionObject* object);
 	AbstractTile* getTile(int posX, int posY);
 };
 

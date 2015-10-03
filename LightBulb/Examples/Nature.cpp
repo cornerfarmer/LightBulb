@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-EvolutionObjectInterface* Nature::createNewObject()
+AbstractEvolutionObject* Nature::createNewObject()
 {
 	int posX = 0;
 	int posY = 0;
@@ -84,7 +84,7 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 	std::cout << "Animals ate " << missingPlants << " plants" << std::endl;
 }
 
-double Nature::getScore(EvolutionObjectInterface* object)
+double Nature::getScore(AbstractEvolutionObject* object)
 {
 	return static_cast<Animal*>(object)->getStepsSurvived();
 }

@@ -9,12 +9,12 @@
 #include <SFML\Graphics.hpp>
 
 // Include
-#include "Learning\AbstractSimpleEvolutionWorld.hpp"
+#include "Learning\Evolution\AbstractSimpleEvolutionWorld.hpp"
 #include "Examples\TicTacToeDrawer.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
-class EvolutionObjectInterface;
+class AbstractEvolutionObject;
 class TicTacToeKI;
 class AbstractTile;
 
@@ -23,7 +23,7 @@ class TicTacToe : public AbstractSimpleEvolutionWorld
 protected:
 	std::vector<std::vector<int>> fields;	
 	std::map<TicTacToeKI*, int> points;
-	EvolutionObjectInterface* createNewObject();
+	AbstractEvolutionObject* createNewObject();
 	sf::RenderWindow window;
 	std::unique_ptr<TicTacToeDrawer> drawer;
 	void resetWorld();
@@ -36,7 +36,7 @@ public:
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	std::vector<double> getSight();
 	void setField(int x, int y);
-	double getScore(EvolutionObjectInterface* object);
+	double getScore(AbstractEvolutionObject* object);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
 	void rateBestKI(EvolutionLearningRule& learningRule);

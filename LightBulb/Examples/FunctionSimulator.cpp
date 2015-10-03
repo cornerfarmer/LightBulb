@@ -1,11 +1,11 @@
 // Includes
 #include "Examples\FunctionSimulator.hpp"
 #include "Examples\Position.hpp"
-#include "Learning\EvolutionObjectInterface.hpp"
+#include "Learning\Evolution\AbstractEvolutionObject.hpp"
 //Library includes
 #include <iostream>
 
-EvolutionObjectInterface* FunctionSimulator::createNewObject()
+AbstractEvolutionObject* FunctionSimulator::createNewObject()
 {
 	return new Position(this);
 }
@@ -23,7 +23,7 @@ void FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
 	}
 }
 
-double FunctionSimulator::getScore(EvolutionObjectInterface* object)
+double FunctionSimulator::getScore(AbstractEvolutionObject* object)
 {
 	std::vector<float> pos = static_cast<Position*>(object)->getPosition();
 	return -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4));

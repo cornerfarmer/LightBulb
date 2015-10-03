@@ -2,7 +2,7 @@
 #include "Examples\Animal.hpp"
 #include "Examples\Nature.hpp"
 #include "ActivationOrder\TopologicalOrder.hpp"
-#include "Learning\EvolutionLearningRule.hpp"
+#include "Learning\Evolution\EvolutionLearningRule.hpp"
 #include "Examples\AbstractTile.hpp"
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)

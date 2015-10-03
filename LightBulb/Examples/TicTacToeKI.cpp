@@ -1,7 +1,7 @@
 // Includes
 #include "Examples\TicTacToeKI.hpp"
 #include "Examples\TicTacToe.hpp"
-#include "Learning\EvolutionLearningRule.hpp"
+#include "Learning\Evolution\EvolutionLearningRule.hpp"
 
 TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_, 18, 9)
