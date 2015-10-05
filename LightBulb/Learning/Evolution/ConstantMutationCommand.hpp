@@ -18,8 +18,8 @@ private:
 	int objectCount;
 	RankBasedRandomFunction rankBasedRandomFunction;
 public:
-	ConstantMutationCommand(int objectCount_);
-	void execute(EvolutionLearningRule* learningRule, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
+	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, int objectCount_);
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
 };
 
 #endif

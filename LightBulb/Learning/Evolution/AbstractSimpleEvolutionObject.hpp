@@ -34,5 +34,6 @@ public:
 	void resetNN();
 	AbstractEvolutionObject* clone();
 	std::vector<double>* getMutationStrength();
+	void setMutationStrength(std::vector<double>* newMutationStrength);
 };
 #endif

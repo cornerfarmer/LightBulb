@@ -6,12 +6,13 @@
 //Library includes
 #include <iostream>
 
-ConstantMutationCommand::ConstantMutationCommand(int objectCount_)
+ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, int objectCount_)
+	: AbstractMutationCommand(mutationAlgorithm_)
 {
 	objectCount = objectCount_;
 }
 
-void ConstantMutationCommand::execute(EvolutionLearningRule* learningRule, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
+void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
 	std::cout << "Mutated " << objectCount << " random ones" << std::endl;
 	
@@ -20,6 +21,6 @@ void ConstantMutationCommand::execute(EvolutionLearningRule* learningRule, std::
 	{
 		int mutationIndex = rankBasedRandomFunction.execute(highscore->size());
 		newObjectVector->push_back((*highscore)[mutationIndex].second->clone());
-		learningRule->doMutation(*newObjectVector->back());
+		mutationAlgorithm->execute(newObjectVector->back());
 	}
 }

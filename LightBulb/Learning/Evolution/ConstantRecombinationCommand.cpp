@@ -8,8 +8,8 @@
 //Library includes
 #include <iostream>
 
-ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombination, int objectCount_)
-	: AbstractRecombinationCommand(recombination)
+ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, int objectCount_)
+	: AbstractRecombinationCommand(recombinationAlgorithm_)
 {
 	objectCount = objectCount_;
 }
@@ -25,7 +25,7 @@ void ConstantRecombinationCommand::execute(std::vector<std::pair<double, Abstrac
 		int recombinationnIndex2 = rankBasedRandomFunction.execute(highscore->size());
 		newObjectVector->push_back((*highscore)[recombinationnIndex1].second->clone());
 		AbstractEvolutionObject* secondClone = (*highscore)[recombinationnIndex2].second->clone();
-		recombination->execute(newObjectVector->back(), secondClone);
+		recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
 	}
 
 }

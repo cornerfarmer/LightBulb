@@ -21,5 +21,6 @@ public:
 	virtual ~AbstractEvolutionObject() {};
 	virtual AbstractEvolutionObject* clone() = 0;
 	virtual std::vector<double>* getMutationStrength() = 0;
+	virtual void setMutationStrength(std::vector<double>* newMutationStrength) = 0;
 };
 #endif

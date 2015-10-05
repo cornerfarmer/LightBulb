@@ -440,6 +440,12 @@
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -828,6 +834,12 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

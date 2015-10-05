@@ -17,9 +17,9 @@ class EvolutionLearningRule;
 class AbstractRecombinationCommand
 {
 protected:
-	std::unique_ptr<AbstractRecombinationAlgorithm> recombination;
+	std::unique_ptr<AbstractRecombinationAlgorithm> recombinationAlgorithm;
 public:
-	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombination_);
+	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_);
 	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector) = 0;
 };
 

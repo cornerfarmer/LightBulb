@@ -82,6 +82,7 @@
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="Learning\Evolution\ConstantRecombinationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp" />
+    <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp" />
@@ -212,6 +214,7 @@
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp" />
@@ -224,6 +227,7 @@
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp" />
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp" />

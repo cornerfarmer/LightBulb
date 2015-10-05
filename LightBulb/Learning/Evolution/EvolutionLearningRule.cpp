@@ -94,7 +94,7 @@ bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 
 		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
 		{
-			(*mutationCommand)->execute(this, highscore.get(), &newObjectVector);
+			(*mutationCommand)->execute(highscore.get(), &newObjectVector);
 		}
 
 		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)

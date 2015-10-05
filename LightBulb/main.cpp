@@ -75,6 +75,7 @@
 #include "Examples\Position.hpp"
 #include "Learning\Evolution\RateDifferenceCondition.hpp"
 #include "Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp"
+#include "Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1615,7 +1616,7 @@ void doEvolutionTest()
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
 
 	EvolutionLearningRule learningRule(options);
@@ -1664,7 +1665,7 @@ void doTicTacToeTest()
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(25));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 25));
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule learningRule(options);
@@ -1677,10 +1678,10 @@ void doFunctionEvolutionTest()
 	FunctionSimulator simulator;
 
 	EvolutionLearningRuleOptions options;
-	options.exitConditions.push_back(new RateDifferenceCondition(0.0001, 100));
+	options.exitConditions.push_back(new RateDifferenceCondition(0.0001, 10000));
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(23));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
 
 	EvolutionLearningRule learningRule(options);

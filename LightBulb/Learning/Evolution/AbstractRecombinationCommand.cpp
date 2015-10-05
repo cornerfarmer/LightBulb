@@ -2,6 +2,6 @@
 #include "Learning\Evolution\AbstractRecombinationCommand.hpp"
 
 
-AbstractRecombinationCommand::AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombination_) {
-	recombination.reset(recombination_);
+AbstractRecombinationCommand::AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_) {
+	recombinationAlgorithm.reset(recombinationAlgorithm_);
 }

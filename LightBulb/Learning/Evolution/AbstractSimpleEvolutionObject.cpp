@@ -44,7 +44,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 
 	
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-1, 1);
+	//neuralNetwork->getNetworkTopology()->randomizeWeights(-1, 1);
 
 	/*NeuralNetworkIO<double> input(18);
 	input.set(0, 0, 1);
@@ -63,13 +63,18 @@ void AbstractSimpleEvolutionObject::randomizeMutationStrength()
 {
 	for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++) 
 	{
-		*mutationStrengthValue = (float)rand() / RAND_MAX * 2 - 1;
+		*mutationStrengthValue = (float)rand() / RAND_MAX * 0.2 - 0.1;
 	}
 }
 
 std::vector<double>* AbstractSimpleEvolutionObject::getMutationStrength()
 {
 	return &mutationStrength;
+}
+
+void AbstractSimpleEvolutionObject::setMutationStrength(std::vector<double>* newMutationStrength)
+{
+	mutationStrength = *newMutationStrength;
 }
 
 NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
@@ -101,5 +106,6 @@ AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone()
 {
 	AbstractEvolutionObject* newObject = world->addNewObject();
 	newObject->getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*neuralNetwork->getNetworkTopology());
+	newObject->setMutationStrength(getMutationStrength());
 	return newObject;
 }
