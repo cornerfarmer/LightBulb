@@ -6,21 +6,25 @@
 #include "Neuron\StandardNeuron.hpp"
 #include "Neuron\Edge.hpp"
 #include <math.h>
-#include <random>
+
+
+MutationAlgorithm::MutationAlgorithm()
+{
+	distribution = std::normal_distribution<double>(0, 1);
+}
 
 void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 {
 	std::vector<double>* mutationStrength = object1->getMutationStrength();
-	std::default_random_engine generator;
-	std::normal_distribution<double> distribution(0, 1.0);
 
 	for (auto mutationStrengthValue = mutationStrength->begin(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
 	{
-		*mutationStrengthValue *= exp(0.1 * distribution(generator));
+		*mutationStrengthValue *= exp(0.4 * distribution(generator));
+		if ((double)rand() / RAND_MAX > 0.9)
+			*mutationStrengthValue *= -1;
 	}
 
-	auto neurons = object1->getNeuralNetwork()->getNetworkTopology()->getNeurons();
-	
+	auto neurons = object1->getNeuralNetwork()->getNetworkTopology()->getNeurons();	
 	int mutationStrengthIndex = 0;
 	for (auto layer = neurons->begin(); layer != neurons->end(); layer++)
 	{		

@@ -1678,7 +1678,7 @@ void doFunctionEvolutionTest()
 	FunctionSimulator simulator;
 
 	EvolutionLearningRuleOptions options;
-	options.exitConditions.push_back(new RateDifferenceCondition(0.0001, 10000));
+	options.exitConditions.push_back(new RateDifferenceCondition(0.0001, 100));
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
