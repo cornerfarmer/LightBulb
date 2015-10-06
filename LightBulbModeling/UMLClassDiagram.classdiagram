@@ -3216,6 +3216,192 @@
               </generalsInternal>
             </class>
           </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="e79afb71-5eb8-4db8-bd8b-ff0d85a720be" name="Evolution">
+              <elementDefinition Id="c4cdd470-ac3b-4354-948d-2833c5202638" />
+              <packagedElements>
+                <packageHasNamedElement>
+                  <class Id="dd411da2-ea8f-472d-875b-ab907bda82b3" name="EvolutionLearningRule" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="d69e180e-1a6b-44cd-8600-bb664f7dce10" />
+                    <ownedOperationsInternal>
+                      <operation Id="ac61f693-07c0-49f8-b0dc-f6ce6d661453" name="doLearning" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                        <elementDefinition Id="c0713c48-3f06-4362-b31d-bc6ed3374444" />
+                        <ownedParameters>
+                          <operationHasOwnedParameters>
+                            <parameter Id="cec6b5d9-23c6-495b-afa9-88d2900ea64b" name="world" direction="In" isUnique="false">
+                              <elementDefinition Id="dcd1f4f8-a1dd-4ba5-bd79-a5a0ac9db6af" />
+                              <type_NamedElement>
+                                <referencedTypeMoniker Id="731c25a4-ee09-4e3d-9cbe-38e98b86eb75" LastKnownName="AbstractEvolutionWorld" />
+                              </type_NamedElement>
+                            </parameter>
+                          </operationHasOwnedParameters>
+                          <operationHasOwnedParameters>
+                            <parameter Id="a7595eb2-3144-4882-9c57-44f3dd097c7a" direction="Return" isUnique="false">
+                              <elementDefinition Id="aa0fde2b-e697-4659-8ada-e75e93edc9ec" />
+                              <type_NamedElement>
+                                <referencedTypeMoniker Id="cc8fa7da-0025-470b-9c22-74fe061847b1" LastKnownName="void" />
+                              </type_NamedElement>
+                            </parameter>
+                          </operationHasOwnedParameters>
+                        </ownedParameters>
+                      </operation>
+                    </ownedOperationsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="cee5b819-13e9-4edd-a5a7-8bb39cd4b909" name="AbstractEvolutionWorld" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="0acee593-f141-4dc6-9f88-9b0142877c59" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="8eca4ee0-37a0-4cc0-9194-4e104fc6d923" name="AbstractEvolutionObject" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="83b6a62c-179d-4714-b808-8a5e581f3d9e" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="18913fe7-fcce-4a4e-be58-29475289fa51" name="AbstractSimpleEvolutionWorld" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="62fa0c5a-f784-484d-a16b-75689e3f2a1c" />
+                    <generalsInternal>
+                      <generalization Id="6c099ff6-82ee-43f4-85af-a3b8a7382d4b" isSubstitutable="false">
+                        <classMoniker Id="cee5b819-13e9-4edd-a5a7-8bb39cd4b909" LastKnownName="AbstractEvolutionWorld" />
+                        <elementDefinition Id="02babe0d-eb17-43f1-8877-70130c81a09e" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="8700807f-3a26-4981-85e2-3b7e4b8e5820" name="AbstractSimpleEvolutionObject" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="b9a1b151-feeb-406e-b127-ec42469ce77b" />
+                    <generalsInternal>
+                      <generalization Id="4eeef651-7975-4c19-b6a2-65332ff1f608" isSubstitutable="false">
+                        <classMoniker Id="8eca4ee0-37a0-4cc0-9194-4e104fc6d923" LastKnownName="AbstractEvolutionObject" />
+                        <elementDefinition Id="0ab29f9e-ba59-4ef7-891c-e661bb04d0b7" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="ae37db09-b473-452a-bf82-af9ec54b6716" name="AbstractCreationCommand" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="14adabcf-7b85-4b6c-99a8-4586e56273d7" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="d7f808eb-0fa3-4e26-8837-fe06bb241d98" name="AbstractSelectionCommand" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="e244c25e-f55b-49c8-82a4-5a5b68cdbdea" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="6e2d490b-f204-41ff-a98a-82c8b8758eab" name="AbstractRecombinationCommand" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="4df30d0f-ce1c-4ab6-bbd0-a0a957161e45" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="b8bc6ee0-6288-44b6-8e2e-ac13c420101c" name="AbstractMutationCommand" isAbstract="true" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="a874c466-df53-4f19-b571-f38a68523f90" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="da3a22e5-9d49-4c88-8eaf-25c4ea874da3" name="AbstractExitCondition" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="df9fa106-09f7-4b54-9a74-4e3497eaeec2" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="550cd803-d6e0-4b3a-855d-61b1c0d21903" name="ConstantCreationCommand" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="afed165d-b3b3-41f4-b2ab-ada033fd1432" />
+                    <generalsInternal>
+                      <generalization Id="7bafeab2-5d06-4753-bf6f-d57a635a0a43" isSubstitutable="false">
+                        <classMoniker Id="ae37db09-b473-452a-bf82-af9ec54b6716" LastKnownName="AbstractCreationCommand" />
+                        <elementDefinition Id="8a979105-f3ae-4c71-817f-253a169b1ffa" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="675e2ce1-2558-42b6-99dd-c98e43b208b2" name="BestSelectionCommand" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="7a05c459-d2e8-4e78-9136-a60e2740a2e2" />
+                    <generalsInternal>
+                      <generalization Id="bf4accd4-d8f5-4ae1-a5a9-9658720b808b" isSubstitutable="false">
+                        <classMoniker Id="d7f808eb-0fa3-4e26-8837-fe06bb241d98" LastKnownName="AbstractSelectionCommand" />
+                        <elementDefinition Id="3c5039db-aa0b-4b2b-90a4-8057339a07e5" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="1c2bb8d7-c163-4600-8cc1-29c5c6546a75" name="ConstantRecombinationCommand" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="ca780e63-787c-46fe-9754-3158be6fc313" />
+                    <generalsInternal>
+                      <generalization Id="1c75ceee-997a-4468-968a-9270ca8174c5" isSubstitutable="false">
+                        <classMoniker Id="6e2d490b-f204-41ff-a98a-82c8b8758eab" LastKnownName="AbstractRecombinationCommand" />
+                        <elementDefinition Id="095afbd4-587d-461a-8726-7be8bcbfff70" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="df3e015b-f33f-4aa7-abcd-20e02687f05f" name="ConstantMutationCommand" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="0c036562-b80e-42da-8933-67e7f6f00e1d" />
+                    <generalsInternal>
+                      <generalization Id="04557739-d877-47a7-b550-31397973d289" isSubstitutable="false">
+                        <classMoniker Id="b8bc6ee0-6288-44b6-8e2e-ac13c420101c" LastKnownName="AbstractMutationCommand" />
+                        <elementDefinition Id="69bf7ddd-caf2-4e16-bb88-470607260a28" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="4f365b82-bd0a-4ddd-b0ef-66d6b93b9fb9" name="RateDifferenceCondition" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="dc441c91-c322-4f57-84a6-991ddb8ac1c8" />
+                    <generalsInternal>
+                      <generalization Id="d8c4c94b-a463-4651-bd6a-9f447a6fce64" isSubstitutable="false">
+                        <classMoniker Id="da3a22e5-9d49-4c88-8eaf-25c4ea874da3" LastKnownName="AbstractExitCondition" />
+                        <elementDefinition Id="f3961d66-a338-4bd8-a897-1cd54c211b3d" />
+                      </generalization>
+                    </generalsInternal>
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="5208b5fc-a067-4ea4-964c-37a4d2fe8c61" name="AbstractMutationAlgorithm" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="9d3bc080-48c1-40e4-bea1-3645988f2aaa" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <class Id="d3da485a-75b6-426f-b69e-8828fca166ae" name="AbstractRecombinationAlgorithm" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="38cbc5b5-ad5e-420a-a292-c2e382bf3c0b" />
+                  </class>
+                </packageHasNamedElement>
+                <packageHasNamedElement>
+                  <package Id="d207cbb2-f311-4489-bdfa-c87cfe9ba22e" name="EvolutionStrategy">
+                    <elementDefinition Id="8a28a6b9-eb71-4e4d-b386-1cb353d48dfe" />
+                    <packagedElements>
+                      <packageHasNamedElement>
+                        <class Id="e0f2eab6-cb7e-4d2c-b431-36f5f0cfa54b" name="MutationAlgorithm" isAbstract="false" isLeaf="false" isActiveClass="false">
+                          <elementDefinition Id="c30fb6d9-8aa6-416e-8095-5193aed53561" />
+                          <generalsInternal>
+                            <generalization Id="58cc1a7c-c014-4aa0-aa09-078eb5ee9fb6" isSubstitutable="false">
+                              <classMoniker Id="5208b5fc-a067-4ea4-964c-37a4d2fe8c61" LastKnownName="AbstractMutationAlgorithm" />
+                              <elementDefinition Id="6892a7fd-f230-4acf-86bf-e56a6f0e88c0" />
+                            </generalization>
+                          </generalsInternal>
+                        </class>
+                      </packageHasNamedElement>
+                      <packageHasNamedElement>
+                        <class Id="c3162a49-7c17-4335-84e6-ffadc49a6cd3" name="RecombinationAlgorithm" isAbstract="false" isLeaf="false" isActiveClass="false">
+                          <elementDefinition Id="20682420-fa13-4233-b876-b1b5b3ab814c" />
+                          <generalsInternal>
+                            <generalization Id="6942fac5-302d-4fa0-b13f-853ed1f4448e" isSubstitutable="false">
+                              <classMoniker Id="d3da485a-75b6-426f-b69e-8828fca166ae" LastKnownName="AbstractRecombinationAlgorithm" />
+                              <elementDefinition Id="0b800f81-8b73-40ac-b53b-698a9a27c182" />
+                            </generalization>
+                          </generalsInternal>
+                        </class>
+                      </packageHasNamedElement>
+                    </packagedElements>
+                  </package>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
@@ -3937,6 +4123,16 @@
     <packageHasNamedElement>
       <referencedType Id="53ee496d-412c-4714-ba79-9b51c633217b" name="LayeredNetwork" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::LayeredNetwork">
         <elementDefinition Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="731c25a4-ee09-4e3d-9cbe-38e98b86eb75" name="AbstractEvolutionWorld" isAbstract="false" isLeaf="false" cachedFullName="AbstractEvolutionWorld">
+        <elementDefinition Id="512367dd-af34-457b-a86c-578132707446" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="cc8fa7da-0025-470b-9c22-74fe061847b1" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="61386c2b-45da-4ed5-b615-29738908c81d" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>
