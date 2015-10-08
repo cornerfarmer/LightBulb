@@ -87,9 +87,11 @@
     <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp" />
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantMutationCommand.hpp" />
@@ -220,9 +222,11 @@
     <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantMutationCommand.cpp" />

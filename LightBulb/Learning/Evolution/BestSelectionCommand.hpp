@@ -10,14 +10,13 @@
 
 // Forward declarations
 
-
 class BestSelectionCommand : public AbstractSelectionCommand
 {
 private:
 	int objectCount;
 public:
 	BestSelectionCommand(int objectCount_);
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 };
 
 #endif

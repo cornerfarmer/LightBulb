@@ -9,11 +9,12 @@
 // Forward declarations
 class AbstractEvolutionObject;
 class AbstractEvolutionWorld;
+class EvolutionLearningRule;
 
 class AbstractSelectionCommand
 {
 public:
-	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector) = 0;
+	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
 };
 
 #endif

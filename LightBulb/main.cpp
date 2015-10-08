@@ -68,6 +68,7 @@
 #include "Learning\Evolution\EvolutionLearningRule.hpp"
 #include "Learning\Evolution\ConstantCreationCommand.hpp"
 #include "Learning\Evolution\BestSelectionCommand.hpp"
+#include "Learning\Evolution\BestReuseCommand.hpp"
 #include "Learning\Evolution\ConstantMutationCommand.hpp"
 #include "Learning\Evolution\ConstantRecombinationCommand.hpp"
 #include "Examples\TicTacToe.hpp"
@@ -1680,7 +1681,8 @@ void doFunctionEvolutionTest()
 	EvolutionLearningRuleOptions options;
 	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 300));
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
-	options.selectionCommands.push_back(new BestSelectionCommand(5));
+	options.reuseCommands.push_back(new BestReuseCommand(5));
+	options.selectionCommands.push_back(new BestSelectionCommand(35));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
 

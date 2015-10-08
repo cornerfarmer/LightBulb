@@ -449,6 +449,12 @@
     <ClInclude Include="Examples\FunctionDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -846,6 +852,12 @@
     </ClCompile>
     <ClCompile Include="Examples\FunctionDrawer.cpp">
       <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

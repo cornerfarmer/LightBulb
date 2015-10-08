@@ -14,6 +14,7 @@ class AbstractSelectionCommand;
 class AbstractMutationCommand;
 class AbstractRecombinationCommand;
 class AbstractExitCondition;
+class AbstractReuseCommand;
 
 struct EvolutionLearningRuleOptions
 {
@@ -22,6 +23,7 @@ struct EvolutionLearningRuleOptions
 	std::vector<AbstractSelectionCommand*> selectionCommands;
 	std::vector<AbstractMutationCommand*> mutationsCommands;
 	std::vector<AbstractRecombinationCommand*> recombinationCommands;
+	std::vector<AbstractReuseCommand*> reuseCommands;
 	EvolutionLearningRuleOptions()
 	{
 
@@ -38,7 +40,6 @@ public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	void doMutation(AbstractEvolutionObject& object);
 	AbstractEvolutionObject* doRecombination(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2);
-
 	bool doLearning(AbstractEvolutionWorld& world);
 };
 

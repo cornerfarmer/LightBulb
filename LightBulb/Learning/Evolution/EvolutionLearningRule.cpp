@@ -7,6 +7,7 @@
 #include "Learning\Evolution\AbstractMutationCommand.hpp"
 #include "Learning\Evolution\AbstractRecombinationCommand.hpp"
 #include "Learning\Evolution\AbstractExitCondition.hpp"
+#include "Learning\Evolution\AbstractReuseCommand.hpp"
 #include "NeuralNetwork\NeuralNetwork.hpp"
 #include "NetworkTopology\AbstractNetworkTopology.hpp"
 #include "NetworkTopology\LayeredNetwork.hpp"
@@ -14,6 +15,7 @@
 #include "Neuron\Edge.hpp"
 // Library includes
 #include <iostream>
+#include <algorithm>
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 {
@@ -90,7 +92,12 @@ bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 
 		for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 		{
-			(*selectionCommand)->execute(highscore.get(), &newObjectVector);
+			(*selectionCommand)->execute(highscore.get());
+		}
+
+		for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
+		{
+			(*reuseCommand)->execute(highscore.get(), &newObjectVector);
 		}
 
 		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
@@ -101,13 +108,8 @@ bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
 		{
 			(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
-		}
-
-		for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
-		{
-			delete(oldObject->second);
-		}
-
+		}	
+	
 		world.setEvolutionObjects(newObjectVector);
 		world.reset();
 
