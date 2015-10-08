@@ -446,6 +446,9 @@
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp">
       <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\FunctionDrawer.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -840,6 +843,9 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp">
       <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\FunctionDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

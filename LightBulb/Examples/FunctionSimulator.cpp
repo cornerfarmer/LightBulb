@@ -12,15 +12,29 @@ AbstractEvolutionObject* FunctionSimulator::createNewObject()
 
 FunctionSimulator::FunctionSimulator()
 {
-	
+	window.create(sf::VideoMode(800, 700), "LightBulb!");
+	FunctionDrawerOptions options;
+	options.functionSimulator = this;
+	options.startX = -2.5;
+	options.endX = 2.5;
+	options.startY = -1.5;
+	options.endY = 1.5;
+	options.markedPositions.push_back(sf::Vector2f(0.0898f, -0.7126f));
+	options.markedPositions.push_back(sf::Vector2f(-0.0898f, 0.7126f));
+	drawer.reset(new FunctionDrawer(options));
 }
 
 void FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
-{	
+{
 	for (auto position = objects.begin(); position != objects.end(); position++)
 	{
 		(*position)->doNNCalculation(learningRule);
 	}
+
+	window.clear();
+	drawer->recalculateAllValues();
+	drawer->draw(window);
+	window.display();
 }
 
 double FunctionSimulator::getScore(AbstractEvolutionObject* object)

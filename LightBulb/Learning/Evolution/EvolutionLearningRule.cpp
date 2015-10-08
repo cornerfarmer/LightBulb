@@ -64,9 +64,10 @@ AbstractEvolutionObject* EvolutionLearningRule::doRecombination(AbstractEvolutio
 
 bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 {
-	int step = 1;
+	int generation = 0;
 	while (true)
 	{
+		std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
 		for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
 		{
 			(*creationCommand)->execute(world);
@@ -109,6 +110,8 @@ bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 
 		world.setEvolutionObjects(newObjectVector);
 		world.reset();
+
+		generation++;
 	}
 	return true;
 }

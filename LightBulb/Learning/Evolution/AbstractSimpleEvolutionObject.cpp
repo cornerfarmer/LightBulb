@@ -44,7 +44,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 
 	
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
-	//neuralNetwork->getNetworkTopology()->randomizeWeights(-1, 1);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-1, 1);
 
 	/*NeuralNetworkIO<double> input(18);
 	input.set(0, 0, 1);
