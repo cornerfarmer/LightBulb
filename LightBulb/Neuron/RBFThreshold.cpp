@@ -1,5 +1,5 @@
 // Includes
-#include "Neuron\RBFThreshold.hpp"
+#include "Neuron/RBFThreshold.hpp"
 
 RBFThreshold::RBFThreshold(double width_)
 {

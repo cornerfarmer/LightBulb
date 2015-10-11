@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\SingleLayerPerceptronLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Function\BinaryFunction.hpp"
+#include "Learning/SingleLayerPerceptronLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Function/BinaryFunction.hpp"
 
 SingleLayerPerceptronLearningRule::SingleLayerPerceptronLearningRule(AbstractLearningRuleOptions &options_)
 	: AbstractLearningRule(new AbstractLearningRuleOptions(options_)) 

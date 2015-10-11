@@ -1,11 +1,11 @@
 // Includes
-#include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
-#include "Neuron\InputNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Function\AbstractInputFunction.hpp"
-#include "Function\AbstractActivationFunction.hpp"
-#include "Function\AbstractOutputFunction.hpp"
-#include "Neuron\AbstractThreshold.hpp"
+#include "NeuronFactory/SameFunctionsNeuronFactory.hpp"
+#include "Neuron/InputNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Function/AbstractInputFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
+#include "Function/AbstractOutputFunction.hpp"
+#include "Neuron/AbstractThreshold.hpp"
 // Library includes
 #include <exception>
 

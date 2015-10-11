@@ -1,7 +1,7 @@
 // Includes
-#include "Teaching\TeachingLessonLinearInput.hpp"
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "Teaching/TeachingLessonLinearInput.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
 
 TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<double>* teachingInput_)
 {

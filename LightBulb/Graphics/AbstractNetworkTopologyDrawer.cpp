@@ -1,13 +1,13 @@
 // Includes
-#include "Graphics\AbstractNetworkTopologyDrawer.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "Neuron\Edge.hpp"
-#include "Graphics\Arrow.hpp"
-#include "Neuron\BiasNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Function\AbstractActivationFunction.hpp"
+#include "Graphics/AbstractNetworkTopologyDrawer.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Neuron/Edge.hpp"
+#include "Graphics/Arrow.hpp"
+#include "Neuron/BiasNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Function/AbstractActivationFunction.hpp"
 // Library includes
 #include <iomanip>
 #include <exception>
@@ -15,9 +15,9 @@
 
 const float AbstractNetworkTopologyDrawer::angleDifferenceBetweenContraryEdges = 0.3f;
 const sf::Color AbstractNetworkTopologyDrawer::fillColorStandardNeuron = sf::Color::Transparent;
-const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color::Color(0, 0, 150);
-const sf::Color AbstractNetworkTopologyDrawer::fillColorPositiveActivatedNeuron = sf::Color::Color(0, 255, 0);
-const sf::Color AbstractNetworkTopologyDrawer::fillColorNegativeActivatedNeuron = sf::Color::Color(255, 0, 0);
+const sf::Color AbstractNetworkTopologyDrawer::fillColorInputNeuron = sf::Color(0, 0, 150);
+const sf::Color AbstractNetworkTopologyDrawer::fillColorPositiveActivatedNeuron = sf::Color(0, 255, 0);
+const sf::Color AbstractNetworkTopologyDrawer::fillColorNegativeActivatedNeuron = sf::Color(255, 0, 0);
 const sf::Color AbstractNetworkTopologyDrawer::outlineColorStandardNeuron = sf::Color::White;
 const sf::Color AbstractNetworkTopologyDrawer::outlineColorOutputNeuron = sf::Color::Yellow;
 
@@ -222,7 +222,7 @@ void AbstractNetworkTopologyDrawer::refreshAllThresholds()
 			std::ostringstream ss;
 			if (dynamic_cast<StandardNeuron*>(neuronShape->first))
 			{
-				thresholdString = floatToString(static_cast<StandardNeuron*>(neuronShape->first)->getNetInput() + threshold, 3) + "/\n" + thresholdString;
+				thresholdString = floatToString(static_cast<StandardNeuron*>(neuronShape->first)->getNetInput() + threshold, 3) + "//n" + thresholdString;
 			}
 			else
 			{

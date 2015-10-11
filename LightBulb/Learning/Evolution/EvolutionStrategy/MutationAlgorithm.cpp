@@ -1,10 +1,10 @@
 // Includes
-#include "Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp"
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
+#include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
 #include <math.h>
 
 

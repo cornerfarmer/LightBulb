@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\DeltaLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "NetworkTopology\RBFNetwork.hpp"
+#include "Learning/DeltaLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/RBFNetwork.hpp"
 
 
 DeltaLearningRule::DeltaLearningRule(DeltaLearningRuleOptions &options_)

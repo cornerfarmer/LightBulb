@@ -1,9 +1,11 @@
 // Includes
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
+// Library includes
+#include <math.h>
 
 std::unique_ptr<NeuralNetworkIO<double>> AbstractTeachingLesson::tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
@@ -75,7 +77,7 @@ double AbstractTeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, Ab
 		// Add the square of every errorValue in the errorVector
 		for (auto errorValue = errorValues->second.begin(); errorValue != errorValues->second.end(); errorValue++)
 		{
-			specificError += pow(errorValue->second, 2);
+			specificError += pow(errorValue->second, 2.0);
 		}
 
 		// Divide the specific error by two

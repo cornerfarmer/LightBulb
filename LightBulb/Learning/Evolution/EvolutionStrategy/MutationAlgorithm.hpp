@@ -7,7 +7,7 @@
 #include <random>
 
 // Includes
-#include "Learning\Evolution\AbstractMutationAlgorithm.hpp"
+#include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
 
 // Forward declarations
 class AbstractEvolutionObject;

@@ -4,7 +4,7 @@
 #define _EUCLIDEANDISTANCEFUNCTION_H_
 
 // Includes
-#include "Function\AbstractInputFunction.hpp"
+#include "Function/AbstractInputFunction.hpp"
 
 //Forward declarations
 class Edge;

@@ -7,7 +7,7 @@
 #include <vector>
 
 // Include
-#include "Learning\Evolution\AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;

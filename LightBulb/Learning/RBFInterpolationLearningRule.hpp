@@ -4,12 +4,13 @@
 #define _RBFINTERPOLATIONLEARNINGRULE_H_
 
 // Library Includes
-#include "EigenSrc\Dense"
-#include "EigenSrc\Jacobi"
+#include "EigenSrc/Dense"
+#include "EigenSrc/Jacobi"
+#include <memory>
 
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
-#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
+#include "Learning/AbstractLearningRule.hpp"
+#include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class NeuralNetwork;

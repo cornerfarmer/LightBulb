@@ -1,10 +1,10 @@
 // Includes
-#include "ClusterAnalysis\KNearestRBFNeuronPlacer.hpp"
-#include "NetworkTopology\RBFNetwork.hpp"
-#include "ClusterAnalysis\Cluster.hpp"
-#include "ClusterAnalysis\KNearestClustering.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis/KNearestRBFNeuronPlacer.hpp"
+#include "NetworkTopology/RBFNetwork.hpp"
+#include "ClusterAnalysis/Cluster.hpp"
+#include "ClusterAnalysis/KNearestClustering.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ClusterAnalysis/Point.hpp"
 
 void KNearestRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher)
 {

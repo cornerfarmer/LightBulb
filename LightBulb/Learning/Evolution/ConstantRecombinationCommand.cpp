@@ -1,10 +1,10 @@
 // Includes
-#include "Learning\Evolution\ConstantRecombinationCommand.hpp"
-#include "Learning\Evolution\AbstractEvolutionWorld.hpp"
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
-#include "Learning\Evolution\EvolutionLearningRule.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
 //Library includes
 #include <iostream>
 

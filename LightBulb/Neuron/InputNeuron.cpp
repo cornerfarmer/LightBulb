@@ -1,5 +1,5 @@
 // Includes
-#include "Neuron\InputNeuron.hpp"
+#include "Neuron/InputNeuron.hpp"
 
 InputNeuron::InputNeuron()
 {

@@ -1,9 +1,9 @@
 // Includes
-#include "Examples\Animal.hpp"
-#include "Examples\Nature.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Learning\Evolution\EvolutionLearningRule.hpp"
-#include "Examples\AbstractTile.hpp"
+#include "Examples/Animal.hpp"
+#include "Examples/Nature.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "Examples/AbstractTile.hpp"
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 	: AbstractSimpleEvolutionObject(nature_, 6, 5)

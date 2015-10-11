@@ -5,6 +5,7 @@
 
 // Library includes
 #include <map>
+#include <memory>
 
 // Forward declarations
 class AbstractNetworkTopology;

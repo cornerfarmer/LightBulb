@@ -1,8 +1,8 @@
 // Includes
-#include "Examples\Nature.hpp"
-#include "Examples\Animal.hpp"
-#include "Examples\EarthTile.hpp"
-#include "Examples\RockTile.hpp"
+#include "Examples/Nature.hpp"
+#include "Examples/Animal.hpp"
+#include "Examples/EarthTile.hpp"
+#include "Examples/RockTile.hpp"
 //Library includes
 #include <iostream>
 

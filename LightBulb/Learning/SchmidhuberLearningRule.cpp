@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\SchmidhuberLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\SynchronousOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "Learning\ResilientLearningRateHelper.hpp"
+#include "Learning/SchmidhuberLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/SynchronousOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "Learning/ResilientLearningRateHelper.hpp"
 
 SchmidhuberLearningRule::SchmidhuberLearningRule(SchmidhuberLearningRuleOptions& options_) 
 	: AbstractLearningRule(new SchmidhuberLearningRuleOptions(options_))

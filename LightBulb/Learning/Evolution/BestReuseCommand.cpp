@@ -1,7 +1,7 @@
 // Includes
-#include "Learning\Evolution\BestReuseCommand.hpp"
-#include "Learning\Evolution\AbstractEvolutionWorld.hpp"
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/BestReuseCommand.hpp"
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 #include <iostream>
 #include <iomanip>

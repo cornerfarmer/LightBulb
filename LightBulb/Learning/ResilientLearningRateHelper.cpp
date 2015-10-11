@@ -1,14 +1,14 @@
 // Includes
-#include "Learning\ResilientLearningRateHelper.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
+#include "Learning/ResilientLearningRateHelper.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
 
 
 ResilientLearningRateHelper::ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_) 

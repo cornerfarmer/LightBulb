@@ -6,11 +6,11 @@
 // Library Includes
 #include <vector>
 #include <map>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 // Include
-#include "Learning\Evolution\AbstractSimpleEvolutionWorld.hpp"
-#include "Examples\TicTacToeDrawer.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Examples/TicTacToeDrawer.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;

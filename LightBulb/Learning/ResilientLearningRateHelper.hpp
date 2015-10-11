@@ -5,12 +5,12 @@
 
 // Library Includes
 #include <vector>
-#include <math.h>
+#include <cmath>
 #include <iostream>
 #include <iomanip>
 
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
+#include "Learning/AbstractLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;

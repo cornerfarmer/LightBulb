@@ -1,6 +1,6 @@
 // Includes
-#include "Learning\Evolution\ConstantCreationCommand.hpp"
-#include "Learning\Evolution\AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/ConstantCreationCommand.hpp"
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 
 
 ConstantCreationCommand::ConstantCreationCommand(int objectCount_)

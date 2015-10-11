@@ -4,7 +4,7 @@
 #define _BIASNEURON_H_
 
 // Includes
-#include "Neuron\InputNeuron.hpp"
+#include "Neuron/InputNeuron.hpp"
 
 // A BiasNeuron is a special neuron, which has always the output 1
 class BiasNeuron : public InputNeuron

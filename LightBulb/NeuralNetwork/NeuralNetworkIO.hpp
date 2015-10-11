@@ -17,6 +17,7 @@ private:
 	// Holds the dimension (amount of neurons the NeuralNetworkIO can describe)
 	int dimension;
 public:
+
 	NeuralNetworkIO(int d)
 	{
 		dimension = d;
@@ -29,7 +30,7 @@ public:
 		NeuralNetworkIO<T>* unfoldedNetworkIO = new NeuralNetworkIO<T>(0);
 		unfoldedNetworkIO->set(0, std::vector<std::pair<bool,T>>());
 		// Go through all ioSeries in the various timesteps
-		for (auto ioSeries = begin(); ioSeries != end(); ioSeries++)
+		for (auto ioSeries = this->begin(); ioSeries != this->end(); ioSeries++)
 		{			
 			// Add them at the end of the first timestep
 			(*unfoldedNetworkIO)[0].second.insert((*unfoldedNetworkIO)[0].second.end(), ioSeries->second.begin(), ioSeries->second.end());
@@ -41,8 +42,8 @@ public:
 	// Returns the biggest timestep used in this IO
 	int getMaxTimeStep()
 	{
-		if (!empty())
-			return size() - 1;
+		if (!this->empty())
+			return this->size() - 1;
 		else
 			return 0;
 	}
@@ -61,8 +62,8 @@ public:
 	void set(int timestep, int index, T value)
 	{
 		// Resize the vector if necessary
-		if (size() <= timestep)
-			resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
+		if (this->size() <= timestep)
+			this->resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
 		// Make sure the timestep is set to valid
 		if (!(*this)[timestep].first)
 			(*this)[timestep].first = true;
@@ -77,8 +78,8 @@ public:
 	void set(int timestep, std::vector<std::pair<bool, T>> values)
 	{
 		// Resize the vector if necessary
-		if (size() <= timestep)
-			resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
+		if (this->size() <= timestep)
+			this->resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
 		// Make sure the timestep is set to valid
 		if (!(*this)[timestep].first)
 			(*this)[timestep].first = true;
@@ -89,13 +90,13 @@ public:
 	// Returns if the value of the neuron with the given index in the given timestep is valid
 	bool exists(int timestep, int index)
 	{
-		return (size() > timestep && (*this)[timestep].second[index].first);
+		return (this->size() > timestep && (*this)[timestep].second[index].first);
 	}
 
 	// Returns if the given timestep has at least one valid value
 	bool existsTimestep(int timestep)
 	{
-		return (size() > timestep && (*this)[timestep].first);
+		return (this->size() > timestep && (*this)[timestep].first);
 	}
 
 	// Converts the values of a timestep into a vector (invalid values get the value 0)

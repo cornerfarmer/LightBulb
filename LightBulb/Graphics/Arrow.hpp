@@ -4,8 +4,8 @@
 #define _ARROW_H_
 
 // Includes
-#include "Graphics\GraphicObject.hpp"
-#include <SFML\Graphics.hpp>
+#include "Graphics/GraphicObject.hpp"
+#include <SFML/Graphics.hpp>
 #include <string>
 
 // A graphical arrow with a description

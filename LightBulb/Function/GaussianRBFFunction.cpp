@@ -1,9 +1,9 @@
 // Includes
-#include "Function\GaussianRBFFunction.hpp"
-#include "Neuron\RBFThreshold.hpp"
-#include "Neuron\NeuronCompareThreshold.hpp"
-#include "NetworkTopology\AbstractSOMStructure.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Function/GaussianRBFFunction.hpp"
+#include "Neuron/RBFThreshold.hpp"
+#include "Neuron/NeuronCompareThreshold.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
+#include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>

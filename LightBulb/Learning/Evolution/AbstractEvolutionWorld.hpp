@@ -5,6 +5,7 @@
 
 // Library Includes
 #include <vector>
+#include <memory>
 
 // Forward declarations
 class EvolutionLearningRule;

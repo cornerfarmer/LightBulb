@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "Neuron\AbstractThreshold.hpp"
+#include "Neuron/AbstractThreshold.hpp"
 
 // A StandardThreshold just consists of one double value
 class RBFThreshold : public AbstractThreshold

@@ -6,7 +6,7 @@
 // Libary includes
 
 // Includes
-#include "NetworkTopology\FreeNetwork.hpp"
+#include "NetworkTopology/FreeNetwork.hpp"
 
 // Forward declarations
 class AbstractTeachingLesson;

@@ -1,9 +1,9 @@
 // Includes
-#include "Function\MexicanHatFunction.hpp"
-#include "Function\AbstractActivationFunction.hpp"
-#include "Neuron\NeuronCompareThreshold.hpp"
-#include "NetworkTopology\AbstractSOMStructure.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Function/MexicanHatFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
+#include "Neuron/NeuronCompareThreshold.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
+#include "Neuron/StandardNeuron.hpp"
 // Library includes
 
 double MexicanHatFunction::execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)

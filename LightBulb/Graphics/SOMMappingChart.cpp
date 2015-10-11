@@ -1,12 +1,12 @@
 // Includes
-#include "Graphics\SOMMappingChart.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
-#include "NetworkTopology\AbstractSOMStructure.hpp"
-#include "NetworkTopology\SOMNetwork.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Graphics/SOMMappingChart.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
+#include "NetworkTopology/SOMNetwork.hpp"
+#include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <exception>
 #include <vector>

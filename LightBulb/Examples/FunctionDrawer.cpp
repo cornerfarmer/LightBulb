@@ -1,7 +1,7 @@
 // Includes
-#include "Examples\FunctionDrawer.hpp"
-#include "Examples\FunctionSimulator.hpp"
-#include "Examples\Position.hpp"
+#include "Examples/FunctionDrawer.hpp"
+#include "Examples/FunctionSimulator.hpp"
+#include "Examples/Position.hpp"
 // Library includes
 #include <exception>
 #include <vector>

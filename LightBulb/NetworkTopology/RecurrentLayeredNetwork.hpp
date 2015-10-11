@@ -4,8 +4,8 @@
 #define _RECURRENTLAYEREDNETWORK_H_
 
 // Includes
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "NetworkTopology\RecurrentNetworkInterface.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/RecurrentNetworkInterface.hpp"
 
 // This struct contains all options needed to build a RecurrentLayeredNetwork
 struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions

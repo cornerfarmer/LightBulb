@@ -1,9 +1,9 @@
 // Includes
-#include "ClusterAnalysis\AbstractClustering.hpp"
-#include "ClusterAnalysis\ValuePosition.hpp"
-#include "ClusterAnalysis\Cluster.hpp"
-#include "ClusterAnalysis\Point.hpp"
-#include "ClusterAnalysis\PointSet.hpp"
+#include "ClusterAnalysis/AbstractClustering.hpp"
+#include "ClusterAnalysis/ValuePosition.hpp"
+#include "ClusterAnalysis/Cluster.hpp"
+#include "ClusterAnalysis/Point.hpp"
+#include "ClusterAnalysis/PointSet.hpp"
 
 // Sets the minimum cluster width
 const double AbstractClustering::minClusterWidth = 0.05f;

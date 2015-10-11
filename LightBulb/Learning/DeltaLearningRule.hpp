@@ -4,9 +4,9 @@
 #define _DELTALEARNINGRULE_H_
 
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
-#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
-#include "Learning\ResilientLearningRateHelper.hpp"
+#include "Learning/AbstractLearningRule.hpp"
+#include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
+#include "Learning/ResilientLearningRateHelper.hpp"
 
 // Forward declarations
 class NeuralNetwork;

@@ -1,6 +1,6 @@
 // Includes
-#include "Examples\TicTacToeDrawer.hpp"
-#include "Examples\TicTacToe.hpp"
+#include "Examples/TicTacToeDrawer.hpp"
+#include "Examples/TicTacToe.hpp"
 // Library includes
 #include <exception>
 #include <vector>

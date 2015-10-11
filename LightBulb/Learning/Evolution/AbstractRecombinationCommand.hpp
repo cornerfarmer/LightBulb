@@ -4,10 +4,11 @@
 #define _ABSTRACTRECOMBINATIONCOMMAND_H_
 
 // Include
-#include "Learning\Evolution\AbstractRecombinationAlgorithm.hpp"
+#include "Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
 
 // Library Includes
 #include <vector>
+#include <memory>
 
 // Forward declarations
 class AbstractEvolutionObject;

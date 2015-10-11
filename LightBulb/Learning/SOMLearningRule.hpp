@@ -4,8 +4,8 @@
 #define _SOMLEARNINGRULELEARNINGRULE_H_
 
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
-#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
+#include "Learning/AbstractLearningRule.hpp"
+#include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class NeuralNetwork;
@@ -28,7 +28,7 @@ struct SOMLearningRuleOptions : AbstractLearningRuleOptions
 		distanceShrinkFunction = NULL;
 	}
 	~SOMLearningRuleOptions();
-	SOMLearningRuleOptions::SOMLearningRuleOptions(const SOMLearningRuleOptions &obj);
+	SOMLearningRuleOptions(const SOMLearningRuleOptions &obj);
 };
 
 // The SOMLearningRule can only be used to train SOMs

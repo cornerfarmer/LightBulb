@@ -1,8 +1,8 @@
 // Includes
-#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\Edge.hpp"
+#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/Edge.hpp"
 // Library includes
 #include <list>
 

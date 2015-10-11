@@ -1,7 +1,7 @@
 // Includes
-#include "Function\MinimumNetInputActivationFunction.hpp"
-#include "Neuron\NeuronCompareThreshold.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Function/MinimumNetInputActivationFunction.hpp"
+#include "Neuron/NeuronCompareThreshold.hpp"
+#include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>

@@ -1,7 +1,7 @@
 // Includes
-#include "Examples\TicTacToe.hpp"
-#include "Examples\TicTacToeKI.hpp"
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
+#include "Examples/TicTacToe.hpp"
+#include "Examples/TicTacToeKI.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 #include <iostream>
 

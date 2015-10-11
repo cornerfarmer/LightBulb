@@ -6,7 +6,7 @@
 // Library Includes
 
 // Includes
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 // Forward declarations
 

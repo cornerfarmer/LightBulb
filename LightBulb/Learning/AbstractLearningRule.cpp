@@ -1,16 +1,17 @@
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Teaching\Teacher.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "ActivationOrder\AbstractActivationOrder.hpp"
+#include "Learning/AbstractLearningRule.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Teaching/Teacher.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "ActivationOrder/AbstractActivationOrder.hpp"
 // Library includes
 #include <iomanip>
 #include <iostream>
 #include <vector>
+#include <limits>
 
 AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 {

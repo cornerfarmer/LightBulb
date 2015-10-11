@@ -1,6 +1,6 @@
 // Includes
-#include "Function\FermiFunction.hpp"
-#include "Neuron\StandardThreshold.hpp"
+#include "Function/FermiFunction.hpp"
+#include "Neuron/StandardThreshold.hpp"
 // Library includes
 #include <math.h>
 #include <limits>

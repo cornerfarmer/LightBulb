@@ -4,7 +4,7 @@
 #define _BINARYFUNCTION_H_
 
 // Includes
-#include "Function\AbstractActivationFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
 
 // A binary function can decide between two values
 class BinaryFunction : public AbstractActivationFunction

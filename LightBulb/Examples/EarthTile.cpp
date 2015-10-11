@@ -1,5 +1,5 @@
 // Includes
-#include "Examples\EarthTile.hpp"
+#include "Examples/EarthTile.hpp"
 
 sf::Color EarthTile::getColor()
 {

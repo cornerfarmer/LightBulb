@@ -1,7 +1,7 @@
 // Includes
-#include "Function\WeightedSumFunction.hpp"
-#include "Neuron\Edge.hpp"
-#include "Neuron\AbstractNeuron.hpp"
+#include "Function/WeightedSumFunction.hpp"
+#include "Neuron/Edge.hpp"
+#include "Neuron/AbstractNeuron.hpp"
 
 double WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache)
 {

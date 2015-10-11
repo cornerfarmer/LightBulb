@@ -1,9 +1,9 @@
 // Includes
-#include "Graphics\AbstractNetworkStructureChart.hpp"
-#include "NetworkTopology\RBFNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\RBFThreshold.hpp"
+#include "Graphics/AbstractNetworkStructureChart.hpp"
+#include "NetworkTopology/RBFNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/RBFThreshold.hpp"
 
 AbstractNetworkStructureChart::AbstractNetworkStructureChart(AbstractNetworkStructureChartOptions* options_)
 {

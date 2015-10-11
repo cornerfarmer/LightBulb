@@ -4,10 +4,10 @@
 #define _EARTHTILE_H_
 
 // Library Includes
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 // Includes
-#include "Examples\AbstractTile.hpp"
+#include "Examples/AbstractTile.hpp"
 
 // Forward declarations
 

@@ -1,11 +1,11 @@
 // Includes
-#include "NetworkTopology\FreeNetwork.hpp"
-#include "Neuron\InputNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\BiasNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "NeuronFactory\AbstractNeuronFactory.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
+#include "NetworkTopology/FreeNetwork.hpp"
+#include "Neuron/InputNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/BiasNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "NeuronFactory/AbstractNeuronFactory.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 // Library includes
 #include <exception>
 

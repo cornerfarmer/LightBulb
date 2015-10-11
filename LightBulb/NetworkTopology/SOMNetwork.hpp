@@ -7,7 +7,7 @@
 #include <map>
 
 // Includes
-#include "NetworkTopology\LayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 
 // Forward declarations
 class AbstractTeachingLesson;

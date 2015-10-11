@@ -7,10 +7,11 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <memory>
 
 // Includes
-#include "ClusterAnalysis\AbstractClustering.hpp"
-#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis/AbstractClustering.hpp"
+#include "ClusterAnalysis/Point.hpp"
 
 // Forward declarations
 struct Cluster;

@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\CascadeCorrelationLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "NetworkTopology\CascadeCorrelationNetwork.hpp"
+#include "Learning/CascadeCorrelationLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "NetworkTopology/CascadeCorrelationNetwork.hpp"
 // Library includes
 #include <algorithm>
 
@@ -260,7 +260,7 @@ void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNe
 			// Add the output of the candidate unit to the sum
 			meanCandidateOutput[*currentCandidateUnit] += neuronOutputCache[teachingLesson->get()].back()[*currentCandidateUnit];
 		}
-		// Divide the candidate ouput´sum through the value count to get the mean value
+		// Divide the candidate ouputï¿½sum through the value count to get the mean value
 		meanCandidateOutput[*currentCandidateUnit] /= teacher.getTeachingLessons()->size();	
 	}
 

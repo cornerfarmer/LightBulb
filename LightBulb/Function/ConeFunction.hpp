@@ -7,7 +7,7 @@
 #include <math.h>
 
 // Includes
-#include "Function\AbstractNeighborhoodFunction.hpp"
+#include "Function/AbstractNeighborhoodFunction.hpp"
 
 // Describes a neighborhood relation in form of a cone
 class ConeFunction : public AbstractNeighborhoodFunction

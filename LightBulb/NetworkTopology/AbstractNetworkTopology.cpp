@@ -1,9 +1,9 @@
 // Includes
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 // Library includes
 #include <algorithm>
 

@@ -1,11 +1,11 @@
 // Includes
-#include "Graphics\LayeredNetworkTopologyDrawer.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\Edge.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
+#include "Graphics/LayeredNetworkTopologyDrawer.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/Edge.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
 // Library includes
 #include <exception>
 

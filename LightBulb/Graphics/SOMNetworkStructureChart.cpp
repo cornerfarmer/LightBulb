@@ -1,8 +1,8 @@
 // Includes
-#include "Graphics\SOMNetworkStructureChart.hpp"
-#include "NetworkTopology\SOMNetwork.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "NetworkTopology\AbstractSOMStructure.hpp"
+#include "Graphics/SOMNetworkStructureChart.hpp"
+#include "NetworkTopology/SOMNetwork.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
 // Library include
 #include <list>
 

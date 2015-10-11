@@ -1,8 +1,8 @@
 // Includes
-#include "ClusterAnalysis\ENearestClustering.hpp"
-#include "ClusterAnalysis\Cluster.hpp"
-#include "ClusterAnalysis\Point.hpp"
-#include "ClusterAnalysis\PointSet.hpp"
+#include "ClusterAnalysis/ENearestClustering.hpp"
+#include "ClusterAnalysis/Cluster.hpp"
+#include "ClusterAnalysis/Point.hpp"
+#include "ClusterAnalysis/PointSet.hpp"
 // Library includes
 #include <algorithm>
 

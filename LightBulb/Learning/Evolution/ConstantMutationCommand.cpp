@@ -1,8 +1,8 @@
 // Includes
-#include "Learning\Evolution\ConstantMutationCommand.hpp"
-#include "Learning\Evolution\AbstractEvolutionWorld.hpp"
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
-#include "Learning\Evolution\EvolutionLearningRule.hpp"
+#include "Learning/Evolution/ConstantMutationCommand.hpp"
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
 //Library includes
 #include <iostream>
 

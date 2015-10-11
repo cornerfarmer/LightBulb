@@ -8,8 +8,8 @@
 #include <list>
 
 // Includes
-#include "ClusterAnalysis\ValuePosition.hpp"
-#include "ClusterAnalysis\PointSet.hpp"
+#include "ClusterAnalysis/ValuePosition.hpp"
+#include "ClusterAnalysis/PointSet.hpp"
 
 // Forward declaration
 struct Point;

@@ -1,2 +1,2 @@
 // Includes
-#include "NeuronFactory\AbstractNeuronFactory.hpp"
+#include "NeuronFactory/AbstractNeuronFactory.hpp"

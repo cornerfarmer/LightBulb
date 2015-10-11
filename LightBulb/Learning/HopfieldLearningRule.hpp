@@ -4,8 +4,8 @@
 #define _HOPFIELDLEARNINGRULE_H_
 
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
-#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
+#include "Learning/AbstractLearningRule.hpp"
+#include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class NeuralNetwork;

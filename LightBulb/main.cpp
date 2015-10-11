@@ -1,88 +1,87 @@
 // Includes
-#include "Function\WeightedSumFunction.hpp"
-#include "Neuron\Edge.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Function\WeightedSumFunction.hpp"
-#include "Function\IdentityFunction.hpp"
-#include "Function\HyperbolicTangentFunction.hpp"
-#include "Function\FermiFunction.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Function\BinaryFunction.hpp"
-#include "Learning\SingleLayerPerceptronLearningRule.hpp"
-#include "Learning\DeltaLearningRule.hpp"
-#include "Learning\BackpropagationLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "Teaching\TeachingLessonBooleanInput.hpp"
-#include "Graphics\NeuralNetworkResultChart.hpp"
-#include "NeuronFactory\DifferentFunctionsNeuronFactory.hpp"
-#include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
-#include "Neuron\StandardThreshold.hpp"
-#include "NetworkTopology\RBFNetwork.hpp"
-#include "Learning\RBFInterpolationLearningRule.hpp"
-#include "Teaching\TeachingLessonLinearInput.hpp"
-#include "Learning\DeltaLearningRule.hpp"
-#include "ClusterAnalysis\KMeansRBFNeuronPlacer.hpp"
-#include "ClusterAnalysis\KNearestRBFNeuronPlacer.hpp"
-#include "ClusterAnalysis\ENearestRBFNeuronPlacer.hpp"
-#include "Graphics\RBFNetworkStructureChart.hpp"
-#include "ClusterAnalysis\ROLFNeuronPlacer.hpp"
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
-#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
-#include "Learning\BackpropagationThroughTimeLearningRule.hpp"
-#include "Graphics\LayeredNetworkTopologyDrawer.hpp"
-#include "Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp"
-#include "NetworkTopology\FreeNetwork.hpp"
-#include "ActivationOrder\SynchronousOrder.hpp"
-#include "Graphics\FreeNetworkTopologyDrawer.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Learning\RealTimeRecurrentLearningRule.hpp"
-#include "Learning\SchmidhuberLearningRule.hpp"
-#include "NetworkTopology\CascadeCorrelationNetwork.hpp"
-#include "Learning\CascadeCorrelationLearningRule.hpp"
-#include "NetworkTopology\LVQNetwork.hpp"
-#include "Learning\LVQ1LearningRule.hpp"
-#include "Learning\LVQ2LearningRule.hpp"
-#include "Learning\LVQ3LearningRule.hpp"
-#include "Learning\OLVQ1LearningRule.hpp"
-#include "Graphics\LVQNetworkStructureChart.hpp"
-#include "NetworkTopology\SOMNetwork.hpp"
-#include "NetworkTopology\LineStructure.hpp"
-#include "NetworkTopology\GridStructure.hpp"
-#include "Graphics\SOMNetworkStructureChart.hpp"
-#include "Learning\SOMLearningRule.hpp"
-#include "Function\GaussianRBFFunction.hpp"
-#include "Function\CylinderFunction.hpp"
-#include "Function\ConeFunction.hpp"
-#include "Function\CosinusFunction.hpp"
-#include "Function\MexicanHatFunction.hpp"
-#include "Function\ExponentialShrinkFunction.hpp"
-#include "Graphics\SOMMappingChart.hpp"
-#include "NetworkTopology\CounterpropagationNetwork.hpp"
-#include "Learning\CounterpropagationLearningRule.hpp"
-#include "Graphics\CounterpropagationNetworkStructureChart.hpp"
-#include "NetworkTopology\HopfieldNetwork.hpp"
-#include "ActivationOrder\AsynchronousOrder.hpp"
-#include "Learning\HopfieldLearningRule.hpp"
-#include "Examples\Nature.hpp"
-#include "Learning\Evolution\EvolutionLearningRule.hpp"
-#include "Learning\Evolution\ConstantCreationCommand.hpp"
-#include "Learning\Evolution\BestSelectionCommand.hpp"
-#include "Learning\Evolution\BestReuseCommand.hpp"
-#include "Learning\Evolution\ConstantMutationCommand.hpp"
-#include "Learning\Evolution\ConstantRecombinationCommand.hpp"
-#include "Examples\TicTacToe.hpp"
-#include "Examples\FunctionSimulator.hpp"
-#include "Examples\Position.hpp"
-#include "Learning\Evolution\RateDifferenceCondition.hpp"
-#include "Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp"
-#include "Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp"
+#include "Function/WeightedSumFunction.hpp"
+#include "Neuron/Edge.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Function/WeightedSumFunction.hpp"
+#include "Function/IdentityFunction.hpp"
+#include "Function/HyperbolicTangentFunction.hpp"
+#include "Function/FermiFunction.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Function/BinaryFunction.hpp"
+#include "Learning/SingleLayerPerceptronLearningRule.hpp"
+#include "Learning/DeltaLearningRule.hpp"
+#include "Learning/BackpropagationLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "Teaching/TeachingLessonBooleanInput.hpp"
+#include "Graphics/NeuralNetworkResultChart.hpp"
+#include "NeuronFactory/DifferentFunctionsNeuronFactory.hpp"
+#include "NeuronFactory/SameFunctionsNeuronFactory.hpp"
+#include "Neuron/StandardThreshold.hpp"
+#include "NetworkTopology/RBFNetwork.hpp"
+#include "Learning/RBFInterpolationLearningRule.hpp"
+#include "Teaching/TeachingLessonLinearInput.hpp"
+#include "Learning/DeltaLearningRule.hpp"
+#include "ClusterAnalysis/KMeansRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis/KNearestRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis/ENearestRBFNeuronPlacer.hpp"
+#include "Graphics/RBFNetworkStructureChart.hpp"
+#include "ClusterAnalysis/ROLFNeuronPlacer.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "Learning/BackpropagationThroughTimeLearningRule.hpp"
+#include "Graphics/LayeredNetworkTopologyDrawer.hpp"
+#include "Learning/TruncatedBackpropagationThroughTimeLearningRule.hpp"
+#include "NetworkTopology/FreeNetwork.hpp"
+#include "ActivationOrder/SynchronousOrder.hpp"
+#include "Graphics/FreeNetworkTopologyDrawer.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Learning/RealTimeRecurrentLearningRule.hpp"
+#include "Learning/SchmidhuberLearningRule.hpp"
+#include "NetworkTopology/CascadeCorrelationNetwork.hpp"
+#include "Learning/CascadeCorrelationLearningRule.hpp"
+#include "NetworkTopology/LVQNetwork.hpp"
+#include "Learning/LVQ1LearningRule.hpp"
+#include "Learning/LVQ2LearningRule.hpp"
+#include "Learning/LVQ3LearningRule.hpp"
+#include "Learning/OLVQ1LearningRule.hpp"
+#include "Graphics/LVQNetworkStructureChart.hpp"
+#include "NetworkTopology/SOMNetwork.hpp"
+#include "NetworkTopology/LineStructure.hpp"
+#include "NetworkTopology/GridStructure.hpp"
+#include "Graphics/SOMNetworkStructureChart.hpp"
+#include "Learning/SOMLearningRule.hpp"
+#include "Function/GaussianRBFFunction.hpp"
+#include "Function/CylinderFunction.hpp"
+#include "Function/ConeFunction.hpp"
+#include "Function/CosinusFunction.hpp"
+#include "Function/MexicanHatFunction.hpp"
+#include "Function/ExponentialShrinkFunction.hpp"
+#include "Graphics/SOMMappingChart.hpp"
+#include "NetworkTopology/CounterpropagationNetwork.hpp"
+#include "Learning/CounterpropagationLearningRule.hpp"
+#include "Graphics/CounterpropagationNetworkStructureChart.hpp"
+#include "NetworkTopology/HopfieldNetwork.hpp"
+#include "ActivationOrder/AsynchronousOrder.hpp"
+#include "Learning/HopfieldLearningRule.hpp"
+#include "Examples/Nature.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "Learning/Evolution/ConstantCreationCommand.hpp"
+#include "Learning/Evolution/BestSelectionCommand.hpp"
+#include "Learning/Evolution/BestReuseCommand.hpp"
+#include "Learning/Evolution/ConstantMutationCommand.hpp"
+#include "Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "Examples/TicTacToe.hpp"
+#include "Examples/FunctionSimulator.hpp"
+#include "Examples/Position.hpp"
+#include "Learning/Evolution/RateDifferenceCondition.hpp"
+#include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
+#include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
 #include <vector>
-#include <SFML\Graphics.hpp>
-#include <windows.h>
+#include <SFML/Graphics.hpp>
 
 void doPerceptronTest()
 {
@@ -161,13 +160,14 @@ void doPerceptronTest()
 	////neuralNetwork.getNetworkTopology()->randomizeWeights(0,1);
 	//
 
-	double totalError = teacher.getTotalError(neuralNetwork, TopologicalOrder());
+	TopologicalOrder topologicalOrder;
+	double totalError = teacher.getTotalError(neuralNetwork, topologicalOrder);
 
 	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
 	(*teachingPattern).set(0, 0, 8);
 	(*teachingPattern).set(0,1, 7);
 
-	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(*teachingPattern, TopologicalOrder());
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(*teachingPattern, topologicalOrder);
 	
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
@@ -502,7 +502,8 @@ void doFreeNetworkTest()
 	
 
 	learningRule.doLearning(neuralNetwork, teacher);
-	double totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
+	SynchronousOrder synchonousOrder;
+	double totalError = teacher.getTotalError(neuralNetwork, synchonousOrder);
 
 	
 	NeuralNetworkIO<double> teachingPattern(1);
@@ -534,9 +535,12 @@ void doFreeNetworkTest()
         window.clear();
         networkTopologyDrawer.draw(window);
         window.display();
+
 		if (t == 0)
-			networkTopologyDrawer.startNewCalculation(teachingPattern, SynchronousOrder());
-		else if (t <= 4)
+		{
+			SynchronousOrder synchronousOrder;
+			networkTopologyDrawer.startNewCalculation(teachingPattern, synchronousOrder);
+		} else if (t <= 4)
 			networkTopologyDrawer.nextCalculationStep();
 		else
 		{
@@ -545,7 +549,7 @@ void doFreeNetworkTest()
 		}
 		t++;
 
-		Sleep(2000);
+		//Sleep(2000);
     }
 
 }
@@ -613,7 +617,8 @@ void doRTRLTest()
 	
 
 	learningRule.doLearning(neuralNetwork, teacher);
-	double totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
+	SynchronousOrder synchronousOrder;
+	double totalError = teacher.getTotalError(neuralNetwork, synchronousOrder);
 
 		
 	NeuralNetworkIO<double> teachingPattern(1);
@@ -625,7 +630,7 @@ void doRTRLTest()
 	teachingPattern.set(4, 0, 0);	
 	teachingPattern.set(5, 0, 0);	
 
-	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, SynchronousOrder(), 0, 8);
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, synchronousOrder, 0, 8);
 }
 
 void doSchmidhuberTest()
@@ -690,7 +695,9 @@ void doSchmidhuberTest()
 	
 
 	learningRule.doLearning(neuralNetwork, teacher);
-	double totalError = teacher.getTotalError(neuralNetwork, SynchronousOrder());
+
+	SynchronousOrder synchronousOrder;
+	double totalError = teacher.getTotalError(neuralNetwork, synchronousOrder);
 
 
 }
@@ -1026,7 +1033,8 @@ void doRecurrentCascadeCorrelationTest()
 		(*teachingPattern).set(l, 0, 1);
 	}
 
-	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(*teachingPattern, TopologicalOrder());
+	TopologicalOrder topologicalOrder;
+	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(*teachingPattern, topologicalOrder);
 
 	
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
@@ -1152,8 +1160,8 @@ void doRecurrentCascadeCorrelationMorseTest()
 	{
 		(*teachingPattern).set(l, 0, 1);
 	}
-
-	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(*(*teacher.getTeachingLessons())[15]->getTeachingPattern(), TopologicalOrder());
+	TopologicalOrder topologicalOrder;
+	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork.calculate(*(*teacher.getTeachingLessons())[15]->getTeachingPattern(), topologicalOrder);
 
 	for (auto v = (*output).rbegin()->second.begin(); v != (*output).rbegin()->second.end(); v++)
 	{
@@ -1549,7 +1557,8 @@ void doHopfieldTest()
 	teachingPattern.set(0, 0, -4.1);
 	teachingPattern.set(0, 1, 5.1);
 
-	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, AsynchronousOrder(), 0, 4);
+	AsynchronousOrder asynchronousOrder;
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, asynchronousOrder, 0, 4);
 
 }
 
@@ -1606,7 +1615,8 @@ void doAssociativHopfieldTest()
 	teachingPattern.set(0, 1, 1);
 	teachingPattern.set(0, 2, 0);
 
-	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, AsynchronousOrder(), 0, 4);
+	AsynchronousOrder asynchronousOrder;
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(teachingPattern, asynchronousOrder, 0, 4);
 
 }
 
@@ -1657,7 +1667,8 @@ void doTicTacToeTest()
 		input.set(0, 0, 1);
 		input.set(0, 5, 1);
 
-		std::unique_ptr<NeuralNetworkIO<double>> output = network.calculate(input, TopologicalOrder(), 0 , 1);
+		TopologicalOrder topologicalOrder;
+		std::unique_ptr<NeuralNetworkIO<double>> output = network.calculate(input, topologicalOrder, 0 , 1);
 
 	}
 

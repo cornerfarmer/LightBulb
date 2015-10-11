@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\RealTimeRecurrentLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\SynchronousOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "Learning\ResilientLearningRateHelper.hpp"
+#include "Learning/RealTimeRecurrentLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/SynchronousOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "Learning/ResilientLearningRateHelper.hpp"
 
 RealTimeRecurrentLearningRule::RealTimeRecurrentLearningRule(RealTimeRecurrentLearningRuleOptions& options_) 
 	: AbstractLearningRule(new RealTimeRecurrentLearningRuleOptions(options_))

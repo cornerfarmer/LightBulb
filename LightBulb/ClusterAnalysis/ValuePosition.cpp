@@ -1,5 +1,8 @@
 // Includes
-#include "ClusterAnalysis\ValuePosition.hpp"
+#include "ClusterAnalysis/ValuePosition.hpp"
+// Library includes
+#include <math.h>
+
 
 // Sets the relation between the position and the value distance 
 const double ValuePosition::valuePositionRelation = 0.2;

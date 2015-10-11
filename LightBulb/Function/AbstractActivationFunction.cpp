@@ -1,2 +1,2 @@
 // Includes
-#include "Function\AbstractActivationFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"

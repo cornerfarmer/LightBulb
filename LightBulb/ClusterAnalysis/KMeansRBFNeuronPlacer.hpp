@@ -6,7 +6,7 @@
 // Library includes
 
 // Includes
-#include "ClusterAnalysis\AbstractReliableRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis/AbstractReliableRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class RBFNetwork;

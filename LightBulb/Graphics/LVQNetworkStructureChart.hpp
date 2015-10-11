@@ -4,7 +4,7 @@
 #define _LVQNETWORKSTRUCTURECHART_H_
 
 // Includes
-#include "Graphics\AbstractNetworkStructureChart.hpp"
+#include "Graphics/AbstractNetworkStructureChart.hpp"
 
 // Forward declarations
 class LVQNetwork;

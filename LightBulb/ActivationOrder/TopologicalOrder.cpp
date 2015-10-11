@@ -1,7 +1,7 @@
 // Includes
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <exception>
 

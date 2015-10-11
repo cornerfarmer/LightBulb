@@ -7,7 +7,7 @@
 #include <list>
 
 // Includes
-#include "ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis/AbstractNonReliableRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class RBFNetwork;

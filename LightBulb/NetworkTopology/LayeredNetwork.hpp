@@ -5,11 +5,12 @@
 
 // Libary includes
 #include <vector>
+#include <memory>
 
 // Includes
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\BiasNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/BiasNeuron.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;
@@ -29,7 +30,7 @@ struct LayeredNetworkOptions
 	std::vector<unsigned int> outputNeuronsIndices;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
-	LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj);
+	LayeredNetworkOptions(const LayeredNetworkOptions &obj);
 };
 
 typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;

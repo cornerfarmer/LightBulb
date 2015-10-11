@@ -6,8 +6,8 @@
 // Library Includes
 
 // Includes
-#include "Learning\Evolution\AbstractMutationCommand.hpp"
-#include "Function\RankBasedRandomFunction.hpp"
+#include "Learning/Evolution/AbstractMutationCommand.hpp"
+#include "Function/RankBasedRandomFunction.hpp"
 
 // Forward declarations
 

@@ -1,19 +1,19 @@
 // Includes
-#include "Learning\Evolution\AbstractSimpleEvolutionObject.hpp"
-#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "Examples\Nature.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
-#include "Neuron\StandardThreshold.hpp"
-#include "Function\WeightedSumFunction.hpp"
-#include "Function\FermiFunction.hpp"
-#include "Function\HyperbolicTangentFunction.hpp"
-#include "Function\IdentityFunction.hpp"
-#include "Learning\Evolution\EvolutionLearningRule.hpp"
-#include "Examples\AbstractTile.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Examples/Nature.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "NeuronFactory/SameFunctionsNeuronFactory.hpp"
+#include "Neuron/StandardThreshold.hpp"
+#include "Function/WeightedSumFunction.hpp"
+#include "Function/FermiFunction.hpp"
+#include "Function/HyperbolicTangentFunction.hpp"
+#include "Function/IdentityFunction.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "Examples/AbstractTile.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
 
 AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension, bool biasNeuron)
 {
@@ -85,8 +85,8 @@ NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 void AbstractSimpleEvolutionObject::doNNCalculation(EvolutionLearningRule& learningRule)
 {
 	NeuralNetworkIO<double> input = getNNInput();
-	
-	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, TopologicalOrder(), 0, -1, NULL, NULL, false);	
+	TopologicalOrder topologicalOrder;
+	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, topologicalOrder, 0, -1, NULL, NULL, false);
 	
 	interpretNNOutput(learningRule, output.get());
 }

@@ -5,11 +5,12 @@
 
 // Library includes
 #include <vector>
+#include <memory>
 
 // Includes
-#include "ClusterAnalysis\AbstractClustering.hpp"
-#include "ClusterAnalysis\Point.hpp"
-#include "ClusterAnalysis\Cluster.hpp"
+#include "ClusterAnalysis/AbstractClustering.hpp"
+#include "ClusterAnalysis/Point.hpp"
+#include "ClusterAnalysis/Cluster.hpp"
 
 // Forward declarations
 struct Cluster;

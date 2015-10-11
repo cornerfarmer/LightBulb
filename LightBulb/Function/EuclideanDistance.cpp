@@ -1,10 +1,11 @@
 // Includes
-#include "Function\EuclideanDistance.hpp"
-#include "Neuron\Edge.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\RBFThreshold.hpp"
+#include "Function/EuclideanDistance.hpp"
+#include "Neuron/Edge.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/RBFThreshold.hpp"
 // Library includes
 #include <stdexcept>
+#include <math.h>
 
 double EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache)
 {

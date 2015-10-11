@@ -1,10 +1,10 @@
 // Includes
-#include "Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp"
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
+#include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
 
 void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
 {

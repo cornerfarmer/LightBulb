@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\BackpropagationThroughTimeLearningRule.hpp"
-#include "Teaching\Teacher.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "Teaching\AbstractTeachingLesson.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\RecurrentLayeredNetwork.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "NetworkTopology\RecurrentNetworkInterface.hpp"
+#include "Learning/BackpropagationThroughTimeLearningRule.hpp"
+#include "Teaching/Teacher.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "Teaching/AbstractTeachingLesson.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "NetworkTopology/RecurrentNetworkInterface.hpp"
 
 
 BackpropagationThroughTimeLearningRule::BackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_) 

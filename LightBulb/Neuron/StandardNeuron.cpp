@@ -1,10 +1,10 @@
 // Includes
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\Edge.hpp"
-#include "Function\AbstractInputFunction.hpp"
-#include "Function\AbstractActivationFunction.hpp"
-#include "Function\AbstractOutputFunction.hpp"
-#include "Neuron\AbstractThreshold.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/Edge.hpp"
+#include "Function/AbstractInputFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
+#include "Function/AbstractOutputFunction.hpp"
+#include "Neuron/AbstractThreshold.hpp"
 
 StandardNeuron::~StandardNeuron()
 {

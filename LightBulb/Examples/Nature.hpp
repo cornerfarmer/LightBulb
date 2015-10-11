@@ -5,12 +5,12 @@
 
 // Library Includes
 #include <vector>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 // Include
-#include "Learning\Evolution\AbstractSimpleEvolutionWorld.hpp"
-#include "Examples\NatureDrawer.hpp"
-#include "Examples\AbstractTile.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Examples/NatureDrawer.hpp"
+#include "Examples/AbstractTile.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -40,7 +40,7 @@ public:
 	int getWidth();
 	int getHeight();
 	void addRandomPlant();
-	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles();
+	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* getTiles();
 	double getScore(AbstractEvolutionObject* object);
 	AbstractTile* getTile(int posX, int posY);
 };

@@ -4,14 +4,15 @@
 #define _ABSTRACTNETWORKTOPOLOYDRAWEROPTIONS_H_
 
 // Includes
-#include "Graphics\GraphicObject.hpp"
-#include <SFML\Graphics.hpp>
-#include "Graphics\Arrow.hpp"
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
-#include "Function\HyperbolicTangentFunction.hpp"
-#include "Neuron\StandardThreshold.hpp"
+#include "Graphics/GraphicObject.hpp"
+#include <SFML/Graphics.hpp>
+#include "Graphics/Arrow.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "Function/HyperbolicTangentFunction.hpp"
+#include "Neuron/StandardThreshold.hpp"
 
 // Library includes
+#include <memory>
 #include <map>
 
 // Forward declarations

@@ -1,11 +1,11 @@
 // Includes
-#include "NetworkTopology\CascadeCorrelationNetwork.hpp"
-#include "NeuronFactory\SameFunctionsNeuronFactory.hpp"
-#include "Function\WeightedSumFunction.hpp"
-#include "Function\IdentityFunction.hpp"
-#include "Neuron\StandardThreshold.hpp"
-#include "Function\FermiFunction.hpp"
-#include "Function\HyperbolicTangentFunction.hpp"
+#include "NetworkTopology/CascadeCorrelationNetwork.hpp"
+#include "NeuronFactory/SameFunctionsNeuronFactory.hpp"
+#include "Function/WeightedSumFunction.hpp"
+#include "Function/IdentityFunction.hpp"
+#include "Neuron/StandardThreshold.hpp"
+#include "Function/FermiFunction.hpp"
+#include "Function/HyperbolicTangentFunction.hpp"
 
 CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCount, unsigned int outputNeuronCount)
 {

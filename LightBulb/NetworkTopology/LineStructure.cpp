@@ -1,6 +1,6 @@
 // Includes
-#include "NetworkTopology\LineStructure.hpp"
-#include "NetworkTopology\SOMNetwork.hpp"
+#include "NetworkTopology/LineStructure.hpp"
+#include "NetworkTopology/SOMNetwork.hpp"
 
 void LineStructure::initialize(SOMNetwork &somNetwork)
 {

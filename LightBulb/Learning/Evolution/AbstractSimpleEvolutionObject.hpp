@@ -7,8 +7,8 @@
 #include <memory>
 
 // Includes
-#include "Learning\Evolution\AbstractEvolutionObject.hpp"
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
+#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;

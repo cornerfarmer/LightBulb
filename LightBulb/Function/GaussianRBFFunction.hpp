@@ -7,8 +7,8 @@
 #include <math.h>
 
 // Includes
-#include "Function\AbstractActivationFunction.hpp"
-#include "Function\AbstractNeighborhoodFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
+#include "Function/AbstractNeighborhoodFunction.hpp"
 
 class GaussianRBFFunction : public AbstractActivationFunction, public AbstractNeighborhoodFunction
 {

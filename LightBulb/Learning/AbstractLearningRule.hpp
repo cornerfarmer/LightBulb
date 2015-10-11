@@ -6,6 +6,7 @@
 // Library Includes
 #include <vector>
 #include <map>
+#include <memory>
 
 // Forward declarations
 class NeuralNetwork;

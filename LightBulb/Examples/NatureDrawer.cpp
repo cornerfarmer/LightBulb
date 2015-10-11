@@ -1,7 +1,7 @@
 // Includes
-#include "Examples\NatureDrawer.hpp"
-#include "Examples\Nature.hpp"
-#include "Examples\AbstractTile.hpp"
+#include "Examples/NatureDrawer.hpp"
+#include "Examples/Nature.hpp"
+#include "Examples/AbstractTile.hpp"
 // Library includes
 #include <exception>
 #include <vector>

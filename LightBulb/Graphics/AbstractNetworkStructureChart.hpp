@@ -4,8 +4,8 @@
 #define _ABSTRACTNETWORKSTRUCTURECHART_H_
 
 // Includes
-#include "Graphics\GraphicObject.hpp"
-#include <SFML\Graphics.hpp>
+#include "Graphics/GraphicObject.hpp"
+#include <SFML/Graphics.hpp>
 #include <list>
 
 // Forward declarations

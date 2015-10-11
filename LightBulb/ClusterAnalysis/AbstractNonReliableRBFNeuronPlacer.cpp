@@ -1,8 +1,8 @@
 // Includes
-#include "ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp"
-#include "ClusterAnalysis\KMeansClustering.hpp"
-#include "ClusterAnalysis\Cluster.hpp"
-#include "ClusterAnalysis\PointSet.hpp"
+#include "ClusterAnalysis/AbstractNonReliableRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis/KMeansClustering.hpp"
+#include "ClusterAnalysis/Cluster.hpp"
+#include "ClusterAnalysis/PointSet.hpp"
 
 void AbstractNonReliableRBFNeuronPlacer::fillUpClusters(PointSet &points, std::list<Cluster> &clusters, int clusterCount, int dimensionCount)
 {	

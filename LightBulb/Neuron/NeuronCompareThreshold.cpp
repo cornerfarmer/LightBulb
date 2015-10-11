@@ -1,5 +1,5 @@
 // Includes
-#include "Neuron\NeuronCompareThreshold.hpp"
+#include "Neuron/NeuronCompareThreshold.hpp"
 
 NeuronCompareThreshold::NeuronCompareThreshold(std::vector<StandardNeuron*>* neurons_)
 {

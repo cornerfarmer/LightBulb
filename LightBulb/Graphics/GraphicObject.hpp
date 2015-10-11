@@ -6,7 +6,7 @@
 #define _USE_MATH_DEFINES
 
 // Includes
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <math.h>
 
 // Forward declarations

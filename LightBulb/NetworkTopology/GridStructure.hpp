@@ -7,7 +7,7 @@
 
 
 // Includes
-#include "NetworkTopology\AbstractSOMStructure.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
 
 // Forward declarations
 

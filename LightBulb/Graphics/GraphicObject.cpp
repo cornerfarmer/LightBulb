@@ -1,9 +1,9 @@
 // Includes
-#include "Graphics\GraphicObject.hpp"
+#include "Graphics/GraphicObject.hpp"
 #include <iomanip>
 #include <sstream>
 
-sf::Font GraphicObject::font = sf::Font();
+sf::Font GraphicObject::font;
 
 GraphicObject::GraphicObject()
 {

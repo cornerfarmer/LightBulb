@@ -4,8 +4,8 @@
 #define _IDENTITYFUNCTION_H_
 
 // Includes
-#include "Function\AbstractActivationFunction.hpp"
-#include "Function\AbstractOutputFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
+#include "Function/AbstractOutputFunction.hpp"
 
 // The IdentityFunction just returns the input without calculating anything
 class IdentityFunction : public AbstractOutputFunction, public AbstractActivationFunction

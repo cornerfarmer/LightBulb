@@ -8,7 +8,7 @@
 #include <map>
 
 // Includes
-#include "Learning\AbstractLearningRule.hpp"
+#include "Learning/AbstractLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;

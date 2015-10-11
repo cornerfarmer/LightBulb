@@ -1,7 +1,7 @@
 // Includes
-#include "Examples\Position.hpp"
-#include "Examples\FunctionSimulator.hpp"
-#include "Learning\Evolution\EvolutionLearningRule.hpp"
+#include "Examples/Position.hpp"
+#include "Examples/FunctionSimulator.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
 
 Position::Position(FunctionSimulator* functionSimulator_)
 	: AbstractSimpleEvolutionObject(functionSimulator_, 1, 2, false)

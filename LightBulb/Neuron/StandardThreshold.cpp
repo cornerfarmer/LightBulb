@@ -1,5 +1,5 @@
 // Includes
-#include "Neuron\StandardThreshold.hpp"
+#include "Neuron/StandardThreshold.hpp"
 
 StandardThreshold::StandardThreshold(double value_)
 {

@@ -7,7 +7,7 @@
 #include <math.h>
 
 // Includes
-#include "Function\AbstractShrinkFunction.hpp"
+#include "Function/AbstractShrinkFunction.hpp"
 
 // Describes a value which shrinks exponential
 class ExponentialShrinkFunction : public AbstractShrinkFunction

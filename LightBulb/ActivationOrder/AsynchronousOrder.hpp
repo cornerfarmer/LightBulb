@@ -4,7 +4,7 @@
 #define _ASYNCHRONOUSORDER_H_
 
 // Includes
-#include "ActivationOrder\AbstractActivationOrder.hpp"
+#include "ActivationOrder/AbstractActivationOrder.hpp"
 
 // With this order, all neurons will get activated one after another
 // This class is compatible with every sort of network

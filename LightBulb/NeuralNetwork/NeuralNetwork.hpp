@@ -6,9 +6,10 @@
 // Libraray includes
 #include <vector>
 #include <map>
+#include <memory>
 
 // Includes
-#include "NeuralNetwork\NeuralNetworkIO.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;

@@ -4,10 +4,11 @@
 #define _NATUREDRAWER_H_
 
 // Includes
-#include "Graphics\GraphicObject.hpp"
-#include <SFML\Graphics.hpp>
+#include "Graphics/GraphicObject.hpp"
+#include <SFML/Graphics.hpp>
 #include <math.h>
 #include <map>
+#include <memory>
 
 // Forward declarations
 class Nature;

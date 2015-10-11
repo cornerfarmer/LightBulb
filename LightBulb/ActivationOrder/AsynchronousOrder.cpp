@@ -1,9 +1,9 @@
 // Includes
-#include "ActivationOrder\AsynchronousOrder.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "Neuron\InputNeuron.hpp"
-#include "Neuron\BiasNeuron.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
+#include "ActivationOrder/AsynchronousOrder.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "Neuron/InputNeuron.hpp"
+#include "Neuron/BiasNeuron.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
 // Library includes
 #include <exception>
 

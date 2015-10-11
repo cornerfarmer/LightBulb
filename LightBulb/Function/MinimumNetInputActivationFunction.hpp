@@ -7,7 +7,7 @@
 #include <math.h>
 
 // Includes
-#include "Function\AbstractActivationFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
 
 // The MinimumNetInputActivationFunction only activates the neuron with the lowest netInput
 class MinimumNetInputActivationFunction : public AbstractActivationFunction

@@ -1,6 +1,6 @@
 // Includes
-#include "Function\BinaryFunction.hpp"
-#include "Neuron\StandardThreshold.hpp"
+#include "Function/BinaryFunction.hpp"
+#include "Neuron/StandardThreshold.hpp"
 // Library includes
 #include <stdexcept>
 

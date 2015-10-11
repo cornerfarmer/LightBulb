@@ -4,8 +4,8 @@
 #define _FREENETWORKTOPOLOYDRAWEROPTIONS_H_
 
 // Includes
-#include "Graphics\AbstractNetworkTopologyDrawer.hpp"
-#include <SFML\Graphics.hpp>
+#include "Graphics/AbstractNetworkTopologyDrawer.hpp"
+#include <SFML/Graphics.hpp>
 #include <list>
 #include <map>
 

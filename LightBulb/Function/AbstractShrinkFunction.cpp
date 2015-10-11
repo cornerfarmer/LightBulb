@@ -1,5 +1,5 @@
 // Includes
-#include "Function\AbstractShrinkFunction.hpp"
+#include "Function/AbstractShrinkFunction.hpp"
 
 AbstractShrinkFunction::AbstractShrinkFunction(double startValue_, double minValue_)
 {

@@ -4,7 +4,7 @@
 #define _ABSTRACTRELIABLERBFNEURONPLACER_H_
 
 // Includes
-#include "ClusterAnalysis\AbstractRBFNeuronPlacer.hpp"
+#include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 

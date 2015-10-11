@@ -9,8 +9,8 @@
 #include <map>
 
 // Includes
-#include "ClusterAnalysis\AbstractNearestClustering.hpp"
-#include "ClusterAnalysis\Point.hpp"
+#include "ClusterAnalysis/AbstractNearestClustering.hpp"
+#include "ClusterAnalysis/Point.hpp"
 
 // Forward declarations
 struct Cluster;

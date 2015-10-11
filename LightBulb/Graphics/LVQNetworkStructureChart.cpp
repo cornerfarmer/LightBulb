@@ -1,7 +1,7 @@
 // Includes
-#include "Graphics\LVQNetworkStructureChart.hpp"
-#include "NetworkTopology\LVQNetwork.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Graphics/LVQNetworkStructureChart.hpp"
+#include "NetworkTopology/LVQNetwork.hpp"
+#include "Neuron/StandardNeuron.hpp"
 
 LVQNetworkStructureChart::LVQNetworkStructureChart(LVQNetworkStructureChartOptions &options_)
 	: AbstractNetworkStructureChart(new LVQNetworkStructureChartOptions(options_))

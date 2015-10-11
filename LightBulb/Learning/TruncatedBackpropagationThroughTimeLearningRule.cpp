@@ -1,15 +1,15 @@
 // Includes
-#include "Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp"
-#include "NeuralNetwork\NeuralNetwork.hpp"
-#include "NetworkTopology\AbstractNetworkTopology.hpp"
-#include "Neuron\Edge.hpp"
-#include "ActivationOrder\AbstractActivationOrder.hpp"
-#include "Neuron\AbstractNeuron.hpp"
-#include "Neuron\StandardNeuron.hpp"
-#include "ActivationOrder\SynchronousOrder.hpp"
-#include "ActivationOrder\TopologicalOrder.hpp"
-#include "NetworkTopology\LayeredNetwork.hpp"
-#include "NetworkTopology\FreeNetwork.hpp"
+#include "Learning/TruncatedBackpropagationThroughTimeLearningRule.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Neuron/Edge.hpp"
+#include "ActivationOrder/AbstractActivationOrder.hpp"
+#include "Neuron/AbstractNeuron.hpp"
+#include "Neuron/StandardNeuron.hpp"
+#include "ActivationOrder/SynchronousOrder.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FreeNetwork.hpp"
 
 
 TruncatedBackpropagationThroughTimeLearningRule::TruncatedBackpropagationThroughTimeLearningRule(BackpropagationThroughTimeLearningRuleOptions options_) 

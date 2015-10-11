@@ -1,8 +1,8 @@
 // Includes
-#include "ClusterAnalysis\KMeansClustering.hpp"
-#include "ClusterAnalysis\Cluster.hpp"
-#include "ClusterAnalysis\Point.hpp"
-#include "ClusterAnalysis\PointSet.hpp"
+#include "ClusterAnalysis/KMeansClustering.hpp"
+#include "ClusterAnalysis/Cluster.hpp"
+#include "ClusterAnalysis/Point.hpp"
+#include "ClusterAnalysis/PointSet.hpp"
 
 std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &points, int clusterCount, int dimensionCount)
 {

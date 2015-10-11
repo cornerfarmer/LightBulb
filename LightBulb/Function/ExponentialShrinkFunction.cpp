@@ -1,5 +1,5 @@
 // Includes
-#include "Function\ExponentialShrinkFunction.hpp"
+#include "Function/ExponentialShrinkFunction.hpp"
 
 
 ExponentialShrinkFunction::ExponentialShrinkFunction(double startValue_, double minValue_, double speedFactor_)

@@ -1,10 +1,10 @@
 #define _USE_MATH_DEFINES
 // Includes
-#include "Function\CosinusFunction.hpp"
-#include "Function\AbstractActivationFunction.hpp"
-#include "Neuron\NeuronCompareThreshold.hpp"
-#include "NetworkTopology\AbstractSOMStructure.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Function/CosinusFunction.hpp"
+#include "Function/AbstractActivationFunction.hpp"
+#include "Neuron/NeuronCompareThreshold.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
+#include "Neuron/StandardNeuron.hpp"
 // Library includes
 
 

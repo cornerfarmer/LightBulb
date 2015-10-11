@@ -5,9 +5,10 @@
 
 // Library includes
 #include <vector>
+#include <cstddef>
 
 // Includes
-#include "ClusterAnalysis\ValuePosition.hpp"
+#include "ClusterAnalysis/ValuePosition.hpp"
 
 // Forward declarations
 struct Cluster;

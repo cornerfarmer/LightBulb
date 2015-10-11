@@ -1,6 +1,8 @@
 // Includes
-#include "NetworkTopology\GridStructure.hpp"
-#include "NetworkTopology\SOMNetwork.hpp"
+#include "NetworkTopology/GridStructure.hpp"
+#include "NetworkTopology/SOMNetwork.hpp"
+// Library includes
+#include <math.h>
 
 void GridStructure::initialize(SOMNetwork &somNetwork)
 {

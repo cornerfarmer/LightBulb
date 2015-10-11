@@ -1,7 +1,7 @@
 // Includes
-#include "Graphics\CounterpropagationNetworkStructureChart.hpp"
-#include "NetworkTopology\CounterpropagationNetwork.hpp"
-#include "Neuron\StandardNeuron.hpp"
+#include "Graphics/CounterpropagationNetworkStructureChart.hpp"
+#include "NetworkTopology/CounterpropagationNetwork.hpp"
+#include "Neuron/StandardNeuron.hpp"
 
 CounterpropagationNetworkStructureChart::CounterpropagationNetworkStructureChart(CounterpropagationNetworkStructureChartOptions &options_)
 	: AbstractNetworkStructureChart(new CounterpropagationNetworkStructureChartOptions(options_))

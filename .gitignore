@@ -20,6 +20,8 @@ Thumbs.db
 [Bb]in
 *.lib
 *.sbr
+*.o
+*.d
 obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
@@ -29,3 +31,5 @@ LightBulb.sdf
 LightBulb.opensdf
 LightBulb/Debug/
 LightBulb/Release/
+Debug/LightBulb
+Release/LightBulb

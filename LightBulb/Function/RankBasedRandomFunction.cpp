@@ -1,8 +1,8 @@
 // Includes
-#include "Function\RankBasedRandomFunction.hpp"
+#include "Function/RankBasedRandomFunction.hpp"
 // Library includes
 #include <random>
-#include <exception>
+#include <stdexcept>
 
 int RankBasedRandomFunction::execute(int elementCount)
 {

@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "Learning\Evolution\AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;

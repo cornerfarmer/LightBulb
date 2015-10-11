@@ -1,5 +1,5 @@
 // Includes
-#include "NetworkTopology\AbstractSOMStructure.hpp"
+#include "NetworkTopology/AbstractSOMStructure.hpp"
 
 std::map<StandardNeuron*, std::map<StandardNeuron*, double>>* AbstractSOMStructure::getNeighborhoodDistances()
 {
