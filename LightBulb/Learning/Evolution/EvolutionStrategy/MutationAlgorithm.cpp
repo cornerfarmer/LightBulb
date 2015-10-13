@@ -19,7 +19,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 
 	for (auto mutationStrengthValue = mutationStrength->begin(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
 	{
-		*mutationStrengthValue *= exp(0.2 * distribution(generator));
+		*mutationStrengthValue *= exp(0.1 * distribution(generator));
 		if ((double)rand() / RAND_MAX > 0.9)
 			*mutationStrengthValue *= -1;
 	}

@@ -1691,11 +1691,11 @@ void doFunctionEvolutionTest()
 
 	EvolutionLearningRuleOptions options;
 	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 300));
-	options.creationCommands.push_back(new ConstantCreationCommand(40));
-	options.reuseCommands.push_back(new BestReuseCommand(5));
-	options.selectionCommands.push_back(new BestSelectionCommand(35));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
+	options.creationCommands.push_back(new ConstantCreationCommand(1));
+	options.reuseCommands.push_back(new BestReuseCommand(1));
+	options.selectionCommands.push_back(new BestSelectionCommand(1));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 5));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 
 	EvolutionLearningRule learningRule(options);
 

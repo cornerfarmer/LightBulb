@@ -53,6 +53,8 @@ private:
 	std::unique_ptr<FunctionDrawerOptions> options;
 	// 
 	std::vector<sf::RectangleShape> positions;
+
+	std::vector<sf::CircleShape> mutationStrengths;
 public:
 	FunctionDrawer(FunctionDrawerOptions &options_);
 	// This method draws the calculated chart

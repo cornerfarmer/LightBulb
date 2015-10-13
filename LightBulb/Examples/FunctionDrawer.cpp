@@ -19,14 +19,29 @@ FunctionDrawer::FunctionDrawer(FunctionDrawerOptions& options_)
 void FunctionDrawer::recalculateAllValues()
 {
 	positions.resize(options->functionSimulator->getEvolutionObjects()->size() + options->markedPositions.size());
+	mutationStrengths.resize(options->functionSimulator->getEvolutionObjects()->size());
 	
 	auto position = positions.begin();
-	for (auto object = options->functionSimulator->getEvolutionObjects()->begin(); object != options->functionSimulator->getEvolutionObjects()->end(); object++, position++)
+	auto mutationStrength = mutationStrengths.begin();
+	for (auto object = options->functionSimulator->getEvolutionObjects()->begin(); object != options->functionSimulator->getEvolutionObjects()->end(); object++, position++, mutationStrength++)
 	{
 		std::vector<float> objectPosition = dynamic_cast<Position*>(*object)->getPosition();
-		position->setPosition((objectPosition[0] - options->startX) / (options->endX - options->startX) * options->width - 1, (objectPosition[1] - options->startY) / (options->endY - options->startY) * options->height - 1);
+		std::vector<double> objectMutationStrength = *dynamic_cast<Position*>(*object)->getMutationStrength();
+		sf::Vector2f graphicsPosition((objectPosition[0] - options->startX) / (options->endX - options->startX) * options->width - 1, (objectPosition[1] - options->startY) / (options->endY - options->startY) * options->height - 1);
+
+		position->setPosition(graphicsPosition);
 		position->setSize(sf::Vector2f(2, 2));
 		position->setFillColor(sf::Color::White);
+
+		mutationStrength->setPosition(graphicsPosition);
+		mutationStrength->setRadius(1);
+		mutationStrength->setScale(objectMutationStrength[0] / (options->startX - options->endX) * options->width, objectMutationStrength[1] / (options->startY - options->endY) * options->height);
+
+		mutationStrength->setFillColor(sf::Color::Transparent);
+		mutationStrength->setOutlineColor(sf::Color::White);
+		mutationStrength->setOutlineThickness(0.1);
+		mutationStrength->setOrigin(mutationStrength->getRadius(), mutationStrength->getRadius());
+		mutationStrength->setPointCount(100);
 	}
 
 	
@@ -54,6 +69,11 @@ void FunctionDrawer::draw(sf::RenderWindow &window)
 	for (auto position = positions.begin(); position != positions.end(); position++)
 	{
 		window.draw(*position);
+	}
+
+	for (auto mutationStrength = mutationStrengths.begin(); mutationStrength != mutationStrengths.end(); mutationStrength++)
+	{
+		window.draw(*mutationStrength);
 	}
 }
 
