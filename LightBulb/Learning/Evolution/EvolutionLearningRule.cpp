@@ -64,20 +64,21 @@ AbstractEvolutionObject* EvolutionLearningRule::doRecombination(AbstractEvolutio
 	}
 }
 
-bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
+bool EvolutionLearningRule::doLearning()
 {
 	int generation = 0;
 	while (true)
 	{
-		std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
+		if (options->enableDebugOutput)
+			std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
 		for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
 		{
-			(*creationCommand)->execute(world);
+			(*creationCommand)->execute(*options->world);
 		}
 
-		world.doSimulationStep(*this);
+		options->world->doSimulationStep(*this);
 
-		std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = world.getHighscoreList();
+		std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
 		std::vector<AbstractEvolutionObject*> newObjectVector;
 
 		bool exit = true;
@@ -86,7 +87,8 @@ bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 			exit &= (*exitCondition)->evaluate(highscore.get());
 		}
 		if (exit) {
-			std::cout << "All conditions are true => exit" << std::endl;
+			if (options->enableDebugOutput)
+				std::cout << "All conditions are true => exit" << std::endl;
 			break;
 		}
 
@@ -110,10 +112,15 @@ bool EvolutionLearningRule::doLearning(AbstractEvolutionWorld& world)
 			(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
 		}	
 	
-		world.setEvolutionObjects(newObjectVector);
-		world.reset();
+		options->world->setEvolutionObjects(newObjectVector);
+		options->world->reset();
 
 		generation++;
 	}
 	return true;
+}
+
+EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions()
+{
+	return options.get();
 }

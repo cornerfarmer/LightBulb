@@ -25,9 +25,12 @@ struct EvolutionLearningRuleOptions
 	std::vector<AbstractMutationCommand*> mutationsCommands;
 	std::vector<AbstractRecombinationCommand*> recombinationCommands;
 	std::vector<AbstractReuseCommand*> reuseCommands;
+	AbstractEvolutionWorld* world;
+	bool enableDebugOutput;
 	EvolutionLearningRuleOptions()
 	{
-
+		world = NULL;
+		enableDebugOutput = false;
 	}
 };
 
@@ -41,7 +44,8 @@ public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	void doMutation(AbstractEvolutionObject& object);
 	AbstractEvolutionObject* doRecombination(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2);
-	bool doLearning(AbstractEvolutionWorld& world);
+	bool doLearning();
+	EvolutionLearningRuleOptions* getOptions();
 };
 
 #endif

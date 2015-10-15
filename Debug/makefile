@@ -19,6 +19,7 @@ RM := rm -rf
 -include src/Graphics/subdir.mk
 -include src/Function/subdir.mk
 -include src/Examples/subdir.mk
+-include src/Diagnostic/subdir.mk
 -include src/ClusterAnalysis/subdir.mk
 -include src/ActivationOrder/subdir.mk
 -include src/subdir.mk

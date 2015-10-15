@@ -77,6 +77,8 @@
 #include "Learning/Evolution/RateDifferenceCondition.hpp"
 #include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
 #include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
+#include "Diagnostic/LearningRuleAnalyser.hpp"
+#include "Diagnostic/ChangeableNumber.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1629,10 +1631,11 @@ void doEvolutionTest()
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
+	options.world = &nature;
 
 	EvolutionLearningRule learningRule(options);
 
-	learningRule.doLearning(nature);
+	learningRule.doLearning();
 }
 
 void doTicTacToeTest()
@@ -1678,11 +1681,12 @@ void doTicTacToeTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 25));
+	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule learningRule(options);
 
-	learningRule.doLearning(ticTacToe);
+	learningRule.doLearning();
 }
 
 void doFunctionEvolutionTest()
@@ -1694,12 +1698,22 @@ void doFunctionEvolutionTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(1));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(1));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 5));
+	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm();
+	options.mutationsCommands.push_back(new ConstantMutationCommand(mutationAlgorithm, 5));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
+	options.world = &simulator;
 
 	EvolutionLearningRule learningRule(options);
 
-	learningRule.doLearning(simulator);
+	LearningRuleAnalyserOptions analyserOptions;
+	analyserOptions.learningRule = &learningRule;
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 0, 0.1, 1, "mcs"));
+	double test;
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<double>(&test, 0, 0.1, 1, "test"));
+
+	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
+
+	learningRuleAnalyser.execute();
 }
 
 int main()

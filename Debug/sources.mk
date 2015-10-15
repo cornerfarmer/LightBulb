@@ -25,6 +25,7 @@ CPP_DEPS :=
 SUBDIRS := \
 src/ActivationOrder \
 src/ClusterAnalysis \
+src/Diagnostic \
 src/Examples \
 src/Function \
 src/Graphics \

@@ -17,9 +17,11 @@ class MutationAlgorithm : public AbstractMutationAlgorithm
 private:
 	std::default_random_engine generator;
 	std::normal_distribution<double> distribution;
+	double mutationStrengthChangeSpeed;
 public:
 	MutationAlgorithm();
 	void execute(AbstractEvolutionObject* object1);
+	void setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_);
 };
 
 #endif
