@@ -27,6 +27,7 @@ struct FunctionSimulatorOptions
 	}
 };
 
+typedef double(*Function)(std::vector<float> pos);
 
 class FunctionSimulator : public AbstractSimpleEvolutionWorld
 {
@@ -35,9 +36,9 @@ protected:
 	sf::RenderWindow window;
 	std::unique_ptr<FunctionDrawer> drawer;
 	std::unique_ptr<FunctionSimulatorOptions> options;
-
+	Function function;
 public:
-	FunctionSimulator(FunctionSimulatorOptions &options_);
+	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	double getScore(AbstractEvolutionObject* object);
 };

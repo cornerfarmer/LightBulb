@@ -1689,12 +1689,22 @@ void doTicTacToeTest()
 	learningRule.doLearning();
 }
 
+static double sixHumpCamelFunction(std::vector<float> pos)
+{
+	return -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4));
+}
+
+static double threeHumpCamelFunction(std::vector<float> pos)
+{
+	return  -1 * (2 * pow(pos[0], 2) - 1.05 * pow(pos[0], 4) + pow(pos[0], 6) / 6 + pos[0] * pos[1] + pow(pos[1], 2));
+}
+
 void doFunctionEvolutionTest()
 {
 	FunctionSimulatorOptions simulatorOptions;
 	simulatorOptions.enableGraphics = false;
 
-	FunctionSimulator simulator(simulatorOptions);
+	FunctionSimulator simulator(simulatorOptions, sixHumpCamelFunction);
 
 	EvolutionLearningRuleOptions options;
 	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 100));

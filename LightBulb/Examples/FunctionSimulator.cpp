@@ -10,8 +10,10 @@ AbstractEvolutionObject* FunctionSimulator::createNewObject()
 	return new Position(this);
 }
 
-FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_)
+FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Function function_)
 {
+	function = function_;
+
 	options.reset(new FunctionSimulatorOptions(options_));
 
 	if (options->enableGraphics)
@@ -54,7 +56,6 @@ void FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
 double FunctionSimulator::getScore(AbstractEvolutionObject* object)
 {
 	std::vector<float> pos = static_cast<Position*>(object)->getPosition();
-	return -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4));
-	//return  -1 * (2 * pow(pos[0], 2) - 1.05 * pow(pos[0], 4) + pow(pos[0], 6) / 6 + pos[0] * pos[1] + pow(pos[1], 2));
+	return function(pos);
 }
 
