@@ -15,7 +15,7 @@ class BestSelectionCommand : public AbstractSelectionCommand
 private:
 	int objectCount;
 public:
-	BestSelectionCommand(int objectCount_);
+	BestSelectionCommand(int objectCount_, bool enableDebugOutput_ = false);
 	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 };
 

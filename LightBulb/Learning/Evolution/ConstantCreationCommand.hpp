@@ -15,8 +15,9 @@ class ConstantCreationCommand : public AbstractCreationCommand
 private:
 	int objectCount;
 public:
-	ConstantCreationCommand(int objectCount_);
+	ConstantCreationCommand(int objectCount_, bool enableDebugOutput_ = false);
 	void execute(AbstractEvolutionWorld& world);
+	void setObjectCount(int newObjectCount);
 };
 
 #endif

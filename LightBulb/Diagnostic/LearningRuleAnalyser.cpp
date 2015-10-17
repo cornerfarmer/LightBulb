@@ -23,8 +23,10 @@ void LearningRuleAnalyser::execute()
 			(*changableParameter)->printCurrentValue();
 			std::cout << "|";
 		}
+
+		LearningResult currentResult = options->learningRule->doLearning();
+		std::cout << ": " << (currentResult.successful ? "successful" : "unsuccessful") << " after " << currentResult.iterationsNeeded << " iterations";
 		std::cout << std::endl;
-		options->learningRule->doLearning();
 	} while (!switchToNextValueCombination());
 }
 

@@ -1691,25 +1691,28 @@ void doTicTacToeTest()
 
 void doFunctionEvolutionTest()
 {
-	FunctionSimulator simulator;
+	FunctionSimulatorOptions simulatorOptions;
+	simulatorOptions.enableGraphics = false;
+
+	FunctionSimulator simulator(simulatorOptions);
 
 	EvolutionLearningRuleOptions options;
-	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 300));
-	options.creationCommands.push_back(new ConstantCreationCommand(1));
+	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 100));
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(1);
+	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(1));
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm();
-	options.mutationsCommands.push_back(new ConstantMutationCommand(mutationAlgorithm, 5));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(mutationAlgorithm, 2.00));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 	options.world = &simulator;
-
+	options.enableDebugOutput = false;
 	EvolutionLearningRule learningRule(options);
 
 	LearningRuleAnalyserOptions analyserOptions;
 	analyserOptions.learningRule = &learningRule;
-	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 0, 0.1, 1, "mcs"));
-	double test;
-	analyserOptions.changableParameters.push_back(new ChangeableNumber<double>(&test, 0, 0.1, 1, "test"));
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 0, 1, 5.0, "mcs"));
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, ConstantCreationCommand>(constantCreationCommand, &ConstantCreationCommand::setObjectCount, 1, 1, 5.0, "ccc"));
 
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 

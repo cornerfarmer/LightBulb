@@ -64,11 +64,16 @@ AbstractEvolutionObject* EvolutionLearningRule::doRecombination(AbstractEvolutio
 	}
 }
 
-bool EvolutionLearningRule::doLearning()
+
+LearningResult EvolutionLearningRule::doLearning()
 {
+	options->world->getEvolutionObjects()->clear();
+
 	int generation = 0;
 	while (true)
 	{
+		options->world->reset();
+
 		if (options->enableDebugOutput)
 			std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
 		for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
@@ -113,11 +118,17 @@ bool EvolutionLearningRule::doLearning()
 		}	
 	
 		options->world->setEvolutionObjects(newObjectVector);
-		options->world->reset();
 
 		generation++;
 	}
-	return true;
+
+	if (options->enableDebugOutput)
+		std::cout << "Best result: " << options->world->getHighscoreList()->front().first << std::endl;
+
+	LearningResult result;
+	result.iterationsNeeded = generation;
+	result.successful = true;
+	return result;
 }
 
 EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions()

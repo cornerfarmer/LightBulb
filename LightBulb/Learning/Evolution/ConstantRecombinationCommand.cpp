@@ -8,15 +8,26 @@
 //Library includes
 #include <iostream>
 
-ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, int objectCount_)
-	: AbstractRecombinationCommand(recombinationAlgorithm_)
+ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, int objectCount_, bool enableDebugOutput_)
+	: AbstractRecombinationCommand(recombinationAlgorithm_, enableDebugOutput_)
 {
 	objectCount = objectCount_;
 }
 
+ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, double recombinationPercentage_, bool enableDebugOutput_)
+	: AbstractRecombinationCommand(recombinationAlgorithm_, enableDebugOutput_)
+{
+	objectCount = 0;
+	recombinationPercentage = recombinationPercentage_;
+}
+
 void ConstantRecombinationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
-	std::cout << "Recombinated " << objectCount << " random ones" << std::endl;
+	if (objectCount == 0)
+		objectCount = (int)(highscore->size() * recombinationPercentage);
+
+	if (enableDebugOutput)
+		std::cout << "Recombinated " << objectCount << " random ones" << std::endl;
 	
 	int entryIndex = 0;
 	for (int i = 0; i < objectCount; i++)

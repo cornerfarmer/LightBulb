@@ -8,14 +8,16 @@
 #include <iomanip>
 #include <algorithm>
 
-BestSelectionCommand::BestSelectionCommand(int objectCount_)
+BestSelectionCommand::BestSelectionCommand(int objectCount_, bool enableDebugOutput_)
+	: AbstractSelectionCommand(enableDebugOutput_)
 {
 	objectCount = objectCount_;
 }
 
 void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 {
-	std::cout << "Selected " << objectCount << " best ones:";
+	if (enableDebugOutput)
+		std::cout << "Selected " << objectCount << " best ones:";
 	
 	if (highscore->size() > objectCount)
 	{
@@ -26,6 +28,6 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 
 		highscore->resize(objectCount);
 	}
-		
-	std::cout << std::endl;
+	if (enableDebugOutput)
+		std::cout << std::endl;
 }

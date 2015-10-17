@@ -19,8 +19,9 @@ class AbstractRecombinationCommand
 {
 protected:
 	std::unique_ptr<AbstractRecombinationAlgorithm> recombinationAlgorithm;
+	bool enableDebugOutput;
 public:
-	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_);
+	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, bool enableDebugOutput_);
 	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector) = 0;
 };
 

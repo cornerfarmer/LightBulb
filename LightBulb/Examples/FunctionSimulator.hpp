@@ -17,14 +17,27 @@ class EvolutionLearningRule;
 class AbstractEvolutionObject;
 class AbstractTile;
 
+
+struct FunctionSimulatorOptions
+{
+	bool enableGraphics;
+	FunctionSimulatorOptions()
+	{
+		enableGraphics = true;
+	}
+};
+
+
 class FunctionSimulator : public AbstractSimpleEvolutionWorld
 {
 protected:
 	AbstractEvolutionObject* createNewObject();
 	sf::RenderWindow window;
 	std::unique_ptr<FunctionDrawer> drawer;
+	std::unique_ptr<FunctionSimulatorOptions> options;
+
 public:
-	FunctionSimulator();
+	FunctionSimulator(FunctionSimulatorOptions &options_);
 	void doSimulationStep(EvolutionLearningRule& learningRule);
 	double getScore(AbstractEvolutionObject* object);
 };

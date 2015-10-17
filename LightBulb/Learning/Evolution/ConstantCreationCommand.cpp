@@ -3,7 +3,8 @@
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 
 
-ConstantCreationCommand::ConstantCreationCommand(int objectCount_)
+ConstantCreationCommand::ConstantCreationCommand(int objectCount_, bool enableDebugOutput_)
+	: AbstractCreationCommand(enableDebugOutput_)
 {
 	objectCount = objectCount_;
 }
@@ -15,4 +16,9 @@ void ConstantCreationCommand::execute(AbstractEvolutionWorld& world)
 	{
 		world.addNewObject();
 	}
+}
+
+void ConstantCreationCommand::setObjectCount(int newObjectCount)
+{
+	objectCount = newObjectCount;
 }

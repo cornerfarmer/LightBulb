@@ -13,7 +13,10 @@ class EvolutionLearningRule;
 
 class AbstractSelectionCommand
 {
+protected:
+	bool enableDebugOutput;
 public:
+	AbstractSelectionCommand(bool enableDebugOutput_);
 	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
 };
 

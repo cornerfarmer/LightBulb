@@ -16,7 +16,7 @@ class BestReuseCommand : public AbstractReuseCommand
 private:
 	int objectCount;
 public:
-	BestReuseCommand(int objectCount_);
+	BestReuseCommand(int objectCount_, bool enableDebugOutput_ = false);
 	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
 };
 

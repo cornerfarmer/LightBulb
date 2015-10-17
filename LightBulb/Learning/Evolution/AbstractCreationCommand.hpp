@@ -11,7 +11,10 @@ class AbstractEvolutionWorld;
 
 class AbstractCreationCommand
 {
+protected:
+	bool enableDebugOutput;
 public:
+	AbstractCreationCommand(bool enableDebugOutput_);
 	virtual void execute(AbstractEvolutionWorld& world) = 0;
 };
 
