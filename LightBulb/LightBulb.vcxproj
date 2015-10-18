@@ -32,6 +32,9 @@
     <ClInclude Include="ClusterAnalysis\ROLFClustering.hpp" />
     <ClInclude Include="ClusterAnalysis\ROLFNeuronPlacer.hpp" />
     <ClInclude Include="ClusterAnalysis\ValuePosition.hpp" />
+    <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp" />
+    <ClInclude Include="Diagnostic\ChangeableNumber.hpp" />
+    <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp" />
     <ClInclude Include="Examples\AbstractTile.hpp" />
     <ClInclude Include="Examples\Animal.hpp" />
     <ClInclude Include="Examples\EarthTile.hpp" />
@@ -103,6 +106,7 @@
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp" />
     <ClInclude Include="Learning\HopfieldLearningRule.hpp" />
+    <ClInclude Include="Learning\LearningResult.hpp" />
     <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ2LearningRule.hpp" />
     <ClInclude Include="Learning\LVQ3LearningRule.hpp" />
@@ -167,6 +171,9 @@
     <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp" />
     <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp" />
     <ClCompile Include="ClusterAnalysis\ValuePosition.cpp" />
+    <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp" />
+    <ClCompile Include="Diagnostic\ChangeableNumber.cpp" />
+    <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp" />
     <ClCompile Include="Examples\AbstractTile.cpp" />
     <ClCompile Include="Examples\Animal.cpp" />
     <ClCompile Include="Examples\EarthTile.cpp" />

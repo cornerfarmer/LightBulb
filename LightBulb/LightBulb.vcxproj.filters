@@ -48,6 +48,9 @@
     <Filter Include="Quelldateien\Learning\Evolution\EvolutionStrategy">
       <UniqueIdentifier>{3570f652-a4bb-44a6-b6c4-e3dee7583104}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Diagnostic">
+      <UniqueIdentifier>{25f6bd5b-190a-4df7-89a4-b724b574863d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
@@ -455,6 +458,18 @@
     <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\LearningResult.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagnostic\ChangeableNumber.hpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -858,6 +873,15 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\ChangeableNumber.cpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
