@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 template<typename T, typename O = AbstractChangeableParameter>
 class ChangeableNumber : public AbstractChangeableParameter
@@ -94,9 +95,11 @@ public:
 		setValue();
 	}
 
-	void printCurrentValue()
+	std::string printCurrentValue()
 	{
-		std::cout << name << ": " << std::fixed << std::setprecision(4) << value;
+		std::ostringstream strs;
+		strs << std::fixed << std::setprecision(5) << value;
+		return name + ": " + strs.str();
 	}
 };
 

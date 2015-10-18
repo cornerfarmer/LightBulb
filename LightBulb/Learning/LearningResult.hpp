@@ -3,8 +3,13 @@
 
 struct LearningResult
 {
-	bool successful;
+	int successful;
 	int iterationsNeeded;
+	LearningResult()
+	{
+		successful = 0;
+		iterationsNeeded = 0;
+	}
 };
 
 #endif
