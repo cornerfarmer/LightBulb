@@ -19,7 +19,7 @@ private:
 	std::normal_distribution<double> distribution;
 	double mutationStrengthChangeSpeed;
 public:
-	MutationAlgorithm();
+	MutationAlgorithm(double mutationStrengthChangeSpeed_);
 	void execute(AbstractEvolutionObject* object1);
 	void setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_);
 };

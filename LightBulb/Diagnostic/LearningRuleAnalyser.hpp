@@ -23,7 +23,7 @@ struct LearningRuleAnalyserOptions
 	LearningRuleAnalyserOptions()
 	{
 		learningRule = NULL;
-		calculationsPerParameterCombination = 20;
+		calculationsPerParameterCombination = 30;
 	}
 };
 

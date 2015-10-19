@@ -18,6 +18,7 @@ private:
 public:
 	RateDifferenceCondition(double differnce_, int count_, bool enableDebugOutput_ = false);
 	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void setCount(int newCount);
 };
 
 #endif

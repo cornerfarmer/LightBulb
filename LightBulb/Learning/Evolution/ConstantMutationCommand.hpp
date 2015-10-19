@@ -22,6 +22,7 @@ public:
 	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, int objectCount_, bool enableDebugOutput_ = false);
 	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, double mutationPercentage_, bool enableDebugOutput_ = false);
 	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
+	void setMutationPercentage(double newMutationPercentage);
 };
 
 #endif

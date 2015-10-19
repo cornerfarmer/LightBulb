@@ -12,6 +12,7 @@ ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombination
 	: AbstractRecombinationCommand(recombinationAlgorithm_, enableDebugOutput_)
 {
 	objectCount = objectCount_;
+	recombinationPercentage = 0;
 }
 
 ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, double recombinationPercentage_, bool enableDebugOutput_)
@@ -23,6 +24,7 @@ ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombination
 
 void ConstantRecombinationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
+	int objectCount = this->objectCount;
 	if (objectCount == 0)
 		objectCount = (int)(highscore->size() * recombinationPercentage);
 

@@ -1629,7 +1629,7 @@ void doEvolutionTest()
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 23));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 23));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
 	options.world = &nature;
 
@@ -1680,7 +1680,7 @@ void doTicTacToeTest()
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(), 25));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 25));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
@@ -1702,27 +1702,35 @@ static double threeHumpCamelFunction(std::vector<float> pos)
 void doFunctionEvolutionTest()
 {
 	FunctionSimulatorOptions simulatorOptions;
-	simulatorOptions.enableGraphics = false;
+	//simulatorOptions.enableGraphics = false;
 
 	FunctionSimulator simulator(simulatorOptions, sixHumpCamelFunction);
 
 	EvolutionLearningRuleOptions options;
-	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 100));
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(1);
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10);
+	options.exitConditions.push_back(rateDifferenceCondition);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	options.selectionCommands.push_back(new BestSelectionCommand(1));
-	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm();
-	options.mutationsCommands.push_back(new ConstantMutationCommand(mutationAlgorithm, 2.00));
+	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
+	options.selectionCommands.push_back(bestSelectionCommand);
+	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
+	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 	options.world = &simulator;
 	options.enableDebugOutput = false;
+	options.scoreGoal = 1.031627;
+	options.scoreGoal = -0.000001;
 	EvolutionLearningRule learningRule(options);
 
 	LearningRuleAnalyserOptions analyserOptions;
 	analyserOptions.learningRule = &learningRule;
-	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 0, 1, 5.0, "mcs"));
-	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, ConstantCreationCommand>(constantCreationCommand, &ConstantCreationCommand::setObjectCount, 1, 1, 5.0, "ccc"));
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 1.3, 0.1, 2.0, "mcs"));
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, RateDifferenceCondition>(rateDifferenceCondition, &RateDifferenceCondition::setCount, 0, 10, 50, "cnt"));
+	//analyserOptions.changableParameters.push_back(new ChangeableNumber<int, BestSelectionCommand>(bestSelectionCommand, &BestSelectionCommand::setObjectCount, 5, 5, 40, "sel"));
+	//analyserOptions.changableParameters.push_back(new ChangeableNumber<double, ConstantMutationCommand>(constantMutationCommand, &ConstantMutationCommand::setMutationPercentage, 0, 0.3, 2.0, "mut"));
+
 
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 

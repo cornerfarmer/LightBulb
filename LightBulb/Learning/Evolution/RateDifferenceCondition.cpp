@@ -42,3 +42,8 @@ RateDifferenceCondition::RateDifferenceCondition(double differnce_, int count_, 
 	counter = 0;
 	count = count_;
 }
+
+void RateDifferenceCondition::setCount(int newCount)
+{
+	count = newCount;
+}

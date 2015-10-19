@@ -13,7 +13,7 @@ LearningRuleAnalyser::LearningRuleAnalyser(LearningRuleAnalyserOptions &options_
 
 
 bool LearningRuleAnalyser::pairCompare(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem) {
-	return firstElem.first.successful < secondElem.first.successful || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
+	return firstElem.first.successful > secondElem.first.successful || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
 }
 
 void LearningRuleAnalyser::execute()

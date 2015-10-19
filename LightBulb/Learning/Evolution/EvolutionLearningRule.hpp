@@ -30,10 +30,12 @@ struct EvolutionLearningRuleOptions
 	std::vector<AbstractReuseCommand*> reuseCommands;
 	AbstractEvolutionWorld* world;
 	bool enableDebugOutput;
+	double scoreGoal;
 	EvolutionLearningRuleOptions()
 	{
 		world = NULL;
 		enableDebugOutput = false;
+		scoreGoal = 0;
 	}
 };
 

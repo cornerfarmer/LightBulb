@@ -8,10 +8,10 @@
 #include <math.h>
 
 
-MutationAlgorithm::MutationAlgorithm()
+MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_)
 {
 	distribution = std::normal_distribution<double>(0, 1);
-	mutationStrengthChangeSpeed = 0.1;
+	mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
 }
 
 void MutationAlgorithm::execute(AbstractEvolutionObject* object1)

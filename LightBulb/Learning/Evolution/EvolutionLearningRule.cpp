@@ -122,12 +122,14 @@ LearningResult EvolutionLearningRule::doLearning()
 		generation++;
 	}
 
+	double bestScore = options->world->getHighscoreList()->front().first;
+
 	if (options->enableDebugOutput)
-		std::cout << "Best result: " << options->world->getHighscoreList()->front().first << std::endl;
+		std::cout << "Best result: " << bestScore << std::endl;
 
 	LearningResult result;
 	result.iterationsNeeded = generation;
-	result.successful = true;
+	result.successful = (options->scoreGoal == 0 || options->scoreGoal <= bestScore);
 	return result;
 }
 

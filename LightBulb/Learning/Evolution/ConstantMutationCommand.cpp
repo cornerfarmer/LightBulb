@@ -10,6 +10,7 @@ ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* muta
 	: AbstractMutationCommand(mutationAlgorithm_, enableDebugOutput_)
 {
 	objectCount = objectCount_;
+	mutationPercentage = 0;
 }
 
 ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, double mutationPercentage_, bool enableDebugOutput_)
@@ -21,6 +22,7 @@ ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* muta
 
 void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
+	int objectCount = this->objectCount;
 	if (objectCount == 0)
 		objectCount = (int)(highscore->size() * mutationPercentage);
 
@@ -34,4 +36,9 @@ void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvol
 		newObjectVector->push_back((*highscore)[mutationIndex].second->clone());
 		mutationAlgorithm->execute(newObjectVector->back());
 	}
+}
+
+void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)
+{
+	mutationPercentage = newMutationPercentage;
 }

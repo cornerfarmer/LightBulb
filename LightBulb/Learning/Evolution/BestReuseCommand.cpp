@@ -10,10 +10,22 @@ BestReuseCommand::BestReuseCommand(int objectCount_, bool enableDebugOutput_)
 	: AbstractReuseCommand(enableDebugOutput_)
 {
 	objectCount = objectCount_;
+	reusePercentage = 0;
+}
+
+BestReuseCommand::BestReuseCommand(double reusePercentage_, bool enableDebugOutput_)
+	: AbstractReuseCommand(enableDebugOutput_)
+{
+	objectCount = 0;
+	reusePercentage = reusePercentage_;
 }
 
 void BestReuseCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
+	int objectCount = this->objectCount;
+	if (objectCount == 0)
+		objectCount = (int)(highscore->size() * reusePercentage);
+
 	if (enableDebugOutput)
 		std::cout << "Reuse " << objectCount << " best one:";
 	
