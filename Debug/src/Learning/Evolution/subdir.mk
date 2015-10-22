@@ -22,7 +22,9 @@ CPP_SRCS += \
 ../src/Learning/Evolution/ConstantMutationCommand.cpp \
 ../src/Learning/Evolution/ConstantRecombinationCommand.cpp \
 ../src/Learning/Evolution/EvolutionLearningRule.cpp \
-../src/Learning/Evolution/RateDifferenceCondition.cpp 
+../src/Learning/Evolution/RateDifferenceCondition.cpp \
+../src/Learning/Evolution/TeachedEvolutionObject.cpp \
+../src/Learning/Evolution/TeachingEvolutionWorld.cpp 
 
 OBJS += \
 ./src/Learning/Evolution/AbstractCreationCommand.o \
@@ -43,7 +45,9 @@ OBJS += \
 ./src/Learning/Evolution/ConstantMutationCommand.o \
 ./src/Learning/Evolution/ConstantRecombinationCommand.o \
 ./src/Learning/Evolution/EvolutionLearningRule.o \
-./src/Learning/Evolution/RateDifferenceCondition.o 
+./src/Learning/Evolution/RateDifferenceCondition.o \
+./src/Learning/Evolution/TeachedEvolutionObject.o \
+./src/Learning/Evolution/TeachingEvolutionWorld.o 
 
 CPP_DEPS += \
 ./src/Learning/Evolution/AbstractCreationCommand.d \
@@ -64,7 +68,9 @@ CPP_DEPS += \
 ./src/Learning/Evolution/ConstantMutationCommand.d \
 ./src/Learning/Evolution/ConstantRecombinationCommand.d \
 ./src/Learning/Evolution/EvolutionLearningRule.d \
-./src/Learning/Evolution/RateDifferenceCondition.d 
+./src/Learning/Evolution/RateDifferenceCondition.d \
+./src/Learning/Evolution/TeachedEvolutionObject.d \
+./src/Learning/Evolution/TeachingEvolutionWorld.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
