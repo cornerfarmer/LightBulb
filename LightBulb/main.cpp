@@ -81,6 +81,7 @@
 #include "Diagnostic/ChangeableNumber.hpp"
 #include "Examples/NetworkSimulator.hpp"
 #include "Examples/Network.hpp"
+#include "Learning/Evolution/TeachingEvolutionWorld.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1795,9 +1796,104 @@ void doNetworkEvolutionTest()
 
 
 
+void doTeachedEvolutionTest() {
+	LayeredNetworkOptions layeredNetworkOptions;
+	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(),
+																				new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
+	layeredNetworkOptions.useBiasNeuron = true;
+
+
+	Teacher teacher;
+	for (int i=0;i<8;i+=1)
+	{
+		NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(8);
+		NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(8);
+		for (int l=0;l<8;l+=1)
+		{
+			(*teachingPattern).set(0, l, i == l);
+			(*teachingInput).set(0, l, i == l);
+		}
+
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+	}
+
+	LayeredNetwork layeredNetwork(layeredNetworkOptions);
+
+	NeuralNetwork neuralNetwork(&layeredNetwork);
+
+	BackpropagationLearningRuleOptions bOptions;
+	bOptions.enableDebugOutput = true;
+	bOptions.debugOutputInterval = 100;
+	bOptions.maxTotalErrorValue = 4;
+	bOptions.minIterationsPerTry = 3000;
+	bOptions.maxIterationsPerTry = 1000000;
+	bOptions.totalErrorGoal = 0.001f;
+	bOptions.maxTries = 1000;
+	bOptions.minRandomWeightValue = -0.5;
+	bOptions.maxRandomWeightValue = 0.5;
+	bOptions.weightDecayFac = 0;
+	bOptions.resilientLearningRate = false;
+//	options.maxTimeSteps = 1;
+	BackpropagationLearningRule bLearningRule(bOptions);
+
+	//bLearningRule.doLearning(neuralNetwork, teacher);
+
+	TeachingEvolutionWorld world(&teacher, layeredNetworkOptions);
+
+	EvolutionLearningRuleOptions options;
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10000);
+	options.exitConditions.push_back(rateDifferenceCondition);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
+	options.creationCommands.push_back(constantCreationCommand);
+	options.reuseCommands.push_back(new BestReuseCommand(1));
+	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
+	options.selectionCommands.push_back(bestSelectionCommand);
+	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(0.1);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
+	options.mutationsCommands.push_back(constantMutationCommand);
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
+	options.world = &world;
+	options.enableDebugOutput = false;
+	options.scoreGoal = -0.001;
+	EvolutionLearningRule learningRule(options);
+
+	LearningRuleAnalyserOptions analyserOptions;
+	analyserOptions.learningRule = &learningRule;
+	analyserOptions.calculationsPerParameterCombination = 2;
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 0.1, 0.4, 2.0, "mcs"));
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, RateDifferenceCondition>(rateDifferenceCondition, &RateDifferenceCondition::setCount, 10, 20, 100, "cnt"));
+
+	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
+
+	learningRuleAnalyser.execute();
+
+
+	TopologicalOrder topologicalOrder;
+	double totalError = teacher.getTotalError(*world.getEvolutionObjects()->front()->getNeuralNetwork(), topologicalOrder);
+
+	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(8);
+	(*teachingPattern).set(0, 0, 1);
+	(*teachingPattern).set(0, 1, 0);
+	(*teachingPattern).set(0, 2, 0);
+	(*teachingPattern).set(0, 3, 0);
+	(*teachingPattern).set(0, 4, 0);
+	(*teachingPattern).set(0, 5, 0);
+	(*teachingPattern).set(0, 6, 0);
+	(*teachingPattern).set(0, 7, 0);
+
+	NeuralNetworkIO<double>* outputVector = world.getEvolutionObjects()->front()->getNeuralNetwork()->calculate(*teachingPattern, topologicalOrder).get();
+
+}
+
+
+
 
 int main()
 {
-	doNetworkEvolutionTest();
+	doTeachedEvolutionTest();
     return 0;
 }

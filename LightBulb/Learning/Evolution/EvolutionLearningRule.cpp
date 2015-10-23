@@ -124,7 +124,7 @@ LearningResult EvolutionLearningRule::doLearning()
 
 	double bestScore = options->world->getHighscoreList()->front().first;
 
-	if (options->enableDebugOutput)
+	//if (options->enableDebugOutput)
 		std::cout << "Best result: " << bestScore << std::endl;
 
 	LearningResult result;

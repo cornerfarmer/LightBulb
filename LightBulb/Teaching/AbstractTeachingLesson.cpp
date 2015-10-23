@@ -17,7 +17,8 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork &n
 {
 	std::unique_ptr<ErrorMap_t> errorMap;
 
-	if (timeStepCount != -1)
+	// TODO: Is this condition right?
+	if (timeStepCount != -1 || true)
 	{
 		// Try the lesson and extract the output
 		std::unique_ptr<NeuralNetworkIO<double>> outputVector = tryLesson(neuralNetwork, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);

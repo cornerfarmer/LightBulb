@@ -14,7 +14,7 @@ TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingE
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
 
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
-	neuralNetwork->getNetworkTopology()->randomizeWeights(0,0.0001);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5,0.5);
 
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
 
