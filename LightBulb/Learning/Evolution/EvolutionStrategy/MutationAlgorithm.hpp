@@ -18,6 +18,8 @@ private:
 	std::default_random_engine generator;
 	std::normal_distribution<double> distribution;
 	double mutationStrengthChangeSpeed;
+	double mutationStrengthMin;
+	double mutationStrengthMax;
 public:
 	MutationAlgorithm(double mutationStrengthChangeSpeed_);
 	void execute(AbstractEvolutionObject* object1);

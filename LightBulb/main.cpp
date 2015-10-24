@@ -1796,7 +1796,7 @@ void doNetworkEvolutionTest()
 
 
 
-void doTeachedEvolutionTest() {
+void doTeachedEvolution838Test() {
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.neuronFactory = new DifferentFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction(),
 																				new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
@@ -1820,6 +1820,18 @@ void doTeachedEvolutionTest() {
 
 		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 	}
+	/*for (int i=0;i<80;i+=5)
+	{
+		for (int l=0;l<80;l+=5)
+		{
+			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+			NeuralNetworkIO<bool>* teachingInput= new NeuralNetworkIO<bool>(1);
+			(*teachingPattern).set(0, 0, i);
+			(*teachingPattern).set(0, 1, l);
+			(*teachingInput).set(0, 0, i == l);
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		}
+	}*/
 
 	LayeredNetwork layeredNetwork(layeredNetworkOptions);
 
@@ -1845,20 +1857,21 @@ void doTeachedEvolutionTest() {
 	TeachingEvolutionWorld world(&teacher, layeredNetworkOptions);
 
 	EvolutionLearningRuleOptions options;
-	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10000);
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50, true);
 	options.exitConditions.push_back(rateDifferenceCondition);
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(40);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
+	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(40);
 	options.selectionCommands.push_back(bestSelectionCommand);
-	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(0.1);
+	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 	options.world = &world;
-	options.enableDebugOutput = false;
-	options.scoreGoal = -0.001;
+	options.enableDebugOutput = true;
+	options.scoreGoal = -0.1;
+	options.maxTries = 100;
 	EvolutionLearningRule learningRule(options);
 
 	LearningRuleAnalyserOptions analyserOptions;
@@ -1869,24 +1882,57 @@ void doTeachedEvolutionTest() {
 
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
-	learningRuleAnalyser.execute();
+	//learningRuleAnalyser.execute();
+	learningRule.doLearning();
 
+	NeuralNetwork* bestNetwork =  world.getEvolutionObjects()->front()->getNeuralNetwork();
 
 	TopologicalOrder topologicalOrder;
-	double totalError = teacher.getTotalError(*world.getEvolutionObjects()->front()->getNeuralNetwork(), topologicalOrder);
+	double totalError = teacher.getTotalError(*bestNetwork, topologicalOrder);
 
-	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(8);
-	(*teachingPattern).set(0, 0, 1);
-	(*teachingPattern).set(0, 1, 0);
-	(*teachingPattern).set(0, 2, 0);
-	(*teachingPattern).set(0, 3, 0);
-	(*teachingPattern).set(0, 4, 0);
-	(*teachingPattern).set(0, 5, 0);
-	(*teachingPattern).set(0, 6, 0);
-	(*teachingPattern).set(0, 7, 0);
+	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+	(*teachingPattern).set(0, 0, 10);
+	(*teachingPattern).set(0, 1, 10);
 
-	NeuralNetworkIO<double>* outputVector = world.getEvolutionObjects()->front()->getNeuralNetwork()->calculate(*teachingPattern, topologicalOrder).get();
+	std::unique_ptr<NeuralNetworkIO<double>> outputVector = bestNetwork->calculate(*teachingPattern, topologicalOrder);
 
+	std::cout << "end";
+
+	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	neuralNetworkResultChartOptions.neuralNetwork = bestNetwork;
+	neuralNetworkResultChartOptions.binaryInterpretation = true;
+	neuralNetworkResultChartOptions.xRangeEnd = 1000;
+	neuralNetworkResultChartOptions.yRangeEnd = 1000;
+	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+
+	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
+	neuralNetworkResultChart.recalculateAllValues();
+
+
+	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
+	networkTopologyDrawerOptions.width = 700;
+	networkTopologyDrawerOptions.height = 600;
+	networkTopologyDrawerOptions.posY = 100;
+	networkTopologyDrawerOptions.network = bestNetwork;
+	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	networkTopologyDrawer.refresh();
+
+    sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        neuralNetworkResultChart.draw(window);
+		networkTopologyDrawer.draw(window);
+        window.display();
+    }
 }
 
 
@@ -1894,6 +1940,6 @@ void doTeachedEvolutionTest() {
 
 int main()
 {
-	doTeachedEvolutionTest();
+	doTeachedEvolution838Test();
     return 0;
 }

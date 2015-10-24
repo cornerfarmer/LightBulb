@@ -67,65 +67,85 @@ AbstractEvolutionObject* EvolutionLearningRule::doRecombination(AbstractEvolutio
 
 LearningResult EvolutionLearningRule::doLearning()
 {
-	options->world->getEvolutionObjects()->clear();
-
+	double bestScore = 0;
 	int generation = 0;
-	while (true)
+
+	for (int currentTry = 0; currentTry < options->maxTries; currentTry++)
 	{
-		options->world->reset();
+		generation = 0;
 
 		if (options->enableDebugOutput)
-			std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
-		for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
+			std::cout << "+++++ Try " << currentTry << " +++++" << std::endl;
+
+		options->world->getEvolutionObjects()->clear();
+
+
+		while (true)
 		{
-			(*creationCommand)->execute(*options->world);
-		}
+			options->world->reset();
 
-		options->world->doSimulationStep(*this);
-
-		std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
-		std::vector<AbstractEvolutionObject*> newObjectVector;
-
-		bool exit = true;
-		for (auto exitCondition = options->exitConditions.begin(); exitCondition != options->exitConditions.end(); exitCondition++)
-		{
-			exit &= (*exitCondition)->evaluate(highscore.get());
-		}
-		if (exit) {
 			if (options->enableDebugOutput)
-				std::cout << "All conditions are true => exit" << std::endl;
-			break;
-		}
+				std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
+			for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
+			{
+				(*creationCommand)->execute(*options->world);
+			}
 
-		for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
-		{
-			(*selectionCommand)->execute(highscore.get());
-		}
+			options->world->doSimulationStep(*this);
 
-		for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
-		{
-			(*reuseCommand)->execute(highscore.get(), &newObjectVector);
-		}
+			std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
+			std::vector<AbstractEvolutionObject*> newObjectVector;
 
-		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
-		{
-			(*mutationCommand)->execute(highscore.get(), &newObjectVector);
-		}
+			bool exit = true;
+			for (auto exitCondition = options->exitConditions.begin(); exitCondition != options->exitConditions.end(); exitCondition++)
+			{
+				exit &= (*exitCondition)->evaluate(highscore.get());
+			}
+			if (exit) {
+				if (options->enableDebugOutput)
+					std::cout << "All conditions are true => exit" << std::endl;
+				break;
+			}
 
-		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
-		{
-			(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
-		}	
+			for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
+			{
+				(*selectionCommand)->execute(highscore.get());
+			}
+
+			for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
+			{
+				(*reuseCommand)->execute(highscore.get(), &newObjectVector);
+			}
+
+			for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
+			{
+				(*mutationCommand)->execute(highscore.get(), &newObjectVector);
+			}
+
+			for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
+			{
+				(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
+			}
+
+			options->world->setEvolutionObjects(newObjectVector);
+
+
+			for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
+			{
+				delete(oldObject->second);
+			}
+
+			generation++;
+		}
 	
-		options->world->setEvolutionObjects(newObjectVector);
+		bestScore = options->world->getHighscoreList()->front().first;
 
-		generation++;
-	}
-
-	double bestScore = options->world->getHighscoreList()->front().first;
-
-	//if (options->enableDebugOutput)
+		//if (options->enableDebugOutput)
 		std::cout << "Best result: " << bestScore << std::endl;
+
+		if (bestScore > options->scoreGoal)
+			break;
+	}
 
 	LearningResult result;
 	result.iterationsNeeded = generation;

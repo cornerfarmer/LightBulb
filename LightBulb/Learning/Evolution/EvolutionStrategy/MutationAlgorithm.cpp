@@ -12,6 +12,8 @@ MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_)
 {
 	distribution = std::normal_distribution<double>(0, 1);
 	mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
+	mutationStrengthMax = 50;
+	mutationStrengthMin = 0.000001f;
 }
 
 void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
@@ -21,6 +23,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	for (auto mutationStrengthValue = mutationStrength->begin(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
 	{
 		*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * distribution(generator));
+		*mutationStrengthValue = ( *mutationStrengthValue < 0 ? -1 : 1 ) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		if ((double)rand() / RAND_MAX > 0.9)
 			*mutationStrengthValue *= -1;
 	}

@@ -18,7 +18,7 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 
 LayeredNetworkOptions::~LayeredNetworkOptions()
 {
-	//delete(neuronFactory);
+	delete(neuronFactory);
 }
 
 LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj)

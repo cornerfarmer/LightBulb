@@ -31,11 +31,13 @@ struct EvolutionLearningRuleOptions
 	AbstractEvolutionWorld* world;
 	bool enableDebugOutput;
 	double scoreGoal;
+	int maxTries;
 	EvolutionLearningRuleOptions()
 	{
 		world = NULL;
 		enableDebugOutput = false;
 		scoreGoal = 0;
+		maxTries = 1;
 	}
 };
 
