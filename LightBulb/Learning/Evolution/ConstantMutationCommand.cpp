@@ -23,6 +23,7 @@ ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* muta
 void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
 	int objectCount = this->objectCount;
+	// Calculate a temporary static object count if the percentage value is used
 	if (objectCount == 0)
 		objectCount = (int)(highscore->size() * mutationPercentage);
 
@@ -30,10 +31,14 @@ void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvol
 		std::cout << "Mutated " << objectCount << " random ones" << std::endl;
 	
 	int entryIndex = 0;
+	// Do N times
 	for (int i = 0; i < objectCount; i++)
 	{
+		// Select a random object
 		int mutationIndex = rankBasedRandomFunction.execute(highscore->size());
+		// Clone it and add it to the new object vector
 		newObjectVector->push_back((*highscore)[mutationIndex].second->clone());
+		// Mutate the new object
 		mutationAlgorithm->execute(newObjectVector->back());
 	}
 }

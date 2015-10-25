@@ -5,6 +5,7 @@
 
 AbstractEvolutionObject* AbstractSimpleEvolutionWorld::addNewObject()
 {
+	// Create a new object and add it to the vector
 	objects.push_back(createNewObject());
 	
 	return objects.back();
@@ -27,9 +28,11 @@ void AbstractSimpleEvolutionWorld::setEvolutionObjects(std::vector<AbstractEvolu
 
 void AbstractSimpleEvolutionWorld::reset()
 {
+	// Reset all objects
 	for (auto object = objects.begin(); object != objects.end(); object++)
 	{
 		(*object)->resetNN();
 	}
+	// Reset the world
 	resetWorld();
 }

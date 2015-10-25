@@ -25,6 +25,7 @@ BestSelectionCommand::BestSelectionCommand(double selectionPercentage_, bool ena
 void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 {
 	int objectCount = this->objectCount;
+	// Calculate a temporary static object count if the percentage value is used
 	if (selectionPercentage)
 		objectCount = (int)(highscore->size() * selectionPercentage);
 
@@ -33,11 +34,14 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 	
 	if (highscore->size() > objectCount)
 	{
+		// Go through all not selected objects
 		for (auto entry = highscore->begin() + objectCount; entry != highscore->end(); entry++)
 		{
+			// Delete them
 			delete(entry->second);
 		}
 
+		// Resize the vector
 		highscore->resize(objectCount);
 	}
 

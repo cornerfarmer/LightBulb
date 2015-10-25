@@ -1859,10 +1859,10 @@ void doTeachedEvolution838Test() {
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50, true);
 	options.exitConditions.push_back(rateDifferenceCondition);
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(40);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(40);
+	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
@@ -1883,6 +1883,8 @@ void doTeachedEvolution838Test() {
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
 	//learningRuleAnalyser.execute();
+	learningRule.doLearning();
+	learningRule.doLearning();
 	learningRule.doLearning();
 
 	NeuralNetwork* bestNetwork =  world.getEvolutionObjects()->front()->getNeuralNetwork();

@@ -17,6 +17,7 @@
 
 AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension, bool biasNeuron)
 {
+	// Configure the network options depending on the given parameters
 	LayeredNetworkOptions options;
 	if (biasNeuron) {
 		options.useBiasNeuron = true;
@@ -25,37 +26,18 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	options.neuronsPerLayerCount.push_back(outputDimension);
 	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 
+	// Create a new network topology from the adjusted options.
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
-
-	int n = 0;
-	for (auto neuron = layeredNetwork->getNeurons()->front().begin(); neuron != layeredNetwork->getNeurons()->front().end(); neuron++, n++)
-	{
-		int e = 0;
-		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, e++)
-		{
-			if (n * 2 == e || n * 2 + 1 == e)
-				(*edge)->setWeight(-0.5);
-			else if (e == 18)
-				(*edge)->setWeight(0.25);
-			else
-				(*edge)->setWeight(0);
-		}
-	}
-
 	
+	// Create a neural network from the network topolgy
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
+	// Randomize all weights (TODO: make the boundaries variable)
 	neuralNetwork->getNetworkTopology()->randomizeWeights(0,0.0001);
-
-	/*NeuralNetworkIO<double> input(18);
-	input.set(0, 0, 1);
-	input.set(0, 5, 1);
-
-	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, TopologicalOrder(), 0, 1);	*/
 
 	world = world_;
 
+	// Initialize the mutation strength vector
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
-
 	randomizeMutationStrength();
 }
 
@@ -67,10 +49,14 @@ NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 
 void AbstractSimpleEvolutionObject::doNNCalculation(EvolutionLearningRule& learningRule)
 {
+	// Get the input
 	NeuralNetworkIO<double> input = getNNInput();
+
 	TopologicalOrder topologicalOrder;
+	// Calculate the output from the the input
 	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, topologicalOrder, 0, -1, NULL, NULL, false);
 	
+	// Interpret the output
 	interpretNNOutput(learningRule, output.get());
 }
 
@@ -82,13 +68,17 @@ AbstractSimpleEvolutionObject::~AbstractSimpleEvolutionObject()
 
 void AbstractSimpleEvolutionObject::resetNN()
 {
+	// Only reset all activations
 	neuralNetwork->getNetworkTopology()->resetActivation();
 }
 
 AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone()
 {
+	// Create a new object
 	AbstractEvolutionObject* newObject = world->addNewObject();
+	// Copy all weights
 	newObject->getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*neuralNetwork->getNetworkTopology());
+	// Copy all mutation strengths
 	newObject->setMutationStrength(getMutationStrength());
 	return newObject;
 }

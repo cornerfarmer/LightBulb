@@ -10,16 +10,23 @@
 
 // Forward declarations
 
+// A command which selects the best N objects for mutation/recombination
 class BestSelectionCommand : public AbstractSelectionCommand
 {
 private:
+	// Holds amount of objects which should be selected
 	int objectCount;
+	// Alternative: Holds the percentage of objects which should be selected
 	double selectionPercentage;
 public:
-	BestSelectionCommand(int objectCount_, bool enableDebugOutput_ = false);
-	BestSelectionCommand(double selectionPercentage_, bool enableDebugOutput_ = false);
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	virtual ~BestSelectionCommand() {};
 	void setObjectCount(int newObjectCount);
+	// Creates a command which selects a static amount of objects
+	BestSelectionCommand(int objectCount_, bool enableDebugOutput_ = false);
+	// Creates a command which selects a percentage of objects
+	BestSelectionCommand(double selectionPercentage_, bool enableDebugOutput_ = false);
+	// Deletes all objects from the highscore which are not part of the selected objects.
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 };
 
 #endif

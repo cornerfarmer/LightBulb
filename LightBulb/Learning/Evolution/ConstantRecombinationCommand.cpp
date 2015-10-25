@@ -25,6 +25,7 @@ ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombination
 void ConstantRecombinationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
 	int objectCount = this->objectCount;
+	// Calculate a temporary static object count if the percentage value is used
 	if (objectCount == 0)
 		objectCount = (int)(highscore->size() * recombinationPercentage);
 
@@ -32,12 +33,17 @@ void ConstantRecombinationCommand::execute(std::vector<std::pair<double, Abstrac
 		std::cout << "Recombinated " << objectCount << " random ones" << std::endl;
 	
 	int entryIndex = 0;
+	// Do N times
 	for (int i = 0; i < objectCount; i++)
 	{
+		// Select two random objects
 		int recombinationnIndex1 = rankBasedRandomFunction.execute(highscore->size());
 		int recombinationnIndex2 = rankBasedRandomFunction.execute(highscore->size());
+		// Clone the first objects and add it to the new object vector
 		newObjectVector->push_back((*highscore)[recombinationnIndex1].second->clone());
+		// Also clone the second object
 		AbstractEvolutionObject* secondClone = (*highscore)[recombinationnIndex2].second->clone();
+		// Combine the two objects
 		recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
 	}
 

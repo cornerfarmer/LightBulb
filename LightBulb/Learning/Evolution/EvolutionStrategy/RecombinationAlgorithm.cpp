@@ -8,6 +8,7 @@
 
 void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
 {
+	// Go synchronously through all edges of the two given objects
 	auto neurons1 = object1->getNeuralNetwork()->getNetworkTopology()->getNeurons();
 	auto neurons2 = object1->getNeuralNetwork()->getNetworkTopology()->getNeurons();
 	auto layer1 = neurons1->begin();
@@ -19,6 +20,7 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 			auto edge1 = (*neuron1)->getAfferentEdges()->begin();
 			for (auto edge2 = (*neuron2)->getAfferentEdges()->begin(); edge1 != (*neuron1)->getAfferentEdges()->end() && edge2 != (*neuron2)->getAfferentEdges()->begin(); edge1++, edge2++)
 			{
+				// Calculate the weights average and store it inside the first object
 				(*edge1)->setWeight(((*edge1)->getWeight() + (*edge2)->getWeight()) / 2);
 			}
 		}
