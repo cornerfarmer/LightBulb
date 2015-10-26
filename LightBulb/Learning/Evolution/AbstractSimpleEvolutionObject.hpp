@@ -38,6 +38,6 @@ public:
 	void doNNCalculation(EvolutionLearningRule& learningRule);
 	NeuralNetwork* getNeuralNetwork();
 	void resetNN();
-	AbstractEvolutionObject* clone();
+	AbstractEvolutionObject* clone(bool addToWorld = true);
 };
 #endif

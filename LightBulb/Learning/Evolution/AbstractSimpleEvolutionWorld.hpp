@@ -28,7 +28,7 @@ protected:
 public:
 	AbstractSimpleEvolutionWorld();
 	// Inherited:
-	AbstractEvolutionObject* addNewObject();
+	AbstractEvolutionObject* addNewObject(bool addToWorld = true);
 	std::vector<AbstractEvolutionObject*>* getEvolutionObjects();
 	void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects);
 	void reset();	

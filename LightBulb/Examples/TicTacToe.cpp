@@ -5,8 +5,6 @@
 //Library includes
 #include <iostream>
 
-#define RANDOM_KI true
-
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
 {
@@ -27,6 +25,8 @@ TicTacToe::TicTacToe()
 	options.ticTacToe = this;
 	displayMode = true;
 	drawer.reset(new TicTacToeDrawer(options));
+
+	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
 }
 
 int TicTacToe::getFieldValue(int x, int y)
@@ -44,12 +44,10 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	for (auto ki = objects.begin(); ki != objects.end(); ki++)
 	{	
 #ifndef RANDOM_KI
-		for (auto otherKI = objects.begin(); otherKI != objects.end(); otherKI++)
+		for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
 		{
-			if (*ki != *otherKI)
-			{
-				
-				(*otherKI)->resetNN();
+
+				(*bestAI)->resetNN();
 #else
 		for (int r = 0; r < 100; r++)
 		{
@@ -59,7 +57,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 				resetWorld();
 				for (int i = 0; i < 9; i++)
 				{
-					if (i % 2 == 0)
+					if (i % 2 == 1)
 					{
 						currentPlayer = 1;
 						(*ki)->doNNCalculation(learningRule);
@@ -68,7 +66,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 					{
 						currentPlayer = -1;
 #ifndef RANDOM_KI
-						(*otherKI)->doNNCalculation(learningRule);
+						(*bestAI)->doNNCalculation(learningRule);
 #else
 						int x, y;
 						do {
@@ -106,7 +104,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 						points[static_cast<TicTacToeKI*>(*ki)]-=1;
 #ifndef RANDOM_KI
 					else 
-						points[static_cast<TicTacToeKI*>(*otherKI)]-=1;
+						points[static_cast<TicTacToeKI*>(*bestAI)]-=1;
 #endif
 					illegalMoves++;
 				}
@@ -128,13 +126,12 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 					points[static_cast<TicTacToeKI*>(*ki)] -= 1;
 					secondWon++;
 				}*/
-#ifndef RANDOM_KI
-			}
-#endif
+
 		}
 	}
 	std::cout << "IM:" << illegalMoves << " T:" << ties << " 1W:" << firstWon << " 2W:" << secondWon << std::endl;
-	//rateBestKI(learningRule);
+
+	bestAIs.push_back(static_cast<TicTacToeKI*>(getHighscoreList()->front().second->clone(false)));
 }
 
 void TicTacToe::setIllegalMove(bool illegalMove_)

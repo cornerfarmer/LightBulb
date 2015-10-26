@@ -31,6 +31,7 @@ protected:
 	int currentPlayer;
 	bool displayMode;
 	bool illegalMove;
+	std::vector<TicTacToeKI*> bestAIs;
 public:
 	TicTacToe();
 	void doSimulationStep(EvolutionLearningRule& learningRule);

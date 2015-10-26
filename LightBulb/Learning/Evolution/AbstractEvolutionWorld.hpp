@@ -22,7 +22,7 @@ public:
 	virtual std::vector<AbstractEvolutionObject*>* getEvolutionObjects() = 0;
 	virtual void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects) = 0;
 	// This method should create a new evolution object and add it to the world
-	virtual AbstractEvolutionObject* addNewObject() = 0;
+	virtual AbstractEvolutionObject* addNewObject(bool addToWorld = true) = 0;
 	// This method should execute one simulation step.
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual void doSimulationStep(EvolutionLearningRule& learningRule) = 0;

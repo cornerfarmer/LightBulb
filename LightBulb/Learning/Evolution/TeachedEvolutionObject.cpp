@@ -47,10 +47,10 @@ void TeachedEvolutionObject::resetNN()
 	neuralNetwork->getNetworkTopology()->resetActivation();
 }
 
-AbstractEvolutionObject* TeachedEvolutionObject::clone()
+AbstractEvolutionObject* TeachedEvolutionObject::clone(bool addToWorld)
 {
 	// Create a new object
-	AbstractEvolutionObject* newObject = teachingEvolutionWorld->addNewObject();
+	AbstractEvolutionObject* newObject = teachingEvolutionWorld->addNewObject(addToWorld);
 	// Copy all weights
 	newObject->getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*neuralNetwork->getNetworkTopology());
 	// Copy all mutation strengths

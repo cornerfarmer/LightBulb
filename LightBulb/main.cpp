@@ -1643,47 +1643,17 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {
-	{
-		LayeredNetworkOptions options;
-		options.useBiasNeuron = true;
-		options.neuronsPerLayerCount.push_back(18);
-		options.neuronsPerLayerCount.push_back(9);
-		options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
-
-		LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
-
-		int n = 0;
-		for (auto neuron = layeredNetwork->getNeurons()->front().begin(); neuron != layeredNetwork->getNeurons()->front().end(); neuron++, n++)
-		{
-			int e = 0;
-			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++, e++)
-			{
-				if (n * 2 == e || n * 2 + 1 == e)
-					(*edge)->setWeight(-100);
-				else if (e == 18)
-					(*edge)->setWeight(50);
-				else
-					(*edge)->setWeight(0);
-			}
-		}
-
-		NeuralNetwork network(layeredNetwork);
-
-		NeuralNetworkIO<double> input(18);
-		input.set(0, 0, 1);
-		input.set(0, 5, 1);
-
-		TopologicalOrder topologicalOrder;
-		std::unique_ptr<NeuralNetworkIO<double>> output = network.calculate(input, topologicalOrder, 0 , 1);
-
-	}
 
 	TicTacToe ticTacToe;
 
 	EvolutionLearningRuleOptions options;
+
+	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 50, true));
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
-	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 25));
+	options.reuseCommands.push_back(new BestReuseCommand(1));
+	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 2.0));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
@@ -1942,6 +1912,6 @@ void doTeachedEvolution838Test() {
 
 int main()
 {
-	doTeachedEvolution838Test();
+	doTicTacToeTest();
     return 0;
 }

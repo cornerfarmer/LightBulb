@@ -12,6 +12,7 @@
 class EvolutionLearningRule;
 class TicTacToe;
 
+// TODO: Rename to AI
 class TicTacToeKI : public AbstractSimpleEvolutionObject
 {
 protected:

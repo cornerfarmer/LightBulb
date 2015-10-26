@@ -3,12 +3,16 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 
 
-AbstractEvolutionObject* AbstractSimpleEvolutionWorld::addNewObject()
+AbstractEvolutionObject* AbstractSimpleEvolutionWorld::addNewObject(bool addToWorld)
 {
-	// Create a new object and add it to the vector
-	objects.push_back(createNewObject());
+	// Create a new object
+	AbstractEvolutionObject* newObject = createNewObject();
+
+	// Add it to the vector
+	if (addToWorld)
+		objects.push_back(newObject);
 	
-	return objects.back();
+	return newObject;
 }
 
 AbstractSimpleEvolutionWorld::AbstractSimpleEvolutionWorld()

@@ -32,6 +32,6 @@ public:
 	// Reset the NN (All activations to zero)
 	virtual void resetNN() = 0;
 	// This method should return a new evolution object which contains a NN which has the same edges/neurons as the NN of this object.
-	virtual AbstractEvolutionObject* clone() = 0;
+	virtual AbstractEvolutionObject* clone(bool addToWorld = true) = 0;
 };
 #endif

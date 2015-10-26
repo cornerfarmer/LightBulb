@@ -32,7 +32,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	// Create a neural network from the network topolgy
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
 	// Randomize all weights (TODO: make the boundaries variable)
-	neuralNetwork->getNetworkTopology()->randomizeWeights(0,0.0001);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5,0.5);
 
 	world = world_;
 
@@ -72,10 +72,10 @@ void AbstractSimpleEvolutionObject::resetNN()
 	neuralNetwork->getNetworkTopology()->resetActivation();
 }
 
-AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone()
+AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone(bool addToWorld)
 {
 	// Create a new object
-	AbstractEvolutionObject* newObject = world->addNewObject();
+	AbstractEvolutionObject* newObject = world->addNewObject(addToWorld);
 	// Copy all weights
 	newObject->getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*neuralNetwork->getNetworkTopology());
 	// Copy all mutation strengths
