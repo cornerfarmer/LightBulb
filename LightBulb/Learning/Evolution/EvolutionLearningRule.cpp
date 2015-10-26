@@ -70,83 +70,100 @@ LearningResult EvolutionLearningRule::doLearning()
 	double bestScore = 0;
 	int generation = 0;
 
-	for (int currentTry = 0; currentTry < options->maxTries; currentTry++)
+	// Do per try
+	for (int currentTry = 0; currentTry < options->maxTries && (currentTry == 0 || bestScore < options->scoreGoal); currentTry++)
 	{
+		// Reset all
 		generation = 0;
+		options->world->getEvolutionObjects()->clear();
 
 		if (options->enableDebugOutput)
 			std::cout << "+++++ Try " << currentTry << " +++++" << std::endl;
 
-		options->world->getEvolutionObjects()->clear();
-
-
+		// Do while no exit condition has matched
 		while (true)
 		{
+			// Reset the world for the next generation
 			options->world->reset();
 
 			if (options->enableDebugOutput)
 				std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
+
+			// 1. Step: Create new evolution objects
 			for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
 			{
 				(*creationCommand)->execute(*options->world);
 			}
 
+			// 2. Step: Execute the simulation and try to rate the evolution objects
 			options->world->doSimulationStep(*this);
 
+			// Extract all current objects ordered by their score
 			std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
+			// This vector will contain all objects for the next generation
 			std::vector<AbstractEvolutionObject*> newObjectVector;
 
-			bool exit = true;
+			bool exit = false;
+			// 3.Step: Go through all exit conditions
 			for (auto exitCondition = options->exitConditions.begin(); exitCondition != options->exitConditions.end(); exitCondition++)
 			{
-				exit &= (*exitCondition)->evaluate(highscore.get());
+				// Evaluate them and connect them with an OR
+				exit |= (*exitCondition)->evaluate(highscore.get());
 			}
+			// If at least one condition was true => stop this try
 			if (exit) {
 				if (options->enableDebugOutput)
-					std::cout << "All conditions are true => exit" << std::endl;
+					std::cout << "At least one condition is true => exit" << std::endl;
 				break;
 			}
 
+			// 4. Step: Select the relevant evolution objects (Other objects will be deleted)
 			for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 			{
 				(*selectionCommand)->execute(highscore.get());
 			}
 
+			// 5. Step: Reuse some of the evolution objects directly for the next generation
 			for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
 			{
 				(*reuseCommand)->execute(highscore.get(), &newObjectVector);
 			}
 
+			// 6. Step: Mutate some of the evolution objects and use them for the next generation
 			for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
 			{
 				(*mutationCommand)->execute(highscore.get(), &newObjectVector);
 			}
 
+			// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
 			for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
 			{
 				(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
 			}
 
+			// Replace all evolution objects from the last generation with the one from the next generation
 			options->world->setEvolutionObjects(newObjectVector);
 
 
+			// Make sure all not used objects are deleted properly
 			for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
 			{
 				delete(oldObject->second);
 			}
 
+			// Continue with the next generation
 			generation++;
 		}
 	
+		// Extract the best score from the last try
 		bestScore = options->world->getHighscoreList()->front().first;
 
-		//if (options->enableDebugOutput)
-		std::cout << "Best result: " << bestScore << std::endl;
+		if (options->enableDebugOutput)
+			std::cout << "Best result: " << bestScore << std::endl;
 
-		if (bestScore > options->scoreGoal)
-			break;
 	}
 
+	// Build the learning result
 	LearningResult result;
 	result.iterationsNeeded = generation;
 	result.successful = (options->scoreGoal == 0 || options->scoreGoal <= bestScore);

@@ -14,19 +14,25 @@ class TeachingEvolutionWorld;
 class NeuralNetwork;
 class LayeredNetworkOptions;
 
+// A evolution object used in the TeachingEvolutionWorld
 class TeachedEvolutionObject : public AbstractEvolutionObject
 {
 protected:
+	// The corresponding world
 	TeachingEvolutionWorld* teachingEvolutionWorld;
+	// The used network
 	NeuralNetwork* neuralNetwork;
+	// The currentTotalError (used as score)
 	double currentTotalError;
 public:	
+	// Create a new evolution object in the given world and with a NN built after the given network options
 	TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, LayeredNetworkOptions& options);
 	~TeachedEvolutionObject();
+	double getCurrentTotalError();
+	// Inherited:
 	void doNNCalculation(EvolutionLearningRule& learningRule);
 	void resetNN();
 	NeuralNetwork* getNeuralNetwork();
 	AbstractEvolutionObject* clone();
-	double getCurrentTotalError();
 };
 #endif
