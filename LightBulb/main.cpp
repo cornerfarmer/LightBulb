@@ -1648,11 +1648,11 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 50, true));
-	options.creationCommands.push_back(new ConstantCreationCommand(40));
+	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 5000, true));
+	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 2.0));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 1.7));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));

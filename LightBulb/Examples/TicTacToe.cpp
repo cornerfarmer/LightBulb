@@ -40,98 +40,119 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	int firstWon = 0;
 	int secondWon = 0;
 	int illegalMoves = 0;
+	static int generationsSincaLastBestAI = 0;
+	static double lastBestScore = 0;
 	points.clear();
 	for (auto ki = objects.begin(); ki != objects.end(); ki++)
 	{	
-#ifndef RANDOM_KI
-		for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
-		{
 
-				(*bestAI)->resetNN();
-#else
-		for (int r = 0; r < 100; r++)
+		for (int b = 0; b < 2; b++)
 		{
+#ifndef RANDOM_KI
+
+			for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
+			{
+
+					(*bestAI)->resetNN();
+#else
+			for (int r = 0; r < 100; r++)
+			{
 #endif
-				(*ki)->resetNN();
-				illegalMove = false;
-				resetWorld();
-				for (int i = 0; i < 9; i++)
-				{
-					if (i % 2 == 1)
+					(*ki)->resetNN();
+					illegalMove = false;
+					resetWorld();
+					int i;
+					for (i = 0; i < 9; i++)
 					{
-						currentPlayer = 1;
-						(*ki)->doNNCalculation(learningRule);
+						if (i % 2 == b)
+						{
+							currentPlayer = 1;
+							(*ki)->doNNCalculation(learningRule);
+						}
+						else
+						{
+							currentPlayer = -1;
+#ifndef RANDOM_KI
+							(*bestAI)->doNNCalculation(learningRule);
+#else
+							int x, y;
+							do {
+								x = std::min(2, (int)((float)rand() / RAND_MAX * 3));
+								y = std::min(2, (int)((float)rand() / RAND_MAX * 3));
+							} while (!isFree(x, y));
+							setField(x, y);
+#endif
+						}
+
+						sf::Event event;
+						while (window.pollEvent(event))
+						{
+							if (event.type == sf::Event::Closed)
+								window.close();
+							else if (event.type == sf::Event::KeyPressed)
+								displayMode = !displayMode;
+						}
+
+						if (displayMode) {
+							window.clear();
+							drawer->recalculateAllValues();
+							drawer->draw(window);
+							window.display();
+						}
+
+						if (illegalMove)
+							break;
+					}
+					//if (whoHasWon() == 1)
+					//	points[static_cast<TicTacToeKI*>(*ki)]++;
+					if (illegalMove)
+					{
+						if (currentPlayer == 1) {
+							points[static_cast<TicTacToeKI*>(*ki)]-=9-i;
+							illegalMoves++;
+						}
+#ifndef RANDOM_KI
+						else
+							points[static_cast<TicTacToeKI*>(*bestAI)]-=9-i;
+#endif
+
 					}
 					else
 					{
-						currentPlayer = -1;
-#ifndef RANDOM_KI
-						(*bestAI)->doNNCalculation(learningRule);
-#else
-						int x, y;
-						do {
-							x = std::min(2, (int)((float)rand() / RAND_MAX * 3));
-							y = std::min(2, (int)((float)rand() / RAND_MAX * 3));
-						} while (!isFree(x, y));
-						setField(x, y);
-#endif
-					}
-
-					sf::Event event;
-					while (window.pollEvent(event))
+						ties++;
+					}/*
+					else if (whoHasWon() == 1)
 					{
-						if (event.type == sf::Event::Closed)
-							window.close();
-						else if (event.type == sf::Event::KeyPressed)
-							displayMode = !displayMode;
+						points[static_cast<TicTacToeKI*>(*ki)] += 1;
+						points[static_cast<TicTacToeKI*>(*otherKI)] -= 1;
+						firstWon++;
 					}
-
-					if (displayMode) {
-						window.clear();
-						drawer->recalculateAllValues();
-						drawer->draw(window);
-						window.display();
-					}
-
-					if (illegalMove)
-						break;
-				}
-				//if (whoHasWon() == 1)
-				//	points[static_cast<TicTacToeKI*>(*ki)]++;
-				if (illegalMove)
-				{
-					if (currentPlayer == 1)
-						points[static_cast<TicTacToeKI*>(*ki)]-=1;
-#ifndef RANDOM_KI
-					else 
-						points[static_cast<TicTacToeKI*>(*bestAI)]-=1;
-#endif
-					illegalMoves++;
-				}
-				/*else if (whoHasWon() == 0)
-				{					
-					points[static_cast<TicTacToeKI*>(*ki)]++;
-					points[static_cast<TicTacToeKI*>(*otherKI)]++;
-					ties++;
-				}
-				else if (whoHasWon() == 1)
-				{
-					points[static_cast<TicTacToeKI*>(*ki)] += 1;
-					points[static_cast<TicTacToeKI*>(*otherKI)] -= 1;
-					firstWon++;
-				}
-				else if (whoHasWon() == -1)
-				{
-					points[static_cast<TicTacToeKI*>(*otherKI)] += 1;
-					points[static_cast<TicTacToeKI*>(*ki)] -= 1;
-					secondWon++;
-				}*/
-
+					else if (whoHasWon() == -1)
+					{
+						points[static_cast<TicTacToeKI*>(*otherKI)] += 1;
+						points[static_cast<TicTacToeKI*>(*ki)] -= 1;
+						secondWon++;
+					}*/
+			}
 		}
 	}
 	std::cout << "IM:" << illegalMoves << " T:" << ties << " 1W:" << firstWon << " 2W:" << secondWon << std::endl;
 
-	bestAIs.push_back(static_cast<TicTacToeKI*>(getHighscoreList()->front().second->clone(false)));
+	auto highscore = getHighscoreList();
+	if (highscore->front().first == 0) {
+		bestAIs.push_back(static_cast<TicTacToeKI*>(highscore->front().second->clone(false)));
+		std::cout << "Added best evolution object to bestAI list" << std::endl;
+
+	}
+	if (lastBestScore != highscore->front().first) {
+		generationsSincaLastBestAI = 0;
+	} else if (generationsSincaLastBestAI++ > 30) {
+		generationsSincaLastBestAI = 0;
+		//objects[0] = highscore->front().second;
+		//objects.resize(1);
+		objects.clear();
+	}
+	lastBestScore = highscore->front().first;
 }
 
 void TicTacToe::setIllegalMove(bool illegalMove_)
