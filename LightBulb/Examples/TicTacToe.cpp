@@ -142,7 +142,6 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	if (highscore->front().first == 0) {
 		bestAIs.push_back(static_cast<TicTacToeKI*>(highscore->front().second->clone(false)));
 		std::cout << "Added best evolution object to bestAI list" << std::endl;
-
 	}
 	if (lastBestScore != highscore->front().first) {
 		generationsSincaLastBestAI = 0;
@@ -279,3 +278,9 @@ std::vector<double> TicTacToe::getSight()
 	}
 	return sight;
 }
+
+std::vector<TicTacToeKI*>* TicTacToe::getBestAIs()
+{
+	return &bestAIs;
+}
+

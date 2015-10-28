@@ -16,6 +16,7 @@ CPP_SRCS += \
 ../src/Learning/Evolution/AbstractSelectionCommand.cpp \
 ../src/Learning/Evolution/AbstractSimpleEvolutionObject.cpp \
 ../src/Learning/Evolution/AbstractSimpleEvolutionWorld.cpp \
+../src/Learning/Evolution/BestAICountCondition.cpp \
 ../src/Learning/Evolution/BestReuseCommand.cpp \
 ../src/Learning/Evolution/BestSelectionCommand.cpp \
 ../src/Learning/Evolution/ConstantCreationCommand.cpp \
@@ -39,6 +40,7 @@ OBJS += \
 ./src/Learning/Evolution/AbstractSelectionCommand.o \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.o \
 ./src/Learning/Evolution/AbstractSimpleEvolutionWorld.o \
+./src/Learning/Evolution/BestAICountCondition.o \
 ./src/Learning/Evolution/BestReuseCommand.o \
 ./src/Learning/Evolution/BestSelectionCommand.o \
 ./src/Learning/Evolution/ConstantCreationCommand.o \
@@ -62,6 +64,7 @@ CPP_DEPS += \
 ./src/Learning/Evolution/AbstractSelectionCommand.d \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.d \
 ./src/Learning/Evolution/AbstractSimpleEvolutionWorld.d \
+./src/Learning/Evolution/BestAICountCondition.d \
 ./src/Learning/Evolution/BestReuseCommand.d \
 ./src/Learning/Evolution/BestSelectionCommand.d \
 ./src/Learning/Evolution/ConstantCreationCommand.d \

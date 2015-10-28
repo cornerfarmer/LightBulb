@@ -75,6 +75,7 @@
 #include "Examples/FunctionSimulator.hpp"
 #include "Examples/Position.hpp"
 #include "Learning/Evolution/RateDifferenceCondition.hpp"
+#include "Learning/Evolution/BestAICountCondition.hpp"
 #include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
 #include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
 #include "Diagnostic/LearningRuleAnalyser.hpp"
@@ -1648,7 +1649,7 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 5000, true));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 10, true));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(40, true));

@@ -42,6 +42,7 @@ public:
 	int getFieldValue(int x, int y);
 	void rateBestKI(EvolutionLearningRule& learningRule);
 	void setIllegalMove(bool illegalMove_);
+	std::vector<TicTacToeKI*>* getBestAIs();
 };
 
 #endif
