@@ -16,13 +16,16 @@ CPP_SRCS += \
 ../src/Learning/Evolution/AbstractSelectionCommand.cpp \
 ../src/Learning/Evolution/AbstractSimpleEvolutionObject.cpp \
 ../src/Learning/Evolution/AbstractSimpleEvolutionWorld.cpp \
+../src/Learning/Evolution/BestAICountCondition.cpp \
 ../src/Learning/Evolution/BestReuseCommand.cpp \
 ../src/Learning/Evolution/BestSelectionCommand.cpp \
 ../src/Learning/Evolution/ConstantCreationCommand.cpp \
 ../src/Learning/Evolution/ConstantMutationCommand.cpp \
 ../src/Learning/Evolution/ConstantRecombinationCommand.cpp \
 ../src/Learning/Evolution/EvolutionLearningRule.cpp \
-../src/Learning/Evolution/RateDifferenceCondition.cpp 
+../src/Learning/Evolution/RateDifferenceCondition.cpp \
+../src/Learning/Evolution/TeachedEvolutionObject.cpp \
+../src/Learning/Evolution/TeachingEvolutionWorld.cpp 
 
 OBJS += \
 ./src/Learning/Evolution/AbstractCreationCommand.o \
@@ -37,13 +40,16 @@ OBJS += \
 ./src/Learning/Evolution/AbstractSelectionCommand.o \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.o \
 ./src/Learning/Evolution/AbstractSimpleEvolutionWorld.o \
+./src/Learning/Evolution/BestAICountCondition.o \
 ./src/Learning/Evolution/BestReuseCommand.o \
 ./src/Learning/Evolution/BestSelectionCommand.o \
 ./src/Learning/Evolution/ConstantCreationCommand.o \
 ./src/Learning/Evolution/ConstantMutationCommand.o \
 ./src/Learning/Evolution/ConstantRecombinationCommand.o \
 ./src/Learning/Evolution/EvolutionLearningRule.o \
-./src/Learning/Evolution/RateDifferenceCondition.o 
+./src/Learning/Evolution/RateDifferenceCondition.o \
+./src/Learning/Evolution/TeachedEvolutionObject.o \
+./src/Learning/Evolution/TeachingEvolutionWorld.o 
 
 CPP_DEPS += \
 ./src/Learning/Evolution/AbstractCreationCommand.d \
@@ -58,13 +64,16 @@ CPP_DEPS += \
 ./src/Learning/Evolution/AbstractSelectionCommand.d \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.d \
 ./src/Learning/Evolution/AbstractSimpleEvolutionWorld.d \
+./src/Learning/Evolution/BestAICountCondition.d \
 ./src/Learning/Evolution/BestReuseCommand.d \
 ./src/Learning/Evolution/BestSelectionCommand.d \
 ./src/Learning/Evolution/ConstantCreationCommand.d \
 ./src/Learning/Evolution/ConstantMutationCommand.d \
 ./src/Learning/Evolution/ConstantRecombinationCommand.d \
 ./src/Learning/Evolution/EvolutionLearningRule.d \
-./src/Learning/Evolution/RateDifferenceCondition.d 
+./src/Learning/Evolution/RateDifferenceCondition.d \
+./src/Learning/Evolution/TeachedEvolutionObject.d \
+./src/Learning/Evolution/TeachingEvolutionWorld.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

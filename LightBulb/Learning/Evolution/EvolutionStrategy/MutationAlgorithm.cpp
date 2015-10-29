@@ -30,8 +30,8 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 		// Make sure the values stays inside our boundaries
 		*mutationStrengthValue = ( *mutationStrengthValue < 0 ? -1 : 1 ) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		// Change the mutation direction randomly (TODO: Make this variable)
-		if ((double)rand() / RAND_MAX > 0.9)
-			*mutationStrengthValue *= -1;
+		//if ((double)rand() / RAND_MAX > 0.5)
+		//	*mutationStrengthValue *= -1;
 	}
 
 	auto neurons = object1->getNeuralNetwork()->getNetworkTopology()->getNeurons();	
@@ -44,7 +44,8 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
 			{
 				// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
-				(*edge)->setWeight((*edge)->getWeight() + (*mutationStrength)[mutationStrengthIndex]);
+				double weightAdd = (*mutationStrength)[mutationStrengthIndex] * distribution(generator);
+				(*edge)->setWeight((*edge)->getWeight() + weightAdd);
 				mutationStrengthIndex++;
 			}
 		}

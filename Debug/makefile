@@ -58,7 +58,7 @@ all: LightBulb
 LightBulb: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++  -o "LightBulb" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -pg -o "LightBulb" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

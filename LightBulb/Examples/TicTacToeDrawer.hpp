@@ -40,12 +40,15 @@ class TicTacToeDrawer : public GraphicObject
 {
 private:
 	std::unique_ptr<TicTacToeDrawerOptions> options;
+	sf::VertexArray lines;
 	// This texture will contain the chart, calculated in recalculateAllValues
 	std::vector<std::vector<sf::Text>> signs;
 public:
 	TicTacToeDrawer(TicTacToeDrawerOptions &options_);
 	// This method draws the calculated chart
 	void draw(sf::RenderWindow &window);
+
+	bool handleMouseInputEvent(sf::Event &event);
 	// This method recalculates the chart
 	void recalculateAllValues();
 };

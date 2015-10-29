@@ -32,6 +32,8 @@ protected:
 	bool displayMode;
 	bool illegalMove;
 	std::vector<TicTacToeKI*> bestAIs;
+	int defaultResetGenerationCount = 32;
+	int currentResetGenerationCount;
 public:
 	TicTacToe();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
@@ -43,6 +45,8 @@ public:
 	void rateBestKI(EvolutionLearningRule& learningRule);
 	void setIllegalMove(bool illegalMove_);
 	std::vector<TicTacToeKI*>* getBestAIs();
+	void startNewGame(int firstPlayer);
+	bool hasGameFinished();
 };
 
 #endif

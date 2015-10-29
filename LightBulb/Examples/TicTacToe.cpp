@@ -4,6 +4,7 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 #include <iostream>
+#include <algorithm>
 
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
@@ -27,6 +28,8 @@ TicTacToe::TicTacToe()
 	drawer.reset(new TicTacToeDrawer(options));
 
 	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
+
+	currentResetGenerationCount = defaultResetGenerationCount;
 }
 
 int TicTacToe::getFieldValue(int x, int y)
@@ -59,19 +62,21 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 			{
 #endif
 					(*ki)->resetNN();
-					illegalMove = false;
-					resetWorld();
+
+					if (b == 0)
+						startNewGame(1);
+					else
+						startNewGame(-1);
+
 					int i;
 					for (i = 0; i < 9; i++)
 					{
 						if (i % 2 == b)
 						{
-							currentPlayer = 1;
 							(*ki)->doNNCalculation(learningRule);
 						}
 						else
 						{
-							currentPlayer = -1;
 #ifndef RANDOM_KI
 							(*bestAI)->doNNCalculation(learningRule);
 #else
@@ -141,12 +146,14 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	auto highscore = getHighscoreList();
 	if (highscore->front().first == 0) {
 		bestAIs.push_back(static_cast<TicTacToeKI*>(highscore->front().second->clone(false)));
-		std::cout << "Added best evolution object to bestAI list" << std::endl;
+		std::cout << "Added " << bestAIs.size() << ". best evolution object to bestAI list" << std::endl;
+		currentResetGenerationCount = std::max((int)(currentResetGenerationCount / 1.1), defaultResetGenerationCount);
 	}
 	if (lastBestScore != highscore->front().first) {
 		generationsSincaLastBestAI = 0;
-	} else if (generationsSincaLastBestAI++ > 30) {
+	} else if (generationsSincaLastBestAI++ > currentResetGenerationCount) {
 		generationsSincaLastBestAI = 0;
+		currentResetGenerationCount *= 2;
 		//objects[0] = highscore->front().second;
 		//objects.resize(1);
 		objects.clear();
@@ -208,6 +215,17 @@ bool TicTacToe::isFree(int x, int y)
 	return fields[x][y] == 0;
 }
 
+void TicTacToe::startNewGame(int firstPlayer)
+{
+	illegalMove = false;
+	resetWorld();
+	currentPlayer = firstPlayer;
+}
+
+bool TicTacToe::hasGameFinished()
+{
+	return (illegalMove);// || whoHasWon() != 0);
+}
 
 int TicTacToe::whoHasWon()
 {
@@ -237,8 +255,10 @@ void TicTacToe::setField(int x, int y)
 {
 	if (!isFree(x, y))
 		illegalMove = true;
-	else
+	else {
 		fields[x][y] = currentPlayer;
+		currentPlayer *= -1;
+	}
 }
 
 double TicTacToe::getScore(AbstractEvolutionObject* object)

@@ -11,6 +11,9 @@ CPP_SRCS += \
 ../src/Examples/FunctionSimulator.cpp \
 ../src/Examples/Nature.cpp \
 ../src/Examples/NatureDrawer.cpp \
+../src/Examples/Network.cpp \
+../src/Examples/NetworkDrawer.cpp \
+../src/Examples/NetworkSimulator.cpp \
 ../src/Examples/Position.cpp \
 ../src/Examples/RockTile.cpp \
 ../src/Examples/TicTacToe.cpp \
@@ -25,6 +28,9 @@ OBJS += \
 ./src/Examples/FunctionSimulator.o \
 ./src/Examples/Nature.o \
 ./src/Examples/NatureDrawer.o \
+./src/Examples/Network.o \
+./src/Examples/NetworkDrawer.o \
+./src/Examples/NetworkSimulator.o \
 ./src/Examples/Position.o \
 ./src/Examples/RockTile.o \
 ./src/Examples/TicTacToe.o \
@@ -39,6 +45,9 @@ CPP_DEPS += \
 ./src/Examples/FunctionSimulator.d \
 ./src/Examples/Nature.d \
 ./src/Examples/NatureDrawer.d \
+./src/Examples/Network.d \
+./src/Examples/NetworkDrawer.d \
+./src/Examples/NetworkSimulator.d \
 ./src/Examples/Position.d \
 ./src/Examples/RockTile.d \
 ./src/Examples/TicTacToe.d \

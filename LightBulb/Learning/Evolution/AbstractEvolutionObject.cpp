@@ -9,7 +9,7 @@ void AbstractEvolutionObject::randomizeMutationStrength()
 	for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
 	{
 		// Set it to a random value
-		*mutationStrengthValue = (float)rand() / RAND_MAX * 0.2 - 0.1;
+		*mutationStrengthValue = (float)rand() / RAND_MAX * 0.1;
 	}
 }
 

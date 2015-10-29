@@ -28,6 +28,20 @@ TicTacToeDrawer::TicTacToeDrawer(TicTacToeDrawerOptions& options_)
 			signs[x][y].setColor(sf::Color::White);
 		}
 	}
+
+	lines = sf::VertexArray(sf::Lines);
+
+	lines.append(sf::Vertex(sf::Vector2f(options->width / 3, 0)));
+	lines.append(sf::Vertex(sf::Vector2f(options->width / 3, options->height)));
+
+	lines.append(sf::Vertex(sf::Vector2f(options->width / 3 * 2, 0)));
+	lines.append(sf::Vertex(sf::Vector2f(options->width / 3 * 2, options->height)));
+
+	lines.append(sf::Vertex(sf::Vector2f(0, options->height / 3)));
+	lines.append(sf::Vertex(sf::Vector2f(options->width, options->height / 3)));
+
+	lines.append(sf::Vertex(sf::Vector2f(0, options->height / 3 * 2)));
+	lines.append(sf::Vertex(sf::Vector2f(options->width, options->height / 3 * 2)));
 }
 
 void TicTacToeDrawer::recalculateAllValues()
@@ -42,8 +56,22 @@ void TicTacToeDrawer::recalculateAllValues()
 	}
 }
 
+bool TicTacToeDrawer::handleMouseInputEvent(sf::Event &event)
+{
+	int col = (event.mouseButton.x - options->posX) / (options->width / 3);
+	int row = (event.mouseButton.y - options->posY) / (options->height / 3);
+	if (col >= 0 && col < 3 && row >= 0 && row < 3) {
+		options->ticTacToe->setField(col, row);
+		return true;
+	}
+	else
+		return false;
+}
+
 void TicTacToeDrawer::draw(sf::RenderWindow &window)
 {
+	window.draw(lines);
+
 	// Go through all rectangles and draw them
 	for (auto signCol = signs.begin(); signCol != signs.end(); signCol++)
 	{
@@ -53,4 +81,5 @@ void TicTacToeDrawer::draw(sf::RenderWindow &window)
 		}
 	}
 }
+
 

@@ -72,6 +72,7 @@
 #include "Learning/Evolution/ConstantMutationCommand.hpp"
 #include "Learning/Evolution/ConstantRecombinationCommand.hpp"
 #include "Examples/TicTacToe.hpp"
+#include "Examples/TicTacToeKI.hpp"
 #include "Examples/FunctionSimulator.hpp"
 #include "Examples/Position.hpp"
 #include "Learning/Evolution/RateDifferenceCondition.hpp"
@@ -1649,7 +1650,7 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 10, true));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 100, true));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
@@ -1661,6 +1662,63 @@ void doTicTacToeTest()
 	EvolutionLearningRule learningRule(options);
 
 	learningRule.doLearning();
+
+
+	TicTacToeDrawerOptions ticTacToeDrawerOptions;
+	ticTacToeDrawerOptions.width = 600;
+	ticTacToeDrawerOptions.height = 600;
+	ticTacToeDrawerOptions.ticTacToe = &ticTacToe;
+	TicTacToeDrawer ticTacToeDrawer(ticTacToeDrawerOptions);
+
+    sf::RenderWindow window(sf::VideoMode(1300, 1000), "LightBulb!");
+
+    TicTacToeKI* bestAI = ticTacToe.getBestAIs()->back();
+
+
+
+	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
+	networkTopologyDrawerOptions.width = 700;
+	networkTopologyDrawerOptions.height = 1000;
+	networkTopologyDrawerOptions.posX = 600;
+	networkTopologyDrawerOptions.network = bestAI->getNeuralNetwork();
+	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	networkTopologyDrawer.refresh();
+
+
+    ticTacToe.startNewGame(1);
+    bestAI->resetNN();
+	while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+            else if (event.type == sf::Event::MouseButtonPressed) {
+            	if (ticTacToe.hasGameFinished()) {
+            		ticTacToe.startNewGame(1);
+            		bestAI->resetNN();
+            	}
+            	else if (ticTacToeDrawer.handleMouseInputEvent(event)) {
+            		if (!ticTacToe.hasGameFinished()) {
+            			bestAI->doNNCalculation(learningRule);
+            			if (ticTacToe.hasGameFinished())
+            				std::cout << "AI has failed" << std::endl;
+            		}
+            		else
+            			std::cout << "Player has failed" << std::endl;
+            	}
+            }
+        }
+
+        window.clear();
+        ticTacToeDrawer.recalculateAllValues();
+        ticTacToeDrawer.draw(window);
+        //networkTopologyDrawer.draw(window);
+        window.display();
+    }
+
+
 }
 
 static double sixHumpCamelFunction(std::vector<float> pos)
