@@ -32,6 +32,7 @@ src/Graphics \
 src/Learning \
 src/Learning/Evolution \
 src/Learning/Evolution/EvolutionStrategy \
+src/Learning/Evolution/Resilient \
 src/NetworkTopology \
 src/NeuralNetwork \
 src/Neuron \

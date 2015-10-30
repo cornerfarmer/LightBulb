@@ -113,17 +113,18 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 					if (illegalMove)
 					{
 						if (currentPlayer == 1) {
-							points[static_cast<TicTacToeKI*>(*ki)]-=9-i;
+							points[static_cast<TicTacToeKI*>(*ki)]-=10-i;
 							illegalMoves++;
 						}
 #ifndef RANDOM_KI
 						else
-							points[static_cast<TicTacToeKI*>(*bestAI)]-=9-i;
+							points[static_cast<TicTacToeKI*>(*bestAI)]-=10-i;
 #endif
 
 					}
 					else
 					{
+						points[static_cast<TicTacToeKI*>(*ki)]-=1;
 						ties++;
 					}/*
 					else if (whoHasWon() == 1)
@@ -156,7 +157,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		currentResetGenerationCount *= 2;
 		//objects[0] = highscore->front().second;
 		//objects.resize(1);
-		objects.clear();
+		//objects.clear();
 	}
 	lastBestScore = highscore->front().first;
 }

@@ -70,6 +70,7 @@
 #include "Learning/Evolution/BestSelectionCommand.hpp"
 #include "Learning/Evolution/BestReuseCommand.hpp"
 #include "Learning/Evolution/ConstantMutationCommand.hpp"
+#include "Learning/Evolution/Resilient/MutationCommand.hpp"
 #include "Learning/Evolution/ConstantRecombinationCommand.hpp"
 #include "Examples/TicTacToe.hpp"
 #include "Examples/TicTacToeKI.hpp"
@@ -1650,7 +1651,7 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 100, true));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 60, true));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
@@ -1743,18 +1744,20 @@ void doFunctionEvolutionTest()
 	options.exitConditions.push_back(rateDifferenceCondition);
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
 	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new BestReuseCommand(1));
+	//options.reuseCommands.push_back(new BestReuseCommand(1));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
+	MutationCommand* constantMutationCommand = new MutationCommand();
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
 	options.world = &simulator;
-	options.enableDebugOutput = false;
+	options.enableDebugOutput = true;
 	options.scoreGoal = 1.031627;
 	options.scoreGoal = -0.000001;
 	EvolutionLearningRule learningRule(options);
+
+	learningRule.doLearning();
 
 	LearningRuleAnalyserOptions analyserOptions;
 	analyserOptions.learningRule = &learningRule;
@@ -1766,7 +1769,7 @@ void doFunctionEvolutionTest()
 
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
-	learningRuleAnalyser.execute();
+	//learningRuleAnalyser.execute();
 }
 
 
@@ -1971,6 +1974,6 @@ void doTeachedEvolution838Test() {
 
 int main()
 {
-	doTicTacToeTest();
+	doFunctionEvolutionTest();
     return 0;
 }

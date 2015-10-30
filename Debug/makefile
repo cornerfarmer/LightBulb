@@ -13,6 +13,7 @@ RM := rm -rf
 -include src/Neuron/subdir.mk
 -include src/NeuralNetwork/subdir.mk
 -include src/NetworkTopology/subdir.mk
+-include src/Learning/Evolution/Resilient/subdir.mk
 -include src/Learning/Evolution/EvolutionStrategy/subdir.mk
 -include src/Learning/Evolution/subdir.mk
 -include src/Learning/subdir.mk
