@@ -41,7 +41,6 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	randomizeMutationStrength();
 }
 
-
 NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 {
 	return neuralNetwork;

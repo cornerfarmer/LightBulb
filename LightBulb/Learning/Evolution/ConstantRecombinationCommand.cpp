@@ -45,6 +45,13 @@ void ConstantRecombinationCommand::execute(std::vector<std::pair<double, Abstrac
 		AbstractEvolutionObject* secondClone = (*highscore)[recombinationnIndex2].second->clone();
 		// Combine the two objects
 		recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
+
+		delete(secondClone);
 	}
 
+}
+
+void ConstantRecombinationCommand::setRecombinationPercentage(double newRecombinationPercentage)
+{
+	recombinationPercentage = newRecombinationPercentage;
 }

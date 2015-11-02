@@ -22,6 +22,7 @@ private:
 	// A random function which will be used to select objects which will be combined
 	RankBasedRandomFunction rankBasedRandomFunction;
 public:
+	void setRecombinationPercentage(double newRecombinationPercentage);
 	// Creates a command which combines a static amount of objects
 	ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, int objectCount_, bool enableDebugOutput_ = false);
 	// Creates a command which combines a percentage of objects

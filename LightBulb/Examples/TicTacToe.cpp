@@ -157,7 +157,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		currentResetGenerationCount *= 2;
 		//objects[0] = highscore->front().second;
 		//objects.resize(1);
-		//objects.clear();
+		objects.clear();
 	}
 	lastBestScore = highscore->front().first;
 }

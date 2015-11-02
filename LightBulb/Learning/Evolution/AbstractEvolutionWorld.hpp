@@ -16,7 +16,7 @@ class AbstractEvolutionObject;
 class AbstractEvolutionWorld
 {
 private:
-
+	static bool compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y);
 public:
 	virtual ~AbstractEvolutionWorld() {};
 	virtual std::vector<AbstractEvolutionObject*>* getEvolutionObjects() = 0;
