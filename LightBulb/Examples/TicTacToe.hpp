@@ -34,6 +34,7 @@ protected:
 	std::vector<TicTacToeKI*> bestAIs;
 	int defaultResetGenerationCount = 32;
 	int currentResetGenerationCount;
+	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
 public:
 	TicTacToe();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
@@ -47,6 +48,7 @@ public:
 	std::vector<TicTacToeKI*>* getBestAIs();
 	void startNewGame(int firstPlayer);
 	bool hasGameFinished();
+
 };
 
 #endif

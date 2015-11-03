@@ -169,47 +169,74 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 
 void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
 {
-	auto highscoreList = getHighscoreList();
-	TicTacToeKI* bestKI = dynamic_cast<TicTacToeKI*>(highscoreList->front().second);
-
+	TicTacToeKI* bestKI = dynamic_cast<TicTacToeKI*>(bestAIs.back());
 	
 	int wins = 0;
-	int games = 1000;
-	for (int g = 0; g < games; g++)
+	int possibleGames = 9 * 7 * 5 * 3;
+	std::array<int, 4> decisionNr {0,0,0,0};
+
+	bool decisionCombinationsLeft = true;
+
+	while (decisionCombinationsLeft)
 	{
-		resetWorld();
+		bestKI->resetNN();
+		startNewGame(-1);
 		
-		for (int i = 0; i < 9; i++)
+		int i;
+		for (i = 0; i < 9; i++)
 		{
-			bestKI->resetNN();
-			if (i % 2 == 0)
+			if (i % 2 == 1)
 			{
-				currentPlayer = 1;
 				bestKI->doNNCalculation(learningRule);
 			}
 			else
 			{ 
-				currentPlayer = -1;
 				int x, y;
-				do {
-					x = std::min(2, (int)((float)rand() / RAND_MAX * 3));
-					y = std::min(2, (int)((float)rand() / RAND_MAX * 3));
-				} while (!isFree(x, y));
+				int freeFieldNr = -1;
+				for (y = 0; y < 3; y++)
+				{
+					for (x = 0; x < 3; x++)
+					{
+						if (isFree(x, y))
+							freeFieldNr++;
+						if ((i == 8 && freeFieldNr == 0) || freeFieldNr == decisionNr[i / 2])
+							goto setField;
+					}
+				}
+			setField:
 				setField(x, y);
 			}
-			if (whoHasWon() != 0)
+			if (illegalMove)
 				break;
 		}
 
-		if (whoHasWon() == 1)
+		if (currentPlayer == -1 || i > 8)
 			wins++;
+
+		decisionCombinationsLeft = !nextDecisionCombination(decisionNr);
 	}
 
-	std::cout << "Best KI: " << wins << "/" << games << std::endl;
+	std::cout << "Best KI: " << wins << "/" << possibleGames << std::endl;
 }
 
-
-
+bool TicTacToe::nextDecisionCombination(std::array<int, 4>& decisionNr, int level)
+{
+	bool changeAtThisLevel = true;
+	if (level < 3)
+		changeAtThisLevel = nextDecisionCombination(decisionNr, level + 1);
+	if (changeAtThisLevel) {
+		decisionNr[level]++;
+		if (decisionNr[level] >= (4 - level) * 2 + 1)
+		{
+			decisionNr[level] = 0;
+			return true;
+		}
+		else
+			return false;
+	}
+	else
+		return false;
+}
 
 bool TicTacToe::isFree(int x, int y)
 {
