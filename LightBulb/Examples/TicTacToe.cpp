@@ -2,6 +2,8 @@
 #include "Examples/TicTacToe.hpp"
 #include "Examples/TicTacToeKI.hpp"
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
 //Library includes
 #include <iostream>
 #include <algorithm>
@@ -37,23 +39,47 @@ int TicTacToe::getFieldValue(int x, int y)
 	return fields[x][y];
 }
 
+template <class Iter>
+void intervalAdvance(Iter& it,const Iter& end, int i)
+{
+	if (it != end -1)
+	{
+		it += i;
+		if (it > end || (it == end && i != 1))
+			it = end -1;
+	}
+	else
+		it = end;
+}
+
 void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 {	
 	int ties = 0;
 	int firstWon = 0;
 	int secondWon = 0;
 	int illegalMoves = 0;
+	int duplicates = 0;
 	static int generationsSincaLastBestAI = 0;
 	static double lastBestScore = 0;
 	points.clear();
 	for (auto ki = objects.begin(); ki != objects.end(); ki++)
 	{	
+		for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
+		{
+			if ((*bestAI)->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*(*ki)->getNeuralNetwork()->getNetworkTopology()) < 1)
+			{
+				points[static_cast<TicTacToeKI*>(*ki)] = -30;
+				duplicates++;
+				goto nextKI;
+			}
+		}
+
 
 		for (int b = 0; b < 2; b++)
 		{
 #ifndef RANDOM_KI
 
-			for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
+			for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); intervalAdvance<std::vector<TicTacToeKI*>::iterator>(bestAI, bestAIs.end(), bestAIs.size()/10 + 1))
 			{
 
 					(*bestAI)->resetNN();
@@ -141,8 +167,9 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 					}*/
 			}
 		}
+		nextKI:;
 	}
-	std::cout << "IM:" << illegalMoves << " T:" << ties << " 1W:" << firstWon << " 2W:" << secondWon << std::endl;
+	std::cout << "IM:" << illegalMoves << " T:" << ties << " 1W:" << firstWon << " 2W:" << secondWon << " D:" << duplicates << std::endl;
 
 	auto highscore = getHighscoreList();
 	if (highscore->front().first == 0) {
