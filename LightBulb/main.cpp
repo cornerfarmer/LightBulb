@@ -1651,12 +1651,12 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 80, true));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 100, false));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 1.8, true));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, true));
+	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 1.8, false));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, false));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
@@ -1750,17 +1750,17 @@ void doFunctionEvolutionTest()
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
 	//MutationCommand* constantMutationCommand = new MutationCommand();
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 1.8, true);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 1.8, false);
 	options.mutationsCommands.push_back(constantMutationCommand);
-	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, true);
+	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, false);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
 	options.world = &simulator;
-	options.enableDebugOutput = true;
+	options.enableDebugOutput = false;
 	options.scoreGoal = 1.031627;
 	//options.scoreGoal = -0.000001;
 	EvolutionLearningRule learningRule(options);
 
-	learningRule.doLearning();
+	//learningRule.doLearning();
 
 
 	LearningRuleAnalyserOptions analyserOptions;
@@ -1774,7 +1774,7 @@ void doFunctionEvolutionTest()
 
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
-	//learningRuleAnalyser.execute();
+	learningRuleAnalyser.execute();
 }
 
 

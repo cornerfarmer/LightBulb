@@ -6,6 +6,7 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 // Library includes
 #include <algorithm>
+#include <iostream>
 
 void AbstractNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 {
@@ -68,6 +69,8 @@ double AbstractNetworkTopology::calculateEuclideanDistance(AbstractNetworkTopolo
 		}
 	}
 	distance = sqrt(distance);
+
+	std::cout << (int)distance << std::endl;
 	return distance;
 }
 

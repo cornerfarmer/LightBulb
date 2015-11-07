@@ -6,6 +6,12 @@
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
 
+RecombinationAlgorithm::RecombinationAlgorithm(bool useAverageForWeight_, bool useAverageForMutationStrength_)
+{
+	useAverageForWeight = useAverageForWeight_;
+	useAverageForMutationStrength = useAverageForMutationStrength_;
+}
+
 void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
 {
 	// Go synchronously through all edges of the two given objects
@@ -20,8 +26,16 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 			auto edge1 = (*neuron1)->getAfferentEdges()->begin();
 			for (auto edge2 = (*neuron2)->getAfferentEdges()->begin(); edge1 != (*neuron1)->getAfferentEdges()->end() && edge2 != (*neuron2)->getAfferentEdges()->end(); edge1++, edge2++)
 			{
-				// Calculate the weights average and store it inside the first object
-				(*edge1)->setWeight(((*edge1)->getWeight() + (*edge2)->getWeight()) / 2);
+				if (useAverageForWeight)
+				{
+					// Calculate the weights average and store it inside the first object
+					(*edge1)->setWeight(((*edge1)->getWeight() + (*edge2)->getWeight()) / 2);
+				}
+				else
+				{
+					if (rand() > RAND_MAX / 2)
+						(*edge1)->setWeight((*edge2)->getWeight());
+				}
 			}
 		}
 	}
@@ -29,6 +43,14 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 	auto mutationStrength2 = object2->getMutationStrength()->begin();
 	for (auto mutationStrength1 = object1->getMutationStrength()->begin(); mutationStrength1 != object1->getMutationStrength()->end() && mutationStrength2 != object2->getMutationStrength()->end(); mutationStrength1++, mutationStrength2++)
 	{
-		*mutationStrength1 = (*mutationStrength2 + *mutationStrength1) / 2;
+		if (useAverageForMutationStrength)
+		{
+			*mutationStrength1 = (*mutationStrength2 + *mutationStrength1) / 2;
+		}
+		else
+		{
+			if (rand() > RAND_MAX / 2)
+				*mutationStrength1 = *mutationStrength2;
+		}
 	}
 }
