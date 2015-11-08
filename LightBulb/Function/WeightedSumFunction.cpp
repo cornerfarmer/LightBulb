@@ -11,7 +11,7 @@ double WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* 
 	for (auto edge = input.begin(); edge != input.end(); edge++)
 	{
 		// Use the neuronOutputCache if possible else use the current activation
-		sum += (*edge)->getWeight() * (neuronOutputCache == NULL || neuronOutputCache->find((*edge)->getPrevNeuron()) == neuronOutputCache->end() ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]);
+		sum += (*edge)->getWeight() * (*edge)->getPrevNeuron()->getActivation(); // (neuronOutputCache == NULL || neuronOutputCache->find((*edge)->getPrevNeuron()) == neuronOutputCache->end() ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]);
 	}
 
 	return sum;

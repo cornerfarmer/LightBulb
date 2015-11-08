@@ -19,6 +19,7 @@ private:
 public:
 
 	NeuralNetworkIO(int d)
+		: std::vector<std::pair<bool, std::vector<std::pair<bool, T>>>>(1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(d)))
 	{
 		dimension = d;
 	}

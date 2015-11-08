@@ -6,11 +6,13 @@
 // Library Includes
 #include <vector>
 #include <map>
+#include <array>
 #include <SFML/Graphics.hpp>
 
 // Include
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
 #include "Examples/TicTacToeDrawer.hpp"
+#include "NeuralNetwork/NeuralNetworkIO.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -32,13 +34,13 @@ protected:
 	bool displayMode;
 	bool illegalMove;
 	std::vector<TicTacToeKI*> bestAIs;
-	int defaultResetGenerationCount = 32;
+	int defaultResetGenerationCount;
 	int currentResetGenerationCount;
 	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
 public:
 	TicTacToe();
 	void doSimulationStep(EvolutionLearningRule& learningRule);
-	std::vector<double> getSight();
+	NeuralNetworkIO<double> getSight();
 	void setField(int x, int y);
 	double getScore(AbstractEvolutionObject* object);
 	bool isFree(int x, int y);

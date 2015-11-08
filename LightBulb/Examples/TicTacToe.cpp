@@ -16,6 +16,7 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 
 TicTacToe::TicTacToe()
 {
+	defaultResetGenerationCount = 32;
 	fields.resize(3);
 	for (int x = 0; x < fields.size(); x++)
 	{
@@ -126,7 +127,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 								displayMode = !displayMode;
 						}
 
-						if (displayMode) {
+						if (displayMode && window.isOpen()) {
 							window.clear();
 							drawer->recalculateAllValues();
 							drawer->draw(window);
@@ -235,7 +236,7 @@ void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
 	
 	int wins = 0;
 	int possibleGames = 9 * 7 * 5 * 3;
-	std::array<int, 4> decisionNr {0,0,0,0};
+	std::array<int, 4> decisionNr = {0,0,0,0};
 
 	bool decisionCombinationsLeft = true;
 
@@ -261,7 +262,7 @@ void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
 					{
 						if (isFree(x, y))
 							freeFieldNr++;
-						if ((i == 8 && freeFieldNr == 0) || freeFieldNr == decisionNr[i / 2])
+						if ((i == 8 && freeFieldNr == 0) || (i!=8 &&freeFieldNr == decisionNr[i / 2]))
 							goto setField;
 					}
 				}
@@ -368,22 +369,23 @@ void TicTacToe::resetWorld()
 }
 
 
-std::vector<double> TicTacToe::getSight()
+NeuralNetworkIO<double> TicTacToe::getSight()
 {
-	std::vector<double> sight;
+	static NeuralNetworkIO<double> sight(18);
+	int sightIndex = 0;
 	for (auto column = fields.begin(); column != fields.end(); column++)
 	{
 		for (auto field = column->begin(); field != column->end(); field++)
 		{
 			int fieldValue = currentPlayer * *field;
 			if (fieldValue == 1)
-				sight.push_back(1);
+				sight.set(0, sightIndex++, 1);
 			else
-				sight.push_back(0);
+				sight.set(0, sightIndex++, 0);
 			if (fieldValue == -1)
-				sight.push_back(1);
+				sight.set(0, sightIndex++, 1);
 			else
-				sight.push_back(0);
+				sight.set(0, sightIndex++, 0);
 		}
 	}
 	return sight;

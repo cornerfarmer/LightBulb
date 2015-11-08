@@ -470,6 +470,24 @@
     <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp">
       <Filter>Quelldateien\Diagnostic</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestAICountCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\NetworkSimulator.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Network.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\NetworkDrawer.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -882,6 +900,24 @@
     </ClCompile>
     <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp">
       <Filter>Quelldateien\Diagnostic</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestAICountCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NetworkSimulator.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Network.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NetworkDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

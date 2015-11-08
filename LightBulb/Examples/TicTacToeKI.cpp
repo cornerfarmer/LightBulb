@@ -11,13 +11,7 @@ TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
 
 NeuralNetworkIO<double> TicTacToeKI::getNNInput()
 {
-	std::vector<double> sight = ticTacToe->getSight();
-	NeuralNetworkIO<double> input(18);
-	for (int i = 0; i < sight.size(); i++)
-	{
-		input.set(0, i, sight[i]);
-	}
-	return input;
+	return ticTacToe->getSight();
 }
 
 void TicTacToeKI::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output)

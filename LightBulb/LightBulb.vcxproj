@@ -42,6 +42,9 @@
     <ClInclude Include="Examples\FunctionSimulator.hpp" />
     <ClInclude Include="Examples\Nature.hpp" />
     <ClInclude Include="Examples\NatureDrawer.hpp" />
+    <ClInclude Include="Examples\Network.hpp" />
+    <ClInclude Include="Examples\NetworkDrawer.hpp" />
+    <ClInclude Include="Examples\NetworkSimulator.hpp" />
     <ClInclude Include="Examples\Position.hpp" />
     <ClInclude Include="Examples\RockTile.hpp" />
     <ClInclude Include="Examples\TicTacToe.hpp" />
@@ -94,6 +97,7 @@
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\BestAICountCondition.hpp" />
     <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp" />
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp" />
@@ -105,6 +109,8 @@
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp" />
+    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp" />
+    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp" />
     <ClInclude Include="Learning\HopfieldLearningRule.hpp" />
     <ClInclude Include="Learning\LearningResult.hpp" />
     <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
@@ -181,6 +187,9 @@
     <ClCompile Include="Examples\FunctionSimulator.cpp" />
     <ClCompile Include="Examples\Nature.cpp" />
     <ClCompile Include="Examples\NatureDrawer.cpp" />
+    <ClCompile Include="Examples\Network.cpp" />
+    <ClCompile Include="Examples\NetworkDrawer.cpp" />
+    <ClCompile Include="Examples\NetworkSimulator.cpp" />
     <ClCompile Include="Examples\Position.cpp" />
     <ClCompile Include="Examples\RockTile.cpp" />
     <ClCompile Include="Examples\TicTacToe.cpp" />
@@ -233,6 +242,7 @@
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\BestAICountCondition.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp" />
@@ -244,6 +254,8 @@
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp" />
+    <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp" />
+    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp" />
     <ClCompile Include="Learning\HopfieldLearningRule.cpp" />
     <ClCompile Include="Learning\LVQ1LearningRule.cpp" />
     <ClCompile Include="Learning\LVQ2LearningRule.cpp" />
