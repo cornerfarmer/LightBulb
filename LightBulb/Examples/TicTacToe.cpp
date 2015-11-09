@@ -64,6 +64,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	static double lastBestScore = 0;
 	static int lastCompleteNewAI = 0;
 	static int duplicatesInARow = 0;
+	static int resetsInARow = 0;
 	points.clear();
 	for (auto ki = objects.begin(); ki != objects.end(); ki++)
 	{	
@@ -153,7 +154,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 					}
 					else
 					{
-						points[static_cast<TicTacToeKI*>(*ki)]-=1;
+						//points[static_cast<TicTacToeKI*>(*ki)]-=1;
 						ties++;
 					}/*
 					else if (whoHasWon() == 1)
@@ -180,24 +181,29 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		bool duplicate = false;
 		for (int i = 0; i < (int)bestAIs.size(); i++)
 		{
-			if (bestAIs[i]->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*newAI->getNeuralNetwork()->getNetworkTopology()) < 1000)
+			if (bestAIs[i]->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*newAI->getNeuralNetwork()->getNetworkTopology()) < 1500)
 			{
-				if (i < lastCompleteNewAI || duplicatesInARow < 10)
-				{
-					if (i >= lastCompleteNewAI)
-					{
-						duplicatesInARow++;
-						duplicate = true;
-					}
+//				if (i < lastCompleteNewAI || duplicatesInARow < 20)
+//				{
+//					duplicatesInARow++;
+//					if (i >= lastCompleteNewAI)
+//					{
+//						duplicate = true;
+//					}
 					std::cout << bestAIs.size() << ",";
 					delete(bestAIs[i]);
 					bestAIs.erase(bestAIs.begin() + i);
 					i = -1;
 					std::cout << bestAIs.size() << ",";
 					std::cout << "Found a similar AI" << std::endl;
-				}
-				else
-					duplicate = true;
+					//break;
+//				}
+//				else
+//				{
+//					duplicate = true;
+//					if (duplicatesInARow >= 20)
+//						duplicatesInARow = 0;
+//				}
 			}
 		}
 
@@ -211,6 +217,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		std::cout << "Added " << bestAIs.size() << ". best evolution object to bestAI list" << std::endl;
 		rateBestKI(learningRule);
 		currentResetGenerationCount = std::max((int)(currentResetGenerationCount / 1.1), defaultResetGenerationCount);
+		resetsInARow = 0;
 	}
 	if (lastBestScore != highscore->front().first) {
 		generationsSincaLastBestAI = 0;
@@ -220,7 +227,10 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		//objects[0] = highscore->front().second;
 		//objects.resize(1);
 		std::cout << "Reset" << std::endl;
-		objects.erase(objects.begin(), objects.end() - 1);
+		if (resetsInARow++ < 1)
+			objects.erase(objects.begin(), objects.end() - 1);
+		else
+			objects.clear();
 	}
 	lastBestScore = highscore->front().first;
 }
