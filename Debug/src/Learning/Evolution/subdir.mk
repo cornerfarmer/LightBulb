@@ -28,6 +28,7 @@ CPP_SRCS += \
 ../src/Learning/Evolution/FitnessSharingFitnessFunction.cpp \
 ../src/Learning/Evolution/LinearScalingFitnessFunction.cpp \
 ../src/Learning/Evolution/RateDifferenceCondition.cpp \
+../src/Learning/Evolution/RemainderStochasticSamplingSelectionCommand.cpp \
 ../src/Learning/Evolution/StandardDeviationFitnessFunction.cpp \
 ../src/Learning/Evolution/TeachedEvolutionObject.cpp \
 ../src/Learning/Evolution/TeachingEvolutionWorld.cpp 
@@ -57,6 +58,7 @@ OBJS += \
 ./src/Learning/Evolution/FitnessSharingFitnessFunction.o \
 ./src/Learning/Evolution/LinearScalingFitnessFunction.o \
 ./src/Learning/Evolution/RateDifferenceCondition.o \
+./src/Learning/Evolution/RemainderStochasticSamplingSelectionCommand.o \
 ./src/Learning/Evolution/StandardDeviationFitnessFunction.o \
 ./src/Learning/Evolution/TeachedEvolutionObject.o \
 ./src/Learning/Evolution/TeachingEvolutionWorld.o 
@@ -86,6 +88,7 @@ CPP_DEPS += \
 ./src/Learning/Evolution/FitnessSharingFitnessFunction.d \
 ./src/Learning/Evolution/LinearScalingFitnessFunction.d \
 ./src/Learning/Evolution/RateDifferenceCondition.d \
+./src/Learning/Evolution/RemainderStochasticSamplingSelectionCommand.d \
 ./src/Learning/Evolution/StandardDeviationFitnessFunction.d \
 ./src/Learning/Evolution/TeachedEvolutionObject.d \
 ./src/Learning/Evolution/TeachingEvolutionWorld.d 

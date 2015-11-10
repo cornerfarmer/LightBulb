@@ -22,6 +22,7 @@ CPP_SRCS += \
 ../src/Function/MexicanHatFunction.cpp \
 ../src/Function/MinimumNetInputActivationFunction.cpp \
 ../src/Function/RankBasedRandomFunction.cpp \
+../src/Function/RouletteWheelSelectionFunction.cpp \
 ../src/Function/WeightedSumFunction.cpp 
 
 OBJS += \
@@ -43,6 +44,7 @@ OBJS += \
 ./src/Function/MexicanHatFunction.o \
 ./src/Function/MinimumNetInputActivationFunction.o \
 ./src/Function/RankBasedRandomFunction.o \
+./src/Function/RouletteWheelSelectionFunction.o \
 ./src/Function/WeightedSumFunction.o 
 
 CPP_DEPS += \
@@ -64,6 +66,7 @@ CPP_DEPS += \
 ./src/Function/MexicanHatFunction.d \
 ./src/Function/MinimumNetInputActivationFunction.d \
 ./src/Function/RankBasedRandomFunction.d \
+./src/Function/RouletteWheelSelectionFunction.d \
 ./src/Function/WeightedSumFunction.d 
 
 
