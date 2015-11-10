@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/Learning/Evolution/AbstractEvolutionObject.cpp \
 ../src/Learning/Evolution/AbstractEvolutionWorld.cpp \
 ../src/Learning/Evolution/AbstractExitCondition.cpp \
+../src/Learning/Evolution/AbstractFitnessFunction.cpp \
 ../src/Learning/Evolution/AbstractMutationAlgorithm.cpp \
 ../src/Learning/Evolution/AbstractMutationCommand.cpp \
 ../src/Learning/Evolution/AbstractRecombinationAlgorithm.cpp \
@@ -23,7 +24,11 @@ CPP_SRCS += \
 ../src/Learning/Evolution/ConstantMutationCommand.cpp \
 ../src/Learning/Evolution/ConstantRecombinationCommand.cpp \
 ../src/Learning/Evolution/EvolutionLearningRule.cpp \
+../src/Learning/Evolution/ExponentialFitnessFunction.cpp \
+../src/Learning/Evolution/FitnessSharingFitnessFunction.cpp \
+../src/Learning/Evolution/LinearScalingFitnessFunction.cpp \
 ../src/Learning/Evolution/RateDifferenceCondition.cpp \
+../src/Learning/Evolution/StandardDeviationFitnessFunction.cpp \
 ../src/Learning/Evolution/TeachedEvolutionObject.cpp \
 ../src/Learning/Evolution/TeachingEvolutionWorld.cpp 
 
@@ -32,6 +37,7 @@ OBJS += \
 ./src/Learning/Evolution/AbstractEvolutionObject.o \
 ./src/Learning/Evolution/AbstractEvolutionWorld.o \
 ./src/Learning/Evolution/AbstractExitCondition.o \
+./src/Learning/Evolution/AbstractFitnessFunction.o \
 ./src/Learning/Evolution/AbstractMutationAlgorithm.o \
 ./src/Learning/Evolution/AbstractMutationCommand.o \
 ./src/Learning/Evolution/AbstractRecombinationAlgorithm.o \
@@ -47,7 +53,11 @@ OBJS += \
 ./src/Learning/Evolution/ConstantMutationCommand.o \
 ./src/Learning/Evolution/ConstantRecombinationCommand.o \
 ./src/Learning/Evolution/EvolutionLearningRule.o \
+./src/Learning/Evolution/ExponentialFitnessFunction.o \
+./src/Learning/Evolution/FitnessSharingFitnessFunction.o \
+./src/Learning/Evolution/LinearScalingFitnessFunction.o \
 ./src/Learning/Evolution/RateDifferenceCondition.o \
+./src/Learning/Evolution/StandardDeviationFitnessFunction.o \
 ./src/Learning/Evolution/TeachedEvolutionObject.o \
 ./src/Learning/Evolution/TeachingEvolutionWorld.o 
 
@@ -56,6 +66,7 @@ CPP_DEPS += \
 ./src/Learning/Evolution/AbstractEvolutionObject.d \
 ./src/Learning/Evolution/AbstractEvolutionWorld.d \
 ./src/Learning/Evolution/AbstractExitCondition.d \
+./src/Learning/Evolution/AbstractFitnessFunction.d \
 ./src/Learning/Evolution/AbstractMutationAlgorithm.d \
 ./src/Learning/Evolution/AbstractMutationCommand.d \
 ./src/Learning/Evolution/AbstractRecombinationAlgorithm.d \
@@ -71,7 +82,11 @@ CPP_DEPS += \
 ./src/Learning/Evolution/ConstantMutationCommand.d \
 ./src/Learning/Evolution/ConstantRecombinationCommand.d \
 ./src/Learning/Evolution/EvolutionLearningRule.d \
+./src/Learning/Evolution/ExponentialFitnessFunction.d \
+./src/Learning/Evolution/FitnessSharingFitnessFunction.d \
+./src/Learning/Evolution/LinearScalingFitnessFunction.d \
 ./src/Learning/Evolution/RateDifferenceCondition.d \
+./src/Learning/Evolution/StandardDeviationFitnessFunction.d \
 ./src/Learning/Evolution/TeachedEvolutionObject.d \
 ./src/Learning/Evolution/TeachingEvolutionWorld.d 
 

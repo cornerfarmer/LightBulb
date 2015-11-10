@@ -4,10 +4,12 @@
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 #include "Learning/Evolution/AbstractCreationCommand.hpp"
 #include "Learning/Evolution/AbstractSelectionCommand.hpp"
+#include "Learning/Evolution/AbstractFitnessFunction.hpp"
 #include "Learning/Evolution/AbstractMutationCommand.hpp"
 #include "Learning/Evolution/AbstractRecombinationCommand.hpp"
 #include "Learning/Evolution/AbstractExitCondition.hpp"
 #include "Learning/Evolution/AbstractReuseCommand.hpp"
+#include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
@@ -115,6 +117,12 @@ LearningResult EvolutionLearningRule::doLearning()
 				if (options->enableDebugOutput)
 					std::cout << "At least one condition is true => exit" << std::endl;
 				break;
+			}
+
+			// {2,3}.5. Step: Modify the calculated scores
+			for (auto fitnessFunction = options->fitnessFunctions.begin(); fitnessFunction != options->fitnessFunctions.end(); fitnessFunction++)
+			{
+				(*fitnessFunction)->execute(highscore.get());
 			}
 
 			// 4. Step: Select the relevant evolution objects (Other objects will be deleted)

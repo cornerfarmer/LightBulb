@@ -85,6 +85,7 @@
 #include "Examples/NetworkSimulator.hpp"
 #include "Examples/Network.hpp"
 #include "Learning/Evolution/TeachingEvolutionWorld.hpp"
+#include "Learning/Evolution/LinearScalingFitnessFunction.hpp"
 // Library includes
 #include <iostream>
 #include <exception>
@@ -1657,6 +1658,7 @@ void doTicTacToeTest()
 	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, false));
+	options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 

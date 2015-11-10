@@ -19,6 +19,7 @@ class AbstractMutationCommand;
 class AbstractRecombinationCommand;
 class AbstractExitCondition;
 class AbstractReuseCommand;
+class AbstractFitnessFunction;
 
 struct EvolutionLearningRuleOptions
 {
@@ -28,6 +29,8 @@ struct EvolutionLearningRuleOptions
 	std::vector<AbstractCreationCommand*> creationCommands;
 	// Holds commands for selecting objects which should stay
 	std::vector<AbstractSelectionCommand*> selectionCommands;
+	// Holds function which can modify the calculated fitness values
+	std::vector<AbstractFitnessFunction*> fitnessFunctions;
 	// Holds commands for mutating those objects
 	std::vector<AbstractMutationCommand*> mutationsCommands;
 	// Holds commands for combining two objects into a new one
