@@ -1,0 +1,64 @@
+// Includes
+#include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
+//Library includes
+#include <iostream>
+#include <iomanip>
+#include <stdexcept>
+#include <algorithm>
+
+void RemainderStochasticSamplingSelector::initMutation(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int mutationCount)
+{
+	objectSequence.resize(mutationCount);
+	
+	double totalFitness = 0;
+
+	// Go through all not selected objects
+	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	{
+		totalFitness += entry->first;
+	}
+
+	std::vector<double> secondChance;
+	int mutationSequenceIndex = 0;
+
+	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	{
+		int selectionCount = entry->first / totalFitness * mutationCount;
+		for (int i = 0; i < selectionCount; i++)
+		{
+			objectSequence[mutationSequenceIndex++] = entry->second;
+		}
+		secondChance.push_back(entry->first - selectionCount);
+	}
+
+	for (; mutationSequenceIndex < objectSequence.size(); mutationSequenceIndex++)
+	{
+		objectSequence[mutationSequenceIndex] = (*highscore)[randomFunction.execute(secondChance)].second;
+	}
+
+	if (objectSequence.size() != mutationCount)
+		throw std::logic_error("The RemainderStochasticSamplingSelector initialization was not successful");
+
+	currentObjectIndex = 0;
+}
+
+void RemainderStochasticSamplingSelector::initRecombination(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int recombinationCount)
+{
+	initMutation(highscore, recombinationCount * 2);
+	std::random_shuffle(objectSequence.begin(), objectSequence.end());
+}
+
+AbstractEvolutionObject* RemainderStochasticSamplingSelector::nextMutation()
+{
+	return objectSequence[currentObjectIndex++];
+}
+
+std::array<AbstractEvolutionObject*, 2> RemainderStochasticSamplingSelector::nextRecombination()
+{
+	return std::array<AbstractEvolutionObject*, 2> { objectSequence[currentObjectIndex++], objectSequence[currentObjectIndex++] };
+}
+
+bool RemainderStochasticSamplingSelector::hasFinished()
+{
+	return currentObjectIndex == objectSequence.size();
+}

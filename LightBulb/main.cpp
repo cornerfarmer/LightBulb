@@ -1,4 +1,5 @@
 // Includes
+#include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
 #include "Function/WeightedSumFunction.hpp"
 #include "Neuron/Edge.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
@@ -86,7 +87,9 @@
 #include "Examples/Network.hpp"
 #include "Learning/Evolution/TeachingEvolutionWorld.hpp"
 #include "Learning/Evolution/LinearScalingFitnessFunction.hpp"
-// Library includes
+#include "Function/RankBasedRandomFunction.hpp"
+#include "Function/EqualRandomFunction.hpp"
+#include "Learning/Evolution/RandomSelector.hpp"
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -1636,8 +1639,8 @@ void doEvolutionTest()
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 23));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 9));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RemainderStochasticSamplingSelector(), 23));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 9));
 	options.world = &nature;
 
 	EvolutionLearningRule learningRule(options);
@@ -1656,9 +1659,9 @@ void doTicTacToeTest()
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), 1.8, false));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, false));
-	options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RemainderStochasticSamplingSelector(), 1.8, false));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0.3, false));
+	//options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
@@ -1727,7 +1730,7 @@ void doTicTacToeTest()
 
 static double sixHumpCamelFunction(std::vector<float> pos)
 {
-	return -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4));
+	return std::max(0.0, -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4)) + 20);
 }
 
 static double threeHumpCamelFunction(std::vector<float> pos)
@@ -1738,7 +1741,7 @@ static double threeHumpCamelFunction(std::vector<float> pos)
 void doFunctionEvolutionTest()
 {
 	FunctionSimulatorOptions simulatorOptions;
-	simulatorOptions.enableGraphics = false;
+	simulatorOptions.enableGraphics = true;
 
 	FunctionSimulator simulator(simulatorOptions, sixHumpCamelFunction);
 
@@ -1752,17 +1755,20 @@ void doFunctionEvolutionTest()
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
 	//MutationCommand* constantMutationCommand = new MutationCommand();
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 1.8, false);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 1.8, false);
 	options.mutationsCommands.push_back(constantMutationCommand);
-	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0.3, false);
+	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0.3, false);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
 	options.world = &simulator;
-	options.enableDebugOutput = false;
-	options.scoreGoal = 1.031627;
+	options.enableDebugOutput = true;
+	options.scoreGoal = 1.031627 + 20;
 	//options.scoreGoal = -0.000001;
 	EvolutionLearningRule learningRule(options);
 
-	//learningRule.doLearning();
+	learningRule.doLearning();
+	learningRule.doLearning();
+	learningRule.doLearning();
+
 
 
 	LearningRuleAnalyserOptions analyserOptions;
@@ -1776,7 +1782,7 @@ void doFunctionEvolutionTest()
 
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
-	learningRuleAnalyser.execute();
+	//learningRuleAnalyser.execute();
 }
 
 
@@ -1814,9 +1820,9 @@ void doNetworkEvolutionTest()
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RemainderStochasticSamplingSelector(), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0));
 	options.world = &simulator;
 	options.enableDebugOutput = false;
 	options.scoreGoal = -10.47;
@@ -1904,9 +1910,9 @@ void doTeachedEvolution838Test() {
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, 2.0);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), 0));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.world = &world;
 	options.enableDebugOutput = true;
 	options.scoreGoal = -0.1;
@@ -1922,8 +1928,6 @@ void doTeachedEvolution838Test() {
 	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
 	//learningRuleAnalyser.execute();
-	learningRule.doLearning();
-	learningRule.doLearning();
 	learningRule.doLearning();
 
 	NeuralNetwork* bestNetwork =  world.getEvolutionObjects()->front()->getNeuralNetwork();

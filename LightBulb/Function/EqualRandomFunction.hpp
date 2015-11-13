@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _RANKBASEDRANDOMFUNCTION_H_
-#define _RANKBASEDRANDOMFUNCTION_H_
+#ifndef _EQUALRANDOMFUNCTION_H_
+#define _EQUALRANDOMFUNCTION_H_
 
 // Library includes
 #include <math.h>
@@ -9,7 +9,7 @@
 // Includes
 #include "Function/AbstractRandomFunction.hpp"
 
-class RankBasedRandomFunction : public AbstractRandomFunction
+class EqualRandomFunction : public AbstractRandomFunction
 {
 private:
 public:

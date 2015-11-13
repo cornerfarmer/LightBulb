@@ -11,7 +11,7 @@
 #include <iomanip>
 
 MutationCommand::MutationCommand()
-	: AbstractMutationCommand(new ResilientMutationAlgorithm(), true)
+	: AbstractMutationCommand(new ResilientMutationAlgorithm(), NULL, true)
 {
 
 }
@@ -19,8 +19,6 @@ MutationCommand::MutationCommand()
 
 void MutationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
 {
-
-
 	// Do N times
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{

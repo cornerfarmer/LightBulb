@@ -8,11 +8,13 @@ CPP_SRCS += \
 ../src/Function/AbstractInputFunction.cpp \
 ../src/Function/AbstractNeighborhoodFunction.cpp \
 ../src/Function/AbstractOutputFunction.cpp \
+../src/Function/AbstractRandomFunction.cpp \
 ../src/Function/AbstractShrinkFunction.cpp \
 ../src/Function/BinaryFunction.cpp \
 ../src/Function/ConeFunction.cpp \
 ../src/Function/CosinusFunction.cpp \
 ../src/Function/CylinderFunction.cpp \
+../src/Function/EqualRandomFunction.cpp \
 ../src/Function/EuclideanDistance.cpp \
 ../src/Function/ExponentialShrinkFunction.cpp \
 ../src/Function/FermiFunction.cpp \
@@ -22,6 +24,7 @@ CPP_SRCS += \
 ../src/Function/MexicanHatFunction.cpp \
 ../src/Function/MinimumNetInputActivationFunction.cpp \
 ../src/Function/RankBasedRandomFunction.cpp \
+../src/Function/RouletteWheelSelectionFunction.cpp \
 ../src/Function/WeightedSumFunction.cpp 
 
 OBJS += \
@@ -29,11 +32,13 @@ OBJS += \
 ./src/Function/AbstractInputFunction.o \
 ./src/Function/AbstractNeighborhoodFunction.o \
 ./src/Function/AbstractOutputFunction.o \
+./src/Function/AbstractRandomFunction.o \
 ./src/Function/AbstractShrinkFunction.o \
 ./src/Function/BinaryFunction.o \
 ./src/Function/ConeFunction.o \
 ./src/Function/CosinusFunction.o \
 ./src/Function/CylinderFunction.o \
+./src/Function/EqualRandomFunction.o \
 ./src/Function/EuclideanDistance.o \
 ./src/Function/ExponentialShrinkFunction.o \
 ./src/Function/FermiFunction.o \
@@ -43,6 +48,7 @@ OBJS += \
 ./src/Function/MexicanHatFunction.o \
 ./src/Function/MinimumNetInputActivationFunction.o \
 ./src/Function/RankBasedRandomFunction.o \
+./src/Function/RouletteWheelSelectionFunction.o \
 ./src/Function/WeightedSumFunction.o 
 
 CPP_DEPS += \
@@ -50,11 +56,13 @@ CPP_DEPS += \
 ./src/Function/AbstractInputFunction.d \
 ./src/Function/AbstractNeighborhoodFunction.d \
 ./src/Function/AbstractOutputFunction.d \
+./src/Function/AbstractRandomFunction.d \
 ./src/Function/AbstractShrinkFunction.d \
 ./src/Function/BinaryFunction.d \
 ./src/Function/ConeFunction.d \
 ./src/Function/CosinusFunction.d \
 ./src/Function/CylinderFunction.d \
+./src/Function/EqualRandomFunction.d \
 ./src/Function/EuclideanDistance.d \
 ./src/Function/ExponentialShrinkFunction.d \
 ./src/Function/FermiFunction.d \
@@ -64,6 +72,7 @@ CPP_DEPS += \
 ./src/Function/MexicanHatFunction.d \
 ./src/Function/MinimumNetInputActivationFunction.d \
 ./src/Function/RankBasedRandomFunction.d \
+./src/Function/RouletteWheelSelectionFunction.d \
 ./src/Function/WeightedSumFunction.d 
 
 

@@ -11,8 +11,10 @@ CPP_SRCS += \
 ../src/Learning/Evolution/AbstractFitnessFunction.cpp \
 ../src/Learning/Evolution/AbstractMutationAlgorithm.cpp \
 ../src/Learning/Evolution/AbstractMutationCommand.cpp \
+../src/Learning/Evolution/AbstractMutationSelector.cpp \
 ../src/Learning/Evolution/AbstractRecombinationAlgorithm.cpp \
 ../src/Learning/Evolution/AbstractRecombinationCommand.cpp \
+../src/Learning/Evolution/AbstractRecombinationSelector.cpp \
 ../src/Learning/Evolution/AbstractReuseCommand.cpp \
 ../src/Learning/Evolution/AbstractSelectionCommand.cpp \
 ../src/Learning/Evolution/AbstractSimpleEvolutionObject.cpp \
@@ -27,8 +29,9 @@ CPP_SRCS += \
 ../src/Learning/Evolution/ExponentialFitnessFunction.cpp \
 ../src/Learning/Evolution/FitnessSharingFitnessFunction.cpp \
 ../src/Learning/Evolution/LinearScalingFitnessFunction.cpp \
+../src/Learning/Evolution/RandomSelector.cpp \
 ../src/Learning/Evolution/RateDifferenceCondition.cpp \
-../src/Learning/Evolution/RemainderStochasticSamplingSelectionCommand.cpp \
+../src/Learning/Evolution/RemainderStochasticSamplingSelector.cpp \
 ../src/Learning/Evolution/StandardDeviationFitnessFunction.cpp \
 ../src/Learning/Evolution/TeachedEvolutionObject.cpp \
 ../src/Learning/Evolution/TeachingEvolutionWorld.cpp 
@@ -41,8 +44,10 @@ OBJS += \
 ./src/Learning/Evolution/AbstractFitnessFunction.o \
 ./src/Learning/Evolution/AbstractMutationAlgorithm.o \
 ./src/Learning/Evolution/AbstractMutationCommand.o \
+./src/Learning/Evolution/AbstractMutationSelector.o \
 ./src/Learning/Evolution/AbstractRecombinationAlgorithm.o \
 ./src/Learning/Evolution/AbstractRecombinationCommand.o \
+./src/Learning/Evolution/AbstractRecombinationSelector.o \
 ./src/Learning/Evolution/AbstractReuseCommand.o \
 ./src/Learning/Evolution/AbstractSelectionCommand.o \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.o \
@@ -57,8 +62,9 @@ OBJS += \
 ./src/Learning/Evolution/ExponentialFitnessFunction.o \
 ./src/Learning/Evolution/FitnessSharingFitnessFunction.o \
 ./src/Learning/Evolution/LinearScalingFitnessFunction.o \
+./src/Learning/Evolution/RandomSelector.o \
 ./src/Learning/Evolution/RateDifferenceCondition.o \
-./src/Learning/Evolution/RemainderStochasticSamplingSelectionCommand.o \
+./src/Learning/Evolution/RemainderStochasticSamplingSelector.o \
 ./src/Learning/Evolution/StandardDeviationFitnessFunction.o \
 ./src/Learning/Evolution/TeachedEvolutionObject.o \
 ./src/Learning/Evolution/TeachingEvolutionWorld.o 
@@ -71,8 +77,10 @@ CPP_DEPS += \
 ./src/Learning/Evolution/AbstractFitnessFunction.d \
 ./src/Learning/Evolution/AbstractMutationAlgorithm.d \
 ./src/Learning/Evolution/AbstractMutationCommand.d \
+./src/Learning/Evolution/AbstractMutationSelector.d \
 ./src/Learning/Evolution/AbstractRecombinationAlgorithm.d \
 ./src/Learning/Evolution/AbstractRecombinationCommand.d \
+./src/Learning/Evolution/AbstractRecombinationSelector.d \
 ./src/Learning/Evolution/AbstractReuseCommand.d \
 ./src/Learning/Evolution/AbstractSelectionCommand.d \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.d \
@@ -87,8 +95,9 @@ CPP_DEPS += \
 ./src/Learning/Evolution/ExponentialFitnessFunction.d \
 ./src/Learning/Evolution/FitnessSharingFitnessFunction.d \
 ./src/Learning/Evolution/LinearScalingFitnessFunction.d \
+./src/Learning/Evolution/RandomSelector.d \
 ./src/Learning/Evolution/RateDifferenceCondition.d \
-./src/Learning/Evolution/RemainderStochasticSamplingSelectionCommand.d \
+./src/Learning/Evolution/RemainderStochasticSamplingSelector.d \
 ./src/Learning/Evolution/StandardDeviationFitnessFunction.d \
 ./src/Learning/Evolution/TeachedEvolutionObject.d \
 ./src/Learning/Evolution/TeachingEvolutionWorld.d 

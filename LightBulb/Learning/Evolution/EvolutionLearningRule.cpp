@@ -153,10 +153,15 @@ LearningResult EvolutionLearningRule::doLearning()
 			options->world->setEvolutionObjects(newObjectVector);
 
 
+			std::map<AbstractEvolutionObject*, bool> alreadyDeleted;
 			// Make sure all not used objects are deleted properly
 			for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
 			{
-				delete(oldObject->second);
+				if (!alreadyDeleted[oldObject->second])
+				{
+					delete(oldObject->second);
+					alreadyDeleted[oldObject->second] = true;
+				}
 			}
 
 			// Continue with the next generation

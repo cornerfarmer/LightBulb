@@ -5,6 +5,7 @@
 
 // Include
 #include "Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
+#include "Learning/Evolution/AbstractRecombinationSelector.hpp"
 
 // Library Includes
 #include <vector>
@@ -21,11 +22,13 @@ class AbstractRecombinationCommand
 protected:
 	// Holds the chosen recombination algorithm
 	std::unique_ptr<AbstractRecombinationAlgorithm> recombinationAlgorithm;
+	//
+	std::unique_ptr<AbstractRecombinationSelector> recombinationSelector;
 	bool enableDebugOutput;
 public:
 	virtual ~AbstractRecombinationCommand() {};
 	// Create a new recombination command with the given recombination algorithm
-	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, bool enableDebugOutput_);
+	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_,  bool enableDebugOutput_);
 	// Executes the recombinations. (The algorithm will take a few of the old objects, combine them and insert the created ones into the new object vector)
 	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector) = 0;
 };

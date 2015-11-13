@@ -16,8 +16,11 @@ std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> Abstra
 	int listIndex = 0;
 	for (auto object = getEvolutionObjects()->begin(); object < getEvolutionObjects()->end(); object++)
 	{		
+		double score = getScore(*object);
+
 		// Add the objects paired with its score to the list
-		(*list)[listIndex++] = std::make_pair(getScore(*object), *object);
+		(*list)[listIndex++] = std::make_pair(score, *object);
+
 	}
 	// Sort the list
 	std::sort(list->begin(), list->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());

@@ -7,6 +7,7 @@
 //Library includes
 #include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
@@ -176,7 +177,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	//std::cout << "IM:" << illegalMoves << " T:" << ties << " 1W:" << firstWon << " 2W:" << secondWon << " D:" << duplicates << std::endl;
 
 	auto highscore = getHighscoreList();
-	if (highscore->front().first == 0) {
+	if (points[static_cast<TicTacToeKI*>(highscore->front().second)] == 0) {
 		TicTacToeKI* newAI = static_cast<TicTacToeKI*>(highscore->front().second->clone(false));
 		bool duplicate = false;
 		for (int i = 0; i < (int)bestAIs.size(); i++)
@@ -364,7 +365,10 @@ void TicTacToe::setField(int x, int y)
 
 double TicTacToe::getScore(AbstractEvolutionObject* object)
 {
-	return points[static_cast<TicTacToeKI*>(object)];
+	double score = points[static_cast<TicTacToeKI*>(object)] + (double)bestAIs.size() * 2 * 10;
+	if (score < 0)
+		throw std::logic_error("score < 0!");
+	return score;
 }
 
 void TicTacToe::resetWorld()
