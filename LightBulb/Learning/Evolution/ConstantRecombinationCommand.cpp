@@ -32,26 +32,29 @@ void ConstantRecombinationCommand::execute(std::vector<std::pair<double, Abstrac
 	if (enableDebugOutput)
 		std::cout << "Recombinated " << objectCount << " random ones" << std::endl;
 	
-	recombinationSelector->initRecombination(highscore, objectCount);
-
-	int entryIndex = 0;
-	// Do N times
-	for (int i = 0; i < objectCount; i++)
+	if (highscore->size() > 0)
 	{
-		// Select two random objects
-		std::array<AbstractEvolutionObject*, 2> chosenObjects = recombinationSelector->nextRecombination();
-		// Clone the first objects and add it to the new object vector
-		newObjectVector->push_back(chosenObjects[0]->clone());
-		// Also clone the second object
-		AbstractEvolutionObject* secondClone = chosenObjects[01]->clone();
-		// Combine the two objects
-		recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
+		recombinationSelector->initRecombination(highscore, objectCount);
 
-		delete(secondClone);
+		int entryIndex = 0;
+		// Do N times
+		for (int i = 0; i < objectCount; i++)
+		{
+			// Select two random objects
+			std::array<AbstractEvolutionObject*, 2> chosenObjects = recombinationSelector->nextRecombination();
+			// Clone the first objects and add it to the new object vector
+			newObjectVector->push_back(chosenObjects[0]->clone());
+			// Also clone the second object
+			AbstractEvolutionObject* secondClone = chosenObjects[01]->clone();
+			// Combine the two objects
+			recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
+
+			delete(secondClone);
+		}
+
+		if (!recombinationSelector->hasFinished())
+			throw std::logic_error("The recombinationSelector has not finished properly!");
 	}
-
-	if (!recombinationSelector->hasFinished())
-		throw std::logic_error("The recombinationSelector has not finished properly!");
 }
 
 void ConstantRecombinationCommand::setRecombinationPercentage(double newRecombinationPercentage)

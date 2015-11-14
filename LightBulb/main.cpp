@@ -1655,7 +1655,7 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 50, false));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 70, false));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
 	options.selectionCommands.push_back(new BestSelectionCommand(40, false));

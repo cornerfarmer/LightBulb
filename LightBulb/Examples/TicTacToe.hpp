@@ -37,6 +37,7 @@ protected:
 	int defaultResetGenerationCount;
 	int currentResetGenerationCount;
 	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
+	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, EvolutionLearningRule& learningRule, int& illegalMoves, int& ties);
 public:
 	TicTacToe();
 	void doSimulationStep(EvolutionLearningRule& learningRule);

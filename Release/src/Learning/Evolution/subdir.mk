@@ -14,6 +14,7 @@ CPP_SRCS += \
 ../src/Learning/Evolution/AbstractMutationSelector.cpp \
 ../src/Learning/Evolution/AbstractRecombinationAlgorithm.cpp \
 ../src/Learning/Evolution/AbstractRecombinationCommand.cpp \
+../src/Learning/Evolution/AbstractRecombinationSelector.cpp \
 ../src/Learning/Evolution/AbstractReuseCommand.cpp \
 ../src/Learning/Evolution/AbstractSelectionCommand.cpp \
 ../src/Learning/Evolution/AbstractSimpleEvolutionObject.cpp \
@@ -46,6 +47,7 @@ OBJS += \
 ./src/Learning/Evolution/AbstractMutationSelector.o \
 ./src/Learning/Evolution/AbstractRecombinationAlgorithm.o \
 ./src/Learning/Evolution/AbstractRecombinationCommand.o \
+./src/Learning/Evolution/AbstractRecombinationSelector.o \
 ./src/Learning/Evolution/AbstractReuseCommand.o \
 ./src/Learning/Evolution/AbstractSelectionCommand.o \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.o \
@@ -78,6 +80,7 @@ CPP_DEPS += \
 ./src/Learning/Evolution/AbstractMutationSelector.d \
 ./src/Learning/Evolution/AbstractRecombinationAlgorithm.d \
 ./src/Learning/Evolution/AbstractRecombinationCommand.d \
+./src/Learning/Evolution/AbstractRecombinationSelector.d \
 ./src/Learning/Evolution/AbstractReuseCommand.d \
 ./src/Learning/Evolution/AbstractSelectionCommand.d \
 ./src/Learning/Evolution/AbstractSimpleEvolutionObject.d \

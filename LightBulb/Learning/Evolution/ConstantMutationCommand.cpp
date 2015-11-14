@@ -31,22 +31,25 @@ void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvol
 	if (enableDebugOutput)
 		std::cout << "Mutated " << objectCount << " random ones" << std::endl;
 	
-	mutationSelector->initMutation(highscore, objectCount);
-
-	int entryIndex = 0;
-	// Do N times
-	for (int i = 0; i < objectCount; i++)
+	if (highscore->size() > 0)
 	{
-		// Select a random object
-		AbstractEvolutionObject* chosenObject = mutationSelector->nextMutation();
-		// Clone it and add it to the new object vector
-		newObjectVector->push_back(chosenObject->clone());
-		// Mutate the new object
-		mutationAlgorithm->execute(newObjectVector->back());
-	}
+		mutationSelector->initMutation(highscore, objectCount);
 
-	if (!mutationSelector->hasFinished())
-		throw std::logic_error("The mutationSelector has not finished properly!");
+		int entryIndex = 0;
+		// Do N times
+		for (int i = 0; i < objectCount; i++)
+		{
+			// Select a random object
+			AbstractEvolutionObject* chosenObject = mutationSelector->nextMutation();
+			// Clone it and add it to the new object vector
+			newObjectVector->push_back(chosenObject->clone());
+			// Mutate the new object
+			mutationAlgorithm->execute(newObjectVector->back());
+		}
+
+		if (!mutationSelector->hasFinished())
+			throw std::logic_error("The mutationSelector has not finished properly!");
+	}
 }
 
 void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)

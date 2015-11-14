@@ -8,28 +8,44 @@
 
 void RemainderStochasticSamplingSelector::initMutation(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int mutationCount)
 {
+	if (highscore->size() == 0)
+		throw std::invalid_argument("The given highscore is empty!");
+
 	objectSequence.resize(mutationCount);
 	
-	double totalFitness = 0;
+	double smallestFitness = highscore->front().first;
+	// Go through all not selected objects
+	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	{
+		if (smallestFitness > entry->first)
+			smallestFitness = entry->first;
+	}
+
+	double totalFitnessDistance = 0;
 
 	// Go through all not selected objects
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
-		totalFitness += entry->first;
+		totalFitnessDistance += entry->first - smallestFitness;
 	}
 
 	std::vector<double> secondChance;
 	int mutationSequenceIndex = 0;
 
+
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
-		int selectionCount = entry->first / totalFitness * mutationCount;
-		for (int i = 0; i < selectionCount; i++)
+		double selectionCount = 0;
+		if (totalFitnessDistance > 0)
+			selectionCount = (entry->first - smallestFitness) / totalFitnessDistance * mutationCount;
+
+		for (int i = 0; i < (int)selectionCount; i++)
 		{
 			objectSequence[mutationSequenceIndex++] = entry->second;
 		}
-		secondChance.push_back(entry->first - selectionCount);
+		secondChance.push_back(std::max(0.0001, selectionCount - (int)selectionCount));
 	}
+
 
 	for (; mutationSequenceIndex < objectSequence.size(); mutationSequenceIndex++)
 	{
