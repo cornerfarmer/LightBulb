@@ -7,3 +7,10 @@ AbstractMutationCommand::AbstractMutationCommand(AbstractMutationAlgorithm* muta
 	mutationSelector.reset(mutationSelector_);
 	enableDebugOutput = enableDebugOutput_;
 }
+
+
+void AbstractMutationCommand::setMutationSelector(AbstractMutationSelector* mutationSelector_)
+{
+	mutationSelector.release();
+	mutationSelector.reset(mutationSelector_);
+}
