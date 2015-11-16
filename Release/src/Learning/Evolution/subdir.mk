@@ -33,6 +33,7 @@ CPP_SRCS += \
 ../src/Learning/Evolution/RateDifferenceCondition.cpp \
 ../src/Learning/Evolution/RemainderStochasticSamplingSelector.cpp \
 ../src/Learning/Evolution/StandardDeviationFitnessFunction.cpp \
+../src/Learning/Evolution/StochasticUniversalSamplingSelector.cpp \
 ../src/Learning/Evolution/TeachedEvolutionObject.cpp \
 ../src/Learning/Evolution/TeachingEvolutionWorld.cpp 
 
@@ -66,6 +67,7 @@ OBJS += \
 ./src/Learning/Evolution/RateDifferenceCondition.o \
 ./src/Learning/Evolution/RemainderStochasticSamplingSelector.o \
 ./src/Learning/Evolution/StandardDeviationFitnessFunction.o \
+./src/Learning/Evolution/StochasticUniversalSamplingSelector.o \
 ./src/Learning/Evolution/TeachedEvolutionObject.o \
 ./src/Learning/Evolution/TeachingEvolutionWorld.o 
 
@@ -99,6 +101,7 @@ CPP_DEPS += \
 ./src/Learning/Evolution/RateDifferenceCondition.d \
 ./src/Learning/Evolution/RemainderStochasticSamplingSelector.d \
 ./src/Learning/Evolution/StandardDeviationFitnessFunction.d \
+./src/Learning/Evolution/StochasticUniversalSamplingSelector.d \
 ./src/Learning/Evolution/TeachedEvolutionObject.d \
 ./src/Learning/Evolution/TeachingEvolutionWorld.d 
 

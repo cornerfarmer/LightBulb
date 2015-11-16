@@ -13,6 +13,7 @@ private:
 public:
 	// Inherited:	
 	int execute(const std::vector<double> &probabilities);
+	std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount);
 };
 
 #endif

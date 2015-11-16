@@ -6,6 +6,11 @@
 #include <stdexcept>
 #include <algorithm>
 
+RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
+{
+	withReplacement = withReplacement_;
+}
+
 void RemainderStochasticSamplingSelector::initMutation(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int mutationCount)
 {
 	if (highscore->size() == 0)
@@ -13,20 +18,13 @@ void RemainderStochasticSamplingSelector::initMutation(std::vector<std::pair<dou
 
 	objectSequence.resize(mutationCount);
 	
-	double smallestFitness = highscore->front().first;
-	// Go through all not selected objects
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
-	{
-		if (smallestFitness > entry->first)
-			smallestFitness = entry->first;
-	}
 
-	double totalFitnessDistance = 0;
+	double totalFitness = 0;
 
 	// Go through all not selected objects
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
-		totalFitnessDistance += entry->first - smallestFitness;
+		totalFitness += entry->first;
 	}
 
 	std::vector<double> secondChance;
@@ -35,15 +33,15 @@ void RemainderStochasticSamplingSelector::initMutation(std::vector<std::pair<dou
 
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
-		double selectionCount = 0;
-		if (totalFitnessDistance > 0)
-			selectionCount = (entry->first - smallestFitness) / totalFitnessDistance * mutationCount;
-
-		for (int i = 0; i < (int)selectionCount; i++)
+		int selectionCount = entry->first / totalFitness * mutationCount;
+		for (int i = 0; i < selectionCount; i++)
 		{
-			objectSequence[mutationSequenceIndex++] = entry->second;
+		 	objectSequence[mutationSequenceIndex++] = entry->second;
 		}
-		secondChance.push_back(std::max(0.0001, selectionCount - (int)selectionCount));
+		if (withReplacement)
+			secondChance.push_back(entry->first - selectionCount);
+		else
+			secondChance.push_back(entry->first);
 	}
 
 

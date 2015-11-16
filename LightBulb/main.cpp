@@ -92,6 +92,7 @@
 #include "Function/EqualRandomFunction.hpp"
 #include "Learning/Evolution/RandomSelector.hpp"
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
+#include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -1732,7 +1733,7 @@ void doTicTacToeTest()
 
 static double sixHumpCamelFunction(std::vector<float> pos)
 {
-	return std::max(0.0, -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4)) + 20);
+	return std::max(0.0, -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4)) + 10000);
 }
 
 static double threeHumpCamelFunction(std::vector<float> pos)
@@ -1757,17 +1758,23 @@ void doFunctionEvolutionTest()
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
 	//MutationCommand* constantMutationCommand = new MutationCommand();
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 1.8, false);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new StochasticUniversalSamplingSelector(), 1.8, false);
 	options.mutationsCommands.push_back(constantMutationCommand);
-	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0.3, false);
+	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
 	options.world = &simulator;
 	options.enableDebugOutput = false;
-	options.scoreGoal = 1.031627 + 20;
+	options.scoreGoal = 1.031627 + 10000;
 	//options.scoreGoal = -0.000001;
 	EvolutionLearningRule learningRule(options);
 
-	//learningRule.doLearning();
+//	int iterations = 0;
+//	for (int i = 0; i < 20; i++)
+//	{
+//		iterations += learningRule.doLearning().iterationsNeeded;
+//	}
+//	std::cout << "Average " << iterations/20;
+//	return;
 
 	LearningRuleAnalyserOptions analyserOptions;
 	analyserOptions.learningRule = &learningRule;
@@ -1781,6 +1788,7 @@ void doFunctionEvolutionTest()
 	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("rank", new RandomSelector(new RankBasedRandomFunction())));
 	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("equa", new RandomSelector(new EqualRandomFunction())));
 	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("rema", new RemainderStochasticSamplingSelector()));
+	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("stoc", new StochasticUniversalSamplingSelector()));
 
 	analyserOptions.changableParameters.push_back(new ChangeablePointer<AbstractMutationSelector, ConstantMutationCommand>(constantMutationCommand, &ConstantMutationCommand::setMutationSelector, possibleMutationSelectors, "sel"));
 
