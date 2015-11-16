@@ -29,6 +29,7 @@ CPP_SRCS += \
 ../src/Learning/Evolution/ExponentialFitnessFunction.cpp \
 ../src/Learning/Evolution/FitnessSharingFitnessFunction.cpp \
 ../src/Learning/Evolution/LinearScalingFitnessFunction.cpp \
+../src/Learning/Evolution/PositiveMakerFitnessFunction.cpp \
 ../src/Learning/Evolution/RandomSelector.cpp \
 ../src/Learning/Evolution/RateDifferenceCondition.cpp \
 ../src/Learning/Evolution/RemainderStochasticSamplingSelector.cpp \
@@ -63,6 +64,7 @@ OBJS += \
 ./src/Learning/Evolution/ExponentialFitnessFunction.o \
 ./src/Learning/Evolution/FitnessSharingFitnessFunction.o \
 ./src/Learning/Evolution/LinearScalingFitnessFunction.o \
+./src/Learning/Evolution/PositiveMakerFitnessFunction.o \
 ./src/Learning/Evolution/RandomSelector.o \
 ./src/Learning/Evolution/RateDifferenceCondition.o \
 ./src/Learning/Evolution/RemainderStochasticSamplingSelector.o \
@@ -97,6 +99,7 @@ CPP_DEPS += \
 ./src/Learning/Evolution/ExponentialFitnessFunction.d \
 ./src/Learning/Evolution/FitnessSharingFitnessFunction.d \
 ./src/Learning/Evolution/LinearScalingFitnessFunction.d \
+./src/Learning/Evolution/PositiveMakerFitnessFunction.d \
 ./src/Learning/Evolution/RandomSelector.d \
 ./src/Learning/Evolution/RateDifferenceCondition.d \
 ./src/Learning/Evolution/RemainderStochasticSamplingSelector.d \

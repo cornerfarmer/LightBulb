@@ -93,6 +93,7 @@
 #include "Learning/Evolution/RandomSelector.hpp"
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
+#include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -1658,12 +1659,13 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 70, false));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 100, false));
+	options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(1000));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RemainderStochasticSamplingSelector(), 1.8, false));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0.3, false));
+	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new StochasticUniversalSamplingSelector(), 1.8, false));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false));
 	//options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
 	options.world = &ticTacToe;
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
@@ -1998,6 +2000,6 @@ void doTeachedEvolution838Test() {
 
 int main()
 {
-	doFunctionEvolutionTest();
+	doTicTacToeTest();
     return 0;
 }

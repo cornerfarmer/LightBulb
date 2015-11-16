@@ -87,15 +87,13 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 				simulateGame(static_cast<TicTacToeKI*>(*ki), static_cast<TicTacToeKI*>(*bestAI), b, learningRule, illegalMoves, ties);
 			}
 
-			/*for (auto otherAI = objects.begin(); otherAI != objects.end(); otherAI++)
+			for (auto otherAI = objects.begin(); otherAI != objects.end(); otherAI++)
 			{
 				if (otherAI != ki)
 				{
 					simulateGame(static_cast<TicTacToeKI*>(*ki), static_cast<TicTacToeKI*>(*otherAI), b, learningRule, illegalMoves, ties);
 				}
-				else
-					ties = ties;
-			}*/
+			}
 		}
 		nextKI:;
 	}
@@ -105,7 +103,7 @@ void TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	if (points[static_cast<TicTacToeKI*>(highscore->front().second)] == 0) {
 		TicTacToeKI* newAI = static_cast<TicTacToeKI*>(highscore->front().second->clone(false));
 		bool duplicate = false;
-		double currentMaxDist = 1500 * exp(-0.02 * bestAIs.size());
+		double currentMaxDist = 1000;//1500 * exp(-0.1 * bestAIs.size());
 		std::cout << (int)currentMaxDist << std::endl;
 		for (int i = 0; i < (int)bestAIs.size(); i++)
 		{
@@ -212,8 +210,6 @@ void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 			points[ai1]-=10-i;
 			illegalMoves++;
 		}
-		else
-			points[ai2]-=10-i;
 	}
 	else
 	{
@@ -363,8 +359,7 @@ void TicTacToe::setField(int x, int y)
 
 double TicTacToe::getScore(AbstractEvolutionObject* object)
 {
-	double score = points[static_cast<TicTacToeKI*>(object)];
-	return score;
+	return points[static_cast<TicTacToeKI*>(object)];
 }
 
 void TicTacToe::resetWorld()
