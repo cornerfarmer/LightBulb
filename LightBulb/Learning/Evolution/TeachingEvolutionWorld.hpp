@@ -30,7 +30,7 @@ public:
 	TeachingEvolutionWorld(Teacher* teacher_, LayeredNetworkOptions& networkOptions_);
 	Teacher* getTeacher();
 	// Inherited:
-	void doSimulationStep(EvolutionLearningRule& learningRule);
+	bool doSimulationStep(EvolutionLearningRule& learningRule);
 	double getScore(AbstractEvolutionObject* object);
 };
 

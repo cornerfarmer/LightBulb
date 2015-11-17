@@ -70,7 +70,7 @@ double AbstractNetworkTopology::calculateEuclideanDistance(AbstractNetworkTopolo
 	}
 	distance = sqrt(distance);
 
-	std::cout << (int)distance << std::endl;
+	//std::cout << (int)distance << std::endl;
 	return distance;
 }
 

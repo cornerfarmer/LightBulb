@@ -28,7 +28,7 @@ NetworkSimulator::NetworkSimulator(bool enableGraphics_, std::vector<std::vector
 	}
 }
 
-void NetworkSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
+bool NetworkSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
 {
 	for (auto position = objects.begin(); position != objects.end(); position++)
 	{
@@ -42,6 +42,7 @@ void NetworkSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
 		drawer->draw(window);
 		window.display();
 	}
+	return false;
 }
 
 double NetworkSimulator::getScore(AbstractEvolutionObject* object)

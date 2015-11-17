@@ -39,7 +39,7 @@ protected:
 	Function function;
 public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
-	void doSimulationStep(EvolutionLearningRule& learningRule);
+	bool doSimulationStep(EvolutionLearningRule& learningRule);
 	double getScore(AbstractEvolutionObject* object);
 };
 

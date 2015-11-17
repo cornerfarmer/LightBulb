@@ -25,7 +25,7 @@ public:
 	virtual AbstractEvolutionObject* addNewObject(bool addToWorld = true) = 0;
 	// This method should execute one simulation step.
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
-	virtual void doSimulationStep(EvolutionLearningRule& learningRule) = 0;
+	virtual bool doSimulationStep(EvolutionLearningRule& learningRule) = 0;
 	// Returns a list of all current evolution objects ordered by their score
 	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> getHighscoreList();
 	// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)

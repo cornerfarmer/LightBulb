@@ -37,7 +37,7 @@ FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Functio
 	}
 }
 
-void FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
+bool FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
 {
 	for (auto position = objects.begin(); position != objects.end(); position++)
 	{
@@ -51,6 +51,7 @@ void FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
 		drawer->draw(window);
 		window.display();
 	}
+	return false;
 }
 
 double FunctionSimulator::getScore(AbstractEvolutionObject* object)

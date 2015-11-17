@@ -40,7 +40,7 @@ protected:
 	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, EvolutionLearningRule& learningRule, int& illegalMoves, int& ties);
 public:
 	TicTacToe();
-	void doSimulationStep(EvolutionLearningRule& learningRule);
+	bool doSimulationStep(EvolutionLearningRule& learningRule);
 	NeuralNetworkIO<double> getSight();
 	void setField(int x, int y);
 	double getScore(AbstractEvolutionObject* object);

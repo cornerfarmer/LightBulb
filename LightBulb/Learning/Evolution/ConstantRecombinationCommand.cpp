@@ -45,7 +45,7 @@ void ConstantRecombinationCommand::execute(std::vector<std::pair<double, Abstrac
 			// Clone the first objects and add it to the new object vector
 			newObjectVector->push_back(chosenObjects[0]->clone());
 			// Also clone the second object
-			AbstractEvolutionObject* secondClone = chosenObjects[01]->clone();
+			AbstractEvolutionObject* secondClone = chosenObjects[1]->clone();
 			// Combine the two objects
 			recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
 

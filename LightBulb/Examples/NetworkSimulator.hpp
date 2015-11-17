@@ -27,7 +27,7 @@ protected:
 	double distanceBetweenPositions(std::vector<float>& pos1, std::vector<float>& pos2);
 public:
 	NetworkSimulator(bool enableGraphics_, std::vector<std::vector<float>> consumers_);
-	void doSimulationStep(EvolutionLearningRule& learningRule);
+	bool doSimulationStep(EvolutionLearningRule& learningRule);
 	double getScore(AbstractEvolutionObject* object);
 	std::vector<std::vector<float>>* getConsumers();
 };

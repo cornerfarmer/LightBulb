@@ -33,7 +33,7 @@ protected:
 	void resetWorld();
 public:
 	Nature();
-	void doSimulationStep(EvolutionLearningRule& learningRule);
+	bool doSimulationStep(EvolutionLearningRule& learningRule);
 	std::vector<double> getSight(int posX, int posY, int dirX, int dirY);
 	double tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);

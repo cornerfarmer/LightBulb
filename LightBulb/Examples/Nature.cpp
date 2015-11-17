@@ -42,7 +42,7 @@ Nature::Nature()
 	drawer.reset(new NatureDrawer(options));
 }
 
-void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
+bool Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 {	
 	int deadAnimals = 0;
 
@@ -82,6 +82,7 @@ void Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 		//sf::sleep(sf::milliseconds(5));
 	}
 	std::cout << "Animals ate " << missingPlants << " plants" << std::endl;
+	return false;
 }
 
 double Nature::getScore(AbstractEvolutionObject* object)

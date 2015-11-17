@@ -1663,7 +1663,7 @@ void doTicTacToeTest()
 	options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(1000));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
+	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new StochasticUniversalSamplingSelector(), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false));
 	//options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
