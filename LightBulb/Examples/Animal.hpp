@@ -28,7 +28,7 @@ protected:
 	int stepsSurvived;
 	void rotate(int dir);
 	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output);
+	void interpretNNOutput(NeuralNetworkIO<double>* output);
 public:	
 	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();

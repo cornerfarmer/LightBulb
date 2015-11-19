@@ -18,7 +18,7 @@ protected:
 	NetworkSimulator* networkSimulator;
 	std::vector<std::vector<float>> positions;
 	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output);
+	void interpretNNOutput(NeuralNetworkIO<double>* output);
 public:	
 	Network(NetworkSimulator* networkSimulator_);
 	~Network();

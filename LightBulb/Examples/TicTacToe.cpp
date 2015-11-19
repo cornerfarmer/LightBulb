@@ -34,6 +34,9 @@ TicTacToe::TicTacToe()
 	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
 
 	currentResetGenerationCount = defaultResetGenerationCount;
+
+	maxDistanceShrinkFactor = 0.7;
+	debugOutput = true;
 }
 
 int TicTacToe::getFieldValue(int x, int y)
@@ -54,20 +57,28 @@ void intervalAdvance(Iter& it,const Iter& end, int i)
 		it = end;
 }
 
-bool TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
+void TicTacToe::setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_)
+{
+	maxDistanceShrinkFactor = maxDistanceShrinkFactor_;
+}
+
+void TicTacToe::setDebugOutput(bool debugOutput_)
+{
+	debugOutput = debugOutput_;
+}
+
+bool TicTacToe::doSimulationStep()
 {	
 	int ties = 0;
 	int firstWon = 0;
 	int secondWon = 0;
 	int illegalMoves = 0;
 	int duplicates = 0;
-	static int generationsSincaLastBestAI = 0;
-	static double lastBestScore = 0;
+
 	static int lastCompleteNewAI = 0;
 	static int duplicatesInARow = 0;
 	static int resetsInARow = 0;
-	static int maxDistance = 10000;
-	static int lastBestAICount = 0;
+
 	points.clear();
 	for (auto ki = objects.begin(); ki != objects.end(); ki++)
 	{	
@@ -87,7 +98,7 @@ bool TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		{
 			for (auto bestAI = bestAIs.begin() /*+ (bestAIs.size() < 10 ? 0 : bestAIs.size() - 10)*/; bestAI != bestAIs.end(); bestAI++)//intervalAdvance<std::vector<TicTacToeKI*>::iterator>(bestAI, bestAIs.end(), bestAIs.size()/10 + 1))
 			{
-				simulateGame(static_cast<TicTacToeKI*>(*ki), static_cast<TicTacToeKI*>(*bestAI), b, learningRule, illegalMoves, ties);
+				simulateGame(static_cast<TicTacToeKI*>(*ki), static_cast<TicTacToeKI*>(*bestAI), b, illegalMoves, ties);
 			}
 
 //			for (auto otherAI = objects.begin(); otherAI != objects.end(); otherAI++)
@@ -106,8 +117,8 @@ bool TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 	if (points[static_cast<TicTacToeKI*>(highscore->front().second)] == 0) {
 		TicTacToeKI* newAI = static_cast<TicTacToeKI*>(highscore->front().second->clone(false));
 		bool duplicate = false;
-		double currentMaxDist = maxDistance / 0.9;//1500 * exp(-0.1 * bestAIs.size());
-		std::cout << (int)currentMaxDist << std::endl;
+		double currentMaxDist = maxDistance / maxDistanceShrinkFactor;//1500 * exp(-0.1 * bestAIs.size());
+
 		for (int i = 0; i < lastBestAICount; i++)
 		{
 			if (bestAIs[i]->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*newAI->getNeuralNetwork()->getNetworkTopology()) < currentMaxDist)
@@ -119,13 +130,12 @@ bool TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 //					{
 //						duplicate = true;
 //					}
-					std::cout << bestAIs.size() << ",";
 					delete(bestAIs[i]);
 					bestAIs.erase(bestAIs.begin() + i);
 					lastBestAICount--;
 					i = -1;
-					std::cout << bestAIs.size() << ",";
-					std::cout << "Found a similar AI" << std::endl;
+					if (debugOutput)
+						std::cout << "Found a similar AI" << std::endl;
 					//break;
 //				}
 //				else
@@ -144,8 +154,9 @@ bool TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 			duplicatesInARow = 0;
 		}
 		bestAIs.push_back(newAI);
-		std::cout << "Added " << bestAIs.size() << ". best evolution object to bestAI list" << std::endl;
-		rateBestKI(learningRule);
+		if (debugOutput)
+			std::cout << "Added " << bestAIs.size() << ". best evolution object to bestAI list" << std::endl;
+		rateKI(dynamic_cast<TicTacToeKI*>(bestAIs.back()));
 		//currentResetGenerationCount = std::max((int)(currentResetGenerationCount / 1.1), defaultResetGenerationCount);
 		generationsSincaLastBestAI = 0;
 		resetsInARow = 0;
@@ -156,24 +167,40 @@ bool TicTacToe::doSimulationStep(EvolutionLearningRule& learningRule)
 		lastBestAICount = bestAIs.size();
 		generationsSincaLastBestAI = 0;
 		currentResetGenerationCount *= 1.1;
-		maxDistance *= 0.9;
-		std::cout << "Switched to the next mode: d: " << maxDistance << " r: " << currentResetGenerationCount << std::endl;
+		maxDistance *= maxDistanceShrinkFactor;
+		if (debugOutput)
+			std::cout << "Switched to the next mode: d: " << maxDistance << " r: " << currentResetGenerationCount << std::endl;
 		//objects[0] = highscore->front().second;
 		//objects.resize(1);
-		std::cout << "Reset" << std::endl;
+		if (debugOutput)
+			std::cout << "Reset" << std::endl;
 
 		objects.clear();
-		for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
-		{
-			objects.push_back((*bestAI)->clone(false));
-		}
+//		for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
+//		{
+//			objects.push_back((*bestAI)->clone(false));
+//		}
 		return true;
 	}
 	lastBestScore = highscore->front().first;
 	return false;
 }
 
-void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, EvolutionLearningRule& learningRule, int& illegalMoves, int& ties)
+double TicTacToe::getRealScore(AbstractEvolutionObject* object)
+{
+	return rateKI(static_cast<TicTacToeKI*>(object));
+}
+
+void TicTacToe::initializeForLearning()
+{
+	bestAIs.clear();
+	maxDistance = 2000;
+	lastBestAICount = 0;
+	generationsSincaLastBestAI = 0;
+	lastBestScore = 0;
+}
+
+void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties)
 {
 	ai2->resetNN();
 	ai1->resetNN();
@@ -188,11 +215,11 @@ void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 	{
 		if (i % 2 == startingAI)
 		{
-			ai1->doNNCalculation(learningRule);
+			ai1->doNNCalculation();
 		}
 		else
 		{
-			ai2->doNNCalculation(learningRule);
+			ai2->doNNCalculation();
 		}
 
 		sf::Event event;
@@ -247,9 +274,9 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 	illegalMove = illegalMove_;
 }
 
-void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
+int TicTacToe::rateKI(TicTacToeKI* rateKI)
 {
-	TicTacToeKI* bestKI = dynamic_cast<TicTacToeKI*>(bestAIs.back());
+	//TicTacToeKI* bestKI = dynamic_cast<TicTacToeKI*>(bestAIs.back());
 	
 	int wins = 0;
 	int possibleGames = 9 * 7 * 5 * 3;
@@ -259,7 +286,7 @@ void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
 
 	while (decisionCombinationsLeft)
 	{
-		bestKI->resetNN();
+		rateKI->resetNN();
 		startNewGame(-1);
 		
 		int i;
@@ -267,7 +294,7 @@ void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
 		{
 			if (i % 2 == 1)
 			{
-				bestKI->doNNCalculation(learningRule);
+				rateKI->doNNCalculation();
 			}
 			else
 			{ 
@@ -296,7 +323,9 @@ void TicTacToe::rateBestKI(EvolutionLearningRule& learningRule)
 		decisionCombinationsLeft = !nextDecisionCombination(decisionNr);
 	}
 
-	std::cout << "Best KI: " << wins << "/" << possibleGames << std::endl;
+	if (debugOutput)
+		std::cout << "Best KI: " << wins << "/" << possibleGames << std::endl;
+	return wins;
 }
 
 bool TicTacToe::nextDecisionCombination(std::array<int, 4>& decisionNr, int level)

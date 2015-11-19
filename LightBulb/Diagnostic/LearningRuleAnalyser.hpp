@@ -23,10 +23,13 @@ struct LearningRuleAnalyserOptions
 	EvolutionLearningRule* learningRule;
 	// The amount of calculations per parameter combination (the more calculations, the more accurate is the average result, but also the slower is the analyze process!)
 	int calculationsPerParameterCombination;
+
+	bool useQualityInsteadOfSuccessful;
 	LearningRuleAnalyserOptions()
 	{
 		learningRule = NULL;
 		calculationsPerParameterCombination = 30;
+		useQualityInsteadOfSuccessful = false;
 	}
 };
 
@@ -41,7 +44,8 @@ public:
 	virtual ~LearningRuleAnalyser() {};
 	LearningRuleAnalyser(LearningRuleAnalyserOptions &options_);
 	// A function for sorting the learning results by their score
-	static bool pairCompare(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem);
+	static bool pairCompareBySuccessful(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem);
+	static bool pairCompareByQuality(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem);
 	// Execute the analyzer: This will execute the learingRule under every possible parameter combination
 	void execute();
 };

@@ -78,6 +78,7 @@ LearningResult EvolutionLearningRule::doLearning()
 		// Reset all
 		generation = 0;
 		options->world->getEvolutionObjects()->clear();
+		options->world->initializeForLearning();
 
 		if (options->enableDebugOutput)
 			std::cout << "+++++ Try " << currentTry << " +++++" << std::endl;
@@ -98,7 +99,7 @@ LearningResult EvolutionLearningRule::doLearning()
 			}
 
 			// 2. Step: Execute the simulation and try to rate the evolution objects
-			if (options->world->doSimulationStep(*this))
+			if (options->world->doSimulationStep())
 				continue;
 
 			// Extract all current objects ordered by their score
@@ -181,6 +182,7 @@ LearningResult EvolutionLearningRule::doLearning()
 	LearningResult result;
 	result.iterationsNeeded = generation;
 	result.successful = (options->scoreGoal == 0 || options->scoreGoal <= bestScore);
+	result.quality = options->world->getRealScore(options->world->getHighscoreList()->front().second);
 	return result;
 }
 

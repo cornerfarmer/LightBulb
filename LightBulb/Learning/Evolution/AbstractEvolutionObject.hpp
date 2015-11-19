@@ -28,7 +28,7 @@ public:
 	virtual std::vector<double>* getMutationStrength();
 	virtual void setMutationStrength(std::vector<double>* newMutationStrength);
 	// This method should execute one NN calculation. (Mostly: Get input -> let the NN calculate -> react depending on the NN output)
-	virtual void doNNCalculation(EvolutionLearningRule& learningRule) = 0;
+	virtual void doNNCalculation() = 0;
 	// Reset the NN (All activations to zero)
 	virtual void resetNN() = 0;
 	// This method should return a new evolution object which contains a NN which has the same edges/neurons as the NN of this object.

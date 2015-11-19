@@ -36,22 +36,32 @@ protected:
 	std::vector<TicTacToeKI*> bestAIs;
 	int defaultResetGenerationCount;
 	int currentResetGenerationCount;
+	double maxDistanceShrinkFactor;
+	bool debugOutput;
+	int maxDistance;
+	int lastBestAICount;
+	int generationsSincaLastBestAI;
+	double lastBestScore;
 	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
-	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, EvolutionLearningRule& learningRule, int& illegalMoves, int& ties);
+	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties);
+
 public:
 	TicTacToe();
-	bool doSimulationStep(EvolutionLearningRule& learningRule);
+	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
+	bool doSimulationStep();
 	NeuralNetworkIO<double> getSight();
 	void setField(int x, int y);
 	double getScore(AbstractEvolutionObject* object);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
-	void rateBestKI(EvolutionLearningRule& learningRule);
+	int rateKI(TicTacToeKI* rateKI);
 	void setIllegalMove(bool illegalMove_);
 	std::vector<TicTacToeKI*>* getBestAIs();
 	void startNewGame(int firstPlayer);
 	bool hasGameFinished();
-
+	void setDebugOutput(bool debugOutput_);
+	double getRealScore(AbstractEvolutionObject* object);
+	void initializeForLearning();
 };
 
 #endif

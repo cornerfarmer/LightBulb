@@ -17,7 +17,7 @@ NeuralNetworkIO<double> Position::getNNInput()
 	return input;
 }
 
-void Position::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output)
+void Position::interpretNNOutput(NeuralNetworkIO<double>* output)
 {
 	for (int i = 0; i < 2; i++)
 	{	

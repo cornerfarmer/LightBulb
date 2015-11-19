@@ -1659,7 +1659,7 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 100, false));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 30, false));
 	options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(1000));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
@@ -1672,9 +1672,25 @@ void doTicTacToeTest()
 
 	EvolutionLearningRule learningRule(options);
 
-	learningRule.doLearning();
+//#define TICTACTOE_SINGLE
+#ifdef TICTACTOE_SINGLE
+	LearningResult result = learningRule.doLearning();
+	std::cout << "total generations: " << result.iterationsNeeded << std::endl;
 
 	ticTacToe.rateBestKI(learningRule);
+#else
+	ticTacToe.setDebugOutput(false);
+	LearningRuleAnalyserOptions analyserOptions;
+	analyserOptions.learningRule = &learningRule;
+	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, TicTacToe>(&ticTacToe, &TicTacToe::setMaxDistanceShrinkFactor, 0.5, 0.1, 0.9, "shr"));
+
+	analyserOptions.calculationsPerParameterCombination = 1;
+	analyserOptions.useQualityInsteadOfSuccessful = true;
+
+	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
+
+	learningRuleAnalyser.execute();
+#endif
 
 	TicTacToeDrawerOptions ticTacToeDrawerOptions;
 	ticTacToeDrawerOptions.width = 600;
@@ -1713,7 +1729,7 @@ void doTicTacToeTest()
             	}
             	else if (ticTacToeDrawer.handleMouseInputEvent(event)) {
             		if (!ticTacToe.hasGameFinished()) {
-            			bestAI->doNNCalculation(learningRule);
+            			bestAI->doNNCalculation();
             			if (ticTacToe.hasGameFinished())
             				std::cout << "AI has failed" << std::endl;
             		}

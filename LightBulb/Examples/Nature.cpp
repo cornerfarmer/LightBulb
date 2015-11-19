@@ -42,7 +42,7 @@ Nature::Nature()
 	drawer.reset(new NatureDrawer(options));
 }
 
-bool Nature::doSimulationStep(EvolutionLearningRule& learningRule)
+bool Nature::doSimulationStep()
 {	
 	int deadAnimals = 0;
 
@@ -68,7 +68,7 @@ bool Nature::doSimulationStep(EvolutionLearningRule& learningRule)
 		{
 			if (!static_cast<Animal*>(*animal)->isDead())
 			{
-				static_cast<Animal*>(*animal)->doNNCalculation(learningRule);
+				static_cast<Animal*>(*animal)->doNNCalculation();
 				if (static_cast<Animal*>(*animal)->isDead())
 				{
 					deadAnimals++;

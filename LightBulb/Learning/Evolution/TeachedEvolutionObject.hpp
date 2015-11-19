@@ -30,7 +30,7 @@ public:
 	~TeachedEvolutionObject();
 	double getCurrentTotalError();
 	// Inherited:
-	void doNNCalculation(EvolutionLearningRule& learningRule);
+	void doNNCalculation();
 	void resetNN();
 	NeuralNetwork* getNeuralNetwork();
 	AbstractEvolutionObject* clone(bool addToWorld = true);

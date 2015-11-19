@@ -29,7 +29,7 @@ NeuralNetwork* TeachedEvolutionObject::getNeuralNetwork()
 	return neuralNetwork;
 }
 
-void TeachedEvolutionObject::doNNCalculation(EvolutionLearningRule& learningRule)
+void TeachedEvolutionObject::doNNCalculation()
 {
 	// Just recalculate the total error
 	TopologicalOrder activationOrder;

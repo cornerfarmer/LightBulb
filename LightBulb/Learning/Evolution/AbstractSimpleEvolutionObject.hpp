@@ -29,13 +29,13 @@ protected:
 	// This method should return the input for the neural network
 	virtual NeuralNetworkIO<double> getNNInput() = 0;
 	// This method should interpret and act depending on the given NN output
-	virtual void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output) = 0;
+	virtual void interpretNNOutput(NeuralNetworkIO<double>* output) = 0;
 public:	
 	// Create a new evolution object with the given input and output NN size
 	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world, int inputDimension, int outputDimension, bool biasNeuron = true);
 	~AbstractSimpleEvolutionObject();
 	// Inherited:
-	void doNNCalculation(EvolutionLearningRule& learningRule);
+	void doNNCalculation();
 	NeuralNetwork* getNeuralNetwork();
 	void resetNN();
 	AbstractEvolutionObject* clone(bool addToWorld = true);

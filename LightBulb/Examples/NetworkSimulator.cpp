@@ -28,11 +28,11 @@ NetworkSimulator::NetworkSimulator(bool enableGraphics_, std::vector<std::vector
 	}
 }
 
-bool NetworkSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
+bool NetworkSimulator::doSimulationStep()
 {
 	for (auto position = objects.begin(); position != objects.end(); position++)
 	{
-		(*position)->doNNCalculation(learningRule);
+		(*position)->doNNCalculation();
 	}
 
 	if (enableGraphics)

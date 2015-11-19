@@ -46,7 +46,7 @@ NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 	return neuralNetwork;
 }
 
-void AbstractSimpleEvolutionObject::doNNCalculation(EvolutionLearningRule& learningRule)
+void AbstractSimpleEvolutionObject::doNNCalculation()
 {
 	// Get the input
 	NeuralNetworkIO<double> input = getNNInput();
@@ -56,7 +56,7 @@ void AbstractSimpleEvolutionObject::doNNCalculation(EvolutionLearningRule& learn
 	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, topologicalOrder, 0, -1, NULL, NULL, false);
 	
 	// Interpret the output
-	interpretNNOutput(learningRule, output.get());
+	interpretNNOutput(output.get());
 }
 
 AbstractSimpleEvolutionObject::~AbstractSimpleEvolutionObject()

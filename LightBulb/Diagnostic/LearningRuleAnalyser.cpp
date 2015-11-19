@@ -3,6 +3,7 @@
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 // Library include
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 #include <vector>
 
@@ -12,11 +13,18 @@ LearningRuleAnalyser::LearningRuleAnalyser(LearningRuleAnalyserOptions &options_
 }
 
 
-bool LearningRuleAnalyser::pairCompare(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem)
+bool LearningRuleAnalyser::pairCompareBySuccessful(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem)
 {
 	// Prefer learingResults which were more successful and only consider speed if the successful values are equal
 	return firstElem.first.successful > secondElem.first.successful || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
 }
+
+bool LearningRuleAnalyser::pairCompareByQuality(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem)
+{
+	// Prefer learingResults which were more successful and only consider speed if the successful values are equal
+	return firstElem.first.quality > secondElem.first.quality || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
+}
+
 
 void LearningRuleAnalyser::execute()
 {
@@ -45,6 +53,7 @@ void LearningRuleAnalyser::execute()
 		{
 			LearningResult currentResult = options->learningRule->doLearning();
 			summaryResult.successful += currentResult.successful;
+			summaryResult.quality += currentResult.quality;
 			summaryResult.iterationsNeeded += currentResult.iterationsNeeded;
 		}
 
@@ -52,13 +61,18 @@ void LearningRuleAnalyser::execute()
 		combinations.push_back(make_pair(summaryResult ,parameterCombination));
 
 		// Print the result
-		std::cout << ": " << summaryResult.successful << "/" << options->calculationsPerParameterCombination << " successful after " << summaryResult.iterationsNeeded / options->calculationsPerParameterCombination << " iterations";
+		std::cout << ": ";
+		if (!options->useQualityInsteadOfSuccessful)
+			std::cout << summaryResult.successful << "/" << options->calculationsPerParameterCombination << " successful after ";
+		else
+			std::cout << std::fixed << std::setprecision(5) << (summaryResult.quality / options->calculationsPerParameterCombination) << " average quality after ";
+		std::cout << summaryResult.iterationsNeeded / options->calculationsPerParameterCombination << " iterations";
 		std::cout << std::endl;
 		// Switch to the next parameter combination as long as we have not tested all yet
 	} while (!switchToNextValueCombination());
 
 	// Sort the all tested combinations
-	std::sort(combinations.begin(), combinations.end(), LearningRuleAnalyser::pairCompare);
+	std::sort(combinations.begin(), combinations.end(), (options->useQualityInsteadOfSuccessful ? LearningRuleAnalyser::pairCompareByQuality : LearningRuleAnalyser::pairCompareBySuccessful));
 
 	// Print the best combinations
 	int place = 1;

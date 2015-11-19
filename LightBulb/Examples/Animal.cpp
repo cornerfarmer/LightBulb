@@ -25,7 +25,7 @@ NeuralNetworkIO<double> Animal::getNNInput()
 	return input;
 }
 
-void Animal::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output)
+void Animal::interpretNNOutput(NeuralNetworkIO<double>* output)
 {
 	if (output->get(0, 3) > 0)
 	{
@@ -40,7 +40,7 @@ void Animal::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetwor
 		newAnimal->posX = posX - dirX;
 		newAnimal->posY = posY - dirY;
 		newAnimal->rotate(1);
-		learningRule.doMutation(*newAnimal);
+		//learningRule.doMutation(*newAnimal);
 	}
 
 	if (output->get(0, 0) > 0)

@@ -15,12 +15,12 @@ TeachingEvolutionWorld::TeachingEvolutionWorld(Teacher* teacher_, LayeredNetwork
 	networkOptions = networkOptions_;
 }
 
-bool TeachingEvolutionWorld::doSimulationStep(EvolutionLearningRule& learningRule)
+bool TeachingEvolutionWorld::doSimulationStep()
 {
 	// Just recalculate the current total error values of all objects
 	for (auto teachedEvolutionObject = objects.begin(); teachedEvolutionObject != objects.end(); teachedEvolutionObject++)
 	{
-		(*teachedEvolutionObject)->doNNCalculation(learningRule);
+		(*teachedEvolutionObject)->doNNCalculation();
 	}
 	return false;
 }

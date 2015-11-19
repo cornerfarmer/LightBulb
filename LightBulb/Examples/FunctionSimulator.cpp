@@ -37,11 +37,11 @@ FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Functio
 	}
 }
 
-bool FunctionSimulator::doSimulationStep(EvolutionLearningRule& learningRule)
+bool FunctionSimulator::doSimulationStep()
 {
 	for (auto position = objects.begin(); position != objects.end(); position++)
 	{
-		(*position)->doNNCalculation(learningRule);
+		(*position)->doNNCalculation();
 	}
 
 	if (options->enableGraphics)

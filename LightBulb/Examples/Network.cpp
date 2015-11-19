@@ -17,7 +17,7 @@ NeuralNetworkIO<double> Network::getNNInput()
 	return input;
 }
 
-void Network::interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output)
+void Network::interpretNNOutput(NeuralNetworkIO<double>* output)
 {
 	for (int p = 0; p < 4; p++)
 	{	

@@ -18,7 +18,7 @@ protected:
 	FunctionSimulator* functionSimulator;
 	std::vector<float> position;
 	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(EvolutionLearningRule& learningRule, NeuralNetworkIO<double>* output);
+	void interpretNNOutput(NeuralNetworkIO<double>* output);
 public:	
 	Position(FunctionSimulator* functionSimulator_);
 	~Position();
