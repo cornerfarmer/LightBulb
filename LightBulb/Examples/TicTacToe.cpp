@@ -35,7 +35,7 @@ TicTacToe::TicTacToe()
 
 	currentResetGenerationCount = defaultResetGenerationCount;
 
-	maxDistanceShrinkFactor = 0.7;
+	maxDistanceShrinkFactor = 0.9;
 	debugOutput = true;
 }
 
@@ -164,22 +164,29 @@ bool TicTacToe::doSimulationStep()
 	if (lastBestScore != highscore->front().first) {
 		generationsSincaLastBestAI = 0;
 	} else if (generationsSincaLastBestAI++ > currentResetGenerationCount) {
-		lastBestAICount = bestAIs.size();
-		generationsSincaLastBestAI = 0;
-		currentResetGenerationCount *= 1.1;
-		maxDistance *= maxDistanceShrinkFactor;
-		if (debugOutput)
+		if (!softReset)
+		{
+			currentResetGenerationCount *= 1.05;
+			maxDistance *= 0.9;
 			std::cout << "Switched to the next mode: d: " << maxDistance << " r: " << currentResetGenerationCount << std::endl;
-		//objects[0] = highscore->front().second;
-		//objects.resize(1);
-		if (debugOutput)
-			std::cout << "Reset" << std::endl;
+			//objects[0] = highscore->front().second;
+			//objects.resize(1);
+			std::cout << "Hard Reset" << std::endl;
 
-		objects.clear();
-//		for (auto bestAI = bestAIs.begin(); bestAI != bestAIs.end(); bestAI++)
-//		{
-//			objects.push_back((*bestAI)->clone(false));
-//		}
+			objects.clear();
+			for (auto bestAI = bestAIs.begin() + lastBestAICount; bestAI != bestAIs.end(); bestAI++)
+			{
+				objects.push_back((*bestAI)->clone(false));
+			}
+			lastBestAICount = bestAIs.size();
+			softReset = true;
+		}
+		else
+		{
+			std::cout << "Soft Reset" << std::endl;
+			objects.clear();
+			softReset = false;
+		}
 		return true;
 	}
 	lastBestScore = highscore->front().first;
@@ -194,10 +201,11 @@ double TicTacToe::getRealScore(AbstractEvolutionObject* object)
 void TicTacToe::initializeForLearning()
 {
 	bestAIs.clear();
-	maxDistance = 2000;
+	maxDistance = 10000;
 	lastBestAICount = 0;
 	generationsSincaLastBestAI = 0;
 	lastBestScore = 0;
+	softReset = true;
 }
 
 void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties)
@@ -252,7 +260,8 @@ void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 	}
 	else
 	{
-		//points[static_cast<TicTacToeKI*>(*ki)]-=1;
+		// TODO: discuss if this makes sense:
+		//points[ai1]-=1;
 		ties++;
 	}/*
 	else if (whoHasWon() == 1)

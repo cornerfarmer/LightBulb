@@ -1659,7 +1659,7 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 30, false));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 400, false));
 	options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(1000));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
@@ -1672,12 +1672,11 @@ void doTicTacToeTest()
 
 	EvolutionLearningRule learningRule(options);
 
-//#define TICTACTOE_SINGLE
+#define TICTACTOE_SINGLE
 #ifdef TICTACTOE_SINGLE
 	LearningResult result = learningRule.doLearning();
 	std::cout << "total generations: " << result.iterationsNeeded << std::endl;
 
-	ticTacToe.rateBestKI(learningRule);
 #else
 	ticTacToe.setDebugOutput(false);
 	LearningRuleAnalyserOptions analyserOptions;

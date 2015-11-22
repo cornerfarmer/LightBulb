@@ -32,6 +32,7 @@ protected:
 	int whoHasWon();
 	int currentPlayer;
 	bool displayMode;
+	bool softReset;
 	bool illegalMove;
 	std::vector<TicTacToeKI*> bestAIs;
 	int defaultResetGenerationCount;
