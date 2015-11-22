@@ -46,6 +46,10 @@ public:
 	bool isInputNeuron(AbstractNeuron* neuron);
 	// Returns is the given neuron is an OutputNeuron of this networkTopology
 	bool isOutputNeuron(StandardNeuron* neuron);
+
+	virtual void getOutput(std::vector<std::pair<bool, double>> &outputVector);
+
+	virtual void setInput(std::vector<std::pair<bool, double>>* inputVector);
 };
 
 #endif

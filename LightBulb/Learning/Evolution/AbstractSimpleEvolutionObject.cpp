@@ -14,20 +14,21 @@
 #include "Examples/AbstractTile.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
+#include "NetworkTopology/FastLayeredNetwork.hpp"
 
 AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension, bool biasNeuron)
 {
 	// Configure the network options depending on the given parameters
-	LayeredNetworkOptions options;
+	FastLayeredNetworkOptions options;
 	if (biasNeuron) {
 		options.useBiasNeuron = true;
 	}
 	options.neuronsPerLayerCount.push_back(inputDimension);
 	options.neuronsPerLayerCount.push_back(outputDimension);
-	options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
+	//options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 
 	// Create a new network topology from the adjusted options.
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
+	FastLayeredNetwork* layeredNetwork = new FastLayeredNetwork(options);
 	
 	// Create a neural network from the network topolgy
 	neuralNetwork = new NeuralNetwork(layeredNetwork);

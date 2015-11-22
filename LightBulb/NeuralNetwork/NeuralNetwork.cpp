@@ -32,14 +32,14 @@ std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkI
 	for (int timeStep = startTime; (timeStep <= input.getMaxTimeStep() && timeStepCount == -1) || timeStep - startTime < timeStepCount; timeStep++)
 	{
 		// Set the input into the neural network
-		setInput(input.existsTimestep(timeStep) ? &input[timeStep].second : NULL);
+		networkTopology->setInput(input.existsTimestep(timeStep) ? &input[timeStep].second : NULL);
 
 		// Pass the work to the activationOrder
 		activationOrder.executeActivation(*networkTopology);
 
 		// Extract the output and save it into the output value
 		output->set(timeStep, 0, 0);
-		getOutput((*output)[timeStep].second);
+		networkTopology->getOutput((*output)[timeStep].second);
 
 		// If the output values map is not null, fill it with all current output values 
 		if (outputValuesInTime != NULL)
@@ -50,45 +50,6 @@ std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkI
 	}
 
 	return output;
-}
-
-void NeuralNetwork::getOutput(std::vector<std::pair<bool, double>> &outputVector)
-{
-	// Get all output Neurons
-	std::vector<StandardNeuron*>* outputNeurons = networkTopology->getOutputNeurons();
-
-	// Go through all neurons and copy the activation values into the output vector
-	int outputNeuronIndex = 0;
-	for (auto neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++, outputNeuronIndex++)
-	{
-		outputVector[outputNeuronIndex].first = true;
-		outputVector[outputNeuronIndex].second = (*neuron)->getActivation();
-	}
-}
-
-void NeuralNetwork::setInput(std::vector<std::pair<bool, double>>* inputVector)
-{
-	// Get all input Neurons
-	std::vector<AbstractNeuron*>* inputNeurons = networkTopology->getInputNeurons();
-
-	// Go through all neurons and copy the input values into the inputNeurons
-	unsigned int index = 0;
-	for (auto neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
-	{
-		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
-		// If its a real input neuron set the input as input of the neuron
-		if (inputNeuron)
-			inputNeuron->setInput(inputVector && (*inputVector)[index].first > 0? (*inputVector)[index].second : 0);
-		else
-		{
-			StandardNeuron* standardNeuron = dynamic_cast<StandardNeuron*>(*neuron);
-			// If its a standard neuron, set the input as additional input
-			if (standardNeuron)
-				standardNeuron->setAdditionalInput(inputVector && (*inputVector)[index].first > 0? (*inputVector)[index].second : 0);
-			else
-				throw std::logic_error("Something went wrong while setting the input values");
-		}
-	}
 }
 
 AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()

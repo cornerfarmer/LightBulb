@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/NetworkTopology/AbstractSOMStructure.cpp \
 ../src/NetworkTopology/CascadeCorrelationNetwork.cpp \
 ../src/NetworkTopology/CounterpropagationNetwork.cpp \
+../src/NetworkTopology/FastLayeredNetwork.cpp \
 ../src/NetworkTopology/FreeNetwork.cpp \
 ../src/NetworkTopology/GridStructure.cpp \
 ../src/NetworkTopology/HopfieldNetwork.cpp \
@@ -24,6 +25,7 @@ OBJS += \
 ./src/NetworkTopology/AbstractSOMStructure.o \
 ./src/NetworkTopology/CascadeCorrelationNetwork.o \
 ./src/NetworkTopology/CounterpropagationNetwork.o \
+./src/NetworkTopology/FastLayeredNetwork.o \
 ./src/NetworkTopology/FreeNetwork.o \
 ./src/NetworkTopology/GridStructure.o \
 ./src/NetworkTopology/HopfieldNetwork.o \
@@ -40,6 +42,7 @@ CPP_DEPS += \
 ./src/NetworkTopology/AbstractSOMStructure.d \
 ./src/NetworkTopology/CascadeCorrelationNetwork.d \
 ./src/NetworkTopology/CounterpropagationNetwork.d \
+./src/NetworkTopology/FastLayeredNetwork.d \
 ./src/NetworkTopology/FreeNetwork.d \
 ./src/NetworkTopology/GridStructure.d \
 ./src/NetworkTopology/HopfieldNetwork.d \
