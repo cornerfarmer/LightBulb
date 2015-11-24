@@ -94,6 +94,7 @@
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 #include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
+#include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -2010,11 +2011,70 @@ void doTeachedEvolution838Test() {
     }
 }
 
+void doCompare()
+{
+	LayeredNetworkOptions layeredNetworkOptions;
+	layeredNetworkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
+	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
+	layeredNetworkOptions.useBiasNeuron = true;
 
+	LayeredNetwork layeredNetwork(layeredNetworkOptions);
+
+	NeuralNetwork neuralNetwork(&layeredNetwork);
+
+	FastLayeredNetworkOptions fastLayeredNetworkOptions;
+	fastLayeredNetworkOptions.activationFunction = new FermiFunction(1);
+	fastLayeredNetworkOptions.threshold = new StandardThreshold(0);
+	fastLayeredNetworkOptions.inputFunction = new WeightedSumFunction();
+	fastLayeredNetworkOptions.outputFunction = new IdentityFunction();
+	fastLayeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	fastLayeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	fastLayeredNetworkOptions.neuronsPerLayerCount[1]=3;
+	fastLayeredNetworkOptions.neuronsPerLayerCount[2]=8;
+	fastLayeredNetworkOptions.useBiasNeuron = true;
+
+	FastLayeredNetwork fastLayeredNetwork(fastLayeredNetworkOptions);
+
+	NeuralNetwork fastNeuralNetwork(&fastLayeredNetwork);
+
+	NeuralNetworkIO<double> input(8);
+	input.set(0, 0, 1);
+	input.set(0, 1, 1);
+	input.set(0, 2, 2);
+	input.set(0, 3, 1);
+	input.set(0, 4, 0.5);
+	input.set(0, 5, 1);
+	input.set(0, 6, 3);
+	input.set(0, 7, 0);
+
+	TopologicalOrder topologicalOrder;
+
+	clock_t begin = clock();
+	for (int i = 0; i < 10000; i++)
+		NeuralNetworkIO<double>* output = neuralNetwork.calculate(input, topologicalOrder).get();
+	clock_t end = clock();
+
+	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+
+	begin = clock();
+	for (int i = 0; i < 10000; i++)
+		NeuralNetworkIO<double>* fastOutput = fastNeuralNetwork.calculate(input, topologicalOrder).get();
+	end = clock();
+
+	double fastelapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+
+	std::cout << "normal: " << std::fixed << std::setprecision(5) << elapsed_secs << std::endl;
+	std::cout << "fast: " << std::fixed << std::setprecision(5) << fastelapsed_secs << std::endl;
+
+	fastelapsed_secs = 0;
+}
 
 
 int main()
 {
-	doTicTacToeTest();
+	doCompare();
     return 0;
 }

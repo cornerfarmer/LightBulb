@@ -1,6 +1,7 @@
 // Includes
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FastLayeredNetwork.hpp"
 #include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <exception>
@@ -8,23 +9,36 @@
 void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology)
 {
 
-	// Cast the network as an layeredNetwork
-	LayeredNetwork* layeredNetwork = dynamic_cast<LayeredNetwork*>(&networkTopology);
-
-	// Check if the given networkTopology was a layeredNetwork, else throw a exception
-	if (!layeredNetwork)
-		throw std::invalid_argument("The given networkTopology has to be a layeredNetwork");
-
-	// Go through all layers
-	for (auto layer = layeredNetwork->getNeurons()->begin(); layer != layeredNetwork->getNeurons()->end(); layer++)
+	if (dynamic_cast<LayeredNetwork*>(&networkTopology))
 	{
-		// First recalculate the netInput of all neurons in the current layer
-		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
-			(*neuron)->refreshNetInput();
-		// Then recalculate the activation of all neurons in the current layer
-		for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)		
-			(*neuron)->refreshActivation();
+
+		// Cast the network as an layeredNetwork
+		LayeredNetwork* layeredNetwork = dynamic_cast<LayeredNetwork*>(&networkTopology);
+
+		// Go through all layers
+		for (auto layer = layeredNetwork->getNeurons()->begin(); layer != layeredNetwork->getNeurons()->end(); layer++)
+		{
+			// First recalculate the netInput of all neurons in the current layer
+			for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+				(*neuron)->refreshNetInput();
+			// Then recalculate the activation of all neurons in the current layer
+			for (auto neuron = (*layer).begin(); neuron != (*layer).end(); neuron++)
+				(*neuron)->refreshActivation();
+		}
 	}
+	else if (dynamic_cast<FastLayeredNetwork*>(&networkTopology))
+	{
+		// Cast the network as an layeredNetwork
+		FastLayeredNetwork* layeredNetwork = dynamic_cast<FastLayeredNetwork*>(&networkTopology);
+
+		for (int l = 1; l < layeredNetwork->getLayerCount(); l++)
+		{
+			layeredNetwork->refreshNetInputsForLayer(l);
+			layeredNetwork->refreshActivationsForLayer(l);
+		}
+	}
+	else
+		throw std::invalid_argument("The given networkTopology has to be a layeredNetwork");
 }
 
 AbstractActivationOrder* TopologicalOrder::getCopy()

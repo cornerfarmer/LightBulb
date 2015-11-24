@@ -37,9 +37,9 @@ public:
 	// Puts all current neuronNetInputValues into the given map
 	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs) = 0;
 	// Copies the weight from all matching edges from the other network into the current one
-	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
+	virtual void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
 
-	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
+	virtual double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
 	// Returns the biasNeuron
 	virtual BiasNeuron* getBiasNeuron() = 0;
 	// Returns is the given neuron is an InputNeuron of this networkTopology
@@ -50,6 +50,8 @@ public:
 	virtual void getOutput(std::vector<std::pair<bool, double>> &outputVector);
 
 	virtual void setInput(std::vector<std::pair<bool, double>>* inputVector);
+
+	virtual int getOutputSize() { return getOutputNeurons()->size(); };
 };
 
 #endif

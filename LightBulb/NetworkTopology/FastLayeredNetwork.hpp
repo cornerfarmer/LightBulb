@@ -14,6 +14,10 @@
 
 // Forward declarations
 class AbstractNeuronFactory;
+class AbstractActivationFunction;
+class AbstractInputFunction;
+class AbstractOutputFunction;
+class AbstractThreshold;
 
 // This struct contains all options needed to build a LayeredNetwork
 struct FastLayeredNetworkOptions
@@ -26,6 +30,14 @@ struct FastLayeredNetworkOptions
 	std::vector<unsigned int> neuronsPerLayerCount;
 	// Specifies which neurons of the last layer will be used as output neurons (if empty, the whole last layer will be used)
 	std::vector<unsigned int> outputNeuronsIndices;
+
+	AbstractActivationFunction* activationFunction;
+
+	AbstractInputFunction* inputFunction;
+
+	AbstractOutputFunction* outputFunction;
+
+	AbstractThreshold* threshold;
 	FastLayeredNetworkOptions();
 	~FastLayeredNetworkOptions();
 	FastLayeredNetworkOptions(const FastLayeredNetworkOptions &obj);
@@ -43,6 +55,8 @@ protected:
 	std::vector<double> activations;
 
 	std::vector<std::vector<double>> weights;
+
+	std::vector<int> layerOffsets;
 	// Builds the network from the given options
 	void buildNetwork();	
 	// Refreshes the neuronPerLayerCounters
@@ -94,6 +108,18 @@ public:
 	std::vector<StandardNeuron*>* getOutputNeurons();
 
 	BiasNeuron* getBiasNeuron();
+
+	int getOutputSize();
+
+	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
+
+	void refreshNetInputsForLayer(int layerNr);
+
+	void refreshActivationsForLayer(int layerNr);
+
+	std::vector<std::vector<double>>* getWeights();
+
+	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
 };
 
 #endif

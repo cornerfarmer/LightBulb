@@ -20,7 +20,7 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 
 std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
 {
-	std::unique_ptr<NeuralNetworkIO<double>> output(new NeuralNetworkIO<double>(networkTopology->getOutputNeurons()->size()));
+	std::unique_ptr<NeuralNetworkIO<double>> output(new NeuralNetworkIO<double>(networkTopology->getOutputSize()));
 	// If the calculation start at time 0
 	if (startTime == 0 && resetActivations)
 	{

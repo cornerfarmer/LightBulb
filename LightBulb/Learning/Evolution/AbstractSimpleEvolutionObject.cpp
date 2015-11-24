@@ -25,6 +25,10 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	}
 	options.neuronsPerLayerCount.push_back(inputDimension);
 	options.neuronsPerLayerCount.push_back(outputDimension);
+	options.activationFunction = new FermiFunction(0.1);
+	options.inputFunction = new WeightedSumFunction();
+	options.outputFunction = new IdentityFunction();
+	options.threshold = new StandardThreshold(0);
 	//options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 
 	// Create a new network topology from the adjusted options.
