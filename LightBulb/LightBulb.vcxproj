@@ -59,6 +59,7 @@
     <ClInclude Include="Function\ConeFunction.hpp" />
     <ClInclude Include="Function\CosinusFunction.hpp" />
     <ClInclude Include="Function\CylinderFunction.hpp" />
+    <ClInclude Include="Function\EqualRandomFunction.hpp" />
     <ClInclude Include="Function\EuclideanDistance.hpp" />
     <ClInclude Include="Function\ExponentialShrinkFunction.hpp" />
     <ClInclude Include="Function\FermiFunction.hpp" />
@@ -68,6 +69,7 @@
     <ClInclude Include="Function\MexicanHatFunction.hpp" />
     <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp" />
     <ClInclude Include="Function\RankBasedRandomFunction.hpp" />
+    <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
@@ -108,7 +110,11 @@
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp" />
+    <ClInclude Include="Learning\Evolution\RandomSelector.hpp" />
     <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp" />
+    <ClInclude Include="Learning\Evolution\RemainderStochasticSamplingSelector.hpp" />
+    <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp" />
     <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp" />
     <ClInclude Include="Learning\HopfieldLearningRule.hpp" />
@@ -128,6 +134,7 @@
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
     <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp" />
     <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\FastLayeredNetwork.hpp" />
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp" />
     <ClInclude Include="NetworkTopology\GridStructure.hpp" />
     <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp" />
@@ -204,6 +211,7 @@
     <ClCompile Include="Function\ConeFunction.cpp" />
     <ClCompile Include="Function\CosinusFunction.cpp" />
     <ClCompile Include="Function\CylinderFunction.cpp" />
+    <ClCompile Include="Function\EqualRandomFunction.cpp" />
     <ClCompile Include="Function\EuclideanDistance.cpp" />
     <ClCompile Include="Function\ExponentialShrinkFunction.cpp" />
     <ClCompile Include="Function\FermiFunction.cpp" />
@@ -213,6 +221,7 @@
     <ClCompile Include="Function\MexicanHatFunction.cpp" />
     <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp" />
     <ClCompile Include="Function\RankBasedRandomFunction.cpp" />
+    <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
@@ -253,7 +262,11 @@
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp" />
+    <ClCompile Include="Learning\Evolution\RandomSelector.cpp" />
     <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp" />
+    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelector.cpp" />
+    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelector.cpp" />
     <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp" />
     <ClCompile Include="Learning\HopfieldLearningRule.cpp" />
@@ -273,6 +286,7 @@
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
     <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp" />
     <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\FastLayeredNetwork.cpp" />
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp" />
     <ClCompile Include="NetworkTopology\GridStructure.cpp" />
     <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp" />

@@ -2026,7 +2026,7 @@ void doCompare()
 	NeuralNetwork neuralNetwork(&layeredNetwork);
 
 	FastLayeredNetworkOptions fastLayeredNetworkOptions;
-	fastLayeredNetworkOptions.activationFunction = new FermiFunction(1);
+	fastLayeredNetworkOptions.activationFunction = new BinaryFunction();
 	fastLayeredNetworkOptions.threshold = new StandardThreshold(0);
 	fastLayeredNetworkOptions.inputFunction = new WeightedSumFunction();
 	fastLayeredNetworkOptions.outputFunction = new IdentityFunction();
@@ -2053,14 +2053,14 @@ void doCompare()
 	TopologicalOrder topologicalOrder;
 
 	clock_t begin = clock();
-	for (int i = 0; i < 10000; i++)
-		NeuralNetworkIO<double>* output = neuralNetwork.calculate(input, topologicalOrder).get();
+	//for (int i = 0; i < 10000; i++)
+	//	NeuralNetworkIO<double>* output = neuralNetwork.calculate(input, topologicalOrder).get();
 	clock_t end = clock();
 
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 
 	begin = clock();
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 1000000; i++)
 		NeuralNetworkIO<double>* fastOutput = fastNeuralNetwork.calculate(input, topologicalOrder).get();
 	end = clock();
 

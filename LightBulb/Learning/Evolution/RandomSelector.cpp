@@ -33,7 +33,10 @@ void RandomSelector::initRecombination(std::vector<std::pair<double, AbstractEvo
 
 std::array<AbstractEvolutionObject*, 2> RandomSelector::nextRecombination()
 {
-	return std::array<AbstractEvolutionObject*, 2> { nextMutation(), nextMutation() };
+	std::array<AbstractEvolutionObject*, 2> arr;
+	arr[0] = nextMutation();
+	arr[1] = nextMutation();
+	return arr;
 }
 
 bool RandomSelector::hasFinished()

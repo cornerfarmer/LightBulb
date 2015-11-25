@@ -12,13 +12,10 @@ BinaryFunction::BinaryFunction(double minValue_, double maxValue_)
 
 double BinaryFunction::execute(double input, AbstractThreshold* threshold)
 {
-	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
-	// Check if the given threshold is a StandardThreshold
-	if (!standardThreshold)
-		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
+	StandardThreshold* standardThreshold = static_cast<StandardThreshold*>(threshold);
 
 	// If the input is greater than the threshold return 1 else 0
-	if (input > standardThreshold->getThreshold())
+	if (input > 0)
 		return maxValue;
 	else
 		return minValue;

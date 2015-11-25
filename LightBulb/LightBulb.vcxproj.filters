@@ -488,6 +488,27 @@
     <ClInclude Include="Examples\NetworkDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopology\FastLayeredNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RemainderStochasticSamplingSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\EqualRandomFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -918,6 +939,27 @@
     </ClCompile>
     <ClCompile Include="Examples\NetworkDrawer.cpp">
       <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\FastLayeredNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\EqualRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

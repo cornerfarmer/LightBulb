@@ -69,7 +69,10 @@ AbstractEvolutionObject* RemainderStochasticSamplingSelector::nextMutation()
 
 std::array<AbstractEvolutionObject*, 2> RemainderStochasticSamplingSelector::nextRecombination()
 {
-	return std::array<AbstractEvolutionObject*, 2> { objectSequence[currentObjectIndex++], objectSequence[currentObjectIndex++] };
+	std::array<AbstractEvolutionObject*, 2> arr;
+	arr[0] = objectSequence[currentObjectIndex++];
+	arr[1] = objectSequence[currentObjectIndex++];
+	return arr;
 }
 
 bool RemainderStochasticSamplingSelector::hasFinished()
