@@ -258,21 +258,21 @@ void FastLayeredNetwork::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 
 void FastLayeredNetwork::refreshNetInputsForLayer(int layerNr)
 {
-	for (int i = 0; i < options->neuronsPerLayerCount[layerNr]; i++)
+	for (auto neuron = layers[layerNr].begin(); neuron != layers[layerNr].end(); neuron++)
 	{
-		layers[layerNr][i].netInput = 0;
-		for (int l = 0; l < layers[layerNr][i].edges.size(); l++)
+		neuron->netInput = 0;
+		for (auto edge = neuron->edges.begin(); edge < neuron->edges.end(); edge++)
 		{
-			layers[layerNr][i].netInput += layers[layerNr][i].edges[l].first * layers[layerNr][i].edges[l].second->activation;
+			neuron->netInput += edge->first *  edge->second->activation;
 		}
 	}
 }
 
 void FastLayeredNetwork::refreshActivationsForLayer(int layerNr)
 {
-	for (int i = 0; i < options->neuronsPerLayerCount[layerNr]; i++)
+	for (auto neuron = layers[layerNr].begin(); neuron != layers[layerNr].end(); neuron++)
 	{
-		layers[layerNr][i].activation = options->activationFunction->execute(layers[layerNr][i].netInput, options->threshold);
+		neuron->activation = options->activationFunction->execute(neuron->netInput, options->threshold);
 	}
 }
 
