@@ -2060,8 +2060,11 @@ void doCompare()
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 
 	begin = clock();
+	NeuralNetworkIO<double> fastOutput(fastLayeredNetwork.getOutputSize());
 	for (int i = 0; i < 1000000; i++)
-		NeuralNetworkIO<double>* fastOutput = fastNeuralNetwork.calculate(input, topologicalOrder).get();
+	{
+		fastNeuralNetwork.calculate(input, fastOutput, topologicalOrder);
+	}
 	end = clock();
 
 	double fastelapsed_secs = double(end - begin) / CLOCKS_PER_SEC;

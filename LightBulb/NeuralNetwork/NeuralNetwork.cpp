@@ -18,9 +18,8 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	networkTopology.reset(networkTopology_);
 }
 
-std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
+void NeuralNetwork::calculate(NeuralNetworkIO<double>& input, NeuralNetworkIO<double>& output, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
 {
-	std::unique_ptr<NeuralNetworkIO<double>> output(new NeuralNetworkIO<double>(networkTopology->getOutputSize()));
 	// If the calculation start at time 0
 	if (startTime == 0 && resetActivations)
 	{
@@ -38,8 +37,8 @@ std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkI
 		activationOrder.executeActivation(*networkTopology);
 
 		// Extract the output and save it into the output value
-		output->set(timeStep, 0, 0);
-		networkTopology->getOutput((*output)[timeStep].second);
+		output.set(timeStep, 0, 0);
+		networkTopology->getOutput(output[timeStep].second);
 
 		// If the output values map is not null, fill it with all current output values 
 		if (outputValuesInTime != NULL)
@@ -48,6 +47,15 @@ std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkI
 		if (netInputValuesInTime != NULL)
 			networkTopology->getAllNeuronNetInputs((*netInputValuesInTime)[timeStep]);
 	}
+
+}
+
+
+std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
+{
+	std::unique_ptr<NeuralNetworkIO<double>> output(new NeuralNetworkIO<double>(networkTopology->getOutputSize()));
+
+	calculate(input, *output.get(), activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime, resetActivations);
 
 	return output;
 }
