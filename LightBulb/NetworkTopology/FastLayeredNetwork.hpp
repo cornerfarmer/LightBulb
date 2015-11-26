@@ -6,7 +6,6 @@
 // Libary includes
 #include <vector>
 #include <memory>
-#include <utility>
 
 // Includes
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
@@ -22,7 +21,7 @@ class AbstractThreshold;
 
 // This struct contains all options needed to build a LayeredNetwork
 struct FastLayeredNetworkOptions
-{	
+{
 	// Enables shourtcut edges
 	bool enableShortcuts;
 	// Enables a bias neuron
@@ -45,23 +44,21 @@ struct FastLayeredNetworkOptions
 };
 
 
-struct FastNeuron {
-	double netInput;
-	double activation;
-	std::vector<std::pair<double, FastNeuron*>> edges;
-};
-
 // A FastLayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
 class FastLayeredNetwork : public AbstractNetworkTopology
 {
 protected:
 	std::unique_ptr<FastLayeredNetworkOptions> options;
+	//
+	std::vector<double> netInputs;
+	//
+	std::vector<double> activations;
 
-	std::vector<std::vector<FastNeuron>> layers;
+	std::vector<std::vector<double>> weights;
 
-	FastNeuron biasNeuron;
+	std::vector<int> layerOffsets;
 	// Builds the network from the given options
-	void buildNetwork();	
+	void buildNetwork();
 	// Refreshes the neuronPerLayerCounters
 	void refreshNeuronsPerLayerCounters();
 	// Rebuilds the output neurons vector from the outputNeuronsIndices option
@@ -120,8 +117,8 @@ public:
 
 	void refreshActivationsForLayer(int layerNr);
 
-	std::vector<std::vector<FastNeuron>>* getFastNeurons();
-	std::vector<std::vector<double>>* getWeights() { return NULL; };
+	std::vector<std::vector<double>>* getWeights();
+
 	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
 };
 

@@ -70,9 +70,8 @@ FastLayeredNetwork::FastLayeredNetwork(FastLayeredNetworkOptions &options_)
 	if (!options->threshold)
 		throw std::invalid_argument("The given threshold is not valid");
 
-	biasNeuron.activation = 1;
 	// Build the network
-	buildNetwork();		
+	buildNetwork();
 }
 
 
@@ -84,28 +83,45 @@ void FastLayeredNetwork::buildNetwork()
 		for (unsigned int i = 0; i < options->neuronsPerLayerCount.back(); i++)
 			options->outputNeuronsIndices.push_back(i);
 	}
-	
-	// Clear all neurons
-	layers.clear();
-	layers.resize(getLayerCount());
+	layerOffsets.resize(options->neuronsPerLayerCount.size() + 1);
 
+	// Clear all neurons
+	netInputs.clear();
+	activations.clear();
+	weights.clear();
+	int totalNeuronCount = 0;
 	for (int l = 0; l < getLayerCount(); l++)
 	{
-		FastNeuron neuronPattern;
-		neuronPattern.activation = 0;
-		neuronPattern.netInput = 0;
-		if (l > 0)
+		layerOffsets[l] = totalNeuronCount;
+		totalNeuronCount += options->neuronsPerLayerCount[l];
+	}
+	layerOffsets[getLayerCount()] = totalNeuronCount;
+	if (options->useBiasNeuron)
+		totalNeuronCount += 1;
+	netInputs.resize(totalNeuronCount, 0);
+	activations.resize(totalNeuronCount, 0);
+	weights.resize(totalNeuronCount, std::vector<double>(totalNeuronCount, 0));
+
+	for (int l = 0; l < getLayerCount() - 1; l++) 
+	{
+		for (int n1 = layerOffsets[l]; n1 < layerOffsets[l + 1]; n1++)
 		{
-			for (int n = 0; n < options->neuronsPerLayerCount[l - 1]; n++)
+			for (int n2 = layerOffsets[l + 1]; n2 < layerOffsets[l + 2]; n2++)
 			{
-				neuronPattern.edges.push_back(std::make_pair(1.0, &layers[l - 1][n]));
+				weights[n1][n2] = 1;
 			}
-			if (options->useBiasNeuron)
-				neuronPattern.edges.push_back(std::make_pair(1.0, &biasNeuron));
 		}
-		layers[l].resize(options->neuronsPerLayerCount[l], neuronPattern);
 	}
 
+
+	if (options->useBiasNeuron)
+	{
+		activations.back() = 1;
+		for (int n = 0; n < weights.size(); n++)
+		{
+			weights.back()[n] = 1;
+		}
+	}
 }
 
 
@@ -134,14 +150,14 @@ std::vector<std::vector<StandardNeuron*>>* FastLayeredNetwork::getNeurons()
 	throw std::logic_error("getNeurons() is not yet implemented");
 }
 
-std::vector<std::vector<FastNeuron>>* FastLayeredNetwork::getFastNeurons()
+std::vector<std::vector<double>>* FastLayeredNetwork::getWeights()
 {
-	return &layers;
+	return &weights;
 }
 
 void FastLayeredNetwork::randomizeWeights(double randStart, double randEnd)
 {
-	/*for (auto column = weights.begin(); column != weights.end(); column++)
+	for (auto column = weights.begin(); column != weights.end(); column++)
 	{
 		for (auto weight = column->begin(); weight != column->end(); weight++)
 		{
@@ -149,25 +165,20 @@ void FastLayeredNetwork::randomizeWeights(double randStart, double randEnd)
 				*weight = (double)rand() / RAND_MAX * (randEnd - randStart) + randStart;
 			} while (*weight == 0);
 		}
-	}*/
+	}
 }
 
 int FastLayeredNetwork::getEdgeCount()
 {
-	/*return weights[0].size() * weights.size();*/
-	return 0;
+	return weights[0].size() * weights.size();
 }
 
 void FastLayeredNetwork::resetActivation()
 {
-	for (int l = 0; l < getLayerCount(); l++)
+	for (auto activation = activations.begin() + options->neuronsPerLayerCount.front(); activation != activations.end() - options->useBiasNeuron; activation++)
 	{
-		for (int n = 0; n < options->neuronsPerLayerCount[l]; n++)
-		{
-			layers[l][n].activation = 0;
-		}
+		*activation = 0;
 	}
-
 }
 
 void FastLayeredNetwork::horizontalMergeWith(FastLayeredNetwork& otherNetwork)
@@ -225,7 +236,7 @@ void FastLayeredNetwork::getOutput(std::vector<std::pair<bool, double>> &outputV
 	int outputVectorIndex = 0;
 	for (auto outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
 	{
-		outputVector[outputVectorIndex++] = std::make_pair(true, layers.back()[*outputNeuronIndex].activation);
+		outputVector[outputVectorIndex++] = std::make_pair(true, activations[layerOffsets[layerOffsets.size() - 2] + *outputNeuronIndex]);
 	}
 }
 
@@ -233,7 +244,7 @@ void FastLayeredNetwork::setInput(std::vector<std::pair<bool, double>>* inputVec
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		layers[0][i].activation = (*inputVector)[i].second;
+		activations[i] = (*inputVector)[i].second;
 	}
 }
 
@@ -252,53 +263,55 @@ void FastLayeredNetwork::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 	if (!dynamic_cast<FastLayeredNetwork*>(&otherNetwork))
 		throw std::logic_error("You can not mix topology types when calling copyWeightsFrom on a FastLayeredNetwork");
 
-	//weights = static_cast<FastLayeredNetwork*>(&otherNetwork)->weights;
+	weights = static_cast<FastLayeredNetwork*>(&otherNetwork)->weights;
 }
 
 
 void FastLayeredNetwork::refreshNetInputsForLayer(int layerNr)
 {
-	for (auto neuron = layers[layerNr].begin(); neuron != layers[layerNr].end(); neuron++)
+	for (int i = layerOffsets[layerNr]; i < layerOffsets[layerNr + 1]; i++)
 	{
-		neuron->netInput = 0;
-		for (auto edge = neuron->edges.begin(); edge < neuron->edges.end(); edge++)
+		double netInput = 0;
+		for (int l = layerOffsets[layerNr - 1]; l < layerOffsets[layerNr]; l++)
 		{
-			neuron->netInput += edge->first *  edge->second->activation;
+			netInput += weights[l][i] * activations[l];
 		}
+		if (options->useBiasNeuron)
+			netInput += weights.back()[i];
+		netInputs[i] = netInput;
 	}
 }
 
 void FastLayeredNetwork::refreshActivationsForLayer(int layerNr)
 {
-	for (auto neuron = layers[layerNr].begin(); neuron != layers[layerNr].end(); neuron++)
+	for (int i = layerOffsets[layerNr]; i < layerOffsets[layerNr] + options->neuronsPerLayerCount[layerNr]; i++)
 	{
-		neuron->activation = options->activationFunction->execute(neuron->netInput, options->threshold);
+		activations[i] = options->activationFunction->execute(netInputs[i], options->threshold);
 	}
 }
 
 
 double FastLayeredNetwork::calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork)
 {
-	//double distance = 0;
+	double distance = 0;
 
-	//auto weights1 = getWeights();
-	//auto weights2 = static_cast<FastLayeredNetwork*>(&otherNetwork)->getWeights();
-	//// Go through all edges
-	//auto neuron2 = weights2->begin();
-	//for (auto neuron1 = weights1->begin(); neuron1 != weights1->end(); neuron1++, neuron2++)
-	//{
-	//	auto weight2 = neuron2->begin();
-	//	for (auto weight1 = neuron1->begin(); weight1 != neuron1->end(); weight1++, weight2++)
-	//	{
-	//		// Calculate the weights average and store it inside the first object
-	//		distance += pow(*weight1 - *weight2, 2);
-	//	}
-	//}
+	auto weights1 = getWeights();
+	auto weights2 = static_cast<FastLayeredNetwork*>(&otherNetwork)->getWeights();
+	// Go through all edges
+	auto neuron2 = weights2->begin();
+	for (auto neuron1 = weights1->begin(); neuron1 != weights1->end(); neuron1++, neuron2++)
+	{
+		auto weight2 = neuron2->begin();
+		for (auto weight1 = neuron1->begin(); weight1 != neuron1->end(); weight1++, weight2++)
+		{
+			// Calculate the weights average and store it inside the first object
+			distance += pow(*weight1 - *weight2, 2);
+		}
+	}
 
-	//distance = sqrt(distance);
+	distance = sqrt(distance);
 
-	////std::cout << (int)distance << std::endl;
-	//return distance;
-	return 0;
+	//std::cout << (int)distance << std::endl;
+	return distance;
 }
 
