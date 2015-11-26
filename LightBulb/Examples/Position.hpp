@@ -17,8 +17,8 @@ class Position : public AbstractSimpleEvolutionObject
 protected:
 	FunctionSimulator* functionSimulator;
 	std::vector<float> position;
-	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(NeuralNetworkIO<double>* output);
+	std::vector<double> getNNInput();
+	void interpretNNOutput(std::vector<double>& output);
 public:	
 	Position(FunctionSimulator* functionSimulator_);
 	~Position();

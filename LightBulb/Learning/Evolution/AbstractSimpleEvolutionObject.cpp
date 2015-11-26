@@ -25,7 +25,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	}
 	options.neuronsPerLayerCount.push_back(inputDimension);
 	options.neuronsPerLayerCount.push_back(outputDimension);
-	options.activationFunction = new FermiFunction(0.1);
+	options.activationFunction = new IdentityFunction();
 	options.inputFunction = new WeightedSumFunction();
 	options.outputFunction = new IdentityFunction();
 	options.threshold = new StandardThreshold(0);
@@ -54,14 +54,16 @@ NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 void AbstractSimpleEvolutionObject::doNNCalculation()
 {
 	// Get the input
-	NeuralNetworkIO<double> input = getNNInput();
+	static std::vector<double> input;
+	getNNInput(input);
 
 	TopologicalOrder topologicalOrder;
+	static std::vector<double> output(neuralNetwork->getNetworkTopology()->getOutputSize());
 	// Calculate the output from the the input
-	std::unique_ptr<NeuralNetworkIO<double>> output = neuralNetwork->calculate(input, topologicalOrder, 0, -1, NULL, NULL, false);
+	neuralNetwork->calculate(input, output, topologicalOrder, false);
 	
 	// Interpret the output
-	interpretNNOutput(output.get());
+	interpretNNOutput(output);
 }
 
 AbstractSimpleEvolutionObject::~AbstractSimpleEvolutionObject()

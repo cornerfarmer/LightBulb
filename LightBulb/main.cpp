@@ -2014,7 +2014,7 @@ void doTeachedEvolution838Test() {
 void doCompare()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new FermiFunction(1), new IdentityFunction());
+	layeredNetworkOptions.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new BinaryFunction(), new IdentityFunction());
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
 	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
@@ -2053,8 +2053,8 @@ void doCompare()
 	TopologicalOrder topologicalOrder;
 
 	clock_t begin = clock();
-	//for (int i = 0; i < 10000; i++)
-	//	NeuralNetworkIO<double>* output = neuralNetwork.calculate(input, topologicalOrder).get();
+	for (int i = 0; i < 1000000; i++)
+		NeuralNetworkIO<double>* output = neuralNetwork.calculate(input, topologicalOrder).get();
 	clock_t end = clock();
 
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -2078,6 +2078,6 @@ void doCompare()
 
 int main()
 {
-	doCompare();
+	doTicTacToeTest();
     return 0;
 }

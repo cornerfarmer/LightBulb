@@ -51,6 +51,11 @@ public:
 
 	virtual void setInput(std::vector<std::pair<bool, double>>* inputVector);
 
+
+	virtual void getOutput(std::vector<double> &outputVector);
+
+	virtual void setInput(std::vector<double>* inputVector);
+
 	virtual int getOutputSize() { return getOutputNeurons()->size(); };
 };
 

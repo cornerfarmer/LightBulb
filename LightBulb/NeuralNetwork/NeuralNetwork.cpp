@@ -51,6 +51,27 @@ void NeuralNetwork::calculate(NeuralNetworkIO<double>& input, NeuralNetworkIO<do
 }
 
 
+void NeuralNetwork::calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations)
+{
+	// If the calculation start at time 0
+	if (resetActivations)
+	{
+		// Reset all activations
+		networkTopology->resetActivation();
+	}
+
+	// Set the input into the neural network
+	networkTopology->setInput(&input);
+
+	// Pass the work to the activationOrder
+	activationOrder.executeActivation(*networkTopology);
+
+	// Extract the output and save it into the output value
+	networkTopology->getOutput(output);
+
+}
+
+
 std::unique_ptr<NeuralNetworkIO<double>> NeuralNetwork::calculate(NeuralNetworkIO<double>& input, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
 {
 	std::unique_ptr<NeuralNetworkIO<double>> output(new NeuralNetworkIO<double>(networkTopology->getOutputSize()));

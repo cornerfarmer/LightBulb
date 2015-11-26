@@ -248,6 +248,24 @@ void FastLayeredNetwork::setInput(std::vector<std::pair<bool, double>>* inputVec
 	}
 }
 
+void FastLayeredNetwork::getOutput(std::vector<double> &outputVector)
+{
+	int outputVectorIndex = 0;
+	for (auto outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
+	{
+		outputVector[outputVectorIndex++] = activations[layerOffsets[layerOffsets.size() - 2] + *outputNeuronIndex];
+	}
+}
+
+void FastLayeredNetwork::setInput(std::vector<double>* inputVector)
+{
+	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
+	{
+		activations[i] = (*inputVector)[i];
+	}
+}
+
+
 BiasNeuron* FastLayeredNetwork::getBiasNeuron()
 {
 	throw std::logic_error("getBiasNeuron() is not yet implemented");

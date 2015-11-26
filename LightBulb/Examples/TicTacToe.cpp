@@ -424,9 +424,9 @@ void TicTacToe::resetWorld()
 }
 
 
-NeuralNetworkIO<double> TicTacToe::getSight()
+ void TicTacToe::getSight(std::vector<double>& sight)
 {
-	static NeuralNetworkIO<double> sight(18);
+	sight.resize(18);
 	int sightIndex = 0;
 	for (auto column = fields.begin(); column != fields.end(); column++)
 	{
@@ -434,16 +434,15 @@ NeuralNetworkIO<double> TicTacToe::getSight()
 		{
 			int fieldValue = currentPlayer * *field;
 			if (fieldValue == 1)
-				sight.set(0, sightIndex++, 1);
+				sight[sightIndex++] = 1;
 			else
-				sight.set(0, sightIndex++, 0);
+				sight[sightIndex++] = 0;
 			if (fieldValue == -1)
-				sight.set(0, sightIndex++, 1);
+				sight[sightIndex++] = 1;
 			else
-				sight.set(0, sightIndex++, 0);
+				sight[sightIndex++] = 0;
 		}
 	}
-	return sight;
 }
 
 std::vector<TicTacToeKI*>* TicTacToe::getBestAIs()

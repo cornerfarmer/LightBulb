@@ -9,18 +9,18 @@ TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
 	ticTacToe = ticTacToe_;
 }
 
-NeuralNetworkIO<double> TicTacToeKI::getNNInput()
+void TicTacToeKI::getNNInput(std::vector<double>& input)
 {
-	return ticTacToe->getSight();
+	ticTacToe->getSight(input);
 }
 
-void TicTacToeKI::interpretNNOutput(NeuralNetworkIO<double>* output)
+void TicTacToeKI::interpretNNOutput(std::vector<double>& output)
 {
 	for (int i = 0; i < 9; i++)
 	{
 		int x = i / 3;
 		int y = i % 3;
-		if (output->get(0, i) > 0.5)
+		if (output[i] > 0.5)
 		{
 			ticTacToe->setField(x, y);
 			return;

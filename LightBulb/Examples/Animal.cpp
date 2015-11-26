@@ -13,21 +13,15 @@ Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 	reset(posX_, posY_, dirX_, dirY_);
 }
 
-NeuralNetworkIO<double> Animal::getNNInput()
+void Animal::getNNInput(std::vector<double>& input)
 {
-	std::vector<double> sight = nature->getSight(posX, posY, dirX, dirY);
-	NeuralNetworkIO<double> input(6);
-	for (int i = 0; i < sight.size(); i++)
-	{
-		input.set(0, i, sight[i]);
-	}
-	input.set(0, sight.size(), health / 200.0);
-	return input;
+	input = nature->getSight(posX, posY, dirX, dirY);
+	input.push_back(health / 200.0);
 }
 
-void Animal::interpretNNOutput(NeuralNetworkIO<double>* output)
+void Animal::interpretNNOutput(std::vector<double>& output)
 {
-	if (output->get(0, 3) > 0)
+	if (output[3] > 0)
 	{
 		health = std::min(200.0, health + nature->tryToEat(posX + dirX, posY + dirY));
 	}
@@ -43,11 +37,11 @@ void Animal::interpretNNOutput(NeuralNetworkIO<double>* output)
 		//learningRule.doMutation(*newAnimal);
 	}
 
-	if (output->get(0, 0) > 0)
+	if (output[0] > 0)
 		rotate(1);
-	if (output->get(0, 2) > 0)
+	if (output[2] > 0)
 		rotate(-1);
-	if (output->get(0, 1) > 0)
+	if (output[1] > 0)
 	{
 		if (nature->getTile(posX + dirX, posY + dirY)->isWalkable())
 		{

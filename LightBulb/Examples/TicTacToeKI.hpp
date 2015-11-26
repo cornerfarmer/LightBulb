@@ -17,8 +17,8 @@ class TicTacToeKI : public AbstractSimpleEvolutionObject
 {
 protected:
 	TicTacToe* ticTacToe;
-	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(NeuralNetworkIO<double>* output);
+	void getNNInput(std::vector<double>& input);
+	void interpretNNOutput(std::vector<double>& output);
 public:	
 	TicTacToeKI(TicTacToe* ticTacToe_);
 	~TicTacToeKI();

@@ -128,3 +128,40 @@ void AbstractNetworkTopology::setInput(std::vector<std::pair<bool, double>>* inp
 }
 
 
+void AbstractNetworkTopology::getOutput(std::vector<double> &outputVector)
+{
+	// Get all output Neurons
+	std::vector<StandardNeuron*>* outputNeurons = getOutputNeurons();
+
+	// Go through all neurons and copy the activation values into the output vector
+	int outputNeuronIndex = 0;
+	for (auto neuron = outputNeurons->begin(); neuron != outputNeurons->end(); neuron++, outputNeuronIndex++)
+	{
+		outputVector[outputNeuronIndex] = (*neuron)->getActivation();
+	}
+}
+
+void AbstractNetworkTopology::setInput(std::vector<double>* inputVector)
+{
+	// Get all input Neurons
+	std::vector<AbstractNeuron*>* inputNeurons = getInputNeurons();
+
+	// Go through all neurons and copy the input values into the inputNeurons
+	unsigned int index = 0;
+	for (auto neuron = inputNeurons->begin(); neuron != inputNeurons->end() && (!inputVector || index < inputVector->size()); neuron++, index++)
+	{
+		InputNeuron* inputNeuron = dynamic_cast<InputNeuron*>(*neuron);
+		// If its a real input neuron set the input as input of the neuron
+		if (inputNeuron)
+			inputNeuron->setInput((*inputVector)[index]);
+		else
+		{
+			StandardNeuron* standardNeuron = dynamic_cast<StandardNeuron*>(*neuron);
+			// If its a standard neuron, set the input as additional input
+			if (standardNeuron)
+				standardNeuron->setAdditionalInput((*inputVector)[index]);
+			else
+				throw std::logic_error("Something went wrong while setting the input values");
+		}
+	}
+}

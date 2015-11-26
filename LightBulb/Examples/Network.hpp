@@ -17,8 +17,8 @@ class Network : public AbstractSimpleEvolutionObject
 protected:
 	NetworkSimulator* networkSimulator;
 	std::vector<std::vector<float>> positions;
-	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(NeuralNetworkIO<double>* output);
+	void getNNInput(std::vector<double>& input);
+	void interpretNNOutput(std::vector<double>& output);
 public:	
 	Network(NetworkSimulator* networkSimulator_);
 	~Network();

@@ -10,20 +10,19 @@ Network::Network(NetworkSimulator* networkSimulator_)
 	positions.resize(4, std::vector<float>(2));
 }
 
-NeuralNetworkIO<double> Network::getNNInput()
+void Network::getNNInput(std::vector<double>& input)
 {
-	NeuralNetworkIO<double> input(1);	
-	input.set(0, 0, 1);	
-	return input;
+	input.resize(1);
+	input[0] = 1;
 }
 
-void Network::interpretNNOutput(NeuralNetworkIO<double>* output)
+void Network::interpretNNOutput(std::vector<double>& output)
 {
 	for (int p = 0; p < 4; p++)
 	{	
 		for (int i = 0; i < 2; i++)
 		{
-			positions[p][i] = output->get(0, p * 2 + i);
+			positions[p][i] = output[p * 2 + i];
 		}
 	}
 }

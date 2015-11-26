@@ -10,18 +10,17 @@ Position::Position(FunctionSimulator* functionSimulator_)
 	position.resize(2);
 }
 
-NeuralNetworkIO<double> Position::getNNInput()
+std::vector<double> Position::getNNInput()
 {
-	NeuralNetworkIO<double> input(1);	
-	input.set(0, 0, 1);	
+	std::vector<double> input(1, 1);
 	return input;
 }
 
-void Position::interpretNNOutput(NeuralNetworkIO<double>* output)
+void Position::interpretNNOutput(std::vector<double>& output)
 {
 	for (int i = 0; i < 2; i++)
 	{	
-		position[i] = output->get(0, i);
+		position[i] = output[i];
 	}
 }
 

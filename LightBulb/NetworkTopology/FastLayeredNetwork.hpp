@@ -67,10 +67,14 @@ public:
 	~FastLayeredNetwork();
 	FastLayeredNetwork(FastLayeredNetworkOptions &options_);
 	FastLayeredNetwork();
-	// Returns all InputNeurons (first layer)
+
 	void setInput(std::vector<std::pair<bool, double>>* inputVector);
-	// Returns all OutputNeurons (last layer)
+
 	void getOutput(std::vector<std::pair<bool, double>> &outputVector);
+
+	void setInput(std::vector<double>* inputVector);
+
+	void getOutput(std::vector<double> &outputVector);
 	// Calculates the layer count
 	int getLayerCount();
 	// Returns all Neurons

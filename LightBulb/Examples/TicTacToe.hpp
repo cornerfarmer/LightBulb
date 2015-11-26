@@ -50,7 +50,7 @@ public:
 	TicTacToe();
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	bool doSimulationStep();
-	NeuralNetworkIO<double> getSight();
+	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
 	double getScore(AbstractEvolutionObject* object);
 	bool isFree(int x, int y);

@@ -27,8 +27,8 @@ protected:
 	bool dead;
 	int stepsSurvived;
 	void rotate(int dir);
-	NeuralNetworkIO<double> getNNInput();
-	void interpretNNOutput(NeuralNetworkIO<double>* output);
+	void getNNInput(std::vector<double>& input);
+	void interpretNNOutput(std::vector<double>& output);
 public:	
 	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();

@@ -27,9 +27,9 @@ protected:
 	// The world which holds this object
 	AbstractEvolutionWorld* world;
 	// This method should return the input for the neural network
-	virtual NeuralNetworkIO<double> getNNInput() = 0;
+	virtual void getNNInput(std::vector<double>& input) = 0;
 	// This method should interpret and act depending on the given NN output
-	virtual void interpretNNOutput(NeuralNetworkIO<double>* output) = 0;
+	virtual void interpretNNOutput(std::vector<double>& output) = 0;
 public:	
 	// Create a new evolution object with the given input and output NN size
 	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world, int inputDimension, int outputDimension, bool biasNeuron = true);
