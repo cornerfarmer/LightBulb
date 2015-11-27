@@ -8,6 +8,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
+#include "Function/XorShfGenerator.hpp"
 
 // Forward declarations
 class AbstractEvolutionObject;
@@ -17,7 +18,7 @@ class MutationAlgorithm : public AbstractMutationAlgorithm
 {
 private:
 	// Random generator
-	std::default_random_engine generator;
+	XorShfGenerator generator;
 	std::normal_distribution<double> distribution;
 	// This factor influences the change speed of mutationStrengths
 	double mutationStrengthChangeSpeed;

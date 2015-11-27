@@ -162,7 +162,7 @@ void FastLayeredNetwork::randomizeWeights(double randStart, double randEnd)
 		for (auto weight = column->begin(); weight != column->end(); weight++)
 		{
 			do {
-				*weight = (double)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+				*weight = randGenerator.next() * (randEnd - randStart) + randStart;
 			} while (*weight == 0);
 		}
 	}
@@ -323,11 +323,11 @@ double FastLayeredNetwork::calculateEuclideanDistance(AbstractNetworkTopology& o
 		for (auto weight1 = neuron1->begin(); weight1 != neuron1->end(); weight1++, weight2++)
 		{
 			// Calculate the weights average and store it inside the first object
-			distance += pow(*weight1 - *weight2, 2);
+			distance += abs(*weight1 - *weight2);
 		}
 	}
 
-	distance = sqrt(distance);
+	//distance = sqrt(distance);
 
 	//std::cout << (int)distance << std::endl;
 	return distance;

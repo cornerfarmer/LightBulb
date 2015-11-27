@@ -54,6 +54,7 @@ protected:
 	void refreshNeuronsPerLayerCounters();
 	// Rebuilds the output neurons vector from the outputNeuronsIndices option
 	void rebuildOutputNeurons();
+
 public:
 	~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions_t &options_);	

@@ -10,10 +10,10 @@ Position::Position(FunctionSimulator* functionSimulator_)
 	position.resize(2);
 }
 
-std::vector<double> Position::getNNInput()
+void Position::getNNInput(std::vector<double>& input)
 {
-	std::vector<double> input(1, 1);
-	return input;
+	input.resize(1);
+	input[0] = 1;
 }
 
 void Position::interpretNNOutput(std::vector<double>& output)

@@ -3,6 +3,9 @@
 #ifndef _EDGE_H_
 #define _EDGE_H_
 
+// Includes
+#include "Function/XorShfGenerator.hpp"
+
 // Forward declarations
 class AbstractNeuron;
 class StandardNeuron;
@@ -14,6 +17,7 @@ private:
 	double weight;
 	AbstractNeuron* prevNeuron;
 	StandardNeuron* nextNeuron;
+	XorShfGenerator randGenerator;
 public:
 	// Creates a new edge between the two given neurons with the given weight
 	Edge(AbstractNeuron* prevNeuron_, StandardNeuron* nextNeuron_, double weight_);	

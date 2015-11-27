@@ -71,6 +71,7 @@
     <ClInclude Include="Function\RankBasedRandomFunction.hpp" />
     <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
+    <ClInclude Include="Function\XorShfGenerator.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
     <ClInclude Include="Graphics\Arrow.hpp" />
@@ -223,6 +224,7 @@
     <ClCompile Include="Function\RankBasedRandomFunction.cpp" />
     <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
+    <ClCompile Include="Function\XorShfGenerator.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
     <ClCompile Include="Graphics\Arrow.cpp" />

@@ -509,6 +509,9 @@
     <ClInclude Include="Function\EqualRandomFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="Function\XorShfGenerator.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -959,6 +962,9 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Function\EqualRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\XorShfGenerator.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
   </ItemGroup>

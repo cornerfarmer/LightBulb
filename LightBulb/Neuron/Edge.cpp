@@ -49,5 +49,5 @@ void Edge::setNextNeuron(StandardNeuron* newNextNeuron)
 
 void Edge::randomizeWeight(double randStart, double randEnd)
 {
-	weight = (double)rand() / RAND_MAX * (randEnd - randStart) + randStart;
+	weight = randGenerator.next() * (randEnd - randStart) + randStart;
 }

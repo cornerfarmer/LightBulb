@@ -11,6 +11,7 @@
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Neuron/AbstractNeuron.hpp"
 #include "Neuron/BiasNeuron.hpp"
+#include "Function/XorShfGenerator.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;
@@ -63,6 +64,8 @@ protected:
 	void refreshNeuronsPerLayerCounters();
 	// Rebuilds the output neurons vector from the outputNeuronsIndices option
 	void rebuildOutputNeurons();
+
+	XorShfGenerator randGenerator;
 public:
 	~FastLayeredNetwork();
 	FastLayeredNetwork(FastLayeredNetworkOptions &options_);

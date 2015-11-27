@@ -174,7 +174,7 @@ bool TicTacToe::doSimulationStep()
 			std::cout << "Hard Reset" << std::endl;
 
 			objects.clear();
-			for (auto bestAI = bestAIs.begin() + lastBestAICount; bestAI != bestAIs.end(); bestAI++)
+			for (auto bestAI = bestAIs.begin() + (bestAIs.size() > 40 ? bestAIs.size() - 40 : 0); bestAI != bestAIs.end(); bestAI++)
 			{
 				objects.push_back((*bestAI)->clone(false));
 			}

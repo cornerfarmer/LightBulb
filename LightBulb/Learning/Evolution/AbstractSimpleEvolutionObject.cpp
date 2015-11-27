@@ -10,6 +10,7 @@
 #include "Function/FermiFunction.hpp"
 #include "Function/HyperbolicTangentFunction.hpp"
 #include "Function/IdentityFunction.hpp"
+#include "Function/BinaryFunction.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include "Examples/AbstractTile.hpp"
 #include "Neuron/StandardNeuron.hpp"
@@ -25,7 +26,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	}
 	options.neuronsPerLayerCount.push_back(inputDimension);
 	options.neuronsPerLayerCount.push_back(outputDimension);
-	options.activationFunction = new IdentityFunction();
+	options.activationFunction = new BinaryFunction();
 	options.inputFunction = new WeightedSumFunction();
 	options.outputFunction = new IdentityFunction();
 	options.threshold = new StandardThreshold(0);
