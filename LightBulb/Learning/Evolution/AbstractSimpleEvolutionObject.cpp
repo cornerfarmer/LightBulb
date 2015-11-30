@@ -38,7 +38,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	// Create a neural network from the network topolgy
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
 	// Randomize all weights (TODO: make the boundaries variable)
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5,0.5);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-5,5);
 
 	world = world_;
 

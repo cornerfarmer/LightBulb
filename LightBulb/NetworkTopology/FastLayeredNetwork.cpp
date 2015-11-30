@@ -323,11 +323,11 @@ double FastLayeredNetwork::calculateEuclideanDistance(AbstractNetworkTopology& o
 		for (auto weight1 = neuron1->begin(); weight1 != neuron1->end(); weight1++, weight2++)
 		{
 			// Calculate the weights average and store it inside the first object
-			distance += abs(*weight1 - *weight2);
+			distance += (*weight1 - *weight2) * (*weight1 - *weight2);
 		}
 	}
 
-	//distance = sqrt(distance);
+	distance = sqrt(distance);
 
 	//std::cout << (int)distance << std::endl;
 	return distance;

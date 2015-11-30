@@ -50,6 +50,7 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
 			std::cout << std::fixed << std::setprecision(5) << entry->first << ", ";
+			break;
 		}
 	}
 

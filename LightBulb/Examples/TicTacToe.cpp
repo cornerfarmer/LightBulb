@@ -30,9 +30,7 @@ TicTacToe::TicTacToe()
 	options.ticTacToe = this;
 	displayMode = true;
 	drawer.reset(new TicTacToeDrawer(options));
-
-	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
-
+	
 	currentResetGenerationCount = defaultResetGenerationCount;
 
 	maxDistanceShrinkFactor = 0.9;
@@ -87,7 +85,7 @@ bool TicTacToe::doSimulationStep()
 			double distance = (*bestAI)->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*(*ki)->getNeuralNetwork()->getNetworkTopology());
 			if (distance < maxDistance)
 			{
-				points[static_cast<TicTacToeKI*>(*ki)] = -800 * maxDistance / distance;
+				points[static_cast<TicTacToeKI*>(*ki)] = -1 * std::max(bestAIs.size() * 0.2, std::min(bestAIs.size() * 2.0, distance == 0 ? bestAIs.size() * 2 : bestAIs.size() * 2 * (1 - distance / maxDistance)));
 				duplicates++;
 				goto nextKI;
 			}
@@ -201,6 +199,7 @@ double TicTacToe::getRealScore(AbstractEvolutionObject* object)
 void TicTacToe::initializeForLearning()
 {
 	bestAIs.clear();
+	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
 	maxDistance = 10000;
 	lastBestAICount = 0;
 	generationsSincaLastBestAI = 0;
@@ -254,14 +253,14 @@ void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 	if (illegalMove)
 	{
 		if (currentPlayer == 1) {
-			points[ai1]-=10-i;
+			points[ai1]--;
 			illegalMoves++;
 		}
 	}
 	else
 	{
 		// TODO: discuss if this makes sense:
-		//points[ai1]-=1;
+		points[ai1]--;
 		ties++;
 	}/*
 	else if (whoHasWon() == 1)
@@ -366,6 +365,7 @@ void TicTacToe::startNewGame(int firstPlayer)
 	illegalMove = false;
 	resetWorld();
 	currentPlayer = firstPlayer;
+
 }
 
 bool TicTacToe::hasGameFinished()
@@ -409,7 +409,7 @@ void TicTacToe::setField(int x, int y)
 
 double TicTacToe::getScore(AbstractEvolutionObject* object)
 {
-	return points[static_cast<TicTacToeKI*>(object)];
+	return (bestAIs.size() * 2 - points[static_cast<TicTacToeKI*>(object)]) / (bestAIs.size() * 2);
 }
 
 void TicTacToe::resetWorld()

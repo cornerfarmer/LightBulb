@@ -45,7 +45,7 @@ protected:
 	double lastBestScore;
 	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
 	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties);
-
+	bool tieMode;
 public:
 	TicTacToe();
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
