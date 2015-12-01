@@ -72,6 +72,7 @@
     <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Function\XorShfGenerator.hpp" />
+    <ClInclude Include="Function\ZigguratGenerator.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
     <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
     <ClInclude Include="Graphics\Arrow.hpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp" />
     <ClInclude Include="Learning\SOMLearningRule.hpp" />
     <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp" />
+    <ClInclude Include="Lib\ziggurat.hpp" />
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
     <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp" />
@@ -225,6 +227,7 @@
     <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Function\XorShfGenerator.cpp" />
+    <ClCompile Include="Function\ZigguratGenerator.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />
     <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
     <ClCompile Include="Graphics\Arrow.cpp" />
@@ -283,6 +286,7 @@
     <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp" />
     <ClCompile Include="Learning\SOMLearningRule.cpp" />
     <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp" />
+    <ClCompile Include="Lib\ziggurat.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
