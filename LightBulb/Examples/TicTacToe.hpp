@@ -24,7 +24,7 @@ class TicTacToe : public AbstractSimpleEvolutionWorld
 {
 protected:
 	std::vector<std::vector<int>> fields;	
-	std::map<TicTacToeKI*, int> points;
+	std::map<TicTacToeKI*, double> points;
 	AbstractEvolutionObject* createNewObject();
 	sf::RenderWindow window;
 	std::unique_ptr<TicTacToeDrawer> drawer;

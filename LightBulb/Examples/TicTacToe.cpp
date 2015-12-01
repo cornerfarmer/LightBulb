@@ -85,7 +85,9 @@ bool TicTacToe::doSimulationStep()
 			double distance = (*bestAI)->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*(*ki)->getNeuralNetwork()->getNetworkTopology());
 			if (distance < maxDistance)
 			{
-				points[static_cast<TicTacToeKI*>(*ki)] = -1 * std::max(bestAIs.size() * 0.2, std::min(bestAIs.size() * 2.0, distance == 0 ? bestAIs.size() * 2 : bestAIs.size() * 2 * (1 - distance / maxDistance)));
+				double point = -1 * std::min(bestAIs.size() * 2.0, distance == 0 ? bestAIs.size() * 2 : bestAIs.size() * 2 * (1 - distance / maxDistance));
+				point -= bestAIs.size() * 2;
+				points[static_cast<TicTacToeKI*>(*ki)] = point;
 				duplicates++;
 				goto nextKI;
 			}
@@ -409,7 +411,7 @@ void TicTacToe::setField(int x, int y)
 
 double TicTacToe::getScore(AbstractEvolutionObject* object)
 {
-	return (bestAIs.size() * 2 - points[static_cast<TicTacToeKI*>(object)]) / (bestAIs.size() * 2);
+	return (bestAIs.size() * 4 + points[static_cast<TicTacToeKI*>(object)]) / (bestAIs.size() * 4);
 }
 
 void TicTacToe::resetWorld()
