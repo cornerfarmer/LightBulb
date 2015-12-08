@@ -40,7 +40,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	std::vector<double>* mutationStrength = object1->getMutationStrength();
 
 	// Go through all mutationStrength values
-	for (auto mutationStrengthValue = mutationStrength->begin() + rand() % mutationStrength->size(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
+	for (auto mutationStrengthValue = mutationStrength->begin(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
 	{
 		// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
 		*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * distribution(generator));
@@ -49,7 +49,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 		// Change the mutation direction randomly (TODO: Make this variable)
 		//if ((double)rand() / RAND_MAX > 0.5)
 		//	*mutationStrengthValue *= -1;
-		break;
+
 	}
 
 	auto weights = static_cast<FastLayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();

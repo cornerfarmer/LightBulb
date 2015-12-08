@@ -35,7 +35,7 @@ TicTacToe::TicTacToe()
 
 	currentResetGenerationCount = defaultResetGenerationCount;
 
-	maxDistanceShrinkFactor = 0.9;
+	maxDistanceShrinkFactor = 1000;
 	debugOutput = true;
 }
 
@@ -67,7 +67,18 @@ void TicTacToe::setDebugOutput(bool debugOutput_)
 	debugOutput = debugOutput_;
 }
 
+
 bool TicTacToe::doSimulationStep()
+{
+	points.clear();
+	for (auto ki = objects.begin(); ki != objects.end(); ki++)
+	{
+		points[static_cast<TicTacToeKI*>(*ki)] = rateKI(static_cast<TicTacToeKI*>(*ki));
+	}
+	return false;
+}
+
+bool TicTacToe::doSimulationStep2()
 {	
 	int ties = 0;
 	int firstWon = 0;
@@ -87,7 +98,7 @@ bool TicTacToe::doSimulationStep()
 			double distance = (*bestAI)->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*(*ki)->getNeuralNetwork()->getNetworkTopology());
 			if (distance < maxDistance)
 			{
-				points[static_cast<TicTacToeKI*>(*ki)] = -800 * maxDistance / distance;
+				points[static_cast<TicTacToeKI*>(*ki)] = -800 * maxDistance / std::max(0.0001, distance);
 				duplicates++;
 				goto nextKI;
 			}
@@ -117,7 +128,7 @@ bool TicTacToe::doSimulationStep()
 	if (points[static_cast<TicTacToeKI*>(highscore->front().second)] == 0) {
 		TicTacToeKI* newAI = static_cast<TicTacToeKI*>(highscore->front().second->clone(false));
 		bool duplicate = false;
-		double currentMaxDist = maxDistance / maxDistanceShrinkFactor;//1500 * exp(-0.1 * bestAIs.size());
+		double currentMaxDist = maxDistance + maxDistanceShrinkFactor;//1500 * exp(-0.1 * bestAIs.size());
 
 		for (int i = 0; i < lastBestAICount; i++)
 		{
@@ -166,8 +177,17 @@ bool TicTacToe::doSimulationStep()
 	} else if (generationsSincaLastBestAI++ > currentResetGenerationCount) {
 		if (!softReset)
 		{
-			currentResetGenerationCount *= 1.05;
-			maxDistance *= 0.9;
+			if (lastBestAICount == bestAIs.size())
+				maxDistanceShrinkFactor *= 2;
+			else
+				maxDistanceShrinkFactor /= 2;
+			
+			maxDistanceShrinkFactor = std::max(10.0, maxDistanceShrinkFactor);
+			currentResetGenerationCount += 1;
+			maxDistance -= maxDistanceShrinkFactor;
+			maxDistance = std::max(0, maxDistance);
+			if (maxDistance == 0)
+				maxDistanceShrinkFactor = 0;
 			std::cout << "Switched to the next mode: d: " << maxDistance << " r: " << currentResetGenerationCount << std::endl;
 			//objects[0] = highscore->front().second;
 			//objects.resize(1);
@@ -201,7 +221,7 @@ double TicTacToe::getRealScore(AbstractEvolutionObject* object)
 void TicTacToe::initializeForLearning()
 {
 	bestAIs.clear();
-	maxDistance = 10000;
+	maxDistance = 100000;
 	lastBestAICount = 0;
 	generationsSincaLastBestAI = 0;
 	lastBestScore = 0;
@@ -261,7 +281,7 @@ void TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 	else
 	{
 		// TODO: discuss if this makes sense:
-		//points[ai1]-=1;
+		points[ai1]-=1;
 		ties++;
 	}/*
 	else if (whoHasWon() == 1)

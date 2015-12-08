@@ -24,7 +24,7 @@ class TicTacToe : public AbstractSimpleEvolutionWorld
 {
 protected:
 	std::vector<std::vector<int>> fields;	
-	std::map<TicTacToeKI*, int> points;
+	std::map<TicTacToeKI*, double> points;
 	AbstractEvolutionObject* createNewObject();
 	sf::RenderWindow window;
 	std::unique_ptr<TicTacToeDrawer> drawer;
@@ -50,6 +50,7 @@ public:
 	TicTacToe();
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	bool doSimulationStep();
+	bool doSimulationStep2();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
 	double getScore(AbstractEvolutionObject* object);

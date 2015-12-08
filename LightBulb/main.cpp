@@ -1657,18 +1657,20 @@ void doTicTacToeTest()
 {
 
 	TicTacToe ticTacToe;
+	ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 400, false));
+	options.exitConditions.push_back(new RateDifferenceCondition(0.00001, 100));
 	options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(1000));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));
-	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
+	options.selectionCommands.push_back(new BestSelectionCommand(40, true));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new StochasticUniversalSamplingSelector(), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false));
 	//options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
 	options.world = &ticTacToe;
+	
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule learningRule(options);
@@ -1700,8 +1702,8 @@ void doTicTacToeTest()
 
     sf::RenderWindow window(sf::VideoMode(1300, 1000), "LightBulb!");
 
-    TicTacToeKI* bestAI = ticTacToe.getBestAIs()->back();
-
+	TicTacToeKI* bestAI = static_cast<TicTacToeKI*>(ticTacToe.getHighscoreList()->front().second);// ticTacToe.getBestAIs()->back();
+	
 
 
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
@@ -1709,8 +1711,8 @@ void doTicTacToeTest()
 	networkTopologyDrawerOptions.height = 1000;
 	networkTopologyDrawerOptions.posX = 600;
 	networkTopologyDrawerOptions.network = bestAI->getNeuralNetwork();
-	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
-	networkTopologyDrawer.refresh();
+	//LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	//networkTopologyDrawer.refresh();
 
 
     ticTacToe.startNewGame(1);
