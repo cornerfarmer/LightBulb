@@ -51,6 +51,9 @@
     <Filter Include="Quelldateien\Diagnostic">
       <UniqueIdentifier>{25f6bd5b-190a-4df7-89a4-b724b574863d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Lib">
+      <UniqueIdentifier>{fa473da5-8599-43ae-9307-499eb1d3d951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
@@ -512,6 +515,12 @@
     <ClInclude Include="Function\XorShfGenerator.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="Function\ZigguratGenerator.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\ziggurat.hpp">
+      <Filter>Quelldateien\Lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -966,6 +975,12 @@
     </ClCompile>
     <ClCompile Include="Function\XorShfGenerator.cpp">
       <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ZigguratGenerator.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\ziggurat.cpp">
+      <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
