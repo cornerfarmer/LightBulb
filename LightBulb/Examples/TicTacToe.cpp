@@ -67,18 +67,7 @@ void TicTacToe::setDebugOutput(bool debugOutput_)
 	debugOutput = debugOutput_;
 }
 
-
 bool TicTacToe::doSimulationStep()
-{
-	points.clear();
-	for (auto ki = objects.begin(); ki != objects.end(); ki++)
-	{
-		points[static_cast<TicTacToeKI*>(*ki)] = rateKI(static_cast<TicTacToeKI*>(*ki));
-	}
-	return false;
-}
-
-bool TicTacToe::doSimulationStep2()
 {	
 	int ties = 0;
 	int firstWon = 0;
@@ -100,7 +89,7 @@ bool TicTacToe::doSimulationStep2()
 			{
 				points[static_cast<TicTacToeKI*>(*ki)] = -800 * maxDistance / std::max(0.0001, distance);
 				duplicates++;
-				goto nextKI;
+				goto nextKI; 
 			}
 		}
 
@@ -180,10 +169,13 @@ bool TicTacToe::doSimulationStep2()
 			if (lastBestAICount == bestAIs.size())
 				maxDistanceShrinkFactor *= 2;
 			else
-				maxDistanceShrinkFactor /= 2;
+				maxDistanceShrinkFactor = 10;
 			
 			maxDistanceShrinkFactor = std::max(10.0, maxDistanceShrinkFactor);
+			maxDistanceShrinkFactor = std::min(10000.0, maxDistanceShrinkFactor);
 			currentResetGenerationCount += 1;
+			if (maxDistance == 0)
+				currentResetGenerationCount += 100;
 			maxDistance -= maxDistanceShrinkFactor;
 			maxDistance = std::max(0, maxDistance);
 			if (maxDistance == 0)

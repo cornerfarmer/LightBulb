@@ -8,7 +8,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "Function/XorShfGenerator.hpp"
+#include "Function/ZigguratGenerator.hpp"
 
 // Forward declarations
 class AbstractEvolutionObject;
@@ -17,15 +17,13 @@ class AbstractEvolutionObject;
 class MutationAlgorithm : public AbstractMutationAlgorithm
 {
 private:
-	// Random generator
-	XorShfGenerator generator;
-	std::normal_distribution<double> distribution;
 	// This factor influences the change speed of mutationStrengths
 	double mutationStrengthChangeSpeed;
 	// The absolute minimum of a mutationStrength value
 	double mutationStrengthMin;
 	// The absolute maximum of a mutationStrength value
 	double mutationStrengthMax;
+	ZigguratGenerator generator;
 public:
 	MutationAlgorithm(double mutationStrengthChangeSpeed_);
 	void setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_);

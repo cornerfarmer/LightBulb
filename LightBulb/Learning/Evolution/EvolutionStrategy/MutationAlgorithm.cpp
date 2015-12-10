@@ -12,7 +12,6 @@
 MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_)
 {
 	// Initialize the normal distribution with mean 0 and variance 1
-	distribution = std::normal_distribution<double>(0, 1);
 	mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
 	// Initialize the mutation strength boundaries (TODO: Make them variable)
 	mutationStrengthMax = 50;
@@ -43,7 +42,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	for (auto mutationStrengthValue = mutationStrength->begin(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
 	{
 		// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
-		*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * distribution(generator));
+		*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * ZigguratGenerator::next());
 		// Make sure the values stays inside our boundaries
 		*mutationStrengthValue = ( *mutationStrengthValue < 0 ? -1 : 1 ) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		// Change the mutation direction randomly (TODO: Make this variable)
@@ -60,7 +59,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 		for (auto weight = neuron->begin(); weight != neuron->end(); weight++)
 		{
 			// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
-			double weightAdd = (*mutationStrength)[mutationStrengthIndex] * distribution(generator);
+			double weightAdd = (*mutationStrength)[mutationStrengthIndex] * ZigguratGenerator::next();
 			*weight += weightAdd;
 			mutationStrengthIndex++;
 		}
