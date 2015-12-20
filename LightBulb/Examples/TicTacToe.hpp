@@ -24,7 +24,8 @@ class TicTacToe : public AbstractSimpleEvolutionWorld
 {
 protected:
 	std::vector<std::vector<int>> fields;	
-	std::map<TicTacToeKI*, double> points;
+	std::map<TicTacToeKI*, double> ties;
+	std::map<TicTacToeKI*, double> defeats;
 	AbstractEvolutionObject* createNewObject();
 	sf::RenderWindow window;
 	std::unique_ptr<TicTacToeDrawer> drawer;
@@ -46,6 +47,9 @@ protected:
 	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
 	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties);
 	bool tieMode;
+	bool printCurrentBestAI;
+	int variationStart;
+	void stopCurrentVariation();
 public:
 	TicTacToe();
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);

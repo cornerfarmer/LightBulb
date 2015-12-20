@@ -1654,14 +1654,13 @@ void doEvolutionTest()
 }
 
 void doTicTacToeTest()
-{
-
+{	
 	TicTacToe ticTacToe;
 	//ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 400, false));
+	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 800, false));
 	options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(100000));
 	options.creationCommands.push_back(new ConstantCreationCommand(80));
 	options.reuseCommands.push_back(new BestReuseCommand(1));

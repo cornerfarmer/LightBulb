@@ -99,8 +99,11 @@ LearningResult EvolutionLearningRule::doLearning()
 			}
 
 			// 2. Step: Execute the simulation and try to rate the evolution objects
-			if (options->world->doSimulationStep())
+			if (options->world->doSimulationStep()) {
+				std::cout << generation << " generations" << std::endl;
+				generation = 0;
 				continue;
+			}
 
 			// Extract all current objects ordered by their score
 			std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
@@ -168,6 +171,8 @@ LearningResult EvolutionLearningRule::doLearning()
 
 			// Continue with the next generation
 			generation++;
+
+		
 		}
 	
 		// Extract the best score from the last try
