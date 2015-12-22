@@ -101,7 +101,7 @@
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
-    <ClInclude Include="Learning\Evolution\BestAICountCondition.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractTournamentWorld.hpp" />
     <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp" />
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp" />
@@ -256,7 +256,7 @@
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
-    <ClCompile Include="Learning\Evolution\BestAICountCondition.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractTournamentWorld.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp" />
