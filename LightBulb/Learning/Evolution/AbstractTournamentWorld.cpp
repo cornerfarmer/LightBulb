@@ -22,9 +22,10 @@ bool AbstractTournamentWorld::doSimulationStep()
 		currentLevelIndex++;
 	}
 
-	if (currentLevel->size() > 0)
+	if (currentLevel->size() > 0) {
 		fitnessValues[currentLevel->front()] = currentLevelIndex;
-
+		rateKI(currentLevel->front());
+	}
 	return false;
 }
 

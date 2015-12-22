@@ -125,7 +125,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 			window.display();
 		}
 
-		if (illegalMove)
+		if (hasGameFinished())
 			break;
 	}
 
@@ -140,7 +140,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 	}
 	else
 	{
-		return whoHasWon();
+		return 0;
 	}
 }
 
@@ -149,68 +149,72 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 	illegalMove = illegalMove_;
 }
 
-int TicTacToe::rateKI(TicTacToeKI* rateKI)
+void TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 {
-	//TicTacToeKI* bestKI = dynamic_cast<TicTacToeKI*>(bestAIs.back());
-	
+
 	int wins = 0;
 	int possibleGames = 9 * 7 * 5 * 3;
-	std::array<int, 4> decisionNr = {0,0,0,0};
+	possibleGames += 8 * 6 * 4 * 2;
 
-	bool decisionCombinationsLeft = true;
-
-	while (decisionCombinationsLeft)
+	for (int b = 0; b < 2; b++)
 	{
-		rateKI->resetNN();
-		startNewGame(-1);
-		
-		int i;
-		for (i = 0; i < 9; i++)
+		std::vector<int> decisionNr(b == 0 ? 4 : 4, 0);
+
+		bool decisionCombinationsLeft = true;
+
+		while (decisionCombinationsLeft)
 		{
-			if (i % 2 == 1)
+			rateKI->resetNN();
+			startNewGame(b == 0 ? -1 : 1);
+
+			int i;
+			for (i = 0; i < 9; i++)
 			{
-				rateKI->doNNCalculation();
-			}
-			else
-			{ 
-				int x, y;
-				int freeFieldNr = -1;
-				for (y = 0; y < 3; y++)
+				if (i % 2 == 1 - b)
 				{
-					for (x = 0; x < 3; x++)
-					{
-						if (isFree(x, y))
-							freeFieldNr++;
-						if ((i == 8 && freeFieldNr == 0) || (i!=8 &&freeFieldNr == decisionNr[i / 2]))
-							goto setField;
-					}
+					rateKI->doNNCalculation();
 				}
-			setField:
-				setField(x, y);
+				else
+				{
+					int x, y;
+					int freeFieldNr = -1;
+					for (y = 0; y < 3; y++)
+					{
+						for (x = 0; x < 3; x++)
+						{
+							if (isFree(x, y))
+								freeFieldNr++;
+							if ((i == 8 && freeFieldNr == 0) || (i != 8 && freeFieldNr == decisionNr[i / 2]))
+								goto setField;
+						}
+					}
+				setField:
+					setField(x, y);
+				}
+				if (hasGameFinished())
+					break;
 			}
-			if (illegalMove)
-				break;
+
+			if (currentPlayer == -1 || i > 8)
+				wins++;
+
+			decisionCombinationsLeft = !nextDecisionCombination(decisionNr, b);
 		}
-
-		if (currentPlayer == -1 || i > 8)
-			wins++;
-
-		decisionCombinationsLeft = !nextDecisionCombination(decisionNr);
 	}
 
 	if (debugOutput)
 		std::cout << "Best KI: " << wins << "/" << possibleGames << std::endl;
-	return wins;
+	
 }
 
-bool TicTacToe::nextDecisionCombination(std::array<int, 4>& decisionNr, int level)
+bool TicTacToe::nextDecisionCombination(std::vector<int>& decisionNr, int b, int level)
 {
 	bool changeAtThisLevel = true;
 	if (level < 3)
-		changeAtThisLevel = nextDecisionCombination(decisionNr, level + 1);
+		changeAtThisLevel = nextDecisionCombination(decisionNr, b, level + 1);
 	if (changeAtThisLevel) {
 		decisionNr[level]++;
-		if (decisionNr[level] >= (4 - level) * 2 + 1)
+		if ((decisionNr[level] >= (4 - level) * 2 + 1 && b == 0) || (decisionNr[level] >= (4 - level) * 2 && b == 1))
 		{
 			decisionNr[level] = 0;
 			return true;

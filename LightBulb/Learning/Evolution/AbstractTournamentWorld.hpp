@@ -21,10 +21,12 @@ private:
 	void processLevel();	
 protected:
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
+	
 public:	
 	AbstractTournamentWorld();
 	bool doSimulationStep(); 
 	double getScore(AbstractEvolutionObject* object);
+	virtual void rateKI(AbstractEvolutionObject* rateKI) {};
 };
 
 #endif
