@@ -17,7 +17,7 @@ void FitnessSharingFitnessFunction::execute(std::vector<std::pair<double, Abstra
 {
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
-		double sharingValue = 0;
+		double sharingValue = 1;
 
 		for (auto otherEntry = highscore->begin(); otherEntry != highscore->end(); otherEntry++)
 		{

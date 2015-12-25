@@ -36,7 +36,7 @@ TicTacToe::TicTacToe()
 
 bool TicTacToe::hasGameFinished()
 {
-	return (illegalMove);// || whoHasWon() != 0);
+	return (illegalMove || whoHasWon() != 0);
 }
 
 int TicTacToe::getFieldValue(int x, int y)
@@ -140,7 +140,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 	}
 	else
 	{
-		return 0;
+		return whoHasWon();
 	}
 }
 
@@ -195,7 +195,7 @@ void TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 					break;
 			}
 
-			if (currentPlayer == -1 || i > 8)
+			if ((currentPlayer == -1 && illegalMove) || (whoHasWon() == 1) || i>8)
 				wins++;
 
 			decisionCombinationsLeft = !nextDecisionCombination(decisionNr, b);

@@ -93,6 +93,7 @@
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 #include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
+#include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1660,12 +1661,12 @@ void doTicTacToeTest()
 	EvolutionLearningRuleOptions options;
 
 	options.creationCommands.push_back(new ConstantCreationCommand(256));
-	options.exitConditions.push_back(new RateDifferenceCondition(1000, 3000));
-	options.reuseCommands.push_back(new BestReuseCommand(1));
+	options.exitConditions.push_back(new RateDifferenceCondition(1000, 8000));
+	options.reuseCommands.push_back(new BestReuseCommand(256));
 	options.selectionCommands.push_back(new BestSelectionCommand(256, false));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RemainderStochasticSamplingSelector(), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0.3, false));
-	//options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
+	options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(1000));
 	options.world = &ticTacToe;
 	
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));

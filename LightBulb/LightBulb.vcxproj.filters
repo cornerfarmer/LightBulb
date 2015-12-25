@@ -521,6 +521,9 @@
     <ClInclude Include="Learning\Evolution\AbstractTournamentWorld.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -980,6 +983,9 @@
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractTournamentWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>

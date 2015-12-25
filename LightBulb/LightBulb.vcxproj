@@ -112,6 +112,7 @@
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\RandomSelector.hpp" />
     <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp" />
@@ -267,6 +268,7 @@
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\RandomSelector.cpp" />
     <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp" />
