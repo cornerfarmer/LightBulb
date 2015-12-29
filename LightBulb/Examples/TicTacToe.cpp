@@ -72,6 +72,7 @@ int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionOb
 	int result = 0;
 	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), false);
 	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), true);
+	//std::cout << result;
 	return result;
 }
 

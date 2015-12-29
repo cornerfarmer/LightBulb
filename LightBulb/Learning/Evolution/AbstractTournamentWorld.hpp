@@ -13,11 +13,15 @@
 
 class AbstractTournamentWorld : public AbstractSimpleEvolutionWorld
 {
-private:	
+private:
+	std::unique_ptr<std::vector<AbstractEvolutionObject*>> cachedObjects;
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> currentLevel;
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> nextLevel;
 	std::map<AbstractEvolutionObject*, int> fitnessValues;
 	int currentLevelIndex;
+	int cacheCounter;
+	int cacheIndex;
+	int cacheSize;
 	void processLevel();	
 protected:
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
