@@ -55,7 +55,7 @@ public:
 	void setField(int x, int y);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
-	void rateKI(AbstractEvolutionObject* rateKI);
+	int rateKI(AbstractEvolutionObject* rateKI);
 	void setIllegalMove(bool illegalMove_);
 	void startNewGame(int firstPlayer);
 	void setDebugOutput(bool debugOutput_);

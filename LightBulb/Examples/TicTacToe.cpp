@@ -90,6 +90,8 @@ void TicTacToe::initializeForLearning()
 
 int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlayerStarts)
 {
+	int pointsAI1 = 0;
+	int pointsAI2 = 0;
 	ai2->resetNN();
 	ai1->resetNN();
 
@@ -104,10 +106,14 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 		if (i % 2 == secondPlayerStarts)
 		{
 			ai1->doNNCalculation();
+			if (!illegalMove)
+				pointsAI1++;
 		}
 		else
 		{
 			ai2->doNNCalculation();
+			if (!illegalMove)
+				pointsAI2++;
 		}
 
 		sf::Event event;
@@ -132,17 +138,21 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 
 	if (illegalMove)
 	{
-		if (currentPlayer == 1) {
-			return -1;
-		}
-		else {
-			return 1;
-		}
+		
 	}
 	else
 	{
-		return whoHasWon();
+		int w = whoHasWon();
+		if (w == 0) {
+			pointsAI1 += 5;
+			pointsAI2 += 5;
+		} else if (w == 1) {
+			pointsAI1 += 20;
+		} else if (w == -1) {
+			pointsAI2 += 20;
+		}
 	}
+	return pointsAI1 - pointsAI2;
 }
 
 void TicTacToe::setIllegalMove(bool illegalMove_)
@@ -150,7 +160,7 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 	illegalMove = illegalMove_;
 }
 
-void TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
+int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 {
 
 	int wins = 0;
@@ -205,7 +215,7 @@ void TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 
 	if (debugOutput)
 		std::cout << "Best KI: " << wins << "/" << possibleGames << std::endl;
-	
+	return wins;
 }
 
 bool TicTacToe::nextDecisionCombination(std::vector<int>& decisionNr, int b, int level)
@@ -306,4 +316,5 @@ void TicTacToe::resetWorld()
 		}
 	}
 }
+
 

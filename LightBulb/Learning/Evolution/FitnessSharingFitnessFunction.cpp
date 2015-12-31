@@ -15,18 +15,22 @@ FitnessSharingFitnessFunction::FitnessSharingFitnessFunction(double dissimilarit
 
 void FitnessSharingFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 {
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	if (dissimilarityThreshold > 0)
 	{
-		double sharingValue = 1;
-
-		for (auto otherEntry = highscore->begin(); otherEntry != highscore->end(); otherEntry++)
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
-			if (*otherEntry != *entry)
-			{
-				sharingValue += std::max(0.0, 1 - pow(entry->second->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*otherEntry->second->getNeuralNetwork()->getNetworkTopology()), exponent) / dissimilarityThreshold);
-			}
-		}
+			double sharingValue = 1;
 
-		entry->first = entry->first / sharingValue;
+			for (auto otherEntry = highscore->begin(); otherEntry != highscore->end(); otherEntry++)
+			{
+				if (*otherEntry != *entry)
+				{
+					sharingValue += std::max(0.0, 1 - pow(entry->second->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*otherEntry->second->getNeuralNetwork()->getNetworkTopology()), exponent) / dissimilarityThreshold);
+				}
+			}
+
+			entry->first = entry->first / sharingValue;
+		}
+		dissimilarityThreshold -= 0.1;
 	}
 }

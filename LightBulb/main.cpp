@@ -1664,9 +1664,9 @@ void doTicTacToeTest()
 	options.exitConditions.push_back(new RateDifferenceCondition(1000, 150000));
 	options.reuseCommands.push_back(new BestReuseCommand(32));
 	options.selectionCommands.push_back(new BestSelectionCommand(256, false));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RemainderStochasticSamplingSelector(), 1.8, false));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0.3, false));
-	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(1000));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3, false));
+	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
 	options.world = &ticTacToe;
 	
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));

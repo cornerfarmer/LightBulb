@@ -30,7 +30,7 @@ public:
 	AbstractTournamentWorld();
 	bool doSimulationStep(); 
 	double getScore(AbstractEvolutionObject* object);
-	virtual void rateKI(AbstractEvolutionObject* rateKI) {};
+	virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; };
 };
 
 #endif
