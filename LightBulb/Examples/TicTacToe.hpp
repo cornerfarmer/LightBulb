@@ -43,8 +43,8 @@ protected:
 	int lastBestAICount;
 	int generationsSincaLastBestAI;
 	double lastBestScore;
-	bool nextDecisionCombination(std::array<int, 4>& decisionNr, int level = 0);
-	void simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties);
+	bool nextDecisionCombination(std::vector<int>& decisionNr, int b, int level = 0);
+	bool simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties);
 	bool tieMode;
 public:
 	TicTacToe();
@@ -55,7 +55,7 @@ public:
 	double getScore(AbstractEvolutionObject* object);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
-	int rateKI(TicTacToeKI* rateKI);
+	int rateKI(AbstractEvolutionObject* rateKI);
 	void setIllegalMove(bool illegalMove_);
 	std::vector<TicTacToeKI*>* getBestAIs();
 	void startNewGame(int firstPlayer);
