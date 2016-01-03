@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 
 // Include
-#include "Learning/Evolution/AbstractTournamentWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "Examples/TicTacToeDrawer.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 
@@ -20,7 +20,7 @@ class AbstractEvolutionObject;
 class TicTacToeKI;
 class AbstractTile;
 
-class TicTacToe : public AbstractTournamentWorld
+class TicTacToe : public AbstractCoevolutionWorld
 {
 protected:
 	std::vector<std::vector<int>> fields;	
@@ -47,9 +47,8 @@ protected:
 	bool tieMode;
 	bool printCurrentBestAI;
 	int variationStart;
-	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2);
 public:
-	TicTacToe();
+	TicTacToe(AbstractCombiningStrategy* combiningStrategy_);
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
@@ -61,6 +60,7 @@ public:
 	void setDebugOutput(bool debugOutput_);
 	void initializeForLearning();
 	bool hasGameFinished();
+	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2);
 
 };
 

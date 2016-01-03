@@ -518,10 +518,25 @@
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractTournamentWorld.hpp">
+    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp">
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
   </ItemGroup>
@@ -982,10 +997,25 @@
     <ClCompile Include="Lib\ziggurat.cpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractTournamentWorld.cpp">
+    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp">
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>

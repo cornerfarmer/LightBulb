@@ -94,6 +94,9 @@
 #include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 #include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
 #include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
+#include "Learning/Evolution/TournamentCombiningStrategy.hpp"
+#include "Learning/Evolution/RoundRobinCombiningStrategy.hpp"
+#include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1655,7 +1658,7 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {	
-	TicTacToe ticTacToe;
+	TicTacToe ticTacToe(new RoundRobinCombiningStrategy(new ConstantCoevolutionFitnessFunction()));
 	//ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;

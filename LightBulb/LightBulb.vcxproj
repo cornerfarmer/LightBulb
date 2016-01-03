@@ -91,6 +91,9 @@
     <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
     <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\DeltaLearningRule.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp" />
@@ -101,7 +104,9 @@
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractTournamentWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
+    <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp" />
+    <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp" />
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp" />
@@ -247,6 +252,9 @@
     <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
     <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\DeltaLearningRule.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp" />
@@ -257,7 +265,9 @@
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractTournamentWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
+    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp" />
+    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp" />
