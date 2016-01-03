@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _CONSTANTCOEVOLUTIONFITNESSFUNCTION_H_
-#define _CONSTANTCOEVOLUTIONFITNESSFUNCTION_H_
+#ifndef _SHAREDCOEVOLUTIONFITNESSFUNCTION_H_
+#define _SHAREDCOEVOLUTIONFITNESSFUNCTION_H_
 
 // Library Includes
 
@@ -10,7 +10,7 @@
 
 // Forward declarations
 
-class ConstantCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
+class SharedCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
 {
 protected:
 public:

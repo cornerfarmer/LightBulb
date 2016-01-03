@@ -539,6 +539,9 @@
     <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -1016,6 +1019,9 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>

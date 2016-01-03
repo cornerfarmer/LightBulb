@@ -106,6 +106,7 @@
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp" />
+    <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp" />
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp" />
@@ -267,6 +268,7 @@
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp" />
+    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp" />
