@@ -16,8 +16,8 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 	return new TicTacToeKI(this);
 }
 
-TicTacToe::TicTacToe(AbstractCombiningStrategy* combiningStrategy_)
-	: AbstractCoevolutionWorld(combiningStrategy_)
+TicTacToe::TicTacToe(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_)
+	: AbstractCoevolutionWorld(combiningStrategy_, fitnessFunction_, hallOfFameAlgorithm_)
 {
 	fields.resize(3);
 	for (int x = 0; x < fields.size(); x++)

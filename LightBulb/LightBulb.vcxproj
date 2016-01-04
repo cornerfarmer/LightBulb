@@ -96,6 +96,7 @@
     <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
+    <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp" />
@@ -258,6 +260,7 @@
     <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractHallOfFameAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp" />
@@ -267,6 +270,7 @@
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
+    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp" />

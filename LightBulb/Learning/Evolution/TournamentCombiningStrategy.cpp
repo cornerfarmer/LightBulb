@@ -6,8 +6,7 @@
 #include <algorithm>
 #include <iostream>
 
-TournamentCombiningStrategy::TournamentCombiningStrategy(AbstractCoevolutionFitnessFunction* fitnessFunction_)
-	:AbstractCombiningStrategy(fitnessFunction_)
+TournamentCombiningStrategy::TournamentCombiningStrategy()
 {
 	currentLevel.reset(new std::vector<AbstractEvolutionObject*>());
 	nextLevel.reset(new std::vector<AbstractEvolutionObject*>());

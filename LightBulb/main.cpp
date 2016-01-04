@@ -98,6 +98,7 @@
 #include "Learning/Evolution/RoundRobinCombiningStrategy.hpp"
 #include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
 #include "Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
+#include "Learning/Evolution/FullHallOfFameAlgorithm.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1659,7 +1660,7 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {	
-	TicTacToe ticTacToe(new RoundRobinCombiningStrategy(new SharedCoevolutionFitnessFunction()));
+	TicTacToe ticTacToe(new RoundRobinCombiningStrategy(), new SharedCoevolutionFitnessFunction(), new FullHallOfFameAlgorithm());
 	//ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;

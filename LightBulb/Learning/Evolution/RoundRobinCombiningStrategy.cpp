@@ -6,11 +6,6 @@
 #include <algorithm>
 #include <iostream>
 
-RoundRobinCombiningStrategy::RoundRobinCombiningStrategy(AbstractCoevolutionFitnessFunction* fitnessFunction_)
-	:AbstractCombiningStrategy(fitnessFunction_)
-{
-}
-
 void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* world)
 {
 	for (auto firstPlayer = world->getEvolutionObjects()->begin(); firstPlayer != world->getEvolutionObjects()->end(); firstPlayer++)

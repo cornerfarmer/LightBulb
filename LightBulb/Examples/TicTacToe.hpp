@@ -48,7 +48,7 @@ protected:
 	bool printCurrentBestAI;
 	int variationStart;
 public:
-	TicTacToe(AbstractCombiningStrategy* combiningStrategy_);
+	TicTacToe(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_ = NULL);
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);

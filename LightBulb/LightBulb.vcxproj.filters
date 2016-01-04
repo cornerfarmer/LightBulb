@@ -542,6 +542,12 @@
     <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -1022,6 +1028,12 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>

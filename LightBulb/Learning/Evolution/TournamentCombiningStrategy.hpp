@@ -21,7 +21,7 @@ private:
 	void processLevel(AbstractCoevolutionWorld* world);
 	void combine(AbstractCoevolutionWorld* world);
 public:	
-	TournamentCombiningStrategy(AbstractCoevolutionFitnessFunction* fitnessFunction_);	
+	TournamentCombiningStrategy();	
 };
 
 #endif

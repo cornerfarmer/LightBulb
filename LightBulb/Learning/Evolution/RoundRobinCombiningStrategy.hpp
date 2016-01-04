@@ -17,7 +17,6 @@ class RoundRobinCombiningStrategy : public AbstractCombiningStrategy
 private:
 	void combine(AbstractCoevolutionWorld* world);
 public:
-	RoundRobinCombiningStrategy(AbstractCoevolutionFitnessFunction* fitnessFunction_);
 };
 
 #endif
