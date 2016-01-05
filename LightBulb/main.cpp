@@ -99,6 +99,8 @@
 #include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
 #include "Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
 #include "Learning/Evolution/FullHallOfFameAlgorithm.hpp"
+#include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
+#include "Learning/Evolution/RandomCombiningStrategy.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1660,15 +1662,15 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {	
-	TicTacToe ticTacToe(new RoundRobinCombiningStrategy(), new SharedCoevolutionFitnessFunction(), new FullHallOfFameAlgorithm());
+	TicTacToe ticTacToe(new RandomCombiningStrategy(100), new SharedCoevolutionFitnessFunction(), new RandomHallOfFameAlgorithm(100));
 	//ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;
 
-	options.creationCommands.push_back(new ConstantCreationCommand(600));
+	options.creationCommands.push_back(new ConstantCreationCommand(1000));
 	options.exitConditions.push_back(new RateDifferenceCondition(1000, 150000));
 	options.reuseCommands.push_back(new BestReuseCommand(32));
-	options.selectionCommands.push_back(new BestSelectionCommand(256, false));
+	options.selectionCommands.push_back(new BestSelectionCommand(1000, false));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3, false));
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));

@@ -107,6 +107,8 @@
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp" />
+    <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp" />
+    <ClInclude Include="Learning\Evolution\RandomHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp" />
@@ -271,6 +273,8 @@
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp" />
+    <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp" />
+    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp" />
