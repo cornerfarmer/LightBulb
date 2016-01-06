@@ -13,29 +13,30 @@ TournamentCombiningStrategy::TournamentCombiningStrategy()
 	cachedObjects.reset(new std::vector<AbstractEvolutionObject*>());
 }
 
-void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld* world)
+void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		*currentLevel = *world->getEvolutionObjects();
+		// TODO: Try to make it work with two populations
+		*currentLevel = *firstObjects;
 		nextLevel->clear();
 
 		while (currentLevel->size() != 1) {
-			processLevel(world);
+			processLevel(simulationWorld);
 			nextLevel.swap(currentLevel);
 		}
 	}
 }
 
 
-void TournamentCombiningStrategy::processLevel(AbstractCoevolutionWorld* world)
+void TournamentCombiningStrategy::processLevel(AbstractCoevolutionWorld* simulationWorld)
 {
 	nextLevel->clear();
 	std::random_shuffle(currentLevel->begin(), currentLevel->end());
 
 	for (int i = 0; i < currentLevel->size(); i+=2) {
 		if (i < currentLevel->size() - 1) {
-			int result = world->compareObjects(currentLevel->at(i), currentLevel->at(i + 1));
+			int result = simulationWorld->compareObjects(currentLevel->at(i), currentLevel->at(i + 1));
 			if (result == 0) {
 				result = (rand() > RAND_MAX / 2 ? 1 : -1);
 			}

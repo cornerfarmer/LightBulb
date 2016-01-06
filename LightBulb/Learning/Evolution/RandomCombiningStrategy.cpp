@@ -5,16 +5,16 @@
 //Library includes
 #include <algorithm>
 
-void RandomCombiningStrategy::combine(AbstractCoevolutionWorld* world)
+void RandomCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 {
-	std::vector<AbstractEvolutionObject*> randomOpponents = *world->getEvolutionObjects();
+	std::vector<AbstractEvolutionObject*> randomOpponents = *secondObjects;
 	std::random_shuffle(randomOpponents.begin(), randomOpponents.end());
 
-	for (auto firstPlayer = world->getEvolutionObjects()->begin(); firstPlayer != world->getEvolutionObjects()->end(); firstPlayer++)
+	for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
 	{
 		for (int opponentIndex = 0; opponentIndex < amountOfCompetitionsPerObject && opponentIndex < randomOpponents.size(); opponentIndex++)
 		{
-			int result = world->compareObjects(*firstPlayer, randomOpponents[opponentIndex]);
+			int result = simulationWorld->compareObjects(*firstPlayer, randomOpponents[opponentIndex]);
 			if (result != 0)
 				setResult(*firstPlayer, randomOpponents[opponentIndex], result > 0);
 		}

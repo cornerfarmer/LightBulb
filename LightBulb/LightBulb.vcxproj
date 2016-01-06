@@ -105,6 +105,7 @@
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
+    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp" />
@@ -271,6 +272,7 @@
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
+    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp" />

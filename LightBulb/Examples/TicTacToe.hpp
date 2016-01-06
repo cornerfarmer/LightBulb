@@ -47,8 +47,9 @@ protected:
 	bool tieMode;
 	bool printCurrentBestAI;
 	int variationStart;
+	bool isParasiteWorld;
 public:
-	TicTacToe(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_ = NULL);
+	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_ = NULL);
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
@@ -61,6 +62,7 @@ public:
 	void initializeForLearning();
 	bool hasGameFinished();
 	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2);
+
 
 };
 

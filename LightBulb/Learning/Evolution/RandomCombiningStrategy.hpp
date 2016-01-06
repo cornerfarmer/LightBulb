@@ -14,7 +14,7 @@ class RandomCombiningStrategy : public AbstractCombiningStrategy
 {
 private:
 	int amountOfCompetitionsPerObject;
-	void combine(AbstractCoevolutionWorld* world);
+	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:
 	RandomCombiningStrategy(int amountOfCompetitionsPerObject_);
 };

@@ -6,15 +6,15 @@
 #include <algorithm>
 #include <iostream>
 
-void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* world)
+void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 {
-	for (auto firstPlayer = world->getEvolutionObjects()->begin(); firstPlayer != world->getEvolutionObjects()->end(); firstPlayer++)
+	for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
 	{
-		for (auto secondPlayer = world->getEvolutionObjects()->begin(); secondPlayer != world->getEvolutionObjects()->end(); secondPlayer++)
+		for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
 		{
 			if (*firstPlayer != *secondPlayer)
 			{
-				int result = world->compareObjects(*firstPlayer, *secondPlayer);
+				int result = simulationWorld->compareObjects(*firstPlayer, *secondPlayer);
 				if (result != 0)
 					setResult(*firstPlayer, *secondPlayer, result > 0);
 			}

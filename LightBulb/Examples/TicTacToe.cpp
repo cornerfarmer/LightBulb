@@ -16,9 +16,10 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 	return new TicTacToeKI(this);
 }
 
-TicTacToe::TicTacToe(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_)
+TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_)
 	: AbstractCoevolutionWorld(combiningStrategy_, fitnessFunction_, hallOfFameAlgorithm_)
 {
+	isParasiteWorld = isParasiteWorld_;
 	fields.resize(3);
 	for (int x = 0; x < fields.size(); x++)
 	{
@@ -73,12 +74,25 @@ int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionOb
 	int result = 0;
 	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), false);
 	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), true);
+	
 	//std::cout << result;
 	static int counter = 0;
 	counter++;
 	if (counter % 1000000 == 0)
 		std::cout << counter << ". calculation" << std::endl;
-	return result;
+
+	if (isParasiteWorld) {
+		if (result >= 0)
+			return 1;
+		else
+			return -1;
+	}
+	else {
+		if (result == 2)
+			return 1;
+		else
+			return -1;
+	}
 }
 
 void TicTacToe::initializeForLearning()
@@ -99,6 +113,9 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 	int pointsAI2 = 0;
 	ai2->resetNN();
 	ai1->resetNN();
+
+	ai1->setTicTacToe(this);
+	ai2->setTicTacToe(this);
 
 	if (secondPlayerStarts == 0)
 		startNewGame(1);
@@ -140,24 +157,44 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 		if (hasGameFinished())
 			break;
 	}
+	static int il = 0;
+	static int wins = 0;
+	static int ties = 0;
+	static bool prevPW = false;
 
+	if (prevPW != isParasiteWorld)
+	{
+		std::cout << "il:" << il << " wins:" << wins << " ties:" << ties << std::endl;
+		il = 0;
+		wins = 0;
+		ties = 0;
+		prevPW = isParasiteWorld;
+	}
 	if (illegalMove)
 	{
-		
+		il++;
+		if (currentPlayer == 1)
+			return -1;
+		else
+			return 1;
 	}
 	else
 	{
 		int w = whoHasWon();
 		if (w == 0) {
-			pointsAI1 += 5;
-			pointsAI2 += 5;
+			ties++;
+			if (isParasiteWorld)
+				return -1;
+			else
+				return 1;
 		} else if (w == 1) {
-			pointsAI1 += 20;
+			wins++;
+			return 1;
 		} else if (w == -1) {
-			pointsAI2 += 20;
+			wins++;
+			return -1;
 		}
 	}
-	return pointsAI1 - pointsAI2;
 }
 
 void TicTacToe::setIllegalMove(bool illegalMove_)

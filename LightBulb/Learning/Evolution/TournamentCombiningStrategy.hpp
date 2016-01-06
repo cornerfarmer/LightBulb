@@ -19,7 +19,7 @@ private:
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> currentLevel;
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> nextLevel;
 	void processLevel(AbstractCoevolutionWorld* world);
-	void combine(AbstractCoevolutionWorld* world);
+	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:	
 	TournamentCombiningStrategy();	
 };

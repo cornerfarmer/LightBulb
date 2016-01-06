@@ -45,3 +45,8 @@ TicTacToeKI::~TicTacToeKI()
 {
 }
 
+
+void TicTacToeKI::setTicTacToe(TicTacToe* newTicTacToe)
+{
+	ticTacToe = newTicTacToe;
+}

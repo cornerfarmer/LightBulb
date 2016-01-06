@@ -47,11 +47,12 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 
 	if (enableDebugOutput)
 	{
+		int totalFitness = 0;
 		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
-			std::cout << std::fixed << std::setprecision(5) << entry->first << ", ";
-			break;
+			totalFitness += entry->first;
 		}
+		std::cout << std::fixed << std::setprecision(5) << totalFitness / highscore->size() << ", ";
 	}
 
 	if (enableDebugOutput)
