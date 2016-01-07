@@ -25,6 +25,7 @@ public:
 	AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = NULL);
 	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> execute(AbstractCoevolutionWorld* world);
 	void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
+	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* getPrevResults();
 };
 
 #endif

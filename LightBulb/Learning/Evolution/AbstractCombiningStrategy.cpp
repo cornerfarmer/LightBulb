@@ -27,3 +27,7 @@ void AbstractCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld* newSeco
 	secondWorld = newSecondWorld;
 }
 
+std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* AbstractCombiningStrategy::getPrevResults()
+{
+	return &results;
+}

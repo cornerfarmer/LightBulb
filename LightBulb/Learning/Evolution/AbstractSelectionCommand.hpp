@@ -20,7 +20,7 @@ public:
 	virtual ~AbstractSelectionCommand() {};
 	AbstractSelectionCommand(bool enableDebugOutput_);
 	// The command will delete all not-selected objects from the vector.
-	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects) = 0;
 };
 
 #endif

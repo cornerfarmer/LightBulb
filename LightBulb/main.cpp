@@ -102,6 +102,7 @@
 #include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
 #include "Learning/Evolution/RandomCombiningStrategy.hpp"
 #include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
+#include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1663,8 +1664,9 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {
-	AbstractCombiningStrategy* cs1 = new RandomCombiningStrategy(100);
-	AbstractCombiningStrategy* cs2 = new RandomCombiningStrategy(100);
+	SharedSamplingCombiningStrategy* cs1 = new SharedSamplingCombiningStrategy(100);
+	SharedSamplingCombiningStrategy* cs2 = new SharedSamplingCombiningStrategy(100, cs1);
+	cs1->setOtherCombiningStrategy(cs2);
 
 	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(100);
 	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(100);

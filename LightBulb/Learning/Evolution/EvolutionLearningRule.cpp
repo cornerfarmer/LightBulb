@@ -119,6 +119,47 @@ bool EvolutionLearningRule::doEvolutionStep()
 	if (options->enableDebugOutput)
 		std::cout << "------------- Generation " << generation << " -----------------" << std::endl;
 
+	if (options->world->getEvolutionObjects()->size()>0) {
+		// Extract all current objects ordered by their score
+		std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
+		// This vector will contain all objects for the next generation
+		std::vector<AbstractEvolutionObject*> newObjectVector;
+
+		// 5. Step: Reuse some of the evolution objects directly for the next generation
+		for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
+		{
+			(*reuseCommand)->execute(highscore.get(), &newObjectVector);
+		}
+
+		// 6. Step: Mutate some of the evolution objects and use them for the next generation
+		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
+		{
+			(*mutationCommand)->execute(highscore.get(), &newObjectVector);
+		}
+
+		// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
+		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
+		{
+			(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
+		}
+
+		// Replace all evolution objects from the last generation with the one from the next generation
+		options->world->setEvolutionObjects(newObjectVector);
+
+
+		std::map<AbstractEvolutionObject*, bool> alreadyDeleted;
+		// Make sure all not used objects are deleted properly
+		for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
+		{
+			if (!alreadyDeleted[oldObject->second])
+			{
+				delete(oldObject->second);
+				alreadyDeleted[oldObject->second] = true;
+			}
+		}
+	}
+
+
 	// 1. Step: Create new evolution objects
 	for (auto creationCommand = options->creationCommands.begin(); creationCommand != options->creationCommands.end(); creationCommand++)
 	{
@@ -133,9 +174,7 @@ bool EvolutionLearningRule::doEvolutionStep()
 	}
 
 	// Extract all current objects ordered by their score
-	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
-	// This vector will contain all objects for the next generation
-	std::vector<AbstractEvolutionObject*> newObjectVector;
+	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();	
 
 	bool exit = false;
 	// 3.Step: Go through all exit conditions
@@ -160,40 +199,7 @@ bool EvolutionLearningRule::doEvolutionStep()
 	// 4. Step: Select the relevant evolution objects (Other objects will be deleted)
 	for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 	{
-		(*selectionCommand)->execute(highscore.get());
-	}
-
-	// 5. Step: Reuse some of the evolution objects directly for the next generation
-	for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
-	{
-		(*reuseCommand)->execute(highscore.get(), &newObjectVector);
-	}
-
-	// 6. Step: Mutate some of the evolution objects and use them for the next generation
-	for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
-	{
-		(*mutationCommand)->execute(highscore.get(), &newObjectVector);
-	}
-
-	// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
-	for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
-	{
-		(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
-	}
-
-	// Replace all evolution objects from the last generation with the one from the next generation
-	options->world->setEvolutionObjects(newObjectVector);
-
-
-	std::map<AbstractEvolutionObject*, bool> alreadyDeleted;
-	// Make sure all not used objects are deleted properly
-	for (auto oldObject = highscore->begin(); oldObject != highscore->end(); oldObject++)
-	{
-		if (!alreadyDeleted[oldObject->second])
-		{
-			delete(oldObject->second);
-			alreadyDeleted[oldObject->second] = true;
-		}
+		(*selectionCommand)->execute(highscore.get(), options->world->getEvolutionObjects());
 	}
 
 	// Continue with the next generation
