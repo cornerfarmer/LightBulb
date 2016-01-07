@@ -5,27 +5,28 @@
 //Library includes
 #include <iostream>
 
-AbstractCoevolutionWorld::AbstractCoevolutionWorld(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_)
+AbstractCoevolutionWorld::AbstractCoevolutionWorld(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
 {
 	combiningStrategy.reset(combiningStrategy_);
 	fitnessFunction.reset(fitnessFunction_);
-	hallOfFameAlgorithm.reset(hallOfFameAlgorithm_);
+	hallOfFameToAddAlgorithm.reset(hallOfFameToAddAlgorithm_);
+	hallOfFameToChallengeAlgorithm.reset(hallOfFameToChallengeAlgorithm_);
 }
 
 bool AbstractCoevolutionWorld::doSimulationStep()
 {
 	auto results = combiningStrategy->execute(this);
 
-	if (hallOfFameAlgorithm)
-		hallOfFameAlgorithm->execute(this, results);
+	if (hallOfFameToChallengeAlgorithm)
+		hallOfFameToChallengeAlgorithm->execute(this, results);
 
 	fitnessValues = fitnessFunction->execute(results);
 
 	AbstractEvolutionObject* bestAI = getHighscoreList()->front().second;
 	rateKI(bestAI);
 
-	if (hallOfFameAlgorithm)
-		hallOfFameAlgorithm->addMember(bestAI);
+	if (hallOfFameToAddAlgorithm)
+		hallOfFameToAddAlgorithm->addMember(bestAI);
 
 	return false;
 }

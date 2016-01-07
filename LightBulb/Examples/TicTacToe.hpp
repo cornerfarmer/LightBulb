@@ -49,7 +49,7 @@ protected:
 	int variationStart;
 	bool isParasiteWorld;
 public:
-	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_ = NULL);
+	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);

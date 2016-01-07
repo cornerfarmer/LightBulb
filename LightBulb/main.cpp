@@ -1666,8 +1666,11 @@ void doTicTacToeTest()
 	AbstractCombiningStrategy* cs1 = new RandomCombiningStrategy(100);
 	AbstractCombiningStrategy* cs2 = new RandomCombiningStrategy(100);
 
-	TicTacToe ticTacToe1(false, cs1, new SharedCoevolutionFitnessFunction());
-	TicTacToe ticTacToe2(true, cs2, new SharedCoevolutionFitnessFunction());
+	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(100);
+	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(100);
+
+	TicTacToe ticTacToe1(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	TicTacToe ticTacToe2(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 	cs1->setSecondWorld(&ticTacToe2);
 	cs2->setSecondWorld(&ticTacToe1);
 

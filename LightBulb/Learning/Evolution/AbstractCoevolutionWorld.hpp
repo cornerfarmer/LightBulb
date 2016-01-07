@@ -17,12 +17,13 @@ class AbstractCoevolutionWorld : public AbstractSimpleEvolutionWorld
 {
 private:
 	std::unique_ptr<AbstractCoevolutionFitnessFunction> fitnessFunction;
-	std::unique_ptr<AbstractHallOfFameAlgorithm> hallOfFameAlgorithm;
+	std::unique_ptr<AbstractHallOfFameAlgorithm> hallOfFameToAddAlgorithm;
+	std::unique_ptr<AbstractHallOfFameAlgorithm> hallOfFameToChallengeAlgorithm;
 	std::unique_ptr<AbstractCombiningStrategy> combiningStrategy;
 	std::map<AbstractEvolutionObject*, double> fitnessValues;
 protected:
 public:
-	AbstractCoevolutionWorld(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameAlgorithm_ = NULL);
+	AbstractCoevolutionWorld(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	bool doSimulationStep(); 
 	double getScore(AbstractEvolutionObject* object);
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
