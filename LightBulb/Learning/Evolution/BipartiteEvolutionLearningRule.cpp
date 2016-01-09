@@ -16,11 +16,13 @@ LearningResult BipartiteEvolutionLearningRule::doLearning()
 
 	bool stopLearning = false;
 	while (!stopLearning) {
-		stopLearning = true;
+		stopLearning = false;
 		std::cout << "lr1: ";
-		stopLearning &= learningRule1->doEvolutionStep();
+		stopLearning |= learningRule1->doEvolutionStep();
+		if (stopLearning)
+			break;
 		std::cout << "lr2: ";
-		stopLearning &= learningRule2->doEvolutionStep();
+		stopLearning |= learningRule2->doEvolutionStep();
 	}
 	LearningResult result;
 	return result;

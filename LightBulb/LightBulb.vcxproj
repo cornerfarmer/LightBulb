@@ -108,6 +108,7 @@
     <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp" />
     <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp" />
+    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp" />
     <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp" />
     <ClInclude Include="Learning\Evolution\RandomHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp" />
@@ -276,6 +277,7 @@
     <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp" />
+    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp" />
     <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp" />
     <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp" />

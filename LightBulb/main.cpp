@@ -103,6 +103,7 @@
 #include "Learning/Evolution/RandomCombiningStrategy.hpp"
 #include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
 #include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "Learning/Evolution/PerfectObjectFoundCondition.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1681,7 +1682,7 @@ void doTicTacToeTest()
 	EvolutionLearningRuleOptions options;
 
 	options.creationCommands.push_back(new ConstantCreationCommand(500));
-	options.exitConditions.push_back(new RateDifferenceCondition(1000, 150000));
+	options.exitConditions.push_back(new PerfectObjectFoundCondition(2, cs2));
 	options.reuseCommands.push_back(new BestReuseCommand(16));
 	options.selectionCommands.push_back(new BestSelectionCommand(500, true));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
@@ -1738,6 +1739,7 @@ void doTicTacToeTest()
 
     ticTacToe1.startNewGame(1);
     bestAI->resetNN();
+	bestAI->setTicTacToe(&ticTacToe1);
 	while (window.isOpen())
     {
         sf::Event event;

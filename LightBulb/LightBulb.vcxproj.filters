@@ -560,6 +560,9 @@
     <ClInclude Include="Learning\Evolution\SharedSamplingCombiningStrategy.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -1058,6 +1061,9 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
   </ItemGroup>
