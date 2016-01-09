@@ -26,6 +26,8 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	}
 	options.enableShortcuts = true;
 	options.neuronsPerLayerCount.push_back(inputDimension);
+	options.neuronsPerLayerCount.push_back(10);
+	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(outputDimension);
 	options.activationFunction = new BinaryFunction();
 	options.inputFunction = new WeightedSumFunction();

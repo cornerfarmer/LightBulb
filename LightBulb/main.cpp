@@ -1668,8 +1668,8 @@ void doTicTacToeTest()
 	SharedSamplingCombiningStrategy* cs2 = new SharedSamplingCombiningStrategy(100, cs1);
 	cs1->setOtherCombiningStrategy(cs2);
 
-	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(100);
-	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(100);
+	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(50);
+	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(50);
 
 	TicTacToe ticTacToe1(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 	TicTacToe ticTacToe2(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
@@ -1680,10 +1680,10 @@ void doTicTacToeTest()
 
 	EvolutionLearningRuleOptions options;
 
-	options.creationCommands.push_back(new ConstantCreationCommand(800));
+	options.creationCommands.push_back(new ConstantCreationCommand(500));
 	options.exitConditions.push_back(new RateDifferenceCondition(1000, 150000));
 	options.reuseCommands.push_back(new BestReuseCommand(16));
-	options.selectionCommands.push_back(new BestSelectionCommand(800, true));
+	options.selectionCommands.push_back(new BestSelectionCommand(500, true));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3, false));
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
