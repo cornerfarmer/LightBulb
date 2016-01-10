@@ -6,14 +6,12 @@
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
-#include "Function/ZigguratGenerator.hpp"
 #include <math.h>
 
 
 MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_)
 {
 	// Initialize the normal distribution with mean 0 and variance 1
-	distribution = std::normal_distribution<double>(0, 1);
 	mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
 	// Initialize the mutation strength boundaries (TODO: Make them variable)
 	mutationStrengthMax = 50;
@@ -50,6 +48,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 		// Change the mutation direction randomly (TODO: Make this variable)
 		//if ((double)rand() / RAND_MAX > 0.5)
 		//	*mutationStrengthValue *= -1;
+
 	}
 
 	auto weights = static_cast<FastLayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();

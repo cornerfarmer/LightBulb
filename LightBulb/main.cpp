@@ -78,7 +78,6 @@
 #include "Examples/FunctionSimulator.hpp"
 #include "Examples/Position.hpp"
 #include "Learning/Evolution/RateDifferenceCondition.hpp"
-#include "Learning/Evolution/BestAICountCondition.hpp"
 #include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
 #include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
 #include "Diagnostic/LearningRuleAnalyser.hpp"
@@ -94,6 +93,17 @@
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 #include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
+#include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
+#include "Learning/Evolution/TournamentCombiningStrategy.hpp"
+#include "Learning/Evolution/RoundRobinCombiningStrategy.hpp"
+#include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
+#include "Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
+#include "Learning/Evolution/FullHallOfFameAlgorithm.hpp"
+#include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
+#include "Learning/Evolution/RandomCombiningStrategy.hpp"
+#include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
+#include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "Learning/Evolution/PerfectObjectFoundCondition.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include <iostream>
 #include <exception>
@@ -1655,24 +1665,38 @@ void doEvolutionTest()
 
 void doTicTacToeTest()
 {
+	SharedSamplingCombiningStrategy* cs1 = new SharedSamplingCombiningStrategy(100);
+	SharedSamplingCombiningStrategy* cs2 = new SharedSamplingCombiningStrategy(100, cs1);
+	cs1->setOtherCombiningStrategy(cs2);
 
-	TicTacToe ticTacToe;
+	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(50);
+	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(50);
+
+	TicTacToe ticTacToe1(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	TicTacToe ticTacToe2(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+	cs1->setSecondWorld(&ticTacToe2);
+	cs2->setSecondWorld(&ticTacToe1);
+
+	//ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;
 
-	options.exitConditions.push_back(new BestAICountCondition(&ticTacToe, 600, false));
-	//options.fitnessFunctions.push_back(new PositiveMakerFitnessFunction(1000));
-	options.creationCommands.push_back(new ConstantCreationCommand(80));
-	options.reuseCommands.push_back(new BestReuseCommand(1));
-	options.selectionCommands.push_back(new BestSelectionCommand(40, false));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new StochasticUniversalSamplingSelector(), 1.8, false));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false));
-	//options.fitnessFunctions.push_back(new LinearScalingFitnessFunction(1, 0));
-	options.world = &ticTacToe;
+	options.creationCommands.push_back(new ConstantCreationCommand(500));
+	options.exitConditions.push_back(new PerfectObjectFoundCondition(2, cs2));
+	options.reuseCommands.push_back(new BestReuseCommand(16));
+	options.selectionCommands.push_back(new BestSelectionCommand(500, true));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3, false));
+	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
+	options.world = &ticTacToe1;
+	
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
-	EvolutionLearningRule learningRule(options);
+	EvolutionLearningRule learningRule1(options);
+	options.world = &ticTacToe2;
+	EvolutionLearningRule learningRule2(options);
 
+	BipartiteEvolutionLearningRule learningRule(&learningRule1, &learningRule2);
 #define TICTACTOE_SINGLE
 #ifdef TICTACTOE_SINGLE
 	LearningResult result = learningRule.doLearning();
@@ -1695,13 +1719,13 @@ void doTicTacToeTest()
 	TicTacToeDrawerOptions ticTacToeDrawerOptions;
 	ticTacToeDrawerOptions.width = 600;
 	ticTacToeDrawerOptions.height = 600;
-	ticTacToeDrawerOptions.ticTacToe = &ticTacToe;
+	ticTacToeDrawerOptions.ticTacToe = &ticTacToe1;
 	TicTacToeDrawer ticTacToeDrawer(ticTacToeDrawerOptions);
 
     sf::RenderWindow window(sf::VideoMode(1300, 1000), "LightBulb!");
 
-    TicTacToeKI* bestAI = ticTacToe.getBestAIs()->back();
-
+	TicTacToeKI* bestAI = static_cast<TicTacToeKI*>(ticTacToe1.getHighscoreList()->front().second);// ticTacToe.getBestAIs()->back();
+	
 
 
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
@@ -1709,12 +1733,13 @@ void doTicTacToeTest()
 	networkTopologyDrawerOptions.height = 1000;
 	networkTopologyDrawerOptions.posX = 600;
 	networkTopologyDrawerOptions.network = bestAI->getNeuralNetwork();
-	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
-	networkTopologyDrawer.refresh();
+	//LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	//networkTopologyDrawer.refresh();
 
 
-    ticTacToe.startNewGame(1);
+    ticTacToe1.startNewGame(1);
     bestAI->resetNN();
+	bestAI->setTicTacToe(&ticTacToe1);
 	while (window.isOpen())
     {
         sf::Event event;
@@ -1723,14 +1748,14 @@ void doTicTacToeTest()
             if (event.type == sf::Event::Closed)
                 window.close();
             else if (event.type == sf::Event::MouseButtonPressed) {
-            	if (ticTacToe.hasGameFinished()) {
-            		ticTacToe.startNewGame(1);
+            	if (ticTacToe1.hasGameFinished()) {
+            		ticTacToe1.startNewGame(1);
             		bestAI->resetNN();
             	}
             	else if (ticTacToeDrawer.handleMouseInputEvent(event)) {
-            		if (!ticTacToe.hasGameFinished()) {
+            		if (!ticTacToe1.hasGameFinished()) {
             			bestAI->doNNCalculation();
-            			if (ticTacToe.hasGameFinished())
+            			if (ticTacToe1.hasGameFinished())
             				std::cout << "AI has failed" << std::endl;
             		}
             		else

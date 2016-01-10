@@ -22,5 +22,6 @@ protected:
 public:	
 	TicTacToeKI(TicTacToe* ticTacToe_);
 	~TicTacToeKI();
+	void setTicTacToe(TicTacToe* newTicTacToe);
 };
 #endif

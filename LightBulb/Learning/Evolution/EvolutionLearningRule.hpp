@@ -55,15 +55,18 @@ struct EvolutionLearningRuleOptions
 };
 
 // A learingRule for improving NNs with the help of algorithms oriented by the evolution
-class EvolutionLearningRule 
+class EvolutionLearningRule
 {
 protected:
 	std::unique_ptr<EvolutionLearningRuleOptions> options;
-public:	
+	int generation;
+public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRuleOptions* getOptions();
 	// Executes the learning process
 	LearningResult doLearning();
+	bool doEvolutionStep();
+	void initialize();
 	// TODO: Remove/Move into own classes
 	void doMutation(AbstractEvolutionObject& object);
 	AbstractEvolutionObject* doRecombination(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2);

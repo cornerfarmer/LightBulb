@@ -3,6 +3,7 @@
 #ifndef _XORSHFGENERATOR_H_
 #define _XORSHFGENERATOR_H_
 
+
 class XorShfGenerator
 {
 private:
@@ -13,7 +14,7 @@ public:
 
 	explicit XorShfGenerator()
 	{	// construct
-		
+
 	}
 
 	static result_type(min)()

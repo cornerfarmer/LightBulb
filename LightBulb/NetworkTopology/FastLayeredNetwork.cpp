@@ -96,31 +96,31 @@ void FastLayeredNetwork::buildNetwork()
 		totalNeuronCount += options->neuronsPerLayerCount[l];
 	}
 	layerOffsets[getLayerCount()] = totalNeuronCount;
+	int normalNeuronCount = totalNeuronCount;
+
 	if (options->useBiasNeuron)
 		totalNeuronCount += 1;
+	
 	netInputs.resize(totalNeuronCount, 0);
 	activations.resize(totalNeuronCount, 0);
-	weights.resize(totalNeuronCount, std::vector<double>(totalNeuronCount, 0));
-
-	for (int l = 0; l < getLayerCount() - 1; l++) 
+	weights.resize(totalNeuronCount);
+	int neuronsToThisLayer = 0;
+	for (int l = 0; l < getLayerCount(); l++)
 	{
-		for (int n1 = layerOffsets[l]; n1 < layerOffsets[l + 1]; n1++)
+		for (int i = layerOffsets[l]; i < layerOffsets[l + 1]; i++)
 		{
-			for (int n2 = layerOffsets[l + 1]; n2 < layerOffsets[l + 2]; n2++)
-			{
-				weights[n1][n2] = 1;
-			}
+			if (options->enableShortcuts)
+				weights[i].resize(normalNeuronCount - layerOffsets[l + 1], 1);
+			else
+				weights[i].resize(options->neuronsPerLayerCount[l + 1], 1);
 		}
 	}
-
+	if (options->useBiasNeuron)
+		weights.back().resize(normalNeuronCount, 1);
 
 	if (options->useBiasNeuron)
 	{
 		activations.back() = 1;
-		for (int n = 0; n < weights.size(); n++)
-		{
-			weights.back()[n] = 1;
-		}
 	}
 }
 
@@ -290,9 +290,12 @@ void FastLayeredNetwork::refreshNetInputsForLayer(int layerNr)
 	for (int i = layerOffsets[layerNr]; i < layerOffsets[layerNr + 1]; i++)
 	{
 		double netInput = 0;
-		for (int l = layerOffsets[layerNr - 1]; l < layerOffsets[layerNr]; l++)
+		for (int l = (options->enableShortcuts ? 0 : layerNr - 1); l < layerNr; l++)
 		{
-			netInput += weights[l][i] * activations[l];
+			for (int o = layerOffsets[l]; o < layerOffsets[l + 1]; o++)
+			{
+				netInput += weights[o][i - layerOffsets[layerNr] + (layerOffsets[layerNr] - layerOffsets[l + 1])] * activations[o];
+			}
 		}
 		if (options->useBiasNeuron)
 			netInput += weights.back()[i];
@@ -323,11 +326,11 @@ double FastLayeredNetwork::calculateEuclideanDistance(AbstractNetworkTopology& o
 		for (auto weight1 = neuron1->begin(); weight1 != neuron1->end(); weight1++, weight2++)
 		{
 			// Calculate the weights average and store it inside the first object
-			distance += (*weight1 - *weight2) * (*weight1 - *weight2);
+			distance += abs(*weight1 - *weight2);// *(*weight1 - *weight2);
 		}
 	}
 
-	distance = sqrt(distance);
+	//distance = sqrt(distance);
 
 	//std::cout << (int)distance << std::endl;
 	return distance;

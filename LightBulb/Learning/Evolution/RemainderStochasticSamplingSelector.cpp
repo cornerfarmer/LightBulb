@@ -39,7 +39,7 @@ void RemainderStochasticSamplingSelector::initMutation(std::vector<std::pair<dou
 		 	objectSequence[mutationSequenceIndex++] = entry->second;
 		}
 		if (withReplacement)
-			secondChance.push_back(entry->first - selectionCount);
+			secondChance.push_back(entry->first / totalFitness * mutationCount - selectionCount);
 		else
 			secondChance.push_back(entry->first);
 	}

@@ -6,6 +6,7 @@
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 //Library includes
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 #include <stdexcept>
 
@@ -15,9 +16,10 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 	return new TicTacToeKI(this);
 }
 
-TicTacToe::TicTacToe()
+TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+	: AbstractCoevolutionWorld(combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
-	defaultResetGenerationCount = 32;
+	isParasiteWorld = isParasiteWorld_;
 	fields.resize(3);
 	for (int x = 0; x < fields.size(); x++)
 	{
@@ -30,11 +32,13 @@ TicTacToe::TicTacToe()
 	options.ticTacToe = this;
 	displayMode = true;
 	drawer.reset(new TicTacToeDrawer(options));
-	
-	currentResetGenerationCount = defaultResetGenerationCount;
 
-	maxDistanceShrinkFactor = 0.9;
 	debugOutput = true;
+}
+
+bool TicTacToe::hasGameFinished()
+{
+	return (illegalMove || whoHasWon() != 0);
 }
 
 int TicTacToe::getFieldValue(int x, int y)
@@ -65,147 +69,55 @@ void TicTacToe::setDebugOutput(bool debugOutput_)
 	debugOutput = debugOutput_;
 }
 
-bool TicTacToe::doSimulationStep()
-{	
-	int ties = 0;
-	int firstWon = 0;
-	int secondWon = 0;
-	int illegalMoves = 0;
-	int duplicates = 0;
-
-	static int lastCompleteNewAI = 0;
-	static int duplicatesInARow = 0;
-	static int resetsInARow = 0;
-
-	points.clear();
-	for (auto ki = objects.begin(); ki != objects.end(); ki++)
-	{	
-		
-
-
-		for (int b = 0; b < 2; b++)
-		{
-			for (auto bestAI = bestAIs.rbegin() /*+ (bestAIs.size() < 10 ? 0 : bestAIs.size() - 10)*/; bestAI != bestAIs.rend(); bestAI++)//intervalAdvance<std::vector<TicTacToeKI*>::iterator>(bestAI, bestAIs.end(), bestAIs.size()/10 + 1))
-			{
-				if (!simulateGame(static_cast<TicTacToeKI*>(*ki), static_cast<TicTacToeKI*>(*bestAI), b, illegalMoves, ties))
-					break;				
-			}
-
-//			for (auto otherAI = objects.begin(); otherAI != objects.end(); otherAI++)
-//			{
-//				if (otherAI != ki)
-//				{
-//					simulateGame(static_cast<TicTacToeKI*>(*ki), static_cast<TicTacToeKI*>(*otherAI), b, learningRule, illegalMoves, ties);
-//				}
-//			}
-		}
-		nextKI:;
-	}
-	//std::cout << "IM:" << illegalMoves << " T:" << ties << " 1W:" << firstWon << " 2W:" << secondWon << " D:" << duplicates << std::endl;
-
-	auto highscore = getHighscoreList();
-	if (points[static_cast<TicTacToeKI*>(highscore->front().second)] == bestAIs.size() * 2 * 20) {
-		TicTacToeKI* newAI = static_cast<TicTacToeKI*>(highscore->front().second->clone(false));
-		bool duplicate = false;
-		double currentMaxDist = 0;// maxDistance / maxDistanceShrinkFactor;//1500 * exp(-0.1 * bestAIs.size());
-
-		for (int i = 0; i < lastBestAICount; i++)
-		{
-			if (bestAIs[i]->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*newAI->getNeuralNetwork()->getNetworkTopology()) < currentMaxDist)
-			{
-//				if (i < lastCompleteNewAI || duplicatesInARow < 20)
-//				{
-//					duplicatesInARow++;
-//					if (i >= lastCompleteNewAI)
-//					{
-//						duplicate = true;
-//					}
-					delete(bestAIs[i]);
-					bestAIs.erase(bestAIs.begin() + i);
-					lastBestAICount--;
-					i = -1;
-					if (debugOutput)
-						std::cout << "Found a similar AI" << std::endl;
-					//break;
-//				}
-//				else
-//				{
-//					duplicate = true;
-//					if (duplicatesInARow >= 20)
-//						duplicatesInARow = 0;
-//				}
-			}
-		}
-
-
-		if (!duplicate)
-		{
-			lastCompleteNewAI = bestAIs.size();
-			duplicatesInARow = 0;
-		}
-		bestAIs.push_back(newAI);
-		if (debugOutput)
-			std::cout << "Added " << bestAIs.size() << ". best evolution object to bestAI list" << std::endl;
-		rateKI(dynamic_cast<TicTacToeKI*>(bestAIs.back()));
-		//currentResetGenerationCount = std::max((int)(currentResetGenerationCount / 1.1), defaultResetGenerationCount);
-		generationsSincaLastBestAI = 0;
-		resetsInARow = 0;
-	}
-	if (lastBestScore != highscore->front().first) {
-		generationsSincaLastBestAI = 0;
-	} else if (generationsSincaLastBestAI++ > currentResetGenerationCount) {
-		if (!softReset)
-		{
-			currentResetGenerationCount *= 1.05;
-			maxDistance *= 0.9;
-			std::cout << "Switched to the next mode: d: " << maxDistance << " r: " << currentResetGenerationCount << std::endl;
-			//objects[0] = highscore->front().second;
-			//objects.resize(1);
-			std::cout << "Hard Reset" << std::endl;
-
-			objects.clear();
-			for (auto bestAI = bestAIs.begin() + (bestAIs.size() > 40 ? bestAIs.size() - 40 : 0); bestAI != bestAIs.end(); bestAI++)
-			{
-				objects.push_back((*bestAI)->clone(false));
-			}
-			lastBestAICount = bestAIs.size();
-			softReset = true;
-		}
-		else
-		{
-			std::cout << "Soft Reset" << std::endl;
-			objects.clear();
-			softReset = false;
-		}
-		return true;
-	}
-	lastBestScore = highscore->front().first;
-	return false;
-}
-
-double TicTacToe::getRealScore(AbstractEvolutionObject* object)
+int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2)
 {
-	return rateKI(static_cast<TicTacToeKI*>(object));
+	int result = 0;
+	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), false);
+	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), true);
+	
+	//std::cout << result;
+	static int counter = 0;
+	counter++;
+	if (counter % 1000000 == 0)
+		std::cout << counter << ". calculation" << std::endl;
+
+	if (isParasiteWorld) {
+		if (result >= 0)
+			return 1;
+		else
+			return -1;
+	}
+	else {
+		if (result == 2)
+			return 1;
+		else
+			return -1;
+	}
 }
 
 void TicTacToe::initializeForLearning()
 {
 	bestAIs.clear();
 	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
-	maxDistance = 10000;
-	lastBestAICount = 0;
+	maxDistance = 15000;
+	lastBestAICount = 1;
 	generationsSincaLastBestAI = 0;
 	lastBestScore = 0;
 	softReset = true;
+	variationStart = 1;
 }
 
-bool TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI, int& illegalMoves, int& ties)
+int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlayerStarts)
 {
-	int pointsA1 = 0;
+	int pointsAI1 = 0;
+	int pointsAI2 = 0;
 	ai2->resetNN();
 	ai1->resetNN();
 
-	if (startingAI == 0)
+	ai1->setTicTacToe(this);
+	ai2->setTicTacToe(this);
+
+	if (secondPlayerStarts == 0)
 		startNewGame(1);
 	else
 		startNewGame(-1);
@@ -213,15 +125,17 @@ bool TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 	int i;
 	for (i = 0; i < 9; i++)
 	{
-		if (i % 2 == startingAI)
+		if (i % 2 == secondPlayerStarts)
 		{
 			ai1->doNNCalculation();
 			if (!illegalMove)
-				pointsA1 += 1;
+				pointsAI1++;
 		}
 		else
 		{
 			ai2->doNNCalculation();
+			if (!illegalMove)
+				pointsAI2++;
 		}
 
 		sf::Event event;
@@ -243,38 +157,43 @@ bool TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, int startingAI,
 		if (hasGameFinished())
 			break;
 	}
+	static int il = 0;
+	static int wins = 0;
+	static int ties = 0;
+	static bool prevPW = false;
 
+	if (prevPW != isParasiteWorld)
+	{
+		std::cout << "il:" << il << " wins:" << wins << " ties:" << ties << std::endl;
+		il = 0;
+		wins = 0;
+		ties = 0;
+		prevPW = isParasiteWorld;
+	}
 	if (illegalMove)
 	{
-		if (currentPlayer == 1) {
-			illegalMoves++;
-			points[ai1] += pointsA1;
-			return false;
-		}
-		else {
-			points[ai1] += 20;
-			return true;
-		}
-
-	}	
-	else if (whoHasWon() == 1)
-	{
-		//points[ai1] += 1;
-		points[ai1] += 20;
-		return true;
-	}
-	else if (whoHasWon() == -1)
-	{
-		points[ai1] += pointsA1;
-		return false;
+		il++;
+		if (currentPlayer == 1)
+			return -1;
+		else
+			return 1;
 	}
 	else
 	{
-		// TODO: discuss if this makes sense:
-		//points[ai1]--;
-		ties++;
-		//points[ai1] += 20;
-		return true;
+		int w = whoHasWon();
+		if (w == 0) {
+			ties++;
+			if (isParasiteWorld)
+				return -1;
+			else
+				return 1;
+		} else if (w == 1) {
+			wins++;
+			return 1;
+		} else if (w == -1) {
+			wins++;
+			return -1;
+		}
 	}
 }
 
@@ -285,6 +204,7 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 
 int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 {
+
 	int wins = 0;
 	int possibleGames = 9 * 7 * 5 * 3;
 	possibleGames += 8 * 6 * 4 * 2;
@@ -328,7 +248,7 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 					break;
 			}
 
-			if (currentPlayer == -1 || i>8)
+			if ((currentPlayer == -1 && illegalMove) || (whoHasWon() == 1) || i>8)
 				wins++;
 
 			decisionCombinationsLeft = !nextDecisionCombination(decisionNr, b);
@@ -369,12 +289,6 @@ void TicTacToe::startNewGame(int firstPlayer)
 	illegalMove = false;
 	resetWorld();
 	currentPlayer = firstPlayer;
-
-}
-
-bool TicTacToe::hasGameFinished()
-{
-	return (illegalMove || whoHasWon() != 0);
 }
 
 int TicTacToe::whoHasWon()
@@ -411,10 +325,6 @@ void TicTacToe::setField(int x, int y)
 	}
 }
 
-double TicTacToe::getScore(AbstractEvolutionObject* object)
-{
-	return points[static_cast<TicTacToeKI*>(object)];
-}
 
 void TicTacToe::resetWorld()
 {
@@ -449,8 +359,4 @@ void TicTacToe::resetWorld()
 	}
 }
 
-std::vector<TicTacToeKI*>* TicTacToe::getBestAIs()
-{
-	return &bestAIs;
-}
 

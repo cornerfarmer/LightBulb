@@ -24,7 +24,10 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	if (biasNeuron) {
 		options.useBiasNeuron = true;
 	}
+	options.enableShortcuts = true;
 	options.neuronsPerLayerCount.push_back(inputDimension);
+	options.neuronsPerLayerCount.push_back(10);
+	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(outputDimension);
 	options.activationFunction = new BinaryFunction();
 	options.inputFunction = new WeightedSumFunction();
@@ -38,7 +41,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	// Create a neural network from the network topolgy
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
 	// Randomize all weights (TODO: make the boundaries variable)
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-5,5);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5,0.5);
 
 	world = world_;
 
