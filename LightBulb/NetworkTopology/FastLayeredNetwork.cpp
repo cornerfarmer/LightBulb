@@ -111,7 +111,7 @@ void FastLayeredNetwork::buildNetwork()
 		{
 			if (options->enableShortcuts)
 				weights[i].resize(normalNeuronCount - layerOffsets[l + 1], 1);
-			else
+			else if (l != getLayerCount() - 1)
 				weights[i].resize(options->neuronsPerLayerCount[l + 1], 1);
 		}
 	}

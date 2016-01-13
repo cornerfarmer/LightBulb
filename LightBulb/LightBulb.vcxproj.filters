@@ -54,6 +54,9 @@
     <Filter Include="Quelldateien\Lib">
       <UniqueIdentifier>{fa473da5-8599-43ae-9307-499eb1d3d951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\IO">
+      <UniqueIdentifier>{76cbcee2-22c0-49ef-a71f-77daf5154f94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
@@ -563,6 +566,12 @@
     <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="IO\AbstractExporter.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BrainJSExporter.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
@@ -1065,6 +1074,12 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\AbstractExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\BrainJSExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
