@@ -90,7 +90,13 @@
     <ClInclude Include="Graphics\SOMMappingChart.hpp" />
     <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
+    <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />
+    <ClInclude Include="IO\JSONArray.hpp" />
+    <ClInclude Include="IO\JSONAttribute.hpp" />
+    <ClInclude Include="IO\JSONNumberElement.hpp" />
+    <ClInclude Include="IO\JSONStringElement.hpp" />
+    <ClInclude Include="IO\JSONObject.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
@@ -261,7 +267,13 @@
     <ClCompile Include="Graphics\SOMMappingChart.cpp" />
     <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp" />
     <ClCompile Include="IO\AbstractExporter.cpp" />
+    <ClCompile Include="IO\AbstractJSONElement.cpp" />
     <ClCompile Include="IO\BrainJSExporter.cpp" />
+    <ClCompile Include="IO\JSONArray.cpp" />
+    <ClCompile Include="IO\JSONAttribute.cpp" />
+    <ClCompile Include="IO\JSONNumberElement.cpp" />
+    <ClCompile Include="IO\JSONStringElement.cpp" />
+    <ClCompile Include="IO\JSONObject.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />

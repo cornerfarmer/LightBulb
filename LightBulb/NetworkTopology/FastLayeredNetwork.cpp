@@ -145,6 +145,31 @@ int FastLayeredNetwork::getLayerCount()
 	return options->neuronsPerLayerCount.size();
 }
 
+int FastLayeredNetwork::getNeuronCountInLayer(int layerNr)
+{
+	return options->neuronsPerLayerCount[layerNr];
+}
+
+double FastLayeredNetwork::getBiasWeightOfNeuron(int layerNr, int neuronNr)
+{
+	if (!options->useBiasNeuron)
+		throw std::logic_error("The network does not use a bias neuron");
+	return weights.back()[layerOffsets[layerNr] + neuronNr];
+}
+
+std::vector<double> FastLayeredNetwork::getAfferentWeights(int layerNr, int neuronNr)
+{
+	std::vector<double> afferentWeights;
+	if (layerNr != 0)
+	{
+		for (auto neuronInPrevLayer = weights.begin() + layerOffsets[layerNr - 1]; neuronInPrevLayer != weights.begin() + layerOffsets[layerNr]; neuronInPrevLayer++)
+		{
+			afferentWeights.push_back((*neuronInPrevLayer)[neuronNr]);
+		}
+	}
+	return afferentWeights;
+}
+
 std::vector<std::vector<StandardNeuron*>>* FastLayeredNetwork::getNeurons()
 {
 	throw std::logic_error("getNeurons() is not yet implemented");

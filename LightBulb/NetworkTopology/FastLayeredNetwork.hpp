@@ -127,6 +127,12 @@ public:
 	std::vector<std::vector<double>>* getWeights();
 
 	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
+
+	int getNeuronCountInLayer(int layerNr);
+
+	double getBiasWeightOfNeuron(int layerNr, int neuronNr);
+
+	std::vector<double> getAfferentWeights(int layerNr, int neuronNr);
 };
 
 #endif
