@@ -4,7 +4,7 @@
 #include "Neuron/Edge.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include "Function/WeightedSumFunction.hpp"
+#include "Function/WeightedSumFunction.hpp" 
 #include "Function/IdentityFunction.hpp"
 #include "Function/HyperbolicTangentFunction.hpp"
 #include "Function/FermiFunction.hpp"
@@ -105,10 +105,12 @@
 #include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
 #include "Learning/Evolution/PerfectObjectFoundCondition.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "IO/BrainJSExporter.hpp"
 #include <iostream>
 #include <exception>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 void doPerceptronTest()
 {
@@ -1726,7 +1728,12 @@ void doTicTacToeTest()
 
 	TicTacToeKI* bestAI = static_cast<TicTacToeKI*>(ticTacToe1.getHighscoreList()->front().second);// ticTacToe.getBestAIs()->back();
 	
-
+	BrainJSExporter exporter;
+	std::string json = exporter.execute(bestAI->getNeuralNetwork());
+	std::ofstream myfile;
+	myfile.open("bestTicTacToeAI.txt");
+	myfile << json;
+	myfile.close();
 
 	AbstractNetworkTopologyDrawerOptions networkTopologyDrawerOptions;
 	networkTopologyDrawerOptions.width = 700;

@@ -124,6 +124,11 @@ void FastLayeredNetwork::buildNetwork()
 	}
 }
 
+std::vector<int> FastLayeredNetwork::getLayerOffsets()
+{
+	return layerOffsets;
+}
+
 
 void FastLayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters)
 {

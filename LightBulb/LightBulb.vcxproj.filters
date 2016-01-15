@@ -6,67 +6,999 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Quelldateien">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <UniqueIdentifier>{1481436c-d90b-4c1d-9df2-dee64ee62729}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\ActivationOrder">
-      <UniqueIdentifier>{c371cb1f-7969-4486-84ae-39d29d8ead5d}</UniqueIdentifier>
+      <UniqueIdentifier>{afb9c30f-5d1c-4cd1-875d-acfad2953d5d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\NetworkTopology">
-      <UniqueIdentifier>{54470349-f2cd-450a-b0e2-8f48c7690fb6}</UniqueIdentifier>
+      <UniqueIdentifier>{2915dadf-0222-4dfd-b4d5-12bbe2c06b3d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Neuron">
-      <UniqueIdentifier>{ff89ba63-a219-4cef-a96f-b63397b80bf3}</UniqueIdentifier>
+      <UniqueIdentifier>{ae20d64e-3a60-4708-94e8-dc2e5a164d32}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Function">
-      <UniqueIdentifier>{56f3d7c2-006d-45b6-b899-c7f0908202f5}</UniqueIdentifier>
+      <UniqueIdentifier>{0cabd701-40be-4650-a1c8-cabd53ee5e93}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\NeuralNetwork">
-      <UniqueIdentifier>{cab1bad9-86a8-4c43-a90f-b407dadd336a}</UniqueIdentifier>
+      <UniqueIdentifier>{35d084fd-4401-4e5a-a0e0-8336f6972512}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Learning">
-      <UniqueIdentifier>{a7efac7b-7060-4341-bd65-ee417a74389c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Teaching">
-      <UniqueIdentifier>{26cea91d-ef3e-4174-9869-b522f7d3f9ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Graphics">
-      <UniqueIdentifier>{734068f5-0975-4e7f-b6aa-df7dbf3b849c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\NeuronFactory">
-      <UniqueIdentifier>{72294d96-7099-4cc7-bb29-7218ce5a24ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\ClusterAnalysis">
-      <UniqueIdentifier>{4db96599-cd2c-4dce-8bd8-646c9b718330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Examples">
-      <UniqueIdentifier>{56971003-78c0-48eb-90c8-ff0587fb1275}</UniqueIdentifier>
+      <UniqueIdentifier>{b0410e88-019f-4cc1-a4f1-f0284ba644d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Learning\Evolution">
-      <UniqueIdentifier>{60c39e0e-ff9c-44f2-9640-7865c9a69dd0}</UniqueIdentifier>
+      <UniqueIdentifier>{01fa9a77-f8cf-4778-ab0e-2236964cabc5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Learning\Evolution\EvolutionStrategy">
-      <UniqueIdentifier>{3570f652-a4bb-44a6-b6c4-e3dee7583104}</UniqueIdentifier>
+      <UniqueIdentifier>{d856134a-6d06-48d7-bc18-9c214cb6d72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Teaching">
+      <UniqueIdentifier>{55ed8858-cf7f-426a-b78a-a54160aeae02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Graphics">
+      <UniqueIdentifier>{13ebc50c-8dfa-4649-b20a-d35ac597c1b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\NeuronFactory">
+      <UniqueIdentifier>{3643bad8-f0fd-432d-ba71-4ce81842a94d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\ClusterAnalysis">
+      <UniqueIdentifier>{cd721e0a-929c-4b59-a41a-644f99719a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples">
+      <UniqueIdentifier>{0b280240-5df3-4c89-8443-b8c01da68649}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Diagnostic">
-      <UniqueIdentifier>{25f6bd5b-190a-4df7-89a4-b724b574863d}</UniqueIdentifier>
+      <UniqueIdentifier>{70c75323-3a85-43ce-8761-410a3e4aa8a3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Lib">
-      <UniqueIdentifier>{fa473da5-8599-43ae-9307-499eb1d3d951}</UniqueIdentifier>
+      <UniqueIdentifier>{5fc37252-aea6-4cb5-bb6a-fb8467bdbd6d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\IO">
-      <UniqueIdentifier>{76cbcee2-22c0-49ef-a71f-77daf5154f94}</UniqueIdentifier>
+      <UniqueIdentifier>{45480065-edd4-41f4-84ea-9956b3174e2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram2.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="ActivationOrder\SynchronousOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\FastLayeredNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\FreeNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\GridStructure.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LineStructure.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\RBFNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\RecurrentLayeredNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\AbstractNeuron.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\AbstractThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\BiasNeuron.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\Edge.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\InputNeuron.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\RBFThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\StandardNeuron.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\StandardThreshold.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractActivationFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractInputFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractOutputFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractShrinkFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\BinaryFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ConeFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\CosinusFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\CylinderFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\EqualRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\EuclideanDistance.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ExponentialShrinkFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\FermiFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\GaussianRBFFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\HyperbolicTangentFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\IdentityFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\MexicanHatFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RankBasedRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\WeightedSumFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\XorShfGenerator.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ZigguratGenerator.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\BackpropagationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\DeltaLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\HopfieldLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ1LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ2LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ3LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\ResilientLearningRateHelper.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\SchmidhuberLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\SOMLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantMutationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Teaching\AbstractTeachingLesson.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="Teaching\Teacher.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="Teaching\TeachingLessonLinearInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Arrow.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GraphicObject.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SOMMappingChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronFactory\AbstractNeuronFactory.cpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronFactory\DifferentFunctionsNeuronFactory.cpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronFactory\SameFunctionsNeuronFactory.cpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractNearestClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ENearestClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ENearestRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KMeansClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KMeansRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KNearestClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KNearestRBFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\PointSet.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ValuePosition.cpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\AbstractTile.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Animal.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\EarthTile.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\FunctionDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\FunctionSimulator.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NatureDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Network.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NetworkDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NetworkSimulator.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Position.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\RockTile.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToe.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeDrawer.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeKI.cpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\ChangeableNumber.cpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp">
+      <Filter>Quelldateien\Diagnostic</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\ziggurat.cpp">
+      <Filter>Quelldateien\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\AbstractExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\AbstractJSONElement.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\BrainJSExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\JSONArray.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\JSONAttribute.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\JSONNumberElement.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\JSONStringElement.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\JSONObject.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\SynapticExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
     <ClInclude Include="ActivationOrder\TopologicalOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
-    <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
+    <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\FastLayeredNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\FreeNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\GridStructure.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LineStructure.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\RBFNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\RecurrentLayeredNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\AbstractNeuron.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\AbstractThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\BiasNeuron.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\Edge.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\InputNeuron.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\RBFThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\StandardNeuron.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\StandardThreshold.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractActivationFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractInputFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractOutputFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractShrinkFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\BinaryFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ConeFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\CosinusFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\CylinderFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\EqualRandomFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\EuclideanDistance.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ExponentialShrinkFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\FermiFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\GaussianRBFFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\HyperbolicTangentFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\IdentityFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\MexicanHatFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\RankBasedRandomFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\WeightedSumFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\XorShfGenerator.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ZigguratGenerator.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\BackpropagationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\DeltaLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\HopfieldLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\LVQ1LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\LVQ2LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\LVQ3LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\ResilientLearningRateHelper.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\SchmidhuberLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\SOMLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\SharedSamplingCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantMutationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantRecombinationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RemainderStochasticSamplingSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\LearningResult.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Teaching\AbstractTeachingLesson.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="Teaching\Teacher.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="Teaching\TeachingLessonBooleanInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="Teaching\TeachingLessonLinearInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Arrow.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicObject.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SOMMappingChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronFactory\AbstractNeuronFactory.hpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronFactory\DifferentFunctionsNeuronFactory.hpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronFactory\SameFunctionsNeuronFactory.hpp">
+      <Filter>Quelldateien\NeuronFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractNearestClustering.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractRBFNeuronPlacer.hpp">
+      <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
     <ClInclude Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
@@ -107,262 +1039,19 @@
     <ClInclude Include="ClusterAnalysis\ValuePosition.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractNearestClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\EuclideanDistance.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\FermiFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\GaussianRBFFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\HyperbolicTangentFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\IdentityFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\WeightedSumFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractActivationFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractInputFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractOutputFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\BinaryFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Arrow.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\GraphicObject.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\DeltaLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\ResilientLearningRateHelper.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\SchmidhuberLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\AbstractLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\BackpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\RBFNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\RecurrentLayeredNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\FreeNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
-      <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\AbstractThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\BiasNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\Edge.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\InputNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\RBFThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\StandardNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\StandardThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\AbstractNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\DifferentFunctionsNeuronFactory.hpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\SameFunctionsNeuronFactory.hpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\AbstractNeuronFactory.hpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="Teaching\TeachingLessonBooleanInput.hpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClInclude>
-    <ClInclude Include="Teaching\TeachingLessonLinearInput.hpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClInclude>
-    <ClInclude Include="Teaching\AbstractTeachingLesson.hpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClInclude>
-    <ClInclude Include="Teaching\Teacher.hpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LVQ1LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LVQ2LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LVQ3LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LineStructure.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\SOMLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\CylinderFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractShrinkFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\ExponentialShrinkFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\ConeFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\CosinusFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\MexicanHatFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\GridStructure.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\SOMMappingChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\HopfieldLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
+    <ClInclude Include="Examples\AbstractTile.hpp">
+      <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\Animal.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\EarthTile.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\FunctionDrawer.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\FunctionSimulator.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\Nature.hpp">
@@ -371,19 +1060,19 @@
     <ClInclude Include="Examples\NatureDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\AbstractTile.hpp">
+    <ClInclude Include="Examples\Network.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\EarthTile.hpp">
+    <ClInclude Include="Examples\NetworkDrawer.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\NetworkSimulator.hpp">
+      <Filter>Quelldateien\Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Position.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\RockTile.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\RankBasedRandomFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeKI.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TicTacToe.hpp">
@@ -392,734 +1081,47 @@
     <ClInclude Include="Examples\TicTacToeDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\Position.hpp">
+    <ClInclude Include="Examples\TicTacToeKI.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\FunctionSimulator.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\ConstantMutationCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\ConstantRecombinationCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\FunctionDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LearningResult.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp">
+    <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp">
       <Filter>Quelldateien\Diagnostic</Filter>
     </ClInclude>
     <ClInclude Include="Diagnostic\ChangeableNumber.hpp">
       <Filter>Quelldateien\Diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp">
+    <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp">
       <Filter>Quelldateien\Diagnostic</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkSimulator.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Network.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\FastLayeredNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\RemainderStochasticSamplingSelector.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\RandomSelector.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\EqualRandomFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\XorShfGenerator.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\ZigguratGenerator.hpp">
-      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractHallOfFameAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\RandomHallOfFameAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\SharedSamplingCombiningStrategy.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractExporter.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\BrainJSExporter.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\JSONObject.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractJSONElement.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\JSONAttribute.hpp">
+    <ClInclude Include="IO\BrainJSExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\JSONArray.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\JSONStringElement.hpp">
+    <ClInclude Include="IO\JSONAttribute.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\JSONNumberElement.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClCompile>
-    <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClCompile>
-    <ClCompile Include="ActivationOrder\SynchronousOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ENearestClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ENearestRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KMeansClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KMeansRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KNearestClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KNearestRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\PointSet.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ValuePosition.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractNearestClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\FermiFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\GaussianRBFFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\HyperbolicTangentFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\IdentityFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\WeightedSumFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractActivationFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractInputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractOutputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\BinaryFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\EuclideanDistance.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Arrow.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\GraphicObject.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\ResilientLearningRateHelper.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\SchmidhuberLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\AbstractLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\BackpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\DeltaLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RBFNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RecurrentLayeredNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\FreeNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp">
-      <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp">
-      <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\AbstractThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\BiasNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\Edge.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\InputNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\RBFThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\StandardNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\StandardThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\AbstractNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\DifferentFunctionsNeuronFactory.cpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\SameFunctionsNeuronFactory.cpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\AbstractNeuronFactory.cpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="Teaching\TeachingLessonLinearInput.cpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClCompile>
-    <ClCompile Include="Teaching\AbstractTeachingLesson.cpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClCompile>
-    <ClCompile Include="Teaching\Teacher.cpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClCompile>
-    <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp">
-      <Filter>Quelldateien\Teaching</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\LVQ1LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\LVQ2LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\LVQ3LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LineStructure.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\SOMLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\CylinderFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractShrinkFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\ExponentialShrinkFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\ConeFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\CosinusFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\MexicanHatFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\GridStructure.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\SOMMappingChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\HopfieldLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Animal.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NatureDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\AbstractTile.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\EarthTile.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\RockTile.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\RankBasedRandomFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeKI.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToe.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\FunctionSimulator.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Position.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\ConstantMutationCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\FunctionDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClCompile>
-    <ClCompile Include="Diagnostic\ChangeableNumber.cpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClCompile>
-    <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkSimulator.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Network.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\FastLayeredNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelector.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelector.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\RandomSelector.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\EqualRandomFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\XorShfGenerator.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\ZigguratGenerator.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Lib\ziggurat.cpp">
-      <Filter>Quelldateien\Lib</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractHallOfFameAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategy.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\AbstractExporter.cpp">
+    <ClInclude Include="IO\JSONStringElement.hpp">
       <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\BrainJSExporter.cpp">
+    </ClInclude>
+    <ClInclude Include="IO\JSONObject.hpp">
       <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONObject.cpp">
+    </ClInclude>
+    <ClInclude Include="IO\SynapticExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\AbstractJSONElement.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONAttribute.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONArray.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONStringElement.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONNumberElement.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
+    </ClInclude>
   </ItemGroup>
 </Project>

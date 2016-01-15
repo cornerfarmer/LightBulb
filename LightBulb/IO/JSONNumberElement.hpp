@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _JSONSTRINGELEMENT_H_
-#define _JSONSTRINGELEMENT_H_
+#ifndef _JSONNUMBERELEMENT_H_
+#define _JSONNUMBERELEMENT_H_
 
 // Includes
 #include "IO/AbstractJSONElement.hpp"

@@ -133,6 +133,8 @@ public:
 	double getBiasWeightOfNeuron(int layerNr, int neuronNr);
 
 	std::vector<double> getAfferentWeights(int layerNr, int neuronNr);
+
+	std::vector<int> getLayerOffsets();
 };
 
 #endif
