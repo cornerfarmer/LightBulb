@@ -106,6 +106,7 @@
 #include "Learning/Evolution/PerfectObjectFoundCondition.hpp"
 #include "NetworkTopology/FastLayeredNetwork.hpp"
 #include "IO/BrainJSExporter.hpp"
+#include "IO/SynapticExporter.hpp"
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -1684,7 +1685,7 @@ void doTicTacToeTest()
 	EvolutionLearningRuleOptions options;
 
 	options.creationCommands.push_back(new ConstantCreationCommand(500));
-	options.exitConditions.push_back(new PerfectObjectFoundCondition(2, cs2));
+	options.exitConditions.push_back(new PerfectObjectFoundCondition(20, cs2));
 	options.reuseCommands.push_back(new BestReuseCommand(16));
 	options.selectionCommands.push_back(new BestSelectionCommand(500, true));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
@@ -1728,7 +1729,7 @@ void doTicTacToeTest()
 
 	TicTacToeKI* bestAI = static_cast<TicTacToeKI*>(ticTacToe1.getHighscoreList()->front().second);// ticTacToe.getBestAIs()->back();
 	
-	BrainJSExporter exporter;
+	SynapticExporter exporter;
 	std::string json = exporter.execute(bestAI->getNeuralNetwork());
 	std::ofstream myfile;
 	myfile.open("bestTicTacToeAI.txt");
