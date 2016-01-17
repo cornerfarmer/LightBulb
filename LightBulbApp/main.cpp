@@ -1685,7 +1685,7 @@ void doTicTacToeTest()
 	EvolutionLearningRuleOptions options;
 
 	options.creationCommands.push_back(new ConstantCreationCommand(500));
-	options.exitConditions.push_back(new PerfectObjectFoundCondition(20, cs2));
+	options.exitConditions.push_back(new PerfectObjectFoundCondition(200, cs2));
 	options.reuseCommands.push_back(new BestReuseCommand(16));
 	options.selectionCommands.push_back(new BestSelectionCommand(500, true));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
