@@ -32,7 +32,7 @@ void RealTimeRecurrentLearningRule::initializeLearningAlgoritm(NeuralNetwork &ne
 }
 
 
-double RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	double outputNeuronsDependency = 0;
 	// Go through all error maps
@@ -63,7 +63,7 @@ double RealTimeRecurrentLearningRule::calculateDeltaWeightFromEdge(AbstractTeach
 	return getOptions()->learningRate * outputNeuronsDependency;
 }
 
-void RealTimeRecurrentLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void RealTimeRecurrentLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	
 }
@@ -120,7 +120,7 @@ void RealTimeRecurrentLearningRule::initializeAllWeightAdjustments(NeuralNetwork
 	}
 }
 
-void RealTimeRecurrentLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
+void RealTimeRecurrentLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson)
 {
 	// If we should use teacherForcing extract the teachingInputMap from the currentTeachingInputMap
 	if (getOptions()->teacherForcing)
@@ -158,7 +158,7 @@ double RealTimeRecurrentLearningRule::getDynamicSystemValueOfEdgeAtTime(Edge* ed
 	return dynamicSystemCache[edge][neuron][time].first;
 }
 
-bool RealTimeRecurrentLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+bool RealTimeRecurrentLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson)
 {
 	// Always do one step
 	*nextTimeStepCount = 1;

@@ -63,7 +63,7 @@ AbstractActivationOrder* HopfieldLearningRule::getNewActivationOrder(NeuralNetwo
 	return new AsynchronousOrder();
 }
 
-double HopfieldLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double HopfieldLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// Multiplicate the netInput (= teachingPattern) of the two connected neurons
 	double res = edge.getNextNeuron()->getNetInput() * static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput();
@@ -80,7 +80,7 @@ HopfieldLearningRuleOptions* HopfieldLearningRule::getOptions()
 }
 
 
-bool HopfieldLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+bool HopfieldLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson)
 {
 	// Only do one calculation per teaching lesson
 	if (*nextStartTime != -1)

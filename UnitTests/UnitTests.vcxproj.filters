@@ -13,15 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Quelldateien\IO">
+      <UniqueIdentifier>{7a6704f9-292a-46ee-87ae-961d47899930}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UT.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="BrainJSExporterTest.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="IO\BrainJSExporterTest.cpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="SynapticExporterTest.cpp">
+    <ClCompile Include="IO\SynapticExporterTest.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

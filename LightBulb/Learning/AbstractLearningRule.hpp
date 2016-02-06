@@ -17,7 +17,7 @@ class StandardNeuron;
 class AbstractActivationOrder;
 class AbstractNeuron;
 class StandardNeuron;
-class AbstractTeachingLesson;
+class AbstractTeachingLessoni;
 
 
 typedef std::map<int, std::map<StandardNeuron*, double>> ErrorMap_t;
@@ -81,13 +81,13 @@ protected:
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
-	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap) = 0;
+	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap) = 0;
 	// This method should adjust the weight of the current edge
 	virtual void adjustWeight(Edge* edge, double deltaWeight) = 0;
 	// Calculate if it is sensible to continue learning
 	virtual bool learningHasStopped() = 0;
 	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges
-	virtual void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap) {};
+	virtual void initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap) {};
 	// This method should return the used activationOrder
 	virtual AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork) = 0;
 	// Prints a current summary of the status of the learning process
@@ -97,7 +97,7 @@ protected:
 	// This method can be used to do some work before every iteration
 	virtual void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) { };
 	// This method can be used to do some work before every teaching lesson
-	virtual void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson) { };
+	virtual void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson) { };
 	// This method could be used to do some work after all weights has been adjusted
 	virtual void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
 	// This method could be used to do some work befora all weights are adjusted
@@ -113,7 +113,7 @@ protected:
 	// This method can return a pointer to a netInput value map, which should be filled before weight calculation
 	virtual std::vector<std::map<AbstractNeuron*, double>>* getNetInputValuesInTime() { return NULL; };
 	// This method should determine the start time and time step count of the next calculation
-	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
+	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson);
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given NeuralNetwork

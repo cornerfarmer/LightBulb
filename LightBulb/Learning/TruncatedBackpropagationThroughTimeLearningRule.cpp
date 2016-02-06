@@ -45,7 +45,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeLearningAlgoritm
 	}
 }
 
-double TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// Calculate the gradient
 	double gradient = 0;
@@ -65,7 +65,7 @@ double TruncatedBackpropagationThroughTimeLearningRule::calculateDeltaWeightFrom
 	return gradient / getOptions()->maxTimeSteps;
 }
 
-void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void TruncatedBackpropagationThroughTimeLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// Go through all timesteps
 	for (unsigned int t = 0; t < getOptions()->maxTimeSteps; t++)
@@ -123,7 +123,7 @@ std::vector<std::map<AbstractNeuron*, double>>* TruncatedBackpropagationThroughT
 	return &netInputValuesInTime;
 }
 
-void TruncatedBackpropagationThroughTimeLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
+void TruncatedBackpropagationThroughTimeLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson)
 {
 	// Go through all hidden/output layers
 	for (auto layer = neuralNetwork.getNetworkTopology()->getNeurons()->begin(); layer != neuralNetwork.getNetworkTopology()->getNeurons()->end(); layer++)
@@ -148,7 +148,7 @@ AbstractActivationOrder* TruncatedBackpropagationThroughTimeLearningRule::getNew
 		throw std::logic_error("Something went wrong while setting the activation order for the LearningRule");
 }
 
-bool TruncatedBackpropagationThroughTimeLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+bool TruncatedBackpropagationThroughTimeLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson)
 {
 	if (*nextStartTime != -1)
 		return false;

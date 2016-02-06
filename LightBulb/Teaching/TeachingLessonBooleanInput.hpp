@@ -12,7 +12,7 @@
 
 // Forward declarations
 
-class TeachingLessonBooleanInput : public AbstractTeachingLesson
+class TeachingLessonBooleanInput : public AbstractTeachingLessoni
 {
 private:
 	// The values the neural network should give back
@@ -28,7 +28,7 @@ protected:
 public:
 	TeachingLessonBooleanInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
 	// Inherited:
-	AbstractTeachingLesson* unfold();
+	AbstractTeachingLessoni* unfold();
 	int getMaxTimeStep();
 };
 

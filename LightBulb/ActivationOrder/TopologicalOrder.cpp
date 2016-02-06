@@ -1,7 +1,7 @@
 // Includes
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 #include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <exception>
@@ -26,10 +26,10 @@ void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopolog
 				(*neuron)->refreshActivation();
 		}
 	}
-	else if (dynamic_cast<FastLayeredNetwork*>(&networkTopology))
+	else if (dynamic_cast<LayeredNetwork*>(&networkTopology))
 	{
 		// Cast the network as an layeredNetwork
-		FastLayeredNetwork* layeredNetwork = dynamic_cast<FastLayeredNetwork*>(&networkTopology);
+		LayeredNetwork* layeredNetwork = dynamic_cast<LayeredNetwork*>(&networkTopology);
 
 		for (int l = 1; l < layeredNetwork->getLayerCount(); l++)
 		{

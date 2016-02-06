@@ -3,7 +3,7 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
 
@@ -15,24 +15,27 @@ RecombinationAlgorithm::RecombinationAlgorithm(bool useAverageForWeight_, bool u
 
 void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
 {
-	auto weights1 = static_cast<FastLayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();
-	auto weights2 = static_cast<FastLayeredNetwork*>(object2->getNeuralNetwork()->getNetworkTopology())->getWeights();
-	// Go through all edges
-	auto neuron2 = weights2->begin();
-	for (auto neuron1 = weights1->begin(); neuron1 != weights1->end(); neuron1++, neuron2++)
+	auto weights1 = static_cast<LayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();
+	auto weights2 = static_cast<LayeredNetwork*>(object2->getNeuralNetwork()->getNetworkTopology())->getWeights();
+
+	auto layer1 = weights1->begin();
+	auto layer2 = weights2->begin();
+	for (; layer1 != weights1->end(); layer1++, layer2++)
 	{
-		auto weight2 = neuron2->begin();
-		for (auto weight1 = neuron1->begin(); weight1 != neuron1->end(); weight1++, weight2++)
+		for (int i = 0; i < layer1->cols(); i++)
 		{
-			if (useAverageForWeight)
+			for (int j = 0; j < layer1->rows(); j++)
 			{
-				// Calculate the weights average and store it inside the first object
-				*weight1 = (*weight1 + *weight2) / 2;
-			}
-			else
-			{
-				if (rand() > RAND_MAX / 2)
-					*weight1 = *weight2;
+				if (useAverageForWeight)
+				{
+					// Calculate the weights average and store it inside the first object
+					(*layer1)(i, j) = ((*layer1)(i, j) + (*layer2)(i, j)) / 2;
+				}
+				else
+				{
+					if (rand() > RAND_MAX / 2)
+						(*layer1)(i, j) = (*layer2)(i, j);
+				}
 			}
 		}
 	}

@@ -86,9 +86,6 @@
     <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\FastLayeredNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
@@ -96,9 +93,6 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="NetworkTopology\LineStructure.cpp">
@@ -114,9 +108,6 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="Neuron\AbstractNeuron.cpp">
@@ -587,6 +578,15 @@
     <ClCompile Include="IO\SynapticExporter.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkTopology\LayeredNetwork.old..cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -613,9 +613,6 @@
     <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\FastLayeredNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
@@ -623,9 +620,6 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTopology\LineStructure.hpp">
@@ -1122,6 +1116,12 @@
     </ClInclude>
     <ClInclude Include="IO\SynapticExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LayeredNetwork.old.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

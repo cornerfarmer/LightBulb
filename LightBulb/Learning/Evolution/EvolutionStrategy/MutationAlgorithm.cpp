@@ -3,7 +3,7 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
 #include <math.h>
@@ -51,17 +51,20 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 
 	}
 
-	auto weights = static_cast<FastLayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();
+	auto weights = static_cast<LayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();
 	int mutationStrengthIndex = 0;
 	// Go through all edges
-	for (auto neuron = weights->begin(); neuron != weights->end(); neuron++)
+	for (auto layer = weights->begin(); layer != weights->end(); layer++)
 	{
-		for (auto weight = neuron->begin(); weight != neuron->end(); weight++)
+		for (int i = 0; i < layer->cols(); i++)
 		{
-			// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
-			double weightAdd = (*mutationStrength)[mutationStrengthIndex] * ZigguratGenerator::next();
-			*weight += weightAdd;
-			mutationStrengthIndex++;
+			for (int j = 0; j < layer->rows(); j++)
+			{
+				// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
+				double weightAdd = (*mutationStrength)[mutationStrengthIndex] * ZigguratGenerator::next();
+				(*layer)(i,j) += weightAdd;
+				mutationStrengthIndex++;
+			}
 		}
 	}
 

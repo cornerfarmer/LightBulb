@@ -104,7 +104,7 @@
 #include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
 #include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
 #include "Learning/Evolution/PerfectObjectFoundCondition.hpp"
-#include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 #include "IO/BrainJSExporter.hpp"
 #include "IO/SynapticExporter.hpp"
 #include <iostream>
@@ -2058,20 +2058,20 @@ void doCompare()
 
 	NeuralNetwork neuralNetwork(&layeredNetwork);
 
-	FastLayeredNetworkOptions fastLayeredNetworkOptions;
-	fastLayeredNetworkOptions.activationFunction = new BinaryFunction();
-	fastLayeredNetworkOptions.threshold = new StandardThreshold(0);
-	fastLayeredNetworkOptions.inputFunction = new WeightedSumFunction();
-	fastLayeredNetworkOptions.outputFunction = new IdentityFunction();
-	fastLayeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	fastLayeredNetworkOptions.neuronsPerLayerCount[0]=8;
-	fastLayeredNetworkOptions.neuronsPerLayerCount[1]=3;
-	fastLayeredNetworkOptions.neuronsPerLayerCount[2]=8;
-	fastLayeredNetworkOptions.useBiasNeuron = true;
+	LayeredNetworkOptions LayeredNetworkOptions;
+	LayeredNetworkOptions.activationFunction = new BinaryFunction();
+	LayeredNetworkOptions.threshold = new StandardThreshold(0);
+	LayeredNetworkOptions.inputFunction = new WeightedSumFunction();
+	LayeredNetworkOptions.outputFunction = new IdentityFunction();
+	LayeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	LayeredNetworkOptions.neuronsPerLayerCount[0]=8;
+	LayeredNetworkOptions.neuronsPerLayerCount[1]=3;
+	LayeredNetworkOptions.neuronsPerLayerCount[2]=8;
+	LayeredNetworkOptions.useBiasNeuron = true;
 
-	FastLayeredNetwork fastLayeredNetwork(fastLayeredNetworkOptions);
+	LayeredNetwork LayeredNetwork(LayeredNetworkOptions);
 
-	NeuralNetwork fastNeuralNetwork(&fastLayeredNetwork);
+	NeuralNetwork fastNeuralNetwork(&LayeredNetwork);
 
 	NeuralNetworkIO<double> input(8);
 	input.set(0, 0, 1);
@@ -2093,7 +2093,7 @@ void doCompare()
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 
 	begin = clock();
-	NeuralNetworkIO<double> fastOutput(fastLayeredNetwork.getOutputSize());
+	NeuralNetworkIO<double> fastOutput(LayeredNetwork.getOutputSize());
 	for (int i = 0; i < 1000000; i++)
 	{
 		fastNeuralNetwork.calculate(input, fastOutput, topologicalOrder);

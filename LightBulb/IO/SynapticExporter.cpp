@@ -1,7 +1,7 @@
 // Includes
 #include "IO/SynapticExporter.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 #include "IO/JSONObject.hpp"
 #include "IO/JSONArray.hpp"
 #include "IO/JSONNumberElement.hpp"
@@ -9,7 +9,7 @@
 
 std::string SynapticExporter::execute(NeuralNetwork* neuralNetwork)
 {
-	layeredNetwork = dynamic_cast<FastLayeredNetwork*>(neuralNetwork->getNetworkTopology());
+	layeredNetwork = dynamic_cast<LayeredNetwork*>(neuralNetwork->getNetworkTopology());
 
 	std::unique_ptr<JSONObject> jsonObject(getNetworkJSONObject());
 	return jsonObject->toString();
@@ -81,7 +81,7 @@ JSONAttribute* SynapticExporter::getNeuronLayerAttribute(int layerIndex, int neu
 JSONAttribute* SynapticExporter::getConnectionsAttribute()
 {
 	JSONArray* connections = new JSONArray();
-	weights = layeredNetwork->getWeights();
+	/*weights = layeredNetwork->getWeights();
 	for (int layerIndex = 0; layerIndex < layeredNetwork->getLayerCount(); layerIndex++)
 	{
 		for (int sourceNeuronIndex = layeredNetwork->getLayerOffsets()[layerIndex]; sourceNeuronIndex < layeredNetwork->getLayerOffsets()[layerIndex + 1]; sourceNeuronIndex++)
@@ -91,7 +91,7 @@ JSONAttribute* SynapticExporter::getConnectionsAttribute()
 				connections->addElement(getConnectionJSONObject(layerIndex, sourceNeuronIndex, destNeuronIndex));
 			}
 		}
-	}
+	}*/
 	return new JSONAttribute("connections", connections);
 }
 

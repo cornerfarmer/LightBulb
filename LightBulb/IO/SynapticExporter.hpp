@@ -12,13 +12,13 @@
 // Forward declarations
 class JSONObject;
 class JSONAttribute;
-class FastLayeredNetwork;
+class LayeredNetwork;
 
 // 
 class SynapticExporter : public AbstractExporter
 {
 private:
-	FastLayeredNetwork* layeredNetwork;
+	LayeredNetwork* layeredNetwork;
 	std::vector<std::vector<double>>* weights;
 	JSONObject* getNetworkJSONObject();
 	JSONAttribute* getNeuronsAttribute();

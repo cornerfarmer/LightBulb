@@ -9,7 +9,7 @@
 #include "NetworkTopology/FreeNetwork.hpp"
 
 // Forward declarations
-class AbstractTeachingLesson;
+class AbstractTeachingLessoni;
 class Teacher;
 
 // A HopfieldNetwork is special free network

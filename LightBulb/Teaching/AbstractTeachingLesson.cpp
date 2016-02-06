@@ -7,13 +7,13 @@
 // Library includes
 #include <math.h>
 
-std::unique_ptr<NeuralNetworkIO<double>> AbstractTeachingLesson::tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
+std::unique_ptr<NeuralNetworkIO<double>> AbstractTeachingLessoni::tryLesson(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
 	// Let the network calculate
 	return neuralNetwork.calculate(*getTeachingPattern(), activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
 }
 
-std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
+std::unique_ptr<ErrorMap_t> AbstractTeachingLessoni::getErrormap(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
 	std::unique_ptr<ErrorMap_t> errorMap;
 
@@ -30,7 +30,8 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork &n
 	return errorMap;
 }
 
-std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(NeuralNetworkIO<double>& outputVector, NeuralNetwork &neuralNetwork)
+
+std::unique_ptr<ErrorMap_t> AbstractTeachingLessoni::getErrormapFromOutputVector(NeuralNetworkIO<double>& outputVector, NeuralNetwork& neuralNetwork)
 {
 	// Get the teachingInput
 	NeuralNetworkIO<double>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
@@ -56,17 +57,17 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(
 	return errorMap;
 }
 
-double AbstractTeachingLesson::getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+double AbstractTeachingLessoni::getEuclidienDistance(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder)
 {
 	return 0;
 }
 
-double AbstractTeachingLesson::getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+double AbstractTeachingLessoni::getRMS(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder)
 {
 	return 0;
 }
 
-double AbstractTeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+double AbstractTeachingLessoni::getSpecificError(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder)
 {
 	// Calculate the errorVector
 	std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder, 0, getMaxTimeStep() + 1);
@@ -84,11 +85,11 @@ double AbstractTeachingLesson::getSpecificError(NeuralNetwork &neuralNetwork, Ab
 		// Divide the specific error by two
 		specificError /= 2;
 	}
-	
+
 	return specificError;
 }
 
-std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(NeuralNetwork &neuralNetwork)
+std::unique_ptr<ErrorMap_t> AbstractTeachingLessoni::getTeachingInputMap(NeuralNetwork& neuralNetwork)
 {
 	std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t());
 	NeuralNetworkIO<double>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
@@ -98,12 +99,13 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(NeuralNe
 		{
 			(*teachingInputMap)[timestep] = std::map<StandardNeuron*, double>();
 			int outputNeuronIndex = 0;
-			for (auto outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end(); outputNeuron++, outputNeuronIndex++)
+			for (auto outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end(); outputNeuron++ , outputNeuronIndex++)
 			{
 				(*teachingInputMap)[timestep][*outputNeuron] = teachingInput->get(timestep, outputNeuronIndex);
 			}
 		}
 	}
 
-	return  teachingInputMap;
+	return teachingInputMap;
 }
+

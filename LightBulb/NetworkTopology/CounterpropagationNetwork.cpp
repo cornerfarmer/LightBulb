@@ -61,7 +61,7 @@ void CounterpropagationNetwork::placeCodebookVectorsOnTeachingLessons(Teacher &t
 
 	for (auto teachingLessonIndex = lessonOrder.begin(); teachingLessonIndex != lessonOrder.end(); teachingLessonIndex++)
 	{
-		AbstractTeachingLesson* teachingLesson = (*teacher.getTeachingLessons())[*teachingLessonIndex].get();
+		AbstractTeachingLessoni* teachingLesson = (*teacher.getTeachingLessons())[*teachingLessonIndex].get();
 		for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
 		{
 			if (!readyNeurons[*neuron])

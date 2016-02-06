@@ -20,10 +20,10 @@ class StandardNeuron;
 
 typedef std::map<int, std::map<StandardNeuron*, double>> ErrorMap_t;
 
-class AbstractTeachingLesson
+class AbstractTeachingLessoni
 {
 public:
-	virtual ~AbstractTeachingLesson() {}
+	virtual ~AbstractTeachingLessoni() {}
 	// Put the teachingPattern into the neuralNetwork, refresh the network and fills (optional) the given output and netput values map
 	std::unique_ptr<NeuralNetworkIO<double>> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
 	// This method should return a double vector of the teachingInput 
@@ -43,7 +43,7 @@ public:
 	// Calculate the specific error
 	double getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Unfolds the teaching lesson
-	virtual AbstractTeachingLesson* unfold() = 0;
+	virtual AbstractTeachingLessoni* unfold() = 0;
 	// Returns the maximal time step in the teaching lesson
 	virtual int getMaxTimeStep() = 0;
 };

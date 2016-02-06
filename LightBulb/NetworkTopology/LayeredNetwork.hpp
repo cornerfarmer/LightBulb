@@ -4,6 +4,7 @@
 #define _LAYEREDNETWORK_H_
 
 // Libary includes
+#include "EigenSrc/Dense"
 #include <vector>
 #include <memory>
 
@@ -11,15 +12,18 @@
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Neuron/AbstractNeuron.hpp"
 #include "Neuron/BiasNeuron.hpp"
+#include "Function/XorShfGenerator.hpp"
 
 // Forward declarations
 class AbstractNeuronFactory;
+class AbstractActivationFunction;
+class AbstractInputFunction;
+class AbstractOutputFunction;
+class AbstractThreshold;
 
 // This struct contains all options needed to build a LayeredNetwork
 struct LayeredNetworkOptions
-{	
-	// Specifies the neuron factory
-	AbstractNeuronFactory* neuronFactory;
+{
 	// Enables shourtcut edges
 	bool enableShortcuts;
 	// Enables a bias neuron
@@ -28,41 +32,53 @@ struct LayeredNetworkOptions
 	std::vector<unsigned int> neuronsPerLayerCount;
 	// Specifies which neurons of the last layer will be used as output neurons (if empty, the whole last layer will be used)
 	std::vector<unsigned int> outputNeuronsIndices;
+
+	AbstractActivationFunction* activationFunction;
+
+	AbstractInputFunction* inputFunction;
+
+	AbstractOutputFunction* outputFunction;
+
+	AbstractThreshold* threshold;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
 	LayeredNetworkOptions(const LayeredNetworkOptions &obj);
 };
 
-typedef struct LayeredNetworkOptions LayeredNetworkOptions_t;
 
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
 class LayeredNetwork : public AbstractNetworkTopology
 {
 protected:
-	std::unique_ptr<LayeredNetworkOptions_t> options;
-	// Holds all neurons
-	std::vector<std::vector<StandardNeuron*>> neurons;
-	// Holds the bias neuron
-	BiasNeuron biasNeuron;
-	// Holds all output neurons
-	std::vector<StandardNeuron*> outputNeurons;
-	// Holds all input neurons
-	std::vector<AbstractNeuron*> inputNeurons;
+	std::unique_ptr<LayeredNetworkOptions> options;
+	//
+	std::vector<Eigen::VectorXd> netInputs;
+	//
+	std::vector<Eigen::VectorXd> activations;
+
+	std::vector<Eigen::MatrixXd> weights;
+
+	std::vector<int> layerOffsets;
 	// Builds the network from the given options
-	void buildNetwork();	
+	void buildNetwork();
 	// Refreshes the neuronPerLayerCounters
 	void refreshNeuronsPerLayerCounters();
 	// Rebuilds the output neurons vector from the outputNeuronsIndices option
 	void rebuildOutputNeurons();
 
+	XorShfGenerator randGenerator;
 public:
 	~LayeredNetwork();
-	LayeredNetwork(LayeredNetworkOptions_t &options_);	
-	LayeredNetwork();	
-	// Returns all InputNeurons (first layer)
-	std::vector<AbstractNeuron*>* getInputNeurons();
-	// Returns all OutputNeurons (last layer)
-	std::vector<StandardNeuron*>* getOutputNeurons();
+	LayeredNetwork(LayeredNetworkOptions &options_);
+	LayeredNetwork();
+
+	void setInput(std::vector<std::pair<bool, double>>* inputVector);
+
+	void getOutput(std::vector<std::pair<bool, double>> &outputVector);
+
+	void setInput(std::vector<double>* inputVector);
+
+	void getOutput(std::vector<double> &outputVector);
 	// Calculates the layer count
 	int getLayerCount();
 	// Returns all Neurons
@@ -84,7 +100,7 @@ public:
 	// Reset all activations of all neurons
 	void resetActivation();
 	// Merge this network with another one (The neurons of the otherNetwork will be removed from it)
-	void mergeWith(LayeredNetwork& otherNetwork);	 
+	void mergeWith(LayeredNetwork& otherNetwork);
 	// Merge this network with another one
 	virtual void horizontalMergeWith(LayeredNetwork& otherNetwork);
 	// Returns a map which holds for every edge the information if it is recurrent or not
@@ -93,8 +109,37 @@ public:
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
 	void getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs);
-	// Returns the bias neuron
+
+	// Returns all InputNeurons in the NeuralNetwork
+	std::vector<AbstractNeuron*>* getInputNeurons();
+	// Returns all OutputNeurons in the NeuralNetwork
+	std::vector<StandardNeuron*>* getOutputNeurons();
+
 	BiasNeuron* getBiasNeuron();
+
+	int getOutputSize();
+
+	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
+
+	void refreshNetInputsForLayer(int layerNr);
+
+	void refreshActivationsForLayer(int layerNr);
+
+	std::vector<Eigen::MatrixXd>* getWeights();
+
+	std::vector<Eigen::VectorXd>* getActivations();
+
+	std::vector<Eigen::VectorXd>* getNetInputs();
+
+	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
+
+	int getNeuronCountInLayer(int layerNr);
+
+	double getBiasWeightOfNeuron(int layerNr, int neuronNr);
+
+	std::vector<double> getAfferentWeights(int layerNr, int neuronNr);
+
+	std::vector<int> getLayerOffsets();
 };
 
 #endif

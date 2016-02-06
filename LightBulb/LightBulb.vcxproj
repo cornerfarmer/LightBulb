@@ -163,19 +163,35 @@
     <ClCompile Include="Lib\ziggurat.cpp" />
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
-    <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp" />
-    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp" />
-    <ClCompile Include="NetworkTopology\FastLayeredNetwork.cpp" />
-    <ClCompile Include="NetworkTopology\FreeNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\FreeNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NetworkTopology\GridStructure.cpp" />
     <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp" />
-    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\LayeredNetwork.old..cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NetworkTopology\LineStructure.cpp" />
-    <ClCompile Include="NetworkTopology\LVQNetwork.cpp" />
-    <ClCompile Include="NetworkTopology\RBFNetwork.cpp" />
-    <ClCompile Include="NetworkTopology\RecurrentLayeredNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\RBFNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\RecurrentLayeredNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp" />
-    <ClCompile Include="NetworkTopology\SOMNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp" />
     <ClCompile Include="NeuronFactory\AbstractNeuronFactory.cpp" />
@@ -343,19 +359,35 @@
     <ClInclude Include="Lib\ziggurat.hpp" />
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
-    <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp" />
-    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp" />
-    <ClInclude Include="NetworkTopology\FastLayeredNetwork.hpp" />
-    <ClInclude Include="NetworkTopology\FreeNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\FreeNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NetworkTopology\GridStructure.hpp" />
     <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp" />
-    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\LayeredNetwork.old.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NetworkTopology\LineStructure.hpp" />
-    <ClInclude Include="NetworkTopology\LVQNetwork.hpp" />
-    <ClInclude Include="NetworkTopology\RBFNetwork.hpp" />
-    <ClInclude Include="NetworkTopology\RecurrentLayeredNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\RBFNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\RecurrentLayeredNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp" />
-    <ClInclude Include="NetworkTopology\SOMNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp" />
     <ClInclude Include="NeuronFactory\AbstractNeuronFactory.hpp" />

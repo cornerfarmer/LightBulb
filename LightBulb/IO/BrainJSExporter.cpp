@@ -1,7 +1,7 @@
 // Includes
 #include "IO/BrainJSExporter.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/FastLayeredNetwork.hpp"
+#include "NetworkTopology/LayeredNetwork.hpp"
 #include "IO/JSONObject.hpp"
 #include "IO/JSONArray.hpp"
 #include "IO/JSONNumberElement.hpp"
@@ -10,7 +10,7 @@ std::string BrainJSExporter::execute(NeuralNetwork* neuralNetwork)
 {
 	JSONObject jsonObject;
 	JSONArray* layers = new JSONArray();
-	FastLayeredNetwork* layeredNetwork = dynamic_cast<FastLayeredNetwork*>(neuralNetwork->getNetworkTopology());
+	LayeredNetwork* layeredNetwork = dynamic_cast<LayeredNetwork*>(neuralNetwork->getNetworkTopology());
 	
 	int layerCount = layeredNetwork->getLayerCount();
 	for (int l = 0; l < layerCount; l++)

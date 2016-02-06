@@ -9,7 +9,7 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 
 // Forward declarations
-class AbstractTeachingLesson;
+class AbstractTeachingLessoni;
 class Teacher;
 
 // A CounterpropagationNetwork is layered network which has only one input, one hidden and one output layer.

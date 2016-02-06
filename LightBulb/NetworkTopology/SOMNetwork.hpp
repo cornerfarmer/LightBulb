@@ -10,7 +10,7 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 
 // Forward declarations
-class AbstractTeachingLesson;
+class AbstractTeachingLessoni;
 class Teacher;
 class AbstractSOMStructure;
 
