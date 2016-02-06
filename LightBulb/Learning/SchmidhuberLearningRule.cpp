@@ -45,7 +45,7 @@ void SchmidhuberLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNe
 }
 
 
-double SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double SchmidhuberLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	double gradient = lastGradients[&edge];
 	// If this is not the first block
@@ -130,7 +130,7 @@ double SchmidhuberLearningRule::getDynamicSystemValue(StandardNeuron* neuron, Ed
 	return dynamicSystemValue;
 }
 
-void SchmidhuberLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void SchmidhuberLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	
 }
@@ -185,7 +185,7 @@ void SchmidhuberLearningRule::initializeAllWeightAdjustments(NeuralNetwork &neur
 	}
 }
 
-void SchmidhuberLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson)
+void SchmidhuberLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {	
 	currentBlockSize = neuralNetwork.getNetworkTopology()->getNeurons()->front().size();
 	lastGradients.clear();
@@ -218,7 +218,7 @@ double SchmidhuberLearningRule::getGammaOfNeuronsInTime(StandardNeuron* neuronj,
 	return gamma;
 }
 
-bool SchmidhuberLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson)
+bool SchmidhuberLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
 {	
 	// At the beginning of every teachingLesson start with the first timestep, else add the blocksize to the old start time to get the new one
 	if (*nextStartTime == -1)

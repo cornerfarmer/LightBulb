@@ -8,7 +8,7 @@
 #include <memory>
 
 // Forward declarations
-class AbstractTeachingLessoni;
+class AbstractTeachingLesson;
 class NeuralNetwork;
 class AbstractActivationOrder;
 
@@ -17,16 +17,16 @@ class Teacher
 {
 private:
 	// A list of teaching lessons which are used for total error calculation and learning stuff
-	std::vector<std::unique_ptr<AbstractTeachingLessoni>> teachingLessons;
+	std::vector<std::unique_ptr<AbstractTeachingLesson>> teachingLessons;
 	// A list of teaching lessons which influent the total error, but they will not be part of any learning process
-	std::vector<std::unique_ptr<AbstractTeachingLessoni>> testingLessons;
+	std::vector<std::unique_ptr<AbstractTeachingLesson>> testingLessons;
 public:
 	// Adds a new TechingLesson to the teachingLessons list
-	void addTeachingLesson(AbstractTeachingLessoni* newTeachingLesson);
+	void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson);
 	// Adds a new TechingLesson to the testingLessons list
-	void addTestingLesson(AbstractTeachingLessoni* newTestingLesson);
+	void addTestingLesson(AbstractTeachingLesson* newTestingLesson);
 	// Get all techingLessons (Useful for online learning)
-	std::vector<std::unique_ptr<AbstractTeachingLessoni>>* getTeachingLessons();
+	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons();
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
 	double getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Returns a unfolded version of this teacher

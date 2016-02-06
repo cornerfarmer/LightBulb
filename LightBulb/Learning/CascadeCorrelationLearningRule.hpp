@@ -66,19 +66,19 @@ private:
 	// The current teacher
 	Teacher* currentTeacher;
 
-	std::map<AbstractTeachingLessoni*, std::map<Edge*, std::map<int, std::pair<double, bool>>>> outputGradientCache;
+	std::map<AbstractTeachingLesson*, std::map<Edge*, std::map<int, std::pair<double, bool>>>> outputGradientCache;
 	// The cache of every output of every neuron in every timestep in every teaching lesson
-	std::map<AbstractTeachingLessoni*, std::vector<std::map<AbstractNeuron*, double>>> neuronOutputCache;
+	std::map<AbstractTeachingLesson*, std::vector<std::map<AbstractNeuron*, double>>> neuronOutputCache;
 	// The cache of every net input of every candidate unit int every timestep in every teaching lesson
-	std::map<StandardNeuron*, std::map<AbstractTeachingLessoni*, std::vector<double>>> candidatesNetInputCache;
+	std::map<StandardNeuron*, std::map<AbstractTeachingLesson*, std::vector<double>>> candidatesNetInputCache;
 	// Holds all current correlation values of all output neurons corresponding to all candidate units
 	std::map<StandardNeuron*, std::map<StandardNeuron*, double>> correlations;
 	// Holds all current error factors of all output neurons in all teaching lessons
-	std::map<AbstractTeachingLessoni*, std::map<int, std::map<StandardNeuron*, double>>> errorFactors;
+	std::map<AbstractTeachingLesson*, std::map<int, std::map<StandardNeuron*, double>>> errorFactors;
 	// Computes the output gradient of an edge in a given time and lesson
-	double getOutputGradient(Edge* edge, int time, AbstractTeachingLessoni* lesson);
-	double getOutputGradientCached(Edge* edge, int time, AbstractTeachingLessoni* lesson);
-	double calcOutputGradient(Edge* edge, int time, AbstractTeachingLessoni* lesson);
+	double getOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson);
+	double getOutputGradientCached(Edge* edge, int time, AbstractTeachingLesson* lesson);
+	double calcOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson);
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeight(Edge* edge, double gradient);
@@ -92,13 +92,13 @@ protected:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
-	void initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
+	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
+	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
-	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson);
+	void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson);
 	void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
-	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson);
+	bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 	std::vector<std::map<AbstractNeuron*, double>>* getOutputValuesInTime();
 	std::vector<std::map<AbstractNeuron*, double>>* getNetInputValuesInTime();
 public:

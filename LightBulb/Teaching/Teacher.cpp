@@ -7,19 +7,19 @@
 #include "Neuron/AbstractNeuron.hpp"
 #include "Neuron/Edge.hpp"
 
-void Teacher::addTestingLesson(AbstractTeachingLessoni* newTestingLesson)
+void Teacher::addTestingLesson(AbstractTeachingLesson* newTestingLesson)
 {
 	// Add the newTeachingLesson to the list
-	testingLessons.push_back(std::unique_ptr<AbstractTeachingLessoni>(newTestingLesson));
+	testingLessons.push_back(std::unique_ptr<AbstractTeachingLesson>(newTestingLesson));
 
 }
-void Teacher::addTeachingLesson(AbstractTeachingLessoni* newTeachingLesson)
+void Teacher::addTeachingLesson(AbstractTeachingLesson* newTeachingLesson)
 {
 	// Add the newTeachingLesson to the list
-	teachingLessons.push_back(std::unique_ptr<AbstractTeachingLessoni>(newTeachingLesson));
+	teachingLessons.push_back(std::unique_ptr<AbstractTeachingLesson>(newTeachingLesson));
 }
 
-std::vector<std::unique_ptr<AbstractTeachingLessoni>>* Teacher::getTeachingLessons()
+std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLessons()
 {
 	return &teachingLessons;
 }

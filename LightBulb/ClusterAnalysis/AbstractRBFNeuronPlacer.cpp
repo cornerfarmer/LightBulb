@@ -14,7 +14,7 @@ std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(
 	std::unique_ptr<PointSet> points(new PointSet());
 		
 	// Go through all teachingLessons and the corresponding points
-	for (std::vector<std::unique_ptr<AbstractTeachingLessoni>>::const_iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
+	for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::const_iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 	{
 		std::vector<double> position(inputDimension);
 		std::vector<double> value = (*teachingLesson)->getTeachingInput(NULL)->getRealVectorInTimestep(0);

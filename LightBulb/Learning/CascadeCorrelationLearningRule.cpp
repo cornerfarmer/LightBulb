@@ -42,7 +42,7 @@ void CascadeCorrelationLearningRule::initializeLearningAlgoritm(NeuralNetwork &n
 }
 
 
-double CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// If the learning rule is in output neurons learning mode, let the backpropagation learning rule do the work
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)	
@@ -75,7 +75,7 @@ double CascadeCorrelationLearningRule::calculateDeltaWeightFromEdge(AbstractTeac
 		return 0;
 }
 
-double CascadeCorrelationLearningRule::calcOutputGradient(Edge* edge, int time, AbstractTeachingLessoni* lesson)
+double CascadeCorrelationLearningRule::calcOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson)
 {
 	double outputSum = 0;
 	// Calculate the output gradient of the current time step
@@ -88,7 +88,7 @@ double CascadeCorrelationLearningRule::calcOutputGradient(Edge* edge, int time, 
 	return edge->getNextNeuron()->executeDerivationOnActivationFunction(candidatesNetInputCache[edge->getNextNeuron()][lesson][time]) * outputSum;
 }
 
-double CascadeCorrelationLearningRule::getOutputGradientCached(Edge* edge, int time, AbstractTeachingLessoni* lesson)
+double CascadeCorrelationLearningRule::getOutputGradientCached(Edge* edge, int time, AbstractTeachingLesson* lesson)
 {
 	if (!outputGradientCache[lesson][edge][time].second)
 	{
@@ -98,7 +98,7 @@ double CascadeCorrelationLearningRule::getOutputGradientCached(Edge* edge, int t
 	return outputGradientCache[lesson][edge][time].first;
 }
 
-double CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, AbstractTeachingLessoni* lesson)
+double CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, AbstractTeachingLesson* lesson)
 {
 	if (getOptions()->recurrent)
 		return getOutputGradientCached(edge, time, lesson);
@@ -106,7 +106,7 @@ double CascadeCorrelationLearningRule::getOutputGradient(Edge* edge, int time, A
 		return calcOutputGradient(edge, time, lesson);
 }
 
-void CascadeCorrelationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void CascadeCorrelationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// If we are in output neurons learning mode, let the backpropagation learning rule do some work
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE && layerIndex == currentNetworkTopology->getNeurons()->size() - 1)
@@ -174,7 +174,7 @@ void CascadeCorrelationLearningRule::initializeTry(NeuralNetwork &neuralNetwork,
 	currentMode = OUTPUTNEURONSLEARNINGMODE;
 }
 
-void CascadeCorrelationLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson)
+void CascadeCorrelationLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {
 	if (currentMode == OUTPUTNEURONSLEARNINGMODE) 
 		outputNeuronsBackpropagationLearningRule->initializeTeachingLesson(neuralNetwork, teachingLesson);
@@ -183,7 +183,7 @@ void CascadeCorrelationLearningRule::initializeTeachingLesson(NeuralNetwork &neu
 void CascadeCorrelationLearningRule::calcAllCorrelations(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder, bool calcErrorFactor)
 {	
 	// Create a map which should hold all errormaps of all teaching lessons (only needed if this is the first calculation)
-	std::map<AbstractTeachingLessoni*, std::unique_ptr<ErrorMap_t>> errorMaps;
+	std::map<AbstractTeachingLesson*, std::unique_ptr<ErrorMap_t>> errorMaps;
 	// Go through all teaching lessons
 	for (auto teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 	{
@@ -415,7 +415,7 @@ void CascadeCorrelationLearningRule::initializeIteration(NeuralNetwork &neuralNe
 	}	
 }
 
-bool CascadeCorrelationLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLessoni& teachingLesson)
+bool CascadeCorrelationLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
 {
 	// Only do one calculation per teaching lesson
 	if (*nextStartTime != -1)

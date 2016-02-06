@@ -66,7 +66,7 @@ AbstractActivationOrder* CounterpropagationLearningRule::getNewActivationOrder(N
 	return new TopologicalOrder();
 }
 
-double CounterpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double CounterpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	if (mode == 0 && layerIndex == 0 && neuron.getActivation() == neuron.getActivationFunction()->getMaximum())
 	{	

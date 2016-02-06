@@ -55,7 +55,7 @@ NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingPattern()
 	return teachingPattern.get();
 }
 
-AbstractTeachingLessoni* TeachingLessonBooleanInput::unfold()
+AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
 {
 	// Create a new teaching input
 	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>(teachingInput->getDimension());

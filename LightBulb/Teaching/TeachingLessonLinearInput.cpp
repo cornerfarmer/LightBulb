@@ -25,7 +25,7 @@ NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingPattern()
 	return teachingPattern.get();
 }
 
-AbstractTeachingLessoni* TeachingLessonLinearInput::unfold()
+AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 {
 	// Create a new teaching input
 	NeuralNetworkIO<double>* unfoldedTeachingInput = new NeuralNetworkIO<double>(teachingInput->getDimension());

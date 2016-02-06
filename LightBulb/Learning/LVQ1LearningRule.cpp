@@ -59,7 +59,7 @@ AbstractActivationOrder* LVQ1LearningRule::getNewActivationOrder(NeuralNetwork &
 	return new TopologicalOrder();
 }
 
-double LVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double LVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	if (layerIndex == 0 && neuron.getActivation() == neuron.getActivationFunction()->getMaximum())
 	{	

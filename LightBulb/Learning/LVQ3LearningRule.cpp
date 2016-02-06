@@ -59,7 +59,7 @@ AbstractActivationOrder* LVQ3LearningRule::getNewActivationOrder(NeuralNetwork &
 	return new TopologicalOrder();
 }
 
-double LVQ3LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double LVQ3LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	if (changeWeights && (&neuron == firstWinnerNeuron || &neuron == secondWinnerNeuron))
 	{		
@@ -85,7 +85,7 @@ double LVQ3LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& l
 		return 0;
 }
 
-void LVQ3LearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLessoni &teachingLesson)
+void LVQ3LearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 {
 	// Determine the winner neurons
 	secondWinnerNeuron = NULL;

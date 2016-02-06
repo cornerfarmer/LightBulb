@@ -63,7 +63,7 @@ AbstractActivationOrder* OLVQ1LearningRule::getNewActivationOrder(NeuralNetwork 
 	return new TopologicalOrder();
 }
 
-double OLVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double OLVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// If the current neuron is the nearest neuron
 	if (layerIndex == 0 && neuron.getActivation() == neuron.getActivationFunction()->getMaximum())
@@ -82,7 +82,7 @@ double OLVQ1LearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLessoni& 
 		return 0;
 }
 
-void OLVQ1LearningRule::initializeNeuronWeightCalculation(AbstractTeachingLessoni& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void OLVQ1LearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// If the current neuron is the nearest neuron
 	if (layerIndex == 0 && neuron.getActivation() == neuron.getActivationFunction()->getMaximum())

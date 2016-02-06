@@ -79,7 +79,7 @@ int LVQNetwork::getClassOfNeuronWithIndex(int neuronIndex)
 	return getClassOfNeuron(neurons[0][neuronIndex]);
 }
 
-int LVQNetwork::getClassOfTeachingLesson(AbstractTeachingLessoni& teachingLesson)
+int LVQNetwork::getClassOfTeachingLesson(AbstractTeachingLesson& teachingLesson)
 {
 	NeuralNetworkIO<double>* teachingInput = teachingLesson.getTeachingInput(neurons.back()[0]->getActivationFunction());
 	for (int teachingInputValueIndex = 0; teachingInputValueIndex < teachingInput->getDimension(); teachingInputValueIndex++)
@@ -120,7 +120,7 @@ void LVQNetwork::placeCodebookVectorsOnTeachingLessons(Teacher &teacher)
 
 	for (auto teachingLessonIndex = lessonOrder.begin(); teachingLessonIndex != lessonOrder.end(); teachingLessonIndex++)
 	{
-		AbstractTeachingLessoni* teachingLesson = (*teacher.getTeachingLessons())[*teachingLessonIndex].get();
+		AbstractTeachingLesson* teachingLesson = (*teacher.getTeachingLessons())[*teachingLessonIndex].get();
 		for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
 		{
 			if (!readyNeurons[*neuron] && getClassOfTeachingLesson(*teachingLesson) == getClassOfNeuron(*neuron))

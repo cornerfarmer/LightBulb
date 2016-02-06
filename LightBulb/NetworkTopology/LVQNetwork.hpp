@@ -9,7 +9,7 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 
 // Forward declarations
-class AbstractTeachingLessoni;
+class AbstractTeachingLesson;
 class Teacher;
 
 // A LVQNetwork is layered network which has only one input, one hidden and one output layer.
@@ -28,7 +28,7 @@ public:
 	// Returns the class of a neuron with the given index in the hidden layer
 	int getClassOfNeuronWithIndex(int neuronIndex);
 	// Returns the class of a teaching lesson
-	int getClassOfTeachingLesson(AbstractTeachingLessoni& teachingLesson);
+	int getClassOfTeachingLesson(AbstractTeachingLesson& teachingLesson);
 	// Divide the codebook vectors into classes (not random)
 	void divideCodebookVectorsIntoClasses();
 	// Place all codebook vectors in the hidden layer on teaching lessons (random)
