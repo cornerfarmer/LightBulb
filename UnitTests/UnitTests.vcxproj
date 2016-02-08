@@ -177,6 +177,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Function\WeightedSumFunctionTest.cpp" />
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />

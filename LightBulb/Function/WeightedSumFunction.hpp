@@ -15,7 +15,7 @@ class WeightedSumFunction : public AbstractInputFunction
 private:
 public:
 	// Calculates Σ output * weight
-	double execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache = NULL);
+	void execute(int layerNr, std::vector<Eigen::VectorXd> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights);
 	AbstractInputFunction* getInputFunctionCopy();
 };
 

@@ -66,7 +66,11 @@
     <ClCompile Include="Function\CosinusFunction.cpp" />
     <ClCompile Include="Function\CylinderFunction.cpp" />
     <ClCompile Include="Function\EqualRandomFunction.cpp" />
-    <ClCompile Include="Function\EuclideanDistance.cpp" />
+    <ClCompile Include="Function\EuclideanDistance.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Function\ExponentialShrinkFunction.cpp" />
     <ClCompile Include="Function\FermiFunction.cpp" />
     <ClCompile Include="Function\GaussianRBFFunction.cpp" />
@@ -204,7 +208,11 @@
     <ClCompile Include="Neuron\InputNeuron.cpp" />
     <ClCompile Include="Neuron\NeuronCompareThreshold.cpp" />
     <ClCompile Include="Neuron\RBFThreshold.cpp" />
-    <ClCompile Include="Neuron\StandardNeuron.cpp" />
+    <ClCompile Include="Neuron\StandardNeuron.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Neuron\StandardThreshold.cpp" />
     <ClCompile Include="Teaching\AbstractTeachingLesson.cpp" />
     <ClCompile Include="Teaching\Teacher.cpp" />
@@ -261,7 +269,11 @@
     <ClInclude Include="Function\CosinusFunction.hpp" />
     <ClInclude Include="Function\CylinderFunction.hpp" />
     <ClInclude Include="Function\EqualRandomFunction.hpp" />
-    <ClInclude Include="Function\EuclideanDistance.hpp" />
+    <ClInclude Include="Function\EuclideanDistance.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Function\ExponentialShrinkFunction.hpp" />
     <ClInclude Include="Function\FermiFunction.hpp" />
     <ClInclude Include="Function\GaussianRBFFunction.hpp" />
@@ -400,7 +412,11 @@
     <ClInclude Include="Neuron\InputNeuron.hpp" />
     <ClInclude Include="Neuron\NeuronCompareThreshold.hpp" />
     <ClInclude Include="Neuron\RBFThreshold.hpp" />
-    <ClInclude Include="Neuron\StandardNeuron.hpp" />
+    <ClInclude Include="Neuron\StandardNeuron.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Neuron\StandardThreshold.hpp" />
     <ClInclude Include="Teaching\AbstractTeachingLesson.hpp" />
     <ClInclude Include="Teaching\Teacher.hpp" />

@@ -1,20 +1,9 @@
 // Includes
 #include "Function/WeightedSumFunction.hpp"
-#include "Neuron/Edge.hpp"
-#include "Neuron/AbstractNeuron.hpp"
 
-double WeightedSumFunction::execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache)
+void WeightedSumFunction::execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights)
 {
-	double sum = additionalInput;
-
-	// Calculate the product of weight and output of every neuron and add it to the sum
-	for (auto edge = input.begin(); edge != input.end(); edge++)
-	{
-		// Use the neuronOutputCache if possible else use the current activation
-		sum += (*edge)->getWeight() * (*edge)->getPrevNeuron()->getActivation(); // (neuronOutputCache == NULL || neuronOutputCache->find((*edge)->getPrevNeuron()) == neuronOutputCache->end() ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]);
-	}
-
-	return sum;
+	netInputs[layerNr].noalias() = weights[layerNr] * activations[layerNr];
 }
 
 AbstractInputFunction* WeightedSumFunction::getInputFunctionCopy()
