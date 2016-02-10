@@ -14,8 +14,8 @@ private:
 public:
 	FermiFunction(double temperatureParameter_);
 	// Inherited
-	double execute(double input, AbstractThreshold* threshold);
-	double executeDerivation(double input, AbstractThreshold* threshold);
+	double execute(double input);
+	double executeDerivation(double input);
 	AbstractActivationFunction* getActivationFunctionCopy();
 	double getMaximum();
 	double getMinimum();

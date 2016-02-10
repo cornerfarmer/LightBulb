@@ -4,7 +4,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Examples/Nature.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
-#include "NeuronFactory/SameFunctionsNeuronFactory.hpp"
+#include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
 #include "Neuron/StandardThreshold.hpp"
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/FermiFunction.hpp"
@@ -16,6 +16,7 @@
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
+#include <Neuron/NeuronDescription.hpp>
 
 AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension, bool biasNeuron)
 {
@@ -29,10 +30,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(outputDimension);
-	options.activationFunction = new BinaryFunction();
-	options.inputFunction = new WeightedSumFunction();
-	options.outputFunction = new IdentityFunction();
-	options.threshold = new StandardThreshold(0);
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
 	//options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 
 	// Create a new network topology from the adjusted options.

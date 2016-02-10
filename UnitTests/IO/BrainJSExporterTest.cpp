@@ -7,6 +7,8 @@
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/IdentityFunction.hpp"
 #include "Neuron/StandardThreshold.hpp"
+#include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
+#include "Neuron/NeuronDescription.hpp"
 
 TEST(BrainJSExporterTest, exportSimpleLayeredNetwork)
 {
@@ -16,10 +18,7 @@ TEST(BrainJSExporterTest, exportSimpleLayeredNetwork)
 	options.neuronsPerLayerCount.push_back(2);
 	options.neuronsPerLayerCount.push_back(3);
 	options.neuronsPerLayerCount.push_back(1);
-	options.activationFunction = new FermiFunction(1);
-	options.inputFunction = new WeightedSumFunction();
-	options.outputFunction = new IdentityFunction();
-	options.threshold = new StandardThreshold(0);
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	options.useBiasNeuron = true;
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
 	auto weights = layeredNetwork->getWeights();

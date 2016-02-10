@@ -248,7 +248,7 @@ void AbstractNetworkTopologyDrawer::refreshAllActivations()
 		{
 			double activationFactor = neuronShape->first->getActivation();		
 
-			activationFactor = activationFunction->execute(activationFactor, threshold.get());
+			activationFactor = activationFunction->execute(activationFactor);
 			
 			if (activationFactor > 0)
 				neuronShape->second.first.setFillColor(sf::Color(fillColorPositiveActivatedNeuron.r, fillColorPositiveActivatedNeuron.g, fillColorPositiveActivatedNeuron.b,  255.0 * activationFactor));
@@ -258,7 +258,7 @@ void AbstractNetworkTopologyDrawer::refreshAllActivations()
 			for (auto edge = neuronShape->first->getEfferentEdges()->begin(); edge != neuronShape->first->getEfferentEdges()->end(); edge++)
 			{
 				double edgeActivationFactor = (*edge)->getWeight() * neuronShape->first->getActivation();
-				edgeActivationFactor = activationFunction->execute(edgeActivationFactor, threshold.get());
+				edgeActivationFactor = activationFunction->execute(edgeActivationFactor);
 
 				if (edgeActivationFactor > 0)
 					edgeShapes[*edge]->setColor(sf::Color((255 - fillColorPositiveActivatedNeuron.r) * (1 - edgeActivationFactor) + fillColorPositiveActivatedNeuron.r,  (255 - fillColorPositiveActivatedNeuron.g) * (1 - edgeActivationFactor) + fillColorPositiveActivatedNeuron.g, (255 - fillColorPositiveActivatedNeuron.b) * (1 - edgeActivationFactor) + fillColorPositiveActivatedNeuron.b));

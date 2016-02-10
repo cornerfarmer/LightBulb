@@ -15,11 +15,8 @@
 #include "Function/XorShfGenerator.hpp"
 
 // Forward declarations
-class AbstractNeuronFactory;
-class AbstractActivationFunction;
-class AbstractInputFunction;
-class AbstractOutputFunction;
-class AbstractThreshold;
+class AbstractNeuronDescriptionFactory;
+class NeuronDescription;
 
 // This struct contains all options needed to build a LayeredNetwork
 struct LayeredNetworkOptions
@@ -33,13 +30,7 @@ struct LayeredNetworkOptions
 	// Specifies which neurons of the last layer will be used as output neurons (if empty, the whole last layer will be used)
 	std::vector<unsigned int> outputNeuronsIndices;
 
-	AbstractActivationFunction* activationFunction;
-
-	AbstractInputFunction* inputFunction;
-
-	AbstractOutputFunction* outputFunction;
-
-	AbstractThreshold* threshold;
+	AbstractNeuronDescriptionFactory* descriptionFactory;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();
 	LayeredNetworkOptions(const LayeredNetworkOptions &obj);
@@ -59,6 +50,8 @@ protected:
 	std::vector<Eigen::MatrixXd> weights;
 
 	std::vector<int> layerOffsets;
+
+	std::vector<std::unique_ptr<NeuronDescription>> neuronDescriptionsPerLayer;
 	// Builds the network from the given options
 	void buildNetwork();
 	// Refreshes the neuronPerLayerCounters

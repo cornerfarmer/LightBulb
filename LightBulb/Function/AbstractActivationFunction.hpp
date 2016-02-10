@@ -3,8 +3,13 @@
 #ifndef _ABSTRACTACTIVATIONFUNCTION_H_
 #define _ABSTRACTACTIVATIONFUNCTION_H_
 
+// Library includes
+#include <vector>
+#include <EigenSrc/Cholesky>
+
 // Forward declaration
 class AbstractThreshold;
+
 
 // This abstract class describes a function, which can calculate the activation of a neuron
 class AbstractActivationFunction
@@ -13,9 +18,11 @@ private:
 public:
 	virtual ~AbstractActivationFunction() {}
 	// Calculate the activation from the given input
-	virtual double execute(double input, AbstractThreshold* threshold) = 0;
+	virtual void execute(int layerNr, std::vector<Eigen::VectorXd> &activations, std::vector<Eigen::VectorXd> &netInputs);
+
+	virtual double execute(double input) = 0;
 	// Calculate the derivated activation from the given input
-	virtual double executeDerivation(double input, AbstractThreshold* threshold) = 0;
+	virtual double executeDerivation(double input) = 0;
 	// Create a copy of the object
 	virtual AbstractActivationFunction* getActivationFunctionCopy() = 0;
 	// Returns the maximum value of this function

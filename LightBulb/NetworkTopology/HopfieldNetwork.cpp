@@ -1,6 +1,6 @@
 // Includes
 #include "NetworkTopology/HopfieldNetwork.hpp"
-#include "NeuronFactory/SameFunctionsNeuronFactory.hpp"
+#include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
 #include "Function/IdentityFunction.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Function/WeightedSumFunction.hpp"
@@ -10,6 +10,7 @@
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "Neuron/Edge.hpp"
 #include "Teaching/Teacher.hpp"
+#include "Neuron/NeuronDescription.hpp"
 //  Library includes
 #include <algorithm>  
 
@@ -33,7 +34,8 @@ HopfieldNetwork::HopfieldNetwork(unsigned int neuronCount, bool binaryActivation
 	options->selfReferencingEdges = false;
 	options->neuronCount = neuronCount;
 	// Define thresholds and functions
-	options->neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), (binaryActivationFunction ? static_cast<AbstractActivationFunction*>(new BinaryFunction(-1)) : static_cast<AbstractActivationFunction*>(new FermiFunction(0.1))), new IdentityFunction());
+	throw new std::exception("currently not working");
+	//options->neuronFactory = new SameNeuronDescriptionFactory(new NetworkDescription(new WeightedSumFunction(), (binaryActivationFunction ? static_cast<AbstractActivationFunction*>(new BinaryFunction(-1)) : static_cast<AbstractActivationFunction*>(new FermiFunction(0.1)))));
 
 	// Build the network
 	buildNetwork();

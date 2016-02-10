@@ -16,9 +16,9 @@ private:
 public:
 	BinaryFunction(double minValue_ = 0, double maxValue_ = 1);
 	// Returns minValue (input < threshold) or maxValue (input > threshold)
-	double execute(double input, AbstractThreshold* threshold);
+	double execute(double input);
 	// Error - No derivation available
-	double executeDerivation(double input, AbstractThreshold* threshold);
+	double executeDerivation(double input);
 	// Inherited:
 	AbstractActivationFunction* getActivationFunctionCopy();
 	double getMaximum();

@@ -14,8 +14,8 @@ private:
 public:
 	// Inherited: 
 	double execute(double input);
-	double execute(double input, AbstractThreshold* threshold);
-	double executeDerivation(double input, AbstractThreshold* threshold);
+	void execute(int layerNr, std::vector<Eigen::VectorXd> &activations, std::vector<Eigen::VectorXd> &netInputs);
+	double executeDerivation(double input);
 	AbstractOutputFunction* getOutputFunctionCopy();
 	AbstractActivationFunction* getActivationFunctionCopy();
 	double getMaximum();

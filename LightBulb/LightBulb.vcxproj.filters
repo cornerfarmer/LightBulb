@@ -38,9 +38,6 @@
     <Filter Include="Quelldateien\Graphics">
       <UniqueIdentifier>{13ebc50c-8dfa-4649-b20a-d35ac597c1b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\NeuronFactory">
-      <UniqueIdentifier>{3643bad8-f0fd-432d-ba71-4ce81842a94d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\ClusterAnalysis">
       <UniqueIdentifier>{cd721e0a-929c-4b59-a41a-644f99719a58}</UniqueIdentifier>
     </Filter>
@@ -55,6 +52,9 @@
     </Filter>
     <Filter Include="Quelldateien\IO">
       <UniqueIdentifier>{45480065-edd4-41f4-84ea-9956b3174e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\NeuronDescriptionFactory">
+      <UniqueIdentifier>{3643bad8-f0fd-432d-ba71-4ce81842a94d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -440,15 +440,6 @@
     <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="NeuronFactory\AbstractNeuronFactory.cpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\DifferentFunctionsNeuronFactory.cpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\SameFunctionsNeuronFactory.cpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClCompile>
     <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
@@ -586,6 +577,18 @@
     </ClCompile>
     <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron\NeuronDescription.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronFactory\AbstractNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronFactory\SameNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -973,15 +976,6 @@
     <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="NeuronFactory\AbstractNeuronFactory.hpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\DifferentFunctionsNeuronFactory.hpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\SameFunctionsNeuronFactory.hpp">
-      <Filter>Quelldateien\NeuronFactory</Filter>
-    </ClInclude>
     <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
@@ -1122,6 +1116,18 @@
     </ClInclude>
     <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron\NeuronDescription.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronFactory\AbstractNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronFactory\SameNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronFactory\DifferentNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

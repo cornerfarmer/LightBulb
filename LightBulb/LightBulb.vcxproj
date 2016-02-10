@@ -198,15 +198,16 @@
     </ClCompile>
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp" />
-    <ClCompile Include="NeuronFactory\AbstractNeuronFactory.cpp" />
-    <ClCompile Include="NeuronFactory\DifferentFunctionsNeuronFactory.cpp" />
-    <ClCompile Include="NeuronFactory\SameFunctionsNeuronFactory.cpp" />
+    <ClCompile Include="NeuronFactory\AbstractNeuronDescriptionFactory.cpp" />
+    <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp" />
+    <ClCompile Include="NeuronFactory\SameNeuronDescriptionFactory.cpp" />
     <ClCompile Include="Neuron\AbstractNeuron.cpp" />
     <ClCompile Include="Neuron\AbstractThreshold.cpp" />
     <ClCompile Include="Neuron\BiasNeuron.cpp" />
     <ClCompile Include="Neuron\Edge.cpp" />
     <ClCompile Include="Neuron\InputNeuron.cpp" />
     <ClCompile Include="Neuron\NeuronCompareThreshold.cpp" />
+    <ClCompile Include="Neuron\NeuronDescription.cpp" />
     <ClCompile Include="Neuron\RBFThreshold.cpp" />
     <ClCompile Include="Neuron\StandardNeuron.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -402,15 +403,16 @@
     </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp" />
-    <ClInclude Include="NeuronFactory\AbstractNeuronFactory.hpp" />
-    <ClInclude Include="NeuronFactory\DifferentFunctionsNeuronFactory.hpp" />
-    <ClInclude Include="NeuronFactory\SameFunctionsNeuronFactory.hpp" />
+    <ClInclude Include="NeuronFactory\AbstractNeuronDescriptionFactory.hpp" />
+    <ClInclude Include="NeuronFactory\DifferentNeuronDescriptionFactory.hpp" />
+    <ClInclude Include="NeuronFactory\SameNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Neuron\AbstractNeuron.hpp" />
     <ClInclude Include="Neuron\AbstractThreshold.hpp" />
     <ClInclude Include="Neuron\BiasNeuron.hpp" />
     <ClInclude Include="Neuron\Edge.hpp" />
     <ClInclude Include="Neuron\InputNeuron.hpp" />
     <ClInclude Include="Neuron\NeuronCompareThreshold.hpp" />
+    <ClInclude Include="Neuron\NeuronDescription.hpp" />
     <ClInclude Include="Neuron\RBFThreshold.hpp" />
     <ClInclude Include="Neuron\StandardNeuron.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

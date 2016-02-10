@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "Function/FermiFunction.hpp"
-#include "Function/IdentityFunction.hpp"
-#include "Neuron/StandardThreshold.hpp"
 #include "Function/WeightedSumFunction.hpp"
+#include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
+#include "Neuron/NeuronDescription.hpp"
 
 class LayeredNetworkTest : public testing::Test {
 public:
@@ -13,10 +13,7 @@ public:
 		options.neuronsPerLayerCount.push_back(2);
 		options.neuronsPerLayerCount.push_back(3);
 		options.neuronsPerLayerCount.push_back(1);
-		options.activationFunction = new FermiFunction(1);
-		options.inputFunction = new WeightedSumFunction();
-		options.outputFunction = new IdentityFunction();
-		options.threshold = new StandardThreshold(0);
+		options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 		options.useBiasNeuron = true;
 
 		network = new LayeredNetwork(options);

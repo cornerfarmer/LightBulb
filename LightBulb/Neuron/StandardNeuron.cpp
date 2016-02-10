@@ -66,7 +66,7 @@ void StandardNeuron::removeAfferentEdge(Edge* edgeToRemove)
 void StandardNeuron::refreshActivation()
 {
 	// Calc the activation from the input
-	activation = activationFunction->execute(netInput, threshold);
+	activation = activationFunction->execute(netInput);
 	// Calc the output activation from the activation
 	activation = outputFunction->execute(activation);
 }
@@ -89,7 +89,7 @@ double StandardNeuron::getNetInput()
 
 double StandardNeuron::executeDerivationOnActivationFunction(double input)
 {
-	return activationFunction->executeDerivation(input, threshold);
+	return activationFunction->executeDerivation(input);
 }
 
 AbstractActivationFunction* StandardNeuron::getActivationFunction()

@@ -10,10 +10,8 @@ BinaryFunction::BinaryFunction(double minValue_, double maxValue_)
 	maxValue = maxValue_;
 }
 
-double BinaryFunction::execute(double input, AbstractThreshold* threshold)
+double BinaryFunction::execute(double input)
 {
-	StandardThreshold* standardThreshold = static_cast<StandardThreshold*>(threshold);
-
 	// If the input is greater than the threshold return 1 else 0
 	if (input > 0)
 		return maxValue;
@@ -21,7 +19,7 @@ double BinaryFunction::execute(double input, AbstractThreshold* threshold)
 		return minValue;
 }
 
-double BinaryFunction::executeDerivation(double input, AbstractThreshold* threshold)
+double BinaryFunction::executeDerivation(double input)
 {
 	// A binary function does not have a derivation => throw a exception
 	throw std::logic_error("There is no derivation of the binary function");

@@ -11,23 +11,16 @@ FermiFunction::FermiFunction(double temperatureParameter_)
 	temperatureParameter = temperatureParameter_;
 }
 
-double FermiFunction::execute(double input, AbstractThreshold* threshold)
+double FermiFunction::execute(double input)
 {
-	StandardThreshold* standardThreshold = dynamic_cast<StandardThreshold*>(threshold);
-	// Check if the given threshold is a StandardThreshold
-	if (!standardThreshold)
-		throw std::invalid_argument("The given threshold has to be a StandardThreshold");
-
-	// Consider the threshold
-	input -= standardThreshold->getThreshold();
 	// Execture the fermi function
 	return  1 / (1 + exp(-input / temperatureParameter));
 }
 
-double FermiFunction::executeDerivation(double input, AbstractThreshold* threshold)
+double FermiFunction::executeDerivation(double input)
 {
 	// Execute the derivation of the Fermi function		
-	return execute(input, threshold) * (1 - execute(input, threshold));
+	return execute(input) * (1 - execute(input));
 }
 
 AbstractActivationFunction* FermiFunction::getActivationFunctionCopy()

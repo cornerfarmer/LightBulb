@@ -9,12 +9,12 @@ double IdentityFunction::execute(double input)
 	return input;
 }
 
-double IdentityFunction::execute(double input, AbstractThreshold* threshold)
+void IdentityFunction::execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs)
 {
-	return input;
+	activations[layerNr] = netInputs[layerNr];
 }
 
-double IdentityFunction::executeDerivation(double input, AbstractThreshold* threshold)
+double IdentityFunction::executeDerivation(double input)
 {
 	return 0;
 }

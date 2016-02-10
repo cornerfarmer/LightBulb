@@ -4,7 +4,8 @@
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/BiasNeuron.hpp"
 #include "Neuron/Edge.hpp"
-#include "NeuronFactory/AbstractNeuronFactory.hpp"
+#include "NeuronFactory/AbstractNeuronDescriptionFactory.hpp"
+#include "Neuron/NeuronDescription.hpp"
 #include "Function/AbstractActivationFunction.hpp"
 #include "Function/AbstractInputFunction.hpp"
 #include "Function/AbstractOutputFunction.hpp"
@@ -18,27 +19,18 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 	enableShortcuts = false;
 	neuronsPerLayerCount = std::vector<unsigned int>();
 	useBiasNeuron = false;
-	activationFunction = NULL;
-	inputFunction = NULL;
-	outputFunction = NULL;
-	threshold = NULL;
+	descriptionFactory = NULL;
 }
 
 LayeredNetworkOptions::~LayeredNetworkOptions()
 {
-	delete(activationFunction);
-	delete(inputFunction);
-	delete(outputFunction);
-	delete(threshold);
+	delete(descriptionFactory);
 }
 
 LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj)
 {
 	*this = obj;
-	activationFunction = obj.activationFunction->getActivationFunctionCopy();
-	inputFunction = obj.inputFunction->getInputFunctionCopy();
-	outputFunction = obj.outputFunction->getOutputFunctionCopy();
-	threshold = obj.threshold->getCopy();
+	descriptionFactory = obj.descriptionFactory->getCopy();
 }
 
 
@@ -61,14 +53,8 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions &options_)
 	// Check if all given options are correct
 	if (getLayerCount() < 2)
 		throw std::invalid_argument("A layered network must always contain at least two layers (one input and one output layer)");
-	if (!options->activationFunction)
-		throw std::invalid_argument("The given activationFunction is not valid");
-	if (!options->inputFunction)
-		throw std::invalid_argument("The given inputFunction is not valid");
-	if (!options->outputFunction)
-		throw std::invalid_argument("The given outputFunction is not valid");
-	if (!options->threshold)
-		throw std::invalid_argument("The given threshold is not valid");
+	if (!options->descriptionFactory)
+		throw std::invalid_argument("The given descriptionFactory is not valid");
 
 	// Build the network
 	buildNetwork();
@@ -91,6 +77,7 @@ void LayeredNetwork::buildNetwork()
 	weights.resize(getLayerCount() - 1);
 	activations.resize(getLayerCount());
 	netInputs.resize(getLayerCount());
+	neuronDescriptionsPerLayer.resize(getLayerCount());
 	int totalNeuronCount = 0;
 	for (int l = 0; l < getLayerCount(); l++)
 	{
@@ -101,10 +88,13 @@ void LayeredNetwork::buildNetwork()
 		{
 			weights[l - 1] = Eigen::MatrixXd(options->neuronsPerLayerCount[l], options->neuronsPerLayerCount[l - 1] + 1);
 		}
+		if (l == getLayerCount() - 1)
+			neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createOutputNeuronDescription());
+		else 
+			neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createInnerNeuronDescription());
 		totalNeuronCount += options->neuronsPerLayerCount[l];
 	}
 	layerOffsets[getLayerCount()] = totalNeuronCount;
-
 }
 
 std::vector<int> LayeredNetwork::getLayerOffsets()
@@ -314,15 +304,12 @@ void LayeredNetwork::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 
 void LayeredNetwork::refreshNetInputsForLayer(int layerNr)
 {
-	netInputs[layerNr].noalias() = weights[layerNr - 1] * activations[layerNr - 1];
+	neuronDescriptionsPerLayer[layerNr]->getInputFunction()->execute(layerNr, activations, netInputs, weights);
 }
 
 void LayeredNetwork::refreshActivationsForLayer(int layerNr)
 {
-	for (int i = 0; i < activations[layerNr].cols(); i++)
-	{
-		activations[layerNr](i) = options->activationFunction->execute(netInputs[layerNr](i), options->threshold);
-	}
+	neuronDescriptionsPerLayer[layerNr]->getActivationFunction()->execute(layerNr, activations, netInputs);
 }
 
 
