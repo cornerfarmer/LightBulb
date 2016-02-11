@@ -61,7 +61,7 @@ protected:
 
 	XorShfGenerator randGenerator;
 public:
-	~LayeredNetwork();
+	virtual ~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions &options_);
 	LayeredNetwork();
 
@@ -73,7 +73,7 @@ public:
 
 	void getOutput(std::vector<double> &outputVector);
 	// Calculates the layer count
-	int getLayerCount();
+	virtual int getLayerCount();
 	// Returns all Neurons
 	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
@@ -114,9 +114,9 @@ public:
 
 	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
 
-	void refreshNetInputsForLayer(int layerNr);
+	virtual void refreshNetInputsForLayer(int layerNr);
 
-	void refreshActivationsForLayer(int layerNr);
+	virtual void refreshActivationsForLayer(int layerNr);
 
 	std::vector<Eigen::MatrixXd>* getWeights();
 
