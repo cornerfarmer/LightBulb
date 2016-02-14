@@ -317,7 +317,6 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 	// The second layer holds all the other neurons
 	layeredNetworkOptions.neuronsPerLayerCount[1] = options->neuronCount;
 	// Copy some more informations
-	layeredNetworkOptions.useBiasNeuron = options->useBiasNeuron;
 	layeredNetworkOptions.outputNeuronsIndices = options->outputNeuronsIndices;
 	
 	std::unique_ptr<LayeredNetwork> unfoldedNetwork;

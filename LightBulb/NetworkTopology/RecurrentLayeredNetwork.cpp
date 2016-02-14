@@ -254,17 +254,15 @@ std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentE
 		}
 	}
 
-	// If a bias neuron is used also randomize its weights
-	if (options->useBiasNeuron)
+
+	// Go through all effernetEdges of the bias neuron
+	std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
+	for (auto edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
 	{
-		// Go through all effernetEdges of the bias neuron
-		std::list<Edge*>* efferentEdges = biasNeuron.getEfferentEdges();
-		for (auto edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
-		{
-			// A bias neuron can not have any recurrent edges
-			(*nonRecurrentEdges)[*edge] = true;
-		}		
-	}
+		// A bias neuron can not have any recurrent edges
+		(*nonRecurrentEdges)[*edge] = true;
+	}		
+	
 
 	return nonRecurrentEdges;
 }

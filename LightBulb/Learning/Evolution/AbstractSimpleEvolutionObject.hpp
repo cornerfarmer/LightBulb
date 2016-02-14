@@ -32,7 +32,7 @@ protected:
 	virtual void interpretNNOutput(std::vector<double>& output) = 0;
 public:	
 	// Create a new evolution object with the given input and output NN size
-	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world, int inputDimension, int outputDimension, bool biasNeuron = true);
+	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world, int inputDimension, int outputDimension);
 	~AbstractSimpleEvolutionObject();
 	// Inherited:
 	void doNNCalculation();

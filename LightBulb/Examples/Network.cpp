@@ -4,7 +4,7 @@
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 
 Network::Network(NetworkSimulator* networkSimulator_)
-	: AbstractSimpleEvolutionObject(networkSimulator_, 1, 8, false)
+	: AbstractSimpleEvolutionObject(networkSimulator_, 1, 8)
 {
 	networkSimulator = networkSimulator_;
 	positions.resize(4, std::vector<float>(2));

@@ -4,7 +4,7 @@
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 
 Position::Position(FunctionSimulator* functionSimulator_)
-	: AbstractSimpleEvolutionObject(functionSimulator_, 1, 2, false)
+	: AbstractSimpleEvolutionObject(functionSimulator_, 1, 2)
 {
 	functionSimulator = functionSimulator_;
 	position.resize(2);

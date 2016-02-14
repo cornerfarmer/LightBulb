@@ -18,13 +18,10 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include <Neuron/NeuronDescription.hpp>
 
-AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension, bool biasNeuron)
+AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension)
 {
 	// Configure the network options depending on the given parameters
 	LayeredNetworkOptions options;
-	if (biasNeuron) {
-		options.useBiasNeuron = true;
-	}
 	options.enableShortcuts = true;
 	options.neuronsPerLayerCount.push_back(inputDimension);
 	options.neuronsPerLayerCount.push_back(10);

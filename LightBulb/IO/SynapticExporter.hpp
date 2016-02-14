@@ -5,6 +5,7 @@
 
 // Library includes
 #include <vector>
+#include <EigenSrc/Dense>
 
 // Includes
 #include "IO/AbstractExporter.hpp"
@@ -19,7 +20,7 @@ class SynapticExporter : public AbstractExporter
 {
 private:
 	LayeredNetwork* layeredNetwork;
-	std::vector<std::vector<double>>* weights;
+	Eigen::MatrixXd* weights;
 	JSONObject* getNetworkJSONObject();
 	JSONAttribute* getNeuronsAttribute();
 	JSONObject* getNeuronJSONObject(int layer, int neuron);
@@ -28,9 +29,10 @@ private:
 	JSONAttribute* getNeuronLayerAttribute(int layer, int neuron);
 	JSONAttribute* getConnectionsAttribute();
 	JSONObject* getConnectionJSONObject(int layerIndex, int sourceNeuronIndex, int destNeuronIndex);
-	JSONAttribute* getConnectionFromAttribute(int sourceNeuronIndex);
+	JSONAttribute* getConnectionFromAttribute(int layerIndex, int sourceNeuronIndex);
 	JSONAttribute* getConnectionToAttribute(int layerIndex, int destNeuronIndex);
 	JSONAttribute* getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex);
+	int getTotalIndexOfNeuron(int layerIndex, int neuronIndex);
 public:
 	std::string execute(NeuralNetwork* neuralNetwork);
 };

@@ -18,7 +18,6 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 {
 	enableShortcuts = false;
 	neuronsPerLayerCount = std::vector<unsigned int>();
-	useBiasNeuron = false;
 	descriptionFactory = NULL;
 }
 
@@ -82,7 +81,7 @@ void LayeredNetwork::buildNetwork()
 	for (int l = 0; l < getLayerCount(); l++)
 	{
 		layerOffsets[l] = totalNeuronCount;
-		netInputs[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l] + 1);
+		netInputs[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l]);
 		activations[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l] + 1);
 		if (l > 0)
 		{
@@ -130,14 +129,20 @@ int LayeredNetwork::getNeuronCountInLayer(int layerNr)
 
 double LayeredNetwork::getBiasWeightOfNeuron(int layerNr, int neuronNr)
 {
-	if (!options->useBiasNeuron)
-		throw std::logic_error("The network does not use a bias neuron");
-	return weights[layerNr](neuronNr, weights[layerNr].rows() - 1);
+	if (layerNr == 0)
+		throw std::logic_error("The first layer does not have a bias weight.");
+	return weights[layerNr - 1](neuronNr, weights[layerNr - 1].cols() - 1);
 }
 
-std::vector<double> LayeredNetwork::getAfferentWeights(int layerNr, int neuronNr)
+std::vector<double> LayeredNetwork::getAfferentWeights(int layerNr, int neuronNr, bool withoutBiasWeight)
 {
-	std::vector<double> afferentWeights(weights[layerNr].col(neuronNr).data(), weights[layerNr].col(neuronNr).data() + weights[layerNr].rows());
+	if (layerNr == 0)
+		throw std::logic_error("The first layer does not have afferent weights.");
+	std::vector<double> afferentWeights(weights[layerNr - 1].cols() - withoutBiasWeight);
+	for (int i = 0; i < afferentWeights.size(); i++)
+	{
+		afferentWeights[i] = weights[layerNr - 1](neuronNr, i);
+	}
 	return afferentWeights;
 }
 
@@ -267,18 +272,14 @@ void LayeredNetwork::setInput(std::vector<std::pair<bool, double>>* inputVector)
 
 void LayeredNetwork::getOutput(std::vector<double> &outputVector)
 {
-	int outputVectorIndex = 0;
-	for (auto outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
-	{
-		outputVector[outputVectorIndex++] = activations.back()(*outputNeuronIndex);
-	}
+	outputVector.assign(activations.back().data(), activations.back().data() + outputVector.size());
 }
 
 void LayeredNetwork::setInput(std::vector<double>* inputVector)
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		activations.front()[i] = (*inputVector)[i];
+		activations.front()(i) = (*inputVector)[i];
 	}
 }
 

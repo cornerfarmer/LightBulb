@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "test";
 	doNetworkPerformanceTest();
+	std::cin.get();
 	return 0;
 }

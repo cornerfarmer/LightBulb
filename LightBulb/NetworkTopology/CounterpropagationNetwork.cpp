@@ -28,7 +28,6 @@ CounterpropagationNetwork::CounterpropagationNetwork(unsigned int inputNeuronCou
 	// Create a new options object
 	options.reset(new LayeredNetworkOptions());
 	// Set all options
-	options->useBiasNeuron = false;
 	// Define thresholds and functions
 	options->neuronFactory = new DifferentFunctionsNeuronFactory(new NeuronCompareThreshold(NULL), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction(),
 																	new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());

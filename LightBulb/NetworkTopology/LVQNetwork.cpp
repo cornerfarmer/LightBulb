@@ -28,7 +28,6 @@ LVQNetwork::LVQNetwork(unsigned int inputNeuronCount, unsigned int codebookVecto
 	// Create a new options object
 	options.reset(new LayeredNetworkOptions());
 	// Set all options
-	options->useBiasNeuron = false;
 	// Define thresholds and functions
 	options->neuronFactory = new DifferentFunctionsNeuronFactory(new NeuronCompareThreshold(NULL), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction(),
 																	new StandardThreshold(0), new WeightedSumFunction(), new BinaryFunction(), new IdentityFunction());

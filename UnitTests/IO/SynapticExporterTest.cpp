@@ -19,25 +19,25 @@ TEST(SynapticExporterTest, exportSimpleLayeredNetwork)
 	options.neuronsPerLayerCount.push_back(3);
 	options.neuronsPerLayerCount.push_back(1);
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	options.useBiasNeuron = true;
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
 	auto weights = layeredNetwork->getWeights();
-	/*(*weights)[0][0] = -5.97730812726829;
-	(*weights)[0][1] = -2.36775816488263;
-	(*weights)[0][2] = -2.84008772426777;
+	(*weights)[0](0, 0) = -5.97730812726829;
+	(*weights)[0](0, 1) = -6.01825421209065;
 
-	(*weights)[1][0] = -6.01825421209065;
-	(*weights)[1][1] = -2.46654960015039;
-	(*weights)[1][2] = -2.75312838822441;
+	(*weights)[0](1, 0) = -2.36775816488263;
+	(*weights)[0](1, 1) = -2.46654960015039;
 
-	(*weights)[2][0] = -8.53883973729034;
-	(*weights)[3][0] = 4.18224867001210;
-	(*weights)[4][0] = 4.96020682361533;
+	(*weights)[0](2, 0) = -2.84008772426777;
+	(*weights)[0](2, 1) = -2.75312838822441;
 
-	(*weights)[6][2] = 2.27842384712968;
-	(*weights)[6][3] = 3.34858981861236;
-	(*weights)[6][4] = 3.96418096172299;
-	(*weights)[6][5] = -3.92979671193090;*/
+	(*weights)[1](0, 0) = -8.53883973729034;
+	(*weights)[1](0, 1) = 4.18224867001210;
+	(*weights)[1](0, 2) = 4.96020682361533;
+
+	(*weights)[0](0, 2) = 2.27842384712968;
+	(*weights)[0](1, 2) = 3.34858981861236;
+	(*weights)[0](2, 2) = 3.96418096172299;
+	(*weights)[1](0, 3) = -3.92979671193090;
 
 	NeuralNetwork neuralNetwork(layeredNetwork);
 

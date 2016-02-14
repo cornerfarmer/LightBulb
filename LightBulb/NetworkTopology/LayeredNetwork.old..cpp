@@ -13,7 +13,6 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 	enableShortcuts = false;
 	neuronFactory = NULL;
 	neuronsPerLayerCount = std::vector<unsigned int>();
-	useBiasNeuron = false;
 }
 
 LayeredNetworkOptions::~LayeredNetworkOptions()
@@ -80,10 +79,7 @@ LayeredNetwork::LayeredNetwork(LayeredNetworkOptions_t &options_)
 
 BiasNeuron* LayeredNetwork::getBiasNeuron()
 {
-	if (options->useBiasNeuron)
-		return &biasNeuron;
-	else
-		return NULL;
+	return &biasNeuron;
 }
 
 void LayeredNetwork::getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs)

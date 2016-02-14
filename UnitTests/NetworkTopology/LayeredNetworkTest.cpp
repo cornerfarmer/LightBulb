@@ -14,7 +14,6 @@ public:
 		options.neuronsPerLayerCount.push_back(3);
 		options.neuronsPerLayerCount.push_back(1);
 		options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-		options.useBiasNeuron = true;
 
 		network = new LayeredNetwork(options);
 	}
@@ -29,9 +28,9 @@ TEST_F(LayeredNetworkTest, createSimpleNetwork)
 {
 	auto netInputs = network->getNetInputs();
 	EXPECT_EQ(netInputs->size(), 3);
-	EXPECT_EQ((*netInputs)[0].rows(), 3);
-	EXPECT_EQ((*netInputs)[1].rows(), 4);
-	EXPECT_EQ((*netInputs)[2].rows(), 2);
+	EXPECT_EQ((*netInputs)[0].rows(), 2);
+	EXPECT_EQ((*netInputs)[1].rows(), 3);
+	EXPECT_EQ((*netInputs)[2].rows(), 1);
 
 	auto activations = network->getActivations();
 	EXPECT_EQ(activations->size(), 3);

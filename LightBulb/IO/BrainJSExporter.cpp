@@ -25,7 +25,7 @@ std::string BrainJSExporter::execute(NeuralNetwork* neuralNetwork)
 				neuron->addAttribute(new JSONAttribute("bias", new JSONNumberElement<double>(layeredNetwork->getBiasWeightOfNeuron(l, n))));
 
 				JSONObject* weights = new JSONObject();
-				std::vector<double> afferentWeights = layeredNetwork->getAfferentWeights(l, n);
+				std::vector<double> afferentWeights = layeredNetwork->getAfferentWeights(l, n, true);
 				for (int afferentWeightIndex = 0; afferentWeightIndex < afferentWeights.size(); afferentWeightIndex++)
 				{
 					weights->addAttribute(new JSONAttribute(std::to_string((_ULonglong)afferentWeightIndex), new JSONNumberElement<double>(afferentWeights[afferentWeightIndex])));

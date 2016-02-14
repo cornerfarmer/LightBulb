@@ -12,9 +12,10 @@ TEST(WeightedSumFunction, computeNetInputs)
 	activations[1] << 1, 2, 3, 1;
 	activations[2] = Eigen::VectorXd(1);
 
-	std::vector<Eigen::VectorXd> netInputs(2);
-	netInputs[0] = Eigen::VectorXd(3);
-	netInputs[1] = Eigen::VectorXd(1);
+	std::vector<Eigen::VectorXd> netInputs(3);
+	netInputs[0] = Eigen::VectorXd(2);
+	netInputs[1] = Eigen::VectorXd(3);
+	netInputs[2] = Eigen::VectorXd(1);
 
 	std::vector<Eigen::MatrixXd> weights(2);
 	weights[0] = Eigen::MatrixXd(3, 3);
@@ -24,15 +25,15 @@ TEST(WeightedSumFunction, computeNetInputs)
 	weights[1] = Eigen::MatrixXd(1, 4);
 	weights[1] << 1, 2, 3, 4;
 
-	function.execute(0, activations, netInputs, weights);
 	function.execute(1, activations, netInputs, weights);
+	function.execute(2, activations, netInputs, weights);
 
-	std::vector<Eigen::VectorXd> expectedNetInputs(2);
-	expectedNetInputs[0] = Eigen::VectorXd(3);
-	expectedNetInputs[0] << 8, 20, 32;
-	expectedNetInputs[1] = Eigen::VectorXd(1);
-	expectedNetInputs[1] << 18;
+	std::vector<Eigen::VectorXd> expectedNetInputs(3);
+	expectedNetInputs[1] = Eigen::VectorXd(3);
+	expectedNetInputs[1] << 8, 20, 32;
+	expectedNetInputs[2] = Eigen::VectorXd(1);
+	expectedNetInputs[2] << 18;
 
-	ASSERT_TRUE(netInputs[0].isApprox(expectedNetInputs[0]));
 	ASSERT_TRUE(netInputs[1].isApprox(expectedNetInputs[1]));
+	ASSERT_TRUE(netInputs[2].isApprox(expectedNetInputs[2]));
 }

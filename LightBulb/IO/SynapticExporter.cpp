@@ -81,42 +81,53 @@ JSONAttribute* SynapticExporter::getNeuronLayerAttribute(int layerIndex, int neu
 JSONAttribute* SynapticExporter::getConnectionsAttribute()
 {
 	JSONArray* connections = new JSONArray();
-	/*weights = layeredNetwork->getWeights();
-	for (int layerIndex = 0; layerIndex < layeredNetwork->getLayerCount(); layerIndex++)
+	
+	for (int layerIndex = 1; layerIndex < layeredNetwork->getLayerCount(); layerIndex++)
 	{
-		for (int sourceNeuronIndex = layeredNetwork->getLayerOffsets()[layerIndex]; sourceNeuronIndex < layeredNetwork->getLayerOffsets()[layerIndex + 1]; sourceNeuronIndex++)
+		weights = &(*layeredNetwork->getWeights())[layerIndex - 1];
+		for (int sourceNeuronIndex = 0; sourceNeuronIndex < weights->cols() - 1; sourceNeuronIndex++)
 		{
-			for (auto destNeuronIndex = 0; destNeuronIndex < (*weights)[sourceNeuronIndex].size(); destNeuronIndex++)
+			for (int destinationNeuronIndex = 0; destinationNeuronIndex < weights->rows(); destinationNeuronIndex++)
 			{
-				connections->addElement(getConnectionJSONObject(layerIndex, sourceNeuronIndex, destNeuronIndex));
+				connections->addElement(getConnectionJSONObject(layerIndex, sourceNeuronIndex, destinationNeuronIndex));
 			}
 		}
-	}*/
+	}
 	return new JSONAttribute("connections", connections);
 }
 
-JSONObject* SynapticExporter::getConnectionJSONObject(int layerIndex, int sourceNeuronIndex, int destNeuronIndex)
+JSONObject* SynapticExporter::getConnectionJSONObject(int layerIndex, int sourceNeuronIndex, int destinationNeuronIndex)
 {
 	JSONObject* connection = new JSONObject();
 
-	connection->addAttribute(getConnectionFromAttribute(sourceNeuronIndex));
-	connection->addAttribute(getConnectionToAttribute(layerIndex, destNeuronIndex));
-	connection->addAttribute(getConnectionWeightAttribute(sourceNeuronIndex, destNeuronIndex));
+	connection->addAttribute(getConnectionFromAttribute(layerIndex, sourceNeuronIndex));
+	connection->addAttribute(getConnectionToAttribute(layerIndex, destinationNeuronIndex));
+	connection->addAttribute(getConnectionWeightAttribute(sourceNeuronIndex, destinationNeuronIndex));
 
 	return connection;
 }
 
-JSONAttribute* SynapticExporter::getConnectionFromAttribute(int sourceNeuronIndex)
+JSONAttribute* SynapticExporter::getConnectionFromAttribute(int layerIndex, int sourceNeuronIndex)
 {
-	return new JSONAttribute("from", new JSONNumberElement<int>(sourceNeuronIndex));
+	return new JSONAttribute("from", new JSONNumberElement<int>(getTotalIndexOfNeuron(layerIndex - 1, sourceNeuronIndex)));
 }
 
-JSONAttribute* SynapticExporter::getConnectionToAttribute(int layerIndex, int destNeuronIndex)
+JSONAttribute* SynapticExporter::getConnectionToAttribute(int layerIndex, int destinationNeuronIndex)
 {
-	return new JSONAttribute("to", new JSONNumberElement<int>(layeredNetwork->getLayerOffsets()[layerIndex + 1] + destNeuronIndex));
+	return new JSONAttribute("to", new JSONNumberElement<int>(getTotalIndexOfNeuron(layerIndex, destinationNeuronIndex)));
 }
 
 JSONAttribute* SynapticExporter::getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex)
 {
-	return new JSONAttribute("weight", new JSONNumberElement<double>((*weights)[sourceNeuronIndex][destNeuronIndex]));
+	return new JSONAttribute("weight", new JSONNumberElement<double>((*weights)(destNeuronIndex, sourceNeuronIndex)));
+}
+
+int SynapticExporter::getTotalIndexOfNeuron(int layerIndex, int neuronIndex)
+{
+	int totalIndex = 0;
+	for (int l = 0; l < layerIndex; l++)
+	{
+		totalIndex += layeredNetwork->getNeuronCountInLayer(l);
+	}
+	return totalIndex + neuronIndex;
 }

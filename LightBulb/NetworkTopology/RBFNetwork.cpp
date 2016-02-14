@@ -24,7 +24,6 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 	options.reset(new LayeredNetworkOptions());
 	// Set all options
 	options->enableShortcuts = false;
-	options->useBiasNeuron = false;
 	// Define thresholds and functions
 	options->neuronFactory = new DifferentFunctionsNeuronFactory(new RBFThreshold(0.5), new EuclideanDistance(), new GaussianRBFFunction(), new IdentityFunction(),
 																	new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());

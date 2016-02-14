@@ -23,8 +23,6 @@ struct LayeredNetworkOptions
 {
 	// Enables shourtcut edges
 	bool enableShortcuts;
-	// Enables a bias neuron
-	bool useBiasNeuron;
 	// Specifies the neuron count of every layer
 	std::vector<unsigned int> neuronsPerLayerCount;
 	// Specifies which neurons of the last layer will be used as output neurons (if empty, the whole last layer will be used)
@@ -130,7 +128,7 @@ public:
 
 	double getBiasWeightOfNeuron(int layerNr, int neuronNr);
 
-	std::vector<double> getAfferentWeights(int layerNr, int neuronNr);
+	std::vector<double> getAfferentWeights(int layerNr, int neuronNr, bool withoutBiasWeight = false);
 
 	std::vector<int> getLayerOffsets();
 };

@@ -19,7 +19,6 @@ CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCou
 	options.reset(new LayeredNetworkOptions());
 	// Set all options
 	options->enableShortcuts = true;
-	options->useBiasNeuron = true;
 	// Define thresholds and functions
 	options->neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new HyperbolicTangentFunction(), new IdentityFunction());
 	// Set the neuronCounts in all three layers

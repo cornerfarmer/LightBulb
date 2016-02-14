@@ -30,7 +30,6 @@ SOMNetwork::SOMNetwork(unsigned int inputNeuronCount, unsigned int codebookVecto
 	// Create a new options object
 	options.reset(new LayeredNetworkOptions());
 	// Set all options
-	options->useBiasNeuron = false;
 	// Define thresholds and functions
 	options->neuronFactory = new SameFunctionsNeuronFactory(new NeuronCompareThreshold(NULL), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction());
 	// Set the neuronCounts in all three layers

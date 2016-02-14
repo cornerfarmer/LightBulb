@@ -5,6 +5,10 @@
 #include <Function/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include "NeuralNetwork/NeuralNetwork.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
+#include <ctime>
+#include <iostream>
+#include <iomanip>
 
 void doNetworkPerformanceTest()
 {
@@ -14,10 +18,18 @@ void doNetworkPerformanceTest()
 	LayeredNetworkOptions.neuronsPerLayerCount[0] = 8;
 	LayeredNetworkOptions.neuronsPerLayerCount[1] = 3;
 	LayeredNetworkOptions.neuronsPerLayerCount[2] = 8;
-	LayeredNetworkOptions.useBiasNeuron = true;
 
-	LayeredNetwork layeredNetwork(LayeredNetworkOptions);
+	LayeredNetwork* layeredNetwork = new LayeredNetwork(LayeredNetworkOptions);
 
-	NeuralNetwork neuralNetwork(&layeredNetwork);
-	NeuralNetworkIO<double> input(8);
+	NeuralNetwork neuralNetwork(layeredNetwork);
+	std::vector<double> input(8);
+	std::vector<double> output(8);
+	TopologicalOrder activationOrder;
+	clock_t begin = clock();
+	for (int i = 0; i < 1000000; i++) {
+		neuralNetwork.calculate(input, output, activationOrder);
+	}
+	clock_t end = clock();
+	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+	std::cout << "Elapsed time:" << std::fixed << std::setprecision(4) << elapsed_secs << std::endl;
 }
