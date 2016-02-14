@@ -7,10 +7,12 @@
 // Library includes
 #include <math.h>
 
-std::unique_ptr<NeuralNetworkIO<double>> AbstractTeachingLesson::tryLesson(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
+std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
+	std::vector<std::vector<double>> output(getTeachingPattern()->size(), std::vector<double>((*getTeachingPattern())[0].size()));
 	// Let the network calculate
-	return neuralNetwork.calculate(*getTeachingPattern(), activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
+	neuralNetwork.calculate(*getTeachingPattern(), output, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
+	return output;
 }
 
 std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
@@ -21,8 +23,8 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork& n
 	if (timeStepCount != -1 || true)
 	{
 		// Try the lesson and extract the output
-		std::unique_ptr<NeuralNetworkIO<double>> outputVector = tryLesson(neuralNetwork, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
-		errorMap = getErrormapFromOutputVector(*outputVector, neuralNetwork);
+		std::vector<std::vector<double>> outputVector = tryLesson(neuralNetwork, activationOrder, startTime, timeStepCount, outputValuesInTime, netInputValuesInTime);
+		errorMap = getErrormapFromOutputVector(outputVector, neuralNetwork);
 	}
 	else
 		errorMap.reset(new ErrorMap_t());
@@ -31,10 +33,10 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(NeuralNetwork& n
 }
 
 
-std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(NeuralNetworkIO<double>& outputVector, NeuralNetwork& neuralNetwork)
+std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, NeuralNetwork& neuralNetwork)
 {
 	// Get the teachingInput
-	NeuralNetworkIO<double>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
+	NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputActivationFunction());
 
 	// Create the errorMap
 	std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t());
@@ -42,13 +44,13 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(
 	// Calculate the error values (expected value - real value)
 	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
-		if (teachingInput->existsTimestep(timestep) && outputVector.existsTimestep(timestep))
+		if (teachingInput->existsTimestep(timestep))
 		{
 			for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
 			{
 				if (teachingInput->exists(timestep, i))
 				{
-					(*errorMap)[timestep][static_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[i])] = teachingInput->get(timestep, i) - outputVector.get(timestep, i);
+					(*errorMap)[timestep][i] = teachingInput->get(timestep, i) - outputVector[timestep][i];
 				}
 			}
 		}
@@ -77,9 +79,9 @@ double AbstractTeachingLesson::getSpecificError(NeuralNetwork& neuralNetwork, Ab
 	for (auto errorValues = errorMap->begin(); errorValues != errorMap->end(); errorValues++)
 	{
 		// Add the square of every errorValue in the errorVector
-		for (auto errorValue = errorValues->second.begin(); errorValue != errorValues->second.end(); errorValue++)
+		for (auto errorValue = errorValues->begin(); errorValue != errorValues->end(); errorValue++)
 		{
-			specificError += pow(errorValue->second, 2.0);
+			specificError += pow(*errorValue, 2.0);
 		}
 
 		// Divide the specific error by two
@@ -92,19 +94,19 @@ double AbstractTeachingLesson::getSpecificError(NeuralNetwork& neuralNetwork, Ab
 std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(NeuralNetwork& neuralNetwork)
 {
 	std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t());
-	NeuralNetworkIO<double>* teachingInput = getTeachingInput(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction());
-	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
-	{
-		if (teachingInput->existsTimestep(timestep))
-		{
-			(*teachingInputMap)[timestep] = std::map<StandardNeuron*, double>();
-			int outputNeuronIndex = 0;
-			for (auto outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end(); outputNeuron++ , outputNeuronIndex++)
-			{
-				(*teachingInputMap)[timestep][*outputNeuron] = teachingInput->get(timestep, outputNeuronIndex);
-			}
-		}
-	}
+	NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputActivationFunction());
+	//for (int timestep = 0; timestep < teachingInput->size(); timestep++)
+	//{
+	//	if (teachingInput->existsTimestep(timestep))
+	//	{
+	//		(*teachingInputMap)[timestep] = std::map<StandardNeuron*, double>();
+	//		int outputNeuronIndex = 0;
+	//		for (auto outputNeuron = neuralNetwork.getNetworkTopology()->getOutputNeurons()->begin(); outputNeuron != neuralNetwork.getNetworkTopology()->getOutputNeurons()->end(); outputNeuron++ , outputNeuronIndex++)
+	//		{
+	//			(*teachingInputMap)[timestep][*outputNeuron] = teachingInput->get(timestep, outputNeuronIndex);
+	//		}
+	//	}
+	//}
 
 	return teachingInputMap;
 }

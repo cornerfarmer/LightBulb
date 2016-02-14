@@ -23,21 +23,51 @@
     <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp" />
     <ClCompile Include="ActivationOrder\SynchronousOrder.cpp" />
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp" />
-    <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp" />
-    <ClCompile Include="ClusterAnalysis\AbstractNearestClustering.cpp" />
-    <ClCompile Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\AbstractRBFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\ENearestClustering.cpp" />
-    <ClCompile Include="ClusterAnalysis\ENearestRBFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\KMeansClustering.cpp" />
-    <ClCompile Include="ClusterAnalysis\KMeansRBFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\KNearestClustering.cpp" />
-    <ClCompile Include="ClusterAnalysis\KNearestRBFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\PointSet.cpp" />
-    <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp" />
-    <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp" />
-    <ClCompile Include="ClusterAnalysis\ValuePosition.cpp" />
+    <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractNearestClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractRBFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ENearestClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ENearestRBFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KMeansClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KMeansRBFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KNearestClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\KNearestRBFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\PointSet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ClusterAnalysis\ValuePosition.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp" />
     <ClCompile Include="Diagnostic\ChangeableNumber.cpp" />
     <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp" />
@@ -83,18 +113,42 @@
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Function\XorShfGenerator.cpp" />
     <ClCompile Include="Function\ZigguratGenerator.cpp" />
-    <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp" />
-    <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp" />
-    <ClCompile Include="Graphics\Arrow.cpp" />
-    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp" />
-    <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp" />
-    <ClCompile Include="Graphics\GraphicObject.cpp" />
-    <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp" />
-    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp" />
-    <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp" />
-    <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp" />
-    <ClCompile Include="Graphics\SOMMappingChart.cpp" />
-    <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp" />
+    <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Arrow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\GraphicObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\SOMMappingChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="IO\AbstractExporter.cpp" />
     <ClCompile Include="IO\AbstractJSONElement.cpp" />
     <ClCompile Include="IO\BrainJSExporter.cpp" />
@@ -104,12 +158,24 @@
     <ClCompile Include="IO\JSONObject.cpp" />
     <ClCompile Include="IO\JSONStringElement.cpp" />
     <ClCompile Include="IO\SynapticExporter.cpp" />
-    <ClCompile Include="Learning\AbstractLearningRule.cpp" />
-    <ClCompile Include="Learning\BackpropagationLearningRule.cpp" />
-    <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp" />
-    <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp" />
-    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp" />
-    <ClCompile Include="Learning\DeltaLearningRule.cpp" />
+    <ClCompile Include="Learning\AbstractLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\BackpropagationLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\DeltaLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp" />
@@ -152,18 +218,42 @@
     <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp" />
     <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp" />
-    <ClCompile Include="Learning\HopfieldLearningRule.cpp" />
-    <ClCompile Include="Learning\LVQ1LearningRule.cpp" />
-    <ClCompile Include="Learning\LVQ2LearningRule.cpp" />
-    <ClCompile Include="Learning\LVQ3LearningRule.cpp" />
-    <ClCompile Include="Learning\OLVQ1LearningRule.cpp" />
-    <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp" />
-    <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp" />
-    <ClCompile Include="Learning\ResilientLearningRateHelper.cpp" />
-    <ClCompile Include="Learning\SchmidhuberLearningRule.cpp" />
-    <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp" />
-    <ClCompile Include="Learning\SOMLearningRule.cpp" />
-    <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp" />
+    <ClCompile Include="Learning\HopfieldLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ1LearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ2LearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\LVQ3LearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\ResilientLearningRateHelper.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\SchmidhuberLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\SOMLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Lib\ziggurat.cpp" />
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
@@ -223,9 +313,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Neuron\StandardThreshold.cpp" />
-    <ClCompile Include="Teaching\AbstractTeachingLesson.cpp" />
+    <ClCompile Include="Teaching\AbstractTeachingLesson.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Teaching\Teacher.cpp" />
-    <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp" />
+    <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Teaching\TeachingLessonLinearInput.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,23 +329,57 @@
     <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp" />
     <ClInclude Include="ActivationOrder\SynchronousOrder.hpp" />
     <ClInclude Include="ActivationOrder\TopologicalOrder.hpp" />
-    <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp" />
-    <ClInclude Include="ClusterAnalysis\AbstractNearestClustering.hpp" />
-    <ClInclude Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\AbstractRBFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\Cluster.hpp" />
-    <ClInclude Include="ClusterAnalysis\ENearestClustering.hpp" />
-    <ClInclude Include="ClusterAnalysis\ENearestRBFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\KMeansClustering.hpp" />
-    <ClInclude Include="ClusterAnalysis\KMeansRBFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\KNearestClustering.hpp" />
-    <ClInclude Include="ClusterAnalysis\KNearestRBFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\Point.hpp" />
-    <ClInclude Include="ClusterAnalysis\PointSet.hpp" />
-    <ClInclude Include="ClusterAnalysis\ROLFClustering.hpp" />
-    <ClInclude Include="ClusterAnalysis\ROLFNeuronPlacer.hpp" />
-    <ClInclude Include="ClusterAnalysis\ValuePosition.hpp" />
+    <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractNearestClustering.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractRBFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\Cluster.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\ENearestClustering.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\ENearestRBFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\KMeansClustering.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\KMeansRBFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\KNearestClustering.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\KNearestRBFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\Point.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\PointSet.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\ROLFClustering.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\ROLFNeuronPlacer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ClusterAnalysis\ValuePosition.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp" />
     <ClInclude Include="Diagnostic\ChangeableNumber.hpp" />
     <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp" />
@@ -295,18 +425,42 @@
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Function\XorShfGenerator.hpp" />
     <ClInclude Include="Function\ZigguratGenerator.hpp" />
-    <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp" />
-    <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp" />
-    <ClInclude Include="Graphics\Arrow.hpp" />
-    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp" />
-    <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp" />
-    <ClInclude Include="Graphics\GraphicObject.hpp" />
-    <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp" />
-    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp" />
-    <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp" />
-    <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp" />
-    <ClInclude Include="Graphics\SOMMappingChart.hpp" />
-    <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp" />
+    <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\Arrow.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicObject.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\SOMMappingChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="IO\AbstractExporter.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />
@@ -316,12 +470,24 @@
     <ClInclude Include="IO\JSONObject.hpp" />
     <ClInclude Include="IO\JSONStringElement.hpp" />
     <ClInclude Include="IO\SynapticExporter.hpp" />
-    <ClInclude Include="Learning\AbstractLearningRule.hpp" />
-    <ClInclude Include="Learning\BackpropagationLearningRule.hpp" />
-    <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp" />
-    <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp" />
-    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp" />
-    <ClInclude Include="Learning\DeltaLearningRule.hpp" />
+    <ClInclude Include="Learning\AbstractLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\BackpropagationLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\DeltaLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp" />
@@ -364,19 +530,43 @@
     <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp" />
     <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp" />
     <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp" />
-    <ClInclude Include="Learning\HopfieldLearningRule.hpp" />
+    <ClInclude Include="Learning\HopfieldLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Learning\LearningResult.hpp" />
-    <ClInclude Include="Learning\LVQ1LearningRule.hpp" />
-    <ClInclude Include="Learning\LVQ2LearningRule.hpp" />
-    <ClInclude Include="Learning\LVQ3LearningRule.hpp" />
-    <ClInclude Include="Learning\OLVQ1LearningRule.hpp" />
-    <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp" />
-    <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp" />
-    <ClInclude Include="Learning\ResilientLearningRateHelper.hpp" />
-    <ClInclude Include="Learning\SchmidhuberLearningRule.hpp" />
-    <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp" />
-    <ClInclude Include="Learning\SOMLearningRule.hpp" />
-    <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp" />
+    <ClInclude Include="Learning\LVQ1LearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\LVQ2LearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\LVQ3LearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\ResilientLearningRateHelper.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\SchmidhuberLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\SOMLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp" />
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
@@ -436,9 +626,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Neuron\StandardThreshold.hpp" />
-    <ClInclude Include="Teaching\AbstractTeachingLesson.hpp" />
+    <ClInclude Include="Teaching\AbstractTeachingLesson.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Teaching\Teacher.hpp" />
-    <ClInclude Include="Teaching\TeachingLessonBooleanInput.hpp" />
+    <ClInclude Include="Teaching\TeachingLessonBooleanInput.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Teaching\TeachingLessonLinearInput.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

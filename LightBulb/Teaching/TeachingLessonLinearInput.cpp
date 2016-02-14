@@ -3,16 +3,12 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 
-TeachingLessonLinearInput::TeachingLessonLinearInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<double>* teachingInput_)
-{
-	// Check if all given options are correct
-	if (!teachingPattern_)
-		throw std::invalid_argument("The given teachingPattern is not valid");
-	if (!teachingInput_)
-		throw std::invalid_argument("The given teachingInput is not valid");
 
-	teachingInput = std::unique_ptr<NeuralNetworkIO<double>>(teachingInput_);
-	teachingPattern = std::unique_ptr<NeuralNetworkIO<double>>(teachingPattern_);
+
+TeachingLessonLinearInput::TeachingLessonLinearInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<double>* teachingInput_)
+{
+	teachingInput.reset(teachingInput_);
+	teachingPattern = teachingPattern_;
 }
 
 NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingInput(AbstractActivationFunction* activationFunction)
@@ -20,9 +16,9 @@ NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingInput(AbstractAct
 	return teachingInput.get();
 }
 
-NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingPattern()
+std::vector<std::vector<double>>* TeachingLessonLinearInput::getTeachingPattern()
 {
-	return teachingPattern.get();
+	return &teachingPattern;
 }
 
 AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
@@ -30,13 +26,26 @@ AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
 	// Create a new teaching input
 	NeuralNetworkIO<double>* unfoldedTeachingInput = new NeuralNetworkIO<double>(teachingInput->getDimension());
 	// Copy the teaching input
-	(*unfoldedTeachingInput).set(0, teachingInput->rbegin()->second);
+	unfoldedTeachingInput->set(0, teachingInput->back().second);
 	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
-	TeachingLessonLinearInput* unfoldedTeachingLesson = new TeachingLessonLinearInput(teachingPattern->unfold(), unfoldedTeachingInput);
-	return unfoldedTeachingLesson;
+	return new TeachingLessonLinearInput(unfoldTeachingPattern(), unfoldedTeachingInput);
+}
+
+std::vector<std::vector<double>> TeachingLessonLinearInput::unfoldTeachingPattern()
+{
+	std::vector<std::vector<double>> unfoldededTeachingPattern(1);
+	for (int t = 0; t < teachingPattern.size(); t++)
+	{
+		for (int i = 0; i < teachingPattern[t].size(); i++)
+		{
+			unfoldededTeachingPattern[0].push_back(teachingPattern[t][i]);
+		}
+	}
+	return unfoldededTeachingPattern;
 }
 
 int TeachingLessonLinearInput::getMaxTimeStep()
 {
 	return teachingInput->getMaxTimeStep();
 }
+

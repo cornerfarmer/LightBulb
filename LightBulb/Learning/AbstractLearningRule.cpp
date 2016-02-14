@@ -38,8 +38,6 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	// Let the learning algorithm do stuff before starting
 	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher, *activationOrder);
 
-	// Get all output neurons
-	std::vector<StandardNeuron*>* outputNeurons = initializedNeuralNetwork.getNetworkTopology()->getOutputNeurons();
 	// Create a vector which will contain all weights for offline learning
 	std::map<Edge*, double> offlineLearningWeights;
 	

@@ -44,6 +44,8 @@ LayeredNetwork::LayeredNetwork()
 	// TODO: Maybe remove this constructor
 }
 
+
+
 LayeredNetwork::LayeredNetwork(LayeredNetworkOptions &options_)
 {
 	// Copy all options
@@ -101,6 +103,10 @@ std::vector<int> LayeredNetwork::getLayerOffsets()
 	return layerOffsets;
 }
 
+AbstractActivationFunction* LayeredNetwork::getOutputActivationFunction()
+{
+	return options->descriptionFactory->getOutputActivationFunction();
+}
 
 void LayeredNetwork::addNeuronIntoLayer(int layerIndex, AbstractNeuron* newNeuron, bool refreshNeuronCounters)
 {
@@ -170,9 +176,9 @@ void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
 {
 	for (auto layer = weights.begin(); layer != weights.end(); layer++)
 	{
-		for (auto i = 0; i < layer->cols(); i++)
+		for (auto i = 0; i < layer->rows(); i++)
 		{
-			for (auto j = 0; j < layer->rows(); j++)
+			for (auto j = 0; j < layer->cols(); j++)
 			{
 				do {
 					(*layer)(i, j) = randGenerator.next() * (randEnd - randStart) + randStart;
@@ -262,11 +268,11 @@ void LayeredNetwork::getOutput(std::vector<std::pair<bool, double>> &outputVecto
 	}
 }
 
-void LayeredNetwork::setInput(std::vector<std::pair<bool, double>>* inputVector)
+void LayeredNetwork::setInput(std::vector<std::pair<bool, double>> &inputVector)
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		activations[0](i) = (*inputVector)[i].second;
+		activations[0](i) = inputVector[i].second;
 	}
 }
 
@@ -275,11 +281,11 @@ void LayeredNetwork::getOutput(std::vector<double> &outputVector)
 	outputVector.assign(activations.back().data(), activations.back().data() + outputVector.size());
 }
 
-void LayeredNetwork::setInput(std::vector<double>* inputVector)
+void LayeredNetwork::setInput(std::vector<double> &inputVector)
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		activations.front()(i) = (*inputVector)[i];
+		activations.front()(i) = inputVector[i];
 	}
 }
 

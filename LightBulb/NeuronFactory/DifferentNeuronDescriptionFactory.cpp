@@ -37,3 +37,8 @@ AbstractNeuronDescriptionFactory* DifferentNeuronDescriptionFactory::getCopy()
 {
 	return new DifferentNeuronDescriptionFactory(*this);
 }
+
+AbstractActivationFunction* DifferentNeuronDescriptionFactory::getOutputActivationFunction()
+{
+	return outputNeuronDescription->getActivationFunction();
+}

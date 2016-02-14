@@ -16,6 +16,9 @@
     <Filter Include="Quelldateien\Performance">
       <UniqueIdentifier>{c497f015-a6fd-4fcd-8f44-14cb62dbea60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Examples">
+      <UniqueIdentifier>{85984f4b-d7b8-4577-8094-90c898b62c43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.old.cpp">
@@ -27,9 +30,15 @@
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp">
       <Filter>Quelldateien\Performance</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\BackpropagationAndExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\BackpropagationAndExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

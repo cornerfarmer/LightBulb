@@ -16,6 +16,9 @@
     <Filter Include="Quelldateien\IO">
       <UniqueIdentifier>{7a6704f9-292a-46ee-87ae-961d47899930}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Teaching">
+      <UniqueIdentifier>{cfdbc2a7-a817-4135-a747-f7ed72831f6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UT.cpp">
@@ -36,9 +39,21 @@
     <ClCompile Include="ActivationOrder\TopologicalOrderTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Teaching\TeachingLessonLinearInputTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockAbstractNetworkTopology.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockAbstractActivationOrder.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

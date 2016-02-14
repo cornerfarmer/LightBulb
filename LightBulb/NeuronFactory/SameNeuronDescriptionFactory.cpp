@@ -33,3 +33,8 @@ AbstractNeuronDescriptionFactory* SameNeuronDescriptionFactory::getCopy()
 {
 	return new SameNeuronDescriptionFactory(*this);
 }
+
+AbstractActivationFunction* SameNeuronDescriptionFactory::getOutputActivationFunction()
+{
+	return neuronDescription->getActivationFunction();
+}

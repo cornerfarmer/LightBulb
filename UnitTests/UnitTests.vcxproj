@@ -182,9 +182,13 @@
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
+    <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
+    <ClCompile Include="Teaching\TeachingLessonLinearInputTest.cpp" />
     <ClCompile Include="UT.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Mocks\MockAbstractActivationOrder.hpp" />
+    <ClInclude Include="Mocks\MockAbstractNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

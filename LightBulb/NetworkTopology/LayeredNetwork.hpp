@@ -62,12 +62,14 @@ public:
 	virtual ~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions &options_);
 	LayeredNetwork();
+	
+	AbstractActivationFunction* getOutputActivationFunction();
 
-	void setInput(std::vector<std::pair<bool, double>>* inputVector);
+	void setInput(std::vector<std::pair<bool, double>> &inputVector);
 
 	void getOutput(std::vector<std::pair<bool, double>> &outputVector);
 
-	void setInput(std::vector<double>* inputVector);
+	void setInput(std::vector<double> &inputVector);
 
 	void getOutput(std::vector<double> &outputVector);
 	// Calculates the layer count

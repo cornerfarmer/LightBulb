@@ -5,6 +5,7 @@
 
 // Forward declarations
 class NeuronDescription;
+class AbstractActivationFunction;
 
 // This is a basic schema for all neuron factories
 class AbstractNeuronDescriptionFactory
@@ -16,6 +17,8 @@ public:
 	virtual NeuronDescription* createInnerNeuronDescription() = 0;
 	// Create a new output neuron
 	virtual NeuronDescription* createOutputNeuronDescription() = 0;
+
+	virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
 	// Get a copy of the factory
 	virtual AbstractNeuronDescriptionFactory* getCopy() = 0;
 };

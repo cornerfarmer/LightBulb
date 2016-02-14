@@ -20,7 +20,7 @@ class StandardNeuron;
 class AbstractTeachingLesson;
 
 
-typedef std::map<int, std::map<StandardNeuron*, double>> ErrorMap_t;
+typedef std::vector<std::vector<double>> ErrorMap_t;
 
 struct AbstractLearningRuleOptions
 {

@@ -6,6 +6,7 @@
 // Library includes
 #include <vector>
 #include <map>
+#include <Function/AbstractActivationFunction.hpp>
 
 // Forward declarations
 class InputNeuron;
@@ -19,7 +20,9 @@ class AbstractNetworkTopology
 {
 private:
 public:	
-	virtual ~AbstractNetworkTopology() {};
+	virtual ~AbstractNetworkTopology() {}
+
+	virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
 	// Returns all InputNeurons in the NeuralNetwork
 	virtual std::vector<AbstractNeuron*>* getInputNeurons() = 0;
 	// Returns all OutputNeurons in the NeuralNetwork
@@ -48,13 +51,10 @@ public:
 	bool isOutputNeuron(StandardNeuron* neuron);
 
 	virtual void getOutput(std::vector<std::pair<bool, double>> &outputVector);
-
-	virtual void setInput(std::vector<std::pair<bool, double>>* inputVector);
-
-
+	
 	virtual void getOutput(std::vector<double> &outputVector);
 
-	virtual void setInput(std::vector<double>* inputVector);
+	virtual void setInput(std::vector<double> &inputVector);
 
 	virtual int getOutputSize() { return getOutputNeurons()->size(); };
 };

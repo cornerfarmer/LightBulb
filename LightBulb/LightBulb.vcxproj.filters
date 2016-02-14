@@ -643,9 +643,6 @@
     <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
     <ClInclude Include="Neuron\AbstractNeuron.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
@@ -1128,6 +1125,9 @@
     </ClInclude>
     <ClInclude Include="NeuronFactory\DifferentNeuronDescriptionFactory.hpp">
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
