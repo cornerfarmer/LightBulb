@@ -19,16 +19,17 @@ private:
 	std::unique_ptr<NeuralNetworkIO<bool>> teachingInput;
 	std::unique_ptr<NeuralNetworkIO<double>> teachingInputLinear;
 	// The values we will put into the neural network
-	std::unique_ptr<NeuralNetworkIO<double>> teachingPattern;	
+	std::vector<std::vector<double>> teachingPattern;
 protected:
-	
+	std::vector<std::vector<double>> unfoldTeachingPattern();
 public:
-	TeachingLessonBooleanInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
+	TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
 	// Inherited:
 	AbstractTeachingLesson* unfold();
 	int getMaxTimeStep();
 	// Converts our boolean teachingInput vector in a double vector depending on the used activationFunction
-	std::vector<std::vector<double>>* getTeachingInput(AbstractActivationFunction* activationFunction);
+	NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction);
+	NeuralNetworkIO<bool>* getBooleanTeachingInput();
 	std::vector<std::vector<double>>* getTeachingPattern();
 };
 

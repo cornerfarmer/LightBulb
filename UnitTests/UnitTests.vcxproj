@@ -183,6 +183,7 @@
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
+    <ClCompile Include="Teaching\TeachingLessonBooleanInputTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonLinearInputTest.cpp" />
     <ClCompile Include="UT.cpp" />
   </ItemGroup>

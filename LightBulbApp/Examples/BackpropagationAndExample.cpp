@@ -40,30 +40,31 @@ void doBackpropagationAndExample()
 	BackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;
-	for (int i = 0; i<8; i += 1)
+	for (int i = 0; i < 8; i += 1)
 	{
-		for (int l = 0; l<8; l += 1)
+		for (int l = 0; l < 8; l += 1)
 		{
-			NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
+			std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(2));
 			NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
 
-			(*teachingPattern).set(0, 0, i);
-			(*teachingPattern).set(0, 1, l);
+			teachingPattern[0][0] = i;
+			teachingPattern[0][1] = l;
 			(*teachingInput).set(0, 0, (i == l));
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
 	}
 
 	bool success = learningRule.doLearning(neuralNetwork, teacher);
-	
+
 	TopologicalOrder topologicalOrder;
 	double totalError = teacher.getTotalError(neuralNetwork, topologicalOrder);
 
-	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(2);
-	(*teachingPattern).set(0, 0, 8);
-	(*teachingPattern).set(0, 1, 7);
+	std::vector<std::vector<double>>* input = new std::vector<std::vector<double>>(1, std::vector<double>(2));
+	(*input)[0][0] = 8;
+	(*input)[0][1] = 7;
+	std::vector<std::vector<double>>* output = new std::vector<std::vector<double>>(1, std::vector<double>(1));
 
-	std::unique_ptr<NeuralNetworkIO<double>> outputVector = neuralNetwork.calculate(*teachingPattern, topologicalOrder);
+	neuralNetwork.calculate(*input, *output, topologicalOrder);
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
 	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;

@@ -321,7 +321,7 @@
     <ClCompile Include="Teaching\Teacher.cpp" />
     <ClCompile Include="Teaching\TeachingLessonBooleanInput.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Teaching\TeachingLessonLinearInput.cpp" />
   </ItemGroup>
@@ -635,7 +635,7 @@
     <ClInclude Include="Teaching\Teacher.hpp" />
     <ClInclude Include="Teaching\TeachingLessonBooleanInput.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Teaching\TeachingLessonLinearInput.hpp" />
   </ItemGroup>

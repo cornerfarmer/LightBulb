@@ -6,37 +6,14 @@
 // Library includes
 #include <exception>
 
-TeachingLessonBooleanInput::TeachingLessonBooleanInput(NeuralNetworkIO<double>* teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
+TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
 {
-	// Check if all given options are correct
-	if (!teachingPattern_)
-		throw std::invalid_argument("The given teachingPattern is not valid");
-	if (!teachingInput_)
-		throw std::invalid_argument("The given teachingInput is not valid");
-
-	teachingInput = std::unique_ptr<NeuralNetworkIO<bool>>(teachingInput_);	
-	teachingPattern = std::unique_ptr<NeuralNetworkIO<double>>(teachingPattern_);
+	teachingInput.reset(teachingInput_);
+	teachingPattern = teachingPattern_;
 	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
 }
 
-
-AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
-{
-	// Create a new teaching input
-	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>(teachingInput->getDimension());
-	// Copy the teaching input
-	(*unfoldedTeachingInput).set(0, teachingInput->rbegin()->second);
-	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
-	TeachingLessonBooleanInput* unfoldedTeachingLesson = new TeachingLessonBooleanInput(teachingPattern->unfold(), unfoldedTeachingInput);
-	return unfoldedTeachingLesson;
-}
-
-int TeachingLessonBooleanInput::getMaxTimeStep()
-{
-	return teachingInput->getMaxTimeStep();
-}
-
-std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
+NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
 {
 	// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
 	if (!activationFunction->hasAMaxAndMinimum())
@@ -67,7 +44,41 @@ std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingInput(A
 	return teachingInputLinear.get();
 }
 
+NeuralNetworkIO<bool>* TeachingLessonBooleanInput::getBooleanTeachingInput()
+{
+	return teachingInput.get();
+}
+
 std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingPattern()
 {
-	return teachingPattern.get();
+	return &teachingPattern;
 }
+
+AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
+{
+	// Create a new teaching input
+	NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>(teachingInput->getDimension());
+	// Copy the teaching input
+	unfoldedTeachingInput->set(0, teachingInput->back().second);
+	// Create new teaching lesson with the unfolded teaching pattern and the just created unfolded teaching input
+	return new TeachingLessonBooleanInput(unfoldTeachingPattern(), unfoldedTeachingInput);
+}
+
+std::vector<std::vector<double>> TeachingLessonBooleanInput::unfoldTeachingPattern()
+{
+	std::vector<std::vector<double>> unfoldededTeachingPattern(1);
+	for (int t = 0; t < teachingPattern.size(); t++)
+	{
+		for (int i = 0; i < teachingPattern[t].size(); i++)
+		{
+			unfoldededTeachingPattern[0].push_back(teachingPattern[t][i]);
+		}
+	}
+	return unfoldededTeachingPattern;
+}
+
+int TeachingLessonBooleanInput::getMaxTimeStep()
+{
+	return teachingInput->getMaxTimeStep();
+}
+
