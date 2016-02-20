@@ -50,10 +50,16 @@
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Mocks\MockAbstractNetworkTopology.hpp">
+    <ClInclude Include="Mocks\MockNetworkTopology.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Mocks\MockAbstractActivationOrder.hpp">
+    <ClInclude Include="Mocks\MockActivationOrder.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockNeuralNetwork.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockActivationFunction.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

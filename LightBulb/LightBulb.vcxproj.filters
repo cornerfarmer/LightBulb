@@ -590,6 +590,7 @@
     <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp">
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClCompile>
+    <ClCompile Include="NeuralNetwork\AbstractNeuralNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1129,5 +1130,6 @@
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
+    <ClInclude Include="NeuralNetwork\AbstractNeuralNetwork.hpp" />
   </ItemGroup>
 </Project>

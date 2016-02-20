@@ -12,7 +12,7 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 
 // Forward declarations
-class NeuralNetwork;
+class AbstractNeuralNetwork;
 class AbstractActivationOrder;
 class AbstractActivationFunction;
 class AbstractNeuron;
@@ -25,23 +25,19 @@ class AbstractTeachingLesson
 public:
 	virtual ~AbstractTeachingLesson() {}
 	// Put the teachingPattern into the neuralNetwork, refresh the network and fills (optional) the given output and netput values map
-	std::vector<std::vector<double>> tryLesson(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
+	std::vector<std::vector<double>> tryLesson(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
 	// This method should return a double vector of the teachingInput 
 	virtual NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
-	// Returns a map of all teaching inputs of all neurons in all timesteps
-	std::unique_ptr<ErrorMap_t> getTeachingInputMap(NeuralNetwork &neuralNetwork);
+	// Returns a map of all teaching inputs of all neurons in all timesteps TODO: Discuss if this method makes sense
+	std::unique_ptr<ErrorMap_t> getTeachingInputMap(AbstractNeuralNetwork &neuralNetwork);
 	// This method should return a double vector of the teachingPattern
 	virtual std::vector<std::vector<double>>* getTeachingPattern() = 0;
 	// Calculate the Errormap and fills (optional) the given output and netput values map
-	std::unique_ptr<ErrorMap_t> getErrormap(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
+	std::unique_ptr<ErrorMap_t> getErrormap(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
 	// Returns the Errormap from the given output vector
-	std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, NeuralNetwork &neuralNetwork);
-	// Calculate the euclidient distance
-	double getEuclidienDistance(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
-	// Calculate the RootMeanSquare
-	double getRMS(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork);
 	// Calculate the specific error
-	double getSpecificError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	double getSpecificError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Unfolds the teaching lesson
 	virtual AbstractTeachingLesson* unfold() = 0;
 	// Returns the maximal time step in the teaching lesson

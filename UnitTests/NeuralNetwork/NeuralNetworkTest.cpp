@@ -1,25 +1,26 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include "Mocks/MockAbstractNetworkTopology.hpp"
-#include "Mocks/MockAbstractActivationOrder.hpp"
+#include "Mocks/MockNetworkTopology.hpp"
+#include "Mocks/MockActivationOrder.hpp"
 
 using testing::Expectation;
 
 class NeuralNetworkTest : public testing::Test {
 public:
 	NeuralNetwork* neuralNetwork;
-	MockAbstractNetworkTopology* networkTopology;
-	MockAbstractActivationOrder* activationOrder;
+	MockNetworkTopology* networkTopology;
+	MockActivationOrder* activationOrder;
 	void SetUp() {
-		networkTopology = new MockAbstractNetworkTopology();
-		activationOrder = new MockAbstractActivationOrder();
+		networkTopology = new MockNetworkTopology();
+		activationOrder = new MockActivationOrder();
 		neuralNetwork = new NeuralNetwork(networkTopology);
 	}
 
 	virtual ~NeuralNetworkTest()
 	{
 		delete neuralNetwork;
+		delete activationOrder;
 	}
 };
 

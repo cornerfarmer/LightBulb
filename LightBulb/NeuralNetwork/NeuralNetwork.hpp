@@ -9,7 +9,7 @@
 #include <memory>
 
 // Includes
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;
@@ -17,7 +17,7 @@ class AbstractActivationOrder;
 class AbstractNeuron;
 
 // This class contains all stuff needed to describe a NeuralNetwork
-class NeuralNetwork 
+class NeuralNetwork : public AbstractNeuralNetwork
 {
 private:
 	std::unique_ptr<AbstractNetworkTopology> networkTopology;

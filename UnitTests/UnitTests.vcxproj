@@ -187,9 +187,11 @@
     <ClCompile Include="UT.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mocks\MockAbstractActivationOrder.hpp" />
-    <ClInclude Include="Mocks\MockAbstractNetworkTopology.hpp" />
+    <ClInclude Include="Mocks\MockActivationFunction.hpp" />
+    <ClInclude Include="Mocks\MockActivationOrder.hpp" />
+    <ClInclude Include="Mocks\MockNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
+    <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
