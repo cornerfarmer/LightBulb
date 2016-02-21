@@ -5,7 +5,7 @@
 
 int main()
 {
-	doNetworkPerformanceTest();
+	doBackpropagationAndExample();
 	std::cin.get();
 	return 0;
 }

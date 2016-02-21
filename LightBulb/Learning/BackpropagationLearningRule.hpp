@@ -57,7 +57,7 @@ protected:
 	// The resilient learning rate helper is used when resilientLearningRate is activated
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeight(Edge* edge, double gradient);
+	void adjustWeight(int layerIndex, int neuronIndex, int edgeIndex, double deltaWeight);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
 	// Calculate the delta weight value of the given edge
@@ -66,8 +66,8 @@ protected:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	virtual double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
-	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
+	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
+	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:

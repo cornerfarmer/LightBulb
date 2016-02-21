@@ -98,6 +98,14 @@ std::vector<int> LayeredNetwork::getLayerOffsets()
 	return layerOffsets;
 }
 
+int LayeredNetwork::getAfferentEdgeCount(int layerIndex, unsigned neuronIndex)
+{
+	if (layerIndex == 0)
+		return 0;
+	else
+		return options->neuronsPerLayerCount[layerIndex - 1];
+}
+
 AbstractActivationFunction* LayeredNetwork::getOutputActivationFunction()
 {
 	return options->descriptionFactory->getOutputActivationFunction();

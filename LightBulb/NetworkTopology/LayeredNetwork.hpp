@@ -131,6 +131,8 @@ public:
 	std::vector<double> getAfferentWeights(int layerNr, int neuronNr, bool withoutBiasWeight = false);
 
 	std::vector<int> getLayerOffsets();
+
+	int getAfferentEdgeCount(int layerIndex, unsigned neuronIndex);
 };
 
 #endif

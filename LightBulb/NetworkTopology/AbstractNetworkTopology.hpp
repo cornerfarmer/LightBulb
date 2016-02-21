@@ -56,7 +56,13 @@ public:
 
 	virtual void setInput(std::vector<double> &inputVector);
 
-	virtual int getOutputSize() { return getOutputNeurons()->size(); };
+	virtual int getOutputSize() { return getOutputNeurons()->size(); }
+
+	virtual int getNeuronCountInLayer(int layerIndex) = 0;
+
+	virtual int getLayerCount() = 0;
+
+	virtual int getAfferentEdgeCount(int layerIndex, unsigned neuronIndex) = 0;
 };
 
 #endif

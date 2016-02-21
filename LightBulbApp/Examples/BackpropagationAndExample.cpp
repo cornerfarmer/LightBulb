@@ -55,7 +55,7 @@ void doBackpropagationAndExample()
 	}
 
 	bool success = learningRule.doLearning(neuralNetwork, teacher);
-
+/*
 	TopologicalOrder topologicalOrder;
 	double totalError = teacher.getTotalError(neuralNetwork, topologicalOrder);
 
@@ -90,6 +90,6 @@ void doBackpropagationAndExample()
 		window.clear();
 		neuralNetworkResultChart.draw(window);
 		window.display();
-	}
+	}*/
 
 }

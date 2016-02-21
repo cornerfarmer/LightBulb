@@ -5,10 +5,7 @@
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include "Neuron/AbstractNeuron.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/Edge.hpp"
 #include "Learning/ResilientLearningRateHelper.hpp"
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_) 
@@ -57,7 +54,7 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 }
 
 
-double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 {
 	// If its the last layer
 	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
@@ -80,7 +77,7 @@ double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachin
 	return 0;
 }
 
-void BackpropagationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void BackpropagationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// If its the last layer
 	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
@@ -140,7 +137,7 @@ AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(Neur
 	return new TopologicalOrder();
 }
 
-void BackpropagationLearningRule::adjustWeight(Edge* edge, double gradient)
+void BackpropagationLearningRule::adjustWeight(int layerIndex, int neuronIndex, int edgeIndex, double deltaWeight)
 {
 	edge->setWeight(edge->getWeight() + calculateDeltaWeight(edge, gradient));
 }
