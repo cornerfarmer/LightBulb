@@ -20,8 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp" />
-    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp" />
-    <ClCompile Include="ActivationOrder\SynchronousOrder.cpp" />
+    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ActivationOrder\SynchronousOrder.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp" />
     <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -91,10 +95,18 @@
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
     <ClCompile Include="Function\AbstractOutputFunction.cpp" />
     <ClCompile Include="Function\AbstractShrinkFunction.cpp" />
-    <ClCompile Include="Function\BinaryFunction.cpp" />
-    <ClCompile Include="Function\ConeFunction.cpp" />
-    <ClCompile Include="Function\CosinusFunction.cpp" />
-    <ClCompile Include="Function\CylinderFunction.cpp" />
+    <ClCompile Include="Function\BinaryFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Function\ConeFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Function\CosinusFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Function\CylinderFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Function\EqualRandomFunction.cpp" />
     <ClCompile Include="Function\EuclideanDistance.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -102,12 +114,22 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Function\ExponentialShrinkFunction.cpp" />
-    <ClCompile Include="Function\FermiFunction.cpp" />
-    <ClCompile Include="Function\GaussianRBFFunction.cpp" />
-    <ClCompile Include="Function\HyperbolicTangentFunction.cpp" />
+    <ClCompile Include="Function\FermiFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Function\GaussianRBFFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Function\HyperbolicTangentFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Function\IdentityFunction.cpp" />
-    <ClCompile Include="Function\MexicanHatFunction.cpp" />
-    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp" />
+    <ClCompile Include="Function\MexicanHatFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Function\RankBasedRandomFunction.cpp" />
     <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
@@ -176,48 +198,128 @@
     <ClCompile Include="Learning\DeltaLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractHallOfFameAlgorithm.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp" />
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp" />
-    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp" />
-    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\ConstantMutationCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommand.cpp" />
-    <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCombiningStrategy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCreationCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractExitCondition.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractHallOfFameAlgorithm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationAlgorithm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantCreationCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantMutationCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp" />
-    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp" />
-    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp" />
-    <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp" />
-    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithm.cpp" />
-    <ClCompile Include="Learning\Evolution\RandomSelector.cpp" />
-    <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp" />
-    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelector.cpp" />
-    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp" />
-    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategy.cpp" />
-    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelector.cpp" />
-    <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp" />
-    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp" />
-    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp" />
+    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomSelector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RateDifferenceCondition.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunction.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TeachedEvolutionObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Learning\HopfieldLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -271,7 +373,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="NetworkTopology\GridStructure.cpp" />
-    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NetworkTopology\LayeredNetwork.old..cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -300,20 +404,13 @@
     <ClCompile Include="NeuronFactory\AbstractNeuronDescriptionFactory.cpp" />
     <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp" />
     <ClCompile Include="NeuronFactory\SameNeuronDescriptionFactory.cpp" />
-    <ClCompile Include="Neuron\AbstractNeuron.cpp" />
-    <ClCompile Include="Neuron\AbstractThreshold.cpp" />
-    <ClCompile Include="Neuron\BiasNeuron.cpp" />
-    <ClCompile Include="Neuron\Edge.cpp" />
-    <ClCompile Include="Neuron\InputNeuron.cpp" />
-    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp" />
-    <ClCompile Include="Neuron\NeuronDescription.cpp" />
-    <ClCompile Include="Neuron\RBFThreshold.cpp" />
-    <ClCompile Include="Neuron\StandardNeuron.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
+    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Neuron\StandardThreshold.cpp" />
+    <ClCompile Include="Neuron\NeuronDescription.cpp" />
+    <ClCompile Include="Neuron\RBFThreshold.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Teaching\AbstractTeachingLesson.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -327,8 +424,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp" />
-    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp" />
-    <ClInclude Include="ActivationOrder\SynchronousOrder.hpp" />
+    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ActivationOrder\TopologicalOrder.hpp" />
     <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -404,10 +505,18 @@
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
     <ClInclude Include="Function\AbstractOutputFunction.hpp" />
     <ClInclude Include="Function\AbstractShrinkFunction.hpp" />
-    <ClInclude Include="Function\BinaryFunction.hpp" />
-    <ClInclude Include="Function\ConeFunction.hpp" />
-    <ClInclude Include="Function\CosinusFunction.hpp" />
-    <ClInclude Include="Function\CylinderFunction.hpp" />
+    <ClInclude Include="Function\BinaryFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Function\ConeFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Function\CosinusFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Function\CylinderFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Function\EqualRandomFunction.hpp" />
     <ClInclude Include="Function\EuclideanDistance.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -415,12 +524,22 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Function\ExponentialShrinkFunction.hpp" />
-    <ClInclude Include="Function\FermiFunction.hpp" />
-    <ClInclude Include="Function\GaussianRBFFunction.hpp" />
-    <ClInclude Include="Function\HyperbolicTangentFunction.hpp" />
+    <ClInclude Include="Function\FermiFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Function\GaussianRBFFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Function\HyperbolicTangentFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Function\IdentityFunction.hpp" />
-    <ClInclude Include="Function\MexicanHatFunction.hpp" />
-    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp" />
+    <ClInclude Include="Function\MexicanHatFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Function\RankBasedRandomFunction.hpp" />
     <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
@@ -489,48 +608,128 @@
     <ClInclude Include="Learning\DeltaLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractHallOfFameAlgorithm.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp" />
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp" />
-    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp" />
-    <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\ConstantMutationCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\ConstantRecombinationCommand.hpp" />
-    <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCombiningStrategy.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCreationCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractExitCondition.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractHallOfFameAlgorithm.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationAlgorithm.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantCreationCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantMutationCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantRecombinationCommand.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp" />
-    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp" />
-    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp" />
-    <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp" />
-    <ClInclude Include="Learning\Evolution\RandomHallOfFameAlgorithm.hpp" />
-    <ClInclude Include="Learning\Evolution\RandomSelector.hpp" />
-    <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp" />
-    <ClInclude Include="Learning\Evolution\RemainderStochasticSamplingSelector.hpp" />
-    <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp" />
-    <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\SharedSamplingCombiningStrategy.hpp" />
-    <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp" />
-    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp" />
-    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp" />
-    <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp" />
+    <ClInclude Include="Learning\Evolution\FitnessSharingFitnessFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\PositiveMakerFitnessFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomHallOfFameAlgorithm.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RandomSelector.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RateDifferenceCondition.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RemainderStochasticSamplingSelector.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\RoundRobinCombiningStrategy.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\SharedCoevolutionFitnessFunction.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\SharedSamplingCombiningStrategy.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Learning\HopfieldLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -585,7 +784,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="NetworkTopology\GridStructure.hpp" />
-    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NetworkTopology\LayeredNetwork.old.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -614,20 +815,13 @@
     <ClInclude Include="NeuronFactory\AbstractNeuronDescriptionFactory.hpp" />
     <ClInclude Include="NeuronFactory\DifferentNeuronDescriptionFactory.hpp" />
     <ClInclude Include="NeuronFactory\SameNeuronDescriptionFactory.hpp" />
-    <ClInclude Include="Neuron\AbstractNeuron.hpp" />
-    <ClInclude Include="Neuron\AbstractThreshold.hpp" />
-    <ClInclude Include="Neuron\BiasNeuron.hpp" />
-    <ClInclude Include="Neuron\Edge.hpp" />
-    <ClInclude Include="Neuron\InputNeuron.hpp" />
-    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp" />
-    <ClInclude Include="Neuron\NeuronDescription.hpp" />
-    <ClInclude Include="Neuron\RBFThreshold.hpp" />
-    <ClInclude Include="Neuron\StandardNeuron.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
+    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Neuron\StandardThreshold.hpp" />
+    <ClInclude Include="Neuron\NeuronDescription.hpp" />
+    <ClInclude Include="Neuron\RBFThreshold.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Teaching\AbstractTeachingLesson.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

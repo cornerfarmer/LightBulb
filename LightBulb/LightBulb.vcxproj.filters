@@ -110,31 +110,10 @@
     <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="Neuron\AbstractNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\AbstractThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\BiasNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\Edge.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\InputNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
     <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
     <ClCompile Include="Neuron\RBFThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\StandardNeuron.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron\StandardThreshold.cpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
     <ClCompile Include="Function\AbstractActivationFunction.cpp">
@@ -644,31 +623,10 @@
     <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="Neuron\AbstractNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\AbstractThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\BiasNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\Edge.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\InputNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
     <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="Neuron\RBFThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\StandardNeuron.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\StandardThreshold.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="Function\AbstractActivationFunction.hpp">

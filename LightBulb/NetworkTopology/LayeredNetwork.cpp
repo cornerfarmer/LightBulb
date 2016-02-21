@@ -1,15 +1,10 @@
 // Includes
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include "Neuron/InputNeuron.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/BiasNeuron.hpp"
-#include "Neuron/Edge.hpp"
 #include "NeuronFactory/AbstractNeuronDescriptionFactory.hpp"
 #include "Neuron/NeuronDescription.hpp"
 #include "Function/AbstractActivationFunction.hpp"
 #include "Function/AbstractInputFunction.hpp"
 #include "Function/AbstractOutputFunction.hpp"
-#include "Neuron/AbstractThreshold.hpp"
 // Library includes
 #include <exception>
 #include <math.h>

@@ -5,7 +5,6 @@
 #include "Examples/Nature.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
-#include "Neuron/StandardThreshold.hpp"
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/FermiFunction.hpp"
 #include "Function/HyperbolicTangentFunction.hpp"
@@ -13,8 +12,6 @@
 #include "Function/BinaryFunction.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include "Examples/AbstractTile.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/Edge.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include <Neuron/NeuronDescription.hpp>
 

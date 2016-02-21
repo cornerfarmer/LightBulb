@@ -2,10 +2,8 @@
 #include "Teaching/Teacher.hpp"
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/AbstractNeuron.hpp"
-#include "Neuron/Edge.hpp"
 
 void Teacher::addTestingLesson(AbstractTeachingLesson* newTestingLesson)
 {
@@ -24,7 +22,13 @@ std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLesson
 	return &teachingLessons;
 }
 
-double Teacher::getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTestingLessons()
+{
+	return &testingLessons;
+}
+
+
+double Teacher::getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
 	double totalError = 0;
 
@@ -51,6 +55,12 @@ std::unique_ptr<Teacher> Teacher::unfold()
 	for (auto originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
 	{
 		unfoldedTeacher->addTeachingLesson((*originalTeachingLesson)->unfold());
+	}
+
+	// Unfold all testing lessons
+	for (auto originalTestingLesson = testingLessons.begin(); originalTestingLesson != testingLessons.end(); originalTestingLesson++)
+	{
+		unfoldedTeacher->addTestingLesson((*originalTestingLesson)->unfold());
 	}
 	return unfoldedTeacher;
 }

@@ -4,7 +4,6 @@
 #define _NEURONCOMPARETHRESHOLD_H_
 
 // Includes
-#include "Neuron/AbstractThreshold.hpp"
 
 // Library Includes
 #include <vector>

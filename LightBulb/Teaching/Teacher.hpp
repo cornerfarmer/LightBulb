@@ -9,7 +9,7 @@
 
 // Forward declarations
 class AbstractTeachingLesson;
-class NeuralNetwork;
+class AbstractNeuralNetwork;
 class AbstractActivationOrder;
 
 // A techer manages many techingLessons
@@ -27,12 +27,15 @@ public:
 	void addTestingLesson(AbstractTeachingLesson* newTestingLesson);
 	// Get all techingLessons (Useful for online learning)
 	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons();
+
+	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons();
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
-	double getTotalError(NeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Returns a unfolded version of this teacher
 	std::unique_ptr<Teacher> unfold();
 	// Returns the biggest used timestep of all teaching lessons
 	int getMaxTimeStep();
+
 };
 
 #endif

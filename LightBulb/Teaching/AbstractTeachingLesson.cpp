@@ -2,7 +2,6 @@
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/StandardNeuron.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <math.h>

@@ -34,3 +34,4 @@ LightBulb/Release/
 Debug/LightBulb
 Release/LightBulb
 [path to project]/node_modules/
+*.VC.opendb

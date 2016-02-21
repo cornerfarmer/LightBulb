@@ -6,7 +6,6 @@
 #include "Function/FermiFunction.hpp"
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/IdentityFunction.hpp"
-#include "Neuron/StandardThreshold.hpp"
 #include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
 #include "Neuron/NeuronDescription.hpp"
 

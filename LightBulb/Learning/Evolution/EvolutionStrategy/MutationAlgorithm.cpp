@@ -4,8 +4,6 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/Edge.hpp"
 #include <math.h>
 
 

@@ -48,6 +48,9 @@
     <ClCompile Include="Teaching\TeachingLessonBooleanInputTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Teaching\TeacherTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
@@ -63,6 +66,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockActivationFunction.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockTeachingLesson.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

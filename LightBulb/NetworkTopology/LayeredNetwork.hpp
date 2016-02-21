@@ -10,8 +10,6 @@
 
 // Includes
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/AbstractNeuron.hpp"
-#include "Neuron/BiasNeuron.hpp"
 #include "Function/XorShfGenerator.hpp"
 
 // Forward declarations

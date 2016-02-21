@@ -1,11 +1,8 @@
 // Includes
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/AbstractNeuron.hpp"
 #include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "Neuron/InputNeuron.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
-#include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <exception>
 

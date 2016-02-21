@@ -183,6 +183,7 @@
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
+    <ClCompile Include="Teaching\TeacherTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonBooleanInputTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonLinearInputTest.cpp" />
     <ClCompile Include="UT.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Mocks\MockNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
     <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
+    <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

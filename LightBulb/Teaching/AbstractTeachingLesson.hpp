@@ -37,7 +37,7 @@ public:
 	// Returns the Errormap from the given output vector
 	std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork);
 	// Calculate the specific error
-	double getSpecificError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	virtual double getSpecificError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Unfolds the teaching lesson
 	virtual AbstractTeachingLesson* unfold() = 0;
 	// Returns the maximal time step in the teaching lesson

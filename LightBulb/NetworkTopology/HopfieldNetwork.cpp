@@ -2,13 +2,10 @@
 #include "NetworkTopology/HopfieldNetwork.hpp"
 #include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
 #include "Function/IdentityFunction.hpp"
-#include "Neuron/StandardNeuron.hpp"
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/BinaryFunction.hpp"
 #include "Function/FermiFunction.hpp"
-#include "Neuron/StandardThreshold.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
-#include "Neuron/Edge.hpp"
 #include "Teaching/Teacher.hpp"
 #include "Neuron/NeuronDescription.hpp"
 //  Library includes
