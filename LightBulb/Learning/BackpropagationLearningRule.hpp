@@ -6,6 +6,7 @@
 // Library Includes
 #include <vector>
 #include <map>
+#include <EigenSrc/Dense>
 
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
@@ -48,9 +49,9 @@ class BackpropagationLearningRule : public AbstractLearningRule
 	friend class CascadeCorrelationLearningRule;
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
-	std::map<Edge*, double> previousDeltaWeights;	
+	std::vector<std::vector<std::vector<double>>> previousDeltaWeights;
 	// This vector should hold all delta values
-	std::map<AbstractNeuron*, double> deltaVectorOutputLayer;
+	std::vector<Eigen::VectorXd> deltaVectorOutputLayer;
 	// Check and adjust all given options
 	void initialize();
 protected:
@@ -61,7 +62,7 @@ protected:
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
 	// Calculate the delta weight value of the given edge
-	double calculateDeltaWeight(Edge* edge, double gradient);
+	double calculateDeltaWeight(int layerIndex, int neuronIndex, int edgeIndex, double gradient);
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();

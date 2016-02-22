@@ -18,6 +18,7 @@ class AbstractActivationOrder;
 class AbstractNeuron;
 class StandardNeuron;
 class AbstractTeachingLesson;
+class AbstractNetworkTopology;
 
 
 typedef std::vector<std::vector<double>> ErrorMap_t;
@@ -74,8 +75,10 @@ protected:
 	unsigned int iteration;
 	// Holds the current try number
 	unsigned int tryCounter;
-	// The current network toplogy
+	// The current network 
 	NeuralNetwork* currentNeuralNetwork;
+	// The current network toplogy
+	AbstractNetworkTopology* currentNetworkTopology;
 	// The current teacher
 	Teacher* currentTeacher;
 	// This method will be called in front of the actual learning algorithm

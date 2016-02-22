@@ -37,3 +37,8 @@ AbstractActivationFunction* SameNeuronDescriptionFactory::getOutputActivationFun
 {
 	return neuronDescription->getActivationFunction();
 }
+
+AbstractActivationFunction* SameNeuronDescriptionFactory::getInnerActivationFunction()
+{
+	return neuronDescription->getActivationFunction();
+}

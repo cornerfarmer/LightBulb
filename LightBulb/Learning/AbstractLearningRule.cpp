@@ -55,7 +55,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	tryCounter = 0;
 	totalError = 0;
 	
-
+	currentNetworkTopology = initializedNeuralNetwork.getNetworkTopology();
 	currentNeuralNetwork = &initializedNeuralNetwork;
 	currentTeacher = &initializedTeacher;
 	

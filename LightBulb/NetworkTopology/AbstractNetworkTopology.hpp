@@ -23,6 +23,8 @@ public:
 	virtual ~AbstractNetworkTopology() {}
 
 	virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
+
+	virtual AbstractActivationFunction* getInnerActivationFunction() = 0;
 	// Returns all InputNeurons in the NeuralNetwork
 	virtual std::vector<AbstractNeuron*>* getInputNeurons() = 0;
 	// Returns all OutputNeurons in the NeuralNetwork
@@ -62,7 +64,17 @@ public:
 
 	virtual int getLayerCount() = 0;
 
-	virtual int getAfferentEdgeCount(int layerIndex, unsigned neuronIndex) = 0;
+	virtual int getAfferentEdgeCount(int layerIndex, int neuronIndex) = 0;
+
+	virtual double getPrevNeuronActivation(int layerIndex, int neuronIndex, int edgeIndex) = 0;
+
+	virtual double getWeight(int layerIndex, int neuronIndex, int edgeIndex) = 0;
+
+	virtual void setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight) = 0;
+
+	virtual double getNetInput(int layerIndex, int neuronIndex) = 0;
+
+	virtual Eigen::VectorXf getEfferentWeightVector(int layerIndex, int neuronIndex) = 0;
 };
 
 #endif

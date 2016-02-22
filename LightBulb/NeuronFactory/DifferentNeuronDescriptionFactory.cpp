@@ -41,3 +41,8 @@ AbstractActivationFunction* DifferentNeuronDescriptionFactory::getOutputActivati
 {
 	return outputNeuronDescription->getActivationFunction();
 }
+
+AbstractActivationFunction* DifferentNeuronDescriptionFactory::getInnerActivationFunction()
+{
+	return innerNeuronDescription->getActivationFunction();
+}

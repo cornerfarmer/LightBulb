@@ -132,7 +132,20 @@ public:
 
 	std::vector<int> getLayerOffsets();
 
-	int getAfferentEdgeCount(int layerIndex, unsigned neuronIndex);
+	int getAfferentEdgeCount(int layerIndex, int neuronIndex);
+
+	double getPrevNeuronActivation(int layerIndex, int neuronIndex, int edgeIndex);
+	
+	double getWeight(int layerIndex, int neuronIndex, int edgeIndex);
+
+	void setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight);
+
+	double getNetInput(int layerIndex, int neuronIndex);
+
+	Eigen::VectorXf getEfferentWeightVector(int layerIndex, int neuronIndex);
+
+
+	AbstractActivationFunction* getInnerActivationFunction();
 };
 
 #endif

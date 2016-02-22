@@ -98,12 +98,42 @@ std::vector<int> LayeredNetwork::getLayerOffsets()
 	return layerOffsets;
 }
 
-int LayeredNetwork::getAfferentEdgeCount(int layerIndex, unsigned neuronIndex)
+double LayeredNetwork::getNetInput(int layerIndex, int neuronIndex)
+{
+	return netInputs[layerIndex](neuronIndex);
+}
+
+Eigen::VectorXf LayeredNetwork::getEfferentWeightVector(int layerIndex, int neuronIndex)
+{
+	return weights[layerIndex].row(neuronIndex);
+}
+
+AbstractActivationFunction* LayeredNetwork::getInnerActivationFunction()
+{
+	return options->descriptionFactory->getOutputActivationFunction();
+}
+
+int LayeredNetwork::getAfferentEdgeCount(int layerIndex, int neuronIndex)
 {
 	if (layerIndex == 0)
 		return 0;
 	else
 		return options->neuronsPerLayerCount[layerIndex - 1];
+}
+
+double LayeredNetwork::getPrevNeuronActivation(int layerIndex, int neuronIndex, int edgeIndex)
+{
+	return activations[layerIndex - 1][edgeIndex];
+}
+
+double LayeredNetwork::getWeight(int layerIndex, int neuronIndex, int edgeIndex)
+{
+	return weights[layerIndex](neuronIndex, edgeIndex);
+}
+
+void LayeredNetwork::setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight)
+{
+	weights[layerIndex](neuronIndex, edgeIndex) = weight;
 }
 
 AbstractActivationFunction* LayeredNetwork::getOutputActivationFunction()

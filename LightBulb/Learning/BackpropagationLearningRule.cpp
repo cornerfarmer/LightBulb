@@ -7,6 +7,7 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Learning/ResilientLearningRateHelper.hpp"
+#include <list>
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_) 
 	: AbstractLearningRule(new BackpropagationLearningRuleOptions(options_))
@@ -61,7 +62,7 @@ double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachin
 	{		
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
-		double gradient = -1 * edge.getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge.getNextNeuron()];	
+		double gradient = -1 * currentNetworkTopology->getPrevNeuronActivation(layerIndex, neuronIndex, edgeIndex) * deltaVectorOutputLayer[layerIndex][neuronIndex];
 
 		return gradient;
 	}
@@ -69,7 +70,7 @@ double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachin
 	{		
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
-		double gradient = -1 * edge.getPrevNeuron()->getActivation() * deltaVectorOutputLayer[edge.getNextNeuron()];
+		double gradient = -1 * currentNetworkTopology->getPrevNeuronActivation(layerIndex, neuronIndex, edgeIndex) * deltaVectorOutputLayer[layerIndex][neuronIndex];
 	
 		return gradient;
 	}	
@@ -80,31 +81,21 @@ double BackpropagationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachin
 void BackpropagationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
 {
 	// If its the last layer
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
+	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
 	{					
 		// Compute the delta value: activationFunction'(netInput) * errorValue
-		deltaVectorOutputLayer[&neuron] = (neuron.executeDerivationOnActivationFunction(neuron.getNetInput()) + getOptions()->flatSpotEliminationFac) * (*errormap).rbegin()->second[&neuron];
+		deltaVectorOutputLayer[layerIndex][neuronIndex] = (currentNetworkTopology->getOutputActivationFunction()->executeDerivation(currentNetworkTopology->getNetInput(layerIndex, neuronIndex)) + getOptions()->flatSpotEliminationFac) * errormap->back()[neuronIndex];
 	}
 	else
 	{
-		std::list<Edge*>* efferentEdges = neuron.getEfferentEdges();
-
-		// Calc the nextLayerErrorValueFactor
-		double nextLayerErrorValueFactor = 0;
-
-		// Go through all efferentEdges of the actual neuron and add to the nextLayerErrorValueFactor: deltaValue * edgeWeight
-		int efferentEdgeIndex = 0;
-		for (auto efferentEdge = efferentEdges->begin(); efferentEdge != efferentEdges->end(); efferentEdge++, efferentEdgeIndex++)
-		{
-			nextLayerErrorValueFactor += deltaVectorOutputLayer[(*efferentEdge)->getNextNeuron()] * (*efferentEdge)->getWeight();
-		}
+		double nextLayerErrorValueFactor = (deltaVectorOutputLayer[layerIndex] * currentNetworkTopology->getEfferentWeightVector(layerIndex, neuronIndex)).sum();
 
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-		deltaVectorOutputLayer[&neuron] = (neuron.executeDerivationOnActivationFunction(neuron.getNetInput()) + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor;					
+		deltaVectorOutputLayer[layerIndex][neuronIndex] = (currentNetworkTopology->getInnerActivationFunction()->executeDerivation(currentNetworkTopology->getNetInput(layerIndex, neuronIndex)) + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor;
 	}	
 }
 
-double BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, double gradient)
+double BackpropagationLearningRule::calculateDeltaWeight(int layerIndex, int neuronIndex, int edgeIndex, double gradient)
 {
 	double deltaWeight;
 
@@ -112,9 +103,9 @@ double BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, double grad
 	if (getOptions()->momentum > 0)
 	{
 		// Calc the delta weight, add the momentum term and the weight decay term
-		previousDeltaWeights[edge] = - getOptions()->learningRate * gradient + getOptions()->momentum * previousDeltaWeights[edge] - getOptions()->weightDecayFac * edge->getWeight();
+		previousDeltaWeights[layerIndex][neuronIndex][edgeIndex] = - getOptions()->learningRate * gradient + getOptions()->momentum * previousDeltaWeights[layerIndex][neuronIndex][edgeIndex] - getOptions()->weightDecayFac * edge->getWeight();
 		// Set this to the delta weight
-		deltaWeight = previousDeltaWeights[edge];		
+		deltaWeight = previousDeltaWeights[layerIndex][neuronIndex][edgeIndex];
 	}
 	else 
 	{
@@ -125,7 +116,7 @@ double BackpropagationLearningRule::calculateDeltaWeight(Edge* edge, double grad
 			deltaWeight = - getOptions()->learningRate * gradient;
 		
 		// Substract the weightDecay term
-		deltaWeight -= getOptions()->weightDecayFac * edge->getWeight();
+		deltaWeight -= getOptions()->weightDecayFac * currentNetworkTopology->getWeight(layerIndex, neuronIndex, edgeIndex);
 	}
 	
 	return deltaWeight;
@@ -139,7 +130,7 @@ AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(Neur
 
 void BackpropagationLearningRule::adjustWeight(int layerIndex, int neuronIndex, int edgeIndex, double deltaWeight)
 {
-	edge->setWeight(edge->getWeight() + calculateDeltaWeight(edge, gradient));
+	currentNetworkTopology->setWeight(layerIndex, neuronIndex, edgeIndex, currentNetworkTopology->getWeight(layerIndex, neuronIndex, edgeIndex) + calculateDeltaWeight(edge, gradient));
 }
 
 void BackpropagationLearningRule::printDebugOutput()

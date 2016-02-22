@@ -19,6 +19,8 @@ public:
 	virtual NeuronDescription* createOutputNeuronDescription() = 0;
 
 	virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
+
+	virtual AbstractActivationFunction* getInnerActivationFunction() = 0;
 	// Get a copy of the factory
 	virtual AbstractNeuronDescriptionFactory* getCopy() = 0;
 };

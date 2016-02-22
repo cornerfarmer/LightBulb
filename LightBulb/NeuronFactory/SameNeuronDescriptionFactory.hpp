@@ -30,6 +30,7 @@ public:
 	NeuronDescription* createOutputNeuronDescription();
 	AbstractNeuronDescriptionFactory* getCopy();
 	AbstractActivationFunction* getOutputActivationFunction();
+	AbstractActivationFunction* getInnerActivationFunction();
 };
 
 #endif
