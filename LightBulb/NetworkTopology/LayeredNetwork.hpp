@@ -142,10 +142,17 @@ public:
 
 	double getNetInput(int layerIndex, int neuronIndex);
 
+	Eigen::VectorXf getNetInputVector(int layerIndex);
+
 	Eigen::VectorXf getEfferentWeightVector(int layerIndex, int neuronIndex);
 
-
 	AbstractActivationFunction* getInnerActivationFunction();
+
+	Eigen::VectorXf getActivationVector(int layerIndex);
+
+	Eigen::MatrixXf getAfferentWeightsPerLayer(int layerIndex);
+
+	void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXf& newWeights);
 };
 
 #endif

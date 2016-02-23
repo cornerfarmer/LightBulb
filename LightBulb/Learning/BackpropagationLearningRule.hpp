@@ -49,26 +49,26 @@ class BackpropagationLearningRule : public AbstractLearningRule
 	friend class CascadeCorrelationLearningRule;
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
-	std::vector<std::vector<std::vector<double>>> previousDeltaWeights;
+	std::vector<Eigen::MatrixXf> previousDeltaWeights;
 	// This vector should hold all delta values
-	std::vector<Eigen::VectorXd> deltaVectorOutputLayer;
+	std::vector<Eigen::VectorXf> deltaVectorOutputLayer;
 	// Check and adjust all given options
 	void initialize();
 protected:
 	// The resilient learning rate helper is used when resilientLearningRate is activated
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeight(int layerIndex, int neuronIndex, int edgeIndex, double deltaWeight);
+	void adjustWeights(int layerIndex, Eigen::MatrixXf& gradients);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
 	// Calculate the delta weight value of the given edge
-	double calculateDeltaWeight(int layerIndex, int neuronIndex, int edgeIndex, double gradient);
+	Eigen::MatrixXf calculateDeltaWeight(int layerIndex, Eigen::MatrixXf& gradients);
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
-	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
+	Eigen::MatrixXf calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
+	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:

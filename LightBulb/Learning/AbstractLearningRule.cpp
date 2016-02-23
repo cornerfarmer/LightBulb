@@ -147,25 +147,17 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					// Adjust all hidden/output layers except 
 					for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l >= 0; l--)
 					{			
-						// Go through all neurons in this layer
-						for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)
-						{					
-							// Let the algorithm do some work for the actual neuron
-							initializeNeuronWeightCalculation(*teachingLesson->get(), lessonIndex, l, n, errormap.get());
+						// Let the algorithm do some work for the actual neuron
+						initializeLayerCalculation(*teachingLesson->get(), lessonIndex, l, errormap.get());
 
-							// Go through all afferentEdges of the actual neuron
-							for (int edgeIndex = 0; edgeIndex < initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n); edgeIndex++)
-							{			
-								// Calculate the deltaWeight
-								double deltaWeight = calculateDeltaWeightFromEdge(*teachingLesson->get(), lessonIndex, l, n, edgeIndex, errormap.get());
+						// Calculate the deltaWeight
+						Eigen::MatrixXf deltaWeight = calculateDeltaWeightFromLayer(*teachingLesson->get(), lessonIndex, l, errormap.get());
 
-								// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
- 								if (options->offlineLearning)
-									offlineLearningWeights[l][n][edgeIndex] += deltaWeight;
-								else
-									offlineLearningWeights[l][n][edgeIndex] = deltaWeight;
-							}							
-						}
+						// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
+						if (options->offlineLearning)
+							offlineLearningWeights[l][n][edgeIndex] += deltaWeight;
+						else
+							offlineLearningWeights[l][n][edgeIndex] = deltaWeight;
 					}
 
 					// If offline learning is activated, adjust all weights

@@ -74,7 +74,15 @@ public:
 
 	virtual double getNetInput(int layerIndex, int neuronIndex) = 0;
 
+	virtual Eigen::VectorXf getNetInputVector(int layerIndex) = 0;
+
 	virtual Eigen::VectorXf getEfferentWeightVector(int layerIndex, int neuronIndex) = 0;
+
+	virtual Eigen::VectorXf getActivationVector(int layerIndex) = 0;
+
+	virtual Eigen::MatrixXf getAfferentWeightsPerLayer(int layerIndex) = 0;
+
+	virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXf& newWeights) = 0;
 };
 
 #endif

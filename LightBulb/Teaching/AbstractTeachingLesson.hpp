@@ -18,7 +18,7 @@ class AbstractActivationFunction;
 class AbstractNeuron;
 class StandardNeuron;
 
-typedef std::vector<std::vector<double>> ErrorMap_t;
+typedef std::vector<Eigen::VectorXf> ErrorMap_t;
 
 class AbstractTeachingLesson
 {

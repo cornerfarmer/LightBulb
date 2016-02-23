@@ -20,9 +20,11 @@ public:
 	// Calculate the activation from the given input
 	virtual void execute(int layerNr, std::vector<Eigen::VectorXd> &activations, std::vector<Eigen::VectorXd> &netInputs);
 
-	virtual double execute(double input) = 0;
+	virtual double execute(double input) = ;
 	// Calculate the derivated activation from the given input
 	virtual double executeDerivation(double input) = 0;
+	// Calculate the derivated activation from the given input
+	virtual Eigen::VectorXd executeDerivation(Eigen::VectorXd input);
 	// Create a copy of the object
 	virtual AbstractActivationFunction* getActivationFunctionCopy() = 0;
 	// Returns the maximum value of this function
