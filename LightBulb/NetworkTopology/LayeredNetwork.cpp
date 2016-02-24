@@ -103,12 +103,12 @@ double LayeredNetwork::getNetInput(int layerIndex, int neuronIndex)
 	return netInputs[layerIndex](neuronIndex);
 }
 
-Eigen::VectorXf LayeredNetwork::getNetInputVector(int layerIndex)
+Eigen::VectorXd LayeredNetwork::getNetInputVector(int layerIndex)
 {
 	return netInputs[layerIndex];
 }
 
-Eigen::VectorXf LayeredNetwork::getEfferentWeightVector(int layerIndex, int neuronIndex)
+Eigen::VectorXd LayeredNetwork::getEfferentWeightVector(int layerIndex, int neuronIndex)
 {
 	return weights[layerIndex].row(neuronIndex);
 }
@@ -118,17 +118,17 @@ AbstractActivationFunction* LayeredNetwork::getInnerActivationFunction()
 	return options->descriptionFactory->getOutputActivationFunction();
 }
 
-Eigen::VectorXf LayeredNetwork::getActivationVector(int layerIndex)
+Eigen::VectorXd LayeredNetwork::getActivationVector(int layerIndex)
 {
 	return activations[layerIndex];
 }
 
-Eigen::MatrixXf LayeredNetwork::getAfferentWeightsPerLayer(int layerIndex)
+Eigen::MatrixXd LayeredNetwork::getAfferentWeightsPerLayer(int layerIndex)
 {
 	return weights[layerIndex];
 }
 
-void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXf& newWeights)
+void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
 {
 	weights[layerIndex] = newWeights;
 }

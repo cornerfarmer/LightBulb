@@ -38,19 +38,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher, *activationOrder);
 
 	// Create a vector which will contain all weights for offline learning
-	std::vector<std::vector<std::vector<double>>> offlineLearningWeights(initializedNeuralNetwork.getNetworkTopology()->getLayerCount());
+	std::vector<Eigen::MatrixXd> offlineLearningWeights(initializedNeuralNetwork.getNetworkTopology()->getLayerCount());
 
-	// Adjust all hidden/output layers except 
-	for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l >= 0; l--)
-	{
-		offlineLearningWeights[l].resize(initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l));
-		// Go through all neurons in this layer
-		for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)
-		{
-			offlineLearningWeights[l][n].resize(initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n));
-		}
-	}
-	
 	// Reset all counter
 	tryCounter = 0;
 	totalError = 0;
@@ -108,15 +97,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				// Adjust all hidden/output layers except 
 				for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
 				{
-					// Go through all neurons in this layer
-					for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)
-					{
-						// Go through all afferentEdges of the actual neuron
-						for (int edgeIndex = 0; edgeIndex < initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n); edgeIndex++)
-						{
-							offlineLearningWeights[l][n][edgeIndex] = 0;
-						}
-					}
+					offlineLearningWeights[l].setZero();
 				}
 			}
 
@@ -151,13 +132,13 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						initializeLayerCalculation(*teachingLesson->get(), lessonIndex, l, errormap.get());
 
 						// Calculate the deltaWeight
-						Eigen::MatrixXf deltaWeight = calculateDeltaWeightFromLayer(*teachingLesson->get(), lessonIndex, l, errormap.get());
+						Eigen::MatrixXd deltaWeight = calculateDeltaWeightFromLayer(*teachingLesson->get(), lessonIndex, l, errormap.get());
 
 						// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
 						if (options->offlineLearning)
-							offlineLearningWeights[l][n][edgeIndex] += deltaWeight;
+							offlineLearningWeights[l] += deltaWeight;
 						else
-							offlineLearningWeights[l][n][edgeIndex] = deltaWeight;
+							offlineLearningWeights[l] = deltaWeight;
 					}
 
 					// If offline learning is activated, adjust all weights
@@ -173,7 +154,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 								for (int edgeIndex = 0; edgeIndex < initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n); edgeIndex++)
 								{
 									// Adjust the weight depending on the sum of all calculated gradients
-									adjustWeight(l, n, edgeIndex, offlineLearningWeights[l][n][edgeIndex]);
+									adjustWeights(l, offlineLearningWeights[l]);
 								}					
 							}
 						}
@@ -202,7 +183,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						for (int edgeIndex = 0; edgeIndex < initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n); edgeIndex++)
 						{
 							// Adjust the weight depending on the sum of all calculated gradients
-							adjustWeight(l, n, edgeIndex, offlineLearningWeights[l][n][edgeIndex] / offlineLearningWeights.size());							
+							adjustWeights(l, offlineLearningWeights[l] * (1.0 / offlineLearningWeights.size()));							
 						}					
 					}
 				}

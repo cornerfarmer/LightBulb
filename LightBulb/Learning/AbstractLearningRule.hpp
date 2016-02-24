@@ -22,7 +22,7 @@ class AbstractTeachingLesson;
 class AbstractNetworkTopology;
 
 
-typedef std::vector<Eigen::VectorXf> ErrorMap_t;
+typedef std::vector<Eigen::VectorXd> ErrorMap_t;
 
 struct AbstractLearningRuleOptions
 {
@@ -85,9 +85,9 @@ protected:
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
-	virtual Eigen::MatrixXf calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap) = 0;
+	virtual Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap) = 0;
 	// This method should adjust the weight of the current edge
-	virtual void adjustWeights(int layerIndex, Eigen::MatrixXf& gradients) = 0;
+	virtual void adjustWeights(int layerIndex, Eigen::MatrixXd gradients) = 0;
 	// Calculate if it is sensible to continue learning
 	virtual bool learningHasStopped() = 0;
 	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges

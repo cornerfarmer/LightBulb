@@ -40,13 +40,13 @@ class RBFInterpolationLearningRule : public AbstractLearningRule
 {
 private:
 	// A matrix which will contain all outputValues from neurons in the second layer in every teachingLesson
-	std::unique_ptr<Eigen::MatrixXf> m;
+	std::unique_ptr<Eigen::MatrixXd> m;
 	// Inversion of m
-	std::unique_ptr<Eigen::MatrixXf> mInverse;
+	std::unique_ptr<Eigen::MatrixXd> mInverse;
 	// A matrx which will contain all teachingInput values from all output neurons
-	std::unique_ptr<Eigen::MatrixXf> t;
+	std::unique_ptr<Eigen::MatrixXd> t;
 	// A vector which will contain all calculated weights
-	std::unique_ptr<Eigen::VectorXf> w;	
+	std::unique_ptr<Eigen::VectorXd> w;	
 	// Holds the actual teacher
 	Teacher* actTeacher;
 protected:

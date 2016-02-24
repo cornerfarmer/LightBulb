@@ -49,25 +49,25 @@ class BackpropagationLearningRule : public AbstractLearningRule
 	friend class CascadeCorrelationLearningRule;
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
-	std::vector<Eigen::MatrixXf> previousDeltaWeights;
+	std::vector<Eigen::MatrixXd> previousDeltaWeights;
 	// This vector should hold all delta values
-	std::vector<Eigen::VectorXf> deltaVectorOutputLayer;
+	std::vector<Eigen::VectorXd> deltaVectorOutputLayer;
 	// Check and adjust all given options
 	void initialize();
 protected:
 	// The resilient learning rate helper is used when resilientLearningRate is activated
-	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
+	//std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Adjusts the weights of an edge dependent on its gradient
-	void adjustWeights(int layerIndex, Eigen::MatrixXf& gradients);
+	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	BackpropagationLearningRuleOptions* getOptions();
 	// Calculate the delta weight value of the given edge
-	Eigen::MatrixXf calculateDeltaWeight(int layerIndex, Eigen::MatrixXf& gradients);
+	Eigen::MatrixXd calculateDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients);
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
-	Eigen::MatrixXf calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
+	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);

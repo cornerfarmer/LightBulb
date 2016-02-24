@@ -57,11 +57,11 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	std::vector<StandardNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
 
 	// Initialize a matrix which will contain all outputValues from neurons in the first hidden layer in every teachingLesson
-	m.reset(new MatrixXf(teacher.getTeachingLessons()->size(), rbfNetwork->getNeurons()->front().size()));
+	m.reset(new MatrixXd(teacher.getTeachingLessons()->size(), rbfNetwork->getNeurons()->front().size()));
 	// Initialize a new matrx which will contain all teachingInput values from all output neurons
-	t.reset(new MatrixXf(m->rows(), neuralNetwork.getNetworkTopology()->getOutputNeurons()->size()));
+	t.reset(new MatrixXd(m->rows(), neuralNetwork.getNetworkTopology()->getOutputNeurons()->size()));
 	// Initialize a new vector which will contain all calculated weights
-	w.reset(new VectorXf(m->cols()));
+	w.reset(new VectorXd(m->cols()));
 
 	
 }
@@ -91,7 +91,7 @@ void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(AbstractTea
 		if (lessonIndex == t->rows() - 1)
 		{
 			// Do the magic: Multiplicate the inversed matrix with the techingInputs of the current neuron
-			w.reset(new VectorXf((*mInverse) * t->col(neuronIndex)));
+			w.reset(new VectorXd((*mInverse) * t->col(neuronIndex)));
 		}
 	}
 }
@@ -135,13 +135,13 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 	if (m->cols() == m->rows())
 	{
 		// Do a normal inversion
-		mInverse.reset(new MatrixXf(m->inverse()));
+		mInverse.reset(new MatrixXd(m->inverse()));
 	}
 	else
 	{
-		mInverse.reset(new MatrixXf(m->rows(), m->cols()));
+		mInverse.reset(new MatrixXd(m->rows(), m->cols()));
 		// Create a jacobiSVD object
-		Eigen::JacobiSVD<MatrixXf> jacobiSVD(*m, ComputeThinU | ComputeThinV);	
+		Eigen::JacobiSVD<MatrixXd> jacobiSVD(*m, ComputeThinU | ComputeThinV);	
 		// Do a pseudo inverse
 		jacobiSVD.pinv(*mInverse);
 	}

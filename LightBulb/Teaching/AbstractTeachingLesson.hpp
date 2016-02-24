@@ -4,6 +4,7 @@
 #define _ABSTRACTTEACHINGLESSON_H_
 
 // Library Includes
+#include <EigenSrc/Dense>
 #include <vector>
 #include <map>
 #include <memory>
@@ -18,7 +19,7 @@ class AbstractActivationFunction;
 class AbstractNeuron;
 class StandardNeuron;
 
-typedef std::vector<Eigen::VectorXf> ErrorMap_t;
+typedef std::vector<Eigen::VectorXd> ErrorMap_t;
 
 class AbstractTeachingLesson
 {
