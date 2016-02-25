@@ -8,7 +8,7 @@
 
 std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
-	std::vector<std::vector<double>> output(getTeachingPattern()->size(), std::vector<double>((*getTeachingPattern())[0].size()));
+	std::vector<std::vector<double>> output(getTeachingPattern()->size(), std::vector<double>(neuralNetwork.getNetworkTopology()->getOutputSize()));
 	// Let the network calculate
 	neuralNetwork.calculate(*getTeachingPattern(), output, activationOrder, 0, -1, outputValuesInTime, netInputValuesInTime);
 	return output;

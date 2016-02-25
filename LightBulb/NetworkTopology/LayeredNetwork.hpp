@@ -153,6 +153,8 @@ public:
 	Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex);
 
 	void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights);
+
+	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex);
 };
 
 #endif

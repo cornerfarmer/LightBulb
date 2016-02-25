@@ -126,7 +126,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(initializedNeuralNetwork, *activationOrder, /*nextStartTime, nextTimeStepCount,*/  getOutputValuesInTime(), getNetInputValuesInTime());
 				
 					// Adjust all hidden/output layers except 
-					for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l >= 0; l--)
+					for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 					{			
 						// Let the algorithm do some work for the actual neuron
 						initializeLayerCalculation(*teachingLesson->get(), lessonIndex, l, errormap.get());
@@ -145,7 +145,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 					if (!options->offlineLearning)
 					{
 						// Adjust the every hidden/output layer
-						for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l >= 0; l--)
+						for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 						{
 							// Go through all neurons in this layer
 							for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)
@@ -174,7 +174,7 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				initializeAllWeightAdjustments(initializedNeuralNetwork);
 
 				// Adjust the every hidden/output layer
-				for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l >= 0; l--)
+				for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 				{
 					// Go through all neurons in this layer
 					for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)

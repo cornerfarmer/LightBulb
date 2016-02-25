@@ -36,6 +36,7 @@ void doBackpropagationAndExample()
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
 	options.weightDecayFac = 0;
+	options.momentum = 0;
 	options.resilientLearningRate = false;
 	BackpropagationLearningRule learningRule(options);
 

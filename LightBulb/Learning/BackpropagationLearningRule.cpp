@@ -45,12 +45,14 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 
 	// Create a vector which will contain all delta values of the neurons in the output layer
 	deltaVectorOutputLayer.clear();		
+	deltaVectorOutputLayer.resize(neuralNetwork.getNetworkTopology()->getLayerCount());
 
 	// If momentum is used
 	if (getOptions()->momentum > 0)
 	{
 		// Initialize the learningRates map
 		previousDeltaWeights.clear();
+		previousDeltaWeights.resize(neuralNetwork.getNetworkTopology()->getLayerCount());
 	}
 }
 
@@ -59,7 +61,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeightFromLayer(Abstr
 {
 	// Calculate the gradient
 	// gradient = - Output(prevNeuron) * deltaValue
-	Eigen::MatrixXd gradient = (currentNetworkTopology->getActivationVector(layerIndex - 1) * deltaVectorOutputLayer[layerIndex].transpose()).matrix();
+	Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * currentNetworkTopology->getActivationVector(layerIndex - 1).transpose()).matrix();
 	gradient *= -1;
 	return gradient;
 }
@@ -74,8 +76,8 @@ void BackpropagationLearningRule::initializeLayerCalculation(AbstractTeachingLes
 	}
 	else
 	{
-		Eigen::VectorXd nextLayerErrorValueFactor = currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex + 1) * deltaVectorOutputLayer[layerIndex + 1];
-
+		Eigen::VectorXd nextLayerErrorValueFactor = currentNetworkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
+		nextLayerErrorValueFactor.resize(nextLayerErrorValueFactor.rows() - 1);
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
 		deltaVectorOutputLayer[layerIndex] = (currentNetworkTopology->getInnerActivationFunction()->executeDerivation(currentNetworkTopology->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor.array();
 	}	
@@ -99,7 +101,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 		/*if (getOptions()->resilientLearningRate)
 			deltaWeights = resilientLearningRateHelper->getLearningRate(edge, gradient);
 		else*/
-			deltaWeights = - getOptions()->learningRate * gradients;
+		deltaWeights = - getOptions()->learningRate * gradients;
 		
 		// Substract the weightDecay term
 		deltaWeights -= getOptions()->weightDecayFac * currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex);

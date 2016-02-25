@@ -80,6 +80,7 @@ void LayeredNetwork::buildNetwork()
 		layerOffsets[l] = totalNeuronCount;
 		netInputs[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l]);
 		activations[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l] + 1);
+		activations[l](options->neuronsPerLayerCount[l]) = 1;
 		if (l > 0)
 		{
 			weights[l - 1] = Eigen::MatrixXd(options->neuronsPerLayerCount[l], options->neuronsPerLayerCount[l - 1] + 1);
@@ -125,12 +126,17 @@ Eigen::VectorXd LayeredNetwork::getActivationVector(int layerIndex)
 
 Eigen::MatrixXd LayeredNetwork::getAfferentWeightsPerLayer(int layerIndex)
 {
-	return weights[layerIndex];
+	return weights[layerIndex - 1];
+}
+
+Eigen::MatrixXd LayeredNetwork::getEfferentWeightsPerLayer(int layerIndex)
+{
+	return weights[layerIndex].transpose();
 }
 
 void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
 {
-	weights[layerIndex] = newWeights;
+	weights[layerIndex - 1] = newWeights;
 }
 
 int LayeredNetwork::getAfferentEdgeCount(int layerIndex, int neuronIndex)
@@ -255,7 +261,7 @@ void LayeredNetwork::resetActivation()
 {
 	for (auto layer = activations.begin(); layer != activations.end(); layer++)
 	{
-		for (auto i = 0; i != layer->cols() - 1; i++)
+		for (auto i = 0; i != layer->rows() - 1; i++)
 		{
 			(*layer)(i) = 0;
 		}
