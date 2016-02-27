@@ -5,10 +5,7 @@
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include "Neuron/AbstractNeuron.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/Edge.hpp"
 
 
 ResilientLearningRateHelper::ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_) 
@@ -24,43 +21,42 @@ ResilientLearningRateHelper::ResilientLearningRateHelper()
 void ResilientLearningRateHelper::initialize(NeuralNetwork &neuralNetwork)
 {
 	// Make sure the previous learning rates map is empty
-	previousLearningRates.clear();
+	previousLearningRates = *neuralNetwork.getNetworkTopology()->getWeights();
+	for (int i = 0; i < previousLearningRates.size(); i++)
+	{
+		previousLearningRates[i].setConstant(options->learningRateStart);
+	}
 }
 
-double ResilientLearningRateHelper::getLearningRate(Edge* edge, double gradient)
+Eigen::MatrixXd ResilientLearningRateHelper::getLearningRate(int layerIndex, Eigen::MatrixXd& gradients)
 {
-	// If there is no prevous learning rate, set it to the start value
-	if (previousLearningRates.count(edge) == 0)
-		previousLearningRates[edge] = options->learningRateStart;
+	// Switch the sign of the gradient (We want to decrease, not to increase the totalError!)
+	gradients *= -1;
 
-	double learningRate = 0;
+	for (int i = 0; i < gradients.rows(); i++)
+	{
+		for (int j = 0; j < gradients.cols(); j++)
+		{
+			if (gradients(i, j) != 0)
+			{
+				// If the sign of the gradient equals the sign of the last learning rate
+				if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) > 0)
+					previousLearningRates[layerIndex - 1](i, j) *= options->learningRateGrowFac; // Increase the new learning rate
+				else if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) < 0)
+					previousLearningRates[layerIndex - 1](i, j) *= options->learningRateShrinkFac;	 // Decrease the new learning rate
 
-	// Only do something if the gradient is not 0
-	if (gradient != 0)
-	{		
-		// Set the new learning rate from the last one
-		learningRate = previousLearningRates[edge];		
+				// Make sure the new learningRate is between learningRateMin and learningRateMax
+				previousLearningRates[layerIndex - 1](i, j) = std::max(options->learningRateMin, std::min(options->learningRateMax, std::abs(previousLearningRates[layerIndex - 1](i, j))));
 
-		// Switch the sign of the gradient (We want to decrease, not to increase the totalError!)
-		gradient *= -1;
-
-		// If the sign of the gradient equals the sign of the last learning rate
-		if (previousLearningRates[edge] * gradient > 0)
-			learningRate *= options->learningRateGrowFac; // Increase the new learning rate
-		else if (previousLearningRates[edge] * gradient < 0)
-			learningRate *= options->learningRateShrinkFac;	 // Decrease the new learning rate
-	
-		// Make sure the new learningRate is between learningRateMin and learningRateMax
- 		learningRate = std::max(options->learningRateMin, std::min(options->learningRateMax, std::abs(learningRate)));
-
-		// Set the sign of the learningRate to the sign of the gradient
-		learningRate *= (gradient > 0 ? 1 : -1);
+				// Set the sign of the learningRate to the sign of the gradient
+				previousLearningRates[layerIndex - 1](i, j) *= (gradients(i, j) > 0 ? 1 : -1);
+			}
+			else
+				previousLearningRates[layerIndex - 1](i, j) = 0;
+		}
 	}
 
-	// Save the new learningRate
-	previousLearningRates[edge] = learningRate;
-
-	return learningRate;
+	return previousLearningRates[layerIndex - 1];
 }
 
 void ResilientLearningRateHelper::printDebugOutput()
@@ -68,7 +64,7 @@ void ResilientLearningRateHelper::printDebugOutput()
 	// Calculate the absolute sum of all learningRates
 	double totalLearningRate = 0;
 	for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
-		totalLearningRate += abs(previousLearningRate->second); 
+		totalLearningRate += previousLearningRate->cwiseAbs().sum(); 
 	// Print the totalLearningRate
 	std::cout << "totalLR :" << std::fixed << std::setprecision(10) << totalLearningRate << " ";
 }
@@ -84,10 +80,10 @@ bool ResilientLearningRateHelper::learningHasStopped()
 		for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		{
 			// If the learning rate is in the allowed range, continue learning
-			if (abs(previousLearningRate->second) > options->learningRateMin && abs(previousLearningRate->second) < options->learningRateMax)
+			if (abs(previousLearningRate->maxCoeff()) > options->learningRateMin && abs(previousLearningRate->minCoeff()) < options->learningRateMax)
 				learningHasStopped = false;
 		
-			totalLearningRate += abs(previousLearningRate->second);
+			totalLearningRate += previousLearningRate->cwiseAbs().sum();
 		}
 
 		// If the totalLearningRate is below the minium stop the learning process

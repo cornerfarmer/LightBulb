@@ -1,11 +1,11 @@
 #include "Performance/NetworkPerformanceTests.hpp"
-#include "Examples/BackpropagationAndExample.hpp"
+#include "Examples/BackpropagationXorExample.hpp"
 #include <iostream>
 
 
 int main()
 {
-	doBackpropagationAndExample();
+	doBackpropagationXorExample();
 	std::cin.get();
 	return 0;
 }

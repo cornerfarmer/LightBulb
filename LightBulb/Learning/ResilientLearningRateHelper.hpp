@@ -47,13 +47,13 @@ class ResilientLearningRateHelper
 {
 private:
 	// Holds for every edge its previous learning rate
-	std::map<Edge*, double> previousLearningRates;
+	std::vector<Eigen::MatrixXd> previousLearningRates;
 	ResilientLearningRateHelperOptions* options;
 public:
 	ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_);
 	ResilientLearningRateHelper();
 	// Computes the new learning rate of the given edge from the given gradient
-	double getLearningRate(Edge* edge, double gradient);
+	Eigen::MatrixXd getLearningRate(int layerIndex, Eigen::MatrixXd& gradients);
 	// Print a short debug output (totalLearningRate)
 	void printDebugOutput();
 	// Returns if the learning has stopped

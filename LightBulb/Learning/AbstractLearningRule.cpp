@@ -94,8 +94,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (options->offlineLearning)
 			{
+				offlineLearningWeights = *neuralNetwork.getNetworkTopology()->getWeights();
 				// Adjust all hidden/output layers except 
-				for (int l = initializedNeuralNetwork.getNetworkTopology()->getNeurons()->size() - 1; l >= 0; l--)
+				for (int l = 0; l < offlineLearningWeights.size(); l++)
 				{
 					offlineLearningWeights[l].setZero();
 				}
@@ -136,9 +137,9 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 
 						// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
 						if (options->offlineLearning)
-							offlineLearningWeights[l] += deltaWeight;
+							offlineLearningWeights[l - 1] += deltaWeight;
 						else
-							offlineLearningWeights[l] = deltaWeight;
+							offlineLearningWeights[l - 1] = deltaWeight;
 					}
 
 					// If offline learning is activated, adjust all weights
@@ -147,16 +148,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 						// Adjust the every hidden/output layer
 						for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 						{
-							// Go through all neurons in this layer
-							for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)
-							{
-								// Go through all afferentEdges of the actual neuron
-								for (int edgeIndex = 0; edgeIndex < initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n); edgeIndex++)
-								{
-									// Adjust the weight depending on the sum of all calculated gradients
-									adjustWeights(l, offlineLearningWeights[l]);
-								}					
-							}
+							// Adjust the weight depending on the sum of all calculated gradients
+							adjustWeights(l, offlineLearningWeights[l - 1]);
 						}
 					}		
 
@@ -176,16 +169,8 @@ bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &tea
 				// Adjust the every hidden/output layer
 				for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 				{
-					// Go through all neurons in this layer
-					for (unsigned int n = 0; n < initializedNeuralNetwork.getNetworkTopology()->getNeuronCountInLayer(l); n++)
-					{
-						// Go through all afferentEdges of the actual neuron
-						for (int edgeIndex = 0; edgeIndex < initializedNeuralNetwork.getNetworkTopology()->getAfferentEdgeCount(l, n); edgeIndex++)
-						{
-							// Adjust the weight depending on the sum of all calculated gradients
-							adjustWeights(l, offlineLearningWeights[l] * (1.0 / offlineLearningWeights.size()));							
-						}					
-					}
+					// Adjust the weight depending on the sum of all calculated gradients
+					adjustWeights(l, offlineLearningWeights[l - 1]);
 				}
 
 				// Do some work after all weights were adjusted

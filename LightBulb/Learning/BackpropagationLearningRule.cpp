@@ -29,7 +29,7 @@ void BackpropagationLearningRule::initialize()
 	if (getOptions()->resilientLearningRate)
 	{
 		// Create a new ResilientLearningRateHelper
-		//resilientLearningRateHelper.reset(new ResilientLearningRateHelper(&getOptions()->resilientLearningRateOptions));
+		resilientLearningRateHelper.reset(new ResilientLearningRateHelper(&getOptions()->resilientLearningRateOptions));
 		// Set the momentum to zero (Momentum is not compatible with a resilient learning rate
 		getOptions()->momentum = 0;
 		// A resilient learning rate can only be used offline
@@ -40,8 +40,8 @@ void BackpropagationLearningRule::initialize()
 void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
-	/*if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
-		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");*/
+	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 
 	// Create a vector which will contain all delta values of the neurons in the output layer
 	deltaVectorOutputLayer.clear();		
@@ -51,8 +51,11 @@ void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neur
 	if (getOptions()->momentum > 0)
 	{
 		// Initialize the learningRates map
-		previousDeltaWeights.clear();
-		previousDeltaWeights.resize(neuralNetwork.getNetworkTopology()->getLayerCount());
+		previousDeltaWeights = *neuralNetwork.getNetworkTopology()->getWeights();
+		for (int i = 0; i < previousDeltaWeights.size(); i++)
+		{
+			previousDeltaWeights[i].setZero();
+		}
 	}
 }
 
@@ -77,7 +80,7 @@ void BackpropagationLearningRule::initializeLayerCalculation(AbstractTeachingLes
 	else
 	{
 		Eigen::VectorXd nextLayerErrorValueFactor = currentNetworkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
-		nextLayerErrorValueFactor.resize(nextLayerErrorValueFactor.rows() - 1);
+		nextLayerErrorValueFactor.conservativeResize(nextLayerErrorValueFactor.rows() - 1);
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
 		deltaVectorOutputLayer[layerIndex] = (currentNetworkTopology->getInnerActivationFunction()->executeDerivation(currentNetworkTopology->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor.array();
 	}	
@@ -91,17 +94,17 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 	if (getOptions()->momentum > 0)
 	{
 		// Calc the delta weight, add the momentum term and the weight decay term
-		previousDeltaWeights[layerIndex] = - getOptions()->learningRate * gradients + getOptions()->momentum * previousDeltaWeights[layerIndex] - getOptions()->weightDecayFac * currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex);
+		previousDeltaWeights[layerIndex - 1] = - getOptions()->learningRate * gradients + getOptions()->momentum * previousDeltaWeights[layerIndex - 1] - getOptions()->weightDecayFac * currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex);
 		// Set this to the delta weight
-		deltaWeights = previousDeltaWeights[layerIndex];
+		deltaWeights = previousDeltaWeights[layerIndex - 1];
 	}
 	else 
 	{
 		// If a resilientLearningRate is used, get the deltaWeight from the helper object, else calculate it the classical way: - learningRate * gradient
-		/*if (getOptions()->resilientLearningRate)
-			deltaWeights = resilientLearningRateHelper->getLearningRate(edge, gradient);
-		else*/
-		deltaWeights = - getOptions()->learningRate * gradients;
+		if (getOptions()->resilientLearningRate)
+			deltaWeights = resilientLearningRateHelper->getLearningRate(layerIndex, gradients);
+		else
+			deltaWeights = - getOptions()->learningRate * gradients;
 		
 		// Substract the weightDecay term
 		deltaWeights -= getOptions()->weightDecayFac * currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex);
@@ -124,16 +127,16 @@ void BackpropagationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd 
 
 void BackpropagationLearningRule::printDebugOutput()
 {
-	//if (getOptions()->resilientLearningRate)
-	//	resilientLearningRateHelper->printDebugOutput();
+	if (getOptions()->resilientLearningRate)
+		resilientLearningRateHelper->printDebugOutput();
 }
 
 bool BackpropagationLearningRule::learningHasStopped()
 {
 	// TODO: Implement a learning has stopped algorithm if we use a normal learning rate
-	//if (getOptions()->resilientLearningRate)
-	//	return resilientLearningRateHelper->learningHasStopped();
-	//else
+	if (getOptions()->resilientLearningRate)
+		return resilientLearningRateHelper->learningHasStopped();
+	else
 		return false;
 }
 
@@ -152,6 +155,6 @@ void BackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Te
 	}
 
 	// If used, initialize the learning rate helper
-	//if (getOptions()->resilientLearningRate)
-	//	resilientLearningRateHelper->initialize(neuralNetwork);
+	if (getOptions()->resilientLearningRate)
+		resilientLearningRateHelper->initialize(neuralNetwork);
 }

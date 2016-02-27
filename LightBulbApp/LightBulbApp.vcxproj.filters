@@ -30,7 +30,7 @@
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp">
       <Filter>Quelldateien\Performance</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\BackpropagationAndExample.cpp">
+    <ClCompile Include="Examples\BackpropagationXorExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\BackpropagationAndExample.hpp">
+    <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

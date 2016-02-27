@@ -56,7 +56,7 @@ private:
 	void initialize();
 protected:
 	// The resilient learning rate helper is used when resilientLearningRate is activated
-	//std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
+	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object

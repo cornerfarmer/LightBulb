@@ -85,6 +85,8 @@ public:
 	virtual Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) = 0;
 
 	virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) = 0;
+
+	virtual std::vector<Eigen::MatrixXd>* getWeights() = 0;
 };
 
 #endif

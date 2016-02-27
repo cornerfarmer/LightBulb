@@ -122,7 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Examples\BackpropagationAndExample.cpp">
+    <ClCompile Include="Examples\BackpropagationXorExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
@@ -133,7 +133,7 @@
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Examples\BackpropagationAndExample.hpp">
+    <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />

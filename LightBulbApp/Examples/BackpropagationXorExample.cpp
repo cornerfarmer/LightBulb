@@ -1,4 +1,4 @@
-#include "BackpropagationAndExample.hpp"
+#include "BackpropagationXorExample.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Learning/BackpropagationLearningRule.hpp>
@@ -12,7 +12,7 @@
 #include <Graphics/NeuralNetworkResultChart.hpp>
 
 
-void doBackpropagationAndExample()
+void doBackpropagationXorExample()
 {
 	LayeredNetworkOptions layeredNetworkOptions;
 	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
@@ -36,21 +36,21 @@ void doBackpropagationAndExample()
 	options.minRandomWeightValue = -0.5;
 	options.maxRandomWeightValue = 0.5;
 	options.weightDecayFac = 0;
-	options.momentum = 0;
-	options.resilientLearningRate = false;
+	options.learningRate = 0.1;
+	options.resilientLearningRate = true;
 	BackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;
-	for (int i = 0; i < 8; i += 1)
+	for (int i = 0; i < 2; i += 1)
 	{
-		for (int l = 0; l < 8; l += 1)
+		for (int l = 0; l < 2; l += 1)
 		{
 			std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(2));
 			NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
 
 			teachingPattern[0][0] = i;
 			teachingPattern[0][1] = l;
-			(*teachingInput).set(0, 0, (i == l));
+			(*teachingInput).set(0, 0, (i != l));
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
 	}
