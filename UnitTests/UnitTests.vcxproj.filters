@@ -51,6 +51,9 @@
     <ClCompile Include="Teaching\TeacherTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">

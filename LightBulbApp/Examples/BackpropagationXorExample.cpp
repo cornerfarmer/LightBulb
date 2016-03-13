@@ -27,17 +27,13 @@ void doBackpropagationXorExample()
 
 	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.debugOutputInterval = 1000;
 	options.maxTotalErrorValue = 4;
-	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
-	options.minRandomWeightValue = -0.5;
-	options.maxRandomWeightValue = 0.5;
 	options.weightDecayFac = 0;
 	options.learningRate = 0.1;
-	options.momentum = false;
+	options.momentum = 0;
 	options.resilientLearningRate = false;
 	BackpropagationLearningRule learningRule(options);
 
