@@ -1,26 +1,13 @@
 // Includes
 #include "Function/EuclideanDistance.hpp"
-#include "Neuron/Edge.hpp"
-#include "Neuron/AbstractNeuron.hpp"
-#include "Neuron/RBFThreshold.hpp"
 // Library includes
 #include <stdexcept>
 #include <math.h>
 
-double EuclideanDistance::execute(std::list<Edge*> &input, AbstractThreshold* threshold, double additionalInput, std::map<AbstractNeuron*, double>* neuronOutputCache)
+void EuclideanDistance::execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights)
 {
-	double euclideanDistance = 0.0;
-
-	// Calculate the square of the distance between the output and the center
-	for (auto edge = input.begin(); edge != input.end(); edge++)
-	{
-		euclideanDistance += pow((neuronOutputCache == NULL ? (*edge)->getPrevNeuron()->getActivation() : (*neuronOutputCache)[(*edge)->getPrevNeuron()]) - (*edge)->getWeight(), 2);
-	}
-
-	// Sqrt
-	euclideanDistance = sqrt(euclideanDistance);
-	
-	return euclideanDistance;
+	Eigen::MatrixXd sub = (weights[layerNr - 1].rowwise() - activations[layerNr - 1].transpose());
+	netInputs[layerNr].noalias() = (weights[layerNr - 1].rowwise() - activations[layerNr - 1].transpose()).rowwise().squaredNorm().cwiseSqrt().transpose();
 }
 
 AbstractInputFunction* EuclideanDistance::getInputFunctionCopy()
