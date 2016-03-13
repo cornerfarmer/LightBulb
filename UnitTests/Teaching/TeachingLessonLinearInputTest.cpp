@@ -5,6 +5,7 @@
 #include <Mocks/MockLayeredNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 #include <Mocks/MockActivationFunction.hpp>
+#include <EigenSrc/Dense>
 
 class TeachingLessonLinearInputTest : public testing::Test {
 public:
@@ -103,7 +104,7 @@ TEST_F(TeachingLessonLinearInputTest, tryLesson)
 TEST_F(TeachingLessonLinearInputTest, getErrormapFromOutputVector)
 {
 	std::vector<std::vector<double>> output(3, std::vector<double>(3, 1));
-	std::vector<std::vector<double>> expected(3, std::vector<double>(3));
+	ErrorMap_t expected(3, Eigen::VectorXd(3));
 	expected[0][0] = 0;
 	expected[0][1] = 1;
 	expected[0][2] = 2;
@@ -120,7 +121,7 @@ TEST_F(TeachingLessonLinearInputTest, getErrormapFromOutputVector)
 TEST_F(TeachingLessonLinearInputTest, getErrormap)
 {
 	setUpNeuralNetworkCalculateCall();
-	std::vector<std::vector<double>> expected(3, std::vector<double>(3));
+	ErrorMap_t expected(3, Eigen::VectorXd(3));
 	expected[0][0] = 2;
 	expected[0][1] = 3;
 	expected[0][2] = 4;
@@ -131,7 +132,9 @@ TEST_F(TeachingLessonLinearInputTest, getErrormap)
 	expected[2][1] = 9;
 	expected[2][2] = 10;
 	auto returnedValue = teachingLesson->getErrormap(*neuralNetwork, *activationOrder);
-	EXPECT_EQ(expected, *returnedValue.get());
+	ASSERT_TRUE(expected[0].isApprox((*returnedValue.get())[0]));
+	ASSERT_TRUE(expected[1].isApprox((*returnedValue.get())[1]));
+	ASSERT_TRUE(expected[2].isApprox((*returnedValue.get())[2]));
 }
 
 TEST_F(TeachingLessonLinearInputTest, getSpecificError)
@@ -143,7 +146,7 @@ TEST_F(TeachingLessonLinearInputTest, getSpecificError)
 
 TEST_F(TeachingLessonLinearInputTest, getTeachingInputMap)
 {
-	std::vector<std::vector<double>> expected(3, std::vector<double>(3));
+	ErrorMap_t expected(3, Eigen::VectorXd(3));
 	expected[0][0] = 1;
 	expected[0][1] = 2;
 	expected[0][2] = 3;
@@ -154,5 +157,7 @@ TEST_F(TeachingLessonLinearInputTest, getTeachingInputMap)
 	expected[2][1] = 8;
 	expected[2][2] = 9;
 	auto returnedValue = teachingLesson->getTeachingInputMap(*neuralNetwork);
-	EXPECT_EQ(expected, *returnedValue.get());
+	ASSERT_TRUE(expected[0].isApprox((*returnedValue.get())[0]));
+	ASSERT_TRUE(expected[1].isApprox((*returnedValue.get())[1]));
+	ASSERT_TRUE(expected[2].isApprox((*returnedValue.get())[2]));
 }

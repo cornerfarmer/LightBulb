@@ -152,6 +152,7 @@ void BackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Te
 	{
 		// Randomize all weights
 		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
 	}
 
 	// If used, initialize the learning rate helper

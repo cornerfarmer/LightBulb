@@ -25,6 +25,22 @@ public:
 	MOCK_METHOD0(getOutputSize, int());
 	MOCK_METHOD1(copyWeightsFrom, void(AbstractNetworkTopology& otherNetwork));
 	MOCK_METHOD1(calculateEuclideanDistance, double(AbstractNetworkTopology& otherNetwork));
+
+	MOCK_METHOD0(getInnerActivationFunction, AbstractActivationFunction* ());
+	MOCK_METHOD1(getNeuronCountInLayer, int (int));
+	MOCK_METHOD0(getLayerCount, int ());
+	MOCK_METHOD2(getAfferentEdgeCount, int (int, int));
+	MOCK_METHOD3(getPrevNeuronActivation, double (int, int, int));
+	MOCK_METHOD3(getWeight, double (int, int, int));
+	MOCK_METHOD4(setWeight, void (int, int, int, double));
+	MOCK_METHOD2(getNetInput, double (int, int));
+	MOCK_METHOD1(getNetInputVector, Eigen::VectorXd (int));
+	MOCK_METHOD2(getEfferentWeightVector, Eigen::VectorXd (int, int));
+	MOCK_METHOD1(getActivationVector, Eigen::VectorXd (int));
+	MOCK_METHOD1(getAfferentWeightsPerLayer, Eigen::MatrixXd (int));
+	MOCK_METHOD1(getEfferentWeightsPerLayer, Eigen::MatrixXd (int));
+	MOCK_METHOD2(setAfferentWeightsPerLayer, void (int, Eigen::MatrixXd&));
+	MOCK_METHOD0(getWeights, std::vector<Eigen::MatrixXd>* ());
 };
 
 #endif

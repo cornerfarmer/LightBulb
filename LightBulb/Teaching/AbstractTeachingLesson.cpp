@@ -37,6 +37,7 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(
 	// Calculate the error values (expected value - real value)
 	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
+		(*errorMap)[timestep].setZero();
 		if (teachingInput->existsTimestep(timestep))
 		{
 			for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
@@ -63,7 +64,7 @@ double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNet
 	for (auto errorValues = errorMap->begin(); errorValues != errorMap->end(); errorValues++)
 	{
 		// Add the square of every errorValue in the errorVector
-		for (int i = 0; i < errorValues->cols(); i++)
+		for (int i = 0; i < errorValues->rows(); i++)
 		{
 			specificError += pow((*errorValues)[i], 2.0);
 		}
@@ -82,6 +83,7 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(Abstract
 	
 	for (int timestep = 0; timestep < teachingInput->size(); timestep++)
 	{
+		(*teachingInputMap)[timestep].setZero();
 		if (teachingInput->existsTimestep(timestep))
 		{
 			for (unsigned int i = 0; i < teachingInput->getDimension(); i++)

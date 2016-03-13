@@ -27,7 +27,7 @@ void doBackpropagationXorExample()
 
 	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
-	options.debugOutputInterval = 100;
+	options.debugOutputInterval = 1000;
 	options.maxTotalErrorValue = 4;
 	options.minIterationsPerTry = 3000;
 	options.maxIterationsPerTry = 1000000;
@@ -37,7 +37,8 @@ void doBackpropagationXorExample()
 	options.maxRandomWeightValue = 0.5;
 	options.weightDecayFac = 0;
 	options.learningRate = 0.1;
-	options.resilientLearningRate = true;
+	options.momentum = false;
+	options.resilientLearningRate = false;
 	BackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;
@@ -54,8 +55,13 @@ void doBackpropagationXorExample()
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
 	}
-
+	clock_t begin = clock();
 	bool success = learningRule.doLearning(neuralNetwork, teacher);
+	clock_t end = clock();
+
+	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+	std::cout << "time: " << std::fixed << std::setprecision(5) << elapsed_secs << std::endl;
+
 /*
 	TopologicalOrder topologicalOrder;
 	double totalError = teacher.getTotalError(neuralNetwork, topologicalOrder);
