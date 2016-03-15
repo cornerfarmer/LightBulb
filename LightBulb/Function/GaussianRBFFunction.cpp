@@ -1,12 +1,20 @@
 // Includes
 #include "Function/GaussianRBFFunction.hpp"
-#include "Neuron/RBFThreshold.hpp"
-#include "Neuron/NeuronCompareThreshold.hpp"
 #include "NetworkTopology/AbstractSOMStructure.hpp"
-#include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>
+#include <EigenSrc/Dense>
+
+GaussianRBFFunction::GaussianRBFFunction(Eigen::VectorXd* widths_)
+{
+	widths = widths_;
+}
+
+void GaussianRBFFunction::execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs)
+{
+	netInputs[layerNr] = (-1 * activations[layerNr].array().pow(2) / (2 * widths->array().pow(2))).exp();
+}
 
 double GaussianRBFFunction::execute(double input)
 {

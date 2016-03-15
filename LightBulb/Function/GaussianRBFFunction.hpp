@@ -13,8 +13,11 @@
 class GaussianRBFFunction : public AbstractActivationFunction, public AbstractNeighborhoodFunction
 {
 private:
+	Eigen::VectorXd* widths;
 public:
+	GaussianRBFFunction(Eigen::VectorXd* widths_);
 	// Inherited:
+	void execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs);
 	double execute(double input);
 	double executeDerivation(double input);
 	AbstractActivationFunction* getActivationFunctionCopy();

@@ -11,7 +11,8 @@
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
 class RBFNetwork : public LayeredNetwork
 {
-private:	
+private:
+	Eigen::VectorXd neuronWidths;
 public:
 	RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer);		
 	// Set all weights to new random values between randStart and randEnd
@@ -24,6 +25,8 @@ public:
 	void setCenterOfRBFNeuron(int neuronIndex, std::vector<double> &newCenterPosition);
 	// Sets the width of the RBFNeuron with the given index
 	void setWidthOfRBFNeuron(int neuronIndex, double newWidth);
+
+
 };
 
 #endif

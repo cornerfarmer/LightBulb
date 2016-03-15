@@ -26,6 +26,8 @@ struct LayeredNetworkOptions
 	// Specifies which neurons of the last layer will be used as output neurons (if empty, the whole last layer will be used)
 	std::vector<unsigned int> outputNeuronsIndices;
 
+	bool useBiasNeuron;
+
 	AbstractNeuronDescriptionFactory* descriptionFactory;
 	LayeredNetworkOptions();
 	~LayeredNetworkOptions();

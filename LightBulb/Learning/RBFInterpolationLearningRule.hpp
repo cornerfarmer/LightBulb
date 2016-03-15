@@ -46,20 +46,20 @@ private:
 	// A matrx which will contain all teachingInput values from all output neurons
 	std::unique_ptr<Eigen::MatrixXd> t;
 	// A vector which will contain all calculated weights
-	std::unique_ptr<Eigen::VectorXd> w;	
+	std::unique_ptr<Eigen::MatrixXd> w;
 	// Holds the actual teacher
 	Teacher* actTeacher;
 protected:
 	// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
 	RBFInterpolationLearningRuleOptions* getOptions();
 	// Inherited:
-	void adjustWeight(Edge* edge, double deltaWeight);
+	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
-	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
-	void initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap);
+	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
+	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);

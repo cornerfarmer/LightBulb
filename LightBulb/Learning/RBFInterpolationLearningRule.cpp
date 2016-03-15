@@ -4,12 +4,8 @@
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Neuron/AbstractNeuron.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/Edge.hpp"
 #include "NetworkTopology/RBFNetwork.hpp"
-#include "Neuron/RBFThreshold.hpp"
 
 
 using namespace Eigen;
@@ -27,10 +23,12 @@ RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearn
 	options->maxIterationsPerTry = 1;
 }
 
-void RBFInterpolationLearningRule::adjustWeight(Edge* edge, double deltaWeight)
+void RBFInterpolationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
 {
-	// Set the calculated weight as new weight
-	edge->setWeight(edge->getWeight() + deltaWeight);
+	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1) {
+		Eigen::MatrixXd newWeights = currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex) + gradients;
+		currentNetworkTopology->setAfferentWeightsPerLayer(layerIndex, newWeights);
+	}
 }
 
 void RBFInterpolationLearningRule::printDebugOutput()
@@ -53,15 +51,12 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	if (!rbfNetwork)
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 	
-	// Get all output neurons
-	std::vector<StandardNeuron*>* outputNeurons = neuralNetwork.getNetworkTopology()->getOutputNeurons();
-
 	// Initialize a matrix which will contain all outputValues from neurons in the first hidden layer in every teachingLesson
-	m.reset(new MatrixXd(teacher.getTeachingLessons()->size(), rbfNetwork->getNeurons()->front().size()));
+	m.reset(new MatrixXd(teacher.getTeachingLessons()->size(), rbfNetwork->getNeuronCountInLayer(1)));
 	// Initialize a new matrx which will contain all teachingInput values from all output neurons
-	t.reset(new MatrixXd(m->rows(), neuralNetwork.getNetworkTopology()->getOutputNeurons()->size()));
+	t.reset(new MatrixXd(m->rows(), neuralNetwork.getNetworkTopology()->getOutputSize()));
 	// Initialize a new vector which will contain all calculated weights
-	w.reset(new VectorXd(m->cols()));
+	w.reset(new MatrixXd(m->cols(), t->cols()));
 
 	
 }
@@ -71,27 +66,29 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(Neu
 	return new TopologicalOrder();
 }
 
-double RBFInterpolationLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+Eigen::MatrixXd RBFInterpolationLearningRule::calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
 	if (lessonIndex == currentTeacher->getTeachingLessons()->size() - 1 && layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
-		return (*w)[edgeIndex];
+		return (*w);
 	else
-		return 0;
+		return Eigen::MatrixXd::Zero(w->rows(), w->cols());
 }
 
-void RBFInterpolationLearningRule::initializeNeuronWeightCalculation(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, int lessonIndex, int layerIndex, int neuronIndex, ErrorMap_t* errormap)
+void RBFInterpolationLearningRule::initializeLayerCalculation(class AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ::ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
+	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
 	{
 		// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
-		(*t)(lessonIndex, neuronIndex) = (float)lesson.getTeachingInput(neuron.getActivationFunction())->get(0, neuronIndex);
-		
+		for (int i = 0; i < t->cols(); i++) {
+			(*t)(lessonIndex, i) = lesson.getTeachingInput(currentNeuralNetwork->getNetworkTopology()->getOutputActivationFunction())->get(0, i);
+		}
+
 		if (lessonIndex == t->rows() - 1)
 		{
 			// Do the magic: Multiplicate the inversed matrix with the techingInputs of the current neuron
-			w.reset(new VectorXd((*mInverse) * t->col(neuronIndex)));
+			w.reset(new MatrixXd((*mInverse) * *t));
 		}
 	}
 }
@@ -105,13 +102,7 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 		// Replace all RBFNeurons with the help of the choosen neuronPlacer
 		getOptions()->neuronPlacer->doPlacing(*rbfNetwork, teacher);
 
-		for (auto neuron = rbfNetwork->getNeurons()->back().begin(); neuron != rbfNetwork->getNeurons()->back().end(); neuron++)
-		{
-			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
-			{
-				(*edge)->setWeight(0);
-			}
-		}
+		neuralNetwork.getNetworkTopology()->getAfferentWeightsPerLayer(1).setZero();
 	}
 
 	// The TopologicalOrder will be our activationOrder
@@ -123,12 +114,7 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 		// Try the teachingLesson
 		(*teacher.getTeachingLessons())[i]->tryLesson(neuralNetwork, activationOrder);
 
-		// Go through every neuron in the second layer
-		for (int j = 0; j != m->cols(); j++)
-		{
-			// Store the output of the neuron into our matrix
-			(*m)(i, j) = (float)rbfNetwork->getNeurons()->front()[j]->getActivation();
-		}
+		m->row(i) = (*rbfNetwork->getActivations())[0];
 	}
 	
 	// If our matrix is a square matrix

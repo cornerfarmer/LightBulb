@@ -21,7 +21,7 @@ std::unique_ptr<PointSet> AbstractRBFNeuronPlacer::getPointsFromTeachingLessons(
 		// Create a new point in the right dimension and with the same value as the current teachingInput
 		Point* newPoint = new Point(position, value);
 		// Set the the teachingPattern of the current teachingLesson to the pointCoordinate
-		newPoint->valPos.position = (*teachingLesson)->getTeachingPattern()->getRealVectorInTimestep(0);		
+		newPoint->valPos.position = (*(*teachingLesson)->getTeachingPattern())[0];		
 		// Add the point to the list
 		points->push_back(newPoint);
 	}

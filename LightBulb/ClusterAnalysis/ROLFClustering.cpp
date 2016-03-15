@@ -6,9 +6,6 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Teaching/Teacher.hpp"
 #include "Teaching/TeachingLessonLinearInput.hpp"
-#include "Neuron/AbstractNeuron.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/RBFThreshold.hpp"
 #include "ClusterAnalysis/PointSet.hpp"
 
 ROLFClustering::ROLFClustering(ROLFClusteringOptions &options_)

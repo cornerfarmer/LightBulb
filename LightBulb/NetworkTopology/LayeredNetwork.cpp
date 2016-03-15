@@ -14,6 +14,7 @@ LayeredNetworkOptions::LayeredNetworkOptions()
 	enableShortcuts = false;
 	neuronsPerLayerCount = std::vector<unsigned int>();
 	descriptionFactory = NULL;
+	useBiasNeuron = true;
 }
 
 LayeredNetworkOptions::~LayeredNetworkOptions()
@@ -79,11 +80,13 @@ void LayeredNetwork::buildNetwork()
 	{
 		layerOffsets[l] = totalNeuronCount;
 		netInputs[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l]);
-		activations[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l] + 1);
-		activations[l](options->neuronsPerLayerCount[l]) = 1;
+		activations[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l] + options->useBiasNeuron);
+		if (options->useBiasNeuron) {
+			activations[l](options->neuronsPerLayerCount[l]) = 1;
+		}
 		if (l > 0)
 		{
-			weights[l - 1] = Eigen::MatrixXd(options->neuronsPerLayerCount[l], options->neuronsPerLayerCount[l - 1] + 1);
+			weights[l - 1] = Eigen::MatrixXd::Zero(options->neuronsPerLayerCount[l], options->neuronsPerLayerCount[l - 1] + options->useBiasNeuron);
 		}
 		if (l == getLayerCount() - 1)
 			neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createOutputNeuronDescription());
@@ -92,6 +95,7 @@ void LayeredNetwork::buildNetwork()
 		totalNeuronCount += options->neuronsPerLayerCount[l];
 	}
 	layerOffsets[getLayerCount()] = totalNeuronCount;
+	
 }
 
 std::vector<int> LayeredNetwork::getLayerOffsets()
