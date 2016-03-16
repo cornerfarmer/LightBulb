@@ -1,12 +1,12 @@
 #include "Performance/NetworkPerformanceTests.hpp"
 #include "Examples/BackpropagationXorExample.hpp"
-#include "Examples/RBFNetworkAndExample.hpp"
+#include "Examples/RBFNetworkBiggerExample.hpp"
 #include <iostream>
 
 
 int main()
 {
-	doRBFNetworkAndExample();
+	doRBFNetworkBiggerExample();
 	std::cin.get();
 	return 0;
 }

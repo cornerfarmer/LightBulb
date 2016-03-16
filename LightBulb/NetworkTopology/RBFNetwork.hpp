@@ -26,7 +26,7 @@ public:
 	// Sets the width of the RBFNeuron with the given index
 	void setWidthOfRBFNeuron(int neuronIndex, double newWidth);
 
-
+	double getWidthOfRBFNeuron(int neuronIndex);
 };
 
 #endif

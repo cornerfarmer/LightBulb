@@ -33,12 +33,18 @@
     <ClCompile Include="Examples\BackpropagationXorExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\BackpropagationXorExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

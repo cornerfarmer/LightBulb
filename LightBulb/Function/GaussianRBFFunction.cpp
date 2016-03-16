@@ -13,7 +13,7 @@ GaussianRBFFunction::GaussianRBFFunction(Eigen::VectorXd* widths_)
 
 void GaussianRBFFunction::execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs)
 {
-	netInputs[layerNr] = (-1 * activations[layerNr].array().pow(2) / (2 * widths->array().pow(2))).exp();
+	activations[layerNr] = (-1 * netInputs[layerNr].array().pow(2) / (2 * widths->array().pow(2))).exp();
 }
 
 double GaussianRBFFunction::execute(double input)

@@ -1,8 +1,6 @@
 // Includes
 #include "Graphics/RBFNetworkStructureChart.hpp"
 #include "NetworkTopology/RBFNetwork.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/RBFThreshold.hpp"
 
 RBFNetworkStructureChart::RBFNetworkStructureChart(RBFNetworkStructureChartOptions &options_)
 	: AbstractNetworkStructureChart(new RBFNetworkStructureChartOptions(options_))
@@ -12,26 +10,26 @@ RBFNetworkStructureChart::RBFNetworkStructureChart(RBFNetworkStructureChartOptio
 	if (getOptions()->rbfNetwork == NULL)
 		throw std::invalid_argument("The given rbfNetwork is not valid");
 	// Check if the indices are correct
-	if (options->xNeuronCoordinateIndex >= getNeurons()->size())
+	if (options->xNeuronCoordinateIndex >= getNeuronCount())
 		throw std::invalid_argument("Can't find any coordinate with index 'xNeuronCoordinateIndex'");
-	if (options->yNeuronCoordinateIndex >= getNeurons()->size())
+	if (options->yNeuronCoordinateIndex >= getNeuronCount())
 		throw std::invalid_argument("Can't find any coordinate with index 'yNeuronCoordinateIndex'");
 }
 
-std::vector<StandardNeuron*>* RBFNetworkStructureChart::getNeurons()
+int RBFNetworkStructureChart::getNeuronCount()
 {
-	return &getOptions()->rbfNetwork->getNeurons()->front();
+	return getOptions()->rbfNetwork->getNeuronCountInLayer(1);
 }
 
-double RBFNetworkStructureChart::getRadiusOfNeuron(StandardNeuron& neuron)
+double RBFNetworkStructureChart::getRadiusOfNeuron(int neuronIndex)
 {
-	RBFThreshold* thresholdOfNeuron = static_cast<RBFThreshold*>(neuron.getThreshold());
-	return thresholdOfNeuron->getWidth();
+	return getOptions()->rbfNetwork->getWidthOfRBFNeuron(neuronIndex);
 }
 
-std::vector<double> RBFNetworkStructureChart::getPositionOfNeuron(StandardNeuron& neuron)
+std::vector<double> RBFNetworkStructureChart::getPositionOfNeuron(int neuronIndex)
 {
-	return neuron.getAfferentWeightsVector();
+	Eigen::MatrixXd position = getOptions()->rbfNetwork->getAfferentWeightsPerLayer(1).row(neuronIndex).transpose();
+	return std::vector<double>(position.data(), position.data() + position.rows());
 }
 
 RBFNetworkStructureChartOptions* RBFNetworkStructureChart::getOptions()

@@ -112,6 +112,16 @@ public:
 		return realVector;
 	}
 
+	std::vector<std::vector<T>> getRealVector()
+	{
+		std::vector<std::vector<T>> realVector(this->size());
+		for (int t = 0; t < realVector.size(); t++)
+		{
+			realVector[t] = getRealVectorInTimestep(t);
+		}
+		return realVector;
+	}
+
 	// Returns the dimension of the io
 	int getDimension()
 	{

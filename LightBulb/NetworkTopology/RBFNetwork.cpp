@@ -1,14 +1,11 @@
 // Includes
 #include "NetworkTopology/RBFNetwork.hpp"
-#include "NeuronFactory/DifferentFunctionsNeuronFactory.hpp"
-#include "Neuron/RBFThreshold.hpp"
+#include "NeuronFactory/DifferentNeuronDescriptionFactory.hpp"
 #include "Function/EuclideanDistance.hpp"
 #include "Function/GaussianRBFFunction.hpp"
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/IdentityFunction.hpp"
-#include "Neuron/StandardThreshold.hpp"
-#include "Neuron/Edge.hpp"
-#include "Neuron/StandardNeuron.hpp"
+#include <Neuron/NeuronDescription.hpp>
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)
 {
@@ -25,53 +22,42 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 	// Set all options
 	options->enableShortcuts = false;
 	// Define thresholds and functions
-	options->neuronFactory = new DifferentFunctionsNeuronFactory(new RBFThreshold(0.5), new EuclideanDistance(), new GaussianRBFFunction(), new IdentityFunction(),
-																	new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
+	options->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new EuclideanDistance(), new GaussianRBFFunction(&neuronWidths)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	// Set the neuronCounts in all three layers
 	options->neuronsPerLayerCount = std::vector<unsigned int>(3);
 	options->neuronsPerLayerCount[0] = neuronCountFirstLayer;
 	options->neuronsPerLayerCount[1] = neuronCountSecondLayer;
-	options->neuronsPerLayerCount[2] = neuronCountThirdLayer;	
-
+	options->neuronsPerLayerCount[2] = neuronCountThirdLayer;
+	options->useBiasNeuron = false;
 	// Build the network
 	buildNetwork();
+
+	neuronWidths = Eigen::VectorXd(neuronCountSecondLayer);
 }
 
 void RBFNetwork::randomizeWeights(double randStart, double randEnd)
-{	
-	// Go through all neurons in the first hidden layer
-	for (auto neuron = neurons.front().begin(); neuron != neurons.front().end(); neuron++)
+{
+	for (auto i = 0; i < weights[0].rows(); i++)
 	{
-		// Go through all effernetEdges of this neuron
-		std::list<Edge*>* efferentEdges = (*neuron)->getEfferentEdges();
-		for (auto edge = efferentEdges->begin(); edge != efferentEdges->end(); edge++)
+		for (auto j = 0; j < weights[0].cols(); j++)
 		{
-			do{
-				// Set the weight to a new random value
-				(*edge)->randomizeWeight(randStart, randEnd);
-			} while ((*edge)->getWeight()==0); // If the new weight is 0 => retry
+			do {
+				weights[0](i, j) = randGenerator.next() * (randEnd - randStart) + randStart;
+			} while (weights[0](i, j) == 0);
 		}
-	}	
+	}
 }
 
 void RBFNetwork::randomizeCenters(double randStart, double randEnd)
 {
-	// Go through all neurons in the first hidden layer
-	for (int neuronIndex = 0; neuronIndex != neurons.front().size(); neuronIndex++)
-	{
-		// Create a new center vector and fill it with random values
-		std::vector<double> newCenter(inputNeurons.size());
-		for (auto centerCoordinate = newCenter.begin(); centerCoordinate != newCenter.end(); centerCoordinate++)
-			*centerCoordinate = (double)rand() / RAND_MAX * (randEnd - randStart) + randStart;
-		// Set the new center vector to the neuron
-		setCenterOfRBFNeuron(neuronIndex, newCenter);
-	}	
+	weights[0].setRandom();
+	weights[0] *= (randEnd - randStart) + randStart;
 }
 	
 void RBFNetwork::randomizeWidths(double randStart, double randEnd)
 {
 	// Go through all neurons in the second layer
-	for (int neuronIndex = 0; neuronIndex != neurons.front().size(); neuronIndex++)
+	for (int neuronIndex = 0; neuronIndex != weights[0].rows(); neuronIndex++)
 	{
 		// Set a new random width to the neuron
 		setWidthOfRBFNeuron(neuronIndex, (double)rand() / RAND_MAX * (randEnd - randStart) + randStart);
@@ -82,14 +68,19 @@ void RBFNetwork::setCenterOfRBFNeuron(int neuronIndex, std::vector<double> &newC
 {
 	// Set the new center position to the neuron with neuronIndex
 	auto centerCoordinate = newCenterPosition.begin();
-	for(auto edge = neurons.front()[neuronIndex]->getAfferentEdges()->begin(); edge != neurons.front()[neuronIndex]->getAfferentEdges()->end(); edge++, centerCoordinate++)
+	for (int i = 0; i < weights[0].cols(); i++)
 	{
-		(*edge)->setWeight(*centerCoordinate);
+		weights[0](neuronIndex, i) = newCenterPosition[i];
 	}	
 }
 
 void RBFNetwork::setWidthOfRBFNeuron(int neuronIndex, double newWidth)
 {
 	// Set the new width to the neuron with neuronIndex
-	dynamic_cast<RBFThreshold*>(neurons.front()[neuronIndex]->getThreshold())->setWidth(newWidth);
+	neuronWidths(neuronIndex) = newWidth;
+}
+
+double RBFNetwork::getWidthOfRBFNeuron(int neuronIndex)
+{
+	return neuronWidths(neuronIndex);
 }

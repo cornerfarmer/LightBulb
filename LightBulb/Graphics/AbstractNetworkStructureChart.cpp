@@ -1,9 +1,6 @@
 // Includes
 #include "Graphics/AbstractNetworkStructureChart.hpp"
 #include "NetworkTopology/RBFNetwork.hpp"
-#include "Neuron/AbstractNeuron.hpp"
-#include "Neuron/StandardNeuron.hpp"
-#include "Neuron/RBFThreshold.hpp"
 
 AbstractNetworkStructureChart::AbstractNetworkStructureChart(AbstractNetworkStructureChartOptions* options_)
 {
@@ -13,15 +10,15 @@ AbstractNetworkStructureChart::AbstractNetworkStructureChart(AbstractNetworkStru
 void AbstractNetworkStructureChart::recalculateAllValues()
 {
 	// Clear the shape list
-	neuronShapes.clear();
+	neuronShapes.resize(getNeuronCount());
 	// Go through all neurons
-	for (auto neuron = getNeurons()->begin(); neuron != getNeurons()->end(); neuron++)
+	for (int neuronIndex = 0; neuronIndex < getNeuronCount(); neuronIndex++)
 	{
 		// Create a new circle shape
 		sf::CircleShape newCircle;
 		// Extract the radius and position of the current neuron
-		double radius = getRadiusOfNeuron(**neuron);
-		std::vector<double> positionVector = getPositionOfNeuron(**neuron);
+		double radius = getRadiusOfNeuron(neuronIndex);
+		std::vector<double> positionVector = getPositionOfNeuron(neuronIndex);
 		// Set the radius to the width of the neuron converted into the view range
 		newCircle.setRadius((float)(radius / (options->xRangeEnd - options->xRangeStart) * options->width));
 		// Set the position to the wished coordinates of the neuron center converted into the view range
@@ -39,7 +36,7 @@ void AbstractNetworkStructureChart::recalculateAllValues()
 		newCircle.setPointCount(100);
 
 		// Add the circle shape to the list
-		neuronShapes[*neuron] = newCircle;
+		neuronShapes[neuronIndex] = newCircle;
 	}
 }
 
@@ -58,7 +55,7 @@ void AbstractNetworkStructureChart::draw(sf::RenderWindow &window)
 	for (auto neuronShape = neuronShapes.begin(); neuronShape != neuronShapes.end(); neuronShape++)
 	{	
 		// Draw the circle shape
-		window.draw(neuronShape->second);
+		window.draw(*neuronShape);
 	}
 
 }

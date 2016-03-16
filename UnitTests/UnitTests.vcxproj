@@ -179,10 +179,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrderTest.cpp" />
+    <ClCompile Include="Function\EuclideanDistanceTest.cpp" />
     <ClCompile Include="Function\WeightedSumFunctionTest.cpp" />
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
     <ClCompile Include="Teaching\TeacherTest.cpp" />

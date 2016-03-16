@@ -113,9 +113,6 @@
     <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
-    <ClCompile Include="Neuron\RBFThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
     <ClCompile Include="Function\AbstractActivationFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
@@ -624,9 +621,6 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\RBFThreshold.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="Function\AbstractActivationFunction.hpp">

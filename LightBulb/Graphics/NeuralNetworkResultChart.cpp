@@ -54,11 +54,11 @@ NeuralNetworkResultChart::NeuralNetworkResultChart(NeuralNetworkResultChartOptio
 	if (options->activationOrder == NULL)
 		throw std::invalid_argument("The given activationOrder is not valid");
 	// Check if the output and input neuron indices are correct
-	if (options->xInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
+	if (options->xInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getNeuronCountInLayer(0))
 		throw std::invalid_argument("Can't find any inputNeuron with index 'xInputNeuronIndex'");
-	if (options->yInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size())
+	if (options->yInputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getNeuronCountInLayer(0))
 		throw std::invalid_argument("Can't find any inputNeuron with index 'yInputNeuronIndex'");
-	if (options->outputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getOutputNeurons()->size())
+	if (options->outputNeuronIndex >= options->neuralNetwork->getNetworkTopology()->getOutputSize())
 		throw std::invalid_argument("Can't find any outputNeuron with index 'outputNeuronIndex'");
 }
 
@@ -67,7 +67,7 @@ void NeuralNetworkResultChart::recalculateAllValues()
 	// Create a new pixel array, which will contain all color informations
 	std::unique_ptr<sf::Uint8[]> pixels(new sf::Uint8[options->width*options->height*4]);
 	// Create a new inputVector with the size of the inputCount
-    NeuralNetworkIO<double> input(options->neuralNetwork->getNetworkTopology()->getInputNeurons()->size());
+    NeuralNetworkIO<double> input(options->neuralNetwork->getNetworkTopology()->getNeuronCountInLayer(0));
 
 	// Go through every pixel
 	for(unsigned int x = 0; x < options->width; x++)
@@ -79,7 +79,10 @@ void NeuralNetworkResultChart::recalculateAllValues()
 			input.set(options->yTimeStep, options->yInputNeuronIndex, (double)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart);
 
 			// Extract the output
-            float output = (float)(*options->neuralNetwork->calculate(input, *options->activationOrder, 0, options->ouputTimeStep + 1)).get(options->ouputTimeStep,options->outputNeuronIndex);
+			std::vector<std::vector<double>> outputVector(options->ouputTimeStep + 1, options->neuralNetwork->getNetworkTopology()->getOutputSize());
+			std::vector<std::vector<double>> inputVector = input.getRealVector();
+			options->neuralNetwork->calculate(inputVector, outputVector, *options->activationOrder, 0, options->ouputTimeStep + 1);
+			float output = outputVector[options->ouputTimeStep][options->outputNeuronIndex];
 
 			// If binaryInterpretation is selected, just use black or white, else interpret the output linear
 			if (options->binaryInterpretation)

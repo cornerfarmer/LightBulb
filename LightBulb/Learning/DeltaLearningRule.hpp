@@ -49,9 +49,9 @@ private:
 	// Inherited:
 	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
 	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
-	double calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap);
+	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
+	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
-	void adjustWeight(Edge* edge, double gradient);
 	bool learningHasStopped();	
 	void printDebugOutput();
 public:

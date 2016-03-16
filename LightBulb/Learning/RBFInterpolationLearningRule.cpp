@@ -56,7 +56,7 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	// Initialize a new matrx which will contain all teachingInput values from all output neurons
 	t.reset(new MatrixXd(m->rows(), neuralNetwork.getNetworkTopology()->getOutputSize()));
 	// Initialize a new vector which will contain all calculated weights
-	w.reset(new MatrixXd(m->cols(), t->cols()));
+	w.reset(new MatrixXd(neuralNetwork.getNetworkTopology()->getOutputSize(), rbfNetwork->getNeuronCountInLayer(1)));
 
 	
 }
@@ -69,7 +69,7 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(Neu
 Eigen::MatrixXd RBFInterpolationLearningRule::calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
-	if (lessonIndex == currentTeacher->getTeachingLessons()->size() - 1 && layerIndex == currentNeuralNetwork->getNetworkTopology()->getNeurons()->size() - 1)
+	if (lessonIndex == currentTeacher->getTeachingLessons()->size() - 1 && layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
 		return (*w);
 	else
 		return Eigen::MatrixXd::Zero(w->rows(), w->cols());
@@ -88,7 +88,7 @@ void RBFInterpolationLearningRule::initializeLayerCalculation(class AbstractTeac
 		if (lessonIndex == t->rows() - 1)
 		{
 			// Do the magic: Multiplicate the inversed matrix with the techingInputs of the current neuron
-			w.reset(new MatrixXd((*mInverse) * *t));
+			w.reset(new MatrixXd(((*mInverse) * *t).transpose()));
 		}
 	}
 }
@@ -114,7 +114,7 @@ void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, T
 		// Try the teachingLesson
 		(*teacher.getTeachingLessons())[i]->tryLesson(neuralNetwork, activationOrder);
 
-		m->row(i) = (*rbfNetwork->getActivations())[0];
+		m->row(i) = (*rbfNetwork->getActivations())[1];
 	}
 	
 	// If our matrix is a square matrix

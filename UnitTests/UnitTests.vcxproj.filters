@@ -54,6 +54,12 @@
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Function\EuclideanDistanceTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
