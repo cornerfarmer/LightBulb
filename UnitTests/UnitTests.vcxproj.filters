@@ -60,6 +60,9 @@
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
