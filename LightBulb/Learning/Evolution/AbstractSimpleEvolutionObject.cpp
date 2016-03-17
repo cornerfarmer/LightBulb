@@ -15,31 +15,24 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include <Neuron/NeuronDescription.hpp>
 
-AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_, int inputDimension, int outputDimension)
+void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& options)
 {
-	// Configure the network options depending on the given parameters
-	LayeredNetworkOptions options;
-	options.enableShortcuts = true;
-	options.neuronsPerLayerCount.push_back(inputDimension);
-	options.neuronsPerLayerCount.push_back(10);
-	options.neuronsPerLayerCount.push_back(10);
-	options.neuronsPerLayerCount.push_back(outputDimension);
-	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
-	//options.neuronFactory = new SameFunctionsNeuronFactory(new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
-
 	// Create a new network topology from the adjusted options.
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
-	
+
 	// Create a neural network from the network topolgy
 	neuralNetwork = new NeuralNetwork(layeredNetwork);
 	// Randomize all weights (TODO: make the boundaries variable)
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5,0.5);
-
-	world = world_;
+	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5, 0.5);
 
 	// Initialize the mutation strength vector
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
 	randomizeMutationStrength();
+}
+
+AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_)
+{
+	world = world_;
 }
 
 NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()

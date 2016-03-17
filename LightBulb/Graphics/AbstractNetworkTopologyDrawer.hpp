@@ -9,7 +9,6 @@
 #include "Graphics/Arrow.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 #include "Function/HyperbolicTangentFunction.hpp"
-#include "Neuron/StandardThreshold.hpp"
 
 // Library includes
 #include <memory>

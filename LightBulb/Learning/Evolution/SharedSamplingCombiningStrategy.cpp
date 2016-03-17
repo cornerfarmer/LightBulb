@@ -13,8 +13,7 @@ void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld* simulati
 	std::map<AbstractEvolutionObject*, double> sampleFitness;
 	auto prevResults = otherCombiningStrategy->getPrevResults();
 	while (sample.size() < amountOfCompetitionsPerObject)
-	{
-		AbstractEvolutionObject* bestObject = NULL;
+	{		AbstractEvolutionObject* bestObject = NULL;
 		for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
 		{
 			if (sampleFitness[*secondPlayer] != -1)

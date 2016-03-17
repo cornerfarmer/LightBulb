@@ -2,12 +2,24 @@
 #include "Examples/Network.hpp"
 #include "Examples/NetworkSimulator.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <Function/WeightedSumFunction.hpp>
+#include <Function/IdentityFunction.hpp>
+#include <NetworkTopology/LayeredNetwork.hpp>
+#include <Neuron/NeuronDescription.hpp>
 
 Network::Network(NetworkSimulator* networkSimulator_)
-	: AbstractSimpleEvolutionObject(networkSimulator_, 1, 8)
+	: AbstractSimpleEvolutionObject(networkSimulator_)
 {
 	networkSimulator = networkSimulator_;
 	positions.resize(4, std::vector<float>(2));
+
+	LayeredNetworkOptions options;
+	options.useBiasNeuron = false;
+	options.neuronsPerLayerCount.push_back(1);
+	options.neuronsPerLayerCount.push_back(8);
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+	buildNeuralNetwork(options);
 }
 
 void Network::getNNInput(std::vector<double>& input)

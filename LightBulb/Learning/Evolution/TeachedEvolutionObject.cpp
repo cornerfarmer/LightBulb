@@ -12,7 +12,6 @@ TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingE
 	teachingEvolutionWorld = teachingEvolutionWorld_;
 	currentTotalError = 0;
 
-
 	// Create a new network after the given options
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
 	neuralNetwork = new NeuralNetwork(layeredNetwork);

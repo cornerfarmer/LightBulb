@@ -54,9 +54,9 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	// Go through all edges
 	for (auto layer = weights->begin(); layer != weights->end(); layer++)
 	{
-		for (int i = 0; i < layer->cols(); i++)
+		for (int i = 0; i < layer->rows(); i++)
 		{
-			for (int j = 0; j < layer->rows(); j++)
+			for (int j = 0; j < layer->cols(); j++)
 			{
 				// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
 				double weightAdd = (*mutationStrength)[mutationStrengthIndex] * ZigguratGenerator::next();

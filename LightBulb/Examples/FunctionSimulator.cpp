@@ -30,9 +30,9 @@ FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Functio
 	//	options.endX = 0.5;
 	//	options.startY = 0.25;
 	//	options.endY = 1.25;
-		//options.markedPositions.push_back(sf::Vector2f(0.0898f, -0.7126f));
-		//options.markedPositions.push_back(sf::Vector2f(-0.0898f, 0.7126f));
-		options.markedPositions.push_back(sf::Vector2f(0, 0));
+		options.markedPositions.push_back(sf::Vector2f(0.0898f, -0.7126f));
+		options.markedPositions.push_back(sf::Vector2f(-0.0898f, 0.7126f));
+		//options.markedPositions.push_back(sf::Vector2f(0, 0));
 		drawer.reset(new FunctionDrawer(options));
 	}
 }

@@ -1,16 +1,28 @@
 // Includes
 #include "Examples/Animal.hpp"
 #include "Examples/Nature.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include "Examples/AbstractTile.hpp"
+#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <Function/WeightedSumFunction.hpp>
+#include <NetworkTopology/LayeredNetwork.hpp>
+#include <Neuron/NeuronDescription.hpp>
+#include <Function/BinaryFunction.hpp>
+
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
-	: AbstractSimpleEvolutionObject(nature_, 6, 5)
+	: AbstractSimpleEvolutionObject(nature_)
 {
 	nature = nature_;
 
 	reset(posX_, posY_, dirX_, dirY_);
+
+	LayeredNetworkOptions options;
+	options.useBiasNeuron = false;
+	options.neuronsPerLayerCount.push_back(6);
+	options.neuronsPerLayerCount.push_back(10);
+	options.neuronsPerLayerCount.push_back(5);
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
+	buildNeuralNetwork(options);
 }
 
 void Animal::getNNInput(std::vector<double>& input)

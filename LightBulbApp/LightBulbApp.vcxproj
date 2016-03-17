@@ -125,10 +125,15 @@
     <ClCompile Include="Examples\BackpropagationXorExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Examples\NetworkEvolutionExample.cpp" />
+    <ClCompile Include="Examples\EvolutionExample.cpp" />
+    <ClCompile Include="Examples\FunctionEvolutionExample.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Examples\TeachedEvolutionExample.cpp" />
+    <ClCompile Include="Examples\TicTacToeEvolutionExample.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main.old.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -140,10 +145,15 @@
     <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Examples\NetworkEvolutionExample.hpp" />
+    <ClInclude Include="Examples\EvolutionExample.hpp" />
+    <ClInclude Include="Examples\FunctionEvolutionExample.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Examples\TeachedEvolutionExample.hpp" />
+    <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

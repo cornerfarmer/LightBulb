@@ -20,9 +20,9 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 	auto layer2 = weights2->begin();
 	for (; layer1 != weights1->end(); layer1++, layer2++)
 	{
-		for (int i = 0; i < layer1->cols(); i++)
+		for (int i = 0; i < layer1->rows(); i++)
 		{
-			for (int j = 0; j < layer1->rows(); j++)
+			for (int j = 0; j < layer1->cols(); j++)
 			{
 				if (useAverageForWeight)
 				{

@@ -10,11 +10,13 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 
+struct LayeredNetworkOptions;
 // Forward declarations
 class EvolutionLearningRule;
 class NeuralNetwork;
 class RecurrentLayeredNetworkOptions;
-class AbstractEvolutionWorld; 
+class AbstractEvolutionWorld;
+class AbstractNeuronDescriptionFactory;
 
 // This class is simplification of the AbstractEvolutionObject class.
 // It decreases the work you have to do for your evolutionObject class, but also decreases your possibilities.
@@ -30,9 +32,11 @@ protected:
 	virtual void getNNInput(std::vector<double>& input) = 0;
 	// This method should interpret and act depending on the given NN output
 	virtual void interpretNNOutput(std::vector<double>& output) = 0;
+
+	void buildNeuralNetwork(LayeredNetworkOptions &options);
 public:	
 	// Create a new evolution object with the given input and output NN size
-	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world, int inputDimension, int outputDimension);
+	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world);
 	~AbstractSimpleEvolutionObject();
 	// Inherited:
 	void doNNCalculation();

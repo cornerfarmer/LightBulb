@@ -2,11 +2,25 @@
 #include "Examples/TicTacToeKI.hpp"
 #include "Examples/TicTacToe.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <Function/WeightedSumFunction.hpp>
+#include <NetworkTopology/LayeredNetwork.hpp>
+#include <Function/BinaryFunction.hpp>
+#include <Neuron/NeuronDescription.hpp>
 
 TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
-	: AbstractSimpleEvolutionObject(ticTacToe_, 18, 9)
+	: AbstractSimpleEvolutionObject(ticTacToe_)
 {
 	ticTacToe = ticTacToe_;
+
+	LayeredNetworkOptions options;
+	options.enableShortcuts = true;
+	options.neuronsPerLayerCount.push_back(18);
+	options.neuronsPerLayerCount.push_back(10);
+	options.neuronsPerLayerCount.push_back(10);
+	options.neuronsPerLayerCount.push_back(9);
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
+	buildNeuralNetwork(options);
 }
 
 void TicTacToeKI::getNNInput(std::vector<double>& input)
