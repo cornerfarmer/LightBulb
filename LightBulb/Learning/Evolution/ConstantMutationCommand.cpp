@@ -21,35 +21,15 @@ ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* muta
 	objectCount = 0;
 }
 
-void ConstantMutationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
+
+void ConstantMutationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter)
 {
 	int objectCount = this->objectCount;
 	// Calculate a temporary static object count if the percentage value is used
 	if (objectCount == 0)
 		objectCount = (int)(highscore->size() * mutationPercentage);
 
-	if (enableDebugOutput)
-		std::cout << "Mutated " << objectCount << " random ones" << std::endl;
-	
-	if (highscore->size() > 0)
-	{
-		mutationSelector->initMutation(highscore, objectCount);
-
-		int entryIndex = 0;
-		// Do N times
-		for (int i = 0; i < objectCount; i++)
-		{
-			// Select a random object
-			AbstractEvolutionObject* chosenObject = mutationSelector->nextMutation();
-			// Clone it and add it to the new object vector
-			newObjectVector->push_back(chosenObject->clone());
-			// Mutate the new object
-			mutationAlgorithm->execute(newObjectVector->back());
-		}
-
-		if (!mutationSelector->hasFinished())
-			throw std::logic_error("The mutationSelector has not finished properly!");
-	}
+	mutationSelector->executeMutationSelection(objectCount, highscore, counter);
 }
 
 void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)

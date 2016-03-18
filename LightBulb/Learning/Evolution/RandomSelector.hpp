@@ -18,16 +18,12 @@ class RandomSelector : public AbstractMutationSelector, public AbstractRecombina
 {
 private:
 	// Holds amount of objects which should be selected
-	std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore;
-	int objectsToDo;
 	std::unique_ptr<AbstractRandomFunction> randomFunction;
+protected:
+	void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 public:
 	RandomSelector(AbstractRandomFunction* randomFunction_);
-	void initMutation(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore_, int mutationCount);
-	AbstractEvolutionObject* nextMutation();
-	void initRecombination(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int recombinationCount);
-	std::array<AbstractEvolutionObject*, 2> nextRecombination();
-	bool hasFinished();
 };
 
 #endif

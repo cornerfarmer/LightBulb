@@ -311,6 +311,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationSelector.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -321,11 +322,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationSelector.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractReuseCommand.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractReuseSelector.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -341,11 +344,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp">
+    <ClCompile Include="Learning\Evolution\ConstantReuseCommand.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestReuseSelector.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -891,6 +895,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationSelector.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationAlgorithm.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -901,11 +906,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationSelector.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractReuseCommand.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractReuseSelector.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -921,11 +928,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
+    <ClInclude Include="Learning\Evolution\ConstantReuseCommand.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestReuseSelector.hpp" />
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

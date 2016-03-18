@@ -60,6 +60,7 @@ class EvolutionLearningRule
 protected:
 	std::unique_ptr<EvolutionLearningRuleOptions> options;
 	int generation;
+	std::vector<AbstractEvolutionObject*> notUsedObjects;
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRuleOptions* getOptions();

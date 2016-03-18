@@ -14,9 +14,10 @@
 #include <Function/EqualRandomFunction.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Diagnostic/ChangeableNumber.hpp>
-#include <Learning/Evolution/BestReuseCommand.hpp>
+#include <Learning/Evolution/ConstantReuseCommand.hpp>
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Examples/FunctionSimulator.hpp>
+#include <Learning/Evolution/BestReuseSelector.hpp>
 
 static double sixHumpCamelFunction(std::vector<float> pos)
 {
@@ -35,7 +36,7 @@ void doFunctionEvolutionExample()
 	options.exitConditions.push_back(rateDifferenceCondition);
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
 	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new BestReuseCommand(1));
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);

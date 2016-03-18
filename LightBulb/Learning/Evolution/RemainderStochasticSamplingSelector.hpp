@@ -16,18 +16,14 @@
 class RemainderStochasticSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
 {
 private:
-	// Holds amount of objects which should be selected
-	std::vector<AbstractEvolutionObject*> objectSequence;
-	int currentObjectIndex;
 	RouletteWheelSelectionFunction randomFunction;
 	bool withReplacement;
+	void select(bool recombination, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+protected:
+	void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 public:
 	RemainderStochasticSamplingSelector(bool withReplacement_ = true);
-	void initMutation(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int mutationCount);
-	AbstractEvolutionObject* nextMutation();
-	void initRecombination(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, int recombinationCount);
-	std::array<AbstractEvolutionObject*, 2> nextRecombination();
-	bool hasFinished();
 };
 
 #endif

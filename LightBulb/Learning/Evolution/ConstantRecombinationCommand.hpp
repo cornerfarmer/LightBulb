@@ -25,8 +25,8 @@ public:
 	ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_, bool enableDebugOutput_ = false);
 	// Creates a command which combines a percentage of objects
 	ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_, bool enableDebugOutput_ = false);
-	// Takes N * 2 objects, combines them and adds the created objects to the new objects vector
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
+	
+	void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter);
 };
 
 #endif

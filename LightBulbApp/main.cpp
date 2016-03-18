@@ -11,7 +11,7 @@
 
 int main()
 {
-	doTicTacToeEvolutionExample();
+	doFunctionEvolutionExample();
 	std::cin.get();
 	return 0;
 }

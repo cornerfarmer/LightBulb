@@ -28,8 +28,6 @@ LayeredNetworkOptions::LayeredNetworkOptions(const LayeredNetworkOptions &obj)
 	descriptionFactory = obj.descriptionFactory->getCopy();
 }
 
-
-
 LayeredNetwork::~LayeredNetwork()
 {
 

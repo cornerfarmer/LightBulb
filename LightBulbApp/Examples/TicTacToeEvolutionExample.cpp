@@ -4,7 +4,7 @@
 #include <Learning/Evolution/ConstantMutationCommand.hpp>
 #include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Learning/Evolution/BestReuseCommand.hpp>
+#include <Learning/Evolution/ConstantReuseCommand.hpp>
 #include <Learning/Evolution/ConstantRecombinationCommand.hpp>
 #include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
@@ -22,6 +22,7 @@
 #include <IO/SynapticExporter.hpp>
 #include <fstream>
 #include <Examples/TicTacToeKI.hpp>
+#include <Learning/Evolution/BestReuseSelector.hpp>
 
 
 void doTicTacToeEvolutionExample()
@@ -44,7 +45,7 @@ void doTicTacToeEvolutionExample()
 
 	options.creationCommands.push_back(new ConstantCreationCommand(500));
 	options.exitConditions.push_back(new PerfectObjectFoundCondition(200, cs2));
-	options.reuseCommands.push_back(new BestReuseCommand(16));
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
 	options.selectionCommands.push_back(new BestSelectionCommand(500, true));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8, false));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3, false));

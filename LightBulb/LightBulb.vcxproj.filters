@@ -314,9 +314,6 @@
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategy.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\BestReuseCommand.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\BestSelectionCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -567,6 +564,21 @@
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClCompile>
     <ClCompile Include="NeuralNetwork\AbstractNeuralNetwork.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractRecombinationSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractMutationSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractReuseSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\BestReuseSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -819,9 +831,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\TournamentCombiningStrategy.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\BestReuseCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\BestSelectionCommand.hpp">
@@ -1083,5 +1092,20 @@
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
     <ClInclude Include="NeuralNetwork\AbstractNeuralNetwork.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractRecombinationSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractMutationSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractReuseSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\BestReuseSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ConstantReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

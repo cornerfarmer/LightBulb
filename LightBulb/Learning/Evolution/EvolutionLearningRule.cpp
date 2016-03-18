@@ -16,6 +16,8 @@
 // Library includes
 #include <iostream>
 #include <algorithm>
+#include <map>
+#include <string>
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 {
@@ -80,6 +82,25 @@ bool EvolutionLearningRule::doEvolutionStep()
 		std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
 		// This vector will contain all objects for the next generation
 		std::vector<AbstractEvolutionObject*> newObjectVector;
+		std::map<AbstractEvolutionObject*, std::map<std::string, int>> operationCounter;
+
+		// 5. Step: Reuse some of the evolution objects directly for the next generation
+		for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
+		{
+			(*reuseCommand)->select(highscore.get(), &operationCounter);
+		}
+
+		// 6. Step: Mutate some of the evolution objects and use them for the next generation
+		for (auto mutationCommand = options->mutationsCommands.begin(); mutationCommand != options->mutationsCommands.end(); mutationCommand++)
+		{
+			(*mutationCommand)->select(highscore.get(), &operationCounter);
+		}
+
+		// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
+		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
+		{
+			(*recombinationCommand)->select(highscore.get(), &operationCounter);
+		}
 
 		// 5. Step: Reuse some of the evolution objects directly for the next generation
 		for (auto reuseCommand = options->reuseCommands.begin(); reuseCommand != options->reuseCommands.end(); reuseCommand++)
@@ -96,7 +117,7 @@ bool EvolutionLearningRule::doEvolutionStep()
 		// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
 		for (auto recombinationCommand = options->recombinationCommands.begin(); recombinationCommand != options->recombinationCommands.end(); recombinationCommand++)
 		{
-			(*recombinationCommand)->execute(highscore.get(), &newObjectVector);
+			(*recombinationCommand)->execute(highscore.get(), &newObjectVector, &operationCounter, &notUsedObjects);
 		}
 
 		// Replace all evolution objects from the last generation with the one from the next generation
@@ -130,7 +151,7 @@ bool EvolutionLearningRule::doEvolutionStep()
 	}
 
 	// Extract all current objects ordered by their score
-	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();	
+	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = options->world->getHighscoreList();
 
 	bool exit = false;
 	// 3.Step: Go through all exit conditions
@@ -155,7 +176,7 @@ bool EvolutionLearningRule::doEvolutionStep()
 	// 4. Step: Select the relevant evolution objects (Other objects will be deleted)
 	for (auto selectionCommand = options->selectionCommands.begin(); selectionCommand != options->selectionCommands.end(); selectionCommand++)
 	{
-		(*selectionCommand)->execute(highscore.get(), options->world->getEvolutionObjects());
+		(*selectionCommand)->execute(highscore.get(), options->world->getEvolutionObjects(), &notUsedObjects);
 	}
 
 	// Continue with the next generation

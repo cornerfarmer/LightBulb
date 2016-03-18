@@ -5,7 +5,7 @@
 #include <Learning/Evolution/ConstantMutationCommand.hpp>
 #include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Learning/Evolution/BestReuseCommand.hpp>
+#include <Learning/Evolution/ConstantReuseCommand.hpp>
 #include <Learning/Evolution/ConstantRecombinationCommand.hpp>
 #include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
@@ -24,6 +24,7 @@
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <Learning/Evolution/AbstractEvolutionObject.hpp>
+#include <Learning/Evolution/BestReuseSelector.hpp>
 
 
 void doTeachedEvolutionExample()
@@ -62,7 +63,7 @@ void doTeachedEvolutionExample()
 	options.exitConditions.push_back(rateDifferenceCondition);
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
 	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new BestReuseCommand(1));
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);

@@ -22,7 +22,7 @@ BestSelectionCommand::BestSelectionCommand(double selectionPercentage_, bool ena
 	selectionPercentage = selectionPercentage_;
 }
 
-void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects)
+void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects, std::vector<AbstractEvolutionObject*>* notUsedObjects)
 {
 	int objectCount = this->objectCount;
 	// Calculate a temporary static object count if the percentage value is used
@@ -44,7 +44,7 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 		// Go through all not selected objects
 		for (auto entry = highscore->begin() + objectCount; entry != highscore->end(); entry++)
 		{
-			// Delete them
+			// Recycle them
 			delete(entry->second);
 		}
 

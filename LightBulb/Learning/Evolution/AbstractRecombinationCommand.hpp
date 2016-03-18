@@ -27,10 +27,12 @@ protected:
 	bool enableDebugOutput;
 public:
 	virtual ~AbstractRecombinationCommand() {};
+
+	virtual void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter) = 0;
 	// Create a new recombination command with the given recombination algorithm
 	AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_,  bool enableDebugOutput_);
 	// Executes the recombinations. (The algorithm will take a few of the old objects, combine them and insert the created ones into the new object vector)
-	virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector) = 0;
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 };
 
 #endif
