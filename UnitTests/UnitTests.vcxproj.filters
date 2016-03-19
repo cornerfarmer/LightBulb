@@ -63,6 +63,15 @@
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantMutationCommandTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
@@ -81,6 +90,24 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockTeachingLesson.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockRecombinationSelector.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockRecombinationAlgorithm.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockEvolutionObject.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockMutationAlgorithm.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockMutationSelector.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockReuseSelector.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

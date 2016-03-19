@@ -579,6 +579,9 @@
     <ClCompile Include="Learning\Evolution\ConstantReuseCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1105,6 +1108,9 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\ConstantReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
   </ItemGroup>

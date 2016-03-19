@@ -49,6 +49,7 @@ void doFunctionEvolutionExample()
 	options.scoreGoal = 1.031627 + 10000;
 	EvolutionLearningRule learningRule(options);
 
+
 	LearningRuleAnalyserOptions analyserOptions;
 	analyserOptions.learningRule = &learningRule;
 	//analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 1.3, 0.1, 2.0, "mcs"));

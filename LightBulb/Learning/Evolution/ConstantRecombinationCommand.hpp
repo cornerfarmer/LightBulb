@@ -21,12 +21,13 @@ private:
 	double recombinationPercentage;
 public:
 	void setRecombinationPercentage(double newRecombinationPercentage);
+	void setRecombinationCount(int newObjectCount);
 	// Creates a command which combines a static amount of objects
 	ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_, bool enableDebugOutput_ = false);
 	// Creates a command which combines a percentage of objects
 	ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_, bool enableDebugOutput_ = false);
 	
-	void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter);
+	void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
 };
 
 #endif

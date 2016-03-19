@@ -10,13 +10,16 @@
 // Library Includes
 #include <vector>
 
+// Includes
+#include "AbstractCommand.hpp"
+
 // Forward declarations
 class AbstractEvolutionObject;
 class AbstractEvolutionWorld;
 class EvolutionLearningRule;
 
 // A command which mutates a few of the given evolution objects.
-class AbstractMutationCommand
+class AbstractMutationCommand : public AbstractCommand
 {
 protected:
 	// Holds the chosen mutation algorithm
@@ -28,13 +31,13 @@ protected:
 	bool enableDebugOutput;
 public:
 	virtual ~AbstractMutationCommand() {};
-	virtual void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter) = 0;
+	virtual void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) = 0;
 
 	void setMutationSelector(AbstractMutationSelector* mutationSelector);
 	// Creates a new mutation command with the given mutation algorithm
 	AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, bool enableDebugOutput_);
 	// Executes the mutations. (The algorithm will take a few of the old objects, mutate them and insert them into the new object vector)
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector);
+	void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 };
 
 #endif

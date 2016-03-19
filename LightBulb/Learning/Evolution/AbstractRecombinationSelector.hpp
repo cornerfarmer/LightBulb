@@ -19,17 +19,17 @@ class AbstractRecombinationSelector
 private:
 	std::vector<AbstractEvolutionObject*> selectedObjects;
 
-	std::map<AbstractEvolutionObject*, std::map<std::string, int>>* currentCounter;
+	std::map<AbstractEvolutionObject*, int>* currentCounter;
 protected:
-	void addObjectToRecombination(AbstractEvolutionObject* object);
+	virtual void addObjectToRecombination(AbstractEvolutionObject* object);
 
 	virtual void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
 public:
 	virtual ~AbstractRecombinationSelector() {};
 	//
-	void executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter);
+	virtual void executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
 
-	std::vector<AbstractEvolutionObject*>* getRecombinationSelection();
+	virtual std::vector<AbstractEvolutionObject*>* getRecombinationSelection();
 };
 
 #endif

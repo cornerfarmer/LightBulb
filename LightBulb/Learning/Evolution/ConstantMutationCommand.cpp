@@ -1,28 +1,22 @@
 // Includes
 #include "Learning/Evolution/ConstantMutationCommand.hpp"
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
 //Library includes
-#include <iostream>
-#include <stdexcept>
 
 ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_,  int objectCount_, bool enableDebugOutput_)
 	: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_, enableDebugOutput_)
 {
-	objectCount = objectCount_;
-	mutationPercentage = 0;
+	setMutationCount(objectCount_);
 }
 
 ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_,  double mutationPercentage_, bool enableDebugOutput_)
 	: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_, enableDebugOutput_)
 {
-	mutationPercentage = mutationPercentage_;
-	objectCount = 0;
+	setMutationPercentage(mutationPercentage_);
 }
 
 
-void ConstantMutationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter)
+void ConstantMutationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
 {
 	int objectCount = this->objectCount;
 	// Calculate a temporary static object count if the percentage value is used
@@ -34,5 +28,12 @@ void ConstantMutationCommand::select(std::vector<std::pair<double, AbstractEvolu
 
 void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)
 {
+	objectCount = 0;
 	mutationPercentage = newMutationPercentage;
+}
+
+void ConstantMutationCommand::setMutationCount(double newMutationCount)
+{
+	mutationPercentage = 0;
+	objectCount = newMutationCount;
 }

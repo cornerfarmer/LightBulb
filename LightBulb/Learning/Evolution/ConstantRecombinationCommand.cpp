@@ -6,18 +6,16 @@
 ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_, bool enableDebugOutput_)
 	: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_, enableDebugOutput_)
 {
-	objectCount = objectCount_;
-	recombinationPercentage = 0;
+	setRecombinationCount(objectCount_);
 }
 
 ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_, bool enableDebugOutput_)
 	: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_, enableDebugOutput_)
 {
-	objectCount = 0;
-	recombinationPercentage = recombinationPercentage_;
+	setRecombinationPercentage(recombinationPercentage_);
 }
 
-void ConstantRecombinationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter)
+void ConstantRecombinationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
 {
 	int objectCount = this->objectCount;
 	// Calculate a temporary static object count if the percentage value is used
@@ -28,5 +26,12 @@ void ConstantRecombinationCommand::select(std::vector<std::pair<double, Abstract
 
 void ConstantRecombinationCommand::setRecombinationPercentage(double newRecombinationPercentage)
 {
+	objectCount = 0;
 	recombinationPercentage = newRecombinationPercentage;
+}
+
+void ConstantRecombinationCommand::setRecombinationCount(int newObjectCount)
+{
+	recombinationPercentage = 0;
+	objectCount = newObjectCount;
 }

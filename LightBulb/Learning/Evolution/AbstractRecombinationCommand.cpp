@@ -2,28 +2,51 @@
 #include "Learning/Evolution/AbstractRecombinationCommand.hpp"
 #include "AbstractEvolutionObject.hpp"
 
-
 AbstractRecombinationCommand::AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, bool enableDebugOutput_) {
 	recombinationAlgorithm.reset(recombinationAlgorithm_);
 	recombinationSelector.reset(recombinationSelector_);
 	enableDebugOutput = enableDebugOutput_;
 }
 
-void AbstractRecombinationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects)
 {
-	if (highscore->size() > 0)
+	AbstractEvolutionObject* firstParent;
+	AbstractEvolutionObject* secondParent;
+	for (auto object = recombinationSelector->getRecombinationSelection()->begin(); object != recombinationSelector->getRecombinationSelection()->end(); object++)
 	{
-		for (auto object = recombinationSelector->getRecombinationSelection()->begin(); object != recombinationSelector->getRecombinationSelection()->end(); object++)
+		if ((*counter)[*object] == 1)
 		{
-			// Clone the first objects and add it to the new object vector
-			newObjectVector->push_back((*object)->clone());
+			firstParent = *object;
+			(*counter)[*object]--;
 			object++;
-			// Also clone the second object
-			AbstractEvolutionObject* secondClone = (*object)->clone();
-			// Combine the two objects
-			recombinationAlgorithm->execute(newObjectVector->back(), secondClone);
-
-			delete(secondClone);
+			secondParent = *object;
+			(*counter)[*object]--;
+			if ((*counter)[*object] == 0)
+			{
+				notUsedObjects->push_back(*object);
+			}
+			recombinationAlgorithm->execute(firstParent, secondParent);
+			newObjectVector->push_back(firstParent);
+		}
+		else
+		{
+			firstParent = *object;
+			(*counter)[*object]--;
+			object++;
+			if ((*counter)[*object] == 1)
+			{
+				secondParent = *object;
+				(*counter)[*object]--;
+				recombinationAlgorithm->execute(secondParent, firstParent);
+				newObjectVector->push_back(secondParent);
+			} 
+			else
+			{
+				secondParent = getUnusedObject(*object, notUsedObjects);
+				(*counter)[*object]--;
+				recombinationAlgorithm->execute(secondParent, firstParent);
+				newObjectVector->push_back(secondParent);
+			}
 		}
 	}
 }

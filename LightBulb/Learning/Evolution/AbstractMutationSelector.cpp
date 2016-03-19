@@ -4,10 +4,10 @@
 void AbstractMutationSelector::addObjectToMutate(AbstractEvolutionObject* object)
 {
 	selectedObjects.push_back(object);
-	(*currentCounter)[object]["mutate"]++;
+	(*currentCounter)[object]++;
 }
 
-void AbstractMutationSelector::executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter)
+void AbstractMutationSelector::executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
 {
 	selectedObjects.clear();
 	if (mutationCount > 0) {

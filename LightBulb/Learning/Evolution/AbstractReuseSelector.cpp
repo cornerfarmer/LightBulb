@@ -4,10 +4,10 @@
 void AbstractReuseSelector::addObjectToReuse(AbstractEvolutionObject* object)
 {
 	selectedObjects.push_back(object);
-	(*currentCounter)[object]["reuse"]++;
+	(*currentCounter)[object]++;
 }
 
-void AbstractReuseSelector::executeReuseSelection(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter)
+void AbstractReuseSelector::executeReuseSelection(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
 {
 	selectedObjects.clear();
 	if (reuseCount > 0) {

@@ -5,10 +5,10 @@
 void AbstractRecombinationSelector::addObjectToRecombination(AbstractEvolutionObject* object)
 {
 	selectedObjects.push_back(object);
-	(*currentCounter)[object]["recombine"]++;
+	(*currentCounter)[object]++;
 }
 
-void AbstractRecombinationSelector::executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter)
+void AbstractRecombinationSelector::executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
 {
 	selectedObjects.clear();
 	if (recombinationCount > 0) {

@@ -45,7 +45,7 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 		for (auto entry = highscore->begin() + objectCount; entry != highscore->end(); entry++)
 		{
 			// Recycle them
-			delete(entry->second);
+			notUsedObjects->push_back(entry->second);
 		}
 
 		// Resize the vector

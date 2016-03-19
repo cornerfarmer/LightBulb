@@ -16,16 +16,21 @@ void AbstractMutationCommand::setMutationSelector(AbstractMutationSelector* muta
 }
 
 
-void AbstractMutationCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* newObjectVector)
+void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects)
 {
-	if (highscore->size() > 0)
+	for (auto object = mutationSelector->getMutationSelection()->begin(); object != mutationSelector->getMutationSelection()->end(); object++)
 	{
-		for (auto object = mutationSelector->getMutationSelection()->begin(); object != mutationSelector->getMutationSelection()->end(); object++)
+		if ((*counter)[*object] == 1)
 		{
-			// Clone it and add it to the new object vector
-			newObjectVector->push_back((*object)->clone());
-			// Mutate the new object
-			mutationAlgorithm->execute(newObjectVector->back());
+			mutationAlgorithm->execute(*object);
+			newObjectVector->push_back(*object);
 		}
+		else
+		{
+			AbstractEvolutionObject* unusedObject = getUnusedObject(*object, notUsedObjects);
+			mutationAlgorithm->execute(unusedObject);
+			newObjectVector->push_back(unusedObject);
+		}
+		(*counter)[*object]--;
 	}
 }

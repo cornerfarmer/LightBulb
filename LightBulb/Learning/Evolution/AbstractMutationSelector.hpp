@@ -18,17 +18,17 @@ class AbstractMutationSelector
 private:
 	std::vector<AbstractEvolutionObject*> selectedObjects;
 
-	std::map<AbstractEvolutionObject*, std::map<std::string, int>>* currentCounter;
+	std::map<AbstractEvolutionObject*, int>* currentCounter;
 protected:
-	void addObjectToMutate(AbstractEvolutionObject* object);
+	virtual void addObjectToMutate(AbstractEvolutionObject* object);
 
 	virtual void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
 public:
 	virtual ~AbstractMutationSelector() {};
 	//
-	void executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, std::map<std::string, int>>* counter);
+	virtual void executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
 
-	std::vector<AbstractEvolutionObject*>* getMutationSelection();
+	virtual std::vector<AbstractEvolutionObject*>* getMutationSelection();
 };
 
 #endif

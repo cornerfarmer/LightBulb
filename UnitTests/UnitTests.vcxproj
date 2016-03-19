@@ -184,6 +184,9 @@
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\ConstantMutationCommandTest.cpp" />
+    <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp" />
+    <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
@@ -196,9 +199,15 @@
   <ItemGroup>
     <ClInclude Include="Mocks\MockActivationFunction.hpp" />
     <ClInclude Include="Mocks\MockActivationOrder.hpp" />
+    <ClInclude Include="Mocks\MockEvolutionObject.hpp" />
+    <ClInclude Include="Mocks\MockMutationAlgorithm.hpp" />
+    <ClInclude Include="Mocks\MockMutationSelector.hpp" />
     <ClInclude Include="Mocks\MockNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
     <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
+    <ClInclude Include="Mocks\MockRecombinationAlgorithm.hpp" />
+    <ClInclude Include="Mocks\MockRecombinationSelector.hpp" />
+    <ClInclude Include="Mocks\MockReuseSelector.hpp" />
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
