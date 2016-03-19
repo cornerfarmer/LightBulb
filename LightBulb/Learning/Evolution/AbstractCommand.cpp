@@ -12,6 +12,7 @@ AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObjec
 	{
 		AbstractEvolutionObject* notUsedObject = notUsedObjects->back();
 		notUsedObjects->pop_back();
+		notUsedObject->copyPropertiesFrom(usedObject);
 		return notUsedObject;
 	}
 }

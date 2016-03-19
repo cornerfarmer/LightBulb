@@ -23,7 +23,8 @@ protected:
 	// Randomize all values inside the mutation strength vecor
 	void randomizeMutationStrength();
 public:	
-	virtual ~AbstractEvolutionObject() {};
+	virtual ~AbstractEvolutionObject() {}
+	virtual void copyPropertiesFrom(AbstractEvolutionObject* notUsedObject);
 	virtual NeuralNetwork* getNeuralNetwork() = 0;
 	virtual std::vector<double>* getMutationStrength();
 	virtual void setMutationStrength(std::vector<double>* newMutationStrength);

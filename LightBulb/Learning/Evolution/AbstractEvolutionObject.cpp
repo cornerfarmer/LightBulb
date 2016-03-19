@@ -2,6 +2,8 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 // Library includes
 #include <stdlib.h>
+#include <NeuralNetwork/NeuralNetwork.hpp>
+#include <NetworkTopology/AbstractNetworkTopology.hpp>
 
 void AbstractEvolutionObject::randomizeMutationStrength()
 {
@@ -11,6 +13,12 @@ void AbstractEvolutionObject::randomizeMutationStrength()
 		// Set it to a random value
 		*mutationStrengthValue = 0.2; // (float)rand() / RAND_MAX * 0.1;
 	}
+}
+
+void AbstractEvolutionObject::copyPropertiesFrom(AbstractEvolutionObject* notUsedObject)
+{
+	getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*notUsedObject->getNeuralNetwork()->getNetworkTopology());
+	setMutationStrength(notUsedObject->getMutationStrength());
 }
 
 std::vector<double>* AbstractEvolutionObject::getMutationStrength()
