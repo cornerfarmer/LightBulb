@@ -1,0 +1,8 @@
+Window {
+	BackgroundColor: #c2020255;
+}
+
+Frame {
+    Padding: 0;
+    LabelPadding: 0;
+}

@@ -60,6 +60,9 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="default.theme">
+      <Filter>Ressourcendateien</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp">
@@ -581,6 +584,12 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\AbstractWindow.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\TrainingWindow.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1112,6 +1121,12 @@
     </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\AbstractWindow.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\TrainingWindow.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

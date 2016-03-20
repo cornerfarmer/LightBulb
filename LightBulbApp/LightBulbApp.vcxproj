@@ -74,12 +74,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;../Debug/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfgui-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;../Debug/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -97,14 +97,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;../Release/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfgui.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;../Release/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

@@ -17,6 +17,7 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="default.theme" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp" />
@@ -179,6 +180,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Graphics\AbstractWindow.cpp" />
     <ClCompile Include="Graphics\Arrow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -222,6 +224,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Graphics\TrainingWindow.cpp" />
     <ClCompile Include="IO\AbstractExporter.cpp" />
     <ClCompile Include="IO\AbstractJSONElement.cpp" />
     <ClCompile Include="IO\BrainJSExporter.cpp" />
@@ -764,6 +767,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Graphics\AbstractWindow.hpp" />
     <ClInclude Include="Graphics\Arrow.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -807,6 +811,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Graphics\TrainingWindow.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />
@@ -1231,7 +1236,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -1244,7 +1249,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -1259,7 +1264,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
