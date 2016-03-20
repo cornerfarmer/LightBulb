@@ -79,7 +79,7 @@ void NeuralNetworkResultChart::recalculateAllValues()
 			input.set(options->yTimeStep, options->yInputNeuronIndex, (double)y / options->height * (options->yRangeEnd - options->yRangeStart) + options->yRangeStart);
 
 			// Extract the output
-			std::vector<std::vector<double>> outputVector(options->ouputTimeStep + 1, options->neuralNetwork->getNetworkTopology()->getOutputSize());
+			std::vector<std::vector<double>> outputVector(options->ouputTimeStep + 1, std::vector<double>(options->neuralNetwork->getNetworkTopology()->getOutputSize()));
 			std::vector<std::vector<double>> inputVector = input.getRealVector();
 			options->neuralNetwork->calculate(inputVector, outputVector, *options->activationOrder, 0, options->ouputTimeStep + 1);
 			float output = outputVector[options->ouputTimeStep][options->outputNeuronIndex];

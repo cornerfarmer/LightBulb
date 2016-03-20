@@ -58,5 +58,7 @@ void AbstractNetworkStructureChart::draw(sf::RenderWindow &window)
 		window.draw(*neuronShape);
 	}
 
+
+
 }
 

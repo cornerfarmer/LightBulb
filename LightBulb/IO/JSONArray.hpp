@@ -8,6 +8,7 @@
 
 // Library includes
 #include <vector>
+#include <memory>
 
 // Forward declarations
 

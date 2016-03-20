@@ -6,6 +6,7 @@
 // Library Includes
 #include <map>
 #include <vector>
+#include <memory>
 
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"

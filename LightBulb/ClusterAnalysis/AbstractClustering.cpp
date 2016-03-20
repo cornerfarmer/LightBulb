@@ -4,6 +4,7 @@
 #include "ClusterAnalysis/Cluster.hpp"
 #include "ClusterAnalysis/Point.hpp"
 #include "ClusterAnalysis/PointSet.hpp"
+#include <algorithm>
 
 // Sets the minimum cluster width
 const double AbstractClustering::minClusterWidth = 0.05f;

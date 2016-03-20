@@ -3,6 +3,7 @@
 #include "ClusterAnalysis/Point.hpp"
 // Library includes
 #include <math.h>
+#include <algorithm>
 
 void PointSet::refreshMaxDistances()
 {

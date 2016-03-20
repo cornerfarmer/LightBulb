@@ -2,6 +2,7 @@
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 //Library include
 #include <algorithm>
+#include <functional>
 
 bool AbstractEvolutionWorld::compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y)
 {

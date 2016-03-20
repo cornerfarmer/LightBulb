@@ -2,7 +2,7 @@
 #include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
 // Library includes
 #include <stdexcept>
-
+#include <algorithm>
 
 PositiveMakerFitnessFunction::PositiveMakerFitnessFunction(double constant_)
 {
