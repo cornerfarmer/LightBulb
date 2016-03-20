@@ -591,6 +591,9 @@
     <ClCompile Include="Graphics\TrainingWindow.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\DataTable.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1126,6 +1129,9 @@
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\TrainingWindow.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\DataTable.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
