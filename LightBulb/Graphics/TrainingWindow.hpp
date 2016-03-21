@@ -12,8 +12,10 @@
 class TrainingWindow : public AbstractWindow
 {
 protected:
-	void build();
+	DECLARE_EVENT_TABLE();
 public:
+	TrainingWindow();
+	void OnClick(wxCommandEvent& event);
 };
 
 #endif
