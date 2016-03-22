@@ -8,9 +8,14 @@
 
 // Forward declarations
 
-// A chart which shows the location of neurons
 class TrainingWindow : public AbstractWindow
 {
+private:
+	wxPanel* createNNColumn(wxWindow* parent);
+	wxPanel* createTrainingColumn(wxWindow* parent);
+	wxPanel* createRunningTrainingColumn(wxWindow* parent);
+	wxPanel* createDetailsPanel(wxWindow* parent);
+	void createMenuBar();
 protected:
 	DECLARE_EVENT_TABLE();
 public:
