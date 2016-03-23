@@ -194,6 +194,11 @@ int LayeredNetwork::getNeuronCountInLayer(int layerNr)
 	return options->neuronsPerLayerCount[layerNr];
 }
 
+std::vector<unsigned int> LayeredNetwork::getNeuronCountsPerLayer()
+{
+	return options->neuronsPerLayerCount;
+}
+
 double LayeredNetwork::getBiasWeightOfNeuron(int layerNr, int neuronNr)
 {
 	if (layerNr == 0)

@@ -62,6 +62,8 @@ public:
 
 	virtual int getNeuronCountInLayer(int layerIndex) = 0;
 
+	virtual std::vector<unsigned int> getNeuronCountsPerLayer() = 0;
+
 	virtual int getLayerCount() = 0;
 
 	virtual int getAfferentEdgeCount(int layerIndex, int neuronIndex) = 0;

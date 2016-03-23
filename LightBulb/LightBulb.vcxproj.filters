@@ -594,6 +594,11 @@
     <ClCompile Include="Graphics\DataTable.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\TrainingController.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Teaching\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="Teaching\ExampleTrainingPlan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1134,5 +1139,10 @@
     <ClInclude Include="Graphics\DataTable.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\TrainingController.hpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Teaching\AbstractTrainingPlan.hpp" />
+    <ClInclude Include="Teaching\ExampleTrainingPlan.hpp" />
   </ItemGroup>
 </Project>

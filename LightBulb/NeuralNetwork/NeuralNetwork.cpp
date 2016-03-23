@@ -5,6 +5,7 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <exception>
+#include <ctime>
 
 NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 {
@@ -69,4 +70,14 @@ void NeuralNetwork::calculate(std::vector<double>& input, std::vector<double>& o
 AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
 {
 	return networkTopology.get();
+}
+
+std::string NeuralNetwork::getName()
+{
+	return "MyName";
+}
+
+std::time_t NeuralNetwork::getCreationDate()
+{
+	return std::time(nullptr);
 }

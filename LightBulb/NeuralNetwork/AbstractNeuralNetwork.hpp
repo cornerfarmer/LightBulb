@@ -6,6 +6,7 @@
 // Libraray includes
 #include <vector>
 #include <map>
+#include <ctime>
 
 // Includes
 
@@ -24,6 +25,8 @@ public:
 	virtual void calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL, bool resetActivations = true) = 0;
 	virtual void calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
 	virtual AbstractNetworkTopology* getNetworkTopology() = 0;
+	virtual std::string getName() = 0;
+	virtual std::time_t getCreationDate() = 0;
 };
 
 #endif

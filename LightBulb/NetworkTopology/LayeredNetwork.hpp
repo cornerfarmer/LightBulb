@@ -128,6 +128,8 @@ public:
 
 	int getNeuronCountInLayer(int layerNr);
 
+	std::vector<unsigned int> getNeuronCountsPerLayer();
+
 	double getBiasWeightOfNeuron(int layerNr, int neuronNr);
 
 	std::vector<double> getAfferentWeights(int layerNr, int neuronNr, bool withoutBiasWeight = false);

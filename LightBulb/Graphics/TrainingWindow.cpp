@@ -5,6 +5,7 @@
 #include <wx/artprov.h>
 #include <wx/statline.h>
 #include <wx/richtext/richtextctrl.h>
+#include <NetworkTopology/AbstractNetworkTopology.hpp>
 
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
 EVT_BUTTON(wxID_NEW, TrainingWindow::OnClick)
@@ -12,6 +13,8 @@ END_EVENT_TABLE()
 
 TrainingWindow::TrainingWindow()
 {
+	controller.reset(new TrainingController());
+
 	createMenuBar();
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -44,16 +47,23 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 	listctrl->AppendTextColumn("Name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
 	listctrl->AppendTextColumn("Size")->SetMinWidth(50);
 	listctrl->AppendTextColumn("Creation date")->SetMinWidth(50);
-	wxVector<wxVariant> data;
-	data.push_back(wxVariant("NN1"));
-	data.push_back(wxVariant("8-3-9"));
-	data.push_back(wxVariant("19.12.42 23:00"));
-	listctrl->AppendItem(data);
-	data.clear();
-	data.push_back(wxVariant("NN2"));
-	data.push_back(wxVariant("10-452-3"));
-	data.push_back(wxVariant("03.12.32 13:03"));
-	listctrl->AppendItem(data);
+	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
+	{
+		wxVector<wxVariant> data;
+		data.push_back(wxVariant((*network)->getName()));
+		std::vector<unsigned int> neuronCountsPerLayer = (*network)->getNetworkTopology()->getNeuronCountsPerLayer();
+		std::string neuronCountsPerLayerString = "";
+		for (int i = 0; i < neuronCountsPerLayer.size(); i++)
+		{
+			if (i != 0)
+				neuronCountsPerLayerString += "-";
+			neuronCountsPerLayerString += std::to_string(neuronCountsPerLayer[i]);
+		}
+		data.push_back(wxVariant(neuronCountsPerLayerString));
+		std::time_t creationDate = (*network)->getCreationDate();
+		data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
+		listctrl->AppendItem(data);
+	}
 
 	listctrl->SetMinSize(wxSize(100, 100));
 
@@ -74,16 +84,14 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 	listctrl->AppendTextColumn("Name")->SetMinWidth(50);
 	listctrl->AppendTextColumn("Learning rate")->SetMinWidth(50);
 	listctrl->AppendTextColumn("Description")->SetMinWidth(50);
-	wxVector<wxVariant> data;
-	data.push_back(wxVariant("T1"));
-	data.push_back(wxVariant("Backpropagation"));
-	data.push_back(wxVariant("Trains a AND-NN"));
-	listctrl->AppendItem(data);
-	data.clear();
-	data.push_back(wxVariant("T2"));
-	data.push_back(wxVariant("Evolution"));
-	data.push_back(wxVariant("Learns TicTacToe"));
-	listctrl->AppendItem(data);
+	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
+	{
+		wxVector<wxVariant> data;
+		data.push_back(wxVariant((*trainingPlan)->getName()));
+		data.push_back(wxVariant((*trainingPlan)->getLearningRateName()));
+		data.push_back(wxVariant((*trainingPlan)->getDescription()));
+		listctrl->AppendItem(data);
+	}
 
 	listctrl->SetMinSize(wxSize(100, 100));
 
@@ -103,11 +111,14 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	listctrl->AppendTextColumn("Training name")->SetMinWidth(50);
 	listctrl->AppendTextColumn("Network name")->SetMinWidth(50);
 	listctrl->AppendTextColumn("State")->SetMinWidth(50);
-	wxVector<wxVariant> data;
-	data.push_back(wxVariant("T1"));
-	data.push_back(wxVariant("NN1"));
-	data.push_back(wxVariant("Running"));
-	listctrl->AppendItem(data);
+	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
+	{
+		wxVector<wxVariant> data;
+		data.push_back(wxVariant((*trainingPlan)->getName()));
+		data.push_back(wxVariant((*trainingPlan)->getNeuralNetwork()->getName()));
+		data.push_back(wxVariant((*trainingPlan)->getState()));
+		listctrl->AppendItem(data);
+	}
 
 	listctrl->SetMinSize(wxSize(100, 100));
 
@@ -128,16 +139,18 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	wxSizer* processSizer = new wxBoxSizer(wxHORIZONTAL);
 
 	wxChoice* networks = new wxChoice(panel, wxID_ANY);
-	networks->Append("NN1");
-	networks->Append("NN2");
-	networks->Append("NN3");
+	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
+	{
+		networks->Append((*network)->getName());
+	}
 	processSizer->Add(networks);
 	processSizer->Add(new wxStaticBitmap(panel, wxID_ANY, wxArtProvider::GetBitmap(wxART_GO_FORWARD)), 0, wxALIGN_CENTRE_VERTICAL);
-	wxChoice* training = new wxChoice(panel, wxID_ANY);
-	training->Append("Training1");
-	training->Append("Training2");
-	training->Append("Training3");
-	processSizer->Add(training);
+	wxChoice* trainingPlans = new wxChoice(panel, wxID_ANY);
+	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
+	{
+		trainingPlans->Append((*trainingPlan)->getName());
+	}
+	processSizer->Add(trainingPlans);
 
 	commandSizer->Add(processSizer, 0, wxEXPAND | wxALL, 20);
 	commandSizer->AddStretchSpacer(1);
