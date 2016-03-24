@@ -7,9 +7,12 @@
 #include <Function/WeightedSumFunction.hpp>
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
+#include "TrainingWindow.hpp"
 
-TrainingController::TrainingController()
+TrainingController::TrainingController(TrainingWindow* window_)
 {
+	window = window_;
+
 	LayeredNetworkOptions options;
 	options.neuronsPerLayerCount.push_back(4);
 	options.neuronsPerLayerCount.push_back(7);
@@ -20,9 +23,6 @@ TrainingController::TrainingController()
 
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
-
-	trainingPlans.push_back(new ExampleTrainingPlan());
-	trainingPlans[0]->start(neuralNetworks[0]);
 }
 
 std::vector<AbstractNeuralNetwork*>* TrainingController::getNeuralNetworks()
@@ -38,4 +38,31 @@ std::vector<AbstractTrainingPlan*>* TrainingController::getTrainingPlanPatterns(
 std::vector<AbstractTrainingPlan*>* TrainingController::getTrainingPlans()
 {
 	return &trainingPlans;
+}
+
+void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex)
+{
+	trainingPlans.push_back(trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute());
+	trainingPlans.back()->start(neuralNetworks[neuralNetworkIndex]);
+	window->refreshTrainingPlans();
+}
+
+int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern)
+{
+	for (int i = 0; i < trainingPlanPatterns.size(); i++)
+	{
+		if (trainingPlanPatterns[i] == trainingPlanPattern)
+			return i;
+	}
+	return -1;
+}
+
+int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
+{
+	for (int i = 0; i < neuralNetworks.size(); i++)
+	{
+		if (neuralNetworks[i] == network)
+			return i;
+	}
+	return -1;
 }

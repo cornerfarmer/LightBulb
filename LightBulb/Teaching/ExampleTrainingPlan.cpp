@@ -20,3 +20,8 @@ std::string ExampleTrainingPlan::getLearningRateName()
 {
 	return "Backpropagation";
 }
+
+AbstractTrainingPlan* ExampleTrainingPlan::getCopy()
+{
+	return new ExampleTrainingPlan();
+}

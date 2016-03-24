@@ -19,6 +19,7 @@ public:
 	std::string getName();
 	std::string getDescription();
 	std::string getLearningRateName();
+	AbstractTrainingPlan* getCopy();
 };
 
 #endif

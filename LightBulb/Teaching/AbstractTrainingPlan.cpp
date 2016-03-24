@@ -17,3 +17,15 @@ std::string AbstractTrainingPlan::getState()
 {
 	return "running";
 }
+
+AbstractTrainingPlan* AbstractTrainingPlan::getCopyForExecute()
+{
+	AbstractTrainingPlan* copy = getCopy();
+	copy->pattern = this;
+	return copy;
+}
+
+AbstractTrainingPlan* AbstractTrainingPlan::getTrainingPlanPattern()
+{
+	return pattern;
+}

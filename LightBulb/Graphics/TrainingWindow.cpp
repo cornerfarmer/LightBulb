@@ -7,13 +7,18 @@
 #include <wx/richtext/richtextctrl.h>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
+enum
+{
+	TOOLBAR_START_TRAINING,
+	TOOLBAR_STOP_TRAINING
+};
+
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
-EVT_BUTTON(wxID_NEW, TrainingWindow::OnClick)
 END_EVENT_TABLE()
 
 TrainingWindow::TrainingWindow()
 {
-	controller.reset(new TrainingController());
+	controller.reset(new TrainingController(this));
 
 	createMenuBar();
 
@@ -47,6 +52,19 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 	neuralNetworkList->AppendTextColumn("Name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
 	neuralNetworkList->AppendTextColumn("Size")->SetMinWidth(50);
 	neuralNetworkList->AppendTextColumn("Creation date")->SetMinWidth(50);
+	refreshNeuralNetworks();
+	neuralNetworkList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectNeuralNetwork), this);
+	neuralNetworkList->SetMinSize(wxSize(100, 100));
+
+	sizer->Add(neuralNetworkList, 1, wxEXPAND, 0);
+	panel->SetSizer(sizer);
+	return panel;
+}
+
+
+void TrainingWindow::refreshNeuralNetworks()
+{
+	neuralNetworkList->DeleteAllItems();
 	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
 	{
 		wxVector<wxVariant> data;
@@ -56,14 +74,7 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 		data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
 		neuralNetworkList->AppendItem(data);
 	}
-	neuralNetworkList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectNeuralNetwork), this);
-	neuralNetworkList->SetMinSize(wxSize(100, 100));
-
-	sizer->Add(neuralNetworkList, 1, wxEXPAND, 0);
-	panel->SetSizer(sizer);
-	return panel;
 }
-
 
 wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 {
@@ -76,7 +87,20 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 	trainingPlanPatternList->AppendTextColumn("Name")->SetMinWidth(50);
 	trainingPlanPatternList->AppendTextColumn("Learning rate")->SetMinWidth(50);
 	trainingPlanPatternList->AppendTextColumn("Description")->SetMinWidth(50);
-	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
+	refreshTrainingPlanPatterns();
+	trainingPlanPatternList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlanPattern), this);
+	trainingPlanPatternList->SetMinSize(wxSize(100, 100));
+
+	sizer->Add(trainingPlanPatternList, 1, wxEXPAND, 0);
+	panel->SetSizer(sizer);
+	return panel;
+}
+
+
+void TrainingWindow::refreshTrainingPlanPatterns()
+{
+	trainingPlanPatternList->DeleteAllItems();
+	for (auto trainingPlan = controller->getTrainingPlanPatterns()->begin(); trainingPlan != controller->getTrainingPlanPatterns()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
@@ -84,12 +108,6 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 		data.push_back(wxVariant((*trainingPlan)->getDescription()));
 		trainingPlanPatternList->AppendItem(data);
 	}
-	trainingPlanPatternList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlanPattern), this);
-	trainingPlanPatternList->SetMinSize(wxSize(100, 100));
-
-	sizer->Add(trainingPlanPatternList, 1, wxEXPAND, 0);
-	panel->SetSizer(sizer);
-	return panel;
 }
 
 wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
@@ -103,6 +121,19 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	trainingPlanList->AppendTextColumn("Training name")->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("Network name")->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
+	refreshTrainingPlans();
+	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
+	trainingPlanList->SetMinSize(wxSize(100, 100));
+
+	sizer->Add(trainingPlanList, 1, wxEXPAND, 0);
+	panel->SetSizer(sizer);
+	return panel;
+}
+
+
+void TrainingWindow::refreshTrainingPlans()
+{
+	trainingPlanList->DeleteAllItems();
 	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
@@ -111,12 +142,6 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 		data.push_back(wxVariant((*trainingPlan)->getState()));
 		trainingPlanList->AppendItem(data);
 	}
-	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
-	trainingPlanList->SetMinSize(wxSize(100, 100));
-
-	sizer->Add(trainingPlanList, 1, wxEXPAND, 0);
-	panel->SetSizer(sizer);
-	return panel;
 }
 
 wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
@@ -130,26 +155,28 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 
 	wxSizer* processSizer = new wxBoxSizer(wxHORIZONTAL);
 
-	wxChoice* networks = new wxChoice(panel, wxID_ANY);
+	neuralNetworksChoice = new wxChoice(panel, wxID_ANY);
 	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
 	{
-		networks->Append((*network)->getName());
+		neuralNetworksChoice->Append((*network)->getName());
 	}
-	processSizer->Add(networks);
+	processSizer->Add(neuralNetworksChoice);
 	processSizer->Add(new wxStaticBitmap(panel, wxID_ANY, wxArtProvider::GetBitmap(wxART_GO_FORWARD)), 0, wxALIGN_CENTRE_VERTICAL);
-	wxChoice* trainingPlans = new wxChoice(panel, wxID_ANY);
-	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
+	trainingPlanPatternsChoice = new wxChoice(panel, wxID_ANY);
+	for (auto trainingPlan = controller->getTrainingPlanPatterns()->begin(); trainingPlan != controller->getTrainingPlanPatterns()->end(); trainingPlan++)
 	{
-		trainingPlans->Append((*trainingPlan)->getName());
+		trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
 	}
-	processSizer->Add(trainingPlans);
+	processSizer->Add(trainingPlanPatternsChoice);
 
 	commandSizer->Add(processSizer, 0, wxEXPAND | wxALL, 20);
 	commandSizer->AddStretchSpacer(1);
 
-	wxToolBar* toolbar = new wxToolBar(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
-	toolbar->AddTool(wxID_CLOSE, "Start", wxArtProvider::GetBitmap(wxART_MISSING_IMAGE));
-	toolbar->AddTool(wxID_CLOSE, "Pause", wxArtProvider::GetBitmap(wxART_MISSING_IMAGE));
+	toolbar = new wxToolBar(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
+	toolbar->AddTool(TOOLBAR_START_TRAINING, "Start", wxArtProvider::GetBitmap(wxART_GO_FORWARD));
+	toolbar->AddTool(TOOLBAR_STOP_TRAINING, "Pause", wxArtProvider::GetBitmap(wxART_DELETE));
+	toolbar->EnableTool(TOOLBAR_STOP_TRAINING, false);
+	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::startTraining), this, TOOLBAR_START_TRAINING);
 	toolbar->Realize();
 	commandSizer->Add(toolbar);
 
@@ -182,7 +209,11 @@ void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 {
 	int row = getRowIndexOfItem(neuralNetworkList, event.GetItem());
 	if (row != -1)
+	{
 		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row]);
+		restoreDefaultProcessView();
+		neuralNetworksChoice->Select(row);
+	}
 	else
 		clearDetails();
 }
@@ -190,17 +221,41 @@ void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 {
 	int row = getRowIndexOfItem(trainingPlanPatternList, event.GetItem());
-	if (row != -1)
+	if (row != -1) {
 		showDetailsOfTrainingPlanPattern((*controller->getTrainingPlanPatterns())[row]);
+		restoreDefaultProcessView();
+		trainingPlanPatternsChoice->Select(row);
+	}
 	else
 		clearDetails();
+}
+
+void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
+{
+	neuralNetworksChoice->Select(controller->getIndexOfNeuralNetwork(trainingPlan->getNeuralNetwork()));
+	trainingPlanPatternsChoice->Select(controller->getIndexOfTrainingPlanPattern(trainingPlan->getTrainingPlanPattern()));
+	neuralNetworksChoice->Enable(false);
+	trainingPlanPatternsChoice->Enable(false);
+	toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
+	toolbar->EnableTool(TOOLBAR_STOP_TRAINING, true);
+}
+
+void TrainingWindow::restoreDefaultProcessView()
+{
+	neuralNetworksChoice->Enable(true);
+	trainingPlanPatternsChoice->Enable(true);
+	toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
+	toolbar->EnableTool(TOOLBAR_STOP_TRAINING, false);
 }
 
 void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 {
 	int row = getRowIndexOfItem(trainingPlanList, event.GetItem());
 	if (row != -1)
+	{
 		showDetailsOfTrainingPlan((*controller->getTrainingPlans())[row]);
+		showProcessOfTrainingPlan((*controller->getTrainingPlans())[row]);
+	}
 	else
 		clearDetails();
 }
@@ -252,7 +307,17 @@ int TrainingWindow::getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& 
 	return ((wxDataViewIndexListModel*)list->GetModel())->GetRow(item);
 }
 
-void TrainingWindow::OnClick(wxCommandEvent& event)
+void TrainingWindow::startTraining(wxCommandEvent& event)
 {
-	wxMessageBox("This is a wxWidgets' Hello world sample", "About Hello World", wxOK | wxICON_INFORMATION);
+	int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
+	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
+	if (neuralNetworkIndex != -1 && trainingPlanPatternIndex != -1)
+	{
+		controller->startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
+	}
+}
+
+void TrainingWindow::stopTraining(wxCommandEvent& event)
+{
+
 }
