@@ -11,17 +11,33 @@
 #include "TrainingController.hpp"
 
 // Forward declarations
-
+class wxRichTextCtrl;
+class wxDataViewEvent;
+class wxDataViewListCtrl;
+class wxDataViewItem;
 
 class TrainingWindow : public AbstractWindow
 {
 private:
+	wxRichTextCtrl* detailsTextBox;
+	wxDataViewListCtrl* neuralNetworkList;
+	wxDataViewListCtrl* trainingPlanPatternList;
+	wxDataViewListCtrl* trainingPlanList;
 	std::unique_ptr<TrainingController> controller;
 	wxPanel* createNNColumn(wxWindow* parent);
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
 	void createMenuBar();
+	void selectNeuralNetwork(wxDataViewEvent& event);
+	void selectTrainingPlanPattern(wxDataViewEvent& event);
+	void selectTrainingPlan(wxDataViewEvent& event);
+	void showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNetwork);
+	void showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan);
+	void showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
+	void clearDetails();
+	std::string getNeuralNetworkSizeAsString(std::vector<unsigned int> size);
+	int getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item);
 protected:
 	DECLARE_EVENT_TABLE();
 public:

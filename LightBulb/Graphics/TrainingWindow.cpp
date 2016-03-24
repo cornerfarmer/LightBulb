@@ -43,31 +43,23 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(new wxStaticText(panel, -1, "Neural networks"), 0, wxEXPAND | wxALL, 5);
 
-	wxDataViewListCtrl *listctrl = new wxDataViewListCtrl(panel, wxID_ANY);
-	listctrl->AppendTextColumn("Name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
-	listctrl->AppendTextColumn("Size")->SetMinWidth(50);
-	listctrl->AppendTextColumn("Creation date")->SetMinWidth(50);
+	neuralNetworkList = new wxDataViewListCtrl(panel, wxID_ANY);
+	neuralNetworkList->AppendTextColumn("Name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
+	neuralNetworkList->AppendTextColumn("Size")->SetMinWidth(50);
+	neuralNetworkList->AppendTextColumn("Creation date")->SetMinWidth(50);
 	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*network)->getName()));
-		std::vector<unsigned int> neuronCountsPerLayer = (*network)->getNetworkTopology()->getNeuronCountsPerLayer();
-		std::string neuronCountsPerLayerString = "";
-		for (int i = 0; i < neuronCountsPerLayer.size(); i++)
-		{
-			if (i != 0)
-				neuronCountsPerLayerString += "-";
-			neuronCountsPerLayerString += std::to_string(neuronCountsPerLayer[i]);
-		}
-		data.push_back(wxVariant(neuronCountsPerLayerString));
+		data.push_back(wxVariant(getNeuralNetworkSizeAsString((*network)->getNetworkTopology()->getNeuronCountsPerLayer())));
 		std::time_t creationDate = (*network)->getCreationDate();
 		data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
-		listctrl->AppendItem(data);
+		neuralNetworkList->AppendItem(data);
 	}
+	neuralNetworkList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectNeuralNetwork), this);
+	neuralNetworkList->SetMinSize(wxSize(100, 100));
 
-	listctrl->SetMinSize(wxSize(100, 100));
-
-	sizer->Add(listctrl, 1, wxEXPAND, 0);
+	sizer->Add(neuralNetworkList, 1, wxEXPAND, 0);
 	panel->SetSizer(sizer);
 	return panel;
 }
@@ -80,22 +72,22 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(new wxStaticText(panel, -1, "Trainings"), 0, wxEXPAND | wxALL, 5);
 
-	wxDataViewListCtrl *listctrl = new wxDataViewListCtrl(panel, wxID_ANY);
-	listctrl->AppendTextColumn("Name")->SetMinWidth(50);
-	listctrl->AppendTextColumn("Learning rate")->SetMinWidth(50);
-	listctrl->AppendTextColumn("Description")->SetMinWidth(50);
+	trainingPlanPatternList = new wxDataViewListCtrl(panel, wxID_ANY);
+	trainingPlanPatternList->AppendTextColumn("Name")->SetMinWidth(50);
+	trainingPlanPatternList->AppendTextColumn("Learning rate")->SetMinWidth(50);
+	trainingPlanPatternList->AppendTextColumn("Description")->SetMinWidth(50);
 	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getLearningRateName()));
 		data.push_back(wxVariant((*trainingPlan)->getDescription()));
-		listctrl->AppendItem(data);
+		trainingPlanPatternList->AppendItem(data);
 	}
+	trainingPlanPatternList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlanPattern), this);
+	trainingPlanPatternList->SetMinSize(wxSize(100, 100));
 
-	listctrl->SetMinSize(wxSize(100, 100));
-
-	sizer->Add(listctrl, 1, wxEXPAND, 0);
+	sizer->Add(trainingPlanPatternList, 1, wxEXPAND, 0);
 	panel->SetSizer(sizer);
 	return panel;
 }
@@ -107,22 +99,22 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(new wxStaticText(panel, -1, "Running trainings"), 0, wxEXPAND | wxALL, 5);
 
-	wxDataViewListCtrl *listctrl = new wxDataViewListCtrl(panel, wxID_ANY);
-	listctrl->AppendTextColumn("Training name")->SetMinWidth(50);
-	listctrl->AppendTextColumn("Network name")->SetMinWidth(50);
-	listctrl->AppendTextColumn("State")->SetMinWidth(50);
+	trainingPlanList = new wxDataViewListCtrl(panel, wxID_ANY);
+	trainingPlanList->AppendTextColumn("Training name")->SetMinWidth(50);
+	trainingPlanList->AppendTextColumn("Network name")->SetMinWidth(50);
+	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
 	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getNeuralNetwork()->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getState()));
-		listctrl->AppendItem(data);
+		trainingPlanList->AppendItem(data);
 	}
+	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
+	trainingPlanList->SetMinSize(wxSize(100, 100));
 
-	listctrl->SetMinSize(wxSize(100, 100));
-
-	sizer->Add(listctrl, 1, wxEXPAND, 0);
+	sizer->Add(trainingPlanList, 1, wxEXPAND, 0);
 	panel->SetSizer(sizer);
 	return panel;
 }
@@ -166,7 +158,8 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 
 	wxSizer* detailsSizer = new wxBoxSizer(wxVERTICAL);
 	detailsSizer->Add(new wxStaticText(panel, -1, "Details"), 0, wxBOTTOM, 10);
-	detailsSizer->Add(new wxRichTextCtrl(panel, wxID_ANY, "BlaBla:\nTest: 1\nFoo: Bar\n1: -234.32", wxDefaultPosition, wxDefaultSize, wxRE_READONLY), 1, wxEXPAND);
+	detailsTextBox = new wxRichTextCtrl(panel, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+	detailsSizer->Add(detailsTextBox, 1, wxEXPAND);
 	sizer->Add(detailsSizer, 1, wxEXPAND | wxALL, 10);
 
 	panel->SetSizer(sizer);
@@ -183,6 +176,80 @@ void TrainingWindow::createMenuBar()
 	file->Append(wxID_EXIT);
 	menubar->Append(file, "File");
 	SetMenuBar(menubar);
+}
+
+void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
+{
+	int row = getRowIndexOfItem(neuralNetworkList, event.GetItem());
+	if (row != -1)
+		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row]);
+	else
+		clearDetails();
+}
+
+void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
+{
+	int row = getRowIndexOfItem(trainingPlanPatternList, event.GetItem());
+	if (row != -1)
+		showDetailsOfTrainingPlanPattern((*controller->getTrainingPlanPatterns())[row]);
+	else
+		clearDetails();
+}
+
+void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
+{
+	int row = getRowIndexOfItem(trainingPlanList, event.GetItem());
+	if (row != -1)
+		showDetailsOfTrainingPlan((*controller->getTrainingPlans())[row]);
+	else
+		clearDetails();
+}
+
+void TrainingWindow::showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNetwork)
+{
+	clearDetails();
+	detailsTextBox->WriteText("Name: " + neuralNetwork->getName() + "\n");
+	detailsTextBox->WriteText("Size: " + getNeuralNetworkSizeAsString(neuralNetwork->getNetworkTopology()->getNeuronCountsPerLayer()) + "\n");
+	std::time_t creationDate = neuralNetwork->getCreationDate();
+	detailsTextBox->WriteText("Creation date: " + std::string(std::asctime(std::localtime(&creationDate))) + "\n");
+}
+
+void TrainingWindow::showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan)
+{
+	clearDetails();
+	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
+	detailsTextBox->WriteText("Learning rate: " + trainingPlan->getLearningRateName() + "\n");
+	detailsTextBox->WriteText("Description: " + trainingPlan->getDescription() + "\n");
+}
+
+void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
+{
+	clearDetails();
+	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
+	detailsTextBox->WriteText("Network name: " + trainingPlan->getNeuralNetwork()->getName() + "\n");
+	detailsTextBox->WriteText("State: " + trainingPlan->getState() + "\n");
+}
+
+void TrainingWindow::clearDetails()
+{
+	detailsTextBox->Clear();
+}
+
+std::string TrainingWindow::getNeuralNetworkSizeAsString(std::vector<unsigned int> size)
+{
+	std::string neuronCountsPerLayerString = "";
+	for (int i = 0; i < size.size(); i++)
+	{
+		if (i != 0)
+			neuronCountsPerLayerString += "-";
+		neuronCountsPerLayerString += std::to_string(size[i]);
+	}
+	return neuronCountsPerLayerString;
+}
+
+int TrainingWindow::getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item)
+{
+	return ((wxDataViewIndexListModel*)list->GetModel())->GetRow(item);
 }
 
 void TrainingWindow::OnClick(wxCommandEvent& event)
