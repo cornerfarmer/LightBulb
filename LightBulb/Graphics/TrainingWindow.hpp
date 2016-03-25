@@ -27,10 +27,12 @@ private:
 	std::unique_ptr<TrainingController> controller;
 	wxChoice* neuralNetworksChoice;
 	wxChoice* trainingPlanPatternsChoice;
+	AbstractTrainingPlan* processTrainingPlanSelection;
 	wxPanel* createNNColumn(wxWindow* parent);
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
+	void* currentDetailObject;
 	void createMenuBar();
 	void selectNeuralNetwork(wxDataViewEvent& event);
 	void selectTrainingPlanPattern(wxDataViewEvent& event);

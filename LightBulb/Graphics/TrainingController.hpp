@@ -24,10 +24,11 @@ public:
 	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlans();
 	void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
-	void pauseTrainingPlan(int trainingPlanIndex);
+	void pauseTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	int getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern);
 	void trainingPlanPaused(AbstractTrainingPlan* trainingPlan);
+	void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
 };
 
 #endif

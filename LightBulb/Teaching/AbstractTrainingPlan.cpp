@@ -18,6 +18,12 @@ void AbstractTrainingPlan::start(AbstractNeuralNetwork* network_)
 		state = TP_RUNNING;
 		thread = std::thread(&AbstractTrainingPlan::run, this);
 	}
+	else if (state == TP_PAUSED)
+	{
+		state = TP_RUNNING;
+		thread.join();
+		thread = std::thread(&AbstractTrainingPlan::run, this);
+	}
 }
 
 AbstractNeuralNetwork* AbstractTrainingPlan::getNeuralNetwork()
@@ -61,6 +67,16 @@ void AbstractTrainingPlan::pause()
 		state = TP_PAUSING;
 		tryToPause();
 	}
+}
+
+bool AbstractTrainingPlan::isPaused()
+{
+	return state == TP_PAUSED;
+}
+
+bool AbstractTrainingPlan::isRunning()
+{
+	return state == TP_RUNNING;
 }
 
 void AbstractTrainingPlan::pausingFinished()

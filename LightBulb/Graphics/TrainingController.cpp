@@ -46,9 +46,9 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	window->refreshTrainingPlans();
 }
 
-void TrainingController::pauseTrainingPlan(int trainingPlanIndex)
+void TrainingController::pauseTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
-	trainingPlans[trainingPlanIndex]->pause();
+	trainingPlan->pause();
 	window->refreshTrainingPlans();
 }
 
@@ -64,6 +64,12 @@ int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trai
 
 void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
 {
+	window->refreshTrainingPlans();
+}
+
+void TrainingController::resumeTrainingPlan(AbstractTrainingPlan* trainingPlan)
+{
+	trainingPlan->start();
 	window->refreshTrainingPlans();
 }
 

@@ -53,6 +53,8 @@ public:
 	AbstractTrainingPlan* getCopyForExecute();
 	AbstractTrainingPlan* getTrainingPlanPattern();
 	void pause();
+	bool isPaused();
+	bool isRunning();
 };
 
 #endif

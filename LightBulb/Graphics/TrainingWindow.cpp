@@ -19,6 +19,8 @@ END_EVENT_TABLE()
 TrainingWindow::TrainingWindow()
 {
 	controller.reset(new TrainingController(this));
+	processTrainingPlanSelection = NULL;
+	currentDetailObject = NULL;
 
 	createMenuBar();
 
@@ -76,6 +78,8 @@ void TrainingWindow::refreshNeuralNetworks()
 		data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
 		neuralNetworkList->AppendItem(data);
 		neuralNetworksChoice->Append((*network)->getName());
+		if (currentDetailObject == *network)
+			showDetailsOfNeuralNetwork(*network);
 	}
 	neuralNetworksChoice->Append("<Create new>");
 	neuralNetworksChoice->SetSelection(controller->getNeuralNetworks()->size());
@@ -113,6 +117,8 @@ void TrainingWindow::refreshTrainingPlanPatterns()
 		data.push_back(wxVariant((*trainingPlan)->getDescription()));
 		trainingPlanPatternList->AppendItem(data);
 		trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
+		if (currentDetailObject == *trainingPlan)
+			showDetailsOfTrainingPlanPattern(*trainingPlan);
 	}
 }
 
@@ -146,7 +152,12 @@ void TrainingWindow::refreshTrainingPlans()
 		data.push_back(wxVariant((*trainingPlan)->getNeuralNetwork()->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getStateAsString()));
 		trainingPlanList->AppendItem(data);
+		if (currentDetailObject == *trainingPlan)
+			showDetailsOfTrainingPlan(*trainingPlan);
+		if (processTrainingPlanSelection == *trainingPlan)
+			showProcessOfTrainingPlan(*trainingPlan);
 	}
+	
 }
 
 void TrainingWindow::refreshAllData()
@@ -237,12 +248,13 @@ void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 
 void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
+	processTrainingPlanSelection = trainingPlan;
 	neuralNetworksChoice->Select(controller->getIndexOfNeuralNetwork(trainingPlan->getNeuralNetwork()));
 	trainingPlanPatternsChoice->Select(controller->getIndexOfTrainingPlanPattern(trainingPlan->getTrainingPlanPattern()));
 	neuralNetworksChoice->Enable(false);
 	trainingPlanPatternsChoice->Enable(false);
-	toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
-	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, true);
+	toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan->isPaused());
+	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan->isRunning());
 }
 
 void TrainingWindow::restoreDefaultProcessView()
@@ -251,6 +263,7 @@ void TrainingWindow::restoreDefaultProcessView()
 	trainingPlanPatternsChoice->Enable(true);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
 	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
+	processTrainingPlanSelection = NULL;
 }
 
 void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
@@ -272,6 +285,7 @@ void TrainingWindow::showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNet
 	detailsTextBox->WriteText("Size: " + getNeuralNetworkSizeAsString(neuralNetwork->getNetworkTopology()->getNeuronCountsPerLayer()) + "\n");
 	std::time_t creationDate = neuralNetwork->getCreationDate();
 	detailsTextBox->WriteText("Creation date: " + std::string(std::asctime(std::localtime(&creationDate))) + "\n");
+	currentDetailObject = neuralNetwork;
 }
 
 void TrainingWindow::showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan)
@@ -280,6 +294,7 @@ void TrainingWindow::showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trai
 	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
 	detailsTextBox->WriteText("Learning rate: " + trainingPlan->getLearningRateName() + "\n");
 	detailsTextBox->WriteText("Description: " + trainingPlan->getDescription() + "\n");
+	currentDetailObject = trainingPlan;
 }
 
 void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
@@ -288,11 +303,13 @@ void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
 	detailsTextBox->WriteText("Network name: " + trainingPlan->getNeuralNetwork()->getName() + "\n");
 	detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
+	currentDetailObject = trainingPlan;
 }
 
 void TrainingWindow::clearDetails()
 {
 	detailsTextBox->Clear();
+	currentDetailObject = NULL;
 }
 
 std::string TrainingWindow::getNeuralNetworkSizeAsString(std::vector<unsigned int> size)
@@ -314,19 +331,25 @@ int TrainingWindow::getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& 
 
 void TrainingWindow::startTraining(wxCommandEvent& event)
 {
-	int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
-	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-	if (neuralNetworkIndex != -1 && trainingPlanPatternIndex != -1)
+	if (processTrainingPlanSelection == NULL)
 	{
-		controller->startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
+		int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
+		int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
+		if (neuralNetworkIndex != -1 && trainingPlanPatternIndex != -1)
+		{
+			controller->startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
+		}
+	}
+	else
+	{
+		controller->resumeTrainingPlan(processTrainingPlanSelection);
 	}
 }
 
 void TrainingWindow::pauseTraining(wxCommandEvent& event)
 {
-	int trainingPlanIndex = trainingPlanPatternsChoice->GetSelection();
-	if (trainingPlanIndex != -1)
+	if (processTrainingPlanSelection != NULL)
 	{
-		controller->pauseTrainingPlan(trainingPlanIndex);
+		controller->pauseTrainingPlan(processTrainingPlanSelection);
 	}
 }
