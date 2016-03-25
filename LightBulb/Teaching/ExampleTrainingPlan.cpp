@@ -54,3 +54,13 @@ AbstractTrainingPlan* ExampleTrainingPlan::getCopy()
 {
 	return new ExampleTrainingPlan();
 }
+
+int ExampleTrainingPlan::getRequiredInputSize()
+{
+	return 3;
+}
+
+int ExampleTrainingPlan::getRequiredOutputSize()
+{
+	return 6;
+}

@@ -21,6 +21,7 @@ class TrainingWindow : public AbstractWindow
 private:
 	wxToolBar* toolbar;
 	wxRichTextCtrl* detailsTextBox;
+	wxStaticText* processErrorText;
 	wxDataViewListCtrl* neuralNetworkList;
 	wxDataViewListCtrl* trainingPlanPatternList;
 	wxDataViewListCtrl* trainingPlanList;
@@ -32,6 +33,7 @@ private:
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
+	void validateSelectedProcess();
 	void* currentDetailObject;
 	void createMenuBar();
 	void selectNeuralNetwork(wxDataViewEvent& event);
@@ -47,7 +49,7 @@ private:
 	int getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item);
 	void startTraining(wxCommandEvent& event);
 	void pauseTraining(wxCommandEvent& event);
-
+	void processSelecionHasChanged(wxCommandEvent& event);
 protected:
 	DECLARE_EVENT_TABLE();
 public:

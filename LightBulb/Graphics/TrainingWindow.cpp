@@ -179,13 +179,18 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	wxSizer* processSizer = new wxBoxSizer(wxHORIZONTAL);
 
 	neuralNetworksChoice = new wxChoice(panel, wxID_ANY);
+	neuralNetworksChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&TrainingWindow::processSelecionHasChanged), this);
 	processSizer->Add(neuralNetworksChoice);
 	processSizer->Add(new wxStaticBitmap(panel, wxID_ANY, wxArtProvider::GetBitmap(wxART_GO_FORWARD)), 0, wxALIGN_CENTRE_VERTICAL);
 	trainingPlanPatternsChoice = new wxChoice(panel, wxID_ANY);
+	trainingPlanPatternsChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&TrainingWindow::processSelecionHasChanged), this);
 	processSizer->Add(trainingPlanPatternsChoice);
 
 	commandSizer->Add(processSizer, 0, wxEXPAND | wxALL, 20);
 	commandSizer->AddStretchSpacer(1);
+
+	processErrorText = new wxStaticText(panel, wxID_ANY, "");
+	commandSizer->Add(processErrorText, 0, wxALL, 3);
 
 	toolbar = new wxToolBar(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
 	toolbar->AddTool(TOOLBAR_START_TRAINING, "Start", wxArtProvider::GetBitmap(wxART_GO_FORWARD));
@@ -210,6 +215,32 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	return panel;
 }
 
+void TrainingWindow::validateSelectedProcess()
+{
+	int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
+	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
+	if (neuralNetworkIndex < controller->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
+	{
+		int requiredInputSize = (*controller->getTrainingPlanPatterns())[trainingPlanPatternIndex]->getRequiredInputSize();
+		int requiredOutputSize = (*controller->getTrainingPlanPatterns())[trainingPlanPatternIndex]->getRequiredOutputSize();
+
+		if ((*controller->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().front() != requiredInputSize ||
+			(*controller->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().back() != requiredOutputSize)
+		{
+			processErrorText->SetLabel("The network must have " + std::to_string(requiredInputSize) + " input neurons and " + std::to_string(requiredOutputSize) + " output neurons!");
+			toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
+		}
+		else
+		{
+			processErrorText->SetLabel("");
+		}
+	}
+	else
+	{
+		processErrorText->SetLabel("");
+	}
+}
+
 void TrainingWindow::createMenuBar()
 {
 	wxMenuBar* menubar = new wxMenuBar();
@@ -229,6 +260,7 @@ void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row]);
 		restoreDefaultProcessView();
 		neuralNetworksChoice->Select(row);
+		validateSelectedProcess();
 	}
 	else
 		clearDetails();
@@ -241,6 +273,7 @@ void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 		showDetailsOfTrainingPlanPattern((*controller->getTrainingPlanPatterns())[row]);
 		restoreDefaultProcessView();
 		trainingPlanPatternsChoice->Select(row);
+		validateSelectedProcess();
 	}
 	else
 		clearDetails();
@@ -255,6 +288,7 @@ void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	trainingPlanPatternsChoice->Enable(false);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan->isPaused());
 	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan->isRunning());
+	processErrorText->SetLabel("");
 }
 
 void TrainingWindow::restoreDefaultProcessView()
@@ -352,4 +386,10 @@ void TrainingWindow::pauseTraining(wxCommandEvent& event)
 	{
 		controller->pauseTrainingPlan(processTrainingPlanSelection);
 	}
+}
+
+void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
+{
+	toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
+	validateSelectedProcess();
 }

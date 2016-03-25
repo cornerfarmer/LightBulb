@@ -24,6 +24,8 @@ public:
 	std::string getDescription();
 	std::string getLearningRateName();
 	AbstractTrainingPlan* getCopy();
+	int getRequiredInputSize();
+	int getRequiredOutputSize();
 };
 
 #endif

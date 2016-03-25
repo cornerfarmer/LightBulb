@@ -55,6 +55,8 @@ public:
 	void pause();
 	bool isPaused();
 	bool isRunning();
+	virtual int getRequiredInputSize() = 0;
+	virtual int getRequiredOutputSize() = 0;
 };
 
 #endif
