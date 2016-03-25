@@ -103,6 +103,9 @@
     <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp" />
     <ClCompile Include="Diagnostic\ChangeableNumber.cpp" />
     <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp" />
+    <ClCompile Include="Event\AbstractObserver.cpp" />
+    <ClCompile Include="Event\Observable.cpp" />
+    <ClCompile Include="Event\Observer.cpp" />
     <ClCompile Include="Examples\AbstractTile.cpp" />
     <ClCompile Include="Examples\Animal.cpp" />
     <ClCompile Include="Examples\EarthTile.cpp" />
@@ -694,6 +697,9 @@
     <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp" />
     <ClInclude Include="Diagnostic\ChangeableNumber.hpp" />
     <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp" />
+    <ClInclude Include="Event\AbstractObserver.hpp" />
+    <ClInclude Include="Event\Observable.hpp" />
+    <ClInclude Include="Event\Observer.hpp" />
     <ClInclude Include="Examples\AbstractTile.hpp" />
     <ClInclude Include="Examples\Animal.hpp" />
     <ClInclude Include="Examples\EarthTile.hpp" />

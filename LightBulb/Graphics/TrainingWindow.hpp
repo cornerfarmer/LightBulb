@@ -44,7 +44,7 @@ private:
 	std::string getNeuralNetworkSizeAsString(std::vector<unsigned int> size);
 	int getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item);
 	void startTraining(wxCommandEvent& event);
-	void stopTraining(wxCommandEvent& event);
+	void pauseTraining(wxCommandEvent& event);
 
 protected:
 	DECLARE_EVENT_TABLE();
@@ -53,6 +53,7 @@ public:
 	void refreshNeuralNetworks();
 	void refreshTrainingPlanPatterns();
 	void refreshTrainingPlans();
+	void refreshAllData();
 };
 
 #endif

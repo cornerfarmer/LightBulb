@@ -14,7 +14,11 @@
 class ExampleTrainingPlan : public AbstractTrainingPlan
 {
 private:
+	bool shouldPause;
+protected:
 	void run();
+	AbstractNeuralNetwork* createNeuralNetwork();
+	void tryToPause();
 public:
 	std::string getName();
 	std::string getDescription();

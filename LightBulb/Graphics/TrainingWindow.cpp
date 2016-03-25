@@ -10,7 +10,7 @@
 enum
 {
 	TOOLBAR_START_TRAINING,
-	TOOLBAR_STOP_TRAINING
+	TOOLBAR_PAUSE_TRAINING
 };
 
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
@@ -38,6 +38,8 @@ TrainingWindow::TrainingWindow()
 	sizer->Add(mainSplitterWindow, 1, wxEXPAND);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
+
+	refreshAllData();
 }
 
 
@@ -52,7 +54,6 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 	neuralNetworkList->AppendTextColumn("Name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
 	neuralNetworkList->AppendTextColumn("Size")->SetMinWidth(50);
 	neuralNetworkList->AppendTextColumn("Creation date")->SetMinWidth(50);
-	refreshNeuralNetworks();
 	neuralNetworkList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectNeuralNetwork), this);
 	neuralNetworkList->SetMinSize(wxSize(100, 100));
 
@@ -65,6 +66,7 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 void TrainingWindow::refreshNeuralNetworks()
 {
 	neuralNetworkList->DeleteAllItems();
+	neuralNetworksChoice->Clear();
 	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
 	{
 		wxVector<wxVariant> data;
@@ -73,7 +75,10 @@ void TrainingWindow::refreshNeuralNetworks()
 		std::time_t creationDate = (*network)->getCreationDate();
 		data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
 		neuralNetworkList->AppendItem(data);
+		neuralNetworksChoice->Append((*network)->getName());
 	}
+	neuralNetworksChoice->Append("<Create new>");
+	neuralNetworksChoice->SetSelection(controller->getNeuralNetworks()->size());
 }
 
 wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
@@ -87,7 +92,6 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 	trainingPlanPatternList->AppendTextColumn("Name")->SetMinWidth(50);
 	trainingPlanPatternList->AppendTextColumn("Learning rate")->SetMinWidth(50);
 	trainingPlanPatternList->AppendTextColumn("Description")->SetMinWidth(50);
-	refreshTrainingPlanPatterns();
 	trainingPlanPatternList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlanPattern), this);
 	trainingPlanPatternList->SetMinSize(wxSize(100, 100));
 
@@ -100,6 +104,7 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 void TrainingWindow::refreshTrainingPlanPatterns()
 {
 	trainingPlanPatternList->DeleteAllItems();
+	trainingPlanPatternsChoice->Clear();
 	for (auto trainingPlan = controller->getTrainingPlanPatterns()->begin(); trainingPlan != controller->getTrainingPlanPatterns()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
@@ -107,6 +112,7 @@ void TrainingWindow::refreshTrainingPlanPatterns()
 		data.push_back(wxVariant((*trainingPlan)->getLearningRateName()));
 		data.push_back(wxVariant((*trainingPlan)->getDescription()));
 		trainingPlanPatternList->AppendItem(data);
+		trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
 	}
 }
 
@@ -121,7 +127,6 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	trainingPlanList->AppendTextColumn("Training name")->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("Network name")->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
-	refreshTrainingPlans();
 	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
 	trainingPlanList->SetMinSize(wxSize(100, 100));
 
@@ -139,9 +144,16 @@ void TrainingWindow::refreshTrainingPlans()
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getNeuralNetwork()->getName()));
-		data.push_back(wxVariant((*trainingPlan)->getState()));
+		data.push_back(wxVariant((*trainingPlan)->getStateAsString()));
 		trainingPlanList->AppendItem(data);
 	}
+}
+
+void TrainingWindow::refreshAllData()
+{
+	refreshNeuralNetworks();
+	refreshTrainingPlanPatterns();
+	refreshTrainingPlans();
 }
 
 wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
@@ -156,17 +168,9 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	wxSizer* processSizer = new wxBoxSizer(wxHORIZONTAL);
 
 	neuralNetworksChoice = new wxChoice(panel, wxID_ANY);
-	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
-	{
-		neuralNetworksChoice->Append((*network)->getName());
-	}
 	processSizer->Add(neuralNetworksChoice);
 	processSizer->Add(new wxStaticBitmap(panel, wxID_ANY, wxArtProvider::GetBitmap(wxART_GO_FORWARD)), 0, wxALIGN_CENTRE_VERTICAL);
 	trainingPlanPatternsChoice = new wxChoice(panel, wxID_ANY);
-	for (auto trainingPlan = controller->getTrainingPlanPatterns()->begin(); trainingPlan != controller->getTrainingPlanPatterns()->end(); trainingPlan++)
-	{
-		trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
-	}
 	processSizer->Add(trainingPlanPatternsChoice);
 
 	commandSizer->Add(processSizer, 0, wxEXPAND | wxALL, 20);
@@ -174,9 +178,10 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 
 	toolbar = new wxToolBar(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
 	toolbar->AddTool(TOOLBAR_START_TRAINING, "Start", wxArtProvider::GetBitmap(wxART_GO_FORWARD));
-	toolbar->AddTool(TOOLBAR_STOP_TRAINING, "Pause", wxArtProvider::GetBitmap(wxART_DELETE));
-	toolbar->EnableTool(TOOLBAR_STOP_TRAINING, false);
+	toolbar->AddTool(TOOLBAR_PAUSE_TRAINING, "Pause", wxArtProvider::GetBitmap(wxART_DELETE));
+	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
 	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::startTraining), this, TOOLBAR_START_TRAINING);
+	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::pauseTraining), this, TOOLBAR_PAUSE_TRAINING);
 	toolbar->Realize();
 	commandSizer->Add(toolbar);
 
@@ -237,7 +242,7 @@ void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	neuralNetworksChoice->Enable(false);
 	trainingPlanPatternsChoice->Enable(false);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
-	toolbar->EnableTool(TOOLBAR_STOP_TRAINING, true);
+	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, true);
 }
 
 void TrainingWindow::restoreDefaultProcessView()
@@ -245,7 +250,7 @@ void TrainingWindow::restoreDefaultProcessView()
 	neuralNetworksChoice->Enable(true);
 	trainingPlanPatternsChoice->Enable(true);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
-	toolbar->EnableTool(TOOLBAR_STOP_TRAINING, false);
+	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
 }
 
 void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
@@ -282,7 +287,7 @@ void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	clearDetails();
 	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
 	detailsTextBox->WriteText("Network name: " + trainingPlan->getNeuralNetwork()->getName() + "\n");
-	detailsTextBox->WriteText("State: " + trainingPlan->getState() + "\n");
+	detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
 }
 
 void TrainingWindow::clearDetails()
@@ -317,7 +322,11 @@ void TrainingWindow::startTraining(wxCommandEvent& event)
 	}
 }
 
-void TrainingWindow::stopTraining(wxCommandEvent& event)
+void TrainingWindow::pauseTraining(wxCommandEvent& event)
 {
-
+	int trainingPlanIndex = trainingPlanPatternsChoice->GetSelection();
+	if (trainingPlanIndex != -1)
+	{
+		controller->pauseTrainingPlan(trainingPlanIndex);
+	}
 }

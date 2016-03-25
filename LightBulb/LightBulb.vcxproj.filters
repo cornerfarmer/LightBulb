@@ -599,6 +599,9 @@
     </ClCompile>
     <ClCompile Include="Teaching\AbstractTrainingPlan.cpp" />
     <ClCompile Include="Teaching\ExampleTrainingPlan.cpp" />
+    <ClCompile Include="Event\Observer.cpp" />
+    <ClCompile Include="Event\Observable.cpp" />
+    <ClCompile Include="Event\AbstractObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1144,5 +1147,8 @@
     </ClInclude>
     <ClInclude Include="Teaching\AbstractTrainingPlan.hpp" />
     <ClInclude Include="Teaching\ExampleTrainingPlan.hpp" />
+    <ClInclude Include="Event\Observer.hpp" />
+    <ClInclude Include="Event\Observable.hpp" />
+    <ClInclude Include="Event\AbstractObserver.hpp" />
   </ItemGroup>
 </Project>
