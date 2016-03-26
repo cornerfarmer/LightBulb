@@ -10,7 +10,7 @@
 #include <memory>
 
 // Forward declarations
-class NeuralNetwork;
+class AbstractNeuralNetwork;
 class Teacher;
 class Neuron;
 class Edge;
@@ -65,7 +65,7 @@ struct AbstractLearningRuleOptions
 	virtual ~AbstractLearningRuleOptions() {}
 };
 
-// A LearningRule is used to improve a NeuralNetwork
+// A LearningRule is used to improve a AbstractNeuralNetwork
 class AbstractLearningRule 
 {
 protected:
@@ -77,13 +77,13 @@ protected:
 	// Holds the current try number
 	unsigned int tryCounter;
 	// The current network 
-	NeuralNetwork* currentNeuralNetwork;
+	AbstractNeuralNetwork* currentNeuralNetwork;
 	// The current network toplogy
 	AbstractNetworkTopology* currentNetworkTopology;
 	// The current teacher
 	Teacher* currentTeacher;
 	// This method will be called in front of the actual learning algorithm
-	virtual void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
+	virtual void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
 	virtual Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap) = 0;
 	// This method should adjust the weight of the current edge
@@ -93,25 +93,25 @@ protected:
 	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges
 	virtual void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap) {};
 	// This method should return the used activationOrder
-	virtual AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork) = 0;
+	virtual AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork) = 0;
 	// Prints a current summary of the status of the learning process
 	virtual void printDebugOutput() {};
 	// This method should do something like randomizing all weight
-	virtual void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
+	virtual void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
 	// This method can be used to do some work before every iteration
-	virtual void initializeIteration(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) { };
+	virtual void initializeIteration(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) { };
 	// This method can be used to do some work before every teaching lesson
-	virtual void initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson) { };
+	virtual void initializeTeachingLesson(AbstractNeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson) { };
 	// This method could be used to do some work after all weights has been adjusted
-	virtual void doCalculationAfterAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
+	virtual void doCalculationAfterAllWeightAdjustments(AbstractNeuralNetwork &neuralNetwork) { };
 	// This method could be used to do some work befora all weights are adjusted
-	virtual void initializeAllWeightAdjustments(NeuralNetwork &neuralNetwork) { };
-	// This method could be used to do some prework on the neuralNetwork
-	virtual NeuralNetwork* initializeNeuralNetwork(NeuralNetwork &neuralNetwork) { return &neuralNetwork; };
+	virtual void initializeAllWeightAdjustments(AbstractNeuralNetwork &neuralNetwork) { };
+	// This method could be used to do some prework on the AbstractNeuralNetwork
+	virtual AbstractNeuralNetwork* initializeNeuralNetwork(AbstractNeuralNetwork &neuralNetwork) { return &neuralNetwork; };
 	// This method could be used to do some prework on the teacher
 	virtual Teacher* initializeTeacher(Teacher &teacher) { return &teacher; };
 	// This method could be used to do something after the learning process
-	virtual void doCalculationAfterLearningProcess(NeuralNetwork &neuralNetwork, Teacher &teacher) {};
+	virtual void doCalculationAfterLearningProcess(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher) {};
 	// This method can return a pointer to a output value map, which should be filled before weight calculation
 	virtual std::vector<std::map<AbstractNeuron*, double>>* getOutputValuesInTime() { return NULL; };
 	// This method can return a pointer to a netInput value map, which should be filled before weight calculation
@@ -120,9 +120,9 @@ protected:
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
-	// Execute the learning process on the given NeuralNetwork
+	// Execute the learning process on the given AbstractNeuralNetwork
 	// If the learning process succeded the method will return true
-	bool doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	bool doLearning(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
 
 
 };

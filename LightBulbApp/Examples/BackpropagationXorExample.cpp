@@ -12,19 +12,8 @@
 #include <Graphics/NeuralNetworkResultChart.hpp>
 
 
-void doBackpropagationXorExample()
+void BackpropagationXorExample::run()
 {
-	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions.neuronsPerLayerCount[0] = 2;
-	layeredNetworkOptions.neuronsPerLayerCount[1] = 2;
-	layeredNetworkOptions.neuronsPerLayerCount[2] = 1;
-
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
-
-	NeuralNetwork neuralNetwork(layeredNetwork);
-
 	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
 	options.maxTotalErrorValue = 4;
@@ -51,48 +40,55 @@ void doBackpropagationXorExample()
 			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
 	}
-	clock_t begin = clock();
-	bool success = learningRule.doLearning(neuralNetwork, teacher);
-	clock_t end = clock();
 
-	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-	std::cout << "time: " << std::fixed << std::setprecision(5) << elapsed_secs << std::endl;
+	bool success = learningRule.doLearning(*network, teacher);
+}
 
-/*
-	TopologicalOrder topologicalOrder;
-	double totalError = teacher.getTotalError(neuralNetwork, topologicalOrder);
+AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
+{
+	LayeredNetworkOptions layeredNetworkOptions;
+	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount[0] = 2;
+	layeredNetworkOptions.neuronsPerLayerCount[1] = 2;
+	layeredNetworkOptions.neuronsPerLayerCount[2] = 1;
 
-	std::vector<std::vector<double>>* input = new std::vector<std::vector<double>>(1, std::vector<double>(2));
-	(*input)[0][0] = 8;
-	(*input)[0][1] = 7;
-	std::vector<std::vector<double>>* output = new std::vector<std::vector<double>>(1, std::vector<double>(1));
+	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
 
-	neuralNetwork.calculate(*input, *output, topologicalOrder);
+	return new NeuralNetwork(layeredNetwork);
+}
 
-	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
-	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
-	neuralNetworkResultChartOptions.binaryInterpretation = true;
-	neuralNetworkResultChartOptions.xRangeEnd = 100;
-	neuralNetworkResultChartOptions.yRangeEnd = 100;
-	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+void BackpropagationXorExample::tryToPause()
+{
+	shouldPause = true;
+}
 
-	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
-	neuralNetworkResultChart.recalculateAllValues();
+std::string BackpropagationXorExample::getName()
+{
+	return "Backpropagation xor example";
+}
 
-	sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
+std::string BackpropagationXorExample::getDescription()
+{
+	return "Trains a network to simulate the xor function!";
+}
 
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+std::string BackpropagationXorExample::getLearningRateName()
+{
+	return "Backpropagation";
+}
 
-		window.clear();
-		neuralNetworkResultChart.draw(window);
-		window.display();
-	}*/
+AbstractTrainingPlan* BackpropagationXorExample::getCopy()
+{
+	return new BackpropagationXorExample();
+}
 
+int BackpropagationXorExample::getRequiredInputSize()
+{
+	return 2;
+}
+
+int BackpropagationXorExample::getRequiredOutputSize()
+{
+	return 1;
 }

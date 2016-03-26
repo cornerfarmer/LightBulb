@@ -32,11 +32,11 @@ enum TrainingPlanEvents
 class AbstractTrainingPlan : public Observable<TrainingPlanEvents, AbstractTrainingPlan>
 {
 private:
-	AbstractNeuralNetwork* network;
 	std::thread thread;
 	AbstractTrainingPlan* pattern;
 	TrainingPlanState state;
 protected:
+	AbstractNeuralNetwork* network;
 	virtual void run() = 0;
 	virtual AbstractTrainingPlan* getCopy() = 0;
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;

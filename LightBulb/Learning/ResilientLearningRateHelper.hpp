@@ -13,7 +13,6 @@
 #include "Learning/AbstractLearningRule.hpp"
 
 // Forward declarations
-class NeuralNetwork;
 class Teacher;
 class Edge;
 
@@ -59,7 +58,7 @@ public:
 	// Returns if the learning has stopped
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper
-	void initialize(NeuralNetwork &neuralNetwork);	
+	void initialize(AbstractNeuralNetwork &neuralNetwork);
 };
 
 #endif

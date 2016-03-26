@@ -56,11 +56,11 @@ protected:
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	void printDebugOutput();
 	bool learningHasStopped();
-	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
-	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
+	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
+	AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork);
 	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
-	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);
 };

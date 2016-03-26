@@ -37,7 +37,7 @@ void BackpropagationLearningRule::initialize()
 	}
 }
 
-void BackpropagationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
+void BackpropagationLearningRule::initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
@@ -114,7 +114,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 }
 
 
-AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
+AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }
@@ -145,7 +145,7 @@ BackpropagationLearningRuleOptions* BackpropagationLearningRule::getOptions()
 	return static_cast<BackpropagationLearningRuleOptions*>(options.get());
 }
 
-void BackpropagationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void BackpropagationLearningRule::initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// If we can change the weights before learning
 	if (options->changeWeightsBeforeLearning)

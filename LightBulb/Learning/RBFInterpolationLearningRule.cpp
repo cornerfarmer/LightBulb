@@ -40,7 +40,7 @@ bool RBFInterpolationLearningRule::learningHasStopped()
 	return false;
 }
 
-void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
+void RBFInterpolationLearningRule::initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	actTeacher = &teacher;
 
@@ -61,7 +61,7 @@ void RBFInterpolationLearningRule::initializeLearningAlgoritm(NeuralNetwork &neu
 	
 }
 
-AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
+AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }
@@ -93,7 +93,7 @@ void RBFInterpolationLearningRule::initializeLayerCalculation(class AbstractTeac
 	}
 }
 
-void RBFInterpolationLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void RBFInterpolationLearningRule::initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	RBFNetwork* rbfNetwork = dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
 

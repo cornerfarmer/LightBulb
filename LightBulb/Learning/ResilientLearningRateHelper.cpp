@@ -18,7 +18,7 @@ ResilientLearningRateHelper::ResilientLearningRateHelper()
 	options = NULL;
 }
 
-void ResilientLearningRateHelper::initialize(NeuralNetwork &neuralNetwork)
+void ResilientLearningRateHelper::initialize(AbstractNeuralNetwork &neuralNetwork)
 {
 	// Make sure the previous learning rates map is empty
 	previousLearningRates = *neuralNetwork.getNetworkTopology()->getWeights();

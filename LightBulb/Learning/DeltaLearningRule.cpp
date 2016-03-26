@@ -26,7 +26,7 @@ DeltaLearningRule::DeltaLearningRule(DeltaLearningRuleOptions &options_)
 	}
 }
 
-void DeltaLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
+void DeltaLearningRule::initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
 	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
@@ -39,7 +39,7 @@ void DeltaLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork,
 		resilientLearningRateHelper->initialize(neuralNetwork);
 }
 
-AbstractActivationOrder* DeltaLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
+AbstractActivationOrder* DeltaLearningRule::getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork)
 {
 	return new TopologicalOrder();
 }
@@ -57,7 +57,7 @@ Eigen::MatrixXd DeltaLearningRule::calculateDeltaWeightFromLayer(AbstractTeachin
 		return Eigen::MatrixXd::Zero(currentNeuralNetwork->getNetworkTopology()->getNeuronCountInLayer(layerIndex), currentNeuralNetwork->getNetworkTopology()->getNeuronCountInLayer(layerIndex - 1));
 }
 
-void DeltaLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
+void DeltaLearningRule::initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	if (options->changeWeightsBeforeLearning)
 	{

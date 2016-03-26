@@ -3,15 +3,16 @@
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include "TrainingPlans/ExampleTrainingPlan.hpp"
-
+#include "Examples/BackpropagationXorExample.hpp"
 #include "TrainingWindow.hpp"
+#include <Examples/BackpropagationXorExample.hpp>
 
 TrainingController::TrainingController(TrainingWindow* window_)
 {
 	window = window_;
 
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
-	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
+	trainingPlanPatterns.push_back(new BackpropagationXorExample());
 }
 
 std::vector<AbstractNeuralNetwork*>* TrainingController::getNeuralNetworks()

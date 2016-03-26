@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "Teaching/Teacher.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
@@ -22,14 +22,14 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 }
 
-bool AbstractLearningRule::doLearning(NeuralNetwork &neuralNetwork, Teacher &teacher)
+bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// Check if all given options are correct
 	if (teacher.getTeachingLessons()->size() == 0)
 		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
 
 	Teacher& initializedTeacher = *initializeTeacher(teacher);
-	NeuralNetwork& initializedNeuralNetwork = *initializeNeuralNetwork(neuralNetwork);
+	AbstractNeuralNetwork& initializedNeuralNetwork = *initializeNeuralNetwork(neuralNetwork);
 	
 	// Ask for the used activation order
 	std::unique_ptr<AbstractActivationOrder> activationOrder(getNewActivationOrder(initializedNeuralNetwork));

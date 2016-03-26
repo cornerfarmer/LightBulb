@@ -13,7 +13,6 @@
 #include "Learning/ResilientLearningRateHelper.hpp"
 
 // Forward declarations
-class NeuralNetwork;
 class Teacher;
 class Edge;
 class AbstractNeuron;
@@ -66,11 +65,11 @@ protected:
 	// Inherited:
 	void printDebugOutput();
 	bool learningHasStopped();
-	void initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);	
+	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
-	AbstractActivationOrder* getNewActivationOrder(NeuralNetwork &neuralNetwork);
-	void initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher);
+	AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork);
+	void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_);
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_);
