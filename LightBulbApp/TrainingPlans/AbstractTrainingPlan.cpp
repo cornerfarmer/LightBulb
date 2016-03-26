@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "Teaching/AbstractTrainingPlan.hpp"
+#include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <thread>
 
 AbstractTrainingPlan::AbstractTrainingPlan()

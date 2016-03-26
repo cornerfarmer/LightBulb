@@ -1,5 +1,5 @@
 #include "App.hpp"
-#include <Graphics/TrainingWindow.hpp>
+#include "Windows/TrainingWindow.hpp"
 
 bool App::OnInit()
 {

@@ -73,8 +73,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -141,6 +141,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\ExampleTrainingPlan.cpp" />
+    <ClCompile Include="Windows\AbstractWindow.cpp" />
+    <ClCompile Include="Windows\TrainingController.cpp" />
+    <ClCompile Include="Windows\TrainingWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -157,6 +162,11 @@
     <ClInclude Include="Examples\TeachedEvolutionExample.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
+    <ClInclude Include="TrainingPlans\ExampleTrainingPlan.hpp" />
+    <ClInclude Include="Windows\AbstractWindow.hpp" />
+    <ClInclude Include="Windows\TrainingController.hpp" />
+    <ClInclude Include="Windows\TrainingWindow.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

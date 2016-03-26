@@ -2,11 +2,13 @@
 
 #ifndef _TRAININGCONTROLLER_H_
 #define _TRAININGCONTROLLER_H_
+
+// Library includes
 #include <vector>
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
-#include <Teaching/AbstractTrainingPlan.hpp>
 
 // Includes
+#include "TrainingPlans/AbstractTrainingPlan.hpp"
 
 // Forward declarations
 class TrainingWindow;

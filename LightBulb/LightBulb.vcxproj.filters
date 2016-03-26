@@ -585,20 +585,9 @@
     <ClCompile Include="Learning\Evolution\AbstractCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\AbstractWindow.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\TrainingWindow.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\DataTable.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\TrainingController.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Teaching\AbstractTrainingPlan.cpp" />
-    <ClCompile Include="Teaching\ExampleTrainingPlan.cpp" />
     <ClCompile Include="Event\Observer.cpp" />
     <ClCompile Include="Event\Observable.cpp" />
     <ClCompile Include="Event\AbstractObserver.cpp" />
@@ -1133,20 +1122,9 @@
     <ClInclude Include="Learning\Evolution\AbstractCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\AbstractWindow.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\TrainingWindow.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\DataTable.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\TrainingController.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Teaching\AbstractTrainingPlan.hpp" />
-    <ClInclude Include="Teaching\ExampleTrainingPlan.hpp" />
     <ClInclude Include="Event\Observer.hpp" />
     <ClInclude Include="Event\Observable.hpp" />
     <ClInclude Include="Event\AbstractObserver.hpp" />

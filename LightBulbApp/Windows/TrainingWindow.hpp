@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "Graphics/AbstractWindow.hpp"
+#include "Windows/AbstractWindow.hpp"
 #include "TrainingController.hpp"
 
 // Forward declarations

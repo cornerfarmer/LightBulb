@@ -1,8 +1,8 @@
 // Includes
-#include "Graphics/TrainingController.hpp"
+#include "Windows/TrainingController.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include <Teaching/ExampleTrainingPlan.hpp>
+#include "TrainingPlans/ExampleTrainingPlan.hpp"
 
 #include "TrainingWindow.hpp"
 

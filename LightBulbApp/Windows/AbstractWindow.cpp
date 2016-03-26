@@ -1,5 +1,5 @@
 // Includes
-#include "Graphics/AbstractWindow.hpp"
+#include "Windows/AbstractWindow.hpp"
 
 AbstractWindow::AbstractWindow()
 	: wxFrame(NULL, wxID_ANY, "LightBulb")

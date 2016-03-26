@@ -4,7 +4,7 @@
 #define _EXAMPLETRAININGPLAN_H_
 
 // Includes
-#include "Teaching/AbstractTrainingPlan.hpp"
+#include "TrainingPlans/AbstractTrainingPlan.hpp"
 
 // Library includes
 

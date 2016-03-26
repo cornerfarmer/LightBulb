@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "Teaching/ExampleTrainingPlan.hpp"
+#include "TrainingPlans/ExampleTrainingPlan.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Function/WeightedSumFunction.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>

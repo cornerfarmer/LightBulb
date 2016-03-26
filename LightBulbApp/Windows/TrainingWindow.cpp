@@ -1,5 +1,5 @@
 // Includes
-#include "Graphics/TrainingWindow.hpp"
+#include "Windows/TrainingWindow.hpp"
 #include <wx/dataview.h>
 #include <wx/splitter.h>
 #include <wx/artprov.h>
