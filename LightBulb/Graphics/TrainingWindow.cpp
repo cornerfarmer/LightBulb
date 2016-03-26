@@ -200,7 +200,7 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::pauseTraining), this, TOOLBAR_PAUSE_TRAINING);
 	toolbar->Realize();
 	commandSizer->Add(toolbar);
-
+	commandSizer->SetSizeHints(panel);
 	sizer->Add(commandSizer, 0, wxEXPAND | wxTOP, 10);
 	sizer->Add(new wxStaticLine(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVERTICAL), 0, wxEXPAND);
 
@@ -239,6 +239,7 @@ void TrainingWindow::validateSelectedProcess()
 	{
 		processErrorText->SetLabel("");
 	}
+	processErrorText->GetParent()->Layout();
 }
 
 void TrainingWindow::createMenuBar()

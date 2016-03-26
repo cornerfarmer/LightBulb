@@ -2,7 +2,7 @@
 #include "Graphics/AbstractWindow.hpp"
 
 AbstractWindow::AbstractWindow()
-	: wxFrame(NULL, wxID_ANY, "Servus")
+	: wxFrame(NULL, wxID_ANY, "LightBulb")
 {
 
 }
