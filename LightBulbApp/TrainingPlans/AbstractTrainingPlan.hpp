@@ -20,12 +20,14 @@ enum TrainingPlanState
 	TP_RUNNING,
 	TP_PAUSING,
 	TP_PAUSED,
-	TP_IDLE
+	TP_IDLE,
+	TP_FINISHED
 };
 
 enum TrainingPlanEvents
 {
-	EVT_TP_PAUSED
+	EVT_TP_PAUSED,
+	EVT_TP_FINISHED
 };
 
 // A techer manages many techingLessons
@@ -42,6 +44,7 @@ protected:
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
 	virtual void tryToPause() = 0;
 	void pausingFinished();
+	void finished();
 public:
 	AbstractTrainingPlan();
 	void start(AbstractNeuralNetwork* network = NULL);

@@ -34,6 +34,8 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 {
 	trainingPlans.push_back(trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute());
 	trainingPlans.back()->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
+	trainingPlans.back()->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
+
 	if (neuralNetworks.size() <= neuralNetworkIndex) 
 	{
 		trainingPlans.back()->start();
@@ -64,6 +66,11 @@ int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trai
 }
 
 void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
+{
+	window->refreshTrainingPlans();
+}
+
+void TrainingController::trainingPlanFinished(AbstractTrainingPlan* trainingPlan)
 {
 	window->refreshTrainingPlans();
 }

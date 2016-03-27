@@ -42,6 +42,7 @@ void BackpropagationXorExample::run()
 	}
 
 	bool success = learningRule.doLearning(*network, teacher);
+	finished();
 }
 
 AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()

@@ -30,6 +30,7 @@ public:
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	int getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern);
 	void trainingPlanPaused(AbstractTrainingPlan* trainingPlan);
+	void trainingPlanFinished(AbstractTrainingPlan* trainingPlan);
 	void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
 };
 

@@ -43,6 +43,8 @@ std::string AbstractTrainingPlan::getStateAsString()
 		return "running";
 	case TP_PAUSED:
 		return "paused";
+	case TP_FINISHED :
+		return "finished";
 	default:
 		return "";
 	}
@@ -83,4 +85,10 @@ void AbstractTrainingPlan::pausingFinished()
 {
 	state = TP_PAUSED;
 	throwEvent(EVT_TP_PAUSED, this);
+}
+
+void AbstractTrainingPlan::finished()
+{
+	state = TP_FINISHED;
+	throwEvent(EVT_TP_FINISHED, this);
 }
