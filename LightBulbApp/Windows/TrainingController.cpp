@@ -7,12 +7,14 @@
 #include "TrainingWindow.hpp"
 #include <Examples/BackpropagationXorExample.hpp>
 
-TrainingController::TrainingController(TrainingWindow* window_)
+TrainingController::TrainingController()
 {
-	window = window_;
+	window.reset(new TrainingWindow(this));;
+	logger = NULL;
 
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
+	window->refreshAllData();
 }
 
 std::vector<AbstractNeuralNetwork*>* TrainingController::getNeuralNetworks()
@@ -35,7 +37,7 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	trainingPlans.push_back(trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute());
 	trainingPlans.back()->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
 	trainingPlans.back()->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
-
+	trainingPlans.back()->setLogger(logger);
 	if (neuralNetworks.size() <= neuralNetworkIndex) 
 	{
 		trainingPlans.back()->start();
@@ -81,6 +83,16 @@ void TrainingController::resumeTrainingPlan(AbstractTrainingPlan* trainingPlan)
 	window->refreshTrainingPlans();
 }
 
+void TrainingController::setLogger(AbstractLogger* newLogger)
+{
+	logger = newLogger;
+}
+
+void TrainingController::show()
+{
+	window->Show();
+}
+
 int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
 {
 	for (int i = 0; i < neuralNetworks.size(); i++)
@@ -90,3 +102,4 @@ int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
 	}
 	return -1;
 }
+

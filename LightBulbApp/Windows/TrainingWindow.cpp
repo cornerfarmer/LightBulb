@@ -16,9 +16,10 @@ enum
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
 END_EVENT_TABLE()
 
-TrainingWindow::TrainingWindow()
+TrainingWindow::TrainingWindow(TrainingController* controller_)
+	:AbstractWindow("LightBulb")
 {
-	controller.reset(new TrainingController(this));
+	controller = controller_;
 	processTrainingPlanSelection = NULL;
 	currentDetailObject = NULL;
 
@@ -167,6 +168,13 @@ void TrainingWindow::refreshAllData()
 	refreshTrainingPlans();
 }
 
+void TrainingWindow::addSubWindow(AbstractWindow* newSubWindow)
+{
+	wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubWindow->GetLabel());
+	windowsMenu->Append(newItem);
+	newSubWindow->SetParent(this);
+}
+
 wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 {
 	wxPanel* panel = new wxPanel(parent, wxID_ANY);
@@ -250,6 +258,8 @@ void TrainingWindow::createMenuBar()
 	file->Append(wxID_SAVE);
 	file->Append(wxID_EXIT);
 	menubar->Append(file, "File");
+	windowsMenu = new wxMenu();
+	menubar->Append(windowsMenu, "Windows");
 	SetMenuBar(menubar);
 }
 

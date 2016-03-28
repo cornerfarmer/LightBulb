@@ -16,7 +16,7 @@ class AbstractWindow : public wxFrame
 private:
 	
 public:
-	AbstractWindow();
+	AbstractWindow(std::string label);
 	
 };
 

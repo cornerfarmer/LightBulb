@@ -12,7 +12,7 @@
 #include <vector>
 
 // Forward declarations
-
+class AbstractLogger;
 class AbstractNeuralNetwork;
 
 enum TrainingPlanState
@@ -39,6 +39,7 @@ private:
 	TrainingPlanState state;
 protected:
 	AbstractNeuralNetwork* network;
+	AbstractLogger* logger;
 	virtual void run() = 0;
 	virtual AbstractTrainingPlan* getCopy() = 0;
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
@@ -58,6 +59,7 @@ public:
 	void pause();
 	bool isPaused();
 	bool isRunning();
+	void setLogger(AbstractLogger* newLogger);
 	virtual int getRequiredInputSize() = 0;
 	virtual int getRequiredOutputSize() = 0;
 };

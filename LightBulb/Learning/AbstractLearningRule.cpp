@@ -20,8 +20,6 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 
 	if (options->maxTotalErrorValue <= options->totalErrorGoal)
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
-	if (!options->logger)
-		throw std::invalid_argument("The given logger is invalid.");
 }
 
 bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
@@ -60,7 +58,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 		initializeTry(initializedNeuralNetwork, initializedTeacher);
 		
 		// If debug is enabled, print every n-th iteration a short debug info
-		log("--------------\nStart Try: " + std::to_string(tryCounter), LL_HIGH);
+		log("Start Try: " + std::to_string(tryCounter), LL_HIGH);
 
 		
 		// Do while the totalError is not zero
@@ -85,7 +83,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 			// If debug is enabled, print every n-th iteration a short debug info
 			if (iteration % options->debugOutputInterval == 0)
 			{
-				log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(iteration) + " " + printDebugOutput() + "\n", LL_LOW);
+				log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(iteration) + " " + printDebugOutput(), LL_LOW);
 			}
 
 			// If offlineLearning is activated, reset the offlineLearningGradients
@@ -178,7 +176,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 	
 
 	if (totalError <= options->totalErrorGoal)
-		log("Try (No. " + std::to_string(tryCounter) + ", " + std::to_string(iteration) + " iterations needed) was successful (totalError: " + std::to_string(totalError) + " < " + std::to_string(options->totalErrorGoal) + ")\n", LL_HIGH);
+		log("Try (No. " + std::to_string(tryCounter) + ", " + std::to_string(iteration) + " iterations needed) was successful (totalError: " + std::to_string(totalError) + " < " + std::to_string(options->totalErrorGoal) + ")", LL_HIGH);
 	else
 		log("All tries failed => stop learning", LL_HIGH);
 	

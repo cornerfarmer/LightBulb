@@ -25,6 +25,7 @@ void BackpropagationXorExample::run()
 	options.learningRate = 0.1;
 	options.momentum = 0;
 	options.resilientLearningRate = false;
+	options.logger = logger;
 	BackpropagationLearningRule learningRule(options);
 
 	Teacher teacher;

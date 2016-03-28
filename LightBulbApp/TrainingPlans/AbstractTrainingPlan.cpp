@@ -92,3 +92,8 @@ void AbstractTrainingPlan::finished()
 	state = TP_FINISHED;
 	throwEvent(EVT_TP_FINISHED, this);
 }
+
+void AbstractTrainingPlan::setLogger(AbstractLogger* newLogger)
+{
+	logger = newLogger;
+}

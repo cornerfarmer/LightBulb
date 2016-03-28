@@ -9,6 +9,7 @@
 
 // Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
+#include <Logging/AbstractLogger.hpp>
 
 // Forward declarations
 class TrainingWindow;
@@ -19,9 +20,10 @@ private:
 	std::vector<AbstractNeuralNetwork*> neuralNetworks;
 	std::vector<AbstractTrainingPlan*> trainingPlanPatterns;
 	std::vector<AbstractTrainingPlan*> trainingPlans;
-	TrainingWindow* window;
+	std::unique_ptr<TrainingWindow> window;
+	AbstractLogger* logger;
 public:
-	TrainingController(TrainingWindow* window_);
+	TrainingController();
 	std::vector<AbstractNeuralNetwork*>* getNeuralNetworks();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlans();
@@ -32,6 +34,8 @@ public:
 	void trainingPlanPaused(AbstractTrainingPlan* trainingPlan);
 	void trainingPlanFinished(AbstractTrainingPlan* trainingPlan);
 	void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
+	void setLogger(AbstractLogger* newLogger);
+	void show();
 };
 
 #endif

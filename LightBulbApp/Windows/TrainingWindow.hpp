@@ -25,7 +25,7 @@ private:
 	wxDataViewListCtrl* neuralNetworkList;
 	wxDataViewListCtrl* trainingPlanPatternList;
 	wxDataViewListCtrl* trainingPlanList;
-	std::unique_ptr<TrainingController> controller;
+	TrainingController* controller;
 	wxChoice* neuralNetworksChoice;
 	wxChoice* trainingPlanPatternsChoice;
 	AbstractTrainingPlan* processTrainingPlanSelection;
@@ -33,6 +33,7 @@ private:
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
+	wxMenu* windowsMenu;
 	void validateSelectedProcess();
 	void* currentDetailObject;
 	void createMenuBar();
@@ -53,11 +54,12 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	TrainingWindow();
+	TrainingWindow(TrainingController* controller_);
 	void refreshNeuralNetworks();
 	void refreshTrainingPlanPatterns();
 	void refreshTrainingPlans();
 	void refreshAllData();
+	void addSubWindow(AbstractWindow* newSubWindow);
 };
 
 #endif

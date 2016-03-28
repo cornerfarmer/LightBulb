@@ -1,9 +1,16 @@
 #include "App.hpp"
-#include "Windows/TrainingWindow.hpp"
+#include "Windows/TrainingController.hpp"
+#include "Windows/LoggerController.hpp"
 
 bool App::OnInit()
 {
-	TrainingWindow *window = new TrainingWindow();
-	window->Show(true);
+	TrainingController* window = new TrainingController();
+	LoggerController* loggerWindow = new LoggerController();
+
+	//window->addSubWindow(loggerWindow);
+	window->setLogger(loggerWindow);
+
+	loggerWindow->show();
+	window->show();
 	return true;
 }

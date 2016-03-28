@@ -20,8 +20,8 @@ enum LogLevel
 class AbstractLogger
 {
 private:
-	LogLevel currentLogLevel;
 protected:
+	LogLevel currentLogLevel;
 	virtual void outputMessage(std::string message) = 0;
 public:
 	virtual ~AbstractLogger() {};

@@ -1,8 +1,8 @@
 // Includes
 #include "Windows/AbstractWindow.hpp"
 
-AbstractWindow::AbstractWindow()
-	: wxFrame(NULL, wxID_ANY, "LightBulb")
+AbstractWindow::AbstractWindow(std::string label)
+	: wxFrame(NULL, wxID_ANY, label)
 {
 
 }

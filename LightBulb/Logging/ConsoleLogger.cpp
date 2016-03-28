@@ -4,7 +4,7 @@
 
 void ConsoleLogger::outputMessage(std::string message)
 {
-	std::cout << message;
+	std::cout << message << std::endl;
 }
 
 ConsoleLogger::ConsoleLogger(LogLevel logLevel)

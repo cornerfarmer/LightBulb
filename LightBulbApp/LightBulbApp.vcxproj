@@ -144,6 +144,8 @@
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\ExampleTrainingPlan.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
+    <ClCompile Include="Windows\LoggerController.cpp" />
+    <ClCompile Include="Windows\LoggerWindow.cpp" />
     <ClCompile Include="Windows\TrainingController.cpp" />
     <ClCompile Include="Windows\TrainingWindow.cpp" />
   </ItemGroup>
@@ -165,6 +167,8 @@
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\ExampleTrainingPlan.hpp" />
     <ClInclude Include="Windows\AbstractWindow.hpp" />
+    <ClInclude Include="Windows\LoggerController.hpp" />
+    <ClInclude Include="Windows\LoggerWindow.hpp" />
     <ClInclude Include="Windows\TrainingController.hpp" />
     <ClInclude Include="Windows\TrainingWindow.hpp" />
   </ItemGroup>
