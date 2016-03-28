@@ -2,8 +2,8 @@
 #include "Windows/LoggerWindow.hpp"
 #include <wx/richtext/richtextctrl.h>
 
-LoggerWindow::LoggerWindow(LoggerController* controller_)
-	:AbstractWindow("Logger")
+LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent)
+	:AbstractWindow("Logger", parent)
 {
 	controller = controller_;
 

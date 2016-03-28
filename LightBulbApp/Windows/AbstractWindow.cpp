@@ -1,8 +1,8 @@
 // Includes
 #include "Windows/AbstractWindow.hpp"
 
-AbstractWindow::AbstractWindow(std::string label)
-	: wxFrame(NULL, wxID_ANY, label)
+AbstractWindow::AbstractWindow(std::string label, AbstractWindow* parent)
+	: wxFrame(parent, wxID_ANY, label)
 {
 
 }

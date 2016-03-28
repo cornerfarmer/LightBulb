@@ -2,10 +2,10 @@
 #include "Windows/LoggerController.hpp"
 #include "LoggerWindow.hpp"
 
-LoggerController::LoggerController()
+LoggerController::LoggerController(AbstractWindow* parent)
 	:AbstractLogger(LL_LOW)
 {
-	window.reset(new LoggerWindow(this));
+	window.reset(new LoggerWindow(this, parent));
 }
 
 void LoggerController::show()
@@ -16,4 +16,9 @@ void LoggerController::show()
 void LoggerController::outputMessage(std::string message)
 {
 	window->addLogMessage(message);
+}
+
+LoggerWindow* LoggerController::getWindow()
+{
+	return window.get();
 }

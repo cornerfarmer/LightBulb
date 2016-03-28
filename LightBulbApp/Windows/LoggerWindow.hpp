@@ -8,11 +8,11 @@
 
 // Includes
 #include "Windows/AbstractWindow.hpp"
-#include "LoggerController.hpp"
 #include <Logging/AbstractLogger.hpp>
 
 // Forward declarations
 class wxRichTextCtrl;
+class LoggerController;
 
 class LoggerWindow : public AbstractWindow
 {
@@ -20,7 +20,7 @@ private:
 	LoggerController* controller;
 	wxRichTextCtrl* textBox;
 public:
-	LoggerWindow(LoggerController* controller_);
+	LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
 	void addLogMessage(std::string message);
 };
 

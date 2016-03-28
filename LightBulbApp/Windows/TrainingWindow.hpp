@@ -8,13 +8,15 @@
 
 // Includes
 #include "Windows/AbstractWindow.hpp"
-#include "TrainingController.hpp"
 
 // Forward declarations
 class wxRichTextCtrl;
 class wxDataViewEvent;
 class wxDataViewListCtrl;
 class wxDataViewItem;
+class TrainingController;
+class AbstractTrainingPlan;
+class AbstractNeuralNetwork;
 
 class TrainingWindow : public AbstractWindow
 {
@@ -34,6 +36,7 @@ private:
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
 	wxMenu* windowsMenu;
+	std::map<int, AbstractWindow*> subWindows;
 	void validateSelectedProcess();
 	void* currentDetailObject;
 	void createMenuBar();
@@ -51,6 +54,7 @@ private:
 	void startTraining(wxCommandEvent& event);
 	void pauseTraining(wxCommandEvent& event);
 	void processSelecionHasChanged(wxCommandEvent& event);
+	void toggleSubWindow(wxCommandEvent& event);
 protected:
 	DECLARE_EVENT_TABLE();
 public:

@@ -93,6 +93,11 @@ void TrainingController::show()
 	window->Show();
 }
 
+TrainingWindow* TrainingController::getWindow()
+{
+	return window.get();
+}
+
 int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
 {
 	for (int i = 0; i < neuralNetworks.size(); i++)
@@ -103,3 +108,7 @@ int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
 	return -1;
 }
 
+void TrainingController::addSubWindow(AbstractWindow* newSubWindow)
+{
+	window->addSubWindow(newSubWindow);
+}

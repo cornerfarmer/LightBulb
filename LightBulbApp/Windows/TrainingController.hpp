@@ -10,9 +10,10 @@
 // Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <Logging/AbstractLogger.hpp>
+#include "LoggerController.hpp"
+#include "TrainingWindow.hpp"
 
 // Forward declarations
-class TrainingWindow;
 
 class TrainingController
 {
@@ -36,6 +37,8 @@ public:
 	void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	void setLogger(AbstractLogger* newLogger);
 	void show();
+	TrainingWindow* getWindow();
+	void addSubWindow(AbstractWindow* newSubWindow);
 };
 
 #endif

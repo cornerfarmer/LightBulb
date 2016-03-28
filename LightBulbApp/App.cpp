@@ -4,13 +4,12 @@
 
 bool App::OnInit()
 {
-	TrainingController* window = new TrainingController();
-	LoggerController* loggerWindow = new LoggerController();
+	TrainingController* trainingController = new TrainingController();
+	LoggerController* loggerController = new LoggerController(trainingController->getWindow());
 
-	//window->addSubWindow(loggerWindow);
-	window->setLogger(loggerWindow);
+	trainingController->addSubWindow(loggerController->getWindow());
+	trainingController->setLogger(loggerController);
 
-	loggerWindow->show();
-	window->show();
+	trainingController->show();
 	return true;
 }

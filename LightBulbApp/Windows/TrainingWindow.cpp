@@ -6,6 +6,7 @@
 #include <wx/statline.h>
 #include <wx/richtext/richtextctrl.h>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
+#include "TrainingController.hpp"
 
 enum
 {
@@ -170,9 +171,10 @@ void TrainingWindow::refreshAllData()
 
 void TrainingWindow::addSubWindow(AbstractWindow* newSubWindow)
 {
-	wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubWindow->GetLabel());
+	wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubWindow->GetLabel(), wxEmptyString, wxITEM_CHECK);
 	windowsMenu->Append(newItem);
-	newSubWindow->SetParent(this);
+	subWindows[newItem->GetId()] = newSubWindow;
+	windowsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::toggleSubWindow), this);
 }
 
 wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
@@ -403,4 +405,9 @@ void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
 {
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
 	validateSelectedProcess();
+}
+
+void TrainingWindow::toggleSubWindow(wxCommandEvent& event)
+{
+	subWindows[event.GetId()]->Show(!subWindows[event.GetId()]->IsShownOnScreen());
 }

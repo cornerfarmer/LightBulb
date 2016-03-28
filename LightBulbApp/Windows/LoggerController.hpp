@@ -10,10 +10,10 @@
 // Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <Logging/AbstractLogger.hpp>
+#include "LoggerWindow.hpp"
 
 // Forward declarations
 class TrainingWindow;
-class LoggerWindow;
 
 class LoggerController : public AbstractLogger
 {
@@ -22,8 +22,9 @@ private:
 protected:
 	void outputMessage(std::string message);
 public:
-	LoggerController();
+	LoggerController(AbstractWindow* parent = NULL);
 	void show();
+	LoggerWindow* getWindow();
 };
 
 #endif
