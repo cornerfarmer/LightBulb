@@ -591,6 +591,8 @@
     <ClCompile Include="Event\Observer.cpp" />
     <ClCompile Include="Event\Observable.cpp" />
     <ClCompile Include="Event\AbstractObserver.cpp" />
+    <ClCompile Include="Logging\AbstractLogger.cpp" />
+    <ClCompile Include="Logging\ConsoleLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1128,5 +1130,7 @@
     <ClInclude Include="Event\Observer.hpp" />
     <ClInclude Include="Event\Observable.hpp" />
     <ClInclude Include="Event\AbstractObserver.hpp" />
+    <ClInclude Include="Logging\AbstractLogger.hpp" />
+    <ClInclude Include="Logging\ConsoleLogger.hpp" />
   </ItemGroup>
 </Project>

@@ -59,14 +59,14 @@ Eigen::MatrixXd ResilientLearningRateHelper::getLearningRate(int layerIndex, Eig
 	return previousLearningRates[layerIndex - 1];
 }
 
-void ResilientLearningRateHelper::printDebugOutput()
+std::string ResilientLearningRateHelper::printDebugOutput()
 {
 	// Calculate the absolute sum of all learningRates
 	double totalLearningRate = 0;
 	for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 		totalLearningRate += previousLearningRate->cwiseAbs().sum(); 
 	// Print the totalLearningRate
-	std::cout << "totalLR :" << std::fixed << std::setprecision(10) << totalLearningRate << " ";
+	return "totalLR :" + std::to_string(totalLearningRate) + " ";
 }
 
 bool ResilientLearningRateHelper::learningHasStopped()

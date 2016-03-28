@@ -99,8 +99,10 @@ bool DeltaLearningRule::learningHasStopped()
 		return false;
 }
 
-void DeltaLearningRule::printDebugOutput()
+std::string DeltaLearningRule::printDebugOutput()
 {
 	if (getOptions()->resilientLearningRate)
-		resilientLearningRateHelper->printDebugOutput();
+		return resilientLearningRateHelper->printDebugOutput();
+	else
+		return "";
 }

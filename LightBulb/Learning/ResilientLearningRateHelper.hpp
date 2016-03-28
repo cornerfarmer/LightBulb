@@ -54,7 +54,7 @@ public:
 	// Computes the new learning rate of the given edge from the given gradient
 	Eigen::MatrixXd getLearningRate(int layerIndex, Eigen::MatrixXd& gradients);
 	// Print a short debug output (totalLearningRate)
-	void printDebugOutput();
+	std::string printDebugOutput();
 	// Returns if the learning has stopped
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper

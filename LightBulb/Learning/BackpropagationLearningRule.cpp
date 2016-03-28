@@ -125,10 +125,12 @@ void BackpropagationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd 
 	currentNetworkTopology->setAfferentWeightsPerLayer(layerIndex, newWeights);
 }
 
-void BackpropagationLearningRule::printDebugOutput()
+std::string BackpropagationLearningRule::printDebugOutput()
 {
 	if (getOptions()->resilientLearningRate)
-		resilientLearningRateHelper->printDebugOutput();
+		return resilientLearningRateHelper->printDebugOutput();
+	else
+		return "";
 }
 
 bool BackpropagationLearningRule::learningHasStopped()

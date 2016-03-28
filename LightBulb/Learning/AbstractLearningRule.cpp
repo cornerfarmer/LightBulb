@@ -20,6 +20,8 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 
 	if (options->maxTotalErrorValue <= options->totalErrorGoal)
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
+	if (!options->logger)
+		throw std::invalid_argument("The given logger is invalid.");
 }
 
 bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
@@ -58,8 +60,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 		initializeTry(initializedNeuralNetwork, initializedTeacher);
 		
 		// If debug is enabled, print every n-th iteration a short debug info
-		if (options->enableDebugOutput)
-			std::cout << "--------------" << std::endl << "Start Try: " << tryCounter << std::endl;
+		log("--------------\nStart Try: " + std::to_string(tryCounter), LL_HIGH);
 
 		
 		// Do while the totalError is not zero
@@ -69,8 +70,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 			if (iteration > 1 && learningHasStopped())
 			{	
 				// If debug is enabled, print a short debug info
-				if (options->enableDebugOutput)
-					std::cout << "Skip that try (learning has stopped with totalError: " << std::fixed << std::setprecision(8) << totalError << ")" << std::endl;		
+				log("Skip that try (learning has stopped with totalError: " + std::to_string(totalError) + ")", LL_MEDIUM);
 				break;
 			}
 
@@ -78,17 +78,14 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 			if (iteration > options->minIterationsPerTry && totalError > options->maxTotalErrorValue)
 			{
 				// If debug is enabled, print a short debug info
-				if (options->enableDebugOutput)
-					std::cout << "Skip that try (totalError: " << std::fixed << std::setprecision(8) << totalError << " > " << std::fixed << std::setprecision(8) << options->maxTotalErrorValue << ")" << std::endl;
+				log("Skip that try (totalError: " + std::to_string(totalError) +  " > " + std::to_string(options->maxTotalErrorValue) + ")", LL_MEDIUM);
 				break;
 			}
 
 			// If debug is enabled, print every n-th iteration a short debug info
-			if (options->enableDebugOutput && iteration % options->debugOutputInterval == 0)
+			if (iteration % options->debugOutputInterval == 0)
 			{
-				std::cout << "TotalError: " << std::fixed << std::setprecision(8) << totalError << " Iteration: " << iteration << " " ;
-				printDebugOutput();
-				std::cout << std::endl;
+				log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(iteration) + " " + printDebugOutput() + "\n", LL_LOW);
 			}
 
 			// If offlineLearning is activated, reset the offlineLearningGradients
@@ -179,14 +176,11 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 		}
 	} while ((totalError > options->totalErrorGoal || abs(totalError) == std::numeric_limits<double>::infinity()) && ++tryCounter < options->maxTries);
 	
-	// Print, If goal has reached 
-	if (options->enableDebugOutput)
-	{
-		if (totalError <= options->totalErrorGoal)
-			std::cout << "Try (No. " << tryCounter << ", " << iteration << " iterations needed) was successful " << "(totalError: " << std::fixed << std::setprecision(8) << totalError << " < " << std::fixed << std::setprecision(8) << options->totalErrorGoal << ")" << std::endl;
-		else
-			std::cout << "All tries failed => stop learning" << std::endl;
-	}
+
+	if (totalError <= options->totalErrorGoal)
+		log("Try (No. " + std::to_string(tryCounter) + ", " + std::to_string(iteration) + " iterations needed) was successful (totalError: " + std::to_string(totalError) + " < " + std::to_string(options->totalErrorGoal) + ")\n", LL_HIGH);
+	else
+		log("All tries failed => stop learning", LL_HIGH);
 	
 	doCalculationAfterLearningProcess(initializedNeuralNetwork, initializedTeacher);
 
@@ -205,4 +199,10 @@ bool AbstractLearningRule::configureNextErroMapCalculation(int* nextStartTime, i
 		*nextTimeStepCount = -1;
 		return true;
 	}
+}
+
+void AbstractLearningRule::log(std::string message, LogLevel level)
+{
+	if (options->logger)
+		options->logger->log(message, level);
 }

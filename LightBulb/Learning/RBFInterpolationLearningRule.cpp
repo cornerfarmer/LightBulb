@@ -31,10 +31,6 @@ void RBFInterpolationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd
 	}
 }
 
-void RBFInterpolationLearningRule::printDebugOutput()
-{
-}
-
 bool RBFInterpolationLearningRule::learningHasStopped()
 {
 	return false;

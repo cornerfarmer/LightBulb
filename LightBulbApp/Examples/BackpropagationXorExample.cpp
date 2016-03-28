@@ -10,12 +10,13 @@
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <Graphics/NeuralNetworkResultChart.hpp>
+#include <Logging/ConsoleLogger.hpp>
 
 
 void BackpropagationXorExample::run()
 {
 	BackpropagationLearningRuleOptions options;
-	options.enableDebugOutput = true;
+	options.logger = new ConsoleLogger(LL_LOW);
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;

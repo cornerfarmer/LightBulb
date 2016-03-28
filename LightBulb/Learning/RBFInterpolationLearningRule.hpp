@@ -54,7 +54,6 @@ protected:
 	RBFInterpolationLearningRuleOptions* getOptions();
 	// Inherited:
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
-	void printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork);

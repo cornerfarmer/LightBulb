@@ -534,6 +534,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Lib\ziggurat.cpp" />
+    <ClCompile Include="Logging\AbstractLogger.cpp" />
+    <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
     <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp">
@@ -1128,6 +1130,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp" />
+    <ClInclude Include="Logging\AbstractLogger.hpp" />
+    <ClInclude Include="Logging\ConsoleLogger.hpp" />
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
     <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp">

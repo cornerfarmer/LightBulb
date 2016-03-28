@@ -53,7 +53,7 @@ private:
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
 	bool learningHasStopped();	
-	void printDebugOutput();
+	std::string printDebugOutput();
 public:
 	DeltaLearningRule(DeltaLearningRuleOptions &options_);
 };

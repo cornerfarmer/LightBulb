@@ -63,7 +63,7 @@ protected:
 	// Calculate the delta weight value of the given edge
 	Eigen::MatrixXd calculateDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients);
 	// Inherited:
-	void printDebugOutput();
+	std::string printDebugOutput();
 	bool learningHasStopped();
 	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
 	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);

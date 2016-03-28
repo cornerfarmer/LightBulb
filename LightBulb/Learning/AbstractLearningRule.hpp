@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <Logging/AbstractLogger.hpp>
 
 // Forward declarations
 class AbstractNeuralNetwork;
@@ -20,7 +21,6 @@ class AbstractNeuron;
 class StandardNeuron;
 class AbstractTeachingLesson;
 class AbstractNetworkTopology;
-
 
 typedef std::vector<Eigen::VectorXd> ErrorMap_t;
 
@@ -41,7 +41,7 @@ struct AbstractLearningRuleOptions
 	// Sets the maximum total error value (If a try has after its miniums iterations a greater total error value than the maxTotalErrorValue, skip that try)
 	double maxTotalErrorValue;
 	// Enable debug output
-	bool enableDebugOutput;
+	AbstractLogger* logger;
 	// Sets the debug output interval
 	unsigned int debugOutputInterval;
 	// Enable offline learning
@@ -57,7 +57,7 @@ struct AbstractLearningRuleOptions
 		maxRandomWeightValue = 0.5f;
 		minIterationsPerTry = 1000;
 		maxTotalErrorValue = 2;
-		enableDebugOutput = false;
+		logger = NULL;
 		debugOutputInterval = 1000;	
 		offlineLearning = false;
 		changeWeightsBeforeLearning = true;
@@ -95,7 +95,7 @@ protected:
 	// This method should return the used activationOrder
 	virtual AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork) = 0;
 	// Prints a current summary of the status of the learning process
-	virtual void printDebugOutput() {};
+	virtual std::string printDebugOutput() { return ""; };
 	// This method should do something like randomizing all weight
 	virtual void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher) = 0;
 	// This method can be used to do some work before every iteration
@@ -118,6 +118,8 @@ protected:
 	virtual std::vector<std::map<AbstractNeuron*, double>>* getNetInputValuesInTime() { return NULL; };
 	// This method should determine the start time and time step count of the next calculation
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
+
+	void log(std::string message, LogLevel level);
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given AbstractNeuralNetwork

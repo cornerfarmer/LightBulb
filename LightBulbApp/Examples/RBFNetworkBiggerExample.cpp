@@ -37,7 +37,6 @@ void doRBFNetworkBiggerExample()
 	}
 
 	RBFInterpolationLearningRuleOptions learningRuleOptions;
-	learningRuleOptions.enableDebugOutput = true;
 	learningRuleOptions.offlineLearning = true;
 	learningRuleOptions.totalErrorGoal = 2;
 	learningRuleOptions.maxTotalErrorValue = 5;
@@ -54,7 +53,6 @@ void doRBFNetworkBiggerExample()
 	delteLearningRuleOptions.maxTries = 1;
 	delteLearningRuleOptions.totalErrorGoal = 2;
 	delteLearningRuleOptions.maxTotalErrorValue = 5;
-	delteLearningRuleOptions.enableDebugOutput = true;
 	delteLearningRuleOptions.changeWeightsBeforeLearning = false;
 	delteLearningRuleOptions.resilientLearningRate = true;
 	DeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
