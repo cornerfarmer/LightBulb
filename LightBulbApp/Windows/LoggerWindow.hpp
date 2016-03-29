@@ -19,9 +19,11 @@ class LoggerWindow : public AbstractWindow
 private:
 	LoggerController* controller;
 	wxRichTextCtrl* textBox;
+	void logLevelChanged(wxCommandEvent& event);
 public:
 	LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
 	void addLogMessage(std::string message);
+	void clearLog();
 };
 
 #endif

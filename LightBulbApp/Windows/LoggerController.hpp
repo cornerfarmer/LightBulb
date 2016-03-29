@@ -19,12 +19,14 @@ class LoggerController : public AbstractLogger
 {
 private:
 	std::unique_ptr<LoggerWindow> window;
-protected:
-	void outputMessage(std::string message);
+	std::vector<std::pair<LogLevel, std::string>> messages;
+	void reloadLog();
 public:
 	LoggerController(AbstractWindow* parent = NULL);
 	void show();
 	LoggerWindow* getWindow();
+	void setLogLevel(int level);
+	void log(std::string message, LogLevel level);
 };
 
 #endif

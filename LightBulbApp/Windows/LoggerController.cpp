@@ -13,12 +13,32 @@ void LoggerController::show()
 	window->Show();
 }
 
-void LoggerController::outputMessage(std::string message)
-{
-	window->addLogMessage(message);
-}
-
 LoggerWindow* LoggerController::getWindow()
 {
 	return window.get();
 }
+
+void LoggerController::setLogLevel(int level)
+{
+	currentLogLevel = (LogLevel)level;
+	reloadLog();
+}
+
+void LoggerController::log(std::string message, LogLevel level)
+{
+	if (level <= currentLogLevel)
+		window->addLogMessage(message);
+	messages.push_back(std::pair<LogLevel, std::string>(level, message));
+}
+
+
+void LoggerController::reloadLog()
+{
+	window->clearLog();
+	for (auto message = messages.begin(); message != messages.end(); message++)
+	{
+		if (message->first <= currentLogLevel)
+			window->addLogMessage(message->second);
+	}
+}
+

@@ -22,7 +22,7 @@ class AbstractLogger
 private:
 protected:
 	LogLevel currentLogLevel;
-	virtual void outputMessage(std::string message) = 0;
+	virtual void outputMessage(std::string message) {};
 public:
 	virtual ~AbstractLogger() {};
 	AbstractLogger(LogLevel currentLogLevel_);

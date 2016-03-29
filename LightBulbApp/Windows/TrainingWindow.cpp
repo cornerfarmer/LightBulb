@@ -195,6 +195,7 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	trainingPlanPatternsChoice = new wxChoice(panel, wxID_ANY);
 	trainingPlanPatternsChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&TrainingWindow::processSelecionHasChanged), this);
 	processSizer->Add(trainingPlanPatternsChoice);
+	processSizer->SetSizeHints(panel);
 
 	commandSizer->Add(processSizer, 0, wxEXPAND | wxALL, 20);
 	commandSizer->AddStretchSpacer(1);
@@ -217,8 +218,10 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	wxSizer* detailsSizer = new wxBoxSizer(wxVERTICAL);
 	detailsSizer->Add(new wxStaticText(panel, -1, "Details"), 0, wxBOTTOM, 10);
 	detailsTextBox = new wxRichTextCtrl(panel, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+	detailsTextBox->SetMinSize(wxSize(300, 50));
 	detailsSizer->Add(detailsTextBox, 1, wxEXPAND);
 	sizer->Add(detailsSizer, 1, wxEXPAND | wxALL, 10);
+	detailsSizer->SetSizeHints(panel);
 
 	panel->SetSizer(sizer);
 	sizer->SetSizeHints(panel);
