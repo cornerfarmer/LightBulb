@@ -141,11 +141,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp" />
+    <ClCompile Include="Repositories\NeuralNetworkRepository.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\ExampleTrainingPlan.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
     <ClCompile Include="Windows\LoggerController.cpp" />
     <ClCompile Include="Windows\LoggerWindow.cpp" />
+    <ClCompile Include="Windows\SimulatorController.cpp" />
+    <ClCompile Include="Windows\SimulatorWindow.cpp" />
     <ClCompile Include="Windows\TrainingController.cpp" />
     <ClCompile Include="Windows\TrainingWindow.cpp" />
   </ItemGroup>
@@ -164,11 +167,14 @@
     <ClInclude Include="Examples\TeachedEvolutionExample.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
+    <ClInclude Include="Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\ExampleTrainingPlan.hpp" />
     <ClInclude Include="Windows\AbstractWindow.hpp" />
     <ClInclude Include="Windows\LoggerController.hpp" />
     <ClInclude Include="Windows\LoggerWindow.hpp" />
+    <ClInclude Include="Windows\SimulatorController.hpp" />
+    <ClInclude Include="Windows\SimulatorWindow.hpp" />
     <ClInclude Include="Windows\TrainingController.hpp" />
     <ClInclude Include="Windows\TrainingWindow.hpp" />
   </ItemGroup>

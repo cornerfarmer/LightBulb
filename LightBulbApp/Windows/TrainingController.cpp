@@ -6,9 +6,11 @@
 #include "Examples/BackpropagationXorExample.hpp"
 #include "TrainingWindow.hpp"
 #include <Examples/BackpropagationXorExample.hpp>
+#include <Repositories/NeuralNetworkRepository.hpp>
 
-TrainingController::TrainingController()
+TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_)
 {
+	neuralNetworkRepository = neuralNetworkRepository_;
 	window.reset(new TrainingWindow(this));;
 	logger = NULL;
 
@@ -19,7 +21,7 @@ TrainingController::TrainingController()
 
 std::vector<AbstractNeuralNetwork*>* TrainingController::getNeuralNetworks()
 {
-	return &neuralNetworks;
+	return neuralNetworkRepository->getNeuralNetworks();
 }
 
 std::vector<AbstractTrainingPlan*>* TrainingController::getTrainingPlanPatterns()
@@ -38,15 +40,15 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	trainingPlans.back()->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
 	trainingPlans.back()->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
 	trainingPlans.back()->setLogger(logger);
-	if (neuralNetworks.size() <= neuralNetworkIndex) 
+	if (getNeuralNetworks()->size() <= neuralNetworkIndex) 
 	{
 		trainingPlans.back()->start();
-		neuralNetworks.push_back(trainingPlans.back()->getNeuralNetwork());
+		neuralNetworkRepository->Add(trainingPlans.back()->getNeuralNetwork());
 		window->refreshNeuralNetworks();
 	} 
 	else
 	{
-		trainingPlans.back()->start(neuralNetworks[neuralNetworkIndex]);
+		trainingPlans.back()->start((*getNeuralNetworks())[neuralNetworkIndex]);
 	}
 	window->refreshTrainingPlans();
 }
@@ -100,12 +102,7 @@ TrainingWindow* TrainingController::getWindow()
 
 int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
 {
-	for (int i = 0; i < neuralNetworks.size(); i++)
-	{
-		if (neuralNetworks[i] == network)
-			return i;
-	}
-	return -1;
+	return neuralNetworkRepository->getIndexOfNeuralNetwork(network);
 }
 
 void TrainingController::addSubWindow(AbstractWindow* newSubWindow)

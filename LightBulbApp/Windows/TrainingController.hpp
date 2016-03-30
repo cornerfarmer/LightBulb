@@ -14,17 +14,18 @@
 #include "TrainingWindow.hpp"
 
 // Forward declarations
+class NeuralNetworkRepository;
 
 class TrainingController
 {
 private:
-	std::vector<AbstractNeuralNetwork*> neuralNetworks;
 	std::vector<AbstractTrainingPlan*> trainingPlanPatterns;
 	std::vector<AbstractTrainingPlan*> trainingPlans;
 	std::unique_ptr<TrainingWindow> window;
 	AbstractLogger* logger;
+	NeuralNetworkRepository* neuralNetworkRepository;
 public:
-	TrainingController();
+	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_);
 	std::vector<AbstractNeuralNetwork*>* getNeuralNetworks();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlans();

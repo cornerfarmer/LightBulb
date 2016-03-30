@@ -75,6 +75,15 @@
     <ClCompile Include="Windows\LoggerController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\SimulatorWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\SimulatorController.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Repositories\NeuralNetworkRepository.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -123,6 +132,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\LoggerWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\SimulatorWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\SimulatorController.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Repositories\NeuralNetworkRepository.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
