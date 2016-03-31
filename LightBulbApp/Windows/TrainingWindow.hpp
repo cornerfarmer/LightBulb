@@ -31,6 +31,8 @@ private:
 	wxChoice* neuralNetworksChoice;
 	wxChoice* trainingPlanPatternsChoice;
 	AbstractTrainingPlan* processTrainingPlanSelection;
+	void neuralNetworkPopUpMenuSelected(wxCommandEvent& event);
+	void neuralNetworkListRightClick(wxDataViewEvent& event);
 	wxPanel* createNNColumn(wxWindow* parent);
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);

@@ -109,3 +109,8 @@ void TrainingController::addSubWindow(AbstractWindow* newSubWindow)
 {
 	window->addSubWindow(newSubWindow);
 }
+
+void TrainingController::saveNeuralNetwork(std::string path, int neuralNetworkIndex)
+{
+	neuralNetworkRepository->save(path, neuralNetworkIndex);
+}

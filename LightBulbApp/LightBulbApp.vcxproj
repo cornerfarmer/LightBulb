@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -97,7 +97,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

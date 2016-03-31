@@ -40,6 +40,7 @@ public:
 	void show();
 	TrainingWindow* getWindow();
 	void addSubWindow(AbstractWindow* newSubWindow);
+	void saveNeuralNetwork(std::string path, int neuralNetworkIndex);
 };
 
 #endif

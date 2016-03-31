@@ -26,6 +26,7 @@ public:
 	std::vector<AbstractNeuralNetwork*>* getNeuralNetworks();
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	void Add(AbstractNeuralNetwork* neuralNetwork);
+	void save(std::string path, int neuralNetworkIndex);
 };
 
 #endif

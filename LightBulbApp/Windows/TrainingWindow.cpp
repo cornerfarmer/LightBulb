@@ -14,6 +14,11 @@ enum
 	TOOLBAR_PAUSE_TRAINING
 };
 
+enum
+{
+	NETWORK_POPUP_SAVE
+};
+
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
 END_EVENT_TABLE()
 
@@ -46,6 +51,29 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	refreshAllData();
 }
 
+void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
+{
+	if (event.GetId() == NETWORK_POPUP_SAVE)
+	{
+		wxFileDialog saveFileDialog(this, "Save neural network", "", "", "Neural network files (*.nn)|*.nn", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+		if (saveFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+		
+		controller->saveNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow());
+	}
+}
+
+void TrainingWindow::neuralNetworkListRightClick(wxDataViewEvent& event)
+{
+	if (event.GetItem())
+	{
+		wxMenu* popUpMenu = new wxMenu;
+		popUpMenu->Append(new wxMenuItem(popUpMenu, NETWORK_POPUP_SAVE, "Save network"));
+		popUpMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::neuralNetworkPopUpMenuSelected), this);
+		neuralNetworkList->PopupMenu(popUpMenu);
+	}
+}
 
 wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 {
@@ -59,10 +87,12 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 	neuralNetworkList->AppendTextColumn("Size")->SetMinWidth(50);
 	neuralNetworkList->AppendTextColumn("Creation date")->SetMinWidth(50);
 	neuralNetworkList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectNeuralNetwork), this);
+	neuralNetworkList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&TrainingWindow::neuralNetworkListRightClick), this);
 	neuralNetworkList->SetMinSize(wxSize(100, 100));
 
 	sizer->Add(neuralNetworkList, 1, wxEXPAND, 0);
 	panel->SetSizer(sizer);
+
 	return panel;
 }
 

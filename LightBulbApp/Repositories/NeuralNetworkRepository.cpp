@@ -1,5 +1,7 @@
 // Includes
 #include "NeuralNetworkRepository.hpp"
+#include <fstream>
+#include <cereal/archives/xml.hpp>
 
 NeuralNetworkRepository::NeuralNetworkRepository()
 {
@@ -25,4 +27,13 @@ void NeuralNetworkRepository::Add(AbstractNeuralNetwork* neuralNetwork)
 {
 	neuralNetworks.push_back(neuralNetwork);
 	throwEvent(EVT_NN_CHANGED, this);
+}
+
+void NeuralNetworkRepository::save(std::string path, int neuralNetworkIndex)
+{
+	std::ofstream os(path);
+	cereal::XMLOutputArchive archive(os);
+
+	archive(*neuralNetworks[neuralNetworkIndex]);
+	
 }
