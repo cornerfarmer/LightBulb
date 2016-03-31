@@ -16,7 +16,7 @@ SimulatorWindow* SimulatorController::getWindow()
 	return window.get();
 }
 
-std::vector<AbstractNeuralNetwork*>* SimulatorController::getNeuralNetworks()
+std::vector<std::unique_ptr<AbstractNeuralNetwork>>* SimulatorController::getNeuralNetworks()
 {
 	return neuralNetworkRepository->getNeuralNetworks();
 }
@@ -28,7 +28,7 @@ void SimulatorController::neuralNetworksChanged(NeuralNetworkRepository* neuralN
 
 std::vector<double> SimulatorController::calculate(int neuralNetworkIndex, std::vector<double> input)
 {
-	AbstractNeuralNetwork* network = (*neuralNetworkRepository->getNeuralNetworks())[neuralNetworkIndex];
+	AbstractNeuralNetwork* network = (*neuralNetworkRepository->getNeuralNetworks())[neuralNetworkIndex].get();
 	std::vector<double> output(network->getNetworkTopology()->getOutputSize());
 	TopologicalOrder activationOrder;
 	network->calculate(input, output, activationOrder);

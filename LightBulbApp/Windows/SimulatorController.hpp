@@ -24,7 +24,7 @@ private:
 public:
 	SimulatorController(NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
 	SimulatorWindow* getWindow();
-	std::vector<AbstractNeuralNetwork*>* getNeuralNetworks();
+	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 	std::vector<double> calculate(int neuralNetworkIndex, std::vector<double> input);
 };

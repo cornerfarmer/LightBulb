@@ -593,6 +593,7 @@
     <ClCompile Include="Event\AbstractObserver.cpp" />
     <ClCompile Include="Logging\AbstractLogger.cpp" />
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
+    <ClCompile Include="IO\NeuralNetworkIO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1132,5 +1133,6 @@
     <ClInclude Include="Event\AbstractObserver.hpp" />
     <ClInclude Include="Logging\AbstractLogger.hpp" />
     <ClInclude Include="Logging\ConsoleLogger.hpp" />
+    <ClInclude Include="IO\LayeredNetworkIO.cpp" />
   </ItemGroup>
 </Project>

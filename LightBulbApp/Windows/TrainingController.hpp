@@ -26,7 +26,7 @@ private:
 	NeuralNetworkRepository* neuralNetworkRepository;
 public:
 	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_);
-	std::vector<AbstractNeuralNetwork*>* getNeuralNetworks();
+	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlans();
 	void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);

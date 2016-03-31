@@ -27,13 +27,6 @@ public:
 	virtual AbstractNetworkTopology* getNetworkTopology() = 0;
 	virtual std::string getName() = 0;
 	virtual std::time_t getCreationDate() = 0;
-	template<class Archive>
-	void serialize(Archive & archive);
 };
 
-template <class Archive>
-void AbstractNeuralNetwork::serialize(Archive& archive)
-{
-	archive(0);
-}
 #endif

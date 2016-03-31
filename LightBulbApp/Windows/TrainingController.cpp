@@ -19,7 +19,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	window->refreshAllData();
 }
 
-std::vector<AbstractNeuralNetwork*>* TrainingController::getNeuralNetworks()
+std::vector<std::unique_ptr<AbstractNeuralNetwork>>* TrainingController::getNeuralNetworks()
 {
 	return neuralNetworkRepository->getNeuralNetworks();
 }
@@ -48,7 +48,7 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	} 
 	else
 	{
-		trainingPlans.back()->start((*getNeuralNetworks())[neuralNetworkIndex]);
+		trainingPlans.back()->start((*getNeuralNetworks())[neuralNetworkIndex].get());
 	}
 	window->refreshTrainingPlans();
 }

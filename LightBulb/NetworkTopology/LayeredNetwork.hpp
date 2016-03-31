@@ -160,5 +160,4 @@ public:
 
 	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex);
 };
-
 #endif

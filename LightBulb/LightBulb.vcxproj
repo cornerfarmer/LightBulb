@@ -235,6 +235,7 @@
     <ClCompile Include="IO\JSONNumberElement.cpp" />
     <ClCompile Include="IO\JSONObject.cpp" />
     <ClCompile Include="IO\JSONStringElement.cpp" />
+    <ClCompile Include="IO\NeuralNetworkIO.cpp" />
     <ClCompile Include="IO\SynapticExporter.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -826,6 +827,9 @@
     <ClInclude Include="IO\JSONNumberElement.hpp" />
     <ClInclude Include="IO\JSONObject.hpp" />
     <ClInclude Include="IO\JSONStringElement.hpp" />
+    <ClCompile Include="IO\LayeredNetworkIO.cpp">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
     <ClInclude Include="IO\SynapticExporter.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

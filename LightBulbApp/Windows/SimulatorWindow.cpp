@@ -33,7 +33,7 @@ SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindo
 
 void SimulatorWindow::networkChanged(wxCommandEvent& event)
 {
-	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[event.GetSelection()];
+	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[event.GetSelection()].get();
 	inputSizer->Clear(true);
 	inputCheckBoxes.clear();
 	inputSizer->AddStretchSpacer(1);

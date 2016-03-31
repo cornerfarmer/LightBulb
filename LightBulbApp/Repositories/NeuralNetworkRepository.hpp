@@ -7,6 +7,7 @@
 #include <vector>
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <Event/Observable.hpp>
+#include <memory>
 
 // Includes
 
@@ -20,10 +21,10 @@ enum NeuralNetworkRepositoryEvents
 class NeuralNetworkRepository : public Observable<NeuralNetworkRepositoryEvents, NeuralNetworkRepository>
 {
 private:
-	std::vector<AbstractNeuralNetwork*> neuralNetworks;
+	std::vector<std::unique_ptr<AbstractNeuralNetwork>> neuralNetworks;
 public:
 	NeuralNetworkRepository();
-	std::vector<AbstractNeuralNetwork*>* getNeuralNetworks();
+	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	void Add(AbstractNeuralNetwork* neuralNetwork);
 	void save(std::string path, int neuralNetworkIndex);

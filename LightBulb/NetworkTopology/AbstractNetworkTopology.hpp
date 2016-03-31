@@ -91,4 +91,7 @@ public:
 	virtual std::vector<Eigen::MatrixXd>* getWeights() = 0;
 };
 
+
+
+
 #endif

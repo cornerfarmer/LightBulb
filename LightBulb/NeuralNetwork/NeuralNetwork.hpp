@@ -10,15 +10,19 @@
 
 // Includes
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include <cereal/access.hpp>
 
 // Forward declarations
-class AbstractNetworkTopology;
 class AbstractActivationOrder;
 class AbstractNeuron;
+class Archive;
 
 // This class contains all stuff needed to describe a NeuralNetwork
 class NeuralNetwork : public AbstractNeuralNetwork
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, NeuralNetwork& neuralNetwork);
 private:
 	std::unique_ptr<AbstractNetworkTopology> networkTopology;
 public:

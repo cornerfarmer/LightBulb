@@ -110,8 +110,8 @@ void TrainingWindow::refreshNeuralNetworks()
 		data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
 		neuralNetworkList->AppendItem(data);
 		neuralNetworksChoice->Append((*network)->getName());
-		if (currentDetailObject == *network)
-			showDetailsOfNeuralNetwork(*network);
+		if (currentDetailObject == network->get())
+			showDetailsOfNeuralNetwork(network->get());
 	}
 	neuralNetworksChoice->Append("<Create new>");
 	neuralNetworksChoice->SetSelection(controller->getNeuralNetworks()->size());
@@ -303,7 +303,7 @@ void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 	int row = getRowIndexOfItem(neuralNetworkList, event.GetItem());
 	if (row != -1)
 	{
-		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row]);
+		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row].get());
 		restoreDefaultProcessView();
 		neuralNetworksChoice->Select(row);
 		validateSelectedProcess();
