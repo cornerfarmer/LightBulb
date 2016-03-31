@@ -39,3 +39,14 @@ void NeuralNetworkRepository::save(std::string path, int neuralNetworkIndex)
 
 	archive(neuralNetworks[neuralNetworkIndex]);
 }
+
+void NeuralNetworkRepository::load(std::string path)
+{
+	std::ifstream is(path);
+	cereal::XMLInputArchive archive(is);
+
+	neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>());
+	archive(neuralNetworks.back());
+
+	throwEvent(EVT_NN_CHANGED, this);
+}

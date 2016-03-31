@@ -30,6 +30,7 @@ public:
 	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlans();
 	void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
+	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 	void pauseTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	int getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern);
@@ -41,6 +42,7 @@ public:
 	TrainingWindow* getWindow();
 	void addSubWindow(AbstractWindow* newSubWindow);
 	void saveNeuralNetwork(std::string path, int neuralNetworkIndex);
+	void loadNeuralNetwork(std::string path);
 };
 
 #endif

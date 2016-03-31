@@ -39,7 +39,9 @@ struct LayeredNetworkOptions
 class LayeredNetwork : public AbstractNetworkTopology
 {
 	template <class Archive>
-	friend void serialize(Archive& archive, LayeredNetwork& layeredNetwork);
+	friend void load(Archive& archive, LayeredNetwork& layeredNetwork);
+	template <class Archive>
+	friend void save(Archive& archive, LayeredNetwork const & layeredNetwork);
 protected:
 	std::unique_ptr<LayeredNetworkOptions> options;
 	//

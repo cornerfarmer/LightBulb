@@ -12,7 +12,7 @@
 namespace cereal
 {
 	template <class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
-	void serialize(Archive& archive, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& matrix)
+	void save(Archive& archive, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> const & matrix)
 	{
 		std::vector<std::vector<double>> vector(matrix.rows(), std::vector<double>(matrix.cols()));
 		for (int i = 0; i < matrix.rows(); i++)
@@ -24,18 +24,21 @@ namespace cereal
 		}
 		archive(vector);
 	}
-}
 
-namespace cereal
-{
-	template <> struct LoadAndConstruct<Eigen::VectorXd>
+	template <class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
+	void load(Archive& archive, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& matrix)
 	{
-		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<Eigen::VectorXd> & construct)
+		std::vector<std::vector<double>> vector;
+		archive(vector);
+		matrix.resize(vector.size(), vector[0].size());
+		for (int i = 0; i < matrix.rows(); i++)
 		{
-			construct();
+			for (int j = 0; j < matrix.cols(); j++)
+			{
+				matrix(i, j) = vector[i][j];
+			}
 		}
-	};
+	}
 }
 
 #endif

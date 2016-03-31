@@ -15,7 +15,7 @@
 
 
 template <class Archive>
-void serialize(Archive& archive, LayeredNetworkOptions& options)
+void save(Archive& archive, LayeredNetworkOptions const & options)
 {
 	archive(CEREAL_NVP(options.enableShortcuts));
 	archive(CEREAL_NVP(options.neuronsPerLayerCount));
@@ -25,9 +25,21 @@ void serialize(Archive& archive, LayeredNetworkOptions& options)
 	archive(cereal::make_nvp("descriptionFactory", descriptionFactory));
 }
 
+template <class Archive>
+void load(Archive& archive, LayeredNetworkOptions& options)
+{
+	archive(CEREAL_NVP(options.enableShortcuts));
+	archive(CEREAL_NVP(options.neuronsPerLayerCount));
+	archive(CEREAL_NVP(options.outputNeuronsIndices));
+	archive(CEREAL_NVP(options.useBiasNeuron));
+	std::unique_ptr<AbstractNeuronDescriptionFactory> descriptionFactory;
+	archive(CEREAL_NVP(descriptionFactory));
+	options.descriptionFactory = descriptionFactory.release();
+}
+
 
 template <class Archive>
-void serialize(Archive& archive, LayeredNetwork& layeredNetwork)
+void save(Archive& archive, LayeredNetwork const & layeredNetwork)
 {
 	archive(CEREAL_NVP(layeredNetwork.options));
 	archive(CEREAL_NVP(layeredNetwork.netInputs));
@@ -35,18 +47,18 @@ void serialize(Archive& archive, LayeredNetwork& layeredNetwork)
 	archive(CEREAL_NVP(layeredNetwork.weights));
 }
 
-namespace cereal
+
+template <class Archive>
+void load(Archive& archive, LayeredNetwork & layeredNetwork)
 {
-	template <> struct LoadAndConstruct<LayeredNetwork>
-	{
-		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<LayeredNetwork> & construct)
-		{
-			LayeredNetworkOptions options;
-			construct(options);
-		}
-	};
+	archive(CEREAL_NVP(layeredNetwork.options));
+	layeredNetwork.buildNetwork();
+	archive(CEREAL_NVP(layeredNetwork.netInputs));
+	archive(CEREAL_NVP(layeredNetwork.activations));
+	archive(CEREAL_NVP(layeredNetwork.weights));
 }
+
+
 
 #include "UsedArchives.hpp"
 

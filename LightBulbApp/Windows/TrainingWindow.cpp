@@ -19,6 +19,11 @@ enum
 	NETWORK_POPUP_SAVE
 };
 
+enum
+{
+	FILE_LOAD_NN
+};
+
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
 END_EVENT_TABLE()
 
@@ -49,6 +54,19 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	sizer->SetSizeHints(this);
 
 	refreshAllData();
+}
+
+void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
+{
+	if (event.GetId() == FILE_LOAD_NN)
+	{
+		wxFileDialog openFileDialog(this, "Load neural network", "", "", "Neural network files (*.nn)|*.nn", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+
+		if (openFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+
+		controller->loadNeuralNetwork(openFileDialog.GetPath().ToStdString());
+	}
 }
 
 void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
@@ -290,8 +308,10 @@ void TrainingWindow::createMenuBar()
 	wxMenuBar* menubar = new wxMenuBar();
 	wxMenu* file = new wxMenu;
 	file->Append(wxID_OPEN);
+	file->Append(new wxMenuItem(file, FILE_LOAD_NN, "Load a neural network"));
 	file->Append(wxID_SAVE);
 	file->Append(wxID_EXIT);
+	file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::fileMenuSelected), this);
 	menubar->Append(file, "File");
 	windowsMenu = new wxMenu();
 	menubar->Append(windowsMenu, "Windows");

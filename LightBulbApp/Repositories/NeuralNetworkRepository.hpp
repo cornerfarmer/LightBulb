@@ -28,6 +28,7 @@ public:
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	void Add(AbstractNeuralNetwork* neuralNetwork);
 	void save(std::string path, int neuralNetworkIndex);
+	void load(std::string path);
 };
 
 #endif

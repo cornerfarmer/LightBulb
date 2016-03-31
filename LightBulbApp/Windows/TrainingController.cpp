@@ -11,6 +11,8 @@
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_)
 {
 	neuralNetworkRepository = neuralNetworkRepository_;
+	neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &TrainingController::neuralNetworksChanged, this);
+
 	window.reset(new TrainingWindow(this));;
 	logger = NULL;
 
@@ -44,13 +46,17 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	{
 		trainingPlans.back()->start();
 		neuralNetworkRepository->Add(trainingPlans.back()->getNeuralNetwork());
-		window->refreshNeuralNetworks();
 	} 
 	else
 	{
 		trainingPlans.back()->start((*getNeuralNetworks())[neuralNetworkIndex].get());
 	}
 	window->refreshTrainingPlans();
+}
+
+void TrainingController::neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository)
+{
+	window->refreshNeuralNetworks();
 }
 
 void TrainingController::pauseTrainingPlan(AbstractTrainingPlan* trainingPlan)
@@ -113,4 +119,9 @@ void TrainingController::addSubWindow(AbstractWindow* newSubWindow)
 void TrainingController::saveNeuralNetwork(std::string path, int neuralNetworkIndex)
 {
 	neuralNetworkRepository->save(path, neuralNetworkIndex);
+}
+
+void TrainingController::loadNeuralNetwork(std::string path)
+{
+	neuralNetworkRepository->load(path);
 }
