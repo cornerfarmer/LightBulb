@@ -35,3 +35,14 @@ Debug/LightBulb
 Release/LightBulb
 [path to project]/node_modules/
 *.VC.opendb
+*.tlog
+*.psess
+*.vsp
+*.lastbuildstate
+*.idb
+*.enc
+*.unsuccessfulbuild
+*.ipdb
+*.iobj
+*.bsc
+*.db
