@@ -20,6 +20,8 @@ class AbstractThreshold;
 // This is the standard neuron factory, where every neuron has the same functions
 class SameNeuronDescriptionFactory : public AbstractNeuronDescriptionFactory
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory);
 private:
 	std::unique_ptr<NeuronDescription> neuronDescription;
 public:	

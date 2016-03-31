@@ -14,6 +14,8 @@
 
 class NeuronDescription
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, NeuronDescription& neuronDescription);
 private:
 	std::unique_ptr<AbstractInputFunction> inputFunction;
 	std::unique_ptr<AbstractActivationFunction> activationFunction;

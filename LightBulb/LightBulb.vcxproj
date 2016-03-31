@@ -235,8 +235,9 @@
     <ClCompile Include="IO\JSONNumberElement.cpp" />
     <ClCompile Include="IO\JSONObject.cpp" />
     <ClCompile Include="IO\JSONStringElement.cpp" />
-    <ClCompile Include="IO\NeuralNetworkIO.cpp" />
+    <ClCompile Include="IO\NeuralNetworkIO.hpp" />
     <ClCompile Include="IO\SynapticExporter.cpp" />
+    <ClCompile Include="IO\MatrixIO.hpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>
@@ -820,17 +821,23 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="IO\AbstractExporter.hpp" />
+    <ClInclude Include="IO\FermiFunctionIO.hpp" />
+    <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />
+    <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="IO\JSONArray.hpp" />
     <ClInclude Include="IO\JSONAttribute.hpp" />
     <ClInclude Include="IO\JSONNumberElement.hpp" />
     <ClInclude Include="IO\JSONObject.hpp" />
     <ClInclude Include="IO\JSONStringElement.hpp" />
-    <ClCompile Include="IO\LayeredNetworkIO.cpp">
+    <ClCompile Include="IO\LayeredNetworkIO.hpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
+    <ClInclude Include="IO\NeuronDescriptionIO.hpp" />
+    <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="IO\SynapticExporter.hpp" />
+    <ClInclude Include="IO\UsedArchives.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">false</ExcludedFromBuild>

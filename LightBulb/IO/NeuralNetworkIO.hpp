@@ -1,6 +1,11 @@
+#pragma once
+
+#ifndef _NEURALNETWORKIO_H_
+#define _NEURALNETWORKIO_H_
+
 // Includes
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "IO/LayeredNetworkIO.cpp"
+#include "IO/LayeredNetworkIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -26,6 +31,8 @@ namespace cereal
 	};
 }
 
-#include <cereal/archives/xml.hpp>
+#include "UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(NeuralNetwork);
+
+#endif

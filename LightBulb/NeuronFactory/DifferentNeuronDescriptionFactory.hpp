@@ -20,6 +20,8 @@ class AbstractThreshold;
 // This factory makes it possible to use different functions for inner and output neurons
 class DifferentNeuronDescriptionFactory : public AbstractNeuronDescriptionFactory
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, DifferentNeuronDescriptionFactory& descriptionFactory);
 private:
 	// Inner neurons
 	std::unique_ptr<NeuronDescription> innerNeuronDescription;

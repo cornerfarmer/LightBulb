@@ -38,6 +38,8 @@ struct LayeredNetworkOptions
 // A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
 class LayeredNetwork : public AbstractNetworkTopology
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, LayeredNetwork& layeredNetwork);
 protected:
 	std::unique_ptr<LayeredNetworkOptions> options;
 	//

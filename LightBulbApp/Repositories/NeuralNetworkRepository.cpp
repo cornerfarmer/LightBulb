@@ -4,7 +4,7 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include "IO/NeuralNetworkIO.cpp"
+#include <IO/NeuralNetworkIO.hpp>
 
 NeuralNetworkRepository::NeuralNetworkRepository()
 {
