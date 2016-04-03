@@ -3,12 +3,14 @@
 #ifndef _TEACHER_H_
 #define _TEACHER_H_
 
+// Includes
+#include "AbstractTeachingLesson.hpp"
+
 // Library includes
 #include <vector>
 #include <memory>
 
 // Forward declarations
-class AbstractTeachingLesson;
 class AbstractNeuralNetwork;
 class AbstractActivationOrder;
 

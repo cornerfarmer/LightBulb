@@ -34,7 +34,9 @@ enum TrainingPlanEvents
 class AbstractTrainingPlan : public Observable<TrainingPlanEvents, AbstractTrainingPlan>
 {
 	template <class Archive>
-	friend void serialize(Archive& archive, AbstractTrainingPlan& trainingPlan);
+	friend void save(Archive& archive, AbstractTrainingPlan const& trainingPlan);
+	template <class Archive>
+	friend void load(Archive& archive, AbstractTrainingPlan& trainingPlan);
 private:
 	std::thread thread;
 	AbstractTrainingPlan* pattern;

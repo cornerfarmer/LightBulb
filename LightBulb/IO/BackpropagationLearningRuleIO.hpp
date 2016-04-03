@@ -5,7 +5,7 @@
 
 // Includes
 #include "Learning/BackpropagationLearningRule.hpp"
-#include "IO/LayeredNetworkIO.hpp"
+#include "IO/AbstractLearningRuleIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -14,7 +14,7 @@
 template <class Archive>
 void serialize(Archive& archive, BackpropagationLearningRule& learningRule)
 {
-	archive(CEREAL_NVP(learningRule.));
+	archive(cereal::base_class<AbstractLearningRule>(&learningRule));
 }
 
 namespace cereal
@@ -24,9 +24,7 @@ namespace cereal
 		template <class Archive>
 		static void load_and_construct(Archive& ar, cereal::construct<BackpropagationLearningRule>& construct)
 		{
-			std::unique_ptr<AbstractNetworkTopology> networkTopology;
-			ar(networkTopology);
-			construct(networkTopology.release());
+
 		}
 	};
 }

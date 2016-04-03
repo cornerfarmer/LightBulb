@@ -1142,5 +1142,6 @@
     <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
     <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp" />
+    <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
   </ItemGroup>
 </Project>

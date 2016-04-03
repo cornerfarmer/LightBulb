@@ -21,7 +21,8 @@ enum
 
 enum
 {
-	FILE_LOAD_NN
+	FILE_LOAD_NN,
+	FILE_LOAD_TP
 };
 
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
@@ -75,7 +76,17 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 
 		controller->loadNeuralNetwork(openFileDialog.GetPath().ToStdString());
 	}
+	else if(event.GetId() == FILE_LOAD_TP)
+	{
+		wxFileDialog openFileDialog(this, "Load training plan", "", "", "Training plan files (*.tp)|*.tp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+
+		if (openFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+
+		controller->loadTrainingPlan(openFileDialog.GetPath().ToStdString());
+	}
 }
+
 
 void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
 {
@@ -343,6 +354,7 @@ void TrainingWindow::createMenuBar()
 	wxMenu* file = new wxMenu;
 	file->Append(wxID_OPEN);
 	file->Append(new wxMenuItem(file, FILE_LOAD_NN, "Load a neural network"));
+	file->Append(new wxMenuItem(file, FILE_LOAD_TP, "Load a training plan"));
 	file->Append(wxID_SAVE);
 	file->Append(wxID_EXIT);
 	file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::fileMenuSelected), this);

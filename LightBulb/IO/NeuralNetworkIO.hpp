@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _NEURALNETWORKIO_H_
-#define _NEURALNETWORKIO_H_
+#ifndef _IO_NEURALNETWORKIO_H_
+#define _IO_NEURALNETWORKIO_H_
 
 // Includes
 #include "NeuralNetwork/NeuralNetwork.hpp"

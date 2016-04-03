@@ -70,6 +70,8 @@ struct AbstractLearningRuleOptions
 // A LearningRule is used to improve a AbstractNeuralNetwork
 class AbstractLearningRule 
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractLearningRule& learningRule);
 private:
 	bool pauseRequest;
 protected:
