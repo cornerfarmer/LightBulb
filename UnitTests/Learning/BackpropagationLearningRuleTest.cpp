@@ -101,7 +101,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearning)
 
 	backpropagationLearningRule = new BackpropagationLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->doLearning(*neuralNetwork, *teacher));
+	EXPECT_EQ(true, backpropagationLearningRule->start(*neuralNetwork, *teacher));
 
 	assertTrainedNeuralNetwork();
 }
@@ -116,7 +116,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearningWithResilientLearningRate)
 
 	backpropagationLearningRule = new BackpropagationLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->doLearning(*neuralNetwork, *teacher));
+	EXPECT_EQ(true, backpropagationLearningRule->start(*neuralNetwork, *teacher));
 
 	assertTrainedNeuralNetwork();
 }
@@ -131,7 +131,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearningWithMomentum)
 
 	backpropagationLearningRule = new BackpropagationLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->doLearning(*neuralNetwork, *teacher));
+	EXPECT_EQ(true, backpropagationLearningRule->start(*neuralNetwork, *teacher));
 
 	assertTrainedNeuralNetwork();
 }

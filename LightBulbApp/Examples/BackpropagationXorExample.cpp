@@ -13,38 +13,49 @@
 #include <Logging/ConsoleLogger.hpp>
 
 
-void BackpropagationXorExample::run()
+void BackpropagationXorExample::run(bool initial)
 {
-	BackpropagationLearningRuleOptions options;
-	options.logger = new ConsoleLogger(LL_LOW);
-	options.maxTotalErrorValue = 4;
-	options.maxIterationsPerTry = 1000000;
-	options.totalErrorGoal = 0.001f;
-	options.maxTries = 1000;
-	options.weightDecayFac = 0;
-	options.learningRate = 0.1;
-	options.momentum = 0;
-	options.resilientLearningRate = false;
-	options.logger = logger;
-	BackpropagationLearningRule learningRule(options);
-
-	Teacher teacher;
-	for (int i = 0; i < 2; i += 1)
+	if (initial)
 	{
-		for (int l = 0; l < 2; l += 1)
-		{
-			std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(2));
-			NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
+		BackpropagationLearningRuleOptions options;
+		options.logger = new ConsoleLogger(LL_LOW);
+		options.maxTotalErrorValue = 4;
+		options.maxIterationsPerTry = 1000000;
+		options.totalErrorGoal = 0.001f;
+		options.maxTries = 1000;
+		options.weightDecayFac = 0;
+		options.learningRate = 0.1;
+		options.momentum = 0;
+		options.resilientLearningRate = false;
+		options.logger = logger;
+		learningRule.reset(new BackpropagationLearningRule(options));
 
-			teachingPattern[0][0] = i;
-			teachingPattern[0][1] = l;
-			(*teachingInput).set(0, 0, (i != l));
-			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		Teacher* teacher = new Teacher();
+		for (int i = 0; i < 2; i += 1)
+		{
+			for (int l = 0; l < 2; l += 1)
+			{
+				std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(2));
+				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
+
+				teachingPattern[0][0] = i;
+				teachingPattern[0][1] = l;
+				(*teachingInput).set(0, 0, (i != l));
+				teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+			}
 		}
+
+		bool success = learningRule->start(*network, *teacher);
+	} 
+	else
+	{
+		learningRule->resume();
 	}
 
-	bool success = learningRule.doLearning(*network, teacher);
-	finished();
+	if (isPausing())
+		pausingFinished();
+	else
+		finished();
 }
 
 AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
@@ -63,7 +74,7 @@ AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 
 void BackpropagationXorExample::tryToPause()
 {
-	shouldPause = true;
+	learningRule->sendPauseRequest();
 }
 
 std::string BackpropagationXorExample::getName()

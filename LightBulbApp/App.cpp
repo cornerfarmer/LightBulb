@@ -3,12 +3,14 @@
 #include "Windows/LoggerController.hpp"
 #include "Windows/SimulatorController.hpp"
 #include "Repositories/NeuralNetworkRepository.hpp"
+#include "Repositories/TrainingPlanRepository.hpp"
 
 bool App::OnInit()
 {
 	NeuralNetworkRepository* neuralNetworkRepository = new NeuralNetworkRepository();
+	TrainingPlanRepository* trainingPlanRepository = new TrainingPlanRepository();
 
-	TrainingController* trainingController = new TrainingController(neuralNetworkRepository);
+	TrainingController* trainingController = new TrainingController(neuralNetworkRepository, trainingPlanRepository);
 	LoggerController* loggerController = new LoggerController(trainingController->getWindow());
 	SimulatorController* simulatorController = new SimulatorController(neuralNetworkRepository, trainingController->getWindow());
 

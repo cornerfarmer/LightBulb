@@ -18,6 +18,11 @@ class TrainingController;
 class AbstractTrainingPlan;
 class AbstractNeuralNetwork;
 
+wxDECLARE_EVENT(TW_EVT_REFRESH_NN, wxCommandEvent);
+wxDECLARE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);
+wxDECLARE_EVENT(TW_EVT_REFRESH_TP, wxCommandEvent);
+wxDECLARE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
+
 class TrainingWindow : public AbstractWindow
 {
 private:
@@ -34,6 +39,8 @@ private:
 	void fileMenuSelected(wxCommandEvent& event);
 	void neuralNetworkPopUpMenuSelected(wxCommandEvent& event);
 	void neuralNetworkListRightClick(wxDataViewEvent& event);
+	void trainingPlanPopUpMenuSelected(wxCommandEvent& event);
+	void trainingPlanListRightClick(wxDataViewEvent& event);
 	wxPanel* createNNColumn(wxWindow* parent);
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
@@ -58,14 +65,14 @@ private:
 	void pauseTraining(wxCommandEvent& event);
 	void processSelecionHasChanged(wxCommandEvent& event);
 	void toggleSubWindow(wxCommandEvent& event);
+	void refreshNeuralNetworks(wxCommandEvent& event);
+	void refreshTrainingPlanPatterns(wxCommandEvent& event);
+	void refreshTrainingPlans(wxCommandEvent& event);
+	void refreshAllData(wxCommandEvent& event);
 protected:
 	DECLARE_EVENT_TABLE();
 public:
 	TrainingWindow(TrainingController* controller_);
-	void refreshNeuralNetworks();
-	void refreshTrainingPlanPatterns();
-	void refreshTrainingPlans();
-	void refreshAllData();
 	void addSubWindow(AbstractWindow* newSubWindow);
 };
 

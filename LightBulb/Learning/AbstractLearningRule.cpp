@@ -16,13 +16,13 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 {
 	options.reset(options_);
 
+	pauseRequest = false;
 	// Check if all given options are correct
-
 	if (options->maxTotalErrorValue <= options->totalErrorGoal)
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 }
 
-bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
+bool AbstractLearningRule::start(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
 {
 	// Check if all given options are correct
 	if (teacher.getTeachingLessons()->size() == 0)
@@ -32,13 +32,10 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 	AbstractNeuralNetwork& initializedNeuralNetwork = *initializeNeuralNetwork(neuralNetwork);
 	
 	// Ask for the used activation order
-	std::unique_ptr<AbstractActivationOrder> activationOrder(getNewActivationOrder(initializedNeuralNetwork));
+	currentActivationOrder.reset(getNewActivationOrder(initializedNeuralNetwork));
 
 	// Let the learning algorithm do stuff before starting
-	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher, *activationOrder);
-
-	// Create a vector which will contain all weights for offline learning
-	std::vector<Eigen::MatrixXd> offlineLearningWeights(initializedNeuralNetwork.getNetworkTopology()->getLayerCount());
+	initializeLearningAlgoritm(initializedNeuralNetwork, initializedTeacher, *currentActivationOrder);
 
 	// Reset all counter
 	tryCounter = 0;
@@ -47,26 +44,36 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 	currentNetworkTopology = initializedNeuralNetwork.getNetworkTopology();
 	currentNeuralNetwork = &initializedNeuralNetwork;
 	currentTeacher = &initializedTeacher;
-	
+
+	return learn(false);
+}
+
+bool AbstractLearningRule::learn(bool resume)
+{
+	// Create a vector which will contain all weights for offline learning
+	std::vector<Eigen::MatrixXd> offlineLearningWeights(currentNeuralNetwork->getNetworkTopology()->getLayerCount());
+
 	// Start a new try
 	do
 	{
-		// Reset the iteration counter
-		iteration = 0;
+		if (!resume)
+		{
+			// Reset the iteration counter
+			iteration = 0;
 
-		// Initialize a new try
-		initializeTry(initializedNeuralNetwork, initializedTeacher);
-		
-		// If debug is enabled, print every n-th iteration a short debug info
-		log("Start Try: " + std::to_string(tryCounter), LL_HIGH);
+			// Initialize a new try
+			initializeTry(*currentNeuralNetwork, *currentTeacher);
 
-		
+			// If debug is enabled, print every n-th iteration a short debug info
+			log("Start Try: " + std::to_string(tryCounter), LL_HIGH);
+			resume = false;
+		}
 		// Do while the totalError is not zero
-		while ((totalError = initializedTeacher.getTotalError(initializedNeuralNetwork, *activationOrder)) > options->totalErrorGoal  && iteration++ < options->maxIterationsPerTry)
-		{			
+		while ((totalError = currentTeacher->getTotalError(*currentNeuralNetwork, *currentActivationOrder)) > options->totalErrorGoal  && iteration++ < options->maxIterationsPerTry)
+		{
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
-			{	
+			{
 				// If debug is enabled, print a short debug info
 				log("Skip that try (learning has stopped with totalError: " + std::to_string(totalError) + ")", LL_MEDIUM);
 				break;
@@ -76,7 +83,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 			if (iteration > options->minIterationsPerTry && totalError > options->maxTotalErrorValue)
 			{
 				// If debug is enabled, print a short debug info
-				log("Skip that try (totalError: " + std::to_string(totalError) +  " > " + std::to_string(options->maxTotalErrorValue) + ")", LL_MEDIUM);
+				log("Skip that try (totalError: " + std::to_string(totalError) + " > " + std::to_string(options->maxTotalErrorValue) + ")", LL_MEDIUM);
 				break;
 			}
 
@@ -89,7 +96,7 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 			// If offlineLearning is activated, reset the offlineLearningGradients
 			if (options->offlineLearning)
 			{
-				offlineLearningWeights = *neuralNetwork.getNetworkTopology()->getWeights();
+				offlineLearningWeights = *currentNeuralNetwork->getNetworkTopology()->getWeights();
 				// Adjust all hidden/output layers except 
 				for (int l = 0; l < offlineLearningWeights.size(); l++)
 				{
@@ -98,32 +105,32 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 			}
 
 			// Do some work before every iteration
-			initializeIteration(initializedNeuralNetwork, initializedTeacher, *activationOrder);
+			initializeIteration(*currentNeuralNetwork, *currentTeacher, *currentActivationOrder);
 
 			// Go through every TeachingLesson
 			int lessonIndex = 0;
-			for (auto teachingLesson = initializedTeacher.getTeachingLessons()->begin(); teachingLesson != initializedTeacher.getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
+			for (auto teachingLesson = currentTeacher->getTeachingLessons()->begin(); teachingLesson != currentTeacher->getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
 			{
 				// Do some work before every teaching lesson
-				initializeTeachingLesson(initializedNeuralNetwork, **teachingLesson);
+				initializeTeachingLesson(*currentNeuralNetwork, **teachingLesson);
 
 				// Do some work before all weights will be adjusted
 				if (!options->offlineLearning)
-					initializeAllWeightAdjustments(initializedNeuralNetwork);
+					initializeAllWeightAdjustments(*currentNeuralNetwork);
 
 				// Set start and time counter to default values
 				int nextStartTime = -1;
 				int nextTimeStepCount = -1;
 
 				// While the learning rule wants do some calculation with the current teaching lesson
-				while(configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
+				while (configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
 				{
 					// Calculate the errormap and also fill - if needed - the output and netInput values map
-					std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(initializedNeuralNetwork, *activationOrder, /*nextStartTime, nextTimeStepCount,*/  getOutputValuesInTime(), getNetInputValuesInTime());
-				
+					std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*currentNeuralNetwork, *currentActivationOrder, /*nextStartTime, nextTimeStepCount,*/  getOutputValuesInTime(), getNetInputValuesInTime());
+
 					// Adjust all hidden/output layers except 
-					for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
-					{			
+					for (int l = currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
+					{
 						// Let the algorithm do some work for the actual neuron
 						initializeLayerCalculation(*teachingLesson->get(), lessonIndex, l, errormap.get());
 
@@ -141,49 +148,65 @@ bool AbstractLearningRule::doLearning(AbstractNeuralNetwork &neuralNetwork, Teac
 					if (!options->offlineLearning)
 					{
 						// Adjust the every hidden/output layer
-						for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
+						for (int l = currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 						{
 							// Adjust the weight depending on the sum of all calculated gradients
 							adjustWeights(l, offlineLearningWeights[l - 1]);
 						}
-					}		
+					}
 
 				}
-				
+
 				// Do some work after all weights were adjusted
 				if (!options->offlineLearning)
-					doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
+					doCalculationAfterAllWeightAdjustments(*currentNeuralNetwork);
 			}
 
 			// If offline learning is activated, adjust all weights
 			if (options->offlineLearning)
 			{
 				// Do some work before all weights will be adjusted
-				initializeAllWeightAdjustments(initializedNeuralNetwork);
+				initializeAllWeightAdjustments(*currentNeuralNetwork);
 
 				// Adjust the every hidden/output layer
-				for (int l = initializedNeuralNetwork.getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
+				for (int l = currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 				{
 					// Adjust the weight depending on the sum of all calculated gradients
 					adjustWeights(l, offlineLearningWeights[l - 1]);
 				}
 
 				// Do some work after all weights were adjusted
-				doCalculationAfterAllWeightAdjustments(initializedNeuralNetwork);
+				doCalculationAfterAllWeightAdjustments(*currentNeuralNetwork);
+			}
+
+			if (pauseRequest)
+			{
+				pauseRequest = false;
+				return false;
 			}
 		}
 	} while ((totalError > options->totalErrorGoal || abs(totalError) == std::numeric_limits<double>::infinity()) && ++tryCounter < options->maxTries);
-	
+
 
 	if (totalError <= options->totalErrorGoal)
 		log("Try (No. " + std::to_string(tryCounter) + ", " + std::to_string(iteration) + " iterations needed) was successful (totalError: " + std::to_string(totalError) + " < " + std::to_string(options->totalErrorGoal) + ")", LL_HIGH);
 	else
 		log("All tries failed => stop learning", LL_HIGH);
-	
-	doCalculationAfterLearningProcess(initializedNeuralNetwork, initializedTeacher);
+
+	doCalculationAfterLearningProcess(*currentNeuralNetwork, *currentTeacher);
 
 	// Return if learning was successful
 	return (totalError <= options->totalErrorGoal);
+}
+
+bool AbstractLearningRule::resume()
+{
+	return learn(true);
+}
+
+void AbstractLearningRule::sendPauseRequest()
+{
+	pauseRequest = true;
 }
 
 bool AbstractLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
@@ -204,3 +227,4 @@ void AbstractLearningRule::log(std::string message, LogLevel level)
 	if (options->logger)
 		options->logger->log(message, level);
 }
+

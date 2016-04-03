@@ -15,20 +15,21 @@
 
 // Forward declarations
 class NeuralNetworkRepository;
+class TrainingPlanRepository;
 
 class TrainingController
 {
 private:
 	std::vector<AbstractTrainingPlan*> trainingPlanPatterns;
-	std::vector<AbstractTrainingPlan*> trainingPlans;
 	std::unique_ptr<TrainingWindow> window;
 	AbstractLogger* logger;
 	NeuralNetworkRepository* neuralNetworkRepository;
+	TrainingPlanRepository* trainingPlanRepository;
 public:
-	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_);
+	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_);
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
-	std::vector<AbstractTrainingPlan*>* getTrainingPlans();
+	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
 	void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 	void pauseTrainingPlan(AbstractTrainingPlan* trainingPlan);
@@ -43,6 +44,8 @@ public:
 	void addSubWindow(AbstractWindow* newSubWindow);
 	void saveNeuralNetwork(std::string path, int neuralNetworkIndex);
 	void loadNeuralNetwork(std::string path);
+	void saveTrainingPlan(std::string path, int trainingPlanIndex);
+	void loadTrainingPlan(std::string path);
 };
 
 #endif

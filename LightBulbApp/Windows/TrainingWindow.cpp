@@ -27,12 +27,22 @@ enum
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
 END_EVENT_TABLE()
 
+wxDEFINE_EVENT(TW_EVT_REFRESH_NN, wxCommandEvent);
+wxDEFINE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);
+wxDEFINE_EVENT(TW_EVT_REFRESH_TP, wxCommandEvent);
+wxDEFINE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
+
 TrainingWindow::TrainingWindow(TrainingController* controller_)
 	:AbstractWindow("LightBulb")
 {
 	controller = controller_;
 	processTrainingPlanSelection = NULL;
 	currentDetailObject = NULL;
+
+	Bind(TW_EVT_REFRESH_NN, wxCommandEventFunction(&TrainingWindow::refreshNeuralNetworks), this);
+	Bind(TW_EVT_REFRESH_TP, wxCommandEventFunction(&TrainingWindow::refreshTrainingPlans), this);
+	Bind(TW_EVT_REFRESH_TPP, wxCommandEventFunction(&TrainingWindow::refreshTrainingPlanPatterns), this);
+	Bind(TW_EVT_REFRESH_ALL, wxCommandEventFunction(&TrainingWindow::refreshAllData), this);
 
 	createMenuBar();
 
@@ -52,8 +62,6 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	sizer->Add(mainSplitterWindow, 1, wxEXPAND);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
-
-	refreshAllData();
 }
 
 void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
@@ -93,6 +101,31 @@ void TrainingWindow::neuralNetworkListRightClick(wxDataViewEvent& event)
 	}
 }
 
+void TrainingWindow::trainingPlanPopUpMenuSelected(wxCommandEvent& event)
+{
+	if (event.GetId() == NETWORK_POPUP_SAVE)
+	{
+		wxFileDialog saveFileDialog(this, "Save training plan", "", "", "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+		if (saveFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+
+		controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanList->GetSelectedRow());
+	}
+}
+
+
+void TrainingWindow::trainingPlanListRightClick(wxDataViewEvent& event)
+{
+	if (event.GetItem())
+	{
+		wxMenu* popUpMenu = new wxMenu;
+		popUpMenu->Append(new wxMenuItem(popUpMenu, NETWORK_POPUP_SAVE, "Save training plan"));
+		popUpMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::trainingPlanPopUpMenuSelected), this);
+		neuralNetworkList->PopupMenu(popUpMenu);
+	}
+}
+
 wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 {
 	wxPanel* panel = new wxPanel(parent, wxID_ANY);
@@ -115,7 +148,7 @@ wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 }
 
 
-void TrainingWindow::refreshNeuralNetworks()
+void TrainingWindow::refreshNeuralNetworks(wxCommandEvent& event)
 {
 	neuralNetworkList->DeleteAllItems();
 	neuralNetworksChoice->Clear();
@@ -155,7 +188,7 @@ wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
 }
 
 
-void TrainingWindow::refreshTrainingPlanPatterns()
+void TrainingWindow::refreshTrainingPlanPatterns(wxCommandEvent& event)
 {
 	trainingPlanPatternList->DeleteAllItems();
 	trainingPlanPatternsChoice->Clear();
@@ -184,6 +217,7 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	trainingPlanList->AppendTextColumn("Network name")->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
+	trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&TrainingWindow::trainingPlanListRightClick), this);
 	trainingPlanList->SetMinSize(wxSize(100, 100));
 
 	sizer->Add(trainingPlanList, 1, wxEXPAND, 0);
@@ -192,7 +226,7 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 }
 
 
-void TrainingWindow::refreshTrainingPlans()
+void TrainingWindow::refreshTrainingPlans(wxCommandEvent& event)
 {
 	trainingPlanList->DeleteAllItems();
 	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
@@ -202,19 +236,19 @@ void TrainingWindow::refreshTrainingPlans()
 		data.push_back(wxVariant((*trainingPlan)->getNeuralNetwork()->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getStateAsString()));
 		trainingPlanList->AppendItem(data);
-		if (currentDetailObject == *trainingPlan)
-			showDetailsOfTrainingPlan(*trainingPlan);
-		if (processTrainingPlanSelection == *trainingPlan)
-			showProcessOfTrainingPlan(*trainingPlan);
+		if (currentDetailObject == trainingPlan->get())
+			showDetailsOfTrainingPlan(trainingPlan->get());
+		if (processTrainingPlanSelection == trainingPlan->get())
+			showProcessOfTrainingPlan(trainingPlan->get());
 	}
 	
 }
 
-void TrainingWindow::refreshAllData()
+void TrainingWindow::refreshAllData(wxCommandEvent& event)
 {
-	refreshNeuralNetworks();
-	refreshTrainingPlanPatterns();
-	refreshTrainingPlans();
+	refreshNeuralNetworks(event);
+	refreshTrainingPlanPatterns(event);
+	refreshTrainingPlans(event);
 }
 
 void TrainingWindow::addSubWindow(AbstractWindow* newSubWindow)
@@ -371,8 +405,8 @@ void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 	int row = getRowIndexOfItem(trainingPlanList, event.GetItem());
 	if (row != -1)
 	{
-		showDetailsOfTrainingPlan((*controller->getTrainingPlans())[row]);
-		showProcessOfTrainingPlan((*controller->getTrainingPlans())[row]);
+		showDetailsOfTrainingPlan((*controller->getTrainingPlans())[row].get());
+		showProcessOfTrainingPlan((*controller->getTrainingPlans())[row].get());
 	}
 	else
 		clearDetails();

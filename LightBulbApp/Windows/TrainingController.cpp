@@ -7,10 +7,12 @@
 #include "TrainingWindow.hpp"
 #include <Examples/BackpropagationXorExample.hpp>
 #include <Repositories/NeuralNetworkRepository.hpp>
+#include <Repositories/TrainingPlanRepository.hpp>
 
-TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_)
+TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
 {
 	neuralNetworkRepository = neuralNetworkRepository_;
+	trainingPlanRepository = trainingPlanRepository_;
 	neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &TrainingController::neuralNetworksChanged, this);
 
 	window.reset(new TrainingWindow(this));;
@@ -18,7 +20,9 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
-	window->refreshAllData();
+
+	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 std::vector<std::unique_ptr<AbstractNeuralNetwork>>* TrainingController::getNeuralNetworks()
@@ -31,38 +35,43 @@ std::vector<AbstractTrainingPlan*>* TrainingController::getTrainingPlanPatterns(
 	return &trainingPlanPatterns;
 }
 
-std::vector<AbstractTrainingPlan*>* TrainingController::getTrainingPlans()
+std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingController::getTrainingPlans()
 {
-	return &trainingPlans;
+	return trainingPlanRepository->getTrainingPlans();
 }
 
 void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex)
 {
-	trainingPlans.push_back(trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute());
-	trainingPlans.back()->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
-	trainingPlans.back()->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
-	trainingPlans.back()->setLogger(logger);
+
+	AbstractTrainingPlan* trainingPlan = trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute();
+	trainingPlan->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
+	trainingPlan->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
+	trainingPlan->setLogger(logger);
+	trainingPlanRepository->Add(trainingPlan);
 	if (getNeuralNetworks()->size() <= neuralNetworkIndex) 
 	{
-		trainingPlans.back()->start();
-		neuralNetworkRepository->Add(trainingPlans.back()->getNeuralNetwork());
+		trainingPlan->start();
+		neuralNetworkRepository->Add(trainingPlan->getNeuralNetwork());
 	} 
 	else
 	{
-		trainingPlans.back()->start((*getNeuralNetworks())[neuralNetworkIndex].get());
+		trainingPlan->start((*getNeuralNetworks())[neuralNetworkIndex].get());
 	}
-	window->refreshTrainingPlans();
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 void TrainingController::neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository)
 {
-	window->refreshNeuralNetworks();
+	wxThreadEvent evt(TW_EVT_REFRESH_NN);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 void TrainingController::pauseTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
 	trainingPlan->pause();
-	window->refreshTrainingPlans();
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern)
@@ -77,18 +86,21 @@ int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trai
 
 void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
 {
-	window->refreshTrainingPlans();
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 void TrainingController::trainingPlanFinished(AbstractTrainingPlan* trainingPlan)
 {
-	window->refreshTrainingPlans();
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 void TrainingController::resumeTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
 	trainingPlan->start();
-	window->refreshTrainingPlans();
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
 void TrainingController::setLogger(AbstractLogger* newLogger)
@@ -124,4 +136,14 @@ void TrainingController::saveNeuralNetwork(std::string path, int neuralNetworkIn
 void TrainingController::loadNeuralNetwork(std::string path)
 {
 	neuralNetworkRepository->load(path);
+}
+
+void TrainingController::saveTrainingPlan(std::string path, int trainingPlanIndex)
+{
+	trainingPlanRepository->save(path, trainingPlanIndex);
+}
+
+void TrainingController::loadTrainingPlan(std::string path)
+{
+	trainingPlanRepository->load(path);
 }

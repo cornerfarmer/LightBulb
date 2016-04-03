@@ -595,6 +595,7 @@
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="IO\NeuralNetworkIO.hpp" />
     <ClCompile Include="IO\MatrixIO.hpp" />
+    <ClCompile Include="IO\LayeredNetworkIO.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1134,12 +1135,12 @@
     <ClInclude Include="Event\AbstractObserver.hpp" />
     <ClInclude Include="Logging\AbstractLogger.hpp" />
     <ClInclude Include="Logging\ConsoleLogger.hpp" />
-    <ClInclude Include="IO\LayeredNetworkIO.cpp" />
     <ClInclude Include="IO\UsedArchives.hpp" />
     <ClInclude Include="IO\NeuronDescriptionIO.hpp" />
     <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
+    <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp" />
   </ItemGroup>
 </Project>

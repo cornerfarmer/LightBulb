@@ -10,13 +10,15 @@
 #include <memory>
 #include <Logging/AbstractLogger.hpp>
 
+// Includes
+#include "ActivationOrder/AbstractActivationOrder.hpp"
+
 // Forward declarations
 class AbstractNeuralNetwork;
 class Teacher;
 class Neuron;
 class Edge;
 class StandardNeuron;
-class AbstractActivationOrder;
 class AbstractNeuron;
 class StandardNeuron;
 class AbstractTeachingLesson;
@@ -68,6 +70,8 @@ struct AbstractLearningRuleOptions
 // A LearningRule is used to improve a AbstractNeuralNetwork
 class AbstractLearningRule 
 {
+private:
+	bool pauseRequest;
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
 	// Holds the current total error
@@ -82,6 +86,8 @@ protected:
 	AbstractNetworkTopology* currentNetworkTopology;
 	// The current teacher
 	Teacher* currentTeacher;
+
+	std::unique_ptr<AbstractActivationOrder> currentActivationOrder;
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
 	// This method should calculate the deltaWeight for the actual edge
@@ -120,13 +126,17 @@ protected:
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 
 	void log(std::string message, LogLevel level);
+
+	bool learn(bool resume);
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given AbstractNeuralNetwork
 	// If the learning process succeded the method will return true
-	bool doLearning(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
+	bool start(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
 
+	bool resume();
 
+	void sendPauseRequest();
 };
 
 #endif

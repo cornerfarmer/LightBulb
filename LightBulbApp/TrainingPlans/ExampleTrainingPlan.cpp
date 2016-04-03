@@ -7,7 +7,7 @@
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 
-void ExampleTrainingPlan::run()
+void ExampleTrainingPlan::run(bool initial)
 {
 	while (true)
 	{

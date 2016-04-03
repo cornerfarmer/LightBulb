@@ -46,3 +46,5 @@ Release/LightBulb
 *.iobj
 *.bsc
 *.db
+*.tmp
+*.exp

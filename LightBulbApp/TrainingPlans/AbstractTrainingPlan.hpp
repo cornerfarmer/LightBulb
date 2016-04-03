@@ -10,6 +10,7 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <cereal/cereal.hpp>
 
 // Forward declarations
 class AbstractLogger;
@@ -30,9 +31,10 @@ enum TrainingPlanEvents
 	EVT_TP_FINISHED
 };
 
-// A techer manages many techingLessons
 class AbstractTrainingPlan : public Observable<TrainingPlanEvents, AbstractTrainingPlan>
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractTrainingPlan& trainingPlan);
 private:
 	std::thread thread;
 	AbstractTrainingPlan* pattern;
@@ -40,7 +42,7 @@ private:
 protected:
 	AbstractNeuralNetwork* network;
 	AbstractLogger* logger;
-	virtual void run() = 0;
+	virtual void run(bool initial) = 0;
 	virtual AbstractTrainingPlan* getCopy() = 0;
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
 	virtual void tryToPause() = 0;
@@ -58,6 +60,7 @@ public:
 	AbstractTrainingPlan* getTrainingPlanPattern();
 	void pause();
 	bool isPaused();
+	bool isPausing();
 	bool isRunning();
 	void setLogger(AbstractLogger* newLogger);
 	virtual int getRequiredInputSize() = 0;

@@ -186,7 +186,7 @@ void doPerceptronTest()
 	//teacher.addTestingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 	//}
 
-	bool success = learningRule.doLearning(neuralNetwork, teacher);
+	bool success = learningRule.start(neuralNetwork, teacher);
 	////neuralNetwork.getNetworkTopology()->randomizeWeights(0,1);
 	//
 
@@ -272,7 +272,7 @@ void doRBFTest()
 	learningRuleOptions.neuronPlacer = new ROLFNeuronPlacer();
 	RBFInterpolationLearningRule learningRule(learningRuleOptions);
 	
-	learningRule.doLearning(neuralNetwork, teacher);	
+	learningRule.start(neuralNetwork, teacher);	
 
 	DeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
@@ -283,7 +283,7 @@ void doRBFTest()
 	delteLearningRuleOptions.resilientLearningRate = true;
 	DeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
 
-	deltaLearningRule.doLearning(neuralNetwork, teacher);
+	deltaLearningRule.start(neuralNetwork, teacher);
 
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
@@ -406,7 +406,7 @@ void doRecurrentLayeredNetworkTest()
 		}
 	}
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 	
 	
 
@@ -530,7 +530,7 @@ void doFreeNetworkTest()
 	}
 	
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 	SynchronousOrder synchonousOrder;
 	double totalError = teacher.getTotalError(neuralNetwork, synchonousOrder);
 
@@ -645,7 +645,7 @@ void doRTRLTest()
 	}
 	
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 	SynchronousOrder synchronousOrder;
 	double totalError = teacher.getTotalError(neuralNetwork, synchronousOrder);
 
@@ -723,7 +723,7 @@ void doSchmidhuberTest()
 	}
 	
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	SynchronousOrder synchronousOrder;
 	double totalError = teacher.getTotalError(neuralNetwork, synchronousOrder);
@@ -964,7 +964,7 @@ void doCascadeCorrelationTest()
 	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 1;
 	CascadeCorrelationLearningRule learningRule(options);
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
@@ -1051,7 +1051,7 @@ void doRecurrentCascadeCorrelationTest()
 	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 1;
 	CascadeCorrelationLearningRule learningRule(options);
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 
 	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(1);
@@ -1179,7 +1179,7 @@ void doRecurrentCascadeCorrelationMorseTest()
 	options.candidateUnitsLearningRuleOptions.resilientLearningRateOptions.minLearningRate = 1;
 	CascadeCorrelationLearningRule learningRule(options);
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 
 	NeuralNetworkIO<double>* teachingPattern = new NeuralNetworkIO<double>(1);
@@ -1276,7 +1276,7 @@ void doLVQTest()
 	options.learningRateStart = 0.01;
 	OLVQ1LearningRule learningRule(options);
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 	
 	NeuralNetworkIO<double> input(2);
 
@@ -1390,7 +1390,7 @@ void doSOMTest()
 	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
 	SOMLearningRule learningRule(options);
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	SOMNetworkStructureChartOptions somNetworkStructureChartOptions;
 	somNetworkStructureChartOptions.somNetwork = somNetwork;
@@ -1459,7 +1459,7 @@ void doSOMColorTest()
 	options.distanceShrinkFunction = new ExponentialShrinkFunction(4, 0.5, 200);
 	SOMLearningRule learningRule(options);
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	SOMMappingChartOptions somMappingChartOptions;
 	somMappingChartOptions.somNetwork = somNetwork;
@@ -1524,7 +1524,7 @@ void doCounterpropagationTest()
 		}
 	}
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	
 	CounterpropagationNetworkStructureChartOptions counterpropagationNetworkStructureChartOptions;
@@ -1579,7 +1579,7 @@ void doHopfieldTest()
 		teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));		
 	}
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	NeuralNetworkIO<double> teachingPattern(2);
 
@@ -1636,7 +1636,7 @@ void doAssociativHopfieldTest()
 		teacher.addTeachingLesson(new TeachingLessonLinearInput(teachingPattern, teachingInput));		
 	}
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	NeuralNetworkIO<double> teachingPattern(3);
 

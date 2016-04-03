@@ -821,6 +821,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="IO\AbstractExporter.hpp" />
+    <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp" />
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
     <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />

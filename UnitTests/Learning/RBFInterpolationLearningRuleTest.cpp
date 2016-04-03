@@ -99,7 +99,7 @@ TEST_F(RBFInterpolationLearningRuleTest, doLearning)
 
 	rbfInterpolationLearningRule = new RBFInterpolationLearningRule(options);
 
-	EXPECT_EQ(true, rbfInterpolationLearningRule->doLearning(*neuralNetwork, *teacher));
+	EXPECT_EQ(true, rbfInterpolationLearningRule->start(*neuralNetwork, *teacher));
 
 	assertTrainedNeuralNetwork();
 }

@@ -46,7 +46,7 @@ void doRBFNetworkBiggerExample()
 
 	TopologicalOrder topologicalOrder;
 
-	learningRule.doLearning(neuralNetwork, teacher);
+	learningRule.start(neuralNetwork, teacher);
 
 	DeltaLearningRuleOptions delteLearningRuleOptions;
 	delteLearningRuleOptions.maxIterationsPerTry = 100000;
@@ -57,7 +57,7 @@ void doRBFNetworkBiggerExample()
 	delteLearningRuleOptions.resilientLearningRate = true;
 	DeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
 
-	deltaLearningRule.doLearning(neuralNetwork, teacher);
+	deltaLearningRule.start(neuralNetwork, teacher);
 
 
 	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;

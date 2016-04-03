@@ -46,6 +46,8 @@ struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
 class BackpropagationLearningRule : public AbstractLearningRule
 {
 	friend class CascadeCorrelationLearningRule;
+	template <class Archive>
+	friend void serialize(Archive& archive, BackpropagationLearningRule& learningRule);
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::vector<Eigen::MatrixXd> previousDeltaWeights;

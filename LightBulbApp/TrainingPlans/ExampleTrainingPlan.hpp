@@ -16,7 +16,7 @@ class ExampleTrainingPlan : public AbstractTrainingPlan
 private:
 	bool shouldPause;
 protected:
-	void run();
+	void run(bool initial);
 	AbstractNeuralNetwork* createNeuralNetwork();
 	void tryToPause();
 public:

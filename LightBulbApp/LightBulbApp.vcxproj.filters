@@ -84,6 +84,9 @@
     <ClCompile Include="Repositories\NeuralNetworkRepository.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Repositories\TrainingPlanRepository.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -141,6 +144,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Repositories\NeuralNetworkRepository.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractTrainingPlanIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Repositories\TrainingPlanRepository.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BackpropagationXorExampleIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
