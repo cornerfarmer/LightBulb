@@ -64,7 +64,7 @@ public:
 	bool isPaused();
 	bool isPausing();
 	bool isRunning();
-	void setLogger(AbstractLogger* newLogger);
+	virtual void setLogger(AbstractLogger* newLogger);
 	virtual int getRequiredInputSize() = 0;
 	virtual int getRequiredOutputSize() = 0;
 };

@@ -11,6 +11,7 @@
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
 #include "Learning/ResilientLearningRateHelper.hpp"
+#include <cereal/access.hpp>
 
 // Forward declarations
 class Teacher;
@@ -48,6 +49,7 @@ class BackpropagationLearningRule : public AbstractLearningRule
 	friend class CascadeCorrelationLearningRule;
 	template <class Archive>
 	friend void serialize(Archive& archive, BackpropagationLearningRule& learningRule);
+	friend struct cereal::LoadAndConstruct<BackpropagationLearningRule>;
 private:	
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::vector<Eigen::MatrixXd> previousDeltaWeights;

@@ -27,7 +27,7 @@ public:
 	int getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	void Add(AbstractTrainingPlan* trainingPlan);
 	void save(std::string path, int trainingPlanIndex);
-	void load(std::string path);
+	AbstractTrainingPlan* load(std::string path, AbstractLogger* logger);
 };
 
 #endif

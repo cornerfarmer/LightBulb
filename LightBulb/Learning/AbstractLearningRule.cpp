@@ -31,7 +31,6 @@ bool AbstractLearningRule::start(AbstractNeuralNetwork &neuralNetwork, Teacher &
 	Teacher& initializedTeacher = *initializeTeacher(teacher);
 	AbstractNeuralNetwork& initializedNeuralNetwork = *initializeNeuralNetwork(neuralNetwork);
 	
-	// Ask for the used activation order
 	currentActivationOrder.reset(getNewActivationOrder(initializedNeuralNetwork));
 
 	// Let the learning algorithm do stuff before starting
@@ -207,6 +206,24 @@ bool AbstractLearningRule::resume()
 void AbstractLearningRule::sendPauseRequest()
 {
 	pauseRequest = true;
+}
+
+void AbstractLearningRule::setCurrentNeuralNetwork(AbstractNeuralNetwork& neuralNetwork)
+{
+	currentNeuralNetwork = &neuralNetwork;
+	currentNetworkTopology = neuralNetwork.getNetworkTopology();
+	// Ask for the used activation order
+	currentActivationOrder.reset(getNewActivationOrder(neuralNetwork));
+}
+
+void AbstractLearningRule::setCurrentTeacher(Teacher& teacher)
+{
+	currentTeacher = &teacher;
+}
+
+void AbstractLearningRule::setLogger(AbstractLogger* logger)
+{
+	options->logger = logger;
 }
 
 bool AbstractLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)

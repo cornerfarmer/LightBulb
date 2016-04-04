@@ -34,6 +34,7 @@ public:
 	std::string getDescription();
 	std::string getLearningRateName();
 	AbstractTrainingPlan* getCopy();
+	void setLogger(AbstractLogger* newLogger);
 	int getRequiredInputSize();
 	int getRequiredOutputSize();
 };

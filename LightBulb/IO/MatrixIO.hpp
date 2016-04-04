@@ -30,12 +30,15 @@ namespace cereal
 	{
 		std::vector<std::vector<double>> vector;
 		archive(vector);
-		matrix.resize(vector.size(), vector[0].size());
-		for (int i = 0; i < matrix.rows(); i++)
+		if (vector.size() > 0)
 		{
-			for (int j = 0; j < matrix.cols(); j++)
+			matrix.resize(vector.size(), vector[0].size());
+			for (int i = 0; i < matrix.rows(); i++)
 			{
-				matrix(i, j) = vector[i][j];
+				for (int j = 0; j < matrix.cols(); j++)
+				{
+					matrix(i, j) = vector[i][j];
+				}
 			}
 		}
 	}

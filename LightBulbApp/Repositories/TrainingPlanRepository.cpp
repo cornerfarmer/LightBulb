@@ -30,15 +30,18 @@ void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
 	archive(trainingPlans[trainingPlanIndex]);
 }
 
-void TrainingPlanRepository::load(std::string path)
+AbstractTrainingPlan* TrainingPlanRepository::load(std::string path, AbstractLogger* logger)
 {
 	std::ifstream is(path);
 	cereal::XMLInputArchive archive(is);
 
 	trainingPlans.push_back(std::unique_ptr<AbstractTrainingPlan>());
 	archive(trainingPlans.back());
+	trainingPlans.back()->setLogger(logger);
 
 	throwEvent(EVT_TP_CHANGED, this);
+
+	return trainingPlans.back().get();
 }
 
 std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingPlanRepository::getTrainingPlans()

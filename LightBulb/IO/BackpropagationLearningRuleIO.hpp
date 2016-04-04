@@ -6,6 +6,8 @@
 // Includes
 #include "Learning/BackpropagationLearningRule.hpp"
 #include "IO/AbstractLearningRuleIO.hpp"
+#include "IOStorage.hpp"
+
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -15,6 +17,8 @@ template <class Archive>
 void serialize(Archive& archive, BackpropagationLearningRule& learningRule)
 {
 	archive(cereal::base_class<AbstractLearningRule>(&learningRule));
+	archive(learningRule.deltaVectorOutputLayer);
+	archive(learningRule.previousDeltaWeights);
 }
 
 namespace cereal
@@ -24,7 +28,11 @@ namespace cereal
 		template <class Archive>
 		static void load_and_construct(Archive& ar, cereal::construct<BackpropagationLearningRule>& construct)
 		{
-
+			BackpropagationLearningRule* learningRule = IOStorage<BackpropagationLearningRule>::pop();
+			ar(cereal::base_class<AbstractLearningRule>(learningRule));
+			ar(learningRule->deltaVectorOutputLayer);
+			ar(learningRule->previousDeltaWeights);
+			IOStorage<BackpropagationLearningRule>::push(learningRule);
 		}
 	};
 }

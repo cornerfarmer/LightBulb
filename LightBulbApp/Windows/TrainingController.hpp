@@ -32,6 +32,7 @@ public:
 	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
 	void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
+	void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 	void pauseTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
 	int getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern);

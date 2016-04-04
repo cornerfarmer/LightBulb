@@ -16,7 +16,6 @@
 void BackpropagationXorExample::initializeLearningRate()
 {
 	BackpropagationLearningRuleOptions options;
-	options.logger = new ConsoleLogger(LL_LOW);
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
@@ -100,6 +99,14 @@ std::string BackpropagationXorExample::getLearningRateName()
 AbstractTrainingPlan* BackpropagationXorExample::getCopy()
 {
 	return new BackpropagationXorExample();
+}
+
+void BackpropagationXorExample::setLogger(AbstractLogger* newLogger)
+{
+	AbstractTrainingPlan::setLogger(newLogger);
+	if (learningRule.get()) {
+		learningRule->setLogger(newLogger);
+	}
 }
 
 int BackpropagationXorExample::getRequiredInputSize()

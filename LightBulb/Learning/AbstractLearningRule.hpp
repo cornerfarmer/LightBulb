@@ -139,6 +139,14 @@ public:
 	bool resume();
 
 	void sendPauseRequest();
+
+	void setCurrentNeuralNetwork(AbstractNeuralNetwork &neuralNetwork);
+
+	void setCurrentTeacher(Teacher &teacher);
+
+	void setLogger(AbstractLogger* logger);
 };
 
 #endif
+
+

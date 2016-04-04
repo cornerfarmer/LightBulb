@@ -14,6 +14,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	neuralNetworkRepository = neuralNetworkRepository_;
 	trainingPlanRepository = trainingPlanRepository_;
 	neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &TrainingController::neuralNetworksChanged, this);
+	trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &TrainingController::trainingPlansChanged, this);
 
 	window.reset(new TrainingWindow(this));;
 	logger = NULL;
@@ -64,6 +65,12 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 void TrainingController::neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository)
 {
 	wxThreadEvent evt(TW_EVT_REFRESH_NN);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
+}
+
+void TrainingController::trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository)
+{
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
@@ -145,5 +152,6 @@ void TrainingController::saveTrainingPlan(std::string path, int trainingPlanInde
 
 void TrainingController::loadTrainingPlan(std::string path)
 {
-	trainingPlanRepository->load(path);
+	AbstractTrainingPlan* trainingPlan = trainingPlanRepository->load(path, logger);
+	neuralNetworkRepository->Add(trainingPlan->getNeuralNetwork());
 }

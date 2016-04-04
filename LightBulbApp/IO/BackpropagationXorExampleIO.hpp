@@ -12,6 +12,7 @@
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/types/base_class.hpp>
+#include <IO/IOStorage.hpp>
 
 
 template <class Archive>
@@ -25,8 +26,14 @@ template <class Archive>
 void load(Archive& archive, BackpropagationXorExample& trainingPlan)
 {
 	archive(cereal::base_class<AbstractTrainingPlan>(&trainingPlan));
+
 	trainingPlan.initializeLearningRate();
+	IOStorage<BackpropagationLearningRule>::push(trainingPlan.learningRule.release());
 	archive(trainingPlan.learningRule);
+	trainingPlan.learningRule.reset(IOStorage<BackpropagationLearningRule>::pop());
+
+	trainingPlan.learningRule->setCurrentNeuralNetwork(*trainingPlan.network);
+	trainingPlan.learningRule->setCurrentTeacher(*trainingPlan.teacher);
 }
 
 #include "IO/UsedArchives.hpp"
