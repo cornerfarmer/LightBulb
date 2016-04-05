@@ -19,7 +19,7 @@ template <class Archive>
 void save(Archive& archive, BackpropagationXorExample const& trainingPlan)
 {
 	archive(cereal::base_class<AbstractTrainingPlan>(&trainingPlan));
-	archive(trainingPlan.learningRule);
+	archive(cereal::make_nvp("learningRule", trainingPlan.learningRule));
 }
 
 template <class Archive>
@@ -29,7 +29,7 @@ void load(Archive& archive, BackpropagationXorExample& trainingPlan)
 
 	trainingPlan.initializeLearningRate();
 	IOStorage<BackpropagationLearningRule>::push(trainingPlan.learningRule.release());
-	archive(trainingPlan.learningRule);
+	archive(cereal::make_nvp("learningRule", trainingPlan.learningRule));
 	trainingPlan.learningRule.reset(IOStorage<BackpropagationLearningRule>::pop());
 
 	trainingPlan.learningRule->setCurrentNeuralNetwork(*trainingPlan.network);

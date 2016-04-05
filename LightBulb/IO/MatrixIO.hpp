@@ -22,14 +22,14 @@ namespace cereal
 				vector[i][j] = matrix(i, j);
 			}
 		}
-		archive(vector);
+		archive(cereal::make_nvp("asVector", vector));
 	}
 
 	template <class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
 	void load(Archive& archive, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& matrix)
 	{
 		std::vector<std::vector<double>> vector;
-		archive(vector);
+		archive(cereal::make_nvp("asVector", vector));
 		if (vector.size() > 0)
 		{
 			matrix.resize(vector.size(), vector[0].size());

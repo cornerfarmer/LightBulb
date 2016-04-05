@@ -17,10 +17,11 @@
 template <class Archive>
 void save(Archive& archive, LayeredNetworkOptions const & options)
 {
-	archive(CEREAL_NVP(options.enableShortcuts));
-	archive(CEREAL_NVP(options.neuronsPerLayerCount));
-	archive(CEREAL_NVP(options.outputNeuronsIndices));
-	archive(CEREAL_NVP(options.useBiasNeuron));
+	archive(cereal::make_nvp("enableShortcuts", options.enableShortcuts));
+	archive(cereal::make_nvp("neuronsPerLayerCount", options.neuronsPerLayerCount));
+	archive(cereal::make_nvp("outputNeuronsIndices", options.outputNeuronsIndices));
+	archive(cereal::make_nvp("useBiasNeuron", options.useBiasNeuron));
+
 	std::unique_ptr<AbstractNeuronDescriptionFactory> descriptionFactory(options.descriptionFactory->getCopy());
 	archive(cereal::make_nvp("descriptionFactory", descriptionFactory));
 }
@@ -28,12 +29,12 @@ void save(Archive& archive, LayeredNetworkOptions const & options)
 template <class Archive>
 void load(Archive& archive, LayeredNetworkOptions& options)
 {
-	archive(CEREAL_NVP(options.enableShortcuts));
-	archive(CEREAL_NVP(options.neuronsPerLayerCount));
-	archive(CEREAL_NVP(options.outputNeuronsIndices));
-	archive(CEREAL_NVP(options.useBiasNeuron));
+	archive(cereal::make_nvp("enableShortcuts", options.enableShortcuts));
+	archive(cereal::make_nvp("neuronsPerLayerCount", options.neuronsPerLayerCount));
+	archive(cereal::make_nvp("outputNeuronsIndices", options.outputNeuronsIndices));
+	archive(cereal::make_nvp("useBiasNeuron", options.useBiasNeuron));
 	std::unique_ptr<AbstractNeuronDescriptionFactory> descriptionFactory;
-	archive(CEREAL_NVP(descriptionFactory));
+	archive(cereal::make_nvp("descriptionFactory", descriptionFactory));
 	options.descriptionFactory = descriptionFactory.release();
 }
 
@@ -41,21 +42,21 @@ void load(Archive& archive, LayeredNetworkOptions& options)
 template <class Archive>
 void save(Archive& archive, LayeredNetwork const & layeredNetwork)
 {
-	archive(CEREAL_NVP(layeredNetwork.options));
-	archive(CEREAL_NVP(layeredNetwork.netInputs));
-	archive(CEREAL_NVP(layeredNetwork.activations));
-	archive(CEREAL_NVP(layeredNetwork.weights));
+	archive(cereal::make_nvp("options", layeredNetwork.options));
+	archive(cereal::make_nvp("netInputs", layeredNetwork.netInputs));
+	archive(cereal::make_nvp("activations", layeredNetwork.activations));
+	archive(cereal::make_nvp("weights", layeredNetwork.weights));
 }
 
 
 template <class Archive>
 void load(Archive& archive, LayeredNetwork & layeredNetwork)
 {
-	archive(CEREAL_NVP(layeredNetwork.options));
+	archive(cereal::make_nvp("options", layeredNetwork.options));
 	layeredNetwork.buildNetwork();
-	archive(CEREAL_NVP(layeredNetwork.netInputs));
-	archive(CEREAL_NVP(layeredNetwork.activations));
-	archive(CEREAL_NVP(layeredNetwork.weights));
+	archive(cereal::make_nvp("netInputs", layeredNetwork.netInputs));
+	archive(cereal::make_nvp("activations", layeredNetwork.activations));
+	archive(cereal::make_nvp("weights", layeredNetwork.weights));
 }
 
 

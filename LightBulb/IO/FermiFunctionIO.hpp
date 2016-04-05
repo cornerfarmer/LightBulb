@@ -12,7 +12,7 @@
 template <class Archive>
 void serialize(Archive& archive, FermiFunction& fermiFunction)
 {
-	archive(CEREAL_NVP(fermiFunction.temperatureParameter));
+	archive(cereal::make_nvp("temperatureParameter", fermiFunction.temperatureParameter));
 }
 
 namespace cereal
@@ -23,7 +23,7 @@ namespace cereal
 		static void load_and_construct(Archive & ar, cereal::construct<FermiFunction>& construct)
 		{
 			double temperatureParameter;
-			ar(temperatureParameter);
+			ar(cereal::make_nvp("temperatureParameter", temperatureParameter));
 			construct(temperatureParameter);
 		}
 	};

@@ -14,8 +14,8 @@
 template <class Archive>
 void serialize(Archive& archive, DifferentNeuronDescriptionFactory& descriptionFactory)
 {
-	archive(CEREAL_NVP(descriptionFactory.innerNeuronDescription));
-	archive(CEREAL_NVP(descriptionFactory.outputNeuronDescription));
+	archive(cereal::make_nvp("innerNeuronDescription", descriptionFactory.innerNeuronDescription));
+	archive(cereal::make_nvp("outputNeuronDescription", descriptionFactory.outputNeuronDescription));
 }
 
 namespace cereal
@@ -26,9 +26,10 @@ namespace cereal
 		static void load_and_construct(Archive & ar, cereal::construct<DifferentNeuronDescriptionFactory>& construct)
 		{
 			std::unique_ptr<NeuronDescription> innerNeuronDescription;
-			ar(innerNeuronDescription);
+			ar(cereal::make_nvp("innerNeuronDescription", innerNeuronDescription));
 			std::unique_ptr<NeuronDescription> outputNeuronDescription;
-			ar(outputNeuronDescription);
+			ar(cereal::make_nvp("outputNeuronDescription", outputNeuronDescription));
+
 			construct(innerNeuronDescription.release(), outputNeuronDescription.release());
 		}
 	};

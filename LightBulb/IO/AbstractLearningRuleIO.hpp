@@ -11,9 +11,9 @@
 template <class Archive>
 void serialize(Archive& archive, AbstractLearningRule& learningRule)
 {
-	archive(learningRule.iteration);
-	archive(learningRule.totalError);
-	archive(learningRule.tryCounter);
+	archive(cereal::make_nvp("iteration", learningRule.iteration));
+	archive(cereal::make_nvp("totalError", learningRule.totalError));
+	archive(cereal::make_nvp("tryCounter", learningRule.tryCounter));
 }
 
 #endif

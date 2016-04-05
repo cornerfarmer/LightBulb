@@ -13,8 +13,8 @@
 template <class Archive>
 void serialize(Archive& archive, NeuronDescription& neuronDescription)
 {
-	archive(CEREAL_NVP(neuronDescription.inputFunction));
-	archive(CEREAL_NVP(neuronDescription.activationFunction));
+	archive(cereal::make_nvp("inputFunction", neuronDescription.inputFunction));
+	archive(cereal::make_nvp("activationFunction", neuronDescription.activationFunction));
 }
 
 namespace cereal
@@ -25,9 +25,9 @@ namespace cereal
 		static void load_and_construct(Archive & ar, cereal::construct<NeuronDescription>& construct)
 		{
 			std::unique_ptr<AbstractInputFunction> inputFunction;
-			ar(inputFunction);
+			ar(cereal::make_nvp("inputFunction", inputFunction));
 			std::unique_ptr<AbstractActivationFunction> activationFunction;
-			ar(activationFunction);
+			ar(cereal::make_nvp("activationFunction", activationFunction));
 			construct(inputFunction.release(), activationFunction.release());
 		}
 	};
