@@ -23,6 +23,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 
 	window.reset(new TrainingWindow(this));;
 	logger = NULL;
+	saveTrainingPlanAfterPausedIndex = -1;
 
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
@@ -98,6 +99,13 @@ int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trai
 
 void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
 {
+	if (saveTrainingPlanAfterPausedIndex != -1 && (*trainingPlanRepository->getTrainingPlans())[saveTrainingPlanAfterPausedIndex].get() == trainingPlan)
+	{
+		wxThreadEvent evt(TW_EVT_SAVE_TP);
+		evt.SetPayload(saveTrainingPlanAfterPausedIndex);
+		window->GetEventHandler()->QueueEvent(evt.Clone());
+		saveTrainingPlanAfterPausedIndex = -1;
+	}
 	wxThreadEvent evt(TW_EVT_REFRESH_TP);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
@@ -148,6 +156,22 @@ void TrainingController::saveNeuralNetwork(std::string path, int neuralNetworkIn
 void TrainingController::loadNeuralNetwork(std::string path)
 {
 	neuralNetworkRepository->load(path);
+}
+
+void TrainingController::saveTrainingPlan(int trainingPlanIndex)
+{
+	AbstractTrainingPlan* trainingPlan = (*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get();
+	if (!trainingPlan->isPaused()) 
+	{
+		saveTrainingPlanAfterPausedIndex = trainingPlanIndex;
+		trainingPlan->pause();
+	}
+	else
+	{
+		wxThreadEvent evt(TW_EVT_SAVE_TP);
+		evt.SetPayload(trainingPlanIndex);
+		window->GetEventHandler()->QueueEvent(evt.Clone());
+	}
 }
 
 void TrainingController::saveTrainingPlan(std::string path, int trainingPlanIndex)

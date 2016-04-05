@@ -34,6 +34,7 @@ wxDEFINE_EVENT(TW_EVT_REFRESH_NN, wxCommandEvent);
 wxDEFINE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);
 wxDEFINE_EVENT(TW_EVT_REFRESH_TP, wxCommandEvent);
 wxDEFINE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
+wxDEFINE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
 
 TrainingWindow::TrainingWindow(TrainingController* controller_)
 	:AbstractWindow("LightBulb")
@@ -46,6 +47,7 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	Bind(TW_EVT_REFRESH_TP, wxCommandEventFunction(&TrainingWindow::refreshTrainingPlans), this);
 	Bind(TW_EVT_REFRESH_TPP, wxCommandEventFunction(&TrainingWindow::refreshTrainingPlanPatterns), this);
 	Bind(TW_EVT_REFRESH_ALL, wxCommandEventFunction(&TrainingWindow::refreshAllData), this);
+	Bind(TW_EVT_SAVE_TP, wxThreadEventFunction(&TrainingWindow::saveTrainingPlan), this);
 
 	createMenuBar();
 
@@ -136,12 +138,9 @@ void TrainingWindow::trainingPlanPopUpMenuSelected(wxCommandEvent& event)
 {
 	if (event.GetId() == NETWORK_POPUP_SAVE)
 	{
-		wxFileDialog saveFileDialog(this, "Save training plan", "", "", "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-
-		if (saveFileDialog.ShowModal() == wxID_CANCEL)
-			return;
-
-		controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanList->GetSelectedRow());
+		Enable(false);
+		Refresh();
+		controller->saveTrainingPlan(trainingPlanList->GetSelectedRow());
 	}
 }
 
@@ -280,6 +279,19 @@ void TrainingWindow::refreshAllData(wxCommandEvent& event)
 	refreshNeuralNetworks(event);
 	refreshTrainingPlanPatterns(event);
 	refreshTrainingPlans(event);
+}
+
+void TrainingWindow::saveTrainingPlan(wxThreadEvent& event)
+{
+	wxFileDialog saveFileDialog(this, "Save training plan", "", "", "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+	if (saveFileDialog.ShowModal() == wxID_CANCEL)
+		return;
+
+	controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), event.GetPayload<int>());
+	
+	Enable(true);
+	Refresh();
 }
 
 void TrainingWindow::addSubWindow(AbstractWindow* newSubWindow)

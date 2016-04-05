@@ -27,6 +27,7 @@ private:
 	AbstractLogger* logger;
 	NeuralNetworkRepository* neuralNetworkRepository;
 	TrainingPlanRepository* trainingPlanRepository;
+	int saveTrainingPlanAfterPausedIndex;
 public:
 	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_);
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
@@ -47,6 +48,7 @@ public:
 	void addSubWindow(AbstractWindow* newSubWindow);
 	void saveNeuralNetwork(std::string path, int neuralNetworkIndex);
 	void loadNeuralNetwork(std::string path);
+	void saveTrainingPlan(int trainingPlanIndex);
 	void saveTrainingPlan(std::string path, int trainingPlanIndex);
 	void loadTrainingPlan(std::string path);
 	void loadTrainingSession(std::string path);
