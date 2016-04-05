@@ -169,6 +169,7 @@
     <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
     <ClInclude Include="IO\BackpropagationXorExampleIO.hpp" />
+    <ClInclude Include="IO\TrainingControllerIO.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="Repositories\TrainingPlanRepository.hpp" />

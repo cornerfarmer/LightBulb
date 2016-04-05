@@ -19,6 +19,8 @@ class TrainingPlanRepository;
 
 class TrainingController
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, TrainingController& trainingController);
 private:
 	std::vector<AbstractTrainingPlan*> trainingPlanPatterns;
 	std::unique_ptr<TrainingWindow> window;
@@ -47,6 +49,8 @@ public:
 	void loadNeuralNetwork(std::string path);
 	void saveTrainingPlan(std::string path, int trainingPlanIndex);
 	void loadTrainingPlan(std::string path);
+	void loadTrainingSession(std::string path);
+	void saveTrainingSession(std::string path);
 };
 
 #endif

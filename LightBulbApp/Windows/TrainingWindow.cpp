@@ -22,7 +22,9 @@ enum
 enum
 {
 	FILE_LOAD_NN,
-	FILE_LOAD_TP
+	FILE_LOAD_TP,
+	FILE_SAVE_TS,
+	FILE_LOAD_TS
 };
 
 BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
@@ -84,6 +86,24 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 			return;
 
 		controller->loadTrainingPlan(openFileDialog.GetPath().ToStdString());
+	}
+	else if (event.GetId() == FILE_LOAD_TS)
+	{
+		wxFileDialog openFileDialog(this, "Load training session", "", "", "Training session files (*.ts)|*.ts", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+
+		if (openFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+
+		controller->loadTrainingSession(openFileDialog.GetPath().ToStdString());
+	}
+	else if (event.GetId() == FILE_SAVE_TS)
+	{
+		wxFileDialog saveFileDialog(this, "Save training session", "", "", "Training session files (*.ts)|*.ts", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+		if (saveFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+
+		controller->saveTrainingSession(saveFileDialog.GetPath().ToStdString());
 	}
 }
 
@@ -353,6 +373,8 @@ void TrainingWindow::createMenuBar()
 	wxMenuBar* menubar = new wxMenuBar();
 	wxMenu* file = new wxMenu;
 	file->Append(wxID_OPEN);
+	file->Append(new wxMenuItem(file, FILE_SAVE_TS, "Save training session"));
+	file->Append(new wxMenuItem(file, FILE_LOAD_TS, "Load training session"));
 	file->Append(new wxMenuItem(file, FILE_LOAD_NN, "Load a neural network"));
 	file->Append(new wxMenuItem(file, FILE_LOAD_TP, "Load a training plan"));
 	file->Append(wxID_SAVE);

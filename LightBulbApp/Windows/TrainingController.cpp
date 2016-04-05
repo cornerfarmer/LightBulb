@@ -8,6 +8,11 @@
 #include <Examples/BackpropagationXorExample.hpp>
 #include <Repositories/NeuralNetworkRepository.hpp>
 #include <Repositories/TrainingPlanRepository.hpp>
+#include <fstream>
+#include <cereal/archives/xml.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/types/polymorphic.hpp>
+#include "IO/TrainingControllerIO.hpp"
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
 {
@@ -154,4 +159,29 @@ void TrainingController::loadTrainingPlan(std::string path)
 {
 	AbstractTrainingPlan* trainingPlan = trainingPlanRepository->load(path, logger);
 	neuralNetworkRepository->Add(trainingPlan->getNeuralNetwork());
+}
+
+void TrainingController::loadTrainingSession(std::string path)
+{
+	std::ifstream is(path);
+	cereal::XMLInputArchive archive(is);
+
+	archive(*this);
+
+	for (auto trainingPlan = trainingPlanRepository->getTrainingPlans()->begin(); trainingPlan != trainingPlanRepository->getTrainingPlans()->end(); trainingPlan++)
+	{
+		(*trainingPlan)->setLogger(logger);
+		neuralNetworkRepository->Add((*trainingPlan)->getNeuralNetwork());
+	}
+
+	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
+}
+
+void TrainingController::saveTrainingSession(std::string path)
+{
+	std::ofstream os(path);
+	cereal::XMLOutputArchive archive(os);
+
+	archive(*this);
 }

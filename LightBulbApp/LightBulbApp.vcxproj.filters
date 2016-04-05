@@ -155,5 +155,8 @@
     <ClInclude Include="IO\BackpropagationXorExampleIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="IO\TrainingControllerIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
