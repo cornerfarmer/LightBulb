@@ -5,6 +5,7 @@
 
 AbstractTrainingPlan::AbstractTrainingPlan()
 {
+	threadShouldBeJoinedBeforeReuse = false;
 	state = TP_IDLE;
 }
 
@@ -18,13 +19,17 @@ void AbstractTrainingPlan::start(AbstractNeuralNetwork* network_)
 			network = createNeuralNetwork();
 		network->setState(NN_STATE_TRAINED);
 		state = TP_RUNNING;
-		thread = std::thread(&AbstractTrainingPlan::run, this, true);
+		thread = std::thread(&AbstractTrainingPlan::runThread, this, true);
 	}
 	else if (state == TP_PAUSED)
 	{
 		state = TP_RUNNING;
-//		thread.join();
-		thread = std::thread(&AbstractTrainingPlan::run, this, false);
+		if (threadShouldBeJoinedBeforeReuse)
+		{
+			thread.join();
+			threadShouldBeJoinedBeforeReuse = false;
+		}
+		thread = std::thread(&AbstractTrainingPlan::runThread, this, false);
 	}
 }
 
@@ -86,6 +91,12 @@ bool AbstractTrainingPlan::isPausing()
 bool AbstractTrainingPlan::isRunning()
 {
 	return state == TP_RUNNING;
+}
+
+void AbstractTrainingPlan::runThread(bool initial)
+{
+	run(initial);
+	threadShouldBeJoinedBeforeReuse = true;
 }
 
 void AbstractTrainingPlan::pausingFinished()

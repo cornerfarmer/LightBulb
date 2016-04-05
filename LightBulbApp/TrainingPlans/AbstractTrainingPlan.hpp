@@ -41,6 +41,8 @@ private:
 	std::thread thread;
 	AbstractTrainingPlan* pattern;
 	TrainingPlanState state;
+	void runThread(bool initial);
+	bool threadShouldBeJoinedBeforeReuse;
 protected:
 	AbstractNeuralNetwork* network;
 	AbstractLogger* logger;
