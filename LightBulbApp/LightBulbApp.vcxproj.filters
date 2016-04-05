@@ -87,6 +87,9 @@
     <ClCompile Include="Repositories\TrainingPlanRepository.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="IO\AbstractTrainingPlanIO.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -156,6 +159,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\TrainingControllerIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\TrainingPlanRepositoryIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

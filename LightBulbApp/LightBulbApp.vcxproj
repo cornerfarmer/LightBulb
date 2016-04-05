@@ -135,6 +135,7 @@
     </ClCompile>
     <ClCompile Include="Examples\TeachedEvolutionExample.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolutionExample.cpp" />
+    <ClCompile Include="IO\AbstractTrainingPlanIO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main.old.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -169,7 +170,9 @@
     <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
     <ClInclude Include="IO\BackpropagationXorExampleIO.hpp" />
+    <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />
     <ClInclude Include="IO\TrainingControllerIO.hpp" />
+    <ClInclude Include="IO\TrainingPlanRepositoryIO.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="Repositories\TrainingPlanRepository.hpp" />

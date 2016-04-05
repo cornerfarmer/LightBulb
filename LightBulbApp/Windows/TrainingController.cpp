@@ -171,7 +171,6 @@ void TrainingController::loadTrainingSession(std::string path)
 	for (auto trainingPlan = trainingPlanRepository->getTrainingPlans()->begin(); trainingPlan != trainingPlanRepository->getTrainingPlans()->end(); trainingPlan++)
 	{
 		(*trainingPlan)->setLogger(logger);
-		neuralNetworkRepository->Add((*trainingPlan)->getNeuralNetwork());
 	}
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);

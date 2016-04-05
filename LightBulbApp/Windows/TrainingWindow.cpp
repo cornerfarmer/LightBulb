@@ -358,7 +358,15 @@ void TrainingWindow::validateSelectedProcess()
 		}
 		else
 		{
-			processErrorText->SetLabel("");
+			if ((*controller->getNeuralNetworks())[neuralNetworkIndex]->getState() == NN_STATE_TRAINED)
+			{
+				processErrorText->SetLabel("The network gets already trained!");
+				toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
+			}
+			else
+			{
+				processErrorText->SetLabel("");
+			}
 		}
 	}
 	else
@@ -453,6 +461,7 @@ void TrainingWindow::showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNet
 	detailsTextBox->WriteText("Size: " + getNeuralNetworkSizeAsString(neuralNetwork->getNetworkTopology()->getNeuronCountsPerLayer()) + "\n");
 	std::time_t creationDate = neuralNetwork->getCreationDate();
 	detailsTextBox->WriteText("Creation date: " + std::string(std::asctime(std::localtime(&creationDate))) + "\n");
+	detailsTextBox->WriteText("State: " + neuralNetwork->getStateAsString() + "\n");
 	currentDetailObject = neuralNetwork;
 }
 

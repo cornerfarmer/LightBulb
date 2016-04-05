@@ -14,6 +14,8 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 		throw std::invalid_argument("The given networkTopology is not valid");
 
 	networkTopology.reset(networkTopology_);
+
+	state = NN_STATE_READY;
 }
 
 void NeuralNetwork::calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
@@ -80,4 +82,14 @@ std::string NeuralNetwork::getName()
 std::time_t NeuralNetwork::getCreationDate()
 {
 	return std::time(nullptr);
+}
+
+NeuralNetworkState NeuralNetwork::getState()
+{
+	return state;
+}
+
+void NeuralNetwork::setState(NeuralNetworkState newState)
+{
+	state = newState;
 }

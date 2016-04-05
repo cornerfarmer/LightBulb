@@ -23,8 +23,10 @@ class NeuralNetwork : public AbstractNeuralNetwork
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, NeuralNetwork& neuralNetwork);
+	friend struct cereal::LoadAndConstruct<NeuralNetwork>;
 private:
 	std::unique_ptr<AbstractNetworkTopology> networkTopology;
+	NeuralNetworkState state;
 public:
 	NeuralNetwork(AbstractNetworkTopology* networkTopology_);	
 	// Calculates from the given input and activation order the output from neural network (If a not-NULL output value map or a netInput value map is given, the method will fill them)
@@ -33,6 +35,9 @@ public:
 	AbstractNetworkTopology* getNetworkTopology();
 	std::string getName();
 	std::time_t getCreationDate();
+	NeuralNetworkState getState();
+	void setState(NeuralNetworkState newState);
 };
 
 #endif
+

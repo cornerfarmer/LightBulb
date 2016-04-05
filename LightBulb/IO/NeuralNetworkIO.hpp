@@ -15,6 +15,7 @@ template <class Archive>
 void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
 {
 	archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
+	archive(cereal::make_nvp("state", neuralNetwork.state));
 }
 
 namespace cereal
@@ -27,6 +28,7 @@ namespace cereal
 			std::unique_ptr<AbstractNetworkTopology> networkTopology;
 			ar(cereal::make_nvp("networkTopology", networkTopology));
 			construct(networkTopology.release());
+			ar(cereal::make_nvp("state", construct->state));
 		}
 	};
 }

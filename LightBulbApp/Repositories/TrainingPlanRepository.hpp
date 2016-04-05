@@ -21,9 +21,7 @@ enum TrainingPlanRepositoryEvents
 class TrainingPlanRepository : public Observable<TrainingPlanRepositoryEvents, TrainingPlanRepository>
 {
 	template <class Archive>
-	friend void load(Archive& archive, TrainingPlanRepository& trainingPlanRepository);
-	template <class Archive>
-	friend void save(Archive& archive, TrainingPlanRepository const& trainingPlanRepository);
+	friend void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository);
 private:
 	std::vector<std::unique_ptr<AbstractTrainingPlan>> trainingPlans;
 public:

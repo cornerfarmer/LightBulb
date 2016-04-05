@@ -1,6 +1,7 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <thread>
+#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 
 AbstractTrainingPlan::AbstractTrainingPlan()
 {
@@ -15,6 +16,7 @@ void AbstractTrainingPlan::start(AbstractNeuralNetwork* network_)
 			network = network_;
 		else
 			network = createNeuralNetwork();
+		network->setState(NN_STATE_TRAINED);
 		state = TP_RUNNING;
 		thread = std::thread(&AbstractTrainingPlan::run, this, true);
 	}

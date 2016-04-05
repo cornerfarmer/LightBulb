@@ -15,6 +15,12 @@ class AbstractNetworkTopology;
 class AbstractActivationOrder;
 class AbstractNeuron;
 
+enum NeuralNetworkState
+{
+	NN_STATE_READY,
+	NN_STATE_TRAINED,
+};
+
 // This class contains all stuff needed to describe a NeuralNetwork
 class AbstractNeuralNetwork 
 {
@@ -27,6 +33,9 @@ public:
 	virtual AbstractNetworkTopology* getNetworkTopology() = 0;
 	virtual std::string getName() = 0;
 	virtual std::time_t getCreationDate() = 0;
+	virtual NeuralNetworkState getState() = 0;
+	virtual void setState(NeuralNetworkState newState) = 0;
+	virtual std::string getStateAsString();
 };
 
 #endif

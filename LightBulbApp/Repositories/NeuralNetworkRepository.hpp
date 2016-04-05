@@ -20,6 +20,8 @@ enum NeuralNetworkRepositoryEvents
 
 class NeuralNetworkRepository : public Observable<NeuralNetworkRepositoryEvents, NeuralNetworkRepository>
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, NeuralNetworkRepository& neuralNetworkRepository);
 private:
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>> neuralNetworks;
 public:

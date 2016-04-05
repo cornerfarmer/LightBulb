@@ -1,2 +1,12 @@
 // Includes
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
+
+std::string AbstractNeuralNetwork::getStateAsString()
+{
+	if (getState() == NN_STATE_READY)
+		return "ready";
+	else if (getState() == NN_STATE_TRAINED)
+		return "trained";
+	else
+		return "";
+}
