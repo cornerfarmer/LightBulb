@@ -11,25 +11,28 @@
 #include <map>
 #include <vector>
 
-template<typename EventTypes, typename EventArg>
-class Observable
+namespace LightBulb
 {
-private:
-	std::map<EventTypes, std::vector<AbstractObserver<EventArg>*>> observers;
-protected:
-	void throwEvent(EventTypes eventType, EventArg* arg)
+	template<typename EventTypes, typename EventArg>
+	class Observable
 	{
-		for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
+	private:
+		std::map<EventTypes, std::vector<AbstractObserver<EventArg>*>> observers;
+	protected:
+		void throwEvent(EventTypes eventType, EventArg* arg)
 		{
-			(*observer)->throwEvent(arg);
+			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
+			{
+				(*observer)->throwEvent(arg);
+			}
 		}
-	}
-public:
-	template<typename Class>
-	void registerObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
-	{
-		observers[eventType].push_back(new Observer<Class, EventArg>(observerMethod, observerObject));
-	}
-};
+	public:
+		template<typename Class>
+		void registerObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
+		{
+			observers[eventType].push_back(new Observer<Class, EventArg>(observerMethod, observerObject));
+		}
+	};
+}
 
 #endif

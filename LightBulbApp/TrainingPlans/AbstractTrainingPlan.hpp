@@ -31,7 +31,7 @@ enum TrainingPlanEvents
 	EVT_TP_FINISHED
 };
 
-class AbstractTrainingPlan : public Observable<TrainingPlanEvents, AbstractTrainingPlan>
+class AbstractTrainingPlan : public LightBulb::Observable<TrainingPlanEvents, AbstractTrainingPlan>
 {
 	template <class Archive>
 	friend void save(Archive& archive, AbstractTrainingPlan const& trainingPlan);

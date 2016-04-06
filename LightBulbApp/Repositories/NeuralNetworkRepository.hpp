@@ -18,7 +18,7 @@ enum NeuralNetworkRepositoryEvents
 	EVT_NN_CHANGED
 };
 
-class NeuralNetworkRepository : public Observable<NeuralNetworkRepositoryEvents, NeuralNetworkRepository>
+class NeuralNetworkRepository : public LightBulb::Observable<NeuralNetworkRepositoryEvents, NeuralNetworkRepository>
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, NeuralNetworkRepository& neuralNetworkRepository);

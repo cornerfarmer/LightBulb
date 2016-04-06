@@ -18,7 +18,7 @@ enum TrainingPlanRepositoryEvents
 	EVT_TP_CHANGED
 };
 
-class TrainingPlanRepository : public Observable<TrainingPlanRepositoryEvents, TrainingPlanRepository>
+class TrainingPlanRepository : public LightBulb::Observable<TrainingPlanRepositoryEvents, TrainingPlanRepository>
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository);
