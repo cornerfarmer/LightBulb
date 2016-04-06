@@ -41,6 +41,7 @@ public:
 	MOCK_METHOD1(getEfferentWeightsPerLayer, Eigen::MatrixXd (int));
 	MOCK_METHOD2(setAfferentWeightsPerLayer, void (int, Eigen::MatrixXd&));
 	MOCK_METHOD0(getWeights, std::vector<Eigen::MatrixXd>* ());
+	MOCK_METHOD0(getNeuronCountsPerLayer, std::vector<unsigned> ());
 };
 
 #endif

@@ -47,7 +47,6 @@ public:
 	RBFInterpolationLearningRuleOptions getDefaultOptions()
 	{
 		RBFInterpolationLearningRuleOptions options;
-		options.enableDebugOutput = true;
 		options.offlineLearning = true;
 		options.totalErrorGoal = 6;
 		options.maxTotalErrorValue = 10;
