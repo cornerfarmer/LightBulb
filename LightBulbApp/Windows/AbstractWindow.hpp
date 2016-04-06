@@ -4,7 +4,6 @@
 #define _ABSTRACTWINDOW_H_
 
 // Includes
-#include "Graphics/GraphicObject.hpp"
 #include <list>
 #include <wx/wxprec.h>
 

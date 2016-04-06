@@ -1,7 +1,6 @@
 #include "RBFNetworkBiggerExample.hpp"
-#include <SFML/Window/Event.hpp>
-#include <Graphics/RBFNetworkStructureChart.hpp>
-#include <Graphics/NeuralNetworkResultChart.hpp>
+//#include <Graphics/RBFNetworkStructureChart.hpp>
+//#include <Graphics/NeuralNetworkResultChart.hpp>
 #include <ClusterAnalysis/ROLFNeuronPlacer.hpp>
 #include <Learning/RBFInterpolationLearningRule.hpp>
 #include <Learning/DeltaLearningRule.hpp>
@@ -60,40 +59,40 @@ void doRBFNetworkBiggerExample()
 	deltaLearningRule.start(neuralNetwork, teacher);
 
 
-	NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
-	neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
-	neuralNetworkResultChartOptions.binaryInterpretation = true;
-	neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
-	neuralNetworkResultChartOptions.yRangeEnd = 20;
-	neuralNetworkResultChartOptions.xRangeEnd = 20;
-	NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
-	neuralNetworkResultChart.recalculateAllValues();
+	//NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
+	//neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
+	//neuralNetworkResultChartOptions.binaryInterpretation = true;
+	//neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
+	//neuralNetworkResultChartOptions.yRangeEnd = 20;
+	//neuralNetworkResultChartOptions.xRangeEnd = 20;
+	//NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
+	//neuralNetworkResultChart.recalculateAllValues();
 
-	RBFNetworkStructureChartOptions rbfNetworkStructureChartOptions;
-	rbfNetworkStructureChartOptions.rbfNetwork = static_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
-	rbfNetworkStructureChartOptions.yRangeEnd = 20;
-	rbfNetworkStructureChartOptions.xRangeEnd = 20;
-	rbfNetworkStructureChartOptions.posX = 300;
-	rbfNetworkStructureChartOptions.posY = 0;
-	RBFNetworkStructureChart rbfNetworkStructureChart(rbfNetworkStructureChartOptions);
-	rbfNetworkStructureChart.recalculateAllValues();
+	//RBFNetworkStructureChartOptions rbfNetworkStructureChartOptions;
+	//rbfNetworkStructureChartOptions.rbfNetwork = static_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
+	//rbfNetworkStructureChartOptions.yRangeEnd = 20;
+	//rbfNetworkStructureChartOptions.xRangeEnd = 20;
+	//rbfNetworkStructureChartOptions.posX = 300;
+	//rbfNetworkStructureChartOptions.posY = 0;
+	//RBFNetworkStructureChart rbfNetworkStructureChart(rbfNetworkStructureChartOptions);
+	//rbfNetworkStructureChart.recalculateAllValues();
 
 
-	sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
+	//sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
 
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+	//while (window.isOpen())
+	//{
+	//	sf::Event event;
+	//	while (window.pollEvent(event))
+	//	{
+	//		if (event.type == sf::Event::Closed)
+	//			window.close();
+	//	}
 
-		window.clear();
-		neuralNetworkResultChart.draw(window);
-		rbfNetworkStructureChart.draw(window);
-		window.display();
-	}
+	//	window.clear();
+	//	neuralNetworkResultChart.draw(window);
+	//	rbfNetworkStructureChart.draw(window);
+	//	window.display();
+	//}
 
 }

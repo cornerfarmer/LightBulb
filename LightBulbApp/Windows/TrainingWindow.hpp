@@ -8,6 +8,7 @@
 
 // Includes
 #include "Windows/AbstractWindow.hpp"
+#include <map>
 
 // Forward declarations
 class wxRichTextCtrl;

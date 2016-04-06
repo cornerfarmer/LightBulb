@@ -6,11 +6,8 @@
 #include <Function/WeightedSumFunction.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
-#include <ActivationOrder/TopologicalOrder.hpp>
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <Graphics/NeuralNetworkResultChart.hpp>
-#include <Logging/ConsoleLogger.hpp>
 
 
 void BackpropagationXorExample::initializeLearningRate()

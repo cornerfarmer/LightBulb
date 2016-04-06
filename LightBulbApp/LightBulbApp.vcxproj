@@ -74,12 +74,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions> _UNICODE;SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sfgui-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;../Debug/LightBulb.lib;wxcode_msw28ud_freechart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\lib\vc_lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\lib\vc_lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>../Debug/LightBulb.lib;wxcode_msw28ud_freechart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\lib\vc_lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\lib\vc_lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -97,14 +97,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfgui.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;wxcode_msw28u_freechart.lib;../Release/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFML-2.3.2\lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\SFGUI\lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\lib\vc_lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\lib\vc_lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxcode_msw28u_freechart.lib;../Release/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\lib\vc_lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\lib\vc_lib</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -126,15 +126,30 @@
     <ClCompile Include="Examples\BackpropagationXorExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolutionExample.cpp" />
-    <ClCompile Include="Examples\EvolutionExample.cpp" />
-    <ClCompile Include="Examples\FunctionEvolutionExample.cpp" />
+    <ClCompile Include="Examples\NetworkEvolutionExample.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Examples\EvolutionExample.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Examples\TeachedEvolutionExample.cpp" />
-    <ClCompile Include="Examples\TicTacToeEvolutionExample.cpp" />
+    <ClCompile Include="Examples\TeachedEvolutionExample.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolutionExample.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="IO\AbstractTrainingPlanIO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main.old.cpp">
@@ -161,15 +176,30 @@
     <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolutionExample.hpp" />
-    <ClInclude Include="Examples\EvolutionExample.hpp" />
-    <ClInclude Include="Examples\FunctionEvolutionExample.hpp" />
+    <ClInclude Include="Examples\NetworkEvolutionExample.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Examples\EvolutionExample.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Examples\TeachedEvolutionExample.hpp" />
-    <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp" />
+    <ClInclude Include="Examples\TeachedEvolutionExample.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
     <ClInclude Include="IO\BackpropagationXorExampleIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />

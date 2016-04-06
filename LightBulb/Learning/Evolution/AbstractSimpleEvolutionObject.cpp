@@ -2,18 +2,9 @@
 #include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
 #include "NetworkTopology/RecurrentLayeredNetwork.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Examples/Nature.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
-#include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
-#include "Function/WeightedSumFunction.hpp"
-#include "Function/FermiFunction.hpp"
-#include "Function/HyperbolicTangentFunction.hpp"
-#include "Function/IdentityFunction.hpp"
-#include "Function/BinaryFunction.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include "Examples/AbstractTile.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
-#include <Neuron/NeuronDescription.hpp>
+#include "AbstractEvolutionWorld.hpp"
 
 void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& options)
 {
