@@ -23,6 +23,16 @@ public:
 		storage = NULL;
 		return temp;
 	}
+
+	static T* get()
+	{
+		return storage;
+	}
+
+	static void clear()
+	{
+		storage = NULL;
+	}
 };
 
 template<typename T>

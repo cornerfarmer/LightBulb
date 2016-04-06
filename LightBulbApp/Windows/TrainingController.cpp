@@ -14,6 +14,7 @@
 #include <cereal/types/polymorphic.hpp>
 #include "IO/TrainingControllerIO.hpp"
 
+
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
 {
 	neuralNetworkRepository = neuralNetworkRepository_;
@@ -24,6 +25,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	window.reset(new TrainingWindow(this));;
 	logger = NULL;
 	saveTrainingPlanAfterPausedIndex = -1;
+	saveTrainingSessionAfterPause = false;
 
 	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
@@ -99,6 +101,8 @@ int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trai
 
 void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
 {
+	wxThreadEvent evt(TW_EVT_REFRESH_TP);
+	window->GetEventHandler()->QueueEvent(evt.Clone());
 	if (saveTrainingPlanAfterPausedIndex != -1 && (*trainingPlanRepository->getTrainingPlans())[saveTrainingPlanAfterPausedIndex].get() == trainingPlan)
 	{
 		wxThreadEvent evt(TW_EVT_SAVE_TP);
@@ -106,8 +110,12 @@ void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 		saveTrainingPlanAfterPausedIndex = -1;
 	}
-	wxThreadEvent evt(TW_EVT_REFRESH_TP);
-	window->GetEventHandler()->QueueEvent(evt.Clone());
+	if (saveTrainingSessionAfterPause && allTrainingPlansPaused())
+	{
+		wxThreadEvent evt(TW_EVT_SAVE_TS);
+		window->GetEventHandler()->QueueEvent(evt.Clone());
+		saveTrainingSessionAfterPause = false;
+	}
 }
 
 void TrainingController::trainingPlanFinished(AbstractTrainingPlan* trainingPlan)
@@ -207,4 +215,35 @@ void TrainingController::saveTrainingSession(std::string path)
 	cereal::XMLOutputArchive archive(os);
 
 	archive(*this);
+}
+
+void TrainingController::saveTrainingSession()
+{
+	if (!allTrainingPlansPaused())
+	{
+		saveTrainingSessionAfterPause = true;
+		for (auto trainingPlan = trainingPlanRepository->getTrainingPlans()->begin(); trainingPlan != trainingPlanRepository->getTrainingPlans()->end(); trainingPlan++)
+		{
+			if (!(*trainingPlan)->isPaused())
+				(*trainingPlan)->pause();
+		}
+	}
+	else
+	{
+		wxThreadEvent evt(TW_EVT_SAVE_TS);
+		window->GetEventHandler()->QueueEvent(evt.Clone());
+	}
+}
+
+
+
+bool TrainingController::allTrainingPlansPaused()
+{
+	bool allPaused = true;
+	for (auto trainingPlan = trainingPlanRepository->getTrainingPlans()->begin(); trainingPlan != trainingPlanRepository->getTrainingPlans()->end(); trainingPlan++)
+	{
+		if (!(*trainingPlan)->isPaused())
+			allPaused = false;
+	}
+	return allPaused;
 }

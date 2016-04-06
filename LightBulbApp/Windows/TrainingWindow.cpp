@@ -35,6 +35,7 @@ wxDEFINE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);
 wxDEFINE_EVENT(TW_EVT_REFRESH_TP, wxCommandEvent);
 wxDEFINE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
 wxDEFINE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
+wxDEFINE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
 
 TrainingWindow::TrainingWindow(TrainingController* controller_)
 	:AbstractWindow("LightBulb")
@@ -48,6 +49,7 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	Bind(TW_EVT_REFRESH_TPP, wxCommandEventFunction(&TrainingWindow::refreshTrainingPlanPatterns), this);
 	Bind(TW_EVT_REFRESH_ALL, wxCommandEventFunction(&TrainingWindow::refreshAllData), this);
 	Bind(TW_EVT_SAVE_TP, wxThreadEventFunction(&TrainingWindow::saveTrainingPlan), this);
+	Bind(TW_EVT_SAVE_TS, wxThreadEventFunction(&TrainingWindow::saveTrainingSession), this);
 
 	createMenuBar();
 
@@ -100,12 +102,9 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 	}
 	else if (event.GetId() == FILE_SAVE_TS)
 	{
-		wxFileDialog saveFileDialog(this, "Save training session", "", "", "Training session files (*.ts)|*.ts", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-
-		if (saveFileDialog.ShowModal() == wxID_CANCEL)
-			return;
-
-		controller->saveTrainingSession(saveFileDialog.GetPath().ToStdString());
+		Enable(false);
+		Refresh();
+		controller->saveTrainingSession();
 	}
 }
 
@@ -290,6 +289,19 @@ void TrainingWindow::saveTrainingPlan(wxThreadEvent& event)
 
 	controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), event.GetPayload<int>());
 	
+	Enable(true);
+	Refresh();
+}
+
+void TrainingWindow::saveTrainingSession(wxThreadEvent& event)
+{
+	wxFileDialog saveFileDialog(this, "Save training session", "", "", "Training session files (*.ts)|*.ts", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+	if (saveFileDialog.ShowModal() == wxID_CANCEL)
+		return;
+
+	controller->saveTrainingSession(saveFileDialog.GetPath().ToStdString());
+
 	Enable(true);
 	Refresh();
 }

@@ -23,6 +23,7 @@ wxDECLARE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);
 wxDECLARE_EVENT(TW_EVT_REFRESH_TP, wxCommandEvent);
 wxDECLARE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
 wxDECLARE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
+wxDECLARE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
 
 class TrainingWindow : public AbstractWindow
 {
@@ -71,6 +72,7 @@ private:
 	void refreshTrainingPlans(wxCommandEvent& event);
 	void refreshAllData(wxCommandEvent& event);
 	void saveTrainingPlan(wxThreadEvent& event);
+	void saveTrainingSession(wxThreadEvent& event);
 protected:
 	DECLARE_EVENT_TABLE();
 public:

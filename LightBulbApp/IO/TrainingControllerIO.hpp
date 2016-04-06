@@ -17,6 +17,7 @@ void serialize(Archive& archive, TrainingController& trainingController)
 
 	IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(trainingController.neuralNetworkRepository->getNeuralNetworks());
 	serialize(archive, *trainingController.trainingPlanRepository);
+	IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
 }
 
 

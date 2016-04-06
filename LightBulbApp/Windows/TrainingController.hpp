@@ -28,6 +28,8 @@ private:
 	NeuralNetworkRepository* neuralNetworkRepository;
 	TrainingPlanRepository* trainingPlanRepository;
 	int saveTrainingPlanAfterPausedIndex;
+	bool saveTrainingSessionAfterPause;
+	bool allTrainingPlansPaused();
 public:
 	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_);
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
@@ -53,6 +55,7 @@ public:
 	void loadTrainingPlan(std::string path);
 	void loadTrainingSession(std::string path);
 	void saveTrainingSession(std::string path);
+	void saveTrainingSession();
 };
 
 #endif

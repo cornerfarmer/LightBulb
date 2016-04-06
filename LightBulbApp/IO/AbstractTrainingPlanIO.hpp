@@ -23,7 +23,7 @@ void save(Archive& archive, AbstractTrainingPlan const& trainingPlan)
 	}
 	else
 	{
-		auto networks = IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::pop();
+		auto networks = IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::get();
 		int neuralNetworkIndex = 0;
 		for (auto network = networks->begin(); network != networks->end(); network++, neuralNetworkIndex++)
 		{
@@ -46,7 +46,7 @@ void load(Archive& archive, AbstractTrainingPlan& trainingPlan)
 	}
 	else
 	{
-		auto networks = IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::pop();
+		auto networks = IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::get();
 		int neuralNetworkIndex;
 		archive(cereal::make_nvp("neuralNetworkIndex", neuralNetworkIndex));
 		trainingPlan.network = (*networks)[neuralNetworkIndex].get();
