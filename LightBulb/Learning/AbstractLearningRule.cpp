@@ -16,6 +16,8 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 {
 	options.reset(options_);
 
+	learningState.reset(new LearningState(options->dataSaveInterval));
+
 	pauseRequest = false;
 	// Check if all given options are correct
 	if (options->maxTotalErrorValue <= options->totalErrorGoal)
@@ -70,7 +72,7 @@ bool AbstractLearningRule::learn(bool resume)
 		// Do while the totalError is not zero
 		while ((totalError = currentTeacher->getTotalError(*currentNeuralNetwork, *currentActivationOrder)) > options->totalErrorGoal  && iteration++ < options->maxIterationsPerTry)
 		{
-			learningState.addData(DATA_SET_TRAINING_ERROR, iteration, totalError);
+			learningState->addData(DATA_SET_TRAINING_ERROR, iteration, totalError);
 
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
@@ -250,7 +252,7 @@ void AbstractLearningRule::log(std::string message, LogLevel level)
 
 LearningState* AbstractLearningRule::getLearningState()
 {
-	return &learningState;
+	return learningState.get();
 }
 
 std::vector<std::string> AbstractLearningRule::getDataSetLabels()

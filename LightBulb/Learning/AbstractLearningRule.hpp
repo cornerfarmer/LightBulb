@@ -54,6 +54,8 @@ struct AbstractLearningRuleOptions
 	bool offlineLearning;
 	// Can be used to prevent the learning rule to change the weights of the network before the learning begins
 	bool changeWeightsBeforeLearning;
+
+	int dataSaveInterval;
 	AbstractLearningRuleOptions()
 	{
 		maxIterationsPerTry = 10000;
@@ -67,6 +69,7 @@ struct AbstractLearningRuleOptions
 		debugOutputInterval = 1000;	
 		offlineLearning = false;
 		changeWeightsBeforeLearning = true;
+		dataSaveInterval = 1;
 	}
 	virtual ~AbstractLearningRuleOptions() {}
 };
@@ -93,7 +96,7 @@ protected:
 	// The current teacher
 	Teacher* currentTeacher;
 
-	LearningState learningState;
+	std::unique_ptr<LearningState> learningState;
 
 	std::unique_ptr<AbstractActivationOrder> currentActivationOrder;
 	// This method will be called in front of the actual learning algorithm

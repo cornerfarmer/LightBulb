@@ -24,6 +24,8 @@ private:
 	TrainingPlanRepository* trainingPlanRepository;
 	AbstractTrainingPlan* selectedTrainingPlan;
 	int iterationsSinceLearningStateChanged;
+	int refreshRate;
+	bool refreshScheduled;
 public:
 	LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
 	LearningStateWindow* getWindow();
@@ -33,6 +35,9 @@ public:
 	AbstractTrainingPlan* getSelectedTrainingPlan();
 	void learningStateChanged(LearningState* learningState);
 	std::vector<double>* getDataSet(std::string dataSetLabel);
+	void setRefreshRate(int newRefreshRate);
+	int getRefreshRate();
+	void refreshFinished();
 };
 
 #endif

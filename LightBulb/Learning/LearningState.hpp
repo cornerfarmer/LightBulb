@@ -13,6 +13,9 @@ enum LearningStateEvents
 // All informations about a finished learning process
 struct LearningState : public LightBulb::Observable<LearningStateEvents, LearningState>
 {
+private:
+	int dataSaveInterval;
+public:
 	// Was the learning process successful
 	int successful;
 
@@ -21,18 +24,22 @@ struct LearningState : public LightBulb::Observable<LearningStateEvents, Learnin
 	int iterationsNeeded;
 
 	std::map<std::string, std::vector<double>> dataSets;
-	LearningState()
+	LearningState(int dataSaveInterval_ = 1)
 	{
 		successful = 0;
 		quality = 0;
 		iterationsNeeded = 0;
+		dataSaveInterval = dataSaveInterval_;
 	}
 
 	void addData(std::string dataSetLabel, int iteration, double data)
 	{
-		dataSets[dataSetLabel].push_back(iteration);
-		dataSets[dataSetLabel].push_back(data);
-		throwEvent(EVT_LS_DS_CHANGED, this);
+		if (iteration % dataSaveInterval == 0)
+		{
+			dataSets[dataSetLabel].push_back(iteration);
+			dataSets[dataSetLabel].push_back(data);
+			throwEvent(EVT_LS_DS_CHANGED, this);
+		}
 	}
 
 };

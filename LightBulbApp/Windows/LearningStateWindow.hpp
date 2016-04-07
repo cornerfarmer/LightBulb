@@ -25,7 +25,9 @@ private:
 	wxBoxSizer* dataSetsSizer;
 	wxChartPanel* chartPanel;
 	std::vector<wxCheckBox*> dataSetsCheckBoxes;
+	wxComboBox* refreshRateChoice;
 	void trainingPlanChanged(wxCommandEvent& event);
+	void refreshRateChanged(wxCommandEvent& event);
 	void selectionChanged(wxCommandEvent& event);
 	void refreshChart(wxThreadEvent& event);
 public:

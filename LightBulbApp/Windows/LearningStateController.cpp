@@ -8,6 +8,7 @@
 
 LearningStateController::LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
 {
+	refreshRate = 100;
 	trainingPlanRepository = trainingPlanRepository_;
 	trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, this);
 	window.reset(new LearningStateWindow(this, parent));
@@ -42,11 +43,12 @@ AbstractTrainingPlan* LearningStateController::getSelectedTrainingPlan()
 
 void LearningStateController::learningStateChanged(LearningState* learningState)
 {		
-	if (iterationsSinceLearningStateChanged-- <= 0)
+	if (iterationsSinceLearningStateChanged-- <= 0 && !refreshScheduled)
 	{
+		refreshScheduled = true;
 		wxThreadEvent evt(LSW_EVT_REFRESH_CHART);
 		window->GetEventHandler()->QueueEvent(evt.Clone());
-		iterationsSinceLearningStateChanged = 100;
+		iterationsSinceLearningStateChanged = refreshRate;
 	}
 }
 
@@ -54,4 +56,23 @@ std::vector<double>* LearningStateController::getDataSet(std::string dataSetLabe
 {
 	LearningState* state = selectedTrainingPlan->getLearningState();
 	return &state->dataSets[dataSetLabel];
+}
+
+void LearningStateController::setRefreshRate(int newRefreshRate)
+{
+	if (newRefreshRate > 0)
+	{
+		refreshRate = newRefreshRate;
+		iterationsSinceLearningStateChanged = refreshRate;
+	}
+}
+
+int LearningStateController::getRefreshRate()
+{
+	return refreshRate;
+}
+
+void LearningStateController::refreshFinished()
+{
+	refreshScheduled = false;
 }

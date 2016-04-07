@@ -22,6 +22,7 @@ void BackpropagationXorExample::initializeLearningRate()
 	options.momentum = 0;
 	options.resilientLearningRate = false;
 	options.logger = logger;
+	options.dataSaveInterval = 10;
 	learningRule.reset(new BackpropagationLearningRule(options));
 
 	teacher.reset(new Teacher());
