@@ -895,9 +895,6 @@
     <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\LearningResult.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
     <ClInclude Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp">
       <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
     </ClInclude>
@@ -1144,5 +1141,8 @@
     <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
     <ClInclude Include="IO\IOStorage.hpp" />
+    <ClInclude Include="Learning\LearningState.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

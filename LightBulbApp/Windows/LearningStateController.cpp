@@ -4,12 +4,14 @@
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <Repositories/TrainingPlanRepository.hpp>
+#include <Learning/LearningState.hpp>
 
 LearningStateController::LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
 {
 	trainingPlanRepository = trainingPlanRepository_;
 	trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, this);
 	window.reset(new LearningStateWindow(this, parent));
+	iterationsSinceLearningStateChanged = 0;
 }
 
 LearningStateWindow* LearningStateController::getWindow()
@@ -25,4 +27,31 @@ std::vector<std::unique_ptr<AbstractTrainingPlan>>* LearningStateController::get
 void LearningStateController::trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository)
 {
 	window->refreshTrainingPlans();
+}
+
+void LearningStateController::setSelectedTrainingPlan(int trainingPlanIndex)
+{
+	selectedTrainingPlan = (*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get();
+	selectedTrainingPlan->getLearningState()->registerObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
+}
+
+AbstractTrainingPlan* LearningStateController::getSelectedTrainingPlan()
+{
+	return selectedTrainingPlan;
+}
+
+void LearningStateController::learningStateChanged(LearningState* learningState)
+{		
+	if (iterationsSinceLearningStateChanged-- <= 0)
+	{
+		wxThreadEvent evt(LSW_EVT_REFRESH_CHART);
+		window->GetEventHandler()->QueueEvent(evt.Clone());
+		iterationsSinceLearningStateChanged = 100;
+	}
+}
+
+std::vector<double>* LearningStateController::getDataSet(std::string dataSetLabel)
+{
+	LearningState* state = selectedTrainingPlan->getLearningState();
+	return &state->dataSets[dataSetLabel];
 }

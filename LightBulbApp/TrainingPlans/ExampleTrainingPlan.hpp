@@ -26,6 +26,8 @@ public:
 	AbstractTrainingPlan* getCopy();
 	int getRequiredInputSize();
 	int getRequiredOutputSize();
+	std::vector<std::string> getDataSetLabels();
+	LearningState* getLearningState();
 };
 
 #endif

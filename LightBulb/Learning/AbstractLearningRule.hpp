@@ -12,6 +12,7 @@
 
 // Includes
 #include "ActivationOrder/AbstractActivationOrder.hpp"
+#include "LearningState.hpp"
 
 // Forward declarations
 class AbstractNeuralNetwork;
@@ -25,6 +26,9 @@ class AbstractTeachingLesson;
 class AbstractNetworkTopology;
 
 typedef std::vector<Eigen::VectorXd> ErrorMap_t;
+
+#define DATA_SET_TRAINING_ERROR "Training error"
+
 
 struct AbstractLearningRuleOptions
 {
@@ -89,6 +93,8 @@ protected:
 	// The current teacher
 	Teacher* currentTeacher;
 
+	LearningState learningState;
+
 	std::unique_ptr<AbstractActivationOrder> currentActivationOrder;
 	// This method will be called in front of the actual learning algorithm
 	virtual void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder) {};
@@ -145,6 +151,10 @@ public:
 	void setCurrentTeacher(Teacher &teacher);
 
 	void setLogger(AbstractLogger* logger);
+
+	LearningState* getLearningState();
+
+	static std::vector<std::string> getDataSetLabels();
 };
 
 #endif

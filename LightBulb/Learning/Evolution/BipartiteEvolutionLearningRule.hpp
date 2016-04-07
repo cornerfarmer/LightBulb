@@ -18,7 +18,7 @@ protected:
 public:
 	BipartiteEvolutionLearningRule(EvolutionLearningRule* learningRule1_, EvolutionLearningRule* learningRule2_);
 	// Executes the learning process
-	LearningResult doLearning();
+	LearningState doLearning();
 };
 
 #endif

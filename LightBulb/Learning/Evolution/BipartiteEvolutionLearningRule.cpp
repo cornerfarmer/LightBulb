@@ -9,7 +9,7 @@ BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(EvolutionLearning
 	learningRule2 = learningRule2_;
 }
 
-LearningResult BipartiteEvolutionLearningRule::doLearning()
+LearningState BipartiteEvolutionLearningRule::doLearning()
 {
 	learningRule1->initialize();
 	learningRule2->initialize();
@@ -24,6 +24,6 @@ LearningResult BipartiteEvolutionLearningRule::doLearning()
 		std::cout << "lr2: ";
 		stopLearning |= learningRule2->doEvolutionStep();
 	}
-	LearningResult result;
+	LearningState result;
 	return result;
 }

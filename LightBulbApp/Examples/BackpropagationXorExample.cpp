@@ -115,3 +115,13 @@ int BackpropagationXorExample::getRequiredOutputSize()
 {
 	return 1;
 }
+
+std::vector<std::string> BackpropagationXorExample::getDataSetLabels()
+{
+	return BackpropagationLearningRule::getDataSetLabels();
+}
+
+LearningState* BackpropagationXorExample::getLearningState()
+{
+	return learningRule->getLearningState();
+}

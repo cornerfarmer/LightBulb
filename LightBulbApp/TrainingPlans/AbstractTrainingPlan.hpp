@@ -15,6 +15,7 @@
 // Forward declarations
 class AbstractLogger;
 class AbstractNeuralNetwork;
+struct LearningState;
 
 enum TrainingPlanState
 {
@@ -69,6 +70,8 @@ public:
 	virtual void setLogger(AbstractLogger* newLogger);
 	virtual int getRequiredInputSize() = 0;
 	virtual int getRequiredOutputSize() = 0;
+	virtual std::vector<std::string> getDataSetLabels() = 0;
+	virtual LearningState* getLearningState() = 0;
 };
 
 #endif

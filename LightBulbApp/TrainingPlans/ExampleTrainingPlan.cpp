@@ -6,6 +6,7 @@
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
+#include <Learning/LearningState.hpp>
 
 void ExampleTrainingPlan::run(bool initial)
 {
@@ -63,4 +64,14 @@ int ExampleTrainingPlan::getRequiredInputSize()
 int ExampleTrainingPlan::getRequiredOutputSize()
 {
 	return 6;
+}
+
+std::vector<std::string> ExampleTrainingPlan::getDataSetLabels()
+{
+	return std::vector<std::string>();
+}
+
+LearningState* ExampleTrainingPlan::getLearningState()
+{
+	return new LearningState();
 }

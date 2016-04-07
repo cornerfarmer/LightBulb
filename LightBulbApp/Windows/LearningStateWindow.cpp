@@ -7,13 +7,18 @@
 #include <wx/xy/xyplot.h>
 #include <wx/xy/xysimpledataset.h>
 #include <wx/xy/xylinerenderer.h>
+#include <wx/zoompan.h>
+
+wxDEFINE_EVENT(LSW_EVT_REFRESH_CHART, wxThreadEvent);
 
 LearningStateWindow::LearningStateWindow(LearningStateController* controller_, AbstractWindow* parent)
 	:AbstractWindow("LearningState", parent)
 {
 	controller = controller_;
 
-	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	Bind(LSW_EVT_REFRESH_CHART, wxThreadEventFunction(&LearningStateWindow::refreshChart), this);
+
+	sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);
 
 	header->Add(new wxStaticText(this, wxID_ANY, "Network:"), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
@@ -23,59 +28,48 @@ LearningStateWindow::LearningStateWindow(LearningStateController* controller_, A
 	header->Add(trainingPlansChoice);
 	sizer->Add(header, 0, wxALL | wxALIGN_RIGHT, 7);
 
+	wxBoxSizer* body = new wxBoxSizer(wxHORIZONTAL);
 
-	// serie xy data
-	double data[][2] = {
-		{ 10, 20, },
-		{ 13, 16, },
-		{ 7, 30, },
-		{ 15, 34, },
-		{ 25, 4, },
-	};
+	dataSetsSizer = new wxBoxSizer(wxVERTICAL);
 
-	// first step: create plot
-	XYPlot *plot = new XYPlot();
+	body->Add(dataSetsSizer, 0, wxALL, 7);
 
-	// create dataset
-	XYSimpleDataset *dataset = new XYSimpleDataset();
+	
+	chartPanel = new wxChartPanel(this, wxID_ANY, NULL, wxDefaultPosition, wxSize(100, 100));
+	chartPanel->SetMinSize(wxSize(500, 300));
 
-	// and add serie to it
-	dataset->AddSerie((double *)data, WXSIZEOF(data));
+	body->Add(chartPanel, 1, wxEXPAND);
 
-	// set line renderer to dataset
-	dataset->SetRenderer(new XYLineRenderer());
+	sizer->Add(body, 1, wxEXPAND);
 
-	// create left and bottom number axes
-	NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-	NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-
-	// optional: set axis titles
-	leftAxis->SetTitle(wxT("X"));
-	bottomAxis->SetTitle(wxT("Y"));
-
-	// add axes and dataset to plot
-	plot->AddObjects(dataset, leftAxis, bottomAxis);
-
-	// and finally create chart
-	Chart* chart = new Chart(plot, "T");
-	wxChartPanel *chartPanel = new wxChartPanel(this, wxID_ANY, chart, wxDefaultPosition, wxSize(100, 100));
-	chartPanel->SetMinSize(wxSize(300, 300));
-	sizer->Add(chartPanel, 1, wxEXPAND);
-
+	
 	SetSizerAndFit(sizer);
 }
 
 void LearningStateWindow::trainingPlanChanged(wxCommandEvent& event)
 {
-	AbstractTrainingPlan* trainingPlan = (*controller->getTrainingPlans())[event.GetSelection()].get();
+	controller->setSelectedTrainingPlan(event.GetSelection());
+	dataSetsSizer->Clear();
+	dataSetsSizer->Add(new wxStaticText(this, wxID_ANY, "Datasets:"));
 
+	std::vector<std::string> dataSetLabels = controller->getSelectedTrainingPlan()->getDataSetLabels();
+	for (auto label = dataSetLabels.begin(); label != dataSetLabels.end(); label++)
+	{
+		dataSetsCheckBoxes.push_back(new wxCheckBox(this, wxID_ANY, *label));
+		dataSetsCheckBoxes.back()->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&LearningStateWindow::selectionChanged), this);
+		dataSetsSizer->Add(dataSetsCheckBoxes.back());
+	}
+
+	Fit();
 }
 
 
 void LearningStateWindow::selectionChanged(wxCommandEvent& event)
 {
-
+	wxThreadEvent evt;
+	refreshChart(evt);
 }
+
 
 void LearningStateWindow::refreshTrainingPlans()
 {
@@ -83,5 +77,51 @@ void LearningStateWindow::refreshTrainingPlans()
 	for (auto network = controller->getTrainingPlans()->begin(); network != controller->getTrainingPlans()->end(); network++)
 	{
 		trainingPlansChoice->Append((*network)->getName());
+	}
+}
+
+void LearningStateWindow::refreshChart(wxThreadEvent& event)
+{
+	// first step: create plot
+	XYPlot* plot = new XYPlot();
+	// create dataset
+	XYSimpleDataset *dataset = new XYSimpleDataset();
+
+	for (auto checkBox = dataSetsCheckBoxes.begin(); checkBox != dataSetsCheckBoxes.end(); checkBox++)
+	{
+		if ((*checkBox)->IsChecked())
+		{
+			std::vector<double>* dataSet = controller->getDataSet((*checkBox)->GetLabel().ToStdString());
+
+			// and add serie to it
+			dataset->AddSerie(&(*dataSet)[0], dataSet->size() / 2);
+
+			// set line renderer to dataset
+			dataset->SetRenderer(new XYLineRenderer());
+
+			dataset->SetSerieName(dataset->GetSerieCount() - 1, (*checkBox)->GetLabel());
+		}
+	}
+
+	if (dataset->GetSerieCount() > 0)
+	{
+		// create left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// optional: set axis titles
+		leftAxis->SetTitle(wxT("Error"));
+		leftAxis->SetFixedBounds(0, dataset->GetMaxY());
+		bottomAxis->SetTitle(wxT("Iterations"));
+
+		// add axes and dataset to plot
+		plot->AddObjects(dataset, leftAxis, bottomAxis);
+
+		// set legend
+		plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
+
+		// and finally create chart
+		Chart* chart = new Chart(plot, controller->getSelectedTrainingPlan()->getName());
+		chartPanel->SetChart(chart);
 	}
 }

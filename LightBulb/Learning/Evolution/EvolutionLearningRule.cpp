@@ -25,7 +25,7 @@ EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& optio
 }
 
 
-LearningResult EvolutionLearningRule::doLearning()
+LearningState EvolutionLearningRule::doLearning()
 {
 	double bestScore = 0;
 
@@ -53,7 +53,7 @@ LearningResult EvolutionLearningRule::doLearning()
 	}
 
 	// Build the learning result
-	LearningResult result;
+	LearningState result;
 	result.iterationsNeeded = generation;
 	result.successful = (options->scoreGoal == 0 || options->scoreGoal <= bestScore);
 	result.quality = options->world->getRealScore(options->world->getHighscoreList()->front().second);

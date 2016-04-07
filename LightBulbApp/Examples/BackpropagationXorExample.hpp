@@ -37,5 +37,7 @@ public:
 	void setLogger(AbstractLogger* newLogger);
 	int getRequiredInputSize();
 	int getRequiredOutputSize();
+	std::vector<std::string> getDataSetLabels();
+	LearningState* getLearningState();
 };
 #endif

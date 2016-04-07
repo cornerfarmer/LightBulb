@@ -13,13 +13,13 @@ LearningRuleAnalyser::LearningRuleAnalyser(LearningRuleAnalyserOptions &options_
 }
 
 
-bool LearningRuleAnalyser::pairCompareBySuccessful(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem)
+bool LearningRuleAnalyser::pairCompareBySuccessful(const std::pair<LearningState, std::string>& firstElem, const std::pair<LearningState, std::string>& secondElem)
 {
 	// Prefer learingResults which were more successful and only consider speed if the successful values are equal
 	return firstElem.first.successful > secondElem.first.successful || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
 }
 
-bool LearningRuleAnalyser::pairCompareByQuality(const std::pair<LearningResult, std::string>& firstElem, const std::pair<LearningResult, std::string>& secondElem)
+bool LearningRuleAnalyser::pairCompareByQuality(const std::pair<LearningState, std::string>& firstElem, const std::pair<LearningState, std::string>& secondElem)
 {
 	// Prefer learingResults which were more successful and only consider speed if the successful values are equal
 	return firstElem.first.quality > secondElem.first.quality || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
@@ -35,7 +35,7 @@ void LearningRuleAnalyser::execute()
 	}
 
 	// A vector which holds the learning result of every parameter combination
-	std::vector<std::pair<LearningResult, std::string>> combinations;
+	std::vector<std::pair<LearningState, std::string>> combinations;
 	do
 	{
 		// Go through all parameters and print them
@@ -48,10 +48,10 @@ void LearningRuleAnalyser::execute()
 		std::cout << parameterCombination;
 
 		// Execute the learning rule multiple times with the current parameter combination so we get stable average values
-		LearningResult summaryResult;
+		LearningState summaryResult;
 		for (int i = 0; i < options->calculationsPerParameterCombination; i++)
 		{
-			LearningResult currentResult = options->learningRule->doLearning();
+			LearningState currentResult = options->learningRule->doLearning();
 			summaryResult.successful += currentResult.successful;
 			summaryResult.quality += currentResult.quality;
 			summaryResult.iterationsNeeded += currentResult.iterationsNeeded;

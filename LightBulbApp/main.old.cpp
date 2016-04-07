@@ -1701,7 +1701,7 @@ void doTicTacToeTest()
 	BipartiteEvolutionLearningRule learningRule(&learningRule1, &learningRule2);
 #define TICTACTOE_SINGLE
 #ifdef TICTACTOE_SINGLE
-	LearningResult result = learningRule.doLearning();
+	LearningState result = learningRule.doLearning();
 	std::cout << "total generations: " << result.iterationsNeeded << std::endl;
 
 #else

@@ -4,7 +4,7 @@
 #define _EVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/LearningResult.hpp"
+#include "Learning/LearningState.hpp"
 
 // Library Includes
 #include <vector>
@@ -65,7 +65,7 @@ public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRuleOptions* getOptions();
 	// Executes the learning process
-	LearningResult doLearning();
+	LearningState doLearning();
 	bool doEvolutionStep();
 	void initialize();
 	// TODO: Remove/Move into own classes
