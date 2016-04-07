@@ -1144,5 +1144,6 @@
     <ClInclude Include="Learning\LearningState.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
+    <ClInclude Include="IO\LearningStateIO.hpp" />
   </ItemGroup>
 </Project>

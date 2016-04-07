@@ -5,6 +5,7 @@
 
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
+#include "IO/LearningStateIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 
@@ -14,6 +15,7 @@ void serialize(Archive& archive, AbstractLearningRule& learningRule)
 	archive(cereal::make_nvp("iteration", learningRule.iteration));
 	archive(cereal::make_nvp("totalError", learningRule.totalError));
 	archive(cereal::make_nvp("tryCounter", learningRule.tryCounter));
+	archive(cereal::make_nvp("learningState", learningRule.learningState));
 }
 
 #endif

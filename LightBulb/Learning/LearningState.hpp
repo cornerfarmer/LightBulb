@@ -13,6 +13,8 @@ enum LearningStateEvents
 // All informations about a finished learning process
 struct LearningState : public LightBulb::Observable<LearningStateEvents, LearningState>
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, LearningState& learningState);
 private:
 	int dataSaveInterval;
 public:
