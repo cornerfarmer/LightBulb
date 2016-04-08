@@ -1145,5 +1145,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="IO\LearningStateIO.hpp" />
+    <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
   </ItemGroup>
 </Project>

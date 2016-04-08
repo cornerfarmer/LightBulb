@@ -59,7 +59,7 @@ public:
 	virtual std::string getName() = 0;
 	AbstractNeuralNetwork* getNeuralNetwork();
 	virtual std::string getDescription() = 0;
-	virtual std::string getLearningRateName() = 0;
+	virtual std::string getLearningRuleName() = 0;
 	std::string getStateAsString();
 	AbstractTrainingPlan* getCopyForExecute();
 	AbstractTrainingPlan* getTrainingPlanPattern();

@@ -225,7 +225,7 @@ void TrainingWindow::refreshTrainingPlanPatterns(wxCommandEvent& event)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
-		data.push_back(wxVariant((*trainingPlan)->getLearningRateName()));
+		data.push_back(wxVariant((*trainingPlan)->getLearningRuleName()));
 		data.push_back(wxVariant((*trainingPlan)->getDescription()));
 		trainingPlanPatternList->AppendItem(data);
 		trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
@@ -493,7 +493,7 @@ void TrainingWindow::showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trai
 {
 	clearDetails();
 	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
-	detailsTextBox->WriteText("Learning rate: " + trainingPlan->getLearningRateName() + "\n");
+	detailsTextBox->WriteText("Learning rate: " + trainingPlan->getLearningRuleName() + "\n");
 	detailsTextBox->WriteText("Description: " + trainingPlan->getDescription() + "\n");
 	currentDetailObject = trainingPlan;
 }

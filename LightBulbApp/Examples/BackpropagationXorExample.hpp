@@ -16,10 +16,6 @@
 // A techer manages many techingLessons
 class BackpropagationXorExample : public AbstractLearningRuleTrainingPlan
 {
-	template <class Archive>
-	friend void load(Archive& archive, BackpropagationXorExample& trainingPlan);
-	template <class Archive>
-	friend void save(Archive& archive, BackpropagationXorExample const& trainingPlan);
 private:
 	std::unique_ptr<Teacher> teacher;
 protected:
@@ -28,9 +24,9 @@ protected:
 public:
 	std::string getName();
 	std::string getDescription();
-	std::string getLearningRateName();
 	AbstractTrainingPlan* getCopy();
 	int getRequiredInputSize();
 	int getRequiredOutputSize();
+	std::string getLearningRuleName();
 };
 #endif

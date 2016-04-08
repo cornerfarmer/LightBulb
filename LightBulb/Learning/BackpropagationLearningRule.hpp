@@ -77,7 +77,7 @@ protected:
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_);
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_);
-	std::string getName();
+	static std::string getName();
 };
 
 #endif

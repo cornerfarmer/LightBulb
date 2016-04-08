@@ -68,7 +68,7 @@ bool AbstractLearningRule::learn(bool resume)
 		// Do while the totalError is not zero
 		while ((totalError = options->teacher->getTotalError(*options->neuralNetwork, *currentActivationOrder)) > options->totalErrorGoal  && iteration++ < options->maxIterationsPerTry)
 		{
-			learningState->addData(DATA_SET_TRAINING_ERROR, iteration, totalError);
+			learningState->addData(DATA_SET_TRAINING_ERROR, iteration - 1, totalError);
 
 			// If its not the first iteration and the learning process has stopped, skip that try
 			if (iteration > 1 && learningHasStopped())
@@ -186,6 +186,7 @@ bool AbstractLearningRule::learn(bool resume)
 		}
 	} while ((totalError > options->totalErrorGoal || abs(totalError) == std::numeric_limits<double>::infinity()) && ++tryCounter < options->maxTries);
 
+	learningState->addData(DATA_SET_TRAINING_ERROR, iteration - 1, totalError);
 
 	if (totalError <= options->totalErrorGoal)
 		log("Try (No. " + std::to_string(tryCounter) + ", " + std::to_string(iteration) + " iterations needed) was successful (totalError: " + std::to_string(totalError) + " < " + std::to_string(options->totalErrorGoal) + ")", LL_HIGH);

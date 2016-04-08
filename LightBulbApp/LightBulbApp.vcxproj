@@ -205,6 +205,7 @@
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
     <ClInclude Include="IO\BackpropagationXorExampleIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />
+    <ClInclude Include="IO\RBFNetworkBiggerExampleIO.hpp" />
     <ClInclude Include="IO\TrainingControllerIO.hpp" />
     <ClInclude Include="IO\TrainingPlanRepositoryIO.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />

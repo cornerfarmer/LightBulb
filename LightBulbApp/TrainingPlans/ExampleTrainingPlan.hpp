@@ -22,7 +22,7 @@ protected:
 public:
 	std::string getName();
 	std::string getDescription();
-	std::string getLearningRateName();
+	std::string getLearningRuleName();
 	AbstractTrainingPlan* getCopy();
 	int getRequiredInputSize();
 	int getRequiredOutputSize();

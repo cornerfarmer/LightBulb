@@ -46,7 +46,7 @@ std::string ExampleTrainingPlan::getDescription()
 	return "Bla bla bla!";
 }
 
-std::string ExampleTrainingPlan::getLearningRateName()
+std::string ExampleTrainingPlan::getLearningRuleName()
 {
 	return "Backpropagation";
 }

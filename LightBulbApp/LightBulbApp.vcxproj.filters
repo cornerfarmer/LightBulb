@@ -188,5 +188,8 @@
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="IO\RBFNetworkBiggerExampleIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

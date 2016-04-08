@@ -25,11 +25,11 @@ void AbstractLearningRuleTrainingPlan::tryToPause()
 	learningRule->sendPauseRequest();
 }
 
-std::string AbstractLearningRuleTrainingPlan::getLearningRateName()
+void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
 {
-	return learningRule->getName();
+	options->neuralNetwork = network;
+	options->logger = logger;
 }
-
 
 void AbstractLearningRuleTrainingPlan::setLogger(AbstractLogger* newLogger)
 {

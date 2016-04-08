@@ -13,6 +13,7 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include "IO/TrainingControllerIO.hpp"
+#include <Examples/RBFNetworkBiggerExample.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -27,7 +28,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	saveTrainingPlanAfterPausedIndex = -1;
 	saveTrainingSessionAfterPause = false;
 
-	trainingPlanPatterns.push_back(new ExampleTrainingPlan());
+	trainingPlanPatterns.push_back(new RBFNetworkBiggerExample());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);

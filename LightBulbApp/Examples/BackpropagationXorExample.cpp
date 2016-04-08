@@ -36,11 +36,8 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	options.learningRate = 0.1;
 	options.momentum = 0;
 	options.resilientLearningRate = false;
-	options.logger = logger;
-	options.dataSaveInterval = 10;
-	options.neuralNetwork = network;
 	options.teacher = teacher.get();
-
+	fillDefaultLearningRuleOptions(&options);
 
 	return new BackpropagationLearningRule(options);
 }
@@ -70,10 +67,6 @@ std::string BackpropagationXorExample::getDescription()
 	return "Trains a network to simulate the xor function!";
 }
 
-std::string BackpropagationXorExample::getLearningRateName()
-{
-	return "Backpropagation";
-}
 
 AbstractTrainingPlan* BackpropagationXorExample::getCopy()
 {
@@ -90,3 +83,7 @@ int BackpropagationXorExample::getRequiredOutputSize()
 	return 1;
 }
 
+std::string BackpropagationXorExample::getLearningRuleName()
+{
+	return BackpropagationLearningRule::getName();
+}

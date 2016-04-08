@@ -155,8 +155,6 @@ public:
 
 	LearningState* getLearningState();
 
-	virtual std::string getName() = 0;
-
 	static std::vector<std::string> getDataSetLabels();
 };
 

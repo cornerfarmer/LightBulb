@@ -826,6 +826,7 @@
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
     <ClInclude Include="IO\IOStorage.hpp" />
     <ClInclude Include="IO\LearningStateIO.hpp" />
+    <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
     <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />

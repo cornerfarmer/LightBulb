@@ -27,8 +27,8 @@ protected:
 	virtual AbstractLearningRule* createLearningRate() = 0;
 	void run(bool initial);
 	void tryToPause();
+	void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
 public:
-	std::string getLearningRateName();
 	void setLogger(AbstractLogger* newLogger);
 	std::vector<std::string> getDataSetLabels();
 	LearningState* getLearningState();
