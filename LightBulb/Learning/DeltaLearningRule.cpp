@@ -26,6 +26,11 @@ DeltaLearningRule::DeltaLearningRule(DeltaLearningRuleOptions &options_)
 	}
 }
 
+std::string DeltaLearningRule::getName()
+{
+	return "DeltaLearningRule";
+}
+
 void DeltaLearningRule::initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
@@ -46,15 +51,15 @@ AbstractActivationOrder* DeltaLearningRule::getNewActivationOrder(AbstractNeural
 
 Eigen::MatrixXd DeltaLearningRule::calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap)
 {
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
+	if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
 	{
 		// Use the delta rule: deltaWeight = Output(prevNeuron) * errorValue
-		Eigen::MatrixXd gradient = (errormap->back() * currentNetworkTopology->getActivationVector(layerIndex - 1).transpose()).matrix();
+		Eigen::MatrixXd gradient = (errormap->back() * getCurrentNetworkTopology()->getActivationVector(layerIndex - 1).transpose()).matrix();
 		gradient *= -1;
 		return gradient;
 	}
 	else
-		return Eigen::MatrixXd::Zero(currentNeuralNetwork->getNetworkTopology()->getNeuronCountInLayer(layerIndex), currentNeuralNetwork->getNetworkTopology()->getNeuronCountInLayer(layerIndex - 1));
+		return Eigen::MatrixXd::Zero(getCurrentNetworkTopology()->getNeuronCountInLayer(layerIndex), getCurrentNetworkTopology()->getNeuronCountInLayer(layerIndex - 1));
 }
 
 void DeltaLearningRule::initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
@@ -80,14 +85,14 @@ void DeltaLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
 	if (getOptions()->resilientLearningRate)
 	{
 		// Add the learningRate and the weight decay term to the weight
-		Eigen::MatrixXd newWeights = currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex) + resilientLearningRateHelper->getLearningRate(layerIndex, gradients);
-		currentNetworkTopology->setAfferentWeightsPerLayer(layerIndex, newWeights);
+		Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + resilientLearningRateHelper->getLearningRate(layerIndex, gradients);
+		getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 	}
 	else
 	{
 		// Just add the weight (learningRate * gradient)
-		Eigen::MatrixXd newWeights = currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex) - getOptions()->learningRate * gradients;
-		currentNetworkTopology->setAfferentWeightsPerLayer(layerIndex, newWeights);
+		Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) - getOptions()->learningRate * gradients;
+		getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 	}
 }
 

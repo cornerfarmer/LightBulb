@@ -4,7 +4,7 @@
 #define _BACKPROPAGATIONXOREXAMPLEIO_H_
 
 // Includes
-#include "IO/AbstractTrainingPlanIO.hpp"
+#include "IO/AbstractLearningRuleTrainingPlanIO.hpp"
 #include "IO/BackpropagationLearningRuleIO.hpp"
 #include "Examples/BackpropagationXorExample.hpp"
 // Libraray includes
@@ -18,22 +18,13 @@
 template <class Archive>
 void save(Archive& archive, BackpropagationXorExample const& trainingPlan)
 {
-	archive(cereal::base_class<AbstractTrainingPlan>(&trainingPlan));
-	archive(cereal::make_nvp("learningRule", trainingPlan.learningRule));
+	archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 }
 
 template <class Archive>
 void load(Archive& archive, BackpropagationXorExample& trainingPlan)
 {
-	archive(cereal::base_class<AbstractTrainingPlan>(&trainingPlan));
-
-	trainingPlan.initializeLearningRate();
-	IOStorage<BackpropagationLearningRule>::push(trainingPlan.learningRule.release());
-	archive(cereal::make_nvp("learningRule", trainingPlan.learningRule));
-	trainingPlan.learningRule.reset(IOStorage<BackpropagationLearningRule>::pop());
-
-	trainingPlan.learningRule->setCurrentNeuralNetwork(*trainingPlan.network);
-	trainingPlan.learningRule->setCurrentTeacher(*trainingPlan.teacher);
+	archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 }
 
 #include "IO/UsedArchives.hpp"

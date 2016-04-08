@@ -5,39 +5,32 @@
 
 
 // Includes
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <Learning/BackpropagationLearningRule.hpp>
 #include "Teaching/Teacher.hpp"
+#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
 
 // Library includes
 
 // Forward declarations
 
 // A techer manages many techingLessons
-class BackpropagationXorExample : public AbstractTrainingPlan
+class BackpropagationXorExample : public AbstractLearningRuleTrainingPlan
 {
 	template <class Archive>
 	friend void load(Archive& archive, BackpropagationXorExample& trainingPlan);
 	template <class Archive>
 	friend void save(Archive& archive, BackpropagationXorExample const& trainingPlan);
 private:
-	bool pauseRequested;
-	std::unique_ptr<BackpropagationLearningRule> learningRule;
 	std::unique_ptr<Teacher> teacher;
-	void initializeLearningRate();
 protected:
-	void run(bool initial);
 	AbstractNeuralNetwork* createNeuralNetwork();
-	void tryToPause();
+	AbstractLearningRule* createLearningRate();
 public:
 	std::string getName();
 	std::string getDescription();
 	std::string getLearningRateName();
 	AbstractTrainingPlan* getCopy();
-	void setLogger(AbstractLogger* newLogger);
 	int getRequiredInputSize();
 	int getRequiredOutputSize();
-	std::vector<std::string> getDataSetLabels();
-	LearningState* getLearningState();
 };
 #endif

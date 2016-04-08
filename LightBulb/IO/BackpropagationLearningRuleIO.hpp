@@ -28,11 +28,11 @@ namespace cereal
 		template <class Archive>
 		static void load_and_construct(Archive& ar, cereal::construct<BackpropagationLearningRule>& construct)
 		{
-			BackpropagationLearningRule* learningRule = IOStorage<BackpropagationLearningRule>::pop();
+			BackpropagationLearningRule* learningRule = static_cast<BackpropagationLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 			ar(cereal::base_class<AbstractLearningRule>(learningRule));
 			ar(cereal::make_nvp("deltaVectorOutputLayer", learningRule->deltaVectorOutputLayer));
 			ar(cereal::make_nvp("previousDeltaWeights", learningRule->previousDeltaWeights));
-			IOStorage<BackpropagationLearningRule>::push(learningRule);
+			IOStorage<AbstractLearningRule>::push(learningRule);
 		}
 	};
 }

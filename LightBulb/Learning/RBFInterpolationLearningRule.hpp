@@ -62,6 +62,7 @@ protected:
 	void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
 public:
 	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);
+	std::string getName();
 };
 
 #endif

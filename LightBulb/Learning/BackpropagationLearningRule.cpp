@@ -23,6 +23,11 @@ BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearning
 	initialize();
 }
 
+std::string BackpropagationLearningRule::getName()
+{
+	return "Backpropagation";
+}
+
 void BackpropagationLearningRule::initialize()
 {
 	// If we should use a resilient learnig rate
@@ -64,7 +69,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeightFromLayer(Abstr
 {
 	// Calculate the gradient
 	// gradient = - Output(prevNeuron) * deltaValue
-	Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * currentNetworkTopology->getActivationVector(layerIndex - 1).transpose()).matrix();
+	Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * getCurrentNetworkTopology()->getActivationVector(layerIndex - 1).transpose()).matrix();
 	gradient *= -1;
 	return gradient;
 }
@@ -72,17 +77,17 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeightFromLayer(Abstr
 void BackpropagationLearningRule::initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap)
 {
 	// If its the last layer
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
+	if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
 	{					
 		// Compute the delta value: activationFunction'(netInput) * errorValue
-		deltaVectorOutputLayer[layerIndex] = (currentNetworkTopology->getOutputActivationFunction()->executeDerivation(currentNetworkTopology->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * errormap->back().array();
+		deltaVectorOutputLayer[layerIndex] = (getCurrentNetworkTopology()->getOutputActivationFunction()->executeDerivation(getCurrentNetworkTopology()->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * errormap->back().array();
 	}
 	else
 	{
-		Eigen::VectorXd nextLayerErrorValueFactor = currentNetworkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
+		Eigen::VectorXd nextLayerErrorValueFactor = getCurrentNetworkTopology()->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
 		nextLayerErrorValueFactor.conservativeResize(nextLayerErrorValueFactor.rows() - 1);
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-		deltaVectorOutputLayer[layerIndex] = (currentNetworkTopology->getInnerActivationFunction()->executeDerivation(currentNetworkTopology->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor.array();
+		deltaVectorOutputLayer[layerIndex] = (getCurrentNetworkTopology()->getInnerActivationFunction()->executeDerivation(getCurrentNetworkTopology()->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor.array();
 	}	
 }
 
@@ -94,7 +99,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 	if (getOptions()->momentum > 0)
 	{
 		// Calc the delta weight, add the momentum term and the weight decay term
-		previousDeltaWeights[layerIndex - 1] = - getOptions()->learningRate * gradients + getOptions()->momentum * previousDeltaWeights[layerIndex - 1] - getOptions()->weightDecayFac * currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex);
+		previousDeltaWeights[layerIndex - 1] = - getOptions()->learningRate * gradients + getOptions()->momentum * previousDeltaWeights[layerIndex - 1] - getOptions()->weightDecayFac * getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex);
 		// Set this to the delta weight
 		deltaWeights = previousDeltaWeights[layerIndex - 1];
 	}
@@ -107,7 +112,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 			deltaWeights = - getOptions()->learningRate * gradients;
 		
 		// Substract the weightDecay term
-		deltaWeights -= getOptions()->weightDecayFac * currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex);
+		deltaWeights -= getOptions()->weightDecayFac * getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex);
 	}
 	
 	return deltaWeights;
@@ -121,8 +126,8 @@ AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(Abst
 
 void BackpropagationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
 {
-	Eigen::MatrixXd newWeights = currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex) + calculateDeltaWeight(layerIndex, gradients);
-	currentNetworkTopology->setAfferentWeightsPerLayer(layerIndex, newWeights);
+	Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + calculateDeltaWeight(layerIndex, gradients);
+	getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 }
 
 std::string BackpropagationLearningRule::printDebugOutput()

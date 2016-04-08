@@ -56,6 +56,10 @@ struct AbstractLearningRuleOptions
 	bool changeWeightsBeforeLearning;
 
 	int dataSaveInterval;
+
+	AbstractNeuralNetwork* neuralNetwork;
+
+	Teacher* teacher;
 	AbstractLearningRuleOptions()
 	{
 		maxIterationsPerTry = 10000;
@@ -70,6 +74,8 @@ struct AbstractLearningRuleOptions
 		offlineLearning = false;
 		changeWeightsBeforeLearning = true;
 		dataSaveInterval = 1;
+		neuralNetwork = NULL;
+		teacher = NULL;
 	}
 	virtual ~AbstractLearningRuleOptions() {}
 };
@@ -89,12 +95,6 @@ protected:
 	unsigned int iteration;
 	// Holds the current try number
 	unsigned int tryCounter;
-	// The current network 
-	AbstractNeuralNetwork* currentNeuralNetwork;
-	// The current network toplogy
-	AbstractNetworkTopology* currentNetworkTopology;
-	// The current teacher
-	Teacher* currentTeacher;
 
 	std::unique_ptr<LearningState> learningState;
 
@@ -139,23 +139,23 @@ protected:
 	void log(std::string message, LogLevel level);
 
 	bool learn(bool resume);
+
+	AbstractNetworkTopology* getCurrentNetworkTopology();
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given AbstractNeuralNetwork
 	// If the learning process succeded the method will return true
-	bool start(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
+	bool start();
 
 	bool resume();
 
 	void sendPauseRequest();
-
-	void setCurrentNeuralNetwork(AbstractNeuralNetwork &neuralNetwork);
-
-	void setCurrentTeacher(Teacher &teacher);
-
+	
 	void setLogger(AbstractLogger* logger);
 
 	LearningState* getLearningState();
+
+	virtual std::string getName() = 0;
 
 	static std::vector<std::string> getDataSetLabels();
 };

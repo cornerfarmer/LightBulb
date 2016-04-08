@@ -56,6 +56,7 @@ private:
 	std::string printDebugOutput();
 public:
 	DeltaLearningRule(DeltaLearningRuleOptions &options_);
+	std::string getName();
 };
 
 #endif

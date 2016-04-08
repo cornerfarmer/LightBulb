@@ -96,6 +96,9 @@
     <ClCompile Include="Windows\LearningStateController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -177,6 +180,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\LearningStateController.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -23,11 +23,16 @@ RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearn
 	options->maxIterationsPerTry = 1;
 }
 
+std::string RBFInterpolationLearningRule::getName()
+{
+	return "RBFInterpolationLearningRule";
+}
+
 void RBFInterpolationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
 {
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1) {
-		Eigen::MatrixXd newWeights = currentNetworkTopology->getAfferentWeightsPerLayer(layerIndex) + gradients;
-		currentNetworkTopology->setAfferentWeightsPerLayer(layerIndex, newWeights);
+	if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1) {
+		Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradients;
+		getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 	}
 }
 
@@ -65,7 +70,7 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder(Abs
 Eigen::MatrixXd RBFInterpolationLearningRule::calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
-	if (lessonIndex == currentTeacher->getTeachingLessons()->size() - 1 && layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
+	if (lessonIndex == options->teacher->getTeachingLessons()->size() - 1 && layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
 		return (*w);
 	else
 		return Eigen::MatrixXd::Zero(w->rows(), w->cols());
@@ -74,11 +79,11 @@ Eigen::MatrixXd RBFInterpolationLearningRule::calculateDeltaWeightFromLayer(Abst
 void RBFInterpolationLearningRule::initializeLayerCalculation(class AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ::ErrorMap_t* errormap)
 {
 	// Only change weights in the last layer
-	if (layerIndex == currentNeuralNetwork->getNetworkTopology()->getLayerCount() - 1)
+	if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
 	{
 		// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
 		for (int i = 0; i < t->cols(); i++) {
-			(*t)(lessonIndex, i) = lesson.getTeachingInput(currentNeuralNetwork->getNetworkTopology()->getOutputActivationFunction())->get(0, i);
+			(*t)(lessonIndex, i) = lesson.getTeachingInput(getCurrentNetworkTopology()->getOutputActivationFunction())->get(0, i);
 		}
 
 		if (lessonIndex == t->rows() - 1)

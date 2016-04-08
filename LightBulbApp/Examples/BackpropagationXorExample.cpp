@@ -10,21 +10,8 @@
 #include <Neuron/NeuronDescription.hpp>
 
 
-void BackpropagationXorExample::initializeLearningRate()
+AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 {
-	BackpropagationLearningRuleOptions options;
-	options.maxTotalErrorValue = 4;
-	options.maxIterationsPerTry = 1000000;
-	options.totalErrorGoal = 0.001f;
-	options.maxTries = 1000;
-	options.weightDecayFac = 0;
-	options.learningRate = 0.1;
-	options.momentum = 0;
-	options.resilientLearningRate = false;
-	options.logger = logger;
-	options.dataSaveInterval = 10;
-	learningRule.reset(new BackpropagationLearningRule(options));
-
 	teacher.reset(new Teacher());
 	for (int i = 0; i < 2; i += 1)
 	{
@@ -40,24 +27,22 @@ void BackpropagationXorExample::initializeLearningRate()
 		}
 	}
 
-}
+	BackpropagationLearningRuleOptions options;
+	options.maxTotalErrorValue = 4;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.001f;
+	options.maxTries = 1000;
+	options.weightDecayFac = 0;
+	options.learningRate = 0.1;
+	options.momentum = 0;
+	options.resilientLearningRate = false;
+	options.logger = logger;
+	options.dataSaveInterval = 10;
+	options.neuralNetwork = network;
+	options.teacher = teacher.get();
 
-void BackpropagationXorExample::run(bool initial)
-{
-	if (initial)
-	{
-		initializeLearningRate();
-		bool success = learningRule->start(*network, *teacher);
-	} 
-	else
-	{
-		learningRule->resume();
-	}
 
-	if (isPausing())
-		pausingFinished();
-	else
-		finished();
+	return new BackpropagationLearningRule(options);
 }
 
 AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
@@ -74,10 +59,6 @@ AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 	return new NeuralNetwork(layeredNetwork);
 }
 
-void BackpropagationXorExample::tryToPause()
-{
-	learningRule->sendPauseRequest();
-}
 
 std::string BackpropagationXorExample::getName()
 {
@@ -99,14 +80,6 @@ AbstractTrainingPlan* BackpropagationXorExample::getCopy()
 	return new BackpropagationXorExample();
 }
 
-void BackpropagationXorExample::setLogger(AbstractLogger* newLogger)
-{
-	AbstractTrainingPlan::setLogger(newLogger);
-	if (learningRule.get()) {
-		learningRule->setLogger(newLogger);
-	}
-}
-
 int BackpropagationXorExample::getRequiredInputSize()
 {
 	return 2;
@@ -117,12 +90,3 @@ int BackpropagationXorExample::getRequiredOutputSize()
 	return 1;
 }
 
-std::vector<std::string> BackpropagationXorExample::getDataSetLabels()
-{
-	return BackpropagationLearningRule::getDataSetLabels();
-}
-
-LearningState* BackpropagationXorExample::getLearningState()
-{
-	return learningRule->getLearningState();
-}
