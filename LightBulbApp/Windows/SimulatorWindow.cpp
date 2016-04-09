@@ -3,6 +3,13 @@
 #include "SimulatorController.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
+#include <wx/valnum.h>
+
+enum IOType
+{
+	TYPE_BOOL,
+	TYPE_FLOAT
+};
 
 SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent)
 	:AbstractWindow("Simulator", parent)
@@ -22,10 +29,31 @@ SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindo
 	inputSizer = new wxBoxSizer(wxHORIZONTAL);
 	outputSizer = new wxBoxSizer(wxHORIZONTAL);
 
-	sizer->Add(new wxStaticText(this, wxID_ANY, "Input:"), 0, wxALL, 7);
+	wxBoxSizer* inputHeader = new wxBoxSizer(wxHORIZONTAL);
+	inputHeader->Add(new wxStaticText(this, wxID_ANY, "Input:"), 0, wxALL, 7);
+	inputHeader->AddStretchSpacer(1);
+	inputTypeChoice = new wxChoice(this, wxID_ANY);
+	inputTypeChoice->Append("Boolean");
+	inputTypeChoice->Append("Floating");
+	inputTypeChoice->SetSelection(0);
+	inputTypeChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&SimulatorWindow::inputTypeChanged), this);
+	inputHeader->Add(inputTypeChoice, 0, wxALL, 7);
+	sizer->Add(inputHeader, 0, wxEXPAND);
+
 	sizer->Add(inputSizer, 0, wxEXPAND | wxALL, 7);
 	sizer->Add(new wxButton(this, wxID_ANY, "Neural network"), 1, wxALL | wxEXPAND, 7);
-	sizer->Add(new wxStaticText(this, wxID_ANY, "Output:"), 0, wxALL, 7);
+
+	wxBoxSizer* outputHeader = new wxBoxSizer(wxHORIZONTAL);
+	outputHeader->Add(new wxStaticText(this, wxID_ANY, "Output:"), 0, wxALL, 7);
+	outputHeader->AddStretchSpacer(1);
+	outputTypeChoice = new wxChoice(this, wxID_ANY);
+	outputTypeChoice->Append("Boolean");
+	outputTypeChoice->Append("Floating");
+	outputTypeChoice->SetSelection(0);
+	outputTypeChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&SimulatorWindow::outputTypeChanged), this);
+	outputHeader->Add(outputTypeChoice, 0, wxALL, 7);
+	sizer->Add(outputHeader, 0, wxEXPAND);
+
 	sizer->Add(outputSizer, 0, wxEXPAND | wxALL, 7);
 
 	SetSizerAndFit(sizer);
@@ -34,47 +62,121 @@ SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindo
 void SimulatorWindow::networkChanged(wxCommandEvent& event)
 {
 	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[event.GetSelection()].get();
-	inputSizer->Clear(true);
-	inputCheckBoxes.clear();
-	inputSizer->AddStretchSpacer(1);
-	for (int i = 0; i < network->getNetworkTopology()->getNeuronCountInLayer(0); i++)
-	{
-		inputCheckBoxes.push_back(new wxCheckBox(this, wxID_ANY, ""));
-		inputCheckBoxes.back()->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&SimulatorWindow::selectionChanged), this);
-		inputSizer->Add(inputCheckBoxes.back(), 0);
-		inputSizer->AddStretchSpacer(1);
-	}
-
-	outputCheckBoxes.clear();
-	outputSizer->Clear(true);
-	outputSizer->AddStretchSpacer(1);
-	for (int i = 0; i < network->getNetworkTopology()->getOutputSize(); i++)
-	{
-		outputCheckBoxes.push_back(new wxCheckBox(this, wxID_ANY, ""));
-		outputCheckBoxes.back()->Enable(false);
-		outputSizer->Add(outputCheckBoxes.back(), 0);
-		outputSizer->AddStretchSpacer(1);
-	}
-
-	SetSizerAndFit(sizer);
+	
+	refreshInput(network);
+	
+	refreshOutput(network);
 	recalculateNetworkOutput();
 }
 
 void SimulatorWindow::recalculateNetworkOutput()
 {
-	std::vector<double> input(inputCheckBoxes.size());
-	for (int i = 0; i < inputCheckBoxes.size(); i++)
-		input[i] = inputCheckBoxes[i]->GetValue();
+	IOType inputType = (IOType)inputTypeChoice->GetSelection();
+	std::vector<double> input(inputControls.size());
+	for (int i = 0; i < inputControls.size(); i++)
+	{
+		if (inputType == TYPE_BOOL)
+		{
+			input[i] = static_cast<wxCheckBox*>(inputControls[i])->GetValue();
+		} 
+		else if (inputType == TYPE_FLOAT)
+		{
+			try
+			{
+				input[i] = std::stod(static_cast<wxTextCtrl*>(inputControls[i])->GetValue().ToStdString());
+			}
+			catch(std::invalid_argument e)
+			{
+				input[i] = 0;
+			}
+		}
+	}
 
+	IOType outputType = (IOType)outputTypeChoice->GetSelection();
 	std::vector<double> output = controller->calculate(neuralNetworksChoice->GetSelection(), input);
 
-	for (int i = 0; i < outputCheckBoxes.size(); i++)
-		outputCheckBoxes[i]->SetValue(output[i] > 0.5);
+	for (int i = 0; i < outputControls.size(); i++)
+	{
+		if (outputType == TYPE_BOOL)
+		{
+			static_cast<wxCheckBox*>(outputControls[i])->SetValue(output[i] > 0.5);
+		}
+		else if (outputType == TYPE_FLOAT)
+		{
+			static_cast<wxTextCtrl*>(outputControls[i])->SetValue(std::to_string(output[i]));
+		}
+	}
 }
 
 void SimulatorWindow::selectionChanged(wxCommandEvent& event)
 {
 	recalculateNetworkOutput();
+}
+
+void SimulatorWindow::inputTypeChanged(wxCommandEvent& event)
+{
+	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
+	refreshInput(network);
+	recalculateNetworkOutput();
+}
+
+void SimulatorWindow::outputTypeChanged(wxCommandEvent& event)
+{
+	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
+	refreshOutput(network);
+	recalculateNetworkOutput();
+}
+
+void SimulatorWindow::refreshInput(AbstractNeuralNetwork* network)
+{
+	IOType type = (IOType)inputTypeChoice->GetSelection();
+
+	inputSizer->Clear(true);
+	inputControls.clear();
+	inputSizer->AddStretchSpacer(1);
+	for (int i = 0; i < network->getNetworkTopology()->getNeuronCountInLayer(0); i++)
+	{
+		if (type == TYPE_BOOL)
+		{
+			inputControls.push_back(new wxCheckBox(this, wxID_ANY, ""));
+			inputControls.back()->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&SimulatorWindow::selectionChanged), this);
+		}
+		else if (type == TYPE_FLOAT)
+		{
+			inputControls.push_back(new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1)));
+			wxFloatingPointValidator<double> val(3);
+			inputControls.back()->SetValidator(val);
+			inputControls.back()->Bind(wxEVT_TEXT, wxCommandEventFunction(&SimulatorWindow::selectionChanged), this);
+		}
+		inputSizer->Add(inputControls.back(), 0);
+		inputSizer->AddStretchSpacer(1);
+	}
+	Fit();
+}
+
+void SimulatorWindow::refreshOutput(AbstractNeuralNetwork* network)
+{
+	IOType type = (IOType)outputTypeChoice->GetSelection();
+
+	outputControls.clear();
+	outputSizer->Clear(true);
+	outputSizer->AddStretchSpacer(1);
+	for (int i = 0; i < network->getNetworkTopology()->getOutputSize(); i++)
+	{
+		if (type == TYPE_BOOL)
+		{
+			outputControls.push_back(new wxCheckBox(this, wxID_ANY, ""));
+			outputControls.back()->Enable(false);
+		}
+		else if (type == TYPE_FLOAT)
+		{
+			outputControls.push_back(new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1)));
+			outputControls.back()->Enable(false);
+		}
+		outputSizer->Add(outputControls.back(), 0);
+		outputSizer->AddStretchSpacer(1);
+	}
+	Fit();
 }
 
 void SimulatorWindow::refreshNeuralNetworks()

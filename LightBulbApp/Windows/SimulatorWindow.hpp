@@ -11,6 +11,7 @@
 
 // Forward declarations
 class SimulatorController;
+class AbstractNeuralNetwork;
 
 class SimulatorWindow : public AbstractWindow
 {
@@ -21,11 +22,17 @@ private:
 	wxBoxSizer* outputSizer;
 	wxPanel* panel;
 	wxBoxSizer* sizer;
-	std::vector<wxCheckBox*> inputCheckBoxes;
-	std::vector<wxCheckBox*> outputCheckBoxes;
+	std::vector<wxControl*> inputControls;
+	std::vector<wxControl*> outputControls;
+	wxChoice* inputTypeChoice;
+	wxChoice* outputTypeChoice;
 	void networkChanged(wxCommandEvent& event);
 	void recalculateNetworkOutput();
 	void selectionChanged(wxCommandEvent& event);
+	void inputTypeChanged(wxCommandEvent& event);
+	void outputTypeChanged(wxCommandEvent& event);
+	void refreshInput(AbstractNeuralNetwork* network);
+	void refreshOutput(AbstractNeuralNetwork* network);
 public:
 	SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent = NULL);
 	void refreshNeuralNetworks();
