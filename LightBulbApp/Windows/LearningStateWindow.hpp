@@ -13,6 +13,8 @@
 class LearningStateController;
 class XYSimpleDataset;
 class wxChartPanel;
+class wxDataViewListCtrl;
+class wxDataViewEvent;
 
 wxDECLARE_EVENT(LSW_EVT_REFRESH_CHART, wxThreadEvent);
 
@@ -22,14 +24,17 @@ private:
 	wxBoxSizer* sizer;
 	wxChoice* trainingPlansChoice;
 	LearningStateController* controller;
-	wxBoxSizer* dataSetsSizer;
+	wxDataViewListCtrl* dataSetsList;
 	wxChartPanel* chartPanel;
-	std::vector<wxCheckBox*> dataSetsCheckBoxes;
 	wxComboBox* refreshRateChoice;
+	wxChoice* tryChoice;
+	wxChoice* dataSetChoice;
 	void trainingPlanChanged(wxCommandEvent& event);
 	void refreshRateChanged(wxCommandEvent& event);
-	void selectionChanged(wxCommandEvent& event);
+	void addDataSet(wxCommandEvent& event);
 	void refreshChart(wxThreadEvent& event);
+	void dataSetsListRightClick(wxDataViewEvent& event);
+	void dataSetsPopUpMenuSelected(wxCommandEvent& event);
 public:
 	LearningStateWindow(LearningStateController* controller_, AbstractWindow* parent = NULL);
 	void refreshTrainingPlans();

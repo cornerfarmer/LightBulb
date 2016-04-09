@@ -52,12 +52,6 @@ void LearningStateController::learningStateChanged(LearningState* learningState)
 	}
 }
 
-std::vector<double>* LearningStateController::getDataSet(std::string dataSetLabel)
-{
-	LearningState* state = selectedTrainingPlan->getLearningState();
-	return &state->dataSets[dataSetLabel];
-}
-
 void LearningStateController::setRefreshRate(int newRefreshRate)
 {
 	if (newRefreshRate > 0)
@@ -75,4 +69,31 @@ int LearningStateController::getRefreshRate()
 void LearningStateController::refreshFinished()
 {
 	refreshScheduled = false;
+}
+
+std::vector<std::string> LearningStateController::getDataSetLabels()
+{
+	return selectedTrainingPlan->getDataSetLabels();
+}
+
+int LearningStateController::getTryCount()
+{
+	return selectedTrainingPlan->getLearningState()->tries;
+}
+
+std::string LearningStateController::addDataSet(int tryNumber, int dataSetIndex)
+{
+	std::string dataSetLabel = selectedTrainingPlan->getDataSetLabels()[dataSetIndex];
+	selectedDataSets.push_back(std::make_pair(dataSetLabel, &selectedTrainingPlan->getLearningState()->dataSets[tryNumber][dataSetLabel]));
+	return dataSetLabel;
+}
+
+std::vector<std::pair<std::string, std::vector<double>*>>* LearningStateController::getSelectedDataSets()
+{
+	return &selectedDataSets;
+}
+
+void LearningStateController::removeDataSet(int dataSetIndex)
+{
+	selectedDataSets.erase(selectedDataSets.begin() + dataSetIndex);
 }

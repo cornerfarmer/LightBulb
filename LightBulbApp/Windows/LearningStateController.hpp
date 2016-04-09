@@ -8,6 +8,7 @@
 
 // Includes
 #include "LearningStateWindow.hpp"
+#include <map>
 
 // Forward declarations
 class TrainingWindow;
@@ -26,6 +27,7 @@ private:
 	int iterationsSinceLearningStateChanged;
 	int refreshRate;
 	bool refreshScheduled;
+	std::vector<std::pair<std::string, std::vector<double>*>> selectedDataSets;
 public:
 	LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
 	LearningStateWindow* getWindow();
@@ -34,10 +36,14 @@ public:
 	void setSelectedTrainingPlan(int trainingPlanIndex);
 	AbstractTrainingPlan* getSelectedTrainingPlan();
 	void learningStateChanged(LearningState* learningState);
-	std::vector<double>* getDataSet(std::string dataSetLabel);
 	void setRefreshRate(int newRefreshRate);
 	int getRefreshRate();
 	void refreshFinished();
+	std::vector<std::string> getDataSetLabels();
+	int getTryCount();
+	std::string addDataSet(int tryNumber, int dataSetIndex);
+	std::vector<std::pair<std::string, std::vector<double>*>>* getSelectedDataSets();
+	void removeDataSet(int dataSetIndex);
 };
 
 #endif

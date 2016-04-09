@@ -9,6 +9,12 @@
 #include <wx/xy/xylinerenderer.h>
 #include <string>
 #include <wx/valnum.h>
+#include <wx/dataview.h>
+
+enum
+{
+	DATASET_REMOVE
+};
 
 wxDEFINE_EVENT(LSW_EVT_REFRESH_CHART, wxThreadEvent);
 
@@ -22,30 +28,7 @@ LearningStateWindow::LearningStateWindow(LearningStateController* controller_, A
 	sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);
 
-	header->Add(new wxStaticText(this, wxID_ANY, "Learning plan:"), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
-	trainingPlansChoice = new wxChoice(this, wxID_ANY);
-	trainingPlansChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&LearningStateWindow::trainingPlanChanged), this);
-
-	header->Add(trainingPlansChoice);
-	sizer->Add(header, 0, wxALL | wxALIGN_RIGHT, 7);
-
-	wxBoxSizer* body = new wxBoxSizer(wxHORIZONTAL);
-
-	dataSetsSizer = new wxBoxSizer(wxVERTICAL);
-
-	body->Add(dataSetsSizer, 0, wxALL, 7);
-
-	
-	chartPanel = new wxChartPanel(this, wxID_ANY, NULL, wxDefaultPosition, wxSize(100, 100));
-	chartPanel->SetMinSize(wxSize(500, 300));
-
-	body->Add(chartPanel, 1, wxEXPAND);
-
-	sizer->Add(body, 1, wxEXPAND);
-
-	wxBoxSizer* footer = new wxBoxSizer(wxHORIZONTAL);
-
-	footer->Add(new wxStaticText(this, wxID_ANY, "Refresh all "), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	header->Add(new wxStaticText(this, wxID_ANY, "Refresh all "), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
 	refreshRateChoice = new wxComboBox(this, wxID_ANY);
 	wxIntegerValidator<unsigned int> validator;
 	validator.SetMin(1);
@@ -62,8 +45,45 @@ LearningStateWindow::LearningStateWindow(LearningStateController* controller_, A
 	refreshRateChoice->Append("1000");
 	refreshRateChoice->Bind(wxEVT_COMBOBOX, wxCommandEventFunction(&LearningStateWindow::refreshRateChanged), this);
 	refreshRateChoice->Bind(wxEVT_TEXT, wxCommandEventFunction(&LearningStateWindow::refreshRateChanged), this);
-	footer->Add(refreshRateChoice, 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
-	footer->Add(new wxStaticText(this, wxID_ANY, " iterations."), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	header->Add(refreshRateChoice, 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	header->Add(new wxStaticText(this, wxID_ANY, " iterations."), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+
+	sizer->Add(header, 0, wxALL | wxALIGN_RIGHT, 7);
+
+	wxBoxSizer* body = new wxBoxSizer(wxHORIZONTAL);
+
+	dataSetsList = new wxDataViewListCtrl(this, wxID_ANY);
+	dataSetsList->AppendTextColumn("Data sets");
+	dataSetsList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&LearningStateWindow::dataSetsListRightClick), this);
+
+	body->Add(dataSetsList, 0, wxRIGHT | wxLEFT | wxEXPAND, 7);
+
+	chartPanel = new wxChartPanel(this, wxID_ANY, NULL, wxDefaultPosition, wxSize(100, 100));
+	chartPanel->SetMinSize(wxSize(500, 300));
+
+	body->Add(chartPanel, 1, wxEXPAND);
+
+	sizer->Add(body, 1, wxEXPAND);
+
+	wxBoxSizer* footer = new wxBoxSizer(wxHORIZONTAL);
+
+
+	footer->Add(new wxStaticText(this, wxID_ANY, "Learning plan:"), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	trainingPlansChoice = new wxChoice(this, wxID_ANY);
+	trainingPlansChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&LearningStateWindow::trainingPlanChanged), this);
+	footer->Add(trainingPlansChoice, 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+
+	footer->Add(new wxStaticText(this, wxID_ANY, "Try:"), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	tryChoice = new wxChoice(this, wxID_ANY);
+	footer->Add(tryChoice, 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+
+	footer->Add(new wxStaticText(this, wxID_ANY, "Dataset:"), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	dataSetChoice = new wxChoice(this, wxID_ANY);
+	footer->Add(dataSetChoice, 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+
+	wxButton* button = new wxButton(this, wxID_ANY, "Add", wxDefaultPosition, wxSize(100, -1));
+	footer->Add(button, 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+	button->Bind(wxEVT_BUTTON, wxCommandEventFunction(&LearningStateWindow::addDataSet), this);
 
 	sizer->Add(footer, 0, wxALL, 7);
 	
@@ -73,18 +93,23 @@ LearningStateWindow::LearningStateWindow(LearningStateController* controller_, A
 void LearningStateWindow::trainingPlanChanged(wxCommandEvent& event)
 {
 	controller->setSelectedTrainingPlan(event.GetSelection());
-	dataSetsSizer->Clear();
-	dataSetsSizer->Add(new wxStaticText(this, wxID_ANY, "Datasets:"));
 
-	std::vector<std::string> dataSetLabels = controller->getSelectedTrainingPlan()->getDataSetLabels();
+	dataSetChoice->Clear();
+	std::vector<std::string> dataSetLabels = controller->getDataSetLabels();
 	for (auto label = dataSetLabels.begin(); label != dataSetLabels.end(); label++)
 	{
-		dataSetsCheckBoxes.push_back(new wxCheckBox(this, wxID_ANY, *label));
-		dataSetsCheckBoxes.back()->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&LearningStateWindow::selectionChanged), this);
-		dataSetsSizer->Add(dataSetsCheckBoxes.back());
+		dataSetChoice->Append(*label);
 	}
+	dataSetChoice->SetSelection(0);
 
-	Fit();
+	tryChoice->Clear();
+	for (int i = 0; i < controller->getTryCount(); i++)
+	{
+		tryChoice->Append(std::to_string(i));
+	}
+	tryChoice->SetSelection(controller->getTryCount() - 1);
+
+	refreshAfterChange(sizer);
 }
 
 void LearningStateWindow::refreshRateChanged(wxCommandEvent& event)
@@ -99,12 +124,19 @@ void LearningStateWindow::refreshRateChanged(wxCommandEvent& event)
 	}
 }
 
-void LearningStateWindow::selectionChanged(wxCommandEvent& event)
+void LearningStateWindow::addDataSet(wxCommandEvent& event)
 {
+	std::string label = controller->addDataSet(tryChoice->GetSelection(), dataSetChoice->GetSelection());
+
+	wxVector<wxVariant> data;
+	data.push_back(label);
+	dataSetsList->AppendItem(data);
+
 	wxThreadEvent evt;
 	refreshChart(evt);
-}
 
+	refreshAfterChange(sizer);
+}
 
 void LearningStateWindow::refreshTrainingPlans()
 {
@@ -113,6 +145,7 @@ void LearningStateWindow::refreshTrainingPlans()
 	{
 		trainingPlansChoice->Append((*network)->getName());
 	}
+	refreshAfterChange(sizer);
 }
 
 void LearningStateWindow::refreshChart(wxThreadEvent& event)
@@ -120,28 +153,23 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 	// first step: create plot
 	XYPlot* plot = new XYPlot();
 	// create dataset
-	XYSimpleDataset *dataset = new XYSimpleDataset();
+	XYSimpleDataset *xyDataSet = new XYSimpleDataset();
 
-	for (auto checkBox = dataSetsCheckBoxes.begin(); checkBox != dataSetsCheckBoxes.end(); checkBox++)
+	for (auto dataSet = controller->getSelectedDataSets()->begin(); dataSet != controller->getSelectedDataSets()->end(); dataSet++)
 	{
-		if ((*checkBox)->IsChecked())
+		if (dataSet->second->size() > 0)
 		{
-			std::vector<double>* dataSet = controller->getDataSet((*checkBox)->GetLabel().ToStdString());
+			// and add serie to it
+			xyDataSet->AddSerie(&(*dataSet->second)[0], dataSet->second->size() / 2);
 
-			if (dataSet->size() > 0)
-			{
-				// and add serie to it
-				dataset->AddSerie(&(*dataSet)[0], dataSet->size() / 2);
+			// set line renderer to dataset
+			xyDataSet->SetRenderer(new XYLineRenderer());
 
-				// set line renderer to dataset
-				dataset->SetRenderer(new XYLineRenderer());
-
-				dataset->SetSerieName(dataset->GetSerieCount() - 1, (*checkBox)->GetLabel());
-			}
+			xyDataSet->SetSerieName(xyDataSet->GetSerieCount() - 1, dataSet->first);
 		}
 	}
 
-	if (dataset->GetSerieCount() > 0)
+	if (xyDataSet->GetSerieCount() > 0)
 	{
 		// create left and bottom number axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
@@ -149,11 +177,11 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 
 		// optional: set axis titles
 		leftAxis->SetTitle("Value");
-		leftAxis->SetFixedBounds(0, dataset->GetMaxY());
+		leftAxis->SetFixedBounds(0, xyDataSet->GetMaxY());
 		bottomAxis->SetTitle("Iterations");
 
 		// add axes and dataset to plot
-		plot->AddObjects(dataset, leftAxis, bottomAxis);
+		plot->AddObjects(xyDataSet, leftAxis, bottomAxis);
 
 		// set legend
 		plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
@@ -162,6 +190,32 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 		Chart* chart = new Chart(plot, controller->getSelectedTrainingPlan()->getName());
 		chartPanel->SetChart(chart);
 	}
+	else
+	{
+		chartPanel->SetChart(NULL);
+	}
 
 	controller->refreshFinished();
+}
+
+void LearningStateWindow::dataSetsListRightClick(wxDataViewEvent& event)
+{
+	if (event.GetItem())
+	{
+		wxMenu* popUpMenu = new wxMenu;
+		popUpMenu->Append(new wxMenuItem(popUpMenu, DATASET_REMOVE, "Remove"));
+		popUpMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&LearningStateWindow::dataSetsPopUpMenuSelected), this);
+		dataSetsList->PopupMenu(popUpMenu);
+	}
+}
+
+void LearningStateWindow::dataSetsPopUpMenuSelected(wxCommandEvent& event)
+{
+	if (event.GetId() == DATASET_REMOVE)
+	{
+		controller->removeDataSet(dataSetsList->GetSelectedRow());
+		dataSetsList->DeleteItem(dataSetsList->GetSelectedRow());
+		wxThreadEvent evt;
+		refreshChart(evt);
+	}
 }

@@ -25,23 +25,32 @@ public:
 	// How many iterations were needed
 	int iterationsNeeded;
 
-	std::map<std::string, std::vector<double>> dataSets;
+	int tries;
+
+	std::vector<std::map<std::string, std::vector<double>>> dataSets;
 	LearningState(int dataSaveInterval_ = 1)
 	{
 		successful = 0;
 		quality = 0;
 		iterationsNeeded = 0;
+		tries = 0;
 		dataSaveInterval = dataSaveInterval_;
 	}
 
-	void addData(std::string dataSetLabel, int iteration, double data)
+	void addData(std::string dataSetLabel, int tryNumber, int iteration, double data)
 	{
 		if (iteration % dataSaveInterval == 0)
 		{
-			dataSets[dataSetLabel].push_back(iteration);
-			dataSets[dataSetLabel].push_back(data);
+			dataSets[tryNumber][dataSetLabel].push_back(iteration);
+			dataSets[tryNumber][dataSetLabel].push_back(data);
 			throwEvent(EVT_LS_DS_CHANGED, this);
 		}
+	}
+
+	void addTry()
+	{
+		dataSets.push_back(std::map<std::string, std::vector<double>>());
+		tries++;
 	}
 
 };
