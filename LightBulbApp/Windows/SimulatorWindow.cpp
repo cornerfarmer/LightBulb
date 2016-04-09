@@ -64,9 +64,10 @@ void SimulatorWindow::networkChanged(wxCommandEvent& event)
 	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[event.GetSelection()].get();
 	
 	refreshInput(network);
-	
 	refreshOutput(network);
 	recalculateNetworkOutput();
+
+	refreshAfterChange(sizer);
 }
 
 void SimulatorWindow::recalculateNetworkOutput()
@@ -118,6 +119,8 @@ void SimulatorWindow::inputTypeChanged(wxCommandEvent& event)
 	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
 	refreshInput(network);
 	recalculateNetworkOutput();
+
+	refreshAfterChange(sizer);
 }
 
 void SimulatorWindow::outputTypeChanged(wxCommandEvent& event)
@@ -125,6 +128,8 @@ void SimulatorWindow::outputTypeChanged(wxCommandEvent& event)
 	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
 	refreshOutput(network);
 	recalculateNetworkOutput();
+
+	refreshAfterChange(sizer);
 }
 
 void SimulatorWindow::refreshInput(AbstractNeuralNetwork* network)
@@ -138,20 +143,21 @@ void SimulatorWindow::refreshInput(AbstractNeuralNetwork* network)
 	{
 		if (type == TYPE_BOOL)
 		{
-			inputControls.push_back(new wxCheckBox(this, wxID_ANY, ""));
+			inputControls.push_back(new wxCheckBox(this, wxID_ANY, "", wxPoint(-100, -100)));
 			inputControls.back()->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&SimulatorWindow::selectionChanged), this);
+			inputSizer->Add(inputControls.back(), 0);
 		}
 		else if (type == TYPE_FLOAT)
 		{
-			inputControls.push_back(new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1)));
+			inputControls.push_back(new wxTextCtrl(this, wxID_ANY, "0", wxPoint(-100, -100), wxSize(60, -1)));
 			wxFloatingPointValidator<double> val(3);
 			inputControls.back()->SetValidator(val);
 			inputControls.back()->Bind(wxEVT_TEXT, wxCommandEventFunction(&SimulatorWindow::selectionChanged), this);
+			inputSizer->Add(inputControls.back(), 0);
 		}
-		inputSizer->Add(inputControls.back(), 0);
 		inputSizer->AddStretchSpacer(1);
 	}
-	Fit();
+	
 }
 
 void SimulatorWindow::refreshOutput(AbstractNeuralNetwork* network)
@@ -165,18 +171,18 @@ void SimulatorWindow::refreshOutput(AbstractNeuralNetwork* network)
 	{
 		if (type == TYPE_BOOL)
 		{
-			outputControls.push_back(new wxCheckBox(this, wxID_ANY, ""));
+			outputControls.push_back(new wxCheckBox(this, wxID_ANY, "", wxPoint(-100, -100)));
 			outputControls.back()->Enable(false);
 		}
 		else if (type == TYPE_FLOAT)
 		{
-			outputControls.push_back(new wxTextCtrl(this, wxID_ANY, "0", wxDefaultPosition, wxSize(60, -1)));
+			outputControls.push_back(new wxTextCtrl(this, wxID_ANY, "0", wxPoint(-100, -100), wxSize(60, -1)));
 			outputControls.back()->Enable(false);
 		}
 		outputSizer->Add(outputControls.back(), 0);
 		outputSizer->AddStretchSpacer(1);
 	}
-	Fit();
+	
 }
 
 void SimulatorWindow::refreshNeuralNetworks()
