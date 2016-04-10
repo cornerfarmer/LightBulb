@@ -34,3 +34,8 @@ std::vector<double> SimulatorController::calculate(int neuralNetworkIndex, std::
 	network->calculate(input, output, activationOrder);
 	return output;
 }
+
+std::string SimulatorController::getLabel()
+{
+	return "Simulator";
+}

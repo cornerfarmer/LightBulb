@@ -5,10 +5,11 @@
 
 // Library includes
 #include <vector>
+#include <map>
 
 // Includes
 #include "LearningStateWindow.hpp"
-#include <map>
+#include "AbstractSubApp.hpp"
 
 // Forward declarations
 class TrainingWindow;
@@ -17,7 +18,7 @@ class TrainingPlanRepository;
 class AbstractTrainingPlan;
 struct LearningState;
 
-class LearningStateController
+class LearningStateController : public AbstractSubApp
 {
 private:
 	std::unique_ptr<LearningStateWindow> window;
@@ -44,6 +45,7 @@ public:
 	std::string addDataSet(int tryNumber, int dataSetIndex);
 	std::vector<std::pair<std::string, std::vector<double>*>>* getSelectedDataSets();
 	void removeDataSet(int dataSetIndex);
+	static std::string getLabel();
 };
 
 #endif

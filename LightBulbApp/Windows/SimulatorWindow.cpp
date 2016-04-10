@@ -12,7 +12,7 @@ enum IOType
 };
 
 SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent)
-	:AbstractWindow("Simulator", parent)
+	:AbstractWindow(SimulatorController::getLabel(), parent)
 {
 	controller = controller_;
 

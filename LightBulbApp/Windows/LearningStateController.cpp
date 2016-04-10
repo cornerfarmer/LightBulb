@@ -97,3 +97,8 @@ void LearningStateController::removeDataSet(int dataSetIndex)
 {
 	selectedDataSets.erase(selectedDataSets.begin() + dataSetIndex);
 }
+
+std::string LearningStateController::getLabel()
+{
+	return "LearningState";
+}

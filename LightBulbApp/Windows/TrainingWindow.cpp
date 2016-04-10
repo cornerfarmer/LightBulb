@@ -306,12 +306,12 @@ void TrainingWindow::saveTrainingSession(wxThreadEvent& event)
 	Refresh();
 }
 
-void TrainingWindow::addSubWindow(AbstractWindow* newSubWindow)
+
+void TrainingWindow::addSubAppFactory(AbstractSubAppFactory* newSubAppFactory, int factoryIndex)
 {
-	wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubWindow->GetLabel(), wxEmptyString, wxITEM_CHECK);
+	wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubAppFactory->getLabel());
 	windowsMenu->Append(newItem);
-	subWindows[newItem->GetId()] = newSubWindow;
-	windowsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::toggleSubWindow), this);
+	
 }
 
 wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
@@ -414,6 +414,7 @@ void TrainingWindow::createMenuBar()
 	file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::fileMenuSelected), this);
 	menubar->Append(file, "File");
 	windowsMenu = new wxMenu();
+	windowsMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::addSubApp), this);
 	menubar->Append(windowsMenu, "Windows");
 	SetMenuBar(menubar);
 }
@@ -561,7 +562,8 @@ void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
 	validateSelectedProcess();
 }
 
-void TrainingWindow::toggleSubWindow(wxCommandEvent& event)
+void TrainingWindow::addSubApp(wxCommandEvent& event)
 {
-	subWindows[event.GetId()]->Show(!subWindows[event.GetId()]->IsShownOnScreen());
+	int index = windowsMenu->GetMenuItems().IndexOf(windowsMenu->FindItem(event.GetId()));
+	controller->addSubApp(index);
 }

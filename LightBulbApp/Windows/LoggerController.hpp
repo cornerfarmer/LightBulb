@@ -11,11 +11,12 @@
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <Logging/AbstractLogger.hpp>
 #include "LoggerWindow.hpp"
+#include "AbstractSubApp.hpp"
 
 // Forward declarations
 class TrainingWindow;
 
-class LoggerController : public AbstractLogger
+class LoggerController : public AbstractSubApp, public AbstractLogger
 {
 private:
 	std::unique_ptr<LoggerWindow> window;
@@ -27,6 +28,7 @@ public:
 	LoggerWindow* getWindow();
 	void setLogLevel(int level);
 	void log(std::string message, LogLevel level);
+	static std::string getLabel();
 };
 
 #endif

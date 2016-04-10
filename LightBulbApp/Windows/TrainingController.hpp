@@ -16,14 +16,17 @@
 // Forward declarations
 class NeuralNetworkRepository;
 class TrainingPlanRepository;
+class AbstractSubAppFactory;
 
-class TrainingController
+class TrainingController : public AbstractSubApp
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, TrainingController& trainingController);
 private:
 	std::vector<AbstractTrainingPlan*> trainingPlanPatterns;
 	std::unique_ptr<TrainingWindow> window;
+	std::vector<std::unique_ptr<AbstractSubApp>> activeSubApps;
+	std::vector<AbstractSubAppFactory*> subAppFactories;
 	AbstractLogger* logger;
 	NeuralNetworkRepository* neuralNetworkRepository;
 	TrainingPlanRepository* trainingPlanRepository;
@@ -47,7 +50,7 @@ public:
 	void setLogger(AbstractLogger* newLogger);
 	void show();
 	TrainingWindow* getWindow();
-	void addSubWindow(AbstractWindow* newSubWindow);
+	void addSubAppFactory(AbstractSubAppFactory* newSubAppFactory);
 	void saveNeuralNetwork(std::string path, int neuralNetworkIndex);
 	void loadNeuralNetwork(std::string path);
 	void saveTrainingPlan(int trainingPlanIndex);
@@ -56,6 +59,7 @@ public:
 	void loadTrainingSession(std::string path);
 	void saveTrainingSession(std::string path);
 	void saveTrainingSession();
+	void addSubApp(int subAppFactoryIndex);
 };
 
 #endif

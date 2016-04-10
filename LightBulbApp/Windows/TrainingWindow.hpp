@@ -9,6 +9,7 @@
 // Includes
 #include "Windows/AbstractWindow.hpp"
 #include <map>
+#include "AbstractSubAppFactory.hpp"
 
 // Forward declarations
 class wxRichTextCtrl;
@@ -67,7 +68,7 @@ private:
 	void startTraining(wxCommandEvent& event);
 	void pauseTraining(wxCommandEvent& event);
 	void processSelecionHasChanged(wxCommandEvent& event);
-	void toggleSubWindow(wxCommandEvent& event);
+	void addSubApp(wxCommandEvent& event);
 	void refreshNeuralNetworks(wxCommandEvent& event);
 	void refreshTrainingPlanPatterns(wxCommandEvent& event);
 	void refreshTrainingPlans(wxCommandEvent& event);
@@ -78,7 +79,7 @@ protected:
 	DECLARE_EVENT_TABLE();
 public:
 	TrainingWindow(TrainingController* controller_);
-	void addSubWindow(AbstractWindow* newSubWindow);
+	void addSubAppFactory(AbstractSubAppFactory* newSubAppFactory, int factoryIndex);
 };
 
 #endif

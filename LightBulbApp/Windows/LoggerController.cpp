@@ -31,6 +31,10 @@ void LoggerController::log(std::string message, LogLevel level)
 	messages.push_back(std::pair<LogLevel, std::string>(level, message));
 }
 
+std::string LoggerController::getLabel()
+{
+	return "Logger";
+}
 
 void LoggerController::reloadLog()
 {

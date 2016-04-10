@@ -4,7 +4,7 @@
 #include "LoggerController.hpp"
 
 LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent)
-	:AbstractWindow("Logger", parent)
+	:AbstractWindow(LoggerController::getLabel(), parent)
 {
 	controller = controller_;
 

@@ -147,14 +147,15 @@ TrainingWindow* TrainingController::getWindow()
 	return window.get();
 }
 
+void TrainingController::addSubAppFactory(AbstractSubAppFactory* newSubAppFactory)
+{
+	subAppFactories.push_back(newSubAppFactory);
+	window->addSubAppFactory(newSubAppFactory, subAppFactories.size() - 1);
+}
+
 int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
 {
 	return neuralNetworkRepository->getIndexOfNeuralNetwork(network);
-}
-
-void TrainingController::addSubWindow(AbstractWindow* newSubWindow)
-{
-	window->addSubWindow(newSubWindow);
 }
 
 void TrainingController::saveNeuralNetwork(std::string path, int neuralNetworkIndex)
@@ -236,7 +237,10 @@ void TrainingController::saveTrainingSession()
 	}
 }
 
-
+void TrainingController::addSubApp(int subAppFactoryIndex)
+{
+	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createWindow(window.get())));
+}
 
 bool TrainingController::allTrainingPlansPaused()
 {

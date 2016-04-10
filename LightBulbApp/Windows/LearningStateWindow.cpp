@@ -19,7 +19,7 @@ enum
 wxDEFINE_EVENT(LSW_EVT_REFRESH_CHART, wxThreadEvent);
 
 LearningStateWindow::LearningStateWindow(LearningStateController* controller_, AbstractWindow* parent)
-	:AbstractWindow("LearningState", parent)
+	:AbstractWindow(LearningStateController::getLabel(), parent)
 {
 	controller = controller_;
 

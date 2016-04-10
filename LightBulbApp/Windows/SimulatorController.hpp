@@ -8,6 +8,7 @@
 
 // Includes
 #include "SimulatorWindow.hpp"
+#include "AbstractSubApp.hpp"
 
 // Forward declarations
 class TrainingWindow;
@@ -15,7 +16,7 @@ class TrainingController;
 class NeuralNetworkRepository;
 class AbstractNeuralNetwork;
 
-class SimulatorController
+class SimulatorController : public AbstractSubApp
 {
 private:
 	std::unique_ptr<SimulatorWindow> window;
@@ -27,6 +28,7 @@ public:
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 	std::vector<double> calculate(int neuralNetworkIndex, std::vector<double> input);
+	static std::string getLabel();
 };
 
 #endif
