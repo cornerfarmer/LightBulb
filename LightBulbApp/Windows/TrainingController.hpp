@@ -27,7 +27,6 @@ private:
 	std::unique_ptr<TrainingWindow> window;
 	std::vector<std::unique_ptr<AbstractSubApp>> activeSubApps;
 	std::vector<AbstractSubAppFactory*> subAppFactories;
-	AbstractLogger* logger;
 	NeuralNetworkRepository* neuralNetworkRepository;
 	TrainingPlanRepository* trainingPlanRepository;
 	int saveTrainingPlanAfterPausedIndex;
@@ -47,7 +46,6 @@ public:
 	void trainingPlanPaused(AbstractTrainingPlan* trainingPlan);
 	void trainingPlanFinished(AbstractTrainingPlan* trainingPlan);
 	void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
-	void setLogger(AbstractLogger* newLogger);
 	void show();
 	TrainingWindow* getWindow();
 	void addSubAppFactory(AbstractSubAppFactory* newSubAppFactory);

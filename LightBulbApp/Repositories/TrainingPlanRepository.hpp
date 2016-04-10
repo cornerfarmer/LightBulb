@@ -29,7 +29,7 @@ public:
 	int getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	void Add(AbstractTrainingPlan* trainingPlan);
 	void save(std::string path, int trainingPlanIndex);
-	AbstractTrainingPlan* load(std::string path, AbstractLogger* logger);
+	AbstractTrainingPlan* load(std::string path);
 };
 
 #endif

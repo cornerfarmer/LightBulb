@@ -29,7 +29,6 @@ protected:
 	void tryToPause();
 	void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
 public:
-	void setLogger(AbstractLogger* newLogger);
 	std::vector<std::string> getDataSetLabels();
 	LearningState* getLearningState();
 };

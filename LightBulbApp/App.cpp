@@ -15,7 +15,7 @@ bool App::OnInit()
 	TrainingPlanRepository* trainingPlanRepository = new TrainingPlanRepository();
 
 	TrainingController* trainingController = new TrainingController(neuralNetworkRepository, trainingPlanRepository);
-	LoggerFactory* loggerFactory = new LoggerFactory();
+	LoggerFactory* loggerFactory = new LoggerFactory(trainingPlanRepository);
 	SimulatorFactory* simulatorFactory = new SimulatorFactory(neuralNetworkRepository);
 	LearningStateFactory* learningStateFactory = new LearningStateFactory(trainingPlanRepository);
 

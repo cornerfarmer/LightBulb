@@ -9,26 +9,33 @@
 
 // Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
-#include <Logging/AbstractLogger.hpp>
 #include "LoggerWindow.hpp"
 #include "AbstractSubApp.hpp"
 
 // Forward declarations
 class TrainingWindow;
+class TrainingPlanRepository;
 
-class LoggerController : public AbstractSubApp, public AbstractLogger
+class LoggerController : public AbstractSubApp
 {
 private:
 	std::unique_ptr<LoggerWindow> window;
-	std::vector<std::pair<LogLevel, std::string>> messages;
+	TrainingPlanRepository* trainingPlanRepository;
+	AbstractTrainingPlan* selectedTrainingPlan;
+	int lastLogMessageIndex;
 	void reloadLog();
+	void addLogMessage(std::string message);
+	void addNewLogMessages();
 public:
-	LoggerController(AbstractWindow* parent = NULL);
+	LoggerController(TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
 	void show();
+	void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
+	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
 	LoggerWindow* getWindow();
 	void setLogLevel(int level);
-	void log(std::string message, LogLevel level);
+	void logChanged(AbstractLogger* logger);
 	static std::string getLabel();
+	void selectTrainingPlan(int trainingPlanIndex);
 };
 
 #endif

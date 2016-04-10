@@ -1,0 +1,25 @@
+#pragma once
+
+#ifndef _STORAGELOGGER_H_
+#define _STORAGELOGGER_H_
+
+// Library Includes
+#include <vector>
+
+// Includes
+#include "AbstractLogger.hpp"
+
+// Forward declarations
+
+class StorageLogger : public AbstractLogger
+{
+protected:
+	std::vector<std::pair<LogLevel, std::string>> messages;
+public:
+	StorageLogger();
+	void log(std::string message, LogLevel level);
+	std::vector<std::pair<LogLevel, std::string>>* getMessages();
+};
+
+#endif
+

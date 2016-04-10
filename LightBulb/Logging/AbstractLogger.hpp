@@ -5,6 +5,7 @@
 
 // Library Includes
 #include <string>
+#include <Event/Observable.hpp>
 
 // Includes
 
@@ -17,7 +18,12 @@ enum LogLevel
 	LL_LOW
 };
 
-class AbstractLogger
+enum LoggerEvents
+{
+	EVT_LG_LOGADDED
+};
+
+class AbstractLogger : public LightBulb::Observable<LoggerEvents, AbstractLogger>
 {
 private:
 protected:
@@ -27,6 +33,8 @@ public:
 	virtual ~AbstractLogger() {};
 	AbstractLogger(LogLevel currentLogLevel_);
 	virtual void log(std::string message, LogLevel level);
+	void setLogLevel(LogLevel level);
+	LogLevel getLogLevel();
 };
 
 #endif

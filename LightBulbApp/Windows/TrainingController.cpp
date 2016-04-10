@@ -24,7 +24,6 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &TrainingController::trainingPlansChanged, this);
 
 	window.reset(new TrainingWindow(this));;
-	logger = NULL;
 	saveTrainingPlanAfterPausedIndex = -1;
 	saveTrainingSessionAfterPause = false;
 
@@ -56,7 +55,6 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	AbstractTrainingPlan* trainingPlan = trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute();
 	trainingPlan->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
 	trainingPlan->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
-	trainingPlan->setLogger(logger);
 	trainingPlanRepository->Add(trainingPlan);
 	if (getNeuralNetworks()->size() <= neuralNetworkIndex) 
 	{
@@ -132,11 +130,6 @@ void TrainingController::resumeTrainingPlan(AbstractTrainingPlan* trainingPlan)
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
-void TrainingController::setLogger(AbstractLogger* newLogger)
-{
-	logger = newLogger;
-}
-
 void TrainingController::show()
 {
 	window->Show();
@@ -191,7 +184,7 @@ void TrainingController::saveTrainingPlan(std::string path, int trainingPlanInde
 
 void TrainingController::loadTrainingPlan(std::string path)
 {
-	AbstractTrainingPlan* trainingPlan = trainingPlanRepository->load(path, logger);
+	AbstractTrainingPlan* trainingPlan = trainingPlanRepository->load(path);
 	neuralNetworkRepository->Add(trainingPlan->getNeuralNetwork());
 }
 
@@ -201,11 +194,6 @@ void TrainingController::loadTrainingSession(std::string path)
 	cereal::XMLInputArchive archive(is);
 
 	archive(*this);
-
-	for (auto trainingPlan = trainingPlanRepository->getTrainingPlans()->begin(); trainingPlan != trainingPlanRepository->getTrainingPlans()->end(); trainingPlan++)
-	{
-		(*trainingPlan)->setLogger(logger);
-	}
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());

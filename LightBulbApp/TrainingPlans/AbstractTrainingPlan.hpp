@@ -5,6 +5,7 @@
 
 // Includes
 #include <Event/Observable.hpp>
+#include <Logging/StorageLogger.hpp>
 
 // Library includes
 #include <string>
@@ -46,7 +47,7 @@ private:
 	bool threadShouldBeJoinedBeforeReuse;
 protected:
 	AbstractNeuralNetwork* network;
-	AbstractLogger* logger;
+	std::unique_ptr<StorageLogger> logger;
 	virtual void run(bool initial) = 0;
 	virtual AbstractTrainingPlan* getCopy() = 0;
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
@@ -67,11 +68,11 @@ public:
 	bool isPaused();
 	bool isPausing();
 	bool isRunning();
-	virtual void setLogger(AbstractLogger* newLogger);
 	virtual int getRequiredInputSize() = 0;
 	virtual int getRequiredOutputSize() = 0;
 	virtual std::vector<std::string> getDataSetLabels() = 0;
 	virtual LearningState* getLearningState() = 0;
+	StorageLogger* getLogger();
 };
 
 #endif

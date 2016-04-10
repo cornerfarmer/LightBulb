@@ -13,17 +13,23 @@
 // Forward declarations
 class wxRichTextCtrl;
 class LoggerController;
+class AbstractTrainingPlan;
+
+wxDECLARE_EVENT(LW_EVT_ADD_MSG, wxThreadEvent);
 
 class LoggerWindow : public AbstractWindow
 {
 private:
 	LoggerController* controller;
 	wxRichTextCtrl* textBox;
+	wxChoice* trainingPlansChoice;
+	void trainingPlanChanged(wxCommandEvent& event);
 	void logLevelChanged(wxCommandEvent& event);
 public:
 	LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
-	void addLogMessage(std::string message);
+	void addLogMessage(wxThreadEvent& event);
 	void clearLog();
+	void refreshTrainingPlans();
 };
 
 #endif

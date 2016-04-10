@@ -5,6 +5,7 @@
 
 AbstractTrainingPlan::AbstractTrainingPlan()
 {
+	logger.reset(new StorageLogger());
 	threadShouldBeJoinedBeforeReuse = false;
 	state = TP_IDLE;
 }
@@ -111,7 +112,8 @@ void AbstractTrainingPlan::finished()
 	throwEvent(EVT_TP_FINISHED, this);
 }
 
-void AbstractTrainingPlan::setLogger(AbstractLogger* newLogger)
+
+StorageLogger* AbstractTrainingPlan::getLogger()
 {
-	logger = newLogger;
+	return logger.get();
 }

@@ -13,7 +13,9 @@ class TrainingPlanRepository;
 class LoggerFactory : public AbstractSubAppFactory
 {
 protected:
+	TrainingPlanRepository* trainingPlanRepository;
 public:
+	LoggerFactory(TrainingPlanRepository* trainingPlanRepository_);
 	AbstractSubApp* createWindow(AbstractWindow* parent);
 	std::string getLabel();
 };

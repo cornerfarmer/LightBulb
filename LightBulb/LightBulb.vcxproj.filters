@@ -596,6 +596,7 @@
     <ClCompile Include="IO\NeuralNetworkIO.hpp" />
     <ClCompile Include="IO\MatrixIO.hpp" />
     <ClCompile Include="IO\LayeredNetworkIO.hpp" />
+    <ClCompile Include="Logging\StorageLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1146,5 +1147,6 @@
     </ClInclude>
     <ClInclude Include="IO\LearningStateIO.hpp" />
     <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
+    <ClInclude Include="Logging\StorageLogger.hpp" />
   </ItemGroup>
 </Project>

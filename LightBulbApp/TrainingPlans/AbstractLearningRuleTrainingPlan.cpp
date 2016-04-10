@@ -28,16 +28,9 @@ void AbstractLearningRuleTrainingPlan::tryToPause()
 void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
 {
 	options->neuralNetwork = network;
-	options->logger = logger;
+	options->logger = logger.get();
 }
 
-void AbstractLearningRuleTrainingPlan::setLogger(AbstractLogger* newLogger)
-{
-	AbstractTrainingPlan::setLogger(newLogger);
-	if (learningRule.get()) {
-		learningRule->setLogger(newLogger);
-	}
-}
 
 std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels()
 {
