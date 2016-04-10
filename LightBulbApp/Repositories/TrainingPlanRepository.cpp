@@ -4,7 +4,7 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include "IO/BackpropagationXorExampleIO.hpp"
+#include "IO/TrainingPlanRepositoryIO.hpp"
 
 int TrainingPlanRepository::getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {

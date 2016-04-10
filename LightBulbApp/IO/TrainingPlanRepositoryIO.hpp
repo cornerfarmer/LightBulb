@@ -4,7 +4,8 @@
 #define _TRAININGPLANREPOSITORYIO_H_
 
 // Includes
-#include "IO/AbstractTrainingPlanIO.hpp"
+#include "IO/BackpropagationXorExampleIO.hpp"
+#include "IO/RBFNetworkBiggerExampleIO.hpp"
 #include "Repositories/TrainingPlanRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>

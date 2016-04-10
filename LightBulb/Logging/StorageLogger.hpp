@@ -13,6 +13,8 @@
 
 class StorageLogger : public AbstractLogger
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, StorageLogger& storageLogger);
 protected:
 	std::vector<std::pair<LogLevel, std::string>> messages;
 public:

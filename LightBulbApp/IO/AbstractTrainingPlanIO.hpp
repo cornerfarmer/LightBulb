@@ -5,10 +5,12 @@
 
 // Includes
 #include "IO/NeuralNetworkIO.hpp"
+#include "IO/StorageLoggerIO.hpp"
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <IO/IOStorage.hpp>
+
 
 extern bool onlyUseNeuralNetworkIndex;
 
@@ -33,6 +35,7 @@ void save(Archive& archive, AbstractTrainingPlan const& trainingPlan)
 		archive(cereal::make_nvp("neuralNetworkIndex", neuralNetworkIndex));
 	}
 	archive(cereal::make_nvp("state", trainingPlan.state));
+	archive(cereal::make_nvp("logger", trainingPlan.logger));
 }
 
 template <class Archive>
@@ -52,6 +55,7 @@ void load(Archive& archive, AbstractTrainingPlan& trainingPlan)
 		trainingPlan.network = (*networks)[neuralNetworkIndex].get();
 	}
 	archive(cereal::make_nvp("state", trainingPlan.state));
+	archive(cereal::make_nvp("logger", trainingPlan.logger));
 }
 
 #endif
