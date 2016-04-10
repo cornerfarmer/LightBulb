@@ -13,6 +13,7 @@ LearningStateController::LearningStateController(TrainingPlanRepository* trainin
 	trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, this);
 	window.reset(new LearningStateWindow(this, parent));
 	iterationsSinceLearningStateChanged = 0;
+	trainingPlansChanged(trainingPlanRepository);
 }
 
 LearningStateWindow* LearningStateController::getWindow()

@@ -9,6 +9,7 @@ SimulatorController::SimulatorController(NeuralNetworkRepository* neuralNetworkR
 	neuralNetworkRepository = neuralNetworkRepository_;
 	neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
 	window.reset(new SimulatorWindow(this, parent));
+	neuralNetworksChanged(neuralNetworkRepository);
 }
 
 SimulatorWindow* SimulatorController::getWindow()
