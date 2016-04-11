@@ -179,9 +179,6 @@
     <ClInclude Include="Repositories\TrainingPlanRepository.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="IO\BackpropagationXorExampleIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\TrainingControllerIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -201,9 +198,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\RBFNetworkBiggerExampleIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\AbstractSubApp.hpp">

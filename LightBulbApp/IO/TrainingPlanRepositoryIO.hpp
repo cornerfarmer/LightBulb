@@ -4,11 +4,11 @@
 #define _TRAININGPLANREPOSITORYIO_H_
 
 // Includes
-#include "IO/BackpropagationXorExampleIO.hpp"
-#include "IO/RBFNetworkBiggerExampleIO.hpp"
+#include "IO/AbstractTrainingPlanIO.hpp"
 #include "Repositories/TrainingPlanRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
+#include <Examples/RBFNetworkBiggerExample.hpp>
 
 template <class Archive>
 void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository)

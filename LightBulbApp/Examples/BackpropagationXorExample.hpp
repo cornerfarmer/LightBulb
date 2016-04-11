@@ -29,4 +29,7 @@ public:
 	int getRequiredOutputSize();
 	std::string getLearningRuleName();
 };
+
+USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractLearningRuleTrainingPlan);
+
 #endif

@@ -1149,5 +1149,6 @@
     <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
     <ClInclude Include="Logging\StorageLogger.hpp" />
     <ClInclude Include="IO\StorageLoggerIO.hpp" />
+    <ClInclude Include="IO\UseParentSerialization.hpp" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,8 @@
 // Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <Learning/BackpropagationLearningRule.hpp>
-#include "Teaching/Teacher.hpp"
+#include <IO/IOStorage.hpp>
+#include "IO/UseParentSerialization.hpp"
 
 // Library includes
 
@@ -32,4 +33,6 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	LearningState* getLearningState();
 };
+
+#include "IO/AbstractLearningRuleTrainingPlanIO.hpp"
 #endif
