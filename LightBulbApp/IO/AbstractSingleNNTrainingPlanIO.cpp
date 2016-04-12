@@ -1,5 +1,5 @@
 
 // Includes
-#include "IO/AbstractTrainingPlanIO.hpp"
+#include "IO/AbstractSingleNNTrainingPlanIO.hpp"
 
 bool onlyUseNeuralNetworkIndex = false;

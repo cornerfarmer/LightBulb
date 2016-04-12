@@ -71,3 +71,84 @@ void doFunctionEvolutionExample()
 	learningRuleAnalyser.execute();
 
 }
+
+
+
+
+AbstractLearningRule* BackpropagationXorExample::createLearningRate()
+{
+	teacher.reset(new Teacher());
+	for (int i = 0; i < 2; i += 1)
+	{
+		for (int l = 0; l < 2; l += 1)
+		{
+			std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(2));
+			NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
+
+			teachingPattern[0][0] = i;
+			teachingPattern[0][1] = l;
+			(*teachingInput).set(0, 0, (i != l));
+			teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		}
+	}
+
+	BackpropagationLearningRuleOptions options;
+	options.maxTotalErrorValue = 4;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.001f;
+	options.maxTries = 1000;
+	options.weightDecayFac = 0;
+	options.learningRate = 0.1;
+	options.momentum = 0;
+	options.resilientLearningRate = false;
+	options.teacher = teacher.get();
+	fillDefaultLearningRuleOptions(&options);
+
+	return new BackpropagationLearningRule(options);
+}
+
+AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
+{
+	LayeredNetworkOptions layeredNetworkOptions;
+	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	layeredNetworkOptions.neuronsPerLayerCount[0] = 2;
+	layeredNetworkOptions.neuronsPerLayerCount[1] = 2;
+	layeredNetworkOptions.neuronsPerLayerCount[2] = 1;
+
+	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
+
+	return new NeuralNetwork(layeredNetwork);
+}
+
+
+std::string BackpropagationXorExample::getName()
+{
+	return "Backpropagation xor example";
+}
+
+std::string BackpropagationXorExample::getDescription()
+{
+	return "Trains a network to simulate the xor function!";
+}
+
+
+AbstractTrainingPlan* BackpropagationXorExample::getCopy()
+{
+	return new BackpropagationXorExample();
+}
+
+int BackpropagationXorExample::getRequiredInputSize()
+{
+	return 2;
+}
+
+int BackpropagationXorExample::getRequiredOutputSize()
+{
+	return 1;
+}
+
+std::string BackpropagationXorExample::getLearningRuleName()
+{
+	return BackpropagationLearningRule::getName();
+}

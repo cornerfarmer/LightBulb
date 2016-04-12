@@ -136,7 +136,7 @@
     </ClCompile>
     <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -150,7 +150,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="IO\AbstractTrainingPlanIO.cpp" />
+    <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main.old.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -160,8 +160,8 @@
     <ClCompile Include="Repositories\NeuralNetworkRepository.cpp" />
     <ClCompile Include="Repositories\TrainingPlanRepository.cpp" />
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
-    <ClCompile Include="TrainingPlans\ExampleTrainingPlan.cpp" />
     <ClCompile Include="Windows\AbstractSubApp.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
     <ClCompile Include="Windows\AbstractSubAppFactory.cpp" />
@@ -192,7 +192,7 @@
     </ClInclude>
     <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -207,6 +207,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />
+    <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />
     <ClInclude Include="IO\TrainingControllerIO.hpp" />
@@ -215,8 +216,8 @@
     <ClInclude Include="Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="Repositories\TrainingPlanRepository.hpp" />
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
-    <ClInclude Include="TrainingPlans\ExampleTrainingPlan.hpp" />
     <ClInclude Include="Windows\AbstractSubApp.hpp" />
     <ClInclude Include="Windows\AbstractWindow.hpp" />
     <ClInclude Include="Windows\AbstractSubAppFactory.hpp" />

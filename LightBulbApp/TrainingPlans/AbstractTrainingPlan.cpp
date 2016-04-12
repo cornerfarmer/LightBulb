@@ -1,7 +1,6 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <thread>
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 
 AbstractTrainingPlan::AbstractTrainingPlan()
 {
@@ -10,15 +9,11 @@ AbstractTrainingPlan::AbstractTrainingPlan()
 	state = TP_IDLE;
 }
 
-void AbstractTrainingPlan::start(AbstractNeuralNetwork* network_)
+void AbstractTrainingPlan::start()
 {
 	if (state == TP_IDLE)
 	{
-		if (network_ != NULL)
-			network = network_;
-		else
-			network = createNeuralNetwork();
-		network->setState(NN_STATE_TRAINED);
+		initializeStart();
 		state = TP_RUNNING;
 		thread = std::thread(&AbstractTrainingPlan::runThread, this, true);
 	}
@@ -34,10 +29,6 @@ void AbstractTrainingPlan::start(AbstractNeuralNetwork* network_)
 	}
 }
 
-AbstractNeuralNetwork* AbstractTrainingPlan::getNeuralNetwork()
-{
-	return network;
-}
 
 std::string AbstractTrainingPlan::getStateAsString()
 {

@@ -4,6 +4,7 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
+#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 
 int TrainingPlanRepository::getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {

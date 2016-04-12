@@ -63,9 +63,6 @@
     <ClCompile Include="Windows\AbstractWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\ExampleTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -85,9 +82,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Repositories\TrainingPlanRepository.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\AbstractTrainingPlanIO.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Windows\LearningStateWindow.cpp">
@@ -112,6 +106,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Windows\SimulatorFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -150,9 +150,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\AbstractWindow.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\ExampleTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp">
@@ -213,6 +210,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\SimulatorFactory.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

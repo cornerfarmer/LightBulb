@@ -7,14 +7,14 @@
 // Includes
 #include <Learning/BackpropagationLearningRule.hpp>
 #include "Teaching/Teacher.hpp"
-#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
+#include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
 
 // Library includes
 
 // Forward declarations
 
 // A techer manages many techingLessons
-class BackpropagationXorExample : public AbstractLearningRuleTrainingPlan
+class BackpropagationXorExample : public AbstractSingleNNTrainingPlan
 {
 private:
 	std::unique_ptr<Teacher> teacher;
@@ -30,6 +30,6 @@ public:
 	std::string getLearningRuleName();
 };
 
-USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractSingleNNTrainingPlan);
 
 #endif

@@ -27,7 +27,6 @@ void AbstractLearningRuleTrainingPlan::tryToPause()
 
 void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
 {
-	options->neuralNetwork = network;
 	options->logger = logger.get();
 }
 

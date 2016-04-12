@@ -15,7 +15,6 @@
 
 // Forward declarations
 class AbstractLogger;
-class AbstractNeuralNetwork;
 struct LearningState;
 
 enum TrainingPlanState
@@ -46,19 +45,17 @@ private:
 	void runThread(bool initial);
 	bool threadShouldBeJoinedBeforeReuse;
 protected:
-	AbstractNeuralNetwork* network;
 	std::unique_ptr<StorageLogger> logger;
 	virtual void run(bool initial) = 0;
 	virtual AbstractTrainingPlan* getCopy() = 0;
-	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
 	virtual void tryToPause() = 0;
 	void pausingFinished();
 	void finished();
+	virtual void initializeStart() {};
 public:
 	AbstractTrainingPlan();
-	void start(AbstractNeuralNetwork* network = NULL);
+	void start();
 	virtual std::string getName() = 0;
-	AbstractNeuralNetwork* getNeuralNetwork();
 	virtual std::string getDescription() = 0;
 	virtual std::string getLearningRuleName() = 0;
 	std::string getStateAsString();

@@ -2,7 +2,6 @@
 #include "Windows/TrainingController.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include "TrainingPlans/ExampleTrainingPlan.hpp"
 #include "Examples/BackpropagationXorExample.hpp"
 #include "TrainingWindow.hpp"
 #include <Examples/BackpropagationXorExample.hpp>
@@ -13,6 +12,7 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <Examples/RBFNetworkBiggerExample.hpp>
+#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -55,15 +55,26 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	trainingPlan->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
 	trainingPlan->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
 	trainingPlanRepository->Add(trainingPlan);
-	if (getNeuralNetworks()->size() <= neuralNetworkIndex) 
+
+	AbstractSingleNNTrainingPlan* singleNNTrainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan);
+	if (singleNNTrainingPlan)
 	{
-		trainingPlan->start();
-		neuralNetworkRepository->Add(trainingPlan->getNeuralNetwork());
-	} 
+		if (getNeuralNetworks()->size() <= neuralNetworkIndex)
+		{
+			singleNNTrainingPlan->start();
+			neuralNetworkRepository->Add(singleNNTrainingPlan->getNeuralNetwork());
+		}
+		else
+		{
+			singleNNTrainingPlan->setNeuralNetwork((*getNeuralNetworks())[neuralNetworkIndex].get());
+			singleNNTrainingPlan->start();
+		}
+	}
 	else
 	{
-		trainingPlan->start((*getNeuralNetworks())[neuralNetworkIndex].get());
+		trainingPlan->start();
 	}
+
 	wxThreadEvent evt(TW_EVT_REFRESH_TP);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
@@ -184,7 +195,10 @@ void TrainingController::saveTrainingPlan(std::string path, int trainingPlanInde
 void TrainingController::loadTrainingPlan(std::string path)
 {
 	AbstractTrainingPlan* trainingPlan = trainingPlanRepository->load(path);
-	neuralNetworkRepository->Add(trainingPlan->getNeuralNetwork());
+	if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
+	{
+		neuralNetworkRepository->Add(static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork());
+	}
 }
 
 void TrainingController::loadTrainingSession(std::string path)

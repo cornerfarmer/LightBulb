@@ -14,7 +14,6 @@
 
 // Forward declarations
 
-// A techer manages many techingLessons
 class AbstractLearningRuleTrainingPlan : public AbstractTrainingPlan
 {
 	template <class Archive>
@@ -28,7 +27,7 @@ protected:
 	virtual AbstractLearningRule* createLearningRate() = 0;
 	void run(bool initial);
 	void tryToPause();
-	void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
+	virtual void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
 public:
 	std::vector<std::string> getDataSetLabels();
 	LearningState* getLearningState();

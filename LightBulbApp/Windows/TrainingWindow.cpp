@@ -7,6 +7,7 @@
 #include <wx/richtext/richtextctrl.h>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include "TrainingController.hpp"
+#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 
 enum
 {
@@ -243,7 +244,6 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 
 	trainingPlanList = new wxDataViewListCtrl(panel, wxID_ANY);
 	trainingPlanList->AppendTextColumn("Training name")->SetMinWidth(50);
-	trainingPlanList->AppendTextColumn("Network name")->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&TrainingWindow::trainingPlanListRightClick), this);
@@ -262,7 +262,6 @@ void TrainingWindow::refreshTrainingPlans(wxCommandEvent& event)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
-		data.push_back(wxVariant((*trainingPlan)->getNeuralNetwork()->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getStateAsString()));
 		trainingPlanList->AppendItem(data);
 		if (currentDetailObject == trainingPlan->get())
@@ -449,7 +448,10 @@ void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
 	processTrainingPlanSelection = trainingPlan;
-	neuralNetworksChoice->Select(controller->getIndexOfNeuralNetwork(trainingPlan->getNeuralNetwork()));
+	if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
+	{
+		neuralNetworksChoice->Select(controller->getIndexOfNeuralNetwork(static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()));
+	}
 	trainingPlanPatternsChoice->Select(controller->getIndexOfTrainingPlanPattern(trainingPlan->getTrainingPlanPattern()));
 	neuralNetworksChoice->Enable(false);
 	trainingPlanPatternsChoice->Enable(false);
@@ -503,7 +505,8 @@ void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPla
 {
 	clearDetails();
 	detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
-	detailsTextBox->WriteText("Network name: " + trainingPlan->getNeuralNetwork()->getName() + "\n");
+	if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
+		detailsTextBox->WriteText("Network name: " + static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()->getName() + "\n");
 	detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
 	currentDetailObject = trainingPlan;
 }

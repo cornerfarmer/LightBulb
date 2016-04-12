@@ -8,14 +8,14 @@
 // Includes
 #include <Learning/BackpropagationLearningRule.hpp>
 #include "Teaching/Teacher.hpp"
-#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
+#include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
 
 // Library includes
 
 // Forward declarations
 
 // A techer manages many techingLessons
-class RBFNetworkBiggerExample : public AbstractLearningRuleTrainingPlan
+class RBFNetworkBiggerExample : public AbstractSingleNNTrainingPlan
 {
 private:
 	std::unique_ptr<Teacher> teacher;
@@ -31,6 +31,6 @@ public:
 	std::string getLearningRuleName();
 };
 
-USE_PARENT_SERIALIZATION(RBFNetworkBiggerExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(RBFNetworkBiggerExample, AbstractSingleNNTrainingPlan);
 
 #endif
