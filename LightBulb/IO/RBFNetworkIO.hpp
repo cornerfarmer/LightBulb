@@ -10,7 +10,7 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
-
+#include "IOStorage.hpp"
 
 template <class Archive>
 void save(Archive& archive, RBFNetwork const & rbfNetwork)
@@ -22,6 +22,7 @@ void save(Archive& archive, RBFNetwork const & rbfNetwork)
 template <class Archive>
 void load(Archive& archive, RBFNetwork & rbfNetwork)
 {
+	IOStorage<Eigen::VectorXd>::push(&rbfNetwork.neuronWidths);
 	archive(cereal::base_class<LayeredNetwork>(&rbfNetwork));
 	archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
 }

@@ -821,6 +821,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
     <ClInclude Include="IO\RBFNetworkIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
@@ -831,7 +832,6 @@
     <ClInclude Include="IO\LearningStateIO.hpp" />
     <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
     <ClInclude Include="IO\StorageLoggerIO.hpp" />
-    <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />
     <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp" />

@@ -28,4 +28,6 @@ public:
 	AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy();
 };
 
+#include "IO/GaussianRBFFunctionIO.hpp"
+
 #endif

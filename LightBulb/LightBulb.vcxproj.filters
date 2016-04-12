@@ -1137,7 +1137,6 @@
     <ClInclude Include="IO\NeuronDescriptionIO.hpp" />
     <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp" />
-    <ClInclude Include="IO\WeightedSumFunctionIO.hpp" />
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
     <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
@@ -1151,5 +1150,6 @@
     <ClInclude Include="IO\StorageLoggerIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\RBFNetworkIO.hpp" />
+    <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 
 // Includes
 #include "Function/AbstractInputFunction.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 //Forward declarations
 class Edge;
@@ -19,5 +20,7 @@ public:
 	// Inherited:
 	AbstractInputFunction* getInputFunctionCopy();
 };
+
+EMPTY_CHILD_SERIALIZATION(EuclideanDistance);
 
 #endif

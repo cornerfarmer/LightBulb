@@ -26,4 +26,25 @@ void load(Archive& archive, T& trainingPlan) \
 } \
 CEREAL_REGISTER_TYPE(T);
 
+#define EMPTY_CHILD_SERIALIZATION(T) \
+template <class Archive> \
+void save(Archive& archive, T const& trainingPlan) \
+{ \
+} \
+template <class Archive> \
+void load(Archive& archive, T& trainingPlan) \
+{ \
+} \
+CEREAL_REGISTER_TYPE(T);
+
+#define EMPTY_SERIALIZATION(T) \
+template <class Archive> \
+void save(Archive& archive, T const& trainingPlan) \
+{ \
+} \
+template <class Archive> \
+void load(Archive& archive, T& trainingPlan) \
+{ \
+} \
+
 #endif

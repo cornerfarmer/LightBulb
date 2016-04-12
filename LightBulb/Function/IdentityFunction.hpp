@@ -6,9 +6,10 @@
 // Includes
 #include "Function/AbstractActivationFunction.hpp"
 #include "Function/AbstractOutputFunction.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // The IdentityFunction just returns the input without calculating anything
-class IdentityFunction : public AbstractOutputFunction, public AbstractActivationFunction
+class IdentityFunction : public AbstractActivationFunction, public AbstractOutputFunction
 {
 private:
 public:
@@ -22,5 +23,7 @@ public:
 	double getMinimum();
 	bool hasAMaxAndMinimum();
 };
+
+EMPTY_CHILD_SERIALIZATION(IdentityFunction);
 
 #endif

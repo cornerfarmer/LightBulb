@@ -5,6 +5,7 @@
 
 // Includes
 #include "Function/AbstractInputFunction.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 //Forward declarations
 class Edge;
@@ -19,6 +20,6 @@ public:
 	AbstractInputFunction* getInputFunctionCopy();
 };
 
-#include "IO/WeightedSumFunctionIO.hpp"
+EMPTY_CHILD_SERIALIZATION(WeightedSumFunction);
 
 #endif
