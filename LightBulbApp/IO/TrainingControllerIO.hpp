@@ -4,8 +4,6 @@
 #define _TRAININGCONTROLLERIO_H_
 
 // Includes
-#include "IO/NeuralNetworkRepositoryIO.hpp"
-#include "IO/TrainingPlanRepositoryIO.hpp"
 #include "Windows/TrainingController.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>

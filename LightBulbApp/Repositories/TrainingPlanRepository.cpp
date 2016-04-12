@@ -4,7 +4,6 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include "IO/TrainingPlanRepositoryIO.hpp"
 
 int TrainingPlanRepository::getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
@@ -27,6 +26,7 @@ void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
 	std::ofstream os(path);
 	cereal::XMLOutputArchive archive(os);
 
+	onlyUseNeuralNetworkIndex = false;
 	archive(trainingPlans[trainingPlanIndex]);
 }
 

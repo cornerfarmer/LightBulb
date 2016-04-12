@@ -65,4 +65,6 @@ public:
 	static std::string getName();
 };
 
+#include "IO/RBFInterpolationLearningRuleIO.hpp"
+
 #endif

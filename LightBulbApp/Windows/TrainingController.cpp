@@ -12,7 +12,6 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include "IO/TrainingControllerIO.hpp"
 #include <Examples/RBFNetworkBiggerExample.hpp>
 
 

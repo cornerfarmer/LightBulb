@@ -1150,5 +1150,6 @@
     <ClInclude Include="Logging\StorageLogger.hpp" />
     <ClInclude Include="IO\StorageLoggerIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
+    <ClInclude Include="IO\RBFNetworkIO.hpp" />
   </ItemGroup>
 </Project>

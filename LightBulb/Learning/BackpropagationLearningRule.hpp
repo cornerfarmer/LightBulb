@@ -80,5 +80,7 @@ public:
 	static std::string getName();
 };
 
+#include "IO/BackpropagationLearningRuleIO.hpp"
+
 #endif
 

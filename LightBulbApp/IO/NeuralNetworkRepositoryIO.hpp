@@ -4,7 +4,6 @@
 #define _NEURALNETWORKREPOSITORYIO_H_
 
 // Includes
-#include "IO/NeuralNetworkRepositoryIO.hpp"
 #include "Repositories/NeuralNetworkRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>

@@ -39,5 +39,7 @@ public:
 	void setState(NeuralNetworkState newState);
 };
 
+#include "IO/NeuralNetworkIO.hpp"
+
 #endif
 

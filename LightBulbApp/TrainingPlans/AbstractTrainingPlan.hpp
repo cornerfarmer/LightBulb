@@ -75,4 +75,6 @@ public:
 	StorageLogger* getLogger();
 };
 
+#include "IO/AbstractTrainingPlanIO.hpp"
+
 #endif

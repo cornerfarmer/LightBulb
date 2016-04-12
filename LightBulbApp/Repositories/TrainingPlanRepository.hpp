@@ -32,4 +32,6 @@ public:
 	AbstractTrainingPlan* load(std::string path);
 };
 
+#include "IO/TrainingPlanRepositoryIO.hpp"
+
 #endif

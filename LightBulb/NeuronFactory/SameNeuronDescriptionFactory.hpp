@@ -35,4 +35,6 @@ public:
 	AbstractActivationFunction* getInnerActivationFunction();
 };
 
+#include "IO/SameNeuronDescriptionFactoryIO.hpp"
+
 #endif

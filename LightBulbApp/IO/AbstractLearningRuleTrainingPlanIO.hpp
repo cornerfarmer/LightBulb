@@ -4,8 +4,6 @@
 #define _ABSTRACTLEARNINGRULETRAININGPLANIO_H_
 
 // Includes
-#include "IO/AbstractTrainingPlanIO.hpp"
-#include "IO/BackpropagationLearningRuleIO.hpp"
 #include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>

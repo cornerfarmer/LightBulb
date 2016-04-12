@@ -38,4 +38,6 @@ public:
 	AbstractActivationFunction* getInnerActivationFunction();
 };
 
+#include "IO/DifferentNeuronDescriptionFactoryIO.hpp"
+
 #endif

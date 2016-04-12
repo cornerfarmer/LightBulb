@@ -5,7 +5,7 @@
 
 // Includes
 #include "Learning/BackpropagationLearningRule.hpp"
-#include "IO/AbstractLearningRuleIO.hpp"
+#include "IO/MatrixIO.hpp"
 #include "IOStorage.hpp"
 
 // Libraray includes

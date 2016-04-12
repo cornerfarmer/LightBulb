@@ -19,4 +19,6 @@ public:
 	AbstractInputFunction* getInputFunctionCopy();
 };
 
+#include "IO/WeightedSumFunctionIO.hpp"
+
 #endif

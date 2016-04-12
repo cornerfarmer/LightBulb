@@ -5,7 +5,6 @@
 
 // Includes
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "IO/LayeredNetworkIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

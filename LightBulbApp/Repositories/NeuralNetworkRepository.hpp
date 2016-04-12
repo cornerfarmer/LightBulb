@@ -33,4 +33,6 @@ public:
 	void load(std::string path);
 };
 
+#include "IO/NeuralNetworkRepositoryIO.hpp"
+
 #endif

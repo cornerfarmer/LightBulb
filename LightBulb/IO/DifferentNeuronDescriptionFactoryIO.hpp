@@ -4,8 +4,8 @@
 #define _DIFFERENTNEURONDESCRIPTIONFACTORYIO_H_
 
 // Libary includes
-#include "IO/NeuronDescriptionIO.hpp"
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
+
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>

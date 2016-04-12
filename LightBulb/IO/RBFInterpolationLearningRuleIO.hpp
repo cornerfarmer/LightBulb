@@ -5,7 +5,6 @@
 
 // Includes
 #include "Learning/RBFInterpolationLearningRule.hpp"
-#include "IO/AbstractLearningRuleIO.hpp"
 #include "IOStorage.hpp"
 
 // Libraray includes

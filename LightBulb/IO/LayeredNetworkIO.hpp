@@ -4,14 +4,15 @@
 #define _LAYEREDNETWORKIO_H_
 
 // Libary includes
-#include "IO/SameNeuronDescriptionFactoryIO.hpp"
-#include "IO/DifferentNeuronDescriptionFactoryIO.hpp"
 #include "IO/MatrixIO.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
+#include <NeuronFactory/AbstractNeuronDescriptionFactory.hpp>
+
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
+
 
 
 template <class Archive>

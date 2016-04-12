@@ -35,6 +35,10 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 	neuronWidths = Eigen::VectorXd(neuronCountSecondLayer);
 }
 
+RBFNetwork::RBFNetwork()
+{
+}
+
 void RBFNetwork::randomizeWeights(double randStart, double randEnd)
 {
 	for (auto i = 0; i < weights[0].rows(); i++)

@@ -4,9 +4,8 @@
 #define _ABSTRACTTRAININGPLANIO_H_
 
 // Includes
-#include "IO/NeuralNetworkIO.hpp"
-#include "IO/StorageLoggerIO.hpp"
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
+#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <IO/IOStorage.hpp>

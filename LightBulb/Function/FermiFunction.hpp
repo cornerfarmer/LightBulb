@@ -24,4 +24,6 @@ public:
 	bool hasAMaxAndMinimum();
 };
 
+#include "IO/FermiFunctionIO.hpp"
+
 #endif

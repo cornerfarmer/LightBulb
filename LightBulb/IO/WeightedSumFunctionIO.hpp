@@ -5,6 +5,7 @@
 
 // Libary includes
 #include <Function/WeightedSumFunction.hpp>
+
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>

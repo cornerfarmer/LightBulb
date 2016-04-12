@@ -164,4 +164,6 @@ public:
 
 	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex);
 };
+
+#include "IO/LayeredNetworkIO.hpp"
 #endif

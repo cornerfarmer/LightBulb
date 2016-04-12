@@ -821,6 +821,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="IO\RBFNetworkIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />

@@ -23,5 +23,7 @@ public:
 	std::vector<std::pair<LogLevel, std::string>>* getMessages();
 };
 
+#include "IO/StorageLoggerIO.hpp"
+
 #endif
 

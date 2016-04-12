@@ -5,7 +5,6 @@
 #include <Learning/RBFInterpolationLearningRule.hpp>
 #include <Learning/DeltaLearningRule.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
-#include <NeuralNetwork/NeuralNetworkIO.hpp>
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <NetworkTopology/RBFNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>

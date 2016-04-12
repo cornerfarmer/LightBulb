@@ -26,4 +26,6 @@ public:
 	AbstractActivationFunction* getActivationFunction();
 };
 
+#include "IO/NeuronDescriptionIO.hpp"
+
 #endif

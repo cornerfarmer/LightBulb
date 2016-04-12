@@ -4,8 +4,6 @@
 #define _NEURONDESCRIPTIONIO_H_
 
 // Libary includes
-#include "IO/WeightedSumFunctionIO.hpp"
-#include "IO/FermiFunctionIO.hpp"
 #include <Neuron/NeuronDescription.hpp>
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>

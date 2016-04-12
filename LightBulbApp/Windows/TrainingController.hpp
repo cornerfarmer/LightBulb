@@ -60,4 +60,6 @@ public:
 	void addSubApp(int subAppFactoryIndex);
 };
 
+#include "IO/TrainingControllerIO.hpp"
+
 #endif

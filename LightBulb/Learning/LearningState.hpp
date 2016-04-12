@@ -55,4 +55,6 @@ public:
 
 };
 
+#include "IO/LearningStateIO.hpp"
+
 #endif

@@ -35,4 +35,5 @@ public:
 };
 
 #include "IO/AbstractLearningRuleTrainingPlanIO.hpp"
+
 #endif

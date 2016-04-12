@@ -158,6 +158,8 @@ public:
 	static std::vector<std::string> getDataSetLabels();
 };
 
+#include "IO/AbstractLearningRuleIO.hpp"
+
 #endif
 
 

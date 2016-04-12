@@ -5,7 +5,6 @@
 
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
-#include "IO/LearningStateIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 
