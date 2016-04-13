@@ -25,6 +25,8 @@ protected:
 public:
 	void initializeStart();
 	AbstractNeuralNetwork* getNeuralNetwork();
+	virtual int getRequiredInputSize() = 0;
+	virtual int getRequiredOutputSize() = 0;
 	void setNeuralNetwork(AbstractNeuralNetwork* network_);
 };
 

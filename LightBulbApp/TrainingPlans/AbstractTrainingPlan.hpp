@@ -65,8 +65,6 @@ public:
 	bool isPaused();
 	bool isPausing();
 	bool isRunning();
-	virtual int getRequiredInputSize() = 0;
-	virtual int getRequiredOutputSize() = 0;
 	virtual std::vector<std::string> getDataSetLabels() = 0;
 	virtual LearningState* getLearningState() = 0;
 	StorageLogger* getLogger();

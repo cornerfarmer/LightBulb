@@ -87,3 +87,8 @@ std::string BackpropagationXorExample::getLearningRuleName()
 {
 	return BackpropagationLearningRule::getName();
 }
+
+std::vector<std::string> BackpropagationXorExample::getDataSetLabels()
+{
+	return BackpropagationLearningRule::getDataSetLabels();
+}

@@ -598,6 +598,7 @@
     <ClCompile Include="IO\LayeredNetworkIO.hpp" />
     <ClCompile Include="Logging\StorageLogger.cpp" />
     <ClCompile Include="Learning\AbstractSupervisedLearningRule.cpp" />
+    <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1154,5 +1155,6 @@
     <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
     <ClInclude Include="Learning\AbstractSupervisedLearningRule.hpp" />
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
+    <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp" />
   </ItemGroup>
 </Project>

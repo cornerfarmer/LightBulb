@@ -4,7 +4,7 @@
 #define _EVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/LearningState.hpp"
+#include "Learning/AbstractEvolutionLearningRule.hpp"
 
 // Library Includes
 #include <vector>
@@ -21,7 +21,9 @@ class AbstractExitCondition;
 class AbstractReuseCommand;
 class AbstractFitnessFunction;
 
-struct EvolutionLearningRuleOptions
+#define DATA_SET_FITNESS "Fitness"
+
+struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 {
 	// Holds a few conditions which evaluate if the learning process should be stopped
 	std::vector<AbstractExitCondition*> exitConditions;
@@ -39,38 +41,33 @@ struct EvolutionLearningRuleOptions
 	std::vector<AbstractReuseCommand*> reuseCommands;
 	// The world which should contain all trained evolution objects
 	AbstractEvolutionWorld* world;
-	// Enable debugging output
-	bool enableDebugOutput;
 	// Holds the score which should be reached after the learning process
 	double scoreGoal;
-	// The maximum tries which can be used to reach the score goal
-	int maxTries;
 	EvolutionLearningRuleOptions()
 	{
 		world = NULL;
-		enableDebugOutput = false;
 		scoreGoal = 0;
 		maxTries = 1;
 	}
 };
 
 // A learingRule for improving NNs with the help of algorithms oriented by the evolution
-class EvolutionLearningRule
+class EvolutionLearningRule : public AbstractEvolutionLearningRule
 {
 protected:
-	std::unique_ptr<EvolutionLearningRuleOptions> options;
-	int generation;
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
+	bool doIteration();
+	bool hasLearningSucceeded();
+	EvolutionLearningRuleOptions* getOptions();
+	void doCalculationAfterLearningProcess();
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
-	EvolutionLearningRuleOptions* getOptions();
+	EvolutionLearningRule(EvolutionLearningRuleOptions* options_);
 	// Executes the learning process
-	LearningState doLearning();
-	bool doEvolutionStep();
-	void initialize();
-	// TODO: Remove/Move into own classes
-	void doMutation(AbstractEvolutionObject& object);
-	AbstractEvolutionObject* doRecombination(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2);
+	void initializeTry();
+	static std::string getName();
+	static std::vector<std::string> getDataSetLabels();
+
 };
 
 #endif

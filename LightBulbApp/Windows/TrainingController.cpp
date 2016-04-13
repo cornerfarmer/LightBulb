@@ -12,6 +12,7 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <Examples/RBFNetworkBiggerExample.hpp>
+#include <Examples/FunctionEvolutionExample.hpp>
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 
 
@@ -28,6 +29,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 
 	trainingPlanPatterns.push_back(new RBFNetworkBiggerExample());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
+	trainingPlanPatterns.push_back(new FunctionEvolutionExample());
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());

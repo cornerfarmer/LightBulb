@@ -51,10 +51,10 @@ void LearningRuleAnalyser::execute()
 		LearningState summaryResult;
 		for (int i = 0; i < options->calculationsPerParameterCombination; i++)
 		{
-			LearningState currentResult = options->learningRule->doLearning();
+			/*LearningState currentResult = options->learningRule->doLearning();
 			summaryResult.successful += currentResult.successful;
 			summaryResult.quality += currentResult.quality;
-			summaryResult.iterationsNeeded += currentResult.iterationsNeeded;
+			summaryResult.iterationsNeeded += currentResult.iterationsNeeded;*/
 		}
 
 		// Add the result to the vector

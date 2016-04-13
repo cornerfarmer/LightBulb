@@ -28,6 +28,7 @@ public:
 	int getRequiredInputSize();
 	int getRequiredOutputSize();
 	std::string getLearningRuleName();
+	std::vector<std::string> getDataSetLabels();
 };
 
 USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractSingleNNTrainingPlan);

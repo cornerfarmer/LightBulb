@@ -368,10 +368,12 @@ void TrainingWindow::validateSelectedProcess()
 {
 	int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
 	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-	if (neuralNetworkIndex < controller->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
+	AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>((*controller->getTrainingPlanPatterns())[trainingPlanPatternIndex]);
+
+	if (trainingPlan && neuralNetworkIndex < controller->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
 	{
-		int requiredInputSize = (*controller->getTrainingPlanPatterns())[trainingPlanPatternIndex]->getRequiredInputSize();
-		int requiredOutputSize = (*controller->getTrainingPlanPatterns())[trainingPlanPatternIndex]->getRequiredOutputSize();
+		int requiredInputSize = trainingPlan->getRequiredInputSize();
+		int requiredOutputSize = trainingPlan->getRequiredOutputSize();
 
 		if ((*controller->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().front() != requiredInputSize ||
 			(*controller->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().back() != requiredOutputSize)

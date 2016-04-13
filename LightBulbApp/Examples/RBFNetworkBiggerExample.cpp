@@ -129,3 +129,8 @@ std::string RBFNetworkBiggerExample::getLearningRuleName()
 {
 	return RBFInterpolationLearningRule::getName();
 }
+
+std::vector<std::string> RBFNetworkBiggerExample::getDataSetLabels()
+{
+	return RBFInterpolationLearningRule::getDataSetLabels();
+}

@@ -1,6 +1,5 @@
 #include "FunctionEvolutionExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Examples/Nature.hpp>
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
 #include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
 #include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
@@ -8,12 +7,9 @@
 #include <Learning/Evolution/ConstantRecombinationCommand.hpp>
 #include <Learning/Evolution/ConstantMutationCommand.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Diagnostic/LearningRuleAnalyser.hpp>
-#include <Diagnostic/ChangeablePointer.hpp>
 #include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
 #include <Function/EqualRandomFunction.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
-#include <Diagnostic/ChangeableNumber.hpp>
 #include <Learning/Evolution/ConstantReuseCommand.hpp>
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Examples/FunctionSimulator.hpp>
@@ -21,7 +17,7 @@
 
 static double sixHumpCamelFunction(std::vector<float> pos)
 {
-	return std::max(0.0, -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4)) + 10000);
+	return -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4));
 }
 //
 //void doFunctionEvolutionExample()
@@ -56,7 +52,7 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	FunctionSimulatorOptions simulatorOptions;
 	simulatorOptions.enableGraphics = false;
 
-	FunctionSimulator simulator(simulatorOptions, sixHumpCamelFunction);
+	FunctionSimulator* simulator = new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
 
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10);
@@ -71,8 +67,7 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
-	options.world = &simulator;
-	options.enableDebugOutput = false;
+	options.world = simulator;
 	options.scoreGoal = 1.031627 + 10000;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -98,4 +93,9 @@ AbstractTrainingPlan* FunctionEvolutionExample::getCopy()
 std::string FunctionEvolutionExample::getLearningRuleName()
 {
 	return EvolutionLearningRule::getName();
+}
+
+std::vector<std::string> FunctionEvolutionExample::getDataSetLabels()
+{
+	return EvolutionLearningRule::getDataSetLabels();
 }

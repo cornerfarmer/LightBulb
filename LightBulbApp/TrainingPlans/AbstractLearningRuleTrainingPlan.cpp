@@ -30,12 +30,6 @@ void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLe
 	options->logger = logger.get();
 }
 
-
-std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels()
-{
-	return BackpropagationLearningRule::getDataSetLabels();
-}
-
 LearningState* AbstractLearningRuleTrainingPlan::getLearningState()
 {
 	return learningRule->getLearningState();
