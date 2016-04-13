@@ -114,6 +114,9 @@
     <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -216,6 +219,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

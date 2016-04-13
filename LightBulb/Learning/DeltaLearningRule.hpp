@@ -4,7 +4,7 @@
 #define _DELTALEARNINGRULE_H_
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
+#include "Learning/AbstractSupervisedLearningRule.hpp"
 #include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 #include "Learning/ResilientLearningRateHelper.hpp"
 
@@ -12,7 +12,7 @@
 class NeuralNetwork;
 class Teacher;
 
-struct DeltaLearningRuleOptions : AbstractLearningRuleOptions
+struct DeltaLearningRuleOptions : AbstractSupervisedLearningRuleOptions
 {	
 	// The neuronPlacer helps to replace all RBFNeurons before starting to learn (Only needed when training RBFNetworks)
 	AbstractRBFNeuronPlacer* neuronPlacer;
@@ -41,13 +41,13 @@ struct DeltaLearningRuleOptions : AbstractLearningRuleOptions
 };
 
 // The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks or RBFNetworks
-class DeltaLearningRule : public AbstractLearningRule
+class DeltaLearningRule : public AbstractSupervisedLearningRule
 {
 private:
 	DeltaLearningRuleOptions* getOptions();
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	// Inherited:
-	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
+	void initializeStartLearningAlgoritm();
 	AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork);
 	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);

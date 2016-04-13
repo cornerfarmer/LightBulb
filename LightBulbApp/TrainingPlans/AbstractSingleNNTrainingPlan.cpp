@@ -3,7 +3,7 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 
 
-void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
+void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options)
 {
 	AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
 	options->neuralNetwork = network;

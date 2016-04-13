@@ -16,7 +16,7 @@
 template <class Archive>
 void serialize(Archive& archive, BackpropagationLearningRule& learningRule)
 {
-	archive(cereal::base_class<AbstractLearningRule>(&learningRule));
+	archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
 	archive(cereal::make_nvp("deltaVectorOutputLayer", learningRule.deltaVectorOutputLayer));
 	archive(cereal::make_nvp("previousDeltaWeights", learningRule.previousDeltaWeights));
 }
@@ -29,7 +29,7 @@ namespace cereal
 		static void load_and_construct(Archive& ar, cereal::construct<BackpropagationLearningRule>& construct)
 		{
 			BackpropagationLearningRule* learningRule = static_cast<BackpropagationLearningRule*>(IOStorage<AbstractLearningRule>::pop());
-			ar(cereal::base_class<AbstractLearningRule>(learningRule));
+			ar(cereal::base_class<AbstractSupervisedLearningRule>(learningRule));
 			ar(cereal::make_nvp("deltaVectorOutputLayer", learningRule->deltaVectorOutputLayer));
 			ar(cereal::make_nvp("previousDeltaWeights", learningRule->previousDeltaWeights));
 			IOStorage<AbstractLearningRule>::push(learningRule);

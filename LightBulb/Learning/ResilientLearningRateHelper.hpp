@@ -15,6 +15,7 @@
 // Forward declarations
 class Teacher;
 class Edge;
+class AbstractNeuralNetwork;
 
 struct ResilientLearningRateHelperOptions
 {	

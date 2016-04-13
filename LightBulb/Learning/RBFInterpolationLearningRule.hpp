@@ -9,14 +9,14 @@
 #include <memory>
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
+#include "Learning/AbstractSupervisedLearningRule.hpp"
 #include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 
 // Forward declarations
 class NeuralNetwork;
 class Teacher;
 
-struct RBFInterpolationLearningRuleOptions : AbstractLearningRuleOptions
+struct RBFInterpolationLearningRuleOptions : AbstractSupervisedLearningRuleOptions
 {	
 	// The neuronPlacer helps to replace all RBFNeurons before starting to learn
 	AbstractRBFNeuronPlacer* neuronPlacer;
@@ -36,7 +36,7 @@ struct RBFInterpolationLearningRuleOptions : AbstractLearningRuleOptions
 };
 
 // The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
-class RBFInterpolationLearningRule : public AbstractLearningRule
+class RBFInterpolationLearningRule : public AbstractSupervisedLearningRule
 {
 private:
 	// A matrix which will contain all outputValues from neurons in the second layer in every teachingLesson
@@ -47,19 +47,17 @@ private:
 	std::unique_ptr<Eigen::MatrixXd> t;
 	// A vector which will contain all calculated weights
 	std::unique_ptr<Eigen::MatrixXd> w;
-	// Holds the actual teacher
-	Teacher* actTeacher;
 protected:
 	// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
 	RBFInterpolationLearningRuleOptions* getOptions();
 	// Inherited:
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	bool learningHasStopped();
-	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
-	AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork);
+	void initializeStartLearningAlgoritm();
+	AbstractActivationOrder* getNewActivationOrder();
 	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
-	void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
+	void initializeTry();
 public:
 	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);
 	static std::string getName();

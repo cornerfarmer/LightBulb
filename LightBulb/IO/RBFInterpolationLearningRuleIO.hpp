@@ -15,7 +15,7 @@
 template <class Archive>
 void serialize(Archive& archive, RBFInterpolationLearningRule& learningRule)
 {
-	archive(cereal::base_class<AbstractLearningRule>(&learningRule));
+	archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
 }
 
 namespace cereal
@@ -26,7 +26,7 @@ namespace cereal
 		static void load_and_construct(Archive& ar, cereal::construct<RBFInterpolationLearningRule>& construct)
 		{
 			RBFInterpolationLearningRule* learningRule = static_cast<RBFInterpolationLearningRule*>(IOStorage<AbstractLearningRule>::pop());
-			ar(cereal::base_class<AbstractLearningRule>(learningRule));
+			ar(cereal::base_class<AbstractSupervisedLearningRule>(learningRule));
 			IOStorage<AbstractLearningRule>::push(learningRule);
 		}
 	};

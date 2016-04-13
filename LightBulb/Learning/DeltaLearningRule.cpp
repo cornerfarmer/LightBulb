@@ -10,7 +10,7 @@
 
 
 DeltaLearningRule::DeltaLearningRule(DeltaLearningRuleOptions &options_)
-	: AbstractLearningRule(new DeltaLearningRuleOptions(options_)) 
+	: AbstractSupervisedLearningRule(new DeltaLearningRuleOptions(options_))
 {
 	// Check if all given options are correct
 	// Check if the given neuronPlacer is valid
@@ -31,17 +31,18 @@ std::string DeltaLearningRule::getName()
 	return "DeltaLearningRule";
 }
 
-void DeltaLearningRule::initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
+void DeltaLearningRule::initializeStartLearningAlgoritm()
 {
+	AbstractSupervisedLearningRule::initializeStartLearningAlgoritm();
 	// Check if all given parameters are correct
-	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+	if (!dynamic_cast<LayeredNetwork*>(getOptions()->neuralNetwork->getNetworkTopology()))
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
-	if (!dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
+	if (!dynamic_cast<RBFNetwork*>(getOptions()->neuralNetwork->getNetworkTopology()) && dynamic_cast<LayeredNetwork*>(getOptions()->neuralNetwork->getNetworkTopology())->getLayerCount() != 2)
 		throw std::invalid_argument("The given neuralNetwork has to contain exactly two layers");
-	if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()) && (getOptions()->changeWeightsBeforeLearning && !getOptions()->neuronPlacer))
+	if (dynamic_cast<RBFNetwork*>(getOptions()->neuralNetwork->getNetworkTopology()) && (getOptions()->changeWeightsBeforeLearning && !getOptions()->neuronPlacer))
 		throw new std::invalid_argument("The neuronPlacer in the given options cannot be null");
 	if (getOptions()->resilientLearningRate)
-		resilientLearningRateHelper->initialize(neuralNetwork);
+		resilientLearningRateHelper->initialize(*getOptions()->neuralNetwork);
 }
 
 AbstractActivationOrder* DeltaLearningRule::getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork)
@@ -64,10 +65,10 @@ Eigen::MatrixXd DeltaLearningRule::calculateDeltaWeightFromLayer(AbstractTeachin
 
 void DeltaLearningRule::initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
 {
-	if (options->changeWeightsBeforeLearning)
+	if (getOptions()->changeWeightsBeforeLearning)
 	{
 		// Randomize all weights
-		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+		neuralNetwork.getNetworkTopology()->randomizeWeights(getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
 
 		// If the given network is a rbfNetwork replace all RBFNeurons with the help of the choosen neuronPlacer
 		if (dynamic_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology()))

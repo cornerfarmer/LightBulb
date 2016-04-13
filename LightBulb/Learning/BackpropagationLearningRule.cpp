@@ -10,14 +10,14 @@
 #include <list>
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_) 
-	: AbstractLearningRule(new BackpropagationLearningRuleOptions(options_))
+	: AbstractSupervisedLearningRule(new BackpropagationLearningRuleOptions(options_))
 {
 
 	initialize();
 }
 
 BackpropagationLearningRule::BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_) 
-	: AbstractLearningRule(options_)
+	: AbstractSupervisedLearningRule(options_)
 {
 
 	initialize();
@@ -42,21 +42,22 @@ void BackpropagationLearningRule::initialize()
 	}
 }
 
-void BackpropagationLearningRule::initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
+void BackpropagationLearningRule::initializeStartLearningAlgoritm()
 {
+	AbstractSupervisedLearningRule::initializeStartLearningAlgoritm();
 	// Check if all given parameters are correct
-	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+	if (!dynamic_cast<LayeredNetwork*>(getOptions()->neuralNetwork->getNetworkTopology()))
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 
 	// Create a vector which will contain all delta values of the neurons in the output layer
 	deltaVectorOutputLayer.clear();		
-	deltaVectorOutputLayer.resize(neuralNetwork.getNetworkTopology()->getLayerCount());
+	deltaVectorOutputLayer.resize(getOptions()->neuralNetwork->getNetworkTopology()->getLayerCount());
 
 	// If momentum is used
 	if (getOptions()->momentum > 0)
 	{
 		// Initialize the learningRates map
-		previousDeltaWeights = *neuralNetwork.getNetworkTopology()->getWeights();
+		previousDeltaWeights = *getOptions()->neuralNetwork->getNetworkTopology()->getWeights();
 		for (int i = 0; i < previousDeltaWeights.size(); i++)
 		{
 			previousDeltaWeights[i].setZero();
@@ -119,7 +120,7 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 }
 
 
-AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork)
+AbstractActivationOrder* BackpropagationLearningRule::getNewActivationOrder()
 {
 	return new TopologicalOrder();
 }
@@ -152,17 +153,17 @@ BackpropagationLearningRuleOptions* BackpropagationLearningRule::getOptions()
 	return static_cast<BackpropagationLearningRuleOptions*>(options.get());
 }
 
-void BackpropagationLearningRule::initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher)
+void BackpropagationLearningRule::initializeTry()
 {
 	// If we can change the weights before learning
-	if (options->changeWeightsBeforeLearning)
+	if (getOptions()->changeWeightsBeforeLearning)
 	{
 		// Randomize all weights
-		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
-		neuralNetwork.getNetworkTopology()->randomizeWeights(options->minRandomWeightValue, options->maxRandomWeightValue);
+		getCurrentNetworkTopology()->randomizeWeights(getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
+		getCurrentNetworkTopology()->randomizeWeights(getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
 	}
 
 	// If used, initialize the learning rate helper
 	if (getOptions()->resilientLearningRate)
-		resilientLearningRateHelper->initialize(neuralNetwork);
+		resilientLearningRateHelper->initialize(*getOptions()->neuralNetwork);
 }

@@ -9,7 +9,7 @@
 #include <EigenSrc/Dense>
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
+#include "Learning/AbstractSupervisedLearningRule.hpp"
 #include "Learning/ResilientLearningRateHelper.hpp"
 #include <cereal/access.hpp>
 
@@ -18,7 +18,7 @@ class Teacher;
 class Edge;
 class AbstractNeuron;
 
-struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
+struct BackpropagationLearningRuleOptions : public AbstractSupervisedLearningRuleOptions
 {	
 		
 	double flatSpotEliminationFac;
@@ -44,7 +44,7 @@ struct BackpropagationLearningRuleOptions : public AbstractLearningRuleOptions
 };
 
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
-class BackpropagationLearningRule : public AbstractLearningRule
+class BackpropagationLearningRule : public AbstractSupervisedLearningRule
 {
 	friend class CascadeCorrelationLearningRule;
 	template <class Archive>
@@ -69,11 +69,11 @@ protected:
 	// Inherited:
 	std::string printDebugOutput();
 	bool learningHasStopped();
-	void initializeLearningAlgoritm(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder);
+	void initializeStartLearningAlgoritm();
 	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
-	AbstractActivationOrder* getNewActivationOrder(AbstractNeuralNetwork &neuralNetwork);
-	void initializeTry(AbstractNeuralNetwork &neuralNetwork, Teacher &teacher);
+	AbstractActivationOrder* getNewActivationOrder();
+	void initializeTry();
 public:
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions& options_);
 	BackpropagationLearningRule(BackpropagationLearningRuleOptions* options_);

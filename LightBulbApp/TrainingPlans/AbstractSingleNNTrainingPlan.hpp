@@ -21,7 +21,7 @@ class AbstractSingleNNTrainingPlan : public AbstractLearningRuleTrainingPlan
 protected:
 	AbstractNeuralNetwork* network;
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
-	void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
+	void fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options);
 public:
 	void initializeStart();
 	AbstractNeuralNetwork* getNeuralNetwork();

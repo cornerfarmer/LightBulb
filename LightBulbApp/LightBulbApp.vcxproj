@@ -159,6 +159,9 @@
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp" />
     <ClCompile Include="Repositories\NeuralNetworkRepository.cpp" />
     <ClCompile Include="Repositories\TrainingPlanRepository.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
@@ -215,6 +218,9 @@
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="Repositories\TrainingPlanRepository.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
