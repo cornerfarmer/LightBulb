@@ -3,27 +3,66 @@
 // Library includes
 #include <iostream>
 
-BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(EvolutionLearningRule* learningRule1_, EvolutionLearningRule* learningRule2_)
+
+BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_)
+	: AbstractEvolutionLearningRule(new BipartiteEvolutionLearningRuleOptions(options_))
 {
-	learningRule1 = learningRule1_;
-	learningRule2 = learningRule2_;
+	initialize();
 }
 
-LearningState BipartiteEvolutionLearningRule::doLearning()
+BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_)
+	: AbstractEvolutionLearningRule(options_)
 {
-	learningRule1->initialize();
-	learningRule2->initialize();
+	initialize();
+}
 
-	bool stopLearning = false;
-	while (!stopLearning) {
-		stopLearning = false;
-		std::cout << "lr1: ";
-		stopLearning |= learningRule1->doEvolutionStep();
-		if (stopLearning)
-			break;
-		std::cout << "lr2: ";
-		stopLearning |= learningRule2->doEvolutionStep();
-	}
-	LearningState result;
-	return result;
+std::string BipartiteEvolutionLearningRule::getName()
+{
+	return "BipartiteEvolutionLearningRule";
+}
+
+std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels()
+{
+	return AbstractEvolutionLearningRule::getDataSetLabels();
+}
+
+void BipartiteEvolutionLearningRule::initialize()
+{
+	getOptions()->learningRule1->options->logger = options->logger;
+	getOptions()->learningRule2->options->logger = options->logger;
+	getOptions()->learningRule1->setLoggerToUsedObjects();
+	getOptions()->learningRule2->setLoggerToUsedObjects();
+	getOptions()->learningRule1->learningState.reset(learningState.get());
+	getOptions()->learningRule2->learningState.reset(learningState.get());
+}
+
+BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOptions()
+{
+	return static_cast<BipartiteEvolutionLearningRuleOptions*>(options.get());
+}
+
+bool BipartiteEvolutionLearningRule::doIteration()
+{
+	getOptions()->learningRule1->iteration = iteration;
+	getOptions()->learningRule2->iteration = iteration;
+	getOptions()->learningRule1->tryCounter = tryCounter;
+	getOptions()->learningRule2->tryCounter = tryCounter;
+	log("lr1: ", LL_MEDIUM);
+	bool successfull = getOptions()->learningRule1->doIteration();
+	if (!successfull)
+		return false;
+	log("lr2: ", LL_MEDIUM);
+	getOptions()->learningRule2->doIteration();
+	return true;
+}
+
+void BipartiteEvolutionLearningRule::initializeTry()
+{
+	getOptions()->learningRule1->initializeTry();
+	getOptions()->learningRule2->initializeTry();
+}
+
+bool BipartiteEvolutionLearningRule::hasLearningSucceeded()
+{
+	return tryCounter > 1;
 }

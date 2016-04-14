@@ -10,15 +10,32 @@
 
 // Forward declarations
 
-class BipartiteEvolutionLearningRule
+
+struct BipartiteEvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 {
-protected:
 	EvolutionLearningRule* learningRule1;
 	EvolutionLearningRule* learningRule2;
+
+	BipartiteEvolutionLearningRuleOptions()
+	{
+		learningRule1 = NULL;
+		learningRule2 = NULL;
+	}
+};
+
+class BipartiteEvolutionLearningRule : public AbstractEvolutionLearningRule
+{
+protected:
+	BipartiteEvolutionLearningRuleOptions* getOptions();
+	bool doIteration();
+	void initializeTry();
+	bool hasLearningSucceeded();
+	void initialize();
 public:
-	BipartiteEvolutionLearningRule(EvolutionLearningRule* learningRule1_, EvolutionLearningRule* learningRule2_);
-	// Executes the learning process
-	LearningState doLearning();
+	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
+	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
+	static std::string getName();
+	static std::vector<std::string> getDataSetLabels();
 };
 
 #endif

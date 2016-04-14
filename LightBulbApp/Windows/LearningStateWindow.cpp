@@ -177,7 +177,7 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 
 		// optional: set axis titles
 		leftAxis->SetTitle("Value");
-		leftAxis->SetFixedBounds(0, xyDataSet->GetMaxY());
+		leftAxis->SetFixedBounds(std::min(xyDataSet->GetMinY(), 0.0), xyDataSet->GetMaxY());
 		bottomAxis->SetTitle("Iterations");
 
 		// add axes and dataset to plot

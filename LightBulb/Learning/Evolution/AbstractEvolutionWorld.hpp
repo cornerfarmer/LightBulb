@@ -7,13 +7,16 @@
 #include <vector>
 #include <memory>
 
+// Includes
+#include <Logging/AbstractLoggable.hpp>
+
 // Forward declarations
 class EvolutionLearningRule;
 class AbstractEvolutionObject;
 
 // This class should describe a world which contains multiple evolution objects.
 // The evolution world has to simulate the environment which surrounds its evolution objects.
-class AbstractEvolutionWorld
+class AbstractEvolutionWorld : public AbstractLoggable
 {
 private:
 	static bool compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y);

@@ -20,7 +20,7 @@ private:
 protected:
 	void log(std::string message, LogLevel logLevel);
 public:
-	void setLogger(AbstractLogger* logger_);
+	virtual void setLogger(AbstractLogger* logger_);
 };
 
 #endif

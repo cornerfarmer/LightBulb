@@ -22,17 +22,19 @@
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 	: AbstractEvolutionLearningRule(new EvolutionLearningRuleOptions(options_))
 {
-	initialize();
+	setLoggerToUsedObjects();
 }
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions* options_)
 	: AbstractEvolutionLearningRule(options_)
 {
-	initialize();
+	setLoggerToUsedObjects();
 }
 
-void EvolutionLearningRule::initialize()
+void EvolutionLearningRule::setLoggerToUsedObjects()
 {
+	getOptions()->world->setLogger(options->logger);
+
 	for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
 		(*reuseCommand)->setLogger(options->logger);
 
@@ -94,7 +96,7 @@ void EvolutionLearningRule::initialize()
 
 bool EvolutionLearningRule::hasLearningSucceeded()
 {
-	return iteration > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
+	return getOptions()->world->getEvolutionObjects()->size() > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
 }
 
 void EvolutionLearningRule::initializeTry()

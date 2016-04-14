@@ -28,6 +28,7 @@ public:
 	double getScore(AbstractEvolutionObject* object);
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
 	virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; };
+	void setLogger(AbstractLogger* logger_);
 };
 
 #endif

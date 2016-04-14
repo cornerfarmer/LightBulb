@@ -7,11 +7,9 @@
 #include <vector>
 #include <map>
 #include <array>
-#include <SFML/Graphics.hpp>
 
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
-#include "Examples/TicTacToeDrawer.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 
 // Forward declarations
@@ -25,8 +23,8 @@ class TicTacToe : public AbstractCoevolutionWorld
 protected:
 	std::vector<std::vector<int>> fields;	
 	AbstractEvolutionObject* createNewObject();
-	sf::RenderWindow window;
-	std::unique_ptr<TicTacToeDrawer> drawer;
+	//sf::RenderWindow window;
+	//std::unique_ptr<TicTacToeDrawer> drawer;
 	void resetWorld();
 	int whoHasWon();
 	int currentPlayer;
@@ -37,7 +35,6 @@ protected:
 	int defaultResetGenerationCount;
 	int currentResetGenerationCount;
 	double maxDistanceShrinkFactor;
-	bool debugOutput;
 	int maxDistance;
 	int lastBestAICount;
 	int generationsSincaLastBestAI;
@@ -58,7 +55,6 @@ public:
 	int rateKI(AbstractEvolutionObject* rateKI);
 	void setIllegalMove(bool illegalMove_);
 	void startNewGame(int firstPlayer);
-	void setDebugOutput(bool debugOutput_);
 	void initializeForLearning();
 	bool hasGameFinished();
 	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2);

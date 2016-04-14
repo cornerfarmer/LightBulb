@@ -17,6 +17,7 @@
 #include <Examples/NetworkEvolutionExample.hpp>
 #include <Examples/NatureEvolutionExample.hpp>
 #include <Examples/TeachedEvolutionExample.hpp>
+#include <Examples/TicTacToeEvolutionExample.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -36,6 +37,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	trainingPlanPatterns.push_back(new NetworkEvolutionExample());
 	trainingPlanPatterns.push_back(new NatureEvolutionExample());
 	trainingPlanPatterns.push_back(new TeachedEvolutionExample());
+	trainingPlanPatterns.push_back(new TicTacToeEvolutionExample());
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());

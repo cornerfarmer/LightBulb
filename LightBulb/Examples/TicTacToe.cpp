@@ -27,13 +27,12 @@ TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combining
 	}
 	resetWorld();
 
-	window.create(sf::VideoMode(800, 700), "LightBulb!");
+	/*window.create(sf::VideoMode(800, 700), "LightBulb!");
 	TicTacToeDrawerOptions options;
 	options.ticTacToe = this;
 	displayMode = true;
-	drawer.reset(new TicTacToeDrawer(options));
+	drawer.reset(new TicTacToeDrawer(options));*/
 
-	debugOutput = true;
 }
 
 bool TicTacToe::hasGameFinished()
@@ -64,10 +63,6 @@ void TicTacToe::setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_)
 	maxDistanceShrinkFactor = maxDistanceShrinkFactor_;
 }
 
-void TicTacToe::setDebugOutput(bool debugOutput_)
-{
-	debugOutput = debugOutput_;
-}
 
 int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2)
 {
@@ -79,7 +74,7 @@ int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionOb
 	static int counter = 0;
 	counter++;
 	if (counter % 1000000 == 0)
-		std::cout << counter << ". calculation" << std::endl;
+		log(std::to_string(counter) + ". calculation", LL_HIGH);
 
 	if (isParasiteWorld) {
 		if (result >= 0)
@@ -138,7 +133,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 				pointsAI2++;
 		}
 
-		sf::Event event;
+		/*sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -152,7 +147,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 			drawer->recalculateAllValues();
 			drawer->draw(window);
 			window.display();
-		}
+		}*/
 
 		if (hasGameFinished())
 			break;
@@ -164,7 +159,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 
 	if (prevPW != isParasiteWorld)
 	{
-		std::cout << "il:" << il << " wins:" << wins << " ties:" << ties << std::endl;
+		log("il:" + std::to_string(il) + " wins:" + std::to_string(wins) + " ties:" + std::to_string(ties), LL_MEDIUM);
 		il = 0;
 		wins = 0;
 		ties = 0;
@@ -255,8 +250,7 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 		}
 	}
 
-	if (debugOutput)
-		std::cout << "Best KI: " << wins << "/" << possibleGames << std::endl;
+	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
 	return wins;
 }
 

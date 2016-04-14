@@ -35,3 +35,12 @@ double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject* object)
 {
 	return fitnessValues[object];
 }
+
+void AbstractCoevolutionWorld::setLogger(AbstractLogger* logger_)
+{
+	AbstractLoggable::setLogger(logger_);
+	if (hallOfFameToChallengeAlgorithm)
+		hallOfFameToChallengeAlgorithm->setLogger(logger_);
+	if (hallOfFameToAddAlgorithm)
+		hallOfFameToAddAlgorithm->setLogger(logger_);
+}
