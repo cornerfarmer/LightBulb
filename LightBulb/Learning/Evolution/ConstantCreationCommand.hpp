@@ -20,7 +20,7 @@ public:
 	virtual ~ConstantCreationCommand() {};
 	void setObjectCount(int newObjectCount);
 	// Creates a command which creates up to a static amount of objects
-	ConstantCreationCommand(int objectCount_, bool enableDebugOutput_ = false);
+	ConstantCreationCommand(int objectCount_);
 	// Inherited:
 	void execute(AbstractEvolutionWorld& world);
 };

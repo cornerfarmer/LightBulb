@@ -8,12 +8,13 @@
 #include <map>
 
 // Include
+#include "Logging/AbstractLoggable.hpp"
 
 // Forward declarations
 class AbstractEvolutionObject;
 class AbstractCoevolutionWorld;
 
-class AbstractHallOfFameAlgorithm
+class AbstractHallOfFameAlgorithm : public AbstractLoggable
 {
 private:
 	AbstractCoevolutionWorld* currentWorld;

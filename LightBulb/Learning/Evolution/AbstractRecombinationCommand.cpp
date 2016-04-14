@@ -2,10 +2,9 @@
 #include "Learning/Evolution/AbstractRecombinationCommand.hpp"
 #include "AbstractEvolutionObject.hpp"
 
-AbstractRecombinationCommand::AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, bool enableDebugOutput_) {
+AbstractRecombinationCommand::AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_) {
 	recombinationAlgorithm.reset(recombinationAlgorithm_);
 	recombinationSelector.reset(recombinationSelector_);
-	enableDebugOutput = enableDebugOutput_;
 }
 
 void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects)

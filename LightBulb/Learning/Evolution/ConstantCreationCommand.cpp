@@ -3,8 +3,8 @@
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 
 
-ConstantCreationCommand::ConstantCreationCommand(int objectCount_, bool enableDebugOutput_)
-	: AbstractCreationCommand(enableDebugOutput_)
+ConstantCreationCommand::ConstantCreationCommand(int objectCount_)
+	: AbstractCreationCommand()
 {
 	objectCount = objectCount_;
 }

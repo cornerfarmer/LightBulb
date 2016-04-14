@@ -5,6 +5,7 @@
 
 // Include
 #include "Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
+#include "Logging/AbstractLoggable.hpp"
 
 // Library Includes
 #include <vector>
@@ -15,10 +16,11 @@ class AbstractEvolutionWorld;
 class EvolutionLearningRule;
 
 // A command which combines a few of the given evolution objects.
-class AbstractCommand
+class AbstractCommand : public AbstractLoggable
 {
 protected:
 	AbstractEvolutionObject* getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 };
 
 #endif
+

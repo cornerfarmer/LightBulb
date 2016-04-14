@@ -63,9 +63,9 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
 	options.selectionCommands.push_back(bestSelectionCommand);
 	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new StochasticUniversalSamplingSelector(), 1.8, false);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new StochasticUniversalSamplingSelector(), 1.8);
 	options.mutationsCommands.push_back(constantMutationCommand);
-	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3, false);
+	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
 	options.world = simulator;
 	options.scoreGoal = 1.031627 + 10000;

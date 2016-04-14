@@ -28,14 +28,13 @@ protected:
 	std::unique_ptr<AbstractMutationSelector> mutationSelector;
 
 	std::vector<AbstractEvolutionObject*> objectsToMutate;
-	bool enableDebugOutput;
 public:
 	virtual ~AbstractMutationCommand() {};
 	virtual void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) = 0;
 
 	void setMutationSelector(AbstractMutationSelector* mutationSelector);
 	// Creates a new mutation command with the given mutation algorithm
-	AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, bool enableDebugOutput_);
+	AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_);
 	// Executes the mutations. (The algorithm will take a few of the old objects, mutate them and insert them into the new object vector)
 	void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 };

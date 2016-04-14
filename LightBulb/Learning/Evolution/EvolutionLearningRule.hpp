@@ -60,6 +60,7 @@ protected:
 	bool hasLearningSucceeded();
 	EvolutionLearningRuleOptions* getOptions();
 	void doCalculationAfterLearningProcess();
+	void initialize();
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRule(EvolutionLearningRuleOptions* options_);

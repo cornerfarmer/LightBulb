@@ -3,14 +3,14 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 
-ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_, bool enableDebugOutput_)
-	: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_, enableDebugOutput_)
+ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_)
+	: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_)
 {
 	setRecombinationCount(objectCount_);
 }
 
-ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_, bool enableDebugOutput_)
-	: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_, enableDebugOutput_)
+ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_)
+	: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_)
 {
 	setRecombinationPercentage(recombinationPercentage_);
 }

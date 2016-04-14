@@ -22,15 +22,38 @@
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 	: AbstractEvolutionLearningRule(new EvolutionLearningRuleOptions(options_))
 {
-
+	initialize();
 }
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions* options_)
 	: AbstractEvolutionLearningRule(options_)
 {
-
+	initialize();
 }
 
+void EvolutionLearningRule::initialize()
+{
+	for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
+		(*reuseCommand)->setLogger(options->logger);
+
+	for (auto mutationCommand = getOptions()->mutationsCommands.begin(); mutationCommand != getOptions()->mutationsCommands.end(); mutationCommand++)
+		(*mutationCommand)->setLogger(options->logger);
+
+	for (auto recombinationCommand = getOptions()->recombinationCommands.begin(); recombinationCommand != getOptions()->recombinationCommands.end(); recombinationCommand++)
+		(*recombinationCommand)->setLogger(options->logger);
+
+	for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
+		(*reuseCommand)->setLogger(options->logger);
+
+	for (auto creationCommand = getOptions()->creationCommands.begin(); creationCommand != getOptions()->creationCommands.end(); creationCommand++)
+		(*creationCommand)->setLogger(options->logger);
+
+	for (auto exitCondition = getOptions()->exitConditions.begin(); exitCondition != getOptions()->exitConditions.end(); exitCondition++)
+		(*exitCondition)->setLogger(options->logger);
+
+	for (auto selectionCommand = getOptions()->selectionCommands.begin(); selectionCommand != getOptions()->selectionCommands.end(); selectionCommand++)
+		(*selectionCommand)->setLogger(options->logger);
+}
 
 //
 //LearningState EvolutionLearningRule::doLearning()
@@ -207,3 +230,4 @@ void EvolutionLearningRule::doCalculationAfterLearningProcess()
 {
 	learningState->addData(DATA_SET_FITNESS, tryCounter, iteration - 1, getOptions()->world->getHighscoreList()->front().first);
 }
+

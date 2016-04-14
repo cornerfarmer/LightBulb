@@ -3,14 +3,14 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 
-ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_, bool enableDebugOutput_)
-	: AbstractReuseCommand(reuseSelector_, enableDebugOutput_)
+ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_)
+	: AbstractReuseCommand(reuseSelector_)
 {
 	setReuseCount(objectCount_);
 }
 
-ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_, bool enableDebugOutput_)
-	: AbstractReuseCommand(reuseSelector_, enableDebugOutput_)
+ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_)
+	: AbstractReuseCommand(reuseSelector_)
 {
 	setReusePercentage(reusePercentage_);
 }

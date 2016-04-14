@@ -2,9 +2,8 @@
 #include "Learning/Evolution/AbstractReuseCommand.hpp"
 #include "AbstractEvolutionObject.hpp"
 
-AbstractReuseCommand::AbstractReuseCommand(AbstractReuseSelector* reuseSelector_,bool enableDebugOutput_)
+AbstractReuseCommand::AbstractReuseCommand(AbstractReuseSelector* reuseSelector_)
 {
-	enableDebugOutput = enableDebugOutput_;
 	reuseSelector.reset(reuseSelector_);
 }
 

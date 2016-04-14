@@ -599,6 +599,7 @@
     <ClCompile Include="Logging\StorageLogger.cpp" />
     <ClCompile Include="Learning\AbstractSupervisedLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp" />
+    <ClCompile Include="Logging\AbstractLoggable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1156,5 +1157,6 @@
     <ClInclude Include="Learning\AbstractSupervisedLearningRule.hpp" />
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
     <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp" />
+    <ClInclude Include="Logging\AbstractLoggable.hpp" />
   </ItemGroup>
 </Project>

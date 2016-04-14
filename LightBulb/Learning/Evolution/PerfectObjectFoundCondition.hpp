@@ -22,7 +22,7 @@ private:
 public:
 	void setCount(int newCount);
 	// Creates a new condition with the minimum difference and the allowed timesteps
-	PerfectObjectFoundCondition(int count_, AbstractCombiningStrategy* combiningStrategy_, bool enableDebugOutput_ = false);
+	PerfectObjectFoundCondition(int count_, AbstractCombiningStrategy* combiningStrategy_);
 	// Inherited:
 	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 };

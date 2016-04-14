@@ -8,15 +8,15 @@
 #include <iomanip>
 #include <algorithm>
 
-BestSelectionCommand::BestSelectionCommand(int objectCount_, bool enableDebugOutput_)
-	: AbstractSelectionCommand(enableDebugOutput_)
+BestSelectionCommand::BestSelectionCommand(int objectCount_)
+	: AbstractSelectionCommand()
 {
 	objectCount = objectCount_;
 	selectionPercentage = 0;
 }
 
-BestSelectionCommand::BestSelectionCommand(double selectionPercentage_, bool enableDebugOutput_)
-	: AbstractSelectionCommand(enableDebugOutput_)
+BestSelectionCommand::BestSelectionCommand(double selectionPercentage_)
+	: AbstractSelectionCommand()
 {
 	objectCount = 0;
 	selectionPercentage = selectionPercentage_;
@@ -28,10 +28,7 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 	// Calculate a temporary static object count if the percentage value is used
 	if (selectionPercentage)
 		objectCount = (int)(highscore->size() * selectionPercentage);
-
-	if (enableDebugOutput)
-		std::cout << "Selected " << objectCount << " best ones:";
-	
+		
 	if (highscore->size() > objectCount)
 	{
 		objects->clear();
@@ -52,18 +49,14 @@ void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvoluti
 		highscore->resize(objectCount);
 	}
 
-	if (enableDebugOutput)
-	{
-		int totalFitness = 0;
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
-		{
-			totalFitness += entry->first;
-		}
-		std::cout << std::fixed << std::setprecision(5) << totalFitness / highscore->size() << ", ";
-	}
 
-	if (enableDebugOutput)
-		std::cout << std::endl;
+	double totalFitness = 0;
+	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	{
+		totalFitness += entry->first;
+	}
+	log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string((double)totalFitness / highscore->size()), LL_LOW);
+	
 }
 
 void BestSelectionCommand::setObjectCount(int newObjectCount)

@@ -23,9 +23,9 @@ public:
 	void setMutationPercentage(double newMutationPercentage);
 	void setMutationCount(double newMutationCount);
 	// Creates a command which mutates a static amount of objects
-	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int objectCount_, bool enableDebugOutput_ = false);
+	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int objectCount_);
 	// Creates a command which mutates a percentage of objects
-	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_, bool enableDebugOutput_ = false);
+	ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_);
 
 	void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
 };

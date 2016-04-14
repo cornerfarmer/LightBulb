@@ -21,9 +21,9 @@ private:
 public:
 	virtual ~ConstantReuseCommand() {};
 	// Creates a command which reuses a static amount of objects
-	ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_, bool enableDebugOutput_ = false);
+	ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_);
 	// Creates a command which reuses a percentage of objects
-	ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_, bool enableDebugOutput_ = false);
+	ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_);
 	
 	void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
 	void setReusePercentage(double newReusePercentage);

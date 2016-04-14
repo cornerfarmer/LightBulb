@@ -2,11 +2,10 @@
 #include "Learning/Evolution/AbstractMutationCommand.hpp"
 #include "AbstractEvolutionObject.hpp"
 
-AbstractMutationCommand::AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, bool enableDebugOutput_)
+AbstractMutationCommand::AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_)
 {
 	mutationAlgorithm.reset(mutationAlgorithm_);
 	mutationSelector.reset(mutationSelector_);
-	enableDebugOutput = enableDebugOutput_;
 }
 
 void AbstractMutationCommand::setMutationSelector(AbstractMutationSelector* mutationSelector_)

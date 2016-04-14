@@ -21,6 +21,6 @@ void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld* world, std::
 void AbstractHallOfFameAlgorithm::addMember(AbstractEvolutionObject* newMember)
 {
 	members.push_back(newMember->clone(false));
-	std::cout << "Added " << members.size() << ". hall of fame member" << std::endl;
+	log("Added " + std::to_string(members.size()) + ". hall of fame member", LL_LOW);
 }
 

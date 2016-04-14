@@ -22,9 +22,9 @@ public:
 	virtual ~BestSelectionCommand() {};
 	void setObjectCount(int newObjectCount);
 	// Creates a command which selects a static amount of objects
-	BestSelectionCommand(int objectCount_, bool enableDebugOutput_ = false);
+	BestSelectionCommand(int objectCount_);
 	// Creates a command which selects a percentage of objects
-	BestSelectionCommand(double selectionPercentage_, bool enableDebugOutput_ = false);
+	BestSelectionCommand(double selectionPercentage_);
 	// Deletes all objects from the highscore which are not part of the selected objects.
 	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 };

@@ -3,14 +3,14 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 
-ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_,  int objectCount_, bool enableDebugOutput_)
-	: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_, enableDebugOutput_)
+ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_,  int objectCount_)
+	: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_)
 {
 	setMutationCount(objectCount_);
 }
 
-ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_,  double mutationPercentage_, bool enableDebugOutput_)
-	: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_, enableDebugOutput_)
+ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_,  double mutationPercentage_)
+	: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_)
 {
 	setMutationPercentage(mutationPercentage_);
 }

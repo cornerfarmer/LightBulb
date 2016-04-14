@@ -22,13 +22,10 @@ bool RateDifferenceCondition::evaluate(std::vector<std::pair<double, AbstractEvo
 			else
 				counter = 0;
 
-			if (enableDebugOutput)
-			{
-				if (result)
-					std::cout << "rateDifferenceCondition is true: " << std::fixed << std::setprecision(7) << lastBestRate << " - " << std::fixed << std::setprecision(7) << highscore->front().first << " < " << std::fixed << std::setprecision(7) << difference << std::endl;
-				else
-					std::cout << "rateDifferenceCondition is false: " << std::fixed << std::setprecision(7) << lastBestRate << " - " << std::fixed << std::setprecision(7) << highscore->front().first << " > " << std::fixed << std::setprecision(7) << difference << std::endl;
-			}
+			if (result)
+				log("rateDifferenceCondition is true: " + std::to_string(lastBestRate) + " - " + std::to_string(highscore->front().first) + " < " + std::to_string(difference), LL_LOW);
+			else
+				log("rateDifferenceCondition is false: " + std::to_string(lastBestRate) + " - " + std::to_string(highscore->front().first) + " > " + std::to_string(difference), LL_LOW);
 
 			// Remember the best score for the next generation
 			lastBestRate = highscore->front().first;
@@ -46,8 +43,8 @@ bool RateDifferenceCondition::evaluate(std::vector<std::pair<double, AbstractEvo
 }
 
 
-RateDifferenceCondition::RateDifferenceCondition(double difference_, int count_, bool enableDebugOutput_)
-	: AbstractExitCondition(enableDebugOutput_)
+RateDifferenceCondition::RateDifferenceCondition(double difference_, int count_)
+	: AbstractExitCondition()
 {
 	difference = difference_;
 	lastBestRate = -1;

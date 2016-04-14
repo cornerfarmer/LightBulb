@@ -47,8 +47,8 @@ bool PerfectObjectFoundCondition::perfectObjectExists()
 	return false;
 }
 
-PerfectObjectFoundCondition::PerfectObjectFoundCondition(int count_, AbstractCombiningStrategy* combiningStrategy_, bool enableDebugOutput_)
-	: AbstractExitCondition(enableDebugOutput_)
+PerfectObjectFoundCondition::PerfectObjectFoundCondition(int count_, AbstractCombiningStrategy* combiningStrategy_)
+	: AbstractExitCondition()
 {
 	combiningStrategy = combiningStrategy_;
 	counter = 0;

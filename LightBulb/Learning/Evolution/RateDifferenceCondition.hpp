@@ -24,7 +24,7 @@ public:
 	virtual ~RateDifferenceCondition() {}
 	void setCount(int newCount);
 	// Creates a new condition with the minimum difference and the allowed timesteps
-	RateDifferenceCondition(double difference_, int count_, bool enableDebugOutput_ = false);
+	RateDifferenceCondition(double difference_, int count_);
 	// Inherited:
 	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 };

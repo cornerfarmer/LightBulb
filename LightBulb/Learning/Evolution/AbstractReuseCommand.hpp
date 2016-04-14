@@ -22,11 +22,9 @@ class AbstractReuseCommand : public AbstractCommand
 protected:
 	//
 	std::unique_ptr<AbstractReuseSelector> reuseSelector;
-
-	bool enableDebugOutput;
 public:
 	virtual ~AbstractReuseCommand() {};
-	AbstractReuseCommand(AbstractReuseSelector* reuseSelector_, bool enableDebugOutput_);
+	AbstractReuseCommand(AbstractReuseSelector* reuseSelector_);
 	// Execute the command (Take a few of the old objects and move them directly into the new object vector)
 	void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 	virtual void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) = 0 ;
