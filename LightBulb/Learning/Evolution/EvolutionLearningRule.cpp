@@ -94,7 +94,7 @@ void EvolutionLearningRule::initialize()
 
 bool EvolutionLearningRule::hasLearningSucceeded()
 {
-	return tryCounter > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
+	return iteration > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
 }
 
 void EvolutionLearningRule::initializeTry()
