@@ -14,6 +14,7 @@
 #include <Examples/RBFNetworkBiggerExample.hpp>
 #include <Examples/FunctionEvolutionExample.hpp>
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
+#include <Examples/NetworkEvolutionExample.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -30,6 +31,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	trainingPlanPatterns.push_back(new RBFNetworkBiggerExample());
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
 	trainingPlanPatterns.push_back(new FunctionEvolutionExample());
+	trainingPlanPatterns.push_back(new NetworkEvolutionExample());
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());

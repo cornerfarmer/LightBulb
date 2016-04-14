@@ -6,11 +6,9 @@
 // Library Includes
 #include <vector>
 #include <map>
-#include <SFML/Graphics.hpp>
 
 // Include
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
-#include "Examples/NetworkDrawer.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -22,8 +20,8 @@ protected:
 	std::vector<std::vector<float>> consumers;
 	bool enableGraphics;
 	AbstractEvolutionObject* createNewObject();
-	sf::RenderWindow window;
-	std::unique_ptr<NetworkDrawer> drawer;
+	//sf::RenderWindow window;
+	//std::unique_ptr<NetworkDrawer> drawer;
 	double distanceBetweenPositions(std::vector<float>& pos1, std::vector<float>& pos2);
 public:
 	NetworkSimulator(bool enableGraphics_, std::vector<std::vector<float>> consumers_);

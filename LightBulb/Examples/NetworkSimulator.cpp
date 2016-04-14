@@ -14,7 +14,7 @@ NetworkSimulator::NetworkSimulator(bool enableGraphics_, std::vector<std::vector
 {
 	consumers = consumers_;
 	enableGraphics = enableGraphics_;
-	if (enableGraphics)
+	/*if (enableGraphics)
 	{
 		window.create(sf::VideoMode(800, 700), "LightBulb!");
 		NetworkDrawerOptions options;
@@ -25,7 +25,7 @@ NetworkSimulator::NetworkSimulator(bool enableGraphics_, std::vector<std::vector
 		options.endY = 2;
 
 		drawer.reset(new NetworkDrawer(options));
-	}
+	}*/
 }
 
 bool NetworkSimulator::doSimulationStep()
@@ -35,13 +35,13 @@ bool NetworkSimulator::doSimulationStep()
 		(*position)->doNNCalculation();
 	}
 
-	if (enableGraphics)
+	/*if (enableGraphics)
 	{
 		window.clear();
 		drawer->recalculateAllValues();
 		drawer->draw(window);
 		window.display();
-	}
+	}*/
 	return false;
 }
 

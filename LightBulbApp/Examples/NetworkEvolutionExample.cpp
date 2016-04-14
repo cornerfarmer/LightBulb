@@ -1,5 +1,4 @@
 #include "NetworkEvolutionExample.hpp"
-#include <Diagnostic/LearningRuleAnalyser.hpp>
 #include <Examples/NetworkSimulator.hpp>
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Learning/Evolution/ConstantMutationCommand.hpp>
@@ -10,12 +9,25 @@
 #include <Learning/Evolution/ConstantRecombinationCommand.hpp>
 #include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
-#include <Diagnostic/ChangeableNumber.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 
 
-void doNetworkEvolutionExample()
+//void doNetworkEvolutionExample()
+//{
+//
+//	LearningRuleAnalyserOptions analyserOptions;
+//	analyserOptions.learningRule = &learningRule;
+//	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 1.3, 0.1, 2.0, "mcs"));
+//	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, RateDifferenceCondition>(rateDifferenceCondition, &RateDifferenceCondition::setCount, 0, 10, 50, "cnt"));
+//
+//	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
+//
+//	learningRuleAnalyser.execute();
+//
+//}
+
+AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 {
 	std::vector<std::vector<float>> consumers(8, std::vector<float>(2));
 	consumers[0][0] = 1;
@@ -38,7 +50,7 @@ void doNetworkEvolutionExample()
 	consumers[7][0] = 4;
 	consumers[7][1] = -1;
 
-	NetworkSimulator simulator(false, consumers);
+	NetworkSimulator* simulator = new NetworkSimulator(false, consumers);
 
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 20);
@@ -52,18 +64,35 @@ void doNetworkEvolutionExample()
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RemainderStochasticSamplingSelector(), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0));
-	options.world = &simulator;
-	options.enableDebugOutput = false;
+	options.world = simulator;
 	options.scoreGoal = -10.47;
-	EvolutionLearningRule learningRule(options);
+	fillDefaultLearningRuleOptions(&options);
 
-	LearningRuleAnalyserOptions analyserOptions;
-	analyserOptions.learningRule = &learningRule;
-	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 1.3, 0.1, 2.0, "mcs"));
-	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, RateDifferenceCondition>(rateDifferenceCondition, &RateDifferenceCondition::setCount, 0, 10, 50, "cnt"));
+	return new EvolutionLearningRule(options);
+}
 
-	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
 
-	learningRuleAnalyser.execute();
+std::string NetworkEvolutionExample::getName()
+{
+	return "Network evolution example";
+}
 
+std::string NetworkEvolutionExample::getDescription()
+{
+	return "Finds a network structure with the lowest amount of cables.";
+}
+
+AbstractTrainingPlan* NetworkEvolutionExample::getCopy()
+{
+	return new NetworkEvolutionExample();
+}
+
+std::string NetworkEvolutionExample::getLearningRuleName()
+{
+	return EvolutionLearningRule::getName();
+}
+
+std::vector<std::string> NetworkEvolutionExample::getDataSetLabels()
+{
+	return EvolutionLearningRule::getDataSetLabels();
 }
