@@ -5,11 +5,9 @@
 
 // Library Includes
 #include <vector>
-#include <SFML/Graphics.hpp>
 
 // Include
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
-#include "Examples/NatureDrawer.hpp"
 #include "Examples/AbstractTile.hpp"
 
 // Forward declarations
@@ -25,8 +23,8 @@ protected:
 	int width;
 	int height;
 	double getViewValueOfPos(int posX, int posY);
-	sf::RenderWindow window;
-	std::unique_ptr<NatureDrawer> drawer;
+	//sf::RenderWindow window;
+	//std::unique_ptr<NatureDrawer> drawer;
 	int missingPlants;	
 	bool displayMode;
 	AbstractEvolutionObject* createNewObject();

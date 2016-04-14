@@ -58,7 +58,7 @@ void RemainderStochasticSamplingSelector::selectForMutation(int mutationCount, s
 
 void RemainderStochasticSamplingSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 {
-	select(false, recombinationCount * 2, highscore);
+	select(true, recombinationCount * 2, highscore);
 	std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
 }
 

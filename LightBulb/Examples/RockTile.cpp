@@ -1,10 +1,10 @@
 // Includes
 #include "Examples/RockTile.hpp"
 
-sf::Color RockTile::getColor()
-{
-	return sf::Color(100, 100, 100);
-}
+//sf::Color RockTile::getColor()
+//{
+//	return sf::Color(100, 100, 100);
+//}
 
 float RockTile::tryToEat()
 {

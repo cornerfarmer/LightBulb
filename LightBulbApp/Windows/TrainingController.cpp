@@ -15,6 +15,7 @@
 #include <Examples/FunctionEvolutionExample.hpp>
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 #include <Examples/NetworkEvolutionExample.hpp>
+#include <Examples/NatureEvolutionExample.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -32,6 +33,7 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	trainingPlanPatterns.push_back(new BackpropagationXorExample());
 	trainingPlanPatterns.push_back(new FunctionEvolutionExample());
 	trainingPlanPatterns.push_back(new NetworkEvolutionExample());
+	trainingPlanPatterns.push_back(new NatureEvolutionExample());
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());

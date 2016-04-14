@@ -33,13 +33,13 @@ Nature::Nature()
 	resetWorld();
 
 
-	window.create(sf::VideoMode(800, 700), "LightBulb!");
+	/*window.create(sf::VideoMode(800, 700), "LightBulb!");
 	NatureDrawerOptions options;
 	options.nature = this;
 	displayMode = true;
 	options.scalingX =  60.0 / width * 10;
 	options.scalingY =  60.0 / height * 10;
-	drawer.reset(new NatureDrawer(options));
+	drawer.reset(new NatureDrawer(options));*/
 }
 
 bool Nature::doSimulationStep()
@@ -48,7 +48,7 @@ bool Nature::doSimulationStep()
 
 	while (objects.size() - deadAnimals > 0)
 	{
-		sf::Event event;
+		/*sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -62,7 +62,7 @@ bool Nature::doSimulationStep()
 			drawer->recalculateAllValues();
 			drawer->draw(window);
 			window.display();
-		}
+		}*/
 
 		for (auto animal = objects.begin(); animal != objects.end(); animal++)
 		{

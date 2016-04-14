@@ -1,10 +1,10 @@
 // Includes
 #include "Examples/EarthTile.hpp"
 
-sf::Color EarthTile::getColor()
-{
-	return food > 0 ? sf::Color::Green : sf::Color::Black;
-}
+//sf::Color EarthTile::getColor()
+//{
+//	return food > 0 ? sf::Color::Green : sf::Color::Black;
+//}
 
 float EarthTile::tryToEat()
 {
