@@ -7,7 +7,7 @@ LearningStateFactory::LearningStateFactory(TrainingPlanRepository* trainingPlanR
 	trainingPlanRepository = trainingPlanRepository_;
 }
 
-AbstractSubApp* LearningStateFactory::createWindow(AbstractWindow* parent)
+AbstractSubApp* LearningStateFactory::createSupApp(AbstractWindow* parent)
 {
 	LearningStateController* controller = new LearningStateController(trainingPlanRepository, parent);
 	controller->getWindow()->Show();

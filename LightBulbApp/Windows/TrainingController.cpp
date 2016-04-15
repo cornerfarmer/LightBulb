@@ -17,7 +17,7 @@
 #include <Examples/NetworkEvolutionExample.hpp>
 #include <Examples/NatureEvolutionExample.hpp>
 #include <Examples/TeachedEvolutionExample.hpp>
-#include <Examples/TicTacToeEvolutionExample.hpp>
+#include <Examples/TicTacToeEvolution/TicTacToeEvolutionExample.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -250,7 +250,7 @@ void TrainingController::saveTrainingSession()
 
 void TrainingController::addSubApp(int subAppFactoryIndex)
 {
-	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createWindow(window.get())));
+	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createSupApp(window.get())));
 }
 
 bool TrainingController::allTrainingPlansPaused()

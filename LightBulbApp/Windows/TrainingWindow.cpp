@@ -109,6 +109,13 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 	}
 }
 
+void TrainingWindow::trainingPlanMenuSelected(wxCommandEvent& event)
+{
+	AbstractTrainingPlan* trainingPlan = (*controller->getTrainingPlans())[trainingPlanList->GetSelectedRow()].get();
+	int factoryIndex = event.GetExtraLong();
+	AbstractCustomSubAppFactory* selectedFactory = (*trainingPlan->getCustomSubApps())[factoryIndex].get();
+	selectedFactory->createCustomSupApp(trainingPlan, this);
+}
 
 void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
 {
@@ -403,7 +410,7 @@ void TrainingWindow::validateSelectedProcess()
 
 void TrainingWindow::createMenuBar()
 {
-	wxMenuBar* menubar = new wxMenuBar();
+	menubar = new wxMenuBar();
 	wxMenu* file = new wxMenu;
 	file->Append(wxID_OPEN);
 	file->Append(new wxMenuItem(file, FILE_SAVE_TS, "Save training session"));
@@ -471,6 +478,19 @@ void TrainingWindow::restoreDefaultProcessView()
 	processTrainingPlanSelection = NULL;
 }
 
+void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan)
+{
+	trainingPlanMenu = new wxMenu();
+	auto customSubApps = trainingPlan->getCustomSubApps();
+	for (auto customSubApp = customSubApps->begin(); customSubApp != customSubApps->end(); customSubApp++)
+	{
+		trainingPlanMenu->Append(new wxMenuItem(trainingPlanMenu, wxID_ANY, (*customSubApp)->getLabel()));
+	}
+	trainingPlanMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::trainingPlanMenuSelected), this);
+	menubar->Append(trainingPlanMenu, trainingPlan->getName());
+
+}
+
 void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 {
 	int row = getRowIndexOfItem(trainingPlanList, event.GetItem());
@@ -478,6 +498,7 @@ void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 	{
 		showDetailsOfTrainingPlan((*controller->getTrainingPlans())[row].get());
 		showProcessOfTrainingPlan((*controller->getTrainingPlans())[row].get());
+		showCustomSubAppsMenuForTrainingPlan((*controller->getTrainingPlans())[row].get());
 	}
 	else
 		clearDetails();

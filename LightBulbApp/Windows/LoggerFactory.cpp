@@ -7,7 +7,7 @@ LoggerFactory::LoggerFactory(TrainingPlanRepository* trainingPlanRepository_)
 	trainingPlanRepository = trainingPlanRepository_;
 }
 
-AbstractSubApp* LoggerFactory::createWindow(AbstractWindow* parent)
+AbstractSubApp* LoggerFactory::createSupApp(AbstractWindow* parent)
 {
 	LoggerController* controller = new LoggerController(trainingPlanRepository, parent);
 	controller->getWindow()->Show();

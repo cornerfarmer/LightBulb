@@ -17,7 +17,7 @@ class AbstractSubAppFactory
 {
 protected:
 public:
-	virtual AbstractSubApp* createWindow(AbstractWindow* parent = NULL) = 0;
+	virtual AbstractSubApp* createSupApp(AbstractWindow* parent = NULL) = 0;
 	virtual std::string getLabel() = 0;
 };
 

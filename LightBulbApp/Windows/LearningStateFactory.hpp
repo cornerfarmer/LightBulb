@@ -16,7 +16,7 @@ protected:
 	TrainingPlanRepository* trainingPlanRepository;
 public:
 	LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_);
-	AbstractSubApp* createWindow(AbstractWindow* parent);
+	AbstractSubApp* createSupApp(AbstractWindow* parent);
 	std::string getLabel();
 };
 

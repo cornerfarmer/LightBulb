@@ -497,15 +497,6 @@
     <ClCompile Include="Examples\RockTile.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\TicTacToe.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeKI.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
     <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp">
       <Filter>Quelldateien\Diagnostic</Filter>
     </ClCompile>
@@ -1038,15 +1029,6 @@
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\RockTile.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToe.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeKI.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp">

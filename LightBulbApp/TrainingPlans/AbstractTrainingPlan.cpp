@@ -2,6 +2,11 @@
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <thread>
 
+void AbstractTrainingPlan::addCustomSubApp(AbstractCustomSubAppFactory* customSubApp)
+{
+	customSubApps.push_back(std::unique_ptr<AbstractCustomSubAppFactory>(customSubApp));
+}
+
 AbstractTrainingPlan::AbstractTrainingPlan()
 {
 	logger.reset(new StorageLogger());
@@ -107,4 +112,9 @@ void AbstractTrainingPlan::finished()
 StorageLogger* AbstractTrainingPlan::getLogger()
 {
 	return logger.get();
+}
+
+std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* AbstractTrainingPlan::getCustomSubApps()
+{
+	return &customSubApps;
 }

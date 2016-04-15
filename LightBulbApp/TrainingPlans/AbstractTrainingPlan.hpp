@@ -12,6 +12,7 @@
 #include <thread>
 #include <vector>
 #include <cereal/cereal.hpp>
+#include <Windows/AbstractCustomSubAppFactory.hpp>
 
 // Forward declarations
 class AbstractLogger;
@@ -44,6 +45,7 @@ private:
 	TrainingPlanState state;
 	void runThread(bool initial);
 	bool threadShouldBeJoinedBeforeReuse;
+	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>> customSubApps;
 protected:
 	std::unique_ptr<StorageLogger> logger;
 	virtual void run(bool initial) = 0;
@@ -52,6 +54,7 @@ protected:
 	void pausingFinished();
 	void finished();
 	virtual void initializeStart() {};
+	void addCustomSubApp(AbstractCustomSubAppFactory* customSubApp);
 public:
 	AbstractTrainingPlan();
 	void start();
@@ -68,6 +71,7 @@ public:
 	virtual std::vector<std::string> getDataSetLabels() = 0;
 	virtual LearningState* getLearningState() = 0;
 	StorageLogger* getLogger();
+	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
 };
 
 #include "IO/AbstractTrainingPlanIO.hpp"

@@ -39,8 +39,10 @@ private:
 	TrainingController* controller;
 	wxChoice* neuralNetworksChoice;
 	wxChoice* trainingPlanPatternsChoice;
+	wxMenu* trainingPlanMenu;
 	AbstractTrainingPlan* processTrainingPlanSelection;
 	void fileMenuSelected(wxCommandEvent& event);
+	void trainingPlanMenuSelected(wxCommandEvent& event);
 	void neuralNetworkPopUpMenuSelected(wxCommandEvent& event);
 	void neuralNetworkListRightClick(wxDataViewEvent& event);
 	void trainingPlanPopUpMenuSelected(wxCommandEvent& event);
@@ -49,6 +51,7 @@ private:
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
+	wxMenuBar* menubar;
 	wxMenu* windowsMenu;
 	std::map<int, AbstractWindow*> subWindows;
 	void validateSelectedProcess();
@@ -58,6 +61,7 @@ private:
 	void selectTrainingPlanPattern(wxDataViewEvent& event);
 	void showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	void restoreDefaultProcessView();
+	void showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan);
 	void selectTrainingPlan(wxDataViewEvent& event);
 	void showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNetwork);
 	void showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan);

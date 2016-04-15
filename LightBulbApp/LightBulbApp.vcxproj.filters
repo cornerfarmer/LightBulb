@@ -45,9 +45,6 @@
     <ClCompile Include="Examples\TeachedEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -117,6 +114,30 @@
     <ClCompile Include="Examples\NatureEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractCustomSubApp.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeKI.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameController.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -135,9 +156,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TeachedEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="App.hpp">
@@ -222,6 +240,30 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\NatureEvolutionExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AbstractCustomSubApp.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameController.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

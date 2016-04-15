@@ -146,10 +146,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolutionExample.cpp">
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp" />
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameController.cpp" />
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp" />
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp" />
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeKI.cpp" />
     <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main.old.cpp">
@@ -165,6 +170,8 @@
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
+    <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
     <ClCompile Include="Windows\AbstractSubApp.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
     <ClCompile Include="Windows\AbstractSubAppFactory.cpp" />
@@ -205,10 +212,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolutionExample.hpp">
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp" />
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameController.hpp" />
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp" />
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
@@ -224,6 +236,8 @@
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
+    <ClInclude Include="Windows\AbstractCustomSubApp.hpp" />
+    <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp" />
     <ClInclude Include="Windows\AbstractSubApp.hpp" />
     <ClInclude Include="Windows\AbstractWindow.hpp" />
     <ClInclude Include="Windows\AbstractSubAppFactory.hpp" />
