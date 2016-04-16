@@ -3,9 +3,8 @@
 
 
 AbstractWindow::AbstractWindow(std::string label, AbstractWindow* parent)
-	: wxFrame(parent, wxID_ANY, label)
+	: wxFrame(parent, wxID_ANY, label, wxDefaultPosition, wxDefaultSize)
 {
-
 }
 
 void AbstractWindow::refreshAfterChange(wxSizer* sizer)

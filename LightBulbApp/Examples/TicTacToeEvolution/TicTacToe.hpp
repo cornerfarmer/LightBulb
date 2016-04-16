@@ -11,6 +11,7 @@
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include <mutex>
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -18,7 +19,12 @@ class AbstractEvolutionObject;
 class TicTacToeKI;
 class AbstractTile;
 
-class TicTacToe : public AbstractCoevolutionWorld
+enum TicTacToeEvents
+{
+	EVT_FIELD_CHANGED
+};
+
+class TicTacToe : public AbstractCoevolutionWorld, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
 {
 protected:
 	std::vector<std::vector<int>> fields;	
@@ -45,6 +51,9 @@ protected:
 	bool printCurrentBestAI;
 	int variationStart;
 	bool isParasiteWorld;
+	bool stepMode;
+	std::condition_variable doNextStep;
+	std::mutex doNextStepMutex;
 public:
 	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
@@ -58,8 +67,10 @@ public:
 	void initializeForLearning();
 	bool hasGameFinished();
 	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2);
-
-
+	std::vector<std::vector<int>>* getFields();
+	void startStepMode();
+	void stopStepMode();
+	void nextStep();
 };
 
 #endif

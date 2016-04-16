@@ -26,7 +26,7 @@ TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combining
 		fields[x].resize(3);
 	}
 	resetWorld();
-
+	stepMode = false;
 	/*window.create(sf::VideoMode(800, 700), "LightBulb!");
 	TicTacToeDrawerOptions options;
 	options.ticTacToe = this;
@@ -90,6 +90,36 @@ int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionOb
 	}
 }
 
+std::vector<std::vector<int>>* TicTacToe::getFields()
+{
+	return &fields;
+}
+
+void TicTacToe::startStepMode()
+{
+	if (!stepMode)
+	{
+		stepMode = true;
+	}
+}
+
+void TicTacToe::stopStepMode()
+{
+	if (stepMode)
+	{
+		stepMode = false;
+		doNextStep.notify_one();
+	}
+}
+
+void TicTacToe::nextStep()
+{
+	if (stepMode)
+	{
+		doNextStep.notify_all();
+	}
+}
+
 void TicTacToe::initializeForLearning()
 {
 	bestAIs.clear();
@@ -120,6 +150,11 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 	int i;
 	for (i = 0; i < 9; i++)
 	{
+		if (stepMode)
+		{
+			std::unique_lock<std::mutex> doNextStepMutexLock(doNextStepMutex);
+			doNextStep.wait(doNextStepMutexLock);
+		}
 		if (i % 2 == secondPlayerStarts)
 		{
 			ai1->doNNCalculation();
@@ -316,6 +351,7 @@ void TicTacToe::setField(int x, int y)
 	else {
 		fields[x][y] = currentPlayer;
 		currentPlayer *= -1;
+		throwEvent(EVT_FIELD_CHANGED, this);
 	}
 }
 
@@ -329,6 +365,7 @@ void TicTacToe::resetWorld()
 			*field = 0;
 		}
 	}
+	throwEvent(EVT_FIELD_CHANGED, this);
 }
 
 

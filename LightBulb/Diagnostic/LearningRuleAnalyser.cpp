@@ -58,7 +58,7 @@ void LearningRuleAnalyser::execute()
 		}
 
 		// Add the result to the vector
-		combinations.push_back(make_pair(summaryResult ,parameterCombination));
+		//combinations.push_back(std::pair<LearningState, std::string>(summaryResult, parameterCombination));
 
 		// Print the result
 		std::cout << ": ";
@@ -72,7 +72,7 @@ void LearningRuleAnalyser::execute()
 	} while (!switchToNextValueCombination());
 
 	// Sort the all tested combinations
-	std::sort(combinations.begin(), combinations.end(), (options->useQualityInsteadOfSuccessful ? LearningRuleAnalyser::pairCompareByQuality : LearningRuleAnalyser::pairCompareBySuccessful));
+//	std::sort(combinations.begin(), combinations.end(), (options->useQualityInsteadOfSuccessful ? LearningRuleAnalyser::pairCompareByQuality : LearningRuleAnalyser::pairCompareBySuccessful));
 
 	// Print the best combinations
 	int place = 1;

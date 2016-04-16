@@ -103,7 +103,7 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(50);
 	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(50);
 
-	TicTacToe* ticTacToe1 = new TicTacToe(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	ticTacToe1 = new TicTacToe(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 	TicTacToe* ticTacToe2 = new TicTacToe(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 	cs1->setSecondWorld(ticTacToe2);
 	cs2->setSecondWorld(ticTacToe1);
@@ -165,3 +165,7 @@ std::vector<std::string> TicTacToeEvolutionExample::getDataSetLabels()
 	return BipartiteEvolutionLearningRule::getDataSetLabels();
 }
 
+TicTacToe* TicTacToeEvolutionExample::getTicTacToeWorld()
+{
+	return ticTacToe1;
+}

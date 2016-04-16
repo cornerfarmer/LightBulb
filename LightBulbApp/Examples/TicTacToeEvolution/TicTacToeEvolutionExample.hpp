@@ -6,9 +6,12 @@
 
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 
+class TicTacToe;
+
 class TicTacToeEvolutionExample : public AbstractEvolutionTrainingPlan
 {
 private:
+	TicTacToe* ticTacToe1;
 protected:
 	AbstractLearningRule* createLearningRate();
 public:
@@ -18,6 +21,7 @@ public:
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();
 	std::vector<std::string> getDataSetLabels();
+	TicTacToe* getTicTacToeWorld();
 };
 
 USE_PARENT_SERIALIZATION(TicTacToeEvolutionExample, AbstractEvolutionTrainingPlan);
