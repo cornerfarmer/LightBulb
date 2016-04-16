@@ -24,8 +24,9 @@ private:
 	AbstractTrainingPlan* selectedTrainingPlan;
 	int lastLogMessageIndex;
 	void reloadLog();
-	void addLogMessage(std::string message);
-	void addNewLogMessages();
+	bool logMessagesAdding;
+	bool autoScrolling;
+
 public:
 	LoggerController(TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
 	void show();
@@ -34,8 +35,13 @@ public:
 	LoggerWindow* getWindow();
 	void setLogLevel(int level);
 	void logChanged(AbstractLogger* logger);
+	std::vector<std::pair<LogLevel, std::string>>* getMessages();
+	LogLevel getLogLevel();
+	void setAutoScrolling(bool newAutoScrolling);
+	bool isAutoScrolling();
 	static std::string getLabel();
 	void selectTrainingPlan(int trainingPlanIndex);
+	void logMessagesAddingFinished();
 };
 
 #endif

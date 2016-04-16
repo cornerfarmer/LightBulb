@@ -3,14 +3,17 @@
 #include <wx/richtext/richtextctrl.h>
 #include "LoggerController.hpp"
 
-wxDEFINE_EVENT(LW_EVT_ADD_MSG, wxThreadEvent);
+wxDEFINE_EVENT(LW_EVT_ADD_NEW_MSG, wxThreadEvent);
+wxDEFINE_EVENT(LW_EVT_RELOAD_LOG, wxThreadEvent);
+
 
 LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent)
 	:AbstractWindow(LoggerController::getLabel(), parent)
 {
 	controller = controller_;
 
-	Bind(LW_EVT_ADD_MSG, wxThreadEventFunction(&LoggerWindow::addLogMessage), this);
+	Bind(LW_EVT_ADD_NEW_MSG, wxThreadEventFunction(&LoggerWindow::addNewLogMessages), this);
+	Bind(LW_EVT_RELOAD_LOG, wxThreadEventFunction(&LoggerWindow::reloadLog), this);
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);
@@ -31,6 +34,11 @@ LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent
 	textBox = new wxRichTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(400, 300), wxRE_READONLY);
 	sizer->Add(textBox, 1, wxEXPAND | wxALL, 7);
 
+	wxCheckBox* checkBox = new wxCheckBox(this, wxID_ANY, "Automatically scrolling");
+	checkBox->SetValue(true);
+	checkBox->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&LoggerWindow::autoScrollingChanged), this);
+	sizer->Add(checkBox, 0, wxEXPAND | wxALL, 7);
+
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
 }
@@ -45,11 +53,14 @@ void LoggerWindow::logLevelChanged(wxCommandEvent& event)
 	controller->setLogLevel(event.GetSelection());
 }
 
-
-void LoggerWindow::addLogMessage(wxThreadEvent& event)
+void LoggerWindow::autoScrollingChanged(wxCommandEvent& event)
 {
-	wxString message = event.GetPayload<wxString>();
-	textBox->AppendText(message + "\n");
+	controller->setAutoScrolling(event.GetSelection());
+}
+
+void LoggerWindow::addLogMessage(std::string msg)
+{
+	textBox->AppendText(msg + "\n");
 }
 
 void LoggerWindow::clearLog()
@@ -65,4 +76,27 @@ void LoggerWindow::refreshTrainingPlans()
 		trainingPlansChoice->Append((*network)->getName());
 	}
 	refreshAfterChange(GetSizer());
+}
+
+void LoggerWindow::addNewLogMessages(wxThreadEvent& event)
+{
+	auto messages = controller->getMessages();
+	for (int messageIndex = lastLogMessageIndex + 1; messageIndex < messages->size(); messageIndex++)
+	{
+		if ((*messages)[messageIndex].first <= controller->getLogLevel())
+			addLogMessage((*messages)[messageIndex].second);
+		lastLogMessageIndex++;
+	}
+	if (controller->isAutoScrolling())
+	{
+		textBox->ScrollIntoView(textBox->GetLastPosition(), WXK_END);
+	}
+	controller->logMessagesAddingFinished();
+}
+
+void LoggerWindow::reloadLog(wxThreadEvent& event)
+{
+	clearLog();
+	lastLogMessageIndex = std::max((int)(controller->getMessages()->size() - 50), -1);
+	addNewLogMessages(event);
 }

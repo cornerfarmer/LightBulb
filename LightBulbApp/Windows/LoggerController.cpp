@@ -5,6 +5,7 @@
 
 LoggerController::LoggerController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
 {
+	autoScrolling = true;
 	lastLogMessageIndex = -1;
 	selectedTrainingPlan = NULL;
 	trainingPlanRepository = trainingPlanRepository_;
@@ -43,7 +44,12 @@ void LoggerController::setLogLevel(int level)
 
 void LoggerController::logChanged(AbstractLogger* logger)
 {
-	addNewLogMessages();
+	if (!logMessagesAdding)
+	{
+		logMessagesAdding = true;
+		wxThreadEvent evt(LW_EVT_ADD_NEW_MSG);
+		window->GetEventHandler()->QueueEvent(evt.Clone());
+	}
 }
 
 std::string LoggerController::getLabel()
@@ -60,32 +66,33 @@ void LoggerController::selectTrainingPlan(int trainingPlanIndex)
 	reloadLog();
 }
 
+void LoggerController::logMessagesAddingFinished()
+{
+	logMessagesAdding = false;
+}
+
+std::vector<std::pair<LogLevel, std::string>>* LoggerController::getMessages()
+{
+	return selectedTrainingPlan->getLogger()->getMessages();
+}
+
+LogLevel LoggerController::getLogLevel()
+{
+	return selectedTrainingPlan->getLogger()->getLogLevel();
+}
+
+void LoggerController::setAutoScrolling(bool newAutoScrolling)
+{
+	autoScrolling = newAutoScrolling;
+}
+
+bool LoggerController::isAutoScrolling()
+{
+	return autoScrolling;
+}
+
 void LoggerController::reloadLog()
 {
-	lastLogMessageIndex = -1;
-	window->clearLog();
-	for (auto message = selectedTrainingPlan->getLogger()->getMessages()->begin(); message != selectedTrainingPlan->getLogger()->getMessages()->end(); message++)
-	{
-		if (message->first <= selectedTrainingPlan->getLogger()->getLogLevel())
-			addLogMessage(message->second);
-		lastLogMessageIndex++;
-	}
-}
-
-void LoggerController::addLogMessage(std::string message)
-{
-	wxThreadEvent evt(LW_EVT_ADD_MSG);
-	evt.SetPayload<wxString>(wxString(message).c_str());
+	wxThreadEvent evt(LW_EVT_RELOAD_LOG);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
-}
-
-void LoggerController::addNewLogMessages()
-{
-	auto messages = selectedTrainingPlan->getLogger()->getMessages();
-	for (int messageIndex = lastLogMessageIndex + 1; messageIndex < selectedTrainingPlan->getLogger()->getMessages()->size(); messageIndex++)
-	{
-		if ((*messages)[messageIndex].first <= selectedTrainingPlan->getLogger()->getLogLevel())
-			addLogMessage((*messages)[messageIndex].second);
-		lastLogMessageIndex++;
-	}
 }
