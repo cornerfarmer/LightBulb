@@ -46,7 +46,3 @@ std::string NatureEvolutionExample::getLearningRuleName()
 	return EvolutionLearningRule::getName();
 }
 
-std::vector<std::string> NatureEvolutionExample::getDataSetLabels()
-{
-	return EvolutionLearningRule::getDataSetLabels();
-}

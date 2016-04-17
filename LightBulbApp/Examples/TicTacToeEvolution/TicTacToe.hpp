@@ -50,7 +50,6 @@ protected:
 	bool tieMode;
 	bool printCurrentBestAI;
 	int variationStart;
-	bool isParasiteWorld;
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;

@@ -151,8 +151,3 @@ std::string TeachedEvolutionExample::getLearningRuleName()
 	return EvolutionLearningRule::getName();
 }
 
-std::vector<std::string> TeachedEvolutionExample::getDataSetLabels()
-{
-	return EvolutionLearningRule::getDataSetLabels();
-}
-

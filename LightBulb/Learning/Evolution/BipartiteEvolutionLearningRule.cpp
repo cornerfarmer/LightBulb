@@ -23,17 +23,20 @@ std::string BipartiteEvolutionLearningRule::getName()
 
 std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels()
 {
-	return AbstractEvolutionLearningRule::getDataSetLabels();
+	std::vector<std::string> labels1 = getOptions()->learningRule1->getDataSetLabels();
+	std::vector<std::string> labels2 = getOptions()->learningRule2->getDataSetLabels();
+	labels1.insert(labels1.end(), labels2.begin(), labels2.end());
+	return labels1;
 }
 
 void BipartiteEvolutionLearningRule::initialize()
 {
 	getOptions()->learningRule1->options->logger = options->logger;
 	getOptions()->learningRule2->options->logger = options->logger;
-	getOptions()->learningRule1->setLoggerToUsedObjects();
-	getOptions()->learningRule2->setLoggerToUsedObjects();
 	getOptions()->learningRule1->learningState.reset(learningState.get());
 	getOptions()->learningRule2->learningState.reset(learningState.get());
+	getOptions()->learningRule1->setLoggerToUsedObjects();
+	getOptions()->learningRule2->setLoggerToUsedObjects();
 }
 
 BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOptions()
@@ -43,10 +46,6 @@ BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOption
 
 bool BipartiteEvolutionLearningRule::doIteration()
 {
-	getOptions()->learningRule1->iteration = iteration;
-	getOptions()->learningRule2->iteration = iteration;
-	getOptions()->learningRule1->tryCounter = tryCounter;
-	getOptions()->learningRule2->tryCounter = tryCounter;
 	log("lr1: ", LL_MEDIUM);
 	bool successfull = getOptions()->learningRule1->doIteration();
 	if (!successfull)
@@ -64,5 +63,5 @@ void BipartiteEvolutionLearningRule::initializeTry()
 
 bool BipartiteEvolutionLearningRule::hasLearningSucceeded()
 {
-	return tryCounter > 1;
+	return learningState->tries > 1;
 }

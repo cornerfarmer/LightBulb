@@ -16,13 +16,13 @@ LearningRuleAnalyser::LearningRuleAnalyser(LearningRuleAnalyserOptions &options_
 bool LearningRuleAnalyser::pairCompareBySuccessful(const std::pair<LearningState, std::string>& firstElem, const std::pair<LearningState, std::string>& secondElem)
 {
 	// Prefer learingResults which were more successful and only consider speed if the successful values are equal
-	return firstElem.first.successful > secondElem.first.successful || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
+	return firstElem.first.successful > secondElem.first.successful || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterations < secondElem.first.iterations);
 }
 
 bool LearningRuleAnalyser::pairCompareByQuality(const std::pair<LearningState, std::string>& firstElem, const std::pair<LearningState, std::string>& secondElem)
 {
 	// Prefer learingResults which were more successful and only consider speed if the successful values are equal
-	return firstElem.first.quality > secondElem.first.quality || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterationsNeeded < secondElem.first.iterationsNeeded);
+	return firstElem.first.quality > secondElem.first.quality || (firstElem.first.successful == secondElem.first.successful && firstElem.first.iterations < secondElem.first.iterations);
 }
 
 
@@ -66,7 +66,7 @@ void LearningRuleAnalyser::execute()
 			std::cout << summaryResult.successful << "/" << options->calculationsPerParameterCombination << " successful after ";
 		else
 			std::cout << std::fixed << std::setprecision(5) << (summaryResult.quality / options->calculationsPerParameterCombination) << " average quality after ";
-		std::cout << summaryResult.iterationsNeeded / options->calculationsPerParameterCombination << " iterations";
+		std::cout << summaryResult.iterations / options->calculationsPerParameterCombination << " iterations";
 		std::cout << std::endl;
 		// Switch to the next parameter combination as long as we have not tested all yet
 	} while (!switchToNextValueCombination());
@@ -78,7 +78,7 @@ void LearningRuleAnalyser::execute()
 	int place = 1;
 	for (auto combination = combinations.begin(); combination != combinations.end() && place <= 3; combination++, place++)
 	{
-		std::cout << place << ". " << combination->second << ": " << combination->first.successful << "/" << options->calculationsPerParameterCombination << " successful after " << combination->first.iterationsNeeded / options->calculationsPerParameterCombination << " iterations" << std::endl;
+		std::cout << place << ". " << combination->second << ": " << combination->first.successful << "/" << options->calculationsPerParameterCombination << " successful after " << combination->first.iterations / options->calculationsPerParameterCombination << " iterations" << std::endl;
 	}
 
 }

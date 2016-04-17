@@ -21,6 +21,7 @@ private:
 public:
 	SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, SharedSamplingCombiningStrategy* otherCombiningStrategy_ = NULL);
 	void setOtherCombiningStrategy(SharedSamplingCombiningStrategy* otherCombiningStrategy_);
+	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
 
 #endif

@@ -13,6 +13,11 @@ TournamentCombiningStrategy::TournamentCombiningStrategy()
 	cachedObjects.reset(new std::vector<AbstractEvolutionObject*>());
 }
 
+int TournamentCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
+{
+	throw std::logic_error("Not yet implemented.");
+}
+
 void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 {
 	for (int i = 0; i < 4; i++)

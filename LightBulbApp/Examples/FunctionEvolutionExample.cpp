@@ -95,7 +95,3 @@ std::string FunctionEvolutionExample::getLearningRuleName()
 	return EvolutionLearningRule::getName();
 }
 
-std::vector<std::string> FunctionEvolutionExample::getDataSetLabels()
-{
-	return EvolutionLearningRule::getDataSetLabels();
-}

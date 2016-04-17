@@ -15,7 +15,7 @@ void serialize(Archive& archive, LearningState& learningState)
 {
 	archive(cereal::make_nvp("dataSaveInterval", learningState.dataSaveInterval));
 	archive(cereal::make_nvp("dataSets", learningState.dataSets));
-	archive(cereal::make_nvp("iterationsNeeded", learningState.iterationsNeeded));
+	archive(cereal::make_nvp("iterationsNeeded", learningState.iterations));
 	archive(cereal::make_nvp("quality", learningState.quality));
 	archive(cereal::make_nvp("successful", learningState.successful)); 
 	archive(cereal::make_nvp("tries", learningState.tries));
@@ -33,7 +33,7 @@ namespace cereal
 			construct(dataSaveInterval);
 
 			ar(cereal::make_nvp("dataSets", construct->dataSets));
-			ar(cereal::make_nvp("iterationsNeeded", construct->iterationsNeeded));
+			ar(cereal::make_nvp("iterationsNeeded", construct->iterations));
 			ar(cereal::make_nvp("quality", construct->quality));
 			ar(cereal::make_nvp("successful", construct->successful));
 			ar(cereal::make_nvp("tries", construct->tries));

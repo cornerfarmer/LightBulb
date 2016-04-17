@@ -91,8 +91,3 @@ std::string NetworkEvolutionExample::getLearningRuleName()
 {
 	return EvolutionLearningRule::getName();
 }
-
-std::vector<std::string> NetworkEvolutionExample::getDataSetLabels()
-{
-	return EvolutionLearningRule::getDataSetLabels();
-}

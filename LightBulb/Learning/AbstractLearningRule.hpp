@@ -47,10 +47,6 @@ private:
 	bool pauseRequest;
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
-	// Holds the current iteration
-	unsigned int iteration;
-	// Holds the current try number
-	unsigned int tryCounter;
 
 	std::unique_ptr<LearningState> learningState;
 
@@ -87,7 +83,7 @@ public:
 
 	LearningState* getLearningState();
 
-	static std::vector<std::string> getDataSetLabels();
+	virtual std::vector<std::string> getDataSetLabels();
 };
 
 #include "IO/AbstractLearningRuleIO.hpp"

@@ -68,7 +68,7 @@ public:
 	// Executes the learning process
 	void initializeTry();
 	static std::string getName();
-	static std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels();
 
 };
 

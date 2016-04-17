@@ -34,6 +34,7 @@ EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions* optio
 void EvolutionLearningRule::setLoggerToUsedObjects()
 {
 	getOptions()->world->setLogger(options->logger);
+	getOptions()->world->setLearningState(learningState.get());
 
 	for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
 		(*reuseCommand)->setLogger(options->logger);
@@ -115,18 +116,20 @@ std::vector<std::string> EvolutionLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 	labels.push_back(DATA_SET_FITNESS);
+	std::vector<std::string> worldLabels = getOptions()->world->getDataSetLabels();
+	labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
 	return labels;
 }
 
 bool EvolutionLearningRule::doIteration()
 {
-	if (iteration - 1 > 0)
-		learningState->addData(DATA_SET_FITNESS, tryCounter, iteration - 1, getOptions()->world->getHighscoreList()->front().first);
+	if (getOptions()->world->getEvolutionObjects()->size() > 0)
+		learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 
 	// Reset the world for the next generation
 	getOptions()->world->reset();
 
-	log("------------- Generation " + std::to_string(iteration) + " -----------------", LL_LOW);
+	log("------------- Generation " + std::to_string(learningState->iterations) + " -----------------", LL_LOW);
 
 	if (getOptions()->world->getEvolutionObjects()->size()>0) {
 		// Extract all current objects ordered by their score
@@ -184,8 +187,8 @@ bool EvolutionLearningRule::doIteration()
 
 	// 2. Step: Execute the simulation and try to rate the evolution objects
 	if (getOptions()->world->doSimulationStep()) {
-		log(std::to_string(iteration) + " generations", LL_HIGH);
-		iteration = 0;
+		log(std::to_string(learningState->iterations) + " generations", LL_HIGH);
+		learningState->iterations = 0;
 		return true;
 	}
 
@@ -218,7 +221,7 @@ bool EvolutionLearningRule::doIteration()
 	}
 
 	// Continue with the next generation
-	iteration++;
+	learningState->iterations++;
 
 	return true;
 }
@@ -230,6 +233,6 @@ EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions()
 
 void EvolutionLearningRule::doCalculationAfterLearningProcess()
 {
-	learningState->addData(DATA_SET_FITNESS, tryCounter, iteration - 1, getOptions()->world->getHighscoreList()->front().first);
+	learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 }
 

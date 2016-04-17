@@ -15,7 +15,6 @@ public:
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();
-	std::vector<std::string> getDataSetLabels();
 };
 
 USE_PARENT_SERIALIZATION(NatureEvolutionExample, AbstractLearningRuleTrainingPlan);

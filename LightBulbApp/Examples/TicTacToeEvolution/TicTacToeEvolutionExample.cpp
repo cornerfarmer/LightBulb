@@ -160,11 +160,6 @@ std::string TicTacToeEvolutionExample::getLearningRuleName()
 	return BipartiteEvolutionLearningRule::getName();
 }
 
-std::vector<std::string> TicTacToeEvolutionExample::getDataSetLabels()
-{
-	return BipartiteEvolutionLearningRule::getDataSetLabels();
-}
-
 TicTacToe* TicTacToeEvolutionExample::getTicTacToeWorld()
 {
 	return ticTacToe1;

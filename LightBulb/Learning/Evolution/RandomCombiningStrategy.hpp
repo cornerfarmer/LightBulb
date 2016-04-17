@@ -17,6 +17,7 @@ private:
 	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:
 	RandomCombiningStrategy(int amountOfCompetitionsPerObject_);
+	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
 
 #endif

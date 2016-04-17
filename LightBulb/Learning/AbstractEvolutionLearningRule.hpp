@@ -23,7 +23,7 @@ protected:
 public:
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
-	static std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels();
 };
 
 USE_PARENT_SERIALIZATION(AbstractEvolutionLearningRule, AbstractLearningRule);

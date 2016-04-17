@@ -17,6 +17,7 @@ class RoundRobinCombiningStrategy : public AbstractCombiningStrategy
 private:
 	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:
+	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
 
 #endif

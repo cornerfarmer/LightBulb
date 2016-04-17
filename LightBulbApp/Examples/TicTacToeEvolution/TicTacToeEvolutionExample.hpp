@@ -20,7 +20,6 @@ public:
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();
-	std::vector<std::string> getDataSetLabels();
 	TicTacToe* getTicTacToeWorld();
 };
 

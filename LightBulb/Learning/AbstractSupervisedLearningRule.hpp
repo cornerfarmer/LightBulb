@@ -118,7 +118,7 @@ public:
 	AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions& options_);
 	AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions* options_);
 
-	static std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels();
 };
 
 #include "IO/AbstractSupervisedLearningRuleIO.hpp"

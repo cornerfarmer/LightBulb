@@ -27,7 +27,7 @@ bool AbstractLearningRule::start()
 	initializeStartLearningAlgoritm();
 
 	// Reset all counter
-	tryCounter = 0;
+	learningState->tries = 0;
 		
 	return learn(false);
 }
@@ -44,19 +44,19 @@ bool AbstractLearningRule::learn(bool resume)
 			learningState->addTry();
 
 			// Reset the iteration counter
-			iteration = 0;
+			learningState->iterations = 0;
 
 			// Initialize a new try
 			initializeTry();
 
 			// If debug is enabled, print every n-th iteration a short debug info
-			log("Start Try: " + std::to_string(tryCounter), LL_HIGH);
+			log("Start Try: " + std::to_string(learningState->tries - 1), LL_HIGH);
 			resume = false;
 		}
 		rateLearning();
 
 		// Do while the totalError is not zero
-		while (!hasLearningSucceeded() && iteration++ < options->maxIterationsPerTry)
+		while (!hasLearningSucceeded() && learningState->iterations++ < options->maxIterationsPerTry)
 		{
 			bool successful = doIteration();
 			if (!successful)
@@ -70,12 +70,10 @@ bool AbstractLearningRule::learn(bool resume)
 
 			rateLearning();
 		}
-		tryCounter++;
-	} while (!hasLearningSucceeded() && tryCounter < options->maxTries);
-	tryCounter--;
+	} while (!hasLearningSucceeded() && learningState->tries < options->maxTries);
 
 	if (hasLearningSucceeded())
-		log("Try (No. " + std::to_string(tryCounter) + ", " + std::to_string(iteration) + " iterations needed) was successful", LL_HIGH);
+		log("Try (No. " + std::to_string(learningState->tries - 1) + ", " + std::to_string(learningState->iterations) + " iterations needed) was successful", LL_HIGH);
 	else
 		log("All tries failed => stop learning", LL_HIGH);
 

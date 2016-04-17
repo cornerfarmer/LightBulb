@@ -27,3 +27,14 @@ std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> Abstra
 	std::sort(list->begin(), list->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	return list;
 }
+
+std::vector<std::string> AbstractEvolutionWorld::getDataSetLabels()
+{
+	std::vector<std::string> labels;
+	return labels;
+}
+
+void AbstractEvolutionWorld::setLearningState(LearningState* learningState_)
+{
+	learningState = learningState_;
+}

@@ -35,7 +35,7 @@ public:
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
 	static std::string getName();
-	static std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels();
 };
 
 #endif

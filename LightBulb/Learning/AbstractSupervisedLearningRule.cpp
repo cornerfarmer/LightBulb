@@ -46,10 +46,10 @@ void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 
 bool AbstractSupervisedLearningRule::doIteration()
 {
-	learningState->addData(DATA_SET_TRAINING_ERROR, tryCounter, iteration - 1, totalError);
+	learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
 
 	// If its not the first iteration and the learning process has stopped, skip that try
-	if (iteration > 1 && learningHasStopped())
+	if (learningState->iterations > 1 && learningHasStopped())
 	{
 		// If debug is enabled, print a short debug info
 		log("Skip that try (learning has stopped with totalError: " + std::to_string(totalError) + ")", LL_MEDIUM);
@@ -57,7 +57,7 @@ bool AbstractSupervisedLearningRule::doIteration()
 	}
 
 	// If we had more iterations than minIterationsPerTry and the totalError is still greater than the maxTotalErrorValue, skip that try
-	if (iteration > getOptions()->minIterationsPerTry && totalError > getOptions()->maxTotalErrorValue)
+	if (learningState->iterations > getOptions()->minIterationsPerTry && totalError > getOptions()->maxTotalErrorValue)
 	{
 		// If debug is enabled, print a short debug info
 		log("Skip that try (totalError: " + std::to_string(totalError) + " > " + std::to_string(getOptions()->maxTotalErrorValue) + ")", LL_MEDIUM);
@@ -65,9 +65,9 @@ bool AbstractSupervisedLearningRule::doIteration()
 	}
 
 	// If debug is enabled, print every n-th iteration a short debug info
-	if (iteration % options->debugOutputInterval == 0)
+	if (learningState->iterations % options->debugOutputInterval == 0)
 	{
-		log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(iteration) + " " + printDebugOutput(), LL_LOW);
+		log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(learningState->iterations) + " " + printDebugOutput(), LL_LOW);
 	}
 
 	// If offlineLearning is activated, reset the offlineLearningGradients
@@ -173,7 +173,7 @@ void AbstractSupervisedLearningRule::initializeLearningAlgoritm()
 
 void AbstractSupervisedLearningRule::doCalculationAfterLearningProcess()
 {
-	learningState->addData(DATA_SET_TRAINING_ERROR, tryCounter, iteration - 1, totalError);
+	learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
 }
 
 bool AbstractSupervisedLearningRule::hasLearningSucceeded()

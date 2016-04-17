@@ -17,9 +17,8 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 }
 
 TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
-	: AbstractCoevolutionWorld(combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
+	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
-	isParasiteWorld = isParasiteWorld_;
 	fields.resize(3);
 	for (int x = 0; x < fields.size(); x++)
 	{

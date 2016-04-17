@@ -9,6 +9,7 @@
 
 // Includes
 #include <Logging/AbstractLoggable.hpp>
+#include <Learning/LearningState.hpp>
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -20,8 +21,11 @@ class AbstractEvolutionWorld : public AbstractLoggable
 {
 private:
 	static bool compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y);
+protected:
+	LearningState* learningState;
 public:
-	virtual ~AbstractEvolutionWorld() {};
+	virtual ~AbstractEvolutionWorld() {}
+		
 	virtual std::vector<AbstractEvolutionObject*>* getEvolutionObjects() = 0;
 	virtual void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects) = 0;
 	// This method should create a new evolution object and add it to the world
@@ -38,6 +42,10 @@ public:
 	virtual void initializeForLearning() {};
 	// Reset the whole world (This method can for instance reset the environment or the current evolution objects...)
 	virtual void reset() = 0;
+
+	virtual std::vector<std::string> getDataSetLabels();
+
+	void setLearningState(LearningState* learningState_);
 };
 
 #endif

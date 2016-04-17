@@ -22,7 +22,8 @@ private:
 	void processLevel(AbstractCoevolutionWorld* world);
 	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:	
-	TournamentCombiningStrategy();	
+	TournamentCombiningStrategy();
+	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
 
 #endif

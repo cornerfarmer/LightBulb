@@ -13,6 +13,9 @@
 
 // Forward declarations
 
+#define DATASET_AVG_WINS "Average wins"
+#define DATASET_PARASITE_PREFIX "Parasite - "
+
 class AbstractCoevolutionWorld : public AbstractSimpleEvolutionWorld
 {
 private:
@@ -22,13 +25,15 @@ private:
 	std::unique_ptr<AbstractCombiningStrategy> combiningStrategy;
 	std::map<AbstractEvolutionObject*, double> fitnessValues;
 protected:
+	bool isParasiteWorld;
 public:
-	AbstractCoevolutionWorld(AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	bool doSimulationStep(); 
 	double getScore(AbstractEvolutionObject* object);
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
 	virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; };
 	void setLogger(AbstractLogger* logger_);
+	std::vector<std::string> getDataSetLabels();
 };
 
 #endif

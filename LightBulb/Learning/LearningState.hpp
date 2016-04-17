@@ -23,7 +23,7 @@ public:
 
 	double quality;
 	// How many iterations were needed
-	int iterationsNeeded;
+	int iterations;
 
 	int tries;
 
@@ -32,17 +32,17 @@ public:
 	{
 		successful = 0;
 		quality = 0;
-		iterationsNeeded = 0;
+		iterations = 0;
 		tries = 0;
 		dataSaveInterval = dataSaveInterval_;
 	}
 
-	void addData(std::string dataSetLabel, int tryNumber, int iteration, double data)
+	void addData(std::string dataSetLabel, double data)
 	{
-		if (iteration % dataSaveInterval == 0)
+		if ((iterations - 1) % dataSaveInterval == 0)
 		{
-			dataSets[tryNumber][dataSetLabel].push_back(iteration);
-			dataSets[tryNumber][dataSetLabel].push_back(data);
+			dataSets[tries - 1][dataSetLabel].push_back(iterations - 1);
+			dataSets[tries - 1][dataSetLabel].push_back(data);
 			throwEvent(EVT_LS_DS_CHANGED, this);
 		}
 	}
