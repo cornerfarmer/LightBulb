@@ -111,6 +111,13 @@ void TicTacToe::stopStepMode()
 	}
 }
 
+std::vector<std::string> TicTacToe::getDataSetLabels()
+{
+	auto labels = AbstractCoevolutionWorld::getDataSetLabels();
+	labels.push_back(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING);
+	return labels;
+}
+
 void TicTacToe::nextStep()
 {
 	if (stepMode)
@@ -285,6 +292,8 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 	}
 
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
+	learningState->addData(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, (double)wins / possibleGames);
+
 	return wins;
 }
 

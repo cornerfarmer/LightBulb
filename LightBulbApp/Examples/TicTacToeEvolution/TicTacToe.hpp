@@ -24,6 +24,8 @@ enum TicTacToeEvents
 	EVT_FIELD_CHANGED
 };
 
+#define DATASET_TICTACTOE_RATING "TicTacToe rating"
+
 class TicTacToe : public AbstractCoevolutionWorld, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
 {
 protected:
@@ -69,6 +71,7 @@ public:
 	std::vector<std::vector<int>>* getFields();
 	void startStepMode();
 	void stopStepMode();
+	std::vector<std::string> getDataSetLabels();
 	void nextStep();
 };
 
