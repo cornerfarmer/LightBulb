@@ -17,7 +17,7 @@ private:
 public:
 	GaussianRBFFunction(Eigen::VectorXd* widths_);
 	// Inherited:
-	void execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs);
+	void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs);
 	double execute(double input);
 	double executeDerivation(double input);
 	AbstractActivationFunction* getActivationFunctionCopy();

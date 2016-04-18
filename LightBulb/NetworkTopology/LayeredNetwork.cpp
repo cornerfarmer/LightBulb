@@ -64,35 +64,61 @@ void LayeredNetwork::buildNetwork()
 		for (unsigned int i = 0; i < options->neuronsPerLayerCount.back(); i++)
 			options->outputNeuronsIndices.push_back(i);
 	}
+
 	layerOffsets.resize(options->neuronsPerLayerCount.size() + 1);
+	int totalNeuronCount = 0;
+	for (int l = 0; l < getLayerCount(); l++)
+	{
+		layerOffsets[l] = totalNeuronCount;
+		totalNeuronCount += options->neuronsPerLayerCount[l];
+	}
+	layerOffsets[getLayerCount()] = totalNeuronCount;
+
 	// Clear all neurons
 	netInputs.clear();
-	activations.clear();
 	weights.clear();
 	weights.resize(getLayerCount() - 1);
 	activations.resize(getLayerCount());
 	netInputs.resize(getLayerCount());
 	neuronDescriptionsPerLayer.resize(getLayerCount());
-	int totalNeuronCount = 0;
+	if (options->enableShortcuts)
+	{
+		activations = Eigen::VectorXd(totalNeuronCount + options->useBiasNeuron);
+		if (options->useBiasNeuron) {
+			activations(0) = 1;
+		}
+	}
+	else
+	{
+		activations = Eigen::VectorXd(totalNeuronCount + options->useBiasNeuron * getLayerCount());
+		if (options->useBiasNeuron) {
+			for (int l = 0; l < getLayerCount(); l++)
+				activations(l + layerOffsets[l]) = 1;
+		}
+	}
 	for (int l = 0; l < getLayerCount(); l++)
 	{
-		layerOffsets[l] = totalNeuronCount;
 		netInputs[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l]);
-		activations[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l] + options->useBiasNeuron);
-		if (options->useBiasNeuron) {
-			activations[l](options->neuronsPerLayerCount[l]) = 1;
+		if (options->enableShortcuts)
+		{
+			activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron + layerOffsets[l], options->neuronsPerLayerCount[l]));
+			activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, layerOffsets[l + 1]));
+		}
+		else
+		{
+			activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron * (l + 1) + layerOffsets[l], options->neuronsPerLayerCount[l]));
+			activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron * l + layerOffsets[l], options->neuronsPerLayerCount[l] + options->useBiasNeuron));
 		}
 		if (l > 0)
 		{
-			weights[l - 1] = Eigen::MatrixXd::Zero(options->neuronsPerLayerCount[l], options->neuronsPerLayerCount[l - 1] + options->useBiasNeuron);
+			weights[l - 1] = Eigen::MatrixXd::Zero(activationsPerLayerIn[l].size(), activationsPerLayerOut[l - 1].size());
 		}
 		if (l == getLayerCount() - 1)
 			neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createOutputNeuronDescription());
 		else 
 			neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createInnerNeuronDescription());
-		totalNeuronCount += options->neuronsPerLayerCount[l];
 	}
-	layerOffsets[getLayerCount()] = totalNeuronCount;
+	
 	
 }
 
@@ -123,7 +149,7 @@ AbstractActivationFunction* LayeredNetwork::getInnerActivationFunction()
 
 Eigen::VectorXd LayeredNetwork::getActivationVector(int layerIndex)
 {
-	return activations[layerIndex];
+	return activationsPerLayerOut[layerIndex];
 }
 
 Eigen::MatrixXd LayeredNetwork::getAfferentWeightsPerLayer(int layerIndex)
@@ -151,7 +177,7 @@ int LayeredNetwork::getAfferentEdgeCount(int layerIndex, int neuronIndex)
 
 double LayeredNetwork::getPrevNeuronActivation(int layerIndex, int neuronIndex, int edgeIndex)
 {
-	return activations[layerIndex - 1][edgeIndex];
+	return activationsPerLayerOut[layerIndex - 1][edgeIndex];
 }
 
 double LayeredNetwork::getWeight(int layerIndex, int neuronIndex, int edgeIndex)
@@ -228,9 +254,9 @@ std::vector<Eigen::MatrixXd>* LayeredNetwork::getWeights()
 	return &weights;
 }
 
-std::vector<Eigen::VectorXd>* LayeredNetwork::getActivations()
+std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* LayeredNetwork::getActivations()
 {
-	return &activations;
+	return &activationsPerLayerOut;
 }
 
 std::vector<Eigen::VectorXd>* LayeredNetwork::getNetInputs()
@@ -266,12 +292,21 @@ int LayeredNetwork::getEdgeCount()
 
 void LayeredNetwork::resetActivation()
 {
-	for (auto layer = activations.begin(); layer != activations.end(); layer++)
+	if (options->enableShortcuts)
 	{
-		for (auto i = 0; i != layer->rows() - 1; i++)
+		for (auto i = 1; i != activations.rows(); i++)
 		{
-			(*layer)(i) = 0;
+			activations(i) = 0;
 		}
+	}
+	else
+	{
+		for (auto i = 0; i != activations.rows(); i++)
+		{
+			activations(i) = 0;
+		}
+		for (int l = 0; l < getLayerCount(); l++)
+			activations(l + layerOffsets[l]) = 1;
 	}
 }
 
@@ -330,7 +365,7 @@ void LayeredNetwork::getOutput(std::vector<std::pair<bool, double>> &outputVecto
 	int outputVectorIndex = 0;
 	for (auto outputNeuronIndex = options->outputNeuronsIndices.begin(); outputNeuronIndex != options->outputNeuronsIndices.end(); outputNeuronIndex++)
 	{
-		outputVector[outputVectorIndex++] = std::make_pair(true, activations.back()(*outputNeuronIndex));
+		outputVector[outputVectorIndex++] = std::make_pair(true, activationsPerLayerIn.back()(*outputNeuronIndex));
 	}
 }
 
@@ -338,20 +373,20 @@ void LayeredNetwork::setInput(std::vector<std::pair<bool, double>> &inputVector)
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		activations[0](i) = inputVector[i].second;
+		activationsPerLayerIn[0](i) = inputVector[i].second;
 	}
 }
 
 void LayeredNetwork::getOutput(std::vector<double> &outputVector)
 {
-	outputVector.assign(activations.back().data(), activations.back().data() + outputVector.size());
+	outputVector.assign(activationsPerLayerIn.back().data(), activationsPerLayerIn.back().data() + outputVector.size());
 }
 
 void LayeredNetwork::setInput(std::vector<double> &inputVector)
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		activations.front()(i) = inputVector[i];
+		activationsPerLayerIn.front()(i) = inputVector[i];
 	}
 }
 
@@ -377,12 +412,12 @@ void LayeredNetwork::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 
 void LayeredNetwork::refreshNetInputsForLayer(int layerNr)
 {
-	neuronDescriptionsPerLayer[layerNr]->getInputFunction()->execute(layerNr, activations, netInputs, weights);
+	neuronDescriptionsPerLayer[layerNr]->getInputFunction()->execute(layerNr, activationsPerLayerOut, netInputs, weights);
 }
 
 void LayeredNetwork::refreshActivationsForLayer(int layerNr)
 {
-	neuronDescriptionsPerLayer[layerNr]->getActivationFunction()->execute(layerNr, activations, netInputs);
+	neuronDescriptionsPerLayer[layerNr]->getActivationFunction()->execute(layerNr, activationsPerLayerIn, netInputs);
 }
 
 

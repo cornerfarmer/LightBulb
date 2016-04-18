@@ -18,7 +18,6 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 {
 	auto results = combiningStrategy->execute(this);
 
-	log(std::to_string(results.size() * results.begin()->second.size()), LL_HIGH);
 
 	if (results.size() > 0)
 		learningState->addData(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(this));

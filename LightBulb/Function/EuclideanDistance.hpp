@@ -16,7 +16,7 @@ class EuclideanDistance : public AbstractInputFunction
 private:
 public:
 	// Calculates sqrt( Σ (output - center)^2 )
-	void execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights);
+	void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights);
 	// Inherited:
 	AbstractInputFunction* getInputFunctionCopy();
 };

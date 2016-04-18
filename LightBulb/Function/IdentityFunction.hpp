@@ -15,7 +15,7 @@ private:
 public:
 	// Inherited: 
 	double execute(double input);
-	void execute(int layerNr, std::vector<Eigen::VectorXd> &activations, std::vector<Eigen::VectorXd> &netInputs);
+	void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs);
 	double executeDerivation(double input);
 	AbstractOutputFunction* getOutputFunctionCopy();
 	AbstractActivationFunction* getActivationFunctionCopy();

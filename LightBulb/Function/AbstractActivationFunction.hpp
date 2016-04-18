@@ -18,7 +18,7 @@ private:
 public:
 	virtual ~AbstractActivationFunction() {}
 	// Calculate the activation from the given input
-	virtual void execute(int layerNr, std::vector<Eigen::VectorXd> &activations, std::vector<Eigen::VectorXd> &netInputs);
+	virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs);
 
 	virtual double execute(double input) = 0;
 	// Calculate the derivated activation from the given input

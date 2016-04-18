@@ -47,7 +47,11 @@ protected:
 	//
 	std::vector<Eigen::VectorXd> netInputs;
 	//
-	std::vector<Eigen::VectorXd> activations;
+	Eigen::VectorXd activations;
+	
+	std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerOut;
+
+	std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerIn;
 
 	std::vector<Eigen::MatrixXd> weights;
 
@@ -124,7 +128,7 @@ public:
 
 	std::vector<Eigen::MatrixXd>* getWeights();
 
-	std::vector<Eigen::VectorXd>* getActivations();
+	std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getActivations();
 
 	std::vector<Eigen::VectorXd>* getNetInputs();
 
