@@ -167,6 +167,8 @@ public:
 	void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights);
 
 	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex);
+
+	bool usesBiasNeuron();
 };
 
 #include "IO/LayeredNetworkIO.hpp"

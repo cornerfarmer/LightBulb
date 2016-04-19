@@ -86,9 +86,9 @@ void BackpropagationLearningRule::initializeLayerCalculation(AbstractTeachingLes
 	else
 	{
 		Eigen::VectorXd nextLayerErrorValueFactor = getCurrentNetworkTopology()->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
-		nextLayerErrorValueFactor.conservativeResize(nextLayerErrorValueFactor.rows() - 1);
+
 		// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-		deltaVectorOutputLayer[layerIndex] = (getCurrentNetworkTopology()->getInnerActivationFunction()->executeDerivation(getCurrentNetworkTopology()->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor.array();
+		deltaVectorOutputLayer[layerIndex] = (getCurrentNetworkTopology()->getInnerActivationFunction()->executeDerivation(getCurrentNetworkTopology()->getNetInputVector(layerIndex)).array() + getOptions()->flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - getCurrentNetworkTopology()->usesBiasNeuron()).array();
 	}	
 }
 

@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <Function/AbstractActivationFunction.hpp>
+#include <Function/AbstractActivationFunction.hpp>
 
 // Forward declarations
 class InputNeuron;
@@ -89,6 +90,7 @@ public:
 	virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) = 0;
 
 	virtual std::vector<Eigen::MatrixXd>* getWeights() = 0;
+	virtual bool usesBiasNeuron() = 0;
 };
 
 

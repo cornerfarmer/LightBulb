@@ -162,6 +162,11 @@ Eigen::MatrixXd LayeredNetwork::getEfferentWeightsPerLayer(int layerIndex)
 	return weights[layerIndex].transpose();
 }
 
+bool LayeredNetwork::usesBiasNeuron()
+{
+	return options->useBiasNeuron;
+}
+
 void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
 {
 	weights[layerIndex - 1] = newWeights;
