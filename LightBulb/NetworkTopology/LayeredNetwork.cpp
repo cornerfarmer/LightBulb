@@ -299,7 +299,7 @@ void LayeredNetwork::resetActivation()
 {
 	if (options->enableShortcuts)
 	{
-		for (auto i = 1; i != activations.rows(); i++)
+		for (auto i = options->useBiasNeuron; i != activations.rows(); i++)
 		{
 			activations(i) = 0;
 		}
@@ -310,8 +310,11 @@ void LayeredNetwork::resetActivation()
 		{
 			activations(i) = 0;
 		}
-		for (int l = 0; l < getLayerCount(); l++)
-			activations(l + layerOffsets[l]) = 1;
+		if (options->useBiasNeuron)
+		{
+			for (int l = 0; l < getLayerCount(); l++)
+				activations(l + layerOffsets[l]) = 1;
+		}
 	}
 }
 

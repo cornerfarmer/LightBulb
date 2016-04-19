@@ -140,6 +140,8 @@ TEST_F(ConstantRecombinationCommandTest, executeWithTwoMultipleUsedObjectsAndANo
 
 	EXPECT_CALL(*recombinationAlgorithm, execute(&unusedObject, selectedObjects[0])).Times(1);
 
+	EXPECT_CALL(unusedObject, copyPropertiesFrom(selectedObjects[1])).Times(1);
+
 	constantRecombinationCommand->execute(&newObjectVector, &counter, &notUsedObjects);
 
 	EXPECT_EQ(1, newObjectVector.size());

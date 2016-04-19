@@ -100,6 +100,8 @@ TEST_F(ConstantMutationCommandTest, executeWithTwoMultipleUsedObjectsAndANotUsed
 
 	EXPECT_CALL(*mutationAlgorithm, execute(&unusedObject)).Times(1);
 
+	EXPECT_CALL(unusedObject, copyPropertiesFrom(selectedObjects[0])).Times(1);
+
 	constantMutationCommand->execute(&newObjectVector, &counter, &notUsedObjects);
 
 	EXPECT_EQ(1, newObjectVector.size());

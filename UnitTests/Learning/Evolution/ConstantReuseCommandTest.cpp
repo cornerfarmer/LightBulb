@@ -91,6 +91,8 @@ TEST_F(ConstantReuseCommandTest, executeWithTwoMultipleUsedObjectsAndANotUsedObj
 	counter[selectedObjects[0]] = 2;
 	MockEvolutionObject unusedObject;
 	notUsedObjects.push_back(&unusedObject);
+
+	EXPECT_CALL(unusedObject, copyPropertiesFrom(selectedObjects[0])).Times(1);
 	
 	constantReuseCommand->execute(&newObjectVector, &counter, &notUsedObjects);
 

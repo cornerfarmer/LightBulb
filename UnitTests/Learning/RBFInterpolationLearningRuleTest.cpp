@@ -52,6 +52,8 @@ public:
 		options.maxTotalErrorValue = 10;
 		options.maxTries = 1;
 		options.neuronPlacer = new KMeansRBFNeuronPlacer();
+		options.neuralNetwork = neuralNetwork;
+		options.teacher = teacher;
 
 		return options;
 	}
@@ -98,7 +100,7 @@ TEST_F(RBFInterpolationLearningRuleTest, doLearning)
 
 	rbfInterpolationLearningRule = new RBFInterpolationLearningRule(options);
 
-	EXPECT_EQ(true, rbfInterpolationLearningRule->start(*neuralNetwork, *teacher));
+	EXPECT_EQ(true, rbfInterpolationLearningRule->start());
 
 	assertTrainedNeuralNetwork();
 }

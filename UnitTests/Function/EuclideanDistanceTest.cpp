@@ -6,12 +6,13 @@ TEST(EuclideanDistance, computeNetInputs)
 {
 	EuclideanDistance function;
 	// 2 - 3 - 1 Network:
-	std::vector<Eigen::VectorXd> activations(3);
-	activations[0] = Eigen::VectorXd(3);
-	activations[0] << 1, 2, 1;
-	activations[1] = Eigen::VectorXd(4);
-	activations[1] << 1, 2, 3, 1;
-	activations[2] = Eigen::VectorXd(1);
+	Eigen::VectorXd activations(8);
+	std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayer;
+	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, 3));
+	activationsPerLayer[0] << 1, 2, 1;
+	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 3, 4));
+	activationsPerLayer[1] << 1, 2, 3, 1;
+	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 7, 1));
 
 	std::vector<Eigen::VectorXd> netInputs(3);
 	netInputs[0] = Eigen::VectorXd(2);
@@ -26,8 +27,8 @@ TEST(EuclideanDistance, computeNetInputs)
 	weights[1] = Eigen::MatrixXd(1, 4);
 	weights[1] << 1, 2, 3, 4;
 
-	function.execute(1, activations, netInputs, weights);
-	function.execute(2, activations, netInputs, weights);
+	function.execute(1, activationsPerLayer, netInputs, weights);
+	function.execute(2, activationsPerLayer, netInputs, weights);
 
 	std::vector<Eigen::VectorXd> expectedNetInputs(3);
 	expectedNetInputs[1] = Eigen::VectorXd(3);
