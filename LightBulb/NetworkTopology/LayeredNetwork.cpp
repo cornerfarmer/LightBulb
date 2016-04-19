@@ -102,7 +102,7 @@ void LayeredNetwork::buildNetwork()
 		if (options->enableShortcuts)
 		{
 			activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron + layerOffsets[l], options->neuronsPerLayerCount[l]));
-			activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, layerOffsets[l + 1]));
+			activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, layerOffsets[l + 1] + options->useBiasNeuron));
 		}
 		else
 		{
