@@ -9,13 +9,17 @@ class LayeredNetworkTest : public testing::Test {
 public:
 	LayeredNetwork* network;
 	void SetUp() {
+		
+	}
+
+	LayeredNetworkOptions getDefaultOptions()
+	{
 		LayeredNetworkOptions options;
 		options.neuronsPerLayerCount.push_back(2);
 		options.neuronsPerLayerCount.push_back(3);
 		options.neuronsPerLayerCount.push_back(1);
 		options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-
-		network = new LayeredNetwork(options);
+		return options;
 	}
 
 	virtual ~LayeredNetworkTest()
@@ -26,6 +30,9 @@ public:
 
 TEST_F(LayeredNetworkTest, createSimpleNetwork)
 {
+	LayeredNetworkOptions options = getDefaultOptions();
+	network = new LayeredNetwork(options);
+
 	auto netInputs = network->getNetInputs();
 	EXPECT_EQ(netInputs->size(), 3);
 	EXPECT_EQ((*netInputs)[0].rows(), 2);
@@ -44,4 +51,31 @@ TEST_F(LayeredNetworkTest, createSimpleNetwork)
 	EXPECT_EQ((*weights)[0].cols(), 3);
 	EXPECT_EQ((*weights)[1].rows(), 1);
 	EXPECT_EQ((*weights)[1].cols(), 4);
+}
+
+
+TEST_F(LayeredNetworkTest, createNetworkWithShortcuts)
+{
+	LayeredNetworkOptions options = getDefaultOptions();
+	options.enableShortcuts = true;
+	network = new LayeredNetwork(options);
+
+	auto netInputs = network->getNetInputs();
+	EXPECT_EQ(netInputs->size(), 3);
+	EXPECT_EQ((*netInputs)[0].rows(), 2);
+	EXPECT_EQ((*netInputs)[1].rows(), 3);
+	EXPECT_EQ((*netInputs)[2].rows(), 1);
+
+	auto activations = network->getActivations();
+	EXPECT_EQ(activations->size(), 3);
+	EXPECT_EQ((*activations)[0].rows(), 3);
+	EXPECT_EQ((*activations)[1].rows(), 6);
+	EXPECT_EQ((*activations)[2].rows(), 7);
+
+	auto weights = network->getWeights();
+	EXPECT_EQ(weights->size(), 2);
+	EXPECT_EQ((*weights)[0].rows(), 3);
+	EXPECT_EQ((*weights)[0].cols(), 3);
+	EXPECT_EQ((*weights)[1].rows(), 1);
+	EXPECT_EQ((*weights)[1].cols(), 6);
 }
