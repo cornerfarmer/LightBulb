@@ -12,7 +12,8 @@
 enum
 {
 	TOOLBAR_START_TRAINING,
-	TOOLBAR_PAUSE_TRAINING
+	TOOLBAR_PAUSE_TRAINING,
+	TOOLBAR_PREFERENCES
 };
 
 enum
@@ -349,9 +350,11 @@ wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
 	toolbar = new wxToolBar(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL);
 	toolbar->AddTool(TOOLBAR_START_TRAINING, "Start", wxArtProvider::GetBitmap(wxART_GO_FORWARD));
 	toolbar->AddTool(TOOLBAR_PAUSE_TRAINING, "Pause", wxArtProvider::GetBitmap(wxART_DELETE));
+	toolbar->AddTool(TOOLBAR_PREFERENCES, "Preferences", wxArtProvider::GetBitmap(wxART_EDIT));
 	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
 	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::startTraining), this, TOOLBAR_START_TRAINING);
 	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::pauseTraining), this, TOOLBAR_PAUSE_TRAINING);
+	toolbar->Bind(wxEVT_TOOL, wxCommandEventFunction(&TrainingWindow::showPreferences), this, TOOLBAR_PREFERENCES);
 	toolbar->Realize();
 	commandSizer->Add(toolbar);
 	commandSizer->SetSizeHints(panel);
@@ -580,6 +583,12 @@ void TrainingWindow::pauseTraining(wxCommandEvent& event)
 	{
 		controller->pauseTrainingPlan(processTrainingPlanSelection);
 	}
+}
+
+void TrainingWindow::showPreferences(wxCommandEvent& event)
+{
+	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
+	controller->openPreferences(trainingPlanPatternIndex);
 }
 
 void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)

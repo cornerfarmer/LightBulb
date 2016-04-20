@@ -8,7 +8,17 @@
 #include <Teaching/Teacher.hpp>
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
+#include <TrainingPlans/DoublePreference.hpp>
 
+
+#define PREFERENCE_LEARNINGRATE "Learning rate"
+#define PREFERENCE_MOMENTUM "Momentum"
+
+BackpropagationXorExample::BackpropagationXorExample()
+{
+	addPreference(new DoublePreference(PREFERENCE_LEARNINGRATE, 0.1, 0.0001, 2));
+	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
+}
 
 AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 {
@@ -33,14 +43,15 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.weightDecayFac = 0;
-	options.learningRate = 0.1;
-	options.momentum = 0;
+	options.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
+	options.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	options.resilientLearningRate = false;
 	options.teacher = teacher.get();
 	fillDefaultLearningRuleOptions(&options);
 
 	return new BackpropagationLearningRule(options);
 }
+
 
 AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 {

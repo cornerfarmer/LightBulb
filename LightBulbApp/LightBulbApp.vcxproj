@@ -168,8 +168,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractPreference.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractVariablePreference.cpp" />
+    <ClCompile Include="TrainingPlans\DoublePreference.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
     <ClCompile Include="Windows\AbstractSubApp.cpp" />
@@ -181,6 +184,8 @@
     <ClCompile Include="Windows\LoggerController.cpp" />
     <ClCompile Include="Windows\LoggerFactory.cpp" />
     <ClCompile Include="Windows\LoggerWindow.cpp" />
+    <ClCompile Include="Windows\PreferencesController.cpp" />
+    <ClCompile Include="Windows\PreferencesWindow.cpp" />
     <ClCompile Include="Windows\SimulatorController.cpp" />
     <ClCompile Include="Windows\SimulatorFactory.cpp" />
     <ClCompile Include="Windows\SimulatorWindow.cpp" />
@@ -234,8 +239,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractPreference.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractVariablePreference.hpp" />
+    <ClInclude Include="TrainingPlans\DoublePreference.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp" />
     <ClInclude Include="Windows\AbstractSubApp.hpp" />
@@ -247,6 +255,8 @@
     <ClInclude Include="Windows\LoggerController.hpp" />
     <ClInclude Include="Windows\LoggerFactory.hpp" />
     <ClInclude Include="Windows\LoggerWindow.hpp" />
+    <ClInclude Include="Windows\PreferencesController.hpp" />
+    <ClInclude Include="Windows\PreferencesWindow.hpp" />
     <ClInclude Include="Windows\SimulatorController.hpp" />
     <ClInclude Include="Windows\SimulatorFactory.hpp" />
     <ClInclude Include="Windows\SimulatorWindow.hpp" />

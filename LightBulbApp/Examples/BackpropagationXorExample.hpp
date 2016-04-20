@@ -22,6 +22,7 @@ protected:
 	AbstractNeuralNetwork* createNeuralNetwork();
 	AbstractLearningRule* createLearningRate();
 public:
+	BackpropagationXorExample();
 	std::string getName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();

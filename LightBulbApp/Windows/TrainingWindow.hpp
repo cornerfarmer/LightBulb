@@ -71,6 +71,7 @@ private:
 	int getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item);
 	void startTraining(wxCommandEvent& event);
 	void pauseTraining(wxCommandEvent& event);
+	void showPreferences(wxCommandEvent& event);
 	void processSelecionHasChanged(wxCommandEvent& event);
 	void addSubApp(wxCommandEvent& event);
 	void refreshNeuralNetworks(wxCommandEvent& event);

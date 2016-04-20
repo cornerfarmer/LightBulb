@@ -6,6 +6,7 @@
 // Includes
 #include <Event/Observable.hpp>
 #include <Logging/StorageLogger.hpp>
+#include "AbstractPreference.hpp"
 
 // Library includes
 #include <string>
@@ -46,6 +47,7 @@ private:
 	void runThread(bool initial);
 	bool threadShouldBeJoinedBeforeReuse;
 	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>> customSubApps;
+	std::vector<std::unique_ptr<AbstractPreference>> preferences;
 protected:
 	std::unique_ptr<StorageLogger> logger;
 	virtual void run(bool initial) = 0;
@@ -55,6 +57,9 @@ protected:
 	void finished();
 	virtual void initializeStart() {};
 	void addCustomSubApp(AbstractCustomSubAppFactory* customSubApp);
+	void addPreference(AbstractPreference* newPreference);
+	AbstractPreference* getPreference(std::string name);
+	double getDoublePreference(std::string name);
 public:
 	AbstractTrainingPlan();
 	void start();
@@ -72,6 +77,8 @@ public:
 	virtual LearningState* getLearningState() = 0;
 	StorageLogger* getLogger();
 	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
+
+	std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
 };
 
 #include "IO/AbstractTrainingPlanIO.hpp"

@@ -23,6 +23,7 @@ protected:
 	virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
 	void fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options);
 public:
+	AbstractSingleNNTrainingPlan();
 	void initializeStart();
 	AbstractNeuralNetwork* getNeuralNetwork();
 	virtual int getRequiredInputSize() = 0;

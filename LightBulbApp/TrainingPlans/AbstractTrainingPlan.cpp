@@ -1,10 +1,35 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <thread>
+#include "DoublePreference.hpp"
 
 void AbstractTrainingPlan::addCustomSubApp(AbstractCustomSubAppFactory* customSubApp)
 {
 	customSubApps.push_back(std::unique_ptr<AbstractCustomSubAppFactory>(customSubApp));
+}
+
+void AbstractTrainingPlan::addPreference(AbstractPreference* newPreference)
+{
+	preferences.push_back(std::unique_ptr<AbstractPreference>(newPreference));
+}
+
+AbstractPreference* AbstractTrainingPlan::getPreference(std::string name)
+{ 
+	for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
+	{
+		if ((*preference)->getName() == name)
+			return preference->get();
+	}
+	return NULL;
+}
+
+double AbstractTrainingPlan::getDoublePreference(std::string name)
+{
+	DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(name));
+	if (doublePreference)
+		return doublePreference->getValue();
+	else
+		return 0;
 }
 
 AbstractTrainingPlan::AbstractTrainingPlan()
@@ -58,6 +83,11 @@ AbstractTrainingPlan* AbstractTrainingPlan::getCopyForExecute()
 {
 	AbstractTrainingPlan* copy = getCopy();
 	copy->pattern = this;
+	copy->preferences.clear();
+	for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
+	{
+		copy->preferences.push_back(std::unique_ptr<AbstractPreference>((*preference)->getCopy()));
+	}
 	return copy;
 }
 
@@ -117,4 +147,9 @@ StorageLogger* AbstractTrainingPlan::getLogger()
 std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* AbstractTrainingPlan::getCustomSubApps()
 {
 	return &customSubApps;
+}
+
+std::vector<std::unique_ptr<AbstractPreference>>& AbstractTrainingPlan::getPreferences()
+{
+	return preferences;
 }

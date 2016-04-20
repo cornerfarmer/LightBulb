@@ -9,6 +9,11 @@ void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSuperv
 	options->neuralNetwork = network;
 }
 
+AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
+{
+	network = NULL;
+}
+
 void AbstractSingleNNTrainingPlan::initializeStart()
 {
 	if (network == NULL)
