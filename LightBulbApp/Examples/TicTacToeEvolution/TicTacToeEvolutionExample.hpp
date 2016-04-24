@@ -4,25 +4,31 @@
 #ifndef _TICTACTOEEVOLUTIONEXAMPLE_H_
 #define _TICTACTOEEVOLUTIONEXAMPLE_H_
 
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
 class TicTacToe;
+class SharedSamplingCombiningStrategy;
+class AbstractHallOfFameAlgorithm;
 
-class TicTacToeEvolutionExample : public AbstractEvolutionTrainingPlan
+class TicTacToeEvolutionExample : public AbstractCoevolutionTrainingPlan
 {
 private:
-	TicTacToe* ticTacToe1;
+	AbstractHallOfFameAlgorithm* hof1;
+	AbstractHallOfFameAlgorithm* hof2;
+	SharedSamplingCombiningStrategy* cs1;
+	SharedSamplingCombiningStrategy* cs2;
 protected:
 	AbstractLearningRule* createLearningRate();
+	AbstractEvolutionWorld* createWorld();
+	AbstractEvolutionWorld* createParasiteWorld();
 public:
 	TicTacToeEvolutionExample();
 	std::string getName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();
-	TicTacToe* getTicTacToeWorld();
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeEvolutionExample, AbstractEvolutionTrainingPlan);
+USE_PARENT_SERIALIZATION(TicTacToeEvolutionExample, AbstractCoevolutionTrainingPlan);
 
 #endif

@@ -12,19 +12,20 @@
 
 AbstractLearningRule* NatureEvolutionExample::createLearningRate()
 {
-	Nature* nature = new Nature();
-
 	EvolutionLearningRuleOptions options;
 	options.creationCommands.push_back(new ConstantCreationCommand(40));
 	options.selectionCommands.push_back(new BestSelectionCommand(5));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RemainderStochasticSamplingSelector(), 23));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 9));
-	options.world = nature;
 	fillDefaultLearningRuleOptions(&options);
 
 	return new EvolutionLearningRule(options);
 }
 
+AbstractEvolutionWorld* NatureEvolutionExample::createWorld()
+{
+	return new Nature();
+}
 
 std::string NatureEvolutionExample::getName()
 {

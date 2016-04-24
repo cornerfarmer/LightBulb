@@ -10,10 +10,9 @@ AbstractEvolutionObject* NetworkSimulator::createNewObject()
 	return new Network(this);
 }
 
-NetworkSimulator::NetworkSimulator(bool enableGraphics_, std::vector<std::vector<float>> consumers_)
+NetworkSimulator::NetworkSimulator(std::vector<std::vector<float>> consumers_)
 {
 	consumers = consumers_;
-	enableGraphics = enableGraphics_;
 	/*if (enableGraphics)
 	{
 		window.create(sf::VideoMode(800, 700), "LightBulb!");

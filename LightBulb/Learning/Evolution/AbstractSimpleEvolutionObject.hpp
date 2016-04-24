@@ -23,6 +23,8 @@ class AbstractNeuronDescriptionFactory;
 // Nevertheless this class can be used in the most of all cases.
 class AbstractSimpleEvolutionObject : public AbstractEvolutionObject
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractSimpleEvolutionObject& object);
 protected:
 	// The NN of the object
 	NeuralNetwork* neuralNetwork;

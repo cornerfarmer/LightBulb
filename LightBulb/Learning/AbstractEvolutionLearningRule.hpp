@@ -10,9 +10,15 @@
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
+class AbstractEvolutionWorld;
 
 struct AbstractEvolutionLearningRuleOptions : public AbstractLearningRuleOptions
 {
+	AbstractEvolutionWorld* world;
+	AbstractEvolutionLearningRuleOptions()
+	{
+		world = NULL;
+	}
 };
 
 // A LearningRule is used to improve a AbstractNeuralNetwork

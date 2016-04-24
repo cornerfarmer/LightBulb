@@ -4,12 +4,14 @@
 #define _NETWORKEVOLUTIONEXAMPLE_H_
 
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 class NetworkEvolutionExample : public AbstractEvolutionTrainingPlan
 {
 private:
 protected:
 	AbstractLearningRule* createLearningRate();
+	AbstractEvolutionWorld* createWorld();
 public:
 	std::string getName();
 	std::string getDescription();
@@ -17,6 +19,6 @@ public:
 	std::string getLearningRuleName();
 };
 
-USE_PARENT_SERIALIZATION(NetworkEvolutionExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(NetworkEvolutionExample, AbstractEvolutionTrainingPlan);
 
 #endif

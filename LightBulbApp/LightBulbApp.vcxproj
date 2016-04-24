@@ -164,6 +164,7 @@
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp" />
     <ClCompile Include="Repositories\NeuralNetworkRepository.cpp" />
     <ClCompile Include="Repositories\TrainingPlanRepository.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractCoevolutionTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -193,6 +194,7 @@
     <ClCompile Include="Windows\TrainingWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\LightBulb\IO\AbstractCoevolutionWorldIO.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -226,6 +228,8 @@
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
+    <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp" />
+    <ClInclude Include="IO\AbstractEvolutionTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
@@ -235,6 +239,7 @@
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="Repositories\TrainingPlanRepository.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractCoevolutionTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

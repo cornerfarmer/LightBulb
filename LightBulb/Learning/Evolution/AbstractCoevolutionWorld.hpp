@@ -18,10 +18,12 @@
 
 class AbstractCoevolutionWorld : public AbstractSimpleEvolutionWorld
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractCoevolutionWorld& world);
 private:
 	std::unique_ptr<AbstractCoevolutionFitnessFunction> fitnessFunction;
-	std::unique_ptr<AbstractHallOfFameAlgorithm> hallOfFameToAddAlgorithm;
-	std::unique_ptr<AbstractHallOfFameAlgorithm> hallOfFameToChallengeAlgorithm;
+	std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToAddAlgorithm;
+	std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToChallengeAlgorithm;
 	std::unique_ptr<AbstractCombiningStrategy> combiningStrategy;
 	std::map<AbstractEvolutionObject*, double> fitnessValues;
 protected:
@@ -35,5 +37,7 @@ public:
 	void setLogger(AbstractLogger* logger_);
 	std::vector<std::string> getDataSetLabels();
 };
+
+#include "IO/AbstractCoevolutionWorldIO.hpp"
 
 #endif

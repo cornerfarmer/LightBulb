@@ -39,13 +39,10 @@ struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOption
 	std::vector<AbstractRecombinationCommand*> recombinationCommands;
 	// Holds commands for directly reusing objects
 	std::vector<AbstractReuseCommand*> reuseCommands;
-	// The world which should contain all trained evolution objects
-	AbstractEvolutionWorld* world;
 	// Holds the score which should be reached after the learning process
 	double scoreGoal;
 	EvolutionLearningRuleOptions()
 	{
-		world = NULL;
 		scoreGoal = 0;
 		maxTries = 1;
 	}

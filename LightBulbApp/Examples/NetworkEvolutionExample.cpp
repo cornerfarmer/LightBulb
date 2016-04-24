@@ -29,6 +29,28 @@
 
 AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 {
+	
+
+	EvolutionLearningRuleOptions options;
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 20);
+	options.exitConditions.push_back(rateDifferenceCondition);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
+	options.creationCommands.push_back(constantCreationCommand);
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
+	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
+	options.selectionCommands.push_back(bestSelectionCommand);
+	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RemainderStochasticSamplingSelector(), 2.0);
+	options.mutationsCommands.push_back(constantMutationCommand);
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0));
+	options.scoreGoal = -10.47;
+	fillDefaultLearningRuleOptions(&options);
+
+	return new EvolutionLearningRule(options);
+}
+
+AbstractEvolutionWorld* NetworkEvolutionExample::createWorld()
+{
 	std::vector<std::vector<float>> consumers(8, std::vector<float>(2));
 	consumers[0][0] = 1;
 	consumers[0][1] = 1;
@@ -50,27 +72,8 @@ AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 	consumers[7][0] = 4;
 	consumers[7][1] = -1;
 
-	NetworkSimulator* simulator = new NetworkSimulator(false, consumers);
-
-	EvolutionLearningRuleOptions options;
-	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 20);
-	options.exitConditions.push_back(rateDifferenceCondition);
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
-	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
-	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
-	options.selectionCommands.push_back(bestSelectionCommand);
-	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RemainderStochasticSamplingSelector(), 2.0);
-	options.mutationsCommands.push_back(constantMutationCommand);
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0));
-	options.world = simulator;
-	options.scoreGoal = -10.47;
-	fillDefaultLearningRuleOptions(&options);
-
-	return new EvolutionLearningRule(options);
+	return new NetworkSimulator(false, consumers);
 }
-
 
 std::string NetworkEvolutionExample::getName()
 {

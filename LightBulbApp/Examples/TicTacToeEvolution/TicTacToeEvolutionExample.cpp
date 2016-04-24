@@ -96,19 +96,6 @@
 
 AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 {
-	SharedSamplingCombiningStrategy* cs1 = new SharedSamplingCombiningStrategy(100);
-	SharedSamplingCombiningStrategy* cs2 = new SharedSamplingCombiningStrategy(100, cs1);
-	cs1->setOtherCombiningStrategy(cs2);
-
-	AbstractHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(50);
-	AbstractHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(50);
-
-	ticTacToe1 = new TicTacToe(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
-	TicTacToe* ticTacToe2 = new TicTacToe(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
-	cs1->setSecondWorld(ticTacToe2);
-	cs2->setSecondWorld(ticTacToe1);
-
-	//ticTacToe.setDebugOutput(false);
 
 	EvolutionLearningRuleOptions options;
 
@@ -119,12 +106,12 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3));
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
-	options.world = ticTacToe1;
+	fillDefaultEvolutionLearningRule1Options(&options);
 
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule* learningRule1 = new EvolutionLearningRule(options);
-	options.world = ticTacToe2;
+	fillDefaultEvolutionLearningRule2Options(&options);
 	EvolutionLearningRule* learningRule2 = new EvolutionLearningRule(options);
 
 	BipartiteEvolutionLearningRuleOptions bipartiteOptions;
@@ -133,6 +120,27 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	fillDefaultLearningRuleOptions(&bipartiteOptions);
 
 	return new BipartiteEvolutionLearningRule(bipartiteOptions);
+}
+
+AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
+{
+	cs1 = new SharedSamplingCombiningStrategy(100);
+
+	hof1 = new RandomHallOfFameAlgorithm(50);
+	hof2 = new RandomHallOfFameAlgorithm(50);
+
+	return new TicTacToe(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+}
+
+AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
+{
+	cs2 = new SharedSamplingCombiningStrategy(100, cs1);
+	cs1->setOtherCombiningStrategy(cs2);
+
+	TicTacToe* ticTacToe2 = new TicTacToe(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+	cs1->setSecondWorld(ticTacToe2);
+	cs2->setSecondWorld(static_cast<TicTacToe*>(world.get()));
+	return ticTacToe2;
 }
 
 TicTacToeEvolutionExample::TicTacToeEvolutionExample()
@@ -160,7 +168,3 @@ std::string TicTacToeEvolutionExample::getLearningRuleName()
 	return BipartiteEvolutionLearningRule::getName();
 }
 
-TicTacToe* TicTacToeEvolutionExample::getTicTacToeWorld()
-{
-	return ticTacToe1;
-}

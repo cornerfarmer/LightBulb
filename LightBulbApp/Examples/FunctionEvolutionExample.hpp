@@ -10,6 +10,7 @@ class FunctionEvolutionExample : public AbstractEvolutionTrainingPlan
 private:
 protected:
 	AbstractLearningRule* createLearningRate();
+	AbstractEvolutionWorld* createWorld();
 public:
 	std::string getName();
 	std::string getDescription();

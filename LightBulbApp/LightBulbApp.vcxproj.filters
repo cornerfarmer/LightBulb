@@ -153,6 +153,9 @@
     <ClCompile Include="TrainingPlans\DoublePreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractCoevolutionTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -294,6 +297,18 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\DoublePreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractEvolutionTrainingPlanIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractCoevolutionTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\LightBulb\IO\AbstractCoevolutionWorldIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -299,14 +299,14 @@ void LayeredNetwork::resetActivation()
 {
 	if (options->enableShortcuts)
 	{
-		for (auto i = options->useBiasNeuron; i != activations.rows(); i++)
+		for (int i = options->useBiasNeuron; i < activations.rows(); i++)
 		{
 			activations(i) = 0;
 		}
 	}
 	else
 	{
-		for (auto i = 0; i != activations.rows(); i++)
+		for (int i = 0; i < activations.rows(); i++)
 		{
 			activations(i) = 0;
 		}
@@ -387,7 +387,7 @@ void LayeredNetwork::setInput(std::vector<std::pair<bool, double>> &inputVector)
 
 void LayeredNetwork::getOutput(std::vector<double> &outputVector)
 {
-	outputVector.assign(activationsPerLayerIn.back().data(), activationsPerLayerIn.back().data() + outputVector.size());
+	outputVector.assign(activationsPerLayerOut.back().data(), activationsPerLayerOut.back().data() + outputVector.size());
 }
 
 void LayeredNetwork::setInput(std::vector<double> &inputVector)

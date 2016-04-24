@@ -18,6 +18,10 @@ class AbstractEvolutionObject;
 // Nevertheless this class can be used in the most of all cases.
 class AbstractSimpleEvolutionWorld : public AbstractEvolutionWorld
 {
+	template <class Archive>
+	friend void save(Archive& archive, AbstractSimpleEvolutionWorld const& world);
+	template <class Archive>
+	friend void load(Archive& archive, AbstractSimpleEvolutionWorld& world);
 protected:
 	// A vector which holds all current evolution objects
 	std::vector<AbstractEvolutionObject*> objects;
@@ -33,5 +37,7 @@ public:
 	void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects);
 	void reset();	
 };
+
+#include "IO/AbstractSimpleEvolutionWorldIO.hpp"
 
 #endif

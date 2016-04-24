@@ -23,6 +23,8 @@ namespace LightBulb
 	protected:
 		void throwEvent(EventTypes eventType, EventArg* arg)
 		{
+			if (observers.size() == 0)
+				return;
 			observersMutex.lock();
 			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
 			{

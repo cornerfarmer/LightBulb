@@ -49,10 +49,7 @@ static double sixHumpCamelFunction(std::vector<float> pos)
 
 AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 {
-	FunctionSimulatorOptions simulatorOptions;
-	simulatorOptions.enableGraphics = false;
-
-	FunctionSimulator* simulator = new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
+	
 
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10);
@@ -67,13 +64,19 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
-	options.world = simulator;
 	options.scoreGoal = 1.031627 + 10000;
 	fillDefaultLearningRuleOptions(&options);
 
 	return new EvolutionLearningRule(options);
 }
 
+AbstractEvolutionWorld* FunctionEvolutionExample::createWorld()
+{
+	FunctionSimulatorOptions simulatorOptions;
+	simulatorOptions.enableGraphics = false;
+
+	return new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
+}
 
 std::string FunctionEvolutionExample::getName()
 {

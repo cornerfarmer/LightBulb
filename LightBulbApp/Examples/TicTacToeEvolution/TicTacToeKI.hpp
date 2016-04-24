@@ -7,6 +7,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -20,8 +21,11 @@ protected:
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<double>& output);
 public:	
-	TicTacToeKI(TicTacToe* ticTacToe_);
+	TicTacToeKI(TicTacToe* ticTacToe_ = NULL);
 	~TicTacToeKI();
 	void setTicTacToe(TicTacToe* newTicTacToe);
 };
+
+USE_PARENT_SERIALIZATION(TicTacToeKI, AbstractSimpleEvolutionObject);
+
 #endif

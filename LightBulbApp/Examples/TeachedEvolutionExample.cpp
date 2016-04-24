@@ -86,6 +86,29 @@
 
 AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 {
+	
+
+	EvolutionLearningRuleOptions options;
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50);
+	options.exitConditions.push_back(rateDifferenceCondition);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
+	options.creationCommands.push_back(constantCreationCommand);
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
+	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
+	options.selectionCommands.push_back(bestSelectionCommand);
+	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 2.0);
+	options.mutationsCommands.push_back(constantMutationCommand);
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
+	options.scoreGoal = -0.1;
+	options.maxTries = 100;
+	fillDefaultLearningRuleOptions(&options);
+
+	return new EvolutionLearningRule(options);
+}
+
+AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
+{
 	LayeredNetworkOptions* layeredNetworkOptions = new LayeredNetworkOptions();
 	layeredNetworkOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
@@ -108,28 +131,9 @@ AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 		teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 	}
 
-	TeachingEvolutionWorld* world = new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
 
-	EvolutionLearningRuleOptions options;
-	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50);
-	options.exitConditions.push_back(rateDifferenceCondition);
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
-	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
-	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
-	options.selectionCommands.push_back(bestSelectionCommand);
-	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 2.0);
-	options.mutationsCommands.push_back(constantMutationCommand);
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
-	options.world = world;
-	options.scoreGoal = -0.1;
-	options.maxTries = 100;
-	fillDefaultLearningRuleOptions(&options);
-
-	return new EvolutionLearningRule(options);
+	return new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
 }
-
 
 std::string TeachedEvolutionExample::getName()
 {

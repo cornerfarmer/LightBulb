@@ -11,7 +11,7 @@
 TicTacToeGameController::TicTacToeGameController(AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
 	:AbstractCustomSubApp(trainingPlan_)
 {
-	world = static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getTicTacToeWorld();	
+	world = static_cast<TicTacToe*>(static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getWorld());
 	window.reset(new TicTacToeGameWindow(this, parent));
 }
 

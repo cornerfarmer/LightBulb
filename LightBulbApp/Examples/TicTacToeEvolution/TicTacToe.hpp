@@ -11,6 +11,7 @@
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "IO/UseParentSerialization.hpp"
 #include <mutex>
 
 // Forward declarations
@@ -74,5 +75,7 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	void nextStep();
 };
+
+USE_PARENT_SERIALIZATION(TicTacToe, AbstractCoevolutionWorld);
 
 #endif

@@ -14,6 +14,8 @@ class NeuralNetwork;
 // The evolution object contains a NN which should calculate the actions from external and internal inputs.
 class AbstractEvolutionObject 
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractEvolutionObject& object);
 protected:
 	// This vector describes the mutation strength of every edge in the NN.
 	// It can be used inside the mutation/recombination algorithm
@@ -35,4 +37,7 @@ public:
 	// This method should return a new evolution object which contains a NN which has the same edges/neurons as the NN of this object.
 	virtual AbstractEvolutionObject* clone(bool addToWorld = true) = 0;
 };
+
+#include "IO/AbstractEvolutionObjectIO.hpp"
+
 #endif
