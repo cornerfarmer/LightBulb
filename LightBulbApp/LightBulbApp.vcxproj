@@ -126,7 +126,8 @@
     <ClCompile Include="Examples\BackpropagationXorExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolutionExample.cpp">
+    <ClCompile Include="Examples\NetworkEvolution\Network.cpp" />
+    <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -138,6 +139,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -199,7 +201,8 @@
     <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolutionExample.hpp">
+    <ClInclude Include="Examples\NetworkEvolution\Network.hpp" />
+    <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -211,6 +214,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -233,6 +237,8 @@
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
+    <ClInclude Include="IO\NetworkIO.hpp" />
+    <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />
     <ClInclude Include="IO\TrainingControllerIO.hpp" />
     <ClInclude Include="IO\TrainingPlanRepositoryIO.hpp" />

@@ -4,7 +4,7 @@
 #define _NETWORKSIMULATORIO_H_
 
 // Includes
-#include "Examples/NetworkSimulator.hpp"
+#include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

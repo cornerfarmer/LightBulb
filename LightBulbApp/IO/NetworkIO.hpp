@@ -4,7 +4,7 @@
 #define _NETWORKIO_H_
 
 // Includes
-#include "Examples/Network.hpp"
+#include "Examples/NetworkEvolution/Network.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

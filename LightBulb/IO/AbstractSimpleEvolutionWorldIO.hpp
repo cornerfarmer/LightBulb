@@ -12,7 +12,6 @@
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
-#include <Examples/Network.hpp>
 
 template <class Archive>
 void save(Archive& archive, AbstractSimpleEvolutionWorld const& world)

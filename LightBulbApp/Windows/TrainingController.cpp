@@ -14,7 +14,7 @@
 #include <Examples/RBFNetworkBiggerExample.hpp>
 #include <Examples/FunctionEvolutionExample.hpp>
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
-#include <Examples/NetworkEvolutionExample.hpp>
+#include <Examples/NetworkEvolution/NetworkEvolutionExample.hpp>
 #include <Examples/NatureEvolutionExample.hpp>
 #include <Examples/TeachedEvolutionExample.hpp>
 #include <Examples/TicTacToeEvolution/TicTacToeEvolutionExample.hpp>

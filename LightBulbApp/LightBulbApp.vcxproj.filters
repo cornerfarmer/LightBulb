@@ -39,9 +39,6 @@
     <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\TeachedEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -156,6 +153,15 @@
     <ClCompile Include="TrainingPlans\AbstractCoevolutionTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\NetworkEvolution\Network.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -168,9 +174,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolutionExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TeachedEvolutionExample.hpp">
@@ -309,6 +312,21 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\NetworkSimulatorIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\NetworkIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

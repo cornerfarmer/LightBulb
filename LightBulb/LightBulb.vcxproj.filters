@@ -482,13 +482,7 @@
     <ClCompile Include="Examples\NatureDrawer.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\Network.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\NetworkDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkSimulator.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
     <ClCompile Include="Examples\Position.cpp">
@@ -1016,13 +1010,7 @@
     <ClInclude Include="Examples\NatureDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\Network.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\NetworkDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkSimulator.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\Position.hpp">
@@ -1145,9 +1133,5 @@
     <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp" />
     <ClInclude Include="IO\AbstractEvolutionObjectIO.hpp" />
     <ClInclude Include="IO\AbstractSimpleEvolutionObjectIO.hpp" />
-    <ClInclude Include="IO\NetworkSimulatorIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\NetworkIO.hpp" />
   </ItemGroup>
 </Project>

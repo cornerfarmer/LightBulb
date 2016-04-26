@@ -38,27 +38,14 @@ protected:
 	int whoHasWon();
 	int currentPlayer;
 	bool displayMode;
-	bool softReset;
 	bool illegalMove;
-	std::vector<TicTacToeKI*> bestAIs;
-	int defaultResetGenerationCount;
-	int currentResetGenerationCount;
-	double maxDistanceShrinkFactor;
-	int maxDistance;
-	int lastBestAICount;
-	int generationsSincaLastBestAI;
-	double lastBestScore;
 	bool nextDecisionCombination(std::vector<int>& decisionNr, int b, int level = 0);
 	int simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlayerStarts);
-	bool tieMode;
-	bool printCurrentBestAI;
-	int variationStart;
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
 public:
 	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
-	void setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_);
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
 	bool isFree(int x, int y);

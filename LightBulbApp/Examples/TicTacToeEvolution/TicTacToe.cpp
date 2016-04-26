@@ -57,11 +57,6 @@ void intervalAdvance(Iter& it,const Iter& end, int i)
 		it = end;
 }
 
-void TicTacToe::setMaxDistanceShrinkFactor(double maxDistanceShrinkFactor_)
-{
-	maxDistanceShrinkFactor = maxDistanceShrinkFactor_;
-}
-
 
 int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2)
 {
@@ -128,14 +123,6 @@ void TicTacToe::nextStep()
 
 void TicTacToe::initializeForLearning()
 {
-	bestAIs.clear();
-	bestAIs.push_back(static_cast<TicTacToeKI*>(createNewObject()));
-	maxDistance = 15000;
-	lastBestAICount = 1;
-	generationsSincaLastBestAI = 0;
-	lastBestScore = 0;
-	softReset = true;
-	variationStart = 1;
 }
 
 int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlayerStarts)
