@@ -69,4 +69,6 @@ public:
 
 };
 
+#include "IO/EvolutionLearningRuleIO.hpp"
+
 #endif

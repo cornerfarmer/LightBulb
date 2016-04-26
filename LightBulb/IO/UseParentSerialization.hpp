@@ -26,6 +26,15 @@ void load(Archive& archive, T& trainingPlan) \
 } \
 CEREAL_REGISTER_TYPE(T);
 
+
+#define USE_PARENT_SINGLE_SERIALIZATION(T, Parent) \
+template <class Archive> \
+void serialize(Archive& archive, T& trainingPlan) \
+{ \
+	archive(cereal::base_class<Parent>(&trainingPlan)); \
+} \
+CEREAL_REGISTER_TYPE(T);
+
 #define EMPTY_CHILD_SERIALIZATION(T) \
 template <class Archive> \
 void save(Archive& archive, T const& trainingPlan) \

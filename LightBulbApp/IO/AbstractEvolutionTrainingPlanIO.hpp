@@ -10,13 +10,10 @@
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <IO/IOStorage.hpp>
-#include <Examples/NetworkSimulator.hpp>
 
 template <class Archive>
 void save(Archive& archive, AbstractEvolutionTrainingPlan const& trainingPlan)
 {
-	NetworkSimulator simulator(std::vector<std::vector<float>>());
-	archive(simulator);
 	archive(cereal::make_nvp("world", trainingPlan.world));
 	archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 }

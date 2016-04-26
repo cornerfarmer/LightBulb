@@ -32,7 +32,7 @@ public:
 	std::vector<std::string> getDataSetLabels();
 };
 
-USE_PARENT_SERIALIZATION(AbstractEvolutionLearningRule, AbstractLearningRule);
+USE_PARENT_SINGLE_SERIALIZATION(AbstractEvolutionLearningRule, AbstractLearningRule);
 
 #endif
 

@@ -15,7 +15,9 @@ class NeuralNetwork;
 class AbstractEvolutionObject 
 {
 	template <class Archive>
-	friend void serialize(Archive& archive, AbstractEvolutionObject& object);
+	friend void save(Archive& archive, AbstractEvolutionObject const& object);
+	template <class Archive>
+	friend void load(Archive& archive, AbstractEvolutionObject& object);
 protected:
 	// This vector describes the mutation strength of every edge in the NN.
 	// It can be used inside the mutation/recombination algorithm

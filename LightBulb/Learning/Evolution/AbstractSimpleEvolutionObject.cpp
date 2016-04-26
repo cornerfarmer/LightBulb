@@ -12,7 +12,7 @@ void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& op
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
 
 	// Create a neural network from the network topolgy
-	neuralNetwork = new NeuralNetwork(layeredNetwork);
+	neuralNetwork.reset(new NeuralNetwork(layeredNetwork));
 	// Randomize all weights (TODO: make the boundaries variable)
 	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5, 0.5);
 
@@ -28,7 +28,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 
 NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 {
-	return neuralNetwork;
+	return neuralNetwork.get();
 }
 
 void AbstractSimpleEvolutionObject::doNNCalculation()
@@ -44,11 +44,6 @@ void AbstractSimpleEvolutionObject::doNNCalculation()
 	
 	// Interpret the output
 	interpretNNOutput(output);
-}
-
-AbstractSimpleEvolutionObject::~AbstractSimpleEvolutionObject()
-{
-	delete(neuralNetwork);
 }
 
 

@@ -807,6 +807,7 @@
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
+    <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
     <ClInclude Include="IO\RBFNetworkIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />

@@ -11,7 +11,6 @@
 #include <cereal/types/polymorphic.hpp>
 #include <IO/IOStorage.hpp>
 
-
 template <class Archive>
 void save(Archive& archive, AbstractLearningRuleTrainingPlan const& trainingPlan)
 {

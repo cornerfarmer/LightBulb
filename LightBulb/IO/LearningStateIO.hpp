@@ -8,6 +8,7 @@
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
+#include <cereal/types/vector.hpp>
 #include <Learning/LearningState.hpp>
 
 template <class Archive>

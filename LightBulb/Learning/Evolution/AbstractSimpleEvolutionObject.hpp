@@ -8,12 +8,12 @@
 
 // Includes
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 struct LayeredNetworkOptions;
 // Forward declarations
 class EvolutionLearningRule;
-class NeuralNetwork;
 class RecurrentLayeredNetworkOptions;
 class AbstractEvolutionWorld;
 class AbstractNeuronDescriptionFactory;
@@ -24,10 +24,12 @@ class AbstractNeuronDescriptionFactory;
 class AbstractSimpleEvolutionObject : public AbstractEvolutionObject
 {
 	template <class Archive>
-	friend void serialize(Archive& archive, AbstractSimpleEvolutionObject& object);
+	friend void save(Archive& archive, AbstractSimpleEvolutionObject const& object);
+	template <class Archive>
+	friend void load(Archive& archive, AbstractSimpleEvolutionObject& object);
 protected:
 	// The NN of the object
-	NeuralNetwork* neuralNetwork;
+	std::unique_ptr<NeuralNetwork> neuralNetwork;
 	// The world which holds this object
 	AbstractEvolutionWorld* world;
 	// This method should return the input for the neural network
@@ -39,11 +41,14 @@ protected:
 public:	
 	// Create a new evolution object with the given input and output NN size
 	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world);
-	~AbstractSimpleEvolutionObject();
+	AbstractSimpleEvolutionObject() = default;
 	// Inherited:
 	void doNNCalculation();
 	NeuralNetwork* getNeuralNetwork();
 	void resetNN();
 	AbstractEvolutionObject* clone(bool addToWorld = true);
 };
+
+#include "IO/AbstractSimpleEvolutionObjectIO.hpp"
+
 #endif

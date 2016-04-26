@@ -1148,5 +1148,6 @@
     <ClInclude Include="IO\NetworkSimulatorIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="IO\NetworkIO.hpp" />
   </ItemGroup>
 </Project>

@@ -72,7 +72,7 @@ AbstractEvolutionWorld* NetworkEvolutionExample::createWorld()
 	consumers[7][0] = 4;
 	consumers[7][1] = -1;
 
-	return new NetworkSimulator(false, consumers);
+	return new NetworkSimulator(consumers);
 }
 
 std::string NetworkEvolutionExample::getName()

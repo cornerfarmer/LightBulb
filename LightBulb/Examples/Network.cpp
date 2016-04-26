@@ -11,7 +11,6 @@
 Network::Network(NetworkSimulator* networkSimulator_)
 	: AbstractSimpleEvolutionObject(networkSimulator_)
 {
-	networkSimulator = networkSimulator_;
 	positions.resize(4, std::vector<float>(2));
 
 	LayeredNetworkOptions options;
@@ -38,6 +37,7 @@ void Network::interpretNNOutput(std::vector<double>& output)
 		}
 	}
 }
+
 
 std::vector<std::vector<float>>* Network::getPositions()
 {
