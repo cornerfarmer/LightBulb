@@ -8,6 +8,11 @@
 #include <iomanip>
 #include <vector>
 
+AbstractEvolutionLearningRuleOptions* AbstractEvolutionLearningRule::getOptions()
+{
+	return static_cast<AbstractEvolutionLearningRuleOptions*>(options.get());
+}
+
 AbstractEvolutionLearningRule::AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_)
 	: AbstractLearningRule(new AbstractEvolutionLearningRuleOptions(options_))
 {
@@ -21,4 +26,9 @@ AbstractEvolutionLearningRule::AbstractEvolutionLearningRule(AbstractEvolutionLe
 std::vector<std::string> AbstractEvolutionLearningRule::getDataSetLabels()
 {
 	return AbstractLearningRule::getDataSetLabels();
+}
+
+AbstractEvolutionWorld* AbstractEvolutionLearningRule::getWorld()
+{
+	return getOptions()->world;
 }

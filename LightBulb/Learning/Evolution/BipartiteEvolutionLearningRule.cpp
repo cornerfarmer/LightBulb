@@ -29,12 +29,24 @@ std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels()
 	return labels1;
 }
 
+EvolutionLearningRule* BipartiteEvolutionLearningRule::getFirstLearningRule()
+{
+	return getOptions()->learningRule1;
+}
+
+
+EvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearningRule()
+{
+	return getOptions()->learningRule2;
+}
+
+
 void BipartiteEvolutionLearningRule::initialize()
 {
 	getOptions()->learningRule1->options->logger = options->logger;
 	getOptions()->learningRule2->options->logger = options->logger;
-	getOptions()->learningRule1->learningState.reset(learningState.get());
-	getOptions()->learningRule2->learningState.reset(learningState.get());
+	getOptions()->learningRule1->learningState = learningState;
+	getOptions()->learningRule2->learningState = learningState;
 	getOptions()->learningRule1->setLoggerToUsedObjects();
 	getOptions()->learningRule2->setLoggerToUsedObjects();
 }

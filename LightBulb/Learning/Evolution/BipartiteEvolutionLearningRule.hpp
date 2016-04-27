@@ -25,6 +25,9 @@ struct BipartiteEvolutionLearningRuleOptions : public AbstractEvolutionLearningR
 
 class BipartiteEvolutionLearningRule : public AbstractEvolutionLearningRule
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule);
+	friend struct cereal::LoadAndConstruct<BipartiteEvolutionLearningRule>;
 protected:
 	BipartiteEvolutionLearningRuleOptions* getOptions();
 	bool doIteration();
@@ -36,6 +39,10 @@ public:
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
 	static std::string getName();
 	std::vector<std::string> getDataSetLabels();
+	EvolutionLearningRule* getFirstLearningRule();
+	EvolutionLearningRule* getSecondLearningRule();
 };
+
+#include "IO/BipartiteEvolutionLearningRuleIO.hpp"
 
 #endif

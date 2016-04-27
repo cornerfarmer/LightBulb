@@ -6,9 +6,9 @@
 
 void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject* object, int memberID)
 {
-	bool firstPlayerHasWon = currentWorld->compareObjects(object, members[memberID]) > 0;
-	(*currentResults)[object][members[memberID]] = firstPlayerHasWon;
-	(*currentResults)[members[memberID]][object] = !firstPlayerHasWon;
+	bool firstPlayerHasWon = currentWorld->compareObjects(object, members[memberID].get()) > 0;
+	(*currentResults)[object][members[memberID].get()] = firstPlayerHasWon;
+	(*currentResults)[members[memberID].get()][object] = !firstPlayerHasWon;
 }
 
 void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld* world, std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& prevResults)
@@ -20,7 +20,7 @@ void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld* world, std::
 
 void AbstractHallOfFameAlgorithm::addMember(AbstractEvolutionObject* newMember)
 {
-	members.push_back(newMember->clone(false));
+	members.push_back(std::unique_ptr<AbstractEvolutionObject>(newMember->clone(false)));
 	log("Added " + std::to_string(members.size()) + ". hall of fame member", LL_LOW);
 }
 

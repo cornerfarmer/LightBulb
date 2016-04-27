@@ -14,7 +14,7 @@ template <class Archive>
 void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
 {
 	archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
-	archive(cereal::make_nvp("state", neuralNetwork.state));
+	archive(cereal::make_nvp("state", (int)neuralNetwork.state));
 }
 
 namespace cereal

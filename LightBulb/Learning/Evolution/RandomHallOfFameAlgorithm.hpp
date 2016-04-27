@@ -12,13 +12,16 @@
 
 class RandomHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, RandomHallOfFameAlgorithm& hallOfFameAlgorithm);
 private:
 	int amountOfCompetitionsPerObject;
 protected:	
 	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects);
 public:
-	RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_);
+	RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_ = 0);
 };
 
+#include "IO/RandomHallOfFameAlgorithmIO.hpp"
 
 #endif

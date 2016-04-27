@@ -7,7 +7,7 @@
 
 AbstractCoevolutionWorld::AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
 {
-	isParasiteWorld = isParasiteWorld_;
+	parasiteWorld = isParasiteWorld_;
 	combiningStrategy.reset(combiningStrategy_);
 	fitnessFunction.reset(fitnessFunction_);
 	hallOfFameToAddAlgorithm.reset(hallOfFameToAddAlgorithm_);
@@ -20,7 +20,7 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 
 
 	if (results.size() > 0)
-		learningState->addData(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(this));
+		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(this));
 
 	if (hallOfFameToChallengeAlgorithm)
 		hallOfFameToChallengeAlgorithm->execute(this, results);
@@ -41,6 +41,11 @@ double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject* object)
 	return fitnessValues[object];
 }
 
+AbstractCombiningStrategy* AbstractCoevolutionWorld::getCombiningStrategy()
+{
+	return combiningStrategy.get();
+}
+
 void AbstractCoevolutionWorld::setLogger(AbstractLogger* logger_)
 {
 	AbstractLoggable::setLogger(logger_);
@@ -53,6 +58,11 @@ void AbstractCoevolutionWorld::setLogger(AbstractLogger* logger_)
 std::vector<std::string> AbstractCoevolutionWorld::getDataSetLabels()
 {
 	auto labels = AbstractEvolutionWorld::getDataSetLabels();
-	labels.push_back(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS);
+	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS);
 	return labels;
+}
+
+bool AbstractCoevolutionWorld::isParasiteWorld()
+{
+	return parasiteWorld;
 }

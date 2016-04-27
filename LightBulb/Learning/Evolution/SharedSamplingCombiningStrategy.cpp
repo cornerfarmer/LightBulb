@@ -54,17 +54,20 @@ void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld* simulati
 	}
 }
 
-
-SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, SharedSamplingCombiningStrategy* otherCombiningStrategy_)
+void SharedSamplingCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld* newSecondWorld)
 {
-	otherCombiningStrategy = otherCombiningStrategy_;
+	AbstractCombiningStrategy::setSecondWorld(newSecondWorld);
+	otherCombiningStrategy = static_cast<SharedSamplingCombiningStrategy*>(secondWorld->getCombiningStrategy());
+}
+
+SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, AbstractCoevolutionWorld* secondWorld_)
+	:AbstractCombiningStrategy(secondWorld_)
+{
+	if (secondWorld)
+		otherCombiningStrategy = static_cast<SharedSamplingCombiningStrategy*>(secondWorld->getCombiningStrategy());
 	amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
 }
 
-void SharedSamplingCombiningStrategy::setOtherCombiningStrategy(SharedSamplingCombiningStrategy* otherCombiningStrategy_)
-{
-	otherCombiningStrategy = otherCombiningStrategy_;
-}
 
 int SharedSamplingCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
 {

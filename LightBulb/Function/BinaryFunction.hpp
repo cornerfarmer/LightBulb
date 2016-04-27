@@ -5,6 +5,7 @@
 
 // Includes
 #include "Function/AbstractActivationFunction.hpp"
+#include <IO/UseParentSerialization.hpp>
 
 // A binary function can decide between two values
 class BinaryFunction : public AbstractActivationFunction
@@ -25,5 +26,7 @@ public:
 	double getMinimum();
 	bool hasAMaxAndMinimum();
 };
+
+EMPTY_CHILD_SERIALIZATION(BinaryFunction);
 
 #endif

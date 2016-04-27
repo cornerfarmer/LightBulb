@@ -26,10 +26,12 @@ class AbstractEvolutionLearningRule : public AbstractLearningRule
 {
 private:
 protected:
+	AbstractEvolutionLearningRuleOptions* getOptions();
 public:
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
 	std::vector<std::string> getDataSetLabels();
+	AbstractEvolutionWorld* getWorld();
 };
 
 USE_PARENT_SINGLE_SERIALIZATION(AbstractEvolutionLearningRule, AbstractLearningRule);

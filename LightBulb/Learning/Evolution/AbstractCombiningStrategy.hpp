@@ -25,7 +25,7 @@ protected:
 public:
 	AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = NULL);
 	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> execute(AbstractCoevolutionWorld* world);
-	void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
+	virtual void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
 	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* getPrevResults();
 	int getFirstPlayerWins();
 	virtual int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) = 0;

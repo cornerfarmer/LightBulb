@@ -5,6 +5,8 @@
 
 // Includes
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include <Learning/Evolution/AbstractCoevolutionWorld.hpp>
+
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
@@ -22,6 +24,10 @@ void load(Archive& archive, AbstractCoevolutionTrainingPlan& trainingPlan)
 {
 	archive(cereal::make_nvp("parasiteWorld", trainingPlan.parasiteWorld));
 	archive(cereal::base_class<AbstractEvolutionTrainingPlan>(&trainingPlan));
+
+	trainingPlan.parasiteWorld->setLearningState(trainingPlan.getLearningState());
+	static_cast<AbstractCoevolutionWorld*>(trainingPlan.parasiteWorld.get())->getCombiningStrategy()->setSecondWorld(static_cast<AbstractCoevolutionWorld*>(trainingPlan.world.get()));
+	static_cast<AbstractCoevolutionWorld*>(trainingPlan.world.get())->getCombiningStrategy()->setSecondWorld(static_cast<AbstractCoevolutionWorld*>(trainingPlan.parasiteWorld.get()));
 }
 
 #include "IO/UsedArchives.hpp"

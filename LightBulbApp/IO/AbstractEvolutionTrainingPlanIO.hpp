@@ -23,6 +23,8 @@ void load(Archive& archive, AbstractEvolutionTrainingPlan& trainingPlan)
 {
 	archive(cereal::make_nvp("world", trainingPlan.world));
 	archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
+
+	trainingPlan.world->setLearningState(trainingPlan.getLearningState());
 }
 
 #include "IO/UsedArchives.hpp"

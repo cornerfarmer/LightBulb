@@ -48,7 +48,7 @@ private:
 protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
 
-	std::unique_ptr<LearningState> learningState;
+	std::shared_ptr<LearningState> learningState;
 
 	virtual bool doIteration() = 0;
 	// This method will be called in front of the actual learning algorithm

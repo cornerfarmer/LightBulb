@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 
-bool RateDifferenceCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+bool RateDifferenceCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
 {
 	if (highscore->size() > 0)
 	{

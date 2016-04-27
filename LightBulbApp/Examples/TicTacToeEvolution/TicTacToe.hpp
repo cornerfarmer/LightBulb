@@ -29,6 +29,8 @@ enum TicTacToeEvents
 
 class TicTacToe : public AbstractCoevolutionWorld, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
 {
+private:
+	void initialize();
 protected:
 	std::vector<std::vector<int>> fields;	
 	AbstractEvolutionObject* createNewObject();
@@ -46,6 +48,7 @@ protected:
 	std::mutex doNextStepMutex;
 public:
 	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
 	bool isFree(int x, int y);

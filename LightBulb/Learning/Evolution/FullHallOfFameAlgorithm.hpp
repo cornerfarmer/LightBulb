@@ -7,6 +7,7 @@
 
 // Include
 #include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 
@@ -16,5 +17,7 @@ private:
 protected:	
 	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects);
 };
+
+USE_PARENT_SINGLE_SERIALIZATION(FullHallOfFameAlgorithm, AbstractHallOfFameAlgorithm)
 
 #endif

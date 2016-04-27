@@ -200,7 +200,7 @@ bool EvolutionLearningRule::doIteration()
 	for (auto exitCondition = getOptions()->exitConditions.begin(); exitCondition != getOptions()->exitConditions.end(); exitCondition++)
 	{
 		// Evaluate them and connect them with an OR
-		exit |= (*exitCondition)->evaluate(highscore.get());
+		exit |= (*exitCondition)->evaluate(highscore.get(), this);
 	}
 	// If at least one condition was true => stop this try
 	if (exit) {

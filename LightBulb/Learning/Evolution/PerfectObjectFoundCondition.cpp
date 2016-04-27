@@ -4,12 +4,15 @@
 // Library includes
 #include <iostream>
 #include <iomanip>
+#include "EvolutionLearningRule.hpp"
+#include "AbstractCoevolutionWorld.hpp"
 
-bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
 {
 	if (highscore->size() > 0)
 	{
-		if (perfectObjectExists())
+		AbstractCoevolutionWorld* coevolutionWorld = static_cast<AbstractCoevolutionWorld*>(static_cast<EvolutionLearningRule*>(learningRule)->getWorld());
+		if (coevolutionWorld->isParasiteWorld() && perfectObjectExists(coevolutionWorld->getCombiningStrategy()))
 		{
 			counter++;
 			if (counter > count)
@@ -26,7 +29,7 @@ bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, Abstrac
 		return false;
 	}
 }
-bool PerfectObjectFoundCondition::perfectObjectExists()
+bool PerfectObjectFoundCondition::perfectObjectExists(AbstractCombiningStrategy* combiningStrategy)
 {
 	auto results = combiningStrategy->getPrevResults();
 	std::map<AbstractEvolutionObject*, bool> defeatedObjects;
@@ -47,10 +50,9 @@ bool PerfectObjectFoundCondition::perfectObjectExists()
 	return false;
 }
 
-PerfectObjectFoundCondition::PerfectObjectFoundCondition(int count_, AbstractCombiningStrategy* combiningStrategy_)
+PerfectObjectFoundCondition::PerfectObjectFoundCondition(int count_)
 	: AbstractExitCondition()
 {
-	combiningStrategy = combiningStrategy_;
 	counter = 0;
 	count = count_;
 }

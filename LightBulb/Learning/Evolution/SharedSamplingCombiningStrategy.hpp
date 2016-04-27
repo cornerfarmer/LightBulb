@@ -9,19 +9,24 @@
 
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include <IO/UseParentSerialization.hpp>
 
 // Forward declarations
 
 class SharedSamplingCombiningStrategy : public AbstractCombiningStrategy
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, SharedSamplingCombiningStrategy& sharedSamplingCombiningStrategy);
 private:
 	int amountOfCompetitionsPerObject;
 	SharedSamplingCombiningStrategy* otherCombiningStrategy;
 	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:
-	SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, SharedSamplingCombiningStrategy* otherCombiningStrategy_ = NULL);
-	void setOtherCombiningStrategy(SharedSamplingCombiningStrategy* otherCombiningStrategy_);
+	void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
+	SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_ = 0, AbstractCoevolutionWorld* secondWorld_ = NULL);
 	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
+
+#include "IO/SharedSamplingCombiningStrategyIO.hpp"
 
 #endif

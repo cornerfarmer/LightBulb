@@ -19,6 +19,16 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
 	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
+	initialize();
+}
+
+TicTacToe::TicTacToe()
+{
+	initialize();
+}
+
+void TicTacToe::initialize()
+{
 	fields.resize(3);
 	for (int x = 0; x < fields.size(); x++)
 	{
@@ -31,7 +41,6 @@ TicTacToe::TicTacToe(bool isParasiteWorld_, AbstractCombiningStrategy* combining
 	options.ticTacToe = this;
 	displayMode = true;
 	drawer.reset(new TicTacToeDrawer(options));*/
-
 }
 
 bool TicTacToe::hasGameFinished()
@@ -70,7 +79,7 @@ int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionOb
 	if (counter % 1000000 == 0)
 		log(std::to_string(counter) + ". calculation", LL_HIGH);
 
-	if (isParasiteWorld) {
+	if (parasiteWorld) {
 		if (result >= 0)
 			return 1;
 		else
@@ -109,7 +118,7 @@ void TicTacToe::stopStepMode()
 std::vector<std::string> TicTacToe::getDataSetLabels()
 {
 	auto labels = AbstractCoevolutionWorld::getDataSetLabels();
-	labels.push_back(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING);
+	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING);
 	return labels;
 }
 
@@ -185,13 +194,13 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 	static int ties = 0;
 	static bool prevPW = false;
 
-	if (prevPW != isParasiteWorld)
+	if (prevPW != parasiteWorld)
 	{
 		log("il:" + std::to_string(il) + " wins:" + std::to_string(wins) + " ties:" + std::to_string(ties), LL_MEDIUM);
 		il = 0;
 		wins = 0;
 		ties = 0;
-		prevPW = isParasiteWorld;
+		prevPW = parasiteWorld;
 	}
 	if (illegalMove)
 	{
@@ -206,7 +215,7 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 		int w = whoHasWon();
 		if (w == 0) {
 			ties++;
-			if (isParasiteWorld)
+			if (parasiteWorld)
 				return -1;
 			else
 				return 1;
@@ -279,7 +288,7 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 	}
 
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
-	learningState->addData(std::string(isParasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, (double)wins / possibleGames);
+	learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, (double)wins / possibleGames);
 
 	return wins;
 }

@@ -35,7 +35,9 @@ void load(Archive& archive, AbstractSimpleEvolutionWorld& world)
 	IOStorage<AbstractEvolutionWorld>::clear();
 
 	for (auto object = objects.begin(); object != objects.end(); object++)
+	{
 		world.objects.push_back(object->release());
+	}
 }
 
 #include "UsedArchives.hpp"

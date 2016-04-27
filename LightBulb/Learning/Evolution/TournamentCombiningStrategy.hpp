@@ -10,6 +10,7 @@
 
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include <IO/UseParentSerialization.hpp>
 
 // Forward declarations
 
@@ -25,5 +26,7 @@ public:
 	TournamentCombiningStrategy();
 	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
+
+EMPTY_CHILD_SERIALIZATION(TournamentCombiningStrategy)
 
 #endif
