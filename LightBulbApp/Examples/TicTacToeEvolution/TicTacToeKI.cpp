@@ -11,6 +11,7 @@
 TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)
 {
+	currentGame = ticTacToe_;
 	LayeredNetworkOptions options;
 	options.enableShortcuts = true;
 	options.neuronsPerLayerCount.push_back(18);
@@ -21,14 +22,10 @@ TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
 	buildNeuralNetwork(options);
 }
 
-TicTacToe* TicTacToeKI::getTicTacToe()
-{
-	return static_cast<TicTacToe*>(world);
-}
 
 void TicTacToeKI::getNNInput(std::vector<double>& input)
 {
-	getTicTacToe()->getSight(input);
+	currentGame->getSight(input);
 }
 
 void TicTacToeKI::interpretNNOutput(std::vector<double>& output)
@@ -39,19 +36,19 @@ void TicTacToeKI::interpretNNOutput(std::vector<double>& output)
 		int y = i % 3;
 		if (output[i] > 0.5)
 		{
-			getTicTacToe()->setField(x, y);
+			currentGame->setField(x, y);
 			return;
 		}
 	}
-	getTicTacToe()->setIllegalMove(true);
+	currentGame->setIllegalMove(true);
 	return;
 	for (int x = 0; x < 3; x++)
 	{
 		for (int y = 0; y < 3; y++)
 		{
-			if (getTicTacToe()->isFree(x, y))
+			if (currentGame->isFree(x, y))
 			{
-				getTicTacToe()->setField(x, y);
+				currentGame->setField(x, y);
 				return;
 			}
 		}
@@ -65,5 +62,5 @@ TicTacToeKI::~TicTacToeKI()
 
 void TicTacToeKI::setTicTacToe(TicTacToe* newTicTacToe)
 {
-	world = newTicTacToe;
+	currentGame = newTicTacToe;
 }

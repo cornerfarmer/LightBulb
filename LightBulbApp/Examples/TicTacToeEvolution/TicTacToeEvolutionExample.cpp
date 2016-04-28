@@ -18,6 +18,7 @@
 #include <fstream>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include "TicTacToeGameFactory.hpp"
+#include <Learning/Evolution/RandomCombiningStrategy.hpp>
 
 //
 //void doTicTacToeEvolutionExample()
@@ -124,7 +125,7 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 {
-	cs1 = new SharedSamplingCombiningStrategy(100);
+	cs1 = new RandomCombiningStrategy(100);
 
 	hof1 = new RandomHallOfFameAlgorithm(50);
 	hof2 = new RandomHallOfFameAlgorithm(50);
@@ -134,7 +135,7 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 {
-	cs2 = new SharedSamplingCombiningStrategy(100);
+	cs2 = new RandomCombiningStrategy(100);
 
 	TicTacToe* ticTacToe2 = new TicTacToe(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 	cs1->setSecondWorld(ticTacToe2);

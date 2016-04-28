@@ -387,7 +387,7 @@ void LayeredNetwork::setInput(std::vector<std::pair<bool, double>> &inputVector)
 
 void LayeredNetwork::getOutput(std::vector<double> &outputVector)
 {
-	outputVector.assign(activationsPerLayerOut.back().data(), activationsPerLayerOut.back().data() + outputVector.size());
+	outputVector.assign(activationsPerLayerIn.back().data(), activationsPerLayerIn.back().data() + outputVector.size());
 }
 
 void LayeredNetwork::setInput(std::vector<double> &inputVector)

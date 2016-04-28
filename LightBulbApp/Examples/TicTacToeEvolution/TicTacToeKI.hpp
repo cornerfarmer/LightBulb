@@ -17,7 +17,7 @@ class TicTacToe;
 class TicTacToeKI : public AbstractSimpleEvolutionObject
 {
 protected:
-	TicTacToe* getTicTacToe();
+	TicTacToe* currentGame;
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<double>& output);
 public:	
