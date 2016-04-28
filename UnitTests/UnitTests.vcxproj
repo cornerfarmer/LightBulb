@@ -136,6 +136,8 @@
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\BestReuseSelectorTest.cpp" />
+    <ClCompile Include="Learning\Evolution\BestSelectionCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantMutationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp" />

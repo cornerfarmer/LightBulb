@@ -79,7 +79,7 @@ int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionOb
 	if (counter % 1000000 == 0)
 		log(std::to_string(counter) + ". calculation", LL_HIGH);
 
-	if (!parasiteWorld) {
+	if (parasiteWorld) {
 		if (result >= 0)
 			return 1;
 		else
