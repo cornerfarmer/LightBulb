@@ -228,7 +228,6 @@ bool EvolutionLearningRule::doIteration()
 
 	// Continue with the next generation
 	learningState->iterations++;
-
 	return true;
 }
 
