@@ -138,9 +138,13 @@
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommandTest.cpp" />
+    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\ConstantCreationCommandTest.cpp" />
+    <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantMutationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp" />
+    <ClCompile Include="Learning\Evolution\EvolutionLearningRuleTest.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
@@ -153,15 +157,25 @@
   <ItemGroup>
     <ClInclude Include="Mocks\MockActivationFunction.hpp" />
     <ClInclude Include="Mocks\MockActivationOrder.hpp" />
+    <ClInclude Include="Mocks\MockCreationCommand.hpp" />
+    <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockEvolutionObject.hpp" />
+    <ClInclude Include="Mocks\MockEvolutionWorld.hpp" />
+    <ClInclude Include="Mocks\MockExitCondition.hpp" />
+    <ClInclude Include="Mocks\MockFitnessFunction.hpp" />
+    <ClInclude Include="Mocks\MockLogger.hpp" />
     <ClInclude Include="Mocks\MockMutationAlgorithm.hpp" />
+    <ClInclude Include="Mocks\MockMutationCommand.hpp" />
     <ClInclude Include="Mocks\MockMutationSelector.hpp" />
     <ClInclude Include="Mocks\MockNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
     <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
     <ClInclude Include="Mocks\MockRecombinationAlgorithm.hpp" />
+    <ClInclude Include="Mocks\MockRecombinationCommand.hpp" />
     <ClInclude Include="Mocks\MockRecombinationSelector.hpp" />
+    <ClInclude Include="Mocks\MockReuseCommand.hpp" />
     <ClInclude Include="Mocks\MockReuseSelector.hpp" />
+    <ClInclude Include="Mocks\MockSelectionCommand.hpp" />
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

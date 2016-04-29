@@ -9,10 +9,10 @@ bool AbstractEvolutionWorld::compareHighscoreEntries(const std::pair<double, Abs
 	return x.first > y.first || (x.first == y.first && rand() > RAND_MAX / 2);
 }
 
-std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> AbstractEvolutionWorld::getHighscoreList()
+std::vector<std::pair<double, AbstractEvolutionObject*>>* AbstractEvolutionWorld::getHighscoreList()
 {
 	// Create new vector which should return the whole highscore
-	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> list(new std::vector<std::pair<double, AbstractEvolutionObject*>>(getEvolutionObjects()->size()));
+	currentHighscore.reset(new std::vector<std::pair<double, AbstractEvolutionObject*>>(getPopulationSize()));
 	// Go through all evolution objects
 	int listIndex = 0;
 	for (auto object = getEvolutionObjects()->begin(); object < getEvolutionObjects()->end(); object++)
@@ -20,12 +20,12 @@ std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> Abstra
 		double score = getScore(*object);
 
 		// Add the objects paired with its score to the list
-		(*list)[listIndex++] = std::make_pair(score, *object);
+		(*currentHighscore)[listIndex++] = std::make_pair(score, *object);
 
 	}
 	// Sort the list
-	std::sort(list->begin(), list->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
-	return list;
+	std::sort(currentHighscore->begin(), currentHighscore->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+	return currentHighscore.get();
 }
 
 std::vector<std::string> AbstractEvolutionWorld::getDataSetLabels()

@@ -28,5 +28,5 @@ RandomCombiningStrategy::RandomCombiningStrategy(int amountOfCompetitionsPerObje
 
 int RandomCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
 {
-	return amountOfCompetitionsPerObject * simulationWorld->getEvolutionObjects()->size();
+	return amountOfCompetitionsPerObject * simulationWorld->getPopulationSize();
 }

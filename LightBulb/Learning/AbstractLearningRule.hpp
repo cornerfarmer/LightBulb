@@ -79,7 +79,7 @@ public:
 
 	void sendPauseRequest();
 	
-	void setLogger(AbstractLogger* logger);
+	virtual void setLogger(AbstractLogger* logger);
 
 	LearningState* getLearningState();
 

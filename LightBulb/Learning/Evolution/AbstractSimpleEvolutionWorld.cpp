@@ -40,3 +40,14 @@ void AbstractSimpleEvolutionWorld::reset()
 	// Reset the world
 	resetWorld();
 }
+
+int AbstractSimpleEvolutionWorld::getPopulationSize()
+{
+	return objects.size();
+}
+
+
+void AbstractSimpleEvolutionWorld::clearPopulation()
+{
+	objects.clear();
+}

@@ -31,13 +31,13 @@ TEST_F(BestReuseSelectorTest, executeReuseSelection)
 	bestReuseSelector->executeReuseSelection(3, &highscore, &counter);
 	std::vector<AbstractEvolutionObject*>* selectedObjects = bestReuseSelector->getReuseSelection();
 
-	EXPECT_EQ(selectedObjects->size(), 3);
-	EXPECT_EQ(selectedObjects->at(0), highscore[0].second);
-	EXPECT_EQ(selectedObjects->at(1), highscore[1].second);
-	EXPECT_EQ(selectedObjects->at(2), highscore[2].second);
+	EXPECT_EQ(3, selectedObjects->size());
+	EXPECT_EQ(highscore[0].second, selectedObjects->at(0));
+	EXPECT_EQ(highscore[1].second, selectedObjects->at(1));
+	EXPECT_EQ(highscore[2].second, selectedObjects->at(2));
 
-	EXPECT_EQ(counter.size(), 3);
-	EXPECT_EQ(counter[highscore[0].second], 1);
-	EXPECT_EQ(counter[highscore[1].second], 1);
-	EXPECT_EQ(counter[highscore[2].second], 1);
+	EXPECT_EQ(3, counter.size());
+	EXPECT_EQ(1, counter[highscore[0].second]);
+	EXPECT_EQ(1, counter[highscore[1].second]);
+	EXPECT_EQ(1, counter[highscore[2].second]);
 }

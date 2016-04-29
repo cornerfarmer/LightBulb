@@ -35,7 +35,9 @@ public:
 	AbstractEvolutionObject* addNewObject(bool addToWorld = true);
 	std::vector<AbstractEvolutionObject*>* getEvolutionObjects();
 	void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects);
-	void reset();	
+	void reset();
+	int getPopulationSize();
+	void clearPopulation();
 };
 
 #include "IO/AbstractSimpleEvolutionWorldIO.hpp"

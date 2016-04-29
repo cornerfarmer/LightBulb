@@ -45,8 +45,8 @@ void EvolutionLearningRule::setLoggerToUsedObjects()
 	for (auto recombinationCommand = getOptions()->recombinationCommands.begin(); recombinationCommand != getOptions()->recombinationCommands.end(); recombinationCommand++)
 		(*recombinationCommand)->setLogger(options->logger);
 
-	for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
-		(*reuseCommand)->setLogger(options->logger);
+	for (auto fitnessFunction = getOptions()->fitnessFunctions.begin(); fitnessFunction != getOptions()->fitnessFunctions.end(); fitnessFunction++)
+		(*fitnessFunction)->setLogger(options->logger);
 
 	for (auto creationCommand = getOptions()->creationCommands.begin(); creationCommand != getOptions()->creationCommands.end(); creationCommand++)
 		(*creationCommand)->setLogger(options->logger);
@@ -97,13 +97,13 @@ void EvolutionLearningRule::setLoggerToUsedObjects()
 
 bool EvolutionLearningRule::hasLearningSucceeded()
 {
-	return getOptions()->world->getEvolutionObjects()->size() > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
+	return getOptions()->world->getPopulationSize() > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
 }
 
 void EvolutionLearningRule::initializeTry()
 {
 	// Reset all
-	getOptions()->world->getEvolutionObjects()->clear();
+	getOptions()->world->clearPopulation();
 	getOptions()->world->initializeForLearning();
 }
 
@@ -121,9 +121,15 @@ std::vector<std::string> EvolutionLearningRule::getDataSetLabels()
 	return labels;
 }
 
+void EvolutionLearningRule::setLogger(AbstractLogger* logger)
+{
+	AbstractLearningRule::setLogger(logger);
+	setLoggerToUsedObjects();
+}
+
 bool EvolutionLearningRule::doIteration()
 {
-	if (getOptions()->world->getEvolutionObjects()->size() > 0)
+	if (getOptions()->world->getPopulationSize() > 0)
 		learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 
 	// Reset the world for the next generation
@@ -131,9 +137,9 @@ bool EvolutionLearningRule::doIteration()
 
 	log("------------- Generation " + std::to_string(learningState->iterations) + " -----------------", LL_LOW);
 
-	if (getOptions()->world->getEvolutionObjects()->size()>0) {
+	if (getOptions()->world->getPopulationSize()>0) {
 		// Extract all current objects ordered by their score
-		std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = getOptions()->world->getHighscoreList();
+		std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore = getOptions()->world->getHighscoreList();
 		// This vector will contain all objects for the next generation
 		std::vector<AbstractEvolutionObject*> newObjectVector;
 		std::map<AbstractEvolutionObject*, int> operationCounter;
@@ -141,19 +147,19 @@ bool EvolutionLearningRule::doIteration()
 		// 5. Step: Reuse some of the evolution objects directly for the next generation
 		for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
 		{
-			(*reuseCommand)->select(highscore.get(), &operationCounter);
+			(*reuseCommand)->select(highscore, &operationCounter);
 		}
 
 		// 6. Step: Mutate some of the evolution objects and use them for the next getOptions()
 		for (auto mutationCommand = getOptions()->mutationsCommands.begin(); mutationCommand != getOptions()->mutationsCommands.end(); mutationCommand++)
 		{
-			(*mutationCommand)->select(highscore.get(), &operationCounter);
+			(*mutationCommand)->select(highscore, &operationCounter);
 		}
 
 		// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
 		for (auto recombinationCommand = getOptions()->recombinationCommands.begin(); recombinationCommand != getOptions()->recombinationCommands.end(); recombinationCommand++)
 		{
-			(*recombinationCommand)->select(highscore.get(), &operationCounter);
+			(*recombinationCommand)->select(highscore, &operationCounter);
 		}
 
 		// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
@@ -193,14 +199,14 @@ bool EvolutionLearningRule::doIteration()
 	}
 
 	// Extract all current objects ordered by their score
-	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> highscore = getOptions()->world->getHighscoreList();
+	std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore = getOptions()->world->getHighscoreList();
 
 	bool exit = false;
 	// 3.Step: Go through all exit conditions
 	for (auto exitCondition = getOptions()->exitConditions.begin(); exitCondition != getOptions()->exitConditions.end(); exitCondition++)
 	{
 		// Evaluate them and connect them with an OR
-		exit |= (*exitCondition)->evaluate(highscore.get(), this);
+		exit |= (*exitCondition)->evaluate(highscore, this);
 	}
 	// If at least one condition was true => stop this try
 	if (exit) {
@@ -211,13 +217,13 @@ bool EvolutionLearningRule::doIteration()
 	// {2,3}.5. Step: Modify the calculated scores
 	for (auto fitnessFunction = getOptions()->fitnessFunctions.begin(); fitnessFunction != getOptions()->fitnessFunctions.end(); fitnessFunction++)
 	{
-		(*fitnessFunction)->execute(highscore.get());
+		(*fitnessFunction)->execute(highscore);
 	}
 
 	// 4. Step: Select the relevant evolution objects (Other objects will be deleted)
 	for (auto selectionCommand = getOptions()->selectionCommands.begin(); selectionCommand != getOptions()->selectionCommands.end(); selectionCommand++)
 	{
-		(*selectionCommand)->execute(highscore.get(), getOptions()->world->getEvolutionObjects(), &notUsedObjects);
+		(*selectionCommand)->execute(highscore, getOptions()->world->getEvolutionObjects(), &notUsedObjects);
 	}
 
 	// Continue with the next generation

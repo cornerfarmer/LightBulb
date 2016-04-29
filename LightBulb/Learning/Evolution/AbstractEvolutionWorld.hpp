@@ -21,6 +21,7 @@ class AbstractEvolutionWorld : public AbstractLoggable
 {
 private:
 	static bool compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y);
+	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> currentHighscore;
 protected:
 	LearningState* learningState;
 public:
@@ -34,7 +35,7 @@ public:
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual bool doSimulationStep() = 0;
 	// Returns a list of all current evolution objects ordered by their score
-	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> getHighscoreList();
+	virtual std::vector<std::pair<double, AbstractEvolutionObject*>>* getHighscoreList();
 	// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)
 	virtual double getScore(AbstractEvolutionObject* object) = 0;
 	//
@@ -46,6 +47,10 @@ public:
 	virtual std::vector<std::string> getDataSetLabels();
 
 	void setLearningState(LearningState* learningState_);
+
+	virtual int getPopulationSize() = 0;
+
+	virtual void clearPopulation() = 0;
 };
 
 #endif

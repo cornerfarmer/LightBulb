@@ -18,8 +18,8 @@ FunctionDrawer::FunctionDrawer(FunctionDrawerOptions& options_)
 
 void FunctionDrawer::recalculateAllValues()
 {
-	positions.resize(options->functionSimulator->getEvolutionObjects()->size() + options->markedPositions.size());
-	mutationStrengths.resize(options->functionSimulator->getEvolutionObjects()->size());
+	positions.resize(options->functionSimulator->getPopulationSize() + options->markedPositions.size());
+	mutationStrengths.resize(options->functionSimulator->getPopulationSize());
 	
 	auto position = positions.begin();
 	auto mutationStrength = mutationStrengths.begin();

@@ -24,6 +24,7 @@ struct AbstractEvolutionLearningRuleOptions : public AbstractLearningRuleOptions
 // A LearningRule is used to improve a AbstractNeuralNetwork
 class AbstractEvolutionLearningRule : public AbstractLearningRule
 {
+	friend class BipartiteEvolutionLearningRule;
 private:
 protected:
 	AbstractEvolutionLearningRuleOptions* getOptions();

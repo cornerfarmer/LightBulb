@@ -585,6 +585,7 @@
     <ClCompile Include="Learning\AbstractSupervisedLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp" />
     <ClCompile Include="Logging\AbstractLoggable.cpp" />
+    <ClCompile Include="..\UnitTests\Learning\Evolution\BipartiteEvolutionLearningRuleTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">

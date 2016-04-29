@@ -19,7 +19,7 @@ NetworkDrawer::NetworkDrawer(NetworkDrawerOptions& options_)
 void NetworkDrawer::recalculateAllValues()
 {
 	connections = sf::VertexArray(sf::Lines, 22);
-	mutationStrengths.resize(options->networkSimulator->getEvolutionObjects()->size());
+	mutationStrengths.resize(options->networkSimulator->getPopulationSize());
 	consumerShapes.resize(options->networkSimulator->getConsumers()->size());
 	Network* network = static_cast<Network*>(options->networkSimulator->getEvolutionObjects()->front());
 

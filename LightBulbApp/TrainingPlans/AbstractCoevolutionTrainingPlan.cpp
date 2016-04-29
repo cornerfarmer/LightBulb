@@ -1,6 +1,7 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
+#include <Learning/Evolution/EvolutionLearningRule.hpp>
 
 void AbstractCoevolutionTrainingPlan::fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions* options)
 {

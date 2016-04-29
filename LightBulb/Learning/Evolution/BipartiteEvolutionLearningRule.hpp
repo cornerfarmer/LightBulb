@@ -4,7 +4,7 @@
 #define _BIPARTITEEVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "Learning/AbstractEvolutionLearningRule.hpp"
 
 // Library Includes
 
@@ -13,8 +13,8 @@
 
 struct BipartiteEvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 {
-	EvolutionLearningRule* learningRule1;
-	EvolutionLearningRule* learningRule2;
+	AbstractEvolutionLearningRule* learningRule1;
+	AbstractEvolutionLearningRule* learningRule2;
 
 	BipartiteEvolutionLearningRuleOptions()
 	{
@@ -39,8 +39,8 @@ public:
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
 	static std::string getName();
 	std::vector<std::string> getDataSetLabels();
-	EvolutionLearningRule* getFirstLearningRule();
-	EvolutionLearningRule* getSecondLearningRule();
+	AbstractEvolutionLearningRule* getFirstLearningRule();
+	AbstractEvolutionLearningRule* getSecondLearningRule();
 };
 
 #include "IO/BipartiteEvolutionLearningRuleIO.hpp"

@@ -51,7 +51,6 @@ struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOption
 // A learingRule for improving NNs with the help of algorithms oriented by the evolution
 class EvolutionLearningRule : public AbstractEvolutionLearningRule
 {
-	friend class BipartiteEvolutionLearningRule;
 protected:
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
 	bool doIteration();
@@ -66,7 +65,7 @@ public:
 	void initializeTry();
 	static std::string getName();
 	std::vector<std::string> getDataSetLabels();
-
+	void setLogger(AbstractLogger* logger);
 };
 
 #include "IO/EvolutionLearningRuleIO.hpp"

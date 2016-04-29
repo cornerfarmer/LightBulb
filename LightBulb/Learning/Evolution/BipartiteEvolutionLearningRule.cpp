@@ -29,13 +29,13 @@ std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels()
 	return labels1;
 }
 
-EvolutionLearningRule* BipartiteEvolutionLearningRule::getFirstLearningRule()
+AbstractEvolutionLearningRule* BipartiteEvolutionLearningRule::getFirstLearningRule()
 {
 	return getOptions()->learningRule1;
 }
 
 
-EvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearningRule()
+AbstractEvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearningRule()
 {
 	return getOptions()->learningRule2;
 }
@@ -43,12 +43,10 @@ EvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearningRule()
 
 void BipartiteEvolutionLearningRule::initialize()
 {
-	getOptions()->learningRule1->options->logger = options->logger;
-	getOptions()->learningRule2->options->logger = options->logger;
+	getOptions()->learningRule1->setLogger(options->logger);
+	getOptions()->learningRule2->setLogger(options->logger);
 	getOptions()->learningRule1->learningState = learningState;
 	getOptions()->learningRule2->learningState = learningState;
-	getOptions()->learningRule1->setLoggerToUsedObjects();
-	getOptions()->learningRule2->setLoggerToUsedObjects();
 }
 
 BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOptions()
@@ -75,5 +73,5 @@ void BipartiteEvolutionLearningRule::initializeTry()
 
 bool BipartiteEvolutionLearningRule::hasLearningSucceeded()
 {
-	return learningState->tries > 1;
+	return (getOptions()->learningRule1->hasLearningSucceeded() || getOptions()->learningRule2->hasLearningSucceeded());
 }

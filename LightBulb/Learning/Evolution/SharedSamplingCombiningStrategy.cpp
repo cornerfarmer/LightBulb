@@ -71,5 +71,5 @@ SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCom
 
 int SharedSamplingCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
 {
-	return amountOfCompetitionsPerObject * simulationWorld->getEvolutionObjects()->size();
+	return amountOfCompetitionsPerObject * simulationWorld->getPopulationSize();
 }

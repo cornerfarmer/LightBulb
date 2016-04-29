@@ -39,11 +39,11 @@ namespace cereal
 			IOStorage<AbstractLearningRule>::push(learningRule->getOptions()->learningRule1);
 			std::unique_ptr<AbstractLearningRule> learningRuleDummy;
 			ar(cereal::make_nvp("learningRule1", learningRuleDummy));
-			learningRule->getOptions()->learningRule1 = static_cast<EvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			learningRule->getOptions()->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
 			IOStorage<AbstractLearningRule>::push(learningRule->getOptions()->learningRule2);
 			ar(cereal::make_nvp("learningRule2", learningRuleDummy));
-			learningRule->getOptions()->learningRule2 = static_cast<EvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			learningRule->getOptions()->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
 			IOStorage<AbstractLearningRule>::push(learningRule);
 		}

@@ -7,7 +7,7 @@
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
 class TicTacToe;
-class RandomCombiningStrategy;
+class SharedSamplingCombiningStrategy;
 class AbstractHallOfFameAlgorithm;
 
 class TicTacToeEvolutionExample : public AbstractCoevolutionTrainingPlan
@@ -15,8 +15,8 @@ class TicTacToeEvolutionExample : public AbstractCoevolutionTrainingPlan
 private:
 	AbstractHallOfFameAlgorithm* hof1;
 	AbstractHallOfFameAlgorithm* hof2;
-	RandomCombiningStrategy* cs1;
-	RandomCombiningStrategy* cs2;
+	SharedSamplingCombiningStrategy* cs1;
+	SharedSamplingCombiningStrategy* cs2;
 protected:
 	AbstractLearningRule* createLearningRate();
 	AbstractEvolutionWorld* createWorld();

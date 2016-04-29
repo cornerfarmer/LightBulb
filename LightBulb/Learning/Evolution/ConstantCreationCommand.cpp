@@ -12,7 +12,7 @@ ConstantCreationCommand::ConstantCreationCommand(int objectCount_)
 void ConstantCreationCommand::execute(AbstractEvolutionWorld& world)
 {
 	// Calculate the amount of objects we have to create
-	int objectsToCreate = objectCount - world.getEvolutionObjects()->size();
+	int objectsToCreate = objectCount - world.getPopulationSize();
 	// Create them
 	for (int i = 0; i < objectsToCreate; i++)
 	{

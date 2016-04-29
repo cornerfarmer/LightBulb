@@ -3,6 +3,9 @@
 #ifndef _ABSTRACTFITNESSFUNCTION_H_
 #define _ABSTRACTFITNESSFUNCTION_H_
 
+// Includes
+#include "Logging/AbstractLoggable.hpp"
+
 // Library Includes
 #include <vector>
 #include <utility>
@@ -11,7 +14,7 @@
 class AbstractEvolutionObject;
 
 //
-class AbstractFitnessFunction
+class AbstractFitnessFunction : public AbstractLoggable
 {
 public:
 	virtual ~AbstractFitnessFunction() {};
