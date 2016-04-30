@@ -587,6 +587,7 @@
     <ClCompile Include="Logging\AbstractLoggable.cpp" />
     <ClCompile Include="Learning\Evolution\ExponentialFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunction.cpp" />
+    <ClCompile Include="..\UnitTests\Learning\Evolution\PositiveMakerFitnessFunctionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
