@@ -32,7 +32,7 @@ public:
 	// Inherited:
 	void doNNCalculation();
 	void resetNN();
-	NeuralNetwork* getNeuralNetwork();
+	AbstractNeuralNetwork* getNeuralNetwork();
 	AbstractEvolutionObject* clone(bool addToWorld = true);
 };
 #endif

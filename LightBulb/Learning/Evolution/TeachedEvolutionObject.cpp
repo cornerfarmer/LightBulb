@@ -23,7 +23,7 @@ TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingE
 	randomizeMutationStrength();
 }
 
-NeuralNetwork* TeachedEvolutionObject::getNeuralNetwork()
+AbstractNeuralNetwork* TeachedEvolutionObject::getNeuralNetwork()
 {
 	return neuralNetwork;
 }

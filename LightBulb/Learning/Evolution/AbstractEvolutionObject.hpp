@@ -8,7 +8,7 @@
 
 // Forward declarations
 class EvolutionLearningRule;
-class NeuralNetwork;
+class AbstractNeuralNetwork;
 
 // This class describes an abstract object which "lives" inside an evolution world.
 // The evolution object contains a NN which should calculate the actions from external and internal inputs.
@@ -29,7 +29,7 @@ protected:
 public:	
 	virtual ~AbstractEvolutionObject() {}
 	virtual void copyPropertiesFrom(AbstractEvolutionObject* notUsedObject);
-	virtual NeuralNetwork* getNeuralNetwork() = 0;
+	virtual AbstractNeuralNetwork* getNeuralNetwork() = 0;
 	virtual std::vector<double>* getMutationStrength();
 	virtual void setMutationStrength(std::vector<double>* newMutationStrength);
 	// This method should execute one NN calculation. (Mostly: Get input -> let the NN calculate -> react depending on the NN output)

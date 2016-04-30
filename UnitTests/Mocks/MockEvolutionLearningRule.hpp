@@ -11,6 +11,7 @@ class MockEvolutionLearningRule : public AbstractEvolutionLearningRule
 public:
 	MockEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_):AbstractEvolutionLearningRule(options_) {};
 	MOCK_METHOD0(doIteration, bool ());
+	MOCK_METHOD0(getWorld, AbstractEvolutionWorld* ());
 	MOCK_METHOD0(initializeStartLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeResumeLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeLearningAlgoritm, void ());

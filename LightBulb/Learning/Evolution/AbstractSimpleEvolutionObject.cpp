@@ -26,7 +26,7 @@ AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWo
 	world = world_;
 }
 
-NeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
+AbstractNeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 {
 	return neuralNetwork.get();
 }

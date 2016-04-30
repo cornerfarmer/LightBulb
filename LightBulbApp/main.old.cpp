@@ -1992,7 +1992,7 @@ void doTeachedEvolution838Test() {
 	//learningRuleAnalyser.execute();
 	learningRule.doLearning();
 
-	NeuralNetwork* bestNetwork =  world.getEvolutionObjects()->front()->getNeuralNetwork();
+	AbstractNeuralNetwork* bestNetwork =  world.getEvolutionObjects()->front()->getNeuralNetwork();
 
 	TopologicalOrder topologicalOrder;
 	double totalError = teacher.getTotalError(*bestNetwork, topologicalOrder);

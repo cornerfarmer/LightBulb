@@ -2,6 +2,7 @@
 #include "Learning/Evolution/LinearScalingFitnessFunction.hpp"
 // Library includes
 #include <stdexcept>
+#include <algorithm>
 
 LinearScalingFitnessFunction::LinearScalingFitnessFunction(double proportionalScaling_, double base_, bool useDynamicScaling_)
 {

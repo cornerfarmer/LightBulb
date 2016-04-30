@@ -31,6 +31,5 @@ void FitnessSharingFitnessFunction::execute(std::vector<std::pair<double, Abstra
 
 			entry->first = entry->first / sharingValue;
 		}
-		dissimilarityThreshold -= 0.1;
 	}
 }

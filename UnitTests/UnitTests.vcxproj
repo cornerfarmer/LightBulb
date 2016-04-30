@@ -145,6 +145,11 @@
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\ExponentialFitnessFunctionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunctionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithmTest.cpp" />
+    <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunctionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\PerfectObjectFoundConditionTest.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
@@ -157,6 +162,8 @@
   <ItemGroup>
     <ClInclude Include="Mocks\MockActivationFunction.hpp" />
     <ClInclude Include="Mocks\MockActivationOrder.hpp" />
+    <ClInclude Include="Mocks\MockCoevolutionWorld.hpp" />
+    <ClInclude Include="Mocks\MockCombiningStrategy.hpp" />
     <ClInclude Include="Mocks\MockCreationCommand.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockEvolutionObject.hpp" />

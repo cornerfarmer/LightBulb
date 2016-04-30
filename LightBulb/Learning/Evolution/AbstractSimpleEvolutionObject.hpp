@@ -44,7 +44,7 @@ public:
 	AbstractSimpleEvolutionObject() = default;
 	// Inherited:
 	void doNNCalculation();
-	NeuralNetwork* getNeuralNetwork();
+	AbstractNeuralNetwork* getNeuralNetwork();
 	void resetNN();
 	AbstractEvolutionObject* clone(bool addToWorld = true);
 };

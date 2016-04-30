@@ -32,7 +32,7 @@ public:
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
 	std::vector<std::string> getDataSetLabels();
-	AbstractEvolutionWorld* getWorld();
+	virtual AbstractEvolutionWorld* getWorld();
 };
 
 USE_PARENT_SINGLE_SERIALIZATION(AbstractEvolutionLearningRule, AbstractLearningRule);

@@ -15,7 +15,7 @@ bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, Abstrac
 		if (coevolutionWorld->isParasiteWorld() && perfectObjectExists(coevolutionWorld->getCombiningStrategy()))
 		{
 			counter++;
-			if (counter > count)
+			if (counter >= count)
 				return true;
 		}
 		else

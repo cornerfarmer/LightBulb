@@ -37,10 +37,10 @@ public:
 	double getScore(AbstractEvolutionObject* object);
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
 	virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; }
-	AbstractCombiningStrategy* getCombiningStrategy();
+	virtual AbstractCombiningStrategy* getCombiningStrategy();
 	void setLogger(AbstractLogger* logger_);
 	std::vector<std::string> getDataSetLabels();
-	bool isParasiteWorld();
+	virtual bool isParasiteWorld();
 };
 
 #include "IO/AbstractCoevolutionWorldIO.hpp"
