@@ -36,7 +36,7 @@ public:
 	// Creates a new mutation command with the given mutation algorithm
 	AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_);
 	// Executes the mutations. (The algorithm will take a few of the old objects, mutate them and insert them into the new object vector)
-	void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
+	virtual void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 };
 
 #endif

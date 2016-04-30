@@ -91,6 +91,13 @@ TEST_F(EvolutionLearningRuleTest, learn)
 	EXPECT_CALL(*evolutionWorld, getEvolutionObjects()).WillRepeatedly(testing::Return(&objects));
 	EXPECT_CALL(*evolutionWorld, getPopulationSize()).WillRepeatedly(testing::Return(0));
 	testing::Expectation lastIterationExpectation;
+	testing::Expectation createExpectation;
+
+	std::vector<std::pair<double, AbstractEvolutionObject*>> emptyHighscore;
+
+	std::vector<std::pair<double, AbstractEvolutionObject*>> unseccessfullHighscore;
+	unseccessfullHighscore.push_back(std::make_pair(20, new MockEvolutionObject()));
+
 	{
 		testing::InSequence s;
 
@@ -100,20 +107,39 @@ TEST_F(EvolutionLearningRuleTest, learn)
 
 		// iteration 0
 		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
+		createExpectation = EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld))).Times(1);
+		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
+
+		EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));
+		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);
+		EXPECT_CALL(*selectionCommand, execute(&unseccessfullHighscore, &objects, testing::_)).Times(1);
+
+		// iteration 1
+		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
+		EXPECT_CALL(*reuseCommand, select(&unseccessfullHighscore, testing::_)).Times(1);
+		EXPECT_CALL(*mutationCommand, select(&unseccessfullHighscore, testing::_)).Times(1);
+		EXPECT_CALL(*recombinationCommand, select(&unseccessfullHighscore, testing::_)).Times(1);
+		EXPECT_CALL(*recombinationCommand, execute(testing::_, testing::_, testing::_)).Times(1);
+		EXPECT_CALL(*mutationCommand, execute(testing::_, testing::_, testing::_)).Times(1);
+		EXPECT_CALL(*reuseCommand, execute(testing::_, testing::_, testing::_)).Times(1);
+		EXPECT_CALL(*evolutionWorld, setEvolutionObjects(testing::_)).Times(1);
+
 		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld))).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
-		std::vector<std::pair<double, AbstractEvolutionObject*>> emptyHighscore;
-		EXPECT_CALL(*evolutionWorld, getHighscoreList()).WillOnce(testing::Return(&emptyHighscore));
 
-		EXPECT_CALL(*exitCondition, evaluate(&emptyHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));
-		EXPECT_CALL(*fitnessFunction, execute(&emptyHighscore)).Times(1);
-		lastIterationExpectation = EXPECT_CALL(*selectionCommand, execute(&emptyHighscore, &objects, testing::_)).Times(1);
+		EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));
+		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);
+		lastIterationExpectation = EXPECT_CALL(*selectionCommand, execute(&unseccessfullHighscore, &objects, testing::_)).Times(1);
 	}
 
-	EXPECT_CALL(*evolutionWorld, getPopulationSize()).After(lastIterationExpectation).WillRepeatedly(testing::Return(1));
-	std::vector<std::pair<double, AbstractEvolutionObject*>> fullHighscore;
-	fullHighscore.push_back(std::make_pair(100, new MockEvolutionObject()));
-	EXPECT_CALL(*evolutionWorld, getHighscoreList()).After(lastIterationExpectation).WillRepeatedly(testing::Return(&fullHighscore));
+	EXPECT_CALL(*evolutionWorld, getHighscoreList()).WillRepeatedly(testing::Return(&emptyHighscore));
+
+	EXPECT_CALL(*evolutionWorld, getPopulationSize()).After(createExpectation).WillRepeatedly(testing::Return(1));	
+	EXPECT_CALL(*evolutionWorld, getHighscoreList()).After(createExpectation).WillRepeatedly(testing::Return(&unseccessfullHighscore));
+
+	std::vector<std::pair<double, AbstractEvolutionObject*>> successfullHighscore;
+	successfullHighscore.push_back(std::make_pair(100, new MockEvolutionObject()));
+	EXPECT_CALL(*evolutionWorld, getHighscoreList()).After(lastIterationExpectation).WillRepeatedly(testing::Return(&successfullHighscore));
 
 	evolutionLearningRule->start();
 }

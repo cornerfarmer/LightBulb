@@ -14,6 +14,7 @@ public:
 		: AbstractMutationCommand(NULL, NULL)
 	{
 	}
+	MOCK_METHOD3(execute, void (std::vector<AbstractEvolutionObject*>*, std::map<AbstractEvolutionObject*, int>*, std::vector<AbstractEvolutionObject*>*));
 	MOCK_METHOD1(setLogger, void (AbstractLogger*));
 	MOCK_METHOD2(select, void (std::vector<std::pair<double, AbstractEvolutionObject*>>*, std::map<AbstractEvolutionObject*, int>*));
 };
