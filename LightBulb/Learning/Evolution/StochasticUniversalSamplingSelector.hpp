@@ -8,7 +8,8 @@
 // Includes
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "Function/RouletteWheelSelectionFunction.hpp"
+#include "Function/AbstractSelectionFunction.hpp"
+#include <memory>
 
 // Forward declarations
 
@@ -16,13 +17,14 @@
 class StochasticUniversalSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
 {
 private:
-	RouletteWheelSelectionFunction randomFunction;
+	std::unique_ptr<AbstractSelectionFunction> randomFunction;
 	void select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 protected:
 	void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 	void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 public:
-
+	StochasticUniversalSamplingSelector();
+	void setRandomFunction(AbstractSelectionFunction* randomFunction_);
 };
 
 #endif

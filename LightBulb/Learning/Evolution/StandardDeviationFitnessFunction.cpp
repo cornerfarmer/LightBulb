@@ -31,7 +31,7 @@ void StandardDeviationFitnessFunction::execute(std::vector<std::pair<double, Abs
 	standardDeviation = sqrt(standardDeviation);
 
 	if (average < deviationFac * standardDeviation)
-		std::logic_error("Your chosen deviationFac is too big");
+		throw std::logic_error("Your chosen deviationFac is too big");
 
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{

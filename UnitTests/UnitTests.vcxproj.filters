@@ -123,6 +123,18 @@
     <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelectorTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategyTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunctionTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunctionTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">

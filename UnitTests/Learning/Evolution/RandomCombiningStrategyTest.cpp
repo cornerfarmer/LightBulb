@@ -43,9 +43,9 @@ TEST_F(RandomCombiningStrategyTest, executeSingleWorld)
 	auto result = randomCombiningStrategy->execute(&world);
 	
 	EXPECT_EQ(3, result.size());
-	EXPECT_EQ(3, result[&object1].size());
-	EXPECT_EQ(3, result[&object2].size());
-	EXPECT_EQ(3, result[&object3].size());
+	EXPECT_EQ(2, result[&object1].size());
+	EXPECT_EQ(2, result[&object2].size());
+	EXPECT_EQ(2, result[&object3].size());
 }
 
 TEST_F(RandomCombiningStrategyTest, executeTwoWorlds)

@@ -1,7 +1,9 @@
 // Includes
-#include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>.hpp>
+#include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
+#include <Function/RouletteWheelSelectionFunction.hpp>
 //Library includes
 #include <algorithm>
+
 
 void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 {
@@ -13,7 +15,7 @@ void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount
 		probabilities.push_back(entry->first);
 	}
 
-	std::vector<int> selectedIndices = randomFunction.execute(probabilities, objectCount);
+	std::vector<int> selectedIndices = randomFunction->execute(probabilities, objectCount);
 	int mutationSequenceIndex = 0;
 	for (auto selectedIndex = selectedIndices.begin(); selectedIndex != selectedIndices.end(); selectedIndex++, mutationSequenceIndex++)
 	{
@@ -33,4 +35,15 @@ void StochasticUniversalSamplingSelector::selectForRecombination(int recombinati
 {
 	select(true, recombinationCount * 2, highscore);
 	std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
+}
+
+
+StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector()
+{
+	randomFunction.reset(new RouletteWheelSelectionFunction());
+}
+
+void StochasticUniversalSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
+{
+	randomFunction.reset(randomFunction_);
 }

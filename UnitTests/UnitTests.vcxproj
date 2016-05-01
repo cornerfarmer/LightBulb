@@ -156,6 +156,10 @@
     <ClCompile Include="Learning\Evolution\RandomSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\RateDifferenceConditionTest.cpp" />
     <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelectorTest.cpp" />
+    <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategyTest.cpp" />
+    <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunctionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunctionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
