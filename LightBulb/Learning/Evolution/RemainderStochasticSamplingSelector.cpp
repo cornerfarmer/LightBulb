@@ -1,5 +1,6 @@
 // Includes
 #include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
+#include <Function/RouletteWheelSelectionFunction.hpp>
 //Library includes
 #include <iostream>
 #include <iomanip>
@@ -45,9 +46,9 @@ void RemainderStochasticSamplingSelector::select(bool recombination, int objectC
 	while ((recombination && getRecombinationSelection()->size() < objectCount) || (!recombination && getMutationSelection()->size() < objectCount))
 	{
 		if (recombination)
-			addObjectToRecombination((*highscore)[randomFunction.execute(secondChance)].second);
+			addObjectToRecombination((*highscore)[randomFunction->execute(secondChance)].second);
 		else
-			addObjectToMutate((*highscore)[randomFunction.execute(secondChance)].second);
+			addObjectToMutate((*highscore)[randomFunction->execute(secondChance)].second);
 	}
 }
 
@@ -65,4 +66,10 @@ void RemainderStochasticSamplingSelector::selectForRecombination(int recombinati
 RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
 {
 	withReplacement = withReplacement_;
+	randomFunction.reset(new RouletteWheelSelectionFunction());
+}
+
+void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
+{
+	randomFunction.reset(randomFunction_);
 }

@@ -152,6 +152,10 @@
     <ClCompile Include="Learning\Evolution\PerfectObjectFoundConditionTest.cpp" />
     <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\RandomCombiningStrategyTest.cpp" />
+    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithmTest.cpp" />
+    <ClCompile Include="Learning\Evolution\RandomSelectorTest.cpp" />
+    <ClCompile Include="Learning\Evolution\RateDifferenceConditionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
@@ -179,12 +183,14 @@
     <ClInclude Include="Mocks\MockNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
     <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
+    <ClInclude Include="Mocks\MockRandomFunction.hpp" />
     <ClInclude Include="Mocks\MockRecombinationAlgorithm.hpp" />
     <ClInclude Include="Mocks\MockRecombinationCommand.hpp" />
     <ClInclude Include="Mocks\MockRecombinationSelector.hpp" />
     <ClInclude Include="Mocks\MockReuseCommand.hpp" />
     <ClInclude Include="Mocks\MockReuseSelector.hpp" />
     <ClInclude Include="Mocks\MockSelectionCommand.hpp" />
+    <ClInclude Include="Mocks\MockSelectionFunction.hpp" />
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -111,6 +111,18 @@
     <ClCompile Include="Learning\Evolution\RandomCombiningStrategyTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithmTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RandomSelectorTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RateDifferenceConditionTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelectorTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
@@ -183,6 +195,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockCombiningStrategy.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockRandomFunction.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockSelectionFunction.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

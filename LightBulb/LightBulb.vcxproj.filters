@@ -587,7 +587,7 @@
     <ClCompile Include="Logging\AbstractLoggable.cpp" />
     <ClCompile Include="Learning\Evolution\ExponentialFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunction.cpp" />
-    <ClCompile Include="..\UnitTests\Learning\Evolution\PositiveMakerFitnessFunctionTest.cpp" />
+    <ClCompile Include="Function\AbstractSelectionFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1143,5 +1143,6 @@
     <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="Learning\Evolution\ExponentialFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\LinearScalingFitnessFunction.hpp" />
+    <ClInclude Include="Function\AbstractSelectionFunction.hpp" />
   </ItemGroup>
 </Project>

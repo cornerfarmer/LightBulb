@@ -136,6 +136,7 @@
     <ClCompile Include="Function\AbstractInputFunction.cpp" />
     <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp" />
     <ClCompile Include="Function\AbstractOutputFunction.cpp" />
+    <ClCompile Include="Function\AbstractSelectionFunction.cpp" />
     <ClCompile Include="Function\AbstractShrinkFunction.cpp" />
     <ClCompile Include="Function\BinaryFunction.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -687,6 +688,7 @@
     <ClInclude Include="Function\AbstractInputFunction.hpp" />
     <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp" />
     <ClInclude Include="Function\AbstractOutputFunction.hpp" />
+    <ClInclude Include="Function\AbstractSelectionFunction.hpp" />
     <ClInclude Include="Function\AbstractShrinkFunction.hpp" />
     <ClInclude Include="Function\BinaryFunction.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
