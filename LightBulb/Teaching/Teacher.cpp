@@ -47,10 +47,10 @@ double Teacher::getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActi
 	return totalError;
 }
 
-std::unique_ptr<Teacher> Teacher::unfold()
+AbstractTeacher* Teacher::unfold()
 {
 	// Create a new teacher
-	std::unique_ptr<Teacher> unfoldedTeacher(new Teacher());
+	AbstractTeacher* unfoldedTeacher = new Teacher();
 	// Unfold all teaching lessons
 	for (auto originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
 	{

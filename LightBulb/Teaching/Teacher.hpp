@@ -5,17 +5,14 @@
 
 // Includes
 #include "AbstractTeachingLesson.hpp"
+#include "AbstractTeacher.hpp"
 
 // Library includes
-#include <vector>
-#include <memory>
 
 // Forward declarations
-class AbstractNeuralNetwork;
-class AbstractActivationOrder;
 
-// A techer manages many techingLessons
-class Teacher
+// A teacher manages many teachingLessons
+class Teacher : public AbstractTeacher
 {
 private:
 	// A list of teaching lessons which are used for total error calculation and learning stuff
@@ -34,7 +31,7 @@ public:
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
 	double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Returns a unfolded version of this teacher
-	std::unique_ptr<Teacher> unfold();
+	AbstractTeacher* unfold();
 	// Returns the biggest used timestep of all teaching lessons
 	int getMaxTimeStep();
 

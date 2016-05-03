@@ -13,7 +13,7 @@
 // Forward declarations
 class EvolutionLearningRule;
 class AbstractEvolutionObject;
-class Teacher;
+class AbstractTeacher;
 
 // Evolution world which can be used to use the EvolutionLearingRule in combination with a Teacher
 class TeachingEvolutionWorld : public AbstractSimpleEvolutionWorld
@@ -22,13 +22,13 @@ protected:
 	// Inherited
 	AbstractEvolutionObject* createNewObject();
 	// Holds the given teacher
-	Teacher* teacher;
+	AbstractTeacher* teacher;
 	// Holds the given network options for new evolution objects
 	LayeredNetworkOptions networkOptions;
 public:
 	// Creates a new world with the given teacher and the network options
-	TeachingEvolutionWorld(Teacher* teacher_, LayeredNetworkOptions& networkOptions_);
-	Teacher* getTeacher();
+	TeachingEvolutionWorld(AbstractTeacher* teacher_, LayeredNetworkOptions& networkOptions_);
+	AbstractTeacher* getTeacher();
 	// Inherited:
 	bool doSimulationStep();
 	double getScore(AbstractEvolutionObject* object);

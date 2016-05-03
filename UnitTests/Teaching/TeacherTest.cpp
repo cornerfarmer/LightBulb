@@ -78,7 +78,7 @@ TEST_F(TeacherTest, unfold)
 	EXPECT_CALL(*testingLesson1, unfold()).WillOnce(testing::Return(unfoldedTestingLesson1));
 	EXPECT_CALL(*testingLesson2, unfold()).WillOnce(testing::Return(unfoldedTestingLesson2));
 
-	std::unique_ptr<Teacher> unfoldetedTeacher = teacher->unfold();
+	std::unique_ptr<AbstractTeacher> unfoldetedTeacher(teacher->unfold());
 
 	EXPECT_EQ(2, unfoldetedTeacher->getTeachingLessons()->size());
 	EXPECT_EQ(unfoldedTeachingLesson1, unfoldetedTeacher->getTeachingLessons()->at(0).get());

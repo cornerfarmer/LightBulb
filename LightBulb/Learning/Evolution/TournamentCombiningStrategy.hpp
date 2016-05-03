@@ -17,6 +17,7 @@
 class TournamentCombiningStrategy : public AbstractCombiningStrategy
 {
 private:
+	bool doShuffleBeforeTournament;
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> cachedObjects;
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> currentLevel;
 	std::unique_ptr<std::vector<AbstractEvolutionObject*>> nextLevel;
@@ -25,6 +26,7 @@ private:
 public:	
 	TournamentCombiningStrategy();
 	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
+	void setDoShuffleBeforeTournament(bool doShuffleBeforeTournament_);
 };
 
 EMPTY_CHILD_SERIALIZATION(TournamentCombiningStrategy)

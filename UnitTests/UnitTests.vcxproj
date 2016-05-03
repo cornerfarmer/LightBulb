@@ -160,6 +160,8 @@
     <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp" />
+    <ClCompile Include="Learning\Evolution\TeachedEvolutionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\TournamentCombiningStrategyTest.cpp" />
     <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
@@ -175,6 +177,7 @@
     <ClInclude Include="Mocks\MockCoevolutionWorld.hpp" />
     <ClInclude Include="Mocks\MockCombiningStrategy.hpp" />
     <ClInclude Include="Mocks\MockCreationCommand.hpp" />
+    <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockEvolutionObject.hpp" />
     <ClInclude Include="Mocks\MockEvolutionWorld.hpp" />
@@ -195,6 +198,7 @@
     <ClInclude Include="Mocks\MockReuseSelector.hpp" />
     <ClInclude Include="Mocks\MockSelectionCommand.hpp" />
     <ClInclude Include="Mocks\MockSelectionFunction.hpp" />
+    <ClInclude Include="Mocks\MockTeacher.hpp" />
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

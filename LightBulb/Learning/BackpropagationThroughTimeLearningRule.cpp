@@ -30,7 +30,7 @@ NeuralNetwork* BackpropagationThroughTimeLearningRule::initializeNeuralNetwork(N
 Teacher* BackpropagationThroughTimeLearningRule::initializeTeacher(Teacher &teacher)
 {
 	// Unfold the teacher and return it
-	return teacher.unfold().release();
+	return teacher.unfold();
 }
 
 void BackpropagationThroughTimeLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)

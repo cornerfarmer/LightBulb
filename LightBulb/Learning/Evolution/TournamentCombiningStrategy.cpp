@@ -8,6 +8,7 @@
 
 TournamentCombiningStrategy::TournamentCombiningStrategy()
 {
+	doShuffleBeforeTournament = true;
 	currentLevel.reset(new std::vector<AbstractEvolutionObject*>());
 	nextLevel.reset(new std::vector<AbstractEvolutionObject*>());
 	cachedObjects.reset(new std::vector<AbstractEvolutionObject*>());
@@ -18,18 +19,20 @@ int TournamentCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simul
 	throw std::logic_error("Not yet implemented.");
 }
 
+void TournamentCombiningStrategy::setDoShuffleBeforeTournament(bool doShuffleBeforeTournament_)
+{
+	doShuffleBeforeTournament = doShuffleBeforeTournament_;
+}
+
 void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 {
-	for (int i = 0; i < 4; i++)
-	{
-		// TODO: Try to make it work with two populations
-		*currentLevel = *firstObjects;
-		nextLevel->clear();
+	// TODO: Try to make it work with two populations
+	*currentLevel = *firstObjects;
+	nextLevel->clear();
 
-		while (currentLevel->size() != 1) {
-			processLevel(simulationWorld);
-			nextLevel.swap(currentLevel);
-		}
+	while (currentLevel->size() > 1) {
+		processLevel(simulationWorld);
+		nextLevel.swap(currentLevel);
 	}
 }
 
@@ -37,7 +40,8 @@ void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWo
 void TournamentCombiningStrategy::processLevel(AbstractCoevolutionWorld* simulationWorld)
 {
 	nextLevel->clear();
-	std::random_shuffle(currentLevel->begin(), currentLevel->end());
+	if (doShuffleBeforeTournament)
+		std::random_shuffle(currentLevel->begin(), currentLevel->end());
 
 	for (int i = 0; i < currentLevel->size(); i+=2) {
 		if (i < currentLevel->size() - 1) {

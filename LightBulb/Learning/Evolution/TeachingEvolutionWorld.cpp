@@ -9,7 +9,7 @@ AbstractEvolutionObject* TeachingEvolutionWorld::createNewObject()
 	return new TeachedEvolutionObject(this, networkOptions);
 }
 
-TeachingEvolutionWorld::TeachingEvolutionWorld(Teacher* teacher_, LayeredNetworkOptions& networkOptions_)
+TeachingEvolutionWorld::TeachingEvolutionWorld(AbstractTeacher* teacher_, LayeredNetworkOptions& networkOptions_)
 {
 	teacher = teacher_;
 	networkOptions = networkOptions_;
@@ -32,7 +32,7 @@ double TeachingEvolutionWorld::getScore(AbstractEvolutionObject* object)
 }
 
 
-Teacher* TeachingEvolutionWorld::getTeacher()
+AbstractTeacher* TeachingEvolutionWorld::getTeacher()
 {
 	return teacher;
 }
