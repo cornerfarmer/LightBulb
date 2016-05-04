@@ -64,12 +64,12 @@ TEST_F(RandomSelectorTest, executeRecombinationSelection)
 
 	{
 		testing::InSequence s;
-		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(4));
-		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(2));
 		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(3));
 		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(1));
-		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(3));
-		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(5));
+		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(2));
+		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(0));
+		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(2));
+		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(4));
 	}
 
 	std::map<AbstractEvolutionObject*, int> counter;
@@ -77,17 +77,17 @@ TEST_F(RandomSelectorTest, executeRecombinationSelection)
 	std::vector<AbstractEvolutionObject*>* selectedObjects = randomSelector->getRecombinationSelection();
 
 	EXPECT_EQ(6, selectedObjects->size());
-	EXPECT_EQ(highscore[4].second, selectedObjects->at(0));
-	EXPECT_EQ(highscore[2].second, selectedObjects->at(1));
-	EXPECT_EQ(highscore[3].second, selectedObjects->at(2));
-	EXPECT_EQ(highscore[1].second, selectedObjects->at(3));
-	EXPECT_EQ(highscore[3].second, selectedObjects->at(4));
-	EXPECT_EQ(highscore[5].second, selectedObjects->at(5));
+	EXPECT_EQ(highscore[3].second, selectedObjects->at(0));
+	EXPECT_EQ(highscore[1].second, selectedObjects->at(1));
+	EXPECT_EQ(highscore[2].second, selectedObjects->at(2));
+	EXPECT_EQ(highscore[0].second, selectedObjects->at(3));
+	EXPECT_EQ(highscore[2].second, selectedObjects->at(4));
+	EXPECT_EQ(highscore[4].second, selectedObjects->at(5));
 
 	EXPECT_EQ(5, counter.size());
-	EXPECT_EQ(1, counter[highscore[4].second]);
-	EXPECT_EQ(1, counter[highscore[2].second]);
-	EXPECT_EQ(2, counter[highscore[3].second]);
+	EXPECT_EQ(1, counter[highscore[3].second]);
 	EXPECT_EQ(1, counter[highscore[1].second]);
-	EXPECT_EQ(1, counter[highscore[5].second]);
+	EXPECT_EQ(2, counter[highscore[2].second]);
+	EXPECT_EQ(1, counter[highscore[0].second]);
+	EXPECT_EQ(1, counter[highscore[4].second]);
 }

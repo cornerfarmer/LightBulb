@@ -8,12 +8,16 @@
 
 void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 {
+	if (!otherCombiningStrategy)
+		throw std::invalid_argument("SharedSamplingCombiningStrategy only works with two worlds.");
+
 	std::vector<AbstractEvolutionObject*> sample;
 	std::map<AbstractEvolutionObject*, int> beat;
 	std::map<AbstractEvolutionObject*, double> sampleFitness;
 	auto prevResults = otherCombiningStrategy->getPrevResults();
 	while (sample.size() < amountOfCompetitionsPerObject)
-	{		AbstractEvolutionObject* bestObject = NULL;
+	{		
+		AbstractEvolutionObject* bestObject = NULL;
 		for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
 		{
 			if (sampleFitness[*secondPlayer] != -1)
@@ -22,7 +26,7 @@ void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld* simulati
 				for (auto result = (*prevResults)[*secondPlayer].begin(); result != (*prevResults)[*secondPlayer].end(); result++)
 				{
 					if (result->second)
-						sampleFitness[*secondPlayer] += 1 / (1 + beat[result->first]);
+						sampleFitness[*secondPlayer] += 1.0 / (1 + beat[result->first]);
 				}
 				if (bestObject == NULL || sampleFitness[bestObject] < sampleFitness[*secondPlayer])
 					bestObject = *secondPlayer;
@@ -57,14 +61,14 @@ void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld* simulati
 void SharedSamplingCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld* newSecondWorld)
 {
 	AbstractCombiningStrategy::setSecondWorld(newSecondWorld);
-	otherCombiningStrategy = static_cast<SharedSamplingCombiningStrategy*>(secondWorld->getCombiningStrategy());
+	otherCombiningStrategy = secondWorld->getCombiningStrategy();
 }
 
 SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, AbstractCoevolutionWorld* secondWorld_)
 	:AbstractCombiningStrategy(secondWorld_)
 {
 	if (secondWorld)
-		otherCombiningStrategy = static_cast<SharedSamplingCombiningStrategy*>(secondWorld->getCombiningStrategy());
+		otherCombiningStrategy = secondWorld->getCombiningStrategy();
 	amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
 }
 

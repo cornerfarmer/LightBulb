@@ -24,8 +24,9 @@ TEST_F(BestSelectionCommandTest, executeReuseSelection)
 	highscore.push_back(std::make_pair(3, new MockEvolutionObject()));
 	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
 	highscore.push_back(std::make_pair(1, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(0, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(-1, new MockEvolutionObject()));
+	MockEvolutionObject* notUsedObject1 = new MockEvolutionObject(), *notUsedObject2 = new MockEvolutionObject();
+	highscore.push_back(std::make_pair(0, notUsedObject1));
+	highscore.push_back(std::make_pair(-1, notUsedObject2));
 
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
 
@@ -38,6 +39,6 @@ TEST_F(BestSelectionCommandTest, executeReuseSelection)
 	EXPECT_EQ(highscore[2].second, objects[2]);
 
 	EXPECT_EQ(2, notUsedObjects.size());
-	EXPECT_EQ(highscore[3].second, notUsedObjects[0]);
-	EXPECT_EQ(highscore[4].second, notUsedObjects[1]);
+	EXPECT_EQ(notUsedObject1, notUsedObjects[0]);
+	EXPECT_EQ(notUsedObject2, notUsedObjects[1]);
 }

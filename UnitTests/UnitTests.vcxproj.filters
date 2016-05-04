@@ -141,6 +141,9 @@
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategyTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategyTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">

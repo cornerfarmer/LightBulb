@@ -158,6 +158,7 @@
     <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategyTest.cpp" />
     <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunctionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategyTest.cpp" />
     <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\TeachedEvolutionTest.cpp" />

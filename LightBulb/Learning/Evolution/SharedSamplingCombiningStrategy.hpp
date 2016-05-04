@@ -19,7 +19,7 @@ class SharedSamplingCombiningStrategy : public AbstractCombiningStrategy
 	friend void serialize(Archive& archive, SharedSamplingCombiningStrategy& sharedSamplingCombiningStrategy);
 private:
 	int amountOfCompetitionsPerObject;
-	SharedSamplingCombiningStrategy* otherCombiningStrategy;
+	AbstractCombiningStrategy* otherCombiningStrategy;
 	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
 public:
 	void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);

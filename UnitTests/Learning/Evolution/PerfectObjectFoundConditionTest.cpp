@@ -76,5 +76,11 @@ TEST_F(PerfectObjectFoundConditionTest, evaluateWithReset)
 
 	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
 
-	PerfectObjectFoundConditionTest_evaluatePositive_Test();
+
+
+	results[&object1][&object3] = true;
+	results[&object3][&object1] = false;
+
+	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
+	EXPECT_EQ(true, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
 }
