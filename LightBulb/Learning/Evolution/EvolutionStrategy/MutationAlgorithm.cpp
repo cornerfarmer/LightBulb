@@ -3,33 +3,15 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
 #include <math.h>
 
 
 MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_)
 {
-	// Initialize the normal distribution with mean 0 and variance 1
 	mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
 	// Initialize the mutation strength boundaries (TODO: Make them variable)
 	mutationStrengthMax = 50;
 	mutationStrengthMin = 0.000001f;
-}
-
-static unsigned long x = 123456789, y = 362436069, z = 521288629;
-
-double xorshf96(void) {          //period 2^96-1
-	unsigned long t;
-	x ^= x << 16;
-	x ^= x >> 5;
-	x ^= x << 1;
-
-	t = x;
-	x = y;
-	y = z;
-	z = t ^ x ^ y;
-
-	return (double)z / ULONG_MAX;
 }
 
 void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
@@ -49,7 +31,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 
 	}
 
-	auto weights = static_cast<LayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();
+	auto weights = object1->getNeuralNetwork()->getNetworkTopology()->getWeights();
 	int mutationStrengthIndex = 0;
 	// Go through all edges
 	for (auto layer = weights->begin(); layer != weights->end(); layer++)

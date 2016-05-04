@@ -145,6 +145,7 @@
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithmTest.cpp" />
     <ClCompile Include="Learning\Evolution\ExponentialFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithmTest.cpp" />
