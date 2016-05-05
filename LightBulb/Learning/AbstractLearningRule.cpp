@@ -11,6 +11,7 @@
 #include <vector>
 #include <limits>
 #include <list>
+#include <vld.h>
 
 AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 {

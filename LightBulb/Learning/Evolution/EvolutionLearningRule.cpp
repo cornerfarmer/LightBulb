@@ -162,6 +162,12 @@ bool EvolutionLearningRule::doIteration()
 			(*recombinationCommand)->select(highscore, &operationCounter);
 		}
 
+		for (auto object = getOptions()->world->getEvolutionObjects()->begin(); object != getOptions()->world->getEvolutionObjects()->end(); object++)
+		{
+			if (operationCounter[*object] == 0)
+				notUsedObjects.push_back(*object);
+		}
+
 		// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
 		for (auto recombinationCommand = getOptions()->recombinationCommands.begin(); recombinationCommand != getOptions()->recombinationCommands.end(); recombinationCommand++)
 		{
