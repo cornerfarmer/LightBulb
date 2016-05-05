@@ -95,7 +95,8 @@ public:
 };
 
 TEST_F(RBFInterpolationLearningRuleTest, doLearning)
-{
+ {
+	srand(1);
 	RBFInterpolationLearningRuleOptions options = getDefaultOptions();
 
 	rbfInterpolationLearningRule = new RBFInterpolationLearningRule(options);

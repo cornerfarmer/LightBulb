@@ -20,7 +20,6 @@ class AbstractEvolutionObject;
 class AbstractEvolutionWorld : public AbstractLoggable
 {
 private:
-	static bool compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y);
 	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> currentHighscore;
 protected:
 	LearningState* learningState;

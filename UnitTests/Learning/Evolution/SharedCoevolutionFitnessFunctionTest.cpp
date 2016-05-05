@@ -45,7 +45,7 @@ TEST_F(SharedCoevolutionFitnessFunctionTest, start)
 
 	auto fitnessValues = sharedCoevolutionFitnessFunction->execute(results);
 
-	EXPECT_EQ(1.5, fitnessValues[objects[0]]);
-	EXPECT_EQ(0.5, fitnessValues[objects[1]]);
-	EXPECT_EQ(0, fitnessValues[objects[2]]);
+	EXPECT_EQ(1.5, (*fitnessValues)[objects[0]]);
+	EXPECT_EQ(0.5, (*fitnessValues)[objects[1]]);
+	EXPECT_EQ(0, (*fitnessValues)[objects[2]]);
 }

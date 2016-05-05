@@ -40,7 +40,7 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeTwoEmptyWorlds)
 
 	auto result = sharedSamplingCombiningStrategy->execute(&world);
 
-	EXPECT_EQ(0, result.size());
+	EXPECT_EQ(0, result->size());
 }
 
 TEST_F(SharedSamplingCombiningStrategyTest, executeEmptyParasiteWorld)
@@ -61,7 +61,7 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeEmptyParasiteWorld)
 
 	auto result = sharedSamplingCombiningStrategy->execute(&world);
 
-	EXPECT_EQ(0, result.size());
+	EXPECT_EQ(0, result->size());
 }
 
 
@@ -105,11 +105,11 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeTwoWorlds)
 	
 	auto result = sharedSamplingCombiningStrategy->execute(&world);
 
-	EXPECT_EQ(5, result.size());
-	EXPECT_EQ(2, result[&object1].size());
-	EXPECT_EQ(2, result[&object2].size());
-	EXPECT_EQ(2, result[&object3].size());
-	EXPECT_EQ(3, result[&object4].size());
-	EXPECT_EQ(3, result[&object6].size());
+	EXPECT_EQ(5, result->size());
+	EXPECT_EQ(2, (*result)[&object1].size());
+	EXPECT_EQ(2, (*result)[&object2].size());
+	EXPECT_EQ(2, (*result)[&object3].size());
+	EXPECT_EQ(3, (*result)[&object4].size());
+	EXPECT_EQ(3, (*result)[&object6].size());
 
 }

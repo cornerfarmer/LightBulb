@@ -127,6 +127,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearningWithResilientLearningRate)
 
 TEST_F(BackpropagationLearningRuleTest, doLearningWithMomentum)
 {
+	srand(1);
 	BackpropagationLearningRuleOptions options = getDefaultOptions();
 	options.maxIterationsPerTry = 1000;
 	options.weightDecayFac = 0;

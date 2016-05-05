@@ -147,6 +147,15 @@
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithmTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithmTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorldTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorldTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
@@ -231,6 +240,18 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockTestableEvolutionWorld.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockTestableCoevolutionWorld.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockHallOfFameAlgorithm.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockCoevolutionFitnessFunction.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -45,7 +45,7 @@ TEST_F(ConstantCoevolutionFitnessFunctionTest, start)
 
 	auto fitnessValues = constantCoevolutionFitnessFunction->execute(results);
 
-	EXPECT_EQ(2, fitnessValues[objects[0]]);
-	EXPECT_EQ(1, fitnessValues[objects[1]]);
-	EXPECT_EQ(0, fitnessValues[objects[2]]);
+	EXPECT_EQ(2, (*fitnessValues)[objects[0]]);
+	EXPECT_EQ(1, (*fitnessValues)[objects[1]]);
+	EXPECT_EQ(0, (*fitnessValues)[objects[2]]);
 }

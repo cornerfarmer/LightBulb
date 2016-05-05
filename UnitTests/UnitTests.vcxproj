@@ -136,6 +136,8 @@
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorldTest.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorldTest.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRuleTest.cpp" />
@@ -146,6 +148,7 @@
     <ClCompile Include="Learning\Evolution\ConstantReuseCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionLearningRuleTest.cpp" />
     <ClCompile Include="Learning\Evolution\EvolutionStrategy\MutationAlgorithmTest.cpp" />
+    <ClCompile Include="Learning\Evolution\EvolutionStrategy\RecombinationAlgorithmTest.cpp" />
     <ClCompile Include="Learning\Evolution\ExponentialFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\FitnessSharingFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithmTest.cpp" />
@@ -176,9 +179,11 @@
   <ItemGroup>
     <ClInclude Include="Mocks\MockActivationFunction.hpp" />
     <ClInclude Include="Mocks\MockActivationOrder.hpp" />
+    <ClInclude Include="Mocks\MockCoevolutionFitnessFunction.hpp" />
     <ClInclude Include="Mocks\MockCoevolutionWorld.hpp" />
     <ClInclude Include="Mocks\MockCombiningStrategy.hpp" />
     <ClInclude Include="Mocks\MockCreationCommand.hpp" />
+    <ClInclude Include="Mocks\MockHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockEvolutionObject.hpp" />
@@ -202,6 +207,8 @@
     <ClInclude Include="Mocks\MockSelectionFunction.hpp" />
     <ClInclude Include="Mocks\MockTeacher.hpp" />
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
+    <ClInclude Include="Mocks\MockTestableCoevolutionWorld.hpp" />
+    <ClInclude Include="Mocks\MockTestableEvolutionWorld.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

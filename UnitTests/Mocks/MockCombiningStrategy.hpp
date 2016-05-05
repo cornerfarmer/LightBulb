@@ -10,6 +10,8 @@ class MockCombiningStrategy : public AbstractCombiningStrategy
 {
 public:
 	MOCK_METHOD3(combine, void (AbstractCoevolutionWorld*, std::vector<AbstractEvolutionObject*>*, std::vector<AbstractEvolutionObject*>*));
+	MOCK_METHOD1(execute, std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* (AbstractCoevolutionWorld*));
+	MOCK_METHOD0(getFirstPlayerWins, int ());
 	MOCK_METHOD1(setSecondWorld, void (AbstractCoevolutionWorld*));
 	MOCK_METHOD0(getPrevResults, std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* ());
 	MOCK_METHOD1(getTotalMatches, int (AbstractCoevolutionWorld*));

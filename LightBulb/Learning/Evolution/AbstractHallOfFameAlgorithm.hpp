@@ -27,7 +27,7 @@ protected:
 	virtual void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) = 0;
 public:
 	virtual void execute(AbstractCoevolutionWorld* world, std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& prevResults);
-	void addMember(AbstractEvolutionObject* newMember);
+	virtual void addMember(AbstractEvolutionObject* newMember);
 };
 
 #include "IO/AbstractHallOfFameAlgorithmIO.hpp"

@@ -27,7 +27,7 @@ private:
 	std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToAddAlgorithm;
 	std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToChallengeAlgorithm;
 	std::unique_ptr<AbstractCombiningStrategy> combiningStrategy;
-	std::map<AbstractEvolutionObject*, double> fitnessValues;
+	std::unique_ptr<std::map<AbstractEvolutionObject*, double>> fitnessValues;
 protected:
 	bool parasiteWorld;
 public:

@@ -5,6 +5,7 @@
 
 // Library Includes
 #include <vector>
+#include <memory>
 
 // Include
 #include "Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
@@ -16,7 +17,7 @@ class AbstractEvolutionObject;
 class AbstractCombiningStrategy
 {
 private:
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> results;
+	std::unique_ptr<std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>> results;
 	int firstPlayerWins;
 protected:	
 	AbstractCoevolutionWorld* secondWorld;
@@ -24,10 +25,10 @@ protected:
 	void setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, bool firstPlayerHasWon);
 public:
 	AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = NULL);
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> execute(AbstractCoevolutionWorld* world);
+	virtual std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* execute(AbstractCoevolutionWorld* world);
 	virtual void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
 	virtual std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* getPrevResults();
-	int getFirstPlayerWins();
+	virtual int getFirstPlayerWins();
 	virtual int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) = 0;
 };
 

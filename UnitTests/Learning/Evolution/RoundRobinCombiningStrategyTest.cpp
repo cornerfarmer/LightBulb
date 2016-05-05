@@ -27,7 +27,7 @@ TEST_F(RoundRobinCombiningStrategyTest, executeEmptyWorld)
 	
 	auto result = roundRobinCombiningStrategy->execute(&world);
 
-	EXPECT_EQ(0, result.size());
+	EXPECT_EQ(0, result->size());
 }
 
 TEST_F(RoundRobinCombiningStrategyTest, executeSingleWorld)
@@ -38,10 +38,10 @@ TEST_F(RoundRobinCombiningStrategyTest, executeSingleWorld)
 
 	auto result = roundRobinCombiningStrategy->execute(&world);
 	
-	EXPECT_EQ(3, result.size());
-	EXPECT_EQ(2, result[&object1].size());
-	EXPECT_EQ(2, result[&object2].size());
-	EXPECT_EQ(2, result[&object3].size());
+	EXPECT_EQ(3, result->size());
+	EXPECT_EQ(2, (*result)[&object1].size());
+	EXPECT_EQ(2, (*result)[&object2].size());
+	EXPECT_EQ(2, (*result)[&object3].size());
 }
 
 TEST_F(RoundRobinCombiningStrategyTest, executeTwoWorlds)
@@ -58,12 +58,12 @@ TEST_F(RoundRobinCombiningStrategyTest, executeTwoWorlds)
 
 	auto result = roundRobinCombiningStrategy->execute(&world);
 
-	EXPECT_EQ(6, result.size());
-	EXPECT_EQ(3, result[&object1].size());
-	EXPECT_EQ(3, result[&object2].size());
-	EXPECT_EQ(3, result[&object3].size());
-	EXPECT_EQ(3, result[&object4].size());
-	EXPECT_EQ(3, result[&object5].size());
-	EXPECT_EQ(3, result[&object6].size());
+	EXPECT_EQ(6, result->size());
+	EXPECT_EQ(3, (*result)[&object1].size());
+	EXPECT_EQ(3, (*result)[&object2].size());
+	EXPECT_EQ(3, (*result)[&object3].size());
+	EXPECT_EQ(3, (*result)[&object4].size());
+	EXPECT_EQ(3, (*result)[&object5].size());
+	EXPECT_EQ(3, (*result)[&object6].size());
 
 }

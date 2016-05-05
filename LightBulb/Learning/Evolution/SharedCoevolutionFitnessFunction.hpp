@@ -15,7 +15,7 @@ class SharedCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFuncti
 {
 protected:
 public:
-	std::map<AbstractEvolutionObject*, double> execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results);
+	std::map<AbstractEvolutionObject*, double>* execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results);
 };
 
 EMPTY_CHILD_SERIALIZATION(SharedCoevolutionFitnessFunction)

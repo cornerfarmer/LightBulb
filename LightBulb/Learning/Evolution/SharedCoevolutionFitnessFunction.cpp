@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
 
-std::map<AbstractEvolutionObject*, double> SharedCoevolutionFitnessFunction::execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results)
+std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results)
 {
 	std::map<AbstractEvolutionObject*, int> winCounter;
 
@@ -14,7 +14,7 @@ std::map<AbstractEvolutionObject*, double> SharedCoevolutionFitnessFunction::exe
 		}
 	}
 
-	std::map<AbstractEvolutionObject*, double> fitnessValues;
+	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
 
 	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 	{
@@ -22,7 +22,7 @@ std::map<AbstractEvolutionObject*, double> SharedCoevolutionFitnessFunction::exe
 		{
 			if (result->second)
 			{
-				fitnessValues[resultsPerObject->first] += 1.0 / winCounter[result->first];
+				(*fitnessValues)[resultsPerObject->first] += 1.0 / winCounter[result->first];
 			}
 		}
 	}

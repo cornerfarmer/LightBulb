@@ -16,7 +16,7 @@ class AbstractCoevolutionFitnessFunction
 {
 protected:
 public:
-	virtual std::map<AbstractEvolutionObject*, double> execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results) = 0;
+	virtual std::map<AbstractEvolutionObject*, double>* execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results) = 0;
 };
 
 #endif

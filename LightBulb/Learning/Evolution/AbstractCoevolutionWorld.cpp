@@ -18,14 +18,13 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 {
 	auto results = combiningStrategy->execute(this);
 
-
-	if (results.size() > 0)
+	if (results->size() > 0)
 		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(this));
 
 	if (hallOfFameToChallengeAlgorithm)
-		hallOfFameToChallengeAlgorithm->execute(this, results);
+		hallOfFameToChallengeAlgorithm->execute(this, *results);
 
-	fitnessValues = fitnessFunction->execute(results);
+	fitnessValues.reset(fitnessFunction->execute(*results));
 
 	AbstractEvolutionObject* bestAI = getHighscoreList()->front().second;
 	rateKI(bestAI);
@@ -38,7 +37,7 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 
 double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject* object)
 {
-	return fitnessValues[object];
+	return (*fitnessValues)[object];
 }
 
 AbstractCombiningStrategy* AbstractCoevolutionWorld::getCombiningStrategy()

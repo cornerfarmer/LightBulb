@@ -23,8 +23,8 @@ void save(Archive& archive, AbstractCoevolutionWorld const& world)
 	std::vector<double> fitnessValues(world.objects.size());
 	for (int i = 0; i < world.objects.size(); i++)
 	{
-		if (world.fitnessValues.count(world.objects[i]))
-			fitnessValues[i] = world.fitnessValues.at(world.objects[i]);
+		if (world.fitnessValues->count(world.objects[i]))
+			fitnessValues[i] = world.fitnessValues->at(world.objects[i]);
 	}		
 	archive(cereal::make_nvp("fitnessValues", fitnessValues));
 
@@ -46,7 +46,7 @@ void load(Archive& archive, AbstractCoevolutionWorld& world)
 	std::vector<double> fitnessValues;
 	archive(cereal::make_nvp("fitnessValues", fitnessValues));
 	for (int i = 0; i < world.objects.size(); i++)
-		world.fitnessValues[world.objects[i]] = fitnessValues[i];
+		(*world.fitnessValues)[world.objects[i]] = fitnessValues[i];
 
 	archive(cereal::make_nvp("isParasiteWorld", world.parasiteWorld));
 }

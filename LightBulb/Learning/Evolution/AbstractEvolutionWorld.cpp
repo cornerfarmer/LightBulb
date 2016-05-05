@@ -4,11 +4,6 @@
 #include <algorithm>
 #include <functional>
 
-bool AbstractEvolutionWorld::compareHighscoreEntries(const std::pair<double, AbstractEvolutionObject*>& x, const std::pair<double, AbstractEvolutionObject*>& y)
-{
-	return x.first > y.first || (x.first == y.first && rand() > RAND_MAX / 2);
-}
-
 std::vector<std::pair<double, AbstractEvolutionObject*>>* AbstractEvolutionWorld::getHighscoreList()
 {
 	// Create new vector which should return the whole highscore

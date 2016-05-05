@@ -27,7 +27,7 @@ TEST_F(TournamentCombiningStrategyTest, executeEmptyWorld)
 	
 	auto result = tournamentCombiningStrategy->execute(&world);
 
-	EXPECT_EQ(0, result.size());
+	EXPECT_EQ(0, result->size());
 }
 
 TEST_F(TournamentCombiningStrategyTest, executeSingleWorld)
@@ -46,13 +46,13 @@ TEST_F(TournamentCombiningStrategyTest, executeSingleWorld)
 
 	auto result = tournamentCombiningStrategy->execute(&world);
 	
-	EXPECT_EQ(6, result.size());
-	EXPECT_EQ(3, result[&object1].size());
-	EXPECT_EQ(1, result[&object2].size());
-	EXPECT_EQ(1, result[&object3].size());
-	EXPECT_EQ(2, result[&object4].size());
-	EXPECT_EQ(2, result[&object5].size());
-	EXPECT_EQ(1, result[&object6].size());
+	EXPECT_EQ(6, result->size());
+	EXPECT_EQ(3, (*result)[&object1].size());
+	EXPECT_EQ(1, (*result)[&object2].size());
+	EXPECT_EQ(1, (*result)[&object3].size());
+	EXPECT_EQ(2, (*result)[&object4].size());
+	EXPECT_EQ(2, (*result)[&object5].size());
+	EXPECT_EQ(1, (*result)[&object6].size());
 }
 
 TEST_F(TournamentCombiningStrategyTest, executeTwoWorlds)
