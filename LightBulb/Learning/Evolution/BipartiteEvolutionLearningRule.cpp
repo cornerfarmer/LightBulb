@@ -43,10 +43,10 @@ AbstractEvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearning
 
 void BipartiteEvolutionLearningRule::initialize()
 {
-	getOptions()->learningRule1->setLogger(options->logger);
-	getOptions()->learningRule2->setLogger(options->logger);
 	getOptions()->learningRule1->learningState = learningState;
 	getOptions()->learningRule2->learningState = learningState;
+	getOptions()->learningRule1->setLogger(options->logger);
+	getOptions()->learningRule2->setLogger(options->logger);
 }
 
 BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOptions()
@@ -73,5 +73,5 @@ void BipartiteEvolutionLearningRule::initializeTry()
 
 bool BipartiteEvolutionLearningRule::hasLearningSucceeded()
 {
-	return (getOptions()->learningRule1->hasLearningSucceeded() || getOptions()->learningRule2->hasLearningSucceeded());
+	return false && (getOptions()->learningRule1->hasLearningSucceeded() || getOptions()->learningRule2->hasLearningSucceeded());
 }
