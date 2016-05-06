@@ -203,7 +203,6 @@
     <ClCompile Include="Windows\TrainingWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\LightBulb\IO\AbstractCoevolutionWorldIO.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Examples\BackpropagationXorExample.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

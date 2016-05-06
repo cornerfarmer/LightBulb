@@ -56,6 +56,12 @@
     <Filter Include="Quelldateien\NeuronDescriptionFactory">
       <UniqueIdentifier>{3643bad8-f0fd-432d-ba71-4ce81842a94d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Logging">
+      <UniqueIdentifier>{e4d89380-86bc-4786-ab8e-54c023e76411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Event">
+      <UniqueIdentifier>{bed3beb0-17dd-46fd-8052-46587b24149a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -551,7 +557,6 @@
     <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp">
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClCompile>
-    <ClCompile Include="NeuralNetwork\AbstractNeuralNetwork.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractRecombinationSelector.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -573,24 +578,63 @@
     <ClCompile Include="Graphics\DataTable.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Event\Observer.cpp" />
-    <ClCompile Include="Event\Observable.cpp" />
-    <ClCompile Include="Event\AbstractObserver.cpp" />
-    <ClCompile Include="Logging\AbstractLogger.cpp" />
-    <ClCompile Include="Logging\ConsoleLogger.cpp" />
-    <ClCompile Include="IO\NeuralNetworkIO.hpp" />
-    <ClCompile Include="IO\MatrixIO.hpp" />
-    <ClCompile Include="IO\LayeredNetworkIO.hpp" />
-    <ClCompile Include="Logging\StorageLogger.cpp" />
-    <ClCompile Include="Learning\AbstractSupervisedLearningRule.cpp" />
-    <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp" />
-    <ClCompile Include="Logging\AbstractLoggable.cpp" />
-    <ClCompile Include="Learning\Evolution\ExponentialFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunction.cpp" />
-    <ClCompile Include="Function\AbstractSelectionFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunction.cpp" />
-    <ClCompile Include="Teaching\AbstractTeacher.cpp" />
-    <ClCompile Include="Learning\Evolution\ScoreCondition.cpp" />
+    <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\AbstractLoggable.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\AbstractLogger.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetwork\AbstractNeuralNetwork.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\AbstractObserver.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\AbstractSelectionFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\AbstractSupervisedLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\LayeredNetworkIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\MatrixIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Teaching\AbstractTeacher.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\ConsoleLogger.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ExponentialFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\ScoreCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Observable.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Observer.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\StorageLogger.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1085,7 +1129,6 @@
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
-    <ClInclude Include="NeuralNetwork\AbstractNeuralNetwork.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractRecombinationSelector.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
@@ -1107,48 +1150,131 @@
     <ClInclude Include="Graphics\DataTable.hpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Event\Observer.hpp" />
-    <ClInclude Include="Event\Observable.hpp" />
-    <ClInclude Include="Event\AbstractObserver.hpp" />
-    <ClInclude Include="Logging\AbstractLogger.hpp" />
-    <ClInclude Include="Logging\ConsoleLogger.hpp" />
-    <ClInclude Include="IO\UsedArchives.hpp" />
-    <ClInclude Include="IO\NeuronDescriptionIO.hpp" />
-    <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp" />
-    <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp" />
-    <ClInclude Include="IO\FermiFunctionIO.hpp" />
-    <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp" />
-    <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
-    <ClInclude Include="IO\IOStorage.hpp" />
     <ClInclude Include="Learning\LearningState.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="IO\LearningStateIO.hpp" />
-    <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
-    <ClInclude Include="Logging\StorageLogger.hpp" />
-    <ClInclude Include="IO\StorageLoggerIO.hpp" />
-    <ClInclude Include="IO\UseParentSerialization.hpp" />
-    <ClInclude Include="IO\RBFNetworkIO.hpp" />
-    <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
-    <ClInclude Include="Learning\AbstractSupervisedLearningRule.hpp" />
-    <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
-    <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp" />
-    <ClInclude Include="Logging\AbstractLoggable.hpp" />
-    <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
-    <ClInclude Include="IO\AbstractSimpleEvolutionWorldIO.hpp" />
-    <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp" />
-    <ClInclude Include="IO\AbstractEvolutionObjectIO.hpp" />
-    <ClInclude Include="IO\AbstractSimpleEvolutionObjectIO.hpp" />
-    <ClInclude Include="IO\AbstractHallOfFameAlgorithmIO.hpp" />
-    <ClInclude Include="IO\RandomHallOfFameAlgorithmIO.hpp" />
-    <ClInclude Include="IO\RandomCombiningStrategyIO.hpp" />
-    <ClInclude Include="IO\SharedSamplingCombiningStrategyIO.hpp" />
-    <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp" />
-    <ClInclude Include="Learning\Evolution\ExponentialFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\LinearScalingFitnessFunction.hpp" />
-    <ClInclude Include="Function\AbstractSelectionFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\StandardDeviationFitnessFunction.hpp" />
-    <ClInclude Include="Teaching\AbstractTeacher.hpp" />
-    <ClInclude Include="Learning\Evolution\ScoreCondition.hpp" />
+    <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractEvolutionObjectIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractHallOfFameAlgorithmIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\AbstractLoggable.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\AbstractLogger.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuralNetwork\AbstractNeuralNetwork.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\AbstractObserver.hpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\AbstractSelectionFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractSimpleEvolutionObjectIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractSimpleEvolutionWorldIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\AbstractSupervisedLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\EvolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\FermiFunctionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\GaussianRBFFunctionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\LearningStateIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\NeuronDescriptionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\RandomCombiningStrategyIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\RandomHallOfFameAlgorithmIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\SharedSamplingCombiningStrategyIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\StorageLoggerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\UseParentSerialization.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Teaching\AbstractTeacher.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\ConsoleLogger.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\StandardDeviationFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ExponentialFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\LinearScalingFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\ScoreCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Observer.hpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Observable.hpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\RBFNetworkIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\IOStorage.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\StorageLogger.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\UsedArchives.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

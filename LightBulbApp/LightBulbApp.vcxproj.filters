@@ -308,9 +308,6 @@
     <ClInclude Include="TrainingPlans\AbstractCoevolutionTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="..\LightBulb\IO\AbstractCoevolutionWorldIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
