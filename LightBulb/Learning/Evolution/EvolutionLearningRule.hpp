@@ -39,11 +39,8 @@ struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOption
 	std::vector<AbstractRecombinationCommand*> recombinationCommands;
 	// Holds commands for directly reusing objects
 	std::vector<AbstractReuseCommand*> reuseCommands;
-	// Holds the score which should be reached after the learning process
-	double scoreGoal;
 	EvolutionLearningRuleOptions()
 	{
-		scoreGoal = 0;
 		maxTries = 1;
 	}
 };
@@ -58,6 +55,7 @@ protected:
 	EvolutionLearningRuleOptions* getOptions();
 	void doCalculationAfterLearningProcess();
 	void setLoggerToUsedObjects();
+	bool exitConditionReached;
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRule(EvolutionLearningRuleOptions* options_);

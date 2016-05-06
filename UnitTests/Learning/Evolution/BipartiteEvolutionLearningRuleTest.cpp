@@ -39,12 +39,10 @@ TEST_F(BipartiteEvolutionLearningRuleTest, start)
 	EXPECT_CALL(*learningRule1, initializeTry()).Times(1);
 	EXPECT_CALL(*learningRule2, initializeTry()).Times(1);
 
-	EXPECT_CALL(*learningRule1, hasLearningSucceeded()).WillOnce(testing::Return(false));
-
 	EXPECT_CALL(*learningRule1, doIteration()).WillOnce(testing::Return(true));
-	EXPECT_CALL(*learningRule2, doIteration()).WillOnce(testing::Return(true));
+	EXPECT_CALL(*learningRule2, doIteration()).WillOnce(testing::Return(false));
 
-	EXPECT_CALL(*learningRule1, hasLearningSucceeded()).WillRepeatedly(testing::Return(true));
+	EXPECT_CALL(*learningRule1, doIteration()).WillOnce(testing::Return(false));
 
 	EXPECT_EQ(true, bipartiteEvolutionLearningRule->start());
 }

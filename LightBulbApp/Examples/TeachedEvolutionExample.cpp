@@ -18,6 +18,7 @@
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
+#include <Learning/Evolution/ScoreCondition.hpp>
 
 //
 //void doTeachedEvolutionExample()
@@ -91,6 +92,7 @@ AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50);
 	options.exitConditions.push_back(rateDifferenceCondition);
+	options.exitConditions.push_back(new ScoreCondition(-0.1));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
@@ -100,7 +102,6 @@ AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
-	options.scoreGoal = -0.1;
 	options.maxTries = 100;
 	fillDefaultLearningRuleOptions(&options);
 

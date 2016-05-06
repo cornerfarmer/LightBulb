@@ -11,6 +11,7 @@
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
+#include <Learning/Evolution/ScoreCondition.hpp>
 
 
 //void doNetworkEvolutionExample()
@@ -34,6 +35,7 @@ AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 20);
 	options.exitConditions.push_back(rateDifferenceCondition);
+	options.exitConditions.push_back(new ScoreCondition(-10.47));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
@@ -43,7 +45,6 @@ AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RemainderStochasticSamplingSelector(), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0));
-	options.scoreGoal = -10.47;
 	fillDefaultLearningRuleOptions(&options);
 
 	return new EvolutionLearningRule(options);

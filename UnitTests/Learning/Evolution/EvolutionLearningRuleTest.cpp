@@ -50,7 +50,6 @@ public:
 		options.selectionCommands.push_back(selectionCommand);
 		options.world = evolutionWorld;
 		options.logger = logger;
-		options.scoreGoal = 50;
 
 		evolutionLearningRule = new EvolutionLearningRule(options);
 	}
@@ -127,9 +126,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld))).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
-		EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));
-		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);
-		lastIterationExpectation = EXPECT_CALL(*selectionCommand, execute(&unseccessfullHighscore, &objects, testing::_)).Times(1);
+		lastIterationExpectation = EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(true));
 	}
 
 	EXPECT_CALL(*evolutionWorld, getHighscoreList()).WillRepeatedly(testing::Return(&emptyHighscore));

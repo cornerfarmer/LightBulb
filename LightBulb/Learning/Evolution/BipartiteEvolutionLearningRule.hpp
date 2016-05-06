@@ -34,6 +34,7 @@ protected:
 	void initializeTry();
 	bool hasLearningSucceeded();
 	void initialize();
+	bool exitConditionReached;
 public:
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);

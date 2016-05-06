@@ -23,12 +23,14 @@ EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& optio
 	: AbstractEvolutionLearningRule(new EvolutionLearningRuleOptions(options_))
 {
 	setLoggerToUsedObjects();
+	exitConditionReached = false;
 }
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions* options_)
 	: AbstractEvolutionLearningRule(options_)
 {
 	setLoggerToUsedObjects();
+	exitConditionReached = false;
 }
 
 void EvolutionLearningRule::setLoggerToUsedObjects()
@@ -58,46 +60,9 @@ void EvolutionLearningRule::setLoggerToUsedObjects()
 		(*selectionCommand)->setLogger(options->logger);
 }
 
-//
-//LearningState EvolutionLearningRule::doLearning()
-//{
-//	double bestScore = 0;
-//
-//	// Do per try
-//	for (int currentTry = 0; currentTry < options->maxTries && (currentTry == 0 || bestScore < options->scoreGoal); currentTry++)
-//	{
-//		initialize();
-//
-//		if (options->enableDebugOutput)
-//			std::cout << "+++++ Try " << currentTry << " +++++" << std::endl;
-//
-//		// Do while no exit condition has matched
-//		bool stopLearning = false;
-//		while (!stopLearning)
-//		{
-//			stopLearning = doEvolutionStep();
-//		}
-//
-//		// Extract the best score from the last try
-//		bestScore = options->world->getHighscoreList()->front().first;
-//
-//		if (options->enableDebugOutput)
-//			std::cout << "Best result: " << bestScore << std::endl;
-//
-//	}
-//
-//	// Build the learning result
-//	LearningState result;
-//	result.iterationsNeeded = generation;
-//	result.successful = (options->scoreGoal == 0 || options->scoreGoal <= bestScore);
-//	result.quality = options->world->getRealScore(options->world->getHighscoreList()->front().second);
-//	return result;
-//}
-
-
 bool EvolutionLearningRule::hasLearningSucceeded()
 {
-	return getOptions()->world->getPopulationSize() > 0 && getOptions()->world->getHighscoreList()->front().first >= getOptions()->scoreGoal;
+	return exitConditionReached;
 }
 
 void EvolutionLearningRule::initializeTry()
@@ -216,6 +181,7 @@ bool EvolutionLearningRule::doIteration()
 	}
 	// If at least one condition was true => stop this try
 	if (exit) {
+		exitConditionReached = true;
 		log("At least one condition is true => exit", LL_HIGH);
 		return false;
 	}

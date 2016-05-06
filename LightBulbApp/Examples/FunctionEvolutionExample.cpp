@@ -14,6 +14,7 @@
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Examples/FunctionSimulator.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
+#include <Learning/Evolution/ScoreCondition.hpp>
 
 static double sixHumpCamelFunction(std::vector<float> pos)
 {
@@ -54,6 +55,7 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10);
 	options.exitConditions.push_back(rateDifferenceCondition);
+	options.exitConditions.push_back(new ScoreCondition(1.031627 + 10000));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
@@ -64,7 +66,6 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
-	options.scoreGoal = 1.031627 + 10000;
 	fillDefaultLearningRuleOptions(&options);
 
 	return new EvolutionLearningRule(options);

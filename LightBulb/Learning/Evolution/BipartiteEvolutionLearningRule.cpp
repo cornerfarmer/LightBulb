@@ -43,6 +43,7 @@ AbstractEvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearning
 
 void BipartiteEvolutionLearningRule::initialize()
 {
+	exitConditionReached = false;
 	getOptions()->learningRule1->learningState = learningState;
 	getOptions()->learningRule2->learningState = learningState;
 	getOptions()->learningRule1->setLogger(options->logger);
@@ -58,8 +59,10 @@ bool BipartiteEvolutionLearningRule::doIteration()
 {
 	log("lr1: ", LL_MEDIUM);
 	bool successfull = getOptions()->learningRule1->doIteration();
-	if (!successfull)
+	if (!successfull) {
+		exitConditionReached = true;
 		return false;
+	}
 	log("lr2: ", LL_MEDIUM);
 	getOptions()->learningRule2->doIteration();
 	return true;
@@ -73,5 +76,5 @@ void BipartiteEvolutionLearningRule::initializeTry()
 
 bool BipartiteEvolutionLearningRule::hasLearningSucceeded()
 {
-	return false && (getOptions()->learningRule1->hasLearningSucceeded() || getOptions()->learningRule2->hasLearningSucceeded());
+	return exitConditionReached;
 }

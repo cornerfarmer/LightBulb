@@ -590,6 +590,7 @@
     <ClCompile Include="Function\AbstractSelectionFunction.cpp" />
     <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunction.cpp" />
     <ClCompile Include="Teaching\AbstractTeacher.cpp" />
+    <ClCompile Include="Learning\Evolution\ScoreCondition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1148,5 +1149,6 @@
     <ClInclude Include="Function\AbstractSelectionFunction.hpp" />
     <ClInclude Include="Learning\Evolution\StandardDeviationFitnessFunction.hpp" />
     <ClInclude Include="Teaching\AbstractTeacher.hpp" />
+    <ClInclude Include="Learning\Evolution\ScoreCondition.hpp" />
   </ItemGroup>
 </Project>
