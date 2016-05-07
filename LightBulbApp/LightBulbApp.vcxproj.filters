@@ -162,6 +162,9 @@
     <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\IntegerPreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -324,6 +327,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\IntegerPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

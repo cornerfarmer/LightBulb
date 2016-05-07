@@ -60,6 +60,7 @@ protected:
 	void addPreference(AbstractPreference* newPreference);
 	AbstractPreference* getPreference(std::string name);
 	double getDoublePreference(std::string name);
+	int getIntegerPreference(std::string name);
 public:
 	AbstractTrainingPlan();
 	void start();

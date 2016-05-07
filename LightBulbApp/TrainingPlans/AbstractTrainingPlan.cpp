@@ -2,6 +2,7 @@
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 #include <thread>
 #include "DoublePreference.hpp"
+#include "IntegerPreference.hpp"
 
 void AbstractTrainingPlan::addCustomSubApp(AbstractCustomSubAppFactory* customSubApp)
 {
@@ -28,6 +29,16 @@ double AbstractTrainingPlan::getDoublePreference(std::string name)
 	DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(name));
 	if (doublePreference)
 		return doublePreference->getValue();
+	else
+		return 0;
+}
+
+
+int AbstractTrainingPlan::getIntegerPreference(std::string name)
+{
+	IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(getPreference(name));
+	if (integerPreference)
+		return integerPreference->getValue();
 	else
 		return 0;
 }

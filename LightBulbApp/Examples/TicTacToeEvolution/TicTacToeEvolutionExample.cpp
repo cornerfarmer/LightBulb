@@ -19,6 +19,8 @@
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include "TicTacToeGameFactory.hpp"
 #include <Learning/Evolution/RandomCombiningStrategy.hpp>
+#include <TrainingPlans/DoublePreference.hpp>
+#include <TrainingPlans/IntegerPreference.hpp>
 
 //
 //void doTicTacToeEvolutionExample()
@@ -95,17 +97,23 @@
 //	}
 //}
 
+#define PREFERENCE_POPULATION_SIZE "Population size"
+#define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
+#define PREFERENCE_RECOMBINATION_PERCENTAGE "Recombination percentage"
+#define PREFERENCE_COMPETITIONS_SIZE "Competitions per object"
+#define PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE "Hall of fame competitions"
+
 AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 {
 
 	EvolutionLearningRuleOptions options;
 
-	options.creationCommands.push_back(new ConstantCreationCommand(500));
+	options.creationCommands.push_back(new ConstantCreationCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
 	options.exitConditions.push_back(new PerfectObjectFoundCondition(200));
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
-	options.selectionCommands.push_back(new BestSelectionCommand(500));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8));
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3));
+	options.selectionCommands.push_back(new BestSelectionCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE)));
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
 	fillDefaultEvolutionLearningRule1Options(&options);
 
@@ -125,17 +133,17 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 {
-	cs1 = new SharedSamplingCombiningStrategy(100);
+	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	hof1 = new RandomHallOfFameAlgorithm(50);
-	hof2 = new RandomHallOfFameAlgorithm(50);
+	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
+	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 
 	return new TicTacToe(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 }
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 {
-	cs2 = new SharedSamplingCombiningStrategy(100);
+	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
 	TicTacToe* ticTacToe2 = new TicTacToe(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 	cs1->setSecondWorld(ticTacToe2);
@@ -146,6 +154,11 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 {
 	addCustomSubApp(new TicTacToeGameFactory());
+	addPreference(new DoublePreference(PREFERENCE_MUTATION_PERCENTAGE, 1.8, 0, 3));
+	addPreference(new DoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE, 0.3, 0, 3));
+	addPreference(new IntegerPreference(PREFERENCE_POPULATION_SIZE, 500, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 100, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 50, 1, 1000));
 }
 
 std::string TicTacToeEvolutionExample::getName()

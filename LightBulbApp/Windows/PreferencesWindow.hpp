@@ -21,10 +21,11 @@ private:
 	std::map<wxSlider*, wxTextCtrl*> textCtrlFromSlider;
 	std::map<wxTextCtrl*, wxSlider*> sliderFromtextCtrl;
 	std::map<wxSlider*, double> sliderStepSize;
-	void setDoubleValueFromTextBox(wxCommandEvent& event);
-	void setDoubleValueFromSlider(wxCommandEvent& event);
+	void setValueFromTextBox(wxCommandEvent& event);
+	void setValueFromSlider(wxCommandEvent& event);
 	double sliderValueToDouble(wxSlider* slider, DoublePreference* doublePreference, int value);
 	double doubleToSliderValue(wxSlider* slider, DoublePreference* doublePreference, double value);
+	wxSizer* createSlider(std::string min, std::string max, std::string current, int currentStep, wxObject* preference, int minStep, int maxStep, double stepSize = 0);
 public:
 	PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent = NULL);
 };

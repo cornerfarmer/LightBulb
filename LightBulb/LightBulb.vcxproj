@@ -11,11 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="default.theme" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp" />
     <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

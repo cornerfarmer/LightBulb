@@ -64,13 +64,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="default.theme">
-      <Filter>Ressourcendateien</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
