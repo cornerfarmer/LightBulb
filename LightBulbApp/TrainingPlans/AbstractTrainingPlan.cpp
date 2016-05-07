@@ -70,6 +70,13 @@ void AbstractTrainingPlan::start()
 	}
 }
 
+std::string AbstractTrainingPlan::getName()
+{
+	if (name != "")
+		return name;
+	else
+		return getDefaultName();
+}
 
 std::string AbstractTrainingPlan::getStateAsString()
 {
@@ -163,4 +170,9 @@ std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* AbstractTrainingPlan:
 std::vector<std::unique_ptr<AbstractPreference>>& AbstractTrainingPlan::getPreferences()
 {
 	return preferences;
+}
+
+void AbstractTrainingPlan::setName(std::string newName)
+{
+	name = newName;
 }

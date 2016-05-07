@@ -65,6 +65,15 @@ void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, 
 	AbstractTrainingPlan* trainingPlan = trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute();
 	trainingPlan->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, this);
 	trainingPlan->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, this);
+
+	std::string defaultName = trainingPlan->getDefaultName();
+	int index = 1;
+	while (trainingPlanRepository->getByName(defaultName + " #" + std::to_string(index)))
+	{
+		index++;
+	}
+	trainingPlan->setName(defaultName + " #" + std::to_string(index));
+
 	trainingPlanRepository->Add(trainingPlan);
 
 	AbstractSingleNNTrainingPlan* singleNNTrainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan);
@@ -259,6 +268,11 @@ void TrainingController::openPreferences(int trainingPlanPatternIndex)
 	PreferencesController* preferencesController = new PreferencesController(trainingPlanPatterns[trainingPlanPatternIndex], window.get());
 	preferencesController->getWindow()->Show();
 	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
+}
+
+void TrainingController::setTrainingPlanName(int trainingPlanIndex, std::string newName)
+{
+	trainingPlanRepository->setTrainingPlanName(trainingPlanIndex, newName);
 }
 
 bool TrainingController::allTrainingPlansPaused()

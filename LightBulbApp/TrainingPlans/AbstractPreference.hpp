@@ -16,20 +16,18 @@ class AbstractPreference
 {
 protected:
 	std::string name;
+
+	virtual std::string getValueAsString() = 0;
 public:
 	virtual ~AbstractPreference() {}
 
 	virtual AbstractPreference* getCopy() = 0;
 
-	AbstractPreference(std::string name_)
-	{
-		name = name_;
-	}
+	AbstractPreference(std::string name_);
 
-	std::string getName()
-	{
-		return name;
-	}
+	std::string getName();
+
+	std::string toString();
 };
 
 #endif

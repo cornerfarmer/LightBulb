@@ -47,12 +47,14 @@ private:
 	void neuralNetworkListRightClick(wxDataViewEvent& event);
 	void trainingPlanPopUpMenuSelected(wxCommandEvent& event);
 	void trainingPlanListRightClick(wxDataViewEvent& event);
+	void trainingPlanNameChanged(wxDataViewEvent& event);
 	wxPanel* createNNColumn(wxWindow* parent);
 	wxPanel* createTrainingColumn(wxWindow* parent);
 	wxPanel* createRunningTrainingColumn(wxWindow* parent);
 	wxPanel* createDetailsPanel(wxWindow* parent);
 	wxMenuBar* menubar;
 	wxMenu* windowsMenu;
+	bool customMenuVisible;
 	std::map<int, AbstractWindow*> subWindows;
 	void validateSelectedProcess();
 	void* currentDetailObject;
@@ -80,6 +82,7 @@ private:
 	void refreshAllData(wxCommandEvent& event);
 	void saveTrainingPlan(wxThreadEvent& event);
 	void saveTrainingSession(wxThreadEvent& event);
+	void removeCustomSubAppsMenu();
 protected:
 	DECLARE_EVENT_TABLE();
 public:

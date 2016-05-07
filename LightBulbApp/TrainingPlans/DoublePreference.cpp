@@ -2,6 +2,7 @@
 #include "TrainingPlans/DoublePreference.hpp"
 
 
+
 DoublePreference::DoublePreference(std::string name, double defaultValue, double min_, double max_)
 	:AbstractVariablePreference(name, defaultValue)
 {
@@ -22,4 +23,9 @@ double DoublePreference::getMax()
 AbstractPreference* DoublePreference::getCopy()
 {
 	return new DoublePreference(*this);
+}
+
+std::string DoublePreference::getValueAsString()
+{
+	return std::to_string(value);
 }

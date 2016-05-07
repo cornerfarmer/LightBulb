@@ -44,6 +44,7 @@ private:
 	std::thread thread;
 	AbstractTrainingPlan* pattern;
 	TrainingPlanState state;
+	std::string name;
 	void runThread(bool initial);
 	bool threadShouldBeJoinedBeforeReuse;
 	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>> customSubApps;
@@ -64,7 +65,8 @@ protected:
 public:
 	AbstractTrainingPlan();
 	void start();
-	virtual std::string getName() = 0;
+	std::string getName();
+	virtual std::string getDefaultName() = 0;
 	virtual std::string getDescription() = 0;
 	virtual std::string getLearningRuleName() = 0;
 	std::string getStateAsString();
@@ -80,6 +82,7 @@ public:
 	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
 
 	std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
+	void setName(std::string newName);
 };
 
 #include "IO/AbstractTrainingPlanIO.hpp"

@@ -23,7 +23,7 @@ protected:
 	AbstractEvolutionWorld* createParasiteWorld();
 public:
 	TicTacToeEvolutionExample();
-	std::string getName();
+	std::string getDefaultName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();

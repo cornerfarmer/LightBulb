@@ -45,6 +45,7 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	controller = controller_;
 	processTrainingPlanSelection = NULL;
 	currentDetailObject = NULL;
+	customMenuVisible = false;
 
 	Bind(TW_EVT_REFRESH_NN, wxCommandEventFunction(&TrainingWindow::refreshNeuralNetworks), this);
 	Bind(TW_EVT_REFRESH_TP, wxCommandEventFunction(&TrainingWindow::refreshTrainingPlans), this);
@@ -164,6 +165,15 @@ void TrainingWindow::trainingPlanListRightClick(wxDataViewEvent& event)
 	}
 }
 
+void TrainingWindow::trainingPlanNameChanged(wxDataViewEvent& event)
+{
+	int row = trainingPlanList->ItemToRow(event.GetItem());
+	std::string newName = event.GetValue();
+	controller->setTrainingPlanName(row, newName);
+	wxCommandEvent evt;
+	refreshTrainingPlans(evt);
+}
+
 wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
 {
 	wxPanel* panel = new wxPanel(parent, wxID_ANY);
@@ -251,10 +261,11 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	sizer->Add(new wxStaticText(panel, -1, "Running trainings"), 0, wxEXPAND | wxALL, 5);
 
 	trainingPlanList = new wxDataViewListCtrl(panel, wxID_ANY);
-	trainingPlanList->AppendTextColumn("Training name")->SetMinWidth(50);
+	trainingPlanList->AppendTextColumn("Training name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&TrainingWindow::trainingPlanListRightClick), this);
+	trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_EDITING_DONE, wxDataViewEventFunction(&TrainingWindow::trainingPlanNameChanged), this);
 	trainingPlanList->SetMinSize(wxSize(100, 100));
 
 	sizer->Add(trainingPlanList, 1, wxEXPAND, 0);
@@ -289,12 +300,13 @@ void TrainingWindow::refreshAllData(wxCommandEvent& event)
 
 void TrainingWindow::saveTrainingPlan(wxThreadEvent& event)
 {
-	wxFileDialog saveFileDialog(this, "Save training plan", "", "", "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	int trainingPlanIndex = event.GetPayload<int>();
+	wxFileDialog saveFileDialog(this, "Save training plan", "", controller->getTrainingPlans()->at(trainingPlanIndex)->getName(), "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
 	if (saveFileDialog.ShowModal() == wxID_CANCEL)
 		return;
 
-	controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), event.GetPayload<int>());
+	controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
 	
 	Enable(true);
 	Refresh();
@@ -435,26 +447,34 @@ void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 	int row = getRowIndexOfItem(neuralNetworkList, event.GetItem());
 	if (row != -1)
 	{
+		removeCustomSubAppsMenu();
 		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row].get());
 		restoreDefaultProcessView();
 		neuralNetworksChoice->Select(row);
 		validateSelectedProcess();
 	}
 	else
+	{
+		removeCustomSubAppsMenu();
 		clearDetails();
+	}
 }
 
 void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 {
 	int row = getRowIndexOfItem(trainingPlanPatternList, event.GetItem());
 	if (row != -1) {
+		removeCustomSubAppsMenu();
 		showDetailsOfTrainingPlanPattern((*controller->getTrainingPlanPatterns())[row]);
 		restoreDefaultProcessView();
 		trainingPlanPatternsChoice->Select(row);
 		validateSelectedProcess();
 	}
 	else
+	{
+		removeCustomSubAppsMenu();
 		clearDetails();
+	}
 }
 
 void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
@@ -469,6 +489,7 @@ void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	trainingPlanPatternsChoice->Enable(false);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan->isPaused());
 	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan->isRunning());
+	toolbar->EnableTool(TOOLBAR_PREFERENCES, false);
 	processErrorText->SetLabel("");
 }
 
@@ -478,20 +499,35 @@ void TrainingWindow::restoreDefaultProcessView()
 	trainingPlanPatternsChoice->Enable(true);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
 	toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
+	toolbar->EnableTool(TOOLBAR_PREFERENCES, true);
 	processTrainingPlanSelection = NULL;
+}
+
+
+void TrainingWindow::removeCustomSubAppsMenu()
+{
+	if (customMenuVisible)
+	{
+		menubar->Remove(menubar->GetMenuCount() - 1);
+		customMenuVisible = false;
+	}
 }
 
 void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
-	trainingPlanMenu = new wxMenu();
+	removeCustomSubAppsMenu();
 	auto customSubApps = trainingPlan->getCustomSubApps();
-	for (auto customSubApp = customSubApps->begin(); customSubApp != customSubApps->end(); customSubApp++)
+	if (customSubApps->size() > 0)
 	{
-		trainingPlanMenu->Append(new wxMenuItem(trainingPlanMenu, wxID_ANY, (*customSubApp)->getLabel()));
+		trainingPlanMenu = new wxMenu();
+		for (auto customSubApp = customSubApps->begin(); customSubApp != customSubApps->end(); customSubApp++)
+		{
+			trainingPlanMenu->Append(new wxMenuItem(trainingPlanMenu, wxID_ANY, (*customSubApp)->getLabel()));
+		}
+		trainingPlanMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::trainingPlanMenuSelected), this);
+		menubar->Append(trainingPlanMenu, trainingPlan->getName());
+		customMenuVisible = true;
 	}
-	trainingPlanMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::trainingPlanMenuSelected), this);
-	menubar->Append(trainingPlanMenu, trainingPlan->getName());
-
 }
 
 void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
@@ -504,7 +540,10 @@ void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 		showCustomSubAppsMenuForTrainingPlan((*controller->getTrainingPlans())[row].get());
 	}
 	else
+	{
+		removeCustomSubAppsMenu();
 		clearDetails();
+	}
 }
 
 void TrainingWindow::showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNetwork)
@@ -534,6 +573,13 @@ void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
 		detailsTextBox->WriteText("Network name: " + static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()->getName() + "\n");
 	detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
+	detailsTextBox->WriteText("Preferences:\n");
+	for (auto preference = trainingPlan->getPreferences().begin(); preference != trainingPlan->getPreferences().end(); preference++)
+	{
+		detailsTextBox->WriteText(" + " + (*preference)->toString() + "\n");
+	}
+	
+	
 	currentDetailObject = trainingPlan;
 }
 

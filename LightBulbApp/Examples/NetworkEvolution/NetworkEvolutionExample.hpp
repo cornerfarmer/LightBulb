@@ -13,7 +13,7 @@ protected:
 	AbstractLearningRule* createLearningRate();
 	AbstractEvolutionWorld* createWorld();
 public:
-	std::string getName();
+	std::string getDefaultName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();

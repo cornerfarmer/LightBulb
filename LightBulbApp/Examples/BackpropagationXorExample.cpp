@@ -68,7 +68,7 @@ AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 }
 
 
-std::string BackpropagationXorExample::getName()
+std::string BackpropagationXorExample::getDefaultName()
 {
 	return "Backpropagation xor example";
 }

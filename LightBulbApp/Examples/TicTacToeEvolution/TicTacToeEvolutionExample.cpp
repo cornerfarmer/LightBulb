@@ -161,7 +161,7 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 50, 1, 1000));
 }
 
-std::string TicTacToeEvolutionExample::getName()
+std::string TicTacToeEvolutionExample::getDefaultName()
 {
 	return "TicTacToe evolution example";
 }

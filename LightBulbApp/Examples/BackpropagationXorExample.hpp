@@ -23,7 +23,7 @@ protected:
 	AbstractLearningRule* createLearningRate();
 public:
 	BackpropagationXorExample();
-	std::string getName();
+	std::string getDefaultName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	int getRequiredInputSize();

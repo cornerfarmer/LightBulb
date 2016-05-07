@@ -15,6 +15,7 @@ class IntegerPreference : public AbstractVariablePreference<int>
 protected:
 	int min;
 	int max;
+	std::string getValueAsString();
 public:
 	IntegerPreference(std::string name, int defaultValue, int min_, int max_);
 

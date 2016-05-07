@@ -23,7 +23,7 @@ protected:
 	AbstractNeuralNetwork* createNeuralNetwork();
 	AbstractLearningRule* createLearningRate();
 public:
-	std::string getName();
+	std::string getDefaultName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	int getRequiredInputSize();

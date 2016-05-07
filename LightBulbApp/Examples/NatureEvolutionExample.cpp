@@ -27,7 +27,7 @@ AbstractEvolutionWorld* NatureEvolutionExample::createWorld()
 	return new Nature();
 }
 
-std::string NatureEvolutionExample::getName()
+std::string NatureEvolutionExample::getDefaultName()
 {
 	return "Evolution example";
 }

@@ -23,3 +23,8 @@ AbstractPreference* IntegerPreference::getCopy()
 {
 	return new IntegerPreference(*this);
 }
+
+std::string IntegerPreference::getValueAsString()
+{
+	return std::to_string(value);
+}

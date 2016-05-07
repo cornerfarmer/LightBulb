@@ -30,6 +30,8 @@ public:
 	void Add(AbstractTrainingPlan* trainingPlan);
 	void save(std::string path, int trainingPlanIndex);
 	AbstractTrainingPlan* load(std::string path);
+	AbstractTrainingPlan* getByName(std::string name);
+	void setTrainingPlanName(int trainingPlanIndex, std::string newName);
 };
 
 #include "IO/TrainingPlanRepositoryIO.hpp"

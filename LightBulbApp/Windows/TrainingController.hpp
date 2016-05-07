@@ -59,6 +59,7 @@ public:
 	void saveTrainingSession();
 	void addSubApp(int subAppFactoryIndex);
 	void openPreferences(int trainingPlanPatternIndex);
+	void setTrainingPlanName(int trainingPlanIndex, std::string newName);
 };
 
 #include "IO/TrainingControllerIO.hpp"

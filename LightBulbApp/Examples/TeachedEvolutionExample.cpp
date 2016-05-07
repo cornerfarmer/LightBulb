@@ -136,7 +136,7 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	return new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
 }
 
-std::string TeachedEvolutionExample::getName()
+std::string TeachedEvolutionExample::getDefaultName()
 {
 	return "Teached evolution example";
 }

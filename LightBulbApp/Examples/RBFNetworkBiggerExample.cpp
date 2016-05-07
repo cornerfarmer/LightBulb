@@ -100,7 +100,7 @@ AbstractNeuralNetwork* RBFNetworkBiggerExample::createNeuralNetwork()
 }
 
 
-std::string RBFNetworkBiggerExample::getName()
+std::string RBFNetworkBiggerExample::getDefaultName()
 {
 	return "RBFNetwork bigger example";
 }

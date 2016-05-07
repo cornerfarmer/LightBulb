@@ -15,12 +15,14 @@ class DoublePreference : public AbstractVariablePreference<double>
 protected:
 	double min;
 	double max;
+	std::string getValueAsString();
 public:
 	DoublePreference(std::string name, double defaultValue, double min_, double max_);
 
 	double getMin();
 	double getMax();
 	AbstractPreference* getCopy();
+	
 };
 
 #endif

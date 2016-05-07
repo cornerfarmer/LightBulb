@@ -79,7 +79,7 @@ AbstractEvolutionWorld* FunctionEvolutionExample::createWorld()
 	return new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
 }
 
-std::string FunctionEvolutionExample::getName()
+std::string FunctionEvolutionExample::getDefaultName()
 {
 	return "Function evolution example";
 }

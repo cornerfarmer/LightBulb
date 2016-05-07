@@ -44,6 +44,22 @@ AbstractTrainingPlan* TrainingPlanRepository::load(std::string path)
 	return trainingPlans.back().get();
 }
 
+AbstractTrainingPlan* TrainingPlanRepository::getByName(std::string name)
+{
+	for (int i = 0; i < trainingPlans.size(); i++)
+	{
+		if (trainingPlans[i]->getName() == name)
+			return trainingPlans[i].get();
+	}
+	return NULL;
+}
+
+void TrainingPlanRepository::setTrainingPlanName(int trainingPlanIndex, std::string newName)
+{
+	trainingPlans[trainingPlanIndex]->setName(newName);
+	throwEvent(EVT_TP_CHANGED, this);
+}
+
 std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingPlanRepository::getTrainingPlans()
 {
 	return &trainingPlans;
