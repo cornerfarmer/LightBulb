@@ -1,5 +1,6 @@
 // Includes
 #include "Learning/Evolution/FullHallOfFameAlgorithm.hpp"
+#include "AbstractCoevolutionWorld.hpp"
 
 void FullHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
 {
@@ -7,7 +8,10 @@ void FullHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObjec
 	{
 		for (int memberIndex = 0; memberIndex < members.size(); memberIndex++)
 		{
-			simulateAgainstMember(*object, memberIndex);
+			for (int r = 0; r < currentWorld->getRoundCount(); r++)
+			{
+				simulateAgainstMember(*object, memberIndex, r);
+			}
 		}
 	}
 }

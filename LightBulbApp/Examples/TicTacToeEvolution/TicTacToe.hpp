@@ -58,12 +58,13 @@ public:
 	void startNewGame(int firstPlayer);
 	void initializeForLearning();
 	bool hasGameFinished();
-	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2);
+	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 	std::vector<std::vector<int>>* getFields();
 	void startStepMode();
 	void stopStepMode();
 	std::vector<std::string> getDataSetLabels();
 	void nextStep();
+	int getRoundCount();
 };
 
 USE_PARENT_SERIALIZATION(TicTacToe, AbstractCoevolutionWorld);

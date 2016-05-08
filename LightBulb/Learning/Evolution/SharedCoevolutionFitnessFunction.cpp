@@ -1,16 +1,19 @@
 // Includes
 #include "Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
 
-std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results)
+std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
 {
-	std::map<AbstractEvolutionObject*, int> winCounter;
+	std::map<AbstractEvolutionObject*, std::map<int, int>> winCounter;
 
 	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 	{
-		for (auto result = resultsPerObject->second.begin(); result != resultsPerObject->second.end(); result++)
+		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 		{
-			if (result->second)
-				winCounter[result->first]++;
+			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+			{
+				if (result->second)
+					winCounter[resultsPerCombination->first][result->first]++;
+			}
 		}
 	}
 
@@ -18,11 +21,14 @@ std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::ex
 
 	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 	{
-		for (auto result = resultsPerObject->second.begin(); result != resultsPerObject->second.end(); result++)
+		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 		{
-			if (result->second)
+			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
 			{
-				(*fitnessValues)[resultsPerObject->first] += 1.0 / winCounter[result->first];
+				if (result->second)
+				{
+					(*fitnessValues)[resultsPerObject->first] += 1.0 / winCounter[resultsPerCombination->first][result->first];
+				}
 			}
 		}
 	}

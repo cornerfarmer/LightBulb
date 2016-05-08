@@ -10,6 +10,7 @@
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "AbstractCoevolutionFitnessFunction.hpp"
 
 // Forward declarations
 
@@ -35,12 +36,13 @@ public:
 	AbstractCoevolutionWorld() = default;
 	bool doSimulationStep(); 
 	double getScore(AbstractEvolutionObject* object);
-	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2) = 0;
+	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round) = 0;
 	virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; }
 	virtual AbstractCombiningStrategy* getCombiningStrategy();
 	void setLogger(AbstractLogger* logger_);
 	std::vector<std::string> getDataSetLabels();
 	virtual bool isParasiteWorld();
+	virtual int getRoundCount();
 };
 
 #include "IO/AbstractCoevolutionWorldIO.hpp"

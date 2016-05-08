@@ -1,16 +1,20 @@
 // Includes
 #include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
+#include "AbstractCoevolutionWorld.hpp"
 
-std::map<AbstractEvolutionObject*, double>* ConstantCoevolutionFitnessFunction::execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results)
+std::map<AbstractEvolutionObject*, double>* ConstantCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
 {
 	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
 
 	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 	{
-		for (auto result = resultsPerObject->second.begin(); result != resultsPerObject->second.end(); result++)
+		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 		{
-			if (result->second)
-				(*fitnessValues)[resultsPerObject->first]++;
+			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+			{
+				if (result->second)
+					(*fitnessValues)[resultsPerObject->first]++;
+			}
 		}
 	}
 

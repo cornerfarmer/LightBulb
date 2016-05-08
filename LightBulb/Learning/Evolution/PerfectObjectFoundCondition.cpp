@@ -36,9 +36,12 @@ bool PerfectObjectFoundCondition::perfectObjectExists(AbstractCombiningStrategy*
 
 	for (auto resultsPerObject = results->begin(); resultsPerObject != results->end(); resultsPerObject++)
 	{
-		for (auto result = resultsPerObject->second.begin(); result != resultsPerObject->second.end(); result++)
+		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 		{
-			defeatedObjects[result->first] |= result->second;
+			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+			{
+				defeatedObjects[resultsPerCombination->first] |= result->second;
+			}
 		}
 	}
 

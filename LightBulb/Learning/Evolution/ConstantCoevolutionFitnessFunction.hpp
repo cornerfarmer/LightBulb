@@ -15,7 +15,7 @@ class ConstantCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunc
 {
 protected:
 public:
-	std::map<AbstractEvolutionObject*, double>* execute(std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& results);
+	std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results);
 };
 
 EMPTY_CHILD_SERIALIZATION(ConstantCoevolutionFitnessFunction)

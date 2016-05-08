@@ -14,9 +14,12 @@ void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWo
 		{
 			if (*firstPlayer != *secondPlayer)
 			{
-				int result = simulationWorld->compareObjects(*firstPlayer, *secondPlayer);
-				if (result != 0)
-					setResult(*firstPlayer, *secondPlayer, result > 0);
+				for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+				{
+					int result = simulationWorld->compareObjects(*firstPlayer, *secondPlayer, r);
+					if (result != 0)
+						setResult(*firstPlayer, *secondPlayer, r, result > 0);
+				}
 			}
 		}
 	}

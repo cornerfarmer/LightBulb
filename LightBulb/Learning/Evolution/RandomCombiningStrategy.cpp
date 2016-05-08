@@ -14,9 +14,12 @@ void RandomCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld,
 	{
 		for (int opponentIndex = 0; opponentIndex < amountOfCompetitionsPerObject && opponentIndex < randomOpponents.size(); opponentIndex++)
 		{
-			int result = simulationWorld->compareObjects(*firstPlayer, randomOpponents[opponentIndex]);
-			if (result != 0)
-				setResult(*firstPlayer, randomOpponents[opponentIndex], result > 0);
+			for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+			{
+				int result = simulationWorld->compareObjects(*firstPlayer, randomOpponents[opponentIndex], r);
+				if (result != 0)
+					setResult(*firstPlayer, randomOpponents[opponentIndex], r, result > 0);
+			}
 		}
 	}
 }

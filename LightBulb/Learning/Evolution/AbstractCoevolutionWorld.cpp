@@ -65,3 +65,8 @@ bool AbstractCoevolutionWorld::isParasiteWorld()
 {
 	return parasiteWorld;
 }
+
+int AbstractCoevolutionWorld::getRoundCount()
+{
+	return 1;
+}

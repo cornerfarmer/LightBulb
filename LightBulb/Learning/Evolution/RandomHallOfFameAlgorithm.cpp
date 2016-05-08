@@ -2,6 +2,7 @@
 #include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
 // Library includes
 #include <algorithm>
+#include "AbstractCoevolutionWorld.hpp"
 
 void RandomHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
 {
@@ -11,7 +12,10 @@ void RandomHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObj
 	{
 		for (int memberIndex = 0; memberIndex < amountOfCompetitionsPerObject && memberIndex < members.size(); memberIndex++)
 		{
-			simulateAgainstMember(*object, memberIndex);
+			for (int r = 0; r < currentWorld->getRoundCount(); r++)
+			{
+				simulateAgainstMember(*object, memberIndex, r);
+			}
 		}
 	}
 }

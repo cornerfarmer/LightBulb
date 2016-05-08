@@ -4,14 +4,14 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include <iostream>
 
-void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject* object, int memberID)
+void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject* object, int memberID, int round)
 {
-	bool firstPlayerHasWon = currentWorld->compareObjects(object, members[memberID].get()) > 0;
-	(*currentResults)[object][members[memberID].get()] = firstPlayerHasWon;
-	(*currentResults)[members[memberID].get()][object] = !firstPlayerHasWon;
+	bool firstPlayerHasWon = currentWorld->compareObjects(object, members[memberID].get(), round) > 0;
+	(*currentResults)[object][members[memberID].get()][round] = firstPlayerHasWon;
+	(*currentResults)[members[memberID].get()][object][round] = !firstPlayerHasWon;
 }
 
-void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld* world, std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>& prevResults)
+void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld* world, CombiningStrategyResults& prevResults)
 {
 	currentResults = &prevResults;
 	currentWorld = world;

@@ -7,16 +7,16 @@ AbstractCombiningStrategy::AbstractCombiningStrategy(AbstractCoevolutionWorld* s
 	secondWorld = secondWorld_;
 }
 
-void AbstractCombiningStrategy::setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, bool firstPlayerHasWon)
+void AbstractCombiningStrategy::setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, int round, bool firstPlayerHasWon)
 {
-	(*results)[firstPlayer][secondPlayer] = firstPlayerHasWon;
-	(*results)[secondPlayer][firstPlayer] = !firstPlayerHasWon;
+	(*results)[firstPlayer][secondPlayer][round] = firstPlayerHasWon;
+	(*results)[secondPlayer][firstPlayer][round] = !firstPlayerHasWon;
 	firstPlayerWins += firstPlayerHasWon;
 }
 
-std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* AbstractCombiningStrategy::execute(AbstractCoevolutionWorld* world)
+CombiningStrategyResults* AbstractCombiningStrategy::execute(AbstractCoevolutionWorld* world)
 {
-	results.reset(new std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>());
+	results.reset(new CombiningStrategyResults());
 	firstPlayerWins = 0;
 
 	combine(world, world->getEvolutionObjects(), secondWorld ? secondWorld->getEvolutionObjects() : world->getEvolutionObjects());
@@ -29,7 +29,7 @@ void AbstractCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld* newSeco
 	secondWorld = newSecondWorld;
 }
 
-std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>* AbstractCombiningStrategy::getPrevResults()
+CombiningStrategyResults* AbstractCombiningStrategy::getPrevResults()
 {
 	return results.get();
 }

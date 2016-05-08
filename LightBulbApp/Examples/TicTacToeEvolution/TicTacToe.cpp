@@ -67,10 +67,10 @@ void intervalAdvance(Iter& it,const Iter& end, int i)
 }
 
 
-int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2)
+int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
 {
 	int result = 0;
-	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), false);
+	return simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), round == 1);
 	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), true);
 	
 	//std::cout << result;
@@ -128,6 +128,11 @@ void TicTacToe::nextStep()
 	{
 		doNextStep.notify_all();
 	}
+}
+
+int TicTacToe::getRoundCount()
+{
+	return 2;
 }
 
 void TicTacToe::initializeForLearning()
