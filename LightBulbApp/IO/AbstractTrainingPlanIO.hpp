@@ -7,6 +7,7 @@
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
+#include <cereal/types/vector.hpp>
 
 template <class Archive>
 void save(Archive& archive, AbstractTrainingPlan const& trainingPlan)
@@ -14,6 +15,7 @@ void save(Archive& archive, AbstractTrainingPlan const& trainingPlan)
 	archive(cereal::make_nvp("state", trainingPlan.state));
 	archive(cereal::make_nvp("logger", trainingPlan.logger));
 	archive(cereal::make_nvp("name", trainingPlan.name));
+	archive(cereal::make_nvp("preferences", trainingPlan.preferences));
 }
 
 template <class Archive>
@@ -22,6 +24,7 @@ void load(Archive& archive, AbstractTrainingPlan& trainingPlan)
 	archive(cereal::make_nvp("state", trainingPlan.state));
 	archive(cereal::make_nvp("logger", trainingPlan.logger));
 	archive(cereal::make_nvp("name", trainingPlan.name));
+	archive(cereal::make_nvp("preferences", trainingPlan.preferences));
 }
 
 #endif

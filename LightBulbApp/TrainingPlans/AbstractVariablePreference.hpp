@@ -22,6 +22,10 @@ public:
 		value = defaultValue;
 	}
 
+	AbstractVariablePreference()
+	{
+	}
+
 	void setValue(Type newValue)
 	{
 		value = newValue;

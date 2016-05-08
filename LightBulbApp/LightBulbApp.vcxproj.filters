@@ -332,5 +332,14 @@
     <ClInclude Include="TrainingPlans\IntegerPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="IO\AbstractPreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\IntegerPreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DoublePreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

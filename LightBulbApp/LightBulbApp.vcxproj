@@ -242,8 +242,11 @@
     <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractEvolutionTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />
+    <ClInclude Include="IO\AbstractPreferenceIO.hpp" />
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
+    <ClInclude Include="IO\DoublePreferenceIO.hpp" />
+    <ClInclude Include="IO\IntegerPreferenceIO.hpp" />
     <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />

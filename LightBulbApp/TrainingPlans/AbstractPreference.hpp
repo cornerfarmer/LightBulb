@@ -14,6 +14,10 @@
 
 class AbstractPreference
 {
+	template <class Archive>
+	friend void save(Archive& archive, AbstractPreference const& preference);
+	template <class Archive>
+	friend void load(Archive& archive, AbstractPreference& preference);
 protected:
 	std::string name;
 
@@ -25,9 +29,13 @@ public:
 
 	AbstractPreference(std::string name_);
 
+	AbstractPreference() = default;
+
 	std::string getName();
 
 	std::string toString();
 };
+
+#include "IO/AbstractPreferenceIO.hpp"
 
 #endif
