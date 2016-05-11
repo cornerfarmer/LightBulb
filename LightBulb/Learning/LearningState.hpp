@@ -9,6 +9,9 @@ enum LearningStateEvents
 	EVT_LS_DS_CHANGED
 };
 
+typedef std::vector<double> DataSet;
+typedef std::map<std::string, DataSet> DataSetsPerTry;
+typedef std::vector<DataSetsPerTry> DataSets;
 
 // All informations about a finished learning process
 struct LearningState : public LightBulb::Observable<LearningStateEvents, LearningState>
@@ -27,7 +30,7 @@ public:
 
 	int tries;
 
-	std::vector<std::map<std::string, std::vector<double>>> dataSets;
+	DataSets dataSets;
 	LearningState(int dataSaveInterval_ = 1)
 	{
 		successful = 0;
@@ -49,7 +52,7 @@ public:
 
 	void addTry()
 	{
-		dataSets.push_back(std::map<std::string, std::vector<double>>());
+		dataSets.push_back(DataSetsPerTry());
 		tries++;
 	}
 

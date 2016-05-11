@@ -10,13 +10,15 @@
 // Includes
 #include "LearningStateWindow.hpp"
 #include "AbstractSubApp.hpp"
+#include <Learning/DeltaLearningRule.hpp>
+
+#define DEFAULT_COMP_DS "Iterations"
 
 // Forward declarations
 class TrainingWindow;
 class TrainingController;
 class TrainingPlanRepository;
 class AbstractTrainingPlan;
-struct LearningState;
 
 class LearningStateController : public AbstractSubApp
 {
@@ -28,7 +30,8 @@ private:
 	int iterationsSinceLearningStateChanged;
 	int refreshRate;
 	bool refreshScheduled;
-	std::vector<std::pair<std::string, std::vector<double>*>> selectedDataSets;
+	std::vector<std::pair<DataSetsPerTry*, std::string>> selectedDataSets;
+	std::string comparisonDataSetLabel;
 public:
 	LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
 	LearningStateWindow* getWindow();
@@ -43,9 +46,12 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	int getTryCount();
 	std::string addDataSet(int tryNumber, int dataSetIndex);
-	std::vector<std::pair<std::string, std::vector<double>*>>* getSelectedDataSets();
+	std::vector<std::pair<DataSetsPerTry*, std::string>>* getSelectedDataSets();
 	void removeDataSet(int dataSetIndex);
+	std::string getComparisonDataSetLabel();
+	void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);
 	static std::string getLabel();
+	std::vector<std::string> getPossibleComparisonDatasetLabels();
 };
 
 #endif

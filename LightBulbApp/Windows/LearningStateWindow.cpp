@@ -28,6 +28,11 @@ LearningStateWindow::LearningStateWindow(LearningStateController* controller_, A
 	sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);
 
+	header->Add(new wxStaticText(this, wxID_ANY, "Comparison dataset "), 0, wxLEFT | wxALIGN_CENTER_VERTICAL, 5);
+	comparisonDatasetChoice = new wxChoice(this, wxID_ANY);
+	comparisonDatasetChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&LearningStateWindow::comparisonDatasetChanged), this);
+	header->Add(comparisonDatasetChoice, 0, wxLEFT | wxALIGN_CENTER_VERTICAL, 5);
+
 	header->Add(new wxStaticText(this, wxID_ANY, "Refresh all "), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
 	refreshRateChoice = new wxComboBox(this, wxID_ANY);
 	wxIntegerValidator<unsigned int> validator;
@@ -124,9 +129,18 @@ void LearningStateWindow::refreshRateChanged(wxCommandEvent& event)
 	}
 }
 
+void LearningStateWindow::comparisonDatasetChanged(wxCommandEvent& event)
+{
+	controller->setComparisonDataSetLabel(comparisonDatasetChoice->GetString(event.GetSelection()).ToStdString());
+	wxThreadEvent evt;
+	refreshChart(evt);
+}
+
 void LearningStateWindow::addDataSet(wxCommandEvent& event)
 {
 	std::string label = controller->addDataSet(tryChoice->GetSelection(), dataSetChoice->GetSelection());
+
+	refreshComparisonDatasetChoices();
 
 	wxVector<wxVariant> data;
 	data.push_back(label);
@@ -155,17 +169,53 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 	// create dataset
 	XYSimpleDataset *xyDataSet = new XYSimpleDataset();
 
-	for (auto dataSet = controller->getSelectedDataSets()->begin(); dataSet != controller->getSelectedDataSets()->end(); dataSet++)
+	for (auto selectedDataSet = controller->getSelectedDataSets()->begin(); selectedDataSet != controller->getSelectedDataSets()->end(); selectedDataSet++)
 	{
-		if (dataSet->second->size() > 0)
+		DataSet* dataSet = &selectedDataSet->first->at(selectedDataSet->second);
+		if (dataSet->size() > 0)
 		{
-			// and add serie to it
-			xyDataSet->AddSerie(&(*dataSet->second)[0], dataSet->second->size() / 2);
+			if (controller->getComparisonDataSetLabel() != DEFAULT_COMP_DS)
+			{
+				DataSet dataSetCopy = *dataSet;
+				int comparisonIndex = 0;
+				int dataSetIndex = 0;
+				DataSet* comparisonDataSet = &selectedDataSet->first->at(controller->getComparisonDataSetLabel());
+				while(dataSetIndex < dataSetCopy.size() && comparisonIndex < comparisonDataSet->size())
+				{
+					if (dataSetCopy[dataSetIndex] == comparisonDataSet->at(comparisonIndex))
+					{
+						dataSetCopy[dataSetIndex] = comparisonDataSet->at(comparisonIndex + 1);
+						dataSetIndex += 2;
+						comparisonIndex += 2;
+					}
+					else if (dataSetCopy[dataSetIndex] < comparisonDataSet->at(comparisonIndex))
+					{
+						dataSetCopy[dataSetIndex] = comparisonDataSet->at(comparisonIndex + 1);
+						dataSetIndex += 2;
+					}
+					else if (dataSetCopy[dataSetIndex] > comparisonDataSet->at(comparisonIndex))
+					{
+						comparisonIndex += 2;
+					}
+				}
+				while (dataSetIndex < dataSetCopy.size())
+				{
+					if (dataSetIndex > 0)
+						dataSetCopy[dataSetIndex] = dataSetCopy[dataSetIndex - 2];
+					dataSetIndex += 2;
+				}
+				xyDataSet->AddSerie(&(dataSetCopy)[0], dataSetCopy.size() / 2);
+			}
+			else
+			{
+				// and add serie to it
+				xyDataSet->AddSerie(&(*dataSet)[0], dataSet->size() / 2);
+			}
 
 			// set line renderer to dataset
 			xyDataSet->SetRenderer(new XYLineRenderer());
 
-			xyDataSet->SetSerieName(xyDataSet->GetSerieCount() - 1, dataSet->first);
+			xyDataSet->SetSerieName(xyDataSet->GetSerieCount() - 1, selectedDataSet->second);
 		}
 	}
 
@@ -178,7 +228,7 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 		// optional: set axis titles
 		leftAxis->SetTitle("Value");
 		leftAxis->SetFixedBounds(std::min(xyDataSet->GetMinY(), 0.0), xyDataSet->GetMaxY());
-		bottomAxis->SetTitle("Iterations");
+		bottomAxis->SetTitle(controller->getComparisonDataSetLabel());
 
 		// add axes and dataset to plot
 		plot->AddObjects(xyDataSet, leftAxis, bottomAxis);
@@ -218,4 +268,20 @@ void LearningStateWindow::dataSetsPopUpMenuSelected(wxCommandEvent& event)
 		wxThreadEvent evt;
 		refreshChart(evt);
 	}
+}
+
+void LearningStateWindow::refreshComparisonDatasetChoices()
+{
+	std::string prevSelection = comparisonDatasetChoice->GetString(comparisonDatasetChoice->GetSelection());
+	int newSelection = 0;
+	comparisonDatasetChoice->Clear();
+	std::vector<std::string> possibilities = controller->getPossibleComparisonDatasetLabels();
+	for (auto choice = possibilities.begin(); choice != possibilities.end(); choice++)
+	{
+		comparisonDatasetChoice->Append(*choice);
+		if (*choice == prevSelection)
+			newSelection = choice - possibilities.begin();
+	}
+	comparisonDatasetChoice->SetSelection(newSelection);
+	controller->setComparisonDataSetLabel(possibilities[newSelection]);
 }

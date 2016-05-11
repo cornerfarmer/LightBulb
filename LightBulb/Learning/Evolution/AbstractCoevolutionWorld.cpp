@@ -12,6 +12,7 @@ AbstractCoevolutionWorld::AbstractCoevolutionWorld(bool isParasiteWorld_, Abstra
 	fitnessFunction.reset(fitnessFunction_);
 	hallOfFameToAddAlgorithm.reset(hallOfFameToAddAlgorithm_);
 	hallOfFameToChallengeAlgorithm.reset(hallOfFameToChallengeAlgorithm_);
+	comparisons = 0;
 }
 
 bool AbstractCoevolutionWorld::doSimulationStep()
@@ -32,12 +33,20 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 	if (hallOfFameToAddAlgorithm)
 		hallOfFameToAddAlgorithm->addMember(bestAI);
 
+	learningState->addData(DATASET_COMP, comparisons / 1000000.0);
+
 	return false;
 }
 
 double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject* object)
 {
 	return (*fitnessValues)[object];
+}
+
+int AbstractCoevolutionWorld::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
+{
+	comparisons++;
+	return doCompare(obj1, obj2, round);
 }
 
 AbstractCombiningStrategy* AbstractCoevolutionWorld::getCombiningStrategy()
@@ -58,6 +67,8 @@ std::vector<std::string> AbstractCoevolutionWorld::getDataSetLabels()
 {
 	auto labels = AbstractEvolutionWorld::getDataSetLabels();
 	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS);
+	if (!parasiteWorld)
+		labels.push_back(DATASET_COMP);
 	return labels;
 }
 

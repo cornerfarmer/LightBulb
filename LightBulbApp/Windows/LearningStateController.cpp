@@ -85,11 +85,11 @@ int LearningStateController::getTryCount()
 std::string LearningStateController::addDataSet(int tryNumber, int dataSetIndex)
 {
 	std::string dataSetLabel = selectedTrainingPlan->getDataSetLabels()[dataSetIndex];
-	selectedDataSets.push_back(std::make_pair(dataSetLabel, &selectedTrainingPlan->getLearningState()->dataSets[tryNumber][dataSetLabel]));
+	selectedDataSets.push_back(std::make_pair(&selectedTrainingPlan->getLearningState()->dataSets[tryNumber], dataSetLabel));
 	return dataSetLabel;
 }
 
-std::vector<std::pair<std::string, std::vector<double>*>>* LearningStateController::getSelectedDataSets()
+std::vector<std::pair<DataSetsPerTry*, std::string>>* LearningStateController::getSelectedDataSets()
 {
 	return &selectedDataSets;
 }
@@ -99,7 +99,32 @@ void LearningStateController::removeDataSet(int dataSetIndex)
 	selectedDataSets.erase(selectedDataSets.begin() + dataSetIndex);
 }
 
+std::string LearningStateController::getComparisonDataSetLabel()
+{
+	return comparisonDataSetLabel;
+}
+
+void LearningStateController::setComparisonDataSetLabel(std::string newComparisonDataSetLabel)
+{
+	comparisonDataSetLabel = newComparisonDataSetLabel;
+}
+
 std::string LearningStateController::getLabel()
 {
 	return "LearningState";
+}
+
+std::vector<std::string> LearningStateController::getPossibleComparisonDatasetLabels()
+{
+	std::vector<std::string> possibilities;
+	possibilities.push_back(DEFAULT_COMP_DS);
+	for (int i = 0; i < selectedDataSets.size(); i++)
+	{
+		for (auto dataSetSelection = selectedDataSets[i].first->begin(); dataSetSelection != selectedDataSets[i].first->end(); dataSetSelection++)
+		{
+			if (std::find(possibilities.begin(), possibilities.end(), dataSetSelection->first) == possibilities.end())
+				possibilities.push_back(dataSetSelection->first);
+		}
+	}
+	return possibilities;
 }

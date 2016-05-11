@@ -43,6 +43,7 @@ protected:
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
+	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 public:
 	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	TicTacToe();
@@ -55,7 +56,6 @@ public:
 	void startNewGame(int firstPlayer);
 	void initializeForLearning();
 	bool hasGameFinished();
-	int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 	std::vector<std::vector<int>>* getFields();
 	void startStepMode();
 	void stopStepMode();

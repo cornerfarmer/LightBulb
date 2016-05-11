@@ -29,6 +29,7 @@ void save(Archive& archive, AbstractCoevolutionWorld const& world)
 	archive(cereal::make_nvp("fitnessValues", fitnessValues));
 
 	archive(cereal::make_nvp("isParasiteWorld", world.parasiteWorld));
+	archive(cereal::make_nvp("comparisons", world.comparisons));
 }
 
 
@@ -50,6 +51,7 @@ void load(Archive& archive, AbstractCoevolutionWorld& world)
 		(*world.fitnessValues)[world.objects[i]] = fitnessValues[i];
 
 	archive(cereal::make_nvp("isParasiteWorld", world.parasiteWorld));
+	archive(cereal::make_nvp("comparisons", world.comparisons));
 }
 
 #include "UsedArchives.hpp"

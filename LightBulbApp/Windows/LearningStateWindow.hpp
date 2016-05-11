@@ -29,12 +29,15 @@ private:
 	wxComboBox* refreshRateChoice;
 	wxChoice* tryChoice;
 	wxChoice* dataSetChoice;
+	wxChoice* comparisonDatasetChoice;
 	void trainingPlanChanged(wxCommandEvent& event);
 	void refreshRateChanged(wxCommandEvent& event);
+	void comparisonDatasetChanged(wxCommandEvent& event);
 	void addDataSet(wxCommandEvent& event);
 	void refreshChart(wxThreadEvent& event);
 	void dataSetsListRightClick(wxDataViewEvent& event);
 	void dataSetsPopUpMenuSelected(wxCommandEvent& event);
+	void refreshComparisonDatasetChoices();
 public:
 	LearningStateWindow(LearningStateController* controller_, AbstractWindow* parent = NULL);
 	void refreshTrainingPlans();

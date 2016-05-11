@@ -48,7 +48,7 @@ int TicTacToe::getFieldValue(int x, int y)
 	return fields[x][y];
 }
 
-int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
+int TicTacToe::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
 {
 	return simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), round == 1);
 }
