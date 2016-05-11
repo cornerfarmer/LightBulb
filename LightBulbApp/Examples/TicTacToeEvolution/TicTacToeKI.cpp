@@ -41,18 +41,6 @@ void TicTacToeKI::interpretNNOutput(std::vector<double>& output)
 		}
 	}
 	currentGame->setIllegalMove(true);
-	return;
-	for (int x = 0; x < 3; x++)
-	{
-		for (int y = 0; y < 3; y++)
-		{
-			if (currentGame->isFree(x, y))
-			{
-				currentGame->setField(x, y);
-				return;
-			}
-		}
-	}
 }
 
 TicTacToeKI::~TicTacToeKI()

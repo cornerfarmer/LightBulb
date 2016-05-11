@@ -7,12 +7,12 @@
 #include <vector>
 #include <map>
 #include <array>
+#include <mutex>
 
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 #include "IO/UseParentSerialization.hpp"
-#include <mutex>
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -34,12 +34,9 @@ private:
 protected:
 	std::vector<std::vector<int>> fields;	
 	AbstractEvolutionObject* createNewObject();
-	//sf::RenderWindow window;
-	//std::unique_ptr<TicTacToeDrawer> drawer;
 	void resetWorld();
 	int whoHasWon();
 	int currentPlayer;
-	bool displayMode;
 	bool illegalMove;
 	bool nextDecisionCombination(std::vector<int>& decisionNr, int b, int level = 0);
 	int simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlayerStarts);

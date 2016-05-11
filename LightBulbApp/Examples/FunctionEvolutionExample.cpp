@@ -20,33 +20,6 @@ static double sixHumpCamelFunction(std::vector<float> pos)
 {
 	return -1 * (4 * pow(pos[0], 2) - 2.1 * pow(pos[0], 4) + pow(pos[0], 6) / 3 + pos[0] * pos[1] - 4 * pow(pos[1], 2) + 4 * pow(pos[1], 4));
 }
-//
-//void doFunctionEvolutionExample()
-//{
-//	
-//
-//	LearningRuleAnalyserOptions analyserOptions;
-//	analyserOptions.learningRule = &learningRule;
-//	//analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 1.3, 0.1, 2.0, "mcs"));
-//	//analyserOptions.changableParameters.push_back(new ChangeableNumber<int, RateDifferenceCondition>(rateDifferenceCondition, &RateDifferenceCondition::setCount, 0, 10, 50, "cnt"));
-//	//analyserOptions.changableParameters.push_back(new ChangeableNumber<int, BestSelectionCommand>(bestSelectionCommand, &BestSelectionCommand::setObjectCount, 5, 5, 40, "sel"));
-//	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, ConstantMutationCommand>(constantMutationCommand, &ConstantMutationCommand::setMutationPercentage, 0, 0.3, 2.0, "mut"));
-//	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, ConstantRecombinationCommand>(constantRecombinationCommand, &ConstantRecombinationCommand::setRecombinationPercentage, 0, 0.3, 2.0, "rcb"));
-//
-//	std::vector<std::pair<std::string, AbstractMutationSelector*>> possibleMutationSelectors;
-//	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("rank", new RandomSelector(new RankBasedRandomFunction())));
-//	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("equa", new RandomSelector(new EqualRandomFunction())));
-//	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("rema", new RemainderStochasticSamplingSelector()));
-//	possibleMutationSelectors.push_back(std::make_pair<std::string, AbstractMutationSelector*>("stoc", new StochasticUniversalSamplingSelector()));
-//
-//	analyserOptions.changableParameters.push_back(new ChangeablePointer<AbstractMutationSelector, ConstantMutationCommand>(constantMutationCommand, &ConstantMutationCommand::setMutationSelector, possibleMutationSelectors, "sel"));
-//
-//
-//	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
-//
-//	learningRuleAnalyser.execute();
-//
-//}
 
 AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 {

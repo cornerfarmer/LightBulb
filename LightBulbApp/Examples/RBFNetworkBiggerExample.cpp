@@ -10,57 +10,7 @@
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Teaching/Teacher.hpp>
 #include <ClusterAnalysis/KMeansRBFNeuronPlacer.hpp>
-//
-//void doRBFNetworkBiggerExample()
-//{	
-//	DeltaLearningRuleOptions delteLearningRuleOptions;
-//	delteLearningRuleOptions.maxIterationsPerTry = 100000;
-//	delteLearningRuleOptions.maxTries = 1;
-//	delteLearningRuleOptions.totalErrorGoal = 2;
-//	delteLearningRuleOptions.maxTotalErrorValue = 5;
-//	delteLearningRuleOptions.changeWeightsBeforeLearning = false;
-//	delteLearningRuleOptions.resilientLearningRate = true;
-//	DeltaLearningRule deltaLearningRule(delteLearningRuleOptions);
-//
-//	deltaLearningRule.start();
-//
-//
-//	//NeuralNetworkResultChartOptions neuralNetworkResultChartOptions;
-//	//neuralNetworkResultChartOptions.neuralNetwork = &neuralNetwork;
-//	//neuralNetworkResultChartOptions.binaryInterpretation = true;
-//	//neuralNetworkResultChartOptions.activationOrder = new TopologicalOrder();
-//	//neuralNetworkResultChartOptions.yRangeEnd = 20;
-//	//neuralNetworkResultChartOptions.xRangeEnd = 20;
-//	//NeuralNetworkResultChart neuralNetworkResultChart(neuralNetworkResultChartOptions);
-//	//neuralNetworkResultChart.recalculateAllValues();
-//
-//	//RBFNetworkStructureChartOptions rbfNetworkStructureChartOptions;
-//	//rbfNetworkStructureChartOptions.rbfNetwork = static_cast<RBFNetwork*>(neuralNetwork.getNetworkTopology());
-//	//rbfNetworkStructureChartOptions.yRangeEnd = 20;
-//	//rbfNetworkStructureChartOptions.xRangeEnd = 20;
-//	//rbfNetworkStructureChartOptions.posX = 300;
-//	//rbfNetworkStructureChartOptions.posY = 0;
-//	//RBFNetworkStructureChart rbfNetworkStructureChart(rbfNetworkStructureChartOptions);
-//	//rbfNetworkStructureChart.recalculateAllValues();
-//
-//
-//	//sf::RenderWindow window(sf::VideoMode(800, 600), "LightBulb!");
-//
-//	//while (window.isOpen())
-//	//{
-//	//	sf::Event event;
-//	//	while (window.pollEvent(event))
-//	//	{
-//	//		if (event.type == sf::Event::Closed)
-//	//			window.close();
-//	//	}
-//
-//	//	window.clear();
-//	//	neuralNetworkResultChart.draw(window);
-//	//	rbfNetworkStructureChart.draw(window);
-//	//	window.display();q
-//	//}
-//}
+
 
 AbstractLearningRule* RBFNetworkBiggerExample::createLearningRate()
 {

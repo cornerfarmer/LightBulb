@@ -18,84 +18,8 @@
 #include <fstream>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include "TicTacToeGameFactory.hpp"
-#include <Learning/Evolution/RandomCombiningStrategy.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
-
-//
-//void doTicTacToeEvolutionExample()
-//{
-//	
-//#define TICTACTOE_SINGLE
-//#ifdef TICTACTOE_SINGLE
-//	LearningState result = learningRule.doLearning();
-//	std::cout << "total generations: " << result.iterationsNeeded << std::endl;
-//
-//#else
-//	ticTacToe.setDebugOutput(false);
-//	LearningRuleAnalyserOptions analyserOptions;
-//	analyserOptions.learningRule = &learningRule;
-//	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, TicTacToe>(&ticTacToe, &TicTacToe::setMaxDistanceShrinkFactor, 0.5, 0.1, 0.9, "shr"));
-//
-//	analyserOptions.calculationsPerParameterCombination = 1;
-//	analyserOptions.useQualityInsteadOfSuccessful = true;
-//
-//	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
-//
-//	learningRuleAnalyser.execute();
-//#endif
-//
-//	TicTacToeDrawerOptions ticTacToeDrawerOptions;
-//	ticTacToeDrawerOptions.width = 600;
-//	ticTacToeDrawerOptions.height = 600;
-//	ticTacToeDrawerOptions.ticTacToe = &ticTacToe1;
-//	TicTacToeDrawer ticTacToeDrawer(ticTacToeDrawerOptions);
-//
-//	sf::RenderWindow window(sf::VideoMode(1300, 1000), "LightBulb!");
-//
-//	TicTacToeKI* bestAI = static_cast<TicTacToeKI*>(ticTacToe1.getHighscoreList()->front().second);// ticTacToe.getBestAIs()->back();
-//
-//	SynapticExporter exporter;
-//	std::string json = exporter.execute(bestAI->getNeuralNetwork());
-//	std::ofstream myfile;
-//	myfile.open("bestTicTacToeAI.txt");
-//	myfile << json;
-//	myfile.close();
-//
-//	ticTacToe1.startNewGame(1);
-//	bestAI->resetNN();
-//	bestAI->setTicTacToe(&ticTacToe1);
-//	while (window.isOpen())
-//	{
-//		sf::Event event;
-//		while (window.pollEvent(event))
-//		{
-//			if (event.type == sf::Event::Closed)
-//				window.close();
-//			else if (event.type == sf::Event::MouseButtonPressed) {
-//				if (ticTacToe1.hasGameFinished()) {
-//					ticTacToe1.startNewGame(1);
-//					bestAI->resetNN();
-//				}
-//				else if (ticTacToeDrawer.handleMouseInputEvent(event)) {
-//					if (!ticTacToe1.hasGameFinished()) {
-//						bestAI->doNNCalculation();
-//						if (ticTacToe1.hasGameFinished())
-//							std::cout << "AI has failed" << std::endl;
-//					}
-//					else
-//						std::cout << "Player has failed" << std::endl;
-//				}
-//			}
-//		}
-//
-//		window.clear();
-//		ticTacToeDrawer.recalculateAllValues();
-//		ticTacToeDrawer.draw(window);
-//		//networkTopologyDrawer.draw(window);
-//		window.display();
-//	}
-//}
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"

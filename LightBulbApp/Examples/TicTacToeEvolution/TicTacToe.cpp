@@ -36,11 +36,6 @@ void TicTacToe::initialize()
 	}
 	resetWorld();
 	stepMode = false;
-	/*window.create(sf::VideoMode(800, 700), "LightBulb!");
-	TicTacToeDrawerOptions options;
-	options.ticTacToe = this;
-	displayMode = true;
-	drawer.reset(new TicTacToeDrawer(options));*/
 }
 
 bool TicTacToe::hasGameFinished()
@@ -53,44 +48,9 @@ int TicTacToe::getFieldValue(int x, int y)
 	return fields[x][y];
 }
 
-template <class Iter>
-void intervalAdvance(Iter& it,const Iter& end, int i)
-{
-	if (it != end -1)
-	{
-		it += i;
-		if (it > end || (it == end && i != 1))
-			it = end -1;
-	}
-	else
-		it = end;
-}
-
-
 int TicTacToe::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
 {
-	int result = 0;
 	return simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), round == 1);
-	result += simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), true);
-	
-	//std::cout << result;
-	static int counter = 0;
-	counter++;
-	if (counter % 1000000 == 0)
-		log(std::to_string(counter) + ". calculation", LL_HIGH);
-
-	if (parasiteWorld) {
-		if (result >= 0)
-			return 1;
-		else
-			return -1;
-	}
-	else {
-		if (result == 2)
-			return 1;
-		else
-			return -1;
-	}
 }
 
 std::vector<std::vector<int>>* TicTacToe::getFields()
@@ -175,41 +135,12 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 				pointsAI2++;
 		}
 
-		/*sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-			else if (event.type == sf::Event::KeyPressed)
-				displayMode = !displayMode;
-		}
-
-		if (displayMode && window.isOpen()) {
-			window.clear();
-			drawer->recalculateAllValues();
-			drawer->draw(window);
-			window.display();
-		}*/
-
 		if (hasGameFinished())
 			break;
 	}
-	static int il = 0;
-	static int wins = 0;
-	static int ties = 0;
-	static bool prevPW = false;
 
-	if (prevPW != parasiteWorld)
-	{
-		log("il:" + std::to_string(il) + " wins:" + std::to_string(wins) + " ties:" + std::to_string(ties), LL_MEDIUM);
-		il = 0;
-		wins = 0;
-		ties = 0;
-		prevPW = parasiteWorld;
-	}
 	if (illegalMove)
 	{
-		il++;
 		if (currentPlayer == 1)
 			return -1;
 		else
@@ -219,16 +150,13 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 	{
 		int w = whoHasWon();
 		if (w == 0) {
-			ties++;
 			if (parasiteWorld)
 				return -1;
 			else
 				return 1;
 		} else if (w == 1) {
-			wins++;
 			return 1;
 		} else if (w == -1) {
-			wins++;
 			return -1;
 		}
 	}
