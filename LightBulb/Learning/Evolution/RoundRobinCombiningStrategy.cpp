@@ -27,5 +27,5 @@ void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWo
 
 int RoundRobinCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
 {
-	return simulationWorld->getPopulationSize() * simulationWorld->getPopulationSize();
+	return simulationWorld->getPopulationSize() * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
 }

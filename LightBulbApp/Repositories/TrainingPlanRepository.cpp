@@ -25,7 +25,7 @@ void TrainingPlanRepository::Add(AbstractTrainingPlan* trainingPlan)
 void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
 {
 	std::ofstream os(path);
-	cereal::XMLOutputArchive archive(os);
+	cereal::BinaryOutputArchive archive(os);
 
 	onlyUseNeuralNetworkIndex = false;
 	archive(trainingPlans[trainingPlanIndex]);
@@ -34,7 +34,7 @@ void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
 AbstractTrainingPlan* TrainingPlanRepository::load(std::string path)
 {
 	std::ifstream is(path);
-	cereal::XMLInputArchive archive(is);
+	cereal::BinaryInputArchive archive(is);
 
 	trainingPlans.push_back(std::unique_ptr<AbstractTrainingPlan>());
 	archive(trainingPlans.back());
