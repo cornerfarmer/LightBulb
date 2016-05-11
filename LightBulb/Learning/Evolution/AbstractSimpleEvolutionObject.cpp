@@ -19,6 +19,9 @@ void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& op
 	// Initialize the mutation strength vector
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
 	randomizeMutationStrength();
+
+	lastOutput.resize(neuralNetwork->getNetworkTopology()->getOutputSize());
+
 }
 
 AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_)
@@ -34,16 +37,14 @@ AbstractNeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
 void AbstractSimpleEvolutionObject::doNNCalculation()
 {
 	// Get the input
-	static std::vector<double> input;
-	getNNInput(input);
+	getNNInput(lastInput);
 
 	TopologicalOrder topologicalOrder;
-	static std::vector<double> output(neuralNetwork->getNetworkTopology()->getOutputSize());
 	// Calculate the output from the the input
-	neuralNetwork->calculate(input, output, topologicalOrder, false);
+	neuralNetwork->calculate(lastInput, lastOutput, topologicalOrder, false);
 	
 	// Interpret the output
-	interpretNNOutput(output);
+	interpretNNOutput(lastOutput);
 }
 
 

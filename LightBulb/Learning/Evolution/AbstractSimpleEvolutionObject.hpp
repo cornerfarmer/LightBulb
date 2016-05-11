@@ -27,6 +27,9 @@ class AbstractSimpleEvolutionObject : public AbstractEvolutionObject
 	friend void save(Archive& archive, AbstractSimpleEvolutionObject const& object);
 	template <class Archive>
 	friend void load(Archive& archive, AbstractSimpleEvolutionObject& object);
+private:
+	std::vector<double> lastOutput;
+	std::vector<double> lastInput;
 protected:
 	// The NN of the object
 	std::unique_ptr<NeuralNetwork> neuralNetwork;
