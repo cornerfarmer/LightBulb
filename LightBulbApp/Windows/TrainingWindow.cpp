@@ -72,6 +72,8 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	sizer->Add(mainSplitterWindow, 1, wxEXPAND);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
+
+	SetSize(1100, 700);
 }
 
 void TrainingWindow::fileMenuSelected(wxCommandEvent& event)

@@ -1,7 +1,7 @@
 // Includes
 #include "NeuralNetworkRepository.hpp"
 #include <fstream>
-#include <cereal/archives/xml.hpp>
+#include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 

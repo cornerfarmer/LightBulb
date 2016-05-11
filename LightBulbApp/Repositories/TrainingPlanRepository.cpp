@@ -1,7 +1,7 @@
 // Includes
 #include "TrainingPlanRepository.hpp"
 #include <fstream>
-#include <cereal/archives/xml.hpp>
+#include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
@@ -24,7 +24,7 @@ void TrainingPlanRepository::Add(AbstractTrainingPlan* trainingPlan)
 
 void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
 {
-	std::ofstream os(path);
+	std::ofstream os(path, std::ios::binary);
 	cereal::BinaryOutputArchive archive(os);
 
 	onlyUseNeuralNetworkIndex = false;
@@ -33,7 +33,7 @@ void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
 
 AbstractTrainingPlan* TrainingPlanRepository::load(std::string path)
 {
-	std::ifstream is(path);
+	std::ifstream is(path, std::ios::binary);
 	cereal::BinaryInputArchive archive(is);
 
 	trainingPlans.push_back(std::unique_ptr<AbstractTrainingPlan>());

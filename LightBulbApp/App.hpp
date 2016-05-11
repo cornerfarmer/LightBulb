@@ -9,6 +9,8 @@ class App : public wxApp
 {
 public:
 	virtual bool OnInit();
+	void OnUnhandledException();
+	bool OnExceptionInMainLoop();
 };
 
 #endif

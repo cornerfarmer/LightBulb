@@ -8,7 +8,7 @@
 #include <Repositories/NeuralNetworkRepository.hpp>
 #include <Repositories/TrainingPlanRepository.hpp>
 #include <fstream>
-#include <cereal/archives/xml.hpp>
+#include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <Examples/RBFNetworkBiggerExample.hpp>
@@ -194,7 +194,7 @@ void TrainingController::loadNeuralNetwork(std::string path)
 void TrainingController::saveTrainingPlan(int trainingPlanIndex)
 {
 	AbstractTrainingPlan* trainingPlan = (*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get();
-	if (!trainingPlan->isPaused()) 
+	if (trainingPlan->isRunning()) 
 	{
 		saveTrainingPlanAfterPausedIndex = trainingPlanIndex;
 		trainingPlan->pause();

@@ -4,6 +4,7 @@
 
 AbstractCombiningStrategy::AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_)
 {
+	results.reset(new CombiningStrategyResults());
 	secondWorld = secondWorld_;
 }
 

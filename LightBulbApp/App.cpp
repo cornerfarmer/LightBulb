@@ -26,3 +26,13 @@ bool App::OnInit()
 	trainingController->show();
 	return true;
 }
+
+void App::OnUnhandledException()
+{
+	throw;
+}
+
+bool App::OnExceptionInMainLoop()
+{
+	throw;
+}
