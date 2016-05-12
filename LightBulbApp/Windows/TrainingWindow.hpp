@@ -5,10 +5,10 @@
 
 // Library include
 #include <memory>
-
+#include <chrono>
+#include <map>
 // Includes
 #include "Windows/AbstractWindow.hpp"
-#include <map>
 #include "AbstractSubAppFactory.hpp"
 
 // Forward declarations
@@ -41,6 +41,7 @@ private:
 	wxChoice* trainingPlanPatternsChoice;
 	wxMenu* trainingPlanMenu;
 	AbstractTrainingPlan* processTrainingPlanSelection;
+	wxTimer* runTimeRefreshTimer;
 	void fileMenuSelected(wxCommandEvent& event);
 	void trainingPlanMenuSelected(wxCommandEvent& event);
 	void neuralNetworkPopUpMenuSelected(wxCommandEvent& event);
@@ -83,6 +84,8 @@ private:
 	void saveTrainingPlan(wxThreadEvent& event);
 	void saveTrainingSession(wxThreadEvent& event);
 	void removeCustomSubAppsMenu();
+	void refreshTrainingPlanRunTimes(wxTimerEvent& event);
+	std::string getStringFromDuration(std::chrono::duration<double>& duration);
 protected:
 	DECLARE_EVENT_TABLE();
 public:

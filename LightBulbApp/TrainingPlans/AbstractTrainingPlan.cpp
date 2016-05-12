@@ -43,8 +43,14 @@ int AbstractTrainingPlan::getIntegerPreference(std::string name)
 		return 0;
 }
 
+std::chrono::duration<double> AbstractTrainingPlan::getRunTime()
+{
+	return (isRunning() || isPausing() ? std::chrono::system_clock::now() - currentStartTime : std::chrono::duration<double>::zero()) + concludedRunTime;
+}
+
 AbstractTrainingPlan::AbstractTrainingPlan()
 {
+	concludedRunTime = std::chrono::duration<double>(0);
 	logger.reset(new StorageLogger());
 	threadShouldBeJoinedBeforeReuse = false;
 	state = TP_IDLE;
@@ -140,8 +146,12 @@ bool AbstractTrainingPlan::isRunning()
 
 void AbstractTrainingPlan::runThread(bool initial)
 {
+	currentStartTime = std::chrono::system_clock::now();
+
 	run(initial);
 	threadShouldBeJoinedBeforeReuse = true;
+
+	concludedRunTime += std::chrono::system_clock::now() - currentStartTime;
 }
 
 void AbstractTrainingPlan::pausingFinished()

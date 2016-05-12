@@ -8,6 +8,7 @@
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include "TrainingController.hpp"
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
+#include <wx/timer.h>
 
 enum
 {
@@ -72,6 +73,10 @@ TrainingWindow::TrainingWindow(TrainingController* controller_)
 	sizer->Add(mainSplitterWindow, 1, wxEXPAND);
 	SetSizer(sizer);
 	sizer->SetSizeHints(this);
+
+	runTimeRefreshTimer = new wxTimer(this, wxID_ANY);
+	Bind(wxEVT_TIMER, wxTimerEventFunction(&TrainingWindow::refreshTrainingPlanRunTimes), this);
+	runTimeRefreshTimer->Start(1000);
 
 	SetSize(1100, 700);
 }
@@ -265,6 +270,7 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 	trainingPlanList = new wxDataViewListCtrl(panel, wxID_ANY);
 	trainingPlanList->AppendTextColumn("Training name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
 	trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
+	trainingPlanList->AppendTextColumn("Runtime")->SetMinWidth(50);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&TrainingWindow::trainingPlanListRightClick), this);
 	trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_EDITING_DONE, wxDataViewEventFunction(&TrainingWindow::trainingPlanNameChanged), this);
@@ -284,6 +290,8 @@ void TrainingWindow::refreshTrainingPlans(wxCommandEvent& event)
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
 		data.push_back(wxVariant((*trainingPlan)->getStateAsString()));
+		auto duration = (*trainingPlan)->getRunTime();
+		data.push_back(wxVariant(getStringFromDuration(duration)));
 		trainingPlanList->AppendItem(data);
 		if (currentDetailObject == trainingPlan->get())
 			showDetailsOfTrainingPlan(trainingPlan->get());
@@ -513,6 +521,38 @@ void TrainingWindow::removeCustomSubAppsMenu()
 		menubar->Remove(menubar->GetMenuCount() - 1);
 		customMenuVisible = false;
 	}
+}
+
+void TrainingWindow::refreshTrainingPlanRunTimes(wxTimerEvent& event)
+{
+	int trainingPlanIndex = 0;
+	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++, trainingPlanIndex++)
+	{
+		auto duration = (*trainingPlan)->getRunTime();
+		trainingPlanList->SetValue(wxVariant(getStringFromDuration(duration)), trainingPlanIndex, 2);
+	}
+}
+
+std::string TrainingWindow::getStringFromDuration(std::chrono::duration<double>& duration)
+{
+	auto hours = std::chrono::duration_cast<std::chrono::hours>(duration);
+	duration -= hours;
+	auto minutes = std::chrono::duration_cast<std::chrono::minutes>(duration);
+	duration -= minutes;
+	auto seconds = std::chrono::duration_cast<std::chrono::seconds>(duration);
+	duration -= seconds;
+	auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
+
+	std::string output = "";
+	if (hours.count() > 0)
+		output += std::to_string(hours.count()) + "h ";
+	if (minutes.count() > 0)
+		output += std::to_string(minutes.count()) + "m ";
+	if (seconds.count() > 0)
+		output += std::to_string(seconds.count()) + "s ";
+
+	output += std::to_string(milliseconds.count()) + "ms";
+	return output;
 }
 
 void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan)

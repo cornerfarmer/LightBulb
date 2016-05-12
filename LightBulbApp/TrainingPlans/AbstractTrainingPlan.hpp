@@ -41,6 +41,8 @@ class AbstractTrainingPlan : public LightBulb::Observable<TrainingPlanEvents, Ab
 	template <class Archive>
 	friend void load(Archive& archive, AbstractTrainingPlan& trainingPlan);
 private:
+	std::chrono::time_point<std::chrono::system_clock> currentStartTime;
+	std::chrono::duration<double> concludedRunTime;
 	std::thread thread;
 	AbstractTrainingPlan* pattern;
 	TrainingPlanState state;
@@ -80,7 +82,7 @@ public:
 	virtual LearningState* getLearningState() = 0;
 	StorageLogger* getLogger();
 	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
-
+	std::chrono::duration<double> getRunTime();
 	std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
 	void setName(std::string newName);
 };
