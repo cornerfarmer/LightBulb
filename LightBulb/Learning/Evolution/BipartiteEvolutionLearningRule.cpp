@@ -59,12 +59,15 @@ bool BipartiteEvolutionLearningRule::doIteration()
 {
 	log("lr1: ", LL_MEDIUM);
 	bool successfull = getOptions()->learningRule1->doIteration();
+	learningState->iterations--;
 	if (!successfull) {
 		exitConditionReached = true;
 		return false;
 	}
+
 	log("lr2: ", LL_MEDIUM);
 	getOptions()->learningRule2->doIteration();
+	learningState->iterations--;
 	return true;
 }
 
