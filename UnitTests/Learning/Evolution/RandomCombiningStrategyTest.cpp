@@ -39,7 +39,7 @@ TEST_F(RandomCombiningStrategyTest, executeSingleWorld)
 
 	std::vector<AbstractEvolutionObject*> objects({ &object1 , &object2, &object3 });
 	EXPECT_CALL(world, getEvolutionObjects()).WillRepeatedly(testing::Return(&objects));
-	EXPECT_CALL(world, compareObjects(testing::_, testing::_)).Times(9).WillRepeatedly(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(testing::_, testing::_, 0)).Times(9).WillRepeatedly(testing::Return(1));
 
 	auto result = randomCombiningStrategy->execute(&world);
 	
@@ -61,7 +61,7 @@ TEST_F(RandomCombiningStrategyTest, executeTwoWorlds)
 
 	EXPECT_CALL(world, getEvolutionObjects()).WillRepeatedly(testing::Return(&objects));
 	EXPECT_CALL(parasiteWorld, getEvolutionObjects()).WillRepeatedly(testing::Return(&parasiteObjects));
-	EXPECT_CALL(world, compareObjects(testing::_, testing::_)).Times(6).WillRepeatedly(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(testing::_, testing::_, 0)).Times(6).WillRepeatedly(testing::Return(1));
 
 	auto result = randomCombiningStrategy->execute(&world);
 

@@ -24,7 +24,8 @@ public:
 	MOCK_METHOD0(clearPopulation, void ());
 	MOCK_METHOD0(doSimulationStep, bool ());
 	MOCK_METHOD1(getScore, double (AbstractEvolutionObject*));
-	MOCK_METHOD2(compareObjects, int (AbstractEvolutionObject*, AbstractEvolutionObject*));
+	MOCK_METHOD3(doCompare, int (AbstractEvolutionObject*, AbstractEvolutionObject*, int));
+	MOCK_METHOD3(compareObjects, int (AbstractEvolutionObject*, AbstractEvolutionObject*, int));
 	MOCK_METHOD1(rateKI, int (AbstractEvolutionObject*));
 	MOCK_METHOD1(setLogger, void (AbstractLogger*));
 	MOCK_METHOD0(getDataSetLabels, std::vector<std::string> ());

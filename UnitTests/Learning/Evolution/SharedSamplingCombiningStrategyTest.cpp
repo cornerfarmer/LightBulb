@@ -32,7 +32,7 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeTwoEmptyWorlds)
 	EXPECT_CALL(parasiteWorld, getCombiningStrategy()).WillRepeatedly(testing::Return(&otherCombiningStrategy));
 	sharedSamplingCombiningStrategy->setSecondWorld(&parasiteWorld);
 
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> prevResults;
+	CombiningStrategyResults prevResults;
 	EXPECT_CALL(otherCombiningStrategy, getPrevResults()).WillRepeatedly(testing::Return(&prevResults));
 
 	std::vector<AbstractEvolutionObject*> parasiteObjects;
@@ -53,7 +53,7 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeEmptyParasiteWorld)
 	EXPECT_CALL(parasiteWorld, getCombiningStrategy()).WillRepeatedly(testing::Return(&otherCombiningStrategy));
 	sharedSamplingCombiningStrategy->setSecondWorld(&parasiteWorld);
 
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> prevResults;
+	CombiningStrategyResults prevResults;
 	EXPECT_CALL(otherCombiningStrategy, getPrevResults()).WillRepeatedly(testing::Return(&prevResults));
 
 	std::vector<AbstractEvolutionObject*> parasiteObjects;
@@ -80,11 +80,11 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeTwoWorlds)
 	EXPECT_CALL(parasiteWorld, getCombiningStrategy()).WillRepeatedly(testing::Return(&otherCombiningStrategy));
 	sharedSamplingCombiningStrategy->setSecondWorld(&parasiteWorld);
 
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> prevResults;
-	prevResults[&object4][&object1] = true;
-	prevResults[&object4][&object2] = true;
-	prevResults[&object5][&object1] = true;
-	prevResults[&object6][&object3] = true;
+	CombiningStrategyResults prevResults;
+	prevResults[&object4][&object1][0] = true;
+	prevResults[&object4][&object2][0] = true;
+	prevResults[&object5][&object1][0] = true;
+	prevResults[&object6][&object3][0] = true;
 	EXPECT_CALL(otherCombiningStrategy, getPrevResults()).WillRepeatedly(testing::Return(&prevResults));
 
 	std::vector<AbstractEvolutionObject*> objects({ &object1 , &object2, &object3 });
@@ -95,12 +95,12 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeTwoWorlds)
 
 	{
 		testing::InSequence s;
-		EXPECT_CALL(world, compareObjects(&object1, &object4)).WillOnce(testing::Return(1));
-		EXPECT_CALL(world, compareObjects(&object1, &object6)).WillOnce(testing::Return(-1));
-		EXPECT_CALL(world, compareObjects(&object2, &object4)).WillOnce(testing::Return(-1));
-		EXPECT_CALL(world, compareObjects(&object2, &object6)).WillOnce(testing::Return(1));
-		EXPECT_CALL(world, compareObjects(&object3, &object4)).WillOnce(testing::Return(1));
-		EXPECT_CALL(world, compareObjects(&object3, &object6)).WillOnce(testing::Return(1));
+		EXPECT_CALL(world, compareObjects(&object1, &object4, 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(world, compareObjects(&object1, &object6, 0)).WillOnce(testing::Return(-1));
+		EXPECT_CALL(world, compareObjects(&object2, &object4, 0)).WillOnce(testing::Return(-1));
+		EXPECT_CALL(world, compareObjects(&object2, &object6, 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(world, compareObjects(&object3, &object4, 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(world, compareObjects(&object3, &object6, 0)).WillOnce(testing::Return(1));
 	}
 	
 	auto result = sharedSamplingCombiningStrategy->execute(&world);

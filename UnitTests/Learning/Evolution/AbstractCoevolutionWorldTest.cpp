@@ -13,6 +13,7 @@ public:
 	MockCoevolutionFitnessFunction* coevolutionFitnessFunction;
 	MockHallOfFameAlgorithm* hallOfFameToAddAlgorithm;
 	MockHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm;
+	
 	void SetUp() {
 		combiningStrategy = new MockCombiningStrategy();
 		coevolutionFitnessFunction = new MockCoevolutionFitnessFunction();
@@ -29,10 +30,12 @@ public:
 
 TEST_F(AbstractCoevolutionWorldTest, doSimulationStep)
 {
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> result;
+	CombiningStrategyResults result;
 	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
 	MockEvolutionObject bestObject;
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
+	LearningState learningState(5);
+	coevolutionWorld->setLearningState(&learningState);
 	highscore.push_back(std::make_pair(42, &bestObject));
 	{
 		testing::InSequence s;

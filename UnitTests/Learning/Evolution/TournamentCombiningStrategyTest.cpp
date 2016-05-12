@@ -36,13 +36,13 @@ TEST_F(TournamentCombiningStrategyTest, executeSingleWorld)
 
 	std::vector<AbstractEvolutionObject*> objects({ &object1 , &object2, &object3, &object4, &object5, &object6 });
 	EXPECT_CALL(world, getEvolutionObjects()).WillRepeatedly(testing::Return(&objects));
-	EXPECT_CALL(world, compareObjects(&object1, &object2)).WillOnce(testing::Return(1));
-	EXPECT_CALL(world, compareObjects(&object3, &object4)).WillOnce(testing::Return(-1));
-	EXPECT_CALL(world, compareObjects(&object5, &object6)).WillOnce(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(&object1, &object2, 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(&object3, &object4, 0)).WillOnce(testing::Return(-1));
+	EXPECT_CALL(world, compareObjects(&object5, &object6, 0)).WillOnce(testing::Return(1));
 
-	EXPECT_CALL(world, compareObjects(&object1, &object4)).WillOnce(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(&object1, &object4, 0)).WillOnce(testing::Return(1));
 
-	EXPECT_CALL(world, compareObjects(&object1, &object5)).WillOnce(testing::Return(-1));
+	EXPECT_CALL(world, compareObjects(&object1, &object5, 0)).WillOnce(testing::Return(-1));
 
 	auto result = tournamentCombiningStrategy->execute(&world);
 	

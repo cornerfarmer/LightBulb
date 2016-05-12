@@ -9,7 +9,7 @@
 class MockCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
 {
 public:
-	MOCK_METHOD1(execute, std::map<AbstractEvolutionObject*, double>* (std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>>&));
+	MOCK_METHOD1(execute, std::map<AbstractEvolutionObject*, double>* (CombiningStrategyResults&));
 };
 
 #endif

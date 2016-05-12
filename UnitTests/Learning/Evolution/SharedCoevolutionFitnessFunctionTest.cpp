@@ -32,16 +32,16 @@ public:
 
 TEST_F(SharedCoevolutionFitnessFunctionTest, start)
 {
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> results;
+	CombiningStrategyResults results;
 
-	results[objects[0]][objects[1]] = true;
-	results[objects[1]][objects[0]] = false;
+	results[objects[0]][objects[1]][0] = true;
+	results[objects[1]][objects[0]][0] = false;
 
-	results[objects[1]][objects[2]] = true;
-	results[objects[2]][objects[1]] = false;
+	results[objects[1]][objects[2]][0] = true;
+	results[objects[2]][objects[1]][0] = false;
 
-	results[objects[0]][objects[2]] = true;
-	results[objects[2]][objects[0]] = false;
+	results[objects[0]][objects[2]][0] = true;
+	results[objects[2]][objects[0]][0] = false;
 
 	auto fitnessValues = sharedCoevolutionFitnessFunction->execute(results);
 

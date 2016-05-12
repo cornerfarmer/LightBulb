@@ -14,7 +14,7 @@ public:
 	MockCombiningStrategy combiningStrategy;
 	MockEvolutionObject object1, object2, object3;
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, bool>> results;
+	CombiningStrategyResults results;
 
 	void SetUp() {
 		perfectObjectFoundCondition = new PerfectObjectFoundCondition(2);
@@ -26,12 +26,12 @@ public:
 		EXPECT_CALL(world, getCombiningStrategy()).WillRepeatedly(testing::Return(&combiningStrategy));
 		EXPECT_CALL(world, isParasiteWorld()).WillRepeatedly(testing::Return(true));
 		
-		results[&object1][&object2] = true;
-		results[&object2][&object1] = false;
-		results[&object1][&object3] = false;
-		results[&object3][&object1] = true;
-		results[&object2][&object3] = true;
-		results[&object3][&object2] = false;
+		results[&object1][&object2][0] = true;
+		results[&object2][&object1][0] = false;
+		results[&object1][&object3][0] = false;
+		results[&object3][&object1][0] = true;
+		results[&object2][&object3][0] = true;
+		results[&object3][&object2][0] = false;
 		EXPECT_CALL(combiningStrategy, getPrevResults()).WillRepeatedly(testing::Return(&results));
 
 	}
@@ -56,8 +56,8 @@ TEST_F(PerfectObjectFoundConditionTest, evaluateNegative)
 
 TEST_F(PerfectObjectFoundConditionTest, evaluatePositive)
 {
-	results[&object1][&object3] = true;
-	results[&object3][&object1] = false;
+	results[&object1][&object3][0] = true;
+	results[&object3][&object1][0] = false;
 
 	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
 	EXPECT_EQ(true, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
@@ -66,20 +66,20 @@ TEST_F(PerfectObjectFoundConditionTest, evaluatePositive)
 
 TEST_F(PerfectObjectFoundConditionTest, evaluateWithReset)
 {
-	results[&object1][&object3] = true;
-	results[&object3][&object1] = false;
+	results[&object1][&object3][0] = true;
+	results[&object3][&object1][0] = false;
 
 	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
 
-	results[&object1][&object3] = false;
-	results[&object3][&object1] = true;
+	results[&object1][&object3][0] = false;
+	results[&object3][&object1][0] = true;
 
 	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
 
 
 
-	results[&object1][&object3] = true;
-	results[&object3][&object1] = false;
+	results[&object1][&object3][0] = true;
+	results[&object3][&object1][0] = false;
 
 	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
 	EXPECT_EQ(true, perfectObjectFoundCondition->evaluate(&highscore, learningRule));
