@@ -6,6 +6,14 @@
 #include <Repositories/TrainingPlanRepository.hpp>
 #include <Learning/LearningState.hpp>
 
+DataSet* DataSetSelection::getDataSet(std::string otherLabel)
+{
+	if (otherLabel == "")
+		return &trainingPlan->getLearningState()->dataSets[tryNumber][label];
+	else
+		return &trainingPlan->getLearningState()->dataSets[tryNumber][otherLabel];
+}
+
 LearningStateController::LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
 {
 	refreshRate = 100;
@@ -85,11 +93,16 @@ int LearningStateController::getTryCount()
 std::string LearningStateController::addDataSet(int tryNumber, int dataSetIndex)
 {
 	std::string dataSetLabel = selectedTrainingPlan->getDataSetLabels()[dataSetIndex];
-	selectedDataSets.push_back(std::make_pair(&selectedTrainingPlan->getLearningState()->dataSets[tryNumber], dataSetLabel));
+	DataSetSelection newSelection;
+	newSelection.trainingPlan = selectedTrainingPlan;
+	newSelection.tryNumber = tryNumber;
+	newSelection.label = dataSetLabel;
+
+	selectedDataSets.push_back(newSelection);
 	return dataSetLabel;
 }
 
-std::vector<std::pair<DataSetsPerTry*, std::string>>* LearningStateController::getSelectedDataSets()
+std::vector<DataSetSelection>* LearningStateController::getSelectedDataSets()
 {
 	return &selectedDataSets;
 }
@@ -120,11 +133,29 @@ std::vector<std::string> LearningStateController::getPossibleComparisonDatasetLa
 	possibilities.push_back(DEFAULT_COMP_DS);
 	for (int i = 0; i < selectedDataSets.size(); i++)
 	{
-		for (auto dataSetSelection = selectedDataSets[i].first->begin(); dataSetSelection != selectedDataSets[i].first->end(); dataSetSelection++)
+		std::vector<std::string> labels = selectedDataSets[i].trainingPlan->getDataSetLabels();
+		for (auto dataSetLabel = labels.begin(); dataSetLabel != labels.end(); dataSetLabel++)
 		{
-			if (std::find(possibilities.begin(), possibilities.end(), dataSetSelection->first) == possibilities.end())
-				possibilities.push_back(dataSetSelection->first);
+			if (std::find(possibilities.begin(), possibilities.end(), *dataSetLabel) == possibilities.end())
+			{
+				possibilities.push_back(*dataSetLabel);
+			}
 		}
 	}
+
+	for (int i = 0; i < selectedDataSets.size(); i++)
+	{
+		std::vector<std::string> labels = selectedDataSets[i].trainingPlan->getDataSetLabels();
+		for (auto possibility = possibilities.begin(); possibility != possibilities.end(); )
+		{
+			if (*possibility != DEFAULT_COMP_DS && std::find(labels.begin(), labels.end(), *possibility) == labels.end())
+			{
+				possibility = possibilities.erase(possibility);
+			}
+			else
+				possibility++;
+		}
+	}
+
 	return possibilities;
 }

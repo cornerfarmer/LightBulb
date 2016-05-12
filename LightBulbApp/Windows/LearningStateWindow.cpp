@@ -171,7 +171,7 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 
 	for (auto selectedDataSet = controller->getSelectedDataSets()->begin(); selectedDataSet != controller->getSelectedDataSets()->end(); selectedDataSet++)
 	{
-		DataSet* dataSet = &selectedDataSet->first->at(selectedDataSet->second);
+		DataSet* dataSet = selectedDataSet->getDataSet();
 		if (dataSet->size() > 0)
 		{
 			if (controller->getComparisonDataSetLabel() != DEFAULT_COMP_DS)
@@ -179,7 +179,7 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 				DataSet dataSetCopy = *dataSet;
 				int comparisonIndex = 0;
 				int dataSetIndex = 0;
-				DataSet* comparisonDataSet = &selectedDataSet->first->at(controller->getComparisonDataSetLabel());
+				DataSet* comparisonDataSet = selectedDataSet->getDataSet(controller->getComparisonDataSetLabel());
 				while(dataSetIndex < dataSetCopy.size() && comparisonIndex < comparisonDataSet->size())
 				{
 					if (dataSetCopy[dataSetIndex] == comparisonDataSet->at(comparisonIndex))
@@ -215,7 +215,7 @@ void LearningStateWindow::refreshChart(wxThreadEvent& event)
 			// set line renderer to dataset
 			xyDataSet->SetRenderer(new XYLineRenderer());
 
-			xyDataSet->SetSerieName(xyDataSet->GetSerieCount() - 1, selectedDataSet->second);
+			xyDataSet->SetSerieName(xyDataSet->GetSerieCount() - 1, selectedDataSet->label);
 		}
 	}
 
@@ -265,8 +265,10 @@ void LearningStateWindow::dataSetsPopUpMenuSelected(wxCommandEvent& event)
 	{
 		controller->removeDataSet(dataSetsList->GetSelectedRow());
 		dataSetsList->DeleteItem(dataSetsList->GetSelectedRow());
+		refreshComparisonDatasetChoices();
 		wxThreadEvent evt;
 		refreshChart(evt);
+		refreshAfterChange(sizer);
 	}
 }
 

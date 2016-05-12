@@ -20,6 +20,15 @@ class TrainingController;
 class TrainingPlanRepository;
 class AbstractTrainingPlan;
 
+struct DataSetSelection
+{
+	AbstractTrainingPlan* trainingPlan;
+	int tryNumber;
+	std::string label;
+
+	DataSet* getDataSet(std::string otherLabel = "");
+};
+
 class LearningStateController : public AbstractSubApp
 {
 private:
@@ -30,7 +39,7 @@ private:
 	int iterationsSinceLearningStateChanged;
 	int refreshRate;
 	bool refreshScheduled;
-	std::vector<std::pair<DataSetsPerTry*, std::string>> selectedDataSets;
+	std::vector<DataSetSelection> selectedDataSets;
 	std::string comparisonDataSetLabel;
 public:
 	LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
@@ -46,7 +55,7 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	int getTryCount();
 	std::string addDataSet(int tryNumber, int dataSetIndex);
-	std::vector<std::pair<DataSetsPerTry*, std::string>>* getSelectedDataSets();
+	std::vector<DataSetSelection>* getSelectedDataSets();
 	void removeDataSet(int dataSetIndex);
 	std::string getComparisonDataSetLabel();
 	void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);
