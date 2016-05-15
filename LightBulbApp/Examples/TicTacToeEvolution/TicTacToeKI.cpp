@@ -8,16 +8,13 @@
 #include <Function/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 
-TicTacToeKI::TicTacToeKI(TicTacToe* ticTacToe_)
+TicTacToeKI::TicTacToeKI(std::vector<unsigned int> neuronsPerLayerCount, TicTacToe* ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)
 {
 	currentGame = ticTacToe_;
 	LayeredNetworkOptions options;
 	options.enableShortcuts = true;
-	options.neuronsPerLayerCount.push_back(18);
-	options.neuronsPerLayerCount.push_back(10);
-	options.neuronsPerLayerCount.push_back(10);
-	options.neuronsPerLayerCount.push_back(9);
+	options.neuronsPerLayerCount = neuronsPerLayerCount;
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
 	buildNeuralNetwork(options);
 }

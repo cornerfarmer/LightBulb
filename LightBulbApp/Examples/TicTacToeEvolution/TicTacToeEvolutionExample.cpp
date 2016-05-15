@@ -26,6 +26,8 @@
 #define PREFERENCE_RECOMBINATION_PERCENTAGE "Recombination percentage"
 #define PREFERENCE_COMPETITIONS_SIZE "Competitions per object"
 #define PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE "Hall of fame competitions"
+#define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
+#define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
 
 AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 {
@@ -62,14 +64,26 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 
-	return new TicTacToe(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	std::vector<unsigned int> neuronsPerLayerCount;
+	neuronsPerLayerCount.push_back(18);
+	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
+	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
+	neuronsPerLayerCount.push_back(9);
+
+	return new TicTacToe(neuronsPerLayerCount, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 }
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	TicTacToe* ticTacToe2 = new TicTacToe(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+	std::vector<unsigned int> neuronsPerLayerCount;
+	neuronsPerLayerCount.push_back(18);
+	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
+	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
+	neuronsPerLayerCount.push_back(9);
+
+	TicTacToe* ticTacToe2 = new TicTacToe(neuronsPerLayerCount, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 	cs1->setSecondWorld(ticTacToe2);
 	cs2->setSecondWorld(static_cast<TicTacToe*>(world.get()));
 	return ticTacToe2;
@@ -83,6 +97,8 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new IntegerPreference(PREFERENCE_POPULATION_SIZE, 500, 1, 1000));
 	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 100, 1, 1000));
 	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 50, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 10, 1, 30));
 }
 
 std::string TicTacToeEvolutionExample::getDefaultName()

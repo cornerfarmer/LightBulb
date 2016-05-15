@@ -21,7 +21,8 @@ protected:
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<double>& output);
 public:	
-	TicTacToeKI(TicTacToe* ticTacToe_ = NULL);
+	TicTacToeKI(std::vector<unsigned int> neuronsPerLayerCount, TicTacToe* ticTacToe_ = NULL);
+	TicTacToeKI() = default;
 	~TicTacToeKI();
 	void setTicTacToe(TicTacToe* newTicTacToe);
 };

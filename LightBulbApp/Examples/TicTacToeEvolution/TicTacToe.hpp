@@ -43,9 +43,10 @@ protected:
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
+	std::vector<unsigned int> neuronsPerLayerCount;
 	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 public:
-	TicTacToe(bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	TicTacToe(std::vector<unsigned int> neuronsPerLayerCount_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
