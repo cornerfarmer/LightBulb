@@ -41,7 +41,7 @@ wxDEFINE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
 wxDEFINE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
 
 TrainingWindow::TrainingWindow(TrainingController* controller_)
-	:AbstractWindow("LightBulb")
+	:AbstractWindow(controller_, "LightBulb")
 {
 	controller = controller_;
 	processTrainingPlanSelection = NULL;
@@ -90,7 +90,7 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 		if (openFileDialog.ShowModal() == wxID_CANCEL)
 			return;
 
-		controller->loadNeuralNetwork(openFileDialog.GetPath().ToStdString());
+		getController()->loadNeuralNetwork(openFileDialog.GetPath().ToStdString());
 	}
 	else if(event.GetId() == FILE_LOAD_TP)
 	{
@@ -99,7 +99,7 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 		if (openFileDialog.ShowModal() == wxID_CANCEL)
 			return;
 
-		controller->loadTrainingPlan(openFileDialog.GetPath().ToStdString());
+		getController()->loadTrainingPlan(openFileDialog.GetPath().ToStdString());
 	}
 	else if (event.GetId() == FILE_LOAD_TS)
 	{
@@ -108,22 +108,22 @@ void TrainingWindow::fileMenuSelected(wxCommandEvent& event)
 		if (openFileDialog.ShowModal() == wxID_CANCEL)
 			return;
 
-		controller->loadTrainingSession(openFileDialog.GetPath().ToStdString());
+		getController()->loadTrainingSession(openFileDialog.GetPath().ToStdString());
 	}
 	else if (event.GetId() == FILE_SAVE_TS)
 	{
 		Enable(false);
 		Refresh();
-		controller->saveTrainingSession();
+		getController()->saveTrainingSession();
 	}
 }
 
 void TrainingWindow::trainingPlanMenuSelected(wxCommandEvent& event)
 {
-	AbstractTrainingPlan* trainingPlan = (*controller->getTrainingPlans())[trainingPlanList->GetSelectedRow()].get();
+	AbstractTrainingPlan* trainingPlan = (*getController()->getTrainingPlans())[trainingPlanList->GetSelectedRow()].get();
 	int factoryIndex = event.GetExtraLong();
 	AbstractCustomSubAppFactory* selectedFactory = (*trainingPlan->getCustomSubApps())[factoryIndex].get();
-	selectedFactory->createCustomSupApp(trainingPlan, this);
+	selectedFactory->createCustomSupApp(getController(), trainingPlan, this);
 }
 
 void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
@@ -135,7 +135,7 @@ void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
 		if (saveFileDialog.ShowModal() == wxID_CANCEL)
 			return;
 		
-		controller->saveNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow());
+		getController()->saveNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow());
 	}
 }
 
@@ -156,7 +156,7 @@ void TrainingWindow::trainingPlanPopUpMenuSelected(wxCommandEvent& event)
 	{
 		Enable(false);
 		Refresh();
-		controller->saveTrainingPlan(trainingPlanList->GetSelectedRow());
+		getController()->saveTrainingPlan(trainingPlanList->GetSelectedRow());
 	}
 }
 
@@ -176,7 +176,7 @@ void TrainingWindow::trainingPlanNameChanged(wxDataViewEvent& event)
 {
 	int row = trainingPlanList->ItemToRow(event.GetItem());
 	std::string newName = event.GetValue();
-	controller->setTrainingPlanName(row, newName);
+	getController()->setTrainingPlanName(row, newName);
 	wxCommandEvent evt;
 	refreshTrainingPlans(evt);
 }
@@ -207,7 +207,7 @@ void TrainingWindow::refreshNeuralNetworks(wxCommandEvent& event)
 {
 	neuralNetworkList->DeleteAllItems();
 	neuralNetworksChoice->Clear();
-	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
+	for (auto network = getController()->getNeuralNetworks()->begin(); network != getController()->getNeuralNetworks()->end(); network++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*network)->getName()));
@@ -220,7 +220,7 @@ void TrainingWindow::refreshNeuralNetworks(wxCommandEvent& event)
 			showDetailsOfNeuralNetwork(network->get());
 	}
 	neuralNetworksChoice->Append("<Create new>");
-	neuralNetworksChoice->SetSelection(controller->getNeuralNetworks()->size());
+	neuralNetworksChoice->SetSelection(getController()->getNeuralNetworks()->size());
 }
 
 wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
@@ -247,7 +247,7 @@ void TrainingWindow::refreshTrainingPlanPatterns(wxCommandEvent& event)
 {
 	trainingPlanPatternList->DeleteAllItems();
 	trainingPlanPatternsChoice->Clear();
-	for (auto trainingPlan = controller->getTrainingPlanPatterns()->begin(); trainingPlan != controller->getTrainingPlanPatterns()->end(); trainingPlan++)
+	for (auto trainingPlan = getController()->getTrainingPlanPatterns()->begin(); trainingPlan != getController()->getTrainingPlanPatterns()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
@@ -285,7 +285,7 @@ wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
 void TrainingWindow::refreshTrainingPlans(wxCommandEvent& event)
 {
 	trainingPlanList->DeleteAllItems();
-	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++)
+	for (auto trainingPlan = getController()->getTrainingPlans()->begin(); trainingPlan != getController()->getTrainingPlans()->end(); trainingPlan++)
 	{
 		wxVector<wxVariant> data;
 		data.push_back(wxVariant((*trainingPlan)->getName()));
@@ -311,12 +311,12 @@ void TrainingWindow::refreshAllData(wxCommandEvent& event)
 void TrainingWindow::saveTrainingPlan(wxThreadEvent& event)
 {
 	int trainingPlanIndex = event.GetPayload<int>();
-	wxFileDialog saveFileDialog(this, "Save training plan", "", controller->getTrainingPlans()->at(trainingPlanIndex)->getName(), "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	wxFileDialog saveFileDialog(this, "Save training plan", "", getController()->getTrainingPlans()->at(trainingPlanIndex)->getName(), "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
 	if (saveFileDialog.ShowModal() == wxID_CANCEL)
 		return;
 
-	controller->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
+	getController()->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
 	
 	Enable(true);
 	Refresh();
@@ -329,7 +329,7 @@ void TrainingWindow::saveTrainingSession(wxThreadEvent& event)
 	if (saveFileDialog.ShowModal() == wxID_CANCEL)
 		return;
 
-	controller->saveTrainingSession(saveFileDialog.GetPath().ToStdString());
+	getController()->saveTrainingSession(saveFileDialog.GetPath().ToStdString());
 
 	Enable(true);
 	Refresh();
@@ -400,22 +400,22 @@ void TrainingWindow::validateSelectedProcess()
 {
 	int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
 	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-	AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>((*controller->getTrainingPlanPatterns())[trainingPlanPatternIndex]);
+	AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>((*getController()->getTrainingPlanPatterns())[trainingPlanPatternIndex]);
 
-	if (trainingPlan && neuralNetworkIndex < controller->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
+	if (trainingPlan && neuralNetworkIndex < getController()->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
 	{
 		int requiredInputSize = trainingPlan->getRequiredInputSize();
 		int requiredOutputSize = trainingPlan->getRequiredOutputSize();
 
-		if ((*controller->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().front() != requiredInputSize ||
-			(*controller->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().back() != requiredOutputSize)
+		if ((*getController()->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().front() != requiredInputSize ||
+			(*getController()->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().back() != requiredOutputSize)
 		{
 			processErrorText->SetLabel("The network must have " + std::to_string(requiredInputSize) + " input neurons and " + std::to_string(requiredOutputSize) + " output neurons!");
 			toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
 		}
 		else
 		{
-			if ((*controller->getNeuralNetworks())[neuralNetworkIndex]->getState() == NN_STATE_TRAINED)
+			if ((*getController()->getNeuralNetworks())[neuralNetworkIndex]->getState() == NN_STATE_TRAINED)
 			{
 				processErrorText->SetLabel("The network gets already trained!");
 				toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
@@ -458,7 +458,7 @@ void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 	if (row != -1)
 	{
 		removeCustomSubAppsMenu();
-		showDetailsOfNeuralNetwork((*controller->getNeuralNetworks())[row].get());
+		showDetailsOfNeuralNetwork((*getController()->getNeuralNetworks())[row].get());
 		restoreDefaultProcessView();
 		neuralNetworksChoice->Select(row);
 		validateSelectedProcess();
@@ -475,7 +475,7 @@ void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 	int row = getRowIndexOfItem(trainingPlanPatternList, event.GetItem());
 	if (row != -1) {
 		removeCustomSubAppsMenu();
-		showDetailsOfTrainingPlanPattern((*controller->getTrainingPlanPatterns())[row]);
+		showDetailsOfTrainingPlanPattern((*getController()->getTrainingPlanPatterns())[row]);
 		restoreDefaultProcessView();
 		trainingPlanPatternsChoice->Select(row);
 		validateSelectedProcess();
@@ -492,9 +492,9 @@ void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	processTrainingPlanSelection = trainingPlan;
 	if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
 	{
-		neuralNetworksChoice->Select(controller->getIndexOfNeuralNetwork(static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()));
+		neuralNetworksChoice->Select(getController()->getIndexOfNeuralNetwork(static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()));
 	}
-	trainingPlanPatternsChoice->Select(controller->getIndexOfTrainingPlanPattern(trainingPlan->getTrainingPlanPattern()));
+	trainingPlanPatternsChoice->Select(getController()->getIndexOfTrainingPlanPattern(trainingPlan->getTrainingPlanPattern()));
 	neuralNetworksChoice->Enable(false);
 	trainingPlanPatternsChoice->Enable(false);
 	toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan->isPaused());
@@ -526,7 +526,7 @@ void TrainingWindow::removeCustomSubAppsMenu()
 void TrainingWindow::refreshTrainingPlanRunTimes(wxTimerEvent& event)
 {
 	int trainingPlanIndex = 0;
-	for (auto trainingPlan = controller->getTrainingPlans()->begin(); trainingPlan != controller->getTrainingPlans()->end(); trainingPlan++, trainingPlanIndex++)
+	for (auto trainingPlan = getController()->getTrainingPlans()->begin(); trainingPlan != getController()->getTrainingPlans()->end(); trainingPlan++, trainingPlanIndex++)
 	{
 		auto duration = (*trainingPlan)->getRunTime();
 		trainingPlanList->SetValue(wxVariant(getStringFromDuration(duration)), trainingPlanIndex, 2);
@@ -555,6 +555,16 @@ std::string TrainingWindow::getStringFromDuration(std::chrono::duration<double>&
 	return output;
 }
 
+TrainingController* TrainingWindow::getController()
+{
+	return static_cast<TrainingController*>(controller);
+}
+
+void TrainingWindow::close(wxCloseEvent& event)
+{
+	event.Skip();
+}
+
 void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan)
 {
 	removeCustomSubAppsMenu();
@@ -577,9 +587,9 @@ void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 	int row = getRowIndexOfItem(trainingPlanList, event.GetItem());
 	if (row != -1)
 	{
-		showDetailsOfTrainingPlan((*controller->getTrainingPlans())[row].get());
-		showProcessOfTrainingPlan((*controller->getTrainingPlans())[row].get());
-		showCustomSubAppsMenuForTrainingPlan((*controller->getTrainingPlans())[row].get());
+		showDetailsOfTrainingPlan((*getController()->getTrainingPlans())[row].get());
+		showProcessOfTrainingPlan((*getController()->getTrainingPlans())[row].get());
+		showCustomSubAppsMenuForTrainingPlan((*getController()->getTrainingPlans())[row].get());
 	}
 	else
 	{
@@ -656,12 +666,12 @@ void TrainingWindow::startTraining(wxCommandEvent& event)
 		int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
 		if (neuralNetworkIndex != -1 && trainingPlanPatternIndex != -1)
 		{
-			controller->startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
+			getController()->startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
 		}
 	}
 	else
 	{
-		controller->resumeTrainingPlan(processTrainingPlanSelection);
+		getController()->resumeTrainingPlan(processTrainingPlanSelection);
 	}
 }
 
@@ -669,14 +679,14 @@ void TrainingWindow::pauseTraining(wxCommandEvent& event)
 {
 	if (processTrainingPlanSelection != NULL)
 	{
-		controller->pauseTrainingPlan(processTrainingPlanSelection);
+		getController()->pauseTrainingPlan(processTrainingPlanSelection);
 	}
 }
 
 void TrainingWindow::showPreferences(wxCommandEvent& event)
 {
 	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-	controller->openPreferences(trainingPlanPatternIndex);
+	getController()->openPreferences(trainingPlanPatternIndex);
 }
 
 void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
@@ -688,5 +698,5 @@ void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
 void TrainingWindow::addSubApp(wxCommandEvent& event)
 {
 	int index = windowsMenu->GetMenuItems().IndexOf(windowsMenu->FindItem(event.GetId()));
-	controller->addSubApp(index);
+	getController()->addSubApp(index);
 }

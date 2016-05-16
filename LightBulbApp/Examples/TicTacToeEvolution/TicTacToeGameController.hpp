@@ -15,8 +15,11 @@ class TicTacToeGameController : public AbstractCustomSubApp
 private:
 	std::unique_ptr<TicTacToeGameWindow> window;
 	TicTacToe* world;
+
+protected:
+	void prepareClose();
 public:
-	TicTacToeGameController(AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
+	TicTacToeGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
 	TicTacToeGameWindow* getWindow();
 	void stopStepMode();
 	void startStepMode();

@@ -2,7 +2,8 @@
 #include "Windows/PreferencesController.hpp"
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 
-PreferencesController::PreferencesController(AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+PreferencesController::PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+	:AbstractSubApp(mainApp)
 {
 	trainingPlan = trainingPlan_;
 	window.reset(new PreferencesWindow(this, parent));

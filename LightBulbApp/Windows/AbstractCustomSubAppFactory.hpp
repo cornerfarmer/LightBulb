@@ -18,7 +18,7 @@ class AbstractCustomSubAppFactory
 {
 protected:
 public:
-	virtual AbstractCustomSubApp* createCustomSupApp(AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL) = 0;
+	virtual AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL) = 0;
 	virtual std::string getLabel() = 0;
 };
 

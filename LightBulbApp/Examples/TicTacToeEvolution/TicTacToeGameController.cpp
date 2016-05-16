@@ -8,11 +8,16 @@
 #include "TicTacToe.hpp"
 
 
-TicTacToeGameController::TicTacToeGameController(AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
-	:AbstractCustomSubApp(trainingPlan_)
+TicTacToeGameController::TicTacToeGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
 	world = static_cast<TicTacToe*>(static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getWorld());
 	window.reset(new TicTacToeGameWindow(this, parent));
+}
+
+void TicTacToeGameController::prepareClose()
+{
+	stopStepMode();
 }
 
 TicTacToeGameWindow* TicTacToeGameController::getWindow()

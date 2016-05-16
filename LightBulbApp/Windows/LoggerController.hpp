@@ -27,8 +27,10 @@ private:
 	bool logMessagesAdding;
 	bool autoScrolling;
 
+protected:
+	void prepareClose();
 public:
-	LoggerController(TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
+	LoggerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
 	void show();
 	void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();

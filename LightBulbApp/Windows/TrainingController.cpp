@@ -260,12 +260,12 @@ void TrainingController::saveTrainingSession()
 
 void TrainingController::addSubApp(int subAppFactoryIndex)
 {
-	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createSupApp(window.get())));
+	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createSupApp(this, window.get())));
 }
 
 void TrainingController::openPreferences(int trainingPlanPatternIndex)
 {
-	PreferencesController* preferencesController = new PreferencesController(trainingPlanPatterns[trainingPlanPatternIndex], window.get());
+	PreferencesController* preferencesController = new PreferencesController(this, trainingPlanPatterns[trainingPlanPatternIndex], window.get());
 	preferencesController->getWindow()->Show();
 	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
 }
@@ -273,6 +273,18 @@ void TrainingController::openPreferences(int trainingPlanPatternIndex)
 void TrainingController::setTrainingPlanName(int trainingPlanIndex, std::string newName)
 {
 	trainingPlanRepository->setTrainingPlanName(trainingPlanIndex, newName);
+}
+
+void TrainingController::removeSubApp(AbstractSubApp* subApp)
+{
+	for (auto activeSubApp = activeSubApps.begin(); activeSubApp != activeSubApps.end(); activeSubApp++)
+	{
+		if (activeSubApp->get() == subApp)
+		{
+			activeSubApps.erase(activeSubApp);
+			break;
+		}
+	}
 }
 
 bool TrainingController::allTrainingPlansPaused()

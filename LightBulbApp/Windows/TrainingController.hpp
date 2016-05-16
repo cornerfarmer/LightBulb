@@ -12,13 +12,14 @@
 #include <Logging/AbstractLogger.hpp>
 #include "LoggerController.hpp"
 #include "TrainingWindow.hpp"
+#include "AbstractMainApp.hpp"
 
 // Forward declarations
 class NeuralNetworkRepository;
 class TrainingPlanRepository;
 class AbstractSubAppFactory;
 
-class TrainingController : public AbstractSubApp
+class TrainingController : public AbstractMainApp
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, TrainingController& trainingController);
@@ -60,6 +61,7 @@ public:
 	void addSubApp(int subAppFactoryIndex);
 	void openPreferences(int trainingPlanPatternIndex);
 	void setTrainingPlanName(int trainingPlanIndex, std::string newName);
+	void removeSubApp(AbstractSubApp* subApp);
 };
 
 #include "IO/TrainingControllerIO.hpp"

@@ -7,17 +7,16 @@
 #include <memory>
 
 // Includes
-#include "Windows/AbstractWindow.hpp"
+#include "Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations
 class SimulatorController;
 class AbstractNeuralNetwork;
 
-class SimulatorWindow : public AbstractWindow
+class SimulatorWindow : public AbstractSubAppWindow
 {
 private:
 	wxChoice* neuralNetworksChoice;
-	SimulatorController* controller;
 	wxBoxSizer* inputSizer;
 	wxBoxSizer* outputSizer;
 	wxPanel* panel;
@@ -33,6 +32,7 @@ private:
 	void outputTypeChanged(wxCommandEvent& event);
 	void refreshInput(AbstractNeuralNetwork* network);
 	void refreshOutput(AbstractNeuralNetwork* network);
+	SimulatorController* getController();
 public:
 	SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent = NULL);
 	void refreshNeuralNetworks();

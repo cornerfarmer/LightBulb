@@ -1,7 +1,8 @@
 // Includes
 #include "Windows/AbstractCustomSubApp.hpp"
 
-AbstractCustomSubApp::AbstractCustomSubApp(AbstractTrainingPlan* trainingPlan_)
+AbstractCustomSubApp::AbstractCustomSubApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_)
+	:AbstractSubApp(mainApp)
 {
 	trainingPlan = trainingPlan_;
 }

@@ -14,7 +14,8 @@ DataSet* DataSetSelection::getDataSet(std::string otherLabel)
 		return &trainingPlan->getLearningState()->dataSets[tryNumber][otherLabel];
 }
 
-LearningStateController::LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+LearningStateController::LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+	:AbstractSubApp(mainApp)
 {
 	refreshRate = 100;
 	trainingPlanRepository = trainingPlanRepository_;
@@ -22,6 +23,16 @@ LearningStateController::LearningStateController(TrainingPlanRepository* trainin
 	window.reset(new LearningStateWindow(this, parent));
 	iterationsSinceLearningStateChanged = 0;
 	trainingPlansChanged(trainingPlanRepository);
+}
+
+void LearningStateController::prepareClose()
+{
+	for (int i = 0; i < selectedDataSets.size(); i++)
+	{
+		selectedDataSets[i].trainingPlan->getLearningState()->removeObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
+	}
+	
+	trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, this);
 }
 
 LearningStateWindow* LearningStateController::getWindow()
@@ -42,7 +53,6 @@ void LearningStateController::trainingPlansChanged(TrainingPlanRepository* train
 void LearningStateController::setSelectedTrainingPlan(int trainingPlanIndex)
 {
 	selectedTrainingPlan = (*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get();
-	selectedTrainingPlan->getLearningState()->registerObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
 }
 
 AbstractTrainingPlan* LearningStateController::getSelectedTrainingPlan()
@@ -92,6 +102,8 @@ int LearningStateController::getTryCount()
 
 std::string LearningStateController::addDataSet(int tryNumber, int dataSetIndex)
 {
+	selectedTrainingPlan->getLearningState()->registerObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
+
 	std::string dataSetLabel = selectedTrainingPlan->getDataSetLabels()[dataSetIndex];
 	DataSetSelection newSelection;
 	newSelection.trainingPlan = selectedTrainingPlan;
@@ -109,6 +121,17 @@ std::vector<DataSetSelection>* LearningStateController::getSelectedDataSets()
 
 void LearningStateController::removeDataSet(int dataSetIndex)
 {
+	bool removeObserver = true;
+	for (int i = 0; i < selectedDataSets.size(); i++)
+	{
+		if (i != dataSetIndex && selectedDataSets[i].trainingPlan == selectedDataSets[dataSetIndex].trainingPlan)
+		{
+			removeObserver = false;
+			break;
+		}
+	}
+	if (removeObserver)
+		selectedDataSets[dataSetIndex].trainingPlan->getLearningState()->removeObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
 	selectedDataSets.erase(selectedDataSets.begin() + dataSetIndex);
 }
 

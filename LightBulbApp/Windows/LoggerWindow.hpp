@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "Windows/AbstractWindow.hpp"
+#include "Windows/AbstractSubAppWindow.hpp"
 #include <Logging/AbstractLogger.hpp>
 
 // Forward declarations
@@ -18,10 +18,9 @@ class AbstractTrainingPlan;
 wxDECLARE_EVENT(LW_EVT_ADD_NEW_MSG, wxThreadEvent);
 wxDECLARE_EVENT(LW_EVT_RELOAD_LOG, wxThreadEvent);
 
-class LoggerWindow : public AbstractWindow
+class LoggerWindow : public AbstractSubAppWindow
 {
 private:
-	LoggerController* controller;
 	wxRichTextCtrl* textBox;
 	wxChoice* trainingPlansChoice;
 	void trainingPlanChanged(wxCommandEvent& event);
@@ -30,6 +29,7 @@ private:
 	void addNewLogMessages(wxThreadEvent& event);
 	void reloadLog(wxThreadEvent& event);
 	int lastLogMessageIndex;
+	LoggerController* getController();
 public:
 	LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
 	void addLogMessage(std::string msg);

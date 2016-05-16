@@ -13,7 +13,7 @@ class AbstractCustomSubApp : public AbstractSubApp
 protected:
 	AbstractTrainingPlan* trainingPlan;
 public:	
-	AbstractCustomSubApp(AbstractTrainingPlan* trainingPlan_);
+	AbstractCustomSubApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_);
 };
 
 #endif

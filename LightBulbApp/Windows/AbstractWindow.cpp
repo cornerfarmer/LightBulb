@@ -1,10 +1,12 @@
 // Includes
 #include "Windows/AbstractWindow.hpp"
+#include "AbstractSubApp.hpp"
 
 
-AbstractWindow::AbstractWindow(std::string label, AbstractWindow* parent)
+AbstractWindow::AbstractWindow(AbstractApp* controller_, std::string label, AbstractWindow* parent)
 	: wxFrame(parent, wxID_ANY, label, wxDefaultPosition, wxDefaultSize)
 {
+	controller = controller_;
 }
 
 void AbstractWindow::refreshAfterChange(wxSizer* sizer)

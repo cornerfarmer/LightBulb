@@ -4,7 +4,7 @@
 #define _TICTACTOEGAMEWINDOW_H_
 
 // Includes
-#include <Windows/AbstractWindow.hpp>
+#include <Windows/AbstractSubAppWindow.hpp>
 
 // Forward declarations
 
@@ -12,14 +12,14 @@ class TicTacToeGameController;
 
 wxDECLARE_EVENT(TTT_EVT_FIELD_CHANGED, wxThreadEvent);
 
-class TicTacToeGameWindow : public AbstractWindow
+class TicTacToeGameWindow : public AbstractSubAppWindow
 {
 private:
 	std::vector<std::vector<int>> currentFields;
 	wxPanel* panel;
 	wxToolBar* toolbar;
+	TicTacToeGameController* getController();
 protected:
-	TicTacToeGameController* controller;
 	DECLARE_EVENT_TABLE();
 public:
 	TicTacToeGameWindow(TicTacToeGameController* controller_, AbstractWindow* parent = NULL);

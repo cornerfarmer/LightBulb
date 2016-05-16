@@ -36,7 +36,6 @@ private:
 	wxDataViewListCtrl* neuralNetworkList;
 	wxDataViewListCtrl* trainingPlanPatternList;
 	wxDataViewListCtrl* trainingPlanList;
-	TrainingController* controller;
 	wxChoice* neuralNetworksChoice;
 	wxChoice* trainingPlanPatternsChoice;
 	wxMenu* trainingPlanMenu;
@@ -86,7 +85,9 @@ private:
 	void removeCustomSubAppsMenu();
 	void refreshTrainingPlanRunTimes(wxTimerEvent& event);
 	std::string getStringFromDuration(std::chrono::duration<double>& duration);
+	TrainingController* getController();
 protected:
+	void close(wxCloseEvent& event);
 	DECLARE_EVENT_TABLE();
 public:
 	TrainingWindow(TrainingController* controller_);

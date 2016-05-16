@@ -7,9 +7,9 @@ SimulatorFactory::SimulatorFactory(NeuralNetworkRepository* neuralNetworkReposit
 	neuralNetworkRepository = neuralNetworkRepository_;
 }
 
-AbstractSubApp* SimulatorFactory::createSupApp(AbstractWindow* parent)
+AbstractSubApp* SimulatorFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
 {
-	SimulatorController* controller = new SimulatorController(neuralNetworkRepository, parent);
+	SimulatorController* controller = new SimulatorController(mainApp, neuralNetworkRepository, parent);
 	controller->getWindow()->Show();
 	return controller;
 }

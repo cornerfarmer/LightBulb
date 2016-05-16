@@ -22,8 +22,10 @@ private:
 	std::unique_ptr<SimulatorWindow> window;
 	TrainingController* trainingController;
 	NeuralNetworkRepository* neuralNetworkRepository;
+protected:
+	void prepareClose();
 public:
-	SimulatorController(NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
+	SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
 	SimulatorWindow* getWindow();
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);

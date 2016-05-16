@@ -168,6 +168,15 @@
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\AbstractMainApp.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractSubAppWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractApp.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -348,6 +357,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\BooleanPreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AbstractMainApp.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AbstractSubAppWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AbstractApp.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

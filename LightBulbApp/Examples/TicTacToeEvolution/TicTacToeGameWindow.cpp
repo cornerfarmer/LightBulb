@@ -18,10 +18,9 @@ enum
 };
 
 TicTacToeGameWindow::TicTacToeGameWindow(TicTacToeGameController* controller_, AbstractWindow* parent)
-	:AbstractWindow(TicTacToeGameWindow::getLabel(), parent)
+	:AbstractSubAppWindow(controller_, TicTacToeGameWindow::getLabel(), parent)
 {
 	panel = NULL;
-	controller = controller_;
 	Bind(TTT_EVT_FIELD_CHANGED, &TicTacToeGameWindow::refreshField, this);
 
 	toolbar = CreateToolBar();
@@ -66,7 +65,7 @@ void TicTacToeGameWindow::paintNow()
 
 void TicTacToeGameWindow::refreshField(wxThreadEvent& evt)
 {
-	currentFields = *controller->getFields();
+	currentFields = *getController()->getFields();
 	paintNow();
 }
 
@@ -76,7 +75,7 @@ void TicTacToeGameWindow::toolBarClicked(wxCommandEvent& evt)
 	{
 		toolbar->EnableTool(TOOLBAR_STOP_STEPMODE, false);
 		toolbar->EnableTool(TOOLBAR_DO_STEP, false);
-		controller->stopStepMode();
+		getController()->stopStepMode();
 		toolbar->EnableTool(TOOLBAR_START_STEPMODE, true);
 
 		currentFields.clear();
@@ -85,7 +84,7 @@ void TicTacToeGameWindow::toolBarClicked(wxCommandEvent& evt)
 	else if (evt.GetId() == TOOLBAR_START_STEPMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_START_STEPMODE, false);
-		controller->startStepMode();
+		getController()->startStepMode();
 		toolbar->EnableTool(TOOLBAR_STOP_STEPMODE, true);
 		toolbar->EnableTool(TOOLBAR_DO_STEP, true);
 		wxThreadEvent tEvt;
@@ -93,7 +92,7 @@ void TicTacToeGameWindow::toolBarClicked(wxCommandEvent& evt)
 	}
 	else if (evt.GetId() == TOOLBAR_DO_STEP)
 	{
-		controller->doStep();
+		getController()->doStep();
 	}
 	
 }
@@ -135,4 +134,9 @@ void TicTacToeGameWindow::render(wxDC& dc)
 std::string TicTacToeGameWindow::getLabel()
 {
 	return "TicTacToeGame";
+}
+
+TicTacToeGameController* TicTacToeGameWindow::getController()
+{
+	return static_cast<TicTacToeGameController*>(controller);
 }

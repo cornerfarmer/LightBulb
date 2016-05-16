@@ -3,7 +3,10 @@
 #include "LoggerWindow.hpp"
 #include <Repositories/TrainingPlanRepository.hpp>
 
-LoggerController::LoggerController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+
+
+LoggerController::LoggerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+	:AbstractSubApp(mainApp)
 {
 	autoScrolling = true;
 	lastLogMessageIndex = -1;
@@ -14,6 +17,13 @@ LoggerController::LoggerController(TrainingPlanRepository* trainingPlanRepositor
 	window.reset(new LoggerWindow(this, parent));
 
 	trainingPlansChanged(trainingPlanRepository);
+}
+
+void LoggerController::prepareClose()
+{
+	trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, this);
+	if (selectedTrainingPlan)
+		selectedTrainingPlan->getLogger()->removeObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, this);
 }
 
 void LoggerController::show()

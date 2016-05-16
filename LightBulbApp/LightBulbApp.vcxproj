@@ -187,9 +187,12 @@
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp" />
     <ClCompile Include="TrainingPlans\DoublePreference.cpp" />
     <ClCompile Include="TrainingPlans\IntegerPreference.cpp" />
+    <ClCompile Include="Windows\AbstractApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
+    <ClCompile Include="Windows\AbstractMainApp.cpp" />
     <ClCompile Include="Windows\AbstractSubApp.cpp" />
+    <ClCompile Include="Windows\AbstractSubAppWindow.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
     <ClCompile Include="Windows\AbstractSubAppFactory.cpp" />
     <ClCompile Include="Windows\LearningStateController.cpp" />
@@ -273,9 +276,12 @@
     <ClInclude Include="TrainingPlans\BooleanPreference.hpp" />
     <ClInclude Include="TrainingPlans\DoublePreference.hpp" />
     <ClInclude Include="TrainingPlans\IntegerPreference.hpp" />
+    <ClInclude Include="Windows\AbstractApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp" />
+    <ClInclude Include="Windows\AbstractMainApp.hpp" />
     <ClInclude Include="Windows\AbstractSubApp.hpp" />
+    <ClInclude Include="Windows\AbstractSubAppWindow.hpp" />
     <ClInclude Include="Windows\AbstractWindow.hpp" />
     <ClInclude Include="Windows\AbstractSubAppFactory.hpp" />
     <ClInclude Include="Windows\LearningStateController.hpp" />

@@ -7,17 +7,16 @@
 #include <map>
 
 // Includes
-#include "Windows/AbstractWindow.hpp"
+#include "Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations
 class PreferencesController;
 class DoublePreference;
 
-class PreferencesWindow : public AbstractWindow
+class PreferencesWindow : public AbstractSubAppWindow
 {
 private:
 	static const int stepCount;
-	PreferencesController* controller;
 	std::map<wxSlider*, wxTextCtrl*> textCtrlFromSlider;
 	std::map<wxTextCtrl*, wxSlider*> sliderFromtextCtrl;
 	std::map<wxSlider*, double> sliderStepSize;
@@ -28,6 +27,7 @@ private:
 	double doubleToSliderValue(wxSlider* slider, DoublePreference* doublePreference, double value);
 	wxSizer* createSlider(std::string min, std::string max, std::string current, int currentStep, wxObject* preference, int minStep, int maxStep, double stepSize = 0);
 	wxSizer* createCheckBox(std::string label, bool currentValue, wxObject* preference);
+	PreferencesController* getController();
 public:
 	PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent = NULL);
 };

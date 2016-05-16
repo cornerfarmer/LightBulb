@@ -4,12 +4,19 @@
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 
-SimulatorController::SimulatorController(NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent)
+
+SimulatorController::SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent)
+	:AbstractSubApp(mainApp)
 {
 	neuralNetworkRepository = neuralNetworkRepository_;
 	neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
 	window.reset(new SimulatorWindow(this, parent));
 	neuralNetworksChanged(neuralNetworkRepository);
+}
+
+void SimulatorController::prepareClose()
+{
+	neuralNetworkRepository->removeObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
 }
 
 SimulatorWindow* SimulatorController::getWindow()

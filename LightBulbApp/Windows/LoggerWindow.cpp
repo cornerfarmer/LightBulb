@@ -7,11 +7,14 @@ wxDEFINE_EVENT(LW_EVT_ADD_NEW_MSG, wxThreadEvent);
 wxDEFINE_EVENT(LW_EVT_RELOAD_LOG, wxThreadEvent);
 
 
-LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent)
-	:AbstractWindow(LoggerController::getLabel(), parent)
+LoggerController* LoggerWindow::getController()
 {
-	controller = controller_;
+	return static_cast<LoggerController*>(controller);
+}
 
+LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent)
+	:AbstractSubAppWindow(controller_, LoggerController::getLabel(), parent)
+{
 	Bind(LW_EVT_ADD_NEW_MSG, wxThreadEventFunction(&LoggerWindow::addNewLogMessages), this);
 	Bind(LW_EVT_RELOAD_LOG, wxThreadEventFunction(&LoggerWindow::reloadLog), this);
 
@@ -45,17 +48,17 @@ LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent
 
 void LoggerWindow::trainingPlanChanged(wxCommandEvent& event)
 {
-	controller->selectTrainingPlan(event.GetSelection());
+	getController()->selectTrainingPlan(event.GetSelection());
 }
 
 void LoggerWindow::logLevelChanged(wxCommandEvent& event)
 {
-	controller->setLogLevel(event.GetSelection());
+	getController()->setLogLevel(event.GetSelection());
 }
 
 void LoggerWindow::autoScrollingChanged(wxCommandEvent& event)
 {
-	controller->setAutoScrolling(event.GetSelection());
+	getController()->setAutoScrolling(event.GetSelection());
 }
 
 void LoggerWindow::addLogMessage(std::string msg)
@@ -71,7 +74,7 @@ void LoggerWindow::clearLog()
 void LoggerWindow::refreshTrainingPlans()
 {
 	trainingPlansChoice->Clear();
-	for (auto network = controller->getTrainingPlans()->begin(); network != controller->getTrainingPlans()->end(); network++)
+	for (auto network = getController()->getTrainingPlans()->begin(); network != getController()->getTrainingPlans()->end(); network++)
 	{
 		trainingPlansChoice->Append((*network)->getName());
 	}
@@ -80,23 +83,23 @@ void LoggerWindow::refreshTrainingPlans()
 
 void LoggerWindow::addNewLogMessages(wxThreadEvent& event)
 {
-	auto messages = controller->getMessages();
+	auto messages = getController()->getMessages();
 	for (int messageIndex = lastLogMessageIndex + 1; messageIndex < messages->size(); messageIndex++)
 	{
-		if ((*messages)[messageIndex].first <= controller->getLogLevel())
+		if ((*messages)[messageIndex].first <= getController()->getLogLevel())
 			addLogMessage((*messages)[messageIndex].second);
 		lastLogMessageIndex++;
 	}
-	if (controller->isAutoScrolling())
+	if (getController()->isAutoScrolling())
 	{
 		textBox->ScrollIntoView(textBox->GetLastPosition(), WXK_END);
 	}
-	controller->logMessagesAddingFinished();
+	getController()->logMessagesAddingFinished();
 }
 
 void LoggerWindow::reloadLog(wxThreadEvent& event)
 {
 	clearLog();
-	lastLogMessageIndex = std::max((int)(controller->getMessages()->size() - 50), -1);
+	lastLogMessageIndex = std::max((int)(getController()->getMessages()->size() - 50), -1);
 	addNewLogMessages(event);
 }

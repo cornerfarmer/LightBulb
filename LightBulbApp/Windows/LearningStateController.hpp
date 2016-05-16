@@ -41,8 +41,11 @@ private:
 	bool refreshScheduled;
 	std::vector<DataSetSelection> selectedDataSets;
 	std::string comparisonDataSetLabel;
+
+protected:
+	void prepareClose();
 public:
-	LearningStateController(TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
+	LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
 	LearningStateWindow* getWindow();
 	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
 	void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);

@@ -26,18 +26,45 @@ namespace LightBulb
 			if (observers.size() == 0)
 				return;
 			observersMutex.lock();
-			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
+			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); )
 			{
-				(*observer)->throwEvent(arg);
+				try
+				{
+					(*observer)->throwEvent(arg);
+					observer++;
+				}
+				catch(...)
+				{
+					observer = observers[eventType].erase(observer);
+				}
 			}
 			observersMutex.unlock();
 		}
+
+		template<typename Class>
+		bool existsObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
+		{
+			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
+			{
+				if (dynamic_cast<Observer<Class, EventArg>*>(*observer))
+				{
+					Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer);
+					if (castedObserver->object == observerObject && castedObserver->method == observerMethod)
+					{
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
 	public:
 		template<typename Class>
 		void registerObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
 		{
 			observersMutex.lock();
-			observers[eventType].push_back(new Observer<Class, EventArg>(observerMethod, observerObject));
+			if (!existsObserver(eventType, observerMethod, observerObject))
+				observers[eventType].push_back(new Observer<Class, EventArg>(observerMethod, observerObject));
 			observersMutex.unlock();
 		}
 

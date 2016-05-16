@@ -12,10 +12,8 @@ enum IOType
 };
 
 SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent)
-	:AbstractWindow(SimulatorController::getLabel(), parent)
+	:AbstractSubAppWindow(controller_, SimulatorController::getLabel(), parent)
 {
-	controller = controller_;
-
 	sizer = new wxBoxSizer(wxVERTICAL);
 	wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);
 
@@ -61,7 +59,7 @@ SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindo
 
 void SimulatorWindow::networkChanged(wxCommandEvent& event)
 {
-	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[event.GetSelection()].get();
+	AbstractNeuralNetwork* network = (*getController()->getNeuralNetworks())[event.GetSelection()].get();
 	
 	refreshInput(network);
 	refreshOutput(network);
@@ -94,7 +92,7 @@ void SimulatorWindow::recalculateNetworkOutput()
 	}
 
 	IOType outputType = (IOType)outputTypeChoice->GetSelection();
-	std::vector<double> output = controller->calculate(neuralNetworksChoice->GetSelection(), input);
+	std::vector<double> output = getController()->calculate(neuralNetworksChoice->GetSelection(), input);
 
 	for (int i = 0; i < outputControls.size(); i++)
 	{
@@ -116,7 +114,7 @@ void SimulatorWindow::selectionChanged(wxCommandEvent& event)
 
 void SimulatorWindow::inputTypeChanged(wxCommandEvent& event)
 {
-	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
+	AbstractNeuralNetwork* network = (*getController()->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
 	refreshInput(network);
 	recalculateNetworkOutput();
 
@@ -125,7 +123,7 @@ void SimulatorWindow::inputTypeChanged(wxCommandEvent& event)
 
 void SimulatorWindow::outputTypeChanged(wxCommandEvent& event)
 {
-	AbstractNeuralNetwork* network = (*controller->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
+	AbstractNeuralNetwork* network = (*getController()->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
 	refreshOutput(network);
 	recalculateNetworkOutput();
 
@@ -185,10 +183,15 @@ void SimulatorWindow::refreshOutput(AbstractNeuralNetwork* network)
 	
 }
 
+SimulatorController* SimulatorWindow::getController()
+{
+	return static_cast<SimulatorController*>(controller);
+}
+
 void SimulatorWindow::refreshNeuralNetworks()
 {
 	neuralNetworksChoice->Clear();
-	for (auto network = controller->getNeuralNetworks()->begin(); network != controller->getNeuralNetworks()->end(); network++)
+	for (auto network = getController()->getNeuralNetworks()->begin(); network != getController()->getNeuralNetworks()->end(); network++)
 	{
 		neuralNetworksChoice->Append((*network)->getName());
 	}

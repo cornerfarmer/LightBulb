@@ -9,11 +9,14 @@
 class BooleanPreference;
 const int PreferencesWindow::stepCount = 1000;
 
-PreferencesWindow::PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent)
-	:AbstractWindow(PreferencesController::getLabel(), parent)
+PreferencesController* PreferencesWindow::getController()
 {
-	controller = controller_;
+	return static_cast<PreferencesController*>(controller);
+}
 
+PreferencesWindow::PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent)
+	:AbstractSubAppWindow(controller_, PreferencesController::getLabel(), parent)
+{
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	for (auto preference = controller_->getPreferences().begin(); preference != controller_->getPreferences().end(); preference++)

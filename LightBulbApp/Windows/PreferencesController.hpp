@@ -21,7 +21,7 @@ private:
 	std::unique_ptr<PreferencesWindow> window;
 	AbstractTrainingPlan* trainingPlan;
 public:
-	PreferencesController(AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent = NULL);
+	PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent = NULL);
 	PreferencesWindow* getWindow();
 	static std::string getLabel();
 	std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();

@@ -12,12 +12,13 @@
 // Forward declarations
 class AbstractSubApp;
 class AbstractWindow;
+class AbstractMainApp;
 
 class AbstractSubAppFactory
 {
 protected:
 public:
-	virtual AbstractSubApp* createSupApp(AbstractWindow* parent = NULL) = 0;
+	virtual AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent = NULL) = 0;
 	virtual std::string getLabel() = 0;
 };
 

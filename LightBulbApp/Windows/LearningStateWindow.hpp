@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "Windows/AbstractWindow.hpp"
+#include "Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations
 class LearningStateController;
@@ -18,12 +18,11 @@ class wxDataViewEvent;
 
 wxDECLARE_EVENT(LSW_EVT_REFRESH_CHART, wxThreadEvent);
 
-class LearningStateWindow : public AbstractWindow
+class LearningStateWindow : public AbstractSubAppWindow
 {
 private:
 	wxBoxSizer* sizer;
 	wxChoice* trainingPlansChoice;
-	LearningStateController* controller;
 	wxDataViewListCtrl* dataSetsList;
 	wxChartPanel* chartPanel;
 	wxComboBox* refreshRateChoice;
@@ -38,6 +37,7 @@ private:
 	void dataSetsListRightClick(wxDataViewEvent& event);
 	void dataSetsPopUpMenuSelected(wxCommandEvent& event);
 	void refreshComparisonDatasetChoices();
+	LearningStateController* getController();
 public:
 	LearningStateWindow(LearningStateController* controller_, AbstractWindow* parent = NULL);
 	void refreshTrainingPlans();
