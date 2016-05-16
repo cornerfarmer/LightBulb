@@ -20,14 +20,23 @@
 #include "TicTacToeGameFactory.hpp"
 #include <TrainingPlans/DoublePreference.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
+#include <TrainingPlans/BooleanPreference.hpp>
+#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <Function/WeightedSumFunction.hpp>
+#include <Function/BinaryFunction.hpp>
+#include <Neuron/NeuronDescription.hpp>
+#include <NetworkTopology/LayeredNetwork.hpp>
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
 #define PREFERENCE_RECOMBINATION_PERCENTAGE "Recombination percentage"
 #define PREFERENCE_COMPETITIONS_SIZE "Competitions per object"
 #define PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE "Hall of fame competitions"
+#define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
+#define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
+
 
 AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 {
@@ -57,6 +66,22 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	return new BipartiteEvolutionLearningRule(bipartiteOptions);
 }
 
+
+LayeredNetworkOptions TicTacToeEvolutionExample::getNetworkOptions()
+{
+	LayeredNetworkOptions options;
+	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
+
+	options.neuronsPerLayerCount.push_back(18);
+	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
+	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
+		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
+	options.neuronsPerLayerCount.push_back(9);
+
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
+	return options;
+}
+
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 {
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
@@ -64,26 +89,16 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 
-	std::vector<unsigned int> neuronsPerLayerCount;
-	neuronsPerLayerCount.push_back(18);
-	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
-	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-	neuronsPerLayerCount.push_back(9);
-
-	return new TicTacToe(neuronsPerLayerCount, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	LayeredNetworkOptions options = getNetworkOptions();
+	return new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 }
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	std::vector<unsigned int> neuronsPerLayerCount;
-	neuronsPerLayerCount.push_back(18);
-	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
-	neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-	neuronsPerLayerCount.push_back(9);
-
-	TicTacToe* ticTacToe2 = new TicTacToe(neuronsPerLayerCount, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+	LayeredNetworkOptions options = getNetworkOptions();
+	TicTacToe* ticTacToe2 = new TicTacToe(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 	cs1->setSecondWorld(ticTacToe2);
 	cs2->setSecondWorld(static_cast<TicTacToe*>(world.get()));
 	return ticTacToe2;
@@ -97,7 +112,9 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new IntegerPreference(PREFERENCE_POPULATION_SIZE, 500, 1, 1000));
 	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 100, 1, 1000));
 	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 50, 1, 1000));
+	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, true));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
+	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, true));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 10, 1, 30));
 }
 

@@ -6,6 +6,7 @@
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
+struct LayeredNetworkOptions;
 class TicTacToe;
 class SharedSamplingCombiningStrategy;
 class AbstractHallOfFameAlgorithm;
@@ -19,6 +20,7 @@ private:
 	SharedSamplingCombiningStrategy* cs2;
 protected:
 	AbstractLearningRule* createLearningRate();
+	LayeredNetworkOptions getNetworkOptions();
 	AbstractEvolutionWorld* createWorld();
 	AbstractEvolutionWorld* createParasiteWorld();
 public:

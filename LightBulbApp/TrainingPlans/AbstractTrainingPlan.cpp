@@ -3,6 +3,7 @@
 #include <thread>
 #include "DoublePreference.hpp"
 #include "IntegerPreference.hpp"
+#include "BooleanPreference.hpp"
 
 void AbstractTrainingPlan::addCustomSubApp(AbstractCustomSubAppFactory* customSubApp)
 {
@@ -41,6 +42,15 @@ int AbstractTrainingPlan::getIntegerPreference(std::string name)
 		return integerPreference->getValue();
 	else
 		return 0;
+}
+
+bool AbstractTrainingPlan::getBooleanPreference(std::string name)
+{
+	BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(getPreference(name));
+	if (booleanPreference)
+		return booleanPreference->getValue();
+	else
+		return false;
 }
 
 std::chrono::duration<double> AbstractTrainingPlan::getRunTime()

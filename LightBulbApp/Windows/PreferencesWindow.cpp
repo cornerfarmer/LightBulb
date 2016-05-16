@@ -4,7 +4,9 @@
 #include "TrainingPlans/AbstractPreference.hpp"
 #include <TrainingPlans/DoublePreference.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
+#include <TrainingPlans/BooleanPreference.hpp>
 
+class BooleanPreference;
 const int PreferencesWindow::stepCount = 1000;
 
 PreferencesWindow::PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent)
@@ -16,17 +18,28 @@ PreferencesWindow::PreferencesWindow(PreferencesController* controller_, Abstrac
 
 	for (auto preference = controller_->getPreferences().begin(); preference != controller_->getPreferences().end(); preference++)
 	{
-		sizer->Add(new wxStaticText(this, wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
-		if (dynamic_cast<DoublePreference*>(preference->get())) {
+		if (!dynamic_cast<BooleanPreference*>(preference->get()))
+			sizer->Add(new wxStaticText(this, wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
+
+		if (dynamic_cast<DoublePreference*>(preference->get())) 
+		{
 			DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
 			double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
 			int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
 
 			sizer->Add(createSlider(std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, (wxObject*)doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
-		} else if (dynamic_cast<IntegerPreference*>(preference->get())) {
+		}
+		else if (dynamic_cast<IntegerPreference*>(preference->get()))
+		{
 			IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
 
 			sizer->Add(createSlider(std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), (wxObject*)integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
+		} 
+		else if (dynamic_cast<BooleanPreference*>(preference->get()))
+		{
+			BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
+
+			sizer->Add(createCheckBox((*preference)->getName(), booleanPreference->getValue(), (wxObject*)booleanPreference), 0, wxEXPAND);
 		}
 	}
 
@@ -57,6 +70,18 @@ wxSizer* PreferencesWindow::createSlider(std::string min, std::string max, std::
 }
 
 
+
+wxSizer* PreferencesWindow::createCheckBox(std::string label, bool currentValue, wxObject* preference)
+{
+	wxSizer* preferenceSizer = new wxBoxSizer(wxHORIZONTAL);
+	wxCheckBox* checkBox = new wxCheckBox(this, wxID_ANY, label);
+	checkBox->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&PreferencesWindow::setValueFromCheckBox), this, wxID_ANY, wxID_ANY, preference);
+	preferenceSizer->Add(checkBox, 1, wxALL | wxALIGN_CENTER_VERTICAL, 7);
+	checkBox->SetValue(currentValue);
+
+	return preferenceSizer;
+}
+
 void PreferencesWindow::setValueFromTextBox(wxCommandEvent& event)
 {
 	wxTextCtrl* textBox = dynamic_cast<wxTextCtrl*>(event.GetEventObject());
@@ -75,6 +100,13 @@ void PreferencesWindow::setValueFromTextBox(wxCommandEvent& event)
 
 		slider->SetValue(integerPreference->getValue());
 	}
+}
+
+void PreferencesWindow::setValueFromCheckBox(wxCommandEvent& event)
+{
+	wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(event.GetEventObject());
+	BooleanPreference* booleanPreference = (BooleanPreference*)(event.GetEventUserData());
+	booleanPreference->setValue(checkBox->GetValue());
 }
 
 void PreferencesWindow::setValueFromSlider(wxCommandEvent& event)

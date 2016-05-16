@@ -13,6 +13,7 @@
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 #include "IO/UseParentSerialization.hpp"
+#include <NetworkTopology/LayeredNetwork.hpp>
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -43,10 +44,10 @@ protected:
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
-	std::vector<unsigned int> neuronsPerLayerCount;
+	std::unique_ptr<LayeredNetworkOptions> options;
 	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 public:
-	TicTacToe(std::vector<unsigned int> neuronsPerLayerCount_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	TicTacToe(LayeredNetworkOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);

@@ -13,13 +13,13 @@
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
 {
-	return new TicTacToeKI(neuronsPerLayerCount, this);
+	return new TicTacToeKI(*options, this);
 }
 
-TicTacToe::TicTacToe(std::vector<unsigned int> neuronsPerLayerCount_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+TicTacToe::TicTacToe(LayeredNetworkOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
 	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
-	neuronsPerLayerCount = neuronsPerLayerCount_;
+	options.reset(new LayeredNetworkOptions(options_));
 	initialize();
 }
 

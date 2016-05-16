@@ -64,6 +64,7 @@ protected:
 	AbstractPreference* getPreference(std::string name);
 	double getDoublePreference(std::string name);
 	int getIntegerPreference(std::string name);
+	bool getBooleanPreference(std::string name);
 public:
 	AbstractTrainingPlan();
 	void start();

@@ -165,6 +165,9 @@
     <ClCompile Include="TrainingPlans\IntegerPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\BooleanPreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -339,6 +342,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\DoublePreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\BooleanPreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BooleanPreferenceIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
