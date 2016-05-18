@@ -35,9 +35,12 @@ LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent
 
 	sizer->Add(header, 0, wxLEFT | wxTOP | wxRIGHT | wxEXPAND, 7);
 	textBox = new wxRichTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(400, 300), wxRE_READONLY);
+	textBox->Bind(wxEVT_SCROLLWIN_THUMBTRACK, wxScrollWinEventFunction(&LoggerWindow::scrollChanged), this);
+	textBox->Bind(wxEVT_SCROLLWIN_LINEUP, wxScrollWinEventFunction(&LoggerWindow::scrollChanged), this);
+	textBox->Bind(wxEVT_SCROLLWIN_PAGEUP, wxScrollWinEventFunction(&LoggerWindow::scrollChanged), this);
 	sizer->Add(textBox, 1, wxEXPAND | wxALL, 7);
 
-	wxCheckBox* checkBox = new wxCheckBox(this, wxID_ANY, "Automatically scrolling");
+	checkBox = new wxCheckBox(this, wxID_ANY, "Automatically scrolling");
 	checkBox->SetValue(true);
 	checkBox->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&LoggerWindow::autoScrollingChanged), this);
 	sizer->Add(checkBox, 0, wxEXPAND | wxALL, 7);
@@ -64,6 +67,8 @@ void LoggerWindow::autoScrollingChanged(wxCommandEvent& event)
 void LoggerWindow::addLogMessage(std::string msg)
 {
 	textBox->AppendText(msg + "\n");
+	if (textBox->GetNumberOfLines() > 2500)
+		textBox->Remove(0, textBox->GetLineLength(0) + 1);
 }
 
 void LoggerWindow::clearLog()
@@ -102,4 +107,14 @@ void LoggerWindow::reloadLog(wxThreadEvent& event)
 	clearLog();
 	lastLogMessageIndex = std::max((int)(getController()->getMessages()->size() - 50), -1);
 	addNewLogMessages(event);
+}
+
+void LoggerWindow::scrollChanged(wxScrollWinEvent& event)
+{
+	if (getController()->isAutoScrolling())
+	{
+		getController()->setAutoScrolling(false);
+		checkBox->SetValue(false);
+	}
+	event.Skip();
 }

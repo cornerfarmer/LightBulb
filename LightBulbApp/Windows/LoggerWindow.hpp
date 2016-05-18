@@ -28,7 +28,9 @@ private:
 	void autoScrollingChanged(wxCommandEvent& event);
 	void addNewLogMessages(wxThreadEvent& event);
 	void reloadLog(wxThreadEvent& event);
+	void scrollChanged(wxScrollWinEvent& event);
 	int lastLogMessageIndex;
+	wxCheckBox* checkBox;
 	LoggerController* getController();
 public:
 	LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
