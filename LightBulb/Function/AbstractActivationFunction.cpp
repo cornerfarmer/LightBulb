@@ -1,11 +1,11 @@
 // Includes
 #include "Function/AbstractActivationFunction.hpp"
 
-void AbstractActivationFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs)
+void AbstractActivationFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs)
 {
 	for (auto i = 0; i < netInputs[layerNr].rows(); i++)
 	{
-		activations[layerNr](i) = execute(netInputs[layerNr](i));
+		(*activations[layerNr])(i) = execute(netInputs[layerNr](i));
 	}
 }
 

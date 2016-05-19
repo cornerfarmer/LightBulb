@@ -49,9 +49,9 @@ protected:
 	//
 	Eigen::VectorXd activations;
 	
-	std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerOut;
+	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> activationsPerLayerOut;
 
-	std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerIn;
+	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> activationsPerLayerIn;
 
 	std::vector<Eigen::MatrixXd> weights;
 
@@ -66,6 +66,8 @@ protected:
 	void rebuildOutputNeurons();
 
 	XorShfGenerator randGenerator;
+
+	void rebuildActivationsPerLayer(int layerIndex);
 public:
 	virtual ~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions &options_);
@@ -128,7 +130,7 @@ public:
 
 	std::vector<Eigen::MatrixXd>* getWeights();
 
-	std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getActivations();
+	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* getActivations();
 
 	std::vector<Eigen::VectorXd>* getNetInputs();
 
@@ -169,6 +171,10 @@ public:
 	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex);
 
 	bool usesBiasNeuron();
+
+	void removeNeuron(int layerIndex, int neuronIndex);
+
+	void addNeuron(int layerIndex);
 };
 
 #include "IO/LayeredNetworkIO.hpp"

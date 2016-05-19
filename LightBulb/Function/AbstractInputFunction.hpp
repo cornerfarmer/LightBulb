@@ -5,7 +5,7 @@
 
 // Includes
 #include <list>
-#include <map>
+#include <memory>
 #include "EigenSrc/Dense"
 #include <vector>
 
@@ -22,7 +22,7 @@ public:
 	virtual ~AbstractInputFunction() {}
 	// Calculate the one value from all given input edges and the additional input.
 	// The neuronOutputCache can be used do use a cached activation instead of the real/current one.
-	virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) = 0;
+	virtual void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) = 0;
 	// Create a copy of the object
 	virtual AbstractInputFunction* getInputFunctionCopy() = 0;
 };

@@ -115,7 +115,7 @@ void RBFInterpolationLearningRule::initializeTry()
 		// Try the teachingLesson
 		(*getOptions()->teacher->getTeachingLessons())[i]->tryLesson(*getOptions()->neuralNetwork, activationOrder);
 
-		m->row(i) = (*rbfNetwork->getActivations())[1];
+		m->row(i) = *(*rbfNetwork->getActivations())[1];
 	}
 	
 	// If our matrix is a square matrix

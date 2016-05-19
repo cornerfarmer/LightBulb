@@ -6,6 +6,7 @@
 // Library includes
 #include <vector>
 #include <EigenSrc/Cholesky>
+#include <memory>
 
 // Forward declaration
 class AbstractThreshold;
@@ -18,7 +19,7 @@ private:
 public:
 	virtual ~AbstractActivationFunction() {}
 	// Calculate the activation from the given input
-	virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs);
+	virtual void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs);
 
 	virtual double execute(double input) = 0;
 	// Calculate the derivated activation from the given input

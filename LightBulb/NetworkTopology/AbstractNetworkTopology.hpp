@@ -90,7 +90,12 @@ public:
 	virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) = 0;
 
 	virtual std::vector<Eigen::MatrixXd>* getWeights() = 0;
+
 	virtual bool usesBiasNeuron() = 0;
+
+	virtual void removeNeuron(int layerIndex, int neuronIndex) = 0;
+
+	virtual void addNeuron(int layerIndex) = 0;
 };
 
 
