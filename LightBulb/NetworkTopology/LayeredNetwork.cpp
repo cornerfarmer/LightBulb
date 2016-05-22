@@ -176,6 +176,34 @@ bool LayeredNetwork::usesBiasNeuron()
 
 void LayeredNetwork::removeNeuron(int layerIndex, int neuronIndex)
 {
+	for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
+		layerOffsets[l]--;
+
+	options->neuronsPerLayerCount[layerIndex]--;
+
+	for (int i = neuronIndex; i < netInputs[layerIndex].size() - 1; i++)
+		netInputs[layerIndex][i] = netInputs[layerIndex][i + 1];
+	netInputs[layerIndex].conservativeResize(netInputs[layerIndex].rows() - 1);
+
+	for (int i = layerOffsets[layerIndex] + options->useBiasNeuron * layerIndex + neuronIndex; i < activations.size() - 1; i++)
+		activations[i] = activations[i + 1];
+	activations.conservativeResize(activations.rows() - 1);
+
+	for (int l = 0; l < getLayerCount(); l++)
+		rebuildActivationsPerLayer(l);
+
+	if (layerIndex > 0)
+	{
+		for (int n = neuronIndex; n < weights[layerIndex - 1].rows() - 1; n++)
+			weights[layerIndex - 1].row(n) = weights[layerIndex - 1].row(n + 1);
+		weights[layerIndex - 1].conservativeResize(weights[layerIndex - 1].rows() - 1, weights[layerIndex - 1].cols());
+	}
+	if (layerIndex < weights.size())
+	{
+		for (int n = neuronIndex; n < weights[layerIndex].cols() - 1; n++)
+			weights[layerIndex].col(n) = weights[layerIndex].col(n + 1);
+		weights[layerIndex].conservativeResize(weights[layerIndex].rows(), weights[layerIndex].cols() - 1);
+	}
 }
 
 void LayeredNetwork::addNeuron(int layerIndex)
@@ -197,9 +225,15 @@ void LayeredNetwork::addNeuron(int layerIndex)
 		rebuildActivationsPerLayer(l);
 
 	if (layerIndex < weights.size())
+	{
 		weights[layerIndex].conservativeResize(weights[layerIndex].rows(), weights[layerIndex].cols() + 1);
+		weights[layerIndex].col(weights[layerIndex].cols() - 1).setZero();
+	}
 	if (layerIndex > 0)
+	{
 		weights[layerIndex - 1].conservativeResize(weights[layerIndex - 1].rows() + 1, weights[layerIndex - 1].cols());
+		weights[layerIndex - 1].row(weights[layerIndex - 1].rows() - 1).setZero();
+	}
 }
 
 void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
