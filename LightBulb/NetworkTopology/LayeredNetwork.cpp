@@ -193,7 +193,7 @@ void LayeredNetwork::addNeuron(int layerIndex)
 		activations[i] = activations[i - 1];
 	activations[layerOffsets[layerIndex + 1] + options->useBiasNeuron * (layerIndex + 1) - 1] = 0;
 	
-	for (int l = layerIndex; l < getLayerCount(); l++)
+	for (int l = 0; l < getLayerCount(); l++)
 		rebuildActivationsPerLayer(l);
 
 	if (layerIndex < weights.size())
