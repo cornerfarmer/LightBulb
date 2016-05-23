@@ -7,7 +7,6 @@
 #include "Repositories/TrainingPlanRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
-#include <Examples/RBFNetworkBiggerExample.hpp>
 
 template <class Archive>
 void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository)

@@ -25,7 +25,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -83,7 +83,8 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>../LightBulb;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\eigen-eigen-10219c95fe65\Eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;C:\Users\Dominik\Documents\Visual Studio 2015\Projects\LightBulb\LightBulbApp;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\cereal-1.1.2\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <UndefinePreprocessorDefinitions>wxUSE_EXCEPTIONS</UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>../Debug/LightBulb.lib;wxcode_msw28ud_freechart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -132,42 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="Examples\BackpropagationXorExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolution\Network.cpp" />
-    <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\NatureEvolutionExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp" />
-    <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\TeachedEvolutionExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp" />
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameController.cpp" />
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp" />
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp" />
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeKI.cpp" />
     <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="main.old.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -183,18 +149,13 @@
     <ClCompile Include="TrainingPlans\AbstractPreference.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
-    <ClCompile Include="TrainingPlans\AbstractVariablePreference.cpp" />
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp" />
     <ClCompile Include="TrainingPlans\DoublePreference.cpp" />
     <ClCompile Include="TrainingPlans\IntegerPreference.cpp" />
-    <ClCompile Include="Windows\AbstractApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
-    <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
-    <ClCompile Include="Windows\AbstractMainApp.cpp" />
     <ClCompile Include="Windows\AbstractSubApp.cpp" />
     <ClCompile Include="Windows\AbstractSubAppWindow.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
-    <ClCompile Include="Windows\AbstractSubAppFactory.cpp" />
     <ClCompile Include="Windows\LearningStateController.cpp" />
     <ClCompile Include="Windows\LearningStateWindow.cpp" />
     <ClCompile Include="Windows\LearningStateFactory.cpp" />
@@ -211,40 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="Examples\BackpropagationXorExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolution\Network.hpp" />
-    <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\NatureEvolutionExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp" />
-    <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\TeachedEvolutionExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp" />
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameController.hpp" />
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp" />
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
     <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractEvolutionTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />

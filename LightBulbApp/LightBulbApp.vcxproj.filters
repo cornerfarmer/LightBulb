@@ -16,31 +16,13 @@
     <Filter Include="Quelldateien\Performance">
       <UniqueIdentifier>{c497f015-a6fd-4fcd-8f44-14cb62dbea60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Examples">
-      <UniqueIdentifier>{85984f4b-d7b8-4577-8094-90c898b62c43}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.old.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp">
       <Filter>Quelldateien\Performance</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\BackpropagationXorExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TeachedEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>Quelldateien</Filter>
@@ -87,9 +69,6 @@
     <ClCompile Include="Windows\AbstractSubApp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Windows\AbstractSubAppFactory.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Windows\LearningStateFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -108,31 +87,7 @@
     <ClCompile Include="TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\NatureEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeKI.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameController.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Windows\PreferencesWindow.cpp">
@@ -144,22 +99,10 @@
     <ClCompile Include="TrainingPlans\AbstractPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractVariablePreference.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingPlans\DoublePreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractCoevolutionTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolution\Network.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TrainingPlans\IntegerPreference.cpp">
@@ -168,30 +111,12 @@
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Windows\AbstractMainApp.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Windows\AbstractSubAppWindow.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows\AbstractApp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\BackpropagationXorExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TeachedEvolutionExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="App.hpp">
@@ -275,31 +200,10 @@
     <ClInclude Include="TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\NatureEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Windows\AbstractCustomSubApp.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameController.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\PreferencesController.hpp">
@@ -330,15 +234,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\NetworkIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\IntegerPreference.hpp">

@@ -2,23 +2,15 @@
 #include "Windows/TrainingController.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include "Examples/BackpropagationXorExample.hpp"
 #include "TrainingWindow.hpp"
-#include <Examples/BackpropagationXorExample.hpp>
 #include <Repositories/NeuralNetworkRepository.hpp>
 #include <Repositories/TrainingPlanRepository.hpp>
 #include <fstream>
 #include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <Examples/RBFNetworkBiggerExample.hpp>
-#include <Examples/FunctionEvolutionExample.hpp>
-#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
-#include <Examples/NetworkEvolution/NetworkEvolutionExample.hpp>
-#include <Examples/NatureEvolutionExample.hpp>
-#include <Examples/TeachedEvolutionExample.hpp>
-#include <Examples/TicTacToeEvolution/TicTacToeEvolutionExample.hpp>
 #include "PreferencesController.hpp"
+#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
@@ -32,13 +24,13 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	saveTrainingPlanAfterPausedIndex = -1;
 	saveTrainingSessionAfterPause = false;
 
-	trainingPlanPatterns.push_back(new RBFNetworkBiggerExample());
-	trainingPlanPatterns.push_back(new BackpropagationXorExample());
-	trainingPlanPatterns.push_back(new FunctionEvolutionExample());
-	trainingPlanPatterns.push_back(new NetworkEvolutionExample());
-	trainingPlanPatterns.push_back(new NatureEvolutionExample());
-	trainingPlanPatterns.push_back(new TeachedEvolutionExample());
-	trainingPlanPatterns.push_back(new TicTacToeEvolutionExample());
+	//trainingPlanPatterns.push_back(new RBFNetworkBiggerExample());
+	//trainingPlanPatterns.push_back(new BackpropagationXorExample());
+	//trainingPlanPatterns.push_back(new FunctionEvolutionExample());
+	//trainingPlanPatterns.push_back(new NetworkEvolutionExample());
+	//trainingPlanPatterns.push_back(new NatureEvolutionExample());
+	//trainingPlanPatterns.push_back(new TeachedEvolutionExample());
+	//trainingPlanPatterns.push_back(new TicTacToeEvolutionExample());
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
