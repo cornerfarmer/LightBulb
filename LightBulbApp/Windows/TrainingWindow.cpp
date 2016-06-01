@@ -255,8 +255,8 @@ void TrainingWindow::refreshTrainingPlanPatterns(wxCommandEvent& event)
 		data.push_back(wxVariant((*trainingPlan)->getDescription()));
 		trainingPlanPatternList->AppendItem(data);
 		trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
-		if (currentDetailObject == *trainingPlan)
-			showDetailsOfTrainingPlanPattern(*trainingPlan);
+		if (currentDetailObject == trainingPlan->get())
+			showDetailsOfTrainingPlanPattern(trainingPlan->get());
 	}
 }
 
@@ -400,7 +400,7 @@ void TrainingWindow::validateSelectedProcess()
 {
 	int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
 	int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-	AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>((*getController()->getTrainingPlanPatterns())[trainingPlanPatternIndex]);
+	AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>((*getController()->getTrainingPlanPatterns())[trainingPlanPatternIndex].get());
 
 	if (trainingPlan && neuralNetworkIndex < getController()->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
 	{
@@ -475,7 +475,7 @@ void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 	int row = getRowIndexOfItem(trainingPlanPatternList, event.GetItem());
 	if (row != -1) {
 		removeCustomSubAppsMenu();
-		showDetailsOfTrainingPlanPattern((*getController()->getTrainingPlanPatterns())[row]);
+		showDetailsOfTrainingPlanPattern((*getController()->getTrainingPlanPatterns())[row].get());
 		restoreDefaultProcessView();
 		trainingPlanPatternsChoice->Select(row);
 		validateSelectedProcess();

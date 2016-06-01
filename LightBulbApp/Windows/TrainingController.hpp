@@ -24,7 +24,7 @@ class TrainingController : public AbstractMainApp
 	template <class Archive>
 	friend void serialize(Archive& archive, TrainingController& trainingController);
 private:
-	std::vector<AbstractTrainingPlan*> trainingPlanPatterns;
+	std::vector<std::unique_ptr<AbstractTrainingPlan>> trainingPlanPatterns;
 	std::unique_ptr<TrainingWindow> window;
 	std::vector<std::unique_ptr<AbstractSubApp>> activeSubApps;
 	std::vector<AbstractSubAppFactory*> subAppFactories;
@@ -34,9 +34,9 @@ private:
 	bool saveTrainingSessionAfterPause;
 	bool allTrainingPlansPaused();
 public:
-	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_);
+	TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_);
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
-	std::vector<AbstractTrainingPlan*>* getTrainingPlanPatterns();
+	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlanPatterns();
 	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
 	void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);

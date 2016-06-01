@@ -13,7 +13,7 @@
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 
 
-TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_)
+TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_)
 {
 	neuralNetworkRepository = neuralNetworkRepository_;
 	trainingPlanRepository = trainingPlanRepository_;
@@ -24,13 +24,10 @@ TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRep
 	saveTrainingPlanAfterPausedIndex = -1;
 	saveTrainingSessionAfterPause = false;
 
-	//trainingPlanPatterns.push_back(new RBFNetworkBiggerExample());
-	//trainingPlanPatterns.push_back(new BackpropagationXorExample());
-	//trainingPlanPatterns.push_back(new FunctionEvolutionExample());
-	//trainingPlanPatterns.push_back(new NetworkEvolutionExample());
-	//trainingPlanPatterns.push_back(new NatureEvolutionExample());
-	//trainingPlanPatterns.push_back(new TeachedEvolutionExample());
-	//trainingPlanPatterns.push_back(new TicTacToeEvolutionExample());
+	for (int i = 0; i < trainingPlanPatterns_.size(); i++)
+	{
+		trainingPlanPatterns.push_back(std::unique_ptr<AbstractTrainingPlan>(trainingPlanPatterns_[i]));
+	}
 
 	wxThreadEvent evt(TW_EVT_REFRESH_ALL);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
@@ -41,7 +38,7 @@ std::vector<std::unique_ptr<AbstractNeuralNetwork>>* TrainingController::getNeur
 	return neuralNetworkRepository->getNeuralNetworks();
 }
 
-std::vector<AbstractTrainingPlan*>* TrainingController::getTrainingPlanPatterns()
+std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingController::getTrainingPlanPatterns()
 {
 	return &trainingPlanPatterns;
 }
@@ -114,7 +111,7 @@ int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trai
 {
 	for (int i = 0; i < trainingPlanPatterns.size(); i++)
 	{
-		if (trainingPlanPatterns[i] == trainingPlanPattern)
+		if (trainingPlanPatterns[i].get() == trainingPlanPattern)
 			return i;
 	}
 	return -1;
@@ -257,7 +254,7 @@ void TrainingController::addSubApp(int subAppFactoryIndex)
 
 void TrainingController::openPreferences(int trainingPlanPatternIndex)
 {
-	PreferencesController* preferencesController = new PreferencesController(this, trainingPlanPatterns[trainingPlanPatternIndex], window.get());
+	PreferencesController* preferencesController = new PreferencesController(this, trainingPlanPatterns[trainingPlanPatternIndex].get(), window.get());
 	preferencesController->getWindow()->Show();
 	activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
 }
@@ -289,3 +286,4 @@ bool TrainingController::allTrainingPlansPaused()
 	}
 	return allPaused;
 }
+

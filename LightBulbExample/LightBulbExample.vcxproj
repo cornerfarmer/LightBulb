@@ -127,6 +127,7 @@
     <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp" />
+    <ClCompile Include="Examples\TCProblemEvolutionExample.cpp" />
     <ClCompile Include="Examples\TeachedEvolutionExample.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp" />
+    <ClInclude Include="Examples\TCProblemEvolutionExample.hpp" />
     <ClInclude Include="Examples\TeachedEvolutionExample.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp" />
