@@ -175,6 +175,10 @@ public:
 	void removeNeuron(int layerIndex, int neuronIndex);
 
 	void addNeuron(int layerIndex);
+
+	void removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex);
+
+	bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex);
 };
 
 #include "IO/LayeredNetworkIO.hpp"

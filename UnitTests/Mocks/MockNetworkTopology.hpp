@@ -45,6 +45,8 @@ public:
 	MOCK_METHOD2(removeNeuron, void (int, int));
 	MOCK_METHOD1(addNeuron, void (int));
 	MOCK_METHOD0(usesBiasNeuron, bool ());
+	MOCK_METHOD3(removeAfferentWeight, void (int, int, int));
+	MOCK_METHOD3(existsAfferentWeight, bool (int, int, int));
 };
 
 #endif

@@ -236,6 +236,16 @@ void LayeredNetwork::addNeuron(int layerIndex)
 	}
 }
 
+void LayeredNetwork::removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex)
+{
+	weights[layerIndex](weightIndex, neuronIndex) = 0;
+}
+
+bool LayeredNetwork::existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex)
+{
+	return weights[layerIndex](weightIndex, neuronIndex) != 0;
+}
+
 void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
 {
 	weights[layerIndex - 1] = newWeights;

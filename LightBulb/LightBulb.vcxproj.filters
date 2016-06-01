@@ -628,6 +628,7 @@
     <ClCompile Include="Logging\StorageLogger.cpp">
       <Filter>Quelldateien\Logging</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1269,5 +1270,6 @@
     <ClInclude Include="IO\UsedArchives.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
   </ItemGroup>
 </Project>

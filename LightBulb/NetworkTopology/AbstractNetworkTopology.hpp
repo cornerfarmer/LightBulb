@@ -96,6 +96,10 @@ public:
 	virtual void removeNeuron(int layerIndex, int neuronIndex) = 0;
 
 	virtual void addNeuron(int layerIndex) = 0;
+
+	virtual void removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) = 0;
+
+	virtual bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) = 0;
 };
 
 

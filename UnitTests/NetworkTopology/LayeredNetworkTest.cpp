@@ -241,3 +241,56 @@ TEST_F(LayeredNetworkTest, removeNeuron)
 	EXPECT_EQ(3, (*weights)[1].cols());
 	EXPECT_EQ(expectedWeights[1], (*weights)[1]);
 }
+
+
+TEST_F(LayeredNetworkTest, removeAfferentWeight)
+{
+	LayeredNetworkOptions options = getDefaultOptions();
+	network = new LayeredNetwork(options);
+
+	auto weights = network->getWeights();
+	(*weights)[0].row(0) << 1, 2, 3;
+	(*weights)[0].row(1) << 4, 5, 6,
+	(*weights)[0].row(2) << 7, 8, 9;
+	(*weights)[1].row(0) << 1, 2, 3, 4;
+
+	network->removeAfferentWeight(0, 0, 0);
+	network->removeAfferentWeight(0, 1, 1);
+	network->removeAfferentWeight(0, 2, 1);
+	network->removeAfferentWeight(1, 3, 0);
+
+	std::vector<Eigen::MatrixXd> expectedWeights;
+	expectedWeights.push_back(Eigen::MatrixXd(3, 3));
+	expectedWeights.push_back(Eigen::MatrixXd(1, 4));
+	expectedWeights[0].row(0) << 0, 2, 3;
+	expectedWeights[0].row(1) << 4, 0, 0,
+	expectedWeights[0].row(2) << 7, 8, 9;
+	expectedWeights[1].row(0) << 1, 2, 3, 0;
+
+	weights = network->getWeights();
+	EXPECT_EQ(2, weights->size());
+	EXPECT_EQ(3, (*weights)[0].rows());
+	EXPECT_EQ(3, (*weights)[0].cols());
+	EXPECT_EQ(expectedWeights[0], (*weights)[0]);
+	EXPECT_EQ(1, (*weights)[1].rows());
+	EXPECT_EQ(4, (*weights)[1].cols());
+	EXPECT_EQ(expectedWeights[1], (*weights)[1]);
+}
+
+
+TEST_F(LayeredNetworkTest, existsAfferentWeight)
+{
+	LayeredNetworkOptions options = getDefaultOptions();
+	network = new LayeredNetwork(options);
+
+	auto weights = network->getWeights();
+	(*weights)[0].row(0) << 0, 2, 3;
+	(*weights)[0].row(1) << 4, 0, 0,
+	(*weights)[0].row(2) << 7, 8, 9;
+	(*weights)[1].row(0) << 1, 2, 3, 0;
+
+	EXPECT_EQ(true, network->existsAfferentWeight(1, 2, 0));
+	EXPECT_EQ(true, network->existsAfferentWeight(0, 2, 2));
+	EXPECT_EQ(false, network->existsAfferentWeight(0, 0, 0));
+	EXPECT_EQ(false, network->existsAfferentWeight(1, 3, 0));
+}
