@@ -185,7 +185,13 @@ void LayeredNetwork::removeNeuron(int layerIndex, int neuronIndex)
 		netInputs[layerIndex][i] = netInputs[layerIndex][i + 1];
 	netInputs[layerIndex].conservativeResize(netInputs[layerIndex].rows() - 1);
 
-	for (int i = layerOffsets[layerIndex] + options->useBiasNeuron * layerIndex + neuronIndex; i < activations.size() - 1; i++)
+	int prevBiasNeuronCount;
+	if (!options->enableShortcuts)
+		prevBiasNeuronCount = options->useBiasNeuron * layerIndex;
+	else
+		prevBiasNeuronCount = layerIndex > 0 ? 1 : 0;
+
+	for (int i = layerOffsets[layerIndex] + prevBiasNeuronCount + neuronIndex; i < activations.size() - 1; i++)
 		activations[i] = activations[i + 1];
 	activations.conservativeResize(activations.rows() - 1);
 
@@ -200,9 +206,23 @@ void LayeredNetwork::removeNeuron(int layerIndex, int neuronIndex)
 	}
 	if (layerIndex < weights.size())
 	{
-		for (int n = neuronIndex; n < weights[layerIndex].cols() - 1; n++)
-			weights[layerIndex].col(n) = weights[layerIndex].col(n + 1);
-		weights[layerIndex].conservativeResize(weights[layerIndex].rows(), weights[layerIndex].cols() - 1);
+		if (options->enableShortcuts)
+		{
+			for (int l = layerIndex; l < weights.size(); l++)
+			{
+				for (int c = layerOffsets[layerIndex] + prevBiasNeuronCount + neuronIndex; c < weights[l].cols() - 1; c++)
+				{
+					weights[l].col(c) = weights[l].col(c + 1);
+				}
+				weights[l].conservativeResize(weights[l].rows(), weights[l].cols() - 1);
+			}
+		}
+		else
+		{
+			for (int n = neuronIndex; n < weights[layerIndex].cols() - 1; n++)
+				weights[layerIndex].col(n) = weights[layerIndex].col(n + 1);
+			weights[layerIndex].conservativeResize(weights[layerIndex].rows(), weights[layerIndex].cols() - 1);
+		}
 	}
 }
 

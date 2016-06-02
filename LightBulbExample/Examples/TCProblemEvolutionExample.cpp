@@ -19,6 +19,7 @@
 #include <Neuron/NeuronDescription.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include <Learning/Evolution/ScoreCondition.hpp>
+#include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 
 AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 {
@@ -32,8 +33,11 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
-	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RandomSelector(new RankBasedRandomFunction()), 2.0);
+
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 2.0);
+	options.mutationsCommands.push_back(constantMutationCommand);
+
+	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 1.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;
