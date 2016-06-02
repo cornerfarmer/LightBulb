@@ -7,6 +7,7 @@
 #include "Examples/FunctionEvolutionExample.hpp"
 #include "Examples/NetworkEvolution/NetworkEvolutionExample.hpp"
 #include "Examples/RBFNetworkBiggerExample.hpp"
+#include "Examples/TCProblemEvolutionExample.hpp"
 
 void main(int argc, char** argv)
 {
@@ -18,6 +19,7 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new NatureEvolutionExample());
 	app->addTrainingPlan(new TicTacToeEvolutionExample());
 	app->addTrainingPlan(new TeachedEvolutionExample());
+	app->addTrainingPlan(new TCProblemEvolutionExample());
 
 	wxApp::SetInstance(app);
 	wxEntry(argc, argv);

@@ -528,8 +528,10 @@ void TrainingWindow::refreshTrainingPlanRunTimes(wxTimerEvent& event)
 	int trainingPlanIndex = 0;
 	for (auto trainingPlan = getController()->getTrainingPlans()->begin(); trainingPlan != getController()->getTrainingPlans()->end(); trainingPlan++, trainingPlanIndex++)
 	{
-		auto duration = (*trainingPlan)->getRunTime();
-		trainingPlanList->SetValue(wxVariant(getStringFromDuration(duration)), trainingPlanIndex, 2);
+		if (trainingPlanIndex < trainingPlanList->GetItemCount()) {
+			auto duration = (*trainingPlan)->getRunTime();
+			trainingPlanList->SetValue(wxVariant(getStringFromDuration(duration)), trainingPlanIndex, 2);
+		}
 	}
 }
 
