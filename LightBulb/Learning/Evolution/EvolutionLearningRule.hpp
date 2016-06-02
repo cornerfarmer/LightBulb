@@ -22,6 +22,7 @@ class AbstractReuseCommand;
 class AbstractFitnessFunction;
 
 #define DATA_SET_FITNESS "Fitness"
+#define DATA_AVG_NEURON_COUNT "Average neuron count"
 
 struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 {

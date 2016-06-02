@@ -285,6 +285,14 @@ bool LayeredNetwork::existsAfferentWeight(int layerIndex, int neuronIndex, int w
 	return weights[layerIndex](weightIndex, neuronIndex) != 0;
 }
 
+int LayeredNetwork::getNeuronCount()
+{
+	int neuronCount = 0;
+	for (int i = 0; i < options->neuronsPerLayerCount.size(); i++)
+		neuronCount += options->neuronsPerLayerCount[i];
+	return neuronCount;
+}
+
 void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
 {
 	weights[layerIndex - 1] = newWeights;
@@ -533,6 +541,12 @@ void LayeredNetwork::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
 		throw std::logic_error("You can not mix topology types when calling copyWeightsFrom on a LayeredNetwork");
 
 	weights = static_cast<LayeredNetwork*>(&otherNetwork)->weights;
+	activations = static_cast<LayeredNetwork*>(&otherNetwork)->activations;
+	netInputs = static_cast<LayeredNetwork*>(&otherNetwork)->netInputs;
+	options->neuronsPerLayerCount = static_cast<LayeredNetwork*>(&otherNetwork)->options->neuronsPerLayerCount;
+	layerOffsets = static_cast<LayeredNetwork*>(&otherNetwork)->layerOffsets;
+	for (int l = 0; l < getLayerCount(); l++)
+		rebuildActivationsPerLayer(l);
 }
 
 

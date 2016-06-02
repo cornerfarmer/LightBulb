@@ -81,6 +81,7 @@ std::vector<std::string> EvolutionLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 	labels.push_back(DATA_SET_FITNESS);
+	labels.push_back(DATA_AVG_NEURON_COUNT);
 	std::vector<std::string> worldLabels = getOptions()->world->getDataSetLabels();
 	labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
 	return labels;
@@ -171,6 +172,13 @@ bool EvolutionLearningRule::doIteration()
 
 	// Extract all current objects ordered by their score
 	std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore = getOptions()->world->getHighscoreList();
+
+	int totalNeuronCount = 0;
+	for (int i = 0; i < highscore->size(); i++)
+	{
+		totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+	}
+	learningState->addData(DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
 
 	bool exit = false;
 	// 3.Step: Go through all exit conditions

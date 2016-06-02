@@ -17,8 +17,8 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 	for (int n = 0; n < removeNeuronsPerIteration; n++)
 	{
 		bool usesBiasNeuron = networkTopology->usesBiasNeuron();
-		int minimalNeuronIndex;
-		int minimalNeuronLayerIndex;
+		int minimalNeuronIndex = -1;
+		int minimalNeuronLayerIndex = -1;
 
 		if (removeNeuronsByTheirTotalWeight)
 		{
@@ -28,14 +28,17 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
-				auto weightSums = layer->cwiseAbs().colwise().sum();
-				for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
+				if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
 				{
-					if (weightSums[i] < minimalWeightSum || minimalWeightSum == -1)
+					auto weightSums = layer->cwiseAbs().colwise().sum();
+					for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
 					{
-						minimalWeightSum = weightSums[i];
-						minimalNeuronLayerIndex = layerIndex;
-						minimalNeuronIndex = i;
+						if (weightSums[i] < minimalWeightSum || minimalWeightSum == -1)
+						{
+							minimalWeightSum = weightSums[i];
+							minimalNeuronLayerIndex = layerIndex;
+							minimalNeuronIndex = i;
+						}
 					}
 				}
 			}
@@ -48,33 +51,37 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
-				for (int i = usesBiasNeuron; i < layer->cols(); i++)
+				if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
 				{
-					int weightCount = 0;
-					for (int j = 0; j < layer->rows(); j++)
+					for (int i = usesBiasNeuron; i < layer->cols(); i++)
 					{
-						if (networkTopology->existsAfferentWeight(layerIndex, i, j))
-							weightCount++;
-					}
-					if (weightCount < minimalWeightCount || minimalWeightCount == -1)
-					{
-						minimalWeightCount = weightCount;
-						minimalNeuronLayerIndex = layerIndex;
-						minimalNeuronIndex = i;
+						int weightCount = 0;
+						for (int j = 0; j < layer->rows(); j++)
+						{
+							if (networkTopology->existsAfferentWeight(layerIndex, i, j))
+								weightCount++;
+						}
+						if (weightCount < minimalWeightCount || minimalWeightCount == -1)
+						{
+							minimalWeightCount = weightCount;
+							minimalNeuronLayerIndex = layerIndex;
+							minimalNeuronIndex = i;
+						}
 					}
 				}
 			}
 		}
 
-		networkTopology->removeNeuron(minimalNeuronLayerIndex, minimalNeuronIndex);
+		if (minimalNeuronLayerIndex != -1)
+			networkTopology->removeNeuron(minimalNeuronLayerIndex, minimalNeuronIndex);
 	}
 
 	for (int w = 0; w < removeWeightsPerIteration; w++)
 	{
 		double minimalWeight = -1;
-		int minimalWeightIndex;
-		int minimalWeightNeuronIndex;
-		int minimalWeightLayerIndex;
+		int minimalWeightIndex = -1;
+		int minimalWeightNeuronIndex = -1;
+		int minimalWeightLayerIndex = -1;
 
 		auto weights = networkTopology->getWeights();
 		int layerIndex = 0;
@@ -95,7 +102,8 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			}
 		}
 
-		networkTopology->removeAfferentWeight(minimalWeightLayerIndex, minimalWeightNeuronIndex, minimalWeightIndex);
+		if (minimalWeightLayerIndex != -1)
+			networkTopology->removeAfferentWeight(minimalWeightLayerIndex, minimalWeightNeuronIndex, minimalWeightIndex);
 	}
 
 	

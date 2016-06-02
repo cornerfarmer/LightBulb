@@ -100,6 +100,8 @@ public:
 	virtual void removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) = 0;
 
 	virtual bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) = 0;
+
+	virtual int getNeuronCount() = 0;
 };
 
 
