@@ -168,6 +168,92 @@ TEST_F(LayeredNetworkTest, addNeuron)
 }
 
 
+TEST_F(LayeredNetworkTest, addNeuronWithShortcuts)
+{
+	LayeredNetworkOptions options = getDefaultOptions();
+	options.enableShortcuts = true;
+	network = new LayeredNetwork(options);
+
+	auto netInputs = network->getNetInputs();
+	(*netInputs)[0] << 1, 2;
+	(*netInputs)[1] << 1, 2, 3;
+	(*netInputs)[2] << 1;
+
+	auto activations = network->getActivations();
+	(*activations)[2]->col(0) << 1, 2, 3, 2, 3, 4, 2;
+
+	auto weights = network->getWeights();
+	(*weights)[0].row(0) << 1, 2, 3;
+	(*weights)[0].row(1) << 4, 5, 6,
+	(*weights)[0].row(2) << 7, 8, 9;
+	(*weights)[1].row(0) << 1, 2, 3, 4, 5, 6;
+
+	network->addNeuron(0);
+	network->addNeuron(1);
+	network->addNeuron(1);
+	network->addNeuron(2);
+	network->addNeuron(2);
+	network->addNeuron(2);
+
+	std::vector<Eigen::VectorXd> expectedNetInputs;
+	expectedNetInputs.push_back(Eigen::VectorXd(3));
+	expectedNetInputs.push_back(Eigen::VectorXd(5));
+	expectedNetInputs.push_back(Eigen::VectorXd(4));
+	expectedNetInputs[0] << 1, 2, 0;
+	expectedNetInputs[1] << 1, 2, 3, 0, 0;
+	expectedNetInputs[2] << 1, 0, 0, 0;
+
+	std::vector<Eigen::VectorXd> expectedActivations;
+	expectedActivations.push_back(Eigen::VectorXd(4));
+	expectedActivations.push_back(Eigen::VectorXd(9));
+	expectedActivations.push_back(Eigen::VectorXd(13));
+	expectedActivations[0] << 1, 2, 3, 0;
+	expectedActivations[1] << 1, 2, 3, 0, 2, 3, 4, 0, 0;
+	expectedActivations[2] << 1, 2, 3, 0, 2, 3, 4, 0, 0, 2, 0, 0, 0;
+
+	std::vector<Eigen::MatrixXd> expectedWeights;
+	expectedWeights.push_back(Eigen::MatrixXd(5, 4));
+	expectedWeights.push_back(Eigen::MatrixXd(4, 9));
+	expectedWeights[0].row(0) << 1, 2, 3, 0;
+	expectedWeights[0].row(1) << 4, 5, 6, 0,
+	expectedWeights[0].row(2) << 7, 8, 9, 0;
+	expectedWeights[0].row(3) << 0, 0, 0, 0;
+	expectedWeights[0].row(4) << 0, 0, 0, 0;
+	expectedWeights[1].row(0) << 1, 2, 3, 0, 4, 5, 6, 0, 0;
+	expectedWeights[1].row(1) << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+	expectedWeights[1].row(2) << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+	expectedWeights[1].row(3) << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+
+
+	netInputs = network->getNetInputs();
+	EXPECT_EQ(3, netInputs->size());
+	EXPECT_EQ(3, (*netInputs)[0].rows());
+	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
+	EXPECT_EQ(5, (*netInputs)[1].rows());
+	EXPECT_EQ(expectedNetInputs[1], (*netInputs)[1]);
+	EXPECT_EQ(4, (*netInputs)[2].rows());
+	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
+
+	activations = network->getActivations();
+	EXPECT_EQ(3, activations->size());
+	EXPECT_EQ(4, (*activations)[0]->rows());
+	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
+	EXPECT_EQ(9, (*activations)[1]->rows());
+	EXPECT_EQ(expectedActivations[1], *(*activations)[1]);
+	EXPECT_EQ(13, (*activations)[2]->rows());
+	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
+
+	weights = network->getWeights();
+	EXPECT_EQ(2, weights->size());
+	EXPECT_EQ(5, (*weights)[0].rows());
+	EXPECT_EQ(4, (*weights)[0].cols());
+	EXPECT_EQ(expectedWeights[0], (*weights)[0]);
+	EXPECT_EQ(4, (*weights)[1].rows());
+	EXPECT_EQ(9, (*weights)[1].cols());
+	EXPECT_EQ(expectedWeights[1], (*weights)[1]);
+}
+
+
 TEST_F(LayeredNetworkTest, removeNeuron)
 {
 	LayeredNetworkOptions options = getDefaultOptions();

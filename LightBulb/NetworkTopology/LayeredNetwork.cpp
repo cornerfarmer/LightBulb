@@ -217,9 +217,15 @@ void LayeredNetwork::addNeuron(int layerIndex)
 	netInputs[layerIndex](netInputs[layerIndex].rows() - 1) = 0;
 
 	activations.conservativeResize(activations.rows() + 1);
-	for (int i = activations.size() - 1; i >= layerOffsets[layerIndex + 1] + options->useBiasNeuron * (layerIndex + 1); i--)
+	int prevBiasNeuronCount;
+	if (!options->enableShortcuts)
+		prevBiasNeuronCount = options->useBiasNeuron * (layerIndex + 1);
+	else
+		prevBiasNeuronCount = 1;
+
+	for (int i = activations.size() - 1; i >= layerOffsets[layerIndex + 1] + prevBiasNeuronCount; i--)
 		activations[i] = activations[i - 1];
-	activations[layerOffsets[layerIndex + 1] + options->useBiasNeuron * (layerIndex + 1) - 1] = 0;
+	activations[layerOffsets[layerIndex + 1] + prevBiasNeuronCount - 1] = 0;
 	
 	for (int l = 0; l < getLayerCount(); l++)
 		rebuildActivationsPerLayer(l);
@@ -228,6 +234,19 @@ void LayeredNetwork::addNeuron(int layerIndex)
 	{
 		weights[layerIndex].conservativeResize(weights[layerIndex].rows(), weights[layerIndex].cols() + 1);
 		weights[layerIndex].col(weights[layerIndex].cols() - 1).setZero();
+
+		if (options->enableShortcuts)
+		{
+			for (int l = layerIndex + 1; l < weights.size(); l++)
+			{
+				weights[l].conservativeResize(weights[l].rows(), weights[l].cols() + 1);
+				for (int c = weights[l].cols() - 1; c > weights[layerIndex].cols() - 1; c--)
+				{
+					weights[l].col(c) = weights[l].col(c - 1);
+				}
+				weights[l].col(weights[layerIndex].cols() - 1).setZero();
+			}
+		}
 	}
 	if (layerIndex > 0)
 	{
