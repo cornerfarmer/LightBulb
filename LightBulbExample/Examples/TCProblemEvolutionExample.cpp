@@ -20,12 +20,13 @@
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include <Learning/Evolution/ScoreCondition.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
+#include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 
 AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 {
 
 	EvolutionLearningRuleOptions options;
-	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50);
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 100);
 	options.exitConditions.push_back(rateDifferenceCondition);
 	options.exitConditions.push_back(new ScoreCondition(-0.001));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
@@ -37,7 +38,14 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 
-	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.2);
+	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.7);
+	options.mutationsCommands.push_back(constantMutationCommand);
+
+	std::vector<unsigned int> maxNeuronsPerLayer(3);
+	maxNeuronsPerLayer[0] = 16;
+	maxNeuronsPerLayer[1] = 16;
+	maxNeuronsPerLayer[2] = 1;
+	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.3);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;

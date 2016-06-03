@@ -629,6 +629,7 @@
       <Filter>Quelldateien\Logging</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.cpp" />
+    <ClCompile Include="Learning\Evolution\NetworkGrowMutationAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1271,5 +1272,6 @@
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
+    <ClInclude Include="Learning\Evolution\NetworkGrowMutationAlgorithm.hpp" />
   </ItemGroup>
 </Project>
