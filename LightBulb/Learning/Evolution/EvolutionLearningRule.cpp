@@ -160,7 +160,7 @@ bool EvolutionLearningRule::doIteration()
 	// 1. Step: Create new evolution objects
 	for (auto creationCommand = getOptions()->creationCommands.begin(); creationCommand != getOptions()->creationCommands.end(); creationCommand++)
 	{
-		(*creationCommand)->execute(*getOptions()->world);
+		(*creationCommand)->execute(*getOptions()->world, &notUsedObjects);
 	}
 
 	// 2. Step: Execute the simulation and try to rate the evolution objects

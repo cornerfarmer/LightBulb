@@ -19,7 +19,7 @@ class EvolutionLearningRule;
 class AbstractCommand : public AbstractLoggable
 {
 protected:
-	AbstractEvolutionObject* getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects);
+	AbstractEvolutionObject* getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects, bool addToWorld = true);
 };
 
 #endif

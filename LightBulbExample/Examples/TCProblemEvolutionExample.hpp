@@ -13,6 +13,7 @@ protected:
 	AbstractLearningRule* createLearningRate();
 	AbstractEvolutionWorld* createWorld();
 public:
+	TCProblemEvolutionExample();
 	std::string getDefaultName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();

@@ -21,15 +21,18 @@
 #include <Learning/Evolution/ScoreCondition.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
+#include <TrainingPlans/IntegerPreference.hpp>
+
+#define PREFERENCE_CREATION_COUNT "Creation count"
 
 AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 {
 
 	EvolutionLearningRuleOptions options;
-	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 100);
+	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 1000);
 	options.exitConditions.push_back(rateDifferenceCondition);
 	options.exitConditions.push_back(new ScoreCondition(-0.001));
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(80);
+	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATION_COUNT));
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
@@ -39,14 +42,15 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 
 	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.7);
-	options.mutationsCommands.push_back(constantMutationCommand);
+	//options.mutationsCommands.push_back(constantMutationCommand);
 
 	std::vector<unsigned int> maxNeuronsPerLayer(3);
 	maxNeuronsPerLayer[0] = 16;
 	maxNeuronsPerLayer[1] = 16;
 	maxNeuronsPerLayer[2] = 1;
 	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.3);
-	options.mutationsCommands.push_back(constantMutationCommand);
+	//options.mutationsCommands.push_back(constantMutationCommand);
+
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;
 	fillDefaultLearningRuleOptions(&options);
@@ -160,6 +164,11 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 
 
 	return new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
+}
+
+TCProblemEvolutionExample::TCProblemEvolutionExample()
+{
+	addPreference(new IntegerPreference(PREFERENCE_CREATION_COUNT, 161, 80, 300));
 }
 
 std::string TCProblemEvolutionExample::getDefaultName()

@@ -3,11 +3,11 @@
 #include "AbstractEvolutionObject.hpp"
 #include <Logging/AbstractLogger.hpp>
 
-AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects, bool addToWorld)
 {
 	if (notUsedObjects->empty())
 	{
-		return usedObject->clone();
+		return usedObject->clone(addToWorld);
 	}
 	else
 	{
