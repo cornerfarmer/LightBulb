@@ -63,6 +63,12 @@
     <ClCompile Include="Examples\TCProblemEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\TCProblemBackpropagationExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\TCProblemTeacher.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -108,6 +114,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TCProblemEvolutionExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TCProblemBackpropagationExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TCProblemTeacher.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
