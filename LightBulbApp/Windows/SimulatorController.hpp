@@ -20,7 +20,6 @@ class SimulatorController : public AbstractSubApp
 {
 private:
 	std::unique_ptr<SimulatorWindow> window;
-	TrainingController* trainingController;
 	NeuralNetworkRepository* neuralNetworkRepository;
 protected:
 	void prepareClose();

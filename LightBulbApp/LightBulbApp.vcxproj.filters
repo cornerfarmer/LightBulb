@@ -114,6 +114,27 @@
     <ClCompile Include="Windows\AbstractSubAppWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\NetworkViewerWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\NetworkViewerController.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\NetworkViewerFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractSubAppFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractMainApp.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbstractApp.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -261,6 +282,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\AbstractApp.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\NetworkViewerFactory.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\NetworkViewerWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\NetworkViewerController.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

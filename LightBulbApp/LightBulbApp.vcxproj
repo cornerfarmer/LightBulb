@@ -152,8 +152,12 @@
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp" />
     <ClCompile Include="TrainingPlans\DoublePreference.cpp" />
     <ClCompile Include="TrainingPlans\IntegerPreference.cpp" />
+    <ClCompile Include="Windows\AbstractApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
+    <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
+    <ClCompile Include="Windows\AbstractMainApp.cpp" />
     <ClCompile Include="Windows\AbstractSubApp.cpp" />
+    <ClCompile Include="Windows\AbstractSubAppFactory.cpp" />
     <ClCompile Include="Windows\AbstractSubAppWindow.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
     <ClCompile Include="Windows\LearningStateController.cpp" />
@@ -162,6 +166,9 @@
     <ClCompile Include="Windows\LoggerController.cpp" />
     <ClCompile Include="Windows\LoggerFactory.cpp" />
     <ClCompile Include="Windows\LoggerWindow.cpp" />
+    <ClCompile Include="Windows\NetworkViewerController.cpp" />
+    <ClCompile Include="Windows\NetworkViewerFactory.cpp" />
+    <ClCompile Include="Windows\NetworkViewerWindow.cpp" />
     <ClCompile Include="Windows\PreferencesController.cpp" />
     <ClCompile Include="Windows\PreferencesWindow.cpp" />
     <ClCompile Include="Windows\SimulatorController.cpp" />
@@ -217,6 +224,9 @@
     <ClInclude Include="Windows\LoggerController.hpp" />
     <ClInclude Include="Windows\LoggerFactory.hpp" />
     <ClInclude Include="Windows\LoggerWindow.hpp" />
+    <ClInclude Include="Windows\NetworkViewerController.hpp" />
+    <ClInclude Include="Windows\NetworkViewerFactory.hpp" />
+    <ClInclude Include="Windows\NetworkViewerWindow.hpp" />
     <ClInclude Include="Windows\PreferencesController.hpp" />
     <ClInclude Include="Windows\PreferencesWindow.hpp" />
     <ClInclude Include="Windows\SimulatorController.hpp" />

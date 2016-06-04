@@ -8,6 +8,7 @@
 #include "Windows/LearningStateFactory.hpp"
 #include "Windows/SimulatorFactory.hpp"
 #include "Windows/LoggerFactory.hpp"
+#include "Windows/NetworkViewerFactory.hpp"
 
 bool App::OnInit()
 {
@@ -19,10 +20,12 @@ bool App::OnInit()
 	LoggerFactory* loggerFactory = new LoggerFactory(trainingPlanRepository);
 	SimulatorFactory* simulatorFactory = new SimulatorFactory(neuralNetworkRepository);
 	LearningStateFactory* learningStateFactory = new LearningStateFactory(trainingPlanRepository);
+	NetworkViewerFactory* networkViewerFactory = new NetworkViewerFactory(neuralNetworkRepository);
 
 	trainingController->addSubAppFactory(loggerFactory);
 	trainingController->addSubAppFactory(simulatorFactory);
 	trainingController->addSubAppFactory(learningStateFactory);
+	trainingController->addSubAppFactory(networkViewerFactory);
 
 	trainingController->show();
 	return true;
