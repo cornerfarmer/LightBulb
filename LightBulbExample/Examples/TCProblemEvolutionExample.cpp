@@ -22,8 +22,11 @@
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
+#include <TrainingPlans/DoublePreference.hpp>
 
 #define PREFERENCE_CREATION_COUNT "Creation count"
+#define PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED "Mutationstrength changespeed"
+#define PREFERENCE_WEIGHTDECAY_FAC "Weight decay factor"
 
 AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 {
@@ -38,18 +41,18 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
 
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 2.0);
+	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(new MutationAlgorithm(getDoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED)), new RandomSelector(new RankBasedRandomFunction()), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 
-	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.7);
-	//options.mutationsCommands.push_back(constantMutationCommand);
+	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.03);
+	options.mutationsCommands.push_back(constantMutationCommand);
 
 	std::vector<unsigned int> maxNeuronsPerLayer(3);
 	maxNeuronsPerLayer[0] = 16;
 	maxNeuronsPerLayer[1] = 16;
 	maxNeuronsPerLayer[2] = 1;
-	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.3);
-	//options.mutationsCommands.push_back(constantMutationCommand);
+	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.03);
+	options.mutationsCommands.push_back(constantMutationCommand);
 
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;
@@ -148,7 +151,7 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 		lernExamples[i] = lernExamples[i - 10].colwise().reverse();
 	}
 
-	Teacher* teacher = new Teacher();
+	Teacher* teacher = new Teacher(getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC));
 	for (int i = 0; i < 40; i ++)
 	{
 		std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(16));
@@ -169,6 +172,8 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 TCProblemEvolutionExample::TCProblemEvolutionExample()
 {
 	addPreference(new IntegerPreference(PREFERENCE_CREATION_COUNT, 161, 80, 300));
+	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.2, 0, 2));
+	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.002, 0.003, 0.3));
 }
 
 std::string TCProblemEvolutionExample::getDefaultName()

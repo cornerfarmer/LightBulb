@@ -11,6 +11,12 @@ void Teacher::addTestingLesson(AbstractTeachingLesson* newTestingLesson)
 	testingLessons.push_back(std::unique_ptr<AbstractTeachingLesson>(newTestingLesson));
 
 }
+
+Teacher::Teacher(double weightDecayFac_)
+{
+	weightDecayFac = weightDecayFac_;
+}
+
 void Teacher::addTeachingLesson(AbstractTeachingLesson* newTeachingLesson)
 {
 	// Add the newTeachingLesson to the list
@@ -30,6 +36,11 @@ std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTestingLessons
 
 double Teacher::getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
 {
+	return getTeachingError(neuralNetwork, activationOrder) + getWeightDecayError(neuralNetwork);
+}
+
+double Teacher::getTeachingError(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder)
+{
 	double totalError = 0;
 
 	// Add every specific error of the teachingLessons to the total error
@@ -45,6 +56,21 @@ double Teacher::getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActi
 	}
 
 	return totalError;
+}
+
+
+double Teacher::getWeightDecayError(AbstractNeuralNetwork& neuralNetwork)
+{
+	double weightDecayError = 0;
+	if (weightDecayFac > 0)
+	{
+		auto weights = neuralNetwork.getNetworkTopology()->getWeights();
+		for (auto weightsPerLayer = weights->begin(); weightsPerLayer != weights->end(); weightsPerLayer++)
+		{
+			weightDecayError += 0.5 * weightsPerLayer->squaredNorm();
+		}
+	}
+	return weightDecayFac * weightDecayError;
 }
 
 AbstractTeacher* Teacher::unfold()

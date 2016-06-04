@@ -24,11 +24,15 @@ protected:
 	NeuralNetwork* neuralNetwork;
 	// The currentTotalError (used as score)
 	double currentTotalError;
+	double currentTeachingError;
+	double currentWeightDecayError;
 public:	
 	// Create a new evolution object in the given world and with a NN built after the given network options
 	TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, LayeredNetworkOptions& options);
 	~TeachedEvolutionObject();
 	double getCurrentTotalError();
+	double getCurrentTeachingError();
+	double getCurrentWeightDecayError();
 	// Inherited:
 	void doNNCalculation();
 	void resetNN();

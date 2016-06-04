@@ -21,6 +21,8 @@ TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingE
 	// Initialize mutation strengths
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
 	randomizeMutationStrength();
+
+
 }
 
 AbstractNeuralNetwork* TeachedEvolutionObject::getNeuralNetwork()
@@ -32,7 +34,9 @@ void TeachedEvolutionObject::doNNCalculation()
 {
 	// Just recalculate the total error
 	TopologicalOrder activationOrder;
-	currentTotalError = teachingEvolutionWorld->getTeacher()->getTotalError(*neuralNetwork, activationOrder);
+	currentTeachingError = teachingEvolutionWorld->getTeacher()->getTeachingError(*neuralNetwork, activationOrder);
+	currentWeightDecayError = teachingEvolutionWorld->getTeacher()->getWeightDecayError(*neuralNetwork);
+	currentTotalError = currentTeachingError + currentWeightDecayError;
 }
 
 TeachedEvolutionObject::~TeachedEvolutionObject()
@@ -60,4 +64,15 @@ AbstractEvolutionObject* TeachedEvolutionObject::clone(bool addToWorld)
 double TeachedEvolutionObject::getCurrentTotalError()
 {
 	return currentTotalError;
+}
+
+
+double TeachedEvolutionObject::getCurrentTeachingError()
+{
+	return currentTeachingError;
+}
+
+double TeachedEvolutionObject::getCurrentWeightDecayError()
+{
+	return currentWeightDecayError;
 }

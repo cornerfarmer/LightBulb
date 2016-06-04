@@ -15,6 +15,9 @@ class EvolutionLearningRule;
 class AbstractEvolutionObject;
 class AbstractTeacher;
 
+#define DATASET_TEACHING_ERROR "Teaching error"
+#define DATASET_WEIGHTDECAY_ERROR "Weigth decay error"
+
 // Evolution world which can be used to use the EvolutionLearingRule in combination with a Teacher
 class TeachingEvolutionWorld : public AbstractSimpleEvolutionWorld
 {
@@ -31,6 +34,7 @@ public:
 	AbstractTeacher* getTeacher();
 	// Inherited:
 	bool doSimulationStep();
+	std::vector<std::string> getDataSetLabels();
 	double getScore(AbstractEvolutionObject* object);
 };
 

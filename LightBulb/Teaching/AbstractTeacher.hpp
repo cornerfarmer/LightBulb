@@ -28,6 +28,10 @@ public:
 	virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() = 0;
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
 	virtual double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) = 0;
+
+	virtual double getTeachingError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) = 0;
+
+	virtual double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) = 0;
 	// Returns a unfolded version of this teacher
 	virtual AbstractTeacher* unfold() = 0;
 	// Returns the biggest used timestep of all teaching lessons

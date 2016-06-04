@@ -22,7 +22,21 @@ bool TeachingEvolutionWorld::doSimulationStep()
 	{
 		(*teachedEvolutionObject)->doNNCalculation();
 	}
+
+	auto highscore = getHighscoreList();
+
+	learningState->addData(DATASET_TEACHING_ERROR, static_cast<TeachedEvolutionObject*>(highscore->front().second)->getCurrentTeachingError());
+	learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedEvolutionObject*>(highscore->front().second)->getCurrentWeightDecayError());
+	
 	return false;
+}
+
+std::vector<std::string> TeachingEvolutionWorld::getDataSetLabels()
+{
+	auto labels = AbstractEvolutionWorld::getDataSetLabels();
+	labels.push_back(DATASET_TEACHING_ERROR);
+	labels.push_back(DATASET_WEIGHTDECAY_ERROR);
+	return labels;
 }
 
 double TeachingEvolutionWorld::getScore(AbstractEvolutionObject* object)
