@@ -9,7 +9,11 @@ EVT_PAINT(NetworkViewerWindow::paintEvent)
 EVT_SIZE(NetworkViewerWindow::resize)
 END_EVENT_TABLE()
 
-#define BORDER 30
+#define BORDER 40
+#define NEURON_RAD 30
+#define NEURON_SPACE 120
+#define LAYER_SPACE 120
+#define WEIGHT_SPACE 40
 
 NetworkViewerWindow::NetworkViewerWindow(NetworkViewerController* controller_, AbstractWindow* parent)
 	:AbstractSubAppWindow(controller_, NetworkViewerController::getLabel(), parent)
@@ -57,7 +61,7 @@ void NetworkViewerWindow::networkChanged(wxCommandEvent& event)
 	for (int i = 0; i < neuronCountsPerLayer.size(); i++)
 		maxNeuronCount = std::max(maxNeuronCount, neuronCountsPerLayer[i]);
 
-	panel->SetScrollbars(1, 1, layerCount * 60, maxNeuronCount * 60, 0, 0);
+	panel->SetScrollbars(1, 1, layerCount * LAYER_SPACE, maxNeuronCount * NEURON_SPACE, 0, 0);
 
 	paintNow();
 }
@@ -94,12 +98,17 @@ void NetworkViewerWindow::render(wxDC& dc)
 	if (selectedNetwork)
 	{
 		dc.SetBackground(*wxWHITE_BRUSH);
-		dc.SetBackgroundMode(wxSOLID);
+		dc.SetBackgroundMode(wxTRANSPARENT);
+		dc.SetFont(*wxSMALL_FONT);
 
 		dc.Clear();
 
 		panel->GetVirtualSize(&width, &height);
 		panel->GetScrollPos(0);
+
+
+		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
+		bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
 
 		layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
 		for (int l = 0; l < layerCount; l++)
@@ -107,12 +116,17 @@ void NetworkViewerWindow::render(wxDC& dc)
 			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
 			for (int n = 0; n < neuronCount; n++)
 			{
-				dc.DrawCircle(getXPos(l), getYPos(n, neuronCount), 20);
+				dc.DrawCircle(getXPos(l), getYPos(n, neuronCount), NEURON_RAD);
+
+				if (usesBiasNeuron && l > 0)
+				{
+					double bias = (*weights)[l - 1](n, 0);
+					wxCoord textWidth, textHeight;
+					dc.GetTextExtent(std::to_string(bias), &textWidth, &textHeight);
+					dc.DrawText(std::to_string(bias), getXPos(l) - textWidth / 2, getYPos(n, neuronCount) - textHeight / 2);
+				}
 			}
 		}
-
-		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
-		bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
 
 		for (int l = 0; l < weights->size(); l++)
 		{
@@ -122,7 +136,15 @@ void NetworkViewerWindow::render(wxDC& dc)
 			{
 				for (int fn = usesBiasNeuron; fn < (*weights)[l].cols(); fn++)
 				{
-					dc.DrawLine(getXPos(l), getYPos(fn - usesBiasNeuron, neuronCount), getXPos(l + 1), getYPos(tn, neuronCountNextLayer));
+					int x1 = getXPos(l);
+					int y1 = getYPos(fn - usesBiasNeuron, neuronCount);
+					int x2 = getXPos(l + 1);
+					int y2 = getYPos(tn, neuronCountNextLayer);
+					float angle = atan((float)(y2 - y1) / (x2 - x1));
+
+					dc.DrawLine(x1 + NEURON_RAD * std::cos(angle), y1 + NEURON_RAD * std::sin(angle), x2 + NEURON_RAD * std::cos(angle + M_PI), y2 + NEURON_RAD * std::sin(angle + M_PI));
+
+					dc.DrawRotatedText(std::to_string((*weights)[l](tn, fn)), x1 + WEIGHT_SPACE * std::cos(angle), y1 + WEIGHT_SPACE * std::sin(angle), -1 * angle / M_PI * 180);
 				}
 			}
 		}
