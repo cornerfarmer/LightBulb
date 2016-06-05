@@ -135,6 +135,15 @@
     <ClCompile Include="Windows\AbstractApp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\EvolutionAnalyzerController.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\EvolutionAnalyzerFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\EvolutionAnalyzerWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -291,6 +300,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\NetworkViewerController.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\EvolutionAnalyzerController.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\EvolutionAnalyzerFactory.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\EvolutionAnalyzerWindow.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

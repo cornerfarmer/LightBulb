@@ -31,6 +31,7 @@ protected:
 public:
 	std::vector<std::string> getDataSetLabels();
 	LearningState* getLearningState();
+	AbstractLearningRule* getLearningRule();
 };
 
 #include "IO/AbstractLearningRuleTrainingPlanIO.hpp"

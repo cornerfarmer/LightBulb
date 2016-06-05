@@ -24,6 +24,11 @@ class AbstractFitnessFunction;
 #define DATA_SET_FITNESS "Fitness"
 #define DATA_AVG_NEURON_COUNT "Average neuron count"
 
+enum EvolutionLearningEvents
+{
+	EVT_EL_EVOLUTIONSTEP
+};
+
 struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 {
 	// Holds a few conditions which evaluate if the learning process should be stopped
@@ -47,7 +52,7 @@ struct EvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOption
 };
 
 // A learingRule for improving NNs with the help of algorithms oriented by the evolution
-class EvolutionLearningRule : public AbstractEvolutionLearningRule
+class EvolutionLearningRule : public AbstractEvolutionLearningRule, public LightBulb::Observable<EvolutionLearningEvents, EvolutionLearningRule>
 {
 protected:
 	std::vector<AbstractEvolutionObject*> notUsedObjects;

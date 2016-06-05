@@ -14,6 +14,7 @@
 
 // Forward declarations
 
+
 struct AbstractLearningRuleOptions
 {
 	// Sets the maximum iterations per try
@@ -37,6 +38,8 @@ struct AbstractLearningRuleOptions
 	}
 	virtual ~AbstractLearningRuleOptions() {}
 };
+
+
 
 // A LearningRule is used to improve a AbstractNeuralNetwork
 class AbstractLearningRule 

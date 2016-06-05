@@ -160,6 +160,9 @@
     <ClCompile Include="Windows\AbstractSubAppFactory.cpp" />
     <ClCompile Include="Windows\AbstractSubAppWindow.cpp" />
     <ClCompile Include="Windows\AbstractWindow.cpp" />
+    <ClCompile Include="Windows\EvolutionAnalyzerController.cpp" />
+    <ClCompile Include="Windows\EvolutionAnalyzerFactory.cpp" />
+    <ClCompile Include="Windows\EvolutionAnalyzerWindow.cpp" />
     <ClCompile Include="Windows\LearningStateController.cpp" />
     <ClCompile Include="Windows\LearningStateWindow.cpp" />
     <ClCompile Include="Windows\LearningStateFactory.cpp" />
@@ -218,6 +221,9 @@
     <ClInclude Include="Windows\AbstractSubAppWindow.hpp" />
     <ClInclude Include="Windows\AbstractWindow.hpp" />
     <ClInclude Include="Windows\AbstractSubAppFactory.hpp" />
+    <ClInclude Include="Windows\EvolutionAnalyzerController.hpp" />
+    <ClInclude Include="Windows\EvolutionAnalyzerFactory.hpp" />
+    <ClInclude Include="Windows\EvolutionAnalyzerWindow.hpp" />
     <ClInclude Include="Windows\LearningStateController.hpp" />
     <ClInclude Include="Windows\LearningStateWindow.hpp" />
     <ClInclude Include="Windows\LearningStateFactory.hpp" />

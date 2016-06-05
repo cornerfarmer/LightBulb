@@ -39,3 +39,8 @@ LearningState* AbstractLearningRuleTrainingPlan::getLearningState()
 {
 	return learningRule->getLearningState();
 }
+
+AbstractLearningRule* AbstractLearningRuleTrainingPlan::getLearningRule()
+{
+	return learningRule.get();
+}

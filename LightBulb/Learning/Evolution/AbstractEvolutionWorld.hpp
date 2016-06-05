@@ -15,12 +15,14 @@
 class EvolutionLearningRule;
 class AbstractEvolutionObject;
 
+typedef std::vector<std::pair<double, AbstractEvolutionObject*>> Highscore;
+
 // This class should describe a world which contains multiple evolution objects.
 // The evolution world has to simulate the environment which surrounds its evolution objects.
 class AbstractEvolutionWorld : public AbstractLoggable
 {
 private:
-	std::unique_ptr<std::vector<std::pair<double, AbstractEvolutionObject*>>> currentHighscore;
+	Highscore currentHighscore;
 protected:
 	LearningState* learningState;
 public:
@@ -34,7 +36,7 @@ public:
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual bool doSimulationStep() = 0;
 	// Returns a list of all current evolution objects ordered by their score
-	virtual std::vector<std::pair<double, AbstractEvolutionObject*>>* getHighscoreList();
+	virtual Highscore* getHighscoreList();
 	// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)
 	virtual double getScore(AbstractEvolutionObject* object) = 0;
 	//

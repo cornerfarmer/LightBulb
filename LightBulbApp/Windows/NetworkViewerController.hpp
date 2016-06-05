@@ -26,6 +26,7 @@ public:
 	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 	static std::string getLabel();
+
 };
 
 #endif

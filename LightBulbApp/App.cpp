@@ -9,6 +9,7 @@
 #include "Windows/SimulatorFactory.hpp"
 #include "Windows/LoggerFactory.hpp"
 #include "Windows/NetworkViewerFactory.hpp"
+#include "Windows/EvolutionAnalyzerFactory.hpp"
 
 bool App::OnInit()
 {
@@ -21,11 +22,13 @@ bool App::OnInit()
 	SimulatorFactory* simulatorFactory = new SimulatorFactory(neuralNetworkRepository);
 	LearningStateFactory* learningStateFactory = new LearningStateFactory(trainingPlanRepository);
 	NetworkViewerFactory* networkViewerFactory = new NetworkViewerFactory(neuralNetworkRepository);
+	EvolutionAnalyzerFactory* evolutionAnalyzerFactory = new EvolutionAnalyzerFactory(trainingPlanRepository);
 
 	trainingController->addSubAppFactory(loggerFactory);
 	trainingController->addSubAppFactory(simulatorFactory);
 	trainingController->addSubAppFactory(learningStateFactory);
 	trainingController->addSubAppFactory(networkViewerFactory);
+	trainingController->addSubAppFactory(evolutionAnalyzerFactory);
 
 	trainingController->show();
 	return true;

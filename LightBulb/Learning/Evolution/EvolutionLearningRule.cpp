@@ -105,7 +105,7 @@ bool EvolutionLearningRule::doIteration()
 
 	if (getOptions()->world->getPopulationSize()>0) {
 		// Extract all current objects ordered by their score
-		std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore = getOptions()->world->getHighscoreList();
+		Highscore* highscore = getOptions()->world->getHighscoreList();
 		// This vector will contain all objects for the next generation
 		std::vector<AbstractEvolutionObject*> newObjectVector;
 		std::map<AbstractEvolutionObject*, int> operationCounter;
@@ -171,7 +171,7 @@ bool EvolutionLearningRule::doIteration()
 	}
 
 	// Extract all current objects ordered by their score
-	std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore = getOptions()->world->getHighscoreList();
+	Highscore* highscore = getOptions()->world->getHighscoreList();
 
 	int totalNeuronCount = 0;
 	for (int i = 0; i < highscore->size(); i++)
@@ -179,6 +179,8 @@ bool EvolutionLearningRule::doIteration()
 		totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
 	}
 	learningState->addData(DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
+
+	throwEvent(EVT_EL_EVOLUTIONSTEP, this);
 
 	bool exit = false;
 	// 3.Step: Go through all exit conditions
