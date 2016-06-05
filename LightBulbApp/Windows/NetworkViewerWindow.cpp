@@ -3,6 +3,7 @@
 #include "NetworkViewerController.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
+#include <wx/dataview.h>
 
 BEGIN_EVENT_TABLE(NetworkViewerWindow, wxFrame)
 EVT_PAINT(NetworkViewerWindow::paintEvent)
@@ -18,7 +19,7 @@ END_EVENT_TABLE()
 NetworkViewerWindow::NetworkViewerWindow(NetworkViewerController* controller_, AbstractWindow* parent)
 	:AbstractSubAppWindow(controller_, NetworkViewerController::getLabel(), parent)
 {
-
+	selectedNeuronIndex = -1;
 	selectedNetwork = NULL;
 
 	sizer = new wxBoxSizer(wxVERTICAL);
@@ -31,13 +32,39 @@ NetworkViewerWindow::NetworkViewerWindow(NetworkViewerController* controller_, A
 	header->Add(neuralNetworksChoice);
 	sizer->Add(header, 0, wxALL | wxALIGN_RIGHT, 7);
 
+	wxBoxSizer* content = new wxBoxSizer(wxHORIZONTAL);
+
 	panel = new wxScrolledWindow(this);
 	
 	panel->SetMinSize(wxSize(300, 300));
 	panel->Bind(wxEVT_SCROLLWIN_THUMBTRACK, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
 	panel->Bind(wxEVT_SCROLLWIN_THUMBRELEASE, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_LEFT_UP, wxMouseEventFunction(&NetworkViewerWindow::panelClick), this);
+	content->Add(panel, 1, wxEXPAND);
 
-	sizer->Add(panel, 1, wxEXPAND);
+	wxBoxSizer* details = new wxBoxSizer(wxVERTICAL);
+
+	details->Add(new wxStaticText(this, wxID_ANY, "Afferent edges:"), 0, wxEXPAND | wxALL, 7);
+
+	afferentEdgesList = new wxDataViewListCtrl(this, wxID_ANY);
+	afferentEdgesList->AppendTextColumn("Layer")->SetMinWidth(10);
+	afferentEdgesList->AppendTextColumn("Neuron")->SetMinWidth(10);
+	afferentEdgesList->AppendTextColumn("Weight")->SetMinWidth(50);
+	details->Add(afferentEdgesList, 1, wxEXPAND);
+
+	details->Add(new wxStaticText(this, wxID_ANY, "Efferent edges:"), 0, wxEXPAND | wxALL, 7);
+
+	efferentEdgesList = new wxDataViewListCtrl(this, wxID_ANY);
+	efferentEdgesList->AppendTextColumn("Layer")->SetMinWidth(10);
+	efferentEdgesList->AppendTextColumn("Neuron")->SetMinWidth(10);
+	efferentEdgesList->AppendTextColumn("Weight")->SetMinWidth(50);
+	details->Add(efferentEdgesList, 1, wxEXPAND);
+
+	details->SetMinSize(300, 100);
+
+	content->Add(details, 0, wxEXPAND);
+
+	sizer->Add(content, 1, wxEXPAND);
 
 	SetSizerAndFit(sizer);
 
@@ -48,6 +75,61 @@ void NetworkViewerWindow::scrollEvent(wxScrollWinEvent& event)
 {
 	paintNow();
 	event.Skip();
+}
+
+void NetworkViewerWindow::panelClick(wxMouseEvent& event)
+{
+	layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
+	for (int l = 0; l < layerCount; l++)
+	{
+		int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
+		for (int n = 0; n < neuronCount; n++)
+		{
+			if (std::sqrt(std::pow(event.GetX() - getXPos(l), 2) + std::pow(event.GetY() - getYPos(n, neuronCount), 2)) < NEURON_RAD)
+			{
+				selectedNeuronIndex = n;
+				selectedLayerIndex = l;
+				refreshDetail();
+				return;
+			}
+		}
+	}
+}
+
+
+void NetworkViewerWindow::refreshDetail()
+{
+	if (selectedNeuronIndex != -1)
+	{
+		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
+		bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
+
+		afferentEdgesList->DeleteAllItems();
+		if (selectedLayerIndex > 0)
+		{
+			for (int n = usesBiasNeuron; n < (*weights)[selectedLayerIndex - 1].cols(); n++)
+			{
+				wxVector<wxVariant> data;
+				data.push_back(wxVariant(std::to_string(selectedLayerIndex - 1)));
+				data.push_back(wxVariant(std::to_string(n - usesBiasNeuron)));
+				data.push_back(wxVariant(std::to_string((*weights)[selectedLayerIndex - 1](selectedNeuronIndex, n))));
+				afferentEdgesList->AppendItem(data);
+			}
+		}
+
+		efferentEdgesList->DeleteAllItems();
+		if (selectedLayerIndex < weights->size())
+		{
+			for (int n = 0; n < (*weights)[selectedLayerIndex].rows(); n++)
+			{
+				wxVector<wxVariant> data;
+				data.push_back(wxVariant(std::to_string(selectedLayerIndex + 1)));
+				data.push_back(wxVariant(std::to_string(n)));
+				data.push_back(wxVariant(std::to_string((*weights)[selectedLayerIndex](n, selectedNeuronIndex + usesBiasNeuron))));
+				efferentEdgesList->AppendItem(data);
+			}
+		}
+	}
 }
 
 void NetworkViewerWindow::networkChanged(wxCommandEvent& event)
@@ -123,7 +205,7 @@ void NetworkViewerWindow::render(wxDC& dc)
 					double bias = (*weights)[l - 1](n, 0);
 					wxCoord textWidth, textHeight;
 					dc.GetTextExtent(std::to_string(bias), &textWidth, &textHeight);
-					dc.DrawText(std::to_string(bias), getXPos(l) - textWidth / 2, getYPos(n, neuronCount) - textHeight / 2);
+					dc.DrawText(std::to_string(-bias), getXPos(l) - textWidth / 2, getYPos(n, neuronCount) - textHeight / 2);
 				}
 			}
 		}
