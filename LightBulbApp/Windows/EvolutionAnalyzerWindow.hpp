@@ -9,6 +9,7 @@
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"
 #include <Logging/AbstractLogger.hpp>
+#include <Learning/Evolution/AbstractEvolutionObject.hpp>
 
 wxDECLARE_EVENT(EAW_EVT_REFRESH, wxThreadEvent);
 
@@ -23,6 +24,7 @@ private:
 	EvolutionAnalyzerController* getController();
 	wxDataViewListCtrl* highscoreList;
 	void refresh(wxThreadEvent& event);
+	std::string getEvolutionSourceAsString(EvolutionSource source);
 public:
 	EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent = NULL);
 	void trainingPlanChanged(wxCommandEvent& event);

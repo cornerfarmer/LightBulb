@@ -30,6 +30,7 @@ void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>* new
 			mutationAlgorithm->execute(unusedObject);
 			newObjectVector->push_back(unusedObject);
 		}
+		newObjectVector->back()->setEvolutionSource(Mutation);
 		(*counter)[*object]--;
 	}
 }

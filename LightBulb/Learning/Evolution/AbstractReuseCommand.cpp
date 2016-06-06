@@ -19,6 +19,7 @@ void AbstractReuseCommand::execute(std::vector<AbstractEvolutionObject*>* newObj
 		{
 			newObjectVector->push_back(getUnusedObject(*object, notUsedObjects));
 		}
+		newObjectVector->back()->setEvolutionSource(Reuse);
 		(*counter)[*object]--;
 	}
 }

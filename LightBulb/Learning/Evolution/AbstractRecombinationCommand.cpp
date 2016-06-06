@@ -47,5 +47,6 @@ void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>
 				newObjectVector->push_back(secondParent);
 			}
 		}
+		newObjectVector->back()->setEvolutionSource(Recombination);
 	}
 }

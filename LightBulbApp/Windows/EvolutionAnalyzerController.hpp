@@ -10,6 +10,7 @@
 #include "EvolutionAnalyzerWindow.hpp"
 #include "AbstractSubApp.hpp"
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
+#include <Learning/Evolution/AbstractEvolutionObject.hpp>
 
 // Forward declarations
 class TrainingWindow;
@@ -22,7 +23,7 @@ private:
 	std::unique_ptr<EvolutionAnalyzerWindow> window;
 	TrainingPlanRepository* trainingPlanRepository;
 	AbstractEvolutionTrainingPlan* selectedTrainingPlan;
-	Highscore currentHighscore;
+	std::vector<std::pair<EvolutionSource, double>> currentState;
 protected:
 	void prepareClose();
 public:
@@ -33,7 +34,7 @@ public:
 	static std::string getLabel();
 	void selectTrainingPlan(int trainingPlanIndex);
 	void evolutionStepCompleted(EvolutionLearningRule* evolutionLearningRule);
-	Highscore* getCurrentHighscore();
+	std::vector<std::pair<EvolutionSource, double>>* getCurrentState();
 };
 
 #endif

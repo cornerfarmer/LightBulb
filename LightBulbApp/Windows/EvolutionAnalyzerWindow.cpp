@@ -55,14 +55,31 @@ void EvolutionAnalyzerWindow::refreshTrainingPlans()
 
 void EvolutionAnalyzerWindow::refresh(wxThreadEvent& event)
 {
-	Highscore* highscore = getController()->getCurrentHighscore();
+	auto state = getController()->getCurrentState();
 	
 	highscoreList->DeleteAllItems();
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	for (auto entry = state->begin(); entry != state->end(); entry++)
 	{
 		wxVector<wxVariant> data;
-		data.push_back(wxVariant(std::to_string(0)));
-		data.push_back(wxVariant(std::to_string(entry->first)));
+		data.push_back(wxVariant(getEvolutionSourceAsString(entry->first)));
+		data.push_back(wxVariant(std::to_string(entry->second)));
 		highscoreList->AppendItem(data);
+	}
+}
+
+std::string EvolutionAnalyzerWindow::getEvolutionSourceAsString(EvolutionSource source)
+{
+	switch (source)
+	{
+	case Creation:
+		return "Creation";
+	case Mutation:
+		return "Mutation";
+	case Recombination:
+		return "Recombination";
+	case Reuse:
+		return "Reuse";
+	default:
+		return "";
 	}
 }

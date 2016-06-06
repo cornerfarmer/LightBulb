@@ -31,6 +31,16 @@ void AbstractEvolutionObject::setMutationStrength(std::vector<double>* newMutati
 	mutationStrength = *newMutationStrength;
 }
 
+void AbstractEvolutionObject::setEvolutionSource(EvolutionSource evolutionSource_)
+{
+	evolutionSource = evolutionSource_;
+}
+
+EvolutionSource AbstractEvolutionObject::getEvolutionSource()
+{
+	return evolutionSource;
+}
+
 void AbstractEvolutionObject::resizeMutationStrength(int newSize)
 {
 	mutationStrength.resize(newSize);

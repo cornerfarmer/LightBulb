@@ -40,7 +40,7 @@ EvolutionAnalyzerWindow* EvolutionAnalyzerController::getWindow()
 
 std::string EvolutionAnalyzerController::getLabel()
 {
-	return "Evolution highscore";
+	return "Evolution analyzer";
 }
 
 void EvolutionAnalyzerController::selectTrainingPlan(int trainingPlanIndex)
@@ -54,12 +54,21 @@ void EvolutionAnalyzerController::selectTrainingPlan(int trainingPlanIndex)
 
 void EvolutionAnalyzerController::evolutionStepCompleted(EvolutionLearningRule* evolutionLearningRule)
 {
-	currentHighscore = *evolutionLearningRule->getWorld()->getHighscoreList();
+	auto highscore = evolutionLearningRule->getWorld()->getHighscoreList();
+	currentState.resize(highscore->size());
+	
+	int i = 0;
+	for (auto entry = highscore->begin(); entry != highscore->end(); entry++, i++)
+	{
+		currentState[i].first = entry->second->getEvolutionSource();
+		currentState[i].second = entry->first;
+	}
+
 	wxThreadEvent evt(EAW_EVT_REFRESH);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }
 
-Highscore* EvolutionAnalyzerController::getCurrentHighscore()
+std::vector<std::pair<EvolutionSource, double>>* EvolutionAnalyzerController::getCurrentState()
 {
-	return &currentHighscore;
+	return &currentState;
 }
