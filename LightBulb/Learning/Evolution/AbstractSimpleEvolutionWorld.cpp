@@ -51,3 +51,8 @@ void AbstractSimpleEvolutionWorld::clearPopulation()
 {
 	objects.clear();
 }
+
+void AbstractSimpleEvolutionWorld::releaseAllObjects()
+{
+	objects.clear();
+}

@@ -102,6 +102,8 @@ public:
 	virtual bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) = 0;
 
 	virtual int getNeuronCount() = 0;
+
+	virtual AbstractNetworkTopology* clone() = 0;
 };
 
 

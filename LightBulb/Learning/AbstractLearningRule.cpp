@@ -11,6 +11,7 @@
 #include <vector>
 #include <limits>
 #include <list>
+#include "AbstractLearningResult.hpp"
 
 AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 {
@@ -21,7 +22,7 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 	pauseRequest = false;
 }
 
-bool AbstractLearningRule::start()
+AbstractLearningResult* AbstractLearningRule::start()
 {
 	// Let the learning algorithm do stuff before starting
 	initializeStartLearningAlgoritm();
@@ -32,7 +33,13 @@ bool AbstractLearningRule::start()
 	return learn(false);
 }
 
-bool AbstractLearningRule::learn(bool resume)
+void AbstractLearningRule::fillDefaultResults(AbstractLearningResult* learningResult)
+{
+	learningResult->learningState = learningState;
+	learningResult->succeeded = hasLearningSucceeded();
+}
+
+AbstractLearningResult* AbstractLearningRule::learn(bool resume)
 {
 	initializeLearningAlgoritm();
 
@@ -79,10 +86,10 @@ bool AbstractLearningRule::learn(bool resume)
 
 	doCalculationAfterLearningProcess();
 
-	return hasLearningSucceeded();
+	return getLearningResult();
 }
 
-bool AbstractLearningRule::resume()
+AbstractLearningResult* AbstractLearningRule::resume()
 {
 	initializeResumeLearningAlgoritm();
 

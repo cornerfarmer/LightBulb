@@ -35,6 +35,7 @@ protected:
 	bool hasLearningSucceeded();
 	void initialize();
 	bool exitConditionReached;
+	AbstractLearningResult* getLearningResult();
 public:
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
@@ -42,6 +43,7 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	AbstractEvolutionLearningRule* getFirstLearningRule();
 	AbstractEvolutionLearningRule* getSecondLearningRule();
+
 };
 
 #include "IO/BipartiteEvolutionLearningRuleIO.hpp"

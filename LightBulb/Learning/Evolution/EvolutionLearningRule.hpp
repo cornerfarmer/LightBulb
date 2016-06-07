@@ -62,6 +62,7 @@ protected:
 	void doCalculationAfterLearningProcess();
 	void setLoggerToUsedObjects();
 	bool exitConditionReached;
+	AbstractLearningResult* getLearningResult();
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRule(EvolutionLearningRuleOptions* options_);

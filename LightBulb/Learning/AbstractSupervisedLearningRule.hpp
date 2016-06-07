@@ -114,6 +114,8 @@ protected:
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 
 	AbstractNetworkTopology* getCurrentNetworkTopology();
+
+	AbstractLearningResult* getLearningResult();
 public:	
 	AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions& options_);
 	AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions* options_);

@@ -38,7 +38,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	options.exitConditions.push_back(new ScoreCondition(-0.001));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATION_COUNT));
 	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 10));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
 

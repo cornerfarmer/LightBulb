@@ -4,6 +4,11 @@
 #include <iostream>
 
 
+AbstractLearningResult* BipartiteEvolutionLearningRule::getLearningResult()
+{
+	return getOptions()->learningRule1->getLearningResult();
+}
+
 BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_)
 	: AbstractEvolutionLearningRule(new BipartiteEvolutionLearningRuleOptions(options_))
 {

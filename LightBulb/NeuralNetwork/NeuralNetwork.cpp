@@ -16,6 +16,8 @@ NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	networkTopology.reset(networkTopology_);
 
 	state = NN_STATE_READY;
+
+	name = "NoName";
 }
 
 void NeuralNetwork::calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
@@ -76,7 +78,7 @@ AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
 
 std::string NeuralNetwork::getName()
 {
-	return "MyName";
+	return name;
 }
 
 std::time_t NeuralNetwork::getCreationDate()
@@ -92,4 +94,16 @@ NeuralNetworkState NeuralNetwork::getState()
 void NeuralNetwork::setState(NeuralNetworkState newState)
 {
 	state = newState;
+}
+
+AbstractNeuralNetwork* NeuralNetwork::clone()
+{
+	NeuralNetwork* clone = new NeuralNetwork(networkTopology->clone());
+	clone->name = name + " - clone";
+	return clone;
+}
+
+void NeuralNetwork::setName(std::string name_)
+{
+	name = name_;
 }

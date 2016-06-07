@@ -11,6 +11,8 @@
 #include <cereal/types/polymorphic.hpp>
 #include "PreferencesController.hpp"
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
+#include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
+#include <Learning/EvolutionLearningResult.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_)
@@ -138,6 +140,13 @@ void TrainingController::trainingPlanPaused(AbstractTrainingPlan* trainingPlan)
 
 void TrainingController::trainingPlanFinished(AbstractTrainingPlan* trainingPlan)
 {
+	if (dynamic_cast<AbstractEvolutionTrainingPlan*>(trainingPlan))
+	{
+		EvolutionLearningResult* learningResult = static_cast<EvolutionLearningResult*>(static_cast<AbstractEvolutionTrainingPlan*>(trainingPlan)->getLearningResult());
+		AbstractNeuralNetwork* clone = learningResult->bestObjects.front()->getNeuralNetwork()->clone();
+		clone->setName("Result of " + trainingPlan->getName());
+		neuralNetworkRepository->Add(clone);
+	}
 	wxThreadEvent evt(TW_EVT_REFRESH_TP);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }

@@ -32,6 +32,8 @@ public:
 	void setWidthOfRBFNeuron(int neuronIndex, double newWidth);
 
 	double getWidthOfRBFNeuron(int neuronIndex);
+
+	AbstractNetworkTopology* clone();
 };
 
 #include "IO/RBFNetworkIO.hpp"

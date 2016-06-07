@@ -27,6 +27,7 @@ class NeuralNetwork : public AbstractNeuralNetwork
 private:
 	std::unique_ptr<AbstractNetworkTopology> networkTopology;
 	NeuralNetworkState state;
+	std::string name;
 public:
 	NeuralNetwork(AbstractNetworkTopology* networkTopology_);	
 	// Calculates from the given input and activation order the output from neural network (If a not-NULL output value map or a netInput value map is given, the method will fill them)
@@ -37,6 +38,8 @@ public:
 	std::time_t getCreationDate();
 	NeuralNetworkState getState();
 	void setState(NeuralNetworkState newState);
+	AbstractNeuralNetwork* clone();
+	void setName(std::string name);
 };
 
 #include "IO/NeuralNetworkIO.hpp"

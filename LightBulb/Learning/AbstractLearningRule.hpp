@@ -15,6 +15,8 @@
 // Forward declarations
 
 
+struct AbstractLearningResult;
+
 struct AbstractLearningRuleOptions
 {
 	// Sets the maximum iterations per try
@@ -71,14 +73,18 @@ protected:
 
 	virtual bool hasLearningSucceeded() = 0;
 
-	bool learn(bool resume);
+	virtual AbstractLearningResult* getLearningResult() = 0;
+
+	virtual void fillDefaultResults(AbstractLearningResult* learningResult);
+
+	AbstractLearningResult* learn(bool resume);
 public:	
 	AbstractLearningRule(AbstractLearningRuleOptions* options_);
 	// Execute the learning process on the given AbstractNeuralNetwork
 	// If the learning process succeded the method will return true
-	bool start();
+	AbstractLearningResult* start();
 
-	bool resume();
+	AbstractLearningResult* resume();
 
 	void sendPauseRequest();
 	

@@ -7,6 +7,7 @@
 // Library includes
 #include <iomanip>
 #include <vector>
+#include "SupervisedLearningResult.hpp"
 
 AbstractSupervisedLearningRule::AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions& options_)
 	: AbstractLearningRule(new AbstractSupervisedLearningRuleOptions(options_))
@@ -189,6 +190,17 @@ void AbstractSupervisedLearningRule::rateLearning()
 AbstractNetworkTopology* AbstractSupervisedLearningRule::getCurrentNetworkTopology()
 {
 	return getOptions()->neuralNetwork->getNetworkTopology();
+}
+
+AbstractLearningResult* AbstractSupervisedLearningRule::getLearningResult()
+{
+	SupervisedLearningResult* learningResult = new SupervisedLearningResult();
+	fillDefaultResults(learningResult);
+	learningResult->quality = totalError;
+	learningResult->qualityLabel = "Total error";
+	learningResult->trainedNetwork = getOptions()->neuralNetwork;
+	
+	return learningResult;
 }
 
 bool AbstractSupervisedLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)

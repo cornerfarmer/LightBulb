@@ -293,6 +293,13 @@ int LayeredNetwork::getNeuronCount()
 	return neuronCount;
 }
 
+AbstractNetworkTopology* LayeredNetwork::clone()
+{
+	LayeredNetwork* clone = new LayeredNetwork(*options);
+	clone->copyWeightsFrom(*this);
+	return clone;
+}
+
 void LayeredNetwork::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
 {
 	weights[layerIndex - 1] = newWeights;

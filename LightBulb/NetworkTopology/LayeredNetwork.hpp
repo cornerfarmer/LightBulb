@@ -181,6 +181,8 @@ public:
 	bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex);
 
 	int getNeuronCount();
+
+	AbstractNetworkTopology* clone();
 };
 
 #include "IO/LayeredNetworkIO.hpp"

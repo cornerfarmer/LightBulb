@@ -17,7 +17,10 @@ AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
 void AbstractSingleNNTrainingPlan::initializeStart()
 {
 	if (network == NULL)
+	{
 		network = createNeuralNetwork();
+		network->setName("trained by " + getName());
+	}
 	network->setState(NN_STATE_TRAINED);
 }
 

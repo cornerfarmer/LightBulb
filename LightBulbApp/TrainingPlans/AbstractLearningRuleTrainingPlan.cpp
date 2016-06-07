@@ -7,11 +7,11 @@ void AbstractLearningRuleTrainingPlan::run(bool initial)
 	if (initial)
 	{
 		learningRule.reset(createLearningRate());
-		bool success = learningRule->start();
+		learningResult.reset(learningRule->start());
 	} 
 	else
 	{
-		learningRule->resume();
+		learningResult.reset(learningRule->resume());
 	}
 
 	if (isPausing())
@@ -38,6 +38,11 @@ std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels()
 LearningState* AbstractLearningRuleTrainingPlan::getLearningState()
 {
 	return learningRule->getLearningState();
+}
+
+AbstractLearningResult* AbstractLearningRuleTrainingPlan::getLearningResult()
+{
+	return learningResult.get();
 }
 
 AbstractLearningRule* AbstractLearningRuleTrainingPlan::getLearningRule()

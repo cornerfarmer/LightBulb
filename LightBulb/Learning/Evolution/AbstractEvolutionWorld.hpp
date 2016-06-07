@@ -41,7 +41,9 @@ public:
 	virtual double getScore(AbstractEvolutionObject* object) = 0;
 	//
 	virtual double getRealScore(AbstractEvolutionObject* object) { return getScore(object); }
-	virtual void initializeForLearning() {};
+	virtual void initializeForLearning() {}
+
+	virtual void releaseAllObjects() = 0;
 	// Reset the whole world (This method can for instance reset the environment or the current evolution objects...)
 	virtual void reset() = 0;
 

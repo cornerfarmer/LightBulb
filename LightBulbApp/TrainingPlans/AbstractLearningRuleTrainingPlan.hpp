@@ -9,6 +9,7 @@
 #include <Learning/BackpropagationLearningRule.hpp>
 #include <IO/IOStorage.hpp>
 #include "IO/UseParentSerialization.hpp"
+#include "Learning/AbstractLearningResult.hpp"
 
 // Library includes
 
@@ -22,6 +23,7 @@ class AbstractLearningRuleTrainingPlan : public AbstractTrainingPlan
 	friend void save(Archive& archive, AbstractLearningRuleTrainingPlan const& trainingPlan);
 private:
 	bool pauseRequested;
+	std::unique_ptr<AbstractLearningResult> learningResult;
 	std::unique_ptr<AbstractLearningRule> learningRule;
 protected:
 	virtual AbstractLearningRule* createLearningRate() = 0;
@@ -31,6 +33,7 @@ protected:
 public:
 	std::vector<std::string> getDataSetLabels();
 	LearningState* getLearningState();
+	AbstractLearningResult* getLearningResult();
 	AbstractLearningRule* getLearningRule();
 };
 

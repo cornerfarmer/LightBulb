@@ -1273,5 +1273,8 @@
     </ClInclude>
     <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\NetworkGrowMutationAlgorithm.hpp" />
+    <ClInclude Include="Learning\AbstractLearningResult.hpp" />
+    <ClInclude Include="Learning\SupervisedLearningResult.hpp" />
+    <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
   </ItemGroup>
 </Project>

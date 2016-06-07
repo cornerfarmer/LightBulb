@@ -15,6 +15,7 @@ void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
 {
 	archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
 	archive(cereal::make_nvp("state", (int)neuralNetwork.state));
+	archive(cereal::make_nvp("name", neuralNetwork.name));
 }
 
 namespace cereal
@@ -28,6 +29,7 @@ namespace cereal
 			ar(cereal::make_nvp("networkTopology", networkTopology));
 			construct(networkTopology.release());
 			ar(cereal::make_nvp("state", construct->state));
+			ar(cereal::make_nvp("name", construct->name));
 		}
 	};
 }

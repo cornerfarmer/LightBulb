@@ -18,6 +18,23 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <Learning/EvolutionLearningResult.hpp>
+
+AbstractLearningResult* EvolutionLearningRule::getLearningResult()
+{
+	EvolutionLearningResult* learningResult = new EvolutionLearningResult();
+	fillDefaultResults(learningResult);
+	Highscore* highscore = getOptions()->world->getHighscoreList();
+	learningResult->quality = highscore->front().first;
+	learningResult->qualityLabel = "Best fitness";
+	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	{
+		learningResult->bestObjects.push_back(std::unique_ptr<AbstractEvolutionObject>(entry->second));
+	}
+	getOptions()->world->releaseAllObjects();
+	
+	return learningResult;
+}
 
 EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 	: AbstractEvolutionLearningRule(new EvolutionLearningRuleOptions(options_))

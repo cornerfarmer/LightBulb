@@ -826,6 +826,7 @@
     <ClInclude Include="IO\SynapticExporter.hpp" />
     <ClInclude Include="IO\UsedArchives.hpp" />
     <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp" />
+    <ClInclude Include="Learning\AbstractLearningResult.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -851,6 +852,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -1072,6 +1074,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\SupervisedLearningResult.hpp" />
     <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

@@ -88,3 +88,11 @@ double RBFNetwork::getWidthOfRBFNeuron(int neuronIndex)
 {
 	return neuronWidths(neuronIndex);
 }
+
+AbstractNetworkTopology* RBFNetwork::clone()
+{
+	RBFNetwork* clone = new RBFNetwork();
+	clone->copyWeightsFrom(*this);
+	clone->neuronWidths = neuronWidths;
+	return clone;
+}

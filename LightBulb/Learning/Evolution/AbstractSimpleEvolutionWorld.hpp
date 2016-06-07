@@ -38,6 +38,7 @@ public:
 	void reset();
 	int getPopulationSize();
 	void clearPopulation();
+	void releaseAllObjects();
 };
 
 #include "IO/AbstractSimpleEvolutionWorldIO.hpp"
