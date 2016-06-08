@@ -39,7 +39,14 @@ NetworkViewerWindow::NetworkViewerWindow(NetworkViewerController* controller_, A
 	panel->SetMinSize(wxSize(300, 300));
 	panel->Bind(wxEVT_SCROLLWIN_THUMBTRACK, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
 	panel->Bind(wxEVT_SCROLLWIN_THUMBRELEASE, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_SCROLLWIN_PAGEDOWN, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_SCROLLWIN_PAGEUP, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_SCROLLWIN_BOTTOM, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_SCROLLWIN_TOP, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_SCROLLWIN_LINEDOWN, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
+	panel->Bind(wxEVT_SCROLLWIN_LINEUP, wxScrollWinEventFunction(&NetworkViewerWindow::scrollEvent), this);
 	panel->Bind(wxEVT_LEFT_UP, wxMouseEventFunction(&NetworkViewerWindow::panelClick), this);
+
 	content->Add(panel, 1, wxEXPAND);
 
 	wxBoxSizer* details = new wxBoxSizer(wxVERTICAL);
@@ -79,18 +86,22 @@ void NetworkViewerWindow::scrollEvent(wxScrollWinEvent& event)
 
 void NetworkViewerWindow::panelClick(wxMouseEvent& event)
 {
-	layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
-	for (int l = 0; l < layerCount; l++)
+	if (selectedNetwork)
 	{
-		int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
-		for (int n = 0; n < neuronCount; n++)
+		layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
+		for (int l = 0; l < layerCount; l++)
 		{
-			if (std::sqrt(std::pow(event.GetX() - getXPos(l), 2) + std::pow(event.GetY() - getYPos(n, neuronCount), 2)) < NEURON_RAD)
+			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
+			for (int n = 0; n < neuronCount; n++)
 			{
-				selectedNeuronIndex = n;
-				selectedLayerIndex = l;
-				refreshDetail();
-				return;
+				if (std::sqrt(std::pow(event.GetX() - getXPos(l), 2) + std::pow(event.GetY() - getYPos(n, neuronCount), 2)) < NEURON_RAD)
+				{
+					selectedNeuronIndex = n;
+					selectedLayerIndex = l;
+					refreshDetail();
+					paintNow();
+					return;
+				}
 			}
 		}
 	}
@@ -198,13 +209,18 @@ void NetworkViewerWindow::render(wxDC& dc)
 			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
 			for (int n = 0; n < neuronCount; n++)
 			{
+				if (selectedLayerIndex == l && selectedNeuronIndex == n)
+					dc.SetPen(*wxGREEN_PEN);
 				dc.DrawCircle(getXPos(l), getYPos(n, neuronCount), NEURON_RAD);
+				if (selectedLayerIndex == l && selectedNeuronIndex == n)
+					dc.SetPen(*wxBLACK_PEN);
 
 				if (usesBiasNeuron && l > 0)
 				{
 					double bias = (*weights)[l - 1](n, 0);
 					wxCoord textWidth, textHeight;
 					dc.GetTextExtent(std::to_string(bias), &textWidth, &textHeight);
+					
 					dc.DrawText(std::to_string(-bias), getXPos(l) - textWidth / 2, getYPos(n, neuronCount) - textHeight / 2);
 				}
 			}
@@ -224,7 +240,11 @@ void NetworkViewerWindow::render(wxDC& dc)
 					int y2 = getYPos(tn, neuronCountNextLayer);
 					float angle = atan((float)(y2 - y1) / (x2 - x1));
 
+					if ((selectedLayerIndex == l && selectedNeuronIndex == fn - usesBiasNeuron) || (selectedLayerIndex == l + 1 && selectedNeuronIndex == tn))
+						dc.SetPen(*wxGREEN_PEN);
 					dc.DrawLine(x1 + NEURON_RAD * std::cos(angle), y1 + NEURON_RAD * std::sin(angle), x2 + NEURON_RAD * std::cos(angle + M_PI), y2 + NEURON_RAD * std::sin(angle + M_PI));
+					if ((selectedLayerIndex == l && selectedNeuronIndex == fn - usesBiasNeuron) || (selectedLayerIndex == l + 1 && selectedNeuronIndex == tn))
+						dc.SetPen(*wxBLACK_PEN);
 
 					dc.DrawRotatedText(std::to_string((*weights)[l](tn, fn)), x1 + WEIGHT_SPACE * std::cos(angle), y1 + WEIGHT_SPACE * std::sin(angle), -1 * angle / M_PI * 180);
 				}
