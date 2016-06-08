@@ -36,7 +36,7 @@ public:
 	// Calculate the Errormap and fills (optional) the given output and netput values map
 	std::unique_ptr<ErrorMap_t> getErrormap(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
 	// Returns the Errormap from the given output vector
-	std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork);
+	virtual std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork);
 	// Calculate the specific error
 	virtual double getSpecificError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
 	// Unfolds the teaching lesson

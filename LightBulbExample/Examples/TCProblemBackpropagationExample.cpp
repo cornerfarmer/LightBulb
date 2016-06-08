@@ -21,7 +21,7 @@ TCProblemBackpropagationExample::TCProblemBackpropagationExample()
 
 AbstractLearningRule* TCProblemBackpropagationExample::createLearningRate()
 {
-	teacher.reset(new TCProblemTeacher());
+	teacher.reset(new TCProblemTeacher(true));
 
 	BackpropagationLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;

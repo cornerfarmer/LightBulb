@@ -2,7 +2,7 @@
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 
 
-TCProblemTeacher::TCProblemTeacher(double weightDecayFac_)
+TCProblemTeacher::TCProblemTeacher(bool calcStrictError, double weightDecayFac_)
 	:Teacher(weightDecayFac_)
 {
 	std::vector<Eigen::MatrixXi> lernExamples(40, Eigen::MatrixXi(4, 4));
@@ -94,7 +94,7 @@ TCProblemTeacher::TCProblemTeacher(double weightDecayFac_)
 		}
 		(*teachingInput).set(0, 0, (i % 10) >= 4);
 
-		addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput, calcStrictError));
 	}
 }
 

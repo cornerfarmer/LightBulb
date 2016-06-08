@@ -11,7 +11,7 @@ class TCProblemTeacher : public Teacher
 private:
 protected:
 public:
-	TCProblemTeacher(double weightDecayFac_ = 0);
+	TCProblemTeacher(bool calcStrictError, double weightDecayFac_ = 0);
 };
 
 

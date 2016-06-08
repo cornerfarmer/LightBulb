@@ -6,10 +6,11 @@
 // Library includes
 #include <exception>
 
-TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
+TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_, bool calcStrictError_)
 {
 	teachingInput.reset(teachingInput_);
 	teachingPattern = teachingPattern_;
+	calcStrictError = calcStrictError_;
 	teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
 }
 
@@ -52,6 +53,57 @@ NeuralNetworkIO<bool>* TeachingLessonBooleanInput::getBooleanTeachingInput()
 std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingPattern()
 {
 	return &teachingPattern;
+}
+
+std::unique_ptr<ErrorMap_t> TeachingLessonBooleanInput::getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork)
+{
+	if (calcStrictError)
+		return AbstractTeachingLesson::getErrormapFromOutputVector(outputVector, neuralNetwork);
+	else
+	{
+		// Create the errorMap
+		std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
+		auto activationFunction = neuralNetwork.getNetworkTopology()->getOutputActivationFunction();
+
+		double half = (activationFunction->getMaximum() - activationFunction->getMinimum()) / 2;
+		double middle = half + activationFunction->getMinimum();
+
+		// Calculate the error values (expected value - real value)
+		for (int timestep = 0; timestep < teachingInput->size(); timestep++)
+		{
+			(*errorMap)[timestep].setZero();
+			if (teachingInput->existsTimestep(timestep))
+			{
+				for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
+				{
+					if (teachingInput->exists(timestep, i))
+					{
+						if (teachingInput->get(timestep, i))
+						{
+							if (outputVector[timestep][i] > middle + half / 2)
+								(*errorMap)[timestep][i] = 0;
+							else
+								(*errorMap)[timestep][i] = activationFunction->getMaximum() - outputVector[timestep][i];
+						}
+						else
+						{
+							if (outputVector[timestep][i] < middle - half / 2)
+								(*errorMap)[timestep][i] = 0;
+							else
+								(*errorMap)[timestep][i] = activationFunction->getMinimum() - outputVector[timestep][i];
+						}
+					}
+				}
+			}
+		}
+
+		/*auto realMap = AbstractTeachingLesson::getErrormapFromOutputVector(outputVector, neuralNetwork);
+
+		if (*realMap != *errorMap)
+		errorMap.release();*/
+
+		return errorMap;
+	}
 }
 
 AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()

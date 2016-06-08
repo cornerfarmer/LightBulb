@@ -33,12 +33,13 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 {
 
 	EvolutionLearningRuleOptions options;
+	options.maxIterationsPerTry = 100000;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 1000);
 	options.exitConditions.push_back(rateDifferenceCondition);
 	options.exitConditions.push_back(new ScoreCondition(-0.001));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATION_COUNT));
 	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 10));
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
 	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(80);
 	options.selectionCommands.push_back(bestSelectionCommand);
 
@@ -46,7 +47,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 
 	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.03);
-	//options.mutationsCommands.push_back(constantMutationCommand);
+	options.mutationsCommands.push_back(constantMutationCommand);
 
 	std::vector<unsigned int> maxNeuronsPerLayer(3);
 	maxNeuronsPerLayer[0] = 16;
@@ -73,16 +74,16 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 	layeredNetworkOptions->useBiasNeuron = true;
 	layeredNetworkOptions->enableShortcuts = true;
 
-	TCProblemTeacher* teacher = new TCProblemTeacher(getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC));
+	TCProblemTeacher* teacher = new TCProblemTeacher(false, getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC));
 	
 	return new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
 }
 
 TCProblemEvolutionExample::TCProblemEvolutionExample()
 {
-	addPreference(new IntegerPreference(PREFERENCE_CREATION_COUNT, 161, 80, 300));
-	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.2, 0, 2));
-	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.002, 0.003, 0.3));
+	addPreference(new IntegerPreference(PREFERENCE_CREATION_COUNT, 200, 80, 300));
+	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.0001, 0, 2));
+	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.005, 0.003, 0.3));
 }
 
 std::string TCProblemEvolutionExample::getDefaultName()
