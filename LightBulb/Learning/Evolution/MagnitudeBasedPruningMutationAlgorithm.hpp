@@ -8,6 +8,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
+#include <Function/RankBasedRandomFunction.hpp>
 
 // Forward declarations
 class AbstractEvolutionObject;
@@ -16,6 +17,7 @@ class AbstractEvolutionObject;
 class MagnitudeBasedPruningMutationAlgorithm : public AbstractMutationAlgorithm
 {
 private:
+	RankBasedRandomFunction randomFunction;
 	int removeNeuronsPerIteration;
 	int removeWeightsPerIteration;
 	bool removeNeuronsByTheirTotalWeight;
