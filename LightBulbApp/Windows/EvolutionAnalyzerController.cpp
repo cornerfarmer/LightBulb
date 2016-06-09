@@ -4,6 +4,7 @@
 #include <Repositories/TrainingPlanRepository.hpp>
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 
+
 EvolutionAnalyzerController::EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
 	:AbstractSubApp(mainApp)
 {

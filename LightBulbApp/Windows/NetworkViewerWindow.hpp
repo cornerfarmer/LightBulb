@@ -33,6 +33,7 @@ private:
 	int getXPos(int layerIndex);
 	int getYPos(int neuronIndex, int neuronCount);
 	void refreshDetail();
+	void eraseBackGround(wxEraseEvent& event);
 protected:
 	DECLARE_EVENT_TABLE();
 public:

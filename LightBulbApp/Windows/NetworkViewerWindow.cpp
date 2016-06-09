@@ -4,10 +4,12 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <wx/dataview.h>
+#include <wx/dcbuffer.h>
 
 BEGIN_EVENT_TABLE(NetworkViewerWindow, wxFrame)
 EVT_PAINT(NetworkViewerWindow::paintEvent)
 EVT_SIZE(NetworkViewerWindow::resize)
+EVT_ERASE_BACKGROUND(NetworkViewerWindow::eraseBackGround)
 END_EVENT_TABLE()
 
 #define BORDER 40
@@ -143,6 +145,11 @@ void NetworkViewerWindow::refreshDetail()
 	}
 }
 
+void NetworkViewerWindow::eraseBackGround(wxEraseEvent& event)
+{
+	event.Skip();
+}
+
 void NetworkViewerWindow::networkChanged(wxCommandEvent& event)
 {
 	selectedNetwork = (*getController()->getNeuralNetworks())[event.GetSelection()].get();
@@ -181,7 +188,8 @@ void NetworkViewerWindow::paintNow()
 {
 	if (panel)
 	{
-		wxClientDC dc(panel);
+		wxClientDC cdc(panel);
+		wxBufferedDC dc(&cdc, cdc.GetSize());
 		render(dc);
 	}
 }
@@ -198,6 +206,9 @@ void NetworkViewerWindow::render(wxDC& dc)
 
 		panel->GetVirtualSize(&width, &height);
 		panel->GetScrollPos(0);
+		static int counter = 0;
+		counter++;
+		dc.DrawText(std::to_string(counter), 100, 100);
 
 
 		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
