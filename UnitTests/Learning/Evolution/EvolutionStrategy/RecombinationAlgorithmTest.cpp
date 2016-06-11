@@ -47,6 +47,28 @@ public:
 		weights2[1](0, 0) = 3;
 	}
 
+	void addExtraNeuronsForDifferentSizes()
+	{
+		weights1[0] = Eigen::MatrixXd(2, 3);
+		weights1[0](0, 0) = 2;
+		weights1[0](0, 1) = -3;
+		weights1[0](0, 2) = 5;
+		weights1[0](1, 0) = -2;
+		weights1[0](1, 1) = 3;
+		weights1[0](1, 2) = -5;
+
+		weights1[1] = Eigen::MatrixXd(1, 2);
+		weights1[1](0, 0) = 10;
+		weights1[1](0, 1) = -1;
+
+		mutationStrength1.push_back(0.1);
+
+		weights2[1] = Eigen::MatrixXd(2, 1);
+		weights2[1](0, 0) = 3;
+		weights2[1](1, 0) = 6;
+
+	}
+
 	virtual ~RecombinationAlgorithmTest()
 	{
 		delete recombinationAlgorithm;
@@ -55,6 +77,7 @@ public:
 
 TEST_F(RecombinationAlgorithmTest, executeWithAverage)
 {
+	srand(1);
 	recombinationAlgorithm = new RecombinationAlgorithm(true, true);
 	recombinationAlgorithm->execute(&object1, &object2);
 
@@ -69,6 +92,7 @@ TEST_F(RecombinationAlgorithmTest, executeWithAverage)
 
 TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
 {
+	srand(1);
 	recombinationAlgorithm = new RecombinationAlgorithm(false, false);
 	recombinationAlgorithm->execute(&object1, &object2);
 
@@ -78,4 +102,49 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
 	EXPECT_NEAR(2, weights1[0](0, 0), 0.00001);
 	EXPECT_NEAR(1, weights1[0](0, 1), 0.00001);
 	EXPECT_NEAR(10, weights1[1](0, 0), 0.00001);
+}
+
+TEST_F(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
+{
+	srand(1);
+	addExtraNeuronsForDifferentSizes();
+
+	recombinationAlgorithm = new RecombinationAlgorithm(true, true);
+	recombinationAlgorithm->execute(&object1, &object2);
+
+	EXPECT_NEAR(1.15, mutationStrength1[0], 0.00001);
+	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
+	EXPECT_NEAR(0.1, mutationStrength1[2], 0.00001);
+
+	EXPECT_NEAR(-2, weights1[0](0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[0](0, 1), 0.00001);
+	EXPECT_NEAR(5, weights1[0](0, 2), 0.00001);
+	EXPECT_NEAR(-2, weights1[0](1, 0), 0.00001);
+	EXPECT_NEAR(3, weights1[0](1, 1), 0.00001);
+	EXPECT_NEAR(-5, weights1[0](1, 2), 0.00001);
+	EXPECT_NEAR(6.5, weights1[1](0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[1](0, 1), 0.00001);
+}
+
+
+TEST_F(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
+{
+	srand(1);
+	addExtraNeuronsForDifferentSizes();
+
+	recombinationAlgorithm = new RecombinationAlgorithm(false, false);
+	recombinationAlgorithm->execute(&object1, &object2);
+	
+	EXPECT_NEAR(0.3, mutationStrength1[0], 0.00001);
+	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);
+	EXPECT_NEAR(0.1, mutationStrength1[2], 0.00001);
+
+	EXPECT_NEAR(2, weights1[0](0, 0), 0.00001);
+	EXPECT_NEAR(1, weights1[0](0, 1), 0.00001);
+	EXPECT_NEAR(5, weights1[0](0, 2), 0.00001);
+	EXPECT_NEAR(-2, weights1[0](1, 0), 0.00001);
+	EXPECT_NEAR(3, weights1[0](1, 1), 0.00001);
+	EXPECT_NEAR(-5, weights1[0](1, 2), 0.00001);
+	EXPECT_NEAR(10, weights1[1](0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[1](0, 1), 0.00001);
 }

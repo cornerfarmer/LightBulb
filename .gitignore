@@ -49,3 +49,4 @@ Release/LightBulb
 *.tmp
 *.exp
 *.tp
+/Experiments/TicTacToe/~$log.xlsx
