@@ -10,6 +10,7 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/types/vector.hpp>
 #include <Learning/LearningState.hpp>
+#include <IO/IOStorage.hpp>
 
 template <class Archive>
 void serialize(Archive& archive, LearningState& learningState)
@@ -31,7 +32,7 @@ namespace cereal
 		{
 			int dataSaveInterval;
 			ar(cereal::make_nvp("dataSaveInterval", dataSaveInterval));
-			construct(dataSaveInterval);
+			construct(*IOStorage<std::map<std::string, bool>>::pop(), dataSaveInterval);
 
 			ar(cereal::make_nvp("dataSets", construct->dataSets));
 			ar(cereal::make_nvp("iterationsNeeded", construct->iterations));

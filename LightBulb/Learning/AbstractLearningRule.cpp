@@ -17,7 +17,7 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 {
 	options.reset(options_);
 
-	learningState.reset(new LearningState(options->dataSaveInterval));
+	learningState.reset(new LearningState(options->disabledDataSets, options->dataSaveInterval));
 
 	pauseRequest = false;
 }

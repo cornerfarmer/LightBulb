@@ -112,7 +112,7 @@ void EvolutionLearningRule::setLogger(AbstractLogger* logger)
 
 bool EvolutionLearningRule::doIteration()
 {
-	if (getOptions()->world->getPopulationSize() > 0)
+	if (!options->disabledDataSets[DATA_SET_FITNESS] && getOptions()->world->getPopulationSize() > 0)
 		learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 
 	// Reset the world for the next generation
@@ -190,12 +190,15 @@ bool EvolutionLearningRule::doIteration()
 	// Extract all current objects ordered by their score
 	Highscore* highscore = getOptions()->world->getHighscoreList();
 
-	int totalNeuronCount = 0;
-	for (int i = 0; i < highscore->size(); i++)
+	if (!options->disabledDataSets[DATA_AVG_NEURON_COUNT])
 	{
-		totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+		int totalNeuronCount = 0;
+		for (int i = 0; i < highscore->size(); i++)
+		{
+			totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+		}
+		learningState->addData(DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
 	}
-	learningState->addData(DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
 
 	throwEvent(EVT_EL_EVOLUTIONSTEP, this);
 
@@ -237,6 +240,7 @@ EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions()
 
 void EvolutionLearningRule::doCalculationAfterLearningProcess()
 {
-	learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
+	if (!options->disabledDataSets[DATA_SET_FITNESS])
+		learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 }
 

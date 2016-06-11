@@ -11,6 +11,7 @@
 template <class Archive>
 void serialize(Archive& archive, AbstractLearningRule& learningRule)
 {
+	IOStorage<std::map<std::string, bool>>::push(&learningRule.options->disabledDataSets);
 	archive(cereal::make_nvp("learningState", learningRule.learningState));
 }
 

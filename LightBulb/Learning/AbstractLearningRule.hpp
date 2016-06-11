@@ -30,6 +30,8 @@ struct AbstractLearningRuleOptions
 
 	int dataSaveInterval;
 
+	std::map<std::string, bool> disabledDataSets;
+
 	AbstractLearningRuleOptions()
 	{
 		maxIterationsPerTry = 10000;

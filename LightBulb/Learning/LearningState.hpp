@@ -31,8 +31,12 @@ public:
 	int tries;
 
 	DataSets dataSets;
-	LearningState(int dataSaveInterval_ = 1)
+	
+	std::map<std::string, bool> disabledDatasets;
+
+	LearningState(std::map<std::string, bool>& disabledDatasets_, int dataSaveInterval_ = 1)
 	{
+		disabledDatasets = disabledDatasets_;
 		successful = 0;
 		quality = 0;
 		iterations = 0;

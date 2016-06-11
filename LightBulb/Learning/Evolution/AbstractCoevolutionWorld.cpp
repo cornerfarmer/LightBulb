@@ -19,7 +19,7 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 {
 	auto results = combiningStrategy->execute(this);
 
-	if (results->size() > 0)
+	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results->size() > 0)
 		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(this));
 
 	if (hallOfFameToChallengeAlgorithm)
@@ -33,7 +33,8 @@ bool AbstractCoevolutionWorld::doSimulationStep()
 	if (hallOfFameToAddAlgorithm)
 		hallOfFameToAddAlgorithm->addMember(bestAI);
 
-	learningState->addData(DATASET_COMP, comparisons / 1000000.0);
+	if (!learningState->disabledDatasets[DATASET_COMP])
+		learningState->addData(DATASET_COMP, comparisons / 1000000.0);
 
 	return false;
 }

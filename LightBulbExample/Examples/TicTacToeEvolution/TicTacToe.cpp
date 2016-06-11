@@ -222,7 +222,8 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 	}
 
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
-	learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, (double)wins / possibleGames);
+	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING])
+		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, (double)wins / possibleGames);
 
 	return wins;
 }

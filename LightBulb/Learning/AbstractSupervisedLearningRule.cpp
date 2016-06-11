@@ -47,7 +47,8 @@ void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 
 bool AbstractSupervisedLearningRule::doIteration()
 {
-	learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
+	if (!options->disabledDataSets[DATA_SET_TRAINING_ERROR])
+		learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
 
 	// If its not the first iteration and the learning process has stopped, skip that try
 	if (learningState->iterations > 1 && learningHasStopped())
@@ -174,7 +175,8 @@ void AbstractSupervisedLearningRule::initializeLearningAlgoritm()
 
 void AbstractSupervisedLearningRule::doCalculationAfterLearningProcess()
 {
-	learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
+	if (!options->disabledDataSets[DATA_SET_TRAINING_ERROR])
+		learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
 }
 
 bool AbstractSupervisedLearningRule::hasLearningSucceeded()

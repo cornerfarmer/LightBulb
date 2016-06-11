@@ -34,7 +34,8 @@ TEST_F(AbstractCoevolutionWorldTest, doSimulationStep)
 	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
 	MockEvolutionObject bestObject;
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	LearningState learningState(5);
+	std::map<std::string, bool> disabledDataSets;
+	LearningState learningState(disabledDataSets, 5);
 	coevolutionWorld->setLearningState(&learningState);
 	highscore.push_back(std::make_pair(42, &bestObject));
 	{

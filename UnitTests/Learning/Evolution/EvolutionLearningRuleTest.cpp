@@ -50,6 +50,7 @@ public:
 		options.selectionCommands.push_back(selectionCommand);
 		options.world = evolutionWorld;
 		options.logger = logger;
+		options.disabledDataSets[DATA_AVG_NEURON_COUNT] = true;
 
 		evolutionLearningRule = new EvolutionLearningRule(options);
 	}
@@ -123,7 +124,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*reuseCommand, execute(testing::_, testing::_, testing::_)).Times(1);
 		EXPECT_CALL(*evolutionWorld, setEvolutionObjects(testing::_)).Times(1);
 
-		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld))).Times(1);
+		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
 		lastIterationExpectation = EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(true));
