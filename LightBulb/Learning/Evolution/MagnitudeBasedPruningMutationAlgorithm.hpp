@@ -21,8 +21,9 @@ private:
 	int removeNeuronsPerIteration;
 	int removeWeightsPerIteration;
 	bool removeNeuronsByTheirTotalWeight;
+	bool useRandomFunction;
 public:
-	MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool removeNeuronsByTheirTotalWeight_ = false);
+	MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_ = true, bool removeNeuronsByTheirTotalWeight_ = false);
 
 	void execute(AbstractEvolutionObject* object1);
 };

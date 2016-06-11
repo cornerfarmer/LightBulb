@@ -4,11 +4,12 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
-MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool removeNeuronsByTheirTotalWeight_)
+MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_, bool removeNeuronsByTheirTotalWeight_)
 {
 	removeNeuronsPerIteration = removeNeuronsPerIteration_;
 	removeWeightsPerIteration = removeWeightsPerIteration_;
 	removeNeuronsByTheirTotalWeight = removeNeuronsByTheirTotalWeight_;
+	useRandomFunction = useRandomFunction_;
 }
 
 void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* object1)
@@ -57,11 +58,13 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 				}
 			}
 		}
+
 		std::sort(neuronRanking.begin(), neuronRanking.end(), std::less<std::tuple<int, int, int>>());
 
-		
-		int selectedIndex = randomFunction.execute(neuronRanking.size());
-		
+		int selectedIndex = 0;
+		if (useRandomFunction) 
+			randomFunction.execute(neuronRanking.size());
+
 		networkTopology->removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
 	}
 
