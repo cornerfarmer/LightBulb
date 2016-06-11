@@ -106,7 +106,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 
 		// iteration 0
 		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
-		createExpectation = EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld))).Times(1);
+		createExpectation = EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
 		EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));

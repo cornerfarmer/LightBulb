@@ -12,6 +12,7 @@ class MockCreationCommand : public AbstractCreationCommand
 public:
 	MOCK_METHOD1(setLogger, void (AbstractLogger*));
 	MOCK_METHOD1(execute, void (AbstractEvolutionWorld&));
+	MOCK_METHOD2(execute, void (AbstractEvolutionWorld&, std::vector<AbstractEvolutionObject*>*));
 };
 
 #endif

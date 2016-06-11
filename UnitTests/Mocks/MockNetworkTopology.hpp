@@ -47,6 +47,8 @@ public:
 	MOCK_METHOD0(usesBiasNeuron, bool ());
 	MOCK_METHOD3(removeAfferentWeight, void (int, int, int));
 	MOCK_METHOD3(existsAfferentWeight, bool (int, int, int));
+	MOCK_METHOD0(getNeuronCount, int ());
+	MOCK_METHOD0(clone, AbstractNetworkTopology* ());
 };
 
 #endif

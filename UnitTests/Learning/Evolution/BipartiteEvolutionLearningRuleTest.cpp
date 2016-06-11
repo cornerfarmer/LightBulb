@@ -5,6 +5,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
+#include <Learning/AbstractLearningResult.hpp>
+#include <Mocks/MockLearningResult.hpp>
 
 using testing::Expectation;
 
@@ -44,5 +46,9 @@ TEST_F(BipartiteEvolutionLearningRuleTest, start)
 
 	EXPECT_CALL(*learningRule1, doIteration()).WillOnce(testing::Return(false));
 
-	EXPECT_EQ(true, bipartiteEvolutionLearningRule->start());
+	MockLearningResult learningResult;
+
+	EXPECT_CALL(*learningRule1, getLearningResult()).WillOnce(testing::Return(&learningResult));
+	
+	EXPECT_EQ(&learningResult, bipartiteEvolutionLearningRule->start());
 }

@@ -22,6 +22,8 @@ public:
 	MOCK_METHOD0(clearPopulation, void ());
 	MOCK_METHOD0(reset, void ());
 	MOCK_METHOD0(getDataSetLabels, std::vector<std::string> ());
+	MOCK_METHOD0(releaseAllObjects, void ());
+	MOCK_METHOD1(addExistingObject, void (AbstractEvolutionObject*));
 };
 
 #endif

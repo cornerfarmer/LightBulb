@@ -18,6 +18,8 @@ public:
 	MOCK_METHOD0(getState, NeuralNetworkState ());
 	MOCK_METHOD1(setState, void (NeuralNetworkState));
 	MOCK_METHOD0(getStateAsString, std::string ());
+	MOCK_METHOD0(clone, AbstractNeuralNetwork* ());
+	MOCK_METHOD1(setName, void (std::string));
 };
 
 #endif

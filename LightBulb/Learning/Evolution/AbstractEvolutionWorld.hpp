@@ -54,6 +54,8 @@ public:
 	virtual int getPopulationSize() = 0;
 
 	virtual void clearPopulation() = 0;
+
+	virtual void addExistingObject(AbstractEvolutionObject* newObject) = 0;
 };
 
 #endif

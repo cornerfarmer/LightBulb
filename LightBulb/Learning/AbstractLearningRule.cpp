@@ -63,7 +63,7 @@ AbstractLearningResult* AbstractLearningRule::learn(bool resume)
 		rateLearning();
 
 		// Do while the totalError is not zero
-		while (!hasLearningSucceeded() && learningState->iterations++ < options->maxIterationsPerTry)
+		while (!hasLearningSucceeded() && learningState->iterations++ < (int)options->maxIterationsPerTry)
 		{
 			bool successful = doIteration();
 			if (!successful)

@@ -21,9 +21,10 @@ void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector
 	{
 		std::unique_ptr<AbstractEvolutionObject> newObject(world.addNewObject(false));
 
-		world.getEvolutionObjects()->push_back(getUnusedObject(newObject.get(), notUsedObjects, false));
+		AbstractEvolutionObject* objectToAdd = getUnusedObject(newObject.get(), notUsedObjects, false);
+		objectToAdd->setEvolutionSource(Creation);
 
-		world.getEvolutionObjects()->back()->setEvolutionSource(Creation);
+		world.addExistingObject(objectToAdd);
 	}
 }
 

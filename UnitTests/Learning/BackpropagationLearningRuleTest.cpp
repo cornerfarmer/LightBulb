@@ -12,6 +12,7 @@
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
+#include <Learning/AbstractLearningResult.hpp>
 
 class BackpropagationLearningRuleTest : public testing::Test {
 public:
@@ -103,7 +104,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearning)
 
 	backpropagationLearningRule = new BackpropagationLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->start());
+	EXPECT_EQ(true, backpropagationLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }
@@ -120,7 +121,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearningWithResilientLearningRate)
 
 	backpropagationLearningRule = new BackpropagationLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->start());
+	EXPECT_EQ(true, backpropagationLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }
@@ -138,7 +139,7 @@ TEST_F(BackpropagationLearningRuleTest, doLearningWithMomentum)
 
 	backpropagationLearningRule = new BackpropagationLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->start());
+	EXPECT_EQ(true, backpropagationLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }

@@ -39,6 +39,7 @@ public:
 	int getPopulationSize();
 	void clearPopulation();
 	void releaseAllObjects();
+	void addExistingObject(AbstractEvolutionObject* newObject);
 };
 
 #include "IO/AbstractSimpleEvolutionWorldIO.hpp"

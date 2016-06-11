@@ -18,6 +18,8 @@ public:
 	MOCK_METHOD2(getTotalError, double (AbstractNeuralNetwork&, AbstractActivationOrder&));
 	MOCK_METHOD0(unfold, AbstractTeacher* ());
 	MOCK_METHOD0(getMaxTimeStep, int ());
+	MOCK_METHOD2(getTeachingError, double (AbstractNeuralNetwork&, AbstractActivationOrder&));
+	MOCK_METHOD1(getWeightDecayError, double (AbstractNeuralNetwork&));
 };
 
 #endif

@@ -49,7 +49,7 @@ public:
 	// This method should return a new evolution object which contains a NN which has the same edges/neurons as the NN of this object.
 	virtual AbstractEvolutionObject* clone(bool addToWorld = true) = 0;
 
-	void setEvolutionSource(EvolutionSource evolutionSource_);
+	virtual void setEvolutionSource(EvolutionSource evolutionSource_);
 
 	EvolutionSource getEvolutionSource();
 };

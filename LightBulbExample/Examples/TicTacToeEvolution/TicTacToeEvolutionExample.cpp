@@ -26,6 +26,7 @@
 #include <Function/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
+#include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
@@ -36,7 +37,7 @@
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
-
+#define PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED "Mutationstrength changespeed"
 
 AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 {
@@ -47,9 +48,12 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	options.exitConditions.push_back(new PerfectObjectFoundCondition(200));
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
 	options.selectionCommands.push_back(new BestSelectionCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(getDoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED)), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE)));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.03));
+
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
+
 	fillDefaultEvolutionLearningRule1Options(&options);
 
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
@@ -116,6 +120,7 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, true));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 10, 1, 30));
+	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 1.6, 0, 2));
 }
 
 std::string TicTacToeEvolutionExample::getDefaultName()

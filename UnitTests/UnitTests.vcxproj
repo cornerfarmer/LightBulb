@@ -186,6 +186,7 @@
     <ClInclude Include="Mocks\MockCombiningStrategy.hpp" />
     <ClInclude Include="Mocks\MockCreationCommand.hpp" />
     <ClInclude Include="Mocks\MockHallOfFameAlgorithm.hpp" />
+    <ClInclude Include="Mocks\MockLearningResult.hpp" />
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockEvolutionObject.hpp" />

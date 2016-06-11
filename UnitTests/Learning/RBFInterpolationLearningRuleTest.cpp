@@ -16,6 +16,7 @@
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <Learning/RBFInterpolationLearningRule.hpp>
 #include <ClusterAnalysis/KMeansRBFNeuronPlacer.hpp>
+#include <Learning/AbstractLearningResult.hpp>
 
 class RBFInterpolationLearningRuleTest : public testing::Test {
 public:
@@ -101,7 +102,7 @@ TEST_F(RBFInterpolationLearningRuleTest, doLearning)
 
 	rbfInterpolationLearningRule = new RBFInterpolationLearningRule(options);
 
-	EXPECT_EQ(true, rbfInterpolationLearningRule->start());
+	EXPECT_EQ(true, rbfInterpolationLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }

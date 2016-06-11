@@ -260,5 +260,8 @@
     <ClInclude Include="Mocks\MockCoevolutionFitnessFunction.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Mocks\MockLearningResult.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

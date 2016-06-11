@@ -16,6 +16,7 @@ public:
 	MOCK_METHOD0(resetNN, void ());
 	MOCK_METHOD1(clone, AbstractEvolutionObject* (bool));
 	MOCK_METHOD1(copyPropertiesFrom, void (AbstractEvolutionObject*));
+	MOCK_METHOD1(setEvolutionSource, void (EvolutionSource));
 };
 
 #endif
