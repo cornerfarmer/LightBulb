@@ -190,6 +190,12 @@ bool EvolutionLearningRule::doIteration()
 	// Extract all current objects ordered by their score
 	Highscore* highscore = getOptions()->world->getHighscoreList();
 
+	// {2,3}.5. Step: Modify the calculated scores
+	for (auto fitnessFunction = getOptions()->fitnessFunctions.begin(); fitnessFunction != getOptions()->fitnessFunctions.end(); fitnessFunction++)
+	{
+		(*fitnessFunction)->execute(highscore);
+	}
+
 	if (!options->disabledDataSets[DATA_AVG_NEURON_COUNT])
 	{
 		int totalNeuronCount = 0;
@@ -216,11 +222,7 @@ bool EvolutionLearningRule::doIteration()
 		return false;
 	}
 
-	// {2,3}.5. Step: Modify the calculated scores
-	for (auto fitnessFunction = getOptions()->fitnessFunctions.begin(); fitnessFunction != getOptions()->fitnessFunctions.end(); fitnessFunction++)
-	{
-		(*fitnessFunction)->execute(highscore);
-	}
+
 
 	// 4. Step: Select the relevant evolution objects (Other objects will be deleted)
 	for (auto selectionCommand = getOptions()->selectionCommands.begin(); selectionCommand != getOptions()->selectionCommands.end(); selectionCommand++)

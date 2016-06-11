@@ -630,6 +630,7 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\NetworkGrowMutationAlgorithm.cpp" />
+    <ClCompile Include="Learning\Evolution\WeightDecayFitnessFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1276,5 +1277,6 @@
     <ClInclude Include="Learning\AbstractLearningResult.hpp" />
     <ClInclude Include="Learning\SupervisedLearningResult.hpp" />
     <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
+    <ClInclude Include="Learning\Evolution\WeightDecayFitnessFunction.hpp" />
   </ItemGroup>
 </Project>
