@@ -23,6 +23,7 @@ class AbstractFitnessFunction;
 
 #define DATA_SET_FITNESS "Fitness"
 #define DATA_AVG_NEURON_COUNT "Average neuron count"
+#define DATA_BEST_NEURON_COUNT "Best neuron count"
 
 enum EvolutionLearningEvents
 {

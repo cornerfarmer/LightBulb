@@ -40,19 +40,20 @@
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
 #define PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED "Mutationstrength changespeed"
 #define PREFERENCE_WEIGHTDECAY_FAC "Weight decay fac"
+#define PREFERENCE_CREATE_UP_TO "Create up to"
 
 AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 {
 
 	EvolutionLearningRuleOptions options;
 
-	options.creationCommands.push_back(new ConstantCreationCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
+	options.creationCommands.push_back(new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATE_UP_TO)));
 	options.exitConditions.push_back(new PerfectObjectFoundCondition(200));
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
 	options.selectionCommands.push_back(new BestSelectionCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(getDoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED)), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE)));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.03));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.1));
 	options.fitnessFunctions.push_back(new WeightDecayFitnessFunction(getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC)));
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
 
@@ -115,15 +116,16 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addCustomSubApp(new TicTacToeGameFactory());
 	addPreference(new DoublePreference(PREFERENCE_MUTATION_PERCENTAGE, 1.8, 0, 3));
 	addPreference(new DoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE, 0.3, 0, 3));
-	addPreference(new IntegerPreference(PREFERENCE_POPULATION_SIZE, 500, 1, 1000));
-	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 100, 1, 1000));
-	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 50, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_POPULATION_SIZE, 250, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_CREATE_UP_TO, 580, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 25, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 0, 1, 1000));
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, true));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, true));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 10, 1, 30));
-	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 1.6, 0, 2));
-	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.005, 0.003, 0.3));
+	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.001, 0, 2));
+	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.00005, 0.003, 0.3));
 }
 
 std::string TicTacToeEvolutionExample::getDefaultName()

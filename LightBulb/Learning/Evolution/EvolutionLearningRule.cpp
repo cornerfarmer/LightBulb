@@ -97,8 +97,9 @@ std::string EvolutionLearningRule::getName()
 std::vector<std::string> EvolutionLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
-	labels.push_back(DATA_SET_FITNESS);
-	labels.push_back(DATA_AVG_NEURON_COUNT);
+	labels.push_back(getOptions()->dataSetsPrefix + DATA_SET_FITNESS);
+	labels.push_back(getOptions()->dataSetsPrefix + DATA_AVG_NEURON_COUNT);
+	labels.push_back(getOptions()->dataSetsPrefix + DATA_BEST_NEURON_COUNT);
 	std::vector<std::string> worldLabels = getOptions()->world->getDataSetLabels();
 	labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
 	return labels;
@@ -112,8 +113,8 @@ void EvolutionLearningRule::setLogger(AbstractLogger* logger)
 
 bool EvolutionLearningRule::doIteration()
 {
-	if (!options->disabledDataSets[DATA_SET_FITNESS] && getOptions()->world->getPopulationSize() > 0)
-		learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
+	if (!options->disabledDataSets[getOptions()->dataSetsPrefix + DATA_SET_FITNESS] && getOptions()->world->getPopulationSize() > 0)
+		learningState->addData(getOptions()->dataSetsPrefix + DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 
 	// Reset the world for the next generation
 	getOptions()->world->reset();
@@ -186,6 +187,7 @@ bool EvolutionLearningRule::doIteration()
 		learningState->iterations = 0;
 		return true;
 	}
+	getOptions()->world->refreshHighscore();
 
 	// Extract all current objects ordered by their score
 	Highscore* highscore = getOptions()->world->getHighscoreList();
@@ -196,14 +198,19 @@ bool EvolutionLearningRule::doIteration()
 		(*fitnessFunction)->execute(highscore);
 	}
 
-	if (!options->disabledDataSets[DATA_AVG_NEURON_COUNT])
+	if (!options->disabledDataSets[getOptions()->dataSetsPrefix + DATA_AVG_NEURON_COUNT])
 	{
 		int totalNeuronCount = 0;
 		for (int i = 0; i < highscore->size(); i++)
 		{
 			totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
 		}
-		learningState->addData(DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
+		learningState->addData(getOptions()->dataSetsPrefix + DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
+	}
+
+	if (!options->disabledDataSets[getOptions()->dataSetsPrefix + DATA_BEST_NEURON_COUNT])
+	{
+		learningState->addData(getOptions()->dataSetsPrefix + DATA_BEST_NEURON_COUNT, highscore->front().second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount());
 	}
 
 	throwEvent(EVT_EL_EVOLUTIONSTEP, this);
@@ -242,7 +249,7 @@ EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions()
 
 void EvolutionLearningRule::doCalculationAfterLearningProcess()
 {
-	if (!options->disabledDataSets[DATA_SET_FITNESS])
-		learningState->addData(DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
+	if (!options->disabledDataSets[getOptions()->dataSetsPrefix + DATA_SET_FITNESS])
+		learningState->addData(getOptions()->dataSetsPrefix + DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 }
 

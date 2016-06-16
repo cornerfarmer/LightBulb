@@ -47,8 +47,8 @@ void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 
 bool AbstractSupervisedLearningRule::doIteration()
 {
-	if (!options->disabledDataSets[DATA_SET_TRAINING_ERROR])
-		learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
+	if (!options->disabledDataSets[options->dataSetsPrefix + DATA_SET_TRAINING_ERROR])
+		learningState->addData(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR, totalError);
 
 	// If its not the first iteration and the learning process has stopped, skip that try
 	if (learningState->iterations > 1 && learningHasStopped())
@@ -175,8 +175,8 @@ void AbstractSupervisedLearningRule::initializeLearningAlgoritm()
 
 void AbstractSupervisedLearningRule::doCalculationAfterLearningProcess()
 {
-	if (!options->disabledDataSets[DATA_SET_TRAINING_ERROR])
-		learningState->addData(DATA_SET_TRAINING_ERROR, totalError);
+	if (!options->disabledDataSets[options->dataSetsPrefix + DATA_SET_TRAINING_ERROR])
+		learningState->addData(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR, totalError);
 }
 
 bool AbstractSupervisedLearningRule::hasLearningSucceeded()
@@ -221,6 +221,6 @@ bool AbstractSupervisedLearningRule::configureNextErroMapCalculation(int* nextSt
 std::vector<std::string> AbstractSupervisedLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
-	labels.push_back(DATA_SET_TRAINING_ERROR);
+	labels.push_back(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR);
 	return labels;
 }

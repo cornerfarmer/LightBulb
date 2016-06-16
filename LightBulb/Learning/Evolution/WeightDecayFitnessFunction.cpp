@@ -24,4 +24,5 @@ void WeightDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractE
 		
 		entry->first -= fac * weightDecayError;
 	}
+	std::sort(highscore->begin(), highscore->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 }

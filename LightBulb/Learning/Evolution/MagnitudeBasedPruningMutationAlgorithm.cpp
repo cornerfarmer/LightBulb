@@ -43,29 +43,35 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
-				if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
+				if (layerIndex > 0)
 				{
-					for (int i = usesBiasNeuron; i < layer->cols(); i++)
+					if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
 					{
-						int weightCount = 0;
-						for (int j = 0; j < layer->rows(); j++)
+						for (int i = usesBiasNeuron; i < layer->cols(); i++)
 						{
-							if (networkTopology->existsAfferentWeight(layerIndex, i, j))
-								weightCount++;
+							int weightCount = 0;
+							for (int j = 0; j < layer->rows(); j++)
+							{
+								if (networkTopology->existsAfferentWeight(layerIndex, i, j))
+									weightCount++;
+							}
+							neuronRanking.push_back(std::make_tuple(weightCount, layerIndex, i));
 						}
-						neuronRanking.push_back(std::make_tuple(weightCount, layerIndex, i));
 					}
 				}
 			}
 		}
 
-		std::sort(neuronRanking.begin(), neuronRanking.end(), std::less<std::tuple<int, int, int>>());
+		if (neuronRanking.size() > 0) {
 
-		int selectedIndex = 0;
-		if (useRandomFunction) 
-			randomFunction.execute(neuronRanking.size());
+			std::sort(neuronRanking.begin(), neuronRanking.end(), std::less<std::tuple<int, int, int>>());
 
-		networkTopology->removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
+			int selectedIndex = 0;
+			if (useRandomFunction)
+				selectedIndex = randomFunction.execute(neuronRanking.size());
+
+			networkTopology->removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
+		}
 	}
 
 	for (int w = 0; w < removeWeightsPerIteration; w++)

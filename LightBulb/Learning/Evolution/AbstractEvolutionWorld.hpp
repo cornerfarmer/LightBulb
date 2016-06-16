@@ -23,10 +23,13 @@ class AbstractEvolutionWorld : public AbstractLoggable
 {
 private:
 	Highscore currentHighscore;
+	bool recalculateHighscore;
 protected:
 	LearningState* learningState;
 public:
 	virtual ~AbstractEvolutionWorld() {}
+
+	AbstractEvolutionWorld();
 		
 	virtual std::vector<AbstractEvolutionObject*>* getEvolutionObjects() = 0;
 	virtual void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects) = 0;
@@ -56,6 +59,8 @@ public:
 	virtual void clearPopulation() = 0;
 
 	virtual void addExistingObject(AbstractEvolutionObject* newObject) = 0;
+
+	void refreshHighscore();
 };
 
 #endif

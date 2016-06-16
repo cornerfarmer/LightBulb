@@ -32,6 +32,8 @@ struct AbstractLearningRuleOptions
 
 	std::map<std::string, bool> disabledDataSets;
 
+	std::string dataSetsPrefix;
+
 	AbstractLearningRuleOptions()
 	{
 		maxIterationsPerTry = 10000;
@@ -39,6 +41,7 @@ struct AbstractLearningRuleOptions
 		logger = NULL;
 		debugOutputInterval = 1000;	
 		dataSaveInterval = 1;
+		dataSetsPrefix = "";
 	}
 	virtual ~AbstractLearningRuleOptions() {}
 };

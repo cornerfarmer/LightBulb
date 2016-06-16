@@ -56,7 +56,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.03);
 	//options.mutationsCommands.push_back(constantMutationCommand);
 
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3));
 	options.maxTries = 100;
 	fillDefaultLearningRuleOptions(&options);
 
