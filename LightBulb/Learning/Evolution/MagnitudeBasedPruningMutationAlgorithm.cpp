@@ -74,7 +74,7 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			if (useRandomFunction)
 				selectedIndex = randomFunction.execute(neuronRanking.size());
 
-			networkTopology->removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
+			object1->removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
 		}
 	}
 

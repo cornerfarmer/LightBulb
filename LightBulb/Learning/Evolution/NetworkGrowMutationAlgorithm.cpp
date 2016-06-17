@@ -31,7 +31,7 @@ void NetworkGrowMutationAlgorithm::execute(AbstractEvolutionObject* object1)
 		{
 			layer = rand() % neuronCountsPerLayer.size();
 		} while (maxNeuronsPerLayer[layer] <= neuronCountsPerLayer[layer]);
-		networkTopology->addNeuron(layer);
+		object1->addNeuron(layer);
 	}
 
 }

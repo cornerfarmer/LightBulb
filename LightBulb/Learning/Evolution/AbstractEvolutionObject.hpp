@@ -5,6 +5,12 @@
 
 // Library includes
 #include <vector>
+#include <algorithm>
+#include <algorithm>
+#include <algorithm>
+#include <algorithm>
+#include <algorithm>
+#include <algorithm>
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -52,6 +58,10 @@ public:
 	virtual void setEvolutionSource(EvolutionSource evolutionSource_);
 
 	EvolutionSource getEvolutionSource();
+
+	virtual void removeNeuron(int layerIndex, int neuronIndex);
+
+	virtual void addNeuron(int layerIndex);
 };
 
 #include "IO/AbstractEvolutionObjectIO.hpp"

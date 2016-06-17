@@ -47,14 +47,14 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 
 	constantMutationCommand = new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0), new RandomSelector(new RankBasedRandomFunction()), 0.03);
-	options.mutationsCommands.push_back(constantMutationCommand);
+	//options.mutationsCommands.push_back(constantMutationCommand);
 
 	std::vector<unsigned int> maxNeuronsPerLayer(3);
 	maxNeuronsPerLayer[0] = 16;
 	maxNeuronsPerLayer[1] = 16;
 	maxNeuronsPerLayer[2] = 1;
 	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.03);
-	//options.mutationsCommands.push_back(constantMutationCommand);
+	options.mutationsCommands.push_back(constantMutationCommand);
 
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;
@@ -69,7 +69,7 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 	layeredNetworkOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions->neuronsPerLayerCount[0] = 16;
-	layeredNetworkOptions->neuronsPerLayerCount[1] = 16;
+	layeredNetworkOptions->neuronsPerLayerCount[1] = 1;
 	layeredNetworkOptions->neuronsPerLayerCount[2] = 1;
 	layeredNetworkOptions->useBiasNeuron = true;
 	layeredNetworkOptions->enableShortcuts = true;

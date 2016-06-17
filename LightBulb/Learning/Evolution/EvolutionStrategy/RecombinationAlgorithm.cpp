@@ -44,7 +44,7 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 
 	auto mutationStrength1 = object1->getMutationStrength();
 	auto mutationStrength2 = object2->getMutationStrength();
-	for (int i = 0; i < mutationStrength2->size(); i++)
+	for (int i = 0; i < mutationStrength2->size() && i < mutationStrength1->size(); i++)
 	{
 		if (useAverageForMutationStrength)
 		{

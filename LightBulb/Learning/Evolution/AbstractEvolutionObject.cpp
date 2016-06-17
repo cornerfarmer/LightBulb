@@ -41,6 +41,18 @@ EvolutionSource AbstractEvolutionObject::getEvolutionSource()
 	return evolutionSource;
 }
 
+void AbstractEvolutionObject::removeNeuron(int layerIndex, int neuronIndex)
+{
+	getNeuralNetwork()->getNetworkTopology()->removeNeuron(layerIndex, neuronIndex);
+	mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount());
+}
+
+void AbstractEvolutionObject::addNeuron(int layerIndex)
+{
+	getNeuralNetwork()->getNetworkTopology()->addNeuron(layerIndex);
+	mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount(), 0.2);
+}
+
 void AbstractEvolutionObject::resizeMutationStrength(int newSize)
 {
 	mutationStrength.resize(newSize);
