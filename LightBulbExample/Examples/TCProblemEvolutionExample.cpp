@@ -56,7 +56,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	constantMutationCommand = new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), 0.03);
 	//options.mutationsCommands.push_back(constantMutationCommand);
 
-	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -83,7 +83,7 @@ TCProblemEvolutionExample::TCProblemEvolutionExample()
 {
 	addPreference(new IntegerPreference(PREFERENCE_CREATION_COUNT, 200, 80, 300));
 	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.0001, 0, 2));
-	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.005, 0.003, 0.3));
+	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.006, 0.003, 0.3));
 }
 
 std::string TCProblemEvolutionExample::getDefaultName()

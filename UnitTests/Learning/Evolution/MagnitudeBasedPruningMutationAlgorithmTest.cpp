@@ -22,7 +22,7 @@ public:
 
 TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 {
-	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(1, 0, false, true);
+	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(1, 0, false, false, true);
 	MockEvolutionObject object;
 
 	MockNeuralNetwork neuralNetwork;
@@ -52,7 +52,7 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 
 TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 {
-	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(1, 0, false, false);
+	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(1, 0, false, false, false);
 	MockEvolutionObject object;
 
 	MockNeuralNetwork neuralNetwork;

@@ -4,12 +4,13 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
-MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_, bool removeNeuronsByTheirTotalWeight_)
+MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_, bool ignoreInputLayer_, bool removeNeuronsByTheirTotalWeight_)
 {
 	removeNeuronsPerIteration = removeNeuronsPerIteration_;
 	removeWeightsPerIteration = removeWeightsPerIteration_;
 	removeNeuronsByTheirTotalWeight = removeNeuronsByTheirTotalWeight_;
 	useRandomFunction = useRandomFunction_;
+	ignoreInputLayer = ignoreInputLayer_;
 }
 
 void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* object1)
@@ -27,12 +28,15 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
-				if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
+				if (layerIndex > 0 || !ignoreInputLayer)
 				{
-					auto weightSums = layer->cwiseAbs().colwise().sum();
-					for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
+					if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
 					{
-						neuronRanking.push_back(std::make_tuple(weightSums[i], layerIndex, i));
+						auto weightSums = layer->cwiseAbs().colwise().sum();
+						for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
+						{
+							neuronRanking.push_back(std::make_tuple(weightSums[i], layerIndex, i));
+						}
 					}
 				}
 			}
@@ -43,7 +47,7 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
-				if (layerIndex > 0)
+				if (layerIndex > 0 || !ignoreInputLayer)
 				{
 					if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
 					{
