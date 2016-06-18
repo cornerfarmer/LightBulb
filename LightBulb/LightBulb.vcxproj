@@ -383,6 +383,7 @@
     <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\NetworkGrowMutationAlgorithm.cpp" />
+    <ClCompile Include="Learning\Evolution\NeuronDecayFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -969,6 +970,7 @@
     <ClInclude Include="Learning\Evolution\LinearScalingFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\NetworkGrowMutationAlgorithm.hpp" />
+    <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
