@@ -30,6 +30,7 @@
 #include <Learning/Evolution/WeightDecayFitnessFunction.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <Learning/Evolution/NeuronDecayFitnessFunction.hpp>
+#include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
@@ -56,14 +57,14 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	options.selectionCommands.push_back(new BestSelectionCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(getDoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED)), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE)));
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0, true, true), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE)));
+	//options.mutationsCommands.push_back(new ConstantMutationCommand(new MagnitudeBasedPruningMutationAlgorithm(1, 0, true, true), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE)));
 	options.fitnessFunctions.push_back(new NeuronDecayFitnessFunction(getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC)));
 	std::vector<unsigned int> maxNeuronsPerLayer(4);
 	maxNeuronsPerLayer[0] = 18;
-	maxNeuronsPerLayer[1] = 10;
-	maxNeuronsPerLayer[2] = 10;
+	maxNeuronsPerLayer[1] = 100;
+	maxNeuronsPerLayer[2] = 100;
 	maxNeuronsPerLayer[3] = 9;
-	//options.mutationsCommands.push_back(new ConstantMutationCommand(new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE)));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new PhasedTopologyMutationAlgorithm(new MagnitudeBasedPruningMutationAlgorithm(1, 0, true, true), new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), 100), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE)));
 
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
 

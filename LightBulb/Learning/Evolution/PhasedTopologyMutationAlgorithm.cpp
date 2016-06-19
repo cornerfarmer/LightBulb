@@ -4,12 +4,13 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
-PhasedTopologyMutationAlgorithm::PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_)
+PhasedTopologyMutationAlgorithm::PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_, int pruningThresholdDistance_)
 {
 	magnitudeBasedPruningMutationAlgorithm.reset(magnitudeBasedPruningMutationAlgorithm_);
 	networkGrowMutationAlgorithm.reset(networkGrowMutationAlgorithm_);
 	pruningPhase = false;
 	pruneThreshold = -1;
+	pruningThresholdDistance = pruningThresholdDistance_;
 }
 
 void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject* object1)
@@ -40,7 +41,7 @@ void PhasedTopologyMutationAlgorithm::initialize(std::vector<std::pair<double, A
 	{
 		if (pruneThreshold == -1)
 		{
-			pruneThreshold = calcMPC(highscore) + 30;
+			pruneThreshold = calcMPC(highscore) + pruningThresholdDistance;
 		}
 		else
 		{
@@ -60,7 +61,7 @@ void PhasedTopologyMutationAlgorithm::initialize(std::vector<std::pair<double, A
 			if (mpcNotFallenRounds > 10)
 			{
 				pruningPhase = false;
-				pruneThreshold = currentMPC + 30;
+				pruneThreshold = currentMPC + pruningThresholdDistance;
 			}
 		}
 		else

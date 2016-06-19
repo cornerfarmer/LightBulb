@@ -22,9 +22,10 @@ private:
 	bool pruningPhase;
 	double lastMPC;
 	int mpcNotFallenRounds;
+	int pruningThresholdDistance;
 	double calcMPC(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 public:
-	PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_);
+	PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_, int pruningThresholdDistance_ = 30);
 
 	void execute(AbstractEvolutionObject* object1);
 
