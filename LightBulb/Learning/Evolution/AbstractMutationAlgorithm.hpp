@@ -5,6 +5,7 @@
 
 // Library Includes
 #include <memory>
+#include <vector>
 
 // Forward declarations
 class AbstractEvolutionObject;
@@ -16,6 +17,7 @@ public:
 	virtual ~AbstractMutationAlgorithm() {};
 	// Mutates the given evolution object.
 	virtual void execute(AbstractEvolutionObject* object1) = 0;
+	virtual void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) {};
 };
 
 #endif

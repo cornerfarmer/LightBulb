@@ -527,7 +527,7 @@ void LayeredNetwork::setInput(std::vector<double> &inputVector)
 {
 	for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 	{
-		(*activationsPerLayerIn.front())(i) = inputVector[i];
+		(*activationsPerLayerIn.front())(i) = (inputVector.size() > i ? inputVector[i] : 0);
 	}
 }
 

@@ -632,6 +632,7 @@
     <ClCompile Include="Learning\Evolution\NetworkGrowMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\WeightDecayFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\NeuronDecayFitnessFunction.cpp" />
+    <ClCompile Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1280,5 +1281,6 @@
     <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
     <ClInclude Include="Learning\Evolution\WeightDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
+    <ClInclude Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp" />
   </ItemGroup>
 </Project>

@@ -24,6 +24,8 @@ void ConstantMutationCommand::select(std::vector<std::pair<double, AbstractEvolu
 		objectCount = (int)(highscore->size() * mutationPercentage);
 
 	mutationSelector->executeMutationSelection(objectCount, highscore, counter);
+
+	mutationAlgorithm->initialize(highscore);
 }
 
 void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)
