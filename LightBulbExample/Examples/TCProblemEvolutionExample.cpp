@@ -67,7 +67,7 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 	layeredNetworkOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions->neuronsPerLayerCount[0] = 16;
-	layeredNetworkOptions->neuronsPerLayerCount[1] = 1;
+	layeredNetworkOptions->neuronsPerLayerCount[1] = 20;
 	layeredNetworkOptions->neuronsPerLayerCount[2] = 1;
 	layeredNetworkOptions->useBiasNeuron = true;
 	layeredNetworkOptions->enableShortcuts = true;

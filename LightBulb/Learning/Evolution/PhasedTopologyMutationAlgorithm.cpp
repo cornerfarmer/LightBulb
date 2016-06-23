@@ -31,6 +31,7 @@ double PhasedTopologyMutationAlgorithm::calcMPC(std::vector<std::pair<double, Ab
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
 		mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getEdgeCount();
+		mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
 	}
 	return mpc / highscore->size();
 }
