@@ -30,19 +30,19 @@ PreferencesWindow::PreferencesWindow(PreferencesController* controller_, Abstrac
 			double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
 			int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
 
-			sizer->Add(createSlider(std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, (wxObject*)doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+			sizer->Add(createSlider(std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
 		}
 		else if (dynamic_cast<IntegerPreference*>(preference->get()))
 		{
 			IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
 
-			sizer->Add(createSlider(std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), (wxObject*)integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
+			sizer->Add(createSlider(std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
 		} 
 		else if (dynamic_cast<BooleanPreference*>(preference->get()))
 		{
 			BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
 
-			sizer->Add(createCheckBox((*preference)->getName(), booleanPreference->getValue(), (wxObject*)booleanPreference), 0, wxEXPAND);
+			sizer->Add(createCheckBox((*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
 		}
 	}
 
@@ -50,18 +50,24 @@ PreferencesWindow::PreferencesWindow(PreferencesController* controller_, Abstrac
 }
 
 
-wxSizer* PreferencesWindow::createSlider(std::string min, std::string max, std::string current, int currentStep, wxObject* preference, int minStep, int maxStep, double stepSize)
+wxSizer* PreferencesWindow::createSlider(std::string min, std::string max, std::string current, int currentStep, AbstractPreference* preference, int minStep, int maxStep, double stepSize)
 {
 	wxSizer* preferenceSizer = new wxBoxSizer(wxHORIZONTAL);
 	preferenceSizer->Add(new wxStaticText(this, wxID_ANY, min), 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
 	wxSlider* slider = new wxSlider(this, wxID_ANY, currentStep, minStep, maxStep, wxDefaultPosition, wxDefaultSize);
-	slider->Bind(wxEVT_SLIDER, wxCommandEventFunction(&PreferencesWindow::setValueFromSlider), this, wxID_ANY, wxID_ANY, preference);
+
+	std::function<void(wxCommandEvent &)> slideHandler(bind(&PreferencesWindow::setValueFromSlider, this, std::placeholders::_1, preference));
+	slider->Bind(wxEVT_SLIDER, slideHandler);
+
 	preferenceSizer->Add(slider, 1, wxALL | wxALIGN_CENTER_VERTICAL, 7);
 	sliderStepSize[slider] = stepSize;
-
+	
 	preferenceSizer->Add(new wxStaticText(this, wxID_ANY, max), 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
 	wxTextCtrl* textBox = new wxTextCtrl(this, wxID_ANY);
-	textBox->Bind(wxEVT_TEXT, wxCommandEventFunction(&PreferencesWindow::setValueFromTextBox), this, wxID_ANY, wxID_ANY, preference);
+
+	std::function<void(wxCommandEvent &)> textHandler(bind(&PreferencesWindow::setValueFromTextBox, this, std::placeholders::_1, preference));
+	textBox->Bind(wxEVT_TEXT, textHandler);
+
 	preferenceSizer->Add(textBox, 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
 
 	sliderFromtextCtrl[textBox] = slider;
@@ -74,57 +80,73 @@ wxSizer* PreferencesWindow::createSlider(std::string min, std::string max, std::
 
 
 
-wxSizer* PreferencesWindow::createCheckBox(std::string label, bool currentValue, wxObject* preference)
+wxSizer* PreferencesWindow::createCheckBox(std::string label, bool currentValue, AbstractPreference* preference)
 {
 	wxSizer* preferenceSizer = new wxBoxSizer(wxHORIZONTAL);
 	wxCheckBox* checkBox = new wxCheckBox(this, wxID_ANY, label);
-	checkBox->Bind(wxEVT_CHECKBOX, wxCommandEventFunction(&PreferencesWindow::setValueFromCheckBox), this, wxID_ANY, wxID_ANY, preference);
+
+	std::function<void(wxCommandEvent &)> checkHandler(bind(&PreferencesWindow::setValueFromCheckBox, this, std::placeholders::_1, preference));
+	checkBox->Bind(wxEVT_CHECKBOX, checkHandler);
 	preferenceSizer->Add(checkBox, 1, wxALL | wxALIGN_CENTER_VERTICAL, 7);
 	checkBox->SetValue(currentValue);
 
 	return preferenceSizer;
 }
 
-void PreferencesWindow::setValueFromTextBox(wxCommandEvent& event)
+void PreferencesWindow::setValueFromTextBox(wxCommandEvent& event, AbstractPreference* preference)
 {
 	wxTextCtrl* textBox = dynamic_cast<wxTextCtrl*>(event.GetEventObject());
 	wxSlider* slider = sliderFromtextCtrl[textBox];
-	if (sliderStepSize[slider] != 0)
+	if (dynamic_cast<DoublePreference*>(preference))
 	{
-		DoublePreference* doublePreference = (DoublePreference*)(event.GetEventUserData());
-		doublePreference->setValue(std::stod(event.GetString().ToStdString()));
+		DoublePreference* doublePreference = static_cast<DoublePreference*>(preference);
+		try 
+		{
+			doublePreference->setValue(std::stod(event.GetString().ToStdString()));
+		}
+		catch(std::exception e)
+		{
+			doublePreference->reset();
+		}
 
 		slider->SetValue(doubleToSliderValue(slider, doublePreference, doublePreference->getValue()));
-	} 
+	}
 	else
 	{
-		IntegerPreference* integerPreference = (IntegerPreference*)(event.GetEventUserData());
-		integerPreference->setValue(std::stoi(event.GetString().ToStdString()));
+		IntegerPreference* integerPreference = static_cast<IntegerPreference*>(preference);
+		try
+		{
+			integerPreference->setValue(std::stoi(event.GetString().ToStdString()));
+		}
+		catch (std::exception e)
+		{
+			integerPreference->reset();
+		}
 
 		slider->SetValue(integerPreference->getValue());
 	}
 }
 
-void PreferencesWindow::setValueFromCheckBox(wxCommandEvent& event)
+void PreferencesWindow::setValueFromCheckBox(wxCommandEvent& event, AbstractPreference* preference)
 {
 	wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(event.GetEventObject());
-	BooleanPreference* booleanPreference = (BooleanPreference*)(event.GetEventUserData());
+	BooleanPreference* booleanPreference = static_cast<BooleanPreference*>(preference);
 	booleanPreference->setValue(checkBox->GetValue());
 }
 
-void PreferencesWindow::setValueFromSlider(wxCommandEvent& event)
+void PreferencesWindow::setValueFromSlider(wxCommandEvent& event, AbstractPreference* preference)
 {
 	wxSlider* slider = dynamic_cast<wxSlider*>(event.GetEventObject());
-	if (sliderStepSize[slider] != 0)
+	if (dynamic_cast<DoublePreference*>(preference))
 	{
-		DoublePreference* doublePreference = (DoublePreference*)(event.GetEventUserData());
+		DoublePreference* doublePreference = static_cast<DoublePreference*>(preference);
 		doublePreference->setValue(sliderValueToDouble(slider, doublePreference, slider->GetValue()));
 
 		textCtrlFromSlider[slider]->SetValue(std::to_string(doublePreference->getValue()));
 	}
 	else
 	{
-		IntegerPreference* integerPreference = (IntegerPreference*)(event.GetEventUserData());
+		IntegerPreference* integerPreference = static_cast<IntegerPreference*>(preference);
 		integerPreference->setValue(slider->GetValue());
 
 		textCtrlFromSlider[slider]->SetValue(std::to_string(integerPreference->getValue()));

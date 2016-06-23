@@ -15,11 +15,13 @@ class AbstractVariablePreference : public AbstractPreference
 {
 protected:
 	Type value;
+	Type defaultValue;
 public:
-	AbstractVariablePreference(std::string name, Type defaultValue)
+	AbstractVariablePreference(std::string name, Type defaultValue_)
 		:AbstractPreference(name)
 	{
-		value = defaultValue;
+		defaultValue = defaultValue_;
+		reset();
 	}
 
 	AbstractVariablePreference()
@@ -34,6 +36,11 @@ public:
 	Type getValue()
 	{
 		return value;
+	}
+
+	void reset()
+	{
+		value = defaultValue;
 	}
 };
 
