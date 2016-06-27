@@ -260,12 +260,6 @@
     <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="IO\NetworkSimulatorIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\NetworkIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="TrainingPlans\IntegerPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>

@@ -122,10 +122,12 @@
   <ItemGroup>
     <ClCompile Include="Examples\BackpropagationXorExample.cpp" />
     <ClCompile Include="Examples\FunctionEvolutionExample.cpp" />
+    <ClCompile Include="Examples\FunctionSimulator.cpp" />
     <ClCompile Include="Examples\NatureEvolutionExample.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\Network.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp" />
+    <ClCompile Include="Examples\Position.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp" />
     <ClCompile Include="Examples\TCProblemBackpropagationExample.cpp" />
     <ClCompile Include="Examples\TCProblemEvolutionExample.cpp" />
@@ -142,10 +144,12 @@
   <ItemGroup>
     <ClInclude Include="Examples\BackpropagationXorExample.hpp" />
     <ClInclude Include="Examples\FunctionEvolutionExample.hpp" />
+    <ClInclude Include="Examples\FunctionSimulator.hpp" />
     <ClInclude Include="Examples\NatureEvolutionExample.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp" />
+    <ClInclude Include="Examples\Position.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp" />
     <ClInclude Include="Examples\TCProblemBackpropagationExample.hpp" />
     <ClInclude Include="Examples\TCProblemEvolutionExample.hpp" />
@@ -157,6 +161,10 @@
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
+    <ClInclude Include="IO\PositionIO.hpp" />
+    <ClInclude Include="IO\FunctionSimulatorIO.hpp" />
+    <ClInclude Include="IO\NetworkIO.hpp" />
+    <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

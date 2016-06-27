@@ -6,6 +6,8 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "AbstractEvolutionWorld.hpp"
 
+
+
 void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& options)
 {
 	// Create a new network topology from the adjusted options.
@@ -19,9 +21,12 @@ void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& op
 	// Initialize the mutation strength vector
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
 	randomizeMutationStrength();
+	buildOutputBuffer();
+}
 
+void AbstractSimpleEvolutionObject::buildOutputBuffer()
+{
 	lastOutput.resize(neuralNetwork->getNetworkTopology()->getOutputSize());
-
 }
 
 AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_)

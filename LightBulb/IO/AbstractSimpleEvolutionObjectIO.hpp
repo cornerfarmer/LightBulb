@@ -24,6 +24,7 @@ void load(Archive& archive, AbstractSimpleEvolutionObject& object)
 {
 	archive(cereal::base_class<AbstractEvolutionObject>(&object));
 	archive(cereal::make_nvp("neuralNetwork", object.neuralNetwork));
+	object.buildOutputBuffer();
 	object.world = IOStorage<AbstractEvolutionWorld>::get();
 }
 

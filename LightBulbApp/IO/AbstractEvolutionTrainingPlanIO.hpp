@@ -5,6 +5,7 @@
 
 // Includes
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
@@ -21,7 +22,10 @@ void save(Archive& archive, AbstractEvolutionTrainingPlan const& trainingPlan)
 template <class Archive>
 void load(Archive& archive, AbstractEvolutionTrainingPlan& trainingPlan)
 {
+	IOStorage<AbstractEvolutionWorld>::push(trainingPlan.createWorld());
 	archive(cereal::make_nvp("world", trainingPlan.world));
+	trainingPlan.world.reset(IOStorage<AbstractEvolutionWorld>::pop());
+
 	archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 
 	trainingPlan.world->setLearningState(trainingPlan.getLearningState());

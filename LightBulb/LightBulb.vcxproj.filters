@@ -472,9 +472,6 @@
     <ClCompile Include="Examples\FunctionDrawer.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\FunctionSimulator.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\Nature.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
@@ -482,9 +479,6 @@
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
     <ClCompile Include="Examples\NetworkDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Position.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
     <ClCompile Include="Examples\RockTile.cpp">
@@ -1049,9 +1043,6 @@
     <ClInclude Include="Examples\FunctionDrawer.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\FunctionSimulator.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\Nature.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
@@ -1059,9 +1050,6 @@
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\NetworkDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Position.hpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Examples\RockTile.hpp">
@@ -1282,5 +1270,6 @@
     <ClInclude Include="Learning\Evolution\WeightDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp" />
+    <ClInclude Include="IO\ConstructExisting.hpp" />
   </ItemGroup>
 </Project>

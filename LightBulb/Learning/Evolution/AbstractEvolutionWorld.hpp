@@ -10,6 +10,7 @@
 // Includes
 #include <Logging/AbstractLoggable.hpp>
 #include <Learning/LearningState.hpp>
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -62,5 +63,7 @@ public:
 
 	void refreshHighscore();
 };
+
+EMPTY_SERIALIZATION(AbstractEvolutionWorld);
 
 #endif

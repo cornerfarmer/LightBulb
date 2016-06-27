@@ -58,6 +58,8 @@ void load(Archive& archive, LayeredNetwork & layeredNetwork)
 	archive(cereal::make_nvp("netInputs", layeredNetwork.netInputs));
 	archive(cereal::make_nvp("activations", layeredNetwork.activations));
 	archive(cereal::make_nvp("weights", layeredNetwork.weights));
+	for (int l = 0; l < layeredNetwork.getLayerCount(); l++)
+		layeredNetwork.rebuildActivationsPerLayer(l);
 }
 
 

@@ -50,6 +50,12 @@ EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions* optio
 	exitConditionReached = false;
 }
 
+EvolutionLearningRule::EvolutionLearningRule()
+	: AbstractEvolutionLearningRule(new EvolutionLearningRuleOptions())
+{
+
+}
+
 void EvolutionLearningRule::setLoggerToUsedObjects()
 {
 	getOptions()->world->setLogger(options->logger);

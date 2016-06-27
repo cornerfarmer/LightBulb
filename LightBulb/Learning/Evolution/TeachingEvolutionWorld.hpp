@@ -9,6 +9,7 @@
 // Include
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -37,5 +38,7 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	double getScore(AbstractEvolutionObject* object);
 };
+
+//USE_PARENT_SERIALIZATION(TeachingEvolutionWorld, AbstractSimpleEvolutionWorld)
 
 #endif

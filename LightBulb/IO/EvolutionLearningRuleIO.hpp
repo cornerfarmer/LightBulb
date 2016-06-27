@@ -5,7 +5,7 @@
 
 // Includes
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include "IOStorage.hpp"
+#include "ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -20,14 +20,12 @@ void serialize(Archive& archive, EvolutionLearningRule& learningRule)
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<EvolutionLearningRule>
+	CONSTRUCT_EXISTING(EvolutionLearningRule, AbstractLearningRule)
 	{
 		template <class Archive>
-		static void load_and_construct(Archive& ar, cereal::construct<EvolutionLearningRule>& construct)
+		static void construct(Archive& ar, EvolutionLearningRule& learningRule)
 		{
-			EvolutionLearningRule* learningRule = static_cast<EvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
-			ar(cereal::base_class<AbstractEvolutionLearningRule>(learningRule));
-			IOStorage<AbstractLearningRule>::push(learningRule);
+			ar(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
 		}
 	};
 }

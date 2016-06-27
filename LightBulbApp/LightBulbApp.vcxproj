@@ -193,8 +193,6 @@
     </ClInclude>
     <ClInclude Include="IO\DoublePreferenceIO.hpp" />
     <ClInclude Include="IO\IntegerPreferenceIO.hpp" />
-    <ClInclude Include="IO\NetworkIO.hpp" />
-    <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />
     <ClInclude Include="IO\TrainingControllerIO.hpp" />
     <ClInclude Include="IO\TrainingPlanRepositoryIO.hpp" />

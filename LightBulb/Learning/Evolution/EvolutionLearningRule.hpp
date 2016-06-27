@@ -67,6 +67,7 @@ protected:
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRule(EvolutionLearningRuleOptions* options_);
+	EvolutionLearningRule();
 	// Executes the learning process
 	void initializeTry();
 	static std::string getName();

@@ -18,6 +18,6 @@ public:
 	std::string getLearningRuleName();
 };
 
-USE_PARENT_SERIALIZATION(FunctionEvolutionExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(FunctionEvolutionExample, AbstractEvolutionTrainingPlan);
 
 #endif

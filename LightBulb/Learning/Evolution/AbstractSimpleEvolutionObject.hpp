@@ -30,6 +30,8 @@ class AbstractSimpleEvolutionObject : public AbstractEvolutionObject
 private:
 	std::vector<double> lastOutput;
 	std::vector<double> lastInput;
+
+	void buildOutputBuffer();
 protected:
 	// The NN of the object
 	std::unique_ptr<NeuralNetwork> neuralNetwork;

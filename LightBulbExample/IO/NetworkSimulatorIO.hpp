@@ -5,6 +5,7 @@
 
 // Includes
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
+#include "IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -24,6 +25,19 @@ void load(Archive& archive, NetworkSimulator& world)
 {
 	archive(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
 	archive(cereal::make_nvp("consumers", world.consumers));
+}
+
+namespace cereal
+{
+	CONSTRUCT_EXISTING(NetworkSimulator, AbstractEvolutionWorld)
+	{
+		template <class Archive>
+		static void construct(Archive& ar, NetworkSimulator& world)
+		{
+			ar(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
+			ar(cereal::make_nvp("consumers", world.consumers));
+		}
+	};
 }
 
 #include "IO/UsedArchives.hpp"

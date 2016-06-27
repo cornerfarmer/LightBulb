@@ -20,6 +20,7 @@ class NetworkSimulator : public AbstractSimpleEvolutionWorld
 	friend void save(Archive& archive, NetworkSimulator const& world);
 	template <class Archive>
 	friend void load(Archive& archive, NetworkSimulator& world);
+	friend struct cereal::LoadAndConstruct<NetworkSimulator>;
 protected:
 	std::vector<std::vector<float>> consumers;
 	AbstractEvolutionObject* createNewObject();
