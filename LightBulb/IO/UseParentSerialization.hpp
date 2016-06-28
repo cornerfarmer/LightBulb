@@ -4,6 +4,7 @@
 #define _USEPARENTSERIALIZATION_H_
 
 // Includes
+#include "IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -51,5 +52,31 @@ template <class Archive> \
 void load(Archive& archive, T& trainingPlan) \
 { \
 } \
+
+#define USE_EXISTING_PARENT_SERIALIZATION(T, Parent, StorageType) \
+template <class Archive> \
+void save(Archive& archive, T const& trainingPlan) \
+{ \
+	archive(cereal::base_class<Parent>(&trainingPlan)); \
+} \
+template <class Archive> \
+void load(Archive& archive, T& trainingPlan) \
+{ \
+	archive(cereal::base_class<Parent>(&trainingPlan)); \
+} \
+namespace cereal \
+{ \
+	CONSTRUCT_EXISTING(T, StorageType) \
+	{ \
+		template <class Archive> \
+		static void construct(Archive& ar, T& trainingPlan) \
+		{ \
+			ar(cereal::base_class<Parent>(&trainingPlan)); \
+		} \
+	}; \
+} \
+CEREAL_REGISTER_TYPE(T);
+
+
 
 #endif

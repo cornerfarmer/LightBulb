@@ -42,6 +42,6 @@ public:
 	double getScore(AbstractEvolutionObject* object);
 };
 
-#include "IO/FunctionSimulatorIO.hpp"
+USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, AbstractSimpleEvolutionWorld, AbstractEvolutionWorld)
 
 #endif

@@ -162,7 +162,6 @@
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
     <ClInclude Include="IO\PositionIO.hpp" />
-    <ClInclude Include="IO\FunctionSimulatorIO.hpp" />
     <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
   </ItemGroup>

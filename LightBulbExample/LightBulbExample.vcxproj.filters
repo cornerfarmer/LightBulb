@@ -134,9 +134,6 @@
     <ClInclude Include="IO\NetworkIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="IO\FunctionSimulatorIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\Position.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>

@@ -40,6 +40,6 @@ public:
 	double getScore(AbstractEvolutionObject* object);
 };
 
-#include "IO/TeachingEvolutionWorldIO.hpp"
+USE_EXISTING_PARENT_SERIALIZATION(TeachingEvolutionWorld, AbstractSimpleEvolutionWorld, AbstractEvolutionWorld)
 
 #endif
