@@ -32,6 +32,7 @@ protected:
 public:
 	// Creates a new world with the given teacher and the network options
 	TeachingEvolutionWorld(AbstractTeacher* teacher_, LayeredNetworkOptions& networkOptions_);
+	TeachingEvolutionWorld() = default;
 	AbstractTeacher* getTeacher();
 	// Inherited:
 	bool doSimulationStep();
@@ -39,6 +40,6 @@ public:
 	double getScore(AbstractEvolutionObject* object);
 };
 
-//USE_PARENT_SERIALIZATION(TeachingEvolutionWorld, AbstractSimpleEvolutionWorld)
+#include "IO/TeachingEvolutionWorldIO.hpp"
 
 #endif

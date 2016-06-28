@@ -14,7 +14,7 @@ TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingE
 
 	// Create a new network after the given options
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
-	neuralNetwork = new NeuralNetwork(layeredNetwork);
+	neuralNetwork.reset(new NeuralNetwork(layeredNetwork));
 	// Randomize all weights
 	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5,0.5);
 
@@ -27,7 +27,7 @@ TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingE
 
 AbstractNeuralNetwork* TeachedEvolutionObject::getNeuralNetwork()
 {
-	return neuralNetwork;
+	return neuralNetwork.get();
 }
 
 void TeachedEvolutionObject::doNNCalculation()
@@ -37,11 +37,6 @@ void TeachedEvolutionObject::doNNCalculation()
 	currentTeachingError = teachingEvolutionWorld->getTeacher()->getTeachingError(*neuralNetwork, activationOrder);
 	currentWeightDecayError = teachingEvolutionWorld->getTeacher()->getWeightDecayError(*neuralNetwork);
 	currentTotalError = currentTeachingError + currentWeightDecayError;
-}
-
-TeachedEvolutionObject::~TeachedEvolutionObject()
-{
-	delete(neuralNetwork);
 }
 
 void TeachedEvolutionObject::resetNN()

@@ -1271,5 +1271,7 @@
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
+    <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
+    <ClInclude Include="IO\TeachingEvolutionWorldIO.hpp" />
   </ItemGroup>
 </Project>

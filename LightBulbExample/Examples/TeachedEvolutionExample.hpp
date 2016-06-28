@@ -19,6 +19,6 @@ public:
 	std::string getLearningRuleName();
 };
 
-USE_PARENT_SERIALIZATION(TeachedEvolutionExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(TeachedEvolutionExample, AbstractEvolutionTrainingPlan);
 
 #endif
