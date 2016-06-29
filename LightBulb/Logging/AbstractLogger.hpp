@@ -8,7 +8,6 @@
 #include <Event/Observable.hpp>
 
 // Includes
-#include "IO/EnumSerialization.hpp"
 
 // Forward declarations
 
