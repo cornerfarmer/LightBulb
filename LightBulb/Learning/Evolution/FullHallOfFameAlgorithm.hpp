@@ -18,6 +18,6 @@ protected:
 	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects);
 };
 
-USE_PARENT_SINGLE_SERIALIZATION(FullHallOfFameAlgorithm, AbstractHallOfFameAlgorithm)
+USE_EXISTING_PARENT_SINGLE_SERIALIZATION(FullHallOfFameAlgorithm, AbstractHallOfFameAlgorithm, AbstractHallOfFameAlgorithm)
 
 #endif

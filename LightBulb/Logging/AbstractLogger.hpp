@@ -8,6 +8,7 @@
 #include <Event/Observable.hpp>
 
 // Includes
+#include "IO/EnumSerialization.hpp"
 
 // Forward declarations
 
@@ -17,6 +18,7 @@ enum LogLevel
 	LL_MEDIUM,
 	LL_LOW
 };
+
 
 enum LoggerEvents
 {

@@ -7,7 +7,7 @@
 #include <Event/Observable.hpp>
 #include <Logging/StorageLogger.hpp>
 #include "AbstractPreference.hpp"
-
+#include "IO/EnumSerialization.hpp"
 // Library includes
 #include <string>
 #include <thread>

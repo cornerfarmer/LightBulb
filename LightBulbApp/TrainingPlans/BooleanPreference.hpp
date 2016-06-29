@@ -24,5 +24,6 @@ public:
 	AbstractPreference* getCopy();
 };
 
+#include "IO/BooleanPreferenceIO.hpp"
 
 #endif

@@ -9,7 +9,6 @@
 
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include <IO/UseParentSerialization.hpp>
 
 // Forward declarations
 
@@ -26,7 +25,5 @@ public:
 	SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_ = 0, AbstractCoevolutionWorld* secondWorld_ = NULL);
 	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
-
-#include "IO/SharedSamplingCombiningStrategyIO.hpp"
 
 #endif

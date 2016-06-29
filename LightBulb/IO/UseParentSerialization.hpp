@@ -77,6 +77,26 @@ namespace cereal \
 } \
 CEREAL_REGISTER_TYPE(T);
 
+#define USE_EXISTING_PARENT_SINGLE_SERIALIZATION(T, Parent, StorageType) \
+template <class Archive> \
+void serialize(Archive& archive, T& trainingPlan) \
+{ \
+	archive(cereal::base_class<Parent>(&trainingPlan)); \
+} \
+namespace cereal \
+{ \
+	CONSTRUCT_EXISTING(T, StorageType) \
+	{ \
+		template <class Archive> \
+		static void construct(Archive& ar, T& trainingPlan) \
+		{ \
+			ar(cereal::base_class<Parent>(&trainingPlan)); \
+		} \
+	}; \
+} \
+CEREAL_REGISTER_TYPE(T);
+
+
 
 
 #endif

@@ -8,6 +8,7 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/vector.hpp>
+#include <cereal/types/common.hpp>
 
 template <class Archive>
 void save(Archive& archive, AbstractTrainingPlan const& trainingPlan)

@@ -783,12 +783,10 @@
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
     <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
+    <ClInclude Include="IO\EnumSerialization.hpp" />
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
-    <ClInclude Include="IO\RandomCombiningStrategyIO.hpp" />
-    <ClInclude Include="IO\RandomHallOfFameAlgorithmIO.hpp" />
     <ClInclude Include="IO\RBFNetworkIO.hpp" />
-    <ClInclude Include="IO\SharedSamplingCombiningStrategyIO.hpp" />
     <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />

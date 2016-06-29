@@ -1205,19 +1205,10 @@
     <ClInclude Include="IO\NeuronDescriptionIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\RandomCombiningStrategyIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\RandomHallOfFameAlgorithmIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\SharedSamplingCombiningStrategyIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\StorageLoggerIO.hpp">
@@ -1272,5 +1263,6 @@
     <ClInclude Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
     <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
+    <ClInclude Include="IO\EnumSerialization.hpp" />
   </ItemGroup>
 </Project>

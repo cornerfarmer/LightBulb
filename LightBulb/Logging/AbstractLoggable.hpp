@@ -20,6 +20,10 @@ private:
 protected:
 	void log(std::string message, LogLevel logLevel);
 public:
+	virtual ~AbstractLoggable()
+	{
+	}
+
 	virtual void setLogger(AbstractLogger* logger_);
 };
 

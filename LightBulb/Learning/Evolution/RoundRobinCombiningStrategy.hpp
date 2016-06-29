@@ -9,7 +9,6 @@
 
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 
@@ -20,7 +19,5 @@ private:
 public:
 	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
-
-EMPTY_CHILD_SERIALIZATION(RoundRobinCombiningStrategy)
 
 #endif

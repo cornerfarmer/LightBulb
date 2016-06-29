@@ -7,7 +7,6 @@
 
 // Include
 #include "Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
-#include <IO/UseParentSerialization.hpp>
 
 // Forward declarations
 
@@ -17,7 +16,5 @@ protected:
 public:
 	std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results);
 };
-
-EMPTY_CHILD_SERIALIZATION(SharedCoevolutionFitnessFunction)
 
 #endif

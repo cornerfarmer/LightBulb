@@ -22,7 +22,10 @@ void save(Archive& archive, AbstractCoevolutionTrainingPlan const& trainingPlan)
 template <class Archive>
 void load(Archive& archive, AbstractCoevolutionTrainingPlan& trainingPlan)
 {
+	IOStorage<AbstractEvolutionWorld>::push(trainingPlan.createParasiteWorld());
 	archive(cereal::make_nvp("parasiteWorld", trainingPlan.parasiteWorld));
+	trainingPlan.parasiteWorld.reset(IOStorage<AbstractEvolutionWorld>::pop());
+
 	archive(cereal::base_class<AbstractEvolutionTrainingPlan>(&trainingPlan));
 
 	trainingPlan.parasiteWorld->setLearningState(trainingPlan.getLearningState());

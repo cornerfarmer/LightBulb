@@ -66,6 +66,6 @@ public:
 	int getRoundCount();
 };
 
-USE_PARENT_SERIALIZATION(TicTacToe, AbstractCoevolutionWorld);
+USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, AbstractCoevolutionWorld, AbstractEvolutionWorld);
 
 #endif

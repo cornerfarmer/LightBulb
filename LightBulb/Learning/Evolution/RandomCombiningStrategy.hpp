@@ -7,7 +7,6 @@
 
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include <IO/UseParentSerialization.hpp>
 
 // Forward declarations
 
@@ -22,7 +21,5 @@ public:
 	RandomCombiningStrategy(int amountOfCompetitionsPerObject_ = 0);
 	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
 };
-
-#include "IO/RandomCombiningStrategyIO.hpp"
 
 #endif

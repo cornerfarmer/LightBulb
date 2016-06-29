@@ -20,8 +20,8 @@ void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule2Options(E
 
 void AbstractCoevolutionTrainingPlan::initializeStart()
 {
-	AbstractEvolutionTrainingPlan::initializeStart();
 	parasiteWorld.reset(createParasiteWorld());
+	AbstractEvolutionTrainingPlan::initializeStart();
 }
 
 AbstractEvolutionWorld* AbstractCoevolutionTrainingPlan::getParasiteWorld()

@@ -7,13 +7,12 @@
 
 // Include
 #include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 
 class RandomHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
 {
-	template <class Archive>
-	friend void serialize(Archive& archive, RandomHallOfFameAlgorithm& hallOfFameAlgorithm);
 private:
 	int amountOfCompetitionsPerObject;
 protected:	
@@ -22,6 +21,6 @@ public:
 	RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_ = 0);
 };
 
-#include "IO/RandomHallOfFameAlgorithmIO.hpp"
+USE_EXISTING_PARENT_SINGLE_SERIALIZATION(RandomHallOfFameAlgorithm, AbstractHallOfFameAlgorithm, AbstractHallOfFameAlgorithm)
 
 #endif

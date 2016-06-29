@@ -10,7 +10,6 @@
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
 #include <Learning/Evolution/AbstractHallOfFameAlgorithm.hpp>
-#include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 #include <Examples/TicTacToeEvolution/TicTacToe.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
 #include <Learning/Evolution/PerfectObjectFoundCondition.hpp>
@@ -31,6 +30,7 @@
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <Learning/Evolution/NeuronDecayFitnessFunction.hpp>
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
+#include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
@@ -104,22 +104,25 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 {
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
-	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
-
 	LayeredNetworkOptions options = getNetworkOptions();
-	return new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	TicTacToe* ticTacToe1 = new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+
+	cs1->setSecondWorld(static_cast<TicTacToe*>(parasiteWorld.get()));
+	cs2->setSecondWorld(ticTacToe1);
+
+	return ticTacToe1;
+
 }
 
 AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
+	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
+	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
+
 	LayeredNetworkOptions options = getNetworkOptions();
-	TicTacToe* ticTacToe2 = new TicTacToe(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
-	cs1->setSecondWorld(ticTacToe2);
-	cs2->setSecondWorld(static_cast<TicTacToe*>(world.get()));
-	return ticTacToe2;
+	return new TicTacToe(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 }
 
 TicTacToeEvolutionExample::TicTacToeEvolutionExample()
