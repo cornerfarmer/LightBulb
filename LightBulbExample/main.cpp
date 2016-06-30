@@ -9,6 +9,7 @@
 #include "Examples/RBFNetworkBiggerExample.hpp"
 #include "Examples/TCProblemEvolutionExample.hpp"
 #include "Examples/TCProblemBackpropagationExample.hpp"
+#include "Examples/PongEvolution/PongEvolutionExample.hpp"
 
 void main(int argc, char** argv)
 {
@@ -22,6 +23,7 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new TeachedEvolutionExample());
 	app->addTrainingPlan(new TCProblemEvolutionExample());
 	app->addTrainingPlan(new TCProblemBackpropagationExample());
+	app->addTrainingPlan(new PongEvolutionExample());
 
 	wxApp::SetInstance(app);
 	wxEntry(argc, argv);
