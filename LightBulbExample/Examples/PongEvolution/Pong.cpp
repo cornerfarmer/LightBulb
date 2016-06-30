@@ -118,76 +118,68 @@ int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 		ai2->doNNCalculation();
 		advanceBall(1);
 
-		if (watchMode)
+		/*if (watchMode)
 		{
 			throwEvent(EVT_FIELD_CHANGED, this);
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
-		}
+		}*/
 		time++;
 	}
 
-	return whoHasWon();
+	if (whoHasWon() == 0) {
+		if (parasiteWorld)
+			return -1;
+		else
+			return 1;
+	}
+	else
+		return whoHasWon();
 }
+
+void Pong::executeCompareAI()
+{
+	if (state.ballPosY > state.paddle2Pos + properties.paddleHeight / 2)
+		movePaddle(1);
+	else
+		movePaddle(-1);
+}
+
 
 int Pong::rateKI(AbstractEvolutionObject* rateKI)
 {
-/*
 	int wins = 0;
-	int possibleGames = 9 * 7 * 5 * 3;
-	possibleGames += 8 * 6 * 4 * 2;
-
-	for (int b = 0; b < 2; b++)
+	int matchCount = 10;
+	for (int i = 0; i < matchCount; i++)
 	{
-		std::vector<int> decisionNr(b == 0 ? 4 : 4, 0);
+		rateKI->resetNN();
 
-		bool decisionCombinationsLeft = true;
+		startNewGame();
 
-		while (decisionCombinationsLeft)
+		double time = 0;
+		while (whoHasWon() == 0 && time < properties.maxTime)
 		{
-			rateKI->resetNN();
-			startNewGame(b == 0 ? -1 : 1);
+			currentPlayer = 1;
+			rateKI->doNNCalculation();
+			currentPlayer = -1;
+			executeCompareAI();
+			advanceBall(1);
 
-			int i;
-			for (i = 0; i < 9; i++)
+			if (watchMode)
 			{
-				if (i % 2 == 1 - b)
-				{
-					rateKI->doNNCalculation();
-				}
-				else
-				{
-					int x, y;
-					int freeFieldNr = -1;
-					for (y = 0; y < 3; y++)
-					{
-						for (x = 0; x < 3; x++)
-						{
-							if (isFree(x, y))
-								freeFieldNr++;
-							if ((i == 8 && freeFieldNr == 0) || (i != 8 && freeFieldNr == decisionNr[i / 2]))
-								goto setField;
-						}
-					}
-				setField:
-					setField(x, y);
-				}
-				if (hasGameFinished())
-					break;
+				throwEvent(EVT_FIELD_CHANGED, this);
+				std::this_thread::sleep_for(std::chrono::milliseconds(20));
 			}
-
-			if ((currentPlayer == -1 && illegalMove) || (whoHasWon() == 1) || i>8)
-				wins++;
-
-			decisionCombinationsLeft = !nextDecisionCombination(decisionNr, b);
+			time++;
 		}
+
+		if (whoHasWon() == 1 || whoHasWon() == 0)
+			wins++;
 	}
+	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(matchCount), LL_MEDIUM);
+	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING])
+		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING, (double)wins / matchCount);
 
-	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
-	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING])
-		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, (double)wins / possibleGames);
-
-	return wins;*/
-	return 0;
+	return wins;
 }
 
 
@@ -199,9 +191,9 @@ void Pong::startNewGame()
 int Pong::whoHasWon()
 {
 	if (state.ballPosX + properties.ballRad >= properties.width)
-		return 1;
-	else if (state.ballPosX <= 0)
 		return -1;
+	else if (state.ballPosX <= 0)
+		return 1;
 	else
 		return 0;
 }
@@ -291,6 +283,3 @@ void Pong::resetWorld()
 		 input[4] = state.paddle2Pos / (properties.height - properties.paddleHeight);
 	 }
 }
-
-
-
