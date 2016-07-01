@@ -46,6 +46,7 @@ struct PongGameProperties
 	int maxBallSpeed;
 	int minBallSpeed;
 	int maxTime;
+	double speedIncreaseFac;
 };
 
 

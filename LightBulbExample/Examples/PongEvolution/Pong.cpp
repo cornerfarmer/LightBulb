@@ -30,7 +30,8 @@ void Pong::initialize()
 	properties.paddleSpeed = 5;
 	properties.paddleHeight = 30;
 	properties.paddleWidth = 10;
-	properties.maxTime = 1000;
+	properties.maxTime = 1000; // 1000
+	properties.speedIncreaseFac = 1.2; // 1.2
 }
 
 int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
@@ -225,8 +226,8 @@ void Pong::advanceBall(double fac)
 		{
 			state.ballVelX *= -1;
 			advanceBall(fac - colTimeX);
-			state.ballVelX *= 1.2;
-			state.ballVelY *= 1.2;
+			state.ballVelX *= properties.speedIncreaseFac;
+			state.ballVelY *= properties.speedIncreaseFac;
 		}
 		else
 		{
