@@ -22,7 +22,7 @@ Pong::Pong(LayeredNetworkOptions& options_, bool isParasiteWorld_, AbstractCombi
 void Pong::initialize()
 {
 	watchMode = false;
-	properties.maxBallSpeed = 5;
+	properties.maxBallSpeed = 3;
 	properties.minBallSpeed = 2;
 	properties.width = 210;
 	properties.height = 160;
@@ -30,7 +30,7 @@ void Pong::initialize()
 	properties.paddleSpeed = 5;
 	properties.paddleHeight = 30;
 	properties.paddleWidth = 10;
-	properties.maxTime = 500;
+	properties.maxTime = 1000;
 }
 
 int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
@@ -225,6 +225,8 @@ void Pong::advanceBall(double fac)
 		{
 			state.ballVelX *= -1;
 			advanceBall(fac - colTimeX);
+			state.ballVelX *= 1.2;
+			state.ballVelY *= 1.2;
 		}
 		else
 		{
