@@ -206,10 +206,6 @@ void NetworkViewerWindow::render(wxDC& dc)
 
 		panel->GetVirtualSize(&width, &height);
 		panel->GetScrollPos(0);
-		static int counter = 0;
-		counter++;
-		dc.DrawText(std::to_string(counter), 100, 100);
-
 
 		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
 		bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
