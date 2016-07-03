@@ -22,7 +22,6 @@ Pong::Pong(LayeredNetworkOptions& options_, bool isParasiteWorld_, AbstractCombi
 void Pong::initialize()
 {
 	watchMode = false;
-	properties.maxBallSpeed = 3;
 	properties.minBallSpeed = 2;
 	properties.width = 210;
 	properties.height = 160;
@@ -32,6 +31,7 @@ void Pong::initialize()
 	properties.paddleWidth = 10;
 	properties.maxTime = 1000; // 1000
 	properties.speedIncreaseFac = 1.2; // 1.2
+	properties.maxBallSpeed = properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
 }
 
 int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
@@ -149,7 +149,7 @@ void Pong::executeCompareAI()
 int Pong::rateKI(AbstractEvolutionObject* rateKI)
 {
 	int wins = 0;
-	int matchCount = 10;
+	int matchCount = 100;
 	for (int i = 0; i < matchCount; i++)
 	{
 		rateKI->resetNN();
@@ -226,8 +226,10 @@ void Pong::advanceBall(double fac)
 		{
 			state.ballVelX *= -1;
 			advanceBall(fac - colTimeX);
-			state.ballVelX *= properties.speedIncreaseFac;
-			state.ballVelY *= properties.speedIncreaseFac;
+			if (std::abs(state.ballVelX * properties.speedIncreaseFac) < properties.maxBallSpeed && std::abs(state.ballVelY * properties.speedIncreaseFac) < properties.maxBallSpeed) {
+				state.ballVelX *= properties.speedIncreaseFac;
+				state.ballVelY *= properties.speedIncreaseFac;
+			}
 		}
 		else
 		{
@@ -255,11 +257,11 @@ void Pong::resetWorld()
 	state.ballPosX = properties.width / 2;
 	state.ballPosY = properties.height / 2;
 
-	state.ballVelX = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) + properties.minBallSpeed;
+	state.ballVelX = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
 	if (rand() > RAND_MAX / 2)
 		state.ballVelX *= -1;
 
-	state.ballVelY = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) + properties.minBallSpeed;
+	state.ballVelY = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
 	if (rand() > RAND_MAX / 2)
 		state.ballVelY *= -1;
 
