@@ -130,16 +130,16 @@ PongEvolutionExample::PongEvolutionExample()
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new DoublePreference(PREFERENCE_MUTATION_PERCENTAGE, 1.8, 0, 3));
 	addPreference(new DoublePreference(PREFERENCE_RECOMBINATION_PERCENTAGE, 0.3, 0, 3));
-	addPreference(new DoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE, 0.05, 0, 3));
+	addPreference(new DoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE, 0, 0, 3));
 	addPreference(new IntegerPreference(PREFERENCE_POPULATION_SIZE, 150, 1, 1000));
 	addPreference(new IntegerPreference(PREFERENCE_CREATE_UP_TO, 250, 1, 1000));
-	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 15, 1, 1000));
-	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 0, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_COMPETITIONS_SIZE, 25, 1, 1000));
+	addPreference(new IntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE, 5, 1, 1000));
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, true));
-	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 1, 1, 30));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
-	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.1, 0, 2)); // 1.6, simple
+	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.5, 0, 2)); // 1.6, simple
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0, 0.003, 0.3));
 }
 
