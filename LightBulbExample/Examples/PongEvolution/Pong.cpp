@@ -30,8 +30,8 @@ void Pong::initialize()
 	properties.paddleHeight = 30;
 	properties.paddleWidth = 10;
 	properties.maxTime = 1000; // 1000
-	properties.speedIncreaseFac = 1.2; // 1.2
-	properties.maxBallSpeed = properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
+	properties.speedIncreaseFac = 1; // 1.2
+	properties.maxBallSpeed = 3;// properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
 }
 
 int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
@@ -149,7 +149,7 @@ void Pong::executeCompareAI()
 int Pong::rateKI(AbstractEvolutionObject* rateKI)
 {
 	int wins = 0;
-	int matchCount = 100;
+	int matchCount = 10;
 	for (int i = 0; i < matchCount; i++)
 	{
 		rateKI->resetNN();
@@ -272,19 +272,28 @@ void Pong::resetWorld()
 
  void Pong::getNNInput(std::vector<double>& input)
 {
-	 input.resize(6);
-	 input[0] = currentPlayer * state.ballPosX / properties.width;
-	 input[1] = state.ballPosY / properties.height;
-	 input[2] = currentPlayer * state.ballVelX / properties.maxBallSpeed;
-	 input[3] = state.ballVelY / properties.maxBallSpeed;
-	 if (currentPlayer == 1) 
+	 input.resize(properties.height * (properties.width + properties.paddleWidth * 2));
+	 int index = 0;
+	 for (int y = 0; y < properties.height; y++)
 	 {
-		 input[4] = state.paddle1Pos / (properties.height - properties.paddleHeight);
-		 input[5] = state.paddle2Pos / (properties.height - properties.paddleHeight);
-	 }
-	 else
-	 {
-		 input[5] = state.paddle1Pos / (properties.height - properties.paddleHeight);
-		 input[4] = state.paddle2Pos / (properties.height - properties.paddleHeight);
+		 for (int x = (currentPlayer == 1 ? -properties.paddleWidth : properties.width + properties.paddleWidth - 1); (currentPlayer == 1 && x < properties.width + properties.paddleWidth) || (currentPlayer == -1 && x >= -properties.paddleWidth); x += (currentPlayer == 1 ? 1 : -1))
+		 {
+			 if (x < 0 && y >= state.paddle2Pos && y < state.paddle2Pos + properties.paddleHeight)
+			 {
+				 input[index++] = 1;
+			 }
+			 else if (x >= properties.width && y >= state.paddle1Pos && y < state.paddle1Pos + properties.paddleHeight)
+			 {
+				 input[index++] = 1;
+			 }
+			 else if (x >= state.ballPosX && y >= state.ballPosY && y < state.ballPosY + properties.ballRad && x < state.ballPosX + properties.ballRad)
+			 {
+				 input[index++] = 1;
+			 }
+			 else
+			 {
+				 input[index++] = 0;
+			 }
+		 }
 	 }
 }
