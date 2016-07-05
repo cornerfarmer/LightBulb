@@ -93,6 +93,9 @@
     <ClCompile Include="Examples\PongEvolution\PongGameWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\PongEvolution\PongGame.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -177,6 +180,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\PongEvolution\PongGameWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\PongEvolution\PongGame.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

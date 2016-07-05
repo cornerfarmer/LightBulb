@@ -130,6 +130,7 @@
     <ClCompile Include="Examples\PongEvolution\Pong.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongAI.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongEvolutionExample.cpp" />
+    <ClCompile Include="Examples\PongEvolution\PongGame.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameController.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameFactory.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameWindow.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Examples\PongEvolution\Pong.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongAI.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongEvolutionExample.hpp" />
+    <ClInclude Include="Examples\PongEvolution\PongGame.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameController.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameFactory.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameWindow.hpp" />

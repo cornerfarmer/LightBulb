@@ -12,7 +12,7 @@ PongGameController::PongGameController(AbstractMainApp* mainApp, AbstractTrainin
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
 	world = static_cast<Pong*>(static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
-	properties = world->getProperties();
+	properties = world->getGame()->getProperties();
 	window.reset(new PongGameWindow(this, parent));
 }
 
@@ -57,7 +57,7 @@ PongGameProperties* PongGameController::getProperties()
 
 void PongGameController::fieldChanged(Pong * pong)
 {
-	currentState = pong->getState();
+	currentState = pong->getGame()->getState();
 	wxThreadEvent evt(PONG_EVT_FIELD_CHANGED);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }

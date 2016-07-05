@@ -627,6 +627,8 @@
     <ClCompile Include="Learning\Evolution\WeightDecayFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\NeuronDecayFitnessFunction.cpp" />
     <ClCompile Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.cpp" />
+    <ClCompile Include="Learning\Reinforcement\ReinforcementLearningRule.cpp" />
+    <ClCompile Include="Learning\Reinforcement\AbstractReinforcementWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1264,5 +1266,7 @@
     <ClInclude Include="IO\ConstructExisting.hpp" />
     <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
     <ClInclude Include="IO\EnumSerialization.hpp" />
+    <ClInclude Include="Learning\Reinforcement\ReinforcementLearningRule.hpp" />
+    <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
   </ItemGroup>
 </Project>

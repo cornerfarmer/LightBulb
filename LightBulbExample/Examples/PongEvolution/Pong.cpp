@@ -16,22 +16,7 @@ Pong::Pong(LayeredNetworkOptions& options_, bool isParasiteWorld_, AbstractCombi
 	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
 	options.reset(new LayeredNetworkOptions(options_));
-	initialize();
-}
-
-void Pong::initialize()
-{
 	watchMode = false;
-	properties.minBallSpeed = 2;
-	properties.width = 210;
-	properties.height = 160;
-	properties.ballRad = 5;
-	properties.paddleSpeed = 5;
-	properties.paddleHeight = 30;
-	properties.paddleWidth = 10;
-	properties.maxTime = 1000; // 1000
-	properties.speedIncreaseFac = 1; // 1.2
-	properties.maxBallSpeed = 3;// properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
 }
 
 int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
@@ -57,26 +42,6 @@ void Pong::initializeForLearning()
 {
 }
 
-void Pong::movePaddle(int dir)
-{
-	if (currentPlayer == 1)
-	{
-		if (dir == 1)
-			state.paddle1Pos += properties.paddleSpeed;
-		else if(dir == -1)
-			state.paddle1Pos -= properties.paddleSpeed;
-		state.paddle1Pos = std::max(0.0, std::min((double)(properties.height - properties.paddleHeight), state.paddle1Pos));
-	}
-	else
-	{
-		if (dir == 1)
-			state.paddle2Pos += properties.paddleSpeed;
-		else if (dir == -1)
-			state.paddle2Pos -= properties.paddleSpeed;
-		state.paddle2Pos = std::max(0.0, std::min((double)(properties.height - properties.paddleHeight), state.paddle2Pos));
-	}
-}
-
 
 void Pong::startWatchMode()
 {
@@ -88,14 +53,9 @@ void Pong::stopWatchMode()
 	watchMode = false;
 }
 
-PongGameState Pong::getState()
+PongGame* Pong::getGame()
 {
-	return state;
-}
-
-PongGameProperties Pong::getProperties()
-{
-	return properties;
+	return &game;
 }
 
 int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
@@ -111,13 +71,13 @@ int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 	startNewGame();
 
 	double time = 0;
-	while (whoHasWon() == 0 && time < properties.maxTime)
+	while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
 	{
-		currentPlayer = 1;
+		game.setPlayer(1);
 		ai1->doNNCalculation();
-		currentPlayer = -1;
+		game.setPlayer(-1);
 		ai2->doNNCalculation();
-		advanceBall(1);
+		game.advanceBall(1);
 
 		/*if (watchMode)
 		{
@@ -127,29 +87,29 @@ int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 		time++;
 	}
 
-	if (whoHasWon() == 0) {
+	if (game.whoHasWon() == 0) {
 		if (parasiteWorld)
 			return -1;
 		else
 			return 1;
 	}
 	else
-		return whoHasWon();
+		return game.whoHasWon();
 }
 
 void Pong::executeCompareAI()
 {
-	if (state.ballPosY > state.paddle2Pos + properties.paddleHeight / 2)
-		movePaddle(1);
+	if (game.getState().ballPosY > game.getState().paddle2Pos + game.getProperties().paddleHeight / 2)
+		game.movePaddle(1);
 	else
-		movePaddle(-1);
+		game.movePaddle(-1);
 }
 
 
 int Pong::rateKI(AbstractEvolutionObject* rateKI)
 {
 	int wins = 0;
-	int matchCount = 10;
+	int matchCount = 100;
 	for (int i = 0; i < matchCount; i++)
 	{
 		rateKI->resetNN();
@@ -157,13 +117,13 @@ int Pong::rateKI(AbstractEvolutionObject* rateKI)
 		startNewGame();
 
 		double time = 0;
-		while (whoHasWon() == 0 && time < properties.maxTime)
+		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
 		{
-			currentPlayer = 1;
+			game.setPlayer(1);
 			rateKI->doNNCalculation();
-			currentPlayer = -1;
+			game.setPlayer(-1);
 			executeCompareAI();
-			advanceBall(1);
+			game.advanceBall(1);
 
 			if (watchMode)
 			{
@@ -173,7 +133,7 @@ int Pong::rateKI(AbstractEvolutionObject* rateKI)
 			time++;
 		}
 
-		if (whoHasWon() == 1 || whoHasWon() == 0)
+		if (game.whoHasWon() == 1 || game.whoHasWon() == 0)
 			wins++;
 	}
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(matchCount), LL_MEDIUM);
@@ -189,111 +149,27 @@ void Pong::startNewGame()
 	resetWorld();
 }
 
-int Pong::whoHasWon()
-{
-	if (state.ballPosX + properties.ballRad >= properties.width)
-		return -1;
-	else if (state.ballPosX <= 0)
-		return 1;
-	else
-		return 0;
-}
-
-void Pong::advanceBall(double fac)
-{
-	double nextBallPosX = state.ballPosX + state.ballVelX * fac;
-	double nextBallPosY = state.ballPosY + state.ballVelY * fac;
-
-	double colTimeX = 0, colTimeY = 0;
-
-	if (nextBallPosY <= 0)
-		colTimeY = state.ballPosY / -state.ballVelY;
-
-	if (nextBallPosY + properties.ballRad >= properties.height)
-		colTimeY = (properties.height - (state.ballPosY + properties.ballRad)) / state.ballVelY;
-
-	if (nextBallPosX <= 0)
-		colTimeX = state.ballPosX / -state.ballVelX;
-
-	if (nextBallPosX + properties.ballRad >= properties.width)
-		colTimeX = (properties.width - (state.ballPosX + properties.ballRad)) / state.ballVelX;
-
-	if (colTimeX > 0 && (colTimeY == 0 || colTimeX <= colTimeY))
-	{
-		advanceBallWithoutCollision(colTimeX);
-		if ((state.ballVelX > 0 && state.ballPosY + properties.ballRad >= state.paddle1Pos && state.ballPosY <= state.paddle1Pos + properties.paddleHeight) ||
-			(state.ballVelX < 0 && state.ballPosY + properties.ballRad >= state.paddle2Pos && state.ballPosY <= state.paddle2Pos + properties.paddleHeight))
-		{
-			state.ballVelX *= -1;
-			advanceBall(fac - colTimeX);
-			if (std::abs(state.ballVelX * properties.speedIncreaseFac) < properties.maxBallSpeed && std::abs(state.ballVelY * properties.speedIncreaseFac) < properties.maxBallSpeed) {
-				state.ballVelX *= properties.speedIncreaseFac;
-				state.ballVelY *= properties.speedIncreaseFac;
-			}
-		}
-		else
-		{
-			advanceBallWithoutCollision(fac - colTimeX);
-		}
-	}
-	else if (colTimeY > 0)
-	{
-		advanceBallWithoutCollision(colTimeY);
-		state.ballVelY *= -1;
-		advanceBall(fac - colTimeY);
-	}
-	else
-		advanceBallWithoutCollision(fac);
-}
-
-void Pong::advanceBallWithoutCollision(double fac)
-{
-	state.ballPosX += state.ballVelX * fac;
-	state.ballPosY += state.ballVelY * fac;
-}
-
 void Pong::resetWorld()
 {
-	state.ballPosX = properties.width / 2;
-	state.ballPosY = properties.height / 2;
-
-	state.ballVelX = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (rand() > RAND_MAX / 2)
-		state.ballVelX *= -1;
-
-	state.ballVelY = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (rand() > RAND_MAX / 2)
-		state.ballVelY *= -1;
-
-	state.paddle1Pos = properties.height / 2;
-	state.paddle2Pos = properties.height / 2;
+	game.reset();
 }
 
-
- void Pong::getNNInput(std::vector<double>& input)
+void Pong::getNNInput(std::vector<double>& input)
 {
-	 input.resize(properties.height * (properties.width + properties.paddleWidth * 2));
-	 int index = 0;
-	 for (int y = 0; y < properties.height; y++)
-	 {
-		 for (int x = (currentPlayer == 1 ? -properties.paddleWidth : properties.width + properties.paddleWidth - 1); (currentPlayer == 1 && x < properties.width + properties.paddleWidth) || (currentPlayer == -1 && x >= -properties.paddleWidth); x += (currentPlayer == 1 ? 1 : -1))
-		 {
-			 if (x < 0 && y >= state.paddle2Pos && y < state.paddle2Pos + properties.paddleHeight)
-			 {
-				 input[index++] = 1;
-			 }
-			 else if (x >= properties.width && y >= state.paddle1Pos && y < state.paddle1Pos + properties.paddleHeight)
-			 {
-				 input[index++] = 1;
-			 }
-			 else if (x >= state.ballPosX && y >= state.ballPosY && y < state.ballPosY + properties.ballRad && x < state.ballPosX + properties.ballRad)
-			 {
-				 input[index++] = 1;
-			 }
-			 else
-			 {
-				 input[index++] = 0;
-			 }
-		 }
-	 }
+	input.resize(6);
+	input[0] = game.getPlayer() * game.getState().ballPosX / game.getProperties().width;
+	input[1] = game.getState().ballPosY / game.getProperties().height;
+	input[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
+	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
+	if (game.getPlayer() == 1)
+	{
+		input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	}
+	else
+	{
+		input[5] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input[4] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	}
 }
+

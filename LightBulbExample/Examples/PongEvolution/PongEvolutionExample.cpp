@@ -90,7 +90,7 @@ LayeredNetworkOptions PongEvolutionExample::getNetworkOptions()
 	LayeredNetworkOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
-	options.neuronsPerLayerCount.push_back(36800);
+	options.neuronsPerLayerCount.push_back(6);
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
 	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));

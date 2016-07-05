@@ -18,9 +18,9 @@ void PongAI::getNNInput(std::vector<double>& input)
 void PongAI::interpretNNOutput(std::vector<double>& output)
 {
 	if (output[0] > 0.5)
-		currentGame->movePaddle(1);
+		currentGame->getGame()->movePaddle(1);
 	else if (output[1] > 0.5)
-		currentGame->movePaddle(-1);
+		currentGame->getGame()->movePaddle(-1);
 }
 
 

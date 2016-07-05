@@ -13,6 +13,7 @@
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
+#include "PongGame.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -25,44 +26,13 @@ enum PongEvents
 	EVT_FIELD_CHANGED
 };
 
-struct PongGameState
-{
-	double ballVelX;
-	double ballVelY; 
-	double ballPosX; 
-	double ballPosY;
-	double paddle1Pos;
-	double paddle2Pos;
-};
-
-struct PongGameProperties
-{
-	int width;
-	int height; 
-	int ballRad;
-	int paddleHeight;
-	int paddleWidth; 
-	int paddleSpeed; 
-	int maxBallSpeed;
-	int minBallSpeed;
-	int maxTime;
-	double speedIncreaseFac;
-};
-
-
 #define DATASET_PONG_RATING "Pong rating"
 
 class Pong : public AbstractCoevolutionWorld, public LightBulb::Observable<PongEvents, Pong>
 {
 private:
-	PongGameState state;
-	PongGameProperties properties;
-	int currentPlayer;
+	PongGame game;
 	bool watchMode;
-	void initialize();
-	int whoHasWon();
-	void advanceBall(double fac);
-	void advanceBallWithoutCollision(double fac);
 protected:
 	AbstractEvolutionObject* createNewObject();
 	void resetWorld();
@@ -77,13 +47,11 @@ public:
 	int rateKI(AbstractEvolutionObject* rateKI);
 	void startNewGame();
 	void initializeForLearning();
-	void movePaddle(int dir);
 	std::vector<std::string> getDataSetLabels();
 	int getRoundCount();
 	void startWatchMode();
 	void stopWatchMode();
-	PongGameState getState();
-	PongGameProperties getProperties();
+	PongGame* getGame();
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(Pong, AbstractCoevolutionWorld, AbstractEvolutionWorld);
