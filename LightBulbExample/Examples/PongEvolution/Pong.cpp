@@ -42,22 +42,6 @@ void Pong::initializeForLearning()
 {
 }
 
-
-void Pong::startWatchMode()
-{
-	watchMode = true;
-}
-
-void Pong::stopWatchMode()
-{
-	watchMode = false;
-}
-
-PongGame* Pong::getGame()
-{
-	return &game;
-}
-
 int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 {
 	int pointsAI1 = 0;

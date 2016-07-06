@@ -44,8 +44,28 @@ void ReinforcementLearningRule::initializeTry()
 {
 	getOptions()->world->initializeForLearning();
 
-	gradients.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getLayerCount() - 1);
+	gradientsNegative.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getLayerCount() - 1);
+	gradientsPositive.resize(gradientsNegative.size());
+	for (int i = 0; i < gradientsNegative.size(); i++)
+	{
+		gradientsNegative[i].resizeLike(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getWeights()->at(i));
+		gradientsPositive[i].resizeLike(gradientsNegative[i]);
+	}
+	resetGradients();
+
+	stepsSinceLastReward = 0;
 }
+
+
+void ReinforcementLearningRule::resetGradients()
+{
+	for (int i = 0; i < gradientsNegative.size(); i++)
+	{
+		gradientsNegative[i].setZero();
+		gradientsPositive[i].setZero();
+	}
+}
+
 
 std::string ReinforcementLearningRule::getName()
 {
@@ -55,6 +75,7 @@ std::string ReinforcementLearningRule::getName()
 std::vector<std::string> ReinforcementLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
+	labels.push_back(DATA_SET_REWARD);
 	return labels;
 }
 
@@ -63,11 +84,39 @@ bool ReinforcementLearningRule::doIteration()
 {
 	double reward = getOptions()->world->doSimulationStep();
 
-	addGradients(getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+	learningState->addData(DATA_SET_REWARD, reward);
+
+	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
+
+	computeGradients(networkTopology);
+	stepsSinceLastReward++;
+
+	if (reward != 0)
+	{
+		if (reward > 0)
+			addGradients(networkTopology, gradientsPositive);
+		else
+			addGradients(networkTopology, gradientsNegative);
+
+		resetGradients();
+		stepsSinceLastReward = 0;
+	}
 	
 	// Continue with the next generation
 	learningState->iterations++;
 	return true;
+}
+
+
+void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients)
+{
+	for (int l = 0; l < gradients.size(); l++)
+	{
+		gradients[l] *= 1 / stepsSinceLastReward;
+
+		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 0.1 * gradients[l];
+		networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
+	}
 }
 
 ReinforcementLearningRuleOptions* ReinforcementLearningRule::getOptions()
@@ -79,10 +128,10 @@ void ReinforcementLearningRule::doCalculationAfterLearningProcess()
 {
 }
 
-void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTopology)
+void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networkTopology)
 {
 	std::vector<Eigen::MatrixXd> deltaVectorOutputLayer(networkTopology->getLayerCount());
-	std::vector<double> lastOutput;
+	std::vector<double> lastOutput(networkTopology->getOutputSize());
 	networkTopology->getOutput(lastOutput);
 	Eigen::VectorXd ouputVector(lastOutput.size());
 	for (int i = 0; i < lastOutput.size(); i++)
@@ -111,9 +160,11 @@ void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTop
 
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
-		gradients[layerIndex - 1] += -1 * (deltaVectorOutputLayer[layerIndex] * networkTopology->getActivationVector(layerIndex - 1).transpose()).matrix();
+		Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * networkTopology->getActivationVector(layerIndex - 1).transpose()).matrix();
+		gradient *= -1;
+		gradientsPositive[layerIndex - 1] += gradient;
+		gradientsNegative[layerIndex - 1] += gradient * -1;
 	}
 }
-
 
 

@@ -14,6 +14,7 @@
 #include "IO/UseParentSerialization.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include "PongGame.hpp"
+#include "AbstractPongWorld.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -21,18 +22,11 @@ class AbstractEvolutionObject;
 class PongAI;
 class AbstractTile;
 
-enum PongEvents
-{
-	EVT_FIELD_CHANGED
-};
-
 #define DATASET_PONG_RATING "Pong rating"
 
-class Pong : public AbstractCoevolutionWorld, public LightBulb::Observable<PongEvents, Pong>
+class Pong : public AbstractCoevolutionWorld, public AbstractPongWorld
 {
 private:
-	PongGame game;
-	bool watchMode;
 protected:
 	AbstractEvolutionObject* createNewObject();
 	void resetWorld();
@@ -49,9 +43,6 @@ public:
 	void initializeForLearning();
 	std::vector<std::string> getDataSetLabels();
 	int getRoundCount();
-	void startWatchMode();
-	void stopWatchMode();
-	PongGame* getGame();
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(Pong, AbstractCoevolutionWorld, AbstractEvolutionWorld);

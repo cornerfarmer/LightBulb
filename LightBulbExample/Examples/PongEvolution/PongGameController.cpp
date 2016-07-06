@@ -6,12 +6,17 @@
 #include <TrainingPlans/AbstractTrainingPlan.hpp>
 #include "PongEvolutionExample.hpp"
 #include "Pong.hpp"
+#include <Examples/PongReinforcement/PongReinforcementExample.hpp>
+#include <Examples/PongReinforcement/PongReinforcementWorld.hpp>
 
 
 PongGameController::PongGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
-	world = static_cast<Pong*>(static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
+	if (dynamic_cast<PongEvolutionExample*>(trainingPlan))
+		world = static_cast<Pong*>(static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
+	else
+		world = static_cast<PongReinforcementExample*>(trainingPlan)->getWorld();
 	properties = world->getGame()->getProperties();
 	window.reset(new PongGameWindow(this, parent));
 }
@@ -55,7 +60,7 @@ PongGameProperties* PongGameController::getProperties()
 	return &properties;
 }
 
-void PongGameController::fieldChanged(Pong * pong)
+void PongGameController::fieldChanged(AbstractPongWorld * pong)
 {
 	currentState = pong->getGame()->getState();
 	wxThreadEvent evt(PONG_EVT_FIELD_CHANGED);

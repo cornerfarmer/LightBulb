@@ -14,7 +14,7 @@ class PongGameController : public AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<PongGameWindow> window;
-	Pong* world;
+	AbstractPongWorld* world;
 	PongGameState currentState;
 	PongGameProperties properties;
 protected:
@@ -27,7 +27,7 @@ public:
 	static std::string getLabel();
 	PongGameState* getState();
 	PongGameProperties* getProperties();
-	void fieldChanged(Pong * pong);
+	void fieldChanged(AbstractPongWorld * pong);
 };
 
 #endif

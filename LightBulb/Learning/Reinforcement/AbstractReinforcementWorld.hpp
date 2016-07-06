@@ -36,7 +36,7 @@ public:
 	// This method should execute one simulation step.
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual double doSimulationStep() = 0;
-	void initializeForLearning();
+	virtual void initializeForLearning();
 	NeuralNetwork* getNeuralNetwork();
 };
 

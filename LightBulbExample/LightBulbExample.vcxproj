@@ -127,6 +127,7 @@
     <ClCompile Include="Examples\NetworkEvolution\Network.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp" />
+    <ClCompile Include="Examples\PongEvolution\AbstractPongWorld.cpp" />
     <ClCompile Include="Examples\PongEvolution\Pong.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongAI.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongEvolutionExample.cpp" />
@@ -134,6 +135,8 @@
     <ClCompile Include="Examples\PongEvolution\PongGameController.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameFactory.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameWindow.cpp" />
+    <ClCompile Include="Examples\PongReinforcement\PongReinforcementExample.cpp" />
+    <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp" />
     <ClCompile Include="Examples\Position.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp" />
     <ClCompile Include="Examples\TCProblemBackpropagationExample.cpp" />
@@ -156,6 +159,7 @@
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp" />
+    <ClInclude Include="Examples\PongEvolution\AbstractPongWorld.hpp" />
     <ClInclude Include="Examples\PongEvolution\Pong.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongAI.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongEvolutionExample.hpp" />
@@ -163,6 +167,8 @@
     <ClInclude Include="Examples\PongEvolution\PongGameController.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameFactory.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameWindow.hpp" />
+    <ClInclude Include="Examples\PongReinforcement\PongReinforcementExample.hpp" />
+    <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp" />
     <ClInclude Include="Examples\Position.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp" />
     <ClInclude Include="Examples\TCProblemBackpropagationExample.hpp" />

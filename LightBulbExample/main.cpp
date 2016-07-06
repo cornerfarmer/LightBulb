@@ -10,6 +10,7 @@
 #include "Examples/TCProblemEvolutionExample.hpp"
 #include "Examples/TCProblemBackpropagationExample.hpp"
 #include "Examples/PongEvolution/PongEvolutionExample.hpp"
+#include "Examples/PongReinforcement/PongReinforcementExample.hpp"
 
 void main(int argc, char** argv)
 {
@@ -24,6 +25,7 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new TCProblemEvolutionExample());
 	app->addTrainingPlan(new TCProblemBackpropagationExample());
 	app->addTrainingPlan(new PongEvolutionExample());
+	app->addTrainingPlan(new PongReinforcementExample());
 
 	wxApp::SetInstance(app);
 	wxEntry(argc, argv);

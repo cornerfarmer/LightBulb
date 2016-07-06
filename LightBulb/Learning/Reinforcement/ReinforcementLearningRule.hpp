@@ -19,14 +19,21 @@ struct ReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
 	ReinforcementLearningRuleOptions()
 	{
 		world = NULL;
+		maxIterationsPerTry = 100000;
 	}
 };
+
+#define DATA_SET_REWARD "Reward"
 
 class ReinforcementLearningRule : public AbstractLearningRule
 {
 private:
-	std::vector<Eigen::MatrixXd> gradients;
-	void addGradients(AbstractNetworkTopology* networkTopology);
+	std::vector<Eigen::MatrixXd> gradientsPositive;
+	std::vector<Eigen::MatrixXd> gradientsNegative;
+	int stepsSinceLastReward;
+	void addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients);
+	void computeGradients(AbstractNetworkTopology* networkTopology);
+	void resetGradients();
 protected:
 	bool doIteration();
 	bool hasLearningSucceeded();
