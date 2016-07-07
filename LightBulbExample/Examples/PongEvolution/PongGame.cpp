@@ -17,7 +17,7 @@ PongGame::PongGame()
 	properties.paddleSpeed = 5;
 	properties.paddleHeight = 30;
 	properties.paddleWidth = 10;
-	properties.maxTime = 1000; // 1000
+	properties.maxTime = 200; // 1000
 	properties.speedIncreaseFac = 1; // 1.2
 	properties.maxBallSpeed = 3;// properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
 }

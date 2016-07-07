@@ -24,14 +24,11 @@ double PongReinforcementWorld::doSimulationStep()
 	executeCompareAI();
 	game.advanceBall(1);
 
-	if (watchMode)
-	{
-		throwEvent(EVT_FIELD_CHANGED, this);
-		std::this_thread::sleep_for(std::chrono::milliseconds(20));
-	}
-
 	time++;
-	return game.whoHasWon();
+	if (time >= game.getProperties().maxTime)
+		return 1;
+	else
+		return game.whoHasWon();
 }
 
 void PongReinforcementWorld::getNNInput(std::vector<double>& input)
@@ -86,6 +83,12 @@ int PongReinforcementWorld::rateKI()
 			game.setPlayer(-1);
 			executeCompareAI();
 			game.advanceBall(1);
+
+			if (watchMode)
+			{
+				throwEvent(EVT_FIELD_CHANGED, this);
+				std::this_thread::sleep_for(std::chrono::milliseconds(20));
+			}
 
 			time++;
 		}
