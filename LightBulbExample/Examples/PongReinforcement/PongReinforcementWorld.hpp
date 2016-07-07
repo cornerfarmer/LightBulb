@@ -12,6 +12,8 @@
 
 // Forward declarations
 
+#define DATASET_PONG_RATING "Pong rating"
+
 class PongReinforcementWorld : public AbstractReinforcementWorld, public AbstractPongWorld
 {
 private:
@@ -25,6 +27,8 @@ public:
 	double doSimulationStep();
 	void executeCompareAI();
 	void initializeForLearning();
+	int rateKI();
+	std::vector<std::string> getDataSetLabels();
 };
 
 

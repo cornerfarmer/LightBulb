@@ -34,6 +34,11 @@ NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()
 	return neuralNetwork.get();
 }
 
+void AbstractReinforcementWorld::setLearningState(LearningState* learningState_)
+{
+	learningState = learningState_;
+}
+
 void AbstractReinforcementWorld::buildNeuralNetwork(LayeredNetworkOptions& options)
 {
 	// Create a new network topology from the adjusted options.
@@ -50,4 +55,10 @@ void AbstractReinforcementWorld::buildNeuralNetwork(LayeredNetworkOptions& optio
 void AbstractReinforcementWorld::buildOutputBuffer()
 {
 	lastOutput.resize(neuralNetwork->getNetworkTopology()->getOutputSize());
+}
+
+std::vector<std::string> AbstractReinforcementWorld::getDataSetLabels()
+{
+	std::vector<std::string> labels;
+	return labels;
 }

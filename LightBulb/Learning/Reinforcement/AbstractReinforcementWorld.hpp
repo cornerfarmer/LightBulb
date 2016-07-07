@@ -13,6 +13,7 @@
 
 // Forward declarations
 struct LayeredNetworkOptions;
+struct LearningState;
 
 class AbstractReinforcementWorld
 {
@@ -22,6 +23,7 @@ private:
 	void buildOutputBuffer();
 	void buildNeuralNetwork(LayeredNetworkOptions &options);
 protected:
+	LearningState* learningState;
 	// The NN of the object
 	std::unique_ptr<NeuralNetwork> neuralNetwork;
 	// This method should return the input for the neural network
@@ -37,7 +39,10 @@ public:
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual double doSimulationStep() = 0;
 	virtual void initializeForLearning();
+	virtual int rateKI() { return 0; };
 	NeuralNetwork* getNeuralNetwork();
+	void setLearningState(LearningState* learningState_);
+	virtual std::vector<std::string> getDataSetLabels();
 };
 
 EMPTY_SERIALIZATION(AbstractReinforcementWorld);

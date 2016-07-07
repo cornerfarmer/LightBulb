@@ -19,7 +19,7 @@ struct ReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
 	ReinforcementLearningRuleOptions()
 	{
 		world = NULL;
-		maxIterationsPerTry = 100000;
+		maxIterationsPerTry = 10000000000;
 	}
 };
 
@@ -33,6 +33,7 @@ private:
 	int stepsSinceLastReward;
 	void addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients);
 	void computeGradients(AbstractNetworkTopology* networkTopology);
+	void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::MatrixXd>& gradients);
 	void resetGradients();
 protected:
 	bool doIteration();

@@ -24,6 +24,7 @@ AbstractLearningRule* PongReinforcementExample::createLearningRate()
 	ReinforcementLearningRuleOptions options;
 	world = createWorld();
 	options.world = world;
+	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
 	return new ReinforcementLearningRule(options);
@@ -42,6 +43,7 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 	options.neuronsPerLayerCount.push_back(2);
 
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	
 
 	return new PongReinforcementWorld(options);
 }

@@ -1,5 +1,7 @@
 // Includes
 #include "Examples/PongReinforcement/PongReinforcementWorld.hpp"
+#include <Learning/LearningState.hpp>
+
 //Library includes
 
 PongReinforcementWorld::PongReinforcementWorld(LayeredNetworkOptions& options_)
@@ -22,14 +24,13 @@ double PongReinforcementWorld::doSimulationStep()
 	executeCompareAI();
 	game.advanceBall(1);
 
-	time++;
-
 	if (watchMode)
 	{
 		throwEvent(EVT_FIELD_CHANGED, this);
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 
+	time++;
 	return game.whoHasWon();
 }
 
@@ -65,4 +66,44 @@ void PongReinforcementWorld::initializeForLearning()
 {
 	AbstractReinforcementWorld::initializeForLearning();
 	time = -1;
+}
+
+
+int PongReinforcementWorld::rateKI()
+{
+	PongGame tmp = game;
+	int wins = 0;
+	int matchCount = 100;
+	for (int i = 0; i < matchCount; i++)
+	{
+		game.reset();
+
+		double time = 0;
+		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
+		{
+			game.setPlayer(1);
+			doNNCalculation();
+			game.setPlayer(-1);
+			executeCompareAI();
+			game.advanceBall(1);
+
+			time++;
+		}
+
+		if (game.whoHasWon() == 1 || game.whoHasWon() == 0)
+			wins++;
+	}
+
+	if (!learningState->disabledDatasets[DATASET_PONG_RATING])
+		learningState->addData(DATASET_PONG_RATING, (double)wins / matchCount);
+	game = tmp;
+	return wins;
+}
+
+
+std::vector<std::string> PongReinforcementWorld::getDataSetLabels()
+{
+	auto labels = AbstractReinforcementWorld::getDataSetLabels();
+	labels.push_back(DATASET_PONG_RATING);
+	return labels;
 }
