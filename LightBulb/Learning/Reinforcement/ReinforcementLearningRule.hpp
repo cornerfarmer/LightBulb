@@ -29,15 +29,19 @@ struct ReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
 class ReinforcementLearningRule : public AbstractLearningRule
 {
 private:
-	std::vector<Eigen::MatrixXd> gradientsPositive;
-	std::vector<Eigen::MatrixXd> gradientsNegative;
+	std::vector<std::vector<Eigen::VectorXd>> netInputRecord;
+	std::vector<std::vector<Eigen::VectorXd>> activationRecord;
+	std::vector<Eigen::VectorXd> errorVectorRecord;
+	std::vector<Eigen::MatrixXd> gradients;
+
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	int stepsSinceLastReward;
 	void addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients);
-	void computeGradients(AbstractNetworkTopology* networkTopology);
-	void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::MatrixXd>& gradients);
+	void computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward);
+	void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations);
 	void resetGradients();
 	void initialize();
+	void recordStep(AbstractNetworkTopology* networkTopology);
 protected:
 	bool doIteration();
 	bool hasLearningSucceeded();

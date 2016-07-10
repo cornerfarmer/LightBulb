@@ -77,11 +77,16 @@ public:
 
 	virtual double getNetInput(int layerIndex, int neuronIndex) = 0;
 
+	virtual std::vector<Eigen::VectorXd> getActivationsCopy() = 0;
+
 	virtual Eigen::VectorXd getNetInputVector(int layerIndex) = 0;
+
+	virtual std::vector<Eigen::VectorXd>* getNetInputs() = 0;
 
 	virtual Eigen::VectorXd getEfferentWeightVector(int layerIndex, int neuronIndex) = 0;
 
 	virtual Eigen::VectorXd getActivationVector(int layerIndex) = 0;
+
 
 	virtual Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) = 0;
 

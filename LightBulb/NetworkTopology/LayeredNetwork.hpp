@@ -156,8 +156,10 @@ public:
 
 	double getNetInput(int layerIndex, int neuronIndex);
 
-	Eigen::VectorXd getNetInputVector(int layerIndex);
+	std::vector<Eigen::VectorXd> getActivationsCopy();
 
+	Eigen::VectorXd getNetInputVector(int layerIndex);
+	
 	Eigen::VectorXd getEfferentWeightVector(int layerIndex, int neuronIndex);
 
 	AbstractActivationFunction* getInnerActivationFunction();

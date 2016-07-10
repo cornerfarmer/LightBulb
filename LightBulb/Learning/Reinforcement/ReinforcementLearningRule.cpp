@@ -42,6 +42,21 @@ void ReinforcementLearningRule::initialize()
 	resilientLearningRateHelper.reset(new ResilientLearningRateHelper(new ResilientLearningRateHelperOptions()));
 }
 
+void ReinforcementLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
+{
+	std::vector<double> lastOutput(networkTopology->getOutputSize());
+	networkTopology->getOutput(lastOutput);
+
+	errorVectorRecord.push_back(Eigen::VectorXd(lastOutput.size()));
+	for (int i = 0; i < lastOutput.size(); i++)
+	{
+		errorVectorRecord.back()(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];
+	}
+
+	netInputRecord.push_back(*networkTopology->getNetInputs());
+	activationRecord.push_back(networkTopology->getActivationsCopy());
+}
+
 bool ReinforcementLearningRule::hasLearningSucceeded()
 {
 	return false;
@@ -53,12 +68,10 @@ void ReinforcementLearningRule::initializeTry()
 	getOptions()->world->setLearningState(learningState.get());
 	getOptions()->world->initializeForLearning();
 
-	gradientsNegative.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getLayerCount() - 1);
-	gradientsPositive.resize(gradientsNegative.size());
-	for (int i = 0; i < gradientsNegative.size(); i++)
+	gradients.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getLayerCount() - 1);
+	for (int i = 0; i < gradients.size(); i++)
 	{
-		gradientsNegative[i].resizeLike(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getWeights()->at(i));
-		gradientsPositive[i].resizeLike(gradientsNegative[i]);
+		gradients[i].resizeLike(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getWeights()->at(i));
 	}
 	resetGradients();
 
@@ -68,10 +81,9 @@ void ReinforcementLearningRule::initializeTry()
 
 void ReinforcementLearningRule::resetGradients()
 {
-	for (int i = 0; i < gradientsNegative.size(); i++)
+	for (int i = 0; i < gradients.size(); i++)
 	{
-		gradientsNegative[i].setZero();
-		gradientsPositive[i].setZero();
+		gradients[i].setZero();
 	}
 }
 
@@ -101,18 +113,17 @@ bool ReinforcementLearningRule::doIteration()
 	{
 		double reward = getOptions()->world->doSimulationStep();
 		
-		computeGradients(networkTopology);
+		recordStep(networkTopology);
+		
 		stepsSinceLastReward++;
 
 		if (reward != 0)
 		{
 			totalReward += reward;
 
-			if (reward > 0)
-				gradientsNegative = gradientsPositive;
-			else
-				gradientsPositive = gradientsNegative;
+			computeGradients(networkTopology, stepsSinceLastReward, reward);
 
+			stepsSinceLastReward = 0;
 			rewardCounter++;
 		}
 	}
@@ -121,9 +132,9 @@ bool ReinforcementLearningRule::doIteration()
 	learningState->addData(DATA_SET_REWARD, totalReward);
 
 
-	addGradients(networkTopology, gradientsPositive);
+	addGradients(networkTopology, gradients);
 	resetGradients();
-	stepsSinceLastReward = 0;
+	
 	
 	// Continue with the next generation
 	learningState->iterations++;
@@ -139,19 +150,19 @@ void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTop
 	static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradients.size());
 	for (int l = 0; l < gradients.size(); l++)
 	{
-		gradients[l] *= 1.0 / stepsSinceLastReward;
+		/*gradients[l] *= 1.0 / stepsSinceLastReward;*/
 
-	/*	if (prevDeltaWeights[l].size() == 0) {
+		if (prevDeltaWeights[l].size() == 0) {
 			prevDeltaWeights[l].resizeLike(gradients[l]);
 			prevDeltaWeights[l].setZero();
 		}
 
 		prevDeltaWeights[l] = 0.99 * prevDeltaWeights[l] + (1 - 0.99) * gradients[l].cwiseAbs2();
-*/
 
-		prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);
+
+		/*prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
 		
-		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + prevDeltaWeights[l];// 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
+		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
 		networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
 	}
 }
@@ -165,29 +176,31 @@ void ReinforcementLearningRule::doCalculationAfterLearningProcess()
 {
 }
 
-void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networkTopology)
+void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward)
 {
-	std::vector<double> lastOutput(networkTopology->getOutputSize());
-	networkTopology->getOutput(lastOutput);
-
-	Eigen::VectorXd positiveOutputVector(lastOutput.size());
-	for (int i = 0; i < lastOutput.size(); i++)
+	Eigen::VectorXd rewards(stepsSinceLastReward);
+	rewards(stepsSinceLastReward - 1) = reward;
+	for (int i = stepsSinceLastReward - 2; i >= 0; i--)
 	{
-		positiveOutputVector(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];
+		rewards(i) = rewards(i + 1) * 0.99;
 	}
 
-	Eigen::VectorXd negativeOutputVector(lastOutput.size());
-	for (int i = 0; i < lastOutput.size(); i++)
+	rewards = rewards.array() - rewards.mean();
+	double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
+	rewards = rewards.array() / stddev;
+
+	for (int i = 0; i < stepsSinceLastReward; i++)
 	{
-		negativeOutputVector(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];
+		errorVectorRecord[i] *= rewards(i);
+		computeGradientsForError(networkTopology, errorVectorRecord[i], netInputRecord[i], activationRecord[i]);
 	}
 
-	computeGradientsForError(networkTopology, positiveOutputVector, gradientsPositive);
-	computeGradientsForError(networkTopology, negativeOutputVector, gradientsNegative);
-	
+	errorVectorRecord.clear();
+	netInputRecord.clear();
+	activationRecord.clear();
 }
 
-void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::MatrixXd>& gradients)
+void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
 {
 	std::vector<Eigen::MatrixXd> deltaVectorOutputLayer(networkTopology->getLayerCount());
 	for (int layerIndex = networkTopology->getLayerCount() - 1; layerIndex > 0; layerIndex--)
@@ -196,19 +209,19 @@ void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology
 		if (layerIndex == networkTopology->getLayerCount() - 1)
 		{
 			// Compute the delta value: activationFunction'(netInput) * errorValue
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(networkTopology->getNetInputVector(layerIndex)).array() + 0.1) * errorVector.array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * errorVector.array();
 		}
 		else
 		{
 			Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
 
 			// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(networkTopology->getNetInputVector(layerIndex)).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 		}
 
 		// Calculate the gradient
 		// gradient = - Output(prevNeuron) * deltaValue
-		Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * networkTopology->getActivationVector(layerIndex - 1).transpose()).matrix();
+		Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * activations[layerIndex - 1].transpose()).matrix();
 		gradient *= -1;
 		gradients[layerIndex - 1] += gradient;
 	}

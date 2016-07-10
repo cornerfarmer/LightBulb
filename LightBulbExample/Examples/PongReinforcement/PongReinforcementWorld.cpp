@@ -44,14 +44,9 @@ void PongReinforcementWorld::getNNInput(std::vector<double>& input)
 
 void PongReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 {
-	std::vector<bool> outputCopy = output;
-
-	lastBooleanOutput[0] = (game.getState().ballPosY > game.getState().paddle2Pos + game.getProperties().paddleHeight / 2);
-	lastBooleanOutput[1] = !lastBooleanOutput[0];
-
-	if (outputCopy[0])
+	if (output[0])
 		game.movePaddle(1);
-	else if (outputCopy[1])
+	else if (output[1])
 		game.movePaddle(-1);
 }
 

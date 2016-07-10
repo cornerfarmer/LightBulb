@@ -139,6 +139,8 @@ double LayeredNetwork::getNetInput(int layerIndex, int neuronIndex)
 	return netInputs[layerIndex](neuronIndex);
 }
 
+
+
 Eigen::VectorXd LayeredNetwork::getNetInputVector(int layerIndex)
 {
 	return netInputs[layerIndex];
@@ -395,6 +397,18 @@ std::vector<Eigen::MatrixXd>* LayeredNetwork::getWeights()
 std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* LayeredNetwork::getActivations()
 {
 	return &activationsPerLayerOut;
+}
+
+std::vector<Eigen::VectorXd> LayeredNetwork::getActivationsCopy()
+{
+	std::vector<Eigen::VectorXd> copy(activationsPerLayerOut.size());
+
+	for (int i = 0; i < copy.size(); i++)
+	{
+		copy[i] = *activationsPerLayerOut[i];
+	}
+
+	return copy;
 }
 
 std::vector<Eigen::VectorXd>* LayeredNetwork::getNetInputs()
