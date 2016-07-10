@@ -7,6 +7,7 @@
 
 void AbstractReinforcementWorld::doNNCalculation()
 {
+	neuralNetwork->getNetworkTopology()->resetActivation();
 	// Get the input
 	getNNInput(lastInput);
 
@@ -14,8 +15,13 @@ void AbstractReinforcementWorld::doNNCalculation()
 	// Calculate the output from the the input
 	neuralNetwork->calculate(lastInput, lastOutput, topologicalOrder, false);
 
+	for (int i = 0; i < lastOutput.size(); i++)
+	{
+		lastBooleanOutput[i] = ((double)rand() / RAND_MAX < lastOutput[i]);
+	}
+
 	// Interpret the output
-	interpretNNOutput(lastOutput);
+	interpretNNOutput(lastBooleanOutput);
 }
 
 AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& options)
@@ -55,10 +61,16 @@ void AbstractReinforcementWorld::buildNeuralNetwork(LayeredNetworkOptions& optio
 void AbstractReinforcementWorld::buildOutputBuffer()
 {
 	lastOutput.resize(neuralNetwork->getNetworkTopology()->getOutputSize());
+	lastBooleanOutput.resize(lastOutput.size());
 }
 
 std::vector<std::string> AbstractReinforcementWorld::getDataSetLabels()
 {
 	std::vector<std::string> labels;
 	return labels;
+}
+
+std::vector<bool> AbstractReinforcementWorld::getLastBooleanOutput()
+{
+	return lastBooleanOutput;
 }

@@ -20,7 +20,7 @@ private:
 	int time;
 protected:
 	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<double>& output);
+	void interpretNNOutput(std::vector<bool>& output);
 public:
 	PongReinforcementWorld(LayeredNetworkOptions& options_);
 	PongReinforcementWorld() = default;

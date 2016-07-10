@@ -21,7 +21,10 @@ Pong::Pong(LayeredNetworkOptions& options_, bool isParasiteWorld_, AbstractCombi
 
 int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
 {
-	return simulateGame(static_cast<PongAI*>(obj1), static_cast<PongAI*>(obj2));
+	if (round == 0)
+		return simulateGame(static_cast<PongAI*>(obj1), static_cast<PongAI*>(obj2));
+	else
+		return -simulateGame(static_cast<PongAI*>(obj2), static_cast<PongAI*>(obj1));
 }
 
 
@@ -63,11 +66,11 @@ int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 		ai2->doNNCalculation();
 		game.advanceBall(1);
 
-		/*if (watchMode)
+		if (watchMode)
 		{
 			throwEvent(EVT_FIELD_CHANGED, this);
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
-		}*/
+		}
 		time++;
 	}
 
@@ -109,11 +112,11 @@ int Pong::rateKI(AbstractEvolutionObject* rateKI)
 			executeCompareAI();
 			game.advanceBall(1);
 
-			if (watchMode)
+			/*if (watchMode)
 			{
 				throwEvent(EVT_FIELD_CHANGED, this);
 				std::this_thread::sleep_for(std::chrono::milliseconds(20));
-			}
+			}*/
 			time++;
 		}
 

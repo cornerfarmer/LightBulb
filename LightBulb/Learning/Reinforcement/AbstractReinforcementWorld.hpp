@@ -23,13 +23,14 @@ private:
 	void buildOutputBuffer();
 	void buildNeuralNetwork(LayeredNetworkOptions &options);
 protected:
+	std::vector<bool> lastBooleanOutput;
 	LearningState* learningState;
 	// The NN of the object
 	std::unique_ptr<NeuralNetwork> neuralNetwork;
 	// This method should return the input for the neural network
 	virtual void getNNInput(std::vector<double>& input) = 0;
 	// This method should interpret and act depending on the given NN output
-	virtual void interpretNNOutput(std::vector<double>& output) = 0;
+	virtual void interpretNNOutput(std::vector<bool>& output) = 0;
 
 	void doNNCalculation();
 public:
@@ -43,6 +44,7 @@ public:
 	NeuralNetwork* getNeuralNetwork();
 	void setLearningState(LearningState* learningState_);
 	virtual std::vector<std::string> getDataSetLabels();
+	std::vector<bool> getLastBooleanOutput();
 };
 
 EMPTY_SERIALIZATION(AbstractReinforcementWorld);

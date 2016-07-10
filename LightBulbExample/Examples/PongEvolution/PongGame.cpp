@@ -148,6 +148,9 @@ void PongGame::reset()
 	if (rand() > RAND_MAX / 2)
 		state.ballVelY *= -1;
 
+	//state.ballVelX = 3;
+	//state.ballVelY = 3;
+
 	state.paddle1Pos = properties.height / 2;
 	state.paddle2Pos = properties.height / 2;
 }

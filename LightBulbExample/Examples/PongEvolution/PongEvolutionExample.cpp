@@ -32,6 +32,7 @@
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 #include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 #include <Function/FermiFunction.hpp>
+#include <Function/HyperbolicTangentFunction.hpp>
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
@@ -97,7 +98,7 @@ LayeredNetworkOptions PongEvolutionExample::getNetworkOptions()
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
 	options.neuronsPerLayerCount.push_back(2);
 
-	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
 	return options;
 }
 

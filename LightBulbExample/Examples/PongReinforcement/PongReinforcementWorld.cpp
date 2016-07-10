@@ -17,7 +17,7 @@ double PongReinforcementWorld::doSimulationStep()
 		time = 0;
 		game.reset();
 	}
-
+	
 	game.setPlayer(1);
 	doNNCalculation();
 	game.setPlayer(-1);
@@ -42,11 +42,16 @@ void PongReinforcementWorld::getNNInput(std::vector<double>& input)
 	input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
 }
 
-void PongReinforcementWorld::interpretNNOutput(std::vector<double>& output)
+void PongReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 {
-	if (output[0] > 0.5)
+	std::vector<bool> outputCopy = output;
+
+	lastBooleanOutput[0] = (game.getState().ballPosY > game.getState().paddle2Pos + game.getProperties().paddleHeight / 2);
+	lastBooleanOutput[1] = !lastBooleanOutput[0];
+
+	if (outputCopy[0])
 		game.movePaddle(1);
-	else if (output[1] > 0.5)
+	else if (outputCopy[1])
 		game.movePaddle(-1);
 }
 

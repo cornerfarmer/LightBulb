@@ -1,6 +1,5 @@
 // Includes
 #include "Function/HyperbolicTangentFunction.hpp"
-#include "Neuron/StandardThreshold.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>
