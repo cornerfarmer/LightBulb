@@ -86,7 +86,7 @@ Eigen::VectorXd ReinforcementLearningRule::getErrorVector(AbstractNetworkTopolog
 	Eigen::VectorXd errorVector(lastOutput.size());
 	for (int i = 0; i < lastOutput.size(); i++)
 	{
-		errorVector(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];
+		errorVector(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];//-2 * std::signbit(getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 	}
 	return errorVector;
 }
@@ -182,7 +182,7 @@ bool ReinforcementLearningRule::doIteration()
 void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients)
 {
 	static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradients.size());
-	for (int l = 0; l < gradients.size(); l++)
+	for (int l = gradients.size() - 1; l >= 0; l--)
 	{
 		/*gradients[l] *= 1.0 / stepsSinceLastReward;*/
 
@@ -193,10 +193,10 @@ void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTop
 
 		prevDeltaWeights[l] = 0.99 * prevDeltaWeights[l] + (1 - 0.99) * gradients[l].cwiseAbs2();
 
-
-		/*prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
+/*
+		prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
 		
-		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
+		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
 		networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
 	}
 }
@@ -216,16 +216,19 @@ void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networ
 	rewards(stepsSinceLastReward - 1) = reward;
 	for (int i = stepsSinceLastReward - 2; i >= 0; i--)
 	{
-		rewards(i) = rewards(i + 1) * 0.99;
+		rewards(i) = rewards(i + 1); // *0.99;
 	}
 
-	rewards = rewards.array() - rewards.mean();
-	double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
-	rewards = rewards.array() / stddev;
+	//rewards = rewards.array() - rewards.mean();
+	//double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
+	//rewards = rewards.array() / stddev;
 
 	for (int i = 0; i < stepsSinceLastReward; i++)
 	{
-		errorVectorRecord[i] *= rewards(i);
+		if (rewards(i) == -1 && errorVectorRecord[i](0) >= 0)
+			errorVectorRecord[i] = -1 * (1 - errorVectorRecord[i].array());
+		else if (rewards(i) == -1 && errorVectorRecord[i](0) < 0)
+			errorVectorRecord[i] = -1 * (-1 - errorVectorRecord[i].array());
 		computeGradientsForError(networkTopology, errorVectorRecord[i], netInputRecord[i], activationRecord[i]);
 	}
 
@@ -243,14 +246,14 @@ void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology
 		if (layerIndex == networkTopology->getLayerCount() - 1)
 		{
 			// Compute the delta value: activationFunction'(netInput) * errorValue
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(netInputs[layerIndex]).array()) * errorVector.array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * errorVector.array();
 		}
 		else
 		{
 			Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
 
 			// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(netInputs[layerIndex]).array()) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 		}
 
 		// Calculate the gradient

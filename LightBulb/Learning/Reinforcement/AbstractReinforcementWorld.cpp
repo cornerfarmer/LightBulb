@@ -19,7 +19,7 @@ void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
 
 	for (int i = 0; i < lastOutput.size(); i++)
 	{
-		lastBooleanOutput[i] = ((double)rand() / RAND_MAX < lastOutput[i]);
+		lastBooleanOutput[i] = (0.5 <= lastOutput[i]);
 	}
 
 	// Interpret the output

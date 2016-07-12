@@ -59,7 +59,7 @@ AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	layeredNetworkOptions.neuronsPerLayerCount[0] = 2;
-	layeredNetworkOptions.neuronsPerLayerCount[1] = 2;
+	layeredNetworkOptions.neuronsPerLayerCount[1] = 3;
 	layeredNetworkOptions.neuronsPerLayerCount[2] = 1;
 
 	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);

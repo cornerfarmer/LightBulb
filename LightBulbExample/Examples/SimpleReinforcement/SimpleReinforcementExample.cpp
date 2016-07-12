@@ -1,0 +1,85 @@
+#include "SimpleReinforcementExample.hpp"
+#include <Learning/Evolution/EvolutionLearningRule.hpp>
+#include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
+#include <TrainingPlans/IntegerPreference.hpp>
+#include <TrainingPlans/BooleanPreference.hpp>
+#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <Function/WeightedSumFunction.hpp>
+#include <Function/BinaryFunction.hpp>
+#include <Neuron/NeuronDescription.hpp>
+#include <NetworkTopology/LayeredNetwork.hpp>
+#include <Learning/Reinforcement/ReinforcementLearningRule.hpp>
+#include <Examples/PongEvolution/PongGameFactory.hpp>
+#include <Function/HyperbolicTangentFunction.hpp>
+#include <Function/FermiFunction.hpp>
+#include "SimpleReinforcementWorld.hpp"
+
+#define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
+#define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
+#define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
+#define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
+
+AbstractLearningRule* SimpleReinforcementExample::createLearningRate()
+{
+	ReinforcementLearningRuleOptions options;
+	world = createWorld();
+	options.world = world;
+	//options.dataSaveInterval = 100;
+	fillDefaultLearningRuleOptions(&options);
+
+	return new ReinforcementLearningRule(options);
+}
+
+
+SimpleReinforcementWorld* SimpleReinforcementExample::createWorld()
+{
+	LayeredNetworkOptions options;
+	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
+
+	options.neuronsPerLayerCount.push_back(2);
+	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
+	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
+		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
+	options.neuronsPerLayerCount.push_back(1);
+
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	
+
+	return new SimpleReinforcementWorld(options);
+}
+
+
+SimpleReinforcementExample::SimpleReinforcementExample()
+{
+	addCustomSubApp(new PongGameFactory());
+	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 3, 1, 30));
+	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
+}
+
+std::string SimpleReinforcementExample::getDefaultName()
+{
+	return "Simple reinforcement example";
+}
+
+std::string SimpleReinforcementExample::getDescription()
+{
+	return "";
+}
+
+AbstractTrainingPlan* SimpleReinforcementExample::getCopy()
+{
+	return new SimpleReinforcementExample();
+}
+
+std::string SimpleReinforcementExample::getLearningRuleName()
+{
+	return BipartiteEvolutionLearningRule::getName();
+}
+
+
+SimpleReinforcementWorld* SimpleReinforcementExample::getWorld()
+{
+	return world;
+}

@@ -139,6 +139,8 @@
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp" />
     <ClCompile Include="Examples\Position.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp" />
+    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementExample.cpp" />
+    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.cpp" />
     <ClCompile Include="Examples\TCProblemBackpropagationExample.cpp" />
     <ClCompile Include="Examples\TCProblemEvolutionExample.cpp" />
     <ClCompile Include="Examples\TCProblemTeacher.cpp" />
@@ -171,6 +173,8 @@
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp" />
     <ClInclude Include="Examples\Position.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp" />
+    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementExample.hpp" />
+    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.hpp" />
     <ClInclude Include="Examples\TCProblemBackpropagationExample.hpp" />
     <ClInclude Include="Examples\TCProblemEvolutionExample.hpp" />
     <ClInclude Include="Examples\TCProblemTeacher.hpp" />

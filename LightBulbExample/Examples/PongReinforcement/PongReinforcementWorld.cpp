@@ -24,6 +24,11 @@ double PongReinforcementWorld::doSimulationStep()
 	executeCompareAI();
 	game.advanceBall(1);
 
+	if (watchMode)
+	{
+		throwEvent(EVT_FIELD_CHANGED, this);
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
+	}
 	time++;
 	if (time >= game.getProperties().maxTime)
 		return 1;
@@ -34,9 +39,9 @@ double PongReinforcementWorld::doSimulationStep()
 void PongReinforcementWorld::getNNInput(std::vector<double>& input)
 {
 	input.resize(6);
-	input[0] = game.getPlayer() * game.getState().ballPosX / game.getProperties().width;
+	input[0] = game.getState().ballPosX / game.getProperties().width;
 	input[1] = game.getState().ballPosY / game.getProperties().height;
-	input[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
+	input[2] = game.getState().ballVelX / game.getProperties().maxBallSpeed;
 	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
 	input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
 	input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
@@ -83,12 +88,6 @@ int PongReinforcementWorld::rateKI()
 			game.setPlayer(-1);
 			executeCompareAI();
 			game.advanceBall(1);
-
-			if (watchMode)
-			{
-				throwEvent(EVT_FIELD_CHANGED, this);
-				std::this_thread::sleep_for(std::chrono::milliseconds(20));
-			}
 
 			time++;
 		}
