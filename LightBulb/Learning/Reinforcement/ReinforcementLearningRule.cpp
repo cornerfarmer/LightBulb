@@ -143,7 +143,7 @@ bool ReinforcementLearningRule::doIteration()
 	double totalReward = 0;
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 
-	while (rewardCounter < 10)
+	while (rewardCounter < 250)
 	{
 		double reward = getOptions()->world->doSimulationStep();
 		

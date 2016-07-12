@@ -40,7 +40,7 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
 	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-	options.neuronsPerLayerCount.push_back(2);
+	options.neuronsPerLayerCount.push_back(1);
 
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
