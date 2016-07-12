@@ -44,17 +44,51 @@ void ReinforcementLearningRule::initialize()
 
 void ReinforcementLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
 {
-	std::vector<double> lastOutput(networkTopology->getOutputSize());
-	networkTopology->getOutput(lastOutput);
-
-	errorVectorRecord.push_back(Eigen::VectorXd(lastOutput.size()));
-	for (int i = 0; i < lastOutput.size(); i++)
-	{
-		errorVectorRecord.back()(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];
-	}
+	errorVectorRecord.push_back(getErrorVector(networkTopology));
 
 	netInputRecord.push_back(*networkTopology->getNetInputs());
 	activationRecord.push_back(networkTopology->getActivationsCopy());
+}
+
+std::vector<Eigen::MatrixXd> ReinforcementLearningRule::checkGradient(AbstractNetworkTopology* networkTopology)
+{
+	double epsilon = 0.0001;
+	auto weights = networkTopology->getWeights();
+	std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
+	for (int l = weights->size() - 1; l >= 0 ; l--)
+	{
+		gradientApprox[l].resizeLike(weights->at(l));
+		for (int n1 = 0; n1 < weights->at(l).rows(); n1++)
+		{
+			for (int n2 = 0; n2 < weights->at(l).cols(); n2++)
+			{
+				weights->at(l)(n1, n2) += epsilon;
+				getOptions()->world->doNNCalculation(false);
+				double firstError = 0.5* getErrorVector(networkTopology).cwiseAbs2().sum();
+
+				weights->at(l)(n1, n2) -= epsilon * 2;
+				getOptions()->world->doNNCalculation(false);
+				double secondError = 0.5* getErrorVector(networkTopology).cwiseAbs2().sum();
+				gradientApprox[l](n1, n2) = (firstError - secondError) / (2 * epsilon);
+
+				weights->at(l)(n1, n2) += epsilon;
+			}
+		}
+	}
+	return gradientApprox;
+}
+
+Eigen::VectorXd ReinforcementLearningRule::getErrorVector(AbstractNetworkTopology* networkTopology)
+{
+	std::vector<double> lastOutput(networkTopology->getOutputSize());
+	networkTopology->getOutput(lastOutput);
+
+	Eigen::VectorXd errorVector(lastOutput.size());
+	for (int i = 0; i < lastOutput.size(); i++)
+	{
+		errorVector(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];
+	}
+	return errorVector;
 }
 
 bool ReinforcementLearningRule::hasLearningSucceeded()
@@ -115,8 +149,8 @@ bool ReinforcementLearningRule::doIteration()
 		
 		recordStep(networkTopology);
 		
-		stepsSinceLastReward++;
-
+		stepsSinceLastReward++;		
+		
 		if (reward != 0)
 		{
 			totalReward += reward;
@@ -209,14 +243,14 @@ void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology
 		if (layerIndex == networkTopology->getLayerCount() - 1)
 		{
 			// Compute the delta value: activationFunction'(netInput) * errorValue
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * errorVector.array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(netInputs[layerIndex]).array()) * errorVector.array();
 		}
 		else
 		{
 			Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
 
 			// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(netInputs[layerIndex]).array()) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 		}
 
 		// Calculate the gradient
@@ -225,5 +259,17 @@ void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology
 		gradient *= -1;
 		gradients[layerIndex - 1] += gradient;
 	}
+
+	/*std::vector<Eigen::MatrixXd> gradientApprox = checkGradient(networkTopology);
+	std::vector<Eigen::MatrixXd> diff(gradientApprox.size());
+	bool same = true;
+	for (int i = 0; i < gradientApprox.size(); i++)
+	{
+		diff[i] = gradients[i] - gradientApprox[i];
+		same &= gradients[i].isApprox(gradientApprox[i], 1e-8);
+	}
+	if (!same)
+		throw std::logic_error("");*/
+	
 }
 

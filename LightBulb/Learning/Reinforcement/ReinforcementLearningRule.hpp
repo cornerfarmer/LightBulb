@@ -42,6 +42,8 @@ private:
 	void resetGradients();
 	void initialize();
 	void recordStep(AbstractNetworkTopology* networkTopology);
+	std::vector<Eigen::MatrixXd> checkGradient(AbstractNetworkTopology* networkTopology);
+	Eigen::VectorXd getErrorVector(AbstractNetworkTopology* networkTopology);
 protected:
 	bool doIteration();
 	bool hasLearningSucceeded();

@@ -32,8 +32,9 @@ protected:
 	// This method should interpret and act depending on the given NN output
 	virtual void interpretNNOutput(std::vector<bool>& output) = 0;
 
-	void doNNCalculation();
+	
 public:
+	void doNNCalculation(bool resetInput = true);
 	virtual ~AbstractReinforcementWorld() {}
 	AbstractReinforcementWorld(LayeredNetworkOptions& options);
 	// This method should execute one simulation step.

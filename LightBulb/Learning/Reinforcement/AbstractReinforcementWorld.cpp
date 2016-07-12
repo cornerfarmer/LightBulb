@@ -5,11 +5,13 @@
 
 //Library include
 
-void AbstractReinforcementWorld::doNNCalculation()
+void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
 {
-	neuralNetwork->getNetworkTopology()->resetActivation();
-	// Get the input
-	getNNInput(lastInput);
+	if (resetInput) {
+		neuralNetwork->getNetworkTopology()->resetActivation();
+		// Get the input
+		getNNInput(lastInput);
+	}
 
 	TopologicalOrder topologicalOrder;
 	// Calculate the output from the the input
