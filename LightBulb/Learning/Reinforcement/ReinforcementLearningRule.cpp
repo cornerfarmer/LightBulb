@@ -197,7 +197,7 @@ void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTop
 /*
 		prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
 		
-		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
+		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-2 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
 		networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
 		
 		gradients[l] *= 1.0 / getOptions()->episodeSize;
@@ -221,7 +221,7 @@ void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networ
 	rewards(stepsSinceLastReward - 1) = reward;
 	for (int i = stepsSinceLastReward - 2; i >= 0; i--)
 	{
-		rewards(i) = rewards(i + 1); // *0.99;
+		rewards(i) = rewards(i + 1) * 0.99;
 	}
 
 	//rewards = rewards.array() - rewards.mean();
@@ -230,10 +230,7 @@ void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networ
 
 	for (int i = 0; i < stepsSinceLastReward; i++)
 	{
-		if (rewards(i) == -1 && errorVectorRecord[i](0) >= 0)
-			errorVectorRecord[i] = -1 * (1 - errorVectorRecord[i].array());
-		else if (rewards(i) == -1 && errorVectorRecord[i](0) < 0)
-			errorVectorRecord[i] = -1 * (-1 - errorVectorRecord[i].array());
+		errorVectorRecord[i] = rewards(i) * errorVectorRecord[i].array();
 		computeGradientsForError(networkTopology, errorVectorRecord[i], netInputRecord[i], activationRecord[i]);
 	}
 
