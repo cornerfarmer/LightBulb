@@ -17,14 +17,17 @@ class AbstractReinforcementWorld;
 struct ReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
 {
 	AbstractReinforcementWorld* world;
+	int episodeSize;
 	ReinforcementLearningRuleOptions()
 	{
+		episodeSize = 100;
 		world = NULL;
 		maxIterationsPerTry = 10000000000;
 	}
 };
 
 #define DATA_SET_REWARD "Reward"
+#define DATA_SET_GRADIENT "Gradient"
 
 class ReinforcementLearningRule : public AbstractLearningRule
 {
@@ -33,6 +36,7 @@ private:
 	std::vector<std::vector<Eigen::VectorXd>> activationRecord;
 	std::vector<Eigen::VectorXd> errorVectorRecord;
 	std::vector<Eigen::MatrixXd> gradients;
+
 
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	int stepsSinceLastReward;

@@ -140,11 +140,11 @@ void PongGame::reset()
 	state.ballPosX = properties.width / 2;
 	state.ballPosY = properties.height / 2;
 
-	state.ballVelX = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
+	state.ballVelX = (double)rand() / RAND_MAX * 3;
 	if (rand() > RAND_MAX / 2)
 		state.ballVelX *= -1;
 
-	state.ballVelY = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
+	state.ballVelY = (double)rand() / RAND_MAX * 3;
 	if (rand() > RAND_MAX / 2)
 		state.ballVelY *= -1;
 

@@ -14,6 +14,7 @@
 #include <Function/FermiFunction.hpp>
 #include "SimpleReinforcementWorld.hpp"
 
+#define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
@@ -24,6 +25,7 @@ AbstractLearningRule* SimpleReinforcementExample::createLearningRate()
 	ReinforcementLearningRuleOptions options;
 	world = createWorld();
 	options.world = world;
+	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -52,6 +54,7 @@ SimpleReinforcementWorld* SimpleReinforcementExample::createWorld()
 SimpleReinforcementExample::SimpleReinforcementExample()
 {
 	addCustomSubApp(new PongGameFactory());
+	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 100, 1, 10000));
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 3, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));

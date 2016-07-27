@@ -49,6 +49,8 @@ public:
 	MOCK_METHOD3(existsAfferentWeight, bool (int, int, int));
 	MOCK_METHOD0(getNeuronCount, int ());
 	MOCK_METHOD0(clone, AbstractNetworkTopology* ());
+	MOCK_METHOD0(getActivationsCopy, std::vector<Eigen::VectorXd> ());
+	MOCK_METHOD0(getNetInputs, std::vector<Eigen::VectorXd>* ());
 };
 
 #endif

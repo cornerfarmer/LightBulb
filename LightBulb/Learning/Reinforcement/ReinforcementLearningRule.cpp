@@ -131,6 +131,7 @@ std::vector<std::string> ReinforcementLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 	labels.push_back(DATA_SET_REWARD);
+	labels.push_back(DATA_SET_GRADIENT);
 	std::vector<std::string> worldLabels = getOptions()->world->getDataSetLabels();
 	labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
 	return labels;
@@ -143,7 +144,7 @@ bool ReinforcementLearningRule::doIteration()
 	double totalReward = 0;
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 
-	while (rewardCounter < 250)
+	while (rewardCounter < getOptions()->episodeSize)
 	{
 		double reward = getOptions()->world->doSimulationStep();
 		
@@ -181,11 +182,11 @@ bool ReinforcementLearningRule::doIteration()
 
 void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients)
 {
+
+
 	static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradients.size());
 	for (int l = gradients.size() - 1; l >= 0; l--)
 	{
-		/*gradients[l] *= 1.0 / stepsSinceLastReward;*/
-
 		if (prevDeltaWeights[l].size() == 0) {
 			prevDeltaWeights[l].resizeLike(gradients[l]);
 			prevDeltaWeights[l].setZero();
@@ -198,7 +199,11 @@ void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTop
 		
 		Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
 		networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
+		
+		gradients[l] *= 1.0 / getOptions()->episodeSize;
 	}
+
+	learningState->addData(DATA_SET_GRADIENT, gradients.back()(0, 0));
 }
 
 ReinforcementLearningRuleOptions* ReinforcementLearningRule::getOptions()
