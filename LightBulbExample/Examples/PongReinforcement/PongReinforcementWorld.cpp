@@ -4,8 +4,8 @@
 
 //Library includes
 
-PongReinforcementWorld::PongReinforcementWorld(LayeredNetworkOptions& options_)
-	: AbstractReinforcementWorld(options_)
+PongReinforcementWorld::PongReinforcementWorld(LayeredNetworkOptions& options_, bool epsilonGreedly, double epsilon)
+	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
 {
 	watchMode = false;
 }
@@ -51,7 +51,7 @@ void PongReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 {
 	if (output[0])
 		game.movePaddle(1);
-	else
+	else if (output[1])
 		game.movePaddle(-1);
 }
 

@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Reinforcement/ReinforcementLearningRule.hpp"
+#include "Learning/Reinforcement/PolicyGradientLearningRule.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
@@ -12,37 +12,37 @@
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include "AbstractReinforcementWorld.hpp"
 
-AbstractLearningResult* ReinforcementLearningRule::getLearningResult()
+AbstractLearningResult* PolicyGradientLearningRule::getLearningResult()
 {
 	EvolutionLearningResult* learningResult = new EvolutionLearningResult();
 	
 	return learningResult;
 }
 
-ReinforcementLearningRule::ReinforcementLearningRule(ReinforcementLearningRuleOptions& options_)
-	: AbstractLearningRule(new ReinforcementLearningRuleOptions(options_))
+PolicyGradientLearningRule::PolicyGradientLearningRule(PolicyGradientLearningRuleOptions& options_)
+	: AbstractReinforcementLearningRule(new PolicyGradientLearningRuleOptions(options_))
 {
 	initialize();
 }
 
-ReinforcementLearningRule::ReinforcementLearningRule(ReinforcementLearningRuleOptions* options_)
-	: AbstractLearningRule(options_)
+PolicyGradientLearningRule::PolicyGradientLearningRule(PolicyGradientLearningRuleOptions* options_)
+	: AbstractReinforcementLearningRule(options_)
 {
 	initialize();
 }
 
-ReinforcementLearningRule::ReinforcementLearningRule()
-	: AbstractLearningRule(new ReinforcementLearningRuleOptions())
+PolicyGradientLearningRule::PolicyGradientLearningRule()
+	: AbstractReinforcementLearningRule(new PolicyGradientLearningRuleOptions())
 {
 	initialize();
 }
 
-void ReinforcementLearningRule::initialize()
+void PolicyGradientLearningRule::initialize()
 {
 	resilientLearningRateHelper.reset(new ResilientLearningRateHelper(new ResilientLearningRateHelperOptions()));
 }
 
-void ReinforcementLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
+void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
 {
 	errorVectorRecord.push_back(getErrorVector(networkTopology));
 
@@ -50,7 +50,7 @@ void ReinforcementLearningRule::recordStep(AbstractNetworkTopology* networkTopol
 	activationRecord.push_back(networkTopology->getActivationsCopy());
 }
 
-std::vector<Eigen::MatrixXd> ReinforcementLearningRule::checkGradient(AbstractNetworkTopology* networkTopology)
+std::vector<Eigen::MatrixXd> PolicyGradientLearningRule::checkGradient(AbstractNetworkTopology* networkTopology)
 {
 	double epsilon = 0.0001;
 	auto weights = networkTopology->getWeights();
@@ -78,7 +78,7 @@ std::vector<Eigen::MatrixXd> ReinforcementLearningRule::checkGradient(AbstractNe
 	return gradientApprox;
 }
 
-Eigen::VectorXd ReinforcementLearningRule::getErrorVector(AbstractNetworkTopology* networkTopology)
+Eigen::VectorXd PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology* networkTopology)
 {
 	std::vector<double> lastOutput(networkTopology->getOutputSize());
 	networkTopology->getOutput(lastOutput);
@@ -91,12 +91,7 @@ Eigen::VectorXd ReinforcementLearningRule::getErrorVector(AbstractNetworkTopolog
 	return errorVector;
 }
 
-bool ReinforcementLearningRule::hasLearningSucceeded()
-{
-	return false;
-}
-
-void ReinforcementLearningRule::initializeTry()
+void PolicyGradientLearningRule::initializeTry()
 {
 	resilientLearningRateHelper->initialize(*getOptions()->world->getNeuralNetwork());
 	getOptions()->world->setLearningState(learningState.get());
@@ -113,7 +108,7 @@ void ReinforcementLearningRule::initializeTry()
 }
 
 
-void ReinforcementLearningRule::resetGradients()
+void PolicyGradientLearningRule::resetGradients()
 {
 	for (int i = 0; i < gradients.size(); i++)
 	{
@@ -122,23 +117,20 @@ void ReinforcementLearningRule::resetGradients()
 }
 
 
-std::string ReinforcementLearningRule::getName()
+std::string PolicyGradientLearningRule::getName()
 {
-	return "ReinforcementLearningRule";
+	return "PolicyGradientLearningRule";
 }
 
-std::vector<std::string> ReinforcementLearningRule::getDataSetLabels()
+std::vector<std::string> PolicyGradientLearningRule::getDataSetLabels()
 {
-	std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
-	labels.push_back(DATA_SET_REWARD);
+	std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
 	labels.push_back(DATA_SET_GRADIENT);
-	std::vector<std::string> worldLabels = getOptions()->world->getDataSetLabels();
-	labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
 	return labels;
 }
 
 
-bool ReinforcementLearningRule::doIteration()
+bool PolicyGradientLearningRule::doIteration()
 {
 	int rewardCounter = 0;
 	double totalReward = 0;
@@ -180,7 +172,7 @@ bool ReinforcementLearningRule::doIteration()
 }
 
 
-void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients)
+void PolicyGradientLearningRule::addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients)
 {
 
 
@@ -206,16 +198,16 @@ void ReinforcementLearningRule::addGradients(AbstractNetworkTopology* networkTop
 	learningState->addData(DATA_SET_GRADIENT, gradients.back()(0, 0));
 }
 
-ReinforcementLearningRuleOptions* ReinforcementLearningRule::getOptions()
+PolicyGradientLearningRuleOptions* PolicyGradientLearningRule::getOptions()
 {
-	return static_cast<ReinforcementLearningRuleOptions*>(options.get());
+	return static_cast<PolicyGradientLearningRuleOptions*>(options.get());
 }
 
-void ReinforcementLearningRule::doCalculationAfterLearningProcess()
+void PolicyGradientLearningRule::doCalculationAfterLearningProcess()
 {
 }
 
-void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward)
+void PolicyGradientLearningRule::computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward)
 {
 	Eigen::VectorXd rewards(stepsSinceLastReward);
 	rewards(stepsSinceLastReward - 1) = reward;
@@ -239,7 +231,7 @@ void ReinforcementLearningRule::computeGradients(AbstractNetworkTopology* networ
 	activationRecord.clear();
 }
 
-void ReinforcementLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
+void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
 {
 	std::vector<Eigen::MatrixXd> deltaVectorOutputLayer(networkTopology->getLayerCount());
 	for (int layerIndex = networkTopology->getLayerCount() - 1; layerIndex > 0; layerIndex--)

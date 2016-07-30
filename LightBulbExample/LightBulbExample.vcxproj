@@ -135,6 +135,7 @@
     <ClCompile Include="Examples\PongEvolution\PongGameController.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameFactory.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameWindow.cpp" />
+    <ClCompile Include="Examples\PongReinforcement\PongMonteCarloExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp" />
     <ClCompile Include="Examples\Position.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Examples\PongEvolution\PongGameController.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameFactory.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameWindow.hpp" />
+    <ClInclude Include="Examples\PongReinforcement\PongMonteCarloExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp" />
     <ClInclude Include="Examples\Position.hpp" />

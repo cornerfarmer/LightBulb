@@ -20,6 +20,8 @@ class AbstractReinforcementWorld
 private:
 	std::vector<double> lastOutput;
 	std::vector<double> lastInput;
+	bool epsilonGreedly = false;
+	double epsilon;
 	void buildOutputBuffer();
 	void buildNeuralNetwork(LayeredNetworkOptions &options);
 protected:
@@ -36,7 +38,7 @@ protected:
 public:
 	void doNNCalculation(bool resetInput = true);
 	virtual ~AbstractReinforcementWorld() {}
-	AbstractReinforcementWorld(LayeredNetworkOptions& options);
+	AbstractReinforcementWorld(LayeredNetworkOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
 	// This method should execute one simulation step.
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual double doSimulationStep() = 0;

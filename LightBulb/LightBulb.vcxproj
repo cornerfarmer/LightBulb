@@ -464,8 +464,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Learning\Reinforcement\AbstractReinforcementLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementWorld.cpp" />
-    <ClCompile Include="Learning\Reinforcement\ReinforcementLearningRule.cpp" />
+    <ClCompile Include="Learning\Reinforcement\MonteCarloLearningRule.cpp" />
+    <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
     <ClCompile Include="Learning\ResilientLearningRateHelper.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -1050,8 +1052,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
-    <ClInclude Include="Learning\Reinforcement\ReinforcementLearningRule.hpp" />
+    <ClInclude Include="Learning\Reinforcement\MonteCarloLearningRule.hpp" />
+    <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
     <ClInclude Include="Learning\ResilientLearningRateHelper.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

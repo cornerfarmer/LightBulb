@@ -22,7 +22,7 @@ protected:
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<bool>& output);
 public:
-	PongReinforcementWorld(LayeredNetworkOptions& options_);
+	PongReinforcementWorld(LayeredNetworkOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	PongReinforcementWorld() = default;
 	double doSimulationStep();
 	void executeCompareAI();

@@ -17,18 +17,40 @@ void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
 	// Calculate the output from the the input
 	neuralNetwork->calculate(lastInput, lastOutput, topologicalOrder, false);
 
-	for (int i = 0; i < lastOutput.size(); i++)
+	if (!epsilonGreedly) {
+		for (int i = 0; i < lastOutput.size(); i++)
+		{
+			lastBooleanOutput[i] = (0.5 <= lastOutput[i]);
+		}
+	}
+	else
 	{
-		lastBooleanOutput[i] = (0.5 <= lastOutput[i]);
+		lastBooleanOutput = std::vector<bool>(lastBooleanOutput.size(), 0);
+		if ((float)rand() / RAND_MAX < epsilon)
+		{
+			lastBooleanOutput[rand() % lastBooleanOutput.size()] = true;
+		}
+		else
+		{
+			int bestOutput = 0;
+			for (int i = 1; i < lastOutput.size(); i++)
+			{
+				if (lastOutput[bestOutput] <= lastOutput[i])
+					bestOutput = i;
+			}
+			lastBooleanOutput[bestOutput] = true;
+		}
 	}
 
 	// Interpret the output
 	interpretNNOutput(lastBooleanOutput);
 }
 
-AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& options)
+AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& options, bool epsilonGreedly_, double epsilon_)
 {
 	buildNeuralNetwork(options);
+	epsilonGreedly = epsilonGreedly_;
+	epsilon = epsilon_;
 }
 
 void AbstractReinforcementWorld::initializeForLearning()

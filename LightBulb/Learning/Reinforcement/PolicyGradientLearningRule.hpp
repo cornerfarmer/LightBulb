@@ -1,42 +1,36 @@
 #pragma once
 
-#ifndef _REINFORCEMENTLEARNINGRULE_H_
-#define _REINFORCEMENTLEARNINGRULE_H_
+#ifndef _POLICYGRADIENTLEARNINGRULE_H_
+#define _POLICYGRADIENTLEARNINGRULE_H_
 
 // Includes
-#include "Learning/AbstractEvolutionLearningRule.hpp"
+#include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 
 // Library Includes
 #include <vector>
 #include <Learning/ResilientLearningRateHelper.hpp>
 
-class AbstractNetworkTopology;
 // Forward declarations
-class AbstractReinforcementWorld;
+class AbstractNetworkTopology;
 
-struct ReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
+struct PolicyGradientLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 {
-	AbstractReinforcementWorld* world;
 	int episodeSize;
-	ReinforcementLearningRuleOptions()
+	PolicyGradientLearningRuleOptions()
 	{
 		episodeSize = 100;
-		world = NULL;
-		maxIterationsPerTry = 10000000000;
 	}
 };
 
-#define DATA_SET_REWARD "Reward"
 #define DATA_SET_GRADIENT "Gradient"
 
-class ReinforcementLearningRule : public AbstractLearningRule
+class PolicyGradientLearningRule : public AbstractReinforcementLearningRule
 {
 private:
 	std::vector<std::vector<Eigen::VectorXd>> netInputRecord;
 	std::vector<std::vector<Eigen::VectorXd>> activationRecord;
 	std::vector<Eigen::VectorXd> errorVectorRecord;
 	std::vector<Eigen::MatrixXd> gradients;
-
 
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	int stepsSinceLastReward;
@@ -50,14 +44,13 @@ private:
 	Eigen::VectorXd getErrorVector(AbstractNetworkTopology* networkTopology);
 protected:
 	bool doIteration();
-	bool hasLearningSucceeded();
-	ReinforcementLearningRuleOptions* getOptions();
+	PolicyGradientLearningRuleOptions* getOptions();
 	void doCalculationAfterLearningProcess();
 	AbstractLearningResult* getLearningResult();
 public:
-	ReinforcementLearningRule(ReinforcementLearningRuleOptions& options_);
-	ReinforcementLearningRule(ReinforcementLearningRuleOptions* options_);
-	ReinforcementLearningRule();
+	PolicyGradientLearningRule(PolicyGradientLearningRuleOptions& options_);
+	PolicyGradientLearningRule(PolicyGradientLearningRuleOptions* options_);
+	PolicyGradientLearningRule();
 	// Executes the learning process
 	void initializeTry();
 	static std::string getName();

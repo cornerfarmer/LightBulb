@@ -111,6 +111,9 @@
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\PongReinforcement\PongMonteCarloExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -213,6 +216,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\PongReinforcement\PongMonteCarloExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

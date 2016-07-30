@@ -26,8 +26,6 @@ void AbstractSupervisedLearningRule::validateOptions()
 	// Check if all given options are correct
 	if (getOptions()->maxTotalErrorValue <= getOptions()->totalErrorGoal)
 		throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
-	if (getOptions()->teacher->getTeachingLessons()->size() == 0)
-		throw std::invalid_argument("The given teacher does not contain any teachingLessons. So what should i learn??");
 }
 
 AbstractSupervisedLearningRuleOptions* AbstractSupervisedLearningRule::getOptions()

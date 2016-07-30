@@ -8,7 +8,7 @@
 #include <Function/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
-#include <Learning/Reinforcement/ReinforcementLearningRule.hpp>
+#include <Learning/Reinforcement/PolicyGradientLearningRule.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementWorld.hpp"
 #include <Function/HyperbolicTangentFunction.hpp>
@@ -22,14 +22,14 @@
 
 AbstractLearningRule* PongReinforcementExample::createLearningRate()
 {
-	ReinforcementLearningRuleOptions options;
+	PolicyGradientLearningRuleOptions options;
 	world = createWorld();
 	options.world = world;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
-	return new ReinforcementLearningRule(options);
+	return new PolicyGradientLearningRule(options);
 }
 
 
@@ -42,7 +42,7 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
 	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-	options.neuronsPerLayerCount.push_back(1);
+	options.neuronsPerLayerCount.push_back(2);
 
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
