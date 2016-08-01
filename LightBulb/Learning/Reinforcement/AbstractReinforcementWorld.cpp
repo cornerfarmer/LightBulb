@@ -64,6 +64,17 @@ NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()
 	return neuralNetwork.get();
 }
 
+double AbstractReinforcementWorld::getEpsilon()
+{
+	return epsilon;
+}
+
+
+void AbstractReinforcementWorld::setEpsilon(double newEpsilon)
+{
+	epsilon = newEpsilon;
+}
+
 void AbstractReinforcementWorld::setLearningState(LearningState* learningState_)
 {
 	learningState = learningState_;

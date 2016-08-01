@@ -48,12 +48,13 @@ void MonteCarloLearningRule::initialize()
 {
 	BackpropagationLearningRuleOptions options;
 	options.resilientLearningRate = false;
-	options.maxIterationsPerTry = 10;
+	options.maxIterationsPerTry = 1000;
 	options.maxTries = 1;
 	options.changeWeightsBeforeLearning = false;
 	options.teacher = &teacher;
 	options.neuralNetwork = getOptions()->world->getNeuralNetwork();
 	options.logger = getOptions()->logger;
+	options.resilientLearningRate = true;
 	backpropagationLearningRule.reset(new BackpropagationLearningRule(options));
 }
 
@@ -85,17 +86,21 @@ void MonteCarloLearningRule::addTrainingPattern(AbstractNetworkTopology* network
 
 void MonteCarloLearningRule::doSupervisedLearning()
 {
-	teacher.getTeachingLessons()->clear();
+	if (teacher.getTeachingLessons()->size() == 0) {
+		teacher.getTeachingLessons()->clear();
 
-	for (int i = 0; i < teachingInputs.size(); i++) 
-	{
-		NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(teachingInputs[i].size());
-		for (int j = 0; j < teachingInputs[i].size(); j++)
-			input->set(0, j, teachingInputs[i][j]);
-		teacher.addTeachingLesson(new TeachingLessonLinearInput(std::vector<std::vector<double>>(1, teachingPatterns[i]), input));
+		for (int i = 0; i < teachingInputs.size(); i++)
+		{
+			NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(teachingInputs[i].size());
+			for (int j = 0; j < teachingInputs[i].size(); j++)
+				input->set(0, j, teachingInputs[i][j]);
+			teacher.addTeachingLesson(new TeachingLessonLinearInput(std::vector<std::vector<double>>(1, teachingPatterns[i]), input));
+		}
 	}
 	
+	initialize();
 	auto result = backpropagationLearningRule->start();
+	learningState->addData(DATA_SET_TRAINING_ERROR, result->quality);
 
 	teachingPatterns.clear();
 	teachingInputs.clear();
@@ -110,6 +115,7 @@ std::string MonteCarloLearningRule::getName()
 std::vector<std::string> MonteCarloLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
+	labels.push_back(DATA_SET_TRAINING_ERROR);
 	return labels;
 }
 

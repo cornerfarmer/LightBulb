@@ -1,4 +1,4 @@
-#include "PongMonteCarloExample.hpp"
+#include "PongDQNExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
@@ -12,7 +12,7 @@
 #include "PongReinforcementWorld.hpp"
 #include <Function/HyperbolicTangentFunction.hpp>
 #include <Function/FermiFunction.hpp>
-#include <Learning/Reinforcement/MonteCarloLearningRule.hpp>
+#include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
@@ -20,19 +20,19 @@
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
 
-AbstractLearningRule* PongMonteCarloExample::createLearningRate()
+AbstractLearningRule* PongDQNExample::createLearningRate()
 {
-	MonteCarloLearningRuleOptions options;
+	DQNLearningRuleOptions options;
 	world = createWorld();
 	options.world = world;
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
-	return new MonteCarloLearningRule(options);
+	return new DQNLearningRule(options);
 }
 
 
-PongReinforcementWorld* PongMonteCarloExample::createWorld()
+PongReinforcementWorld* PongDQNExample::createWorld()
 {
 	LayeredNetworkOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -46,11 +46,11 @@ PongReinforcementWorld* PongMonteCarloExample::createWorld()
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
-	return new PongReinforcementWorld(options, true);
+	return new PongReinforcementWorld(options, true, 1);
 }
 
 
-PongMonteCarloExample::PongMonteCarloExample()
+PongDQNExample::PongDQNExample()
 {
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
@@ -59,28 +59,28 @@ PongMonteCarloExample::PongMonteCarloExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 }
 
-std::string PongMonteCarloExample::getDefaultName()
+std::string PongDQNExample::getDefaultName()
 {
-	return "Pong monte carlo example";
+	return "Pong DQN example";
 }
 
-std::string PongMonteCarloExample::getDescription()
+std::string PongDQNExample::getDescription()
 {
-	return "Evolution of a Pong AI with monte carlo.";
+	return "Evolution of a Pong AI with DQN.";
 }
 
-AbstractTrainingPlan* PongMonteCarloExample::getCopy()
+AbstractTrainingPlan* PongDQNExample::getCopy()
 {
-	return new PongMonteCarloExample();
+	return new PongDQNExample();
 }
 
-std::string PongMonteCarloExample::getLearningRuleName()
+std::string PongDQNExample::getLearningRuleName()
 {
-	return PongMonteCarloExample::getName();
+	return PongDQNExample::getName();
 }
 
 
-PongReinforcementWorld* PongMonteCarloExample::getWorld()
+PongReinforcementWorld* PongDQNExample::getWorld()
 {
 	return world;
 }

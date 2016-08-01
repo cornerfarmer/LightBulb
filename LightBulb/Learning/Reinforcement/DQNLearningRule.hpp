@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _MONTECARLOLEARNINGRULE_H_
-#define _MONTECARLOLEARNINGRULE_H_
+#ifndef _DQNLEARNINGRULE_H_
+#define _DQNLEARNINGRULE_H_
 
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
@@ -17,35 +17,43 @@ class AbstractNetworkTopology;
 
 #define DATA_SET_TRAINING_ERROR "Training error"
 
-struct MonteCarloLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
+struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 {
 	double discountingFactor;
-	MonteCarloLearningRuleOptions()
+	DQNLearningRuleOptions()
 	{
 		discountingFactor = 0.99;
 	}
 };
 
+struct Transition
+{
+	std::vector<double> state;
+	std::vector<double> nextState;
+	int action;
+	double reward;
+};
 
-class MonteCarloLearningRule : public AbstractReinforcementLearningRule
+class DQNLearningRule : public AbstractReinforcementLearningRule
 {
 private:
+	int nextTransitionIndex;
+	int waitUntilLearningStarts;
 	Teacher teacher;
+	std::vector<Transition> transitions;
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
-	std::vector<std::vector<double>> teachingPatterns;
-	std::vector<std::vector<double>> teachingInputs;
-	std::vector<int> chosenActions;
+	std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 	void initialize();
-	void addTrainingPattern(AbstractNetworkTopology* networkTopology, double reward);
+	void storeTransition(AbstractNetworkTopology* networkTopology, double reward);
 	void doSupervisedLearning();
 protected:
 	bool doIteration();
-	MonteCarloLearningRuleOptions* getOptions();
+	DQNLearningRuleOptions* getOptions();
 	AbstractLearningResult* getLearningResult();
 public:
-	MonteCarloLearningRule(MonteCarloLearningRuleOptions& options_);
-	MonteCarloLearningRule(MonteCarloLearningRuleOptions* options_);
-	MonteCarloLearningRule();
+	DQNLearningRule(DQNLearningRuleOptions& options_);
+	DQNLearningRule(DQNLearningRuleOptions* options_);
+	DQNLearningRule();
 	// Executes the learning process
 	void initializeTry();
 	static std::string getName();

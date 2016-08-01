@@ -29,13 +29,15 @@ protected:
 	LearningState* learningState;
 	// The NN of the object
 	std::unique_ptr<NeuralNetwork> neuralNetwork;
-	// This method should return the input for the neural network
-	virtual void getNNInput(std::vector<double>& input) = 0;
+
 	// This method should interpret and act depending on the given NN output
 	virtual void interpretNNOutput(std::vector<bool>& output) = 0;
 
 	
 public:
+	// This method should return the input for the neural network
+	virtual void getNNInput(std::vector<double>& input) = 0;
+
 	void doNNCalculation(bool resetInput = true);
 	virtual ~AbstractReinforcementWorld() {}
 	AbstractReinforcementWorld(LayeredNetworkOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
@@ -45,6 +47,8 @@ public:
 	virtual void initializeForLearning();
 	virtual int rateKI() { return 0; };
 	NeuralNetwork* getNeuralNetwork();
+	void setEpsilon(double newEpsilon);
+	double getEpsilon();
 	void setLearningState(LearningState* learningState_);
 	virtual std::vector<std::string> getDataSetLabels();
 	std::vector<bool> getLastBooleanOutput();

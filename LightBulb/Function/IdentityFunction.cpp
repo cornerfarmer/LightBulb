@@ -16,7 +16,7 @@ void IdentityFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::V
 
 double IdentityFunction::executeDerivation(double input)
 {
-	return 0;
+	return 1;
 }
 
 AbstractActivationFunction* IdentityFunction::getActivationFunctionCopy()

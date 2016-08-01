@@ -466,6 +466,7 @@
     </ClCompile>
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementWorld.cpp" />
+    <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\MonteCarloLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
     <ClCompile Include="Learning\ResilientLearningRateHelper.cpp">
@@ -1054,6 +1055,7 @@
     </ClInclude>
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
+    <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\MonteCarloLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
     <ClInclude Include="Learning\ResilientLearningRateHelper.hpp">
