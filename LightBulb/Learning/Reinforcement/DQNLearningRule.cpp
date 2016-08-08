@@ -53,6 +53,8 @@ void DQNLearningRule::initialize()
 	options.neuralNetwork = getOptions()->world->getNeuralNetwork();
 	options.logger = getOptions()->logger;
 	options.resilientLearningRate = true;
+	options.flatSpotEliminationFac = 0;
+	options.totalErrorGoal = 0;
 	backpropagationLearningRule.reset(new BackpropagationLearningRule(options));
 
 	steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
@@ -116,9 +118,10 @@ void DQNLearningRule::doSupervisedLearning()
 		teacher.addTeachingLesson(new TeachingLessonLinearInput(std::vector<std::vector<double>>(1, transitions[r].state), input));
 	}
 
+	//auto gradient = checkGradient(&teacher, getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 
 	auto result = backpropagationLearningRule->start();
-	learningState->addData(DATA_SET_TRAINING_ERROR, result->quality);
+	currentTotalError += result->quality;
 }
 
 std::string DQNLearningRule::getName()
@@ -133,8 +136,37 @@ std::vector<std::string> DQNLearningRule::getDataSetLabels()
 	return labels;
 }
 
+
+std::vector<Eigen::MatrixXd> DQNLearningRule::checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology)
+{
+	double error = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
+	double epsilon = 0.0001;
+	auto weights = networkTopology->getWeights();
+	std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
+	for (int l = weights->size() - 1; l >= 0; l--)
+	{
+		gradientApprox[l].resizeLike(weights->at(l));
+		for (int n1 = 0; n1 < weights->at(l).rows(); n1++)
+		{
+			for (int n2 = 0; n2 < weights->at(l).cols(); n2++)
+			{
+				weights->at(l)(n1, n2) += epsilon;
+				double firstError = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
+
+				weights->at(l)(n1, n2) -= epsilon * 2;
+				double secondError = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
+				gradientApprox[l](n1, n2) = (firstError - secondError) / (2 * epsilon);
+
+				weights->at(l)(n1, n2) += epsilon;
+			}
+		}
+	}
+	return gradientApprox;
+}
+
 bool DQNLearningRule::doIteration()
 {
+	currentTotalError = 0;
 	int rewardCounter = 0;
 	double totalReward = 0;
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
@@ -155,6 +187,8 @@ bool DQNLearningRule::doIteration()
 		if (e > 0.1)
 			getOptions()->world->setEpsilon(e - 0.9 / 1000000);
 	}
+	
+	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / 10000);
 		
 	steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 

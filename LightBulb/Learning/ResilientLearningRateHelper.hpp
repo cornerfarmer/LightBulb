@@ -49,6 +49,7 @@ private:
 	// Holds for every edge its previous learning rate
 	std::vector<Eigen::MatrixXd> previousLearningRates;
 	ResilientLearningRateHelperOptions* options;
+	bool initialized;
 public:
 	ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_);
 	ResilientLearningRateHelper();
@@ -60,6 +61,8 @@ public:
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper
 	void initialize(AbstractNeuralNetwork &neuralNetwork);
+
+	bool isInitialized();
 };
 
 #endif

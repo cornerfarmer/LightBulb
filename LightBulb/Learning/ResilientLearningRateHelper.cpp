@@ -11,11 +11,13 @@
 ResilientLearningRateHelper::ResilientLearningRateHelper(ResilientLearningRateHelperOptions* options_) 
 {
 	options = options_;
+	initialized = false;
 }
 
 ResilientLearningRateHelper::ResilientLearningRateHelper() 
 {
 	options = NULL;
+	initialized = false;
 }
 
 void ResilientLearningRateHelper::initialize(AbstractNeuralNetwork &neuralNetwork)
@@ -26,6 +28,12 @@ void ResilientLearningRateHelper::initialize(AbstractNeuralNetwork &neuralNetwor
 	{
 		previousLearningRates[i].setConstant(options->learningRateStart);
 	}
+	initialized = true;
+}
+
+bool ResilientLearningRateHelper::isInitialized()
+{
+	return initialized;
 }
 
 Eigen::MatrixXd ResilientLearningRateHelper::getLearningRate(int layerIndex, Eigen::MatrixXd& gradients)

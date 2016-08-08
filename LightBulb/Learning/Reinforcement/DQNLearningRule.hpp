@@ -39,6 +39,7 @@ class DQNLearningRule : public AbstractReinforcementLearningRule
 private:
 	int nextTransitionIndex;
 	int waitUntilLearningStarts;
+	double currentTotalError;
 	Teacher teacher;
 	std::vector<Transition> transitions;
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
@@ -46,6 +47,7 @@ private:
 	void initialize();
 	void storeTransition(AbstractNetworkTopology* networkTopology, double reward);
 	void doSupervisedLearning();
+	std::vector<Eigen::MatrixXd> checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology);
 protected:
 	bool doIteration();
 	DQNLearningRuleOptions* getOptions();

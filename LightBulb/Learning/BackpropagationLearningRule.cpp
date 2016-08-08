@@ -164,6 +164,6 @@ void BackpropagationLearningRule::initializeTry()
 	}
 
 	// If used, initialize the learning rate helper
-	if (getOptions()->resilientLearningRate)
+	if (getOptions()->resilientLearningRate && (getOptions()->changeWeightsBeforeLearning || !resilientLearningRateHelper->isInitialized()))
 		resilientLearningRateHelper->initialize(*getOptions()->neuralNetwork);
 }

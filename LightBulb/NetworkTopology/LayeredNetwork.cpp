@@ -153,7 +153,7 @@ Eigen::VectorXd LayeredNetwork::getEfferentWeightVector(int layerIndex, int neur
 
 AbstractActivationFunction* LayeredNetwork::getInnerActivationFunction()
 {
-	return options->descriptionFactory->getOutputActivationFunction();
+	return options->descriptionFactory->getInnerActivationFunction();
 }
 
 Eigen::VectorXd LayeredNetwork::getActivationVector(int layerIndex)
