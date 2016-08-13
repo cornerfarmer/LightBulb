@@ -19,10 +19,35 @@ class AbstractNetworkTopology;
 
 struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 {
-	double discountingFactor;
+	int minibatchSize;
+	int replayMemorySize;
+	int targetNetworkUpdateFrequency;
+	double discountFactor;
+	double initialExploration;
+	double finalExploration;
+	int finalExplorationFrame;
+	int replayStartSize;
+
+	BackpropagationLearningRuleOptions backpropagationOptions;
 	DQNLearningRuleOptions()
 	{
-		discountingFactor = 0.99;
+		minibatchSize = 32;
+		replayMemorySize = 1000000;
+		targetNetworkUpdateFrequency = 10000;
+		discountFactor = 0.99;
+		initialExploration = 1;
+		finalExploration = 0.1;
+		finalExplorationFrame = 1000000;
+		replayStartSize = 50000;
+		
+		backpropagationOptions.maxIterationsPerTry = 1;
+		backpropagationOptions.maxTries = 1;
+		backpropagationOptions.changeWeightsBeforeLearning = false;
+		backpropagationOptions.resilientLearningRate = false;
+		backpropagationOptions.flatSpotEliminationFac = 0;
+		backpropagationOptions.offlineLearning = true;
+		backpropagationOptions.totalErrorGoal = 0;
+		backpropagationOptions.learningRate = 0.00025;
 	}
 };
 

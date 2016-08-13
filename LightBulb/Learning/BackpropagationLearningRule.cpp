@@ -50,7 +50,7 @@ void BackpropagationLearningRule::initializeStartLearningAlgoritm()
 		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
 
 	// Create a vector which will contain all delta values of the neurons in the output layer
-	deltaVectorOutputLayer.clear();		
+	//deltaVectorOutputLayer.clear();		
 	deltaVectorOutputLayer.resize(getOptions()->neuralNetwork->getNetworkTopology()->getLayerCount());
 
 	// If momentum is used

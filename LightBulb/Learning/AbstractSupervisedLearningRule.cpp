@@ -166,7 +166,7 @@ void AbstractSupervisedLearningRule::initializeResumeLearningAlgoritm()
 
 void AbstractSupervisedLearningRule::initializeLearningAlgoritm()
 {
-	offlineLearningWeights.clear();
+	//offlineLearningWeights.clear();
 	// Create a vector which will contain all weights for offline learning
 	offlineLearningWeights.resize(getCurrentNetworkTopology()->getLayerCount());
 }

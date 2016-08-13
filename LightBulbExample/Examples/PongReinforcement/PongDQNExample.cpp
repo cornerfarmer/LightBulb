@@ -14,17 +14,27 @@
 #include <Function/FermiFunction.hpp>
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
+#include <TrainingPlans/DoublePreference.hpp>
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
+#define PREFERENCE_LEARNING_RATE "Learning rate"
+#define PREFERENCE_MINIBATCH_SIZE "Minibatch size"
+#define PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY "Target network update frequency"
+#define PREFERENCE_REPLAY_MEMORY_SIZE "replay memory size"
 
 AbstractLearningRule* PongDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;
 	world = createWorld();
 	options.world = world;
+	options.backpropagationOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
+	options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
+	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
+	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
+
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -57,6 +67,10 @@ PongDQNExample::PongDQNExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
+	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.00025, 0, 1));
+	addPreference(new IntegerPreference(PREFERENCE_MINIBATCH_SIZE, 32, 1, 1024));
+	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
+	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
 }
 
 std::string PongDQNExample::getDefaultName()

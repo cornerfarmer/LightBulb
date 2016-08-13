@@ -32,6 +32,8 @@ struct BackpropagationLearningRuleOptions : public AbstractSupervisedLearningRul
 	bool resilientLearningRate;
 	// Holds all options which are needed for the resilient learning rate
 	ResilientLearningRateHelperOptions resilientLearningRateOptions;
+
+	bool rmsProp;
 	BackpropagationLearningRuleOptions()
 	{
 		flatSpotEliminationFac = 0.1f;

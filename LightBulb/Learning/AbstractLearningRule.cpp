@@ -17,13 +17,13 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 {
 	options.reset(options_);
 
-	learningState.reset(new LearningState(options->disabledDataSets, options->dataSaveInterval));
-
 	pauseRequest = false;
 }
 
 AbstractLearningResult* AbstractLearningRule::start()
 {
+	learningState.reset(new LearningState(options->disabledDataSets, options->dataSaveInterval));
+
 	// Let the learning algorithm do stuff before starting
 	initializeStartLearningAlgoritm();
 

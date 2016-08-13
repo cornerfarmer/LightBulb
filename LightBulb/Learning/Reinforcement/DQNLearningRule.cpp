@@ -38,24 +38,18 @@ void DQNLearningRule::initializeTry()
 {
 	getOptions()->world->setLearningState(learningState.get());
 	getOptions()->world->initializeForLearning();
+	steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 	nextTransitionIndex = 0;
-	waitUntilLearningStarts = 50000;
+	waitUntilLearningStarts = getOptions()->replayStartSize;
+	getOptions()->world->setEpsilon(getOptions()->initialExploration);
 }
 
 void DQNLearningRule::initialize()
 {
-	BackpropagationLearningRuleOptions options;
-	options.resilientLearningRate = false;
-	options.maxIterationsPerTry = 10;
-	options.maxTries = 1;
-	options.changeWeightsBeforeLearning = false;
-	options.teacher = &teacher;
-	options.neuralNetwork = getOptions()->world->getNeuralNetwork();
-	options.logger = getOptions()->logger;
-	options.resilientLearningRate = true;
-	options.flatSpotEliminationFac = 0;
-	options.totalErrorGoal = 0;
-	backpropagationLearningRule.reset(new BackpropagationLearningRule(options));
+	getOptions()->backpropagationOptions.teacher = &teacher;
+	getOptions()->backpropagationOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
+	getOptions()->backpropagationOptions.logger = getOptions()->logger;
+	backpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->backpropagationOptions));
 
 	steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
 }
@@ -81,7 +75,7 @@ void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, 
 		}
 	}
 
-	if (transitions.size() < 1000000)
+	if (transitions.size() < getOptions()->replayMemorySize)
 	{
 		transitions.push_back(transition);
 	} 
@@ -97,7 +91,7 @@ void DQNLearningRule::doSupervisedLearning()
 {
 	teacher.getTeachingLessons()->clear();
 
-	for (int i = 0; i < 32; i++)
+	for (int i = 0; i < getOptions()->minibatchSize; i++)
 	{
 		int r = rand() % transitions.size();
 
@@ -120,7 +114,7 @@ void DQNLearningRule::doSupervisedLearning()
 
 	//auto gradient = checkGradient(&teacher, getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 
-	auto result = backpropagationLearningRule->start();
+	std::unique_ptr<AbstractLearningResult> result(backpropagationLearningRule->start());
 	currentTotalError += result->quality;
 }
 
@@ -171,12 +165,11 @@ bool DQNLearningRule::doIteration()
 	double totalReward = 0;
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 
-	for (int i = 0; i < 10000; i++) {
+	for (int i = 0; i < getOptions()->targetNetworkUpdateFrequency; i++) {
 		double reward = getOptions()->world->doSimulationStep();
+		totalReward += reward;
 
 		storeTransition(networkTopology, reward);
-
-		learningState->addData(DATA_SET_REWARD, totalReward);
 
 		if (waitUntilLearningStarts > 0)
 			waitUntilLearningStarts--;
@@ -184,11 +177,14 @@ bool DQNLearningRule::doIteration()
 			doSupervisedLearning();
 
 		double e = getOptions()->world->getEpsilon();
-		if (e > 0.1)
-			getOptions()->world->setEpsilon(e - 0.9 / 1000000);
+		if (e > getOptions()->finalExploration)
+			getOptions()->world->setEpsilon(e - (getOptions()->initialExploration - getOptions()->finalExploration) / getOptions()->finalExplorationFrame);
 	}
+
+
+	learningState->addData(DATA_SET_REWARD, totalReward);
 	
-	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / 10000);
+	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions()->targetNetworkUpdateFrequency);
 		
 	steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 
@@ -196,7 +192,10 @@ bool DQNLearningRule::doIteration()
 	// Continue with the next generation
 	learningState->iterations++;
 
+	double e = getOptions()->world->getEpsilon();
+	getOptions()->world->setEpsilon(0);
 	getOptions()->world->rateKI();	
+	getOptions()->world->setEpsilon(e);
 
 	return true;
 }
