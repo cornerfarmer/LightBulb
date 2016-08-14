@@ -1,4 +1,4 @@
-#include "SimpleReinforcementDQNExample.hpp"
+#include "MountainCarDQNExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
@@ -9,12 +9,13 @@
 #include <Neuron/NeuronDescription.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
-#include "SimpleReinforcementWorld.hpp"
+#include "MountainCarWorld.hpp"
 #include <Function/HyperbolicTangentFunction.hpp>
 #include <Function/FermiFunction.hpp>
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
+#include "MountainCarFactory.hpp"
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
@@ -26,7 +27,7 @@
 #define PREFERENCE_REPLAY_MEMORY_SIZE "replay memory size"
 #define PREFERENCE_FINAL_EXPLORATION_FRAME "final exploration frame"
 
-AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
+AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;
 	world = createWorld();
@@ -43,26 +44,27 @@ AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 }
 
 
-SimpleReinforcementWorld* SimpleReinforcementDQNExample::createWorld()
+MountainCarWorld* MountainCarDQNExample::createWorld()
 {
 	LayeredNetworkOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
-	options.neuronsPerLayerCount.push_back(4);
+	options.neuronsPerLayerCount.push_back(2);
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
 	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-	options.neuronsPerLayerCount.push_back(4);
+	options.neuronsPerLayerCount.push_back(3);
 
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
-	return new SimpleReinforcementWorld(options, true, 1);
+	return new MountainCarWorld(options, true, 1);
 }
 
 
-SimpleReinforcementDQNExample::SimpleReinforcementDQNExample()
+MountainCarDQNExample::MountainCarDQNExample()
 {
+	addCustomSubApp(new MountainCarFactory());
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
@@ -74,28 +76,28 @@ SimpleReinforcementDQNExample::SimpleReinforcementDQNExample()
 	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 1000000, 1, 1000000));
 }
 
-std::string SimpleReinforcementDQNExample::getDefaultName()
+std::string MountainCarDQNExample::getDefaultName()
 {
-	return "Simple DQN example";
+	return "MountainCar DQN example";
 }
 
-std::string SimpleReinforcementDQNExample::getDescription()
+std::string MountainCarDQNExample::getDescription()
 {
-	return "Evolution of a Simple AI with DQN.";
+	return "Evolution of a MountainCar AI with DQN.";
 }
 
-AbstractTrainingPlan* SimpleReinforcementDQNExample::getCopy()
+AbstractTrainingPlan* MountainCarDQNExample::getCopy()
 {
-	return new SimpleReinforcementDQNExample();
+	return new MountainCarDQNExample();
 }
 
-std::string SimpleReinforcementDQNExample::getLearningRuleName()
+std::string MountainCarDQNExample::getLearningRuleName()
 {
-	return SimpleReinforcementDQNExample::getName();
+	return MountainCarDQNExample::getName();
 }
 
 
-SimpleReinforcementWorld* SimpleReinforcementDQNExample::getWorld()
+MountainCarWorld* MountainCarDQNExample::getWorld()
 {
 	return world;
 }

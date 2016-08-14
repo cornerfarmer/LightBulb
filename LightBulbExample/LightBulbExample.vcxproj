@@ -123,6 +123,11 @@
     <ClCompile Include="Examples\BackpropagationXorExample.cpp" />
     <ClCompile Include="Examples\FunctionEvolutionExample.cpp" />
     <ClCompile Include="Examples\FunctionSimulator.cpp" />
+    <ClCompile Include="Examples\MountainCar\MountainCarController.cpp" />
+    <ClCompile Include="Examples\MountainCar\MountainCarDQNExample.cpp" />
+    <ClCompile Include="Examples\MountainCar\MountainCarFactory.cpp" />
+    <ClCompile Include="Examples\MountainCar\MountainCarWindow.cpp" />
+    <ClCompile Include="Examples\MountainCar\MountainCarWorld.cpp" />
     <ClCompile Include="Examples\NatureEvolutionExample.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\Network.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp" />
@@ -160,6 +165,11 @@
     <ClInclude Include="Examples\BackpropagationXorExample.hpp" />
     <ClInclude Include="Examples\FunctionEvolutionExample.hpp" />
     <ClInclude Include="Examples\FunctionSimulator.hpp" />
+    <ClInclude Include="Examples\MountainCar\MountainCarController.hpp" />
+    <ClInclude Include="Examples\MountainCar\MountainCarDQNExample.hpp" />
+    <ClInclude Include="Examples\MountainCar\MountainCarFactory.hpp" />
+    <ClInclude Include="Examples\MountainCar\MountainCarWindow.hpp" />
+    <ClInclude Include="Examples\MountainCar\MountainCarWorld.hpp" />
     <ClInclude Include="Examples\NatureEvolutionExample.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp" />
