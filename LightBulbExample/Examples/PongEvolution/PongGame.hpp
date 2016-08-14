@@ -17,6 +17,7 @@ struct PongGameState
 	double ballPosY;
 	double paddle1Pos;
 	double paddle2Pos;
+	bool ballCollidedWithPaddle;
 };
 
 struct PongGameProperties

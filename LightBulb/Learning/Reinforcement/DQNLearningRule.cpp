@@ -60,7 +60,7 @@ void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, 
 	auto patternVector = networkTopology->getActivationVector(0);
 	transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
 
-	if (reward == 0) {
+	if (!getOptions()->world->isTerminalState()) {
 		 getOptions()->world->getNNInput(transition.nextState);
 	}
 
@@ -163,11 +163,14 @@ bool DQNLearningRule::doIteration()
 	currentTotalError = 0;
 	int rewardCounter = 0;
 	double totalReward = 0;
+	int totalEpisodes = 1;
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 
 	for (int i = 0; i < getOptions()->targetNetworkUpdateFrequency; i++) {
 		double reward = getOptions()->world->doSimulationStep();
 		totalReward += reward;
+		if (getOptions()->world->isTerminalState())
+			totalEpisodes++;
 
 		storeTransition(networkTopology, reward);
 
@@ -182,7 +185,7 @@ bool DQNLearningRule::doIteration()
 	}
 
 
-	learningState->addData(DATA_SET_REWARD, totalReward);
+	learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);
 	
 	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions()->targetNetworkUpdateFrequency);
 		

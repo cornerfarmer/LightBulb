@@ -117,6 +117,9 @@
     <ClCompile Include="Examples\PongReinforcement\PongDQNExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -225,6 +228,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\PongReinforcement\PongDQNExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

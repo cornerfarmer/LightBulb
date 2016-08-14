@@ -52,6 +52,7 @@ public:
 	void setLearningState(LearningState* learningState_);
 	virtual std::vector<std::string> getDataSetLabels();
 	std::vector<bool> getLastBooleanOutput();
+	virtual bool isTerminalState() = 0;
 };
 
 EMPTY_SERIALIZATION(AbstractReinforcementWorld);

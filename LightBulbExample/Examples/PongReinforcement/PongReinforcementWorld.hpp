@@ -29,6 +29,7 @@ public:
 	void initializeForLearning();
 	int rateKI();
 	std::vector<std::string> getDataSetLabels();
+	bool isTerminalState();
 };
 
 

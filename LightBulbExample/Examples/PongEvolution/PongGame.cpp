@@ -74,6 +74,9 @@ int PongGame::whoHasWon()
 
 void PongGame::advanceBall(double fac)
 {
+	if (fac == 1)
+		state.ballCollidedWithPaddle = false;
+
 	double nextBallPosX = state.ballPosX + state.ballVelX * fac;
 	double nextBallPosY = state.ballPosY + state.ballVelY * fac;
 
@@ -91,12 +94,15 @@ void PongGame::advanceBall(double fac)
 	if (nextBallPosX + properties.ballRad >= properties.width)
 		colTimeX = (properties.width - (state.ballPosX + properties.ballRad)) / state.ballVelX;
 
+
 	if (colTimeX > 0 && (colTimeY == 0 || colTimeX <= colTimeY))
 	{
 		advanceBallWithoutCollision(colTimeX);
 		if ((state.ballVelX > 0 && state.ballPosY + properties.ballRad >= state.paddle1Pos && state.ballPosY <= state.paddle1Pos + properties.paddleHeight) ||
 			(state.ballVelX < 0 && state.ballPosY + properties.ballRad >= state.paddle2Pos && state.ballPosY <= state.paddle2Pos + properties.paddleHeight))
 		{
+			if (state.ballVelX > 0)
+				state.ballCollidedWithPaddle = true;
 			state.ballVelX *= -1;
 			advanceBall(fac - colTimeX);
 			if (std::abs(state.ballVelX * properties.speedIncreaseFac) < properties.maxBallSpeed && std::abs(state.ballVelY * properties.speedIncreaseFac) < properties.maxBallSpeed) {

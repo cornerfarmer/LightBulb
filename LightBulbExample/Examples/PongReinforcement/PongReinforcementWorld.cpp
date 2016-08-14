@@ -30,7 +30,7 @@ double PongReinforcementWorld::doSimulationStep()
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 	time++;
-	if (time >= game.getProperties().maxTime)
+	if (game.getState().ballCollidedWithPaddle)
 		return 1;
 	else
 		return game.whoHasWon();
@@ -108,4 +108,9 @@ std::vector<std::string> PongReinforcementWorld::getDataSetLabels()
 	auto labels = AbstractReinforcementWorld::getDataSetLabels();
 	labels.push_back(DATASET_PONG_RATING);
 	return labels;
+}
+
+bool PongReinforcementWorld::isTerminalState()
+{
+	return game.whoHasWon() != 0 || time >= game.getProperties().maxTime;
 }

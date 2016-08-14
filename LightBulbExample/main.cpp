@@ -14,6 +14,7 @@
 #include "Examples/SimpleReinforcement/SimpleReinforcementExample.hpp"
 #include "Examples/PongReinforcement/PongMonteCarloExample.hpp"
 #include "Examples/PongReinforcement/PongDQNExample.hpp"
+#include "Examples/SimpleReinforcement/SimpleReinforcementDQNExample.hpp"
 
 void main(int argc, char** argv)
 {
@@ -32,6 +33,7 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new PongMonteCarloExample());
 	app->addTrainingPlan(new PongDQNExample());
 	app->addTrainingPlan(new SimpleReinforcementExample());
+	app->addTrainingPlan(new SimpleReinforcementDQNExample());
 
 	wxApp::SetInstance(app);
 	wxEntry(argc, argv);
