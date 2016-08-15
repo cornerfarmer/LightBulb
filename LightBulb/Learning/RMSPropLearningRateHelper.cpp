@@ -23,12 +23,14 @@ RMSPropLearningRateHelper::RMSPropLearningRateHelper()
 void RMSPropLearningRateHelper::initialize(AbstractNeuralNetwork &neuralNetwork)
 {
 	// Make sure the previous learning rates map is empty
-	prevDeltaWeights.resize(neuralNetwork.getNetworkTopology()->getWeights()->size());
-	for (int i = 0; i < prevDeltaWeights.size(); i++)
+	prevGradient.resize(neuralNetwork.getNetworkTopology()->getWeights()->size());
+	for (int i = 0; i < prevGradient.size(); i++)
 	{
-		prevDeltaWeights[i].resizeLike(neuralNetwork.getNetworkTopology()->getWeights()->at(i));
-		prevDeltaWeights[i].setZero();
+		prevGradient[i].resizeLike(neuralNetwork.getNetworkTopology()->getWeights()->at(i));
+		prevGradient[i].setZero();
 	}
+	prevSquaredGradient = prevGradient;
+	prevDeltaWeights = prevGradient;
 	initialized = true;
 }
 
@@ -39,9 +41,12 @@ bool RMSPropLearningRateHelper::isInitialized()
 
 Eigen::MatrixXd RMSPropLearningRateHelper::getLearningRate(int layerIndex, Eigen::MatrixXd& gradients)
 {
-	prevDeltaWeights[layerIndex - 1] = options->decayFac * prevDeltaWeights[layerIndex - 1] + (1 - options->decayFac) * gradients.cwiseAbs2();
+	prevGradient[layerIndex - 1] = options->gradientMomentum * prevGradient[layerIndex - 1] + (1 - options->gradientMomentum) * gradients;
+	prevSquaredGradient[layerIndex - 1] = options->squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - options->squaredGradientMomentum) * gradients.cwiseAbs2();
 	
-	return - options->learningRate * gradients.cwiseQuotient(((prevDeltaWeights[layerIndex - 1].array() + options->minSquaredGradient).cwiseSqrt()).matrix());
+	prevDeltaWeights[layerIndex - 1] = options->deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1] - options->learningRate * gradients.cwiseQuotient(((prevSquaredGradient[layerIndex - 1].array() - prevGradient[layerIndex - 1].cwiseAbs2().array() + options->minSquaredGradient).cwiseSqrt()).matrix());
+
+	return prevDeltaWeights[layerIndex - 1];
 }
 
 std::string RMSPropLearningRateHelper::printDebugOutput()

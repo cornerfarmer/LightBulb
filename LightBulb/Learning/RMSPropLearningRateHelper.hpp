@@ -20,12 +20,16 @@ class AbstractNeuralNetwork;
 struct RMSPropLearningRateHelperOptions
 {	
 	// Sets the factor by which the learningRate can grow
-	double decayFac;
+	double gradientMomentum;
+	double squaredGradientMomentum;
+	double deltaWeightsMomentum;
 	double learningRate;
 	double minSquaredGradient;
 	RMSPropLearningRateHelperOptions()
 	{
-		decayFac = 0.9;
+		gradientMomentum = 0.9;
+		squaredGradientMomentum = 0.9;
+		deltaWeightsMomentum = 0.9;
 		learningRate = 0.25;
 		minSquaredGradient = 0.01;
 	}
@@ -36,6 +40,8 @@ class RMSPropLearningRateHelper
 {
 private:
 	// Holds for every edge its previous learning rate
+	std::vector<Eigen::MatrixXd> prevGradient;
+	std::vector<Eigen::MatrixXd> prevSquaredGradient;
 	std::vector<Eigen::MatrixXd> prevDeltaWeights;
 	RMSPropLearningRateHelperOptions* options;
 	bool initialized;
