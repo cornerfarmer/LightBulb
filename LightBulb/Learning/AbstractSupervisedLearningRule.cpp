@@ -103,7 +103,7 @@ bool AbstractSupervisedLearningRule::doIteration()
 		while (configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
 		{
 			// Calculate the errormap and also fill - if needed - the output and netInput values map
-			std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
+			std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder, NULL, NULL, getOptions()->clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
 
 			// Adjust all hidden/output layers except 
 			for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)

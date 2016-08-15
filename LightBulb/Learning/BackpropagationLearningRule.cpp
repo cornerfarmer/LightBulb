@@ -31,10 +31,13 @@ std::string BackpropagationLearningRule::getName()
 void BackpropagationLearningRule::initialize()
 {
 	// If we should use a resilient learnig rate
-	if (getOptions()->resilientLearningRate)
+	if (getOptions()->resilientLearningRate || getOptions()->rmsPropLearningRate)
 	{
 		// Create a new ResilientLearningRateHelper
-		resilientLearningRateHelper.reset(new ResilientLearningRateHelper(&getOptions()->resilientLearningRateOptions));
+		if (getOptions()->resilientLearningRate)
+			resilientLearningRateHelper.reset(new ResilientLearningRateHelper(&getOptions()->resilientLearningRateOptions));
+		else
+			rmsPropLearningRateHelper.reset(new RMSPropLearningRateHelper(&getOptions()->rmsPropLearningRateOptions));
 		// Set the momentum to zero (Momentum is not compatible with a resilient learning rate
 		getOptions()->momentum = 0;
 		// A resilient learning rate can only be used offline
@@ -109,6 +112,8 @@ Eigen::MatrixXd BackpropagationLearningRule::calculateDeltaWeight(int layerIndex
 		// If a resilientLearningRate is used, get the deltaWeight from the helper object, else calculate it the classical way: - learningRate * gradient
 		if (getOptions()->resilientLearningRate)
 			deltaWeights = resilientLearningRateHelper->getLearningRate(layerIndex, gradients);
+		else if (getOptions()->rmsPropLearningRate)
+			deltaWeights = rmsPropLearningRateHelper->getLearningRate(layerIndex, gradients);
 		else
 			deltaWeights = - getOptions()->learningRate * gradients;
 		
@@ -166,4 +171,8 @@ void BackpropagationLearningRule::initializeTry()
 	// If used, initialize the learning rate helper
 	if (getOptions()->resilientLearningRate && (getOptions()->changeWeightsBeforeLearning || !resilientLearningRateHelper->isInitialized()))
 		resilientLearningRateHelper->initialize(*getOptions()->neuralNetwork);
+
+	// If used, initialize the learning rate helper
+	if (getOptions()->rmsPropLearningRate && (getOptions()->changeWeightsBeforeLearning || !rmsPropLearningRateHelper->isInitialized()))
+		rmsPropLearningRateHelper->initialize(*getOptions()->neuralNetwork);
 }

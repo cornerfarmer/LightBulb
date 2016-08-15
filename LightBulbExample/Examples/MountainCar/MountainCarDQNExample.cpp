@@ -26,6 +26,9 @@
 #define PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY "Target network update frequency"
 #define PREFERENCE_REPLAY_MEMORY_SIZE "replay memory size"
 #define PREFERENCE_FINAL_EXPLORATION_FRAME "final exploration frame"
+#define PREFERENCE_CLIP_ERROR "Clip error"
+#define PREFERENCE_RESILIENT_LEARNING_RATE "Resilient learning rate"
+#define PREFERENCE_MOMENTUM "Momentum"
 
 AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 {
@@ -37,6 +40,9 @@ AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
 	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
+	options.backpropagationOptions.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
+	options.backpropagationOptions.resilientLearningRate = getBooleanPreference(PREFERENCE_RESILIENT_LEARNING_RATE);
+	options.backpropagationOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -74,6 +80,9 @@ MountainCarDQNExample::MountainCarDQNExample()
 	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
 	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
 	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 1000000, 1, 1000000));
+	addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, false));
+	addPreference(new BooleanPreference(PREFERENCE_RESILIENT_LEARNING_RATE, false));
+	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
 }
 
 std::string MountainCarDQNExample::getDefaultName()

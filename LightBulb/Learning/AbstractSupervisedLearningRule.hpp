@@ -46,6 +46,8 @@ struct AbstractSupervisedLearningRuleOptions : public AbstractLearningRuleOption
 	AbstractNeuralNetwork* neuralNetwork;
 
 	Teacher* teacher;
+
+	bool clipError;
 	AbstractSupervisedLearningRuleOptions()
 	{
 		totalErrorGoal = 0.01;
@@ -57,6 +59,7 @@ struct AbstractSupervisedLearningRuleOptions : public AbstractLearningRuleOption
 		changeWeightsBeforeLearning = true;
 		neuralNetwork = NULL;
 		teacher = NULL;
+		clipError = false;
 	}
 	virtual ~AbstractSupervisedLearningRuleOptions() {}
 };

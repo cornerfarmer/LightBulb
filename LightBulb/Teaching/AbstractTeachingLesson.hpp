@@ -34,11 +34,11 @@ public:
 	// This method should return a double vector of the teachingPattern
 	virtual std::vector<std::vector<double>>* getTeachingPattern() = 0;
 	// Calculate the Errormap and fills (optional) the given output and netput values map
-	std::unique_ptr<ErrorMap_t> getErrormap(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
+	std::unique_ptr<ErrorMap_t> getErrormap(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL, bool clipError = false);
 	// Returns the Errormap from the given output vector
-	virtual std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork);
+	virtual std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork, bool clipError = false);
 	// Calculate the specific error
-	virtual double getSpecificError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	virtual double getSpecificError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, bool clipError = false);
 	// Unfolds the teaching lesson
 	virtual AbstractTeachingLesson* unfold() = 0;
 	// Returns the maximal time step in the teaching lesson

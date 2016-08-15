@@ -12,6 +12,7 @@
 #include "Learning/AbstractSupervisedLearningRule.hpp"
 #include "Learning/ResilientLearningRateHelper.hpp"
 #include <cereal/access.hpp>
+#include "RMSPropLearningRateHelper.hpp"
 
 // Forward declarations
 class Teacher;
@@ -32,8 +33,10 @@ struct BackpropagationLearningRuleOptions : public AbstractSupervisedLearningRul
 	bool resilientLearningRate;
 	// Holds all options which are needed for the resilient learning rate
 	ResilientLearningRateHelperOptions resilientLearningRateOptions;
-
-	bool rmsProp;
+	// Selects if a resilient learning rate should be used (This option can not be used at the same time with the momentum term)
+	bool rmsPropLearningRate;
+	// Holds all options which are needed for the resilient learning rate
+	RMSPropLearningRateHelperOptions rmsPropLearningRateOptions;
 	BackpropagationLearningRuleOptions()
 	{
 		flatSpotEliminationFac = 0.1f;
@@ -42,6 +45,7 @@ struct BackpropagationLearningRuleOptions : public AbstractSupervisedLearningRul
 		learningRate = 0.45f;
 		offlineLearning = false;
 		resilientLearningRate = false;
+		rmsPropLearningRate = false;
 	}
 };
 
@@ -62,6 +66,7 @@ private:
 protected:
 	// The resilient learning rate helper is used when resilientLearningRate is activated
 	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
+	std::unique_ptr<RMSPropLearningRateHelper> rmsPropLearningRateHelper;
 	// Adjusts the weights of an edge dependent on its gradient
 	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object

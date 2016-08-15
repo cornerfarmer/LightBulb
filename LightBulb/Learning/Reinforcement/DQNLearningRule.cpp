@@ -127,6 +127,7 @@ std::vector<std::string> DQNLearningRule::getDataSetLabels()
 {
 	std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
 	labels.push_back(DATA_SET_TRAINING_ERROR);
+	labels.push_back(DATA_SET_EPSILON);
 	return labels;
 }
 
@@ -185,6 +186,7 @@ bool DQNLearningRule::doIteration()
 	}
 
 
+	learningState->addData(DATA_SET_EPSILON, getOptions()->world->getEpsilon());
 	learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);
 	
 	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions()->targetNetworkUpdateFrequency);

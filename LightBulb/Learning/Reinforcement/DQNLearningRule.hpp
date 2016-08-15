@@ -16,6 +16,7 @@
 class AbstractNetworkTopology;
 
 #define DATA_SET_TRAINING_ERROR "Training error"
+#define DATA_SET_EPSILON "Epsilon"
 
 struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 {
@@ -43,11 +44,12 @@ struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 		backpropagationOptions.maxIterationsPerTry = 1;
 		backpropagationOptions.maxTries = 1;
 		backpropagationOptions.changeWeightsBeforeLearning = false;
-		backpropagationOptions.resilientLearningRate = false;
+		backpropagationOptions.resilientLearningRate = true;
 		backpropagationOptions.flatSpotEliminationFac = 0;
 		backpropagationOptions.offlineLearning = true;
 		backpropagationOptions.totalErrorGoal = 0;
 		backpropagationOptions.learningRate = 0.00025;
+		backpropagationOptions.clipError = true;
 	}
 };
 

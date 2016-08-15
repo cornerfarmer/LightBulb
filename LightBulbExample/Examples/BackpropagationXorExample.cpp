@@ -46,6 +46,7 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	options.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
 	options.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	options.resilientLearningRate = false;
+	options.rmsPropLearningRate = true;
 	options.teacher = teacher.get();
 	fillDefaultLearningRuleOptions(&options);
 
