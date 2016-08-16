@@ -48,7 +48,7 @@ void DQNLearningRule::initialize()
 {
 	getOptions()->backpropagationOptions.teacher = &teacher;
 	getOptions()->backpropagationOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
-	getOptions()->backpropagationOptions.logger = getOptions()->logger;
+	getOptions()->backpropagationOptions.logger = NULL;
 	backpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->backpropagationOptions));
 
 	steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
