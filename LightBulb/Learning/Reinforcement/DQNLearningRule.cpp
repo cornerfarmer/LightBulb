@@ -128,6 +128,7 @@ std::vector<std::string> DQNLearningRule::getDataSetLabels()
 	std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
 	labels.push_back(DATA_SET_TRAINING_ERROR);
 	labels.push_back(DATA_SET_EPSILON);
+	labels.push_back(DATA_SET_Q_VALUE);
 	return labels;
 }
 
@@ -164,14 +165,39 @@ bool DQNLearningRule::doIteration()
 	currentTotalError = 0;
 	int rewardCounter = 0;
 	double totalReward = 0;
-	int totalEpisodes = 1;
+	int totalEpisodes = 0;
+	bool nextIsStartingState = true;
+	double totalQ = 0;
+	int totalQValues = 0;
+	static double currentTotalReward = 0;
+	bool skipNextTotalReward = currentTotalReward == -1;
+
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 
 	for (int i = 0; i < getOptions()->targetNetworkUpdateFrequency; i++) {
 		double reward = getOptions()->world->doSimulationStep();
-		totalReward += reward;
-		if (getOptions()->world->isTerminalState())
-			totalEpisodes++;
+		currentTotalReward += reward;
+
+		if (nextIsStartingState)
+		{
+			std::vector<double> output(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutputSize());
+			getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutput(output);
+			totalQ += *std::max_element(output.begin(), output.end());
+			totalQValues++;
+			nextIsStartingState = false;
+		}
+
+		if (getOptions()->world->isTerminalState()) {
+			nextIsStartingState = true;
+			if (!skipNextTotalReward) {
+				totalEpisodes++;
+				totalReward += currentTotalReward;
+			}
+			else
+				skipNextTotalReward = false;
+
+			currentTotalReward = 0;
+		}
 
 		storeTransition(networkTopology, reward);
 
@@ -185,9 +211,15 @@ bool DQNLearningRule::doIteration()
 			getOptions()->world->setEpsilon(e - (getOptions()->initialExploration - getOptions()->finalExploration) / getOptions()->finalExplorationFrame);
 	}
 
+	if (totalQValues > 0)
+		learningState->addData(DATA_SET_Q_VALUE, totalQ / totalQValues);
 
 	learningState->addData(DATA_SET_EPSILON, getOptions()->world->getEpsilon());
-	learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);
+
+	if (totalEpisodes > 0)
+		learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);
+	else
+		currentTotalReward = -1;
 	
 	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions()->targetNetworkUpdateFrequency);
 		

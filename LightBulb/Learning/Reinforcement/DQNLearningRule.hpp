@@ -17,6 +17,7 @@ class AbstractNetworkTopology;
 
 #define DATA_SET_TRAINING_ERROR "Training error"
 #define DATA_SET_EPSILON "Epsilon"
+#define DATA_SET_Q_VALUE "Q-Value"
 
 struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 {
