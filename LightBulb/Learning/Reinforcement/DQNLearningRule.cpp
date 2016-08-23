@@ -42,6 +42,7 @@ void DQNLearningRule::initializeTry()
 	nextTransitionIndex = 0;
 	waitUntilLearningStarts = getOptions()->replayStartSize;
 	getOptions()->world->setEpsilon(getOptions()->initialExploration);
+	currentTotalReward = 0;
 }
 
 void DQNLearningRule::initialize()
@@ -91,7 +92,7 @@ void DQNLearningRule::doSupervisedLearning()
 {
 	teacher.getTeachingLessons()->clear();
 
-	for (int i = 0; i < getOptions()->minibatchSize; i++)
+	for (int i = 0; i < std::min((int)transitions.size(), getOptions()->minibatchSize); i++)
 	{
 		int r = rand() % transitions.size();
 
@@ -102,7 +103,7 @@ void DQNLearningRule::doSupervisedLearning()
 			std::vector<double> output(steadyNetwork->getNetworkTopology()->getOutputSize());
 			steadyNetwork->calculate(transitions[r].nextState, output, TopologicalOrder());
 			double q = *std::max_element(output.begin(), output.end());
-			y += 0.99 * q;
+			y += getOptions()->discountFactor * q;
 		}
 
 		NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(steadyNetwork->getNetworkTopology()->getOutputSize());
@@ -169,7 +170,6 @@ bool DQNLearningRule::doIteration()
 	bool nextIsStartingState = true;
 	double totalQ = 0;
 	int totalQValues = 0;
-	static double currentTotalReward = 0;
 	bool skipNextTotalReward = currentTotalReward == -1;
 
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();

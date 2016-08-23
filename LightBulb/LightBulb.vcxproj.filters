@@ -633,6 +633,7 @@
     <ClCompile Include="Learning\Reinforcement\MonteCarloLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
     <ClCompile Include="Learning\RMSPropLearningRateHelper.cpp" />
+    <ClCompile Include="Function\RectifierFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1276,5 +1277,6 @@
     <ClInclude Include="Learning\Reinforcement\MonteCarloLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
     <ClInclude Include="Learning\RMSPropLearningRateHelper.hpp" />
+    <ClInclude Include="Function\RectifierFunction.hpp" />
   </ItemGroup>
 </Project>

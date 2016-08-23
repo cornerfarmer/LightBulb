@@ -25,6 +25,7 @@
 #define PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY "Target network update frequency"
 #define PREFERENCE_REPLAY_MEMORY_SIZE "replay memory size"
 #define PREFERENCE_FINAL_EXPLORATION_FRAME "final exploration frame"
+#define PREFERENCE_RMSMPROP_LEARNING_RATE "RMSProp learning rate"
 
 AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 {
@@ -36,6 +37,8 @@ AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
 	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
+	options.backpropagationOptions.rmsPropLearningRate = getBooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE);
+	options.backpropagationOptions.rmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -72,6 +75,7 @@ SimpleReinforcementDQNExample::SimpleReinforcementDQNExample()
 	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
 	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
 	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 1000000, 1, 1000000));
+	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, false));
 }
 
 std::string SimpleReinforcementDQNExample::getDefaultName()

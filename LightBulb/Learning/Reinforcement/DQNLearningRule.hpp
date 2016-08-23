@@ -45,7 +45,7 @@ struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 		backpropagationOptions.maxIterationsPerTry = 1;
 		backpropagationOptions.maxTries = 1;
 		backpropagationOptions.changeWeightsBeforeLearning = false;
-		backpropagationOptions.resilientLearningRate = true;
+		backpropagationOptions.resilientLearningRate = false;
 		backpropagationOptions.flatSpotEliminationFac = 0;
 		backpropagationOptions.offlineLearning = true;
 		backpropagationOptions.totalErrorGoal = 0;
@@ -68,6 +68,7 @@ private:
 	int nextTransitionIndex;
 	int waitUntilLearningStarts;
 	double currentTotalError;
+	double currentTotalReward;
 	Teacher teacher;
 	std::vector<Transition> transitions;
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;

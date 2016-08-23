@@ -167,6 +167,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Function\RankBasedRandomFunction.cpp" />
+    <ClCompile Include="Function\RectifierFunction.cpp" />
     <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\WeightedSumFunction.cpp" />
     <ClCompile Include="Function\XorShfGenerator.cpp" />
@@ -725,6 +726,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Function\RankBasedRandomFunction.hpp" />
+    <ClInclude Include="Function\RectifierFunction.hpp" />
     <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\WeightedSumFunction.hpp" />
     <ClInclude Include="Function\XorShfGenerator.hpp" />

@@ -16,6 +16,7 @@
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 #include "MountainCarFactory.hpp"
+#include <Function/RectifierFunction.hpp>
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
@@ -29,6 +30,8 @@
 #define PREFERENCE_CLIP_ERROR "Clip error"
 #define PREFERENCE_RMSMPROP_LEARNING_RATE "RMSProp learning rate"
 #define PREFERENCE_MOMENTUM "Momentum"
+#define PREFERENCE_REPLAY_START_SIZE "Replay start size"
+#define PREFERENCE_DISCOUNT_FACTOR "Discount factor"
 
 AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 {
@@ -40,11 +43,14 @@ AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
 	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
+	options.replayStartSize = getIntegerPreference(PREFERENCE_REPLAY_START_SIZE);
 	options.backpropagationOptions.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
 	options.backpropagationOptions.resilientLearningRate = false;
 	options.backpropagationOptions.rmsPropLearningRate = getBooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE);
 	options.backpropagationOptions.rmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
-	options.backpropagationOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
+	options.backpropagationOptions.rmsPropLearningRateOptions.deltaWeightsMomentum = getDoublePreference(PREFERENCE_MOMENTUM);
+	options.backpropagationOptions.momentum = 0;
+	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -63,7 +69,7 @@ MountainCarWorld* MountainCarDQNExample::createWorld()
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
 	options.neuronsPerLayerCount.push_back(3);
 
-	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction(0.2)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
 	return new MountainCarWorld(options, true, 1);
@@ -74,17 +80,19 @@ MountainCarDQNExample::MountainCarDQNExample()
 {
 	addCustomSubApp(new MountainCarFactory());
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
-	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 60, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
-	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.00025, 0, 1));
+	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.0025, 0, 1));
 	addPreference(new IntegerPreference(PREFERENCE_MINIBATCH_SIZE, 32, 1, 1024));
-	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
-	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
-	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 1000000, 1, 1000000));
+	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 1000, 1, 100000));
+	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 10000, 1, 10000000));
+	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 10000, 1, 1000000));
 	addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, false));
-	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, false));
+	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, true));
 	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
+	addPreference(new IntegerPreference(PREFERENCE_REPLAY_START_SIZE, 2000, 1, 50000));
+	addPreference(new DoublePreference(PREFERENCE_DISCOUNT_FACTOR, 0.99, 0, 1));
 }
 
 std::string MountainCarDQNExample::getDefaultName()
