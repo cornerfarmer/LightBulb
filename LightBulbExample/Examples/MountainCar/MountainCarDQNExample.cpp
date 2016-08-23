@@ -32,6 +32,7 @@
 #define PREFERENCE_MOMENTUM "Momentum"
 #define PREFERENCE_REPLAY_START_SIZE "Replay start size"
 #define PREFERENCE_DISCOUNT_FACTOR "Discount factor"
+#define PREFERENCE_REPLACE_STORED_TRANSITIONS "Replace stored transitions"
 
 AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 {
@@ -51,6 +52,7 @@ AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 	options.backpropagationOptions.rmsPropLearningRateOptions.deltaWeightsMomentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	options.backpropagationOptions.momentum = 0;
 	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
+	options.replaceStoredTransitions = getBooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -93,6 +95,7 @@ MountainCarDQNExample::MountainCarDQNExample()
 	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
 	addPreference(new IntegerPreference(PREFERENCE_REPLAY_START_SIZE, 2000, 1, 50000));
 	addPreference(new DoublePreference(PREFERENCE_DISCOUNT_FACTOR, 0.99, 0, 1));
+	addPreference(new BooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS, true));
 }
 
 std::string MountainCarDQNExample::getDefaultName()

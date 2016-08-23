@@ -30,7 +30,7 @@ double PongReinforcementWorld::doSimulationStep()
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 	time++;
-	if (game.getState().ballCollidedWithPaddle)
+	if (time >= game.getProperties().maxTime)
 		return 1;
 	else
 		return game.whoHasWon();

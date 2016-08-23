@@ -80,7 +80,7 @@ void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, 
 	{
 		transitions.push_back(transition);
 	} 
-	else
+	else if (getOptions()->replaceStoredTransitions)
 	{
 		transitions[nextTransitionIndex++] = transition;
 		nextTransitionIndex %= transitions.size();
@@ -204,11 +204,13 @@ bool DQNLearningRule::doIteration()
 		if (waitUntilLearningStarts > 0)
 			waitUntilLearningStarts--;
 		else
+		{
 			doSupervisedLearning();
 
-		double e = getOptions()->world->getEpsilon();
-		if (e > getOptions()->finalExploration)
-			getOptions()->world->setEpsilon(e - (getOptions()->initialExploration - getOptions()->finalExploration) / getOptions()->finalExplorationFrame);
+			double e = getOptions()->world->getEpsilon();
+			if (e > getOptions()->finalExploration)
+				getOptions()->world->setEpsilon(e - (getOptions()->initialExploration - getOptions()->finalExploration) / getOptions()->finalExplorationFrame);
+		}
 	}
 
 	if (totalQValues > 0)

@@ -29,6 +29,7 @@ struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 	double finalExploration;
 	int finalExplorationFrame;
 	int replayStartSize;
+	bool replaceStoredTransitions;
 
 	BackpropagationLearningRuleOptions backpropagationOptions;
 	DQNLearningRuleOptions()
@@ -41,6 +42,7 @@ struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 		finalExploration = 0.1;
 		finalExplorationFrame = 1000000;
 		replayStartSize = 50000;
+		replaceStoredTransitions = true;
 		
 		backpropagationOptions.maxIterationsPerTry = 1;
 		backpropagationOptions.maxTries = 1;
