@@ -71,7 +71,7 @@ PongReinforcementWorld* PongDQNExample::createWorld()
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
 	options.neuronsPerLayerCount.push_back(3);
 
-	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction(0.2)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
 	return new PongReinforcementWorld(options, true, 1);
@@ -82,7 +82,7 @@ PongDQNExample::PongDQNExample()
 {
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
-	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 60, 1, 30));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 512, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.00025, 0, 1));
@@ -90,7 +90,7 @@ PongDQNExample::PongDQNExample()
 	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
 	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
 	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 1000000, 1, 1000000));
-	addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, false));
+	addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, true));
 	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, true));
 	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
 	addPreference(new IntegerPreference(PREFERENCE_REPLAY_START_SIZE, 50000, 1, 50000));

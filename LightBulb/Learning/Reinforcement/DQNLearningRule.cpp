@@ -103,6 +103,7 @@ void DQNLearningRule::doSupervisedLearning()
 			std::vector<double> output(steadyNetwork->getNetworkTopology()->getOutputSize());
 			steadyNetwork->calculate(transitions[r].nextState, output, TopologicalOrder());
 			double q = *std::max_element(output.begin(), output.end());
+			qAvgSum += q;
 			y += getOptions()->discountFactor * q;
 		}
 
@@ -130,6 +131,7 @@ std::vector<std::string> DQNLearningRule::getDataSetLabels()
 	labels.push_back(DATA_SET_TRAINING_ERROR);
 	labels.push_back(DATA_SET_EPSILON);
 	labels.push_back(DATA_SET_Q_VALUE);
+	labels.push_back(DATA_SET_AVG_Q_VALUE);
 	return labels;
 }
 
@@ -171,6 +173,7 @@ bool DQNLearningRule::doIteration()
 	double totalQ = 0;
 	int totalQValues = 0;
 	bool skipNextTotalReward = currentTotalReward == -1;
+	qAvgSum = 0;
 
 	AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 
@@ -217,6 +220,7 @@ bool DQNLearningRule::doIteration()
 		learningState->addData(DATA_SET_Q_VALUE, totalQ / totalQValues);
 
 	learningState->addData(DATA_SET_EPSILON, getOptions()->world->getEpsilon());
+	learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions()->targetNetworkUpdateFrequency);
 
 	if (totalEpisodes > 0)
 		learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);

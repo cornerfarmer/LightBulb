@@ -18,6 +18,7 @@ class AbstractNetworkTopology;
 #define DATA_SET_TRAINING_ERROR "Training error"
 #define DATA_SET_EPSILON "Epsilon"
 #define DATA_SET_Q_VALUE "Q-Value"
+#define DATA_SET_AVG_Q_VALUE "Avg. Q-Value"
 
 struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 {
@@ -75,6 +76,7 @@ private:
 	std::vector<Transition> transitions;
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
 	std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
+	double qAvgSum;
 	void initialize();
 	void storeTransition(AbstractNetworkTopology* networkTopology, double reward);
 	void doSupervisedLearning();

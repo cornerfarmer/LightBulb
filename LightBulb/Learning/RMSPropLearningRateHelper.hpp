@@ -27,8 +27,8 @@ struct RMSPropLearningRateHelperOptions
 	double minSquaredGradient;
 	RMSPropLearningRateHelperOptions()
 	{
-		gradientMomentum = 0.9;
-		squaredGradientMomentum = 0.9;
+		gradientMomentum = 0.95;
+		squaredGradientMomentum = 0.95;
 		deltaWeightsMomentum = 0.9;
 		learningRate = 0.25;
 		minSquaredGradient = 0.01;

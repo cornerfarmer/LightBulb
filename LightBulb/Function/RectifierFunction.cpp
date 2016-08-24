@@ -16,7 +16,7 @@ double RectifierFunction::execute(double input)
 double RectifierFunction::executeDerivation(double input)
 {
 	// Execute the derivation of the Fermi function		
-	return input * (input > 0);
+	return (input > 0);
 }
 
 AbstractActivationFunction* RectifierFunction::getActivationFunctionCopy()
