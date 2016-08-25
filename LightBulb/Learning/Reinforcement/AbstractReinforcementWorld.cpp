@@ -56,7 +56,7 @@ AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& op
 void AbstractReinforcementWorld::initializeForLearning()
 {
 	// Randomize all weights
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.04, 0.04);
+	neuralNetwork->getNetworkTopology()->randomizeDependingOnWeightsSize();
 }
 
 NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()

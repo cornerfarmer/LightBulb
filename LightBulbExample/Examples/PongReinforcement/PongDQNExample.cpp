@@ -21,6 +21,7 @@
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
+#define PREFERENCE_USE_BIAS_NEURON "Use bias neuron"
 #define PREFERENCE_LEARNING_RATE "Learning rate"
 #define PREFERENCE_MINIBATCH_SIZE "Minibatch size"
 #define PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY "Target network update frequency"
@@ -53,6 +54,7 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
 	options.replaceStoredTransitions = getBooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS);
 
+
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -64,6 +66,7 @@ PongReinforcementWorld* PongDQNExample::createWorld()
 {
 	LayeredNetworkOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
+	options.useBiasNeuron = getBooleanPreference(PREFERENCE_USE_BIAS_NEURON);
 
 	options.neuronsPerLayerCount.push_back(6);
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
@@ -82,6 +85,7 @@ PongDQNExample::PongDQNExample()
 {
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
+	addPreference(new BooleanPreference(PREFERENCE_USE_BIAS_NEURON, true));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 512, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));

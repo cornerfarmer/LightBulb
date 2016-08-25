@@ -231,10 +231,6 @@ bool DQNLearningRule::doIteration()
 		
 	steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 
-
-	// Continue with the next generation
-	learningState->iterations++;
-
 	double e = getOptions()->world->getEpsilon();
 	getOptions()->world->setEpsilon(0);
 	getOptions()->world->rateKI();	

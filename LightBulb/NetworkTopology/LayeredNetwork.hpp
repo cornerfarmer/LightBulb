@@ -88,6 +88,7 @@ public:
 	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(double randStart, double randEnd);
+	void randomizeDependingOnWeightsSize();
 	// Adds a new neuron into the specified layer
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters, bool addEdgesToNextLayer);
 	// Removes the neuron with given index from a layer

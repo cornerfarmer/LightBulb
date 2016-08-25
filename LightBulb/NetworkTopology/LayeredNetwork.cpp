@@ -432,6 +432,25 @@ void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
 	}
 }
 
+
+void LayeredNetwork::randomizeDependingOnWeightsSize()
+{
+	for (auto layer = weights.begin(); layer != weights.end(); layer++)
+	{
+		double stdv = 1 / std::sqrt(layer->cols());
+
+		for (auto i = 0; i < layer->rows(); i++)
+		{
+			for (auto j = 0; j < layer->cols(); j++)
+			{
+				do {
+					(*layer)(i, j) = randGenerator.next() * stdv * 2 - stdv;
+				} while ((*layer)(i, j) == 0);
+			}
+		}
+	}
+}
+
 int LayeredNetwork::getEdgeCount()
 {
 	int edgeCount = 0;

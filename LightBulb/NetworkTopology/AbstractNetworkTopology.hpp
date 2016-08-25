@@ -32,6 +32,7 @@ public:
 	virtual std::vector<StandardNeuron*>* getOutputNeurons() = 0;
 	// Set all weights to new random values between randStart and randEnd
 	virtual void randomizeWeights(double randStart, double randEnd) = 0;
+	virtual void randomizeDependingOnWeightsSize() = 0;
 	// Returns all Neurons
 	virtual std::vector<std::vector<StandardNeuron*>>* getNeurons() = 0;
 	// Calculates the Edge count
