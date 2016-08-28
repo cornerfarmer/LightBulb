@@ -8,6 +8,7 @@
 #include "AbstractReinforcementWorld.hpp"
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
+#include <random>
 
 AbstractLearningResult* DQNLearningRule::getLearningResult()
 {
@@ -55,37 +56,51 @@ void DQNLearningRule::initialize()
 	steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
 }
 
-void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, double reward)
+void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, double reward, bool fake)
 {
 	Transition transition;
-	auto patternVector = networkTopology->getActivationVector(0);
-	transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
+	if (!fake) {
+		auto patternVector = networkTopology->getActivationVector(0);
+		transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
 
-	if (!getOptions()->world->isTerminalState()) {
-		 getOptions()->world->getNNInput(transition.nextState);
-	}
+		if (!getOptions()->world->isTerminalState()) {
+			getOptions()->world->getNNInput(transition.nextState);
+		}
 
-	transition.reward = reward;	
-	
-	for (int i = 0; i < getOptions()->world->getLastBooleanOutput().size(); i++)
-	{
-		if (getOptions()->world->getLastBooleanOutput()[i])
+		transition.reward = reward;
+
+		for (int i = 0; i < getOptions()->world->getLastBooleanOutput().size(); i++)
 		{
-			transition.action = i;
-			break;
+			if (getOptions()->world->getLastBooleanOutput()[i])
+			{
+				transition.action = i;
+				break;
+			}
 		}
 	}
 
-	if (transitions.size() < getOptions()->replayMemorySize)
-	{
-		transitions.push_back(transition);
-	} 
-	else if (getOptions()->replaceStoredTransitions)
-	{
-		transitions[nextTransitionIndex++] = transition;
-		nextTransitionIndex %= transitions.size();
-	}
+	recentTransitions.push_back(transition);
 
+
+
+}
+
+
+void DQNLearningRule::persistRecentTransitions()
+{
+	for (int i = 0; i < recentTransitions.size(); i++) 
+	{
+		if (transitions.size() < getOptions()->replayMemorySize)
+		{
+			transitions.push_back(recentTransitions[i]);
+		}
+		else if (getOptions()->replaceStoredTransitions)
+		{
+			transitions[nextTransitionIndex++] = recentTransitions[i];
+			nextTransitionIndex %= transitions.size();
+		}
+	}
+	recentTransitions.clear();
 }
 
 void DQNLearningRule::doSupervisedLearning()
@@ -94,7 +109,11 @@ void DQNLearningRule::doSupervisedLearning()
 
 	for (int i = 0; i < std::min((int)transitions.size(), getOptions()->minibatchSize); i++)
 	{
-		int r = rand() % transitions.size();
+		start:
+		int r = LayeredNetwork::myRandom(1, transitions.size() - 2);
+
+		if (transitions[r].state.empty())
+			goto start;
 
 		double y = transitions[r].reward;
 
@@ -181,6 +200,11 @@ bool DQNLearningRule::doIteration()
 		double reward = getOptions()->world->doSimulationStep();
 		currentTotalReward += reward;
 
+		if (reward > 0)
+		{
+			std::cout << "Positive reward: " << learningState->iterations * getOptions()->targetNetworkUpdateFrequency + i;
+		}
+
 		if (nextIsStartingState)
 		{
 			std::vector<double> output(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutputSize());
@@ -189,6 +213,8 @@ bool DQNLearningRule::doIteration()
 			totalQValues++;
 			nextIsStartingState = false;
 		}
+
+		storeTransition(networkTopology, reward, false);
 
 		if (getOptions()->world->isTerminalState()) {
 			nextIsStartingState = true;
@@ -200,11 +226,12 @@ bool DQNLearningRule::doIteration()
 				skipNextTotalReward = false;
 
 			currentTotalReward = 0;
+			storeTransition(networkTopology, reward, true);
+			i++;
+			waitUntilLearningStarts--;
 		}
 
-		storeTransition(networkTopology, reward);
-
-		if (waitUntilLearningStarts > 0)
+		if (waitUntilLearningStarts > 1)
 			waitUntilLearningStarts--;
 		else
 		{
@@ -214,6 +241,9 @@ bool DQNLearningRule::doIteration()
 			if (e > getOptions()->finalExploration)
 				getOptions()->world->setEpsilon(e - (getOptions()->initialExploration - getOptions()->finalExploration) / getOptions()->finalExplorationFrame);
 		}
+
+		persistRecentTransitions();
+
 	}
 
 	if (totalQValues > 0)
@@ -230,6 +260,15 @@ bool DQNLearningRule::doIteration()
 	learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions()->targetNetworkUpdateFrequency);
 		
 	steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+	auto weights = getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getWeights();
+	double sum = 0;
+	int count = 0;
+	for (int i = 0; i < weights->size(); i++)
+	{
+		sum += weights->at(i).sum();
+		count += weights->at(i).count();
+	}
+	//std::cout << "AVG: " << std::setprecision(14) << (sum / count) << std::endl;
 
 	double e = getOptions()->world->getEpsilon();
 	getOptions()->world->setEpsilon(0);

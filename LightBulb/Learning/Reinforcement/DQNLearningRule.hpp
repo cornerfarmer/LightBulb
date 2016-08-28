@@ -74,13 +74,15 @@ private:
 	double currentTotalReward;
 	Teacher teacher;
 	std::vector<Transition> transitions;
+	std::vector<Transition> recentTransitions;
 	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
 	std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 	double qAvgSum;
 	void initialize();
-	void storeTransition(AbstractNetworkTopology* networkTopology, double reward);
+	void storeTransition(AbstractNetworkTopology* networkTopology, double reward, bool fake);
 	void doSupervisedLearning();
 	std::vector<Eigen::MatrixXd> checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology);
+	void persistRecentTransitions();
 protected:
 	bool doIteration();
 	DQNLearningRuleOptions* getOptions();

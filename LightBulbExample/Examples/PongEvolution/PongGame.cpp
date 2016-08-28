@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
+#include "NetworkTopology/LayeredNetwork.hpp"
 
 PongGame::PongGame()
 {
@@ -146,11 +147,11 @@ void PongGame::reset()
 	state.ballPosX = properties.width / 2;
 	state.ballPosY = properties.height / 2;
 
-	state.ballVelX = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (rand() > RAND_MAX / 2)
+	state.ballVelX = LayeredNetwork::myUniform() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
+	if (LayeredNetwork::myUniform() > 0.5)
 		state.ballVelX *= -1;
-	state.ballVelY = (double)rand() / RAND_MAX * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (rand() > RAND_MAX / 2)
+	state.ballVelY = LayeredNetwork::myUniform() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
+	if (LayeredNetwork::myUniform() > 0.5)
 		state.ballVelY *= -1;
 
 	//state.ballVelX = 3;

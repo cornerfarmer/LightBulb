@@ -9,6 +9,9 @@
 #include <exception>
 #include <math.h>
 
+std::mt19937 LayeredNetwork::g1(1);
+
+
 LayeredNetworkOptions::LayeredNetworkOptions()
 {
 	enableShortcuts = false;
@@ -444,7 +447,7 @@ void LayeredNetwork::randomizeDependingOnWeightsSize()
 			for (auto j = 0; j < layer->cols(); j++)
 			{
 				do {
-					(*layer)(i, j) = randGenerator.next() * stdv * 2 - stdv;
+					(*layer)(i, j) = LayeredNetwork::myUniform() * stdv * 2 - stdv;
 				} while ((*layer)(i, j) == 0);
 			}
 		}

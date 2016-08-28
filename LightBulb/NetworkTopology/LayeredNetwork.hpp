@@ -11,6 +11,7 @@
 // Includes
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Function/XorShfGenerator.hpp"
+#include <random>
 
 // Forward declarations
 class AbstractNeuronDescriptionFactory;
@@ -186,7 +187,21 @@ public:
 	int getNeuronCount();
 
 	AbstractNetworkTopology* clone();
+
+	static std::mt19937 g1;
+
+	static double myUniform(double a = 0, double b = 1)
+	{
+		return g1() * (1.0 / 4294967296.0) * (b - a) + a;
+	}
+
+	static int myRandom(int a, int b)
+	{
+		return (g1() % (b + 1 - a)) + a;
+	}
 };
 
 #include "IO/LayeredNetworkIO.hpp"
+
+
 #endif

@@ -41,6 +41,7 @@ bool RMSPropLearningRateHelper::isInitialized()
 
 Eigen::MatrixXd RMSPropLearningRateHelper::getLearningRate(int layerIndex, Eigen::MatrixXd& gradients)
 {
+
 	prevGradient[layerIndex - 1] = options->gradientMomentum * prevGradient[layerIndex - 1] + (1 - options->gradientMomentum) * gradients;
 	prevSquaredGradient[layerIndex - 1] = options->squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - options->squaredGradientMomentum) * gradients.cwiseAbs2();
 	

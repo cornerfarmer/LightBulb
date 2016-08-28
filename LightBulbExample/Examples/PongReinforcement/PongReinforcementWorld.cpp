@@ -1,6 +1,7 @@
 // Includes
 #include "Examples/PongReinforcement/PongReinforcementWorld.hpp"
 #include <Learning/LearningState.hpp>
+#include "NetworkTopology/LayeredNetwork.hpp"
 
 //Library includes
 
@@ -66,8 +67,9 @@ void PongReinforcementWorld::executeCompareAI()
 
 void PongReinforcementWorld::initializeForLearning()
 {
+	time = 0;
+	game.reset();
 	AbstractReinforcementWorld::initializeForLearning();
-	time = -1;
 }
 
 
