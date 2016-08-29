@@ -25,10 +25,10 @@ bool TeachingEvolutionWorld::doSimulationStep()
 
 	auto highscore = getHighscoreList();
 
-	if (!learningState->disabledDatasets[DATASET_TEACHING_ERROR])
+	if (learningState && !learningState->disabledDatasets[DATASET_TEACHING_ERROR])
 		learningState->addData(DATASET_TEACHING_ERROR, static_cast<TeachedEvolutionObject*>(highscore->front().second)->getCurrentTeachingError());
 
-	if (!learningState->disabledDatasets[DATASET_WEIGHTDECAY_ERROR])
+	if (learningState && !learningState->disabledDatasets[DATASET_WEIGHTDECAY_ERROR])
 		learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedEvolutionObject*>(highscore->front().second)->getCurrentWeightDecayError());
 	
 	return false;

@@ -50,10 +50,10 @@ TEST_F(TeacherTest, getTotalError)
 	MockNeuralNetwork* neuralNetwork = new MockNeuralNetwork();
 	MockActivationOrder* activationOrder = new MockActivationOrder();
 
-	EXPECT_CALL(*teachingLesson1, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder))).WillOnce(testing::Return(5));
-	EXPECT_CALL(*teachingLesson2, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder))).WillOnce(testing::Return(-8));
-	EXPECT_CALL(*testingLesson1, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder))).WillOnce(testing::Return(2));
-	EXPECT_CALL(*testingLesson2, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder))).WillOnce(testing::Return(42));
+	EXPECT_CALL(*teachingLesson1, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder), false)).WillOnce(testing::Return(5));
+	EXPECT_CALL(*teachingLesson2, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder), false)).WillOnce(testing::Return(-8));
+	EXPECT_CALL(*testingLesson1, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder), false)).WillOnce(testing::Return(2));
+	EXPECT_CALL(*testingLesson2, getSpecificError(testing::Ref(*neuralNetwork), testing::Ref(*activationOrder), false)).WillOnce(testing::Return(42));
 
 	EXPECT_EQ(41, teacher->getTotalError(*neuralNetwork, *activationOrder));
 }

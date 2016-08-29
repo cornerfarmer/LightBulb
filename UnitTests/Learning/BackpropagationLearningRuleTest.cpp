@@ -67,22 +67,22 @@ public:
 		std::vector<double>* output = new std::vector<double>(1);
 
 		neuralNetwork->calculate(*input, *output, topologicalOrder);
-		EXPECT_NEAR(1, (*output)[0], 0.03);
+		EXPECT_NEAR(1, (*output)[0], 0.04);
 
 		(*input)[0] = 1;
 		(*input)[1] = 1;
 		neuralNetwork->calculate(*input, *output, topologicalOrder);
-		EXPECT_NEAR(0, (*output)[0], 0.03);
+		EXPECT_NEAR(0, (*output)[0], 0.04);
 
 		(*input)[0] = 0;
 		(*input)[1] = 1;
 		neuralNetwork->calculate(*input, *output, topologicalOrder);
-		EXPECT_NEAR(1, (*output)[0], 0.03);
+		EXPECT_NEAR(1, (*output)[0], 0.04);
 
 		(*input)[0] = 0;
 		(*input)[1] = 0;
 		neuralNetwork->calculate(*input, *output, topologicalOrder);
-		EXPECT_NEAR(0, (*output)[0], 0.03);
+		EXPECT_NEAR(0, (*output)[0], 0.04);
 	}
 
 	virtual ~BackpropagationLearningRuleTest()

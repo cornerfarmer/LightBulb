@@ -9,7 +9,7 @@
 class MockTeachingLesson : public AbstractTeachingLesson
 {
 public:
-	MOCK_METHOD2(getSpecificError, double (AbstractNeuralNetwork&, AbstractActivationOrder&));
+	MOCK_METHOD3(getSpecificError, double (AbstractNeuralNetwork&, AbstractActivationOrder&, bool));
 	MOCK_METHOD1(getTeachingInput, NeuralNetworkIO<double>* (AbstractActivationFunction*));
 	MOCK_METHOD0(getTeachingPattern, std::vector<std::vector<double>>* ());
 	MOCK_METHOD0(unfold, AbstractTeachingLesson* ());

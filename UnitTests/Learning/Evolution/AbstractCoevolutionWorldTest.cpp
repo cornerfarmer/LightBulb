@@ -45,7 +45,7 @@ TEST_F(AbstractCoevolutionWorldTest, doSimulationStep)
 		EXPECT_CALL(*coevolutionFitnessFunction, execute(testing::Ref(result))).WillOnce(testing::Return(fitnessValues));
 		EXPECT_CALL(*coevolutionWorld, getHighscoreList()).WillOnce(testing::Return(&highscore));
 		EXPECT_CALL(*coevolutionWorld, rateKI(&bestObject)).Times(1);
-		EXPECT_CALL(*hallOfFameToChallengeAlgorithm, addMember(&bestObject)).Times(1);
+		EXPECT_CALL(*hallOfFameToAddAlgorithm, addMember(&bestObject)).Times(1);
 	}
 
 	coevolutionWorld->doSimulationStep();

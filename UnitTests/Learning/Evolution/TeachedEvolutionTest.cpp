@@ -30,9 +30,10 @@ TEST_F(TeachedEvolutionTest, doSimulationStep)
 {
 	AbstractEvolutionObject* evolutionObject = teachingEvolutionWorld->addNewObject(true);
 
-	EXPECT_CALL(teacher, getTotalError(testing::Ref(*evolutionObject->getNeuralNetwork()), testing::_)).WillOnce(testing::Return(5));
+	EXPECT_CALL(teacher, getTeachingError(testing::Ref(*evolutionObject->getNeuralNetwork()), testing::_)).WillOnce(testing::Return(5));
+	EXPECT_CALL(teacher, getWeightDecayError(testing::Ref(*evolutionObject->getNeuralNetwork()))).WillOnce(testing::Return(3));
 
 	teachingEvolutionWorld->doSimulationStep();
 
-	EXPECT_EQ(-5, teachingEvolutionWorld->getScore(evolutionObject));
+	EXPECT_EQ(-8, teachingEvolutionWorld->getScore(evolutionObject));
 }
