@@ -51,6 +51,7 @@ public:
 	MOCK_METHOD0(clone, AbstractNetworkTopology* ());
 	MOCK_METHOD0(getActivationsCopy, std::vector<Eigen::VectorXd> ());
 	MOCK_METHOD0(getNetInputs, std::vector<Eigen::VectorXd>* ());
+	MOCK_METHOD0(randomizeDependingOnWeightsSize, void ());
 };
 
 #endif
