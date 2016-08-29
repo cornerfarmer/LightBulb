@@ -49,7 +49,7 @@ protected:
 	std::vector<Eigen::VectorXd> netInputs;
 	//
 	Eigen::VectorXd activations;
-	
+
 	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> activationsPerLayerOut;
 
 	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> activationsPerLayerIn;
@@ -73,7 +73,7 @@ public:
 	virtual ~LayeredNetwork();
 	LayeredNetwork(LayeredNetworkOptions &options_);
 	LayeredNetwork();
-	
+
 	AbstractActivationFunction* getOutputActivationFunction();
 
 	void setInput(std::vector<std::pair<bool, double>> &inputVector);
@@ -151,7 +151,7 @@ public:
 	int getAfferentEdgeCount(int layerIndex, int neuronIndex);
 
 	double getPrevNeuronActivation(int layerIndex, int neuronIndex, int edgeIndex);
-	
+
 	double getWeight(int layerIndex, int neuronIndex, int edgeIndex);
 
 	void setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight);
@@ -161,7 +161,7 @@ public:
 	std::vector<Eigen::VectorXd> getActivationsCopy();
 
 	Eigen::VectorXd getNetInputVector(int layerIndex);
-	
+
 	Eigen::VectorXd getEfferentWeightVector(int layerIndex, int neuronIndex);
 
 	AbstractActivationFunction* getInnerActivationFunction();
@@ -202,6 +202,4 @@ public:
 };
 
 #include "IO/LayeredNetworkIO.hpp"
-
-
 #endif

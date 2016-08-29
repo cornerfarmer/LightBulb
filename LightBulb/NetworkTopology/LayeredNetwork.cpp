@@ -11,7 +11,6 @@
 
 std::mt19937 LayeredNetwork::g1(1);
 
-
 LayeredNetworkOptions::LayeredNetworkOptions()
 {
 	enableShortcuts = false;
@@ -428,7 +427,7 @@ void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
 			for (auto j = 0; j < layer->cols(); j++)
 			{
 				do {
-					(*layer)(i, j) = randGenerator.next() * (randEnd - randStart) + randStart;
+					(*layer)(i, j) = LayeredNetwork::myUniform() * (randEnd - randStart) + randStart;
 				} while ((*layer)(i, j) == 0);
 			}
 		}
@@ -447,7 +446,7 @@ void LayeredNetwork::randomizeDependingOnWeightsSize()
 			for (auto j = 0; j < layer->cols(); j++)
 			{
 				do {
-					(*layer)(i, j) = LayeredNetwork::myUniform() * stdv * 2 - stdv;
+					(*layer)(i, j) = randGenerator.next() * stdv * 2 - stdv;
 				} while ((*layer)(i, j) == 0);
 			}
 		}
