@@ -8,7 +8,6 @@
 
 // Library Includes
 #include <vector>
-#include <Learning/ResilientLearningRateHelper.hpp>
 
 // Forward declarations
 class AbstractNetworkTopology;
@@ -32,7 +31,6 @@ private:
 	std::vector<Eigen::VectorXd> errorVectorRecord;
 	std::vector<Eigen::MatrixXd> gradients;
 
-	std::unique_ptr<ResilientLearningRateHelper> resilientLearningRateHelper;
 	int stepsSinceLastReward;
 	void addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients);
 	void computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward);

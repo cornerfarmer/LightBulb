@@ -8,9 +8,9 @@
 
 // Library includes
 
-
 // Forward declarations
 class AbstractNeuralNetwork;
+struct AbstractSupervisedLearningRuleOptions;
 
 class AbstractSingleNNTrainingPlan : public AbstractLearningRuleTrainingPlan
 {

@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/AbstractSupervisedLearningRule.hpp"
+#include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "Teaching/Teacher.hpp"
@@ -7,7 +7,8 @@
 // Library includes
 #include <iomanip>
 #include <vector>
-#include "SupervisedLearningResult.hpp"
+#include "Learning/Supervised/SupervisedLearningResult.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
 
 AbstractSupervisedLearningRule::AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions& options_)
 	: AbstractLearningRule(new AbstractSupervisedLearningRuleOptions(options_))
@@ -38,7 +39,7 @@ void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 	getOptions()->teacher = initializeTeacher(*getOptions()->teacher);
 	getOptions()->neuralNetwork = initializeNeuralNetwork(*getOptions()->neuralNetwork);
 
-	currentActivationOrder.reset(getNewActivationOrder());
+	currentActivationOrder.reset(new TopologicalOrder());
 
 	totalError = 0;
 }
@@ -105,20 +106,15 @@ bool AbstractSupervisedLearningRule::doIteration()
 			// Calculate the errormap and also fill - if needed - the output and netInput values map
 			std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder, NULL, NULL, getOptions()->clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
 
-			// Adjust all hidden/output layers except 
+			std::vector<Eigen::MatrixXd> deltaWeight = calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errormap.get());
+
 			for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 			{
-				// Let the algorithm do some work for the actual neuron
-				initializeLayerCalculation(*teachingLesson->get(), lessonIndex, l, errormap.get());
-
-				// Calculate the deltaWeight
-				Eigen::MatrixXd deltaWeight = calculateDeltaWeightFromLayer(*teachingLesson->get(), lessonIndex, l, errormap.get());
-
 				// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
 				if (getOptions()->offlineLearning)
-					offlineLearningWeights[l - 1] += deltaWeight;
+					offlineLearningWeights[l - 1] += deltaWeight[l - 1];
 				else
-					offlineLearningWeights[l - 1] = deltaWeight;
+					offlineLearningWeights[l - 1] = deltaWeight[l - 1];
 			}
 
 			// If offline learning is activated, adjust all weights
@@ -161,7 +157,7 @@ bool AbstractSupervisedLearningRule::doIteration()
 
 void AbstractSupervisedLearningRule::initializeResumeLearningAlgoritm()
 {
-	currentActivationOrder.reset(getNewActivationOrder());
+	currentActivationOrder.reset(new TopologicalOrder());
 }
 
 void AbstractSupervisedLearningRule::initializeLearningAlgoritm()

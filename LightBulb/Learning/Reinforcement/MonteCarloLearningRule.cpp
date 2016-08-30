@@ -46,16 +46,14 @@ void MonteCarloLearningRule::initializeTry()
 
 void MonteCarloLearningRule::initialize()
 {
-	BackpropagationLearningRuleOptions options;
-	options.resilientLearningRate = false;
+	GradientDecentLearningRuleOptions options;
 	options.maxIterationsPerTry = 1000;
 	options.maxTries = 1;
 	options.changeWeightsBeforeLearning = false;
 	options.teacher = &teacher;
 	options.neuralNetwork = getOptions()->world->getNeuralNetwork();
 	options.logger = getOptions()->logger;
-	options.resilientLearningRate = true;
-	backpropagationLearningRule.reset(new BackpropagationLearningRule(options));
+	gradientDecentLearningRule.reset(new GradientDecentLearningRule(options));
 }
 
 void MonteCarloLearningRule::addTrainingPattern(AbstractNetworkTopology* networkTopology, double reward)
@@ -99,7 +97,7 @@ void MonteCarloLearningRule::doSupervisedLearning()
 	}
 	
 	initialize();
-	auto result = backpropagationLearningRule->start();
+	auto result = gradientDecentLearningRule->start();
 	learningState->addData(DATA_SET_TRAINING_ERROR, result->quality);
 
 	teachingPatterns.clear();

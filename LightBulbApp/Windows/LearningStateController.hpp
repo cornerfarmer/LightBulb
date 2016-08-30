@@ -10,7 +10,7 @@
 // Includes
 #include "LearningStateWindow.hpp"
 #include "AbstractSubApp.hpp"
-#include <Learning/DeltaLearningRule.hpp>
+#include "Learning/LearningState.hpp"
 
 #define DEFAULT_COMP_DS "Iterations"
 

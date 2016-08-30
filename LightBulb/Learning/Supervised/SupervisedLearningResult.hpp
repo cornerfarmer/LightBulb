@@ -1,7 +1,7 @@
 #ifndef _SUPERVISEDLEARNINGRESULT_H_
 #define _SUPERVISEDLEARNINGRESULT_H_
 
-#include "AbstractLearningResult.hpp"
+#include "Learning/AbstractLearningResult.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 
 struct SupervisedLearningResult : public AbstractLearningResult

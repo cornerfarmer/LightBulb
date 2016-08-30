@@ -1,6 +1,7 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
+#include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 
 
 void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options)

@@ -9,8 +9,8 @@
 #include <memory>
 
 // Includes
-#include "Learning/AbstractSupervisedLearningRule.hpp"
 #include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
+#include "Supervised/AbstractSupervisedLearningRule.hpp"
 
 // Forward declarations
 class NeuralNetwork;
@@ -55,7 +55,7 @@ protected:
 	bool learningHasStopped();
 	void initializeStartLearningAlgoritm();
 	AbstractActivationOrder* getNewActivationOrder();
-	Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
+	std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap);
 	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeTry();
 public:

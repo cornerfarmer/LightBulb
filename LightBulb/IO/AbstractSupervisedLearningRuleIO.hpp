@@ -4,7 +4,7 @@
 #define _ABSTRACTSUPERVISEDLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/AbstractSupervisedLearningRule.hpp"
+#include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

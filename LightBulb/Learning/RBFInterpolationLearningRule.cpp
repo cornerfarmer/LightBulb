@@ -67,13 +67,17 @@ AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
 	return new TopologicalOrder();
 }
 
-Eigen::MatrixXd RBFInterpolationLearningRule::calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap)
+std::vector<Eigen::MatrixXd> RBFInterpolationLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
 {
-	// Only change weights in the last layer
-	if (lessonIndex == getOptions()->teacher->getTeachingLessons()->size() - 1 && layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
-		return (*w);
-	else
-		return Eigen::MatrixXd::Zero(w->rows(), w->cols());
+	std::vector<Eigen::MatrixXd> deltaWeight(getCurrentNetworkTopology()->getLayerCount() - 1);
+	for (int layerIndex = getCurrentNetworkTopology()->getLayerCount() - 1; layerIndex > 0; layerIndex--) {
+		// Only change weights in the last layer
+		if (lessonIndex == getOptions()->teacher->getTeachingLessons()->size() - 1 && layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
+			deltaWeight[layerIndex - 1] = (*w);
+		else
+			deltaWeight[layerIndex - 1] = Eigen::MatrixXd::Zero(w->rows(), w->cols());
+	}
+	return deltaWeight;
 }
 
 void RBFInterpolationLearningRule::initializeLayerCalculation(class AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ::ErrorMap_t* errormap)

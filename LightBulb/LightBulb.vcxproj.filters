@@ -193,9 +193,6 @@
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\BackpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
@@ -203,9 +200,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\DeltaLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\HopfieldLearningRule.cpp">
@@ -227,9 +221,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\ResilientLearningRateHelper.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\SchmidhuberLearningRule.cpp">
@@ -583,9 +574,6 @@
     <ClCompile Include="Function\AbstractSelectionFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\AbstractSupervisedLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="IO\LayeredNetworkIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
@@ -632,8 +620,21 @@
     <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\MonteCarloLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
-    <ClCompile Include="Learning\RMSPropLearningRateHelper.cpp" />
     <ClCompile Include="Function\RectifierFunction.cpp" />
+    <ClCompile Include="Learning\Supervised\AbstractSupervisedLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientDecentLearningRule.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\AbstractGradientDecentAlgorithm.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientCalculation\AbstractGradientCalculation.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientCalculation\Backpropagation.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -765,9 +766,6 @@
     <ClInclude Include="Learning\AbstractLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\BackpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
@@ -775,9 +773,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\DeltaLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\HopfieldLearningRule.hpp">
@@ -799,9 +794,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\ResilientLearningRateHelper.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\SchmidhuberLearningRule.hpp">
@@ -1182,9 +1174,6 @@
     <ClInclude Include="IO\AbstractSimpleEvolutionWorldIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\AbstractSupervisedLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -1263,7 +1252,6 @@
     <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\NetworkGrowMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\AbstractLearningResult.hpp" />
-    <ClInclude Include="Learning\SupervisedLearningResult.hpp" />
     <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
     <ClInclude Include="Learning\Evolution\WeightDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
@@ -1276,7 +1264,21 @@
     <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\MonteCarloLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
-    <ClInclude Include="Learning\RMSPropLearningRateHelper.hpp" />
     <ClInclude Include="Function\RectifierFunction.hpp" />
+    <ClInclude Include="Learning\Supervised\AbstractSupervisedLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Supervised\GradientDecentLearningRule.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\AbstractGradientDecentAlgorithm.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientCalculation\AbstractGradientCalculation.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientCalculation\Backpropagation.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Supervised\SupervisedLearningResult.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.hpp" />
   </ItemGroup>
 </Project>

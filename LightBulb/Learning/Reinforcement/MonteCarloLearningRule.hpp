@@ -6,11 +6,10 @@
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 #include <Teaching/Teacher.hpp>
-#include <Learning/ResilientLearningRateHelper.hpp>
-#include <Learning/BackpropagationLearningRule.hpp>
 
 // Library Includes
 #include <vector>
+#include "Learning/Supervised/GradientDecentLearningRule.hpp"
 
 // Forward declarations
 class AbstractNetworkTopology;
@@ -31,7 +30,7 @@ class MonteCarloLearningRule : public AbstractReinforcementLearningRule
 {
 private:
 	Teacher teacher;
-	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
+	std::unique_ptr<GradientDecentLearningRule> gradientDecentLearningRule;
 	std::vector<std::vector<double>> teachingPatterns;
 	std::vector<std::vector<double>> teachingInputs;
 	std::vector<int> chosenActions;

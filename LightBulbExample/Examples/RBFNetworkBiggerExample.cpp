@@ -3,7 +3,6 @@
 //#include <Graphics/NeuralNetworkResultChart.hpp>
 #include <ClusterAnalysis/ROLFNeuronPlacer.hpp>
 #include <Learning/RBFInterpolationLearningRule.hpp>
-#include <Learning/DeltaLearningRule.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <NetworkTopology/RBFNetwork.hpp>

@@ -6,8 +6,8 @@
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 #include <Teaching/Teacher.hpp>
-#include <Learning/ResilientLearningRateHelper.hpp>
-#include <Learning/BackpropagationLearningRule.hpp>
+#include "Learning/Supervised/GradientDecentLearningRule.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
 
 // Library Includes
 #include <vector>
@@ -32,7 +32,9 @@ struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 	int replayStartSize;
 	bool replaceStoredTransitions;
 
-	BackpropagationLearningRuleOptions backpropagationOptions;
+	GradientDecentLearningRuleOptions gradientDecentOptions;
+
+	RMSPropLearningRateOptions rmsPropOptions;
 	DQNLearningRuleOptions()
 	{
 		minibatchSize = 32;
@@ -45,15 +47,14 @@ struct DQNLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 		replayStartSize = 50000;
 		replaceStoredTransitions = true;
 		
-		backpropagationOptions.maxIterationsPerTry = 1;
-		backpropagationOptions.maxTries = 1;
-		backpropagationOptions.changeWeightsBeforeLearning = false;
-		backpropagationOptions.resilientLearningRate = false;
-		backpropagationOptions.flatSpotEliminationFac = 0;
-		backpropagationOptions.offlineLearning = true;
-		backpropagationOptions.totalErrorGoal = 0;
-		backpropagationOptions.learningRate = 0.00025;
-		backpropagationOptions.clipError = true;
+		gradientDecentOptions.maxIterationsPerTry = 1;
+		gradientDecentOptions.maxTries = 1;
+		gradientDecentOptions.changeWeightsBeforeLearning = false;
+		gradientDecentOptions.offlineLearning = true;
+		gradientDecentOptions.totalErrorGoal = 0;
+		gradientDecentOptions.clipError = true;
+
+		rmsPropOptions.learningRate = 0.00025;
 	}
 };
 
@@ -74,7 +75,7 @@ private:
 	double currentTotalReward;
 	Teacher teacher;
 	std::vector<Transition> transitions;
-	std::unique_ptr<BackpropagationLearningRule> backpropagationLearningRule;
+	std::unique_ptr<GradientDecentLearningRule> gradientDecent;
 	std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 	double qAvgSum;
 	void initialize();

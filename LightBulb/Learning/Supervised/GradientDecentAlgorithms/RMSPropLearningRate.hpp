@@ -5,19 +5,13 @@
 
 // Library Includes
 #include <vector>
-#include <cmath>
-#include <iostream>
-#include <iomanip>
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
+#include "AbstractGradientDecentAlgorithm.hpp"
 
 // Forward declarations
-class Teacher;
-class Edge;
-class AbstractNeuralNetwork;
 
-struct RMSPropLearningRateHelperOptions
+struct RMSPropLearningRateOptions : public AbstractGradientDecentAlgorithmOptions
 {	
 	// Sets the factor by which the learningRate can grow
 	double gradientMomentum;
@@ -25,7 +19,7 @@ struct RMSPropLearningRateHelperOptions
 	double deltaWeightsMomentum;
 	double learningRate;
 	double minSquaredGradient;
-	RMSPropLearningRateHelperOptions()
+	RMSPropLearningRateOptions()
 	{
 		gradientMomentum = 0.95;
 		squaredGradientMomentum = 0.95;
@@ -36,28 +30,23 @@ struct RMSPropLearningRateHelperOptions
 };
 
 
-class RMSPropLearningRateHelper
+class RMSPropLearningRate : public AbstractGradientDecentAlgorithm
 {
 private:
 	// Holds for every edge its previous learning rate
 	std::vector<Eigen::MatrixXd> prevGradient;
 	std::vector<Eigen::MatrixXd> prevSquaredGradient;
 	std::vector<Eigen::MatrixXd> prevDeltaWeights;
-	RMSPropLearningRateHelperOptions* options;
-	bool initialized;
+	RMSPropLearningRateOptions* getOptions();
 public:
-	RMSPropLearningRateHelper(RMSPropLearningRateHelperOptions* options_);
-	RMSPropLearningRateHelper();
+	RMSPropLearningRate(RMSPropLearningRateOptions& options_);
+	RMSPropLearningRate();
 	// Computes the new learning rate of the given edge from the given gradient
-	Eigen::MatrixXd getLearningRate(int layerIndex, Eigen::MatrixXd& gradients);
-	// Print a short debug output (totalLearningRate)
-	std::string printDebugOutput();
+	Eigen::MatrixXd calcDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients);
 	// Returns if the learning has stopped
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper
-	void initialize(AbstractNeuralNetwork &neuralNetwork);
-
-	bool isInitialized();
+	void initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork);
 };
 
 #endif

@@ -1,7 +1,6 @@
 #include "BackpropagationXorExample.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include <Learning/BackpropagationLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/WeightedSumFunction.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
@@ -9,6 +8,8 @@
 #include <Function/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
+#include "Learning/Supervised/GradientDecentLearningRule.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
 
 
 #define PREFERENCE_LEARNINGRATE "Learning rate"
@@ -37,20 +38,20 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 		}
 	}
 
-	BackpropagationLearningRuleOptions options;
+	SimpleGradientDecentOptions gradientDecentOptions;
+	gradientDecentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
+	gradientDecentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
+
+	GradientDecentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
-	options.weightDecayFac = 0;
-	options.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
-	options.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
-	options.resilientLearningRate = false;
-	options.rmsPropLearningRate = true;
 	options.teacher = teacher.get();
+	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
 	fillDefaultLearningRuleOptions(&options);
 
-	return new BackpropagationLearningRule(options);
+	return new GradientDecentLearningRule(options);
 }
 
 
@@ -97,5 +98,5 @@ int BackpropagationXorExample::getRequiredOutputSize()
 
 std::string BackpropagationXorExample::getLearningRuleName()
 {
-	return BackpropagationLearningRule::getName();
+	return GradientDecentLearningRule::getName();
 }

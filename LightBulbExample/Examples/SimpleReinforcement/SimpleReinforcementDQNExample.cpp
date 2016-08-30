@@ -32,13 +32,11 @@ AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 	DQNLearningRuleOptions options;
 	world = createWorld();
 	options.world = world;
-	options.backpropagationOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
+	options.rmsPropOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
 	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
-	options.backpropagationOptions.rmsPropLearningRate = getBooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE);
-	options.backpropagationOptions.rmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 

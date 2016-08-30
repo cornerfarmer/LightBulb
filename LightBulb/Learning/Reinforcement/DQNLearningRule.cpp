@@ -47,10 +47,10 @@ void DQNLearningRule::initializeTry()
 
 void DQNLearningRule::initialize()
 {
-	getOptions()->backpropagationOptions.teacher = &teacher;
-	getOptions()->backpropagationOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
-	getOptions()->backpropagationOptions.logger = NULL;
-	backpropagationLearningRule.reset(new BackpropagationLearningRule(getOptions()->backpropagationOptions));
+	getOptions()->gradientDecentOptions.teacher = &teacher;
+	getOptions()->gradientDecentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
+	getOptions()->gradientDecentOptions.logger = NULL;
+	gradientDecent.reset(new GradientDecentLearningRule(getOptions()->gradientDecentOptions));
 
 	steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
 }
@@ -116,7 +116,7 @@ void DQNLearningRule::doSupervisedLearning()
 
 	//auto gradient = checkGradient(&teacher, getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 
-	std::unique_ptr<AbstractLearningResult> result(backpropagationLearningRule->start());
+	std::unique_ptr<AbstractLearningResult> result(gradientDecent->start());
 	currentTotalError += result->quality;
 }
 

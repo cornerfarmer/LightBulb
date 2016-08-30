@@ -1,5 +1,4 @@
 #include "AbstractLearningRuleTrainingPlan.hpp"
-#include <Learning/BackpropagationLearningRule.hpp>
 
 
 void AbstractLearningRuleTrainingPlan::run(bool initial)

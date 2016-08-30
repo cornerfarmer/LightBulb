@@ -39,7 +39,7 @@ PolicyGradientLearningRule::PolicyGradientLearningRule()
 
 void PolicyGradientLearningRule::initialize()
 {
-	resilientLearningRateHelper.reset(new ResilientLearningRateHelper(new ResilientLearningRateHelperOptions()));
+	//resilientLearningRateHelper.reset(new ResilientLearningRateHelper(new ResilientLearningRateHelperOptions()));
 }
 
 void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
@@ -93,7 +93,7 @@ Eigen::VectorXd PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopolo
 
 void PolicyGradientLearningRule::initializeTry()
 {
-	resilientLearningRateHelper->initialize(*getOptions()->world->getNeuralNetwork());
+	//resilientLearningRateHelper->initialize(*getOptions()->world->getNeuralNetwork());
 	getOptions()->world->setLearningState(learningState.get());
 	getOptions()->world->initializeForLearning();
 

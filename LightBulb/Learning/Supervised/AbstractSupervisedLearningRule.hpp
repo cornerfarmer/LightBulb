@@ -86,15 +86,11 @@ protected:
 	bool hasLearningSucceeded();
 	void rateLearning();
 	// This method should calculate the deltaWeight for the actual edge
-	virtual Eigen::MatrixXd calculateDeltaWeightFromLayer(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap) = 0;
+	virtual std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) = 0;
 	// This method should adjust the weight of the current edge
 	virtual void adjustWeights(int layerIndex, Eigen::MatrixXd gradients) = 0;
 	// Calculate if it is sensible to continue learning
 	virtual bool learningHasStopped() = 0;
-	// This method could be used to do some work for the current neuron before calculating deltaWeights for every of its edges
-	virtual void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap) {};
-	// This method should return the used activationOrder
-	virtual AbstractActivationOrder* getNewActivationOrder() = 0;
 	// Prints a current summary of the status of the learning process
 	virtual std::string printDebugOutput() { return ""; };
 	// This method should do something like randomizing all weight

@@ -6,10 +6,8 @@
 
 // Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
-#include <Learning/BackpropagationLearningRule.hpp>
-#include <IO/IOStorage.hpp>
-#include "IO/UseParentSerialization.hpp"
 #include "Learning/AbstractLearningResult.hpp"
+#include "Learning/AbstractLearningRule.hpp"
 
 // Library includes
 

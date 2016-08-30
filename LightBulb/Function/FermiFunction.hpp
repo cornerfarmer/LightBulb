@@ -17,10 +17,19 @@ public:
 	FermiFunction(double temperatureParameter_);
 	// Inherited
 	double execute(double input);
+	/**
+	 * \brief 
+	 * \param input 
+	 * \return 
+	 */
 	double executeDerivation(double input);
 	AbstractActivationFunction* getActivationFunctionCopy();
 	double getMaximum();
 	double getMinimum();
+	/**
+	 * \brief 
+	 * \param 
+	 */
 	bool hasAMaxAndMinimum();
 };
 

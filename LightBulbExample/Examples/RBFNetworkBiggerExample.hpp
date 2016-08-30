@@ -6,9 +6,9 @@
 
 
 // Includes
-#include <Learning/BackpropagationLearningRule.hpp>
 #include "Teaching/Teacher.hpp"
 #include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // Library includes
 
