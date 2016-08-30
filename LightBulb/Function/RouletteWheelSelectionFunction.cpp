@@ -12,7 +12,7 @@ int RouletteWheelSelectionFunction::execute(const std::vector<double> &probabili
 		probabilitySum += *probability;
 	}
 
-	double randomLine = (float)rand() / RAND_MAX * probabilitySum;
+	double randomLine = randomGenerator->randDouble() * probabilitySum;
 	double partialSum = 0;
 	int index = 0;
 	for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++, index++)

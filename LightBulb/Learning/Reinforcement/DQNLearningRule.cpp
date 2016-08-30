@@ -4,7 +4,7 @@
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
 // Library includes
-#include <Learning/EvolutionLearningResult.hpp>
+#include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include "AbstractReinforcementWorld.hpp"
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
@@ -94,7 +94,7 @@ void DQNLearningRule::doSupervisedLearning()
 
 	for (int i = 0; i < std::min((int)transitions.size(), getOptions()->minibatchSize); i++)
 	{
-		int r = LayeredNetwork::myRandom(1, transitions.size() - 2);
+		int r = randomGenerator->randInt(1, transitions.size() - 2);
 
 		double y = transitions[r].reward;
 

@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <map>
 #include <string>
-#include <Learning/EvolutionLearningResult.hpp>
+#include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include "AbstractReinforcementWorld.hpp"
 #include <Teaching/TeachingLessonLinearInput.hpp>

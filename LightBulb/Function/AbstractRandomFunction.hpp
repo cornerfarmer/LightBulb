@@ -3,7 +3,10 @@
 #ifndef _ABSTRACTRANDOMFUNCTION_H_
 #define _ABSTRACTRANDOMFUNCTION_H_
 
-class AbstractRandomFunction
+// Includes
+#include "Random/AbstractRandomGeneratorUser.hpp"
+
+class AbstractRandomFunction : public AbstractRandomGeneratorUser
 {
 private:
 public:

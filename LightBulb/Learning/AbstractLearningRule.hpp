@@ -11,6 +11,7 @@
 
 // Includes
 #include "LearningState.hpp"
+#include "Random/AbstractRandomGenerator.hpp"
 
 // Forward declarations
 
@@ -59,6 +60,8 @@ protected:
 	std::unique_ptr<AbstractLearningRuleOptions> options;
 
 	std::shared_ptr<LearningState> learningState;
+
+	std::unique_ptr<AbstractRandomGenerator> randomGenerator;
 
 	virtual bool doIteration() = 0;
 	// This method will be called in front of the actual learning algorithm

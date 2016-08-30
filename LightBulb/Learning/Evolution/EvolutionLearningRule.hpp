@@ -4,7 +4,7 @@
 #define _EVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/AbstractEvolutionLearningRule.hpp"
+#include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 
 // Library Includes
 #include <vector>

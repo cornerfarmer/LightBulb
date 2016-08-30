@@ -6,5 +6,5 @@
 
 int EqualRandomFunction::execute(int elementCount)
 {
-	return std::min(elementCount - 1, (int)((float)rand() / RAND_MAX * elementCount));
+	return randomGenerator->randInt(0, elementCount - 1);
 }

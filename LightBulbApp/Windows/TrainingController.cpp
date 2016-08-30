@@ -12,7 +12,7 @@
 #include "PreferencesController.hpp"
 #include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
-#include <Learning/EvolutionLearningResult.hpp>
+#include <Learning/Evolution/EvolutionLearningResult.hpp>
 
 
 TrainingController::TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_)

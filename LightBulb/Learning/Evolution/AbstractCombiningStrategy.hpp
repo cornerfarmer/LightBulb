@@ -3,12 +3,13 @@
 #ifndef _ABSTRACTCOMBININGSTRATEGY_H_
 #define _ABSTRACTCOMBININGSTRATEGY_H_
 
+// Include
+#include "Random/AbstractRandomGeneratorUser.hpp"
+
 // Library Includes
 #include <vector>
 #include <memory>
 #include <map>
-
-// Include
 
 // Forward declarations
 class AbstractCoevolutionWorld;
@@ -16,7 +17,7 @@ class AbstractEvolutionObject;
 
 typedef std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, std::map<int, bool>>> CombiningStrategyResults;
 
-class AbstractCombiningStrategy
+class AbstractCombiningStrategy : public AbstractRandomGeneratorUser
 {
 private:
 	std::unique_ptr<CombiningStrategyResults> results;

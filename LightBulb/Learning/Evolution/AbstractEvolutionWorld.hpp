@@ -11,6 +11,7 @@
 #include <Logging/AbstractLoggable.hpp>
 #include <Learning/LearningState.hpp>
 #include "IO/UseParentSerialization.hpp"
+#include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -20,7 +21,7 @@ typedef std::vector<std::pair<double, AbstractEvolutionObject*>> Highscore;
 
 // This class should describe a world which contains multiple evolution objects.
 // The evolution world has to simulate the environment which surrounds its evolution objects.
-class AbstractEvolutionWorld : public AbstractLoggable
+class AbstractEvolutionWorld : public AbstractLoggable, public AbstractRandomGeneratorUser
 {
 private:
 	Highscore currentHighscore;

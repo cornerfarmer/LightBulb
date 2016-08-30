@@ -3,6 +3,7 @@
 #include "ClusterAnalysis/Cluster.hpp"
 #include "ClusterAnalysis/Point.hpp"
 #include "ClusterAnalysis/PointSet.hpp"
+#include "Random/AbstractRandomGenerator.hpp"
 
 std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &points, int clusterCount, int dimensionCount)
 {
@@ -13,7 +14,7 @@ std::unique_ptr<std::list<Cluster>> KMeansClustering::doClustering(PointSet &poi
 	for (auto cluster = clusters->begin(); cluster != clusters->end(); cluster++)
 	{
 		PointSet::iterator point = points.begin();
-		std::advance(point, (double)(rand() % RAND_MAX) / RAND_MAX * points.size());
+		std::advance(point, randomGenerator->randInt(0, points.size() - 1));
 		// Set the position to one random point, so every cluster does now contain at least one point
 		(*cluster).center.position = (*point)->valPos.position;
 		(*cluster).center.value = (*point)->valPos.value;

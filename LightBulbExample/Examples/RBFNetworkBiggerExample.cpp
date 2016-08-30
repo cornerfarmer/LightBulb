@@ -2,7 +2,7 @@
 //#include <Graphics/RBFNetworkStructureChart.hpp>
 //#include <Graphics/NeuralNetworkResultChart.hpp>
 #include <ClusterAnalysis/ROLFNeuronPlacer.hpp>
-#include <Learning/RBFInterpolationLearningRule.hpp>
+#include <Learning/Supervised/RBFInterpolationLearningRule.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <NetworkTopology/RBFNetwork.hpp>

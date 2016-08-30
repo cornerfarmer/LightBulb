@@ -76,8 +76,8 @@ void GradientDecentLearningRule::initializeTry()
 	if (getOptions()->changeWeightsBeforeLearning)
 	{
 		// Randomize all weights
-		getCurrentNetworkTopology()->randomizeWeights(getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
-		getCurrentNetworkTopology()->randomizeWeights(getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
+		getCurrentNetworkTopology()->randomizeWeights(randomGenerator.get(), getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
+		getCurrentNetworkTopology()->randomizeWeights(randomGenerator.get(), getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
 	}
 
 	// If used, initialize the learning rate helper

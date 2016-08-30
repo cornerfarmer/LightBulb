@@ -6,6 +6,7 @@
 // Library Includes
 
 // Include
+#include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
 
@@ -34,7 +35,7 @@ struct PongGameProperties
 	double speedIncreaseFac;
 };
 
-class PongGame
+class PongGame : public AbstractRandomGeneratorUser
 {
 private:
 	PongGameState state;

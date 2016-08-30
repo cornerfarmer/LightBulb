@@ -21,11 +21,11 @@ public:
 	RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer);		
 	RBFNetwork();
 	// Set all weights to new random values between randStart and randEnd
-	void randomizeWeights(double randStart, double randEnd);
+	void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
 	// Set all neuron centers to new random values between randStart and randEnd
-	void randomizeCenters(double randStart, double randEnd);
+	void randomizeCenters(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
 	// Set all neuron centers to new random values between randStart and randEnd
-	void randomizeWidths(double randStart, double randEnd);
+	void randomizeWidths(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
 	// Sets the center of the RBFNeuron with the given index
 	void setCenterOfRBFNeuron(int neuronIndex, std::vector<double> &newCenterPosition);
 	// Sets the width of the RBFNeuron with the given index

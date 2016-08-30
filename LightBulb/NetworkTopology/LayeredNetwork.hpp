@@ -66,8 +66,6 @@ protected:
 	// Rebuilds the output neurons vector from the outputNeuronsIndices option
 	void rebuildOutputNeurons();
 
-	XorShfGenerator randGenerator;
-
 	void rebuildActivationsPerLayer(int layerIndex);
 public:
 	virtual ~LayeredNetwork();
@@ -88,8 +86,8 @@ public:
 	// Returns all Neurons
 	std::vector<std::vector<StandardNeuron*>>* getNeurons();
 	// Set all weights to new random values between randStart and randEnd
-	void randomizeWeights(double randStart, double randEnd);
-	void randomizeDependingOnWeightsSize();
+	void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
+	void randomizeDependingOnWeightsSize(AbstractRandomGenerator* randomGenerator);
 	// Adds a new neuron into the specified layer
 	AbstractNeuron* addNeuronIntoLayer(int layerIndex, bool refreshNeuronCounters, bool addEdgesToNextLayer);
 	// Removes the neuron with given index from a layer
@@ -187,18 +185,6 @@ public:
 	int getNeuronCount();
 
 	AbstractNetworkTopology* clone();
-
-	static std::mt19937 g1;
-
-	static double myUniform(double a = 0, double b = 1)
-	{
-		return g1() * (1.0 / 4294967296.0) * (b - a) + a;
-	}
-
-	static int myRandom(int a, int b)
-	{
-		return (g1() % (b + 1 - a)) + a;
-	}
 };
 
 #include "IO/LayeredNetworkIO.hpp"

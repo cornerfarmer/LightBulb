@@ -4,7 +4,7 @@
 #define _BIPARTITEEVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/AbstractEvolutionLearningRule.hpp"
+#include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 
 // Library Includes
 

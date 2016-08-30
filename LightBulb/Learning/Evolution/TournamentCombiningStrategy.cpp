@@ -47,7 +47,7 @@ void TournamentCombiningStrategy::processLevel(AbstractCoevolutionWorld* simulat
 		if (i < currentLevel->size() - 1) {
 			int result = simulationWorld->compareObjects(currentLevel->at(i), currentLevel->at(i + 1), 0);
 			if (result == 0) {
-				result = (rand() > RAND_MAX / 2 ? 1 : -1);
+				result = (randomGenerator->randDouble() > 0.5 ? 1 : -1);
 			}
 //			setResult(currentLevel->at(i), currentLevel->at(i + 1), result >= 0);
 

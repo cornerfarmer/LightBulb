@@ -12,8 +12,8 @@ AbstractEvolutionObject* Nature::createNewObject()
 	int posX = 0;
 	int posY = 0;
 	do {
-		posX = (int)((float)rand() / RAND_MAX * (width - 1));
-		posY = (int)((float)rand() / RAND_MAX * (height - 1));
+		posX = randomGenerator->randInt(0, width - 1);
+		posY = randomGenerator->randInt(0, height - 1);
 	} while (!tiles[posX][posY]->isWalkable());
 
 	return new Animal(this, posX, posY, 0, 1);
@@ -97,8 +97,8 @@ void Nature::resetWorld()
 		int posX = 0;
 		int posY = 0;
 		do {
-			posX = (int)((float)rand() / RAND_MAX * (width - 1));
-			posY = (int)((float)rand() / RAND_MAX * (height - 1));
+			posX = randomGenerator->randInt(0, width - 1);
+			posY = randomGenerator->randInt(0, height - 1);
 		} while (!tiles[posX][posY]->isWalkable());
 		static_cast<Animal*>(*animal)->reset(posX, posY, 0, 1);
 	}

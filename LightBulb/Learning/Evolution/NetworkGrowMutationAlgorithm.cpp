@@ -29,7 +29,7 @@ void NetworkGrowMutationAlgorithm::execute(AbstractEvolutionObject* object1)
 		int layer;
 		do
 		{
-			layer = rand() % neuronCountsPerLayer.size();
+			layer = randomGenerator->randInt(0, neuronCountsPerLayer.size() - 1);
 		} while (maxNeuronsPerLayer[layer] <= neuronCountsPerLayer[layer]);
 		object1->addNeuron(layer);
 	}

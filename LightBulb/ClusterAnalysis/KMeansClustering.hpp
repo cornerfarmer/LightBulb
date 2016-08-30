@@ -11,14 +11,16 @@
 #include "ClusterAnalysis/AbstractClustering.hpp"
 #include "ClusterAnalysis/Point.hpp"
 #include "ClusterAnalysis/Cluster.hpp"
+#include "Random/AbstractRandomGeneratorUser.hpp"
 
+class AbstractRandomGenerator;
 // Forward declarations
 struct Cluster;
 class Teacher;
 class PointSet;
 
 // This class contains all stuff needed to calculate clusters with the k-means cluster algorithm 
-class KMeansClustering : public AbstractClustering
+class KMeansClustering : public AbstractClustering, public AbstractRandomGeneratorUser
 {
 private:
 public:

@@ -45,3 +45,7 @@ void AbstractRBFNeuronPlacer::placeRBFNeuronsFromClusters(std::list<Cluster>* cl
 	}
 }
 
+void AbstractRBFNeuronPlacer::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	randomGenerator = randomGenerator_;
+}

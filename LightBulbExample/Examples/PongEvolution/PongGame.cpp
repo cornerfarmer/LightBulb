@@ -146,12 +146,12 @@ void PongGame::reset()
 {
 	state.ballPosX = properties.width / 2;
 	state.ballPosY = properties.height / 2;
-
-	state.ballVelX = LayeredNetwork::myUniform() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (LayeredNetwork::myUniform() > 0.5)
+	
+	state.ballVelX = randomGenerator->randDouble() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
+	if (randomGenerator->randDouble() > 0.5)
 		state.ballVelX *= -1;
-	state.ballVelY = LayeredNetwork::myUniform() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (LayeredNetwork::myUniform() > 0.5)
+	state.ballVelY = randomGenerator->randDouble() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
+	if (randomGenerator->randDouble() > 0.5)
 		state.ballVelY *= -1;
 
 	//state.ballVelX = 3;

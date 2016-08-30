@@ -10,12 +10,13 @@
 // Includes
 #include "IO/UseParentSerialization.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
 struct LayeredNetworkOptions;
 struct LearningState;
 
-class AbstractReinforcementWorld
+class AbstractReinforcementWorld : public AbstractRandomGeneratorUser
 {
 private:
 	std::vector<double> lastOutput;

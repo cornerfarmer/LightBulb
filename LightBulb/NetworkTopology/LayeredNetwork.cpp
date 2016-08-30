@@ -8,8 +8,8 @@
 // Library includes
 #include <exception>
 #include <math.h>
+#include "Random/AbstractRandomGenerator.hpp"
 
-std::mt19937 LayeredNetwork::g1(1);
 
 LayeredNetworkOptions::LayeredNetworkOptions()
 {
@@ -418,7 +418,7 @@ std::vector<Eigen::VectorXd>* LayeredNetwork::getNetInputs()
 	return &netInputs;
 }
 
-void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
+void LayeredNetwork::randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd)
 {
 	for (auto layer = weights.begin(); layer != weights.end(); layer++)
 	{
@@ -427,7 +427,7 @@ void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
 			for (auto j = 0; j < layer->cols(); j++)
 			{
 				do {
-					(*layer)(i, j) = LayeredNetwork::myUniform() * (randEnd - randStart) + randStart;
+					(*layer)(i, j) = randomGenerator->randDouble(randStart, randEnd);
 				} while ((*layer)(i, j) == 0);
 			}
 		}
@@ -435,7 +435,7 @@ void LayeredNetwork::randomizeWeights(double randStart, double randEnd)
 }
 
 
-void LayeredNetwork::randomizeDependingOnWeightsSize()
+void LayeredNetwork::randomizeDependingOnWeightsSize(AbstractRandomGenerator* randomGenerator)
 {
 	for (auto layer = weights.begin(); layer != weights.end(); layer++)
 	{
@@ -446,7 +446,7 @@ void LayeredNetwork::randomizeDependingOnWeightsSize()
 			for (auto j = 0; j < layer->cols(); j++)
 			{
 				do {
-					(*layer)(i, j) = randGenerator.next() * stdv * 2 - stdv;
+					(*layer)(i, j) = randomGenerator->randDouble(-stdv, stdv);
 				} while ((*layer)(i, j) == 0);
 			}
 		}

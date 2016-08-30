@@ -15,6 +15,7 @@ class AbstractNeuron;
 class StandardNeuron;
 class Edge;
 class BiasNeuron;
+class AbstractRandomGenerator;
 
 // A NetworkTopology is used to describe the structure of a NeuralNetwork
 class AbstractNetworkTopology
@@ -31,8 +32,8 @@ public:
 	// Returns all OutputNeurons in the NeuralNetwork
 	virtual std::vector<StandardNeuron*>* getOutputNeurons() = 0;
 	// Set all weights to new random values between randStart and randEnd
-	virtual void randomizeWeights(double randStart, double randEnd) = 0;
-	virtual void randomizeDependingOnWeightsSize() = 0;
+	virtual void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) = 0;
+	virtual void randomizeDependingOnWeightsSize(AbstractRandomGenerator* randomGenerator) = 0;
 	// Returns all Neurons
 	virtual std::vector<std::vector<StandardNeuron*>>* getNeurons() = 0;
 	// Calculates the Edge count

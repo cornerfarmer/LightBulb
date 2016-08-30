@@ -33,7 +33,7 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 					}
 					else
 					{
-						if (rand() > RAND_MAX / 2)
+						if (randomGenerator->randDouble() > 0.5)
 							(*layer1)(i, j) = (*layer2)(i, j);
 					}
 				}
@@ -52,7 +52,7 @@ void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractE
 		}
 		else
 		{
-			if (rand() > RAND_MAX / 2)
+			if (randomGenerator->randDouble() > 0.5)
 				(*mutationStrength1)[i] = (*mutationStrength2)[i];
 		}
 	}

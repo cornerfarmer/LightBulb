@@ -3,6 +3,9 @@
 #ifndef _ABSTRACTMUTATIONALGORITHM_H_
 #define _ABSTRACTMUTATIONALGORITHM_H_
 
+// Includes
+#include "Random/AbstractRandomGeneratorUser.hpp"
+
 // Library Includes
 #include <memory>
 #include <vector>
@@ -11,7 +14,7 @@
 class AbstractEvolutionObject;
 
 // A algorithm which mutates the given object.
-class AbstractMutationAlgorithm
+class AbstractMutationAlgorithm : public AbstractRandomGeneratorUser
 {
 public:
 	virtual ~AbstractMutationAlgorithm() {};

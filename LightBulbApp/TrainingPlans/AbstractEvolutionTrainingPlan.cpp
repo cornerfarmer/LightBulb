@@ -1,6 +1,6 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include <Learning/AbstractEvolutionLearningRule.hpp>
+#include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
 
 void AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options)
 {

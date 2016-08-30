@@ -12,7 +12,7 @@ int RankBasedRandomFunction::execute(int elementCount)
 		probabilitySum += 1 + (8 - 1) * exp(-1.0 * (8 - 1) * i / elementCount);
 	}
 
-	double randomLine = (float)rand() / RAND_MAX * probabilitySum;
+	double randomLine = randomGenerator->randDouble() * probabilitySum;
 	double partialSum = 0;
 	for (int i = 1; i <= elementCount; i++)
 	{

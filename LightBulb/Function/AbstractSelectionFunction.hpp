@@ -3,10 +3,13 @@
 #ifndef _ABSTRACTSELECTIONFUNCTION_H_
 #define _ABSTRACTSELECTIONFUNCTION_H_
 
+// Includes
+#include "Random/AbstractRandomGeneratorUser.hpp"
+
 // Library includes
 #include <vector>
 
-class AbstractSelectionFunction
+class AbstractSelectionFunction : public AbstractRandomGeneratorUser
 {
 private:
 public:

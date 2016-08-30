@@ -26,9 +26,9 @@ void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
 	else
 	{
 		lastBooleanOutput = std::vector<bool>(lastBooleanOutput.size(), 0);
-		if (LayeredNetwork::myUniform() < epsilon)
+		if (randomGenerator->randDouble() < epsilon)
 		{
-			lastBooleanOutput[LayeredNetwork::myRandom(0, lastBooleanOutput.size() - 1)] = true;
+			lastBooleanOutput[randomGenerator->randInt(0, lastBooleanOutput.size() - 1)] = true;
 		}
 		else
 		{
@@ -56,7 +56,7 @@ AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& op
 void AbstractReinforcementWorld::initializeForLearning()
 {
 	// Randomize all weights
-	neuralNetwork->getNetworkTopology()->randomizeDependingOnWeightsSize();
+	neuralNetwork->getNetworkTopology()->randomizeDependingOnWeightsSize(randomGenerator);
 }
 
 NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()

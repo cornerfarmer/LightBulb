@@ -6,11 +6,7 @@
 // Library includes
 #include <vector>
 #include <algorithm>
-#include <algorithm>
-#include <algorithm>
-#include <algorithm>
-#include <algorithm>
-#include <algorithm>
+#include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
 class EvolutionLearningRule;
@@ -26,7 +22,7 @@ enum EvolutionSource
 
 // This class describes an abstract object which "lives" inside an evolution world.
 // The evolution object contains a NN which should calculate the actions from external and internal inputs.
-class AbstractEvolutionObject 
+class AbstractEvolutionObject : public AbstractRandomGeneratorUser
 {
 	template <class Archive>
 	friend void save(Archive& archive, AbstractEvolutionObject const& object);

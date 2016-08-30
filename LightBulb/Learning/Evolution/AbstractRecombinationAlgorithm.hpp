@@ -6,12 +6,13 @@
 // Library Includes
 
 // Includes
+#include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
 class AbstractEvolutionObject;
 
 // A algorithm which describes the recombination of two existing evolution objects into a new one.
-class AbstractRecombinationAlgorithm
+class AbstractRecombinationAlgorithm : public AbstractRandomGeneratorUser
 {
 private:
 public:

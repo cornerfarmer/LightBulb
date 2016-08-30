@@ -235,7 +235,7 @@
     <ClCompile Include="IO\NeuralNetworkIO.hpp" />
     <ClCompile Include="IO\SynapticExporter.cpp" />
     <ClCompile Include="IO\MatrixIO.hpp" />
-    <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -249,15 +249,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\BackpropagationThroughTimeLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\CascadeCorrelationLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\CounterpropagationLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -437,31 +437,31 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\WeightDecayFitnessFunction.cpp" />
-    <ClCompile Include="Learning\HopfieldLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\HopfieldLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\LVQ1LearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\LVQ1LearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\LVQ2LearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\LVQ2LearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\LVQ3LearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\LVQ3LearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\OLVQ1LearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp">
+    <ClCompile Include="Learning\Supervised\RBFInterpolationLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\RealTimeRecurrentLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -475,19 +475,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.cpp" />
-    <ClCompile Include="Learning\SchmidhuberLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\SchmidhuberLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\SingleLayerPerceptronLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\SOMLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\SOMLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp">
+    <ClCompile Include="Learning\Old %28not working%29\TruncatedBackpropagationThroughTimeLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -549,6 +549,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Neuron\NeuronDescription.cpp" />
+    <ClCompile Include="Random\AbstractRandomGenerator.cpp" />
+    <ClCompile Include="Random\AbstractRandomGeneratorUser.cpp" />
+    <ClCompile Include="Random\StandardRandomGenerator.cpp" />
     <ClCompile Include="Teaching\AbstractTeacher.cpp" />
     <ClCompile Include="Teaching\AbstractTeachingLesson.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -823,7 +826,7 @@
     <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="IO\SynapticExporter.hpp" />
     <ClInclude Include="IO\UsedArchives.hpp" />
-    <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionLearningRule.hpp" />
     <ClInclude Include="Learning\AbstractLearningResult.hpp" />
     <ClInclude Include="Learning\AbstractLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -838,19 +841,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\BackpropagationThroughTimeLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\CascadeCorrelationLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\CounterpropagationLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
+    <ClInclude Include="Learning\Evolution\EvolutionLearningResult.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -1027,7 +1030,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\WeightDecayFitnessFunction.hpp" />
-    <ClInclude Include="Learning\HopfieldLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\HopfieldLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -1035,27 +1038,27 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\LVQ1LearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\LVQ1LearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\LVQ2LearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\LVQ2LearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\LVQ3LearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\LVQ3LearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\OLVQ1LearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp">
+    <ClInclude Include="Learning\Supervised\RBFInterpolationLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\RealTimeRecurrentLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -1069,20 +1072,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.hpp" />
-    <ClInclude Include="Learning\SchmidhuberLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\SchmidhuberLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\SingleLayerPerceptronLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\SOMLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\SOMLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Learning\Supervised\SupervisedLearningResult.hpp" />
-    <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp">
+    <ClInclude Include="Learning\Old %28not working%29\TruncatedBackpropagationThroughTimeLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -1144,6 +1147,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Neuron\NeuronDescription.hpp" />
+    <ClInclude Include="Random\AbstractRandomGenerator.hpp" />
+    <ClInclude Include="Random\AbstractRandomGeneratorUser.hpp" />
+    <ClInclude Include="Random\StandardRandomGenerator.hpp" />
     <ClInclude Include="Teaching\AbstractTeacher.hpp" />
     <ClInclude Include="Teaching\AbstractTeachingLesson.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

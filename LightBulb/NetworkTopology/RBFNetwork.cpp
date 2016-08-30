@@ -6,6 +6,7 @@
 #include "Function/WeightedSumFunction.hpp"
 #include "Function/IdentityFunction.hpp"
 #include <Neuron/NeuronDescription.hpp>
+#include "Random/AbstractRandomGenerator.hpp"
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)
 {
@@ -39,32 +40,32 @@ RBFNetwork::RBFNetwork()
 {
 }
 
-void RBFNetwork::randomizeWeights(double randStart, double randEnd)
+void RBFNetwork::randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd)
 {
 	for (auto i = 0; i < weights[0].rows(); i++)
 	{
 		for (auto j = 0; j < weights[0].cols(); j++)
 		{
 			do {
-				weights[0](i, j) = randGenerator.next() * (randEnd - randStart) + randStart;
+				weights[0](i, j) = randomGenerator->randDouble(randStart, randEnd);
 			} while (weights[0](i, j) == 0);
 		}
 	}
 }
 
-void RBFNetwork::randomizeCenters(double randStart, double randEnd)
+void RBFNetwork::randomizeCenters(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd)
 {
 	weights[0].setRandom();
-	weights[0] *= (randEnd - randStart) + randStart;
+	weights[0] *= randomGenerator->randDouble(randStart, randEnd);
 }
 	
-void RBFNetwork::randomizeWidths(double randStart, double randEnd)
+void RBFNetwork::randomizeWidths(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd)
 {
 	// Go through all neurons in the second layer
 	for (int neuronIndex = 0; neuronIndex != weights[0].rows(); neuronIndex++)
 	{
 		// Set a new random width to the neuron
-		setWidthOfRBFNeuron(neuronIndex, (double)rand() / RAND_MAX * (randEnd - randStart) + randStart);
+		setWidthOfRBFNeuron(neuronIndex, randomGenerator->randDouble(randStart, randEnd));
 	}
 }
 

@@ -4,7 +4,7 @@
 #define _RBFINTERPOLATIONLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/RBFInterpolationLearningRule.hpp"
+#include "Learning/Supervised/RBFInterpolationLearningRule.hpp"
 #include "IOStorage.hpp"
 
 // Libraray includes

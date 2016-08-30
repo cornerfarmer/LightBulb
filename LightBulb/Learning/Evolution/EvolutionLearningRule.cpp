@@ -18,7 +18,7 @@
 #include <algorithm>
 #include <map>
 #include <string>
-#include <Learning/EvolutionLearningResult.hpp>
+#include <Learning/Evolution/EvolutionLearningResult.hpp>
 
 AbstractLearningResult* EvolutionLearningRule::getLearningResult()
 {

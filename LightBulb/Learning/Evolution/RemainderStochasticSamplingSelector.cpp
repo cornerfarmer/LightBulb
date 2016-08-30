@@ -66,7 +66,7 @@ void RemainderStochasticSamplingSelector::selectForRecombination(int recombinati
 RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
 {
 	withReplacement = withReplacement_;
-	randomFunction.reset(new RouletteWheelSelectionFunction());
+	setRandomFunction(new RouletteWheelSelectionFunction());
 }
 
 void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)

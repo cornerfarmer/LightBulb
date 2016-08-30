@@ -44,7 +44,7 @@ public:
 
 	double next()
 	{
-		return (float)(*this)() / max();
+		return (double)(*this)() / max();
 	}
 };
 

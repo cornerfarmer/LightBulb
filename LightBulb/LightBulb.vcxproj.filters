@@ -193,48 +193,6 @@
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\BackpropagationThroughTimeLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\CascadeCorrelationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\CounterpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\HopfieldLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\LVQ1LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\LVQ2LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\LVQ3LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\OLVQ1LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\RBFInterpolationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\RealTimeRecurrentLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\SchmidhuberLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\SingleLayerPerceptronLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\SOMLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -556,9 +514,6 @@
     <ClCompile Include="Graphics\DataTable.cpp">
       <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\AbstractEvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="Logging\AbstractLoggable.cpp">
       <Filter>Quelldateien\Logging</Filter>
     </ClCompile>
@@ -635,6 +590,54 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Supervised\RBFInterpolationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\BackpropagationThroughTimeLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\CascadeCorrelationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\CounterpropagationLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\HopfieldLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\LVQ1LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\LVQ2LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\LVQ3LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\OLVQ1LearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\RealTimeRecurrentLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\SchmidhuberLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\SingleLayerPerceptronLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\SOMLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Old %28not working%29\TruncatedBackpropagationThroughTimeLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Random\AbstractRandomGenerator.cpp" />
+    <ClCompile Include="Random\StandardRandomGenerator.cpp" />
+    <ClCompile Include="Random\AbstractRandomGeneratorUser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -764,48 +767,6 @@
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
     <ClInclude Include="Learning\AbstractLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\BackpropagationThroughTimeLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\CascadeCorrelationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\CounterpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\HopfieldLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LVQ1LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LVQ2LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\LVQ3LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\OLVQ1LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\RBFInterpolationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\RealTimeRecurrentLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\SchmidhuberLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\SingleLayerPerceptronLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\SOMLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\TruncatedBackpropagationThroughTimeLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
@@ -1141,9 +1102,6 @@
     <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\AbstractEvolutionLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractEvolutionObjectIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -1252,7 +1210,6 @@
     <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\NetworkGrowMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\AbstractLearningResult.hpp" />
-    <ClInclude Include="Learning\EvolutionLearningResult.hpp" />
     <ClInclude Include="Learning\Evolution\WeightDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp" />
@@ -1280,5 +1237,54 @@
     </ClInclude>
     <ClInclude Include="Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\EvolutionLearningResult.hpp" />
+    <ClInclude Include="Learning\Supervised\RBFInterpolationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\BackpropagationThroughTimeLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\CascadeCorrelationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\CounterpropagationLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\HopfieldLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\LVQ1LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\LVQ2LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\LVQ3LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\OLVQ1LearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\RealTimeRecurrentLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\SchmidhuberLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\SingleLayerPerceptronLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\SOMLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Old %28not working%29\TruncatedBackpropagationThroughTimeLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Random\AbstractRandomGenerator.hpp" />
+    <ClInclude Include="Random\StandardRandomGenerator.hpp" />
+    <ClInclude Include="Random\AbstractRandomGeneratorUser.hpp" />
   </ItemGroup>
 </Project>

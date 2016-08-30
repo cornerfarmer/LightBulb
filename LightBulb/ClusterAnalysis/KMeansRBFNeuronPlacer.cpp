@@ -10,6 +10,7 @@ void KMeansRBFNeuronPlacer::doPlacing(RBFNetwork &neuralNetwork, Teacher &teache
 	int clusterCount = neuralNetwork.getNeuronCountInLayer(1);
 	// Create a new KMeansClustering object which will do all hard work :)
 	KMeansClustering clustering;
+	clustering.setRandomGenerator(randomGenerator);
 
 	// Let the clustering algorithm calculate clusters from our teachingLessons
 	std::unique_ptr<std::list<Cluster>> clusters = clustering.doClustering(*getPointsFromTeachingLessons(teacher, neuralNetwork.getNeuronCountInLayer(0)).get(), clusterCount, neuralNetwork.getNeuronCountInLayer(0));

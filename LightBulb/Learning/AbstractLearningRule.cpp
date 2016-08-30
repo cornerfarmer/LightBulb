@@ -5,17 +5,17 @@
 #include "Teaching/Teacher.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "ActivationOrder/AbstractActivationOrder.hpp"
+#include "AbstractLearningResult.hpp"
+#include "Random/StandardRandomGenerator.hpp"
 // Library includes
 #include <iomanip>
-#include <iostream>
 #include <vector>
-#include <limits>
-#include <list>
-#include "AbstractLearningResult.hpp"
 
 AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 {
 	options.reset(options_);
+
+	randomGenerator.reset(new StandardRandomGenerator<>());
 
 	pauseRequest = false;
 }

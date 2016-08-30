@@ -16,7 +16,7 @@ void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& op
 	// Create a neural network from the network topolgy
 	neuralNetwork.reset(new NeuralNetwork(layeredNetwork));
 	// Randomize all weights (TODO: make the boundaries variable)
-	neuralNetwork->getNetworkTopology()->randomizeWeights(-0.5, 0.5);
+	neuralNetwork->getNetworkTopology()->randomizeWeights(randomGenerator, -0.5, 0.5);
 
 	// Initialize the mutation strength vector
 	resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
