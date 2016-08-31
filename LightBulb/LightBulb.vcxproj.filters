@@ -328,42 +328,6 @@
     <ClCompile Include="Teaching\TeachingLessonLinearInput.cpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\AbstractNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AbstractNetworkTopologyDrawer.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Arrow.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\CounterpropagationNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\FreeNetworkTopologyDrawer.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\GraphicObject.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\LayeredNetworkTopologyDrawer.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\LVQNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\NeuralNetworkResultChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\RBFNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\SOMMappingChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\SOMNetworkStructureChart.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
@@ -510,9 +474,6 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\DataTable.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Logging\AbstractLoggable.cpp">
       <Filter>Quelldateien\Logging</Filter>
@@ -904,42 +865,6 @@
     <ClInclude Include="Teaching\TeachingLessonLinearInput.hpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\AbstractNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AbstractNetworkTopologyDrawer.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Arrow.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\CounterpropagationNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\FreeNetworkTopologyDrawer.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\GraphicObject.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\LayeredNetworkTopologyDrawer.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\LVQNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\NeuralNetworkResultChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\RBFNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\SOMMappingChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\SOMNetworkStructureChart.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
@@ -1092,9 +1017,6 @@
     </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\DataTable.hpp">
-      <Filter>Quelldateien\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Learning\LearningState.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
