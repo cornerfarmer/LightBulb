@@ -47,6 +47,7 @@ void DQNLearningRule::initializeTry()
 
 void DQNLearningRule::initialize()
 {
+	getOptions()->gradientDecentOptions.gradientDecentAlgorithm = new RMSPropLearningRate(getOptions()->rmsPropOptions);
 	getOptions()->gradientDecentOptions.teacher = &teacher;
 	getOptions()->gradientDecentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
 	getOptions()->gradientDecentOptions.logger = NULL;

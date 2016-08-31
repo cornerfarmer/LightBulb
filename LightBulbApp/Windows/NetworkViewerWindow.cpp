@@ -6,6 +6,7 @@
 #include <wx/dataview.h>
 #include <wx/dcbuffer.h>
 
+
 BEGIN_EVENT_TABLE(NetworkViewerWindow, wxFrame)
 EVT_PAINT(NetworkViewerWindow::paintEvent)
 EVT_SIZE(NetworkViewerWindow::resize)

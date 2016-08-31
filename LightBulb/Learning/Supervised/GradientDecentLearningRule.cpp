@@ -81,6 +81,7 @@ void GradientDecentLearningRule::initializeTry()
 	}
 
 	// If used, initialize the learning rate helper
-	getOptions()->gradientDecentAlgorithm->initialize(*getOptions()->neuralNetwork);
+	if (!getOptions()->gradientDecentAlgorithm->isInitialized())
+		getOptions()->gradientDecentAlgorithm->initialize(*getOptions()->neuralNetwork);
 
 }

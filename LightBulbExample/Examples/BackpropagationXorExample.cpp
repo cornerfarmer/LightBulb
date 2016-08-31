@@ -10,6 +10,7 @@
 #include <TrainingPlans/DoublePreference.hpp>
 #include "Learning/Supervised/GradientDecentLearningRule.hpp"
 #include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
 
 
 #define PREFERENCE_LEARNINGRATE "Learning rate"
@@ -42,13 +43,15 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	gradientDecentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	gradientDecentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
 
+	RMSPropLearningRateOptions rmsPropLearningRateOptions;
+
 	GradientDecentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.teacher = teacher.get();
-	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
+	options.gradientDecentAlgorithm = new RMSPropLearningRate(rmsPropLearningRateOptions);
 	fillDefaultLearningRuleOptions(&options);
 
 	return new GradientDecentLearningRule(options);
