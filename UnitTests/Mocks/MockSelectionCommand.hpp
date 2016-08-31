@@ -11,6 +11,7 @@ class MockSelectionCommand : public AbstractSelectionCommand
 public:
 	MOCK_METHOD1(setLogger, void (AbstractLogger*));
 	MOCK_METHOD3(execute, void (std::vector<std::pair<double, AbstractEvolutionObject*>>*, std::vector<AbstractEvolutionObject*>*, std::vector<AbstractEvolutionObject*>*));
+	MOCK_METHOD1(setRandomGenerator, void (AbstractRandomGenerator*));
 };
 
 #endif

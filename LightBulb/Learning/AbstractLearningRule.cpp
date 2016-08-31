@@ -15,7 +15,7 @@ AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_
 {
 	options.reset(options_);
 
-	randomGenerator.reset(new StandardRandomGenerator<>());
+	randomGenerator.reset(new StandardRandomGenerator<>(options->seed));
 
 	pauseRequest = false;
 }

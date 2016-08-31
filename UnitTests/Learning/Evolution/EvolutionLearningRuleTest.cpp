@@ -51,6 +51,7 @@ public:
 		options.world = evolutionWorld;
 		options.logger = logger;
 		options.disabledDataSets[DATA_AVG_NEURON_COUNT] = true;
+		options.disabledDataSets[DATA_BEST_NEURON_COUNT] = true;
 
 		evolutionLearningRule = new EvolutionLearningRule(options);
 	}
@@ -110,8 +111,8 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		createExpectation = EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
-		EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));
 		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);
+		EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(false));
 		EXPECT_CALL(*selectionCommand, execute(&unseccessfullHighscore, &objects, testing::_)).Times(1);
 
 		// iteration 1
@@ -127,6 +128,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
+		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);
 		lastIterationExpectation = EXPECT_CALL(*exitCondition, evaluate(&unseccessfullHighscore, evolutionLearningRule)).WillOnce(testing::Return(true));
 	}
 

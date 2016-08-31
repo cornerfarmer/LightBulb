@@ -263,5 +263,8 @@
     <ClInclude Include="Mocks\MockLearningResult.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Mocks\MockRandomGenerator.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 #define _MOCKEVOLUTIONLEARNINGRULE_H_
 
 #include "gmock/gmock.h"
-#include <Learning/AbstractEvolutionLearningRule.hpp>
+#include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
 
 class MockEvolutionLearningRule : public AbstractEvolutionLearningRule
 {

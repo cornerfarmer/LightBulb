@@ -1,11 +1,11 @@
 #include "gtest/gtest.h"
-#include <Learning/BackpropagationLearningRule.hpp>
+#include <Learning/Supervised/GradientDecentLearningRule.hpp>
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <NeuralNetwork/NeuralNetworkIO.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
-#include <Function/FermiFunction.hpp>
-#include <Function/WeightedSumFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
@@ -13,10 +13,12 @@
 #include <Teaching/Teacher.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <Learning/AbstractLearningResult.hpp>
+#include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/ResilientLearningRate.hpp"
 
-class BackpropagationLearningRuleTest : public testing::Test {
+class GradientDecentLearningRuleTest : public testing::Test {
 public:
-	BackpropagationLearningRule* backpropagationLearningRule;
+	GradientDecentLearningRule* gradientDecentLearningRule;
 	NeuralNetwork* neuralNetwork;
 	Teacher* teacher;
 	void SetUp() {
@@ -47,12 +49,12 @@ public:
 		}
 	}
 	
-	BackpropagationLearningRuleOptions getDefaultOptions()
+	GradientDecentLearningRuleOptions getDefaultOptions()
 	{
-		BackpropagationLearningRuleOptions options;
+		GradientDecentLearningRuleOptions options;
 		options.maxIterationsPerTry = 1000000;
 		options.totalErrorGoal = 0.001f;
-		options.learningRate = 0.1;
+		options.seed = 1;
 
 		return options;
 	}
@@ -85,61 +87,64 @@ public:
 		EXPECT_NEAR(0, (*output)[0], 0.04);
 	}
 
-	virtual ~BackpropagationLearningRuleTest()
+	virtual ~GradientDecentLearningRuleTest()
 	{
-		delete backpropagationLearningRule;
+		delete gradientDecentLearningRule;
 		delete neuralNetwork;
 		delete teacher;
 	}
 };
 
-TEST_F(BackpropagationLearningRuleTest, doLearning)
+TEST_F(GradientDecentLearningRuleTest, doLearning)
 {
-	BackpropagationLearningRuleOptions options = getDefaultOptions();
-	options.weightDecayFac = 0;
-	options.momentum = false;
-	options.resilientLearningRate = false;
+	SimpleGradientDecentOptions gradientDecentOptions;
+	gradientDecentOptions.learningRate = 0.1;
+
+	GradientDecentLearningRuleOptions options = getDefaultOptions();
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
+	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
 
-	backpropagationLearningRule = new BackpropagationLearningRule(options);
+	gradientDecentLearningRule = new GradientDecentLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->start()->succeeded);
+	EXPECT_EQ(true, gradientDecentLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }
 
-TEST_F(BackpropagationLearningRuleTest, doLearningWithResilientLearningRate)
+TEST_F(GradientDecentLearningRuleTest, doLearningWithResilientLearningRate)
 {
-	BackpropagationLearningRuleOptions options = getDefaultOptions();
+	ResilientLearningRateOptions resilientLearningRateOptions;
+
+	GradientDecentLearningRuleOptions options = getDefaultOptions();
 	options.maxIterationsPerTry = 1000;
-	options.weightDecayFac = 0;
-	options.momentum = false;
-	options.resilientLearningRate = true;
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
+	options.offlineLearning = true;
+	options.gradientDecentAlgorithm = new ResilientLearningRate(resilientLearningRateOptions);
 
-	backpropagationLearningRule = new BackpropagationLearningRule(options);
+	gradientDecentLearningRule = new GradientDecentLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->start()->succeeded);
+	EXPECT_EQ(true, gradientDecentLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }
 
-TEST_F(BackpropagationLearningRuleTest, doLearningWithMomentum)
+TEST_F(GradientDecentLearningRuleTest, doLearningWithMomentum)
 {
-	srand(1);
-	BackpropagationLearningRuleOptions options = getDefaultOptions();
+	SimpleGradientDecentOptions gradientDecentOptions;
+	gradientDecentOptions.learningRate = 0.1;
+	gradientDecentOptions.momentum = 0.7;
+
+	GradientDecentLearningRuleOptions options = getDefaultOptions();
 	options.maxIterationsPerTry = 1000;
-	options.weightDecayFac = 0;
-	options.momentum = 0.7;
-	options.resilientLearningRate = true;
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
+	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
 
-	backpropagationLearningRule = new BackpropagationLearningRule(options);
+	gradientDecentLearningRule = new GradientDecentLearningRule(options);
 
-	EXPECT_EQ(true, backpropagationLearningRule->start()->succeeded);
+	EXPECT_EQ(true, gradientDecentLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }

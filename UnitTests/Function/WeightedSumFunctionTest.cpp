@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Function/WeightedSumFunction.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
 
 TEST(WeightedSumFunction, computeNetInputs)
 {

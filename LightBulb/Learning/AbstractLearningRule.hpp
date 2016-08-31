@@ -35,6 +35,8 @@ struct AbstractLearningRuleOptions
 
 	std::string dataSetsPrefix;
 
+	int seed;
+
 	AbstractLearningRuleOptions()
 	{
 		maxIterationsPerTry = 10000;
@@ -43,6 +45,7 @@ struct AbstractLearningRuleOptions
 		debugOutputInterval = 1000;	
 		dataSaveInterval = 1;
 		dataSetsPrefix = "";
+		seed = -1;
 	}
 	virtual ~AbstractLearningRuleOptions() {}
 };

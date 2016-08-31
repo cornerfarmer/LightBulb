@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
-#include "Function/FermiFunction.hpp"
-#include <Mocks/MockmutationSelector.hpp>
+#include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
 

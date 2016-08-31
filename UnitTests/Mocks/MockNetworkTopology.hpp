@@ -14,7 +14,6 @@ public:
 	MOCK_METHOD1(setInput, void(std::vector<double>& inputVector));
 	MOCK_METHOD1(getOutput, void(std::vector<double>& outputVector));
 	MOCK_METHOD0(getNeurons, std::vector<std::vector<StandardNeuron*>>*());
-	MOCK_METHOD2(randomizeWeights, void(double randStart, double randEnd));
 	MOCK_METHOD0(getEdgeCount, int());
 	MOCK_METHOD0(resetActivation, void());
 	MOCK_METHOD1(getAllNeuronOutputs, void(std::map<AbstractNeuron*, double>& neuronOutputs));
@@ -51,7 +50,8 @@ public:
 	MOCK_METHOD0(clone, AbstractNetworkTopology* ());
 	MOCK_METHOD0(getActivationsCopy, std::vector<Eigen::VectorXd> ());
 	MOCK_METHOD0(getNetInputs, std::vector<Eigen::VectorXd>* ());
-	MOCK_METHOD0(randomizeDependingOnWeightsSize, void ());
+	MOCK_METHOD3(randomizeWeights, void (AbstractRandomGenerator*, double, double));
+	MOCK_METHOD1(randomizeDependingOnWeightsSize, void (AbstractRandomGenerator*));
 };
 
 #endif

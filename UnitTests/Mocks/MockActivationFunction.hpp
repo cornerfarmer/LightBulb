@@ -4,7 +4,7 @@
 #define _MOCKACTIVATIONFUNCTION_H_
 
 #include "gmock/gmock.h"
-#include <Function/AbstractActivationFunction.hpp>
+#include <Function/ActivationFunction/AbstractActivationFunction.hpp>
 
 class MockActivationFunction : public AbstractActivationFunction
 {

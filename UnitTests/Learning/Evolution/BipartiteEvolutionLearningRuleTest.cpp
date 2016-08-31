@@ -1,11 +1,8 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "Function/FermiFunction.hpp"
 #include <Mocks/MockmutationSelector.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
-#include <Learning/AbstractLearningResult.hpp>
 #include <Mocks/MockLearningResult.hpp>
 
 using testing::Expectation;

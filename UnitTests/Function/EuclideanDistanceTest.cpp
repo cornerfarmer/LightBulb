@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Function/EuclideanDistance.hpp"
+#include "Function/InputFunction/EuclideanDistance.hpp"
 #include <math.h>
 
 TEST(EuclideanDistance, computeNetInputs)

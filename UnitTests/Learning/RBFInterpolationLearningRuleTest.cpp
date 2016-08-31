@@ -1,20 +1,13 @@
 #include "gtest/gtest.h"
-#include <Learning/BackpropagationLearningRule.hpp>
-#include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <NeuralNetwork/NeuralNetworkIO.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
-#include <Function/FermiFunction.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
-#include <Neuron/NeuronDescription.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <NetworkTopology/RBFNetwork.hpp>
 #include <Teaching/TeachingLessonLinearInput.hpp>
-#include <Learning/RBFInterpolationLearningRule.hpp>
+#include <Learning/Supervised/RBFInterpolationLearningRule.hpp>
 #include <ClusterAnalysis/KMeansRBFNeuronPlacer.hpp>
 #include <Learning/AbstractLearningResult.hpp>
 
@@ -55,6 +48,7 @@ public:
 		options.neuronPlacer = new KMeansRBFNeuronPlacer();
 		options.neuralNetwork = neuralNetwork;
 		options.teacher = teacher;
+		options.seed = 1;
 
 		return options;
 	}

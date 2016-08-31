@@ -3,9 +3,9 @@
 #include "IO/BrainJSExporter.hpp"
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Function/FermiFunction.hpp"
-#include "Function/WeightedSumFunction.hpp"
-#include "Function/IdentityFunction.hpp"
+#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "Function/ActivationFunction/IdentityFunction.hpp"
 #include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
 #include "Neuron/NeuronDescription.hpp"
 

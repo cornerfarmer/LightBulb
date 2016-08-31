@@ -201,6 +201,7 @@
     <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
     <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
     <ClInclude Include="Mocks\MockRandomFunction.hpp" />
+    <ClInclude Include="Mocks\MockRandomGenerator.hpp" />
     <ClInclude Include="Mocks\MockRecombinationAlgorithm.hpp" />
     <ClInclude Include="Mocks\MockRecombinationCommand.hpp" />
     <ClInclude Include="Mocks\MockRecombinationSelector.hpp" />
