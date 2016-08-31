@@ -5,3 +5,8 @@ void AbstractRandomGeneratorUser::setRandomGenerator(AbstractRandomGenerator* ra
 {
 	randomGenerator = randomGenerator_;
 }
+
+AbstractRandomGenerator* AbstractRandomGeneratorUser::getRandomGenerator()
+{
+	return randomGenerator;
+}

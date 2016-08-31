@@ -73,3 +73,9 @@ void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFun
 {
 	randomFunction.reset(randomFunction_);
 }
+
+void RemainderStochasticSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
+}

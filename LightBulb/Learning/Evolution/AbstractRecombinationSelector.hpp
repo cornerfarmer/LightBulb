@@ -3,18 +3,19 @@
 #ifndef _ABSTRACTRECOMBINATIONSELECTOR_H_
 #define _ABSTRACTRECOMBINATIONSELECTOR_H_
 
+// Includes
+#include "Random/AbstractRandomGeneratorUser.hpp"
+
 // Library includes
 #include <vector>
 #include <utility>
-#include <array>
 #include <map>
-#include <string>
 
 // Forward declarations
 class AbstractEvolutionObject;
 
 //
-class AbstractRecombinationSelector
+class AbstractRecombinationSelector : public AbstractRandomGeneratorUser
 {
 private:
 	std::vector<AbstractEvolutionObject*> selectedObjects;

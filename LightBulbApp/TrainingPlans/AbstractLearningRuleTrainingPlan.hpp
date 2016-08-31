@@ -33,6 +33,7 @@ public:
 	LearningState* getLearningState();
 	AbstractLearningResult* getLearningResult();
 	AbstractLearningRule* getLearningRule();
+	int getSeed();
 };
 
 #include "IO/AbstractLearningRuleTrainingPlanIO.hpp"

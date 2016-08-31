@@ -6,6 +6,7 @@
 AbstractReinforcementLearningRule::AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_)
 	: AbstractLearningRule(options_)
 {
+	options_->world->setRandomGenerator(randomGenerator.get());
 }
 
 

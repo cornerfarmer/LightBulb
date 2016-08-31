@@ -48,3 +48,8 @@ AbstractLearningRule* AbstractLearningRuleTrainingPlan::getLearningRule()
 {
 	return learningRule.get();
 }
+
+int AbstractLearningRuleTrainingPlan::getSeed()
+{
+	return learningRule->getSeed();
+}

@@ -16,7 +16,8 @@ RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearn
 	// Check if all given parameters are correct
 	if (!getOptions()->neuronPlacer)
 		throw new std::invalid_argument("The neuronPlacer in the given options cannot be null");
-
+	
+	getOptions()->neuronPlacer->setRandomGenerator(randomGenerator.get());
 	// Never do offlineLearning
 	getOptions()->offlineLearning = false;
 	// Do only one iteration

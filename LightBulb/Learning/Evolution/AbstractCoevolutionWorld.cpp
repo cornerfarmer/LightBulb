@@ -82,3 +82,9 @@ int AbstractCoevolutionWorld::getRoundCount()
 {
 	return 1;
 }
+
+void AbstractCoevolutionWorld::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	combiningStrategy->setRandomGenerator(randomGenerator_);
+}

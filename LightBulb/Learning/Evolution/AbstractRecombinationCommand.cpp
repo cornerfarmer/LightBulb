@@ -50,3 +50,9 @@ void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>
 		newObjectVector->back()->setEvolutionSource(Recombination);
 	}
 }
+
+void AbstractRecombinationCommand::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	recombinationAlgorithm->setRandomGenerator(randomGenerator_);
+}

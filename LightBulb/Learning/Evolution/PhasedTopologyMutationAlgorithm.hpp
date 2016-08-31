@@ -30,6 +30,8 @@ public:
 	void execute(AbstractEvolutionObject* object1);
 
 	void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 };
 
 #endif

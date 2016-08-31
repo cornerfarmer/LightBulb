@@ -40,10 +40,17 @@ void StochasticUniversalSamplingSelector::selectForRecombination(int recombinati
 
 StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector()
 {
-	randomFunction.reset(new RouletteWheelSelectionFunction());
+	setRandomFunction(new RouletteWheelSelectionFunction());
 }
 
 void StochasticUniversalSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
 {
 	randomFunction.reset(randomFunction_);
+}
+
+
+void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
 }

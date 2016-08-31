@@ -16,7 +16,8 @@ class AbstractRandomGeneratorUser
 protected:
 	AbstractRandomGenerator* randomGenerator;
 public:
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	virtual void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	AbstractRandomGenerator* getRandomGenerator();
 };
 
 #endif

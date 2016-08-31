@@ -61,7 +61,7 @@ protected:
 	bool hasLearningSucceeded();
 	EvolutionLearningRuleOptions* getOptions();
 	void doCalculationAfterLearningProcess();
-	void setLoggerToUsedObjects();
+	void setHelperToUsedObjects();
 	bool exitConditionReached;
 	AbstractLearningResult* getLearningResult();
 public:

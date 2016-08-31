@@ -22,7 +22,7 @@ enum EvolutionSource
 
 // This class describes an abstract object which "lives" inside an evolution world.
 // The evolution object contains a NN which should calculate the actions from external and internal inputs.
-class AbstractEvolutionObject : public AbstractRandomGeneratorUser
+class AbstractEvolutionObject
 {
 	template <class Archive>
 	friend void save(Archive& archive, AbstractEvolutionObject const& object);

@@ -72,3 +72,10 @@ void PhasedTopologyMutationAlgorithm::initialize(std::vector<std::pair<double, A
 		}
 	}
 }
+
+void PhasedTopologyMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	networkGrowMutationAlgorithm->setRandomGenerator(randomGenerator_);
+	magnitudeBasedPruningMutationAlgorithm->setRandomGenerator(randomGenerator_);
+}

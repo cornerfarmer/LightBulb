@@ -61,7 +61,7 @@ protected:
 
 	std::shared_ptr<LearningState> learningState;
 
-	std::unique_ptr<AbstractRandomGenerator> randomGenerator;
+	std::shared_ptr<AbstractRandomGenerator> randomGenerator;
 
 	virtual bool doIteration() = 0;
 	// This method will be called in front of the actual learning algorithm
@@ -101,6 +101,8 @@ public:
 	LearningState* getLearningState();
 
 	virtual std::vector<std::string> getDataSetLabels();
+
+	int getSeed();
 };
 
 #include "IO/AbstractLearningRuleIO.hpp"

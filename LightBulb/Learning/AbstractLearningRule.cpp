@@ -123,3 +123,8 @@ std::vector<std::string> AbstractLearningRule::getDataSetLabels()
 	std::vector<std::string> labels;
 	return labels;
 }
+
+int AbstractLearningRule::getSeed()
+{
+	return randomGenerator->getSeed();
+}

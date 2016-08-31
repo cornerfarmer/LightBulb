@@ -26,6 +26,7 @@ protected:
 public:
 	RemainderStochasticSamplingSelector(bool withReplacement_ = true);
 	void setRandomFunction(AbstractSelectionFunction* randomFunction);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 };
 
 #endif

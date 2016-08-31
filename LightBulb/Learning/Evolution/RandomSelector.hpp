@@ -24,6 +24,8 @@ protected:
 	void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
 public:
 	RandomSelector(AbstractRandomFunction* randomFunction_);
+
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 };
 
 #endif

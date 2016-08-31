@@ -627,6 +627,7 @@ void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPla
 	if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
 		detailsTextBox->WriteText("Network name: " + static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()->getName() + "\n");
 	detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
+	detailsTextBox->WriteText("Seed: " + std::to_string(trainingPlan->getSeed()) + "\n");
 	detailsTextBox->WriteText("Preferences:\n");
 	for (auto preference = trainingPlan->getPreferences().begin(); preference != trainingPlan->getPreferences().end(); preference++)
 	{

@@ -46,6 +46,7 @@ public:
 	std::vector<std::string> getDataSetLabels();
 	virtual bool isParasiteWorld();
 	virtual int getRoundCount();
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 };
 
 #include "IO/AbstractCoevolutionWorldIO.hpp"

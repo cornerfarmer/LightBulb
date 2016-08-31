@@ -34,3 +34,10 @@ void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>* new
 		(*counter)[*object]--;
 	}
 }
+
+void AbstractMutationCommand::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	mutationAlgorithm->setRandomGenerator(randomGenerator_);
+	mutationSelector->setRandomGenerator(randomGenerator_);
+}

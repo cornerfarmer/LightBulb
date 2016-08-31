@@ -25,6 +25,7 @@ protected:
 public:
 	StochasticUniversalSamplingSelector();
 	void setRandomFunction(AbstractSelectionFunction* randomFunction_);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 };
 
 #endif

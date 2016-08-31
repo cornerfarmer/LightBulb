@@ -110,3 +110,9 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 
 	
 }
+
+void MagnitudeBasedPruningMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	randomFunction.setRandomGenerator(randomGenerator_);
+}

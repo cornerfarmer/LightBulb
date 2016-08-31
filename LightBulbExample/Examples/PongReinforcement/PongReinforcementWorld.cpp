@@ -114,3 +114,9 @@ bool PongReinforcementWorld::isTerminalState()
 {
 	return game.whoHasWon() != 0 || time >= game.getProperties().maxTime;
 }
+
+void PongReinforcementWorld::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	game.setRandomGenerator(randomGenerator_);
+}

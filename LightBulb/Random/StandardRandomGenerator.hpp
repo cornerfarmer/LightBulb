@@ -9,7 +9,7 @@
 
 // Library Includes
 #include <random>
-#include <ctime>
+#include <chrono>
 
 // Forward declarations
 
@@ -22,10 +22,12 @@ protected:
 	std::uniform_real_distribution<double> uniformDistribution;
 public:
 
-	StandardRandomGenerator()
-		:generator(time(NULL))
+	StandardRandomGenerator(int seed_ = -1)
+		:generator(seed_)
 	{
-		
+		seed = seed_;
+		if (seed == -1)
+			setSeed(std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
 	}
 
 	double randDouble()

@@ -85,6 +85,7 @@ public:
 	std::chrono::duration<double> getRunTime();
 	std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
 	void setName(std::string newName);
+	virtual int getSeed() = 0;
 };
 
 #include "IO/AbstractTrainingPlanIO.hpp"
