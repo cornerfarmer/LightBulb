@@ -12,8 +12,8 @@
 #include <Teaching/Teacher.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <Function/FermiFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Learning/Evolution/TeachingEvolutionWorld.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Neuron/NeuronDescription.hpp>

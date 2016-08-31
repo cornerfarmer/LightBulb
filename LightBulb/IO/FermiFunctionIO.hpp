@@ -4,7 +4,7 @@
 #define _FERMIFUNCTIONIO_H_
 
 // Libary includes
-#include <Function/FermiFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
 
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>

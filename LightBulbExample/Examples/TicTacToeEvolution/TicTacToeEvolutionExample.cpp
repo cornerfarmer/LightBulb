@@ -9,7 +9,6 @@
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
-#include <Learning/Evolution/AbstractHallOfFameAlgorithm.hpp>
 #include <Examples/TicTacToeEvolution/TicTacToe.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
 #include <Learning/Evolution/PerfectObjectFoundCondition.hpp>
@@ -21,14 +20,12 @@
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <Function/BinaryFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
+#include <Function/ActivationFunction/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
-#include <Learning/Evolution/WeightDecayFitnessFunction.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
-#include <Learning/Evolution/NeuronDecayFitnessFunction.hpp>
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 #include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 

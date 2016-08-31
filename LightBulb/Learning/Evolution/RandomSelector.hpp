@@ -9,7 +9,7 @@
 // Includes
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "Function/AbstractRandomFunction.hpp"
+#include "Function/RandomFunction/AbstractRandomFunction.hpp"
 
 // Forward declarations
 

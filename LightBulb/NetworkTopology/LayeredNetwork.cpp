@@ -2,9 +2,9 @@
 #include "NetworkTopology/LayeredNetwork.hpp"
 #include "NeuronFactory/AbstractNeuronDescriptionFactory.hpp"
 #include "Neuron/NeuronDescription.hpp"
-#include "Function/AbstractActivationFunction.hpp"
-#include "Function/AbstractInputFunction.hpp"
-#include "Function/AbstractOutputFunction.hpp"
+#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "Function/InputFunction/AbstractInputFunction.hpp"
+#include "Function/OutputFunction/AbstractOutputFunction.hpp"
 // Library includes
 #include <exception>
 #include <math.h>

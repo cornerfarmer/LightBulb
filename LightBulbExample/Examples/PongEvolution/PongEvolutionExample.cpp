@@ -21,8 +21,8 @@
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <Function/BinaryFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
+#include <Function/ActivationFunction/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
@@ -31,8 +31,8 @@
 #include <Learning/Evolution/NeuronDecayFitnessFunction.hpp>
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 #include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
-#include <Function/FermiFunction.hpp>
-#include <Function/HyperbolicTangentFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
+#include <Function/ActivationFunction/HyperbolicTangentFunction.hpp>
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"

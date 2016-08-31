@@ -10,7 +10,7 @@
 
 // Includes
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Function/XorShfGenerator.hpp"
+#include "Random/XorShfGenerator.hpp"
 #include <random>
 
 // Forward declarations

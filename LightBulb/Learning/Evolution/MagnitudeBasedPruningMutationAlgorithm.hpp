@@ -8,7 +8,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include <Function/EqualRandomFunction.hpp>
+#include <Function/RandomFunction/EqualRandomFunction.hpp>
 
 // Forward declarations
 class AbstractEvolutionObject;

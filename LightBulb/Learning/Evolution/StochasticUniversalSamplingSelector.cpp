@@ -1,6 +1,6 @@
 // Includes
 #include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
-#include <Function/RouletteWheelSelectionFunction.hpp>
+#include <Function/SelectionFunction/RouletteWheelSelectionFunction.hpp>
 //Library includes
 #include <algorithm>
 

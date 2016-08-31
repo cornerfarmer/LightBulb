@@ -3,10 +3,10 @@
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Learning/Supervised/GradientDecentLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
-#include <Function/FermiFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 #include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"

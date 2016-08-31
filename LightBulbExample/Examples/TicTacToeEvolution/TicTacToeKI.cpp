@@ -1,12 +1,7 @@
 // Includes
 #include "Examples/TicTacToeEvolution/TicTacToeKI.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
-#include <Function/BinaryFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
 
 TicTacToeKI::TicTacToeKI(LayeredNetworkOptions& options, TicTacToe* ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)

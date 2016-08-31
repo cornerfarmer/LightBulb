@@ -4,8 +4,8 @@
 #define _NEURONDESCRIPTION_H_
 
 // Includes
-#include "Function/AbstractInputFunction.hpp"
-#include "Function/AbstractActivationFunction.hpp"
+#include "Function/InputFunction/AbstractInputFunction.hpp"
+#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 // Forward declarations
 

@@ -5,7 +5,7 @@
 
 // Libary includes
 #include <Neuron/NeuronDescription.hpp>
-#include "Function/IdentityFunction.hpp"
+#include "Function/ActivationFunction/IdentityFunction.hpp"
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 

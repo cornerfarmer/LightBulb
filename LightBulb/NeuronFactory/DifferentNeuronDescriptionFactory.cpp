@@ -1,6 +1,6 @@
 // Includes
 #include "NeuronFactory/DifferentNeuronDescriptionFactory.hpp"
-#include "Function/AbstractInputFunction.hpp"
+#include "Function/InputFunction/AbstractInputFunction.hpp"
 #include "Neuron/NeuronDescription.hpp"
 // Library includes
 

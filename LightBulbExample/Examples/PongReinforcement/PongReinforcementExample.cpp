@@ -4,15 +4,13 @@
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <Function/BinaryFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Learning/Reinforcement/PolicyGradientLearningRule.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementWorld.hpp"
-#include <Function/HyperbolicTangentFunction.hpp>
-#include <Function/FermiFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"

@@ -115,75 +115,6 @@
     <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClCompile>
-    <ClCompile Include="Function\AbstractActivationFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractInputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractNeighborhoodFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractOutputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\AbstractShrinkFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\BinaryFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\ConeFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\CosinusFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\CylinderFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\EqualRandomFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\EuclideanDistance.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\ExponentialShrinkFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\FermiFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\GaussianRBFFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\HyperbolicTangentFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\IdentityFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\MexicanHatFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\MinimumNetInputActivationFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\RankBasedRandomFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\RouletteWheelSelectionFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\WeightedSumFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\XorShfGenerator.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Function\ZigguratGenerator.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClCompile>
@@ -487,9 +418,6 @@
     <ClCompile Include="Event\AbstractObserver.cpp">
       <Filter>Quelldateien\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Function\AbstractSelectionFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
     <ClCompile Include="IO\LayeredNetworkIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
@@ -536,7 +464,6 @@
     <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\MonteCarloLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
-    <ClCompile Include="Function\RectifierFunction.cpp" />
     <ClCompile Include="Learning\Supervised\AbstractSupervisedLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
@@ -599,6 +526,80 @@
     <ClCompile Include="Random\AbstractRandomGenerator.cpp" />
     <ClCompile Include="Random\StandardRandomGenerator.cpp" />
     <ClCompile Include="Random\AbstractRandomGeneratorUser.cpp" />
+    <ClCompile Include="Function\ActivationFunction\AbstractActivationFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\InputFunction\AbstractInputFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\OutputFunction\AbstractOutputFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RandomFunction\AbstractRandomFunction.cpp" />
+    <ClCompile Include="Function\SelectionFunction\AbstractSelectionFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ShrinkFunction\AbstractShrinkFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\BinaryFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\NeighborhoodFunction\ConeFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\NeighborhoodFunction\CosinusFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\NeighborhoodFunction\CylinderFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RandomFunction\EqualRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\InputFunction\EuclideanDistance.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ShrinkFunction\ExponentialShrinkFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\FermiFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\GaussianRBFFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\HyperbolicTangentFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\IdentityFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\NeighborhoodFunction\MexicanHatFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\MinimumNetInputActivationFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\RandomFunction\RankBasedRandomFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\ActivationFunction\RectifierFunction.cpp" />
+    <ClCompile Include="Function\SelectionFunction\RouletteWheelSelectionFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Function\InputFunction\WeightedSumFunction.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Random\XorShfGenerator.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Random\ZigguratGenerator.cpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -654,75 +655,6 @@
     </ClInclude>
     <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
       <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractActivationFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractInputFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractNeighborhoodFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractOutputFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\AbstractShrinkFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\BinaryFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\ConeFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\CosinusFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\CylinderFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\EqualRandomFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\EuclideanDistance.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\ExponentialShrinkFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\FermiFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\GaussianRBFFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\HyperbolicTangentFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\IdentityFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\MexicanHatFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\MinimumNetInputActivationFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\RankBasedRandomFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\RouletteWheelSelectionFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\WeightedSumFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\XorShfGenerator.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\ZigguratGenerator.hpp">
-      <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
@@ -1045,9 +977,6 @@
     <ClInclude Include="Event\AbstractObserver.hpp">
       <Filter>Quelldateien\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Function\AbstractSelectionFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractSimpleEvolutionObjectIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -1143,7 +1072,6 @@
     <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\MonteCarloLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
-    <ClInclude Include="Function\RectifierFunction.hpp" />
     <ClInclude Include="Learning\Supervised\AbstractSupervisedLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
@@ -1208,5 +1136,79 @@
     <ClInclude Include="Random\AbstractRandomGenerator.hpp" />
     <ClInclude Include="Random\StandardRandomGenerator.hpp" />
     <ClInclude Include="Random\AbstractRandomGeneratorUser.hpp" />
+    <ClInclude Include="Function\ActivationFunction\AbstractActivationFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\InputFunction\AbstractInputFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\OutputFunction\AbstractOutputFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\RandomFunction\AbstractRandomFunction.hpp" />
+    <ClInclude Include="Function\SelectionFunction\AbstractSelectionFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ShrinkFunction\AbstractShrinkFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\BinaryFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\NeighborhoodFunction\ConeFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\NeighborhoodFunction\CosinusFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\NeighborhoodFunction\CylinderFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\RandomFunction\EqualRandomFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\InputFunction\EuclideanDistance.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ShrinkFunction\ExponentialShrinkFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\FermiFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\GaussianRBFFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\HyperbolicTangentFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\IdentityFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\NeighborhoodFunction\MexicanHatFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\MinimumNetInputActivationFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\RandomFunction\RankBasedRandomFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\ActivationFunction\RectifierFunction.hpp" />
+    <ClInclude Include="Function\SelectionFunction\RouletteWheelSelectionFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\InputFunction\WeightedSumFunction.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Random\ZigguratGenerator.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Random\XorShfGenerator.hpp">
+      <Filter>Quelldateien\Function</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

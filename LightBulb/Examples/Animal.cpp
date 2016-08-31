@@ -3,10 +3,10 @@
 #include "Examples/Nature.hpp"
 #include "Examples/AbstractTile.hpp"
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <Function/BinaryFunction.hpp>
+#include <Function/ActivationFunction/BinaryFunction.hpp>
 
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)

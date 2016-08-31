@@ -3,9 +3,9 @@
 #include "Examples/FunctionSimulator.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
-#include <Function/IdentityFunction.hpp>
+#include <Function/ActivationFunction/IdentityFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 
 

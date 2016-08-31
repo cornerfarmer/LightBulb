@@ -4,7 +4,7 @@
 #define _FERMIFUNCTIONIO_H_
 
 // Libary includes
-#include <Function/GaussianRBFFunction.hpp>
+#include <Function/ActivationFunction/GaussianRBFFunction.hpp>
 
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>

@@ -3,11 +3,12 @@
 #ifndef _ABSTRACTNETWORKTOPOLOGY_H_
 #define _ABSTRACTNETWORKTOPOLOGY_H_
 
+// Includes
+#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
+
 // Library includes
 #include <vector>
 #include <map>
-#include <Function/AbstractActivationFunction.hpp>
-#include <Function/AbstractActivationFunction.hpp>
 
 // Forward declarations
 class InputNeuron;

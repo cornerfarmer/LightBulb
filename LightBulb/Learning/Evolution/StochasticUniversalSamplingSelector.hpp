@@ -8,7 +8,7 @@
 // Includes
 #include "Learning/Evolution/AbstractMutationSelector.hpp"
 #include "Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "Function/AbstractSelectionFunction.hpp"
+#include "Function/SelectionFunction/AbstractSelectionFunction.hpp"
 #include <memory>
 
 // Forward declarations

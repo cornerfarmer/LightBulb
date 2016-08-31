@@ -1,10 +1,10 @@
 // Includes
 #include "NetworkTopology/RBFNetwork.hpp"
 #include "NeuronFactory/DifferentNeuronDescriptionFactory.hpp"
-#include "Function/EuclideanDistance.hpp"
-#include "Function/GaussianRBFFunction.hpp"
-#include "Function/WeightedSumFunction.hpp"
-#include "Function/IdentityFunction.hpp"
+#include "Function/InputFunction/EuclideanDistance.hpp"
+#include "Function/ActivationFunction//GaussianRBFFunction.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "Function/ActivationFunction/IdentityFunction.hpp"
 #include <Neuron/NeuronDescription.hpp>
 #include "Random/AbstractRandomGenerator.hpp"
 

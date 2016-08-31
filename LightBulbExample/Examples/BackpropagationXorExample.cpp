@@ -2,10 +2,10 @@
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
-#include <Function/FermiFunction.hpp>
+#include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 #include "Learning/Supervised/GradientDecentLearningRule.hpp"
@@ -43,15 +43,13 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	gradientDecentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	gradientDecentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
 
-	RMSPropLearningRateOptions rmsPropLearningRateOptions;
-
 	GradientDecentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.teacher = teacher.get();
-	options.gradientDecentAlgorithm = new RMSPropLearningRate(rmsPropLearningRateOptions);
+	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
 	fillDefaultLearningRuleOptions(&options);
 
 	return new GradientDecentLearningRule(options);

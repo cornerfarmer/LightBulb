@@ -3,8 +3,8 @@
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <Function/IdentityFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
+#include <Function/ActivationFunction/IdentityFunction.hpp>
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <Neuron/NeuronDescription.hpp>
 

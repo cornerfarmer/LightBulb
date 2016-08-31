@@ -7,7 +7,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractRecombinationCommand.hpp"
-#include "Function/RankBasedRandomFunction.hpp"
+#include "Function/RandomFunction/RankBasedRandomFunction.hpp"
 
 // Forward declarations
 

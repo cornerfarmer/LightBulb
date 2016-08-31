@@ -1,7 +1,7 @@
 // Includes
 #include "Teaching/TeachingLessonBooleanInput.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Function/AbstractActivationFunction.hpp"
+#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <exception>

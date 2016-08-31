@@ -8,7 +8,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "Function/ZigguratGenerator.hpp"
+#include "Random/ZigguratGenerator.hpp"
 
 // Forward declarations
 class AbstractEvolutionObject;

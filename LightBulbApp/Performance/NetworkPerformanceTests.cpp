@@ -1,8 +1,8 @@
 #include "NetworkPerformanceTests.hpp"
 #include <NetworkTopology/LayeredNetwork.hpp>
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
-#include <Function/WeightedSumFunction.hpp>
-#include <Function/BinaryFunction.hpp>
+#include <Function/InputFunction/WeightedSumFunction.hpp>
+#include <Function/ActivationFunction/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"

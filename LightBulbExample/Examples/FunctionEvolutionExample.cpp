@@ -1,15 +1,12 @@
 #include "FunctionEvolutionExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
-#include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
 #include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Learning/Evolution/ConstantRecombinationCommand.hpp>
 #include <Learning/Evolution/ConstantMutationCommand.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
 #include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
-#include <Function/EqualRandomFunction.hpp>
-#include <Learning/Evolution/RandomSelector.hpp>
 #include <Learning/Evolution/ConstantReuseCommand.hpp>
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Examples/FunctionSimulator.hpp>
