@@ -134,10 +134,10 @@ TEST_F(GradientDecentLearningRuleTest, doLearningWithMomentum)
 {
 	SimpleGradientDecentOptions gradientDecentOptions;
 	gradientDecentOptions.learningRate = 0.1;
-	gradientDecentOptions.momentum = 0.7;
+	gradientDecentOptions.momentum = 0.8;
 
 	GradientDecentLearningRuleOptions options = getDefaultOptions();
-	options.maxIterationsPerTry = 1000;
+	options.maxIterationsPerTry = 10000;
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
 	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);

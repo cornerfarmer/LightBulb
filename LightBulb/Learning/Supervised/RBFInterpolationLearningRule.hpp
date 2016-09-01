@@ -56,7 +56,6 @@ protected:
 	void initializeStartLearningAlgoritm();
 	AbstractActivationOrder* getNewActivationOrder();
 	std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap);
-	void initializeLayerCalculation(AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ErrorMap_t* errormap);
 	void initializeTry();
 public:
 	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);

@@ -72,6 +72,22 @@ std::vector<Eigen::MatrixXd> RBFInterpolationLearningRule::calculateDeltaWeight(
 {
 	std::vector<Eigen::MatrixXd> deltaWeight(getCurrentNetworkTopology()->getLayerCount() - 1);
 	for (int layerIndex = getCurrentNetworkTopology()->getLayerCount() - 1; layerIndex > 0; layerIndex--) {
+
+		// Only change weights in the last layer
+		if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
+		{
+			// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
+			for (int i = 0; i < t->cols(); i++) {
+				(*t)(lessonIndex, i) = lesson.getTeachingInput(getCurrentNetworkTopology()->getOutputActivationFunction())->get(0, i);
+			}
+
+			if (lessonIndex == t->rows() - 1)
+			{
+				// Do the magic: Multiplicate the inversed matrix with the techingInputs of the current neuron
+				w.reset(new MatrixXd(((*mInverse) * *t).transpose()));
+			}
+		}
+
 		// Only change weights in the last layer
 		if (lessonIndex == getOptions()->teacher->getTeachingLessons()->size() - 1 && layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
 			deltaWeight[layerIndex - 1] = (*w);
@@ -79,24 +95,6 @@ std::vector<Eigen::MatrixXd> RBFInterpolationLearningRule::calculateDeltaWeight(
 			deltaWeight[layerIndex - 1] = Eigen::MatrixXd::Zero(w->rows(), w->cols());
 	}
 	return deltaWeight;
-}
-
-void RBFInterpolationLearningRule::initializeLayerCalculation(class AbstractTeachingLesson& lesson, int lessonIndex, int layerIndex, ::ErrorMap_t* errormap)
-{
-	// Only change weights in the last layer
-	if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
-	{
-		// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
-		for (int i = 0; i < t->cols(); i++) {
-			(*t)(lessonIndex, i) = lesson.getTeachingInput(getCurrentNetworkTopology()->getOutputActivationFunction())->get(0, i);
-		}
-
-		if (lessonIndex == t->rows() - 1)
-		{
-			// Do the magic: Multiplicate the inversed matrix with the techingInputs of the current neuron
-			w.reset(new MatrixXd(((*mInverse) * *t).transpose()));
-		}
-	}
 }
 
 void RBFInterpolationLearningRule::initializeTry()
