@@ -11,10 +11,10 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "IO/UseParentSerialization.hpp"
 
-struct LayeredNetworkOptions;
+struct FeedForwardNetworkTopologyOptions;
 // Forward declarations
 class EvolutionLearningRule;
-class RecurrentLayeredNetworkOptions;
+class RecurrentFeedForwardNetworkTopologyOptions;
 class AbstractEvolutionWorld;
 class AbstractNeuronDescriptionFactory;
 
@@ -42,7 +42,7 @@ protected:
 	// This method should interpret and act depending on the given NN output
 	virtual void interpretNNOutput(std::vector<double>& output) = 0;
 
-	void buildNeuralNetwork(LayeredNetworkOptions &options);
+	void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 public:	
 	// Create a new evolution object with the given input and output NN size
 	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world);

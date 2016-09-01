@@ -4,7 +4,7 @@
 
 //Library includes
 
-SimpleReinforcementWorld::SimpleReinforcementWorld(LayeredNetworkOptions& options_, bool epsilonGreedly, double epsilon)
+SimpleReinforcementWorld::SimpleReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
 	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
 {
 	posX = 0;

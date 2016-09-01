@@ -31,7 +31,7 @@ void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
 
 	}
 
-	auto weights = object1->getNeuralNetwork()->getNetworkTopology()->getWeights();
+	auto weights = object1->getNeuralNetwork()->getNetworkTopology()->getAllWeights();
 	int mutationStrengthIndex = 0;
 	// Go through all edges
 	for (auto layer = weights->begin(); layer != weights->end(); layer++)

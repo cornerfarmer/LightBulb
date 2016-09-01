@@ -4,7 +4,7 @@
 
 //Library includes
 
-PongReinforcementWorld::PongReinforcementWorld(LayeredNetworkOptions& options_, bool epsilonGreedly, double epsilon)
+PongReinforcementWorld::PongReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
 	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
 {
 	watchMode = false;

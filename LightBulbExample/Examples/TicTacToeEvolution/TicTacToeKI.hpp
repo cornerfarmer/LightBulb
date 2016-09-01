@@ -21,7 +21,7 @@ protected:
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<double>& output);
 public:	
-	TicTacToeKI(LayeredNetworkOptions& options, TicTacToe* ticTacToe_ = NULL);
+	TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = NULL);
 	TicTacToeKI() = default;
 	~TicTacToeKI();
 	void setTicTacToe(TicTacToe* newTicTacToe);

@@ -5,7 +5,7 @@
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include "MountainCarWorld.hpp"
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
@@ -53,7 +53,7 @@ AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 
 MountainCarWorld* MountainCarDQNExample::createWorld()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
 	options.neuronsPerLayerCount.push_back(2);

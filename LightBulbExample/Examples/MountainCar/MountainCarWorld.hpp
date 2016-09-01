@@ -28,7 +28,7 @@ protected:
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<bool>& output);
 public:
-	MountainCarWorld(LayeredNetworkOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	MountainCarWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	MountainCarWorld() = default;
 	double doSimulationStep();
 	std::vector<std::string> getDataSetLabels();

@@ -187,6 +187,7 @@
     <ClInclude Include="Mocks\MockCreationCommand.hpp" />
     <ClInclude Include="Mocks\MockHallOfFameAlgorithm.hpp" />
     <ClInclude Include="Mocks\MockLearningResult.hpp" />
+    <ClInclude Include="Mocks\MockNeuronDescription.hpp" />
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockEvolutionObject.hpp" />
@@ -198,7 +199,7 @@
     <ClInclude Include="Mocks\MockMutationCommand.hpp" />
     <ClInclude Include="Mocks\MockMutationSelector.hpp" />
     <ClInclude Include="Mocks\MockNetworkTopology.hpp" />
-    <ClInclude Include="Mocks\MockLayeredNetwork.hpp" />
+    <ClInclude Include="Mocks\MockFeedForwardNetworkTopology.hpp" />
     <ClInclude Include="Mocks\MockNeuralNetwork.hpp" />
     <ClInclude Include="Mocks\MockRandomFunction.hpp" />
     <ClInclude Include="Mocks\MockRandomGenerator.hpp" />

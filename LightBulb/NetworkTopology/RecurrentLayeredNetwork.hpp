@@ -1,14 +1,14 @@
 #pragma once
 
-#ifndef _RECURRENTLAYEREDNETWORK_H_
-#define _RECURRENTLAYEREDNETWORK_H_
+#ifndef _RECURRENTFeedForwardNetworkTopology_H_
+#define _RECURRENTFeedForwardNetworkTopology_H_
 
 // Includes
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NetworkTopology/RecurrentNetworkInterface.hpp"
 
-// This struct contains all options needed to build a RecurrentLayeredNetwork
-struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
+// This struct contains all options needed to build a RecurrentFeedForwardNetworkTopology
+struct RecurrentFeedForwardNetworkTopologyOptions : public FeedForwardNetworkTopologyOptions
 {	
 	// Enables edges from the output neurons to the first hidden layer neurons 
 	bool connectOutputWithInnerNeurons;
@@ -16,7 +16,7 @@ struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
 	bool selfConnectHiddenLayers;
 	// Enables edges between all neurons inside the output layer
 	bool selfConnectOutputLayers;
-	RecurrentLayeredNetworkOptions()
+	RecurrentFeedForwardNetworkTopologyOptions()
 	{
 		connectOutputWithInnerNeurons = false;
 		selfConnectHiddenLayers = false;
@@ -24,19 +24,19 @@ struct RecurrentLayeredNetworkOptions : public LayeredNetworkOptions
 	}
 };
 
-// A RecurrentLayeredNetwork describes a LayeredNetwork with recurrent connections
-class RecurrentLayeredNetwork : public LayeredNetwork, public RecurrentNetworkInterface
+// A RecurrentFeedForwardNetworkTopology describes a FeedForwardNetworkTopology with recurrent connections
+class RecurrentFeedForwardNetworkTopology : public FeedForwardNetworkTopology, public RecurrentNetworkInterface
 {
 private:	
 	// Build all recurrent connections
 	void buildRecurrentConnections();
-	// Returns our current options in form of a RecurrentLayeredNetworkOptions object
-	RecurrentLayeredNetworkOptions* getOptions();
+	// Returns our current options in form of a RecurrentFeedForwardNetworkTopologyOptions object
+	RecurrentFeedForwardNetworkTopologyOptions* getOptions();
 public:
-	RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_);		
+	RecurrentFeedForwardNetworkTopology(RecurrentFeedForwardNetworkTopologyOptions& options_);		
 	// Inherited:
-	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
+	std::unique_ptr<FeedForwardNetworkTopology> unfold(int instanceCount);
 	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
-	void horizontalMergeWith(RecurrentLayeredNetwork& otherNetwork);
+	void horizontalMergeWith(RecurrentFeedForwardNetworkTopology& otherNetwork);
 };
 #endif

@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/TrainingController.hpp"
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include "TrainingWindow.hpp"
 #include <Repositories/NeuralNetworkRepository.hpp>

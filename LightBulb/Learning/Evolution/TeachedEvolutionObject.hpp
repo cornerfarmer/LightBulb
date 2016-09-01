@@ -12,7 +12,7 @@
 // Forward declarations
 class EvolutionLearningRule;
 class TeachingEvolutionWorld;
-class LayeredNetworkOptions;
+class FeedForwardNetworkTopologyOptions;
 
 // A evolution object used in the TeachingEvolutionWorld
 class TeachedEvolutionObject : public AbstractEvolutionObject
@@ -32,7 +32,7 @@ protected:
 	double currentWeightDecayError;
 public:	
 	// Create a new evolution object in the given world and with a NN built after the given network options
-	TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, LayeredNetworkOptions& options);
+	TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
 	TeachedEvolutionObject() = default;
 	double getCurrentTotalError();
 	double getCurrentTeachingError();

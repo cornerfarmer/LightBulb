@@ -171,6 +171,7 @@
     <ClCompile Include="Function\ActivationFunction\RectifierFunction.cpp" />
     <ClCompile Include="Function\SelectionFunction\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\InputFunction\WeightedSumFunction.cpp" />
+    <ClCompile Include="NetworkTopology\AbstractFeedForwardNetworkTopology.cpp" />
     <ClCompile Include="Random\XorShfGenerator.cpp" />
     <ClCompile Include="Random\ZigguratGenerator.cpp" />
     <ClCompile Include="IO\AbstractExporter.cpp" />
@@ -455,21 +456,23 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp" />
+    <ClCompile Include="NetworkTopology\FeedForwardNetworkTopology.cpp" />
     <ClCompile Include="NetworkTopology\FreeNetwork.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\GridStructure.cpp" />
+    <ClCompile Include="NetworkTopology\GridStructure.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\LayeredNetwork.old..cpp">
+    <ClCompile Include="NetworkTopology\LineStructure.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\LineStructure.cpp" />
     <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -682,6 +685,7 @@
     <ClInclude Include="Function\ActivationFunction\RectifierFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\InputFunction\WeightedSumFunction.hpp" />
+    <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
     <ClInclude Include="Random\XorShfGenerator.hpp" />
     <ClInclude Include="Random\ZigguratGenerator.hpp" />
     <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp" />
@@ -717,7 +721,7 @@
     <ClInclude Include="IO\JSONNumberElement.hpp" />
     <ClInclude Include="IO\JSONObject.hpp" />
     <ClInclude Include="IO\JSONStringElement.hpp" />
-    <ClCompile Include="IO\LayeredNetworkIO.hpp">
+    <ClCompile Include="IO\FeedForwardNetworkTopologyIO.hpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
     <ClInclude Include="IO\NeuronDescriptionIO.hpp" />
@@ -1002,21 +1006,23 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp" />
+    <ClInclude Include="NetworkTopology\FeedForwardNetworkTopology.hpp" />
     <ClInclude Include="NetworkTopology\FreeNetwork.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\GridStructure.hpp" />
+    <ClInclude Include="NetworkTopology\GridStructure.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\LayeredNetwork.old.hpp">
+    <ClInclude Include="NetworkTopology\LineStructure.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\LineStructure.hpp" />
     <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

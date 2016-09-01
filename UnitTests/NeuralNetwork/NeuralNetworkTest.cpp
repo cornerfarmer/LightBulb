@@ -106,21 +106,3 @@ TEST_F(NeuralNetworkTest, calculateWithTimeStepCount)
 
 	neuralNetwork->calculate(input, output, *activationOrder, 1, 1);
 }
-
-TEST_F(NeuralNetworkTest, calculateWithOutputValues)
-{
-	std::vector<std::vector<double>> input(1, std::vector<double>(3));
-	std::vector<std::vector<double>> output(1, std::vector<double>(2));
-	std::vector<std::map<AbstractNeuron*, double>> outputValuesInTime(1);
-	std::vector<std::map<AbstractNeuron*, double>> netInputValuesInTime(1);
-
-	Expectation resetActivation = EXPECT_CALL(*networkTopology, resetActivation()).Times(1);
-	Expectation setInput = EXPECT_CALL(*networkTopology, setInput(input[0])).Times(1).After(resetActivation);
-	Expectation executeActivation = EXPECT_CALL(*activationOrder, executeActivation(testing::Ref(*networkTopology))).Times(1).After(setInput);
-	Expectation getOutput = EXPECT_CALL(*networkTopology, getOutput(output[0])).Times(1).After(executeActivation);
-
-	Expectation getAllNeuronOutputs = EXPECT_CALL(*networkTopology, getAllNeuronOutputs(outputValuesInTime[0])).Times(1).After(getOutput);
-	Expectation getAllNetInputs = EXPECT_CALL(*networkTopology, getAllNeuronNetInputs(netInputValuesInTime[0])).Times(1).After(getAllNeuronOutputs);
-
-	neuralNetwork->calculate(input, output, *activationOrder, 0, -1, &outputValuesInTime, &netInputValuesInTime);
-}

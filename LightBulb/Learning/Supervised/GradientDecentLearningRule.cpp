@@ -3,7 +3,7 @@
 #include "Teaching/Teacher.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "GradientDecentAlgorithms/AbstractGradientDecentAlgorithm.hpp"
 #include "GradientCalculation/AbstractGradientCalculation.hpp"

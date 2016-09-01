@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include "Function/InputFunction/WeightedSumFunction.hpp"
 #include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
@@ -21,19 +21,19 @@ public:
 
 TEST_F(RBFNetworkTest, createSimpleNetwork)
 {
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(2, (*netInputs)[0].rows());
 	EXPECT_EQ(3, (*netInputs)[1].rows());
 	EXPECT_EQ(1, (*netInputs)[2].rows());
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(2, (*activations)[0]->rows());
 	EXPECT_EQ(3, (*activations)[1]->rows());
 	EXPECT_EQ(1, (*activations)[2]->rows());
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
 	EXPECT_EQ(3, (*weights)[0].rows());
 	EXPECT_EQ(2, (*weights)[0].cols());

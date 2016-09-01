@@ -164,9 +164,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mocks\MockLayeredNetwork.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Mocks\MockNetworkTopology.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -264,6 +261,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockRandomGenerator.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockFeedForwardNetworkTopology.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockNeuronDescription.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

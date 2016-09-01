@@ -27,7 +27,7 @@ void SimpleGradientDecent::initializeAlgorithm(AbstractNeuralNetwork &neuralNetw
 	if (getOptions()->momentum > 0)
 	{
 		// Initialize the learningRates map
-		previousDeltaWeights = *neuralNetwork.getNetworkTopology()->getWeights();
+		previousDeltaWeights = *neuralNetwork.getNetworkTopology()->getAllWeights();
 		for (int i = 0; i < previousDeltaWeights.size(); i++)
 		{
 			previousDeltaWeights[i].setZero();

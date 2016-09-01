@@ -255,14 +255,14 @@
           </nestedChildShapes>
         </classShape>
         <classShape Id="4f6eda0e-8258-4966-875d-44de32ab9486" absoluteBounds="16.625, 3.375, 2.5, 1.5081481095155072" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
-          <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="LayeredNetwork" />
+          <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="FeedForwardNetworkTopology" />
           <nestedChildShapes>
             <AttributeElementListCompartment Id="ef127fbe-0417-4dce-bf18-bc70898f3a6e" absoluteBounds="16.64, 3.89033563931783, 2.4699999999999998, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
             <OperationElementListCompartment Id="59c886b4-4fd0-4016-ae5c-d88c39c6105c" absoluteBounds="16.64, 4.2616637519001959, 2.4699999999999998, 0.52148435761531187" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </classShape>
         <classShape Id="228b726f-dedf-4769-b911-29610498e512" absoluteBounds="17.25, 1, 2.5, 1.8284605995814016" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
-          <classMoniker Id="5b27932e-59dc-41be-b7d2-730ca5529f70" LastKnownName="LayeredNetworkOptions" />
+          <classMoniker Id="5b27932e-59dc-41be-b7d2-730ca5529f70" LastKnownName="FeedForwardNetworkTopologyOptions" />
           <nestedChildShapes>
             <AttributeElementListCompartment Id="24a36221-95fe-4745-85e3-1a9f11fc2f8e" absoluteBounds="17.265, 1.5153356393178306, 2.4699999999999998, 1.0019530927141505" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
             <OperationElementListCompartment Id="78349423-6a6f-424c-b740-12d682643a79" absoluteBounds="17.265, 2.5272887320319812, 2.4699999999999998, 0.20117186754942007" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
@@ -276,7 +276,7 @@
           </nestedChildShapes>
         </classShape>
         <classShape Id="cd287328-cbb2-4a68-99c2-1235d3008ab6" absoluteBounds="20.375, 4.625, 1.5, 1.0624999801317854" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
-          <classMoniker Id="a0ff69b2-1e77-4153-88a8-be3407345e79" LastKnownName="RecurrentLayeredNetwork" />
+          <classMoniker Id="a0ff69b2-1e77-4153-88a8-be3407345e79" LastKnownName="RecurrentFeedForwardNetworkTopology" />
           <nestedChildShapes>
             <AttributeElementListCompartment Id="d3a78067-98c6-4b21-a6fe-a9dd1caf38a0" absoluteBounds="20.39, 5.015, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
             <OperationElementListCompartment Id="f71bdc4d-d95e-4063-ad2c-f7e7a3dbd7e6" absoluteBounds="20.39, 5.22617186754942, 1.4700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />

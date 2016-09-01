@@ -1,20 +1,19 @@
 // Includes
 #include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
-#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "AbstractEvolutionWorld.hpp"
 
 
 
-void AbstractSimpleEvolutionObject::buildNeuralNetwork(LayeredNetworkOptions& options)
+void AbstractSimpleEvolutionObject::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
 {
 	// Create a new network topology from the adjusted options.
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
+	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
 
 	// Create a neural network from the network topolgy
-	neuralNetwork.reset(new NeuralNetwork(layeredNetwork));
+	neuralNetwork.reset(new NeuralNetwork(networkTopology));
 	// Randomize all weights (TODO: make the boundaries variable)
 	neuralNetwork->getNetworkTopology()->randomizeWeights(world->getRandomGenerator(), -0.5, 0.5);
 

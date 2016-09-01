@@ -23,7 +23,7 @@ ResilientLearningRateOptions* ResilientLearningRate::getOptions()
 void ResilientLearningRate::initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork)
 {
 	// Make sure the previous learning rates map is empty
-	previousLearningRates = *neuralNetwork.getNetworkTopology()->getWeights();
+	previousLearningRates = *neuralNetwork.getNetworkTopology()->getAllWeights();
 	for (int i = 0; i < previousLearningRates.size(); i++)
 	{
 		previousLearningRates[i].setConstant(getOptions()->learningRateStart);

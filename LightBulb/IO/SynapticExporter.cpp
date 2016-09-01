@@ -1,7 +1,7 @@
 // Includes
 #include "IO/SynapticExporter.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "IO/JSONObject.hpp"
 #include "IO/JSONArray.hpp"
 #include "IO/JSONNumberElement.hpp"
@@ -9,7 +9,7 @@
 
 std::string SynapticExporter::execute(NeuralNetwork* neuralNetwork)
 {
-	layeredNetwork = dynamic_cast<LayeredNetwork*>(neuralNetwork->getNetworkTopology());
+	networkTopology = dynamic_cast<FeedForwardNetworkTopology*>(neuralNetwork->getNetworkTopology());
 
 	std::unique_ptr<JSONObject> jsonObject(getNetworkJSONObject());
 	return jsonObject->toString();
@@ -28,9 +28,9 @@ JSONObject* SynapticExporter::getNetworkJSONObject()
 JSONAttribute* SynapticExporter::getNeuronsAttribute()
 {
 	JSONArray* neurons = new JSONArray();
-	for (int l = 0; l < layeredNetwork->getLayerCount(); l++)
+	for (int l = 0; l < networkTopology->getLayerCount(); l++)
 	{
-		int neuronCount = layeredNetwork->getNeuronCountInLayer(l);
+		int neuronCount = networkTopology->getNeuronCountsPerLayer()[l];
 		for (int n = 0; n < neuronCount; n++)
 		{
 			neurons->addElement(getNeuronJSONObject(l, n));
@@ -58,7 +58,7 @@ JSONAttribute* SynapticExporter::getNeuronBiasAttribute(int layerIndex, int neur
 	double bias = 0;
 	if (layerIndex > 0)
 	{
-		bias = layeredNetwork->getBiasWeightOfNeuron(layerIndex, neuronIndex);
+		bias = networkTopology->getBiasWeightOfNeuron(layerIndex, neuronIndex);
 	}
 	return new JSONAttribute("bias", new JSONNumberElement<double>(bias));
 }
@@ -69,7 +69,7 @@ JSONAttribute* SynapticExporter::getNeuronLayerAttribute(int layerIndex, int neu
 	if (layerIndex == 0) {
 		layer = "input";
 	}
-	else if (layerIndex == layeredNetwork->getLayerCount() - 1) {
+	else if (layerIndex == networkTopology->getLayerCount() - 1) {
 		layer = "output";
 	}
 	else {
@@ -82,9 +82,9 @@ JSONAttribute* SynapticExporter::getConnectionsAttribute()
 {
 	JSONArray* connections = new JSONArray();
 	
-	for (int layerIndex = 1; layerIndex < layeredNetwork->getLayerCount(); layerIndex++)
+	for (int layerIndex = 1; layerIndex < networkTopology->getLayerCount(); layerIndex++)
 	{
-		weights = &(*layeredNetwork->getWeights())[layerIndex - 1];
+		weights = &(*networkTopology->getAllWeights())[layerIndex - 1];
 		for (int sourceNeuronIndex = 0; sourceNeuronIndex < weights->cols() - 1; sourceNeuronIndex++)
 		{
 			for (int destinationNeuronIndex = 0; destinationNeuronIndex < weights->rows(); destinationNeuronIndex++)
@@ -127,7 +127,7 @@ int SynapticExporter::getTotalIndexOfNeuron(int layerIndex, int neuronIndex)
 	int totalIndex = 0;
 	for (int l = 0; l < layerIndex; l++)
 	{
-		totalIndex += layeredNetwork->getNeuronCountInLayer(l);
+		totalIndex += networkTopology->getNeuronCountsPerLayer()[l];
 	}
 	return totalIndex + neuronIndex;
 }

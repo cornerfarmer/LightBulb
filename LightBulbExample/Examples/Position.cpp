@@ -4,7 +4,7 @@
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Function/ActivationFunction/IdentityFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
 
@@ -15,7 +15,7 @@ Position::Position(FunctionSimulator* functionSimulator_)
 	functionSimulator = functionSimulator_;
 	position.resize(2);
 
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.useBiasNeuron = false;
 	options.neuronsPerLayerCount.push_back(1);
 	options.neuronsPerLayerCount.push_back(2);

@@ -7,7 +7,7 @@
     <packageHasNamedElement>
       <class
         Id="c7be55b4-1061-4dbe-9378-89b17394e305"
-        name="LayeredNetworkOptions"
+        name="FeedForwardNetworkTopologyOptions"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -401,7 +401,7 @@
     <packageHasNamedElement>
       <class
         Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-        name="LayeredNetwork"
+        name="FeedForwardNetworkTopology"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -519,7 +519,7 @@
             isAbstract="false">
             <classMoniker
               Id="c7be55b4-1061-4dbe-9378-89b17394e305"
-              LastKnownName="LayeredNetworkOptions"
+              LastKnownName="FeedForwardNetworkTopologyOptions"
               LastKnownLocation="Package_1252.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -564,7 +564,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="c7be55b4-1061-4dbe-9378-89b17394e305"
-                LastKnownName="LayeredNetworkOptions"
+                LastKnownName="FeedForwardNetworkTopologyOptions"
                 LastKnownLocation="Package_1252.uml" />
             </type_NamedElement>
           </property>
@@ -572,7 +572,7 @@
         <ownedOperationsInternal>
           <operation
             Id="e8695ddf-2c16-4ce8-a544-f5c554263290"
-            name="LayeredNetwork"
+            name="FeedForwardNetworkTopology"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -631,7 +631,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="c7be55b4-1061-4dbe-9378-89b17394e305"
-                      LastKnownName="LayeredNetworkOptions"
+                      LastKnownName="FeedForwardNetworkTopologyOptions"
                       LastKnownLocation="Package_1252.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -1049,7 +1049,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-                      LastKnownName="LayeredNetwork"
+                      LastKnownName="FeedForwardNetworkTopology"
                       LastKnownLocation="Package_1252.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -1072,7 +1072,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-              LastKnownName="LayeredNetwork"
+              LastKnownName="FeedForwardNetworkTopology"
               LastKnownLocation="Package_1252.uml" />
           </generalization>
         </generalsInternal>
@@ -1081,7 +1081,7 @@
     <packageHasNamedElement>
       <class
         Id="c15ca439-ee38-4dd7-94a1-54ab9d253bf3"
-        name="RecurrentLayeredNetwork"
+        name="RecurrentFeedForwardNetworkTopology"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -1100,7 +1100,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-              LastKnownName="LayeredNetwork"
+              LastKnownName="FeedForwardNetworkTopology"
               LastKnownLocation="Package_1252.uml" />
           </generalization>
         </generalsInternal>
@@ -1122,7 +1122,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-                      LastKnownName="LayeredNetwork"
+                      LastKnownName="FeedForwardNetworkTopology"
                       LastKnownLocation="Package_1252.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -1156,7 +1156,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe"
-                      LastKnownName="LayeredNetwork"
+                      LastKnownName="FeedForwardNetworkTopology"
                       LastKnownLocation="Package_1252.uml" />
                   </type_NamedElement>
                 </parameter>

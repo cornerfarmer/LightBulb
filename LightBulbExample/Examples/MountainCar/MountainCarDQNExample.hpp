@@ -8,7 +8,7 @@
 
 class MountainCarWorld;
 class AbstractReinforcementWorld;
-struct LayeredNetworkOptions;
+struct FeedForwardNetworkTopologyOptions;
 
 class MountainCarDQNExample : public AbstractLearningRuleTrainingPlan
 {

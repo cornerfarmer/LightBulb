@@ -5,6 +5,7 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <math.h>
+#include "Neuron/NeuronDescription.hpp"
 
 std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {
@@ -29,7 +30,7 @@ std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(AbstractNeuralNe
 std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError)
 {
 	// Get the teachingInput
-	NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputActivationFunction());
+	NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
 
 	// Create the errorMap
 	std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
@@ -80,7 +81,7 @@ double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNet
 
 std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(AbstractNeuralNetwork& neuralNetwork)
 {
-	NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputActivationFunction());
+	NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
 	std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
 	
 	for (int timestep = 0; timestep < teachingInput->size(); timestep++)

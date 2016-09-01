@@ -8,7 +8,7 @@
 #include <map>
 // Include
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
@@ -28,10 +28,10 @@ protected:
 	// Holds the given teacher
 	AbstractTeacher* teacher;
 	// Holds the given network options for new evolution objects
-	LayeredNetworkOptions networkOptions;
+	FeedForwardNetworkTopologyOptions networkOptions;
 public:
 	// Creates a new world with the given teacher and the network options
-	TeachingEvolutionWorld(AbstractTeacher* teacher_, LayeredNetworkOptions& networkOptions_);
+	TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_);
 	TeachingEvolutionWorld() = default;
 	AbstractTeacher* getTeacher();
 	// Inherited:

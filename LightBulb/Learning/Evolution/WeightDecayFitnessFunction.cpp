@@ -16,7 +16,7 @@ void WeightDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractE
 	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 	{
 		double weightDecayError = 0;
-		auto weights = entry->second->getNeuralNetwork()->getNetworkTopology()->getWeights();
+		auto weights = entry->second->getNeuralNetwork()->getNetworkTopology()->getAllWeights();
 		for (auto weightsPerLayer = weights->begin(); weightsPerLayer != weights->end(); weightsPerLayer++)
 		{
 			weightDecayError += 0.5 * weightsPerLayer->squaredNorm();

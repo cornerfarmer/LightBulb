@@ -1,15 +1,15 @@
 // Includes
-#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "NetworkTopology/RecurrentFeedForwardNetworkTopology.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/AbstractNeuron.hpp"
 #include "Neuron/Edge.hpp"
 // Library includes
 #include <list>
 
-RecurrentLayeredNetwork::RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions& options_)
+RecurrentFeedForwardNetworkTopology::RecurrentFeedForwardNetworkTopology(RecurrentFeedForwardNetworkTopologyOptions& options_)
 {
 	// Copy all options
-	options.reset(new RecurrentLayeredNetworkOptions(options_));
+	options.reset(new RecurrentFeedForwardNetworkTopologyOptions(options_));
 
 	// Build the network
 	buildNetwork();
@@ -18,7 +18,7 @@ RecurrentLayeredNetwork::RecurrentLayeredNetwork(RecurrentLayeredNetworkOptions&
 	buildRecurrentConnections();
 }
 
-void RecurrentLayeredNetwork::buildRecurrentConnections()
+void RecurrentFeedForwardNetworkTopology::buildRecurrentConnections()
 {
 	// If we should connect ouput neurons with input neurons
 	if (getOptions()->connectOutputWithInnerNeurons)
@@ -69,12 +69,12 @@ void RecurrentLayeredNetwork::buildRecurrentConnections()
 	}
 }
 
-RecurrentLayeredNetworkOptions* RecurrentLayeredNetwork::getOptions()
+RecurrentFeedForwardNetworkTopologyOptions* RecurrentFeedForwardNetworkTopology::getOptions()
 {
-	return static_cast<RecurrentLayeredNetworkOptions*>(options.get());
+	return static_cast<RecurrentFeedForwardNetworkTopologyOptions*>(options.get());
 }
 
-void RecurrentLayeredNetwork::horizontalMergeWith(RecurrentLayeredNetwork& otherNetwork)
+void RecurrentFeedForwardNetworkTopology::horizontalMergeWith(RecurrentFeedForwardNetworkTopology& otherNetwork)
 {
 	if (otherNetwork.getOptions()->selfConnectHiddenLayers != getOptions()->selfConnectHiddenLayers)
 		throw std::logic_error("The two networks must have the same configuration");
@@ -82,7 +82,7 @@ void RecurrentLayeredNetwork::horizontalMergeWith(RecurrentLayeredNetwork& other
 		throw std::logic_error("ConnectOutputWithInnerNeurons is not supported yet");
 	if (otherNetwork.getOptions()->selfConnectOutputLayers || getOptions()->selfConnectOutputLayers)
 		throw std::logic_error("selfConnectOutputLayers is not supported yet");
-	LayeredNetwork::horizontalMergeWith(otherNetwork);
+	FeedForwardNetworkTopology::horizontalMergeWith(otherNetwork);
 
 	for (auto layer = neurons.begin(); layer + 1 != neurons.end(); layer++)
 	{
@@ -97,16 +97,16 @@ void RecurrentLayeredNetwork::horizontalMergeWith(RecurrentLayeredNetwork& other
 	}
 }
 
-std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCount)
+std::unique_ptr<FeedForwardNetworkTopology> RecurrentFeedForwardNetworkTopology::unfold(int instanceCount)
 {
 	// Create a new layered network with the same options as we used for this recurrent network
-	std::unique_ptr<LayeredNetwork> unfoldedNetwork(new LayeredNetwork(*options));
+	std::unique_ptr<FeedForwardNetworkTopology> unfoldedNetwork(new FeedForwardNetworkTopology(*options));
 
 	// Do for every extra instance
 	for (int i = 0; i < instanceCount - 1; i++)
 	{
 		// Create a new layered network with the same options as we used for this recurrent network
-		LayeredNetwork layeredNetworkToMerge(*options);
+		FeedForwardNetworkTopology FeedForwardNetworkTopologyToMerge(*options);
 
 		// If output neurons are connected with inner neurons
 		if (getOptions()->connectOutputWithInnerNeurons)
@@ -115,7 +115,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 			for (auto outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
 			{
 				// Go through all hidden neurons in the first hidden layer of our new network
-				for (auto hiddenNeuron = (*layeredNetworkToMerge.getNeurons()).front().begin(); hiddenNeuron != (*layeredNetworkToMerge.getNeurons()).front().end(); hiddenNeuron++)
+				for (auto hiddenNeuron = (*FeedForwardNetworkTopologyToMerge.getNeurons()).front().begin(); hiddenNeuron != (*FeedForwardNetworkTopologyToMerge.getNeurons()).front().end(); hiddenNeuron++)
 				{
 					// Add a edge from the output to the hidden neuron
 					(*outputNeuron)->addNextNeuron(*hiddenNeuron, 1);
@@ -126,14 +126,14 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 		// If we should self connect the hidden layers
 		if (getOptions()->selfConnectHiddenLayers)
 		{
-			// Go through all hidden layers of the current and the last layeredNetworkToMerge
+			// Go through all hidden layers of the current and the last FeedForwardNetworkTopologyToMerge
 			std::vector<std::vector<StandardNeuron*>>::iterator hiddenLayer = unfoldedNetwork->getNeurons()->begin() + i * (getOptions()->neuronsPerLayerCount.size() - 1);
-			for (auto otherHiddenLayer = (*layeredNetworkToMerge.getNeurons()).begin(); otherHiddenLayer + 1 != (*layeredNetworkToMerge.getNeurons()).end(); hiddenLayer++, otherHiddenLayer++)
+			for (auto otherHiddenLayer = (*FeedForwardNetworkTopologyToMerge.getNeurons()).begin(); otherHiddenLayer + 1 != (*FeedForwardNetworkTopologyToMerge.getNeurons()).end(); hiddenLayer++, otherHiddenLayer++)
 			{
 				// Go through all hidden neurons in the unfolded Network
 				for (auto hiddenNeuron = hiddenLayer->begin(); hiddenNeuron != hiddenLayer->end(); hiddenNeuron++)
 				{
-					// Go through all hidden neurons in the layeredNetworkToMerge
+					// Go through all hidden neurons in the FeedForwardNetworkTopologyToMerge
 					for (auto otherHiddenNeuron = otherHiddenLayer->begin(); otherHiddenNeuron != otherHiddenLayer->end(); otherHiddenNeuron++)
 					{
 						// Add a edge from the hidden to the other hidden neuron
@@ -150,8 +150,8 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 			// Go through all current output neurons of the unfolded network
 			for (auto outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
 			{
-				// Go through all output neurons of the layeredNetworkToMerge
-				for (auto outherOutputNeuron = layeredNetworkToMerge.getNeurons()->back().begin(); outherOutputNeuron != layeredNetworkToMerge.getNeurons()->back().end(); outherOutputNeuron++)
+				// Go through all output neurons of the FeedForwardNetworkTopologyToMerge
+				for (auto outherOutputNeuron = FeedForwardNetworkTopologyToMerge.getNeurons()->back().begin(); outherOutputNeuron != FeedForwardNetworkTopologyToMerge.getNeurons()->back().end(); outherOutputNeuron++)
 				{
 					// Add a edge from the output to the other output neuron
 					(*outputNeuron)->addNextNeuron(*outherOutputNeuron, 1);					
@@ -160,7 +160,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 		}
 
 		// Merge the new network with our unfoldedNetwork
-		unfoldedNetwork->mergeWith(layeredNetworkToMerge);
+		unfoldedNetwork->mergeWith(FeedForwardNetworkTopologyToMerge);
 	}
 
 	// If output neurons are connected with inner neurons
@@ -218,7 +218,7 @@ std::unique_ptr<LayeredNetwork> RecurrentLayeredNetwork::unfold(int instanceCoun
 	return unfoldedNetwork;
 }
 
-std::unique_ptr<std::map<Edge*, bool>> RecurrentLayeredNetwork::getNonRecurrentEdges()
+std::unique_ptr<std::map<Edge*, bool>> RecurrentFeedForwardNetworkTopology::getNonRecurrentEdges()
 {
 	std::unique_ptr<std::map<Edge*, bool>> nonRecurrentEdges(new std::map<Edge*, bool>());
 

@@ -94,7 +94,7 @@ void NetworkViewerWindow::panelClick(wxMouseEvent& event)
 		layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
 		for (int l = 0; l < layerCount; l++)
 		{
-			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
+			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l];
 			for (int n = 0; n < neuronCount; n++)
 			{
 				if (std::sqrt(std::pow(event.GetX() - getXPos(l), 2) + std::pow(event.GetY() - getYPos(n, neuronCount), 2)) < NEURON_RAD)
@@ -115,7 +115,7 @@ void NetworkViewerWindow::refreshDetail()
 {
 	if (selectedNeuronIndex != -1)
 	{
-		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
+		auto weights = selectedNetwork->getNetworkTopology()->getAllWeights();
 		bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
 
 		afferentEdgesList->DeleteAllItems();
@@ -208,13 +208,13 @@ void NetworkViewerWindow::render(wxDC& dc)
 		panel->GetVirtualSize(&width, &height);
 		panel->GetScrollPos(0);
 
-		auto weights = selectedNetwork->getNetworkTopology()->getWeights();
+		auto weights = selectedNetwork->getNetworkTopology()->getAllWeights();
 		bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
 
 		layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
 		for (int l = 0; l < layerCount; l++)
 		{
-			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
+			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l];
 			for (int n = 0; n < neuronCount; n++)
 			{
 				if (selectedLayerIndex == l && selectedNeuronIndex == n)
@@ -236,8 +236,8 @@ void NetworkViewerWindow::render(wxDC& dc)
 
 		for (int l = 0; l < weights->size(); l++)
 		{
-			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l);
-			int neuronCountNextLayer = selectedNetwork->getNetworkTopology()->getNeuronCountInLayer(l + 1);
+			int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l];
+			int neuronCountNextLayer = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l + 1];
 			for (int tn = 0; tn < (*weights)[l].rows(); tn++)
 			{
 				for (int fn = usesBiasNeuron; fn < (*weights)[l].cols(); fn++)

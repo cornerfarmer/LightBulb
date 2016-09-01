@@ -64,7 +64,7 @@ double Teacher::getWeightDecayError(AbstractNeuralNetwork& neuralNetwork)
 	double weightDecayError = 0;
 	if (weightDecayFac > 0)
 	{
-		auto weights = neuralNetwork.getNetworkTopology()->getWeights();
+		auto weights = neuralNetwork.getNetworkTopology()->getAllWeights();
 		for (auto weightsPerLayer = weights->begin(); weightsPerLayer != weights->end(); weightsPerLayer++)
 		{
 			weightDecayError += 0.5 * weightsPerLayer->squaredNorm();

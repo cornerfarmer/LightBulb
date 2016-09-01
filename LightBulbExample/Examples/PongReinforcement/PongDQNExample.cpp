@@ -5,7 +5,7 @@
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <Function/InputFunction//WeightedSumFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementWorld.hpp"
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
@@ -56,7 +56,7 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 
 PongReinforcementWorld* PongDQNExample::createWorld()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 	options.useBiasNeuron = getBooleanPreference(PREFERENCE_USE_BIAS_NEURON);
 

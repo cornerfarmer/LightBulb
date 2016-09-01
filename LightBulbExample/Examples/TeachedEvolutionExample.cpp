@@ -10,7 +10,7 @@
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
@@ -45,13 +45,13 @@ AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 
 AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 {
-	LayeredNetworkOptions* layeredNetworkOptions = new LayeredNetworkOptions();
-	layeredNetworkOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions->neuronsPerLayerCount[0] = 8;
-	layeredNetworkOptions->neuronsPerLayerCount[1] = 3;
-	layeredNetworkOptions->neuronsPerLayerCount[2] = 8;
-	layeredNetworkOptions->useBiasNeuron = true;
+	FeedForwardNetworkTopologyOptions* networkTopologyOptions = new FeedForwardNetworkTopologyOptions();
+	networkTopologyOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions->neuronsPerLayerCount[0] = 8;
+	networkTopologyOptions->neuronsPerLayerCount[1] = 3;
+	networkTopologyOptions->neuronsPerLayerCount[2] = 8;
+	networkTopologyOptions->useBiasNeuron = true;
 
 	Teacher* teacher = new Teacher();
 	for (int i = 0; i<8; i += 1)
@@ -68,7 +68,7 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	}
 
 
-	return new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
+	return new TeachingEvolutionWorld(teacher, *networkTopologyOptions);
 }
 
 std::string TeachedEvolutionExample::getDefaultName()

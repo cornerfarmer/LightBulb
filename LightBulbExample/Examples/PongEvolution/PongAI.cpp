@@ -2,7 +2,7 @@
 #include "Examples/PongEvolution/PongAI.hpp"
 #include "Examples/PongEvolution/Pong.hpp"
 
-PongAI::PongAI(LayeredNetworkOptions& options, Pong* pong_)
+PongAI::PongAI(FeedForwardNetworkTopologyOptions& options, Pong* pong_)
 	: AbstractSimpleEvolutionObject(pong_)
 {
 	currentGame = pong_;

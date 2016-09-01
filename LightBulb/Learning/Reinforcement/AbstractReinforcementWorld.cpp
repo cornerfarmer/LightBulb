@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementWorld.hpp"
 #include <ActivationOrder/TopologicalOrder.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
 //Library include
 
@@ -46,7 +46,7 @@ void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
 	interpretNNOutput(lastBooleanOutput);
 }
 
-AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& options, bool epsilonGreedly_, double epsilon_)
+AbstractReinforcementWorld::AbstractReinforcementWorld(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
 {
 	buildNeuralNetwork(options);
 	epsilonGreedly = epsilonGreedly_;
@@ -56,7 +56,7 @@ AbstractReinforcementWorld::AbstractReinforcementWorld(LayeredNetworkOptions& op
 void AbstractReinforcementWorld::initializeForLearning()
 {
 	// Randomize all weights
-	neuralNetwork->getNetworkTopology()->randomizeDependingOnWeightsSize(randomGenerator);
+	neuralNetwork->getNetworkTopology()->randomizeDependingOnLayerSize(randomGenerator);
 }
 
 NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()
@@ -80,13 +80,13 @@ void AbstractReinforcementWorld::setLearningState(LearningState* learningState_)
 	learningState = learningState_;
 }
 
-void AbstractReinforcementWorld::buildNeuralNetwork(LayeredNetworkOptions& options)
+void AbstractReinforcementWorld::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
 {
 	// Create a new network topology from the adjusted options.
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
+	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
 
 	// Create a neural network from the network topolgy
-	neuralNetwork.reset(new NeuralNetwork(layeredNetwork));
+	neuralNetwork.reset(new NeuralNetwork(networkTopology));
 
 	// Initialize the mutation strength vector
 	buildOutputBuffer();

@@ -1,9 +1,9 @@
 // Includes
 #include "Examples/TicTacToeEvolution/TicTacToeKI.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
-TicTacToeKI::TicTacToeKI(LayeredNetworkOptions& options, TicTacToe* ticTacToe_)
+TicTacToeKI::TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)
 {
 	currentGame = ticTacToe_;

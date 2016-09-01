@@ -26,7 +26,7 @@ CounterpropagationNetwork::CounterpropagationNetwork(unsigned int inputNeuronCou
 		throw std::invalid_argument("The given outputNeuronCount has to be greater than 0");
 
 	// Create a new options object
-	options.reset(new LayeredNetworkOptions());
+	options.reset(new FeedForwardNetworkTopologyOptions());
 	// Set all options
 	// Define thresholds and functions
 	options->neuronFactory = new DifferentFunctionsNeuronFactory(new NeuronCompareThreshold(NULL), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction(),

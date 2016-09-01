@@ -1,20 +1,20 @@
 // Includes
 #include "Learning/Evolution/TeachedEvolutionObject.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Teaching/Teacher.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "Learning/Evolution/TeachingEvolutionWorld.hpp"
 
 
-TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, LayeredNetworkOptions& options)
+TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options)
 {
 	teachingEvolutionWorld = teachingEvolutionWorld_;
 	currentTotalError = 0;
 
 	// Create a new network after the given options
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(options);
-	neuralNetwork.reset(new NeuralNetwork(layeredNetwork));
+	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
+	neuralNetwork.reset(new NeuralNetwork(networkTopology));
 	// Randomize all weights
 	neuralNetwork->getNetworkTopology()->randomizeWeights(teachingEvolutionWorld->getRandomGenerator(), -0.5,0.5);
 

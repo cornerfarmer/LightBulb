@@ -10,7 +10,7 @@
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
@@ -63,18 +63,18 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 
 AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 {
-	LayeredNetworkOptions* layeredNetworkOptions = new LayeredNetworkOptions();
-	layeredNetworkOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	layeredNetworkOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions->neuronsPerLayerCount[0] = 16;
-	layeredNetworkOptions->neuronsPerLayerCount[1] = 20;
-	layeredNetworkOptions->neuronsPerLayerCount[2] = 1;
-	layeredNetworkOptions->useBiasNeuron = true;
-	layeredNetworkOptions->enableShortcuts = true;
+	FeedForwardNetworkTopologyOptions* networkTopologyOptions = new FeedForwardNetworkTopologyOptions();
+	networkTopologyOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions->neuronsPerLayerCount[0] = 16;
+	networkTopologyOptions->neuronsPerLayerCount[1] = 20;
+	networkTopologyOptions->neuronsPerLayerCount[2] = 1;
+	networkTopologyOptions->useBiasNeuron = true;
+	networkTopologyOptions->enableShortcuts = true;
 
 	TCProblemTeacher* teacher = new TCProblemTeacher(false, getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC));
 	
-	return new TeachingEvolutionWorld(teacher, *layeredNetworkOptions);
+	return new TeachingEvolutionWorld(teacher, *networkTopologyOptions);
 }
 
 TCProblemEvolutionExample::TCProblemEvolutionExample()

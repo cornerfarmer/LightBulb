@@ -8,7 +8,7 @@
 #include "Neuron/StandardNeuron.hpp"
 #include "ActivationOrder/SynchronousOrder.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NetworkTopology/FreeNetwork.hpp"
 
 
@@ -140,7 +140,7 @@ void TruncatedBackpropagationThroughTimeLearningRule::initializeTeachingLesson(N
 
 AbstractActivationOrder* TruncatedBackpropagationThroughTimeLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
 {
-	if (dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
+	if (dynamic_cast<FeedForwardNetworkTopology*>(neuralNetwork.getNetworkTopology()))
 		return new TopologicalOrder();
 	else if (dynamic_cast<FreeNetwork*>(neuralNetwork.getNetworkTopology()))
 		return new SynchronousOrder();

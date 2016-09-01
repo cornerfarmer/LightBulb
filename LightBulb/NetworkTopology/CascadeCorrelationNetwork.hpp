@@ -6,13 +6,13 @@
 // Libary includes
 
 // Includes
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 // Forward declarations
 
 
 // A CascadeCorrelationNetwork is layered network which has only one input and one output layer at the beginning. It grows while it learns.
-class CascadeCorrelationNetwork : public LayeredNetwork
+class CascadeCorrelationNetwork : public FeedForwardNetworkTopology
 {
 private:	
 public:

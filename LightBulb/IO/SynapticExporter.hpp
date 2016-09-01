@@ -13,13 +13,13 @@
 // Forward declarations
 class JSONObject;
 class JSONAttribute;
-class LayeredNetwork;
+class FeedForwardNetworkTopology;
 
 // 
 class SynapticExporter : public AbstractExporter
 {
 private:
-	LayeredNetwork* layeredNetwork;
+	FeedForwardNetworkTopology* networkTopology;
 	Eigen::MatrixXd* weights;
 	JSONObject* getNetworkJSONObject();
 	JSONAttribute* getNeuronsAttribute();

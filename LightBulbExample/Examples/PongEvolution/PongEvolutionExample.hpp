@@ -6,7 +6,7 @@
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
-struct LayeredNetworkOptions;
+struct FeedForwardNetworkTopologyOptions;
 class SharedSamplingCombiningStrategy;
 class AbstractHallOfFameAlgorithm;
 
@@ -19,7 +19,7 @@ private:
 	SharedSamplingCombiningStrategy* cs2;
 protected:
 	AbstractLearningRule* createLearningRate();
-	LayeredNetworkOptions getNetworkOptions();
+	FeedForwardNetworkTopologyOptions getNetworkOptions();
 	AbstractEvolutionWorld* createWorld();
 	AbstractEvolutionWorld* createParasiteWorld();
 public:

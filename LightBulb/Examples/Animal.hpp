@@ -12,7 +12,7 @@
 // Forward declarations
 class EvolutionLearningRule;
 class NeuralNetwork;
-class RecurrentLayeredNetworkOptions;
+class RecurrentFeedForwardNetworkTopologyOptions;
 class Nature;
 
 class Animal : public AbstractSimpleEvolutionObject

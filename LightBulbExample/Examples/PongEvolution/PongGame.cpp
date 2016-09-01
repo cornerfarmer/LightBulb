@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 PongGame::PongGame()
 {

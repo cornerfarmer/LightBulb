@@ -1,6 +1,6 @@
 // Includes
 #include "ActivationOrder/SynchronousOrder.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Neuron/StandardNeuron.hpp"
 // Library includes
 #include <exception>

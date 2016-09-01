@@ -5,7 +5,7 @@
 #include "Neuron/BiasNeuron.hpp"
 #include "Neuron/Edge.hpp"
 #include "NeuronFactory/AbstractNeuronFactory.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <exception>
 
@@ -301,31 +301,31 @@ BiasNeuron* FreeNetwork::getBiasNeuron()
 		return NULL;
 }
 
-std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
+std::unique_ptr<FeedForwardNetworkTopology> FreeNetwork::unfold(int instanceCount)
 {
-	// Create a new layeredNetworkOptions value which will be used for all parts of the new layered network
-	LayeredNetworkOptions layeredNetworkOptions;
+	// Create a new FeedForwardNetworkTopologyOptions value which will be used for all parts of the new layered network
+	FeedForwardNetworkTopologyOptions FeedForwardNetworkTopologyOptions;
 	// Copy the neuronFactory
-	layeredNetworkOptions.neuronFactory = options->neuronFactory;
+	FeedForwardNetworkTopologyOptions.neuronFactory = options->neuronFactory;
 	// Every part of the unfolded network does only have two layers (one for input and one for all the other neurons)
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(2);
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(2);
 	// If the network does not use real input neurons set the value to zero (it will be filled later), else copy the input neurons count
 	if (!options->realInputNeurons)
-		layeredNetworkOptions.neuronsPerLayerCount[0] = 0;
+		FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0] = 0;
 	else
-		layeredNetworkOptions.neuronsPerLayerCount[0] = options->inputNeuronCount;
+		FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0] = options->inputNeuronCount;
 	// The second layer holds all the other neurons
-	layeredNetworkOptions.neuronsPerLayerCount[1] = options->neuronCount;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[1] = options->neuronCount;
 	// Copy some more informations
-	layeredNetworkOptions.outputNeuronsIndices = options->outputNeuronsIndices;
+	FeedForwardNetworkTopologyOptions.outputNeuronsIndices = options->outputNeuronsIndices;
 	
-	std::unique_ptr<LayeredNetwork> unfoldedNetwork;
+	std::unique_ptr<FeedForwardNetworkTopology> unfoldedNetwork;
 
 	// Do for every instance
 	for (int i = 0; i < instanceCount; i++)
 	{ 
 		// Create a new part of the unfolded network
-		LayeredNetwork* layeredNetworkToMerge = new LayeredNetwork(layeredNetworkOptions);	
+		FeedForwardNetworkTopology* FeedForwardNetworkTopologyToMerge = new FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions);	
 
 		// If the network does not use real input neurons
 		if (!options->realInputNeurons)
@@ -333,7 +333,7 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 			// Copy every standard neuron which is also used as a input neuron into the input layer
 			for (auto inputNeuronIndex = options->inputNeuronsIndices.begin(); inputNeuronIndex != options->inputNeuronsIndices.end(); inputNeuronIndex++)
 			{
-				layeredNetworkToMerge->addNeuronIntoLayer(0, (*layeredNetworkToMerge->getNeurons()).front()[*inputNeuronIndex], true);
+				FeedForwardNetworkTopologyToMerge->addNeuronIntoLayer(0, (*FeedForwardNetworkTopologyToMerge->getNeurons()).front()[*inputNeuronIndex], true);
 			}	
 		}
 		
@@ -344,7 +344,7 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 			for (auto outputNeuron = unfoldedNetwork->getNeurons()->back().begin(); outputNeuron != unfoldedNetwork->getNeurons()->back().end(); outputNeuron++)
 			{
 				// Go through all hidden neurons in the first hidden layer of our new network
-				for (auto hiddenNeuron = (*layeredNetworkToMerge->getNeurons()).front().begin(); hiddenNeuron != (*layeredNetworkToMerge->getNeurons()).front().end(); hiddenNeuron++)
+				for (auto hiddenNeuron = (*FeedForwardNetworkTopologyToMerge->getNeurons()).front().begin(); hiddenNeuron != (*FeedForwardNetworkTopologyToMerge->getNeurons()).front().end(); hiddenNeuron++)
 				{
 					// Add a edge from the output to the hidden neuron
 					(*outputNeuron)->addNextNeuron(*hiddenNeuron, 1);
@@ -356,11 +356,11 @@ std::unique_ptr<LayeredNetwork> FreeNetwork::unfold(int instanceCount)
 		if (i != 0)
 		{
 			// Merge the new network with our unfoldedNetwork
-			unfoldedNetwork->mergeWith(*layeredNetworkToMerge);
-			delete(layeredNetworkToMerge);
+			unfoldedNetwork->mergeWith(*FeedForwardNetworkTopologyToMerge);
+			delete(FeedForwardNetworkTopologyToMerge);
 		}
 		else // else set the part to be the current unfolded network
-			unfoldedNetwork.reset(layeredNetworkToMerge);
+			unfoldedNetwork.reset(FeedForwardNetworkTopologyToMerge);
 	}
 
 	// Do for every neuron 

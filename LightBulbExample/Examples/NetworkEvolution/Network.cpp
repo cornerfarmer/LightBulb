@@ -5,7 +5,7 @@
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/IdentityFunction.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Neuron/NeuronDescription.hpp>
 
 Network::Network(NetworkSimulator* networkSimulator_)
@@ -13,7 +13,7 @@ Network::Network(NetworkSimulator* networkSimulator_)
 {
 	positions.resize(4, std::vector<float>(2));
 
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.useBiasNeuron = false;
 	options.neuronsPerLayerCount.push_back(1);
 	options.neuronsPerLayerCount.push_back(8);

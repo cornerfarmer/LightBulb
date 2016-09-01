@@ -5,7 +5,7 @@
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include "SimpleReinforcementWorld.hpp"
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
@@ -42,7 +42,7 @@ AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 
 SimpleReinforcementWorld* SimpleReinforcementDQNExample::createWorld()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
 	options.neuronsPerLayerCount.push_back(4);

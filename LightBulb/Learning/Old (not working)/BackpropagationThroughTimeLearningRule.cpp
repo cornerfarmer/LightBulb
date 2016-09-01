@@ -4,7 +4,7 @@
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "NetworkTopology/RecurrentFeedForwardNetworkTopology.hpp"
 #include "Neuron/AbstractNeuron.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Neuron/StandardNeuron.hpp"

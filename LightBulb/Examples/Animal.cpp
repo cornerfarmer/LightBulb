@@ -4,7 +4,7 @@
 #include "Examples/AbstractTile.hpp"
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Neuron/NeuronDescription.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
 
@@ -16,7 +16,7 @@ Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 
 	reset(posX_, posY_, dirX_, dirY_);
 
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.useBiasNeuron = false;
 	options.neuronsPerLayerCount.push_back(6);
 	options.neuronsPerLayerCount.push_back(10);

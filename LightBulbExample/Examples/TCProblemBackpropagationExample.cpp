@@ -1,5 +1,5 @@
 #include "TCProblemBackpropagationExample.hpp"
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Learning/Supervised/GradientDecentLearningRule.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
@@ -43,16 +43,16 @@ AbstractLearningRule* TCProblemBackpropagationExample::createLearningRate()
 
 AbstractNeuralNetwork* TCProblemBackpropagationExample::createNeuralNetwork()
 {
-	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions.neuronsPerLayerCount[0] = 16;
-	layeredNetworkOptions.neuronsPerLayerCount[1] = 16;
-	layeredNetworkOptions.neuronsPerLayerCount[2] = 1;
+	FeedForwardNetworkTopologyOptions networkTopologyOptions;
+	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions.neuronsPerLayerCount[0] = 16;
+	networkTopologyOptions.neuronsPerLayerCount[1] = 16;
+	networkTopologyOptions.neuronsPerLayerCount[2] = 1;
 
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
+	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(networkTopologyOptions);
 
-	return new NeuralNetwork(layeredNetwork);
+	return new NeuralNetwork(networkTopology);
 }
 
 

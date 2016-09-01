@@ -24,13 +24,13 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 
 		if (removeNeuronsByTheirTotalWeight)
 		{
-			auto weights = networkTopology->getWeights();
+			auto weights = networkTopology->getAllWeights();
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
 				if (layerIndex > 0 || !ignoreInputLayer)
 				{
-					if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
+					if (networkTopology->getNeuronCountsPerLayer()[layerIndex] > 1)
 					{
 						auto weightSums = layer->cwiseAbs().colwise().sum();
 						for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
@@ -43,13 +43,13 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 		}
 		else
 		{
-			auto weights = networkTopology->getWeights();
+			auto weights = networkTopology->getAllWeights();
 			int layerIndex = 0;
 			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 			{
 				if (layerIndex > 0 || !ignoreInputLayer)
 				{
-					if (networkTopology->getNeuronCountInLayer(layerIndex) > 1)
+					if (networkTopology->getNeuronCountsPerLayer()[layerIndex] > 1)
 					{
 						for (int i = usesBiasNeuron; i < layer->cols(); i++)
 						{
@@ -85,7 +85,7 @@ void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* ob
 		int minimalWeightNeuronIndex = -1;
 		int minimalWeightLayerIndex = -1;
 
-		auto weights = networkTopology->getWeights();
+		auto weights = networkTopology->getAllWeights();
 		int layerIndex = 0;
 		for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
 		{

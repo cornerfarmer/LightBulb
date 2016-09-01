@@ -4,7 +4,7 @@
 
 //Library includes
 
-MountainCarWorld::MountainCarWorld(LayeredNetworkOptions& options_, bool epsilonGreedly, double epsilon)
+MountainCarWorld::MountainCarWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
 	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
 {
 	pos = -0.5;

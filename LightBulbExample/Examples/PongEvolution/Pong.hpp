@@ -12,7 +12,7 @@
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 #include "IO/UseParentSerialization.hpp"
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include "PongGame.hpp"
 #include "AbstractPongWorld.hpp"
 
@@ -31,10 +31,10 @@ protected:
 	AbstractEvolutionObject* createNewObject();
 	void resetWorld();
 	int simulateGame(PongAI* ai1, PongAI* ai2);
-	std::unique_ptr<LayeredNetworkOptions> options;
+	std::unique_ptr<FeedForwardNetworkTopologyOptions> options;
 	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 public:
-	Pong(LayeredNetworkOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	Pong() = default;
 	void getNNInput(std::vector<double>& sight);
 	void executeCompareAI();

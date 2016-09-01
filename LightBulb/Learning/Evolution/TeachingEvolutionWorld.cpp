@@ -9,7 +9,7 @@ AbstractEvolutionObject* TeachingEvolutionWorld::createNewObject()
 	return new TeachedEvolutionObject(this, networkOptions);
 }
 
-TeachingEvolutionWorld::TeachingEvolutionWorld(AbstractTeacher* teacher_, LayeredNetworkOptions& networkOptions_)
+TeachingEvolutionWorld::TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_)
 {
 	teacher = teacher_;
 	networkOptions = networkOptions_;

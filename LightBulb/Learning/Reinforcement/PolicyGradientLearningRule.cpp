@@ -2,7 +2,7 @@
 #include "Learning/Reinforcement/PolicyGradientLearningRule.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <iostream>
 #include <algorithm>
@@ -11,6 +11,7 @@
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include "AbstractReinforcementWorld.hpp"
+#include "Neuron/NeuronDescription.hpp"
 
 AbstractLearningResult* PolicyGradientLearningRule::getLearningResult()
 {
@@ -46,14 +47,14 @@ void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopo
 {
 	errorVectorRecord.push_back(getErrorVector(networkTopology));
 
-	netInputRecord.push_back(*networkTopology->getNetInputs());
+	netInputRecord.push_back(*networkTopology->getAllNetInputs());
 	activationRecord.push_back(networkTopology->getActivationsCopy());
 }
 
 std::vector<Eigen::MatrixXd> PolicyGradientLearningRule::checkGradient(AbstractNetworkTopology* networkTopology)
 {
 	double epsilon = 0.0001;
-	auto weights = networkTopology->getWeights();
+	auto weights = networkTopology->getAllWeights();
 	std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
 	for (int l = weights->size() - 1; l >= 0 ; l--)
 	{
@@ -100,7 +101,7 @@ void PolicyGradientLearningRule::initializeTry()
 	gradients.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getLayerCount() - 1);
 	for (int i = 0; i < gradients.size(); i++)
 	{
-		gradients[i].resizeLike(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getWeights()->at(i));
+		gradients[i].resizeLike(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getAllWeights()->at(i));
 	}
 	resetGradients();
 
@@ -240,14 +241,14 @@ void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopolog
 		if (layerIndex == networkTopology->getLayerCount() - 1)
 		{
 			// Compute the delta value: activationFunction'(netInput) * errorValue
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * errorVector.array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * errorVector.array();
 		}
 		else
 		{
 			Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
 
 			// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+			deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 		}
 
 		// Calculate the gradient

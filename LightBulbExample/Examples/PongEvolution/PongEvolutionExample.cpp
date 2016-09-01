@@ -24,7 +24,7 @@
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/WeightDecayFitnessFunction.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
@@ -87,9 +87,9 @@ AbstractLearningRule* PongEvolutionExample::createLearningRate()
 }
 
 
-LayeredNetworkOptions PongEvolutionExample::getNetworkOptions()
+FeedForwardNetworkTopologyOptions PongEvolutionExample::getNetworkOptions()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
 	options.neuronsPerLayerCount.push_back(6);
@@ -106,7 +106,7 @@ AbstractEvolutionWorld* PongEvolutionExample::createWorld()
 {
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	LayeredNetworkOptions options = getNetworkOptions();
+	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	Pong* pong1 = new Pong(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 
 	cs1->setSecondWorld(static_cast<Pong*>(parasiteWorld.get()));
@@ -123,7 +123,7 @@ AbstractEvolutionWorld* PongEvolutionExample::createParasiteWorld()
 	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 
-	LayeredNetworkOptions options = getNetworkOptions();
+	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	return new Pong(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 }
 

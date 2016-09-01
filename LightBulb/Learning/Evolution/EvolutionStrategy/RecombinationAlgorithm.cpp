@@ -3,7 +3,7 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 RecombinationAlgorithm::RecombinationAlgorithm(bool useAverageForWeight_, bool useAverageForMutationStrength_)
 {
@@ -13,8 +13,8 @@ RecombinationAlgorithm::RecombinationAlgorithm(bool useAverageForWeight_, bool u
 
 void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
 {
-	auto weights1 = static_cast<LayeredNetwork*>(object1->getNeuralNetwork()->getNetworkTopology())->getWeights();
-	auto weights2 = static_cast<LayeredNetwork*>(object2->getNeuralNetwork()->getNetworkTopology())->getWeights();
+	auto weights1 = static_cast<FeedForwardNetworkTopology*>(object1->getNeuralNetwork()->getNetworkTopology())->getAllWeights();
+	auto weights2 = static_cast<FeedForwardNetworkTopology*>(object2->getNeuralNetwork()->getNetworkTopology())->getAllWeights();
 
 	auto layer1 = weights1->begin();
 	auto layer2 = weights2->begin();

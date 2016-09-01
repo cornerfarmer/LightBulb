@@ -41,13 +41,6 @@ void NeuralNetwork::calculate(std::vector<std::vector<double>>& input, std::vect
 
 		// Extract the output and save it into the output value
 		networkTopology->getOutput(output[timeStep]);
-
-		// If the output values map is not null, fill it with all current output values 
-		if (outputValuesInTime != NULL)
-			networkTopology->getAllNeuronOutputs((*outputValuesInTime)[timeStep]);
-		// If the netInput values map is not null, fill it with all current netInput values 
-		if (netInputValuesInTime != NULL)
-			networkTopology->getAllNeuronNetInputs((*netInputValuesInTime)[timeStep]);
 	}
 
 }

@@ -25,7 +25,7 @@ public:
 		
 		EXPECT_CALL(object1, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork1));
 		EXPECT_CALL(neuralNetwork1, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology1));
-		EXPECT_CALL(networkTopology1, getWeights()).WillRepeatedly(testing::Return(&weights1));
+		EXPECT_CALL(networkTopology1, getAllWeights()).WillRepeatedly(testing::Return(&weights1));
 
 		weights1.push_back(Eigen::MatrixXd(1, 2));
 		weights1[0](0, 0) = 2;
@@ -40,7 +40,7 @@ public:
 
 		EXPECT_CALL(object2, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork2));
 		EXPECT_CALL(neuralNetwork2, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology2));
-		EXPECT_CALL(networkTopology2, getWeights()).WillRepeatedly(testing::Return(&weights2));
+		EXPECT_CALL(networkTopology2, getAllWeights()).WillRepeatedly(testing::Return(&weights2));
 
 		weights2.push_back(Eigen::MatrixXd(1, 2));
 		weights2[0](0, 0) = -6;

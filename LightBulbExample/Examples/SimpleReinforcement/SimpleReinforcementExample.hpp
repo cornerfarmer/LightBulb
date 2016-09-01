@@ -8,7 +8,7 @@
 
 class SimpleReinforcementWorld;
 class AbstractReinforcementWorld;
-struct LayeredNetworkOptions;
+struct FeedForwardNetworkTopologyOptions;
 
 class SimpleReinforcementExample : public AbstractLearningRuleTrainingPlan
 {

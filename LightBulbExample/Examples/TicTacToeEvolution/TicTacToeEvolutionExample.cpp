@@ -23,7 +23,7 @@
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
@@ -82,9 +82,9 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 }
 
 
-LayeredNetworkOptions TicTacToeEvolutionExample::getNetworkOptions()
+FeedForwardNetworkTopologyOptions TicTacToeEvolutionExample::getNetworkOptions()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
 	options.neuronsPerLayerCount.push_back(18);
@@ -101,7 +101,7 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 {
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	LayeredNetworkOptions options = getNetworkOptions();
+	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	TicTacToe* ticTacToe1 = new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 
 	cs1->setSecondWorld(static_cast<TicTacToe*>(parasiteWorld.get()));
@@ -118,7 +118,7 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
 	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
 
-	LayeredNetworkOptions options = getNetworkOptions();
+	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	return new TicTacToe(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
 }
 

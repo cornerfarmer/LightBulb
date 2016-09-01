@@ -5,6 +5,7 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <exception>
+#include "Neuron/NeuronDescription.hpp"
 
 TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_, bool calcStrictError_)
 {
@@ -63,7 +64,7 @@ std::unique_ptr<ErrorMap_t> TeachingLessonBooleanInput::getErrormapFromOutputVec
 	{
 		// Create the errorMap
 		std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
-		auto activationFunction = neuralNetwork.getNetworkTopology()->getOutputActivationFunction();
+		auto activationFunction = neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction();
 
 		double half = (activationFunction->getMaximum() - activationFunction->getMinimum()) / 2;
 		double middle = half + activationFunction->getMinimum();

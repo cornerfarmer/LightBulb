@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Teaching/Teacher.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 // Library includes
@@ -74,7 +74,7 @@ bool AbstractSupervisedLearningRule::doIteration()
 	// If offlineLearning is activated, reset the offlineLearningGradients
 	if (getOptions()->offlineLearning)
 	{
-		offlineLearningWeights = *getCurrentNetworkTopology()->getWeights();
+		offlineLearningWeights = *getCurrentNetworkTopology()->getAllWeights();
 		// Adjust all hidden/output layers except 
 		for (int l = 0; l < offlineLearningWeights.size(); l++)
 		{

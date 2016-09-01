@@ -3,7 +3,7 @@
 #include "Function/WeightedSumFunction.hpp"
 #include "Neuron/Edge.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Function/WeightedSumFunction.hpp" 
 #include "Function/IdentityFunction.hpp"
 #include "Function/HyperbolicTangentFunction.hpp"
@@ -29,9 +29,9 @@
 #include "Graphics/RBFNetworkStructureChart.hpp"
 #include "ClusterAnalysis/ROLFNeuronPlacer.hpp"
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
-#include "NetworkTopology/RecurrentLayeredNetwork.hpp"
+#include "NetworkTopology/RecurrentFeedForwardNetworkTopology.hpp"
 #include "Learning/BackpropagationThroughTimeLearningRule.hpp"
-#include "Graphics/LayeredNetworkTopologyDrawer.hpp"
+#include "Graphics/FeedForwardNetworkTopologyTopologyDrawer.hpp"
 #include "Learning/TruncatedBackpropagationThroughTimeLearningRule.hpp"
 #include "NetworkTopology/FreeNetwork.hpp"
 #include "ActivationOrder/SynchronousOrder.hpp"
@@ -104,7 +104,7 @@
 #include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
 #include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
 #include "Learning/Evolution/PerfectObjectFoundCondition.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "IO/BrainJSExporter.hpp"
 #include "IO/SynapticExporter.hpp"
 #include "Neuron/NeuronDescription.hpp"
@@ -116,17 +116,17 @@
 
 void doPerceptronTest()
 {
-	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions.neuronsPerLayerCount[0]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=2;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=1;
-	layeredNetworkOptions.useBiasNeuron = true;
+	FeedForwardNetworkTopologyOptions FeedForwardNetworkTopologyOptions;
+	FeedForwardNetworkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0]=2;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[1]=2;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[2]=1;
+	FeedForwardNetworkTopologyOptions.useBiasNeuron = true;
 
-	LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
+	FeedForwardNetworkTopology* FeedForwardNetworkTopology = new FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions);
 
-	NeuralNetwork neuralNetwork(layeredNetwork);
+	NeuralNetwork neuralNetwork(FeedForwardNetworkTopology);
 
 	BackpropagationLearningRuleOptions options;
 	options.enableDebugOutput = true;
@@ -216,7 +216,7 @@ void doPerceptronTest()
 	networkTopologyDrawerOptions.height = 600;
 	networkTopologyDrawerOptions.posY = 100;
 	networkTopologyDrawerOptions.network = &neuralNetwork;
-	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	FeedForwardNetworkTopologyTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
 	networkTopologyDrawer.refresh();
 	networkTopologyDrawer.startNewCalculation(*teachingPattern, *new TopologicalOrder());
 	networkTopologyDrawer.nextCalculationStep();
@@ -324,9 +324,9 @@ void doRBFTest()
 
 }
 
-void doRecurrentLayeredNetworkTest()
+void doRecurrentFeedForwardNetworkTopologyTest()
 {
-	RecurrentLayeredNetworkOptions networkOptions;
+	RecurrentFeedForwardNetworkTopologyOptions networkOptions;
 	networkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	networkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
 	networkOptions.neuronsPerLayerCount[0]=1;
@@ -336,9 +336,9 @@ void doRecurrentLayeredNetworkTest()
 	//networkOptions.selfConnectOutputLayers = true;
 	networkOptions.selfConnectHiddenLayers = true;
 	//networkOptions.connectOutputWithInnerNeurons = true;
-	RecurrentLayeredNetwork* recurrentNetwork = new RecurrentLayeredNetwork(networkOptions);
+	RecurrentFeedForwardNetworkTopology* recurrentNetwork = new RecurrentFeedForwardNetworkTopology(networkOptions);
 
-	/*std::unique_ptr<LayeredNetwork> unfoldedNetwork = recurrentNetwork->unfold(2);
+	/*std::unique_ptr<FeedForwardNetworkTopology> unfoldedNetwork = recurrentNetwork->unfold(2);
 	NetworkTopologyDrawerOptions networkTopologyDrawerOptions;
 	networkTopologyDrawerOptions.width = 700;
 	networkTopologyDrawerOptions.height = 600;
@@ -459,7 +459,7 @@ void doFreeNetworkTest()
 
 	NeuralNetwork neuralNetwork(freeNetwork);
 
-	/*std::unique_ptr<LayeredNetwork> unfoldedNetwork = freeNetwork->unfold(2);
+	/*std::unique_ptr<FeedForwardNetworkTopology> unfoldedNetwork = freeNetwork->unfold(2);
 
 	NeuralNetwork unfoldedneuralNetwork(unfoldedNetwork.get());
 
@@ -1325,7 +1325,7 @@ void doLVQTest()
 	networkTopologyDrawerOptions.height = 600;
 	networkTopologyDrawerOptions.posY = 100;
 	networkTopologyDrawerOptions.network = &neuralNetwork;
-	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	FeedForwardNetworkTopologyTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
 	networkTopologyDrawer.refresh();
 	networkTopologyDrawer.startNewCalculation(input, *new TopologicalOrder());
 	networkTopologyDrawer.nextCalculationStep();
@@ -1740,7 +1740,7 @@ void doTicTacToeTest()
 	networkTopologyDrawerOptions.height = 1000;
 	networkTopologyDrawerOptions.posX = 600;
 	networkTopologyDrawerOptions.network = bestAI->getNeuralNetwork();
-	//LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	//FeedForwardNetworkTopologyTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
 	//networkTopologyDrawer.refresh();
 
 
@@ -1905,13 +1905,13 @@ void doNetworkEvolutionTest()
 
 
 void doTeachedEvolution838Test() {
-	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
-	layeredNetworkOptions.useBiasNeuron = true;
+	FeedForwardNetworkTopologyOptions FeedForwardNetworkTopologyOptions;
+	FeedForwardNetworkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0]=8;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[1]=3;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[2]=8;
+	FeedForwardNetworkTopologyOptions.useBiasNeuron = true;
 
 
 	Teacher teacher;
@@ -1940,9 +1940,9 @@ void doTeachedEvolution838Test() {
 		}
 	}*/
 
-	LayeredNetwork layeredNetwork(layeredNetworkOptions);
+	FeedForwardNetworkTopology FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions);
 
-	NeuralNetwork neuralNetwork(&layeredNetwork);
+	NeuralNetwork neuralNetwork(&FeedForwardNetworkTopology);
 
 	BackpropagationLearningRuleOptions bOptions;
 	bOptions.enableDebugOutput = true;
@@ -1961,7 +1961,7 @@ void doTeachedEvolution838Test() {
 
 	//bLearningRule.doLearning(neuralNetwork, teacher);
 
-	TeachingEvolutionWorld world(&teacher, layeredNetworkOptions);
+	TeachingEvolutionWorld world(&teacher, FeedForwardNetworkTopologyOptions);
 
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 50, true);
@@ -2021,7 +2021,7 @@ void doTeachedEvolution838Test() {
 	networkTopologyDrawerOptions.height = 600;
 	networkTopologyDrawerOptions.posY = 100;
 	networkTopologyDrawerOptions.network = bestNetwork;
-	LayeredNetworkTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
+	FeedForwardNetworkTopologyTopologyDrawer networkTopologyDrawer(networkTopologyDrawerOptions);
 	networkTopologyDrawer.refresh();
 
     sf::RenderWindow window(sf::VideoMode(800, 700), "LightBulb!");
@@ -2044,29 +2044,29 @@ void doTeachedEvolution838Test() {
 
 void doCompare()
 {
-	LayeredNetworkOptions layeredNetworkOptions;
-	layeredNetworkOptions.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
-	layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	layeredNetworkOptions.neuronsPerLayerCount[0]=8;
-	layeredNetworkOptions.neuronsPerLayerCount[1]=3;
-	layeredNetworkOptions.neuronsPerLayerCount[2]=8;
-	layeredNetworkOptions.useBiasNeuron = true;
+	FeedForwardNetworkTopologyOptions FeedForwardNetworkTopologyOptions;
+	FeedForwardNetworkTopologyOptions.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0]=8;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[1]=3;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[2]=8;
+	FeedForwardNetworkTopologyOptions.useBiasNeuron = true;
 
-	LayeredNetwork layeredNetwork(layeredNetworkOptions);
+	FeedForwardNetworkTopology FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions);
 
-	NeuralNetwork neuralNetwork(&layeredNetwork);
+	NeuralNetwork neuralNetwork(&FeedForwardNetworkTopology);
 
-	LayeredNetworkOptions LayeredNetworkOptions;
-	LayeredNetworkOptions.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
-	LayeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	LayeredNetworkOptions.neuronsPerLayerCount[0]=8;
-	LayeredNetworkOptions.neuronsPerLayerCount[1]=3;
-	LayeredNetworkOptions.neuronsPerLayerCount[2]=8;
-	LayeredNetworkOptions.useBiasNeuron = true;
+	FeedForwardNetworkTopologyOptions FeedForwardNetworkTopologyOptions;
+	FeedForwardNetworkTopologyOptions.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0]=8;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[1]=3;
+	FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[2]=8;
+	FeedForwardNetworkTopologyOptions.useBiasNeuron = true;
 
-	LayeredNetwork LayeredNetwork(LayeredNetworkOptions);
+	FeedForwardNetworkTopology FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions);
 
-	NeuralNetwork fastNeuralNetwork(&LayeredNetwork);
+	NeuralNetwork fastNeuralNetwork(&FeedForwardNetworkTopology);
 
 	NeuralNetworkIO<double> input(8);
 	input.set(0, 0, 1);
@@ -2088,7 +2088,7 @@ void doCompare()
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 
 	begin = clock();
-	NeuralNetworkIO<double> fastOutput(LayeredNetwork.getOutputSize());
+	NeuralNetworkIO<double> fastOutput(FeedForwardNetworkTopology.getOutputSize());
 	for (int i = 0; i < 1000000; i++)
 	{
 		fastNeuralNetwork.calculate(input, fastOutput, topologicalOrder);

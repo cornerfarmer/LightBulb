@@ -20,7 +20,7 @@ protected:
 	void getNNInput(std::vector<double>& input);
 	void interpretNNOutput(std::vector<double>& output);
 public:	
-	PongAI(LayeredNetworkOptions& options, Pong* pong_ = NULL);
+	PongAI(FeedForwardNetworkTopologyOptions& options, Pong* pong_ = NULL);
 	PongAI() = default;
 	void setPong(Pong* currentGame_);
 };

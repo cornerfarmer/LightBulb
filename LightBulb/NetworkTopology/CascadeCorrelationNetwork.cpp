@@ -16,7 +16,7 @@ CascadeCorrelationNetwork::CascadeCorrelationNetwork(unsigned int inputNeuronCou
 		throw std::invalid_argument("The given outputNeuronCount has to be greater than 0");
 
 	// Create a new options object
-	options.reset(new LayeredNetworkOptions());
+	options.reset(new FeedForwardNetworkTopologyOptions());
 	// Set all options
 	options->enableShortcuts = true;
 	// Define thresholds and functions

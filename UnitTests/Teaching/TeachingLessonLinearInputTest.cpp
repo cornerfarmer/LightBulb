@@ -2,10 +2,11 @@
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockActivationOrder.hpp>
-#include <Mocks/MockLayeredNetwork.hpp>
+#include <Mocks/MockFeedForwardNetworkTopology.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <EigenSrc/Dense>
+#include "Mocks/MockNeuronDescription.hpp"
 
 class TeachingLessonLinearInputTest : public testing::Test {
 public:
@@ -16,14 +17,17 @@ public:
 	MockNetworkTopology* networkTopology;
 	MockActivationOrder* activationOrder;
 	MockActivationFunction* activationFunction;
+	MockNeuronDescription* neuronDescription;
 	std::vector<std::vector<double>> neuralNetworkOutput;
 	void SetUp() {
 		neuralNetwork = new MockNeuralNetwork();
 		networkTopology = new MockNetworkTopology();
 		activationOrder = new MockActivationOrder();
+		neuronDescription = new MockNeuronDescription();
 		activationFunction = new MockActivationFunction();
 		EXPECT_CALL(*neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(networkTopology));
-		EXPECT_CALL(*networkTopology, getOutputActivationFunction()).WillRepeatedly(testing::Return(activationFunction));
+		EXPECT_CALL(*networkTopology, getOutputNeuronDescription()).WillRepeatedly(testing::Return(neuronDescription));
+		EXPECT_CALL(*neuronDescription, getActivationFunction()).WillRepeatedly(testing::Return(activationFunction));
 
 		teachingInput = new NeuralNetworkIO<double>(3);
 		teachingInput->set(0, 0, 1);

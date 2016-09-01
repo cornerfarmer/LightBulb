@@ -8,7 +8,7 @@
 
 class PongReinforcementWorld;
 class AbstractReinforcementWorld;
-struct LayeredNetworkOptions;
+struct FeedForwardNetworkTopologyOptions;
 
 class PongReinforcementExample : public AbstractLearningRuleTrainingPlan
 {

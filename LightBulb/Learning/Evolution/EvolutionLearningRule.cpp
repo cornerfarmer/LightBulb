@@ -12,7 +12,7 @@
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <iostream>
 #include <algorithm>

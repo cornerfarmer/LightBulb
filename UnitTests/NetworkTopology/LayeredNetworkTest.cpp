@@ -1,20 +1,20 @@
 #include "gtest/gtest.h"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include "Function/InputFunction/WeightedSumFunction.hpp"
 #include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
 #include "Neuron/NeuronDescription.hpp"
 
-class LayeredNetworkTest : public testing::Test {
+class FeedForwardNetworkTopologyTest : public testing::Test {
 public:
-	LayeredNetwork* network;
+	FeedForwardNetworkTopology* network;
 	void SetUp() {
 		
 	}
 
-	LayeredNetworkOptions getDefaultOptions()
+	FeedForwardNetworkTopologyOptions getDefaultOptions()
 	{
-		LayeredNetworkOptions options;
+		FeedForwardNetworkTopologyOptions options;
 		options.neuronsPerLayerCount.push_back(2);
 		options.neuronsPerLayerCount.push_back(3);
 		options.neuronsPerLayerCount.push_back(1);
@@ -22,30 +22,30 @@ public:
 		return options;
 	}
 
-	virtual ~LayeredNetworkTest()
+	virtual ~FeedForwardNetworkTopologyTest()
 	{
 		delete network;
 	}
 };
 
-TEST_F(LayeredNetworkTest, createSimpleNetwork)
+TEST_F(FeedForwardNetworkTopologyTest, createSimpleNetwork)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
-	network = new LayeredNetwork(options);
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
+	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	EXPECT_EQ(netInputs->size(), 3);
 	EXPECT_EQ((*netInputs)[0].rows(), 2);
 	EXPECT_EQ((*netInputs)[1].rows(), 3);
 	EXPECT_EQ((*netInputs)[2].rows(), 1);
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	EXPECT_EQ(activations->size(), 3);
 	EXPECT_EQ((*activations)[0]->rows(), 3);
 	EXPECT_EQ((*activations)[1]->rows(), 4);
 	EXPECT_EQ((*activations)[2]->rows(), 2);
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	EXPECT_EQ(weights->size(), 2);
 	EXPECT_EQ((*weights)[0].rows(), 3);
 	EXPECT_EQ((*weights)[0].cols(), 3);
@@ -54,25 +54,25 @@ TEST_F(LayeredNetworkTest, createSimpleNetwork)
 }
 
 
-TEST_F(LayeredNetworkTest, createNetworkWithShortcuts)
+TEST_F(FeedForwardNetworkTopologyTest, createNetworkWithShortcuts)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
 	options.enableShortcuts = true;
-	network = new LayeredNetwork(options);
+	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	EXPECT_EQ(netInputs->size(), 3);
 	EXPECT_EQ((*netInputs)[0].rows(), 2);
 	EXPECT_EQ((*netInputs)[1].rows(), 3);
 	EXPECT_EQ((*netInputs)[2].rows(), 1);
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	EXPECT_EQ(activations->size(), 3);
 	EXPECT_EQ((*activations)[0]->rows(), 3);
 	EXPECT_EQ((*activations)[1]->rows(), 6);
 	EXPECT_EQ((*activations)[2]->rows(), 7);
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	EXPECT_EQ(weights->size(), 2);
 	EXPECT_EQ((*weights)[0].rows(), 3);
 	EXPECT_EQ((*weights)[0].cols(), 3);
@@ -81,22 +81,22 @@ TEST_F(LayeredNetworkTest, createNetworkWithShortcuts)
 }
 
 
-TEST_F(LayeredNetworkTest, addNeuron)
+TEST_F(FeedForwardNetworkTopologyTest, addNeuron)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
-	network = new LayeredNetwork(options);
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
+	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	(*activations)[0]->col(0) << 1, 2, 3;
 	(*activations)[1]->col(0) << 1, 2, 3, 4;
 	(*activations)[2]->col(0) << 1, 2;
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
 	(*weights)[0].row(1) << 4, 5, 6,
 	(*weights)[0].row(2) << 7, 8, 9;
@@ -139,7 +139,7 @@ TEST_F(LayeredNetworkTest, addNeuron)
 	expectedWeights[1].row(3) << 0, 0, 0, 0, 0, 0;
 
 
-	netInputs = network->getNetInputs();
+	netInputs = network->getAllNetInputs();
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(3, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -148,7 +148,7 @@ TEST_F(LayeredNetworkTest, addNeuron)
 	EXPECT_EQ(4, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getActivations();
+	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(4, (*activations)[0]->rows());
 	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
@@ -157,7 +157,7 @@ TEST_F(LayeredNetworkTest, addNeuron)
 	EXPECT_EQ(5, (*activations)[2]->rows());
 	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
 
-	weights = network->getWeights();
+	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
 	EXPECT_EQ(5, (*weights)[0].rows());
 	EXPECT_EQ(4, (*weights)[0].cols());
@@ -168,21 +168,21 @@ TEST_F(LayeredNetworkTest, addNeuron)
 }
 
 
-TEST_F(LayeredNetworkTest, addNeuronWithShortcuts)
+TEST_F(FeedForwardNetworkTopologyTest, addNeuronWithShortcuts)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
 	options.enableShortcuts = true;
-	network = new LayeredNetwork(options);
+	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	(*activations)[2]->col(0) << 1, 2, 3, 2, 3, 4, 2;
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
 	(*weights)[0].row(1) << 4, 5, 6,
 	(*weights)[0].row(2) << 7, 8, 9;
@@ -225,7 +225,7 @@ TEST_F(LayeredNetworkTest, addNeuronWithShortcuts)
 	expectedWeights[1].row(3) << 0, 0, 0, 0, 0, 0, 0, 0, 0;
 
 
-	netInputs = network->getNetInputs();
+	netInputs = network->getAllNetInputs();
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(3, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -234,7 +234,7 @@ TEST_F(LayeredNetworkTest, addNeuronWithShortcuts)
 	EXPECT_EQ(4, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getActivations();
+	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(4, (*activations)[0]->rows());
 	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
@@ -243,7 +243,7 @@ TEST_F(LayeredNetworkTest, addNeuronWithShortcuts)
 	EXPECT_EQ(13, (*activations)[2]->rows());
 	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
 
-	weights = network->getWeights();
+	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
 	EXPECT_EQ(5, (*weights)[0].rows());
 	EXPECT_EQ(4, (*weights)[0].cols());
@@ -254,22 +254,22 @@ TEST_F(LayeredNetworkTest, addNeuronWithShortcuts)
 }
 
 
-TEST_F(LayeredNetworkTest, removeNeuron)
+TEST_F(FeedForwardNetworkTopologyTest, removeNeuron)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
-	network = new LayeredNetwork(options);
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
+	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	(*activations)[0]->col(0) << 1, 2, 3;
 	(*activations)[1]->col(0) << 1, 2, 3, 4;
 	(*activations)[2]->col(0) << 1, 2;
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
 	(*weights)[0].row(1) << 4, 5, 6,
 	(*weights)[0].row(2) << 7, 8, 9;
@@ -300,7 +300,7 @@ TEST_F(LayeredNetworkTest, removeNeuron)
 	expectedWeights[0].row(0) << 2, 3;
 	expectedWeights[0].row(1) << 8, 9;
 
-	netInputs = network->getNetInputs();
+	netInputs = network->getAllNetInputs();
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(1, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -309,7 +309,7 @@ TEST_F(LayeredNetworkTest, removeNeuron)
 	EXPECT_EQ(0, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getActivations();
+	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(2, (*activations)[0]->rows());
 	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
@@ -318,7 +318,7 @@ TEST_F(LayeredNetworkTest, removeNeuron)
 	EXPECT_EQ(1, (*activations)[2]->rows());
 	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
 
-	weights = network->getWeights();
+	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
 	EXPECT_EQ(2, (*weights)[0].rows());
 	EXPECT_EQ(2, (*weights)[0].cols());
@@ -330,21 +330,21 @@ TEST_F(LayeredNetworkTest, removeNeuron)
 
 
 
-TEST_F(LayeredNetworkTest, removeNeuronWithShortcuts)
+TEST_F(FeedForwardNetworkTopologyTest, removeNeuronWithShortcuts)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
 	options.enableShortcuts = true;
-	network = new LayeredNetwork(options);
+	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getNetInputs();
+	auto netInputs = network->getAllNetInputs();
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getActivations();
+	auto activations = network->getAllActivations();
 	(*activations)[2]->col(0) << 1, 2, 3, 2, 3, 4, 2;
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
 	(*weights)[0].row(1) << 4, 5, 6,
 	(*weights)[0].row(2) << 7, 8, 9;
@@ -376,7 +376,7 @@ TEST_F(LayeredNetworkTest, removeNeuronWithShortcuts)
 	expectedWeights[0].row(1) << 8, 9;
 	expectedWeights[1].row(0) << 2, 3, 4, 6;
 
-	netInputs = network->getNetInputs();
+	netInputs = network->getAllNetInputs();
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(1, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -385,7 +385,7 @@ TEST_F(LayeredNetworkTest, removeNeuronWithShortcuts)
 	EXPECT_EQ(1, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getActivations();
+	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(2, (*activations)[0]->rows());
 	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
@@ -394,7 +394,7 @@ TEST_F(LayeredNetworkTest, removeNeuronWithShortcuts)
 	EXPECT_EQ(5, (*activations)[2]->rows());
 	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
 
-	weights = network->getWeights();
+	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
 	EXPECT_EQ(2, (*weights)[0].rows());
 	EXPECT_EQ(2, (*weights)[0].cols());
@@ -406,12 +406,12 @@ TEST_F(LayeredNetworkTest, removeNeuronWithShortcuts)
 
 
 
-TEST_F(LayeredNetworkTest, removeAfferentWeight)
+TEST_F(FeedForwardNetworkTopologyTest, removeAfferentWeight)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
-	network = new LayeredNetwork(options);
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
+	network = new FeedForwardNetworkTopology(options);
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
 	(*weights)[0].row(1) << 4, 5, 6,
 	(*weights)[0].row(2) << 7, 8, 9;
@@ -430,7 +430,7 @@ TEST_F(LayeredNetworkTest, removeAfferentWeight)
 	expectedWeights[0].row(2) << 7, 8, 9;
 	expectedWeights[1].row(0) << 1, 2, 3, 0;
 
-	weights = network->getWeights();
+	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
 	EXPECT_EQ(3, (*weights)[0].rows());
 	EXPECT_EQ(3, (*weights)[0].cols());
@@ -441,12 +441,12 @@ TEST_F(LayeredNetworkTest, removeAfferentWeight)
 }
 
 
-TEST_F(LayeredNetworkTest, existsAfferentWeight)
+TEST_F(FeedForwardNetworkTopologyTest, existsAfferentWeight)
 {
-	LayeredNetworkOptions options = getDefaultOptions();
-	network = new LayeredNetwork(options);
+	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
+	network = new FeedForwardNetworkTopology(options);
 
-	auto weights = network->getWeights();
+	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 0, 2, 3;
 	(*weights)[0].row(1) << 4, 0, 0,
 	(*weights)[0].row(2) << 7, 8, 9;

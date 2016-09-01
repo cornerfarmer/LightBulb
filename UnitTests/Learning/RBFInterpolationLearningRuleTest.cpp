@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include <Mocks/MockActivationFunction.hpp>
 #include <NeuralNetwork/NeuralNetworkIO.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Teaching/Teacher.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>

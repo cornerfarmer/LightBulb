@@ -15,7 +15,7 @@
 template <class Archive>
 void save(Archive& archive, RBFNetwork const & rbfNetwork)
 {
-	archive(cereal::base_class<LayeredNetwork>(&rbfNetwork));
+	archive(cereal::base_class<FeedForwardNetworkTopology>(&rbfNetwork));
 	archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
 }
 
@@ -23,7 +23,7 @@ template <class Archive>
 void load(Archive& archive, RBFNetwork & rbfNetwork)
 {
 	IOStorage<Eigen::VectorXd>::push(&rbfNetwork.neuronWidths);
-	archive(cereal::base_class<LayeredNetwork>(&rbfNetwork));
+	archive(cereal::base_class<FeedForwardNetworkTopology>(&rbfNetwork));
 	archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
 }
 

@@ -16,10 +16,10 @@ AbstractEvolutionObject* TicTacToe::createNewObject()
 	return new TicTacToeKI(*options, this);
 }
 
-TicTacToe::TicTacToe(LayeredNetworkOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+TicTacToe::TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
 	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
-	options.reset(new LayeredNetworkOptions(options_));
+	options.reset(new FeedForwardNetworkTopologyOptions(options_));
 	initialize();
 }
 

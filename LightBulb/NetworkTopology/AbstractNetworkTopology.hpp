@@ -4,75 +4,79 @@
 #define _ABSTRACTNETWORKTOPOLOGY_H_
 
 // Includes
-#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 // Library includes
+#include "EigenSrc/Dense"
 #include <vector>
-#include <map>
+#include <memory>
+#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 // Forward declarations
-class InputNeuron;
-class AbstractNeuron;
-class StandardNeuron;
-class Edge;
-class BiasNeuron;
 class AbstractRandomGenerator;
+class NeuronDescription;
 
 // A NetworkTopology is used to describe the structure of a NeuralNetwork
 class AbstractNetworkTopology
 {
 private:
-public:	
-	virtual ~AbstractNetworkTopology() {}
-
-	virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
-
-	virtual AbstractActivationFunction* getInnerActivationFunction() = 0;
-	// Returns all InputNeurons in the NeuralNetwork
-	virtual std::vector<AbstractNeuron*>* getInputNeurons() = 0;
-	// Returns all OutputNeurons in the NeuralNetwork
-	virtual std::vector<StandardNeuron*>* getOutputNeurons() = 0;
-	// Set all weights to new random values between randStart and randEnd
-	virtual void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) = 0;
-	virtual void randomizeDependingOnWeightsSize(AbstractRandomGenerator* randomGenerator) = 0;
-	// Returns all Neurons
-	virtual std::vector<std::vector<StandardNeuron*>>* getNeurons() = 0;
-	// Calculates the Edge count
+public:
 	virtual int getEdgeCount() = 0;
-	// Reset the activation of all neurons
+
+	virtual int getInputSize() = 0;
+
+	virtual int getOutputSize() = 0;
+
+	virtual void setInput(std::vector<double> &inputVector) = 0;
+
+	virtual void getOutput(std::vector<double> &outputVector) = 0;
+
 	virtual void resetActivation() = 0;
-	// Puts all current neuronOutputValues into the given map
-	virtual void getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs) = 0;
-	// Puts all current neuronNetInputValues into the given map
-	virtual void getAllNeuronNetInputs(std::map<AbstractNeuron*, double>& neuronNetInputs) = 0;
-	// Copies the weight from all matching edges from the other network into the current one
-	virtual void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
 
-	virtual double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
-	// Returns the biasNeuron
-	virtual BiasNeuron* getBiasNeuron() = 0;
-	// Returns is the given neuron is an InputNeuron of this networkTopology
-	bool isInputNeuron(AbstractNeuron* neuron);
-	// Returns is the given neuron is an OutputNeuron of this networkTopology
-	bool isOutputNeuron(StandardNeuron* neuron);
+	virtual void copyWeightsFrom(AbstractNetworkTopology& otherNetwork) = 0;
 
-	virtual void getOutput(std::vector<std::pair<bool, double>> &outputVector);
-	
-	virtual void getOutput(std::vector<double> &outputVector);
+	virtual int getNeuronCount() = 0;
 
-	virtual void setInput(std::vector<double> &inputVector);
+	virtual double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork) = 0;
 
-	virtual int getOutputSize() { return getOutputNeurons()->size(); }
+	virtual void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) = 0;
 
-	virtual int getNeuronCountInLayer(int layerIndex) = 0;
-
-	virtual std::vector<unsigned int> getNeuronCountsPerLayer() = 0;
 
 	virtual int getLayerCount() = 0;
 
-	virtual int getAfferentEdgeCount(int layerIndex, int neuronIndex) = 0;
+	virtual std::vector<unsigned int> getNeuronCountsPerLayer() = 0;
 
-	virtual double getPrevNeuronActivation(int layerIndex, int neuronIndex, int edgeIndex) = 0;
+
+	virtual void randomizeDependingOnLayerSize(AbstractRandomGenerator* randomGenerator) = 0;
+
+	virtual void refreshNetInputsForLayer(int layerNr) = 0;
+
+	virtual void refreshActivationsForLayer(int layerNr) = 0;
+
+	virtual std::vector<Eigen::MatrixXd>* getAllWeights() = 0;
+
+	virtual std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* getAllActivations() = 0;
+
+	virtual std::vector<Eigen::VectorXd> getActivationsCopy() = 0;
+
+	virtual std::vector<Eigen::VectorXd>* getAllNetInputs() = 0;
+
+
+	virtual Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) = 0;
+
+	virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) = 0;
+
+	virtual Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) = 0;
+
+	virtual Eigen::VectorXd getNetInputsPerLayer(int layerIndex) = 0;
+
+	virtual Eigen::VectorXd getActivationsPerLayer(int layerIndex) = 0;
+
+
+	virtual Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) = 0;
+
+	virtual double getBiasWeightOfNeuron(int layerNr, int neuronNr) = 0;
+
+	virtual std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false) = 0;
 
 	virtual double getWeight(int layerIndex, int neuronIndex, int edgeIndex) = 0;
 
@@ -80,24 +84,7 @@ public:
 
 	virtual double getNetInput(int layerIndex, int neuronIndex) = 0;
 
-	virtual std::vector<Eigen::VectorXd> getActivationsCopy() = 0;
-
-	virtual Eigen::VectorXd getNetInputVector(int layerIndex) = 0;
-
-	virtual std::vector<Eigen::VectorXd>* getNetInputs() = 0;
-
-	virtual Eigen::VectorXd getEfferentWeightVector(int layerIndex, int neuronIndex) = 0;
-
-	virtual Eigen::VectorXd getActivationVector(int layerIndex) = 0;
-
-
-	virtual Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) = 0;
-
-	virtual Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) = 0;
-
-	virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) = 0;
-
-	virtual std::vector<Eigen::MatrixXd>* getWeights() = 0;
+	virtual double getActivation(int layerIndex, int neuronIndex) = 0;
 
 	virtual bool usesBiasNeuron() = 0;
 
@@ -109,9 +96,11 @@ public:
 
 	virtual bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) = 0;
 
-	virtual int getNeuronCount() = 0;
-
 	virtual AbstractNetworkTopology* clone() = 0;
+	
+	virtual NeuronDescription* getInnerNeuronDescription() = 0;
+
+	virtual NeuronDescription* getOutputNeuronDescription() = 0;
 };
 
 

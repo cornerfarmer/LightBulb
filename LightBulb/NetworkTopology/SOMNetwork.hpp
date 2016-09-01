@@ -7,7 +7,7 @@
 #include <map>
 
 // Includes
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 // Forward declarations
 class AbstractTeachingLesson;
@@ -15,7 +15,7 @@ class Teacher;
 class AbstractSOMStructure;
 
 // A SOMNetwork is layered network which has only one input and one output layer.
-class SOMNetwork : public LayeredNetwork
+class SOMNetwork : public FeedForwardNetworkTopology
 {
 private:	
 	AbstractSOMStructure* structure;

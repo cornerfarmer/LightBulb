@@ -139,7 +139,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="7325e575-120a-4a23-a958-224dfcb2c331" name="LayeredNetworkOptions" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::LayeredNetworkOptions">
+      <referencedType Id="7325e575-120a-4a23-a958-224dfcb2c331" name="FeedForwardNetworkTopologyOptions" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::FeedForwardNetworkTopologyOptions">
         <elementDefinition Id="c7be55b4-1061-4dbe-9378-89b17394e305" />
       </referencedType>
     </packageHasNamedElement>
@@ -1549,7 +1549,7 @@
         <elementDefinition Id="223df67c-c611-4d91-a070-355649ff96b7" />
         <packagedElements>
           <packageHasNamedElement>
-            <class Id="5b27932e-59dc-41be-b7d2-730ca5529f70" name="LayeredNetworkOptions" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="5b27932e-59dc-41be-b7d2-730ca5529f70" name="FeedForwardNetworkTopologyOptions" isAbstract="false" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="da994962-4aaf-4827-8a5f-9abd650f7de5" name="class" profile="CSharpProfile">
                   <elementDefinition Id="f2c558c0-d209-4816-881b-5148e86a6cb5" />
@@ -1838,7 +1838,7 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" name="LayeredNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" name="FeedForwardNetworkTopology" isAbstract="false" isLeaf="false" isActiveClass="false">
               <appliedStereotypesInternal>
                 <stereotypeInstance Id="147658a5-0102-422a-bcfd-282efafcbeb0" name="class" profile="CSharpProfile">
                   <elementDefinition Id="3a12346c-f100-4457-86dd-5d2946269e5d" />
@@ -1911,7 +1911,7 @@
                   <elementDefinition Id="a70b60c2-88ab-40f9-a7a9-2ed65d41786a" />
                 </association>
                 <association Id="a53700f2-4897-40df-abbe-18a17c547f14" isDerived="false" sourceEndRoleName="" targetEndRoleName="options" isLeaf="false" isAbstract="false">
-                  <classMoniker Id="5b27932e-59dc-41be-b7d2-730ca5529f70" LastKnownName="LayeredNetworkOptions" />
+                  <classMoniker Id="5b27932e-59dc-41be-b7d2-730ca5529f70" LastKnownName="FeedForwardNetworkTopologyOptions" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
                       <memberEnd Id="e941b864-6438-4f61-bb0c-11ac8fe3e995" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -1931,12 +1931,12 @@
                 <property Id="9f9ef212-b961-4612-844b-a98614a017cc" name="options" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="079318db-1232-486f-9e66-2917b1e4e051" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="7325e575-120a-4a23-a958-224dfcb2c331" LastKnownName="LayeredNetworkOptions" />
+                    <referencedTypeMoniker Id="7325e575-120a-4a23-a958-224dfcb2c331" LastKnownName="FeedForwardNetworkTopologyOptions" />
                   </type_NamedElement>
                 </property>
               </ownedAttributesInternal>
               <ownedOperationsInternal>
-                <operation Id="49a74b6e-f48d-4d42-b0be-3cf2b2b53e69" name="LayeredNetwork" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                <operation Id="49a74b6e-f48d-4d42-b0be-3cf2b2b53e69" name="FeedForwardNetworkTopology" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
                   <appliedStereotypesInternal>
                     <stereotypeInstance Id="98a2c1c0-08e4-44eb-9a69-78eb11c7c729" name="method" profile="CSharpProfile">
                       <elementDefinition Id="4fe2def1-546b-4a29-b652-9a37d85cb109" />
@@ -1980,7 +1980,7 @@
                       <parameter Id="78a44f2a-f292-45b6-a6db-38f781c8b56b" name="options_" direction="In" isUnique="false">
                         <elementDefinition Id="5e1decf6-d4b6-4e12-9f9b-64aff3ac817a" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="7325e575-120a-4a23-a958-224dfcb2c331" LastKnownName="LayeredNetworkOptions" />
+                          <referencedTypeMoniker Id="7325e575-120a-4a23-a958-224dfcb2c331" LastKnownName="FeedForwardNetworkTopologyOptions" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -2279,7 +2279,7 @@
                       <parameter Id="58532743-d2b2-462e-8e1f-67787c30b418" direction="Return" isUnique="false">
                         <elementDefinition Id="71506942-eeaa-409d-9d03-02c5a3ccdfba" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="LayeredNetwork" />
+                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="FeedForwardNetworkTopology" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -2293,14 +2293,14 @@
               <elementDefinition Id="ca0edee0-aa65-40c9-991b-aa5151776c8c" />
               <generalsInternal>
                 <generalization Id="2751f255-92f9-4661-b174-8cf50080846d" isSubstitutable="false">
-                  <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="LayeredNetwork" />
+                  <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="FeedForwardNetworkTopology" />
                   <elementDefinition Id="35054367-704a-4bea-b941-7d4d4b21bb57" />
                 </generalization>
               </generalsInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="a0ff69b2-1e77-4153-88a8-be3407345e79" name="RecurrentLayeredNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="a0ff69b2-1e77-4153-88a8-be3407345e79" name="RecurrentFeedForwardNetworkTopology" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="c15ca439-ee38-4dd7-94a1-54ab9d253bf3" />
               <suppliersInternal>
                 <interfaceRealization Id="baec2b11-78e7-41f1-a81f-2616effd2810">
@@ -2310,7 +2310,7 @@
               </suppliersInternal>
               <generalsInternal>
                 <generalization Id="d6ae66e9-5081-47d6-8dfe-2b0ea46fc9c9" isSubstitutable="false">
-                  <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="LayeredNetwork" />
+                  <classMoniker Id="359a8f77-9a50-4126-aef8-1ffe79b34f10" LastKnownName="FeedForwardNetworkTopology" />
                   <elementDefinition Id="6075916f-20a7-4696-bac2-aa48f5e2e575" />
                 </generalization>
               </generalsInternal>
@@ -2322,7 +2322,7 @@
                       <parameter Id="db4eb991-9200-4266-b639-23c0219ad236" direction="Return" isUnique="false">
                         <elementDefinition Id="987282b2-06b6-4e8a-b192-9d05615c8a9a" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="LayeredNetwork" />
+                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="FeedForwardNetworkTopology" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -2342,7 +2342,7 @@
                       <parameter Id="f152905e-3301-4ca4-8571-8f898bbea90d" direction="Return" isUnique="false">
                         <elementDefinition Id="599fccd0-b0e7-4bfd-ae52-84c668089a22" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="LayeredNetwork" />
+                          <referencedTypeMoniker Id="53ee496d-412c-4714-ba79-9b51c633217b" LastKnownName="FeedForwardNetworkTopology" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -4121,7 +4121,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="53ee496d-412c-4714-ba79-9b51c633217b" name="LayeredNetwork" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::LayeredNetwork">
+      <referencedType Id="53ee496d-412c-4714-ba79-9b51c633217b" name="FeedForwardNetworkTopology" isAbstract="false" isLeaf="false" cachedFullName="LightBulbModeling::NetworkTopology::FeedForwardNetworkTopology">
         <elementDefinition Id="cf658375-abab-4b57-ba8a-f0ea5b5ed5fe" />
       </referencedType>
     </packageHasNamedElement>

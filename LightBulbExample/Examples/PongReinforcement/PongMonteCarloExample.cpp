@@ -5,7 +5,7 @@
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementWorld.hpp"
 #include <Function/ActivationFunction/FermiFunction.hpp>
@@ -31,7 +31,7 @@ AbstractLearningRule* PongMonteCarloExample::createLearningRate()
 
 PongReinforcementWorld* PongMonteCarloExample::createWorld()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
 	options.neuronsPerLayerCount.push_back(6);

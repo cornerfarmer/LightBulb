@@ -6,14 +6,14 @@
 // Libary includes
 
 // Includes
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 // Forward declarations
 class AbstractTeachingLesson;
 class Teacher;
 
 // A LVQNetwork is layered network which has only one input, one hidden and one output layer.
-class LVQNetwork : public LayeredNetwork
+class LVQNetwork : public FeedForwardNetworkTopology
 {
 private:	
 public:

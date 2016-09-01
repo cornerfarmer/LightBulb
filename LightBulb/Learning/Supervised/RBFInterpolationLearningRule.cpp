@@ -6,6 +6,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/RBFNetwork.hpp"
+#include "Neuron/NeuronDescription.hpp"
 
 
 using namespace Eigen;
@@ -51,14 +52,14 @@ void RBFInterpolationLearningRule::initializeStartLearningAlgoritm()
 
 	// Check if all given parameters are correct
 	if (!rbfNetwork)
-		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
+		throw std::invalid_argument("The given neuralNetwork has to contain a FeedForwardNetworkTopologyTopology");
 	
 	// Initialize a matrix which will contain all outputValues from neurons in the first hidden layer in every teachingLesson
-	m.reset(new MatrixXd(getOptions()->teacher->getTeachingLessons()->size(), rbfNetwork->getNeuronCountInLayer(1)));
+	m.reset(new MatrixXd(getOptions()->teacher->getTeachingLessons()->size(), rbfNetwork->getNeuronCountsPerLayer()[1]));
 	// Initialize a new matrx which will contain all teachingInput values from all output neurons
 	t.reset(new MatrixXd(m->rows(), getOptions()->neuralNetwork->getNetworkTopology()->getOutputSize()));
 	// Initialize a new vector which will contain all calculated weights
-	w.reset(new MatrixXd(getOptions()->neuralNetwork->getNetworkTopology()->getOutputSize(), rbfNetwork->getNeuronCountInLayer(1)));
+	w.reset(new MatrixXd(getOptions()->neuralNetwork->getNetworkTopology()->getOutputSize(), rbfNetwork->getNeuronCountsPerLayer()[1]));
 
 	
 }
@@ -78,7 +79,7 @@ std::vector<Eigen::MatrixXd> RBFInterpolationLearningRule::calculateDeltaWeight(
 		{
 			// Put the teachingInput concerning current neuron into the collumn of the current neuron in our t matrix
 			for (int i = 0; i < t->cols(); i++) {
-				(*t)(lessonIndex, i) = lesson.getTeachingInput(getCurrentNetworkTopology()->getOutputActivationFunction())->get(0, i);
+				(*t)(lessonIndex, i) = lesson.getTeachingInput(getCurrentNetworkTopology()->getOutputNeuronDescription()->getActivationFunction())->get(0, i);
 			}
 
 			if (lessonIndex == t->rows() - 1)
@@ -118,7 +119,7 @@ void RBFInterpolationLearningRule::initializeTry()
 		// Try the teachingLesson
 		(*getOptions()->teacher->getTeachingLessons())[i]->tryLesson(*getOptions()->neuralNetwork, activationOrder);
 
-		m->row(i) = *(*rbfNetwork->getActivations())[1];
+		m->row(i) = *(*rbfNetwork->getAllActivations())[1];
 	}
 	
 	// If our matrix is a square matrix

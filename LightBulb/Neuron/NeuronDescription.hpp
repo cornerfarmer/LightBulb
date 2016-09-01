@@ -21,9 +21,10 @@ private:
 	std::unique_ptr<AbstractActivationFunction> activationFunction;
 public:
 	NeuronDescription(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_);
+	NeuronDescription() = default;
 	NeuronDescription* getCopy();
 	AbstractInputFunction* getInputFunction();
-	AbstractActivationFunction* getActivationFunction();
+	virtual AbstractActivationFunction* getActivationFunction();
 };
 
 #include "IO/NeuronDescriptionIO.hpp"

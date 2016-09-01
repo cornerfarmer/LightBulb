@@ -2,7 +2,7 @@
 #include "Learning/Reinforcement/MonteCarloLearningRule.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <iostream>
 #include <algorithm>
@@ -58,7 +58,7 @@ void MonteCarloLearningRule::initialize()
 
 void MonteCarloLearningRule::addTrainingPattern(AbstractNetworkTopology* networkTopology, double reward)
 {
-	auto patternVector = networkTopology->getActivationVector(0);
+	auto patternVector = networkTopology->getActivationsPerLayer(0);
 	teachingPatterns.push_back(std::vector<double>(patternVector.data(), patternVector.data() + patternVector.size()));
 
 	teachingInputs.resize(teachingInputs.size() + 1, std::vector<double>(networkTopology->getOutputSize()));

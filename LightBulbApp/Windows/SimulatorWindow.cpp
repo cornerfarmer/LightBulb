@@ -137,7 +137,7 @@ void SimulatorWindow::refreshInput(AbstractNeuralNetwork* network)
 	inputSizer->Clear(true);
 	inputControls.clear();
 	inputSizer->AddStretchSpacer(1);
-	for (int i = 0; i < network->getNetworkTopology()->getNeuronCountInLayer(0); i++)
+	for (int i = 0; i < network->getNetworkTopology()->getInputSize(); i++)
 	{
 		if (type == TYPE_BOOL)
 		{

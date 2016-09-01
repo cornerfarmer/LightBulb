@@ -6,10 +6,10 @@
 // Libary includes
 
 // Includes
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
-// A LayeredNetwork describes a network with one input layer, multiple "hidden" layers and one output layer
-class RBFNetwork : public LayeredNetwork
+// A FeedForwardNetworkTopology describes a network with one input layer, multiple "hidden" layers and one output layer
+class RBFNetwork : public FeedForwardNetworkTopology
 {
 	template <class Archive>
 	friend void save(Archive& archive, RBFNetwork const & rbfNetwork);

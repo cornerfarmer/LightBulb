@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Teaching/Teacher.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 // Library includes

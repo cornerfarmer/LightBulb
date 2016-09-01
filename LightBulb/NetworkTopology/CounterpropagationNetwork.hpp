@@ -6,14 +6,14 @@
 // Libary includes
 
 // Includes
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 // Forward declarations
 class AbstractTeachingLesson;
 class Teacher;
 
 // A CounterpropagationNetwork is layered network which has only one input, one hidden and one output layer.
-class CounterpropagationNetwork : public LayeredNetwork
+class CounterpropagationNetwork : public FeedForwardNetworkTopology
 {
 private:	
 public:

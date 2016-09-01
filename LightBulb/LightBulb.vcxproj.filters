@@ -367,12 +367,6 @@
     <ClCompile Include="IO\SynapticExporter.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\LayeredNetwork.old..cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LayeredNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
     <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
@@ -417,9 +411,6 @@
     </ClCompile>
     <ClCompile Include="Event\AbstractObserver.cpp">
       <Filter>Quelldateien\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\LayeredNetworkIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
     </ClCompile>
     <ClCompile Include="IO\MatrixIO.hpp">
       <Filter>Quelldateien\IO</Filter>
@@ -600,6 +591,13 @@
     <ClCompile Include="Random\ZigguratGenerator.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkTopology\FeedForwardNetworkTopology.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\FeedForwardNetworkTopologyIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTopology\AbstractFeedForwardNetworkTopology.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -911,12 +909,6 @@
     <ClInclude Include="IO\SynapticExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\LayeredNetwork.old.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LayeredNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
     <ClInclude Include="Neuron\NeuronDescription.hpp">
       <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
@@ -1210,5 +1202,9 @@
     <ClInclude Include="Random\XorShfGenerator.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkTopology\FeedForwardNetworkTopology.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
   </ItemGroup>
 </Project>

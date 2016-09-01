@@ -13,7 +13,7 @@
 #include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
-struct LayeredNetworkOptions;
+struct FeedForwardNetworkTopologyOptions;
 struct LearningState;
 
 class AbstractReinforcementWorld : public AbstractRandomGeneratorUser
@@ -24,7 +24,7 @@ private:
 	bool epsilonGreedly = false;
 	double epsilon;
 	void buildOutputBuffer();
-	void buildNeuralNetwork(LayeredNetworkOptions &options);
+	void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 protected:
 	std::vector<bool> lastBooleanOutput;
 	LearningState* learningState;
@@ -41,7 +41,7 @@ public:
 
 	void doNNCalculation(bool resetInput = true);
 	virtual ~AbstractReinforcementWorld() {}
-	AbstractReinforcementWorld(LayeredNetworkOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
+	AbstractReinforcementWorld(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
 	// This method should execute one simulation step.
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual double doSimulationStep() = 0;

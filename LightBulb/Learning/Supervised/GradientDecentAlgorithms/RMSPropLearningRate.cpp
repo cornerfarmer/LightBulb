@@ -23,10 +23,10 @@ RMSPropLearningRateOptions* RMSPropLearningRate::getOptions()
 void RMSPropLearningRate::initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork)
 {
 	// Make sure the previous learning rates map is empty
-	prevGradient.resize(neuralNetwork.getNetworkTopology()->getWeights()->size());
+	prevGradient.resize(neuralNetwork.getNetworkTopology()->getAllWeights()->size());
 	for (int i = 0; i < prevGradient.size(); i++)
 	{
-		prevGradient[i].resizeLike(neuralNetwork.getNetworkTopology()->getWeights()->at(i));
+		prevGradient[i].resizeLike(neuralNetwork.getNetworkTopology()->getAllWeights()->at(i));
 		prevGradient[i].setZero();
 	}
 	prevSquaredGradient = prevGradient;

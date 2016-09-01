@@ -6,7 +6,7 @@
 #include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Neuron/NeuronDescription.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Learning/Reinforcement/PolicyGradientLearningRule.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
@@ -33,7 +33,7 @@ AbstractLearningRule* SimpleReinforcementExample::createLearningRate()
 
 SimpleReinforcementWorld* SimpleReinforcementExample::createWorld()
 {
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 
 	options.neuronsPerLayerCount.push_back(2);

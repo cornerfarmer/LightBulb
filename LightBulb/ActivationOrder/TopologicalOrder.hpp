@@ -7,7 +7,7 @@
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 
 // With this order, neurons will get activated layer by layer
-// This class is only compatible with a LayeredNetwork!
+// This class is only compatible with a FeedForwardNetworkTopology!
 class TopologicalOrder : public AbstractActivationOrder
 {
 private:

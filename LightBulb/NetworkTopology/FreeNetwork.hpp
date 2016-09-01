@@ -78,7 +78,7 @@ public:
 	// Adds a neuron to the network
 	AbstractNeuron* addNeuron(bool refreshNeuronCounters, bool inputNeuron = false);
 	// Inherited:
-	std::unique_ptr<LayeredNetwork> unfold(int instanceCount);
+	std::unique_ptr<FeedForwardNetworkTopology> unfold(int instanceCount);
 	BiasNeuron* getBiasNeuron();
 };
 

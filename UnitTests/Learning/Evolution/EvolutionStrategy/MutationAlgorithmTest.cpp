@@ -37,7 +37,7 @@ TEST_F(MutationAlgorithmTest, execute)
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
-	EXPECT_CALL(networkTopology, getWeights()).WillRepeatedly(testing::Return(&weights));
+	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::Return(&weights));
 
 	weights.push_back(Eigen::MatrixXd(2,2));
 	weights[0](0, 0) = 2;

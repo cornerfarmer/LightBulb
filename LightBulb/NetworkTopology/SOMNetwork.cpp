@@ -28,7 +28,7 @@ SOMNetwork::SOMNetwork(unsigned int inputNeuronCount, unsigned int codebookVecto
 	structure = somStructure;
 
 	// Create a new options object
-	options.reset(new LayeredNetworkOptions());
+	options.reset(new FeedForwardNetworkTopologyOptions());
 	// Set all options
 	// Define thresholds and functions
 	options->neuronFactory = new SameFunctionsNeuronFactory(new NeuronCompareThreshold(NULL), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction());

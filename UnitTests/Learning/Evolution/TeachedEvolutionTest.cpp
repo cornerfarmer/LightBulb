@@ -12,7 +12,7 @@ class TeachedEvolutionTest : public testing::Test {
 public:
 	TeachingEvolutionWorld* teachingEvolutionWorld;
 	MockTeacher teacher;
-	LayeredNetworkOptions options;
+	FeedForwardNetworkTopologyOptions options;
 	MockRandomGenerator randomGenerator;
 	void SetUp() {
 		

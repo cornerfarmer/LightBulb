@@ -3,7 +3,7 @@
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <NeuralNetwork/NeuralNetworkIO.hpp>
-#include <NetworkTopology/LayeredNetwork.hpp>
+#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
@@ -22,16 +22,16 @@ public:
 	NeuralNetwork* neuralNetwork;
 	Teacher* teacher;
 	void SetUp() {
-		LayeredNetworkOptions layeredNetworkOptions;
-		layeredNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-		layeredNetworkOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-		layeredNetworkOptions.neuronsPerLayerCount[0] = 2;
-		layeredNetworkOptions.neuronsPerLayerCount[1] = 2;
-		layeredNetworkOptions.neuronsPerLayerCount[2] = 1;
+		FeedForwardNetworkTopologyOptions FeedForwardNetworkTopologyOptions;
+		FeedForwardNetworkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+		FeedForwardNetworkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+		FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[0] = 2;
+		FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[1] = 2;
+		FeedForwardNetworkTopologyOptions.neuronsPerLayerCount[2] = 1;
 
-		LayeredNetwork* layeredNetwork = new LayeredNetwork(layeredNetworkOptions);
+		FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions);
 
-		neuralNetwork = new NeuralNetwork(layeredNetwork);
+		neuralNetwork = new NeuralNetwork(networkTopology);
 
 		teacher = new Teacher();
 		for (int i = 0; i < 2; i += 1)

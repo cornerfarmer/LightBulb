@@ -2,7 +2,7 @@
 #include "Learning/Reinforcement/DQNLearningRule.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include "AbstractReinforcementWorld.hpp"
@@ -59,7 +59,7 @@ void DQNLearningRule::initialize()
 void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, double reward)
 {
 	Transition transition;
-	auto patternVector = networkTopology->getActivationVector(0);
+	auto patternVector = networkTopology->getActivationsPerLayer(0);
 	transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
 
 	if (!getOptions()->world->isTerminalState()) {
@@ -141,7 +141,7 @@ std::vector<Eigen::MatrixXd> DQNLearningRule::checkGradient(Teacher* teacher, Ab
 {
 	double error = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
 	double epsilon = 0.0001;
-	auto weights = networkTopology->getWeights();
+	auto weights = networkTopology->getAllWeights();
 	std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
 	for (int l = weights->size() - 1; l >= 0; l--)
 	{

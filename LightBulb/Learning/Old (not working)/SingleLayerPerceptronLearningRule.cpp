@@ -8,7 +8,7 @@
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Neuron/StandardNeuron.hpp"
 #include "Neuron/Edge.hpp"
-#include "NetworkTopology/LayeredNetwork.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "Function/BinaryFunction.hpp"
 
 SingleLayerPerceptronLearningRule::SingleLayerPerceptronLearningRule(AbstractLearningRuleOptions &options_)
@@ -31,9 +31,9 @@ bool SingleLayerPerceptronLearningRule::learningHasStopped()
 void SingleLayerPerceptronLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
 {
 	// Check if all given parameters are correct
-	if (!dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology()))
-		throw std::invalid_argument("The given neuralNetwork has to contain a layeredNetworkTopology");
-	if (dynamic_cast<LayeredNetwork*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
+	if (!dynamic_cast<FeedForwardNetworkTopology*>(neuralNetwork.getNetworkTopology()))
+		throw std::invalid_argument("The given neuralNetwork has to contain a FeedForwardNetworkTopologyTopology");
+	if (dynamic_cast<FeedForwardNetworkTopology*>(neuralNetwork.getNetworkTopology())->getLayerCount() != 2)
 		throw std::invalid_argument("The given neuralNetwork has to contain exactly two layers");
 	if (!dynamic_cast<BinaryFunction*>(dynamic_cast<StandardNeuron*>((*neuralNetwork.getNetworkTopology()->getOutputNeurons())[0])->getActivationFunction()))
 		throw std::invalid_argument("All outputNeurons have to use binary activationFunctions");

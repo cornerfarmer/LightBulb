@@ -19,7 +19,7 @@ RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCo
 		throw std::invalid_argument("The given neuronCountThirdLayer has to be greater than 0");
 
 	// Create a new options object
-	options.reset(new LayeredNetworkOptions());
+	options.reset(new FeedForwardNetworkTopologyOptions());
 	// Set all options
 	options->enableShortcuts = false;
 	// Define thresholds and functions
