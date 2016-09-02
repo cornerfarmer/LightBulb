@@ -328,15 +328,6 @@
     <ClCompile Include="Examples\RockTile.cpp">
       <Filter>Quelldateien\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClCompile>
-    <ClCompile Include="Diagnostic\ChangeableNumber.cpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClCompile>
-    <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClCompile>
     <ClCompile Include="Lib\ziggurat.cpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
@@ -869,15 +860,6 @@
     </ClInclude>
     <ClInclude Include="Examples\RockTile.hpp">
       <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClInclude>
-    <ClInclude Include="Diagnostic\ChangeableNumber.hpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
-    </ClInclude>
-    <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp">
-      <Filter>Quelldateien\Diagnostic</Filter>
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>

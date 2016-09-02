@@ -81,9 +81,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Diagnostic\AbstractChangeableParameter.cpp" />
-    <ClCompile Include="Diagnostic\ChangeableNumber.cpp" />
-    <ClCompile Include="Diagnostic\LearningRuleAnalyser.cpp" />
     <ClCompile Include="Event\AbstractObserver.cpp" />
     <ClCompile Include="Event\Observable.cpp" />
     <ClCompile Include="Event\Observer.cpp" />
@@ -595,9 +592,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Diagnostic\AbstractChangeableParameter.hpp" />
-    <ClInclude Include="Diagnostic\ChangeableNumber.hpp" />
-    <ClInclude Include="Diagnostic\LearningRuleAnalyser.hpp" />
     <ClInclude Include="Event\AbstractObserver.hpp" />
     <ClInclude Include="Event\Observable.hpp" />
     <ClInclude Include="Event\Observer.hpp" />
