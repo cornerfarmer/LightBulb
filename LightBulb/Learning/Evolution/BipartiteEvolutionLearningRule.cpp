@@ -12,13 +12,11 @@ AbstractLearningResult* BipartiteEvolutionLearningRule::getLearningResult()
 BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_)
 	: AbstractEvolutionLearningRule(new BipartiteEvolutionLearningRuleOptions(options_))
 {
-	initialize();
 }
 
 BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_)
 	: AbstractEvolutionLearningRule(options_)
 {
-	initialize();
 }
 
 std::string BipartiteEvolutionLearningRule::getName()
@@ -46,7 +44,7 @@ AbstractEvolutionLearningRule* BipartiteEvolutionLearningRule::getSecondLearning
 }
 
 
-void BipartiteEvolutionLearningRule::initialize()
+void BipartiteEvolutionLearningRule::initializeStartLearningAlgoritm()
 {
 	exitConditionReached = false;
 	getOptions()->learningRule1->learningState = learningState;
@@ -55,6 +53,8 @@ void BipartiteEvolutionLearningRule::initialize()
 	getOptions()->learningRule2->setLogger(options->logger);
 	getOptions()->learningRule1->randomGenerator = randomGenerator;
 	getOptions()->learningRule2->randomGenerator = randomGenerator;
+	getOptions()->learningRule1->setHelperToUsedObjects();
+	getOptions()->learningRule2->setHelperToUsedObjects();
 	getOptions()->learningRule2->options->dataSetsPrefix = "Parasite - ";
 }
 

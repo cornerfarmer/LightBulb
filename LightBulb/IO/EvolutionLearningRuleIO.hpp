@@ -26,6 +26,7 @@ namespace cereal
 		static void construct(Archive& ar, EvolutionLearningRule& learningRule)
 		{
 			ar(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
+			learningRule.setHelperToUsedObjects();
 		}
 	};
 }

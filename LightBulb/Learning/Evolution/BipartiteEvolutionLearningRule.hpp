@@ -33,7 +33,7 @@ protected:
 	bool doIteration();
 	void initializeTry();
 	bool hasLearningSucceeded();
-	void initialize();
+	void initializeStartLearningAlgoritm();
 	bool exitConditionReached;
 	AbstractLearningResult* getLearningResult();
 public:

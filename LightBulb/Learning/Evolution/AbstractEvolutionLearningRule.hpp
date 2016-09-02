@@ -28,6 +28,7 @@ class AbstractEvolutionLearningRule : public AbstractLearningRule
 private:
 protected:
 	AbstractEvolutionLearningRuleOptions* getOptions();
+	virtual void setHelperToUsedObjects() {};
 public:
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
