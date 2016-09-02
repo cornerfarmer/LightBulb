@@ -7,6 +7,7 @@
 // Include
 
 // Library Includes
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 
@@ -20,5 +21,7 @@ public:
 	virtual int getSeed() = 0;
 	virtual void setSeed(int newSeed) = 0;
 };
+
+EMPTY_SERIALIZATION(AbstractRandomGenerator)
 
 #endif

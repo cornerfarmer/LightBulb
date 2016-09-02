@@ -39,6 +39,9 @@ struct ResilientLearningRateOptions : public AbstractGradientDecentAlgorithmOpti
 
 class ResilientLearningRate : public AbstractGradientDecentAlgorithm
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, ResilientLearningRate& resilientLearningRate);
+	friend struct cereal::LoadAndConstruct<ResilientLearningRate>;
 private:
 	// Holds for every edge its previous learning rate
 	std::vector<Eigen::MatrixXd> previousLearningRates;
@@ -47,15 +50,17 @@ public:
 	ResilientLearningRate(ResilientLearningRateOptions& options_);
 	ResilientLearningRate();
 
-	Eigen::MatrixXd calcDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients) override;
+	Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
 	// Print a short debug output (totalLearningRate)
 	std::string printDebugOutput();
 	// Returns if the learning has stopped
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper
-	void initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork);
+	void initializeAlgorithm(AbstractNetworkTopology* networkTopology);
 
 };
+
+#include "IO/ResilientLearningRateIO.hpp"
 
 #endif
 

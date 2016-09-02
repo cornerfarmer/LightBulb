@@ -11,10 +11,10 @@
 // Includes
 #include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 #include <cereal/access.hpp>
+#include "GradientCalculation/AbstractGradientCalculation.hpp"
+#include "GradientDecentAlgorithms/AbstractGradientDecentAlgorithm.hpp"
 
 // Forward declarations
-class AbstractGradientCalculation;
-class AbstractGradientDecentAlgorithm;
 
 struct GradientDecentLearningRuleOptions : public AbstractSupervisedLearningRuleOptions
 {	
@@ -38,6 +38,8 @@ class GradientDecentLearningRule : public AbstractSupervisedLearningRule
 	friend void serialize(Archive& archive, GradientDecentLearningRule& learningRule);
 	friend struct cereal::LoadAndConstruct<GradientDecentLearningRule>;
 private:	
+	std::unique_ptr<AbstractGradientCalculation> gradientCalculation;
+	std::unique_ptr<AbstractGradientDecentAlgorithm> gradientDecentAlgorithm;
 	void initialize();
 protected:
 	// Adjusts the weights of an edge dependent on its gradient
@@ -52,10 +54,11 @@ protected:
 public:
 	GradientDecentLearningRule(GradientDecentLearningRuleOptions& options_);
 	GradientDecentLearningRule(GradientDecentLearningRuleOptions* options_);
+	GradientDecentLearningRule();
 	static std::string getName();
 };
 
-//#include "IO/BackpropagationLearningRuleIO.hpp"
+#include "IO/GradientDecentLearningRuleIO.hpp"
 
 #endif
 

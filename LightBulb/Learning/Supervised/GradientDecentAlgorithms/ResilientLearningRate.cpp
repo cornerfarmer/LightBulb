@@ -20,10 +20,10 @@ ResilientLearningRateOptions* ResilientLearningRate::getOptions()
 	return static_cast<ResilientLearningRateOptions*>(options.get());
 }
 
-void ResilientLearningRate::initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork)
+void ResilientLearningRate::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
 {
 	// Make sure the previous learning rates map is empty
-	previousLearningRates = *neuralNetwork.getNetworkTopology()->getAllWeights();
+	previousLearningRates = *networkTopology->getAllWeights();
 	for (int i = 0; i < previousLearningRates.size(); i++)
 	{
 		previousLearningRates[i].setConstant(getOptions()->learningRateStart);
@@ -31,7 +31,7 @@ void ResilientLearningRate::initializeAlgorithm(AbstractNeuralNetwork &neuralNet
 }
 
 
-Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients)
+Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
 {
 	// Switch the sign of the gradient (We want to decrease, not to increase the totalError!)
 	gradients *= -1;

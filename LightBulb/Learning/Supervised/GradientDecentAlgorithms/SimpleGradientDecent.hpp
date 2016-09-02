@@ -25,28 +25,33 @@ struct SimpleGradientDecentOptions : public AbstractGradientDecentAlgorithmOptio
 		momentum = 0.7f;
 		learningRate = 0.45f;
 	}
+
 };
 
 
 class SimpleGradientDecent : public AbstractGradientDecentAlgorithm
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, SimpleGradientDecent& simpleGradientDecent);
+	friend struct cereal::LoadAndConstruct<SimpleGradientDecent>;
 private:
 	// Contains all previous deltaWeights (used by the momentum term)
 	std::vector<Eigen::MatrixXd> previousDeltaWeights;
-	AbstractNeuralNetwork* neuralNetwork;
 	SimpleGradientDecentOptions* getOptions();
 public:
 	SimpleGradientDecent(SimpleGradientDecentOptions& options_);
 	SimpleGradientDecent();
 
-	Eigen::MatrixXd calcDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients) override;
+	Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
 	// Print a short debug output (totalLearningRate)
 	std::string printDebugOutput();
 	// Returns if the learning has stopped
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper
-	void initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork);
+	void initializeAlgorithm(AbstractNetworkTopology* networkTopology);
 };
+
+#include "IO/SimpleGradientDecentIO.hpp"
 
 #endif
 

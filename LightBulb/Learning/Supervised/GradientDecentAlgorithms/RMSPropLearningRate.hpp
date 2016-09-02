@@ -32,6 +32,9 @@ struct RMSPropLearningRateOptions : public AbstractGradientDecentAlgorithmOption
 
 class RMSPropLearningRate : public AbstractGradientDecentAlgorithm
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate);
+	friend struct cereal::LoadAndConstruct<RMSPropLearningRate>;
 private:
 	// Holds for every edge its previous learning rate
 	std::vector<Eigen::MatrixXd> prevGradient;
@@ -42,12 +45,14 @@ public:
 	RMSPropLearningRate(RMSPropLearningRateOptions& options_);
 	RMSPropLearningRate();
 	// Computes the new learning rate of the given edge from the given gradient
-	Eigen::MatrixXd calcDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients);
+	Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients);
 	// Returns if the learning has stopped
 	bool learningHasStopped();
 	// Initializes the ResilientLearningRateHelper
-	void initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork);
+	void initializeAlgorithm(AbstractNetworkTopology* networkTopology);
 };
+
+#include "IO/RMSPropLearningRateIO.hpp"
 
 #endif
 

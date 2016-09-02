@@ -16,6 +16,10 @@
 template<class URNG = std::default_random_engine>
 class StandardRandomGenerator : public AbstractRandomGenerator
 {
+	template <class Archive, class T>
+	friend void load(Archive& archive, StandardRandomGenerator<T>& standardRandomGenerator);
+	template <class Archive, class T>
+	friend void save(Archive& archive, StandardRandomGenerator<T> const& standardRandomGenerator);
 protected:
 	int seed;
 	URNG generator;
@@ -58,5 +62,7 @@ public:
 	}
 
 };
+
+#include "IO/StandardRandomGeneratorIO.hpp"
 
 #endif

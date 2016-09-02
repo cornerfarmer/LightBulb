@@ -685,6 +685,11 @@
     <ClInclude Include="Function\ActivationFunction\RectifierFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\InputFunction\WeightedSumFunction.hpp" />
+    <ClInclude Include="IO\BackpropagationIO.hpp" />
+    <ClInclude Include="IO\ResilientLearningRateIO.hpp" />
+    <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
+    <ClInclude Include="IO\SimpleGradientDecentIO.hpp" />
+    <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
     <ClInclude Include="Random\XorShfGenerator.hpp" />
     <ClInclude Include="Random\ZigguratGenerator.hpp" />
@@ -704,9 +709,9 @@
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
-    <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp">
+    <ClInclude Include="IO\GradientDecentLearningRuleIO.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
     <ClInclude Include="IO\IOStorage.hpp" />

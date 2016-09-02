@@ -15,6 +15,9 @@
 // The BackpropagationLearningRule can  be used to train MultiPerceptronNetworks
 class Backpropagation : public AbstractGradientCalculation
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, Backpropagation& backpropagation);
+	friend struct cereal::LoadAndConstruct<Backpropagation>;
 private:	
 	// This vector should hold all delta values
 	Eigen::VectorXd lastDeltaVectorOutputLayer;
@@ -24,7 +27,7 @@ public:
 	void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient);
 };
 
-//#include "IO/BackpropagationLearningRuleIO.hpp"
+#include "IO/BackpropagationIO.hpp"
 
 #endif
 

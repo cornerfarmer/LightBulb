@@ -20,14 +20,13 @@ SimpleGradientDecentOptions* SimpleGradientDecent::getOptions()
 	return static_cast<SimpleGradientDecentOptions*>(options.get());
 }
 
-void SimpleGradientDecent::initializeAlgorithm(AbstractNeuralNetwork &neuralNetwork)
+void SimpleGradientDecent::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
 {
-	this->neuralNetwork = &neuralNetwork;
 	// If momentum is used
 	if (getOptions()->momentum > 0)
 	{
 		// Initialize the learningRates map
-		previousDeltaWeights = *neuralNetwork.getNetworkTopology()->getAllWeights();
+		previousDeltaWeights = *networkTopology->getAllWeights();
 		for (int i = 0; i < previousDeltaWeights.size(); i++)
 		{
 			previousDeltaWeights[i].setZero();
@@ -35,7 +34,7 @@ void SimpleGradientDecent::initializeAlgorithm(AbstractNeuralNetwork &neuralNetw
 	}
 }
 
-Eigen::MatrixXd SimpleGradientDecent::calcDeltaWeight(int layerIndex, Eigen::MatrixXd& gradients)
+Eigen::MatrixXd SimpleGradientDecent::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
 {
 	Eigen::MatrixXd deltaWeight;
 
@@ -43,7 +42,7 @@ Eigen::MatrixXd SimpleGradientDecent::calcDeltaWeight(int layerIndex, Eigen::Mat
 	deltaWeight = -getOptions()->learningRate * gradients;
 	
 	// Substract the weightDecay term
-	deltaWeight -= getOptions()->weightDecayFac * neuralNetwork->getNetworkTopology()->getAfferentWeightsPerLayer(layerIndex);
+	deltaWeight -= getOptions()->weightDecayFac * networkTopology->getAfferentWeightsPerLayer(layerIndex);
 
 	if (getOptions()->momentum > 0) {
 		// Add the momentum term

@@ -11,9 +11,9 @@ AbstractGradientDecentAlgorithm::AbstractGradientDecentAlgorithm(AbstractGradien
 	initialized = false;
 }
 
-void AbstractGradientDecentAlgorithm::initialize(AbstractNeuralNetwork &neuralNetwork)
+void AbstractGradientDecentAlgorithm::initialize(AbstractNetworkTopology* networkTopology)
 {
-	initializeAlgorithm(neuralNetwork);
+	initializeAlgorithm(networkTopology);
 	initialized = true;
 }
 

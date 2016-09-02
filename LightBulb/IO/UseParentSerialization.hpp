@@ -53,6 +53,12 @@ void load(Archive& archive, T& trainingPlan) \
 { \
 } \
 
+#define EMPTY_SINGLE_SERIALIZATION(T) \
+template <class Archive> \
+void serialize(Archive& archive, T& trainingPlan) \
+{ \
+} 
+
 #define USE_EXISTING_PARENT_SERIALIZATION(T, Parent, StorageType) \
 template <class Archive> \
 void save(Archive& archive, T const& trainingPlan) \

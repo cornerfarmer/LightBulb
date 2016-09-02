@@ -22,14 +22,25 @@ GradientDecentLearningRule::GradientDecentLearningRule(GradientDecentLearningRul
 	initialize();
 }
 
+GradientDecentLearningRule::GradientDecentLearningRule()
+	:AbstractSupervisedLearningRule(new GradientDecentLearningRuleOptions())
+{
+
+}
 
 void GradientDecentLearningRule::initialize()
 {
 	if (!getOptions()->gradientDecentAlgorithm)
-		getOptions()->gradientDecentAlgorithm = new SimpleGradientDecent();
+		gradientDecentAlgorithm.reset(new SimpleGradientDecent());
+	else
+		gradientDecentAlgorithm.reset(getOptions()->gradientDecentAlgorithm);
+	getOptions()->gradientDecentAlgorithm = NULL;
 
 	if (!getOptions()->gradientCalculation)
-		getOptions()->gradientCalculation = new Backpropagation();
+		gradientCalculation.reset(new Backpropagation());
+	else
+		gradientCalculation.reset(getOptions()->gradientCalculation);
+	getOptions()->gradientCalculation = NULL;
 }
 
 std::string GradientDecentLearningRule::getName()
@@ -41,7 +52,7 @@ std::string GradientDecentLearningRule::getName()
 std::vector<Eigen::MatrixXd> GradientDecentLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
 {
 	std::vector<Eigen::MatrixXd> gradient(getCurrentNetworkTopology()->getLayerCount() - 1);
-	getOptions()->gradientCalculation->calcGradient(getCurrentNetworkTopology(), errormap, gradient);
+	gradientCalculation->calcGradient(getCurrentNetworkTopology(), errormap, gradient);
 	for (int i = 0; i < gradient.size(); i++)
 		gradient[i] *= -1;
 
@@ -51,18 +62,18 @@ std::vector<Eigen::MatrixXd> GradientDecentLearningRule::calculateDeltaWeight(Ab
 
 void GradientDecentLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
 {
-	Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + getOptions()->gradientDecentAlgorithm->calcDeltaWeight(layerIndex, gradients);
+	Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradientDecentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradients);
 	getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 }
 
 std::string GradientDecentLearningRule::printDebugOutput()
 {
-	return getOptions()->gradientDecentAlgorithm->printDebugOutput();
+	return gradientDecentAlgorithm->printDebugOutput();
 }
 
 bool GradientDecentLearningRule::learningHasStopped()
 {
-	return getOptions()->gradientDecentAlgorithm->learningHasStopped();
+	return gradientDecentAlgorithm->learningHasStopped();
 }
 
 GradientDecentLearningRuleOptions* GradientDecentLearningRule::getOptions()
@@ -81,7 +92,7 @@ void GradientDecentLearningRule::initializeTry()
 	}
 
 	// If used, initialize the learning rate helper
-	if (!getOptions()->gradientDecentAlgorithm->isInitialized())
-		getOptions()->gradientDecentAlgorithm->initialize(*getOptions()->neuralNetwork);
+	if (!gradientDecentAlgorithm->isInitialized())
+		gradientDecentAlgorithm->initialize(getCurrentNetworkTopology());
 
 }

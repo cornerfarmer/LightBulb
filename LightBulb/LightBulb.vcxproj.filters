@@ -978,9 +978,6 @@
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\BackpropagationLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -1206,5 +1203,13 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
+    <ClInclude Include="IO\GradientDecentLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BackpropagationIO.hpp" />
+    <ClInclude Include="IO\ResilientLearningRateIO.hpp" />
+    <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
+    <ClInclude Include="IO\SimpleGradientDecentIO.hpp" />
+    <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
   </ItemGroup>
 </Project>
