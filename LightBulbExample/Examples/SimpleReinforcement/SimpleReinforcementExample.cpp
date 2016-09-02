@@ -66,7 +66,7 @@ std::string SimpleReinforcementExample::getDefaultName()
 
 std::string SimpleReinforcementExample::getDescription()
 {
-	return "";
+	return "Evolution of a Simple AI with PolicyGradient";
 }
 
 AbstractTrainingPlan* SimpleReinforcementExample::getCopy()
@@ -76,7 +76,7 @@ AbstractTrainingPlan* SimpleReinforcementExample::getCopy()
 
 std::string SimpleReinforcementExample::getLearningRuleName()
 {
-	return BipartiteEvolutionLearningRule::getName();
+	return PolicyGradientLearningRule::getName();
 }
 
 

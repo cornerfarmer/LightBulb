@@ -12,7 +12,6 @@
 #include "Examples/PongEvolution/PongEvolutionExample.hpp"
 #include "Examples/PongReinforcement/PongReinforcementExample.hpp"
 #include "Examples/SimpleReinforcement/SimpleReinforcementExample.hpp"
-#include "Examples/PongReinforcement/PongMonteCarloExample.hpp"
 #include "Examples/PongReinforcement/PongDQNExample.hpp"
 #include "Examples/SimpleReinforcement/SimpleReinforcementDQNExample.hpp"
 #include "Examples/MountainCar/MountainCarDQNExample.hpp"
@@ -31,7 +30,6 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new TCProblemBackpropagationExample());
 	app->addTrainingPlan(new PongEvolutionExample());
 	app->addTrainingPlan(new PongReinforcementExample());
-	app->addTrainingPlan(new PongMonteCarloExample());
 	app->addTrainingPlan(new PongDQNExample());
 	app->addTrainingPlan(new SimpleReinforcementExample());
 	app->addTrainingPlan(new SimpleReinforcementDQNExample());

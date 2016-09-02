@@ -415,7 +415,6 @@
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementWorld.cpp" />
     <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
-    <ClCompile Include="Learning\Reinforcement\MonteCarloLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
     <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -966,7 +965,6 @@
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
     <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
-    <ClInclude Include="Learning\Reinforcement\MonteCarloLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
     <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
