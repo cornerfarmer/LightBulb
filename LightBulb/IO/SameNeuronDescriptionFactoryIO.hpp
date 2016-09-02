@@ -4,7 +4,7 @@
 #define _SAMENEURONDESCRIPTIONFACTORYIO_H_
 
 // Libary includes
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

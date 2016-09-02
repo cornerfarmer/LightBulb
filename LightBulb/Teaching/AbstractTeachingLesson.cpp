@@ -5,7 +5,7 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <math.h>
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
 {

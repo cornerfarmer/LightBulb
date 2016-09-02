@@ -489,14 +489,10 @@
     <ClCompile Include="NeuralNetwork\AbstractNeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp" />
-    <ClCompile Include="NeuronFactory\AbstractNeuronDescriptionFactory.cpp" />
-    <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp" />
-    <ClCompile Include="NeuronFactory\SameNeuronDescriptionFactory.cpp" />
-    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Neuron\NeuronDescription.cpp" />
+    <ClCompile Include="NeuronDescription\AbstractNeuronDescriptionFactory.cpp" />
+    <ClCompile Include="NeuronDescription\DifferentNeuronDescriptionFactory.cpp" />
+    <ClCompile Include="NeuronDescription\SameNeuronDescriptionFactory.cpp" />
+    <ClCompile Include="NeuronDescription\NeuronDescription.cpp" />
     <ClCompile Include="Random\AbstractRandomGenerator.cpp" />
     <ClCompile Include="Random\AbstractRandomGeneratorUser.cpp" />
     <ClCompile Include="Random\StandardRandomGenerator.cpp" />
@@ -1040,14 +1036,10 @@
     <ClInclude Include="NeuralNetwork\AbstractNeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp" />
-    <ClInclude Include="NeuronFactory\AbstractNeuronDescriptionFactory.hpp" />
-    <ClInclude Include="NeuronFactory\DifferentNeuronDescriptionFactory.hpp" />
-    <ClInclude Include="NeuronFactory\SameNeuronDescriptionFactory.hpp" />
-    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Neuron\NeuronDescription.hpp" />
+    <ClInclude Include="NeuronDescription\AbstractNeuronDescriptionFactory.hpp" />
+    <ClInclude Include="NeuronDescription\DifferentNeuronDescriptionFactory.hpp" />
+    <ClInclude Include="NeuronDescription\SameNeuronDescriptionFactory.hpp" />
+    <ClInclude Include="NeuronDescription\NeuronDescription.hpp" />
     <ClInclude Include="Random\AbstractRandomGenerator.hpp" />
     <ClInclude Include="Random\AbstractRandomGeneratorUser.hpp" />
     <ClInclude Include="Random\StandardRandomGenerator.hpp" />

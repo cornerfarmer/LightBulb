@@ -4,12 +4,12 @@
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include "SimpleReinforcementWorld.hpp"
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
-#include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"

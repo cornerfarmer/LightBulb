@@ -1,9 +1,9 @@
 #include "NetworkPerformanceTests.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include <ctime>

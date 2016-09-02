@@ -4,12 +4,12 @@
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
 #include <Function/InputFunction//WeightedSumFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementWorld.hpp"
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
-#include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 #include <Function/ActivationFunction/RectifierFunction.hpp>
 

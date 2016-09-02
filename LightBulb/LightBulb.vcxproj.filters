@@ -112,9 +112,6 @@
     <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="Neuron\NeuronCompareThreshold.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClCompile>
@@ -361,18 +358,6 @@
     <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="Neuron\NeuronDescription.cpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\AbstractNeuronDescriptionFactory.cpp">
-      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\SameNeuronDescriptionFactory.cpp">
-      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="NeuronFactory\DifferentNeuronDescriptionFactory.cpp">
-      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractRecombinationSelector.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -588,6 +573,18 @@
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
     <ClCompile Include="NetworkTopology\AbstractFeedForwardNetworkTopology.cpp" />
+    <ClCompile Include="NeuronDescription\NeuronDescription.cpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronDescription\AbstractNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronDescription\DifferentNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronDescription\SameNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -640,9 +637,6 @@
     </ClInclude>
     <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\NeuronCompareThreshold.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
     </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
@@ -889,18 +883,6 @@
     </ClInclude>
     <ClInclude Include="IO\SynapticExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron\NeuronDescription.hpp">
-      <Filter>Quelldateien\Neuron</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\AbstractNeuronDescriptionFactory.hpp">
-      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\SameNeuronDescriptionFactory.hpp">
-      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuronFactory\DifferentNeuronDescriptionFactory.hpp">
-      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
@@ -1191,5 +1173,17 @@
     <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
     <ClInclude Include="IO\SimpleGradientDecentIO.hpp" />
     <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
+    <ClInclude Include="NeuronDescription\NeuronDescription.hpp">
+      <Filter>Quelldateien\Neuron</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronDescription\AbstractNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronDescription\DifferentNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronDescription\SameNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

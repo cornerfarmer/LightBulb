@@ -1,11 +1,11 @@
 // Includes
 #include "NetworkTopology/RBFNetwork.hpp"
-#include "NeuronFactory/DifferentNeuronDescriptionFactory.hpp"
+#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
 #include "Function/InputFunction/EuclideanDistance.hpp"
 #include "Function/ActivationFunction//GaussianRBFFunction.hpp"
 #include "Function/InputFunction/WeightedSumFunction.hpp"
 #include "Function/ActivationFunction/IdentityFunction.hpp"
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include "Random/AbstractRandomGenerator.hpp"
 
 RBFNetwork::RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer)

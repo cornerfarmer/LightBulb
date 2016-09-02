@@ -3,9 +3,9 @@
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Learning/Reinforcement/PolicyGradientLearningRule.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>

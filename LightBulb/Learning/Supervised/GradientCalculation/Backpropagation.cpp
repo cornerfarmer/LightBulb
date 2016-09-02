@@ -6,7 +6,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 
 Backpropagation::Backpropagation(double flatSpotEliminationFac_)

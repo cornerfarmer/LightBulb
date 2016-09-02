@@ -2,12 +2,12 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Learning/Supervised/GradientDecentLearningRule.hpp>
-#include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
 #include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
 

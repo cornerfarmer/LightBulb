@@ -20,10 +20,10 @@
 #include <TrainingPlans/DoublePreference.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
 #include <TrainingPlans/BooleanPreference.hpp>
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/WeightDecayFitnessFunction.hpp>

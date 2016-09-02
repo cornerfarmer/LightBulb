@@ -4,7 +4,7 @@
 #define _NEURONDESCRIPTIONIO_H_
 
 // Libary includes
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include "Function/ActivationFunction/IdentityFunction.hpp"
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>

@@ -2,11 +2,11 @@
 #include "Examples/Position.hpp"
 #include "Examples/FunctionSimulator.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Function/ActivationFunction/IdentityFunction.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 
 
 Position::Position(FunctionSimulator* functionSimulator_)

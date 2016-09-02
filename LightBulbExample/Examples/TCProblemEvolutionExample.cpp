@@ -11,12 +11,12 @@
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Learning/Evolution/TeachingEvolutionWorld.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include <Learning/Evolution/ScoreCondition.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>

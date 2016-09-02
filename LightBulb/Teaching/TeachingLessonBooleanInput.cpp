@@ -5,7 +5,7 @@
 #include "NeuralNetwork/NeuralNetworkIO.hpp"
 // Library includes
 #include <exception>
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_, bool calcStrictError_)
 {

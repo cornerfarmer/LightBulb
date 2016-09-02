@@ -6,7 +6,7 @@
 // Libary includes
 #include "IO/MatrixIO.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuronFactory/AbstractNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/AbstractNeuronDescriptionFactory.hpp>
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

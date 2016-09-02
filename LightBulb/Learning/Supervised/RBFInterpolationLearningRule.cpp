@@ -6,7 +6,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/RBFNetwork.hpp"
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 
 using namespace Eigen;

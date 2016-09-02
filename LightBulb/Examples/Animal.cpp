@@ -2,10 +2,10 @@
 #include "Examples/Animal.hpp"
 #include "Examples/Nature.hpp"
 #include "Examples/AbstractTile.hpp"
-#include <NeuronFactory/SameNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
 
 
