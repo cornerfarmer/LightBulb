@@ -6,8 +6,8 @@
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include "Function/InputFunction/WeightedSumFunction.hpp"
 #include "Function/ActivationFunction/IdentityFunction.hpp"
-#include "NeuronFactory/SameNeuronDescriptionFactory.hpp"
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 TEST(SynapticExporterTest, exportSimpleFeedForwardNetworkTopology)
 {

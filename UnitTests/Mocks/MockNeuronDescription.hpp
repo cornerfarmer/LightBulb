@@ -4,7 +4,7 @@
 #define _MOCKNEURONDESCRIPTION_H_
 
 #include "gmock/gmock.h"
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 class MockNeuronDescription : public NeuronDescription
 {

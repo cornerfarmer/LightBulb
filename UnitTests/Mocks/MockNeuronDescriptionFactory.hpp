@@ -4,7 +4,7 @@
 #define _MOCKNEURONDESCRIPTIONFACTORY_H_
 
 #include "gmock/gmock.h"
-#include <NeuronFactory/AbstractNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/AbstractNeuronDescriptionFactory.hpp>
 
 class MockNeuronDescriptionFactory : public AbstractNeuronDescriptionFactory
 {

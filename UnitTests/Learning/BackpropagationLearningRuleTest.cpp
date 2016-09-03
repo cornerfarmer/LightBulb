@@ -6,8 +6,8 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <NeuronFactory/DifferentNeuronDescriptionFactory.hpp>
-#include <Neuron/NeuronDescription.hpp>
+#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include <NeuronDescription/NeuronDescription.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 #include <Teaching/Teacher.hpp>

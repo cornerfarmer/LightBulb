@@ -11,7 +11,7 @@
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include "AbstractReinforcementWorld.hpp"
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 AbstractLearningResult* PolicyGradientLearningRule::getLearningResult()
 {
