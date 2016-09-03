@@ -7,8 +7,8 @@
 
 // Include
 #include <Learning/Reinforcement/AbstractReinforcementWorld.hpp>
-#include <Examples/PongEvolution/PongGame.hpp>
 #include <Examples/PongEvolution/AbstractPongWorld.hpp>
+#include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 
@@ -33,5 +33,7 @@ public:
 	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 };
 
+
+USE_EXISTING_PARENT_SERIALIZATION(PongReinforcementWorld, AbstractReinforcementWorld, AbstractReinforcementWorld)
 
 #endif

@@ -68,6 +68,9 @@ struct Transition
 
 class DQNLearningRule : public AbstractReinforcementLearningRule
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, DQNLearningRule& learningRule);
+	friend struct cereal::LoadAndConstruct<DQNLearningRule>;
 private:
 	int nextTransitionIndex;
 	int waitUntilLearningStarts;
@@ -95,6 +98,8 @@ public:
 	static std::string getName();
 	std::vector<std::string> getDataSetLabels();
 };
+
+#include "IO/DQNLearningRuleIO.hpp"
 
 
 #endif

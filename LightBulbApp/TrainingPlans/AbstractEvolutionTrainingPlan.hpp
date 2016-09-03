@@ -5,7 +5,6 @@
 
 // Includes
 #include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include "IO/UseParentSerialization.hpp"
 #include <Learning/Evolution/AbstractEvolutionWorld.hpp>
 
 // Library includes

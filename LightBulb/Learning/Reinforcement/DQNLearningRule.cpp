@@ -31,7 +31,6 @@ DQNLearningRule::DQNLearningRule(DQNLearningRuleOptions* options_)
 DQNLearningRule::DQNLearningRule()
 	: AbstractReinforcementLearningRule(new DQNLearningRuleOptions())
 {
-	initialize();
 }
 
 void DQNLearningRule::initializeTry()

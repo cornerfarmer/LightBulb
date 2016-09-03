@@ -147,6 +147,7 @@
     </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractPreference.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="IO\AbstractEvolutionTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractPreferenceIO.hpp" />
+    <ClInclude Include="IO\AbstractReinforcementTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp" />
     <ClInclude Include="IO\AbstractTrainingPlanIO.hpp" />
     <ClInclude Include="IO\BooleanPreferenceIO.hpp">
@@ -206,6 +208,7 @@
     </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractPreference.hpp" />
+    <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractVariablePreference.hpp" />

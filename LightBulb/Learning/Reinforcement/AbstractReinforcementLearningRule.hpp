@@ -25,15 +25,19 @@ struct AbstractReinforcementLearningRuleOptions : public AbstractLearningRuleOpt
 
 class AbstractReinforcementLearningRule : public AbstractLearningRule
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule);
 private:
 	protected:
 	bool hasLearningSucceeded();
 	virtual AbstractReinforcementLearningRuleOptions* getOptions();
+	void randomGeneretorHasChanged();
 public:
 	AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_);
 	AbstractReinforcementLearningRule() = default;
 	std::vector<std::string> getDataSetLabels();
 };
 
+#include "IO/AbstractReinforcementLearningRuleIO.hpp"
 
 #endif

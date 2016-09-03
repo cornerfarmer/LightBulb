@@ -4,28 +4,26 @@
 #ifndef _PONGDQNEXAMPLE_H_
 #define _PONGDQNEXAMPLE_H_
 
-#include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include "TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
 
 class PongReinforcementWorld;
 class AbstractReinforcementWorld;
 struct FeedForwardNetworkTopologyOptions;
 
-class PongDQNExample : public AbstractLearningRuleTrainingPlan
+class PongDQNExample : public AbstractReinforcementTrainingPlan
 {
 private:
-	PongReinforcementWorld* world;
 protected:
 	AbstractLearningRule* createLearningRate();
-	PongReinforcementWorld* createWorld();
+	AbstractReinforcementWorld* createWorld();
 public:
 	PongDQNExample();
 	std::string getDefaultName();
 	std::string getDescription();
 	AbstractTrainingPlan* getCopy();
 	std::string getLearningRuleName();
-	PongReinforcementWorld* getWorld();
 };
 
-USE_PARENT_SERIALIZATION(PongDQNExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(PongDQNExample, AbstractReinforcementTrainingPlan);
 
 #endif

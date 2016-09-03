@@ -5,6 +5,7 @@
 
 // Includes
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "IO/UseParentSerialization.hpp"
 
 // The FermiFunction is a sigmoid function between 0 and 1 which can be adjusted with temperatureParameter
 class RectifierFunction : public AbstractActivationFunction
@@ -22,5 +23,6 @@ public:
 	bool hasAMaxAndMinimum();
 };
 
+EMPTY_CHILD_SERIALIZATION(RectifierFunction);
 
 #endif

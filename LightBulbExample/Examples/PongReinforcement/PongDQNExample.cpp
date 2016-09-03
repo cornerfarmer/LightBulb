@@ -33,8 +33,6 @@
 AbstractLearningRule* PongDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;
-	world = createWorld();
-	options.world = world;
 	options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
@@ -54,7 +52,7 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 }
 
 
-PongReinforcementWorld* PongDQNExample::createWorld()
+AbstractReinforcementWorld* PongDQNExample::createWorld()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -112,10 +110,4 @@ AbstractTrainingPlan* PongDQNExample::getCopy()
 std::string PongDQNExample::getLearningRuleName()
 {
 	return PongDQNExample::getName();
-}
-
-
-PongReinforcementWorld* PongDQNExample::getWorld()
-{
-	return world;
 }

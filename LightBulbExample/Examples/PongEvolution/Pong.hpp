@@ -37,6 +37,7 @@ public:
 	Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	Pong() = default;
 	void getNNInput(std::vector<double>& sight);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
 	void executeCompareAI();
 	int rateKI(AbstractEvolutionObject* rateKI);
 	void startNewGame();

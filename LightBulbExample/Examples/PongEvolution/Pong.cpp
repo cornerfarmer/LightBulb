@@ -160,3 +160,9 @@ void Pong::getNNInput(std::vector<double>& input)
 	}
 }
 
+
+void Pong::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	game.setRandomGenerator(randomGenerator_);
+}

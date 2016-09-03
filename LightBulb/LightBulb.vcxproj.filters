@@ -1185,5 +1185,8 @@
     <ClInclude Include="NeuronDescription\SameNeuronDescriptionFactory.hpp">
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClInclude>
+    <ClInclude Include="IO\DQNLearningRuleIO.hpp" />
+    <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
+    <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
   </ItemGroup>
 </Project>

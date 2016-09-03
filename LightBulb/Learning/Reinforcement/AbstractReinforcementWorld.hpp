@@ -18,6 +18,10 @@ struct LearningState;
 
 class AbstractReinforcementWorld : public AbstractRandomGeneratorUser
 {
+	template <class Archive>
+	friend void save(Archive& archive, AbstractReinforcementWorld const& world);
+	template <class Archive>
+	friend void load(Archive& archive, AbstractReinforcementWorld& world);
 private:
 	std::vector<double> lastOutput;
 	std::vector<double> lastInput;
@@ -33,8 +37,6 @@ protected:
 
 	// This method should interpret and act depending on the given NN output
 	virtual void interpretNNOutput(std::vector<bool>& output) = 0;
-
-	
 public:
 	// This method should return the input for the neural network
 	virtual void getNNInput(std::vector<double>& input) = 0;
@@ -42,6 +44,7 @@ public:
 	void doNNCalculation(bool resetInput = true);
 	virtual ~AbstractReinforcementWorld() {}
 	AbstractReinforcementWorld(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
+	AbstractReinforcementWorld() = default;
 	// This method should execute one simulation step.
 	// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 	virtual double doSimulationStep() = 0;
@@ -56,6 +59,6 @@ public:
 	virtual bool isTerminalState() = 0;
 };
 
-EMPTY_SERIALIZATION(AbstractReinforcementWorld);
+#include "IO/AbstractReinforcementWorldIO.hpp"
 
 #endif

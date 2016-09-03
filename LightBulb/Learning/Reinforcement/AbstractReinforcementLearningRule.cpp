@@ -6,9 +6,14 @@
 AbstractReinforcementLearningRule::AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_)
 	: AbstractLearningRule(options_)
 {
-	options_->world->setRandomGenerator(randomGenerator.get());
+	randomGeneretorHasChanged();
 }
 
+void AbstractReinforcementLearningRule::randomGeneretorHasChanged()
+{
+	if (getOptions()->world)
+		getOptions()->world->setRandomGenerator(randomGenerator.get());
+}
 
 bool AbstractReinforcementLearningRule::hasLearningSucceeded()
 {
