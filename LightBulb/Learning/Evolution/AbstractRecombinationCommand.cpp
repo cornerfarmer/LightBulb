@@ -55,4 +55,5 @@ void AbstractRecombinationCommand::setRandomGenerator(AbstractRandomGenerator* r
 {
 	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 	recombinationAlgorithm->setRandomGenerator(randomGenerator_);
+	recombinationSelector->setRandomGenerator(randomGenerator_);
 }
