@@ -2,7 +2,6 @@
 #include <wx/wxprec.h>
 #include "Examples/BackpropagationXorExample.hpp"
 #include "Examples/TeachedEvolutionExample.hpp"
-#include "Examples/NatureEvolutionExample.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeEvolutionExample.hpp"
 #include "Examples/FunctionEvolutionExample.hpp"
 #include "Examples/NetworkEvolution/NetworkEvolutionExample.hpp"
@@ -15,6 +14,7 @@
 #include "Examples/PongReinforcement/PongDQNExample.hpp"
 #include "Examples/SimpleReinforcement/SimpleReinforcementDQNExample.hpp"
 #include "Examples/MountainCar/MountainCarDQNExample.hpp"
+#include "Examples/Nature/NatureExample.hpp"
 
 void main(int argc, char** argv)
 {
@@ -23,7 +23,7 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new BackpropagationXorExample());
 	app->addTrainingPlan(new FunctionEvolutionExample());
 	app->addTrainingPlan(new NetworkEvolutionExample());
-	app->addTrainingPlan(new NatureEvolutionExample());
+	app->addTrainingPlan(new NatureExample());
 	app->addTrainingPlan(new TicTacToeEvolutionExample());
 	app->addTrainingPlan(new TeachedEvolutionExample());
 	app->addTrainingPlan(new TCProblemEvolutionExample());

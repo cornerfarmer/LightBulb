@@ -301,30 +301,6 @@
     <ClCompile Include="ClusterAnalysis\ValuePosition.cpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\AbstractTile.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Animal.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\EarthTile.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\FunctionDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NatureDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\NetworkDrawer.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\RockTile.cpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClCompile>
     <ClCompile Include="Lib\ziggurat.cpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
@@ -829,30 +805,6 @@
     </ClInclude>
     <ClInclude Include="ClusterAnalysis\ValuePosition.hpp">
       <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\AbstractTile.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Animal.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\EarthTile.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\FunctionDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NatureDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NetworkDrawer.hpp">
-      <Filter>Quelldateien\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\RockTile.hpp">
-      <Filter>Quelldateien\Examples</Filter>
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>

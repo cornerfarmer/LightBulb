@@ -51,9 +51,6 @@
     <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\NatureEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -132,6 +129,33 @@
     <ClCompile Include="Examples\MountainCar\MountainCarController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\Nature\AbstractTile.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\Animal.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\EarthTile.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\Nature.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\RockTile.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\NatureExample.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\NatureController.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\NatureFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Nature\NatureWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -165,9 +189,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\NatureEvolutionExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
@@ -261,6 +282,33 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\PongGameIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\AbstractTile.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\Animal.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\EarthTile.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\Nature.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\RockTile.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\NatureExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\NatureController.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\NatureFactory.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\Nature\NatureWindow.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

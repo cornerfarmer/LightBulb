@@ -142,8 +142,6 @@ bool EvolutionLearningRule::doIteration()
 	if (!options->disabledDataSets[getOptions()->dataSetsPrefix + DATA_SET_FITNESS] && getOptions()->world->getPopulationSize() > 0)
 		learningState->addData(getOptions()->dataSetsPrefix + DATA_SET_FITNESS, getOptions()->world->getHighscoreList()->front().first);
 
-	// Reset the world for the next generation
-	getOptions()->world->reset();
 
 	log("------------- Generation " + std::to_string(learningState->iterations) + " -----------------", LL_LOW);
 
@@ -206,6 +204,9 @@ bool EvolutionLearningRule::doIteration()
 	{
 		(*creationCommand)->execute(*getOptions()->world, &notUsedObjects);
 	}
+	
+	// Reset the world for the next generation
+	getOptions()->world->reset();
 
 	// 2. Step: Execute the simulation and try to rate the evolution objects
 	if (getOptions()->world->doSimulationStep()) {
