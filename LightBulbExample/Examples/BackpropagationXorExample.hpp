@@ -19,16 +19,16 @@ class BackpropagationXorExample : public AbstractSingleNNTrainingPlan
 private:
 	std::unique_ptr<Teacher> teacher;
 protected:
-	AbstractNeuralNetwork* createNeuralNetwork();
-	AbstractLearningRule* createLearningRate();
+	AbstractNeuralNetwork* createNeuralNetwork() override;
+	AbstractLearningRule* createLearningRate() override;
 public:
 	BackpropagationXorExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	int getRequiredInputSize();
-	int getRequiredOutputSize();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	int getRequiredInputSize() override;
+	int getRequiredOutputSize() override;
+	std::string getLearningRuleName() override;
 };
 
 USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractSingleNNTrainingPlan);

@@ -26,7 +26,7 @@ protected:
 	void fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options);
 public:
 	AbstractEvolutionTrainingPlan();
-	void initializeStart();
+	void initializeStart() override;
 	AbstractEvolutionWorld* getWorld();
 	void setWorld(AbstractEvolutionWorld* network_);
 };

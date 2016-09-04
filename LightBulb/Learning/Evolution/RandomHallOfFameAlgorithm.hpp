@@ -16,7 +16,7 @@ class RandomHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
 private:
 	int amountOfCompetitionsPerObject;
 protected:	
-	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects);
+	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) override;
 public:
 	RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_ = 0);
 };

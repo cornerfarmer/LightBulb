@@ -24,7 +24,7 @@ class TeachingEvolutionWorld : public AbstractSimpleEvolutionWorld
 {
 protected:
 	// Inherited
-	AbstractEvolutionObject* createNewObject();
+	AbstractEvolutionObject* createNewObject() override;
 	// Holds the given teacher
 	AbstractTeacher* teacher;
 	// Holds the given network options for new evolution objects
@@ -35,9 +35,9 @@ public:
 	TeachingEvolutionWorld() = default;
 	AbstractTeacher* getTeacher();
 	// Inherited:
-	bool doSimulationStep();
-	std::vector<std::string> getDataSetLabels();
-	double getScore(AbstractEvolutionObject* object);
+	bool doSimulationStep() override;
+	std::vector<std::string> getDataSetLabels() override;
+	double getScore(AbstractEvolutionObject* object) override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(TeachingEvolutionWorld, AbstractSimpleEvolutionWorld, AbstractEvolutionWorld)

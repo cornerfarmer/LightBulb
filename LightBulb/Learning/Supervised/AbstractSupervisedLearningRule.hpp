@@ -79,12 +79,12 @@ protected:
 	std::unique_ptr<AbstractActivationOrder> currentActivationOrder;
 	// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 	AbstractSupervisedLearningRuleOptions* getOptions();
-	bool doIteration();
-	void initializeStartLearningAlgoritm();
-	void initializeResumeLearningAlgoritm();
-	void initializeLearningAlgoritm();
-	bool hasLearningSucceeded();
-	void rateLearning();
+	bool doIteration() override;
+	void initializeStartLearningAlgoritm() override;
+	void initializeResumeLearningAlgoritm() override;
+	void initializeLearningAlgoritm() override;
+	bool hasLearningSucceeded() override;
+	void rateLearning() override;
 	// This method should calculate the deltaWeight for the actual edge
 	virtual std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) = 0;
 	// This method should adjust the weight of the current edge
@@ -94,7 +94,7 @@ protected:
 	// Prints a current summary of the status of the learning process
 	virtual std::string printDebugOutput() { return ""; };
 	// This method should do something like randomizing all weight
-	virtual void initializeTry() = 0;
+	void initializeTry() override = 0;
 	// This method can be used to do some work before every iteration
 	virtual void initializeIteration() { };
 	// This method can be used to do some work before every teaching lesson
@@ -108,18 +108,18 @@ protected:
 	// This method could be used to do some prework on the teacher
 	virtual Teacher* initializeTeacher(Teacher &teacher) { return &teacher; };
 	// This method could be used to do something after the learning process
-	virtual void doCalculationAfterLearningProcess();
+	void doCalculationAfterLearningProcess() override;
 	// This method should determine the start time and time step count of the next calculation
 	virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
 
 	AbstractNetworkTopology* getCurrentNetworkTopology();
 
-	AbstractLearningResult* getLearningResult();
+	AbstractLearningResult* getLearningResult() override;
 public:	
 	AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions& options_);
 	AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions* options_);
 
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 };
 
 #include "IO/AbstractSupervisedLearningRuleIO.hpp"

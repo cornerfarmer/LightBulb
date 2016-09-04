@@ -12,9 +12,9 @@ class App : public wxApp
 private:
 	std::vector<AbstractTrainingPlan*> trainingPlans;
 public:
-	virtual bool OnInit();
-	void OnUnhandledException();
-	bool OnExceptionInMainLoop();
+	bool OnInit() override;
+	void OnUnhandledException() override;
+	bool OnExceptionInMainLoop() override;
 	void addTrainingPlan(AbstractTrainingPlan* trainingPlan);
 };
 

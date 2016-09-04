@@ -38,7 +38,7 @@ public:
 	// Executes the mutations. (The algorithm will take a few of the old objects, mutate them and insert them into the new object vector)
 	virtual void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
 };
 
 #endif

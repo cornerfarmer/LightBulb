@@ -19,7 +19,7 @@ protected:
 	std::vector<std::pair<LogLevel, std::string>> messages;
 public:
 	StorageLogger();
-	void log(std::string message, LogLevel level);
+	void log(std::string message, LogLevel level) override;
 	std::vector<std::pair<LogLevel, std::string>>* getMessages();
 };
 

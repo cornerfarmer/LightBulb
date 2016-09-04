@@ -16,8 +16,8 @@ class RockTile : public AbstractTile
 protected:	
 public:	
 	//sf::Color getColor();
-	float tryToEat();
-	bool isWalkable();
-	double getViewValue();
+	float tryToEat() override;
+	bool isWalkable() override;
+	double getViewValue() override;
 };
 #endif

@@ -36,7 +36,7 @@ public:
 	// Executes the recombinations. (The algorithm will take a few of the old objects, combine them and insert the created ones into the new object vector)
 	virtual void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
 	
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
 };
 
 #endif

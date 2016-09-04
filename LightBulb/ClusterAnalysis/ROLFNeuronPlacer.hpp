@@ -19,8 +19,8 @@ class ROLFNeuronPlacer : public AbstractNonReliableRBFNeuronPlacer
 protected:
 public:
 	// Inherited:
-	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher);
-	AbstractRBFNeuronPlacer* getCopy();
+	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) override;
+	AbstractRBFNeuronPlacer* getCopy() override;
 };
 
 #endif

@@ -14,7 +14,7 @@ class EqualRandomFunction : public AbstractRandomFunction
 private:
 public:
 	// Inherited:	
-	int execute(int elementCount);
+	int execute(int elementCount) override;
 };
 
 #endif

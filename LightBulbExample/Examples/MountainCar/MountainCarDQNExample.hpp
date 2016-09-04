@@ -15,14 +15,14 @@ class MountainCarDQNExample : public AbstractLearningRuleTrainingPlan
 private:
 	MountainCarWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate();
+	AbstractLearningRule* createLearningRate() override;
 	MountainCarWorld* createWorld();
 public:
 	MountainCarDQNExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 	MountainCarWorld* getWorld();
 };
 

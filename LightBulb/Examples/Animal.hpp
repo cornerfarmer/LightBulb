@@ -27,8 +27,8 @@ protected:
 	bool dead;
 	int stepsSurvived;
 	void rotate(int dir);
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<double>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<double>& output) override;
 public:	
 	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();

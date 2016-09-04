@@ -43,7 +43,7 @@ private:
 	std::string comparisonDataSetLabel;
 
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
 	LearningStateWindow* getWindow();

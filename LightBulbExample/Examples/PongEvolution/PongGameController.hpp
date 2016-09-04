@@ -18,7 +18,7 @@ private:
 	PongGameState currentState;
 	PongGameProperties properties;
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	PongGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
 	PongGameWindow* getWindow();

@@ -9,13 +9,13 @@ class NatureEvolutionExample : public AbstractEvolutionTrainingPlan
 {
 private:
 protected:
-	AbstractLearningRule* createLearningRate();
-	AbstractEvolutionWorld* createWorld();
+	AbstractLearningRule* createLearningRate() override;
+	AbstractEvolutionWorld* createWorld() override;
 public:
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 };
 
 USE_PARENT_SERIALIZATION(NatureEvolutionExample, AbstractLearningRuleTrainingPlan);

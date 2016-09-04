@@ -16,7 +16,7 @@ class GridStructure : public AbstractSOMStructure
 {
 private:	
 public:
-	void initialize(SOMNetwork& somNetwork);
+	void initialize(SOMNetwork& somNetwork) override;
 };
 
 #endif

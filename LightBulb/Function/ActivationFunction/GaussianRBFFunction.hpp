@@ -17,15 +17,15 @@ private:
 public:
 	GaussianRBFFunction(Eigen::VectorXd* widths_);
 	// Inherited:
-	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs);
-	double execute(double input);
-	double executeDerivation(double input);
-	AbstractActivationFunction* getActivationFunctionCopy();
-	double getMaximum();
-	double getMinimum();
-	bool hasAMaxAndMinimum();
-	double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance);
-	AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy();
+	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs) override;
+	double execute(double input) override;
+	double executeDerivation(double input) override;
+	AbstractActivationFunction* getActivationFunctionCopy() override;
+	double getMaximum() override;
+	double getMinimum() override;
+	bool hasAMaxAndMinimum() override;
+	double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance) override;
+	AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy() override;
 };
 
 #include "IO/GaussianRBFFunctionIO.hpp"

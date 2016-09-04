@@ -21,8 +21,8 @@ class Position : public AbstractSimpleEvolutionObject
 protected:
 	FunctionSimulator* functionSimulator;
 	std::vector<float> position;
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<double>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<double>& output) override;
 public:	
 	Position(FunctionSimulator* functionSimulator_);
 	Position() = default;

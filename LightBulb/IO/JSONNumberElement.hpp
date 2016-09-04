@@ -24,7 +24,7 @@ public:
 		number = number_;
 	}
 
-	std::string toString()
+	std::string toString() override
 	{
 		std::ostringstream convert;
 		convert << std::fixed << std::setprecision(14) << number;

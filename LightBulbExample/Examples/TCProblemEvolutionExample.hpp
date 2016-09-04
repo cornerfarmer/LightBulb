@@ -10,14 +10,14 @@ class TCProblemEvolutionExample : public AbstractEvolutionTrainingPlan
 {
 private:
 protected:
-	AbstractLearningRule* createLearningRate();
-	AbstractEvolutionWorld* createWorld();
+	AbstractLearningRule* createLearningRate() override;
+	AbstractEvolutionWorld* createWorld() override;
 public:
 	TCProblemEvolutionExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 };
 
 USE_PARENT_SERIALIZATION(TCProblemEvolutionExample, AbstractEvolutionTrainingPlan);

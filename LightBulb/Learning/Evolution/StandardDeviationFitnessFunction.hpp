@@ -18,7 +18,7 @@ private:
 public:
 	StandardDeviationFitnessFunction(double deviationFac_ = 0);
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 };
 
 #endif

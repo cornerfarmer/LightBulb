@@ -19,13 +19,13 @@ class IntegerPreference : public AbstractVariablePreference<int>
 protected:
 	int min;
 	int max;
-	std::string getValueAsString();
+	std::string getValueAsString() override;
 public:
 	IntegerPreference(std::string name, int defaultValue, int min_, int max_);
 	IntegerPreference() = default;
 	int getMin();
 	int getMax();
-	AbstractPreference* getCopy();
+	AbstractPreference* getCopy() override;
 };
 
 #include "IO/IntegerPreferenceIO.hpp"

@@ -26,9 +26,9 @@ private:
 public:
 	MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_ = true, bool ignoreInputLayer_ = false, bool removeNeuronsByTheirTotalWeight_ = false);
 
-	void execute(AbstractEvolutionObject* object1);
+	void execute(AbstractEvolutionObject* object1) override;
 
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
 };
 
 #endif

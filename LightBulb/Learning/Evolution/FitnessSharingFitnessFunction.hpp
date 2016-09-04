@@ -19,7 +19,7 @@ private:
 public:
 	FitnessSharingFitnessFunction(double dissimilarityThreshold_, double exponent_ = 1);
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 };
 
 #endif

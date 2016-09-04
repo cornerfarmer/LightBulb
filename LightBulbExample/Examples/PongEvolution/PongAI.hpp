@@ -17,8 +17,8 @@ class PongAI : public AbstractSimpleEvolutionObject
 {
 protected:
 	Pong* currentGame;
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<double>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<double>& output) override;
 public:	
 	PongAI(FeedForwardNetworkTopologyOptions& options, Pong* pong_ = NULL);
 	PongAI() = default;

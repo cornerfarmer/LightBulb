@@ -38,10 +38,10 @@ public:
 	double getCurrentTeachingError();
 	double getCurrentWeightDecayError();
 	// Inherited:
-	void doNNCalculation();
-	void resetNN();
-	AbstractNeuralNetwork* getNeuralNetwork();
-	AbstractEvolutionObject* clone(bool addToWorld = true);
+	void doNNCalculation() override;
+	void resetNN() override;
+	AbstractNeuralNetwork* getNeuralNetwork() override;
+	AbstractEvolutionObject* clone(bool addToWorld = true) override;
 };
 
 #include "IO/TeachedEvolutionObjectIO.hpp"

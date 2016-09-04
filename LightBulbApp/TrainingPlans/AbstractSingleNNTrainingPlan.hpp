@@ -24,7 +24,7 @@ protected:
 	void fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options);
 public:
 	AbstractSingleNNTrainingPlan();
-	void initializeStart();
+	void initializeStart() override;
 	AbstractNeuralNetwork* getNeuralNetwork();
 	virtual int getRequiredInputSize() = 0;
 	virtual int getRequiredOutputSize() = 0;

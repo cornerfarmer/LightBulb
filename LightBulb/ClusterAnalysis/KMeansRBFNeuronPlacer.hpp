@@ -17,8 +17,8 @@ class KMeansRBFNeuronPlacer : public AbstractReliableRBFNeuronPlacer
 {
 protected:
 public:
-	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher);
-	AbstractRBFNeuronPlacer* getCopy();
+	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) override;
+	AbstractRBFNeuronPlacer* getCopy() override;
 };
 
 #endif

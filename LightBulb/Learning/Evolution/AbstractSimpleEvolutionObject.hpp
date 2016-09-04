@@ -48,10 +48,10 @@ public:
 	AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world);
 	AbstractSimpleEvolutionObject() = default;
 	// Inherited:
-	void doNNCalculation();
-	AbstractNeuralNetwork* getNeuralNetwork();
-	void resetNN();
-	AbstractEvolutionObject* clone(bool addToWorld = true);
+	void doNNCalculation() override;
+	AbstractNeuralNetwork* getNeuralNetwork() override;
+	void resetNN() override;
+	AbstractEvolutionObject* clone(bool addToWorld = true) override;
 };
 
 #include "IO/AbstractSimpleEvolutionObjectIO.hpp"

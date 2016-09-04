@@ -22,18 +22,18 @@ class PongReinforcementWorld : public AbstractReinforcementWorld, public Abstrac
 private:
 	int time;
 protected:
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<bool>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<bool>& output) override;
 public:
 	PongReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	PongReinforcementWorld() = default;
-	double doSimulationStep();
+	double doSimulationStep() override;
 	void executeCompareAI();
-	void initializeForLearning();
-	int rateKI();
-	std::vector<std::string> getDataSetLabels();
-	bool isTerminalState();
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	void initializeForLearning() override;
+	int rateKI() override;
+	std::vector<std::string> getDataSetLabels() override;
+	bool isTerminalState() override;
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
 };
 
 

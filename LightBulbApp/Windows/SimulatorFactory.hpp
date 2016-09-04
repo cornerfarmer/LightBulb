@@ -16,8 +16,8 @@ protected:
 	NeuralNetworkRepository* neuralNetworkRepository;
 public:
 	SimulatorFactory(NeuralNetworkRepository* neuralNetworkRepository_);
-	AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent);
-	std::string getLabel();
+	AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
+	std::string getLabel() override;
 };
 
 #endif

@@ -17,11 +17,11 @@ class BooleanPreference : public AbstractVariablePreference<bool>
 	template <class Archive>
 	friend void load(Archive& archive, BooleanPreference& booleanPreference);
 protected:
-	std::string getValueAsString();
+	std::string getValueAsString() override;
 public:
 	BooleanPreference(std::string name, bool defaultValue);
 	BooleanPreference() = default;
-	AbstractPreference* getCopy();
+	AbstractPreference* getCopy() override;
 };
 
 #include "IO/BooleanPreferenceIO.hpp"

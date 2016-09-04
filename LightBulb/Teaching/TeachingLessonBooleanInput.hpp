@@ -26,12 +26,12 @@ protected:
 public:
 	TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_, bool calcStrictError_ = true);
 	// Inherited:
-	AbstractTeachingLesson* unfold();
-	int getMaxTimeStep();
+	AbstractTeachingLesson* unfold() override;
+	int getMaxTimeStep() override;
 	// Converts our boolean teachingInput vector in a double vector depending on the used activationFunction
-	NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction);
+	NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction) override;
 	NeuralNetworkIO<bool>* getBooleanTeachingInput();
-	std::vector<std::vector<double>>* getTeachingPattern();
+	std::vector<std::vector<double>>* getTeachingPattern() override;
 
 	std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork);
 };

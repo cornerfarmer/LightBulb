@@ -19,13 +19,13 @@ class DoublePreference : public AbstractVariablePreference<double>
 protected:
 	double min;
 	double max;
-	std::string getValueAsString();
+	std::string getValueAsString() override;
 public:
 	DoublePreference(std::string name, double defaultValue, double min_, double max_);
 	DoublePreference() = default;
 	double getMin();
 	double getMax();
-	AbstractPreference* getCopy();
+	AbstractPreference* getCopy() override;
 	
 };
 

@@ -17,8 +17,8 @@ private:
 public:
 	ExponentialShrinkFunction(double startValue_, double minValue_, double speedFactor_);
 	// Inherited:	
-	double execute(double time);
-	AbstractShrinkFunction* getShrinkFunctionCopy();
+	double execute(double time) override;
+	AbstractShrinkFunction* getShrinkFunctionCopy() override;
 };
 
 #endif

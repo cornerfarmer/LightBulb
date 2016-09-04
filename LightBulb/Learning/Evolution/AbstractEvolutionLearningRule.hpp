@@ -32,7 +32,7 @@ protected:
 public:
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 	AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 	virtual AbstractEvolutionWorld* getWorld();
 };
 

@@ -15,14 +15,14 @@ class SimpleReinforcementDQNExample : public AbstractLearningRuleTrainingPlan
 private:
 	SimpleReinforcementWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate();
+	AbstractLearningRule* createLearningRate() override;
 	SimpleReinforcementWorld* createWorld();
 public:
 	SimpleReinforcementDQNExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 	SimpleReinforcementWorld* getWorld();
 };
 

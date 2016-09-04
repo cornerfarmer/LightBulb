@@ -44,11 +44,11 @@ public:
 
 	Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
 	// Print a short debug output (totalLearningRate)
-	std::string printDebugOutput();
+	std::string printDebugOutput() override;
 	// Returns if the learning has stopped
-	bool learningHasStopped();
+	bool learningHasStopped() override;
 	// Initializes the ResilientLearningRateHelper
-	void initializeAlgorithm(AbstractNetworkTopology* networkTopology);
+	void initializeAlgorithm(AbstractNetworkTopology* networkTopology) override;
 };
 
 #include "IO/SimpleGradientDecentIO.hpp"

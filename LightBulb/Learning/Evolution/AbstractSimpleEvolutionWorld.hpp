@@ -32,14 +32,14 @@ protected:
 public:
 	AbstractSimpleEvolutionWorld();
 	// Inherited:
-	AbstractEvolutionObject* addNewObject(bool addToWorld = true);
-	std::vector<AbstractEvolutionObject*>* getEvolutionObjects();
-	void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects);
-	void reset();
-	int getPopulationSize();
-	void clearPopulation();
-	void releaseAllObjects();
-	void addExistingObject(AbstractEvolutionObject* newObject);
+	AbstractEvolutionObject* addNewObject(bool addToWorld = true) override;
+	std::vector<AbstractEvolutionObject*>* getEvolutionObjects() override;
+	void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects) override;
+	void reset() override;
+	int getPopulationSize() override;
+	void clearPopulation() override;
+	void releaseAllObjects() override;
+	void addExistingObject(AbstractEvolutionObject* newObject) override;
 };
 
 #include "IO/AbstractSimpleEvolutionWorldIO.hpp"

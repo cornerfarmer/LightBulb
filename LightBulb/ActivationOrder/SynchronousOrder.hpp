@@ -13,10 +13,10 @@ class SynchronousOrder : public AbstractActivationOrder
 private:
 public:
 	// Activates all neurons in the given topology 
-	void executeActivation(AbstractNetworkTopology &networkTopology);
+	void executeActivation(AbstractNetworkTopology &networkTopology) override;
 	// Inherited:
-	AbstractActivationOrder* getCopy(); 
-	std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology);
+	AbstractActivationOrder* getCopy() override; 
+	std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) override;
 };
 
 #endif

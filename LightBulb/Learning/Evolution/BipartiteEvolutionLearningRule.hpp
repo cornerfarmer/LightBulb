@@ -30,17 +30,17 @@ class BipartiteEvolutionLearningRule : public AbstractEvolutionLearningRule
 	friend struct cereal::LoadAndConstruct<BipartiteEvolutionLearningRule>;
 protected:
 	BipartiteEvolutionLearningRuleOptions* getOptions();
-	bool doIteration();
-	void initializeTry();
-	bool hasLearningSucceeded();
-	void initializeStartLearningAlgoritm();
+	bool doIteration() override;
+	void initializeTry() override;
+	bool hasLearningSucceeded() override;
+	void initializeStartLearningAlgoritm() override;
 	bool exitConditionReached;
-	AbstractLearningResult* getLearningResult();
+	AbstractLearningResult* getLearningResult() override;
 public:
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
 	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
 	static std::string getName();
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 	AbstractEvolutionLearningRule* getFirstLearningRule();
 	AbstractEvolutionLearningRule* getSecondLearningRule();
 

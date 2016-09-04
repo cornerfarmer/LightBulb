@@ -21,8 +21,8 @@ class Network : public AbstractSimpleEvolutionObject
 	friend void load(Archive& archive, Network& object);
 protected:
 	std::vector<std::vector<float>> positions;
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<double>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<double>& output) override;
 public:	
 	Network(NetworkSimulator* networkSimulator_);
 	Network() = default;

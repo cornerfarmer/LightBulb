@@ -29,13 +29,13 @@ class AbstractReinforcementLearningRule : public AbstractLearningRule
 	friend void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule);
 private:
 	protected:
-	bool hasLearningSucceeded();
+	bool hasLearningSucceeded() override;
 	virtual AbstractReinforcementLearningRuleOptions* getOptions();
 	void randomGeneretorHasChanged();
 public:
 	AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_);
 	AbstractReinforcementLearningRule() = default;
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 };
 
 #include "IO/AbstractReinforcementLearningRuleIO.hpp"

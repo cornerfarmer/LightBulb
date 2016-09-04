@@ -35,7 +35,7 @@ private:
 public:
 	RecurrentFeedForwardNetworkTopology(RecurrentFeedForwardNetworkTopologyOptions& options_);		
 	// Inherited:
-	std::unique_ptr<FeedForwardNetworkTopology> unfold(int instanceCount);
+	std::unique_ptr<FeedForwardNetworkTopology> unfold(int instanceCount) override;
 	std::unique_ptr<std::map<Edge*, bool>> getNonRecurrentEdges();
 	void horizontalMergeWith(RecurrentFeedForwardNetworkTopology& otherNetwork);
 };

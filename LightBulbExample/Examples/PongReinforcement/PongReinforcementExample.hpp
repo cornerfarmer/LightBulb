@@ -15,14 +15,14 @@ class PongReinforcementExample : public AbstractLearningRuleTrainingPlan
 private:
 	PongReinforcementWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate();
+	AbstractLearningRule* createLearningRate() override;
 	PongReinforcementWorld* createWorld();
 public:
 	PongReinforcementExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 	PongReinforcementWorld* getWorld();
 };
 

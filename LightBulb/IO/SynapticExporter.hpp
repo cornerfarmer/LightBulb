@@ -34,7 +34,7 @@ private:
 	JSONAttribute* getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex);
 	int getTotalIndexOfNeuron(int layerIndex, int neuronIndex);
 public:
-	std::string execute(NeuralNetwork* neuralNetwork);
+	std::string execute(NeuralNetwork* neuralNetwork) override;
 };
 
 #endif

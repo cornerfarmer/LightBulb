@@ -1,7 +1,7 @@
 // Includes
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuronFactory/AbstractNeuronDescriptionFactory.hpp"
-#include "Neuron/NeuronDescription.hpp"
+#include "NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "Function/InputFunction/AbstractInputFunction.hpp"
 #include "Function/OutputFunction/AbstractOutputFunction.hpp"

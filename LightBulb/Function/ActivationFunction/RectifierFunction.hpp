@@ -15,12 +15,12 @@ private:
 public:
 	RectifierFunction(double leakyFac_ = 0);
 	// Inherited
-	double execute(double input);
-	double executeDerivation(double input);
-	AbstractActivationFunction* getActivationFunctionCopy();
-	double getMaximum();
-	double getMinimum();
-	bool hasAMaxAndMinimum();
+	double execute(double input) override;
+	double executeDerivation(double input) override;
+	AbstractActivationFunction* getActivationFunctionCopy() override;
+	double getMaximum() override;
+	double getMinimum() override;
+	bool hasAMaxAndMinimum() override;
 };
 
 EMPTY_CHILD_SERIALIZATION(RectifierFunction);

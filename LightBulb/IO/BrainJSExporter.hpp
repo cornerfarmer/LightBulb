@@ -13,7 +13,7 @@ class BrainJSExporter : public AbstractExporter
 {
 private:
 public:
-	std::string execute(NeuralNetwork* neuralNetwork);
+	std::string execute(NeuralNetwork* neuralNetwork) override;
 };
 
 #endif

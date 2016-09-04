@@ -27,11 +27,11 @@ protected:
 	//std::unique_ptr<NatureDrawer> drawer;
 	int missingPlants;	
 	bool displayMode;
-	AbstractEvolutionObject* createNewObject();
-	void resetWorld();
+	AbstractEvolutionObject* createNewObject() override;
+	void resetWorld() override;
 public:
 	Nature();
-	bool doSimulationStep();
+	bool doSimulationStep() override;
 	std::vector<double> getSight(int posX, int posY, int dirX, int dirY);
 	double tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);
@@ -39,7 +39,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* getTiles();
-	double getScore(AbstractEvolutionObject* object);
+	double getScore(AbstractEvolutionObject* object) override;
 	AbstractTile* getTile(int posX, int posY);
 };
 

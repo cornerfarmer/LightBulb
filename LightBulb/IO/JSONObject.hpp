@@ -20,7 +20,7 @@ private:
 	std::vector<std::unique_ptr<JSONAttribute>> attributes;
 	std::string attributesToString();
 public:
-	std::string toString();
+	std::string toString() override;
 	void addAttribute(JSONAttribute* newAttribute);
 };
 

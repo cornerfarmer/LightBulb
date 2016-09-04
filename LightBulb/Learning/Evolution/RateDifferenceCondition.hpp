@@ -26,7 +26,7 @@ public:
 	// Creates a new condition with the minimum difference and the allowed timesteps
 	RateDifferenceCondition(double difference_, int count_);
 	// Inherited:
-	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule);
+	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) override;
 };
 
 #endif

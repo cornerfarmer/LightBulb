@@ -61,7 +61,7 @@ public:
 	void addSubApp(int subAppFactoryIndex);
 	void openPreferences(int trainingPlanPatternIndex);
 	void setTrainingPlanName(int trainingPlanIndex, std::string newName);
-	void removeSubApp(AbstractSubApp* subApp);
+	void removeSubApp(AbstractSubApp* subApp) override;
 };
 
 #include "IO/TrainingControllerIO.hpp"

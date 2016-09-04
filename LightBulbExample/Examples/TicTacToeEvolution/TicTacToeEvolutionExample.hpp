@@ -19,16 +19,16 @@ private:
 	SharedSamplingCombiningStrategy* cs1;
 	SharedSamplingCombiningStrategy* cs2;
 protected:
-	AbstractLearningRule* createLearningRate();
+	AbstractLearningRule* createLearningRate() override;
 	FeedForwardNetworkTopologyOptions getNetworkOptions();
-	AbstractEvolutionWorld* createWorld();
-	AbstractEvolutionWorld* createParasiteWorld();
+	AbstractEvolutionWorld* createWorld() override;
+	AbstractEvolutionWorld* createParasiteWorld() override;
 public:
 	TicTacToeEvolutionExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 };
 
 USE_PARENT_SERIALIZATION(TicTacToeEvolutionExample, AbstractCoevolutionTrainingPlan);

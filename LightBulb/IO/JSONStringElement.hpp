@@ -17,7 +17,7 @@ class JSONStringElement : public AbstractJSONElement
 private:
 	std::string content;
 public:
-	std::string toString();
+	std::string toString() override;
 	JSONStringElement(std::string content_);
 };
 

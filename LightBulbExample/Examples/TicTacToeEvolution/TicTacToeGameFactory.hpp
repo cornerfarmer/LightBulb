@@ -13,8 +13,8 @@ class TicTacToeGameFactory : public AbstractCustomSubAppFactory
 {
 protected:
 public:
-	AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent);
-	std::string getLabel();
+	AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent) override;
+	std::string getLabel() override;
 };
 
 #endif

@@ -18,8 +18,8 @@ class KNearestRBFNeuronPlacer : public AbstractNonReliableRBFNeuronPlacer
 {
 protected:
 public:
-	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher);
-	AbstractRBFNeuronPlacer* getCopy();
+	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) override;
+	AbstractRBFNeuronPlacer* getCopy() override;
 };
 
 #endif

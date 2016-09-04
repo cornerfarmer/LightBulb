@@ -29,7 +29,7 @@ protected:
 	void fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions* options);
 	void fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions* options);
 public:
-	void initializeStart();
+	void initializeStart() override;
 	AbstractEvolutionWorld* getParasiteWorld();
 	void setParasiteWorld(AbstractEvolutionWorld* world_);
 };

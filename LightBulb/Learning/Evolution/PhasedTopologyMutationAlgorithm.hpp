@@ -27,11 +27,11 @@ private:
 public:
 	PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_, int pruningThresholdDistance_ = 30);
 
-	void execute(AbstractEvolutionObject* object1);
+	void execute(AbstractEvolutionObject* object1) override;
 
-	void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
 };
 
 #endif

@@ -25,7 +25,7 @@ protected:
 	void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions* options);
 public:
 	AbstractReinforcementTrainingPlan();
-	void initializeStart();
+	void initializeStart() override;
 	AbstractReinforcementWorld* getWorld();
 	void setWorld(AbstractReinforcementWorld* network_);
 };

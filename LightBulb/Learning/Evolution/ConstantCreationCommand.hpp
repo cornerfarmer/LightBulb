@@ -22,7 +22,7 @@ public:
 	// Creates a command which creates up to a static amount of objects
 	ConstantCreationCommand(int objectCount_);
 	// Inherited:
-	void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>* notUsedObjects);
+	void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>* notUsedObjects) override;
 };
 
 #endif

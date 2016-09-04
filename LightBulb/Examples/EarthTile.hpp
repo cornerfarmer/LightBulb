@@ -18,8 +18,8 @@ protected:
 public:	
 	EarthTile();
 	//sf::Color getColor();
-	float tryToEat();
-	bool isWalkable();
-	double getViewValue();
+	float tryToEat() override;
+	bool isWalkable() override;
+	double getViewValue() override;
 };
 #endif

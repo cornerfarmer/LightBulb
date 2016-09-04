@@ -24,7 +24,7 @@ private:
 	double flatSpotEliminationFac;
 public:
 	Backpropagation(double flatSpotEliminationFac_ = 0);
-	void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient);
+	void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient) override;
 };
 
 #include "IO/BackpropagationIO.hpp"

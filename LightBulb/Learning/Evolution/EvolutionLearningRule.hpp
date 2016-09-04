@@ -60,22 +60,22 @@ class EvolutionLearningRule : public AbstractEvolutionLearningRule, public Light
 	friend struct cereal::LoadAndConstruct<EvolutionLearningRule>;
 protected:
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
-	bool doIteration();
-	bool hasLearningSucceeded();
+	bool doIteration() override;
+	bool hasLearningSucceeded() override;
 	EvolutionLearningRuleOptions* getOptions();
-	void doCalculationAfterLearningProcess();
-	void setHelperToUsedObjects();
+	void doCalculationAfterLearningProcess() override;
+	void setHelperToUsedObjects() override;
 	bool exitConditionReached;
-	AbstractLearningResult* getLearningResult();
+	AbstractLearningResult* getLearningResult() override;
 public:
 	EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 	EvolutionLearningRule(EvolutionLearningRuleOptions* options_);
 	EvolutionLearningRule();
 	// Executes the learning process
-	void initializeTry();
+	void initializeTry() override;
 	static std::string getName();
-	std::vector<std::string> getDataSetLabels();
-	void setLogger(AbstractLogger* logger);
+	std::vector<std::string> getDataSetLabels() override;
+	void setLogger(AbstractLogger* logger) override;
 };
 
 #include "IO/EvolutionLearningRuleIO.hpp"

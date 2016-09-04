@@ -37,16 +37,16 @@ protected:
 public:
 	AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	AbstractCoevolutionWorld() = default;
-	bool doSimulationStep(); 
-	double getScore(AbstractEvolutionObject* object);
+	bool doSimulationStep() override; 
+	double getScore(AbstractEvolutionObject* object) override;
 	virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
 	virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; }
 	virtual AbstractCombiningStrategy* getCombiningStrategy();
-	void setLogger(AbstractLogger* logger_);
-	std::vector<std::string> getDataSetLabels();
+	void setLogger(AbstractLogger* logger_) override;
+	std::vector<std::string> getDataSetLabels() override;
 	virtual bool isParasiteWorld();
 	virtual int getRoundCount();
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
 };
 
 #include "IO/AbstractCoevolutionWorldIO.hpp"

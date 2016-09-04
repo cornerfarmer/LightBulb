@@ -20,7 +20,7 @@ private:
 public:
 	NetworkGrowMutationAlgorithm(std::vector<unsigned int> maxNeuronsPerLayer_);
 
-	void execute(AbstractEvolutionObject* object1);
+	void execute(AbstractEvolutionObject* object1) override;
 };
 
 #endif

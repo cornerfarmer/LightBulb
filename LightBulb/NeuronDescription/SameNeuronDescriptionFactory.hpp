@@ -28,11 +28,11 @@ public:
 	SameNeuronDescriptionFactory(NeuronDescription* neuronDescription_);
 	SameNeuronDescriptionFactory(const SameNeuronDescriptionFactory &obj);
 	// Inherited:
-	NeuronDescription* createInnerNeuronDescription();
-	NeuronDescription* createOutputNeuronDescription();
-	AbstractNeuronDescriptionFactory* getCopy();
-	AbstractActivationFunction* getOutputActivationFunction();
-	AbstractActivationFunction* getInnerActivationFunction();
+	NeuronDescription* createInnerNeuronDescription() override;
+	NeuronDescription* createOutputNeuronDescription() override;
+	AbstractNeuronDescriptionFactory* getCopy() override;
+	AbstractActivationFunction* getOutputActivationFunction() override;
+	AbstractActivationFunction* getInnerActivationFunction() override;
 };
 
 #include "IO/SameNeuronDescriptionFactoryIO.hpp"

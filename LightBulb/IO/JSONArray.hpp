@@ -19,7 +19,7 @@ private:
 	std::vector<std::unique_ptr<AbstractJSONElement>> elements;
 	std::string elementsToString();
 public:
-	std::string toString();
+	std::string toString() override;
 	void addElement(AbstractJSONElement* newElement);
 };
 

@@ -25,7 +25,7 @@ private:
 	AbstractEvolutionTrainingPlan* selectedTrainingPlan;
 	std::vector<std::pair<EvolutionSource, double>> currentState;
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
 	void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);

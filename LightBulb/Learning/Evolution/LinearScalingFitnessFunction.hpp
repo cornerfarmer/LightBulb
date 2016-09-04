@@ -20,7 +20,7 @@ private:
 public:
 	LinearScalingFitnessFunction(double proportionalScaling_, double base_, bool useDynamicScaling_ = false);
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 };
 
 #endif

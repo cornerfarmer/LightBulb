@@ -18,7 +18,7 @@ private:
 public:
 	PositiveMakerFitnessFunction(double constant_);
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 };
 
 #endif

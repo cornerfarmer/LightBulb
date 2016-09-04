@@ -68,9 +68,9 @@ public:
 	// Set all weights to new random values between randStart and randEnd
 	void randomizeWeights(double randStart, double randEnd);
 	// Calculates the Edge count
-	int getEdgeCount();
+	int getEdgeCount() override;
 	// Reset all activations of all neurons
-	void resetActivation();
+	void resetActivation() override;
 	// Puts all current neuron outputs into the given map
 	void getAllNeuronOutputs(std::map<AbstractNeuron*, double>& neuronOutputs);
 	// Puts all current neuron net inputs into the given map
@@ -78,7 +78,7 @@ public:
 	// Adds a neuron to the network
 	AbstractNeuron* addNeuron(bool refreshNeuronCounters, bool inputNeuron = false);
 	// Inherited:
-	std::unique_ptr<FeedForwardNetworkTopology> unfold(int instanceCount);
+	std::unique_ptr<FeedForwardNetworkTopology> unfold(int instanceCount) override;
 	BiasNeuron* getBiasNeuron();
 };
 

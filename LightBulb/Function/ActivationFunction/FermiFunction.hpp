@@ -16,21 +16,21 @@ private:
 public:
 	FermiFunction(double temperatureParameter_);
 	// Inherited
-	double execute(double input);
+	double execute(double input) override;
 	/**
 	 * \brief 
 	 * \param input 
 	 * \return 
 	 */
-	double executeDerivation(double input);
-	AbstractActivationFunction* getActivationFunctionCopy();
-	double getMaximum();
-	double getMinimum();
+	double executeDerivation(double input) override;
+	AbstractActivationFunction* getActivationFunctionCopy() override;
+	double getMaximum() override;
+	double getMinimum() override;
 	/**
 	 * \brief 
 	 * \param 
 	 */
-	bool hasAMaxAndMinimum();
+	bool hasAMaxAndMinimum() override;
 };
 
 #include "IO/FermiFunctionIO.hpp"

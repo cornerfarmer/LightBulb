@@ -16,8 +16,8 @@ protected:
 	TrainingPlanRepository* trainingPlanRepository;
 public:
 	EvolutionAnalyzerFactory(TrainingPlanRepository* trainingPlanRepository_);
-	AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent);
-	std::string getLabel();
+	AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
+	std::string getLabel() override;
 };
 
 #endif

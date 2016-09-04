@@ -31,15 +31,15 @@ typedef double(*Function)(std::vector<float> pos);
 class FunctionSimulator : public AbstractSimpleEvolutionWorld
 {
 protected:
-	AbstractEvolutionObject* createNewObject();
+	AbstractEvolutionObject* createNewObject() override;
 	//std::unique_ptr<FunctionDrawer> drawer;
 	std::unique_ptr<FunctionSimulatorOptions> options;
 	Function function;
 public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	FunctionSimulator() = default;
-	bool doSimulationStep();
-	double getScore(AbstractEvolutionObject* object);
+	bool doSimulationStep() override;
+	double getScore(AbstractEvolutionObject* object) override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, AbstractSimpleEvolutionWorld, AbstractEvolutionWorld)

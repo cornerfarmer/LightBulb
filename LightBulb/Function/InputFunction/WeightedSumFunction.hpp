@@ -16,8 +16,8 @@ class WeightedSumFunction : public AbstractInputFunction
 private:
 public:
 	// Calculates Σ output * weight
-	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights);
-	AbstractInputFunction* getInputFunctionCopy();
+	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) override;
+	AbstractInputFunction* getInputFunctionCopy() override;
 };
 
 EMPTY_CHILD_SERIALIZATION(WeightedSumFunction);

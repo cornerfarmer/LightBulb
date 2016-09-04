@@ -16,7 +16,7 @@ private:
 public:
 	ScoreCondition(double scoreGoal_);
 	// Inherited:
-	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule);
+	bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) override;
 };
 
 #endif

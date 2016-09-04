@@ -19,7 +19,7 @@ class BestReuseSelector : public AbstractReuseSelector
 {
 private:
 protected:
-	void selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	void selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 public:
 };
 

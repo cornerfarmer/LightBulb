@@ -22,7 +22,7 @@ private:
 	std::unique_ptr<SimulatorWindow> window;
 	NeuralNetworkRepository* neuralNetworkRepository;
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
 	SimulatorWindow* getWindow();

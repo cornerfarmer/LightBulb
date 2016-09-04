@@ -31,11 +31,11 @@ public:
 	DifferentNeuronDescriptionFactory(NeuronDescription* innerNeuronDescription_, NeuronDescription* outputNeuronDescription_);
 	DifferentNeuronDescriptionFactory(const DifferentNeuronDescriptionFactory &obj);
 	// Inherited:
-	NeuronDescription* createInnerNeuronDescription();
-	NeuronDescription* createOutputNeuronDescription();
-	AbstractNeuronDescriptionFactory* getCopy();
-	AbstractActivationFunction* getOutputActivationFunction();
-	AbstractActivationFunction* getInnerActivationFunction();
+	NeuronDescription* createInnerNeuronDescription() override;
+	NeuronDescription* createOutputNeuronDescription() override;
+	AbstractNeuronDescriptionFactory* getCopy() override;
+	AbstractActivationFunction* getOutputActivationFunction() override;
+	AbstractActivationFunction* getInnerActivationFunction() override;
 };
 
 #include "IO/DifferentNeuronDescriptionFactoryIO.hpp"

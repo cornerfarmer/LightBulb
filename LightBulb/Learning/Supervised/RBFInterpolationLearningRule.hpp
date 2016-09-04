@@ -51,12 +51,12 @@ protected:
 	// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
 	RBFInterpolationLearningRuleOptions* getOptions();
 	// Inherited:
-	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients);
-	bool learningHasStopped();
-	void initializeStartLearningAlgoritm();
+	void adjustWeights(int layerIndex, Eigen::MatrixXd gradients) override;
+	bool learningHasStopped() override;
+	void initializeStartLearningAlgoritm() override;
 	AbstractActivationOrder* getNewActivationOrder();
-	std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap);
-	void initializeTry();
+	std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
+	void initializeTry() override;
 public:
 	RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);
 	static std::string getName();

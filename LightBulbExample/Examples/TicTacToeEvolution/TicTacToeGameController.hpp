@@ -17,7 +17,7 @@ private:
 	TicTacToe* world;
 
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	TicTacToeGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
 	TicTacToeGameWindow* getWindow();

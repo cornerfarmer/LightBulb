@@ -14,7 +14,7 @@ class ConstantCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunc
 {
 protected:
 public:
-	std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results);
+	std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results) override;
 };
 
 #endif

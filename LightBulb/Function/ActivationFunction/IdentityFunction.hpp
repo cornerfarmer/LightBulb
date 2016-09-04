@@ -14,14 +14,14 @@ class IdentityFunction : public AbstractActivationFunction, public AbstractOutpu
 private:
 public:
 	// Inherited: 
-	double execute(double input);
-	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs);
-	double executeDerivation(double input);
-	AbstractOutputFunction* getOutputFunctionCopy();
-	AbstractActivationFunction* getActivationFunctionCopy();
-	double getMaximum();
-	double getMinimum();
-	bool hasAMaxAndMinimum();
+	double execute(double input) override;
+	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs) override;
+	double executeDerivation(double input) override;
+	AbstractOutputFunction* getOutputFunctionCopy() override;
+	AbstractActivationFunction* getActivationFunctionCopy() override;
+	double getMaximum() override;
+	double getMinimum() override;
+	bool hasAMaxAndMinimum() override;
 };
 
 EMPTY_CHILD_SERIALIZATION(IdentityFunction);

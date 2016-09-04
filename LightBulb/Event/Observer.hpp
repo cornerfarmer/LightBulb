@@ -24,7 +24,7 @@ namespace LightBulb
 			object = object_;
 		}
 
-		void throwEvent(EventArg* arg)
+		void throwEvent(EventArg* arg) override
 		{
 			(object->*method)(arg);
 		}

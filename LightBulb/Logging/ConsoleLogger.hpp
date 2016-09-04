@@ -13,7 +13,7 @@
 class ConsoleLogger : public AbstractLogger
 {
 protected:
-	void outputMessage(std::string message);
+	void outputMessage(std::string message) override;
 public:
 	ConsoleLogger(LogLevel logLevel);
 };

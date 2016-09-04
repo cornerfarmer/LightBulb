@@ -25,15 +25,15 @@ private:
 	std::unique_ptr<AbstractLearningRule> learningRule;
 protected:
 	virtual AbstractLearningRule* createLearningRate() = 0;
-	void run(bool initial);
-	void tryToPause();
+	void run(bool initial) override;
+	void tryToPause() override;
 	virtual void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
 public:
-	std::vector<std::string> getDataSetLabels();
-	LearningState* getLearningState();
+	std::vector<std::string> getDataSetLabels() override;
+	LearningState* getLearningState() override;
 	AbstractLearningResult* getLearningResult();
 	AbstractLearningRule* getLearningRule();
-	int getSeed();
+	int getSeed() override;
 };
 
 #include "IO/AbstractLearningRuleTrainingPlanIO.hpp"

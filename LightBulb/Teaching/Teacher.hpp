@@ -23,23 +23,23 @@ private:
 public:
 	Teacher(double weightDecayFac_ = 0);
 	// Adds a new TechingLesson to the teachingLessons list
-	void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson);
+	void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson) override;
 	// Adds a new TechingLesson to the testingLessons list
-	void addTestingLesson(AbstractTeachingLesson* newTestingLesson);
+	void addTestingLesson(AbstractTeachingLesson* newTestingLesson) override;
 	// Get all techingLessons (Useful for online learning)
-	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons();
+	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() override;
 
-	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons();
+	std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() override;
 	// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
-	double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) override;
 
-	double getTeachingError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder);
+	double getTeachingError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) override;
 
-	double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork);
+	double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) override;
 	// Returns a unfolded version of this teacher
-	AbstractTeacher* unfold();
+	AbstractTeacher* unfold() override;
 	// Returns the biggest used timestep of all teaching lessons
-	int getMaxTimeStep();
+	int getMaxTimeStep() override;
 
 };
 

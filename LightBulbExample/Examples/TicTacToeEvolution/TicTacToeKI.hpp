@@ -18,8 +18,8 @@ class TicTacToeKI : public AbstractSimpleEvolutionObject
 {
 protected:
 	TicTacToe* currentGame;
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<double>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<double>& output) override;
 public:	
 	TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = NULL);
 	TicTacToeKI() = default;

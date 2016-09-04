@@ -21,7 +21,7 @@ public:
 	RBFNetwork(unsigned int neuronCountFirstLayer, unsigned int neuronCountSecondLayer, unsigned int neuronCountThirdLayer);		
 	RBFNetwork();
 	// Set all weights to new random values between randStart and randEnd
-	void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
+	void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) override;
 	// Set all neuron centers to new random values between randStart and randEnd
 	void randomizeCenters(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
 	// Set all neuron centers to new random values between randStart and randEnd
@@ -33,7 +33,7 @@ public:
 
 	double getWidthOfRBFNeuron(int neuronIndex);
 
-	AbstractNetworkTopology* clone();
+	AbstractNetworkTopology* clone() override;
 };
 
 #include "IO/RBFNetworkIO.hpp"

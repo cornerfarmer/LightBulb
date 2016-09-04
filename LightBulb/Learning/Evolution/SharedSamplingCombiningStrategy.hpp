@@ -19,11 +19,11 @@ class SharedSamplingCombiningStrategy : public AbstractCombiningStrategy
 private:
 	int amountOfCompetitionsPerObject;
 	AbstractCombiningStrategy* otherCombiningStrategy;
-	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects);
+	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
 public:
-	void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
+	void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld) override;
 	SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_ = 0, AbstractCoevolutionWorld* secondWorld_ = NULL);
-	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld);
+	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
 };
 
 #endif

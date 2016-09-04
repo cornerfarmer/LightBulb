@@ -23,10 +23,10 @@ protected:
 public:
 	TeachingLessonLinearInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<double>* teachingInput_);
 	// Inherited:
-	AbstractTeachingLesson* unfold();
-	int getMaxTimeStep();
-	NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction);
-	std::vector<std::vector<double>>* getTeachingPattern();
+	AbstractTeachingLesson* unfold() override;
+	int getMaxTimeStep() override;
+	NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction) override;
+	std::vector<std::vector<double>>* getTeachingPattern() override;
 };
 
 #endif

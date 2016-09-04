@@ -45,11 +45,11 @@ public:
 	RMSPropLearningRate(RMSPropLearningRateOptions& options_);
 	RMSPropLearningRate();
 	// Computes the new learning rate of the given edge from the given gradient
-	Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients);
+	Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
 	// Returns if the learning has stopped
-	bool learningHasStopped();
+	bool learningHasStopped() override;
 	// Initializes the ResilientLearningRateHelper
-	void initializeAlgorithm(AbstractNetworkTopology* networkTopology);
+	void initializeAlgorithm(AbstractNetworkTopology* networkTopology) override;
 };
 
 #include "IO/RMSPropLearningRateIO.hpp"

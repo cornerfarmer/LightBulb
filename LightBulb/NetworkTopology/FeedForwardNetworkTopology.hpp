@@ -64,85 +64,85 @@ public:
 	FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_);
 	FeedForwardNetworkTopology();
 
-	int getEdgeCount();
+	int getEdgeCount() override;
 
-	int getLayerCount();
+	int getLayerCount() override;
 
-	int getNeuronCount();
+	int getNeuronCount() override;
 
-	int getInputSize();
+	int getInputSize() override;
 
-	int getOutputSize();
+	int getOutputSize() override;
 
-	std::vector<unsigned int> getNeuronCountsPerLayer();
+	std::vector<unsigned int> getNeuronCountsPerLayer() override;
 
-	void setInput(std::vector<double> &inputVector);
+	void setInput(std::vector<double> &inputVector) override;
 
-	void getOutput(std::vector<double> &outputVector);
+	void getOutput(std::vector<double> &outputVector) override;
 	
-	void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd);
+	void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) override;
 
-	void randomizeDependingOnLayerSize(AbstractRandomGenerator* randomGenerator);
+	void randomizeDependingOnLayerSize(AbstractRandomGenerator* randomGenerator) override;
 
-	void resetActivation();
+	void resetActivation() override;
 	
-	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork);
+	void copyWeightsFrom(AbstractNetworkTopology& otherNetwork) override;
 
-	void refreshNetInputsForLayer(int layerNr);
+	void refreshNetInputsForLayer(int layerNr) override;
 
-	void refreshActivationsForLayer(int layerNr);
+	void refreshActivationsForLayer(int layerNr) override;
 
-	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork);
+	double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork) override;
 
-	std::vector<Eigen::MatrixXd>* getAllWeights();
+	std::vector<Eigen::MatrixXd>* getAllWeights() override;
 
-	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* getAllActivations();
+	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* getAllActivations() override;
 
-	std::vector<Eigen::VectorXd> getActivationsCopy();
+	std::vector<Eigen::VectorXd> getActivationsCopy() override;
 
-	std::vector<Eigen::VectorXd>* getAllNetInputs();
-	
-
-	Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex);
-
-	void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights);
-
-	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex);
-	
-	Eigen::VectorXd getNetInputsPerLayer(int layerIndex);
-	
-	Eigen::VectorXd getActivationsPerLayer(int layerIndex);
+	std::vector<Eigen::VectorXd>* getAllNetInputs() override;
 	
 
-	Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex);
+	Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) override;
 
-	double getBiasWeightOfNeuron(int layerNr, int neuronNr);
+	void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) override;
 
-	std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false);
+	Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) override;
 	
-	double getWeight(int layerIndex, int neuronIndex, int edgeIndex);
-
-	void setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight);
-
-	double getNetInput(int layerIndex, int neuronIndex);
-
-	double getActivation(int layerIndex, int neuronIndex);
+	Eigen::VectorXd getNetInputsPerLayer(int layerIndex) override;
 	
-	bool usesBiasNeuron();
-
-	void removeNeuron(int layerIndex, int neuronIndex);
-
-	void addNeuron(int layerIndex);
-
-	void removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex);
-
-	bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex);
+	Eigen::VectorXd getActivationsPerLayer(int layerIndex) override;
 	
-	AbstractNetworkTopology* clone();
 
-	NeuronDescription* getInnerNeuronDescription();
+	Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) override;
 
-	NeuronDescription* getOutputNeuronDescription();
+	double getBiasWeightOfNeuron(int layerNr, int neuronNr) override;
+
+	std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false) override;
+	
+	double getWeight(int layerIndex, int neuronIndex, int edgeIndex) override;
+
+	void setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight) override;
+
+	double getNetInput(int layerIndex, int neuronIndex) override;
+
+	double getActivation(int layerIndex, int neuronIndex) override;
+	
+	bool usesBiasNeuron() override;
+
+	void removeNeuron(int layerIndex, int neuronIndex) override;
+
+	void addNeuron(int layerIndex) override;
+
+	void removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) override;
+
+	bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) override;
+	
+	AbstractNetworkTopology* clone() override;
+
+	NeuronDescription* getInnerNeuronDescription() override;
+
+	NeuronDescription* getOutputNeuronDescription() override;
 };
 
 #include "IO/FeedForwardNetworkTopologyIO.hpp"

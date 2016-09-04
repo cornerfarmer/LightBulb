@@ -86,17 +86,17 @@ private:
 	void doSupervisedLearning();
 	std::vector<Eigen::MatrixXd> checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology);
 protected:
-	bool doIteration();
-	DQNLearningRuleOptions* getOptions();
-	AbstractLearningResult* getLearningResult();
+	bool doIteration() override;
+	DQNLearningRuleOptions* getOptions() override;
+	AbstractLearningResult* getLearningResult() override;
 public:
 	DQNLearningRule(DQNLearningRuleOptions& options_);
 	DQNLearningRule(DQNLearningRuleOptions* options_);
 	DQNLearningRule();
 	// Executes the learning process
-	void initializeTry();
+	void initializeTry() override;
 	static std::string getName();
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 };
 
 #include "IO/DQNLearningRuleIO.hpp"

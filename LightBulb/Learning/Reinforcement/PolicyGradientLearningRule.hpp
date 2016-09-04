@@ -41,18 +41,18 @@ private:
 	std::vector<Eigen::MatrixXd> checkGradient(AbstractNetworkTopology* networkTopology);
 	Eigen::VectorXd getErrorVector(AbstractNetworkTopology* networkTopology);
 protected:
-	bool doIteration();
-	PolicyGradientLearningRuleOptions* getOptions();
-	void doCalculationAfterLearningProcess();
-	AbstractLearningResult* getLearningResult();
+	bool doIteration() override;
+	PolicyGradientLearningRuleOptions* getOptions() override;
+	void doCalculationAfterLearningProcess() override;
+	AbstractLearningResult* getLearningResult() override;
 public:
 	PolicyGradientLearningRule(PolicyGradientLearningRuleOptions& options_);
 	PolicyGradientLearningRule(PolicyGradientLearningRuleOptions* options_);
 	PolicyGradientLearningRule();
 	// Executes the learning process
-	void initializeTry();
+	void initializeTry() override;
 	static std::string getName();
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 };
 
 

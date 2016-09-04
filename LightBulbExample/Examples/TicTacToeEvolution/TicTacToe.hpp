@@ -34,8 +34,8 @@ private:
 	void initialize();
 protected:
 	std::vector<std::vector<int>> fields;	
-	AbstractEvolutionObject* createNewObject();
-	void resetWorld();
+	AbstractEvolutionObject* createNewObject() override;
+	void resetWorld() override;
 	int whoHasWon();
 	int currentPlayer;
 	bool illegalMove;
@@ -45,7 +45,7 @@ protected:
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
 	std::unique_ptr<FeedForwardNetworkTopologyOptions> options;
-	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
+	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round) override;
 public:
 	TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	TicTacToe();
@@ -53,17 +53,17 @@ public:
 	void setField(int x, int y);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
-	int rateKI(AbstractEvolutionObject* rateKI);
+	int rateKI(AbstractEvolutionObject* rateKI) override;
 	void setIllegalMove(bool illegalMove_);
 	void startNewGame(int firstPlayer);
-	void initializeForLearning();
+	void initializeForLearning() override;
 	bool hasGameFinished();
 	std::vector<std::vector<int>>* getFields();
 	void startStepMode();
 	void stopStepMode();
-	std::vector<std::string> getDataSetLabels();
+	std::vector<std::string> getDataSetLabels() override;
 	void nextStep();
-	int getRoundCount();
+	int getRoundCount() override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, AbstractCoevolutionWorld, AbstractEvolutionWorld);

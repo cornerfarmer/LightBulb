@@ -28,7 +28,7 @@ private:
 	bool autoScrolling;
 
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	LoggerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
 	void show();

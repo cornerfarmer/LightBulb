@@ -18,14 +18,14 @@ private:
 	int posX;
 	int posY;
 protected:
-	void getNNInput(std::vector<double>& input);
-	void interpretNNOutput(std::vector<bool>& output);
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<bool>& output) override;
 public:
 	SimpleReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	SimpleReinforcementWorld() = default;
-	double doSimulationStep();
-	std::vector<std::string> getDataSetLabels();
-	bool isTerminalState();
+	double doSimulationStep() override;
+	std::vector<std::string> getDataSetLabels() override;
+	bool isTerminalState() override;
 };
 
 

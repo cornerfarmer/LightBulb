@@ -24,10 +24,10 @@ private:
 	// Caches the orderd distance between all points
 	std::map<Point*, std::vector<std::pair<Point*, double>>> distanceToPoint;
 	// Add all points of which the distance to pointToAdd is less than epsilon (nearestPointDistance)
-	void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointDistance);
+	void addKNearestPointsToCluster(PointSet& points, Cluster& cluster, Point &pointToAdd, double nearestPointDistance) override;
 public:
 	// Refresh cache (nthNearestPointToPoint)
-	void calculateCache(PointSet& points);
+	void calculateCache(PointSet& points) override;
 	double getBiggestDistance(PointSet& points);
 };
 

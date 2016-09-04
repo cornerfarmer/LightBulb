@@ -19,7 +19,7 @@ private:
 	double velocity;
 	int action;
 protected:
-	void prepareClose();
+	void prepareClose() override;
 public:
 	MountainCarController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
 	MountainCarWindow* getWindow();

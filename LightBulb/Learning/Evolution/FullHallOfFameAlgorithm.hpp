@@ -15,7 +15,7 @@ class FullHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
 {
 private:
 protected:	
-	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects);
+	void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) override;
 };
 
 USE_EXISTING_PARENT_SINGLE_SERIALIZATION(FullHallOfFameAlgorithm, AbstractHallOfFameAlgorithm, AbstractHallOfFameAlgorithm)

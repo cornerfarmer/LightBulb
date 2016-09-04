@@ -17,14 +17,14 @@ private:
 public:
 	BinaryFunction(double minValue_ = 0, double maxValue_ = 1);
 	// Returns minValue (input < threshold) or maxValue (input > threshold)
-	double execute(double input);
+	double execute(double input) override;
 	// Error - No derivation available
-	double executeDerivation(double input);
+	double executeDerivation(double input) override;
 	// Inherited:
-	AbstractActivationFunction* getActivationFunctionCopy();
-	double getMaximum();
-	double getMinimum();
-	bool hasAMaxAndMinimum();
+	AbstractActivationFunction* getActivationFunctionCopy() override;
+	double getMaximum() override;
+	double getMinimum() override;
+	bool hasAMaxAndMinimum() override;
 };
 
 EMPTY_CHILD_SERIALIZATION(BinaryFunction);

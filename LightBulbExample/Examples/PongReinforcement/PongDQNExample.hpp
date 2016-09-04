@@ -14,14 +14,14 @@ class PongDQNExample : public AbstractReinforcementTrainingPlan
 {
 private:
 protected:
-	AbstractLearningRule* createLearningRate();
-	AbstractReinforcementWorld* createWorld();
+	AbstractLearningRule* createLearningRate() override;
+	AbstractReinforcementWorld* createWorld() override;
 public:
 	PongDQNExample();
-	std::string getDefaultName();
-	std::string getDescription();
-	AbstractTrainingPlan* getCopy();
-	std::string getLearningRuleName();
+	std::string getDefaultName() override;
+	std::string getDescription() override;
+	AbstractTrainingPlan* getCopy() override;
+	std::string getLearningRuleName() override;
 };
 
 USE_PARENT_SERIALIZATION(PongDQNExample, AbstractReinforcementTrainingPlan);
