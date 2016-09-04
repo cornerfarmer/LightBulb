@@ -1188,5 +1188,6 @@
     <ClInclude Include="IO\DQNLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
+    <ClInclude Include="IO\AbstractGradientDecentAlgorithmIO.hpp" />
   </ItemGroup>
 </Project>

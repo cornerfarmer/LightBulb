@@ -27,6 +27,8 @@ struct AbstractGradientDecentAlgorithmOptions
 
 class AbstractGradientDecentAlgorithm
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, AbstractGradientDecentAlgorithm& gradientDecentAlgorithm);
 private:
 	bool initialized;
 protected:
@@ -46,7 +48,7 @@ public:
 	bool isInitialized();
 };
 
-EMPTY_SINGLE_SERIALIZATION(AbstractGradientDecentAlgorithm)
+#include "IO/AbstractGradientDecentAlgorithmIO.hpp"
 
 #endif
 

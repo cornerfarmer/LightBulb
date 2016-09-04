@@ -10,6 +10,7 @@
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
+#include <cereal/access.hpp>
 
 template <class Archive>
 void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate)

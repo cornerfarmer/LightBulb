@@ -36,9 +36,6 @@
     <ClCompile Include="Windows\AbstractWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Windows\LoggerWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
     <ClCompile Include="Windows\LearningStateController.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Windows\AbstractSubApp.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -78,13 +72,7 @@
     <ClCompile Include="Windows\SimulatorFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp">
@@ -94,21 +82,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Windows\PreferencesController.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractPreference.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\DoublePreference.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractCoevolutionTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\IntegerPreference.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\BooleanPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Windows\AbstractSubAppWindow.cpp">
@@ -144,7 +117,34 @@
     <ClCompile Include="Windows\EvolutionAnalyzerWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractCoevolutionTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractPreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\BooleanPreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\DoublePreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\IntegerPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -162,9 +162,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\AbstractWindow.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\LoggerController.hpp">
@@ -203,9 +200,6 @@
     <ClInclude Include="Windows\LearningStateController.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractLearningRuleTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -224,13 +218,7 @@
     <ClInclude Include="Windows\SimulatorFactory.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractSingleNNTrainingPlanIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Windows\AbstractCustomSubApp.hpp">
@@ -245,25 +233,10 @@
     <ClInclude Include="Windows\PreferencesWindow.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractPreference.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractVariablePreference.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\DoublePreference.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractEvolutionTrainingPlanIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractCoevolutionTrainingPlan.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractCoevolutionTrainingPlanIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\IntegerPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractPreferenceIO.hpp">
@@ -273,9 +246,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\DoublePreferenceIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\BooleanPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\BooleanPreferenceIO.hpp">
@@ -308,10 +278,40 @@
     <ClInclude Include="Windows\EvolutionAnalyzerWindow.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="IO\AbstractReinforcementTrainingPlanIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractCoevolutionTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractPreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="IO\AbstractReinforcementTrainingPlanIO.hpp">
+    <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractVariablePreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\BooleanPreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\DoublePreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\IntegerPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

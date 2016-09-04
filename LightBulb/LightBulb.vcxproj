@@ -674,6 +674,7 @@
     <ClInclude Include="Function\ActivationFunction\RectifierFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\InputFunction\WeightedSumFunction.hpp" />
+    <ClInclude Include="IO\AbstractGradientDecentAlgorithmIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\BackpropagationIO.hpp" />

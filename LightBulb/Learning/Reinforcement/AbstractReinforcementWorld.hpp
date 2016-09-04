@@ -19,9 +19,7 @@ struct LearningState;
 class AbstractReinforcementWorld : public AbstractRandomGeneratorUser
 {
 	template <class Archive>
-	friend void save(Archive& archive, AbstractReinforcementWorld const& world);
-	template <class Archive>
-	friend void load(Archive& archive, AbstractReinforcementWorld& world);
+	friend void serialize(Archive& archive, AbstractReinforcementWorld& world);
 private:
 	std::vector<double> lastOutput;
 	std::vector<double> lastInput;

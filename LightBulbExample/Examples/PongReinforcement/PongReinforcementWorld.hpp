@@ -16,6 +16,9 @@
 
 class PongReinforcementWorld : public AbstractReinforcementWorld, public AbstractPongWorld
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, PongReinforcementWorld& world);
+	friend struct cereal::LoadAndConstruct<PongReinforcementWorld>;
 private:
 	int time;
 protected:
@@ -34,6 +37,6 @@ public:
 };
 
 
-USE_EXISTING_PARENT_SERIALIZATION(PongReinforcementWorld, AbstractReinforcementWorld, AbstractReinforcementWorld)
+#include "IO/PongReinforcementWorldIO.hpp"
 
 #endif

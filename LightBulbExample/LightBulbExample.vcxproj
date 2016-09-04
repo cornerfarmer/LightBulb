@@ -199,6 +199,8 @@
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
+    <ClInclude Include="IO\PongGameIO.hpp" />
+    <ClInclude Include="IO\PongReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\PositionIO.hpp" />
     <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />

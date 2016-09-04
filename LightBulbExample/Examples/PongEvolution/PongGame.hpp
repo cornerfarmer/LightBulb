@@ -37,6 +37,9 @@ struct PongGameProperties
 
 class PongGame : public AbstractRandomGeneratorUser
 {
+	template <class Archive>
+	friend void serialize(Archive& archive, PongGame& game);
+	friend struct cereal::LoadAndConstruct<PongGame>;
 private:
 	PongGameState state;
 	PongGameProperties properties;
@@ -56,5 +59,6 @@ public:
 	int getPlayer();
 };
 
+#include "IO/PongGameIO.hpp"
 
 #endif

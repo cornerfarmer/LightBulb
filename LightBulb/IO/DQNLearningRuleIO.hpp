@@ -34,6 +34,7 @@ void serialize(Archive& archive, DQNLearningRule& learningRule)
 	archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
 	archive(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
 	archive(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
+	archive(cereal::make_nvp("gradientDecent", learningRule.gradientDecent));
 }
 
 
@@ -51,6 +52,10 @@ namespace cereal
 			ar(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
 			ar(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
 			ar(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
+
+			IOStorage<AbstractLearningRule>::push(learningRule.gradientDecent.release());
+			ar(cereal::make_nvp("gradientDecent", learningRule.gradientDecent));
+			learningRule.gradientDecent.reset(static_cast<GradientDecentLearningRule*>(IOStorage<AbstractLearningRule>::pop()));
 		}
 	};
 }
