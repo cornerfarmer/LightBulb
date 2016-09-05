@@ -6,13 +6,17 @@
 // Includes
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 
-// With this order, neurons will get activated layer by layer
-// This class is only compatible with a FeedForwardNetworkTopology!
+/**
+ * \brief Activates neurons layer by layer. This class is only compatible with a layered network!
+ */
 class TopologicalOrder : public AbstractActivationOrder
 {
 private:
 public:
-	// Activates all neurons in the given layered(!) topology in a topological order
+	/**
+	 * \brief Activates all neurons in the given layered(!) topology in a topological order.
+	 * \param networkTopology The network to activate
+	 */
 	void executeActivation(AbstractNetworkTopology &networkTopology) override;
 	// Inherited:
 	AbstractActivationOrder* getCopy() override; 

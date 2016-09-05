@@ -6,13 +6,17 @@
 // Includes
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 
-// With this order, all neurons will get activated at the same timestep
-// This class is only compatible with every sort of network
+/**
+ * \brief With this order, all neurons will get activated at the same timestep. Compatible with every sort of network.
+ */
 class SynchronousOrder : public AbstractActivationOrder
 {
 private:
 public:
-	// Activates all neurons in the given topology 
+	/**
+	 * \brief Activates all neurons in the given topology
+	 * \param networkTopology The network to activate
+	 */
 	void executeActivation(AbstractNetworkTopology &networkTopology) override;
 	// Inherited:
 	AbstractActivationOrder* getCopy() override; 

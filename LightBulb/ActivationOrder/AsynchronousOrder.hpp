@@ -6,13 +6,17 @@
 // Includes
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 
-// With this order, all neurons will get activated one after another
-// This class is compatible with every sort of network
+/**
+ * \brief Activates all neurons one after another. Compatible with every sort of network.
+ */
 class AsynchronousOrder : public AbstractActivationOrder
 {
 private:
 public:
-	// Activates all neurons in the given topology one after another
+	/**
+	 * \brief Activates all neurons in the given topology one after another
+	 * \param networkTopology The network to activate
+	 */
 	void executeActivation(AbstractNetworkTopology &networkTopology) override;
 	// Inherited:
 	AbstractActivationOrder* getCopy() override; 

@@ -11,17 +11,29 @@
 class AbstractNetworkTopology;
 class Edge;
 
-// This class describes the order, how neurons should get activated
+/**
+ * \brief Describes the order in which neurons should get activated
+ */
 class AbstractActivationOrder
 {
 private:
 public:
 	virtual ~AbstractActivationOrder() {}
-	// Activates all Neurons in the given topology in a special order
+	/**
+	 * \brief Activates all Neurons in the given topology in a special order
+	 * \param networkTopology The network to activate
+	 */
 	virtual void executeActivation(AbstractNetworkTopology &networkTopology) = 0;
-	// Retruns a copy of this activation order
+	/**
+	 * \brief Returns a copy of this activation order
+	 * \return The copy
+	 */
 	virtual AbstractActivationOrder* getCopy() = 0; 
-	// Returns a map which holds for every edge, if its two neurons are refreshed in the same timestep (In a feed forward with topological acitvation order for example are all edges in the same timestep)
+	/**
+	 * \brief Returns a map which holds for every edge, if its two neurons are refreshed in the same timestep (In a feed forward with topological acitvation order for example are all edges in the same timestep) TODO: Refactor!
+	 * \param networkTopology 
+	 * \return 
+	 */
 	virtual std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) = 0;
 };
 
