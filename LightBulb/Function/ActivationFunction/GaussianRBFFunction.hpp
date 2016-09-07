@@ -10,6 +10,7 @@
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "Function/NeighborhoodFunction/AbstractNeighborhoodFunction.hpp"
 
+// TODO: Refactor
 class GaussianRBFFunction : public AbstractActivationFunction, public AbstractNeighborhoodFunction
 {
 private:

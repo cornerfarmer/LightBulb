@@ -9,7 +9,11 @@
 // Includes
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 
-// The HyperbolicTangentFunction is a sigmoid function between -1 and 1
+/**
+ * \brief The HyperbolicTangentFunction is a sigmoid function between -1 and 1
+ * \details Describes: \n \n \f$f(x)=\tanh(x)\f$ \n \n
+ * Derivative: \n \n \f$ f'(x) = \frac{1}{\cosh(x)^2} \f$
+ */
 class HyperbolicTangentFunction : public AbstractActivationFunction
 {
 private:

@@ -8,7 +8,11 @@
 #include "Function/OutputFunction/AbstractOutputFunction.hpp"
 #include "IO/UseParentSerialization.hpp"
 
-// The IdentityFunction just returns the input without calculating anything
+/**
+ * \brief The IdentityFunction just returns the input without calculating anything
+ * \details Describes: \n \n \f$f(x)=x\f$ \n \n
+ * Derivative: \n \n \f$ f'(x) = 1 \f$
+ */
 class IdentityFunction : public AbstractActivationFunction, public AbstractOutputFunction
 {
 private:
