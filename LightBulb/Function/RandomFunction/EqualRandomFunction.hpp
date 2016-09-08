@@ -9,6 +9,10 @@
 // Includes
 #include "Function/RandomFunction/AbstractRandomFunction.hpp"
 
+/**
+ * \brief Describes a uniform distribution.
+ * \details Every number has the same probability.
+ */
 class EqualRandomFunction : public AbstractRandomFunction
 {
 private:

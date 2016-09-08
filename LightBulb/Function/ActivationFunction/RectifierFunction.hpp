@@ -9,14 +9,21 @@
 
 /**
  * \brief Returns the input if it is greater than 0, otherwise it returns 0.
- * \details Describes: \n \n \f$f(x)=max(0, x)\f$ \n \n
- * Derivative: \n \n \f$ f'(x)={\begin{cases}x&{\mbox{if }}x>0\\0.01x&{\mbox{otherwise}}\end{cases}} \f$
+ * \details Describes: \n \n \f$ f(x)={\begin{cases}x&{\mbox{if }}x>0\\ \alpha*x&{\mbox{otherwise}}\end{cases}} \f$ \n \n
+ * Derivative: \n \n \f$ f'(x)={\begin{cases}1&{\mbox{if }}x>0\\ \alpha&{\mbox{otherwise}}\end{cases}} \f$
  */
 class RectifierFunction : public AbstractActivationFunction
 {
 private:
+	/**
+	 * \brief The alpha factor which influnces the output for negative input
+	 */
 	double leakyFac;
 public:
+	/**
+	 * \brief Creates the RectifierFunction
+	 * \param leakyFac_ The alpha factor which influnces the output for negative input
+	 */
 	RectifierFunction(double leakyFac_ = 0);
 	// Inherited
 	double execute(double input) override;

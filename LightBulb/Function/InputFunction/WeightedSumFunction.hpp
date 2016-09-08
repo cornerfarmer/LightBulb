@@ -10,12 +10,16 @@
 //Forward declarations
 class Edge;
 
-// The WeightedSumFunction uses the weighted sum to calculate the input ;) 
+// 
+/**
+ * \brief The WeightedSumFunction uses the weighted sum to calculate the input ;) 
+ * \details Describes: \n \n \f$\vec{o} ={\vec{w}}\circ{\vec{a}}\f$ \n \n
+ */
 class WeightedSumFunction : public AbstractInputFunction
 {
 private:
 public:
-	// Calculates Σ output * weight
+	// Inherited:
 	void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) override;
 	AbstractInputFunction* getInputFunctionCopy() override;
 };

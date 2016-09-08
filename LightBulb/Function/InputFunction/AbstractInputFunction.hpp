@@ -4,26 +4,33 @@
 #define _ABSTRACTINPUTFUNCTION_H_
 
 // Includes
-#include <list>
 #include <memory>
 #include "EigenSrc/Dense"
 #include <vector>
 
 // Forward declarations
-class Edge;
-class AbstractThreshold;
-class AbstractNeuron;
 
-// An InputFunction calculates one input value from the output of all previous neurons
+
+/**
+ * \brief An InputFunction calculates one input value from the output of all previous connected neurons
+ */
 class AbstractInputFunction
 {
 private:
 public:
 	virtual ~AbstractInputFunction() {}
-	// Calculate the one value from all given input edges and the additional input.
-	// The neuronOutputCache can be used do use a cached activation instead of the real/current one.
+	/**
+	 * \brief Calculates the netInputs for layer <layerNr> from activations and weights from layer <layerNr - 1>.
+	 * \param layerNr The number of the layer for which the inputs should be calculated for
+	 * \param activations The activations which will be used to calculate the inputs
+	 * \param netInputs The variable where the calculated inputs will be stored in
+	 * \param weights The weights which will be used to calculate the inputs
+	 */
 	virtual void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) = 0;
-	// Create a copy of the object
+	/**
+	 * \brief Create a copy of the object
+	 * \return The ciopy
+	 */
 	virtual AbstractInputFunction* getInputFunctionCopy() = 0;
 };
 
