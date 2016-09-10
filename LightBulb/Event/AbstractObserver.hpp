@@ -7,20 +7,23 @@
 
 //Library includes
 
-/**
- * \brief Reacts on thrown events
- * \tparam EventArg The argument type of the thrown event
- */
-template<typename EventArg>
-class AbstractObserver
+namespace LightBulb
 {
-private:
-public:
 	/**
-	 * \brief This method is called if the corresponding observable object throws the registered event.
-	 * \param arg The event argument
+	 * \brief Reacts on thrown events
+	 * \tparam EventArg The argument type of the thrown event
 	 */
-	virtual void throwEvent(EventArg* arg) = 0;
-};
+	template<typename EventArg>
+	class AbstractObserver
+	{
+	private:
+	public:
+		/**
+		 * \brief This method is called if the corresponding observable object throws the registered event.
+		 * \param arg The event argument
+		 */
+		virtual void throwEvent(EventArg* arg) = 0;
+	};
+}
 
 #endif

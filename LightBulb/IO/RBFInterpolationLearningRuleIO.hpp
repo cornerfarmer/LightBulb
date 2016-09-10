@@ -12,19 +12,23 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, RBFInterpolationLearningRule& learningRule)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
+	template <class Archive>
+	void serialize(Archive& archive, RBFInterpolationLearningRule& learningRule)
+	{
+		archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
+	}
 }
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<RBFInterpolationLearningRule>
+	template <> struct LoadAndConstruct<LightBulb::RBFInterpolationLearningRule>
 	{
 		template <class Archive>
-		static void load_and_construct(Archive& ar, cereal::construct<RBFInterpolationLearningRule>& construct)
+		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::RBFInterpolationLearningRule>& construct)
 		{
+			using namespace LightBulb;
 			RBFInterpolationLearningRule* learningRule = static_cast<RBFInterpolationLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 			ar(cereal::base_class<AbstractSupervisedLearningRule>(learningRule));
 			IOStorage<AbstractLearningRule>::push(learningRule);
@@ -34,6 +38,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(RBFInterpolationLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::RBFInterpolationLearningRule);
 
 #endif

@@ -3,6 +3,9 @@
 #ifndef _NETWORKPERFORMANCETESTS_H_
 #define _NETWORKPERFORMANCETESTS_H_
 
-void doNetworkPerformanceTest();
+namespace LightBulb
+{
+	void doNetworkPerformanceTest();
+}
 
 #endif

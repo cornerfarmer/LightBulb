@@ -8,58 +8,61 @@
 #include <iomanip>
 #include <algorithm>
 
-BestSelectionCommand::BestSelectionCommand(int objectCount_)
-	: AbstractSelectionCommand()
+namespace LightBulb
 {
-	objectCount = objectCount_;
-	selectionPercentage = 0;
-}
-
-BestSelectionCommand::BestSelectionCommand(double selectionPercentage_)
-	: AbstractSelectionCommand()
-{
-	objectCount = 0;
-	selectionPercentage = selectionPercentage_;
-}
-
-void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects, std::vector<AbstractEvolutionObject*>* notUsedObjects)
-{
-	int objectCount = this->objectCount;
-	// Calculate a temporary static object count if the percentage value is used
-	if (selectionPercentage)
-		objectCount = (int)(highscore->size() * selectionPercentage);
-		
-	if (highscore->size() > objectCount)
+	BestSelectionCommand::BestSelectionCommand(int objectCount_)
+		: AbstractSelectionCommand()
 	{
-		objects->clear();
-
-		for (auto entry = highscore->begin(); entry != highscore->begin() + objectCount; entry++)
-		{
-			objects->push_back(entry->second);
-		}
-
-		// Go through all not selected objects
-		for (auto entry = highscore->begin() + objectCount; entry != highscore->end(); entry++)
-		{
-			// Recycle them
-			notUsedObjects->push_back(entry->second);
-		}
-
-		// Resize the vector
-		highscore->resize(objectCount);
+		objectCount = objectCount_;
+		selectionPercentage = 0;
 	}
 
-
-	double totalFitness = 0;
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	BestSelectionCommand::BestSelectionCommand(double selectionPercentage_)
+		: AbstractSelectionCommand()
 	{
-		totalFitness += entry->first;
+		objectCount = 0;
+		selectionPercentage = selectionPercentage_;
 	}
-	log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string((double)totalFitness / highscore->size()), LL_LOW);
-	
-}
 
-void BestSelectionCommand::setObjectCount(int newObjectCount)
-{
-	objectCount = newObjectCount;
+	void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+	{
+		int objectCount = this->objectCount;
+		// Calculate a temporary static object count if the percentage value is used
+		if (selectionPercentage)
+			objectCount = (int)(highscore->size() * selectionPercentage);
+
+		if (highscore->size() > objectCount)
+		{
+			objects->clear();
+
+			for (auto entry = highscore->begin(); entry != highscore->begin() + objectCount; entry++)
+			{
+				objects->push_back(entry->second);
+			}
+
+			// Go through all not selected objects
+			for (auto entry = highscore->begin() + objectCount; entry != highscore->end(); entry++)
+			{
+				// Recycle them
+				notUsedObjects->push_back(entry->second);
+			}
+
+			// Resize the vector
+			highscore->resize(objectCount);
+		}
+
+
+		double totalFitness = 0;
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			totalFitness += entry->first;
+		}
+		log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string((double)totalFitness / highscore->size()), LL_LOW);
+
+	}
+
+	void BestSelectionCommand::setObjectCount(int newObjectCount)
+	{
+		objectCount = newObjectCount;
+	}
 }

@@ -10,26 +10,29 @@
 #include "SimulatorWindow.hpp"
 #include "AbstractSubApp.hpp"
 
-// Forward declarations
-class TrainingWindow;
-class TrainingController;
-class NeuralNetworkRepository;
-class AbstractNeuralNetwork;
-
-class SimulatorController : public AbstractSubApp
+namespace LightBulb
 {
-private:
-	std::unique_ptr<SimulatorWindow> window;
-	NeuralNetworkRepository* neuralNetworkRepository;
-protected:
-	void prepareClose() override;
-public:
-	SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
-	SimulatorWindow* getWindow();
-	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
-	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
-	std::vector<double> calculate(int neuralNetworkIndex, std::vector<double> input);
-	static std::string getLabel();
-};
+	// Forward declarations
+	class TrainingWindow;
+	class TrainingController;
+	class NeuralNetworkRepository;
+	class AbstractNeuralNetwork;
+
+	class SimulatorController : public AbstractSubApp
+	{
+	private:
+		std::unique_ptr<SimulatorWindow> window;
+		NeuralNetworkRepository* neuralNetworkRepository;
+	protected:
+		void prepareClose() override;
+	public:
+		SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
+		SimulatorWindow* getWindow();
+		std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
+		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
+		std::vector<double> calculate(int neuralNetworkIndex, std::vector<double> input);
+		static std::string getLabel();
+	};
+}
 
 #endif

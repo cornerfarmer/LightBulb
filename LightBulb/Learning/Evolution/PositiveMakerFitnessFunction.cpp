@@ -4,18 +4,21 @@
 #include <stdexcept>
 #include <algorithm>
 
-PositiveMakerFitnessFunction::PositiveMakerFitnessFunction(double constant_)
+namespace LightBulb
 {
-	constant = constant_;
-}
-
-void PositiveMakerFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	//double minFitness = highscore->back().first;
-
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	PositiveMakerFitnessFunction::PositiveMakerFitnessFunction(double constant_)
 	{
-		entry->first = std::max(0.0, entry->first + constant);
+		constant = constant_;
 	}
 
+	void PositiveMakerFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	{
+		//double minFitness = highscore->back().first;
+
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			entry->first = std::max(0.0, entry->first + constant);
+		}
+
+	}
 }

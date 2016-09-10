@@ -1,10 +1,13 @@
 // Includes
 #include "Learning/Evolution/BestReuseSelector.hpp"
 
-void BestReuseSelector::selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+namespace LightBulb
 {
-	for (int i = 0; i < reuseCount; i++)
+	void BestReuseSelector::selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		addObjectToReuse((*highscore)[i].second);
+		for (int i = 0; i < reuseCount; i++)
+		{
+			addObjectToReuse((*highscore)[i].second);
+		}
 	}
 }

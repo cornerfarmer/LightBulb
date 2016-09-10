@@ -5,6 +5,7 @@
 #include "Examples/Nature/RockTile.hpp"
 //Library includes
 
+using namespace LightBulb;
 
 AbstractEvolutionObject* Nature::createNewObject()
 {

@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <stdexcept>
 
+using namespace LightBulb;
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
 {

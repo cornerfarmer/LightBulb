@@ -11,19 +11,23 @@
 #include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("neuronDescription", descriptionFactory.neuronDescription));
+	template <class Archive>
+	void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory)
+	{
+		archive(cereal::make_nvp("neuronDescription", descriptionFactory.neuronDescription));
+	}
 }
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<SameNeuronDescriptionFactory>
+	template <> struct LoadAndConstruct<LightBulb::SameNeuronDescriptionFactory>
 	{
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<SameNeuronDescriptionFactory>& construct)
+		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::SameNeuronDescriptionFactory>& construct)
 		{
+			using namespace LightBulb;
 			std::unique_ptr<NeuronDescription> neuronDescription;
 			ar(cereal::make_nvp("neuronDescription", neuronDescription));
 			construct(neuronDescription.release());
@@ -33,6 +37,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(SameNeuronDescriptionFactory);
+CEREAL_REGISTER_TYPE(LightBulb::SameNeuronDescriptionFactory);
 
 #endif

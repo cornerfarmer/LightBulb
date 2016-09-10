@@ -28,6 +28,8 @@
 //
 //}
 
+using namespace LightBulb;
+
 AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 {
 	

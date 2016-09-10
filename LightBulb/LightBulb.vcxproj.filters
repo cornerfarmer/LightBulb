@@ -561,6 +561,7 @@
     <ClCompile Include="NeuronDescription\SameNeuronDescriptionFactory.cpp">
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractFitnessFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -1141,5 +1142,6 @@
     <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractGradientDecentAlgorithmIO.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractFitnessFunction.hpp" />
   </ItemGroup>
 </Project>

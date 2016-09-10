@@ -11,26 +11,29 @@
 #include <utility>
 #include <map>
 
-// Forward declarations
-class AbstractEvolutionObject;
-
-//
-class AbstractRecombinationSelector : public AbstractRandomGeneratorUser
+namespace LightBulb
 {
-private:
-	std::vector<AbstractEvolutionObject*> selectedObjects;
+	// Forward declarations
+	class AbstractEvolutionObject;
 
-	std::map<AbstractEvolutionObject*, int>* currentCounter;
-protected:
-	virtual void addObjectToRecombination(AbstractEvolutionObject* object);
-
-	virtual void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
-public:
-	virtual ~AbstractRecombinationSelector() {};
 	//
-	virtual void executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+	class AbstractRecombinationSelector : public AbstractRandomGeneratorUser
+	{
+	private:
+		std::vector<AbstractEvolutionObject*> selectedObjects;
 
-	virtual std::vector<AbstractEvolutionObject*>* getRecombinationSelection();
-};
+		std::map<AbstractEvolutionObject*, int>* currentCounter;
+	protected:
+		virtual void addObjectToRecombination(AbstractEvolutionObject* object);
+
+		virtual void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+	public:
+		virtual ~AbstractRecombinationSelector() {};
+		//
+		virtual void executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+
+		virtual std::vector<AbstractEvolutionObject*>* getRecombinationSelection();
+	};
+}
 
 #endif

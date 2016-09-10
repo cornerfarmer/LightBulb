@@ -4,63 +4,66 @@
 #include <map>
 #include <Event/Observable.hpp>
 
-enum LearningStateEvents
+namespace LightBulb
 {
-	EVT_LS_DS_CHANGED
-};
-
-typedef std::vector<double> DataSet;
-typedef std::map<std::string, DataSet> DataSetsPerTry;
-typedef std::vector<DataSetsPerTry> DataSets;
-
-// All informations about a finished learning process
-struct LearningState : public LightBulb::Observable<LearningStateEvents, LearningState>
-{
-	template <class Archive>
-	friend void serialize(Archive& archive, LearningState& learningState);
-private:
-	int dataSaveInterval;
-public:
-	// Was the learning process successful
-	int successful;
-
-	double quality;
-	// How many iterations were needed
-	int iterations;
-
-	int tries;
-
-	DataSets dataSets;
-	
-	std::map<std::string, bool> disabledDatasets;
-
-	LearningState(std::map<std::string, bool>& disabledDatasets_, int dataSaveInterval_ = 1)
+	enum LearningStateEvents
 	{
-		disabledDatasets = disabledDatasets_;
-		successful = 0;
-		quality = 0;
-		iterations = 0;
-		tries = 0;
-		dataSaveInterval = dataSaveInterval_;
-	}
+		EVT_LS_DS_CHANGED
+	};
 
-	void addData(std::string dataSetLabel, double data)
+	typedef std::vector<double> DataSet;
+	typedef std::map<std::string, DataSet> DataSetsPerTry;
+	typedef std::vector<DataSetsPerTry> DataSets;
+
+	// All informations about a finished learning process
+	struct LearningState : public LightBulb::Observable<LearningStateEvents, LearningState>
 	{
-		if ((iterations - 1) % dataSaveInterval == 0)
+		template <class Archive>
+		friend void serialize(Archive& archive, LearningState& learningState);
+	private:
+		int dataSaveInterval;
+	public:
+		// Was the learning process successful
+		int successful;
+
+		double quality;
+		// How many iterations were needed
+		int iterations;
+
+		int tries;
+
+		DataSets dataSets;
+
+		std::map<std::string, bool> disabledDatasets;
+
+		LearningState(std::map<std::string, bool>& disabledDatasets_, int dataSaveInterval_ = 1)
 		{
-			dataSets[tries - 1][dataSetLabel].push_back(iterations - 1);
-			dataSets[tries - 1][dataSetLabel].push_back(data);
-			throwEvent(EVT_LS_DS_CHANGED, this);
+			disabledDatasets = disabledDatasets_;
+			successful = 0;
+			quality = 0;
+			iterations = 0;
+			tries = 0;
+			dataSaveInterval = dataSaveInterval_;
 		}
-	}
 
-	void addTry()
-	{
-		dataSets.push_back(DataSetsPerTry());
-		tries++;
-	}
+		void addData(std::string dataSetLabel, double data)
+		{
+			if ((iterations - 1) % dataSaveInterval == 0)
+			{
+				dataSets[tries - 1][dataSetLabel].push_back(iterations - 1);
+				dataSets[tries - 1][dataSetLabel].push_back(data);
+				throwEvent(EVT_LS_DS_CHANGED, this);
+			}
+		}
 
-};
+		void addTry()
+		{
+			dataSets.push_back(DataSetsPerTry());
+			tries++;
+		}
+
+	};
+}
 
 #include "IO/LearningStateIO.hpp"
 

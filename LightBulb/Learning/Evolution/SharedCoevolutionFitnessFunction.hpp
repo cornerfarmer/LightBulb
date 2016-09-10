@@ -8,13 +8,16 @@
 // Include
 #include "Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 
-// Forward declarations
-
-class SharedCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
+namespace LightBulb
 {
-protected:
-public:
-	std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results) override;
-};
+	// Forward declarations
+
+	class SharedCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
+	{
+	protected:
+	public:
+		std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results) override;
+	};
+}
 
 #endif

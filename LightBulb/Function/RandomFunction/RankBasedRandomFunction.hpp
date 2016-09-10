@@ -9,12 +9,15 @@
 // Includes
 #include "Function/RandomFunction/AbstractRandomFunction.hpp"
 
-class RankBasedRandomFunction : public AbstractRandomFunction
+namespace LightBulb
 {
-private:
-public:
-	// Inherited:	
-	int execute(int elementCount) override;
-};
+	class RankBasedRandomFunction : public AbstractRandomFunction
+	{
+	private:
+	public:
+		// Inherited:	
+		int execute(int elementCount) override;
+	};
+}
 
 #endif

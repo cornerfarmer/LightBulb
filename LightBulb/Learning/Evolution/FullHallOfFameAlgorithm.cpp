@@ -2,15 +2,18 @@
 #include "Learning/Evolution/FullHallOfFameAlgorithm.hpp"
 #include "AbstractCoevolutionWorld.hpp"
 
-void FullHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
+namespace LightBulb
 {
-	for (auto object = objects.begin(); object != objects.end(); object++)
+	void FullHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
 	{
-		for (int memberIndex = 0; memberIndex < members.size(); memberIndex++)
+		for (auto object = objects.begin(); object != objects.end(); object++)
 		{
-			for (int r = 0; r < currentWorld->getRoundCount(); r++)
+			for (int memberIndex = 0; memberIndex < members.size(); memberIndex++)
 			{
-				simulateAgainstMember(*object, memberIndex, r);
+				for (int r = 0; r < currentWorld->getRoundCount(); r++)
+				{
+					simulateAgainstMember(*object, memberIndex, r);
+				}
 			}
 		}
 	}

@@ -9,16 +9,19 @@
 // Includes
 #include "Function/ShrinkFunction/AbstractShrinkFunction.hpp"
 
-// Describes a value which shrinks exponential
-class ExponentialShrinkFunction : public AbstractShrinkFunction
+namespace LightBulb
 {
-private:
-	double speedFactor;
-public:
-	ExponentialShrinkFunction(double startValue_, double minValue_, double speedFactor_);
-	// Inherited:	
-	double execute(double time) override;
-	AbstractShrinkFunction* getShrinkFunctionCopy() override;
-};
+	// Describes a value which shrinks exponential
+	class ExponentialShrinkFunction : public AbstractShrinkFunction
+	{
+	private:
+		double speedFactor;
+	public:
+		ExponentialShrinkFunction(double startValue_, double minValue_, double speedFactor_);
+		// Inherited:	
+		double execute(double time) override;
+		AbstractShrinkFunction* getShrinkFunctionCopy() override;
+	};
+}
 
 #endif

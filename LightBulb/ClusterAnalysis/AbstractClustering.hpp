@@ -7,24 +7,27 @@
 #include <vector>
 #include <list>
 
-// Forward declarations
-struct Cluster;
-struct ValuePosition;
-
-// This class contains all stuff needed to calculate clusters with the k-means cluster algorithm 
-class AbstractClustering 
+namespace LightBulb
 {
-protected:
-	// Sets the minimum cluster width
-	static const double minClusterWidth;
+	// Forward declarations
+	struct Cluster;
+	struct ValuePosition;
 
-	// Calculate the width of all given clusters based on their points
-	void calculateAllClusterWidths(std::list<Cluster> &clusters);
-	
-	bool calculateClusterCentersFromMedians(std::list<Cluster> &clusters, bool withValue);
-public:
-	virtual ~AbstractClustering() {}
+	// This class contains all stuff needed to calculate clusters with the k-means cluster algorithm 
+	class AbstractClustering
+	{
+	protected:
+		// Sets the minimum cluster width
+		static const double minClusterWidth;
 
-};
+		// Calculate the width of all given clusters based on their points
+		void calculateAllClusterWidths(std::list<Cluster> &clusters);
+
+		bool calculateClusterCentersFromMedians(std::list<Cluster> &clusters, bool withValue);
+	public:
+		virtual ~AbstractClustering() {}
+
+	};
+}
 
 #endif

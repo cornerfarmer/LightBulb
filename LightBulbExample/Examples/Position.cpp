@@ -8,6 +8,7 @@
 #include <Function/ActivationFunction/IdentityFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 
+using namespace LightBulb;
 
 Position::Position(FunctionSimulator* functionSimulator_)
 	: AbstractSimpleEvolutionObject(functionSimulator_)

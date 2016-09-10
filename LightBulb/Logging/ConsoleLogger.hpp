@@ -8,15 +8,18 @@
 // Includes
 #include "AbstractLogger.hpp"
 
-// Forward declarations
-
-class ConsoleLogger : public AbstractLogger
+namespace LightBulb
 {
-protected:
-	void outputMessage(std::string message) override;
-public:
-	ConsoleLogger(LogLevel logLevel);
-};
+	// Forward declarations
+
+	class ConsoleLogger : public AbstractLogger
+	{
+	protected:
+		void outputMessage(std::string message) override;
+	public:
+		ConsoleLogger(LogLevel logLevel);
+	};
+}
 
 #endif
 

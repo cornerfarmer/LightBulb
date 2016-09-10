@@ -26,6 +26,8 @@
 #include "TCProblemTeacher.hpp"
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 
+using namespace LightBulb;
+
 #define PREFERENCE_CREATION_COUNT "Creation count"
 #define PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED "Mutationstrength changespeed"
 #define PREFERENCE_WEIGHTDECAY_FAC "Weight decay factor"

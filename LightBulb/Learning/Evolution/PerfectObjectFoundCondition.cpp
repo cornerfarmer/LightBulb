@@ -7,60 +7,63 @@
 #include "EvolutionLearningRule.hpp"
 #include "AbstractCoevolutionWorld.hpp"
 
-bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
+namespace LightBulb
 {
-	if (highscore->size() > 0)
+	bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
 	{
-		AbstractCoevolutionWorld* coevolutionWorld = static_cast<AbstractCoevolutionWorld*>(static_cast<EvolutionLearningRule*>(learningRule)->getWorld());
-		if (coevolutionWorld->isParasiteWorld() && perfectObjectExists(coevolutionWorld->getCombiningStrategy()))
+		if (highscore->size() > 0)
 		{
-			counter++;
-			if (counter >= count)
-				return true;
+			AbstractCoevolutionWorld* coevolutionWorld = static_cast<AbstractCoevolutionWorld*>(static_cast<EvolutionLearningRule*>(learningRule)->getWorld());
+			if (coevolutionWorld->isParasiteWorld() && perfectObjectExists(coevolutionWorld->getCombiningStrategy()))
+			{
+				counter++;
+				if (counter >= count)
+					return true;
+			}
+			else
+			{
+				counter = 0;
+			}
+			return false;
 		}
 		else
 		{
-			counter = 0;
+			return false;
 		}
-		return false;
 	}
-	else
+	bool PerfectObjectFoundCondition::perfectObjectExists(AbstractCombiningStrategy* combiningStrategy)
 	{
-		return false;
-	}
-}
-bool PerfectObjectFoundCondition::perfectObjectExists(AbstractCombiningStrategy* combiningStrategy)
-{
-	auto results = combiningStrategy->getPrevResults();
-	std::map<AbstractEvolutionObject*, bool> defeatedObjects;
+		auto results = combiningStrategy->getPrevResults();
+		std::map<AbstractEvolutionObject*, bool> defeatedObjects;
 
-	for (auto resultsPerObject = results->begin(); resultsPerObject != results->end(); resultsPerObject++)
-	{
-		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
+		for (auto resultsPerObject = results->begin(); resultsPerObject != results->end(); resultsPerObject++)
 		{
-			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 			{
-				defeatedObjects[resultsPerCombination->first] |= result->second;
+				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+				{
+					defeatedObjects[resultsPerCombination->first] |= result->second;
+				}
 			}
 		}
+
+		for (auto defeatedObject = defeatedObjects.begin(); defeatedObject != defeatedObjects.end(); defeatedObject++)
+		{
+			if (!defeatedObject->second)
+				return true;
+		}
+		return false;
 	}
 
-	for (auto defeatedObject = defeatedObjects.begin(); defeatedObject != defeatedObjects.end(); defeatedObject++)
+	PerfectObjectFoundCondition::PerfectObjectFoundCondition(int count_)
+		: AbstractExitCondition()
 	{
-		if (!defeatedObject->second)
-			return true;
+		counter = 0;
+		count = count_;
 	}
-	return false;
-}
 
-PerfectObjectFoundCondition::PerfectObjectFoundCondition(int count_)
-	: AbstractExitCondition()
-{
-	counter = 0;
-	count = count_;
-}
-
-void PerfectObjectFoundCondition::setCount(int newCount)
-{
-	count = newCount;
+	void PerfectObjectFoundCondition::setCount(int newCount)
+	{
+		count = newCount;
+	}
 }

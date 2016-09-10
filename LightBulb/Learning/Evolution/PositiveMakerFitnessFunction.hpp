@@ -8,17 +8,20 @@
 // Include
 #include "Learning/Evolution/AbstractFitnessFunction.hpp"
 
-// Forward declarations
-
-//
-class PositiveMakerFitnessFunction : public AbstractFitnessFunction
+namespace LightBulb
 {
-private:
-	double constant;
-public:
-	PositiveMakerFitnessFunction(double constant_);
+	// Forward declarations
+
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-};
+	class PositiveMakerFitnessFunction : public AbstractFitnessFunction
+	{
+	private:
+		double constant;
+	public:
+		PositiveMakerFitnessFunction(double constant_);
+		//
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	};
+}
 
 #endif

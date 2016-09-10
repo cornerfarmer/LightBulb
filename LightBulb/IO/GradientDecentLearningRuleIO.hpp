@@ -13,22 +13,26 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, GradientDecentLearningRule& learningRule)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
-	archive(cereal::make_nvp("gradientDecentAlgorithm", learningRule.gradientDecentAlgorithm));
-	archive(cereal::make_nvp("gradientCalculation", learningRule.gradientCalculation));
+	template <class Archive>
+	void serialize(Archive& archive, GradientDecentLearningRule& learningRule)
+	{
+		archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
+		archive(cereal::make_nvp("gradientDecentAlgorithm", learningRule.gradientDecentAlgorithm));
+		archive(cereal::make_nvp("gradientCalculation", learningRule.gradientCalculation));
+	}
 }
 
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(GradientDecentLearningRule, AbstractLearningRule)
+	CONSTRUCT_EXISTING(LightBulb::GradientDecentLearningRule, LightBulb::AbstractLearningRule)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, GradientDecentLearningRule& learningRule)
+		static void construct(Archive& ar, LightBulb::GradientDecentLearningRule& learningRule)
 		{
+			using namespace LightBulb;
 			ar(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
 
 			IOStorage<AbstractGradientDecentAlgorithm>::push(learningRule.gradientDecentAlgorithm.release());
@@ -45,6 +49,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(GradientDecentLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::GradientDecentLearningRule);
 
 #endif

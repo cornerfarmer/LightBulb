@@ -15,13 +15,13 @@
 // Forward declarations
 
 // A techer manages many techingLessons
-class RBFNetworkBiggerExample : public AbstractSingleNNTrainingPlan
+class RBFNetworkBiggerExample : public LightBulb::AbstractSingleNNTrainingPlan
 {
 private:
-	std::unique_ptr<Teacher> teacher;
+	std::unique_ptr<LightBulb::Teacher> teacher;
 protected:
-	AbstractNeuralNetwork* createNeuralNetwork() override;
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractNeuralNetwork* createNeuralNetwork() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 public:
 	std::string getDefaultName() override;
 	std::string getDescription() override;
@@ -31,6 +31,6 @@ public:
 	std::string getLearningRuleName() override;
 };
 
-USE_PARENT_SERIALIZATION(RBFNetworkBiggerExample, AbstractSingleNNTrainingPlan);
+USE_PARENT_SERIALIZATION(RBFNetworkBiggerExample, LightBulb::AbstractSingleNNTrainingPlan);
 
 #endif

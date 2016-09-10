@@ -6,21 +6,24 @@
 // Includes
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 
-/**
- * \brief Activates neurons layer by layer. This class is only compatible with a layered network!
- */
-class TopologicalOrder : public AbstractActivationOrder
+namespace LightBulb
 {
-private:
-public:
 	/**
-	 * \brief Activates all neurons in the given layered(!) topology in a topological order.
-	 * \param networkTopology The network to activate
+	 * \brief Activates neurons layer by layer. This class is only compatible with a layered network!
 	 */
-	void executeActivation(AbstractNetworkTopology &networkTopology) override;
-	// Inherited:
-	AbstractActivationOrder* getCopy() override; 
-	std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) override;
-};
+	class TopologicalOrder : public AbstractActivationOrder
+	{
+	private:
+	public:
+		/**
+		 * \brief Activates all neurons in the given layered(!) topology in a topological order.
+		 * \param networkTopology The network to activate
+		 */
+		void executeActivation(AbstractNetworkTopology &networkTopology) override;
+		// Inherited:
+		AbstractActivationOrder* getCopy() override;
+		std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) override;
+	};
+}
 
 #endif

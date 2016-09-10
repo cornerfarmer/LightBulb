@@ -10,16 +10,19 @@
 // Includes
 #include "AbstractSubAppFactory.hpp"
 
-// Forward declarations
-class AbstractCustomSubApp;
-class AbstractTrainingPlan;
-
-class AbstractCustomSubAppFactory
+namespace LightBulb
 {
-protected:
-public:
-	virtual AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL) = 0;
-	virtual std::string getLabel() = 0;
-};
+	// Forward declarations
+	class AbstractCustomSubApp;
+	class AbstractTrainingPlan;
+
+	class AbstractCustomSubAppFactory
+	{
+	protected:
+	public:
+		virtual AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL) = 0;
+		virtual std::string getLabel() = 0;
+	};
+}
 
 #endif

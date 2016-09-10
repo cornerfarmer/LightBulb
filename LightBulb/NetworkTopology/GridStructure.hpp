@@ -5,18 +5,20 @@
 
 // Libary includes
 
-
 // Includes
 #include "NetworkTopology/AbstractSOMStructure.hpp"
 
-// Forward declarations
-
-// Describes a grid som structure  
-class GridStructure : public AbstractSOMStructure
+namespace LightBulb
 {
-private:	
-public:
-	void initialize(SOMNetwork& somNetwork) override;
-};
+	// Forward declarations
+
+	// Describes a grid som structure  
+	class GridStructure : public AbstractSOMStructure
+	{
+	private:
+	public:
+		void initialize(SOMNetwork& somNetwork) override;
+	};
+}
 
 #endif

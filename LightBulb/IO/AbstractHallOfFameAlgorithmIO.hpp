@@ -9,10 +9,13 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("members", hallOfFameAlgorithm.members));
+	template <class Archive>
+	void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm)
+	{
+		archive(cereal::make_nvp("members", hallOfFameAlgorithm.members));
+	}
 }
 
 #endif

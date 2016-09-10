@@ -10,17 +10,20 @@
 #include <vector>
 #include <memory>
 
-// Forward declarations
-
-// 
-class JSONArray : public AbstractJSONElement
+namespace LightBulb
 {
-private:
-	std::vector<std::unique_ptr<AbstractJSONElement>> elements;
-	std::string elementsToString();
-public:
-	std::string toString() override;
-	void addElement(AbstractJSONElement* newElement);
-};
+	// Forward declarations
+
+	// 
+	class JSONArray : public AbstractJSONElement
+	{
+	private:
+		std::vector<std::unique_ptr<AbstractJSONElement>> elements;
+		std::string elementsToString();
+	public:
+		std::string toString() override;
+		void addElement(AbstractJSONElement* newElement);
+	};
+}
 
 #endif

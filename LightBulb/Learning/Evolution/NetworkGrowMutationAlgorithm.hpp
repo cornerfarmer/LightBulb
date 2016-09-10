@@ -9,18 +9,21 @@
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
 
-// Forward declarations
-class AbstractEvolutionObject;
-
-// A algorithm which mutates a given evolution object by executing the corresponding EvolutionStrategy algorithm
-class NetworkGrowMutationAlgorithm : public AbstractMutationAlgorithm
+namespace LightBulb
 {
-private:
-	std::vector<unsigned int> maxNeuronsPerLayer;
-public:
-	NetworkGrowMutationAlgorithm(std::vector<unsigned int> maxNeuronsPerLayer_);
+	// Forward declarations
+	class AbstractEvolutionObject;
 
-	void execute(AbstractEvolutionObject* object1) override;
-};
+	// A algorithm which mutates a given evolution object by executing the corresponding EvolutionStrategy algorithm
+	class NetworkGrowMutationAlgorithm : public AbstractMutationAlgorithm
+	{
+	private:
+		std::vector<unsigned int> maxNeuronsPerLayer;
+	public:
+		NetworkGrowMutationAlgorithm(std::vector<unsigned int> maxNeuronsPerLayer_);
+
+		void execute(AbstractEvolutionObject* object1) override;
+	};
+}
 
 #endif

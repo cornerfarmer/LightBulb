@@ -10,25 +10,28 @@
 // Includes
 #include "ClusterAnalysis/ValuePosition.hpp"
 
-// Forward declarations
-struct Cluster;
-
-// This class contains all stuff needed to describe a Point 
-struct Point
+namespace LightBulb
 {
-	// Position of the point
-	ValuePosition valPos;
-	// Cluster which contains this point
-	Cluster* cluster;
-	Point(std::vector<double> &position_, std::vector<double> &value_)
-		: valPos(position_, value_)
+	// Forward declarations
+	struct Cluster;
+
+	// This class contains all stuff needed to describe a Point 
+	struct Point
 	{
-		cluster = NULL;
-	}
-	Point()
-	{
-		cluster = NULL;
-	}
-};
+		// Position of the point
+		ValuePosition valPos;
+		// Cluster which contains this point
+		Cluster* cluster;
+		Point(std::vector<double> &position_, std::vector<double> &value_)
+			: valPos(position_, value_)
+		{
+			cluster = NULL;
+		}
+		Point()
+		{
+			cluster = NULL;
+		}
+	};
+}
 
 #endif

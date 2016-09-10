@@ -9,14 +9,17 @@
 // Includes
 #include "NetworkTopology/AbstractSOMStructure.hpp"
 
-// Forward declarations
-
-// Describes a line som structure
-class LineStructure : public AbstractSOMStructure
+namespace LightBulb
 {
-private:	
-public:
-	void initialize(SOMNetwork& somNetwork) override;
-};
+	// Forward declarations
+
+	// Describes a line som structure
+	class LineStructure : public AbstractSOMStructure
+	{
+	private:
+	public:
+		void initialize(SOMNetwork& somNetwork) override;
+	};
+}
 
 #endif

@@ -12,46 +12,50 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
+	template <class Archive>
+	void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule)
+	{
+		archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
 
-	std::unique_ptr<AbstractLearningRule> subLearningRule(learningRule.getOptions()->learningRule1);
-	archive(cereal::make_nvp("learningRule1", subLearningRule));
-	subLearningRule.release();
+		std::unique_ptr<AbstractLearningRule> subLearningRule(learningRule.getOptions()->learningRule1);
+		archive(cereal::make_nvp("learningRule1", subLearningRule));
+		subLearningRule.release();
 
-	subLearningRule.reset(learningRule.getOptions()->learningRule2);
-	archive(cereal::make_nvp("learningRule2", subLearningRule));
-	subLearningRule.release();
+		subLearningRule.reset(learningRule.getOptions()->learningRule2);
+		archive(cereal::make_nvp("learningRule2", subLearningRule));
+		subLearningRule.release();
+	}
 }
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<BipartiteEvolutionLearningRule>
+	template <> struct LoadAndConstruct<LightBulb::BipartiteEvolutionLearningRule>
 	{
 		template <class Archive>
-		static void load_and_construct(Archive& ar, cereal::construct<BipartiteEvolutionLearningRule>& construct)
+		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::BipartiteEvolutionLearningRule>& construct)
 		{
-			BipartiteEvolutionLearningRule* learningRule = static_cast<BipartiteEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			using namespace LightBulb;
+			LightBulb::BipartiteEvolutionLearningRule* learningRule = static_cast<BipartiteEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 			ar(cereal::base_class<AbstractEvolutionLearningRule>(learningRule));
 
-			IOStorage<AbstractLearningRule>::push(learningRule->getOptions()->learningRule1);
-			std::unique_ptr<AbstractLearningRule> learningRuleDummy;
+			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions()->learningRule1);
+			std::unique_ptr<LightBulb::AbstractLearningRule> learningRuleDummy;
 			ar(cereal::make_nvp("learningRule1", learningRuleDummy));
-			learningRule->getOptions()->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			learningRule->getOptions()->learningRule1 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
-			IOStorage<AbstractLearningRule>::push(learningRule->getOptions()->learningRule2);
+			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions()->learningRule2);
 			ar(cereal::make_nvp("learningRule2", learningRuleDummy));
-			learningRule->getOptions()->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			learningRule->getOptions()->learningRule2 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
-			IOStorage<AbstractLearningRule>::push(learningRule);
+			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule);
 		}
 	};
 }
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(BipartiteEvolutionLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::BipartiteEvolutionLearningRule);
 
 #endif

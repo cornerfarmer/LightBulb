@@ -11,21 +11,24 @@
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
 
-// Forward declarations
-
-class TournamentCombiningStrategy : public AbstractCombiningStrategy
+namespace LightBulb
 {
-private:
-	bool doShuffleBeforeTournament;
-	std::unique_ptr<std::vector<AbstractEvolutionObject*>> cachedObjects;
-	std::unique_ptr<std::vector<AbstractEvolutionObject*>> currentLevel;
-	std::unique_ptr<std::vector<AbstractEvolutionObject*>> nextLevel;
-	void processLevel(AbstractCoevolutionWorld* world);
-	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
-public:	
-	TournamentCombiningStrategy();
-	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
-	void setDoShuffleBeforeTournament(bool doShuffleBeforeTournament_);
-};
+	// Forward declarations
+
+	class TournamentCombiningStrategy : public AbstractCombiningStrategy
+	{
+	private:
+		bool doShuffleBeforeTournament;
+		std::unique_ptr<std::vector<AbstractEvolutionObject*>> cachedObjects;
+		std::unique_ptr<std::vector<AbstractEvolutionObject*>> currentLevel;
+		std::unique_ptr<std::vector<AbstractEvolutionObject*>> nextLevel;
+		void processLevel(AbstractCoevolutionWorld* world);
+		void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
+	public:
+		TournamentCombiningStrategy();
+		int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
+		void setDoShuffleBeforeTournament(bool doShuffleBeforeTournament_);
+	};
+}
 
 #endif

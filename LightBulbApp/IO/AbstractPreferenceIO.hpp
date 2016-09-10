@@ -8,16 +8,19 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void save(Archive& archive, AbstractPreference const& preference)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("name", preference.name));
-}
+	template <class Archive>
+	void save(Archive& archive, AbstractPreference const& preference)
+	{
+		archive(cereal::make_nvp("name", preference.name));
+	}
 
-template <class Archive>
-void load(Archive& archive, AbstractPreference& preference)
-{
-	archive(cereal::make_nvp("name", preference.name));
+	template <class Archive>
+	void load(Archive& archive, AbstractPreference& preference)
+	{
+		archive(cereal::make_nvp("name", preference.name));
+	}
 }
 
 #endif

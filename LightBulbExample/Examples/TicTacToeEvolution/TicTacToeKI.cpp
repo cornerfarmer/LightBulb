@@ -3,6 +3,8 @@
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
+using namespace LightBulb;
+
 TicTacToeKI::TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)
 {

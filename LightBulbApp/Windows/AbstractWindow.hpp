@@ -7,17 +7,20 @@
 #include <list>
 #include <wx/wxprec.h>
 
-// Forward declarations
-class AbstractApp;
-
-// A chart which shows the location of neurons
-class AbstractWindow : public wxFrame
+namespace LightBulb
 {
-protected:
-	AbstractApp* controller;
-	void refreshAfterChange(wxSizer* sizer);
-public:
-	AbstractWindow(AbstractApp* controller_, std::string label, AbstractWindow* parent = NULL);
-};
+	// Forward declarations
+	class AbstractApp;
+
+	// A chart which shows the location of neurons
+	class AbstractWindow : public wxFrame
+	{
+	protected:
+		AbstractApp* controller;
+		void refreshAfterChange(wxSizer* sizer);
+	public:
+		AbstractWindow(AbstractApp* controller_, std::string label, AbstractWindow* parent = NULL);
+	};
+}
 
 #endif

@@ -12,7 +12,7 @@ class TicTacToeGameController;
 
 wxDECLARE_EVENT(TTT_EVT_FIELD_CHANGED, wxThreadEvent);
 
-class TicTacToeGameWindow : public AbstractSubAppWindow
+class TicTacToeGameWindow : public LightBulb::AbstractSubAppWindow
 {
 private:
 	std::vector<std::vector<int>> currentFields;
@@ -22,7 +22,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	TicTacToeGameWindow(TicTacToeGameController* controller_, AbstractWindow* parent = NULL);
+	TicTacToeGameWindow(TicTacToeGameController* controller_, LightBulb::AbstractWindow* parent = NULL);
 	void paintEvent(wxPaintEvent & evt);
 	void resize(wxSizeEvent & evt);
 	void paintNow();

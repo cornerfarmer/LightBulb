@@ -7,6 +7,8 @@
 #include <chrono>
 #include <thread>
 
+using namespace LightBulb;
+
 AbstractEvolutionObject* Pong::createNewObject()
 {
 	return new PongAI(*options, this);

@@ -6,17 +6,17 @@
 
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 
-class TCProblemEvolutionExample : public AbstractEvolutionTrainingPlan
+class TCProblemEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 {
 private:
 protected:
-	AbstractLearningRule* createLearningRate() override;
-	AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractEvolutionWorld* createWorld() override;
 public:
 	TCProblemEvolutionExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 };
 

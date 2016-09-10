@@ -150,6 +150,7 @@
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\AbstractVariablePreference.cpp" />
     <ClCompile Include="TrainingPlans\BooleanPreference.cpp" />
     <ClCompile Include="TrainingPlans\DoublePreference.cpp" />
     <ClCompile Include="TrainingPlans\IntegerPreference.cpp" />

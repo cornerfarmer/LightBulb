@@ -2,29 +2,32 @@
 #include <Learning/Evolution/RandomSelector.hpp>
 //Library includes
 
-void RandomSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+namespace LightBulb
 {
-	for (int i = 0; i < mutationCount; i++)
+	void RandomSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		addObjectToMutate((*highscore)[randomFunction->execute(highscore->size())].second);
+		for (int i = 0; i < mutationCount; i++)
+		{
+			addObjectToMutate((*highscore)[randomFunction->execute(highscore->size())].second);
+		}
 	}
-}
 
-void RandomSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	for (int i = 0; i < recombinationCount * 2; i++)
+	void RandomSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		addObjectToRecombination((*highscore)[randomFunction->execute(highscore->size())].second);
+		for (int i = 0; i < recombinationCount * 2; i++)
+		{
+			addObjectToRecombination((*highscore)[randomFunction->execute(highscore->size())].second);
+		}
 	}
-}
 
-RandomSelector::RandomSelector(AbstractRandomFunction* randomFunction_)
-{
-	randomFunction.reset(randomFunction_);
-}
+	RandomSelector::RandomSelector(AbstractRandomFunction* randomFunction_)
+	{
+		randomFunction.reset(randomFunction_);
+	}
 
-void RandomSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
-{
-	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-	randomFunction->setRandomGenerator(randomGenerator_);
+	void RandomSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	{
+		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+		randomFunction->setRandomGenerator(randomGenerator_);
+	}
 }

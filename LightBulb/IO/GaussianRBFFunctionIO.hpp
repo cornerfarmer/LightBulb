@@ -11,19 +11,22 @@
 #include <cereal/types/polymorphic.hpp>
 #include "IOStorage.hpp"
 
-template <class Archive>
-void serialize(Archive& archive, GaussianRBFFunction& gaussianRbfFunction)
+namespace LightBulb
 {
+	template <class Archive>
+	void serialize(Archive& archive, GaussianRBFFunction& gaussianRbfFunction)
+	{
+	}
 }
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<GaussianRBFFunction>
+	template <> struct LoadAndConstruct<LightBulb::GaussianRBFFunction>
 	{
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<GaussianRBFFunction>& construct)
+		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::GaussianRBFFunction>& construct)
 		{
-			construct(IOStorage<Eigen::VectorXd>::pop());
+			construct(LightBulb::IOStorage<Eigen::VectorXd>::pop());
 		}
 	};
 }
@@ -31,6 +34,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(GaussianRBFFunction);
+CEREAL_REGISTER_TYPE(LightBulb::GaussianRBFFunction);
 
 #endif

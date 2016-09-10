@@ -2,28 +2,31 @@
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 #include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
 
-void AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options)
+namespace LightBulb
 {
-	AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
-	options->world = world.get();
-}
+	void AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options)
+	{
+		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
+		options->world = world.get();
+	}
 
-AbstractEvolutionTrainingPlan::AbstractEvolutionTrainingPlan()
-{
-	world = NULL;
-}
+	AbstractEvolutionTrainingPlan::AbstractEvolutionTrainingPlan()
+	{
+		world = NULL;
+	}
 
-void AbstractEvolutionTrainingPlan::initializeStart()
-{
-	world.reset(createWorld());
-}
+	void AbstractEvolutionTrainingPlan::initializeStart()
+	{
+		world.reset(createWorld());
+	}
 
-AbstractEvolutionWorld* AbstractEvolutionTrainingPlan::getWorld()
-{
-	return world.get();
-}
+	AbstractEvolutionWorld* AbstractEvolutionTrainingPlan::getWorld()
+	{
+		return world.get();
+	}
 
-void AbstractEvolutionTrainingPlan::setWorld(AbstractEvolutionWorld* world_)
-{
-	world.reset(world_);
+	void AbstractEvolutionTrainingPlan::setWorld(AbstractEvolutionWorld* world_)
+	{
+		world.reset(world_);
+	}
 }

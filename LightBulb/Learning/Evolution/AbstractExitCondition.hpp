@@ -9,18 +9,21 @@
 // Library Includes
 #include <vector>
 
-// Forward declarations
-class AbstractEvolutionObject;
-class AbstractEvolutionLearningRule;
-
-// This class describes a condition which describes if the learning process has finished.
-class AbstractExitCondition : public AbstractLoggable
+namespace LightBulb
 {
-protected:
-public:
-	virtual ~AbstractExitCondition() {};
-	// Evaluate the condition (true => stop the learning process)
-	virtual bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) = 0;
-};
+	// Forward declarations
+	class AbstractEvolutionObject;
+	class AbstractEvolutionLearningRule;
+
+	// This class describes a condition which describes if the learning process has finished.
+	class AbstractExitCondition : public AbstractLoggable
+	{
+	protected:
+	public:
+		virtual ~AbstractExitCondition() {};
+		// Evaluate the condition (true => stop the learning process)
+		virtual bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) = 0;
+	};
+}
 
 #endif

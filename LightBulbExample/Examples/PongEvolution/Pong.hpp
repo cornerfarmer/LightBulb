@@ -24,20 +24,20 @@ class AbstractTile;
 
 #define DATASET_PONG_RATING "Pong rating"
 
-class Pong : public AbstractCoevolutionWorld, public AbstractPongWorld
+class Pong : public LightBulb::AbstractCoevolutionWorld, public AbstractPongWorld
 {
 private:
 protected:
 	AbstractEvolutionObject* createNewObject() override;
 	void resetWorld() override;
 	int simulateGame(PongAI* ai1, PongAI* ai2);
-	std::unique_ptr<FeedForwardNetworkTopologyOptions> options;
+	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
 	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round) override;
 public:
-	Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	Pong() = default;
 	void getNNInput(std::vector<double>& sight);
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+	void setRandomGenerator(LightBulb::AbstractRandomGenerator* randomGenerator_) override;
 	void executeCompareAI();
 	int rateKI(AbstractEvolutionObject* rateKI) override;
 	void startNewGame();

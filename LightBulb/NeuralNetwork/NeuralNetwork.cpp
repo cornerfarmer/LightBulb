@@ -7,96 +7,99 @@
 #include <exception>
 #include <ctime>
 
-NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
+namespace LightBulb
 {
-	// Check if all given options are correct
-	if (!networkTopology_)
-		throw std::invalid_argument("The given networkTopology is not valid");
-
-	networkTopology.reset(networkTopology_);
-
-	state = NN_STATE_READY;
-
-	name = "NoName";
-}
-
-void NeuralNetwork::calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
-{
-	// If the calculation start at time 0
-	if (startTime == 0 && resetActivations)
+	NeuralNetwork::NeuralNetwork(AbstractNetworkTopology* networkTopology_)
 	{
-		// Reset all activations
-		networkTopology->resetActivation();
+		// Check if all given options are correct
+		if (!networkTopology_)
+			throw std::invalid_argument("The given networkTopology is not valid");
+
+		networkTopology.reset(networkTopology_);
+
+		state = NN_STATE_READY;
+
+		name = "NoName";
 	}
 
-	// Do for every time step
-	for (int timeStep = startTime; (timeStep < input.size() && timeStepCount == -1) || timeStep - startTime < timeStepCount; timeStep++)
+	void NeuralNetwork::calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
 	{
+		// If the calculation start at time 0
+		if (startTime == 0 && resetActivations)
+		{
+			// Reset all activations
+			networkTopology->resetActivation();
+		}
+
+		// Do for every time step
+		for (int timeStep = startTime; (timeStep < input.size() && timeStepCount == -1) || timeStep - startTime < timeStepCount; timeStep++)
+		{
+			// Set the input into the neural network
+			if (input[timeStep].size() > 0)
+				networkTopology->setInput(input[timeStep]);
+
+			// Pass the work to the activationOrder
+			activationOrder.executeActivation(*networkTopology);
+
+			// Extract the output and save it into the output value
+			networkTopology->getOutput(output[timeStep]);
+		}
+
+	}
+
+	void NeuralNetwork::calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations)
+	{
+		// If the calculation start at time 0
+		if (resetActivations)
+		{
+			// Reset all activations
+			networkTopology->resetActivation();
+		}
+
 		// Set the input into the neural network
-		if (input[timeStep].size() > 0)
-			networkTopology->setInput(input[timeStep]);
+		networkTopology->setInput(input);
 
 		// Pass the work to the activationOrder
 		activationOrder.executeActivation(*networkTopology);
 
 		// Extract the output and save it into the output value
-		networkTopology->getOutput(output[timeStep]);
+		networkTopology->getOutput(output);
 	}
 
-}
-
-void NeuralNetwork::calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations)
-{
-	// If the calculation start at time 0
-	if (resetActivations)
+	AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
 	{
-		// Reset all activations
-		networkTopology->resetActivation();
+		return networkTopology.get();
 	}
 
-	// Set the input into the neural network
-	networkTopology->setInput(input);
+	std::string NeuralNetwork::getName()
+	{
+		return name;
+	}
 
-	// Pass the work to the activationOrder
-	activationOrder.executeActivation(*networkTopology);
+	std::time_t NeuralNetwork::getCreationDate()
+	{
+		return std::time(nullptr);
+	}
 
-	// Extract the output and save it into the output value
-	networkTopology->getOutput(output);
-}
+	NeuralNetworkState NeuralNetwork::getState()
+	{
+		return state;
+	}
 
-AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
-{
-	return networkTopology.get();
-}
+	void NeuralNetwork::setState(NeuralNetworkState newState)
+	{
+		state = newState;
+	}
 
-std::string NeuralNetwork::getName()
-{
-	return name;
-}
+	AbstractNeuralNetwork* NeuralNetwork::clone()
+	{
+		NeuralNetwork* clone = new NeuralNetwork(networkTopology->clone());
+		clone->name = name + " - clone";
+		return clone;
+	}
 
-std::time_t NeuralNetwork::getCreationDate()
-{
-	return std::time(nullptr);
-}
-
-NeuralNetworkState NeuralNetwork::getState()
-{
-	return state;
-}
-
-void NeuralNetwork::setState(NeuralNetworkState newState)
-{
-	state = newState;
-}
-
-AbstractNeuralNetwork* NeuralNetwork::clone()
-{
-	NeuralNetwork* clone = new NeuralNetwork(networkTopology->clone());
-	clone->name = name + " - clone";
-	return clone;
-}
-
-void NeuralNetwork::setName(std::string name_)
-{
-	name = name_;
+	void NeuralNetwork::setName(std::string name_)
+	{
+		name = name_;
+	}
 }

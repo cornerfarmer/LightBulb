@@ -10,23 +10,26 @@
 #include "NetworkViewerWindow.hpp"
 #include "AbstractSubApp.hpp"
 
-// Forward declarations
-class NeuralNetworkRepository;
-class AbstractNeuralNetwork;
-
-class NetworkViewerController : public AbstractSubApp
+namespace LightBulb
 {
-private:
-	std::unique_ptr<NetworkViewerWindow> window;
-	NeuralNetworkRepository* neuralNetworkRepository;
-protected:
-public:
-	NetworkViewerController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
-	NetworkViewerWindow* getWindow();
-	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
-	void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
-	static std::string getLabel();
+	// Forward declarations
+	class NeuralNetworkRepository;
+	class AbstractNeuralNetwork;
 
-};
+	class NetworkViewerController : public AbstractSubApp
+	{
+	private:
+		std::unique_ptr<NetworkViewerWindow> window;
+		NeuralNetworkRepository* neuralNetworkRepository;
+	protected:
+	public:
+		NetworkViewerController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = NULL);
+		NetworkViewerWindow* getWindow();
+		std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
+		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
+		static std::string getLabel();
+
+	};
+}
 
 #endif

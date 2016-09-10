@@ -10,16 +10,19 @@
 #include <cereal/cereal.hpp>
 #include <cereal/types/vector.hpp>
 
-template <class Archive>
-void save(Archive& archive, AbstractEvolutionObject const& object)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("mutationStrength", object.mutationStrength));
-}
+	template <class Archive>
+	void save(Archive& archive, AbstractEvolutionObject const& object)
+	{
+		archive(cereal::make_nvp("mutationStrength", object.mutationStrength));
+	}
 
-template <class Archive>
-void load(Archive& archive, AbstractEvolutionObject& object)
-{
-	archive(cereal::make_nvp("mutationStrength", object.mutationStrength));
+	template <class Archive>
+	void load(Archive& archive, AbstractEvolutionObject& object)
+	{
+		archive(cereal::make_nvp("mutationStrength", object.mutationStrength));
+	}
 }
 
 

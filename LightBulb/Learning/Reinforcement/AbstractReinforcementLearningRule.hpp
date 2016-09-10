@@ -8,35 +8,38 @@
 
 // Library Includes
 
-// Forward declarations
-class AbstractReinforcementWorld;
-
-struct AbstractReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
+namespace LightBulb
 {
-	AbstractReinforcementWorld* world;
-	AbstractReinforcementLearningRuleOptions()
+	// Forward declarations
+	class AbstractReinforcementWorld;
+
+	struct AbstractReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
 	{
-		world = NULL;
-		maxIterationsPerTry = 10000000000;
-	}
-};
+		AbstractReinforcementWorld* world;
+		AbstractReinforcementLearningRuleOptions()
+		{
+			world = NULL;
+			maxIterationsPerTry = 10000000000;
+		}
+	};
 
-#define DATA_SET_REWARD "Reward"
+	#define DATA_SET_REWARD "Reward"
 
-class AbstractReinforcementLearningRule : public AbstractLearningRule
-{
-	template <class Archive>
-	friend void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule);
-private:
+	class AbstractReinforcementLearningRule : public AbstractLearningRule
+	{
+		template <class Archive>
+		friend void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule);
+	private:
 	protected:
-	bool hasLearningSucceeded() override;
-	virtual AbstractReinforcementLearningRuleOptions* getOptions();
-	void randomGeneretorHasChanged();
-public:
-	AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_);
-	AbstractReinforcementLearningRule() = default;
-	std::vector<std::string> getDataSetLabels() override;
-};
+		bool hasLearningSucceeded() override;
+		virtual AbstractReinforcementLearningRuleOptions* getOptions();
+		void randomGeneretorHasChanged();
+	public:
+		AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_);
+		AbstractReinforcementLearningRule() = default;
+		std::vector<std::string> getDataSetLabels() override;
+	};
+}
 
 #include "IO/AbstractReinforcementLearningRuleIO.hpp"
 

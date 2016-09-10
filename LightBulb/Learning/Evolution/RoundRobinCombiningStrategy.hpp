@@ -10,14 +10,17 @@
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
 
-// Forward declarations
-
-class RoundRobinCombiningStrategy : public AbstractCombiningStrategy
+namespace LightBulb
 {
-private:
-	void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
-public:
-	int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
-};
+	// Forward declarations
+
+	class RoundRobinCombiningStrategy : public AbstractCombiningStrategy
+	{
+	private:
+		void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
+	public:
+		int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
+	};
+}
 
 #endif

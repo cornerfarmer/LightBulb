@@ -12,7 +12,7 @@
 // Forward declarations
 
 
-class SimpleReinforcementWorld : public AbstractReinforcementWorld
+class SimpleReinforcementWorld : public LightBulb::AbstractReinforcementWorld
 {
 private:
 	int posX;
@@ -21,7 +21,7 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<bool>& output) override;
 public:
-	SimpleReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	SimpleReinforcementWorld(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	SimpleReinforcementWorld() = default;
 	double doSimulationStep() override;
 	std::vector<std::string> getDataSetLabels() override;

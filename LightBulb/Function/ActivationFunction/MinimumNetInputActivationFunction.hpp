@@ -9,18 +9,21 @@
 // Includes
 #include "Function/AbstractActivationFunction.hpp"
 
-// The MinimumNetInputActivationFunction only activates the neuron with the lowest netInput
-class MinimumNetInputActivationFunction : public AbstractActivationFunction
+namespace LightBulb
 {
-private:
-public:
-	// Inherited
-	double execute(double input);
-	double executeDerivation(double input);
-	AbstractActivationFunction* getActivationFunctionCopy();
-	double getMaximum();
-	double getMinimum();
-	bool hasAMaxAndMinimum();
-};
+	// The MinimumNetInputActivationFunction only activates the neuron with the lowest netInput
+	class MinimumNetInputActivationFunction : public AbstractActivationFunction
+	{
+	private:
+	public:
+		// Inherited
+		double execute(double input);
+		double executeDerivation(double input);
+		AbstractActivationFunction* getActivationFunctionCopy();
+		double getMaximum();
+		double getMinimum();
+		bool hasAMaxAndMinimum();
+	};
+}
 
 #endif

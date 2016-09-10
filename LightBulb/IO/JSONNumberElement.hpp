@@ -10,26 +10,29 @@
 #include <sstream>
 #include <iomanip>
 
-// Forward declarations
-
-// 
-template<typename T>
-class JSONNumberElement : public AbstractJSONElement
+namespace LightBulb
 {
-private:
-	T number;
-public:
-	JSONNumberElement(T number_)
-	{
-		number = number_;
-	}
+	// Forward declarations
 
-	std::string toString() override
+	// 
+	template<typename T>
+	class JSONNumberElement : public AbstractJSONElement
 	{
-		std::ostringstream convert;
-		convert << std::fixed << std::setprecision(14) << number;
-		return convert.str();
-	}
-};
+	private:
+		T number;
+	public:
+		JSONNumberElement(T number_)
+		{
+			number = number_;
+		}
+
+		std::string toString() override
+		{
+			std::ostringstream convert;
+			convert << std::fixed << std::setprecision(14) << number;
+			return convert.str();
+		}
+	};
+}
 
 #endif

@@ -6,28 +6,27 @@
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
-struct FeedForwardNetworkTopologyOptions;
 class TicTacToe;
-class SharedSamplingCombiningStrategy;
-class AbstractHallOfFameAlgorithm;
+class LightBulb::SharedSamplingCombiningStrategy;
+struct LightBulb::FeedForwardNetworkTopologyOptions;
 
-class TicTacToeEvolutionExample : public AbstractCoevolutionTrainingPlan
+class TicTacToeEvolutionExample : public LightBulb::AbstractCoevolutionTrainingPlan
 {
 private:
-	AbstractHallOfFameAlgorithm* hof1;
-	AbstractHallOfFameAlgorithm* hof2;
-	SharedSamplingCombiningStrategy* cs1;
-	SharedSamplingCombiningStrategy* cs2;
+	LightBulb::AbstractHallOfFameAlgorithm* hof1;
+	LightBulb::AbstractHallOfFameAlgorithm* hof2;
+	LightBulb::SharedSamplingCombiningStrategy* cs1;
+	LightBulb::SharedSamplingCombiningStrategy* cs2;
 protected:
-	AbstractLearningRule* createLearningRate() override;
-	FeedForwardNetworkTopologyOptions getNetworkOptions();
-	AbstractEvolutionWorld* createWorld() override;
-	AbstractEvolutionWorld* createParasiteWorld() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
+	LightBulb::FeedForwardNetworkTopologyOptions getNetworkOptions();
+	LightBulb::AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractEvolutionWorld* createParasiteWorld() override;
 public:
 	TicTacToeEvolutionExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 };
 

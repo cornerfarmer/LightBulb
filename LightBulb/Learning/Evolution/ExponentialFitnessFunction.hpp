@@ -8,19 +8,22 @@
 // Include
 #include "Learning/Evolution/AbstractFitnessFunction.hpp"
 
-// Forward declarations
-
-//
-class ExponentialFitnessFunction : public AbstractFitnessFunction
+namespace LightBulb
 {
-private:
-	double exponent;
-	double proportionalScaling;
-	double base;
-public:
-	ExponentialFitnessFunction(double exponent_ = 1.005, double proportionalScaling_ = 1, double base_ = 0);
+	// Forward declarations
+
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-};
+	class ExponentialFitnessFunction : public AbstractFitnessFunction
+	{
+	private:
+		double exponent;
+		double proportionalScaling;
+		double base;
+	public:
+		ExponentialFitnessFunction(double exponent_ = 1.005, double proportionalScaling_ = 1, double base_ = 0);
+		//
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	};
+}
 
 #endif

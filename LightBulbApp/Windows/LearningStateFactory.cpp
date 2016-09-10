@@ -2,19 +2,22 @@
 #include "Windows/LearningStateFactory.hpp"
 #include "LearningStateController.hpp"
 
-LearningStateFactory::LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_)
+namespace LightBulb
 {
-	trainingPlanRepository = trainingPlanRepository_;
-}
+	LearningStateFactory::LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_)
+	{
+		trainingPlanRepository = trainingPlanRepository_;
+	}
 
-AbstractSubApp* LearningStateFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
-{
-	LearningStateController* controller = new LearningStateController(mainApp, trainingPlanRepository, parent);
-	controller->getWindow()->Show();
-	return controller;
-}
+	AbstractSubApp* LearningStateFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
+	{
+		LearningStateController* controller = new LearningStateController(mainApp, trainingPlanRepository, parent);
+		controller->getWindow()->Show();
+		return controller;
+	}
 
-std::string LearningStateFactory::getLabel()
-{
-	return LearningStateController::getLabel();
+	std::string LearningStateFactory::getLabel()
+	{
+		return LearningStateController::getLabel();
+	}
 }

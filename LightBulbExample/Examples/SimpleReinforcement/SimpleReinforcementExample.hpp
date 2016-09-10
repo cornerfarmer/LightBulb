@@ -7,25 +7,23 @@
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
 class SimpleReinforcementWorld;
-class AbstractReinforcementWorld;
-struct FeedForwardNetworkTopologyOptions;
 
-class SimpleReinforcementExample : public AbstractLearningRuleTrainingPlan
+class SimpleReinforcementExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
 	SimpleReinforcementWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 	SimpleReinforcementWorld* createWorld();
 public:
 	SimpleReinforcementExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 	SimpleReinforcementWorld* getWorld();
 };
 
-USE_PARENT_SERIALIZATION(SimpleReinforcementExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(SimpleReinforcementExample, LightBulb::AbstractLearningRuleTrainingPlan);
 
 #endif

@@ -4,10 +4,13 @@
 #include "Learning/AbstractLearningResult.hpp"
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 
-struct EvolutionLearningResult : public AbstractLearningResult
+namespace LightBulb
 {
-	std::vector<std::unique_ptr<AbstractEvolutionObject>> bestObjects;
-};
+	struct EvolutionLearningResult : public AbstractLearningResult
+	{
+		std::vector<std::unique_ptr<AbstractEvolutionObject>> bestObjects;
+	};
+}
 
 
 #endif

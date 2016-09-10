@@ -16,8 +16,8 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
 // Forward declarations
-class EvolutionLearningRule;
-class AbstractEvolutionObject;
+class LightBulb::EvolutionLearningRule;
+class LightBulb::AbstractEvolutionObject;
 class TicTacToeKI;
 class AbstractTile;
 
@@ -28,13 +28,13 @@ enum TicTacToeEvents
 
 #define DATASET_TICTACTOE_RATING "TicTacToe rating"
 
-class TicTacToe : public AbstractCoevolutionWorld, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
+class TicTacToe : public LightBulb::AbstractCoevolutionWorld, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
 {
 private:
 	void initialize();
 protected:
 	std::vector<std::vector<int>> fields;	
-	AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractEvolutionObject* createNewObject() override;
 	void resetWorld() override;
 	int whoHasWon();
 	int currentPlayer;
@@ -44,16 +44,16 @@ protected:
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
-	std::unique_ptr<FeedForwardNetworkTopologyOptions> options;
-	int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round) override;
+	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
+	int doCompare(LightBulb::AbstractEvolutionObject* obj1, LightBulb::AbstractEvolutionObject* obj2, int round) override;
 public:
-	TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
 	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
-	int rateKI(AbstractEvolutionObject* rateKI) override;
+	int rateKI(LightBulb::AbstractEvolutionObject* rateKI) override;
 	void setIllegalMove(bool illegalMove_);
 	void startNewGame(int firstPlayer);
 	void initializeForLearning() override;
@@ -66,6 +66,6 @@ public:
 	int getRoundCount() override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, AbstractCoevolutionWorld, AbstractEvolutionWorld);
+USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld);
 
 #endif

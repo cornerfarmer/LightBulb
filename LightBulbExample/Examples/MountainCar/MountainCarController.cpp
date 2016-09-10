@@ -5,6 +5,7 @@
 #include "MountainCarDQNExample.hpp"
 #include "MountainCarWorld.hpp"
 
+using namespace LightBulb;
 
 MountainCarController::MountainCarController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)

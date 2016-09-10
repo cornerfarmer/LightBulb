@@ -11,28 +11,31 @@
 
 // Includes
 
-// Forward declarations
-
-enum TrainingPlanRepositoryEvents
+namespace LightBulb
 {
-	EVT_TP_CHANGED
-};
+	// Forward declarations
 
-class TrainingPlanRepository : public LightBulb::Observable<TrainingPlanRepositoryEvents, TrainingPlanRepository>
-{
-	template <class Archive>
-	friend void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository);
-private:
-	std::vector<std::unique_ptr<AbstractTrainingPlan>> trainingPlans;
-public:
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
-	int getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
-	void Add(AbstractTrainingPlan* trainingPlan);
-	void save(std::string path, int trainingPlanIndex);
-	AbstractTrainingPlan* load(std::string path);
-	AbstractTrainingPlan* getByName(std::string name);
-	void setTrainingPlanName(int trainingPlanIndex, std::string newName);
-};
+	enum TrainingPlanRepositoryEvents
+	{
+		EVT_TP_CHANGED
+	};
+
+	class TrainingPlanRepository : public LightBulb::Observable<TrainingPlanRepositoryEvents, TrainingPlanRepository>
+	{
+		template <class Archive>
+		friend void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository);
+	private:
+		std::vector<std::unique_ptr<AbstractTrainingPlan>> trainingPlans;
+	public:
+		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
+		int getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		void Add(AbstractTrainingPlan* trainingPlan);
+		void save(std::string path, int trainingPlanIndex);
+		AbstractTrainingPlan* load(std::string path);
+		AbstractTrainingPlan* getByName(std::string name);
+		void setTrainingPlanName(int trainingPlanIndex, std::string newName);
+	};
+}
 
 #include "IO/TrainingPlanRepositoryIO.hpp"
 

@@ -4,21 +4,22 @@
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
-
-AbstractGradientDecentAlgorithm::AbstractGradientDecentAlgorithm(AbstractGradientDecentAlgorithmOptions* options_)
+namespace LightBulb
 {
-	options.reset(options_);
-	initialized = false;
-}
+	AbstractGradientDecentAlgorithm::AbstractGradientDecentAlgorithm(AbstractGradientDecentAlgorithmOptions* options_)
+	{
+		options.reset(options_);
+		initialized = false;
+	}
 
-void AbstractGradientDecentAlgorithm::initialize(AbstractNetworkTopology* networkTopology)
-{
-	initializeAlgorithm(networkTopology);
-	initialized = true;
-}
+	void AbstractGradientDecentAlgorithm::initialize(AbstractNetworkTopology* networkTopology)
+	{
+		initializeAlgorithm(networkTopology);
+		initialized = true;
+	}
 
-bool AbstractGradientDecentAlgorithm::isInitialized()
-{
-	return initialized;
+	bool AbstractGradientDecentAlgorithm::isInitialized()
+	{
+		return initialized;
+	}
 }
-

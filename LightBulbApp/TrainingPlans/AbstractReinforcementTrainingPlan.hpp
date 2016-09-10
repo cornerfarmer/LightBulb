@@ -9,26 +9,29 @@
 
 // Library includes
 
-// Forward declarations
-class AbstractNeuralNetwork;
-struct AbstractReinforcementLearningRuleOptions;
-
-class AbstractReinforcementTrainingPlan : public AbstractLearningRuleTrainingPlan
+namespace LightBulb
 {
-	template <class Archive>
-	friend void save(Archive& archive, AbstractReinforcementTrainingPlan const& trainingPlan);
-	template <class Archive>
-	friend void load(Archive& archive, AbstractReinforcementTrainingPlan& trainingPlan);
-protected:
-	std::unique_ptr<AbstractReinforcementWorld> world;
-	virtual AbstractReinforcementWorld* createWorld() = 0;
-	void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions* options);
-public:
-	AbstractReinforcementTrainingPlan();
-	void initializeStart() override;
-	AbstractReinforcementWorld* getWorld();
-	void setWorld(AbstractReinforcementWorld* network_);
-};
+	// Forward declarations
+	class AbstractNeuralNetwork;
+	struct AbstractReinforcementLearningRuleOptions;
+
+	class AbstractReinforcementTrainingPlan : public AbstractLearningRuleTrainingPlan
+	{
+		template <class Archive>
+		friend void save(Archive& archive, AbstractReinforcementTrainingPlan const& trainingPlan);
+		template <class Archive>
+		friend void load(Archive& archive, AbstractReinforcementTrainingPlan& trainingPlan);
+	protected:
+		std::unique_ptr<AbstractReinforcementWorld> world;
+		virtual AbstractReinforcementWorld* createWorld() = 0;
+		void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions* options);
+	public:
+		AbstractReinforcementTrainingPlan();
+		void initializeStart() override;
+		AbstractReinforcementWorld* getWorld();
+		void setWorld(AbstractReinforcementWorld* network_);
+	};
+}
 
 #include "IO/AbstractReinforcementTrainingPlanIO.hpp"
 

@@ -12,24 +12,27 @@
 #include "AbstractEvolutionObject.hpp"
 #include "AbstractCombiningStrategy.hpp"
 
-// Forward declarations
-class AbstractCoevolutionWorld;
-
-class AbstractHallOfFameAlgorithm : public AbstractLoggable
+namespace LightBulb
 {
-	template <class Archive>
-	friend void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm);
-private:
-	CombiningStrategyResults* currentResults;
-protected:
-	AbstractCoevolutionWorld* currentWorld;
-	std::vector<std::unique_ptr<AbstractEvolutionObject>> members;
-	void simulateAgainstMember(AbstractEvolutionObject* object, int memberID, int round);
-	virtual void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) = 0;
-public:
-	virtual void execute(AbstractCoevolutionWorld* world, CombiningStrategyResults& prevResults);
-	virtual void addMember(AbstractEvolutionObject* newMember);
-};
+	// Forward declarations
+	class AbstractCoevolutionWorld;
+
+	class AbstractHallOfFameAlgorithm : public AbstractLoggable
+	{
+		template <class Archive>
+		friend void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm);
+	private:
+		CombiningStrategyResults* currentResults;
+	protected:
+		AbstractCoevolutionWorld* currentWorld;
+		std::vector<std::unique_ptr<AbstractEvolutionObject>> members;
+		void simulateAgainstMember(AbstractEvolutionObject* object, int memberID, int round);
+		virtual void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) = 0;
+	public:
+		virtual void execute(AbstractCoevolutionWorld* world, CombiningStrategyResults& prevResults);
+		virtual void addMember(AbstractEvolutionObject* newMember);
+	};
+}
 
 #include "IO/AbstractHallOfFameAlgorithmIO.hpp"
 

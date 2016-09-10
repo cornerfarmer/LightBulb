@@ -7,6 +7,7 @@
 #include "TicTacToeEvolutionExample.hpp"
 #include "TicTacToe.hpp"
 
+using namespace LightBulb;
 
 TicTacToeGameController::TicTacToeGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)

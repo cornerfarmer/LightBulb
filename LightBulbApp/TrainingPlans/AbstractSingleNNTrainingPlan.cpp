@@ -3,34 +3,36 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 
-
-void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options)
+namespace LightBulb
 {
-	AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
-	options->neuralNetwork = network;
-}
-
-AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
-{
-	network = NULL;
-}
-
-void AbstractSingleNNTrainingPlan::initializeStart()
-{
-	if (network == NULL)
+	void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options)
 	{
-		network = createNeuralNetwork();
-		network->setName("trained by " + getName());
+		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
+		options->neuralNetwork = network;
 	}
-	network->setState(NN_STATE_TRAINED);
-}
 
-AbstractNeuralNetwork* AbstractSingleNNTrainingPlan::getNeuralNetwork()
-{
-	return network;
-}
+	AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
+	{
+		network = NULL;
+	}
 
-void AbstractSingleNNTrainingPlan::setNeuralNetwork(AbstractNeuralNetwork* network_)
-{
-	network = network_;
+	void AbstractSingleNNTrainingPlan::initializeStart()
+	{
+		if (network == NULL)
+		{
+			network = createNeuralNetwork();
+			network->setName("trained by " + getName());
+		}
+		network->setState(NN_STATE_TRAINED);
+	}
+
+	AbstractNeuralNetwork* AbstractSingleNNTrainingPlan::getNeuralNetwork()
+	{
+		return network;
+	}
+
+	void AbstractSingleNNTrainingPlan::setNeuralNetwork(AbstractNeuralNetwork* network_)
+	{
+		network = network_;
+	}
 }

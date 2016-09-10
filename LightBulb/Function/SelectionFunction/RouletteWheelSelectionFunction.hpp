@@ -10,13 +10,16 @@
 #include <math.h>
 #include <vector>
 
-class RouletteWheelSelectionFunction : public AbstractSelectionFunction
+namespace LightBulb
 {
-private:
-public:
-	// Inherited:	
-	int execute(const std::vector<double> &probabilities) override;
-	std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) override;
-};
+	class RouletteWheelSelectionFunction : public AbstractSelectionFunction
+	{
+	private:
+	public:
+		// Inherited:	
+		int execute(const std::vector<double> &probabilities) override;
+		std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) override;
+	};
+}
 
 #endif

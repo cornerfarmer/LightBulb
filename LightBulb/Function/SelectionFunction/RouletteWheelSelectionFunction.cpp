@@ -4,57 +4,60 @@
 #include <random>
 #include <stdexcept>
 
-int RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities)
+namespace LightBulb
 {
-	double probabilitySum = 0;
-	for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++)
+	int RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities)
 	{
-		probabilitySum += *probability;
-	}
-
-	double randomLine = randomGenerator->randDouble() * probabilitySum;
-	double partialSum = 0;
-	int index = 0;
-	for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++, index++)
-	{
-		partialSum += *probability;
-		if (partialSum >= randomLine)
+		double probabilitySum = 0;
+		for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++)
 		{
-			return index;
+			probabilitySum += *probability;
 		}
-	}
-	throw std::logic_error("No element has been selected!");
-}
 
-std::vector<int> RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities, int selectionCount)
-{
-	if (selectionCount <= 0)
-		throw std::invalid_argument("The selectionCount has to be greater than 0!");
-
-	double probabilitySum = 0;
-	for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++)
-	{
-		probabilitySum += *probability;
-	}
-
-	double stepSize = probabilitySum / selectionCount;
-	int currentStep = 0;
-	double partialSum = 0;
-	std::vector<int> selection;
-	selection.reserve(selectionCount);
-	int index = 0;
-	for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++, index++)
-	{
-		partialSum += *probability;
-		while (currentStep < selectionCount && partialSum >= currentStep * stepSize)
+		double randomLine = randomGenerator->randDouble() * probabilitySum;
+		double partialSum = 0;
+		int index = 0;
+		for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++, index++)
 		{
-			selection.push_back(index);
-			currentStep++;
+			partialSum += *probability;
+			if (partialSum >= randomLine)
+			{
+				return index;
+			}
 		}
+		throw std::logic_error("No element has been selected!");
 	}
 
-	if (currentStep != selectionCount)
-		throw std::logic_error("Not the right amount of elements has been selected!");
+	std::vector<int> RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities, int selectionCount)
+	{
+		if (selectionCount <= 0)
+			throw std::invalid_argument("The selectionCount has to be greater than 0!");
 
-	return selection;
+		double probabilitySum = 0;
+		for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++)
+		{
+			probabilitySum += *probability;
+		}
+
+		double stepSize = probabilitySum / selectionCount;
+		int currentStep = 0;
+		double partialSum = 0;
+		std::vector<int> selection;
+		selection.reserve(selectionCount);
+		int index = 0;
+		for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++, index++)
+		{
+			partialSum += *probability;
+			while (currentStep < selectionCount && partialSum >= currentStep * stepSize)
+			{
+				selection.push_back(index);
+				currentStep++;
+			}
+		}
+
+		if (currentStep != selectionCount)
+			throw std::logic_error("Not the right amount of elements has been selected!");
+
+		return selection;
+	}
 }

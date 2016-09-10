@@ -14,18 +14,18 @@
 // Forward declarations
 
 // A techer manages many techingLessons
-class TCProblemBackpropagationExample : public AbstractSingleNNTrainingPlan
+class TCProblemBackpropagationExample : public LightBulb::AbstractSingleNNTrainingPlan
 {
 private:
 	std::unique_ptr<TCProblemTeacher> teacher;
 protected:
-	AbstractNeuralNetwork* createNeuralNetwork() override;
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractNeuralNetwork* createNeuralNetwork() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 public:
 	TCProblemBackpropagationExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	int getRequiredInputSize() override;
 	int getRequiredOutputSize() override;
 	std::string getLearningRuleName() override;

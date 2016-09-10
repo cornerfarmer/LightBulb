@@ -16,16 +16,15 @@ struct ConstructExisting
 	static void load_and_construct(Archive& ar, cereal::construct<T>& construct)
 	{
 		construct();
-		T* storage = static_cast<T*>(IOStorage<StorageType>::pop());
+		T* storage = static_cast<T*>(LightBulb::IOStorage<StorageType>::pop());
 		SelfType::construct(ar, *storage);
-		IOStorage<StorageType>::push(storage);
+		LightBulb::IOStorage<StorageType>::push(storage);
 	}
 };
 
 #define CONSTRUCT_EXISTING(T, StorageType) \
 template <> \
 struct LoadAndConstruct<T> : public ConstructExisting<LoadAndConstruct<T>, T, StorageType>
-
 
 
 #endif

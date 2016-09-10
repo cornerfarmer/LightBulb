@@ -35,7 +35,7 @@ struct PongGameProperties
 	double speedIncreaseFac;
 };
 
-class PongGame : public AbstractRandomGeneratorUser
+class PongGame : public LightBulb::AbstractRandomGeneratorUser
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, PongGame& game);

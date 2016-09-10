@@ -6,6 +6,8 @@
 #include "NatureExample.hpp"
 
 
+using namespace LightBulb;
+
 NatureController::NatureController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {

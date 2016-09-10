@@ -5,47 +5,50 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 
-NeuralNetworkRepository::NeuralNetworkRepository()
+namespace LightBulb
 {
-
-}
-
-std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NeuralNetworkRepository::getNeuralNetworks()
-{
-	return &neuralNetworks;
-}
-
-int NeuralNetworkRepository::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
-{
-	for (int i = 0; i < neuralNetworks.size(); i++)
+	NeuralNetworkRepository::NeuralNetworkRepository()
 	{
-		if (neuralNetworks[i].get() == network)
-			return i;
+
 	}
-	return -1;
-}
 
-void NeuralNetworkRepository::Add(AbstractNeuralNetwork* neuralNetwork)
-{
-	neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>(neuralNetwork));
-	throwEvent(EVT_NN_CHANGED, this);
-}
+	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NeuralNetworkRepository::getNeuralNetworks()
+	{
+		return &neuralNetworks;
+	}
 
-void NeuralNetworkRepository::save(std::string path, int neuralNetworkIndex)
-{
-	std::ofstream os(path);
-	cereal::XMLOutputArchive archive(os);
+	int NeuralNetworkRepository::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
+	{
+		for (int i = 0; i < neuralNetworks.size(); i++)
+		{
+			if (neuralNetworks[i].get() == network)
+				return i;
+		}
+		return -1;
+	}
 
-	archive(neuralNetworks[neuralNetworkIndex]);
-}
+	void NeuralNetworkRepository::Add(AbstractNeuralNetwork* neuralNetwork)
+	{
+		neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>(neuralNetwork));
+		throwEvent(EVT_NN_CHANGED, this);
+	}
 
-void NeuralNetworkRepository::load(std::string path)
-{
-	std::ifstream is(path);
-	cereal::XMLInputArchive archive(is);
+	void NeuralNetworkRepository::save(std::string path, int neuralNetworkIndex)
+	{
+		std::ofstream os(path);
+		cereal::XMLOutputArchive archive(os);
 
-	neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>());
-	archive(neuralNetworks.back());
+		archive(neuralNetworks[neuralNetworkIndex]);
+	}
 
-	throwEvent(EVT_NN_CHANGED, this);
+	void NeuralNetworkRepository::load(std::string path)
+	{
+		std::ifstream is(path);
+		cereal::XMLInputArchive archive(is);
+
+		neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>());
+		archive(neuralNetworks.back());
+
+		throwEvent(EVT_NN_CHANGED, this);
+	}
 }

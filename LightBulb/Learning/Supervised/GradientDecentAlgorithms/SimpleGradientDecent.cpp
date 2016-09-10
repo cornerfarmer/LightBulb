@@ -3,65 +3,67 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
-
-SimpleGradientDecent::SimpleGradientDecent(SimpleGradientDecentOptions& options_)
-	:AbstractGradientDecentAlgorithm(new SimpleGradientDecentOptions(options_))
+namespace LightBulb
 {
-
-}
-
-SimpleGradientDecent::SimpleGradientDecent()
-	: AbstractGradientDecentAlgorithm(new SimpleGradientDecentOptions())
-{
-}
-
-SimpleGradientDecentOptions* SimpleGradientDecent::getOptions()
-{
-	return static_cast<SimpleGradientDecentOptions*>(options.get());
-}
-
-void SimpleGradientDecent::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
-{
-	// If momentum is used
-	if (getOptions()->momentum > 0)
+	SimpleGradientDecent::SimpleGradientDecent(SimpleGradientDecentOptions& options_)
+		:AbstractGradientDecentAlgorithm(new SimpleGradientDecentOptions(options_))
 	{
-		// Initialize the learningRates map
-		previousDeltaWeights = *networkTopology->getAllWeights();
-		for (int i = 0; i < previousDeltaWeights.size(); i++)
+
+	}
+
+	SimpleGradientDecent::SimpleGradientDecent()
+		: AbstractGradientDecentAlgorithm(new SimpleGradientDecentOptions())
+	{
+	}
+
+	SimpleGradientDecentOptions* SimpleGradientDecent::getOptions()
+	{
+		return static_cast<SimpleGradientDecentOptions*>(options.get());
+	}
+
+	void SimpleGradientDecent::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
+	{
+		// If momentum is used
+		if (getOptions()->momentum > 0)
 		{
-			previousDeltaWeights[i].setZero();
+			// Initialize the learningRates map
+			previousDeltaWeights = *networkTopology->getAllWeights();
+			for (int i = 0; i < previousDeltaWeights.size(); i++)
+			{
+				previousDeltaWeights[i].setZero();
+			}
 		}
 	}
-}
 
-Eigen::MatrixXd SimpleGradientDecent::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
-{
-	Eigen::MatrixXd deltaWeight;
+	Eigen::MatrixXd SimpleGradientDecent::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
+	{
+		Eigen::MatrixXd deltaWeight;
 
-	// Calc the delta weight
-	deltaWeight = -getOptions()->learningRate * gradients;
-	
-	// Substract the weightDecay term
-	deltaWeight -= getOptions()->weightDecayFac * networkTopology->getAfferentWeightsPerLayer(layerIndex);
+		// Calc the delta weight
+		deltaWeight = -getOptions()->learningRate * gradients;
 
-	if (getOptions()->momentum > 0) {
-		// Add the momentum term
-		deltaWeight += getOptions()->momentum * previousDeltaWeights[layerIndex - 1];
+		// Substract the weightDecay term
+		deltaWeight -= getOptions()->weightDecayFac * networkTopology->getAfferentWeightsPerLayer(layerIndex);
 
-		// Set this to the delta weight
-		previousDeltaWeights[layerIndex - 1] = deltaWeight;
+		if (getOptions()->momentum > 0) {
+			// Add the momentum term
+			deltaWeight += getOptions()->momentum * previousDeltaWeights[layerIndex - 1];
+
+			// Set this to the delta weight
+			previousDeltaWeights[layerIndex - 1] = deltaWeight;
+		}
+
+		return deltaWeight;
 	}
 
-	return deltaWeight;
-}
+	std::string SimpleGradientDecent::printDebugOutput()
+	{
+		return "";
+	}
 
-std::string SimpleGradientDecent::printDebugOutput()
-{
-	return "";
-}
+	bool SimpleGradientDecent::learningHasStopped()
+	{
+		return false;
+	}
 
-bool SimpleGradientDecent::learningHasStopped()
-{
-	return false;
 }
-

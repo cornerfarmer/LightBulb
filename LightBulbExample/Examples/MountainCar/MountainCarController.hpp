@@ -10,7 +10,7 @@
 #include "MountainCarWorld.hpp"
 
 
-class MountainCarController : public AbstractCustomSubApp
+class MountainCarController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<MountainCarWindow> window;
@@ -21,7 +21,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	MountainCarController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
+	MountainCarController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = NULL);
 	MountainCarWindow* getWindow();
 	void stopWatchMode();
 	void startWatchMode();

@@ -6,7 +6,7 @@
 
 #include <Teaching/Teacher.hpp>
 
-class TCProblemTeacher : public Teacher
+class TCProblemTeacher : public LightBulb::Teacher
 {
 private:
 protected:

@@ -10,21 +10,24 @@
 // Library Includes
 #include <string>
 
-// Forward declarations
-
-// A command which combines a few of the given evolution objects.
-class AbstractLoggable
+namespace LightBulb
 {
-private:
-	AbstractLogger* logger;
-protected:
-	void log(std::string message, LogLevel logLevel);
-public:
-	virtual ~AbstractLoggable()
-	{
-	}
+	// Forward declarations
 
-	virtual void setLogger(AbstractLogger* logger_);
-};
+	// A command which combines a few of the given evolution objects.
+	class AbstractLoggable
+	{
+	private:
+		AbstractLogger* logger;
+	protected:
+		void log(std::string message, LogLevel logLevel);
+	public:
+		virtual ~AbstractLoggable()
+		{
+		}
+
+		virtual void setLogger(AbstractLogger* logger_);
+	};
+}
 
 #endif

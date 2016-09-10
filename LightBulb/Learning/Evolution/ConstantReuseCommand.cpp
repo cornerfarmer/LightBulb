@@ -3,36 +3,39 @@
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 
-ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_)
-	: AbstractReuseCommand(reuseSelector_)
+namespace LightBulb
 {
-	setReuseCount(objectCount_);
-}
+	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_)
+		: AbstractReuseCommand(reuseSelector_)
+	{
+		setReuseCount(objectCount_);
+	}
 
-ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_)
-	: AbstractReuseCommand(reuseSelector_)
-{
-	setReusePercentage(reusePercentage_);
-}
+	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_)
+		: AbstractReuseCommand(reuseSelector_)
+	{
+		setReusePercentage(reusePercentage_);
+	}
 
-void ConstantReuseCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
-{
-	int objectCount = this->objectCount;
-	// Calculate a temporary static object count if the percentage value is used
-	if (objectCount == 0)
-		objectCount = (int)(highscore->size() * reusePercentage);
+	void ConstantReuseCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
+	{
+		int objectCount = this->objectCount;
+		// Calculate a temporary static object count if the percentage value is used
+		if (objectCount == 0)
+			objectCount = (int)(highscore->size() * reusePercentage);
 
-	reuseSelector->executeReuseSelection(objectCount, highscore, counter);
-}
+		reuseSelector->executeReuseSelection(objectCount, highscore, counter);
+	}
 
-void ConstantReuseCommand::setReusePercentage(double newReusePercentage)
-{
-	objectCount = 0;
-	reusePercentage = newReusePercentage;
-}
+	void ConstantReuseCommand::setReusePercentage(double newReusePercentage)
+	{
+		objectCount = 0;
+		reusePercentage = newReusePercentage;
+	}
 
-void ConstantReuseCommand::setReuseCount(double newReuseCount)
-{
-	reusePercentage = 0;
-	objectCount = newReuseCount;
+	void ConstantReuseCommand::setReuseCount(double newReuseCount)
+	{
+		reusePercentage = 0;
+		objectCount = newReuseCount;
+	}
 }

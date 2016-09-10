@@ -11,28 +11,31 @@
 #include <memory>
 #include <map>
 
-// Forward declarations
-class AbstractCoevolutionWorld;
-class AbstractEvolutionObject;
-
-typedef std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, std::map<int, bool>>> CombiningStrategyResults;
-
-class AbstractCombiningStrategy : public AbstractRandomGeneratorUser
+namespace LightBulb
 {
-private:
-	std::unique_ptr<CombiningStrategyResults> results;
-	int firstPlayerWins;
-protected:	
-	AbstractCoevolutionWorld* secondWorld;
-	virtual void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) = 0;
-	void setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, int round, bool firstPlayerHasWon);
-public:
-	AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = NULL);
-	virtual CombiningStrategyResults* execute(AbstractCoevolutionWorld* world);
-	virtual void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
-	virtual CombiningStrategyResults* getPrevResults();
-	virtual int getFirstPlayerWins();
-	virtual int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) = 0;
-};
+	// Forward declarations
+	class AbstractCoevolutionWorld;
+	class AbstractEvolutionObject;
+
+	typedef std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, std::map<int, bool>>> CombiningStrategyResults;
+
+	class AbstractCombiningStrategy : public AbstractRandomGeneratorUser
+	{
+	private:
+		std::unique_ptr<CombiningStrategyResults> results;
+		int firstPlayerWins;
+	protected:
+		AbstractCoevolutionWorld* secondWorld;
+		virtual void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) = 0;
+		void setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, int round, bool firstPlayerHasWon);
+	public:
+		AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = NULL);
+		virtual CombiningStrategyResults* execute(AbstractCoevolutionWorld* world);
+		virtual void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
+		virtual CombiningStrategyResults* getPrevResults();
+		virtual int getFirstPlayerWins();
+		virtual int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) = 0;
+	};
+}
 
 #endif

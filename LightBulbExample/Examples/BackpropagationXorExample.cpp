@@ -12,6 +12,7 @@
 #include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
 #include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
 
+using namespace LightBulb;
 
 #define PREFERENCE_LEARNINGRATE "Learning rate"
 #define PREFERENCE_MOMENTUM "Momentum"

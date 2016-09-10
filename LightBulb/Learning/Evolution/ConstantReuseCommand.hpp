@@ -8,26 +8,29 @@
 // Includes
 #include "Learning/Evolution/AbstractReuseCommand.hpp"
 
-// Forward declarations
-
-// A class to directly reuse the best N evolution objects
-class ConstantReuseCommand : public AbstractReuseCommand
+namespace LightBulb
 {
-private:
-	// Holds amount of objects which should be reused
-	int objectCount;
-	// Alternative: Holds the percentage of objects which should be reused
-	double reusePercentage;
-public:
-	virtual ~ConstantReuseCommand() {};
-	// Creates a command which reuses a static amount of objects
-	ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_);
-	// Creates a command which reuses a percentage of objects
-	ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_);
-	
-	void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) override;
-	void setReusePercentage(double newReusePercentage);
-	void setReuseCount(double newReuseCount);
-};
+	// Forward declarations
+
+	// A class to directly reuse the best N evolution objects
+	class ConstantReuseCommand : public AbstractReuseCommand
+	{
+	private:
+		// Holds amount of objects which should be reused
+		int objectCount;
+		// Alternative: Holds the percentage of objects which should be reused
+		double reusePercentage;
+	public:
+		virtual ~ConstantReuseCommand() {};
+		// Creates a command which reuses a static amount of objects
+		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_);
+		// Creates a command which reuses a percentage of objects
+		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_);
+
+		void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) override;
+		void setReusePercentage(double newReusePercentage);
+		void setReuseCount(double newReuseCount);
+	};
+}
 
 #endif

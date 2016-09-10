@@ -8,18 +8,21 @@
 // Includes
 #include "NetworkTopology/FreeNetwork.hpp"
 
-// Forward declarations
-class AbstractTeachingLesson;
-class Teacher;
-
-// A HopfieldNetwork is special free network
-class HopfieldNetwork : public FreeNetwork
+namespace LightBulb
 {
-private:	
-public:
-	// Create a new HopfieldNetwork with the given counts
-	HopfieldNetwork(unsigned int neuronCount, bool binaryActivationFunction);
+	// Forward declarations
+	class AbstractTeachingLesson;
+	class Teacher;
 
-};
+	// A HopfieldNetwork is special free network
+	class HopfieldNetwork : public FreeNetwork
+	{
+	private:
+	public:
+		// Create a new HopfieldNetwork with the given counts
+		HopfieldNetwork(unsigned int neuronCount, bool binaryActivationFunction);
+
+	};
+}
 
 #endif

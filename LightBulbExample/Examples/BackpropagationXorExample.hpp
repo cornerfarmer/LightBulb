@@ -14,13 +14,13 @@
 // Forward declarations
 
 // A techer manages many techingLessons
-class BackpropagationXorExample : public AbstractSingleNNTrainingPlan
+class BackpropagationXorExample : public LightBulb::AbstractSingleNNTrainingPlan
 {
 private:
-	std::unique_ptr<Teacher> teacher;
+	std::unique_ptr<LightBulb::Teacher> teacher;
 protected:
-	AbstractNeuralNetwork* createNeuralNetwork() override;
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractNeuralNetwork* createNeuralNetwork() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 public:
 	BackpropagationXorExample();
 	std::string getDefaultName() override;

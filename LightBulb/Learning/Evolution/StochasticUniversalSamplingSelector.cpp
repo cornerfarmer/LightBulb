@@ -4,53 +4,55 @@
 //Library includes
 #include <algorithm>
 
-
-void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+namespace LightBulb
 {
-	std::vector<double> probabilities;
-	probabilities.reserve(highscore->size());
-
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		probabilities.push_back(entry->first);
+		std::vector<double> probabilities;
+		probabilities.reserve(highscore->size());
+
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			probabilities.push_back(entry->first);
+		}
+
+		std::vector<int> selectedIndices = randomFunction->execute(probabilities, objectCount);
+		int mutationSequenceIndex = 0;
+		for (auto selectedIndex = selectedIndices.begin(); selectedIndex != selectedIndices.end(); selectedIndex++, mutationSequenceIndex++)
+		{
+			if (recombine)
+				addObjectToRecombination((*highscore)[*selectedIndex].second);
+			else
+				addObjectToMutate((*highscore)[*selectedIndex].second);
+		}
 	}
 
-	std::vector<int> selectedIndices = randomFunction->execute(probabilities, objectCount);
-	int mutationSequenceIndex = 0;
-	for (auto selectedIndex = selectedIndices.begin(); selectedIndex != selectedIndices.end(); selectedIndex++, mutationSequenceIndex++)
+	void StochasticUniversalSamplingSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		if (recombine)
-			addObjectToRecombination((*highscore)[*selectedIndex].second);
-		else
-			addObjectToMutate((*highscore)[*selectedIndex].second);
+		select(false, mutationCount, highscore);
 	}
-}
 
-void StochasticUniversalSamplingSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	select(false, mutationCount, highscore);
-}
-
-void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	select(true, recombinationCount * 2, highscore);
-	std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
-}
+	void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	{
+		select(true, recombinationCount * 2, highscore);
+		std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
+	}
 
 
-StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector()
-{
-	setRandomFunction(new RouletteWheelSelectionFunction());
-}
+	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector()
+	{
+		setRandomFunction(new RouletteWheelSelectionFunction());
+	}
 
-void StochasticUniversalSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
-{
-	randomFunction.reset(randomFunction_);
-}
+	void StochasticUniversalSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
+	{
+		randomFunction.reset(randomFunction_);
+	}
 
 
-void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
-{
-	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-	randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
+	void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	{
+		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+		randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
+	}
 }

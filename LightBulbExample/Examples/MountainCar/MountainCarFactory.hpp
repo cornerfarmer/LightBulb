@@ -9,11 +9,11 @@
 // Forward declarations
 class TrainingPlanRepository;
 
-class MountainCarFactory : public AbstractCustomSubAppFactory
+class MountainCarFactory : public LightBulb::AbstractCustomSubAppFactory
 {
 protected:
 public:
-	AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent) override;
+	LightBulb::AbstractCustomSubApp* createCustomSupApp(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent) override;
 	std::string getLabel() override;
 };
 

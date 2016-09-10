@@ -2,26 +2,29 @@
 #include "Random/ZigguratGenerator.hpp"
 #include "Lib/ziggurat.hpp"
 
-float ZigguratGenerator::fn[128];
-uint32_t ZigguratGenerator::kn[128];
-float ZigguratGenerator::wn[129];
-bool ZigguratGenerator::initialized = false;
-uint32_t ZigguratGenerator::seed = 123456789;
-
-void ZigguratGenerator::initialize()
+namespace LightBulb
 {
-	r4_nor_setup(kn, fn, wn);
-	initialized = true;
-}
+	float ZigguratGenerator::fn[128];
+	uint32_t ZigguratGenerator::kn[128];
+	float ZigguratGenerator::wn[129];
+	bool ZigguratGenerator::initialized = false;
+	uint32_t ZigguratGenerator::seed = 123456789;
 
-float ZigguratGenerator::next()
-{
-	if (!initialized)
-		initialize();
+	void ZigguratGenerator::initialize()
+	{
+		r4_nor_setup(kn, fn, wn);
+		initialized = true;
+	}
 
-	float value;
+	float ZigguratGenerator::next()
+	{
+		if (!initialized)
+			initialize();
 
-	value = r4_nor(seed, kn, fn, wn);
+		float value;
 
-	return value;
+		value = r4_nor(seed, kn, fn, wn);
+
+		return value;
+	}
 }

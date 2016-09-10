@@ -10,22 +10,24 @@
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, Backpropagation& backpropagation)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractGradientCalculation>(&backpropagation));
-	archive(cereal::make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
+	template <class Archive>
+	void serialize(Archive& archive, Backpropagation& backpropagation)
+	{
+		archive(cereal::base_class<AbstractGradientCalculation>(&backpropagation));
+		archive(cereal::make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
+	}
 }
-
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(Backpropagation, AbstractGradientCalculation)
+	CONSTRUCT_EXISTING(LightBulb::Backpropagation, LightBulb::AbstractGradientCalculation)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, Backpropagation& backpropagation)
+		static void construct(Archive& ar, LightBulb::Backpropagation& backpropagation)
 		{
-			ar(cereal::base_class<AbstractGradientCalculation>(&backpropagation));
+			ar(cereal::base_class<LightBulb::AbstractGradientCalculation>(&backpropagation));
 			ar(cereal::make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
 		}
 	};
@@ -34,6 +36,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(Backpropagation);
+CEREAL_REGISTER_TYPE(LightBulb::Backpropagation);
 
 #endif

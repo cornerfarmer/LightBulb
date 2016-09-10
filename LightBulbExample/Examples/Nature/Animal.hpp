@@ -10,12 +10,9 @@
 #include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
 
 // Forward declarations
-class EvolutionLearningRule;
-class NeuralNetwork;
-class RecurrentFeedForwardNetworkTopologyOptions;
 class Nature;
 
-class Animal : public AbstractSimpleEvolutionObject
+class Animal : public LightBulb::AbstractSimpleEvolutionObject
 {
 protected:
 	Nature* nature;

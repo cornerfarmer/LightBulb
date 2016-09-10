@@ -1,55 +1,57 @@
 #include "AbstractLearningRuleTrainingPlan.hpp"
 
-
-void AbstractLearningRuleTrainingPlan::run(bool initial)
+namespace LightBulb
 {
-	if (initial)
+	void AbstractLearningRuleTrainingPlan::run(bool initial)
 	{
-		learningRule.reset(createLearningRate());
-		learningResult.reset(learningRule->start());
-	} 
-	else
-	{
-		learningResult.reset(learningRule->resume());
+		if (initial)
+		{
+			learningRule.reset(createLearningRate());
+			learningResult.reset(learningRule->start());
+		}
+		else
+		{
+			learningResult.reset(learningRule->resume());
+		}
+
+		if (isPausing())
+			pausingFinished();
+		else
+			finished();
 	}
 
-	if (isPausing())
-		pausingFinished();
-	else
-		finished();
-}
+	void AbstractLearningRuleTrainingPlan::tryToPause()
+	{
+		learningRule->sendPauseRequest();
+	}
 
-void AbstractLearningRuleTrainingPlan::tryToPause()
-{
-	learningRule->sendPauseRequest();
-}
+	void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
+	{
+		options->logger = logger.get();
+	}
 
-void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
-{
-	options->logger = logger.get();
-}
+	std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels()
+	{
+		return learningRule->getDataSetLabels();
+	}
 
-std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels()
-{
-	return learningRule->getDataSetLabels();
-}
+	LearningState* AbstractLearningRuleTrainingPlan::getLearningState()
+	{
+		return learningRule->getLearningState();
+	}
 
-LearningState* AbstractLearningRuleTrainingPlan::getLearningState()
-{
-	return learningRule->getLearningState();
-}
+	AbstractLearningResult* AbstractLearningRuleTrainingPlan::getLearningResult()
+	{
+		return learningResult.get();
+	}
 
-AbstractLearningResult* AbstractLearningRuleTrainingPlan::getLearningResult()
-{
-	return learningResult.get();
-}
+	AbstractLearningRule* AbstractLearningRuleTrainingPlan::getLearningRule()
+	{
+		return learningRule.get();
+	}
 
-AbstractLearningRule* AbstractLearningRuleTrainingPlan::getLearningRule()
-{
-	return learningRule.get();
-}
-
-int AbstractLearningRuleTrainingPlan::getSeed()
-{
-	return learningRule->getSeed();
+	int AbstractLearningRuleTrainingPlan::getSeed()
+	{
+		return learningRule->getSeed();
+	}
 }

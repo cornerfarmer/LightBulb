@@ -10,17 +10,20 @@
 #include <string>
 #include <memory>
 
-// Forward declarations
-
-// 
-class JSONAttribute
+namespace LightBulb
 {
-private:
-	std::string name;
-	std::unique_ptr<AbstractJSONElement> value;
-public:
-	JSONAttribute(std::string name_, AbstractJSONElement* value_);
-	std::string toString();
-};
+	// Forward declarations
+	
+	// 
+	class JSONAttribute
+	{
+	private:
+		std::string name;
+		std::unique_ptr<AbstractJSONElement> value;
+	public:
+		JSONAttribute(std::string name_, AbstractJSONElement* value_);
+		std::string toString();
+	};
+}
 
 #endif

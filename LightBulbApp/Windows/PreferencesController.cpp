@@ -2,25 +2,28 @@
 #include "Windows/PreferencesController.hpp"
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
 
-PreferencesController::PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
-	:AbstractSubApp(mainApp)
+namespace LightBulb
 {
-	trainingPlan = trainingPlan_;
-	window.reset(new PreferencesWindow(this, parent));
-}
+	PreferencesController::PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+		:AbstractSubApp(mainApp)
+	{
+		trainingPlan = trainingPlan_;
+		window.reset(new PreferencesWindow(this, parent));
+	}
 
-PreferencesWindow* PreferencesController::getWindow()
-{
-	return window.get();
-}
+	PreferencesWindow* PreferencesController::getWindow()
+	{
+		return window.get();
+	}
 
-std::string PreferencesController::getLabel()
-{
-	return "Preferences";
-}
+	std::string PreferencesController::getLabel()
+	{
+		return "Preferences";
+	}
 
 
-std::vector<std::unique_ptr<AbstractPreference>>& PreferencesController::getPreferences()
-{
-	return trainingPlan->getPreferences();
+	std::vector<std::unique_ptr<AbstractPreference>>& PreferencesController::getPreferences()
+	{
+		return trainingPlan->getPreferences();
+	}
 }

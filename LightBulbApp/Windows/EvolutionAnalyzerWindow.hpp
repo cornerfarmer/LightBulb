@@ -11,24 +11,29 @@
 #include <Logging/AbstractLogger.hpp>
 #include <Learning/Evolution/AbstractEvolutionObject.hpp>
 
-wxDECLARE_EVENT(EAW_EVT_REFRESH, wxThreadEvent);
-
 // Forward declarations
-class EvolutionAnalyzerController;
 class wxDataViewListCtrl;
 
-class EvolutionAnalyzerWindow : public AbstractSubAppWindow
+namespace LightBulb
 {
-private:
-	wxChoice* trainingPlansChoice;
-	EvolutionAnalyzerController* getController();
-	wxDataViewListCtrl* highscoreList;
-	void refresh(wxThreadEvent& event);
-	std::string getEvolutionSourceAsString(EvolutionSource source);
-public:
-	EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent = NULL);
-	void trainingPlanChanged(wxCommandEvent& event);
-	void refreshTrainingPlans();
-};
+	wxDECLARE_EVENT(EAW_EVT_REFRESH, wxThreadEvent);
+
+	// Forward declarations
+	class EvolutionAnalyzerController;
+
+	class EvolutionAnalyzerWindow : public AbstractSubAppWindow
+	{
+	private:
+		wxChoice* trainingPlansChoice;
+		EvolutionAnalyzerController* getController();
+		wxDataViewListCtrl* highscoreList;
+		void refresh(wxThreadEvent& event);
+		std::string getEvolutionSourceAsString(EvolutionSource source);
+	public:
+		EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent = NULL);
+		void trainingPlanChanged(wxCommandEvent& event);
+		void refreshTrainingPlans();
+	};
+}
 
 #endif

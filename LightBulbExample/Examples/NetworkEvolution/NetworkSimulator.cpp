@@ -5,6 +5,8 @@
 //Library includes
 #include <iostream>
 
+using namespace LightBulb;
+
 AbstractEvolutionObject* NetworkSimulator::createNewObject()
 {
 	return new Network(this);

@@ -5,31 +5,34 @@
 //Library includes
 #include <algorithm>
 
-void RandomCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
+namespace LightBulb
 {
-	std::vector<AbstractEvolutionObject*> randomOpponents = *secondObjects;
-	std::random_shuffle(randomOpponents.begin(), randomOpponents.end());
-
-	for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
+	void RandomCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 	{
-		for (int opponentIndex = 0; opponentIndex < amountOfCompetitionsPerObject && opponentIndex < randomOpponents.size(); opponentIndex++)
+		std::vector<AbstractEvolutionObject*> randomOpponents = *secondObjects;
+		std::random_shuffle(randomOpponents.begin(), randomOpponents.end());
+
+		for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
 		{
-			for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+			for (int opponentIndex = 0; opponentIndex < amountOfCompetitionsPerObject && opponentIndex < randomOpponents.size(); opponentIndex++)
 			{
-				int result = simulationWorld->compareObjects(*firstPlayer, randomOpponents[opponentIndex], r);
-				if (result != 0)
-					setResult(*firstPlayer, randomOpponents[opponentIndex], r, result > 0);
+				for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+				{
+					int result = simulationWorld->compareObjects(*firstPlayer, randomOpponents[opponentIndex], r);
+					if (result != 0)
+						setResult(*firstPlayer, randomOpponents[opponentIndex], r, result > 0);
+				}
 			}
 		}
 	}
-}
 
-RandomCombiningStrategy::RandomCombiningStrategy(int amountOfCompetitionsPerObject_)
-{
-	amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
-}
+	RandomCombiningStrategy::RandomCombiningStrategy(int amountOfCompetitionsPerObject_)
+	{
+		amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
+	}
 
-int RandomCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
-{
-	return amountOfCompetitionsPerObject * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
+	int RandomCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
+	{
+		return amountOfCompetitionsPerObject * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
+	}
 }

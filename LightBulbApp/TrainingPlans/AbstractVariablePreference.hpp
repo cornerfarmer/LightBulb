@@ -8,40 +8,43 @@
 
 // Library includes
 
-// Forward declarations
-
-template<class Type>
-class AbstractVariablePreference : public AbstractPreference
+namespace LightBulb
 {
-protected:
-	Type value;
-	Type defaultValue;
-public:
-	AbstractVariablePreference(std::string name, Type defaultValue_)
-		:AbstractPreference(name)
-	{
-		defaultValue = defaultValue_;
-		reset();
-	}
+	// Forward declarations
 
-	AbstractVariablePreference()
+	template<class Type>
+	class AbstractVariablePreference : public AbstractPreference
 	{
-	}
+	protected:
+		Type value;
+		Type defaultValue;
+	public:
+		AbstractVariablePreference(std::string name, Type defaultValue_)
+			:AbstractPreference(name)
+		{
+			defaultValue = defaultValue_;
+			reset();
+		}
 
-	void setValue(Type newValue)
-	{
-		value = newValue;
-	}
+		AbstractVariablePreference()
+		{
+		}
 
-	Type getValue()
-	{
-		return value;
-	}
+		void setValue(Type newValue)
+		{
+			value = newValue;
+		}
 
-	void reset()
-	{
-		value = defaultValue;
-	}
-};
+		Type getValue()
+		{
+			return value;
+		}
+
+		void reset()
+		{
+			value = defaultValue;
+		}
+	};
+}
 
 #endif

@@ -5,30 +5,32 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
-
-ConstantCreationCommand::ConstantCreationCommand(int objectCount_)
-	: AbstractCreationCommand()
+namespace LightBulb
 {
-	objectCount = objectCount_;
-}
-
-void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>* notUsedObjects)
-{
-	// Calculate the amount of objects we have to create
-	int objectsToCreate = objectCount - world.getPopulationSize();
-	// Create them
-	for (int i = 0; i < objectsToCreate; i++)
+	ConstantCreationCommand::ConstantCreationCommand(int objectCount_)
+		: AbstractCreationCommand()
 	{
-		std::unique_ptr<AbstractEvolutionObject> newObject(world.addNewObject(false));
-
-		AbstractEvolutionObject* objectToAdd = getUnusedObject(newObject.get(), notUsedObjects, false);
-		objectToAdd->setEvolutionSource(Creation);
-
-		world.addExistingObject(objectToAdd);
+		objectCount = objectCount_;
 	}
-}
 
-void ConstantCreationCommand::setObjectCount(int newObjectCount)
-{
-	objectCount = newObjectCount;
+	void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+	{
+		// Calculate the amount of objects we have to create
+		int objectsToCreate = objectCount - world.getPopulationSize();
+		// Create them
+		for (int i = 0; i < objectsToCreate; i++)
+		{
+			std::unique_ptr<AbstractEvolutionObject> newObject(world.addNewObject(false));
+
+			AbstractEvolutionObject* objectToAdd = getUnusedObject(newObject.get(), notUsedObjects, false);
+			objectToAdd->setEvolutionSource(Creation);
+
+			world.addExistingObject(objectToAdd);
+		}
+	}
+
+	void ConstantCreationCommand::setObjectCount(int newObjectCount)
+	{
+		objectCount = newObjectCount;
+	}
 }

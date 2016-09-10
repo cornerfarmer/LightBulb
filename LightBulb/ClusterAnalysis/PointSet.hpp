@@ -6,23 +6,26 @@
 // Library includes
 #include <list>
 
-// Forward declarations
-struct Point;
-
-// This class contains all stuff needed to describe a ROLFNeuronPlacer 
-class PointSet : public std::list<Point*>
+namespace LightBulb
 {
-private:
-	// Holds the maximum position distance
-	double maxPositionDistance;
-	// Holds the maximum value distance
-	double maxValueDistance;
-public:
-	PointSet();
-	double getMaxPositionDistance();
-	double getMaxValueDistance();
-	// Recalculate the max distances
-	void refreshMaxDistances();
-};
+	// Forward declarations
+	struct Point;
+
+	// This class contains all stuff needed to describe a ROLFNeuronPlacer 
+	class PointSet : public std::list<Point*>
+	{
+	private:
+		// Holds the maximum position distance
+		double maxPositionDistance;
+		// Holds the maximum value distance
+		double maxValueDistance;
+	public:
+		PointSet();
+		double getMaxPositionDistance();
+		double getMaxValueDistance();
+		// Recalculate the max distances
+		void refreshMaxDistances();
+	};
+}
 
 #endif

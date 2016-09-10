@@ -9,6 +9,7 @@
 #include <Examples/PongReinforcement/PongReinforcementExample.hpp>
 #include <Examples/PongReinforcement/PongReinforcementWorld.hpp>
 
+using namespace LightBulb;
 
 PongGameController::PongGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)

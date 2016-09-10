@@ -14,82 +14,84 @@
 #include "Function/AbstractActivationFunction.hpp"
 #include "NetworkTopology/CounterpropagationNetwork.hpp"
 
-
-HopfieldLearningRule::HopfieldLearningRule(HopfieldLearningRuleOptions &options_)
-	: AbstractLearningRule(new HopfieldLearningRuleOptions(options_)) 
-{	
-	options->maxTries = 1;
-	options->maxIterationsPerTry = 1;	
-	options->offlineLearning = true;
-	options->totalErrorGoal = -1;
-}
-
-void HopfieldLearningRule::adjustWeight(Edge* edge, double deltaWeight)
+namespace LightBulb
 {
-	// Set the calculated weight as new weight
-	edge->setWeight(edge->getWeight() + deltaWeight);
-}
-
-void HopfieldLearningRule::printDebugOutput()
-{
-
-}
-
-bool HopfieldLearningRule::learningHasStopped()
-{
-	return false;
-}
-
-void HopfieldLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
-{
-	// Reset al weights
-	for (auto neuron = neuralNetwork.getNetworkTopology()->getNeurons()->front().begin(); neuron != neuralNetwork.getNetworkTopology()->getNeurons()->front().end(); neuron++)
+	HopfieldLearningRule::HopfieldLearningRule(HopfieldLearningRuleOptions &options_)
+		: AbstractLearningRule(new HopfieldLearningRuleOptions(options_))
 	{
-		for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
+		options->maxTries = 1;
+		options->maxIterationsPerTry = 1;
+		options->offlineLearning = true;
+		options->totalErrorGoal = -1;
+	}
+
+	void HopfieldLearningRule::adjustWeight(Edge* edge, double deltaWeight)
+	{
+		// Set the calculated weight as new weight
+		edge->setWeight(edge->getWeight() + deltaWeight);
+	}
+
+	void HopfieldLearningRule::printDebugOutput()
+	{
+
+	}
+
+	bool HopfieldLearningRule::learningHasStopped()
+	{
+		return false;
+	}
+
+	void HopfieldLearningRule::initializeLearningAlgoritm(NeuralNetwork &neuralNetwork, Teacher &teacher, AbstractActivationOrder &activationOrder)
+	{
+		// Reset al weights
+		for (auto neuron = neuralNetwork.getNetworkTopology()->getNeurons()->front().begin(); neuron != neuralNetwork.getNetworkTopology()->getNeurons()->front().end(); neuron++)
 		{
-			(*edge)->setWeight(0);
+			for (auto edge = (*neuron)->getAfferentEdges()->begin(); edge != (*neuron)->getAfferentEdges()->end(); edge++)
+			{
+				(*edge)->setWeight(0);
+			}
 		}
 	}
-}
 
-void HopfieldLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
-{
-
-}
-
-
-AbstractActivationOrder* HopfieldLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
-{
-	return new AsynchronousOrder();
-}
-
-double HopfieldLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
-{
-	// Multiplicate the netInput (= teachingPattern) of the two connected neurons
-	double res = edge.getNextNeuron()->getNetInput() * static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput();
-
-	// If heteroassociation is activated, also consider teachingInput
-	if (getOptions()->trainHeteroassociation)
-		res += static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput() * lesson.getTeachingInput(neuron.getActivationFunction())->get(0, neuronIndex);
-	return res;
-}
-
-HopfieldLearningRuleOptions* HopfieldLearningRule::getOptions()
-{
-	return static_cast<HopfieldLearningRuleOptions*>(options.get());
-}
-
-
-bool HopfieldLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
-{
-	// Only do one calculation per teaching lesson
-	if (*nextStartTime != -1)
-		return false;
-	else
+	void HopfieldLearningRule::initializeTry(NeuralNetwork &neuralNetwork, Teacher &teacher)
 	{
-		// Always calculate only one timestep
-		*nextTimeStepCount = 1;
-		*nextStartTime = 0;		
-		return true;
+
+	}
+
+
+	AbstractActivationOrder* HopfieldLearningRule::getNewActivationOrder(NeuralNetwork &neuralNetwork)
+	{
+		return new AsynchronousOrder();
+	}
+
+	double HopfieldLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
+	{
+		// Multiplicate the netInput (= teachingPattern) of the two connected neurons
+		double res = edge.getNextNeuron()->getNetInput() * static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput();
+
+		// If heteroassociation is activated, also consider teachingInput
+		if (getOptions()->trainHeteroassociation)
+			res += static_cast<StandardNeuron*>(edge.getPrevNeuron())->getNetInput() * lesson.getTeachingInput(neuron.getActivationFunction())->get(0, neuronIndex);
+		return res;
+	}
+
+	HopfieldLearningRuleOptions* HopfieldLearningRule::getOptions()
+	{
+		return static_cast<HopfieldLearningRuleOptions*>(options.get());
+	}
+
+
+	bool HopfieldLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+	{
+		// Only do one calculation per teaching lesson
+		if (*nextStartTime != -1)
+			return false;
+		else
+		{
+			// Always calculate only one timestep
+			*nextTimeStepCount = 1;
+			*nextStartTime = 0;
+			return true;
+		}
 	}
 }

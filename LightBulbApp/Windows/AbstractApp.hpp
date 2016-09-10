@@ -4,12 +4,15 @@
 
 // Includes
 
-// Forward declarations
-
-class AbstractApp
+namespace LightBulb
 {
-protected:
-public:	
-};
+	// Forward declarations
+
+	class AbstractApp
+	{
+	protected:
+	public:
+	};
+}
 
 #endif

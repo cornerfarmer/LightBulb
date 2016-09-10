@@ -10,17 +10,20 @@
 #include <memory>
 #include <vector>
 
-// Forward declarations
-class AbstractEvolutionObject;
-
-// A algorithm which mutates the given object.
-class AbstractMutationAlgorithm : public AbstractRandomGeneratorUser
+namespace LightBulb
 {
-public:
-	virtual ~AbstractMutationAlgorithm() {};
-	// Mutates the given evolution object.
-	virtual void execute(AbstractEvolutionObject* object1) = 0;
-	virtual void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) {};
-};
+	// Forward declarations
+	class AbstractEvolutionObject;
+
+	// A algorithm which mutates the given object.
+	class AbstractMutationAlgorithm : public AbstractRandomGeneratorUser
+	{
+	public:
+		virtual ~AbstractMutationAlgorithm() {};
+		// Mutates the given evolution object.
+		virtual void execute(AbstractEvolutionObject* object1) = 0;
+		virtual void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) {};
+	};
+}
 
 #endif

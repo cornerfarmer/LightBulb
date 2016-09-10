@@ -4,7 +4,10 @@
 #include <random>
 #include <algorithm>
 
-int EqualRandomFunction::execute(int elementCount)
+namespace LightBulb
 {
-	return randomGenerator->randInt(0, elementCount - 1);
+	int EqualRandomFunction::execute(int elementCount)
+	{
+		return randomGenerator->randInt(0, elementCount - 1);
+	}
 }

@@ -9,14 +9,17 @@
 // Includes
 #include "Function/AbstractNeighborhoodFunction.hpp"
 
-// Describes a neighborhood relation in form of a cone
-class ConeFunction : public AbstractNeighborhoodFunction
+namespace LightBulb
 {
-private:
-public:
-	// Inherited:	
-	double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance);
-	AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy();
-};
+	// Describes a neighborhood relation in form of a cone
+	class ConeFunction : public AbstractNeighborhoodFunction
+	{
+	private:
+	public:
+		// Inherited:	
+		double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance);
+		AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy();
+	};
+}
 
 #endif

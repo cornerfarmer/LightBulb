@@ -2,13 +2,16 @@
 #include "Windows/AbstractSubApp.hpp"
 #include "Windows/AbstractMainApp.hpp"
 
-AbstractSubApp::AbstractSubApp(AbstractMainApp* mainApp_)
+namespace LightBulb
 {
-	mainApp = mainApp_;
-}
+	AbstractSubApp::AbstractSubApp(AbstractMainApp* mainApp_)
+	{
+		mainApp = mainApp_;
+	}
 
-void AbstractSubApp::close()
-{
-	prepareClose();
-	mainApp->removeSubApp(this);
+	void AbstractSubApp::close()
+	{
+		prepareClose();
+		mainApp->removeSubApp(this);
+	}
 }

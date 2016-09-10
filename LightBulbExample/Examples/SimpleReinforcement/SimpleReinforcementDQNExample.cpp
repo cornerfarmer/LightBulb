@@ -23,6 +23,8 @@
 #define PREFERENCE_FINAL_EXPLORATION_FRAME "final exploration frame"
 #define PREFERENCE_RMSMPROP_LEARNING_RATE "RMSProp learning rate"
 
+using namespace LightBulb;
+
 AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;

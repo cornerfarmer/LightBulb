@@ -136,6 +136,7 @@
     <ClCompile Include="Function\ActivationFunction\RectifierFunction.cpp" />
     <ClCompile Include="Function\SelectionFunction\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="Function\InputFunction\WeightedSumFunction.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractFitnessFunction.cpp" />
     <ClCompile Include="NetworkTopology\AbstractFeedForwardNetworkTopology.cpp" />
     <ClCompile Include="Random\XorShfGenerator.cpp" />
     <ClCompile Include="Random\ZigguratGenerator.cpp" />
@@ -619,6 +620,7 @@
     <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
     <ClInclude Include="IO\SimpleGradientDecentIO.hpp" />
     <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractFitnessFunction.hpp" />
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
     <ClInclude Include="Random\XorShfGenerator.hpp" />
     <ClInclude Include="Random\ZigguratGenerator.hpp" />

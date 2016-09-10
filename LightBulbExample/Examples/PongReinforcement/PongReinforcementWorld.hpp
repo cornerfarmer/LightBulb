@@ -14,7 +14,7 @@
 
 #define DATASET_PONG_RATING "Pong rating"
 
-class PongReinforcementWorld : public AbstractReinforcementWorld, public AbstractPongWorld
+class PongReinforcementWorld : public LightBulb::AbstractReinforcementWorld, public AbstractPongWorld
 {
 	template <class Archive>
 	friend void serialize(Archive& archive, PongReinforcementWorld& world);
@@ -25,7 +25,7 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<bool>& output) override;
 public:
-	PongReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	PongReinforcementWorld(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	PongReinforcementWorld() = default;
 	double doSimulationStep() override;
 	void executeCompareAI();
@@ -33,7 +33,7 @@ public:
 	int rateKI() override;
 	std::vector<std::string> getDataSetLabels() override;
 	bool isTerminalState() override;
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+	void setRandomGenerator(LightBulb::AbstractRandomGenerator* randomGenerator_) override;
 };
 
 

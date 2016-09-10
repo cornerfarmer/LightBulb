@@ -8,6 +8,7 @@
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>
 
+using namespace LightBulb;
 
 Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
 	: AbstractSimpleEvolutionObject(nature_)

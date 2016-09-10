@@ -9,16 +9,19 @@
 // Library includes
 #include <string>
 
-// Forward declarations
-
-// 
-class JSONStringElement : public AbstractJSONElement
+namespace LightBulb
 {
-private:
-	std::string content;
-public:
-	std::string toString() override;
-	JSONStringElement(std::string content_);
-};
+	// Forward declarations
+
+	// 
+	class JSONStringElement : public AbstractJSONElement
+	{
+	private:
+		std::string content;
+	public:
+		std::string toString() override;
+		JSONStringElement(std::string content_);
+	};
+}
 
 #endif

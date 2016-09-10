@@ -9,16 +9,19 @@
 // Includes
 #include "Function/RandomFunction/AbstractRandomFunction.hpp"
 
-/**
- * \brief Describes a uniform distribution.
- * \details Every number has the same probability.
- */
-class EqualRandomFunction : public AbstractRandomFunction
+namespace LightBulb
 {
-private:
-public:
-	// Inherited:	
-	int execute(int elementCount) override;
-};
+	/**
+	 * \brief Describes a uniform distribution.
+	 * \details Every number has the same probability.
+	 */
+	class EqualRandomFunction : public AbstractRandomFunction
+	{
+	private:
+	public:
+		// Inherited:	
+		int execute(int elementCount) override;
+	};
+}
 
 #endif

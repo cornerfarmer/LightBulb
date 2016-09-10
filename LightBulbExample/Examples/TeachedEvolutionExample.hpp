@@ -6,19 +6,19 @@
 
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 
-class TeachedEvolutionExample : public AbstractEvolutionTrainingPlan
+class TeachedEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 {
 private:
 protected:
-	AbstractLearningRule* createLearningRate() override;
-	AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractEvolutionWorld* createWorld() override;
 public:
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 };
 
-USE_PARENT_SERIALIZATION(TeachedEvolutionExample, AbstractEvolutionTrainingPlan);
+USE_PARENT_SERIALIZATION(TeachedEvolutionExample, LightBulb::AbstractEvolutionTrainingPlan);
 
 #endif

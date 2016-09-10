@@ -4,6 +4,8 @@
 
 //Library includes
 
+using namespace LightBulb;
+
 SimpleReinforcementWorld::SimpleReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
 	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
 {

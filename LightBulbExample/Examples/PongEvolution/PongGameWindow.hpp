@@ -8,11 +8,11 @@
 
 // Forward declarations
 
-class  PongGameController;
+class PongGameController;
 
 wxDECLARE_EVENT(PONG_EVT_FIELD_CHANGED, wxThreadEvent);
 
-class PongGameWindow : public AbstractSubAppWindow
+class PongGameWindow : public LightBulb::AbstractSubAppWindow
 {
 private:
 	wxPanel* panel;
@@ -21,7 +21,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	PongGameWindow(PongGameController* controller_, AbstractWindow* parent = NULL);
+	PongGameWindow(PongGameController* controller_, LightBulb::AbstractWindow* parent = NULL);
 	void paintEvent(wxPaintEvent & evt);
 	void resize(wxSizeEvent & evt);
 	void paintNow();

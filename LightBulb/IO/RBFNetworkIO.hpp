@@ -12,23 +12,26 @@
 #include <cereal/types/vector.hpp>
 #include "IOStorage.hpp"
 
-template <class Archive>
-void save(Archive& archive, RBFNetwork const & rbfNetwork)
+namespace LightBulb
 {
-	archive(cereal::base_class<FeedForwardNetworkTopology>(&rbfNetwork));
-	archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
-}
+	template <class Archive>
+	void save(Archive& archive, RBFNetwork const & rbfNetwork)
+	{
+		archive(cereal::base_class<FeedForwardNetworkTopology>(&rbfNetwork));
+		archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
+	}
 
-template <class Archive>
-void load(Archive& archive, RBFNetwork & rbfNetwork)
-{
-	IOStorage<Eigen::VectorXd>::push(&rbfNetwork.neuronWidths);
-	archive(cereal::base_class<FeedForwardNetworkTopology>(&rbfNetwork));
-	archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
+	template <class Archive>
+	void load(Archive& archive, RBFNetwork & rbfNetwork)
+	{
+		IOStorage<Eigen::VectorXd>::push(&rbfNetwork.neuronWidths);
+		archive(cereal::base_class<FeedForwardNetworkTopology>(&rbfNetwork));
+		archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
+	}
 }
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(RBFNetwork);
+CEREAL_REGISTER_TYPE(LightBulb::RBFNetwork);
 
 #endif

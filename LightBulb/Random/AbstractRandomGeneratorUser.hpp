@@ -9,15 +9,18 @@
 
 // Library Includes
 
-// Forward declarations
-
-class AbstractRandomGeneratorUser
+namespace LightBulb
 {
-protected:
-	AbstractRandomGenerator* randomGenerator;
-public:
-	virtual void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
-	AbstractRandomGenerator* getRandomGenerator();
-};
+	// Forward declarations
+
+	class AbstractRandomGeneratorUser
+	{
+	protected:
+		AbstractRandomGenerator* randomGenerator;
+	public:
+		virtual void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+		AbstractRandomGenerator* getRandomGenerator();
+	};
+}
 
 #endif

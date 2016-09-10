@@ -4,6 +4,8 @@
 
 //Library includes
 
+using namespace LightBulb;
+
 MountainCarWorld::MountainCarWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
 	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
 {

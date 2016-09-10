@@ -8,43 +8,46 @@
 
 // Library Includes
 
-// Forward declarations
-
-
-struct BipartiteEvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
+namespace LightBulb
 {
-	AbstractEvolutionLearningRule* learningRule1;
-	AbstractEvolutionLearningRule* learningRule2;
+	// Forward declarations
 
-	BipartiteEvolutionLearningRuleOptions()
+
+	struct BipartiteEvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 	{
-		learningRule1 = NULL;
-		learningRule2 = NULL;
-	}
-};
+		AbstractEvolutionLearningRule* learningRule1;
+		AbstractEvolutionLearningRule* learningRule2;
 
-class BipartiteEvolutionLearningRule : public AbstractEvolutionLearningRule
-{
-	template <class Archive>
-	friend void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule);
-	friend struct cereal::LoadAndConstruct<BipartiteEvolutionLearningRule>;
-protected:
-	BipartiteEvolutionLearningRuleOptions* getOptions();
-	bool doIteration() override;
-	void initializeTry() override;
-	bool hasLearningSucceeded() override;
-	void initializeStartLearningAlgoritm() override;
-	bool exitConditionReached;
-	AbstractLearningResult* getLearningResult() override;
-public:
-	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
-	BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
-	static std::string getName();
-	std::vector<std::string> getDataSetLabels() override;
-	AbstractEvolutionLearningRule* getFirstLearningRule();
-	AbstractEvolutionLearningRule* getSecondLearningRule();
+		BipartiteEvolutionLearningRuleOptions()
+		{
+			learningRule1 = NULL;
+			learningRule2 = NULL;
+		}
+	};
 
-};
+	class BipartiteEvolutionLearningRule : public AbstractEvolutionLearningRule
+	{
+		template <class Archive>
+		friend void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule);
+		friend struct cereal::LoadAndConstruct<BipartiteEvolutionLearningRule>;
+	protected:
+		BipartiteEvolutionLearningRuleOptions* getOptions();
+		bool doIteration() override;
+		void initializeTry() override;
+		bool hasLearningSucceeded() override;
+		void initializeStartLearningAlgoritm() override;
+		bool exitConditionReached;
+		AbstractLearningResult* getLearningResult() override;
+	public:
+		BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
+		BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
+		static std::string getName();
+		std::vector<std::string> getDataSetLabels() override;
+		AbstractEvolutionLearningRule* getFirstLearningRule();
+		AbstractEvolutionLearningRule* getSecondLearningRule();
+
+	};
+}
 
 #include "IO/BipartiteEvolutionLearningRuleIO.hpp"
 

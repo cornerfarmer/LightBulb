@@ -4,78 +4,81 @@
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
-PhasedTopologyMutationAlgorithm::PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_, int pruningThresholdDistance_)
+namespace LightBulb
 {
-	magnitudeBasedPruningMutationAlgorithm.reset(magnitudeBasedPruningMutationAlgorithm_);
-	networkGrowMutationAlgorithm.reset(networkGrowMutationAlgorithm_);
-	pruningPhase = false;
-	pruneThreshold = -1;
-	pruningThresholdDistance = pruningThresholdDistance_;
-}
-
-void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject* object1)
-{
-	if (!pruningPhase)
+	PhasedTopologyMutationAlgorithm::PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_, int pruningThresholdDistance_)
 	{
-		networkGrowMutationAlgorithm->execute(object1);
+		magnitudeBasedPruningMutationAlgorithm.reset(magnitudeBasedPruningMutationAlgorithm_);
+		networkGrowMutationAlgorithm.reset(networkGrowMutationAlgorithm_);
+		pruningPhase = false;
+		pruneThreshold = -1;
+		pruningThresholdDistance = pruningThresholdDistance_;
 	}
-	else
-	{
-		magnitudeBasedPruningMutationAlgorithm->execute(object1);
-	}
-}
 
-double PhasedTopologyMutationAlgorithm::calcMPC(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	double mpc = 0;
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	{
-		mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getEdgeCount();
-		mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
-	}
-	return mpc / highscore->size();
-}
-
-void PhasedTopologyMutationAlgorithm::initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	if (!pruningPhase)
-	{
-		if (pruneThreshold == -1)
+		if (!pruningPhase)
 		{
-			pruneThreshold = calcMPC(highscore) + pruningThresholdDistance;
+			networkGrowMutationAlgorithm->execute(object1);
 		}
 		else
 		{
-			if (pruneThreshold <= calcMPC(highscore))
-			{
-				pruningPhase = true;
-				lastMPC = -1;
-			}
+			magnitudeBasedPruningMutationAlgorithm->execute(object1);
 		}
 	}
-	else
+
+	double PhasedTopologyMutationAlgorithm::calcMPC(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		double currentMPC = calcMPC(highscore);
-		if (lastMPC != -1 && lastMPC <= currentMPC)
+		double mpc = 0;
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
-			mpcNotFallenRounds++;
-			if (mpcNotFallenRounds > 10)
+			mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getEdgeCount();
+			mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+		}
+		return mpc / highscore->size();
+	}
+
+	void PhasedTopologyMutationAlgorithm::initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	{
+		if (!pruningPhase)
+		{
+			if (pruneThreshold == -1)
 			{
-				pruningPhase = false;
-				pruneThreshold = currentMPC + pruningThresholdDistance;
+				pruneThreshold = calcMPC(highscore) + pruningThresholdDistance;
+			}
+			else
+			{
+				if (pruneThreshold <= calcMPC(highscore))
+				{
+					pruningPhase = true;
+					lastMPC = -1;
+				}
 			}
 		}
 		else
 		{
-			mpcNotFallenRounds = 0;
-			lastMPC = currentMPC;
+			double currentMPC = calcMPC(highscore);
+			if (lastMPC != -1 && lastMPC <= currentMPC)
+			{
+				mpcNotFallenRounds++;
+				if (mpcNotFallenRounds > 10)
+				{
+					pruningPhase = false;
+					pruneThreshold = currentMPC + pruningThresholdDistance;
+				}
+			}
+			else
+			{
+				mpcNotFallenRounds = 0;
+				lastMPC = currentMPC;
+			}
 		}
 	}
-}
 
-void PhasedTopologyMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
-{
-	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-	networkGrowMutationAlgorithm->setRandomGenerator(randomGenerator_);
-	magnitudeBasedPruningMutationAlgorithm->setRandomGenerator(randomGenerator_);
+	void PhasedTopologyMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	{
+		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+		networkGrowMutationAlgorithm->setRandomGenerator(randomGenerator_);
+		magnitudeBasedPruningMutationAlgorithm->setRandomGenerator(randomGenerator_);
+	}
 }

@@ -14,56 +14,59 @@
 
 #define DEFAULT_COMP_DS "Iterations"
 
-// Forward declarations
-class TrainingWindow;
-class TrainingController;
-class TrainingPlanRepository;
-class AbstractTrainingPlan;
-
-struct DataSetSelection
+namespace LightBulb
 {
-	AbstractTrainingPlan* trainingPlan;
-	int tryNumber;
-	std::string label;
+	// Forward declarations
+	class TrainingWindow;
+	class TrainingController;
+	class TrainingPlanRepository;
+	class AbstractTrainingPlan;
 
-	DataSet* getDataSet(std::string otherLabel = "");
-};
+	struct DataSetSelection
+	{
+		AbstractTrainingPlan* trainingPlan;
+		int tryNumber;
+		std::string label;
 
-class LearningStateController : public AbstractSubApp
-{
-private:
-	std::unique_ptr<LearningStateWindow> window;
-	TrainingController* trainingController;
-	TrainingPlanRepository* trainingPlanRepository;
-	AbstractTrainingPlan* selectedTrainingPlan;
-	int iterationsSinceLearningStateChanged;
-	int refreshRate;
-	bool refreshScheduled;
-	std::vector<DataSetSelection> selectedDataSets;
-	std::string comparisonDataSetLabel;
+		DataSet* getDataSet(std::string otherLabel = "");
+	};
 
-protected:
-	void prepareClose() override;
-public:
-	LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
-	LearningStateWindow* getWindow();
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
-	void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
-	void setSelectedTrainingPlan(int trainingPlanIndex);
-	AbstractTrainingPlan* getSelectedTrainingPlan();
-	void learningStateChanged(LearningState* learningState);
-	void setRefreshRate(int newRefreshRate);
-	int getRefreshRate();
-	void refreshFinished();
-	std::vector<std::string> getDataSetLabels();
-	int getTryCount();
-	std::string addDataSet(int tryNumber, int dataSetIndex);
-	std::vector<DataSetSelection>* getSelectedDataSets();
-	void removeDataSet(int dataSetIndex);
-	std::string getComparisonDataSetLabel();
-	void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);
-	static std::string getLabel();
-	std::vector<std::string> getPossibleComparisonDatasetLabels();
-};
+	class LearningStateController : public AbstractSubApp
+	{
+	private:
+		std::unique_ptr<LearningStateWindow> window;
+		TrainingController* trainingController;
+		TrainingPlanRepository* trainingPlanRepository;
+		AbstractTrainingPlan* selectedTrainingPlan;
+		int iterationsSinceLearningStateChanged;
+		int refreshRate;
+		bool refreshScheduled;
+		std::vector<DataSetSelection> selectedDataSets;
+		std::string comparisonDataSetLabel;
+
+	protected:
+		void prepareClose() override;
+	public:
+		LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = NULL);
+		LearningStateWindow* getWindow();
+		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
+		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
+		void setSelectedTrainingPlan(int trainingPlanIndex);
+		AbstractTrainingPlan* getSelectedTrainingPlan();
+		void learningStateChanged(LearningState* learningState);
+		void setRefreshRate(int newRefreshRate);
+		int getRefreshRate();
+		void refreshFinished();
+		std::vector<std::string> getDataSetLabels();
+		int getTryCount();
+		std::string addDataSet(int tryNumber, int dataSetIndex);
+		std::vector<DataSetSelection>* getSelectedDataSets();
+		void removeDataSet(int dataSetIndex);
+		std::string getComparisonDataSetLabel();
+		void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);
+		static std::string getLabel();
+		std::vector<std::string> getPossibleComparisonDatasetLabels();
+	};
+}
 
 #endif

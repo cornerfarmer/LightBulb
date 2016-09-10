@@ -6,36 +6,39 @@
 // Libary includes
 #include <cstddef>
 
-template<class T>
-class IOStorage
+namespace LightBulb
 {
-private:
-	static T* storage;
-public:
-	static void push(T* newStorage)
+	template<class T>
+	class IOStorage
 	{
-		storage = newStorage;
-	}
+	private:
+		static T* storage;
+	public:
+		static void push(T* newStorage)
+		{
+			storage = newStorage;
+		}
 
-	static T* pop()
-	{
-		T* temp = storage;
-		storage = NULL;
-		return temp;
-	}
+		static T* pop()
+		{
+			T* temp = storage;
+			storage = NULL;
+			return temp;
+		}
 
-	static T* get()
-	{
-		return storage;
-	}
+		static T* get()
+		{
+			return storage;
+		}
 
-	static void clear()
-	{
-		storage = NULL;
-	}
-};
+		static void clear()
+		{
+			storage = NULL;
+		}
+	};
 
-template<typename T>
-T* IOStorage<T>::storage = NULL;
+	template<typename T>
+	T* IOStorage<T>::storage = NULL;
+}
 
 #endif

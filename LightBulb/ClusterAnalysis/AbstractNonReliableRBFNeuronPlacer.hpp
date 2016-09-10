@@ -9,17 +9,20 @@
 // Includes
 #include "ClusterAnalysis/AbstractRBFNeuronPlacer.hpp"
 
-// Forward declarations
-struct Cluster;
-class PointSet;
-
-// This class contains all stuff needed to describe a RBFNeuronPlacer 
-class AbstractNonReliableRBFNeuronPlacer : public AbstractRBFNeuronPlacer
+namespace LightBulb
 {
-protected:
-	// Fills up the cluster list until there are exactly n (clusterCount) clusters
-	void fillUpClusters(PointSet& points, std::list<Cluster> &clusters, int clusterCount, int dimensionCount);
-public:
-};
+	// Forward declarations
+	struct Cluster;
+	class PointSet;
+
+	// This class contains all stuff needed to describe a RBFNeuronPlacer 
+	class AbstractNonReliableRBFNeuronPlacer : public AbstractRBFNeuronPlacer
+	{
+	protected:
+		// Fills up the cluster list until there are exactly n (clusterCount) clusters
+		void fillUpClusters(PointSet& points, std::list<Cluster> &clusters, int clusterCount, int dimensionCount);
+	public:
+	};
+}
 
 #endif

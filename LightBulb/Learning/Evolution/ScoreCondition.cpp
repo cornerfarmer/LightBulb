@@ -4,19 +4,22 @@
 #include <iostream>
 #include <iomanip>
 
-bool ScoreCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
+namespace LightBulb
 {
-	if (highscore->size() > 0)
+	bool ScoreCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
 	{
-		return highscore->front().first >= scoreGoal;
+		if (highscore->size() > 0)
+		{
+			return highscore->front().first >= scoreGoal;
+		}
+		else
+		{
+			return false;
+		}
 	}
-	else
-	{
-		return false;
-	}
-}
 
-ScoreCondition::ScoreCondition(double scoreGoal_)
-{
-	scoreGoal = scoreGoal_;
+	ScoreCondition::ScoreCondition(double scoreGoal_)
+	{
+		scoreGoal = scoreGoal_;
+	}
 }

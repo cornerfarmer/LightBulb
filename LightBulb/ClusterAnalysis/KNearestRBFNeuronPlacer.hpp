@@ -9,17 +9,20 @@
 // Includes
 #include "ClusterAnalysis/AbstractNonReliableRBFNeuronPlacer.hpp"
 
-// Forward declarations
-class RBFNetwork;
-class Teacher;
-
-// This class contains all stuff needed to describe a RBFNeuronPlacer 
-class KNearestRBFNeuronPlacer : public AbstractNonReliableRBFNeuronPlacer
+namespace LightBulb
 {
-protected:
-public:
-	void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) override;
-	AbstractRBFNeuronPlacer* getCopy() override;
-};
+	// Forward declarations
+	class RBFNetwork;
+	class Teacher;
+
+	// This class contains all stuff needed to describe a RBFNeuronPlacer 
+	class KNearestRBFNeuronPlacer : public AbstractNonReliableRBFNeuronPlacer
+	{
+	protected:
+	public:
+		void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) override;
+		AbstractRBFNeuronPlacer* getCopy() override;
+	};
+}
 
 #endif

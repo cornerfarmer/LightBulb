@@ -8,19 +8,22 @@
 // Includes
 #include "Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
 
-// Forward declarations
-class AbstractEvolutionObject;
-
-// A algorithm which combines two given evolution objects by executing the corresponding EvolutionStrategy algorithm
-class RecombinationAlgorithm : public AbstractRecombinationAlgorithm
+namespace LightBulb
 {
-private:
-	bool useAverageForWeight;
-	bool useAverageForMutationStrength;
-public:
-	RecombinationAlgorithm(bool useAverageForWeight_ = true, bool useAverageForMutationStrength_ = true);
-	// The algorithm calculates a simple average between the two given objects.
-	void execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2) override;
-};
+	// Forward declarations
+	class AbstractEvolutionObject;
+
+	// A algorithm which combines two given evolution objects by executing the corresponding EvolutionStrategy algorithm
+	class RecombinationAlgorithm : public AbstractRecombinationAlgorithm
+	{
+	private:
+		bool useAverageForWeight;
+		bool useAverageForMutationStrength;
+	public:
+		RecombinationAlgorithm(bool useAverageForWeight_ = true, bool useAverageForMutationStrength_ = true);
+		// The algorithm calculates a simple average between the two given objects.
+		void execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2) override;
+	};
+}
 
 #endif

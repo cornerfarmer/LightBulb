@@ -9,19 +9,22 @@
 // Includes
 #include "AbstractLogger.hpp"
 
-// Forward declarations
-
-class StorageLogger : public AbstractLogger
+namespace LightBulb
 {
-	template <class Archive>
-	friend void serialize(Archive& archive, StorageLogger& storageLogger);
-protected:
-	std::vector<std::pair<LogLevel, std::string>> messages;
-public:
-	StorageLogger();
-	void log(std::string message, LogLevel level) override;
-	std::vector<std::pair<LogLevel, std::string>>* getMessages();
-};
+	// Forward declarations
+
+	class StorageLogger : public AbstractLogger
+	{
+		template <class Archive>
+		friend void serialize(Archive& archive, StorageLogger& storageLogger);
+	protected:
+		std::vector<std::pair<LogLevel, std::string>> messages;
+	public:
+		StorageLogger();
+		void log(std::string message, LogLevel level) override;
+		std::vector<std::pair<LogLevel, std::string>>* getMessages();
+	};
+}
 
 #include "IO/StorageLoggerIO.hpp"
 

@@ -8,12 +8,15 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository)
+namespace LightBulb
 {
-	onlyUseNeuralNetworkIndex = true;
-	archive(cereal::make_nvp("trainingPlans", trainingPlanRepository.trainingPlans));
-	trainingPlanRepository.throwEvent(EVT_TP_CHANGED, &trainingPlanRepository);
+	template <class Archive>
+	void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository)
+	{
+		onlyUseNeuralNetworkIndex = true;
+		archive(cereal::make_nvp("trainingPlans", trainingPlanRepository.trainingPlans));
+		trainingPlanRepository.throwEvent(EVT_TP_CHANGED, &trainingPlanRepository);
+	}
 }
 
 #endif

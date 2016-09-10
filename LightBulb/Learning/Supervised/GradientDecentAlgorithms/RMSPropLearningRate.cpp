@@ -3,50 +3,52 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
-
-RMSPropLearningRate::RMSPropLearningRate(RMSPropLearningRateOptions& options_)
-	: AbstractGradientDecentAlgorithm(new RMSPropLearningRateOptions(options_)) 
+namespace LightBulb
 {
-}
-
-RMSPropLearningRate::RMSPropLearningRate()
-	:AbstractGradientDecentAlgorithm(new RMSPropLearningRateOptions())
-{
-}
-
-
-RMSPropLearningRateOptions* RMSPropLearningRate::getOptions()
-{
-	return static_cast<RMSPropLearningRateOptions*>(options.get());
-}
-
-void RMSPropLearningRate::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
-{
-	// Make sure the previous learning rates map is empty
-	prevGradient.resize(networkTopology->getAllWeights()->size());
-	for (int i = 0; i < prevGradient.size(); i++)
+	RMSPropLearningRate::RMSPropLearningRate(RMSPropLearningRateOptions& options_)
+		: AbstractGradientDecentAlgorithm(new RMSPropLearningRateOptions(options_))
 	{
-		prevGradient[i].resizeLike(networkTopology->getAllWeights()->at(i));
-		prevGradient[i].setZero();
 	}
-	prevSquaredGradient = prevGradient;
-	prevDeltaWeights = prevGradient;
-}
+
+	RMSPropLearningRate::RMSPropLearningRate()
+		: AbstractGradientDecentAlgorithm(new RMSPropLearningRateOptions())
+	{
+	}
 
 
-Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
-{
-	prevGradient[layerIndex - 1] = getOptions()->gradientMomentum * prevGradient[layerIndex - 1] + (1 - getOptions()->gradientMomentum) * gradients;
-	prevSquaredGradient[layerIndex - 1] = getOptions()->squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - getOptions()->squaredGradientMomentum) * gradients.cwiseAbs2();
-	
-	prevDeltaWeights[layerIndex - 1] = getOptions()->deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1] - getOptions()->learningRate * gradients.cwiseQuotient(((prevSquaredGradient[layerIndex - 1].array() - prevGradient[layerIndex - 1].cwiseAbs2().array() + getOptions()->minSquaredGradient).cwiseSqrt()).matrix());
+	RMSPropLearningRateOptions* RMSPropLearningRate::getOptions()
+	{
+		return static_cast<RMSPropLearningRateOptions*>(options.get());
+	}
 
-	return prevDeltaWeights[layerIndex - 1];
-}
+	void RMSPropLearningRate::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
+	{
+		// Make sure the previous learning rates map is empty
+		prevGradient.resize(networkTopology->getAllWeights()->size());
+		for (int i = 0; i < prevGradient.size(); i++)
+		{
+			prevGradient[i].resizeLike(networkTopology->getAllWeights()->at(i));
+			prevGradient[i].setZero();
+		}
+		prevSquaredGradient = prevGradient;
+		prevDeltaWeights = prevGradient;
+	}
 
 
-bool RMSPropLearningRate::learningHasStopped()
-{
-	return false;
+	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
+	{
+		prevGradient[layerIndex - 1] = getOptions()->gradientMomentum * prevGradient[layerIndex - 1] + (1 - getOptions()->gradientMomentum) * gradients;
+		prevSquaredGradient[layerIndex - 1] = getOptions()->squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - getOptions()->squaredGradientMomentum) * gradients.cwiseAbs2();
+
+		prevDeltaWeights[layerIndex - 1] = getOptions()->deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1] - getOptions()->learningRate * gradients.cwiseQuotient(((prevSquaredGradient[layerIndex - 1].array() - prevGradient[layerIndex - 1].cwiseAbs2().array() + getOptions()->minSquaredGradient).cwiseSqrt()).matrix());
+
+		return prevDeltaWeights[layerIndex - 1];
+	}
+
+
+	bool RMSPropLearningRate::learningHasStopped()
+	{
+		return false;
+	}
 }
 

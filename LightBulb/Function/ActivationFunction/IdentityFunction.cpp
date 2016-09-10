@@ -4,42 +4,45 @@
 #include <limits>
 #include <stdexcept>
 
-double IdentityFunction::execute(double input)
+namespace LightBulb
 {
-	return input;
-}
+	double IdentityFunction::execute(double input)
+	{
+		return input;
+	}
 
-void IdentityFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs)
-{
-	*activations[layerNr] = netInputs[layerNr];
-}
+	void IdentityFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs)
+	{
+		*activations[layerNr] = netInputs[layerNr];
+	}
 
-double IdentityFunction::executeDerivation(double input)
-{
-	return 1;
-}
+	double IdentityFunction::executeDerivation(double input)
+	{
+		return 1;
+	}
 
-AbstractActivationFunction* IdentityFunction::getActivationFunctionCopy()
-{
-	return new IdentityFunction(*this);
-}
+	AbstractActivationFunction* IdentityFunction::getActivationFunctionCopy()
+	{
+		return new IdentityFunction(*this);
+	}
 
-AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
-{
-	return new IdentityFunction(*this);
-}
+	AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
+	{
+		return new IdentityFunction(*this);
+	}
 
-double IdentityFunction::getMaximum()
-{
-	throw std::logic_error("A IdentityFunction does not have a maximum");
-}
+	double IdentityFunction::getMaximum()
+	{
+		throw std::logic_error("A IdentityFunction does not have a maximum");
+	}
 
-double IdentityFunction::getMinimum()
-{
-	throw std::logic_error("A IdentityFunction does not have a maximum");
-}
+	double IdentityFunction::getMinimum()
+	{
+		throw std::logic_error("A IdentityFunction does not have a maximum");
+	}
 
-bool IdentityFunction::hasAMaxAndMinimum()
-{
-	return false;
+	bool IdentityFunction::hasAMaxAndMinimum()
+	{
+		return false;
+	}
 }

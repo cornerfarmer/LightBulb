@@ -2,19 +2,22 @@
 #include "Windows/LoggerFactory.hpp"
 #include "LoggerController.hpp"
 
-LoggerFactory::LoggerFactory(TrainingPlanRepository* trainingPlanRepository_)
+namespace LightBulb
 {
-	trainingPlanRepository = trainingPlanRepository_;
-}
+	LoggerFactory::LoggerFactory(TrainingPlanRepository* trainingPlanRepository_)
+	{
+		trainingPlanRepository = trainingPlanRepository_;
+	}
 
-AbstractSubApp* LoggerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
-{
-	LoggerController* controller = new LoggerController(mainApp, trainingPlanRepository, parent);
-	controller->getWindow()->Show();
-	return controller;
-}
+	AbstractSubApp* LoggerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
+	{
+		LoggerController* controller = new LoggerController(mainApp, trainingPlanRepository, parent);
+		controller->getWindow()->Show();
+		return controller;
+	}
 
-std::string LoggerFactory::getLabel()
-{
-	return LoggerController::getLabel();
+	std::string LoggerFactory::getLabel()
+	{
+		return LoggerController::getLabel();
+	}
 }

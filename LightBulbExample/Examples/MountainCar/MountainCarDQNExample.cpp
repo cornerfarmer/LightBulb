@@ -29,6 +29,8 @@
 #define PREFERENCE_DISCOUNT_FACTOR "Discount factor"
 #define PREFERENCE_REPLACE_STORED_TRANSITIONS "Replace stored transitions"
 
+using namespace LightBulb;
+
 AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;

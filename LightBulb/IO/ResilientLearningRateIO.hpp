@@ -11,22 +11,24 @@
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, ResilientLearningRate & resilientLearningRate)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractGradientDecentAlgorithm>(&resilientLearningRate));
-	archive(cereal::make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
+	template <class Archive>
+	void serialize(Archive& archive, ResilientLearningRate & resilientLearningRate)
+	{
+		archive(cereal::base_class<AbstractGradientDecentAlgorithm>(&resilientLearningRate));
+		archive(cereal::make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
+	}
 }
-
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(ResilientLearningRate, AbstractGradientDecentAlgorithm)
+	CONSTRUCT_EXISTING(LightBulb::ResilientLearningRate, LightBulb::AbstractGradientDecentAlgorithm)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, ResilientLearningRate & resilientLearningRate)
+		static void construct(Archive& ar, LightBulb::ResilientLearningRate & resilientLearningRate)
 		{
-			ar(cereal::base_class<AbstractGradientDecentAlgorithm>(&resilientLearningRate));
+			ar(cereal::base_class<LightBulb::AbstractGradientDecentAlgorithm>(&resilientLearningRate));
 			ar(cereal::make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
 		}
 	};
@@ -34,6 +36,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(ResilientLearningRate);
+CEREAL_REGISTER_TYPE(LightBulb::ResilientLearningRate);
 
 #endif

@@ -8,19 +8,22 @@
 #include <wx/wxprec.h>
 #include "AbstractWindow.hpp"
 
-// Forward declarations
-class AbstractSubApp;
-
-// A chart which shows the location of neurons
-class AbstractSubAppWindow : public AbstractWindow
+namespace LightBulb
 {
-private:
-	AbstractSubApp* getController();
-protected:
-	virtual void close(wxCloseEvent& event);
-public:
-	AbstractSubAppWindow(AbstractSubApp* controller_, std::string label, AbstractWindow* parent);
-	
-};
+	// Forward declarations
+	class AbstractSubApp;
+
+	// A chart which shows the location of neurons
+	class AbstractSubAppWindow : public AbstractWindow
+	{
+	private:
+		AbstractSubApp* getController();
+	protected:
+		virtual void close(wxCloseEvent& event);
+	public:
+		AbstractSubAppWindow(AbstractSubApp* controller_, std::string label, AbstractWindow* parent);
+
+	};
+}
 
 #endif

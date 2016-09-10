@@ -10,18 +10,21 @@
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, FermiFunction& fermiFunction)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("temperatureParameter", fermiFunction.temperatureParameter));
+	template <class Archive>
+	void serialize(Archive& archive, FermiFunction& fermiFunction)
+	{
+		archive(cereal::make_nvp("temperatureParameter", fermiFunction.temperatureParameter));
+	}
 }
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<FermiFunction>
+	template <> struct LoadAndConstruct<LightBulb::FermiFunction>
 	{
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<FermiFunction>& construct)
+		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::FermiFunction>& construct)
 		{
 			double temperatureParameter;
 			ar(cereal::make_nvp("temperatureParameter", temperatureParameter));
@@ -33,6 +36,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(FermiFunction);
+CEREAL_REGISTER_TYPE(LightBulb::FermiFunction);
 
 #endif

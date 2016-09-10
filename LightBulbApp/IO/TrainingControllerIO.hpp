@@ -8,14 +8,17 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, TrainingController& trainingController)
+namespace LightBulb
 {
-	serialize(archive, *trainingController.neuralNetworkRepository);
+	template <class Archive>
+	void serialize(Archive& archive, TrainingController& trainingController)
+	{
+		serialize(archive, *trainingController.neuralNetworkRepository);
 
-	IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(trainingController.neuralNetworkRepository->getNeuralNetworks());
-	serialize(archive, *trainingController.trainingPlanRepository);
-	IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
+		IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(trainingController.neuralNetworkRepository->getNeuralNetworks());
+		serialize(archive, *trainingController.trainingPlanRepository);
+		IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
+	}
 }
 
 

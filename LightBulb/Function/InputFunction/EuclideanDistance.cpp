@@ -4,12 +4,15 @@
 #include <stdexcept>
 #include <math.h>
 
-void EuclideanDistance::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights)
+namespace LightBulb
 {
-	netInputs[layerNr].noalias() = (weights[layerNr - 1].rowwise() - activations[layerNr - 1]->transpose()).rowwise().squaredNorm().cwiseSqrt().transpose();
-}
+	void EuclideanDistance::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights)
+	{
+		netInputs[layerNr].noalias() = (weights[layerNr - 1].rowwise() - activations[layerNr - 1]->transpose()).rowwise().squaredNorm().cwiseSqrt().transpose();
+	}
 
-AbstractInputFunction* EuclideanDistance::getInputFunctionCopy()
-{
-	return new EuclideanDistance(*this);
+	AbstractInputFunction* EuclideanDistance::getInputFunctionCopy()
+	{
+		return new EuclideanDistance(*this);
+	}
 }

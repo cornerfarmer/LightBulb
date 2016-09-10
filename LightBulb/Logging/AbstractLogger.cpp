@@ -1,26 +1,29 @@
 // Includes
 #include "Logging/AbstractLogger.hpp"
 
-AbstractLogger::AbstractLogger(LogLevel currentLogLevel_)
+namespace LightBulb
 {
-	currentLogLevel = currentLogLevel_;
-}
-
-void AbstractLogger::log(std::string message, LogLevel level)
-{
-	if (level <= currentLogLevel)
+	AbstractLogger::AbstractLogger(LogLevel currentLogLevel_)
 	{
-		outputMessage(message);
-		throwEvent(EVT_LG_LOGADDED, this);
+		currentLogLevel = currentLogLevel_;
 	}
-}
 
-void AbstractLogger::setLogLevel(LogLevel level)
-{
-	currentLogLevel = level;
-}
+	void AbstractLogger::log(std::string message, LogLevel level)
+	{
+		if (level <= currentLogLevel)
+		{
+			outputMessage(message);
+			throwEvent(EVT_LG_LOGADDED, this);
+		}
+	}
 
-LogLevel AbstractLogger::getLogLevel()
-{
-	return currentLogLevel;
+	void AbstractLogger::setLogLevel(LogLevel level)
+	{
+		currentLogLevel = level;
+	}
+
+	LogLevel AbstractLogger::getLogLevel()
+	{
+		return currentLogLevel;
+	}
 }

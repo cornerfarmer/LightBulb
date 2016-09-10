@@ -12,20 +12,23 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, EvolutionLearningRule& learningRule)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
+	template <class Archive>
+	void serialize(Archive& archive, EvolutionLearningRule& learningRule)
+	{
+		archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
+	}
 }
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(EvolutionLearningRule, AbstractLearningRule)
+	CONSTRUCT_EXISTING(LightBulb::EvolutionLearningRule, LightBulb::AbstractLearningRule)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, EvolutionLearningRule& learningRule)
+		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule)
 		{
-			ar(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
+			ar(cereal::base_class<LightBulb::AbstractEvolutionLearningRule>(&learningRule));
 			learningRule.setHelperToUsedObjects();
 		}
 	};
@@ -33,6 +36,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(EvolutionLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::EvolutionLearningRule);
 
 #endif

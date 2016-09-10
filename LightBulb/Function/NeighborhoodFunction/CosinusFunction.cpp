@@ -7,13 +7,15 @@
 #include "Neuron/StandardNeuron.hpp"
 // Library includes
 
-
-double CosinusFunction::execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
+namespace LightBulb
 {
-	return cos(std::min((*structure->getNeighborhoodDistances())[neuron][activatedNeuron] / maxDistance * M_PI / 2, M_PI / 2)); 
-}
+	double CosinusFunction::execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance)
+	{
+		return cos(std::min((*structure->getNeighborhoodDistances())[neuron][activatedNeuron] / maxDistance * M_PI / 2, M_PI / 2));
+	}
 
-AbstractNeighborhoodFunction* CosinusFunction::getNeighborhoodFunctionCopy()
-{
-	return new CosinusFunction(*this);
+	AbstractNeighborhoodFunction* CosinusFunction::getNeighborhoodFunctionCopy()
+	{
+		return new CosinusFunction(*this);
+	}
 }

@@ -11,21 +11,24 @@
 #include "Function/SelectionFunction/AbstractSelectionFunction.hpp"
 #include <memory>
 
-// Forward declarations
-
-// A command which selects the best N objects for mutation/recombination
-class StochasticUniversalSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
+namespace LightBulb
 {
-private:
-	std::unique_ptr<AbstractSelectionFunction> randomFunction;
-	void select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
-protected:
-	void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-	void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-public:
-	StochasticUniversalSamplingSelector();
-	void setRandomFunction(AbstractSelectionFunction* randomFunction_);
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
-};
+	// Forward declarations
+
+	// A command which selects the best N objects for mutation/recombination
+	class StochasticUniversalSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
+	{
+	private:
+		std::unique_ptr<AbstractSelectionFunction> randomFunction;
+		void select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	protected:
+		void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	public:
+		StochasticUniversalSamplingSelector();
+		void setRandomFunction(AbstractSelectionFunction* randomFunction_);
+		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+	};
+}
 
 #endif

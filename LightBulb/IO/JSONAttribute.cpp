@@ -1,13 +1,16 @@
 // Includes
 #include "IO/JSONAttribute.hpp"
 
-std::string JSONAttribute::toString()
+namespace LightBulb
 {
-	return "\"" + name + "\":" + value->toString();
-}
+	std::string JSONAttribute::toString()
+	{
+		return "\"" + name + "\":" + value->toString();
+	}
 
-JSONAttribute::JSONAttribute(std::string name_, AbstractJSONElement* value_)
-{
-	name = name_;
-	value.reset(value_);
+	JSONAttribute::JSONAttribute(std::string name_, AbstractJSONElement* value_)
+	{
+		name = name_;
+		value.reset(value_);
+	}
 }

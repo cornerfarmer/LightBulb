@@ -13,35 +13,38 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-template <class Archive>
-void save(Archive& archive, AbstractSimpleEvolutionWorld const& world)
+namespace LightBulb
 {
-	std::vector<std::unique_ptr<AbstractEvolutionObject>> objects;
-	for (auto worldObject = world.objects.begin(); worldObject != world.objects.end(); worldObject++)	
-		objects.push_back(std::unique_ptr<AbstractEvolutionObject>(*worldObject));
-
-	archive(cereal::make_nvp("objects", objects));
-
-	for (auto object = objects.begin(); object != objects.end(); object++)
-		object->release();
-}
-
-template <class Archive>
-void load(Archive& archive, AbstractSimpleEvolutionWorld& world)
-{
-	std::vector<std::unique_ptr<AbstractEvolutionObject>> objects;
-	IOStorage<AbstractEvolutionWorld>::push(&world);
-	archive(cereal::make_nvp("objects", objects));
-	IOStorage<AbstractEvolutionWorld>::clear();
-
-	for (auto object = objects.begin(); object != objects.end(); object++)
+	template <class Archive>
+	void save(Archive& archive, AbstractSimpleEvolutionWorld const& world)
 	{
-		world.objects.push_back(object->release());
+		std::vector<std::unique_ptr<AbstractEvolutionObject>> objects;
+		for (auto worldObject = world.objects.begin(); worldObject != world.objects.end(); worldObject++)
+			objects.push_back(std::unique_ptr<AbstractEvolutionObject>(*worldObject));
+
+		archive(cereal::make_nvp("objects", objects));
+
+		for (auto object = objects.begin(); object != objects.end(); object++)
+			object->release();
+	}
+
+	template <class Archive>
+	void load(Archive& archive, AbstractSimpleEvolutionWorld& world)
+	{
+		std::vector<std::unique_ptr<AbstractEvolutionObject>> objects;
+		IOStorage<AbstractEvolutionWorld>::push(&world);
+		archive(cereal::make_nvp("objects", objects));
+		IOStorage<AbstractEvolutionWorld>::clear();
+
+		for (auto object = objects.begin(); object != objects.end(); object++)
+		{
+			world.objects.push_back(object->release());
+		}
 	}
 }
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(AbstractSimpleEvolutionWorld);
+CEREAL_REGISTER_TYPE(LightBulb::AbstractSimpleEvolutionWorld);
 
 #endif

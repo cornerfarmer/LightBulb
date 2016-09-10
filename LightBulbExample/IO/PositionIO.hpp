@@ -14,14 +14,14 @@
 template <class Archive>
 void save(Archive& archive, Position const& object)
 {
-	archive(cereal::base_class<AbstractSimpleEvolutionObject>(&object));
+	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionObject>(&object));
 	archive(cereal::make_nvp("position", object.position));
 }
 
 template <class Archive>
 void load(Archive& archive, Position& object)
 {
-	archive(cereal::base_class<AbstractSimpleEvolutionObject>(&object));
+	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionObject>(&object));
 	archive(cereal::make_nvp("position", object.position));
 }
 

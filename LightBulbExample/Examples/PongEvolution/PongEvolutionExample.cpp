@@ -48,6 +48,8 @@
 #define PREFERENCE_WEIGHTDECAY_FAC "Weight decay fac"
 #define PREFERENCE_CREATE_UP_TO "Create up to"
 
+using namespace LightBulb;
+
 AbstractLearningRule* PongEvolutionExample::createLearningRate()
 {
 

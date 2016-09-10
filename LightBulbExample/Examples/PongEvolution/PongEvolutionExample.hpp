@@ -6,30 +6,30 @@
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
-struct FeedForwardNetworkTopologyOptions;
+struct LightBulb::FeedForwardNetworkTopologyOptions;
 class SharedSamplingCombiningStrategy;
-class AbstractHallOfFameAlgorithm;
+class LightBulb::AbstractHallOfFameAlgorithm;
 
-class PongEvolutionExample : public AbstractCoevolutionTrainingPlan
+class PongEvolutionExample : public LightBulb::AbstractCoevolutionTrainingPlan
 {
 private:
-	AbstractHallOfFameAlgorithm* hof1;
-	AbstractHallOfFameAlgorithm* hof2;
+	LightBulb::AbstractHallOfFameAlgorithm* hof1;
+	LightBulb::AbstractHallOfFameAlgorithm* hof2;
 	SharedSamplingCombiningStrategy* cs1;
 	SharedSamplingCombiningStrategy* cs2;
 protected:
-	AbstractLearningRule* createLearningRate() override;
-	FeedForwardNetworkTopologyOptions getNetworkOptions();
-	AbstractEvolutionWorld* createWorld() override;
-	AbstractEvolutionWorld* createParasiteWorld() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
+	LightBulb::FeedForwardNetworkTopologyOptions getNetworkOptions();
+	LightBulb::AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractEvolutionWorld* createParasiteWorld() override;
 public:
 	PongEvolutionExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 };
 
-USE_PARENT_SERIALIZATION(PongEvolutionExample, AbstractCoevolutionTrainingPlan);
+USE_PARENT_SERIALIZATION(PongEvolutionExample, LightBulb::AbstractCoevolutionTrainingPlan);
 
 #endif

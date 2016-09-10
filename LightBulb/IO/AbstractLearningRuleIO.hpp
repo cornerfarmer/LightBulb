@@ -8,12 +8,15 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, AbstractLearningRule& learningRule)
+namespace LightBulb
 {
-	IOStorage<std::map<std::string, bool>>::push(&learningRule.options->disabledDataSets);
-	archive(cereal::make_nvp("learningState", learningRule.learningState));
-	archive(cereal::make_nvp("randomGenerator", learningRule.randomGenerator));
+	template <class Archive>
+	void serialize(Archive& archive, AbstractLearningRule& learningRule)
+	{
+		IOStorage<std::map<std::string, bool>>::push(&learningRule.options->disabledDataSets);
+		archive(cereal::make_nvp("learningState", learningRule.learningState));
+		archive(cereal::make_nvp("randomGenerator", learningRule.randomGenerator));
+	}
 }
 
 #endif

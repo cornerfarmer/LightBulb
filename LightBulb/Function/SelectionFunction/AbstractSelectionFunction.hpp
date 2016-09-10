@@ -9,13 +9,16 @@
 // Library includes
 #include <vector>
 
-class AbstractSelectionFunction : public AbstractRandomGeneratorUser
+namespace LightBulb
 {
-private:
-public:
-	// Inherited:	
-	virtual int execute(const std::vector<double> &probabilities) = 0;
-	virtual std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) = 0;
-};
+	class AbstractSelectionFunction : public AbstractRandomGeneratorUser
+	{
+	private:
+	public:
+		// Inherited:	
+		virtual int execute(const std::vector<double> &probabilities) = 0;
+		virtual std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) = 0;
+	};
+}
 
 #endif

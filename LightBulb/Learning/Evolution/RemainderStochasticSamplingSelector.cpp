@@ -7,75 +7,78 @@
 #include <stdexcept>
 #include <algorithm>
 
-void RemainderStochasticSamplingSelector::select(bool recombination, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+namespace LightBulb
 {
-	double totalFitness = 0;
-
-	// Go through all not selected objects
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	void RemainderStochasticSamplingSelector::select(bool recombination, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		totalFitness += entry->first;
-	}
+		double totalFitness = 0;
 
-	std::vector<double> secondChance;
-
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
-	{
-		int selectionCount = entry->first / totalFitness * objectCount;
-		for (int i = 0; i < selectionCount; i++)
+		// Go through all not selected objects
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
-			if (recombination) 
-				addObjectToRecombination(entry->second);
-			else
-				addObjectToMutate(entry->second);
+			totalFitness += entry->first;
 		}
-		if (withReplacement) {
-			if (totalFitness != 0)
+
+		std::vector<double> secondChance;
+
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			int selectionCount = entry->first / totalFitness * objectCount;
+			for (int i = 0; i < selectionCount; i++)
 			{
-				secondChance.push_back(entry->first / totalFitness * objectCount - selectionCount);
+				if (recombination)
+					addObjectToRecombination(entry->second);
+				else
+					addObjectToMutate(entry->second);
+			}
+			if (withReplacement) {
+				if (totalFitness != 0)
+				{
+					secondChance.push_back(entry->first / totalFitness * objectCount - selectionCount);
+				}
+				else
+				{
+					secondChance.push_back(0);
+				}
 			}
 			else
-			{
-				secondChance.push_back(0);
-			}
+				secondChance.push_back(entry->first);
 		}
-		else
-			secondChance.push_back(entry->first);
+
+		while ((recombination && getRecombinationSelection()->size() < objectCount) || (!recombination && getMutationSelection()->size() < objectCount))
+		{
+			if (recombination)
+				addObjectToRecombination((*highscore)[randomFunction->execute(secondChance)].second);
+			else
+				addObjectToMutate((*highscore)[randomFunction->execute(secondChance)].second);
+		}
 	}
 
-	while ((recombination && getRecombinationSelection()->size() < objectCount) || (!recombination && getMutationSelection()->size() < objectCount))
+	void RemainderStochasticSamplingSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		if (recombination)
-			addObjectToRecombination((*highscore)[randomFunction->execute(secondChance)].second);
-		else
-			addObjectToMutate((*highscore)[randomFunction->execute(secondChance)].second);
+		select(false, mutationCount, highscore);
 	}
-}
 
-void RemainderStochasticSamplingSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	select(false, mutationCount, highscore);
-}
+	void RemainderStochasticSamplingSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	{
+		select(true, recombinationCount * 2, highscore);
+		std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
+	}
 
-void RemainderStochasticSamplingSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	select(true, recombinationCount * 2, highscore);
-	std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
-}
+	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
+	{
+		withReplacement = withReplacement_;
+		setRandomFunction(new RouletteWheelSelectionFunction());
+	}
 
-RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
-{
-	withReplacement = withReplacement_;
-	setRandomFunction(new RouletteWheelSelectionFunction());
-}
+	void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
+	{
+		randomFunction.reset(randomFunction_);
+	}
 
-void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
-{
-	randomFunction.reset(randomFunction_);
-}
-
-void RemainderStochasticSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
-{
-	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-	randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
+	void RemainderStochasticSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	{
+		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+		randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
+	}
 }

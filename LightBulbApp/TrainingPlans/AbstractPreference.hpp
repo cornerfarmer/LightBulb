@@ -10,31 +10,34 @@
 #include <memory>
 #include <vector>
 
-// Forward declarations
-
-class AbstractPreference
+namespace LightBulb
 {
-	template <class Archive>
-	friend void save(Archive& archive, AbstractPreference const& preference);
-	template <class Archive>
-	friend void load(Archive& archive, AbstractPreference& preference);
-protected:
-	std::string name;
+	// Forward declarations
 
-	virtual std::string getValueAsString() = 0;
-public:
-	virtual ~AbstractPreference() {}
+	class AbstractPreference
+	{
+		template <class Archive>
+		friend void save(Archive& archive, AbstractPreference const& preference);
+		template <class Archive>
+		friend void load(Archive& archive, AbstractPreference& preference);
+	protected:
+		std::string name;
 
-	virtual AbstractPreference* getCopy() = 0;
+		virtual std::string getValueAsString() = 0;
+	public:
+		virtual ~AbstractPreference() {}
 
-	AbstractPreference(std::string name_);
+		virtual AbstractPreference* getCopy() = 0;
 
-	AbstractPreference() = default;
+		AbstractPreference(std::string name_);
 
-	std::string getName();
+		AbstractPreference() = default;
 
-	std::string toString();
-};
+		std::string getName();
+
+		std::string toString();
+	};
+}
 
 #include "IO/AbstractPreferenceIO.hpp"
 

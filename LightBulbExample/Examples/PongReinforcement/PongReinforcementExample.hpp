@@ -10,22 +10,22 @@ class PongReinforcementWorld;
 class AbstractReinforcementWorld;
 struct FeedForwardNetworkTopologyOptions;
 
-class PongReinforcementExample : public AbstractLearningRuleTrainingPlan
+class PongReinforcementExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
 	PongReinforcementWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 	PongReinforcementWorld* createWorld();
 public:
 	PongReinforcementExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 	PongReinforcementWorld* getWorld();
 };
 
-USE_PARENT_SERIALIZATION(PongReinforcementExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(PongReinforcementExample, LightBulb::AbstractLearningRuleTrainingPlan);
 
 #endif

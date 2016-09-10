@@ -1,20 +1,23 @@
 // Includes
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 
-void AbstractActivationFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs)
+namespace LightBulb
 {
-	for (auto i = 0; i < netInputs[layerNr].rows(); i++)
+	void AbstractActivationFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs)
 	{
-		(*activations[layerNr])(i) = execute(netInputs[layerNr](i));
+		for (auto i = 0; i < netInputs[layerNr].rows(); i++)
+		{
+			(*activations[layerNr])(i) = execute(netInputs[layerNr](i));
+		}
 	}
-}
 
-Eigen::VectorXd AbstractActivationFunction::executeDerivation(Eigen::VectorXd input)
-{
-	Eigen::VectorXd output(input.rows());
-	for (auto i = 0; i < input.rows(); i++)
+	Eigen::VectorXd AbstractActivationFunction::executeDerivation(Eigen::VectorXd input)
 	{
-		output(i) = executeDerivation(input(i));
+		Eigen::VectorXd output(input.rows());
+		for (auto i = 0; i < input.rows(); i++)
+		{
+			output(i) = executeDerivation(input(i));
+		}
+		return output;
 	}
-	return output;
 }

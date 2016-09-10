@@ -20,6 +20,8 @@
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include <Learning/Evolution/ScoreCondition.hpp>
 
+using namespace LightBulb;
+
 AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 {
 	

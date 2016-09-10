@@ -5,18 +5,21 @@
 
 #include "Lib/ziggurat.hpp"
 
-class ZigguratGenerator
+namespace LightBulb
 {
-private:
-	static float fn[128];
-	static uint32_t kn[128];
-	static float wn[129];
-	static bool initialized;
-	static uint32_t seed;
+	class ZigguratGenerator
+	{
+	private:
+		static float fn[128];
+		static uint32_t kn[128];
+		static float wn[129];
+		static bool initialized;
+		static uint32_t seed;
 
-	static void initialize();
-public:
-	static float next();
-};
+		static void initialize();
+	public:
+		static float next();
+	};
+}
 
 #endif

@@ -12,7 +12,7 @@
 class EvolutionLearningRule;
 class FunctionSimulator;
 
-class Position : public AbstractSimpleEvolutionObject
+class Position : public LightBulb::AbstractSimpleEvolutionObject
 {
 	template <class Archive>
 	friend void save(Archive& archive, Position const& object);

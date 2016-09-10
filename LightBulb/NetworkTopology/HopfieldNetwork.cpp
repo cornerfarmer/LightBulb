@@ -11,30 +11,33 @@
 //  Library includes
 #include <algorithm>  
 
-HopfieldNetwork::HopfieldNetwork(unsigned int neuronCount, bool binaryActivationFunction)
+namespace LightBulb
 {
-	// Check if all given options are correct
-	if (neuronCount == 0)
-		throw std::invalid_argument("The given neuronCount has to be greater than 0");
-
-	// Create a new options object
-	options.reset(new FreeNetworkOptions());
-	// Set all options
-	options->inputNeuronsIndices.resize(neuronCount);
-	options->outputNeuronsIndices.resize(neuronCount);
-	for (int i = 0; i < neuronCount; i++)
+	HopfieldNetwork::HopfieldNetwork(unsigned int neuronCount, bool binaryActivationFunction)
 	{
-		options->inputNeuronsIndices[i] = i;
-		options->outputNeuronsIndices[i] = i;
+		// Check if all given options are correct
+		if (neuronCount == 0)
+			throw std::invalid_argument("The given neuronCount has to be greater than 0");
+
+		// Create a new options object
+		options.reset(new FreeNetworkOptions());
+		// Set all options
+		options->inputNeuronsIndices.resize(neuronCount);
+		options->outputNeuronsIndices.resize(neuronCount);
+		for (int i = 0; i < neuronCount; i++)
+		{
+			options->inputNeuronsIndices[i] = i;
+			options->outputNeuronsIndices[i] = i;
+		}
+		options->useBiasNeuron = false;
+		options->selfReferencingEdges = false;
+		options->neuronCount = neuronCount;
+		// Define thresholds and functions
+		throw new std::exception("currently not working");
+		//options->neuronFactory = new SameNeuronDescriptionFactory(new NetworkDescription(new WeightedSumFunction(), (binaryActivationFunction ? static_cast<AbstractActivationFunction*>(new BinaryFunction(-1)) : static_cast<AbstractActivationFunction*>(new FermiFunction(0.1)))));
+
+		// Build the network
+		buildNetwork();
+
 	}
-	options->useBiasNeuron = false;
-	options->selfReferencingEdges = false;
-	options->neuronCount = neuronCount;
-	// Define thresholds and functions
-	throw new std::exception("currently not working");
-	//options->neuronFactory = new SameNeuronDescriptionFactory(new NetworkDescription(new WeightedSumFunction(), (binaryActivationFunction ? static_cast<AbstractActivationFunction*>(new BinaryFunction(-1)) : static_cast<AbstractActivationFunction*>(new FermiFunction(0.1)))));
-
-	// Build the network
-	buildNetwork();
-
 }

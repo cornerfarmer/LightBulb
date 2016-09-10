@@ -17,6 +17,8 @@ enum
 	TOOLBAR_START_WATCHMODE,
 };
 
+using namespace LightBulb;
+
 MountainCarWindow::MountainCarWindow(MountainCarController* controller_, AbstractWindow* parent)
 	:AbstractSubAppWindow(controller_, MountainCarWindow::getLabel(), parent)
 {

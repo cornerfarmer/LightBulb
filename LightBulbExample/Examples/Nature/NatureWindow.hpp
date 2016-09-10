@@ -12,7 +12,7 @@ class NatureController;
 
 wxDECLARE_EVENT(NATURE_EVT_FIELD_CHANGED, wxThreadEvent);
 
-class NatureWindow : public AbstractSubAppWindow
+class NatureWindow : public LightBulb::AbstractSubAppWindow
 {
 private:
 	wxPanel* panel;
@@ -21,7 +21,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	NatureWindow(NatureController* controller_, AbstractWindow* parent = NULL);
+	NatureWindow(NatureController* controller_, LightBulb::AbstractWindow* parent = NULL);
 	void paintEvent(wxPaintEvent & evt);
 	void resize(wxSizeEvent & evt);
 	void paintNow();

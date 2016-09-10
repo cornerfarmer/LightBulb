@@ -16,25 +16,25 @@
 template <class Archive>
 void save(Archive& archive, NetworkSimulator const& world)
 {
-	archive(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
+	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
 	archive(cereal::make_nvp("consumers", world.consumers));
 }
 
 template <class Archive>
 void load(Archive& archive, NetworkSimulator& world)
 {
-	archive(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
+	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
 	archive(cereal::make_nvp("consumers", world.consumers));
 }
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(NetworkSimulator, AbstractEvolutionWorld)
+	CONSTRUCT_EXISTING(NetworkSimulator, LightBulb::AbstractEvolutionWorld)
 	{
 		template <class Archive>
 		static void construct(Archive& ar, NetworkSimulator& world)
 		{
-			ar(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
+			ar(cereal::base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
 			ar(cereal::make_nvp("consumers", world.consumers));
 		}
 	};

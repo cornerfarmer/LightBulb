@@ -9,11 +9,14 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, AbstractReinforcementWorld& world)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("neuralNetwork", world.neuralNetwork));
-	archive(cereal::make_nvp("epsilon", world.epsilon));
+	template <class Archive>
+	void serialize(Archive& archive, AbstractReinforcementWorld& world)
+	{
+		archive(cereal::make_nvp("neuralNetwork", world.neuralNetwork));
+		archive(cereal::make_nvp("epsilon", world.epsilon));
+	}
 }
 
 #endif

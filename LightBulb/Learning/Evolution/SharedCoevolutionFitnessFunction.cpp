@@ -1,37 +1,40 @@
 // Includes
 #include "Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
 
-std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
+namespace LightBulb
 {
-	std::map<AbstractEvolutionObject*, std::map<int, int>> winCounter;
-
-	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
+	std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
 	{
-		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
-		{
-			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
-			{
-				if (result->second)
-					winCounter[resultsPerCombination->first][result->first]++;
-			}
-		}
-	}
+		std::map<AbstractEvolutionObject*, std::map<int, int>> winCounter;
 
-	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
-
-	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
-	{
-		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
+		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 		{
-			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 			{
-				if (result->second)
+				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
 				{
-					(*fitnessValues)[resultsPerObject->first] += 1.0 / winCounter[resultsPerCombination->first][result->first];
+					if (result->second)
+						winCounter[resultsPerCombination->first][result->first]++;
 				}
 			}
 		}
-	}
 
-	return fitnessValues;
+		std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
+
+		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
+		{
+			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
+			{
+				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+				{
+					if (result->second)
+					{
+						(*fitnessValues)[resultsPerObject->first] += 1.0 / winCounter[resultsPerCombination->first][result->first];
+					}
+				}
+			}
+		}
+
+		return fitnessValues;
+	}
 }

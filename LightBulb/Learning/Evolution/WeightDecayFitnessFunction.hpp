@@ -8,17 +8,20 @@
 // Include
 #include "Learning/Evolution/AbstractFitnessFunction.hpp"
 
-// Forward declarations
-
-//
-class WeightDecayFitnessFunction : public AbstractFitnessFunction
+namespace LightBulb
 {
-private:
-	double fac;
-public:
-	WeightDecayFitnessFunction(double fac_);
+	// Forward declarations
+
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-};
+	class WeightDecayFitnessFunction : public AbstractFitnessFunction
+	{
+	private:
+		double fac;
+	public:
+		WeightDecayFitnessFunction(double fac_);
+		//
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	};
+}
 
 #endif

@@ -7,12 +7,11 @@
 #include <Windows/AbstractSubAppWindow.hpp>
 
 // Forward declarations
-
-class  MountainCarController;
+class MountainCarController;
 
 wxDECLARE_EVENT(MOUNTAINCAR_EVT_POS_CHANGED, wxThreadEvent);
 
-class MountainCarWindow : public AbstractSubAppWindow
+class MountainCarWindow : public LightBulb::AbstractSubAppWindow
 {
 private:
 	wxPanel* panel;
@@ -21,7 +20,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	MountainCarWindow(MountainCarController* controller_, AbstractWindow* parent = NULL);
+	MountainCarWindow(MountainCarController* controller_, LightBulb::AbstractWindow* parent = NULL);
 	void paintEvent(wxPaintEvent & evt);
 	void resize(wxSizeEvent & evt);
 	void paintNow();

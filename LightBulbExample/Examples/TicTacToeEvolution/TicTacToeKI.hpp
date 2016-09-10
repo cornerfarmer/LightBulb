@@ -10,23 +10,22 @@
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
-class EvolutionLearningRule;
 class TicTacToe;
 
 // TODO: Rename to AI
-class TicTacToeKI : public AbstractSimpleEvolutionObject
+class TicTacToeKI : public LightBulb::AbstractSimpleEvolutionObject
 {
 protected:
 	TicTacToe* currentGame;
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = NULL);
+	TicTacToeKI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = NULL);
 	TicTacToeKI() = default;
 	~TicTacToeKI();
 	void setTicTacToe(TicTacToe* newTicTacToe);
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeKI, AbstractSimpleEvolutionObject);
+USE_PARENT_SERIALIZATION(TicTacToeKI, LightBulb::AbstractSimpleEvolutionObject);
 
 #endif

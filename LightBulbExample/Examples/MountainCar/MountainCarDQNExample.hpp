@@ -7,25 +7,23 @@
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
 class MountainCarWorld;
-class AbstractReinforcementWorld;
-struct FeedForwardNetworkTopologyOptions;
 
-class MountainCarDQNExample : public AbstractLearningRuleTrainingPlan
+class MountainCarDQNExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
 	MountainCarWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 	MountainCarWorld* createWorld();
 public:
 	MountainCarDQNExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 	MountainCarWorld* getWorld();
 };
 
-USE_PARENT_SERIALIZATION(MountainCarDQNExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(MountainCarDQNExample, LightBulb::AbstractLearningRuleTrainingPlan);
 
 #endif

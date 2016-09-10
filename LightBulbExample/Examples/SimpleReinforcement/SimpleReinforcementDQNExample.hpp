@@ -10,22 +10,22 @@ class SimpleReinforcementWorld;
 class AbstractReinforcementWorld;
 struct FeedForwardNetworkTopologyOptions;
 
-class SimpleReinforcementDQNExample : public AbstractLearningRuleTrainingPlan
+class SimpleReinforcementDQNExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
 	SimpleReinforcementWorld* world;
 protected:
-	AbstractLearningRule* createLearningRate() override;
+	LightBulb::AbstractLearningRule* createLearningRate() override;
 	SimpleReinforcementWorld* createWorld();
 public:
 	SimpleReinforcementDQNExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
+	LightBulb::AbstractTrainingPlan* getCopy() override;
 	std::string getLearningRuleName() override;
 	SimpleReinforcementWorld* getWorld();
 };
 
-USE_PARENT_SERIALIZATION(SimpleReinforcementDQNExample, AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(SimpleReinforcementDQNExample, LightBulb::AbstractLearningRuleTrainingPlan);
 
 #endif

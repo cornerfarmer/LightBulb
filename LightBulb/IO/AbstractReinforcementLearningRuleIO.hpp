@@ -8,11 +8,14 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule)
+namespace LightBulb
 {
-	archive(cereal::base_class<AbstractLearningRule>(&learningRule));
-	learningRule.randomGeneretorHasChanged();
+	template <class Archive>
+	void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule)
+	{
+		archive(cereal::base_class<AbstractLearningRule>(&learningRule));
+		learningRule.randomGeneretorHasChanged();
+	}
 }
 
 #endif

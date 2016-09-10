@@ -5,14 +5,17 @@
 // Includes
 #include "AbstractApp.hpp"
 
-// Forward declarations
-class AbstractSubApp;
-
-class AbstractMainApp : public AbstractApp
+namespace LightBulb
 {
-protected:
-public:	
-	virtual void removeSubApp(AbstractSubApp* subApp) = 0;
-};
+	// Forward declarations
+	class AbstractSubApp;
+
+	class AbstractMainApp : public AbstractApp
+	{
+	protected:
+	public:
+		virtual void removeSubApp(AbstractSubApp* subApp) = 0;
+	};
+}
 
 #endif

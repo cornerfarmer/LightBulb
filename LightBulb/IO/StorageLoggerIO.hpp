@@ -10,11 +10,13 @@
 #include <cereal/types/utility.hpp>
 #include <cereal/cereal.hpp>
 
-
-template <class Archive>
-void serialize(Archive& archive, StorageLogger& storageLogger)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("messages", storageLogger.messages));
+	template <class Archive>
+	void serialize(Archive& archive, StorageLogger& storageLogger)
+	{
+		archive(cereal::make_nvp("messages", storageLogger.messages));
+	}
 }
 
 #endif

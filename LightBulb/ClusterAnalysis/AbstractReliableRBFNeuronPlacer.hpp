@@ -8,11 +8,14 @@
 
 // Forward declarations
 
-// This class contains all stuff needed to describe a RBFNeuronPlacer 
-class AbstractReliableRBFNeuronPlacer : public AbstractRBFNeuronPlacer
+namespace LightBulb
 {
-protected:
-public:
-};
+	// This class contains all stuff needed to describe a RBFNeuronPlacer 
+	class AbstractReliableRBFNeuronPlacer : public AbstractRBFNeuronPlacer
+	{
+	protected:
+	public:
+	};
+}
 
 #endif

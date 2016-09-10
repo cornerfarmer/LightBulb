@@ -7,17 +7,20 @@
 #include "AbstractWindow.hpp"
 #include "AbstractSubAppFactory.hpp"
 
-// Forward declarations
-class TrainingPlanRepository;
-
-class LearningStateFactory : public AbstractSubAppFactory
+namespace LightBulb
 {
-protected:
-	TrainingPlanRepository* trainingPlanRepository;
-public:
-	LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_);
-	AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
-	std::string getLabel() override;
-};
+	// Forward declarations
+	class TrainingPlanRepository;
+
+	class LearningStateFactory : public AbstractSubAppFactory
+	{
+	protected:
+		TrainingPlanRepository* trainingPlanRepository;
+	public:
+		LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_);
+		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
+		std::string getLabel() override;
+	};
+}
 
 #endif

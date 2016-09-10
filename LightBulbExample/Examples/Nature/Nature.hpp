@@ -11,8 +11,6 @@
 #include "Examples/Nature/AbstractTile.hpp"
 
 // Forward declarations
-class EvolutionLearningRule;
-class AbstractEvolutionObject;
 class Animal;
 class AbstractTile;
 
@@ -21,7 +19,7 @@ enum NatureEvents
 	EVT_FIELD_CHANGED
 };
 
-class Nature : public AbstractSimpleEvolutionWorld, public LightBulb::Observable<NatureEvents, Nature>
+class Nature : public LightBulb::AbstractSimpleEvolutionWorld, public LightBulb::Observable<NatureEvents, Nature>
 {
 protected:
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>> tiles;
@@ -31,7 +29,7 @@ protected:
 	double getViewValueOfPos(int posX, int posY);
 	int missingPlants;	
 	bool displayMode;
-	AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractEvolutionObject* createNewObject() override;
 	void resetWorld() override;
 public:
 	Nature();
@@ -43,7 +41,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* getTiles();
-	double getScore(AbstractEvolutionObject* object) override;
+	double getScore(LightBulb::AbstractEvolutionObject* object) override;
 	AbstractTile* getTile(int posX, int posY);
 	void startWatchMode();
 	void stopWatchMode();

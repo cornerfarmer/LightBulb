@@ -13,19 +13,22 @@
 #include "ClusterAnalysis/Cluster.hpp"
 #include "Random/AbstractRandomGeneratorUser.hpp"
 
-class AbstractRandomGenerator;
-// Forward declarations
-struct Cluster;
-class Teacher;
-class PointSet;
-
-// This class contains all stuff needed to calculate clusters with the k-means cluster algorithm 
-class KMeansClustering : public AbstractClustering, public AbstractRandomGeneratorUser
+namespace LightBulb
 {
-private:
-public:
-	// Execute the clustering algorithm and calculate n-th clusters in the given point set
-	std::unique_ptr<std::list<Cluster>> doClustering(PointSet &points, int clusterCount, int dimensionCount);
-};
+	// Forward declarations
+	struct Cluster;
+	class Teacher;
+	class PointSet;
+	class AbstractRandomGenerator;
+
+	// This class contains all stuff needed to calculate clusters with the k-means cluster algorithm 
+	class KMeansClustering : public AbstractClustering, public AbstractRandomGeneratorUser
+	{
+	private:
+	public:
+		// Execute the clustering algorithm and calculate n-th clusters in the given point set
+		std::unique_ptr<std::list<Cluster>> doClustering(PointSet &points, int clusterCount, int dimensionCount);
+	};
+}
 
 #endif

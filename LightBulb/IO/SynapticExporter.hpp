@@ -10,31 +10,34 @@
 // Includes
 #include "IO/AbstractExporter.hpp"
 
-// Forward declarations
-class JSONObject;
-class JSONAttribute;
-class FeedForwardNetworkTopology;
-
-// 
-class SynapticExporter : public AbstractExporter
+namespace LightBulb
 {
-private:
-	FeedForwardNetworkTopology* networkTopology;
-	Eigen::MatrixXd* weights;
-	JSONObject* getNetworkJSONObject();
-	JSONAttribute* getNeuronsAttribute();
-	JSONObject* getNeuronJSONObject(int layer, int neuron);
-	JSONAttribute* getNeuronSquashAttribute(int layer, int neuron);
-	JSONAttribute* getNeuronBiasAttribute(int layer, int neuron);
-	JSONAttribute* getNeuronLayerAttribute(int layer, int neuron);
-	JSONAttribute* getConnectionsAttribute();
-	JSONObject* getConnectionJSONObject(int layerIndex, int sourceNeuronIndex, int destNeuronIndex);
-	JSONAttribute* getConnectionFromAttribute(int layerIndex, int sourceNeuronIndex);
-	JSONAttribute* getConnectionToAttribute(int layerIndex, int destNeuronIndex);
-	JSONAttribute* getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex);
-	int getTotalIndexOfNeuron(int layerIndex, int neuronIndex);
-public:
-	std::string execute(NeuralNetwork* neuralNetwork) override;
-};
+	// Forward declarations
+	class JSONObject;
+	class JSONAttribute;
+	class FeedForwardNetworkTopology;
+
+	// 
+	class SynapticExporter : public AbstractExporter
+	{
+	private:
+		FeedForwardNetworkTopology* networkTopology;
+		Eigen::MatrixXd* weights;
+		JSONObject* getNetworkJSONObject();
+		JSONAttribute* getNeuronsAttribute();
+		JSONObject* getNeuronJSONObject(int layer, int neuron);
+		JSONAttribute* getNeuronSquashAttribute(int layer, int neuron);
+		JSONAttribute* getNeuronBiasAttribute(int layer, int neuron);
+		JSONAttribute* getNeuronLayerAttribute(int layer, int neuron);
+		JSONAttribute* getConnectionsAttribute();
+		JSONObject* getConnectionJSONObject(int layerIndex, int sourceNeuronIndex, int destNeuronIndex);
+		JSONAttribute* getConnectionFromAttribute(int layerIndex, int sourceNeuronIndex);
+		JSONAttribute* getConnectionToAttribute(int layerIndex, int destNeuronIndex);
+		JSONAttribute* getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex);
+		int getTotalIndexOfNeuron(int layerIndex, int neuronIndex);
+	public:
+		std::string execute(NeuralNetwork* neuralNetwork) override;
+	};
+}
 
 #endif

@@ -11,16 +11,19 @@
 // Includes
 #include "AbstractReuseSelector.hpp"
 
-// Forward declarations
-class AbstractEvolutionObject;
-
-//
-class BestReuseSelector : public AbstractReuseSelector
+namespace LightBulb
 {
-private:
-protected:
-	void selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-public:
-};
+	// Forward declarations
+	class AbstractEvolutionObject;
+
+	//
+	class BestReuseSelector : public AbstractReuseSelector
+	{
+	private:
+	protected:
+		void selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	public:
+	};
+}
 
 #endif

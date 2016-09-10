@@ -12,31 +12,36 @@
 
 // Forward declarations
 class wxRichTextCtrl;
-class LoggerController;
-class AbstractTrainingPlan;
 
-wxDECLARE_EVENT(LW_EVT_ADD_NEW_MSG, wxThreadEvent);
-wxDECLARE_EVENT(LW_EVT_RELOAD_LOG, wxThreadEvent);
-
-class LoggerWindow : public AbstractSubAppWindow
+namespace LightBulb
 {
-private:
-	wxRichTextCtrl* textBox;
-	wxChoice* trainingPlansChoice;
-	void trainingPlanChanged(wxCommandEvent& event);
-	void logLevelChanged(wxCommandEvent& event);
-	void autoScrollingChanged(wxCommandEvent& event);
-	void addNewLogMessages(wxThreadEvent& event);
-	void reloadLog(wxThreadEvent& event);
-	void scrollChanged(wxScrollWinEvent& event);
-	int lastLogMessageIndex;
-	wxCheckBox* checkBox;
-	LoggerController* getController();
-public:
-	LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
-	void addLogMessage(std::string msg);
-	void clearLog();
-	void refreshTrainingPlans();
-};
+	// Forward declarations
+	class LoggerController;
+	class AbstractTrainingPlan;
+
+	wxDECLARE_EVENT(LW_EVT_ADD_NEW_MSG, wxThreadEvent);
+	wxDECLARE_EVENT(LW_EVT_RELOAD_LOG, wxThreadEvent);
+
+	class LoggerWindow : public AbstractSubAppWindow
+	{
+	private:
+		wxRichTextCtrl* textBox;
+		wxChoice* trainingPlansChoice;
+		void trainingPlanChanged(wxCommandEvent& event);
+		void logLevelChanged(wxCommandEvent& event);
+		void autoScrollingChanged(wxCommandEvent& event);
+		void addNewLogMessages(wxThreadEvent& event);
+		void reloadLog(wxThreadEvent& event);
+		void scrollChanged(wxScrollWinEvent& event);
+		int lastLogMessageIndex;
+		wxCheckBox* checkBox;
+		LoggerController* getController();
+	public:
+		LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
+		void addLogMessage(std::string msg);
+		void clearLog();
+		void refreshTrainingPlans();
+	};
+}
 
 #endif

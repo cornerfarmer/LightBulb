@@ -8,6 +8,8 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 
+using namespace LightBulb;
+
 Network::Network(NetworkSimulator* networkSimulator_)
 	: AbstractSimpleEvolutionObject(networkSimulator_)
 {

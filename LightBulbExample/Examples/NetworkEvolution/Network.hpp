@@ -13,7 +13,7 @@
 class EvolutionLearningRule;
 class NetworkSimulator;
 
-class Network : public AbstractSimpleEvolutionObject
+class Network : public LightBulb::AbstractSimpleEvolutionObject
 {
 	template <class Archive>
 	friend void save(Archive& archive, Network const& object);

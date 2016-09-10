@@ -1,12 +1,15 @@
 // Includes
 #include "Random/AbstractRandomGeneratorUser.hpp"
 
-void AbstractRandomGeneratorUser::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+namespace LightBulb
 {
-	randomGenerator = randomGenerator_;
-}
+	void AbstractRandomGeneratorUser::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	{
+		randomGenerator = randomGenerator_;
+	}
 
-AbstractRandomGenerator* AbstractRandomGeneratorUser::getRandomGenerator()
-{
-	return randomGenerator;
+	AbstractRandomGenerator* AbstractRandomGeneratorUser::getRandomGenerator()
+	{
+		return randomGenerator;
+	}
 }

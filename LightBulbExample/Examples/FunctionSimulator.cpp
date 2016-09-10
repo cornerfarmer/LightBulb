@@ -5,6 +5,8 @@
 //Library includes
 #include <iostream>
 
+using namespace LightBulb;
+
 AbstractEvolutionObject* FunctionSimulator::createNewObject()
 {
 	return new Position(this);

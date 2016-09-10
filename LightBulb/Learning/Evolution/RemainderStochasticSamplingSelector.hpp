@@ -11,22 +11,25 @@
 #include "Learning/Evolution/AbstractRecombinationSelector.hpp"
 #include "Function/SelectionFunction/AbstractSelectionFunction.hpp"
 
-// Forward declarations
-
-// A command which selects the best N objects for mutation/recombination
-class RemainderStochasticSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
+namespace LightBulb
 {
-private:
-	std::unique_ptr<AbstractSelectionFunction> randomFunction;
-	bool withReplacement;
-	void select(bool recombination, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
-protected:
-	void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-	void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-public:
-	RemainderStochasticSamplingSelector(bool withReplacement_ = true);
-	void setRandomFunction(AbstractSelectionFunction* randomFunction);
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
-};
+	// Forward declarations
+
+	// A command which selects the best N objects for mutation/recombination
+	class RemainderStochasticSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
+	{
+	private:
+		std::unique_ptr<AbstractSelectionFunction> randomFunction;
+		bool withReplacement;
+		void select(bool recombination, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+	protected:
+		void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	public:
+		RemainderStochasticSamplingSelector(bool withReplacement_ = true);
+		void setRandomFunction(AbstractSelectionFunction* randomFunction);
+		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+	};
+}
 
 #endif

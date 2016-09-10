@@ -11,30 +11,33 @@
 
 // Library includes
 
-// Forward declarations
-
-class AbstractLearningRuleTrainingPlan : public AbstractTrainingPlan
+namespace LightBulb
 {
-	template <class Archive>
-	friend void load(Archive& archive, AbstractLearningRuleTrainingPlan& trainingPlan);
-	template <class Archive>
-	friend void save(Archive& archive, AbstractLearningRuleTrainingPlan const& trainingPlan);
-private:
-	bool pauseRequested;
-	std::unique_ptr<AbstractLearningResult> learningResult;
-	std::unique_ptr<AbstractLearningRule> learningRule;
-protected:
-	virtual AbstractLearningRule* createLearningRate() = 0;
-	void run(bool initial) override;
-	void tryToPause() override;
-	virtual void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
-public:
-	std::vector<std::string> getDataSetLabels() override;
-	LearningState* getLearningState() override;
-	AbstractLearningResult* getLearningResult();
-	AbstractLearningRule* getLearningRule();
-	int getSeed() override;
-};
+	// Forward declarations
+
+	class AbstractLearningRuleTrainingPlan : public AbstractTrainingPlan
+	{
+		template <class Archive>
+		friend void load(Archive& archive, AbstractLearningRuleTrainingPlan& trainingPlan);
+		template <class Archive>
+		friend void save(Archive& archive, AbstractLearningRuleTrainingPlan const& trainingPlan);
+	private:
+		bool pauseRequested;
+		std::unique_ptr<AbstractLearningResult> learningResult;
+		std::unique_ptr<AbstractLearningRule> learningRule;
+	protected:
+		virtual AbstractLearningRule* createLearningRate() = 0;
+		void run(bool initial) override;
+		void tryToPause() override;
+		virtual void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options);
+	public:
+		std::vector<std::string> getDataSetLabels() override;
+		LearningState* getLearningState() override;
+		AbstractLearningResult* getLearningResult();
+		AbstractLearningRule* getLearningRule();
+		int getSeed() override;
+	};
+}
 
 #include "IO/AbstractLearningRuleTrainingPlanIO.hpp"
 

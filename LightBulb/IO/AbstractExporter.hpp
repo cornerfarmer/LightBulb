@@ -6,15 +6,18 @@
 // Library includes
 #include <string>
 
-// Forward declarations
-class NeuralNetwork;
-
-// 
-class AbstractExporter
+namespace LightBulb
 {
-private:
-public:
-	virtual std::string execute(NeuralNetwork* neuralNetwork) = 0;
-};
+	// Forward declarations
+	class NeuralNetwork;
+
+	// 
+	class AbstractExporter
+	{
+	private:
+	public:
+		virtual std::string execute(NeuralNetwork* neuralNetwork) = 0;
+	};
+}
 
 #endif

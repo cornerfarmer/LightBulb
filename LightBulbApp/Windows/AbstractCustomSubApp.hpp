@@ -5,15 +5,18 @@
 // Includes
 #include "AbstractSubApp.hpp"
 
-// Forward declarations
-class AbstractTrainingPlan;
-
-class AbstractCustomSubApp : public AbstractSubApp
+namespace LightBulb
 {
-protected:
-	AbstractTrainingPlan* trainingPlan;
-public:	
-	AbstractCustomSubApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_);
-};
+	// Forward declarations
+	class AbstractTrainingPlan;
+
+	class AbstractCustomSubApp : public AbstractSubApp
+	{
+	protected:
+		AbstractTrainingPlan* trainingPlan;
+	public:
+		AbstractCustomSubApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_);
+	};
+}
 
 #endif

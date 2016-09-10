@@ -5,55 +5,58 @@
 #include <NeuralNetwork/NeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
-void AbstractEvolutionObject::randomizeMutationStrength()
+namespace LightBulb
 {
-	// Go through all mutation strength values
-	for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
+	void AbstractEvolutionObject::randomizeMutationStrength()
 	{
-		// Set it to a random value
-		*mutationStrengthValue = 0.2; // (float)rand() / RAND_MAX * 0.1;
+		// Go through all mutation strength values
+		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
+		{
+			// Set it to a random value
+			*mutationStrengthValue = 0.2; // (float)rand() / RAND_MAX * 0.1;
+		}
 	}
-}
 
-void AbstractEvolutionObject::copyPropertiesFrom(AbstractEvolutionObject* notUsedObject)
-{
-	getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*notUsedObject->getNeuralNetwork()->getNetworkTopology());
-	setMutationStrength(notUsedObject->getMutationStrength());
-}
+	void AbstractEvolutionObject::copyPropertiesFrom(AbstractEvolutionObject* notUsedObject)
+	{
+		getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*notUsedObject->getNeuralNetwork()->getNetworkTopology());
+		setMutationStrength(notUsedObject->getMutationStrength());
+	}
 
-std::vector<double>* AbstractEvolutionObject::getMutationStrength()
-{
-	return &mutationStrength;
-}
+	std::vector<double>* AbstractEvolutionObject::getMutationStrength()
+	{
+		return &mutationStrength;
+	}
 
-void AbstractEvolutionObject::setMutationStrength(std::vector<double>* newMutationStrength)
-{
-	mutationStrength = *newMutationStrength;
-}
+	void AbstractEvolutionObject::setMutationStrength(std::vector<double>* newMutationStrength)
+	{
+		mutationStrength = *newMutationStrength;
+	}
 
-void AbstractEvolutionObject::setEvolutionSource(EvolutionSource evolutionSource_)
-{
-	evolutionSource = evolutionSource_;
-}
+	void AbstractEvolutionObject::setEvolutionSource(EvolutionSource evolutionSource_)
+	{
+		evolutionSource = evolutionSource_;
+	}
 
-EvolutionSource AbstractEvolutionObject::getEvolutionSource()
-{
-	return evolutionSource;
-}
+	EvolutionSource AbstractEvolutionObject::getEvolutionSource()
+	{
+		return evolutionSource;
+	}
 
-void AbstractEvolutionObject::removeNeuron(int layerIndex, int neuronIndex)
-{
-	getNeuralNetwork()->getNetworkTopology()->removeNeuron(layerIndex, neuronIndex);
-	mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount());
-}
+	void AbstractEvolutionObject::removeNeuron(int layerIndex, int neuronIndex)
+	{
+		getNeuralNetwork()->getNetworkTopology()->removeNeuron(layerIndex, neuronIndex);
+		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount());
+	}
 
-void AbstractEvolutionObject::addNeuron(int layerIndex)
-{
-	getNeuralNetwork()->getNetworkTopology()->addNeuron(layerIndex);
-	mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount(), 0.2);
-}
+	void AbstractEvolutionObject::addNeuron(int layerIndex)
+	{
+		getNeuralNetwork()->getNetworkTopology()->addNeuron(layerIndex);
+		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount(), 0.2);
+	}
 
-void AbstractEvolutionObject::resizeMutationStrength(int newSize)
-{
-	mutationStrength.resize(newSize);
+	void AbstractEvolutionObject::resizeMutationStrength(int newSize)
+	{
+		mutationStrength.resize(newSize);
+	}
 }

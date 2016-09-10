@@ -11,26 +11,29 @@
 #include <utility>
 #include <map>
 
-// Forward declarations
-class AbstractEvolutionObject;
-
-//
-class AbstractMutationSelector : public AbstractRandomGeneratorUser
+namespace LightBulb
 {
-private:
-	std::vector<AbstractEvolutionObject*> selectedObjects;
+	// Forward declarations
+	class AbstractEvolutionObject;
 
-	std::map<AbstractEvolutionObject*, int>* currentCounter;
-protected:
-	virtual void addObjectToMutate(AbstractEvolutionObject* object);
-
-	virtual void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
-public:
-	virtual ~AbstractMutationSelector() {};
 	//
-	virtual void executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+	class AbstractMutationSelector : public AbstractRandomGeneratorUser
+	{
+	private:
+		std::vector<AbstractEvolutionObject*> selectedObjects;
 
-	virtual std::vector<AbstractEvolutionObject*>* getMutationSelection();
-};
+		std::map<AbstractEvolutionObject*, int>* currentCounter;
+	protected:
+		virtual void addObjectToMutate(AbstractEvolutionObject* object);
+
+		virtual void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+	public:
+		virtual ~AbstractMutationSelector() {};
+		//
+		virtual void executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+
+		virtual std::vector<AbstractEvolutionObject*>* getMutationSelection();
+	};
+}
 
 #endif

@@ -3,15 +3,18 @@
 
 #include <string>
 
-struct AbstractLearningResult
+namespace LightBulb
 {
-	double quality;
+	struct AbstractLearningResult
+	{
+		double quality;
 
-	std::string qualityLabel;
+		std::string qualityLabel;
 
-	std::shared_ptr<LearningState> learningState;
+		std::shared_ptr<LearningState> learningState;
 
-	bool succeeded;
-};
+		bool succeeded;
+	};
+}
 
 #endif

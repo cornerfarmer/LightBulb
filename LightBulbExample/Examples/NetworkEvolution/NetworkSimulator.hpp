@@ -14,7 +14,7 @@
 class EvolutionLearningRule;
 class AbstractEvolutionObject;
 
-class NetworkSimulator : public AbstractSimpleEvolutionWorld
+class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionWorld
 {
 	template <class Archive>
 	friend void save(Archive& archive, NetworkSimulator const& world);
@@ -23,7 +23,7 @@ class NetworkSimulator : public AbstractSimpleEvolutionWorld
 	friend struct cereal::LoadAndConstruct<NetworkSimulator>;
 protected:
 	std::vector<std::vector<float>> consumers;
-	AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractEvolutionObject* createNewObject() override;
 	//sf::RenderWindow window;
 	//std::unique_ptr<NetworkDrawer> drawer;
 	double distanceBetweenPositions(std::vector<float>& pos1, std::vector<float>& pos2);
@@ -31,7 +31,7 @@ public:
 	NetworkSimulator(std::vector<std::vector<float>> consumers_);
 	NetworkSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(AbstractEvolutionObject* object) override;
+	double getScore(LightBulb::AbstractEvolutionObject* object) override;
 	std::vector<std::vector<float>>* getConsumers();
 };
 

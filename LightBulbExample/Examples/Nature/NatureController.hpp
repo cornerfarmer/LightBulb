@@ -10,7 +10,7 @@
 #include "Nature.hpp"
 
 
-class NatureController : public AbstractCustomSubApp
+class NatureController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<NatureWindow> window;
@@ -20,7 +20,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	NatureController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
+	NatureController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = NULL);
 	NatureWindow* getWindow();
 	void stopWatchMode();
 	void startWatchMode();

@@ -11,6 +11,8 @@
 #include <TrainingPlans/DoublePreference.hpp>
 #include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
 
+using namespace LightBulb;
+
 #define PREFERENCE_LEARNINGRATE "Learning rate"
 #define PREFERENCE_MOMENTUM "Momentum"
 

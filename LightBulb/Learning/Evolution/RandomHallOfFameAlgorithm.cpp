@@ -4,23 +4,26 @@
 #include <algorithm>
 #include "AbstractCoevolutionWorld.hpp"
 
-void RandomHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
+namespace LightBulb
 {
-	std::random_shuffle(members.begin(), members.end());
-
-	for (auto object = objects.begin(); object != objects.end(); object++)
+	void RandomHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
 	{
-		for (int memberIndex = 0; memberIndex < amountOfCompetitionsPerObject && memberIndex < members.size(); memberIndex++)
+		std::random_shuffle(members.begin(), members.end());
+
+		for (auto object = objects.begin(); object != objects.end(); object++)
 		{
-			for (int r = 0; r < currentWorld->getRoundCount(); r++)
+			for (int memberIndex = 0; memberIndex < amountOfCompetitionsPerObject && memberIndex < members.size(); memberIndex++)
 			{
-				simulateAgainstMember(*object, memberIndex, r);
+				for (int r = 0; r < currentWorld->getRoundCount(); r++)
+				{
+					simulateAgainstMember(*object, memberIndex, r);
+				}
 			}
 		}
 	}
-}
 
-RandomHallOfFameAlgorithm::RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_)
-{
-	amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
+	RandomHallOfFameAlgorithm::RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_)
+	{
+		amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
+	}
 }

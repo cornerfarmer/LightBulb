@@ -2,22 +2,24 @@
 #include "Windows/AbstractSubAppWindow.hpp"
 #include "AbstractSubApp.hpp"
 
-
-AbstractSubAppWindow::AbstractSubAppWindow(AbstractSubApp* controller_, std::string label, AbstractWindow* parent)
-	: AbstractWindow(controller_, label, parent)
+namespace LightBulb
 {
-	Bind(wxEVT_CLOSE_WINDOW, wxCloseEventFunction(&AbstractSubAppWindow::close), this);
-}
+	AbstractSubAppWindow::AbstractSubAppWindow(AbstractSubApp* controller_, std::string label, AbstractWindow* parent)
+		: AbstractWindow(controller_, label, parent)
+	{
+		Bind(wxEVT_CLOSE_WINDOW, wxCloseEventFunction(&AbstractSubAppWindow::close), this);
+	}
 
 
-void AbstractSubAppWindow::close(wxCloseEvent& event)
-{
-	getController()->close();
+	void AbstractSubAppWindow::close(wxCloseEvent& event)
+	{
+		getController()->close();
 
-	event.Skip();
-}
+		event.Skip();
+	}
 
-AbstractSubApp* AbstractSubAppWindow::getController()
-{
-	return static_cast<AbstractSubApp*>(controller);
+	AbstractSubApp* AbstractSubAppWindow::getController()
+	{
+		return static_cast<AbstractSubApp*>(controller);
+	}
 }

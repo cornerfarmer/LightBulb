@@ -1,24 +1,27 @@
 // Includes
 #include "IO/JSONObject.hpp"
 
-std::string JSONObject::toString()
+namespace LightBulb
 {
-	return "{" + attributesToString() + "}";
-}
-
-std::string JSONObject::attributesToString()
-{
-	std::string output = "";
-	for (auto attribute = attributes.begin(); attribute != attributes.end(); attribute++)
+	std::string JSONObject::toString()
 	{
-		output += (*attribute)->toString();
-		if (*attribute != attributes.back())
-			output += ",";
+		return "{" + attributesToString() + "}";
 	}
-	return output;
-}
 
-void JSONObject::addAttribute(JSONAttribute* newAttribute)
-{
-	attributes.push_back(std::unique_ptr<JSONAttribute>(newAttribute));
+	std::string JSONObject::attributesToString()
+	{
+		std::string output = "";
+		for (auto attribute = attributes.begin(); attribute != attributes.end(); attribute++)
+		{
+			output += (*attribute)->toString();
+			if (*attribute != attributes.back())
+				output += ",";
+		}
+		return output;
+	}
+
+	void JSONObject::addAttribute(JSONAttribute* newAttribute)
+	{
+		attributes.push_back(std::unique_ptr<JSONAttribute>(newAttribute));
+	}
 }

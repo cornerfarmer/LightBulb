@@ -4,19 +4,22 @@
 #include <stdexcept>
 #include <math.h>
 
-ExponentialFitnessFunction::ExponentialFitnessFunction(double exponent_, double proportionalScaling_, double base_)
+namespace LightBulb
 {
-	if (proportionalScaling < 0)
-			throw std::invalid_argument("ProportionalScaling has to be positive!");
-	exponent = exponent_;
-	proportionalScaling = proportionalScaling_;
-	base = base_;
-}
-
-void ExponentialFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	ExponentialFitnessFunction::ExponentialFitnessFunction(double exponent_, double proportionalScaling_, double base_)
 	{
-		entry->first = pow(entry->first * proportionalScaling + base, exponent);
+		if (proportionalScaling < 0)
+			throw std::invalid_argument("ProportionalScaling has to be positive!");
+		exponent = exponent_;
+		proportionalScaling = proportionalScaling_;
+		base = base_;
+	}
+
+	void ExponentialFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	{
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			entry->first = pow(entry->first * proportionalScaling + base, exponent);
+		}
 	}
 }

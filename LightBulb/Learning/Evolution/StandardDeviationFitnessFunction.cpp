@@ -4,37 +4,40 @@
 #include <stdexcept>
 #include <math.h>
 
-StandardDeviationFitnessFunction::StandardDeviationFitnessFunction(double deviationFac_)
+namespace LightBulb
 {
-	deviationFac = deviationFac_;
-}
-
-void StandardDeviationFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
-{
-	double average = 0;
-
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	StandardDeviationFitnessFunction::StandardDeviationFitnessFunction(double deviationFac_)
 	{
-		average += entry->first;
+		deviationFac = deviationFac_;
 	}
 
-	average /= highscore->size();
-
-	double standardDeviation = 0;
-
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+	void StandardDeviationFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
 	{
-		standardDeviation += pow(entry->first - average, 2.0);
-	}
+		double average = 0;
 
-	standardDeviation /= highscore->size();
-	standardDeviation = sqrt(standardDeviation);
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			average += entry->first;
+		}
 
-	if (average < deviationFac * standardDeviation)
-		throw std::logic_error("Your chosen deviationFac is too big");
+		average /= highscore->size();
 
-	for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
-	{
-		entry->first = entry->first - (average - deviationFac * standardDeviation);
+		double standardDeviation = 0;
+
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			standardDeviation += pow(entry->first - average, 2.0);
+		}
+
+		standardDeviation /= highscore->size();
+		standardDeviation = sqrt(standardDeviation);
+
+		if (average < deviationFac * standardDeviation)
+			throw std::logic_error("Your chosen deviationFac is too big");
+
+		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		{
+			entry->first = entry->first - (average - deviationFac * standardDeviation);
+		}
 	}
 }

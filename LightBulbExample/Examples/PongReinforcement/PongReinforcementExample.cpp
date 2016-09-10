@@ -18,6 +18,8 @@
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
 
+using namespace LightBulb;
+
 AbstractLearningRule* PongReinforcementExample::createLearningRate()
 {
 	PolicyGradientLearningRuleOptions options;

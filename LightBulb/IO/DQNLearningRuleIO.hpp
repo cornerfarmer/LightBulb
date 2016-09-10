@@ -13,38 +13,41 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-
-template <class Archive>
-void serialize(Archive& archive, Transition& transition)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("state", transition.state));
-	archive(cereal::make_nvp("nextState", transition.nextState));
-	archive(cereal::make_nvp("action", transition.action));
-	archive(cereal::make_nvp("reward", transition.reward));
-}
+	template <class Archive>
+	void serialize(Archive& archive, Transition& transition)
+	{
+		archive(cereal::make_nvp("state", transition.state));
+		archive(cereal::make_nvp("nextState", transition.nextState));
+		archive(cereal::make_nvp("action", transition.action));
+		archive(cereal::make_nvp("reward", transition.reward));
+	}
 
 
-template <class Archive>
-void serialize(Archive& archive, DQNLearningRule& learningRule)
-{
-	archive(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
-	archive(cereal::make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
-	archive(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
-	archive(cereal::make_nvp("transitions", learningRule.transitions));
-	archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
-	archive(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
-	archive(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
-	archive(cereal::make_nvp("gradientDecent", learningRule.gradientDecent));
+	template <class Archive>
+	void serialize(Archive& archive, DQNLearningRule& learningRule)
+	{
+		archive(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
+		archive(cereal::make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
+		archive(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
+		archive(cereal::make_nvp("transitions", learningRule.transitions));
+		archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
+		archive(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
+		archive(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
+		archive(cereal::make_nvp("gradientDecent", learningRule.gradientDecent));
+	}
 }
 
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(DQNLearningRule, AbstractLearningRule)
+	CONSTRUCT_EXISTING(LightBulb::DQNLearningRule, LightBulb::AbstractLearningRule)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, DQNLearningRule& learningRule)
+		static void construct(Archive& ar, LightBulb::DQNLearningRule& learningRule)
 		{
+			using namespace LightBulb;
 			ar(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
 			ar(cereal::make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
 			ar(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
@@ -63,6 +66,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(DQNLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::DQNLearningRule);
 
 #endif

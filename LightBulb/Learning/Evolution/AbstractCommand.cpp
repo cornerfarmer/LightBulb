@@ -3,17 +3,20 @@
 #include "AbstractEvolutionObject.hpp"
 #include <Logging/AbstractLogger.hpp>
 
-AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects, bool addToWorld)
+namespace LightBulb
 {
-	if (notUsedObjects->empty())
+	AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects, bool addToWorld)
 	{
-		return usedObject->clone(addToWorld);
-	}
-	else
-	{
-		AbstractEvolutionObject* notUsedObject = notUsedObjects->back();
-		notUsedObjects->pop_back();
-		notUsedObject->copyPropertiesFrom(usedObject);
-		return notUsedObject;
+		if (notUsedObjects->empty())
+		{
+			return usedObject->clone(addToWorld);
+		}
+		else
+		{
+			AbstractEvolutionObject* notUsedObject = notUsedObjects->back();
+			notUsedObjects->pop_back();
+			notUsedObject->copyPropertiesFrom(usedObject);
+			return notUsedObject;
+		}
 	}
 }

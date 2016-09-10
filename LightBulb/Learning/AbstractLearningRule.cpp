@@ -11,120 +11,123 @@
 #include <iomanip>
 #include <vector>
 
-AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
+namespace LightBulb
 {
-	options.reset(options_);
-
-	randomGenerator.reset(new StandardRandomGenerator<>(options->seed));
-
-	pauseRequest = false;
-}
-
-AbstractLearningResult* AbstractLearningRule::start()
-{
-	learningState.reset(new LearningState(options->disabledDataSets, options->dataSaveInterval));
-
-	// Let the learning algorithm do stuff before starting
-	initializeStartLearningAlgoritm();
-
-	// Reset all counter
-	learningState->tries = 0;
-		
-	return learn(false);
-}
-
-void AbstractLearningRule::fillDefaultResults(AbstractLearningResult* learningResult)
-{
-	learningResult->learningState = learningState;
-	learningResult->succeeded = hasLearningSucceeded();
-}
-
-AbstractLearningResult* AbstractLearningRule::learn(bool resume)
-{
-	initializeLearningAlgoritm();
-
-	// Start a new try
-	do
+	AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 	{
-		if (!resume)
+		options.reset(options_);
+
+		randomGenerator.reset(new StandardRandomGenerator<>(options->seed));
+
+		pauseRequest = false;
+	}
+
+	AbstractLearningResult* AbstractLearningRule::start()
+	{
+		learningState.reset(new LearningState(options->disabledDataSets, options->dataSaveInterval));
+
+		// Let the learning algorithm do stuff before starting
+		initializeStartLearningAlgoritm();
+
+		// Reset all counter
+		learningState->tries = 0;
+
+		return learn(false);
+	}
+
+	void AbstractLearningRule::fillDefaultResults(AbstractLearningResult* learningResult)
+	{
+		learningResult->learningState = learningState;
+		learningResult->succeeded = hasLearningSucceeded();
+	}
+
+	AbstractLearningResult* AbstractLearningRule::learn(bool resume)
+	{
+		initializeLearningAlgoritm();
+
+		// Start a new try
+		do
 		{
-			learningState->addTry();
-
-			// Reset the iteration counter
-			learningState->iterations = 0;
-
-			// Initialize a new try
-			initializeTry();
-
-			// If debug is enabled, print every n-th iteration a short debug info
-			log("Start Try: " + std::to_string(learningState->tries - 1), LL_HIGH);
-			resume = false;
-		}
-		rateLearning();
-
-		// Do while the totalError is not zero
-		while (!hasLearningSucceeded() && learningState->iterations++ < (int)options->maxIterationsPerTry)
-		{
-			bool successful = doIteration();
-			if (!successful)
-				break;
-
-			if (pauseRequest)
+			if (!resume)
 			{
-				pauseRequest = false;
-				return false;
+				learningState->addTry();
+
+				// Reset the iteration counter
+				learningState->iterations = 0;
+
+				// Initialize a new try
+				initializeTry();
+
+				// If debug is enabled, print every n-th iteration a short debug info
+				log("Start Try: " + std::to_string(learningState->tries - 1), LL_HIGH);
+				resume = false;
 			}
-
 			rateLearning();
-		}
-	} while (!hasLearningSucceeded() && learningState->tries < options->maxTries);
 
-	if (hasLearningSucceeded())
-		log("Try (No. " + std::to_string(learningState->tries - 1) + ", " + std::to_string(learningState->iterations) + " iterations needed) was successful", LL_HIGH);
-	else
-		log("All tries failed => stop learning", LL_HIGH);
+			// Do while the totalError is not zero
+			while (!hasLearningSucceeded() && learningState->iterations++ < (int)options->maxIterationsPerTry)
+			{
+				bool successful = doIteration();
+				if (!successful)
+					break;
 
-	doCalculationAfterLearningProcess();
+				if (pauseRequest)
+				{
+					pauseRequest = false;
+					return false;
+				}
 
-	return getLearningResult();
-}
+				rateLearning();
+			}
+		} while (!hasLearningSucceeded() && learningState->tries < options->maxTries);
 
-AbstractLearningResult* AbstractLearningRule::resume()
-{
-	initializeResumeLearningAlgoritm();
+		if (hasLearningSucceeded())
+			log("Try (No. " + std::to_string(learningState->tries - 1) + ", " + std::to_string(learningState->iterations) + " iterations needed) was successful", LL_HIGH);
+		else
+			log("All tries failed => stop learning", LL_HIGH);
 
-	return learn(true);
-}
+		doCalculationAfterLearningProcess();
 
-void AbstractLearningRule::sendPauseRequest()
-{
-	pauseRequest = true;
-}
+		return getLearningResult();
+	}
 
-void AbstractLearningRule::setLogger(AbstractLogger* logger)
-{
-	options->logger = logger;
-}
+	AbstractLearningResult* AbstractLearningRule::resume()
+	{
+		initializeResumeLearningAlgoritm();
 
-void AbstractLearningRule::log(std::string message, LogLevel level)
-{
-	if (options->logger)
-		options->logger->log(message, level);
-}
+		return learn(true);
+	}
+
+	void AbstractLearningRule::sendPauseRequest()
+	{
+		pauseRequest = true;
+	}
+
+	void AbstractLearningRule::setLogger(AbstractLogger* logger)
+	{
+		options->logger = logger;
+	}
+
+	void AbstractLearningRule::log(std::string message, LogLevel level)
+	{
+		if (options->logger)
+			options->logger->log(message, level);
+	}
 
 
-LearningState* AbstractLearningRule::getLearningState()
-{
-	return learningState.get();
-}
+	LearningState* AbstractLearningRule::getLearningState()
+	{
+		return learningState.get();
+	}
 
-std::vector<std::string> AbstractLearningRule::getDataSetLabels()
-{
-	std::vector<std::string> labels;
-	return labels;
-}
+	std::vector<std::string> AbstractLearningRule::getDataSetLabels()
+	{
+		std::vector<std::string> labels;
+		return labels;
+	}
 
-int AbstractLearningRule::getSeed()
-{
-	return randomGenerator->getSeed();
+	int AbstractLearningRule::getSeed()
+	{
+		return randomGenerator->getSeed();
+	}
 }

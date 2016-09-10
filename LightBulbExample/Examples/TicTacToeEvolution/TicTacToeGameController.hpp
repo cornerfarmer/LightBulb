@@ -10,7 +10,7 @@
 #include "TicTacToe.hpp"
 
 
-class TicTacToeGameController : public AbstractCustomSubApp
+class TicTacToeGameController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<TicTacToeGameWindow> window;
@@ -19,7 +19,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	TicTacToeGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
+	TicTacToeGameController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = NULL);
 	TicTacToeGameWindow* getWindow();
 	void stopStepMode();
 	void startStepMode();

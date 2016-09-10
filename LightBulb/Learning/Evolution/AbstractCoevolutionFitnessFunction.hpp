@@ -9,15 +9,18 @@
 // Include
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
 
-// Forward declarations
-class AbstractCoevolutionWorld;
-class AbstractEvolutionObject;
-
-class AbstractCoevolutionFitnessFunction
+namespace LightBulb
 {
-protected:
-public:
-	virtual std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results) = 0;
-};
+	// Forward declarations
+	class AbstractCoevolutionWorld;
+	class AbstractEvolutionObject;
+
+	class AbstractCoevolutionFitnessFunction
+	{
+	protected:
+	public:
+		virtual std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results) = 0;
+	};
+}
 
 #endif

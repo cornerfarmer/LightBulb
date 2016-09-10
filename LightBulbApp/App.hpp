@@ -5,17 +5,20 @@
 
 #include <wx/wxprec.h>
 
-class AbstractTrainingPlan;
-
-class App : public wxApp
+namespace LightBulb
 {
-private:
-	std::vector<AbstractTrainingPlan*> trainingPlans;
-public:
-	bool OnInit() override;
-	void OnUnhandledException() override;
-	bool OnExceptionInMainLoop() override;
-	void addTrainingPlan(AbstractTrainingPlan* trainingPlan);
-};
+	class AbstractTrainingPlan;
+
+	class App : public wxApp
+	{
+	private:
+		std::vector<AbstractTrainingPlan*> trainingPlans;
+	public:
+		bool OnInit() override;
+		void OnUnhandledException() override;
+		bool OnExceptionInMainLoop() override;
+		void addTrainingPlan(AbstractTrainingPlan* trainingPlan);
+	};
+}
 
 #endif

@@ -9,10 +9,13 @@
 // Libraray includes
 #include <cereal/cereal.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, AbstractGradientDecentAlgorithm& gradientDecentAlgorithm)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("initialized", gradientDecentAlgorithm.initialized));
+	template <class Archive>
+	void serialize(Archive& archive, AbstractGradientDecentAlgorithm& gradientDecentAlgorithm)
+	{
+		archive(cereal::make_nvp("initialized", gradientDecentAlgorithm.initialized));
+	}
 }
 
 #endif

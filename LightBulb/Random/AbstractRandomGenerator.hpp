@@ -9,19 +9,24 @@
 // Library Includes
 #include "IO/UseParentSerialization.hpp"
 
-// Forward declarations
-
-class AbstractRandomGenerator
+namespace LightBulb
 {
-protected:
-public:
-	virtual double randDouble() = 0;
-	virtual double randDouble(double a, double b) = 0;
-	virtual int randInt(int a, int b) = 0;
-	virtual int getSeed() = 0;
-	virtual void setSeed(int newSeed) = 0;
-};
+	// Forward declarations
 
-EMPTY_SERIALIZATION(AbstractRandomGenerator)
+	class AbstractRandomGenerator
+	{
+	protected:
+	public:
+		virtual double randDouble() = 0;
+		virtual double randDouble(double a, double b) = 0;
+		virtual int randInt(int a, int b) = 0;
+		virtual int getSeed() = 0;
+		virtual void setSeed(int newSeed) = 0;
+	};
+
+}
+
+EMPTY_SERIALIZATION(LightBulb::AbstractRandomGenerator, LightBulb)
+
 
 #endif

@@ -2,6 +2,8 @@
 #include "Examples/Nature/NatureFactory.hpp"
 #include "NatureController.hpp"
 
+using namespace LightBulb;
+
 AbstractCustomSubApp* NatureFactory::createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent)
 {
 	NatureController* controller = new NatureController(mainApp, trainingPlan, parent);

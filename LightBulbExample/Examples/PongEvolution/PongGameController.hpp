@@ -10,7 +10,7 @@
 #include "Pong.hpp"
 
 
-class PongGameController : public AbstractCustomSubApp
+class PongGameController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<PongGameWindow> window;
@@ -20,7 +20,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	PongGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL);
+	PongGameController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = NULL);
 	PongGameWindow* getWindow();
 	void stopWatchMode();
 	void startWatchMode();

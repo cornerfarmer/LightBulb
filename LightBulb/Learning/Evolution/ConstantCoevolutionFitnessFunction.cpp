@@ -2,21 +2,24 @@
 #include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
 #include "AbstractCoevolutionWorld.hpp"
 
-std::map<AbstractEvolutionObject*, double>* ConstantCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
+namespace LightBulb
 {
-	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
-
-	for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
+	std::map<AbstractEvolutionObject*, double>* ConstantCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
 	{
-		for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
+		std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
+
+		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 		{
-			for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 			{
-				if (result->second)
-					(*fitnessValues)[resultsPerObject->first]++;
+				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
+				{
+					if (result->second)
+						(*fitnessValues)[resultsPerObject->first]++;
+				}
 			}
 		}
-	}
 
-	return fitnessValues;
+		return fitnessValues;
+	}
 }

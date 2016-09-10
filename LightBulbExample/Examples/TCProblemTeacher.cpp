@@ -1,6 +1,7 @@
 #include "TCProblemTeacher.hpp"
 #include <Teaching/TeachingLessonBooleanInput.hpp>
 
+using namespace LightBulb;
 
 TCProblemTeacher::TCProblemTeacher(bool calcStrictError, double weightDecayFac_)
 	:Teacher(weightDecayFac_)

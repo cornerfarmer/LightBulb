@@ -10,6 +10,7 @@
 #include <Teaching/Teacher.hpp>
 #include <ClusterAnalysis/KMeansRBFNeuronPlacer.hpp>
 
+using namespace LightBulb;
 
 AbstractLearningRule* RBFNetworkBiggerExample::createLearningRate()
 {

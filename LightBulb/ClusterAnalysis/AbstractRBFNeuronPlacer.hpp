@@ -8,31 +8,34 @@
 #include <vector>
 #include <list>
 
-// Forward declarations
-struct Cluster;
-struct Point;
-class RBFNetwork;
-class Teacher;
-class PointSet;
-class AbstractRandomGenerator;
-
-// This class contains all stuff needed to describe a RBFNeuronPlacer 
-class AbstractRBFNeuronPlacer 
+namespace LightBulb
 {
-protected:
-	AbstractRandomGenerator* randomGenerator;
+	// Forward declarations
+	struct Cluster;
+	struct Point;
+	class RBFNetwork;
+	class Teacher;
+	class PointSet;
+	class AbstractRandomGenerator;
 
-	// Extract all teachingPatterns from all teachingLessons and put them into a vector of points
-	std::unique_ptr<PointSet> getPointsFromTeachingLessons(Teacher &teacher, int inputDimension);
-	// Replace all RBFNeurons of the given network with the help of the given clusters
-	void placeRBFNeuronsFromClusters(std::list<Cluster>* clusters, RBFNetwork &neuralNetwork);
-public:
-	// This method should execute the placing process
-	virtual void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) = 0;
-	// Returns a copy of the object
-	virtual AbstractRBFNeuronPlacer* getCopy() = 0;
+	// This class contains all stuff needed to describe a RBFNeuronPlacer 
+	class AbstractRBFNeuronPlacer
+	{
+	protected:
+		AbstractRandomGenerator* randomGenerator;
 
-	void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
-};
+		// Extract all teachingPatterns from all teachingLessons and put them into a vector of points
+		std::unique_ptr<PointSet> getPointsFromTeachingLessons(Teacher &teacher, int inputDimension);
+		// Replace all RBFNeurons of the given network with the help of the given clusters
+		void placeRBFNeuronsFromClusters(std::list<Cluster>* clusters, RBFNetwork &neuralNetwork);
+	public:
+		// This method should execute the placing process
+		virtual void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) = 0;
+		// Returns a copy of the object
+		virtual AbstractRBFNeuronPlacer* getCopy() = 0;
+
+		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+	};
+}
 
 #endif

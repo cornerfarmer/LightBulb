@@ -11,20 +11,23 @@
 #include "PreferencesWindow.hpp"
 #include "AbstractSubApp.hpp"
 
-// Forward declarations
-class AbstractTrainingPlan;
-class AbstractPreference;
-
-class PreferencesController : public AbstractSubApp
+namespace LightBulb
 {
-private:
-	std::unique_ptr<PreferencesWindow> window;
-	AbstractTrainingPlan* trainingPlan;
-public:
-	PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent = NULL);
-	PreferencesWindow* getWindow();
-	static std::string getLabel();
-	std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
-};
+	// Forward declarations
+	class AbstractTrainingPlan;
+	class AbstractPreference;
+
+	class PreferencesController : public AbstractSubApp
+	{
+	private:
+		std::unique_ptr<PreferencesWindow> window;
+		AbstractTrainingPlan* trainingPlan;
+	public:
+		PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent = NULL);
+		PreferencesWindow* getWindow();
+		static std::string getLabel();
+		std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
+	};
+}
 
 #endif

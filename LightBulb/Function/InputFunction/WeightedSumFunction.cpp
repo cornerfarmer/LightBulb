@@ -1,12 +1,15 @@
 // Includes
 #include "Function/InputFunction/WeightedSumFunction.hpp"
 
-void WeightedSumFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights)
+namespace LightBulb
 {
-	netInputs[layerNr].noalias() = weights[layerNr - 1] * *activations[layerNr - 1];
-}
+	void WeightedSumFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::MatrixXd>& weights)
+	{
+		netInputs[layerNr].noalias() = weights[layerNr - 1] * *activations[layerNr - 1];
+	}
 
-AbstractInputFunction* WeightedSumFunction::getInputFunctionCopy()
-{
-	return new WeightedSumFunction(*this);
+	AbstractInputFunction* WeightedSumFunction::getInputFunctionCopy()
+	{
+		return new WeightedSumFunction(*this);
+	}
 }

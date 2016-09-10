@@ -28,7 +28,7 @@ struct FunctionSimulatorOptions
 
 typedef double(*Function)(std::vector<float> pos);
 
-class FunctionSimulator : public AbstractSimpleEvolutionWorld
+class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionWorld
 {
 protected:
 	AbstractEvolutionObject* createNewObject() override;
@@ -42,6 +42,6 @@ public:
 	double getScore(AbstractEvolutionObject* object) override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, AbstractSimpleEvolutionWorld, AbstractEvolutionWorld)
+USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld)
 
 #endif

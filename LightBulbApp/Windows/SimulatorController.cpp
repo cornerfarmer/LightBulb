@@ -4,46 +4,48 @@
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 
-
-SimulatorController::SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent)
-	:AbstractSubApp(mainApp)
+namespace LightBulb
 {
-	neuralNetworkRepository = neuralNetworkRepository_;
-	neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
-	window.reset(new SimulatorWindow(this, parent));
-	neuralNetworksChanged(neuralNetworkRepository);
-}
+	SimulatorController::SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent)
+		:AbstractSubApp(mainApp)
+	{
+		neuralNetworkRepository = neuralNetworkRepository_;
+		neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
+		window.reset(new SimulatorWindow(this, parent));
+		neuralNetworksChanged(neuralNetworkRepository);
+	}
 
-void SimulatorController::prepareClose()
-{
-	neuralNetworkRepository->removeObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
-}
+	void SimulatorController::prepareClose()
+	{
+		neuralNetworkRepository->removeObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, this);
+	}
 
-SimulatorWindow* SimulatorController::getWindow()
-{
-	return window.get();
-}
+	SimulatorWindow* SimulatorController::getWindow()
+	{
+		return window.get();
+	}
 
-std::vector<std::unique_ptr<AbstractNeuralNetwork>>* SimulatorController::getNeuralNetworks()
-{
-	return neuralNetworkRepository->getNeuralNetworks();
-}
+	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* SimulatorController::getNeuralNetworks()
+	{
+		return neuralNetworkRepository->getNeuralNetworks();
+	}
 
-void SimulatorController::neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository)
-{
-	window->refreshNeuralNetworks();
-}
+	void SimulatorController::neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository)
+	{
+		window->refreshNeuralNetworks();
+	}
 
-std::vector<double> SimulatorController::calculate(int neuralNetworkIndex, std::vector<double> input)
-{
-	AbstractNeuralNetwork* network = (*neuralNetworkRepository->getNeuralNetworks())[neuralNetworkIndex].get();
-	std::vector<double> output(network->getNetworkTopology()->getOutputSize());
-	TopologicalOrder activationOrder;
-	network->calculate(input, output, activationOrder);
-	return output;
-}
+	std::vector<double> SimulatorController::calculate(int neuralNetworkIndex, std::vector<double> input)
+	{
+		AbstractNeuralNetwork* network = (*neuralNetworkRepository->getNeuralNetworks())[neuralNetworkIndex].get();
+		std::vector<double> output(network->getNetworkTopology()->getOutputSize());
+		TopologicalOrder activationOrder;
+		network->calculate(input, output, activationOrder);
+		return output;
+	}
 
-std::string SimulatorController::getLabel()
-{
-	return "Simulator";
+	std::string SimulatorController::getLabel()
+	{
+		return "Simulator";
+	}
 }

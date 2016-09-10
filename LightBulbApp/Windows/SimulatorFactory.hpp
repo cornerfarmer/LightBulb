@@ -7,17 +7,20 @@
 #include "AbstractWindow.hpp"
 #include "AbstractSubAppFactory.hpp"
 
-// Forward declarations
-class NeuralNetworkRepository;
-
-class SimulatorFactory : public AbstractSubAppFactory
+namespace LightBulb
 {
-protected:
-	NeuralNetworkRepository* neuralNetworkRepository;
-public:
-	SimulatorFactory(NeuralNetworkRepository* neuralNetworkRepository_);
-	AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
-	std::string getLabel() override;
-};
+	// Forward declarations
+	class NeuralNetworkRepository;
+
+	class SimulatorFactory : public AbstractSubAppFactory
+	{
+	protected:
+		NeuralNetworkRepository* neuralNetworkRepository;
+	public:
+		SimulatorFactory(NeuralNetworkRepository* neuralNetworkRepository_);
+		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
+		std::string getLabel() override;
+	};
+}
 
 #endif

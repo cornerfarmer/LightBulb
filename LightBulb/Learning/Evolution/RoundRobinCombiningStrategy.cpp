@@ -6,26 +6,29 @@
 #include <algorithm>
 #include <iostream>
 
-void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
+namespace LightBulb
 {
-	for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
+	void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
 	{
-		for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
+		for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
 		{
-			if (*firstPlayer != *secondPlayer)
+			for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
 			{
-				for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+				if (*firstPlayer != *secondPlayer)
 				{
-					int result = simulationWorld->compareObjects(*firstPlayer, *secondPlayer, r);
-					if (result != 0)
-						setResult(*firstPlayer, *secondPlayer, r, result > 0);
+					for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+					{
+						int result = simulationWorld->compareObjects(*firstPlayer, *secondPlayer, r);
+						if (result != 0)
+							setResult(*firstPlayer, *secondPlayer, r, result > 0);
+					}
 				}
 			}
 		}
 	}
-}
 
-int RoundRobinCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
-{
-	return simulationWorld->getPopulationSize() * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
+	int RoundRobinCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
+	{
+		return simulationWorld->getPopulationSize() * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
+	}
 }

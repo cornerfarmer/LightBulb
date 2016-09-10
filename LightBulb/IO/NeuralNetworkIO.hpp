@@ -10,21 +10,25 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 
-template <class Archive>
-void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
+namespace LightBulb
 {
-	archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
-	archive(cereal::make_nvp("state", (int)neuralNetwork.state));
-	archive(cereal::make_nvp("name", neuralNetwork.name));
+	template <class Archive>
+	void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
+	{
+		archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
+		archive(cereal::make_nvp("state", (int)neuralNetwork.state));
+		archive(cereal::make_nvp("name", neuralNetwork.name));
+	}
 }
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<NeuralNetwork>
+	template <> struct LoadAndConstruct<LightBulb::NeuralNetwork>
 	{
 		template <class Archive>
-		static void load_and_construct(Archive& ar, cereal::construct<NeuralNetwork>& construct)
+		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::NeuralNetwork>& construct)
 		{
+			using namespace LightBulb;
 			std::unique_ptr<AbstractNetworkTopology> networkTopology;
 			ar(cereal::make_nvp("networkTopology", networkTopology));
 			construct(networkTopology.release());
@@ -36,6 +40,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(NeuralNetwork);
+CEREAL_REGISTER_TYPE(LightBulb::NeuralNetwork);
 
 #endif

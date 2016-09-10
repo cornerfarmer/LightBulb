@@ -15,6 +15,7 @@
 #include "Nature.hpp"
 #include "NatureFactory.hpp"
 
+using namespace LightBulb;
 
 AbstractLearningRule* NatureExample::createLearningRate()
 {

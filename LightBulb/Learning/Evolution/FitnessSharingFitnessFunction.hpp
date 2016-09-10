@@ -8,18 +8,21 @@
 // Include
 #include "Learning/Evolution/AbstractFitnessFunction.hpp"
 
-// Forward declarations
-
-//
-class FitnessSharingFitnessFunction : public AbstractFitnessFunction
+namespace LightBulb
 {
-private:
-	double exponent;
-	double dissimilarityThreshold;
-public:
-	FitnessSharingFitnessFunction(double dissimilarityThreshold_, double exponent_ = 1);
+	// Forward declarations
+
 	//
-	void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-};
+	class FitnessSharingFitnessFunction : public AbstractFitnessFunction
+	{
+	private:
+		double exponent;
+		double dissimilarityThreshold;
+	public:
+		FitnessSharingFitnessFunction(double dissimilarityThreshold_, double exponent_ = 1);
+		//
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+	};
+}
 
 #endif
