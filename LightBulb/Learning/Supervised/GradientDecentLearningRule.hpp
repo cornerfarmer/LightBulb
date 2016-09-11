@@ -45,13 +45,14 @@ namespace LightBulb
 		void initialize();
 	protected:
 		// Adjusts the weights of an edge dependent on its gradient
-		void adjustWeights(int layerIndex, Eigen::MatrixXd gradients) override;
+		void adjustWeights(int layerIndex) override;
 		// Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object
 		GradientDecentLearningRuleOptions* getOptions();
 		// Inherited:
+		void clearGradient() override;
 		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
-		std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
+		void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
 		void initializeTry() override;
 	public:
 		GradientDecentLearningRule(GradientDecentLearningRuleOptions& options_);

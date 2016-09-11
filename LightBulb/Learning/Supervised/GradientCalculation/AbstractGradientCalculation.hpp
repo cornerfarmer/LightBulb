@@ -19,10 +19,12 @@ namespace LightBulb
 
 	class AbstractGradientCalculation
 	{
-	private:
+	protected:
+		std::vector<Eigen::MatrixXd> gradient;
 	public:
-		std::vector<Eigen::MatrixXd> calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap);
-		virtual void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient) = 0;
+		void initGradient(AbstractNetworkTopology* networkTopology);
+		std::vector<Eigen::MatrixXd>* getGradient();
+		virtual void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap) = 0;
 	};
 }
 

@@ -53,7 +53,7 @@ namespace LightBulb
 			gradientDecentOptions.maxTries = 1;
 			gradientDecentOptions.changeWeightsBeforeLearning = false;
 			gradientDecentOptions.offlineLearning = true;
-			gradientDecentOptions.totalErrorGoal = 0;
+			gradientDecentOptions.totalErrorGoal = -1;
 			gradientDecentOptions.clipError = true;
 
 			rmsPropOptions.learningRate = 0.00025;

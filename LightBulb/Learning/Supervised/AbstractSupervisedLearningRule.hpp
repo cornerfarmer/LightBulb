@@ -72,7 +72,6 @@ namespace LightBulb
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractSupervisedLearningRule& learningRule);
 	private:
-		std::vector<Eigen::MatrixXd> offlineLearningWeights;
 		void validateOptions();
 	protected:
 		// Holds the current total error
@@ -87,10 +86,11 @@ namespace LightBulb
 		void initializeLearningAlgoritm() override;
 		bool hasLearningSucceeded() override;
 		void rateLearning() override;
+		virtual void clearGradient() {};
 		// This method should calculate the deltaWeight for the actual edge
-		virtual std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) = 0;
+		virtual void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) = 0;
 		// This method should adjust the weight of the current edge
-		virtual void adjustWeights(int layerIndex, Eigen::MatrixXd gradients) = 0;
+		virtual void adjustWeights(int layerIndex) = 0;
 		// Calculate if it is sensible to continue learning
 		virtual bool learningHasStopped() = 0;
 		// Prints a current summary of the status of the learning process

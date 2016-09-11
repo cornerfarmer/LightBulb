@@ -73,15 +73,9 @@ namespace LightBulb
 			log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(learningState->iterations) + " " + printDebugOutput(), LL_LOW);
 		}
 
-		// If offlineLearning is activated, reset the offlineLearningGradients
 		if (getOptions()->offlineLearning)
 		{
-			offlineLearningWeights = *getCurrentNetworkTopology()->getAllWeights();
-			// Adjust all hidden/output layers except 
-			for (int l = 0; l < offlineLearningWeights.size(); l++)
-			{
-				offlineLearningWeights[l].setZero();
-			}
+			clearGradient();
 		}
 
 		// Do some work before every iteration
@@ -105,19 +99,15 @@ namespace LightBulb
 			// While the learning rule wants do some calculation with the current teaching lesson
 			while (configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
 			{
+				if (!getOptions()->offlineLearning)
+				{
+					clearGradient();
+				}
+
 				// Calculate the errormap and also fill - if needed - the output and netInput values map
 				std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder, NULL, NULL, getOptions()->clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
 
-				std::vector<Eigen::MatrixXd> deltaWeight = calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errormap.get());
-
-				for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)
-				{
-					// If offline learning is activated, add the weight to the offlineLearningWeight, else adjust the weight right now
-					if (getOptions()->offlineLearning)
-						offlineLearningWeights[l - 1] += deltaWeight[l - 1];
-					else
-						offlineLearningWeights[l - 1] = deltaWeight[l - 1];
-				}
+				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errormap.get());
 
 				// If offline learning is activated, adjust all weights
 				if (!getOptions()->offlineLearning)
@@ -126,10 +116,9 @@ namespace LightBulb
 					for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 					{
 						// Adjust the weight depending on the sum of all calculated gradients
-						adjustWeights(l, offlineLearningWeights[l - 1]);
+						adjustWeights(l);
 					}
 				}
-
 			}
 
 			// Do some work after all weights were adjusted
@@ -147,7 +136,7 @@ namespace LightBulb
 			for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)
 			{
 				// Adjust the weight depending on the sum of all calculated gradients
-				adjustWeights(l, offlineLearningWeights[l - 1]);
+				adjustWeights(l);
 			}
 
 			// Do some work after all weights were adjusted
@@ -164,9 +153,7 @@ namespace LightBulb
 
 	void AbstractSupervisedLearningRule::initializeLearningAlgoritm()
 	{
-		//offlineLearningWeights.clear();
-		// Create a vector which will contain all weights for offline learning
-		offlineLearningWeights.resize(getCurrentNetworkTopology()->getLayerCount());
+
 	}
 
 	void AbstractSupervisedLearningRule::doCalculationAfterLearningProcess()
@@ -177,12 +164,14 @@ namespace LightBulb
 
 	bool AbstractSupervisedLearningRule::hasLearningSucceeded()
 	{
-		return (totalError <= getOptions()->totalErrorGoal);
+		return (getOptions()->totalErrorGoal != -1 && totalError <= getOptions()->totalErrorGoal);
 	}
 
 	void AbstractSupervisedLearningRule::rateLearning()
 	{
-		totalError = getOptions()->teacher->getTotalError(*getOptions()->neuralNetwork, *currentActivationOrder);
+		if (getOptions()->totalErrorGoal != -1) {
+			totalError = getOptions()->teacher->getTotalError(*getOptions()->neuralNetwork, *currentActivationOrder);
+		}
 	}
 
 	AbstractNetworkTopology* AbstractSupervisedLearningRule::getCurrentNetworkTopology()

@@ -51,20 +51,15 @@ namespace LightBulb
 	}
 
 
-	std::vector<Eigen::MatrixXd> GradientDecentLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
+	void GradientDecentLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
 	{
-		std::vector<Eigen::MatrixXd> gradient(getCurrentNetworkTopology()->getLayerCount() - 1);
-		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errormap, gradient);
-		for (int i = 0; i < gradient.size(); i++)
-			gradient[i] *= -1;
-
-		return gradient;
+		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errormap);
 	}
 
 
-	void GradientDecentLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
+	void GradientDecentLearningRule::adjustWeights(int layerIndex)
 	{
-		Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradientDecentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradients);
+		Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradientDecentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient()->at(layerIndex - 1));
 		getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 	}
 
@@ -81,6 +76,11 @@ namespace LightBulb
 	GradientDecentLearningRuleOptions* GradientDecentLearningRule::getOptions()
 	{
 		return static_cast<GradientDecentLearningRuleOptions*>(options.get());
+	}
+
+	void GradientDecentLearningRule::clearGradient()
+	{
+		gradientCalculation->initGradient(getCurrentNetworkTopology());
 	}
 
 	void GradientDecentLearningRule::initializeTry()

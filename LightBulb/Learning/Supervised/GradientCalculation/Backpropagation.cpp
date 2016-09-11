@@ -15,7 +15,7 @@ namespace LightBulb
 		flatSpotEliminationFac = flatSpotEliminationFac_;
 	}
 
-	void Backpropagation::calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient)
+	void Backpropagation::calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap)
 	{
 		for (int layerIndex = networkTopology->getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
@@ -33,7 +33,7 @@ namespace LightBulb
 				lastDeltaVectorOutputLayer = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(networkTopology->getNetInputsPerLayer(layerIndex)).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 			}
 
-			gradient[layerIndex - 1] = (lastDeltaVectorOutputLayer * networkTopology->getActivationsPerLayer(layerIndex - 1).transpose()).matrix();
+			gradient[layerIndex - 1].noalias() = gradient[layerIndex - 1] + -1 * (lastDeltaVectorOutputLayer * networkTopology->getActivationsPerLayer(layerIndex - 1).transpose()).matrix();
 		}
 	}
 }

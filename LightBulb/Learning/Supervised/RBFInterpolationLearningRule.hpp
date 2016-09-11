@@ -49,15 +49,17 @@ namespace LightBulb
 		std::unique_ptr<Eigen::MatrixXd> t;
 		// A vector which will contain all calculated weights
 		std::unique_ptr<Eigen::MatrixXd> w;
+
+		std::vector<Eigen::MatrixXd> gradients;
 	protected:
 		// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
 		RBFInterpolationLearningRuleOptions* getOptions();
 		// Inherited:
-		void adjustWeights(int layerIndex, Eigen::MatrixXd gradients) override;
+		void adjustWeights(int layerIndex) override;
 		bool learningHasStopped() override;
 		void initializeStartLearningAlgoritm() override;
 		AbstractActivationOrder* getNewActivationOrder();
-		std::vector<Eigen::MatrixXd> calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
+		void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
 		void initializeTry() override;
 	public:
 		RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);

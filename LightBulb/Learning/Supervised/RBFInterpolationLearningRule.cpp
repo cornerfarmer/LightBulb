@@ -32,10 +32,10 @@ namespace LightBulb
 		return "RBFInterpolationLearningRule";
 	}
 
-	void RBFInterpolationLearningRule::adjustWeights(int layerIndex, Eigen::MatrixXd gradients)
+	void RBFInterpolationLearningRule::adjustWeights(int layerIndex)
 	{
 		if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1) {
-			Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradients;
+			Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradients[layerIndex];
 			getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 		}
 	}
@@ -63,7 +63,7 @@ namespace LightBulb
 		// Initialize a new vector which will contain all calculated weights
 		w.reset(new MatrixXd(getOptions()->neuralNetwork->getNetworkTopology()->getOutputSize(), rbfNetwork->getNeuronCountsPerLayer()[1]));
 
-
+		gradients.resize(getCurrentNetworkTopology()->getLayerCount() - 1);
 	}
 
 	AbstractActivationOrder* RBFInterpolationLearningRule::getNewActivationOrder()
@@ -71,7 +71,7 @@ namespace LightBulb
 		return new TopologicalOrder();
 	}
 
-	std::vector<Eigen::MatrixXd> RBFInterpolationLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
+	void RBFInterpolationLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
 	{
 		std::vector<Eigen::MatrixXd> deltaWeight(getCurrentNetworkTopology()->getLayerCount() - 1);
 		for (int layerIndex = getCurrentNetworkTopology()->getLayerCount() - 1; layerIndex > 0; layerIndex--) {
@@ -93,11 +93,10 @@ namespace LightBulb
 
 			// Only change weights in the last layer
 			if (lessonIndex == getOptions()->teacher->getTeachingLessons()->size() - 1 && layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1)
-				deltaWeight[layerIndex - 1] = (*w);
+				gradients[layerIndex - 1] = (*w);
 			else
-				deltaWeight[layerIndex - 1] = Eigen::MatrixXd::Zero(w->rows(), w->cols());
+				gradients[layerIndex - 1] = Eigen::MatrixXd::Zero(w->rows(), w->cols());
 		}
-		return deltaWeight;
 	}
 
 	void RBFInterpolationLearningRule::initializeTry()
