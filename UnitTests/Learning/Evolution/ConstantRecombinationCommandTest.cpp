@@ -5,6 +5,8 @@
 #include <Mocks/MockRecombinationSelector.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class ConstantRecombinationCommandTest : public testing::Test {
 public:
 	ConstantRecombinationCommand* constantRecombinationCommand;

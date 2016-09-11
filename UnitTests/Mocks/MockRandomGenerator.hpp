@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 #include "Random/AbstractRandomGenerator.hpp"
 
-class MockRandomGenerator : public AbstractRandomGenerator
+class MockRandomGenerator : public LightBulb::AbstractRandomGenerator
 {
 public:
 	MOCK_METHOD0(randDouble, double ());

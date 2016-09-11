@@ -18,7 +18,7 @@
 
 void main(int argc, char** argv)
 {
-	App* app = new App();
+	LightBulb::App* app = new LightBulb::App();
 	app->addTrainingPlan(new RBFNetworkBiggerExample());
 	app->addTrainingPlan(new BackpropagationXorExample());
 	app->addTrainingPlan(new FunctionEvolutionExample());

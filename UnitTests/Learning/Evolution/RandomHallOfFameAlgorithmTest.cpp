@@ -6,6 +6,8 @@
 #include <Mocks/MockCoevolutionWorld.hpp>
 #include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 
+using namespace LightBulb;
+
 class RandomHallOfFameAlgorithmTest : public testing::Test {
 public:
 	RandomHallOfFameAlgorithm* randomHallOfFameAlgorithm;

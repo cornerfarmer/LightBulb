@@ -3,6 +3,8 @@
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 
+using namespace LightBulb;
+
 class TeachingLessonBooleanInputTest : public testing::Test {
 public:
 	TeachingLessonBooleanInput* teachingLesson;

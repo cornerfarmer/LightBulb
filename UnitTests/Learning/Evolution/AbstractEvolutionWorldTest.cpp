@@ -2,6 +2,8 @@
 #include <Mocks/MockTestableEvolutionWorld.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class AbstractEvolutionWorldTest : public testing::Test {
 public:
 	MockTestableEvolutionWorld* evolutionWorld;

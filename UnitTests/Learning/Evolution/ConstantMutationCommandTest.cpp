@@ -5,6 +5,8 @@
 #include <Mocks/MockmutationSelector.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class ConstantMutationCommandTest : public testing::Test {
 public:
 	ConstantMutationCommand* constantMutationCommand;

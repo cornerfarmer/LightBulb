@@ -6,13 +6,13 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractMutationSelector.hpp>
 
-class MockMutationSelector : public AbstractMutationSelector
+class MockMutationSelector : public LightBulb::AbstractMutationSelector
 {
 public:
-	MOCK_METHOD1(addObjectToMutate, void (AbstractEvolutionObject*));
-	MOCK_METHOD3(executeMutationSelection, void (int, std::vector<std::pair<double, AbstractEvolutionObject*>>*, std::map<AbstractEvolutionObject*, int>*));
-	MOCK_METHOD0(getMutationSelection, std::vector<AbstractEvolutionObject*>* ());
-	MOCK_METHOD2(selectForMutation, void (int, std::vector<std::pair<double, AbstractEvolutionObject*>>*));
+	MOCK_METHOD1(addObjectToMutate, void (LightBulb::AbstractEvolutionObject*));
+	MOCK_METHOD3(executeMutationSelection, void (int, std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*, std::map<LightBulb::AbstractEvolutionObject*, int>*));
+	MOCK_METHOD0(getMutationSelection, std::vector<LightBulb::AbstractEvolutionObject*>* ());
+	MOCK_METHOD2(selectForMutation, void (int, std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*));
 };
 
 #endif

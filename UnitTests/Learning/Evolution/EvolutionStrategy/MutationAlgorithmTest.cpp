@@ -6,6 +6,8 @@
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 
+using namespace LightBulb;
+
 class MutationAlgorithmTest : public testing::Test {
 public:
 	MutationAlgorithm* mutationAlgorithm;

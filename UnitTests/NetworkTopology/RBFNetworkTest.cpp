@@ -6,6 +6,8 @@
 #include "NeuronDescription/NeuronDescription.hpp"
 #include <NetworkTopology/RBFNetwork.hpp>
 
+using namespace LightBulb;
+
 class RBFNetworkTest : public testing::Test {
 public:
 	RBFNetwork* network;

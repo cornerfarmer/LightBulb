@@ -4,6 +4,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/StandardDeviationFitnessFunction.hpp>
 
+using namespace LightBulb;
+
 class StandardDeviationFitnessFunctionTest : public testing::Test {
 public:
 	StandardDeviationFitnessFunction* standardDeviationFitnessFunction;

@@ -3,6 +3,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/LinearScalingFitnessFunction.hpp>
 
+using namespace LightBulb;
+
 class LinearScalingFitnessFunctionTest : public testing::Test {
 public:
 	LinearScalingFitnessFunction* linearScalingFitnessFunction;

@@ -8,6 +8,8 @@
 #include <EigenSrc/Dense>
 #include "Mocks/MockNeuronDescription.hpp"
 
+using namespace LightBulb;
+
 class TeachingLessonLinearInputTest : public testing::Test {
 public:
 	TeachingLessonLinearInput* teachingLesson;

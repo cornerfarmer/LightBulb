@@ -6,12 +6,12 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
 
-class MockEvolutionLearningRule : public AbstractEvolutionLearningRule
+class MockEvolutionLearningRule : public LightBulb::AbstractEvolutionLearningRule
 {
 public:
-	MockEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_):AbstractEvolutionLearningRule(options_) {};
+	MockEvolutionLearningRule(LightBulb::AbstractEvolutionLearningRuleOptions& options_):AbstractEvolutionLearningRule(options_) {};
 	MOCK_METHOD0(doIteration, bool ());
-	MOCK_METHOD0(getWorld, AbstractEvolutionWorld* ());
+	MOCK_METHOD0(getWorld, LightBulb::AbstractEvolutionWorld* ());
 	MOCK_METHOD0(initializeStartLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeResumeLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeLearningAlgoritm, void ());
@@ -19,10 +19,10 @@ public:
 	MOCK_METHOD0(doCalculationAfterLearningProcess, void ());
 	MOCK_METHOD0(rateLearning, void ());
 	MOCK_METHOD0(hasLearningSucceeded, bool ());
-	MOCK_METHOD1(setLogger, void (AbstractLogger*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
 	MOCK_METHOD0(getDataSetLabels, std::vector<std::string> ());
-	MOCK_METHOD0(getLearningResult, AbstractLearningResult* ());
-	MOCK_METHOD1(fillDefaultResults, void (AbstractLearningResult*));
+	MOCK_METHOD0(getLearningResult, LightBulb::AbstractLearningResult* ());
+	MOCK_METHOD1(fillDefaultResults, void (LightBulb::AbstractLearningResult*));
 };
 
 #endif

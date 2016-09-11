@@ -10,7 +10,6 @@
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
-class EvolutionLearningRule;
 class NetworkSimulator;
 
 class Network : public LightBulb::AbstractSimpleEvolutionObject

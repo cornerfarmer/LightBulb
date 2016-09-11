@@ -8,18 +8,18 @@
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 
-class MockTeacher : public AbstractTeacher
+class MockTeacher : public LightBulb::AbstractTeacher
 {
 public:
-	MOCK_METHOD1(addTeachingLesson, void (AbstractTeachingLesson*));
-	MOCK_METHOD1(addTestingLesson, void (AbstractTeachingLesson*));
-	MOCK_METHOD0(getTeachingLessons, std::vector<std::unique_ptr<AbstractTeachingLesson>>* ());
-	MOCK_METHOD0(getTestingLessons, std::vector<std::unique_ptr<AbstractTeachingLesson>>* ());
-	MOCK_METHOD2(getTotalError, double (AbstractNeuralNetwork&, AbstractActivationOrder&));
+	MOCK_METHOD1(addTeachingLesson, void (LightBulb::AbstractTeachingLesson*));
+	MOCK_METHOD1(addTestingLesson, void (LightBulb::AbstractTeachingLesson*));
+	MOCK_METHOD0(getTeachingLessons, std::vector<std::unique_ptr<LightBulb::AbstractTeachingLesson>>* ());
+	MOCK_METHOD0(getTestingLessons, std::vector<std::unique_ptr<LightBulb::AbstractTeachingLesson>>* ());
+	MOCK_METHOD2(getTotalError, double (LightBulb::AbstractNeuralNetwork&, LightBulb::AbstractActivationOrder&));
+	MOCK_METHOD2(getTeachingError, double (LightBulb::AbstractNeuralNetwork&, LightBulb::AbstractActivationOrder&));
+	MOCK_METHOD1(getWeightDecayError, double (LightBulb::AbstractNeuralNetwork&));
 	MOCK_METHOD0(unfold, AbstractTeacher* ());
 	MOCK_METHOD0(getMaxTimeStep, int ());
-	MOCK_METHOD2(getTeachingError, double (AbstractNeuralNetwork&, AbstractActivationOrder&));
-	MOCK_METHOD1(getWeightDecayError, double (AbstractNeuralNetwork&));
 };
 
 #endif

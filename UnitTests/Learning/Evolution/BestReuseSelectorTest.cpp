@@ -4,6 +4,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 
+using namespace LightBulb;
+
 class BestReuseSelectorTest : public testing::Test {
 public:
 	BestReuseSelector* bestReuseSelector;

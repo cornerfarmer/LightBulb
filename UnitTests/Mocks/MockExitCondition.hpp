@@ -6,11 +6,11 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractExitCondition.hpp>
 
-class MockExitCondition : public AbstractExitCondition
+class MockExitCondition : public LightBulb::AbstractExitCondition
 {
 public:
-	MOCK_METHOD1(setLogger, void (AbstractLogger*));
-	MOCK_METHOD2(evaluate, bool (std::vector<std::pair<double, AbstractEvolutionObject*>>*, AbstractEvolutionLearningRule*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
+	MOCK_METHOD2(evaluate, bool (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*, LightBulb::AbstractEvolutionLearningRule*));
 };
 
 #endif

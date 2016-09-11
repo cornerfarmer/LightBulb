@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 #include <Function/SelectionFunction/AbstractSelectionFunction.hpp>
 
-class MockSelectionFunction : public AbstractSelectionFunction
+class MockSelectionFunction : public LightBulb::AbstractSelectionFunction
 {
 public:
 	MOCK_METHOD1(execute, int (const std::vector<double>&));

@@ -6,6 +6,8 @@
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>
 
+using namespace LightBulb;
+
 class PerfectObjectFoundConditionTest : public testing::Test {
 public:
 	PerfectObjectFoundCondition* perfectObjectFoundCondition;

@@ -8,6 +8,7 @@
 #include <array>
 
 using testing::Expectation;
+using namespace LightBulb;
 
 class ConstantCoevolutionFitnessFunctionTest : public testing::Test {
 public:

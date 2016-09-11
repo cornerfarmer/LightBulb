@@ -7,8 +7,6 @@
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
 class SimpleReinforcementWorld;
-class AbstractReinforcementWorld;
-struct FeedForwardNetworkTopologyOptions;
 
 class SimpleReinforcementDQNExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {

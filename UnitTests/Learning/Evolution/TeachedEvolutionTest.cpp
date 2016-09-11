@@ -8,6 +8,8 @@
 #include <Mocks/MockNeuronDescriptionFactory.hpp>
 #include "Mocks/MockRandomGenerator.hpp"
 
+using namespace LightBulb;
+
 class TeachedEvolutionTest : public testing::Test {
 public:
 	TeachingEvolutionWorld* teachingEvolutionWorld;

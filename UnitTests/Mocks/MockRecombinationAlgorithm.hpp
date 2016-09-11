@@ -6,10 +6,10 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractRecombinationAlgorithm.hpp>
 
-class MockRecombinationAlgorithm : public AbstractRecombinationAlgorithm
+class MockRecombinationAlgorithm : public LightBulb::AbstractRecombinationAlgorithm
 {
 public:
-	MOCK_METHOD2(execute, void (AbstractEvolutionObject*, AbstractEvolutionObject*));
+	MOCK_METHOD2(execute, void (LightBulb::AbstractEvolutionObject*, LightBulb::AbstractEvolutionObject*));
 };
 
 #endif

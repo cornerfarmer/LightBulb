@@ -2,6 +2,8 @@
 #include "Function/InputFunction/EuclideanDistance.hpp"
 #include <math.h>
 
+using namespace LightBulb;
+
 TEST(EuclideanDistance, computeNetInputs)
 {
 	EuclideanDistance function;

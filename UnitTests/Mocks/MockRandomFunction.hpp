@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 #include <Function/RandomFunction/AbstractRandomFunction.hpp>
 
-class MockRandomFunction : public AbstractRandomFunction
+class MockRandomFunction : public LightBulb::AbstractRandomFunction
 {
 public:
 	MOCK_METHOD1(execute, int (int));

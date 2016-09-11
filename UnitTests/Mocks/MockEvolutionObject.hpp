@@ -6,17 +6,18 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractEvolutionObject.hpp>
 
-class MockEvolutionObject : public AbstractEvolutionObject
+class MockEvolutionObject : public LightBulb::AbstractEvolutionObject
 {
 public:
-	MOCK_METHOD0(getNeuralNetwork, AbstractNeuralNetwork* ());
+	MOCK_METHOD1(copyPropertiesFrom, void (AbstractEvolutionObject*));
+	MOCK_METHOD0(getNeuralNetwork, LightBulb::AbstractNeuralNetwork* ());
 	MOCK_METHOD0(getMutationStrength, std::vector<double>* ());
 	MOCK_METHOD1(setMutationStrength, void (std::vector<double>*));
 	MOCK_METHOD0(doNNCalculation, void ());
 	MOCK_METHOD0(resetNN, void ());
 	MOCK_METHOD1(clone, AbstractEvolutionObject* (bool));
-	MOCK_METHOD1(copyPropertiesFrom, void (AbstractEvolutionObject*));
-	MOCK_METHOD1(setEvolutionSource, void (EvolutionSource));
+	MOCK_METHOD1(setEvolutionSource, void (LightBulb::EvolutionSource));
+
 };
 
 #endif

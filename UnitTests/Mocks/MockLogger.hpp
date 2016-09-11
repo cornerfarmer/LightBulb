@@ -6,16 +6,16 @@
 #include "gmock/gmock.h"
 #include <Logging/AbstractLogger.hpp>
 
-class MockLogger : public AbstractLogger
+class MockLogger : public LightBulb::AbstractLogger
 {
 public:
 	explicit MockLogger()
-		: AbstractLogger(LL_HIGH)
+		: AbstractLogger(LightBulb::LL_HIGH)
 	{
 	}
 
 	MOCK_METHOD1(outputMessage, void (std::string));
-	MOCK_METHOD2(log, void (std::string, LogLevel));
+	MOCK_METHOD2(log, void (std::string, LightBulb::LogLevel));
 };
 
 #endif

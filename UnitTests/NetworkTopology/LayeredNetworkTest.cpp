@@ -5,6 +5,8 @@
 #include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
 
+using namespace LightBulb;
+
 class FeedForwardNetworkTopologyTest : public testing::Test {
 public:
 	FeedForwardNetworkTopology* network;

@@ -13,7 +13,7 @@
 template <class Archive>
 void serialize(Archive& archive, PongReinforcementWorld& world)
 {
-	archive(cereal::base_class<AbstractReinforcementWorld>(&world));
+	archive(cereal::base_class<LightBulb::AbstractReinforcementWorld>(&world));
 	archive(cereal::make_nvp("time", world.time));
 	archive(cereal::make_nvp("game", world.game));
 }
@@ -21,11 +21,12 @@ void serialize(Archive& archive, PongReinforcementWorld& world)
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(PongReinforcementWorld, AbstractReinforcementWorld)
+	CONSTRUCT_EXISTING(PongReinforcementWorld, LightBulb::AbstractReinforcementWorld)
 	{
 		template <class Archive>
 		static void construct(Archive& ar, PongReinforcementWorld& world)
 		{
+			using namespace LightBulb;
 			ar(cereal::base_class<AbstractReinforcementWorld>(&world));
 			ar(cereal::make_nvp("time", world.time));
 

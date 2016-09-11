@@ -16,6 +16,8 @@
 #include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
 #include "Learning/Supervised/GradientDecentAlgorithms/ResilientLearningRate.hpp"
 
+using namespace LightBulb;
+
 class GradientDecentLearningRuleTest : public testing::Test {
 public:
 	GradientDecentLearningRule* gradientDecentLearningRule;

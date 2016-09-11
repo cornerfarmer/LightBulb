@@ -5,10 +5,10 @@
 #define _TICTACTOEEVOLUTIONEXAMPLE_H_
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 class TicTacToe;
-class LightBulb::SharedSamplingCombiningStrategy;
-struct LightBulb::FeedForwardNetworkTopologyOptions;
 
 class TicTacToeEvolutionExample : public LightBulb::AbstractCoevolutionTrainingPlan
 {

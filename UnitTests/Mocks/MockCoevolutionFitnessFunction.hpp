@@ -6,10 +6,10 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
 
-class MockCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
+class MockCoevolutionFitnessFunction : public LightBulb::AbstractCoevolutionFitnessFunction
 {
 public:
-	MOCK_METHOD1(execute, std::map<AbstractEvolutionObject*, double>* (CombiningStrategyResults&));
+	MOCK_METHOD1(execute, std::map<LightBulb::AbstractEvolutionObject*, double>* (LightBulb::CombiningStrategyResults&));
 };
 
 #endif

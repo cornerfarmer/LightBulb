@@ -6,13 +6,13 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractRecombinationSelector.hpp>
 
-class MockRecombinationSelector : public AbstractRecombinationSelector
+class MockRecombinationSelector : public LightBulb::AbstractRecombinationSelector
 {
 public:
-	MOCK_METHOD2(selectForRecombination, void (int, std::vector<std::pair<double, AbstractEvolutionObject*>>*));
-	MOCK_METHOD1(addObjectToRecombination, void (AbstractEvolutionObject*));
-	MOCK_METHOD3(executeRecombinationSelection, void (int, std::vector<std::pair<double, AbstractEvolutionObject*>>*, std::map<AbstractEvolutionObject*, int>*));
-	MOCK_METHOD0(getRecombinationSelection, std::vector<AbstractEvolutionObject*>* ());
+	MOCK_METHOD2(selectForRecombination, void (int, std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*));
+	MOCK_METHOD1(addObjectToRecombination, void (LightBulb::AbstractEvolutionObject*));
+	MOCK_METHOD3(executeRecombinationSelection, void (int, std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*, std::map<LightBulb::AbstractEvolutionObject*, int>*));
+	MOCK_METHOD0(getRecombinationSelection, std::vector<LightBulb::AbstractEvolutionObject*>* ());
 };
 
 #endif

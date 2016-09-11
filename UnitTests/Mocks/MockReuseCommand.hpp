@@ -6,17 +6,17 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractReuseCommand.hpp>
 
-class MockReuseCommand : public AbstractReuseCommand
+class MockReuseCommand : public LightBulb::AbstractReuseCommand
 {
 public:
 	MockReuseCommand()
-		: AbstractReuseCommand(NULL)
+		: LightBulb::AbstractReuseCommand(NULL)
 	{
 	}
 
-	MOCK_METHOD3(execute, void (std::vector<AbstractEvolutionObject*>*, std::map<AbstractEvolutionObject*, int>*, std::vector<AbstractEvolutionObject*>*));
-	MOCK_METHOD1(setLogger, void (AbstractLogger*));
-	MOCK_METHOD2(select, void (std::vector<std::pair<double, AbstractEvolutionObject*>>*, std::map<AbstractEvolutionObject*, int>*));
+	MOCK_METHOD3(execute, void (std::vector<LightBulb::AbstractEvolutionObject*>*, std::map<LightBulb::AbstractEvolutionObject*, int>*, std::vector<LightBulb::AbstractEvolutionObject*>*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
+	MOCK_METHOD2(select, void (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*, std::map<LightBulb::AbstractEvolutionObject*, int>*));
 };
 
 #endif

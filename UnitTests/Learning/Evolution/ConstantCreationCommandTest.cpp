@@ -3,6 +3,8 @@
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class ConstantCreationCommandTest : public testing::Test {
 public:
 	ConstantCreationCommand* constantCreationCommand;

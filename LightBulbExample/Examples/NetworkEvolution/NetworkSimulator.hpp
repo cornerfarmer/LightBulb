@@ -11,8 +11,6 @@
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
 
 // Forward declarations
-class EvolutionLearningRule;
-class AbstractEvolutionObject;
 
 class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionWorld
 {

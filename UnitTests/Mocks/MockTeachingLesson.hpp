@@ -6,12 +6,12 @@
 #include "gmock/gmock.h"
 #include <Teaching/AbstractTeachingLesson.hpp>
 
-class MockTeachingLesson : public AbstractTeachingLesson
+class MockTeachingLesson : public LightBulb::AbstractTeachingLesson
 {
 public:
-	MOCK_METHOD3(getSpecificError, double (AbstractNeuralNetwork&, AbstractActivationOrder&, bool));
-	MOCK_METHOD1(getTeachingInput, NeuralNetworkIO<double>* (AbstractActivationFunction*));
+	MOCK_METHOD1(getTeachingInput, LightBulb::NeuralNetworkIO<double>* (LightBulb::AbstractActivationFunction*));
 	MOCK_METHOD0(getTeachingPattern, std::vector<std::vector<double>>* ());
+	MOCK_METHOD3(getSpecificError, double (LightBulb::AbstractNeuralNetwork&, LightBulb::AbstractActivationOrder&, bool));
 	MOCK_METHOD0(unfold, AbstractTeachingLesson* ());
 	MOCK_METHOD0(getMaxTimeStep, int ());
 };

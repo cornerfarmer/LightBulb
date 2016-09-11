@@ -16,8 +16,6 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
 // Forward declarations
-class LightBulb::EvolutionLearningRule;
-class LightBulb::AbstractEvolutionObject;
 class TicTacToeKI;
 class AbstractTile;
 

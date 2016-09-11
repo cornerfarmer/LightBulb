@@ -7,17 +7,17 @@
 #include "ActivationOrder/AbstractActivationOrder.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
-class MockActivationOrder : public AbstractActivationOrder
+class MockActivationOrder : public LightBulb::AbstractActivationOrder
 {
 public:
-	MOCK_METHOD1(executeActivation, void(AbstractNetworkTopology& networkTopology));
+	MOCK_METHOD1(executeActivation, void(LightBulb::AbstractNetworkTopology& networkTopology));
 	MOCK_METHOD0(getCopy, AbstractActivationOrder*());
 	
-	std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology& networkTopology)
+	std::unique_ptr<std::map<LightBulb::Edge*, bool>> getSameTimestepEdges(LightBulb::AbstractNetworkTopology& networkTopology)
 	{
-		return std::unique_ptr<std::map<Edge*, bool>>(getSameTimestepEdgesProxy(networkTopology));
+		return std::unique_ptr<std::map<LightBulb::Edge*, bool>>(getSameTimestepEdgesProxy(networkTopology));
 	}
-	MOCK_METHOD1(getSameTimestepEdgesProxy, std::map<Edge*, bool>*(AbstractNetworkTopology& networkTopology));
+	MOCK_METHOD1(getSameTimestepEdgesProxy, std::map<LightBulb::Edge*, bool>*(LightBulb::AbstractNetworkTopology& networkTopology));
 };
 
 #endif

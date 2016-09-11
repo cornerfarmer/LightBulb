@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 #include <Function/ActivationFunction/AbstractActivationFunction.hpp>
 
-class MockActivationFunction : public AbstractActivationFunction
+class MockActivationFunction : public LightBulb::AbstractActivationFunction
 {
 public:
 	MOCK_METHOD3(execute, void (int, std::vector<Eigen::VectorXd>&, std::vector<Eigen::VectorXd>&));

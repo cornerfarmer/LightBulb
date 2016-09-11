@@ -11,6 +11,8 @@
 #include <ClusterAnalysis/KMeansRBFNeuronPlacer.hpp>
 #include <Learning/AbstractLearningResult.hpp>
 
+using namespace LightBulb;
+
 class RBFInterpolationLearningRuleTest : public testing::Test {
 public:
 	RBFInterpolationLearningRule* rbfInterpolationLearningRule;

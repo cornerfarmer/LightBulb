@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 #include <Learning/AbstractLearningResult.hpp>
 
-class MockLearningResult : public AbstractLearningResult
+class MockLearningResult : public LightBulb::AbstractLearningResult
 {
 
 };

@@ -9,7 +9,6 @@
 #include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
 
 // Forward declarations
-class EvolutionLearningRule;
 class FunctionSimulator;
 
 class Position : public LightBulb::AbstractSimpleEvolutionObject

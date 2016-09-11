@@ -7,7 +7,6 @@
 #include <Windows/AbstractCustomSubAppFactory.hpp>
 
 // Forward declarations
-class TrainingPlanRepository;
 
 class MountainCarFactory : public LightBulb::AbstractCustomSubAppFactory
 {

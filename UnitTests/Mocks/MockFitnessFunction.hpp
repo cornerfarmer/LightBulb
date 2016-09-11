@@ -6,11 +6,11 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractFitnessFunction.hpp>
 
-class MockFitnessFunction : public AbstractFitnessFunction
+class MockFitnessFunction : public LightBulb::AbstractFitnessFunction
 {
 public:
-	MOCK_METHOD1(setLogger, void (AbstractLogger*));
-	MOCK_METHOD1(execute, void (std::vector<std::pair<double, AbstractEvolutionObject*>>*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
+	MOCK_METHOD1(execute, void (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*));
 };
 
 #endif

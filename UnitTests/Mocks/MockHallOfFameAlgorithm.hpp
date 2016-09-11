@@ -6,13 +6,13 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractHallOfFameAlgorithm.hpp>
 
-class MockHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
+class MockHallOfFameAlgorithm : public LightBulb::AbstractHallOfFameAlgorithm
 {
 public:
-	MOCK_METHOD1(setLogger, void (AbstractLogger*));
-	MOCK_METHOD1(evaluateObjects, void (std::vector<AbstractEvolutionObject*>&));
-	MOCK_METHOD1(addMember, void (AbstractEvolutionObject*));
-	MOCK_METHOD2(execute, void (AbstractCoevolutionWorld*, CombiningStrategyResults&));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
+	MOCK_METHOD1(evaluateObjects, void (std::vector<LightBulb::AbstractEvolutionObject*>&));
+	MOCK_METHOD1(addMember, void (LightBulb::AbstractEvolutionObject*));
+	MOCK_METHOD2(execute, void (LightBulb::AbstractCoevolutionWorld*, LightBulb::CombiningStrategyResults&));
 };
 
 #endif

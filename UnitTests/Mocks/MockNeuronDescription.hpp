@@ -6,10 +6,10 @@
 #include "gmock/gmock.h"
 #include "NeuronDescription/NeuronDescription.hpp"
 
-class MockNeuronDescription : public NeuronDescription
+class MockNeuronDescription : public LightBulb::NeuronDescription
 {
 public:
-	MOCK_METHOD0(getActivationFunction, AbstractActivationFunction* ());
+	MOCK_METHOD0(getActivationFunction, LightBulb::AbstractActivationFunction* ());
 };
 
 #endif

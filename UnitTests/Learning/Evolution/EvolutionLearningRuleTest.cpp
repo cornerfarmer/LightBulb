@@ -11,6 +11,8 @@
 #include <Mocks/MockLogger.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class EvolutionLearningRuleTest : public testing::Test {
 public:
 	EvolutionLearningRule* evolutionLearningRule;
@@ -107,8 +109,8 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*evolutionWorld, initializeForLearning()).Times(1);
 
 		// iteration 0
-		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
 		createExpectation = EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
+		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
 		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);
@@ -116,7 +118,6 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*selectionCommand, execute(&unseccessfullHighscore, &objects, testing::_)).Times(1);
 
 		// iteration 1
-		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
 		EXPECT_CALL(*reuseCommand, select(&unseccessfullHighscore, testing::_)).Times(1);
 		EXPECT_CALL(*mutationCommand, select(&unseccessfullHighscore, testing::_)).Times(1);
 		EXPECT_CALL(*recombinationCommand, select(&unseccessfullHighscore, testing::_)).Times(1);
@@ -126,6 +127,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*evolutionWorld, setEvolutionObjects(testing::_)).Times(1);
 
 		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
+		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
 		EXPECT_CALL(*evolutionWorld, doSimulationStep()).WillOnce(testing::Return(false));
 
 		EXPECT_CALL(*fitnessFunction, execute(&unseccessfullHighscore)).Times(1);

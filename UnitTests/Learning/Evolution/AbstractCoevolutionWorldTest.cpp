@@ -6,6 +6,8 @@
 #include <Mocks/MockHallOfFameAlgorithm.hpp>
 #include <Mocks/MockCoevolutionFitnessFunction.hpp>
 
+using namespace LightBulb;
+
 class AbstractCoevolutionWorldTest : public testing::Test {
 public:
 	MockTestableCoevolutionWorld* coevolutionWorld;

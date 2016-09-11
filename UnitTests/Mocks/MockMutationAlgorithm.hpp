@@ -6,10 +6,10 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractMutationAlgorithm.hpp>
 
-class MockMutationAlgorithm : public AbstractMutationAlgorithm
+class MockMutationAlgorithm : public LightBulb::AbstractMutationAlgorithm
 {
 public:
-	MOCK_METHOD1(execute, void (AbstractEvolutionObject*));
+	MOCK_METHOD1(execute, void (LightBulb::AbstractEvolutionObject*));
 };
 
 #endif

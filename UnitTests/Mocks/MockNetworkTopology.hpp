@@ -6,10 +6,9 @@
 #include "gmock/gmock.h"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
-class MockNetworkTopology : public AbstractNetworkTopology
+class MockNetworkTopology : public LightBulb::AbstractNetworkTopology
 {
 public:
-
 	MOCK_METHOD0(getEdgeCount, int ());
 	MOCK_METHOD0(getInputSize, int ());
 	MOCK_METHOD0(getOutputSize, int ());
@@ -19,10 +18,10 @@ public:
 	MOCK_METHOD1(copyWeightsFrom, void (AbstractNetworkTopology&));
 	MOCK_METHOD0(getNeuronCount, int ());
 	MOCK_METHOD1(calculateEuclideanDistance, double (AbstractNetworkTopology&));
-	MOCK_METHOD3(randomizeWeights, void (AbstractRandomGenerator*, double, double));
+	MOCK_METHOD3(randomizeWeights, void (LightBulb::AbstractRandomGenerator*, double, double));
 	MOCK_METHOD0(getLayerCount, int ());
 	MOCK_METHOD0(getNeuronCountsPerLayer, std::vector<unsigned> ());
-	MOCK_METHOD1(randomizeDependingOnLayerSize, void (AbstractRandomGenerator*));
+	MOCK_METHOD1(randomizeDependingOnLayerSize, void (LightBulb::AbstractRandomGenerator*));
 	MOCK_METHOD1(refreshNetInputsForLayer, void (int));
 	MOCK_METHOD1(refreshActivationsForLayer, void (int));
 	MOCK_METHOD0(getAllWeights, std::vector<Eigen::MatrixXd>* ());
@@ -47,8 +46,8 @@ public:
 	MOCK_METHOD3(removeAfferentWeight, void (int, int, int));
 	MOCK_METHOD3(existsAfferentWeight, bool (int, int, int));
 	MOCK_METHOD0(clone, AbstractNetworkTopology* ());
-	MOCK_METHOD0(getInnerNeuronDescription, NeuronDescription* ());
-	MOCK_METHOD0(getOutputNeuronDescription, NeuronDescription* ());
+	MOCK_METHOD0(getInnerNeuronDescription, LightBulb::NeuronDescription* ());
+	MOCK_METHOD0(getOutputNeuronDescription, LightBulb::NeuronDescription* ());
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include <Mocks/MockLearningResult.hpp>
 
 using testing::Expectation;
+using namespace LightBulb;
 
 class BipartiteEvolutionLearningRuleTest : public testing::Test {
 public:

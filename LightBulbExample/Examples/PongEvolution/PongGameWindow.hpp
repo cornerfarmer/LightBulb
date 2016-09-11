@@ -7,7 +7,6 @@
 #include <Windows/AbstractSubAppWindow.hpp>
 
 // Forward declarations
-
 class PongGameController;
 
 wxDECLARE_EVENT(PONG_EVT_FIELD_CHANGED, wxThreadEvent);

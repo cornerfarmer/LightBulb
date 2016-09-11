@@ -3,6 +3,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
 
+using namespace LightBulb;
+
 class BestSelectionCommandTest : public testing::Test {
 public:
 	BestSelectionCommand* bestSelectionCommand;

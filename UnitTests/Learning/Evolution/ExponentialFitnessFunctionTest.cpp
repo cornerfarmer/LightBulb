@@ -3,6 +3,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/ExponentialFitnessFunction.hpp>
 
+using namespace LightBulb;
+
 class ExponentialFitnessFunctionTest : public testing::Test {
 public:
 	ExponentialFitnessFunction* exponentialFitnessFunction;

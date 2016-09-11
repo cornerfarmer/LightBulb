@@ -3,6 +3,8 @@
 #include <Mocks/MockCoevolutionWorld.hpp>
 #include <Learning/Evolution/ScoreCondition.hpp>
 
+using namespace LightBulb;
+
 class ScoreConditionTest : public testing::Test {
 public:
 	ScoreCondition* scoreCondition;

@@ -4,6 +4,8 @@
 #include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
 #include <Mocks/MockSelectionFunction.hpp>
 
+using namespace LightBulb;
+
 class RemainderStochasticSamplingSelectorTest : public testing::Test {
 public:
 	RemainderStochasticSamplingSelector* remainderStochasticSamplingSelector;

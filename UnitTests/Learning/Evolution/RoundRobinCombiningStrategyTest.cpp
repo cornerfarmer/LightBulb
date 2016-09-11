@@ -3,6 +3,8 @@
 #include <Mocks/MockCoevolutionWorld.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class RoundRobinCombiningStrategyTest : public testing::Test {
 public:
 	RoundRobinCombiningStrategy* roundRobinCombiningStrategy;

@@ -9,6 +9,8 @@
 #include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
 
+using namespace LightBulb;
+
 TEST(SynapticExporterTest, exportSimpleFeedForwardNetworkTopology)
 {
 	SynapticExporter exporter;

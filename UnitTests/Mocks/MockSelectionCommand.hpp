@@ -6,12 +6,12 @@
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractSelectionCommand.hpp>
 
-class MockSelectionCommand : public AbstractSelectionCommand
+class MockSelectionCommand : public LightBulb::AbstractSelectionCommand
 {
 public:
-	MOCK_METHOD1(setLogger, void (AbstractLogger*));
-	MOCK_METHOD3(execute, void (std::vector<std::pair<double, AbstractEvolutionObject*>>*, std::vector<AbstractEvolutionObject*>*, std::vector<AbstractEvolutionObject*>*));
-	MOCK_METHOD1(setRandomGenerator, void (AbstractRandomGenerator*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
+	MOCK_METHOD3(execute, void (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*, std::vector<LightBulb::AbstractEvolutionObject*>*, std::vector<LightBulb::AbstractEvolutionObject*>*));
+	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator*));
 };
 
 #endif

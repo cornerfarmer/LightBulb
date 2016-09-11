@@ -4,6 +4,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>
 
+using namespace LightBulb;
+
 class SharedSamplingCombiningStrategyTest : public testing::Test {
 public:
 	SharedSamplingCombiningStrategy* sharedSamplingCombiningStrategy;

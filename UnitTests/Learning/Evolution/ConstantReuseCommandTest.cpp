@@ -4,6 +4,8 @@
 #include <Mocks/MockReuseSelector.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
+using namespace LightBulb;
+
 class ConstantReuseCommandTest : public testing::Test {
 public:
 	ConstantReuseCommand* constantReuseCommand;

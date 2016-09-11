@@ -5,6 +5,8 @@
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 
+using namespace LightBulb;
+
 class MagnitudeBasedPruningMutationAlgorithmTest : public testing::Test {
 public:
 	MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm;

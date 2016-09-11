@@ -1,6 +1,8 @@
 #include "gtest/gtest.h"
 #include "Function/InputFunction/WeightedSumFunction.hpp"
 
+using namespace LightBulb;
+
 TEST(WeightedSumFunction, computeNetInputs)
 {
 	WeightedSumFunction function;

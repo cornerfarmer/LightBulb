@@ -4,6 +4,8 @@
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockActivationOrder.hpp>
 
+using namespace LightBulb;
+
 class TeacherTest : public testing::Test {
 public:
 	Teacher* teacher;

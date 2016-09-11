@@ -7,6 +7,8 @@
 #include <Mocks/MockNetworkTopology.hpp>
 #include "Mocks/MockRandomGenerator.hpp"
 
+using namespace LightBulb;
+
 class RecombinationAlgorithmTest : public testing::Test {
 public:
 	RecombinationAlgorithm* recombinationAlgorithm;

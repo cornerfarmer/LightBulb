@@ -7,7 +7,6 @@
 #include <Windows/AbstractSubAppWindow.hpp>
 
 // Forward declarations
-
 class NatureController;
 
 wxDECLARE_EVENT(NATURE_EVT_FIELD_CHANGED, wxThreadEvent);

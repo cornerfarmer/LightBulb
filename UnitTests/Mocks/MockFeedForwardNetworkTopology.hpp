@@ -6,7 +6,7 @@
 #include "gmock/gmock.h"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
-class MockFeedForwardNetworkTopology : public FeedForwardNetworkTopology
+class MockFeedForwardNetworkTopology : public LightBulb::FeedForwardNetworkTopology
 {
 public:
 	MOCK_METHOD1(refreshNetInputsForLayer, void(int layerNr));

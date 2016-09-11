@@ -5,6 +5,7 @@
 
 using ::testing::Return;
 using ::testing::Expectation;
+using namespace LightBulb;
 
 TEST(TopologicalOrderFunction, executeActivation)
 {

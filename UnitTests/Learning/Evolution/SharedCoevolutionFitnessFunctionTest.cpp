@@ -7,6 +7,7 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <array>
 
+using namespace LightBulb;
 using testing::Expectation;
 
 class SharedCoevolutionFitnessFunctionTest : public testing::Test {

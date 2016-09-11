@@ -5,6 +5,7 @@
 #include "Mocks/MockActivationOrder.hpp"
 
 using testing::Expectation;
+using namespace LightBulb;
 
 class NeuralNetworkTest : public testing::Test {
 public:

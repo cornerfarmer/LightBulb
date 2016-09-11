@@ -2,6 +2,8 @@
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Mocks/MockCoevolutionWorld.hpp>
 
+using namespace LightBulb;
+
 class RateDifferenceConditionTest : public testing::Test {
 public:
 	RateDifferenceCondition* rateDifferenceCondition;

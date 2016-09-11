@@ -4,6 +4,8 @@
 #include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
 #include <Mocks/MockSelectionFunction.hpp>
 
+using namespace LightBulb;
+
 class StochasticUniversalSamplingSelectorTest : public testing::Test {
 public:
 	StochasticUniversalSamplingSelector* stochasticUniversalSamplingSelector;

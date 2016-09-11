@@ -5,6 +5,8 @@
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Mocks/MockRandomFunction.hpp>
 
+using namespace LightBulb;
+
 class RandomSelectorTest : public testing::Test {
 public:
 	RandomSelector* randomSelector;

@@ -4,6 +4,8 @@
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/PositiveMakerFitnessFunction.hpp>
 
+using namespace LightBulb;
+
 class PositiveMakerFitnessFunctionTest : public testing::Test {
 public:
 	PositiveMakerFitnessFunction* positiveMakerFitnessFunction;
