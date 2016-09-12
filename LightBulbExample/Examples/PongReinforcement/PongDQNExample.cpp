@@ -78,14 +78,14 @@ PongDQNExample::PongDQNExample()
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
 	addPreference(new BooleanPreference(PREFERENCE_USE_BIAS_NEURON, true));
-	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 512, 1, 30));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 256, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
-	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.00025, 0, 1));
+	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.0005, 0, 1));
 	addPreference(new IntegerPreference(PREFERENCE_MINIBATCH_SIZE, 32, 1, 1024));
 	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
 	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
-	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 1000000, 1, 1000000));
+	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 500000, 1, 1000000));
 	addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, true));
 	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, true));
 	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
