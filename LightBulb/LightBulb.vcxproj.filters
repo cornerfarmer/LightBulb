@@ -477,9 +477,6 @@
     <ClCompile Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
     </ClCompile>
-    <ClCompile Include="Function\OutputFunction\AbstractOutputFunction.cpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Function\RandomFunction\AbstractRandomFunction.cpp" />
     <ClCompile Include="Function\SelectionFunction\AbstractSelectionFunction.cpp">
       <Filter>Quelldateien\Function</Filter>
@@ -1047,9 +1044,6 @@
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.hpp">
-      <Filter>Quelldateien\Function</Filter>
-    </ClInclude>
-    <ClInclude Include="Function\OutputFunction\AbstractOutputFunction.hpp">
       <Filter>Quelldateien\Function</Filter>
     </ClInclude>
     <ClInclude Include="Function\RandomFunction\AbstractRandomFunction.hpp" />

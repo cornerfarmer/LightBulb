@@ -15,7 +15,7 @@ namespace LightBulb
 	// 
 	/**
 	 * \brief The WeightedSumFunction uses the weighted sum to calculate the input ;)
-	 * \details Describes: \n \n \f$\vec{o} ={\vec{w}}\circ{\vec{a}}\f$ \n \n
+	 * \details Describes: \n \n \f$\vec{o} ={\vec{w}}\circ{\vec{a}}\f$ 
 	 */
 	class WeightedSumFunction : public AbstractInputFunction
 	{

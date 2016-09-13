@@ -88,7 +88,6 @@
     <ClCompile Include="Function\ActivationFunction\AbstractActivationFunction.cpp" />
     <ClCompile Include="Function\InputFunction\AbstractInputFunction.cpp" />
     <ClCompile Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.cpp" />
-    <ClCompile Include="Function\OutputFunction\AbstractOutputFunction.cpp" />
     <ClCompile Include="Function\SelectionFunction\AbstractSelectionFunction.cpp" />
     <ClCompile Include="Function\ShrinkFunction\AbstractShrinkFunction.cpp" />
     <ClCompile Include="Function\ActivationFunction\BinaryFunction.cpp">
@@ -563,7 +562,6 @@
     <ClInclude Include="Function\ActivationFunction\AbstractActivationFunction.hpp" />
     <ClInclude Include="Function\InputFunction\AbstractInputFunction.hpp" />
     <ClInclude Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.hpp" />
-    <ClInclude Include="Function\OutputFunction\AbstractOutputFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\AbstractSelectionFunction.hpp" />
     <ClInclude Include="Function\ShrinkFunction\AbstractShrinkFunction.hpp" />
     <ClInclude Include="Function\ActivationFunction\BinaryFunction.hpp">

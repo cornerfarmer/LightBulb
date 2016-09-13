@@ -9,7 +9,7 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Stellt eine Function da die aus einer gegebenen Anzahl an Elementen eines zufällig auswählt.
+	 * \brief A function which chooses one of n elements randomly.
 	 */
 	class AbstractRandomFunction : public AbstractRandomGeneratorUser
 	{
@@ -17,9 +17,9 @@ namespace LightBulb
 	public:
 		virtual ~AbstractRandomFunction() {}
 		/**
-		 * \brief Wählt eine zufällige Zahl zwischen 0 und elementCount - 1.
-		 * \param elementCount Die Anzahl der wählbaren Elemente
-		 * \return Das gewählte Element
+		 * \brief Chooses a random number between 0 and elementCount - 1.
+		 * \param elementCount The number of possible elements
+		 * \return The chosen element number
 		 */
 		virtual int execute(int elementCount) = 0;
 	};
