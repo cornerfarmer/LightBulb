@@ -26,10 +26,6 @@ namespace LightBulb
 		return new IdentityFunction(*this);
 	}
 
-	AbstractOutputFunction* IdentityFunction::getOutputFunctionCopy()
-	{
-		return new IdentityFunction(*this);
-	}
 
 	double IdentityFunction::getMaximum()
 	{

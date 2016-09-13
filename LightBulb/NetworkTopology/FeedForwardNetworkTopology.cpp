@@ -4,7 +4,6 @@
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "Function/InputFunction/AbstractInputFunction.hpp"
-#include "Function/OutputFunction/AbstractOutputFunction.hpp"
 // Library includes
 #include <exception>
 #include <math.h>

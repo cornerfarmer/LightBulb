@@ -12,12 +12,6 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class InputNeuron;
-	class StandardNeuron;
-	class AbstractActivationFunction;
-	class AbstractInputFunction;
-	class AbstractOutputFunction;
-	class AbstractThreshold;
 
 	// This factory makes it possible to use different functions for inner and output neurons
 	class DifferentNeuronDescriptionFactory : public AbstractNeuronDescriptionFactory
