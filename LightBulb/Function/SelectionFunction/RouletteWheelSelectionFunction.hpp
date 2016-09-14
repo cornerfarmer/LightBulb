@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief Selects elements like a roulette wheel.
+	 * \details Splits the "roulette wheel" into different parts depending on the element probabilities. \n
+	 *  - When choosing one element, the wheel is just spinned once. \n
+	 *  - When choosing multiple elements, pointers are placed all 360/n degrees. The chosen elements are determined where the pointers point to.
+	 */
 	class RouletteWheelSelectionFunction : public AbstractSelectionFunction
 	{
 	private:

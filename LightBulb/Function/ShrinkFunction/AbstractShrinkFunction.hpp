@@ -5,21 +5,37 @@
 
 namespace LightBulb
 {
-	// Forward declaration
-
-	// This abstract class describes a function, which returns a in time shrinking value
+	/**
+	 * \brief This abstract class describes a function, which returns a in time shrinking value.
+	 */
 	class AbstractShrinkFunction
 	{
 	protected:
-		// The starting value
+		/**
+		 * \brief The starting value.
+		 */
 		double startValue;
-		// The lowest possible value
+		/**
+		 * \brief The lowest possible value.
+		 */
 		double minValue;
 	public:
+		/**
+		 * \brief Create the AbstractShrinkFunction.
+		 * \param startValue_ The starting value.
+		 * \param minValue_ The lowest possible value.
+		 */
 		AbstractShrinkFunction(double startValue_, double minValue_);
-		// Calculate the value in the given timestep
+		/**
+		 * \brief Calculate the value in the given timestep.
+		 * \param time The timestep.
+		 * \return The value at the given timestep.
+		 */
 		virtual double execute(double time) = 0;
-		// Create a copy of the object
+		/**
+		 * \brief Create a copy of the object.
+		 * \return The copy
+		 */
 		virtual AbstractShrinkFunction* getShrinkFunctionCopy() = 0;
 	};
 }
