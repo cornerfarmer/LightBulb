@@ -192,7 +192,7 @@ namespace LightBulb
 			/*
 					prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
 
-			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-2 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
+			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
 			networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
 
 			gradients[l] *= 1.0 / getOptions()->episodeSize;
@@ -219,9 +219,9 @@ namespace LightBulb
 			rewards(i) = rewards(i + 1) * 0.99;
 		}
 
-		//rewards = rewards.array() - rewards.mean();
-		//double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
-		//rewards = rewards.array() / stddev;
+		rewards = rewards.array() - rewards.mean();
+		double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
+		rewards = rewards.array() / stddev;
 
 		for (int i = 0; i < stepsSinceLastReward; i++)
 		{
@@ -243,14 +243,14 @@ namespace LightBulb
 			if (layerIndex == networkTopology->getLayerCount() - 1)
 			{
 				// Compute the delta value: activationFunction'(netInput) * errorValue
-				deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * errorVector.array();
+				deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array()) * errorVector.array();
 			}
 			else
 			{
 				Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
 
 				// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-				deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + 0.1) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+				deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() ) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 			}
 
 			// Calculate the gradient

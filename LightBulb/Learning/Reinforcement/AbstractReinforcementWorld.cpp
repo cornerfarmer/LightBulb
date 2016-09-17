@@ -22,7 +22,7 @@ namespace LightBulb
 		if (!epsilonGreedly) {
 			for (int i = 0; i < lastOutput.size(); i++)
 			{
-				lastBooleanOutput[i] = (0.5 <= lastOutput[i]);
+				lastBooleanOutput[i] = (randomGenerator->randDouble() < lastOutput[i]);
 			}
 		}
 		else
@@ -58,7 +58,7 @@ namespace LightBulb
 	void AbstractReinforcementWorld::initializeForLearning()
 	{
 		// Randomize all weights
-		neuralNetwork->getNetworkTopology()->randomizeDependingOnLayerSize(randomGenerator);
+		neuralNetwork->getNetworkTopology()->randomizeDependingOnLayerSize(randomGenerator);		
 	}
 
 	NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()

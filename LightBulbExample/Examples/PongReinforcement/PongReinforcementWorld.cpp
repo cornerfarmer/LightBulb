@@ -53,7 +53,7 @@ void PongReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 {
 	if (output[0])
 		game.movePaddle(1);
-	else if (output[1])
+	else if ((output.size() > 1 && output[1]) || (output.size() == 1 && !output[0]))
 		game.movePaddle(-1);
 }
 

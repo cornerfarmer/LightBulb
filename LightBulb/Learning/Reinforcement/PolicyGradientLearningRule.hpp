@@ -19,7 +19,7 @@ namespace LightBulb
 		int episodeSize;
 		PolicyGradientLearningRuleOptions()
 		{
-			episodeSize = 100;
+			episodeSize = 10;
 		}
 	};
 

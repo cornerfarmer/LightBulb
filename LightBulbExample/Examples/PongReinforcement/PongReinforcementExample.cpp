@@ -11,6 +11,8 @@
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementWorld.hpp"
 #include <Function/ActivationFunction/FermiFunction.hpp>
+#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "Function/ActivationFunction/RectifierFunction.hpp"
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
@@ -37,14 +39,15 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
+	options.useBiasNeuron = false;
 
 	options.neuronsPerLayerCount.push_back(6);
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
 	if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
 		options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-	options.neuronsPerLayerCount.push_back(2);
+	options.neuronsPerLayerCount.push_back(1);
 
-	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
 
 	return new PongReinforcementWorld(options);
@@ -56,7 +59,7 @@ PongReinforcementExample::PongReinforcementExample()
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 100, 1, 10000));
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
-	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 10, 1, 30));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 200, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 }
