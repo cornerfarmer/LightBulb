@@ -27,7 +27,7 @@ namespace LightBulb
 		 * \param activations A layerwise list of all activations which will contain the calculated activations
 		 * \param netInputs A layerwise list of all inputs which will be used for the computation
 		 */
-		virtual void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs);
+		virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs);
 		/**
 		 * \brief Calculates the activation for one neuron
 		 * \param input The input of the neuron

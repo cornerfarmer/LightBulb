@@ -11,9 +11,9 @@ namespace LightBulb
 		return input;
 	}
 
-	void IdentityFunction::execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs)
+	void IdentityFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs)
 	{
-		*activations[layerNr] = netInputs[layerNr];
+		activations[layerNr] = netInputs[layerNr];
 	}
 
 	double IdentityFunction::executeDerivation(double input)

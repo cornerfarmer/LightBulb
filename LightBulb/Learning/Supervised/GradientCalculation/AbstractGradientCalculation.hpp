@@ -24,7 +24,8 @@ namespace LightBulb
 	public:
 		void initGradient(AbstractNetworkTopology* networkTopology);
 		std::vector<Eigen::MatrixXd>* getGradient();
-		virtual void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap) = 0;
+		virtual void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap);
+		virtual void calcGradient(AbstractNetworkTopology* networkTopology, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, ErrorMap_t* errormap) = 0;
 	};
 }
 

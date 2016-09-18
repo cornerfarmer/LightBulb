@@ -25,7 +25,7 @@ public:
 	MOCK_METHOD1(refreshNetInputsForLayer, void (int));
 	MOCK_METHOD1(refreshActivationsForLayer, void (int));
 	MOCK_METHOD0(getAllWeights, std::vector<Eigen::MatrixXd>* ());
-	MOCK_METHOD0(getAllActivations, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* ());
+	MOCK_METHOD0(getAllActivations, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* ());
 	MOCK_METHOD0(getActivationsCopy, std::vector<Eigen::VectorXd> ());
 	MOCK_METHOD0(getAllNetInputs, std::vector<Eigen::VectorXd>* ());
 	MOCK_METHOD1(getAfferentWeightsPerLayer, Eigen::MatrixXd (int));

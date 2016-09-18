@@ -31,9 +31,9 @@ TEST_F(RBFNetworkTest, createSimpleNetwork)
 
 	auto activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
-	EXPECT_EQ(2, (*activations)[0]->rows());
-	EXPECT_EQ(3, (*activations)[1]->rows());
-	EXPECT_EQ(1, (*activations)[2]->rows());
+	EXPECT_EQ(2, (*activations)[0].rows());
+	EXPECT_EQ(3, (*activations)[1].rows());
+	EXPECT_EQ(1, (*activations)[2].rows());
 
 	auto weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());

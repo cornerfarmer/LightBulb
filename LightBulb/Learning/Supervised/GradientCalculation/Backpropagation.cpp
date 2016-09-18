@@ -15,7 +15,7 @@ namespace LightBulb
 		flatSpotEliminationFac = flatSpotEliminationFac_;
 	}
 
-	void Backpropagation::calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap)
+	void Backpropagation::calcGradient(AbstractNetworkTopology* networkTopology, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, ErrorMap_t* errormap)
 	{
 		for (int layerIndex = networkTopology->getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
@@ -23,17 +23,17 @@ namespace LightBulb
 			if (layerIndex == networkTopology->getLayerCount() - 1)
 			{
 				// Compute the delta value: activationFunction'(netInput) * errorValue
-				lastDeltaVectorOutputLayer = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(networkTopology->getNetInputsPerLayer(layerIndex)).array() + flatSpotEliminationFac) * errormap->back().array();
+				lastDeltaVectorOutputLayer = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * errormap->back().array();
 			}
 			else
 			{
 				Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * lastDeltaVectorOutputLayer;
 
 				// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-				lastDeltaVectorOutputLayer = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(networkTopology->getNetInputsPerLayer(layerIndex)).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+				lastDeltaVectorOutputLayer = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 			}
 
-			gradient[layerIndex - 1].noalias() = gradient[layerIndex - 1] + -1 * (lastDeltaVectorOutputLayer * networkTopology->getActivationsPerLayer(layerIndex - 1).transpose()).matrix();
+			gradient[layerIndex - 1].noalias() = gradient[layerIndex - 1] + -1 * (lastDeltaVectorOutputLayer * activations[layerIndex - 1].transpose()).matrix();
 		}
 	}
 }

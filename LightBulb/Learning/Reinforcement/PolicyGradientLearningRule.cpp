@@ -12,6 +12,7 @@
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include "AbstractReinforcementWorld.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
+#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 
 namespace LightBulb
 {
@@ -42,7 +43,7 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initialize()
 	{
-		//resilientLearningRateHelper.reset(new ResilientLearningRateHelper(new ResilientLearningRateHelperOptions()));
+		gradientCalculation.reset(new Backpropagation());
 	}
 
 	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
@@ -50,6 +51,7 @@ namespace LightBulb
 		errorVectorRecord.push_back(getErrorVector(networkTopology));
 
 		netInputRecord.push_back(*networkTopology->getAllNetInputs());
+
 		activationRecord.push_back(networkTopology->getActivationsCopy());
 	}
 
@@ -100,26 +102,10 @@ namespace LightBulb
 		getOptions()->world->setLearningState(learningState.get());
 		getOptions()->world->initializeForLearning();
 
-		gradients.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getLayerCount() - 1);
-		for (int i = 0; i < gradients.size(); i++)
-		{
-			gradients[i].resizeLike(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getAllWeights()->at(i));
-		}
-		resetGradients();
-
 		stepsSinceLastReward = 0;
 	}
 
-
-	void PolicyGradientLearningRule::resetGradients()
-	{
-		for (int i = 0; i < gradients.size(); i++)
-		{
-			gradients[i].setZero();
-		}
-	}
-
-
+	
 	std::string PolicyGradientLearningRule::getName()
 	{
 		return "PolicyGradientLearningRule";
@@ -128,7 +114,6 @@ namespace LightBulb
 	std::vector<std::string> PolicyGradientLearningRule::getDataSetLabels()
 	{
 		std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
-		labels.push_back(DATA_SET_GRADIENT);
 		return labels;
 	}
 
@@ -138,6 +123,7 @@ namespace LightBulb
 		int rewardCounter = 0;
 		double totalReward = 0;
 		AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
+		gradientCalculation->initGradient(networkTopology);
 
 		while (rewardCounter < getOptions()->episodeSize)
 		{
@@ -152,19 +138,14 @@ namespace LightBulb
 				totalReward += reward;
 
 				computeGradients(networkTopology, stepsSinceLastReward, reward);
-
 				stepsSinceLastReward = 0;
 				rewardCounter++;
 			}
 		}
 
-
 		learningState->addData(DATA_SET_REWARD, totalReward);
 
-
-		addGradients(networkTopology, gradients);
-		resetGradients();
-
+		addGradients(networkTopology);
 
 		// Continue with the next generation
 		learningState->iterations++;
@@ -175,30 +156,24 @@ namespace LightBulb
 	}
 
 
-	void PolicyGradientLearningRule::addGradients(AbstractNetworkTopology* networkTopology, std::vector<Eigen::MatrixXd>& gradients)
+	void PolicyGradientLearningRule::addGradients(AbstractNetworkTopology* networkTopology)
 	{
-
-
-		static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradients.size());
-		for (int l = gradients.size() - 1; l >= 0; l--)
+		static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradientCalculation->getGradient()->size());
+		for (int l = gradientCalculation->getGradient()->size() - 1; l >= 0; l--)
 		{
 			if (prevDeltaWeights[l].size() == 0) {
-				prevDeltaWeights[l].resizeLike(gradients[l]);
+				prevDeltaWeights[l].resizeLike(gradientCalculation->getGradient()->at(l));
 				prevDeltaWeights[l].setZero();
 			}
 
-			prevDeltaWeights[l] = 0.99 * prevDeltaWeights[l] + (1 - 0.99) * gradients[l].cwiseAbs2();
+			prevDeltaWeights[l] = 0.99 * prevDeltaWeights[l] + (1 - 0.99) * gradientCalculation->getGradient()->at(l).cwiseAbs2();
 
 			/*
 					prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
 
-			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradients[l].cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
+			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradientCalculation->getGradient()->at(l).cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
 			networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
-
-			gradients[l] *= 1.0 / getOptions()->episodeSize;
 		}
-
-		learningState->addData(DATA_SET_GRADIENT, gradients.back()(0, 0));
 	}
 
 	PolicyGradientLearningRuleOptions* PolicyGradientLearningRule::getOptions()
@@ -236,41 +211,11 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
 	{
-		std::vector<Eigen::MatrixXd> deltaVectorOutputLayer(networkTopology->getLayerCount());
-		for (int layerIndex = networkTopology->getLayerCount() - 1; layerIndex > 0; layerIndex--)
-		{
-			// If its the last layer
-			if (layerIndex == networkTopology->getLayerCount() - 1)
-			{
-				// Compute the delta value: activationFunction'(netInput) * errorValue
-				deltaVectorOutputLayer[layerIndex] = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array()) * errorVector.array();
-			}
-			else
-			{
-				Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * deltaVectorOutputLayer[layerIndex + 1];
-
-				// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-				deltaVectorOutputLayer[layerIndex] = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() ) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
-			}
-
-			// Calculate the gradient
-			// gradient = - Output(prevNeuron) * deltaValue
-			Eigen::MatrixXd gradient = (deltaVectorOutputLayer[layerIndex] * activations[layerIndex - 1].transpose()).matrix();
-			gradient *= -1;
-			gradients[layerIndex - 1] += gradient;
-		}
-
-		/*std::vector<Eigen::MatrixXd> gradientApprox = checkGradient(networkTopology);
-		std::vector<Eigen::MatrixXd> diff(gradientApprox.size());
-		bool same = true;
-		for (int i = 0; i < gradientApprox.size(); i++)
-		{
-			diff[i] = gradients[i] - gradientApprox[i];
-			same &= gradients[i].isApprox(gradientApprox[i], 1e-8);
-		}
-		if (!same)
-			throw std::logic_error("");*/
-
+		ErrorMap_t errorMap(1, errorVector);
+		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> tmpBlock;
+		for (int j = 0; j < activations.size(); j++)
+			tmpBlock.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations[j].derived(), 0, activations[j].size()));
+		gradientCalculation->calcGradient(networkTopology, netInputs, tmpBlock, &errorMap);
 	}
 
 }

@@ -8,12 +8,12 @@ TEST(WeightedSumFunction, computeNetInputs)
 	WeightedSumFunction function;
 	// 2 - 3 - 1 Network:
 	Eigen::VectorXd activations(8);
-	std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>  activationsPerLayer;
-	activationsPerLayer.push_back(std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>(new Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, 3)));
-	*activationsPerLayer[0] << 1, 2, 1;
-	activationsPerLayer.push_back(std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>(new Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 3, 4)));
-	*activationsPerLayer[1] << 1, 2, 3, 1;
-	activationsPerLayer.push_back(std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>(new Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 7, 1)));
+	std::vector<Eigen::VectorBlock<Eigen::VectorXd>>  activationsPerLayer;
+	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, 3));
+	activationsPerLayer[0] << 1, 2, 1;
+	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 3, 4));
+	activationsPerLayer[1] << 1, 2, 3, 1;
+	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 7, 1));
 
 	std::vector<Eigen::VectorXd> netInputs(3);
 	netInputs[0] = Eigen::VectorXd(2);

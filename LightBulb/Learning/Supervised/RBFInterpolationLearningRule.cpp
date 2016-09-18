@@ -35,7 +35,7 @@ namespace LightBulb
 	void RBFInterpolationLearningRule::adjustWeights(int layerIndex)
 	{
 		if (layerIndex == getCurrentNetworkTopology()->getLayerCount() - 1) {
-			Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradients[layerIndex];
+			Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradients[layerIndex - 1];
 			getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
 		}
 	}
@@ -120,7 +120,7 @@ namespace LightBulb
 			// Try the teachingLesson
 			(*getOptions()->teacher->getTeachingLessons())[i]->tryLesson(*getOptions()->neuralNetwork, activationOrder);
 
-			m->row(i) = *(*rbfNetwork->getAllActivations())[1];
+			m->row(i) = (*rbfNetwork->getAllActivations())[1];
 		}
 
 		// If our matrix is a square matrix

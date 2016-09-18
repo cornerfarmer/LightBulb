@@ -27,7 +27,7 @@ namespace LightBulb
 		 * \param netInputs The variable where the calculated inputs will be stored in
 		 * \param weights The weights which will be used to calculate the inputs
 		 */
-		virtual void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) = 0;
+		virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) = 0;
 		/**
 		 * \brief Create a copy of the object
 		 * \return The ciopy

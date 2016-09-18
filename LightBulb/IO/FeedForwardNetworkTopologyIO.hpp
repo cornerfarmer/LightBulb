@@ -40,25 +40,24 @@ namespace LightBulb
 
 
 	template <class Archive>
-	void save(Archive& archive, FeedForwardNetworkTopology const & FeedForwardNetworkTopology)
+	void save(Archive& archive, FeedForwardNetworkTopology const & feedForwardNetworkTopology)
 	{
-		archive(cereal::make_nvp("options", FeedForwardNetworkTopology.options));
-		archive(cereal::make_nvp("netInputs", FeedForwardNetworkTopology.netInputs));
-		archive(cereal::make_nvp("activations", FeedForwardNetworkTopology.activations));
-		archive(cereal::make_nvp("weights", FeedForwardNetworkTopology.weights));
+		archive(cereal::make_nvp("options", feedForwardNetworkTopology.options));
+		archive(cereal::make_nvp("netInputs", feedForwardNetworkTopology.netInputs));
+		archive(cereal::make_nvp("activations", feedForwardNetworkTopology.activations));
+		archive(cereal::make_nvp("weights", feedForwardNetworkTopology.weights));
 	}
 
 
 	template <class Archive>
-	void load(Archive& archive, FeedForwardNetworkTopology & FeedForwardNetworkTopology)
+	void load(Archive& archive, FeedForwardNetworkTopology & feedForwardNetworkTopology)
 	{
-		archive(cereal::make_nvp("options", FeedForwardNetworkTopology.options));
-		FeedForwardNetworkTopology.buildNetwork();
-		archive(cereal::make_nvp("netInputs", FeedForwardNetworkTopology.netInputs));
-		archive(cereal::make_nvp("activations", FeedForwardNetworkTopology.activations));
-		archive(cereal::make_nvp("weights", FeedForwardNetworkTopology.weights));
-		for (int l = 0; l < FeedForwardNetworkTopology.getLayerCount(); l++)
-			FeedForwardNetworkTopology.rebuildActivationsPerLayer(l);
+		archive(cereal::make_nvp("options", feedForwardNetworkTopology.options));
+		feedForwardNetworkTopology.buildNetwork();
+		archive(cereal::make_nvp("netInputs", feedForwardNetworkTopology.netInputs));
+		archive(cereal::make_nvp("activations", feedForwardNetworkTopology.activations));
+		archive(cereal::make_nvp("weights", feedForwardNetworkTopology.weights));
+		feedForwardNetworkTopology.rebuildActivationsPerLayer();
 	}
 
 }

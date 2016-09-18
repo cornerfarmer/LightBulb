@@ -48,9 +48,9 @@ namespace LightBulb
 		//
 		Eigen::VectorXd activations;
 
-		std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> activationsPerLayerOut;
+		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerOut;
 
-		std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>> activationsPerLayerIn;
+		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerIn;
 
 		std::vector<Eigen::MatrixXd> weights;
 
@@ -60,7 +60,7 @@ namespace LightBulb
 		// Builds the network from the given options
 		void buildNetwork();
 
-		void rebuildActivationsPerLayer(int layerIndex);
+		void rebuildActivationsPerLayer();
 	public:
 		virtual ~FeedForwardNetworkTopology();
 		FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_);
@@ -98,7 +98,7 @@ namespace LightBulb
 
 		std::vector<Eigen::MatrixXd>* getAllWeights() override;
 
-		std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>* getAllActivations() override;
+		std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() override;
 
 		std::vector<Eigen::VectorXd> getActivationsCopy() override;
 

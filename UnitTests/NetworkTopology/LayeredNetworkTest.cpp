@@ -43,9 +43,9 @@ TEST_F(FeedForwardNetworkTopologyTest, createSimpleNetwork)
 
 	auto activations = network->getAllActivations();
 	EXPECT_EQ(activations->size(), 3);
-	EXPECT_EQ((*activations)[0]->rows(), 3);
-	EXPECT_EQ((*activations)[1]->rows(), 4);
-	EXPECT_EQ((*activations)[2]->rows(), 2);
+	EXPECT_EQ((*activations)[0].rows(), 3);
+	EXPECT_EQ((*activations)[1].rows(), 4);
+	EXPECT_EQ((*activations)[2].rows(), 2);
 
 	auto weights = network->getAllWeights();
 	EXPECT_EQ(weights->size(), 2);
@@ -70,9 +70,9 @@ TEST_F(FeedForwardNetworkTopologyTest, createNetworkWithShortcuts)
 
 	auto activations = network->getAllActivations();
 	EXPECT_EQ(activations->size(), 3);
-	EXPECT_EQ((*activations)[0]->rows(), 3);
-	EXPECT_EQ((*activations)[1]->rows(), 6);
-	EXPECT_EQ((*activations)[2]->rows(), 7);
+	EXPECT_EQ((*activations)[0].rows(), 3);
+	EXPECT_EQ((*activations)[1].rows(), 6);
+	EXPECT_EQ((*activations)[2].rows(), 7);
 
 	auto weights = network->getAllWeights();
 	EXPECT_EQ(weights->size(), 2);
@@ -94,9 +94,9 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuron)
 	(*netInputs)[2] << 1;
 
 	auto activations = network->getAllActivations();
-	(*activations)[0]->col(0) << 1, 2, 3;
-	(*activations)[1]->col(0) << 1, 2, 3, 4;
-	(*activations)[2]->col(0) << 1, 2;
+	(*activations)[0].col(0) << 1, 2, 3;
+	(*activations)[1].col(0) << 1, 2, 3, 4;
+	(*activations)[2].col(0) << 1, 2;
 
 	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
@@ -152,12 +152,12 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuron)
 
 	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
-	EXPECT_EQ(4, (*activations)[0]->rows());
-	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
-	EXPECT_EQ(6, (*activations)[1]->rows());
-	EXPECT_EQ(expectedActivations[1], *(*activations)[1]);
-	EXPECT_EQ(5, (*activations)[2]->rows());
-	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
+	EXPECT_EQ(4, (*activations)[0].rows());
+	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
+	EXPECT_EQ(6, (*activations)[1].rows());
+	EXPECT_EQ(expectedActivations[1], (*activations)[1]);
+	EXPECT_EQ(5, (*activations)[2].rows());
+	EXPECT_EQ(expectedActivations[2], (*activations)[2]);
 
 	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
@@ -182,7 +182,7 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuronWithShortcuts)
 	(*netInputs)[2] << 1;
 
 	auto activations = network->getAllActivations();
-	(*activations)[2]->col(0) << 1, 2, 3, 2, 3, 4, 2;
+	(*activations)[2].col(0) << 1, 2, 3, 2, 3, 4, 2;
 
 	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
@@ -238,12 +238,12 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuronWithShortcuts)
 
 	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
-	EXPECT_EQ(4, (*activations)[0]->rows());
-	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
-	EXPECT_EQ(9, (*activations)[1]->rows());
-	EXPECT_EQ(expectedActivations[1], *(*activations)[1]);
-	EXPECT_EQ(13, (*activations)[2]->rows());
-	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
+	EXPECT_EQ(4, (*activations)[0].rows());
+	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
+	EXPECT_EQ(9, (*activations)[1].rows());
+	EXPECT_EQ(expectedActivations[1], (*activations)[1]);
+	EXPECT_EQ(13, (*activations)[2].rows());
+	EXPECT_EQ(expectedActivations[2], (*activations)[2]);
 
 	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
@@ -267,9 +267,9 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuron)
 	(*netInputs)[2] << 1;
 
 	auto activations = network->getAllActivations();
-	(*activations)[0]->col(0) << 1, 2, 3;
-	(*activations)[1]->col(0) << 1, 2, 3, 4;
-	(*activations)[2]->col(0) << 1, 2;
+	(*activations)[0].col(0) << 1, 2, 3;
+	(*activations)[1].col(0) << 1, 2, 3, 4;
+	(*activations)[2].col(0) << 1, 2;
 
 	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
@@ -313,12 +313,12 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuron)
 
 	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
-	EXPECT_EQ(2, (*activations)[0]->rows());
-	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
-	EXPECT_EQ(3, (*activations)[1]->rows());
-	EXPECT_EQ(expectedActivations[1], *(*activations)[1]);
-	EXPECT_EQ(1, (*activations)[2]->rows());
-	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
+	EXPECT_EQ(2, (*activations)[0].rows());
+	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
+	EXPECT_EQ(3, (*activations)[1].rows());
+	EXPECT_EQ(expectedActivations[1], (*activations)[1]);
+	EXPECT_EQ(1, (*activations)[2].rows());
+	EXPECT_EQ(expectedActivations[2], (*activations)[2]);
 
 	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());
@@ -344,7 +344,7 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuronWithShortcuts)
 	(*netInputs)[2] << 1;
 
 	auto activations = network->getAllActivations();
-	(*activations)[2]->col(0) << 1, 2, 3, 2, 3, 4, 2;
+	(*activations)[2].col(0) << 1, 2, 3, 2, 3, 4, 2;
 
 	auto weights = network->getAllWeights();
 	(*weights)[0].row(0) << 1, 2, 3;
@@ -389,12 +389,12 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuronWithShortcuts)
 
 	activations = network->getAllActivations();
 	EXPECT_EQ(3, activations->size());
-	EXPECT_EQ(2, (*activations)[0]->rows());
-	EXPECT_EQ(expectedActivations[0], *(*activations)[0]);
-	EXPECT_EQ(4, (*activations)[1]->rows());
-	EXPECT_EQ(expectedActivations[1], *(*activations)[1]);
-	EXPECT_EQ(5, (*activations)[2]->rows());
-	EXPECT_EQ(expectedActivations[2], *(*activations)[2]);
+	EXPECT_EQ(2, (*activations)[0].rows());
+	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
+	EXPECT_EQ(4, (*activations)[1].rows());
+	EXPECT_EQ(expectedActivations[1], (*activations)[1]);
+	EXPECT_EQ(5, (*activations)[2].rows());
+	EXPECT_EQ(expectedActivations[2], (*activations)[2]);
 
 	weights = network->getAllWeights();
 	EXPECT_EQ(2, weights->size());

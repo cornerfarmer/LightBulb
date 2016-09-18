@@ -34,7 +34,7 @@ namespace LightBulb
 		double getMaximum() override;
 		double getMinimum() override;
 		bool hasAMaxAndMinimum() override;
-		void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs);
+		void execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs);
 	};
 }
 

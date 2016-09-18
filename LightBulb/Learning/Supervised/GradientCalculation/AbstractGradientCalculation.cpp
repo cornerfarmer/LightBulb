@@ -6,7 +6,7 @@ namespace LightBulb
 {
 	void AbstractGradientCalculation::calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap)
 	{
-		calcGradient(networkTopology, errormap);
+		calcGradient(networkTopology, *networkTopology->getAllNetInputs(), *networkTopology->getAllActivations(), errormap);
 	}
 
 	void AbstractGradientCalculation::initGradient(AbstractNetworkTopology* networkTopology)

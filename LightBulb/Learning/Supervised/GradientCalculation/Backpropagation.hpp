@@ -25,7 +25,7 @@ namespace LightBulb
 		double flatSpotEliminationFac;
 	public:
 		Backpropagation(double flatSpotEliminationFac_ = 0);
-		void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap) override;
+		void calcGradient(AbstractNetworkTopology* networkTopology, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, ErrorMap_t* errormap) override;
 	};
 }
 

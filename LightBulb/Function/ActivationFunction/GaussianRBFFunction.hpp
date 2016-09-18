@@ -20,7 +20,7 @@ namespace LightBulb
 	public:
 		GaussianRBFFunction(Eigen::VectorXd* widths_);
 		// Inherited:
-		void execute(int layerNr, std::vector<std::unique_ptr<Eigen::VectorBlock<Eigen::VectorXd>>>& activations, std::vector<Eigen::VectorXd>& netInputs) override;
+		void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs) override;
 		double execute(double input) override;
 		double executeDerivation(double input) override;
 		AbstractActivationFunction* getActivationFunctionCopy() override;
