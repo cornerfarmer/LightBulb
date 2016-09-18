@@ -13,6 +13,7 @@
 #include "AbstractReinforcementWorld.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
 
 namespace LightBulb
 {
@@ -22,6 +23,7 @@ namespace LightBulb
 
 		return learningResult;
 	}
+
 
 	PolicyGradientLearningRule::PolicyGradientLearningRule(PolicyGradientLearningRuleOptions& options_)
 		: AbstractReinforcementLearningRule(new PolicyGradientLearningRuleOptions(options_))
@@ -44,6 +46,13 @@ namespace LightBulb
 	void PolicyGradientLearningRule::initialize()
 	{
 		gradientCalculation.reset(new Backpropagation());
+		
+		gradientDecentAlgorithm.reset(new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions));
+	}
+
+	void PolicyGradientLearningRule::initializeLearningAlgoritm()
+	{
+		gradientDecentAlgorithm->initialize(getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 	}
 
 	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
@@ -161,17 +170,7 @@ namespace LightBulb
 		static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradientCalculation->getGradient()->size());
 		for (int l = gradientCalculation->getGradient()->size() - 1; l >= 0; l--)
 		{
-			if (prevDeltaWeights[l].size() == 0) {
-				prevDeltaWeights[l].resizeLike(gradientCalculation->getGradient()->at(l));
-				prevDeltaWeights[l].setZero();
-			}
-
-			prevDeltaWeights[l] = 0.99 * prevDeltaWeights[l] + (1 - 0.99) * gradientCalculation->getGradient()->at(l).cwiseAbs2();
-
-			/*
-					prevDeltaWeights[l] = resilientLearningRateHelper->getLearningRate(l + 1, gradients[l]);*/
-
-			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) - 1e-4 * gradientCalculation->getGradient()->at(l).cwiseQuotient((prevDeltaWeights[l].cwiseSqrt().array() + 1e-5).matrix());
+			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + gradientDecentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradientCalculation->getGradient()->at(l));
 			networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
 		}
 	}

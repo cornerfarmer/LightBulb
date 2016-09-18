@@ -5,10 +5,12 @@
 
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
+#include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/AbstractGradientDecentAlgorithm.hpp"
+#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
 
 // Library Includes
 #include <vector>
-#include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 
 namespace LightBulb
 {
@@ -18,9 +20,15 @@ namespace LightBulb
 	struct PolicyGradientLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 	{
 		int episodeSize;
+		RMSPropLearningRateOptions rmsPropLearningRateOptions;
 		PolicyGradientLearningRuleOptions()
 		{
 			episodeSize = 10;
+			rmsPropLearningRateOptions.deltaWeightsMomentum = 0;
+			rmsPropLearningRateOptions.gradientMomentum = 1;
+			rmsPropLearningRateOptions.squaredGradientMomentum = 0.99;
+			rmsPropLearningRateOptions.learningRate = 1e-4;
+			rmsPropLearningRateOptions.minSquaredGradient = 1e-5;
 		}
 	};
 
@@ -31,6 +39,7 @@ namespace LightBulb
 		std::vector<std::vector<Eigen::VectorXd>> activationRecord;
 		std::vector<Eigen::VectorXd> errorVectorRecord;
 		std::unique_ptr<AbstractGradientCalculation> gradientCalculation;
+		std::unique_ptr<AbstractGradientDecentAlgorithm> gradientDecentAlgorithm;
 
 		int stepsSinceLastReward;
 		void addGradients(AbstractNetworkTopology* networkTopology);
@@ -45,6 +54,7 @@ namespace LightBulb
 		PolicyGradientLearningRuleOptions* getOptions() override;
 		void doCalculationAfterLearningProcess() override;
 		AbstractLearningResult* getLearningResult() override;
+		void initializeLearningAlgoritm() override;
 	public:
 		PolicyGradientLearningRule(PolicyGradientLearningRuleOptions& options_);
 		PolicyGradientLearningRule(PolicyGradientLearningRuleOptions* options_);
