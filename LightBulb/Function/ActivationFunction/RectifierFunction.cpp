@@ -15,7 +15,7 @@ namespace LightBulb
 		return  std::max(leakyFac * input, input);
 	}
 
-	void RectifierFunction::execute(int layerNr, std::vector<Eigen::VectorXd>& activations, std::vector<Eigen::VectorXd>& netInputs)
+	void RectifierFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs)
 	{
 		activations[layerNr] = netInputs[layerNr].cwiseMax(0);
 	}

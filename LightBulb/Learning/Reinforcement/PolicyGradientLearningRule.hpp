@@ -20,15 +20,13 @@ namespace LightBulb
 	struct PolicyGradientLearningRuleOptions : public AbstractReinforcementLearningRuleOptions
 	{
 		int episodeSize;
+		int ratingInterval;
 		RMSPropLearningRateOptions rmsPropLearningRateOptions;
 		PolicyGradientLearningRuleOptions()
 		{
 			episodeSize = 10;
-			rmsPropLearningRateOptions.deltaWeightsMomentum = 0;
-			rmsPropLearningRateOptions.gradientMomentum = 1;
-			rmsPropLearningRateOptions.squaredGradientMomentum = 0.99;
+			ratingInterval = 10;
 			rmsPropLearningRateOptions.learningRate = 1e-4;
-			rmsPropLearningRateOptions.minSquaredGradient = 1e-5;
 		}
 	};
 

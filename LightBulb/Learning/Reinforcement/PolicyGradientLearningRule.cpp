@@ -159,7 +159,8 @@ namespace LightBulb
 		// Continue with the next generation
 		learningState->iterations++;
 
-		getOptions()->world->rateKI();
+		if (learningState->iterations % getOptions()->ratingInterval == 0)
+			getOptions()->world->rateKI();
 
 		return true;
 	}
