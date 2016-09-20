@@ -53,56 +53,30 @@ namespace LightBulb
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
 	{
 		gradientDecentAlgorithm->initialize(getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+		errorVectorRecord.resize(1000);
+		netInputRecord.resize(1000);
+		activationRecord.resize(1000);
+		lastOutput.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutputSize());
 	}
 
 	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
 	{
-		errorVectorRecord.push_back(getErrorVector(networkTopology));
+		getErrorVector(networkTopology, errorVectorRecord[stepsSinceLastReward]);
 
-		netInputRecord.push_back(*networkTopology->getAllNetInputs());
+		netInputRecord[stepsSinceLastReward] = *networkTopology->getAllNetInputs();
 
-		activationRecord.push_back(networkTopology->getActivationsCopy());
+		networkTopology->getActivationsCopy(activationRecord[stepsSinceLastReward]);
 	}
 
-	std::vector<Eigen::MatrixXd> PolicyGradientLearningRule::checkGradient(AbstractNetworkTopology* networkTopology)
+	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector)
 	{
-		double epsilon = 0.0001;
-		auto weights = networkTopology->getAllWeights();
-		std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
-		for (int l = weights->size() - 1; l >= 0; l--)
-		{
-			gradientApprox[l].resizeLike(weights->at(l));
-			for (int n1 = 0; n1 < weights->at(l).rows(); n1++)
-			{
-				for (int n2 = 0; n2 < weights->at(l).cols(); n2++)
-				{
-					weights->at(l)(n1, n2) += epsilon;
-					getOptions()->world->doNNCalculation(false);
-					double firstError = 0.5* getErrorVector(networkTopology).cwiseAbs2().sum();
-
-					weights->at(l)(n1, n2) -= epsilon * 2;
-					getOptions()->world->doNNCalculation(false);
-					double secondError = 0.5* getErrorVector(networkTopology).cwiseAbs2().sum();
-					gradientApprox[l](n1, n2) = (firstError - secondError) / (2 * epsilon);
-
-					weights->at(l)(n1, n2) += epsilon;
-				}
-			}
-		}
-		return gradientApprox;
-	}
-
-	Eigen::VectorXd PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology* networkTopology)
-	{
-		std::vector<double> lastOutput(networkTopology->getOutputSize());
 		networkTopology->getOutput(lastOutput);
 
-		Eigen::VectorXd errorVector(lastOutput.size());
+		errorVector.resize(lastOutput.size());
 		for (int i = 0; i < lastOutput.size(); i++)
 		{
-			errorVector(i) = getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i];//-2 * std::signbit(getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
+			errorVector(i) = getOptions()->world->getLastBooleanOutput()->at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 		}
-		return errorVector;
 	}
 
 	void PolicyGradientLearningRule::initializeTry()
@@ -204,9 +178,6 @@ namespace LightBulb
 			computeGradientsForError(networkTopology, errorVectorRecord[i], netInputRecord[i], activationRecord[i]);
 		}
 
-		errorVectorRecord.clear();
-		netInputRecord.clear();
-		activationRecord.clear();
 	}
 
 	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)

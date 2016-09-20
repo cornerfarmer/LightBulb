@@ -55,7 +55,7 @@ namespace LightBulb
 		double getEpsilon();
 		void setLearningState(LearningState* learningState_);
 		virtual std::vector<std::string> getDataSetLabels();
-		std::vector<bool> getLastBooleanOutput();
+		std::vector<bool>* getLastBooleanOutput();
 		virtual bool isTerminalState() = 0;
 	};
 }

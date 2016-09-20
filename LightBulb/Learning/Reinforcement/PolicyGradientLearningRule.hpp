@@ -38,15 +38,14 @@ namespace LightBulb
 		std::vector<Eigen::VectorXd> errorVectorRecord;
 		std::unique_ptr<AbstractGradientCalculation> gradientCalculation;
 		std::unique_ptr<AbstractGradientDecentAlgorithm> gradientDecentAlgorithm;
-
+		std::vector<double> lastOutput;
 		int stepsSinceLastReward;
 		void addGradients(AbstractNetworkTopology* networkTopology);
 		void computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward);
 		void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations);
 		void initialize();
 		void recordStep(AbstractNetworkTopology* networkTopology);
-		std::vector<Eigen::MatrixXd> checkGradient(AbstractNetworkTopology* networkTopology);
-		Eigen::VectorXd getErrorVector(AbstractNetworkTopology* networkTopology);
+		void getErrorVector(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector);
 	protected:
 		bool doIteration() override;
 		PolicyGradientLearningRuleOptions* getOptions() override;

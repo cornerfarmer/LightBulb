@@ -58,7 +58,7 @@ namespace LightBulb
 
 		virtual std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() = 0;
 
-		virtual std::vector<Eigen::VectorXd> getActivationsCopy() = 0;
+		virtual void getActivationsCopy(std::vector<Eigen::VectorXd>& copy) = 0;
 
 		virtual std::vector<Eigen::VectorXd>* getAllNetInputs() = 0;
 

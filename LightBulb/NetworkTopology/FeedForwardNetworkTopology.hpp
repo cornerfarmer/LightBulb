@@ -100,7 +100,7 @@ namespace LightBulb
 
 		std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() override;
 
-		std::vector<Eigen::VectorXd> getActivationsCopy() override;
+		void getActivationsCopy(std::vector<Eigen::VectorXd>& copy) override;
 
 		std::vector<Eigen::VectorXd>* getAllNetInputs() override;
 

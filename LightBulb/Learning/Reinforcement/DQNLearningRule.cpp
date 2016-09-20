@@ -69,9 +69,9 @@ namespace LightBulb
 
 		transition.reward = reward;
 
-		for (int i = 0; i < getOptions()->world->getLastBooleanOutput().size(); i++)
+		for (int i = 0; i < getOptions()->world->getLastBooleanOutput()->size(); i++)
 		{
-			if (getOptions()->world->getLastBooleanOutput()[i])
+			if (getOptions()->world->getLastBooleanOutput()->at(i))
 			{
 				transition.action = i;
 				break;

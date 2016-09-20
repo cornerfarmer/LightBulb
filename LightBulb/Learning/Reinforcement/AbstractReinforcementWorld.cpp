@@ -107,8 +107,8 @@ namespace LightBulb
 		return labels;
 	}
 
-	std::vector<bool> AbstractReinforcementWorld::getLastBooleanOutput()
+	std::vector<bool>* AbstractReinforcementWorld::getLastBooleanOutput()
 	{
-		return lastBooleanOutput;
+		return &lastBooleanOutput;
 	}
 }
