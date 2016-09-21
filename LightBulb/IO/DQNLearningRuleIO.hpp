@@ -35,7 +35,7 @@ namespace LightBulb
 		archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
 		archive(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
 		archive(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
-		archive(cereal::make_nvp("gradientDecent", learningRule.gradientDecent));
+		archive(cereal::make_nvp("gradientDescent", learningRule.gradientDescent));
 	}
 }
 
@@ -56,9 +56,9 @@ namespace cereal
 			ar(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
 			ar(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
 
-			IOStorage<AbstractLearningRule>::push(learningRule.gradientDecent.release());
-			ar(cereal::make_nvp("gradientDecent", learningRule.gradientDecent));
-			learningRule.gradientDecent.reset(static_cast<GradientDecentLearningRule*>(IOStorage<AbstractLearningRule>::pop()));
+			IOStorage<AbstractLearningRule>::push(learningRule.gradientDescent.release());
+			ar(cereal::make_nvp("gradientDescent", learningRule.gradientDescent));
+			learningRule.gradientDescent.reset(static_cast<GradientDescentLearningRule*>(IOStorage<AbstractLearningRule>::pop()));
 		}
 	};
 }

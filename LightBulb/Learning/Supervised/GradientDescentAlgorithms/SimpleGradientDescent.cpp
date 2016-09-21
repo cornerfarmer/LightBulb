@@ -1,27 +1,27 @@
 // Includes
-#include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {
-	SimpleGradientDecent::SimpleGradientDecent(SimpleGradientDecentOptions& options_)
-		:AbstractGradientDecentAlgorithm(new SimpleGradientDecentOptions(options_))
+	SimpleGradientDescent::SimpleGradientDescent(SimpleGradientDescentOptions& options_)
+		:AbstractGradientDescentAlgorithm(new SimpleGradientDescentOptions(options_))
 	{
 
 	}
 
-	SimpleGradientDecent::SimpleGradientDecent()
-		: AbstractGradientDecentAlgorithm(new SimpleGradientDecentOptions())
+	SimpleGradientDescent::SimpleGradientDescent()
+		: AbstractGradientDescentAlgorithm(new SimpleGradientDescentOptions())
 	{
 	}
 
-	SimpleGradientDecentOptions* SimpleGradientDecent::getOptions()
+	SimpleGradientDescentOptions* SimpleGradientDescent::getOptions()
 	{
-		return static_cast<SimpleGradientDecentOptions*>(options.get());
+		return static_cast<SimpleGradientDescentOptions*>(options.get());
 	}
 
-	void SimpleGradientDecent::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
+	void SimpleGradientDescent::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
 	{
 		// If momentum is used
 		if (getOptions()->momentum > 0)
@@ -35,7 +35,7 @@ namespace LightBulb
 		}
 	}
 
-	Eigen::MatrixXd SimpleGradientDecent::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
 	{
 		Eigen::MatrixXd deltaWeight;
 
@@ -56,12 +56,12 @@ namespace LightBulb
 		return deltaWeight;
 	}
 
-	std::string SimpleGradientDecent::printDebugOutput()
+	std::string SimpleGradientDescent::printDebugOutput()
 	{
 		return "";
 	}
 
-	bool SimpleGradientDecent::learningHasStopped()
+	bool SimpleGradientDescent::learningHasStopped()
 	{
 		return false;
 	}

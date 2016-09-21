@@ -40,7 +40,7 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
 	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
 	options.replayStartSize = getIntegerPreference(PREFERENCE_REPLAY_START_SIZE);
-	options.gradientDecentOptions.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
+	options.gradientDescentOptions.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
 	options.rmsPropOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	options.rmsPropOptions.deltaWeightsMomentum = getDoublePreference(PREFERENCE_MOMENTUM);
 	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);

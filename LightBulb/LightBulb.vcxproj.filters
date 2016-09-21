@@ -409,17 +409,10 @@
     <ClCompile Include="Learning\Supervised\AbstractSupervisedLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Supervised\GradientDecentLearningRule.cpp" />
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\AbstractGradientDecentAlgorithm.cpp" />
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.cpp" />
     <ClCompile Include="Learning\Supervised\GradientCalculation\AbstractGradientCalculation.cpp" />
     <ClCompile Include="Learning\Supervised\GradientCalculation\Backpropagation.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.cpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
@@ -559,6 +552,13 @@
       <Filter>Quelldateien\NeuronDescriptionFactory</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractFitnessFunction.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentLearningRule.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -976,18 +976,11 @@
     <ClInclude Include="Learning\Supervised\AbstractSupervisedLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Supervised\GradientDecentLearningRule.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\AbstractGradientDecentAlgorithm.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.hpp" />
     <ClInclude Include="Learning\Supervised\GradientCalculation\AbstractGradientCalculation.hpp" />
     <ClInclude Include="Learning\Supervised\GradientCalculation\Backpropagation.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Supervised\SupervisedLearningResult.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionLearningRule.hpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
@@ -1112,13 +1105,9 @@
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
-    <ClInclude Include="IO\GradientDecentLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="IO\BackpropagationIO.hpp" />
     <ClInclude Include="IO\ResilientLearningRateIO.hpp" />
     <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
-    <ClInclude Include="IO\SimpleGradientDecentIO.hpp" />
     <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
     <ClInclude Include="NeuronDescription\NeuronDescription.hpp">
       <Filter>Quelldateien\Neuron</Filter>
@@ -1135,7 +1124,18 @@
     <ClInclude Include="IO\DQNLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
-    <ClInclude Include="IO\AbstractGradientDecentAlgorithmIO.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractFitnessFunction.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentLearningRule.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.hpp" />
+    <ClInclude Include="IO\AbstractGradientDescentAlgorithmIO.hpp" />
+    <ClInclude Include="IO\SimpleGradientDescentIO.hpp" />
+    <ClInclude Include="IO\GradientDescentLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

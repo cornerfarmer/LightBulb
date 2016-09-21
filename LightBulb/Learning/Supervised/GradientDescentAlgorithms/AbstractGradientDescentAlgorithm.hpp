@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _ABSTRACTGRADIENTDECENTALGORITHM_H_
-#define _ABSTRACTGRADIENTDECENTALGORITHM_H_
+#ifndef _ABSTRACTGRADIENTDESCENTALGORITHM_H_
+#define _ABSTRACTGRADIENTDESCENTALGORITHM_H_
 
 // Library Includes
 
@@ -15,29 +15,29 @@ namespace LightBulb
 	class AbstractNeuralNetwork;
 	class AbstractNetworkTopology;
 
-	struct AbstractGradientDecentAlgorithmOptions
+	struct AbstractGradientDescentAlgorithmOptions
 	{
 		int test;
-		AbstractGradientDecentAlgorithmOptions()
+		AbstractGradientDescentAlgorithmOptions()
 		{
 			test = 5;
 		}
 
-		virtual ~AbstractGradientDecentAlgorithmOptions() {}
+		virtual ~AbstractGradientDescentAlgorithmOptions() {}
 	};
 
 
-	class AbstractGradientDecentAlgorithm
+	class AbstractGradientDescentAlgorithm
 	{
 		template <class Archive>
-		friend void serialize(Archive& archive, AbstractGradientDecentAlgorithm& gradientDecentAlgorithm);
+		friend void serialize(Archive& archive, AbstractGradientDescentAlgorithm& gradientDescentAlgorithm);
 	private:
 		bool initialized;
 	protected:
-		std::unique_ptr<AbstractGradientDecentAlgorithmOptions> options;
+		std::unique_ptr<AbstractGradientDescentAlgorithmOptions> options;
 		virtual void initializeAlgorithm(AbstractNetworkTopology* networkTopology) = 0;
 	public:
-		AbstractGradientDecentAlgorithm(AbstractGradientDecentAlgorithmOptions* options_);
+		AbstractGradientDescentAlgorithm(AbstractGradientDescentAlgorithmOptions* options_);
 		// Computes the new learning rate of the given edge from the given gradient
 		virtual Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) = 0;
 		// Print a short debug output (totalLearningRate)
@@ -51,7 +51,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractGradientDecentAlgorithmIO.hpp"
+#include "IO/AbstractGradientDescentAlgorithmIO.hpp"
 
 #endif
 

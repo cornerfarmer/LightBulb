@@ -1,18 +1,18 @@
 // Includes
-#include "Learning/Supervised/GradientDecentAlgorithms/ResilientLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {
 	ResilientLearningRate::ResilientLearningRate(ResilientLearningRateOptions& options_)
-		:AbstractGradientDecentAlgorithm(new ResilientLearningRateOptions(options_))
+		:AbstractGradientDescentAlgorithm(new ResilientLearningRateOptions(options_))
 	{
 
 	}
 
 	ResilientLearningRate::ResilientLearningRate()
-		: AbstractGradientDecentAlgorithm(new ResilientLearningRateOptions())
+		: AbstractGradientDescentAlgorithm(new ResilientLearningRateOptions())
 	{
 	}
 

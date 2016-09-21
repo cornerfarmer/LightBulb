@@ -1,7 +1,7 @@
 #include "TCProblemBackpropagationExample.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include <Learning/Supervised/GradientDecentLearningRule.hpp>
+#include <Learning/Supervised/GradientDescentLearningRule.hpp>
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Teaching/TeachingLessonBooleanInput.hpp>
@@ -9,7 +9,7 @@
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
-#include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 
 using namespace LightBulb;
 
@@ -26,20 +26,20 @@ AbstractLearningRule* TCProblemBackpropagationExample::createLearningRate()
 {
 	teacher.reset(new TCProblemTeacher(true));
 
-	SimpleGradientDecentOptions gradientDecentOptions;
-	gradientDecentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
-	gradientDecentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
+	SimpleGradientDescentOptions gradientDescentOptions;
+	gradientDescentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
+	gradientDescentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 
-	GradientDecentLearningRuleOptions options;
+	GradientDescentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
-	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
+	options.gradientDescentAlgorithm = new SimpleGradientDescent(gradientDescentOptions);
 	options.teacher = teacher.get();
 	fillDefaultLearningRuleOptions(&options);
 
-	return new GradientDecentLearningRule(options);
+	return new GradientDescentLearningRule(options);
 }
 
 
@@ -86,5 +86,5 @@ int TCProblemBackpropagationExample::getRequiredOutputSize()
 
 std::string TCProblemBackpropagationExample::getLearningRuleName()
 {
-	return GradientDecentLearningRule::getName();
+	return GradientDescentLearningRule::getName();
 }

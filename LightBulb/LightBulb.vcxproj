@@ -157,9 +157,9 @@
     </ClCompile>
     <ClCompile Include="Learning\Supervised\AbstractSupervisedLearningRule.cpp" />
     <ClCompile Include="Learning\Supervised\GradientCalculation\AbstractGradientCalculation.cpp" />
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\AbstractGradientDecentAlgorithm.cpp" />
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.cpp" />
-    <ClCompile Include="Learning\Supervised\GradientDecentLearningRule.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentLearningRule.cpp" />
     <ClCompile Include="Learning\Supervised\GradientCalculation\Backpropagation.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -384,11 +384,11 @@
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementWorld.cpp" />
     <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.cpp">
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.cpp" />
     <ClCompile Include="Learning\Old %28not working%29\SchmidhuberLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -609,14 +609,14 @@
     <ClInclude Include="Function\ActivationFunction\RectifierFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\RouletteWheelSelectionFunction.hpp" />
     <ClInclude Include="Function\InputFunction\WeightedSumFunction.hpp" />
-    <ClInclude Include="IO\AbstractGradientDecentAlgorithmIO.hpp" />
+    <ClInclude Include="IO\AbstractGradientDescentAlgorithmIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\BackpropagationIO.hpp" />
     <ClInclude Include="IO\DQNLearningRuleIO.hpp" />
     <ClInclude Include="IO\ResilientLearningRateIO.hpp" />
     <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
-    <ClInclude Include="IO\SimpleGradientDecentIO.hpp" />
+    <ClInclude Include="IO\SimpleGradientDescentIO.hpp" />
     <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractFitnessFunction.hpp" />
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
@@ -638,7 +638,7 @@
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
-    <ClInclude Include="IO\GradientDecentLearningRuleIO.hpp">
+    <ClInclude Include="IO\GradientDescentLearningRuleIO.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -670,9 +670,9 @@
     </ClInclude>
     <ClInclude Include="Learning\Supervised\AbstractSupervisedLearningRule.hpp" />
     <ClInclude Include="Learning\Supervised\GradientCalculation\AbstractGradientCalculation.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\AbstractGradientDecentAlgorithm.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\SimpleGradientDecent.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentLearningRule.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentLearningRule.hpp" />
     <ClInclude Include="Learning\Supervised\GradientCalculation\Backpropagation.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -902,11 +902,11 @@
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
     <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\ResilientLearningRate.hpp">
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Supervised\GradientDecentAlgorithms\RMSPropLearningRate.hpp" />
+    <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.hpp" />
     <ClInclude Include="Learning\Old %28not working%29\SchmidhuberLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

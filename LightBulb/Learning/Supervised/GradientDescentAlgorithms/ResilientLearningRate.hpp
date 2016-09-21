@@ -7,13 +7,13 @@
 #include <vector>
 
 // Includes
-#include "AbstractGradientDecentAlgorithm.hpp"
+#include "AbstractGradientDescentAlgorithm.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 
-	struct ResilientLearningRateOptions : public AbstractGradientDecentAlgorithmOptions
+	struct ResilientLearningRateOptions : public AbstractGradientDescentAlgorithmOptions
 	{
 		// Sets the factor by which the learningRate can grow
 		double learningRateGrowFac;
@@ -39,7 +39,7 @@ namespace LightBulb
 	};
 
 
-	class ResilientLearningRate : public AbstractGradientDecentAlgorithm
+	class ResilientLearningRate : public AbstractGradientDescentAlgorithm
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, ResilientLearningRate& resilientLearningRate);

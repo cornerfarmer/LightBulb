@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include <Learning/Supervised/GradientDecentLearningRule.hpp>
+#include <Learning/Supervised/GradientDescentLearningRule.hpp>
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <NeuralNetwork/NeuralNetworkIO.hpp>
@@ -13,14 +13,14 @@
 #include <Teaching/Teacher.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <Learning/AbstractLearningResult.hpp>
-#include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/ResilientLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 
 using namespace LightBulb;
 
-class GradientDecentLearningRuleTest : public testing::Test {
+class GradientDescentLearningRuleTest : public testing::Test {
 public:
-	GradientDecentLearningRule* gradientDecentLearningRule;
+	GradientDescentLearningRule* gradientDescentLearningRule;
 	NeuralNetwork* neuralNetwork;
 	Teacher* teacher;
 	void SetUp() {
@@ -51,9 +51,9 @@ public:
 		}
 	}
 	
-	GradientDecentLearningRuleOptions getDefaultOptions()
+	GradientDescentLearningRuleOptions getDefaultOptions()
 	{
-		GradientDecentLearningRuleOptions options;
+		GradientDescentLearningRuleOptions options;
 		options.maxIterationsPerTry = 1000000;
 		options.totalErrorGoal = 0.001f;
 		options.seed = 1;
@@ -89,64 +89,64 @@ public:
 		EXPECT_NEAR(0, (*output)[0], 0.04);
 	}
 
-	virtual ~GradientDecentLearningRuleTest()
+	virtual ~GradientDescentLearningRuleTest()
 	{
-		delete gradientDecentLearningRule;
+		delete gradientDescentLearningRule;
 		delete neuralNetwork;
 		delete teacher;
 	}
 };
 
-TEST_F(GradientDecentLearningRuleTest, doLearning)
+TEST_F(GradientDescentLearningRuleTest, doLearning)
 {
-	SimpleGradientDecentOptions gradientDecentOptions;
-	gradientDecentOptions.learningRate = 0.1;
+	SimpleGradientDescentOptions gradientDescentOptions;
+	gradientDescentOptions.learningRate = 0.1;
 
-	GradientDecentLearningRuleOptions options = getDefaultOptions();
+	GradientDescentLearningRuleOptions options = getDefaultOptions();
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
-	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
+	options.gradientDescentAlgorithm = new SimpleGradientDescent(gradientDescentOptions);
 
-	gradientDecentLearningRule = new GradientDecentLearningRule(options);
+	gradientDescentLearningRule = new GradientDescentLearningRule(options);
 
-	EXPECT_EQ(true, gradientDecentLearningRule->start()->succeeded);
+	EXPECT_EQ(true, gradientDescentLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }
 
-TEST_F(GradientDecentLearningRuleTest, doLearningWithResilientLearningRate)
+TEST_F(GradientDescentLearningRuleTest, doLearningWithResilientLearningRate)
 {
 	ResilientLearningRateOptions resilientLearningRateOptions;
 
-	GradientDecentLearningRuleOptions options = getDefaultOptions();
+	GradientDescentLearningRuleOptions options = getDefaultOptions();
 	options.maxIterationsPerTry = 1000;
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
 	options.offlineLearning = true;
-	options.gradientDecentAlgorithm = new ResilientLearningRate(resilientLearningRateOptions);
+	options.gradientDescentAlgorithm = new ResilientLearningRate(resilientLearningRateOptions);
 
-	gradientDecentLearningRule = new GradientDecentLearningRule(options);
+	gradientDescentLearningRule = new GradientDescentLearningRule(options);
 
-	EXPECT_EQ(true, gradientDecentLearningRule->start()->succeeded);
+	EXPECT_EQ(true, gradientDescentLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }
 
-TEST_F(GradientDecentLearningRuleTest, doLearningWithMomentum)
+TEST_F(GradientDescentLearningRuleTest, doLearningWithMomentum)
 {
-	SimpleGradientDecentOptions gradientDecentOptions;
-	gradientDecentOptions.learningRate = 0.1;
-	gradientDecentOptions.momentum = 0.8;
+	SimpleGradientDescentOptions gradientDescentOptions;
+	gradientDescentOptions.learningRate = 0.1;
+	gradientDescentOptions.momentum = 0.8;
 
-	GradientDecentLearningRuleOptions options = getDefaultOptions();
+	GradientDescentLearningRuleOptions options = getDefaultOptions();
 	options.maxIterationsPerTry = 10000;
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
-	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
+	options.gradientDescentAlgorithm = new SimpleGradientDescent(gradientDescentOptions);
 
-	gradientDecentLearningRule = new GradientDecentLearningRule(options);
+	gradientDescentLearningRule = new GradientDescentLearningRule(options);
 
-	EXPECT_EQ(true, gradientDecentLearningRule->start()->succeeded);
+	EXPECT_EQ(true, gradientDescentLearningRule->start()->succeeded);
 
 	assertTrainedNeuralNetwork();
 }

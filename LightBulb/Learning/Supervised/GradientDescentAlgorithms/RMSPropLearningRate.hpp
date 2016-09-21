@@ -7,13 +7,13 @@
 #include <vector>
 
 // Includes
-#include "AbstractGradientDecentAlgorithm.hpp"
+#include "AbstractGradientDescentAlgorithm.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 
-	struct RMSPropLearningRateOptions : public AbstractGradientDecentAlgorithmOptions
+	struct RMSPropLearningRateOptions : public AbstractGradientDescentAlgorithmOptions
 	{
 		// Sets the factor by which the learningRate can grow
 		double gradientMomentum;
@@ -32,7 +32,7 @@ namespace LightBulb
 	};
 
 
-	class RMSPropLearningRate : public AbstractGradientDecentAlgorithm
+	class RMSPropLearningRate : public AbstractGradientDescentAlgorithm
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate);

@@ -6,8 +6,8 @@
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 #include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/AbstractGradientDecentAlgorithm.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 
 // Library Includes
 #include <vector>
@@ -37,7 +37,7 @@ namespace LightBulb
 		std::vector<std::vector<Eigen::VectorXd>> activationRecord;
 		std::vector<Eigen::VectorXd> errorVectorRecord;
 		std::unique_ptr<AbstractGradientCalculation> gradientCalculation;
-		std::unique_ptr<AbstractGradientDecentAlgorithm> gradientDecentAlgorithm;
+		std::unique_ptr<AbstractGradientDescentAlgorithm> gradientDescentAlgorithm;
 		std::vector<double> lastOutput;
 		int stepsSinceLastReward;
 		void addGradients(AbstractNetworkTopology* networkTopology);

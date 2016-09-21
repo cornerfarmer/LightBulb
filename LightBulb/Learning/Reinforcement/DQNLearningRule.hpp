@@ -6,8 +6,8 @@
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 #include <Teaching/Teacher.hpp>
-#include "Learning/Supervised/GradientDecentLearningRule.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 
 // Library Includes
 #include <vector>
@@ -34,7 +34,7 @@ namespace LightBulb
 		int replayStartSize;
 		bool replaceStoredTransitions;
 
-		GradientDecentLearningRuleOptions gradientDecentOptions;
+		GradientDescentLearningRuleOptions gradientDescentOptions;
 
 		RMSPropLearningRateOptions rmsPropOptions;
 		DQNLearningRuleOptions()
@@ -49,12 +49,12 @@ namespace LightBulb
 			replayStartSize = 50000;
 			replaceStoredTransitions = true;
 
-			gradientDecentOptions.maxIterationsPerTry = 1;
-			gradientDecentOptions.maxTries = 1;
-			gradientDecentOptions.changeWeightsBeforeLearning = false;
-			gradientDecentOptions.offlineLearning = true;
-			gradientDecentOptions.totalErrorGoal = -1;
-			gradientDecentOptions.clipError = true;
+			gradientDescentOptions.maxIterationsPerTry = 1;
+			gradientDescentOptions.maxTries = 1;
+			gradientDescentOptions.changeWeightsBeforeLearning = false;
+			gradientDescentOptions.offlineLearning = true;
+			gradientDescentOptions.totalErrorGoal = -1;
+			gradientDescentOptions.clipError = true;
 
 			rmsPropOptions.learningRate = 0.00025;
 		}
@@ -80,7 +80,7 @@ namespace LightBulb
 		double currentTotalReward;
 		Teacher teacher;
 		std::vector<Transition> transitions;
-		std::unique_ptr<GradientDecentLearningRule> gradientDecent;
+		std::unique_ptr<GradientDescentLearningRule> gradientDescent;
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 		double qAvgSum;
 		void initialize();

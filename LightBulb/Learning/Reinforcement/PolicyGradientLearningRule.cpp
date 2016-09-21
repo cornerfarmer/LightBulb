@@ -13,7 +13,7 @@
 #include "AbstractReinforcementWorld.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 
 namespace LightBulb
 {
@@ -47,12 +47,12 @@ namespace LightBulb
 	{
 		gradientCalculation.reset(new Backpropagation());
 		
-		gradientDecentAlgorithm.reset(new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions));
+		gradientDescentAlgorithm.reset(new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions));
 	}
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
 	{
-		gradientDecentAlgorithm->initialize(getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+		gradientDescentAlgorithm->initialize(getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 		errorVectorRecord.resize(1000);
 		netInputRecord.resize(1000);
 		activationRecord.resize(1000);
@@ -145,7 +145,7 @@ namespace LightBulb
 		static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradientCalculation->getGradient()->size());
 		for (int l = gradientCalculation->getGradient()->size() - 1; l >= 0; l--)
 		{
-			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + gradientDecentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradientCalculation->getGradient()->at(l));
+			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + gradientDescentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradientCalculation->getGradient()->at(l));
 			networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
 		}
 	}

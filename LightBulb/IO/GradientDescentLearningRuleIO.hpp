@@ -1,10 +1,10 @@
 #pragma once
 
-#ifndef _GRADIENTDECENTLEARNINGRULEIO_H_
-#define _GRADIENTDECENTLEARNINGRULEIO_H_
+#ifndef _GRADIENTDESCENTLEARNINGRULEIO_H_
+#define _GRADIENTDESCENTLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Supervised/GradientDecentLearningRule.hpp"
+#include "Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "IO/MatrixIO.hpp"
 #include "ConstructExisting.hpp"
 
@@ -16,10 +16,10 @@
 namespace LightBulb
 {
 	template <class Archive>
-	void serialize(Archive& archive, GradientDecentLearningRule& learningRule)
+	void serialize(Archive& archive, GradientDescentLearningRule& learningRule)
 	{
 		archive(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
-		archive(cereal::make_nvp("gradientDecentAlgorithm", learningRule.gradientDecentAlgorithm));
+		archive(cereal::make_nvp("gradientDescentAlgorithm", learningRule.gradientDescentAlgorithm));
 		archive(cereal::make_nvp("gradientCalculation", learningRule.gradientCalculation));
 	}
 }
@@ -27,17 +27,17 @@ namespace LightBulb
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(LightBulb::GradientDecentLearningRule, LightBulb::AbstractLearningRule)
+	CONSTRUCT_EXISTING(LightBulb::GradientDescentLearningRule, LightBulb::AbstractLearningRule)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::GradientDecentLearningRule& learningRule)
+		static void construct(Archive& ar, LightBulb::GradientDescentLearningRule& learningRule)
 		{
 			using namespace LightBulb;
 			ar(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
 
-			IOStorage<AbstractGradientDecentAlgorithm>::push(learningRule.gradientDecentAlgorithm.release());
-			ar(cereal::make_nvp("gradientDecentAlgorithm", learningRule.gradientDecentAlgorithm));
-			learningRule.gradientDecentAlgorithm.reset(IOStorage<AbstractGradientDecentAlgorithm>::pop());
+			IOStorage<AbstractGradientDescentAlgorithm>::push(learningRule.gradientDescentAlgorithm.release());
+			ar(cereal::make_nvp("gradientDescentAlgorithm", learningRule.gradientDescentAlgorithm));
+			learningRule.gradientDescentAlgorithm.reset(IOStorage<AbstractGradientDescentAlgorithm>::pop());
 
 			IOStorage<AbstractGradientCalculation>::push(learningRule.gradientCalculation.release());
 			ar(cereal::make_nvp("gradientCalculation", learningRule.gradientCalculation));
@@ -49,6 +49,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(LightBulb::GradientDecentLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::GradientDescentLearningRule);
 
 #endif

@@ -48,11 +48,11 @@ namespace LightBulb
 
 	void DQNLearningRule::initialize()
 	{
-		getOptions()->gradientDecentOptions.gradientDecentAlgorithm = new RMSPropLearningRate(getOptions()->rmsPropOptions);
-		getOptions()->gradientDecentOptions.teacher = &teacher;
-		getOptions()->gradientDecentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
-		getOptions()->gradientDecentOptions.logger = NULL;
-		gradientDecent.reset(new GradientDecentLearningRule(getOptions()->gradientDecentOptions));
+		getOptions()->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(getOptions()->rmsPropOptions);
+		getOptions()->gradientDescentOptions.teacher = &teacher;
+		getOptions()->gradientDescentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
+		getOptions()->gradientDescentOptions.logger = NULL;
+		gradientDescent.reset(new GradientDescentLearningRule(getOptions()->gradientDescentOptions));
 
 		steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
 	}
@@ -118,7 +118,7 @@ namespace LightBulb
 
 		//auto gradient = checkGradient(&teacher, getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 
-		std::unique_ptr<AbstractLearningResult> result(gradientDecent->start());
+		std::unique_ptr<AbstractLearningResult> result(gradientDescent->start());
 		currentTotalError += result->quality;
 	}
 

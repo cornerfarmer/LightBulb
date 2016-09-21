@@ -1,19 +1,19 @@
 #pragma once
 
-#ifndef _SIMPLEGRADIENTDECENT_H_
-#define _SIMPLEGRADIENTDECENT_H_
+#ifndef _SIMPLEGRADIENTDESCENT_H_
+#define _SIMPLEGRADIENTDESCENT_H_
 
 // Library Includes
 #include <vector>
 
 // Includes
-#include "AbstractGradientDecentAlgorithm.hpp"
+#include "AbstractGradientDescentAlgorithm.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 
-	struct SimpleGradientDecentOptions : public AbstractGradientDecentAlgorithmOptions
+	struct SimpleGradientDescentOptions : public AbstractGradientDescentAlgorithmOptions
 	{
 		// Sets the weight decay factor, which will be used avoid high weights
 		double weightDecayFac;
@@ -21,7 +21,7 @@ namespace LightBulb
 		double momentum;
 		// Sets the learning Rate
 		double learningRate;
-		SimpleGradientDecentOptions()
+		SimpleGradientDescentOptions()
 		{
 			weightDecayFac = 0;
 			momentum = 0.7f;
@@ -31,18 +31,18 @@ namespace LightBulb
 	};
 
 
-	class SimpleGradientDecent : public AbstractGradientDecentAlgorithm
+	class SimpleGradientDescent : public AbstractGradientDescentAlgorithm
 	{
 		template <class Archive>
-		friend void serialize(Archive& archive, SimpleGradientDecent& simpleGradientDecent);
-		friend struct cereal::LoadAndConstruct<SimpleGradientDecent>;
+		friend void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent);
+		friend struct cereal::LoadAndConstruct<SimpleGradientDescent>;
 	private:
 		// Contains all previous deltaWeights (used by the momentum term)
 		std::vector<Eigen::MatrixXd> previousDeltaWeights;
-		SimpleGradientDecentOptions* getOptions();
+		SimpleGradientDescentOptions* getOptions();
 	public:
-		SimpleGradientDecent(SimpleGradientDecentOptions& options_);
-		SimpleGradientDecent();
+		SimpleGradientDescent(SimpleGradientDescentOptions& options_);
+		SimpleGradientDescent();
 
 		Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
 		// Print a short debug output (totalLearningRate)
@@ -54,7 +54,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/SimpleGradientDecentIO.hpp"
+#include "IO/SimpleGradientDescentIO.hpp"
 
 #endif
 

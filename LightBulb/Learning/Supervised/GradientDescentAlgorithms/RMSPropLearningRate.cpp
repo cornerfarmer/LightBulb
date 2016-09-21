@@ -1,17 +1,17 @@
 // Includes
-#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {
 	RMSPropLearningRate::RMSPropLearningRate(RMSPropLearningRateOptions& options_)
-		: AbstractGradientDecentAlgorithm(new RMSPropLearningRateOptions(options_))
+		: AbstractGradientDescentAlgorithm(new RMSPropLearningRateOptions(options_))
 	{
 	}
 
 	RMSPropLearningRate::RMSPropLearningRate()
-		: AbstractGradientDecentAlgorithm(new RMSPropLearningRateOptions())
+		: AbstractGradientDescentAlgorithm(new RMSPropLearningRateOptions())
 	{
 	}
 

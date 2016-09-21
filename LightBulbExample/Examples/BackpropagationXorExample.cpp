@@ -8,9 +8,9 @@
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <TrainingPlans/DoublePreference.hpp>
-#include "Learning/Supervised/GradientDecentLearningRule.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/SimpleGradientDecent.hpp"
-#include "Learning/Supervised/GradientDecentAlgorithms/RMSPropLearningRate.hpp"
+#include "Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 
 using namespace LightBulb;
 
@@ -40,20 +40,20 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 		}
 	}
 
-	SimpleGradientDecentOptions gradientDecentOptions;
-	gradientDecentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
-	gradientDecentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
+	SimpleGradientDescentOptions gradientDescentOptions;
+	gradientDescentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
+	gradientDescentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
 
-	GradientDecentLearningRuleOptions options;
+	GradientDescentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.teacher = teacher.get();
-	options.gradientDecentAlgorithm = new SimpleGradientDecent(gradientDecentOptions);
+	options.gradientDescentAlgorithm = new SimpleGradientDescent(gradientDescentOptions);
 	fillDefaultLearningRuleOptions(&options);
 
-	return new GradientDecentLearningRule(options);
+	return new GradientDescentLearningRule(options);
 }
 
 
@@ -100,5 +100,5 @@ int BackpropagationXorExample::getRequiredOutputSize()
 
 std::string BackpropagationXorExample::getLearningRuleName()
 {
-	return GradientDecentLearningRule::getName();
+	return GradientDescentLearningRule::getName();
 }
