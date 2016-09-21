@@ -21,7 +21,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractInputFunction() {}
 		/**
-		 * \brief Calculates the netInputs for layer <layerNr> from activations and weights from layer <layerNr - 1>.
+		 * \brief Calculates the netInputs for layer "layerNr" from activations and weights from layer "layerNr - 1".
 		 * \param layerNr The number of the layer for which the inputs should be calculated for
 		 * \param activations The activations which will be used to calculate the inputs
 		 * \param netInputs The variable where the calculated inputs will be stored in

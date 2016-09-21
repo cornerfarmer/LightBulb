@@ -30,17 +30,17 @@ namespace LightBulb
 	{
 		/**
 		 * \brief Sets the total error value, when the algorithm should finish successful.
-		 * \detail Default value: 0.01 
+		 * \details Default value: 0.01 
 		 */
 		double totalErrorGoal;
 		/**
 		 * \brief Sets the lower limit of the random generated weights
-		 * \detail Default value: -0.5
+		 * \details Default value: -0.5
 		 */
 		double minRandomWeightValue;
 		/**
 		* \brief Sets the upper limit of the random generated weights
-		* \detail Default value: 0.5
+		* \details Default value: 0.5
 		*/
 		double maxRandomWeightValue;
 		/**
@@ -51,7 +51,7 @@ namespace LightBulb
 		unsigned int minIterationsPerTry;
 		/**
 		 * \brief Sets the maximum total error value.
-		 * \deatils If a try has - after its miniums iterations - a greater total error value than the maxTotalErrorValue, the try will be skipped. \n
+		 * \details If a try has - after its miniums iterations - a greater total error value than the maxTotalErrorValue, the try will be skipped. \n
 		 * Default value: 2
 		 */
 		double maxTotalErrorValue;
