@@ -11,16 +11,34 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	* \brief All options for the RMSprop learning rate.
+	*/
 	struct RMSPropLearningRateOptions : public AbstractGradientDescentAlgorithmOptions
 	{
-		// Sets the factor by which the learningRate can grow
+		/**
+		 * \brief The momentum of the gradient.
+		 */
 		double gradientMomentum;
+		/**
+		 * \brief The momentum of the squared gradient.
+		 */
 		double squaredGradientMomentum;
+		/**
+		 * \brief The momentum of the calculated delta weights.
+		 */
 		double deltaWeightsMomentum;
+		/**
+		 * \brief The learning rate.
+		 */
 		double learningRate;
+		/**
+		 * \brief The basic squared gradient.
+		 */
 		double minSquaredGradient;
+		/**
+		 * \brief Creates the options and fills them with default options.
+		 */
 		RMSPropLearningRateOptions()
 		{
 			gradientMomentum = 0.95;
@@ -32,25 +50,53 @@ namespace LightBulb
 	};
 
 
+	/**
+	 * \brief Performs a normalized gradient descent step.
+	 * \details Calculates: \n \n \f$s_t = (1 - \alpha)~f'(\omega_t) + \alpha s_{t-1}\f$ \n \n
+	 * \f$r_t = (1 - \gamma)~f'(\omega_t)^2 + \gamma r_{t-1}\f$ \n \n
+	 * \f$\Delta\omega_{t+1} = \beta \Delta\omega_{t} + (1 - \beta) \eta {f'(\omega_t) \over \sqrt{r_t - s_t + \delta}}\f$ \n \n
+	 * \f$\alpha: gradientMomentum\f$ \n 
+	 * \f$\gamma: squaredGradientMomentum\f$ \n 
+	 * \f$\beta: deltaWeightsMomentum\f$ \n 
+	 * \f$\delta: minSquaredGradient\f$ \n
+	 * \f$\eta: learningRate\f$ 
+	 */
 	class RMSPropLearningRate : public AbstractGradientDescentAlgorithm
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate);
 		friend struct cereal::LoadAndConstruct<RMSPropLearningRate>;
 	private:
-		// Holds for every edge its previous learning rate
+		/**
+		 * \brief Remembers the previous gradient
+		 */
 		std::vector<Eigen::MatrixXd> prevGradient;
+		/**
+		* \brief Remembers the previous squared gradient
+		*/
 		std::vector<Eigen::MatrixXd> prevSquaredGradient;
+		/**
+		* \brief Remembers the previous delta weights
+		*/
 		std::vector<Eigen::MatrixXd> prevDeltaWeights;
+		/**
+		* \brief Returns our current options in form of a RMSPropLearningRateOptions object.
+		* \return The RMSPropLearningRateOptions object.
+		*/
 		RMSPropLearningRateOptions* getOptions();
 	public:
+		/**
+		* \brief Creates the RMSprop learning rate.
+		* \param options_ The options which configure the RMSprop learning rate.
+		*/
 		RMSPropLearningRate(RMSPropLearningRateOptions& options_);
+		/**
+		 * \brief Creates the RMSprop learning rate with default options.
+		 */
 		RMSPropLearningRate();
-		// Computes the new learning rate of the given edge from the given gradient
+		// Inherited:
 		Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
-		// Returns if the learning has stopped
 		bool learningHasStopped() override;
-		// Initializes the ResilientLearningRateHelper
 		void initializeAlgorithm(AbstractNetworkTopology* networkTopology) override;
 	};
 }

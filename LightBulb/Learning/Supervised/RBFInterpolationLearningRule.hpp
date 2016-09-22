@@ -18,13 +18,21 @@ namespace LightBulb
 	class NeuralNetwork;
 	class Teacher;
 
+	/**
+	 * \brief All options for the RBF interpolation learning rule.
+	 */
 	struct RBFInterpolationLearningRuleOptions : AbstractSupervisedLearningRuleOptions
 	{
-		// The neuronPlacer helps to replace all RBFNeurons before starting to learn
+		/**
+		 * \brief The neuronPlacer helps to place all RBFNeurons before starting to learn.
+		 */
 		AbstractRBFNeuronPlacer* neuronPlacer;
+		/**
+		 * \brief Creates the options and fills them with default options.
+		 */
 		RBFInterpolationLearningRuleOptions()
 		{
-
+			neuronPlacer = NULL;
 		}
 		~RBFInterpolationLearningRuleOptions()
 		{
@@ -38,21 +46,39 @@ namespace LightBulb
 	};
 
 	// The DeltaLearningRule can only be used to train SingleLayerPerceptronNetworks
+	/**
+	 * \brief This learning rule calculates the weights of an RBF network in just one step.
+	 * \details First the given neuron placer (e.q. some clustering algorithm) is executed which places the RBF neurons.
+	 * This affects the first weight layer. Then a system of linear equations is solved by matrix inversion which sets the weights in the second layer.
+	 */
 	class RBFInterpolationLearningRule : public AbstractSupervisedLearningRule
 	{
 	private:
-		// A matrix which will contain all outputValues from neurons in the second layer in every teachingLesson
+		/**
+		 * \brief A matrix which will contain all outputValues from neurons in the second layer in every teachingLesson.
+		 */
 		std::unique_ptr<Eigen::MatrixXd> m;
-		// Inversion of m
+		/**
+		 * \brief Inversion of m.
+		 */
 		std::unique_ptr<Eigen::MatrixXd> mInverse;
-		// A matrx which will contain all teachingInput values from all output neurons
+		/**
+		 * \brief A matrx which will contain all teachingInput values from all output neurons.
+		 */
 		std::unique_ptr<Eigen::MatrixXd> t;
-		// A vector which will contain all calculated weights
+		/**
+		 * \brief A vector which will contain all calculated weights.
+		 */
 		std::unique_ptr<Eigen::MatrixXd> w;
-
+		/**
+		 * \brief The calculated gradients.
+		 */
 		std::vector<Eigen::MatrixXd> gradients;
 	protected:
-		// Returns our current options in form of a RBFInterpolatioLearningRuleOptions object
+		/**
+		 * \brief Returns our current options in form of a RBFInterpolatioLearningRuleOptions object.
+		 * \return The RBFInterpolatioLearningRuleOptions object.
+		 */
 		RBFInterpolationLearningRuleOptions* getOptions();
 		// Inherited:
 		void adjustWeights(int layerIndex) override;
@@ -62,7 +88,15 @@ namespace LightBulb
 		void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
 		void initializeTry() override;
 	public:
+		/**
+		 * \brief Creates the RBF interpolation learning rule.
+		 * \param options_ The options which configure the RBF interpolation learning rule.
+		 */
 		RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_);
+		/**
+		 * \brief Returns the name of the learning rule
+		 * \return The name
+		 */
 		static std::string getName();
 	};
 }

@@ -66,7 +66,7 @@ namespace LightBulb
 		void initialize();
 	protected:
 		/**
-		 * \brief Returns our current options in form of a AbstractBackpropagationLearningRuleOptions object.
+		 * \brief Returns our current options in form of a GradientDescentLearningRuleOptions object.
 		 * \return The GradientDescentLearningRuleOptions object.
 		 */
 		GradientDescentLearningRuleOptions* getOptions();
