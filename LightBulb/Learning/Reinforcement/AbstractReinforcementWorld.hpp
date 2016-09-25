@@ -26,6 +26,7 @@ namespace LightBulb
 		std::vector<double> lastOutput;
 		std::vector<double> lastInput;
 		bool epsilonGreedly = false;
+		bool policyBasedLearning;
 		double epsilon;
 		void buildOutputBuffer();
 		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
@@ -57,6 +58,8 @@ namespace LightBulb
 		virtual std::vector<std::string> getDataSetLabels();
 		std::vector<bool>* getLastBooleanOutput();
 		virtual bool isTerminalState() = 0;
+		int getLastActionIndex();
+		void setPolicyBasedLearning(bool newPolicyBasedLearning);
 	};
 }
 

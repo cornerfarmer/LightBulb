@@ -46,7 +46,6 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
 	options.replaceStoredTransitions = getBooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS);
 
-
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 

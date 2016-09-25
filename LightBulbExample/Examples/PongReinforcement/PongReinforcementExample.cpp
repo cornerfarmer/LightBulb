@@ -28,6 +28,24 @@ AbstractLearningRule* PongReinforcementExample::createLearningRate()
 	world = createWorld();
 	options.world = world;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
+
+	options.criticNetworkOptions.neuronsPerLayerCount.push_back(6);
+	options.criticNetworkOptions.neuronsPerLayerCount.push_back(256);
+	options.criticNetworkOptions.neuronsPerLayerCount.push_back(2);
+	options.criticNetworkOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+	options.criticNetworkOptions.useBiasNeuron = true;
+
+	options.actorCritic = true;
+	options.criticOptions.minibatchSize = 32;
+	options.criticOptions.targetNetworkUpdateFrequency = 10000;
+	options.criticOptions.replayMemorySize = 1000000;
+	options.criticOptions.finalExplorationFrame = 500000;
+	options.criticOptions.replayStartSize = 50000;
+	options.criticOptions.gradientDescentOptions.clipError = true;
+	options.criticOptions.rmsPropOptions.learningRate = 0.0005;
+	options.criticOptions.rmsPropOptions.deltaWeightsMomentum = 0;
+	options.criticOptions.discountFactor = 0.99;
+
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(&options);
 
@@ -57,7 +75,7 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 PongReinforcementExample::PongReinforcementExample()
 {
 	addCustomSubApp(new PongGameFactory());
-	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 100, 1, 10000));
+	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 10000, 1, 10000));
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 200, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));

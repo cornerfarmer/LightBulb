@@ -8,9 +8,11 @@
 #include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 // Library Includes
 #include <vector>
+#include "DQNLearningRule.hpp"
 
 namespace LightBulb
 {
@@ -22,11 +24,15 @@ namespace LightBulb
 		int episodeSize;
 		int ratingInterval;
 		RMSPropLearningRateOptions rmsPropLearningRateOptions;
+		bool actorCritic;
+		DQNLearningRuleOptions criticOptions;
+		FeedForwardNetworkTopologyOptions criticNetworkOptions;
 		PolicyGradientLearningRuleOptions()
 		{
 			episodeSize = 10;
 			ratingInterval = 10;
 			rmsPropLearningRateOptions.learningRate = 1e-4;
+			actorCritic = true;
 		}
 	};
 
@@ -38,6 +44,7 @@ namespace LightBulb
 		std::vector<Eigen::VectorXd> errorVectorRecord;
 		std::unique_ptr<AbstractGradientCalculation> gradientCalculation;
 		std::unique_ptr<AbstractGradientDescentAlgorithm> gradientDescentAlgorithm;
+		std::unique_ptr<DQNLearningRule> critic;
 		std::vector<double> lastOutput;
 		int stepsSinceLastReward;
 		void addGradients(AbstractNetworkTopology* networkTopology);

@@ -19,7 +19,7 @@ namespace LightBulb
 		// Calculate the output from the the input
 		neuralNetwork->calculate(lastInput, lastOutput, topologicalOrder, false);
 
-		if (!epsilonGreedly) {
+		if (policyBasedLearning) {
 			for (int i = 0; i < lastOutput.size(); i++)
 			{
 				lastBooleanOutput[i] = (randomGenerator->randDouble() < lastOutput[i]);
@@ -53,6 +53,7 @@ namespace LightBulb
 		buildNeuralNetwork(options);
 		epsilonGreedly = epsilonGreedly_;
 		epsilon = epsilon_;
+		policyBasedLearning = false;
 	}
 
 	void AbstractReinforcementWorld::initializeForLearning()
@@ -110,5 +111,37 @@ namespace LightBulb
 	std::vector<bool>* AbstractReinforcementWorld::getLastBooleanOutput()
 	{
 		return &lastBooleanOutput;
+	}
+
+	int AbstractReinforcementWorld::getLastActionIndex()
+	{
+		int action = 0;
+		if (!policyBasedLearning)
+		{
+			for (int i = 0; i < lastBooleanOutput.size(); i++)
+			{
+				if (lastBooleanOutput[i])
+				{
+					action = i;
+					break;
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < lastBooleanOutput.size(); i++)
+			{
+				if (lastBooleanOutput[i])
+				{
+					action += pow(2, i);
+				}
+			}
+		}
+		return action;
+	}
+
+	void AbstractReinforcementWorld::setPolicyBasedLearning(bool newPolicyBasedLearning)
+	{
+		policyBasedLearning = newPolicyBasedLearning;
 	}
 }

@@ -37,6 +37,8 @@ namespace LightBulb
 		GradientDescentLearningRuleOptions gradientDescentOptions;
 
 		RMSPropLearningRateOptions rmsPropOptions;
+
+		AbstractNeuralNetwork* alternativeTargetNetwork;
 		DQNLearningRuleOptions()
 		{
 			minibatchSize = 32;
@@ -57,6 +59,7 @@ namespace LightBulb
 			gradientDescentOptions.clipError = true;
 
 			rmsPropOptions.learningRate = 0.00025;
+			alternativeTargetNetwork = NULL;
 		}
 	};
 
@@ -76,17 +79,22 @@ namespace LightBulb
 	private:
 		int nextTransitionIndex;
 		int waitUntilLearningStarts;
+
 		double currentTotalError;
 		double currentTotalReward;
+		int currentTotalEpisodes;
+		double currentTotalEpisodesReward;
+		int currentSimulationStep;
 		Teacher teacher;
 		std::vector<Transition> transitions;
 		std::unique_ptr<GradientDescentLearningRule> gradientDescent;
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 		double qAvgSum;
 		void initialize();
-		void storeTransition(AbstractNetworkTopology* networkTopology, double reward);
+		void storeTransition(double reward, AbstractNetworkTopology* networkTopology);
 		void doSupervisedLearning();
 		std::vector<Eigen::MatrixXd> checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology);
+		AbstractNetworkTopology* getTargetNetworkTopology();
 	protected:
 		bool doIteration() override;
 		DQNLearningRuleOptions* getOptions() override;
@@ -99,6 +107,8 @@ namespace LightBulb
 		void initializeTry() override;
 		static std::string getName();
 		std::vector<std::string> getDataSetLabels() override;
+		bool registerSimulationStep(double reward);
+		double calculateActionValue();
 	};
 }
 

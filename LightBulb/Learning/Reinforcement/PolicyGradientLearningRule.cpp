@@ -48,6 +48,14 @@ namespace LightBulb
 		gradientCalculation.reset(new Backpropagation());
 		
 		gradientDescentAlgorithm.reset(new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions));
+
+		if (getOptions()->actorCritic)
+		{
+			getOptions()->criticOptions.world = getOptions()->world;
+			getOptions()->criticOptions.alternativeTargetNetwork = new NeuralNetwork(new FeedForwardNetworkTopology(getOptions()->criticNetworkOptions));
+			critic.reset(new DQNLearningRule(getOptions()->criticOptions));
+		}
+		getOptions()->world->setPolicyBasedLearning(true);
 	}
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
@@ -82,6 +90,10 @@ namespace LightBulb
 	void PolicyGradientLearningRule::initializeTry()
 	{
 		//resilientLearningRateHelper->initialize(*getOptions()->world->getNeuralNetwork());
+		if (getOptions()->actorCritic)
+		{
+			critic->initializeTry();
+		}
 		getOptions()->world->setLearningState(learningState.get());
 		getOptions()->world->initializeForLearning();
 
@@ -111,19 +123,13 @@ namespace LightBulb
 		while (rewardCounter < getOptions()->episodeSize)
 		{
 			double reward = getOptions()->world->doSimulationStep();
-
-			recordStep(networkTopology);
-
-			stepsSinceLastReward++;
-
-			if (reward != 0)
+			if (getOptions()->actorCritic)
 			{
-				totalReward += reward;
-
-				computeGradients(networkTopology, stepsSinceLastReward, reward);
-				stepsSinceLastReward = 0;
-				rewardCounter++;
+				critic->registerSimulationStep(reward);
 			}
+
+			computeGradients(networkTopology, stepsSinceLastReward, reward);
+			rewardCounter++;
 		}
 
 		learningState->addData(DATA_SET_REWARD, totalReward);
@@ -161,23 +167,18 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward)
 	{
-		Eigen::VectorXd rewards(stepsSinceLastReward);
-		rewards(stepsSinceLastReward - 1) = reward;
-		for (int i = stepsSinceLastReward - 2; i >= 0; i--)
-		{
-			rewards(i) = rewards(i + 1) * 0.99;
-		}
+		Eigen::VectorXd errorVector;
+		getErrorVector(networkTopology, errorVector);
 
-		rewards = rewards.array() - rewards.mean();
-		double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
-		rewards = rewards.array() / stddev;
+		auto netInput = *networkTopology->getAllNetInputs();
 
-		for (int i = 0; i < stepsSinceLastReward; i++)
-		{
-			errorVectorRecord[i] = rewards(i) * errorVectorRecord[i].array();
-			computeGradientsForError(networkTopology, errorVectorRecord[i], netInputRecord[i], activationRecord[i]);
-		}
+		std::vector<Eigen::VectorXd> activation;
+		networkTopology->getActivationsCopy(activation);
 
+		double q = critic->calculateActionValue();
+		//q = std::max(-1.0, std::min(1.0, q));
+		errorVector = q * errorVector;
+		computeGradientsForError(networkTopology, errorVector, netInput, activation);
 	}
 
 	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
