@@ -174,7 +174,7 @@ namespace LightBulb
 		if (getOptions()->alternativeTargetNetwork)
 			return getOptions()->alternativeTargetNetwork->getNetworkTopology();
 		else
-			getOptions()->world->getNeuralNetwork()->getNetworkTopology();
+			return getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 	}
 
 	bool DQNLearningRule::registerSimulationStep(double reward)
@@ -208,7 +208,7 @@ namespace LightBulb
 
 			if (learningState) {
 				learningState->addData(DATA_SET_EPSILON, getOptions()->world->getEpsilon());
-				learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions()->targetNetworkUpdateFrequency);
+				learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / (getOptions()->targetNetworkUpdateFrequency * getOptions()->minibatchSize));
 
 				if (currentTotalEpisodes > 0)
 					learningState->addData(DATA_SET_REWARD, currentTotalEpisodesReward / currentTotalEpisodes);

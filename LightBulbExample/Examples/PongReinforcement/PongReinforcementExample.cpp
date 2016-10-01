@@ -42,7 +42,7 @@ AbstractLearningRule* PongReinforcementExample::createLearningRate()
 	options.criticOptions.finalExplorationFrame = 500000;
 	options.criticOptions.replayStartSize = 50000;
 	options.criticOptions.gradientDescentOptions.clipError = true;
-	options.criticOptions.rmsPropOptions.learningRate = 0.0005;
+	options.criticOptions.rmsPropOptions.learningRate = 0.00025;
 	options.criticOptions.rmsPropOptions.deltaWeightsMomentum = 0;
 	options.criticOptions.discountFactor = 0.99;
 
