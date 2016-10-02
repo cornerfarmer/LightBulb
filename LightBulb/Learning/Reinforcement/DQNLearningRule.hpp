@@ -14,6 +14,7 @@
 
 namespace LightBulb
 {
+	class PolicyGradientLearningRule;
 	// Forward declarations
 	class AbstractNetworkTopology;
 
@@ -73,6 +74,7 @@ namespace LightBulb
 
 	class DQNLearningRule : public AbstractReinforcementLearningRule
 	{
+		friend PolicyGradientLearningRule;
 		template <class Archive>
 		friend void serialize(Archive& archive, DQNLearningRule& learningRule);
 		friend struct cereal::LoadAndConstruct<DQNLearningRule>;
@@ -105,10 +107,11 @@ namespace LightBulb
 		DQNLearningRule();
 		// Executes the learning process
 		void initializeTry() override;
+		Teacher* getTeacher();
 		static std::string getName();
 		std::vector<std::string> getDataSetLabels() override;
 		bool registerSimulationStep(double reward);
-		double calculateActionValue();
+		double calculateActionValue(std::vector<double>& state, int action);
 	};
 }
 

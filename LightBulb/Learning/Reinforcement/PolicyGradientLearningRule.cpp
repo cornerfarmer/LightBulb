@@ -14,6 +14,7 @@
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {
@@ -56,10 +57,19 @@ namespace LightBulb
 			critic.reset(new DQNLearningRule(getOptions()->criticOptions));
 		}
 		getOptions()->world->setPolicyBasedLearning(true);
+
+	
+		GradientDescentLearningRuleOptions options(getOptions()->criticOptions.gradientDescentOptions);
+		options.gradientDescentAlgorithm = new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions);
+		options.teacher = critic->getTeacher();
+		options.neuralNetwork = getOptions()->world->getNeuralNetwork();
+		options.logger = NULL;
+		gradientDescent.reset(new GradientDescentLearningRule(options));
 	}
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
 	{
+		critic->learningState = learningState;
 		gradientDescentAlgorithm->initialize(getOptions()->world->getNeuralNetwork()->getNetworkTopology());
 		errorVectorRecord.resize(1000);
 		netInputRecord.resize(1000);
@@ -108,8 +118,10 @@ namespace LightBulb
 
 	std::vector<std::string> PolicyGradientLearningRule::getDataSetLabels()
 	{
-		std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
-		return labels;
+		std::vector<std::string> labels1 = AbstractReinforcementLearningRule::getDataSetLabels();
+		std::vector<std::string> labels2 = critic->getDataSetLabels();
+		labels1.insert(labels1.end(), labels2.begin(), labels2.end());
+		return labels1;
 	}
 
 
@@ -129,12 +141,13 @@ namespace LightBulb
 			}
 
 			computeGradients(networkTopology, stepsSinceLastReward, reward);
+			addGradients(networkTopology);
 			rewardCounter++;
 		}
 
 		learningState->addData(DATA_SET_REWARD, totalReward);
 
-		addGradients(networkTopology);
+		//
 
 		// Continue with the next generation
 		learningState->iterations++;
@@ -167,27 +180,46 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward)
 	{
-		Eigen::VectorXd errorVector;
-		getErrorVector(networkTopology, errorVector);
+		Teacher* teacher = critic->getTeacher();
+		TopologicalOrder order;
+		if (teacher->getTeachingLessons()->size() > 0) {
+			for (auto teachingLesson = teacher->getTeachingLessons()->begin(); teachingLesson != teacher->getTeachingLessons()->end(); teachingLesson++)
+			{
+				
+				auto output = (*teachingLesson)->tryLesson(*getOptions()->world->getNeuralNetwork(), order).front();
+				Eigen::VectorXd errorVector(output.size());
 
-		auto netInput = *networkTopology->getAllNetInputs();
 
-		std::vector<Eigen::VectorXd> activation;
-		networkTopology->getActivationsCopy(activation);
+				int action = 0;
+				for (int i = 0; i < 2; i++)
+				{
+					if ((*teachingLesson)->getTeachingInput(networkTopology->getOutputNeuronDescription()->getActivationFunction())->exists(0, i))
+					{
+						action = i;
+						break;
+					}
+				}
+				
 
-		double q = critic->calculateActionValue();
-		//q = std::max(-1.0, std::min(1.0, q));
-		errorVector = q * errorVector;
-		computeGradientsForError(networkTopology, errorVector, netInput, activation);
+				double q = critic->calculateActionValue((*teachingLesson)->getTeachingPattern()->front(), action);
+
+				if (action == 1)
+					errorVector[0] = 1 - output[0];
+				else
+					errorVector[0] = 0 - output[0];
+
+				//q = std::max(-1.0, std::min(1.0, q));
+				errorVector = q * errorVector;
+				computeGradientsForError(networkTopology, errorVector);
+			}
+		}
+
 	}
 
-	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
+	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector)
 	{
 		ErrorMap_t errorMap(1, errorVector);
-		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> tmpBlock;
-		for (int j = 0; j < activations.size(); j++)
-			tmpBlock.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations[j].derived(), 0, activations[j].size()));
-		gradientCalculation->calcGradient(networkTopology, netInputs, tmpBlock, &errorMap);
+		gradientCalculation->calcGradient(networkTopology, &errorMap);
 	}
 
 }

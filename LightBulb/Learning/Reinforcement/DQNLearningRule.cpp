@@ -53,6 +53,11 @@ namespace LightBulb
 		currentTotalEpisodesReward = 0;
 	}
 
+	Teacher* DQNLearningRule::getTeacher()
+	{
+		return &teacher;
+	}
+
 	void DQNLearningRule::initialize()
 	{
 		getOptions()->world->setPolicyBasedLearning(false);
@@ -254,15 +259,10 @@ namespace LightBulb
 	}
 
 
-	double DQNLearningRule::calculateActionValue()
+	double DQNLearningRule::calculateActionValue(std::vector<double>& state, int action)
 	{
-		Transition* transition;
-		if (transitions.size() < getOptions()->replayMemorySize)
-			transition = &transitions.back();
-		else
-			transition = &transitions[nextTransitionIndex - 1 >= 0 ? nextTransitionIndex - 1 : transitions.size() - 1];
-		std::vector<double> output(steadyNetwork->getNetworkTopology()->getOutputSize());
-		steadyNetwork->calculate(transition->state, output, TopologicalOrder());
-		return output[transition->action];
+		std::vector<double> output(getTargetNetworkTopology()->getOutputSize());
+		getOptions()->alternativeTargetNetwork->calculate(state, output, TopologicalOrder());
+		return output[action];
 	}
 }

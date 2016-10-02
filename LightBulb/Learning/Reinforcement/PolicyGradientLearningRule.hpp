@@ -46,10 +46,11 @@ namespace LightBulb
 		std::unique_ptr<AbstractGradientDescentAlgorithm> gradientDescentAlgorithm;
 		std::unique_ptr<DQNLearningRule> critic;
 		std::vector<double> lastOutput;
+		std::unique_ptr<GradientDescentLearningRule> gradientDescent;
 		int stepsSinceLastReward;
 		void addGradients(AbstractNetworkTopology* networkTopology);
 		void computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward);
-		void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations);
+		void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector);
 		void initialize();
 		void recordStep(AbstractNetworkTopology* networkTopology);
 		void getErrorVector(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector);
