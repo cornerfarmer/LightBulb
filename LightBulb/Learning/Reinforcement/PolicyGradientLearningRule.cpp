@@ -14,6 +14,10 @@
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "Function/ActivationFunction/RectifierFunction.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {
@@ -46,8 +50,10 @@ namespace LightBulb
 	void PolicyGradientLearningRule::initialize()
 	{
 		gradientCalculation.reset(new Backpropagation());
-		
 		gradientDescentAlgorithm.reset(new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions));
+
+		valueFunctionGradientCalculation.reset(new Backpropagation());
+		valueFunctionGradientDescentAlgorithm.reset(new RMSPropLearningRate(getOptions()->valueRmsPropLearningRateOptions));
 	}
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
@@ -57,6 +63,21 @@ namespace LightBulb
 		netInputRecord.resize(1000);
 		activationRecord.resize(1000);
 		lastOutput.resize(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutputSize());
+		if (getOptions()->valueFunctionAsBase)
+		{
+			FeedForwardNetworkTopologyOptions options;
+			options.enableShortcuts = false;
+			options.useBiasNeuron = true;
+
+			options.neuronsPerLayerCount.push_back(6);
+			options.neuronsPerLayerCount.push_back(256);
+			options.neuronsPerLayerCount.push_back(1);
+
+			options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+			
+			valueFunctionNetwork.reset(new NeuralNetwork(new FeedForwardNetworkTopology(options)));
+			valueFunctionGradientDescentAlgorithm->initialize(valueFunctionNetwork->getNetworkTopology());
+		}
 	}
 
 	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology* networkTopology)
@@ -77,6 +98,8 @@ namespace LightBulb
 		{
 			errorVector(i) = getOptions()->world->getLastBooleanOutput()->at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 		}
+		errorSum += errorVector.cwiseAbs().sum();
+		errorSteps++;
 	}
 
 	void PolicyGradientLearningRule::initializeTry()
@@ -86,6 +109,11 @@ namespace LightBulb
 		getOptions()->world->initializeForLearning();
 
 		stepsSinceLastReward = 0;
+
+		if (getOptions()->valueFunctionAsBase)
+		{
+			valueFunctionNetwork->getNetworkTopology()->randomizeDependingOnLayerSize(randomGenerator.get());
+		}
 	}
 
 	
@@ -97,6 +125,9 @@ namespace LightBulb
 	std::vector<std::string> PolicyGradientLearningRule::getDataSetLabels()
 	{
 		std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
+		labels.push_back(DATA_SET_ERROR_AVG);
+		if (getOptions()->valueFunctionAsBase)
+			labels.push_back(DATA_SET_VALUE_ERROR_AVG);
 		return labels;
 	}
 
@@ -105,8 +136,14 @@ namespace LightBulb
 	{
 		int rewardCounter = 0;
 		double totalReward = 0;
+		errorSum = 0;
+		valueErrorSum = 0;
+		errorSteps = 0;
+		valueErrorSteps = 0;
 		AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
 		gradientCalculation->initGradient(networkTopology);
+		if (getOptions()->valueFunctionAsBase)
+			valueFunctionGradientCalculation->initGradient(valueFunctionNetwork->getNetworkTopology());
 
 		while (rewardCounter < getOptions()->episodeSize)
 		{
@@ -116,7 +153,7 @@ namespace LightBulb
 
 			stepsSinceLastReward++;
 
-			if (reward != 0)
+			if (getOptions()->world->isTerminalState())
 			{
 				totalReward += reward;
 
@@ -127,6 +164,10 @@ namespace LightBulb
 		}
 
 		learningState->addData(DATA_SET_REWARD, totalReward);
+
+		learningState->addData(DATA_SET_ERROR_AVG, errorSum / errorSteps);
+		if (getOptions()->valueFunctionAsBase)
+			learningState->addData(DATA_SET_VALUE_ERROR_AVG, valueErrorSum / valueErrorSteps);
 
 		addGradients(networkTopology);
 
@@ -142,11 +183,19 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::addGradients(AbstractNetworkTopology* networkTopology)
 	{
-		static std::vector<Eigen::MatrixXd> prevDeltaWeights(gradientCalculation->getGradient()->size());
 		for (int l = gradientCalculation->getGradient()->size() - 1; l >= 0; l--)
 		{
 			Eigen::MatrixXd newWeights = networkTopology->getAfferentWeightsPerLayer(l + 1) + gradientDescentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradientCalculation->getGradient()->at(l));
 			networkTopology->setAfferentWeightsPerLayer(l + 1, newWeights);
+		}
+
+		if (getOptions()->valueFunctionAsBase)
+		{
+			for (int l = valueFunctionGradientCalculation->getGradient()->size() - 1; l >= 0; l--)
+			{
+				Eigen::MatrixXd newWeights = valueFunctionNetwork->getNetworkTopology()->getAfferentWeightsPerLayer(l + 1) + valueFunctionGradientDescentAlgorithm->calcDeltaWeight(valueFunctionNetwork->getNetworkTopology(), l + 1, valueFunctionGradientCalculation->getGradient()->at(l));
+				valueFunctionNetwork->getNetworkTopology()->setAfferentWeightsPerLayer(l + 1, newWeights);
+			}
 		}
 	}
 
@@ -168,14 +217,29 @@ namespace LightBulb
 			rewards(i) = rewards(i + 1) * 0.99;
 		}
 
-		rewards = rewards.array() - rewards.mean();
+	/*	rewards = rewards.array() - rewards.mean();
 		double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
-		rewards = rewards.array() / stddev;
+		rewards = rewards.array() / stddev;*/
 
 		for (int i = 0; i < stepsSinceLastReward; i++)
 		{
+			if (getOptions()->valueFunctionAsBase)
+			{
+				std::vector<double> output(1);
+				std::vector<double> input(activationRecord[i][0].data(), activationRecord[i][0].data() + activationRecord[i][0].size());
+				valueFunctionNetwork->calculate(input, output, TopologicalOrder());
+
+				ErrorMap_t errorMap(1, Eigen::VectorXd(1));
+				errorMap[0](0) = rewards(i) - output[0];
+				valueFunctionGradientCalculation->calcGradient(valueFunctionNetwork->getNetworkTopology(), &errorMap);
+				valueErrorSum += abs(errorMap[0](0));
+				valueErrorSteps++;
+
+				rewards(i) -= output[0];
+			}
 			errorVectorRecord[i] = rewards(i) * errorVectorRecord[i].array();
 			computeGradientsForError(networkTopology, errorVectorRecord[i], netInputRecord[i], activationRecord[i]);
+
 		}
 
 	}

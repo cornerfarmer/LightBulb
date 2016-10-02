@@ -33,7 +33,7 @@ double PongReinforcementWorld::doSimulationStep()
 	}
 	time++;
 	if (time >= game.getProperties().maxTime)
-		return 1;
+		return 0;
 	else
 		return game.whoHasWon();
 }
