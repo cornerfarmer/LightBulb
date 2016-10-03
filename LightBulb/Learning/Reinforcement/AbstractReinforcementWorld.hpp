@@ -27,6 +27,7 @@ namespace LightBulb
 		std::vector<double> lastInput;
 		bool epsilonGreedly = false;
 		double epsilon;
+		bool useStochasticActionDecision;
 		void buildOutputBuffer();
 		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 	protected:
@@ -57,6 +58,7 @@ namespace LightBulb
 		virtual std::vector<std::string> getDataSetLabels();
 		std::vector<bool>* getLastBooleanOutput();
 		virtual bool isTerminalState() = 0;
+		void setStochasticActionDecision(bool useStochasticActionDecision_);
 	};
 }
 

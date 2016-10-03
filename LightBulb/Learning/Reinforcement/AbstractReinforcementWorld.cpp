@@ -22,7 +22,10 @@ namespace LightBulb
 		if (!epsilonGreedly) {
 			for (int i = 0; i < lastOutput.size(); i++)
 			{
-				lastBooleanOutput[i] = (randomGenerator->randDouble() < lastOutput[i]);
+				if (useStochasticActionDecision)
+					lastBooleanOutput[i] = (randomGenerator->randDouble() < lastOutput[i]);
+				else
+					lastBooleanOutput[i] = (0.5 < lastOutput[i]);
 			}
 		}
 		else
@@ -53,6 +56,7 @@ namespace LightBulb
 		buildNeuralNetwork(options);
 		epsilonGreedly = epsilonGreedly_;
 		epsilon = epsilon_;
+		useStochasticActionDecision = true;
 	}
 
 	void AbstractReinforcementWorld::initializeForLearning()
@@ -110,5 +114,10 @@ namespace LightBulb
 	std::vector<bool>* AbstractReinforcementWorld::getLastBooleanOutput()
 	{
 		return &lastBooleanOutput;
+	}
+
+	void AbstractReinforcementWorld::setStochasticActionDecision(bool useStochasticActionDecision_)
+	{
+		useStochasticActionDecision = useStochasticActionDecision_;
 	}
 }

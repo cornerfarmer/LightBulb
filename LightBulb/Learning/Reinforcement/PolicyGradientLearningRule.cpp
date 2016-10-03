@@ -184,7 +184,11 @@ namespace LightBulb
 		learningState->iterations++;
 
 		if (learningState->iterations % getOptions()->ratingInterval == 0)
+		{
+			getOptions()->world->setStochasticActionDecision(false);
 			getOptions()->world->rateKI();
+			getOptions()->world->setStochasticActionDecision(true);
+		}
 
 		return true;
 	}
