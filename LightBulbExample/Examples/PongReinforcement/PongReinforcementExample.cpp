@@ -33,8 +33,8 @@ AbstractLearningRule* PongReinforcementExample::createLearningRate()
 	options.world = world;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
-	fillDefaultLearningRuleOptions(&options);
 	options.seed = 1234;
+	fillDefaultLearningRuleOptions(&options);
 	options.valueFunctionAsBase = getBooleanPreference(PREFERENCE_VALUE_FUNCTION);
 	options.rmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	options.valueRmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_VALUE_LEARNING_RATE);

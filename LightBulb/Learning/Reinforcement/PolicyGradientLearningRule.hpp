@@ -39,9 +39,9 @@ namespace LightBulb
 	class PolicyGradientLearningRule : public AbstractReinforcementLearningRule
 	{
 	private:
-		std::vector<std::vector<Eigen::VectorXd>> netInputRecord;
-		std::vector<std::vector<Eigen::VectorXd>> activationRecord;
-		std::vector<Eigen::VectorXd> errorVectorRecord;
+		std::vector<std::vector<double>> stateRecord;
+		std::vector<std::vector<Eigen::MatrixXd>> gradientRecord;
+		std::vector<Eigen::MatrixXd> gradient;
 		std::unique_ptr<AbstractGradientCalculation> gradientCalculation;
 		std::unique_ptr<AbstractGradientDescentAlgorithm> gradientDescentAlgorithm;
 		std::unique_ptr<AbstractGradientCalculation> valueFunctionGradientCalculation;

@@ -33,7 +33,7 @@ namespace LightBulb
 				lastDeltaVectorOutputLayer = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
 			}
 
-			gradient[layerIndex - 1].noalias() = gradient[layerIndex - 1] + -1 * (lastDeltaVectorOutputLayer * activations[layerIndex - 1].transpose()).matrix();
+			gradientToUse->at(layerIndex - 1).noalias() = gradientToUse->at(layerIndex - 1) + -1 * (lastDeltaVectorOutputLayer * activations[layerIndex - 1].transpose()).matrix();
 		}
 	}
 }

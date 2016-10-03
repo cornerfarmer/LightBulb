@@ -6,6 +6,13 @@ namespace LightBulb
 {
 	void AbstractGradientCalculation::calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap)
 	{
+		gradientToUse = &gradient;
+		calcGradient(networkTopology, *networkTopology->getAllNetInputs(), *networkTopology->getAllActivations(), errormap);
+	}
+
+	void AbstractGradientCalculation::calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient)
+	{
+		gradientToUse = &gradient;
 		calcGradient(networkTopology, *networkTopology->getAllNetInputs(), *networkTopology->getAllActivations(), errormap);
 	}
 
@@ -20,6 +27,7 @@ namespace LightBulb
 		{
 			gradient[l].setZero();
 		}
+		gradientToUse = &gradient;
 	}
 
 
