@@ -17,6 +17,7 @@
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
+#define PREFERENCE_BIAS_NEURON "Enable bias neuron"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
 #define PREFERENCE_SECOND_LAYER_ENABLE "Enable 2. layer"
 #define PREFERENCE_NEURON_COUNT_SECOND_LAYER "Neuron count in 2. layer"
@@ -33,7 +34,7 @@ AbstractLearningRule* PongReinforcementExample::createLearningRate()
 	options.world = world;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
-	options.seed = 1234;
+	options.seed = 12345;
 	fillDefaultLearningRuleOptions(&options);
 	options.valueFunctionAsBase = getBooleanPreference(PREFERENCE_VALUE_FUNCTION);
 	options.rmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
@@ -47,7 +48,7 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
-	options.useBiasNeuron = false;
+	options.useBiasNeuron = getBooleanPreference(PREFERENCE_BIAS_NEURON);
 
 	options.neuronsPerLayerCount.push_back(6);
 	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
@@ -65,9 +66,10 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 PongReinforcementExample::PongReinforcementExample()
 {
 	addCustomSubApp(new PongGameFactory());
-	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 100, 1, 10000));
+	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 10, 1, 10000));
 	addPreference(new BooleanPreference(PREFERENCE_SHORTCUT_ENABLE, false));
-	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 200, 1, 30));
+	addPreference(new BooleanPreference(PREFERENCE_BIAS_NEURON, true));
+	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 25, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_VALUE_FUNCTION, true));
