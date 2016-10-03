@@ -9,7 +9,7 @@
 #include "Examples/TCProblemEvolutionExample.hpp"
 #include "Examples/TCProblemBackpropagationExample.hpp"
 #include "Examples/PongEvolution/PongEvolutionExample.hpp"
-#include "Examples/PongReinforcement/PongReinforcementExample.hpp"
+#include "Examples/PongReinforcement/PongPolicyGradientExample.hpp"
 #include "Examples/SimpleReinforcement/SimpleReinforcementExample.hpp"
 #include "Examples/PongReinforcement/PongDQNExample.hpp"
 #include "Examples/SimpleReinforcement/SimpleReinforcementDQNExample.hpp"
@@ -29,7 +29,7 @@ void main(int argc, char** argv)
 	app->addTrainingPlan(new TCProblemEvolutionExample());
 	app->addTrainingPlan(new TCProblemBackpropagationExample());
 	app->addTrainingPlan(new PongEvolutionExample());
-	app->addTrainingPlan(new PongReinforcementExample());
+	app->addTrainingPlan(new PongPolicyGradientExample());
 	app->addTrainingPlan(new PongDQNExample());
 	app->addTrainingPlan(new SimpleReinforcementExample());
 	app->addTrainingPlan(new SimpleReinforcementDQNExample());

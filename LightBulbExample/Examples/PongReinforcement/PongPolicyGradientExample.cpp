@@ -1,4 +1,4 @@
-#include "PongReinforcementExample.hpp"
+#include "PongPolicyGradientExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <TrainingPlans/IntegerPreference.hpp>
@@ -27,7 +27,7 @@
 
 using namespace LightBulb;
 
-AbstractLearningRule* PongReinforcementExample::createLearningRate()
+AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 {
 	PolicyGradientLearningRuleOptions options;
 	world = createWorld();
@@ -44,7 +44,7 @@ AbstractLearningRule* PongReinforcementExample::createLearningRate()
 }
 
 
-PongReinforcementWorld* PongReinforcementExample::createWorld()
+PongReinforcementWorld* PongPolicyGradientExample::createWorld()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -63,7 +63,7 @@ PongReinforcementWorld* PongReinforcementExample::createWorld()
 }
 
 
-PongReinforcementExample::PongReinforcementExample()
+PongPolicyGradientExample::PongPolicyGradientExample()
 {
 	addCustomSubApp(new PongGameFactory());
 	addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, 10, 1, 10000));
@@ -77,28 +77,28 @@ PongReinforcementExample::PongReinforcementExample()
 	addPreference(new DoublePreference(PREFERENCE_VALUE_LEARNING_RATE, 1e-4, 0, 1));
 }
 
-std::string PongReinforcementExample::getDefaultName()
+std::string PongPolicyGradientExample::getDefaultName()
 {
-	return "Pong reinforcement example";
+	return "Pong policy gradient example";
 }
 
-std::string PongReinforcementExample::getDescription()
+std::string PongPolicyGradientExample::getDescription()
 {
-	return "Evolution of a Pong AI with reinforcement.";
+	return "Learns pong with policy gradient learning.";
 }
 
-AbstractTrainingPlan* PongReinforcementExample::getCopy()
+AbstractTrainingPlan* PongPolicyGradientExample::getCopy()
 {
-	return new PongReinforcementExample();
+	return new PongPolicyGradientExample();
 }
 
-std::string PongReinforcementExample::getLearningRuleName()
+std::string PongPolicyGradientExample::getLearningRuleName()
 {
-	return BipartiteEvolutionLearningRule::getName();
+	return PolicyGradientLearningRule::getName();
 }
 
 
-PongReinforcementWorld* PongReinforcementExample::getWorld()
+PongReinforcementWorld* PongPolicyGradientExample::getWorld()
 {
 	return world;
 }

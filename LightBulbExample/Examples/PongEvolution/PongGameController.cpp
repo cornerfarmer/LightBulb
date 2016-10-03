@@ -6,7 +6,7 @@
 #include <TrainingPlans/AbstractTrainingPlan.hpp>
 #include "PongEvolutionExample.hpp"
 #include "Pong.hpp"
-#include <Examples/PongReinforcement/PongReinforcementExample.hpp>
+#include <Examples/PongReinforcement/PongPolicyGradientExample.hpp>
 #include <Examples/PongReinforcement/PongReinforcementWorld.hpp>
 
 using namespace LightBulb;
@@ -17,7 +17,7 @@ PongGameController::PongGameController(AbstractMainApp* mainApp, AbstractTrainin
 	if (dynamic_cast<PongEvolutionExample*>(trainingPlan))
 		world = static_cast<Pong*>(static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
 	else
-		world = static_cast<PongReinforcementExample*>(trainingPlan)->getWorld();
+		world = static_cast<PongPolicyGradientExample*>(trainingPlan)->getWorld();
 	properties = world->getGame()->getProperties();
 	window.reset(new PongGameWindow(this, parent));
 }

@@ -8,7 +8,7 @@
 
 class PongReinforcementWorld;
 
-class PongReinforcementExample : public LightBulb::AbstractLearningRuleTrainingPlan
+class PongPolicyGradientExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
 	PongReinforcementWorld* world;
@@ -16,7 +16,7 @@ protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 	PongReinforcementWorld* createWorld();
 public:
-	PongReinforcementExample();
+	PongPolicyGradientExample();
 	std::string getDefaultName() override;
 	std::string getDescription() override;
 	LightBulb::AbstractTrainingPlan* getCopy() override;
@@ -24,6 +24,6 @@ public:
 	PongReinforcementWorld* getWorld();
 };
 
-USE_PARENT_SERIALIZATION(PongReinforcementExample, LightBulb::AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(PongPolicyGradientExample, LightBulb::AbstractLearningRuleTrainingPlan);
 
 #endif

@@ -152,7 +152,7 @@
     <ClCompile Include="Examples\PongEvolution\PongGameFactory.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongGameWindow.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongDQNExample.cpp" />
-    <ClCompile Include="Examples\PongReinforcement\PongReinforcementExample.cpp" />
+    <ClCompile Include="Examples\PongReinforcement\PongPolicyGradientExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp" />
     <ClCompile Include="Examples\Position.cpp" />
     <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp" />
@@ -201,7 +201,7 @@
     <ClInclude Include="Examples\PongEvolution\PongGameFactory.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongGameWindow.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongDQNExample.hpp" />
-    <ClInclude Include="Examples\PongReinforcement\PongReinforcementExample.hpp" />
+    <ClInclude Include="Examples\PongReinforcement\PongPolicyGradientExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp" />
     <ClInclude Include="Examples\Position.hpp" />
     <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp" />

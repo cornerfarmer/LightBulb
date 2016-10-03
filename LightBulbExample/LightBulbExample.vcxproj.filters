@@ -93,9 +93,6 @@
     <ClCompile Include="Examples\PongEvolution\PongGame.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\PongReinforcement\PongReinforcementExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\Nature\NatureWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\PongReinforcement\PongPolicyGradientExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -242,9 +242,6 @@
     <ClInclude Include="Examples\PongEvolution\PongGame.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\PongReinforcement\PongReinforcementExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -309,6 +306,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\Nature\NatureWindow.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\PongReinforcement\PongPolicyGradientExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
