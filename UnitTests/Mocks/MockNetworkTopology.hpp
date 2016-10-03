@@ -48,6 +48,7 @@ public:
 	MOCK_METHOD0(clone, AbstractNetworkTopology* ());
 	MOCK_METHOD0(getInnerNeuronDescription, LightBulb::NeuronDescription* ());
 	MOCK_METHOD0(getOutputNeuronDescription, LightBulb::NeuronDescription* ());
+	MOCK_METHOD1(getActivationsCopy, void (std::vector<Eigen::VectorXd>&));
 };
 
 #endif
