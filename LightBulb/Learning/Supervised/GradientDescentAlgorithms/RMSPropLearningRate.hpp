@@ -52,7 +52,7 @@ namespace LightBulb
 
 	/**
 	 * \brief Performs a normalized gradient descent step.
-	 * \details Calculates: \n \n \f$s_t = (1 - \alpha)~f'(\omega_t) + \alpha s_{t-1}\f$ \n \n
+	 * \details  \f$s_t = (1 - \alpha)~f'(\omega_t) + \alpha s_{t-1}\f$ \n \n
 	 * \f$r_t = (1 - \gamma)~f'(\omega_t)^2 + \gamma r_{t-1}\f$ \n \n
 	 * \f$\Delta\omega_{t+1} = \beta \Delta\omega_{t} + (1 - \beta) \eta {f'(\omega_t) \over \sqrt{r_t - s_t + \delta}}\f$ \n \n
 	 * \f$\alpha: gradientMomentum\f$ \n 

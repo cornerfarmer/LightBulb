@@ -11,15 +11,26 @@
 
 namespace LightBulb
 {
-	// Forward declarations
 
+	/**
+	* \brief All options for simple gradient descent.
+	*/
 	struct SimpleGradientDescentOptions : public AbstractGradientDescentAlgorithmOptions
 	{
-		// Sets the weight decay factor, which will be used avoid high weights
+		/**
+		 * \brief Sets the weight decay factor, which will be used avoid high weights.
+		 * \details Adds the weights multiplicated by this factor to the training error.
+		 */
 		double weightDecayFac;
-		// Sets the momentum, which can improve learning speed
+		/**
+		 * \brief Sets the momentum, which can improve learning speed.
+		 * \details Adds the delta weights of the last iteration to the delta weights of the current iteration. This can speed up learning on long plateaus.
+		 */
 		double momentum;
-		// Sets the learning Rate
+		/**
+		 * \brief Sets the learning rate.
+		 * \details Determines how much weights should be changed.
+		 */
 		double learningRate;
 		SimpleGradientDescentOptions()
 		{
@@ -27,29 +38,46 @@ namespace LightBulb
 			momentum = 0.7f;
 			learningRate = 0.45f;
 		}
-
 	};
 
 
+	/**
+	 * \brief Describes a simple basic version of gradient descent with optional weight decay and momentum term.
+	 * \details Calculates: \n \n 
+	 * \f$\Delta\omega_{t+1} = - \eta f'(\omega_t) + \alpha  \Delta\omega_{t} - \lambda \omega_t\f$ \n \n
+	 * \f$\eta: learningRate\f$  \n
+	 * \f$\alpha: momentum\f$  \n
+	 * \f$\lambda: weight decay factor\f$ \n
+	 */
 	class SimpleGradientDescent : public AbstractGradientDescentAlgorithm
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent);
 		friend struct cereal::LoadAndConstruct<SimpleGradientDescent>;
 	private:
-		// Contains all previous deltaWeights (used by the momentum term)
+		/**
+		 * \brief Contains all previous deltaWeights (used by the momentum term)
+		 */
 		std::vector<Eigen::MatrixXd> previousDeltaWeights;
+		/**
+		* \brief Returns our current options in form of a SimpleGradientDescentOptions object.
+		* \return The SimpleGradientDescentOptions object.
+		*/
 		SimpleGradientDescentOptions* getOptions();
 	public:
+		/**
+		* \brief Creates simple gradient descent.
+		* \param options_ The options which configure the RMSprop learning rate.
+		*/
 		SimpleGradientDescent(SimpleGradientDescentOptions& options_);
+		/**
+		 * \brief Creates simple gradient descent.
+		 */
 		SimpleGradientDescent();
-
+		// Inherited:
 		Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
-		// Print a short debug output (totalLearningRate)
 		std::string printDebugOutput() override;
-		// Returns if the learning has stopped
 		bool learningHasStopped() override;
-		// Initializes the ResilientLearningRateHelper
 		void initializeAlgorithm(AbstractNetworkTopology* networkTopology) override;
 	};
 }
