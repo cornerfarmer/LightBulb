@@ -10,13 +10,19 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief Logs all messages to the standard console.
+	 */
 	class ConsoleLogger : public AbstractLogger
 	{
 	protected:
+		// Inherited:
 		void outputMessage(std::string message) override;
 	public:
+		/**
+		 * \brief Creates a new ConsoleLogger
+		 * \param logLevel The log level to start with.
+		 */
 		ConsoleLogger(LogLevel logLevel);
 	};
 }
