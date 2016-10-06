@@ -12,7 +12,11 @@ namespace LightBulb
 {
 	// Forward declarations
 
-	// A FeedForwardNetworkTopology describes a network with one input layer, multiple "hidden" layers and one output layer
+	/**
+	 * \brief A feed forward network describes a network which has only forward connections.
+	 * \details It has one input layer, multiple "hidden" layers and one output layer.
+	 * The activation is forward propagated, so the network has no internal state.
+	 */
 	class AbstractFeedForwardNetworkTopology : public AbstractNetworkTopology
 	{
 	protected:
