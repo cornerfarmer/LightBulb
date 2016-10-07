@@ -18,7 +18,7 @@ namespace LightBulb
 		archive(cereal::make_nvp("state", trainingPlan.state));
 		archive(cereal::make_nvp("logger", trainingPlan.logger));
 		archive(cereal::make_nvp("name", trainingPlan.name));
-		archive(cereal::make_nvp("preferences", trainingPlan.preferences));
+		archive(cereal::make_nvp("preferenceGroups", trainingPlan.preferenceGroups));
 		archive(cereal::make_nvp("concludedRunTime", trainingPlan.concludedRunTime.count()));
 	}
 
@@ -28,7 +28,7 @@ namespace LightBulb
 		archive(cereal::make_nvp("state", trainingPlan.state));
 		archive(cereal::make_nvp("logger", trainingPlan.logger));
 		archive(cereal::make_nvp("name", trainingPlan.name));
-		archive(cereal::make_nvp("preferences", trainingPlan.preferences));
+		archive(cereal::make_nvp("preferenceGroups", trainingPlan.preferenceGroups));
 		double concludedRunTime;
 		archive(cereal::make_nvp("concludedRunTime", concludedRunTime));
 		trainingPlan.concludedRunTime = std::chrono::duration<double>(concludedRunTime);

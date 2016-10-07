@@ -5,6 +5,7 @@
 #include <TrainingPlans/Preferences/DoublePreference.hpp>
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>
 #include <TrainingPlans/Preferences/BooleanPreference.hpp>
+#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
 
 namespace LightBulb
 {
@@ -21,33 +22,35 @@ namespace LightBulb
 	{
 		wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-		for (auto preference = controller_->getPreferences().begin(); preference != controller_->getPreferences().end(); preference++)
+		for (auto preferenceGroup = controller_->getPreferenceGroups().begin(); preferenceGroup != controller_->getPreferenceGroups().end(); preferenceGroup++)
 		{
-			if (!dynamic_cast<BooleanPreference*>(preference->get()))
-				sizer->Add(new wxStaticText(this, wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
-
-			if (dynamic_cast<DoublePreference*>(preference->get()))
+			for (auto preference = (*preferenceGroup)->getPreferences().begin(); preference != (*preferenceGroup)->getPreferences().end(); preference++)
 			{
-				DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
-				double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
-				int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
+				if (!dynamic_cast<BooleanPreference*>(preference->get()))
+					sizer->Add(new wxStaticText(this, wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
 
-				sizer->Add(createSlider(std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
-			}
-			else if (dynamic_cast<IntegerPreference*>(preference->get()))
-			{
-				IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
+				if (dynamic_cast<DoublePreference*>(preference->get()))
+				{
+					DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
+					double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
+					int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
 
-				sizer->Add(createSlider(std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
-			}
-			else if (dynamic_cast<BooleanPreference*>(preference->get()))
-			{
-				BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
+					sizer->Add(createSlider(std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+				}
+				else if (dynamic_cast<IntegerPreference*>(preference->get()))
+				{
+					IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
 
-				sizer->Add(createCheckBox((*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
+					sizer->Add(createSlider(std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
+				}
+				else if (dynamic_cast<BooleanPreference*>(preference->get()))
+				{
+					BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
+
+					sizer->Add(createCheckBox((*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
+				}
 			}
 		}
-
 		SetSizerAndFit(sizer);
 	}
 

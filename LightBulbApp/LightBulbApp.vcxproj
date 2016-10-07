@@ -150,7 +150,7 @@
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
-    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractVariablePreference.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\BooleanPreference.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\DoublePreference.cpp" />
@@ -199,6 +199,7 @@
     <ClInclude Include="IO\DoublePreferenceIO.hpp" />
     <ClInclude Include="IO\IntegerPreferenceIO.hpp" />
     <ClInclude Include="IO\NeuralNetworkRepositoryIO.hpp" />
+    <ClInclude Include="IO\PreferenceGroupIO.hpp" />
     <ClInclude Include="IO\TrainingControllerIO.hpp" />
     <ClInclude Include="IO\TrainingPlanRepositoryIO.hpp" />
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp" />
@@ -213,7 +214,7 @@
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
-    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractVariablePreference.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\BooleanPreference.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\DoublePreference.hpp" />

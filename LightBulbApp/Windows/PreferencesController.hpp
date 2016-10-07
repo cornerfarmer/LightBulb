@@ -15,7 +15,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractTrainingPlan;
-	class AbstractPreference;
+	class PreferenceGroup;
 
 	class PreferencesController : public AbstractSubApp
 	{
@@ -26,7 +26,7 @@ namespace LightBulb
 		PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent = NULL);
 		PreferencesWindow* getWindow();
 		static std::string getLabel();
-		std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
+		std::vector<std::unique_ptr<PreferenceGroup>>& getPreferenceGroups();
 	};
 }
 

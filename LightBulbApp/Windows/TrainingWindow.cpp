@@ -631,9 +631,9 @@ namespace LightBulb
 		detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
 		detailsTextBox->WriteText("Seed: " + std::to_string(trainingPlan->getSeed()) + "\n");
 		detailsTextBox->WriteText("Preferences:\n");
-		for (auto preference = trainingPlan->getPreferences().begin(); preference != trainingPlan->getPreferences().end(); preference++)
+		for (auto preferenceGroup = trainingPlan->getPreferenceGroups().begin(); preferenceGroup != trainingPlan->getPreferenceGroups().end(); preferenceGroup++)
 		{
-			detailsTextBox->WriteText(" + " + (*preference)->toString() + "\n");
+			detailsTextBox->WriteText(" + " + (*preferenceGroup)->toString() + "\n");
 		}
 
 

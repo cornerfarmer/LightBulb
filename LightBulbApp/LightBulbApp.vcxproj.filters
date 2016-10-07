@@ -150,7 +150,7 @@
     <ClCompile Include="TrainingPlans\Preferences\AbstractPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,7 +320,10 @@
     <ClInclude Include="TrainingPlans\Preferences\AbstractPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\PreferenceGroupIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

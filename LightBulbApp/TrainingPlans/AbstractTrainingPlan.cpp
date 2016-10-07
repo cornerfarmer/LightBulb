@@ -14,22 +14,27 @@ namespace LightBulb
 
 	void AbstractTrainingPlan::addPreference(AbstractPreference* newPreference)
 	{
-		preferences.push_back(std::unique_ptr<AbstractPreference>(newPreference));
+		preferenceGroups.front()->addPreference(newPreference);
 	}
 
-	AbstractPreference* AbstractTrainingPlan::getPreference(std::string name)
+	void AbstractTrainingPlan::addPreferenceGroup(PreferenceGroup* newPreferenceGroup)
 	{
-		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
+		preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(newPreferenceGroup));
+	}
+
+	AbstractPreference* AbstractTrainingPlan::getPreference(std::string name, std::string groupName)
+	{
+		for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
 		{
-			if ((*preference)->getName() == name)
-				return preference->get();
+			if ((*preferenceGroup)->getName() == groupName)
+				return (*preferenceGroup)->getPreference(name);
 		}
 		return NULL;
 	}
 
-	double AbstractTrainingPlan::getDoublePreference(std::string name)
+	double AbstractTrainingPlan::getDoublePreference(std::string name, std::string groupName)
 	{
-		DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(name));
+		DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(name, groupName));
 		if (doublePreference)
 			return doublePreference->getValue();
 		else
@@ -37,18 +42,18 @@ namespace LightBulb
 	}
 
 
-	int AbstractTrainingPlan::getIntegerPreference(std::string name)
+	int AbstractTrainingPlan::getIntegerPreference(std::string name, std::string groupName)
 	{
-		IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(getPreference(name));
+		IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(getPreference(name, groupName));
 		if (integerPreference)
 			return integerPreference->getValue();
 		else
 			return 0;
 	}
 
-	bool AbstractTrainingPlan::getBooleanPreference(std::string name)
+	bool AbstractTrainingPlan::getBooleanPreference(std::string name, std::string groupName)
 	{
-		BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(getPreference(name));
+		BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(getPreference(name, groupName));
 		if (booleanPreference)
 			return booleanPreference->getValue();
 		else
@@ -66,6 +71,7 @@ namespace LightBulb
 		logger.reset(new StorageLogger());
 		threadShouldBeJoinedBeforeReuse = false;
 		state = TP_IDLE;
+		preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(new PreferenceGroup(DEFAULT_PREFERENCE_GROUP)));
 	}
 
 	void AbstractTrainingPlan::start()
@@ -119,10 +125,10 @@ namespace LightBulb
 	{
 		AbstractTrainingPlan* copy = getCopy();
 		copy->pattern = this;
-		copy->preferences.clear();
-		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
+		copy->preferenceGroups.clear();
+		for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
 		{
-			copy->preferences.push_back(std::unique_ptr<AbstractPreference>((*preference)->getCopy()));
+			copy->preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>((*preferenceGroup)->getCopy()));
 		}
 		return copy;
 	}
@@ -189,9 +195,9 @@ namespace LightBulb
 		return &customSubApps;
 	}
 
-	std::vector<std::unique_ptr<AbstractPreference>>& AbstractTrainingPlan::getPreferences()
+	std::vector<std::unique_ptr<PreferenceGroup>>& AbstractTrainingPlan::getPreferenceGroups()
 	{
-		return preferences;
+		return preferenceGroups;
 	}
 
 	void AbstractTrainingPlan::setName(std::string newName)

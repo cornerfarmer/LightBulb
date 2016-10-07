@@ -6,13 +6,15 @@
 // Includes
 #include <Event/Observable.hpp>
 #include <Logging/StorageLogger.hpp>
+#include <Windows/AbstractCustomSubAppFactory.hpp>
 #include "Preferences/AbstractPreference.hpp"
+#include "Preferences/PreferenceGroup.hpp"
+
 // Library includes
 #include <string>
 #include <thread>
 #include <vector>
 #include <cereal/cereal.hpp>
-#include <Windows/AbstractCustomSubAppFactory.hpp>
 
 namespace LightBulb
 {
@@ -35,6 +37,8 @@ namespace LightBulb
 		EVT_TP_FINISHED
 	};
 
+#define DEFAULT_PREFERENCE_GROUP "Default"
+
 	class AbstractTrainingPlan : public LightBulb::Observable<TrainingPlanEvents, AbstractTrainingPlan>
 	{
 		template <class Archive>
@@ -51,7 +55,7 @@ namespace LightBulb
 		void runThread(bool initial);
 		bool threadShouldBeJoinedBeforeReuse;
 		std::vector<std::unique_ptr<AbstractCustomSubAppFactory>> customSubApps;
-		std::vector<std::unique_ptr<AbstractPreference>> preferences;
+		std::vector<std::unique_ptr<PreferenceGroup>> preferenceGroups;
 	protected:
 		std::unique_ptr<StorageLogger> logger;
 		virtual void run(bool initial) = 0;
@@ -62,10 +66,11 @@ namespace LightBulb
 		virtual void initializeStart() {};
 		void addCustomSubApp(AbstractCustomSubAppFactory* customSubApp);
 		void addPreference(AbstractPreference* newPreference);
-		AbstractPreference* getPreference(std::string name);
-		double getDoublePreference(std::string name);
-		int getIntegerPreference(std::string name);
-		bool getBooleanPreference(std::string name);
+		void addPreferenceGroup(PreferenceGroup* newPreferenceGroup);
+		AbstractPreference* getPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
+		double getDoublePreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
+		int getIntegerPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
+		bool getBooleanPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
 	public:
 		AbstractTrainingPlan();
 		void start();
@@ -85,7 +90,7 @@ namespace LightBulb
 		StorageLogger* getLogger();
 		std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
 		std::chrono::duration<double> getRunTime();
-		std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
+		std::vector<std::unique_ptr<PreferenceGroup>>& getPreferenceGroups();
 		void setName(std::string newName);
 		virtual int getSeed() = 0;
 	};
