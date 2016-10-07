@@ -21,8 +21,8 @@
 #include <Learning/Evolution/ScoreCondition.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
-#include <TrainingPlans/IntegerPreference.hpp>
-#include <TrainingPlans/DoublePreference.hpp>
+#include <TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <TrainingPlans/Preferences/DoublePreference.hpp>
 #include "TCProblemTeacher.hpp"
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 

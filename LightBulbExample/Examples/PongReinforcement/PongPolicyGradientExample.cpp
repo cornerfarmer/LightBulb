@@ -1,8 +1,8 @@
 #include "PongPolicyGradientExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
-#include <TrainingPlans/IntegerPreference.hpp>
-#include <TrainingPlans/BooleanPreference.hpp>
+#include <TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
@@ -13,7 +13,7 @@
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
 #include "Function/ActivationFunction/RectifierFunction.hpp"
-#include "TrainingPlans/DoublePreference.hpp"
+#include "TrainingPlans/Preferences/DoublePreference.hpp"
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"

@@ -16,9 +16,9 @@
 #include <fstream>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include "TicTacToeGameFactory.hpp"
-#include <TrainingPlans/DoublePreference.hpp>
-#include <TrainingPlans/IntegerPreference.hpp>
-#include <TrainingPlans/BooleanPreference.hpp>
+#include <TrainingPlans/Preferences/DoublePreference.hpp>
+#include <TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/BinaryFunction.hpp>

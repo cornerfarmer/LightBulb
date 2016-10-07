@@ -4,7 +4,7 @@
 #define _BOOLEANPREFERENCEIO_H_
 
 // Includes
-#include "TrainingPlans/BooleanPreference.hpp"
+#include "TrainingPlans/Preferences/BooleanPreference.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

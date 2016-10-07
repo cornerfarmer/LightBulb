@@ -4,7 +4,7 @@
 #define _DOUBLEPREFERENCEIO_H_
 
 // Includes
-#include "TrainingPlans/DoublePreference.hpp"
+#include "TrainingPlans/Preferences/DoublePreference.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

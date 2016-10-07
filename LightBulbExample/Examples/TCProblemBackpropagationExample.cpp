@@ -8,7 +8,7 @@
 #include <Teaching/Teacher.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
-#include <TrainingPlans/DoublePreference.hpp>
+#include <TrainingPlans/Preferences/DoublePreference.hpp>
 #include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 
 using namespace LightBulb;

@@ -1,9 +1,9 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractTrainingPlan.hpp"
+#include "Preferences/DoublePreference.hpp"
+#include "Preferences/IntegerPreference.hpp"
+#include "Preferences/BooleanPreference.hpp"
 #include <thread>
-#include "DoublePreference.hpp"
-#include "IntegerPreference.hpp"
-#include "BooleanPreference.hpp"
 
 namespace LightBulb
 {

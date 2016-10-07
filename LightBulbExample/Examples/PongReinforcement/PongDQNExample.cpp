@@ -1,8 +1,8 @@
 #include "PongDQNExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
-#include <TrainingPlans/IntegerPreference.hpp>
-#include <TrainingPlans/BooleanPreference.hpp>
+#include <TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include <Function/InputFunction//WeightedSumFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
@@ -10,7 +10,7 @@
 #include "PongReinforcementWorld.hpp"
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <TrainingPlans/DoublePreference.hpp>
+#include <TrainingPlans/Preferences/DoublePreference.hpp>
 #include <Function/ActivationFunction/RectifierFunction.hpp>
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"

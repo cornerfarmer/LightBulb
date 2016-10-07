@@ -4,7 +4,7 @@
 #define _ABSTRACTPREFERENCEIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractPreference.hpp"
+#include "TrainingPlans/Preferences/AbstractPreference.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

@@ -1,8 +1,8 @@
 #include "SimpleReinforcementDQNExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
-#include <TrainingPlans/IntegerPreference.hpp>
-#include <TrainingPlans/BooleanPreference.hpp>
+#include <TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
@@ -10,7 +10,7 @@
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <TrainingPlans/DoublePreference.hpp>
+#include <TrainingPlans/Preferences/DoublePreference.hpp>
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"

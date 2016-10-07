@@ -345,18 +345,7 @@ namespace LightBulb
 	{
 		return &activationsPerLayerOut;
 	}
-
-	void FeedForwardNetworkTopology::getActivationsCopy(std::vector<Eigen::VectorXd>& copy)
-	{
-		copy.resize(activationsPerLayerOut.size());
-
-		for (int i = 0; i < copy.size(); i++)
-		{
-			copy[i] = activationsPerLayerOut[i];
-		}
-
-	}
-
+	
 	std::vector<Eigen::VectorXd>* FeedForwardNetworkTopology::getAllNetInputs()
 	{
 		return &netInputs;

@@ -126,9 +126,6 @@
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractPreference.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -138,16 +135,22 @@
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\BooleanPreference.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\AbstractVariablePreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\DoublePreference.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\BooleanPreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\IntegerPreference.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\DoublePreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractVariablePreference.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\IntegerPreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\AbstractPreference.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -293,9 +296,6 @@
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractPreference.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -305,16 +305,22 @@
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractVariablePreference.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\IntegerPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\BooleanPreference.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\AbstractVariablePreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\DoublePreference.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\BooleanPreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\IntegerPreference.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\DoublePreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\AbstractPreference.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

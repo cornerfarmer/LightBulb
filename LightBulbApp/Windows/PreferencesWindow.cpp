@@ -1,10 +1,10 @@
 // Includes
 #include "Windows/PreferencesWindow.hpp"
 #include "PreferencesController.hpp"
-#include "TrainingPlans/AbstractPreference.hpp"
-#include <TrainingPlans/DoublePreference.hpp>
-#include <TrainingPlans/IntegerPreference.hpp>
-#include <TrainingPlans/BooleanPreference.hpp>
+#include "TrainingPlans/Preferences/AbstractPreference.hpp"
+#include <TrainingPlans/Preferences/DoublePreference.hpp>
+#include <TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <TrainingPlans/Preferences/BooleanPreference.hpp>
 
 namespace LightBulb
 {

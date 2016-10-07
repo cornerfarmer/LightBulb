@@ -4,7 +4,7 @@
 #define _INTEGERPREFERENCEIO_H_
 
 // Includes
-#include "TrainingPlans/IntegerPreference.hpp"
+#include "TrainingPlans/Preferences/IntegerPreference.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

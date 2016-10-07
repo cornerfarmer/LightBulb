@@ -146,14 +146,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
-    <ClCompile Include="TrainingPlans\AbstractPreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\AbstractPreference.cpp" />
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
-    <ClCompile Include="TrainingPlans\AbstractVariablePreference.cpp" />
-    <ClCompile Include="TrainingPlans\BooleanPreference.cpp" />
-    <ClCompile Include="TrainingPlans\DoublePreference.cpp" />
-    <ClCompile Include="TrainingPlans\IntegerPreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\AbstractVariablePreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\BooleanPreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\DoublePreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\IntegerPreference.cpp" />
     <ClCompile Include="Windows\AbstractApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
@@ -208,14 +209,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
-    <ClInclude Include="TrainingPlans\AbstractPreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\AbstractPreference.hpp" />
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
-    <ClInclude Include="TrainingPlans\AbstractVariablePreference.hpp" />
-    <ClInclude Include="TrainingPlans\BooleanPreference.hpp" />
-    <ClInclude Include="TrainingPlans\DoublePreference.hpp" />
-    <ClInclude Include="TrainingPlans\IntegerPreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\AbstractVariablePreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\BooleanPreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\DoublePreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\IntegerPreference.hpp" />
     <ClInclude Include="Windows\AbstractApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp" />

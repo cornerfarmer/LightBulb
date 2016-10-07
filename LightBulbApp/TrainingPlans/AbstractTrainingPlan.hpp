@@ -6,7 +6,7 @@
 // Includes
 #include <Event/Observable.hpp>
 #include <Logging/StorageLogger.hpp>
-#include "AbstractPreference.hpp"
+#include "Preferences/AbstractPreference.hpp"
 // Library includes
 #include <string>
 #include <thread>

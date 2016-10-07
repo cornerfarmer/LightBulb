@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/DoublePreference.hpp"
+#include "TrainingPlans/Preferences/DoublePreference.hpp"
 
 namespace LightBulb
 {
