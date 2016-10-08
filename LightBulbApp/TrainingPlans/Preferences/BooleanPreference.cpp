@@ -8,7 +8,7 @@ namespace LightBulb
 	{
 	}
 
-	AbstractPreference* BooleanPreference::getCopy()
+	AbstractPreferenceElement* BooleanPreference::getCopy()
 	{
 		return new BooleanPreference(*this);
 	}

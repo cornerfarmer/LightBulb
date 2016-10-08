@@ -23,7 +23,7 @@ namespace LightBulb
 	public:
 		BooleanPreference(std::string name, bool defaultValue);
 		BooleanPreference() = default;
-		AbstractPreference* getCopy() override;
+		AbstractPreferenceElement* getCopy() override;
 	};
 }
 

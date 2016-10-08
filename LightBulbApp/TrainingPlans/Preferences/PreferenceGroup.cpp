@@ -26,8 +26,12 @@ namespace LightBulb
 		return text;
 	}
 
+	void PreferenceGroup::addPreference(AbstractPreferenceElement* preferenceElement)
+	{
+		preferences.push_back(std::unique_ptr<AbstractPreferenceElement>(preferenceElement));
+	}
 
-	PreferenceGroup* PreferenceGroup::getCopy()
+	AbstractPreferenceElement* PreferenceGroup::getCopy()
 	{
 		PreferenceGroup* preferenceGroup = new PreferenceGroup(name);
 		
@@ -39,18 +43,22 @@ namespace LightBulb
 		return preferenceGroup;
 	}
 
-
-	void PreferenceGroup::addPreference(AbstractPreference* preference)
-	{
-		preferences.push_back(std::unique_ptr<AbstractPreference>(preference));
-	}
-
 	AbstractPreference* PreferenceGroup::getPreference(std::string preferenceName)
 	{
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
-			if ((*preference)->getName() == preferenceName)
-				return preference->get();
+			if (dynamic_cast<AbstractPreference*>(preference->get()) && (*preference)->getName() == preferenceName)
+				return dynamic_cast<AbstractPreference*>(preference->get());
+		}
+		return NULL;
+	}
+
+	PreferenceGroup* PreferenceGroup::getPreferenceGroup(std::string preferenceGroupName)
+	{
+		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
+		{
+			if (dynamic_cast<PreferenceGroup*>(preference->get()) && (*preference)->getName() == preferenceGroupName)
+				return dynamic_cast<PreferenceGroup*>(preference->get());
 		}
 		return NULL;
 	}
@@ -83,7 +91,7 @@ namespace LightBulb
 			return false;
 	}
 
-	std::vector<std::unique_ptr<AbstractPreference>>& PreferenceGroup::getPreferences()
+	std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferenceGroup::getPreferenceElements()
 	{
 		return preferences;
 	}

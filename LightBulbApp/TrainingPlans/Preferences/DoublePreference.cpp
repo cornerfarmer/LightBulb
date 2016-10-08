@@ -20,7 +20,7 @@ namespace LightBulb
 		return max;
 	}
 
-	AbstractPreference* DoublePreference::getCopy()
+	AbstractPreferenceElement* DoublePreference::getCopy()
 	{
 		return new DoublePreference(*this);
 	}

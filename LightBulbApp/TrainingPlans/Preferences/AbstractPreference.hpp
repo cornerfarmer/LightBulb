@@ -4,6 +4,7 @@
 #define _ABSTRACTPREFERENCE_H_
 
 // Includes
+#include "AbstractPreferenceElement.hpp"
 
 // Library includes
 #include <string>
@@ -14,7 +15,7 @@ namespace LightBulb
 {
 	// Forward declarations
 
-	class AbstractPreference
+	class AbstractPreference : public AbstractPreferenceElement
 	{
 		template <class Archive>
 		friend void save(Archive& archive, AbstractPreference const& preference);
@@ -27,15 +28,13 @@ namespace LightBulb
 	public:
 		virtual ~AbstractPreference() {}
 
-		virtual AbstractPreference* getCopy() = 0;
-
 		AbstractPreference(std::string name_);
 
 		AbstractPreference() = default;
 
-		std::string getName();
+		std::string getName() override;
 
-		std::string toString();
+		std::string toString() override;
 	};
 }
 

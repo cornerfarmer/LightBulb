@@ -27,7 +27,7 @@ namespace LightBulb
 		DoublePreference() = default;
 		double getMin();
 		double getMax();
-		AbstractPreference* getCopy() override;
+		AbstractPreferenceElement* getCopy() override;
 
 	};
 }

@@ -137,7 +137,7 @@ namespace LightBulb
 		copy->preferenceGroups.clear();
 		for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
 		{
-			copy->preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>((*preferenceGroup)->getCopy()));
+			copy->preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(dynamic_cast<PreferenceGroup*>((*preferenceGroup)->getCopy())));
 		}
 		return copy;
 	}

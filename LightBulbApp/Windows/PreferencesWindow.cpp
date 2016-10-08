@@ -6,7 +6,6 @@
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>
 #include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "wx/collpane.h"
 #include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
 
 namespace LightBulb
@@ -30,46 +29,10 @@ namespace LightBulb
 
 		for (auto preferenceGroup = controller_->getPreferenceGroups().begin(); preferenceGroup != controller_->getPreferenceGroups().end(); preferenceGroup++)
 		{
-			if (!(*preferenceGroup)->getPreferences().empty()) 
+			if (!(*preferenceGroup)->getPreferenceElements().empty())
 			{
-				wxCollapsiblePane *collpane = new wxCollapsiblePane(sw, wxID_ANY, (*preferenceGroup)->getName() + ":", wxDefaultPosition, wxDefaultSize, wxCP_DEFAULT_STYLE | wxCP_NO_TLW_RESIZE);
-				collpane->Bind(wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEventFunction(&PreferencesWindow::refreshWindow), this);
-				if (isFirst)
-				{
-					isFirst = false;
-					collpane->Collapse(false);
-				}
-
-				wxSizer* panelSizer = new wxBoxSizer(wxVERTICAL);
-				for (auto preference = (*preferenceGroup)->getPreferences().begin(); preference != (*preferenceGroup)->getPreferences().end(); preference++)
-				{
-					if (!dynamic_cast<BooleanPreference*>(preference->get()))
-						panelSizer->Add(new wxStaticText(collpane->GetPane(), wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
-
-					if (dynamic_cast<DoublePreference*>(preference->get()))
-					{
-						DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
-						double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
-						int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
-
-						panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
-					}
-					else if (dynamic_cast<IntegerPreference*>(preference->get()))
-					{
-						IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
-
-						panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
-					}
-					else if (dynamic_cast<BooleanPreference*>(preference->get()))
-					{
-						BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
-
-						panelSizer->Add(createCheckBox(collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
-					}
-				}
-
-				collpane->GetPane()->SetSizerAndFit(panelSizer);
-				scrollWinSizer->Add(collpane, 0, wxGROW | wxEXPAND);
+				scrollWinSizer->Add(createCollapsiblePane(sw, preferenceGroup->get(), !isFirst), 0, wxGROW | wxEXPAND);
+				isFirst = false;
 			}
 		}
 		sw->SetSizerAndFit(scrollWinSizer);
@@ -80,6 +43,52 @@ namespace LightBulb
 		SetSizerAndFit(sizer);
 	}
 
+
+	wxCollapsiblePane* PreferencesWindow::createCollapsiblePane(wxWindow* parent, PreferenceGroup* preferenceGroup, bool collapse)
+	{
+		wxCollapsiblePane *collpane = new wxCollapsiblePane(parent, wxID_ANY, preferenceGroup->getName() + ":", wxDefaultPosition, wxDefaultSize, wxCP_DEFAULT_STYLE | wxCP_NO_TLW_RESIZE);
+		collpane->Bind(wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEventFunction(&PreferencesWindow::refreshWindow), this);
+		collpane->Collapse(collapse);
+
+		wxSizer* panelSizer = new wxBoxSizer(wxVERTICAL);
+		for (auto preference = preferenceGroup->getPreferenceElements().begin(); preference != preferenceGroup->getPreferenceElements().end(); preference++)
+		{
+			if (dynamic_cast<PreferenceGroup*>(preference->get()))
+			{
+				panelSizer->Add(createCollapsiblePane(collpane->GetPane(), dynamic_cast<PreferenceGroup*>(preference->get()), true), 0, wxGROW | wxEXPAND);
+			}
+			else
+			{
+				if (!dynamic_cast<BooleanPreference*>(preference->get()))
+					panelSizer->Add(new wxStaticText(collpane->GetPane(), wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
+
+				if (dynamic_cast<DoublePreference*>(preference->get()))
+				{
+					DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
+					double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
+					int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
+
+					panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+				}
+				else if (dynamic_cast<IntegerPreference*>(preference->get()))
+				{
+					IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
+
+					panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
+				}
+				else if (dynamic_cast<BooleanPreference*>(preference->get()))
+				{
+					BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
+
+					panelSizer->Add(createCheckBox(collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
+				}
+			}
+		}
+
+		collpane->GetPane()->SetSizerAndFit(panelSizer);
+
+		return collpane;
+	}
 
 	void PreferencesWindow::refreshWindow(wxCollapsiblePaneEvent& event)
 	{
@@ -129,6 +138,7 @@ namespace LightBulb
 
 		return preferenceSizer;
 	}
+
 
 	void PreferencesWindow::setValueFromTextBox(wxCommandEvent& event, AbstractPreference* preference)
 	{

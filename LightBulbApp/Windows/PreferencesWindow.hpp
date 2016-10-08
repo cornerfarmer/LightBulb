@@ -3,11 +3,12 @@
 #ifndef _PREFERENCESWINDOW_H_
 #define _PREFERENCESWINDOW_H_
 
-// Library include
-#include <map>
-
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"
+
+// Library include
+#include <map>
+#include "wx/collpane.h"
 
 class wxCollapsiblePaneEvent;
 
@@ -17,6 +18,7 @@ namespace LightBulb
 	class PreferencesController;
 	class DoublePreference;
 	class AbstractPreference;
+	class PreferenceGroup;
 
 	class PreferencesWindow : public AbstractSubAppWindow
 	{
@@ -32,6 +34,7 @@ namespace LightBulb
 		double doubleToSliderValue(wxSlider* slider, DoublePreference* doublePreference, double value);
 		wxSizer* createSlider(wxWindow* parent, std::string min, std::string max, std::string current, int currentStep, AbstractPreference* preference, int minStep, int maxStep, double stepSize = 0);
 		wxSizer* createCheckBox(wxWindow* parent, std::string label, bool currentValue, AbstractPreference* preference);
+		wxCollapsiblePane* createCollapsiblePane(wxWindow* parent, PreferenceGroup* preferenceGroup, bool collapse);
 		PreferencesController* getController();
 		void refreshWindow(wxCollapsiblePaneEvent& event);
 	public:

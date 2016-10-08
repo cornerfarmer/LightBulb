@@ -11,13 +11,13 @@
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "TrainingPlans/Preferences/SimpleGradientDescentPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/GradientDescentLearningRulePreferenceGroup.hpp"
 
 using namespace LightBulb;
 
 BackpropagationXorExample::BackpropagationXorExample()
 {
-	addPreferenceGroup(new SimpleGradientDescentPreferenceGroup());
+	addPreferenceGroup(new GradientDescentLearningRulePreferenceGroup());
 }
 
 AbstractLearningRule* BackpropagationXorExample::createLearningRate()
@@ -36,16 +36,13 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 			teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}
 	}
-
-	SimpleGradientDescentOptions gradientDescentOptions = createOptions<SimpleGradientDescentOptions, SimpleGradientDescentPreferenceGroup>();
-
-	GradientDescentLearningRuleOptions options;
+	
+	GradientDescentLearningRuleOptions options = createOptions<GradientDescentLearningRuleOptions, GradientDescentLearningRulePreferenceGroup>();
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
 	options.teacher = teacher.get();
-	options.gradientDescentAlgorithm = new SimpleGradientDescent(gradientDescentOptions);
 	fillDefaultLearningRuleOptions(&options);
 
 	return new GradientDescentLearningRule(options);

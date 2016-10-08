@@ -27,7 +27,7 @@ namespace LightBulb
 		IntegerPreference() = default;
 		int getMin();
 		int getMax();
-		AbstractPreference* getCopy() override;
+		AbstractPreferenceElement* getCopy() override;
 	};
 }
 
