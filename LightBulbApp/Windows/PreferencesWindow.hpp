@@ -9,6 +9,8 @@
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"
 
+class wxCollapsiblePaneEvent;
+
 namespace LightBulb
 {
 	// Forward declarations
@@ -28,9 +30,10 @@ namespace LightBulb
 		void setValueFromSlider(wxCommandEvent& event, AbstractPreference* preference);
 		double sliderValueToDouble(wxSlider* slider, DoublePreference* doublePreference, int value);
 		double doubleToSliderValue(wxSlider* slider, DoublePreference* doublePreference, double value);
-		wxSizer* createSlider(std::string min, std::string max, std::string current, int currentStep, AbstractPreference* preference, int minStep, int maxStep, double stepSize = 0);
-		wxSizer* createCheckBox(std::string label, bool currentValue, AbstractPreference* preference);
+		wxSizer* createSlider(wxWindow* parent, std::string min, std::string max, std::string current, int currentStep, AbstractPreference* preference, int minStep, int maxStep, double stepSize = 0);
+		wxSizer* createCheckBox(wxWindow* parent, std::string label, bool currentValue, AbstractPreference* preference);
 		PreferencesController* getController();
+		void refreshWindow(wxCollapsiblePaneEvent& event);
 	public:
 		PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent = NULL);
 	};

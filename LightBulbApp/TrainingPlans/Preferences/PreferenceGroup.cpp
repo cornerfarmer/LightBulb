@@ -18,7 +18,7 @@ namespace LightBulb
 		std::string text = name + ":\n";
 		for (auto preference = preferences.begin(); preference !=preferences.end(); preference++)
 		{
-			text += (*preference)->toString();
+			text += "    - " + (*preference)->toString();
 		}
 		return text;
 	}

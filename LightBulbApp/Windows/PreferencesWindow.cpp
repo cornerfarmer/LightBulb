@@ -6,6 +6,8 @@
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>
 #include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include "TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "wx/collpane.h"
+#include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
 
 namespace LightBulb
 {
@@ -22,12 +24,18 @@ namespace LightBulb
 	{
 		wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
+		wxScrolledWindow *sw = new wxScrolledWindow(this);
+		wxSizer* scrollWinSizer = new wxBoxSizer(wxVERTICAL);
+
 		for (auto preferenceGroup = controller_->getPreferenceGroups().begin(); preferenceGroup != controller_->getPreferenceGroups().end(); preferenceGroup++)
 		{
+			wxCollapsiblePane *collpane = new wxCollapsiblePane(sw, wxID_ANY, (*preferenceGroup)->getName() + ":", wxDefaultPosition, wxDefaultSize, wxCP_DEFAULT_STYLE | wxCP_NO_TLW_RESIZE);
+			collpane->Bind(wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEventFunction(&PreferencesWindow::refreshWindow), this);
+			wxSizer* panelSizer = new wxBoxSizer(wxVERTICAL);
 			for (auto preference = (*preferenceGroup)->getPreferences().begin(); preference != (*preferenceGroup)->getPreferences().end(); preference++)
 			{
 				if (!dynamic_cast<BooleanPreference*>(preference->get()))
-					sizer->Add(new wxStaticText(this, wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
+					panelSizer->Add(new wxStaticText(collpane->GetPane(), wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
 
 				if (dynamic_cast<DoublePreference*>(preference->get()))
 				{
@@ -35,31 +43,46 @@ namespace LightBulb
 					double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
 					int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
 
-					sizer->Add(createSlider(std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+					panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
 				}
 				else if (dynamic_cast<IntegerPreference*>(preference->get()))
 				{
 					IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
 
-					sizer->Add(createSlider(std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
+					panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
 				}
 				else if (dynamic_cast<BooleanPreference*>(preference->get()))
 				{
 					BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
 
-					sizer->Add(createCheckBox((*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
+					panelSizer->Add(createCheckBox(collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
 				}
 			}
+
+			collpane->GetPane()->SetSizerAndFit(panelSizer);
+			scrollWinSizer->Add(collpane, 0, wxGROW | wxEXPAND);
+
 		}
+		sw->SetSizerAndFit(scrollWinSizer);
+		sw->SetScrollRate(10, 10);
+
+		sizer->Add(sw, 1, wxEXPAND);
+		sizer->SetMinSize(wxSize(500, 300));
 		SetSizerAndFit(sizer);
 	}
 
 
-	wxSizer* PreferencesWindow::createSlider(std::string min, std::string max, std::string current, int currentStep, AbstractPreference* preference, int minStep, int maxStep, double stepSize)
+	void PreferencesWindow::refreshWindow(wxCollapsiblePaneEvent& event)
+	{
+		Layout();
+	}
+
+
+	wxSizer* PreferencesWindow::createSlider(wxWindow* parent, std::string min, std::string max, std::string current, int currentStep, AbstractPreference* preference, int minStep, int maxStep, double stepSize)
 	{
 		wxSizer* preferenceSizer = new wxBoxSizer(wxHORIZONTAL);
-		preferenceSizer->Add(new wxStaticText(this, wxID_ANY, min), 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
-		wxSlider* slider = new wxSlider(this, wxID_ANY, currentStep, minStep, maxStep, wxDefaultPosition, wxDefaultSize);
+		preferenceSizer->Add(new wxStaticText(parent, wxID_ANY, min), 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
+		wxSlider* slider = new wxSlider(parent, wxID_ANY, currentStep, minStep, maxStep, wxDefaultPosition, wxDefaultSize);
 
 		std::function<void(wxCommandEvent &)> slideHandler(bind(&PreferencesWindow::setValueFromSlider, this, std::placeholders::_1, preference));
 		slider->Bind(wxEVT_SLIDER, slideHandler);
@@ -67,8 +90,8 @@ namespace LightBulb
 		preferenceSizer->Add(slider, 1, wxALL | wxALIGN_CENTER_VERTICAL, 7);
 		sliderStepSize[slider] = stepSize;
 
-		preferenceSizer->Add(new wxStaticText(this, wxID_ANY, max), 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
-		wxTextCtrl* textBox = new wxTextCtrl(this, wxID_ANY);
+		preferenceSizer->Add(new wxStaticText(parent, wxID_ANY, max), 0, wxALL | wxALIGN_CENTER_VERTICAL, 7);
+		wxTextCtrl* textBox = new wxTextCtrl(parent, wxID_ANY);
 
 		std::function<void(wxCommandEvent &)> textHandler(bind(&PreferencesWindow::setValueFromTextBox, this, std::placeholders::_1, preference));
 		textBox->Bind(wxEVT_TEXT, textHandler);
@@ -85,10 +108,10 @@ namespace LightBulb
 
 
 
-	wxSizer* PreferencesWindow::createCheckBox(std::string label, bool currentValue, AbstractPreference* preference)
+	wxSizer* PreferencesWindow::createCheckBox(wxWindow* parent, std::string label, bool currentValue, AbstractPreference* preference)
 	{
 		wxSizer* preferenceSizer = new wxBoxSizer(wxHORIZONTAL);
-		wxCheckBox* checkBox = new wxCheckBox(this, wxID_ANY, label);
+		wxCheckBox* checkBox = new wxCheckBox(parent, wxID_ANY, label);
 
 		std::function<void(wxCommandEvent &)> checkHandler(bind(&PreferencesWindow::setValueFromCheckBox, this, std::placeholders::_1, preference));
 		checkBox->Bind(wxEVT_CHECKBOX, checkHandler);
