@@ -1,5 +1,8 @@
 ﻿// Includes
 #include "TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "IntegerPreference.hpp"
+#include "DoublePreference.hpp"
+#include "BooleanPreference.hpp"
 
 namespace LightBulb
 {
@@ -42,18 +45,47 @@ namespace LightBulb
 		preferences.push_back(std::unique_ptr<AbstractPreference>(preference));
 	}
 
-	AbstractPreference* PreferenceGroup::getPreference(std::string name)
+	AbstractPreference* PreferenceGroup::getPreference(std::string preferenceName)
 	{
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
-			if ((*preference)->getName() == name)
+			if ((*preference)->getName() == preferenceName)
 				return preference->get();
 		}
 		return NULL;
+	}
+
+	double PreferenceGroup::getDoublePreference(std::string preferenceName)
+	{
+		DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(preferenceName));
+		if (doublePreference)
+			return doublePreference->getValue();
+		else
+			return 0;
+	}
+
+
+	int PreferenceGroup::getIntegerPreference(std::string preferenceName)
+	{
+		IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(getPreference(preferenceName));
+		if (integerPreference)
+			return integerPreference->getValue();
+		else
+			return 0;
+	}
+
+	bool PreferenceGroup::getBooleanPreference(std::string preferenceName)
+	{
+		BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(getPreference(preferenceName));
+		if (booleanPreference)
+			return booleanPreference->getValue();
+		else
+			return false;
 	}
 
 	std::vector<std::unique_ptr<AbstractPreference>>& PreferenceGroup::getPreferences()
 	{
 		return preferences;
 	}
+
 }

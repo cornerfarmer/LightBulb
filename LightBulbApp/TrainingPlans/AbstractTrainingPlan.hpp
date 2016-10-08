@@ -67,10 +67,30 @@ namespace LightBulb
 		void addCustomSubApp(AbstractCustomSubAppFactory* customSubApp);
 		void addPreference(AbstractPreference* newPreference);
 		void addPreferenceGroup(PreferenceGroup* newPreferenceGroup);
+		PreferenceGroup* getPreferenceGroup(std::string groupName);
 		AbstractPreference* getPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
 		double getDoublePreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
 		int getIntegerPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
 		bool getBooleanPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
+		template<class OptionsClass, class PreferenceGroupClass>
+		OptionsClass createOptions()
+		{
+			for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
+			{
+				if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup->get()))
+					return dynamic_cast<PreferenceGroupClass*>(preferenceGroup->get())->createOptions();
+			}
+			throw std::logic_error("The preference group could not be found.");
+		}
+		template<class OptionsClass, class PreferenceGroupClass>
+		OptionsClass createOptions(std::string groupName)
+		{
+			PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+			if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup))
+				return dynamic_cast<PreferenceGroupClass*>(preferenceGroup)->createOptions();
+			
+			throw std::logic_error("The preference group could not be found.");
+		}
 	public:
 		AbstractTrainingPlan();
 		void start();

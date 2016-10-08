@@ -26,42 +26,51 @@ namespace LightBulb
 
 		wxScrolledWindow *sw = new wxScrolledWindow(this);
 		wxSizer* scrollWinSizer = new wxBoxSizer(wxVERTICAL);
+		bool isFirst = true;
 
 		for (auto preferenceGroup = controller_->getPreferenceGroups().begin(); preferenceGroup != controller_->getPreferenceGroups().end(); preferenceGroup++)
 		{
-			wxCollapsiblePane *collpane = new wxCollapsiblePane(sw, wxID_ANY, (*preferenceGroup)->getName() + ":", wxDefaultPosition, wxDefaultSize, wxCP_DEFAULT_STYLE | wxCP_NO_TLW_RESIZE);
-			collpane->Bind(wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEventFunction(&PreferencesWindow::refreshWindow), this);
-			wxSizer* panelSizer = new wxBoxSizer(wxVERTICAL);
-			for (auto preference = (*preferenceGroup)->getPreferences().begin(); preference != (*preferenceGroup)->getPreferences().end(); preference++)
+			if (!(*preferenceGroup)->getPreferences().empty()) 
 			{
-				if (!dynamic_cast<BooleanPreference*>(preference->get()))
-					panelSizer->Add(new wxStaticText(collpane->GetPane(), wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
-
-				if (dynamic_cast<DoublePreference*>(preference->get()))
+				wxCollapsiblePane *collpane = new wxCollapsiblePane(sw, wxID_ANY, (*preferenceGroup)->getName() + ":", wxDefaultPosition, wxDefaultSize, wxCP_DEFAULT_STYLE | wxCP_NO_TLW_RESIZE);
+				collpane->Bind(wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEventFunction(&PreferencesWindow::refreshWindow), this);
+				if (isFirst)
 				{
-					DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
-					double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
-					int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
-
-					panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+					isFirst = false;
+					collpane->Collapse(false);
 				}
-				else if (dynamic_cast<IntegerPreference*>(preference->get()))
+
+				wxSizer* panelSizer = new wxBoxSizer(wxVERTICAL);
+				for (auto preference = (*preferenceGroup)->getPreferences().begin(); preference != (*preferenceGroup)->getPreferences().end(); preference++)
 				{
-					IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
+					if (!dynamic_cast<BooleanPreference*>(preference->get()))
+						panelSizer->Add(new wxStaticText(collpane->GetPane(), wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
 
-					panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
-				}
-				else if (dynamic_cast<BooleanPreference*>(preference->get()))
-				{
-					BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
+					if (dynamic_cast<DoublePreference*>(preference->get()))
+					{
+						DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get());
+						double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
+						int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
 
-					panelSizer->Add(createCheckBox(collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
+						panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+					}
+					else if (dynamic_cast<IntegerPreference*>(preference->get()))
+					{
+						IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get());
+
+						panelSizer->Add(createSlider(collpane->GetPane(), std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
+					}
+					else if (dynamic_cast<BooleanPreference*>(preference->get()))
+					{
+						BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get());
+
+						panelSizer->Add(createCheckBox(collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
+					}
 				}
+
+				collpane->GetPane()->SetSizerAndFit(panelSizer);
+				scrollWinSizer->Add(collpane, 0, wxGROW | wxEXPAND);
 			}
-
-			collpane->GetPane()->SetSizerAndFit(panelSizer);
-			scrollWinSizer->Add(collpane, 0, wxGROW | wxEXPAND);
-
 		}
 		sw->SetSizerAndFit(scrollWinSizer);
 		sw->SetScrollRate(10, 10);

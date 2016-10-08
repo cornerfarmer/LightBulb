@@ -153,6 +153,9 @@
     <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\SimpleGradientDescentPreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -324,6 +327,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\PreferenceGroupIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\SimpleGradientDescentPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,16 +11,13 @@
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "TrainingPlans/Preferences/SimpleGradientDescentPreferenceGroup.hpp"
 
 using namespace LightBulb;
 
-#define PREFERENCE_LEARNINGRATE "Learning rate"
-#define PREFERENCE_MOMENTUM "Momentum"
-
 BackpropagationXorExample::BackpropagationXorExample()
 {
-	addPreference(new DoublePreference(PREFERENCE_LEARNINGRATE, 0.1, 0.0001, 2));
-	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
+	addPreferenceGroup(new SimpleGradientDescentPreferenceGroup());
 }
 
 AbstractLearningRule* BackpropagationXorExample::createLearningRate()
@@ -40,9 +37,7 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 		}
 	}
 
-	SimpleGradientDescentOptions gradientDescentOptions;
-	gradientDescentOptions.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
-	gradientDescentOptions.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
+	SimpleGradientDescentOptions gradientDescentOptions = createOptions<SimpleGradientDescentOptions, SimpleGradientDescentPreferenceGroup>();
 
 	GradientDescentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;

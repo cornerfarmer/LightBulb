@@ -25,11 +25,13 @@ namespace LightBulb
 
 		std::vector<std::unique_ptr<AbstractPreference>> preferences;
 	public:
-		PreferenceGroup* getCopy();
+		virtual ~PreferenceGroup() {}
 
 		PreferenceGroup(std::string name_);
 
 		PreferenceGroup() = default;
+
+		PreferenceGroup* getCopy();
 
 		std::string getName();
 
@@ -37,9 +39,14 @@ namespace LightBulb
 
 		void addPreference(AbstractPreference* preference);
 
-		AbstractPreference* getPreference(std::string name);
+		AbstractPreference* getPreference(std::string preferenceName);
+		double getDoublePreference(std::string preferenceName);
+		int getIntegerPreference(std::string preferenceName);
+		bool getBooleanPreference(std::string preferenceName);
 
 		std::vector<std::unique_ptr<AbstractPreference>>& getPreferences();
+
+	
 	};
 }
 

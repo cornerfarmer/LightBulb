@@ -22,21 +22,30 @@ namespace LightBulb
 		preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(newPreferenceGroup));
 	}
 
-	AbstractPreference* AbstractTrainingPlan::getPreference(std::string name, std::string groupName)
+	PreferenceGroup* AbstractTrainingPlan::getPreferenceGroup(std::string groupName)
 	{
 		for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
 		{
 			if ((*preferenceGroup)->getName() == groupName)
-				return (*preferenceGroup)->getPreference(name);
+				return preferenceGroup->get();
 		}
 		return NULL;
 	}
 
+	AbstractPreference* AbstractTrainingPlan::getPreference(std::string name, std::string groupName)
+	{
+		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		if (preferenceGroup)
+			return preferenceGroup->getPreference(name);
+		else
+			return NULL;
+	}
+
 	double AbstractTrainingPlan::getDoublePreference(std::string name, std::string groupName)
 	{
-		DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(name, groupName));
-		if (doublePreference)
-			return doublePreference->getValue();
+		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		if (preferenceGroup)
+			return preferenceGroup->getDoublePreference(name);
 		else
 			return 0;
 	}
@@ -44,18 +53,18 @@ namespace LightBulb
 
 	int AbstractTrainingPlan::getIntegerPreference(std::string name, std::string groupName)
 	{
-		IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(getPreference(name, groupName));
-		if (integerPreference)
-			return integerPreference->getValue();
+		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		if (preferenceGroup)
+			return preferenceGroup->getIntegerPreference(name);
 		else
 			return 0;
 	}
 
 	bool AbstractTrainingPlan::getBooleanPreference(std::string name, std::string groupName)
 	{
-		BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(getPreference(name, groupName));
-		if (booleanPreference)
-			return booleanPreference->getValue();
+		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		if (preferenceGroup)
+			return preferenceGroup->getBooleanPreference(name);
 		else
 			return false;
 	}

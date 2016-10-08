@@ -155,6 +155,7 @@
     <ClCompile Include="TrainingPlans\Preferences\BooleanPreference.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\DoublePreference.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\IntegerPreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\SimpleGradientDescentPreferenceGroup.cpp" />
     <ClCompile Include="Windows\AbstractApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubApp.cpp" />
     <ClCompile Include="Windows\AbstractCustomSubAppFactory.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="TrainingPlans\Preferences\BooleanPreference.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\DoublePreference.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\IntegerPreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\SimpleGradientDescentPreferenceGroup.hpp" />
     <ClInclude Include="Windows\AbstractApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubApp.hpp" />
     <ClInclude Include="Windows\AbstractCustomSubAppFactory.hpp" />
