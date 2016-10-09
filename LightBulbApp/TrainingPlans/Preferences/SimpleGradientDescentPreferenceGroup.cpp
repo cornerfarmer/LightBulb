@@ -27,10 +27,6 @@ namespace LightBulb
 
 	AbstractPreferenceElement* SimpleGradientDescentPreferenceGroup::getCopy()
 	{
-		PreferenceGroup* preferenceGroup = new SimpleGradientDescentPreferenceGroup(name);
-
-		copyPreferencesTo(preferenceGroup);
-
-		return preferenceGroup;
+		return new SimpleGradientDescentPreferenceGroup(*this);
 	}
 }

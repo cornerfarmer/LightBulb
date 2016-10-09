@@ -21,10 +21,6 @@ namespace LightBulb
 
 	AbstractPreferenceElement* BackpropagationPreferenceGroup::getCopy()
 	{
-		PreferenceGroup* preferenceGroup = new BackpropagationPreferenceGroup(name);
-
-		copyPreferencesTo(preferenceGroup);
-
-		return preferenceGroup;
+		return new BackpropagationPreferenceGroup(*this);
 	}
 }

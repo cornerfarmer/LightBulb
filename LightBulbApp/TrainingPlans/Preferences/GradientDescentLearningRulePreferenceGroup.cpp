@@ -38,11 +38,7 @@ namespace LightBulb
 
 	AbstractPreferenceElement* GradientDescentLearningRulePreferenceGroup::getCopy()
 	{
-		PreferenceGroup* preferenceGroup = new GradientDescentLearningRulePreferenceGroup(name);
-
-		copyPreferencesTo(preferenceGroup);
-
-		return preferenceGroup;
+		return new GradientDescentLearningRulePreferenceGroup(*this);
 	}
 
 }

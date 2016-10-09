@@ -29,11 +29,10 @@ namespace LightBulb
 		virtual ~PreferenceGroup() {}
 
 		PreferenceGroup(std::string name_);
-
+		PreferenceGroup(const PreferenceGroup& other);
 		PreferenceGroup() = default;
 
 		AbstractPreferenceElement* getCopy() override;
-		void copyPreferencesTo(PreferenceGroup* other);
 		std::string getName() override;
 
 		std::string toString() override;
