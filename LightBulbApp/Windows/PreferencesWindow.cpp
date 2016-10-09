@@ -39,8 +39,9 @@ namespace LightBulb
 		sw->SetScrollRate(10, 10);
 
 		sizer->Add(sw, 1, wxEXPAND);
-		sizer->SetMinSize(wxSize(500, 300));
 		SetSizerAndFit(sizer);
+		SetMinSize(wxSize(500, 300));
+		SetSize(wxSize(500, 300));
 	}
 
 
