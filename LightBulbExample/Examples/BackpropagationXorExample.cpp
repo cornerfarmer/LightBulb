@@ -17,7 +17,12 @@ using namespace LightBulb;
 
 BackpropagationXorExample::BackpropagationXorExample()
 {
-	addPreferenceGroup(new GradientDescentLearningRulePreferenceGroup());
+	GradientDescentLearningRuleOptions options;
+	options.maxTotalErrorValue = 4;
+	options.maxIterationsPerTry = 1000000;
+	options.totalErrorGoal = 0.001f;
+	options.maxTries = 1000;
+	addPreferenceGroup(new GradientDescentLearningRulePreferenceGroup(options));
 }
 
 AbstractLearningRule* BackpropagationXorExample::createLearningRate()
@@ -38,10 +43,6 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	}
 	
 	GradientDescentLearningRuleOptions options = createOptions<GradientDescentLearningRuleOptions, GradientDescentLearningRulePreferenceGroup>();
-	options.maxTotalErrorValue = 4;
-	options.maxIterationsPerTry = 1000000;
-	options.totalErrorGoal = 0.001f;
-	options.maxTries = 1000;
 	options.teacher = teacher.get();
 	fillDefaultLearningRuleOptions(&options);
 

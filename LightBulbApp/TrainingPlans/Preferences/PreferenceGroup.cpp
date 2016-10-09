@@ -35,12 +35,18 @@ namespace LightBulb
 	{
 		PreferenceGroup* preferenceGroup = new PreferenceGroup(name);
 		
-		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
-		{
-			preferenceGroup->addPreference((*preference)->getCopy());
-		}
+		copyPreferencesTo(preferenceGroup);
 		
 		return preferenceGroup;
+	}
+
+	void PreferenceGroup::copyPreferencesTo(PreferenceGroup* other)
+	{
+		other->preferences.clear();
+		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
+		{
+			other->addPreference((*preference)->getCopy());
+		}
 	}
 
 	AbstractPreference* PreferenceGroup::getPreference(std::string preferenceName)

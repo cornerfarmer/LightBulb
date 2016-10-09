@@ -33,7 +33,7 @@ namespace LightBulb
 		PreferenceGroup() = default;
 
 		AbstractPreferenceElement* getCopy() override;
-
+		void copyPreferencesTo(PreferenceGroup* other);
 		std::string getName() override;
 
 		std::string toString() override;
@@ -49,22 +49,22 @@ namespace LightBulb
 
 		std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceElements();
 
-		template<class OptionsClass, class PreferenceGroupClass>
-		OptionsClass createOptionsFromGroup()
+		template<class Class, class PreferenceGroupClass>
+		Class createFromGroup()
 		{
 			for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 			{
 				if (dynamic_cast<PreferenceGroupClass*>(preference->get()))
-					return dynamic_cast<PreferenceGroupClass*>(preference->get())->createOptions();
+					return dynamic_cast<PreferenceGroupClass*>(preference->get())->create();
 			}
 			throw std::logic_error("The preference group could not be found.");
 		}
-		template<class OptionsClass, class PreferenceGroupClass>
-		OptionsClass createOptionsFromGroup(std::string groupName)
+		template<class Class, class PreferenceGroupClass>
+		Class createFromGroup(std::string groupName)
 		{
 			PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
 			if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup))
-				return dynamic_cast<PreferenceGroupClass*>(preferenceGroup)->createOptions();
+				return dynamic_cast<PreferenceGroupClass*>(preferenceGroup)->create();
 
 			throw std::logic_error("The preference group could not be found.");
 		}

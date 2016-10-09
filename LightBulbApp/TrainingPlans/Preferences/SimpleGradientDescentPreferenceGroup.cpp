@@ -16,12 +16,21 @@ namespace LightBulb
 		addPreference(new DoublePreference(PREFERENCE_WEIGHT_DECAY, 0, 0, 1));
 	}
 
-	SimpleGradientDescentOptions SimpleGradientDescentPreferenceGroup::createOptions()
+	SimpleGradientDescentOptions SimpleGradientDescentPreferenceGroup::create()
 	{
 		SimpleGradientDescentOptions options;
 		options.learningRate = getDoublePreference(PREFERENCE_LEARNINGRATE);
 		options.momentum = getDoublePreference(PREFERENCE_MOMENTUM);
 		options.weightDecayFac = getDoublePreference(PREFERENCE_WEIGHT_DECAY);
 		return options;
+	}
+
+	AbstractPreferenceElement* SimpleGradientDescentPreferenceGroup::getCopy()
+	{
+		PreferenceGroup* preferenceGroup = new SimpleGradientDescentPreferenceGroup(name);
+
+		copyPreferencesTo(preferenceGroup);
+
+		return preferenceGroup;
 	}
 }

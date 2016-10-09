@@ -19,7 +19,9 @@ namespace LightBulb
 	public:
 		SimpleGradientDescentPreferenceGroup(std::string name = "Simple gradient descent");
 
-		SimpleGradientDescentOptions createOptions();
+		SimpleGradientDescentOptions create();
+
+		AbstractPreferenceElement* getCopy();
 	};
 }
 

@@ -75,12 +75,12 @@ namespace LightBulb
 		template<class OptionsClass, class PreferenceGroupClass>
 		OptionsClass createOptions()
 		{
-			return preferenceGroup->createOptionsFromGroup<OptionsClass, PreferenceGroupClass>();
+			return preferenceGroup->createFromGroup<OptionsClass, PreferenceGroupClass>();
 		}
 		template<class OptionsClass, class PreferenceGroupClass>
 		OptionsClass createOptions(std::string groupName)
 		{
-			return preferenceGroup->createOptionsFromGroup<OptionsClass, PreferenceGroupClass>(groupName);
+			return preferenceGroup->createFromGroup<OptionsClass, PreferenceGroupClass>(groupName);
 		}
 	public:
 		AbstractTrainingPlan();

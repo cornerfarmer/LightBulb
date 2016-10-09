@@ -151,6 +151,8 @@
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceElement.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\AbstractSupervisedLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\BackpropagationPreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\GradientDescentLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractVariablePreference.cpp" />
@@ -218,6 +220,8 @@
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceElement.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\AbstractSupervisedLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\BackpropagationPreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\GradientDescentLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractVariablePreference.hpp" />

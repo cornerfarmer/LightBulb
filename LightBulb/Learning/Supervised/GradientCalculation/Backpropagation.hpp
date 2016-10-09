@@ -8,6 +8,7 @@
 
 // Includes
 #include "AbstractGradientCalculation.hpp"
+#include "../../../../LightBulbApp/TrainingPlans/Preferences/AbstractPreferenceElement.hpp"
 
 namespace LightBulb
 {

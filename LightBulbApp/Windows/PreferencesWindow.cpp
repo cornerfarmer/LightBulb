@@ -40,8 +40,8 @@ namespace LightBulb
 
 		sizer->Add(sw, 1, wxEXPAND);
 		SetSizerAndFit(sizer);
-		SetMinSize(wxSize(500, 300));
-		SetSize(wxSize(500, 300));
+		SetMinSize(wxSize(450, 600));
+		SetSize(wxSize(450, 600));
 	}
 
 

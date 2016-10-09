@@ -4,7 +4,7 @@
 #define _GRADIENTDESCENTLEARNINGRULEPREFERENCEGROUP_H_
 
 // Includes
-#include "PreferenceGroup.hpp"
+#include "AbstractSupervisedLearningRulePreferenceGroup.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
 
@@ -13,13 +13,16 @@ namespace LightBulb
 
 	// Forward declarations
 
-	class GradientDescentLearningRulePreferenceGroup : public PreferenceGroup
+	class GradientDescentLearningRulePreferenceGroup : public AbstractSupervisedLearningRulePreferenceGroup
 	{
 	protected:
+		void initialize(GradientDescentLearningRuleOptions& options);
 	public:
 		GradientDescentLearningRulePreferenceGroup(std::string name = "Gradient descent");
+		GradientDescentLearningRulePreferenceGroup(GradientDescentLearningRuleOptions& options, std::string name = "Gradient descent");
 
-		GradientDescentLearningRuleOptions createOptions();
+		GradientDescentLearningRuleOptions create();
+		AbstractPreferenceElement* getCopy() override;
 	};
 }
 
