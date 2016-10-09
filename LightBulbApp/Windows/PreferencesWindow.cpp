@@ -29,9 +29,9 @@ namespace LightBulb
 
 		for (auto preferenceGroup = controller_->getPreferenceGroups().begin(); preferenceGroup != controller_->getPreferenceGroups().end(); preferenceGroup++)
 		{
-			if (!(*preferenceGroup)->getPreferenceElements().empty())
+			if (!static_cast<PreferenceGroup*>(preferenceGroup->get())->getPreferenceElements().empty())
 			{
-				scrollWinSizer->Add(createCollapsiblePane(sw, preferenceGroup->get(), !isFirst), 0, wxGROW | wxEXPAND);
+				scrollWinSizer->Add(createCollapsiblePane(sw, static_cast<PreferenceGroup*>(preferenceGroup->get()), !isFirst), 0, wxGROW | wxEXPAND);
 				isFirst = false;
 			}
 		}

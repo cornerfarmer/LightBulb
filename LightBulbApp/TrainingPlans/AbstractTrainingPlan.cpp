@@ -14,22 +14,17 @@ namespace LightBulb
 
 	void AbstractTrainingPlan::addPreference(AbstractPreference* newPreference)
 	{
-		preferenceGroups.front()->addPreference(newPreference);
+		preferenceGroup->getPreferenceGroup(DEFAULT_PREFERENCE_GROUP)->addPreference(newPreference);
 	}
 
 	void AbstractTrainingPlan::addPreferenceGroup(PreferenceGroup* newPreferenceGroup)
 	{
-		preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(newPreferenceGroup));
+		preferenceGroup->addPreference(newPreferenceGroup);
 	}
 
 	PreferenceGroup* AbstractTrainingPlan::getPreferenceGroup(std::string groupName)
 	{
-		for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
-		{
-			if ((*preferenceGroup)->getName() == groupName)
-				return preferenceGroup->get();
-		}
-		return NULL;
+		return preferenceGroup->getPreferenceGroup(groupName);
 	}
 
 	AbstractPreference* AbstractTrainingPlan::getPreference(std::string name, std::string groupName)
@@ -80,7 +75,8 @@ namespace LightBulb
 		logger.reset(new StorageLogger());
 		threadShouldBeJoinedBeforeReuse = false;
 		state = TP_IDLE;
-		preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(new PreferenceGroup(DEFAULT_PREFERENCE_GROUP)));
+		preferenceGroup.reset(new PreferenceGroup("Root"));
+		preferenceGroup->addPreference(new PreferenceGroup(DEFAULT_PREFERENCE_GROUP));
 	}
 
 	void AbstractTrainingPlan::start()
@@ -134,11 +130,7 @@ namespace LightBulb
 	{
 		AbstractTrainingPlan* copy = getCopy();
 		copy->pattern = this;
-		copy->preferenceGroups.clear();
-		for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
-		{
-			copy->preferenceGroups.push_back(std::unique_ptr<PreferenceGroup>(dynamic_cast<PreferenceGroup*>((*preferenceGroup)->getCopy())));
-		}
+		copy->preferenceGroup.reset(static_cast<PreferenceGroup*>(preferenceGroup->getCopy()));
 		return copy;
 	}
 
@@ -204,9 +196,9 @@ namespace LightBulb
 		return &customSubApps;
 	}
 
-	std::vector<std::unique_ptr<PreferenceGroup>>& AbstractTrainingPlan::getPreferenceGroups()
+	std::vector<std::unique_ptr<AbstractPreferenceElement>>& AbstractTrainingPlan::getPreferenceGroups()
 	{
-		return preferenceGroups;
+		return preferenceGroup->getPreferenceElements();
 	}
 
 	void AbstractTrainingPlan::setName(std::string newName)

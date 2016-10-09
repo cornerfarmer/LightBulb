@@ -22,7 +22,7 @@ namespace LightBulb
 	}
 
 
-	std::vector<std::unique_ptr<PreferenceGroup>>& PreferencesController::getPreferenceGroups()
+	std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferencesController::getPreferenceGroups()
 	{
 		return trainingPlan->getPreferenceGroups();
 	}

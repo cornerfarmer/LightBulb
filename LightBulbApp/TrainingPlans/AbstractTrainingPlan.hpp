@@ -55,7 +55,7 @@ namespace LightBulb
 		void runThread(bool initial);
 		bool threadShouldBeJoinedBeforeReuse;
 		std::vector<std::unique_ptr<AbstractCustomSubAppFactory>> customSubApps;
-		std::vector<std::unique_ptr<PreferenceGroup>> preferenceGroups;
+		std::unique_ptr<PreferenceGroup> preferenceGroup;
 	protected:
 		std::unique_ptr<StorageLogger> logger;
 		virtual void run(bool initial) = 0;
@@ -75,21 +75,12 @@ namespace LightBulb
 		template<class OptionsClass, class PreferenceGroupClass>
 		OptionsClass createOptions()
 		{
-			for (auto preferenceGroup = preferenceGroups.begin(); preferenceGroup != preferenceGroups.end(); preferenceGroup++)
-			{
-				if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup->get()))
-					return dynamic_cast<PreferenceGroupClass*>(preferenceGroup->get())->createOptions();
-			}
-			throw std::logic_error("The preference group could not be found.");
+			return preferenceGroup->createOptionsFromGroup<OptionsClass, PreferenceGroupClass>();
 		}
 		template<class OptionsClass, class PreferenceGroupClass>
 		OptionsClass createOptions(std::string groupName)
 		{
-			PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
-			if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup))
-				return dynamic_cast<PreferenceGroupClass*>(preferenceGroup)->createOptions();
-			
-			throw std::logic_error("The preference group could not be found.");
+			return preferenceGroup->createOptionsFromGroup<OptionsClass, PreferenceGroupClass>(groupName);
 		}
 	public:
 		AbstractTrainingPlan();
@@ -110,7 +101,7 @@ namespace LightBulb
 		StorageLogger* getLogger();
 		std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
 		std::chrono::duration<double> getRunTime();
-		std::vector<std::unique_ptr<PreferenceGroup>>& getPreferenceGroups();
+		std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceGroups();
 		void setName(std::string newName);
 		virtual int getSeed() = 0;
 	};
