@@ -17,21 +17,21 @@
 namespace LightBulb
 {
 	AbstractSupervisedLearningRulePreferenceGroup::AbstractSupervisedLearningRulePreferenceGroup(std::string name)
-		:PreferenceGroup(name)
+		:AbstractLearningRulePreferenceGroup(name)
 	{
 		AbstractSupervisedLearningRuleOptions options;
 		initialize(options);
 	}
 
 	AbstractSupervisedLearningRulePreferenceGroup::AbstractSupervisedLearningRulePreferenceGroup(AbstractSupervisedLearningRuleOptions& options, std::string name)
-		:PreferenceGroup(name)
+		:AbstractLearningRulePreferenceGroup(options, name)
 	{
 		initialize(options);
 	}
 
 	void AbstractSupervisedLearningRulePreferenceGroup::initialize(AbstractSupervisedLearningRuleOptions& options)
 	{
-		preferences.clear();
+		AbstractLearningRulePreferenceGroup::initialize(options);
 		addPreference(new DoublePreference(PREFERENCE_TOTAL_ERROR_GOAL, options.totalErrorGoal, 0.0001, 2));
 		addPreference(new DoublePreference(PREFERENCE_MIN_RANDOM, options.minRandomWeightValue, 0, 1));
 		addPreference(new DoublePreference(PREFERENCE_MAX_RANDOM, options.maxRandomWeightValue, 0, 1));
@@ -44,6 +44,7 @@ namespace LightBulb
 	
 	void AbstractSupervisedLearningRulePreferenceGroup::fillOptions(AbstractSupervisedLearningRuleOptions& options)
 	{
+		AbstractLearningRulePreferenceGroup::fillOptions(options);
 		options.totalErrorGoal = getDoublePreference(PREFERENCE_TOTAL_ERROR_GOAL);
 		options.minRandomWeightValue = getDoublePreference(PREFERENCE_MIN_RANDOM);
 		options.maxRandomWeightValue = getDoublePreference(PREFERENCE_MAX_RANDOM);
