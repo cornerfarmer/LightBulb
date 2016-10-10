@@ -9,24 +9,35 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
-	// This class contains all stuff needed to describe a NeuralNetworkIO
+	/**
+	 * \brief This class contains all stuff needed to describe the input and output of a neural network.
+	 * \tparam T The data type which should be used.
+	 * TODO: Refactor!
+	 */
 	template<typename T>
 	class NeuralNetworkIO : public std::vector<std::pair<bool, std::vector<std::pair<bool, T>>>>
 	{
 	private:
-		// Holds the dimension (amount of neurons the NeuralNetworkIO can describe)
+		/**
+		 * \brief Contains the dimension (amount of neurons the NeuralNetworkIO can describe)
+		 */
 		int dimension;
 	public:
 
+		/**
+		 * \brief Creates a new NeuralNetworkIO
+		 * \param d The dimension which should be equal to the output neurons of the corresponding network.
+		 */
 		NeuralNetworkIO(int d)
 			: std::vector<std::pair<bool, std::vector<std::pair<bool, T>>>>(1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(d)))
 		{
 			dimension = d;
 		}
 
-		// Unfolds the NeuralNetworkIO into a NeuralNetworkIO with a single time step
+		/**
+		 * \brief Unfolds the NeuralNetworkIO into a NeuralNetworkIO with a single time step
+		 * \return The unfolded NeuralNetworkIO
+		 */
 		NeuralNetworkIO<T>* unfold()
 		{
 			// Create a new neuralNetworkIO with one timestep
@@ -42,7 +53,10 @@ namespace LightBulb
 			return unfoldedNetworkIO;
 		}
 
-		// Returns the biggest timestep used in this IO
+		/**
+		 * \brief Returns the biggest timestep used in this IO
+		 * \return The maximal timestep.
+		 */
 		int getMaxTimeStep()
 		{
 			if (!this->empty())
@@ -51,7 +65,12 @@ namespace LightBulb
 				return 0;
 		}
 
-		// Returns the value of the neuron with the given index in the given timestep
+		/**
+		 * \brief Returns the value of the neuron with the given index in the given timestep
+		 * \param timestep The timestep.
+		 * \param index The neuron index.
+		 * \return The value.
+		 */
 		T& get(int timestep, int index)
 		{
 			// Make sure the value is valid
@@ -61,7 +80,12 @@ namespace LightBulb
 				throw new std::logic_error("There is no valid value in the given timestep with the given timestep.");
 		}
 
-		// Sets the value of the neuron with the given index in the given timestep
+		/**
+		 * \brief Sets the value of the neuron with the given index in the given timestep.
+		 * \param timestep The timestep.
+		 * \param index The index.
+		 * \param value The new value.
+		 */
 		void set(int timestep, int index, T value)
 		{
 			// Resize the vector if necessary
@@ -77,7 +101,11 @@ namespace LightBulb
 			(*this)[timestep].second[index].second = value;
 		}
 
-		// Sets all values at the given timestep
+		/**
+		 * \brief Sets all values at the given timestep.
+		 * \param timestep The timestep.
+		 * \param values A vector of values
+		 */
 		void set(int timestep, std::vector<std::pair<bool, T>> values)
 		{
 			// Resize the vector if necessary
@@ -90,19 +118,32 @@ namespace LightBulb
 			(*this)[timestep].second = values;
 		}
 
-		// Returns if the value of the neuron with the given index in the given timestep is valid
+		/**
+		 * \brief Returns if the value of the neuron with the given index in the given timestep is valid.
+		 * \param timestep The timestep.
+		 * \param index The neuron index.
+		 * \return True, if a value exists.
+		 */
 		bool exists(int timestep, int index)
 		{
 			return (this->size() > timestep && (*this)[timestep].second[index].first);
 		}
 
-		// Returns if the given timestep has at least one valid value
+		/**
+		 * \brief Returns if the given timestep has at least one valid value.
+		 * \param timestep The timestep.
+		 * \return True, if the timestep exists.
+		 */
 		bool existsTimestep(int timestep)
 		{
 			return (this->size() > timestep && (*this)[timestep].first);
 		}
 
-		// Converts the values of a timestep into a vector (invalid values get the value 0)
+		/**
+		 * \brief Converts the values of a timestep into a vector (invalid values get the value 0)
+		 * \param timestep The timestep.
+		 * \return The vector of values at this timestep.
+		 */
 		std::vector<T> getRealVectorInTimestep(int timestep)
 		{
 			std::vector<T> realVector(dimension);
@@ -114,6 +155,10 @@ namespace LightBulb
 			return realVector;
 		}
 
+		/**
+		 * \brief Returns the real values of al timesteps.
+		 * \return A vector of all timestep vectors.
+		 */
 		std::vector<std::vector<T>> getRealVector()
 		{
 			std::vector<std::vector<T>> realVector(this->size());
@@ -124,7 +169,10 @@ namespace LightBulb
 			return realVector;
 		}
 
-		// Returns the dimension of the io
+		/**
+		 * \brief Returns the dimension of this NeuralNetworkIO.
+		 * \return The dimension.
+		 */
 		int getDimension()
 		{
 			return dimension;
