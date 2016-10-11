@@ -171,6 +171,9 @@
     <ClCompile Include="TrainingPlans\Preferences\AbstractLearningRulePreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\ResilientLearningRatePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -360,6 +363,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\AbstractLearningRulePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\ResilientLearningRatePreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

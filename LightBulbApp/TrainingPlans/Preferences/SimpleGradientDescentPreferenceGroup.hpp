@@ -16,8 +16,10 @@ namespace LightBulb
 	class SimpleGradientDescentPreferenceGroup : public PreferenceGroup
 	{
 	protected:
+		void initialize(SimpleGradientDescentOptions& options);
 	public:
 		SimpleGradientDescentPreferenceGroup(std::string name = "Simple gradient descent");
+		SimpleGradientDescentPreferenceGroup(SimpleGradientDescentOptions& options, std::string name = "Simple gradient descent");
 
 		SimpleGradientDescentOptions create();
 

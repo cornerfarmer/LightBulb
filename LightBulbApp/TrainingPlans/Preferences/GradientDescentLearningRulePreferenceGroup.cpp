@@ -2,6 +2,7 @@
 #include "TrainingPlans/Preferences/GradientDescentLearningRulePreferenceGroup.hpp"
 #include "SimpleGradientDescentPreferenceGroup.hpp"
 #include "BackpropagationPreferenceGroup.hpp"
+#include "ResilientLearningRatePreferenceGroup.hpp"
 
 namespace LightBulb
 {
@@ -23,6 +24,7 @@ namespace LightBulb
 	{
 		AbstractSupervisedLearningRulePreferenceGroup::initialize(options);
 		addPreference(new SimpleGradientDescentPreferenceGroup());
+		addPreference(new ResilientLearningRatePreferenceGroup());
 		addPreference(new BackpropagationPreferenceGroup());
 	}
 	
