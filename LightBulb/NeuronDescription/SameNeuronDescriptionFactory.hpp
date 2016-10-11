@@ -13,15 +13,28 @@ namespace LightBulb
 {
 	// Forward declarations
 
-	// This is the standard neuron factory, where every neuron has the same functions
+	/**
+	* \brief Describes a neuron description factory which provides the same neuron descriptions for all neurons.
+	*/
 	class SameNeuronDescriptionFactory : public AbstractNeuronDescriptionFactory
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory);
 	private:
+		/**
+		 * \brief Contains the neuron description for all neurons.
+		 */
 		std::unique_ptr<NeuronDescription> neuronDescription;
 	public:
+		/**
+		 * \brief Creates a new SameNeuronDescriptionFactory.
+		 * \param neuronDescription_ The neuron description for all neurons.
+		 */
 		SameNeuronDescriptionFactory(NeuronDescription* neuronDescription_);
+		/**
+		 * \brief Copy constructor.
+		 * \param obj A SameNeuronDescriptionFactory which should be copied.
+		 */
 		SameNeuronDescriptionFactory(const SameNeuronDescriptionFactory &obj);
 		// Inherited:
 		NeuronDescription* createInnerNeuronDescription() override;

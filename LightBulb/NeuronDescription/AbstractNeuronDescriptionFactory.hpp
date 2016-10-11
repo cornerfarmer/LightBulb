@@ -9,21 +9,38 @@ namespace LightBulb
 	class NeuronDescription;
 	class AbstractActivationFunction;
 
-	// This is a basic schema for all neuron factories
+	/**
+	 * \brief Describes a factory which provides neurons descriptions depending on the layer.
+	 */
 	class AbstractNeuronDescriptionFactory
 	{
 	private:
 	public:
 		virtual ~AbstractNeuronDescriptionFactory() {}
-		// Create a new inner neuron
+		/**
+		 * \brief Creates a new neuron description for inner/hidden neurons.
+		 * \return The new neuron description.
+		 */
 		virtual NeuronDescription* createInnerNeuronDescription() = 0;
-		// Create a new output neuron
+		/**
+		* \brief Creates a new neuron description for output neurons.
+		* \return The new neuron description.
+		*/
 		virtual NeuronDescription* createOutputNeuronDescription() = 0;
-
+		/**
+		* \brief Returns the activation function for output neurons.
+		* \return The activation function.
+		*/
 		virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
-
+		/**
+		* \brief Returns the activation function for inner/hidden neurons.
+		* \return The activation function.
+		*/
 		virtual AbstractActivationFunction* getInnerActivationFunction() = 0;
-		// Get a copy of the factory
+		/**
+		* \brief Clones the neuron description factory.
+		* \return The clone.
+		*/
 		virtual AbstractNeuronDescriptionFactory* getCopy() = 0;
 	};
 }
