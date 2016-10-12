@@ -14,6 +14,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an AbstractSimpleEvolutionObject
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param object The AbstractSimpleEvolutionObject to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, AbstractSimpleEvolutionObject const& object)
 	{
@@ -21,6 +27,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("neuralNetwork", object.neuralNetwork));
 	}
 
+	/**
+	* \brief Loads an AbstractSimpleEvolutionObject
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param object The AbstractSimpleEvolutionObject to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractSimpleEvolutionObject& object)
 	{

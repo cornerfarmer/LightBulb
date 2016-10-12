@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a NeuralNetwork.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param neuralNetwork The NeuralNetwork to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
 	{
@@ -25,6 +31,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::NeuralNetwork>
 	{
+		/**
+		* \brief Constructs a NeuralNetwork.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The NeuralNetwork construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::NeuralNetwork>& construct)
 		{

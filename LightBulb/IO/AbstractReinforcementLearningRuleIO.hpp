@@ -10,6 +10,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes an AbstractReinforcementLearningRule
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param learningRule The AbstractReinforcementLearningRule to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule)
 	{

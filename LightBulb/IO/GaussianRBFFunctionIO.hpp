@@ -13,6 +13,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a GaussianRBFFunction.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param gaussianRbfFunction The GaussianRBFFunction to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, GaussianRBFFunction& gaussianRbfFunction)
 	{
@@ -23,6 +29,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::GaussianRBFFunction>
 	{
+		/**
+		* \brief Constructs a GaussianRBFFunction.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The GaussianRBFFunction construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::GaussianRBFFunction>& construct)
 		{

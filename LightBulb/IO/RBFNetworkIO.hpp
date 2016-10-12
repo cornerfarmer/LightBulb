@@ -14,6 +14,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves a RBFNetwork.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param rbfNetwork The RBFInterpolationLearningRule to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, RBFNetwork const & rbfNetwork)
 	{
@@ -21,6 +27,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("neuronWidths", rbfNetwork.neuronWidths));
 	}
 
+	/**
+	* \brief Loads a RBFNetwork.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param rbfNetwork The RBFInterpolationLearningRule to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, RBFNetwork & rbfNetwork)
 	{

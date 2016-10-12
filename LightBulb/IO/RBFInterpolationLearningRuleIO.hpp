@@ -14,6 +14,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a RBFInterpolationLearningRule.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param learningRule The RBFInterpolationLearningRule to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, RBFInterpolationLearningRule& learningRule)
 	{
@@ -25,6 +31,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::RBFInterpolationLearningRule>
 	{
+		/**
+		* \brief Constructs a RBFInterpolationLearningRule.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The RBFInterpolationLearningRule construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::RBFInterpolationLearningRule>& construct)
 		{

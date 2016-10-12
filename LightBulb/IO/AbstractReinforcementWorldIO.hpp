@@ -11,6 +11,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes an AbstractReinforcementWorld
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param world The AbstractReinforcementWorld to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, AbstractReinforcementWorld& world)
 	{

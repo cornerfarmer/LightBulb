@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a FermiFunction.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param fermiFunction The FermiFunction to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, FermiFunction& fermiFunction)
 	{
@@ -23,6 +29,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::FermiFunction>
 	{
+		/**
+		* \brief Constructs a FermiFunction.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The FermiFunction construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::FermiFunction>& construct)
 		{

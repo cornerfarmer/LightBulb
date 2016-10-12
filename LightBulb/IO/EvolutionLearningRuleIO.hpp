@@ -14,6 +14,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes an EvolutionLearningRule.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param learningRule The EvolutionLearningRule to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, EvolutionLearningRule& learningRule)
 	{
@@ -25,6 +31,12 @@ namespace cereal
 {
 	CONSTRUCT_EXISTING(LightBulb::EvolutionLearningRule, LightBulb::AbstractLearningRule)
 	{
+		/**
+		* \brief Constructs an existing EvolutionLearningRule.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param learningRule The existing EvolutionLearningRule to construct.
+		*/
 		template <class Archive>
 		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule)
 		{

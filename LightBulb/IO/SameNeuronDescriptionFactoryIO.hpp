@@ -13,6 +13,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a SameNeuronDescriptionFactory.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param descriptionFactory The SameNeuronDescriptionFactory to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory)
 	{
@@ -24,6 +30,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::SameNeuronDescriptionFactory>
 	{
+		/**
+		* \brief Constructs a SameNeuronDescriptionFactory.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The SameNeuronDescriptionFactory construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::SameNeuronDescriptionFactory>& construct)
 		{

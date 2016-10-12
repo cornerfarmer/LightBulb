@@ -14,6 +14,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a BipartiteEvolutionLearningRule.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param learningRule The BipartiteEvolutionLearningRule to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule)
 	{
@@ -33,6 +39,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::BipartiteEvolutionLearningRule>
 	{
+		/**
+		* \brief Constructs a BipartiteEvolutionLearningRule.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The BipartiteEvolutionLearningRule construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::BipartiteEvolutionLearningRule>& construct)
 		{

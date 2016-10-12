@@ -13,6 +13,12 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief Saves an AbstractCoevolutionWorld
+	 * \tparam Archive The archive type.
+	 * \param archive The archive which should be used.
+	 * \param world The AbstractCoevolutionWorld to save.
+	 */
 	template <class Archive>
 	void save(Archive& archive, AbstractCoevolutionWorld const& world)
 	{
@@ -32,6 +38,12 @@ namespace LightBulb
 	}
 
 
+	/**
+	* \brief Loads an AbstractCoevolutionWorld
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param world The AbstractCoevolutionWorld to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractCoevolutionWorld& world)
 	{

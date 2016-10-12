@@ -11,6 +11,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes an AbstractHallOfFameAlgorithm
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param hallOfFameAlgorithm The AbstractHallOfFameAlgorithm to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm)
 	{

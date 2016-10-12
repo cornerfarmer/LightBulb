@@ -13,6 +13,13 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves a StandardRandomGenerator.
+	* \tparam Archive The archive type.
+	* \tparam T The random engine.
+	* \param archive The archive which should be used.
+	* \param standardRandomGenerator The SimpleGradientDescent to save.
+	*/
 	template <class Archive, class T>
 	void save(Archive& archive, StandardRandomGenerator<T> const& standardRandomGenerator)
 	{
@@ -26,6 +33,13 @@ namespace LightBulb
 		archive(cereal::make_nvp("seed", standardRandomGenerator.seed));
 	}
 
+	/**
+	* \brief Loads a StandardRandomGenerator.
+	* \tparam Archive The archive type.
+	* \tparam T The random engine.
+	* \param archive The archive which should be used.
+	* \param standardRandomGenerator The SimpleGradientDescent to load.
+	*/
 	template <class Archive, class T>
 	void load(Archive& archive, StandardRandomGenerator<T>& standardRandomGenerator)
 	{

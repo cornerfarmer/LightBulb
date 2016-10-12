@@ -57,9 +57,9 @@ namespace LightBulb
 	class FeedForwardNetworkTopology : public AbstractNetworkTopology
 	{
 		template <class Archive>
-		friend void load(Archive& archive, FeedForwardNetworkTopology& FeedForwardNetworkTopology);
+		friend void load(Archive& archive, FeedForwardNetworkTopology& feedForwardNetworkTopology);
 		template <class Archive>
-		friend void save(Archive& archive, FeedForwardNetworkTopology const & FeedForwardNetworkTopology);
+		friend void save(Archive& archive, FeedForwardNetworkTopology const & feedForwardNetworkTopology);
 	protected:
 		/**
 		 * \brief The options of the network.

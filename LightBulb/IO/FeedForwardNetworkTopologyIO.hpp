@@ -15,7 +15,12 @@
 
 namespace LightBulb
 {
-
+	/**
+	* \brief Saves FeedForwardNetworkTopologyOptions.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param options The FeedForwardNetworkTopologyOptions to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, FeedForwardNetworkTopologyOptions const & options)
 	{
@@ -26,7 +31,13 @@ namespace LightBulb
 		std::unique_ptr<AbstractNeuronDescriptionFactory> descriptionFactory(options.descriptionFactory->getCopy());
 		archive(cereal::make_nvp("descriptionFactory", descriptionFactory));
 	}
-
+	
+	/**
+	* \brief Loads FeedForwardNetworkTopologyOptions.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param options The FeedForwardNetworkTopologyOptions to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, FeedForwardNetworkTopologyOptions& options)
 	{
@@ -38,7 +49,12 @@ namespace LightBulb
 		options.descriptionFactory = descriptionFactory.release();
 	}
 
-
+	/**
+	* \brief Saves a FeedForwardNetworkTopology.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param feedForwardNetworkTopology The FeedForwardNetworkTopologyOptions to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, FeedForwardNetworkTopology const & feedForwardNetworkTopology)
 	{
@@ -48,7 +64,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("weights", feedForwardNetworkTopology.weights));
 	}
 
-
+	/**
+	* \brief Loads a FeedForwardNetworkTopology.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param feedForwardNetworkTopology The FeedForwardNetworkTopologyOptions to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, FeedForwardNetworkTopology & feedForwardNetworkTopology)
 	{

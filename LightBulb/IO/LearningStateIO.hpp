@@ -14,6 +14,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a LearningState.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param learningState The LearningState to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, LearningState& learningState)
 	{
@@ -28,6 +34,12 @@ namespace cereal
 {
 	template <> struct LoadAndConstruct<LightBulb::LearningState>
 	{
+		/**
+		* \brief Constructs a LearningState.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param construct The LearningState construct object.
+		*/
 		template <class Archive>
 		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::LearningState>& construct)
 		{

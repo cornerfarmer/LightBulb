@@ -15,6 +15,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an AbstractSimpleEvolutionWorld
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param world The AbstractSimpleEvolutionWorld to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, AbstractSimpleEvolutionWorld const& world)
 	{
@@ -28,6 +34,12 @@ namespace LightBulb
 			object->release();
 	}
 
+	/**
+	* \brief Loads an AbstractSimpleEvolutionWorld
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param world The AbstractSimpleEvolutionWorld to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractSimpleEvolutionWorld& world)
 	{

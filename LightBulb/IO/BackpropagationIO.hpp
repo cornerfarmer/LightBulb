@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes Backpropagation.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param backpropagation The Backpropagation to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, Backpropagation& backpropagation)
 	{
@@ -24,6 +30,12 @@ namespace cereal
 {
 	CONSTRUCT_EXISTING(LightBulb::Backpropagation, LightBulb::AbstractGradientCalculation)
 	{
+		/**
+		* \brief Constructs existing Backpropagation.
+		* \tparam Archive The archive type.
+		* \param ar The archive which should be used.
+		* \param backpropagation The existing Backpropagation to construct.
+		*/
 		template <class Archive>
 		static void construct(Archive& ar, LightBulb::Backpropagation& backpropagation)
 		{
