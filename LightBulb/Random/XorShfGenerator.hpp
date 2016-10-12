@@ -5,6 +5,9 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief TODO: Refactor
+	 */
 	class XorShfGenerator
 	{
 	private:

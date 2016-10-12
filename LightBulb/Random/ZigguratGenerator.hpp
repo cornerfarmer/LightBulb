@@ -7,6 +7,9 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief TODO: Refactor
+	 */
 	class ZigguratGenerator
 	{
 	private:
