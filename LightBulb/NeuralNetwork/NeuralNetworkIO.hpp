@@ -57,7 +57,7 @@ namespace LightBulb
 		 * \brief Returns the biggest timestep used in this IO
 		 * \return The maximal timestep.
 		 */
-		int getMaxTimeStep()
+		int getMaxTimeStep() const
 		{
 			if (!this->empty())
 				return this->size() - 1;
@@ -71,7 +71,7 @@ namespace LightBulb
 		 * \param index The neuron index.
 		 * \return The value.
 		 */
-		T& get(int timestep, int index)
+		const T& get(int timestep, int index) const
 		{
 			// Make sure the value is valid
 			if ((*this)[timestep].first && (*this)[timestep].second[index].first)
@@ -124,7 +124,7 @@ namespace LightBulb
 		 * \param index The neuron index.
 		 * \return True, if a value exists.
 		 */
-		bool exists(int timestep, int index)
+		bool exists(int timestep, int index) const
 		{
 			return (this->size() > timestep && (*this)[timestep].second[index].first);
 		}
@@ -134,7 +134,7 @@ namespace LightBulb
 		 * \param timestep The timestep.
 		 * \return True, if the timestep exists.
 		 */
-		bool existsTimestep(int timestep)
+		bool existsTimestep(int timestep) const
 		{
 			return (this->size() > timestep && (*this)[timestep].first);
 		}
@@ -144,7 +144,7 @@ namespace LightBulb
 		 * \param timestep The timestep.
 		 * \return The vector of values at this timestep.
 		 */
-		std::vector<T> getRealVectorInTimestep(int timestep)
+		std::vector<T> getRealVectorInTimestep(int timestep) const
 		{
 			std::vector<T> realVector(dimension);
 			auto pair = (*this)[timestep].second.begin();
@@ -159,7 +159,7 @@ namespace LightBulb
 		 * \brief Returns the real values of al timesteps.
 		 * \return A vector of all timestep vectors.
 		 */
-		std::vector<std::vector<T>> getRealVector()
+		std::vector<std::vector<T>> getRealVector() const
 		{
 			std::vector<std::vector<T>> realVector(this->size());
 			for (int t = 0; t < realVector.size(); t++)
@@ -173,7 +173,7 @@ namespace LightBulb
 		 * \brief Returns the dimension of this NeuralNetworkIO.
 		 * \return The dimension.
 		 */
-		int getDimension()
+		int getDimension() const
 		{
 			return dimension;
 		}

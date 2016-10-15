@@ -9,17 +9,17 @@ namespace LightBulb
 		activationFunction.reset(activationFunction_);
 	}
 
-	NeuronDescription* NeuronDescription::getCopy()
+	NeuronDescription* NeuronDescription::getCopy() const
 	{
 		return new NeuronDescription(inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy());
 	}
 
-	AbstractInputFunction* NeuronDescription::getInputFunction()
+	const AbstractInputFunction* NeuronDescription::getInputFunction() const
 	{
 		return inputFunction.get();
 	}
 
-	AbstractActivationFunction* NeuronDescription::getActivationFunction()
+	const AbstractActivationFunction* NeuronDescription::getActivationFunction() const
 	{
 		return activationFunction.get();
 	}

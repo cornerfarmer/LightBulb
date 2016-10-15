@@ -58,31 +58,31 @@ namespace LightBulb
 		 * \param message The message text.
 		 * \note Is only called for messages which have the same or a higher priority as the current log level.
 		 */
-		virtual void outputMessage(std::string message) {};
+		virtual void outputMessage(const std::string& message) {};
 	public:
 		virtual ~AbstractLogger() {};
 		/**
 		 * \brief Creates the logger.
 		 * \param currentLogLevel_ The log level from the start.
 		 */
-		AbstractLogger(LogLevel currentLogLevel_);
+		AbstractLogger(const LogLevel& currentLogLevel_);
 		/**
 		 * \brief Log a new message.
 		 * \param message The text of the message.
 		 * \param level The log level of the message.
 		 * \note Only logs messages which have the same or a higher priority as the current log level.
 		 */
-		virtual void log(std::string message, LogLevel level);
+		virtual void log(const std::string& message, const LogLevel& level);
 		/**
 		 * \brief Sets a new log level.
 		 * \param level The new log level.
 		 */
-		void setLogLevel(LogLevel level);
+		void setLogLevel(const LogLevel& level);
 		/**
 		 * \brief Returns the current log level.
 		 * \return The current log level.
 		 */
-		LogLevel getLogLevel();
+		const LogLevel& getLogLevel() const;
 	};
 }
 

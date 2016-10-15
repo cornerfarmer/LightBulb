@@ -25,18 +25,18 @@ namespace LightBulb
 		 * \brief Activates all Neurons in the given topology in a special order
 		 * \param networkTopology The network to activate
 		 */
-		virtual void executeActivation(AbstractNetworkTopology &networkTopology) = 0;
+		virtual void executeActivation(AbstractNetworkTopology &networkTopology) const = 0;
 		/**
 		 * \brief Returns a copy of this activation order
 		 * \return The copy
 		 */
-		virtual AbstractActivationOrder* getCopy() = 0;
+		virtual AbstractActivationOrder* getCopy() const = 0;
 		/**
 		 * \brief Returns a map which holds for every edge, if its two neurons are refreshed in the same timestep (In a feed forward with topological acitvation order for example are all edges in the same timestep) TODO: Refactor!
 		 * \param networkTopology
 		 * \return
 		 */
-		virtual std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) = 0;
+		virtual std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const = 0;
 	};
 
 }

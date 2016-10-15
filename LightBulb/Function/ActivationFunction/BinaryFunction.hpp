@@ -27,12 +27,12 @@ namespace LightBulb
 	public:
 		BinaryFunction(double minValue_ = 0, double maxValue_ = 1);
 		// Inherited:
-		double execute(double input) override;
-		double executeDerivation(double input) override;
-		AbstractActivationFunction* getActivationFunctionCopy() override;
-		double getMaximum() override;
-		double getMinimum() override;
-		bool hasAMaxAndMinimum() override;
+		double execute(double input) const override;
+		double executeDerivation(double input) const override;
+		AbstractActivationFunction* getActivationFunctionCopy() const override;
+		double getMaximum() const override;
+		double getMinimum() const override;
+		bool hasAMaxAndMinimum() const override;
 	};
 }
 

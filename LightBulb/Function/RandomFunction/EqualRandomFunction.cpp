@@ -6,7 +6,7 @@
 
 namespace LightBulb
 {
-	int EqualRandomFunction::execute(int elementCount)
+	int EqualRandomFunction::execute(int elementCount) const
 	{
 		return randomGenerator->randInt(0, elementCount - 1);
 	}

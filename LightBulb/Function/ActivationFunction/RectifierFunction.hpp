@@ -28,13 +28,13 @@ namespace LightBulb
 		 */
 		RectifierFunction(double leakyFac_ = 0);
 		// Inherited
-		double execute(double input) override;
-		double executeDerivation(double input) override;
-		AbstractActivationFunction* getActivationFunctionCopy() override;
-		double getMaximum() override;
-		double getMinimum() override;
-		bool hasAMaxAndMinimum() override;
-		void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs) override;
+		double execute(double input) const override;
+		double executeDerivation(double input) const override;
+		AbstractActivationFunction* getActivationFunctionCopy() const override;
+		double getMaximum() const override;
+		double getMinimum() const override;
+		bool hasAMaxAndMinimum() const override;
+		void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const std::vector<Eigen::VectorXd>& netInputs) const override;
 	};
 }
 

@@ -7,7 +7,7 @@
 
 namespace LightBulb
 {
-	void SynchronousOrder::executeActivation(AbstractNetworkTopology &networkTopology)
+	void SynchronousOrder::executeActivation(AbstractNetworkTopology &networkTopology) const
 	{
 		// Go through all layers
 		for (auto layer = networkTopology.getNeurons()->begin(); layer != networkTopology.getNeurons()->end(); layer++)
@@ -26,12 +26,12 @@ namespace LightBulb
 		}
 	}
 
-	AbstractActivationOrder* SynchronousOrder::getCopy()
+	AbstractActivationOrder* SynchronousOrder::getCopy() const
 	{
 		return new SynchronousOrder(*this);
 	}
 
-	std::unique_ptr<std::map<Edge*, bool>> SynchronousOrder::getSameTimestepEdges(AbstractNetworkTopology &networkTopology)
+	std::unique_ptr<std::map<Edge*, bool>> SynchronousOrder::getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const
 	{
 		std::unique_ptr<std::map<Edge*, bool>> sameTimestepEdges(new std::map<Edge*, bool>());
 

@@ -17,7 +17,7 @@ namespace LightBulb
 		teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
 	}
 
-	NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(AbstractActivationFunction* activationFunction)
+	const NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction* activationFunction) const
 	{
 		// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
 		if (!activationFunction->hasAMaxAndMinimum())
@@ -48,17 +48,17 @@ namespace LightBulb
 		return teachingInputLinear.get();
 	}
 
-	NeuralNetworkIO<bool>* TeachingLessonBooleanInput::getBooleanTeachingInput()
+	NeuralNetworkIO<bool>* TeachingLessonBooleanInput::getBooleanTeachingInput() const
 	{
 		return teachingInput.get();
 	}
 
-	std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingPattern()
+	const std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingPattern() const
 	{
 		return &teachingPattern;
 	}
 
-	std::unique_ptr<ErrorMap_t> TeachingLessonBooleanInput::getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork)
+	std::unique_ptr<ErrorMap_t> TeachingLessonBooleanInput::getErrormapFromOutputVector(const std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork)
 	{
 		if (calcStrictError)
 			return AbstractTeachingLesson::getErrormapFromOutputVector(outputVector, neuralNetwork);
@@ -109,7 +109,7 @@ namespace LightBulb
 		}
 	}
 
-	AbstractTeachingLesson* TeachingLessonBooleanInput::unfold()
+	AbstractTeachingLesson* TeachingLessonBooleanInput::unfold() const
 	{
 		// Create a new teaching input
 		NeuralNetworkIO<bool>* unfoldedTeachingInput = new NeuralNetworkIO<bool>(teachingInput->getDimension());
@@ -119,7 +119,7 @@ namespace LightBulb
 		return new TeachingLessonBooleanInput(unfoldTeachingPattern(), unfoldedTeachingInput);
 	}
 
-	std::vector<std::vector<double>> TeachingLessonBooleanInput::unfoldTeachingPattern()
+	std::vector<std::vector<double>> TeachingLessonBooleanInput::unfoldTeachingPattern() const
 	{
 		std::vector<std::vector<double>> unfoldededTeachingPattern(1);
 		for (int t = 0; t < teachingPattern.size(); t++)
@@ -132,7 +132,7 @@ namespace LightBulb
 		return unfoldededTeachingPattern;
 	}
 
-	int TeachingLessonBooleanInput::getMaxTimeStep()
+	int TeachingLessonBooleanInput::getMaxTimeStep() const
 	{
 		return teachingInput->getMaxTimeStep();
 	}

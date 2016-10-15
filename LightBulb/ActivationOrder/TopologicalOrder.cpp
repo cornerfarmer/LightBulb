@@ -7,7 +7,7 @@
 
 namespace LightBulb
 {
-	void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology)
+	void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology) const
 	{
 		// Cast the network as an FeedForwardNetworkTopology
 		FeedForwardNetworkTopology* feedForwardNetworkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&networkTopology);
@@ -22,15 +22,15 @@ namespace LightBulb
 		}
 	}
 
-	AbstractActivationOrder* TopologicalOrder::getCopy()
+	AbstractActivationOrder* TopologicalOrder::getCopy() const
 	{
 		return new TopologicalOrder(*this);
 	}
 
-	std::unique_ptr<std::map<Edge*, bool>> TopologicalOrder::getSameTimestepEdges(AbstractNetworkTopology &networkTopology)
+	std::unique_ptr<std::map<Edge*, bool>> TopologicalOrder::getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const
 	{
 		// Cast the network as an FeedForwardNetworkTopology
-		FeedForwardNetworkTopology* feedForwardNetworkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&networkTopology);
+		const FeedForwardNetworkTopology* feedForwardNetworkTopology = dynamic_cast<const FeedForwardNetworkTopology*>(&networkTopology);
 
 		// Check if the given networkTopology was a FeedForwardNetworkTopology, else throw a exception
 		if (!feedForwardNetworkTopology)

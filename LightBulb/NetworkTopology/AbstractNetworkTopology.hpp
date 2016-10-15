@@ -30,27 +30,27 @@ namespace LightBulb
 		 * \brief Returns the amount of edges.
 		 * \return The edge count.
 		 */
-		virtual int getEdgeCount() = 0;
+		virtual int getEdgeCount() const = 0;
 		/**
 		 * \brief Returns the input size of the network.
 		 * \return The input size.
 		 */
-		virtual int getInputSize() = 0;
+		virtual int getInputSize() const = 0;
 		/**
 		 * \brief Returns the output size of the network.
 		 * \return The output size.
 		 */
-		virtual int getOutputSize() = 0;
+		virtual int getOutputSize() const = 0;
 		/**
 		 * \brief Sets the input of the network.
 		 * \param inputVector The input vector. Should be as big as the input size of the network.
 		 */
-		virtual void setInput(std::vector<double> &inputVector) = 0;
+		virtual void setInput(const std::vector<double> &inputVector) = 0;
 		/**
 		 * \brief Returns the current output of the network.
 		 * \param outputVector A vector which contains the current output.
 		 */
-		virtual void getOutput(std::vector<double> &outputVector) = 0;
+		virtual void getOutput(std::vector<double> &outputVector) const = 0;
 		/**
 		 * \brief Sets the activation of all neurons back to zero.
 		 */
@@ -59,19 +59,19 @@ namespace LightBulb
 		 * \brief Copies the whole structure of the given network.
 		 * \param otherNetwork The network which should be copied.
 		 */
-		virtual void copyWeightsFrom(AbstractNetworkTopology& otherNetwork) = 0;
+		virtual void copyWeightsFrom(const AbstractNetworkTopology& otherNetwork) = 0;
 		/**
 		 * \brief Returns the whole amount of neurons in the network.
 		 * \return The neuron count.
 		 */
-		virtual int getNeuronCount() = 0;
+		virtual int getNeuronCount() const = 0;
 		/**
 		 * \brief Calculates the euclidean distance between the two networks.
 		 * \details \f$ d=\sqrt{\sum{(w_{1,i,j} - w_{2,i,j})^2}} \f$
 		 * \param otherNetwork The other network.
 		 * \return The euclidean distance.
 		 */
-		virtual double calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork) = 0;
+		virtual double calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const = 0;
 		/**
 		 * \brief Randomizes all weights.
 		 * \param randomGenerator The random generator which should be used for randomizing.
@@ -83,12 +83,12 @@ namespace LightBulb
 		 * \brief Returns the count of layers in the network.
 		 * \return The layer count.
 		 */
-		virtual int getLayerCount() = 0;
+		virtual int getLayerCount() const = 0;
 		/**
 		 * \brief Returns the distribution of neurons over all layers.
 		 * \return A vector which stores the count of neurons for every layer.
 		 */
-		virtual std::vector<unsigned int> getNeuronCountsPerLayer() = 0;
+		virtual const std::vector<unsigned int>& getNeuronCountsPerLayer() const = 0;
 		/**
 		 * \brief Randomizes all weights and sets the boundaries depending on the layer sizes.
 		 * \details \$f max = 1 / \sqrt{layersize} \n min = -max \$f
@@ -110,60 +110,61 @@ namespace LightBulb
 		 * \return A pointer to a vector of all weight matrices per layer.
 		 */
 		virtual std::vector<Eigen::MatrixXd>* getAllWeights() = 0;
+		virtual const std::vector<Eigen::MatrixXd>* getAllWeights() const;
 		/**
 		 * \brief Returns a pointer to all activations.
 		 * \return A pointer to a vector of all activation vectors per layer.
 		 */
-		virtual std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() = 0;
+		virtual const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() const = 0;
 		/**
 		 * \brief Returns a pointer to all net inputs.
 		 * \return  A pointer to a vector of all net input vectors per layer.
 		 */
-		virtual std::vector<Eigen::VectorXd>* getAllNetInputs() = 0;
+		virtual const std::vector<Eigen::VectorXd>* getAllNetInputs() const = 0;
 		/**
 		 * \brief Returns all afferent weights for a layer.
 		 * \param layerIndex The index of the layer.
 		 * \return A copy of the afferent weights of the layer.
 		 */
-		virtual Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) = 0;
+		virtual Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) const = 0;
 		/**
 		 * \brief Sets the afferent weights of a layer.
 		 * \param layerIndex The index of the layer.
 		 * \param newWeights The new afferent weights.
 		 */
-		virtual void setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights) = 0;
+		virtual void setAfferentWeightsPerLayer(int layerIndex, const Eigen::MatrixXd& newWeights) = 0;
 		/**
 		 * \brief Returns all efferent weights for a layer.
 		 * \param layerIndex The index of the layer.
 		 * \return A copy of the efferent weights of the layer.
 		 */
-		virtual Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) = 0;
+		virtual Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) const = 0;
 		/**
 		 * \brief Returns all net inputs for a layer.
 		 * \param layerIndex The index of the layer.
 		 * \return A copy of the net inputs of the layer.
 		 */
-		virtual Eigen::VectorXd getNetInputsPerLayer(int layerIndex) = 0;
+		virtual Eigen::VectorXd getNetInputsPerLayer(int layerIndex) const = 0;
 		/**
 		* \brief Returns all net inputs for a layer.
 		* \param layerIndex The index of the layer.
 		* \return A copy of the net inputs of the layer.
 		*/
-		virtual Eigen::VectorXd getActivationsPerLayer(int layerIndex) = 0;
+		virtual Eigen::VectorXd getActivationsPerLayer(int layerIndex) const = 0;
 		/**
 		 * \brief Returns all efferent weights for a neuron.
 		 * \param layerIndex The layer index of the neuron.
 		 * \param neuronIndex The neuron index inside the layer.
 		 * \return A copy of the efferent weights of the neuron.
 		 */
-		virtual Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) = 0;
+		virtual Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const = 0;
 		/**
 		 * \brief Returns the bias weight of a neuron.
 		 * \param layerNr The layer index of the neuron.
 		 * \param neuronNr The neuron index inside the layer.
 		 * \return The bias weight.
 		 */
-		virtual double getBiasWeightOfNeuron(int layerNr, int neuronNr) = 0;
+		virtual double getBiasWeightOfNeuron(int layerNr, int neuronNr) const = 0;
 		/**
 		 * \brief Returns all afferent weights for a neuron.
 		 * \param layerNr The layer index of the neuron.
@@ -171,7 +172,7 @@ namespace LightBulb
 		 * \param withoutBiasWeight If true the bias weight is skipped.
 		 * \return A copy of the afferent weights of the neuron.
 		 */
-		virtual std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false) = 0;
+		virtual std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false) const = 0;
 
 		/**
 		 * \brief Returns one efferent weight of a neuron.
@@ -180,7 +181,7 @@ namespace LightBulb
 		 * \param edgeIndex The edge index of the neuron.
 		 * \return The efferent weight.
 		 */
-		virtual double getWeight(int layerIndex, int neuronIndex, int edgeIndex) = 0;
+		virtual double getWeight(int layerIndex, int neuronIndex, int edgeIndex) const = 0;
 		/**
 		 * \brief Sets one efferent weight of a neuron.
 		 * \param layerIndex The layer index of the neuron.
@@ -195,19 +196,19 @@ namespace LightBulb
 		 * \param neuronIndex The neuron index inside the layer.
 		 * \return The net input of the neuron.
 		 */
-		virtual double getNetInput(int layerIndex, int neuronIndex) = 0;
+		virtual double getNetInput(int layerIndex, int neuronIndex) const = 0;
 		/**
 		 * \brief Returns the current activation of a neuron
 		 * \param layerIndex The layer index of the neuron. 
 		 * \param neuronIndex The neuron index inside the layer.
 		 * \return The net input of the neuron.
 		 */
-		virtual double getActivation(int layerIndex, int neuronIndex) = 0;
+		virtual double getActivation(int layerIndex, int neuronIndex) const = 0;
 		/**
 		 * \brief Returns if the network uses a bias neuron.
 		 * \return True if the network has a bias neuron.
 		 */
-		virtual bool usesBiasNeuron() = 0;
+		virtual bool usesBiasNeuron() const = 0;
 		/**
 		 * \brief Remove a neuron.
 		 * \param layerIndex The layer index of the neuron. 
@@ -238,17 +239,17 @@ namespace LightBulb
 		 * \brief Clones the whole network.
 		 * \return The new network which is clone of this one.
 		 */
-		virtual AbstractNetworkTopology* clone() = 0;
+		virtual AbstractNetworkTopology* clone() const = 0;
 		/**
 		 * \brief Returns the neuron description of inner/hidden neurons.
 		 * \return The neuron description
 		 */
-		virtual NeuronDescription* getInnerNeuronDescription() = 0;
+		virtual const NeuronDescription* getInnerNeuronDescription() const = 0;
 		/**
 		* \brief Returns the neuron description of output neurons.
 		* \return The neuron description
 		*/
-		virtual NeuronDescription* getOutputNeuronDescription() = 0;
+		virtual const NeuronDescription* getOutputNeuronDescription() const = 0;
 	};
 
 }

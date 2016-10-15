@@ -17,13 +17,13 @@ namespace LightBulb
 	{
 	protected:
 		// Inherited:
-		void outputMessage(std::string message) override;
+		void outputMessage(const std::string& message) override;
 	public:
 		/**
 		 * \brief Creates a new ConsoleLogger
 		 * \param logLevel The log level to start with.
 		 */
-		ConsoleLogger(LogLevel logLevel);
+		ConsoleLogger(const LogLevel& logLevel);
 	};
 }
 

@@ -32,12 +32,12 @@ namespace LightBulb
 		 * \param time The timestep.
 		 * \return The value at the given timestep.
 		 */
-		virtual double execute(double time) = 0;
+		virtual double execute(double time) const = 0;
 		/**
 		 * \brief Create a copy of the object.
 		 * \return The copy
 		 */
-		virtual AbstractShrinkFunction* getShrinkFunctionCopy() = 0;
+		virtual AbstractShrinkFunction* getShrinkFunctionCopy() const = 0;
 	};
 }
 

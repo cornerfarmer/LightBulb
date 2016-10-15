@@ -128,37 +128,37 @@ namespace LightBulb
 	}
 
 
-	double FeedForwardNetworkTopology::getNetInput(int layerIndex, int neuronIndex)
+	double FeedForwardNetworkTopology::getNetInput(int layerIndex, int neuronIndex) const
 	{
 		return netInputs[layerIndex](neuronIndex);
 	}
 
-	Eigen::VectorXd FeedForwardNetworkTopology::getNetInputsPerLayer(int layerIndex)
+	Eigen::VectorXd FeedForwardNetworkTopology::getNetInputsPerLayer(int layerIndex) const
 	{
 		return netInputs[layerIndex];
 	}
 
-	Eigen::VectorXd FeedForwardNetworkTopology::getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex)
+	Eigen::VectorXd FeedForwardNetworkTopology::getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const
 	{
 		return weights[layerIndex].row(neuronIndex);
 	}
 
-	Eigen::VectorXd FeedForwardNetworkTopology::getActivationsPerLayer(int layerIndex)
+	Eigen::VectorXd FeedForwardNetworkTopology::getActivationsPerLayer(int layerIndex) const
 	{
 		return activationsPerLayerOut[layerIndex];
 	}
 
-	Eigen::MatrixXd FeedForwardNetworkTopology::getAfferentWeightsPerLayer(int layerIndex)
+	Eigen::MatrixXd FeedForwardNetworkTopology::getAfferentWeightsPerLayer(int layerIndex) const
 	{
 		return weights[layerIndex - 1];
 	}
 
-	Eigen::MatrixXd FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex)
+	Eigen::MatrixXd FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
 	{
 		return weights[layerIndex].transpose();
 	}
 
-	bool FeedForwardNetworkTopology::usesBiasNeuron()
+	bool FeedForwardNetworkTopology::usesBiasNeuron() const
 	{
 		return options->useBiasNeuron;
 	}
@@ -272,7 +272,7 @@ namespace LightBulb
 		return weights[layerIndex](weightIndex, neuronIndex) != 0;
 	}
 
-	int FeedForwardNetworkTopology::getNeuronCount()
+	int FeedForwardNetworkTopology::getNeuronCount() const
 	{
 		int neuronCount = 0;
 		for (int i = 0; i < options->neuronsPerLayerCount.size(); i++)
@@ -280,24 +280,24 @@ namespace LightBulb
 		return neuronCount;
 	}
 
-	int FeedForwardNetworkTopology::getInputSize()
+	int FeedForwardNetworkTopology::getInputSize() const
 	{
 		return options->neuronsPerLayerCount.front();
 	}
 
-	AbstractNetworkTopology* FeedForwardNetworkTopology::clone()
+	AbstractNetworkTopology* FeedForwardNetworkTopology::clone() const
 	{
 		FeedForwardNetworkTopology* clone = new FeedForwardNetworkTopology(*options);
 		clone->copyWeightsFrom(*this);
 		return clone;
 	}
 
-	void FeedForwardNetworkTopology::setAfferentWeightsPerLayer(int layerIndex, Eigen::MatrixXd& newWeights)
+	void FeedForwardNetworkTopology::setAfferentWeightsPerLayer(int layerIndex, const Eigen::MatrixXd& newWeights)
 	{
 		weights[layerIndex - 1] = newWeights;
 	}
 
-	double FeedForwardNetworkTopology::getWeight(int layerIndex, int neuronIndex, int edgeIndex)
+	double FeedForwardNetworkTopology::getWeight(int layerIndex, int neuronIndex, int edgeIndex) const
 	{
 		return weights[layerIndex](neuronIndex, edgeIndex);
 	}
@@ -307,24 +307,24 @@ namespace LightBulb
 		weights[layerIndex](neuronIndex, edgeIndex) = weight;
 	}
 
-	int FeedForwardNetworkTopology::getLayerCount()
+	int FeedForwardNetworkTopology::getLayerCount() const
 	{
 		return options->neuronsPerLayerCount.size();
 	}
 
-	std::vector<unsigned int> FeedForwardNetworkTopology::getNeuronCountsPerLayer()
+	const std::vector<unsigned int>& FeedForwardNetworkTopology::getNeuronCountsPerLayer() const
 	{
 		return options->neuronsPerLayerCount;
 	}
 
-	double FeedForwardNetworkTopology::getBiasWeightOfNeuron(int layerNr, int neuronNr)
+	double FeedForwardNetworkTopology::getBiasWeightOfNeuron(int layerNr, int neuronNr) const
 	{
 		if (layerNr == 0)
 			throw std::logic_error("The first layer does not have a bias weight.");
 		return weights[layerNr - 1](neuronNr, weights[layerNr - 1].cols() - 1);
 	}
 
-	std::vector<double> FeedForwardNetworkTopology::getAfferentWeightsPerNeuron(int layerNr, int neuronNr, bool withoutBiasWeight)
+	std::vector<double> FeedForwardNetworkTopology::getAfferentWeightsPerNeuron(int layerNr, int neuronNr, bool withoutBiasWeight) const
 	{
 		if (layerNr == 0)
 			throw std::logic_error("The first layer does not have afferent weights.");
@@ -341,12 +341,12 @@ namespace LightBulb
 		return &weights;
 	}
 
-	std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* FeedForwardNetworkTopology::getAllActivations()
+	const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* FeedForwardNetworkTopology::getAllActivations() const
 	{
 		return &activationsPerLayerOut;
 	}
 	
-	std::vector<Eigen::VectorXd>* FeedForwardNetworkTopology::getAllNetInputs()
+	const std::vector<Eigen::VectorXd>* FeedForwardNetworkTopology::getAllNetInputs() const
 	{
 		return &netInputs;
 	}
@@ -386,7 +386,7 @@ namespace LightBulb
 		}
 	}
 
-	int FeedForwardNetworkTopology::getEdgeCount()
+	int FeedForwardNetworkTopology::getEdgeCount() const
 	{
 		int edgeCount = 0;
 		for (int layerIndex = 0; layerIndex < weights.size(); layerIndex++)
@@ -419,12 +419,12 @@ namespace LightBulb
 		}
 	}
 
-	void FeedForwardNetworkTopology::getOutput(std::vector<double> &outputVector)
+	void FeedForwardNetworkTopology::getOutput(std::vector<double> &outputVector) const
 	{
 		outputVector.assign(activationsPerLayerIn.back().data(), activationsPerLayerIn.back().data() + outputVector.size());
 	}
 
-	void FeedForwardNetworkTopology::setInput(std::vector<double> &inputVector)
+	void FeedForwardNetworkTopology::setInput(const std::vector<double> &inputVector)
 	{
 		for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 		{
@@ -432,21 +432,21 @@ namespace LightBulb
 		}
 	}
 
-	int FeedForwardNetworkTopology::getOutputSize()
+	int FeedForwardNetworkTopology::getOutputSize() const
 	{
 		return options->neuronsPerLayerCount.back();
 	}
 
-	void FeedForwardNetworkTopology::copyWeightsFrom(AbstractNetworkTopology& otherNetwork)
+	void FeedForwardNetworkTopology::copyWeightsFrom(const AbstractNetworkTopology& otherNetwork)
 	{
-		if (!dynamic_cast<FeedForwardNetworkTopology*>(&otherNetwork))
+		if (!dynamic_cast<const FeedForwardNetworkTopology*>(&otherNetwork))
 			throw std::logic_error("You can not mix topology types when calling copyWeightsFrom on a FeedForwardNetworkTopology");
 
-		weights = static_cast<FeedForwardNetworkTopology*>(&otherNetwork)->weights;
-		activations = static_cast<FeedForwardNetworkTopology*>(&otherNetwork)->activations;
-		netInputs = static_cast<FeedForwardNetworkTopology*>(&otherNetwork)->netInputs;
-		options->neuronsPerLayerCount = static_cast<FeedForwardNetworkTopology*>(&otherNetwork)->options->neuronsPerLayerCount;
-		layerOffsets = static_cast<FeedForwardNetworkTopology*>(&otherNetwork)->layerOffsets;
+		weights = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->weights;
+		activations = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->activations;
+		netInputs = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->netInputs;
+		options->neuronsPerLayerCount = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->options->neuronsPerLayerCount;
+		layerOffsets = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->layerOffsets;
 		rebuildActivationsPerLayer();
 	}
 
@@ -462,12 +462,12 @@ namespace LightBulb
 	}
 
 
-	double FeedForwardNetworkTopology::calculateEuclideanDistance(AbstractNetworkTopology& otherNetwork)
+	double FeedForwardNetworkTopology::calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const
 	{
 		double distance = 0;
 
 		auto weights1 = getAllWeights();
-		auto weights2 = static_cast<FeedForwardNetworkTopology*>(&otherNetwork)->getAllWeights();
+		auto weights2 = otherNetwork.getAllWeights();
 
 		auto layer1 = weights1->begin();
 		auto layer2 = weights2->begin();
@@ -490,17 +490,17 @@ namespace LightBulb
 	}
 
 
-	double FeedForwardNetworkTopology::getActivation(int layerIndex, int neuronIndex)
+	double FeedForwardNetworkTopology::getActivation(int layerIndex, int neuronIndex) const
 	{
 		return (activationsPerLayerOut[layerIndex])(neuronIndex);
 	}
 
-	NeuronDescription* FeedForwardNetworkTopology::getInnerNeuronDescription()
+	const NeuronDescription* FeedForwardNetworkTopology::getInnerNeuronDescription() const
 	{
 		return neuronDescriptionsPerLayer.front().get();
 	}
 
-	NeuronDescription* FeedForwardNetworkTopology::getOutputNeuronDescription()
+	const NeuronDescription* FeedForwardNetworkTopology::getOutputNeuronDescription() const
 	{
 		return neuronDescriptionsPerLayer.back().get();
 	}

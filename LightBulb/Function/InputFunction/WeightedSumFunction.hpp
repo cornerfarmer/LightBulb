@@ -22,8 +22,8 @@ namespace LightBulb
 	private:
 	public:
 		// Inherited:
-		void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs, std::vector<Eigen::MatrixXd> &weights) override;
-		AbstractInputFunction* getInputFunctionCopy() override;
+		void execute(int layerNr, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs, const std::vector<Eigen::MatrixXd> &weights) const override;
+		AbstractInputFunction* getInputFunctionCopy() const override;
 	};
 }
 

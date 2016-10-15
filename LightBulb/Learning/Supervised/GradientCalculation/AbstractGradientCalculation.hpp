@@ -38,7 +38,7 @@ namespace LightBulb
 		 * \brief Initializes and/or resets the internal gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
 		 */
-		void initGradient(AbstractNetworkTopology* networkTopology);
+		void initGradient(const AbstractNetworkTopology* networkTopology);
 		/**
 		 * \brief Returns the current internal gradient.
 		 * \return The internal gradient.
@@ -49,14 +49,14 @@ namespace LightBulb
 		 * \param networkTopology The network topology whose gradient should be calculated.
 		 * \param errormap The errormap which contains the learning information.
 		 */
-		virtual void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap);
+		virtual void calcGradient(const AbstractNetworkTopology* networkTopology, const ErrorMap_t* errormap);
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
 		 * \param errormap The errormap which contains the learning information.
 		 * \param gradient The variable which should be used for storing the calculated gradient. (Instead of the internal gradient storage)
 		 */
-		virtual void calcGradient(AbstractNetworkTopology* networkTopology, ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient);
+		virtual void calcGradient(const AbstractNetworkTopology* networkTopology, const ErrorMap_t* errormap, std::vector<Eigen::MatrixXd>& gradient);
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
@@ -64,7 +64,7 @@ namespace LightBulb
 		 * \param activations The activations which should be used instead of the current ones.
 		 * \param errormap The errormap which contains the learning information.
 		 */
-		virtual void calcGradient(AbstractNetworkTopology* networkTopology, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, ErrorMap_t* errormap) = 0;
+		virtual void calcGradient(const AbstractNetworkTopology* networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const ErrorMap_t* errormap) = 0;
 	};
 }
 

@@ -19,10 +19,10 @@ namespace LightBulb
 		 * \brief Activates all neurons in the given topology
 		 * \param networkTopology The network to activate
 		 */
-		void executeActivation(AbstractNetworkTopology &networkTopology) override;
+		void executeActivation(AbstractNetworkTopology &networkTopology) const override;
 		// Inherited:
-		AbstractActivationOrder* getCopy() override;
-		std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(AbstractNetworkTopology &networkTopology) override;
+		AbstractActivationOrder* getCopy() const override;
+		std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const override;
 	};
 }
 

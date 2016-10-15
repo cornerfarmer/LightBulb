@@ -29,20 +29,21 @@ namespace LightBulb
 		// Adds a new TechingLesson to the testingLessons list
 		void addTestingLesson(AbstractTeachingLesson* newTestingLesson) override;
 		// Get all techingLessons (Useful for online learning)
-		std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() override;
+		const std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() const override;
 
-		std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() override;
+		const std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() const override;
 		// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
-		double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) override;
+		double getTotalError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 
-		double getTeachingError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) override;
+		double getTeachingError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 
-		double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) override;
+		double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) const override;
 		// Returns a unfolded version of this teacher
-		AbstractTeacher* unfold() override;
+		AbstractTeacher* unfold() const override;
 		// Returns the biggest used timestep of all teaching lessons
-		int getMaxTimeStep() override;
+		int getMaxTimeStep() const override;
 
+		void clearLessons() override;
 	};
 }
 

@@ -52,7 +52,7 @@ namespace LightBulb
 		 * \brief The internal initialize function which will be called by initialize().
 		 * \param networkTopology The network topology which should be the target for the gradient descent algorithm. 
 		 */
-		virtual void initializeAlgorithm(AbstractNetworkTopology* networkTopology) = 0;
+		virtual void initializeAlgorithm(const AbstractNetworkTopology* networkTopology) = 0;
 	public:
 		virtual ~AbstractGradientDescentAlgorithm() {};
 		/**
@@ -67,7 +67,7 @@ namespace LightBulb
 		 * \param gradients The calculated gradient of this layer.
 		 * \return The delta weights.
 		 */
-		virtual Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) = 0;
+		virtual Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) = 0;
 		/**
 		 * TODO: Remove
 		 */
@@ -83,7 +83,7 @@ namespace LightBulb
 		* \param networkTopology The network topology which should be the target for the gradient descent algorithm.
 		* \note This method must be called before the algorithm can be used.
 		*/
-		void initialize(AbstractNetworkTopology* networkTopology);
+		void initialize(const AbstractNetworkTopology* networkTopology);
 		/**
 		 * \brief Returns is the algorithm already has been initialized.
 		 * \return True if the algorithm is initialized.

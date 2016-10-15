@@ -9,12 +9,12 @@ namespace LightBulb
 		speedFactor = speedFactor_;
 	}
 
-	double ExponentialShrinkFunction::execute(double time)
+	double ExponentialShrinkFunction::execute(double time) const
 	{
 		return startValue * exp(-1 * time / speedFactor) + minValue;
 	}
 
-	AbstractShrinkFunction* ExponentialShrinkFunction::getShrinkFunctionCopy()
+	AbstractShrinkFunction* ExponentialShrinkFunction::getShrinkFunctionCopy() const
 	{
 		return new ExponentialShrinkFunction(*this);
 	}

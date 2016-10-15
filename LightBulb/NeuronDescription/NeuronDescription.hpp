@@ -43,17 +43,17 @@ namespace LightBulb
 		 * \brief Clones the neuron description.
 		 * \return The clone.
 		 */
-		NeuronDescription* getCopy();
+		NeuronDescription* getCopy() const;
 		/**
 		 * \brief Returns the input function of the neuron.
 		 * \return The input function.
 		 */
-		AbstractInputFunction* getInputFunction();
+		const AbstractInputFunction* getInputFunction() const;
 		/**
 		 * \brief Returns the activation function of the neuron.
 		 * \return The activation function.
 		 */
-		virtual AbstractActivationFunction* getActivationFunction();
+		virtual const AbstractActivationFunction* getActivationFunction() const;
 	};
 }
 

@@ -20,7 +20,7 @@ namespace LightBulb
 	private:
 	public:
 		// Inherited:	
-		int execute(int elementCount) override;
+		int execute(int elementCount) const override;
 	};
 }
 

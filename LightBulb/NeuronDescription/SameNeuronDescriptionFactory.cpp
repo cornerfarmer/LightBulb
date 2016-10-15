@@ -30,17 +30,17 @@ namespace LightBulb
 		return neuronDescription->getCopy();
 	}
 
-	AbstractNeuronDescriptionFactory* SameNeuronDescriptionFactory::getCopy()
+	AbstractNeuronDescriptionFactory* SameNeuronDescriptionFactory::getCopy() const
 	{
 		return new SameNeuronDescriptionFactory(*this);
 	}
 
-	AbstractActivationFunction* SameNeuronDescriptionFactory::getOutputActivationFunction()
+	const AbstractActivationFunction* SameNeuronDescriptionFactory::getOutputActivationFunction() const
 	{
 		return neuronDescription->getActivationFunction();
 	}
 
-	AbstractActivationFunction* SameNeuronDescriptionFactory::getInnerActivationFunction()
+	const AbstractActivationFunction* SameNeuronDescriptionFactory::getInnerActivationFunction() const
 	{
 		return neuronDescription->getActivationFunction();
 	}

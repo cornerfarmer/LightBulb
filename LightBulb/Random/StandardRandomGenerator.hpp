@@ -67,7 +67,7 @@ namespace LightBulb
 			return distribution(generator);
 		}
 
-		int getSeed() override
+		int getSeed() const override
 		{
 			return seed;
 		}

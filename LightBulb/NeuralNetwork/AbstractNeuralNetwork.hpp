@@ -45,7 +45,7 @@ namespace LightBulb
 		 * \brief Clones the whole neural network.
 		 * \return The cloned neural network.
 		 */
-		virtual AbstractNeuralNetwork* clone() = 0;
+		virtual AbstractNeuralNetwork* clone() const = 0;
 		/**
 		 * \brief Calculates from the given input and activation order the output of the neural network.
 		 * \param input The input.
@@ -58,7 +58,7 @@ namespace LightBulb
 		 * \param resetActivations Control if the activations should be resetted before calculating.
 		 * TODO: Refactor
 		 */
-		virtual void calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) = 0;
+		virtual void calculate(const std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, const AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) = 0;
 		/**
 		 * \brief Calculates from the given input and activation order the output of the neural network.
 		 * \param input The input.
@@ -66,32 +66,32 @@ namespace LightBulb
 		 * \param activationOrder The activation order which should be used when calculating.
 		 * \param resetActivations Control if the activations should be resetted before calculating.
 		 */
-		virtual void calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
+		virtual void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
 		/**
 		 * \brief Returns the network topology of the neural network.
 		 * \return The network topology.
 		 */
-		virtual AbstractNetworkTopology* getNetworkTopology() = 0;
+		virtual AbstractNetworkTopology* getNetworkTopology() const = 0;
 		/**
 		 * \brief Returns the name of the neural network.
 		 * \return The name.
 		 */
-		virtual std::string getName() = 0;
+		virtual const std::string& getName() const = 0;
 		/**
 		 * \brief Sets the name of the neural network.
 		 * \param name The name.
 		 */
-		virtual void setName(std::string name) = 0;
+		virtual void setName(const std::string& name) = 0;
 		/**
 		 * \brief Returns the creation date of the neural network.
 		 * \return The creation date.
 		 */
-		virtual std::time_t getCreationDate() = 0;
+		virtual const std::time_t& getCreationDate() const = 0;
 		/**
 		 * \brief Returns the current state of the neural network.
 		 * \return The state.
 		 */
-		virtual NeuralNetworkState getState() = 0;
+		virtual const NeuralNetworkState& getState() const = 0;
 		/**
 		 * \brief Sets a new state.
 		 * \param newState The new state.
@@ -101,7 +101,7 @@ namespace LightBulb
 		 * \brief Returns the state as string.
 		 * \return The state as string.
 		 */
-		virtual std::string getStateAsString();
+		virtual const std::string getStateAsString() const;
 	};
 }
 

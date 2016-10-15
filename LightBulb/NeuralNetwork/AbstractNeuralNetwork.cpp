@@ -3,7 +3,7 @@
 
 namespace LightBulb
 {
-	std::string AbstractNeuralNetwork::getStateAsString()
+	const std::string AbstractNeuralNetwork::getStateAsString() const
 	{
 		if (getState() == NN_STATE_READY)
 			return "ready";

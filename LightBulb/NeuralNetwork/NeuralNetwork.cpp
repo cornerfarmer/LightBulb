@@ -22,7 +22,7 @@ namespace LightBulb
 		name = "NoName";
 	}
 
-	void NeuralNetwork::calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
+	void NeuralNetwork::calculate(const std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, const AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
 	{
 		// If the calculation start at time 0
 		if (startTime == 0 && resetActivations)
@@ -47,7 +47,7 @@ namespace LightBulb
 
 	}
 
-	void NeuralNetwork::calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations)
+	void NeuralNetwork::calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations)
 	{
 		// If the calculation start at time 0
 		if (resetActivations)
@@ -66,22 +66,22 @@ namespace LightBulb
 		networkTopology->getOutput(output);
 	}
 
-	AbstractNetworkTopology* NeuralNetwork::getNetworkTopology()
+	AbstractNetworkTopology* NeuralNetwork::getNetworkTopology() const
 	{
 		return networkTopology.get();
 	}
 
-	std::string NeuralNetwork::getName()
+	const std::string& NeuralNetwork::getName() const
 	{
 		return name;
 	}
 
-	std::time_t NeuralNetwork::getCreationDate()
+	const std::time_t& NeuralNetwork::getCreationDate() const
 	{
 		return std::time(nullptr);
 	}
 
-	NeuralNetworkState NeuralNetwork::getState()
+	const NeuralNetworkState& NeuralNetwork::getState() const
 	{
 		return state;
 	}
@@ -91,14 +91,14 @@ namespace LightBulb
 		state = newState;
 	}
 
-	AbstractNeuralNetwork* NeuralNetwork::clone()
+	AbstractNeuralNetwork* NeuralNetwork::clone() const
 	{
 		NeuralNetwork* clone = new NeuralNetwork(networkTopology->clone());
 		clone->name = name + " - clone";
 		return clone;
 	}
 
-	void NeuralNetwork::setName(std::string name_)
+	void NeuralNetwork::setName(const std::string& name_)
 	{
 		name = name_;
 	}

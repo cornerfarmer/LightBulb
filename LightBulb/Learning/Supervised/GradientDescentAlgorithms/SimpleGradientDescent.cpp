@@ -21,7 +21,7 @@ namespace LightBulb
 		return static_cast<SimpleGradientDescentOptions*>(options.get());
 	}
 
-	void SimpleGradientDescent::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
+	void SimpleGradientDescent::initializeAlgorithm(const AbstractNetworkTopology* networkTopology)
 	{
 		// If momentum is used
 		if (getOptions()->momentum > 0)
@@ -35,7 +35,7 @@ namespace LightBulb
 		}
 	}
 
-	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
 		Eigen::MatrixXd deltaWeight;
 

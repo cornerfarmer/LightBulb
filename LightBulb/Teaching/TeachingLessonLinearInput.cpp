@@ -12,17 +12,17 @@ namespace LightBulb
 		teachingPattern = teachingPattern_;
 	}
 
-	NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingInput(AbstractActivationFunction* activationFunction)
+	const NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction* activationFunction) const
 	{
 		return teachingInput.get();
 	}
 
-	std::vector<std::vector<double>>* TeachingLessonLinearInput::getTeachingPattern()
+	const std::vector<std::vector<double>>* TeachingLessonLinearInput::getTeachingPattern() const
 	{
 		return &teachingPattern;
 	}
 
-	AbstractTeachingLesson* TeachingLessonLinearInput::unfold()
+	AbstractTeachingLesson* TeachingLessonLinearInput::unfold() const
 	{
 		// Create a new teaching input
 		NeuralNetworkIO<double>* unfoldedTeachingInput = new NeuralNetworkIO<double>(teachingInput->getDimension());
@@ -32,7 +32,7 @@ namespace LightBulb
 		return new TeachingLessonLinearInput(unfoldTeachingPattern(), unfoldedTeachingInput);
 	}
 
-	std::vector<std::vector<double>> TeachingLessonLinearInput::unfoldTeachingPattern()
+	std::vector<std::vector<double>> TeachingLessonLinearInput::unfoldTeachingPattern() const
 	{
 		std::vector<std::vector<double>> unfoldededTeachingPattern(1);
 		for (int t = 0; t < teachingPattern.size(); t++)
@@ -45,7 +45,7 @@ namespace LightBulb
 		return unfoldededTeachingPattern;
 	}
 
-	int TeachingLessonLinearInput::getMaxTimeStep()
+	int TeachingLessonLinearInput::getMaxTimeStep() const
 	{
 		return teachingInput->getMaxTimeStep();
 	}

@@ -24,18 +24,18 @@ namespace LightBulb
 		std::vector<std::vector<double>> teachingPattern;
 		bool calcStrictError;
 	protected:
-		std::vector<std::vector<double>> unfoldTeachingPattern();
+		std::vector<std::vector<double>> unfoldTeachingPattern() const;
 	public:
 		TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_, bool calcStrictError_ = true);
 		// Inherited:
-		AbstractTeachingLesson* unfold() override;
-		int getMaxTimeStep() override;
+		AbstractTeachingLesson* unfold() const override;
+		int getMaxTimeStep() const override;
 		// Converts our boolean teachingInput vector in a double vector depending on the used activationFunction
-		NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction) override;
-		NeuralNetworkIO<bool>* getBooleanTeachingInput();
-		std::vector<std::vector<double>>* getTeachingPattern() override;
+		const const NeuralNetworkIO<double>* getTeachingInput(const AbstractActivationFunction* activationFunction) const override;
+		NeuralNetworkIO<bool>* getBooleanTeachingInput() const;
+		const std::vector<std::vector<double>>* getTeachingPattern() const override;
 
-		std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork);
+		std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(const std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork);
 	};
 }
 

@@ -12,34 +12,34 @@ namespace LightBulb
 		temperatureParameter = temperatureParameter_;
 	}
 
-	double FermiFunction::execute(double input)
+	double FermiFunction::execute(double input) const
 	{
 		// Execture the fermi function
 		return  1 / (1 + exp(-input / temperatureParameter));
 	}
 
-	double FermiFunction::executeDerivation(double input)
+	double FermiFunction::executeDerivation(double input) const
 	{
 		// Execute the derivation of the Fermi function		
 		return execute(input) * (1 - execute(input));
 	}
 
-	AbstractActivationFunction* FermiFunction::getActivationFunctionCopy()
+	AbstractActivationFunction* FermiFunction::getActivationFunctionCopy() const
 	{
 		return new FermiFunction(*this);
 	}
 
-	double FermiFunction::getMaximum()
+	double FermiFunction::getMaximum() const
 	{
 		return 1;
 	}
 
-	double FermiFunction::getMinimum()
+	double FermiFunction::getMinimum() const
 	{
 		return 0;
 	}
 
-	bool FermiFunction::hasAMaxAndMinimum()
+	bool FermiFunction::hasAMaxAndMinimum() const
 	{
 		return true;
 	}

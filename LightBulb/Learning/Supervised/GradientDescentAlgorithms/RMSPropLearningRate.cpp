@@ -21,7 +21,7 @@ namespace LightBulb
 		return static_cast<RMSPropLearningRateOptions*>(options.get());
 	}
 
-	void RMSPropLearningRate::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
+	void RMSPropLearningRate::initializeAlgorithm(const AbstractNetworkTopology* networkTopology)
 	{
 		// Make sure the previous learning rates map is empty
 		prevGradient.resize(networkTopology->getAllWeights()->size());
@@ -35,7 +35,7 @@ namespace LightBulb
 	}
 
 
-	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
 		prevGradient[layerIndex - 1] = getOptions()->gradientMomentum * prevGradient[layerIndex - 1] + (1 - getOptions()->gradientMomentum) * gradients;
 		prevSquaredGradient[layerIndex - 1] = getOptions()->squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - getOptions()->squaredGradientMomentum) * gradients.cwiseAbs2();

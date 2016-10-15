@@ -48,15 +48,15 @@ namespace LightBulb
 		 */
 		NeuralNetwork(AbstractNetworkTopology* networkTopology_);
 		// Inherited:
-		void calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) override;
-		void calculate(std::vector<double>& input, std::vector<double>& output, AbstractActivationOrder &activationOrder, bool resetActivations = true) override;
-		AbstractNetworkTopology* getNetworkTopology() override;
-		std::string getName() override;
-		std::time_t getCreationDate() override;
-		NeuralNetworkState getState() override;
+		void calculate(const std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, const AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) override;
+		void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) override;
+		AbstractNetworkTopology* getNetworkTopology() const override;
+		const std::string& getName() const override;
+		const std::time_t& getCreationDate() const override;
+		const NeuralNetworkState& getState() const override;
 		void setState(NeuralNetworkState newState) override;
-		AbstractNeuralNetwork* clone() override;
-		void setName(std::string name) override;
+		AbstractNeuralNetwork* clone() const override;
+		void setName(const std::string& name) override;
 	};
 }
 

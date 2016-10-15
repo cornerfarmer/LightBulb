@@ -12,7 +12,7 @@ namespace LightBulb
 		initialized = false;
 	}
 
-	void AbstractGradientDescentAlgorithm::initialize(AbstractNetworkTopology* networkTopology)
+	void AbstractGradientDescentAlgorithm::initialize(const AbstractNetworkTopology* networkTopology)
 	{
 		initializeAlgorithm(networkTopology);
 		initialized = true;

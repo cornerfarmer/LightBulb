@@ -9,7 +9,7 @@
 
 namespace LightBulb
 {
-	std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime)
+	std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime) const
 	{
 		std::vector<std::vector<double>> output(getTeachingPattern()->size(), std::vector<double>(neuralNetwork.getNetworkTopology()->getOutputSize()));
 		// Let the network calculate
@@ -17,7 +17,7 @@ namespace LightBulb
 		return output;
 	}
 
-	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool clipError)
+	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool clipError) const
 	{
 		std::unique_ptr<ErrorMap_t> errorMap;
 
@@ -29,10 +29,10 @@ namespace LightBulb
 	}
 
 
-	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError)
+	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(const std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
-		NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
+		const NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
 
 		// Create the errorMap
 		std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
@@ -59,7 +59,7 @@ namespace LightBulb
 	}
 
 
-	double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, bool clipError)
+	double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
 		// Calculate the errorVector
 		std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder, nullptr, nullptr, clipError);
@@ -81,9 +81,9 @@ namespace LightBulb
 		return specificError;
 	}
 
-	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(AbstractNeuralNetwork& neuralNetwork)
+	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(AbstractNeuralNetwork& neuralNetwork) const
 	{
-		NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
+		const NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
 		std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
 
 		for (int timestep = 0; timestep < teachingInput->size(); timestep++)

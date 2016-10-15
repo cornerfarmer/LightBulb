@@ -11,7 +11,7 @@ namespace LightBulb
 		maxValue = maxValue_;
 	}
 
-	double BinaryFunction::execute(double input)
+	double BinaryFunction::execute(double input) const
 	{
 		// If the input is greater than the threshold return 1 else 0
 		if (input > 0)
@@ -20,28 +20,28 @@ namespace LightBulb
 			return minValue;
 	}
 
-	double BinaryFunction::executeDerivation(double input)
+	double BinaryFunction::executeDerivation(double input) const
 	{
 		// A binary function does not have a derivation => throw a exception
 		throw std::logic_error("There is no derivation of the binary function");
 	}
 
-	AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy()
+	AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy() const
 	{
 		return new BinaryFunction(*this);
 	}
 
-	double BinaryFunction::getMaximum()
+	double BinaryFunction::getMaximum() const
 	{
 		return maxValue;
 	}
 
-	double BinaryFunction::getMinimum()
+	double BinaryFunction::getMinimum() const
 	{
 		return minValue;
 	}
 
-	bool BinaryFunction::hasAMaxAndMinimum()
+	bool BinaryFunction::hasAMaxAndMinimum() const
 	{
 		return true;
 	}

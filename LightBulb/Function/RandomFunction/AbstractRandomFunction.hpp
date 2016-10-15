@@ -21,7 +21,7 @@ namespace LightBulb
 		 * \param elementCount The number of possible elements
 		 * \return The chosen element number
 		 */
-		virtual int execute(int elementCount) = 0;
+		virtual int execute(int elementCount) const = 0;
 	};
 }
 

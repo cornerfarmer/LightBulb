@@ -25,23 +25,23 @@ namespace LightBulb
 		teachingLessons.push_back(std::unique_ptr<AbstractTeachingLesson>(newTeachingLesson));
 	}
 
-	std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLessons()
+	const std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLessons() const
 	{
 		return &teachingLessons;
 	}
 
-	std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTestingLessons()
+	const std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTestingLessons() const
 	{
 		return &testingLessons;
 	}
 
 
-	double Teacher::getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder)
+	double Teacher::getTotalError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const
 	{
 		return getTeachingError(neuralNetwork, activationOrder) + getWeightDecayError(neuralNetwork);
 	}
 
-	double Teacher::getTeachingError(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder)
+	double Teacher::getTeachingError(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
 		double totalError = 0;
 
@@ -61,7 +61,7 @@ namespace LightBulb
 	}
 
 
-	double Teacher::getWeightDecayError(AbstractNeuralNetwork& neuralNetwork)
+	double Teacher::getWeightDecayError(AbstractNeuralNetwork& neuralNetwork) const
 	{
 		double weightDecayError = 0;
 		if (weightDecayFac > 0)
@@ -75,7 +75,7 @@ namespace LightBulb
 		return weightDecayFac * weightDecayError;
 	}
 
-	AbstractTeacher* Teacher::unfold()
+	AbstractTeacher* Teacher::unfold() const
 	{
 		// Create a new teacher
 		AbstractTeacher* unfoldedTeacher = new Teacher();
@@ -93,7 +93,7 @@ namespace LightBulb
 		return unfoldedTeacher;
 	}
 
-	int Teacher::getMaxTimeStep()
+	int Teacher::getMaxTimeStep() const
 	{
 		int maxTimeStep = 0;
 		// Find the biggest timestep of all teaching lessons
@@ -102,5 +102,11 @@ namespace LightBulb
 			maxTimeStep = std::max(maxTimeStep, (*teachingLesson)->getMaxTimeStep());
 		}
 		return maxTimeStep;
+	}
+
+	void Teacher::clearLessons()
+	{
+		teachingLessons.clear();
+		testingLessons.clear();
 	}
 }

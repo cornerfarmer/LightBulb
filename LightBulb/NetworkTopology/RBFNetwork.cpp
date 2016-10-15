@@ -71,7 +71,7 @@ namespace LightBulb
 		}
 	}
 
-	void RBFNetwork::setCenterOfRBFNeuron(int neuronIndex, std::vector<double> &newCenterPosition)
+	void RBFNetwork::setCenterOfRBFNeuron(int neuronIndex, const std::vector<double> &newCenterPosition)
 	{
 		// Set the new center position to the neuron with neuronIndex
 		auto centerCoordinate = newCenterPosition.begin();
@@ -92,7 +92,7 @@ namespace LightBulb
 		return neuronWidths(neuronIndex);
 	}
 
-	AbstractNetworkTopology* RBFNetwork::clone()
+	AbstractNetworkTopology* RBFNetwork::clone() const
 	{
 		RBFNetwork* clone = new RBFNetwork();
 		clone->copyWeightsFrom(*this);

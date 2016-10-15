@@ -17,9 +17,9 @@ namespace LightBulb
 	public:
 		virtual ~AbstractNeighborhoodFunction() {}
 		// Calculate the neighborhood factor
-		virtual double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance) = 0;
+		virtual double execute(StandardNeuron* neuron, StandardNeuron* activatedNeuron, AbstractSOMStructure* structure, NeuronCompareThreshold* threshold, double maxDistance) const = 0;
 		// Create a copy of the object
-		virtual AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy() = 0;
+		virtual AbstractNeighborhoodFunction* getNeighborhoodFunctionCopy() const = 0;
 	};
 }
 

@@ -27,45 +27,45 @@ namespace LightBulb
 		 * \param activations A layerwise list of all activations which will contain the calculated activations
 		 * \param netInputs A layerwise list of all inputs which will be used for the computation
 		 */
-		virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs);
+		virtual void execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, const std::vector<Eigen::VectorXd> &netInputs) const;
 		/**
 		 * \brief Calculates the activation for one neuron
 		 * \param input The input of the neuron
 		 * \return The activation of the neuron
 		 */
-		virtual double execute(double input) = 0;
+		virtual double execute(double input) const = 0;
 		/**
 		 * \brief Calculates the derivated activation from the given input
 		 * \param input The input of the neuron
 		 * \return The calculated activation derivation
 		 */
-		virtual double executeDerivation(double input) = 0;
+		virtual double executeDerivation(double input) const = 0;
 		/**
 		 * \brief Calculate the derivated activation from the given input of every neuron for one layer
 		 * \param input One layer of input values
 		 * \return The calculated activation derivations for the whole layer
 		 */
-		virtual Eigen::VectorXd executeDerivation(Eigen::VectorXd input);
+		virtual Eigen::VectorXd executeDerivation(const Eigen::VectorXd& input) const;
 		/**
 		 * \brief Create a copy of the object
 		 * \return The copy
 		 */
-		virtual AbstractActivationFunction* getActivationFunctionCopy() = 0;
+		virtual AbstractActivationFunction* getActivationFunctionCopy() const = 0;
 		/**
 		 * \brief Returns the maximum possible output/activation value of this function
 		 * \return The maximum
 		 */
-		virtual double getMaximum() = 0;
+		virtual double getMaximum() const = 0;
 		/**
 		* \brief Returns the lowest possible output/activation value of this function
 		* \return The minimum
 		*/
-		virtual double getMinimum() = 0;
+		virtual double getMinimum() const = 0;
 		/**
 		 * \brief Returns if the function has an max/minimum.
 		 * \return Max/minimum exists
 		 */
-		virtual bool hasAMaxAndMinimum() = 0;
+		virtual bool hasAMaxAndMinimum() const = 0;
 	};
 }
 

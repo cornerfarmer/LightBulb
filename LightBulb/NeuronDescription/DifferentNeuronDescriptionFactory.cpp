@@ -34,17 +34,17 @@ namespace LightBulb
 		return outputNeuronDescription->getCopy();
 	}
 
-	AbstractNeuronDescriptionFactory* DifferentNeuronDescriptionFactory::getCopy()
+	AbstractNeuronDescriptionFactory* DifferentNeuronDescriptionFactory::getCopy() const
 	{
 		return new DifferentNeuronDescriptionFactory(*this);
 	}
 
-	AbstractActivationFunction* DifferentNeuronDescriptionFactory::getOutputActivationFunction()
+	const AbstractActivationFunction* DifferentNeuronDescriptionFactory::getOutputActivationFunction() const
 	{
 		return outputNeuronDescription->getActivationFunction();
 	}
 
-	AbstractActivationFunction* DifferentNeuronDescriptionFactory::getInnerActivationFunction()
+	const AbstractActivationFunction* DifferentNeuronDescriptionFactory::getInnerActivationFunction() const
 	{
 		return innerNeuronDescription->getActivationFunction();
 	}

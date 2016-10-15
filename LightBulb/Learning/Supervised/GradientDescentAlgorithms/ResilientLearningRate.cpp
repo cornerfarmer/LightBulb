@@ -21,7 +21,7 @@ namespace LightBulb
 		return static_cast<ResilientLearningRateOptions*>(options.get());
 	}
 
-	void ResilientLearningRate::initializeAlgorithm(AbstractNetworkTopology* networkTopology)
+	void ResilientLearningRate::initializeAlgorithm(const AbstractNetworkTopology* networkTopology)
 	{
 		// Make sure the previous learning rates map is empty
 		previousLearningRates = *networkTopology->getAllWeights();
@@ -32,11 +32,8 @@ namespace LightBulb
 	}
 
 
-	Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
-		// Switch the sign of the gradient (We want to decrease, not to increase the totalError!)
-		gradients *= -1;
-
 		for (int i = 0; i < gradients.rows(); i++)
 		{
 			for (int j = 0; j < gradients.cols(); j++)
@@ -44,16 +41,16 @@ namespace LightBulb
 				if (gradients(i, j) != 0)
 				{
 					// If the sign of the gradient equals the sign of the last learning rate
-					if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) > 0)
+					if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) < 0)
 						previousLearningRates[layerIndex - 1](i, j) *= getOptions()->learningRateGrowFac; // Increase the new learning rate
-					else if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) < 0)
+					else if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) > 0)
 						previousLearningRates[layerIndex - 1](i, j) *= getOptions()->learningRateShrinkFac;	 // Decrease the new learning rate
 
 					// Make sure the new learningRate is between learningRateMin and learningRateMax
 					previousLearningRates[layerIndex - 1](i, j) = std::max(getOptions()->learningRateMin, std::min(getOptions()->learningRateMax, std::abs(previousLearningRates[layerIndex - 1](i, j))));
 
 					// Set the sign of the learningRate to the sign of the gradient
-					previousLearningRates[layerIndex - 1](i, j) *= (gradients(i, j) > 0 ? 1 : -1);
+					previousLearningRates[layerIndex - 1](i, j) *= (gradients(i, j) < 0 ? 1 : -1);
 				}
 				else
 					previousLearningRates[layerIndex - 1](i, j) = 0;

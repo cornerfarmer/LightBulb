@@ -22,7 +22,7 @@ namespace LightBulb
 	{
 	private:
 		FeedForwardNetworkTopology* networkTopology;
-		Eigen::MatrixXd* weights;
+		const Eigen::MatrixXd* weights;
 		JSONObject* getNetworkJSONObject();
 		JSONAttribute* getNeuronsAttribute();
 		JSONObject* getNeuronJSONObject(int layer, int neuron);

@@ -6,7 +6,7 @@
 
 namespace LightBulb
 {
-	int RankBasedRandomFunction::execute(int elementCount)
+	int RankBasedRandomFunction::execute(int elementCount) const
 	{
 		double probabilitySum = 0;
 		for (int i = 1; i <= elementCount; i++)

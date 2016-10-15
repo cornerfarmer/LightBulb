@@ -26,20 +26,21 @@ namespace LightBulb
 		// Adds a new TechingLesson to the testingLessons list
 		virtual void addTestingLesson(AbstractTeachingLesson* newTestingLesson) = 0;
 		// Get all techingLessons (Useful for online learning)
-		virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() = 0;
+		const virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() const = 0;
 
-		virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() = 0;
+		const virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() const = 0;
 		// Calculate the total error from all teaching and testing lessons (Useful for offline learning)
-		virtual double getTotalError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) = 0;
+		virtual double getTotalError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const = 0;
 
-		virtual double getTeachingError(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder) = 0;
+		virtual double getTeachingError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const = 0;
 
-		virtual double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) = 0;
+		virtual double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) const = 0;
 		// Returns a unfolded version of this teacher
-		virtual AbstractTeacher* unfold() = 0;
+		virtual AbstractTeacher* unfold() const = 0;
 		// Returns the biggest used timestep of all teaching lessons
-		virtual int getMaxTimeStep() = 0;
+		virtual int getMaxTimeStep() const = 0;
 
+		virtual void clearLessons() = 0;
 	};
 }
 

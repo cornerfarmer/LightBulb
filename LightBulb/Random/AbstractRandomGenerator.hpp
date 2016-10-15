@@ -42,7 +42,7 @@ namespace LightBulb
 		 * \brief Returns the current seed of the random generator.
 		 * \return The seed.
 		 */
-		virtual int getSeed() = 0;
+		virtual int getSeed() const = 0;
 		/**
 		 * \brief Sets a new seed.
 		 * \param newSeed The new seed.

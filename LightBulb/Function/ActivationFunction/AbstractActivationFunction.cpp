@@ -3,7 +3,7 @@
 
 namespace LightBulb
 {
-	void AbstractActivationFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, std::vector<Eigen::VectorXd>& netInputs)
+	void AbstractActivationFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const std::vector<Eigen::VectorXd>& netInputs) const
 	{
 		for (auto i = 0; i < netInputs[layerNr].rows(); i++)
 		{
@@ -11,7 +11,7 @@ namespace LightBulb
 		}
 	}
 
-	Eigen::VectorXd AbstractActivationFunction::executeDerivation(Eigen::VectorXd input)
+	Eigen::VectorXd AbstractActivationFunction::executeDerivation(const Eigen::VectorXd& input) const
 	{
 		Eigen::VectorXd output(input.rows());
 		for (auto i = 0; i < input.rows(); i++)

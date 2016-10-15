@@ -92,7 +92,7 @@ namespace LightBulb
 
 	void DQNLearningRule::doSupervisedLearning()
 	{
-		teacher.getTeachingLessons()->clear();
+		teacher.clearLessons();
 
 		for (int i = 0; i < std::min((int)transitions.size(), getOptions()->minibatchSize); i++)
 		{
@@ -137,32 +137,6 @@ namespace LightBulb
 		return labels;
 	}
 
-
-	std::vector<Eigen::MatrixXd> DQNLearningRule::checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology)
-	{
-		double epsilon = 0.0001;
-		auto weights = networkTopology->getAllWeights();
-		std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
-		for (int l = weights->size() - 1; l >= 0; l--)
-		{
-			gradientApprox[l].resizeLike(weights->at(l));
-			for (int n1 = 0; n1 < weights->at(l).rows(); n1++)
-			{
-				for (int n2 = 0; n2 < weights->at(l).cols(); n2++)
-				{
-					weights->at(l)(n1, n2) += epsilon;
-					double firstError = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
-
-					weights->at(l)(n1, n2) -= epsilon * 2;
-					double secondError = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
-					gradientApprox[l](n1, n2) = (firstError - secondError) / (2 * epsilon);
-
-					weights->at(l)(n1, n2) += epsilon;
-				}
-			}
-		}
-		return gradientApprox;
-	}
 
 	bool DQNLearningRule::doIteration()
 	{

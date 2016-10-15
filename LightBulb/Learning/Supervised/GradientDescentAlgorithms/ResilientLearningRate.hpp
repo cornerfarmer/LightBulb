@@ -90,10 +90,10 @@ namespace LightBulb
 		 */
 		ResilientLearningRate();
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(AbstractNetworkTopology* networkTopology, int layerIndex, Eigen::MatrixXd& gradients) override;
+		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
-		void initializeAlgorithm(AbstractNetworkTopology* networkTopology) override;
+		void initializeAlgorithm(const AbstractNetworkTopology* networkTopology) override;
 	};
 }
 

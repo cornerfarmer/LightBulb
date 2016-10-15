@@ -57,7 +57,7 @@ namespace LightBulb
 		 * \param neuronIndex The index of the hidden neuron.
 		 * \param newCenterPosition The new center.
 		 */
-		void setCenterOfRBFNeuron(int neuronIndex, std::vector<double> &newCenterPosition);
+		void setCenterOfRBFNeuron(int neuronIndex, const std::vector<double> &newCenterPosition);
 		/**
 		 * \brief Sets the width of the RBFNeuron with the given index.
 		 * \param neuronIndex The index of the hidden neuron.
@@ -72,7 +72,7 @@ namespace LightBulb
 		double getWidthOfRBFNeuron(int neuronIndex);
 		// Inherited:
 		virtual void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) override;
-		AbstractNetworkTopology* clone() override;
+		AbstractNetworkTopology* clone() const override;
 	};
 }
 

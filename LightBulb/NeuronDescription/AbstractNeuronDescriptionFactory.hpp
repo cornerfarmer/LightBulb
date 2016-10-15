@@ -31,17 +31,17 @@ namespace LightBulb
 		* \brief Returns the activation function for output neurons.
 		* \return The activation function.
 		*/
-		virtual AbstractActivationFunction* getOutputActivationFunction() = 0;
+		virtual const AbstractActivationFunction* getOutputActivationFunction() const = 0;
 		/**
 		* \brief Returns the activation function for inner/hidden neurons.
 		* \return The activation function.
 		*/
-		virtual AbstractActivationFunction* getInnerActivationFunction() = 0;
+		virtual const AbstractActivationFunction* getInnerActivationFunction() const = 0;
 		/**
 		* \brief Clones the neuron description factory.
 		* \return The clone.
 		*/
-		virtual AbstractNeuronDescriptionFactory* getCopy() = 0;
+		virtual AbstractNeuronDescriptionFactory* getCopy() const = 0;
 	};
 }
 

@@ -29,12 +29,12 @@ namespace LightBulb
 		 */
 		FermiFunction(double temperatureParameter_);
 		// Inherited
-		double execute(double input) override;
-		double executeDerivation(double input) override;
-		AbstractActivationFunction* getActivationFunctionCopy() override;
-		double getMaximum() override;
-		double getMinimum() override;
-		bool hasAMaxAndMinimum() override;
+		double execute(double input) const override;
+		double executeDerivation(double input) const override;
+		AbstractActivationFunction* getActivationFunctionCopy() const override;
+		double getMaximum() const override;
+		double getMinimum() const override;
+		bool hasAMaxAndMinimum() const override;
 	};
 }
 

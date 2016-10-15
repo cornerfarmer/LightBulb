@@ -23,8 +23,8 @@ namespace LightBulb
 	private:
 	public:
 		// Inherited:	
-		int execute(const std::vector<double> &probabilities) override;
-		std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) override;
+		int execute(const std::vector<double> &probabilities) const override;
+		std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) const override;
 	};
 }
 

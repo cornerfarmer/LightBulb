@@ -3,12 +3,12 @@
 
 namespace LightBulb
 {
-	AbstractLogger::AbstractLogger(LogLevel currentLogLevel_)
+	AbstractLogger::AbstractLogger(const LogLevel& currentLogLevel_)
 	{
 		currentLogLevel = currentLogLevel_;
 	}
 
-	void AbstractLogger::log(std::string message, LogLevel level)
+	void AbstractLogger::log(const std::string& message, const LogLevel& level)
 	{
 		if (level <= currentLogLevel)
 		{
@@ -17,12 +17,12 @@ namespace LightBulb
 		}
 	}
 
-	void AbstractLogger::setLogLevel(LogLevel level)
+	void AbstractLogger::setLogLevel(const LogLevel& level)
 	{
 		currentLogLevel = level;
 	}
 
-	LogLevel AbstractLogger::getLogLevel()
+	const LogLevel& AbstractLogger::getLogLevel() const
 	{
 		return currentLogLevel;
 	}

@@ -6,7 +6,7 @@
 
 namespace LightBulb
 {
-	int RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities)
+	int RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities) const
 	{
 		double probabilitySum = 0;
 		for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++)
@@ -28,7 +28,7 @@ namespace LightBulb
 		throw std::logic_error("No element has been selected!");
 	}
 
-	std::vector<int> RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities, int selectionCount)
+	std::vector<int> RouletteWheelSelectionFunction::execute(const std::vector<double> &probabilities, int selectionCount) const
 	{
 		if (selectionCount <= 0)
 			throw std::invalid_argument("The selectionCount has to be greater than 0!");

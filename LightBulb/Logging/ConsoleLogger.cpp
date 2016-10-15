@@ -4,12 +4,12 @@
 
 namespace LightBulb
 {
-	void ConsoleLogger::outputMessage(std::string message)
+	void ConsoleLogger::outputMessage(const std::string& message)
 	{
 		std::cout << message << std::endl;
 	}
 
-	ConsoleLogger::ConsoleLogger(LogLevel logLevel)
+	ConsoleLogger::ConsoleLogger(const LogLevel& logLevel)
 		: AbstractLogger(logLevel)
 	{
 	}
