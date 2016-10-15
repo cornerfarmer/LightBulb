@@ -18,7 +18,7 @@ namespace LightBulb
 	{
 		// Check if all given parameters are correct
 		if (!getOptions()->neuronPlacer)
-			throw new std::invalid_argument("The neuronPlacer in the given options cannot be null");
+			throw std::invalid_argument("The neuronPlacer in the given options cannot be nullptr");
 
 		getOptions()->neuronPlacer->setRandomGenerator(randomGenerator.get());
 		// Never do offlineLearning

@@ -37,7 +37,7 @@ namespace LightBulb
 		int comparisons;
 		virtual int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round) = 0;
 	public:
-		AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+		AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 		AbstractCoevolutionWorld() = default;
 		bool doSimulationStep() override;
 		double getScore(AbstractEvolutionObject* object) override;

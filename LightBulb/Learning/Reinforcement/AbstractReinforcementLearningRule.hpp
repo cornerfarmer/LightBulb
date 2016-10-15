@@ -18,7 +18,7 @@ namespace LightBulb
 		AbstractReinforcementWorld* world;
 		AbstractReinforcementLearningRuleOptions()
 		{
-			world = NULL;
+			world = nullptr;
 			maxIterationsPerTry = 10000000000;
 		}
 	};

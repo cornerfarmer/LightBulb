@@ -30,7 +30,7 @@ namespace LightBulb
 		void refresh(wxThreadEvent& event);
 		std::string getEvolutionSourceAsString(EvolutionSource source);
 	public:
-		EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent = NULL);
+		EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent = nullptr);
 		void trainingPlanChanged(wxCommandEvent& event);
 		void refreshTrainingPlans();
 	};

@@ -68,7 +68,7 @@ namespace LightBulb
 		{
 			maxIterationsPerTry = 10000;
 			maxTries = 100;
-			logger = NULL;
+			logger = nullptr;
 			debugOutputInterval = 1000;
 			dataSaveInterval = 1;
 			dataSetsPrefix = "";

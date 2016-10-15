@@ -36,13 +36,13 @@ namespace LightBulb
 			gradientDescentAlgorithm.reset(new SimpleGradientDescent());
 		else
 			gradientDescentAlgorithm.reset(getOptions()->gradientDescentAlgorithm);
-		getOptions()->gradientDescentAlgorithm = NULL;
+		getOptions()->gradientDescentAlgorithm = nullptr;
 
 		if (!getOptions()->gradientCalculation)
 			gradientCalculation.reset(new Backpropagation());
 		else
 			gradientCalculation.reset(getOptions()->gradientCalculation);
-		getOptions()->gradientCalculation = NULL;
+		getOptions()->gradientCalculation = nullptr;
 	}
 
 	std::string GradientDescentLearningRule::getName()

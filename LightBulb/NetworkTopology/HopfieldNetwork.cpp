@@ -33,7 +33,7 @@ namespace LightBulb
 		options->selfReferencingEdges = false;
 		options->neuronCount = neuronCount;
 		// Define thresholds and functions
-		throw new std::exception("currently not working");
+		throw std::exception("currently not working");
 		//options->neuronFactory = new SameNeuronDescriptionFactory(new NetworkDescription(new WeightedSumFunction(), (binaryActivationFunction ? static_cast<AbstractActivationFunction*>(new BinaryFunction(-1)) : static_cast<AbstractActivationFunction*>(new FermiFunction(0.1)))));
 
 		// Build the network

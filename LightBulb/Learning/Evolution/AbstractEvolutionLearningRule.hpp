@@ -19,7 +19,7 @@ namespace LightBulb
 		AbstractEvolutionWorld* world;
 		AbstractEvolutionLearningRuleOptions()
 		{
-			world = NULL;
+			world = nullptr;
 		}
 	};
 

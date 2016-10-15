@@ -26,14 +26,14 @@ namespace LightBulb
 			// Define a variable which should contain the distance to the nearest cluster that contains the current point
 			double nearestClusterDistance = 0;
 			// A variable which holds the nearest cluster
-			Cluster* nearestCluster = NULL;
+			Cluster* nearestCluster = nullptr;
 			// Go through all clusters
 			for (auto cluster = smallClusters->begin(); cluster != smallClusters->end(); cluster++)
 			{
 				// Calculate the distance from the current point to the current cluster
 				double currentDistance = (*point)->valPos.getDistanceBetweenValuePositions(cluster->center, points.getMaxPositionDistance(), points.getMaxValueDistance());
 				// If the distance is inside of the cluster radius and the distance is smaller than the current nearest cluster
-				if (currentDistance < nearestClusterDistance || (nearestCluster == NULL && currentDistance <= cluster->radius * options.widthMultiplier))
+				if (currentDistance < nearestClusterDistance || (nearestCluster == nullptr && currentDistance <= cluster->radius * options.widthMultiplier))
 				{
 					// Set the nearestCluster to the current cluster
 					nearestClusterDistance = currentDistance;
@@ -42,7 +42,7 @@ namespace LightBulb
 			}
 
 			// If no cluster which contains the current point has been found
-			if (nearestCluster == NULL)
+			if (nearestCluster == nullptr)
 			{
 				// Create a new Cluster
 				Cluster newCluster;

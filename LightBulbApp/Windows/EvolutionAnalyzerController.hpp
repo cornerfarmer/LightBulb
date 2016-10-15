@@ -29,7 +29,7 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
+		EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = nullptr);
 		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
 		EvolutionAnalyzerWindow* getWindow();

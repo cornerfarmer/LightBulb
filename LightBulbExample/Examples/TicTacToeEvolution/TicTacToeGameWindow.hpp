@@ -22,7 +22,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	TicTacToeGameWindow(TicTacToeGameController* controller_, LightBulb::AbstractWindow* parent = NULL);
+	TicTacToeGameWindow(TicTacToeGameController* controller_, LightBulb::AbstractWindow* parent = nullptr);
 	void paintEvent(wxPaintEvent & evt);
 	void resize(wxSizeEvent & evt);
 	void paintNow();

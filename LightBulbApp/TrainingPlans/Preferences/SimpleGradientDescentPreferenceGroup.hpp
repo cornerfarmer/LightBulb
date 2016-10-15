@@ -23,7 +23,7 @@ namespace LightBulb
 
 		SimpleGradientDescentOptions create();
 
-		AbstractPreferenceElement* getCopy();
+		AbstractPreferenceElement* getCopy() override;
 	};
 }
 

@@ -373,10 +373,10 @@ namespace LightBulb
 
 				// Determine the candidate unit with the biggest correlation
 				double maxCorrelation = 0;
-				StandardNeuron* bestCandidateUnit = NULL;
+				StandardNeuron* bestCandidateUnit = nullptr;
 				for (auto currentCandidateUnit = currentCandidateUnits.begin(); currentCandidateUnit != currentCandidateUnits.end(); currentCandidateUnit++)
 				{
-					if (bestCandidateUnit == NULL || maxCorrelation < getTotalCorrelationOfUnit(*currentCandidateUnit))
+					if (bestCandidateUnit == nullptr || maxCorrelation < getTotalCorrelationOfUnit(*currentCandidateUnit))
 					{
 						bestCandidateUnit = *currentCandidateUnit;
 						maxCorrelation = getTotalCorrelationOfUnit(*currentCandidateUnit);
@@ -439,7 +439,7 @@ namespace LightBulb
 		if (currentMode == OUTPUTNEURONSLEARNINGMODE)
 			return outputNeuronsBackpropagationLearningRule->getOutputValuesInTime();
 		else
-			return NULL;
+			return nullptr;
 	}
 
 	std::vector<std::map<AbstractNeuron*, double>>* CascadeCorrelationLearningRule::getNetInputValuesInTime()
@@ -447,7 +447,7 @@ namespace LightBulb
 		if (currentMode == OUTPUTNEURONSLEARNINGMODE)
 			return outputNeuronsBackpropagationLearningRule->getNetInputValuesInTime();
 		else
-			return NULL;
+			return nullptr;
 	}
 
 }

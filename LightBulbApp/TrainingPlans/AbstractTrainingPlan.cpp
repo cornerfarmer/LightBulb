@@ -33,7 +33,7 @@ namespace LightBulb
 		if (preferenceGroup)
 			return preferenceGroup->getPreference(name);
 		else
-			return NULL;
+			return nullptr;
 	}
 
 	double AbstractTrainingPlan::getDoublePreference(std::string name, std::string groupName)

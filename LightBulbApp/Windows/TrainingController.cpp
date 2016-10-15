@@ -126,15 +126,15 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 		if (saveTrainingPlanAfterPausedIndex != -1 && (*trainingPlanRepository->getTrainingPlans())[saveTrainingPlanAfterPausedIndex].get() == trainingPlan)
 		{
-			wxThreadEvent evt(TW_EVT_SAVE_TP);
-			evt.SetPayload(saveTrainingPlanAfterPausedIndex);
-			window->GetEventHandler()->QueueEvent(evt.Clone());
+			wxThreadEvent evtSave(TW_EVT_SAVE_TP);
+			evtSave.SetPayload(saveTrainingPlanAfterPausedIndex);
+			window->GetEventHandler()->QueueEvent(evtSave.Clone());
 			saveTrainingPlanAfterPausedIndex = -1;
 		}
 		if (saveTrainingSessionAfterPause && allTrainingPlansPaused())
 		{
-			wxThreadEvent evt(TW_EVT_SAVE_TS);
-			window->GetEventHandler()->QueueEvent(evt.Clone());
+			wxThreadEvent evtSave(TW_EVT_SAVE_TS);
+			window->GetEventHandler()->QueueEvent(evtSave.Clone());
 			saveTrainingSessionAfterPause = false;
 		}
 	}

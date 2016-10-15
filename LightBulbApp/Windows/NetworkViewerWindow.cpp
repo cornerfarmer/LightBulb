@@ -24,7 +24,7 @@ namespace LightBulb
 		:AbstractSubAppWindow(controller_, NetworkViewerController::getLabel(), parent)
 	{
 		selectedNeuronIndex = -1;
-		selectedNetwork = NULL;
+		selectedNetwork = nullptr;
 
 		sizer = new wxBoxSizer(wxVERTICAL);
 		wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);

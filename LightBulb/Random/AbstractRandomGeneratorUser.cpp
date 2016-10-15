@@ -5,7 +5,7 @@ namespace LightBulb
 {
 	AbstractRandomGeneratorUser::AbstractRandomGeneratorUser()
 	{
-		randomGenerator = NULL;
+		randomGenerator = nullptr;
 	}
 
 	void AbstractRandomGeneratorUser::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)

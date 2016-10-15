@@ -31,7 +31,7 @@ namespace LightBulb
 		options.reset(new FeedForwardNetworkTopologyOptions());
 		// Set all options
 		// Define thresholds and functions
-		options->neuronFactory = new DifferentFunctionsNeuronFactory(new NeuronCompareThreshold(NULL), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction(),
+		options->neuronFactory = new DifferentFunctionsNeuronFactory(new NeuronCompareThreshold(nullptr), new EuclideanDistance(), new MinimumNetInputActivationFunction(), new IdentityFunction(),
 			new StandardThreshold(0), new WeightedSumFunction(), new IdentityFunction(), new IdentityFunction());
 		// Set the neuronCounts in all three layers
 		options->neuronsPerLayerCount = std::vector<unsigned int>(3);

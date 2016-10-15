@@ -13,12 +13,12 @@ namespace LightBulb
 
 	AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
 	{
-		network = NULL;
+		network = nullptr;
 	}
 
 	void AbstractSingleNNTrainingPlan::initializeStart()
 	{
-		if (network == NULL)
+		if (network == nullptr)
 		{
 			network = createNeuralNetwork();
 			network->setName("trained by " + getName());

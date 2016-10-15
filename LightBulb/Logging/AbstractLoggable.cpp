@@ -11,7 +11,7 @@ namespace LightBulb
 
 	AbstractLoggable::AbstractLoggable()
 	{
-		logger = NULL;
+		logger = nullptr;
 	}
 
 	void AbstractLoggable::setLogger(AbstractLogger* logger_)

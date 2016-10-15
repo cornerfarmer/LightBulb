@@ -20,7 +20,7 @@ enum
 NatureWindow::NatureWindow(NatureController* controller_, AbstractWindow* parent)
 	:AbstractSubAppWindow(controller_, NatureWindow::getLabel(), parent)
 {
-	panel = NULL;
+	panel = nullptr;
 	Bind(NATURE_EVT_FIELD_CHANGED, &NatureWindow::refreshField, this);
 
 	toolbar = CreateToolBar();

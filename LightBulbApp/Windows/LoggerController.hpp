@@ -32,7 +32,7 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		LoggerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = NULL);
+		LoggerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = nullptr);
 		void show();
 		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();

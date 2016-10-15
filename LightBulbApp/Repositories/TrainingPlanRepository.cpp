@@ -53,7 +53,7 @@ namespace LightBulb
 			if (trainingPlans[i]->getName() == name)
 				return trainingPlans[i].get();
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	void TrainingPlanRepository::setTrainingPlanName(int trainingPlanIndex, std::string newName)

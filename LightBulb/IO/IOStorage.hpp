@@ -38,7 +38,7 @@ namespace LightBulb
 		static T* pop()
 		{
 			T* temp = storage;
-			storage = NULL;
+			storage = nullptr;
 			return temp;
 		}
 
@@ -56,12 +56,12 @@ namespace LightBulb
 		 */
 		static void clear()
 		{
-			storage = NULL;
+			storage = nullptr;
 		}
 	};
 
 	template<typename T>
-	T* IOStorage<T>::storage = NULL;
+	T* IOStorage<T>::storage = nullptr;
 }
 
 #endif

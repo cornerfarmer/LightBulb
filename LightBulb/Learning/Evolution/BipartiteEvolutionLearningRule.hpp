@@ -20,8 +20,8 @@ namespace LightBulb
 
 		BipartiteEvolutionLearningRuleOptions()
 		{
-			learningRule1 = NULL;
-			learningRule2 = NULL;
+			learningRule1 = nullptr;
+			learningRule2 = nullptr;
 		}
 	};
 

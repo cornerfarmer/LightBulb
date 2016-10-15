@@ -13,7 +13,7 @@ namespace LightBulb
 {
 	FreeNetworkOptions::FreeNetworkOptions()
 	{
-		neuronFactory = NULL;
+		neuronFactory = nullptr;
 		useBiasNeuron = false;
 		neuronCount = 0;
 		realInputNeurons = false;
@@ -300,7 +300,7 @@ namespace LightBulb
 		if (options->useBiasNeuron)
 			return &biasNeuron;
 		else
-			return NULL;
+			return nullptr;
 	}
 
 	std::unique_ptr<FeedForwardNetworkTopology> FreeNetwork::unfold(int instanceCount)

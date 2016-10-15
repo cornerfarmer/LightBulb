@@ -28,7 +28,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractTeachingLesson() {}
 		// Put the teachingPattern into the neuralNetwork, refresh the network and fills (optional) the given output and netput values map
-		std::vector<std::vector<double>> tryLesson(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL);
+		std::vector<std::vector<double>> tryLesson(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr);
 		// This method should return a double vector of the teachingInput 
 		virtual NeuralNetworkIO<double>* getTeachingInput(AbstractActivationFunction* activationFunction) = 0;
 		// Returns a map of all teaching inputs of all neurons in all timesteps TODO: Discuss if this method makes sense
@@ -36,7 +36,7 @@ namespace LightBulb
 		// This method should return a double vector of the teachingPattern
 		virtual std::vector<std::vector<double>>* getTeachingPattern() = 0;
 		// Calculate the Errormap and fills (optional) the given output and netput values map
-		std::unique_ptr<ErrorMap_t> getErrormap(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL, bool clipError = false);
+		std::unique_ptr<ErrorMap_t> getErrormap(AbstractNeuralNetwork &neuralNetwork, AbstractActivationOrder &activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool clipError = false);
 		// Returns the Errormap from the given output vector
 		virtual std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork &neuralNetwork, bool clipError = false);
 		// Calculate the specific error

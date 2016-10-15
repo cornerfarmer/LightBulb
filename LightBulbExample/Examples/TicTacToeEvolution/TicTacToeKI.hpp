@@ -20,7 +20,7 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	TicTacToeKI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = NULL);
+	TicTacToeKI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = nullptr);
 	TicTacToeKI() = default;
 	~TicTacToeKI();
 	void setTicTacToe(TicTacToe* newTicTacToe);

@@ -196,7 +196,7 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 				}
 				else
 				{
-					int x, y;
+					int x = 0, y = 0;
 					int freeFieldNr = -1;
 					for (y = 0; y < 3; y++)
 					{

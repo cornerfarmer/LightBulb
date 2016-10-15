@@ -25,11 +25,11 @@ namespace LightBulb
 		Point(std::vector<double> &position_, std::vector<double> &value_)
 			: valPos(position_, value_)
 		{
-			cluster = NULL;
+			cluster = nullptr;
 		}
 		Point()
 		{
-			cluster = NULL;
+			cluster = nullptr;
 		}
 	};
 }

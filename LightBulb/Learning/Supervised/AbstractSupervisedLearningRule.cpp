@@ -105,7 +105,7 @@ namespace LightBulb
 				}
 
 				// Calculate the errormap and also fill - if needed - the output and netInput values map
-				std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder, NULL, NULL, getOptions()->clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
+				std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder, nullptr, nullptr, getOptions()->clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
 
 				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errormap.get());
 

@@ -32,7 +32,7 @@ protected:
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
 	int doCompare(LightBulb::AbstractEvolutionObject* obj1, LightBulb::AbstractEvolutionObject* obj2, int round) override;
 public:
-	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = NULL, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = NULL);
+	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 	Pong() = default;
 	void getNNInput(std::vector<double>& sight);
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator* randomGenerator_) override;

@@ -81,13 +81,13 @@ namespace LightBulb
 
 	void SOMLearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 	{
-		currentActivatedNeuron = NULL;
+		currentActivatedNeuron = nullptr;
 	}
 
 	double SOMLearningRule::calculateDeltaWeightFromEdge(AbstractTeachingLesson& lesson, std::vector<StandardNeuron*>& layer, StandardNeuron& neuron, Edge& edge, int lessonIndex, int layerIndex, int neuronIndex, int edgeIndex, ErrorMap_t* errormap)
 	{
 		// If needed calcualte the current activated neuron
-		if (currentActivatedNeuron == NULL)
+		if (currentActivatedNeuron == nullptr)
 		{
 			for (auto neuron = currentNeuralNetwork->getNetworkTopology()->getNeurons()->front().begin(); neuron != currentNeuralNetwork->getNetworkTopology()->getNeurons()->front().end(); neuron++)
 			{

@@ -15,7 +15,7 @@ namespace LightBulb
 	{
 		enableShortcuts = false;
 		neuronsPerLayerCount = std::vector<unsigned int>();
-		descriptionFactory = NULL;
+		descriptionFactory = nullptr;
 		useBiasNeuron = true;
 	}
 

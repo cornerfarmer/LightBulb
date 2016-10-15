@@ -20,7 +20,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	PongGameController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = NULL);
+	PongGameController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
 	PongGameWindow* getWindow();
 	void stopWatchMode();
 	void startWatchMode();

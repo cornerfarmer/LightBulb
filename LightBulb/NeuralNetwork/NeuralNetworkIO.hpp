@@ -77,7 +77,7 @@ namespace LightBulb
 			if ((*this)[timestep].first && (*this)[timestep].second[index].first)
 				return (*this)[timestep].second[index].second;
 			else
-				throw new std::logic_error("There is no valid value in the given timestep with the given timestep.");
+				throw std::logic_error("There is no valid value in the given timestep with the given timestep.");
 		}
 
 		/**

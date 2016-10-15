@@ -22,22 +22,22 @@ public:
 TEST_F(ScoreConditionTest, evaluateWithEmptyHighscore)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	EXPECT_EQ(false, scoreCondition->evaluate(&highscore, NULL));
+	EXPECT_EQ(false, scoreCondition->evaluate(&highscore, nullptr));
 }
 
 
 TEST_F(ScoreConditionTest, evaluatePositive)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(100, (AbstractEvolutionObject*)NULL));
-	highscore.push_back(std::make_pair(42, (AbstractEvolutionObject*)NULL));
-	EXPECT_EQ(true, scoreCondition->evaluate(&highscore, NULL));
+	highscore.push_back(std::make_pair(100, (AbstractEvolutionObject*)nullptr));
+	highscore.push_back(std::make_pair(42, (AbstractEvolutionObject*)nullptr));
+	EXPECT_EQ(true, scoreCondition->evaluate(&highscore, nullptr));
 }
 
 
 TEST_F(ScoreConditionTest, evaluateNegative)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(42, (AbstractEvolutionObject*)NULL));
-	EXPECT_EQ(false, scoreCondition->evaluate(&highscore, NULL));
+	highscore.push_back(std::make_pair(42, (AbstractEvolutionObject*)nullptr));
+	EXPECT_EQ(false, scoreCondition->evaluate(&highscore, nullptr));
 }

@@ -17,7 +17,7 @@ namespace LightBulb
 			height++;
 
 		// Place all neurons in a temporary grid data structure
-		std::vector<std::vector<StandardNeuron*>> grid(width, std::vector<StandardNeuron*>(height, NULL));
+		std::vector<std::vector<StandardNeuron*>> grid(width, std::vector<StandardNeuron*>(height, nullptr));
 		int neuronIndex = 0;
 		for (auto neuron = somNetwork.getNeurons()->front().begin(); neuron != somNetwork.getNeurons()->front().end(); neuron++, neuronIndex++)
 		{
@@ -29,7 +29,7 @@ namespace LightBulb
 		{
 			for (int y = 0; y < height; y++)
 			{
-				if (grid[x][y] != NULL)
+				if (grid[x][y] != nullptr)
 				{
 					neuronPositionsInStructure[grid[x][y]].resize(2);
 					neuronPositionsInStructure[grid[x][y]][0] = x;
@@ -40,7 +40,7 @@ namespace LightBulb
 					{
 						for (int otherY = 0; otherY < height; otherY++)
 						{
-							if (grid[otherX][otherY] != NULL)
+							if (grid[otherX][otherY] != nullptr)
 							{
 								// Calc the distance between the two current neurons
 								double distance = sqrt(pow(x - otherX, 2.0) + pow(y - otherY, 2.0));

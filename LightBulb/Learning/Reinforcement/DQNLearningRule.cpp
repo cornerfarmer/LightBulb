@@ -51,7 +51,7 @@ namespace LightBulb
 		getOptions()->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(getOptions()->rmsPropOptions);
 		getOptions()->gradientDescentOptions.teacher = &teacher;
 		getOptions()->gradientDescentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
-		getOptions()->gradientDescentOptions.logger = NULL;
+		getOptions()->gradientDescentOptions.logger = nullptr;
 		gradientDescent.reset(new GradientDescentLearningRule(getOptions()->gradientDescentOptions));
 
 		steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
@@ -140,7 +140,6 @@ namespace LightBulb
 
 	std::vector<Eigen::MatrixXd> DQNLearningRule::checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology)
 	{
-		double error = teacher->getTotalError(*getOptions()->world->getNeuralNetwork(), TopologicalOrder());
 		double epsilon = 0.0001;
 		auto weights = networkTopology->getAllWeights();
 		std::vector<Eigen::MatrixXd> gradientApprox(weights->size());
@@ -168,7 +167,6 @@ namespace LightBulb
 	bool DQNLearningRule::doIteration()
 	{
 		currentTotalError = 0;
-		int rewardCounter = 0;
 		double totalReward = 0;
 		int totalEpisodes = 0;
 		bool nextIsStartingState = true;

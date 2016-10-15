@@ -662,7 +662,7 @@ namespace LightBulb
 		size_t len;
 		time_t now;
 
-		now = time(NULL);
+		now = time(nullptr);
 		tm = localtime(&now);
 
 		len = strftime(time_buffer, TIME_SIZE, "%d %B %Y %I:%M:%S %p", tm);

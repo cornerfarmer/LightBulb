@@ -36,7 +36,7 @@ namespace LightBulb
 		void refreshOutput(AbstractNeuralNetwork* network);
 		SimulatorController* getController();
 	public:
-		SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent = NULL);
+		SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent = nullptr);
 		void refreshNeuralNetworks();
 	};
 }

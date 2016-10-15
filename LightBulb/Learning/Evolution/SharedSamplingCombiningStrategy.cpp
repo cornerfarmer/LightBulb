@@ -19,7 +19,7 @@ namespace LightBulb
 		auto prevResults = otherCombiningStrategy->getPrevResults();
 		while (sample.size() < amountOfCompetitionsPerObject)
 		{
-			AbstractEvolutionObject* bestObject = NULL;
+			AbstractEvolutionObject* bestObject = nullptr;
 			for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
 			{
 				if (sampleFitness[*secondPlayer] != -1)
@@ -33,7 +33,7 @@ namespace LightBulb
 								sampleFitness[*secondPlayer] += 1.0 / (1 + beat[resultsPerSecondPlayer->first][result->first]);
 						}
 					}
-					if (bestObject == NULL || sampleFitness[bestObject] < sampleFitness[*secondPlayer])
+					if (bestObject == nullptr || sampleFitness[bestObject] < sampleFitness[*secondPlayer])
 						bestObject = *secondPlayer;
 				}
 			}

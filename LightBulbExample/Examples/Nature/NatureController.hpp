@@ -20,7 +20,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	NatureController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = NULL);
+	NatureController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
 	NatureWindow* getWindow();
 	void stopWatchMode();
 	void startWatchMode();

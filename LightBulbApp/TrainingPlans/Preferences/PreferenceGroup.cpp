@@ -53,7 +53,7 @@ namespace LightBulb
 			if (dynamic_cast<AbstractPreference*>(preference->get()) && (*preference)->getName() == preferenceName)
 				return dynamic_cast<AbstractPreference*>(preference->get());
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	PreferenceGroup* PreferenceGroup::getPreferenceGroup(std::string preferenceGroupName)
@@ -63,7 +63,7 @@ namespace LightBulb
 			if (dynamic_cast<PreferenceGroup*>(preference->get()) && (*preference)->getName() == preferenceGroupName)
 				return dynamic_cast<PreferenceGroup*>(preference->get());
 		}
-		return NULL;
+		return nullptr;
 	}
 
 	double PreferenceGroup::getDoublePreference(std::string preferenceName)

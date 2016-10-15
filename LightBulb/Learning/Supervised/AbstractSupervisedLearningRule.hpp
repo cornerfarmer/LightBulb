@@ -92,8 +92,8 @@ namespace LightBulb
 			maxTotalErrorValue = 2;
 			offlineLearning = false;
 			changeWeightsBeforeLearning = true;
-			neuralNetwork = NULL;
-			teacher = NULL;
+			neuralNetwork = nullptr;
+			teacher = nullptr;
 			clipError = false;
 		}
 		virtual ~AbstractSupervisedLearningRuleOptions() {}

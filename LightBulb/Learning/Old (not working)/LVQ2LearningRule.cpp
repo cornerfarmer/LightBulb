@@ -81,7 +81,7 @@ namespace LightBulb
 	void LVQ2LearningRule::initializeTeachingLesson(NeuralNetwork &neuralNetwork, AbstractTeachingLesson &teachingLesson)
 	{
 		// Determine the winner neurons
-		secondWinnerNeuron = NULL;
+		secondWinnerNeuron = nullptr;
 		for (auto neuron = neuralNetwork.getNetworkTopology()->getNeurons()->front().begin(); neuron != neuralNetwork.getNetworkTopology()->getNeurons()->front().end(); neuron++)
 		{
 			if ((*neuron)->getActivation() == (*neuron)->getActivationFunction()->getMaximum())

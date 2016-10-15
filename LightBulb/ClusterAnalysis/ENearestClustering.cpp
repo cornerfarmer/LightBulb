@@ -34,7 +34,7 @@ namespace LightBulb
 		for (unsigned int i = 1; i < distanceToPoint[&pointToAdd].size() && distanceToPoint[&pointToAdd][i].second <= nearestPointDistance; i++)
 		{
 			// If this point has no cluster yet
-			if (distanceToPoint[&pointToAdd][i].first->cluster == NULL)
+			if (distanceToPoint[&pointToAdd][i].first->cluster == nullptr)
 			{
 				// Set the cluster this point to the given cluster
 				distanceToPoint[&pointToAdd][i].first->cluster = &cluster;

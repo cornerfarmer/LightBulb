@@ -10,7 +10,7 @@ class MockRecombinationCommand : public LightBulb::AbstractRecombinationCommand
 {
 public:
 	MockRecombinationCommand()
-		: LightBulb::AbstractRecombinationCommand(NULL, NULL)
+		: LightBulb::AbstractRecombinationCommand(nullptr, nullptr)
 	{
 	}
 

@@ -48,7 +48,7 @@ namespace LightBulb
 		for (unsigned int i = 0; i < nthNearestPointToPoint[&pointToAdd].size(); i++)
 		{
 			// If the pointToAdd is in the n-th (nearestPointsCount) nearest points from the point in the nthNearestPointToPoint entry and this point has no cluster yet
-			if (nthNearestPointToPoint[&pointToAdd][i].first->cluster == NULL && nthNearestPointToPoint[&pointToAdd][i].second <= nearestPointsCount)
+			if (nthNearestPointToPoint[&pointToAdd][i].first->cluster == nullptr && nthNearestPointToPoint[&pointToAdd][i].second <= nearestPointsCount)
 			{
 				// Set the cluster this point to the given cluster
 				nthNearestPointToPoint[&pointToAdd][i].first->cluster = &cluster;

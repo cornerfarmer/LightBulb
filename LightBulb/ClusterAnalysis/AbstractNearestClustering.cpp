@@ -11,16 +11,16 @@ namespace LightBulb
 		// Create a new cluster list
 		std::unique_ptr<std::list<Cluster>> clusters(new std::list<Cluster>());
 
-		// Go through every point and set the cluster to null
+		// Go through every point and set the cluster to nullptr
 		for (auto point = points.begin(); point != points.end(); point++)
-			(*point)->cluster = NULL;
+			(*point)->cluster = nullptr;
 
 		// Group every point with its k nearest points
 		// Go through every point
 		for (auto point = points.begin(); point != points.end(); point++)
 		{
 			// If the point does not have already a cluster
-			if ((*point)->cluster == NULL)
+			if ((*point)->cluster == nullptr)
 			{
 				// Create a new Cluster for this point
 				Cluster newCluster;

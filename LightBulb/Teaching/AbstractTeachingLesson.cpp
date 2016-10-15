@@ -62,7 +62,7 @@ namespace LightBulb
 	double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNetwork, AbstractActivationOrder& activationOrder, bool clipError)
 	{
 		// Calculate the errorVector
-		std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder, NULL, NULL, clipError);
+		std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder, nullptr, nullptr, clipError);
 
 		double specificError = 0;
 

@@ -16,7 +16,7 @@ namespace LightBulb
 	{
 		Backpropagation options;
 		double flatSpotEliminationFac = getDoublePreference(PREFERENCE_FLATSPOT_ELIMINATION_FAC);
-		return new Backpropagation();
+		return new Backpropagation(flatSpotEliminationFac);
 	}
 
 	AbstractPreferenceElement* BackpropagationPreferenceGroup::getCopy()

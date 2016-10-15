@@ -62,7 +62,7 @@ namespace LightBulb
 		world.hallOfFameToChallengeAlgorithm = tmp;
 		IOStorage<AbstractHallOfFameAlgorithm>::clear();
 
-		tmp = NULL;
+		tmp = nullptr;
 
 		std::vector<double> fitnessValues;
 		archive(cereal::make_nvp("fitnessValues", fitnessValues));

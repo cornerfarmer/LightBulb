@@ -20,7 +20,7 @@ enum
 TicTacToeGameWindow::TicTacToeGameWindow(TicTacToeGameController* controller_, AbstractWindow* parent)
 	:AbstractSubAppWindow(controller_, TicTacToeGameWindow::getLabel(), parent)
 {
-	panel = NULL;
+	panel = nullptr;
 	Bind(TTT_EVT_FIELD_CHANGED, &TicTacToeGameWindow::refreshField, this);
 
 	toolbar = CreateToolBar();

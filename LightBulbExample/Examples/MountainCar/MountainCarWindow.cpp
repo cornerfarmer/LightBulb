@@ -22,7 +22,7 @@ using namespace LightBulb;
 MountainCarWindow::MountainCarWindow(MountainCarController* controller_, AbstractWindow* parent)
 	:AbstractSubAppWindow(controller_, MountainCarWindow::getLabel(), parent)
 {
-	panel = NULL;
+	panel = nullptr;
 	Bind(MOUNTAINCAR_EVT_POS_CHANGED, &MountainCarWindow::refreshField, this);
 
 	toolbar = CreateToolBar();

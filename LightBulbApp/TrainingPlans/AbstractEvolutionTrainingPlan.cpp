@@ -12,7 +12,7 @@ namespace LightBulb
 
 	AbstractEvolutionTrainingPlan::AbstractEvolutionTrainingPlan()
 	{
-		world = NULL;
+		world = nullptr;
 	}
 
 	void AbstractEvolutionTrainingPlan::initializeStart()

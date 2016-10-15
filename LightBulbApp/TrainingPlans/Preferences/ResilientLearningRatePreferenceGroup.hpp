@@ -23,7 +23,7 @@ namespace LightBulb
 
 		ResilientLearningRateOptions create();
 
-		AbstractPreferenceElement* getCopy();
+		AbstractPreferenceElement* getCopy() override;
 	};
 }
 

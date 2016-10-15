@@ -39,8 +39,8 @@ namespace LightBulb
 			// Go through every point
 			for (auto point = points.begin(); point != points.end(); point++)
 			{
-				// Be sure the cluster of the point is null
-				(*point)->cluster = NULL;
+				// Be sure the cluster of the point is nullptr
+				(*point)->cluster = nullptr;
 				// Set the current nearest cluster distance to zero
 				double nearestClusterDistance = 0;
 
@@ -49,7 +49,7 @@ namespace LightBulb
 					// Calculate the distance between the point and the current cluster
 					double currentDistance = (*point)->valPos.getDistanceBetweenValuePositions((*cluster).center, points.getMaxPositionDistance(), points.getMaxValueDistance());
 					// If the currentDistance is less than the nearestClusterDistance or if this is the first cluster
-					if (currentDistance < nearestClusterDistance || (*point)->cluster == NULL)
+					if (currentDistance < nearestClusterDistance || (*point)->cluster == nullptr)
 					{
 						(*point)->cluster = &*cluster;
 						// Set the nearestClusterDistance to the current distance

@@ -19,7 +19,7 @@ namespace LightBulb
 		for (std::vector<std::unique_ptr<AbstractTeachingLesson>>::const_iterator teachingLesson = teacher.getTeachingLessons()->begin(); teachingLesson != teacher.getTeachingLessons()->end(); teachingLesson++)
 		{
 			std::vector<double> position(inputDimension);
-			std::vector<double> value = (*teachingLesson)->getTeachingInput(NULL)->getRealVectorInTimestep(0);
+			std::vector<double> value = (*teachingLesson)->getTeachingInput(nullptr)->getRealVectorInTimestep(0);
 			// Create a new point in the right dimension and with the same value as the current teachingInput
 			Point* newPoint = new Point(position, value);
 			// Set the the teachingPattern of the current teachingLesson to the pointCoordinate

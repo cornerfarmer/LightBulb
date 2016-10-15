@@ -49,8 +49,6 @@ void Pong::initializeForLearning()
 
 int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 {
-	int pointsAI1 = 0;
-	int pointsAI2 = 0;
 	ai2->resetNN();
 	ai1->resetNN();
 

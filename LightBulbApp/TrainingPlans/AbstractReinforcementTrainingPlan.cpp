@@ -12,7 +12,7 @@ namespace LightBulb
 
 	AbstractReinforcementTrainingPlan::AbstractReinforcementTrainingPlan()
 	{
-		world = NULL;
+		world = nullptr;
 	}
 
 	void AbstractReinforcementTrainingPlan::initializeStart()

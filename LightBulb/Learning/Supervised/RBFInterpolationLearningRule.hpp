@@ -32,7 +32,7 @@ namespace LightBulb
 		 */
 		RBFInterpolationLearningRuleOptions()
 		{
-			neuronPlacer = NULL;
+			neuronPlacer = nullptr;
 		}
 		~RBFInterpolationLearningRuleOptions()
 		{

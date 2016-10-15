@@ -37,7 +37,7 @@ namespace LightBulb
 		wxCheckBox* checkBox;
 		LoggerController* getController();
 	public:
-		LoggerWindow(LoggerController* controller_, AbstractWindow* parent = NULL);
+		LoggerWindow(LoggerController* controller_, AbstractWindow* parent = nullptr);
 		void addLogMessage(std::string msg);
 		void clearLog();
 		void refreshTrainingPlans();

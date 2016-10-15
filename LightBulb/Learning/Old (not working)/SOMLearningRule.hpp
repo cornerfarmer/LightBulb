@@ -26,8 +26,8 @@ namespace LightBulb
 		SOMLearningRuleOptions()
 		{
 			learningRate = 0.1;
-			neighborhoodFunction = NULL;
-			distanceShrinkFunction = NULL;
+			neighborhoodFunction = nullptr;
+			distanceShrinkFunction = nullptr;
 		}
 		~SOMLearningRuleOptions();
 		SOMLearningRuleOptions(const SOMLearningRuleOptions &obj);

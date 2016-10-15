@@ -46,8 +46,8 @@ namespace LightBulb
 		:AbstractWindow(controller_, "LightBulb")
 	{
 		controller = controller_;
-		processTrainingPlanSelection = NULL;
-		currentDetailObject = NULL;
+		processTrainingPlanSelection = nullptr;
+		currentDetailObject = nullptr;
 		customMenuVisible = false;
 
 		Bind(TW_EVT_REFRESH_NN, wxCommandEventFunction(&TrainingWindow::refreshNeuralNetworks), this);
@@ -512,7 +512,7 @@ namespace LightBulb
 		toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
 		toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
 		toolbar->EnableTool(TOOLBAR_PREFERENCES, true);
-		processTrainingPlanSelection = NULL;
+		processTrainingPlanSelection = nullptr;
 	}
 
 
@@ -643,7 +643,7 @@ namespace LightBulb
 	void TrainingWindow::clearDetails()
 	{
 		detailsTextBox->Clear();
-		currentDetailObject = NULL;
+		currentDetailObject = nullptr;
 	}
 
 	std::string TrainingWindow::getNeuralNetworkSizeAsString(std::vector<unsigned int> size)
@@ -665,7 +665,7 @@ namespace LightBulb
 
 	void TrainingWindow::startTraining(wxCommandEvent& event)
 	{
-		if (processTrainingPlanSelection == NULL)
+		if (processTrainingPlanSelection == nullptr)
 		{
 			int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
 			int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
@@ -682,7 +682,7 @@ namespace LightBulb
 
 	void TrainingWindow::pauseTraining(wxCommandEvent& event)
 	{
-		if (processTrainingPlanSelection != NULL)
+		if (processTrainingPlanSelection != nullptr)
 		{
 			getController()->pauseTrainingPlan(processTrainingPlanSelection);
 		}

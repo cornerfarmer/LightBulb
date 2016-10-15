@@ -9,7 +9,7 @@ namespace LightBulb
 	EvolutionAnalyzerController::EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
 		:AbstractSubApp(mainApp)
 	{
-		selectedTrainingPlan = NULL;
+		selectedTrainingPlan = nullptr;
 		trainingPlanRepository = trainingPlanRepository_;
 		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &EvolutionAnalyzerController::trainingPlansChanged, this);
 

@@ -58,7 +58,7 @@ namespace LightBulb
 		 * \param resetActivations Control if the activations should be resetted before calculating.
 		 * TODO: Refactor
 		 */
-		virtual void calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = NULL, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = NULL, bool resetActivations = true) = 0;
+		virtual void calculate(std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) = 0;
 		/**
 		 * \brief Calculates from the given input and activation order the output of the neural network.
 		 * \param input The input.

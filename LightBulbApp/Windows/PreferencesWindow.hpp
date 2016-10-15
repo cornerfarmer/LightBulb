@@ -38,7 +38,7 @@ namespace LightBulb
 		PreferencesController* getController();
 		void refreshWindow(wxCollapsiblePaneEvent& event);
 	public:
-		PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent = NULL);
+		PreferencesWindow(PreferencesController* controller_, AbstractWindow* parent = nullptr);
 	};
 }
 

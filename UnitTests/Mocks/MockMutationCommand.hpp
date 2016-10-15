@@ -11,7 +11,7 @@ class MockMutationCommand : public LightBulb::AbstractMutationCommand
 public:
 
 	MockMutationCommand()
-		: LightBulb::AbstractMutationCommand(NULL, NULL)
+		: LightBulb::AbstractMutationCommand(nullptr, nullptr)
 	{
 	}
 	MOCK_METHOD3(execute, void (std::vector<LightBulb::AbstractEvolutionObject*>*, std::map<LightBulb::AbstractEvolutionObject*, int>*, std::vector<LightBulb::AbstractEvolutionObject*>*));

@@ -36,8 +36,8 @@ namespace LightBulb
 		GradientDescentLearningRuleOptions()
 		{
 			offlineLearning = false;
-			gradientCalculation = NULL;
-			gradientDescentAlgorithm = NULL;
+			gradientCalculation = nullptr;
+			gradientDescentAlgorithm = nullptr;
 		}
 	};
 

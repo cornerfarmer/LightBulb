@@ -53,7 +53,7 @@ public:
 	void setUpNeuralNetworkCalculateCall()
 	{
 		neuralNetworkOutput.resize(3, std::vector<double>(3, -1));
-		EXPECT_CALL(*neuralNetwork, calculate(teachingPattern, testing::_, testing::Ref(*activationOrder), 0, -1, NULL, NULL, testing::_)).WillOnce(testing::SetArgReferee<1>(neuralNetworkOutput));
+		EXPECT_CALL(*neuralNetwork, calculate(teachingPattern, testing::_, testing::Ref(*activationOrder), 0, -1, nullptr, nullptr, testing::_)).WillOnce(testing::SetArgReferee<1>(neuralNetworkOutput));
 	}
 
 	virtual ~TeachingLessonLinearInputTest()
@@ -67,7 +67,7 @@ public:
 
 TEST_F(TeachingLessonLinearInputTest, getTeachingInput)
 {
-	EXPECT_EQ(teachingInput, teachingLesson->getTeachingInput(NULL));
+	EXPECT_EQ(teachingInput, teachingLesson->getTeachingInput(nullptr));
 }
 
 TEST_F(TeachingLessonLinearInputTest, getTeachingPattern)
@@ -83,7 +83,7 @@ TEST_F(TeachingLessonLinearInputTest, unfold)
 	expectedTeachingInput.set(0, 0, 7);
 	expectedTeachingInput.set(0, 1, 8);
 	expectedTeachingInput.set(0, 2, 9);
-	EXPECT_EQ(*unfoldedTeachingLesson->getTeachingInput(NULL), expectedTeachingInput);
+	EXPECT_EQ(*unfoldedTeachingLesson->getTeachingInput(nullptr), expectedTeachingInput);
 
 	std::vector<std::vector<double>> expectedTeachingPattern(1, std::vector<double>(6));
 	expectedTeachingPattern[0][0] = 9;

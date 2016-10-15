@@ -65,7 +65,7 @@ namespace LightBulb
 
 		body->Add(dataSetsList, 0, wxRIGHT | wxLEFT | wxEXPAND, 7);
 
-		chartPanel = new wxChartPanel(this, wxID_ANY, NULL, wxDefaultPosition, wxSize(100, 100));
+		chartPanel = new wxChartPanel(this, wxID_ANY, nullptr, wxDefaultPosition, wxSize(100, 100));
 		chartPanel->SetMinSize(wxSize(500, 300));
 
 		body->Add(chartPanel, 1, wxEXPAND);
@@ -244,7 +244,7 @@ namespace LightBulb
 		}
 		else
 		{
-			chartPanel->SetChart(NULL);
+			chartPanel->SetChart(nullptr);
 		}
 
 		getController()->refreshFinished();
@@ -276,7 +276,7 @@ namespace LightBulb
 
 	void LearningStateWindow::refreshComparisonDatasetChoices()
 	{
-		std::string prevSelection = comparisonDatasetChoice->GetString(comparisonDatasetChoice->GetSelection());
+		std::string prevSelection = comparisonDatasetChoice->GetString(comparisonDatasetChoice->GetSelection()).ToStdString();
 		int newSelection = 0;
 		comparisonDatasetChoice->Clear();
 		std::vector<std::string> possibilities = getController()->getPossibleComparisonDatasetLabels();

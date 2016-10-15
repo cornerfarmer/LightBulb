@@ -9,8 +9,8 @@ using namespace LightBulb;
 
 AbstractEvolutionObject* Nature::createNewObject()
 {
-	int posX = 0;
-	int posY = 0;
+	int posX;
+	int posY;
 	do {
 		posX = randomGenerator->randInt(0, width - 1);
 		posY = randomGenerator->randInt(0, height - 1);
@@ -101,8 +101,8 @@ void Nature::resetWorld()
 {
 	for (auto animal = objects.begin(); animal != objects.end(); animal++)
 	{
-		int posX = 0;
-		int posY = 0;
+		int posX;
+		int posY;
 		do {
 			posX = randomGenerator->randInt(0, width - 1);
 			posY = randomGenerator->randInt(0, height - 1);

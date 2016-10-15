@@ -10,7 +10,7 @@ class MockReuseCommand : public LightBulb::AbstractReuseCommand
 {
 public:
 	MockReuseCommand()
-		: LightBulb::AbstractReuseCommand(NULL)
+		: LightBulb::AbstractReuseCommand(nullptr)
 	{
 	}
 

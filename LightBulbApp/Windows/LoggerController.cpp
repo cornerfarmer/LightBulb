@@ -10,7 +10,7 @@ namespace LightBulb
 	{
 		autoScrolling = true;
 		lastLogMessageIndex = -1;
-		selectedTrainingPlan = NULL;
+		selectedTrainingPlan = nullptr;
 		trainingPlanRepository = trainingPlanRepository_;
 		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, this);
 

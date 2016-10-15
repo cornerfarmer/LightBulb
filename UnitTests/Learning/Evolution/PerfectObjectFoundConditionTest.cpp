@@ -22,7 +22,7 @@ public:
 		perfectObjectFoundCondition = new PerfectObjectFoundCondition(2);
 		AbstractEvolutionLearningRuleOptions options;
 		learningRule = new MockEvolutionLearningRule(options);
-		highscore.push_back(std::make_pair(0, (AbstractEvolutionObject*)NULL));
+		highscore.push_back(std::make_pair(0, (AbstractEvolutionObject*)nullptr));
 
 		EXPECT_CALL(*learningRule, getWorld()).WillRepeatedly(testing::Return(&world));
 		EXPECT_CALL(world, getCombiningStrategy()).WillRepeatedly(testing::Return(&combiningStrategy));
@@ -47,7 +47,7 @@ public:
 TEST_F(PerfectObjectFoundConditionTest, evaluateWithEmptyHighscore)
 {
 	highscore.clear();
-	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, NULL));
+	EXPECT_EQ(false, perfectObjectFoundCondition->evaluate(&highscore, nullptr));
 }
 
 
