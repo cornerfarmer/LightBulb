@@ -19,6 +19,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
+		virtual ~AbstractCoevolutionFitnessFunction() {};
 		virtual std::map<AbstractEvolutionObject*, double>* execute(CombiningStrategyResults& results) = 0;
 	};
 }

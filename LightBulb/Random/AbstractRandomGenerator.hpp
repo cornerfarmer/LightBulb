@@ -18,6 +18,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
+		virtual ~AbstractRandomGenerator() {};
 		/**
 		 * \brief Generates a random double between [0, 1[.
 		 * \return The random number.

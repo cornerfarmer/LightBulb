@@ -83,6 +83,7 @@ namespace LightBulb
 		}
 
 	public:
+		virtual ~Observable() {};
 		/**
 		 * \brief Registeres the given object+method as an new observer for the given event type.
 		 * \tparam Class Implicit param of the class of the given observer object

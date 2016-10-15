@@ -23,6 +23,11 @@ namespace LightBulb
 		 */
 		AbstractRandomGenerator* randomGenerator;
 	public:
+		virtual ~AbstractRandomGeneratorUser() {};
+		/**
+		 * \brief Creates an AbstractRandomGeneratorUser
+		 */
+		AbstractRandomGeneratorUser();
 		/**
 		 * \brief Sets the random generator which should be used.
 		 * \param randomGenerator_ The random generator.

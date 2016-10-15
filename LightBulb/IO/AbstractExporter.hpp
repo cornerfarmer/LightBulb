@@ -16,6 +16,7 @@ namespace LightBulb
 	{
 	private:
 	public:
+		virtual ~AbstractExporter() {};
 		virtual std::string execute(NeuralNetwork* neuralNetwork) = 0;
 	};
 }

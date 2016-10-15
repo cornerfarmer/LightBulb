@@ -9,6 +9,11 @@ namespace LightBulb
 			logger->log(message, logLevel);
 	}
 
+	AbstractLoggable::AbstractLoggable()
+	{
+		logger = NULL;
+	}
+
 	void AbstractLoggable::setLogger(AbstractLogger* logger_)
 	{
 		logger = logger_;

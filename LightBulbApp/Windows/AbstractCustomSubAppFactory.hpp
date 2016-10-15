@@ -20,6 +20,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
+		virtual ~AbstractCustomSubAppFactory() {};
 		virtual AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = NULL) = 0;
 		virtual std::string getLabel() = 0;
 	};

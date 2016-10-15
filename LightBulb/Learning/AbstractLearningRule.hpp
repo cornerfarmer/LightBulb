@@ -160,6 +160,7 @@ namespace LightBulb
 		 */
 		AbstractLearningResult* learn(bool resume);
 	public:
+		virtual ~AbstractLearningRule() {};
 		/**
 		 * \brief Creates the learning rule.
 		 * \param options_ The options which configure the learning rule.

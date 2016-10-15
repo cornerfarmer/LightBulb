@@ -20,6 +20,7 @@ namespace LightBulb
 		 */
 		double minValue;
 	public:
+		virtual ~AbstractShrinkFunction() {};
 		/**
 		 * \brief Create the AbstractShrinkFunction.
 		 * \param startValue_ The starting value.

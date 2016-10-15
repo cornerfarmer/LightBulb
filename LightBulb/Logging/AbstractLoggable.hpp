@@ -30,6 +30,10 @@ namespace LightBulb
 	public:
 		virtual ~AbstractLoggable() {};
 		/**
+		 * \brief Creates an AbstractLoggable.
+		 */
+		AbstractLoggable();
+		/**
 		 * \brief Sets the logger.
 		 * \param logger_ The logger which should be used for logging.
 		 */

@@ -54,6 +54,7 @@ namespace LightBulb
 		 */
 		virtual void initializeAlgorithm(AbstractNetworkTopology* networkTopology) = 0;
 	public:
+		virtual ~AbstractGradientDescentAlgorithm() {};
 		/**
 		 * \brief Creates the algorithm.
 		 * \param options_ The options which configure the algorithm.

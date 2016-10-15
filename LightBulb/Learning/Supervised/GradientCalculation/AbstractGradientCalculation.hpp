@@ -33,6 +33,7 @@ namespace LightBulb
 		 */
 		std::vector<Eigen::MatrixXd>* gradientToUse;
 	public:
+		virtual ~AbstractGradientCalculation() {};
 		/**
 		 * \brief Initializes and/or resets the internal gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.

@@ -26,6 +26,8 @@ namespace LightBulb
 		 * \brief Determines if the learning was successful.
 		 */
 		bool succeeded;
+
+		virtual ~AbstractLearningResult() {};
 	};
 }
 

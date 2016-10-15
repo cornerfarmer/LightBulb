@@ -13,6 +13,7 @@ class AbstractJSONElement
 {
 private:
 public:
+	virtual ~AbstractJSONElement() {};
 	virtual std::string toString() = 0;
 };
 

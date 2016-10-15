@@ -20,6 +20,7 @@ namespace LightBulb
 	{
 	private:
 	public:
+		virtual ~AbstractTeacher() {};
 		// Adds a new TechingLesson to the teachingLessons list
 		virtual void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson) = 0;
 		// Adds a new TechingLesson to the testingLessons list

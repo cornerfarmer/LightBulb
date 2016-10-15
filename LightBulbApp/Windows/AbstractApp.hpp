@@ -12,6 +12,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
+		virtual ~AbstractApp() {};
 	};
 }
 

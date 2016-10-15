@@ -29,6 +29,7 @@ namespace LightBulb
 		// Replace all RBFNeurons of the given network with the help of the given clusters
 		void placeRBFNeuronsFromClusters(std::list<Cluster>* clusters, RBFNetwork &neuralNetwork);
 	public:
+		virtual ~AbstractRBFNeuronPlacer() {};
 		// This method should execute the placing process
 		virtual void doPlacing(RBFNetwork &neuralNetwork, Teacher &teacher) = 0;
 		// Returns a copy of the object

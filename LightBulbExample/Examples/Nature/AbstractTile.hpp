@@ -14,7 +14,8 @@
 class AbstractTile 
 {
 protected:	
-public:	
+public:
+	virtual ~AbstractTile() {};
 	virtual float tryToEat() = 0;
 	virtual bool isWalkable() = 0;
 	virtual double getViewValue() = 0;

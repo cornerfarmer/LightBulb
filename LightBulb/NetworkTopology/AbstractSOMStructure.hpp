@@ -27,6 +27,7 @@ namespace LightBulb
 		// Holds the coordinates of every neuron inside the structure (Only used by graphical classes)
 		std::map<StandardNeuron*, std::vector<float>> neuronPositionsInStructure;
 	public:
+		virtual ~AbstractSOMStructure() {};
 		virtual void initialize(SOMNetwork &somNetwork) = 0;
 		std::map<StandardNeuron*, std::map<StandardNeuron*, double>>* getNeighborhoodDistances();
 		std::map<StandardNeuron*, std::vector<float>>* getNeuronPositionsInStructure();

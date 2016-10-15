@@ -18,6 +18,7 @@ namespace LightBulb
 	{
 	private:
 	public:
+		virtual ~AbstractObserver() {};
 		/**
 		 * \brief This method is called if the corresponding observable object throws the registered event.
 		 * \param arg The event argument

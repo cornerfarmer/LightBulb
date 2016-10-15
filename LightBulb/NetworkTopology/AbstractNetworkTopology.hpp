@@ -25,6 +25,7 @@ namespace LightBulb
 	{
 	private:
 	public:
+		virtual ~AbstractNetworkTopology() {};
 		/**
 		 * \brief Returns the amount of edges.
 		 * \return The edge count.
