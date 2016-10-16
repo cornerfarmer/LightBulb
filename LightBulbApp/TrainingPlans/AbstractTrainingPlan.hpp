@@ -59,7 +59,7 @@ namespace LightBulb
 	protected:
 		std::unique_ptr<StorageLogger> logger;
 		virtual void run(bool initial) = 0;
-		virtual AbstractTrainingPlan* getCopy() = 0;
+		virtual AbstractTrainingPlan* getCopy() const = 0;
 		virtual void tryToPause() = 0;
 		void pausingFinished();
 		void finished();
@@ -67,43 +67,44 @@ namespace LightBulb
 		void addCustomSubApp(AbstractCustomSubAppFactory* customSubApp);
 		void addPreference(AbstractPreference* newPreference);
 		void addPreferenceGroup(PreferenceGroup* newPreferenceGroup);
-		PreferenceGroup* getPreferenceGroup(std::string groupName);
-		AbstractPreference* getPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
-		double getDoublePreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
-		int getIntegerPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
-		bool getBooleanPreference(std::string name, std::string groupName = DEFAULT_PREFERENCE_GROUP);
+		PreferenceGroup* getPreferenceGroup(const std::string& groupName);
+		const PreferenceGroup* getPreferenceGroup(const std::string& groupName) const;
+		const AbstractPreference* getPreference(const std::string& name, const std::string& groupName = DEFAULT_PREFERENCE_GROUP) const;
+		double getDoublePreference(const std::string& name, const std::string& groupName = DEFAULT_PREFERENCE_GROUP) const;
+		int getIntegerPreference(const std::string& name, const std::string& groupName = DEFAULT_PREFERENCE_GROUP) const;
+		bool getBooleanPreference(const std::string& name, const std::string& groupName = DEFAULT_PREFERENCE_GROUP) const;
 		template<class OptionsClass, class PreferenceGroupClass>
-		OptionsClass createOptions()
+		OptionsClass createOptions() const
 		{
 			return preferenceGroup->createFromGroup<OptionsClass, PreferenceGroupClass>();
 		}
 		template<class OptionsClass, class PreferenceGroupClass>
-		OptionsClass createOptions(std::string groupName)
+		OptionsClass createOptions(std::string groupName) const
 		{
 			return preferenceGroup->createFromGroup<OptionsClass, PreferenceGroupClass>(groupName);
 		}
 	public:
 		AbstractTrainingPlan();
 		void start();
-		std::string getName();
-		virtual std::string getDefaultName() = 0;
-		virtual std::string getDescription() = 0;
-		virtual std::string getLearningRuleName() = 0;
-		std::string getStateAsString();
+		const std::string& getName() const;
+		virtual const std::string& getDefaultName() const = 0;
+		virtual const std::string& getDescription() const = 0;
+		virtual const std::string& getLearningRuleName() const = 0;
+		const std::string& getStateAsString() const;
 		AbstractTrainingPlan* getCopyForExecute();
-		AbstractTrainingPlan* getTrainingPlanPattern();
+		AbstractTrainingPlan* getTrainingPlanPattern() const;
 		void pause();
-		bool isPaused();
-		bool isPausing();
-		bool isRunning();
-		virtual std::vector<std::string> getDataSetLabels() = 0;
+		bool isPaused() const;
+		bool isPausing() const;
+		bool isRunning() const;
+		virtual std::vector<std::string> getDataSetLabels() const = 0;
 		virtual LearningState* getLearningState() = 0;
 		StorageLogger* getLogger();
-		std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps();
-		std::chrono::duration<double> getRunTime();
-		std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceGroups();
-		void setName(std::string newName);
-		virtual int getSeed() = 0;
+		const std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* getCustomSubApps() const;
+		std::chrono::duration<double> getRunTime() const;
+		const std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceGroups() const;
+		void setName(const std::string& newName);
+		virtual int getSeed() const = 0;
 	};
 }
 

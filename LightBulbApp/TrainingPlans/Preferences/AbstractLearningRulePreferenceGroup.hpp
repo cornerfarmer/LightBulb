@@ -16,11 +16,11 @@ namespace LightBulb
 	class AbstractLearningRulePreferenceGroup : public PreferenceGroup
 	{
 	protected:
-		void fillOptions(AbstractLearningRuleOptions& options);
-		void initialize(AbstractLearningRuleOptions& options);
+		void fillOptions(AbstractLearningRuleOptions& options) const;
+		void initialize(const AbstractLearningRuleOptions& options);
 	public:
-		AbstractLearningRulePreferenceGroup(std::string name = "Learning");
-		AbstractLearningRulePreferenceGroup(AbstractLearningRuleOptions& options, std::string name = "Learning");
+		AbstractLearningRulePreferenceGroup(const std::string& name = "Learning");
+		AbstractLearningRulePreferenceGroup(const AbstractLearningRuleOptions& options, const std::string& name = "Learning");
 	};
 }
 

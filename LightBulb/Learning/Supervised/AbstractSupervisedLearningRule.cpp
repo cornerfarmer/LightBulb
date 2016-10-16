@@ -31,15 +31,16 @@ namespace LightBulb
 			throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 	}
 
-	AbstractSupervisedLearningRuleOptions* AbstractSupervisedLearningRule::getOptions()
+	const AbstractSupervisedLearningRuleOptions* AbstractSupervisedLearningRule::getOptions() const
 	{
 		return static_cast<AbstractSupervisedLearningRuleOptions*>(options.get());
 	}
 
 	void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 	{
-		getOptions()->teacher = initializeTeacher(*getOptions()->teacher);
-		getOptions()->neuralNetwork = initializeNeuralNetwork(*getOptions()->neuralNetwork);
+		// TODO: Refactor?
+		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->teacher = initializeTeacher(*getOptions()->teacher);
+		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->neuralNetwork = initializeNeuralNetwork(*getOptions()->neuralNetwork);
 
 		currentActivationOrder.reset(new TopologicalOrder());
 
@@ -190,7 +191,7 @@ namespace LightBulb
 		return learningResult;
 	}
 
-	bool AbstractSupervisedLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson)
+	bool AbstractSupervisedLearningRule::configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, const AbstractTeachingLesson& teachingLesson)
 	{
 		// Per default only calculate every teaching lesson once in all possible timesteps
 		if (*nextStartTime != -1)
@@ -203,7 +204,7 @@ namespace LightBulb
 		}
 	}
 
-	std::vector<std::string> AbstractSupervisedLearningRule::getDataSetLabels()
+	std::vector<std::string> AbstractSupervisedLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 		labels.push_back(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR);

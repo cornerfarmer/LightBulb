@@ -11,20 +11,20 @@
 
 namespace LightBulb
 {
-	AbstractLearningRulePreferenceGroup::AbstractLearningRulePreferenceGroup(std::string name)
+	AbstractLearningRulePreferenceGroup::AbstractLearningRulePreferenceGroup(const std::string& name)
 		:PreferenceGroup(name)
 	{
 		AbstractLearningRuleOptions options;
 		initialize(options);
 	}
 
-	AbstractLearningRulePreferenceGroup::AbstractLearningRulePreferenceGroup(AbstractLearningRuleOptions& options, std::string name)
+	AbstractLearningRulePreferenceGroup::AbstractLearningRulePreferenceGroup(const AbstractLearningRuleOptions& options, const std::string& name)
 		:PreferenceGroup(name)
 	{
 		initialize(options);
 	}
 
-	void AbstractLearningRulePreferenceGroup::initialize(AbstractLearningRuleOptions& options)
+	void AbstractLearningRulePreferenceGroup::initialize(const AbstractLearningRuleOptions& options)
 	{
 		preferences.clear();
 		addPreference(new IntegerPreference(PREFERENCE_MAX_ITERATIONS_PER_TRY , options.maxIterationsPerTry, 1, 1000000));
@@ -34,7 +34,7 @@ namespace LightBulb
 		addPreference(new IntegerPreference(PREFERENCE_SEED, options.seed, -1, 1000000));
 	}
 	
-	void AbstractLearningRulePreferenceGroup::fillOptions(AbstractLearningRuleOptions& options)
+	void AbstractLearningRulePreferenceGroup::fillOptions(AbstractLearningRuleOptions& options) const
 	{
 		options.maxIterationsPerTry = getIntegerPreference(PREFERENCE_MAX_ITERATIONS_PER_TRY);
 		options.maxTries = getIntegerPreference(PREFERENCE_MAX_TRIES);

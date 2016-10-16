@@ -22,23 +22,28 @@ namespace LightBulb
 		preferenceGroup->addPreference(newPreferenceGroup);
 	}
 
-	PreferenceGroup* AbstractTrainingPlan::getPreferenceGroup(std::string groupName)
+	PreferenceGroup* AbstractTrainingPlan::getPreferenceGroup(const std::string& groupName)
 	{
 		return preferenceGroup->getPreferenceGroup(groupName);
 	}
 
-	AbstractPreference* AbstractTrainingPlan::getPreference(std::string name, std::string groupName)
+	const PreferenceGroup* AbstractTrainingPlan::getPreferenceGroup(const std::string& groupName) const
 	{
-		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		return getPreferenceGroup(groupName);
+	}
+
+	const AbstractPreference* AbstractTrainingPlan::getPreference(const std::string& name, const std::string& groupName) const
+	{
+		const PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
 		if (preferenceGroup)
 			return preferenceGroup->getPreference(name);
 		else
 			return nullptr;
 	}
 
-	double AbstractTrainingPlan::getDoublePreference(std::string name, std::string groupName)
+	double AbstractTrainingPlan::getDoublePreference(const std::string& name, const std::string& groupName) const
 	{
-		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		const PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
 		if (preferenceGroup)
 			return preferenceGroup->getDoublePreference(name);
 		else
@@ -46,25 +51,25 @@ namespace LightBulb
 	}
 
 
-	int AbstractTrainingPlan::getIntegerPreference(std::string name, std::string groupName)
+	int AbstractTrainingPlan::getIntegerPreference(const std::string& name, const std::string& groupName) const
 	{
-		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		const PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
 		if (preferenceGroup)
 			return preferenceGroup->getIntegerPreference(name);
 		else
 			return 0;
 	}
 
-	bool AbstractTrainingPlan::getBooleanPreference(std::string name, std::string groupName)
+	bool AbstractTrainingPlan::getBooleanPreference(const std::string& name, const std::string& groupName) const
 	{
-		PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+		const PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
 		if (preferenceGroup)
 			return preferenceGroup->getBooleanPreference(name);
 		else
 			return false;
 	}
 
-	std::chrono::duration<double> AbstractTrainingPlan::getRunTime()
+	std::chrono::duration<double> AbstractTrainingPlan::getRunTime() const
 	{
 		return (isRunning() || isPausing() ? std::chrono::system_clock::now() - currentStartTime : std::chrono::duration<double>::zero()) + concludedRunTime;
 	}
@@ -99,7 +104,7 @@ namespace LightBulb
 		}
 	}
 
-	std::string AbstractTrainingPlan::getName()
+	const std::string& AbstractTrainingPlan::getName()  const
 	{
 		if (name != "")
 			return name;
@@ -107,7 +112,7 @@ namespace LightBulb
 			return getDefaultName();
 	}
 
-	std::string AbstractTrainingPlan::getStateAsString()
+	const std::string& AbstractTrainingPlan::getStateAsString() const
 	{
 		switch (state)
 		{
@@ -134,7 +139,7 @@ namespace LightBulb
 		return copy;
 	}
 
-	AbstractTrainingPlan* AbstractTrainingPlan::getTrainingPlanPattern()
+	AbstractTrainingPlan* AbstractTrainingPlan::getTrainingPlanPattern() const
 	{
 		return pattern;
 	}
@@ -148,17 +153,17 @@ namespace LightBulb
 		}
 	}
 
-	bool AbstractTrainingPlan::isPaused()
+	bool AbstractTrainingPlan::isPaused() const
 	{
 		return state == TP_PAUSED;
 	}
 
-	bool AbstractTrainingPlan::isPausing()
+	bool AbstractTrainingPlan::isPausing() const
 	{
 		return state == TP_PAUSING;
 	}
 
-	bool AbstractTrainingPlan::isRunning()
+	bool AbstractTrainingPlan::isRunning() const
 	{
 		return state == TP_RUNNING;
 	}
@@ -191,17 +196,17 @@ namespace LightBulb
 		return logger.get();
 	}
 
-	std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* AbstractTrainingPlan::getCustomSubApps()
+	const std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>* AbstractTrainingPlan::getCustomSubApps() const
 	{
 		return &customSubApps;
 	}
 
-	std::vector<std::unique_ptr<AbstractPreferenceElement>>& AbstractTrainingPlan::getPreferenceGroups()
+	const std::vector<std::unique_ptr<AbstractPreferenceElement>>& AbstractTrainingPlan::getPreferenceGroups() const
 	{
 		return preferenceGroup->getPreferenceElements();
 	}
 
-	void AbstractTrainingPlan::setName(std::string newName)
+	void AbstractTrainingPlan::setName(const std::string& newName)
 	{
 		name = newName;
 	}

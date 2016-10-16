@@ -37,33 +37,33 @@ namespace LightBulb
 		bool allTrainingPlansPaused();
 	public:
 		TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_);
-		std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
-		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlanPatterns();
-		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks() const;
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlanPatterns() const;
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
 		void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
 		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 		void pauseTrainingPlan(AbstractTrainingPlan* trainingPlan);
-		int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
-		int getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern);
+		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const;
+		int getIndexOfTrainingPlanPattern(const AbstractTrainingPlan* trainingPlanPattern) const;
 		void trainingPlanPaused(AbstractTrainingPlan* trainingPlan);
 		void trainingPlanFinished(AbstractTrainingPlan* trainingPlan);
 		void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
 		void show();
 		TrainingWindow* getWindow();
 		void addSubAppFactory(AbstractSubAppFactory* newSubAppFactory);
-		void saveNeuralNetwork(std::string path, int neuralNetworkIndex);
-		void loadNeuralNetwork(std::string path);
+		void saveNeuralNetwork(const std::string& path, int neuralNetworkIndex);
+		void loadNeuralNetwork(const std::string& path);
 		void saveTrainingPlan(int trainingPlanIndex);
-		void saveTrainingPlan(std::string path, int trainingPlanIndex);
-		void loadTrainingPlan(std::string path);
-		void loadTrainingSession(std::string path);
-		void saveTrainingSession(std::string path);
+		void saveTrainingPlan(const std::string& path, int trainingPlanIndex);
+		void loadTrainingPlan(const std::string& path);
+		void loadTrainingSession(const std::string& path);
+		void saveTrainingSession(const std::string& path);
 		void saveTrainingSession();
 		void addSubApp(int subAppFactoryIndex);
 		void openPreferences(int trainingPlanPatternIndex);
-		void setTrainingPlanName(int trainingPlanIndex, std::string newName);
-		void removeSubApp(AbstractSubApp* subApp) override;
+		void setTrainingPlanName(int trainingPlanIndex, const std::string& newName);
+		void removeSubApp(const AbstractSubApp* subApp) override;
 	};
 }
 

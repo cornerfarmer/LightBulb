@@ -4,7 +4,7 @@
 
 namespace LightBulb
 {
-	void AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options)
+	void AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options) const
 	{
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
 		options->world = world.get();

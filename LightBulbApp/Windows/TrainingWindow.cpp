@@ -537,7 +537,7 @@ namespace LightBulb
 		}
 	}
 
-	std::string TrainingWindow::getStringFromDuration(std::chrono::duration<double>& duration)
+	std::string TrainingWindow::getStringFromDuration(std::chrono::duration<double> duration) const
 	{
 		auto hours = std::chrono::duration_cast<std::chrono::hours>(duration);
 		duration -= hours;
@@ -646,7 +646,7 @@ namespace LightBulb
 		currentDetailObject = nullptr;
 	}
 
-	std::string TrainingWindow::getNeuralNetworkSizeAsString(std::vector<unsigned int> size)
+	std::string TrainingWindow::getNeuralNetworkSizeAsString(const std::vector<unsigned int>& size) const
 	{
 		std::string neuronCountsPerLayerString = "";
 		for (int i = 0; i < size.size(); i++)
@@ -658,7 +658,7 @@ namespace LightBulb
 		return neuronCountsPerLayerString;
 	}
 
-	int TrainingWindow::getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item)
+	int TrainingWindow::getRowIndexOfItem(const wxDataViewListCtrl* list, const wxDataViewItem& item) const
 	{
 		return ((wxDataViewIndexListModel*)list->GetModel())->GetRow(item);
 	}

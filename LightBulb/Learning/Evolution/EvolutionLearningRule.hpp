@@ -64,7 +64,7 @@ namespace LightBulb
 		std::vector<AbstractEvolutionObject*> notUsedObjects;
 		bool doIteration() override;
 		bool hasLearningSucceeded() override;
-		EvolutionLearningRuleOptions* getOptions();
+		const EvolutionLearningRuleOptions* getOptions() const;
 		void doCalculationAfterLearningProcess() override;
 		void setHelperToUsedObjects() override;
 		bool exitConditionReached;
@@ -76,7 +76,7 @@ namespace LightBulb
 		// Executes the learning process
 		void initializeTry() override;
 		static std::string getName();
-		std::vector<std::string> getDataSetLabels() override;
+		std::vector<std::string> getDataSetLabels() const override;
 		void setLogger(AbstractLogger* logger) override;
 	};
 }

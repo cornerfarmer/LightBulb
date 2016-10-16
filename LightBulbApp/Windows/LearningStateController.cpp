@@ -42,7 +42,7 @@ namespace LightBulb
 		return window.get();
 	}
 
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* LearningStateController::getTrainingPlans()
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* LearningStateController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
@@ -137,7 +137,7 @@ namespace LightBulb
 		selectedDataSets.erase(selectedDataSets.begin() + dataSetIndex);
 	}
 
-	std::string LearningStateController::getComparisonDataSetLabel()
+	const std::string& LearningStateController::getComparisonDataSetLabel() const
 	{
 		return comparisonDataSetLabel;
 	}
@@ -147,7 +147,7 @@ namespace LightBulb
 		comparisonDataSetLabel = newComparisonDataSetLabel;
 	}
 
-	std::string LearningStateController::getLabel()
+	const std::string& LearningStateController::getLabel()
 	{
 		return "LearningState";
 	}

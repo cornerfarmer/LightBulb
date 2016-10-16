@@ -108,25 +108,25 @@ namespace LightBulb
 		options->logger = logger;
 	}
 
-	void AbstractLearningRule::log(std::string message, LogLevel level)
+	void AbstractLearningRule::log(const std::string& message, const LogLevel& level)
 	{
 		if (options->logger)
 			options->logger->log(message, level);
 	}
 
 
-	LearningState* AbstractLearningRule::getLearningState()
+	LearningState* AbstractLearningRule::getLearningState() 
 	{
 		return learningState.get();
 	}
 
-	std::vector<std::string> AbstractLearningRule::getDataSetLabels()
+	std::vector<std::string> AbstractLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels;
 		return labels;
 	}
 
-	int AbstractLearningRule::getSeed()
+	int AbstractLearningRule::getSeed() const
 	{
 		return randomGenerator->getSeed();
 	}

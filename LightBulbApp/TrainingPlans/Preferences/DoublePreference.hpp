@@ -21,13 +21,13 @@ namespace LightBulb
 	protected:
 		double min;
 		double max;
-		std::string getValueAsString() override;
+		const std::string& getValueAsString() const override;
 	public:
-		DoublePreference(std::string name, double defaultValue, double min_, double max_);
+		DoublePreference(const std::string& name, double defaultValue, double min_, double max_);
 		DoublePreference() = default;
-		double getMin();
-		double getMax();
-		AbstractPreferenceElement* getCopy() override;
+		double getMin() const;
+		double getMax() const;
+		AbstractPreferenceElement* getCopy() const override;
 
 	};
 }

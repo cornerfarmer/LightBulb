@@ -16,14 +16,14 @@ namespace LightBulb
 	class SimpleGradientDescentPreferenceGroup : public PreferenceGroup
 	{
 	protected:
-		void initialize(SimpleGradientDescentOptions& options);
+		void initialize(const SimpleGradientDescentOptions& options);
 	public:
-		SimpleGradientDescentPreferenceGroup(std::string name = "Simple gradient descent");
-		SimpleGradientDescentPreferenceGroup(SimpleGradientDescentOptions& options, std::string name = "Simple gradient descent");
+		SimpleGradientDescentPreferenceGroup(const std::string& name = "Simple gradient descent");
+		SimpleGradientDescentPreferenceGroup(const SimpleGradientDescentOptions& options, const std::string& name = "Simple gradient descent");
 
-		SimpleGradientDescentOptions create();
+		SimpleGradientDescentOptions create() const;
 
-		AbstractPreferenceElement* getCopy() override;
+		AbstractPreferenceElement* getCopy() const override;
 	};
 }
 

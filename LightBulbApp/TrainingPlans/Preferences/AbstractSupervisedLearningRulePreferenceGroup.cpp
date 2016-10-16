@@ -16,20 +16,20 @@
 
 namespace LightBulb
 {
-	AbstractSupervisedLearningRulePreferenceGroup::AbstractSupervisedLearningRulePreferenceGroup(std::string name)
+	AbstractSupervisedLearningRulePreferenceGroup::AbstractSupervisedLearningRulePreferenceGroup(const std::string& name)
 		:AbstractLearningRulePreferenceGroup(name)
 	{
 		AbstractSupervisedLearningRuleOptions options;
 		initialize(options);
 	}
 
-	AbstractSupervisedLearningRulePreferenceGroup::AbstractSupervisedLearningRulePreferenceGroup(AbstractSupervisedLearningRuleOptions& options, std::string name)
+	AbstractSupervisedLearningRulePreferenceGroup::AbstractSupervisedLearningRulePreferenceGroup(const AbstractSupervisedLearningRuleOptions& options, const std::string& name)
 		:AbstractLearningRulePreferenceGroup(options, name)
 	{
 		initialize(options);
 	}
 
-	void AbstractSupervisedLearningRulePreferenceGroup::initialize(AbstractSupervisedLearningRuleOptions& options)
+	void AbstractSupervisedLearningRulePreferenceGroup::initialize(const AbstractSupervisedLearningRuleOptions& options)
 	{
 		AbstractLearningRulePreferenceGroup::initialize(options);
 		addPreference(new DoublePreference(PREFERENCE_TOTAL_ERROR_GOAL, options.totalErrorGoal, 0.0001, 2));
@@ -42,7 +42,7 @@ namespace LightBulb
 		addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, options.clipError));
 	}
 	
-	void AbstractSupervisedLearningRulePreferenceGroup::fillOptions(AbstractSupervisedLearningRuleOptions& options)
+	void AbstractSupervisedLearningRulePreferenceGroup::fillOptions(AbstractSupervisedLearningRuleOptions& options) const
 	{
 		AbstractLearningRulePreferenceGroup::fillOptions(options);
 		options.totalErrorGoal = getDoublePreference(PREFERENCE_TOTAL_ERROR_GOAL);

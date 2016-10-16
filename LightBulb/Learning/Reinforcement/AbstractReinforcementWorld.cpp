@@ -105,7 +105,7 @@ namespace LightBulb
 		lastBooleanOutput.resize(lastOutput.size());
 	}
 
-	std::vector<std::string> AbstractReinforcementWorld::getDataSetLabels()
+	std::vector<std::string> AbstractReinforcementWorld::getDataSetLabels() const
 	{
 		std::vector<std::string> labels;
 		return labels;

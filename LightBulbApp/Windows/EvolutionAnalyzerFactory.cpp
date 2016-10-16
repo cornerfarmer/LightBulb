@@ -9,14 +9,14 @@ namespace LightBulb
 		trainingPlanRepository = trainingPlanRepository_;
 	}
 
-	AbstractSubApp* EvolutionAnalyzerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
+	AbstractSubApp* EvolutionAnalyzerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
 	{
 		EvolutionAnalyzerController* controller = new EvolutionAnalyzerController(mainApp, trainingPlanRepository, parent);
 		controller->getWindow()->Show();
 		return controller;
 	}
 
-	std::string EvolutionAnalyzerFactory::getLabel()
+	const std::string& EvolutionAnalyzerFactory::getLabel() const
 	{
 		return EvolutionAnalyzerController::getLabel();
 	}

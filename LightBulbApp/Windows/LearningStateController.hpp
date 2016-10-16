@@ -49,7 +49,7 @@ namespace LightBulb
 	public:
 		LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = nullptr);
 		LearningStateWindow* getWindow();
-		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
 		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 		void setSelectedTrainingPlan(int trainingPlanIndex);
 		AbstractTrainingPlan* getSelectedTrainingPlan();
@@ -62,9 +62,9 @@ namespace LightBulb
 		std::string addDataSet(int tryNumber, int dataSetIndex);
 		std::vector<DataSetSelection>* getSelectedDataSets();
 		void removeDataSet(int dataSetIndex);
-		std::string getComparisonDataSetLabel();
+		const std::string& getComparisonDataSetLabel() const;
 		void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);
-		static std::string getLabel();
+		static const std::string& getLabel();
 		std::vector<std::string> getPossibleComparisonDatasetLabels();
 	};
 }

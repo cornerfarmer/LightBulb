@@ -73,8 +73,8 @@ namespace LightBulb
 		void showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan);
 		void showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
 		void clearDetails();
-		std::string getNeuralNetworkSizeAsString(std::vector<unsigned int> size);
-		int getRowIndexOfItem(wxDataViewListCtrl* list, wxDataViewItem& item);
+		std::string getNeuralNetworkSizeAsString(const std::vector<unsigned int>& size) const;
+		int getRowIndexOfItem(const wxDataViewListCtrl* list, const wxDataViewItem& item) const;
 		void startTraining(wxCommandEvent& event);
 		void pauseTraining(wxCommandEvent& event);
 		void showPreferences(wxCommandEvent& event);
@@ -88,7 +88,7 @@ namespace LightBulb
 		void saveTrainingSession(wxThreadEvent& event);
 		void removeCustomSubAppsMenu();
 		void refreshTrainingPlanRunTimes(wxTimerEvent& event);
-		std::string getStringFromDuration(std::chrono::duration<double>& duration);
+		std::string getStringFromDuration(std::chrono::duration<double> duration) const;
 		TrainingController* getController();
 	protected:
 		void close(wxCloseEvent& event);

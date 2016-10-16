@@ -9,14 +9,14 @@ namespace LightBulb
 		neuralNetworkRepository = neuralNetworkRepository_;
 	}
 
-	AbstractSubApp* NetworkViewerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
+	AbstractSubApp* NetworkViewerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
 	{
 		NetworkViewerController* controller = new NetworkViewerController(mainApp, neuralNetworkRepository, parent);
 		controller->getWindow()->Show();
 		return controller;
 	}
 
-	std::string NetworkViewerFactory::getLabel()
+	const std::string& NetworkViewerFactory::getLabel() const
 	{
 		return NetworkViewerController::getLabel();
 	}

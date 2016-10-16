@@ -28,28 +28,28 @@ namespace LightBulb
 	public:
 		virtual ~PreferenceGroup() {}
 
-		PreferenceGroup(std::string name_);
+		PreferenceGroup(const std::string& name_);
 		PreferenceGroup(const PreferenceGroup& other);
 		PreferenceGroup() = default;
 
-		AbstractPreferenceElement* getCopy() override;
-		std::string getName() override;
+		AbstractPreferenceElement* getCopy() const override;
+		const std::string& getName() const override;
 
-		std::string toString() override;
+		const std::string& toString() const override;
 
 		void addPreference(AbstractPreferenceElement* preferenceElement);
 
-		AbstractPreference* getPreference(std::string preferenceName);
+		const AbstractPreference* getPreference(const std::string& preferenceName) const;
 
-		PreferenceGroup* getPreferenceGroup(std::string preferenceGroupName);
-		double getDoublePreference(std::string preferenceName);
-		int getIntegerPreference(std::string preferenceName);
-		bool getBooleanPreference(std::string preferenceName);
+		PreferenceGroup* getPreferenceGroup(const std::string& preferenceGroupName) const;
+		double getDoublePreference(const std::string& preferenceName) const;
+		int getIntegerPreference(const std::string& preferenceName) const;
+		bool getBooleanPreference(const std::string& preferenceName) const;
 
-		std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceElements();
+		const std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceElements() const;
 
 		template<class Class, class PreferenceGroupClass>
-		Class createFromGroup()
+		Class createFromGroup() const
 		{
 			for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 			{
@@ -59,9 +59,9 @@ namespace LightBulb
 			throw std::logic_error("The preference group could not be found.");
 		}
 		template<class Class, class PreferenceGroupClass>
-		Class createFromGroup(std::string groupName)
+		Class createFromGroup(std::string groupName) const
 		{
-			PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
+			const PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
 			if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup))
 				return dynamic_cast<PreferenceGroupClass*>(preferenceGroup)->create();
 

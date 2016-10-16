@@ -74,18 +74,19 @@ namespace LightBulb
 		 * \brief The calculated gradients.
 		 */
 		std::vector<Eigen::MatrixXd> gradients;
+		void initialize(RBFInterpolationLearningRuleOptions* options);
 	protected:
 		/**
 		 * \brief Returns our current options in form of a RBFInterpolatioLearningRuleOptions object.
 		 * \return The RBFInterpolatioLearningRuleOptions object.
 		 */
-		RBFInterpolationLearningRuleOptions* getOptions();
+		const RBFInterpolationLearningRuleOptions* getOptions() const;
 		// Inherited:
 		void adjustWeights(int layerIndex) override;
 		bool learningHasStopped() override;
 		void initializeStartLearningAlgoritm() override;
 		AbstractActivationOrder* getNewActivationOrder();
-		void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
+		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap) override;
 		void initializeTry() override;
 	public:
 		/**

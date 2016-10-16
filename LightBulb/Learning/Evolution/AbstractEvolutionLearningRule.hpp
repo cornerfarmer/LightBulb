@@ -34,7 +34,7 @@ namespace LightBulb
 	public:
 		AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 		AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
-		std::vector<std::string> getDataSetLabels() override;
+		std::vector<std::string> getDataSetLabels() const override;
 		virtual AbstractEvolutionWorld* getWorld();
 	};
 

@@ -6,7 +6,7 @@
 
 namespace LightBulb
 {
-	PreferenceGroup::PreferenceGroup(std::string name_)
+	PreferenceGroup::PreferenceGroup(const std::string& name_)
 	{
 		name = name_;
 	}
@@ -21,12 +21,12 @@ namespace LightBulb
 		}
 	}
 
-	std::string PreferenceGroup::getName()
+	const std::string& PreferenceGroup::getName() const
 	{
 		return name;
 	}
 
-	std::string PreferenceGroup::toString()
+	const std::string& PreferenceGroup::toString() const
 	{
 		std::string text = name + ":\n";
 		for (auto preference = preferences.begin(); preference !=preferences.end(); preference++)
@@ -41,12 +41,12 @@ namespace LightBulb
 		preferences.push_back(std::unique_ptr<AbstractPreferenceElement>(preferenceElement));
 	}
 
-	AbstractPreferenceElement* PreferenceGroup::getCopy()
+	AbstractPreferenceElement* PreferenceGroup::getCopy() const
 	{
 		return new PreferenceGroup(*this);
 	}
 
-	AbstractPreference* PreferenceGroup::getPreference(std::string preferenceName)
+	const AbstractPreference* PreferenceGroup::getPreference(const std::string& preferenceName) const
 	{
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
@@ -56,7 +56,7 @@ namespace LightBulb
 		return nullptr;
 	}
 
-	PreferenceGroup* PreferenceGroup::getPreferenceGroup(std::string preferenceGroupName)
+	PreferenceGroup* PreferenceGroup::getPreferenceGroup(const std::string& preferenceGroupName) const
 	{
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
@@ -66,9 +66,9 @@ namespace LightBulb
 		return nullptr;
 	}
 
-	double PreferenceGroup::getDoublePreference(std::string preferenceName)
+	double PreferenceGroup::getDoublePreference(const std::string& preferenceName) const
 	{
-		DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(getPreference(preferenceName));
+		const DoublePreference* doublePreference = dynamic_cast<const DoublePreference*>(getPreference(preferenceName));
 		if (doublePreference)
 			return doublePreference->getValue();
 		else
@@ -76,25 +76,25 @@ namespace LightBulb
 	}
 
 
-	int PreferenceGroup::getIntegerPreference(std::string preferenceName)
+	int PreferenceGroup::getIntegerPreference(const std::string& preferenceName) const
 	{
-		IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(getPreference(preferenceName));
+		const IntegerPreference* integerPreference = dynamic_cast<const IntegerPreference*>(getPreference(preferenceName));
 		if (integerPreference)
 			return integerPreference->getValue();
 		else
 			return 0;
 	}
 
-	bool PreferenceGroup::getBooleanPreference(std::string preferenceName)
+	bool PreferenceGroup::getBooleanPreference(const std::string& preferenceName) const
 	{
-		BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(getPreference(preferenceName));
+		const BooleanPreference* booleanPreference = dynamic_cast<const BooleanPreference*>(getPreference(preferenceName));
 		if (booleanPreference)
 			return booleanPreference->getValue();
 		else
 			return false;
 	}
 
-	std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferenceGroup::getPreferenceElements()
+	const std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferenceGroup::getPreferenceElements() const
 	{
 		return preferences;
 	}

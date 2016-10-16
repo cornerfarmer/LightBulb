@@ -16,13 +16,18 @@ namespace LightBulb
 	RBFInterpolationLearningRule::RBFInterpolationLearningRule(RBFInterpolationLearningRuleOptions &options_)
 		: AbstractSupervisedLearningRule(new RBFInterpolationLearningRuleOptions(options_))
 	{
+		initialize(static_cast<RBFInterpolationLearningRuleOptions*>(options.get()));
+	}
+
+	void RBFInterpolationLearningRule::initialize(RBFInterpolationLearningRuleOptions* options)
+	{
 		// Check if all given parameters are correct
-		if (!getOptions()->neuronPlacer)
+		if (!options->neuronPlacer)
 			throw std::invalid_argument("The neuronPlacer in the given options cannot be nullptr");
 
-		getOptions()->neuronPlacer->setRandomGenerator(randomGenerator.get());
+		options->neuronPlacer->setRandomGenerator(randomGenerator.get());
 		// Never do offlineLearning
-		getOptions()->offlineLearning = false;
+		options->offlineLearning = false;
 		// Do only one iteration
 		options->maxIterationsPerTry = 1;
 	}
@@ -71,7 +76,7 @@ namespace LightBulb
 		return new TopologicalOrder();
 	}
 
-	void RBFInterpolationLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
+	void RBFInterpolationLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap)
 	{
 		std::vector<Eigen::MatrixXd> deltaWeight(getCurrentNetworkTopology()->getLayerCount() - 1);
 		for (int layerIndex = getCurrentNetworkTopology()->getLayerCount() - 1; layerIndex > 0; layerIndex--) {
@@ -139,7 +144,7 @@ namespace LightBulb
 		}
 	}
 
-	RBFInterpolationLearningRuleOptions* RBFInterpolationLearningRule::getOptions()
+	const RBFInterpolationLearningRuleOptions* RBFInterpolationLearningRule::getOptions() const
 	{
 		return static_cast<RBFInterpolationLearningRuleOptions*>(options.get());
 	}

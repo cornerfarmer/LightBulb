@@ -5,7 +5,7 @@
 
 namespace LightBulb
 {
-	void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options)
+	void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options) const
 	{
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
 		options->neuralNetwork = network;

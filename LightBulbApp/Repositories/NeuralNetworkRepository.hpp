@@ -28,11 +28,11 @@ namespace LightBulb
 		std::vector<std::unique_ptr<AbstractNeuralNetwork>> neuralNetworks;
 	public:
 		NeuralNetworkRepository();
-		std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
-		int getIndexOfNeuralNetwork(AbstractNeuralNetwork* network);
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks() const;
+		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const;
 		void Add(AbstractNeuralNetwork* neuralNetwork);
-		void save(std::string path, int neuralNetworkIndex);
-		void load(std::string path);
+		void save(const std::string& path, int neuralNetworkIndex) const;
+		void load(const std::string& path);
 	};
 }
 

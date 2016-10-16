@@ -32,12 +32,12 @@ namespace LightBulb
 	private:
 	protected:
 		bool hasLearningSucceeded() override;
-		virtual AbstractReinforcementLearningRuleOptions* getOptions();
+		virtual const AbstractReinforcementLearningRuleOptions* getOptions() const;
 		void randomGeneretorHasChanged();
 	public:
 		AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_);
 		AbstractReinforcementLearningRule() = default;
-		std::vector<std::string> getDataSetLabels() override;
+		std::vector<std::string> getDataSetLabels() const override;
 	};
 }
 

@@ -17,10 +17,10 @@ namespace LightBulb
 	{
 	protected:
 	public:
-		BackpropagationPreferenceGroup(std::string name = "Backpropagation");
+		BackpropagationPreferenceGroup(const std::string& name = "Backpropagation");
 
-		Backpropagation* create();
-		AbstractPreferenceElement* getCopy() override;
+		Backpropagation* create() const;
+		AbstractPreferenceElement* getCopy() const override;
 	};
 }
 

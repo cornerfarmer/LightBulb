@@ -63,13 +63,13 @@ namespace LightBulb
 		/**
 		 * \brief Initializes the learning rule.
 		 */
-		void initialize();
+		void initialize(GradientDescentLearningRuleOptions* options);
 	protected:
 		/**
 		 * \brief Returns our current options in form of a GradientDescentLearningRuleOptions object.
 		 * \return The GradientDescentLearningRuleOptions object.
 		 */
-		GradientDescentLearningRuleOptions* getOptions();
+		const GradientDescentLearningRuleOptions* getOptions() const;
 		// Inherited:
 		/**
 		 * \brief Executes the gradient decent algorithm and adds its return to the weights.
@@ -85,7 +85,7 @@ namespace LightBulb
 		 * \param lessonIndex The current teaching lesson index.
 		 * \param errormap The errormap which represents how well the neural network has done on the current teaching lesson.
 		 */
-		void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) override;
+		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap) override;
 		void initializeTry() override;
 	public:
 		/**

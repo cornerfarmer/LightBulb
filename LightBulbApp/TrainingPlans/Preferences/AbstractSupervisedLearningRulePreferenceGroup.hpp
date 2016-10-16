@@ -16,11 +16,11 @@ namespace LightBulb
 	class AbstractSupervisedLearningRulePreferenceGroup : public AbstractLearningRulePreferenceGroup
 	{
 	protected:
-		void fillOptions(AbstractSupervisedLearningRuleOptions& options);
-		void initialize(AbstractSupervisedLearningRuleOptions& options);
+		void fillOptions(AbstractSupervisedLearningRuleOptions& options) const;
+		void initialize(const AbstractSupervisedLearningRuleOptions& options);
 	public:
-		AbstractSupervisedLearningRulePreferenceGroup(std::string name = "Supervised learning");
-		AbstractSupervisedLearningRulePreferenceGroup(AbstractSupervisedLearningRuleOptions& options, std::string name = "Supervised learning");
+		AbstractSupervisedLearningRulePreferenceGroup(const std::string& name = "Supervised learning");
+		AbstractSupervisedLearningRulePreferenceGroup(const AbstractSupervisedLearningRuleOptions& options, const std::string& name = "Supervised learning");
 	};
 }
 

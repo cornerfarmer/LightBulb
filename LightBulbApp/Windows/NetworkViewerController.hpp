@@ -25,9 +25,9 @@ namespace LightBulb
 	public:
 		NetworkViewerController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = nullptr);
 		NetworkViewerWindow* getWindow();
-		std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks() const;
 		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
-		static std::string getLabel();
+		static const std::string& getLabel();
 
 	};
 }

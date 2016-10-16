@@ -124,7 +124,7 @@ namespace LightBulb
 		 * \brief Returns our current options in form of a AbstractSupervisedLearningRuleOptions object.
 		 * \return The AbstractSupervisedLearningRuleOptions
 		 */
-		AbstractSupervisedLearningRuleOptions* getOptions();
+		const AbstractSupervisedLearningRuleOptions* getOptions() const;
 		/**
 		 * \brief This method can be used to reset any variable which holds the current gradient sum.
 		 */
@@ -135,7 +135,7 @@ namespace LightBulb
 		 * \param lessonIndex The current teaching lesson index.
 		 * \param errormap The errormap which represents how well the neural network has done on the current teaching lesson.
 		 */
-		virtual void calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap) = 0;
+		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap) = 0;
 		/**
 		 * \brief This method should adjust the weight for the current layer.
 		 * \param layerIndex The index of the layer to change.
@@ -159,7 +159,7 @@ namespace LightBulb
 		 * \brief This method can be used to do some work before every teaching lesson.
 		 * \param teachingLesson The next teaching lesson.
 		 */
-		virtual void initializeTeachingLesson(AbstractTeachingLesson &teachingLesson) { };
+		virtual void initializeTeachingLesson(const AbstractTeachingLesson &teachingLesson) { };
 		/**
 		 * \brief This method could be used to do some work after all weights has been adjusted.
 		 */
@@ -187,7 +187,7 @@ namespace LightBulb
 		 * \param teachingLesson The teaching lesson.
 		 * \return If false, the teaching lesson will be skipped.
 		 */
-		virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, AbstractTeachingLesson& teachingLesson);
+		virtual bool configureNextErroMapCalculation(int* nextStartTime, int* nextTimeStepCount, const AbstractTeachingLesson& teachingLesson);
 		/**
 		 * \brief Returns the current network topology
 		 * \return The current network topology
@@ -214,7 +214,7 @@ namespace LightBulb
 		*/
 		AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions* options_);
 		// Inherited:
-		std::vector<std::string> getDataSetLabels() override;
+		std::vector<std::string> getDataSetLabels() const override;
 	};
 }
 

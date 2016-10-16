@@ -8,7 +8,7 @@
 
 namespace LightBulb
 {
-	int TrainingPlanRepository::getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
+	int TrainingPlanRepository::getIndexOfTrainingPlan(const AbstractTrainingPlan* trainingPlan) const
 	{
 		for (int i = 0; i < trainingPlans.size(); i++)
 		{
@@ -24,7 +24,7 @@ namespace LightBulb
 		throwEvent(EVT_TP_CHANGED, this);
 	}
 
-	void TrainingPlanRepository::save(std::string path, int trainingPlanIndex)
+	void TrainingPlanRepository::save(const std::string& path, int trainingPlanIndex) const
 	{
 		std::ofstream os(path, std::ios::binary);
 		cereal::BinaryOutputArchive archive(os);
@@ -33,7 +33,7 @@ namespace LightBulb
 		archive(trainingPlans[trainingPlanIndex]);
 	}
 
-	AbstractTrainingPlan* TrainingPlanRepository::load(std::string path)
+	AbstractTrainingPlan* TrainingPlanRepository::load(const std::string& path)
 	{
 		std::ifstream is(path, std::ios::binary);
 		cereal::BinaryInputArchive archive(is);
@@ -46,7 +46,7 @@ namespace LightBulb
 		return trainingPlans.back().get();
 	}
 
-	AbstractTrainingPlan* TrainingPlanRepository::getByName(std::string name)
+	AbstractTrainingPlan* TrainingPlanRepository::getByName(const std::string& name) const
 	{
 		for (int i = 0; i < trainingPlans.size(); i++)
 		{
@@ -56,13 +56,13 @@ namespace LightBulb
 		return nullptr;
 	}
 
-	void TrainingPlanRepository::setTrainingPlanName(int trainingPlanIndex, std::string newName)
+	void TrainingPlanRepository::setTrainingPlanName(int trainingPlanIndex, const std::string& newName)
 	{
 		trainingPlans[trainingPlanIndex]->setName(newName);
 		throwEvent(EVT_TP_CHANGED, this);
 	}
 
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingPlanRepository::getTrainingPlans()
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingPlanRepository::getTrainingPlans() const
 	{
 		return &trainingPlans;
 	}

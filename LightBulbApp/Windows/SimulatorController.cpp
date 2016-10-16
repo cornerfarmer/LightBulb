@@ -25,7 +25,7 @@ namespace LightBulb
 		return window.get();
 	}
 
-	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* SimulatorController::getNeuralNetworks()
+	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* SimulatorController::getNeuralNetworks()
 	{
 		return neuralNetworkRepository->getNeuralNetworks();
 	}
@@ -35,7 +35,7 @@ namespace LightBulb
 		window->refreshNeuralNetworks();
 	}
 
-	std::vector<double> SimulatorController::calculate(int neuralNetworkIndex, std::vector<double> input)
+	std::vector<double> SimulatorController::calculate(int neuralNetworkIndex, const std::vector<double>& input)
 	{
 		AbstractNeuralNetwork* network = (*neuralNetworkRepository->getNeuralNetworks())[neuralNetworkIndex].get();
 		std::vector<double> output(network->getNetworkTopology()->getOutputSize());
@@ -44,7 +44,7 @@ namespace LightBulb
 		return output;
 	}
 
-	std::string SimulatorController::getLabel()
+	const std::string& SimulatorController::getLabel()
 	{
 		return "Simulator";
 	}

@@ -15,13 +15,13 @@ namespace LightBulb
 	GradientDescentLearningRule::GradientDescentLearningRule(GradientDescentLearningRuleOptions& options_)
 		: AbstractSupervisedLearningRule(new GradientDescentLearningRuleOptions(options_))
 	{
-		initialize();
+		initialize(static_cast<GradientDescentLearningRuleOptions*>(options.get()));
 	}
 
 	GradientDescentLearningRule::GradientDescentLearningRule(GradientDescentLearningRuleOptions* options_)
 		: AbstractSupervisedLearningRule(options_)
 	{
-		initialize();
+		initialize(options_);
 	}
 
 	GradientDescentLearningRule::GradientDescentLearningRule()
@@ -30,19 +30,19 @@ namespace LightBulb
 
 	}
 
-	void GradientDescentLearningRule::initialize()
+	void GradientDescentLearningRule::initialize(GradientDescentLearningRuleOptions* options)
 	{
 		if (!getOptions()->gradientDescentAlgorithm)
 			gradientDescentAlgorithm.reset(new SimpleGradientDescent());
 		else
 			gradientDescentAlgorithm.reset(getOptions()->gradientDescentAlgorithm);
-		getOptions()->gradientDescentAlgorithm = nullptr;
+		options->gradientDescentAlgorithm = nullptr;
 
 		if (!getOptions()->gradientCalculation)
 			gradientCalculation.reset(new Backpropagation());
 		else
 			gradientCalculation.reset(getOptions()->gradientCalculation);
-		getOptions()->gradientCalculation = nullptr;
+		options->gradientCalculation = nullptr;
 	}
 
 	std::string GradientDescentLearningRule::getName()
@@ -51,7 +51,7 @@ namespace LightBulb
 	}
 
 
-	void GradientDescentLearningRule::calculateDeltaWeight(AbstractTeachingLesson& lesson, int lessonIndex, ErrorMap_t* errormap)
+	void GradientDescentLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap)
 	{
 		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errormap);
 	}
@@ -73,7 +73,7 @@ namespace LightBulb
 		return gradientDescentAlgorithm->learningHasStopped();
 	}
 
-	GradientDescentLearningRuleOptions* GradientDescentLearningRule::getOptions()
+	const GradientDescentLearningRuleOptions* GradientDescentLearningRule::getOptions() const
 	{
 		return static_cast<GradientDescentLearningRuleOptions*>(options.get());
 	}

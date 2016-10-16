@@ -263,14 +263,14 @@ namespace LightBulb
 		}
 	}
 
-	int NetworkViewerWindow::getXPos(int layerIndex)
+	int NetworkViewerWindow::getXPos(int layerIndex) const
 	{
 		float spacePartsBefore = layerCount > 1 ? 1.0 / (layerCount - 1) * layerIndex : 0.5;
 		return (width - 2 * BORDER) * spacePartsBefore + BORDER - panel->GetScrollPos(wxHORIZONTAL);
 	}
 
 
-	int NetworkViewerWindow::getYPos(int neuronIndex, int neuronCount)
+	int NetworkViewerWindow::getYPos(int neuronIndex, int neuronCount) const
 	{
 		float spacePartsBefore = neuronCount > 1 ? 1.0 / (neuronCount - 1) * neuronIndex : 0.5;
 		return (height - 2 * BORDER) * spacePartsBefore + BORDER - panel->GetScrollPos(wxVERTICAL);

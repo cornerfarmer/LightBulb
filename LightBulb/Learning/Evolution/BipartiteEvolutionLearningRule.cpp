@@ -25,7 +25,7 @@ namespace LightBulb
 		return "BipartiteEvolutionLearningRule";
 	}
 
-	std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels()
+	std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels1 = getOptions()->learningRule1->getDataSetLabels();
 		std::vector<std::string> labels2 = getOptions()->learningRule2->getDataSetLabels();
@@ -59,7 +59,7 @@ namespace LightBulb
 		getOptions()->learningRule2->options->dataSetsPrefix = "Parasite - ";
 	}
 
-	BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOptions()
+	const BipartiteEvolutionLearningRuleOptions* BipartiteEvolutionLearningRule::getOptions() const
 	{
 		return static_cast<BipartiteEvolutionLearningRuleOptions*>(options.get());
 	}

@@ -7,20 +7,20 @@
 namespace LightBulb
 {
 
-	GradientDescentLearningRulePreferenceGroup::GradientDescentLearningRulePreferenceGroup(std::string name)
+	GradientDescentLearningRulePreferenceGroup::GradientDescentLearningRulePreferenceGroup(const std::string& name)
 		:AbstractSupervisedLearningRulePreferenceGroup(name)
 	{
 		GradientDescentLearningRuleOptions options;
 		initialize(options);
 	}
 
-	GradientDescentLearningRulePreferenceGroup::GradientDescentLearningRulePreferenceGroup(GradientDescentLearningRuleOptions& options, std::string name)
+	GradientDescentLearningRulePreferenceGroup::GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const std::string& name)
 		:AbstractSupervisedLearningRulePreferenceGroup(options, name)
 	{
 		initialize(options);
 	}
 
-	void GradientDescentLearningRulePreferenceGroup::initialize(GradientDescentLearningRuleOptions& options)
+	void GradientDescentLearningRulePreferenceGroup::initialize(const GradientDescentLearningRuleOptions& options) 
 	{
 		AbstractSupervisedLearningRulePreferenceGroup::initialize(options);
 		addPreference(new SimpleGradientDescentPreferenceGroup());
@@ -28,7 +28,7 @@ namespace LightBulb
 		addPreference(new BackpropagationPreferenceGroup());
 	}
 	
-	GradientDescentLearningRuleOptions GradientDescentLearningRulePreferenceGroup::create()
+	GradientDescentLearningRuleOptions GradientDescentLearningRulePreferenceGroup::create() const
 	{
 		GradientDescentLearningRuleOptions options;
 		fillOptions(options);
@@ -38,7 +38,7 @@ namespace LightBulb
 		return options;
 	}
 
-	AbstractPreferenceElement* GradientDescentLearningRulePreferenceGroup::getCopy()
+	AbstractPreferenceElement* GradientDescentLearningRulePreferenceGroup::getCopy() const
 	{
 		return new GradientDescentLearningRulePreferenceGroup(*this);
 	}

@@ -21,7 +21,7 @@ namespace LightBulb
 		return window.get();
 	}
 
-	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NetworkViewerController::getNeuralNetworks()
+	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NetworkViewerController::getNeuralNetworks() const
 	{
 		return neuralNetworkRepository->getNeuralNetworks();
 	}
@@ -33,7 +33,7 @@ namespace LightBulb
 	}
 
 
-	std::string NetworkViewerController::getLabel()
+	const std::string& NetworkViewerController::getLabel()
 	{
 		return "Network viewer";
 	}

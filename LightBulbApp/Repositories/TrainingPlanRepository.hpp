@@ -27,13 +27,13 @@ namespace LightBulb
 	private:
 		std::vector<std::unique_ptr<AbstractTrainingPlan>> trainingPlans;
 	public:
-		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
-		int getIndexOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
+		int getIndexOfTrainingPlan(const AbstractTrainingPlan* trainingPlan) const;
 		void Add(AbstractTrainingPlan* trainingPlan);
-		void save(std::string path, int trainingPlanIndex);
-		AbstractTrainingPlan* load(std::string path);
-		AbstractTrainingPlan* getByName(std::string name);
-		void setTrainingPlanName(int trainingPlanIndex, std::string newName);
+		void save(const std::string& path, int trainingPlanIndex) const;
+		AbstractTrainingPlan* load(const std::string& path);
+		AbstractTrainingPlan* getByName(const std::string& name) const;
+		void setTrainingPlanName(int trainingPlanIndex, const std::string& newName);
 	};
 }
 

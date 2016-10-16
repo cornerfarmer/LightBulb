@@ -36,17 +36,17 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
 
-	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* TrainingController::getNeuralNetworks()
+	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* TrainingController::getNeuralNetworks() const
 	{
 		return neuralNetworkRepository->getNeuralNetworks();
 	}
 
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingController::getTrainingPlanPatterns()
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingController::getTrainingPlanPatterns() const
 	{
 		return &trainingPlanPatterns;
 	}
 
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingController::getTrainingPlans()
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
@@ -110,7 +110,7 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
 
-	int TrainingController::getIndexOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlanPattern)
+	int TrainingController::getIndexOfTrainingPlanPattern(const AbstractTrainingPlan* trainingPlanPattern) const
 	{
 		for (int i = 0; i < trainingPlanPatterns.size(); i++)
 		{
@@ -143,7 +143,7 @@ namespace LightBulb
 	{
 		if (dynamic_cast<AbstractEvolutionTrainingPlan*>(trainingPlan))
 		{
-			EvolutionLearningResult* learningResult = static_cast<EvolutionLearningResult*>(static_cast<AbstractEvolutionTrainingPlan*>(trainingPlan)->getLearningResult());
+			const EvolutionLearningResult* learningResult = static_cast<const EvolutionLearningResult*>(static_cast<AbstractEvolutionTrainingPlan*>(trainingPlan)->getLearningResult());
 			AbstractNeuralNetwork* clone = learningResult->bestObjects.front()->getNeuralNetwork()->clone();
 			clone->setName("Result of " + trainingPlan->getName());
 			neuralNetworkRepository->Add(clone);
@@ -175,17 +175,17 @@ namespace LightBulb
 		window->addSubAppFactory(newSubAppFactory, subAppFactories.size() - 1);
 	}
 
-	int TrainingController::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
+	int TrainingController::getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const
 	{
 		return neuralNetworkRepository->getIndexOfNeuralNetwork(network);
 	}
 
-	void TrainingController::saveNeuralNetwork(std::string path, int neuralNetworkIndex)
+	void TrainingController::saveNeuralNetwork(const std::string& path, int neuralNetworkIndex)
 	{
 		neuralNetworkRepository->save(path, neuralNetworkIndex);
 	}
 
-	void TrainingController::loadNeuralNetwork(std::string path)
+	void TrainingController::loadNeuralNetwork(const std::string& path)
 	{
 		neuralNetworkRepository->load(path);
 	}
@@ -206,12 +206,12 @@ namespace LightBulb
 		}
 	}
 
-	void TrainingController::saveTrainingPlan(std::string path, int trainingPlanIndex)
+	void TrainingController::saveTrainingPlan(const std::string& path, int trainingPlanIndex)
 	{
 		trainingPlanRepository->save(path, trainingPlanIndex);
 	}
 
-	void TrainingController::loadTrainingPlan(std::string path)
+	void TrainingController::loadTrainingPlan(const std::string& path)
 	{
 		AbstractTrainingPlan* trainingPlan = trainingPlanRepository->load(path);
 		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
@@ -220,7 +220,7 @@ namespace LightBulb
 		}
 	}
 
-	void TrainingController::loadTrainingSession(std::string path)
+	void TrainingController::loadTrainingSession(const std::string& path)
 	{
 		std::ifstream is(path);
 		cereal::XMLInputArchive archive(is);
@@ -231,7 +231,7 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
 
-	void TrainingController::saveTrainingSession(std::string path)
+	void TrainingController::saveTrainingSession(const std::string& path)
 	{
 		std::ofstream os(path);
 		cereal::XMLOutputArchive archive(os);
@@ -269,12 +269,12 @@ namespace LightBulb
 		activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
 	}
 
-	void TrainingController::setTrainingPlanName(int trainingPlanIndex, std::string newName)
+	void TrainingController::setTrainingPlanName(int trainingPlanIndex, const std::string& newName)
 	{
 		trainingPlanRepository->setTrainingPlanName(trainingPlanIndex, newName);
 	}
 
-	void TrainingController::removeSubApp(AbstractSubApp* subApp)
+	void TrainingController::removeSubApp(const AbstractSubApp* subApp)
 	{
 		for (auto activeSubApp = activeSubApps.begin(); activeSubApp != activeSubApps.end(); activeSubApp++)
 		{

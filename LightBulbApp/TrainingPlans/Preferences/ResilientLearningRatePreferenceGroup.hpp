@@ -16,14 +16,14 @@ namespace LightBulb
 	class ResilientLearningRatePreferenceGroup : public PreferenceGroup
 	{
 	protected:
-		void initialize(ResilientLearningRateOptions& options);
+		void initialize(const ResilientLearningRateOptions& options);
 	public:
-		ResilientLearningRatePreferenceGroup(std::string name = "Resilient learning rate");
-		ResilientLearningRatePreferenceGroup(ResilientLearningRateOptions& options, std::string name = "Resilient learning rate");
+		ResilientLearningRatePreferenceGroup(const std::string& name = "Resilient learning rate");
+		ResilientLearningRatePreferenceGroup(const ResilientLearningRateOptions& options, const std::string& name = "Resilient learning rate");
 
-		ResilientLearningRateOptions create();
+		ResilientLearningRateOptions create() const;
 
-		AbstractPreferenceElement* getCopy() override;
+		AbstractPreferenceElement* getCopy() const override;
 	};
 }
 

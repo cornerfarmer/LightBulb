@@ -30,7 +30,7 @@ namespace LightBulb
 		window->refreshTrainingPlans();
 	}
 
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* EvolutionAnalyzerController::getTrainingPlans()
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* EvolutionAnalyzerController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
@@ -40,7 +40,7 @@ namespace LightBulb
 		return window.get();
 	}
 
-	std::string EvolutionAnalyzerController::getLabel()
+	const std::string& EvolutionAnalyzerController::getLabel()
 	{
 		return "Evolution analyzer";
 	}
@@ -70,7 +70,7 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
 
-	std::vector<std::pair<EvolutionSource, double>>* EvolutionAnalyzerController::getCurrentState()
+	const std::vector<std::pair<EvolutionSource, double>>* EvolutionAnalyzerController::getCurrentState() const
 	{
 		return &currentState;
 	}

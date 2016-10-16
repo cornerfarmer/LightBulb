@@ -28,10 +28,10 @@ namespace LightBulb
 	public:
 		SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = nullptr);
 		SimulatorWindow* getWindow();
-		std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
-		std::vector<double> calculate(int neuralNetworkIndex, std::vector<double> input);
-		static std::string getLabel();
+		std::vector<double> calculate(int neuralNetworkIndex, const std::vector<double>& input);
+		static const std::string& getLabel();
 	};
 }
 

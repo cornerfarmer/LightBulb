@@ -18,8 +18,8 @@ namespace LightBulb
 		TrainingPlanRepository* trainingPlanRepository;
 	public:
 		LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_);
-		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) override;
-		std::string getLabel() override;
+		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const override;
+		const std::string& getLabel() const override;
 	};
 }
 

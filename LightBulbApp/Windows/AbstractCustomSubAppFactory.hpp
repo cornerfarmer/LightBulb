@@ -21,8 +21,8 @@ namespace LightBulb
 	protected:
 	public:
 		virtual ~AbstractCustomSubAppFactory() {};
-		virtual AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = nullptr) = 0;
-		virtual std::string getLabel() = 0;
+		virtual AbstractCustomSubApp* createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent = nullptr) const = 0;
+		virtual const std::string& getLabel() const = 0;
 	};
 }
 

@@ -36,7 +36,7 @@ namespace LightBulb
 		window->refreshTrainingPlans();
 	}
 
-	std::vector<std::unique_ptr<AbstractTrainingPlan>>* LoggerController::getTrainingPlans()
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* LoggerController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
@@ -62,7 +62,7 @@ namespace LightBulb
 		}
 	}
 
-	std::string LoggerController::getLabel()
+	const std::string& LoggerController::getLabel()
 	{
 		return "Logger";
 	}
@@ -81,12 +81,12 @@ namespace LightBulb
 		logMessagesAdding = false;
 	}
 
-	std::vector<std::pair<LogLevel, std::string>>* LoggerController::getMessages()
+	const std::vector<std::pair<LogLevel, std::string>>* LoggerController::getMessages() const
 	{
 		return selectedTrainingPlan->getLogger()->getMessages();
 	}
 
-	LogLevel LoggerController::getLogLevel()
+	const LogLevel& LoggerController::getLogLevel() const
 	{
 		return selectedTrainingPlan->getLogger()->getLogLevel();
 	}
@@ -96,7 +96,7 @@ namespace LightBulb
 		autoScrolling = newAutoScrolling;
 	}
 
-	bool LoggerController::isAutoScrolling()
+	bool LoggerController::isAutoScrolling() const
 	{
 		return autoScrolling;
 	}

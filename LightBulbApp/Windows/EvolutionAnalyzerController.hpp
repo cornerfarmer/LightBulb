@@ -31,12 +31,12 @@ namespace LightBulb
 	public:
 		EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = nullptr);
 		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
-		std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans();
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
 		EvolutionAnalyzerWindow* getWindow();
-		static std::string getLabel();
+		static const std::string& getLabel();
 		void selectTrainingPlan(int trainingPlanIndex);
 		void evolutionStepCompleted(EvolutionLearningRule* evolutionLearningRule);
-		std::vector<std::pair<EvolutionSource, double>>* getCurrentState();
+		const std::vector<std::pair<EvolutionSource, double>>* getCurrentState() const;
 	};
 }
 

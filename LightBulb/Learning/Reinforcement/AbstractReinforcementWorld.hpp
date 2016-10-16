@@ -55,7 +55,7 @@ namespace LightBulb
 		void setEpsilon(double newEpsilon);
 		double getEpsilon();
 		void setLearningState(LearningState* learningState_);
-		virtual std::vector<std::string> getDataSetLabels();
+		virtual std::vector<std::string> getDataSetLabels() const;
 		std::vector<bool>* getLastBooleanOutput();
 		virtual bool isTerminalState() = 0;
 		void setStochasticActionDecision(bool useStochasticActionDecision_);

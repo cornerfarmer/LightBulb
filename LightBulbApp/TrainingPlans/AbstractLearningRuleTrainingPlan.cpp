@@ -25,12 +25,12 @@ namespace LightBulb
 		learningRule->sendPauseRequest();
 	}
 
-	void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options)
+	void AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options) const
 	{
 		options->logger = logger.get();
 	}
 
-	std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels()
+	std::vector<std::string> AbstractLearningRuleTrainingPlan::getDataSetLabels() const
 	{
 		return learningRule->getDataSetLabels();
 	}
@@ -40,7 +40,7 @@ namespace LightBulb
 		return learningRule->getLearningState();
 	}
 
-	AbstractLearningResult* AbstractLearningRuleTrainingPlan::getLearningResult()
+	const AbstractLearningResult* AbstractLearningRuleTrainingPlan::getLearningResult() const
 	{
 		return learningResult.get();
 	}
@@ -50,7 +50,7 @@ namespace LightBulb
 		return learningRule.get();
 	}
 
-	int AbstractLearningRuleTrainingPlan::getSeed()
+	int AbstractLearningRuleTrainingPlan::getSeed() const
 	{
 		return learningRule->getSeed();
 	}

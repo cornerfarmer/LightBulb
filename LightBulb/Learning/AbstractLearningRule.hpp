@@ -137,7 +137,7 @@ namespace LightBulb
 		 * \param message The message the log.
 		 * \param level The log level of the message.
 		 */
-		void log(std::string message, LogLevel level);
+		void log(const std::string& message, const LogLevel& level);
 		/**
 		 * \brief Returns if the learning has succeeded.
 		 * \return True, if the learning has been successful.
@@ -194,12 +194,12 @@ namespace LightBulb
 		 * \brief Returns a vector of all data set labels which are available in the learning state of this learning rule.
 		 * \return The labels of all available data sets.
 		 */
-		virtual std::vector<std::string> getDataSetLabels();
+		virtual std::vector<std::string> getDataSetLabels() const;
 		/**
 		 * \brief Returns the starting seed of the random generator which is used by the learning rule.
 		 * \return The seed.
 		 */
-		int getSeed();
+		int getSeed() const;
 	};
 }
 

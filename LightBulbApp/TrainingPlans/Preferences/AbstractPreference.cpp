@@ -8,12 +8,12 @@ namespace LightBulb
 		name = name_;
 	}
 
-	std::string AbstractPreference::getName()
+	const std::string& AbstractPreference::getName() const
 	{
 		return name;
 	}
 
-	std::string AbstractPreference::toString()
+	const std::string& AbstractPreference::toString() const
 	{
 		return name + " -> " + getValueAsString() + "\n";
 	}

@@ -63,7 +63,7 @@ namespace LightBulb
 		 * \param data The new data.
 		 * \note Depending on the selected data save interval, this method does not always store the given data.
 		 */
-		void addData(std::string dataSetLabel, double data)
+		void addData(const std::string& dataSetLabel, double data)
 		{
 			if ((iterations - 1) % dataSaveInterval == 0)
 			{

@@ -23,13 +23,13 @@ namespace LightBulb
 	protected:
 		AbstractNeuralNetwork* network;
 		virtual AbstractNeuralNetwork* createNeuralNetwork() = 0;
-		void fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options);
+		void fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options) const;
 	public:
 		AbstractSingleNNTrainingPlan();
 		void initializeStart() override;
 		AbstractNeuralNetwork* getNeuralNetwork();
-		virtual int getRequiredInputSize() = 0;
-		virtual int getRequiredOutputSize() = 0;
+		virtual int getRequiredInputSize() const = 0;
+		virtual int getRequiredOutputSize() const = 0;
 		void setNeuralNetwork(AbstractNeuralNetwork* network_);
 	};
 }

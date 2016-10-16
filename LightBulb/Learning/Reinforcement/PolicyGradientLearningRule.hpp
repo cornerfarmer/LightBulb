@@ -56,12 +56,12 @@ namespace LightBulb
 		void addGradients(AbstractNetworkTopology* networkTopology);
 		void computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward);
 		void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations);
-		void initialize();
+		void initialize(PolicyGradientLearningRuleOptions* options);
 		void recordStep(AbstractNetworkTopology* networkTopology);
 		void getErrorVector(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector);
 	protected:
 		bool doIteration() override;
-		PolicyGradientLearningRuleOptions* getOptions() override;
+		const PolicyGradientLearningRuleOptions* getOptions() const override;
 		void doCalculationAfterLearningProcess() override;
 		AbstractLearningResult* getLearningResult() override;
 		void initializeLearningAlgoritm() override;
@@ -72,7 +72,7 @@ namespace LightBulb
 		// Executes the learning process
 		void initializeTry() override;
 		static std::string getName();
-		std::vector<std::string> getDataSetLabels() override;
+		std::vector<std::string> getDataSetLabels() const override;
 	};
 }
 

@@ -122,7 +122,7 @@ namespace LightBulb
 		return "EvolutionLearningRule";
 	}
 
-	std::vector<std::string> EvolutionLearningRule::getDataSetLabels()
+	std::vector<std::string> EvolutionLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 		labels.push_back(getOptions()->dataSetsPrefix + DATA_SET_FITNESS);
@@ -271,7 +271,7 @@ namespace LightBulb
 		return true;
 	}
 
-	EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions()
+	const EvolutionLearningRuleOptions* EvolutionLearningRule::getOptions() const
 	{
 		return static_cast<EvolutionLearningRuleOptions*>(options.get());
 	}

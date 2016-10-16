@@ -3,17 +3,17 @@
 
 namespace LightBulb
 {
-	BooleanPreference::BooleanPreference(std::string name, bool defaultValue)
+	BooleanPreference::BooleanPreference(const std::string& name, bool defaultValue)
 		:AbstractVariablePreference(name, defaultValue)
 	{
 	}
 
-	AbstractPreferenceElement* BooleanPreference::getCopy()
+	AbstractPreferenceElement* BooleanPreference::getCopy() const
 	{
 		return new BooleanPreference(*this);
 	}
 
-	std::string BooleanPreference::getValueAsString()
+	const std::string& BooleanPreference::getValueAsString() const
 	{
 		return std::to_string(value);
 	}

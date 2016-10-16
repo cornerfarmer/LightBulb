@@ -24,7 +24,7 @@ namespace LightBulb
 	protected:
 		std::string name;
 
-		virtual std::string getValueAsString() = 0;
+		virtual const std::string& getValueAsString() const = 0;
 	public:
 		virtual ~AbstractPreference() {}
 
@@ -32,9 +32,9 @@ namespace LightBulb
 
 		AbstractPreference() = default;
 
-		std::string getName() override;
+		const std::string& getName() const override;
 
-		std::string toString() override;
+		const std::string& toString() const override;
 	};
 }
 

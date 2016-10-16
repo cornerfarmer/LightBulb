@@ -38,7 +38,7 @@ namespace LightBulb
 		LoggerController* getController();
 	public:
 		LoggerWindow(LoggerController* controller_, AbstractWindow* parent = nullptr);
-		void addLogMessage(std::string msg);
+		void addLogMessage(const std::string& msg);
 		void clearLog();
 		void refreshTrainingPlans();
 	};

@@ -10,7 +10,7 @@ namespace LightBulb
 	#define PREFERENCE_LEARNINGRATE_RATE_MIN "Minimum learning rate"
 	#define PREFERENCE_LEARNINGRATE_START "Starting learning rate"
 
-	ResilientLearningRatePreferenceGroup::ResilientLearningRatePreferenceGroup(std::string name)
+	ResilientLearningRatePreferenceGroup::ResilientLearningRatePreferenceGroup(const std::string& name)
 		:PreferenceGroup(name)
 	{
 		ResilientLearningRateOptions options;
@@ -18,13 +18,13 @@ namespace LightBulb
 	}
 
 
-	ResilientLearningRatePreferenceGroup::ResilientLearningRatePreferenceGroup(ResilientLearningRateOptions& options, std::string name)
+	ResilientLearningRatePreferenceGroup::ResilientLearningRatePreferenceGroup(const ResilientLearningRateOptions& options, const std::string& name)
 		:PreferenceGroup(name)
 	{
 		initialize(options);
 	}
 
-	void ResilientLearningRatePreferenceGroup::initialize(ResilientLearningRateOptions& options)
+	void ResilientLearningRatePreferenceGroup::initialize(const ResilientLearningRateOptions& options)
 	{
 		addPreference(new DoublePreference(PREFERENCE_LEARNINGRATE_GROW_FAC, options.learningRateGrowFac, 1, 10));
 		addPreference(new DoublePreference(PREFERENCE_LEARNINGRATE_SHRINK_FAC, options.learningRateShrinkFac, 0, 1));
@@ -33,7 +33,7 @@ namespace LightBulb
 		addPreference(new DoublePreference(PREFERENCE_LEARNINGRATE_START, options.learningRateStart, 0, 1));
 	}
 
-	ResilientLearningRateOptions ResilientLearningRatePreferenceGroup::create()
+	ResilientLearningRateOptions ResilientLearningRatePreferenceGroup::create() const
 	{
 		ResilientLearningRateOptions options;
 		options.learningRateGrowFac = getDoublePreference(PREFERENCE_LEARNINGRATE_GROW_FAC);
@@ -44,7 +44,7 @@ namespace LightBulb
 		return options;
 	}
 
-	AbstractPreferenceElement* ResilientLearningRatePreferenceGroup::getCopy()
+	AbstractPreferenceElement* ResilientLearningRatePreferenceGroup::getCopy() const
 	{
 		return new ResilientLearningRatePreferenceGroup(*this);
 	}

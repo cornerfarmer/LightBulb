@@ -34,7 +34,7 @@ namespace LightBulb
 		 * \brief Returns all messages.
 		 * \return All messages.
 		 */
-		const std::vector<std::pair<LogLevel, std::string>>* getMessages();
+		const std::vector<std::pair<LogLevel, std::string>>* getMessages() const;
 		// Inherited:
 		void log(const std::string& message, const LogLevel& level) override;
 	};

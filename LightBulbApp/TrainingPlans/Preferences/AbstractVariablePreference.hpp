@@ -19,7 +19,7 @@ namespace LightBulb
 		Type value;
 		Type defaultValue;
 	public:
-		AbstractVariablePreference(std::string name, Type defaultValue_)
+		AbstractVariablePreference(const std::string& name, Type defaultValue_)
 			:AbstractPreference(name)
 		{
 			defaultValue = defaultValue_;
@@ -35,7 +35,7 @@ namespace LightBulb
 			value = newValue;
 		}
 
-		Type getValue()
+		Type getValue() const
 		{
 			return value;
 		}

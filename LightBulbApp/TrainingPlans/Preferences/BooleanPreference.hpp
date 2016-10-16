@@ -19,11 +19,11 @@ namespace LightBulb
 		template <class Archive>
 		friend void load(Archive& archive, BooleanPreference& booleanPreference);
 	protected:
-		std::string getValueAsString() override;
+		const std::string& getValueAsString() const override;
 	public:
-		BooleanPreference(std::string name, bool defaultValue);
+		BooleanPreference(const std::string& name, bool defaultValue);
 		BooleanPreference() = default;
-		AbstractPreferenceElement* getCopy() override;
+		AbstractPreferenceElement* getCopy() const override;
 	};
 }
 

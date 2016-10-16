@@ -34,8 +34,8 @@ namespace LightBulb
 		int layerCount, width, height;
 		int selectedNeuronIndex;
 		int selectedLayerIndex;
-		int getXPos(int layerIndex);
-		int getYPos(int neuronIndex, int neuronCount);
+		int getXPos(int layerIndex) const;
+		int getYPos(int neuronIndex, int neuronCount) const;
 		void refreshDetail();
 		void eraseBackGround(wxEraseEvent& event);
 	protected:

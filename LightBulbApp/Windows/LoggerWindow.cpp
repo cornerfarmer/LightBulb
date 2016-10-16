@@ -66,7 +66,7 @@ namespace LightBulb
 		getController()->setAutoScrolling(event.GetSelection());
 	}
 
-	void LoggerWindow::addLogMessage(std::string msg)
+	void LoggerWindow::addLogMessage(const std::string& msg)
 	{
 		textBox->AppendText(msg + "\n");
 		if (textBox->GetNumberOfLines() > 2500)

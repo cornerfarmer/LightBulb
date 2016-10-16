@@ -9,14 +9,14 @@ namespace LightBulb
 		trainingPlanRepository = trainingPlanRepository_;
 	}
 
-	AbstractSubApp* LearningStateFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent)
+	AbstractSubApp* LearningStateFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
 	{
 		LearningStateController* controller = new LearningStateController(mainApp, trainingPlanRepository, parent);
 		controller->getWindow()->Show();
 		return controller;
 	}
 
-	std::string LearningStateFactory::getLabel()
+	const std::string& LearningStateFactory::getLabel() const
 	{
 		return LearningStateController::getLabel();
 	}

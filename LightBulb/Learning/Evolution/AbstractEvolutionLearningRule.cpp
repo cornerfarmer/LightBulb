@@ -25,7 +25,7 @@ namespace LightBulb
 	{
 	}
 
-	std::vector<std::string> AbstractEvolutionLearningRule::getDataSetLabels()
+	std::vector<std::string> AbstractEvolutionLearningRule::getDataSetLabels() const
 	{
 		return AbstractLearningRule::getDataSetLabels();
 	}

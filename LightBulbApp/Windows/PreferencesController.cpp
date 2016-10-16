@@ -16,13 +16,13 @@ namespace LightBulb
 		return window.get();
 	}
 
-	std::string PreferencesController::getLabel()
+	const std::string& PreferencesController::getLabel()
 	{
 		return "Preferences";
 	}
 
 
-	std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferencesController::getPreferenceGroups()
+	const std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferencesController::getPreferenceGroups()
 	{
 		return trainingPlan->getPreferenceGroups();
 	}

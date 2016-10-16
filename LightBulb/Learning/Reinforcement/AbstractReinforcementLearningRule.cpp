@@ -22,7 +22,7 @@ namespace LightBulb
 		return false;
 	}
 
-	std::vector<std::string> AbstractReinforcementLearningRule::getDataSetLabels()
+	std::vector<std::string> AbstractReinforcementLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 		labels.push_back(DATA_SET_REWARD);
@@ -32,7 +32,7 @@ namespace LightBulb
 	}
 
 
-	AbstractReinforcementLearningRuleOptions* AbstractReinforcementLearningRule::getOptions()
+	const AbstractReinforcementLearningRuleOptions* AbstractReinforcementLearningRule::getOptions() const
 	{
 		return static_cast<AbstractReinforcementLearningRuleOptions*>(options.get());
 	}

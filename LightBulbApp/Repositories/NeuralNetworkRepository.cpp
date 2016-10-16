@@ -12,12 +12,12 @@ namespace LightBulb
 
 	}
 
-	std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NeuralNetworkRepository::getNeuralNetworks()
+	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NeuralNetworkRepository::getNeuralNetworks() const
 	{
 		return &neuralNetworks;
 	}
 
-	int NeuralNetworkRepository::getIndexOfNeuralNetwork(AbstractNeuralNetwork* network)
+	int NeuralNetworkRepository::getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const
 	{
 		for (int i = 0; i < neuralNetworks.size(); i++)
 		{
@@ -33,7 +33,7 @@ namespace LightBulb
 		throwEvent(EVT_NN_CHANGED, this);
 	}
 
-	void NeuralNetworkRepository::save(std::string path, int neuralNetworkIndex)
+	void NeuralNetworkRepository::save(const std::string& path, int neuralNetworkIndex) const
 	{
 		std::ofstream os(path);
 		cereal::XMLOutputArchive archive(os);
@@ -41,7 +41,7 @@ namespace LightBulb
 		archive(neuralNetworks[neuralNetworkIndex]);
 	}
 
-	void NeuralNetworkRepository::load(std::string path)
+	void NeuralNetworkRepository::load(const std::string& path)
 	{
 		std::ifstream is(path);
 		cereal::XMLInputArchive archive(is);

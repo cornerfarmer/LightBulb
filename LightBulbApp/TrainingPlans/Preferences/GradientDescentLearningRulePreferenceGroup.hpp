@@ -16,13 +16,13 @@ namespace LightBulb
 	class GradientDescentLearningRulePreferenceGroup : public AbstractSupervisedLearningRulePreferenceGroup
 	{
 	protected:
-		void initialize(GradientDescentLearningRuleOptions& options);
+		void initialize(const GradientDescentLearningRuleOptions& options);
 	public:
-		GradientDescentLearningRulePreferenceGroup(std::string name = "Gradient descent");
-		GradientDescentLearningRulePreferenceGroup(GradientDescentLearningRuleOptions& options, std::string name = "Gradient descent");
+		GradientDescentLearningRulePreferenceGroup(const std::string& name = "Gradient descent");
+		GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const std::string& name = "Gradient descent");
 
-		GradientDescentLearningRuleOptions create();
-		AbstractPreferenceElement* getCopy() override;
+		GradientDescentLearningRuleOptions create() const;
+		AbstractPreferenceElement* getCopy() const override;
 	};
 }
 

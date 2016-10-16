@@ -15,7 +15,7 @@ namespace LightBulb
 			throwEvent(EVT_LG_LOGADDED, this);
 	}
 
-	const std::vector<std::pair<LogLevel, std::string>>* StorageLogger::getMessages()
+	const std::vector<std::pair<LogLevel, std::string>>* StorageLogger::getMessages() const
 	{
 		return &messages;
 	}

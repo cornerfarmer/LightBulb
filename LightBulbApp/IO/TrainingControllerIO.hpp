@@ -5,6 +5,7 @@
 
 // Includes
 #include "Windows/TrainingController.hpp"
+#include "Repositories/NeuralNetworkRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 
@@ -15,9 +16,9 @@ namespace LightBulb
 	{
 		serialize(archive, *trainingController.neuralNetworkRepository);
 
-		IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(trainingController.neuralNetworkRepository->getNeuralNetworks());
+		//IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(trainingController.neuralNetworkRepository->getNeuralNetworks());
 		serialize(archive, *trainingController.trainingPlanRepository);
-		IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
+		//IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
 	}
 }
 

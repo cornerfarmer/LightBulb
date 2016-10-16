@@ -21,18 +21,29 @@ namespace LightBulb
 	DQNLearningRule::DQNLearningRule(DQNLearningRuleOptions& options_)
 		: AbstractReinforcementLearningRule(new DQNLearningRuleOptions(options_))
 	{
-		initialize();
+		initialize(static_cast<DQNLearningRuleOptions*>(options.get()));
 	}
 
 	DQNLearningRule::DQNLearningRule(DQNLearningRuleOptions* options_)
 		: AbstractReinforcementLearningRule(options_)
 	{
-		initialize();
+		initialize(options_);
 	}
 
 	DQNLearningRule::DQNLearningRule()
 		: AbstractReinforcementLearningRule(new DQNLearningRuleOptions())
 	{
+	}
+	
+	void DQNLearningRule::initialize(DQNLearningRuleOptions* options)
+	{
+		options->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(options->rmsPropOptions);
+		options->gradientDescentOptions.teacher = &teacher;
+		options->gradientDescentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
+		options->gradientDescentOptions.logger = nullptr;
+		gradientDescent.reset(new GradientDescentLearningRule(options->gradientDescentOptions));
+
+		steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
 	}
 
 	void DQNLearningRule::initializeTry()
@@ -45,19 +56,8 @@ namespace LightBulb
 		getOptions()->world->setEpsilon(getOptions()->initialExploration);
 		currentTotalReward = 0;
 	}
-
-	void DQNLearningRule::initialize()
-	{
-		getOptions()->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(getOptions()->rmsPropOptions);
-		getOptions()->gradientDescentOptions.teacher = &teacher;
-		getOptions()->gradientDescentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
-		getOptions()->gradientDescentOptions.logger = nullptr;
-		gradientDescent.reset(new GradientDescentLearningRule(getOptions()->gradientDescentOptions));
-
-		steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
-	}
-
-	void DQNLearningRule::storeTransition(AbstractNetworkTopology* networkTopology, double reward)
+	
+	void DQNLearningRule::storeTransition(const AbstractNetworkTopology* networkTopology, double reward)
 	{
 		Transition transition;
 		auto patternVector = networkTopology->getActivationsPerLayer(0);
@@ -127,7 +127,7 @@ namespace LightBulb
 		return "DQNLearningRule";
 	}
 
-	std::vector<std::string> DQNLearningRule::getDataSetLabels()
+	std::vector<std::string> DQNLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
 		labels.push_back(DATA_SET_TRAINING_ERROR);
@@ -214,7 +214,7 @@ namespace LightBulb
 	}
 
 
-	DQNLearningRuleOptions* DQNLearningRule::getOptions()
+	const DQNLearningRuleOptions* DQNLearningRule::getOptions() const
 	{
 		return static_cast<DQNLearningRuleOptions*>(options.get());
 	}

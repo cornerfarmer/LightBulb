@@ -83,13 +83,12 @@ namespace LightBulb
 		std::unique_ptr<GradientDescentLearningRule> gradientDescent;
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 		double qAvgSum;
-		void initialize();
-		void storeTransition(AbstractNetworkTopology* networkTopology, double reward);
+		void initialize(DQNLearningRuleOptions* options);
+		void storeTransition(const AbstractNetworkTopology* networkTopology, double reward);
 		void doSupervisedLearning();
-		std::vector<Eigen::MatrixXd> checkGradient(Teacher* teacher, AbstractNetworkTopology* networkTopology);
 	protected:
 		bool doIteration() override;
-		DQNLearningRuleOptions* getOptions() override;
+		const DQNLearningRuleOptions* getOptions() const override;
 		AbstractLearningResult* getLearningResult() override;
 	public:
 		DQNLearningRule(DQNLearningRuleOptions& options_);
@@ -98,7 +97,7 @@ namespace LightBulb
 		// Executes the learning process
 		void initializeTry() override;
 		static std::string getName();
-		std::vector<std::string> getDataSetLabels() override;
+		std::vector<std::string> getDataSetLabels() const override;
 	};
 }
 

@@ -55,11 +55,11 @@ namespace cereal
 			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions()->learningRule1);
 			std::unique_ptr<LightBulb::AbstractLearningRule> learningRuleDummy;
 			ar(cereal::make_nvp("learningRule1", learningRuleDummy));
-			learningRule->getOptions()->learningRule1 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
 			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions()->learningRule2);
 			ar(cereal::make_nvp("learningRule2", learningRuleDummy));
-			learningRule->getOptions()->learningRule2 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
 			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule);
 		}

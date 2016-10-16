@@ -27,9 +27,9 @@ namespace LightBulb
 	protected:
 		std::unique_ptr<AbstractEvolutionWorld> parasiteWorld;
 		virtual AbstractEvolutionWorld* createParasiteWorld() = 0;
-		void fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions* options);
-		void fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions* options);
-		void fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions* options);
+		void fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions* options) const;
+		void fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions* options) const;
+		void fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions* options) const;
 	public:
 		void initializeStart() override;
 		AbstractEvolutionWorld* getParasiteWorld();

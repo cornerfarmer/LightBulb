@@ -32,28 +32,28 @@ namespace LightBulb
 	PolicyGradientLearningRule::PolicyGradientLearningRule(PolicyGradientLearningRuleOptions& options_)
 		: AbstractReinforcementLearningRule(new PolicyGradientLearningRuleOptions(options_))
 	{
-		initialize();
+		initialize(static_cast<PolicyGradientLearningRuleOptions*>(options.get()));
 	}
 
 	PolicyGradientLearningRule::PolicyGradientLearningRule(PolicyGradientLearningRuleOptions* options_)
 		: AbstractReinforcementLearningRule(options_)
 	{
-		initialize();
+		initialize(options_);
 	}
 
 	PolicyGradientLearningRule::PolicyGradientLearningRule()
 		: AbstractReinforcementLearningRule(new PolicyGradientLearningRuleOptions())
 	{
-		initialize();
+		initialize(static_cast<PolicyGradientLearningRuleOptions*>(options.get()));
 	}
 
-	void PolicyGradientLearningRule::initialize()
+	void PolicyGradientLearningRule::initialize(PolicyGradientLearningRuleOptions* options)
 	{
 		gradientCalculation.reset(new Backpropagation());
-		gradientDescentAlgorithm.reset(new RMSPropLearningRate(getOptions()->rmsPropLearningRateOptions));
+		gradientDescentAlgorithm.reset(new RMSPropLearningRate(options->rmsPropLearningRateOptions));
 
 		valueFunctionGradientCalculation.reset(new Backpropagation());
-		valueFunctionGradientDescentAlgorithm.reset(new RMSPropLearningRate(getOptions()->valueRmsPropLearningRateOptions));
+		valueFunctionGradientDescentAlgorithm.reset(new RMSPropLearningRate(options->valueRmsPropLearningRateOptions));
 	}
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
@@ -131,7 +131,7 @@ namespace LightBulb
 		return "PolicyGradientLearningRule";
 	}
 
-	std::vector<std::string> PolicyGradientLearningRule::getDataSetLabels()
+	std::vector<std::string> PolicyGradientLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels = AbstractReinforcementLearningRule::getDataSetLabels();
 		labels.push_back(DATA_SET_ERROR_AVG);
@@ -212,7 +212,7 @@ namespace LightBulb
 		}
 	}
 
-	PolicyGradientLearningRuleOptions* PolicyGradientLearningRule::getOptions()
+	const PolicyGradientLearningRuleOptions* PolicyGradientLearningRule::getOptions() const
 	{
 		return static_cast<PolicyGradientLearningRuleOptions*>(options.get());
 	}
