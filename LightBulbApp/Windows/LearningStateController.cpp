@@ -147,7 +147,7 @@ namespace LightBulb
 		comparisonDataSetLabel = newComparisonDataSetLabel;
 	}
 
-	const std::string& LearningStateController::getLabel()
+	std::string LearningStateController::getLabel()
 	{
 		return "LearningState";
 	}

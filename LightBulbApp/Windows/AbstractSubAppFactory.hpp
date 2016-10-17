@@ -22,7 +22,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractSubAppFactory() {};
 		virtual AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent = nullptr) const = 0;
-		virtual const std::string& getLabel() const = 0;
+		virtual std::string getLabel() const = 0;
 	};
 }
 

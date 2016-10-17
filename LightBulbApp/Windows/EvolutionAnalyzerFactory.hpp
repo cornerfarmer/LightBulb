@@ -19,7 +19,7 @@ namespace LightBulb
 	public:
 		EvolutionAnalyzerFactory(TrainingPlanRepository* trainingPlanRepository_);
 		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const override;
-		const std::string& getLabel() const override;
+		std::string getLabel() const override;
 	};
 }
 

@@ -35,7 +35,7 @@ namespace LightBulb
 		AbstractPreferenceElement* getCopy() const override;
 		const std::string& getName() const override;
 
-		const std::string& toString() const override;
+		std::string toString() const override;
 
 		void addPreference(AbstractPreferenceElement* preferenceElement);
 

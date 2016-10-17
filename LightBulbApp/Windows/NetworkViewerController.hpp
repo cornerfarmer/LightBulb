@@ -27,7 +27,7 @@ namespace LightBulb
 		NetworkViewerWindow* getWindow();
 		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks() const;
 		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
-		static const std::string& getLabel();
+		static std::string getLabel();
 
 	};
 }

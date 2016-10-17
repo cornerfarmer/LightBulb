@@ -130,7 +130,7 @@ namespace LightBulb
 		void refreshActivationsForLayer(int layerNr) override;
 		double calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const override;
 		std::vector<Eigen::MatrixXd>* getAllWeights() override;
-		using AbstractNetworkTopology::getAllWeights;
+		const std::vector<Eigen::MatrixXd>* getAllWeights() const override;
 		const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() const override;
 		const std::vector<Eigen::VectorXd>* getAllNetInputs() const override;
 		Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) const override;

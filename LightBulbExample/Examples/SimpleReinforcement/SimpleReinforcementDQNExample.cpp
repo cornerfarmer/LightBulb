@@ -74,22 +74,22 @@ SimpleReinforcementDQNExample::SimpleReinforcementDQNExample()
 	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, false));
 }
 
-std::string SimpleReinforcementDQNExample::getDefaultName()
+std::string SimpleReinforcementDQNExample::getDefaultName() const
 {
 	return "Simple DQN example";
 }
 
-std::string SimpleReinforcementDQNExample::getDescription()
+std::string SimpleReinforcementDQNExample::getDescription() const
 {
 	return "Evolution of a Simple AI with DQN.";
 }
 
-AbstractTrainingPlan* SimpleReinforcementDQNExample::getCopy()
+AbstractTrainingPlan* SimpleReinforcementDQNExample::getCopy() const
 {
 	return new SimpleReinforcementDQNExample();
 }
 
-std::string SimpleReinforcementDQNExample::getLearningRuleName()
+std::string SimpleReinforcementDQNExample::getLearningRuleName() const
 {
 	return SimpleReinforcementDQNExample::getName();
 }

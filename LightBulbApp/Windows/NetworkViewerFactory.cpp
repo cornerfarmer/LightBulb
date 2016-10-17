@@ -16,7 +16,7 @@ namespace LightBulb
 		return controller;
 	}
 
-	const std::string& NetworkViewerFactory::getLabel() const
+	std::string NetworkViewerFactory::getLabel() const
 	{
 		return NetworkViewerController::getLabel();
 	}

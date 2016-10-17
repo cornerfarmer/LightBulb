@@ -110,7 +110,7 @@ namespace LightBulb
 		 * \return A pointer to a vector of all weight matrices per layer.
 		 */
 		virtual std::vector<Eigen::MatrixXd>* getAllWeights() = 0;
-		virtual const std::vector<Eigen::MatrixXd>* getAllWeights() const;
+		virtual const std::vector<Eigen::MatrixXd>* getAllWeights() const = 0;
 		/**
 		 * \brief Returns a pointer to all activations.
 		 * \return A pointer to a vector of all activation vectors per layer.

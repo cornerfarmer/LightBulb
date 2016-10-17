@@ -16,7 +16,7 @@ namespace LightBulb
 		return controller;
 	}
 
-	const std::string& LoggerFactory::getLabel()const
+	std::string LoggerFactory::getLabel() const
 	{
 		return LoggerController::getLabel();
 	}

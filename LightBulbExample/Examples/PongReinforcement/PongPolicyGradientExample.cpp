@@ -77,22 +77,22 @@ PongPolicyGradientExample::PongPolicyGradientExample()
 	addPreference(new DoublePreference(PREFERENCE_VALUE_LEARNING_RATE, 1e-4, 0, 1));
 }
 
-std::string PongPolicyGradientExample::getDefaultName()
+std::string PongPolicyGradientExample::getDefaultName() const
 {
 	return "Pong policy gradient example";
 }
 
-std::string PongPolicyGradientExample::getDescription()
+std::string PongPolicyGradientExample::getDescription() const
 {
 	return "Learns pong with policy gradient learning.";
 }
 
-AbstractTrainingPlan* PongPolicyGradientExample::getCopy()
+AbstractTrainingPlan* PongPolicyGradientExample::getCopy() const
 {
 	return new PongPolicyGradientExample();
 }
 
-std::string PongPolicyGradientExample::getLearningRuleName()
+std::string PongPolicyGradientExample::getLearningRuleName() const
 {
 	return PolicyGradientLearningRule::getName();
 }

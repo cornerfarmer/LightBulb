@@ -61,22 +61,22 @@ SimpleReinforcementExample::SimpleReinforcementExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 }
 
-std::string SimpleReinforcementExample::getDefaultName()
+std::string SimpleReinforcementExample::getDefaultName() const
 {
 	return "Simple reinforcement example";
 }
 
-std::string SimpleReinforcementExample::getDescription()
+std::string SimpleReinforcementExample::getDescription() const
 {
 	return "Evolution of a Simple AI with PolicyGradient";
 }
 
-AbstractTrainingPlan* SimpleReinforcementExample::getCopy()
+AbstractTrainingPlan* SimpleReinforcementExample::getCopy() const
 {
 	return new SimpleReinforcementExample();
 }
 
-std::string SimpleReinforcementExample::getLearningRuleName()
+std::string SimpleReinforcementExample::getLearningRuleName() const
 {
 	return PolicyGradientLearningRule::getName();
 }

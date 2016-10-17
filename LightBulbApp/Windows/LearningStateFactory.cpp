@@ -16,7 +16,7 @@ namespace LightBulb
 		return controller;
 	}
 
-	const std::string& LearningStateFactory::getLabel() const
+	std::string LearningStateFactory::getLabel() const
 	{
 		return LearningStateController::getLabel();
 	}

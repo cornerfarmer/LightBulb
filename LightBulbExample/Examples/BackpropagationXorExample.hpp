@@ -23,12 +23,12 @@ protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 public:
 	BackpropagationXorExample();
-	std::string getDefaultName() override;
-	std::string getDescription() override;
-	AbstractTrainingPlan* getCopy() override;
-	int getRequiredInputSize() override;
-	int getRequiredOutputSize() override;
-	std::string getLearningRuleName() override;
+	std::string getDefaultName() const override;
+	std::string getDescription() const override;
+	AbstractTrainingPlan* getCopy() const override;
+	int getRequiredInputSize() const override;
+	int getRequiredOutputSize() const override;
+	std::string getLearningRuleName() const override;
 };
 
 USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractSingleNNTrainingPlan);

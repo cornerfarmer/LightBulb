@@ -86,22 +86,22 @@ TCProblemEvolutionExample::TCProblemEvolutionExample()
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.006, 0.003, 0.3));
 }
 
-std::string TCProblemEvolutionExample::getDefaultName()
+std::string TCProblemEvolutionExample::getDefaultName() const
 {
 	return "TC-problem evolution example";
 }
 
-std::string TCProblemEvolutionExample::getDescription()
+std::string TCProblemEvolutionExample::getDescription() const
 {
 	return "Teaches a network how to distinguish Ts and Cs with the help of evoultion.";
 }
 
-AbstractTrainingPlan* TCProblemEvolutionExample::getCopy()
+AbstractTrainingPlan* TCProblemEvolutionExample::getCopy() const
 {
 	return new TCProblemEvolutionExample();
 }
 
-std::string TCProblemEvolutionExample::getLearningRuleName()
+std::string TCProblemEvolutionExample::getLearningRuleName() const
 {
 	return EvolutionLearningRule::getName();
 }

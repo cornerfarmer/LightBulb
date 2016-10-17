@@ -33,7 +33,7 @@ namespace LightBulb
 		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
 		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
 		EvolutionAnalyzerWindow* getWindow();
-		static const std::string& getLabel();
+		static std::string getLabel();
 		void selectTrainingPlan(int trainingPlanIndex);
 		void evolutionStepCompleted(EvolutionLearningRule* evolutionLearningRule);
 		const std::vector<std::pair<EvolutionSource, double>>* getCurrentState() const;

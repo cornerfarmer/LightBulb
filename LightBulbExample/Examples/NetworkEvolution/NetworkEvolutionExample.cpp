@@ -78,22 +78,22 @@ AbstractEvolutionWorld* NetworkEvolutionExample::createWorld()
 	return new NetworkSimulator(consumers);
 }
 
-std::string NetworkEvolutionExample::getDefaultName()
+std::string NetworkEvolutionExample::getDefaultName() const
 {
 	return "Network evolution example";
 }
 
-std::string NetworkEvolutionExample::getDescription()
+std::string NetworkEvolutionExample::getDescription() const
 {
 	return "Finds a network structure with the lowest amount of cables.";
 }
 
-AbstractTrainingPlan* NetworkEvolutionExample::getCopy()
+AbstractTrainingPlan* NetworkEvolutionExample::getCopy() const
 {
 	return new NetworkEvolutionExample();
 }
 
-std::string NetworkEvolutionExample::getLearningRuleName()
+std::string NetworkEvolutionExample::getLearningRuleName() const
 {
 	return EvolutionLearningRule::getName();
 }

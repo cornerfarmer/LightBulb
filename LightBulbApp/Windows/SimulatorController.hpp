@@ -31,7 +31,7 @@ namespace LightBulb
 		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
 		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
 		std::vector<double> calculate(int neuralNetworkIndex, const std::vector<double>& input);
-		static const std::string& getLabel();
+		static std::string getLabel();
 	};
 }
 

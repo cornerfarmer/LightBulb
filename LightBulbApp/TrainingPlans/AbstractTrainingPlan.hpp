@@ -86,11 +86,11 @@ namespace LightBulb
 	public:
 		AbstractTrainingPlan();
 		void start();
-		const std::string& getName() const;
-		virtual const std::string& getDefaultName() const = 0;
-		virtual const std::string& getDescription() const = 0;
-		virtual const std::string& getLearningRuleName() const = 0;
-		const std::string& getStateAsString() const;
+		std::string getName() const;
+		virtual std::string getDefaultName() const = 0;
+		virtual std::string getDescription() const = 0;
+		virtual std::string getLearningRuleName() const = 0;
+		std::string getStateAsString() const;
 		AbstractTrainingPlan* getCopyForExecute();
 		AbstractTrainingPlan* getTrainingPlanPattern() const;
 		void pause();

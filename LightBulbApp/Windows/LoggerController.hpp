@@ -43,7 +43,7 @@ namespace LightBulb
 		const LogLevel& getLogLevel() const;
 		void setAutoScrolling(bool newAutoScrolling);
 		bool isAutoScrolling() const;
-		static const std::string& getLabel();
+		static std::string getLabel();
 		void selectTrainingPlan(int trainingPlanIndex);
 		void logMessagesAddingFinished();
 	};

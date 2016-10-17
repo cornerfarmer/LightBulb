@@ -147,22 +147,22 @@ PongEvolutionExample::PongEvolutionExample()
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0, 0.003, 0.3));
 }
 
-std::string PongEvolutionExample::getDefaultName()
+std::string PongEvolutionExample::getDefaultName() const
 {
 	return "Pong evolution example";
 }
 
-std::string PongEvolutionExample::getDescription()
+std::string PongEvolutionExample::getDescription() const
 {
 	return "Evolution of a Pong AI with coevolution.";
 }
 
-AbstractTrainingPlan* PongEvolutionExample::getCopy()
+AbstractTrainingPlan* PongEvolutionExample::getCopy() const
 {
 	return new PongEvolutionExample();
 }
 
-std::string PongEvolutionExample::getLearningRuleName()
+std::string PongEvolutionExample::getLearningRuleName() const
 {
 	return BipartiteEvolutionLearningRule::getName();
 }

@@ -40,7 +40,7 @@ namespace LightBulb
 		return window.get();
 	}
 
-	const std::string& EvolutionAnalyzerController::getLabel()
+	std::string EvolutionAnalyzerController::getLabel()
 	{
 		return "Evolution analyzer";
 	}

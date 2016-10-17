@@ -31,7 +31,7 @@ public:
 	MountainCarWorld(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	MountainCarWorld() = default;
 	double doSimulationStep() override;
-	std::vector<std::string> getDataSetLabels() override;
+	std::vector<std::string> getDataSetLabels() const override;
 	bool isTerminalState() override;
 	double getPosition();
 	double getVelocity();

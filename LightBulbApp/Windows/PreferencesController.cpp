@@ -16,7 +16,7 @@ namespace LightBulb
 		return window.get();
 	}
 
-	const std::string& PreferencesController::getLabel()
+	std::string PreferencesController::getLabel()
 	{
 		return "Preferences";
 	}

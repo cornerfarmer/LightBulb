@@ -341,6 +341,11 @@ namespace LightBulb
 		return &weights;
 	}
 
+	const std::vector<Eigen::MatrixXd>* FeedForwardNetworkTopology::getAllWeights() const
+	{
+		return &weights;
+	}
+
 	const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* FeedForwardNetworkTopology::getAllActivations() const
 	{
 		return &activationsPerLayerOut;

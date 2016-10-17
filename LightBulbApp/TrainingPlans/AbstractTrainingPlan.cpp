@@ -29,7 +29,7 @@ namespace LightBulb
 
 	const PreferenceGroup* AbstractTrainingPlan::getPreferenceGroup(const std::string& groupName) const
 	{
-		return getPreferenceGroup(groupName);
+		return preferenceGroup->getPreferenceGroup(groupName);
 	}
 
 	const AbstractPreference* AbstractTrainingPlan::getPreference(const std::string& name, const std::string& groupName) const
@@ -104,7 +104,7 @@ namespace LightBulb
 		}
 	}
 
-	const std::string& AbstractTrainingPlan::getName()  const
+	std::string AbstractTrainingPlan::getName() const
 	{
 		if (name != "")
 			return name;
@@ -112,7 +112,7 @@ namespace LightBulb
 			return getDefaultName();
 	}
 
-	const std::string& AbstractTrainingPlan::getStateAsString() const
+	std::string AbstractTrainingPlan::getStateAsString() const
 	{
 		switch (state)
 		{

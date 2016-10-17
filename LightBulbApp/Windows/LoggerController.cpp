@@ -62,7 +62,7 @@ namespace LightBulb
 		}
 	}
 
-	const std::string& LoggerController::getLabel()
+	std::string LoggerController::getLabel()
 	{
 		return "Logger";
 	}

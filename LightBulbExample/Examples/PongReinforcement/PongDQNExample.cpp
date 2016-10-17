@@ -94,22 +94,22 @@ PongDQNExample::PongDQNExample()
 	addPreference(new BooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS, true));
 }
 
-std::string PongDQNExample::getDefaultName()
+std::string PongDQNExample::getDefaultName() const
 {
 	return "Pong DQN example";
 }
 
-std::string PongDQNExample::getDescription()
+std::string PongDQNExample::getDescription() const
 {
 	return "Evolution of a Pong AI with DQN.";
 }
 
-AbstractTrainingPlan* PongDQNExample::getCopy()
+AbstractTrainingPlan* PongDQNExample::getCopy() const
 {
 	return new PongDQNExample();
 }
 
-std::string PongDQNExample::getLearningRuleName()
+std::string PongDQNExample::getLearningRuleName() const
 {
 	return PongDQNExample::getName();
 }

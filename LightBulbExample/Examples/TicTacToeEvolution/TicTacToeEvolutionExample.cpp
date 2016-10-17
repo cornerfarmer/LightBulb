@@ -142,22 +142,22 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.00005, 0.003, 0.3));
 }
 
-std::string TicTacToeEvolutionExample::getDefaultName()
+std::string TicTacToeEvolutionExample::getDefaultName() const
 {
 	return "TicTacToe evolution example";
 }
 
-std::string TicTacToeEvolutionExample::getDescription()
+std::string TicTacToeEvolutionExample::getDescription() const
 {
 	return "Evolution of a perfect TicTacToe KI with the bipartite evolution learning rule.";
 }
 
-AbstractTrainingPlan* TicTacToeEvolutionExample::getCopy()
+AbstractTrainingPlan* TicTacToeEvolutionExample::getCopy() const
 {
 	return new TicTacToeEvolutionExample();
 }
 
-std::string TicTacToeEvolutionExample::getLearningRuleName()
+std::string TicTacToeEvolutionExample::getLearningRuleName() const
 {
 	return BipartiteEvolutionLearningRule::getName();
 }

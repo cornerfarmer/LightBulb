@@ -91,22 +91,22 @@ MountainCarDQNExample::MountainCarDQNExample()
 	addPreference(new BooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS, true));
 }
 
-std::string MountainCarDQNExample::getDefaultName()
+std::string MountainCarDQNExample::getDefaultName() const
 {
 	return "MountainCar DQN example";
 }
 
-std::string MountainCarDQNExample::getDescription()
+std::string MountainCarDQNExample::getDescription() const
 {
 	return "Evolution of a MountainCar AI with DQN.";
 }
 
-AbstractTrainingPlan* MountainCarDQNExample::getCopy()
+AbstractTrainingPlan* MountainCarDQNExample::getCopy() const
 {
 	return new MountainCarDQNExample();
 }
 
-std::string MountainCarDQNExample::getLearningRuleName()
+std::string MountainCarDQNExample::getLearningRuleName() const
 {
 	return MountainCarDQNExample::getName();
 }

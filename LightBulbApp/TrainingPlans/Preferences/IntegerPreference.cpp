@@ -25,7 +25,7 @@ namespace LightBulb
 		return new IntegerPreference(*this);
 	}
 
-	const std::string& IntegerPreference::getValueAsString() const
+	std::string IntegerPreference::getValueAsString() const
 	{
 		return std::to_string(value);
 	}

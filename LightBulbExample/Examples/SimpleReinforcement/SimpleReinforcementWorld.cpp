@@ -88,7 +88,7 @@ void SimpleReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 }
 
 
-std::vector<std::string> SimpleReinforcementWorld::getDataSetLabels()
+std::vector<std::string> SimpleReinforcementWorld::getDataSetLabels() const
 {
 	auto labels = AbstractReinforcementWorld::getDataSetLabels();
 	return labels;

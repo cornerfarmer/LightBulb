@@ -21,7 +21,7 @@ namespace LightBulb
 	protected:
 		int min;
 		int max;
-		const std::string& getValueAsString() const override;
+		std::string getValueAsString() const override;
 	public:
 		IntegerPreference(const std::string& name, int defaultValue, int min_, int max_);
 		IntegerPreference() = default;

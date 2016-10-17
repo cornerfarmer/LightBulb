@@ -64,7 +64,7 @@ namespace LightBulb
 		void removeDataSet(int dataSetIndex);
 		const std::string& getComparisonDataSetLabel() const;
 		void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);
-		static const std::string& getLabel();
+		static std::string getLabel();
 		std::vector<std::string> getPossibleComparisonDatasetLabels();
 	};
 }

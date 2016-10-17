@@ -31,7 +31,7 @@ public:
 	void executeCompareAI();
 	void initializeForLearning() override;
 	int rateKI() override;
-	std::vector<std::string> getDataSetLabels() override;
+	std::vector<std::string> getDataSetLabels() const override;
 	bool isTerminalState() override;
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator* randomGenerator_) override;
 };

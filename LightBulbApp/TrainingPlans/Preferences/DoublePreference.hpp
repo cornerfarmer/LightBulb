@@ -21,7 +21,7 @@ namespace LightBulb
 	protected:
 		double min;
 		double max;
-		const std::string& getValueAsString() const override;
+		std::string getValueAsString() const override;
 	public:
 		DoublePreference(const std::string& name, double defaultValue, double min_, double max_);
 		DoublePreference() = default;

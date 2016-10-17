@@ -65,33 +65,33 @@ AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 }
 
 
-std::string BackpropagationXorExample::getDefaultName()
+std::string BackpropagationXorExample::getDefaultName() const
 {
 	return "Backpropagation xor example";
 }
 
-std::string BackpropagationXorExample::getDescription()
+std::string BackpropagationXorExample::getDescription() const
 {
 	return "Trains a network to simulate the xor function!";
 }
 
 
-AbstractTrainingPlan* BackpropagationXorExample::getCopy()
+AbstractTrainingPlan* BackpropagationXorExample::getCopy() const
 {
 	return new BackpropagationXorExample();
 }
 
-int BackpropagationXorExample::getRequiredInputSize()
+int BackpropagationXorExample::getRequiredInputSize() const
 {
 	return 2;
 }
 
-int BackpropagationXorExample::getRequiredOutputSize()
+int BackpropagationXorExample::getRequiredOutputSize() const
 {
 	return 1;
 }
 
-std::string BackpropagationXorExample::getLearningRuleName()
+std::string BackpropagationXorExample::getLearningRuleName() const
 {
 	return GradientDescentLearningRule::getName();
 }

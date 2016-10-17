@@ -26,7 +26,7 @@ namespace LightBulb
 		return name;
 	}
 
-	const std::string& PreferenceGroup::toString() const
+	std::string PreferenceGroup::toString() const
 	{
 		std::string text = name + ":\n";
 		for (auto preference = preferences.begin(); preference !=preferences.end(); preference++)

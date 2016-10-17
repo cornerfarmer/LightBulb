@@ -33,7 +33,7 @@ namespace LightBulb
 	}
 
 
-	const std::string& NetworkViewerController::getLabel()
+	std::string NetworkViewerController::getLabel()
 	{
 		return "Network viewer";
 	}

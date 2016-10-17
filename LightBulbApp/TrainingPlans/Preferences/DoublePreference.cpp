@@ -25,7 +25,7 @@ namespace LightBulb
 		return new DoublePreference(*this);
 	}
 
-	const std::string& DoublePreference::getValueAsString() const
+	std::string DoublePreference::getValueAsString() const
 	{
 		return std::to_string(value);
 	}

@@ -51,22 +51,22 @@ AbstractEvolutionWorld* FunctionEvolutionExample::createWorld()
 	return new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
 }
 
-std::string FunctionEvolutionExample::getDefaultName()
+std::string FunctionEvolutionExample::getDefaultName() const
 {
 	return "Function evolution example";
 }
 
-std::string FunctionEvolutionExample::getDescription()
+std::string FunctionEvolutionExample::getDescription() const
 {
 	return "Finds the minimum of the six hump camel back function with the help of evolution!";
 }
 
-AbstractTrainingPlan* FunctionEvolutionExample::getCopy()
+AbstractTrainingPlan* FunctionEvolutionExample::getCopy() const
 {
 	return new FunctionEvolutionExample();
 }
 
-std::string FunctionEvolutionExample::getLearningRuleName()
+std::string FunctionEvolutionExample::getLearningRuleName() const
 {
 	return EvolutionLearningRule::getName();
 }

@@ -73,22 +73,22 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	return new TeachingEvolutionWorld(teacher, *networkTopologyOptions);
 }
 
-std::string TeachedEvolutionExample::getDefaultName()
+std::string TeachedEvolutionExample::getDefaultName() const
 {
 	return "Teached evolution example";
 }
 
-std::string TeachedEvolutionExample::getDescription()
+std::string TeachedEvolutionExample::getDescription() const
 {
 	return "Teaches the famous 8-3-8 en/decoder problem with the help of evoultion.";
 }
 
-AbstractTrainingPlan* TeachedEvolutionExample::getCopy()
+AbstractTrainingPlan* TeachedEvolutionExample::getCopy() const
 {
 	return new TeachedEvolutionExample();
 }
 
-std::string TeachedEvolutionExample::getLearningRuleName()
+std::string TeachedEvolutionExample::getLearningRuleName() const
 {
 	return EvolutionLearningRule::getName();
 }

@@ -16,7 +16,7 @@ namespace LightBulb
 		return controller;
 	}
 
-	const std::string& EvolutionAnalyzerFactory::getLabel() const
+	std::string EvolutionAnalyzerFactory::getLabel() const
 	{
 		return EvolutionAnalyzerController::getLabel();
 	}

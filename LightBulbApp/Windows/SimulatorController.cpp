@@ -44,7 +44,7 @@ namespace LightBulb
 		return output;
 	}
 
-	const std::string& SimulatorController::getLabel()
+	std::string SimulatorController::getLabel()
 	{
 		return "Simulator";
 	}

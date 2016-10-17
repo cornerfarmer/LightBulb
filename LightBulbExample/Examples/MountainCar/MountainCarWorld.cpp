@@ -58,7 +58,7 @@ void MountainCarWorld::interpretNNOutput(std::vector<bool>& output)
 }
 
 
-std::vector<std::string> MountainCarWorld::getDataSetLabels()
+std::vector<std::string> MountainCarWorld::getDataSetLabels() const
 {
 	auto labels = AbstractReinforcementWorld::getDataSetLabels();
 	return labels;

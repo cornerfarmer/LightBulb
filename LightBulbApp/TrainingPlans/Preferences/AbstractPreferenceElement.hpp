@@ -19,7 +19,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractPreferenceElement() {}
 
-		virtual const std::string& toString() const = 0;
+		virtual std::string toString() const = 0;
 
 		virtual const std::string& getName() const = 0;
 

@@ -105,7 +105,7 @@ int PongReinforcementWorld::rateKI()
 }
 
 
-std::vector<std::string> PongReinforcementWorld::getDataSetLabels()
+std::vector<std::string> PongReinforcementWorld::getDataSetLabels() const
 {
 	auto labels = AbstractReinforcementWorld::getDataSetLabels();
 	labels.push_back(DATASET_PONG_RATING);

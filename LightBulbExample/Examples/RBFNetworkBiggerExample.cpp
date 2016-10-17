@@ -50,32 +50,32 @@ AbstractNeuralNetwork* RBFNetworkBiggerExample::createNeuralNetwork()
 }
 
 
-std::string RBFNetworkBiggerExample::getDefaultName()
+std::string RBFNetworkBiggerExample::getDefaultName() const
 {
 	return "RBFNetwork bigger example";
 }
 
-std::string RBFNetworkBiggerExample::getDescription()
+std::string RBFNetworkBiggerExample::getDescription() const
 {
 	return "Trains a rbf network to simulate the compare (bigger) function!";
 }
 
-AbstractTrainingPlan* RBFNetworkBiggerExample::getCopy()
+AbstractTrainingPlan* RBFNetworkBiggerExample::getCopy() const
 {
 	return new RBFNetworkBiggerExample();
 }
 
-int RBFNetworkBiggerExample::getRequiredInputSize()
+int RBFNetworkBiggerExample::getRequiredInputSize() const
 {
 	return 2;
 }
 
-int RBFNetworkBiggerExample::getRequiredOutputSize()
+int RBFNetworkBiggerExample::getRequiredOutputSize() const
 {
 	return 1;
 }
 
-std::string RBFNetworkBiggerExample::getLearningRuleName()
+std::string RBFNetworkBiggerExample::getLearningRuleName() const
 {
 	return RBFInterpolationLearningRule::getName();
 }

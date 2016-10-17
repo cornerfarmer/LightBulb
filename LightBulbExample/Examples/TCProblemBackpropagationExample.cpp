@@ -58,33 +58,33 @@ AbstractNeuralNetwork* TCProblemBackpropagationExample::createNeuralNetwork()
 }
 
 
-std::string TCProblemBackpropagationExample::getDefaultName()
+std::string TCProblemBackpropagationExample::getDefaultName() const
 {
 	return "TC-problem backpropagation example";
 }
 
-std::string TCProblemBackpropagationExample::getDescription()
+std::string TCProblemBackpropagationExample::getDescription() const
 {
 	return "Teaches a network how to distinguish Ts and Cs with the help of backpropagation.";
 }
 
 
-AbstractTrainingPlan* TCProblemBackpropagationExample::getCopy()
+AbstractTrainingPlan* TCProblemBackpropagationExample::getCopy() const
 {
 	return new TCProblemBackpropagationExample();
 }
 
-int TCProblemBackpropagationExample::getRequiredInputSize()
+int TCProblemBackpropagationExample::getRequiredInputSize() const
 {
 	return 16;
 }
 
-int TCProblemBackpropagationExample::getRequiredOutputSize()
+int TCProblemBackpropagationExample::getRequiredOutputSize() const
 {
 	return 1;
 }
 
-std::string TCProblemBackpropagationExample::getLearningRuleName()
+std::string TCProblemBackpropagationExample::getLearningRuleName() const
 {
 	return GradientDescentLearningRule::getName();
 }

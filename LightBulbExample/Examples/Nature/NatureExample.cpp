@@ -47,22 +47,22 @@ NatureExample::NatureExample()
 	addCustomSubApp(new NatureFactory());
 }
 
-std::string NatureExample::getDefaultName()
+std::string NatureExample::getDefaultName() const
 {
 	return "Nature evolution example";
 }
 
-std::string NatureExample::getDescription()
+std::string NatureExample::getDescription() const
 {
 	return "Does an evolution of based on real nature.";
 }
 
-AbstractTrainingPlan* NatureExample::getCopy()
+AbstractTrainingPlan* NatureExample::getCopy() const
 {
 	return new NatureExample();
 }
 
-std::string NatureExample::getLearningRuleName()
+std::string NatureExample::getLearningRuleName() const
 {
 	return EvolutionLearningRule::getName();
 }

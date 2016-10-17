@@ -13,7 +13,7 @@ namespace LightBulb
 		return new BooleanPreference(*this);
 	}
 
-	const std::string& BooleanPreference::getValueAsString() const
+	std::string BooleanPreference::getValueAsString() const
 	{
 		return std::to_string(value);
 	}
