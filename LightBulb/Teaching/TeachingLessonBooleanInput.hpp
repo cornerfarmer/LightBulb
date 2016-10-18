@@ -12,30 +12,45 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief Describes a teaching lesson which has boolean teaching input.
+	 * \details The real teaching input is calculated depending on the activation function of the neural network in the output layer.
+	 */
 	class TeachingLessonBooleanInput : public AbstractTeachingLesson
 	{
 	private:
-		// The values the neural network should give back
+		/**
+		 * \brief The values the neural network should give back as booleans.
+		 */
 		std::unique_ptr<NeuralNetworkIO<bool>> teachingInput;
+		/**
+		 * \brief The values the neural network should give back as doubles.
+		 * \details These are calculated dynamically.
+		 */
 		std::unique_ptr<NeuralNetworkIO<double>> teachingInputLinear;
-		// The values we will put into the neural network
+		/**
+		 * \brief The values we will put into the neural network
+		 */
 		std::vector<std::vector<double>> teachingPattern;
-		bool calcStrictError;
 	protected:
+		/**
+		 * \brief Unfolds the teaching pattern.
+		 * \return The unfolded teaching pattern.
+		 */
 		std::vector<std::vector<double>> unfoldTeachingPattern() const;
 	public:
-		TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_, bool calcStrictError_ = true);
+		/**
+		 * \brief Creates a teaching lesson with boolean input
+		 * \param teachingPattern_ The teaching pattern. (The input values of the network)
+		 * \param teachingInput_ The teaching input. (The values the network should calculate)
+		 */
+		TeachingLessonBooleanInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
 		// Inherited:
 		AbstractTeachingLesson* unfold() const override;
 		int getMaxTimeStep() const override;
-		// Converts our boolean teachingInput vector in a double vector depending on the used activationFunction
 		const const NeuralNetworkIO<double>* getTeachingInput(const AbstractActivationFunction* activationFunction) const override;
 		NeuralNetworkIO<bool>* getBooleanTeachingInput() const;
 		const std::vector<std::vector<double>>* getTeachingPattern() const override;
-
-		std::unique_ptr<ErrorMap_t> getErrormapFromOutputVector(const std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork);
 	};
 }
 

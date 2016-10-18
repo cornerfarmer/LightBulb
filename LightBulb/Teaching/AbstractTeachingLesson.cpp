@@ -81,26 +81,4 @@ namespace LightBulb
 		return specificError;
 	}
 
-	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getTeachingInputMap(AbstractNeuralNetwork& neuralNetwork) const
-	{
-		const NeuralNetworkIO<double>* teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology()->getOutputNeuronDescription()->getActivationFunction());
-		std::unique_ptr<ErrorMap_t> teachingInputMap(new ErrorMap_t(teachingInput->getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput->getDimension())));
-
-		for (int timestep = 0; timestep < teachingInput->size(); timestep++)
-		{
-			(*teachingInputMap)[timestep].setZero();
-			if (teachingInput->existsTimestep(timestep))
-			{
-				for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
-				{
-					if (teachingInput->exists(timestep, i))
-					{
-						(*teachingInputMap)[timestep][i] = teachingInput->get(timestep, i);
-					}
-				}
-			}
-		}
-		return teachingInputMap;
-	}
-
 }
