@@ -287,13 +287,7 @@
     <ClCompile Include="Logging\ConsoleLogger.cpp" />
     <ClCompile Include="Logging\StorageLogger.cpp" />
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp" />
-    <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp" />
     <ClCompile Include="NetworkTopology\FeedForwardNetworkTopology.cpp" />
-    <ClCompile Include="NetworkTopology\RBFNetwork.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp" />
     <ClCompile Include="NeuralNetwork\AbstractNeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp" />
@@ -638,13 +632,7 @@
     <ClInclude Include="Logging\ConsoleLogger.hpp" />
     <ClInclude Include="Logging\StorageLogger.hpp" />
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp" />
-    <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp" />
     <ClInclude Include="NetworkTopology\FeedForwardNetworkTopology.hpp" />
-    <ClInclude Include="NetworkTopology\RBFNetwork.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp" />
     <ClInclude Include="NeuralNetwork\AbstractNeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp" />
     <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp" />

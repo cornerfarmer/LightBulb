@@ -73,15 +73,6 @@
     <ClCompile Include="NetworkTopology\AbstractNetworkTopology.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RBFNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClCompile>
@@ -448,15 +439,6 @@
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTopology\AbstractNetworkTopology.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\RBFNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
