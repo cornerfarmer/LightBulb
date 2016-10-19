@@ -11,10 +11,9 @@ class MockNeuronDescriptionFactory : public LightBulb::AbstractNeuronDescription
 public:
 	MOCK_METHOD0(createInnerNeuronDescription, LightBulb::NeuronDescription* ());
 	MOCK_METHOD0(createOutputNeuronDescription, LightBulb::NeuronDescription* ());
-	MOCK_METHOD0(getOutputActivationFunction, LightBulb::AbstractActivationFunction* ());
-	MOCK_METHOD0(getInnerActivationFunction, LightBulb::AbstractActivationFunction* ());
-
-	AbstractNeuronDescriptionFactory* getCopy() { return new MockNeuronDescriptionFactory(); };
+	MOCK_CONST_METHOD0(getOutputActivationFunction, const LightBulb::AbstractActivationFunction* ());
+	MOCK_CONST_METHOD0(getInnerActivationFunction, const LightBulb::AbstractActivationFunction* ());
+	AbstractNeuronDescriptionFactory* getCopy() const { return new MockNeuronDescriptionFactory(); };
 };
 
 #endif

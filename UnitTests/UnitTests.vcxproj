@@ -169,7 +169,6 @@
     <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\TeachedEvolutionTest.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategyTest.cpp" />
-    <ClCompile Include="Learning\RBFInterpolationLearningRuleTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />

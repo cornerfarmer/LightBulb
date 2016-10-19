@@ -149,21 +149,3 @@ TEST_F(TeachingLessonLinearInputTest, getSpecificError)
 	auto returnedValue = teachingLesson->getSpecificError(*neuralNetwork, *activationOrder);
 	EXPECT_EQ(174, returnedValue);
 }
-
-TEST_F(TeachingLessonLinearInputTest, getTeachingInputMap)
-{
-	ErrorMap_t expected(3, Eigen::VectorXd(3));
-	expected[0][0] = 1;
-	expected[0][1] = 2;
-	expected[0][2] = 3;
-	expected[1][0] = 4;
-	expected[1][1] = 0;
-	expected[1][2] = 6;
-	expected[2][0] = 7;
-	expected[2][1] = 8;
-	expected[2][2] = 9;
-	auto returnedValue = teachingLesson->getTeachingInputMap(*neuralNetwork);
-	ASSERT_TRUE(expected[0].isApprox((*returnedValue.get())[0]));
-	ASSERT_TRUE(expected[1].isApprox((*returnedValue.get())[1]));
-	ASSERT_TRUE(expected[2].isApprox((*returnedValue.get())[2]));
-}

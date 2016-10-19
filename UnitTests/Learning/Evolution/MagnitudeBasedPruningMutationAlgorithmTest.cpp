@@ -34,7 +34,7 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::Return(&weights));
 	EXPECT_CALL(networkTopology, usesBiasNeuron()).WillRepeatedly(testing::Return(true));
 	std::vector<unsigned int> neuronCounts(2, 2);
-	EXPECT_CALL(networkTopology, getNeuronCountsPerLayer()).WillRepeatedly(testing::Return(neuronCounts));
+	EXPECT_CALL(networkTopology, getNeuronCountsPerLayer()).WillRepeatedly(testing::ReturnRef(neuronCounts));
 
 	weights.push_back(Eigen::MatrixXd(2, 3));
 	weights[0](0, 0) = 1;
@@ -68,7 +68,8 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 	EXPECT_CALL(networkTopology, existsAfferentWeight(0, 2, 0)).WillRepeatedly(testing::Return(false));
 	EXPECT_CALL(networkTopology, existsAfferentWeight(0, 0, 1)).WillRepeatedly(testing::Return(false));
 	EXPECT_CALL(networkTopology, existsAfferentWeight(1, 0, 0)).WillRepeatedly(testing::Return(false));
-	EXPECT_CALL(networkTopology, getNeuronCountsPerLayer()).WillRepeatedly(testing::Return(std::vector<unsigned int>(2, 2)));
+	std::vector<unsigned int> neuronCounts(2, 2);
+	EXPECT_CALL(networkTopology, getNeuronCountsPerLayer()).WillRepeatedly(testing::ReturnRef(neuronCounts));
 
 	weights.push_back(Eigen::MatrixXd(2, 3));
 	weights[0](0, 0) = 0;

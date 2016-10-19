@@ -9,13 +9,14 @@
 class MockActivationFunction : public LightBulb::AbstractActivationFunction
 {
 public:
-	MOCK_METHOD3(execute, void (int, std::vector<Eigen::VectorXd>&, std::vector<Eigen::VectorXd>&));
-	MOCK_METHOD1(execute, double (double));
-	MOCK_METHOD1(executeDerivation, double (double));
-	MOCK_METHOD0(getActivationFunctionCopy, AbstractActivationFunction* ());
-	MOCK_METHOD0(getMaximum, double ());
-	MOCK_METHOD0(getMinimum, double ());
-	MOCK_METHOD0(hasAMaxAndMinimum, bool ());
+	MOCK_CONST_METHOD3(execute, void (int, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>&, const std::vector<Eigen::VectorXd>&));
+	MOCK_CONST_METHOD1(execute, double (double));
+	MOCK_CONST_METHOD1(executeDerivation, double (double));
+	MOCK_CONST_METHOD1(executeDerivation, Eigen::VectorXd (const Eigen::VectorXd&));
+	MOCK_CONST_METHOD0(getActivationFunctionCopy, AbstractActivationFunction* ());
+	MOCK_CONST_METHOD0(getMaximum, double ());
+	MOCK_CONST_METHOD0(getMinimum, double ());
+	MOCK_CONST_METHOD0(hasAMaxAndMinimum, bool ());
 };
 
 #endif

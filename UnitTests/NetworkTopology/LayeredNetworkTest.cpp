@@ -88,12 +88,12 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuron)
 	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
 	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getAllNetInputs();
+	auto netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getAllActivations();
+	auto activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	(*activations)[0].col(0) << 1, 2, 3;
 	(*activations)[1].col(0) << 1, 2, 3, 4;
 	(*activations)[2].col(0) << 1, 2;
@@ -141,7 +141,7 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuron)
 	expectedWeights[1].row(3) << 0, 0, 0, 0, 0, 0;
 
 
-	netInputs = network->getAllNetInputs();
+	netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(3, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -150,7 +150,7 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuron)
 	EXPECT_EQ(4, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getAllActivations();
+	activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(4, (*activations)[0].rows());
 	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
@@ -176,12 +176,12 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuronWithShortcuts)
 	options.enableShortcuts = true;
 	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getAllNetInputs();
+	auto netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getAllActivations();
+	auto activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	(*activations)[2].col(0) << 1, 2, 3, 2, 3, 4, 2;
 
 	auto weights = network->getAllWeights();
@@ -227,7 +227,7 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuronWithShortcuts)
 	expectedWeights[1].row(3) << 0, 0, 0, 0, 0, 0, 0, 0, 0;
 
 
-	netInputs = network->getAllNetInputs();
+	netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(3, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -236,7 +236,7 @@ TEST_F(FeedForwardNetworkTopologyTest, addNeuronWithShortcuts)
 	EXPECT_EQ(4, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getAllActivations();
+	activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(4, (*activations)[0].rows());
 	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
@@ -261,12 +261,12 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuron)
 	FeedForwardNetworkTopologyOptions options = getDefaultOptions();
 	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getAllNetInputs();
+	auto netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getAllActivations();
+	auto activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	(*activations)[0].col(0) << 1, 2, 3;
 	(*activations)[1].col(0) << 1, 2, 3, 4;
 	(*activations)[2].col(0) << 1, 2;
@@ -302,7 +302,7 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuron)
 	expectedWeights[0].row(0) << 2, 3;
 	expectedWeights[0].row(1) << 8, 9;
 
-	netInputs = network->getAllNetInputs();
+	netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(1, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -311,7 +311,7 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuron)
 	EXPECT_EQ(0, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getAllActivations();
+	activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(2, (*activations)[0].rows());
 	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
@@ -338,12 +338,12 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuronWithShortcuts)
 	options.enableShortcuts = true;
 	network = new FeedForwardNetworkTopology(options);
 
-	auto netInputs = network->getAllNetInputs();
+	auto netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	(*netInputs)[0] << 1, 2;
 	(*netInputs)[1] << 1, 2, 3;
 	(*netInputs)[2] << 1;
 
-	auto activations = network->getAllActivations();
+	auto activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	(*activations)[2].col(0) << 1, 2, 3, 2, 3, 4, 2;
 
 	auto weights = network->getAllWeights();
@@ -378,7 +378,7 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuronWithShortcuts)
 	expectedWeights[0].row(1) << 8, 9;
 	expectedWeights[1].row(0) << 2, 3, 4, 6;
 
-	netInputs = network->getAllNetInputs();
+	netInputs = const_cast<std::vector<Eigen::VectorXd>*>(network->getAllNetInputs());
 	EXPECT_EQ(3, netInputs->size());
 	EXPECT_EQ(1, (*netInputs)[0].rows());
 	EXPECT_EQ(expectedNetInputs[0], (*netInputs)[0]);
@@ -387,7 +387,7 @@ TEST_F(FeedForwardNetworkTopologyTest, removeNeuronWithShortcuts)
 	EXPECT_EQ(1, (*netInputs)[2].rows());
 	EXPECT_EQ(expectedNetInputs[2], (*netInputs)[2]);
 
-	activations = network->getAllActivations();
+	activations = const_cast<std::vector<Eigen::VectorBlock<Eigen::VectorXd>>*>(network->getAllActivations());
 	EXPECT_EQ(3, activations->size());
 	EXPECT_EQ(2, (*activations)[0].rows());
 	EXPECT_EQ(expectedActivations[0], (*activations)[0]);
