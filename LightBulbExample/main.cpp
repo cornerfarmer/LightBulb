@@ -5,7 +5,6 @@
 #include "Examples/TicTacToeEvolution/TicTacToeEvolutionExample.hpp"
 #include "Examples/FunctionEvolutionExample.hpp"
 #include "Examples/NetworkEvolution/NetworkEvolutionExample.hpp"
-#include "Examples/RBFNetworkBiggerExample.hpp"
 #include "Examples/TCProblemEvolutionExample.hpp"
 #include "Examples/TCProblemBackpropagationExample.hpp"
 #include "Examples/PongEvolution/PongEvolutionExample.hpp"
@@ -19,7 +18,6 @@
 void main(int argc, char** argv)
 {
 	LightBulb::App* app = new LightBulb::App();
-	app->addTrainingPlan(new RBFNetworkBiggerExample());
 	app->addTrainingPlan(new BackpropagationXorExample());
 	app->addTrainingPlan(new FunctionEvolutionExample());
 	app->addTrainingPlan(new NetworkEvolutionExample());

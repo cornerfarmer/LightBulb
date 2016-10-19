@@ -51,9 +51,6 @@
     <ClCompile Include="Examples\FunctionEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\RBFNetworkBiggerExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\TeachedEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -189,9 +186,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\FunctionEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\RBFNetworkBiggerExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TeachedEvolutionExample.hpp">

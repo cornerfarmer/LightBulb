@@ -95,7 +95,7 @@ TCProblemTeacher::TCProblemTeacher(bool calcStrictError, double weightDecayFac_)
 		}
 		(*teachingInput).set(0, 0, (i % 10) >= 4);
 
-		addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput, calcStrictError));
+		addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 	}
 }
 

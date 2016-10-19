@@ -67,12 +67,6 @@
     <ClCompile Include="ActivationOrder\AbstractActivationOrder.cpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
-    <ClCompile Include="ActivationOrder\AsynchronousOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClCompile>
-    <ClCompile Include="ActivationOrder\SynchronousOrder.cpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClCompile>
     <ClCompile Include="ActivationOrder\TopologicalOrder.cpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClCompile>
@@ -82,31 +76,7 @@
     <ClCompile Include="NetworkTopology\AbstractSOMStructure.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\CascadeCorrelationNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\CounterpropagationNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\FreeNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\GridStructure.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\HopfieldNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LineStructure.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\LVQNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
     <ClCompile Include="NetworkTopology\RBFNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\RecurrentLayeredNetwork.cpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="NetworkTopology\RecurrentNetworkInterface.cpp">
@@ -256,51 +226,6 @@
     <ClCompile Include="Teaching\TeachingLessonLinearInput.cpp">
       <Filter>Quelldateien\Teaching</Filter>
     </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractNearestClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ENearestClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ENearestRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KMeansClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KMeansRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KNearestClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\KNearestRBFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\PointSet.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ROLFClustering.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ROLFNeuronPlacer.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
-    <ClCompile Include="ClusterAnalysis\ValuePosition.cpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClCompile>
     <ClCompile Include="Lib\ziggurat.cpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
@@ -330,9 +255,6 @@
     </ClCompile>
     <ClCompile Include="IO\SynapticExporter.cpp">
       <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkTopology\SOMNetwork.cpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractRecombinationSelector.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
@@ -414,48 +336,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractEvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Supervised\RBFInterpolationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\BackpropagationThroughTimeLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\CascadeCorrelationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\CounterpropagationLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\HopfieldLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\LVQ1LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\LVQ2LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\LVQ3LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\OLVQ1LearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\RealTimeRecurrentLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\SchmidhuberLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\SingleLayerPerceptronLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\SOMLearningRule.cpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Old %28not working%29\TruncatedBackpropagationThroughTimeLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Random\AbstractRandomGenerator.cpp" />
@@ -564,12 +444,6 @@
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
-    <ClInclude Include="ActivationOrder\AsynchronousOrder.hpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClInclude>
-    <ClInclude Include="ActivationOrder\SynchronousOrder.hpp">
-      <Filter>Quelldateien\ActivationOrder</Filter>
-    </ClInclude>
     <ClInclude Include="ActivationOrder\TopologicalOrder.hpp">
       <Filter>Quelldateien\ActivationOrder</Filter>
     </ClInclude>
@@ -579,37 +453,10 @@
     <ClInclude Include="NetworkTopology\AbstractSOMStructure.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\CascadeCorrelationNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\CounterpropagationNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\FreeNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\GridStructure.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\HopfieldNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LineStructure.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\LVQNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
     <ClInclude Include="NetworkTopology\RBFNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkTopology\RecurrentLayeredNetwork.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
     <ClInclude Include="NetworkTopology\RecurrentNetworkInterface.hpp">
-      <Filter>Quelldateien\NetworkTopology</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkTopology\SOMNetwork.hpp">
       <Filter>Quelldateien\NetworkTopology</Filter>
     </ClInclude>
     <ClInclude Include="NeuralNetwork\NeuralNetwork.hpp">
@@ -752,57 +599,6 @@
     </ClInclude>
     <ClInclude Include="Teaching\TeachingLessonLinearInput.hpp">
       <Filter>Quelldateien\Teaching</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractNearestClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractNonReliableRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\AbstractReliableRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\Cluster.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\ENearestClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\ENearestRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\KMeansClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\KMeansRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\KNearestClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\KNearestRBFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\Point.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\PointSet.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\ROLFClustering.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\ROLFNeuronPlacer.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
-    </ClInclude>
-    <ClInclude Include="ClusterAnalysis\ValuePosition.hpp">
-      <Filter>Quelldateien\ClusterAnalysis</Filter>
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>
@@ -985,48 +781,6 @@
       <Filter>Quelldateien\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\EvolutionLearningResult.hpp" />
-    <ClInclude Include="Learning\Supervised\RBFInterpolationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\BackpropagationThroughTimeLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\CascadeCorrelationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\CounterpropagationLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\HopfieldLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\LVQ1LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\LVQ2LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\LVQ3LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\OLVQ1LearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\RealTimeRecurrentLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\SchmidhuberLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\SingleLayerPerceptronLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\SOMLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Old %28not working%29\TruncatedBackpropagationThroughTimeLearningRule.hpp">
-      <Filter>Quelldateien\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="Random\AbstractRandomGenerator.hpp" />
     <ClInclude Include="Random\StandardRandomGenerator.hpp" />
     <ClInclude Include="Random\AbstractRandomGeneratorUser.hpp" />

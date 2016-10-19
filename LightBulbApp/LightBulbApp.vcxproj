@@ -134,10 +134,6 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="IO\AbstractSingleNNTrainingPlanIO.cpp" />
-    <ClCompile Include="main.old.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp" />
     <ClCompile Include="Repositories\NeuralNetworkRepository.cpp" />
     <ClCompile Include="Repositories\TrainingPlanRepository.cpp" />

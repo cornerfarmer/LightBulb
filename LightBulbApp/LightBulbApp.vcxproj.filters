@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.old.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Performance\NetworkPerformanceTests.cpp">
       <Filter>Quelldateien\Performance</Filter>
     </ClCompile>
