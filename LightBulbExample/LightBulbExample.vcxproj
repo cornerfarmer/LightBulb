@@ -123,9 +123,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Examples\BackpropagationXorExample.cpp" />
-    <ClCompile Include="Examples\FunctionEvolutionExample.cpp" />
-    <ClCompile Include="Examples\FunctionSimulator.cpp" />
+    <ClCompile Include="Examples\BackpropagationXor\BackpropagationXorExample.cpp" />
+    <ClCompile Include="Examples\FunctionEvolution\FunctionEvolutionExample.cpp" />
+    <ClCompile Include="Examples\FunctionEvolution\FunctionSimulator.cpp" />
     <ClCompile Include="Examples\MountainCar\MountainCarController.cpp" />
     <ClCompile Include="Examples\MountainCar\MountainCarDQNExample.cpp" />
     <ClCompile Include="Examples\MountainCar\MountainCarFactory.cpp" />
@@ -154,14 +154,14 @@
     <ClCompile Include="Examples\PongReinforcement\PongDQNExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongPolicyGradientExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp" />
-    <ClCompile Include="Examples\Position.cpp" />
+    <ClCompile Include="Examples\FunctionEvolution\Position.cpp" />
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.cpp" />
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementExample.cpp" />
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.cpp" />
-    <ClCompile Include="Examples\TCProblemBackpropagationExample.cpp" />
-    <ClCompile Include="Examples\TCProblemEvolutionExample.cpp" />
-    <ClCompile Include="Examples\TCProblemTeacher.cpp" />
-    <ClCompile Include="Examples\TeachedEvolutionExample.cpp" />
+    <ClCompile Include="Examples\TCProblemBackpropagation\TCProblemBackpropagationExample.cpp" />
+    <ClCompile Include="Examples\TCProblemEvolution\TCProblemEvolutionExample.cpp" />
+    <ClCompile Include="Examples\TCProblemBackpropagation\TCProblemTeacher.cpp" />
+    <ClCompile Include="Examples\TeachedEvolution\TeachedEvolutionExample.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameController.cpp" />
@@ -171,9 +171,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Examples\BackpropagationXorExample.hpp" />
-    <ClInclude Include="Examples\FunctionEvolutionExample.hpp" />
-    <ClInclude Include="Examples\FunctionSimulator.hpp" />
+    <ClInclude Include="Examples\BackpropagationXor\BackpropagationXorExample.hpp" />
+    <ClInclude Include="Examples\FunctionEvolution\FunctionEvolutionExample.hpp" />
+    <ClInclude Include="Examples\FunctionEvolution\FunctionSimulator.hpp" />
     <ClInclude Include="Examples\MountainCar\MountainCarController.hpp" />
     <ClInclude Include="Examples\MountainCar\MountainCarDQNExample.hpp" />
     <ClInclude Include="Examples\MountainCar\MountainCarFactory.hpp" />
@@ -202,14 +202,14 @@
     <ClInclude Include="Examples\PongReinforcement\PongDQNExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongPolicyGradientExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp" />
-    <ClInclude Include="Examples\Position.hpp" />
+    <ClInclude Include="Examples\FunctionEvolution\Position.hpp" />
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.hpp" />
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementExample.hpp" />
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.hpp" />
-    <ClInclude Include="Examples\TCProblemBackpropagationExample.hpp" />
-    <ClInclude Include="Examples\TCProblemEvolutionExample.hpp" />
-    <ClInclude Include="Examples\TCProblemTeacher.hpp" />
-    <ClInclude Include="Examples\TeachedEvolutionExample.hpp" />
+    <ClInclude Include="Examples\TCProblemBackpropagation\TCProblemBackpropagationExample.hpp" />
+    <ClInclude Include="Examples\TCProblemEvolution\TCProblemEvolutionExample.hpp" />
+    <ClInclude Include="Examples\TCProblemBackpropagation\TCProblemTeacher.hpp" />
+    <ClInclude Include="Examples\TeachedEvolution\TeachedEvolutionExample.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameController.hpp" />

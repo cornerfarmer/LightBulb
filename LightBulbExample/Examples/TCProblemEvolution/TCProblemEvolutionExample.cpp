@@ -23,8 +23,8 @@
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>
 #include <TrainingPlans/Preferences/DoublePreference.hpp>
-#include "TCProblemTeacher.hpp"
 #include <Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
+#include "Examples/TCProblemBackpropagation/TCProblemTeacher.hpp"
 
 using namespace LightBulb;
 

@@ -1,6 +1,6 @@
 // Includes
-#include "Examples/Position.hpp"
-#include "Examples/FunctionSimulator.hpp"
+#include "Examples/FunctionEvolution/Position.hpp"
+#include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>

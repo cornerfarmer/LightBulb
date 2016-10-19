@@ -1,6 +1,6 @@
 // Includes
-#include "Examples/FunctionSimulator.hpp"
-#include "Examples/Position.hpp"
+#include "Examples/FunctionEvolution/FunctionSimulator.hpp"
+#include "Examples/FunctionEvolution/Position.hpp"
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 //Library includes
 #include <iostream>

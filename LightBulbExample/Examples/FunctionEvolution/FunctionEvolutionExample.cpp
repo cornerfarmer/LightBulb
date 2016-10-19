@@ -9,7 +9,7 @@
 #include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
 #include <Learning/Evolution/ConstantReuseCommand.hpp>
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
-#include <Examples/FunctionSimulator.hpp>
+#include <Examples/FunctionEvolution/FunctionSimulator.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include <Learning/Evolution/ScoreCondition.hpp>
 
