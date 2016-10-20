@@ -57,9 +57,6 @@
     <ClCompile Include="Function\EuclideanDistanceTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkTopology\RBFNetworkTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>

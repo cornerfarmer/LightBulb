@@ -19,23 +19,10 @@
     <ClCompile Include="Function\RandomFunction\AbstractRandomFunction.cpp" />
     <ClCompile Include="Function\ActivationFunction\AbstractActivationFunction.cpp" />
     <ClCompile Include="Function\InputFunction\AbstractInputFunction.cpp" />
-    <ClCompile Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.cpp" />
     <ClCompile Include="Function\SelectionFunction\AbstractSelectionFunction.cpp" />
     <ClCompile Include="Function\ShrinkFunction\AbstractShrinkFunction.cpp" />
     <ClCompile Include="Function\ActivationFunction\BinaryFunction.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Function\NeighborhoodFunction\ConeFunction.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Function\NeighborhoodFunction\CosinusFunction.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Function\NeighborhoodFunction\CylinderFunction.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Function\RandomFunction\EqualRandomFunction.cpp" />
     <ClCompile Include="Function\InputFunction\EuclideanDistance.cpp">
@@ -46,23 +33,11 @@
     <ClCompile Include="Function\ActivationFunction\FermiFunction.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Function\ActivationFunction\GaussianRBFFunction.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Function\ActivationFunction\HyperbolicTangentFunction.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Function\ActivationFunction\IdentityFunction.cpp" />
-    <ClCompile Include="Function\NeighborhoodFunction\MexicanHatFunction.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Function\ActivationFunction\MinimumNetInputActivationFunction.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Function\RandomFunction\RankBasedRandomFunction.cpp" />
     <ClCompile Include="Function\ActivationFunction\RectifierFunction.cpp" />
     <ClCompile Include="Function\SelectionFunction\RouletteWheelSelectionFunction.cpp" />
@@ -319,23 +294,10 @@
     <ClInclude Include="Function\RandomFunction\AbstractRandomFunction.hpp" />
     <ClInclude Include="Function\ActivationFunction\AbstractActivationFunction.hpp" />
     <ClInclude Include="Function\InputFunction\AbstractInputFunction.hpp" />
-    <ClInclude Include="Function\NeighborhoodFunction\AbstractNeighborhoodFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\AbstractSelectionFunction.hpp" />
     <ClInclude Include="Function\ShrinkFunction\AbstractShrinkFunction.hpp" />
     <ClInclude Include="Function\ActivationFunction\BinaryFunction.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Function\NeighborhoodFunction\ConeFunction.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Function\NeighborhoodFunction\CosinusFunction.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Function\NeighborhoodFunction\CylinderFunction.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Function\RandomFunction\EqualRandomFunction.hpp" />
     <ClInclude Include="Function\InputFunction\EuclideanDistance.hpp">
@@ -346,23 +308,11 @@
     <ClInclude Include="Function\ActivationFunction\FermiFunction.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Function\ActivationFunction\GaussianRBFFunction.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Function\ActivationFunction\HyperbolicTangentFunction.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Function\ActivationFunction\IdentityFunction.hpp" />
-    <ClInclude Include="Function\NeighborhoodFunction\MexicanHatFunction.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Function\ActivationFunction\MinimumNetInputActivationFunction.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Function\RandomFunction\RankBasedRandomFunction.hpp" />
     <ClInclude Include="Function\ActivationFunction\RectifierFunction.hpp" />
     <ClInclude Include="Function\SelectionFunction\RouletteWheelSelectionFunction.hpp" />
