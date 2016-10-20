@@ -45,6 +45,7 @@ namespace LightBulb
 		double getDoublePreference(const std::string& preferenceName) const;
 		int getIntegerPreference(const std::string& preferenceName) const;
 		bool getBooleanPreference(const std::string& preferenceName) const;
+		std::string getChoicePreference(const std::string& preferenceName) const;
 
 		const std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceElements() const;
 

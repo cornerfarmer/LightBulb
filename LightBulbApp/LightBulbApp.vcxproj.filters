@@ -150,9 +150,6 @@
     <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceElement.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -169,6 +166,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\ChoicePreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -344,9 +344,6 @@
     <ClInclude Include="IO\PreferenceGroupIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceElement.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -363,6 +360,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\ChoicePreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "IntegerPreference.hpp"
 #include "DoublePreference.hpp"
 #include "BooleanPreference.hpp"
+#include "ChoicePreference.hpp"
 
 namespace LightBulb
 {
@@ -90,6 +91,15 @@ namespace LightBulb
 		const BooleanPreference* booleanPreference = dynamic_cast<const BooleanPreference*>(getPreference(preferenceName));
 		if (booleanPreference)
 			return booleanPreference->getValue();
+		else
+			return false;
+	}
+
+	std::string PreferenceGroup::getChoicePreference(const std::string& preferenceName) const
+	{
+		const ChoicePreference* choicePreference = dynamic_cast<const ChoicePreference*>(getPreference(preferenceName));
+		if (choicePreference)
+			return choicePreference->getValue();
 		else
 			return false;
 	}

@@ -142,12 +142,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\ChoicePreference.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractPreference.cpp" />
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
-    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceElement.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BackpropagationPreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\GradientDescentLearningRulePreferenceGroup.cpp" />
@@ -213,12 +213,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\ChoicePreference.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractPreference.hpp" />
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
-    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceElement.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BackpropagationPreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\GradientDescentLearningRulePreferenceGroup.hpp" />

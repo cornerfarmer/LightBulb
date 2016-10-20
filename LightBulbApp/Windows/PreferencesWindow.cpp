@@ -7,6 +7,7 @@
 #include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include "TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
+#include "TrainingPlans/Preferences/ChoicePreference.hpp"
 
 namespace LightBulb
 {
@@ -83,6 +84,12 @@ namespace LightBulb
 
 					panelSizer->Add(createCheckBox(collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), booleanPreference), 0, wxEXPAND);
 				}
+				else if (dynamic_cast<ChoicePreference*>(preference->get()))
+				{
+					ChoicePreference* choicePreference = dynamic_cast<ChoicePreference*>(preference->get());
+
+					panelSizer->Add(createChoice(collpane->GetPane(), (*preference)->getName(), choicePreference->getValueAsIndex(), choicePreference->getChoices(), choicePreference), 0, wxEXPAND);
+				}
 			}
 		}
 
@@ -140,6 +147,22 @@ namespace LightBulb
 		return preferenceSizer;
 	}
 
+	wxSizer* PreferencesWindow::createChoice(wxWindow* parent, std::string label, int currentValueIndex, const std::vector<std::string>& choices, AbstractPreference* preference)
+	{
+		wxSizer* preferenceSizer = new wxBoxSizer(wxHORIZONTAL);
+		wxChoice* choice = new wxChoice(parent, wxID_ANY);
+		for (auto choiceValue = choices.begin(); choiceValue != choices.end(); choiceValue++)
+		{
+			choice->AppendString(*choiceValue);
+		}
+		choice->SetSelection(currentValueIndex);
+
+		std::function<void(wxCommandEvent &)> checkHandler(bind(&PreferencesWindow::setValueFromChoice, this, std::placeholders::_1, preference));
+		choice->Bind(wxEVT_CHOICE, checkHandler);
+		preferenceSizer->Add(choice, 1, wxALL | wxALIGN_CENTER_VERTICAL, 7);
+
+		return preferenceSizer;
+	}
 
 	void PreferencesWindow::setValueFromTextBox(wxCommandEvent& event, AbstractPreference* preference)
 	{
@@ -180,6 +203,13 @@ namespace LightBulb
 		wxCheckBox* checkBox = dynamic_cast<wxCheckBox*>(event.GetEventObject());
 		BooleanPreference* booleanPreference = static_cast<BooleanPreference*>(preference);
 		booleanPreference->setValue(checkBox->GetValue());
+	}
+
+	void PreferencesWindow::setValueFromChoice(wxCommandEvent& event, AbstractPreference* preference)
+	{
+		wxChoice* choice = dynamic_cast<wxChoice*>(event.GetEventObject());
+		ChoicePreference* choicePreference = static_cast<ChoicePreference*>(preference);
+		choicePreference->setValueFromIndex(choice->GetSelection());
 	}
 
 	void PreferencesWindow::setValueFromSlider(wxCommandEvent& event, AbstractPreference* preference)
