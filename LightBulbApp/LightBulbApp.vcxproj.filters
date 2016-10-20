@@ -365,5 +365,8 @@
     <ClInclude Include="TrainingPlans\Preferences\ChoicePreference.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="IO\ChoicePreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
