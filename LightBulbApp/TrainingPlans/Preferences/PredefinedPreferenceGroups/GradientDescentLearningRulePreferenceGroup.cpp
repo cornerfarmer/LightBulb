@@ -15,16 +15,25 @@ namespace LightBulb
 		:AbstractSupervisedLearningRulePreferenceGroup(name)
 	{
 		GradientDescentLearningRuleOptions options;
-		initialize(options);
+		SimpleGradientDescentOptions simpleGradientDescentOptions;
+		ResilientLearningRateOptions resilientLearningRateOptions;
+		initialize(options, simpleGradientDescentOptions, resilientLearningRateOptions);
 	}
 
 	GradientDescentLearningRulePreferenceGroup::GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const std::string& name)
 		:AbstractSupervisedLearningRulePreferenceGroup(options, name)
 	{
-		initialize(options);
+		SimpleGradientDescentOptions simpleGradientDescentOptions;
+		ResilientLearningRateOptions resilientLearningRateOptions;
+		initialize(options, simpleGradientDescentOptions, resilientLearningRateOptions);
 	}
 
-	void GradientDescentLearningRulePreferenceGroup::initialize(const GradientDescentLearningRuleOptions& options) 
+	GradientDescentLearningRulePreferenceGroup::GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const SimpleGradientDescentOptions& simpleGradientDescentOptions, const ResilientLearningRateOptions& resilientLearningRateOptions, const std::string& name)
+	{
+		initialize(options, simpleGradientDescentOptions, resilientLearningRateOptions);
+	}
+
+	void GradientDescentLearningRulePreferenceGroup::initialize(const GradientDescentLearningRuleOptions& options, const SimpleGradientDescentOptions& simpleGradientDescentOptions, const ResilientLearningRateOptions& resilientLearningRateOptions)
 	{
 		AbstractSupervisedLearningRulePreferenceGroup::initialize(options);
 		ChoicePreference* choicePreference = new ChoicePreference(PREFERENCE_GRADIENT_DECENT_ALGORITHM, CHOICE_SIMPLE_GRADIENT_DESCENT);
@@ -32,8 +41,8 @@ namespace LightBulb
 		choicePreference->addChoice(CHOICE_RESILIENT_LEARNING_RATE);
 
 		addPreference(choicePreference);
-		addPreference(new SimpleGradientDescentPreferenceGroup());
-		addPreference(new ResilientLearningRatePreferenceGroup());
+		addPreference(new SimpleGradientDescentPreferenceGroup(simpleGradientDescentOptions));
+		addPreference(new ResilientLearningRatePreferenceGroup(resilientLearningRateOptions));
 		addPreference(new BackpropagationPreferenceGroup());
 	}
 	

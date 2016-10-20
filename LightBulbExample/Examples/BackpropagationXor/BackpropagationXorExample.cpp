@@ -9,6 +9,8 @@
 #include <NeuronDescription/NeuronDescription.hpp>
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "TrainingPlans/Preferences/PredefinedPreferenceGroups/GradientDescentLearningRulePreferenceGroup.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 
 using namespace LightBulb;
 
@@ -19,7 +21,10 @@ BackpropagationXorExample::BackpropagationXorExample()
 	options.maxIterationsPerTry = 1000000;
 	options.totalErrorGoal = 0.001f;
 	options.maxTries = 1000;
-	addPreferenceGroup(new GradientDescentLearningRulePreferenceGroup(options));
+	SimpleGradientDescentOptions simpleGradientDescentOptions;
+	simpleGradientDescentOptions.learningRate = 0.12345;
+	ResilientLearningRateOptions resilientLearningRateOptions;
+	addPreferenceGroup(new GradientDescentLearningRulePreferenceGroup(options, simpleGradientDescentOptions, resilientLearningRateOptions));
 }
 
 AbstractLearningRule* BackpropagationXorExample::createLearningRate()

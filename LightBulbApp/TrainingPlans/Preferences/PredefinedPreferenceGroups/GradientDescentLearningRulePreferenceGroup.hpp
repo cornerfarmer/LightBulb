@@ -10,16 +10,18 @@
 
 namespace LightBulb
 {
-
 	// Forward declarations
+	class SimpleGradientDescentOptions;
+	class ResilientLearningRateOptions;
 
 	class GradientDescentLearningRulePreferenceGroup : public AbstractSupervisedLearningRulePreferenceGroup
 	{
 	protected:
-		void initialize(const GradientDescentLearningRuleOptions& options);
+		void initialize(const GradientDescentLearningRuleOptions& options, const SimpleGradientDescentOptions& simpleGradientDescentOptions, const ResilientLearningRateOptions& resilientLearningRateOptions);
 	public:
 		GradientDescentLearningRulePreferenceGroup(const std::string& name = "Gradient descent");
 		GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const std::string& name = "Gradient descent");
+		GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const SimpleGradientDescentOptions& simpleGradientDescentOptions, const ResilientLearningRateOptions& resilientLearningRateOptions, const std::string& name = "Gradient descent");
 
 		GradientDescentLearningRuleOptions create() const;
 		AbstractPreferenceElement* getCopy() const override;
