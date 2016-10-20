@@ -4,7 +4,7 @@
 #define _BACKPROPAGATIONPREFERENCEGROUP_H_
 
 // Includes
-#include "PreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 

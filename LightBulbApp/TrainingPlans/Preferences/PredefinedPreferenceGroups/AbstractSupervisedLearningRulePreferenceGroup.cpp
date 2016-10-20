@@ -1,9 +1,9 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/AbstractSupervisedLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractSupervisedLearningRulePreferenceGroup.hpp"
 #include "SimpleGradientDescentPreferenceGroup.hpp"
-#include "DoublePreference.hpp"
-#include "IntegerPreference.hpp"
-#include "BooleanPreference.hpp"
+#include "TrainingPlans/Preferences/DoublePreference.hpp"
+#include "TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "TrainingPlans/Preferences/BooleanPreference.hpp"
 
 #define PREFERENCE_TOTAL_ERROR_GOAL "Total error goal"
 #define PREFERENCE_MIN_RANDOM "Min random weight value"

@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/GradientDescentLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/GradientDescentLearningRulePreferenceGroup.hpp"
 #include "SimpleGradientDescentPreferenceGroup.hpp"
 #include "BackpropagationPreferenceGroup.hpp"
 #include "ResilientLearningRatePreferenceGroup.hpp"

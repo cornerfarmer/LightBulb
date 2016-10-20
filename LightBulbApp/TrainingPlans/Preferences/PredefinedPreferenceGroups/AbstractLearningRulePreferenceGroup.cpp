@@ -1,7 +1,8 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/AbstractLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractLearningRulePreferenceGroup.hpp"
 #include "SimpleGradientDescentPreferenceGroup.hpp"
-#include "IntegerPreference.hpp"
+#include "TrainingPlans/Preferences/IntegerPreference.hpp"
+
 
 #define PREFERENCE_MAX_ITERATIONS_PER_TRY "Max iterations per try"
 #define PREFERENCE_MAX_TRIES "Max tries"

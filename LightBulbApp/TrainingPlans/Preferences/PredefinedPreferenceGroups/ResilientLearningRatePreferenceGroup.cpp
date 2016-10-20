@@ -1,6 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/ResilientLearningRatePreferenceGroup.hpp"
-#include "DoublePreference.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/ResilientLearningRatePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/DoublePreference.hpp"
 
 namespace LightBulb
 {

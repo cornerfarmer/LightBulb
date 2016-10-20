@@ -4,7 +4,7 @@
 #define _ABSTRACTLEARNINGRULEPREFERENCEGROUP_H_
 
 // Includes
-#include "PreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "Learning/AbstractLearningRule.hpp"
 #include "IO/UseParentSerialization.hpp"
 

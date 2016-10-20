@@ -1,6 +1,7 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/BackpropagationPreferenceGroup.hpp"
-#include "DoublePreference.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/BackpropagationPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/DoublePreference.hpp"
+
 
 namespace LightBulb
 {
