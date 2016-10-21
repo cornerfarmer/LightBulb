@@ -83,7 +83,7 @@ namespace LightBulb
 		* \brief Returns our current options in form of a RMSPropLearningRateOptions object.
 		* \return The RMSPropLearningRateOptions object.
 		*/
-		RMSPropLearningRateOptions* getOptions();
+		RMSPropLearningRateOptions& getOptions();
 	public:
 		/**
 		* \brief Creates the RMSprop learning rate.
@@ -95,9 +95,9 @@ namespace LightBulb
 		 */
 		RMSPropLearningRate();
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
+		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		bool learningHasStopped() override;
-		void initializeAlgorithm(const AbstractNetworkTopology* networkTopology) override;
+		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 	};
 }
 

@@ -20,13 +20,13 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	NatureController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
-	NatureWindow* getWindow();
+	NatureController(LightBulb::AbstractMainApp& mainApp, LightBulb::AbstractTrainingPlan& trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
+	NatureWindow& getWindow();
 	void stopWatchMode();
 	void startWatchMode();
 	static std::string getLabel();
-	std::vector<std::vector<const wxBrush*>>* getTiles();
-	void fieldChanged(Nature* nature);
+	std::vector<std::vector<const wxBrush*>>& getTiles();
+	void fieldChanged(Nature& nature);
 	void renderingFinished();
 };
 

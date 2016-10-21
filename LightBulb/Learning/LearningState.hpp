@@ -69,7 +69,7 @@ namespace LightBulb
 			{
 				dataSets[tries - 1][dataSetLabel].push_back(iterations - 1);
 				dataSets[tries - 1][dataSetLabel].push_back(data);
-				throwEvent(EVT_LS_DS_CHANGED, this);
+				throwEvent(EVT_LS_DS_CHANGED, *this);
 			}
 		}
 		/**

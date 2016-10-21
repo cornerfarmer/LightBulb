@@ -17,9 +17,9 @@ namespace LightBulb
 	{
 	protected:
 		AbstractApp* controller;
-		void refreshAfterChange(wxSizer* sizer);
+		void refreshAfterChange(wxSizer& sizer);
 	public:
-		AbstractWindow(AbstractApp* controller_, const std::string& label, AbstractWindow* parent = nullptr);
+		AbstractWindow(AbstractApp& controller_, const std::string& label, AbstractWindow* parent = nullptr);
 	};
 }
 

@@ -44,12 +44,12 @@ namespace LightBulb
 		 * \param activationFunction The activation function the target network uses in the output layer.
 		 * \return The teaching input.
 		 */
-		virtual const NeuralNetworkIO<double>* getTeachingInput(const AbstractActivationFunction* activationFunction) const = 0;
+		virtual const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const = 0;
 		/**
 		 * \brief Returns the teaching pattern.
 		 * \return The teaching pattern.
 		 */
-		virtual const std::vector<std::vector<double>>* getTeachingPattern() const = 0;
+		virtual const std::vector<std::vector<double>>& getTeachingPattern() const = 0;
 		// Calculate the Errormap and fills (optional) the given output and netput values map
 		/**
 		 * \brief Calculates the error map, which contains the error (target - current) for every output neuron.

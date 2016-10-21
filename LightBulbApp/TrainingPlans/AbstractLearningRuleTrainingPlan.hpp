@@ -29,12 +29,12 @@ namespace LightBulb
 		virtual AbstractLearningRule* createLearningRate() = 0;
 		void run(bool initial) override;
 		void tryToPause() override;
-		virtual void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions* options) const;
+		virtual void fillDefaultLearningRuleOptions(AbstractLearningRuleOptions& options) const;
 	public:
 		std::vector<std::string> getDataSetLabels() const override;
-		LearningState* getLearningState() override;
-		const AbstractLearningResult* getLearningResult() const;
-		AbstractLearningRule* getLearningRule();
+		LearningState& getLearningState() override;
+		const AbstractLearningResult& getLearningResult() const;
+		AbstractLearningRule& getLearningRule();
 		int getSeed() const override;
 	};
 }

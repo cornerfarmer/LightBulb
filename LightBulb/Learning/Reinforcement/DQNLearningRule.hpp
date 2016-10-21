@@ -88,7 +88,7 @@ namespace LightBulb
 		void doSupervisedLearning();
 	protected:
 		bool doIteration() override;
-		const DQNLearningRuleOptions* getOptions() const override;
+		const DQNLearningRuleOptions& getOptions() const override;
 		AbstractLearningResult* getLearningResult() override;
 	public:
 		DQNLearningRule(DQNLearningRuleOptions& options_);

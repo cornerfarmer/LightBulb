@@ -16,7 +16,7 @@ public:
 	NatureExample();
 	std::string getDefaultName() const override;
 	std::string getDescription() const override;
-	LightBulb::AbstractTrainingPlan* getCopy() const override;
+	LightBulb::AbstractTrainingPlan& getCopy() const override;
 	std::string getLearningRuleName() const override;
 };
 

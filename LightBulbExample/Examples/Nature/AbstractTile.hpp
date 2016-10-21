@@ -19,6 +19,6 @@ public:
 	virtual float tryToEat() = 0;
 	virtual bool isWalkable() = 0;
 	virtual double getViewValue() = 0;
-	virtual const wxBrush* getColor() = 0;
+	virtual const wxBrush& getColor() = 0;
 };
 #endif

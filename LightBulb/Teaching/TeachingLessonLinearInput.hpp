@@ -41,8 +41,8 @@ namespace LightBulb
 		// Inherited:
 		AbstractTeachingLesson* unfold() const override;
 		int getMaxTimeStep() const override;
-		const NeuralNetworkIO<double>* getTeachingInput(const AbstractActivationFunction* activationFunction) const override;
-		const std::vector<std::vector<double>>* getTeachingPattern() const override;
+		const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
+		const std::vector<std::vector<double>>& getTeachingPattern() const override;
 	};
 }
 

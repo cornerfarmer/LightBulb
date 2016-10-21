@@ -51,12 +51,12 @@ namespace LightBulb
 		virtual double doSimulationStep() = 0;
 		virtual void initializeForLearning();
 		virtual int rateKI() { return 0; };
-		NeuralNetwork* getNeuralNetwork();
+		NeuralNetwork& getNeuralNetwork();
 		void setEpsilon(double newEpsilon);
 		double getEpsilon();
-		void setLearningState(LearningState* learningState_);
+		void setLearningState(LearningState& learningState_);
 		virtual std::vector<std::string> getDataSetLabels() const;
-		std::vector<bool>* getLastBooleanOutput();
+		std::vector<bool>& getLastBooleanOutput();
 		virtual bool isTerminalState() = 0;
 		void setStochasticActionDecision(bool useStochasticActionDecision_);
 	};

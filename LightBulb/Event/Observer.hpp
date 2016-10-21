@@ -23,7 +23,7 @@ namespace LightBulb
 		/**
 		 * \brief Holds the method which should be called.
 		 */
-		void (Class::*method)(EventArg*);
+		void (Class::*method)(EventArg&);
 		/**
 		 * \brief The target object
 		 */
@@ -33,17 +33,17 @@ namespace LightBulb
 		 * \param method_ The method to call
 		 * \param object_ The target object
 		 */
-		Observer(void(Class::*method_)(EventArg*), Class* object_)
+		Observer(void(Class::*method_)(EventArg&), Class& object_)
 		{
 			method = method_;
-			object = object_;
+			object = &object_;
 		}
 
 		/**
 		 * \brief Calls the specified method of the object
 		 * \param arg The argument which will be forwarded to the object
 		 */
-		void throwEvent(EventArg* arg) override
+		void throwEvent(EventArg& arg) override
 		{
 			(object->*method)(arg);
 		}

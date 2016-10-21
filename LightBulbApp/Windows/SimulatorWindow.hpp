@@ -32,11 +32,11 @@ namespace LightBulb
 		void selectionChanged(wxCommandEvent& event);
 		void inputTypeChanged(wxCommandEvent& event);
 		void outputTypeChanged(wxCommandEvent& event);
-		void refreshInput(AbstractNeuralNetwork* network);
-		void refreshOutput(AbstractNeuralNetwork* network);
-		SimulatorController* getController();
+		void refreshInput(AbstractNeuralNetwork& network);
+		void refreshOutput(AbstractNeuralNetwork& network);
+		SimulatorController& getController();
 	public:
-		SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent = nullptr);
+		SimulatorWindow(SimulatorController& controller_, AbstractWindow* parent = nullptr);
 		void refreshNeuralNetworks();
 	};
 }

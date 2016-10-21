@@ -16,13 +16,13 @@ class PongGameWindow : public LightBulb::AbstractSubAppWindow
 private:
 	wxPanel* panel;
 	wxToolBar* toolbar;
-	PongGameController* getController();
+	PongGameController& getController();
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	PongGameWindow(PongGameController* controller_, LightBulb::AbstractWindow* parent = nullptr);
-	void paintEvent(wxPaintEvent & evt);
-	void resize(wxSizeEvent & evt);
+	PongGameWindow(PongGameController& controller_, LightBulb::AbstractWindow* parent = nullptr);
+	void paintEvent(wxPaintEvent& evt);
+	void resize(wxSizeEvent& evt);
 	void paintNow();
 	void refreshField(wxThreadEvent& evt);
 	void toolBarClicked(wxCommandEvent& evt);

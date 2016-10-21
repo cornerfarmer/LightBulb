@@ -37,7 +37,7 @@ namespace LightBulb
 		 * \param eventType The type of event which should be thrown
 		 * \param arg The event argument which will be forwarded to the observers
 		 */
-		void throwEvent(EventTypes eventType, EventArg* arg)
+		void throwEvent(EventTypes eventType, EventArg& arg)
 		{
 			if (observers.size() == 0)
 				return;
@@ -66,14 +66,14 @@ namespace LightBulb
 		 * \return Returns if the given object is an observer
 		 */
 		template<typename Class>
-		bool existsObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
+		bool existsObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg&), Class& observerObject)
 		{
 			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
 			{
 				if (dynamic_cast<Observer<Class, EventArg>*>(*observer))
 				{
 					Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer);
-					if (castedObserver->object == observerObject && castedObserver->method == observerMethod)
+					if (castedObserver->object == &observerObject && castedObserver->method == observerMethod)
 					{
 						return true;
 					}
@@ -93,7 +93,7 @@ namespace LightBulb
 		 * \note If this observer combination does already exist, this method will have no effect.
 		 */
 		template<typename Class>
-		void registerObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
+		void registerObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg&), Class& observerObject)
 		{
 			observersMutex.lock();
 			if (!existsObserver(eventType, observerMethod, observerObject))
@@ -110,7 +110,7 @@ namespace LightBulb
 		 * \note If the observer combination does not exist, this method will have no effect.
 		 */
 		template<typename Class>
-		void removeObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg*), Class* observerObject)
+		void removeObserver(EventTypes eventType, void(Class::*observerMethod)(EventArg&), Class& observerObject)
 		{
 			observersMutex.lock();
 			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
@@ -118,7 +118,7 @@ namespace LightBulb
 				if (dynamic_cast<Observer<Class, EventArg>*>(*observer))
 				{
 					Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer);
-					if (castedObserver->object == observerObject && castedObserver->method == observerMethod)
+					if (castedObserver->object == &observerObject && castedObserver->method == observerMethod)
 					{
 						observers[eventType].erase(observer);
 						break;

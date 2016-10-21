@@ -29,7 +29,7 @@ namespace LightBulb
 		void networkChanged(wxCommandEvent& event);
 		void scrollEvent(wxScrollWinEvent& event);
 		void panelClick(wxMouseEvent& event);
-		NetworkViewerController* getController();
+		NetworkViewerController& getController();
 		wxScrolledWindow* panel;
 		int layerCount, width, height;
 		int selectedNeuronIndex;
@@ -41,10 +41,10 @@ namespace LightBulb
 	protected:
 		DECLARE_EVENT_TABLE();
 	public:
-		NetworkViewerWindow(NetworkViewerController* controller_, AbstractWindow* parent = nullptr);
+		NetworkViewerWindow(NetworkViewerController& controller_, AbstractWindow* parent = nullptr);
 		void refreshNeuralNetworks();
-		void paintEvent(wxPaintEvent & evt);
-		void resize(wxSizeEvent & evt);
+		void paintEvent(wxPaintEvent& evt);
+		void resize(wxSizeEvent& evt);
 		void paintNow();
 		void render(wxDC& dc);
 	};

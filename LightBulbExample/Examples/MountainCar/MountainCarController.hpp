@@ -21,15 +21,15 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	MountainCarController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
-	MountainCarWindow* getWindow();
+	MountainCarController(LightBulb::AbstractMainApp& mainApp, LightBulb::AbstractTrainingPlan& trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
+	MountainCarWindow& getWindow();
 	void stopWatchMode();
 	void startWatchMode();
 	static std::string getLabel();
 	double getPosition();
 	double getVelocity();
 	int getAction();
-	void posChanged(MountainCarWorld* pong);
+	void posChanged(MountainCarWorld& pong);
 };
 
 #endif

@@ -27,7 +27,7 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_);
+	Animal(Nature& nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();
 	int getPosX();
 	int getPosY();

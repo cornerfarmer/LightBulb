@@ -152,7 +152,7 @@ namespace LightBulb
 		 * \brief Fills in the default learning result properties.
 		 * \param learningResult A pointer to a existing learning result which should be modified.
 		 */
-		virtual void fillDefaultResults(AbstractLearningResult* learningResult);
+		virtual void fillDefaultResults(AbstractLearningResult& learningResult);
 		/**
 		 * \brief Does learning.
 		 * \param resume True, if the learning process just resumes.
@@ -184,12 +184,12 @@ namespace LightBulb
 		 * \brief Can be used to change the logger after creating the learning rule.
 		 * \param logger The new logger.
 		 */
-		virtual void setLogger(AbstractLogger* logger);
+		virtual void setLogger(AbstractLogger& logger);
 		/**
 		 * \brief Returns the current learning state.
 		 * \return The current learning state.
 		 */
-		LearningState* getLearningState();
+		LearningState& getLearningState();
 		/**
 		 * \brief Returns a vector of all data set labels which are available in the learning state of this learning rule.
 		 * \return The labels of all available data sets.

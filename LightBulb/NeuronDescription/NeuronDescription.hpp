@@ -48,12 +48,12 @@ namespace LightBulb
 		 * \brief Returns the input function of the neuron.
 		 * \return The input function.
 		 */
-		const AbstractInputFunction* getInputFunction() const;
+		const AbstractInputFunction& getInputFunction() const;
 		/**
 		 * \brief Returns the activation function of the neuron.
 		 * \return The activation function.
 		 */
-		virtual const AbstractActivationFunction* getActivationFunction() const;
+		virtual const AbstractActivationFunction& getActivationFunction() const;
 	};
 }
 

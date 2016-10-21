@@ -52,10 +52,10 @@ namespace LightBulb
 		void trainingPlanPopUpMenuSelected(wxCommandEvent& event);
 		void trainingPlanListRightClick(wxDataViewEvent& event);
 		void trainingPlanNameChanged(wxDataViewEvent& event);
-		wxPanel* createNNColumn(wxWindow* parent);
-		wxPanel* createTrainingColumn(wxWindow* parent);
-		wxPanel* createRunningTrainingColumn(wxWindow* parent);
-		wxPanel* createDetailsPanel(wxWindow* parent);
+		wxPanel* createNNColumn(wxWindow& parent);
+		wxPanel* createTrainingColumn(wxWindow& parent);
+		wxPanel* createRunningTrainingColumn(wxWindow& parent);
+		wxPanel* createDetailsPanel(wxWindow& parent);
 		wxMenuBar* menubar;
 		wxMenu* windowsMenu;
 		bool customMenuVisible;
@@ -65,16 +65,16 @@ namespace LightBulb
 		void createMenuBar();
 		void selectNeuralNetwork(wxDataViewEvent& event);
 		void selectTrainingPlanPattern(wxDataViewEvent& event);
-		void showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		void showProcessOfTrainingPlan(AbstractTrainingPlan& trainingPlan);
 		void restoreDefaultProcessView();
-		void showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		void showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan& trainingPlan);
 		void selectTrainingPlan(wxDataViewEvent& event);
-		void showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNetwork);
-		void showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan);
-		void showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		void showDetailsOfNeuralNetwork(AbstractNeuralNetwork& neuralNetwork);
+		void showDetailsOfTrainingPlanPattern(AbstractTrainingPlan& trainingPlan);
+		void showDetailsOfTrainingPlan(AbstractTrainingPlan& trainingPlan);
 		void clearDetails();
 		std::string getNeuralNetworkSizeAsString(const std::vector<unsigned int>& size) const;
-		int getRowIndexOfItem(const wxDataViewListCtrl* list, const wxDataViewItem& item) const;
+		int getRowIndexOfItem(const wxDataViewListCtrl& list, const wxDataViewItem& item) const;
 		void startTraining(wxCommandEvent& event);
 		void pauseTraining(wxCommandEvent& event);
 		void showPreferences(wxCommandEvent& event);
@@ -89,13 +89,13 @@ namespace LightBulb
 		void removeCustomSubAppsMenu();
 		void refreshTrainingPlanRunTimes(wxTimerEvent& event);
 		std::string getStringFromDuration(std::chrono::duration<double> duration) const;
-		TrainingController* getController();
+		TrainingController& getController();
 	protected:
 		void close(wxCloseEvent& event);
 		DECLARE_EVENT_TABLE();
 	public:
-		TrainingWindow(TrainingController* controller_);
-		void addSubAppFactory(AbstractSubAppFactory* newSubAppFactory, int factoryIndex);
+		TrainingWindow(TrainingController& controller_);
+		void addSubAppFactory(AbstractSubAppFactory& newSubAppFactory, int factoryIndex);
 	};
 }
 

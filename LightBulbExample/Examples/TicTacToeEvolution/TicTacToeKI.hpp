@@ -23,7 +23,7 @@ public:
 	TicTacToeKI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_ = nullptr);
 	TicTacToeKI() = default;
 	~TicTacToeKI();
-	void setTicTacToe(TicTacToe* newTicTacToe);
+	void setTicTacToe(TicTacToe& newTicTacToe);
 };
 
 USE_PARENT_SERIALIZATION(TicTacToeKI, LightBulb::AbstractSimpleEvolutionObject);

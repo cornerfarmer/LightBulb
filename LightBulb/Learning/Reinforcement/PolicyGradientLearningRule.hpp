@@ -53,15 +53,15 @@ namespace LightBulb
 		int stepsSinceLastReward;
 		int errorSteps;
 		int valueErrorSteps;
-		void addGradients(AbstractNetworkTopology* networkTopology);
-		void computeGradients(AbstractNetworkTopology* networkTopology, int stepsSinceLastReward, double reward);
-		void computeGradientsForError(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations);
-		void initialize(PolicyGradientLearningRuleOptions* options);
-		void recordStep(AbstractNetworkTopology* networkTopology);
-		void getErrorVector(AbstractNetworkTopology* networkTopology, Eigen::VectorXd& errorVector);
+		void addGradients(AbstractNetworkTopology& networkTopology);
+		void computeGradients(AbstractNetworkTopology& networkTopology, int stepsSinceLastReward, double reward);
+		void computeGradientsForError(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations);
+		void initialize(PolicyGradientLearningRuleOptions& options);
+		void recordStep(AbstractNetworkTopology& networkTopology);
+		void getErrorVector(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector);
 	protected:
 		bool doIteration() override;
-		const PolicyGradientLearningRuleOptions* getOptions() const override;
+		const PolicyGradientLearningRuleOptions& getOptions() const override;
 		void doCalculationAfterLearningProcess() override;
 		AbstractLearningResult* getLearningResult() override;
 		void initializeLearningAlgoritm() override;

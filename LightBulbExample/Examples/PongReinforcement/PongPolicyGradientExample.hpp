@@ -21,7 +21,7 @@ public:
 	std::string getDescription() const override;
 	LightBulb::AbstractTrainingPlan* getCopy() const override;
 	std::string getLearningRuleName() const override;
-	PongReinforcementWorld* getWorld();
+	PongReinforcementWorld& getWorld();
 };
 
 USE_PARENT_SERIALIZATION(PongPolicyGradientExample, LightBulb::AbstractLearningRuleTrainingPlan);

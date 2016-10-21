@@ -21,7 +21,7 @@ namespace LightBulb
 	protected:
 		virtual void close(wxCloseEvent& event);
 	public:
-		AbstractSubAppWindow(AbstractSubApp* controller_, std::string label, AbstractWindow* parent);
+		AbstractSubAppWindow(AbstractSubApp& controller_, std::string label, AbstractWindow& parent);
 
 	};
 }

@@ -39,9 +39,9 @@ namespace LightBulb
 
 		void addPreference(AbstractPreferenceElement* preferenceElement);
 
-		const AbstractPreference* getPreference(const std::string& preferenceName) const;
+		const AbstractPreference& getPreference(const std::string& preferenceName) const;
 
-		PreferenceGroup* getPreferenceGroup(const std::string& preferenceGroupName) const;
+		PreferenceGroup& getPreferenceGroup(const std::string& preferenceGroupName) const;
 		double getDoublePreference(const std::string& preferenceName) const;
 		int getIntegerPreference(const std::string& preferenceName) const;
 		bool getBooleanPreference(const std::string& preferenceName) const;
@@ -62,9 +62,9 @@ namespace LightBulb
 		template<class Class, class PreferenceGroupClass>
 		Class createFromGroup(std::string groupName) const
 		{
-			const PreferenceGroup* preferenceGroup = getPreferenceGroup(groupName);
-			if (dynamic_cast<PreferenceGroupClass*>(preferenceGroup))
-				return dynamic_cast<PreferenceGroupClass*>(preferenceGroup)->create();
+			const PreferenceGroup& preferenceGroup = getPreferenceGroup(groupName);
+			if (dynamic_cast<PreferenceGroupClass&>(preferenceGroup))
+				return dynamic_cast<PreferenceGroupClass&>(preferenceGroup).create();
 
 			throw std::logic_error("The preference group could not be found.");
 		}

@@ -36,21 +36,21 @@ namespace LightBulb
 		bool saveTrainingSessionAfterPause;
 		bool allTrainingPlansPaused();
 	public:
-		TrainingController(NeuralNetworkRepository* neuralNetworkRepository_, TrainingPlanRepository* trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_);
-		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks() const;
-		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlanPatterns() const;
-		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
+		TrainingController(NeuralNetworkRepository& neuralNetworkRepository_, TrainingPlanRepository& trainingPlanRepository_, std::vector<AbstractTrainingPlan*>& trainingPlanPatterns_);
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& getNeuralNetworks() const;
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>& getTrainingPlanPatterns() const;
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>& getTrainingPlans() const;
 		void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
-		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
-		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
-		void pauseTrainingPlan(AbstractTrainingPlan* trainingPlan);
-		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const;
-		int getIndexOfTrainingPlanPattern(const AbstractTrainingPlan* trainingPlanPattern) const;
-		void trainingPlanPaused(AbstractTrainingPlan* trainingPlan);
-		void trainingPlanFinished(AbstractTrainingPlan* trainingPlan);
-		void resumeTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		void neuralNetworksChanged(NeuralNetworkRepository& neuralNetworkRepository);
+		void trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository);
+		void pauseTrainingPlan(AbstractTrainingPlan& trainingPlan);
+		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork& network) const;
+		int getIndexOfTrainingPlanPattern(const AbstractTrainingPlan& trainingPlanPattern) const;
+		void trainingPlanPaused(AbstractTrainingPlan& trainingPlan);
+		void trainingPlanFinished(AbstractTrainingPlan& trainingPlan);
+		void resumeTrainingPlan(AbstractTrainingPlan& trainingPlan);
 		void show();
-		TrainingWindow* getWindow();
+		TrainingWindow& getWindow();
 		void addSubAppFactory(AbstractSubAppFactory* newSubAppFactory);
 		void saveNeuralNetwork(const std::string& path, int neuralNetworkIndex);
 		void loadNeuralNetwork(const std::string& path);
@@ -63,7 +63,7 @@ namespace LightBulb
 		void addSubApp(int subAppFactoryIndex);
 		void openPreferences(int trainingPlanPatternIndex);
 		void setTrainingPlanName(int trainingPlanIndex, const std::string& newName);
-		void removeSubApp(const AbstractSubApp* subApp) override;
+		void removeSubApp(const AbstractSubApp& subApp) override;
 	};
 }
 

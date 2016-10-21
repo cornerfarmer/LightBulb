@@ -122,17 +122,17 @@ namespace LightBulb
 		const std::vector<unsigned int>& getNeuronCountsPerLayer() const override;
 		void setInput(const std::vector<double> &inputVector) override;
 		void getOutput(std::vector<double> &outputVector) const override;
-		void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) override;
-		void randomizeDependingOnLayerSize(AbstractRandomGenerator* randomGenerator) override;
+		void randomizeWeights(AbstractRandomGenerator& randomGenerator, double randStart, double randEnd) override;
+		void randomizeDependingOnLayerSize(AbstractRandomGenerator& randomGenerator) override;
 		void resetActivation() override;
 		void copyWeightsFrom(const AbstractNetworkTopology& otherNetwork) override;
 		void refreshNetInputsForLayer(int layerNr) override;
 		void refreshActivationsForLayer(int layerNr) override;
 		double calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const override;
-		std::vector<Eigen::MatrixXd>* getAllWeights() override;
-		const std::vector<Eigen::MatrixXd>* getAllWeights() const override;
-		const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() const override;
-		const std::vector<Eigen::VectorXd>* getAllNetInputs() const override;
+		std::vector<Eigen::MatrixXd>& getAllWeights() override;
+		const std::vector<Eigen::MatrixXd>& getAllWeights() const override;
+		const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& getAllActivations() const override;
+		const std::vector<Eigen::VectorXd>& getAllNetInputs() const override;
 		Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) const override;
 		void setAfferentWeightsPerLayer(int layerIndex, const Eigen::MatrixXd& newWeights) override;
 		Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) const override;
@@ -151,8 +151,8 @@ namespace LightBulb
 		void removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) override;
 		bool existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex) override;
 		AbstractNetworkTopology* clone() const override;
-		const NeuronDescription* getInnerNeuronDescription() const override;
-		const NeuronDescription* getOutputNeuronDescription() const override;
+		const NeuronDescription& getInnerNeuronDescription() const override;
+		const NeuronDescription& getOutputNeuronDescription() const override;
 	};
 }
 

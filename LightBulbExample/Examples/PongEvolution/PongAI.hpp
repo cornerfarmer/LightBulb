@@ -21,7 +21,7 @@ protected:
 public:	
 	PongAI(LightBulb::FeedForwardNetworkTopologyOptions& options, Pong* pong_ = nullptr);
 	PongAI() = default;
-	void setPong(Pong* currentGame_);
+	void setPong(Pong& currentGame_);
 };
 
 USE_PARENT_SERIALIZATION(PongAI, LightBulb::AbstractSimpleEvolutionObject);

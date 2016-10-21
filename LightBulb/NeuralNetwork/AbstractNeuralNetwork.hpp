@@ -71,7 +71,7 @@ namespace LightBulb
 		 * \brief Returns the network topology of the neural network.
 		 * \return The network topology.
 		 */
-		virtual AbstractNetworkTopology* getNetworkTopology() const = 0;
+		virtual AbstractNetworkTopology& getNetworkTopology() const = 0;
 		/**
 		 * \brief Returns the name of the neural network.
 		 * \return The name.

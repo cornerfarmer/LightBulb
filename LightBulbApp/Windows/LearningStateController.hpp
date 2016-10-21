@@ -28,7 +28,7 @@ namespace LightBulb
 		int tryNumber;
 		std::string label;
 
-		DataSet* getDataSet(std::string otherLabel = "");
+		DataSet& getDataSet(std::string otherLabel = "");
 	};
 
 	class LearningStateController : public AbstractSubApp
@@ -47,20 +47,20 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent = nullptr);
-		LearningStateWindow* getWindow();
-		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
-		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
+		LearningStateController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository_, AbstractWindow* parent = nullptr);
+		LearningStateWindow& getWindow();
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>& getTrainingPlans() const;
+		void trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository);
 		void setSelectedTrainingPlan(int trainingPlanIndex);
-		AbstractTrainingPlan* getSelectedTrainingPlan();
-		void learningStateChanged(LearningState* learningState);
+		AbstractTrainingPlan& getSelectedTrainingPlan();
+		void learningStateChanged(LearningState& learningState);
 		void setRefreshRate(int newRefreshRate);
 		int getRefreshRate();
 		void refreshFinished();
 		std::vector<std::string> getDataSetLabels();
 		int getTryCount();
 		std::string addDataSet(int tryNumber, int dataSetIndex);
-		std::vector<DataSetSelection>* getSelectedDataSets();
+		std::vector<DataSetSelection>& getSelectedDataSets();
 		void removeDataSet(int dataSetIndex);
 		const std::string& getComparisonDataSetLabel() const;
 		void setComparisonDataSetLabel(std::string newComparisonDataSetLabel);

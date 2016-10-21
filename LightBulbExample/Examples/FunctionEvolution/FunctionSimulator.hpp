@@ -36,7 +36,7 @@ public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	FunctionSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(LightBulb::AbstractEvolutionObject* object) override;
+	double getScore(LightBulb::AbstractEvolutionObject& object) override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld)

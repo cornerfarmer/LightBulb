@@ -23,8 +23,8 @@ namespace LightBulb
 		std::unique_ptr<PreferencesWindow> window;
 		AbstractTrainingPlan* trainingPlan;
 	public:
-		PreferencesController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent = nullptr);
-		PreferencesWindow* getWindow();
+		PreferencesController(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_, AbstractWindow* parent = nullptr);
+		PreferencesWindow& getWindow();
 		static std::string getLabel();
 		const std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceGroups();
 	};

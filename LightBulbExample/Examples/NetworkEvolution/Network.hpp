@@ -23,10 +23,10 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	Network(NetworkSimulator* networkSimulator_);
+	Network(NetworkSimulator& networkSimulator_);
 	Network() = default;
 	~Network();
-	std::vector<std::vector<float>>* getPositions();
+	std::vector<std::vector<float>>& getPositions();
 };
 
 #include "IO/NetworkIO.hpp"

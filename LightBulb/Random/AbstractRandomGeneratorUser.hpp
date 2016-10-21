@@ -32,12 +32,12 @@ namespace LightBulb
 		 * \brief Sets the random generator which should be used.
 		 * \param randomGenerator_ The random generator.
 		 */
-		virtual void setRandomGenerator(AbstractRandomGenerator* randomGenerator_);
+		virtual void setRandomGenerator(AbstractRandomGenerator& randomGenerator_);
 		/**
 		 * \brief Returns the currently used random generator.
 		 * \return The random generator.
 		 */
-		AbstractRandomGenerator* getRandomGenerator();
+		AbstractRandomGenerator& getRandomGenerator();
 	};
 }
 

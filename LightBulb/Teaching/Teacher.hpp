@@ -39,8 +39,8 @@ namespace LightBulb
 		// Inherited:
 		void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson) override;
 		void addTestingLesson(AbstractTeachingLesson* newTestingLesson) override;
-		const std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() const override;
-		const std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() const override;
+		const std::vector<std::unique_ptr<AbstractTeachingLesson>>& getTeachingLessons() const override;
+		const std::vector<std::unique_ptr<AbstractTeachingLesson>>& getTestingLessons() const override;
 		double getTotalError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 		double getTeachingError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 		double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) const override;

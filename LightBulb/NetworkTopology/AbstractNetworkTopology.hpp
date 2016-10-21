@@ -78,7 +78,7 @@ namespace LightBulb
 		 * \param randStart The lower boundary of the random weights.
 		 * \param randEnd The higher boundary of the random weights.
 		 */
-		virtual void randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd) = 0;
+		virtual void randomizeWeights(AbstractRandomGenerator& randomGenerator, double randStart, double randEnd) = 0;
 		/**
 		 * \brief Returns the count of layers in the network.
 		 * \return The layer count.
@@ -94,7 +94,7 @@ namespace LightBulb
 		 * \details \$f max = 1 / \sqrt{layersize} \n min = -max \$f
 		 * \param randomGenerator The random generator which should be used for randomizing.
 		 */
-		virtual void randomizeDependingOnLayerSize(AbstractRandomGenerator* randomGenerator) = 0;
+		virtual void randomizeDependingOnLayerSize(AbstractRandomGenerator& randomGenerator) = 0;
 		/**
 		 * \brief Recalculates the net inputs for one layer.
 		 * \param layerNr The index of the layer.
@@ -109,18 +109,18 @@ namespace LightBulb
 		 * \brief Returns a pointer to all weights.
 		 * \return A pointer to a vector of all weight matrices per layer.
 		 */
-		virtual std::vector<Eigen::MatrixXd>* getAllWeights() = 0;
-		virtual const std::vector<Eigen::MatrixXd>* getAllWeights() const = 0;
+		virtual std::vector<Eigen::MatrixXd>& getAllWeights() = 0;
+		virtual const std::vector<Eigen::MatrixXd>& getAllWeights() const = 0;
 		/**
 		 * \brief Returns a pointer to all activations.
 		 * \return A pointer to a vector of all activation vectors per layer.
 		 */
-		virtual const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* getAllActivations() const = 0;
+		virtual const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& getAllActivations() const = 0;
 		/**
 		 * \brief Returns a pointer to all net inputs.
 		 * \return  A pointer to a vector of all net input vectors per layer.
 		 */
-		virtual const std::vector<Eigen::VectorXd>* getAllNetInputs() const = 0;
+		virtual const std::vector<Eigen::VectorXd>& getAllNetInputs() const = 0;
 		/**
 		 * \brief Returns all afferent weights for a layer.
 		 * \param layerIndex The index of the layer.
@@ -244,12 +244,12 @@ namespace LightBulb
 		 * \brief Returns the neuron description of inner/hidden neurons.
 		 * \return The neuron description
 		 */
-		virtual const NeuronDescription* getInnerNeuronDescription() const = 0;
+		virtual const NeuronDescription& getInnerNeuronDescription() const = 0;
 		/**
 		* \brief Returns the neuron description of output neurons.
 		* \return The neuron description
 		*/
-		virtual const NeuronDescription* getOutputNeuronDescription() const = 0;
+		virtual const NeuronDescription& getOutputNeuronDescription() const = 0;
 	};
 
 }

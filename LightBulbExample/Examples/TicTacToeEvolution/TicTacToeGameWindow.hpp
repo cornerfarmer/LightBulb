@@ -18,13 +18,13 @@ private:
 	std::vector<std::vector<int>> currentFields;
 	wxPanel* panel;
 	wxToolBar* toolbar;
-	TicTacToeGameController* getController();
+	TicTacToeGameController& getController();
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	TicTacToeGameWindow(TicTacToeGameController* controller_, LightBulb::AbstractWindow* parent = nullptr);
-	void paintEvent(wxPaintEvent & evt);
-	void resize(wxSizeEvent & evt);
+	TicTacToeGameWindow(TicTacToeGameController& controller_, LightBulb::AbstractWindow* parent = nullptr);
+	void paintEvent(wxPaintEvent& evt);
+	void resize(wxSizeEvent& evt);
 	void paintNow();
 	void refreshField(wxThreadEvent& evt);
 	void toolBarClicked(wxCommandEvent& evt);

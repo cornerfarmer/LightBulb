@@ -27,7 +27,7 @@ public:
 	virtual ~AbstractPongWorld() {};
 	void startWatchMode();
 	void stopWatchMode();
-	PongGame* getGame();
+	PongGame& getGame();
 };
 
 

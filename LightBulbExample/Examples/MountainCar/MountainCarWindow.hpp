@@ -16,13 +16,13 @@ class MountainCarWindow : public LightBulb::AbstractSubAppWindow
 private:
 	wxPanel* panel;
 	wxToolBar* toolbar;
-	MountainCarController* getController();
+	MountainCarController& getController();
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	MountainCarWindow(MountainCarController* controller_, LightBulb::AbstractWindow* parent = nullptr);
-	void paintEvent(wxPaintEvent & evt);
-	void resize(wxSizeEvent & evt);
+	MountainCarWindow(MountainCarController& controller_, LightBulb::AbstractWindow* parent = nullptr);
+	void paintEvent(wxPaintEvent& evt);
+	void resize(wxSizeEvent& evt);
 	void paintNow();
 	void refreshField(wxThreadEvent& evt);
 	void toolBarClicked(wxCommandEvent& evt);

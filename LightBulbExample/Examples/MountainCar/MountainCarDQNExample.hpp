@@ -21,7 +21,7 @@ public:
 	std::string getDescription() const override;
 	LightBulb::AbstractTrainingPlan* getCopy() const override;
 	std::string getLearningRuleName() const override;
-	MountainCarWorld* getWorld();
+	MountainCarWorld& getWorld();
 };
 
 USE_PARENT_SERIALIZATION(MountainCarDQNExample, LightBulb::AbstractLearningRuleTrainingPlan);

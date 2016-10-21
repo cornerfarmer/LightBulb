@@ -27,17 +27,17 @@ namespace LightBulb
 	private:
 		wxRichTextCtrl* textBox;
 		wxChoice* trainingPlansChoice;
+		int lastLogMessageIndex;
+		wxCheckBox* checkBox;
 		void trainingPlanChanged(wxCommandEvent& event);
 		void logLevelChanged(wxCommandEvent& event);
 		void autoScrollingChanged(wxCommandEvent& event);
 		void addNewLogMessages(wxThreadEvent& event);
 		void reloadLog(wxThreadEvent& event);
 		void scrollChanged(wxScrollWinEvent& event);
-		int lastLogMessageIndex;
-		wxCheckBox* checkBox;
-		LoggerController* getController();
+		LoggerController& getController();
 	public:
-		LoggerWindow(LoggerController* controller_, AbstractWindow* parent = nullptr);
+		LoggerWindow(LoggerController& controller_, AbstractWindow* parent = nullptr);
 		void addLogMessage(const std::string& msg);
 		void clearLog();
 		void refreshTrainingPlans();

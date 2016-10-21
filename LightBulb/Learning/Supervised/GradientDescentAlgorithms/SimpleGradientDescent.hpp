@@ -63,7 +63,7 @@ namespace LightBulb
 		* \brief Returns our current options in form of a SimpleGradientDescentOptions object.
 		* \return The SimpleGradientDescentOptions object.
 		*/
-		SimpleGradientDescentOptions* getOptions();
+		SimpleGradientDescentOptions& getOptions();
 	public:
 		/**
 		* \brief Creates simple gradient descent.
@@ -75,10 +75,10 @@ namespace LightBulb
 		 */
 		SimpleGradientDescent();
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
+		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
-		void initializeAlgorithm(const AbstractNetworkTopology* networkTopology) override;
+		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 	};
 }
 

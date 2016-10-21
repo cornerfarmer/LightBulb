@@ -19,14 +19,14 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	TicTacToeGameController(LightBulb::AbstractMainApp* mainApp, LightBulb::AbstractTrainingPlan* trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
-	TicTacToeGameWindow* getWindow();
+	TicTacToeGameController(LightBulb::AbstractMainApp& mainApp, LightBulb::AbstractTrainingPlan& trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
+	TicTacToeGameWindow& getWindow();
 	void stopStepMode();
 	void startStepMode();
 	void doStep();
 	static std::string getLabel();
-	std::vector<std::vector<int>>* getFields();
-	void fieldsChanged(TicTacToe* ticTacToe);
+	std::vector<std::vector<int>>& getFields();
+	void fieldsChanged(TicTacToe& ticTacToe);
 };
 
 #endif

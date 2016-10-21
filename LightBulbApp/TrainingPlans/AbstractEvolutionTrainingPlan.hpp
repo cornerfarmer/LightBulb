@@ -24,12 +24,12 @@ namespace LightBulb
 	protected:
 		std::unique_ptr<AbstractEvolutionWorld> world;
 		virtual AbstractEvolutionWorld* createWorld() = 0;
-		void fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions* options) const;
+		void fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions& options) const;
 	public:
 		AbstractEvolutionTrainingPlan();
 		void initializeStart() override;
-		AbstractEvolutionWorld* getWorld();
-		void setWorld(AbstractEvolutionWorld* network_);
+		AbstractEvolutionWorld& getWorld();
+		void setWorld(AbstractEvolutionWorld& network_);
 	};
 }
 

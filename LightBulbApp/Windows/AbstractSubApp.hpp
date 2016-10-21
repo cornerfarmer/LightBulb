@@ -16,7 +16,7 @@ namespace LightBulb
 		AbstractMainApp* mainApp;
 		virtual void prepareClose() {};
 	public:
-		AbstractSubApp(AbstractMainApp* mainApp_);
+		AbstractSubApp(AbstractMainApp& mainApp_);
 		void close();
 	};
 }

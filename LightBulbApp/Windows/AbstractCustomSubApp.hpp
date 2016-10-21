@@ -15,7 +15,7 @@ namespace LightBulb
 	protected:
 		AbstractTrainingPlan* trainingPlan;
 	public:
-		AbstractCustomSubApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_);
+		AbstractCustomSubApp(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_);
 	};
 }
 

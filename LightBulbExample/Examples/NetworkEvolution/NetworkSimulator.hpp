@@ -29,8 +29,8 @@ public:
 	NetworkSimulator(std::vector<std::vector<float>> consumers_);
 	NetworkSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(LightBulb::AbstractEvolutionObject* object) override;
-	std::vector<std::vector<float>>* getConsumers();
+	double getScore(LightBulb::AbstractEvolutionObject& object) override;
+	std::vector<std::vector<float>>& getConsumers();
 };
 
 #include "IO/NetworkSimulatorIO.hpp"

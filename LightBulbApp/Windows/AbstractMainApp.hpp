@@ -14,7 +14,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
-		virtual void removeSubApp(const AbstractSubApp* subApp) = 0;
+		virtual void removeSubApp(const AbstractSubApp& subApp) = 0;
 	};
 }
 

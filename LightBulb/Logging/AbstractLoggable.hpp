@@ -37,7 +37,7 @@ namespace LightBulb
 		 * \brief Sets the logger.
 		 * \param logger_ The logger which should be used for logging.
 		 */
-		virtual void setLogger(AbstractLogger* logger_);
+		virtual void setLogger(AbstractLogger& logger_);
 	};
 }
 

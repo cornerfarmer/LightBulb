@@ -78,7 +78,7 @@ namespace LightBulb
 		 * \brief Returns our current options in form of a ResilientLearningRateOptions object.
 		 * \return The ResilientLearningRateOptions object.
 		 */
-		ResilientLearningRateOptions* getOptions();
+		ResilientLearningRateOptions& getOptions();
 	public:
 		/**
 		 * \brief Creates the resilient learning rate.
@@ -90,10 +90,10 @@ namespace LightBulb
 		 */
 		ResilientLearningRate();
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
+		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
-		void initializeAlgorithm(const AbstractNetworkTopology* networkTopology) override;
+		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 	};
 }
 

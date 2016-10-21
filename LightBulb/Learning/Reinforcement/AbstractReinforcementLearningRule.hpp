@@ -32,7 +32,7 @@ namespace LightBulb
 	private:
 	protected:
 		bool hasLearningSucceeded() override;
-		virtual const AbstractReinforcementLearningRuleOptions* getOptions() const;
+		virtual const AbstractReinforcementLearningRuleOptions& getOptions() const;
 		void randomGeneretorHasChanged();
 	public:
 		AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_);

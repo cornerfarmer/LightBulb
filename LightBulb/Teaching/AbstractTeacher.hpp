@@ -39,12 +39,12 @@ namespace LightBulb
 		 * \brief Returns all teaching lessons.
 		 * \return All teaching lessons.
 		 */
-		const virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTeachingLessons() const = 0;
+		const virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>& getTeachingLessons() const = 0;
 		/**
 		 * \brief Returns all testing lessons.
 		 * \return All testing lessons.
 		 */
-		const virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>* getTestingLessons() const = 0;
+		const virtual std::vector<std::unique_ptr<AbstractTeachingLesson>>& getTestingLessons() const = 0;
 		/**
 		 * \brief Calculates the total error from all teaching and testing lessons plus the weight decay error.
 		 * \details Calculates getTeachingError() + getWeightDecayError().

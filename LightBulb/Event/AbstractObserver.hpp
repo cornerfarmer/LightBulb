@@ -23,7 +23,7 @@ namespace LightBulb
 		 * \brief This method is called if the corresponding observable object throws the registered event.
 		 * \param arg The event argument
 		 */
-		virtual void throwEvent(EventArg* arg) = 0;
+		virtual void throwEvent(EventArg& arg) = 0;
 	};
 }
 

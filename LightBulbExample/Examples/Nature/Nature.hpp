@@ -40,9 +40,9 @@ public:
 	int getWidth();
 	int getHeight();
 	void addRandomPlant();
-	std::vector<std::vector<std::unique_ptr<AbstractTile>>>* getTiles();
-	double getScore(LightBulb::AbstractEvolutionObject* object) override;
-	AbstractTile* getTile(int posX, int posY);
+	std::vector<std::vector<std::unique_ptr<AbstractTile>>>& getTiles();
+	double getScore(LightBulb::AbstractEvolutionObject& object) override;
+	AbstractTile& getTile(int posX, int posY);
 	void startWatchMode();
 	void stopWatchMode();
 };

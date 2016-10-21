@@ -17,8 +17,8 @@ namespace LightBulb
 	protected:
 		NeuralNetworkRepository* neuralNetworkRepository;
 	public:
-		SimulatorFactory(NeuralNetworkRepository* neuralNetworkRepository_);
-		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const override;
+		SimulatorFactory(NeuralNetworkRepository& neuralNetworkRepository_);
+		AbstractSubApp* createSupApp(AbstractMainApp& mainApp, AbstractWindow* parent = nullptr) const override;
 		std::string getLabel() const override;
 	};
 }

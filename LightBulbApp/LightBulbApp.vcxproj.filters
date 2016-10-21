@@ -171,6 +171,9 @@
     <ClCompile Include="TrainingPlans\Preferences\ChoicePreference.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceElement.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -366,6 +369,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\ChoicePreferenceIO.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceElement.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

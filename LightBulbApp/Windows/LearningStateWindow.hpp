@@ -41,9 +41,9 @@ namespace LightBulb
 		void dataSetsListRightClick(wxDataViewEvent& event);
 		void dataSetsPopUpMenuSelected(wxCommandEvent& event);
 		void refreshComparisonDatasetChoices();
-		LearningStateController* getController();
+		LearningStateController& getController();
 	public:
-		LearningStateWindow(LearningStateController* controller_, AbstractWindow* parent = nullptr);
+		LearningStateWindow(LearningStateController& controller_, AbstractWindow* parent = nullptr);
 		void refreshTrainingPlans();
 	};
 }

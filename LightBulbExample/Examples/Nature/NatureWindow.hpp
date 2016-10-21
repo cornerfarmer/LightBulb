@@ -16,13 +16,13 @@ class NatureWindow : public LightBulb::AbstractSubAppWindow
 private:
 	wxPanel* panel;
 	wxToolBar* toolbar;
-	NatureController* getController();
+	NatureController& getController();
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	NatureWindow(NatureController* controller_, LightBulb::AbstractWindow* parent = nullptr);
-	void paintEvent(wxPaintEvent & evt);
-	void resize(wxSizeEvent & evt);
+	NatureWindow(NatureController& controller_, LightBulb::AbstractWindow* parent = nullptr);
+	void paintEvent(wxPaintEvent& evt);
+	void resize(wxSizeEvent& evt);
 	void paintNow();
 	void refreshField(wxThreadEvent& evt);
 	void toolBarClicked(wxCommandEvent& evt);

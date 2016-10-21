@@ -24,12 +24,12 @@ namespace LightBulb
 	protected:
 		std::unique_ptr<AbstractReinforcementWorld> world;
 		virtual AbstractReinforcementWorld* createWorld() = 0;
-		void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions* options) const;
+		void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions& options) const;
 	public:
 		AbstractReinforcementTrainingPlan();
 		void initializeStart() override;
-		AbstractReinforcementWorld* getWorld();
-		void setWorld(AbstractReinforcementWorld* network_);
+		AbstractReinforcementWorld& getWorld();
+		void setWorld(AbstractReinforcementWorld& network_);
 	};
 }
 

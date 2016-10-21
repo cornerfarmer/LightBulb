@@ -23,7 +23,7 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	Position(FunctionSimulator* functionSimulator_);
+	Position(FunctionSimulator& functionSimulator_);
 	Position() = default;
 	~Position();
 	std::vector<float> getPosition();

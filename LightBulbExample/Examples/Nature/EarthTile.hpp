@@ -21,6 +21,6 @@ public:
 	float tryToEat() override;
 	bool isWalkable() override;
 	double getViewValue() override;
-	const wxBrush* getColor() override;
+	const wxBrush& getColor() override;
 };
 #endif

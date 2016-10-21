@@ -29,14 +29,14 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository, AbstractWindow* parent = nullptr);
-		void trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository);
-		const std::vector<std::unique_ptr<AbstractTrainingPlan>>* getTrainingPlans() const;
-		EvolutionAnalyzerWindow* getWindow();
+		EvolutionAnalyzerController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository, AbstractWindow* parent = nullptr);
+		void trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository);
+		const std::vector<std::unique_ptr<AbstractTrainingPlan>>& getTrainingPlans() const;
+		EvolutionAnalyzerWindow& getWindow();
 		static std::string getLabel();
 		void selectTrainingPlan(int trainingPlanIndex);
-		void evolutionStepCompleted(EvolutionLearningRule* evolutionLearningRule);
-		const std::vector<std::pair<EvolutionSource, double>>* getCurrentState() const;
+		void evolutionStepCompleted(EvolutionLearningRule& evolutionLearningRule);
+		const std::vector<std::pair<EvolutionSource, double>>& getCurrentState() const;
 	};
 }
 

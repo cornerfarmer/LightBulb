@@ -17,8 +17,8 @@ namespace LightBulb
 	protected:
 		TrainingPlanRepository* trainingPlanRepository;
 	public:
-		LoggerFactory(TrainingPlanRepository* trainingPlanRepository_);
-		AbstractSubApp* createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const override;
+		LoggerFactory(TrainingPlanRepository& trainingPlanRepository_);
+		AbstractSubApp* createSupApp(AbstractMainApp& mainApp, AbstractWindow* parent = nullptr) const override;
 		std::string getLabel() const override;
 	};
 }

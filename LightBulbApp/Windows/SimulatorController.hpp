@@ -26,10 +26,10 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		SimulatorController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent = nullptr);
-		SimulatorWindow* getWindow();
-		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks();
-		void neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository);
+		SimulatorController(AbstractMainApp& mainApp, NeuralNetworkRepository& neuralNetworkRepository_, AbstractWindow* parent = nullptr);
+		SimulatorWindow& getWindow();
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& getNeuralNetworks();
+		void neuralNetworksChanged(NeuralNetworkRepository& neuralNetworkRepository);
 		std::vector<double> calculate(int neuralNetworkIndex, const std::vector<double>& input);
 		static std::string getLabel();
 	};

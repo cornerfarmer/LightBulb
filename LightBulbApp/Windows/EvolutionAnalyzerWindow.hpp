@@ -25,12 +25,12 @@ namespace LightBulb
 	{
 	private:
 		wxChoice* trainingPlansChoice;
-		EvolutionAnalyzerController* getController();
+		EvolutionAnalyzerController& getController();
 		wxDataViewListCtrl* highscoreList;
 		void refresh(wxThreadEvent& event);
 		std::string getEvolutionSourceAsString(EvolutionSource source);
 	public:
-		EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent = nullptr);
+		EvolutionAnalyzerWindow(EvolutionAnalyzerController& controller_, AbstractWindow* parent = nullptr);
 		void trainingPlanChanged(wxCommandEvent& event);
 		void refreshTrainingPlans();
 	};

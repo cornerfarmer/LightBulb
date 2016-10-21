@@ -47,13 +47,13 @@ namespace LightBulb
 		 * \brief Returns all neural network.
 		 * \return A vector of all neural networks.
 		 */
-		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* getNeuralNetworks() const;
+		const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& getNeuralNetworks() const;
 		/**
 		 * \brief Returns the index of a given neural network.
 		 * \param network The neural network.
 		 * \return The index of the neural network in the network storage vector.
 		 */
-		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const;
+		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork& network) const;
 		/**
 		 * \brief Adds a new neural network to the storage.
 		 * \param neuralNetwork The new neural network.
