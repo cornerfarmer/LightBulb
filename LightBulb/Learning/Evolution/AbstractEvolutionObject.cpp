@@ -19,7 +19,7 @@ namespace LightBulb
 
 	void AbstractEvolutionObject::copyPropertiesFrom(AbstractEvolutionObject* notUsedObject)
 	{
-		getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*notUsedObject->getNeuralNetwork()->getNetworkTopology());
+		getNeuralNetwork()->getNetworkTopology().copyWeightsFrom(notUsedObject->getNeuralNetwork()->getNetworkTopology());
 		setMutationStrength(notUsedObject->getMutationStrength());
 	}
 
@@ -45,14 +45,14 @@ namespace LightBulb
 
 	void AbstractEvolutionObject::removeNeuron(int layerIndex, int neuronIndex)
 	{
-		getNeuralNetwork()->getNetworkTopology()->removeNeuron(layerIndex, neuronIndex);
-		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount());
+		getNeuralNetwork()->getNetworkTopology().removeNeuron(layerIndex, neuronIndex);
+		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology().getEdgeCount());
 	}
 
 	void AbstractEvolutionObject::addNeuron(int layerIndex)
 	{
-		getNeuralNetwork()->getNetworkTopology()->addNeuron(layerIndex);
-		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology()->getEdgeCount(), 0.2);
+		getNeuralNetwork()->getNetworkTopology().addNeuron(layerIndex);
+		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology().getEdgeCount(), 0.2);
 	}
 
 	void AbstractEvolutionObject::resizeMutationStrength(int newSize)

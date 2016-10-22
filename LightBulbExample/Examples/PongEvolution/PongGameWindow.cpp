@@ -17,7 +17,7 @@ enum
 	TOOLBAR_START_WATCHMODE,
 };
 
-PongGameWindow::PongGameWindow(PongGameController* controller_, AbstractWindow* parent)
+PongGameWindow::PongGameWindow(PongGameController& controller_, AbstractWindow& parent)
 	:AbstractSubAppWindow(controller_, PongGameWindow::getLabel(), parent)
 {
 	panel = nullptr;
@@ -35,7 +35,7 @@ PongGameWindow::PongGameWindow(PongGameController* controller_, AbstractWindow* 
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	panel = new wxPanel(this);
-	panel->SetMinSize(wxSize(getController()->getProperties()->width + getController()->getProperties()->paddleWidth * 2, getController()->getProperties()->height));
+	panel->SetMinSize(wxSize(getController().getProperties().width + getController().getProperties().paddleWidth * 2, getController().getProperties().height));
 	
 	sizer->Add(panel, 1, wxEXPAND);
 	SetSizerAndFit(sizer);
@@ -71,7 +71,7 @@ void PongGameWindow::toolBarClicked(wxCommandEvent& evt)
 	if (evt.GetId() == TOOLBAR_STOP_WATCHMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_STOP_WATCHMODE, false);
-		getController()->stopWatchMode();
+		getController().stopWatchMode();
 		toolbar->EnableTool(TOOLBAR_START_WATCHMODE, true);
 
 		paintNow();
@@ -79,7 +79,7 @@ void PongGameWindow::toolBarClicked(wxCommandEvent& evt)
 	else if (evt.GetId() == TOOLBAR_START_WATCHMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_START_WATCHMODE, false);
-		getController()->startWatchMode();
+		getController().startWatchMode();
 		toolbar->EnableTool(TOOLBAR_STOP_WATCHMODE, true);
 		wxThreadEvent tEvt;
 		refreshField(tEvt);
@@ -96,14 +96,14 @@ void PongGameWindow::render(wxDC& dc)
 	dc.Clear();
 
 	int width, height;
-	PongGameProperties* properties = getController()->getProperties(); 
-	PongGameState* state = getController()->getState();
+	PongGameProperties& properties = getController().getProperties(); 
+	PongGameState& state = getController().getState();
 	panel->GetClientSize(&width, &height);
 
-	dc.DrawRectangle(0, state->paddle2Pos, properties->paddleWidth, properties->paddleHeight);
-	dc.DrawRectangle(properties->width + properties->paddleWidth, state->paddle1Pos, properties->paddleWidth, properties->paddleHeight);
+	dc.DrawRectangle(0, state.paddle2Pos, properties.paddleWidth, properties.paddleHeight);
+	dc.DrawRectangle(properties.width + properties.paddleWidth, state.paddle1Pos, properties.paddleWidth, properties.paddleHeight);
 
-	dc.DrawCircle(state->ballPosX + properties->paddleWidth + properties->ballRad / 2, state->ballPosY + properties->ballRad / 2, properties->ballRad / 2);
+	dc.DrawCircle(state.ballPosX + properties.paddleWidth + properties.ballRad / 2, state.ballPosY + properties.ballRad / 2, properties.ballRad / 2);
 }
 
 std::string PongGameWindow::getLabel()
@@ -111,7 +111,7 @@ std::string PongGameWindow::getLabel()
 	return "PongGame";
 }
 
-PongGameController* PongGameWindow::getController()
+PongGameController& PongGameWindow::getController()
 {
-	return static_cast<PongGameController*>(controller);
+	return static_cast<PongGameController&>(*controller);
 }

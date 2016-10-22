@@ -45,9 +45,9 @@ namespace LightBulb
 		// Returns a list of all current evolution objects ordered by their score
 		virtual Highscore* getHighscoreList();
 		// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)
-		virtual double getScore(AbstractEvolutionObject* object) = 0;
+		virtual double getScore(AbstractEvolutionObject& object) = 0;
 		//
-		virtual double getRealScore(AbstractEvolutionObject* object) { return getScore(object); }
+		virtual double getRealScore(AbstractEvolutionObject* object) { return getScore(*object); }
 		virtual void initializeForLearning() {}
 
 		virtual void releaseAllObjects() = 0;
@@ -56,7 +56,7 @@ namespace LightBulb
 
 		virtual std::vector<std::string> getDataSetLabels();
 
-		void setLearningState(LearningState* learningState_);
+		void setLearningState(LearningState& learningState_);
 
 		virtual int getPopulationSize() = 0;
 

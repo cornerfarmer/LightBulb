@@ -17,7 +17,7 @@ enum
 	TOOLBAR_START_WATCHMODE,
 };
 
-NatureWindow::NatureWindow(NatureController* controller_, AbstractWindow* parent)
+NatureWindow::NatureWindow(NatureController& controller_, AbstractWindow& parent)
 	:AbstractSubAppWindow(controller_, NatureWindow::getLabel(), parent)
 {
 	panel = nullptr;
@@ -71,7 +71,7 @@ void NatureWindow::toolBarClicked(wxCommandEvent& evt)
 	if (evt.GetId() == TOOLBAR_STOP_WATCHMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_STOP_WATCHMODE, false);
-		getController()->stopWatchMode();
+		getController().stopWatchMode();
 		toolbar->EnableTool(TOOLBAR_START_WATCHMODE, true);
 
 		paintNow();
@@ -79,7 +79,7 @@ void NatureWindow::toolBarClicked(wxCommandEvent& evt)
 	else if (evt.GetId() == TOOLBAR_START_WATCHMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_START_WATCHMODE, false);
-		getController()->startWatchMode();
+		getController().startWatchMode();
 		toolbar->EnableTool(TOOLBAR_STOP_WATCHMODE, true);
 		wxThreadEvent tEvt;
 		refreshField(tEvt);
@@ -97,27 +97,27 @@ void NatureWindow::render(wxDC& dc)
 	dc.SetPen(*wxTRANSPARENT_PEN);
 
 	int width, height;
-	auto tiles = getController()->getTiles(); 
-	if (tiles->size() > 0 && tiles->front().size() > 0)
+	auto tiles = getController().getTiles(); 
+	if (tiles.size() > 0 && tiles.front().size() > 0)
 	{
 		panel->GetClientSize(&width, &height);
-		int tileWidth = width / tiles->size();
-		int tileHeight = height / tiles->front().size();
+		int tileWidth = width / tiles.size();
+		int tileHeight = height / tiles.front().size();
 		int tileSize = std::min(tileWidth, tileHeight);
 
-		for (int x = 0; x < tiles->size(); x++)
+		for (int x = 0; x < tiles.size(); x++)
 		{
-			for (int y = 0; y < tiles->at(x).size(); y++)
+			for (int y = 0; y < tiles.at(x).size(); y++)
 			{
-				if (tiles->at(x)[y]) {
-					dc.SetBrush(*tiles->at(x)[y]);
+				if (tiles.at(x)[y]) {
+					dc.SetBrush(*tiles.at(x)[y]);
 					dc.DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize);
 				}
 			}
 		}
 	}
 
-	getController()->renderingFinished();
+	getController().renderingFinished();
 }
 
 std::string NatureWindow::getLabel()
@@ -125,7 +125,7 @@ std::string NatureWindow::getLabel()
 	return "PongGame";
 }
 
-NatureController* NatureWindow::getController()
+NatureController& NatureWindow::getController()
 {
-	return static_cast<NatureController*>(controller);
+	return static_cast<NatureController&>(*controller);
 }

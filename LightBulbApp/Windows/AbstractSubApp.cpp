@@ -4,14 +4,14 @@
 
 namespace LightBulb
 {
-	AbstractSubApp::AbstractSubApp(AbstractMainApp* mainApp_)
+	AbstractSubApp::AbstractSubApp(AbstractMainApp& mainApp_)
 	{
-		mainApp = mainApp_;
+		mainApp = &mainApp_;
 	}
 
 	void AbstractSubApp::close()
 	{
 		prepareClose();
-		mainApp->removeSubApp(this);
+		mainApp->removeSubApp(*this);
 	}
 }

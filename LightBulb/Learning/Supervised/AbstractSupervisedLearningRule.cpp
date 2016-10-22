@@ -27,20 +27,20 @@ namespace LightBulb
 	void AbstractSupervisedLearningRule::validateOptions()
 	{
 		// Check if all given options are correct
-		if (getOptions()->maxTotalErrorValue <= getOptions()->totalErrorGoal)
+		if (getOptions().maxTotalErrorValue <= getOptions().totalErrorGoal)
 			throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
 	}
 
-	const AbstractSupervisedLearningRuleOptions* AbstractSupervisedLearningRule::getOptions() const
+	const AbstractSupervisedLearningRuleOptions& AbstractSupervisedLearningRule::getOptions() const
 	{
-		return static_cast<AbstractSupervisedLearningRuleOptions*>(options.get());
+		return static_cast<AbstractSupervisedLearningRuleOptions&>(*options.get());
 	}
 
 	void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 	{
 		// TODO: Refactor?
-		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->teacher = initializeTeacher(*getOptions()->teacher);
-		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->neuralNetwork = initializeNeuralNetwork(*getOptions()->neuralNetwork);
+		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->teacher = initializeTeacher(*getOptions().teacher);
+		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->neuralNetwork = initializeNeuralNetwork(*getOptions().neuralNetwork);
 
 		currentActivationOrder.reset(new TopologicalOrder());
 
@@ -61,10 +61,10 @@ namespace LightBulb
 		}
 
 		// If we had more iterations than minIterationsPerTry and the totalError is still greater than the maxTotalErrorValue, skip that try
-		if (learningState->iterations > getOptions()->minIterationsPerTry && totalError > getOptions()->maxTotalErrorValue)
+		if (learningState->iterations > getOptions().minIterationsPerTry && totalError > getOptions().maxTotalErrorValue)
 		{
 			// If debug is enabled, print a short debug info
-			log("Skip that try (totalError: " + std::to_string(totalError) + " > " + std::to_string(getOptions()->maxTotalErrorValue) + ")", LL_MEDIUM);
+			log("Skip that try (totalError: " + std::to_string(totalError) + " > " + std::to_string(getOptions().maxTotalErrorValue) + ")", LL_MEDIUM);
 			return false;
 		}
 
@@ -74,7 +74,7 @@ namespace LightBulb
 			log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(learningState->iterations) + " " + printDebugOutput(), LL_LOW);
 		}
 
-		if (getOptions()->offlineLearning)
+		if (getOptions().offlineLearning)
 		{
 			clearGradient();
 		}
@@ -84,13 +84,13 @@ namespace LightBulb
 
 		// Go through every TeachingLesson
 		int lessonIndex = 0;
-		for (auto teachingLesson = getOptions()->teacher->getTeachingLessons()->begin(); teachingLesson != getOptions()->teacher->getTeachingLessons()->end(); teachingLesson++, lessonIndex++)
+		for (auto teachingLesson = getOptions().teacher->getTeachingLessons().begin(); teachingLesson != getOptions().teacher->getTeachingLessons().end(); teachingLesson++, lessonIndex++)
 		{
 			// Do some work before every teaching lesson
 			initializeTeachingLesson(**teachingLesson);
 
 			// Do some work before all weights will be adjusted
-			if (!getOptions()->offlineLearning)
+			if (!getOptions().offlineLearning)
 				initializeAllWeightAdjustments();
 
 			// Set start and time counter to default values
@@ -100,21 +100,21 @@ namespace LightBulb
 			// While the learning rule wants do some calculation with the current teaching lesson
 			while (configureNextErroMapCalculation(&nextStartTime, &nextTimeStepCount, **teachingLesson))
 			{
-				if (!getOptions()->offlineLearning)
+				if (!getOptions().offlineLearning)
 				{
 					clearGradient();
 				}
 
 				// Calculate the errormap and also fill - if needed - the output and netInput values map
-				std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions()->neuralNetwork, *currentActivationOrder, nullptr, nullptr, getOptions()->clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
+				std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions().neuralNetwork, *currentActivationOrder, nullptr, nullptr, getOptions().clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
 
-				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errormap.get());
+				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, *errormap.get());
 
 				// If offline learning is activated, adjust all weights
-				if (!getOptions()->offlineLearning)
+				if (!getOptions().offlineLearning)
 				{
 					// Adjust the every hidden/output layer
-					for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)
+					for (int l = getCurrentNetworkTopology().getLayerCount() - 1; l > 0; l--)
 					{
 						// Adjust the weight depending on the sum of all calculated gradients
 						adjustWeights(l);
@@ -123,18 +123,18 @@ namespace LightBulb
 			}
 
 			// Do some work after all weights were adjusted
-			if (!getOptions()->offlineLearning)
+			if (!getOptions().offlineLearning)
 				doCalculationAfterAllWeightAdjustments();
 		}
 
 		// If offline learning is activated, adjust all weights
-		if (getOptions()->offlineLearning)
+		if (getOptions().offlineLearning)
 		{
 			// Do some work before all weights will be adjusted
 			initializeAllWeightAdjustments();
 
 			// Adjust the every hidden/output layer
-			for (int l = getCurrentNetworkTopology()->getLayerCount() - 1; l > 0; l--)
+			for (int l = getCurrentNetworkTopology().getLayerCount() - 1; l > 0; l--)
 			{
 				// Adjust the weight depending on the sum of all calculated gradients
 				adjustWeights(l);
@@ -165,28 +165,28 @@ namespace LightBulb
 
 	bool AbstractSupervisedLearningRule::hasLearningSucceeded()
 	{
-		return (getOptions()->totalErrorGoal != -1 && totalError <= getOptions()->totalErrorGoal);
+		return (getOptions().totalErrorGoal != -1 && totalError <= getOptions().totalErrorGoal);
 	}
 
 	void AbstractSupervisedLearningRule::rateLearning()
 	{
-		if (getOptions()->totalErrorGoal != -1) {
-			totalError = getOptions()->teacher->getTotalError(*getOptions()->neuralNetwork, *currentActivationOrder);
+		if (getOptions().totalErrorGoal != -1) {
+			totalError = getOptions().teacher->getTotalError(*getOptions().neuralNetwork, *currentActivationOrder);
 		}
 	}
 
-	AbstractNetworkTopology* AbstractSupervisedLearningRule::getCurrentNetworkTopology()
+	AbstractNetworkTopology& AbstractSupervisedLearningRule::getCurrentNetworkTopology()
 	{
-		return getOptions()->neuralNetwork->getNetworkTopology();
+		return getOptions().neuralNetwork->getNetworkTopology();
 	}
 
 	AbstractLearningResult* AbstractSupervisedLearningRule::getLearningResult()
 	{
 		SupervisedLearningResult* learningResult = new SupervisedLearningResult();
-		fillDefaultResults(learningResult);
+		fillDefaultResults(*learningResult);
 		learningResult->quality = totalError;
 		learningResult->qualityLabel = "Total error";
-		learningResult->trainedNetwork = getOptions()->neuralNetwork;
+		learningResult->trainedNetwork = getOptions().neuralNetwork;
 
 		return learningResult;
 	}

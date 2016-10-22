@@ -47,7 +47,7 @@ namespace LightBulb
 		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 	public:
 		// Create a new evolution object with the given input and output NN size
-		AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world);
+		AbstractSimpleEvolutionObject(AbstractEvolutionWorld& world);
 		AbstractSimpleEvolutionObject() = default;
 		// Inherited:
 		void doNNCalculation() override;

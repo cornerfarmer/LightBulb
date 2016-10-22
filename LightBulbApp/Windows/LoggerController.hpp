@@ -32,14 +32,14 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		LoggerController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository, AbstractWindow* parent = nullptr);
+		LoggerController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository, AbstractWindow& parent);
 		void show();
 		void trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository);
 		const std::vector<std::unique_ptr<AbstractTrainingPlan>>& getTrainingPlans() const;
 		LoggerWindow& getWindow();
 		void setLogLevel(int level);
 		void logChanged(AbstractLogger& logger);
-		const std::vector<std::pair<LogLevel, std::string>>*& getMessages() const;
+		const std::vector<std::pair<LogLevel, std::string>>& getMessages() const;
 		const LogLevel& getLogLevel() const;
 		void setAutoScrolling(bool newAutoScrolling);
 		bool isAutoScrolling() const;

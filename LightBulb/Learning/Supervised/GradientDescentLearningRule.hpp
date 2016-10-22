@@ -85,7 +85,7 @@ namespace LightBulb
 		 * \param lessonIndex The current teaching lesson index.
 		 * \param errormap The errormap which represents how well the neural network has done on the current teaching lesson.
 		 */
-		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap) override;
+		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t& errormap) override;
 		void initializeTry() override;
 	public:
 		/**

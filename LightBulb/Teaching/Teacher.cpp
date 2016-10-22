@@ -25,14 +25,14 @@ namespace LightBulb
 		teachingLessons.push_back(std::unique_ptr<AbstractTeachingLesson>(newTeachingLesson));
 	}
 
-	const std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTeachingLessons() const
+	const std::vector<std::unique_ptr<AbstractTeachingLesson>>& Teacher::getTeachingLessons() const
 	{
-		return &teachingLessons;
+		return teachingLessons;
 	}
 
-	const std::vector<std::unique_ptr<AbstractTeachingLesson>>* Teacher::getTestingLessons() const
+	const std::vector<std::unique_ptr<AbstractTeachingLesson>>& Teacher::getTestingLessons() const
 	{
-		return &testingLessons;
+		return testingLessons;
 	}
 
 
@@ -66,8 +66,8 @@ namespace LightBulb
 		double weightDecayError = 0;
 		if (weightDecayFac > 0)
 		{
-			auto weights = neuralNetwork.getNetworkTopology()->getAllWeights();
-			for (auto weightsPerLayer = weights->begin(); weightsPerLayer != weights->end(); weightsPerLayer++)
+			std::vector<Eigen::MatrixXd>& weights = neuralNetwork.getNetworkTopology().getAllWeights();
+			for (auto weightsPerLayer = weights.begin(); weightsPerLayer != weights.end(); weightsPerLayer++)
 			{
 				weightDecayError += 0.5 * weightsPerLayer->squaredNorm();
 			}

@@ -16,23 +16,23 @@ namespace LightBulb
 	{
 	}
 
-	ResilientLearningRateOptions* ResilientLearningRate::getOptions()
+	ResilientLearningRateOptions& ResilientLearningRate::getOptions()
 	{
-		return static_cast<ResilientLearningRateOptions*>(options.get());
+		return static_cast<ResilientLearningRateOptions&>(*options.get());
 	}
 
-	void ResilientLearningRate::initializeAlgorithm(const AbstractNetworkTopology* networkTopology)
+	void ResilientLearningRate::initializeAlgorithm(const AbstractNetworkTopology& networkTopology)
 	{
 		// Make sure the previous learning rates map is empty
-		previousLearningRates = *networkTopology->getAllWeights();
+		previousLearningRates = networkTopology.getAllWeights();
 		for (int i = 0; i < previousLearningRates.size(); i++)
 		{
-			previousLearningRates[i].setConstant(getOptions()->learningRateStart);
+			previousLearningRates[i].setConstant(getOptions().learningRateStart);
 		}
 	}
 
 
-	Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
 		for (int i = 0; i < gradients.rows(); i++)
 		{
@@ -42,12 +42,12 @@ namespace LightBulb
 				{
 					// If the sign of the gradient equals the sign of the last learning rate
 					if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) < 0)
-						previousLearningRates[layerIndex - 1](i, j) *= getOptions()->learningRateGrowFac; // Increase the new learning rate
+						previousLearningRates[layerIndex - 1](i, j) *= getOptions().learningRateGrowFac; // Increase the new learning rate
 					else if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) > 0)
-						previousLearningRates[layerIndex - 1](i, j) *= getOptions()->learningRateShrinkFac;	 // Decrease the new learning rate
+						previousLearningRates[layerIndex - 1](i, j) *= getOptions().learningRateShrinkFac;	 // Decrease the new learning rate
 
 					// Make sure the new learningRate is between learningRateMin and learningRateMax
-					previousLearningRates[layerIndex - 1](i, j) = std::max(getOptions()->learningRateMin, std::min(getOptions()->learningRateMax, std::abs(previousLearningRates[layerIndex - 1](i, j))));
+					previousLearningRates[layerIndex - 1](i, j) = std::max(getOptions().learningRateMin, std::min(getOptions().learningRateMax, std::abs(previousLearningRates[layerIndex - 1](i, j))));
 
 					// Set the sign of the learningRate to the sign of the gradient
 					previousLearningRates[layerIndex - 1](i, j) *= (gradients(i, j) < 0 ? 1 : -1);
@@ -81,14 +81,14 @@ namespace LightBulb
 			for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 			{
 				// If the learning rate is in the allowed range, continue learning
-				if (abs(previousLearningRate->maxCoeff()) > getOptions()->learningRateMin && abs(previousLearningRate->minCoeff()) < getOptions()->learningRateMax)
+				if (abs(previousLearningRate->maxCoeff()) > getOptions().learningRateMin && abs(previousLearningRate->minCoeff()) < getOptions().learningRateMax)
 					learningHasStopped = false;
 
 				totalLearningRate += previousLearningRate->cwiseAbs().sum();
 			}
 
 			// If the totalLearningRate is below the minium stop the learning process
-			if (totalLearningRate < getOptions()->minLearningRate)
+			if (totalLearningRate < getOptions().minLearningRate)
 				learningHasStopped = true;
 
 			return learningHasStopped;

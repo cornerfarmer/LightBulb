@@ -32,7 +32,7 @@ namespace LightBulb
 
 		void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
 
-		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 

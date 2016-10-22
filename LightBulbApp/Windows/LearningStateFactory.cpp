@@ -4,15 +4,15 @@
 
 namespace LightBulb
 {
-	LearningStateFactory::LearningStateFactory(TrainingPlanRepository* trainingPlanRepository_)
+	LearningStateFactory::LearningStateFactory(TrainingPlanRepository& trainingPlanRepository_)
 	{
-		trainingPlanRepository = trainingPlanRepository_;
+		trainingPlanRepository = &trainingPlanRepository_;
 	}
 
-	AbstractSubApp* LearningStateFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
+	AbstractSubApp* LearningStateFactory::createSupApp(AbstractMainApp& mainApp, AbstractWindow& parent) const
 	{
-		LearningStateController* controller = new LearningStateController(mainApp, trainingPlanRepository, parent);
-		controller->getWindow()->Show();
+		LearningStateController* controller = new LearningStateController(mainApp, *trainingPlanRepository, parent);
+		controller->getWindow().Show();
 		return controller;
 	}
 

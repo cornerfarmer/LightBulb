@@ -9,12 +9,12 @@ namespace LightBulb
 	wxDEFINE_EVENT(LW_EVT_RELOAD_LOG, wxThreadEvent);
 
 
-	LoggerController* LoggerWindow::getController()
+	LoggerController& LoggerWindow::getController()
 	{
-		return static_cast<LoggerController*>(controller);
+		return static_cast<LoggerController&>(*controller);
 	}
 
-	LoggerWindow::LoggerWindow(LoggerController* controller_, AbstractWindow* parent)
+	LoggerWindow::LoggerWindow(LoggerController& controller_, AbstractWindow& parent)
 		:AbstractSubAppWindow(controller_, LoggerController::getLabel(), parent)
 	{
 		Bind(LW_EVT_ADD_NEW_MSG, wxThreadEventFunction(&LoggerWindow::addNewLogMessages), this);
@@ -53,17 +53,17 @@ namespace LightBulb
 
 	void LoggerWindow::trainingPlanChanged(wxCommandEvent& event)
 	{
-		getController()->selectTrainingPlan(event.GetSelection());
+		getController().selectTrainingPlan(event.GetSelection());
 	}
 
 	void LoggerWindow::logLevelChanged(wxCommandEvent& event)
 	{
-		getController()->setLogLevel(event.GetSelection());
+		getController().setLogLevel(event.GetSelection());
 	}
 
 	void LoggerWindow::autoScrollingChanged(wxCommandEvent& event)
 	{
-		getController()->setAutoScrolling(event.GetSelection());
+		getController().setAutoScrolling(event.GetSelection());
 	}
 
 	void LoggerWindow::addLogMessage(const std::string& msg)
@@ -81,41 +81,41 @@ namespace LightBulb
 	void LoggerWindow::refreshTrainingPlans()
 	{
 		trainingPlansChoice->Clear();
-		for (auto network = getController()->getTrainingPlans()->begin(); network != getController()->getTrainingPlans()->end(); network++)
+		for (auto network = getController().getTrainingPlans().begin(); network != getController().getTrainingPlans().end(); network++)
 		{
 			trainingPlansChoice->Append((*network)->getName());
 		}
-		refreshAfterChange(GetSizer());
+		refreshAfterChange(*GetSizer());
 	}
 
 	void LoggerWindow::addNewLogMessages(wxThreadEvent& event)
 	{
-		auto messages = getController()->getMessages();
-		for (int messageIndex = lastLogMessageIndex + 1; messageIndex < messages->size(); messageIndex++)
+		auto messages = getController().getMessages();
+		for (int messageIndex = lastLogMessageIndex + 1; messageIndex < messages.size(); messageIndex++)
 		{
-			if ((*messages)[messageIndex].first <= getController()->getLogLevel())
-				addLogMessage((*messages)[messageIndex].second);
+			if (messages[messageIndex].first <= getController().getLogLevel())
+				addLogMessage(messages[messageIndex].second);
 			lastLogMessageIndex++;
 		}
-		if (getController()->isAutoScrolling())
+		if (getController().isAutoScrolling())
 		{
 			textBox->ScrollIntoView(textBox->GetLastPosition(), WXK_END);
 		}
-		getController()->logMessagesAddingFinished();
+		getController().logMessagesAddingFinished();
 	}
 
 	void LoggerWindow::reloadLog(wxThreadEvent& event)
 	{
 		clearLog();
-		lastLogMessageIndex = std::max((int)(getController()->getMessages()->size() - 50), -1);
+		lastLogMessageIndex = std::max((int)(getController().getMessages().size() - 50), -1);
 		addNewLogMessages(event);
 	}
 
 	void LoggerWindow::scrollChanged(wxScrollWinEvent& event)
 	{
-		if (getController()->isAutoScrolling())
+		if (getController().isAutoScrolling())
 		{
-			getController()->setAutoScrolling(false);
+			getController().setAutoScrolling(false);
 			checkBox->SetValue(false);
 		}
 		event.Skip();

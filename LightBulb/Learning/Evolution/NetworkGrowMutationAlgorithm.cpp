@@ -13,8 +13,8 @@ namespace LightBulb
 
 	void NetworkGrowMutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	{
-		auto networkTopology = object1->getNeuralNetwork()->getNetworkTopology();
-		auto neuronCountsPerLayer = networkTopology->getNeuronCountsPerLayer();
+		AbstractNetworkTopology& networkTopology = object1->getNeuralNetwork()->getNetworkTopology();
+		const std::vector<unsigned>& neuronCountsPerLayer = networkTopology.getNeuronCountsPerLayer();
 
 		bool addingNeuronsPossible = false;
 		for (int l = 0; l < neuronCountsPerLayer.size(); l++)

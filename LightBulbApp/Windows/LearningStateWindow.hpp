@@ -43,7 +43,7 @@ namespace LightBulb
 		void refreshComparisonDatasetChoices();
 		LearningStateController& getController();
 	public:
-		LearningStateWindow(LearningStateController& controller_, AbstractWindow* parent = nullptr);
+		LearningStateWindow(LearningStateController& controller_, AbstractWindow& parent);
 		void refreshTrainingPlans();
 	};
 }

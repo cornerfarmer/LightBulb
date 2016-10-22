@@ -16,10 +16,10 @@ namespace LightBulb
 		teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
 	}
 
-	const NeuralNetworkIO<double>* TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction* activationFunction) const
+	const NeuralNetworkIO<double>& TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
 	{
 		// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
-		if (!activationFunction->hasAMaxAndMinimum())
+		if (!activationFunction.hasAMaxAndMinimum())
 			throw std::invalid_argument("The activationFunction of the outputNeurons is linear, but your teaching input is boolean.");
 
 
@@ -35,26 +35,26 @@ namespace LightBulb
 					{
 						// If the boolean value is true, set the maximum of the activationFunction, else the minimum
 						if (teachingInput->get(timestep, i))
-							teachingInputLinear->set(timestep, i, activationFunction->getMaximum());
+							teachingInputLinear->set(timestep, i, activationFunction.getMaximum());
 						else
-							teachingInputLinear->set(timestep, i, activationFunction->getMinimum());
+							teachingInputLinear->set(timestep, i, activationFunction.getMinimum());
 					}
 				}
 			}
 		}
 
 		// Return the vector with double values
-		return teachingInputLinear.get();
+		return *teachingInputLinear.get();
 	}
 
-	NeuralNetworkIO<bool>* TeachingLessonBooleanInput::getBooleanTeachingInput() const
+	NeuralNetworkIO<bool>& TeachingLessonBooleanInput::getBooleanTeachingInput() const
 	{
-		return teachingInput.get();
+		return *teachingInput.get();
 	}
 
-	const std::vector<std::vector<double>>* TeachingLessonBooleanInput::getTeachingPattern() const
+	const std::vector<std::vector<double>>& TeachingLessonBooleanInput::getTeachingPattern() const
 	{
-		return &teachingPattern;
+		return teachingPattern;
 	}
 	
 	AbstractTeachingLesson* TeachingLessonBooleanInput::unfold() const

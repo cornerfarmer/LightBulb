@@ -6,38 +6,38 @@
 
 namespace LightBulb
 {
-	EvolutionAnalyzerController::EvolutionAnalyzerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+	EvolutionAnalyzerController::EvolutionAnalyzerController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository_, AbstractWindow& parent)
 		:AbstractSubApp(mainApp)
 	{
 		selectedTrainingPlan = nullptr;
-		trainingPlanRepository = trainingPlanRepository_;
-		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &EvolutionAnalyzerController::trainingPlansChanged, this);
+		trainingPlanRepository = &trainingPlanRepository_;
+		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &EvolutionAnalyzerController::trainingPlansChanged, *this);
 
-		window.reset(new EvolutionAnalyzerWindow(this, parent));
+		window.reset(new EvolutionAnalyzerWindow(*this, parent));
 
-		trainingPlansChanged(trainingPlanRepository);
+		trainingPlansChanged(*trainingPlanRepository);
 	}
 
 	void EvolutionAnalyzerController::prepareClose()
 	{
-		trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &EvolutionAnalyzerController::trainingPlansChanged, this);
+		trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &EvolutionAnalyzerController::trainingPlansChanged, *this);
 		if (selectedTrainingPlan)
-			static_cast<EvolutionLearningRule*>(selectedTrainingPlan->getLearningRule())->removeObserver(EVT_EL_EVOLUTIONSTEP, &EvolutionAnalyzerController::evolutionStepCompleted, this);
+			static_cast<EvolutionLearningRule&>(selectedTrainingPlan->getLearningRule()).removeObserver(EVT_EL_EVOLUTIONSTEP, &EvolutionAnalyzerController::evolutionStepCompleted, *this);
 	}
 
-	void EvolutionAnalyzerController::trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository)
+	void EvolutionAnalyzerController::trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository)
 	{
 		window->refreshTrainingPlans();
 	}
 
-	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* EvolutionAnalyzerController::getTrainingPlans() const
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>& EvolutionAnalyzerController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
 
-	EvolutionAnalyzerWindow* EvolutionAnalyzerController::getWindow()
+	EvolutionAnalyzerWindow& EvolutionAnalyzerController::getWindow()
 	{
-		return window.get();
+		return *window.get();
 	}
 
 	std::string EvolutionAnalyzerController::getLabel()
@@ -48,15 +48,15 @@ namespace LightBulb
 	void EvolutionAnalyzerController::selectTrainingPlan(int trainingPlanIndex)
 	{
 		if (selectedTrainingPlan)
-			static_cast<EvolutionLearningRule*>(selectedTrainingPlan->getLearningRule())->removeObserver(EVT_EL_EVOLUTIONSTEP, &EvolutionAnalyzerController::evolutionStepCompleted, this);
-		selectedTrainingPlan = dynamic_cast<AbstractEvolutionTrainingPlan*>((*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get());
+			static_cast<EvolutionLearningRule&>(selectedTrainingPlan->getLearningRule()).removeObserver(EVT_EL_EVOLUTIONSTEP, &EvolutionAnalyzerController::evolutionStepCompleted, *this);
+		selectedTrainingPlan = dynamic_cast<AbstractEvolutionTrainingPlan*>(trainingPlanRepository->getTrainingPlans()[trainingPlanIndex].get());
 		if (selectedTrainingPlan)
-			static_cast<EvolutionLearningRule*>(selectedTrainingPlan->getLearningRule())->registerObserver(EVT_EL_EVOLUTIONSTEP, &EvolutionAnalyzerController::evolutionStepCompleted, this);
+			static_cast<EvolutionLearningRule&>(selectedTrainingPlan->getLearningRule()).registerObserver(EVT_EL_EVOLUTIONSTEP, &EvolutionAnalyzerController::evolutionStepCompleted, *this);
 	}
 
-	void EvolutionAnalyzerController::evolutionStepCompleted(EvolutionLearningRule* evolutionLearningRule)
+	void EvolutionAnalyzerController::evolutionStepCompleted(EvolutionLearningRule& evolutionLearningRule)
 	{
-		auto highscore = evolutionLearningRule->getWorld()->getHighscoreList();
+		auto highscore = evolutionLearningRule.getWorld()->getHighscoreList();
 		currentState.resize(highscore->size());
 
 		int i = 0;
@@ -70,8 +70,8 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
 
-	const std::vector<std::pair<EvolutionSource, double>>* EvolutionAnalyzerController::getCurrentState() const
+	const std::vector<std::pair<EvolutionSource, double>>& EvolutionAnalyzerController::getCurrentState() const
 	{
-		return &currentState;
+		return currentState;
 	}
 }

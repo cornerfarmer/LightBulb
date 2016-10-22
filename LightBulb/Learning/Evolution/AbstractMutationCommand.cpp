@@ -37,7 +37,7 @@ namespace LightBulb
 		}
 	}
 
-	void AbstractMutationCommand::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void AbstractMutationCommand::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		mutationAlgorithm->setRandomGenerator(randomGenerator_);

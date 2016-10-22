@@ -27,7 +27,7 @@ namespace LightBulb
 	public:
 		RandomSelector(AbstractRandomFunction* randomFunction_);
 
-		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 

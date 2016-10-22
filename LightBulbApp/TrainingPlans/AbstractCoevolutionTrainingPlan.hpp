@@ -33,7 +33,7 @@ namespace LightBulb
 	public:
 		void initializeStart() override;
 		AbstractEvolutionWorld& getParasiteWorld();
-		void setParasiteWorld(AbstractEvolutionWorld& world_);
+		void setParasiteWorld(AbstractEvolutionWorld* world_);
 	};
 }
 

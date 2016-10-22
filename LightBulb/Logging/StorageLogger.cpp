@@ -12,11 +12,11 @@ namespace LightBulb
 	{
 		messages.push_back(std::pair<LogLevel, std::string>(level, message));
 		if (level <= currentLogLevel)
-			throwEvent(EVT_LG_LOGADDED, this);
+			throwEvent(EVT_LG_LOGADDED, *this);
 	}
 
-	const std::vector<std::pair<LogLevel, std::string>>* StorageLogger::getMessages() const
+	const std::vector<std::pair<LogLevel, std::string>>& StorageLogger::getMessages() const
 	{
-		return &messages;
+		return messages;
 	}
 }

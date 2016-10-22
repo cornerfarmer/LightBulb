@@ -4,10 +4,10 @@
 
 using namespace LightBulb;
 
-AbstractCustomSubApp* NatureFactory::createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent) const
+AbstractCustomSubApp* NatureFactory::createCustomSupApp(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan, AbstractWindow& parent) const
 {
 	NatureController* controller = new NatureController(mainApp, trainingPlan, parent);
-	controller->getWindow()->Show();
+	controller->getWindow().Show();
 	return controller;
 }
 

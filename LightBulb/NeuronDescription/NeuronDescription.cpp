@@ -14,13 +14,13 @@ namespace LightBulb
 		return new NeuronDescription(inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy());
 	}
 
-	const AbstractInputFunction* NeuronDescription::getInputFunction() const
+	const AbstractInputFunction& NeuronDescription::getInputFunction() const
 	{
-		return inputFunction.get();
+		return *inputFunction.get();
 	}
 
-	const AbstractActivationFunction* NeuronDescription::getActivationFunction() const
+	const AbstractActivationFunction& NeuronDescription::getActivationFunction() const
 	{
-		return activationFunction.get();
+		return *activationFunction.get();
 	}
 }

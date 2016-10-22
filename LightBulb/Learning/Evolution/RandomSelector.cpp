@@ -25,7 +25,7 @@ namespace LightBulb
 		randomFunction.reset(randomFunction_);
 	}
 
-	void RandomSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void RandomSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		randomFunction->setRandomGenerator(randomGenerator_);

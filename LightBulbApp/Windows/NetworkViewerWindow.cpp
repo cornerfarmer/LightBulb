@@ -20,7 +20,7 @@ namespace LightBulb
 #define LAYER_SPACE 120
 #define WEIGHT_SPACE 40
 
-		NetworkViewerWindow::NetworkViewerWindow(NetworkViewerController* controller_, AbstractWindow* parent)
+		NetworkViewerWindow::NetworkViewerWindow(NetworkViewerController& controller_, AbstractWindow& parent)
 		:AbstractSubAppWindow(controller_, NetworkViewerController::getLabel(), parent)
 	{
 		selectedNeuronIndex = -1;
@@ -92,10 +92,10 @@ namespace LightBulb
 	{
 		if (selectedNetwork)
 		{
-			layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
+			layerCount = selectedNetwork->getNetworkTopology().getLayerCount();
 			for (int l = 0; l < layerCount; l++)
 			{
-				int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l];
+				int neuronCount = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer()[l];
 				for (int n = 0; n < neuronCount; n++)
 				{
 					if (std::sqrt(std::pow(event.GetX() - getXPos(l), 2) + std::pow(event.GetY() - getYPos(n, neuronCount), 2)) < NEURON_RAD)
@@ -116,31 +116,31 @@ namespace LightBulb
 	{
 		if (selectedNeuronIndex != -1)
 		{
-			auto weights = selectedNetwork->getNetworkTopology()->getAllWeights();
-			bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
+			auto& weights = selectedNetwork->getNetworkTopology().getAllWeights();
+			bool usesBiasNeuron = selectedNetwork->getNetworkTopology().usesBiasNeuron();
 
 			afferentEdgesList->DeleteAllItems();
 			if (selectedLayerIndex > 0)
 			{
-				for (int n = usesBiasNeuron; n < (*weights)[selectedLayerIndex - 1].cols(); n++)
+				for (int n = usesBiasNeuron; n < weights[selectedLayerIndex - 1].cols(); n++)
 				{
 					wxVector<wxVariant> data;
 					data.push_back(wxVariant(std::to_string(selectedLayerIndex - 1)));
 					data.push_back(wxVariant(std::to_string(n - usesBiasNeuron)));
-					data.push_back(wxVariant(std::to_string((*weights)[selectedLayerIndex - 1](selectedNeuronIndex, n))));
+					data.push_back(wxVariant(std::to_string(weights[selectedLayerIndex - 1](selectedNeuronIndex, n))));
 					afferentEdgesList->AppendItem(data);
 				}
 			}
 
 			efferentEdgesList->DeleteAllItems();
-			if (selectedLayerIndex < weights->size())
+			if (selectedLayerIndex < weights.size())
 			{
-				for (int n = 0; n < (*weights)[selectedLayerIndex].rows(); n++)
+				for (int n = 0; n < weights[selectedLayerIndex].rows(); n++)
 				{
 					wxVector<wxVariant> data;
 					data.push_back(wxVariant(std::to_string(selectedLayerIndex + 1)));
 					data.push_back(wxVariant(std::to_string(n)));
-					data.push_back(wxVariant(std::to_string((*weights)[selectedLayerIndex](n, selectedNeuronIndex + usesBiasNeuron))));
+					data.push_back(wxVariant(std::to_string(weights[selectedLayerIndex](n, selectedNeuronIndex + usesBiasNeuron))));
 					efferentEdgesList->AppendItem(data);
 				}
 			}
@@ -154,9 +154,9 @@ namespace LightBulb
 
 	void NetworkViewerWindow::networkChanged(wxCommandEvent& event)
 	{
-		selectedNetwork = (*getController()->getNeuralNetworks())[event.GetSelection()].get();
+		selectedNetwork = getController().getNeuralNetworks()[event.GetSelection()].get();
 
-		auto neuronCountsPerLayer = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer();
+		auto neuronCountsPerLayer = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer();
 
 		int layerCount = neuronCountsPerLayer.size();
 		unsigned int maxNeuronCount = 0;
@@ -169,9 +169,9 @@ namespace LightBulb
 	}
 
 
-	NetworkViewerController* NetworkViewerWindow::getController()
+	NetworkViewerController& NetworkViewerWindow::getController()
 	{
-		return static_cast<NetworkViewerController*>(controller);
+		return static_cast<NetworkViewerController&>(*controller);
 	}
 
 
@@ -209,13 +209,13 @@ namespace LightBulb
 			panel->GetVirtualSize(&width, &height);
 			panel->GetScrollPos(0);
 
-			auto weights = selectedNetwork->getNetworkTopology()->getAllWeights();
-			bool usesBiasNeuron = selectedNetwork->getNetworkTopology()->usesBiasNeuron();
+			auto weights = selectedNetwork->getNetworkTopology().getAllWeights();
+			bool usesBiasNeuron = selectedNetwork->getNetworkTopology().usesBiasNeuron();
 
-			layerCount = selectedNetwork->getNetworkTopology()->getLayerCount();
+			layerCount = selectedNetwork->getNetworkTopology().getLayerCount();
 			for (int l = 0; l < layerCount; l++)
 			{
-				int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l];
+				int neuronCount = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer()[l];
 				for (int n = 0; n < neuronCount; n++)
 				{
 					if (selectedLayerIndex == l && selectedNeuronIndex == n)
@@ -226,7 +226,7 @@ namespace LightBulb
 
 					if (usesBiasNeuron && l > 0)
 					{
-						double bias = (*weights)[l - 1](n, 0);
+						double bias = weights[l - 1](n, 0);
 						wxCoord textWidth, textHeight;
 						dc.GetTextExtent(std::to_string(bias), &textWidth, &textHeight);
 
@@ -235,13 +235,13 @@ namespace LightBulb
 				}
 			}
 
-			for (int l = 0; l < weights->size(); l++)
+			for (int l = 0; l < weights.size(); l++)
 			{
-				int neuronCount = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l];
-				int neuronCountNextLayer = selectedNetwork->getNetworkTopology()->getNeuronCountsPerLayer()[l + 1];
-				for (int tn = 0; tn < (*weights)[l].rows(); tn++)
+				int neuronCount = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer()[l];
+				int neuronCountNextLayer = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer()[l + 1];
+				for (int tn = 0; tn < weights[l].rows(); tn++)
 				{
-					for (int fn = usesBiasNeuron; fn < (*weights)[l].cols(); fn++)
+					for (int fn = usesBiasNeuron; fn < weights[l].cols(); fn++)
 					{
 						int x1 = getXPos(l);
 						int y1 = getYPos(fn - usesBiasNeuron, neuronCount);
@@ -255,7 +255,7 @@ namespace LightBulb
 						if ((selectedLayerIndex == l && selectedNeuronIndex == fn - usesBiasNeuron) || (selectedLayerIndex == l + 1 && selectedNeuronIndex == tn))
 							dc.SetPen(*wxBLACK_PEN);
 
-						dc.DrawRotatedText(std::to_string((*weights)[l](tn, fn)), x1 + WEIGHT_SPACE * std::cos(angle), y1 + WEIGHT_SPACE * std::sin(angle), -1 * angle / M_PI * 180);
+						dc.DrawRotatedText(std::to_string(weights[l](tn, fn)), x1 + WEIGHT_SPACE * std::cos(angle), y1 + WEIGHT_SPACE * std::sin(angle), -1 * angle / M_PI * 180);
 					}
 				}
 			}
@@ -279,7 +279,7 @@ namespace LightBulb
 	void NetworkViewerWindow::refreshNeuralNetworks()
 	{
 		neuralNetworksChoice->Clear();
-		for (auto network = getController()->getNeuralNetworks()->begin(); network != getController()->getNeuralNetworks()->end(); network++)
+		for (auto network = getController().getNeuralNetworks().begin(); network != getController().getNeuralNetworks().end(); network++)
 		{
 			neuralNetworksChoice->Append((*network)->getName());
 		}

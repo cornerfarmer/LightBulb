@@ -4,15 +4,15 @@
 
 namespace LightBulb
 {
-	SimulatorFactory::SimulatorFactory(NeuralNetworkRepository* neuralNetworkRepository_)
+	SimulatorFactory::SimulatorFactory(NeuralNetworkRepository& neuralNetworkRepository_)
 	{
-		neuralNetworkRepository = neuralNetworkRepository_;
+		neuralNetworkRepository = &neuralNetworkRepository_;
 	}
 
-	AbstractSubApp* SimulatorFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
+	AbstractSubApp* SimulatorFactory::createSupApp(AbstractMainApp& mainApp, AbstractWindow& parent) const
 	{
-		SimulatorController* controller = new SimulatorController(mainApp, neuralNetworkRepository, parent);
-		controller->getWindow()->Show();
+		SimulatorController* controller = new SimulatorController(mainApp, *neuralNetworkRepository, parent);
+		controller->getWindow().Show();
 		return controller;
 	}
 

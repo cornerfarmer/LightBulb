@@ -47,7 +47,7 @@ namespace LightBulb
 	protected:
 		void prepareClose() override;
 	public:
-		LearningStateController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository_, AbstractWindow* parent = nullptr);
+		LearningStateController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository_, AbstractWindow& parent);
 		LearningStateWindow& getWindow();
 		const std::vector<std::unique_ptr<AbstractTrainingPlan>>& getTrainingPlans() const;
 		void trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository);

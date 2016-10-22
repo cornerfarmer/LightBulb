@@ -35,7 +35,7 @@ AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
 	options.seed = 12345;
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 	options.valueFunctionAsBase = getBooleanPreference(PREFERENCE_VALUE_FUNCTION);
 	options.rmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	options.valueRmsPropLearningRateOptions.learningRate = getDoublePreference(PREFERENCE_VALUE_LEARNING_RATE);
@@ -98,7 +98,7 @@ std::string PongPolicyGradientExample::getLearningRuleName() const
 }
 
 
-PongReinforcementWorld* PongPolicyGradientExample::getWorld()
+PongReinforcementWorld& PongPolicyGradientExample::getWorld()
 {
-	return world;
+	return *world;
 }

@@ -23,7 +23,7 @@ double EarthTile::getViewValue()
 	return food > 0 ? 10 : 5;
 }
 
-const wxBrush* EarthTile::getColor()
+const wxBrush& EarthTile::getColor()
 {
-	return food > 0 ? wxGREEN_BRUSH : wxBLACK_BRUSH;
+	return food > 0 ? *wxGREEN_BRUSH : *wxBLACK_BRUSH;
 }

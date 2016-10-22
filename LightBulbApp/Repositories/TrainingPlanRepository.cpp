@@ -8,11 +8,11 @@
 
 namespace LightBulb
 {
-	int TrainingPlanRepository::getIndexOfTrainingPlan(const AbstractTrainingPlan* trainingPlan) const
+	int TrainingPlanRepository::getIndexOfTrainingPlan(const AbstractTrainingPlan& trainingPlan) const
 	{
 		for (int i = 0; i < trainingPlans.size(); i++)
 		{
-			if (trainingPlans[i].get() == trainingPlan)
+			if (trainingPlans[i].get() == &trainingPlan)
 				return i;
 		}
 		return -1;
@@ -21,7 +21,7 @@ namespace LightBulb
 	void TrainingPlanRepository::Add(AbstractTrainingPlan* trainingPlan)
 	{
 		trainingPlans.push_back(std::unique_ptr<AbstractTrainingPlan>(trainingPlan));
-		throwEvent(EVT_TP_CHANGED, this);
+		throwEvent(EVT_TP_CHANGED, *this);
 	}
 
 	void TrainingPlanRepository::save(const std::string& path, int trainingPlanIndex) const
@@ -33,7 +33,7 @@ namespace LightBulb
 		archive(trainingPlans[trainingPlanIndex]);
 	}
 
-	AbstractTrainingPlan* TrainingPlanRepository::load(const std::string& path)
+	AbstractTrainingPlan& TrainingPlanRepository::load(const std::string& path)
 	{
 		std::ifstream is(path, std::ios::binary);
 		cereal::BinaryInputArchive archive(is);
@@ -41,29 +41,39 @@ namespace LightBulb
 		trainingPlans.push_back(std::unique_ptr<AbstractTrainingPlan>());
 		archive(trainingPlans.back());
 
-		throwEvent(EVT_TP_CHANGED, this);
+		throwEvent(EVT_TP_CHANGED, *this);
 
-		return trainingPlans.back().get();
+		return *trainingPlans.back().get();
 	}
 
-	AbstractTrainingPlan* TrainingPlanRepository::getByName(const std::string& name) const
+	AbstractTrainingPlan& TrainingPlanRepository::getByName(const std::string& name) const
 	{
 		for (int i = 0; i < trainingPlans.size(); i++)
 		{
 			if (trainingPlans[i]->getName() == name)
-				return trainingPlans[i].get();
+				return *trainingPlans[i].get();
 		}
-		return nullptr;
+		throw std::invalid_argument("No training plan with name \"" + name + "\" could be found.");
 	}
 
 	void TrainingPlanRepository::setTrainingPlanName(int trainingPlanIndex, const std::string& newName)
 	{
 		trainingPlans[trainingPlanIndex]->setName(newName);
-		throwEvent(EVT_TP_CHANGED, this);
+		throwEvent(EVT_TP_CHANGED, *this);
 	}
 
-	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* TrainingPlanRepository::getTrainingPlans() const
+	bool TrainingPlanRepository::exists(const std::string& name) const
 	{
-		return &trainingPlans;
+		for (int i = 0; i < trainingPlans.size(); i++)
+		{
+			if (trainingPlans[i]->getName() == name)
+				return true;
+		}
+		return false;
+	}
+
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>& TrainingPlanRepository::getTrainingPlans() const
+	{
+		return trainingPlans;
 	}
 }

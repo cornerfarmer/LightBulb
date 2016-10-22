@@ -18,7 +18,7 @@ namespace LightBulb
 				{
 					for (int r = 0; r < simulationWorld->getRoundCount(); r++)
 					{
-						int result = simulationWorld->compareObjects(*firstPlayer, *secondPlayer, r);
+						int result = simulationWorld->compareObjects(**firstPlayer, **secondPlayer, r);
 						if (result != 0)
 							setResult(*firstPlayer, *secondPlayer, r, result > 0);
 					}

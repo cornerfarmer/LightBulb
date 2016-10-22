@@ -47,29 +47,29 @@ namespace LightBulb
 		return new PreferenceGroup(*this);
 	}
 
-	const AbstractPreference* PreferenceGroup::getPreference(const std::string& preferenceName) const
+	const AbstractPreference& PreferenceGroup::getPreference(const std::string& preferenceName) const
 	{
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
 			if (dynamic_cast<AbstractPreference*>(preference->get()) && (*preference)->getName() == preferenceName)
-				return dynamic_cast<AbstractPreference*>(preference->get());
+				return static_cast<AbstractPreference&>(*preference->get());
 		}
-		return nullptr;
+		throw std::invalid_argument("There is no preference with name \"" + preferenceName + "\"");
 	}
 
-	PreferenceGroup* PreferenceGroup::getPreferenceGroup(const std::string& preferenceGroupName) const
+	PreferenceGroup& PreferenceGroup::getPreferenceGroup(const std::string& preferenceGroupName) const
 	{
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
 			if (dynamic_cast<PreferenceGroup*>(preference->get()) && (*preference)->getName() == preferenceGroupName)
-				return dynamic_cast<PreferenceGroup*>(preference->get());
+				return dynamic_cast<PreferenceGroup&>(*preference->get());
 		}
-		return nullptr;
+		throw std::invalid_argument("There is no preference group with name \"" + preferenceGroupName + "\"");
 	}
 
 	double PreferenceGroup::getDoublePreference(const std::string& preferenceName) const
 	{
-		const DoublePreference* doublePreference = dynamic_cast<const DoublePreference*>(getPreference(preferenceName));
+		const DoublePreference* doublePreference = dynamic_cast<const DoublePreference*>(&getPreference(preferenceName));
 		if (doublePreference)
 			return doublePreference->getValue();
 		else
@@ -79,7 +79,7 @@ namespace LightBulb
 
 	int PreferenceGroup::getIntegerPreference(const std::string& preferenceName) const
 	{
-		const IntegerPreference* integerPreference = dynamic_cast<const IntegerPreference*>(getPreference(preferenceName));
+		const IntegerPreference* integerPreference = dynamic_cast<const IntegerPreference*>(&getPreference(preferenceName));
 		if (integerPreference)
 			return integerPreference->getValue();
 		else
@@ -88,7 +88,7 @@ namespace LightBulb
 
 	bool PreferenceGroup::getBooleanPreference(const std::string& preferenceName) const
 	{
-		const BooleanPreference* booleanPreference = dynamic_cast<const BooleanPreference*>(getPreference(preferenceName));
+		const BooleanPreference* booleanPreference = dynamic_cast<const BooleanPreference*>(&getPreference(preferenceName));
 		if (booleanPreference)
 			return booleanPreference->getValue();
 		else
@@ -97,7 +97,7 @@ namespace LightBulb
 
 	std::string PreferenceGroup::getChoicePreference(const std::string& preferenceName) const
 	{
-		const ChoicePreference* choicePreference = dynamic_cast<const ChoicePreference*>(getPreference(preferenceName));
+		const ChoicePreference* choicePreference = dynamic_cast<const ChoicePreference*>(&getPreference(preferenceName));
 		if (choicePreference)
 			return choicePreference->getValue();
 		else

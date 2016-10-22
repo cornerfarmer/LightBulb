@@ -12,14 +12,14 @@ namespace LightBulb
 		teachingPattern = teachingPattern_;
 	}
 
-	const NeuralNetworkIO<double>* TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction* activationFunction) const
+	const NeuralNetworkIO<double>& TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
 	{
-		return teachingInput.get();
+		return *teachingInput.get();
 	}
 
-	const std::vector<std::vector<double>>* TeachingLessonLinearInput::getTeachingPattern() const
+	const std::vector<std::vector<double>>& TeachingLessonLinearInput::getTeachingPattern() const
 	{
-		return &teachingPattern;
+		return teachingPattern;
 	}
 
 	AbstractTeachingLesson* TeachingLessonLinearInput::unfold() const

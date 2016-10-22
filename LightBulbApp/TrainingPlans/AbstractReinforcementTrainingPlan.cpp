@@ -4,10 +4,10 @@
 
 namespace LightBulb
 {
-	void AbstractReinforcementTrainingPlan::fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions* options) const
+	void AbstractReinforcementTrainingPlan::fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions& options) const
 	{
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
-		options->world = world.get();
+		options.world = world.get();
 	}
 
 	AbstractReinforcementTrainingPlan::AbstractReinforcementTrainingPlan()
@@ -20,9 +20,9 @@ namespace LightBulb
 		world.reset(createWorld());
 	}
 
-	AbstractReinforcementWorld* AbstractReinforcementTrainingPlan::getWorld()
+	AbstractReinforcementWorld& AbstractReinforcementTrainingPlan::getWorld()
 	{
-		return world.get();
+		return *world.get();
 	}
 
 	void AbstractReinforcementTrainingPlan::setWorld(AbstractReinforcementWorld* world_)

@@ -20,7 +20,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	NatureWindow(NatureController& controller_, LightBulb::AbstractWindow* parent = nullptr);
+	NatureWindow(NatureController& controller_, LightBulb::AbstractWindow& parent);
 	void paintEvent(wxPaintEvent& evt);
 	void resize(wxSizeEvent& evt);
 	void paintNow();

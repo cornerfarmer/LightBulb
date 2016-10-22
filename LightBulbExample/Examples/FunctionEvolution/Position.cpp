@@ -10,10 +10,10 @@
 
 using namespace LightBulb;
 
-Position::Position(FunctionSimulator* functionSimulator_)
+Position::Position(FunctionSimulator& functionSimulator_)
 	: AbstractSimpleEvolutionObject(functionSimulator_)
 {
-	functionSimulator = functionSimulator_;
+	functionSimulator = &functionSimulator_;
 	position.resize(2);
 
 	FeedForwardNetworkTopologyOptions options;

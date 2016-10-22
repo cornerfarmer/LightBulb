@@ -37,7 +37,7 @@ namespace LightBulb
 		void scrollChanged(wxScrollWinEvent& event);
 		LoggerController& getController();
 	public:
-		LoggerWindow(LoggerController& controller_, AbstractWindow* parent = nullptr);
+		LoggerWindow(LoggerController& controller_, AbstractWindow& parent);
 		void addLogMessage(const std::string& msg);
 		void clearLog();
 		void refreshTrainingPlans();

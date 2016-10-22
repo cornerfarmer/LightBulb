@@ -66,9 +66,9 @@ namespace LightBulb
 		networkTopology->getOutput(output);
 	}
 
-	AbstractNetworkTopology* NeuralNetwork::getNetworkTopology() const
+	AbstractNetworkTopology& NeuralNetwork::getNetworkTopology() const
 	{
-		return networkTopology.get();
+		return *networkTopology.get();
 	}
 
 	const std::string& NeuralNetwork::getName() const

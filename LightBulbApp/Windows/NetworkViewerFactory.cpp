@@ -4,15 +4,15 @@
 
 namespace LightBulb
 {
-	NetworkViewerFactory::NetworkViewerFactory(NeuralNetworkRepository* neuralNetworkRepository_)
+	NetworkViewerFactory::NetworkViewerFactory(NeuralNetworkRepository& neuralNetworkRepository_)
 	{
-		neuralNetworkRepository = neuralNetworkRepository_;
+		neuralNetworkRepository = &neuralNetworkRepository_;
 	}
 
-	AbstractSubApp* NetworkViewerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
+	AbstractSubApp* NetworkViewerFactory::createSupApp(AbstractMainApp& mainApp, AbstractWindow& parent) const
 	{
-		NetworkViewerController* controller = new NetworkViewerController(mainApp, neuralNetworkRepository, parent);
-		controller->getWindow()->Show();
+		NetworkViewerController* controller = new NetworkViewerController(mainApp, *neuralNetworkRepository, parent);
+		controller->getWindow().Show();
 		return controller;
 	}
 

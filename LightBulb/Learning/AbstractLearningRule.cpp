@@ -35,10 +35,10 @@ namespace LightBulb
 		return learn(false);
 	}
 
-	void AbstractLearningRule::fillDefaultResults(AbstractLearningResult* learningResult)
+	void AbstractLearningRule::fillDefaultResults(AbstractLearningResult& learningResult)
 	{
-		learningResult->learningState = learningState;
-		learningResult->succeeded = hasLearningSucceeded();
+		learningResult.learningState = learningState;
+		learningResult.succeeded = hasLearningSucceeded();
 	}
 
 	AbstractLearningResult* AbstractLearningRule::learn(bool resume)
@@ -103,9 +103,9 @@ namespace LightBulb
 		pauseRequest = true;
 	}
 
-	void AbstractLearningRule::setLogger(AbstractLogger* logger)
+	void AbstractLearningRule::setLogger(AbstractLogger& logger)
 	{
-		options->logger = logger;
+		options->logger = &logger;
 	}
 
 	void AbstractLearningRule::log(const std::string& message, const LogLevel& level)
@@ -115,9 +115,9 @@ namespace LightBulb
 	}
 
 
-	LearningState* AbstractLearningRule::getLearningState() 
+	LearningState& AbstractLearningRule::getLearningState() 
 	{
-		return learningState.get();
+		return *learningState.get();
 	}
 
 	std::vector<std::string> AbstractLearningRule::getDataSetLabels() const

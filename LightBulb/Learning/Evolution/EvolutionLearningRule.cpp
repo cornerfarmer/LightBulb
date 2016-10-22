@@ -25,7 +25,7 @@ namespace LightBulb
 	AbstractLearningResult* EvolutionLearningRule::getLearningResult()
 	{
 		EvolutionLearningResult* learningResult = new EvolutionLearningResult();
-		fillDefaultResults(learningResult);
+		fillDefaultResults(*learningResult);
 		Highscore* highscore = getOptions()->world->getHighscoreList();
 		learningResult->quality = highscore->front().first;
 		learningResult->qualityLabel = "Best fitness";
@@ -60,48 +60,48 @@ namespace LightBulb
 
 	void EvolutionLearningRule::setHelperToUsedObjects()
 	{
-		getOptions()->world->setLogger(options->logger);
-		getOptions()->world->setLearningState(learningState.get());
-		getOptions()->world->setRandomGenerator(randomGenerator.get());
+		getOptions()->world->setLogger(*options->logger);
+		getOptions()->world->setLearningState(*learningState.get());
+		getOptions()->world->setRandomGenerator(*randomGenerator.get());
 
 		for (auto reuseCommand = getOptions()->reuseCommands.begin(); reuseCommand != getOptions()->reuseCommands.end(); reuseCommand++)
 		{
-			(*reuseCommand)->setLogger(options->logger);
-			(*reuseCommand)->setRandomGenerator(randomGenerator.get());
+			(*reuseCommand)->setLogger(*options->logger);
+			(*reuseCommand)->setRandomGenerator(*randomGenerator.get());
 		}
 
 		for (auto mutationCommand = getOptions()->mutationsCommands.begin(); mutationCommand != getOptions()->mutationsCommands.end(); mutationCommand++)
 		{
-			(*mutationCommand)->setLogger(options->logger);
-			(*mutationCommand)->setRandomGenerator(randomGenerator.get());
+			(*mutationCommand)->setLogger(*options->logger);
+			(*mutationCommand)->setRandomGenerator(*randomGenerator.get());
 		}
 
 		for (auto recombinationCommand = getOptions()->recombinationCommands.begin(); recombinationCommand != getOptions()->recombinationCommands.end(); recombinationCommand++)
 		{
-			(*recombinationCommand)->setLogger(options->logger);
-			(*recombinationCommand)->setRandomGenerator(randomGenerator.get());
+			(*recombinationCommand)->setLogger(*options->logger);
+			(*recombinationCommand)->setRandomGenerator(*randomGenerator.get());
 		}
 
 		for (auto fitnessFunction = getOptions()->fitnessFunctions.begin(); fitnessFunction != getOptions()->fitnessFunctions.end(); fitnessFunction++)
 		{
-			(*fitnessFunction)->setLogger(options->logger);
+			(*fitnessFunction)->setLogger(*options->logger);
 		}
 
 		for (auto creationCommand = getOptions()->creationCommands.begin(); creationCommand != getOptions()->creationCommands.end(); creationCommand++)
 		{
-			(*creationCommand)->setLogger(options->logger);
-			(*creationCommand)->setRandomGenerator(randomGenerator.get());
+			(*creationCommand)->setLogger(*options->logger);
+			(*creationCommand)->setRandomGenerator(*randomGenerator.get());
 		}
 
 		for (auto exitCondition = getOptions()->exitConditions.begin(); exitCondition != getOptions()->exitConditions.end(); exitCondition++)
 		{
-			(*exitCondition)->setLogger(options->logger);
+			(*exitCondition)->setLogger(*options->logger);
 		}
 
 		for (auto selectionCommand = getOptions()->selectionCommands.begin(); selectionCommand != getOptions()->selectionCommands.end(); selectionCommand++)
 		{
-			(*selectionCommand)->setLogger(options->logger);
-			(*selectionCommand)->setRandomGenerator(randomGenerator.get());
+			(*selectionCommand)->setLogger(*options->logger);
+			(*selectionCommand)->setRandomGenerator(*randomGenerator.get());
 		}
 	}
 
@@ -133,7 +133,7 @@ namespace LightBulb
 		return labels;
 	}
 
-	void EvolutionLearningRule::setLogger(AbstractLogger* logger)
+	void EvolutionLearningRule::setLogger(AbstractLogger& logger)
 	{
 		AbstractLearningRule::setLogger(logger);
 		setHelperToUsedObjects();
@@ -232,17 +232,17 @@ namespace LightBulb
 			int totalNeuronCount = 0;
 			for (int i = 0; i < highscore->size(); i++)
 			{
-				totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+				totalNeuronCount += (*highscore)[i].second->getNeuralNetwork()->getNetworkTopology().getNeuronCount();
 			}
 			learningState->addData(getOptions()->dataSetsPrefix + DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore->size());
 		}
 
 		if (!options->disabledDataSets[getOptions()->dataSetsPrefix + DATA_BEST_NEURON_COUNT])
 		{
-			learningState->addData(getOptions()->dataSetsPrefix + DATA_BEST_NEURON_COUNT, highscore->front().second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount());
+			learningState->addData(getOptions()->dataSetsPrefix + DATA_BEST_NEURON_COUNT, highscore->front().second->getNeuralNetwork()->getNetworkTopology().getNeuronCount());
 		}
 
-		throwEvent(EVT_EL_EVOLUTIONSTEP, this);
+		throwEvent(EVT_EL_EVOLUTIONSTEP, *this);
 
 		bool exit = false;
 		// 3.Step: Go through all exit conditions

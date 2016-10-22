@@ -47,7 +47,7 @@ namespace LightBulb
 
 		for (int i = 0; i < currentLevel->size(); i += 2) {
 			if (i < currentLevel->size() - 1) {
-				int result = simulationWorld->compareObjects(currentLevel->at(i), currentLevel->at(i + 1), 0);
+				int result = simulationWorld->compareObjects(*currentLevel->at(i), *currentLevel->at(i + 1), 0);
 				if (result == 0) {
 					result = (randomGenerator->randDouble() > 0.5 ? 1 : -1);
 				}

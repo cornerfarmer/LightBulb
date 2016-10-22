@@ -8,61 +8,61 @@
 
 namespace LightBulb
 {
-	DataSet* DataSetSelection::getDataSet(std::string otherLabel)
+	DataSet& DataSetSelection::getDataSet(std::string otherLabel)
 	{
 		if (otherLabel == "")
-			return &trainingPlan->getLearningState()->dataSets[tryNumber][label];
+			return trainingPlan->getLearningState().dataSets[tryNumber][label];
 		else
-			return &trainingPlan->getLearningState()->dataSets[tryNumber][otherLabel];
+			return trainingPlan->getLearningState().dataSets[tryNumber][otherLabel];
 	}
 
-	LearningStateController::LearningStateController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+	LearningStateController::LearningStateController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository_, AbstractWindow& parent)
 		:AbstractSubApp(mainApp)
 	{
 		refreshRate = 100;
-		trainingPlanRepository = trainingPlanRepository_;
-		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, this);
-		window.reset(new LearningStateWindow(this, parent));
+		trainingPlanRepository = &trainingPlanRepository_;
+		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, *this);
+		window.reset(new LearningStateWindow(*this, parent));
 		iterationsSinceLearningStateChanged = 0;
-		trainingPlansChanged(trainingPlanRepository);
+		trainingPlansChanged(*trainingPlanRepository);
 	}
 
 	void LearningStateController::prepareClose()
 	{
 		for (int i = 0; i < selectedDataSets.size(); i++)
 		{
-			selectedDataSets[i].trainingPlan->getLearningState()->removeObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
+			selectedDataSets[i].trainingPlan->getLearningState().removeObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, *this);
 		}
 
-		trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, this);
+		trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, *this);
 	}
 
-	LearningStateWindow* LearningStateController::getWindow()
+	LearningStateWindow& LearningStateController::getWindow()
 	{
-		return window.get();
+		return *window.get();
 	}
 
-	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* LearningStateController::getTrainingPlans() const
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>& LearningStateController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
 
-	void LearningStateController::trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository)
+	void LearningStateController::trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository)
 	{
 		window->refreshTrainingPlans();
 	}
 
 	void LearningStateController::setSelectedTrainingPlan(int trainingPlanIndex)
 	{
-		selectedTrainingPlan = (*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get();
+		selectedTrainingPlan = trainingPlanRepository->getTrainingPlans()[trainingPlanIndex].get();
 	}
 
-	AbstractTrainingPlan* LearningStateController::getSelectedTrainingPlan()
+	AbstractTrainingPlan& LearningStateController::getSelectedTrainingPlan()
 	{
-		return selectedTrainingPlan;
+		return *selectedTrainingPlan;
 	}
 
-	void LearningStateController::learningStateChanged(LearningState* learningState)
+	void LearningStateController::learningStateChanged(LearningState& learningState)
 	{
 		if (iterationsSinceLearningStateChanged-- <= 0 && !refreshScheduled)
 		{
@@ -99,12 +99,12 @@ namespace LightBulb
 
 	int LearningStateController::getTryCount()
 	{
-		return selectedTrainingPlan->getLearningState()->tries;
+		return selectedTrainingPlan->getLearningState().tries;
 	}
 
 	std::string LearningStateController::addDataSet(int tryNumber, int dataSetIndex)
 	{
-		selectedTrainingPlan->getLearningState()->registerObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
+		selectedTrainingPlan->getLearningState().registerObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, *this);
 
 		std::string dataSetLabel = selectedTrainingPlan->getDataSetLabels()[dataSetIndex];
 		DataSetSelection newSelection;
@@ -116,9 +116,9 @@ namespace LightBulb
 		return dataSetLabel;
 	}
 
-	std::vector<DataSetSelection>* LearningStateController::getSelectedDataSets()
+	std::vector<DataSetSelection>& LearningStateController::getSelectedDataSets()
 	{
-		return &selectedDataSets;
+		return selectedDataSets;
 	}
 
 	void LearningStateController::removeDataSet(int dataSetIndex)
@@ -133,7 +133,7 @@ namespace LightBulb
 			}
 		}
 		if (removeObserver)
-			selectedDataSets[dataSetIndex].trainingPlan->getLearningState()->removeObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, this);
+			selectedDataSets[dataSetIndex].trainingPlan->getLearningState().removeObserver(EVT_LS_DS_CHANGED, &LearningStateController::learningStateChanged, *this);
 		selectedDataSets.erase(selectedDataSets.begin() + dataSetIndex);
 	}
 

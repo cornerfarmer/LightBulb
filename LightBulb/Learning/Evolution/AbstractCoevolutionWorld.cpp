@@ -30,7 +30,7 @@ namespace LightBulb
 		fitnessValues.reset(fitnessFunction->execute(*results));
 
 		AbstractEvolutionObject* bestAI = getHighscoreList()->front().second;
-		rateKI(bestAI);
+		rateKI(*bestAI);
 
 		if (hallOfFameToAddAlgorithm)
 			hallOfFameToAddAlgorithm->addMember(bestAI);
@@ -41,12 +41,12 @@ namespace LightBulb
 		return false;
 	}
 
-	double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject* object)
+	double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject& object)
 	{
-		return (*fitnessValues)[object];
+		return (*fitnessValues)[&object];
 	}
 
-	int AbstractCoevolutionWorld::compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
+	int AbstractCoevolutionWorld::compareObjects(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
 	{
 		comparisons++;
 		return doCompare(obj1, obj2, round);
@@ -57,7 +57,7 @@ namespace LightBulb
 		return combiningStrategy.get();
 	}
 
-	void AbstractCoevolutionWorld::setLogger(AbstractLogger* logger_)
+	void AbstractCoevolutionWorld::setLogger(AbstractLogger& logger_)
 	{
 		AbstractLoggable::setLogger(logger_);
 		if (hallOfFameToChallengeAlgorithm)
@@ -85,7 +85,7 @@ namespace LightBulb
 		return 1;
 	}
 
-	void AbstractCoevolutionWorld::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void AbstractCoevolutionWorld::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		combiningStrategy->setRandomGenerator(randomGenerator_);

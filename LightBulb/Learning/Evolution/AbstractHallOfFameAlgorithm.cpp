@@ -8,7 +8,7 @@ namespace LightBulb
 {
 	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject* object, int memberID, int round)
 	{
-		bool firstPlayerHasWon = currentWorld->compareObjects(object, members[memberID].get(), round) > 0;
+		bool firstPlayerHasWon = currentWorld->compareObjects(*object, *members[memberID].get(), round) > 0;
 		(*currentResults)[object][members[memberID].get()][round] = firstPlayerHasWon;
 		(*currentResults)[members[memberID].get()][object][round] = !firstPlayerHasWon;
 	}

@@ -15,22 +15,22 @@ namespace LightBulb
 		// Create a neural network from the network topolgy
 		neuralNetwork.reset(new NeuralNetwork(networkTopology));
 		// Randomize all weights (TODO: make the boundaries variable)
-		neuralNetwork->getNetworkTopology()->randomizeWeights(world->getRandomGenerator(), -0.5, 0.5);
+		neuralNetwork->getNetworkTopology().randomizeWeights(world->getRandomGenerator(), -0.5, 0.5);
 
 		// Initialize the mutation strength vector
-		resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
+		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());
 		randomizeMutationStrength();
 		buildOutputBuffer();
 	}
 
 	void AbstractSimpleEvolutionObject::buildOutputBuffer()
 	{
-		lastOutput.resize(neuralNetwork->getNetworkTopology()->getOutputSize());
+		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
 	}
 
-	AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld* world_)
+	AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld& world_)
 	{
-		world = world_;
+		world = &world_;
 	}
 
 	AbstractNeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
@@ -55,7 +55,7 @@ namespace LightBulb
 	void AbstractSimpleEvolutionObject::resetNN()
 	{
 		// Only reset all activations
-		neuralNetwork->getNetworkTopology()->resetActivation();
+		neuralNetwork->getNetworkTopology().resetActivation();
 	}
 
 	AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone(bool addToWorld)
@@ -63,7 +63,7 @@ namespace LightBulb
 		// Create a new object
 		AbstractEvolutionObject* newObject = world->addNewObject(addToWorld);
 		// Copy all weights
-		newObject->getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*neuralNetwork->getNetworkTopology());
+		newObject->getNeuralNetwork()->getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
 		// Copy all mutation strengths
 		newObject->setMutationStrength(getMutationStrength());
 		return newObject;

@@ -44,10 +44,10 @@ namespace LightBulb
 		return labels;
 	}
 
-	double TeachingEvolutionWorld::getScore(AbstractEvolutionObject* object)
+	double TeachingEvolutionWorld::getScore(AbstractEvolutionObject& object)
 	{
 		// Just return the total error of the object (negate it, so the error 0 is the maximum)
-		return -static_cast<TeachedEvolutionObject*>(object)->getCurrentTotalError();
+		return -static_cast<TeachedEvolutionObject&>(object).getCurrentTotalError();
 	}
 
 

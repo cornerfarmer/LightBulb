@@ -7,11 +7,11 @@
 
 using namespace LightBulb;
 
-MountainCarController::MountainCarController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+MountainCarController::MountainCarController(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_, AbstractWindow& parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
-	world = static_cast<MountainCarWorld*>(static_cast<MountainCarDQNExample*>(trainingPlan)->getWorld());
-	window.reset(new MountainCarWindow(this, parent));
+	world = static_cast<MountainCarWorld*>(&static_cast<MountainCarDQNExample*>(trainingPlan)->getWorld());
+	window.reset(new MountainCarWindow(*this, parent));
 }
 
 void MountainCarController::prepareClose()
@@ -19,22 +19,22 @@ void MountainCarController::prepareClose()
 	stopWatchMode();
 }
 
-MountainCarWindow* MountainCarController::getWindow()
+MountainCarWindow& MountainCarController::getWindow()
 {
-	return window.get();
+	return *window.get();
 }
 
 void MountainCarController::stopWatchMode()
 {
 	world->stopWatchMode();
-	world->removeObserver(EVT_POS_CHANGED, &MountainCarController::posChanged, this);
+	world->removeObserver(EVT_POS_CHANGED, &MountainCarController::posChanged, *this);
 }
 
 
 void MountainCarController::startWatchMode()
 {
 	world->startWatchMode();
-	world->registerObserver(EVT_POS_CHANGED, &MountainCarController::posChanged, this);
+	world->registerObserver(EVT_POS_CHANGED, &MountainCarController::posChanged, *this);
 }
 
 
@@ -58,7 +58,7 @@ int MountainCarController::getAction()
 	return action;
 }
 
-void MountainCarController::posChanged(MountainCarWorld* pong)
+void MountainCarController::posChanged(MountainCarWorld& pong)
 {
 	position = world->getPosition();
 	velocity = world->getVelocity();

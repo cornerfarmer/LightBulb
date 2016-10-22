@@ -19,7 +19,7 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	PongAI(LightBulb::FeedForwardNetworkTopologyOptions& options, Pong* pong_ = nullptr);
+	PongAI(LightBulb::FeedForwardNetworkTopologyOptions& options, Pong& pong_);
 	PongAI() = default;
 	void setPong(Pong& currentGame_);
 };

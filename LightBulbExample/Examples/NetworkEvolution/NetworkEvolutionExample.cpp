@@ -47,7 +47,7 @@ AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new RemainderStochasticSamplingSelector(), 2.0);
 	options.mutationsCommands.push_back(constantMutationCommand);
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RemainderStochasticSamplingSelector(), 0));
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new EvolutionLearningRule(options);
 }

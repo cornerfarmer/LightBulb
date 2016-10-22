@@ -48,7 +48,7 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 
 
 	//options.dataSaveInterval = 100;
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new DQNLearningRule(options);
 }

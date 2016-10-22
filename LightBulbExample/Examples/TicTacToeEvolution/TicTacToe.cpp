@@ -14,7 +14,7 @@ using namespace LightBulb;
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
 {
-	return new TicTacToeKI(*options, this);
+	return new TicTacToeKI(*options, *this);
 }
 
 TicTacToe::TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
@@ -50,14 +50,14 @@ int TicTacToe::getFieldValue(int x, int y)
 	return fields[x][y];
 }
 
-int TicTacToe::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
+int TicTacToe::doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
 {
-	return simulateGame(static_cast<TicTacToeKI*>(obj1), static_cast<TicTacToeKI*>(obj2), round == 1);
+	return simulateGame(static_cast<TicTacToeKI&>(obj1), static_cast<TicTacToeKI&>(obj2), round == 1);
 }
 
-std::vector<std::vector<int>>* TicTacToe::getFields()
+std::vector<std::vector<int>>& TicTacToe::getFields()
 {
-	return &fields;
+	return fields;
 }
 
 void TicTacToe::startStepMode()
@@ -101,15 +101,15 @@ void TicTacToe::initializeForLearning()
 {
 }
 
-int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlayerStarts)
+int TicTacToe::simulateGame(TicTacToeKI& ai1, TicTacToeKI& ai2, bool secondPlayerStarts)
 {
 	int pointsAI1 = 0;
 	int pointsAI2 = 0;
-	ai2->resetNN();
-	ai1->resetNN();
+	ai2.resetNN();
+	ai1.resetNN();
 
-	ai1->setTicTacToe(this);
-	ai2->setTicTacToe(this);
+	ai1.setTicTacToe(*this);
+	ai2.setTicTacToe(*this);
 
 	if (secondPlayerStarts == 0)
 		startNewGame(1);
@@ -126,13 +126,13 @@ int TicTacToe::simulateGame(TicTacToeKI* ai1, TicTacToeKI* ai2, bool secondPlaye
 		}
 		if (i % 2 == secondPlayerStarts)
 		{
-			ai1->doNNCalculation();
+			ai1.doNNCalculation();
 			if (!illegalMove)
 				pointsAI1++;
 		}
 		else
 		{
-			ai2->doNNCalculation();
+			ai2.doNNCalculation();
 			if (!illegalMove)
 				pointsAI2++;
 		}
@@ -169,7 +169,7 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 	illegalMove = illegalMove_;
 }
 
-int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
+int TicTacToe::rateKI(AbstractEvolutionObject& rateKI)
 {
 
 	int wins = 0;
@@ -184,7 +184,7 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 
 		while (decisionCombinationsLeft)
 		{
-			rateKI->resetNN();
+			rateKI.resetNN();
 			startNewGame(b == 0 ? -1 : 1);
 
 			int i;
@@ -192,7 +192,7 @@ int TicTacToe::rateKI(AbstractEvolutionObject* rateKI)
 			{
 				if (i % 2 == 1 - b)
 				{
-					rateKI->doNNCalculation();
+					rateKI.doNNCalculation();
 				}
 				else
 				{
@@ -291,7 +291,7 @@ void TicTacToe::setField(int x, int y)
 	else {
 		fields[x][y] = currentPlayer;
 		currentPlayer *= -1;
-		throwEvent(EVT_FIELD_CHANGED, this);
+		throwEvent(EVT_FIELD_CHANGED, *this);
 	}
 }
 
@@ -305,7 +305,7 @@ void TicTacToe::resetWorld()
 			*field = 0;
 		}
 	}
-	throwEvent(EVT_FIELD_CHANGED, this);
+	throwEvent(EVT_FIELD_CHANGED, *this);
 }
 
 

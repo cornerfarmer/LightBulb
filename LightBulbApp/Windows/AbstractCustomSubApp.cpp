@@ -3,9 +3,9 @@
 
 namespace LightBulb
 {
-	AbstractCustomSubApp::AbstractCustomSubApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_)
+	AbstractCustomSubApp::AbstractCustomSubApp(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_)
 		:AbstractSubApp(mainApp)
 	{
-		trainingPlan = trainingPlan_;
+		trainingPlan = &trainingPlan_;
 	}
 }

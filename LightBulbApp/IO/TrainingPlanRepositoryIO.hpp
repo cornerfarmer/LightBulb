@@ -15,7 +15,7 @@ namespace LightBulb
 	{
 		onlyUseNeuralNetworkIndex = true;
 		archive(cereal::make_nvp("trainingPlans", trainingPlanRepository.trainingPlans));
-		trainingPlanRepository.throwEvent(EVT_TP_CHANGED, &trainingPlanRepository);
+		trainingPlanRepository.throwEvent(EVT_TP_CHANGED, trainingPlanRepository);
 	}
 }
 

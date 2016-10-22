@@ -4,15 +4,15 @@
 
 namespace LightBulb
 {
-	LoggerFactory::LoggerFactory(TrainingPlanRepository* trainingPlanRepository_)
+	LoggerFactory::LoggerFactory(TrainingPlanRepository& trainingPlanRepository_)
 	{
-		trainingPlanRepository = trainingPlanRepository_;
+		trainingPlanRepository = &trainingPlanRepository_;
 	}
 
-	AbstractSubApp* LoggerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
+	AbstractSubApp* LoggerFactory::createSupApp(AbstractMainApp& mainApp, AbstractWindow& parent) const
 	{
-		LoggerController* controller = new LoggerController(mainApp, trainingPlanRepository, parent);
-		controller->getWindow()->Show();
+		LoggerController* controller = new LoggerController(mainApp, *trainingPlanRepository, parent);
+		controller->getWindow().Show();
 		return controller;
 	}
 

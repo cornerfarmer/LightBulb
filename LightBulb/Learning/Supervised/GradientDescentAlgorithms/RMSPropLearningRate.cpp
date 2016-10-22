@@ -16,18 +16,18 @@ namespace LightBulb
 	}
 
 
-	RMSPropLearningRateOptions* RMSPropLearningRate::getOptions()
+	RMSPropLearningRateOptions& RMSPropLearningRate::getOptions()
 	{
-		return static_cast<RMSPropLearningRateOptions*>(options.get());
+		return static_cast<RMSPropLearningRateOptions&>(*options.get());
 	}
 
-	void RMSPropLearningRate::initializeAlgorithm(const AbstractNetworkTopology* networkTopology)
+	void RMSPropLearningRate::initializeAlgorithm(const AbstractNetworkTopology& networkTopology)
 	{
 		// Make sure the previous learning rates map is empty
-		prevGradient.resize(networkTopology->getAllWeights()->size());
+		prevGradient.resize(networkTopology.getAllWeights().size());
 		for (int i = 0; i < prevGradient.size(); i++)
 		{
-			prevGradient[i].resizeLike(networkTopology->getAllWeights()->at(i));
+			prevGradient[i].resizeLike(networkTopology.getAllWeights().at(i));
 			prevGradient[i].setZero();
 		}
 		prevSquaredGradient = prevGradient;
@@ -35,12 +35,12 @@ namespace LightBulb
 	}
 
 
-	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
-		prevGradient[layerIndex - 1] = getOptions()->gradientMomentum * prevGradient[layerIndex - 1] + (1 - getOptions()->gradientMomentum) * gradients;
-		prevSquaredGradient[layerIndex - 1] = getOptions()->squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - getOptions()->squaredGradientMomentum) * gradients.cwiseAbs2();
+		prevGradient[layerIndex - 1] = getOptions().gradientMomentum * prevGradient[layerIndex - 1] + (1 - getOptions().gradientMomentum) * gradients;
+		prevSquaredGradient[layerIndex - 1] = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - getOptions().squaredGradientMomentum) * gradients.cwiseAbs2();
 
-		prevDeltaWeights[layerIndex - 1] = getOptions()->deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1] - getOptions()->learningRate * gradients.cwiseQuotient(((prevSquaredGradient[layerIndex - 1].array() - prevGradient[layerIndex - 1].cwiseAbs2().array() + getOptions()->minSquaredGradient).cwiseSqrt()).matrix());
+		prevDeltaWeights[layerIndex - 1] = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1] - getOptions().learningRate * gradients.cwiseQuotient(((prevSquaredGradient[layerIndex - 1].array() - prevGradient[layerIndex - 1].cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
 
 		return prevDeltaWeights[layerIndex - 1];
 	}

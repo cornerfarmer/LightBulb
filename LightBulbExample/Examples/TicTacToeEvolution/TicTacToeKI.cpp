@@ -5,10 +5,10 @@
 
 using namespace LightBulb;
 
-TicTacToeKI::TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe* ticTacToe_)
+TicTacToeKI::TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)
 {
-	currentGame = ticTacToe_;
+	currentGame = &ticTacToe_;
 	buildNeuralNetwork(options);
 }
 
@@ -38,7 +38,7 @@ TicTacToeKI::~TicTacToeKI()
 }
 
 
-void TicTacToeKI::setTicTacToe(TicTacToe* newTicTacToe)
+void TicTacToeKI::setTicTacToe(TicTacToe& newTicTacToe)
 {
-	currentGame = newTicTacToe;
+	currentGame = &newTicTacToe;
 }

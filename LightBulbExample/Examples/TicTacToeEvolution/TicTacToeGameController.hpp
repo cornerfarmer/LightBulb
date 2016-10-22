@@ -19,7 +19,7 @@ private:
 protected:
 	void prepareClose() override;
 public:
-	TicTacToeGameController(LightBulb::AbstractMainApp& mainApp, LightBulb::AbstractTrainingPlan& trainingPlan, LightBulb::AbstractWindow* parent = nullptr);
+	TicTacToeGameController(LightBulb::AbstractMainApp& mainApp, LightBulb::AbstractTrainingPlan& trainingPlan, LightBulb::AbstractWindow& parent);
 	TicTacToeGameWindow& getWindow();
 	void stopStepMode();
 	void startStepMode();

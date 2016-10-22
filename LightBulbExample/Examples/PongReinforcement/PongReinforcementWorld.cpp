@@ -28,7 +28,7 @@ double PongReinforcementWorld::doSimulationStep()
 
 	if (watchMode)
 	{
-		throwEvent(EVT_FIELD_CHANGED, this);
+		throwEvent(EVT_FIELD_CHANGED, *this);
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 	time++;
@@ -117,7 +117,7 @@ bool PongReinforcementWorld::isTerminalState()
 	return game.whoHasWon() != 0 || time >= game.getProperties().maxTime;
 }
 
-void PongReinforcementWorld::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+void PongReinforcementWorld::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 {
 	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 	game.setRandomGenerator(randomGenerator_);

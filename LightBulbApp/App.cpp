@@ -18,13 +18,13 @@ namespace LightBulb
 		NeuralNetworkRepository* neuralNetworkRepository = new NeuralNetworkRepository();
 		TrainingPlanRepository* trainingPlanRepository = new TrainingPlanRepository();
 
-		TrainingController* trainingController = new TrainingController(neuralNetworkRepository, trainingPlanRepository, trainingPlans);
+		TrainingController* trainingController = new TrainingController(*neuralNetworkRepository, *trainingPlanRepository, trainingPlans);
 		trainingPlans.clear();
-		LoggerFactory* loggerFactory = new LoggerFactory(trainingPlanRepository);
-		SimulatorFactory* simulatorFactory = new SimulatorFactory(neuralNetworkRepository);
-		LearningStateFactory* learningStateFactory = new LearningStateFactory(trainingPlanRepository);
-		NetworkViewerFactory* networkViewerFactory = new NetworkViewerFactory(neuralNetworkRepository);
-		EvolutionAnalyzerFactory* evolutionAnalyzerFactory = new EvolutionAnalyzerFactory(trainingPlanRepository);
+		LoggerFactory* loggerFactory = new LoggerFactory(*trainingPlanRepository);
+		SimulatorFactory* simulatorFactory = new SimulatorFactory(*neuralNetworkRepository);
+		LearningStateFactory* learningStateFactory = new LearningStateFactory(*trainingPlanRepository);
+		NetworkViewerFactory* networkViewerFactory = new NetworkViewerFactory(*neuralNetworkRepository);
+		EvolutionAnalyzerFactory* evolutionAnalyzerFactory = new EvolutionAnalyzerFactory(*trainingPlanRepository);
 
 		trainingController->addSubAppFactory(loggerFactory);
 		trainingController->addSubAppFactory(simulatorFactory);

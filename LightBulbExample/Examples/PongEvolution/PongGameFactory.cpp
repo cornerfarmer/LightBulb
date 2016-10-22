@@ -4,10 +4,10 @@
 
 using namespace LightBulb;
 
-AbstractCustomSubApp* PongGameFactory::createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent) const
+AbstractCustomSubApp* PongGameFactory::createCustomSupApp(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan, AbstractWindow& parent) const
 {
 	PongGameController* controller = new PongGameController(mainApp, trainingPlan, parent);
-	controller->getWindow()->Show();
+	controller->getWindow().Show();
 	return controller;
 }
 

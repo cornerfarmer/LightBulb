@@ -29,7 +29,7 @@ namespace LightBulb
 		AbstractEvolutionTrainingPlan();
 		void initializeStart() override;
 		AbstractEvolutionWorld& getWorld();
-		void setWorld(AbstractEvolutionWorld& network_);
+		void setWorld(AbstractEvolutionWorld* network_);
 	};
 }
 

@@ -9,11 +9,11 @@
 
 using namespace LightBulb;
 
-TicTacToeGameController::TicTacToeGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+TicTacToeGameController::TicTacToeGameController(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_, AbstractWindow& parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
-	world = static_cast<TicTacToe*>(static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getWorld());
-	window.reset(new TicTacToeGameWindow(this, parent));
+	world = static_cast<TicTacToe*>(&static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getWorld());
+	window.reset(new TicTacToeGameWindow(*this, parent));
 }
 
 void TicTacToeGameController::prepareClose()
@@ -21,22 +21,22 @@ void TicTacToeGameController::prepareClose()
 	stopStepMode();
 }
 
-TicTacToeGameWindow* TicTacToeGameController::getWindow()
+TicTacToeGameWindow& TicTacToeGameController::getWindow()
 {
-	return window.get();
+	return *window.get();
 }
 
 void TicTacToeGameController::stopStepMode()
 {
 	world->stopStepMode();
-	world->removeObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, this);
+	world->removeObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, *this);
 }
 
 
 void TicTacToeGameController::startStepMode()
 {
 	world->startStepMode();
-	world->registerObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, this);
+	world->registerObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, *this);
 }
 
 void TicTacToeGameController::doStep()
@@ -49,12 +49,12 @@ std::string TicTacToeGameController::getLabel()
 	return "TicTacToeGame";
 }
 
-std::vector<std::vector<int>>* TicTacToeGameController::getFields()
+std::vector<std::vector<int>>& TicTacToeGameController::getFields()
 {
 	return world->getFields();
 }
 
-void TicTacToeGameController::fieldsChanged(TicTacToe * ticTacToe)
+void TicTacToeGameController::fieldsChanged(TicTacToe& ticTacToe)
 {
 	wxThreadEvent evt(TTT_EVT_FIELD_CHANGED);
 	window->GetEventHandler()->QueueEvent(evt.Clone());

@@ -9,7 +9,7 @@ using namespace LightBulb;
 
 AbstractEvolutionObject* NetworkSimulator::createNewObject()
 {
-	return new Network(this);
+	return new Network(*this);
 }
 
 NetworkSimulator::NetworkSimulator(std::vector<std::vector<float>> consumers_)
@@ -46,9 +46,9 @@ bool NetworkSimulator::doSimulationStep()
 	return false;
 }
 
-double NetworkSimulator::getScore(AbstractEvolutionObject* object)
+double NetworkSimulator::getScore(AbstractEvolutionObject& object)
 {
-	std::vector<std::vector<float>> pos = *static_cast<Network*>(object)->getPositions();
+	std::vector<std::vector<float>> pos = static_cast<Network&>(object).getPositions();
 
 	double length = 0;
 	for (int p = 0; p < pos.size(); p++)
@@ -72,7 +72,7 @@ double NetworkSimulator::distanceBetweenPositions(std::vector<float>& pos1, std:
 	return sqrt(distance);
 }
 
-std::vector<std::vector<float>>* NetworkSimulator::getConsumers()
+std::vector<std::vector<float>>& NetworkSimulator::getConsumers()
 {
-	return &consumers;
+	return consumers;
 }

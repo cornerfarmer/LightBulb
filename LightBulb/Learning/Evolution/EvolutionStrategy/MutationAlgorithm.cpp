@@ -32,10 +32,10 @@ namespace LightBulb
 
 		}
 
-		auto weights = object1->getNeuralNetwork()->getNetworkTopology()->getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights = object1->getNeuralNetwork()->getNetworkTopology().getAllWeights();
 		int mutationStrengthIndex = 0;
 		// Go through all edges
-		for (auto layer = weights->begin(); layer != weights->end(); layer++)
+		for (auto layer = weights.begin(); layer != weights.end(); layer++)
 		{
 			for (int i = 0; i < layer->rows(); i++)
 			{

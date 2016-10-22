@@ -51,7 +51,7 @@ namespace LightBulb
 	}
 
 
-	void GradientDescentLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap)
+	void GradientDescentLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t& errormap)
 	{
 		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errormap);
 	}
@@ -59,8 +59,8 @@ namespace LightBulb
 
 	void GradientDescentLearningRule::adjustWeights(int layerIndex)
 	{
-		Eigen::MatrixXd newWeights = getCurrentNetworkTopology()->getAfferentWeightsPerLayer(layerIndex) + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient()->at(layerIndex - 1));
-		getCurrentNetworkTopology()->setAfferentWeightsPerLayer(layerIndex, newWeights);
+		Eigen::MatrixXd newWeights = getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex) + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient().at(layerIndex - 1));
+		getCurrentNetworkTopology().setAfferentWeightsPerLayer(layerIndex, newWeights);
 	}
 
 	std::string GradientDescentLearningRule::printDebugOutput()
@@ -89,8 +89,8 @@ namespace LightBulb
 		if (getOptions()->changeWeightsBeforeLearning)
 		{
 			// Randomize all weights
-			getCurrentNetworkTopology()->randomizeWeights(randomGenerator.get(), getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
-			getCurrentNetworkTopology()->randomizeWeights(randomGenerator.get(), getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
+			getCurrentNetworkTopology().randomizeWeights(*randomGenerator.get(), getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
+			getCurrentNetworkTopology().randomizeWeights(*randomGenerator.get(), getOptions()->minRandomWeightValue, getOptions()->maxRandomWeightValue);
 		}
 
 		// If used, initialize the learning rate helper

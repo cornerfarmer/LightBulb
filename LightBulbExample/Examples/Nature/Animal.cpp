@@ -10,10 +10,10 @@
 
 using namespace LightBulb;
 
-Animal::Animal(Nature* nature_, int posX_, int posY_, int dirX_, int dirY_)
+Animal::Animal(Nature& nature_, int posX_, int posY_, int dirX_, int dirY_)
 	: AbstractSimpleEvolutionObject(nature_)
 {
-	nature = nature_;
+	nature = &nature_;
 
 	reset(posX_, posY_, dirX_, dirY_);
 
@@ -39,7 +39,7 @@ void Animal::interpretNNOutput(std::vector<double>& output)
 		health = std::min(200.0, health + nature->tryToEat(posX + dirX, posY + dirY));
 	}
 
-	if (false && health >= 200 && nature->getTile(posX - dirX, posY - dirY)->isWalkable())
+	if (false && health >= 200 && nature->getTile(posX - dirX, posY - dirY).isWalkable())
 	{
 		Animal* newAnimal = static_cast<Animal*>(clone());
 		health /= 2;
@@ -56,7 +56,7 @@ void Animal::interpretNNOutput(std::vector<double>& output)
 		rotate(-1);
 	if (output[1] > 0)
 	{
-		if (nature->getTile(posX + dirX, posY + dirY)->isWalkable())
+		if (nature->getTile(posX + dirX, posY + dirY).isWalkable())
 		{
 			posX += dirX;
 			posY += dirY;

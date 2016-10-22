@@ -45,7 +45,7 @@ protected:
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
 	int doCompare(LightBulb::AbstractEvolutionObject& obj1, LightBulb::AbstractEvolutionObject& obj2, int round) override;
 public:
-	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy& combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction& fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
+	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);

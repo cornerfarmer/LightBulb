@@ -17,7 +17,7 @@ void AbstractPongWorld::stopWatchMode()
 	watchMode = false;
 }
 
-PongGame* AbstractPongWorld::getGame()
+PongGame& AbstractPongWorld::getGame()
 {
-	return &game;
+	return game;
 }

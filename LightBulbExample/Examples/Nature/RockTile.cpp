@@ -17,7 +17,7 @@ double RockTile::getViewValue()
 	return 0;
 }
 
-const wxBrush* RockTile::getColor()
+const wxBrush& RockTile::getColor()
 {
-	return wxGREY_BRUSH;
+	return *wxGREY_BRUSH;
 }

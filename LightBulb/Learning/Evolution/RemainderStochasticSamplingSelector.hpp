@@ -28,7 +28,7 @@ namespace LightBulb
 	public:
 		RemainderStochasticSamplingSelector(bool withReplacement_ = true);
 		void setRandomFunction(AbstractSelectionFunction* randomFunction);
-		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 

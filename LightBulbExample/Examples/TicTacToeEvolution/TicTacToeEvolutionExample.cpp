@@ -67,18 +67,18 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
 
-	fillDefaultEvolutionLearningRule1Options(&options);
+	fillDefaultEvolutionLearningRule1Options(options);
 
 	//options.recombinationCommands.push_back(new ConstantRecombinationCommand(7));
 
 	EvolutionLearningRule* learningRule1 = new EvolutionLearningRule(options);
-	fillDefaultEvolutionLearningRule2Options(&options);
+	fillDefaultEvolutionLearningRule2Options(options);
 	EvolutionLearningRule* learningRule2 = new EvolutionLearningRule(options);
 
 	BipartiteEvolutionLearningRuleOptions bipartiteOptions;
 	bipartiteOptions.learningRule1 = learningRule1;
 	bipartiteOptions.learningRule2 = learningRule2;
-	fillDefaultLearningRuleOptions(&bipartiteOptions);
+	fillDefaultLearningRuleOptions(bipartiteOptions);
 
 	return new BipartiteEvolutionLearningRule(bipartiteOptions);
 }

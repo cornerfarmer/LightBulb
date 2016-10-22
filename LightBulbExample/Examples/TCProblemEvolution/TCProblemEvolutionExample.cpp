@@ -58,7 +58,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 
 	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0));
 	options.maxTries = 100;
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new EvolutionLearningRule(options);
 }

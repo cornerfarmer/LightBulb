@@ -7,12 +7,12 @@ namespace LightBulb
 {
 	wxDEFINE_EVENT(EAW_EVT_REFRESH, wxThreadEvent);
 
-	EvolutionAnalyzerController* EvolutionAnalyzerWindow::getController()
+	EvolutionAnalyzerController& EvolutionAnalyzerWindow::getController()
 	{
-		return static_cast<EvolutionAnalyzerController*>(controller);
+		return static_cast<EvolutionAnalyzerController&>(*controller);
 	}
 
-	EvolutionAnalyzerWindow::EvolutionAnalyzerWindow(EvolutionAnalyzerController* controller_, AbstractWindow* parent)
+	EvolutionAnalyzerWindow::EvolutionAnalyzerWindow(EvolutionAnalyzerController& controller_, AbstractWindow& parent)
 		:AbstractSubAppWindow(controller_, EvolutionAnalyzerController::getLabel(), parent)
 	{
 		Bind(EAW_EVT_REFRESH, wxThreadEventFunction(&EvolutionAnalyzerWindow::refresh), this);
@@ -40,27 +40,27 @@ namespace LightBulb
 
 	void EvolutionAnalyzerWindow::trainingPlanChanged(wxCommandEvent& event)
 	{
-		getController()->selectTrainingPlan(event.GetSelection());
+		getController().selectTrainingPlan(event.GetSelection());
 	}
 
 
 	void EvolutionAnalyzerWindow::refreshTrainingPlans()
 	{
 		trainingPlansChoice->Clear();
-		for (auto network = getController()->getTrainingPlans()->begin(); network != getController()->getTrainingPlans()->end(); network++)
+		for (auto network = getController().getTrainingPlans().begin(); network != getController().getTrainingPlans().end(); network++)
 		{
 			trainingPlansChoice->Append((*network)->getName());
 		}
-		refreshAfterChange(GetSizer());
+		refreshAfterChange(*GetSizer());
 	}
 
 
 	void EvolutionAnalyzerWindow::refresh(wxThreadEvent& event)
 	{
-		auto state = getController()->getCurrentState();
+		auto state = getController().getCurrentState();
 
 		highscoreList->DeleteAllItems();
-		for (auto entry = state->begin(); entry != state->end(); entry++)
+		for (auto entry = state.begin(); entry != state.end(); entry++)
 		{
 			wxVector<wxVariant> data;
 			data.push_back(wxVariant(getEvolutionSourceAsString(entry->first)));

@@ -4,8 +4,8 @@
 
 namespace LightBulb
 {
-	AbstractSubAppWindow::AbstractSubAppWindow(AbstractSubApp* controller_, std::string label, AbstractWindow* parent)
-		: AbstractWindow(controller_, label, parent)
+	AbstractSubAppWindow::AbstractSubAppWindow(AbstractSubApp& controller_, std::string label, AbstractWindow& parent)
+		: AbstractWindow(controller_, label, &parent)
 	{
 		Bind(wxEVT_CLOSE_WINDOW, wxCloseEventFunction(&AbstractSubAppWindow::close), this);
 	}

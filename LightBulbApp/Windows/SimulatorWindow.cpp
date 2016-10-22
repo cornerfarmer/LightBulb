@@ -13,7 +13,7 @@ namespace LightBulb
 		TYPE_FLOAT
 	};
 
-	SimulatorWindow::SimulatorWindow(SimulatorController* controller_, AbstractWindow* parent)
+	SimulatorWindow::SimulatorWindow(SimulatorController& controller_, AbstractWindow& parent)
 		:AbstractSubAppWindow(controller_, SimulatorController::getLabel(), parent)
 	{
 		sizer = new wxBoxSizer(wxVERTICAL);
@@ -61,13 +61,13 @@ namespace LightBulb
 
 	void SimulatorWindow::networkChanged(wxCommandEvent& event)
 	{
-		AbstractNeuralNetwork* network = (*getController()->getNeuralNetworks())[event.GetSelection()].get();
+		AbstractNeuralNetwork* network = getController().getNeuralNetworks()[event.GetSelection()].get();
 
-		refreshInput(network);
-		refreshOutput(network);
+		refreshInput(*network);
+		refreshOutput(*network);
 		recalculateNetworkOutput();
 
-		refreshAfterChange(sizer);
+		refreshAfterChange(*sizer);
 	}
 
 	void SimulatorWindow::recalculateNetworkOutput()
@@ -94,7 +94,7 @@ namespace LightBulb
 		}
 
 		IOType outputType = (IOType)outputTypeChoice->GetSelection();
-		std::vector<double> output = getController()->calculate(neuralNetworksChoice->GetSelection(), input);
+		std::vector<double> output = getController().calculate(neuralNetworksChoice->GetSelection(), input);
 
 		for (int i = 0; i < outputControls.size(); i++)
 		{
@@ -116,30 +116,30 @@ namespace LightBulb
 
 	void SimulatorWindow::inputTypeChanged(wxCommandEvent& event)
 	{
-		AbstractNeuralNetwork* network = (*getController()->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
-		refreshInput(network);
+		AbstractNeuralNetwork* network = getController().getNeuralNetworks()[neuralNetworksChoice->GetSelection()].get();
+		refreshInput(*network);
 		recalculateNetworkOutput();
 
-		refreshAfterChange(sizer);
+		refreshAfterChange(*sizer);
 	}
 
 	void SimulatorWindow::outputTypeChanged(wxCommandEvent& event)
 	{
-		AbstractNeuralNetwork* network = (*getController()->getNeuralNetworks())[neuralNetworksChoice->GetSelection()].get();
-		refreshOutput(network);
+		AbstractNeuralNetwork* network = getController().getNeuralNetworks()[neuralNetworksChoice->GetSelection()].get();
+		refreshOutput(*network);
 		recalculateNetworkOutput();
 
-		refreshAfterChange(sizer);
+		refreshAfterChange(*sizer);
 	}
 
-	void SimulatorWindow::refreshInput(AbstractNeuralNetwork* network)
+	void SimulatorWindow::refreshInput(AbstractNeuralNetwork& network)
 	{
 		IOType type = (IOType)inputTypeChoice->GetSelection();
 
 		inputSizer->Clear(true);
 		inputControls.clear();
 		inputSizer->AddStretchSpacer(1);
-		for (int i = 0; i < network->getNetworkTopology()->getInputSize(); i++)
+		for (int i = 0; i < network.getNetworkTopology().getInputSize(); i++)
 		{
 			if (type == TYPE_BOOL)
 			{
@@ -160,14 +160,14 @@ namespace LightBulb
 
 	}
 
-	void SimulatorWindow::refreshOutput(AbstractNeuralNetwork* network)
+	void SimulatorWindow::refreshOutput(AbstractNeuralNetwork& network)
 	{
 		IOType type = (IOType)outputTypeChoice->GetSelection();
 
 		outputControls.clear();
 		outputSizer->Clear(true);
 		outputSizer->AddStretchSpacer(1);
-		for (int i = 0; i < network->getNetworkTopology()->getOutputSize(); i++)
+		for (int i = 0; i < network.getNetworkTopology().getOutputSize(); i++)
 		{
 			if (type == TYPE_BOOL)
 			{
@@ -185,15 +185,15 @@ namespace LightBulb
 
 	}
 
-	SimulatorController* SimulatorWindow::getController()
+	SimulatorController& SimulatorWindow::getController()
 	{
-		return static_cast<SimulatorController*>(controller);
+		return static_cast<SimulatorController&>(*controller);
 	}
 
 	void SimulatorWindow::refreshNeuralNetworks()
 	{
 		neuralNetworksChoice->Clear();
-		for (auto network = getController()->getNeuralNetworks()->begin(); network != getController()->getNeuralNetworks()->end(); network++)
+		for (auto network = getController().getNeuralNetworks().begin(); network != getController().getNeuralNetworks().end(); network++)
 		{
 			neuralNetworksChoice->Append((*network)->getName());
 		}

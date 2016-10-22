@@ -39,21 +39,21 @@ namespace LightBulb
 	{
 		options->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(options->rmsPropOptions);
 		options->gradientDescentOptions.teacher = &teacher;
-		options->gradientDescentOptions.neuralNetwork = getOptions()->world->getNeuralNetwork();
+		options->gradientDescentOptions.neuralNetwork = &getOptions().world->getNeuralNetwork();
 		options->gradientDescentOptions.logger = nullptr;
 		gradientDescent.reset(new GradientDescentLearningRule(options->gradientDescentOptions));
 
-		steadyNetwork.reset(getOptions()->world->getNeuralNetwork()->clone());
+		steadyNetwork.reset(getOptions().world->getNeuralNetwork().clone());
 	}
 
 	void DQNLearningRule::initializeTry()
 	{
-		getOptions()->world->setLearningState(learningState.get());
-		getOptions()->world->initializeForLearning();
-		steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+		getOptions().world->setLearningState(*learningState.get());
+		getOptions().world->initializeForLearning();
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().world->getNeuralNetwork().getNetworkTopology());
 		nextTransitionIndex = 0;
-		waitUntilLearningStarts = getOptions()->replayStartSize;
-		getOptions()->world->setEpsilon(getOptions()->initialExploration);
+		waitUntilLearningStarts = getOptions().replayStartSize;
+		getOptions().world->setEpsilon(getOptions().initialExploration);
 		currentTotalReward = 0;
 	}
 	
@@ -63,26 +63,26 @@ namespace LightBulb
 		auto patternVector = networkTopology->getActivationsPerLayer(0);
 		transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
 
-		if (!getOptions()->world->isTerminalState()) {
-			getOptions()->world->getNNInput(transition.nextState);
+		if (!getOptions().world->isTerminalState()) {
+			getOptions().world->getNNInput(transition.nextState);
 		}
 
 		transition.reward = reward;
 
-		for (int i = 0; i < getOptions()->world->getLastBooleanOutput()->size(); i++)
+		for (int i = 0; i < getOptions().world->getLastBooleanOutput().size(); i++)
 		{
-			if (getOptions()->world->getLastBooleanOutput()->at(i))
+			if (getOptions().world->getLastBooleanOutput().at(i))
 			{
 				transition.action = i;
 				break;
 			}
 		}
 
-		if (transitions.size() < getOptions()->replayMemorySize)
+		if (transitions.size() < getOptions().replayMemorySize)
 		{
 			transitions.push_back(transition);
 		}
-		else if (getOptions()->replaceStoredTransitions)
+		else if (getOptions().replaceStoredTransitions)
 		{
 			transitions[nextTransitionIndex++] = transition;
 			nextTransitionIndex %= transitions.size();
@@ -94,7 +94,7 @@ namespace LightBulb
 	{
 		teacher.clearLessons();
 
-		for (int i = 0; i < std::min((int)transitions.size(), getOptions()->minibatchSize); i++)
+		for (int i = 0; i < std::min((int)transitions.size(), getOptions().minibatchSize); i++)
 		{
 			int r = randomGenerator->randInt(1, transitions.size() - 2);
 
@@ -102,14 +102,14 @@ namespace LightBulb
 
 			if (!transitions[r].nextState.empty())
 			{
-				std::vector<double> output(steadyNetwork->getNetworkTopology()->getOutputSize());
+				std::vector<double> output(steadyNetwork->getNetworkTopology().getOutputSize());
 				steadyNetwork->calculate(transitions[r].nextState, output, TopologicalOrder());
 				double q = *std::max_element(output.begin(), output.end());
 				qAvgSum += q;
-				y += getOptions()->discountFactor * q;
+				y += getOptions().discountFactor * q;
 			}
 
-			NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(steadyNetwork->getNetworkTopology()->getOutputSize());
+			NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(steadyNetwork->getNetworkTopology().getOutputSize());
 
 			input->set(0, transitions[r].action, y);
 
@@ -149,22 +149,22 @@ namespace LightBulb
 		bool skipNextTotalReward = currentTotalReward == -1;
 		qAvgSum = 0;
 
-		AbstractNetworkTopology* networkTopology = getOptions()->world->getNeuralNetwork()->getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = getOptions().world->getNeuralNetwork().getNetworkTopology();
 
-		for (int i = 0; i < getOptions()->targetNetworkUpdateFrequency; i++) {
-			double reward = getOptions()->world->doSimulationStep();
+		for (int i = 0; i < getOptions().targetNetworkUpdateFrequency; i++) {
+			double reward = getOptions().world->doSimulationStep();
 			currentTotalReward += reward;
 
 			if (nextIsStartingState)
 			{
-				std::vector<double> output(getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutputSize());
-				getOptions()->world->getNeuralNetwork()->getNetworkTopology()->getOutput(output);
+				std::vector<double> output(getOptions().world->getNeuralNetwork().getNetworkTopology().getOutputSize());
+				getOptions().world->getNeuralNetwork().getNetworkTopology().getOutput(output);
 				totalQ += *std::max_element(output.begin(), output.end());
 				totalQValues++;
 				nextIsStartingState = false;
 			}
 
-			if (getOptions()->world->isTerminalState()) {
+			if (getOptions().world->isTerminalState()) {
 				nextIsStartingState = true;
 				if (!skipNextTotalReward) {
 					totalEpisodes++;
@@ -176,7 +176,7 @@ namespace LightBulb
 				currentTotalReward = 0;
 			}
 
-			storeTransition(networkTopology, reward);
+			storeTransition(&networkTopology, reward);
 
 			if (waitUntilLearningStarts > 0)
 				waitUntilLearningStarts--;
@@ -184,39 +184,39 @@ namespace LightBulb
 			{
 				doSupervisedLearning();
 
-				double e = getOptions()->world->getEpsilon();
-				if (e > getOptions()->finalExploration)
-					getOptions()->world->setEpsilon(e - (getOptions()->initialExploration - getOptions()->finalExploration) / getOptions()->finalExplorationFrame);
+				double e = getOptions().world->getEpsilon();
+				if (e > getOptions().finalExploration)
+					getOptions().world->setEpsilon(e - (getOptions().initialExploration - getOptions().finalExploration) / getOptions().finalExplorationFrame);
 			}
 		}
 
 		if (totalQValues > 0)
 			learningState->addData(DATA_SET_Q_VALUE, totalQ / totalQValues);
 
-		learningState->addData(DATA_SET_EPSILON, getOptions()->world->getEpsilon());
-		learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions()->targetNetworkUpdateFrequency);
+		learningState->addData(DATA_SET_EPSILON, getOptions().world->getEpsilon());
+		learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions().targetNetworkUpdateFrequency);
 
 		if (totalEpisodes > 0)
 			learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);
 		else
 			currentTotalReward = -1;
 
-		learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions()->targetNetworkUpdateFrequency);
+		learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions().targetNetworkUpdateFrequency);
 
-		steadyNetwork->getNetworkTopology()->copyWeightsFrom(*getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().world->getNeuralNetwork().getNetworkTopology());
 
-		double e = getOptions()->world->getEpsilon();
-		getOptions()->world->setEpsilon(0);
-		getOptions()->world->rateKI();
-		getOptions()->world->setEpsilon(e);
+		double e = getOptions().world->getEpsilon();
+		getOptions().world->setEpsilon(0);
+		getOptions().world->rateKI();
+		getOptions().world->setEpsilon(e);
 
 		return true;
 	}
 
 
-	const DQNLearningRuleOptions* DQNLearningRule::getOptions() const
+	const DQNLearningRuleOptions& DQNLearningRule::getOptions() const
 	{
-		return static_cast<DQNLearningRuleOptions*>(options.get());
+		return static_cast<DQNLearningRuleOptions&>(*options.get());
 	}
 
 }

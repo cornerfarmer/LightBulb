@@ -27,7 +27,7 @@ namespace LightBulb
 				{
 					if (*otherEntry != *entry)
 					{
-						sharingValue += std::max(0.0, 1 - pow(entry->second->getNeuralNetwork()->getNetworkTopology()->calculateEuclideanDistance(*otherEntry->second->getNeuralNetwork()->getNetworkTopology()), exponent) / dissimilarityThreshold);
+						sharingValue += std::max(0.0, 1 - pow(entry->second->getNeuralNetwork()->getNetworkTopology().calculateEuclideanDistance(otherEntry->second->getNeuralNetwork()->getNetworkTopology()), exponent) / dissimilarityThreshold);
 					}
 				}
 

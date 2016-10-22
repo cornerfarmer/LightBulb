@@ -12,16 +12,16 @@ namespace LightBulb
 
 	}
 
-	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NeuralNetworkRepository::getNeuralNetworks() const
+	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& NeuralNetworkRepository::getNeuralNetworks() const
 	{
-		return &neuralNetworks;
+		return neuralNetworks;
 	}
 
-	int NeuralNetworkRepository::getIndexOfNeuralNetwork(const AbstractNeuralNetwork* network) const
+	int NeuralNetworkRepository::getIndexOfNeuralNetwork(const AbstractNeuralNetwork& network) const
 	{
 		for (int i = 0; i < neuralNetworks.size(); i++)
 		{
-			if (neuralNetworks[i].get() == network)
+			if (neuralNetworks[i].get() == &network)
 				return i;
 		}
 		return -1;
@@ -30,7 +30,7 @@ namespace LightBulb
 	void NeuralNetworkRepository::Add(AbstractNeuralNetwork* neuralNetwork)
 	{
 		neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>(neuralNetwork));
-		throwEvent(EVT_NN_CHANGED, this);
+		throwEvent(EVT_NN_CHANGED, *this);
 	}
 
 	void NeuralNetworkRepository::save(const std::string& path, int neuralNetworkIndex) const
@@ -49,6 +49,6 @@ namespace LightBulb
 		neuralNetworks.push_back(std::unique_ptr<AbstractNeuralNetwork>());
 		archive(neuralNetworks.back());
 
-		throwEvent(EVT_NN_CHANGED, this);
+		throwEvent(EVT_NN_CHANGED, *this);
 	}
 }

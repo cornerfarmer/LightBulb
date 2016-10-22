@@ -11,7 +11,7 @@ namespace LightBulb
 {
 	std::string SynapticExporter::execute(NeuralNetwork* neuralNetwork)
 	{
-		networkTopology = dynamic_cast<FeedForwardNetworkTopology*>(neuralNetwork->getNetworkTopology());
+		networkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&neuralNetwork->getNetworkTopology());
 
 		std::unique_ptr<JSONObject> jsonObject(getNetworkJSONObject());
 		return jsonObject->toString();
@@ -86,7 +86,7 @@ namespace LightBulb
 
 		for (int layerIndex = 1; layerIndex < networkTopology->getLayerCount(); layerIndex++)
 		{
-			weights = &(*networkTopology->getAllWeights())[layerIndex - 1];
+			weights = &networkTopology->getAllWeights()[layerIndex - 1];
 			for (int sourceNeuronIndex = 0; sourceNeuronIndex < weights->cols() - 1; sourceNeuronIndex++)
 			{
 				for (int destinationNeuronIndex = 0; destinationNeuronIndex < weights->rows(); destinationNeuronIndex++)

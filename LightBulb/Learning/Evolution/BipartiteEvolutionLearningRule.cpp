@@ -50,8 +50,8 @@ namespace LightBulb
 		exitConditionReached = false;
 		getOptions()->learningRule1->learningState = learningState;
 		getOptions()->learningRule2->learningState = learningState;
-		getOptions()->learningRule1->setLogger(options->logger);
-		getOptions()->learningRule2->setLogger(options->logger);
+		getOptions()->learningRule1->setLogger(*options->logger);
+		getOptions()->learningRule2->setLogger(*options->logger);
 		getOptions()->learningRule1->randomGenerator = randomGenerator;
 		getOptions()->learningRule2->randomGenerator = randomGenerator;
 		getOptions()->learningRule1->setHelperToUsedObjects();

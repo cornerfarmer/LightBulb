@@ -10,7 +10,7 @@ namespace LightBulb
 	void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
 	{
 		if (resetInput) {
-			neuralNetwork->getNetworkTopology()->resetActivation();
+			neuralNetwork->getNetworkTopology().resetActivation();
 			// Get the input
 			getNNInput(lastInput);
 		}
@@ -62,12 +62,12 @@ namespace LightBulb
 	void AbstractReinforcementWorld::initializeForLearning()
 	{
 		// Randomize all weights
-		neuralNetwork->getNetworkTopology()->randomizeDependingOnLayerSize(randomGenerator);		
+		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(*randomGenerator);		
 	}
 
-	NeuralNetwork* AbstractReinforcementWorld::getNeuralNetwork()
+	NeuralNetwork& AbstractReinforcementWorld::getNeuralNetwork()
 	{
-		return neuralNetwork.get();
+		return *neuralNetwork.get();
 	}
 
 	double AbstractReinforcementWorld::getEpsilon()
@@ -81,9 +81,9 @@ namespace LightBulb
 		epsilon = newEpsilon;
 	}
 
-	void AbstractReinforcementWorld::setLearningState(LearningState* learningState_)
+	void AbstractReinforcementWorld::setLearningState(LearningState& learningState_)
 	{
-		learningState = learningState_;
+		learningState = &learningState_;
 	}
 
 	void AbstractReinforcementWorld::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
@@ -101,7 +101,7 @@ namespace LightBulb
 
 	void AbstractReinforcementWorld::buildOutputBuffer()
 	{
-		lastOutput.resize(neuralNetwork->getNetworkTopology()->getOutputSize());
+		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
 		lastBooleanOutput.resize(lastOutput.size());
 	}
 
@@ -111,9 +111,9 @@ namespace LightBulb
 		return labels;
 	}
 
-	std::vector<bool>* AbstractReinforcementWorld::getLastBooleanOutput()
+	std::vector<bool>& AbstractReinforcementWorld::getLastBooleanOutput()
 	{
-		return &lastBooleanOutput;
+		return lastBooleanOutput;
 	}
 
 	void AbstractReinforcementWorld::setStochasticActionDecision(bool useStochasticActionDecision_)

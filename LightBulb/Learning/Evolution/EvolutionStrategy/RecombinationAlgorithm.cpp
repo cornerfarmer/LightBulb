@@ -15,12 +15,12 @@ namespace LightBulb
 
 	void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
 	{
-		auto weights1 = static_cast<FeedForwardNetworkTopology*>(object1->getNeuralNetwork()->getNetworkTopology())->getAllWeights();
-		auto weights2 = static_cast<FeedForwardNetworkTopology*>(object2->getNeuralNetwork()->getNetworkTopology())->getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights1 = static_cast<FeedForwardNetworkTopology&>(object1->getNeuralNetwork()->getNetworkTopology()).getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights2 = static_cast<FeedForwardNetworkTopology&>(object2->getNeuralNetwork()->getNetworkTopology()).getAllWeights();
 
-		auto layer1 = weights1->begin();
-		auto layer2 = weights2->begin();
-		for (; layer1 != weights1->end(); layer1++, layer2++)
+		auto layer1 = weights1.begin();
+		auto layer2 = weights2.begin();
+		for (; layer1 != weights1.end(); layer1++, layer2++)
 		{
 			for (int i = 0; i < layer1->rows(); i++)
 			{

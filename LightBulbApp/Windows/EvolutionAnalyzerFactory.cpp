@@ -4,15 +4,15 @@
 
 namespace LightBulb
 {
-	EvolutionAnalyzerFactory::EvolutionAnalyzerFactory(TrainingPlanRepository* trainingPlanRepository_)
+	EvolutionAnalyzerFactory::EvolutionAnalyzerFactory(TrainingPlanRepository& trainingPlanRepository_)
 	{
-		trainingPlanRepository = trainingPlanRepository_;
+		trainingPlanRepository = &trainingPlanRepository_;
 	}
 
-	AbstractSubApp* EvolutionAnalyzerFactory::createSupApp(AbstractMainApp* mainApp, AbstractWindow* parent) const
+	AbstractSubApp* EvolutionAnalyzerFactory::createSupApp(AbstractMainApp& mainApp, AbstractWindow& parent) const
 	{
-		EvolutionAnalyzerController* controller = new EvolutionAnalyzerController(mainApp, trainingPlanRepository, parent);
-		controller->getWindow()->Show();
+		EvolutionAnalyzerController* controller = new EvolutionAnalyzerController(mainApp, *trainingPlanRepository, parent);
+		controller->getWindow().Show();
 		return controller;
 	}
 

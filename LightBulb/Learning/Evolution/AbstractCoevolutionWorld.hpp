@@ -35,20 +35,20 @@ namespace LightBulb
 	protected:
 		bool parasiteWorld;
 		int comparisons;
-		virtual int doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round) = 0;
+		virtual int doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round) = 0;
 	public:
 		AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 		AbstractCoevolutionWorld() = default;
 		bool doSimulationStep() override;
-		double getScore(AbstractEvolutionObject* object) override;
-		virtual int compareObjects(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round);
-		virtual int rateKI(AbstractEvolutionObject* rateKI) { return 0; }
+		double getScore(AbstractEvolutionObject& object) override;
+		virtual int compareObjects(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round);
+		virtual int rateKI(AbstractEvolutionObject& rateKI) { return 0; }
 		virtual AbstractCombiningStrategy* getCombiningStrategy();
-		void setLogger(AbstractLogger* logger_) override;
+		void setLogger(AbstractLogger& logger_) override;
 		std::vector<std::string> getDataSetLabels() override;
 		virtual bool isParasiteWorld();
 		virtual int getRoundCount();
-		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 

@@ -8,13 +8,13 @@ namespace LightBulb
 		randomGenerator = nullptr;
 	}
 
-	void AbstractRandomGeneratorUser::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void AbstractRandomGeneratorUser::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
-		randomGenerator = randomGenerator_;
+		randomGenerator = &randomGenerator_;
 	}
 
-	AbstractRandomGenerator* AbstractRandomGeneratorUser::getRandomGenerator()
+	AbstractRandomGenerator& AbstractRandomGeneratorUser::getRandomGenerator()
 	{
-		return randomGenerator;
+		return *randomGenerator;
 	}
 }

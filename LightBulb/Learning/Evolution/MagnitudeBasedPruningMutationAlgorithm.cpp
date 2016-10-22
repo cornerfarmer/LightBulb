@@ -17,22 +17,22 @@ namespace LightBulb
 
 	void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* object1)
 	{
-		auto networkTopology = object1->getNeuralNetwork()->getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = object1->getNeuralNetwork()->getNetworkTopology();
 		for (int n = 0; n < removeNeuronsPerIteration; n++)
 		{
-			bool usesBiasNeuron = networkTopology->usesBiasNeuron();
+			bool usesBiasNeuron = networkTopology.usesBiasNeuron();
 			std::vector<std::tuple<int, int, int>> neuronRanking;
 
 
 			if (removeNeuronsByTheirTotalWeight)
 			{
-				auto weights = networkTopology->getAllWeights();
+				auto weights = networkTopology.getAllWeights();
 				int layerIndex = 0;
-				for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
+				for (auto layer = weights.begin(); layer != weights.end(); layer++, layerIndex++)
 				{
 					if (layerIndex > 0 || !ignoreInputLayer)
 					{
-						if (networkTopology->getNeuronCountsPerLayer()[layerIndex] > 1)
+						if (networkTopology.getNeuronCountsPerLayer()[layerIndex] > 1)
 						{
 							auto weightSums = layer->cwiseAbs().colwise().sum();
 							for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
@@ -45,20 +45,20 @@ namespace LightBulb
 			}
 			else
 			{
-				auto weights = networkTopology->getAllWeights();
+				auto weights = networkTopology.getAllWeights();
 				int layerIndex = 0;
-				for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
+				for (auto layer = weights.begin(); layer != weights.end(); layer++, layerIndex++)
 				{
 					if (layerIndex > 0 || !ignoreInputLayer)
 					{
-						if (networkTopology->getNeuronCountsPerLayer()[layerIndex] > 1)
+						if (networkTopology.getNeuronCountsPerLayer()[layerIndex] > 1)
 						{
 							for (int i = usesBiasNeuron; i < layer->cols(); i++)
 							{
 								int weightCount = 0;
 								for (int j = 0; j < layer->rows(); j++)
 								{
-									if (networkTopology->existsAfferentWeight(layerIndex, i, j))
+									if (networkTopology.existsAfferentWeight(layerIndex, i, j))
 										weightCount++;
 								}
 								neuronRanking.push_back(std::make_tuple(weightCount, layerIndex, i));
@@ -87,15 +87,15 @@ namespace LightBulb
 			int minimalWeightNeuronIndex = -1;
 			int minimalWeightLayerIndex = -1;
 
-			auto weights = networkTopology->getAllWeights();
+			auto weights = networkTopology.getAllWeights();
 			int layerIndex = 0;
-			for (auto layer = weights->begin(); layer != weights->end(); layer++, layerIndex++)
+			for (auto layer = weights.begin(); layer != weights.end(); layer++, layerIndex++)
 			{
 				for (int i = 0; i < layer->rows(); i++)
 				{
 					for (int j = 0; j < layer->cols(); j++)
 					{
-						if (networkTopology->existsAfferentWeight(layerIndex, j, i) && (abs((*layer)(i, j)) < minimalWeight || minimalWeight == -1))
+						if (networkTopology.existsAfferentWeight(layerIndex, j, i) && (abs((*layer)(i, j)) < minimalWeight || minimalWeight == -1))
 						{
 							minimalWeight = abs((*layer)(i, j));
 							minimalWeightLayerIndex = layerIndex;
@@ -107,13 +107,13 @@ namespace LightBulb
 			}
 
 			if (minimalWeightLayerIndex != -1)
-				networkTopology->removeAfferentWeight(minimalWeightLayerIndex, minimalWeightNeuronIndex, minimalWeightIndex);
+				networkTopology.removeAfferentWeight(minimalWeightLayerIndex, minimalWeightNeuronIndex, minimalWeightIndex);
 		}
 
 
 	}
 
-	void MagnitudeBasedPruningMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void MagnitudeBasedPruningMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		randomFunction.setRandomGenerator(randomGenerator_);

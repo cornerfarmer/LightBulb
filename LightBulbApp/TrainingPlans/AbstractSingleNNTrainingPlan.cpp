@@ -5,10 +5,10 @@
 
 namespace LightBulb
 {
-	void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions* options) const
+	void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions& options) const
 	{
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
-		options->neuralNetwork = network;
+		options.neuralNetwork = network;
 	}
 
 	AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
@@ -26,13 +26,13 @@ namespace LightBulb
 		network->setState(NN_STATE_TRAINED);
 	}
 
-	AbstractNeuralNetwork* AbstractSingleNNTrainingPlan::getNeuralNetwork()
+	AbstractNeuralNetwork& AbstractSingleNNTrainingPlan::getNeuralNetwork()
 	{
-		return network;
+		return *network;
 	}
 
-	void AbstractSingleNNTrainingPlan::setNeuralNetwork(AbstractNeuralNetwork* network_)
+	void AbstractSingleNNTrainingPlan::setNeuralNetwork(AbstractNeuralNetwork& network_)
 	{
-		network = network_;
+		network = &network_;
 	}
 }

@@ -15,22 +15,22 @@ namespace LightBulb
 		flatSpotEliminationFac = flatSpotEliminationFac_;
 	}
 
-	void Backpropagation::calcGradient(const AbstractNetworkTopology* networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const ErrorMap_t* errormap)
+	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const ErrorMap_t& errormap)
 	{
-		for (int layerIndex = networkTopology->getLayerCount() - 1; layerIndex > 0; layerIndex--)
+		for (int layerIndex = networkTopology.getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
 			// If its the last layer
-			if (layerIndex == networkTopology->getLayerCount() - 1)
+			if (layerIndex == networkTopology.getLayerCount() - 1)
 			{
 				// Compute the delta value: activationFunction'(netInput) * errorValue
-				lastDeltaVectorOutputLayer = (networkTopology->getOutputNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * errormap->back().array();
+				lastDeltaVectorOutputLayer = (networkTopology.getOutputNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * errormap.back().array();
 			}
 			else
 			{
-				Eigen::VectorXd nextLayerErrorValueFactor = networkTopology->getEfferentWeightsPerLayer(layerIndex) * lastDeltaVectorOutputLayer;
+				Eigen::VectorXd nextLayerErrorValueFactor = networkTopology.getEfferentWeightsPerLayer(layerIndex) * lastDeltaVectorOutputLayer;
 
 				// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-				lastDeltaVectorOutputLayer = (networkTopology->getInnerNeuronDescription()->getActivationFunction()->executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology->usesBiasNeuron()).array();
+				lastDeltaVectorOutputLayer = (networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology.usesBiasNeuron()).array();
 			}
 
 			gradientToUse->at(layerIndex - 1).noalias() = gradientToUse->at(layerIndex - 1) + -1 * (lastDeltaVectorOutputLayer * activations[layerIndex - 1].transpose()).matrix();

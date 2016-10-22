@@ -11,7 +11,7 @@ using namespace LightBulb;
 
 AbstractEvolutionObject* Pong::createNewObject()
 {
-	return new PongAI(*options, this);
+	return new PongAI(*options, *this);
 }
 
 Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
@@ -21,12 +21,12 @@ Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, A
 	watchMode = false;
 }
 
-int Pong::doCompare(AbstractEvolutionObject* obj1, AbstractEvolutionObject* obj2, int round)
+int Pong::doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
 {
 	if (round == 0)
-		return simulateGame(static_cast<PongAI*>(obj1), static_cast<PongAI*>(obj2));
+		return simulateGame(static_cast<PongAI&>(obj1), static_cast<PongAI&>(obj2));
 	else
-		return -simulateGame(static_cast<PongAI*>(obj2), static_cast<PongAI*>(obj1));
+		return -simulateGame(static_cast<PongAI&>(obj2), static_cast<PongAI&>(obj1));
 }
 
 
@@ -47,13 +47,13 @@ void Pong::initializeForLearning()
 {
 }
 
-int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
+int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
 {
-	ai2->resetNN();
-	ai1->resetNN();
+	ai2.resetNN();
+	ai1.resetNN();
 
-	ai1->setPong(this);
-	ai2->setPong(this);
+	ai1.setPong(*this);
+	ai2.setPong(*this);
 
 	startNewGame();
 
@@ -61,14 +61,14 @@ int Pong::simulateGame(PongAI* ai1, PongAI* ai2)
 	while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
 	{
 		game.setPlayer(1);
-		ai1->doNNCalculation();
+		ai1.doNNCalculation();
 		game.setPlayer(-1);
-		ai2->doNNCalculation();
+		ai2.doNNCalculation();
 		game.advanceBall(1);
 
 		if (watchMode)
 		{
-			throwEvent(EVT_FIELD_CHANGED, this);
+			throwEvent(EVT_FIELD_CHANGED, *this);
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
 		}
 		time++;
@@ -93,13 +93,13 @@ void Pong::executeCompareAI()
 }
 
 
-int Pong::rateKI(AbstractEvolutionObject* rateKI)
+int Pong::rateKI(AbstractEvolutionObject& rateKI)
 {
 	int wins = 0;
 	int matchCount = 100;
 	for (int i = 0; i < matchCount; i++)
 	{
-		rateKI->resetNN();
+		rateKI.resetNN();
 
 		startNewGame();
 
@@ -107,7 +107,7 @@ int Pong::rateKI(AbstractEvolutionObject* rateKI)
 		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
 		{
 			game.setPlayer(1);
-			rateKI->doNNCalculation();
+			rateKI.doNNCalculation();
 			game.setPlayer(-1);
 			executeCompareAI();
 			game.advanceBall(1);
@@ -161,7 +161,7 @@ void Pong::getNNInput(std::vector<double>& input)
 }
 
 
-void Pong::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+void Pong::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 {
 	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 	game.setRandomGenerator(randomGenerator_);

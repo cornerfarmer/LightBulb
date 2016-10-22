@@ -40,7 +40,7 @@ namespace LightBulb
 		PreferencesController& getController();
 		void refreshWindow(wxCollapsiblePaneEvent& event);
 	public:
-		PreferencesWindow(PreferencesController& controller_, AbstractWindow* parent = nullptr);
+		PreferencesWindow(PreferencesController& controller_, AbstractWindow& parent);
 	};
 }
 

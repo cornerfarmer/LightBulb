@@ -50,9 +50,9 @@ namespace LightBulb
 	}
 
 
-	void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		randomFunction->setRandomGenerator(AbstractMutationSelector::randomGenerator);
+		randomFunction->setRandomGenerator(*AbstractMutationSelector::randomGenerator);
 	}
 }

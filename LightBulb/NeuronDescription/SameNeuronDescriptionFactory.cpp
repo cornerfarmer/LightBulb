@@ -35,12 +35,12 @@ namespace LightBulb
 		return new SameNeuronDescriptionFactory(*this);
 	}
 
-	const AbstractActivationFunction* SameNeuronDescriptionFactory::getOutputActivationFunction() const
+	const AbstractActivationFunction& SameNeuronDescriptionFactory::getOutputActivationFunction() const
 	{
 		return neuronDescription->getActivationFunction();
 	}
 
-	const AbstractActivationFunction* SameNeuronDescriptionFactory::getInnerActivationFunction() const
+	const AbstractActivationFunction& SameNeuronDescriptionFactory::getInnerActivationFunction() const
 	{
 		return neuronDescription->getActivationFunction();
 	}

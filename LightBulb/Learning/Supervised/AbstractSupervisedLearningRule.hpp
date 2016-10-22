@@ -124,7 +124,7 @@ namespace LightBulb
 		 * \brief Returns our current options in form of a AbstractSupervisedLearningRuleOptions object.
 		 * \return The AbstractSupervisedLearningRuleOptions
 		 */
-		const AbstractSupervisedLearningRuleOptions* getOptions() const;
+		const AbstractSupervisedLearningRuleOptions& getOptions() const;
 		/**
 		 * \brief This method can be used to reset any variable which holds the current gradient sum.
 		 */
@@ -135,7 +135,7 @@ namespace LightBulb
 		 * \param lessonIndex The current teaching lesson index.
 		 * \param errormap The errormap which represents how well the neural network has done on the current teaching lesson.
 		 */
-		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t* errormap) = 0;
+		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t& errormap) = 0;
 		/**
 		 * \brief This method should adjust the weight for the current layer.
 		 * \param layerIndex The index of the layer to change.
@@ -192,7 +192,7 @@ namespace LightBulb
 		 * \brief Returns the current network topology
 		 * \return The current network topology
 		 */
-		AbstractNetworkTopology* getCurrentNetworkTopology();
+		AbstractNetworkTopology& getCurrentNetworkTopology();
 		// Inherited:
 		bool doIteration() override;
 		void initializeStartLearningAlgoritm() override;

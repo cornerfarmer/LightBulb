@@ -9,7 +9,7 @@ using namespace LightBulb;
 
 AbstractEvolutionObject* FunctionSimulator::createNewObject()
 {
-	return new Position(this);
+	return new Position(*this);
 }
 
 FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Function function_)
@@ -56,9 +56,9 @@ bool FunctionSimulator::doSimulationStep()
 	return false;
 }
 
-double FunctionSimulator::getScore(AbstractEvolutionObject* object)
+double FunctionSimulator::getScore(AbstractEvolutionObject& object)
 {
-	std::vector<float> pos = static_cast<Position*>(object)->getPosition();
+	std::vector<float> pos = static_cast<Position&>(object).getPosition();
 	return function(pos);
 }
 

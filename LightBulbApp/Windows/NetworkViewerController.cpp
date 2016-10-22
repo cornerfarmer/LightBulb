@@ -6,28 +6,28 @@
 
 namespace LightBulb
 {
-	NetworkViewerController::NetworkViewerController(AbstractMainApp* mainApp, NeuralNetworkRepository* neuralNetworkRepository_, AbstractWindow* parent)
+	NetworkViewerController::NetworkViewerController(AbstractMainApp& mainApp, NeuralNetworkRepository& neuralNetworkRepository_, AbstractWindow& parent)
 		:AbstractSubApp(mainApp)
 	{
-		neuralNetworkRepository = neuralNetworkRepository_;
-		neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &NetworkViewerController::neuralNetworksChanged, this);
-		window.reset(new NetworkViewerWindow(this, parent));
-		neuralNetworksChanged(neuralNetworkRepository);
+		neuralNetworkRepository = &neuralNetworkRepository_;
+		neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &NetworkViewerController::neuralNetworksChanged, *this);
+		window.reset(new NetworkViewerWindow(*this, parent));
+		neuralNetworksChanged(*neuralNetworkRepository);
 	}
 
 
-	NetworkViewerWindow* NetworkViewerController::getWindow()
+	NetworkViewerWindow& NetworkViewerController::getWindow()
 	{
-		return window.get();
+		return *window.get();
 	}
 
-	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>* NetworkViewerController::getNeuralNetworks() const
+	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& NetworkViewerController::getNeuralNetworks() const
 	{
 		return neuralNetworkRepository->getNeuralNetworks();
 	}
 
 
-	void NetworkViewerController::neuralNetworksChanged(NeuralNetworkRepository* neuralNetworkRepository)
+	void NetworkViewerController::neuralNetworksChanged(NeuralNetworkRepository& neuralNetworkRepository)
 	{
 		window->refreshNeuralNetworks();
 	}

@@ -32,8 +32,8 @@ namespace LightBulb
 		double mpc = 0;
 		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
-			mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getEdgeCount();
-			mpc += entry->second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+			mpc += entry->second->getNeuralNetwork()->getNetworkTopology().getEdgeCount();
+			mpc += entry->second->getNeuralNetwork()->getNetworkTopology().getNeuronCount();
 		}
 		return mpc / highscore->size();
 	}
@@ -75,7 +75,7 @@ namespace LightBulb
 		}
 	}
 
-	void PhasedTopologyMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void PhasedTopologyMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		networkGrowMutationAlgorithm->setRandomGenerator(randomGenerator_);

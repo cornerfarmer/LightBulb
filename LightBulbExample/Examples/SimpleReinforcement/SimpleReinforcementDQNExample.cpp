@@ -36,7 +36,7 @@ AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
 	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
 	//options.dataSaveInterval = 100;
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new DQNLearningRule(options);
 }
@@ -95,7 +95,7 @@ std::string SimpleReinforcementDQNExample::getLearningRuleName() const
 }
 
 
-SimpleReinforcementWorld* SimpleReinforcementDQNExample::getWorld()
+SimpleReinforcementWorld& SimpleReinforcementDQNExample::getWorld()
 {
-	return world;
+	return *world;
 }

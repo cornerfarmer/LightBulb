@@ -5,25 +5,25 @@
 
 namespace LightBulb
 {
-	LoggerController::LoggerController(AbstractMainApp* mainApp, TrainingPlanRepository* trainingPlanRepository_, AbstractWindow* parent)
+	LoggerController::LoggerController(AbstractMainApp& mainApp, TrainingPlanRepository& trainingPlanRepository_, AbstractWindow& parent)
 		:AbstractSubApp(mainApp)
 	{
 		autoScrolling = true;
 		lastLogMessageIndex = -1;
 		selectedTrainingPlan = nullptr;
-		trainingPlanRepository = trainingPlanRepository_;
-		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, this);
+		trainingPlanRepository = &trainingPlanRepository_;
+		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, *this);
 
-		window.reset(new LoggerWindow(this, parent));
+		window.reset(new LoggerWindow(*this, parent));
 
-		trainingPlansChanged(trainingPlanRepository);
+		trainingPlansChanged(*trainingPlanRepository);
 	}
 
 	void LoggerController::prepareClose()
 	{
-		trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, this);
+		trainingPlanRepository->removeObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, *this);
 		if (selectedTrainingPlan)
-			selectedTrainingPlan->getLogger()->removeObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, this);
+			selectedTrainingPlan->getLogger().removeObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, *this);
 	}
 
 	void LoggerController::show()
@@ -31,28 +31,28 @@ namespace LightBulb
 		window->Show();
 	}
 
-	void LoggerController::trainingPlansChanged(TrainingPlanRepository* trainingPlanRepository)
+	void LoggerController::trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository)
 	{
 		window->refreshTrainingPlans();
 	}
 
-	const std::vector<std::unique_ptr<AbstractTrainingPlan>>* LoggerController::getTrainingPlans() const
+	const std::vector<std::unique_ptr<AbstractTrainingPlan>>& LoggerController::getTrainingPlans() const
 	{
 		return trainingPlanRepository->getTrainingPlans();
 	}
 
-	LoggerWindow* LoggerController::getWindow()
+	LoggerWindow& LoggerController::getWindow()
 	{
-		return window.get();
+		return *window.get();
 	}
 
 	void LoggerController::setLogLevel(int level)
 	{
-		selectedTrainingPlan->getLogger()->setLogLevel((LogLevel)level);
+		selectedTrainingPlan->getLogger().setLogLevel((LogLevel)level);
 		reloadLog();
 	}
 
-	void LoggerController::logChanged(AbstractLogger* logger)
+	void LoggerController::logChanged(AbstractLogger& logger)
 	{
 		if (!logMessagesAdding)
 		{
@@ -70,9 +70,9 @@ namespace LightBulb
 	void LoggerController::selectTrainingPlan(int trainingPlanIndex)
 	{
 		if (selectedTrainingPlan)
-			selectedTrainingPlan->getLogger()->removeObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, this);
-		selectedTrainingPlan = (*trainingPlanRepository->getTrainingPlans())[trainingPlanIndex].get();
-		selectedTrainingPlan->getLogger()->registerObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, this);
+			selectedTrainingPlan->getLogger().removeObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, *this);
+		selectedTrainingPlan = trainingPlanRepository->getTrainingPlans()[trainingPlanIndex].get();
+		selectedTrainingPlan->getLogger().registerObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, *this);
 		reloadLog();
 	}
 
@@ -81,14 +81,14 @@ namespace LightBulb
 		logMessagesAdding = false;
 	}
 
-	const std::vector<std::pair<LogLevel, std::string>>* LoggerController::getMessages() const
+	const std::vector<std::pair<LogLevel, std::string>>& LoggerController::getMessages() const
 	{
-		return selectedTrainingPlan->getLogger()->getMessages();
+		return selectedTrainingPlan->getLogger().getMessages();
 	}
 
 	const LogLevel& LoggerController::getLogLevel() const
 	{
-		return selectedTrainingPlan->getLogger()->getLogLevel();
+		return selectedTrainingPlan->getLogger().getLogLevel();
 	}
 
 	void LoggerController::setAutoScrolling(bool newAutoScrolling)

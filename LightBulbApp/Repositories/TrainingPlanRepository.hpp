@@ -64,7 +64,7 @@ namespace LightBulb
 		 * \brief Returns the training plan with the given name.
 		 * \param name The name to search for.
 		 * \return The training plan with the given name.
-		 * \note If no training plan can be found, NULL is returned.
+		 * \note If no training plan can be found, an exception is thrown.
 		 */
 		AbstractTrainingPlan& getByName(const std::string& name) const;
 		/**
@@ -73,6 +73,12 @@ namespace LightBulb
 		 * \param newName The new name.
 		 */
 		void setTrainingPlanName(int trainingPlanIndex, const std::string& newName);
+		/**
+		 * \brief Returns if a training plan with the given name exists.
+		 * \param name The name to search for.
+		 * \return True, if a training plan with this name exists.
+		 */
+		bool exists(const std::string& name) const;
 	};
 }
 

@@ -77,7 +77,7 @@ namespace LightBulb
 		void initializeTry() override;
 		static std::string getName();
 		std::vector<std::string> getDataSetLabels() const override;
-		void setLogger(AbstractLogger* logger) override;
+		void setLogger(AbstractLogger& logger) override;
 	};
 }
 

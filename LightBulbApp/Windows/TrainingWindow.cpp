@@ -42,10 +42,10 @@ namespace LightBulb
 	wxDEFINE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
 	wxDEFINE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
 
-	TrainingWindow::TrainingWindow(TrainingController* controller_)
+	TrainingWindow::TrainingWindow(TrainingController& controller_)
 		:AbstractWindow(controller_, "LightBulb")
 	{
-		controller = controller_;
+		controller = &controller_;
 		processTrainingPlanSelection = nullptr;
 		currentDetailObject = nullptr;
 		customMenuVisible = false;
@@ -63,13 +63,13 @@ namespace LightBulb
 		wxSplitterWindow* mainSplitterWindow = new wxSplitterWindow(this, -1, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
 		wxSplitterWindow* centerSplitterWindow = new wxSplitterWindow(mainSplitterWindow, -1, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
 		wxSplitterWindow* rightSplitterWindow = new wxSplitterWindow(centerSplitterWindow, -1, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
-		rightSplitterWindow->SplitVertically(createTrainingColumn(rightSplitterWindow), createRunningTrainingColumn(rightSplitterWindow));
+		rightSplitterWindow->SplitVertically(createTrainingColumn(*rightSplitterWindow), createRunningTrainingColumn(*rightSplitterWindow));
 		rightSplitterWindow->SetSashGravity(0.5);
 
-		centerSplitterWindow->SplitVertically(createNNColumn(centerSplitterWindow), rightSplitterWindow);
+		centerSplitterWindow->SplitVertically(createNNColumn(*centerSplitterWindow), rightSplitterWindow);
 		centerSplitterWindow->SetSashGravity(0.3333);
 
-		mainSplitterWindow->SplitHorizontally(centerSplitterWindow, createDetailsPanel(mainSplitterWindow));
+		mainSplitterWindow->SplitHorizontally(centerSplitterWindow, createDetailsPanel(*mainSplitterWindow));
 		mainSplitterWindow->SetSashGravity(0.5);
 
 		sizer->Add(mainSplitterWindow, 1, wxEXPAND);
@@ -92,7 +92,7 @@ namespace LightBulb
 			if (openFileDialog.ShowModal() == wxID_CANCEL)
 				return;
 
-			getController()->loadNeuralNetwork(openFileDialog.GetPath().ToStdString());
+			getController().loadNeuralNetwork(openFileDialog.GetPath().ToStdString());
 		}
 		else if (event.GetId() == FILE_LOAD_TP)
 		{
@@ -101,7 +101,7 @@ namespace LightBulb
 			if (openFileDialog.ShowModal() == wxID_CANCEL)
 				return;
 
-			getController()->loadTrainingPlan(openFileDialog.GetPath().ToStdString());
+			getController().loadTrainingPlan(openFileDialog.GetPath().ToStdString());
 		}
 		else if (event.GetId() == FILE_LOAD_TS)
 		{
@@ -110,22 +110,22 @@ namespace LightBulb
 			if (openFileDialog.ShowModal() == wxID_CANCEL)
 				return;
 
-			getController()->loadTrainingSession(openFileDialog.GetPath().ToStdString());
+			getController().loadTrainingSession(openFileDialog.GetPath().ToStdString());
 		}
 		else if (event.GetId() == FILE_SAVE_TS)
 		{
 			Enable(false);
 			Refresh();
-			getController()->saveTrainingSession();
+			getController().saveTrainingSession();
 		}
 	}
 
 	void TrainingWindow::trainingPlanMenuSelected(wxCommandEvent& event)
 	{
-		AbstractTrainingPlan* trainingPlan = (*getController()->getTrainingPlans())[trainingPlanList->GetSelectedRow()].get();
+		AbstractTrainingPlan* trainingPlan = getController().getTrainingPlans()[trainingPlanList->GetSelectedRow()].get();
 		int factoryIndex = event.GetExtraLong();
-		AbstractCustomSubAppFactory* selectedFactory = (*trainingPlan->getCustomSubApps())[factoryIndex].get();
-		selectedFactory->createCustomSupApp(getController(), trainingPlan, this);
+		AbstractCustomSubAppFactory* selectedFactory = trainingPlan->getCustomSubApps()[factoryIndex].get();
+		selectedFactory->createCustomSupApp(getController(), *trainingPlan, *this);
 	}
 
 	void TrainingWindow::neuralNetworkPopUpMenuSelected(wxCommandEvent& event)
@@ -137,7 +137,7 @@ namespace LightBulb
 			if (saveFileDialog.ShowModal() == wxID_CANCEL)
 				return;
 
-			getController()->saveNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow());
+			getController().saveNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow());
 		}
 	}
 
@@ -158,7 +158,7 @@ namespace LightBulb
 		{
 			Enable(false);
 			Refresh();
-			getController()->saveTrainingPlan(trainingPlanList->GetSelectedRow());
+			getController().saveTrainingPlan(trainingPlanList->GetSelectedRow());
 		}
 	}
 
@@ -178,14 +178,14 @@ namespace LightBulb
 	{
 		int row = trainingPlanList->ItemToRow(event.GetItem());
 		std::string newName = event.GetValue();
-		getController()->setTrainingPlanName(row, newName);
+		getController().setTrainingPlanName(row, newName);
 		wxCommandEvent evt;
 		refreshTrainingPlans(evt);
 	}
 
-	wxPanel* TrainingWindow::createNNColumn(wxWindow* parent)
+	wxPanel* TrainingWindow::createNNColumn(wxWindow& parent)
 	{
-		wxPanel* panel = new wxPanel(parent, wxID_ANY);
+		wxPanel* panel = new wxPanel(&parent, wxID_ANY);
 
 		wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 		sizer->Add(new wxStaticText(panel, -1, "Neural networks"), 0, wxEXPAND | wxALL, 5);
@@ -209,25 +209,25 @@ namespace LightBulb
 	{
 		neuralNetworkList->DeleteAllItems();
 		neuralNetworksChoice->Clear();
-		for (auto network = getController()->getNeuralNetworks()->begin(); network != getController()->getNeuralNetworks()->end(); network++)
+		for (auto network = getController().getNeuralNetworks().begin(); network != getController().getNeuralNetworks().end(); network++)
 		{
 			wxVector<wxVariant> data;
 			data.push_back(wxVariant((*network)->getName()));
-			data.push_back(wxVariant(getNeuralNetworkSizeAsString((*network)->getNetworkTopology()->getNeuronCountsPerLayer())));
+			data.push_back(wxVariant(getNeuralNetworkSizeAsString((*network)->getNetworkTopology().getNeuronCountsPerLayer())));
 			std::time_t creationDate = (*network)->getCreationDate();
 			data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
 			neuralNetworkList->AppendItem(data);
 			neuralNetworksChoice->Append((*network)->getName());
 			if (currentDetailObject == network->get())
-				showDetailsOfNeuralNetwork(network->get());
+				showDetailsOfNeuralNetwork(*network->get());
 		}
 		neuralNetworksChoice->Append("<Create new>");
-		neuralNetworksChoice->SetSelection(getController()->getNeuralNetworks()->size());
+		neuralNetworksChoice->SetSelection(getController().getNeuralNetworks().size());
 	}
 
-	wxPanel* TrainingWindow::createTrainingColumn(wxWindow* parent)
+	wxPanel* TrainingWindow::createTrainingColumn(wxWindow& parent)
 	{
-		wxPanel* panel = new wxPanel(parent, wxID_ANY);
+		wxPanel* panel = new wxPanel(&parent, wxID_ANY);
 
 		wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 		sizer->Add(new wxStaticText(panel, -1, "Trainings"), 0, wxEXPAND | wxALL, 5);
@@ -249,7 +249,7 @@ namespace LightBulb
 	{
 		trainingPlanPatternList->DeleteAllItems();
 		trainingPlanPatternsChoice->Clear();
-		for (auto trainingPlan = getController()->getTrainingPlanPatterns()->begin(); trainingPlan != getController()->getTrainingPlanPatterns()->end(); trainingPlan++)
+		for (auto trainingPlan = getController().getTrainingPlanPatterns().begin(); trainingPlan != getController().getTrainingPlanPatterns().end(); trainingPlan++)
 		{
 			wxVector<wxVariant> data;
 			data.push_back(wxVariant((*trainingPlan)->getName()));
@@ -258,13 +258,13 @@ namespace LightBulb
 			trainingPlanPatternList->AppendItem(data);
 			trainingPlanPatternsChoice->Append((*trainingPlan)->getName());
 			if (currentDetailObject == trainingPlan->get())
-				showDetailsOfTrainingPlanPattern(trainingPlan->get());
+				showDetailsOfTrainingPlanPattern(*trainingPlan->get());
 		}
 	}
 
-	wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow* parent)
+	wxPanel* TrainingWindow::createRunningTrainingColumn(wxWindow& parent)
 	{
-		wxPanel* panel = new wxPanel(parent, wxID_ANY);
+		wxPanel* panel = new wxPanel(&parent, wxID_ANY);
 
 		wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 		sizer->Add(new wxStaticText(panel, -1, "Running trainings"), 0, wxEXPAND | wxALL, 5);
@@ -287,7 +287,7 @@ namespace LightBulb
 	void TrainingWindow::refreshTrainingPlans(wxCommandEvent& event)
 	{
 		trainingPlanList->DeleteAllItems();
-		for (auto trainingPlan = getController()->getTrainingPlans()->begin(); trainingPlan != getController()->getTrainingPlans()->end(); trainingPlan++)
+		for (auto trainingPlan = getController().getTrainingPlans().begin(); trainingPlan != getController().getTrainingPlans().end(); trainingPlan++)
 		{
 			wxVector<wxVariant> data;
 			data.push_back(wxVariant((*trainingPlan)->getName()));
@@ -296,9 +296,9 @@ namespace LightBulb
 			data.push_back(wxVariant(getStringFromDuration(duration)));
 			trainingPlanList->AppendItem(data);
 			if (currentDetailObject == trainingPlan->get())
-				showDetailsOfTrainingPlan(trainingPlan->get());
+				showDetailsOfTrainingPlan(*trainingPlan->get());
 			if (processTrainingPlanSelection == trainingPlan->get())
-				showProcessOfTrainingPlan(trainingPlan->get());
+				showProcessOfTrainingPlan(*trainingPlan->get());
 		}
 
 	}
@@ -313,12 +313,12 @@ namespace LightBulb
 	void TrainingWindow::saveTrainingPlan(wxThreadEvent& event)
 	{
 		int trainingPlanIndex = event.GetPayload<int>();
-		wxFileDialog saveFileDialog(this, "Save training plan", "", getController()->getTrainingPlans()->at(trainingPlanIndex)->getName(), "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		wxFileDialog saveFileDialog(this, "Save training plan", "", getController().getTrainingPlans().at(trainingPlanIndex)->getName(), "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
 		if (saveFileDialog.ShowModal() == wxID_CANCEL)
 			return;
 
-		getController()->saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
+		getController().saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
 
 		Enable(true);
 		Refresh();
@@ -331,23 +331,23 @@ namespace LightBulb
 		if (saveFileDialog.ShowModal() == wxID_CANCEL)
 			return;
 
-		getController()->saveTrainingSession(saveFileDialog.GetPath().ToStdString());
+		getController().saveTrainingSession(saveFileDialog.GetPath().ToStdString());
 
 		Enable(true);
 		Refresh();
 	}
 
 
-	void TrainingWindow::addSubAppFactory(AbstractSubAppFactory* newSubAppFactory, int factoryIndex)
+	void TrainingWindow::addSubAppFactory(AbstractSubAppFactory& newSubAppFactory, int factoryIndex)
 	{
-		wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubAppFactory->getLabel());
+		wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubAppFactory.getLabel());
 		windowsMenu->Append(newItem);
 
 	}
 
-	wxPanel* TrainingWindow::createDetailsPanel(wxWindow* parent)
+	wxPanel* TrainingWindow::createDetailsPanel(wxWindow& parent)
 	{
-		wxPanel* panel = new wxPanel(parent, wxID_ANY);
+		wxPanel* panel = new wxPanel(&parent, wxID_ANY);
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 		wxSizer* commandSizer = new wxBoxSizer(wxVERTICAL);
@@ -402,22 +402,22 @@ namespace LightBulb
 	{
 		int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
 		int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-		AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>((*getController()->getTrainingPlanPatterns())[trainingPlanPatternIndex].get());
+		AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>(getController().getTrainingPlanPatterns()[trainingPlanPatternIndex].get());
 
-		if (trainingPlan && neuralNetworkIndex < getController()->getNeuralNetworks()->size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
+		if (trainingPlan && neuralNetworkIndex < getController().getNeuralNetworks().size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
 		{
 			int requiredInputSize = trainingPlan->getRequiredInputSize();
 			int requiredOutputSize = trainingPlan->getRequiredOutputSize();
 
-			if ((*getController()->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().front() != requiredInputSize ||
-				(*getController()->getNeuralNetworks())[neuralNetworkIndex]->getNetworkTopology()->getNeuronCountsPerLayer().back() != requiredOutputSize)
+			if (getController().getNeuralNetworks()[neuralNetworkIndex]->getNetworkTopology().getNeuronCountsPerLayer().front() != requiredInputSize ||
+				getController().getNeuralNetworks()[neuralNetworkIndex]->getNetworkTopology().getNeuronCountsPerLayer().back() != requiredOutputSize)
 			{
 				processErrorText->SetLabel("The network must have " + std::to_string(requiredInputSize) + " input neurons and " + std::to_string(requiredOutputSize) + " output neurons!");
 				toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
 			}
 			else
 			{
-				if ((*getController()->getNeuralNetworks())[neuralNetworkIndex]->getState() == NN_STATE_TRAINED)
+				if (getController().getNeuralNetworks()[neuralNetworkIndex]->getState() == NN_STATE_TRAINED)
 				{
 					processErrorText->SetLabel("The network gets already trained!");
 					toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
@@ -456,11 +456,11 @@ namespace LightBulb
 
 	void TrainingWindow::selectNeuralNetwork(wxDataViewEvent& event)
 	{
-		int row = getRowIndexOfItem(neuralNetworkList, event.GetItem());
+		int row = getRowIndexOfItem(*neuralNetworkList, event.GetItem());
 		if (row != -1)
 		{
 			removeCustomSubAppsMenu();
-			showDetailsOfNeuralNetwork((*getController()->getNeuralNetworks())[row].get());
+			showDetailsOfNeuralNetwork(*getController().getNeuralNetworks()[row].get());
 			restoreDefaultProcessView();
 			neuralNetworksChoice->Select(row);
 			validateSelectedProcess();
@@ -474,10 +474,10 @@ namespace LightBulb
 
 	void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 	{
-		int row = getRowIndexOfItem(trainingPlanPatternList, event.GetItem());
+		int row = getRowIndexOfItem(*trainingPlanPatternList, event.GetItem());
 		if (row != -1) {
 			removeCustomSubAppsMenu();
-			showDetailsOfTrainingPlanPattern((*getController()->getTrainingPlanPatterns())[row].get());
+			showDetailsOfTrainingPlanPattern(*getController().getTrainingPlanPatterns()[row].get());
 			restoreDefaultProcessView();
 			trainingPlanPatternsChoice->Select(row);
 			validateSelectedProcess();
@@ -489,18 +489,18 @@ namespace LightBulb
 		}
 	}
 
-	void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
+	void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan& trainingPlan)
 	{
-		processTrainingPlanSelection = trainingPlan;
-		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
+		processTrainingPlanSelection = &trainingPlan;
+		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(&trainingPlan))
 		{
-			neuralNetworksChoice->Select(getController()->getIndexOfNeuralNetwork(static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()));
+			neuralNetworksChoice->Select(getController().getIndexOfNeuralNetwork(static_cast<AbstractSingleNNTrainingPlan&>(trainingPlan).getNeuralNetwork()));
 		}
-		trainingPlanPatternsChoice->Select(getController()->getIndexOfTrainingPlanPattern(trainingPlan->getTrainingPlanPattern()));
+		trainingPlanPatternsChoice->Select(getController().getIndexOfTrainingPlanPattern(trainingPlan.getTrainingPlanPattern()));
 		neuralNetworksChoice->Enable(false);
 		trainingPlanPatternsChoice->Enable(false);
-		toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan->isPaused());
-		toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan->isRunning());
+		toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan.isPaused());
+		toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan.isRunning());
 		toolbar->EnableTool(TOOLBAR_PREFERENCES, false);
 		processErrorText->SetLabel("");
 	}
@@ -528,7 +528,7 @@ namespace LightBulb
 	void TrainingWindow::refreshTrainingPlanRunTimes(wxTimerEvent& event)
 	{
 		int trainingPlanIndex = 0;
-		for (auto trainingPlan = getController()->getTrainingPlans()->begin(); trainingPlan != getController()->getTrainingPlans()->end(); trainingPlan++, trainingPlanIndex++)
+		for (auto trainingPlan = getController().getTrainingPlans().begin(); trainingPlan != getController().getTrainingPlans().end(); trainingPlan++, trainingPlanIndex++)
 		{
 			if (trainingPlanIndex < trainingPlanList->GetItemCount()) {
 				auto duration = (*trainingPlan)->getRunTime();
@@ -559,9 +559,9 @@ namespace LightBulb
 		return output;
 	}
 
-	TrainingController* TrainingWindow::getController()
+	TrainingController& TrainingWindow::getController()
 	{
-		return static_cast<TrainingController*>(controller);
+		return static_cast<TrainingController&>(*controller);
 	}
 
 	void TrainingWindow::close(wxCloseEvent& event)
@@ -569,31 +569,31 @@ namespace LightBulb
 		event.Skip();
 	}
 
-	void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan* trainingPlan)
+	void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan& trainingPlan)
 	{
 		removeCustomSubAppsMenu();
-		auto customSubApps = trainingPlan->getCustomSubApps();
-		if (customSubApps->size() > 0)
+		const std::vector<std::unique_ptr<AbstractCustomSubAppFactory>>& customSubApps = trainingPlan.getCustomSubApps();
+		if (customSubApps.size() > 0)
 		{
 			trainingPlanMenu = new wxMenu();
-			for (auto customSubApp = customSubApps->begin(); customSubApp != customSubApps->end(); customSubApp++)
+			for (auto customSubApp = customSubApps.begin(); customSubApp != customSubApps.end(); customSubApp++)
 			{
 				trainingPlanMenu->Append(new wxMenuItem(trainingPlanMenu, wxID_ANY, (*customSubApp)->getLabel()));
 			}
 			trainingPlanMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::trainingPlanMenuSelected), this);
-			menubar->Append(trainingPlanMenu, trainingPlan->getName());
+			menubar->Append(trainingPlanMenu, trainingPlan.getName());
 			customMenuVisible = true;
 		}
 	}
 
 	void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 	{
-		int row = getRowIndexOfItem(trainingPlanList, event.GetItem());
+		int row = getRowIndexOfItem(*trainingPlanList, event.GetItem());
 		if (row != -1)
 		{
-			showDetailsOfTrainingPlan((*getController()->getTrainingPlans())[row].get());
-			showProcessOfTrainingPlan((*getController()->getTrainingPlans())[row].get());
-			showCustomSubAppsMenuForTrainingPlan((*getController()->getTrainingPlans())[row].get());
+			showDetailsOfTrainingPlan(*getController().getTrainingPlans()[row].get());
+			showProcessOfTrainingPlan(*getController().getTrainingPlans()[row].get());
+			showCustomSubAppsMenuForTrainingPlan(*getController().getTrainingPlans()[row].get());
 		}
 		else
 		{
@@ -602,42 +602,42 @@ namespace LightBulb
 		}
 	}
 
-	void TrainingWindow::showDetailsOfNeuralNetwork(AbstractNeuralNetwork* neuralNetwork)
+	void TrainingWindow::showDetailsOfNeuralNetwork(AbstractNeuralNetwork& neuralNetwork)
 	{
 		clearDetails();
-		detailsTextBox->WriteText("Name: " + neuralNetwork->getName() + "\n");
-		detailsTextBox->WriteText("Size: " + getNeuralNetworkSizeAsString(neuralNetwork->getNetworkTopology()->getNeuronCountsPerLayer()) + "\n");
-		std::time_t creationDate = neuralNetwork->getCreationDate();
+		detailsTextBox->WriteText("Name: " + neuralNetwork.getName() + "\n");
+		detailsTextBox->WriteText("Size: " + getNeuralNetworkSizeAsString(neuralNetwork.getNetworkTopology().getNeuronCountsPerLayer()) + "\n");
+		std::time_t creationDate = neuralNetwork.getCreationDate();
 		detailsTextBox->WriteText("Creation date: " + std::string(std::asctime(std::localtime(&creationDate))) + "\n");
-		detailsTextBox->WriteText("State: " + neuralNetwork->getStateAsString() + "\n");
-		currentDetailObject = neuralNetwork;
+		detailsTextBox->WriteText("State: " + neuralNetwork.getStateAsString() + "\n");
+		currentDetailObject = &neuralNetwork;
 	}
 
-	void TrainingWindow::showDetailsOfTrainingPlanPattern(AbstractTrainingPlan* trainingPlan)
+	void TrainingWindow::showDetailsOfTrainingPlanPattern(AbstractTrainingPlan& trainingPlan)
 	{
 		clearDetails();
-		detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
-		detailsTextBox->WriteText("Learning rate: " + trainingPlan->getLearningRuleName() + "\n");
-		detailsTextBox->WriteText("Description: " + trainingPlan->getDescription() + "\n");
-		currentDetailObject = trainingPlan;
+		detailsTextBox->WriteText("Name: " + trainingPlan.getName() + "\n");
+		detailsTextBox->WriteText("Learning rate: " + trainingPlan.getLearningRuleName() + "\n");
+		detailsTextBox->WriteText("Description: " + trainingPlan.getDescription() + "\n");
+		currentDetailObject = &trainingPlan;
 	}
 
-	void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan* trainingPlan)
+	void TrainingWindow::showDetailsOfTrainingPlan(AbstractTrainingPlan& trainingPlan)
 	{
 		clearDetails();
-		detailsTextBox->WriteText("Name: " + trainingPlan->getName() + "\n");
-		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan))
-			detailsTextBox->WriteText("Network name: " + static_cast<AbstractSingleNNTrainingPlan*>(trainingPlan)->getNeuralNetwork()->getName() + "\n");
-		detailsTextBox->WriteText("State: " + trainingPlan->getStateAsString() + "\n");
-		detailsTextBox->WriteText("Seed: " + std::to_string(trainingPlan->getSeed()) + "\n");
+		detailsTextBox->WriteText("Name: " + trainingPlan.getName() + "\n");
+		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(&trainingPlan))
+			detailsTextBox->WriteText("Network name: " + static_cast<AbstractSingleNNTrainingPlan&>(trainingPlan).getNeuralNetwork().getName() + "\n");
+		detailsTextBox->WriteText("State: " + trainingPlan.getStateAsString() + "\n");
+		detailsTextBox->WriteText("Seed: " + std::to_string(trainingPlan.getSeed()) + "\n");
 		detailsTextBox->WriteText("Preferences:\n");
-		for (auto preferenceGroup = trainingPlan->getPreferenceGroups().begin(); preferenceGroup != trainingPlan->getPreferenceGroups().end(); preferenceGroup++)
+		for (auto preferenceGroup = trainingPlan.getPreferenceGroups().begin(); preferenceGroup != trainingPlan.getPreferenceGroups().end(); preferenceGroup++)
 		{
 			detailsTextBox->WriteText(" + " + (*preferenceGroup)->toString() + "\n");
 		}
 
 
-		currentDetailObject = trainingPlan;
+		currentDetailObject = &trainingPlan;
 	}
 
 	void TrainingWindow::clearDetails()
@@ -658,9 +658,9 @@ namespace LightBulb
 		return neuronCountsPerLayerString;
 	}
 
-	int TrainingWindow::getRowIndexOfItem(const wxDataViewListCtrl* list, const wxDataViewItem& item) const
+	int TrainingWindow::getRowIndexOfItem(const wxDataViewListCtrl& list, const wxDataViewItem& item) const
 	{
-		return ((wxDataViewIndexListModel*)list->GetModel())->GetRow(item);
+		return ((wxDataViewIndexListModel*)list.GetModel())->GetRow(item);
 	}
 
 	void TrainingWindow::startTraining(wxCommandEvent& event)
@@ -671,12 +671,12 @@ namespace LightBulb
 			int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
 			if (neuralNetworkIndex != -1 && trainingPlanPatternIndex != -1)
 			{
-				getController()->startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
+				getController().startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
 			}
 		}
 		else
 		{
-			getController()->resumeTrainingPlan(processTrainingPlanSelection);
+			getController().resumeTrainingPlan(*processTrainingPlanSelection);
 		}
 	}
 
@@ -684,14 +684,14 @@ namespace LightBulb
 	{
 		if (processTrainingPlanSelection != nullptr)
 		{
-			getController()->pauseTrainingPlan(processTrainingPlanSelection);
+			getController().pauseTrainingPlan(*processTrainingPlanSelection);
 		}
 	}
 
 	void TrainingWindow::showPreferences(wxCommandEvent& event)
 	{
 		int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-		getController()->openPreferences(trainingPlanPatternIndex);
+		getController().openPreferences(trainingPlanPatternIndex);
 	}
 
 	void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
@@ -703,6 +703,6 @@ namespace LightBulb
 	void TrainingWindow::addSubApp(wxCommandEvent& event)
 	{
 		int index = windowsMenu->GetMenuItems().IndexOf(windowsMenu->FindItem(event.GetId()));
-		getController()->addSubApp(index);
+		getController().addSubApp(index);
 	}
 }

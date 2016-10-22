@@ -13,7 +13,7 @@ namespace LightBulb
 		if (level <= currentLogLevel)
 		{
 			outputMessage(message);
-			throwEvent(EVT_LG_LOGADDED, this);
+			throwEvent(EVT_LG_LOGADDED, *this);
 		}
 	}
 

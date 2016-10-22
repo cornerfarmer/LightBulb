@@ -53,7 +53,7 @@ namespace LightBulb
 		}
 	}
 
-	void AbstractRecombinationCommand::setRandomGenerator(AbstractRandomGenerator* randomGenerator_)
+	void AbstractRecombinationCommand::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		recombinationAlgorithm->setRandomGenerator(randomGenerator_);

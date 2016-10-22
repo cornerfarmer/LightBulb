@@ -16,18 +16,18 @@ namespace LightBulb
 	{
 	}
 
-	SimpleGradientDescentOptions* SimpleGradientDescent::getOptions()
+	SimpleGradientDescentOptions& SimpleGradientDescent::getOptions()
 	{
-		return static_cast<SimpleGradientDescentOptions*>(options.get());
+		return static_cast<SimpleGradientDescentOptions&>(*options.get());
 	}
 
-	void SimpleGradientDescent::initializeAlgorithm(const AbstractNetworkTopology* networkTopology)
+	void SimpleGradientDescent::initializeAlgorithm(const AbstractNetworkTopology& networkTopology)
 	{
 		// If momentum is used
-		if (getOptions()->momentum > 0)
+		if (getOptions().momentum > 0)
 		{
 			// Initialize the learningRates map
-			previousDeltaWeights = *networkTopology->getAllWeights();
+			previousDeltaWeights = networkTopology.getAllWeights();
 			for (int i = 0; i < previousDeltaWeights.size(); i++)
 			{
 				previousDeltaWeights[i].setZero();
@@ -35,19 +35,19 @@ namespace LightBulb
 		}
 	}
 
-	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology* networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
+	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
 		Eigen::MatrixXd deltaWeight;
 
 		// Calc the delta weight
-		deltaWeight = -getOptions()->learningRate * gradients;
+		deltaWeight = -getOptions().learningRate * gradients;
 
 		// Substract the weightDecay term
-		deltaWeight -= getOptions()->weightDecayFac * networkTopology->getAfferentWeightsPerLayer(layerIndex);
+		deltaWeight -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex);
 
-		if (getOptions()->momentum > 0) {
+		if (getOptions().momentum > 0) {
 			// Add the momentum term
-			deltaWeight += getOptions()->momentum * previousDeltaWeights[layerIndex - 1];
+			deltaWeight += getOptions().momentum * previousDeltaWeights[layerIndex - 1];
 
 			// Set this to the delta weight
 			previousDeltaWeights[layerIndex - 1] = deltaWeight;

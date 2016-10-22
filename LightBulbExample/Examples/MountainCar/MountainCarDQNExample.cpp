@@ -47,7 +47,7 @@ AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
 	options.replaceStoredTransitions = getBooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS);
 	//options.dataSaveInterval = 100;
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new DQNLearningRule(options);
 }
@@ -112,7 +112,7 @@ std::string MountainCarDQNExample::getLearningRuleName() const
 }
 
 
-MountainCarWorld* MountainCarDQNExample::getWorld()
+MountainCarWorld& MountainCarDQNExample::getWorld()
 {
-	return world;
+	return *world;
 }

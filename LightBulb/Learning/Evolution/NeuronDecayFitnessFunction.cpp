@@ -17,7 +17,7 @@ namespace LightBulb
 	{
 		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
 		{
-			entry->first -= fac * entry->second->getNeuralNetwork()->getNetworkTopology()->getNeuronCount();
+			entry->first -= fac * entry->second->getNeuralNetwork()->getNetworkTopology().getNeuronCount();
 		}
 		std::sort(highscore->begin(), highscore->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	}

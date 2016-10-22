@@ -5,19 +5,19 @@
 
 namespace LightBulb
 {
-	void AbstractCoevolutionTrainingPlan::fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions* options) const
+	void AbstractCoevolutionTrainingPlan::fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions& options) const
 	{
 		AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(options);
 	}
 
-	void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions* options) const
+	void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions& options) const
 	{
-		options->world = world.get();
+		options.world = world.get();
 	}
 
-	void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions* options) const
+	void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions& options) const
 	{
-		options->world = parasiteWorld.get();
+		options.world = parasiteWorld.get();
 	}
 
 	void AbstractCoevolutionTrainingPlan::initializeStart()
@@ -26,9 +26,9 @@ namespace LightBulb
 		AbstractEvolutionTrainingPlan::initializeStart();
 	}
 
-	AbstractEvolutionWorld* AbstractCoevolutionTrainingPlan::getParasiteWorld()
+	AbstractEvolutionWorld& AbstractCoevolutionTrainingPlan::getParasiteWorld()
 	{
-		return parasiteWorld.get();
+		return *parasiteWorld.get();
 	}
 
 	void AbstractCoevolutionTrainingPlan::setParasiteWorld(AbstractEvolutionWorld* world_)

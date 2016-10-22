@@ -13,8 +13,8 @@ namespace LightBulb
 
 	void AbstractReinforcementLearningRule::randomGeneretorHasChanged()
 	{
-		if (getOptions()->world)
-			getOptions()->world->setRandomGenerator(randomGenerator.get());
+		if (getOptions().world)
+			getOptions().world->setRandomGenerator(*randomGenerator.get());
 	}
 
 	bool AbstractReinforcementLearningRule::hasLearningSucceeded()
@@ -26,14 +26,14 @@ namespace LightBulb
 	{
 		std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 		labels.push_back(DATA_SET_REWARD);
-		std::vector<std::string> worldLabels = getOptions()->world->getDataSetLabels();
+		std::vector<std::string> worldLabels = getOptions().world->getDataSetLabels();
 		labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
 		return labels;
 	}
 
 
-	const AbstractReinforcementLearningRuleOptions* AbstractReinforcementLearningRule::getOptions() const
+	const AbstractReinforcementLearningRuleOptions& AbstractReinforcementLearningRule::getOptions() const
 	{
-		return static_cast<AbstractReinforcementLearningRuleOptions*>(options.get());
+		return static_cast<AbstractReinforcementLearningRuleOptions&>(*options.get());
 	}
 }

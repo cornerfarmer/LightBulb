@@ -11,15 +11,15 @@
 
 using namespace LightBulb;
 
-PongGameController::PongGameController(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan_, AbstractWindow* parent)
+PongGameController::PongGameController(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_, AbstractWindow& parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
 	if (dynamic_cast<PongEvolutionExample*>(trainingPlan))
-		world = static_cast<Pong*>(static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
+		world = static_cast<Pong*>(&static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
 	else
-		world = static_cast<PongPolicyGradientExample*>(trainingPlan)->getWorld();
-	properties = world->getGame()->getProperties();
-	window.reset(new PongGameWindow(this, parent));
+		world = &static_cast<PongPolicyGradientExample*>(trainingPlan)->getWorld();
+	properties = world->getGame().getProperties();
+	window.reset(new PongGameWindow(*this, parent));
 }
 
 void PongGameController::prepareClose()
@@ -27,22 +27,22 @@ void PongGameController::prepareClose()
 	stopWatchMode();
 }
 
-PongGameWindow* PongGameController::getWindow()
+PongGameWindow& PongGameController::getWindow()
 {
-	return window.get();
+	return *window.get();
 }
 
 void PongGameController::stopWatchMode()
 {
 	world->stopWatchMode();
-	world->removeObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, this);
+	world->removeObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, *this);
 }
 
 
 void PongGameController::startWatchMode()
 {
 	world->startWatchMode();
-	world->registerObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, this);
+	world->registerObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, *this);
 }
 
 
@@ -51,19 +51,19 @@ std::string PongGameController::getLabel()
 	return "PongGame";
 }
 
-PongGameState* PongGameController::getState()
+PongGameState& PongGameController::getState()
 {
-	return &currentState;
+	return currentState;
 }
 
-PongGameProperties* PongGameController::getProperties()
+PongGameProperties& PongGameController::getProperties()
 {
-	return &properties;
+	return properties;
 }
 
-void PongGameController::fieldChanged(AbstractPongWorld * pong)
+void PongGameController::fieldChanged(AbstractPongWorld& pong)
 {
-	currentState = pong->getGame()->getState();
+	currentState = pong.getGame().getState();
 	wxThreadEvent evt(PONG_EVT_FIELD_CHANGED);
 	window->GetEventHandler()->QueueEvent(evt.Clone());
 }

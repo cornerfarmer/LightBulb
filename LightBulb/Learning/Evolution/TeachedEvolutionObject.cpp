@@ -17,10 +17,10 @@ namespace LightBulb
 		FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
 		neuralNetwork.reset(new NeuralNetwork(networkTopology));
 		// Randomize all weights
-		neuralNetwork->getNetworkTopology()->randomizeWeights(teachingEvolutionWorld->getRandomGenerator(), -0.5, 0.5);
+		neuralNetwork->getNetworkTopology().randomizeWeights(teachingEvolutionWorld->getRandomGenerator(), -0.5, 0.5);
 
 		// Initialize mutation strengths
-		resizeMutationStrength(neuralNetwork->getNetworkTopology()->getEdgeCount());
+		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());
 		randomizeMutationStrength();
 
 
@@ -43,7 +43,7 @@ namespace LightBulb
 	void TeachedEvolutionObject::resetNN()
 	{
 		// Only reset all activations
-		neuralNetwork->getNetworkTopology()->resetActivation();
+		neuralNetwork->getNetworkTopology().resetActivation();
 	}
 
 	AbstractEvolutionObject* TeachedEvolutionObject::clone(bool addToWorld)
@@ -51,7 +51,7 @@ namespace LightBulb
 		// Create a new object
 		AbstractEvolutionObject* newObject = teachingEvolutionWorld->addNewObject(addToWorld);
 		// Copy all weights
-		newObject->getNeuralNetwork()->getNetworkTopology()->copyWeightsFrom(*neuralNetwork->getNetworkTopology());
+		newObject->getNeuralNetwork()->getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
 		// Copy all mutation strengths
 		newObject->setMutationStrength(getMutationStrength());
 		return newObject;

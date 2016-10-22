@@ -38,7 +38,7 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	options.mutationsCommands.push_back(constantMutationCommand);
 	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3);
 	options.recombinationCommands.push_back(constantRecombinationCommand);
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new EvolutionLearningRule(options);
 }

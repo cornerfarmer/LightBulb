@@ -10,7 +10,7 @@
 
 using namespace LightBulb;
 
-Network::Network(NetworkSimulator* networkSimulator_)
+Network::Network(NetworkSimulator& networkSimulator_)
 	: AbstractSimpleEvolutionObject(networkSimulator_)
 {
 	positions.resize(4, std::vector<float>(2));
@@ -41,9 +41,9 @@ void Network::interpretNNOutput(std::vector<double>& output)
 }
 
 
-std::vector<std::vector<float>>* Network::getPositions()
+std::vector<std::vector<float>>& Network::getPositions()
 {
-	return &positions;
+	return positions;
 }
 
 Network::~Network()

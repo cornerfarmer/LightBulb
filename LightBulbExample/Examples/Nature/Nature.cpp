@@ -16,7 +16,7 @@ AbstractEvolutionObject* Nature::createNewObject()
 		posY = randomGenerator->randInt(0, height - 1);
 	} while (!tiles[posX][posY]->isWalkable());
 
-	return new Animal(this, posX, posY, 0, 1);
+	return new Animal(*this, posX, posY, 0, 1);
 }
 
 Nature::Nature()
@@ -67,7 +67,7 @@ bool Nature::doSimulationStep()
 
 		if (watchMode)
 		{
-			throwEvent(EVT_FIELD_CHANGED, this);
+			throwEvent(EVT_FIELD_CHANGED, *this);
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
 		}
 
@@ -92,9 +92,9 @@ bool Nature::doSimulationStep()
 	return false;
 }
 
-double Nature::getScore(AbstractEvolutionObject* object)
+double Nature::getScore(AbstractEvolutionObject& object)
 {
-	return static_cast<Animal*>(object)->getStepsSurvived();
+	return static_cast<Animal&>(object).getStepsSurvived();
 }
 
 void Nature::resetWorld()
@@ -233,15 +233,15 @@ int Nature::getHeight()
 	return height;
 }
 
-std::vector<std::vector<std::unique_ptr<AbstractTile>>>* Nature::getTiles()
+std::vector<std::vector<std::unique_ptr<AbstractTile>>>& Nature::getTiles()
 {
-	return &tiles;
+	return tiles;
 }
 
-AbstractTile* Nature::getTile(int posX, int posY)
+AbstractTile& Nature::getTile(int posX, int posY)
 {
 	if (posX < width && posY < height)
-		return tiles[posX][posY].get();
+		return *tiles[posX][posY].get();
 	else
 		throw std::exception();
 }

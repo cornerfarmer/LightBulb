@@ -4,10 +4,10 @@
 
 using namespace LightBulb;
 
-AbstractCustomSubApp* MountainCarFactory::createCustomSupApp(AbstractMainApp* mainApp, AbstractTrainingPlan* trainingPlan, AbstractWindow* parent) const
+AbstractCustomSubApp* MountainCarFactory::createCustomSupApp(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan, AbstractWindow& parent) const
 {
 	MountainCarController* controller = new MountainCarController(mainApp, trainingPlan, parent);
-	controller->getWindow()->Show();
+	controller->getWindow().Show();
 	return controller;
 }
 

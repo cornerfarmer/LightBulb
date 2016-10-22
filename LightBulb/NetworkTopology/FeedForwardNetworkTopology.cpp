@@ -336,27 +336,27 @@ namespace LightBulb
 		return afferentWeights;
 	}
 
-	std::vector<Eigen::MatrixXd>* FeedForwardNetworkTopology::getAllWeights()
+	std::vector<Eigen::MatrixXd>& FeedForwardNetworkTopology::getAllWeights()
 	{
-		return &weights;
+		return weights;
 	}
 
-	const std::vector<Eigen::MatrixXd>* FeedForwardNetworkTopology::getAllWeights() const
+	const std::vector<Eigen::MatrixXd>& FeedForwardNetworkTopology::getAllWeights() const
 	{
-		return &weights;
+		return weights;
 	}
 
-	const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* FeedForwardNetworkTopology::getAllActivations() const
+	const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& FeedForwardNetworkTopology::getAllActivations() const
 	{
-		return &activationsPerLayerOut;
+		return activationsPerLayerOut;
 	}
 	
-	const std::vector<Eigen::VectorXd>* FeedForwardNetworkTopology::getAllNetInputs() const
+	const std::vector<Eigen::VectorXd>& FeedForwardNetworkTopology::getAllNetInputs() const
 	{
-		return &netInputs;
+		return netInputs;
 	}
 
-	void FeedForwardNetworkTopology::randomizeWeights(AbstractRandomGenerator* randomGenerator, double randStart, double randEnd)
+	void FeedForwardNetworkTopology::randomizeWeights(AbstractRandomGenerator& randomGenerator, double randStart, double randEnd)
 	{
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)
 		{
@@ -365,7 +365,7 @@ namespace LightBulb
 				for (auto j = 0; j < layer->cols(); j++)
 				{
 					do {
-						(*layer)(i, j) = randomGenerator->randDouble(randStart, randEnd);
+						(*layer)(i, j) = randomGenerator.randDouble(randStart, randEnd);
 					} while ((*layer)(i, j) == 0);
 				}
 			}
@@ -373,7 +373,7 @@ namespace LightBulb
 	}
 
 
-	void FeedForwardNetworkTopology::randomizeDependingOnLayerSize(AbstractRandomGenerator* randomGenerator)
+	void FeedForwardNetworkTopology::randomizeDependingOnLayerSize(AbstractRandomGenerator& randomGenerator)
 	{
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)
 		{
@@ -384,7 +384,7 @@ namespace LightBulb
 				for (auto j = 0; j < layer->cols(); j++)
 				{
 					do {
-						(*layer)(i, j) = randomGenerator->randDouble(-stdv, stdv);
+						(*layer)(i, j) = randomGenerator.randDouble(-stdv, stdv);
 					} while ((*layer)(i, j) == 0);
 				}
 			}
@@ -458,12 +458,12 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::refreshNetInputsForLayer(int layerNr)
 	{
-		neuronDescriptionsPerLayer[layerNr]->getInputFunction()->execute(layerNr, activationsPerLayerOut, netInputs, weights);
+		neuronDescriptionsPerLayer[layerNr]->getInputFunction().execute(layerNr, activationsPerLayerOut, netInputs, weights);
 	}
 
 	void FeedForwardNetworkTopology::refreshActivationsForLayer(int layerNr)
 	{
-		neuronDescriptionsPerLayer[layerNr]->getActivationFunction()->execute(layerNr, activationsPerLayerIn, netInputs);
+		neuronDescriptionsPerLayer[layerNr]->getActivationFunction().execute(layerNr, activationsPerLayerIn, netInputs);
 	}
 
 
@@ -474,9 +474,9 @@ namespace LightBulb
 		auto weights1 = getAllWeights();
 		auto weights2 = otherNetwork.getAllWeights();
 
-		auto layer1 = weights1->begin();
-		auto layer2 = weights2->begin();
-		for (; layer1 != weights1->end(); layer1++, layer2++)
+		auto layer1 = weights1.begin();
+		auto layer2 = weights2.begin();
+		for (; layer1 != weights1.end(); layer1++, layer2++)
 		{
 			for (int i = 0; i < layer1->cols(); i++)
 			{
@@ -500,13 +500,13 @@ namespace LightBulb
 		return (activationsPerLayerOut[layerIndex])(neuronIndex);
 	}
 
-	const NeuronDescription* FeedForwardNetworkTopology::getInnerNeuronDescription() const
+	const NeuronDescription& FeedForwardNetworkTopology::getInnerNeuronDescription() const
 	{
-		return neuronDescriptionsPerLayer.front().get();
+		return *neuronDescriptionsPerLayer.front().get();
 	}
 
-	const NeuronDescription* FeedForwardNetworkTopology::getOutputNeuronDescription() const
+	const NeuronDescription& FeedForwardNetworkTopology::getOutputNeuronDescription() const
 	{
-		return neuronDescriptionsPerLayer.back().get();
+		return *neuronDescriptionsPerLayer.back().get();
 	}
 }

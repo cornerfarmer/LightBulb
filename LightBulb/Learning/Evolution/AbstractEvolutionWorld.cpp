@@ -19,7 +19,7 @@ namespace LightBulb
 			// Go through all evolution objects
 			for (auto object = getEvolutionObjects()->begin(); object < getEvolutionObjects()->end(); object++)
 			{
-				double score = getScore(*object);
+				double score = getScore(**object);
 
 				// Add the objects paired with its score to the list
 				currentHighscore.push_back(std::make_pair(score, *object));
@@ -38,9 +38,9 @@ namespace LightBulb
 		return labels;
 	}
 
-	void AbstractEvolutionWorld::setLearningState(LearningState* learningState_)
+	void AbstractEvolutionWorld::setLearningState(LearningState& learningState_)
 	{
-		learningState = learningState_;
+		learningState = &learningState_;
 	}
 
 	void AbstractEvolutionWorld::refreshHighscore()

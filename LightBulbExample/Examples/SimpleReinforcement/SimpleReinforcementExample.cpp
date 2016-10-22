@@ -27,7 +27,7 @@ AbstractLearningRule* SimpleReinforcementExample::createLearningRate()
 	options.world = world;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new PolicyGradientLearningRule(options);
 }
@@ -82,7 +82,7 @@ std::string SimpleReinforcementExample::getLearningRuleName() const
 }
 
 
-SimpleReinforcementWorld* SimpleReinforcementExample::getWorld()
+SimpleReinforcementWorld& SimpleReinforcementExample::getWorld()
 {
-	return world;
+	return *world;
 }

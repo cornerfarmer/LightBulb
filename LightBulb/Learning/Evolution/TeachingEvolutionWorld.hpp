@@ -39,7 +39,7 @@ namespace LightBulb
 		// Inherited:
 		bool doSimulationStep() override;
 		std::vector<std::string> getDataSetLabels() override;
-		double getScore(AbstractEvolutionObject* object) override;
+		double getScore(AbstractEvolutionObject& object) override;
 	};
 }
 

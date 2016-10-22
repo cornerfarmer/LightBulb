@@ -46,7 +46,7 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	
 	GradientDescentLearningRuleOptions options = createOptions<GradientDescentLearningRuleOptions, GradientDescentLearningRulePreferenceGroup>();
 	options.teacher = teacher.get();
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new GradientDescentLearningRule(options);
 }

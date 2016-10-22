@@ -41,7 +41,7 @@ namespace LightBulb
 	protected:
 		DECLARE_EVENT_TABLE();
 	public:
-		NetworkViewerWindow(NetworkViewerController& controller_, AbstractWindow* parent = nullptr);
+		NetworkViewerWindow(NetworkViewerController& controller_, AbstractWindow& parent);
 		void refreshNeuralNetworks();
 		void paintEvent(wxPaintEvent& evt);
 		void resize(wxSizeEvent& evt);

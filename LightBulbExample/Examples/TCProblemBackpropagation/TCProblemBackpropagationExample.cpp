@@ -37,7 +37,7 @@ AbstractLearningRule* TCProblemBackpropagationExample::createLearningRate()
 	options.maxTries = 1000;
 	options.gradientDescentAlgorithm = new SimpleGradientDescent(gradientDescentOptions);
 	options.teacher = teacher.get();
-	fillDefaultLearningRuleOptions(&options);
+	fillDefaultLearningRuleOptions(options);
 
 	return new GradientDescentLearningRule(options);
 }

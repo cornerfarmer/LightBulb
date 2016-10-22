@@ -19,7 +19,7 @@ enum
 
 using namespace LightBulb;
 
-MountainCarWindow::MountainCarWindow(MountainCarController* controller_, AbstractWindow* parent)
+MountainCarWindow::MountainCarWindow(MountainCarController& controller_, AbstractWindow& parent)
 	:AbstractSubAppWindow(controller_, MountainCarWindow::getLabel(), parent)
 {
 	panel = nullptr;
@@ -73,7 +73,7 @@ void MountainCarWindow::toolBarClicked(wxCommandEvent& evt)
 	if (evt.GetId() == TOOLBAR_STOP_WATCHMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_STOP_WATCHMODE, false);
-		getController()->stopWatchMode();
+		getController().stopWatchMode();
 		toolbar->EnableTool(TOOLBAR_START_WATCHMODE, true);
 
 		paintNow();
@@ -81,7 +81,7 @@ void MountainCarWindow::toolBarClicked(wxCommandEvent& evt)
 	else if (evt.GetId() == TOOLBAR_START_WATCHMODE)
 	{
 		toolbar->EnableTool(TOOLBAR_START_WATCHMODE, false);
-		getController()->startWatchMode();
+		getController().startWatchMode();
 		toolbar->EnableTool(TOOLBAR_STOP_WATCHMODE, true);
 		wxThreadEvent tEvt;
 		refreshField(tEvt);
@@ -98,9 +98,9 @@ void MountainCarWindow::render(wxDC& dc)
 	dc.Clear();
 
 	int width, height;
-	double pos = getController()->getPosition(); 
-	double vel = getController()->getVelocity();
-	int action = getController()->getAction();
+	double pos = getController().getPosition(); 
+	double vel = getController().getVelocity();
+	int action = getController().getAction();
 	panel->GetClientSize(&width, &height);
 
 	dc.DrawCircle((pos - -1.2) / 1.8 * width, height / 2, 20 / 2);
@@ -118,7 +118,7 @@ std::string MountainCarWindow::getLabel()
 	return "PongGame";
 }
 
-MountainCarController* MountainCarWindow::getController()
+MountainCarController& MountainCarWindow::getController()
 {
-	return static_cast<MountainCarController*>(controller);
+	return static_cast<MountainCarController&>(*controller);
 }

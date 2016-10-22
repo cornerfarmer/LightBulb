@@ -14,7 +14,7 @@ namespace LightBulb
 	void serialize(Archive& archive, NeuralNetworkRepository& neuralNetworkRepository)
 	{
 		archive(cereal::make_nvp("neuralNetworks", neuralNetworkRepository.neuralNetworks));
-		neuralNetworkRepository.throwEvent(EVT_NN_CHANGED, &neuralNetworkRepository);
+		neuralNetworkRepository.throwEvent(EVT_NN_CHANGED, neuralNetworkRepository);
 	}
 }
 

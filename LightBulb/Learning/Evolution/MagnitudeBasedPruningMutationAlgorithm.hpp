@@ -30,7 +30,7 @@ namespace LightBulb
 
 		void execute(AbstractEvolutionObject* object1) override;
 
-		void setRandomGenerator(AbstractRandomGenerator* randomGenerator_) override;
+		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 
