@@ -29,7 +29,7 @@ TEST_F(PositiveMakerFitnessFunctionTest, execute)
 	highscore.push_back(std::make_pair(-3, (AbstractEvolutionObject*)nullptr));
 	highscore.push_back(std::make_pair(-13, (AbstractEvolutionObject*)nullptr));
 
-	positiveMakerFitnessFunction->execute(&highscore);
+	positiveMakerFitnessFunction->execute(highscore);
 	EXPECT_EQ(14, highscore[0].first);
 	EXPECT_EQ(7, highscore[1].first);
 	EXPECT_EQ(0, highscore[2].first);

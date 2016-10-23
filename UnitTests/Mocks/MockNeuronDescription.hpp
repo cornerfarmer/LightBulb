@@ -9,7 +9,7 @@
 class MockNeuronDescription : public LightBulb::NeuronDescription
 {
 public:
-	MOCK_METHOD0(getActivationFunction, LightBulb::AbstractActivationFunction* ());
+	MOCK_CONST_METHOD0(getActivationFunction, const LightBulb::AbstractActivationFunction& ());
 };
 
 #endif

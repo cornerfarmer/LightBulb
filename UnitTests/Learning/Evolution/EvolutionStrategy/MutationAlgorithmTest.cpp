@@ -32,14 +32,14 @@ TEST_F(MutationAlgorithmTest, execute)
 	mutationStrength.push_back(0);
 	mutationStrength.push_back(7500000);
 	mutationStrength.push_back(-1000000);
-	EXPECT_CALL(object, getMutationStrength()).WillRepeatedly(testing::Return(&mutationStrength));
+	EXPECT_CALL(object, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength));
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork));
+	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
-	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology));
+	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
-	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::Return(&weights));
+	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
 
 	weights.push_back(Eigen::MatrixXd(2,2));
 	weights[0](0, 0) = 2;
@@ -49,7 +49,7 @@ TEST_F(MutationAlgorithmTest, execute)
 	weights.push_back(Eigen::MatrixXd(1, 1));
 	weights[1](0, 0) = 10;
 
-	mutationAlgorithm->execute(&object);
+	mutationAlgorithm->execute(object);
 
 	EXPECT_NEAR(0.231262, mutationStrength[0], 0.00001);
 	EXPECT_NEAR(-8.35703, mutationStrength[1], 0.00001);

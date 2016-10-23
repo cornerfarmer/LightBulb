@@ -9,10 +9,10 @@
 class MockHallOfFameAlgorithm : public LightBulb::AbstractHallOfFameAlgorithm
 {
 public:
-	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
 	MOCK_METHOD1(evaluateObjects, void (std::vector<LightBulb::AbstractEvolutionObject*>&));
+	MOCK_METHOD2(execute, void (LightBulb::AbstractCoevolutionWorld&, LightBulb::CombiningStrategyResults&));
 	MOCK_METHOD1(addMember, void (LightBulb::AbstractEvolutionObject*));
-	MOCK_METHOD2(execute, void (LightBulb::AbstractCoevolutionWorld*, LightBulb::CombiningStrategyResults&));
 };
 
 #endif

@@ -27,9 +27,9 @@ public:
 		activationOrder = new MockActivationOrder();
 		neuronDescription = new MockNeuronDescription();
 		activationFunction = new MockActivationFunction();
-		EXPECT_CALL(*neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(networkTopology));
-		EXPECT_CALL(*networkTopology, getOutputNeuronDescription()).WillRepeatedly(testing::Return(neuronDescription));
-		EXPECT_CALL(*neuronDescription, getActivationFunction()).WillRepeatedly(testing::Return(activationFunction));
+		EXPECT_CALL(*neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(*networkTopology));
+		EXPECT_CALL(*networkTopology, getOutputNeuronDescription()).WillRepeatedly(testing::ReturnRef(*neuronDescription));
+		EXPECT_CALL(*neuronDescription, getActivationFunction()).WillRepeatedly(testing::ReturnRef(*activationFunction));
 
 		teachingInput = new NeuralNetworkIO<double>(3);
 		teachingInput->set(0, 0, 1);
@@ -67,12 +67,12 @@ public:
 
 TEST_F(TeachingLessonLinearInputTest, getTeachingInput)
 {
-	EXPECT_EQ(teachingInput, teachingLesson->getTeachingInput(nullptr));
+	EXPECT_EQ(*teachingInput, teachingLesson->getTeachingInput(*activationFunction));
 }
 
 TEST_F(TeachingLessonLinearInputTest, getTeachingPattern)
 {
-	EXPECT_EQ(teachingPattern, *teachingLesson->getTeachingPattern());
+	EXPECT_EQ(teachingPattern, teachingLesson->getTeachingPattern());
 }
 
 TEST_F(TeachingLessonLinearInputTest, unfold)
@@ -83,7 +83,7 @@ TEST_F(TeachingLessonLinearInputTest, unfold)
 	expectedTeachingInput.set(0, 0, 7);
 	expectedTeachingInput.set(0, 1, 8);
 	expectedTeachingInput.set(0, 2, 9);
-	EXPECT_EQ(*unfoldedTeachingLesson->getTeachingInput(nullptr), expectedTeachingInput);
+	EXPECT_EQ(expectedTeachingInput, unfoldedTeachingLesson->getTeachingInput(*activationFunction));
 
 	std::vector<std::vector<double>> expectedTeachingPattern(1, std::vector<double>(6));
 	expectedTeachingPattern[0][0] = 9;
@@ -92,7 +92,7 @@ TEST_F(TeachingLessonLinearInputTest, unfold)
 	expectedTeachingPattern[0][3] = 6;
 	expectedTeachingPattern[0][4] = 5;
 	expectedTeachingPattern[0][5] = 4;
-	EXPECT_EQ(expectedTeachingPattern, *unfoldedTeachingLesson->getTeachingPattern());
+	EXPECT_EQ(expectedTeachingPattern, unfoldedTeachingLesson->getTeachingPattern());
 }
 
 TEST_F(TeachingLessonLinearInputTest, getMaxTimeStep)

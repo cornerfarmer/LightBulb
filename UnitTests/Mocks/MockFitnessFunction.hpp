@@ -9,8 +9,8 @@
 class MockFitnessFunction : public LightBulb::AbstractFitnessFunction
 {
 public:
-	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
-	MOCK_METHOD1(execute, void (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
+	MOCK_METHOD1(execute, void (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&));
 };
 
 #endif

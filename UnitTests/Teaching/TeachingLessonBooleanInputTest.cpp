@@ -53,12 +53,12 @@ TEST_F(TeachingLessonBooleanInputTest, getTeachingInput)
 	expected.set(2, 0, 42);
 	expected.set(2, 1, -3);
 	expected.set(2, 2, 42);
-	EXPECT_EQ(expected, *teachingLesson->getTeachingInput(activationFunction));
+	EXPECT_EQ(expected, teachingLesson->getTeachingInput(*activationFunction));
 }
 
 TEST_F(TeachingLessonBooleanInputTest, getTeachingPattern)
 {
-	EXPECT_EQ(teachingPattern, *teachingLesson->getTeachingPattern());
+	EXPECT_EQ(teachingPattern, teachingLesson->getTeachingPattern());
 }
 
 TEST_F(TeachingLessonBooleanInputTest, unfold)
@@ -69,7 +69,7 @@ TEST_F(TeachingLessonBooleanInputTest, unfold)
 	expectedTeachingInput.set(0, 0, true);
 	expectedTeachingInput.set(0, 1, false);
 	expectedTeachingInput.set(0, 2, true);
-	EXPECT_EQ(expectedTeachingInput, *unfoldedTeachingLesson->getBooleanTeachingInput());
+	EXPECT_EQ(expectedTeachingInput, unfoldedTeachingLesson->getBooleanTeachingInput());
 
 	std::vector<std::vector<double>> expectedTeachingPattern(1, std::vector<double>(6));
 	expectedTeachingPattern[0][0] = 9;
@@ -78,7 +78,7 @@ TEST_F(TeachingLessonBooleanInputTest, unfold)
 	expectedTeachingPattern[0][3] = 6;
 	expectedTeachingPattern[0][4] = 5;
 	expectedTeachingPattern[0][5] = 4;
-	EXPECT_EQ(expectedTeachingPattern, *unfoldedTeachingLesson->getTeachingPattern());
+	EXPECT_EQ(expectedTeachingPattern, unfoldedTeachingLesson->getTeachingPattern());
 }
 
 TEST_F(TeachingLessonBooleanInputTest, getMaxTimeStep)

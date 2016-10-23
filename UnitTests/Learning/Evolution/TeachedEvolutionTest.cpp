@@ -22,7 +22,7 @@ public:
 		options.neuronsPerLayerCount.push_back(2);
 		options.neuronsPerLayerCount.push_back(1);
 		teachingEvolutionWorld = new TeachingEvolutionWorld(&teacher, options);
-		teachingEvolutionWorld->setRandomGenerator(&randomGenerator);
+		teachingEvolutionWorld->setRandomGenerator(randomGenerator);
 		EXPECT_CALL(randomGenerator, randDouble(testing::_, testing::_)).WillRepeatedly(testing::Return(0.1));
 	}
 
@@ -36,10 +36,10 @@ TEST_F(TeachedEvolutionTest, doSimulationStep)
 {
 	AbstractEvolutionObject* evolutionObject = teachingEvolutionWorld->addNewObject(true);
 
-	EXPECT_CALL(teacher, getTeachingError(testing::Ref(*evolutionObject->getNeuralNetwork()), testing::_)).WillOnce(testing::Return(5));
-	EXPECT_CALL(teacher, getWeightDecayError(testing::Ref(*evolutionObject->getNeuralNetwork()))).WillOnce(testing::Return(3));
+	EXPECT_CALL(teacher, getTeachingError(testing::Ref(evolutionObject->getNeuralNetwork()), testing::_)).WillOnce(testing::Return(5));
+	EXPECT_CALL(teacher, getWeightDecayError(testing::Ref(evolutionObject->getNeuralNetwork()))).WillOnce(testing::Return(3));
 
 	teachingEvolutionWorld->doSimulationStep();
 
-	EXPECT_EQ(-8, teachingEvolutionWorld->getScore(evolutionObject));
+	EXPECT_EQ(-8, teachingEvolutionWorld->getScore(*evolutionObject));
 }

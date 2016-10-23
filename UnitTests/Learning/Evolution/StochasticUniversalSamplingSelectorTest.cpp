@@ -34,17 +34,17 @@ TEST_F(StochasticUniversalSamplingSelectorTest, executeMutationSelection)
 	EXPECT_CALL(*selectionFunction, execute(testing::_, 3)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
-	stochasticUniversalSamplingSelector->executeMutationSelection(3, &highscore, &counter);
-	std::vector<AbstractEvolutionObject*>* selectedObjects = stochasticUniversalSamplingSelector->getMutationSelection();
+	stochasticUniversalSamplingSelector->executeMutationSelection(3, highscore, counter);
+	std::vector<AbstractEvolutionObject*>& selectedObjects = stochasticUniversalSamplingSelector->getMutationSelection();
 
 	EXPECT_EQ(2, probabilities.size());
 	EXPECT_EQ(8, probabilities[0]);
 	EXPECT_EQ(2, probabilities[1]);
 
-	EXPECT_EQ(3, selectedObjects->size());
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(0));
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(1));
-	EXPECT_EQ(highscore[1].second, selectedObjects->at(2));
+	EXPECT_EQ(3, selectedObjects.size());
+	EXPECT_EQ(highscore[0].second, selectedObjects[0]);
+	EXPECT_EQ(highscore[0].second, selectedObjects[1]);
+	EXPECT_EQ(highscore[1].second, selectedObjects[2]);
 
 	EXPECT_EQ(2, counter.size());
 	EXPECT_EQ(2, counter[highscore[0].second]);
@@ -63,16 +63,16 @@ TEST_F(StochasticUniversalSamplingSelectorTest, executeRecombinationSelection)
 	EXPECT_CALL(*selectionFunction, execute(testing::_, 6)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
-	stochasticUniversalSamplingSelector->executeRecombinationSelection(3, &highscore, &counter);
-	std::vector<AbstractEvolutionObject*>* selectedObjects = stochasticUniversalSamplingSelector->getRecombinationSelection();
+	stochasticUniversalSamplingSelector->executeRecombinationSelection(3, highscore, counter);
+	std::vector<AbstractEvolutionObject*>& selectedObjects = stochasticUniversalSamplingSelector->getRecombinationSelection();
 
 	EXPECT_EQ(2, probabilities.size());
 	EXPECT_EQ(8, probabilities[0]);
 	EXPECT_EQ(2, probabilities[1]);
 
-	EXPECT_EQ(6, selectedObjects->size());
+	EXPECT_EQ(6, selectedObjects.size());
 	int count0 = 0, count1 = 0;
-	for (auto selectedObject = selectedObjects->begin(); selectedObject != selectedObjects->end(); selectedObject++)
+	for (auto selectedObject = selectedObjects.begin(); selectedObject != selectedObjects.end(); selectedObject++)
 	{
 		if (*selectedObject == highscore[0].second)
 			count0++;

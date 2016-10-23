@@ -27,7 +27,7 @@ TEST_F(LinearScalingFitnessFunctionTest, execute)
 	highscore.push_back(std::make_pair(4, (AbstractEvolutionObject*)nullptr));
 	highscore.push_back(std::make_pair(-3, (AbstractEvolutionObject*)nullptr));
 
-	linearScalingFitnessFunction->execute(&highscore);
+	linearScalingFitnessFunction->execute(highscore);
 	EXPECT_EQ(13, highscore[0].first);
 	EXPECT_EQ(-1, highscore[1].first);
 }
@@ -40,7 +40,7 @@ TEST_F(LinearScalingFitnessFunctionTest, executeDynmaic)
 	highscore.push_back(std::make_pair(4, (AbstractEvolutionObject*)nullptr));
 	highscore.push_back(std::make_pair(-3, (AbstractEvolutionObject*)nullptr));
 
-	linearScalingFitnessFunction->execute(&highscore);
+	linearScalingFitnessFunction->execute(highscore);
 	EXPECT_EQ(5, highscore[0].first);
 	EXPECT_EQ(-9, highscore[1].first);
 }

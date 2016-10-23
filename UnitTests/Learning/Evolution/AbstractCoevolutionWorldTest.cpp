@@ -33,20 +33,20 @@ public:
 TEST_F(AbstractCoevolutionWorldTest, doSimulationStep)
 {
 	CombiningStrategyResults result;
-	std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
+	std::map<const AbstractEvolutionObject*, double>* fitnessValues = new std::map<const AbstractEvolutionObject*, double>();
 	MockEvolutionObject bestObject;
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
 	std::map<std::string, bool> disabledDataSets;
 	LearningState learningState(disabledDataSets, 5);
-	coevolutionWorld->setLearningState(&learningState);
+	coevolutionWorld->setLearningState(learningState);
 	highscore.push_back(std::make_pair(42, &bestObject));
 	{
 		testing::InSequence s;
-		EXPECT_CALL(*combiningStrategy, execute(coevolutionWorld)).WillOnce(testing::Return(&result));
-		EXPECT_CALL(*hallOfFameToChallengeAlgorithm, execute(coevolutionWorld, testing::Ref(result))).Times(1);
+		EXPECT_CALL(*combiningStrategy, execute(testing::Ref(*coevolutionWorld))).WillOnce(testing::ReturnRef(result));
+		EXPECT_CALL(*hallOfFameToChallengeAlgorithm, execute(testing::Ref(*coevolutionWorld), testing::Ref(result))).Times(1);
 		EXPECT_CALL(*coevolutionFitnessFunction, execute(testing::Ref(result))).WillOnce(testing::Return(fitnessValues));
-		EXPECT_CALL(*coevolutionWorld, getHighscoreList()).WillOnce(testing::Return(&highscore));
-		EXPECT_CALL(*coevolutionWorld, rateKI(&bestObject)).Times(1);
+		EXPECT_CALL(*coevolutionWorld, getHighscoreList()).WillOnce(testing::ReturnRef(highscore));
+		EXPECT_CALL(*coevolutionWorld, rateKI(testing::Ref(bestObject))).Times(1);
 		EXPECT_CALL(*hallOfFameToAddAlgorithm, addMember(&bestObject)).Times(1);
 	}
 

@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "Random/AbstractRandomGenerator.hpp"
 
 class MockNetworkTopology : public LightBulb::AbstractNetworkTopology
 {
@@ -18,16 +19,16 @@ public:
 	MOCK_METHOD1(copyWeightsFrom, void (const AbstractNetworkTopology&));
 	MOCK_CONST_METHOD0(getNeuronCount, int ());
 	MOCK_CONST_METHOD1(calculateEuclideanDistance, double (const AbstractNetworkTopology&));
-	MOCK_METHOD3(randomizeWeights, void (LightBulb::AbstractRandomGenerator*, double, double));
+	MOCK_METHOD3(randomizeWeights, void (LightBulb::AbstractRandomGenerator&, double, double));
 	MOCK_CONST_METHOD0(getLayerCount, int ());
 	MOCK_CONST_METHOD0(getNeuronCountsPerLayer, const std::vector<unsigned>& ());
-	MOCK_METHOD1(randomizeDependingOnLayerSize, void (LightBulb::AbstractRandomGenerator*));
+	MOCK_METHOD1(randomizeDependingOnLayerSize, void (LightBulb::AbstractRandomGenerator&));
 	MOCK_METHOD1(refreshNetInputsForLayer, void (int));
 	MOCK_METHOD1(refreshActivationsForLayer, void (int));
-	MOCK_METHOD0(getAllWeights, std::vector<Eigen::MatrixXd>* ());
-	MOCK_CONST_METHOD0(getAllWeights, const std::vector<Eigen::MatrixXd>* ());
-	MOCK_CONST_METHOD0(getAllActivations, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>* ());
-	MOCK_CONST_METHOD0(getAllNetInputs, const std::vector<Eigen::VectorXd>* ());
+	MOCK_METHOD0(getAllWeights, std::vector<Eigen::MatrixXd>& ());
+	MOCK_CONST_METHOD0(getAllWeights, const std::vector<Eigen::MatrixXd>& ());
+	MOCK_CONST_METHOD0(getAllActivations, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& ());
+	MOCK_CONST_METHOD0(getAllNetInputs, const std::vector<Eigen::VectorXd>& ());
 	MOCK_CONST_METHOD1(getAfferentWeightsPerLayer, Eigen::MatrixXd (int));
 	MOCK_METHOD2(setAfferentWeightsPerLayer, void (int, const Eigen::MatrixXd&));
 	MOCK_CONST_METHOD1(getEfferentWeightsPerLayer, Eigen::MatrixXd (int));
@@ -46,8 +47,8 @@ public:
 	MOCK_METHOD3(removeAfferentWeight, void (int, int, int));
 	MOCK_METHOD3(existsAfferentWeight, bool (int, int, int));
 	MOCK_CONST_METHOD0(clone, AbstractNetworkTopology* ());
-	MOCK_CONST_METHOD0(getInnerNeuronDescription, const LightBulb::NeuronDescription* ());
-	MOCK_CONST_METHOD0(getOutputNeuronDescription, const LightBulb::NeuronDescription* ());
+	MOCK_CONST_METHOD0(getInnerNeuronDescription, const LightBulb::NeuronDescription& ());
+	MOCK_CONST_METHOD0(getOutputNeuronDescription, const LightBulb::NeuronDescription& ());
 };
 
 #endif

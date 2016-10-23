@@ -9,7 +9,7 @@
 class MockCoevolutionFitnessFunction : public LightBulb::AbstractCoevolutionFitnessFunction
 {
 public:
-	MOCK_METHOD1(execute, std::map<LightBulb::AbstractEvolutionObject*, double>* (LightBulb::CombiningStrategyResults&));
+	MOCK_METHOD1(execute, std::map<const LightBulb::AbstractEvolutionObject*, double>* (const LightBulb::CombiningStrategyResults&));
 };
 
 #endif

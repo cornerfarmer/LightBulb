@@ -22,12 +22,12 @@ public:
 	void SetUp() {
 		mutationStrength1.push_back(2);
 		mutationStrength1.push_back(-5);
-		EXPECT_CALL(object1, getMutationStrength()).WillRepeatedly(testing::Return(&mutationStrength1));
+		EXPECT_CALL(object1, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength1));
 		
 		
-		EXPECT_CALL(object1, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork1));
-		EXPECT_CALL(neuralNetwork1, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology1));
-		EXPECT_CALL(networkTopology1, getAllWeights()).WillRepeatedly(testing::Return(&weights1));
+		EXPECT_CALL(object1, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork1));
+		EXPECT_CALL(neuralNetwork1, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology1));
+		EXPECT_CALL(networkTopology1, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights1));
 
 		weights1.push_back(Eigen::MatrixXd(1, 2));
 		weights1[0](0, 0) = 2;
@@ -38,11 +38,11 @@ public:
 				
 		mutationStrength2.push_back(0.3);
 		mutationStrength2.push_back(3);
-		EXPECT_CALL(object2, getMutationStrength()).WillRepeatedly(testing::Return(&mutationStrength2));
+		EXPECT_CALL(object2, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength2));
 
-		EXPECT_CALL(object2, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork2));
-		EXPECT_CALL(neuralNetwork2, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology2));
-		EXPECT_CALL(networkTopology2, getAllWeights()).WillRepeatedly(testing::Return(&weights2));
+		EXPECT_CALL(object2, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork2));
+		EXPECT_CALL(neuralNetwork2, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology2));
+		EXPECT_CALL(networkTopology2, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights2));
 
 		weights2.push_back(Eigen::MatrixXd(1, 2));
 		weights2[0](0, 0) = -6;
@@ -82,7 +82,7 @@ public:
 TEST_F(RecombinationAlgorithmTest, executeWithAverage)
 {
 	recombinationAlgorithm = new RecombinationAlgorithm(true, true);
-	recombinationAlgorithm->execute(&object1, &object2);
+	recombinationAlgorithm->execute(object1, object2);
 
 	EXPECT_NEAR(1.15, mutationStrength1[0], 0.00001);
 	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
@@ -97,7 +97,7 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
 {
 	recombinationAlgorithm = new RecombinationAlgorithm(false, false);
 
-	recombinationAlgorithm->setRandomGenerator(&mockRandomGenerator);
+	recombinationAlgorithm->setRandomGenerator(mockRandomGenerator);
 	testing::InSequence s;
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
@@ -105,7 +105,7 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
 
-	recombinationAlgorithm->execute(&object1, &object2);
+	recombinationAlgorithm->execute(object1, object2);
 
 	EXPECT_NEAR(0.3, mutationStrength1[0], 0.00001);
 	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);
@@ -120,7 +120,7 @@ TEST_F(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
 	addExtraNeuronsForDifferentSizes();
 
 	recombinationAlgorithm = new RecombinationAlgorithm(true, true);
-	recombinationAlgorithm->execute(&object1, &object2);
+	recombinationAlgorithm->execute(object1, object2);
 
 	EXPECT_NEAR(1.15, mutationStrength1[0], 0.00001);
 	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
@@ -144,7 +144,7 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
 
 	recombinationAlgorithm = new RecombinationAlgorithm(false, false);
 
-	recombinationAlgorithm->setRandomGenerator(&mockRandomGenerator);
+	recombinationAlgorithm->setRandomGenerator(mockRandomGenerator);
 	testing::InSequence s;
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
@@ -152,7 +152,7 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
 	
-	recombinationAlgorithm->execute(&object1, &object2);
+	recombinationAlgorithm->execute(object1, object2);
 	
 	EXPECT_NEAR(0.3, mutationStrength1[0], 0.00001);
 	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);

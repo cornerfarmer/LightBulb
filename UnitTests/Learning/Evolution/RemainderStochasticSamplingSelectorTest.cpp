@@ -35,17 +35,17 @@ TEST_F(RemainderStochasticSamplingSelectorTest, executeMutationSelectionWithoutR
 	EXPECT_CALL(*selectionFunction, execute(testing::_)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&secondChance), testing::Return(1)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
-	remainderStochasticSamplingSelector->executeMutationSelection(3, &highscore, &counter);
-	std::vector<AbstractEvolutionObject*>* selectedObjects = remainderStochasticSamplingSelector->getMutationSelection();
+	remainderStochasticSamplingSelector->executeMutationSelection(3, highscore, counter);
+	std::vector<AbstractEvolutionObject*>& selectedObjects = remainderStochasticSamplingSelector->getMutationSelection();
 
 	EXPECT_EQ(2, secondChance.size());
 	EXPECT_EQ(8, secondChance[0]);
 	EXPECT_EQ(2, secondChance[1]);
 
-	EXPECT_EQ(3, selectedObjects->size());
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(0));
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(1));
-	EXPECT_EQ(highscore[1].second, selectedObjects->at(2));
+	EXPECT_EQ(3, selectedObjects.size());
+	EXPECT_EQ(highscore[0].second, selectedObjects[0]);
+	EXPECT_EQ(highscore[0].second, selectedObjects[1]);
+	EXPECT_EQ(highscore[1].second, selectedObjects[2]);
 
 	EXPECT_EQ(2, counter.size());
 	EXPECT_EQ(2, counter[highscore[0].second]);
@@ -65,17 +65,17 @@ TEST_F(RemainderStochasticSamplingSelectorTest, executeMutationSelectionWithRepl
 	EXPECT_CALL(*selectionFunction, execute(testing::_)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&secondChance), testing::Return(1)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
-	remainderStochasticSamplingSelector->executeMutationSelection(3, &highscore, &counter);
-	std::vector<AbstractEvolutionObject*>* selectedObjects = remainderStochasticSamplingSelector->getMutationSelection();
+	remainderStochasticSamplingSelector->executeMutationSelection(3, highscore, counter);
+	std::vector<AbstractEvolutionObject*>& selectedObjects = remainderStochasticSamplingSelector->getMutationSelection();
 
 	EXPECT_EQ(2, secondChance.size());
 	EXPECT_NEAR(0.4, secondChance[0], 0.001);
 	EXPECT_NEAR(0.6, secondChance[1], 0.001);
 
-	EXPECT_EQ(3, selectedObjects->size());
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(0));
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(1));
-	EXPECT_EQ(highscore[1].second, selectedObjects->at(2));
+	EXPECT_EQ(3, selectedObjects.size());
+	EXPECT_EQ(highscore[0].second, selectedObjects[0]);
+	EXPECT_EQ(highscore[0].second, selectedObjects[1]);
+	EXPECT_EQ(highscore[1].second, selectedObjects[2]);
 
 	EXPECT_EQ(2, counter.size());
 	EXPECT_EQ(2, counter[highscore[0].second]);

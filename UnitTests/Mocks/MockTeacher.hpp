@@ -13,8 +13,8 @@ class MockTeacher : public LightBulb::AbstractTeacher
 public:
 	MOCK_METHOD1(addTeachingLesson, void (LightBulb::AbstractTeachingLesson*));
 	MOCK_METHOD1(addTestingLesson, void (LightBulb::AbstractTeachingLesson*));
-	MOCK_CONST_METHOD0(getTeachingLessons, const std::vector<std::unique_ptr<LightBulb::AbstractTeachingLesson>>* ());
-	MOCK_CONST_METHOD0(getTestingLessons, const std::vector<std::unique_ptr<LightBulb::AbstractTeachingLesson>>* ());
+	MOCK_CONST_METHOD0(getTeachingLessons, const std::vector<std::unique_ptr<LightBulb::AbstractTeachingLesson>>& ());
+	MOCK_CONST_METHOD0(getTestingLessons, const std::vector<std::unique_ptr<LightBulb::AbstractTeachingLesson>>& ());
 	MOCK_CONST_METHOD2(getTotalError, double (LightBulb::AbstractNeuralNetwork&, const LightBulb::AbstractActivationOrder&));
 	MOCK_CONST_METHOD2(getTeachingError, double (LightBulb::AbstractNeuralNetwork&, const LightBulb::AbstractActivationOrder&));
 	MOCK_CONST_METHOD1(getWeightDecayError, double (LightBulb::AbstractNeuralNetwork&));

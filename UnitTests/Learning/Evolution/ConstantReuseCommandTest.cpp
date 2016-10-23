@@ -27,7 +27,7 @@ public:
 		selectedObjects.resize(1);
 		selectedObjects[0] = new MockEvolutionObject();
 		
-		EXPECT_CALL(*reuseSelector, getReuseSelection()).WillRepeatedly(testing::Return(&selectedObjects));
+		EXPECT_CALL(*reuseSelector, getReuseSelection()).WillRepeatedly(testing::ReturnRef(selectedObjects));
 	}
 
 	virtual ~ConstantReuseCommandTest()
@@ -44,9 +44,9 @@ TEST_F(ConstantReuseCommandTest, selectStaticCount)
 	std::map<AbstractEvolutionObject*, int> counter;
 	constantReuseCommand->setReuseCount(10);
 
-	EXPECT_CALL(*reuseSelector, executeReuseSelection(10, &highscore, &counter)).Times(1);
+	EXPECT_CALL(*reuseSelector, executeReuseSelection(10, highscore, counter)).Times(1);
 
-	constantReuseCommand->select(&highscore, &counter);
+	constantReuseCommand->select(highscore, counter);
 }
 
 TEST_F(ConstantReuseCommandTest, selectPercentage)
@@ -55,9 +55,9 @@ TEST_F(ConstantReuseCommandTest, selectPercentage)
 	std::map<AbstractEvolutionObject*, int> counter;
 	constantReuseCommand->setReusePercentage(0.5);
 
-	EXPECT_CALL(*reuseSelector, executeReuseSelection(5, &highscore, &counter)).Times(1);
+	EXPECT_CALL(*reuseSelector, executeReuseSelection(5, highscore, counter)).Times(1);
 
-	constantReuseCommand->select(&highscore, &counter);
+	constantReuseCommand->select(highscore, counter);
 }
 
 TEST_F(ConstantReuseCommandTest, executeWithNoMultipleUsedObject)
@@ -65,7 +65,7 @@ TEST_F(ConstantReuseCommandTest, executeWithNoMultipleUsedObject)
 	SetUpExecute();
 	counter[selectedObjects[0]] = 1;
 
-	constantReuseCommand->execute(&newObjectVector, &counter, &notUsedObjects);
+	constantReuseCommand->execute(newObjectVector, counter, notUsedObjects);
 
 	EXPECT_EQ(1, newObjectVector.size());
 	EXPECT_EQ(selectedObjects[0], newObjectVector[0]);
@@ -80,7 +80,7 @@ TEST_F(ConstantReuseCommandTest, executeWithMultipleUsedObject)
 
 	EXPECT_CALL(*(MockEvolutionObject*)selectedObjects[0], clone(true)).Times(1).WillOnce(testing::Return(&clonedObject));
 
-	constantReuseCommand->execute(&newObjectVector, &counter, &notUsedObjects);
+	constantReuseCommand->execute(newObjectVector, counter, notUsedObjects);
 
 	EXPECT_EQ(1, newObjectVector.size());
 	EXPECT_EQ(&clonedObject, newObjectVector[0]);
@@ -94,9 +94,9 @@ TEST_F(ConstantReuseCommandTest, executeWithTwoMultipleUsedObjectsAndANotUsedObj
 	MockEvolutionObject unusedObject;
 	notUsedObjects.push_back(&unusedObject);
 
-	EXPECT_CALL(unusedObject, copyPropertiesFrom(selectedObjects[0])).Times(1);
+	EXPECT_CALL(unusedObject, copyPropertiesFrom(testing::Ref(*selectedObjects[0]))).Times(1);
 	
-	constantReuseCommand->execute(&newObjectVector, &counter, &notUsedObjects);
+	constantReuseCommand->execute(newObjectVector, counter, notUsedObjects);
 
 	EXPECT_EQ(1, newObjectVector.size());
 	EXPECT_EQ(&unusedObject, newObjectVector[0]);

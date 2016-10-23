@@ -35,13 +35,13 @@ TEST_F(FullHallOfFameAlgorithmTest, execute)
 
 	MockEvolutionObject object1, object2;
 	std::vector<AbstractEvolutionObject*> objects({ &object1 , &object2 });
-	EXPECT_CALL(world, getEvolutionObjects()).WillRepeatedly(testing::Return(&objects));
-	EXPECT_CALL(world, compareObjects(&object2, hallOfFameMember1Clone, 0)).WillOnce(testing::Return(1));
-	EXPECT_CALL(world, compareObjects(&object1, hallOfFameMember1Clone, 0)).WillOnce(testing::Return(0));
-	EXPECT_CALL(world, compareObjects(&object2, hallOfFameMember2Clone, 0)).WillOnce(testing::Return(1));
-	EXPECT_CALL(world, compareObjects(&object1, hallOfFameMember2Clone, 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(world, getEvolutionObjects()).WillRepeatedly(testing::ReturnRef(objects));
+	EXPECT_CALL(world, compareObjects(testing::Ref(object2), testing::Ref(*hallOfFameMember1Clone), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(testing::Ref(object1), testing::Ref(*hallOfFameMember1Clone), 0)).WillOnce(testing::Return(0));
+	EXPECT_CALL(world, compareObjects(testing::Ref(object2), testing::Ref(*hallOfFameMember2Clone), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(world, compareObjects(testing::Ref(object1), testing::Ref(*hallOfFameMember2Clone), 0)).WillOnce(testing::Return(1));
 
-	fullHallOfFameAlgorithm->execute(&world, results);
+	fullHallOfFameAlgorithm->execute(world, results);
 
 	EXPECT_EQ(false, results[&object1][hallOfFameMember1Clone][0]);
 	EXPECT_EQ(true, results[hallOfFameMember1Clone][&object1][0]);

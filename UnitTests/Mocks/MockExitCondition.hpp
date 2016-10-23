@@ -9,8 +9,8 @@
 class MockExitCondition : public LightBulb::AbstractExitCondition
 {
 public:
-	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
-	MOCK_METHOD2(evaluate, bool (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>*, LightBulb::AbstractEvolutionLearningRule*));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
+	MOCK_METHOD2(evaluate, bool (const std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&, const LightBulb::AbstractEvolutionLearningRule&));
 };
 
 #endif

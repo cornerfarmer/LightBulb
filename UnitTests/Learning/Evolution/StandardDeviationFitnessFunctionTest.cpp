@@ -29,7 +29,7 @@ TEST_F(StandardDeviationFitnessFunctionTest, execute)
 	highscore.push_back(std::make_pair(6, (AbstractEvolutionObject*)nullptr));
 	highscore.push_back(std::make_pair(2, (AbstractEvolutionObject*)nullptr));
 
-	standardDeviationFitnessFunction->execute(&highscore);
+	standardDeviationFitnessFunction->execute(highscore);
 	EXPECT_NEAR(7.26599, highscore[0].first, 0.00001);
 	EXPECT_NEAR(3.26599, highscore[1].first, 0.00001);
 	EXPECT_NEAR(-0.734014, highscore[2].first, 0.00001);
@@ -46,5 +46,5 @@ TEST_F(StandardDeviationFitnessFunctionTest, executeFails)
 	highscore.push_back(std::make_pair(6, (AbstractEvolutionObject*)nullptr));
 	highscore.push_back(std::make_pair(2, (AbstractEvolutionObject*)nullptr));
 
-	EXPECT_THROW(standardDeviationFitnessFunction->execute(&highscore), std::logic_error);
+	EXPECT_THROW(standardDeviationFitnessFunction->execute(highscore), std::logic_error);
 }

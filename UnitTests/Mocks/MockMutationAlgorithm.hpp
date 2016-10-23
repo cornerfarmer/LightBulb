@@ -9,7 +9,9 @@
 class MockMutationAlgorithm : public LightBulb::AbstractMutationAlgorithm
 {
 public:
-	MOCK_METHOD1(execute, void (LightBulb::AbstractEvolutionObject*));
+	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
+	MOCK_METHOD1(execute, void (LightBulb::AbstractEvolutionObject&));
+	MOCK_METHOD1(initialize, void (const std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&));
 };
 
 #endif

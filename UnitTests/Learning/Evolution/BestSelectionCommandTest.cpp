@@ -32,7 +32,7 @@ TEST_F(BestSelectionCommandTest, executeReuseSelection)
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
 
 	std::vector<AbstractEvolutionObject*> objects;
-	bestSelectionCommand->execute(&highscore, &objects, &notUsedObjects);
+	bestSelectionCommand->execute(highscore, objects, notUsedObjects);
 
 	EXPECT_EQ(3, objects.size());
 	EXPECT_EQ(highscore[0].second, objects[0]);

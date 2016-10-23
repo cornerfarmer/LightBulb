@@ -27,7 +27,7 @@ TEST_F(ExponentialFitnessFunctionTest, execute)
 	highscore.push_back(std::make_pair(4, (AbstractEvolutionObject*)nullptr));
 	highscore.push_back(std::make_pair(-3, (AbstractEvolutionObject*)nullptr));
 
-	exponentialFitnessFunction->execute(&highscore);
+	exponentialFitnessFunction->execute(highscore);
 	EXPECT_EQ(529, highscore[0].first);
 	EXPECT_EQ(144, highscore[1].first);
 

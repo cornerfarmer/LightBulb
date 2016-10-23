@@ -9,7 +9,8 @@
 class MockRecombinationAlgorithm : public LightBulb::AbstractRecombinationAlgorithm
 {
 public:
-	MOCK_METHOD2(execute, void (LightBulb::AbstractEvolutionObject*, LightBulb::AbstractEvolutionObject*));
+	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
+	MOCK_METHOD2(execute, void (LightBulb::AbstractEvolutionObject&, LightBulb::AbstractEvolutionObject&));
 };
 
 #endif

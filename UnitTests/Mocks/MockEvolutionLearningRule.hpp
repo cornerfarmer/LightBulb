@@ -11,7 +11,6 @@ class MockEvolutionLearningRule : public LightBulb::AbstractEvolutionLearningRul
 public:
 	MockEvolutionLearningRule(LightBulb::AbstractEvolutionLearningRuleOptions& options_):AbstractEvolutionLearningRule(options_) {};
 	MOCK_METHOD0(doIteration, bool ());
-	MOCK_METHOD0(getWorld, LightBulb::AbstractEvolutionWorld* ());
 	MOCK_METHOD0(initializeStartLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeResumeLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeLearningAlgoritm, void ());
@@ -19,10 +18,13 @@ public:
 	MOCK_METHOD0(doCalculationAfterLearningProcess, void ());
 	MOCK_METHOD0(rateLearning, void ());
 	MOCK_METHOD0(hasLearningSucceeded, bool ());
-	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger*));
-	MOCK_METHOD0(getDataSetLabels, std::vector<std::string> ());
 	MOCK_METHOD0(getLearningResult, LightBulb::AbstractLearningResult* ());
-	MOCK_METHOD1(fillDefaultResults, void (LightBulb::AbstractLearningResult*));
+	MOCK_METHOD1(fillDefaultResults, void (LightBulb::AbstractLearningResult&));
+	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
+	MOCK_METHOD0(setHelperToUsedObjects, void ());
+	MOCK_CONST_METHOD0(getDataSetLabels, std::vector<std::string> ());
+	MOCK_CONST_METHOD0(getWorld, const LightBulb::AbstractEvolutionWorld& ());
+	MOCK_METHOD0(getWorld, LightBulb::AbstractEvolutionWorld& ());
 };
 
 #endif

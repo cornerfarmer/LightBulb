@@ -35,16 +35,16 @@ public:
 
 TEST_F(TeacherTest, getTeachingLessons)
 {
-	EXPECT_EQ(2, teacher->getTeachingLessons()->size());
-	EXPECT_EQ(teachingLesson1, teacher->getTeachingLessons()->at(0).get());
-	EXPECT_EQ(teachingLesson2, teacher->getTeachingLessons()->at(1).get());
+	EXPECT_EQ(2, teacher->getTeachingLessons().size());
+	EXPECT_EQ(teachingLesson1, teacher->getTeachingLessons().at(0).get());
+	EXPECT_EQ(teachingLesson2, teacher->getTeachingLessons().at(1).get());
 }
 
 TEST_F(TeacherTest, getTestingLessons)
 {
-	EXPECT_EQ(2, teacher->getTestingLessons()->size());
-	EXPECT_EQ(testingLesson1, teacher->getTestingLessons()->at(0).get());
-	EXPECT_EQ(testingLesson2, teacher->getTestingLessons()->at(1).get());
+	EXPECT_EQ(2, teacher->getTestingLessons().size());
+	EXPECT_EQ(testingLesson1, teacher->getTestingLessons().at(0).get());
+	EXPECT_EQ(testingLesson2, teacher->getTestingLessons().at(1).get());
 }
 
 TEST_F(TeacherTest, getTotalError)
@@ -82,10 +82,10 @@ TEST_F(TeacherTest, unfold)
 
 	std::unique_ptr<AbstractTeacher> unfoldetedTeacher(teacher->unfold());
 
-	EXPECT_EQ(2, unfoldetedTeacher->getTeachingLessons()->size());
-	EXPECT_EQ(unfoldedTeachingLesson1, unfoldetedTeacher->getTeachingLessons()->at(0).get());
-	EXPECT_EQ(unfoldedTeachingLesson2, unfoldetedTeacher->getTeachingLessons()->at(1).get());
-	EXPECT_EQ(2, unfoldetedTeacher->getTestingLessons()->size());
-	EXPECT_EQ(unfoldedTestingLesson1, unfoldetedTeacher->getTestingLessons()->at(0).get());
-	EXPECT_EQ(unfoldedTestingLesson2, unfoldetedTeacher->getTestingLessons()->at(1).get());
+	EXPECT_EQ(2, unfoldetedTeacher->getTeachingLessons().size());
+	EXPECT_EQ(unfoldedTeachingLesson1, unfoldetedTeacher->getTeachingLessons().at(0).get());
+	EXPECT_EQ(unfoldedTeachingLesson2, unfoldetedTeacher->getTeachingLessons().at(1).get());
+	EXPECT_EQ(2, unfoldetedTeacher->getTestingLessons().size());
+	EXPECT_EQ(unfoldedTestingLesson1, unfoldetedTeacher->getTestingLessons().at(0).get());
+	EXPECT_EQ(unfoldedTestingLesson2, unfoldetedTeacher->getTestingLessons().at(1).get());
 }

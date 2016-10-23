@@ -14,8 +14,8 @@ public:
 	{
 	}
 
-	MOCK_METHOD1(outputMessage, void (std::string));
-	MOCK_METHOD2(log, void (std::string, LightBulb::LogLevel));
+	MOCK_METHOD1(outputMessage, void (const std::string&));
+	MOCK_METHOD2(log, void (const std::string&, const LightBulb::LogLevel&));
 };
 
 #endif

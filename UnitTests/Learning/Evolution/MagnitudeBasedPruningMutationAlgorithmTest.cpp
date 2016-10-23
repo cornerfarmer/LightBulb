@@ -27,11 +27,11 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 	MockEvolutionObject object;
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork));
+	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
-	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology));
+	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
-	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::Return(&weights));
+	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
 	EXPECT_CALL(networkTopology, usesBiasNeuron()).WillRepeatedly(testing::Return(true));
 	std::vector<unsigned int> neuronCounts(2, 2);
 	EXPECT_CALL(networkTopology, getNeuronCountsPerLayer()).WillRepeatedly(testing::ReturnRef(neuronCounts));
@@ -48,7 +48,7 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 
 	EXPECT_CALL(networkTopology, removeNeuron(0, 1)).Times(1);
 
-	magnitudeBasedPruningMutationAlgorithm->execute(&object);
+	magnitudeBasedPruningMutationAlgorithm->execute(object);
 }
 
 TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
@@ -57,11 +57,11 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 	MockEvolutionObject object;
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork));
+	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
-	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology));
+	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
-	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::Return(&weights));
+	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
 	EXPECT_CALL(networkTopology, usesBiasNeuron()).WillRepeatedly(testing::Return(true));
 	EXPECT_CALL(networkTopology, existsAfferentWeight(testing::_, testing::_, testing::_)).WillRepeatedly(testing::Return(true));
 	EXPECT_CALL(networkTopology, existsAfferentWeight(0, 0, 0)).WillRepeatedly(testing::Return(false));
@@ -83,7 +83,7 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 
 	EXPECT_CALL(networkTopology, removeNeuron(0, 2)).Times(1);
 
-	magnitudeBasedPruningMutationAlgorithm->execute(&object);
+	magnitudeBasedPruningMutationAlgorithm->execute(object);
 }
 
 
@@ -93,11 +93,11 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeWeight)
 	MockEvolutionObject object;
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::Return(&neuralNetwork));
+	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
-	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::Return(&networkTopology));
+	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
-	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::Return(&weights));
+	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
 	EXPECT_CALL(networkTopology, usesBiasNeuron()).WillRepeatedly(testing::Return(true));
 	EXPECT_CALL(networkTopology, existsAfferentWeight(testing::_, testing::_, testing::_)).WillRepeatedly(testing::Return(true));
 	EXPECT_CALL(networkTopology, existsAfferentWeight(0, 0, 0)).WillRepeatedly(testing::Return(false));
@@ -116,5 +116,5 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeWeight)
 
 	EXPECT_CALL(networkTopology, removeAfferentWeight(0, 1, 0)).Times(1);
 
-	magnitudeBasedPruningMutationAlgorithm->execute(&object);
+	magnitudeBasedPruningMutationAlgorithm->execute(object);
 }

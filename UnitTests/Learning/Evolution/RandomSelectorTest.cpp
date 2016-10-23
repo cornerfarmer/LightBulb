@@ -39,13 +39,13 @@ TEST_F(RandomSelectorTest, executeMutationSelection)
 	}
 
 	std::map<AbstractEvolutionObject*, int> counter;
-	randomSelector->executeMutationSelection(3, &highscore, &counter);
-	std::vector<AbstractEvolutionObject*>* selectedObjects = randomSelector->getMutationSelection();
+	randomSelector->executeMutationSelection(3, highscore, counter);
+	std::vector<AbstractEvolutionObject*>& selectedObjects = randomSelector->getMutationSelection();
 
-	EXPECT_EQ(3, selectedObjects->size());
-	EXPECT_EQ(highscore[4].second, selectedObjects->at(0));
-	EXPECT_EQ(highscore[2].second, selectedObjects->at(1));
-	EXPECT_EQ(highscore[3].second, selectedObjects->at(2));
+	EXPECT_EQ(3, selectedObjects.size());
+	EXPECT_EQ(highscore[4].second, selectedObjects[0]);
+	EXPECT_EQ(highscore[2].second, selectedObjects[1]);
+	EXPECT_EQ(highscore[3].second, selectedObjects[2]);
 
 	EXPECT_EQ(3, counter.size());
 	EXPECT_EQ(1, counter[highscore[4].second]);
@@ -75,16 +75,16 @@ TEST_F(RandomSelectorTest, executeRecombinationSelection)
 	}
 
 	std::map<AbstractEvolutionObject*, int> counter;
-	randomSelector->executeRecombinationSelection(3, &highscore, &counter);
-	std::vector<AbstractEvolutionObject*>* selectedObjects = randomSelector->getRecombinationSelection();
+	randomSelector->executeRecombinationSelection(3, highscore, counter);
+	std::vector<AbstractEvolutionObject*>& selectedObjects = randomSelector->getRecombinationSelection();
 
-	EXPECT_EQ(6, selectedObjects->size());
-	EXPECT_EQ(highscore[3].second, selectedObjects->at(0));
-	EXPECT_EQ(highscore[1].second, selectedObjects->at(1));
-	EXPECT_EQ(highscore[2].second, selectedObjects->at(2));
-	EXPECT_EQ(highscore[0].second, selectedObjects->at(3));
-	EXPECT_EQ(highscore[2].second, selectedObjects->at(4));
-	EXPECT_EQ(highscore[4].second, selectedObjects->at(5));
+	EXPECT_EQ(6, selectedObjects.size());
+	EXPECT_EQ(highscore[3].second, selectedObjects[0]);
+	EXPECT_EQ(highscore[1].second, selectedObjects[1]);
+	EXPECT_EQ(highscore[2].second, selectedObjects[2]);
+	EXPECT_EQ(highscore[0].second, selectedObjects[3]);
+	EXPECT_EQ(highscore[2].second, selectedObjects[4]);
+	EXPECT_EQ(highscore[4].second, selectedObjects[5]);
 
 	EXPECT_EQ(5, counter.size());
 	EXPECT_EQ(1, counter[highscore[3].second]);

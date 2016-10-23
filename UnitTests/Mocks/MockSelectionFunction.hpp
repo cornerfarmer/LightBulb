@@ -9,7 +9,7 @@
 class MockSelectionFunction : public LightBulb::AbstractSelectionFunction
 {
 public:
-	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator*));
+	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
 	MOCK_CONST_METHOD1(execute, int (const std::vector<double>&));
 	MOCK_CONST_METHOD2(execute, std::vector<int> (const std::vector<double>&, int));
 };

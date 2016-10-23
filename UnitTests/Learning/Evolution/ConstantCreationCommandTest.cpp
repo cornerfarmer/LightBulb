@@ -38,5 +38,5 @@ TEST_F(ConstantCreationCommandTest, executeReuseSelection)
 	
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
 
-	constantCreationCommand->execute(*evolutionWorld, &notUsedObjects);
+	constantCreationCommand->execute(*evolutionWorld, notUsedObjects);
 }
