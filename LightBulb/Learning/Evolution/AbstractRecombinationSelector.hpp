@@ -24,15 +24,15 @@ namespace LightBulb
 
 		std::map<AbstractEvolutionObject*, int>* currentCounter;
 	protected:
-		virtual void addObjectToRecombination(AbstractEvolutionObject* object);
+		virtual void addObjectToRecombination(AbstractEvolutionObject& object);
 
-		virtual void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+		virtual void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	public:
 		virtual ~AbstractRecombinationSelector() {};
 		//
-		virtual void executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+		virtual void executeRecombinationSelection(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 
-		virtual std::vector<AbstractEvolutionObject*>* getRecombinationSelection();
+		virtual std::vector<AbstractEvolutionObject*>& getRecombinationSelection() const;
 	};
 }
 

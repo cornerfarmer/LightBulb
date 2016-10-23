@@ -22,15 +22,15 @@ namespace LightBulb
 
 		std::map<AbstractEvolutionObject*, int>* currentCounter;
 	protected:
-		virtual void addObjectToReuse(AbstractEvolutionObject* object);
+		virtual void addObjectToReuse(AbstractEvolutionObject& object);
 
-		virtual void selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+		virtual void selectForReuse(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	public:
 		virtual ~AbstractReuseSelector() {};
 		//
-		virtual void executeReuseSelection(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+		virtual void executeReuseSelection(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 
-		virtual std::vector<AbstractEvolutionObject*>* getReuseSelection();
+		virtual const std::vector<AbstractEvolutionObject*>& getReuseSelection() const;
 	};
 }
 

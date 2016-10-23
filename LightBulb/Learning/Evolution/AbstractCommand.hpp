@@ -21,7 +21,7 @@ namespace LightBulb
 	class AbstractCommand : public AbstractLoggable, public AbstractRandomGeneratorUser
 	{
 	protected:
-		AbstractEvolutionObject* getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects, bool addToWorld = true);
+		AbstractEvolutionObject& getUnusedObject(AbstractEvolutionObject& usedObject, std::vector<AbstractEvolutionObject*>& notUsedObjects, bool addToWorld = true) const;
 	};
 }
 

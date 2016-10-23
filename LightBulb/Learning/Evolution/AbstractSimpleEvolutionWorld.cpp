@@ -26,7 +26,7 @@ namespace LightBulb
 		return &objects;
 	}
 
-	void AbstractSimpleEvolutionWorld::setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects)
+	void AbstractSimpleEvolutionWorld::setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects)
 	{
 		objects = newObjects;
 	}

@@ -51,9 +51,9 @@ namespace LightBulb
 		AbstractSimpleEvolutionObject() = default;
 		// Inherited:
 		void doNNCalculation() override;
-		AbstractNeuralNetwork* getNeuralNetwork() override;
+		AbstractNeuralNetwork& getNeuralNetwork() override;
 		void resetNN() override;
-		AbstractEvolutionObject* clone(bool addToWorld = true) override;
+		AbstractEvolutionObject* clone(bool addToWorld = true) const override;
 	};
 }
 

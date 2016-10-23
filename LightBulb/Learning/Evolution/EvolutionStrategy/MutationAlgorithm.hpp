@@ -32,7 +32,7 @@ namespace LightBulb
 		// Mutates the given evolution object:
 		// 1. Changes the mutationStrength values randomly
 		// 2. Adds the new mutationStrength values to their corresponding weights
-		void execute(AbstractEvolutionObject* object1) override;
+		void execute(AbstractEvolutionObject& object1) override;
 	};
 }
 

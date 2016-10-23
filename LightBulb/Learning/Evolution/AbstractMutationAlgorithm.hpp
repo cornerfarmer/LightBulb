@@ -21,8 +21,8 @@ namespace LightBulb
 	public:
 		virtual ~AbstractMutationAlgorithm() {};
 		// Mutates the given evolution object.
-		virtual void execute(AbstractEvolutionObject* object1) = 0;
-		virtual void initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) {};
+		virtual void execute(AbstractEvolutionObject& object1) = 0;
+		virtual void initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) {};
 	};
 }
 

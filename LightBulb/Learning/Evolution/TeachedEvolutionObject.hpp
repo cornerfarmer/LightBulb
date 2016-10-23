@@ -34,7 +34,7 @@ namespace LightBulb
 		double currentWeightDecayError;
 	public:
 		// Create a new evolution object in the given world and with a NN built after the given network options
-		TeachedEvolutionObject(TeachingEvolutionWorld* teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
+		TeachedEvolutionObject(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
 		TeachedEvolutionObject() = default;
 		double getCurrentTotalError();
 		double getCurrentTeachingError();
@@ -42,8 +42,8 @@ namespace LightBulb
 		// Inherited:
 		void doNNCalculation() override;
 		void resetNN() override;
-		AbstractNeuralNetwork* getNeuralNetwork() override;
-		AbstractEvolutionObject* clone(bool addToWorld = true) override;
+		AbstractNeuralNetwork& getNeuralNetwork() override;
+		AbstractEvolutionObject* clone(bool addToWorld = true) const override;
 	};
 }
 

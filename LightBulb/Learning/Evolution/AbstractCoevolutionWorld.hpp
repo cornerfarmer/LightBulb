@@ -40,14 +40,14 @@ namespace LightBulb
 		AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 		AbstractCoevolutionWorld() = default;
 		bool doSimulationStep() override;
-		double getScore(AbstractEvolutionObject& object) override;
+		double getScore(const AbstractEvolutionObject& object) const override;
 		virtual int compareObjects(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round);
 		virtual int rateKI(AbstractEvolutionObject& rateKI) { return 0; }
-		virtual AbstractCombiningStrategy* getCombiningStrategy();
+		virtual const AbstractCombiningStrategy& getCombiningStrategy() const;
 		void setLogger(AbstractLogger& logger_) override;
-		std::vector<std::string> getDataSetLabels() override;
-		virtual bool isParasiteWorld();
-		virtual int getRoundCount();
+		std::vector<std::string> getDataSetLabels() const override;
+		virtual bool isParasiteWorld() const;
+		virtual int getRoundCount() const;
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }

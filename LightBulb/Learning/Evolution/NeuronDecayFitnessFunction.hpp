@@ -20,7 +20,7 @@ namespace LightBulb
 	public:
 		NeuronDecayFitnessFunction(double fac_);
 		//
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	};
 }
 

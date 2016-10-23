@@ -17,9 +17,9 @@ namespace LightBulb
 	class RoundRobinCombiningStrategy : public AbstractCombiningStrategy
 	{
 	private:
-		void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
+		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
 	public:
-		int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
+		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
 	};
 }
 

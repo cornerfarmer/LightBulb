@@ -21,7 +21,7 @@ namespace LightBulb
 	{
 	private:
 	protected:
-		void selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void selectForReuse(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
 	};
 }

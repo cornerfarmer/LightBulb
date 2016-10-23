@@ -20,7 +20,7 @@ namespace LightBulb
 	public:
 		StandardDeviationFitnessFunction(double deviationFac_ = 0);
 		//
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	};
 }
 

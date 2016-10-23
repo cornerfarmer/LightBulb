@@ -26,15 +26,15 @@ namespace LightBulb
 		int firstPlayerWins;
 	protected:
 		AbstractCoevolutionWorld* secondWorld;
-		virtual void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) = 0;
-		void setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, int round, bool firstPlayerHasWon);
+		virtual void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) = 0;
+		void setResult(AbstractEvolutionObject& firstPlayer, AbstractEvolutionObject& secondPlayer, int round, bool firstPlayerHasWon);
 	public:
 		AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = nullptr);
-		virtual CombiningStrategyResults* execute(AbstractCoevolutionWorld* world);
-		virtual void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld);
-		virtual CombiningStrategyResults* getPrevResults();
-		virtual int getFirstPlayerWins();
-		virtual int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) = 0;
+		virtual CombiningStrategyResults& execute(AbstractCoevolutionWorld& world);
+		virtual void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld);
+		virtual CombiningStrategyResults& getPrevResults();
+		virtual int getFirstPlayerWins() const;
+		virtual int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const = 0;
 	};
 }
 

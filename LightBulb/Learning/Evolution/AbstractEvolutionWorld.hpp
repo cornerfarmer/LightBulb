@@ -35,7 +35,7 @@ namespace LightBulb
 
 		AbstractEvolutionWorld();
 
-		virtual std::vector<AbstractEvolutionObject*>* getEvolutionObjects() = 0;
+		virtual std::vector<AbstractEvolutionObject*>& getEvolutionObjects() = 0;
 		virtual void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects) = 0;
 		// This method should create a new evolution object and add it to the world
 		virtual AbstractEvolutionObject* addNewObject(bool addToWorld = true) = 0;
@@ -43,22 +43,22 @@ namespace LightBulb
 		// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 		virtual bool doSimulationStep() = 0;
 		// Returns a list of all current evolution objects ordered by their score
-		virtual Highscore* getHighscoreList();
+		virtual const Highscore& getHighscoreList();
 		// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)
-		virtual double getScore(AbstractEvolutionObject& object) = 0;
+		virtual double getScore(const AbstractEvolutionObject& object) const = 0;
 		//
-		virtual double getRealScore(AbstractEvolutionObject* object) { return getScore(*object); }
+		virtual double getRealScore(const AbstractEvolutionObject& object) const { return getScore(object); }
 		virtual void initializeForLearning() {}
 
 		virtual void releaseAllObjects() = 0;
 		// Reset the whole world (This method can for instance reset the environment or the current evolution objects...)
 		virtual void reset() = 0;
 
-		virtual std::vector<std::string> getDataSetLabels();
+		virtual std::vector<std::string> getDataSetLabels() const;
 
 		void setLearningState(LearningState& learningState_);
 
-		virtual int getPopulationSize() = 0;
+		virtual int getPopulationSize() const = 0;
 
 		virtual void clearPopulation() = 0;
 

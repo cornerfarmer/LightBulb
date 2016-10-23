@@ -3,11 +3,11 @@
 
 namespace LightBulb
 {
-	void BestReuseSelector::selectForReuse(int reuseCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void BestReuseSelector::selectForReuse(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		for (int i = 0; i < reuseCount; i++)
 		{
-			addObjectToReuse((*highscore)[i].second);
+			addObjectToReuse(*highscore[i].second);
 		}
 	}
 }

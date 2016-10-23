@@ -22,8 +22,8 @@ namespace LightBulb
 		// Holds amount of objects which should be selected
 		std::unique_ptr<AbstractRandomFunction> randomFunction;
 	protected:
-		void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-		void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
 		RandomSelector(AbstractRandomFunction* randomFunction_);
 

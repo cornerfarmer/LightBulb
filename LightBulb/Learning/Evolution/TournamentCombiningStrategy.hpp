@@ -23,10 +23,10 @@ namespace LightBulb
 		std::unique_ptr<std::vector<AbstractEvolutionObject*>> currentLevel;
 		std::unique_ptr<std::vector<AbstractEvolutionObject*>> nextLevel;
 		void processLevel(AbstractCoevolutionWorld* world);
-		void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
+		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
 	public:
 		TournamentCombiningStrategy();
-		int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
+		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
 		void setDoShuffleBeforeTournament(bool doShuffleBeforeTournament_);
 	};
 }

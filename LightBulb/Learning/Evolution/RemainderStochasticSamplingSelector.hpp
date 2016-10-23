@@ -21,10 +21,10 @@ namespace LightBulb
 	private:
 		std::unique_ptr<AbstractSelectionFunction> randomFunction;
 		bool withReplacement;
-		void select(bool recombination, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore);
+		void select(bool recombination, int objectCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore);
 	protected:
-		void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
-		void selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
 		RemainderStochasticSamplingSelector(bool withReplacement_ = true);
 		void setRandomFunction(AbstractSelectionFunction* randomFunction);

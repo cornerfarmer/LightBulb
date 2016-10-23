@@ -22,7 +22,7 @@ namespace LightBulb
 	public:
 		LinearScalingFitnessFunction(double proportionalScaling_, double base_, bool useDynamicScaling_ = false);
 		//
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	};
 }
 

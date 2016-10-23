@@ -31,10 +31,10 @@ namespace LightBulb
 		friend void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule);
 		friend struct cereal::LoadAndConstruct<BipartiteEvolutionLearningRule>;
 	protected:
-		const BipartiteEvolutionLearningRuleOptions* getOptions() const;
+		const BipartiteEvolutionLearningRuleOptions& getOptions() const;
 		bool doIteration() override;
 		void initializeTry() override;
-		bool hasLearningSucceeded() override;
+		bool hasLearningSucceeded() const override;
 		void initializeStartLearningAlgoritm() override;
 		bool exitConditionReached;
 		AbstractLearningResult* getLearningResult() override;
@@ -43,8 +43,8 @@ namespace LightBulb
 		BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
 		static std::string getName();
 		std::vector<std::string> getDataSetLabels() const override;
-		AbstractEvolutionLearningRule* getFirstLearningRule();
-		AbstractEvolutionLearningRule* getSecondLearningRule();
+		AbstractEvolutionLearningRule& getFirstLearningRule();
+		AbstractEvolutionLearningRule& getSecondLearningRule();
 
 	};
 }

@@ -18,7 +18,7 @@ namespace LightBulb
 	public:
 		ScoreCondition(double scoreGoal_);
 		// Inherited:
-		bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) override;
+		bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;
 	};
 }
 

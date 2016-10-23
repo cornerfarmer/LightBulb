@@ -20,9 +20,9 @@ namespace LightBulb
 	private:
 		std::vector<unsigned int> maxNeuronsPerLayer;
 	public:
-		NetworkGrowMutationAlgorithm(std::vector<unsigned int> maxNeuronsPerLayer_);
+		NetworkGrowMutationAlgorithm(const std::vector<unsigned int>& maxNeuronsPerLayer_);
 
-		void execute(AbstractEvolutionObject* object1) override;
+		void execute(AbstractEvolutionObject& object1) override;
 	};
 }
 

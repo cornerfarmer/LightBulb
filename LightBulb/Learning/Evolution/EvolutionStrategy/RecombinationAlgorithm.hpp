@@ -22,7 +22,7 @@ namespace LightBulb
 	public:
 		RecombinationAlgorithm(bool useAverageForWeight_ = true, bool useAverageForMutationStrength_ = true);
 		// The algorithm calculates a simple average between the two given objects.
-		void execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2) override;
+		void execute(AbstractEvolutionObject& object1, AbstractEvolutionObject& object2) override;
 	};
 }
 

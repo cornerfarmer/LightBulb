@@ -21,7 +21,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractFitnessFunction() {};
 		//
-		virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+		virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	};
 }
 

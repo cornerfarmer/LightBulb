@@ -17,7 +17,7 @@ namespace LightBulb
 	}
 
 
-	void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+	void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		for (auto object = mutationSelector->getMutationSelection()->begin(); object != mutationSelector->getMutationSelection()->end(); object++)
 		{

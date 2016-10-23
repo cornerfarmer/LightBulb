@@ -4,7 +4,7 @@
 
 namespace LightBulb
 {
-	std::map<AbstractEvolutionObject*, double>* ConstantCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
+	std::map<AbstractEvolutionObject*, double>* ConstantCoevolutionFitnessFunction::execute(const CombiningStrategyResults& results)
 	{
 		std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
 

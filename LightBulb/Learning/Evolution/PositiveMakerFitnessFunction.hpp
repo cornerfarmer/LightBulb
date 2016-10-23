@@ -20,7 +20,7 @@ namespace LightBulb
 	public:
 		PositiveMakerFitnessFunction(double constant_);
 		//
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) override;
+		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	};
 }
 

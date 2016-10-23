@@ -19,13 +19,13 @@ namespace LightBulb
 		int counter;
 		// Holds the time for how long the score must be lower than the allow minimum
 		int count;
-		bool perfectObjectExists(AbstractCombiningStrategy* combiningStrategy);
+		bool perfectObjectExists(const AbstractCombiningStrategy& combiningStrategy);
 	public:
 		void setCount(int newCount);
 		// Creates a new condition with the minimum difference and the allowed timesteps
 		PerfectObjectFoundCondition(int count_);
 		// Inherited:
-		bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) override;
+		bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;
 	};
 }
 

@@ -21,11 +21,11 @@ namespace LightBulb
 	private:
 		int amountOfCompetitionsPerObject;
 		AbstractCombiningStrategy* otherCombiningStrategy;
-		void combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects) override;
+		void combine(AbstractCoevolutionWorld´& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
 	public:
-		void setSecondWorld(AbstractCoevolutionWorld* newSecondWorld) override;
+		void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld) override;
 		SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_ = 0, AbstractCoevolutionWorld* secondWorld_ = nullptr);
-		int getTotalMatches(AbstractCoevolutionWorld* simulationWorld) override;
+		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
 	};
 }
 

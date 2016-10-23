@@ -27,7 +27,7 @@ namespace LightBulb
 		// Creates a command which reuses a percentage of objects
 		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_);
 
-		void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) override;
+		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
 		void setReusePercentage(double newReusePercentage);
 		void setReuseCount(double newReuseCount);
 	};

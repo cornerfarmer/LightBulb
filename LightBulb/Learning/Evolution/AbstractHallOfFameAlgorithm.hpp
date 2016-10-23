@@ -26,10 +26,10 @@ namespace LightBulb
 	protected:
 		AbstractCoevolutionWorld* currentWorld;
 		std::vector<std::unique_ptr<AbstractEvolutionObject>> members;
-		void simulateAgainstMember(AbstractEvolutionObject* object, int memberID, int round);
+		void simulateAgainstMember(AbstractEvolutionObject& object, int memberID, int round);
 		virtual void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) = 0;
 	public:
-		virtual void execute(AbstractCoevolutionWorld* world, CombiningStrategyResults& prevResults);
+		virtual void execute(AbstractCoevolutionWorld& world, const CombiningStrategyResults& prevResults);
 		virtual void addMember(AbstractEvolutionObject* newMember);
 	};
 }

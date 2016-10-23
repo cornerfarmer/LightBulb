@@ -24,15 +24,15 @@ namespace LightBulb
 
 		std::map<AbstractEvolutionObject*, int>* currentCounter;
 	protected:
-		virtual void addObjectToMutate(AbstractEvolutionObject* object);
+		virtual void addObjectToMutate(AbstractEvolutionObject& object);
 
-		virtual void selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore) = 0;
+		virtual void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	public:
 		virtual ~AbstractMutationSelector() {};
 		//
-		virtual void executeMutationSelection(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter);
+		virtual void executeMutationSelection(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 
-		virtual std::vector<AbstractEvolutionObject*>* getMutationSelection();
+		virtual std::vector<AbstractEvolutionObject*>& getMutationSelection() const;
 	};
 }
 

@@ -22,7 +22,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractExitCondition() {};
 		// Evaluate the condition (true => stop the learning process)
-		virtual bool evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule) = 0;
+		virtual bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) = 0;
 	};
 }
 

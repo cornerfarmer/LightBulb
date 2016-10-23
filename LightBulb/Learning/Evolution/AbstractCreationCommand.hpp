@@ -18,7 +18,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractCreationCommand() {};
 		// This method should create the wished count of objects inside the given world
-		virtual void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>* notUsedObjects) = 0;
+		virtual void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>& notUsedObjects) = 0;
 	};
 }
 

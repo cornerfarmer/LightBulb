@@ -13,7 +13,7 @@ namespace LightBulb
 		objectCount = objectCount_;
 	}
 
-	void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+	void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		// Calculate the amount of objects we have to create
 		int objectsToCreate = objectCount - world.getPopulationSize();

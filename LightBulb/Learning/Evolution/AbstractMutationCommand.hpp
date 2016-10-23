@@ -32,13 +32,13 @@ namespace LightBulb
 		std::vector<AbstractEvolutionObject*> objectsToMutate;
 	public:
 		virtual ~AbstractMutationCommand() {};
-		virtual void select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter) = 0;
+		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
 
 		void setMutationSelector(AbstractMutationSelector* mutationSelector);
 		// Creates a new mutation command with the given mutation algorithm
 		AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_);
 		// Executes the mutations. (The algorithm will take a few of the old objects, mutate them and insert them into the new object vector)
-		virtual void execute(std::vector<AbstractEvolutionObject*>* newObjectVector, std::map<AbstractEvolutionObject*, int>* counter, std::vector<AbstractEvolutionObject*>* notUsedObjects);
+		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
 
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
