@@ -16,7 +16,7 @@ namespace LightBulb
 		cachedObjects.reset(new std::vector<AbstractEvolutionObject*>());
 	}
 
-	int TournamentCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
+	int TournamentCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
 	{
 		throw std::logic_error("Not yet implemented.");
 	}
@@ -26,14 +26,14 @@ namespace LightBulb
 		doShuffleBeforeTournament = doShuffleBeforeTournament_;
 	}
 
-	void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
+	void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)
 	{
 		// TODO: Try to make it work with two populations
-		*currentLevel = *firstObjects;
+		*currentLevel = firstObjects;
 		nextLevel->clear();
 
 		while (currentLevel->size() > 1) {
-			processLevel(simulationWorld);
+			processLevel(&simulationWorld);
 			nextLevel.swap(currentLevel);
 		}
 	}

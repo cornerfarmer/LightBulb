@@ -17,12 +17,12 @@ namespace LightBulb
 		setRecombinationPercentage(recombinationPercentage_);
 	}
 
-	void ConstantRecombinationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
+	void ConstantRecombinationCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
 	{
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (objectCount == 0)
-			objectCount = (int)(highscore->size() * recombinationPercentage);
+			objectCount = (int)(highscore.size() * recombinationPercentage);
 		recombinationSelector->executeRecombinationSelection(objectCount, highscore, counter);
 	}
 

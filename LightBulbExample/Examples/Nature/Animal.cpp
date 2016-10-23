@@ -70,12 +70,12 @@ void Animal::interpretNNOutput(std::vector<double>& output)
 	stepsSurvived++;
 }
 
-bool Animal::isDead()
+bool Animal::isDead() const
 {
 	return dead;
 }
 
-int Animal::getStepsSurvived()
+int Animal::getStepsSurvived() const
 {
 	return stepsSurvived;
 }
@@ -134,12 +134,12 @@ Animal::~Animal()
 {
 }
 
-int Animal::getPosX()
+int Animal::getPosX() const
 {
 	return posX;
 }
 
-int Animal::getPosY()
+int Animal::getPosY() const
 {
 	return posY;
 }

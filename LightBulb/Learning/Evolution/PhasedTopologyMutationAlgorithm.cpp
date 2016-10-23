@@ -15,7 +15,7 @@ namespace LightBulb
 		pruningThresholdDistance = pruningThresholdDistance_;
 	}
 
-	void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject* object1)
+	void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject& object1)
 	{
 		if (!pruningPhase)
 		{
@@ -27,18 +27,18 @@ namespace LightBulb
 		}
 	}
 
-	double PhasedTopologyMutationAlgorithm::calcMPC(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	double PhasedTopologyMutationAlgorithm::calcMPC(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		double mpc = 0;
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
-			mpc += entry->second->getNeuralNetwork()->getNetworkTopology().getEdgeCount();
-			mpc += entry->second->getNeuralNetwork()->getNetworkTopology().getNeuronCount();
+			mpc += entry->second->getNeuralNetwork().getNetworkTopology().getEdgeCount();
+			mpc += entry->second->getNeuralNetwork().getNetworkTopology().getNeuronCount();
 		}
-		return mpc / highscore->size();
+		return mpc / highscore.size();
 	}
 
-	void PhasedTopologyMutationAlgorithm::initialize(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void PhasedTopologyMutationAlgorithm::initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		if (!pruningPhase)
 		{

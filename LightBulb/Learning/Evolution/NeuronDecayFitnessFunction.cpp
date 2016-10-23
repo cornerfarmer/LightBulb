@@ -13,12 +13,12 @@ namespace LightBulb
 		fac = fac_;
 	}
 
-	void NeuronDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void NeuronDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
-			entry->first -= fac * entry->second->getNeuralNetwork()->getNetworkTopology().getNeuronCount();
+			entry->first -= fac * entry->second->getNeuralNetwork().getNetworkTopology().getNeuronCount();
 		}
-		std::sort(highscore->begin(), highscore->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+		std::sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	}
 }

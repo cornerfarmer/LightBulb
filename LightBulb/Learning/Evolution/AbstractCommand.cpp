@@ -5,16 +5,16 @@
 
 namespace LightBulb
 {
-	AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject* usedObject, std::vector<AbstractEvolutionObject*>* notUsedObjects, bool addToWorld)
+	AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject& usedObject, std::vector<AbstractEvolutionObject*>& notUsedObjects, bool addToWorld) const
 	{
-		if (notUsedObjects->empty())
+		if (notUsedObjects.empty())
 		{
-			return usedObject->clone(addToWorld);
+			return usedObject.clone(addToWorld);
 		}
 		else
 		{
-			AbstractEvolutionObject* notUsedObject = notUsedObjects->back();
-			notUsedObjects->pop_back();
+			AbstractEvolutionObject* notUsedObject = notUsedObjects.back();
+			notUsedObjects.pop_back();
 			notUsedObject->copyPropertiesFrom(usedObject);
 			return notUsedObject;
 		}

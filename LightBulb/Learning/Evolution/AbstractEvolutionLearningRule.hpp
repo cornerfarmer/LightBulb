@@ -29,13 +29,14 @@ namespace LightBulb
 		friend class BipartiteEvolutionLearningRule;
 	private:
 	protected:
-		const AbstractEvolutionLearningRuleOptions& getOptions();
+		const AbstractEvolutionLearningRuleOptions& getOptions() const;
 		virtual void setHelperToUsedObjects() {};
 	public:
 		AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_);
 		AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
 		std::vector<std::string> getDataSetLabels() const override;
-		virtual AbstractEvolutionWorld& getWorld() const;
+		virtual const AbstractEvolutionWorld& getWorld() const;
+		virtual AbstractEvolutionWorld& getWorld();
 	};
 
 }

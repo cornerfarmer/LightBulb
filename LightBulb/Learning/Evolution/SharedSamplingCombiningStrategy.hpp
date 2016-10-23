@@ -20,8 +20,8 @@ namespace LightBulb
 		friend void serialize(Archive& archive, SharedSamplingCombiningStrategy& sharedSamplingCombiningStrategy);
 	private:
 		int amountOfCompetitionsPerObject;
-		AbstractCombiningStrategy* otherCombiningStrategy;
-		void combine(AbstractCoevolutionWorld´& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
+		const AbstractCombiningStrategy* otherCombiningStrategy;
+		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
 	public:
 		void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld) override;
 		SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_ = 0, AbstractCoevolutionWorld* secondWorld_ = nullptr);

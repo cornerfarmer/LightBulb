@@ -41,7 +41,7 @@ void Network::interpretNNOutput(std::vector<double>& output)
 }
 
 
-std::vector<std::vector<float>>& Network::getPositions()
+const std::vector<std::vector<float>>& Network::getPositions() const
 {
 	return positions;
 }

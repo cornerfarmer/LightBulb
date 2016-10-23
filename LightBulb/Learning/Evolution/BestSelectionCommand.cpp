@@ -24,40 +24,40 @@ namespace LightBulb
 		selectionPercentage = selectionPercentage_;
 	}
 
-	void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::vector<AbstractEvolutionObject*>* objects, std::vector<AbstractEvolutionObject*>* notUsedObjects)
+	void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::vector<AbstractEvolutionObject*>& objects, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (selectionPercentage)
-			objectCount = (int)(highscore->size() * selectionPercentage);
+			objectCount = (int)(highscore.size() * selectionPercentage);
 
-		if (highscore->size() > objectCount)
+		if (highscore.size() > objectCount)
 		{
-			objects->clear();
+			objects.clear();
 
-			for (auto entry = highscore->begin(); entry != highscore->begin() + objectCount; entry++)
+			for (auto entry = highscore.begin(); entry != highscore.begin() + objectCount; entry++)
 			{
-				objects->push_back(entry->second);
+				objects.push_back(entry->second);
 			}
 
 			// Go through all not selected objects
-			for (auto entry = highscore->begin() + objectCount; entry != highscore->end(); entry++)
+			for (auto entry = highscore.begin() + objectCount; entry != highscore.end(); entry++)
 			{
 				// Recycle them
-				notUsedObjects->push_back(entry->second);
+				notUsedObjects.push_back(entry->second);
 			}
 
 			// Resize the vector
-			highscore->resize(objectCount);
+			highscore.resize(objectCount);
 		}
 
 
 		double totalFitness = 0;
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			totalFitness += entry->first;
 		}
-		log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string((double)totalFitness / highscore->size()), LL_LOW);
+		log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string((double)totalFitness / highscore.size()), LL_LOW);
 
 	}
 

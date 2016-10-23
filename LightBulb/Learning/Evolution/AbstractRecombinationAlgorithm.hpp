@@ -20,7 +20,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractRecombinationAlgorithm() {};
 		// This method combines the two given objects to a new one which will be stored inside the first given object.
-		virtual void execute(AbstractEvolutionObject& object1, const AbstractEvolutionObject& object2) = 0;
+		virtual void execute(AbstractEvolutionObject& object1, AbstractEvolutionObject& object2) = 0;
 	};
 }
 

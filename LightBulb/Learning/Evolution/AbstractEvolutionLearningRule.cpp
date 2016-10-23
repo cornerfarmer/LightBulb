@@ -10,9 +10,9 @@
 
 namespace LightBulb
 {
-	AbstractEvolutionLearningRuleOptions* AbstractEvolutionLearningRule::getOptions()
+	const AbstractEvolutionLearningRuleOptions& AbstractEvolutionLearningRule::getOptions() const
 	{
-		return static_cast<AbstractEvolutionLearningRuleOptions*>(options.get());
+		return static_cast<AbstractEvolutionLearningRuleOptions&>(*options.get());
 	}
 
 	AbstractEvolutionLearningRule::AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_)
@@ -30,8 +30,13 @@ namespace LightBulb
 		return AbstractLearningRule::getDataSetLabels();
 	}
 
-	AbstractEvolutionWorld* AbstractEvolutionLearningRule::getWorld()
+	const AbstractEvolutionWorld& AbstractEvolutionLearningRule::getWorld() const
 	{
-		return getOptions()->world;
+		return *static_cast<AbstractEvolutionLearningRuleOptions*>(options.get())->world;
+	}
+
+	AbstractEvolutionWorld& AbstractEvolutionLearningRule::getWorld()
+	{
+		return *static_cast<AbstractEvolutionLearningRuleOptions*>(options.get())->world;
 	}
 }

@@ -38,7 +38,7 @@ void Position::interpretNNOutput(std::vector<double>& output)
 	}
 }
 
-std::vector<float> Position::getPosition()
+std::vector<float> Position::getPosition() const
 {
 	return position;
 }

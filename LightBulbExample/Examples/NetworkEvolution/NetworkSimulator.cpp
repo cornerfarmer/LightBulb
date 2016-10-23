@@ -46,9 +46,9 @@ bool NetworkSimulator::doSimulationStep()
 	return false;
 }
 
-double NetworkSimulator::getScore(AbstractEvolutionObject& object)
+double NetworkSimulator::getScore(const AbstractEvolutionObject& object) const
 {
-	std::vector<std::vector<float>> pos = static_cast<Network&>(object).getPositions();
+	std::vector<std::vector<float>> pos = static_cast<const Network&>(object).getPositions();
 
 	double length = 0;
 	for (int p = 0; p < pos.size(); p++)
@@ -62,7 +62,7 @@ double NetworkSimulator::getScore(AbstractEvolutionObject& object)
 	return -length;
 }
 
-double NetworkSimulator::distanceBetweenPositions(std::vector<float>& pos1, std::vector<float>& pos2)
+double NetworkSimulator::distanceBetweenPositions(const std::vector<float>& pos1, const std::vector<float>& pos2) const
 {
 	double distance = 0;
 	for (int c = 0; c < pos1.size(); c++)

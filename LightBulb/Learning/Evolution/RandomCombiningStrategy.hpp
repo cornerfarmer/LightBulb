@@ -21,7 +21,7 @@ namespace LightBulb
 		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
 	public:
 		RandomCombiningStrategy(int amountOfCompetitionsPerObject_ = 0);
-		int getTotalMatches(AbstractCoevolutionWorld& simulationWorld) const override;
+		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
 	};
 }
 

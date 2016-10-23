@@ -13,12 +13,12 @@ namespace LightBulb
 		fac = fac_;
 	}
 
-	void WeightDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void WeightDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			double weightDecayError = 0;
-			std::vector<Eigen::MatrixXd>& weights = entry->second->getNeuralNetwork()->getNetworkTopology().getAllWeights();
+			std::vector<Eigen::MatrixXd>& weights = entry->second->getNeuralNetwork().getNetworkTopology().getAllWeights();
 			for (auto weightsPerLayer = weights.begin(); weightsPerLayer != weights.end(); weightsPerLayer++)
 			{
 				weightDecayError += 0.5 * weightsPerLayer->squaredNorm();
@@ -26,6 +26,6 @@ namespace LightBulb
 
 			entry->first -= fac * weightDecayError;
 		}
-		std::sort(highscore->begin(), highscore->end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+		std::sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	}
 }

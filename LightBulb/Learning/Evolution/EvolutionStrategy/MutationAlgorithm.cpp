@@ -15,12 +15,12 @@ namespace LightBulb
 		mutationStrengthMin = 0.000001f;
 	}
 
-	void MutationAlgorithm::execute(AbstractEvolutionObject* object1)
+	void MutationAlgorithm::execute(AbstractEvolutionObject& object1)
 	{
-		std::vector<double>* mutationStrength = object1->getMutationStrength();
+		std::vector<double>& mutationStrength = object1.getMutationStrength();
 
 		// Go through all mutationStrength values
-		for (auto mutationStrengthValue = mutationStrength->begin(); mutationStrengthValue != mutationStrength->end(); mutationStrengthValue++)
+		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
 		{
 			// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
 			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * ZigguratGenerator::next());
@@ -32,7 +32,7 @@ namespace LightBulb
 
 		}
 
-		std::vector<Eigen::MatrixXd>& weights = object1->getNeuralNetwork()->getNetworkTopology().getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights = object1.getNeuralNetwork().getNetworkTopology().getAllWeights();
 		int mutationStrengthIndex = 0;
 		// Go through all edges
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)
@@ -42,7 +42,7 @@ namespace LightBulb
 				for (int j = 0; j < layer->cols(); j++)
 				{
 					// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
-					double weightAdd = (*mutationStrength)[mutationStrengthIndex] * ZigguratGenerator::next();
+					double weightAdd = mutationStrength[mutationStrengthIndex] * ZigguratGenerator::next();
 					(*layer)(i, j) += weightAdd;
 					mutationStrengthIndex++;
 				}

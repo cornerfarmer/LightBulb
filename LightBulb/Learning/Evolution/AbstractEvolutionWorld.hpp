@@ -36,14 +36,14 @@ namespace LightBulb
 		AbstractEvolutionWorld();
 
 		virtual std::vector<AbstractEvolutionObject*>& getEvolutionObjects() = 0;
-		virtual void setEvolutionObjects(std::vector<AbstractEvolutionObject*>& newObjects) = 0;
+		virtual void setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects) = 0;
 		// This method should create a new evolution object and add it to the world
 		virtual AbstractEvolutionObject* addNewObject(bool addToWorld = true) = 0;
 		// This method should execute one simulation step.
 		// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 		virtual bool doSimulationStep() = 0;
 		// Returns a list of all current evolution objects ordered by their score
-		virtual const Highscore& getHighscoreList();
+		virtual Highscore& getHighscoreList();
 		// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)
 		virtual double getScore(const AbstractEvolutionObject& object) const = 0;
 		//

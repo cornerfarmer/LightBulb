@@ -45,7 +45,8 @@ namespace LightBulb
 		virtual void copyPropertiesFrom(AbstractEvolutionObject& notUsedObject);
 		virtual AbstractNeuralNetwork& getNeuralNetwork() = 0;
 		virtual std::vector<double>& getMutationStrength();
-		virtual void setMutationStrength(std::vector<double>& newMutationStrength);
+		const std::vector<double>& getMutationStrength() const;
+		virtual void setMutationStrength(const std::vector<double>& newMutationStrength);
 		// This method should execute one NN calculation. (Mostly: Get input -> let the NN calculate -> react depending on the NN output)
 		virtual void doNNCalculation() = 0;
 		// Reset the NN (All activations to zero)
@@ -53,9 +54,9 @@ namespace LightBulb
 		// This method should return a new evolution object which contains a NN which has the same edges/neurons as the NN of this object.
 		virtual AbstractEvolutionObject* clone(bool addToWorld = true) const = 0;
 
-		virtual void setEvolutionSource(EvolutionSource& evolutionSource_);
+		virtual void setEvolutionSource(const EvolutionSource& evolutionSource_);
 
-		EvolutionSource& getEvolutionSource() const;
+		const EvolutionSource& getEvolutionSource() const;
 
 		virtual void removeNeuron(int layerIndex, int neuronIndex);
 

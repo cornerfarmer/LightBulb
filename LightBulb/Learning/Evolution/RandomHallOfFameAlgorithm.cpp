@@ -16,7 +16,7 @@ namespace LightBulb
 			{
 				for (int r = 0; r < currentWorld->getRoundCount(); r++)
 				{
-					simulateAgainstMember(*object, memberIndex, r);
+					simulateAgainstMember(**object, memberIndex, r);
 				}
 			}
 		}

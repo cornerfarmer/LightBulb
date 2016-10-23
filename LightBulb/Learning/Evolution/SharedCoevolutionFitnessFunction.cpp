@@ -3,7 +3,7 @@
 
 namespace LightBulb
 {
-	std::map<AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(CombiningStrategyResults& results)
+	std::map<const AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(const CombiningStrategyResults& results)
 	{
 		std::map<AbstractEvolutionObject*, std::map<int, int>> winCounter;
 
@@ -19,7 +19,7 @@ namespace LightBulb
 			}
 		}
 
-		std::map<AbstractEvolutionObject*, double>* fitnessValues = new std::map<AbstractEvolutionObject*, double>();
+		std::map<const AbstractEvolutionObject*, double>* fitnessValues = new std::map<const AbstractEvolutionObject*, double>();
 
 		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 		{

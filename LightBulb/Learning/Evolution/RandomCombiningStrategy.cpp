@@ -7,20 +7,20 @@
 
 namespace LightBulb
 {
-	void RandomCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
+	void RandomCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)
 	{
-		std::vector<AbstractEvolutionObject*> randomOpponents = *secondObjects;
+		std::vector<AbstractEvolutionObject*> randomOpponents = secondObjects;
 		std::random_shuffle(randomOpponents.begin(), randomOpponents.end());
 
-		for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
+		for (auto firstPlayer = firstObjects.begin(); firstPlayer != firstObjects.end(); firstPlayer++)
 		{
 			for (int opponentIndex = 0; opponentIndex < amountOfCompetitionsPerObject && opponentIndex < randomOpponents.size(); opponentIndex++)
 			{
-				for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+				for (int r = 0; r < simulationWorld.getRoundCount(); r++)
 				{
-					int result = simulationWorld->compareObjects(**firstPlayer, *randomOpponents[opponentIndex], r);
+					int result = simulationWorld.compareObjects(**firstPlayer, *randomOpponents[opponentIndex], r);
 					if (result != 0)
-						setResult(*firstPlayer, randomOpponents[opponentIndex], r, result > 0);
+						setResult(**firstPlayer, *randomOpponents[opponentIndex], r, result > 0);
 				}
 			}
 		}
@@ -31,8 +31,8 @@ namespace LightBulb
 		amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
 	}
 
-	int RandomCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
+	int RandomCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
 	{
-		return amountOfCompetitionsPerObject * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
+		return amountOfCompetitionsPerObject * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
 	}
 }

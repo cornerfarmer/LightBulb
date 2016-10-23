@@ -56,9 +56,9 @@ bool FunctionSimulator::doSimulationStep()
 	return false;
 }
 
-double FunctionSimulator::getScore(AbstractEvolutionObject& object)
+double FunctionSimulator::getScore(const AbstractEvolutionObject& object) const
 {
-	std::vector<float> pos = static_cast<Position&>(object).getPosition();
+	std::vector<float> pos = static_cast<const Position&>(object).getPosition();
 	return function(pos);
 }
 

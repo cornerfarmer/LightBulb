@@ -8,7 +8,7 @@
 
 namespace LightBulb
 {
-	void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld* simulationWorld, std::vector<AbstractEvolutionObject*>* firstObjects, std::vector<AbstractEvolutionObject*>* secondObjects)
+	void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)
 	{
 		if (!otherCombiningStrategy)
 			throw std::invalid_argument("SharedSamplingCombiningStrategy only works with two worlds.");
@@ -20,12 +20,12 @@ namespace LightBulb
 		while (sample.size() < amountOfCompetitionsPerObject)
 		{
 			AbstractEvolutionObject* bestObject = nullptr;
-			for (auto secondPlayer = secondObjects->begin(); secondPlayer != secondObjects->end(); secondPlayer++)
+			for (auto secondPlayer = secondObjects.begin(); secondPlayer != secondObjects.end(); secondPlayer++)
 			{
 				if (sampleFitness[*secondPlayer] != -1)
 				{
 					sampleFitness[*secondPlayer] = 0;
-					for (auto resultsPerSecondPlayer = (*prevResults)[*secondPlayer].begin(); resultsPerSecondPlayer != (*prevResults)[*secondPlayer].end(); resultsPerSecondPlayer++)
+					for (auto resultsPerSecondPlayer = prevResults[*secondPlayer].begin(); resultsPerSecondPlayer != prevResults[*secondPlayer].end(); resultsPerSecondPlayer++)
 					{
 						for (auto result = resultsPerSecondPlayer->second.begin(); result != resultsPerSecondPlayer->second.end(); result++)
 						{
@@ -42,7 +42,7 @@ namespace LightBulb
 
 			sample.push_back(bestObject);
 			sampleFitness[bestObject] = -1;
-			for (auto resultsPerSecondPlayer = (*prevResults)[bestObject].begin(); resultsPerSecondPlayer != (*prevResults)[bestObject].end(); resultsPerSecondPlayer++)
+			for (auto resultsPerSecondPlayer = prevResults[bestObject].begin(); resultsPerSecondPlayer != prevResults[bestObject].end(); resultsPerSecondPlayer++)
 			{
 				for (auto result = resultsPerSecondPlayer->second.begin(); result != resultsPerSecondPlayer->second.end(); result++)
 				{
@@ -52,41 +52,41 @@ namespace LightBulb
 			}
 		}
 
-		for (auto firstPlayer = firstObjects->begin(); firstPlayer != firstObjects->end(); firstPlayer++)
+		for (auto firstPlayer = firstObjects.begin(); firstPlayer != firstObjects.end(); firstPlayer++)
 		{
 			for (auto secondPlayer = sample.begin(); secondPlayer != sample.end(); secondPlayer++)
 			{
 				if (*firstPlayer != *secondPlayer)
 				{
-					for (int r = 0; r < simulationWorld->getRoundCount(); r++)
+					for (int r = 0; r < simulationWorld.getRoundCount(); r++)
 					{
-						int result = simulationWorld->compareObjects(**firstPlayer, **secondPlayer, r);
+						int result = simulationWorld.compareObjects(**firstPlayer, **secondPlayer, r);
 						if (result != 0)
-							setResult(*firstPlayer, *secondPlayer, r, result > 0);
+							setResult(**firstPlayer, **secondPlayer, r, result > 0);
 					}
 				}
 			}
 		}
 	}
 
-	void SharedSamplingCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld* newSecondWorld)
+	void SharedSamplingCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld& newSecondWorld)
 	{
 		AbstractCombiningStrategy::setSecondWorld(newSecondWorld);
-		otherCombiningStrategy = secondWorld->getCombiningStrategy();
+		otherCombiningStrategy = &secondWorld->getCombiningStrategy();
 	}
 
 	SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, AbstractCoevolutionWorld* secondWorld_)
 		:AbstractCombiningStrategy(secondWorld_)
 	{
 		if (secondWorld)
-			otherCombiningStrategy = secondWorld->getCombiningStrategy();
+			otherCombiningStrategy = &secondWorld->getCombiningStrategy();
 		amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
 	}
 
 
-	int SharedSamplingCombiningStrategy::getTotalMatches(AbstractCoevolutionWorld* simulationWorld)
+	int SharedSamplingCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
 	{
-		return amountOfCompetitionsPerObject * simulationWorld->getPopulationSize() * simulationWorld->getRoundCount();
+		return amountOfCompetitionsPerObject * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
 	}
 
 }

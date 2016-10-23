@@ -11,13 +11,13 @@ namespace LightBulb
 		recalculateHighscore = true;
 	}
 
-	Highscore* AbstractEvolutionWorld::getHighscoreList()
+	Highscore& AbstractEvolutionWorld::getHighscoreList()
 	{
 		if (recalculateHighscore)
 		{
 			currentHighscore.clear();
 			// Go through all evolution objects
-			for (auto object = getEvolutionObjects()->begin(); object < getEvolutionObjects()->end(); object++)
+			for (auto object = getEvolutionObjects().begin(); object < getEvolutionObjects().end(); object++)
 			{
 				double score = getScore(**object);
 
@@ -29,10 +29,10 @@ namespace LightBulb
 			std::sort(currentHighscore.begin(), currentHighscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 			recalculateHighscore = false;
 		}
-		return &currentHighscore;
+		return currentHighscore;
 	}
 
-	std::vector<std::string> AbstractEvolutionWorld::getDataSetLabels()
+	std::vector<std::string> AbstractEvolutionWorld::getDataSetLabels() const
 	{
 		std::vector<std::string> labels;
 		return labels;

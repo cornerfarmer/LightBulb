@@ -19,21 +19,21 @@ namespace LightBulb
 
 	void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
-		for (auto object = mutationSelector->getMutationSelection()->begin(); object != mutationSelector->getMutationSelection()->end(); object++)
+		for (auto object = mutationSelector->getMutationSelection().begin(); object != mutationSelector->getMutationSelection().end(); object++)
 		{
-			if ((*counter)[*object] == 1)
+			if (counter[*object] == 1)
 			{
-				mutationAlgorithm->execute(*object);
-				newObjectVector->push_back(*object);
+				mutationAlgorithm->execute(**object);
+				newObjectVector.push_back(*object);
 			}
 			else
 			{
-				AbstractEvolutionObject* unusedObject = getUnusedObject(*object, notUsedObjects);
-				mutationAlgorithm->execute(unusedObject);
-				newObjectVector->push_back(unusedObject);
+				AbstractEvolutionObject* unusedObject = getUnusedObject(**object, notUsedObjects);
+				mutationAlgorithm->execute(*unusedObject);
+				newObjectVector.push_back(unusedObject);
 			}
-			newObjectVector->back()->setEvolutionSource(Mutation);
-			(*counter)[*object]--;
+			newObjectVector.back()->setEvolutionSource(Mutation);
+			counter[*object]--;
 		}
 	}
 

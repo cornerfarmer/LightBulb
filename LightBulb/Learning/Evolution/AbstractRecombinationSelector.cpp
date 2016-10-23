@@ -3,17 +3,17 @@
 
 namespace LightBulb
 {
-	void AbstractRecombinationSelector::addObjectToRecombination(AbstractEvolutionObject* object)
+	void AbstractRecombinationSelector::addObjectToRecombination(AbstractEvolutionObject& object)
 	{
-		selectedObjects.push_back(object);
-		(*currentCounter)[object]++;
+		selectedObjects.push_back(&object);
+		(*currentCounter)[&object]++;
 	}
 
-	void AbstractRecombinationSelector::executeRecombinationSelection(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
+	void AbstractRecombinationSelector::executeRecombinationSelection(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
 	{
 		selectedObjects.clear();
 		if (recombinationCount > 0) {
-			currentCounter = counter;
+			currentCounter = &counter;
 
 			selectForRecombination(recombinationCount, highscore);
 		}
@@ -22,8 +22,8 @@ namespace LightBulb
 			throw std::logic_error("The recombination selection was not successful");
 	}
 
-	std::vector<AbstractEvolutionObject*>* AbstractRecombinationSelector::getRecombinationSelection()
+	std::vector<AbstractEvolutionObject*>& AbstractRecombinationSelector::getRecombinationSelection()
 	{
-		return &selectedObjects;
+		return selectedObjects;
 	}
 }

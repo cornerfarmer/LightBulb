@@ -26,7 +26,7 @@ public:
 	Network(NetworkSimulator& networkSimulator_);
 	Network() = default;
 	~Network();
-	std::vector<std::vector<float>>& getPositions();
+	const std::vector<std::vector<float>>& getPositions() const;
 };
 
 #include "IO/NetworkIO.hpp"

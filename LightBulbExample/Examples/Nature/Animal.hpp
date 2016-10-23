@@ -29,10 +29,10 @@ protected:
 public:	
 	Animal(Nature& nature_, int posX_, int posY_, int dirX_, int dirY_);
 	~Animal();
-	int getPosX();
-	int getPosY();
-	bool isDead();
-	int getStepsSurvived();
+	int getPosX() const;
+	int getPosY() const;
+	bool isDead() const;
+	int getStepsSurvived() const;
 	void reset(int posX_, int posY_, int dirX_, int dirY_);
 };
 #endif

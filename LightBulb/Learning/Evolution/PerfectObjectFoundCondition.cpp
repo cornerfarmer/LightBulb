@@ -9,12 +9,12 @@
 
 namespace LightBulb
 {
-	bool PerfectObjectFoundCondition::evaluate(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, AbstractEvolutionLearningRule* learningRule)
+	bool PerfectObjectFoundCondition::evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule)
 	{
-		if (highscore->size() > 0)
+		if (highscore.size() > 0)
 		{
-			AbstractCoevolutionWorld* coevolutionWorld = static_cast<AbstractCoevolutionWorld*>(static_cast<EvolutionLearningRule*>(learningRule)->getWorld());
-			if (coevolutionWorld->isParasiteWorld() && perfectObjectExists(coevolutionWorld->getCombiningStrategy()))
+			const AbstractCoevolutionWorld& coevolutionWorld = static_cast<const AbstractCoevolutionWorld&>(static_cast<const EvolutionLearningRule&>(learningRule).getWorld());
+			if (coevolutionWorld.isParasiteWorld() && perfectObjectExists(coevolutionWorld.getCombiningStrategy()))
 			{
 				counter++;
 				if (counter >= count)
@@ -31,12 +31,12 @@ namespace LightBulb
 			return false;
 		}
 	}
-	bool PerfectObjectFoundCondition::perfectObjectExists(AbstractCombiningStrategy* combiningStrategy)
+	bool PerfectObjectFoundCondition::perfectObjectExists(const AbstractCombiningStrategy& combiningStrategy) const
 	{
-		auto results = combiningStrategy->getPrevResults();
+		auto results = combiningStrategy.getPrevResults();
 		std::map<AbstractEvolutionObject*, bool> defeatedObjects;
 
-		for (auto resultsPerObject = results->begin(); resultsPerObject != results->end(); resultsPerObject++)
+		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
 		{
 			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
 			{

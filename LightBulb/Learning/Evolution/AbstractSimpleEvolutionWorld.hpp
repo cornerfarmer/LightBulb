@@ -34,7 +34,7 @@ namespace LightBulb
 	public:
 		AbstractSimpleEvolutionWorld();
 		// Inherited:
-		AbstractEvolutionObject& addNewObject(bool addToWorld = true) override;
+		AbstractEvolutionObject* addNewObject(bool addToWorld = true) override;
 		std::vector<AbstractEvolutionObject*>& getEvolutionObjects() override;
 		void setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects) override;
 		void reset() override;

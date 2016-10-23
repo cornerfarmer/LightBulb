@@ -31,7 +31,7 @@ namespace LightBulb
 		std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToAddAlgorithm;
 		std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToChallengeAlgorithm;
 		std::unique_ptr<AbstractCombiningStrategy> combiningStrategy;
-		std::unique_ptr<std::map<AbstractEvolutionObject*, double>> fitnessValues;
+		std::unique_ptr<std::map<const AbstractEvolutionObject*, double>> fitnessValues;
 	protected:
 		bool parasiteWorld;
 		int comparisons;
@@ -43,7 +43,7 @@ namespace LightBulb
 		double getScore(const AbstractEvolutionObject& object) const override;
 		virtual int compareObjects(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round);
 		virtual int rateKI(AbstractEvolutionObject& rateKI) { return 0; }
-		virtual const AbstractCombiningStrategy& getCombiningStrategy() const;
+		virtual AbstractCombiningStrategy& getCombiningStrategy() const;
 		void setLogger(AbstractLogger& logger_) override;
 		std::vector<std::string> getDataSetLabels() const override;
 		virtual bool isParasiteWorld() const;

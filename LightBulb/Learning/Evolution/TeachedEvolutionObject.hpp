@@ -36,9 +36,9 @@ namespace LightBulb
 		// Create a new evolution object in the given world and with a NN built after the given network options
 		TeachedEvolutionObject(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
 		TeachedEvolutionObject() = default;
-		double getCurrentTotalError();
-		double getCurrentTeachingError();
-		double getCurrentWeightDecayError();
+		double getCurrentTotalError() const;
+		double getCurrentTeachingError() const;
+		double getCurrentWeightDecayError() const;
 		// Inherited:
 		void doNNCalculation() override;
 		void resetNN() override;

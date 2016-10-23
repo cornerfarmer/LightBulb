@@ -63,7 +63,7 @@ namespace LightBulb
 	protected:
 		std::vector<AbstractEvolutionObject*> notUsedObjects;
 		bool doIteration() override;
-		bool hasLearningSucceeded() const override;
+		bool hasLearningSucceeded() override;
 		const EvolutionLearningRuleOptions& getOptions() const;
 		void doCalculationAfterLearningProcess() override;
 		void setHelperToUsedObjects() override;

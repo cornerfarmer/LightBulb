@@ -13,10 +13,10 @@ namespace LightBulb
 		useAverageForMutationStrength = useAverageForMutationStrength_;
 	}
 
-	void RecombinationAlgorithm::execute(AbstractEvolutionObject* object1, AbstractEvolutionObject* object2)
+	void RecombinationAlgorithm::execute(AbstractEvolutionObject& object1, AbstractEvolutionObject& object2)
 	{
-		std::vector<Eigen::MatrixXd>& weights1 = static_cast<FeedForwardNetworkTopology&>(object1->getNeuralNetwork()->getNetworkTopology()).getAllWeights();
-		std::vector<Eigen::MatrixXd>& weights2 = static_cast<FeedForwardNetworkTopology&>(object2->getNeuralNetwork()->getNetworkTopology()).getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights1 = static_cast<FeedForwardNetworkTopology&>(object1.getNeuralNetwork().getNetworkTopology()).getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights2 = static_cast<FeedForwardNetworkTopology&>(object2.getNeuralNetwork().getNetworkTopology()).getAllWeights();
 
 		auto layer1 = weights1.begin();
 		auto layer2 = weights2.begin();
@@ -44,18 +44,18 @@ namespace LightBulb
 		}
 
 
-		auto mutationStrength1 = object1->getMutationStrength();
-		auto mutationStrength2 = object2->getMutationStrength();
-		for (int i = 0; i < mutationStrength2->size() && i < mutationStrength1->size(); i++)
+		std::vector<double>& mutationStrength1 = object1.getMutationStrength();
+		std::vector<double>& mutationStrength2 = object2.getMutationStrength();
+		for (int i = 0; i < mutationStrength2.size() && i < mutationStrength1.size(); i++)
 		{
 			if (useAverageForMutationStrength)
 			{
-				(*mutationStrength1)[i] = ((*mutationStrength2)[i] + (*mutationStrength1)[i]) / 2;
+				mutationStrength1[i] = mutationStrength2[i] + mutationStrength1[i] / 2;
 			}
 			else
 			{
 				if (randomGenerator->randDouble() > 0.5)
-					(*mutationStrength1)[i] = (*mutationStrength2)[i];
+					mutationStrength1[i] = mutationStrength2[i];
 			}
 		}
 	}

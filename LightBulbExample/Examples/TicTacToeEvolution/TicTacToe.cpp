@@ -77,7 +77,7 @@ void TicTacToe::stopStepMode()
 	}
 }
 
-std::vector<std::string> TicTacToe::getDataSetLabels()
+std::vector<std::string> TicTacToe::getDataSetLabels() const
 {
 	auto labels = AbstractCoevolutionWorld::getDataSetLabels();
 	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING);
@@ -92,7 +92,7 @@ void TicTacToe::nextStep()
 	}
 }
 
-int TicTacToe::getRoundCount()
+int TicTacToe::getRoundCount() const
 {
 	return 2;
 }

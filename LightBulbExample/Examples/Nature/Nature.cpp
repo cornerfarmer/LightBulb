@@ -92,9 +92,9 @@ bool Nature::doSimulationStep()
 	return false;
 }
 
-double Nature::getScore(AbstractEvolutionObject& object)
+double Nature::getScore(const AbstractEvolutionObject& object) const
 {
-	return static_cast<Animal&>(object).getStepsSurvived();
+	return static_cast<const Animal&>(object).getStepsSurvived();
 }
 
 void Nature::resetWorld()

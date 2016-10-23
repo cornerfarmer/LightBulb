@@ -35,7 +35,7 @@ namespace LightBulb
 		// Creates a new world with the given teacher and the network options
 		TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_);
 		TeachingEvolutionWorld() = default;
-		AbstractTeacher& getTeacher();
+		AbstractTeacher& getTeacher() const;
 		// Inherited:
 		bool doSimulationStep() override;
 		std::vector<std::string> getDataSetLabels() const override;

@@ -16,7 +16,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
-		std::map<AbstractEvolutionObject*, double>* execute(const CombiningStrategyResults& results) override;
+		std::map<const AbstractEvolutionObject*, double>* execute(const CombiningStrategyResults& results) override;
 	};
 }
 

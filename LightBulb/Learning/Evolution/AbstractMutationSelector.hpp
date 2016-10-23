@@ -32,7 +32,7 @@ namespace LightBulb
 		//
 		virtual void executeMutationSelection(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 
-		virtual std::vector<AbstractEvolutionObject*>& getMutationSelection() const;
+		virtual std::vector<AbstractEvolutionObject*>& getMutationSelection();
 	};
 }
 

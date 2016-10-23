@@ -66,7 +66,7 @@ namespace LightBulb
 
 		std::vector<double> fitnessValues;
 		archive(cereal::make_nvp("fitnessValues", fitnessValues));
-		world.fitnessValues.reset(new std::map<AbstractEvolutionObject*, double>());
+		world.fitnessValues.reset(new std::map<const AbstractEvolutionObject*, double>());
 		for (int i = 0; i < world.objects.size(); i++)
 			(*world.fitnessValues)[world.objects[i]] = fitnessValues[i];
 

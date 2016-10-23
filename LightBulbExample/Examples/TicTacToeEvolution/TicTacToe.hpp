@@ -59,9 +59,9 @@ public:
 	std::vector<std::vector<int>>& getFields();
 	void startStepMode();
 	void stopStepMode();
-	std::vector<std::string> getDataSetLabels() override;
+	std::vector<std::string> getDataSetLabels() const override;
 	void nextStep();
-	int getRoundCount() override;
+	int getRoundCount() const override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld);

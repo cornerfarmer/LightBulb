@@ -111,8 +111,8 @@ AbstractEvolutionWorld* PongEvolutionExample::createWorld()
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	Pong* pong1 = new Pong(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 
-	cs1->setSecondWorld(static_cast<Pong*>(parasiteWorld.get()));
-	cs2->setSecondWorld(pong1);
+	cs1->setSecondWorld(static_cast<Pong&>(*parasiteWorld.get()));
+	cs2->setSecondWorld(*pong1);
 
 	return pong1;
 

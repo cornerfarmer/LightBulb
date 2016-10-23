@@ -21,9 +21,9 @@ namespace LightBulb
 
 	}
 
-	std::vector<AbstractEvolutionObject*>* AbstractSimpleEvolutionWorld::getEvolutionObjects()
+	std::vector<AbstractEvolutionObject*>& AbstractSimpleEvolutionWorld::getEvolutionObjects()
 	{
-		return &objects;
+		return objects;
 	}
 
 	void AbstractSimpleEvolutionWorld::setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects)
@@ -42,7 +42,7 @@ namespace LightBulb
 		resetWorld();
 	}
 
-	int AbstractSimpleEvolutionWorld::getPopulationSize()
+	int AbstractSimpleEvolutionWorld::getPopulationSize() const
 	{
 		return objects.size();
 	}

@@ -33,9 +33,9 @@ namespace LightBulb
 		world = &world_;
 	}
 
-	AbstractNeuralNetwork* AbstractSimpleEvolutionObject::getNeuralNetwork()
+	AbstractNeuralNetwork& AbstractSimpleEvolutionObject::getNeuralNetwork()
 	{
-		return neuralNetwork.get();
+		return *neuralNetwork.get();
 	}
 
 	void AbstractSimpleEvolutionObject::doNNCalculation()
@@ -58,12 +58,12 @@ namespace LightBulb
 		neuralNetwork->getNetworkTopology().resetActivation();
 	}
 
-	AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone(bool addToWorld)
+	AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone(bool addToWorld) const
 	{
 		// Create a new object
 		AbstractEvolutionObject* newObject = world->addNewObject(addToWorld);
 		// Copy all weights
-		newObject->getNeuralNetwork()->getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
+		newObject->getNeuralNetwork().getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
 		// Copy all mutation strengths
 		newObject->setMutationStrength(getMutationStrength());
 		return newObject;

@@ -19,7 +19,7 @@ namespace LightBulb
 		int counter;
 		// Holds the time for how long the score must be lower than the allow minimum
 		int count;
-		bool perfectObjectExists(const AbstractCombiningStrategy& combiningStrategy);
+		bool perfectObjectExists(const AbstractCombiningStrategy& combiningStrategy) const;
 	public:
 		void setCount(int newCount);
 		// Creates a new condition with the minimum difference and the allowed timesteps

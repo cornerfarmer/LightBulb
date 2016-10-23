@@ -40,8 +40,8 @@ public:
 	int rateKI(LightBulb::AbstractEvolutionObject& rateKI) override;
 	void startNewGame();
 	void initializeForLearning() override;
-	std::vector<std::string> getDataSetLabels() override;
-	int getRoundCount() override;
+	std::vector<std::string> getDataSetLabels() const override;
+	int getRoundCount() const override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(Pong, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld);

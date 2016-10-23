@@ -22,7 +22,7 @@ namespace LightBulb
 		{
 			std::unique_ptr<AbstractEvolutionObject> newObject(world.addNewObject(false));
 
-			AbstractEvolutionObject* objectToAdd = getUnusedObject(newObject.get(), notUsedObjects, false);
+			AbstractEvolutionObject* objectToAdd = getUnusedObject(*newObject.get(), notUsedObjects, false);
 			objectToAdd->setEvolutionSource(Creation);
 
 			world.addExistingObject(objectToAdd);

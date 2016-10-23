@@ -30,7 +30,7 @@ int Pong::doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2
 }
 
 
-std::vector<std::string> Pong::getDataSetLabels()
+std::vector<std::string> Pong::getDataSetLabels() const
 {
 	auto labels = AbstractCoevolutionWorld::getDataSetLabels();
 	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING);
@@ -38,7 +38,7 @@ std::vector<std::string> Pong::getDataSetLabels()
 }
 
 
-int Pong::getRoundCount()
+int Pong::getRoundCount() const
 {
 	return 1;
 }

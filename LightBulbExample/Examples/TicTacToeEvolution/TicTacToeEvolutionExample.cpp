@@ -106,8 +106,8 @@ AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	TicTacToe* ticTacToe1 = new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 
-	cs1->setSecondWorld(static_cast<TicTacToe*>(parasiteWorld.get()));
-	cs2->setSecondWorld(ticTacToe1);
+	cs1->setSecondWorld(static_cast<TicTacToe&>(*parasiteWorld.get()));
+	cs2->setSecondWorld(*ticTacToe1);
 
 	return ticTacToe1;
 

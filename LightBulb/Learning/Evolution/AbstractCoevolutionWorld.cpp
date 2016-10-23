@@ -19,17 +19,17 @@ namespace LightBulb
 
 	bool AbstractCoevolutionWorld::doSimulationStep()
 	{
-		auto results = combiningStrategy->execute(this);
+		CombiningStrategyResults& results = combiningStrategy->execute(*this);
 
-		if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results->size() > 0)
-			learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(this));
+		if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results.size() > 0)
+			learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(*this));
 
 		if (hallOfFameToChallengeAlgorithm)
-			hallOfFameToChallengeAlgorithm->execute(this, *results);
+			hallOfFameToChallengeAlgorithm->execute(*this, results);
 
-		fitnessValues.reset(fitnessFunction->execute(*results));
+		fitnessValues.reset(fitnessFunction->execute(results));
 
-		AbstractEvolutionObject* bestAI = getHighscoreList()->front().second;
+		AbstractEvolutionObject* bestAI = getHighscoreList().front().second;
 		rateKI(*bestAI);
 
 		if (hallOfFameToAddAlgorithm)
@@ -41,7 +41,7 @@ namespace LightBulb
 		return false;
 	}
 
-	double AbstractCoevolutionWorld::getScore(AbstractEvolutionObject& object)
+	double AbstractCoevolutionWorld::getScore(const AbstractEvolutionObject& object) const
 	{
 		return (*fitnessValues)[&object];
 	}
@@ -52,9 +52,9 @@ namespace LightBulb
 		return doCompare(obj1, obj2, round);
 	}
 
-	AbstractCombiningStrategy* AbstractCoevolutionWorld::getCombiningStrategy()
+	AbstractCombiningStrategy& AbstractCoevolutionWorld::getCombiningStrategy() const
 	{
-		return combiningStrategy.get();
+		return *combiningStrategy.get();
 	}
 
 	void AbstractCoevolutionWorld::setLogger(AbstractLogger& logger_)
@@ -66,7 +66,7 @@ namespace LightBulb
 			hallOfFameToAddAlgorithm->setLogger(logger_);
 	}
 
-	std::vector<std::string> AbstractCoevolutionWorld::getDataSetLabels()
+	std::vector<std::string> AbstractCoevolutionWorld::getDataSetLabels() const
 	{
 		auto labels = AbstractEvolutionWorld::getDataSetLabels();
 		labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS);
@@ -75,12 +75,12 @@ namespace LightBulb
 		return labels;
 	}
 
-	bool AbstractCoevolutionWorld::isParasiteWorld()
+	bool AbstractCoevolutionWorld::isParasiteWorld() const
 	{
 		return parasiteWorld;
 	}
 
-	int AbstractCoevolutionWorld::getRoundCount()
+	int AbstractCoevolutionWorld::getRoundCount() const
 	{
 		return 1;
 	}

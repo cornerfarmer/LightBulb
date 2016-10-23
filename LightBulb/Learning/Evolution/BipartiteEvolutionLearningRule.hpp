@@ -34,7 +34,7 @@ namespace LightBulb
 		const BipartiteEvolutionLearningRuleOptions& getOptions() const;
 		bool doIteration() override;
 		void initializeTry() override;
-		bool hasLearningSucceeded() const override;
+		bool hasLearningSucceeded() override;
 		void initializeStartLearningAlgoritm() override;
 		bool exitConditionReached;
 		AbstractLearningResult* getLearningResult() override;

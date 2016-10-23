@@ -24,12 +24,12 @@ protected:
 	LightBulb::AbstractEvolutionObject* createNewObject() override;
 	//sf::RenderWindow window;
 	//std::unique_ptr<NetworkDrawer> drawer;
-	double distanceBetweenPositions(std::vector<float>& pos1, std::vector<float>& pos2);
+	double distanceBetweenPositions(const std::vector<float>& pos1, const std::vector<float>& pos2) const;
 public:
 	NetworkSimulator(std::vector<std::vector<float>> consumers_);
 	NetworkSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(LightBulb::AbstractEvolutionObject& object) override;
+	double getScore(const LightBulb::AbstractEvolutionObject& object) const override;
 	std::vector<std::vector<float>>& getConsumers();
 };
 

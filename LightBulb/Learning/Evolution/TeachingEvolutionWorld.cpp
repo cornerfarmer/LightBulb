@@ -8,7 +8,7 @@ namespace LightBulb
 {
 	AbstractEvolutionObject* TeachingEvolutionWorld::createNewObject()
 	{
-		return new TeachedEvolutionObject(this, networkOptions);
+		return new TeachedEvolutionObject(*this, networkOptions);
 	}
 
 	TeachingEvolutionWorld::TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_)
@@ -25,18 +25,18 @@ namespace LightBulb
 			(*teachedEvolutionObject)->doNNCalculation();
 		}
 
-		auto highscore = getHighscoreList();
+		const Highscore& highscore = getHighscoreList();
 
 		if (learningState && !learningState->disabledDatasets[DATASET_TEACHING_ERROR])
-			learningState->addData(DATASET_TEACHING_ERROR, static_cast<TeachedEvolutionObject*>(highscore->front().second)->getCurrentTeachingError());
+			learningState->addData(DATASET_TEACHING_ERROR, static_cast<TeachedEvolutionObject*>(highscore.front().second)->getCurrentTeachingError());
 
 		if (learningState && !learningState->disabledDatasets[DATASET_WEIGHTDECAY_ERROR])
-			learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedEvolutionObject*>(highscore->front().second)->getCurrentWeightDecayError());
+			learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedEvolutionObject*>(highscore.front().second)->getCurrentWeightDecayError());
 
 		return false;
 	}
 
-	std::vector<std::string> TeachingEvolutionWorld::getDataSetLabels()
+	std::vector<std::string> TeachingEvolutionWorld::getDataSetLabels() const
 	{
 		auto labels = AbstractEvolutionWorld::getDataSetLabels();
 		labels.push_back(DATASET_TEACHING_ERROR);
@@ -44,15 +44,15 @@ namespace LightBulb
 		return labels;
 	}
 
-	double TeachingEvolutionWorld::getScore(AbstractEvolutionObject& object)
+	double TeachingEvolutionWorld::getScore(const AbstractEvolutionObject& object) const
 	{
 		// Just return the total error of the object (negate it, so the error 0 is the maximum)
-		return -static_cast<TeachedEvolutionObject&>(object).getCurrentTotalError();
+		return -static_cast<const TeachedEvolutionObject&>(object).getCurrentTotalError();
 	}
 
 
-	AbstractTeacher* TeachingEvolutionWorld::getTeacher()
+	AbstractTeacher& TeachingEvolutionWorld::getTeacher() const
 	{
-		return teacher;
+		return *teacher;
 	}
 }

@@ -17,42 +17,47 @@ namespace LightBulb
 		}
 	}
 
-	void AbstractEvolutionObject::copyPropertiesFrom(AbstractEvolutionObject* notUsedObject)
+	void AbstractEvolutionObject::copyPropertiesFrom(AbstractEvolutionObject& notUsedObject)
 	{
-		getNeuralNetwork()->getNetworkTopology().copyWeightsFrom(notUsedObject->getNeuralNetwork()->getNetworkTopology());
-		setMutationStrength(notUsedObject->getMutationStrength());
+		getNeuralNetwork().getNetworkTopology().copyWeightsFrom(notUsedObject.getNeuralNetwork().getNetworkTopology());
+		setMutationStrength(notUsedObject.getMutationStrength());
 	}
 
-	std::vector<double>* AbstractEvolutionObject::getMutationStrength()
+	std::vector<double>& AbstractEvolutionObject::getMutationStrength()
 	{
-		return &mutationStrength;
+		return mutationStrength;
 	}
 
-	void AbstractEvolutionObject::setMutationStrength(std::vector<double>* newMutationStrength)
+	const std::vector<double>& AbstractEvolutionObject::getMutationStrength() const
 	{
-		mutationStrength = *newMutationStrength;
+		return mutationStrength;
 	}
 
-	void AbstractEvolutionObject::setEvolutionSource(EvolutionSource evolutionSource_)
+	void AbstractEvolutionObject::setMutationStrength(const std::vector<double>& newMutationStrength)
+	{
+		mutationStrength = newMutationStrength;
+	}
+
+	void AbstractEvolutionObject::setEvolutionSource(const EvolutionSource& evolutionSource_)
 	{
 		evolutionSource = evolutionSource_;
 	}
 
-	EvolutionSource AbstractEvolutionObject::getEvolutionSource()
+	const EvolutionSource& AbstractEvolutionObject::getEvolutionSource() const
 	{
 		return evolutionSource;
 	}
 
 	void AbstractEvolutionObject::removeNeuron(int layerIndex, int neuronIndex)
 	{
-		getNeuralNetwork()->getNetworkTopology().removeNeuron(layerIndex, neuronIndex);
-		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology().getEdgeCount());
+		getNeuralNetwork().getNetworkTopology().removeNeuron(layerIndex, neuronIndex);
+		mutationStrength.resize(getNeuralNetwork().getNetworkTopology().getEdgeCount());
 	}
 
 	void AbstractEvolutionObject::addNeuron(int layerIndex)
 	{
-		getNeuralNetwork()->getNetworkTopology().addNeuron(layerIndex);
-		mutationStrength.resize(getNeuralNetwork()->getNetworkTopology().getEdgeCount(), 0.2);
+		getNeuralNetwork().getNetworkTopology().addNeuron(layerIndex);
+		mutationStrength.resize(getNeuralNetwork().getNetworkTopology().getEdgeCount(), 0.2);
 	}
 
 	void AbstractEvolutionObject::resizeMutationStrength(int newSize)

@@ -25,11 +25,11 @@ namespace LightBulb
 	{
 		archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
 
-		std::unique_ptr<AbstractLearningRule> subLearningRule(learningRule.getOptions()->learningRule1);
+		std::unique_ptr<AbstractLearningRule> subLearningRule(learningRule.getOptions().learningRule1);
 		archive(cereal::make_nvp("learningRule1", subLearningRule));
 		subLearningRule.release();
 
-		subLearningRule.reset(learningRule.getOptions()->learningRule2);
+		subLearningRule.reset(learningRule.getOptions().learningRule2);
 		archive(cereal::make_nvp("learningRule2", subLearningRule));
 		subLearningRule.release();
 	}
@@ -52,12 +52,12 @@ namespace cereal
 			LightBulb::BipartiteEvolutionLearningRule* learningRule = static_cast<BipartiteEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 			ar(cereal::base_class<AbstractEvolutionLearningRule>(learningRule));
 
-			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions()->learningRule1);
+			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions().learningRule1);
 			std::unique_ptr<LightBulb::AbstractLearningRule> learningRuleDummy;
 			ar(cereal::make_nvp("learningRule1", learningRuleDummy));
 			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
-			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions()->learningRule2);
+			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions().learningRule2);
 			ar(cereal::make_nvp("learningRule2", learningRuleDummy));
 			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 

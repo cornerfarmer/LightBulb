@@ -6,12 +6,12 @@
 
 namespace LightBulb
 {
-	void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		std::vector<double> probabilities;
-		probabilities.reserve(highscore->size());
+		probabilities.reserve(highscore.size());
 
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++)
+		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			probabilities.push_back(entry->first);
 		}
@@ -21,21 +21,21 @@ namespace LightBulb
 		for (auto selectedIndex = selectedIndices.begin(); selectedIndex != selectedIndices.end(); selectedIndex++, mutationSequenceIndex++)
 		{
 			if (recombine)
-				addObjectToRecombination((*highscore)[*selectedIndex].second);
+				addObjectToRecombination(*highscore[*selectedIndex].second);
 			else
-				addObjectToMutate((*highscore)[*selectedIndex].second);
+				addObjectToMutate(*highscore[*selectedIndex].second);
 		}
 	}
 
-	void StochasticUniversalSamplingSelector::selectForMutation(int mutationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void StochasticUniversalSamplingSelector::selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		select(false, mutationCount, highscore);
 	}
 
-	void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore)
+	void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		select(true, recombinationCount * 2, highscore);
-		std::random_shuffle(getRecombinationSelection()->begin(), getRecombinationSelection()->end());
+		std::random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());
 	}
 
 

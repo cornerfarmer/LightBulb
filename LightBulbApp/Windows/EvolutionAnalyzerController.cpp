@@ -56,11 +56,11 @@ namespace LightBulb
 
 	void EvolutionAnalyzerController::evolutionStepCompleted(EvolutionLearningRule& evolutionLearningRule)
 	{
-		auto highscore = evolutionLearningRule.getWorld()->getHighscoreList();
-		currentState.resize(highscore->size());
+		auto highscore = evolutionLearningRule.getWorld().getHighscoreList();
+		currentState.resize(highscore.size());
 
 		int i = 0;
-		for (auto entry = highscore->begin(); entry != highscore->end(); entry++, i++)
+		for (auto entry = highscore.begin(); entry != highscore.end(); entry++, i++)
 		{
 			currentState[i].first = entry->second->getEvolutionSource();
 			currentState[i].second = entry->first;

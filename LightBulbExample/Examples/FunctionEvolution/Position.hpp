@@ -26,7 +26,7 @@ public:
 	Position(FunctionSimulator& functionSimulator_);
 	Position() = default;
 	~Position();
-	std::vector<float> getPosition();
+	std::vector<float> getPosition() const;
 };
 
 #include "IO/PositionIO.hpp"

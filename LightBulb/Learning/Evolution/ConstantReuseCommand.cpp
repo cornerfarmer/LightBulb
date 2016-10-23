@@ -17,12 +17,12 @@ namespace LightBulb
 		setReusePercentage(reusePercentage_);
 	}
 
-	void ConstantReuseCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>* highscore, std::map<AbstractEvolutionObject*, int>* counter)
+	void ConstantReuseCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
 	{
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (objectCount == 0)
-			objectCount = (int)(highscore->size() * reusePercentage);
+			objectCount = (int)(highscore.size() * reusePercentage);
 
 		reuseSelector->executeReuseSelection(objectCount, highscore, counter);
 	}

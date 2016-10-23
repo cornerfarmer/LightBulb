@@ -10,34 +10,34 @@ namespace LightBulb
 		secondWorld = secondWorld_;
 	}
 
-	void AbstractCombiningStrategy::setResult(AbstractEvolutionObject* firstPlayer, AbstractEvolutionObject* secondPlayer, int round, bool firstPlayerHasWon)
+	void AbstractCombiningStrategy::setResult(AbstractEvolutionObject& firstPlayer, AbstractEvolutionObject& secondPlayer, int round, bool firstPlayerHasWon)
 	{
-		(*results)[firstPlayer][secondPlayer][round] = firstPlayerHasWon;
-		(*results)[secondPlayer][firstPlayer][round] = !firstPlayerHasWon;
+		(*results)[&firstPlayer][&secondPlayer][round] = firstPlayerHasWon;
+		(*results)[&secondPlayer][&firstPlayer][round] = !firstPlayerHasWon;
 		firstPlayerWins += firstPlayerHasWon;
 	}
 
-	CombiningStrategyResults* AbstractCombiningStrategy::execute(AbstractCoevolutionWorld* world)
+	CombiningStrategyResults& AbstractCombiningStrategy::execute(AbstractCoevolutionWorld& world)
 	{
 		results.reset(new CombiningStrategyResults());
 		firstPlayerWins = 0;
 
-		combine(world, world->getEvolutionObjects(), secondWorld ? secondWorld->getEvolutionObjects() : world->getEvolutionObjects());
+		combine(world, world.getEvolutionObjects(), secondWorld ? secondWorld->getEvolutionObjects() : world.getEvolutionObjects());
 
-		return results.get();
+		return *results.get();
 	}
 
-	void AbstractCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld* newSecondWorld)
+	void AbstractCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld& newSecondWorld)
 	{
-		secondWorld = newSecondWorld;
+		secondWorld = &newSecondWorld;
 	}
 
-	CombiningStrategyResults* AbstractCombiningStrategy::getPrevResults()
+	const CombiningStrategyResults& AbstractCombiningStrategy::getPrevResults() const
 	{
-		return results.get();
+		return *results.get();
 	}
 
-	int AbstractCombiningStrategy::getFirstPlayerWins()
+	int AbstractCombiningStrategy::getFirstPlayerWins() const
 	{
 		return firstPlayerWins;
 	}

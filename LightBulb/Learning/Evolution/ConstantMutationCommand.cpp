@@ -18,12 +18,12 @@ namespace LightBulb
 	}
 
 
-	void ConstantMutationCommand::select(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void ConstantMutationCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
 	{
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (objectCount == 0)
-			objectCount = (int)(highscore->size() * mutationPercentage);
+			objectCount = (int)(highscore.size() * mutationPercentage);
 
 		mutationSelector->executeMutationSelection(objectCount, highscore, counter);
 

@@ -15,9 +15,9 @@ namespace LightBulb
 		ignoreInputLayer = ignoreInputLayer_;
 	}
 
-	void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject* object1)
+	void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractEvolutionObject& object1)
 	{
-		AbstractNetworkTopology& networkTopology = object1->getNeuralNetwork()->getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = object1.getNeuralNetwork().getNetworkTopology();
 		for (int n = 0; n < removeNeuronsPerIteration; n++)
 		{
 			bool usesBiasNeuron = networkTopology.usesBiasNeuron();
@@ -76,7 +76,7 @@ namespace LightBulb
 				if (useRandomFunction)
 					selectedIndex = randomFunction.execute(neuronRanking.size());
 
-				object1->removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
+				object1.removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
 			}
 		}
 

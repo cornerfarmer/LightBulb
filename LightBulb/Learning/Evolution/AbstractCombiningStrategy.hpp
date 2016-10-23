@@ -32,7 +32,7 @@ namespace LightBulb
 		AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = nullptr);
 		virtual CombiningStrategyResults& execute(AbstractCoevolutionWorld& world);
 		virtual void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld);
-		virtual CombiningStrategyResults& getPrevResults();
+		virtual const CombiningStrategyResults& getPrevResults() const;
 		virtual int getFirstPlayerWins() const;
 		virtual int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const = 0;
 	};

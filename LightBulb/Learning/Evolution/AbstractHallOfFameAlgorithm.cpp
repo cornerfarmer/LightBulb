@@ -6,18 +6,18 @@
 
 namespace LightBulb
 {
-	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject* object, int memberID, int round)
+	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject& object, int memberID, int round)
 	{
-		bool firstPlayerHasWon = currentWorld->compareObjects(*object, *members[memberID].get(), round) > 0;
-		(*currentResults)[object][members[memberID].get()][round] = firstPlayerHasWon;
-		(*currentResults)[members[memberID].get()][object][round] = !firstPlayerHasWon;
+		bool firstPlayerHasWon = currentWorld->compareObjects(object, *members[memberID].get(), round) > 0;
+		(*currentResults)[&object][members[memberID].get()][round] = firstPlayerHasWon;
+		(*currentResults)[members[memberID].get()][&object][round] = !firstPlayerHasWon;
 	}
 
-	void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld* world, CombiningStrategyResults& prevResults)
+	void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld& world, CombiningStrategyResults& prevResults)
 	{
 		currentResults = &prevResults;
-		currentWorld = world;
-		evaluateObjects(*world->getEvolutionObjects());
+		currentWorld = &world;
+		evaluateObjects(world.getEvolutionObjects());
 	}
 
 	void AbstractHallOfFameAlgorithm::addMember(AbstractEvolutionObject* newMember)
