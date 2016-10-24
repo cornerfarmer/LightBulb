@@ -6,6 +6,7 @@
 #include "gmock/gmock.h"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "Random/AbstractRandomGenerator.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 class MockNetworkTopology : public LightBulb::AbstractNetworkTopology
 {

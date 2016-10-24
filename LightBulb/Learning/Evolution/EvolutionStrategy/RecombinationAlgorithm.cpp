@@ -50,7 +50,7 @@ namespace LightBulb
 		{
 			if (useAverageForMutationStrength)
 			{
-				mutationStrength1[i] = mutationStrength2[i] + mutationStrength1[i] / 2;
+				mutationStrength1[i] = (mutationStrength2[i] + mutationStrength1[i]) / 2;
 			}
 			else
 			{

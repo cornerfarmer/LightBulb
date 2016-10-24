@@ -46,7 +46,7 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 	weights.push_back(Eigen::MatrixXd(1, 1));
 	weights[1](0, 0) = 10;
 
-	EXPECT_CALL(networkTopology, removeNeuron(0, 1)).Times(1);
+	EXPECT_CALL(object, removeNeuron(0, 1)).Times(1);
 
 	magnitudeBasedPruningMutationAlgorithm->execute(object);
 }
@@ -81,7 +81,7 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 	weights.push_back(Eigen::MatrixXd(1, 1));
 	weights[1](0, 0) = 0;
 
-	EXPECT_CALL(networkTopology, removeNeuron(0, 2)).Times(1);
+	EXPECT_CALL(object, removeNeuron(0, 2)).Times(1);
 
 	magnitudeBasedPruningMutationAlgorithm->execute(object);
 }

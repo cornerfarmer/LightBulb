@@ -5,6 +5,8 @@
 
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
+#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/AbstractLearningResult.hpp"
 
 class MockEvolutionLearningRule : public LightBulb::AbstractEvolutionLearningRule
 {

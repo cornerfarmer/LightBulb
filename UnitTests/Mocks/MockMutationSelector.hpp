@@ -5,6 +5,8 @@
 
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractMutationSelector.hpp>
+#include <Learning/Evolution/AbstractEvolutionObject.hpp>
+
 
 class MockMutationSelector : public LightBulb::AbstractMutationSelector
 {

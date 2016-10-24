@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractEvolutionObject.hpp>
+#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 class MockEvolutionObject : public LightBulb::AbstractEvolutionObject
 {
