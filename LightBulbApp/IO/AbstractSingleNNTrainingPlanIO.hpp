@@ -14,8 +14,17 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief Set true if the training plan should only serialize the index of the network in the network respository.
+	 */
 	extern bool onlyUseNeuralNetworkIndex;
 
+	/**
+	* \brief Saves an AbstractSingleNNTrainingPlan.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingPlan The AbstractSingleNNTrainingPlan to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, AbstractSingleNNTrainingPlan const& trainingPlan)
 	{
@@ -39,6 +48,12 @@ namespace LightBulb
 		archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 	}
 
+	/**
+	* \brief Loads an AbstractSingleNNTrainingPlan.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingPlan The AbstractSingleNNTrainingPlan to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractSingleNNTrainingPlan& trainingPlan)
 	{

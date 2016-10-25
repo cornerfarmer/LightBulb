@@ -340,8 +340,6 @@
     <ClInclude Include="IO\ConstructExisting.hpp" />
     <ClInclude Include="IO\EnumSerialization.hpp" />
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
-    <ClInclude Include="IO\GaussianRBFFunctionIO.hpp" />
-    <ClInclude Include="IO\RBFNetworkIO.hpp" />
     <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
@@ -353,7 +351,6 @@
     <ClInclude Include="IO\FermiFunctionIO.hpp" />
     <ClInclude Include="IO\IOStorage.hpp" />
     <ClInclude Include="IO\LearningStateIO.hpp" />
-    <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp" />
     <ClInclude Include="IO\StorageLoggerIO.hpp" />
     <ClInclude Include="IO\AbstractJSONElement.hpp" />
     <ClInclude Include="IO\BrainJSExporter.hpp" />

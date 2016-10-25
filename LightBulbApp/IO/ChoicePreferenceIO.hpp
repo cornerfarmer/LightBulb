@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an ChoicePreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param choicePreference The ChoicePreference to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, ChoicePreference const& choicePreference)
 	{
@@ -19,6 +25,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("value", choicePreference.value));
 	}
 
+	/**
+	* \brief Loads an ChoicePreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param choicePreference The ChoicePreference to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, ChoicePreference& choicePreference)
 	{

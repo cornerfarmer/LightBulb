@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an IntegerPreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param integerPreference The IntegerPreference to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, IntegerPreference const& integerPreference)
 	{
@@ -19,6 +25,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("value", integerPreference.value));
 	}
 
+	/**
+	* \brief Loads an IntegerPreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param integerPreference The IntegerPreference to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, IntegerPreference& integerPreference)
 	{

@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an AbstractTrainingPlan.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingPlan The AbstractTrainingPlan to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, AbstractTrainingPlan const& trainingPlan)
 	{
@@ -22,6 +28,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("concludedRunTime", trainingPlan.concludedRunTime.count()));
 	}
 
+	/**
+	* \brief Loads an AbstractTrainingPlan.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingPlan The AbstractTrainingPlan to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractTrainingPlan& trainingPlan)
 	{

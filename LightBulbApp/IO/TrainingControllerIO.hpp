@@ -11,6 +11,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Serializes a TrainingController.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingController The TrainingController to serialize.
+	*/
 	template <class Archive>
 	void serialize(Archive& archive, TrainingController& trainingController)
 	{

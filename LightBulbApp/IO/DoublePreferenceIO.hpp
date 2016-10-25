@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an DoublePreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param doublePreference The DoublePreference to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, DoublePreference const& doublePreference)
 	{
@@ -19,6 +25,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("value", doublePreference.value));
 	}
 
+	/**
+	* \brief Loads an DoublePreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param doublePreference The DoublePreference to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, DoublePreference& doublePreference)
 	{

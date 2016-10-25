@@ -12,6 +12,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an BooleanPreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param booleanPreference The BooleanPreference to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, BooleanPreference const& booleanPreference)
 	{
@@ -19,6 +25,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("value", booleanPreference.value));
 	}
 
+	/**
+	* \brief Loads an BooleanPreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param booleanPreference The BooleanPreference to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, BooleanPreference& booleanPreference)
 	{

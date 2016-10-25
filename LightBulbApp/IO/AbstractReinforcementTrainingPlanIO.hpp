@@ -13,6 +13,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an AbstractReinforcementTrainingPlan.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingPlan The AbstractReinforcementTrainingPlan to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, AbstractReinforcementTrainingPlan const& trainingPlan)
 	{
@@ -20,6 +26,12 @@ namespace LightBulb
 		archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 	}
 
+	/**
+	* \brief Loads an AbstractReinforcementTrainingPlan.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param trainingPlan The AbstractReinforcementTrainingPlan to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractReinforcementTrainingPlan& trainingPlan)
 	{

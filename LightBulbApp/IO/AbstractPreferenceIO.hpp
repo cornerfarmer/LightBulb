@@ -11,6 +11,12 @@
 
 namespace LightBulb
 {
+	/**
+	* \brief Saves an AbstractPreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param preference The AbstractPreference to save.
+	*/
 	template <class Archive>
 	void save(Archive& archive, AbstractPreference const& preference)
 	{
@@ -18,6 +24,12 @@ namespace LightBulb
 		archive(cereal::make_nvp("name", preference.name));
 	}
 
+	/**
+	* \brief Loads an AbstractPreference.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param preference The AbstractPreference to load.
+	*/
 	template <class Archive>
 	void load(Archive& archive, AbstractPreference& preference)
 	{

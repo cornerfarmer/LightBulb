@@ -660,16 +660,10 @@
     <ClInclude Include="IO\FermiFunctionIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\GaussianRBFFunctionIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="IO\LearningStateIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\NeuronDescriptionIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\RBFInterpolationLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp">
@@ -704,9 +698,6 @@
     </ClInclude>
     <ClInclude Include="Event\Observable.hpp">
       <Filter>Quelldateien\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\RBFNetworkIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\IOStorage.hpp">
       <Filter>Quelldateien\IO</Filter>
