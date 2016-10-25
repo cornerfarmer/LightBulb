@@ -10,8 +10,9 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief Describes a boolean preference.
+	 */
 	class BooleanPreference : public AbstractVariablePreference<bool>
 	{
 		template <class Archive>
@@ -19,10 +20,20 @@ namespace LightBulb
 		template <class Archive>
 		friend void load(Archive& archive, BooleanPreference& booleanPreference);
 	protected:
+		// Inherited:
 		std::string getValueAsString() const override;
 	public:
+		/**
+		 * \brief Creates a boolean preference.
+		 * \param name The name.
+		 * \param defaultValue The defaul value.
+		 */
 		BooleanPreference(const std::string& name, bool defaultValue);
+		/**
+		 * \brief Creates a empty boolean preference.
+		 */
 		BooleanPreference() = default;
+		// Inherited:
 		AbstractPreferenceElement* getCopy() const override;
 	};
 }

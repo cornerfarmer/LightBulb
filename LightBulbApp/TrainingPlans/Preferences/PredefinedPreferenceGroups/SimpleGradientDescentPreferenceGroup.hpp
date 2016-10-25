@@ -10,19 +10,35 @@
 
 namespace LightBulb
 {
-
-	// Forward declarations
-
+	/**
+	* \brief Describes a predefined preference group for simple gradient descent.
+	*/
 	class SimpleGradientDescentPreferenceGroup : public PreferenceGroup
 	{
 	protected:
+		/**
+		* \brief Initializes the preference group.
+		* \param options The options which contain the default values.
+		*/
 		void initialize(const SimpleGradientDescentOptions& options);
 	public:
+		/**
+		* \brief Creates a simple gradient descent preference group with standard default values.
+		* \param name The name.
+		*/
 		SimpleGradientDescentPreferenceGroup(const std::string& name = "Simple gradient descent");
+		/**
+		* \brief Creates a simple gradient descent preference group.
+		* \param options The options which contain the default values to use.
+		* \param name The name.
+		*/
 		SimpleGradientDescentPreferenceGroup(const SimpleGradientDescentOptions& options, const std::string& name = "Simple gradient descent");
-
+		/**
+		* \brief Creates simple gradient descent options with the current preference values.
+		* \return The simple gradient descent options.
+		*/
 		SimpleGradientDescentOptions create() const;
-
+		// Inherited:
 		AbstractPreferenceElement* getCopy() const override;
 	};
 }

@@ -10,16 +10,24 @@
 
 namespace LightBulb
 {
-
-	// Forward declarations
-
+	/**
+	* \brief Describes a predefined preference group for backpropagation.
+	*/
 	class BackpropagationPreferenceGroup : public PreferenceGroup
 	{
 	protected:
 	public:
+		/**
+		* \brief Creates a backpropagation preference group with standard default values.
+		* \param name The name.
+		*/
 		BackpropagationPreferenceGroup(const std::string& name = "Backpropagation");
-
+		/**
+		 * \brief Creates a new backpropagation object with the current preference values.
+		 * \return The new backpropagation object.
+		 */
 		Backpropagation* create() const;
+		// Inherited:
 		AbstractPreferenceElement* getCopy() const override;
 	};
 }
