@@ -27,7 +27,7 @@ public:
 	MOCK_METHOD0(releaseAllObjects, void ());
 	MOCK_METHOD1(addExistingObject, void (LightBulb::AbstractEvolutionObject*));
 	MOCK_METHOD3(doCompare, int (LightBulb::AbstractEvolutionObject&, LightBulb::AbstractEvolutionObject&, int));
-	MOCK_METHOD0(doSimulationStep, bool ());
+
 	MOCK_CONST_METHOD1(getScore, double (const LightBulb::AbstractEvolutionObject&));
 	MOCK_METHOD3(compareObjects, int (LightBulb::AbstractEvolutionObject&, LightBulb::AbstractEvolutionObject&, int));
 	MOCK_METHOD1(rateKI, int (LightBulb::AbstractEvolutionObject&));

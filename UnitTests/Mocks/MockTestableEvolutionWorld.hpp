@@ -15,7 +15,6 @@ public:
 	MOCK_METHOD1(setEvolutionObjects, void (const std::vector<LightBulb::AbstractEvolutionObject*>&));
 	MOCK_METHOD1(addNewObject, LightBulb::AbstractEvolutionObject* (bool));
 	MOCK_METHOD0(doSimulationStep, bool ());
-	MOCK_METHOD0(getHighscoreList, LightBulb::Highscore& ());
 	MOCK_CONST_METHOD1(getScore, double (const LightBulb::AbstractEvolutionObject&));
 	MOCK_CONST_METHOD1(getRealScore, double (const LightBulb::AbstractEvolutionObject&));
 	MOCK_METHOD0(initializeForLearning, void ());

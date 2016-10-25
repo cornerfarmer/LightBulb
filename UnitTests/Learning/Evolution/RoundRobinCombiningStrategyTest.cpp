@@ -13,6 +13,7 @@ public:
 
 	void SetUp()
 	{
+		EXPECT_CALL(world, getRoundCount()).WillRepeatedly(testing::Return(1));
 		roundRobinCombiningStrategy = new RoundRobinCombiningStrategy();
 	}
 

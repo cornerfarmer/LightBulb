@@ -13,7 +13,7 @@ public:
 	MOCK_METHOD0(createOutputNeuronDescription, LightBulb::NeuronDescription* ());
 	MOCK_CONST_METHOD0(getOutputActivationFunction, const LightBulb::AbstractActivationFunction& ());
 	MOCK_CONST_METHOD0(getInnerActivationFunction, const LightBulb::AbstractActivationFunction& ());
-	MOCK_CONST_METHOD0(getCopy, AbstractNeuronDescriptionFactory* ());
+	AbstractNeuronDescriptionFactory* getCopy() const override { return new MockNeuronDescriptionFactory(); };
 };
 
 #endif

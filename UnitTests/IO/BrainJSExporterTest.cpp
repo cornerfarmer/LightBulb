@@ -21,7 +21,7 @@ TEST(BrainJSExporterTest, exportSimpleFeedForwardNetworkTopology)
 	options.neuronsPerLayerCount.push_back(1);
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
-	auto weights = networkTopology->getAllWeights();
+	auto& weights = networkTopology->getAllWeights();
 	weights[0](0, 0) = -5.97730812726829;
 	weights[0](0, 1) = -6.01825421209065;
 

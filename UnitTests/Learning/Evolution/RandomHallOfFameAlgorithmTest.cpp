@@ -25,6 +25,7 @@ public:
 TEST_F(RandomHallOfFameAlgorithmTest, execute)
 {
 	MockCoevolutionWorld world;
+	EXPECT_CALL(world, getRoundCount()).WillRepeatedly(testing::Return(1));
 	CombiningStrategyResults results;
 
 	MockEvolutionObject hallOfFameMember1, hallOfFameMember2;

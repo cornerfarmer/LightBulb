@@ -4,6 +4,7 @@
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Mocks/MockLearningResult.hpp>
+#include "Mocks/MockLogger.hpp"
 
 using testing::Expectation;
 using namespace LightBulb;
@@ -13,9 +14,11 @@ public:
 	BipartiteEvolutionLearningRule* bipartiteEvolutionLearningRule;
 	MockEvolutionLearningRule* learningRule1;
 	MockEvolutionLearningRule* learningRule2;
+	MockLogger logger;
 
 	void SetUp() {
 		BipartiteEvolutionLearningRuleOptions options;
+		options.logger = &logger;
 		AbstractEvolutionLearningRuleOptions subOptions;
 		learningRule1 = new MockEvolutionLearningRule(subOptions);
 		learningRule2 = new MockEvolutionLearningRule(subOptions);

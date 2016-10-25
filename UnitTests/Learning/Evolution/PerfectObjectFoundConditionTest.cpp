@@ -11,8 +11,8 @@ using namespace LightBulb;
 class PerfectObjectFoundConditionTest : public testing::Test {
 public:
 	PerfectObjectFoundCondition* perfectObjectFoundCondition;
-	MockCoevolutionWorld world;
-	MockEvolutionLearningRule* learningRule;
+	MockCoevolutionWorld* world;
+	const MockEvolutionLearningRule* learningRule;
 	MockCombiningStrategy combiningStrategy;
 	MockEvolutionObject object1, object2, object3;
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
@@ -22,11 +22,12 @@ public:
 		perfectObjectFoundCondition = new PerfectObjectFoundCondition(2);
 		AbstractEvolutionLearningRuleOptions options;
 		learningRule = new MockEvolutionLearningRule(options);
+		world = new MockCoevolutionWorld();
 		highscore.push_back(std::make_pair(0, (AbstractEvolutionObject*)nullptr));
 
-		EXPECT_CALL(*learningRule, getWorld()).WillRepeatedly(testing::ReturnRef(world));
-		EXPECT_CALL(world, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(combiningStrategy));
-		EXPECT_CALL(world, isParasiteWorld()).WillRepeatedly(testing::Return(true));
+		EXPECT_CALL(*learningRule, getWorld()).WillRepeatedly(testing::ReturnRef(*world));
+		EXPECT_CALL(*world, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(combiningStrategy));
+		EXPECT_CALL(*world, isParasiteWorld()).WillRepeatedly(testing::Return(true));
 		
 		results[&object1][&object2][0] = true;
 		results[&object2][&object1][0] = false;
