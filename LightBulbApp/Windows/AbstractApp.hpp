@@ -6,8 +6,9 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief Describes an app controller which manages one window
+	 */
 	class AbstractApp
 	{
 	protected:

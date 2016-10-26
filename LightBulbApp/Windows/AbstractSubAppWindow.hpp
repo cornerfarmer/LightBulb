@@ -12,17 +12,31 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractSubApp;
-
-	// A chart which shows the location of neurons
+	/**
+	 * \brief A window for a sub app.
+	 */
 	class AbstractSubAppWindow : public AbstractWindow
 	{
 	private:
+		/**
+		 * \brief Returns the controller of the window.
+		 * \return The controller.
+		 */
 		AbstractSubApp* getController();
 	protected:
+		/**
+		 * \brief Listener for a window close event.
+		 * \param event The close event.
+		 */
 		virtual void close(wxCloseEvent& event);
 	public:
+		/**
+		 * \brief Creates the window.
+		 * \param controller_ The corresponding controller.
+		 * \param label The label of the window.
+		 * \param parent The parent window.
+		 */
 		AbstractSubAppWindow(AbstractSubApp& controller_, std::string label, AbstractWindow& parent);
-
 	};
 }
 
