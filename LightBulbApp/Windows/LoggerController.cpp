@@ -26,11 +26,6 @@ namespace LightBulb
 			selectedTrainingPlan->getLogger().removeObserver(EVT_LG_LOGADDED, &LoggerController::logChanged, *this);
 	}
 
-	void LoggerController::show()
-	{
-		window->Show();
-	}
-
 	void LoggerController::trainingPlansChanged(TrainingPlanRepository& trainingPlanRepository)
 	{
 		window->refreshTrainingPlans();
