@@ -172,7 +172,7 @@ namespace LightBulb
 	void TrainingController::addSubAppFactory(AbstractSubAppFactory* newSubAppFactory)
 	{
 		subAppFactories.push_back(newSubAppFactory);
-		window->addSubAppFactory(*newSubAppFactory, subAppFactories.size() - 1);
+		window->addSubAppFactory(*newSubAppFactory);
 	}
 
 	int TrainingController::getIndexOfNeuralNetwork(const AbstractNeuralNetwork& network) const

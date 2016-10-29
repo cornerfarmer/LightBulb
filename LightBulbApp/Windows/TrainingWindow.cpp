@@ -338,7 +338,7 @@ namespace LightBulb
 	}
 
 
-	void TrainingWindow::addSubAppFactory(AbstractSubAppFactory& newSubAppFactory, int factoryIndex)
+	void TrainingWindow::addSubAppFactory(AbstractSubAppFactory& newSubAppFactory)
 	{
 		wxMenuItem* newItem = new wxMenuItem(windowsMenu, wxID_ANY, newSubAppFactory.getLabel());
 		windowsMenu->Append(newItem);
