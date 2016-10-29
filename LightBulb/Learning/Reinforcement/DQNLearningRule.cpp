@@ -96,7 +96,7 @@ namespace LightBulb
 
 		for (int i = 0; i < std::min((int)transitions.size(), getOptions().minibatchSize); i++)
 		{
-			int r = randomGenerator->randInt(1, transitions.size() - 2);
+			int r = randomGenerator->randInt(0, transitions.size() - 1);
 
 			double y = transitions[r].reward;
 
