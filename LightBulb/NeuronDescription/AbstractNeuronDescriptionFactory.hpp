@@ -5,6 +5,7 @@
 
 // Includes
 #include "Tools/AbstractCloneable.hpp"
+#include <utility>
 
 namespace LightBulb
 {
@@ -20,6 +21,7 @@ namespace LightBulb
 	private:
 	public:
 		virtual ~AbstractNeuronDescriptionFactory() {}
+		friend void swap(AbstractNeuronDescriptionFactory& lhs, AbstractNeuronDescriptionFactory& rhs) noexcept	{}
 		/**
 		 * \brief Creates a new neuron description for inner/hidden neurons.
 		 * \return The new neuron description.

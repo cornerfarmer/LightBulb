@@ -27,6 +27,9 @@ namespace LightBulb
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_);
 		// Creates a command which combines a percentage of objects
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_);
+		ConstantRecombinationCommand& operator=(ConstantRecombinationCommand other);
+
+		friend void swap(ConstantRecombinationCommand& lhs, ConstantRecombinationCommand& rhs) noexcept;
 
 		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
 

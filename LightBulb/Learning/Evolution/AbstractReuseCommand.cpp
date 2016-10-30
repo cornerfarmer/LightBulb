@@ -15,6 +15,13 @@ namespace LightBulb
 		reuseSelector.reset(dynamic_cast<AbstractReuseSelector*>(other.reuseSelector->clone()));
 	}
 
+	void swap(AbstractReuseCommand& lhs, AbstractReuseCommand& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractCommand&>(lhs), static_cast<AbstractCommand&>(rhs));
+		swap(lhs.reuseSelector, rhs.reuseSelector);
+	}
+
 	void AbstractReuseCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		for (auto object = reuseSelector->getReuseSelection().begin(); object != reuseSelector->getReuseSelection().end(); object++)
@@ -31,5 +38,4 @@ namespace LightBulb
 			counter[*object]--;
 		}
 	}
-
 }

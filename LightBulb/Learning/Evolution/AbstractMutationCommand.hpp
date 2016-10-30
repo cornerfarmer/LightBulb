@@ -31,6 +31,8 @@ namespace LightBulb
 	public:
 		virtual ~AbstractMutationCommand() {}
 		AbstractMutationCommand(const AbstractMutationCommand& other);
+		friend void swap(AbstractMutationCommand& lhs, AbstractMutationCommand& rhs) noexcept;
+
 		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
 
 		void setMutationSelector(AbstractMutationSelector* mutationSelector);

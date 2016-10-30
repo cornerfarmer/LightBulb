@@ -24,10 +24,27 @@ namespace LightBulb
 		delete(descriptionFactory);
 	}
 
-	FeedForwardNetworkTopologyOptions::FeedForwardNetworkTopologyOptions(const FeedForwardNetworkTopologyOptions &obj)
+	FeedForwardNetworkTopologyOptions::FeedForwardNetworkTopologyOptions(const FeedForwardNetworkTopologyOptions& other)
 	{
-		*this = obj;
-		descriptionFactory = dynamic_cast<AbstractNeuronDescriptionFactory*>(obj.descriptionFactory->clone());
+		enableShortcuts = other.enableShortcuts;
+		neuronsPerLayerCount = other.neuronsPerLayerCount;
+		useBiasNeuron = other.useBiasNeuron;
+		descriptionFactory = dynamic_cast<AbstractNeuronDescriptionFactory*>(other.descriptionFactory->clone());
+	}
+
+	FeedForwardNetworkTopologyOptions& FeedForwardNetworkTopologyOptions::operator=(FeedForwardNetworkTopologyOptions other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(FeedForwardNetworkTopologyOptions& lhs, FeedForwardNetworkTopologyOptions& rhs) noexcept
+	{
+		using std::swap;
+		swap(lhs.enableShortcuts, rhs.enableShortcuts);
+		swap(lhs.neuronsPerLayerCount, rhs.neuronsPerLayerCount);
+		swap(lhs.useBiasNeuron, rhs.useBiasNeuron);
+		swap(lhs.descriptionFactory, rhs.descriptionFactory);
 	}
 
 	FeedForwardNetworkTopology::~FeedForwardNetworkTopology()

@@ -15,6 +15,19 @@ namespace LightBulb
 		activationFunction.reset(dynamic_cast<AbstractActivationFunction*>(other.activationFunction->clone()));
 	}
 
+	NeuronDescription& NeuronDescription::operator=(NeuronDescription other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(NeuronDescription& lhs, NeuronDescription& rhs) noexcept
+	{
+		using std::swap;
+		swap(lhs.inputFunction, rhs.inputFunction);
+		swap(lhs.activationFunction, rhs.activationFunction);
+	}
+
 	AbstractCloneable* NeuronDescription::clone() const
 	{
 		return new NeuronDescription(*this);
@@ -29,4 +42,5 @@ namespace LightBulb
 	{
 		return *activationFunction.get();
 	}
+
 }

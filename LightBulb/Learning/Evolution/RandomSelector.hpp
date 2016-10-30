@@ -28,6 +28,10 @@ namespace LightBulb
 		RandomSelector(AbstractRandomFunction* randomFunction_);
 		RandomSelector(const RandomSelector& other);
 
+		RandomSelector& operator=(RandomSelector other);
+
+		friend void swap(RandomSelector& lhs, RandomSelector& rhs) noexcept;
+
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 
 		AbstractCloneable* clone() const override;

@@ -22,6 +22,7 @@ namespace LightBulb
 	protected:
 	public:
 		virtual ~AbstractPreferenceElement() {}
+		friend void swap(AbstractPreferenceElement& lhs, AbstractPreferenceElement& rhs) noexcept {}
 		/**
 		 * \brief Generates a string which describes the current state of the element in human readable format.
 		 * \return The string.

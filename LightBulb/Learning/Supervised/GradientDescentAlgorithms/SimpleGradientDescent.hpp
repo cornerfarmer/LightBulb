@@ -78,6 +78,9 @@ namespace LightBulb
 		 * \brief Creates simple gradient descent.
 		 */
 		SimpleGradientDescent();
+		SimpleGradientDescent& operator=(SimpleGradientDescent other);
+		friend void swap(SimpleGradientDescent& lhs, SimpleGradientDescent& rhs) noexcept;
+
 		// Inherited:
 		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		std::string printDebugOutput() override;

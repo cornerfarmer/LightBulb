@@ -17,6 +17,14 @@ namespace LightBulb
 		recombinationSelector.reset(dynamic_cast<AbstractRecombinationSelector*>(other.recombinationSelector->clone()));
 	}
 
+	void swap(AbstractRecombinationCommand& lhs, AbstractRecombinationCommand& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractCommand&>(lhs), static_cast<AbstractCommand&>(rhs));
+		swap(lhs.recombinationAlgorithm, rhs.recombinationAlgorithm);
+		swap(lhs.recombinationSelector, rhs.recombinationSelector);
+	}
+
 	void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		AbstractEvolutionObject* firstParent;
@@ -67,4 +75,5 @@ namespace LightBulb
 		recombinationAlgorithm->setRandomGenerator(randomGenerator_);
 		recombinationSelector->setRandomGenerator(randomGenerator_);
 	}
+
 }

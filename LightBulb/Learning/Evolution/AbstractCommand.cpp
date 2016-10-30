@@ -19,4 +19,9 @@ namespace LightBulb
 			return notUsedObject;
 		}
 	}
+
+	void swap(AbstractCommand& lhs, AbstractCommand& rhs) noexcept
+	{
+		using std::swap;
+	}
 }

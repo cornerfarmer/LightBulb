@@ -28,6 +28,11 @@ namespace LightBulb
 	public:
 		RemainderStochasticSamplingSelector(bool withReplacement_ = true);
 		RemainderStochasticSamplingSelector(const RemainderStochasticSamplingSelector& other);
+
+		RemainderStochasticSamplingSelector& operator=(RemainderStochasticSamplingSelector other);
+
+		friend void swap(RemainderStochasticSamplingSelector& lhs, RemainderStochasticSamplingSelector& rhs) noexcept;
+
 		void setRandomFunction(AbstractSelectionFunction* randomFunction);
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 		AbstractCloneable* clone() const override;

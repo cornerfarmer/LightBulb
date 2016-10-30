@@ -98,6 +98,12 @@ namespace LightBulb
 		 * \brief Creates the RMSprop learning rate with default options.
 		 */
 		RMSPropLearningRate();
+
+
+		RMSPropLearningRate& operator=(RMSPropLearningRate other);
+
+		friend void swap(RMSPropLearningRate& lhs, RMSPropLearningRate& rhs) noexcept;
+
 		// Inherited:
 		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		bool learningHasStopped() override;

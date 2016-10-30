@@ -26,4 +26,11 @@ namespace LightBulb
 	{
 		return selectedObjects;
 	}
+
+	void swap(AbstractRecombinationSelector& lhs, AbstractRecombinationSelector& rhs) noexcept
+	{
+		using std::swap;
+		swap(lhs.selectedObjects, rhs.selectedObjects);
+		swap(lhs.currentCounter, rhs.currentCounter);
+	}
 }

@@ -62,6 +62,8 @@ namespace LightBulb
 		 */
 		AbstractGradientDescentAlgorithm(AbstractGradientDescentAlgorithmOptions* options_);
 		AbstractGradientDescentAlgorithm(const AbstractGradientDescentAlgorithm& other);
+		friend void swap(AbstractGradientDescentAlgorithm& lhs, AbstractGradientDescentAlgorithm& rhs) noexcept;
+
 		/**
 		 * \brief Computes the delta weights for one layer.
 		 * \param networkTopology The corresponding network topology.

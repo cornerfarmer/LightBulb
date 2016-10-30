@@ -20,6 +20,19 @@ namespace LightBulb
 		neuronDescription.reset(dynamic_cast<NeuronDescription*>(obj.neuronDescription->clone()));
 	}
 
+	SameNeuronDescriptionFactory& SameNeuronDescriptionFactory::operator=(SameNeuronDescriptionFactory other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(SameNeuronDescriptionFactory& lhs, SameNeuronDescriptionFactory& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractNeuronDescriptionFactory&>(lhs), static_cast<AbstractNeuronDescriptionFactory&>(rhs));
+		swap(lhs.neuronDescription, rhs.neuronDescription);
+	}
+
 	NeuronDescription* SameNeuronDescriptionFactory::createInnerNeuronDescription()
 	{
 		return dynamic_cast<NeuronDescription*>(neuronDescription->clone());

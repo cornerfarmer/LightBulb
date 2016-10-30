@@ -18,6 +18,13 @@ namespace LightBulb
 		options.reset(dynamic_cast<AbstractGradientDescentAlgorithmOptions*>(other.options->clone()));
 	}
 
+	void swap(AbstractGradientDescentAlgorithm& lhs, AbstractGradientDescentAlgorithm& rhs) noexcept
+	{
+		using std::swap;
+		swap(lhs.initialized, rhs.initialized);
+		swap(lhs.options, rhs.options);
+	}
+	
 	void AbstractGradientDescentAlgorithm::initialize(const AbstractNetworkTopology& networkTopology)
 	{
 		initializeAlgorithm(networkTopology);

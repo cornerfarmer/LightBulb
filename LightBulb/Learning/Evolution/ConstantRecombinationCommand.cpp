@@ -17,6 +17,20 @@ namespace LightBulb
 		setRecombinationPercentage(recombinationPercentage_);
 	}
 
+	ConstantRecombinationCommand& ConstantRecombinationCommand::operator=(ConstantRecombinationCommand other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(ConstantRecombinationCommand& lhs, ConstantRecombinationCommand& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractRecombinationCommand&>(lhs), static_cast<AbstractRecombinationCommand&>(rhs));
+		swap(lhs.objectCount, rhs.objectCount);
+		swap(lhs.recombinationPercentage, rhs.recombinationPercentage);
+	}
+
 	void ConstantRecombinationCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
 	{
 		int objectCount = this->objectCount;

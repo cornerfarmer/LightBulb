@@ -17,6 +17,14 @@ namespace LightBulb
 		mutationSelector.reset(dynamic_cast<AbstractMutationSelector*>(other.mutationSelector->clone()));
 	}
 
+	void swap(AbstractMutationCommand& lhs, AbstractMutationCommand& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractCommand&>(lhs), static_cast<AbstractCommand&>(rhs));
+		swap(lhs.mutationAlgorithm, rhs.mutationAlgorithm);
+		swap(lhs.mutationSelector, rhs.mutationSelector);
+	}
+
 	void AbstractMutationCommand::setMutationSelector(AbstractMutationSelector* mutationSelector_)
 	{
 		mutationSelector.release();
@@ -50,4 +58,5 @@ namespace LightBulb
 		mutationAlgorithm->setRandomGenerator(randomGenerator_);
 		mutationSelector->setRandomGenerator(randomGenerator_);
 	}
+
 }

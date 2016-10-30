@@ -346,4 +346,23 @@ namespace LightBulb
 			reuseCommands.push_back(dynamic_cast<AbstractReuseCommand*>((*reuseCommand)->clone()));
 		}
 	}
+
+	EvolutionLearningRuleOptions& EvolutionLearningRuleOptions::operator=(EvolutionLearningRuleOptions other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(EvolutionLearningRuleOptions& lhs, EvolutionLearningRuleOptions& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractEvolutionLearningRuleOptions&>(lhs), static_cast<AbstractEvolutionLearningRuleOptions&>(rhs));
+		swap(lhs.exitConditions, rhs.exitConditions);
+		swap(lhs.creationCommands, rhs.creationCommands);
+		swap(lhs.selectionCommands, rhs.selectionCommands);
+		swap(lhs.fitnessFunctions, rhs.fitnessFunctions);
+		swap(lhs.mutationsCommands, rhs.mutationsCommands);
+		swap(lhs.recombinationCommands, rhs.recombinationCommands);
+		swap(lhs.reuseCommands, rhs.reuseCommands);
+	}
 }

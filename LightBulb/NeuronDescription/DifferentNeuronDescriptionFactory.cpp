@@ -18,10 +18,24 @@ namespace LightBulb
 		innerNeuronDescription.reset(innerNeuronDescription_);
 	}
 
-	DifferentNeuronDescriptionFactory::DifferentNeuronDescriptionFactory(const DifferentNeuronDescriptionFactory &obj)
+	DifferentNeuronDescriptionFactory::DifferentNeuronDescriptionFactory(const DifferentNeuronDescriptionFactory& other)
 	{
-		outputNeuronDescription.reset(dynamic_cast<NeuronDescription*>(obj.outputNeuronDescription->clone()));
-		innerNeuronDescription.reset(dynamic_cast<NeuronDescription*>(obj.innerNeuronDescription->clone()));
+		outputNeuronDescription.reset(dynamic_cast<NeuronDescription*>(other.outputNeuronDescription->clone()));
+		innerNeuronDescription.reset(dynamic_cast<NeuronDescription*>(other.innerNeuronDescription->clone()));
+	}
+
+	DifferentNeuronDescriptionFactory& DifferentNeuronDescriptionFactory::operator=(DifferentNeuronDescriptionFactory other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(DifferentNeuronDescriptionFactory& lhs, DifferentNeuronDescriptionFactory& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractNeuronDescriptionFactory&>(lhs), static_cast<AbstractNeuronDescriptionFactory&>(rhs));
+		swap(lhs.innerNeuronDescription, rhs.innerNeuronDescription);
+		swap(lhs.outputNeuronDescription, rhs.outputNeuronDescription);
 	}
 
 	NeuronDescription* DifferentNeuronDescriptionFactory::createInnerNeuronDescription()

@@ -25,6 +25,21 @@ namespace LightBulb
 		gradientDescentAlgorithm = dynamic_cast<AbstractGradientDescentAlgorithm*>(other.gradientDescentAlgorithm->clone());
 	}
 
+	GradientDescentLearningRuleOptions& GradientDescentLearningRuleOptions::operator=(GradientDescentLearningRuleOptions other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+
+	void swap(GradientDescentLearningRuleOptions& lhs, GradientDescentLearningRuleOptions& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractSupervisedLearningRuleOptions&>(lhs), static_cast<AbstractSupervisedLearningRuleOptions&>(rhs));
+		swap(lhs.gradientCalculation, rhs.gradientCalculation);
+		swap(lhs.gradientDescentAlgorithm, rhs.gradientDescentAlgorithm);
+	}
+
 	GradientDescentLearningRule::GradientDescentLearningRule(GradientDescentLearningRuleOptions& options_)
 		: AbstractSupervisedLearningRule(new GradientDescentLearningRuleOptions(options_))
 	{
@@ -110,4 +125,5 @@ namespace LightBulb
 			gradientDescentAlgorithm->initialize(getCurrentNetworkTopology());
 
 	}
+
 }

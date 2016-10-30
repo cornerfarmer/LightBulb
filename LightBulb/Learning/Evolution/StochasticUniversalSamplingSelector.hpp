@@ -27,6 +27,9 @@ namespace LightBulb
 	public:
 		StochasticUniversalSamplingSelector();
 		StochasticUniversalSamplingSelector(const StochasticUniversalSamplingSelector& other);
+		StochasticUniversalSamplingSelector& operator=(StochasticUniversalSamplingSelector other);
+		friend void swap(StochasticUniversalSamplingSelector& lhs, StochasticUniversalSamplingSelector& rhs) noexcept;
+
 		void setRandomFunction(AbstractSelectionFunction* randomFunction_);
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 		AbstractCloneable* clone() const override;

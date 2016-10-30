@@ -54,6 +54,8 @@ namespace LightBulb
 		}
 		~EvolutionLearningRuleOptions();
 		EvolutionLearningRuleOptions(const EvolutionLearningRuleOptions& other);
+		EvolutionLearningRuleOptions& operator=(EvolutionLearningRuleOptions other);
+		friend void swap(EvolutionLearningRuleOptions& lhs, EvolutionLearningRuleOptions& rhs) noexcept;
 	};
 
 	// A learingRule for improving NNs with the help of algorithms oriented by the evolution

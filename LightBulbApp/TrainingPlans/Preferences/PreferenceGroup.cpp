@@ -23,6 +23,20 @@ namespace LightBulb
 		}
 	}
 
+	PreferenceGroup& PreferenceGroup::operator=(PreferenceGroup other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(PreferenceGroup& lhs, PreferenceGroup& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractPreferenceElement&>(lhs), static_cast<AbstractPreferenceElement&>(rhs));
+		swap(lhs.name, rhs.name);
+		swap(lhs.preferences, rhs.preferences);
+	}
+
 	const std::string& PreferenceGroup::getName() const
 	{
 		return name;
@@ -37,7 +51,7 @@ namespace LightBulb
 		}
 		return text;
 	}
-
+	
 	void PreferenceGroup::addPreference(AbstractPreferenceElement* preferenceElement)
 	{
 		preferences.push_back(std::unique_ptr<AbstractPreferenceElement>(preferenceElement));

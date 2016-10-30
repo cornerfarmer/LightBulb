@@ -93,6 +93,8 @@ namespace LightBulb
 		 * \brief Creates the resilient learning rate with default options.
 		 */
 		ResilientLearningRate();
+		ResilientLearningRate& operator=(ResilientLearningRate other);
+		friend void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept;
 		// Inherited:
 		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		std::string printDebugOutput() override;

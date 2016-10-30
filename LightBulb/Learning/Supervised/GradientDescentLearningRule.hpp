@@ -41,6 +41,8 @@ namespace LightBulb
 		}
 		~GradientDescentLearningRuleOptions();
 		GradientDescentLearningRuleOptions(const GradientDescentLearningRuleOptions& other);
+		GradientDescentLearningRuleOptions& operator=(GradientDescentLearningRuleOptions other);
+		friend void swap(GradientDescentLearningRuleOptions& lhs, GradientDescentLearningRuleOptions& rhs) noexcept;
 	};
 
 	/**

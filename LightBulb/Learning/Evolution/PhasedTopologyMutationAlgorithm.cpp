@@ -28,6 +28,25 @@ namespace LightBulb
 		pruningThresholdDistance = other.pruningThresholdDistance;
 	}
 
+	PhasedTopologyMutationAlgorithm& PhasedTopologyMutationAlgorithm::operator=(PhasedTopologyMutationAlgorithm other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(PhasedTopologyMutationAlgorithm& lhs, PhasedTopologyMutationAlgorithm& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractMutationAlgorithm&>(lhs), static_cast<AbstractMutationAlgorithm&>(rhs));
+		swap(lhs.magnitudeBasedPruningMutationAlgorithm, rhs.magnitudeBasedPruningMutationAlgorithm);
+		swap(lhs.networkGrowMutationAlgorithm, rhs.networkGrowMutationAlgorithm);
+		swap(lhs.pruneThreshold, rhs.pruneThreshold);
+		swap(lhs.pruningPhase, rhs.pruningPhase);
+		swap(lhs.lastMPC, rhs.lastMPC);
+		swap(lhs.mpcNotFallenRounds, rhs.mpcNotFallenRounds);
+		swap(lhs.pruningThresholdDistance, rhs.pruningThresholdDistance);
+	}
+
 	void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject& object1)
 	{
 		if (!pruningPhase)

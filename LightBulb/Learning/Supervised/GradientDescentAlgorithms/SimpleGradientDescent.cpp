@@ -16,6 +16,19 @@ namespace LightBulb
 	{
 	}
 
+	SimpleGradientDescent& SimpleGradientDescent::operator=(SimpleGradientDescent other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(SimpleGradientDescent& lhs, SimpleGradientDescent& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractGradientDescentAlgorithm&>(lhs), static_cast<AbstractGradientDescentAlgorithm&>(rhs));
+		swap(lhs.previousDeltaWeights, rhs.previousDeltaWeights);
+	}
+
 	SimpleGradientDescentOptions& SimpleGradientDescent::getOptions()
 	{
 		return static_cast<SimpleGradientDescentOptions&>(*options.get());
@@ -70,5 +83,4 @@ namespace LightBulb
 	{
 		return false;
 	}
-
 }

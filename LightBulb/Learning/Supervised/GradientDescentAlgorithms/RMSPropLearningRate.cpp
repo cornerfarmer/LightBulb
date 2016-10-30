@@ -15,6 +15,20 @@ namespace LightBulb
 	{
 	}
 
+	RMSPropLearningRate& RMSPropLearningRate::operator=(RMSPropLearningRate other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(RMSPropLearningRate& lhs, RMSPropLearningRate& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractGradientDescentAlgorithm&>(lhs), static_cast<AbstractGradientDescentAlgorithm&>(rhs));
+		swap(lhs.prevGradient, rhs.prevGradient);
+		swap(lhs.prevSquaredGradient, rhs.prevSquaredGradient);
+		swap(lhs.prevDeltaWeights, rhs.prevDeltaWeights);
+	}
 
 	RMSPropLearningRateOptions& RMSPropLearningRate::getOptions()
 	{

@@ -30,6 +30,7 @@ namespace LightBulb
 		virtual void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	public:
 		virtual ~AbstractRecombinationSelector() {}
+		friend void swap(AbstractRecombinationSelector& lhs, AbstractRecombinationSelector& rhs) noexcept;
 		//
 		virtual void executeRecombinationSelection(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 

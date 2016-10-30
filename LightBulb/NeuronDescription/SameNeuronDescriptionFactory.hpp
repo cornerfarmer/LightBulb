@@ -36,6 +36,8 @@ namespace LightBulb
 		 * \param obj A SameNeuronDescriptionFactory which should be copied.
 		 */
 		SameNeuronDescriptionFactory(const SameNeuronDescriptionFactory &obj);
+		SameNeuronDescriptionFactory& operator=(SameNeuronDescriptionFactory other);
+		friend void swap(SameNeuronDescriptionFactory& lhs, SameNeuronDescriptionFactory& rhs) noexcept;
 		// Inherited:
 		NeuronDescription* createInnerNeuronDescription() override;
 		NeuronDescription* createOutputNeuronDescription() override;

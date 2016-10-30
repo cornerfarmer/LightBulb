@@ -16,6 +16,19 @@ namespace LightBulb
 	{
 	}
 
+	ResilientLearningRate& ResilientLearningRate::operator=(ResilientLearningRate other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractGradientDescentAlgorithm&>(lhs), static_cast<AbstractGradientDescentAlgorithm&>(rhs));
+		swap(lhs.previousLearningRates, rhs.previousLearningRates);
+	}
+
 	ResilientLearningRateOptions& ResilientLearningRate::getOptions()
 	{
 		return static_cast<ResilientLearningRateOptions&>(*options.get());

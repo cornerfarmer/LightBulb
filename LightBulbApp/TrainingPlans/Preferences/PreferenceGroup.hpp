@@ -47,6 +47,8 @@ namespace LightBulb
 		 * \brief Creates a empty preference group.
 		 */
 		PreferenceGroup() = default;
+		PreferenceGroup& operator=(PreferenceGroup other);
+		friend void swap(PreferenceGroup& lhs, PreferenceGroup& rhs) noexcept;
 		/**
 		 * \brief Adds a preference to the group.
 		 * \param preferenceElement The new preference element to store.

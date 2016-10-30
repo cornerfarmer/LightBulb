@@ -3,6 +3,13 @@
 
 namespace LightBulb
 {
+	void swap(AbstractMutationSelector& lhs, AbstractMutationSelector& rhs) noexcept
+	{
+		using std::swap;
+		swap(lhs.selectedObjects, rhs.selectedObjects);
+		swap(lhs.currentCounter, rhs.currentCounter);
+	}
+
 	void AbstractMutationSelector::addObjectToMutate(AbstractEvolutionObject& object)
 	{
 		selectedObjects.push_back(&object);

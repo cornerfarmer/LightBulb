@@ -38,7 +38,9 @@ namespace LightBulb
 		 * \brief Copy constructor.
 		 * \param obj A DifferentNeuronDescriptionFactory which should be copied.
 		 */
-		DifferentNeuronDescriptionFactory(const DifferentNeuronDescriptionFactory &obj);
+		DifferentNeuronDescriptionFactory(const DifferentNeuronDescriptionFactory& other);
+		DifferentNeuronDescriptionFactory& operator=(DifferentNeuronDescriptionFactory other);
+		friend void swap(DifferentNeuronDescriptionFactory& lhs, DifferentNeuronDescriptionFactory& rhs) noexcept;
 		// Inherited:
 		NeuronDescription* createInnerNeuronDescription() override;
 		NeuronDescription* createOutputNeuronDescription() override;

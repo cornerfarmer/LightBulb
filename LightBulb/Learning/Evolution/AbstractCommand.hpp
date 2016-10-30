@@ -23,6 +23,8 @@ namespace LightBulb
 	{
 	protected:
 		AbstractEvolutionObject* getUnusedObject(AbstractEvolutionObject& usedObject, std::vector<AbstractEvolutionObject*>& notUsedObjects, bool addToWorld = true) const;
+
+		friend void swap(AbstractCommand& lhs, AbstractCommand& rhs) noexcept;
 	};
 }
 

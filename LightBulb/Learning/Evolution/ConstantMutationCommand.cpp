@@ -17,6 +17,19 @@ namespace LightBulb
 		setMutationPercentage(mutationPercentage_);
 	}
 
+	ConstantMutationCommand& ConstantMutationCommand::operator=(ConstantMutationCommand other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(ConstantMutationCommand& lhs, ConstantMutationCommand& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractMutationCommand&>(lhs), static_cast<AbstractMutationCommand&>(rhs));
+		swap(lhs.objectCount, rhs.objectCount);
+		swap(lhs.mutationPercentage, rhs.mutationPercentage);
+	}
 
 	void ConstantMutationCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
 	{

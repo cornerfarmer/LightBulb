@@ -30,6 +30,8 @@ namespace LightBulb
 		virtual void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	public:
 		virtual ~AbstractMutationSelector() {}
+		friend void swap(AbstractMutationSelector& lhs, AbstractMutationSelector& rhs) noexcept;
+
 		//
 		virtual void executeMutationSelection(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 

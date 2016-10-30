@@ -78,6 +78,21 @@ namespace LightBulb
 		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
 	}
 
+	RemainderStochasticSamplingSelector& RemainderStochasticSamplingSelector::operator=(RemainderStochasticSamplingSelector other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	void swap(RemainderStochasticSamplingSelector& lhs, RemainderStochasticSamplingSelector& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractMutationSelector&>(lhs), static_cast<AbstractMutationSelector&>(rhs));
+		swap(static_cast<AbstractRecombinationSelector&>(lhs), static_cast<AbstractRecombinationSelector&>(rhs));
+		swap(lhs.randomFunction, rhs.randomFunction);
+		swap(lhs.withReplacement, rhs.withReplacement);
+	}
+
 	void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
 	{
 		randomFunction.reset(randomFunction_);
