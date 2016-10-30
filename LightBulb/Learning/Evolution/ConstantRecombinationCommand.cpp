@@ -26,6 +26,11 @@ namespace LightBulb
 		recombinationSelector->executeRecombinationSelection(objectCount, highscore, counter);
 	}
 
+	AbstractCloneable* ConstantRecombinationCommand::clone() const
+	{
+		return new ConstantRecombinationCommand(*this);
+	}
+
 	void ConstantRecombinationCommand::setRecombinationPercentage(double newRecombinationPercentage)
 	{
 		objectCount = 0;

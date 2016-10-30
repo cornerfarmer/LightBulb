@@ -52,6 +52,8 @@ namespace LightBulb
 		{
 			maxTries = 1;
 		}
+		~EvolutionLearningRuleOptions();
+		EvolutionLearningRuleOptions(const EvolutionLearningRuleOptions& other);
 	};
 
 	// A learingRule for improving NNs with the help of algorithms oriented by the evolution

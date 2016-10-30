@@ -23,6 +23,8 @@ namespace LightBulb
 		ExponentialFitnessFunction(double exponent_ = 1.005, double proportionalScaling_ = 1, double base_ = 0);
 		//
 		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+
+		AbstractFitnessFunction* clone() const override;
 	};
 }
 

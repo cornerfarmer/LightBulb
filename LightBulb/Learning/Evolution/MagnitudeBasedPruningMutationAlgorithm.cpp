@@ -118,4 +118,9 @@ namespace LightBulb
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		randomFunction.setRandomGenerator(randomGenerator_);
 	}
+
+	AbstractCloneable* MagnitudeBasedPruningMutationAlgorithm::clone() const
+	{
+		return new MagnitudeBasedPruningMutationAlgorithm(*this);
+	}
 }

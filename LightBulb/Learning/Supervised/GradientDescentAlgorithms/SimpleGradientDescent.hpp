@@ -38,6 +38,10 @@ namespace LightBulb
 			momentum = 0.7f;
 			learningRate = 0.45f;
 		}
+		AbstractCloneable* clone() const override
+		{
+			return new SimpleGradientDescentOptions(*this);
+		}
 	};
 
 
@@ -79,6 +83,7 @@ namespace LightBulb
 		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

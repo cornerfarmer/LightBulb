@@ -25,6 +25,7 @@ namespace LightBulb
 		ConstantCreationCommand(int objectCount_);
 		// Inherited:
 		void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>& notUsedObjects) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

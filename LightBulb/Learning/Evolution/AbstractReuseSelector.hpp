@@ -3,6 +3,9 @@
 #ifndef _ABSTRACTREUSESELECTOR_H_
 #define _ABSTRACTREUSESELECTOR_H_
 
+// Includes
+#include "Tools/AbstractCloneable.hpp"
+
 // Library includes
 #include <vector>
 #include <utility>
@@ -15,7 +18,7 @@ namespace LightBulb
 	class AbstractEvolutionObject;
 
 	//
-	class AbstractReuseSelector
+	class AbstractReuseSelector : public virtual AbstractCloneable
 	{
 	private:
 		std::vector<AbstractEvolutionObject*> selectedObjects;

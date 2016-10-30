@@ -22,4 +22,9 @@ namespace LightBulb
 			entry->first = pow(entry->first * proportionalScaling + base, exponent);
 		}
 	}
+
+	AbstractFitnessFunction* ExponentialFitnessFunction::clone() const
+	{
+		return new ExponentialFitnessFunction(*this);
+	}
 }

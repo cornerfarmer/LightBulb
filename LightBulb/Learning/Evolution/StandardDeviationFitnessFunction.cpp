@@ -40,4 +40,9 @@ namespace LightBulb
 			entry->first = entry->first - (average - deviationFac * standardDeviation);
 		}
 	}
+
+	AbstractFitnessFunction* StandardDeviationFitnessFunction::clone() const
+	{
+		return new StandardDeviationFitnessFunction(*this);
+	}
 }

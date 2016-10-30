@@ -29,6 +29,8 @@ namespace LightBulb
 		BestSelectionCommand(double selectionPercentage_);
 		// Deletes all objects from the highscore which are not part of the selected objects.
 		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::vector<AbstractEvolutionObject*>& objects, std::vector<AbstractEvolutionObject*>& notUsedObjects) override;
+
+		AbstractCloneable* clone() const override;
 	};
 }
 

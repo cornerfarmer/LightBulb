@@ -31,6 +31,8 @@ namespace LightBulb
 		void execute(AbstractEvolutionObject& object1) override;
 
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
+
+		AbstractCloneable* clone() const override;
 	};
 }
 

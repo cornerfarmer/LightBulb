@@ -29,6 +29,11 @@ namespace LightBulb
 		}
 	}
 
+	AbstractCloneable* ConstantCreationCommand::clone() const
+	{
+		return new ConstantCreationCommand(*this);
+	}
+
 	void ConstantCreationCommand::setObjectCount(int newObjectCount)
 	{
 		objectCount = newObjectCount;

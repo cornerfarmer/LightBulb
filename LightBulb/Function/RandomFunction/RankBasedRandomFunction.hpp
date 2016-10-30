@@ -31,6 +31,7 @@ namespace LightBulb
 		RankBasedRandomFunction(double selectivePressure_ = 8);
 		// Inherited:	
 		int execute(int elementCount) const override;
+		AbstractRandomFunction* clone() override;
 	};
 }
 

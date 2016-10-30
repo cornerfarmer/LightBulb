@@ -31,6 +31,10 @@ namespace LightBulb
 		}
 	}
 
+	AbstractCloneable* ResilientLearningRate::clone() const
+	{
+		return new ResilientLearningRate(*this);
+	}
 
 	Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{

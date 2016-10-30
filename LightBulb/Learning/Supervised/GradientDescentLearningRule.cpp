@@ -12,6 +12,19 @@
 
 namespace LightBulb
 {
+	GradientDescentLearningRuleOptions::~GradientDescentLearningRuleOptions()
+	{
+		delete(gradientCalculation);
+		delete(gradientDescentAlgorithm);
+	}
+
+	GradientDescentLearningRuleOptions::GradientDescentLearningRuleOptions(const GradientDescentLearningRuleOptions& other)
+		:AbstractSupervisedLearningRuleOptions(other)
+	{
+		gradientCalculation = dynamic_cast<AbstractGradientCalculation*>(other.gradientCalculation->clone());
+		gradientDescentAlgorithm = dynamic_cast<AbstractGradientDescentAlgorithm*>(other.gradientDescentAlgorithm->clone());
+	}
+
 	GradientDescentLearningRule::GradientDescentLearningRule(GradientDescentLearningRuleOptions& options_)
 		: AbstractSupervisedLearningRule(new GradientDescentLearningRuleOptions(options_))
 	{
@@ -29,7 +42,6 @@ namespace LightBulb
 	{
 
 	}
-
 	void GradientDescentLearningRule::initialize(GradientDescentLearningRuleOptions* options)
 	{
 		if (!getOptions()->gradientDescentAlgorithm)

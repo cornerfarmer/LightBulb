@@ -21,4 +21,9 @@ namespace LightBulb
 		}
 
 	}
+
+	AbstractFitnessFunction* PositiveMakerFitnessFunction::clone() const
+	{
+		return new PositiveMakerFitnessFunction(*this);
+	}
 }

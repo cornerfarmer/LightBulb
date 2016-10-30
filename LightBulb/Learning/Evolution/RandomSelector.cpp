@@ -25,9 +25,20 @@ namespace LightBulb
 		randomFunction.reset(randomFunction_);
 	}
 
+	RandomSelector::RandomSelector(const RandomSelector& other)
+		:AbstractMutationSelector(other),AbstractRecombinationSelector(other)
+	{
+		randomFunction.reset(other.randomFunction->clone());
+	}
+
 	void RandomSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		randomFunction->setRandomGenerator(randomGenerator_);
+	}
+
+	AbstractCloneable* RandomSelector::clone() const
+	{
+		return new RandomSelector(*this);
 	}
 }

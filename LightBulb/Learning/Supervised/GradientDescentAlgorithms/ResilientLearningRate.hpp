@@ -55,6 +55,10 @@ namespace LightBulb
 			learningRateStart = 0.2;
 			minLearningRate = 0;
 		}
+		AbstractCloneable* clone() const override
+		{
+			return new ResilientLearningRateOptions(*this);
+		}
 	};
 
 
@@ -94,6 +98,7 @@ namespace LightBulb
 		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

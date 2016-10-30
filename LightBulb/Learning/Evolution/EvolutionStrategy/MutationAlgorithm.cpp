@@ -51,6 +51,11 @@ namespace LightBulb
 
 	}
 
+	AbstractMutationAlgorithm* MutationAlgorithm::clone() const
+	{
+		return new MutationAlgorithm(*this);
+	}
+
 	void MutationAlgorithm::setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_)
 	{
 		mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;

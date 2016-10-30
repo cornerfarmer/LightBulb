@@ -21,6 +21,8 @@ namespace LightBulb
 		NeuronDecayFitnessFunction(double fac_);
 		//
 		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+
+		AbstractCloneable* clone() const override;
 	};
 }
 

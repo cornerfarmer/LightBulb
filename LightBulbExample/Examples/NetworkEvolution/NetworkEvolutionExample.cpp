@@ -32,8 +32,6 @@ using namespace LightBulb;
 
 AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 {
-	
-
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 20);
 	options.exitConditions.push_back(rateDifferenceCondition);

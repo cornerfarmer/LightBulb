@@ -33,6 +33,7 @@ namespace LightBulb
 		// 1. Changes the mutationStrength values randomly
 		// 2. Adds the new mutationStrength values to their corresponding weights
 		void execute(AbstractEvolutionObject& object1) override;
+		AbstractMutationAlgorithm* clone() const override;
 	};
 }
 

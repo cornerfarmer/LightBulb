@@ -27,6 +27,7 @@ namespace LightBulb
 	public:
 		virtual ~AbstractReuseCommand() {};
 		AbstractReuseCommand(AbstractReuseSelector* reuseSelector_);
+		AbstractReuseCommand(const AbstractReuseCommand& other);
 		// Execute the command (Take a few of the old objects and move them directly into the new object vector)
 		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
 		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;

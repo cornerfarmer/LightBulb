@@ -38,4 +38,9 @@ namespace LightBulb
 		reusePercentage = 0;
 		objectCount = newReuseCount;
 	}
+
+	AbstractCloneable* ConstantReuseCommand::clone() const
+	{
+		return new ConstantReuseCommand(*this);
+	}
 }

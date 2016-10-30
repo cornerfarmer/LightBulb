@@ -5,6 +5,7 @@
 
 // Includes
 #include "Random/AbstractRandomGeneratorUser.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <vector>
@@ -17,7 +18,7 @@ namespace LightBulb
 	class AbstractEvolutionObject;
 
 	//
-	class AbstractMutationSelector : public AbstractRandomGeneratorUser
+	class AbstractMutationSelector : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
 	{
 	private:
 		std::vector<AbstractEvolutionObject*> selectedObjects;
@@ -28,7 +29,7 @@ namespace LightBulb
 
 		virtual void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	public:
-		virtual ~AbstractMutationSelector() {};
+		virtual ~AbstractMutationSelector() {}
 		//
 		virtual void executeMutationSelection(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter);
 

@@ -36,4 +36,9 @@ namespace LightBulb
 			gradientToUse->at(layerIndex - 1).noalias() = gradientToUse->at(layerIndex - 1) + -1 * (lastDeltaVectorOutputLayer * activations[layerIndex - 1].transpose()).matrix();
 		}
 	}
+
+	AbstractCloneable* Backpropagation::clone() const
+	{
+		return new Backpropagation(*this);
+	}
 }

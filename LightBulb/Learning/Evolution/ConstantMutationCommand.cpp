@@ -30,6 +30,11 @@ namespace LightBulb
 		mutationAlgorithm->initialize(highscore);
 	}
 
+	AbstractCloneable* ConstantMutationCommand::clone() const
+	{
+		return new ConstantMutationCommand(*this);
+	}
+
 	void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)
 	{
 		objectCount = 0;

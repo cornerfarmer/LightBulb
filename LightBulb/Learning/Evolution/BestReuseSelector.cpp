@@ -10,4 +10,9 @@ namespace LightBulb
 			addObjectToReuse(*highscore[i].second);
 		}
 	}
+
+	AbstractCloneable* BestReuseSelector::clone() const
+	{
+		return new BestReuseSelector(*this);
+	}
 }

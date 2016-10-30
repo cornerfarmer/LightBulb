@@ -5,6 +5,7 @@
 
 // Includes
 #include "Logging/AbstractLoggable.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 // Library Includes
 #include <vector>
@@ -16,10 +17,10 @@ namespace LightBulb
 	class AbstractEvolutionObject;
 
 	//
-	class AbstractFitnessFunction : public AbstractLoggable
+	class AbstractFitnessFunction : public virtual AbstractCloneable, public AbstractLoggable
 	{
 	public:
-		virtual ~AbstractFitnessFunction() {};
+		virtual ~AbstractFitnessFunction() {}
 		//
 		virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
 	};

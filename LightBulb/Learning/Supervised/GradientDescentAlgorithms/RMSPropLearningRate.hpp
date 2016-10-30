@@ -47,6 +47,10 @@ namespace LightBulb
 			learningRate = 0.25;
 			minSquaredGradient = 0.01;
 		}
+		AbstractCloneable* clone() const override
+		{
+			return new RMSPropLearningRateOptions(*this);
+		}
 	};
 
 
@@ -98,6 +102,7 @@ namespace LightBulb
 		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

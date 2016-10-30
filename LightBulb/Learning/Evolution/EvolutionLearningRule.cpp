@@ -282,4 +282,68 @@ namespace LightBulb
 			learningState->addData(getOptions().dataSetsPrefix + DATA_SET_FITNESS, getOptions().world->getHighscoreList().front().first);
 	}
 
+	EvolutionLearningRuleOptions::~EvolutionLearningRuleOptions()
+	{
+		for (auto exitCondition = exitConditions.begin(); exitCondition != exitConditions.end(); exitCondition++)
+		{
+			delete(*exitCondition);
+		}
+		for (auto creationCommand = creationCommands.begin(); creationCommand != creationCommands.end(); creationCommand++)
+		{
+			delete(*creationCommand);
+		}
+		for (auto selectionCommand = selectionCommands.begin(); selectionCommand != selectionCommands.end(); selectionCommand++)
+		{
+			delete(*selectionCommand);
+		}
+		for (auto fitnessFunction = fitnessFunctions.begin(); fitnessFunction != fitnessFunctions.end(); fitnessFunction++)
+		{
+			delete(*fitnessFunction);
+		}
+		for (auto mutationsCommand = mutationsCommands.begin(); mutationsCommand != mutationsCommands.end(); mutationsCommand++)
+		{
+			delete(*mutationsCommand);
+		}
+		for (auto recombinationCommand = recombinationCommands.begin(); recombinationCommand != recombinationCommands.end(); recombinationCommand++)
+		{
+			delete(*recombinationCommand);
+		}
+		for (auto reuseCommand = reuseCommands.begin(); reuseCommand != reuseCommands.end(); reuseCommand++)
+		{
+			delete(*reuseCommand);
+		}
+	}
+
+	EvolutionLearningRuleOptions::EvolutionLearningRuleOptions(const EvolutionLearningRuleOptions& other)
+		:AbstractEvolutionLearningRuleOptions(other)
+	{
+		for (auto exitCondition = other.exitConditions.begin(); exitCondition != other.exitConditions.end(); exitCondition++)
+		{
+			exitConditions.push_back(dynamic_cast<AbstractExitCondition*>((*exitCondition)->clone()));
+		}
+		for (auto creationCommand = other.creationCommands.begin(); creationCommand != other.creationCommands.end(); creationCommand++)
+		{
+			creationCommands.push_back(dynamic_cast<AbstractCreationCommand*>((*creationCommand)->clone()));
+		}
+		for (auto selectionCommand = other.selectionCommands.begin(); selectionCommand != other.selectionCommands.end(); selectionCommand++)
+		{
+			selectionCommands.push_back(dynamic_cast<AbstractSelectionCommand*>((*selectionCommand)->clone()));
+		}
+		for (auto fitnessFunction = other.fitnessFunctions.begin(); fitnessFunction != other.fitnessFunctions.end(); fitnessFunction++)
+		{
+			fitnessFunctions.push_back(dynamic_cast<AbstractFitnessFunction*>((*fitnessFunction)->clone()));
+		}
+		for (auto mutationsCommand = other.mutationsCommands.begin(); mutationsCommand != other.mutationsCommands.end(); mutationsCommand++)
+		{
+			mutationsCommands.push_back(dynamic_cast<AbstractMutationCommand*>((*mutationsCommand)->clone()));
+		}
+		for (auto recombinationCommand = other.recombinationCommands.begin(); recombinationCommand != other.recombinationCommands.end(); recombinationCommand++)
+		{
+			recombinationCommands.push_back(dynamic_cast<AbstractRecombinationCommand*>((*recombinationCommand)->clone()));
+		}
+		for (auto reuseCommand = other.reuseCommands.begin(); reuseCommand != other.reuseCommands.end(); reuseCommand++)
+		{
+			reuseCommands.push_back(dynamic_cast<AbstractReuseCommand*>((*reuseCommand)->clone()));
+		}
+	}
 }

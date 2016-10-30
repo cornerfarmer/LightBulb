@@ -26,8 +26,10 @@ namespace LightBulb
 		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
 		StochasticUniversalSamplingSelector();
+		StochasticUniversalSamplingSelector(const StochasticUniversalSamplingSelector& other);
 		void setRandomFunction(AbstractSelectionFunction* randomFunction_);
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

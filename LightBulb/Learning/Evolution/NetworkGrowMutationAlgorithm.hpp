@@ -23,6 +23,7 @@ namespace LightBulb
 		NetworkGrowMutationAlgorithm(const std::vector<unsigned int>& maxNeuronsPerLayer_);
 
 		void execute(AbstractEvolutionObject& object1) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

@@ -31,6 +31,12 @@ namespace LightBulb
 			return false;
 		}
 	}
+
+	AbstractCloneable* PerfectObjectFoundCondition::clone() const
+	{
+		return new PerfectObjectFoundCondition(*this);
+	}
+
 	bool PerfectObjectFoundCondition::perfectObjectExists(const AbstractCombiningStrategy& combiningStrategy) const
 	{
 		auto results = combiningStrategy.getPrevResults();

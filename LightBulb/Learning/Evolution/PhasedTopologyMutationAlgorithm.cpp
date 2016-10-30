@@ -15,6 +15,19 @@ namespace LightBulb
 		pruningThresholdDistance = pruningThresholdDistance_;
 	}
 
+	PhasedTopologyMutationAlgorithm::PhasedTopologyMutationAlgorithm(const PhasedTopologyMutationAlgorithm& other)
+		:AbstractMutationAlgorithm(other)
+	{
+		magnitudeBasedPruningMutationAlgorithm.reset(new MagnitudeBasedPruningMutationAlgorithm(*other.magnitudeBasedPruningMutationAlgorithm));
+		networkGrowMutationAlgorithm.reset(new NetworkGrowMutationAlgorithm(*other.networkGrowMutationAlgorithm));
+
+		pruneThreshold = other.pruneThreshold;
+		pruningPhase = other.pruningPhase;
+		lastMPC = other.lastMPC;
+		mpcNotFallenRounds = other.mpcNotFallenRounds;
+		pruningThresholdDistance = other.pruningThresholdDistance;
+	}
+
 	void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject& object1)
 	{
 		if (!pruningPhase)
@@ -80,5 +93,10 @@ namespace LightBulb
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		networkGrowMutationAlgorithm->setRandomGenerator(randomGenerator_);
 		magnitudeBasedPruningMutationAlgorithm->setRandomGenerator(randomGenerator_);
+	}
+
+	AbstractCloneable* PhasedTopologyMutationAlgorithm::clone() const
+	{
+		return new PhasedTopologyMutationAlgorithm(*this);
 	}
 }

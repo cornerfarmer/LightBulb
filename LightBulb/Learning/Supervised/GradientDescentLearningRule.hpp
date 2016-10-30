@@ -39,6 +39,8 @@ namespace LightBulb
 			gradientCalculation = nullptr;
 			gradientDescentAlgorithm = nullptr;
 		}
+		~GradientDescentLearningRuleOptions();
+		GradientDescentLearningRuleOptions(const GradientDescentLearningRuleOptions& other);
 	};
 
 	/**

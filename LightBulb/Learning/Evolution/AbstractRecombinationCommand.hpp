@@ -30,8 +30,8 @@ namespace LightBulb
 		//
 		std::unique_ptr<AbstractRecombinationSelector> recombinationSelector;
 	public:
-		virtual ~AbstractRecombinationCommand() {};
-
+		virtual ~AbstractRecombinationCommand() {}
+		AbstractRecombinationCommand(const AbstractRecombinationCommand& other);
 		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
 		// Create a new recombination command with the given recombination algorithm
 		AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_);

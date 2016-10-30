@@ -33,4 +33,9 @@ namespace LightBulb
 			entry->first = entry->first * proportionalScaling + base;
 		}
 	}
+
+	AbstractFitnessFunction* LinearScalingFitnessFunction::clone() const
+	{
+		return new LinearScalingFitnessFunction(*this);
+	}
 }

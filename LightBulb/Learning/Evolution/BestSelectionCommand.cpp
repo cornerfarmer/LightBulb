@@ -61,6 +61,11 @@ namespace LightBulb
 
 	}
 
+	AbstractCloneable* BestSelectionCommand::clone() const
+	{
+		return new BestSelectionCommand(*this);
+	}
+
 	void BestSelectionCommand::setObjectCount(int newObjectCount)
 	{
 		objectCount = newObjectCount;

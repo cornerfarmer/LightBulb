@@ -27,12 +27,13 @@ namespace LightBulb
 		double calcMPC(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore);
 	public:
 		PhasedTopologyMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm* magnitudeBasedPruningMutationAlgorithm_, NetworkGrowMutationAlgorithm* networkGrowMutationAlgorithm_, int pruningThresholdDistance_ = 30);
-
+		PhasedTopologyMutationAlgorithm(const PhasedTopologyMutationAlgorithm& other);
 		void execute(AbstractEvolutionObject& object1) override;
 
 		void initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

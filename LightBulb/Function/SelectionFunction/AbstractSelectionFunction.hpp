@@ -4,6 +4,7 @@
 #define _ABSTRACTSELECTIONFUNCTION_H_
 
 // Includes
+#include "Tools/AbstractCloneable.hpp"
 #include "Random/AbstractRandomGeneratorUser.hpp"
 
 // Library includes
@@ -14,7 +15,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a random function which chooses one or multiple elements with different probabilities.
 	 */
-	class AbstractSelectionFunction : public AbstractRandomGeneratorUser
+	class AbstractSelectionFunction : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
 	{
 	private:
 	public:

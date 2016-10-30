@@ -37,4 +37,9 @@ namespace LightBulb
 		}
 
 	}
+
+	AbstractCloneable* NetworkGrowMutationAlgorithm::clone() const
+	{
+		return new NetworkGrowMutationAlgorithm(*this);
+	}
 }

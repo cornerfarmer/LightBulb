@@ -59,4 +59,9 @@ namespace LightBulb
 			}
 		}
 	}
+
+	AbstractCloneable* RecombinationAlgorithm::clone() const
+	{
+		return new RecombinationAlgorithm(*this);
+	}
 }

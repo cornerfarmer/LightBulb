@@ -10,4 +10,9 @@ namespace LightBulb
 	{
 		return randomGenerator->randInt(0, elementCount - 1);
 	}
+
+	AbstractRandomFunction* EqualRandomFunction::clone()
+	{
+		return new EqualRandomFunction(*this);
+	}
 }

@@ -35,4 +35,9 @@ namespace LightBulb
 			}
 		}
 	}
+
+	AbstractFitnessFunction* FitnessSharingFitnessFunction::clone() const
+	{
+		return new FitnessSharingFitnessFunction(*this);
+	}
 }

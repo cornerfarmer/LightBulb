@@ -409,6 +409,7 @@
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.cpp" />
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.cpp" />
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
+    <ClCompile Include="Tools\AbstractCloneable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -822,5 +823,6 @@
     <ClInclude Include="IO\GradientDescentLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="Tools\AbstractCloneable.hpp" />
   </ItemGroup>
 </Project>

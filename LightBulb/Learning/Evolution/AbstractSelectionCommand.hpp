@@ -21,7 +21,7 @@ namespace LightBulb
 	{
 	protected:
 	public:
-		virtual ~AbstractSelectionCommand() {};
+		virtual ~AbstractSelectionCommand() {}
 		// The command will delete all not-selected objects from the vector.
 		virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::vector<AbstractEvolutionObject*>& objects, std::vector<AbstractEvolutionObject*>& notUsedObjects) = 0;
 	};

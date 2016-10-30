@@ -35,6 +35,11 @@ namespace LightBulb
 		}
 	}
 
+	AbstractCloneable* SimpleGradientDescent::clone() const
+	{
+		return new SimpleGradientDescent(*this);
+	}
+
 	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{
 		Eigen::MatrixXd deltaWeight;

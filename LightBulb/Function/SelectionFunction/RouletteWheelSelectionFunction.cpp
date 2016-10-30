@@ -60,4 +60,9 @@ namespace LightBulb
 
 		return selection;
 	}
+
+	AbstractCloneable* RouletteWheelSelectionFunction::clone() const
+	{
+		return new RouletteWheelSelectionFunction(*this);
+	}
 }

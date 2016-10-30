@@ -5,6 +5,7 @@
 
 // Includes
 #include "Logging/AbstractLoggable.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 // Library Includes
 #include <vector>
@@ -16,7 +17,7 @@ namespace LightBulb
 	class AbstractEvolutionLearningRule;
 
 	// This class describes a condition which describes if the learning process has finished.
-	class AbstractExitCondition : public AbstractLoggable
+	class AbstractExitCondition : public virtual AbstractCloneable, public AbstractLoggable
 	{
 	protected:
 	public:

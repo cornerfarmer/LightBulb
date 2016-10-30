@@ -30,6 +30,7 @@ namespace LightBulb
 		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
 		void setReusePercentage(double newReusePercentage);
 		void setReuseCount(double newReuseCount);
+		AbstractCloneable* clone() const override;
 	};
 }
 

@@ -45,6 +45,10 @@ namespace LightBulb
 		}
 	}
 
+	AbstractExitCondition* RateDifferenceCondition::clone() const
+	{
+		return new RateDifferenceCondition(*this);
+	}
 
 	RateDifferenceCondition::RateDifferenceCondition(double difference_, int count_)
 		: AbstractExitCondition()

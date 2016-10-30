@@ -4,9 +4,16 @@
 
 namespace LightBulb
 {
+
 	AbstractRecombinationCommand::AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_) {
 		recombinationAlgorithm.reset(recombinationAlgorithm_);
 		recombinationSelector.reset(recombinationSelector_);
+	}
+
+	AbstractRecombinationCommand::AbstractRecombinationCommand(const AbstractRecombinationCommand& other)
+	{
+		recombinationAlgorithm.reset(dynamic_cast<AbstractRecombinationAlgorithm*>(other.recombinationAlgorithm->clone()));
+		recombinationSelector.reset(dynamic_cast<AbstractRecombinationSelector*>(other.recombinationSelector->clone()));
 	}
 
 	void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)

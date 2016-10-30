@@ -71,6 +71,12 @@ namespace LightBulb
 		setRandomFunction(new RouletteWheelSelectionFunction());
 	}
 
+	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(const RemainderStochasticSamplingSelector& other)
+	{
+		withReplacement = other.withReplacement;
+		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
+	}
+
 	void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
 	{
 		randomFunction.reset(randomFunction_);
@@ -80,5 +86,10 @@ namespace LightBulb
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		randomFunction->setRandomGenerator(*AbstractMutationSelector::randomGenerator);
+	}
+
+	AbstractCloneable* RemainderStochasticSamplingSelector::clone() const
+	{
+		return new RemainderStochasticSamplingSelector(*this);
 	}
 }

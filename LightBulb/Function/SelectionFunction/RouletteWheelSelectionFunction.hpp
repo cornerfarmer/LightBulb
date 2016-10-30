@@ -25,6 +25,7 @@ namespace LightBulb
 		// Inherited:	
 		int execute(const std::vector<double> &probabilities) const override;
 		std::vector<int> execute(const std::vector<double> &probabilities, int selectionCount) const override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

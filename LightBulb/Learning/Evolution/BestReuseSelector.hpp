@@ -23,6 +23,7 @@ namespace LightBulb
 	protected:
 		void selectForReuse(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
+		AbstractCloneable* clone() const override;
 	};
 }
 

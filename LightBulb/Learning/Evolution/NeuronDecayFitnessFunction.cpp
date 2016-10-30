@@ -21,4 +21,9 @@ namespace LightBulb
 		}
 		std::sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	}
+
+	AbstractCloneable* NeuronDecayFitnessFunction::clone() const
+	{
+		return new NeuronDecayFitnessFunction(*this);
+	}
 }

@@ -30,6 +30,8 @@ namespace LightBulb
 		ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_);
 
 		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
+
+		AbstractCloneable* clone() const override;
 	};
 }
 

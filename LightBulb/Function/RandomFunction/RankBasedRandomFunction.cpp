@@ -27,6 +27,11 @@ namespace LightBulb
 		throw std::logic_error("No element has been selected!");
 	}
 
+	AbstractRandomFunction* RankBasedRandomFunction::clone()
+	{
+		return new RankBasedRandomFunction(*this);
+	}
+
 	RankBasedRandomFunction::RankBasedRandomFunction(double selectivePressure_)
 	{
 		selectivePressure = selectivePressure_;

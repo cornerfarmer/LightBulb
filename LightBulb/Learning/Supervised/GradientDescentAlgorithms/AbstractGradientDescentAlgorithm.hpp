@@ -8,6 +8,7 @@
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
 #include "IO/UseParentSerialization.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 namespace LightBulb
 {
@@ -18,7 +19,7 @@ namespace LightBulb
 	/**
 	 * \brief All general options which are the same for all gradien descent algorithms.
 	 */
-	struct AbstractGradientDescentAlgorithmOptions
+	struct AbstractGradientDescentAlgorithmOptions : public virtual AbstractCloneable
 	{
 		/**
 		 * \brief Creates the options and fills them with default options.
@@ -34,7 +35,7 @@ namespace LightBulb
 	 * \brief A algorithm which describes how the gradient descent should be executed.
 	 * \details The algorithm calculates in every step how the weights should change depend on the calculated gradient.
 	 */
-	class AbstractGradientDescentAlgorithm
+	class AbstractGradientDescentAlgorithm : public virtual AbstractCloneable
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractGradientDescentAlgorithm& gradientDescentAlgorithm);
@@ -60,6 +61,7 @@ namespace LightBulb
 		 * \param options_ The options which configure the algorithm.
 		 */
 		AbstractGradientDescentAlgorithm(AbstractGradientDescentAlgorithmOptions* options_);
+		AbstractGradientDescentAlgorithm(const AbstractGradientDescentAlgorithm& other);
 		/**
 		 * \brief Computes the delta weights for one layer.
 		 * \param networkTopology The corresponding network topology.

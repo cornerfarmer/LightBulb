@@ -18,6 +18,11 @@ namespace LightBulb
 		}
 	}
 
+	AbstractCloneable* ScoreCondition::clone() const
+	{
+		return new ScoreCondition(*this);
+	}
+
 	ScoreCondition::ScoreCondition(double scoreGoal_)
 	{
 		scoreGoal = scoreGoal_;

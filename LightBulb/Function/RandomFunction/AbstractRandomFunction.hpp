@@ -22,6 +22,7 @@ namespace LightBulb
 		 * \return The chosen element number
 		 */
 		virtual int execute(int elementCount) const = 0;
+		virtual AbstractRandomFunction* clone() = 0;
 	};
 }
 

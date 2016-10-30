@@ -28,10 +28,9 @@ namespace LightBulb
 		std::unique_ptr<AbstractMutationAlgorithm> mutationAlgorithm;
 		//
 		std::unique_ptr<AbstractMutationSelector> mutationSelector;
-
-		std::vector<AbstractEvolutionObject*> objectsToMutate;
 	public:
-		virtual ~AbstractMutationCommand() {};
+		virtual ~AbstractMutationCommand() {}
+		AbstractMutationCommand(const AbstractMutationCommand& other);
 		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
 
 		void setMutationSelector(AbstractMutationSelector* mutationSelector);

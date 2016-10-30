@@ -34,6 +34,10 @@ namespace LightBulb
 		prevDeltaWeights = prevGradient;
 	}
 
+	AbstractCloneable* RMSPropLearningRate::clone() const
+	{
+		return new RMSPropLearningRate(*this);
+	}
 
 	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
 	{

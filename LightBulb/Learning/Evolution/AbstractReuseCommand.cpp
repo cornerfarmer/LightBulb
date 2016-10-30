@@ -9,6 +9,11 @@ namespace LightBulb
 		reuseSelector.reset(reuseSelector_);
 	}
 
+	AbstractReuseCommand::AbstractReuseCommand(const AbstractReuseCommand& other)
+	{
+		reuseSelector.reset(dynamic_cast<AbstractReuseSelector*>(other.reuseSelector->clone()));
+	}
+
 	void AbstractReuseCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		for (auto object = reuseSelector->getReuseSelection().begin(); object != reuseSelector->getReuseSelection().end(); object++)

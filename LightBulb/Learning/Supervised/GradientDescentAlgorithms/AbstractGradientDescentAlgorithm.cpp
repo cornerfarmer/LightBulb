@@ -12,6 +12,12 @@ namespace LightBulb
 		initialized = false;
 	}
 
+	AbstractGradientDescentAlgorithm::AbstractGradientDescentAlgorithm(const AbstractGradientDescentAlgorithm& other)
+	{
+		initialized = other.initialized;
+		options.reset(dynamic_cast<AbstractGradientDescentAlgorithmOptions*>(other.options->clone()));
+	}
+
 	void AbstractGradientDescentAlgorithm::initialize(const AbstractNetworkTopology& networkTopology)
 	{
 		initializeAlgorithm(networkTopology);
