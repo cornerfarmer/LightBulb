@@ -104,7 +104,7 @@ std::string PongDQNExample::getDescription() const
 	return "Evolution of a Pong AI with DQN.";
 }
 
-AbstractTrainingPlan* PongDQNExample::getCopy() const
+AbstractTrainingPlan* PongDQNExample::createNewFromSameType() const
 {
 	return new PongDQNExample();
 }

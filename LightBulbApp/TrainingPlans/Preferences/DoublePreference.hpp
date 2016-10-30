@@ -54,7 +54,7 @@ namespace LightBulb
 		*/
 		double getMax() const;
 		// Inherited:
-		AbstractPreferenceElement* getCopy() const override;
+		AbstractCloneable* clone() const override;
 
 	};
 }

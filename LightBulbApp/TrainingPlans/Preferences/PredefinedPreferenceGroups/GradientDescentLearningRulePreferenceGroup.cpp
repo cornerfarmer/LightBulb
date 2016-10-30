@@ -67,7 +67,7 @@ namespace LightBulb
 		return options;
 	}
 
-	AbstractPreferenceElement* GradientDescentLearningRulePreferenceGroup::getCopy() const
+	AbstractCloneable* GradientDescentLearningRulePreferenceGroup::clone() const
 	{
 		return new GradientDescentLearningRulePreferenceGroup(*this);
 	}

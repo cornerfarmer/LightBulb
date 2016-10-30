@@ -21,7 +21,7 @@ namespace LightBulb
 	public:
 		// Inherited:	
 		int execute(int elementCount) const override;
-		AbstractRandomFunction* clone() override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

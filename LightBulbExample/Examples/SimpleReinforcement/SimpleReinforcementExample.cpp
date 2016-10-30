@@ -71,7 +71,7 @@ std::string SimpleReinforcementExample::getDescription() const
 	return "Evolution of a Simple AI with PolicyGradient";
 }
 
-AbstractTrainingPlan* SimpleReinforcementExample::getCopy() const
+AbstractTrainingPlan* SimpleReinforcementExample::createNewFromSameType() const
 {
 	return new SimpleReinforcementExample();
 }

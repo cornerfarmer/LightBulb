@@ -44,7 +44,7 @@ namespace LightBulb
 		return options;
 	}
 
-	AbstractPreferenceElement* ResilientLearningRatePreferenceGroup::getCopy() const
+	AbstractCloneable* ResilientLearningRatePreferenceGroup::clone() const
 	{
 		return new ResilientLearningRatePreferenceGroup(*this);
 	}

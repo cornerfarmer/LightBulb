@@ -34,7 +34,7 @@ namespace LightBulb
 		 */
 		BooleanPreference() = default;
 		// Inherited:
-		AbstractPreferenceElement* getCopy() const override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

@@ -21,7 +21,7 @@ namespace LightBulb
 		 */
 		void executeActivation(AbstractNetworkTopology &networkTopology) const override;
 		// Inherited:
-		AbstractActivationOrder* getCopy() const override;
+		AbstractCloneable* clone() const override;
 		std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const override;
 	};
 }

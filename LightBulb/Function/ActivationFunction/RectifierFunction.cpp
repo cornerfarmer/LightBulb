@@ -26,7 +26,7 @@ namespace LightBulb
 		return (input > 0);
 	}
 
-	AbstractActivationFunction* RectifierFunction::getActivationFunctionCopy() const
+	AbstractCloneable* RectifierFunction::clone() const
 	{
 		return new RectifierFunction(*this);
 	}

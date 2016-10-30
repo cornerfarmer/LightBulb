@@ -3,12 +3,15 @@
 #ifndef _ABSTRACTSHRINKFUNCTION_H_
 #define _ABSTRACTSHRINKFUNCTION_H_
 
+// Includes
+#include "Tools/AbstractCloneable.hpp"
+
 namespace LightBulb
 {
 	/**
 	 * \brief This abstract class describes a function, which returns a in time shrinking value.
 	 */
-	class AbstractShrinkFunction
+	class AbstractShrinkFunction : public virtual AbstractCloneable
 	{
 	protected:
 		/**
@@ -33,11 +36,6 @@ namespace LightBulb
 		 * \return The value at the given timestep.
 		 */
 		virtual double execute(double time) const = 0;
-		/**
-		 * \brief Create a copy of the object.
-		 * \return The copy
-		 */
-		virtual AbstractShrinkFunction* getShrinkFunctionCopy() const = 0;
 	};
 }
 

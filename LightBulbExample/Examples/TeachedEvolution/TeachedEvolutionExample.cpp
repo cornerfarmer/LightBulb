@@ -83,7 +83,7 @@ std::string TeachedEvolutionExample::getDescription() const
 	return "Teaches the famous 8-3-8 en/decoder problem with the help of evoultion.";
 }
 
-AbstractTrainingPlan* TeachedEvolutionExample::getCopy() const
+AbstractTrainingPlan* TeachedEvolutionExample::createNewFromSameType() const
 {
 	return new TeachedEvolutionExample();
 }

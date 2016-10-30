@@ -11,7 +11,7 @@ namespace LightBulb
 		netInputs[layerNr].noalias() = (weights[layerNr - 1].rowwise() - activations[layerNr - 1].transpose()).rowwise().squaredNorm().cwiseSqrt().transpose();
 	}
 
-	AbstractInputFunction* EuclideanDistance::getInputFunctionCopy() const
+	AbstractCloneable* EuclideanDistance::clone() const
 	{
 		return new EuclideanDistance(*this);
 	}

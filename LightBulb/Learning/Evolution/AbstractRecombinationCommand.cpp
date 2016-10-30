@@ -11,6 +11,7 @@ namespace LightBulb
 	}
 
 	AbstractRecombinationCommand::AbstractRecombinationCommand(const AbstractRecombinationCommand& other)
+		:AbstractCommand(other)
 	{
 		recombinationAlgorithm.reset(dynamic_cast<AbstractRecombinationAlgorithm*>(other.recombinationAlgorithm->clone()));
 		recombinationSelector.reset(dynamic_cast<AbstractRecombinationSelector*>(other.recombinationSelector->clone()));

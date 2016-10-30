@@ -13,12 +13,13 @@ namespace LightBulb
 	}
 
 	PreferenceGroup::PreferenceGroup(const PreferenceGroup& other)
+		:AbstractPreferenceElement(other)
 	{
 		name = other.name;
 		preferences.clear();
 		for (auto preference = other.preferences.begin(); preference != other.preferences.end(); preference++)
 		{
-			addPreference((*preference)->getCopy());
+			addPreference(dynamic_cast<AbstractPreferenceElement*>((*preference)->clone()));
 		}
 	}
 
@@ -42,7 +43,7 @@ namespace LightBulb
 		preferences.push_back(std::unique_ptr<AbstractPreferenceElement>(preferenceElement));
 	}
 
-	AbstractPreferenceElement* PreferenceGroup::getCopy() const
+	AbstractCloneable* PreferenceGroup::clone() const
 	{
 		return new PreferenceGroup(*this);
 	}

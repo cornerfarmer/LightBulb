@@ -59,7 +59,7 @@ namespace LightBulb
 	protected:
 		std::unique_ptr<StorageLogger> logger;
 		virtual void run(bool initial) = 0;
-		virtual AbstractTrainingPlan* getCopy() const = 0;
+		virtual AbstractTrainingPlan* createNewFromSameType() const = 0;
 		virtual void tryToPause() = 0;
 		void pausingFinished();
 		void finished();

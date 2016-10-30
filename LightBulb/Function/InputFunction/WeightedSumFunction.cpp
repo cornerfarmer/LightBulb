@@ -8,7 +8,7 @@ namespace LightBulb
 		netInputs[layerNr].noalias() = weights[layerNr - 1] * activations[layerNr - 1];
 	}
 
-	AbstractInputFunction* WeightedSumFunction::getInputFunctionCopy() const
+	AbstractCloneable* WeightedSumFunction::clone() const
 	{
 		return new WeightedSumFunction(*this);
 	}

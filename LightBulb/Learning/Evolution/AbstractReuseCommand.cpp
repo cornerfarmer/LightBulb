@@ -10,6 +10,7 @@ namespace LightBulb
 	}
 
 	AbstractReuseCommand::AbstractReuseCommand(const AbstractReuseCommand& other)
+		:AbstractCommand(other)
 	{
 		reuseSelector.reset(dynamic_cast<AbstractReuseSelector*>(other.reuseSelector->clone()));
 	}

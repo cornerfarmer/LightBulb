@@ -96,7 +96,7 @@ std::string TCProblemEvolutionExample::getDescription() const
 	return "Teaches a network how to distinguish Ts and Cs with the help of evoultion.";
 }
 
-AbstractTrainingPlan* TCProblemEvolutionExample::getCopy() const
+AbstractTrainingPlan* TCProblemEvolutionExample::createNewFromSameType() const
 {
 	return new TCProblemEvolutionExample();
 }

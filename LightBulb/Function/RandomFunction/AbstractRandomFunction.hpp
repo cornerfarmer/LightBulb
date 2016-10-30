@@ -5,13 +5,14 @@
 
 // Includes
 #include "Random/AbstractRandomGeneratorUser.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 namespace LightBulb
 {
 	/**
 	 * \brief A function which chooses one of n elements randomly.
 	 */
-	class AbstractRandomFunction : public AbstractRandomGeneratorUser
+	class AbstractRandomFunction : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
 	{
 	private:
 	public:
@@ -22,7 +23,6 @@ namespace LightBulb
 		 * \return The chosen element number
 		 */
 		virtual int execute(int elementCount) const = 0;
-		virtual AbstractRandomFunction* clone() = 0;
 	};
 }
 

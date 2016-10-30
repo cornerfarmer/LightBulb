@@ -17,20 +17,20 @@ namespace LightBulb
 
 	SameNeuronDescriptionFactory::SameNeuronDescriptionFactory(const SameNeuronDescriptionFactory &obj)
 	{
-		neuronDescription.reset(obj.neuronDescription->getCopy());
+		neuronDescription.reset(dynamic_cast<NeuronDescription*>(obj.neuronDescription->clone()));
 	}
 
 	NeuronDescription* SameNeuronDescriptionFactory::createInnerNeuronDescription()
 	{
-		return neuronDescription->getCopy();
+		return dynamic_cast<NeuronDescription*>(neuronDescription->clone());
 	}
 
 	NeuronDescription* SameNeuronDescriptionFactory::createOutputNeuronDescription()
 	{
-		return neuronDescription->getCopy();
+		return dynamic_cast<NeuronDescription*>(neuronDescription->clone());
 	}
 
-	AbstractNeuronDescriptionFactory* SameNeuronDescriptionFactory::getCopy() const
+	AbstractCloneable* SameNeuronDescriptionFactory::clone() const
 	{
 		return new SameNeuronDescriptionFactory(*this);
 	}

@@ -87,7 +87,7 @@ std::string PongPolicyGradientExample::getDescription() const
 	return "Learns pong with policy gradient learning.";
 }
 
-AbstractTrainingPlan* PongPolicyGradientExample::getCopy() const
+AbstractTrainingPlan* PongPolicyGradientExample::createNewFromSameType() const
 {
 	return new PongPolicyGradientExample();
 }

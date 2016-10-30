@@ -157,7 +157,7 @@ std::string PongEvolutionExample::getDescription() const
 	return "Evolution of a Pong AI with coevolution.";
 }
 
-AbstractTrainingPlan* PongEvolutionExample::getCopy() const
+AbstractTrainingPlan* PongEvolutionExample::createNewFromSameType() const
 {
 	return new PongEvolutionExample();
 }

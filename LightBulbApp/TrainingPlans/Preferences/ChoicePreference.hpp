@@ -58,7 +58,7 @@ namespace LightBulb
 		 */
 		const std::vector<std::string>& getChoices() const;
 		// Inherited:
-		AbstractPreferenceElement* getCopy() const override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

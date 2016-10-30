@@ -28,7 +28,7 @@ namespace LightBulb
 	RandomSelector::RandomSelector(const RandomSelector& other)
 		:AbstractMutationSelector(other),AbstractRecombinationSelector(other)
 	{
-		randomFunction.reset(other.randomFunction->clone());
+		randomFunction.reset(dynamic_cast<AbstractRandomFunction*>(other.randomFunction->clone()));
 	}
 
 	void RandomSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)

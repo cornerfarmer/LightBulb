@@ -27,7 +27,7 @@ namespace LightBulb
 	FeedForwardNetworkTopologyOptions::FeedForwardNetworkTopologyOptions(const FeedForwardNetworkTopologyOptions &obj)
 	{
 		*this = obj;
-		descriptionFactory = obj.descriptionFactory->getCopy();
+		descriptionFactory = dynamic_cast<AbstractNeuronDescriptionFactory*>(obj.descriptionFactory->clone());
 	}
 
 	FeedForwardNetworkTopology::~FeedForwardNetworkTopology()

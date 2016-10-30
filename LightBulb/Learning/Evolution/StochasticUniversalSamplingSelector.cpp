@@ -45,6 +45,7 @@ namespace LightBulb
 	}
 
 	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector(const StochasticUniversalSamplingSelector& other)
+		:AbstractMutationSelector(other), AbstractRecombinationSelector(other)
 	{
 		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
 	}

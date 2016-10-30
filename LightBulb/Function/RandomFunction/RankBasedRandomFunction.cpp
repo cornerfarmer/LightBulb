@@ -27,7 +27,7 @@ namespace LightBulb
 		throw std::logic_error("No element has been selected!");
 	}
 
-	AbstractRandomFunction* RankBasedRandomFunction::clone()
+	AbstractCloneable* RankBasedRandomFunction::clone() const
 	{
 		return new RankBasedRandomFunction(*this);
 	}

@@ -20,7 +20,7 @@ namespace LightBulb
 		return new Backpropagation(flatSpotEliminationFac);
 	}
 
-	AbstractPreferenceElement* BackpropagationPreferenceGroup::getCopy() const
+	AbstractCloneable* BackpropagationPreferenceGroup::clone() const
 	{
 		return new BackpropagationPreferenceGroup(*this);
 	}

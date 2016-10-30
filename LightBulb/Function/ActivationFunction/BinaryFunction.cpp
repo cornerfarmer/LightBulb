@@ -26,7 +26,7 @@ namespace LightBulb
 		throw std::logic_error("There is no derivation of the binary function");
 	}
 
-	AbstractActivationFunction* BinaryFunction::getActivationFunctionCopy() const
+	AbstractCloneable* BinaryFunction::clone() const
 	{
 		return new BinaryFunction(*this);
 	}

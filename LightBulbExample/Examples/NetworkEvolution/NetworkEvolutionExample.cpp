@@ -86,7 +86,7 @@ std::string NetworkEvolutionExample::getDescription() const
 	return "Finds a network structure with the lowest amount of cables.";
 }
 
-AbstractTrainingPlan* NetworkEvolutionExample::getCopy() const
+AbstractTrainingPlan* NetworkEvolutionExample::createNewFromSameType() const
 {
 	return new NetworkEvolutionExample();
 }

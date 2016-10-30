@@ -3,6 +3,9 @@
 #ifndef _ABSTRACTACTIVATIONFUNCTION_H_
 #define _ABSTRACTACTIVATIONFUNCTION_H_
 
+// Includes
+#include "Tools/AbstractCloneable.hpp"
+
 // Library includes
 #include <vector>
 #include <EigenSrc/Cholesky>
@@ -16,7 +19,7 @@ namespace LightBulb
 	/**
 	 * \brief This abstract class describes a function, which can calculate the activation of a neuron from its input
 	 */
-	class AbstractActivationFunction
+	class AbstractActivationFunction : public virtual AbstractCloneable
 	{
 	private:
 	public:
@@ -46,11 +49,6 @@ namespace LightBulb
 		 * \return The calculated activation derivations for the whole layer
 		 */
 		virtual Eigen::VectorXd executeDerivation(const Eigen::VectorXd& input) const;
-		/**
-		 * \brief Create a copy of the object
-		 * \return The copy
-		 */
-		virtual AbstractActivationFunction* getActivationFunctionCopy() const = 0;
 		/**
 		 * \brief Returns the maximum possible output/activation value of this function
 		 * \return The maximum

@@ -69,7 +69,7 @@ std::string TCProblemBackpropagationExample::getDescription() const
 }
 
 
-AbstractTrainingPlan* TCProblemBackpropagationExample::getCopy() const
+AbstractTrainingPlan* TCProblemBackpropagationExample::createNewFromSameType() const
 {
 	return new TCProblemBackpropagationExample();
 }

@@ -57,7 +57,7 @@ std::string NatureExample::getDescription() const
 	return "Does an evolution of based on real nature.";
 }
 
-AbstractTrainingPlan* NatureExample::getCopy() const
+AbstractTrainingPlan* NatureExample::createNewFromSameType() const
 {
 	return new NatureExample();
 }

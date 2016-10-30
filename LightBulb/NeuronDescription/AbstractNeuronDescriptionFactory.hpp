@@ -3,6 +3,9 @@
 #ifndef _ABSTRACTNEURONDESCRIPTIONFACTORY_H_
 #define _ABSTRACTNEURONDESCRIPTIONFACTORY_H_
 
+// Includes
+#include "Tools/AbstractCloneable.hpp"
+
 namespace LightBulb
 {
 	// Forward declarations
@@ -12,7 +15,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a factory which provides neurons descriptions depending on the layer.
 	 */
-	class AbstractNeuronDescriptionFactory
+	class AbstractNeuronDescriptionFactory : public virtual AbstractCloneable
 	{
 	private:
 	public:
@@ -37,11 +40,6 @@ namespace LightBulb
 		* \return The activation function.
 		*/
 		virtual const AbstractActivationFunction& getInnerActivationFunction() const = 0;
-		/**
-		* \brief Clones the neuron description factory.
-		* \return The clone.
-		*/
-		virtual AbstractNeuronDescriptionFactory* getCopy() const = 0;
 	};
 }
 

@@ -61,7 +61,7 @@ std::string FunctionEvolutionExample::getDescription() const
 	return "Finds the minimum of the six hump camel back function with the help of evolution!";
 }
 
-AbstractTrainingPlan* FunctionEvolutionExample::getCopy() const
+AbstractTrainingPlan* FunctionEvolutionExample::createNewFromSameType() const
 {
 	return new FunctionEvolutionExample();
 }

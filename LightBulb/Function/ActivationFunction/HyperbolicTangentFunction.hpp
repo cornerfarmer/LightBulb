@@ -23,7 +23,7 @@ namespace LightBulb
 		// Inherited
 		double execute(double input) const override;
 		double executeDerivation(double input) const override;
-		AbstractActivationFunction* getActivationFunctionCopy() const override;
+		AbstractCloneable* clone() const override;
 		double getMaximum() const override;
 		double getMinimum() const override;
 		bool hasAMaxAndMinimum() const override;

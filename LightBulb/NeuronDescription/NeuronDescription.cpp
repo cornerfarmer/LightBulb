@@ -9,9 +9,15 @@ namespace LightBulb
 		activationFunction.reset(activationFunction_);
 	}
 
-	NeuronDescription* NeuronDescription::getCopy() const
+	NeuronDescription::NeuronDescription(const NeuronDescription& other)
 	{
-		return new NeuronDescription(inputFunction->getInputFunctionCopy(), activationFunction->getActivationFunctionCopy());
+		inputFunction.reset(dynamic_cast<AbstractInputFunction*>(other.inputFunction->clone()));
+		activationFunction.reset(dynamic_cast<AbstractActivationFunction*>(other.activationFunction->clone()));
+	}
+
+	AbstractCloneable* NeuronDescription::clone() const
+	{
+		return new NeuronDescription(*this);
 	}
 
 	const AbstractInputFunction& NeuronDescription::getInputFunction() const

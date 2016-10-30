@@ -21,7 +21,7 @@ namespace LightBulb
 		return 1;
 	}
 
-	AbstractActivationFunction* IdentityFunction::getActivationFunctionCopy() const
+	AbstractCloneable* IdentityFunction::clone() const
 	{
 		return new IdentityFunction(*this);
 	}

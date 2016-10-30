@@ -33,7 +33,7 @@ namespace LightBulb
 		ExponentialShrinkFunction(double startValue_, double minValue_, double speedFactor_);
 		// Inherited:	
 		double execute(double time) const override;
-		AbstractShrinkFunction* getShrinkFunctionCopy() const override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

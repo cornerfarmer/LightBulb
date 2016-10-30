@@ -25,7 +25,7 @@ public:
 	BackpropagationXorExample();
 	std::string getDefaultName() const override;
 	std::string getDescription() const override;
-	AbstractTrainingPlan* getCopy() const override;
+	AbstractTrainingPlan* createNewFromSameType() const override;
 	int getRequiredInputSize() const override;
 	int getRequiredOutputSize() const override;
 	std::string getLearningRuleName() const override;

@@ -39,7 +39,7 @@ namespace LightBulb
 		// Inherited:
 		NeuronDescription* createInnerNeuronDescription() override;
 		NeuronDescription* createOutputNeuronDescription() override;
-		AbstractNeuronDescriptionFactory* getCopy() const override;
+		AbstractCloneable* clone() const override;
 		const AbstractActivationFunction& getOutputActivationFunction() const override;
 		const AbstractActivationFunction& getInnerActivationFunction() const override;
 	};

@@ -5,6 +5,7 @@
 
 // Includes
 #include "IO/UseParentSerialization.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <string>
@@ -16,7 +17,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a preference element. Can be a single preference or a preference group.
 	 */
-	class AbstractPreferenceElement
+	class AbstractPreferenceElement : public virtual AbstractCloneable
 	{
 	protected:
 	public:
@@ -31,11 +32,6 @@ namespace LightBulb
 		 * \return The name.
 		 */
 		virtual const std::string& getName() const = 0;
-		/**
-		 * \brief Creates a deep copy of the element.
-		 * \return The copy.
-		 */
-		virtual AbstractPreferenceElement* getCopy() const = 0;
 	};
 }
 

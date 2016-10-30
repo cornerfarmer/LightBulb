@@ -19,7 +19,7 @@ namespace LightBulb
 
 	}
 
-	AbstractActivationFunction* HyperbolicTangentFunction::getActivationFunctionCopy() const
+	AbstractCloneable* HyperbolicTangentFunction::clone() const
 	{
 		return new HyperbolicTangentFunction(*this);
 	}

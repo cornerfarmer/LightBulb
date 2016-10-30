@@ -6,6 +6,7 @@
 // Includes
 #include "Function/InputFunction/AbstractInputFunction.hpp"
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <memory>
@@ -15,7 +16,7 @@ namespace LightBulb
 	/**
 	 * \brief Contains all neuron specific information. 
 	 */
-	class NeuronDescription
+	class NeuronDescription : public virtual AbstractCloneable
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, NeuronDescription& neuronDescription);
@@ -36,6 +37,11 @@ namespace LightBulb
 		 */
 		NeuronDescription(AbstractInputFunction* inputFunction_, AbstractActivationFunction* activationFunction_);
 		/**
+		 * \brief Copy constructor.
+		 * \param other Object to copy.
+		 */
+		NeuronDescription(const NeuronDescription& other);
+		/**
 		 * \brief Creates a neuron description.
 		 */
 		NeuronDescription() = default;
@@ -43,7 +49,7 @@ namespace LightBulb
 		 * \brief Clones the neuron description.
 		 * \return The clone.
 		 */
-		NeuronDescription* getCopy() const;
+		AbstractCloneable* clone() const override;
 		/**
 		 * \brief Returns the input function of the neuron.
 		 * \return The input function.

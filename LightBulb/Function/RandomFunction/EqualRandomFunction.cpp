@@ -11,7 +11,7 @@ namespace LightBulb
 		return randomGenerator->randInt(0, elementCount - 1);
 	}
 
-	AbstractRandomFunction* EqualRandomFunction::clone()
+	AbstractCloneable* EqualRandomFunction::clone() const
 	{
 		return new EqualRandomFunction(*this);
 	}

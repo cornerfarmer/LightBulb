@@ -28,7 +28,7 @@ namespace LightBulb
 		archive(cereal::make_nvp("neuronsPerLayerCount", options.neuronsPerLayerCount));
 		archive(cereal::make_nvp("useBiasNeuron", options.useBiasNeuron));
 
-		std::unique_ptr<AbstractNeuronDescriptionFactory> descriptionFactory(options.descriptionFactory->getCopy());
+		std::unique_ptr<AbstractNeuronDescriptionFactory> descriptionFactory(dynamic_cast<AbstractNeuronDescriptionFactory*>(options.descriptionFactory->clone()));
 		archive(cereal::make_nvp("descriptionFactory", descriptionFactory));
 	}
 	

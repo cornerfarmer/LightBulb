@@ -22,7 +22,7 @@ namespace LightBulb
 		}
 	}
 
-	AbstractActivationOrder* TopologicalOrder::getCopy() const
+	AbstractCloneable* TopologicalOrder::clone() const
 	{
 		return new TopologicalOrder(*this);
 	}

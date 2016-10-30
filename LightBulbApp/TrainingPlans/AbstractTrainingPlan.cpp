@@ -117,9 +117,9 @@ namespace LightBulb
 
 	AbstractTrainingPlan* AbstractTrainingPlan::getCopyForExecute()
 	{
-		AbstractTrainingPlan* copy = getCopy();
+		AbstractTrainingPlan* copy = createNewFromSameType();
 		copy->pattern = this;
-		copy->preferenceGroup.reset(static_cast<PreferenceGroup*>(preferenceGroup->getCopy()));
+		copy->preferenceGroup.reset(dynamic_cast<PreferenceGroup*>(preferenceGroup->clone()));
 		return copy;
 	}
 

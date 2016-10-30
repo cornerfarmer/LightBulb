@@ -14,7 +14,7 @@ namespace LightBulb
 		return startValue * exp(-1 * time / speedFactor) + minValue;
 	}
 
-	AbstractShrinkFunction* ExponentialShrinkFunction::getShrinkFunctionCopy() const
+	AbstractCloneable* ExponentialShrinkFunction::clone() const
 	{
 		return new ExponentialShrinkFunction(*this);
 	}

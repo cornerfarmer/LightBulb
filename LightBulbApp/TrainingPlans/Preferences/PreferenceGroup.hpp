@@ -134,9 +134,9 @@ namespace LightBulb
 			throw std::invalid_argument("The preference group could not be found.");
 		}
 		// Inherited:
-		AbstractPreferenceElement* getCopy() const override;
 		const std::string& getName() const override;
 		std::string toString() const override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

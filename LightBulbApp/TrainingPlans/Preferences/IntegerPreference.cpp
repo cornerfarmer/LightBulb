@@ -20,7 +20,7 @@ namespace LightBulb
 		return max;
 	}
 
-	AbstractPreferenceElement* IntegerPreference::getCopy() const
+	AbstractCloneable* IntegerPreference::clone() const
 	{
 		return new IntegerPreference(*this);
 	}

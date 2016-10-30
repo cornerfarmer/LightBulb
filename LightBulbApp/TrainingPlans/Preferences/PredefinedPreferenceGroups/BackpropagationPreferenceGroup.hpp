@@ -28,7 +28,7 @@ namespace LightBulb
 		 */
 		Backpropagation* create() const;
 		// Inherited:
-		AbstractPreferenceElement* getCopy() const override;
+		AbstractCloneable* clone() const override;
 	};
 }
 

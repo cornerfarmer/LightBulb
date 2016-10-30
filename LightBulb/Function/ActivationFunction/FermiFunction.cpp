@@ -24,7 +24,7 @@ namespace LightBulb
 		return execute(input) * (1 - execute(input));
 	}
 
-	AbstractActivationFunction* FermiFunction::getActivationFunctionCopy() const
+	AbstractCloneable* FermiFunction::clone() const
 	{
 		return new FermiFunction(*this);
 	}

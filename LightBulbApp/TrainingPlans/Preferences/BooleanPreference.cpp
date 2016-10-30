@@ -8,7 +8,7 @@ namespace LightBulb
 	{
 	}
 
-	AbstractPreferenceElement* BooleanPreference::getCopy() const
+	AbstractCloneable* BooleanPreference::clone() const
 	{
 		return new BooleanPreference(*this);
 	}

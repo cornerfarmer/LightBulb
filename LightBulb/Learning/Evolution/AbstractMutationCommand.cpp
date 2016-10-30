@@ -11,6 +11,7 @@ namespace LightBulb
 	}
 
 	AbstractMutationCommand::AbstractMutationCommand(const AbstractMutationCommand& other)
+		:AbstractCommand(other)
 	{
 		mutationAlgorithm.reset(dynamic_cast<AbstractMutationAlgorithm*>(other.mutationAlgorithm->clone()));
 		mutationSelector.reset(dynamic_cast<AbstractMutationSelector*>(other.mutationSelector->clone()));

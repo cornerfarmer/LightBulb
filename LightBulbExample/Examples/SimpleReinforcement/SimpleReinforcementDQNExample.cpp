@@ -84,7 +84,7 @@ std::string SimpleReinforcementDQNExample::getDescription() const
 	return "Evolution of a Simple AI with DQN.";
 }
 
-AbstractTrainingPlan* SimpleReinforcementDQNExample::getCopy() const
+AbstractTrainingPlan* SimpleReinforcementDQNExample::createNewFromSameType() const
 {
 	return new SimpleReinforcementDQNExample();
 }

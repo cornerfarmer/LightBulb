@@ -29,7 +29,7 @@ namespace LightBulb
 		return choices;
 	}
 
-	AbstractPreferenceElement* ChoicePreference::getCopy() const
+	AbstractCloneable* ChoicePreference::clone() const
 	{
 		return new ChoicePreference(*this);
 	}

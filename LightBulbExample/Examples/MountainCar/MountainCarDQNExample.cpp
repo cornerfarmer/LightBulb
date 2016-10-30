@@ -101,7 +101,7 @@ std::string MountainCarDQNExample::getDescription() const
 	return "Evolution of a MountainCar AI with DQN.";
 }
 
-AbstractTrainingPlan* MountainCarDQNExample::getCopy() const
+AbstractTrainingPlan* MountainCarDQNExample::createNewFromSameType() const
 {
 	return new MountainCarDQNExample();
 }

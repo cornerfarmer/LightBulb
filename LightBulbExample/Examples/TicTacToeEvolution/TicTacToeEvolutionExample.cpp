@@ -152,7 +152,7 @@ std::string TicTacToeEvolutionExample::getDescription() const
 	return "Evolution of a perfect TicTacToe KI with the bipartite evolution learning rule.";
 }
 
-AbstractTrainingPlan* TicTacToeEvolutionExample::getCopy() const
+AbstractTrainingPlan* TicTacToeEvolutionExample::createNewFromSameType() const
 {
 	return new TicTacToeEvolutionExample();
 }
