@@ -19,7 +19,7 @@ namespace LightBulb
 		{
 			entry->first -= fac * entry->second->getNeuralNetwork().getNetworkTopology().getNeuronCount();
 		}
-		std::sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+		sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	}
 
 	AbstractCloneable* NeuronDecayFitnessFunction::clone() const

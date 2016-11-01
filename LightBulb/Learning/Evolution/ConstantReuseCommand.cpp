@@ -42,7 +42,7 @@ namespace LightBulb
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (objectCount == 0)
-			objectCount = (int)(highscore.size() * reusePercentage);
+			objectCount = highscore.size() * reusePercentage;
 
 		reuseSelector->executeReuseSelection(objectCount, highscore, counter);
 	}

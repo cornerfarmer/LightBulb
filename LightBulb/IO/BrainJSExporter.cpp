@@ -30,11 +30,11 @@ namespace LightBulb
 					std::vector<double> afferentWeights = networkTopology.getAfferentWeightsPerNeuron(l, n, true);
 					for (int afferentWeightIndex = 0; afferentWeightIndex < afferentWeights.size(); afferentWeightIndex++)
 					{
-						weights->addAttribute(new JSONAttribute(std::to_string((_ULonglong)afferentWeightIndex), new JSONNumberElement<double>(afferentWeights[afferentWeightIndex])));
+						weights->addAttribute(new JSONAttribute(std::to_string(static_cast<_ULonglong>(afferentWeightIndex)), new JSONNumberElement<double>(afferentWeights[afferentWeightIndex])));
 					}
 					neuron->addAttribute(new JSONAttribute("weights", weights));
 				}
-				layer->addAttribute(new JSONAttribute(std::to_string((_ULonglong)n), neuron));
+				layer->addAttribute(new JSONAttribute(std::to_string(static_cast<_ULonglong>(n)), neuron));
 			}
 			layers->addElement(layer);
 		}

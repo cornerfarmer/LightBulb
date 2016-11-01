@@ -47,7 +47,7 @@ namespace LightBulb
 		 * \brief Creates a empty preference group.
 		 */
 		PreferenceGroup() = default;
-		PreferenceGroup(PreferenceGroup&& other);
+		PreferenceGroup(PreferenceGroup&& other) noexcept;
 		PreferenceGroup& operator=(PreferenceGroup other);
 		friend void swap(PreferenceGroup& lhs, PreferenceGroup& rhs) noexcept;
 		/**
@@ -114,8 +114,8 @@ namespace LightBulb
 		{
 			for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 			{
-				if (dynamic_cast<PreferenceGroupClass*>(preference->get()))
-					return dynamic_cast<PreferenceGroupClass*>(preference->get())->create();
+				if (PreferenceGroupClass* preferenceGroup = dynamic_cast<PreferenceGroupClass*>(preference->get()))
+					return preferenceGroup->create();
 			}
 			throw std::invalid_argument("The preference group could not be found.");
 		}
@@ -131,8 +131,8 @@ namespace LightBulb
 		Class createFromGroup(std::string groupName) const
 		{
 			const PreferenceGroup& preferenceGroup = getPreferenceGroup(groupName);
-			if (dynamic_cast<PreferenceGroupClass&>(preferenceGroup))
-				return dynamic_cast<PreferenceGroupClass&>(preferenceGroup).create();
+			if (PreferenceGroupClass* castedPreferenceGroup = dynamic_cast<PreferenceGroupClass&>(preferenceGroup))
+				return castedPreferenceGroup->create();
 
 			throw std::invalid_argument("The preference group could not be found.");
 		}

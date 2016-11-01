@@ -108,7 +108,7 @@ AbstractTrainingPlan* MountainCarDQNExample::createNewFromSameType() const
 
 std::string MountainCarDQNExample::getLearningRuleName() const
 {
-	return MountainCarDQNExample::getName();
+	return getName();
 }
 
 

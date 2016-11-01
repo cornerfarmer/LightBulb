@@ -660,7 +660,7 @@ namespace LightBulb
 
 	int TrainingWindow::getRowIndexOfItem(const wxDataViewListCtrl& list, const wxDataViewItem& item) const
 	{
-		return ((wxDataViewIndexListModel*)list.GetModel())->GetRow(item);
+		return (static_cast<const wxDataViewIndexListModel*>(list.GetModel()))->GetRow(item);
 	}
 
 	void TrainingWindow::startTraining(wxCommandEvent& event)

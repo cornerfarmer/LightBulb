@@ -41,7 +41,7 @@ namespace LightBulb
 
 		sizer->Add(sw, 1, wxEXPAND);
 		SetSizerAndFit(sizer);
-		SetMinSize(wxSize(450, 600));
+		wxTopLevelWindowBase::SetMinSize(wxSize(450, 600));
 		SetSize(wxSize(450, 600));
 	}
 
@@ -55,40 +55,33 @@ namespace LightBulb
 		wxSizer* panelSizer = new wxBoxSizer(wxVERTICAL);
 		for (auto preference = preferenceGroup.getPreferenceElements().begin(); preference != preferenceGroup.getPreferenceElements().end(); preference++)
 		{
-			if (dynamic_cast<PreferenceGroup*>(preference->get()))
+			if (PreferenceGroup* castedPreferenceGroup = dynamic_cast<PreferenceGroup*>(preference->get()))
 			{
-				panelSizer->Add(createCollapsiblePane(*collpane->GetPane(), dynamic_cast<PreferenceGroup&>(*preference->get()), true), 0, wxGROW | wxEXPAND);
+				panelSizer->Add(createCollapsiblePane(*collpane->GetPane(), *castedPreferenceGroup, true), 0, wxGROW | wxEXPAND);
 			}
 			else
 			{
 				if (!dynamic_cast<BooleanPreference*>(preference->get()))
 					panelSizer->Add(new wxStaticText(collpane->GetPane(), wxID_ANY, (*preference)->getName()), 0, wxLEFT | wxRIGHT | wxUP, 7);
 
-				if (dynamic_cast<DoublePreference*>(preference->get()))
+				if (DoublePreference* doublePreference = dynamic_cast<DoublePreference*>(preference->get()))
 				{
-					DoublePreference& doublePreference = dynamic_cast<DoublePreference&>(*preference->get());
-					double stepSize = (doublePreference.getMax() - doublePreference.getMin()) / stepCount;
-					int currentValue = (doublePreference.getValue() - doublePreference.getMin()) / stepSize;
+					double stepSize = (doublePreference->getMax() - doublePreference->getMin()) / stepCount;
+					int currentValue = (doublePreference->getValue() - doublePreference->getMin()) / stepSize;
 
-					panelSizer->Add(createSlider(*collpane->GetPane(), std::to_string(doublePreference.getMin()), std::to_string(doublePreference.getMax()), std::to_string(doublePreference.getValue()), currentValue, doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
+					panelSizer->Add(createSlider(*collpane->GetPane(), std::to_string(doublePreference->getMin()), std::to_string(doublePreference->getMax()), std::to_string(doublePreference->getValue()), currentValue, *doublePreference, 0, stepCount, stepSize), 0, wxEXPAND);
 				}
-				else if (dynamic_cast<IntegerPreference*>(preference->get()))
+				else if (IntegerPreference* integerPreference = dynamic_cast<IntegerPreference*>(preference->get()))
 				{
-					IntegerPreference& integerPreference = dynamic_cast<IntegerPreference&>(*preference->get());
-
-					panelSizer->Add(createSlider(*collpane->GetPane(), std::to_string(integerPreference.getMin()), std::to_string(integerPreference.getMax()), std::to_string(integerPreference.getValue()), integerPreference.getValue(), integerPreference, integerPreference.getMin(), integerPreference.getMax()), 0, wxEXPAND);
+					panelSizer->Add(createSlider(*collpane->GetPane(), std::to_string(integerPreference->getMin()), std::to_string(integerPreference->getMax()), std::to_string(integerPreference->getValue()), integerPreference->getValue(), *integerPreference, integerPreference->getMin(), integerPreference->getMax()), 0, wxEXPAND);
 				}
-				else if (dynamic_cast<BooleanPreference*>(preference->get()))
+				else if (BooleanPreference* booleanPreference = dynamic_cast<BooleanPreference*>(preference->get()))
 				{
-					BooleanPreference& booleanPreference = dynamic_cast<BooleanPreference&>(*preference->get());
-
-					panelSizer->Add(createCheckBox(*collpane->GetPane(), (*preference)->getName(), booleanPreference.getValue(), booleanPreference), 0, wxEXPAND);
+					panelSizer->Add(createCheckBox(*collpane->GetPane(), (*preference)->getName(), booleanPreference->getValue(), *booleanPreference), 0, wxEXPAND);
 				}
-				else if (dynamic_cast<ChoicePreference*>(preference->get()))
+				else if (ChoicePreference* choicePreference = dynamic_cast<ChoicePreference*>(preference->get()))
 				{
-					ChoicePreference& choicePreference = dynamic_cast<ChoicePreference&>(*preference->get());
-
-					panelSizer->Add(createChoice(*collpane->GetPane(), (*preference)->getName(), choicePreference.getValueAsIndex(), choicePreference.getChoices(), choicePreference), 0, wxEXPAND);
+					panelSizer->Add(createChoice(*collpane->GetPane(), (*preference)->getName(), choicePreference->getValueAsIndex(), choicePreference->getChoices(), *choicePreference), 0, wxEXPAND);
 				}
 			}
 		}

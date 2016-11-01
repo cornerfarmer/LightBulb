@@ -70,9 +70,8 @@ namespace LightBulb
 		{
 			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
 			{
-				if (dynamic_cast<Observer<Class, EventArg>*>(*observer))
+				if (Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer))
 				{
-					Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer);
 					if (castedObserver->object == &observerObject && castedObserver->method == observerMethod)
 					{
 						return true;
@@ -115,9 +114,8 @@ namespace LightBulb
 			observersMutex.lock();
 			for (auto observer = observers[eventType].begin(); observer != observers[eventType].end(); observer++)
 			{
-				if (dynamic_cast<Observer<Class, EventArg>*>(*observer))
+				if (Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer))
 				{
-					Observer<Class, EventArg>* castedObserver = dynamic_cast<Observer<Class, EventArg>*>(*observer);
 					if (castedObserver->object == &observerObject && castedObserver->method == observerMethod)
 					{
 						observers[eventType].erase(observer);

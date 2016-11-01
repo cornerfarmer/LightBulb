@@ -65,18 +65,18 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 
 AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 {
-	FeedForwardNetworkTopologyOptions* networkTopologyOptions = new FeedForwardNetworkTopologyOptions();
-	networkTopologyOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	networkTopologyOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
-	networkTopologyOptions->neuronsPerLayerCount[0] = 16;
-	networkTopologyOptions->neuronsPerLayerCount[1] = 20;
-	networkTopologyOptions->neuronsPerLayerCount[2] = 1;
-	networkTopologyOptions->useBiasNeuron = true;
-	networkTopologyOptions->enableShortcuts = true;
+	FeedForwardNetworkTopologyOptions networkTopologyOptions;
+	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions.neuronsPerLayerCount[0] = 16;
+	networkTopologyOptions.neuronsPerLayerCount[1] = 20;
+	networkTopologyOptions.neuronsPerLayerCount[2] = 1;
+	networkTopologyOptions.useBiasNeuron = true;
+	networkTopologyOptions.enableShortcuts = true;
 
 	TCProblemTeacher* teacher = new TCProblemTeacher(false, getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC));
 	
-	return new TeachingEvolutionWorld(teacher, *networkTopologyOptions);
+	return new TeachingEvolutionWorld(teacher, networkTopologyOptions);
 }
 
 TCProblemEvolutionExample::TCProblemEvolutionExample()

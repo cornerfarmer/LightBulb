@@ -19,7 +19,7 @@ public:
 	MOCK_CONST_METHOD0(getCreationDate, const std::time_t& ());
 	MOCK_CONST_METHOD0(getState, const LightBulb::NeuralNetworkState& ());
 	MOCK_METHOD1(setState, void (LightBulb::NeuralNetworkState));
-	MOCK_CONST_METHOD0(getStateAsString, const std::string ());
+	MOCK_CONST_METHOD0(getStateAsString, std::string ());
 };
 
 #endif

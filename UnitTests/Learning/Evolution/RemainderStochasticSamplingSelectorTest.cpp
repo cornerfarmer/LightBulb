@@ -32,7 +32,7 @@ TEST_F(RemainderStochasticSamplingSelectorTest, executeMutationSelectionWithoutR
 	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
 
 	std::vector<double> secondChance;
-	EXPECT_CALL(*selectionFunction, execute(testing::_)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&secondChance), testing::Return(1)));
+	EXPECT_CALL(*selectionFunction, execute(testing::_)).WillRepeatedly(DoAll(testing::SaveArg<0>(&secondChance), testing::Return(1)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
 	remainderStochasticSamplingSelector->executeMutationSelection(3, highscore, counter);
@@ -62,7 +62,7 @@ TEST_F(RemainderStochasticSamplingSelectorTest, executeMutationSelectionWithRepl
 	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
 
 	std::vector<double> secondChance;
-	EXPECT_CALL(*selectionFunction, execute(testing::_)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&secondChance), testing::Return(1)));
+	EXPECT_CALL(*selectionFunction, execute(testing::_)).WillRepeatedly(DoAll(testing::SaveArg<0>(&secondChance), testing::Return(1)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
 	remainderStochasticSamplingSelector->executeMutationSelection(3, highscore, counter);

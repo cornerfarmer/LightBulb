@@ -40,7 +40,7 @@ namespace cereal
 		template <class Archive>
 		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule)
 		{
-			ar(cereal::base_class<LightBulb::AbstractEvolutionLearningRule>(&learningRule));
+			ar(base_class<LightBulb::AbstractEvolutionLearningRule>(&learningRule));
 			learningRule.setHelperToUsedObjects();
 		}
 	};

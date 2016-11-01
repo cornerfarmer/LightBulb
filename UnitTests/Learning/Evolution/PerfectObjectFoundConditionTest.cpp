@@ -23,7 +23,7 @@ public:
 		AbstractEvolutionLearningRuleOptions options;
 		learningRule = new MockEvolutionLearningRule(options);
 		world = new MockCoevolutionWorld();
-		highscore.push_back(std::make_pair(0, (AbstractEvolutionObject*)nullptr));
+		highscore.push_back(std::make_pair(0, static_cast<AbstractEvolutionObject*>(nullptr)));
 
 		EXPECT_CALL(*learningRule, getWorld()).WillRepeatedly(testing::ReturnRef(*world));
 		EXPECT_CALL(*world, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(combiningStrategy));

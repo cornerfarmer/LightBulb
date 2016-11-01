@@ -20,7 +20,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	PongGameWindow(PongGameController& controller_, LightBulb::AbstractWindow& parent);
+	PongGameWindow(PongGameController& controller_, AbstractWindow& parent);
 	void paintEvent(wxPaintEvent& evt);
 	void resize(wxSizeEvent& evt);
 	void paintNow();

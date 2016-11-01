@@ -86,7 +86,7 @@ namespace LightBulb
 		 * \brief Returns the creation date of the neural network.
 		 * \return The creation date.
 		 */
-		virtual const std::time_t& getCreationDate() const = 0;
+		virtual const time_t& getCreationDate() const = 0;
 		/**
 		 * \brief Returns the current state of the neural network.
 		 * \return The state.
@@ -101,7 +101,7 @@ namespace LightBulb
 		 * \brief Returns the state as string.
 		 * \return The state as string.
 		 */
-		virtual const std::string getStateAsString() const;
+		virtual std::string getStateAsString() const;
 	};
 }
 

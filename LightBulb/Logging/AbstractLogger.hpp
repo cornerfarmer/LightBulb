@@ -44,7 +44,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a logger which can store and/or display messages with different priorities.
 	 */
-	class AbstractLogger : public LightBulb::Observable<LoggerEvents, AbstractLogger>
+	class AbstractLogger : public Observable<LoggerEvents, AbstractLogger>
 	{
 	private:
 	protected:

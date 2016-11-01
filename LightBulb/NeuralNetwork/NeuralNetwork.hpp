@@ -52,7 +52,7 @@ namespace LightBulb
 		void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) override;
 		AbstractNetworkTopology& getNetworkTopology() const override;
 		const std::string& getName() const override;
-		const std::time_t& getCreationDate() const override;
+		const time_t& getCreationDate() const override;
 		const NeuralNetworkState& getState() const override;
 		void setState(NeuralNetworkState newState) override;
 		AbstractNeuralNetwork* clone() const override;

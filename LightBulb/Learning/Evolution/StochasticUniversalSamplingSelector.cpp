@@ -35,7 +35,7 @@ namespace LightBulb
 	void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		select(true, recombinationCount * 2, highscore);
-		std::random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());
+		random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());
 	}
 
 
@@ -79,7 +79,7 @@ namespace LightBulb
 	void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		randomFunction->setRandomGenerator(*AbstractMutationSelector::randomGenerator);
+		randomFunction->setRandomGenerator(randomGenerator_);
 	}
 
 	AbstractCloneable* StochasticUniversalSamplingSelector::clone() const

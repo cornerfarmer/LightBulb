@@ -22,7 +22,7 @@ namespace LightBulb
 	void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
 	{
 		archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
-		archive(cereal::make_nvp("state", (int)neuralNetwork.state));
+		archive(cereal::make_nvp("state", static_cast<int>(neuralNetwork.state)));
 		archive(cereal::make_nvp("name", neuralNetwork.name));
 	}
 }
@@ -38,14 +38,14 @@ namespace cereal
 		* \param construct The NeuralNetwork construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::NeuralNetwork>& construct)
+		static void load_and_construct(Archive& ar, construct<LightBulb::NeuralNetwork>& construct)
 		{
 			using namespace LightBulb;
 			std::unique_ptr<AbstractNetworkTopology> networkTopology;
-			ar(cereal::make_nvp("networkTopology", networkTopology));
+			ar(make_nvp("networkTopology", networkTopology));
 			construct(networkTopology.release());
-			ar(cereal::make_nvp("state", construct->state));
-			ar(cereal::make_nvp("name", construct->name));
+			ar(make_nvp("state", construct->state));
+			ar(make_nvp("name", construct->name));
 		}
 	};
 }

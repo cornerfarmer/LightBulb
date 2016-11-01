@@ -11,7 +11,7 @@ class MockMutationCommand : public LightBulb::AbstractMutationCommand
 public:
 
 	MockMutationCommand()
-		: LightBulb::AbstractMutationCommand(nullptr, nullptr)
+		: AbstractMutationCommand(nullptr, nullptr)
 	{
 	}
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));

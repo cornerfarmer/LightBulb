@@ -28,7 +28,7 @@ namespace LightBulb
 
 		static result_type(max)()
 		{	// return maximum possible generated value
-			return ((result_type)-1);
+			return static_cast<result_type>(-1);
 		}
 
 		result_type operator()()
@@ -48,7 +48,7 @@ namespace LightBulb
 
 		double next()
 		{
-			return (double)(*this)() / max();
+			return static_cast<double>((*this)()) / max();
 		}
 	};
 }

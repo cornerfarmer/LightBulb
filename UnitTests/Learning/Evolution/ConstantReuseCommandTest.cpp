@@ -78,7 +78,7 @@ TEST_F(ConstantReuseCommandTest, executeWithMultipleUsedObject)
 	counter[selectedObjects[0]] = 2;
 	MockEvolutionObject clonedObject;
 
-	EXPECT_CALL(*(MockEvolutionObject*)selectedObjects[0], clone(true)).Times(1).WillOnce(testing::Return(&clonedObject));
+	EXPECT_CALL(*static_cast<MockEvolutionObject*>(selectedObjects[0]), clone(true)).Times(1).WillOnce(testing::Return(&clonedObject));
 
 	constantReuseCommand->execute(newObjectVector, counter, notUsedObjects);
 

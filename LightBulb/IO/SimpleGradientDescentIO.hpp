@@ -42,8 +42,8 @@ namespace cereal
 		static void construct(Archive& ar, LightBulb::SimpleGradientDescent& simpleGradientDescent)
 		{
 			using namespace LightBulb;
-			ar(cereal::base_class<AbstractGradientDescentAlgorithm>(&simpleGradientDescent));
-			ar(cereal::make_nvp("previousDeltaWeights", simpleGradientDescent.previousDeltaWeights));
+			ar(base_class<AbstractGradientDescentAlgorithm>(&simpleGradientDescent));
+			ar(make_nvp("previousDeltaWeights", simpleGradientDescent.previousDeltaWeights));
 		}
 	};
 }

@@ -47,13 +47,13 @@ AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 
 AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 {
-	FeedForwardNetworkTopologyOptions* networkTopologyOptions = new FeedForwardNetworkTopologyOptions();
-	networkTopologyOptions->descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	networkTopologyOptions->neuronsPerLayerCount = std::vector<unsigned int>(3);
-	networkTopologyOptions->neuronsPerLayerCount[0] = 8;
-	networkTopologyOptions->neuronsPerLayerCount[1] = 3;
-	networkTopologyOptions->neuronsPerLayerCount[2] = 8;
-	networkTopologyOptions->useBiasNeuron = true;
+	FeedForwardNetworkTopologyOptions networkTopologyOptions;
+	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions.neuronsPerLayerCount[0] = 8;
+	networkTopologyOptions.neuronsPerLayerCount[1] = 3;
+	networkTopologyOptions.neuronsPerLayerCount[2] = 8;
+	networkTopologyOptions.useBiasNeuron = true;
 
 	Teacher* teacher = new Teacher();
 	for (int i = 0; i<8; i += 1)
@@ -70,7 +70,7 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	}
 
 
-	return new TeachingEvolutionWorld(teacher, *networkTopologyOptions);
+	return new TeachingEvolutionWorld(teacher, networkTopologyOptions);
 }
 
 std::string TeachedEvolutionExample::getDefaultName() const

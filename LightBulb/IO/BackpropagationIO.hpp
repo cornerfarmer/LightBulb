@@ -39,8 +39,8 @@ namespace cereal
 		template <class Archive>
 		static void construct(Archive& ar, LightBulb::Backpropagation& backpropagation)
 		{
-			ar(cereal::base_class<LightBulb::AbstractGradientCalculation>(&backpropagation));
-			ar(cereal::make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
+			ar(base_class<LightBulb::AbstractGradientCalculation>(&backpropagation));
+			ar(make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
 		}
 	};
 }

@@ -20,7 +20,7 @@ private:
 protected:
 	DECLARE_EVENT_TABLE();
 public:
-	MountainCarWindow(MountainCarController& controller_, LightBulb::AbstractWindow& parent);
+	MountainCarWindow(MountainCarController& controller_, AbstractWindow& parent);
 	void paintEvent(wxPaintEvent& evt);
 	void resize(wxSizeEvent& evt);
 	void paintNow();

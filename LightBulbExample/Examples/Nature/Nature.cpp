@@ -117,7 +117,7 @@ void Nature::resetWorld()
 				tiles[x][y].reset(new RockTile());
 			else
 			{
-				if (abs(sin((double)x / width * 10) * height / 3 + height / 2 - y) < height / 10)
+				if (abs(sin(static_cast<double>(x) / width * 10) * height / 3 + height / 2 - y) < height / 10)
 					tiles[x][y].reset(new RockTile());
 				else
 					tiles[x][y].reset(new EarthTile());

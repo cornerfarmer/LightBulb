@@ -60,7 +60,7 @@ namespace LightBulb
 	};
 
 	// A learingRule for improving NNs with the help of algorithms oriented by the evolution
-	class EvolutionLearningRule : public AbstractEvolutionLearningRule, public LightBulb::Observable<EvolutionLearningEvents, EvolutionLearningRule>
+	class EvolutionLearningRule : public AbstractEvolutionLearningRule, public Observable<EvolutionLearningEvents, EvolutionLearningRule>
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, EvolutionLearningRule& learningRule);

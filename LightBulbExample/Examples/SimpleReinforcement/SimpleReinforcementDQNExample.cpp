@@ -91,7 +91,7 @@ AbstractTrainingPlan* SimpleReinforcementDQNExample::createNewFromSameType() con
 
 std::string SimpleReinforcementDQNExample::getLearningRuleName() const
 {
-	return SimpleReinforcementDQNExample::getName();
+	return getName();
 }
 
 

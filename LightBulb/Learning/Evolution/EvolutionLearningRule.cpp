@@ -41,14 +41,14 @@ namespace LightBulb
 	EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions& options_)
 		: AbstractEvolutionLearningRule(new EvolutionLearningRuleOptions(options_))
 	{
-		setHelperToUsedObjects();
+		EvolutionLearningRule::setHelperToUsedObjects();
 		exitConditionReached = false;
 	}
 
 	EvolutionLearningRule::EvolutionLearningRule(EvolutionLearningRuleOptions* options_)
 		: AbstractEvolutionLearningRule(options_)
 	{
-		setHelperToUsedObjects();
+		EvolutionLearningRule::setHelperToUsedObjects();
 		exitConditionReached = false;
 	}
 
@@ -234,7 +234,7 @@ namespace LightBulb
 			{
 				totalNeuronCount += highscore[i].second->getNeuralNetwork().getNetworkTopology().getNeuronCount();
 			}
-			learningState->addData(getOptions().dataSetsPrefix + DATA_AVG_NEURON_COUNT, (double)totalNeuronCount / highscore.size());
+			learningState->addData(getOptions().dataSetsPrefix + DATA_AVG_NEURON_COUNT, static_cast<double>(totalNeuronCount) / highscore.size());
 		}
 
 		if (!options->disabledDataSets[getOptions().dataSetsPrefix + DATA_BEST_NEURON_COUNT])

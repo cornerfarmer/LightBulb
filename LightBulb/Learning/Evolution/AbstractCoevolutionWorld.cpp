@@ -22,7 +22,7 @@ namespace LightBulb
 		CombiningStrategyResults& results = combiningStrategy->execute(*this);
 
 		if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results.size() > 0)
-			learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, (double)combiningStrategy->getFirstPlayerWins() / combiningStrategy->getTotalMatches(*this));
+			learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, static_cast<double>(combiningStrategy->getFirstPlayerWins()) / combiningStrategy->getTotalMatches(*this));
 
 		if (hallOfFameToChallengeAlgorithm)
 			hallOfFameToChallengeAlgorithm->execute(*this, results);

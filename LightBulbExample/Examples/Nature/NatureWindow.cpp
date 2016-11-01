@@ -18,7 +18,7 @@ enum
 };
 
 NatureWindow::NatureWindow(NatureController& controller_, AbstractWindow& parent)
-	:AbstractSubAppWindow(controller_, NatureWindow::getLabel(), parent)
+	:AbstractSubAppWindow(controller_, getLabel(), parent)
 {
 	panel = nullptr;
 	Bind(NATURE_EVT_FIELD_CHANGED, &NatureWindow::refreshField, this);

@@ -37,11 +37,11 @@ namespace cereal
 		* \param construct The SameNeuronDescriptionFactory construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::SameNeuronDescriptionFactory>& construct)
+		static void load_and_construct(Archive & ar, construct<LightBulb::SameNeuronDescriptionFactory>& construct)
 		{
 			using namespace LightBulb;
 			std::unique_ptr<NeuronDescription> neuronDescription;
-			ar(cereal::make_nvp("neuronDescription", neuronDescription));
+			ar(make_nvp("neuronDescription", neuronDescription));
 			construct(neuronDescription.release());
 		}
 	};

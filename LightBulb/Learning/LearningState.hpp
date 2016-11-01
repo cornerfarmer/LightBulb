@@ -18,7 +18,7 @@ namespace LightBulb
 	/**
 	 * \brief All information about the current learning process
 	 */
-	struct LearningState : public LightBulb::Observable<LearningStateEvents, LearningState>
+	struct LearningState : public Observable<LearningStateEvents, LearningState>
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, LearningState& learningState);

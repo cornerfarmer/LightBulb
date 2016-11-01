@@ -44,10 +44,10 @@ namespace cereal
 		static void construct(Archive& ar, LightBulb::RMSPropLearningRate& rmsPropLearningRate)
 		{
 			using namespace LightBulb;
-			ar(cereal::base_class<AbstractGradientDescentAlgorithm>(&rmsPropLearningRate));
-			ar(cereal::make_nvp("prevDeltaWeights", rmsPropLearningRate.prevDeltaWeights));
-			ar(cereal::make_nvp("prevGradient", rmsPropLearningRate.prevGradient));
-			ar(cereal::make_nvp("prevSquaredGradient", rmsPropLearningRate.prevSquaredGradient));
+			ar(base_class<AbstractGradientDescentAlgorithm>(&rmsPropLearningRate));
+			ar(make_nvp("prevDeltaWeights", rmsPropLearningRate.prevDeltaWeights));
+			ar(make_nvp("prevGradient", rmsPropLearningRate.prevGradient));
+			ar(make_nvp("prevSquaredGradient", rmsPropLearningRate.prevSquaredGradient));
 		}
 	};
 }

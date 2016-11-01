@@ -32,7 +32,7 @@ void PongGame::movePaddle(int dir)
 			state.paddle1Pos += properties.paddleSpeed;
 		else if(dir == -1)
 			state.paddle1Pos -= properties.paddleSpeed;
-		state.paddle1Pos = std::max(0.0, std::min((double)(properties.height - properties.paddleHeight), state.paddle1Pos));
+		state.paddle1Pos = std::max(0.0, std::min(static_cast<double>(properties.height - properties.paddleHeight), state.paddle1Pos));
 	}
 	else
 	{
@@ -40,7 +40,7 @@ void PongGame::movePaddle(int dir)
 			state.paddle2Pos += properties.paddleSpeed;
 		else if (dir == -1)
 			state.paddle2Pos -= properties.paddleSpeed;
-		state.paddle2Pos = std::max(0.0, std::min((double)(properties.height - properties.paddleHeight), state.paddle2Pos));
+		state.paddle2Pos = std::max(0.0, std::min(static_cast<double>(properties.height - properties.paddleHeight), state.paddle2Pos));
 	}
 }
 

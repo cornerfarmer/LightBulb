@@ -8,7 +8,7 @@ namespace LightBulb
 {
 	void RandomHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
 	{
-		std::random_shuffle(members.begin(), members.end());
+		random_shuffle(members.begin(), members.end());
 
 		for (auto object = objects.begin(); object != objects.end(); object++)
 		{

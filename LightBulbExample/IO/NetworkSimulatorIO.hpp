@@ -34,8 +34,8 @@ namespace cereal
 		template <class Archive>
 		static void construct(Archive& ar, NetworkSimulator& world)
 		{
-			ar(cereal::base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
-			ar(cereal::make_nvp("consumers", world.consumers));
+			ar(base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
+			ar(make_nvp("consumers", world.consumers));
 		}
 	};
 }

@@ -107,7 +107,7 @@ namespace LightBulb
 	void LoggerWindow::reloadLog(wxThreadEvent& event)
 	{
 		clearLog();
-		lastLogMessageIndex = std::max((int)(getController().getMessages().size() - 50), -1);
+		lastLogMessageIndex = std::max(static_cast<int>(getController().getMessages().size() - 50), -1);
 		addNewLogMessages(event);
 	}
 

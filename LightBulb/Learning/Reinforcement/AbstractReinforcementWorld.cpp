@@ -30,7 +30,7 @@ namespace LightBulb
 		}
 		else
 		{
-			lastBooleanOutput = std::vector<bool>(lastBooleanOutput.size(), 0);
+			lastBooleanOutput = std::vector<bool>(lastBooleanOutput.size(), false);
 			if (randomGenerator->randDouble() < epsilon)
 			{
 				lastBooleanOutput[randomGenerator->randInt(0, lastBooleanOutput.size() - 1)] = true;

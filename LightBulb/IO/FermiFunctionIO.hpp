@@ -36,10 +36,10 @@ namespace cereal
 		* \param construct The FermiFunction construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::FermiFunction>& construct)
+		static void load_and_construct(Archive & ar, construct<LightBulb::FermiFunction>& construct)
 		{
 			double temperatureParameter;
-			ar(cereal::make_nvp("temperatureParameter", temperatureParameter));
+			ar(make_nvp("temperatureParameter", temperatureParameter));
 			construct(temperatureParameter);
 		}
 	};

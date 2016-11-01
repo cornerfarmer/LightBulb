@@ -111,5 +111,5 @@ AbstractTrainingPlan* PongDQNExample::createNewFromSameType() const
 
 std::string PongDQNExample::getLearningRuleName() const
 {
-	return PongDQNExample::getName();
+	return getName();
 }

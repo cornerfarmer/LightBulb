@@ -62,7 +62,7 @@ namespace LightBulb
 	void RemainderStochasticSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
 	{
 		select(true, recombinationCount * 2, highscore);
-		std::random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());
+		random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());
 	}
 
 	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
@@ -107,7 +107,7 @@ namespace LightBulb
 	void RemainderStochasticSamplingSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		randomFunction->setRandomGenerator(*AbstractMutationSelector::randomGenerator);
+		randomFunction->setRandomGenerator(randomGenerator_);
 	}
 
 	AbstractCloneable* RemainderStochasticSamplingSelector::clone() const

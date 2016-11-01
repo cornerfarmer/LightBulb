@@ -125,7 +125,7 @@ int Pong::rateKI(AbstractEvolutionObject& rateKI)
 	}
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(matchCount), LL_MEDIUM);
 	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING])
-		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING, (double)wins / matchCount);
+		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING, static_cast<double>(wins) / matchCount);
 
 	return wins;
 }

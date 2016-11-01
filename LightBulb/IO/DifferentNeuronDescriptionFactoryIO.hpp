@@ -38,13 +38,13 @@ namespace cereal
 		* \param construct The DifferentNeuronDescriptionFactory construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::DifferentNeuronDescriptionFactory>& construct)
+		static void load_and_construct(Archive & ar, construct<LightBulb::DifferentNeuronDescriptionFactory>& construct)
 		{
 			using namespace LightBulb;
 			std::unique_ptr<NeuronDescription> innerNeuronDescription;
-			ar(cereal::make_nvp("innerNeuronDescription", innerNeuronDescription));
+			ar(make_nvp("innerNeuronDescription", innerNeuronDescription));
 			std::unique_ptr<NeuronDescription> outputNeuronDescription;
-			ar(cereal::make_nvp("outputNeuronDescription", outputNeuronDescription));
+			ar(make_nvp("outputNeuronDescription", outputNeuronDescription));
 
 			construct(innerNeuronDescription.release(), outputNeuronDescription.release());
 		}

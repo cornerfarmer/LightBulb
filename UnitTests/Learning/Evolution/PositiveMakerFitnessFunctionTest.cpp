@@ -25,9 +25,9 @@ TEST_F(PositiveMakerFitnessFunctionTest, execute)
 	positiveMakerFitnessFunction = new PositiveMakerFitnessFunction(10);
 
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(4, (AbstractEvolutionObject*)nullptr));
-	highscore.push_back(std::make_pair(-3, (AbstractEvolutionObject*)nullptr));
-	highscore.push_back(std::make_pair(-13, (AbstractEvolutionObject*)nullptr));
+	highscore.push_back(std::make_pair(4, static_cast<AbstractEvolutionObject*>(nullptr)));
+	highscore.push_back(std::make_pair(-3, static_cast<AbstractEvolutionObject*>(nullptr)));
+	highscore.push_back(std::make_pair(-13, static_cast<AbstractEvolutionObject*>(nullptr)));
 
 	positiveMakerFitnessFunction->execute(highscore);
 	EXPECT_EQ(14, highscore[0].first);

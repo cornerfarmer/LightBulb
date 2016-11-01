@@ -18,7 +18,7 @@ enum
 };
 
 PongGameWindow::PongGameWindow(PongGameController& controller_, AbstractWindow& parent)
-	:AbstractSubAppWindow(controller_, PongGameWindow::getLabel(), parent)
+	:AbstractSubAppWindow(controller_, getLabel(), parent)
 {
 	panel = nullptr;
 	Bind(PONG_EVT_FIELD_CHANGED, &PongGameWindow::refreshField, this);

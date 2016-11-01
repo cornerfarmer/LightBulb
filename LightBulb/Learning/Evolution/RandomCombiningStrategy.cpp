@@ -10,7 +10,7 @@ namespace LightBulb
 	void RandomCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)
 	{
 		std::vector<AbstractEvolutionObject*> randomOpponents = secondObjects;
-		std::random_shuffle(randomOpponents.begin(), randomOpponents.end());
+		random_shuffle(randomOpponents.begin(), randomOpponents.end());
 
 		for (auto firstPlayer = firstObjects.begin(); firstPlayer != firstObjects.end(); firstPlayer++)
 		{

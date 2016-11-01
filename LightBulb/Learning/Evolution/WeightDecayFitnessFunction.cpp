@@ -26,7 +26,7 @@ namespace LightBulb
 
 			entry->first -= fac * weightDecayError;
 		}
-		std::sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+		sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 	}
 
 	AbstractFitnessFunction* WeightDecayFitnessFunction::clone() const

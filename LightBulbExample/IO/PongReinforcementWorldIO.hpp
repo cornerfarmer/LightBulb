@@ -27,11 +27,11 @@ namespace cereal
 		static void construct(Archive& ar, PongReinforcementWorld& world)
 		{
 			using namespace LightBulb;
-			ar(cereal::base_class<AbstractReinforcementWorld>(&world));
-			ar(cereal::make_nvp("time", world.time));
+			ar(base_class<AbstractReinforcementWorld>(&world));
+			ar(make_nvp("time", world.time));
 
 			IOStorage<PongGame>::push(&world.game);
-			ar(cereal::make_nvp("game", world.game));
+			ar(make_nvp("game", world.game));
 			IOStorage<PongGame>::clear();
 		}
 	};

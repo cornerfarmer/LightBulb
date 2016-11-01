@@ -94,7 +94,7 @@ namespace LightBulb
 	{
 		teacher.clearLessons();
 
-		for (int i = 0; i < std::min((int)transitions.size(), getOptions().minibatchSize); i++)
+		for (int i = 0; i < std::min(static_cast<int>(transitions.size()), getOptions().minibatchSize); i++)
 		{
 			int r = randomGenerator->randInt(0, transitions.size() - 1);
 
@@ -104,7 +104,7 @@ namespace LightBulb
 			{
 				std::vector<double> output(steadyNetwork->getNetworkTopology().getOutputSize());
 				steadyNetwork->calculate(transitions[r].nextState, output, TopologicalOrder());
-				double q = *std::max_element(output.begin(), output.end());
+				double q = *max_element(output.begin(), output.end());
 				qAvgSum += q;
 				y += getOptions().discountFactor * q;
 			}
@@ -159,7 +159,7 @@ namespace LightBulb
 			{
 				std::vector<double> output(getOptions().world->getNeuralNetwork().getNetworkTopology().getOutputSize());
 				getOptions().world->getNeuralNetwork().getNetworkTopology().getOutput(output);
-				totalQ += *std::max_element(output.begin(), output.end());
+				totalQ += *max_element(output.begin(), output.end());
 				totalQValues++;
 				nextIsStartingState = false;
 			}

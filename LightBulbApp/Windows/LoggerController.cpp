@@ -43,7 +43,7 @@ namespace LightBulb
 
 	void LoggerController::setLogLevel(int level)
 	{
-		selectedTrainingPlan->getLogger().setLogLevel((LogLevel)level);
+		selectedTrainingPlan->getLogger().setLogLevel(static_cast<LogLevel>(level));
 		reloadLog();
 	}
 

@@ -42,7 +42,7 @@ namespace LightBulb
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (objectCount == 0)
-			objectCount = (int)(highscore.size() * recombinationPercentage);
+			objectCount = highscore.size() * recombinationPercentage;
 		recombinationSelector->executeRecombinationSelection(objectCount, highscore, counter);
 	}
 

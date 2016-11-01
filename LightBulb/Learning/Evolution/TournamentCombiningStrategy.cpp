@@ -43,7 +43,7 @@ namespace LightBulb
 	{
 		nextLevel->clear();
 		if (doShuffleBeforeTournament)
-			std::random_shuffle(currentLevel->begin(), currentLevel->end());
+			random_shuffle(currentLevel->begin(), currentLevel->end());
 
 		for (int i = 0; i < currentLevel->size(); i += 2) {
 			if (i < currentLevel->size() - 1) {

@@ -31,7 +31,7 @@ TEST_F(StochasticUniversalSamplingSelectorTest, executeMutationSelection)
 
 	std::vector<double> probabilities;
 	std::vector<int> selected({0, 0, 1});
-	EXPECT_CALL(*selectionFunction, execute(testing::_, 3)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
+	EXPECT_CALL(*selectionFunction, execute(testing::_, 3)).WillRepeatedly(DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
 	stochasticUniversalSamplingSelector->executeMutationSelection(3, highscore, counter);
@@ -60,7 +60,7 @@ TEST_F(StochasticUniversalSamplingSelectorTest, executeRecombinationSelection)
 
 	std::vector<double> probabilities;
 	std::vector<int> selected({ 0, 0, 0, 0, 1, 1 });
-	EXPECT_CALL(*selectionFunction, execute(testing::_, 6)).WillRepeatedly(testing::DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
+	EXPECT_CALL(*selectionFunction, execute(testing::_, 6)).WillRepeatedly(DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
 
 	std::map<AbstractEvolutionObject*, int> counter;
 	stochasticUniversalSamplingSelector->executeRecombinationSelection(3, highscore, counter);

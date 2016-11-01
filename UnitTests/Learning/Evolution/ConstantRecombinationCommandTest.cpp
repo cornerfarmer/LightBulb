@@ -121,7 +121,7 @@ TEST_F(ConstantRecombinationCommandTest, executeWithTwoMultipleUsedObjects)
 	counter[selectedObjects[1]] = 2;
 	MockEvolutionObject clonedObject;
 
-	EXPECT_CALL(*(MockEvolutionObject*)selectedObjects[1], clone(true)).Times(1).WillOnce(testing::Return(&clonedObject));
+	EXPECT_CALL(*static_cast<MockEvolutionObject*>(selectedObjects[1]), clone(true)).Times(1).WillOnce(testing::Return(&clonedObject));
 	EXPECT_CALL(*recombinationAlgorithm, execute(testing::Ref(clonedObject), testing::Ref(*selectedObjects[0]))).Times(1);
 
 	constantRecombinationCommand->execute(newObjectVector, counter, notUsedObjects);

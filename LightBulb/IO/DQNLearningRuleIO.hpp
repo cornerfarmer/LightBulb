@@ -65,16 +65,16 @@ namespace cereal
 		static void construct(Archive& ar, LightBulb::DQNLearningRule& learningRule)
 		{
 			using namespace LightBulb;
-			ar(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
-			ar(cereal::make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
-			ar(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
-			ar(cereal::make_nvp("transitions", learningRule.transitions));
-			ar(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
-			ar(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
-			ar(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
+			ar(base_class<AbstractReinforcementLearningRule>(&learningRule));
+			ar(make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
+			ar(make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
+			ar(make_nvp("transitions", learningRule.transitions));
+			ar(make_nvp("currentTotalError", learningRule.currentTotalError));
+			ar(make_nvp("currentTotalReward", learningRule.currentTotalReward));
+			ar(make_nvp("qAvgSum", learningRule.qAvgSum));
 
 			IOStorage<AbstractLearningRule>::push(learningRule.gradientDescent.release());
-			ar(cereal::make_nvp("gradientDescent", learningRule.gradientDescent));
+			ar(make_nvp("gradientDescent", learningRule.gradientDescent));
 			learningRule.gradientDescent.reset(static_cast<GradientDescentLearningRule*>(IOStorage<AbstractLearningRule>::pop()));
 		}
 	};

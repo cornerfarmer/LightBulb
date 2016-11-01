@@ -25,7 +25,7 @@ public:
 	TCProblemBackpropagationExample();
 	std::string getDefaultName() const override;
 	std::string getDescription() const override;
-	LightBulb::AbstractTrainingPlan* createNewFromSameType() const override;
+	AbstractTrainingPlan* createNewFromSameType() const override;
 	int getRequiredInputSize() const override;
 	int getRequiredOutputSize() const override;
 	std::string getLearningRuleName() const override;

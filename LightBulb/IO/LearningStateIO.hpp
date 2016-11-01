@@ -41,16 +41,16 @@ namespace cereal
 		* \param construct The LearningState construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive & ar, cereal::construct<LightBulb::LearningState>& construct)
+		static void load_and_construct(Archive & ar, construct<LightBulb::LearningState>& construct)
 		{
 			using namespace LightBulb;
 			int dataSaveInterval;
-			ar(cereal::make_nvp("dataSaveInterval", dataSaveInterval));
+			ar(make_nvp("dataSaveInterval", dataSaveInterval));
 			construct(*IOStorage<std::map<std::string, bool>>::pop(), dataSaveInterval);
 
-			ar(cereal::make_nvp("dataSets", construct->dataSets));
-			ar(cereal::make_nvp("iterationsNeeded", construct->iterations));
-			ar(cereal::make_nvp("tries", construct->tries));
+			ar(make_nvp("dataSets", construct->dataSets));
+			ar(make_nvp("iterationsNeeded", construct->iterations));
+			ar(make_nvp("tries", construct->tries));
 		}
 	};
 }

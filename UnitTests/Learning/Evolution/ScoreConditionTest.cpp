@@ -32,8 +32,8 @@ TEST_F(ScoreConditionTest, evaluateWithEmptyHighscore)
 TEST_F(ScoreConditionTest, evaluatePositive)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(100, (AbstractEvolutionObject*)nullptr));
-	highscore.push_back(std::make_pair(42, (AbstractEvolutionObject*)nullptr));
+	highscore.push_back(std::make_pair(100, static_cast<AbstractEvolutionObject*>(nullptr)));
+	highscore.push_back(std::make_pair(42, static_cast<AbstractEvolutionObject*>(nullptr)));
 	EXPECT_EQ(true, scoreCondition->evaluate(highscore, *evolutionLearningRule));
 }
 
@@ -41,6 +41,6 @@ TEST_F(ScoreConditionTest, evaluatePositive)
 TEST_F(ScoreConditionTest, evaluateNegative)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(42, (AbstractEvolutionObject*)nullptr));
+	highscore.push_back(std::make_pair(42, static_cast<AbstractEvolutionObject*>(nullptr)));
 	EXPECT_EQ(false, scoreCondition->evaluate(highscore, *evolutionLearningRule));
 }

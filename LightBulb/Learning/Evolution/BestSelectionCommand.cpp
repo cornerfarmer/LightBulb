@@ -29,7 +29,7 @@ namespace LightBulb
 		int objectCount = this->objectCount;
 		// Calculate a temporary static object count if the percentage value is used
 		if (selectionPercentage)
-			objectCount = (int)(highscore.size() * selectionPercentage);
+			objectCount = highscore.size() * selectionPercentage;
 
 		if (highscore.size() > objectCount)
 		{
@@ -57,7 +57,7 @@ namespace LightBulb
 		{
 			totalFitness += entry->first;
 		}
-		log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string((double)totalFitness / highscore.size()), LL_LOW);
+		log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string(static_cast<double>(totalFitness) / highscore.size()), LL_LOW);
 
 	}
 

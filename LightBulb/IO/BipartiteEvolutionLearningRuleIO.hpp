@@ -46,22 +46,22 @@ namespace cereal
 		* \param construct The BipartiteEvolutionLearningRule construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive& ar, cereal::construct<LightBulb::BipartiteEvolutionLearningRule>& construct)
+		static void load_and_construct(Archive& ar, construct<LightBulb::BipartiteEvolutionLearningRule>& construct)
 		{
 			using namespace LightBulb;
-			LightBulb::BipartiteEvolutionLearningRule* learningRule = static_cast<BipartiteEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
-			ar(cereal::base_class<AbstractEvolutionLearningRule>(learningRule));
+			BipartiteEvolutionLearningRule* learningRule = static_cast<BipartiteEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			ar(base_class<AbstractEvolutionLearningRule>(learningRule));
 
-			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions().learningRule1);
-			std::unique_ptr<LightBulb::AbstractLearningRule> learningRuleDummy;
-			ar(cereal::make_nvp("learningRule1", learningRuleDummy));
-			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			IOStorage<AbstractLearningRule>::push(learningRule->getOptions().learningRule1);
+			std::unique_ptr<AbstractLearningRule> learningRuleDummy;
+			ar(make_nvp("learningRule1", learningRuleDummy));
+			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
-			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule->getOptions().learningRule2);
-			ar(cereal::make_nvp("learningRule2", learningRuleDummy));
-			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<LightBulb::AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			IOStorage<AbstractLearningRule>::push(learningRule->getOptions().learningRule2);
+			ar(make_nvp("learningRule2", learningRuleDummy));
+			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
-			LightBulb::IOStorage<LightBulb::AbstractLearningRule>::push(learningRule);
+			IOStorage<AbstractLearningRule>::push(learningRule);
 		}
 	};
 }

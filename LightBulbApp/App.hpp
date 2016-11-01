@@ -3,7 +3,14 @@
 #ifndef _APP_H_
 #define _APP_H_
 
+// Includes
+#include "Repositories/NeuralNetworkRepository.hpp"
+#include "Repositories/TrainingPlanRepository.hpp"
+#include "Windows/TrainingController.hpp"
+
+// Library includes
 #include <wx/wxprec.h>
+#include <memory>
 
 namespace LightBulb
 {
@@ -19,6 +26,9 @@ namespace LightBulb
 		 * \brief Contains all available training plans.
 		 */
 		std::vector<AbstractTrainingPlan*> trainingPlans;
+		std::unique_ptr<NeuralNetworkRepository> neuralNetworkRepository;
+		std::unique_ptr<TrainingPlanRepository> trainingPlanRepository;		
+		std::unique_ptr<TrainingController> trainingController;		
 	public:
 		/**
 		* \brief Adds a new training plan which should be available in the app.

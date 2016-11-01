@@ -3,8 +3,8 @@
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "Mocks/MockFeedForwardNetworkTopology.hpp"
 
-using ::testing::Return;
-using ::testing::Expectation;
+using testing::Return;
+using testing::Expectation;
 using namespace LightBulb;
 
 TEST(TopologicalOrderFunction, executeActivation)

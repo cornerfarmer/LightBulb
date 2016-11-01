@@ -71,7 +71,7 @@ namespace LightBulb
 		options.reset(new FeedForwardNetworkTopologyOptions(options_));
 
 		// Check if all given options are correct
-		if (getLayerCount() < 2)
+		if (FeedForwardNetworkTopology::getLayerCount() < 2)
 			throw std::invalid_argument("A layered network must always contain at least two layers (one input and one output layer)");
 		if (!options->descriptionFactory)
 			throw std::invalid_argument("The given descriptionFactory is not valid");
@@ -467,15 +467,17 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::copyWeightsFrom(const AbstractNetworkTopology& otherNetwork)
 	{
-		if (!dynamic_cast<const FeedForwardNetworkTopology*>(&otherNetwork))
+		if (const FeedForwardNetworkTopology* feedForwardNetwork = dynamic_cast<const FeedForwardNetworkTopology*>(&otherNetwork))
+		{
+			weights = feedForwardNetwork->weights;
+			activations = feedForwardNetwork->activations;
+			netInputs = feedForwardNetwork->netInputs;
+			options->neuronsPerLayerCount = feedForwardNetwork->options->neuronsPerLayerCount;
+			layerOffsets = feedForwardNetwork->layerOffsets;
+			rebuildActivationsPerLayer();
+		}
+		else
 			throw std::logic_error("You can not mix topology types when calling copyWeightsFrom on a FeedForwardNetworkTopology");
-
-		weights = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->weights;
-		activations = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->activations;
-		netInputs = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->netInputs;
-		options->neuronsPerLayerCount = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->options->neuronsPerLayerCount;
-		layerOffsets = static_cast<const FeedForwardNetworkTopology*>(&otherNetwork)->layerOffsets;
-		rebuildActivationsPerLayer();
 	}
 
 

@@ -247,7 +247,7 @@ namespace LightBulb
 						int y1 = getYPos(fn - usesBiasNeuron, neuronCount);
 						int x2 = getXPos(l + 1);
 						int y2 = getYPos(tn, neuronCountNextLayer);
-						float angle = atan((float)(y2 - y1) / (x2 - x1));
+						float angle = atan(static_cast<float>(y2 - y1) / (x2 - x1));
 
 						if ((selectedLayerIndex == l && selectedNeuronIndex == fn - usesBiasNeuron) || (selectedLayerIndex == l + 1 && selectedNeuronIndex == tn))
 							dc.SetPen(*wxGREEN_PEN);

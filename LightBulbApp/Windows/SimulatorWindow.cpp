@@ -72,7 +72,7 @@ namespace LightBulb
 
 	void SimulatorWindow::recalculateNetworkOutput()
 	{
-		IOType inputType = (IOType)inputTypeChoice->GetSelection();
+		IOType inputType = static_cast<IOType>(inputTypeChoice->GetSelection());
 		std::vector<double> input(inputControls.size());
 		for (int i = 0; i < inputControls.size(); i++)
 		{
@@ -93,7 +93,7 @@ namespace LightBulb
 			}
 		}
 
-		IOType outputType = (IOType)outputTypeChoice->GetSelection();
+		IOType outputType = static_cast<IOType>(outputTypeChoice->GetSelection());
 		std::vector<double> output = getController().calculate(neuralNetworksChoice->GetSelection(), input);
 
 		for (int i = 0; i < outputControls.size(); i++)
@@ -134,7 +134,7 @@ namespace LightBulb
 
 	void SimulatorWindow::refreshInput(AbstractNeuralNetwork& network)
 	{
-		IOType type = (IOType)inputTypeChoice->GetSelection();
+		IOType type = static_cast<IOType>(inputTypeChoice->GetSelection());
 
 		inputSizer->Clear(true);
 		inputControls.clear();
@@ -162,7 +162,7 @@ namespace LightBulb
 
 	void SimulatorWindow::refreshOutput(AbstractNeuralNetwork& network)
 	{
-		IOType type = (IOType)outputTypeChoice->GetSelection();
+		IOType type = static_cast<IOType>(outputTypeChoice->GetSelection());
 
 		outputControls.clear();
 		outputSizer->Clear(true);

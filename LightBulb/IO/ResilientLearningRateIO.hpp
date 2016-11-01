@@ -40,8 +40,8 @@ namespace cereal
 		template <class Archive>
 		static void construct(Archive& ar, LightBulb::ResilientLearningRate & resilientLearningRate)
 		{
-			ar(cereal::base_class<LightBulb::AbstractGradientDescentAlgorithm>(&resilientLearningRate));
-			ar(cereal::make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
+			ar(base_class<LightBulb::AbstractGradientDescentAlgorithm>(&resilientLearningRate));
+			ar(make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
 		}
 	};
 }

@@ -35,7 +35,7 @@ namespace cereal
 		template <class Archive>
 		static void construct(Archive& ar, PongGame& game)
 		{
-			ar(cereal::make_nvp("state", game.state));
+			ar(make_nvp("state", game.state));
 		}
 	};
 }

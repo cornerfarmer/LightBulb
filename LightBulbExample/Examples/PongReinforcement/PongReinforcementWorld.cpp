@@ -99,7 +99,7 @@ int PongReinforcementWorld::rateKI()
 	}
 
 	if (!learningState->disabledDatasets[DATASET_PONG_RATING])
-		learningState->addData(DATASET_PONG_RATING, (double)wins / matchCount);
+		learningState->addData(DATASET_PONG_RATING, static_cast<double>(wins) / matchCount);
 	game = tmp;
 	return wins;
 }

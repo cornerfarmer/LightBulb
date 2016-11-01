@@ -76,9 +76,9 @@ namespace LightBulb
 		return name;
 	}
 
-	const std::time_t& NeuralNetwork::getCreationDate() const
+	const time_t& NeuralNetwork::getCreationDate() const
 	{
-		return std::time(nullptr);
+		return time(nullptr);
 	}
 
 	const NeuralNetworkState& NeuralNetwork::getState() const

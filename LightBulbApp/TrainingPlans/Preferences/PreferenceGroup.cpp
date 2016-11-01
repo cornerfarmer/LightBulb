@@ -23,7 +23,7 @@ namespace LightBulb
 		}
 	}
 
-	PreferenceGroup::PreferenceGroup(PreferenceGroup&& other)
+	PreferenceGroup::PreferenceGroup(PreferenceGroup&& other) noexcept
 		:PreferenceGroup()
 	{
 		swap(*this, other);
@@ -83,7 +83,7 @@ namespace LightBulb
 		for (auto preference = preferences.begin(); preference != preferences.end(); preference++)
 		{
 			if (dynamic_cast<PreferenceGroup*>(preference->get()) && (*preference)->getName() == preferenceGroupName)
-				return dynamic_cast<PreferenceGroup&>(*preference->get());
+				return static_cast<PreferenceGroup&>(*preference->get());
 		}
 		throw std::invalid_argument("There is no preference group with name \"" + preferenceGroupName + "\"");
 	}
@@ -122,7 +122,7 @@ namespace LightBulb
 		if (choicePreference)
 			return choicePreference->getValue();
 		else
-			return false;
+			return "";
 	}
 
 	const std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferenceGroup::getPreferenceElements() const

@@ -26,7 +26,7 @@ namespace LightBulb
 
 			}
 			// Sort the list
-			std::sort(currentHighscore.begin(), currentHighscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+			sort(currentHighscore.begin(), currentHighscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
 			recalculateHighscore = false;
 		}
 		return currentHighscore;

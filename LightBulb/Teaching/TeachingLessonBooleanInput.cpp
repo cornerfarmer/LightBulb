@@ -13,7 +13,7 @@ namespace LightBulb
 	{
 		teachingInput.reset(teachingInput_);
 		teachingPattern = teachingPattern_;
-		teachingInputLinear = std::unique_ptr<NeuralNetworkIO<double>>(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
+		teachingInputLinear.reset(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
 	}
 
 	const NeuralNetworkIO<double>& TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const

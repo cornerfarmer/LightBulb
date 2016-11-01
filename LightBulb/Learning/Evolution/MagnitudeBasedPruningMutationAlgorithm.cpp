@@ -70,7 +70,7 @@ namespace LightBulb
 
 			if (neuronRanking.size() > 0) {
 
-				std::sort(neuronRanking.begin(), neuronRanking.end(), std::less<std::tuple<int, int, int>>());
+				sort(neuronRanking.begin(), neuronRanking.end(), std::less<std::tuple<int, int, int>>());
 
 				int selectedIndex = 0;
 				if (useRandomFunction)

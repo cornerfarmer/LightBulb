@@ -15,10 +15,10 @@ namespace LightBulb
 {
 	bool App::OnInit()
 	{
-		NeuralNetworkRepository* neuralNetworkRepository = new NeuralNetworkRepository();
-		TrainingPlanRepository* trainingPlanRepository = new TrainingPlanRepository();
+		neuralNetworkRepository.reset(new NeuralNetworkRepository());
+		trainingPlanRepository.reset(new TrainingPlanRepository());
 
-		TrainingController* trainingController = new TrainingController(*neuralNetworkRepository, *trainingPlanRepository, trainingPlans);
+		trainingController.reset(new TrainingController(*neuralNetworkRepository, *trainingPlanRepository, trainingPlans));
 		trainingPlans.clear();
 		LoggerFactory* loggerFactory = new LoggerFactory(*trainingPlanRepository);
 		SimulatorFactory* simulatorFactory = new SimulatorFactory(*neuralNetworkRepository);

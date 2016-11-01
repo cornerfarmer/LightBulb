@@ -18,7 +18,7 @@ enum
 };
 
 TicTacToeGameWindow::TicTacToeGameWindow(TicTacToeGameController& controller_, AbstractWindow& parent)
-	:AbstractSubAppWindow(controller_, TicTacToeGameWindow::getLabel(), parent)
+	:AbstractSubAppWindow(controller_, getLabel(), parent)
 {
 	panel = nullptr;
 	Bind(TTT_EVT_FIELD_CHANGED, &TicTacToeGameWindow::refreshField, this);

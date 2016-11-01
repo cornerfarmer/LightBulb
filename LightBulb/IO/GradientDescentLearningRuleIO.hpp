@@ -45,14 +45,14 @@ namespace cereal
 		static void construct(Archive& ar, LightBulb::GradientDescentLearningRule& learningRule)
 		{
 			using namespace LightBulb;
-			ar(cereal::base_class<AbstractSupervisedLearningRule>(&learningRule));
+			ar(base_class<AbstractSupervisedLearningRule>(&learningRule));
 
 			IOStorage<AbstractGradientDescentAlgorithm>::push(learningRule.gradientDescentAlgorithm.release());
-			ar(cereal::make_nvp("gradientDescentAlgorithm", learningRule.gradientDescentAlgorithm));
+			ar(make_nvp("gradientDescentAlgorithm", learningRule.gradientDescentAlgorithm));
 			learningRule.gradientDescentAlgorithm.reset(IOStorage<AbstractGradientDescentAlgorithm>::pop());
 
 			IOStorage<AbstractGradientCalculation>::push(learningRule.gradientCalculation.release());
-			ar(cereal::make_nvp("gradientCalculation", learningRule.gradientCalculation));
+			ar(make_nvp("gradientCalculation", learningRule.gradientCalculation));
 			learningRule.gradientCalculation.reset(IOStorage<AbstractGradientCalculation>::pop());
 		}
 	};
