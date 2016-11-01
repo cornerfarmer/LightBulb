@@ -27,6 +27,7 @@ namespace LightBulb
 	public:
 		StochasticUniversalSamplingSelector();
 		StochasticUniversalSamplingSelector(const StochasticUniversalSamplingSelector& other);
+		StochasticUniversalSamplingSelector(StochasticUniversalSamplingSelector&& other) noexcept;
 		StochasticUniversalSamplingSelector& operator=(StochasticUniversalSamplingSelector other);
 		friend void swap(StochasticUniversalSamplingSelector& lhs, StochasticUniversalSamplingSelector& rhs) noexcept;
 

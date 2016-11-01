@@ -78,6 +78,8 @@ namespace LightBulb
 		 * \brief Creates simple gradient descent.
 		 */
 		SimpleGradientDescent();
+		SimpleGradientDescent(const SimpleGradientDescent& other) = default;
+		SimpleGradientDescent(SimpleGradientDescent&& other) noexcept;
 		SimpleGradientDescent& operator=(SimpleGradientDescent other);
 		friend void swap(SimpleGradientDescent& lhs, SimpleGradientDescent& rhs) noexcept;
 

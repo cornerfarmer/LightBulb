@@ -31,6 +31,7 @@ namespace LightBulb
 		std::unique_ptr<AbstractRecombinationSelector> recombinationSelector;
 	public:
 		virtual ~AbstractRecombinationCommand() {}
+		AbstractRecombinationCommand() = default;
 		AbstractRecombinationCommand(const AbstractRecombinationCommand& other);
 		friend void swap(AbstractRecombinationCommand& lhs, AbstractRecombinationCommand& rhs) noexcept;
 

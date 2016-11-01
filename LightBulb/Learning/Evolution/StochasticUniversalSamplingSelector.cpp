@@ -50,6 +50,12 @@ namespace LightBulb
 		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
 	}
 
+	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector(StochasticUniversalSamplingSelector&& other) noexcept
+		: StochasticUniversalSamplingSelector()
+	{
+		swap(*this, other);
+	}
+
 	StochasticUniversalSamplingSelector& StochasticUniversalSamplingSelector::operator=(StochasticUniversalSamplingSelector other)
 	{
 		swap(*this, other);

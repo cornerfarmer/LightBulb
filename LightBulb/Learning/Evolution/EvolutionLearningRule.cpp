@@ -347,6 +347,12 @@ namespace LightBulb
 		}
 	}
 
+	EvolutionLearningRuleOptions::EvolutionLearningRuleOptions(EvolutionLearningRuleOptions&& other) noexcept
+		:EvolutionLearningRuleOptions()
+	{
+		swap(*this, other);
+	}
+
 	EvolutionLearningRuleOptions& EvolutionLearningRuleOptions::operator=(EvolutionLearningRuleOptions other)
 	{
 		swap(*this, other);

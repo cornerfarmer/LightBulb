@@ -78,6 +78,12 @@ namespace LightBulb
 		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
 	}
 
+	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(RemainderStochasticSamplingSelector&& other) noexcept
+		: RemainderStochasticSamplingSelector()
+	{
+		swap(*this, other);
+	}
+
 	RemainderStochasticSamplingSelector& RemainderStochasticSamplingSelector::operator=(RemainderStochasticSamplingSelector other)
 	{
 		swap(*this, other);

@@ -32,6 +32,12 @@ namespace LightBulb
 		descriptionFactory = dynamic_cast<AbstractNeuronDescriptionFactory*>(other.descriptionFactory->clone());
 	}
 
+	FeedForwardNetworkTopologyOptions::FeedForwardNetworkTopologyOptions(FeedForwardNetworkTopologyOptions&& other) noexcept
+		: FeedForwardNetworkTopologyOptions()
+	{
+		swap(*this, other);
+	}
+
 	FeedForwardNetworkTopologyOptions& FeedForwardNetworkTopologyOptions::operator=(FeedForwardNetworkTopologyOptions other)
 	{
 		swap(*this, other);

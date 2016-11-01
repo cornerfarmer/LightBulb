@@ -47,6 +47,7 @@ namespace LightBulb
 		FeedForwardNetworkTopologyOptions();
 		~FeedForwardNetworkTopologyOptions();
 		FeedForwardNetworkTopologyOptions(const FeedForwardNetworkTopologyOptions& other);
+		FeedForwardNetworkTopologyOptions(FeedForwardNetworkTopologyOptions&& other) noexcept;
 		FeedForwardNetworkTopologyOptions& operator=(FeedForwardNetworkTopologyOptions other);
 		friend void swap(FeedForwardNetworkTopologyOptions& lhs, FeedForwardNetworkTopologyOptions& rhs) noexcept;
 	};

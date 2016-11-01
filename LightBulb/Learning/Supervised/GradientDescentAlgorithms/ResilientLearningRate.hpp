@@ -93,6 +93,8 @@ namespace LightBulb
 		 * \brief Creates the resilient learning rate with default options.
 		 */
 		ResilientLearningRate();
+		ResilientLearningRate(const ResilientLearningRate& other) = default;
+		ResilientLearningRate(ResilientLearningRate&& other) noexcept;
 		ResilientLearningRate& operator=(ResilientLearningRate other);
 		friend void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept;
 		// Inherited:

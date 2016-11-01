@@ -28,7 +28,7 @@ namespace LightBulb
 	public:
 		RemainderStochasticSamplingSelector(bool withReplacement_ = true);
 		RemainderStochasticSamplingSelector(const RemainderStochasticSamplingSelector& other);
-
+		RemainderStochasticSamplingSelector(RemainderStochasticSamplingSelector&& other) noexcept;
 		RemainderStochasticSamplingSelector& operator=(RemainderStochasticSamplingSelector other);
 
 		friend void swap(RemainderStochasticSamplingSelector& lhs, RemainderStochasticSamplingSelector& rhs) noexcept;

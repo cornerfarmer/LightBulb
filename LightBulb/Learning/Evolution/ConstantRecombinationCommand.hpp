@@ -23,10 +23,13 @@ namespace LightBulb
 	public:
 		void setRecombinationPercentage(double newRecombinationPercentage);
 		void setRecombinationCount(int newObjectCount);
+		ConstantRecombinationCommand() = default;
+		ConstantRecombinationCommand(const ConstantRecombinationCommand& other) = default;
 		// Creates a command which combines a static amount of objects
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_);
 		// Creates a command which combines a percentage of objects
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_);
+		ConstantRecombinationCommand(ConstantRecombinationCommand&& other) noexcept;
 		ConstantRecombinationCommand& operator=(ConstantRecombinationCommand other);
 
 		friend void swap(ConstantRecombinationCommand& lhs, ConstantRecombinationCommand& rhs) noexcept;

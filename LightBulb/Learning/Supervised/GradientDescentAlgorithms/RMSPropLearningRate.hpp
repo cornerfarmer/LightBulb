@@ -98,8 +98,8 @@ namespace LightBulb
 		 * \brief Creates the RMSprop learning rate with default options.
 		 */
 		RMSPropLearningRate();
-
-
+		RMSPropLearningRate(RMSPropLearningRate&& other) noexcept;
+		RMSPropLearningRate(const RMSPropLearningRate& other) = default;
 		RMSPropLearningRate& operator=(RMSPropLearningRate other);
 
 		friend void swap(RMSPropLearningRate& lhs, RMSPropLearningRate& rhs) noexcept;

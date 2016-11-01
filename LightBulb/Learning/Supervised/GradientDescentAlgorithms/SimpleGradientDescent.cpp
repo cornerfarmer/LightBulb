@@ -16,6 +16,12 @@ namespace LightBulb
 	{
 	}
 
+	SimpleGradientDescent::SimpleGradientDescent(SimpleGradientDescent&& other) noexcept
+		: SimpleGradientDescent()
+	{
+		swap(*this, other);
+	}
+
 	SimpleGradientDescent& SimpleGradientDescent::operator=(SimpleGradientDescent other)
 	{
 		swap(*this, other);

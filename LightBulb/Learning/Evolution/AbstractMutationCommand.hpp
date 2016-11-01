@@ -30,6 +30,7 @@ namespace LightBulb
 		std::unique_ptr<AbstractMutationSelector> mutationSelector;
 	public:
 		virtual ~AbstractMutationCommand() {}
+		AbstractMutationCommand() = default;
 		AbstractMutationCommand(const AbstractMutationCommand& other);
 		friend void swap(AbstractMutationCommand& lhs, AbstractMutationCommand& rhs) noexcept;
 

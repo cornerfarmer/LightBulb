@@ -17,6 +17,12 @@ namespace LightBulb
 		setMutationPercentage(mutationPercentage_);
 	}
 
+	ConstantMutationCommand::ConstantMutationCommand(ConstantMutationCommand&& other) noexcept
+		: ConstantMutationCommand()
+	{
+		swap(*this, other);
+	}
+
 	ConstantMutationCommand& ConstantMutationCommand::operator=(ConstantMutationCommand other)
 	{
 		swap(*this, other);

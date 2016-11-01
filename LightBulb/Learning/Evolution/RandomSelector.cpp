@@ -31,6 +31,12 @@ namespace LightBulb
 		randomFunction.reset(dynamic_cast<AbstractRandomFunction*>(other.randomFunction->clone()));
 	}
 
+	RandomSelector::RandomSelector(RandomSelector&& other) noexcept
+		: RandomSelector()
+	{
+		swap(*this, other);
+	}
+
 	RandomSelector& RandomSelector::operator=(RandomSelector other)
 	{
 		swap(*this, other);

@@ -26,6 +26,7 @@ namespace LightBulb
 		std::unique_ptr<AbstractReuseSelector> reuseSelector;
 	public:
 		virtual ~AbstractReuseCommand() {};
+		AbstractReuseCommand() = default;
 		AbstractReuseCommand(AbstractReuseSelector* reuseSelector_);
 		AbstractReuseCommand(const AbstractReuseCommand& other);
 		friend void swap(AbstractReuseCommand& lhs, AbstractReuseCommand& rhs) noexcept;

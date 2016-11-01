@@ -26,6 +26,7 @@ namespace LightBulb
 		 */
 		std::unique_ptr<NeuronDescription> neuronDescription;
 	public:
+		SameNeuronDescriptionFactory() = default;
 		/**
 		 * \brief Creates a new SameNeuronDescriptionFactory.
 		 * \param neuronDescription_ The neuron description for all neurons.
@@ -33,9 +34,10 @@ namespace LightBulb
 		SameNeuronDescriptionFactory(NeuronDescription* neuronDescription_);
 		/**
 		 * \brief Copy constructor.
-		 * \param obj A SameNeuronDescriptionFactory which should be copied.
+		 * \param other A SameNeuronDescriptionFactory which should be copied.
 		 */
-		SameNeuronDescriptionFactory(const SameNeuronDescriptionFactory &obj);
+		SameNeuronDescriptionFactory(const SameNeuronDescriptionFactory& other);
+		SameNeuronDescriptionFactory(SameNeuronDescriptionFactory&& other) noexcept;
 		SameNeuronDescriptionFactory& operator=(SameNeuronDescriptionFactory other);
 		friend void swap(SameNeuronDescriptionFactory& lhs, SameNeuronDescriptionFactory& rhs) noexcept;
 		// Inherited:

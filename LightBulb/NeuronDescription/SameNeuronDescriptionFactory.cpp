@@ -20,6 +20,12 @@ namespace LightBulb
 		neuronDescription.reset(dynamic_cast<NeuronDescription*>(obj.neuronDescription->clone()));
 	}
 
+	SameNeuronDescriptionFactory::SameNeuronDescriptionFactory(SameNeuronDescriptionFactory&& other) noexcept
+		: SameNeuronDescriptionFactory()
+	{
+		swap(*this, other);
+	}
+
 	SameNeuronDescriptionFactory& SameNeuronDescriptionFactory::operator=(SameNeuronDescriptionFactory other)
 	{
 		swap(*this, other);

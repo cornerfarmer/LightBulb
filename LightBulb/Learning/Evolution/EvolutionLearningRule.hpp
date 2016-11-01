@@ -54,6 +54,7 @@ namespace LightBulb
 		}
 		~EvolutionLearningRuleOptions();
 		EvolutionLearningRuleOptions(const EvolutionLearningRuleOptions& other);
+		EvolutionLearningRuleOptions(EvolutionLearningRuleOptions&& other) noexcept;
 		EvolutionLearningRuleOptions& operator=(EvolutionLearningRuleOptions other);
 		friend void swap(EvolutionLearningRuleOptions& lhs, EvolutionLearningRuleOptions& rhs) noexcept;
 	};

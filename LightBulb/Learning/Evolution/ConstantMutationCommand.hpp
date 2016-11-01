@@ -24,11 +24,13 @@ namespace LightBulb
 		virtual ~ConstantMutationCommand() {};
 		void setMutationPercentage(double newMutationPercentage);
 		void setMutationCount(double newMutationCount);
+		ConstantMutationCommand() = default;
+		ConstantMutationCommand(const ConstantMutationCommand& other) = default;
 		// Creates a command which mutates a static amount of objects
 		ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int objectCount_);
 		// Creates a command which mutates a percentage of objects
 		ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_);
-
+		ConstantMutationCommand(ConstantMutationCommand&& other) noexcept;
 		ConstantMutationCommand& operator=(ConstantMutationCommand other);
 
 		friend void swap(ConstantMutationCommand& lhs, ConstantMutationCommand& rhs) noexcept;

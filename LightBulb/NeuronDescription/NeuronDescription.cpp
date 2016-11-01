@@ -15,6 +15,12 @@ namespace LightBulb
 		activationFunction.reset(dynamic_cast<AbstractActivationFunction*>(other.activationFunction->clone()));
 	}
 
+	NeuronDescription::NeuronDescription(NeuronDescription&& other) noexcept
+		: NeuronDescription()
+	{
+		swap(*this, other);
+	}
+
 	NeuronDescription& NeuronDescription::operator=(NeuronDescription other)
 	{
 		swap(*this, other);

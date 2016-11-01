@@ -41,7 +41,7 @@ namespace LightBulb
 		 * \param other Object to copy.
 		 */
 		NeuronDescription(const NeuronDescription& other);
-
+		NeuronDescription(NeuronDescription&& other) noexcept;
 		NeuronDescription& operator=(NeuronDescription other);
 
 		friend void swap(NeuronDescription& lhs, NeuronDescription& rhs) noexcept;

@@ -17,6 +17,12 @@ namespace LightBulb
 		setReusePercentage(reusePercentage_);
 	}
 
+	ConstantReuseCommand::ConstantReuseCommand(ConstantReuseCommand&& other) noexcept
+		: ConstantReuseCommand()
+	{
+		swap(*this, other);
+	}
+
 	ConstantReuseCommand& ConstantReuseCommand::operator=(ConstantReuseCommand other)
 	{
 		swap(*this, other);

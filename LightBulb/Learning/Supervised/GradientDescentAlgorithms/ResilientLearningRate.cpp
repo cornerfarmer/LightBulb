@@ -16,6 +16,12 @@ namespace LightBulb
 	{
 	}
 
+	ResilientLearningRate::ResilientLearningRate(ResilientLearningRate&& other) noexcept
+		: ResilientLearningRate()
+	{
+		swap(*this, other);
+	}
+
 	ResilientLearningRate& ResilientLearningRate::operator=(ResilientLearningRate other)
 	{
 		swap(*this, other);

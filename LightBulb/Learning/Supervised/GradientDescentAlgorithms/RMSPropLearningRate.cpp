@@ -15,6 +15,13 @@ namespace LightBulb
 	{
 	}
 
+	RMSPropLearningRate::RMSPropLearningRate(RMSPropLearningRate&& other) noexcept
+		: RMSPropLearningRate()
+	{
+		swap(*this, other);
+	}
+
+
 	RMSPropLearningRate& RMSPropLearningRate::operator=(RMSPropLearningRate other)
 	{
 		swap(*this, other);

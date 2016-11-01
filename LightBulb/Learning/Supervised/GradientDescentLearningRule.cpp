@@ -32,12 +32,17 @@ namespace LightBulb
 			gradientDescentAlgorithm = nullptr;
 	}
 
+	GradientDescentLearningRuleOptions::GradientDescentLearningRuleOptions(GradientDescentLearningRuleOptions&& other) noexcept
+		: GradientDescentLearningRuleOptions()
+	{
+		swap(*this, other);
+	}
+
 	GradientDescentLearningRuleOptions& GradientDescentLearningRuleOptions::operator=(GradientDescentLearningRuleOptions other)
 	{
 		swap(*this, other);
 		return *this;
 	}
-
 
 	void swap(GradientDescentLearningRuleOptions& lhs, GradientDescentLearningRuleOptions& rhs) noexcept
 	{

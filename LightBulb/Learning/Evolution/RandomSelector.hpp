@@ -25,9 +25,10 @@ namespace LightBulb
 		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
+		RandomSelector() = default;
 		RandomSelector(AbstractRandomFunction* randomFunction_);
 		RandomSelector(const RandomSelector& other);
-
+		RandomSelector(RandomSelector&& other) noexcept;
 		RandomSelector& operator=(RandomSelector other);
 
 		friend void swap(RandomSelector& lhs, RandomSelector& rhs) noexcept;

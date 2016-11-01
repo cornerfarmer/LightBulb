@@ -23,6 +23,12 @@ namespace LightBulb
 		}
 	}
 
+	PreferenceGroup::PreferenceGroup(PreferenceGroup&& other)
+		:PreferenceGroup()
+	{
+		swap(*this, other);
+	}
+
 	PreferenceGroup& PreferenceGroup::operator=(PreferenceGroup other)
 	{
 		swap(*this, other);

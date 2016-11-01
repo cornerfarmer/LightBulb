@@ -22,11 +22,13 @@ namespace LightBulb
 		double reusePercentage;
 	public:
 		virtual ~ConstantReuseCommand() {};
+		ConstantReuseCommand() = default;
+		ConstantReuseCommand(const ConstantReuseCommand& other) = default;
 		// Creates a command which reuses a static amount of objects
 		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_);
 		// Creates a command which reuses a percentage of objects
 		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_);
-
+		ConstantReuseCommand(ConstantReuseCommand&& other) noexcept;
 		ConstantReuseCommand& operator=(ConstantReuseCommand other);
 		friend void swap(ConstantReuseCommand& lhs, ConstantReuseCommand& rhs) noexcept;
 

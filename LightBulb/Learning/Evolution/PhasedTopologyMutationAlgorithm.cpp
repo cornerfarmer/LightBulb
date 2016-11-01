@@ -28,6 +28,12 @@ namespace LightBulb
 		pruningThresholdDistance = other.pruningThresholdDistance;
 	}
 
+	PhasedTopologyMutationAlgorithm::PhasedTopologyMutationAlgorithm(PhasedTopologyMutationAlgorithm&& other) noexcept
+		:PhasedTopologyMutationAlgorithm()
+	{
+		swap(*this, other);
+	}
+
 	PhasedTopologyMutationAlgorithm& PhasedTopologyMutationAlgorithm::operator=(PhasedTopologyMutationAlgorithm other)
 	{
 		swap(*this, other);

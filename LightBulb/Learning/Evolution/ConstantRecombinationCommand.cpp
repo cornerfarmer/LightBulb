@@ -17,6 +17,12 @@ namespace LightBulb
 		setRecombinationPercentage(recombinationPercentage_);
 	}
 
+	ConstantRecombinationCommand::ConstantRecombinationCommand(ConstantRecombinationCommand&& other) noexcept
+		: ConstantRecombinationCommand()
+	{
+		swap(*this, other);
+	}
+
 	ConstantRecombinationCommand& ConstantRecombinationCommand::operator=(ConstantRecombinationCommand other)
 	{
 		swap(*this, other);
