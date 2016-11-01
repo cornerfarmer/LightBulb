@@ -36,6 +36,13 @@ public:
 		reuseCommand = new MockReuseCommand();
 		selectionCommand = new MockSelectionCommand();
 		evolutionWorld = new MockEvolutionWorld();
+
+		
+		EXPECT_CALL(*mutationCommand, clone()).WillRepeatedly(testing::Return(mutationCommand));
+		EXPECT_CALL(*recombinationCommand, clone()).WillRepeatedly(testing::Return(recombinationCommand));
+		EXPECT_CALL(*reuseCommand, clone()).WillRepeatedly(testing::Return(reuseCommand));
+		EXPECT_CALL(*selectionCommand, clone()).WillRepeatedly(testing::Return(selectionCommand));
+
 		logger = new MockLogger();
 	}
 
@@ -43,13 +50,34 @@ public:
 
 		EvolutionLearningRuleOptions options;
 
-		options.creationCommands.push_back(creationCommand);
-		options.exitConditions.push_back(exitCondition);
-		options.fitnessFunctions.push_back(fitnessFunction);
-		options.mutationsCommands.push_back(mutationCommand);
-		options.recombinationCommands.push_back(recombinationCommand);
-		options.reuseCommands.push_back(reuseCommand);
-		options.selectionCommands.push_back(selectionCommand);
+		MockCreationCommand* creationCommandClone = new MockCreationCommand();
+		options.creationCommands.push_back(creationCommandClone);
+		EXPECT_CALL(*creationCommandClone, clone()).WillRepeatedly(testing::Return(creationCommand));
+
+		MockExitCondition* exitConditionClone = new MockExitCondition();
+		options.exitConditions.push_back(exitConditionClone);
+		EXPECT_CALL(*exitConditionClone, clone()).WillRepeatedly(testing::Return(exitCondition));
+
+		MockFitnessFunction* fitnessFunctionClone = new MockFitnessFunction();
+		options.fitnessFunctions.push_back(fitnessFunctionClone);
+		EXPECT_CALL(*fitnessFunctionClone, clone()).WillRepeatedly(testing::Return(fitnessFunction));
+
+		MockMutationCommand* mutationCommandClone = new MockMutationCommand();
+		options.mutationsCommands.push_back(mutationCommandClone);
+		EXPECT_CALL(*mutationCommandClone, clone()).WillRepeatedly(testing::Return(mutationCommand));
+
+		MockRecombinationCommand* recombinationCommandClone = new MockRecombinationCommand();
+		options.recombinationCommands.push_back(recombinationCommandClone);
+		EXPECT_CALL(*recombinationCommandClone, clone()).WillRepeatedly(testing::Return(recombinationCommand));
+
+		MockReuseCommand* reuseCommandClone = new MockReuseCommand();
+		options.reuseCommands.push_back(reuseCommandClone);
+		EXPECT_CALL(*reuseCommandClone, clone()).WillRepeatedly(testing::Return(reuseCommand));
+
+		MockSelectionCommand* selectionCommandClone = new MockSelectionCommand();
+		options.selectionCommands.push_back(selectionCommandClone);
+		EXPECT_CALL(*selectionCommandClone, clone()).WillRepeatedly(testing::Return(selectionCommand));
+
 		options.world = evolutionWorld;
 		options.logger = logger;
 		options.disabledDataSets[DATA_AVG_NEURON_COUNT] = true;
@@ -60,13 +88,6 @@ public:
 
 	virtual ~EvolutionLearningRuleTest()
 	{
-		delete creationCommand;
-		delete exitCondition;
-		delete fitnessFunction;
-		delete mutationCommand;
-		delete recombinationCommand;
-		delete reuseCommand;
-		delete selectionCommand;
 		delete evolutionWorld;
 		delete logger;
 		delete evolutionLearningRule;

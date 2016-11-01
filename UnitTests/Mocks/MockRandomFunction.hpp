@@ -11,6 +11,7 @@ class MockRandomFunction : public LightBulb::AbstractRandomFunction
 public:
 	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
 	MOCK_CONST_METHOD1(execute, int (int));
+	MOCK_CONST_METHOD0(clone, AbstractCloneable* ());
 };
 
 #endif

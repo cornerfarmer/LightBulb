@@ -11,6 +11,7 @@ class MockExitCondition : public LightBulb::AbstractExitCondition
 public:
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
 	MOCK_METHOD2(evaluate, bool (const std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&, const LightBulb::AbstractEvolutionLearningRule&));
+	MOCK_CONST_METHOD0(clone, AbstractCloneable* ());
 };
 
 #endif

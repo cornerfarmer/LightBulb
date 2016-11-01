@@ -12,6 +12,7 @@ public:
 	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
 	MOCK_METHOD3(execute, void (std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&, std::vector<LightBulb::AbstractEvolutionObject*>&, std::vector<LightBulb::AbstractEvolutionObject*>&));
+	MOCK_CONST_METHOD0(clone, AbstractCloneable* ());
 };
 
 #endif

@@ -21,8 +21,15 @@ namespace LightBulb
 	GradientDescentLearningRuleOptions::GradientDescentLearningRuleOptions(const GradientDescentLearningRuleOptions& other)
 		:AbstractSupervisedLearningRuleOptions(other)
 	{
-		gradientCalculation = dynamic_cast<AbstractGradientCalculation*>(other.gradientCalculation->clone());
-		gradientDescentAlgorithm = dynamic_cast<AbstractGradientDescentAlgorithm*>(other.gradientDescentAlgorithm->clone());
+		if (other.gradientCalculation)
+			gradientCalculation = dynamic_cast<AbstractGradientCalculation*>(other.gradientCalculation->clone());
+		else
+			gradientCalculation = nullptr;
+
+		if (other.gradientDescentAlgorithm)
+			gradientDescentAlgorithm = dynamic_cast<AbstractGradientDescentAlgorithm*>(other.gradientDescentAlgorithm->clone());
+		else
+			gradientDescentAlgorithm = nullptr;
 	}
 
 	GradientDescentLearningRuleOptions& GradientDescentLearningRuleOptions::operator=(GradientDescentLearningRuleOptions other)
