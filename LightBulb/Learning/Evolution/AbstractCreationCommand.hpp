@@ -10,14 +10,19 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractEvolutionWorld;
-
-	// Describes an command which creates a bunch of new evolution objects
+	/**
+	 * \brief Describes a command which creates new objects.
+	 */
 	class AbstractCreationCommand : public AbstractCommand
 	{
 	protected:
 	public:
 		virtual ~AbstractCreationCommand() {}
-		// This method should create the wished count of objects inside the given world
+		/**
+		 * \brief Creates new objects and adds them to the given world.
+		 * \param world The world to use.
+		 * \param notUsedObjects A vector of objects which are not used anymore.
+		 */
 		virtual void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>& notUsedObjects) = 0;
 	};
 }

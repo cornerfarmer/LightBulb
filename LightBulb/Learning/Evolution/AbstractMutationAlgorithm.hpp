@@ -15,15 +15,23 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractEvolutionObject;
-
-	// A algorithm which mutates the given object.
+	/**
+	 * \brief Describes an algorithm which mutates objects.
+	 */
 	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
 	{
 	public:
 		virtual ~AbstractMutationAlgorithm() {}
 		friend void swap(AbstractMutationAlgorithm& lhs, AbstractMutationAlgorithm& rhs) noexcept {	}
-		// Mutates the given evolution object.
+		/**
+		 * \brief Mutates the given object.
+		 * \param object1 The object to mutate.
+		 */
 		virtual void execute(AbstractEvolutionObject& object1) = 0;
+		/**
+		 * \brief Initializes the algorithm.
+		 * \param highscore The current highscore.
+		 */
 		virtual void initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) {};
 	};
 }

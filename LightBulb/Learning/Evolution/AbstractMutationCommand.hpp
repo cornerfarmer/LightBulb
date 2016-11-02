@@ -19,29 +19,46 @@ namespace LightBulb
 	class AbstractEvolutionObject;
 	class AbstractEvolutionWorld;
 	class EvolutionLearningRule;
-
-	// A command which mutates a few of the given evolution objects.
+	/**
+	 * \brief A command which mutates a few of the given evolution objects.
+	 */
 	class AbstractMutationCommand : public AbstractCommand
 	{
 	protected:
-		// Holds the chosen mutation algorithm
+		/**
+		 * \brief The algorithm which executes the mutations
+		 */
 		std::unique_ptr<AbstractMutationAlgorithm> mutationAlgorithm;
-		//
+		/**
+		 * \brief The algorithm which selects objects for mutation.
+		 */
 		std::unique_ptr<AbstractMutationSelector> mutationSelector;
 	public:
 		virtual ~AbstractMutationCommand() {}
 		AbstractMutationCommand() = default;
 		AbstractMutationCommand(const AbstractMutationCommand& other);
-		friend void swap(AbstractMutationCommand& lhs, AbstractMutationCommand& rhs) noexcept;
-
-		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
-
-		void setMutationSelector(AbstractMutationSelector* mutationSelector);
-		// Creates a new mutation command with the given mutation algorithm
+		/**
+		 * \brief Creates a new mutation command.
+		 * \param mutationAlgorithm_ The mutation algorithm to use.
+		 * \param mutationSelector_ The mutation selector to use.
+		 */
 		AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_);
-		// Executes the mutations. (The algorithm will take a few of the old objects, mutate them and insert them into the new object vector)
+		friend void swap(AbstractMutationCommand& lhs, AbstractMutationCommand& rhs) noexcept;
+		/**
+		 * \brief Select objects for mutation.
+		 * \param highscore The current highscore.
+		 * \param counter A counter which stores how often an object is used in all commands.
+		 */
+		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
+		/**
+		 * \brief Executes the mutations.
+		 * \details The algorithm will take a few of the old objects, mutate them and insert them into the new object vector
+		 * \param newObjectVector A vector where the new/mutated objects will be stored in.
+		 * \param counter A counter of all left operations per object.
+		 * \param notUsedObjects A vector of objects which are not used anymore.
+		 */
 		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
-
+		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
