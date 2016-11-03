@@ -25,13 +25,6 @@ namespace LightBulb
 		swap(lhs.mutationSelector, rhs.mutationSelector);
 	}
 
-	void AbstractMutationCommand::setMutationSelector(AbstractMutationSelector* mutationSelector_)
-	{
-		mutationSelector.release();
-		mutationSelector.reset(mutationSelector_);
-	}
-
-
 	void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
 	{
 		for (auto object = mutationSelector->getMutationSelection().begin(); object != mutationSelector->getMutationSelection().end(); object++)

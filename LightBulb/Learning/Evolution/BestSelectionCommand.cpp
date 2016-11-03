@@ -65,9 +65,4 @@ namespace LightBulb
 	{
 		return new BestSelectionCommand(*this);
 	}
-
-	void BestSelectionCommand::setObjectCount(int newObjectCount)
-	{
-		objectCount = newObjectCount;
-	}
 }

@@ -19,10 +19,12 @@ namespace LightBulb
 	class AbstractEvolutionWorld;
 	class AbstractNeuronDescriptionFactory;
 	struct FeedForwardNetworkTopologyOptions;
-
-	// This class is simplification of the AbstractEvolutionObject class.
-	// It decreases the work you have to do for your evolutionObject class, but also decreases your possibilities.
-	// Nevertheless this class can be used in the most of all cases.
+	/**
+	 * \brief This class is simplification of the AbstractEvolutionObject class.
+	 * \details It decreases the work you have to do for your evolutionObject class, but also decreases your possibilities.
+	 * Nevertheless this class can be used in the most of all cases. 
+	 * It manages the neural network, so you only have to set input and interpret output of the network.
+	 */
 	class AbstractSimpleEvolutionObject : public AbstractEvolutionObject
 	{
 		template <class Archive>
@@ -30,23 +32,47 @@ namespace LightBulb
 		template <class Archive>
 		friend void load(Archive& archive, AbstractSimpleEvolutionObject& object);
 	private:
+		/**
+		 * \brief Stores the last ouput of the neural network.
+		 */
 		std::vector<double> lastOutput;
+		/**
+		* \brief Stores the last input of the neural network.
+		*/
 		std::vector<double> lastInput;
-
+		/**
+		 * \brief Constructs the lastOutput vector depending on the network sizes.
+		 */
 		void buildOutputBuffer();
 	protected:
-		// The NN of the object
+		/**
+		 * \brief The NN of the object
+		 */
 		std::unique_ptr<NeuralNetwork> neuralNetwork;
-		// The world which holds this object
+		/**
+		 * \brief The world which contains this object
+		 */
 		AbstractEvolutionWorld* world;
-		// This method should return the input for the neural network
+		/**
+		 * \brief Returns the input for the neural network.
+		 * \param input A vector where the input should be stored in.
+		 */
 		virtual void getNNInput(std::vector<double>& input) = 0;
-		// This method should interpret and act depending on the given NN output
+		/**
+		 * \brief Interprets and acts depending on the given NN output
+		 * \param output The output of the network.
+		 */
 		virtual void interpretNNOutput(std::vector<double>& output) = 0;
-
+		/**
+		 * \brief Builds the neural network from the given options.
+		 * \param options The topology options.
+		 */
 		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 	public:
-		// Create a new evolution object with the given input and output NN size
+		/**
+		 * \brief Creates a new evolution object in the given world.
+		 * \param world The world which should contain the object.
+		 */
 		AbstractSimpleEvolutionObject(AbstractEvolutionWorld& world);
 		AbstractSimpleEvolutionObject() = default;
 		// Inherited:

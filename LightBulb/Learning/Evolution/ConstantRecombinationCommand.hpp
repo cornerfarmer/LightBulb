@@ -11,31 +11,42 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	* \brief Recombines a constant amount of objects.
+	*/
 	class ConstantRecombinationCommand : public AbstractRecombinationCommand
 	{
 	private:
-		// Holds amount of objects which should be combined
+		/**
+		* \brief The amount of objects which should be recombined.
+		*/
 		int objectCount;
-		// Alternative: Holds the percentage of objects which should be combined
+		/**
+		* \brief Alternative: The percentage of objects which should be recombined.
+		*/
 		double recombinationPercentage;
 	public:
-		void setRecombinationPercentage(double newRecombinationPercentage);
-		void setRecombinationCount(int newObjectCount);
 		ConstantRecombinationCommand() = default;
 		ConstantRecombinationCommand(const ConstantRecombinationCommand& other) = default;
-		// Creates a command which combines a static amount of objects
+		/**
+		 * \brief Creates a command which combines a static amount of objects.
+		 * \param recombinationAlgorithm_ The recombination algorithm to use.
+		 * \param recombinationSelector_ The recombination selector to use.
+		 * \param objectCount_ The amount of objects which should be recombined.
+		 */
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_);
-		// Creates a command which combines a percentage of objects
+		/**
+		 * \brief Creates a command which combines a percentage of objects.
+		 * \param recombinationAlgorithm_ The recombination algorithm to use.
+		 * \param recombinationSelector_ The recombination selector to use.
+		 * \param recombinationPercentage_ The percentage of objects which should be recombined.
+		 */
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_);
 		ConstantRecombinationCommand(ConstantRecombinationCommand&& other) noexcept;
 		ConstantRecombinationCommand& operator=(ConstantRecombinationCommand other);
-
 		friend void swap(ConstantRecombinationCommand& lhs, ConstantRecombinationCommand& rhs) noexcept;
-
+		// Inherited:
 		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
-
 		AbstractCloneable* clone() const override;
 	};
 }

@@ -8,13 +8,15 @@ namespace LightBulb
 	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_)
 		: AbstractReuseCommand(reuseSelector_)
 	{
-		setReuseCount(objectCount_);
+		reusePercentage = 0;
+		objectCount = objectCount_;
 	}
 
 	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_)
 		: AbstractReuseCommand(reuseSelector_)
 	{
-		setReusePercentage(reusePercentage_);
+		objectCount = 0;
+		reusePercentage = reusePercentage_;
 	}
 
 	ConstantReuseCommand::ConstantReuseCommand(ConstantReuseCommand&& other) noexcept
@@ -45,18 +47,6 @@ namespace LightBulb
 			objectCount = highscore.size() * reusePercentage;
 
 		reuseSelector->executeReuseSelection(objectCount, highscore, counter);
-	}
-
-	void ConstantReuseCommand::setReusePercentage(double newReusePercentage)
-	{
-		objectCount = 0;
-		reusePercentage = newReusePercentage;
-	}
-
-	void ConstantReuseCommand::setReuseCount(double newReuseCount)
-	{
-		reusePercentage = 0;
-		objectCount = newReuseCount;
 	}
 
 	AbstractCloneable* ConstantReuseCommand::clone() const

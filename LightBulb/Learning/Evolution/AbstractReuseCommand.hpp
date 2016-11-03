@@ -17,12 +17,15 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractEvolutionObject;
 	class AbstractEvolutionWorld;
-
-	// A command which reuses a few of the given evolution objects directly.
+	/**
+	 * \brief A command which reuses a few of the given evolution objects directly.
+	 */
 	class AbstractReuseCommand : public AbstractCommand
 	{
 	protected:
-		//
+		/**
+		 * \brief All selected objects.
+		 */
 		std::unique_ptr<AbstractReuseSelector> reuseSelector;
 	public:
 		virtual ~AbstractReuseCommand() {};
@@ -30,9 +33,19 @@ namespace LightBulb
 		AbstractReuseCommand(AbstractReuseSelector* reuseSelector_);
 		AbstractReuseCommand(const AbstractReuseCommand& other);
 		friend void swap(AbstractReuseCommand& lhs, AbstractReuseCommand& rhs) noexcept;
-
-		// Execute the command (Take a few of the old objects and move them directly into the new object vector)
+		/**
+		 * \brief Executes the command.
+		 * \details Takes a few of the old objects and moves them directly into the new object vector.
+		 * \param newObjectVector A vector where the reused objects will be stored in.
+		 * \param counter A counter of all left operations per object.
+		 * \param notUsedObjects A vector of objects which are not used anymore.
+		 */
 		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
+		/**
+		* \brief Select objects for reusing.
+		* \param highscore The current highscore.
+		* \param counter A counter which stores how often an object is used in all commands.
+		*/
 		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
 	};
 }

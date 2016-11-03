@@ -8,13 +8,15 @@ namespace LightBulb
 	ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int objectCount_)
 		: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_)
 	{
-		setMutationCount(objectCount_);
+		mutationPercentage = 0;
+		objectCount = objectCount_;
 	}
 
 	ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_)
 		: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_)
 	{
-		setMutationPercentage(mutationPercentage_);
+		objectCount = 0;
+		mutationPercentage = mutationPercentage_;
 	}
 
 	ConstantMutationCommand::ConstantMutationCommand(ConstantMutationCommand&& other) noexcept
@@ -54,15 +56,4 @@ namespace LightBulb
 		return new ConstantMutationCommand(*this);
 	}
 
-	void ConstantMutationCommand::setMutationPercentage(double newMutationPercentage)
-	{
-		objectCount = 0;
-		mutationPercentage = newMutationPercentage;
-	}
-
-	void ConstantMutationCommand::setMutationCount(double newMutationCount)
-	{
-		mutationPercentage = 0;
-		objectCount = newMutationCount;
-	}
 }

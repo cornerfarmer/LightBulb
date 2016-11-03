@@ -14,10 +14,12 @@ namespace LightBulb
 	// Forward declarations
 	class EvolutionLearningRule;
 	class AbstractEvolutionObject;
-
-	// This class is simplification of the AbstractEvolutionWorld class.
-	// It decreases the work you have to do for your world, but also decreases your possibilities.
-	// Nevertheless this class can be used in the most of all cases.
+	/**
+	 * \brief This class is simplification of the AbstractEvolutionWorld class.
+	 * \details/ It decreases the work you have to do for your world, but also decreases your possibilities.
+	 * Nevertheless this class can be used in the most of all cases.
+	 * It manages all evolution objects, so all inheriting classes can focus on evaluating those objects.
+	 */
 	class AbstractSimpleEvolutionWorld : public AbstractEvolutionWorld
 	{
 		template <class Archive>
@@ -25,13 +27,23 @@ namespace LightBulb
 		template <class Archive>
 		friend void load(Archive& archive, AbstractSimpleEvolutionWorld& world);
 	protected:
-		// A vector which holds all current evolution objects
+		/**
+		 * \brief A vector which contains all current evolution objects
+		 */
 		std::vector<AbstractEvolutionObject*> objects;
-		// This method should (only) create new evolution object
+		/**
+		 * \brief Creates new evolution object.
+		 * \return The new object.
+		 */
 		virtual AbstractEvolutionObject* createNewObject() = 0;
-		// This method can be used to do some extra work, when the world resets.
+		/**
+		 * \brief Resets the world before doing any simulations.
+		 */
 		virtual void resetWorld() {};
 	public:
+		/**
+		 * \brief Creates the simple evolution world.
+		 */
 		AbstractSimpleEvolutionWorld();
 		// Inherited:
 		AbstractEvolutionObject* addNewObject(bool addToWorld = true) override;

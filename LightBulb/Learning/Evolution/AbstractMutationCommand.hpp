@@ -26,7 +26,7 @@ namespace LightBulb
 	{
 	protected:
 		/**
-		 * \brief The algorithm which executes the mutations
+		 * \brief The algorithm which executes the mutations.
 		 */
 		std::unique_ptr<AbstractMutationAlgorithm> mutationAlgorithm;
 		/**

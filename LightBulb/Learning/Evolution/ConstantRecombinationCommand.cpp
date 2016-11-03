@@ -8,13 +8,15 @@ namespace LightBulb
 	ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_)
 		: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_)
 	{
-		setRecombinationCount(objectCount_);
+		recombinationPercentage = 0;
+		objectCount = objectCount_;
 	}
 
 	ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_)
 		: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_)
 	{
-		setRecombinationPercentage(recombinationPercentage_);
+		objectCount = 0;
+		recombinationPercentage = recombinationPercentage_;
 	}
 
 	ConstantRecombinationCommand::ConstantRecombinationCommand(ConstantRecombinationCommand&& other) noexcept
@@ -49,17 +51,5 @@ namespace LightBulb
 	AbstractCloneable* ConstantRecombinationCommand::clone() const
 	{
 		return new ConstantRecombinationCommand(*this);
-	}
-
-	void ConstantRecombinationCommand::setRecombinationPercentage(double newRecombinationPercentage)
-	{
-		objectCount = 0;
-		recombinationPercentage = newRecombinationPercentage;
-	}
-
-	void ConstantRecombinationCommand::setRecombinationCount(int newObjectCount)
-	{
-		recombinationPercentage = 0;
-		objectCount = newObjectCount;
 	}
 }
