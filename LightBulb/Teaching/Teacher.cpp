@@ -75,35 +75,6 @@ namespace LightBulb
 		return weightDecayFac * weightDecayError;
 	}
 
-	AbstractTeacher* Teacher::unfold() const
-	{
-		// Create a new teacher
-		AbstractTeacher* unfoldedTeacher = new Teacher();
-		// Unfold all teaching lessons
-		for (auto originalTeachingLesson = teachingLessons.begin(); originalTeachingLesson != teachingLessons.end(); originalTeachingLesson++)
-		{
-			unfoldedTeacher->addTeachingLesson((*originalTeachingLesson)->unfold());
-		}
-
-		// Unfold all testing lessons
-		for (auto originalTestingLesson = testingLessons.begin(); originalTestingLesson != testingLessons.end(); originalTestingLesson++)
-		{
-			unfoldedTeacher->addTestingLesson((*originalTestingLesson)->unfold());
-		}
-		return unfoldedTeacher;
-	}
-
-	int Teacher::getMaxTimeStep() const
-	{
-		int maxTimeStep = 0;
-		// Find the biggest timestep of all teaching lessons
-		for (auto teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
-		{
-			maxTimeStep = std::max(maxTimeStep, (*teachingLesson)->getMaxTimeStep());
-		}
-		return maxTimeStep;
-	}
-
 	void Teacher::clearLessons()
 	{
 		teachingLessons.clear();

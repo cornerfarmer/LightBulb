@@ -24,25 +24,17 @@ namespace LightBulb
 		/**
 		 * \brief  The values we will be fed into the neural network.
 		 */
-		std::vector<std::vector<double>> teachingPattern;
-	protected:
-		/**
-		 * \brief Unfolds the teaching pattern.
-		 * \return The unfolded teaching pattern.
-		 */
-		std::vector<std::vector<double>> unfoldTeachingPattern() const;
+		std::vector<double> teachingPattern;
 	public:
 		/**
 		 * \brief Creats a teaching lesson with linear input.
 		 * \param teachingPattern_ The teaching pattern. (The input values of the network)
 		 * \param teachingInput_ The teaching input. (The values the network should calculate)
 		 */
-		TeachingLessonLinearInput(std::vector<std::vector<double>> teachingPattern_, NeuralNetworkIO<double>* teachingInput_);
+		TeachingLessonLinearInput(std::vector<double> teachingPattern_, NeuralNetworkIO<double>* teachingInput_);
 		// Inherited:
-		AbstractTeachingLesson* unfold() const override;
-		int getMaxTimeStep() const override;
 		const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
-		const std::vector<std::vector<double>>& getTeachingPattern() const override;
+		const std::vector<double>& getTeachingPattern() const override;
 	};
 }
 

@@ -12,10 +12,9 @@ namespace LightBulb
 	/**
 	 * \brief This class contains all stuff needed to describe the input and output of a neural network.
 	 * \tparam T The data type which should be used.
-	 * TODO: Refactor!
 	 */
 	template<typename T>
-	class NeuralNetworkIO : public std::vector<std::pair<bool, std::vector<std::pair<bool, T>>>>
+	class NeuralNetworkIO : public std::vector<std::pair<bool, T>>
 	{
 	private:
 		/**
@@ -29,142 +28,60 @@ namespace LightBulb
 		 * \param d The dimension which should be equal to the output neurons of the corresponding network.
 		 */
 		NeuralNetworkIO(int d)
-			: std::vector<std::pair<bool, std::vector<std::pair<bool, T>>>>(1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(d)))
+			: std::vector<std::pair<bool, T>>(d)
 		{
 			dimension = d;
 		}
 
 		/**
-		 * \brief Unfolds the NeuralNetworkIO into a NeuralNetworkIO with a single time step
-		 * \return The unfolded NeuralNetworkIO
-		 */
-		NeuralNetworkIO<T>* unfold()
-		{
-			// Create a new neuralNetworkIO with one timestep
-			NeuralNetworkIO<T>* unfoldedNetworkIO = new NeuralNetworkIO<T>(0);
-			unfoldedNetworkIO->set(0, std::vector<std::pair<bool, T>>());
-			// Go through all ioSeries in the various timesteps
-			for (auto ioSeries = this->begin(); ioSeries != this->end(); ioSeries++)
-			{
-				// Add them at the end of the first timestep
-				(*unfoldedNetworkIO)[0].second.insert((*unfoldedNetworkIO)[0].second.end(), ioSeries->second.begin(), ioSeries->second.end());
-			}
-			unfoldedNetworkIO->dimension = (*unfoldedNetworkIO)[0].second.size();
-			return unfoldedNetworkIO;
-		}
-
-		/**
-		 * \brief Returns the biggest timestep used in this IO
-		 * \return The maximal timestep.
-		 */
-		int getMaxTimeStep() const
-		{
-			if (!this->empty())
-				return this->size() - 1;
-			else
-				return 0;
-		}
-
-		/**
-		 * \brief Returns the value of the neuron with the given index in the given timestep
-		 * \param timestep The timestep.
+		 * \brief Returns the value of the neuron with the given index
 		 * \param index The neuron index.
 		 * \return The value.
 		 */
-		const T& get(int timestep, int index) const
+		const T& get(int index) const
 		{
 			// Make sure the value is valid
-			if ((*this)[timestep].first && (*this)[timestep].second[index].first)
-				return (*this)[timestep].second[index].second;
+			if ((*this)[index].first)
+				return (*this)[index].second;
 			else
-				throw std::logic_error("There is no valid value in the given timestep with the given timestep.");
+				throw std::logic_error("There is no valid value in the given index.");
 		}
 
 		/**
-		 * \brief Sets the value of the neuron with the given index in the given timestep.
-		 * \param timestep The timestep.
+		 * \brief Sets the value of the neuron with the given index.
 		 * \param index The index.
 		 * \param value The new value.
 		 */
-		void set(int timestep, int index, T value)
+		void set(int index, T value)
 		{
-			// Resize the vector if necessary
-			if (this->size() <= timestep)
-				this->resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
-			// Make sure the timestep is set to valid
-			if (!(*this)[timestep].first)
-				(*this)[timestep].first = true;
 			// Make sure the index is set to valid
-			if (!(*this)[timestep].second[index].first)
-				(*this)[timestep].second[index].first = true;
+			if (!(*this)[index].first)
+				(*this)[index].first = true;
 			// Finally set the value
-			(*this)[timestep].second[index].second = value;
+			(*this)[index].second = value;
 		}
 
 		/**
-		 * \brief Sets all values at the given timestep.
-		 * \param timestep The timestep.
-		 * \param values A vector of values
-		 */
-		void set(int timestep, std::vector<std::pair<bool, T>> values)
-		{
-			// Resize the vector if necessary
-			if (this->size() <= timestep)
-				this->resize(timestep + 1, std::pair<bool, std::vector<std::pair<bool, T>>>(false, std::vector<std::pair<bool, T>>(dimension)));
-			// Make sure the timestep is set to valid
-			if (!(*this)[timestep].first)
-				(*this)[timestep].first = true;
-			// Finally set the values
-			(*this)[timestep].second = values;
-		}
-
-		/**
-		 * \brief Returns if the value of the neuron with the given index in the given timestep is valid.
-		 * \param timestep The timestep.
+		 * \brief Returns if the value of the neuron with the given index is valid.
 		 * \param index The neuron index.
 		 * \return True, if a value exists.
 		 */
-		bool exists(int timestep, int index) const
+		bool exists(int index) const
 		{
-			return (this->size() > timestep && (*this)[timestep].second[index].first);
+			return ((*this)[index].first);
 		}
 
 		/**
-		 * \brief Returns if the given timestep has at least one valid value.
-		 * \param timestep The timestep.
-		 * \return True, if the timestep exists.
+		 * \brief Converts the values into a vector (invalid values get the value 0)
+		 * \return The vector of values.
 		 */
-		bool existsTimestep(int timestep) const
-		{
-			return (this->size() > timestep && (*this)[timestep].first);
-		}
-
-		/**
-		 * \brief Converts the values of a timestep into a vector (invalid values get the value 0)
-		 * \param timestep The timestep.
-		 * \return The vector of values at this timestep.
-		 */
-		std::vector<T> getRealVectorInTimestep(int timestep) const
+		std::vector<T> getRealVector() const
 		{
 			std::vector<T> realVector(dimension);
-			auto pair = (*this)[timestep].second.begin();
-			for (auto value = realVector.begin(); value != realVector.end() && pair != (*this)[timestep].second.end(); value++, pair++)
+			auto pair = (*this).begin();
+			for (auto value = realVector.begin(); value != realVector.end() && pair != (*this).end(); value++, pair++)
 			{
 				*value = pair->second;
-			}
-			return realVector;
-		}
-
-		/**
-		 * \brief Returns the real values of al timesteps.
-		 * \return A vector of all timestep vectors.
-		 */
-		std::vector<std::vector<T>> getRealVector() const
-		{
-			std::vector<std::vector<T>> realVector(this->size());
-			for (int t = 0; t < realVector.size(); t++)
-			{
-				realVector[t] = getRealVectorInTimestep(t);
 			}
 			return realVector;
 		}

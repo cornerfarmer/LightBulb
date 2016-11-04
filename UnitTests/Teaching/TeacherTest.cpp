@@ -59,33 +59,3 @@ TEST_F(TeacherTest, getTotalError)
 
 	EXPECT_EQ(41, teacher->getTotalError(*neuralNetwork, *activationOrder));
 }
-
-TEST_F(TeacherTest, getMaxTimeStep)
-{
-	EXPECT_CALL(*teachingLesson1, getMaxTimeStep()).WillOnce(testing::Return(5));
-	EXPECT_CALL(*teachingLesson2, getMaxTimeStep()).WillOnce(testing::Return(23));
-
-	EXPECT_EQ(23, teacher->getMaxTimeStep());
-}
-
-TEST_F(TeacherTest, unfold)
-{
-	MockTeachingLesson* unfoldedTeachingLesson1 = new MockTeachingLesson();
-	MockTeachingLesson* unfoldedTeachingLesson2 = new MockTeachingLesson();
-	MockTeachingLesson* unfoldedTestingLesson1 = new MockTeachingLesson();
-	MockTeachingLesson* unfoldedTestingLesson2 = new MockTeachingLesson();
-
-	EXPECT_CALL(*teachingLesson1, unfold()).WillOnce(testing::Return(unfoldedTeachingLesson1));
-	EXPECT_CALL(*teachingLesson2, unfold()).WillOnce(testing::Return(unfoldedTeachingLesson2));
-	EXPECT_CALL(*testingLesson1, unfold()).WillOnce(testing::Return(unfoldedTestingLesson1));
-	EXPECT_CALL(*testingLesson2, unfold()).WillOnce(testing::Return(unfoldedTestingLesson2));
-
-	std::unique_ptr<AbstractTeacher> unfoldetedTeacher(teacher->unfold());
-
-	EXPECT_EQ(2, unfoldetedTeacher->getTeachingLessons().size());
-	EXPECT_EQ(unfoldedTeachingLesson1, unfoldetedTeacher->getTeachingLessons().at(0).get());
-	EXPECT_EQ(unfoldedTeachingLesson2, unfoldetedTeacher->getTeachingLessons().at(1).get());
-	EXPECT_EQ(2, unfoldetedTeacher->getTestingLessons().size());
-	EXPECT_EQ(unfoldedTestingLesson1, unfoldetedTeacher->getTestingLessons().at(0).get());
-	EXPECT_EQ(unfoldedTestingLesson2, unfoldetedTeacher->getTestingLessons().at(1).get());
-}

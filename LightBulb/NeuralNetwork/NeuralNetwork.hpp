@@ -48,7 +48,6 @@ namespace LightBulb
 		 */
 		NeuralNetwork(AbstractNetworkTopology* networkTopology_);
 		// Inherited:
-		void calculate(const std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, const AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) override;
 		void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) override;
 		AbstractNetworkTopology& getNetworkTopology() const override;
 		const std::string& getName() const override;

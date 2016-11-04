@@ -40,7 +40,7 @@ namespace LightBulb
 		 */
 		Backpropagation(double flatSpotEliminationFac_ = 0);
 		// Inherited:
-		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const ErrorMap_t& errormap) override;
+		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const Eigen::VectorXd& errorVector) override;
 		AbstractCloneable* clone() const override;
 	};
 }

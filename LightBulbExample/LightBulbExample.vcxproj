@@ -167,7 +167,7 @@
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameController.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp" />
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeKI.cpp" />
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +215,7 @@
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameController.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp" />
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeAI.hpp" />
     <ClInclude Include="IO\PongGameIO.hpp" />
     <ClInclude Include="IO\PongReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\PositionIO.hpp" />

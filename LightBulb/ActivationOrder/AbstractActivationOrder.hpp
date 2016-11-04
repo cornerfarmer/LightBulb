@@ -29,12 +29,6 @@ namespace LightBulb
 		 * \param networkTopology The network to activate
 		 */
 		virtual void executeActivation(AbstractNetworkTopology &networkTopology) const = 0;
-		/**
-		 * \brief Returns a map which holds for every edge, if its two neurons are refreshed in the same timestep (In a feed forward with topological acitvation order for example are all edges in the same timestep) TODO: Refactor!
-		 * \param networkTopology
-		 * \return
-		 */
-		virtual std::unique_ptr<std::map<Edge*, bool>> getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const = 0;
 	};
 
 }

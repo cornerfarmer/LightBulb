@@ -73,13 +73,8 @@ namespace LightBulb
 		 */
 		virtual Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) = 0;
 		/**
-		 * TODO: Remove
-		 */
-		virtual std::string printDebugOutput() { return ""; };
-		/**
-		 * TODO: Refactor
-		 * \brief Returns if the learning has stopped
-		 * \return 
+		 * \brief Returns if the learning has stopped.
+		 * \return True if learning has stopped.
 		 */
 		virtual bool learningHasStopped() = 0;
 		/**

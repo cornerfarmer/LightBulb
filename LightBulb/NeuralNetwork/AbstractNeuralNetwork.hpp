@@ -51,19 +51,6 @@ namespace LightBulb
 		 * \param input The input.
 		 * \param output The variable were the output will be stored in.
 		 * \param activationOrder The activation order which should be used when calculating.
-		 * \param startTime The offset time where the calculation should start.
-		 * \param timeStepCount How many time steps the calculation should be done.
-		 * \param outputValuesInTime A variable which will contain all output values for all timesteps.
-		 * \param netInputValuesInTime A variable which will contain all net inputs for all timesteps.
-		 * \param resetActivations Control if the activations should be resetted before calculating.
-		 * TODO: Refactor
-		 */
-		virtual void calculate(const std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, const AbstractActivationOrder &activationOrder, int startTime = 0, int timeStepCount = -1, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime = nullptr, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime = nullptr, bool resetActivations = true) = 0;
-		/**
-		 * \brief Calculates from the given input and activation order the output of the neural network.
-		 * \param input The input.
-		 * \param output The variable were the output will be stored in.
-		 * \param activationOrder The activation order which should be used when calculating.
 		 * \param resetActivations Control if the activations should be resetted before calculating.
 		 */
 		virtual void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;

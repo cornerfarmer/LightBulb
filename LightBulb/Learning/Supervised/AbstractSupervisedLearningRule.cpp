@@ -71,7 +71,7 @@ namespace LightBulb
 		// If debug is enabled, print every n-th iteration a short debug info
 		if (learningState->iterations % options->debugOutputInterval == 0)
 		{
-			log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(learningState->iterations) + " " + printDebugOutput(), LL_LOW);
+			log("TotalError: " + std::to_string(totalError) + " Iteration: " + std::to_string(learningState->iterations), LL_LOW);
 		}
 
 		if (getOptions().offlineLearning)
@@ -105,10 +105,10 @@ namespace LightBulb
 					clearGradient();
 				}
 
-				// Calculate the errormap and also fill - if needed - the output and netInput values map
-				std::unique_ptr<ErrorMap_t> errormap = (*teachingLesson)->getErrormap(*getOptions().neuralNetwork, *currentActivationOrder, nullptr, nullptr, getOptions().clipError/*, nextStartTime, nextTimeStepCount,  getOutputValuesInTime(), getNetInputValuesInTime()*/);
+				// Calculate the errorVector and also fill - if needed - the output and netInput values map
+				std::unique_ptr<Eigen::VectorXd> errorVector = (*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError);
 
-				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, *errormap.get());
+				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, *errorVector.get());
 
 				// If offline learning is activated, adjust all weights
 				if (!getOptions().offlineLearning)

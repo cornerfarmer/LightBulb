@@ -27,16 +27,4 @@ namespace LightBulb
 		return new TopologicalOrder(*this);
 	}
 
-	std::unique_ptr<std::map<Edge*, bool>> TopologicalOrder::getSameTimestepEdges(const AbstractNetworkTopology &networkTopology) const
-	{
-		// Cast the network as an FeedForwardNetworkTopology
-		const FeedForwardNetworkTopology* feedForwardNetworkTopology = dynamic_cast<const FeedForwardNetworkTopology*>(&networkTopology);
-
-		// Check if the given networkTopology was a FeedForwardNetworkTopology, else throw a exception
-		if (!feedForwardNetworkTopology)
-			throw std::invalid_argument("The given networkTopology has to be a FeedForwardNetworkTopology");
-
-		// Only recurrent edges are not in the same time step
-		//return feedForwardNetworkTopology->getNonRecurrentEdges();
-	}
 }

@@ -44,8 +44,6 @@ namespace LightBulb
 		double getTotalError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 		double getTeachingError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 		double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) const override;
-		AbstractTeacher* unfold() const override;
-		int getMaxTimeStep() const override;
 		void clearLessons() override;
 	};
 }

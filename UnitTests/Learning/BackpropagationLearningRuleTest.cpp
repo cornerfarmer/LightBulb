@@ -40,12 +40,12 @@ public:
 		{
 			for (int l = 0; l < 2; l += 1)
 			{
-				std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(2));
+				std::vector<double> teachingPattern(2);
 				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
 
-				teachingPattern[0][0] = i;
-				teachingPattern[0][1] = l;
-				(*teachingInput).set(0, 0, (i != l));
+				teachingPattern[0] = i;
+				teachingPattern[1] = l;
+				(*teachingInput).set(0, (i != l));
 				teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 			}
 		}

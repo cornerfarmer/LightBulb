@@ -20,7 +20,7 @@ public:
 	void SetUp() {
 		recombinationAlgorithm = new MockRecombinationAlgorithm();
 		recombinationSelector = new MockRecombinationSelector();
-		constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
+		
 	}
 
 	void SetUpExecute()
@@ -46,7 +46,7 @@ TEST_F(ConstantRecombinationCommandTest, selectStaticCount)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
 	std::map<AbstractEvolutionObject*, int> counter;
-	constantRecombinationCommand->setRecombinationCount(10);
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
 
 	EXPECT_CALL(*recombinationSelector, executeRecombinationSelection(10, highscore, counter)).Times(1);
 
@@ -57,7 +57,7 @@ TEST_F(ConstantRecombinationCommandTest, selectPercentage)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore(10);
 	std::map<AbstractEvolutionObject*, int> counter;
-	constantRecombinationCommand->setRecombinationPercentage(0.5);
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 0.5);
 
 	EXPECT_CALL(*recombinationSelector, executeRecombinationSelection(5, highscore, counter)).Times(1);
 
@@ -66,6 +66,7 @@ TEST_F(ConstantRecombinationCommandTest, selectPercentage)
 
 TEST_F(ConstantRecombinationCommandTest, executeWithNoMultipleUsedObjects)
 {
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 1;
 	counter[selectedObjects[1]] = 1;
@@ -82,6 +83,7 @@ TEST_F(ConstantRecombinationCommandTest, executeWithNoMultipleUsedObjects)
 
 TEST_F(ConstantRecombinationCommandTest, executeWithOneMultipleUsedObject1)
 {
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	counter[selectedObjects[1]] = 1;
@@ -99,6 +101,7 @@ TEST_F(ConstantRecombinationCommandTest, executeWithOneMultipleUsedObject1)
 
 TEST_F(ConstantRecombinationCommandTest, executeWithOneMultipleUsedObject2)
 {
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 1;
 	counter[selectedObjects[1]] = 2;
@@ -116,6 +119,7 @@ TEST_F(ConstantRecombinationCommandTest, executeWithOneMultipleUsedObject2)
 
 TEST_F(ConstantRecombinationCommandTest, executeWithTwoMultipleUsedObjects)
 {
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	counter[selectedObjects[1]] = 2;
@@ -134,6 +138,7 @@ TEST_F(ConstantRecombinationCommandTest, executeWithTwoMultipleUsedObjects)
 
 TEST_F(ConstantRecombinationCommandTest, executeWithTwoMultipleUsedObjectsAndANotUsedObject)
 {
+	constantRecombinationCommand = new ConstantRecombinationCommand(recombinationAlgorithm, recombinationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	counter[selectedObjects[1]] = 2;

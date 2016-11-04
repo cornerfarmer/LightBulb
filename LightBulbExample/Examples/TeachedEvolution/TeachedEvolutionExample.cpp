@@ -58,12 +58,12 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	Teacher* teacher = new Teacher();
 	for (int i = 0; i<8; i += 1)
 	{
-		std::vector<std::vector<double>> teachingPattern(1, std::vector<double>(8));
+		std::vector<double> teachingPattern(8);
 		NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(8);
 		for (int l = 0; l<8; l += 1)
 		{
-			teachingPattern[0][l] = i == l;
-			(*teachingInput).set(0, l, i == l);
+			teachingPattern[l] = i == l;
+			(*teachingInput).set(l, i == l);
 		}
 
 		teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));

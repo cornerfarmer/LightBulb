@@ -19,8 +19,6 @@ namespace LightBulb
 	class AbstractTeachingLesson;
 	class AbstractNetworkTopology;
 
-	typedef std::vector<Eigen::VectorXd> ErrorMap_t;
-
 #define DATA_SET_TRAINING_ERROR "Training error"
 
 	/**
@@ -133,9 +131,9 @@ namespace LightBulb
 		 * \brief This method should calculate the deltaWeight for the current lesson
 		 * \param lesson The current teaching lesson object.
 		 * \param lessonIndex The current teaching lesson index.
-		 * \param errormap The errormap which represents how well the neural network has done on the current teaching lesson.
+		 * \param errorVector The errorVector which represents how well the neural network has done on the current teaching lesson.
 		 */
-		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t& errormap) = 0;
+		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Eigen::VectorXd& errorVector) = 0;
 		/**
 		 * \brief This method should adjust the weight for the current layer.
 		 * \param layerIndex The index of the layer to change.

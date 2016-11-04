@@ -69,17 +69,6 @@ namespace LightBulb
 		 */
 		virtual double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) const = 0;
 		/**
-		 * \brief Returns a unfolded version of this teacher.
-		 * \return The unfolded teacher.
-		 * TODO: Remove?
-		 */
-		virtual AbstractTeacher* unfold() const = 0;
-		/**
-		 * \brief Returns the biggest used timestep of all teaching lessons.
-		 * \return The maximum timestep.
-		 */
-		virtual int getMaxTimeStep() const = 0;
-		/**
 		 * \brief Removes all teaching and testing lessons.
 		 */
 		virtual void clearLessons() = 0;

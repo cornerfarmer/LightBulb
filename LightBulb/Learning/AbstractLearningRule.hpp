@@ -38,7 +38,7 @@ namespace LightBulb
 		 */
 		AbstractLogger* logger;
 		/**
-		 * \brief TODO: Remove
+		 * \brief Determines after how many iterations the training error should be logged.
 		 */
 		unsigned int debugOutputInterval;
 		/**

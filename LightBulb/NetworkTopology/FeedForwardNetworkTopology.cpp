@@ -60,10 +60,8 @@ namespace LightBulb
 
 	FeedForwardNetworkTopology::FeedForwardNetworkTopology()
 	{
-		// TODO: Maybe remove this constructor
+
 	}
-
-
 
 	FeedForwardNetworkTopology::FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_)
 	{

@@ -42,9 +42,6 @@
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeKI.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\PongEvolution\Pong.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -153,6 +150,9 @@
     <ClCompile Include="Examples\TeachedEvolution\TeachedEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -177,9 +177,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeKI.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\NetworkSimulatorIO.hpp">
@@ -303,6 +300,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TeachedEvolution\TeachedEvolutionExample.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeAI.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

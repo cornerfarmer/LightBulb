@@ -6,74 +6,66 @@
 // Library includes
 #include <math.h>
 #include "NeuronDescription/NeuronDescription.hpp"
+#include <EigenSrc/src/Core/util/ForwardDeclarations.h>
+#include <memory>
 
 namespace LightBulb
 {
-	std::vector<std::vector<double>> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime) const
+	std::vector<double> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
-		std::vector<std::vector<double>> output(getTeachingPattern().size(), std::vector<double>(neuralNetwork.getNetworkTopology().getOutputSize()));
+		std::vector<double> output(neuralNetwork.getNetworkTopology().getOutputSize());
 		// Let the network calculate
-		neuralNetwork.calculate(getTeachingPattern(), output, activationOrder, 0, -1, outputValuesInTime, netInputValuesInTime);
+		neuralNetwork.calculate(getTeachingPattern(), output, activationOrder);
 		return output;
 	}
 
-	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormap(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool clipError) const
+	std::unique_ptr<Eigen::VectorXd> AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
-		std::unique_ptr<ErrorMap_t> errorMap;
+		std::unique_ptr<Eigen::VectorXd> errorVector;
 
 		// Try the lesson and extract the output
-		std::vector<std::vector<double>> outputVector = tryLesson(neuralNetwork, activationOrder, outputValuesInTime, netInputValuesInTime);
-		errorMap = getErrormapFromOutputVector(outputVector, neuralNetwork, clipError);
+		std::vector<double> outputVector = tryLesson(neuralNetwork, activationOrder);
+		errorVector = getErrorVectorFromOutputVector(outputVector, neuralNetwork, clipError);
 
-		return errorMap;
+		return errorVector;
 	}
 
 
-	std::unique_ptr<ErrorMap_t> AbstractTeachingLesson::getErrormapFromOutputVector(const std::vector<std::vector<double>>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
+	std::unique_ptr<Eigen::VectorXd> AbstractTeachingLesson::getErrorVectorFromOutputVector(const std::vector<double>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
 		const NeuralNetworkIO<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
 
-		// Create the errorMap
-		std::unique_ptr<ErrorMap_t> errorMap(new ErrorMap_t(teachingInput.getMaxTimeStep() + 1, Eigen::VectorXd(teachingInput.getDimension())));
+		// Create the errorVector
+		std::unique_ptr<Eigen::VectorXd> errorVector(new Eigen::VectorXd(teachingInput.getDimension()));
 
 		// Calculate the error values (expected value - real value)
-		for (int timestep = 0; timestep < teachingInput.size(); timestep++)
+		for (unsigned int i = 0; i < teachingInput.getDimension(); i++)
 		{
-			(*errorMap)[timestep].setZero();
-			if (teachingInput.existsTimestep(timestep))
+			if (teachingInput.exists(i))
 			{
-				for (unsigned int i = 0; i < teachingInput.getDimension(); i++)
-				{
-					if (teachingInput.exists(timestep, i))
-					{
-						(*errorMap)[timestep][i] = teachingInput.get(timestep, i) - outputVector[timestep][i];
-						if (clipError)
-							(*errorMap)[timestep][i] = std::max(-1.0, std::min(1.0, (*errorMap)[timestep][i]));
-					}
-				}
+				(*errorVector)[i] = teachingInput.get(i) - outputVector[i];
+				if (clipError)
+					(*errorVector)[i] = std::max(-1.0, std::min(1.0, (*errorVector)[i]));
 			}
 		}
 
-		return errorMap;
+		return errorVector;
 	}
 
 
 	double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
 		// Calculate the errorVector
-		std::unique_ptr<ErrorMap_t> errorMap = getErrormap(neuralNetwork, activationOrder, nullptr, nullptr, clipError);
+		std::unique_ptr<Eigen::VectorXd> errorVector = getErrorVector(neuralNetwork, activationOrder, clipError);
 
 		double specificError = 0;
 
-		for (auto errorValues = errorMap->begin(); errorValues != errorMap->end(); errorValues++)
+		// Add the square of every errorValue in the errorVector
+		for (int i = 0; i < errorVector->rows(); i++)
 		{
-			// Add the square of every errorValue in the errorVector
-			for (int i = 0; i < errorValues->rows(); i++)
-			{
-				specificError += pow((*errorValues)[i], 2.0);
-			}
-		}
+			specificError += pow((*errorVector)(i), 2.0);
+		}		
 
 		// Divide the specific error by two
 		specificError /= 2;

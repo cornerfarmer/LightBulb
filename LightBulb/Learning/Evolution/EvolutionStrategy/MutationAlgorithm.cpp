@@ -26,10 +26,6 @@ namespace LightBulb
 			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * ZigguratGenerator::next());
 			// Make sure the values stays inside our boundaries
 			*mutationStrengthValue = (*mutationStrengthValue < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
-			// Change the mutation direction randomly (TODO: Make this variable)
-			//if ((double)rand() / RAND_MAX > 0.5)
-			//	*mutationStrengthValue *= -1;
-
 		}
 
 		std::vector<Eigen::MatrixXd>& weights = object1.getNeuralNetwork().getNetworkTopology().getAllWeights();
@@ -41,7 +37,7 @@ namespace LightBulb
 			{
 				for (int j = 0; j < layer->cols(); j++)
 				{
-					// Simply add the corresponding mutationStrength value to the weight (TODO: Maybe this step should be adjusted, because the original algorithm adds here an additional random factor)
+					// Simply add the corresponding mutationStrength value to the weight
 					double weightAdd = mutationStrength[mutationStrengthIndex] * ZigguratGenerator::next();
 					(*layer)(i, j) += weightAdd;
 					mutationStrengthIndex++;

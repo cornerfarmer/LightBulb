@@ -15,7 +15,6 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractNetworkTopology;
-	typedef std::vector<Eigen::VectorXd> ErrorMap_t;
 
 	/**
 	 * \brief Describes an algorithm which calculates the gradient for an given neural network.
@@ -48,24 +47,24 @@ namespace LightBulb
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
-		 * \param errormap The errormap which contains the learning information.
+		 * \param errorVector The errorVector which contains the learning information.
 		 */
-		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const ErrorMap_t& errormap);
+		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const Eigen::VectorXd& errorVector);
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
-		 * \param errormap The errormap which contains the learning information.
+		 * \param errorVector The errorVector which contains the learning information.
 		 * \param gradient The variable which should be used for storing the calculated gradient. (Instead of the internal gradient storage)
 		 */
-		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const ErrorMap_t& errormap, std::vector<Eigen::MatrixXd>& gradient);
+		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const Eigen::VectorXd& errorVector, std::vector<Eigen::MatrixXd>& gradient);
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
 		 * \param netInputs The netInputs which should be used instead of the current ones.
 		 * \param activations The activations which should be used instead of the current ones.
-		 * \param errormap The errormap which contains the learning information.
+		 * \param errorVector The errorVector which contains the learning information.
 		 */
-		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const ErrorMap_t& errormap) = 0;
+		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const Eigen::VectorXd& errorVector) = 0;
 	};
 }
 

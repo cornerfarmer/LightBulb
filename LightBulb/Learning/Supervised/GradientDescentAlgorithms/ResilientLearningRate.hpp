@@ -99,7 +99,6 @@ namespace LightBulb
 		friend void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept;
 		// Inherited:
 		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
-		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

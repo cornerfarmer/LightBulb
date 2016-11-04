@@ -111,9 +111,9 @@ namespace LightBulb
 
 			NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(steadyNetwork->getNetworkTopology().getOutputSize());
 
-			input->set(0, transitions[r].action, y);
+			input->set(transitions[r].action, y);
 
-			teacher.addTeachingLesson(new TeachingLessonLinearInput(std::vector<std::vector<double>>(1, transitions[r].state), input));
+			teacher.addTeachingLesson(new TeachingLessonLinearInput(transitions[r].state, input));
 		}
 
 		//auto gradient = checkGradient(&teacher, getOptions()->world->getNeuralNetwork()->getNetworkTopology());

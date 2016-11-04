@@ -16,7 +16,7 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
 // Forward declarations
-class TicTacToeKI;
+class TicTacToeAI;
 class AbstractTile;
 
 enum TicTacToeEvents
@@ -38,7 +38,7 @@ protected:
 	int currentPlayer;
 	bool illegalMove;
 	bool nextDecisionCombination(std::vector<int>& decisionNr, int b, int level = 0);
-	int simulateGame(TicTacToeKI& ai1, TicTacToeKI& ai2, bool secondPlayerStarts);
+	int simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts);
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;

@@ -1,11 +1,11 @@
 // Includes
-#include "Examples/TicTacToeEvolution/TicTacToeKI.hpp"
+#include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
 using namespace LightBulb;
 
-TicTacToeKI::TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_)
+TicTacToeAI::TicTacToeAI(FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_)
 	: AbstractSimpleEvolutionObject(ticTacToe_)
 {
 	currentGame = &ticTacToe_;
@@ -13,12 +13,12 @@ TicTacToeKI::TicTacToeKI(FeedForwardNetworkTopologyOptions& options, TicTacToe& 
 }
 
 
-void TicTacToeKI::getNNInput(std::vector<double>& input)
+void TicTacToeAI::getNNInput(std::vector<double>& input)
 {
 	currentGame->getSight(input);
 }
 
-void TicTacToeKI::interpretNNOutput(std::vector<double>& output)
+void TicTacToeAI::interpretNNOutput(std::vector<double>& output)
 {
 	for (int i = 0; i < 9; i++)
 	{
@@ -33,12 +33,12 @@ void TicTacToeKI::interpretNNOutput(std::vector<double>& output)
 	currentGame->setIllegalMove(true);
 }
 
-TicTacToeKI::~TicTacToeKI()
+TicTacToeAI::~TicTacToeAI()
 {
 }
 
 
-void TicTacToeKI::setTicTacToe(TicTacToe& newTicTacToe)
+void TicTacToeAI::setTicTacToe(TicTacToe& newTicTacToe)
 {
 	currentGame = &newTicTacToe;
 }

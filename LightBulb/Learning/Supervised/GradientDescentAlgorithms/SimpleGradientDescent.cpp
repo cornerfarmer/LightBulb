@@ -80,11 +80,6 @@ namespace LightBulb
 		return deltaWeight;
 	}
 
-	std::string SimpleGradientDescent::printDebugOutput()
-	{
-		return "";
-	}
-
 	bool SimpleGradientDescent::learningHasStopped()
 	{
 		return false;

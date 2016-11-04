@@ -113,8 +113,8 @@ namespace LightBulb
 		*/
 		FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_);
 		/**
-		 * \brief Creates a new feed forward network with default options.
-		 */
+		* \brief Creates a new feed forward network with default options.
+		*/
 		FeedForwardNetworkTopology();
 		// Inherited:
 		int getEdgeCount() const override;

@@ -15,7 +15,7 @@ namespace LightBulb
 		flatSpotEliminationFac = flatSpotEliminationFac_;
 	}
 
-	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const ErrorMap_t& errormap)
+	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const Eigen::VectorXd& errorVector)
 	{
 		for (int layerIndex = networkTopology.getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
@@ -23,7 +23,7 @@ namespace LightBulb
 			if (layerIndex == networkTopology.getLayerCount() - 1)
 			{
 				// Compute the delta value: activationFunction'(netInput) * errorValue
-				lastDeltaVectorOutputLayer = (networkTopology.getOutputNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * errormap.back().array();
+				lastDeltaVectorOutputLayer = (networkTopology.getOutputNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * errorVector.array();
 			}
 			else
 			{

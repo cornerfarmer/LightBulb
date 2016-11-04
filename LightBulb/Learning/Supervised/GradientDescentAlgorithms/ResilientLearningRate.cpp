@@ -83,16 +83,6 @@ namespace LightBulb
 		return previousLearningRates[layerIndex - 1];
 	}
 
-	std::string ResilientLearningRate::printDebugOutput()
-	{
-		// Calculate the absolute sum of all learningRates
-		double totalLearningRate = 0;
-		for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
-			totalLearningRate += previousLearningRate->cwiseAbs().sum();
-		// Print the totalLearningRate
-		return "totalLR :" + std::to_string(totalLearningRate) + " ";
-	}
-
 	bool ResilientLearningRate::learningHasStopped()
 	{
 		// If the previousLearningRates map is not empty (so we have done at least one iteration)

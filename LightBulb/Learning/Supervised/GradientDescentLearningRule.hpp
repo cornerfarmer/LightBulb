@@ -82,15 +82,14 @@ namespace LightBulb
 		 */
 		void adjustWeights(int layerIndex) override;
 		void clearGradient() override;
-		std::string printDebugOutput() override;
 		bool learningHasStopped() override;
 		/**
 		 * \brief Calculates the gradient.
 		 * \param lesson The current teaching lesson object.
 		 * \param lessonIndex The current teaching lesson index.
-		 * \param errormap The errormap which represents how well the neural network has done on the current teaching lesson.
+		 * \param errorVector The errorVector which represents how well the neural network has done on the current teaching lesson.
 		 */
-		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const ErrorMap_t& errormap) override;
+		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Eigen::VectorXd& errorVector) override;
 		void initializeTry() override;
 	public:
 		/**

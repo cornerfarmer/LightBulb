@@ -1,6 +1,6 @@
 // Includes
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
-#include "Examples/TicTacToeEvolution/TicTacToeKI.hpp"
+#include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
 #include "Learning/Evolution/AbstractEvolutionObject.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
@@ -14,7 +14,7 @@ using namespace LightBulb;
 
 AbstractEvolutionObject* TicTacToe::createNewObject()
 {
-	return new TicTacToeKI(*options, *this);
+	return new TicTacToeAI(*options, *this);
 }
 
 TicTacToe::TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
@@ -52,7 +52,7 @@ int TicTacToe::getFieldValue(int x, int y)
 
 int TicTacToe::doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
 {
-	return simulateGame(static_cast<TicTacToeKI&>(obj1), static_cast<TicTacToeKI&>(obj2), round == 1);
+	return simulateGame(static_cast<TicTacToeAI&>(obj1), static_cast<TicTacToeAI&>(obj2), round == 1);
 }
 
 std::vector<std::vector<int>>& TicTacToe::getFields()
@@ -101,7 +101,7 @@ void TicTacToe::initializeForLearning()
 {
 }
 
-int TicTacToe::simulateGame(TicTacToeKI& ai1, TicTacToeKI& ai2, bool secondPlayerStarts)
+int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts)
 {
 	int pointsAI1 = 0;
 	int pointsAI2 = 0;

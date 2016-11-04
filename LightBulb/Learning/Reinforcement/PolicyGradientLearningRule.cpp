@@ -87,15 +87,14 @@ namespace LightBulb
 		
 		auto patternVector = networkTopology.getActivationsPerLayer(0);
 		stateRecord[stepsSinceLastReward] = std::vector<double>(patternVector.data() + networkTopology.usesBiasNeuron(), patternVector.data() + patternVector.size());
-
-		ErrorMap_t errorMap(1, errorVector);
+		
 		if (gradientRecord[stepsSinceLastReward].empty())
 			gradientRecord[stepsSinceLastReward] = networkTopology.getAllWeights();
 
 		for (int i = 0; i < gradientRecord[stepsSinceLastReward].size(); i++)
 			gradientRecord[stepsSinceLastReward][i].setZero();
 		
-		gradientCalculation->calcGradient(networkTopology, errorMap, gradientRecord[stepsSinceLastReward]);
+		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[stepsSinceLastReward]);
 	}
 
 	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector)
@@ -241,10 +240,10 @@ namespace LightBulb
 				std::vector<double> output(1);
 				valueFunctionNetwork->calculate(stateRecord[i], output, TopologicalOrder());
 
-				ErrorMap_t errorMap(1, Eigen::VectorXd(1));
-				errorMap[0](0) = rewards(i) - output[0];
-				valueFunctionGradientCalculation->calcGradient(valueFunctionNetwork->getNetworkTopology(), errorMap);
-				valueErrorSum += abs(errorMap[0](0));
+				Eigen::VectorXd errorVector(1);
+				errorVector(0) = rewards(i) - output[0];
+				valueFunctionGradientCalculation->calcGradient(valueFunctionNetwork->getNetworkTopology(), errorVector);
+				valueErrorSum += abs(errorVector(0));
 				valueErrorSteps++;
 
 				rewards(i) -= output[0];
@@ -267,11 +266,10 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
 	{
-		ErrorMap_t errorMap(1, errorVector);
 		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> tmpBlock;
 		for (int j = 0; j < activations.size(); j++)
 			tmpBlock.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations[j].derived(), 0, activations[j].size()));
-		gradientCalculation->calcGradient(networkTopology, netInputs, tmpBlock, errorMap);
+		gradientCalculation->calcGradient(networkTopology, netInputs, tmpBlock, errorVector);
 	}
 
 }

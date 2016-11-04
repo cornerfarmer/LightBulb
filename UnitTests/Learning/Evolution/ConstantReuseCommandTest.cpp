@@ -17,7 +17,7 @@ public:
 	std::vector<AbstractEvolutionObject*> notUsedObjects;
 	void SetUp() {
 		reuseSelector = new MockReuseSelector();
-		constantReuseCommand = new ConstantReuseCommand(reuseSelector, 10);
+		
 	}
 
 	void SetUpExecute()
@@ -42,7 +42,7 @@ TEST_F(ConstantReuseCommandTest, selectStaticCount)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
 	std::map<AbstractEvolutionObject*, int> counter;
-	constantReuseCommand->setReuseCount(10);
+	constantReuseCommand = new ConstantReuseCommand(reuseSelector, 10);
 
 	EXPECT_CALL(*reuseSelector, executeReuseSelection(10, highscore, counter)).Times(1);
 
@@ -53,7 +53,7 @@ TEST_F(ConstantReuseCommandTest, selectPercentage)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore(10);
 	std::map<AbstractEvolutionObject*, int> counter;
-	constantReuseCommand->setReusePercentage(0.5);
+	constantReuseCommand = new ConstantReuseCommand(reuseSelector, 0.5);
 
 	EXPECT_CALL(*reuseSelector, executeReuseSelection(5, highscore, counter)).Times(1);
 
@@ -62,6 +62,7 @@ TEST_F(ConstantReuseCommandTest, selectPercentage)
 
 TEST_F(ConstantReuseCommandTest, executeWithNoMultipleUsedObject)
 {
+	constantReuseCommand = new ConstantReuseCommand(reuseSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 1;
 
@@ -74,6 +75,7 @@ TEST_F(ConstantReuseCommandTest, executeWithNoMultipleUsedObject)
 
 TEST_F(ConstantReuseCommandTest, executeWithMultipleUsedObject)
 {
+	constantReuseCommand = new ConstantReuseCommand(reuseSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	MockEvolutionObject clonedObject;
@@ -89,6 +91,7 @@ TEST_F(ConstantReuseCommandTest, executeWithMultipleUsedObject)
 
 TEST_F(ConstantReuseCommandTest, executeWithTwoMultipleUsedObjectsAndANotUsedObject)
 {
+	constantReuseCommand = new ConstantReuseCommand(reuseSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	MockEvolutionObject unusedObject;

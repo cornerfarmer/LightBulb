@@ -20,7 +20,7 @@ public:
 	void SetUp() {
 		mutationAlgorithm = new MockMutationAlgorithm();
 		mutationSelector = new MockMutationSelector();
-		constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, mutationSelector, 10);
+		
 	}
 
 	void SetUpExecute()
@@ -45,7 +45,7 @@ TEST_F(ConstantMutationCommandTest, selectStaticCount)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
 	std::map<AbstractEvolutionObject*, int> counter;
-	constantMutationCommand->setMutationCount(10);
+	constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, mutationSelector, 10);
 
 	EXPECT_CALL(*mutationSelector, executeMutationSelection(10, highscore, counter)).Times(1);
 
@@ -56,7 +56,7 @@ TEST_F(ConstantMutationCommandTest, selectPercentage)
 {
 	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore(10);
 	std::map<AbstractEvolutionObject*, int> counter;
-	constantMutationCommand->setMutationPercentage(0.5);
+	constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, mutationSelector, 0.5);
 
 	EXPECT_CALL(*mutationSelector, executeMutationSelection(5, highscore, counter)).Times(1);
 
@@ -65,6 +65,7 @@ TEST_F(ConstantMutationCommandTest, selectPercentage)
 
 TEST_F(ConstantMutationCommandTest, executeWithNoMultipleUsedObject)
 {
+	constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, mutationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 1;
 
@@ -79,6 +80,7 @@ TEST_F(ConstantMutationCommandTest, executeWithNoMultipleUsedObject)
 
 TEST_F(ConstantMutationCommandTest, executeWithMultipleUsedObject)
 {
+	constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, mutationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	MockEvolutionObject clonedObject;
@@ -95,6 +97,7 @@ TEST_F(ConstantMutationCommandTest, executeWithMultipleUsedObject)
 
 TEST_F(ConstantMutationCommandTest, executeWithTwoMultipleUsedObjectsAndANotUsedObject)
 {
+	constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, mutationSelector, 10);
 	SetUpExecute();
 	counter[selectedObjects[0]] = 2;
 	MockEvolutionObject unusedObject;

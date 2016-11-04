@@ -12,20 +12,19 @@
 // Forward declarations
 class TicTacToe;
 
-// TODO: Rename to AI
-class TicTacToeKI : public LightBulb::AbstractSimpleEvolutionObject
+class TicTacToeAI : public LightBulb::AbstractSimpleEvolutionObject
 {
 protected:
 	TicTacToe* currentGame;
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
 public:	
-	TicTacToeKI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_);
-	TicTacToeKI() = default;
-	~TicTacToeKI();
+	TicTacToeAI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_);
+	TicTacToeAI() = default;
+	~TicTacToeAI();
 	void setTicTacToe(TicTacToe& newTicTacToe);
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeKI, LightBulb::AbstractSimpleEvolutionObject);
+USE_PARENT_SERIALIZATION(TicTacToeAI, LightBulb::AbstractSimpleEvolutionObject);
 
 #endif

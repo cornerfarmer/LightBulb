@@ -21,32 +21,7 @@ namespace LightBulb
 
 		name = "NoName";
 	}
-
-	void NeuralNetwork::calculate(const std::vector<std::vector<double>>& input, std::vector<std::vector<double>>& output, const AbstractActivationOrder &activationOrder, int startTime, int timeStepCount, std::vector<std::map<AbstractNeuron*, double>>* outputValuesInTime, std::vector<std::map<AbstractNeuron*, double>>* netInputValuesInTime, bool resetActivations)
-	{
-		// If the calculation start at time 0
-		if (startTime == 0 && resetActivations)
-		{
-			// Reset all activations
-			networkTopology->resetActivation();
-		}
-
-		// Do for every time step
-		for (int timeStep = startTime; (timeStep < input.size() && timeStepCount == -1) || timeStep - startTime < timeStepCount; timeStep++)
-		{
-			// Set the input into the neural network
-			if (input[timeStep].size() > 0)
-				networkTopology->setInput(input[timeStep]);
-
-			// Pass the work to the activationOrder
-			activationOrder.executeActivation(*networkTopology);
-
-			// Extract the output and save it into the output value
-			networkTopology->getOutput(output[timeStep]);
-		}
-
-	}
-
+	
 	void NeuralNetwork::calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations)
 	{
 		// If the calculation start at time 0
