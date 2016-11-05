@@ -41,6 +41,7 @@ namespace LightBulb
 		 * \brief The name of the network.
 		 */
 		std::string name;
+		time_t creationTime;
 	public:
 		/**
 		 * \brief Create a new neural network.

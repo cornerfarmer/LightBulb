@@ -20,6 +20,8 @@ namespace LightBulb
 		state = NN_STATE_READY;
 
 		name = "NoName";
+
+		creationTime = time(nullptr);
 	}
 	
 	void NeuralNetwork::calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations)
@@ -53,7 +55,7 @@ namespace LightBulb
 
 	const time_t& NeuralNetwork::getCreationDate() const
 	{
-		return time(nullptr);
+		return creationTime;
 	}
 
 	const NeuralNetworkState& NeuralNetwork::getState() const
