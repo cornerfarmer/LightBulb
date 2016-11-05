@@ -23,7 +23,7 @@ namespace LightBulb
 		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
 		{
 			// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
-			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * generator.randDouble());
+			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * zigguratGenerator->randDouble());
 			// Make sure the values stays inside our boundaries
 			*mutationStrengthValue = (*mutationStrengthValue < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		}
@@ -38,7 +38,7 @@ namespace LightBulb
 				for (int j = 0; j < layer->cols(); j++)
 				{
 					// Simply add the corresponding mutationStrength value to the weight
-					double weightAdd = mutationStrength[mutationStrengthIndex] * generator.randDouble();
+					double weightAdd = mutationStrength[mutationStrengthIndex] * zigguratGenerator->randDouble();
 					(*layer)(i, j) += weightAdd;
 					mutationStrengthIndex++;
 				}
@@ -52,11 +52,7 @@ namespace LightBulb
 		return new MutationAlgorithm(*this);
 	}
 
-	void MutationAlgorithm::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
-	{
-		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		generator.setSeed(randomGenerator_.getSeed());
-	}
+
 
 	void MutationAlgorithm::setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_)
 	{

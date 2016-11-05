@@ -74,6 +74,7 @@ namespace LightBulb
 		{
 			(*mutationCommand)->setLogger(*options->logger);
 			(*mutationCommand)->setRandomGenerator(*randomGenerator.get());
+			(*mutationCommand)->setZigguratGenerator(*zigguratGenerator.get());
 		}
 
 		for (auto recombinationCommand = getOptions().recombinationCommands.begin(); recombinationCommand != getOptions().recombinationCommands.end(); recombinationCommand++)

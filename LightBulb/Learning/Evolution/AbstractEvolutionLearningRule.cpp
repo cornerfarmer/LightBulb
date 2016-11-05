@@ -18,11 +18,13 @@ namespace LightBulb
 	AbstractEvolutionLearningRule::AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_)
 		: AbstractLearningRule(new AbstractEvolutionLearningRuleOptions(options_))
 	{
+		zigguratGenerator.reset(new ZigguratGenerator(options->seed));
 	}
 
 	AbstractEvolutionLearningRule::AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_)
 		: AbstractLearningRule(options_)
 	{
+		zigguratGenerator.reset(new ZigguratGenerator(options->seed));
 	}
 
 	std::vector<std::string> AbstractEvolutionLearningRule::getDataSetLabels() const

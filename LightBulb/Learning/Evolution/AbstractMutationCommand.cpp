@@ -45,6 +45,11 @@ namespace LightBulb
 		}
 	}
 
+	void AbstractMutationCommand::setZigguratGenerator(ZigguratGenerator& zigguratGenerator)
+	{
+		mutationAlgorithm->setZigguratGenerator(zigguratGenerator);
+	}
+
 	void AbstractMutationCommand::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);

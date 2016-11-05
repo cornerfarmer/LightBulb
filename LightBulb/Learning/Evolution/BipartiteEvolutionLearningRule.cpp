@@ -54,6 +54,8 @@ namespace LightBulb
 		getOptions().learningRule2->setLogger(*options->logger);
 		getOptions().learningRule1->randomGenerator = randomGenerator;
 		getOptions().learningRule2->randomGenerator = randomGenerator;
+		getOptions().learningRule1->zigguratGenerator = zigguratGenerator;
+		getOptions().learningRule2->zigguratGenerator = zigguratGenerator;
 		getOptions().learningRule1->setHelperToUsedObjects();
 		getOptions().learningRule2->setHelperToUsedObjects();
 		getOptions().learningRule2->options->dataSetsPrefix = "Parasite - ";

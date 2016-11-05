@@ -24,6 +24,7 @@ namespace LightBulb
 	void serialize(Archive& archive, EvolutionLearningRule& learningRule)
 	{
 		archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
+		archive(cereal::make_nvp("zigguratGenerator", learningRule.zigguratGenerator));
 	}
 }
 
@@ -41,6 +42,7 @@ namespace cereal
 		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule)
 		{
 			ar(base_class<LightBulb::AbstractEvolutionLearningRule>(&learningRule));
+			ar(cereal::make_nvp("zigguratGenerator", learningRule.zigguratGenerator));
 			learningRule.setHelperToUsedObjects();
 		}
 	};

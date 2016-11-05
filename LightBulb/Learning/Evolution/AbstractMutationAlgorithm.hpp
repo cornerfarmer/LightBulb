@@ -6,6 +6,7 @@
 // Includes
 #include "Random/AbstractRandomGeneratorUser.hpp"
 #include "Tools/AbstractCloneable.hpp"
+#include "Random/ZigguratGenerator.hpp"
 
 // Library Includes
 #include <memory>
@@ -20,6 +21,8 @@ namespace LightBulb
 	 */
 	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
 	{
+	protected:
+		ZigguratGenerator* zigguratGenerator;
 	public:
 		virtual ~AbstractMutationAlgorithm() {}
 		friend void swap(AbstractMutationAlgorithm& lhs, AbstractMutationAlgorithm& rhs) noexcept {	}
@@ -33,6 +36,7 @@ namespace LightBulb
 		 * \param highscore The current highscore.
 		 */
 		virtual void initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) {};
+		void setZigguratGenerator(ZigguratGenerator& generator);
 	};
 }
 

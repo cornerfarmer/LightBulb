@@ -8,6 +8,7 @@
 // Includes
 #include "Learning/AbstractLearningRule.hpp"
 #include "IO/UseParentSerialization.hpp"
+#include "Random/ZigguratGenerator.hpp"
 
 namespace LightBulb
 {
@@ -27,8 +28,11 @@ namespace LightBulb
 	class AbstractEvolutionLearningRule : public AbstractLearningRule
 	{
 		friend class BipartiteEvolutionLearningRule;
+		template <class Archive>
+		friend void serialize(Archive& archive, AbstractEvolutionLearningRule& evolutionLearning);
 	private:
 	protected:
+		std::shared_ptr<ZigguratGenerator> zigguratGenerator;
 		const AbstractEvolutionLearningRuleOptions& getOptions() const;
 		virtual void setHelperToUsedObjects() {};
 	public:
@@ -41,7 +45,7 @@ namespace LightBulb
 
 }
 
-USE_PARENT_SINGLE_SERIALIZATION(LightBulb::AbstractEvolutionLearningRule, LightBulb::AbstractLearningRule, LightBulb);
+#include "IO/AbstractEvolutionLearningRuleIO.hpp"
 
 
 #endif

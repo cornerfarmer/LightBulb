@@ -4,7 +4,7 @@
 
 LightBulb::AbstractRandomGenerator::AbstractRandomGenerator(int seed_)
 {
-	if (seed_ == 1)
+	if (seed_ == -1)
 		seed = getRandomSeed();
 	else
 		seed = seed_;
@@ -33,6 +33,9 @@ int LightBulb::AbstractRandomGenerator::getSeed() const
 
 void LightBulb::AbstractRandomGenerator::setSeed(int newSeed)
 {
-	seed = newSeed;
+	if (newSeed == -1)
+		seed = getRandomSeed();
+	else
+		seed = newSeed;
 	reset();
 }

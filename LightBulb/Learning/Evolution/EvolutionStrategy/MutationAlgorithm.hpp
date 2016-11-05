@@ -8,7 +8,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "Random/ZigguratGenerator.hpp"
+
 
 namespace LightBulb
 {
@@ -25,7 +25,6 @@ namespace LightBulb
 		double mutationStrengthMin;
 		// The absolute maximum of a mutationStrength value
 		double mutationStrengthMax;
-		ZigguratGenerator generator;
 	public:
 		MutationAlgorithm(double mutationStrengthChangeSpeed_, double mutationStrengthMax_ = 50, double mutationStrengthMin_ = 0.000001f);
 		void setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_);
@@ -34,7 +33,6 @@ namespace LightBulb
 		// 2. Adds the new mutationStrength values to their corresponding weights
 		void execute(AbstractEvolutionObject& object1) override;
 		AbstractMutationAlgorithm* clone() const override;
-		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 

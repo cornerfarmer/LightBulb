@@ -826,5 +826,6 @@
     <ClInclude Include="Tools\AbstractCloneable.hpp" />
     <ClInclude Include="IO\ZigguratGeneratorIO.hpp" />
     <ClInclude Include="IO\XorShfGeneratorIO.hpp" />
+    <ClInclude Include="IO\AbstractEvolutionLearningRuleIO.hpp" />
   </ItemGroup>
 </Project>
