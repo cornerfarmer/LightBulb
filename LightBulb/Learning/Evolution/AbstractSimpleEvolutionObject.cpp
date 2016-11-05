@@ -14,8 +14,8 @@ namespace LightBulb
 
 		// Create a neural network from the network topolgy
 		neuralNetwork.reset(new NeuralNetwork(networkTopology));
-		// Randomize all weights (TODO: make the boundaries variable)
-		neuralNetwork->getNetworkTopology().randomizeWeights(world->getRandomGenerator(), -0.5, 0.5);
+		// Randomize all weights
+		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(world->getRandomGenerator());
 
 		// Initialize the mutation strength vector
 		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());

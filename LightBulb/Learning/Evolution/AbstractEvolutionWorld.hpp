@@ -44,7 +44,7 @@ namespace LightBulb
 		virtual bool doSimulationStep() = 0;
 		// Returns a list of all current evolution objects ordered by their score
 		virtual Highscore& getHighscoreList();
-		// This method should calculate the score of the given evolution object (TODO: Rename score to fitness)
+		// This method should calculate the score of the given evolution object
 		virtual double getScore(const AbstractEvolutionObject& object) const = 0;
 		//
 		virtual double getRealScore(const AbstractEvolutionObject& object) const { return getScore(object); }

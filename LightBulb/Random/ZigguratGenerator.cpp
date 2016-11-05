@@ -4,27 +4,20 @@
 
 namespace LightBulb
 {
-	float ZigguratGenerator::fn[128];
-	uint32_t ZigguratGenerator::kn[128];
-	float ZigguratGenerator::wn[129];
-	bool ZigguratGenerator::initialized = false;
-	uint32_t ZigguratGenerator::seed = 123456789;
-
-	void ZigguratGenerator::initialize()
+	ZigguratGenerator::ZigguratGenerator(int seed)
+		:AbstractRandomGenerator(seed)
 	{
-		r4_nor_setup(kn, fn, wn);
-		initialized = true;
+		ZigguratGenerator::reset();
 	}
 
-	float ZigguratGenerator::next()
+	double ZigguratGenerator::randDouble()
 	{
-		if (!initialized)
-			initialize();
+		return r4_nor(state, kn, fn, wn);
+	}
 
-		float value;
-
-		value = r4_nor(seed, kn, fn, wn);
-
-		return value;
+	void ZigguratGenerator::reset()
+	{
+		state = seed;
+		r4_nor_setup(kn, fn, wn);
 	}
 }

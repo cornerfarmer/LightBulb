@@ -824,5 +824,7 @@
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="Tools\AbstractCloneable.hpp" />
+    <ClInclude Include="IO\ZigguratGeneratorIO.hpp" />
+    <ClInclude Include="IO\XorShfGeneratorIO.hpp" />
   </ItemGroup>
 </Project>

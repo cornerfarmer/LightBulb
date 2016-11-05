@@ -29,8 +29,6 @@ namespace LightBulb
 		state << standardRandomGenerator.generator;
 		std::string stateStr = state.str();
 		archive(cereal::make_nvp("state", stateStr));
-
-		archive(cereal::make_nvp("seed", standardRandomGenerator.seed));
 	}
 
 	/**
@@ -49,8 +47,6 @@ namespace LightBulb
 		archive(cereal::make_nvp("state", stateStr));
 		std::istringstream state(stateStr);
 		state >> standardRandomGenerator.generator;
-
-		archive(cereal::make_nvp("seed", standardRandomGenerator.seed));
 	}
 }
 

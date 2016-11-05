@@ -5,15 +5,18 @@
 #include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
+#include "Random/StandardRandomGenerator.hpp"
 
 using namespace LightBulb;
 
 class MutationAlgorithmTest : public testing::Test {
 public:
 	MutationAlgorithm* mutationAlgorithm;
-
+	StandardRandomGenerator<> randomGenerator;
 	void SetUp() {
 		mutationAlgorithm = new MutationAlgorithm(1.6);
+		randomGenerator.setSeed(123456789);
+		mutationAlgorithm->setRandomGenerator(randomGenerator);
 	}
 
 	virtual ~MutationAlgorithmTest()

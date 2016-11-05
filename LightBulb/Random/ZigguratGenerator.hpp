@@ -3,26 +3,31 @@
 #ifndef _ZIGGURATGENERATOR_H_
 #define _ZIGGURATGENERATOR_H_
 
+// Includes
 #include "Lib/ziggurat.hpp"
+#include "AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {
-	/**
-	 * \brief TODO: Refactor
-	 */
-	class ZigguratGenerator
+	class ZigguratGenerator : public AbstractRandomGenerator
 	{
+		template <class Archive>
+		friend void load(Archive& archive, ZigguratGenerator& zigguratGenerator);
+		template <class Archive>
+		friend void save(Archive& archive, ZigguratGenerator const& zigguratGenerator);
 	private:
-		static float fn[128];
-		static uint32_t kn[128];
-		static float wn[129];
-		static bool initialized;
-		static uint32_t seed;
-
-		static void initialize();
+		float fn[128];
+		uint32_t kn[128];
+		float wn[129];
+		uint32_t state;
+	protected:
+		void reset() override;
 	public:
-		static float next();
+		ZigguratGenerator(int seed = -1);
+		double randDouble() override;
 	};
 }
+
+#include "IO/ZigguratGeneratorIO.hpp"
 
 #endif

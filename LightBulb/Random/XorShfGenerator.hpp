@@ -3,53 +3,32 @@
 #ifndef _XORSHFGENERATOR_H_
 #define _XORSHFGENERATOR_H_
 
+// Includes
+#include "AbstractRandomGenerator.hpp"
+
 namespace LightBulb
 {
-	/**
-	 * \brief TODO: Refactor
-	 */
-	class XorShfGenerator
+	class XorShfGenerator : public AbstractRandomGenerator
 	{
 	private:
 	public:
 		typedef unsigned long result_type;
 
-		static unsigned long x, y, z;
+		unsigned long x;
+		unsigned long y;
+		unsigned long z;
 
-		explicit XorShfGenerator()
-		{	// construct
+		explicit XorShfGenerator(int seed = -1);
 
-		}
+		result_type min() const;
 
-		static result_type(min)()
-		{	// return minimum possible generated value
-			return (0);
-		}
+		result_type max() const;
 
-		static result_type(max)()
-		{	// return maximum possible generated value
-			return static_cast<result_type>(-1);
-		}
+		result_type operator()();
 
-		result_type operator()()
-		{
-			unsigned long t;
-			x ^= x << 16;
-			x ^= x >> 5;
-			x ^= x << 1;
+		double randDouble() override;
 
-			t = x;
-			x = y;
-			y = z;
-			z = t ^ x ^ y;
-
-			return z;
-		}
-
-		double next()
-		{
-			return static_cast<double>((*this)()) / max();
-		}
+		void reset() override;
 	};
 }
 

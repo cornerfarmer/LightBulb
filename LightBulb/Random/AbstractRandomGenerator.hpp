@@ -16,9 +16,14 @@ namespace LightBulb
 	 */
 	class AbstractRandomGenerator
 	{
+	private:
 	protected:
+		int seed;
+		int getRandomSeed();
+		virtual void reset() = 0;
 	public:
 		virtual ~AbstractRandomGenerator() {};
+		AbstractRandomGenerator(int seed_);
 		/**
 		 * \brief Generates a random double between [0, 1[.
 		 * \return The random number.
@@ -30,24 +35,24 @@ namespace LightBulb
 		 * \param b The upper boundary.
 		 * \return The random number.
 		 */
-		virtual double randDouble(double a, double b) = 0;
+		virtual double randDouble(double a, double b);
 		/**
 		* \brief Generates a random int between [a, b].
 		* \param a The lower boundary.
 		* \param b The upper boundary.
 		* \return The random number.
 		*/
-		virtual int randInt(int a, int b) = 0;
+		virtual int randInt(int a, int b);
 		/**
 		 * \brief Returns the current seed of the random generator.
 		 * \return The seed.
 		 */
-		virtual int getSeed() const = 0;
+		virtual int getSeed() const;
 		/**
 		 * \brief Sets a new seed.
 		 * \param newSeed The new seed.
 		 */
-		virtual void setSeed(int newSeed) = 0;
+		virtual void setSeed(int newSeed);
 	};
 
 }

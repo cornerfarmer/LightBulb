@@ -7,12 +7,12 @@
 
 namespace LightBulb
 {
-	MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_)
+	MutationAlgorithm::MutationAlgorithm(double mutationStrengthChangeSpeed_, double mutationStrengthMax_, double mutationStrengthMin_)
 	{
 		mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
-		// Initialize the mutation strength boundaries (TODO: Make them variable)
-		mutationStrengthMax = 50;
-		mutationStrengthMin = 0.000001f;
+		// Initialize the mutation strength boundaries
+		mutationStrengthMax = mutationStrengthMax_;
+		mutationStrengthMin = mutationStrengthMin_;
 	}
 
 	void MutationAlgorithm::execute(AbstractEvolutionObject& object1)
@@ -23,7 +23,7 @@ namespace LightBulb
 		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
 		{
 			// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
-			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * ZigguratGenerator::next());
+			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * generator.randDouble());
 			// Make sure the values stays inside our boundaries
 			*mutationStrengthValue = (*mutationStrengthValue < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		}
@@ -38,7 +38,7 @@ namespace LightBulb
 				for (int j = 0; j < layer->cols(); j++)
 				{
 					// Simply add the corresponding mutationStrength value to the weight
-					double weightAdd = mutationStrength[mutationStrengthIndex] * ZigguratGenerator::next();
+					double weightAdd = mutationStrength[mutationStrengthIndex] * generator.randDouble();
 					(*layer)(i, j) += weightAdd;
 					mutationStrengthIndex++;
 				}
@@ -52,9 +52,17 @@ namespace LightBulb
 		return new MutationAlgorithm(*this);
 	}
 
+	void MutationAlgorithm::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+	{
+		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+		generator.setSeed(randomGenerator_.getSeed());
+	}
+
 	void MutationAlgorithm::setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_)
 	{
 		mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
 	}
+
+
 }
 

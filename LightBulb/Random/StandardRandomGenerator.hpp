@@ -26,10 +26,6 @@ namespace LightBulb
 		friend void save(Archive& archive, StandardRandomGenerator<T> const& standardRandomGenerator);
 	protected:
 		/**
-		 * \brief The current seed.
-		 */
-		int seed;
-		/**
 		 * \brief The current random engine.
 		 */
 		URNG generator;
@@ -37,17 +33,20 @@ namespace LightBulb
 		 * \brief The default uniform distribution which is used for numbers between 0 and 1.
 		 */
 		std::uniform_real_distribution<double> uniformDistribution;
+		// Inherited:
+		void reset() override
+		{
+			generator.seed(seed);
+		}
 	public:
 		/**
 		 * \brief Creates a new StandardRandomGenerator.
 		 * \param seed_ The seed which should be used for initializing. (-1 means random)
 		 */
 		StandardRandomGenerator(int seed_ = -1)
-			:generator(seed_)
+			:AbstractRandomGenerator(seed_), generator(seed_)
 		{
-			seed = seed_;
-			if (seed == -1)
-				StandardRandomGenerator<URNG>::setSeed(std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
+			StandardRandomGenerator<URNG>::reset();
 		}
 
 		// Inherited:
@@ -56,26 +55,10 @@ namespace LightBulb
 			return uniformDistribution(generator);
 		}
 
-		double randDouble(double a, double b) override
-		{
-			return randDouble() * (b - a) + a;
-		}
-
 		int randInt(int a, int b) override
 		{
 			std::uniform_int_distribution<int> distribution(a, b);
 			return distribution(generator);
-		}
-
-		int getSeed() const override
-		{
-			return seed;
-		}
-
-		void setSeed(int newSeed) override
-		{
-			seed = newSeed;
-			generator.seed(newSeed);
 		}
 	};
 }

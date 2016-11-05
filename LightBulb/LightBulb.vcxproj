@@ -327,6 +327,8 @@
     <ClInclude Include="IO\RMSPropLearningRateIO.hpp" />
     <ClInclude Include="IO\SimpleGradientDescentIO.hpp" />
     <ClInclude Include="IO\StandardRandomGeneratorIO.hpp" />
+    <ClInclude Include="IO\XorShfGeneratorIO.hpp" />
+    <ClInclude Include="IO\ZigguratGeneratorIO.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractFitnessFunction.hpp" />
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
     <ClInclude Include="Random\XorShfGenerator.hpp" />

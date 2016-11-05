@@ -169,15 +169,13 @@ namespace LightBulb
 		/**
 		 * \brief This method could be used to do some prework on the AbstractNeuralNetwork.
 		 * \param neuralNetwork The original neural network.
-		 * \return The adjusted neural network.
 		 */
-		virtual AbstractNeuralNetwork* initializeNeuralNetwork(AbstractNeuralNetwork &neuralNetwork) { return &neuralNetwork; };
+		virtual void initializeNeuralNetwork(AbstractNeuralNetwork &neuralNetwork) { };
 		/**
 		 * \brief This method could be used to do some prework on the teacher.
 		 * \param teacher The original teacher.
-		 * \return The adjusted teacher.
 		 */
-		virtual Teacher* initializeTeacher(Teacher &teacher) { return &teacher; };
+		virtual void initializeTeacher(Teacher &teacher) { };
 		/**
 		 * \brief This method should determine the start time and time step count of the next error calculation.
 		 * \param nextStartTime The time step where to start.

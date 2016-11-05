@@ -27,13 +27,14 @@ namespace LightBulb
 		double mutationStrengthMax;
 		ZigguratGenerator generator;
 	public:
-		MutationAlgorithm(double mutationStrengthChangeSpeed_);
+		MutationAlgorithm(double mutationStrengthChangeSpeed_, double mutationStrengthMax_ = 50, double mutationStrengthMin_ = 0.000001f);
 		void setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_);
 		// Mutates the given evolution object:
 		// 1. Changes the mutationStrength values randomly
 		// 2. Adds the new mutationStrength values to their corresponding weights
 		void execute(AbstractEvolutionObject& object1) override;
 		AbstractMutationAlgorithm* clone() const override;
+		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};
 }
 

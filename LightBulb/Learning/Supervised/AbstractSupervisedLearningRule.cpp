@@ -38,9 +38,8 @@ namespace LightBulb
 
 	void AbstractSupervisedLearningRule::initializeStartLearningAlgoritm()
 	{
-		// TODO: Refactor?
-		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->teacher = initializeTeacher(*getOptions().teacher);
-		static_cast<AbstractSupervisedLearningRuleOptions*>(options.get())->neuralNetwork = initializeNeuralNetwork(*getOptions().neuralNetwork);
+		initializeTeacher(*getOptions().teacher);
+		initializeNeuralNetwork(*getOptions().neuralNetwork);
 
 		currentActivationOrder.reset(new TopologicalOrder());
 
