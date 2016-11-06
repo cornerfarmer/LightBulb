@@ -1,0 +1,6 @@
+[submodule "extlibs/cereal"]
+	path = extlibs/cereal
+	url = https://github.com/USCiLab/cereal.git
+[submodule "extlibs/eigen"]
+	path = extlibs/eigen
+	url = https://github.com/RLovelett/eigen
