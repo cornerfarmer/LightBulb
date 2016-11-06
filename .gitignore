@@ -50,3 +50,4 @@ Release/LightBulb
 *.exp
 *.tp
 /Experiments/TicTacToe/~$log.xlsx
+/build/
