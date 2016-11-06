@@ -5,7 +5,7 @@
 
 // Library includes
 #include <vector>
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 
 // Includes
 #include "IO/AbstractExporter.hpp"

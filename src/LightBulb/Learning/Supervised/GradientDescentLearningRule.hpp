@@ -6,7 +6,7 @@
 // Library Includes
 #include <vector>
 #include <map>
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 
 // Includes
 #include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"

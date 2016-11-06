@@ -4,7 +4,7 @@
 #define _ABSTRACTLEARNINGRULE_H_
 
 // Library Includes´
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 #include <vector>
 #include <memory>
 #include <Logging/AbstractLogger.hpp>

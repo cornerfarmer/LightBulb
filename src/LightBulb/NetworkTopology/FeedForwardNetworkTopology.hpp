@@ -4,7 +4,7 @@
 #define _FEEDFORWARDNETWORKTOPOLOGY_H_
 
 // Libary includes
-#include "EigenSrc/Dense"
+#include "Eigen/Dense"
 #include <vector>
 #include <memory>
 

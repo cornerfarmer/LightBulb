@@ -8,7 +8,7 @@
 
 // Library includes
 #include <vector>
-#include <EigenSrc/Cholesky>
+#include <Eigen/Cholesky>
 #include <memory>
 
 namespace LightBulb

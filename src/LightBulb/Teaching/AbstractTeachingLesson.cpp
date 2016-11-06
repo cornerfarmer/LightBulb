@@ -6,7 +6,7 @@
 // Library includes
 #include <math.h>
 #include "NeuronDescription/NeuronDescription.hpp"
-#include <EigenSrc/src/Core/util/ForwardDeclarations.h>
+#include <Eigen/src/Core/util/ForwardDeclarations.h>
 #include <memory>
 
 namespace LightBulb

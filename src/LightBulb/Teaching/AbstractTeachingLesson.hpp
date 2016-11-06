@@ -4,7 +4,7 @@
 #define _ABSTRACTTEACHINGLESSON_H_
 
 // Library Includes
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 #include <vector>
 #include <map>
 #include <memory>

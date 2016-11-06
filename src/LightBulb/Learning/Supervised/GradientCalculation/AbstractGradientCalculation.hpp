@@ -9,7 +9,7 @@
 
 // Library Includes
 #include <vector>
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 
 namespace LightBulb
 {

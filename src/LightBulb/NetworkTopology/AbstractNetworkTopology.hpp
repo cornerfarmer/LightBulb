@@ -6,7 +6,7 @@
 // Includes
 
 // Library includes
-#include "EigenSrc/Dense"
+#include "Eigen/Dense"
 #include <vector>
 #include <memory>
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"

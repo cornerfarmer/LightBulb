@@ -5,7 +5,7 @@
 #include <Mocks/MockFeedForwardNetworkTopology.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 #include <Mocks/MockActivationFunction.hpp>
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 #include "Mocks/MockNeuronDescription.hpp"
 
 using namespace LightBulb;

@@ -6,7 +6,7 @@
 // Includes
 #include "Tools/AbstractCloneable.hpp"
 #include <memory>
-#include "EigenSrc/Dense"
+#include "Eigen/Dense"
 #include <vector>
 
 // Forward declarations

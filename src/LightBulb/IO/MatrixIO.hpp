@@ -4,7 +4,7 @@
 #define _MATRIXIO_H_
 
 // Libary includes
-#include <EigenSrc/Dense>
+#include <Eigen/Dense>
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
