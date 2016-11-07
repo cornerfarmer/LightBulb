@@ -19,7 +19,7 @@ namespace LightBulb
 	/**
 	* \brief Describes an algorithm which selects the objects which will be recombined.
 	*/
-	class AbstractRecombinationSelector : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
+	class AbstractRecombinationSelector : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 		/**

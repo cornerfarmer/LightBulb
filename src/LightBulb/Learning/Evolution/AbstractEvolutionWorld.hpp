@@ -23,7 +23,7 @@ namespace LightBulb
 
 	// This class should describe a world which contains multiple evolution objects.
 	// The evolution world has to simulate the environment which surrounds its evolution objects.
-	class AbstractEvolutionWorld : public AbstractLoggable, public AbstractRandomGeneratorUser
+	class AbstractEvolutionWorld : public AbstractLoggable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 		Highscore currentHighscore;

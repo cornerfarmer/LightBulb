@@ -19,7 +19,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes an algorithm which mutates objects.
 	 */
-	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
+	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
 	protected:
 		ZigguratGenerator* zigguratGenerator;

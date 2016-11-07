@@ -15,7 +15,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a random function which chooses one or multiple elements with different probabilities.
 	 */
-	class AbstractSelectionFunction : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
+	class AbstractSelectionFunction : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 	public:

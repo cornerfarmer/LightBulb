@@ -40,7 +40,7 @@ namespace LightBulb
 		 */
 		TeachingLessonBooleanInput(std::vector<double> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
 		// Inherited:
-		const const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
+		const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
 		NeuralNetworkIO<bool>& getBooleanTeachingInput() const;
 		const std::vector<double>& getTeachingPattern() const override;
 	};

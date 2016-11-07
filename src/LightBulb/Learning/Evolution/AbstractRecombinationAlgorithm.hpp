@@ -16,7 +16,7 @@ namespace LightBulb
 	/**
 	 * \brief A algorithm that recombines two evolution objects to a new one.
 	 */
-	class AbstractRecombinationAlgorithm : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
+	class AbstractRecombinationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 	public:

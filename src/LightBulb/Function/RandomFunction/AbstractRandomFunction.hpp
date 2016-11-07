@@ -12,7 +12,7 @@ namespace LightBulb
 	/**
 	 * \brief A function which chooses one of n elements randomly.
 	 */
-	class AbstractRandomFunction : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
+	class AbstractRandomFunction : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 	public:

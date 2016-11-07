@@ -19,7 +19,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes an algorithm which selects the objects which will be mutated.
 	 */
-	class AbstractMutationSelector : public virtual AbstractCloneable, public AbstractRandomGeneratorUser
+	class AbstractMutationSelector : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 		/**

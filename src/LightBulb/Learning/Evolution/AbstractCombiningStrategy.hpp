@@ -25,7 +25,7 @@ namespace LightBulb
 	 * \brief Describes a strategy for combining evolution object from one or two coevolution worlds.
 	 * \details The strategy compares each two evolution objects and stores the results in a CombiningStrategyResults object.
 	 */
-	class AbstractCombiningStrategy : public AbstractRandomGeneratorUser
+	class AbstractCombiningStrategy : public virtual AbstractRandomGeneratorUser
 	{
 	private:
 		/**

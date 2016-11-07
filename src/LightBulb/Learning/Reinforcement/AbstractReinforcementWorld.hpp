@@ -18,7 +18,7 @@ namespace LightBulb
 	struct FeedForwardNetworkTopologyOptions;
 	struct LearningState;
 
-	class AbstractReinforcementWorld : public AbstractRandomGeneratorUser
+	class AbstractReinforcementWorld : public virtual AbstractRandomGeneratorUser
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractReinforcementWorld& world);
