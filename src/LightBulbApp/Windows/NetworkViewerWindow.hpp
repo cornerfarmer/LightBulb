@@ -5,6 +5,10 @@
 
 // Library include
 #include <memory>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"
@@ -24,7 +28,7 @@ namespace LightBulb
 	{
 	private:
 		/**
-		 * \brief The choice to select the neural network which should be thrown. 
+		 * \brief The choice to select the neural network which should be thrown.
 		 */
 		wxChoice* neuralNetworksChoice;
 		/**

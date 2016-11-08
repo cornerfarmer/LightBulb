@@ -75,7 +75,7 @@ namespace LightBulb
 			layer = "output";
 		}
 		else {
-			layer = std::to_string(static_cast<_ULonglong>(layerIndex - 1));
+			layer = std::to_string(layerIndex - 1);
 		}
 		return new JSONAttribute("layer", new JSONStringElement(layer));
 	}

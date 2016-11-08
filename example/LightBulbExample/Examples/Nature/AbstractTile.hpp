@@ -5,15 +5,18 @@
 
 // Library Includes
 #include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
 // Includes
 
 // Forward declarations
 
 
-class AbstractTile 
+class AbstractTile
 {
-protected:	
+protected:
 public:
 	virtual ~AbstractTile() {};
 	virtual float tryToEat() = 0;

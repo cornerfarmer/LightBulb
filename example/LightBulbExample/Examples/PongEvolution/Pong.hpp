@@ -44,6 +44,6 @@ public:
 	int getRoundCount() const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(Pong, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld);
+USE_EXISTING_PARENT_SERIALIZATION(Pong, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld, );
 
 #endif

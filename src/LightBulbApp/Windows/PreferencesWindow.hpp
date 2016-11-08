@@ -8,6 +8,10 @@
 
 // Library include
 #include <map>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 #include "wx/collpane.h"
 
 class wxCollapsiblePaneEvent;
@@ -92,7 +96,7 @@ namespace LightBulb
 		 * \param preference The corresponding preference.
 		 * \param minStep The minimun allowed value as step.
 		 * \param maxStep The maximum allowed value as step.
-		 * \param stepSize The step size. 
+		 * \param stepSize The step size.
 		 * \return The new sizer which contains the new slider.
 		 */
 		wxSizer* createSlider(wxWindow& parent, std::string min, std::string max, std::string current, int currentStep, AbstractPreference& preference, int minStep, int maxStep, double stepSize = 0);

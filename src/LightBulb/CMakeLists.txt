@@ -8,3 +8,4 @@ include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)
 
 add_library(LightBulb STATIC ${SOURCES})
+target_compile_features(LightBulb PRIVATE cxx_range_for)

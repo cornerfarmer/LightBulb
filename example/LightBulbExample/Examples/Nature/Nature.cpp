@@ -4,6 +4,7 @@
 #include "Examples/Nature/EarthTile.hpp"
 #include "Examples/Nature/RockTile.hpp"
 //Library includes
+#include <thread>
 
 using namespace LightBulb;
 
@@ -44,7 +45,7 @@ Nature::Nature()
 }
 
 bool Nature::doSimulationStep()
-{	
+{
 	int deadAnimals = 0;
 
 	while (objects.size() - deadAnimals > 0)

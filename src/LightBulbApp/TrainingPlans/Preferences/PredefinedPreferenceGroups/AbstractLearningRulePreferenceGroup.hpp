@@ -41,6 +41,6 @@ namespace LightBulb
 	};
 }
 
-USE_PARENT_SERIALIZATION(LightBulb::AbstractLearningRulePreferenceGroup, PreferenceGroup, LightBulb);
+USE_PARENT_SERIALIZATION(LightBulb::AbstractLearningRulePreferenceGroup, LightBulb::PreferenceGroup, LightBulb);
 
 #endif

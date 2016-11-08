@@ -5,6 +5,10 @@
 
 // Library include
 #include <memory>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <condition_variable>
 #include <stdexcept>
 
 using namespace LightBulb;
@@ -329,5 +330,3 @@ void TicTacToe::resetWorld()
 		}
 	}
 }
-
-

@@ -30,6 +30,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeEvolutionExample, AbstractCoevolutionTrainingPlan);
+USE_PARENT_SERIALIZATION(TicTacToeEvolutionExample, LightBulb::AbstractCoevolutionTrainingPlan, );
 
 #endif

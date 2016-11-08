@@ -39,6 +39,6 @@ public:
 	double getScore(const LightBulb::AbstractEvolutionObject& object) const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld)
+USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld, )
 
 #endif

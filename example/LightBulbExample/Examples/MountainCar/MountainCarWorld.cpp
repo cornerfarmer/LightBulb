@@ -1,6 +1,7 @@
 // Includes
 #include "Examples/MountainCar/MountainCarWorld.hpp"
 #include <Learning/LearningState.hpp>
+#include <thread>
 
 //Library includes
 
@@ -29,14 +30,14 @@ double MountainCarWorld::doSimulationStep()
 		throwEvent(EVT_POS_CHANGED, *this);
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
-		
+
 	return -1;
 }
 
 void MountainCarWorld::getNNInput(std::vector<double>& input)
 {
 	input.resize(2);
-	
+
 	input[0] = pos;
 	input[1] = vel;
 }

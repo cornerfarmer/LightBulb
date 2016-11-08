@@ -43,6 +43,6 @@ namespace LightBulb
 	};
 }
 
-USE_PARENT_SERIALIZATION(LightBulb::SimpleGradientDescentPreferenceGroup, PreferenceGroup, LightBulb);
+USE_PARENT_SERIALIZATION(LightBulb::SimpleGradientDescentPreferenceGroup, LightBulb::PreferenceGroup, LightBulb);
 
 #endif

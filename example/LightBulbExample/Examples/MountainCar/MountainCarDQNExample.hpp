@@ -24,6 +24,6 @@ public:
 	MountainCarWorld& getWorld();
 };
 
-USE_PARENT_SERIALIZATION(MountainCarDQNExample, LightBulb::AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(MountainCarDQNExample, LightBulb::AbstractLearningRuleTrainingPlan, );
 
 #endif

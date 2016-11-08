@@ -1,7 +1,7 @@
 // Includes
 #include "Examples/PongReinforcement/PongReinforcementWorld.hpp"
 #include <Learning/LearningState.hpp>
-
+#include <thread>
 //Library includes
 
 using namespace LightBulb;
@@ -19,7 +19,7 @@ double PongReinforcementWorld::doSimulationStep()
 		time = 0;
 		game.reset();
 	}
-	
+
 	game.setPlayer(1);
 	doNNCalculation();
 	game.setPlayer(-1);

@@ -24,6 +24,6 @@ public:
 	PongReinforcementWorld& getWorld();
 };
 
-USE_PARENT_SERIALIZATION(PongPolicyGradientExample, LightBulb::AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(PongPolicyGradientExample, LightBulb::AbstractLearningRuleTrainingPlan, );
 
 #endif

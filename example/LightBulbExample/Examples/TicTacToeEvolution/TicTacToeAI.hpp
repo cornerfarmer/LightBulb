@@ -18,13 +18,13 @@ protected:
 	TicTacToe* currentGame;
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
-public:	
+public:
 	TicTacToeAI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_);
 	TicTacToeAI() = default;
 	~TicTacToeAI();
 	void setTicTacToe(TicTacToe& newTicTacToe);
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeAI, LightBulb::AbstractSimpleEvolutionObject);
+USE_PARENT_SERIALIZATION(TicTacToeAI, LightBulb::AbstractSimpleEvolutionObject, );
 
 #endif

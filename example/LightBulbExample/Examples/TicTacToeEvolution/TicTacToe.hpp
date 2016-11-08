@@ -8,6 +8,7 @@
 #include <map>
 #include <array>
 #include <mutex>
+#include <condition_variable>
 
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
@@ -31,7 +32,7 @@ class TicTacToe : public LightBulb::AbstractCoevolutionWorld, public LightBulb::
 private:
 	void initialize();
 protected:
-	std::vector<std::vector<int>> fields;	
+	std::vector<std::vector<int>> fields;
 	LightBulb::AbstractEvolutionObject* createNewObject() override;
 	void resetWorld() override;
 	int whoHasWon();
@@ -64,6 +65,6 @@ public:
 	int getRoundCount() const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld);
+USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld, );
 
 #endif

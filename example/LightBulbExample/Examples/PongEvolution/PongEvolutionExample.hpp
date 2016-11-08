@@ -29,6 +29,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(PongEvolutionExample, LightBulb::AbstractCoevolutionTrainingPlan);
+USE_PARENT_SERIALIZATION(PongEvolutionExample, LightBulb::AbstractCoevolutionTrainingPlan, );
 
 #endif

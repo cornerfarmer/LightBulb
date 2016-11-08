@@ -31,6 +31,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(BackpropagationXorExample, AbstractSingleNNTrainingPlan);
+USE_PARENT_SERIALIZATION(BackpropagationXorExample, LightBulb::AbstractSingleNNTrainingPlan, );
 
 #endif

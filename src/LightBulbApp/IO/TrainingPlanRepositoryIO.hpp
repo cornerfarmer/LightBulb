@@ -5,6 +5,7 @@
 
 // Includes
 #include "Repositories/TrainingPlanRepository.hpp"
+#include "IO/AbstractSingleNNTrainingPlanIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

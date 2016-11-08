@@ -32,6 +32,6 @@ namespace LightBulb
 	};
 }
 
-USE_PARENT_SERIALIZATION(LightBulb::BackpropagationPreferenceGroup, PreferenceGroup, LightBulb);
+USE_PARENT_SERIALIZATION(LightBulb::BackpropagationPreferenceGroup, LightBulb::PreferenceGroup, LightBulb);
 
 #endif

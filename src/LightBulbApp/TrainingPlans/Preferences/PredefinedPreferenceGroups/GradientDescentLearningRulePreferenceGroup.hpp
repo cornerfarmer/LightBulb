@@ -57,6 +57,6 @@ namespace LightBulb
 	};
 }
 
-USE_PARENT_SERIALIZATION(LightBulb::GradientDescentLearningRulePreferenceGroup, PreferenceGroup, LightBulb);
+USE_PARENT_SERIALIZATION(LightBulb::GradientDescentLearningRulePreferenceGroup, LightBulb::PreferenceGroup, LightBulb);
 
 #endif

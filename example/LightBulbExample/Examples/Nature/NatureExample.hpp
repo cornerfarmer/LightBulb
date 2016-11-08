@@ -20,6 +20,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(NatureExample, AbstractEvolutionTrainingPlan);
+USE_PARENT_SERIALIZATION(NatureExample, LightBulb::AbstractEvolutionTrainingPlan, );
 
 #endif

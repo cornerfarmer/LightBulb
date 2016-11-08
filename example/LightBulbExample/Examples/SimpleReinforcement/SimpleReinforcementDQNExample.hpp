@@ -24,6 +24,6 @@ public:
 	SimpleReinforcementWorld& getWorld();
 };
 
-USE_PARENT_SERIALIZATION(SimpleReinforcementDQNExample, LightBulb::AbstractLearningRuleTrainingPlan);
+USE_PARENT_SERIALIZATION(SimpleReinforcementDQNExample, LightBulb::AbstractLearningRuleTrainingPlan, );
 
 #endif

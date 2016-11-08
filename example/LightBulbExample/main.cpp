@@ -15,7 +15,7 @@
 #include "Examples/MountainCar/MountainCarDQNExample.hpp"
 #include "Examples/Nature/NatureExample.hpp"
 
-void main(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	LightBulb::App* app = new LightBulb::App();
 	app->addTrainingPlan(new BackpropagationXorExample());
@@ -35,4 +35,6 @@ void main(int argc, char** argv)
 
 	wxApp::SetInstance(app);
 	wxEntry(argc, argv);
+
+	return 0;
 }
