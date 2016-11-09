@@ -11,12 +11,14 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief Describes an hall of fame algorithm where objects are evaluated against ALL members of the hall of fame.
+	 */
 	class FullHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
 	{
 	private:
 	protected:
+		// Inherited:
 		void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) override;
 	};
 }
