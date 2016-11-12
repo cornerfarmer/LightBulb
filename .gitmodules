@@ -7,9 +7,6 @@
 [submodule "extlibs/freechart"]
 	path = extlibs/freechart
 	url = https://github.com/domin1101/freechart.git
-[submodule "extlibs/googlemock"]
-	path = extlibs/googlemock
-	url = https://github.com/google/googlemock.git
 [submodule "extlibs/googletest"]
 	path = extlibs/googletest
 	url = https://github.com/google/googletest.git
