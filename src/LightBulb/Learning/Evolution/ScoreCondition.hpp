@@ -8,14 +8,21 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief A condition which matches if the best score exceeds a specified score goal.
+	 */
 	class ScoreCondition : public AbstractExitCondition
 	{
 	private:
-		// Holds the best score of the last generation
+		/**
+		 * \brief The score which should reached.
+		 */
 		double scoreGoal;
 	public:
+		/**
+		 * \brief Creates a score condition.
+		 * \param scoreGoal_ The score which should reached.
+		 */
 		ScoreCondition(double scoreGoal_);
 		// Inherited:
 		bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;

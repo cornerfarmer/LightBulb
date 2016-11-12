@@ -12,8 +12,8 @@ namespace LightBulb
 {
 	/**
 	 * \brief A fitness function to make sure to keep individuality in the population.
-	 * \details Describes: \n \n \f$ fit(o) = fit*(o) / (\sum Sh(d(o,o_i))) \f$ \n \n
-	 *  Sharing function: \n \n \f$ Sh(d(o,o_i)) ={\begin{cases} 1 - (d(o,o_i)/ \sigma)^\alpha&{\mbox{if }}d(o,o_i)<\sigma\\ 0&{\mbox{otherwise}}\end{cases}}\f$ \n \n
+	 * \details Describes: \n \n \f$ fit(o) = \frac{fit*(o)}{(\sum Sh(d(o,o_i)))} \f$ \n \n
+	 *  Sharing function: \n \n \f$ Sh(d(o,o_i)) ={\begin{cases} 1 - (\frac{d(o,o_i)}{\sigma})^\alpha&{\mbox{if }}d(o,o_i)<\sigma\\ 0&{\mbox{otherwise}}\end{cases}}\f$ \n \n
 	 * \f$\sigma: dissimilarity threshold\f$ \n 
 	 * \f$d(o,o_i): euclidean distance between two objects \f$ \n 
 	 * \f$\alpha: exponent\f$ \n 

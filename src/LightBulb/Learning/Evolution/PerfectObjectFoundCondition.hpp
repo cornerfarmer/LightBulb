@@ -10,19 +10,32 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractCombiningStrategy;
-
-	// A condition which matches if the best score only changes under a specified number for a chosen time
+	/**
+	 * \brief A condition which matches if a perfect object exists for a chosen amount of time.
+	 * \details A perfect object is a object which wins against every object in the other population.
+	 */
 	class PerfectObjectFoundCondition : public AbstractExitCondition
 	{
 	private:
-		// Counts how many times the difference was lower than the allowed minimum
+		/**
+		 * \brief Counts how many times a perfect object existed.
+		 */
 		int counter;
-		// Holds the time for how long the score must be lower than the allow minimum
+		/**
+		 * \brief Contains the time for how long a perfect object has to exist.
+		 */
 		int count;
+		/**
+		 * \brief Returns if an perfect object exists.
+		 * \param combiningStrategy The combining strategy which contains the last combining results.
+		 * \return True, if an perfect object exists.
+		 */
 		bool perfectObjectExists(const AbstractCombiningStrategy& combiningStrategy) const;
 	public:
-		void setCount(int newCount);
-		// Creates a new condition with the minimum difference and the allowed timesteps
+		/**
+		 * \brief Creates a new perfect object found condition.
+		 * \param count_ Determines how many times a perfect object has to exist until the condition should match.
+		 */
 		PerfectObjectFoundCondition(int count_);
 		// Inherited:
 		bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;

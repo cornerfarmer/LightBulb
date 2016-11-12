@@ -33,7 +33,7 @@ namespace LightBulb
 		standardDeviation = sqrt(standardDeviation);
 
 		if (average < deviationFac * standardDeviation)
-			throw std::logic_error("Your chosen deviationFac is too big");
+			throw std::logic_error("Your chosen deviationFac is too big.");
 
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{

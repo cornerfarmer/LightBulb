@@ -12,13 +12,16 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief A combining strategy which combines every object with every object.
+	 */
 	class RoundRobinCombiningStrategy : public AbstractCombiningStrategy
 	{
 	private:
+		// Inherited:
 		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
 	public:
+		// Inherited:
 		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
 	};
 }

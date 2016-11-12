@@ -11,15 +11,24 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	* \brief Describes an hall of fame algorithm where objects are evaluated against random members of the hall of fame.
+	*/
 	class RandomHallOfFameAlgorithm : public AbstractHallOfFameAlgorithm
 	{
 	private:
+		/**
+		* \brief Determines the number of competitions per object.
+		*/
 		int amountOfCompetitionsPerObject;
 	protected:
+		// Inherited:
 		void evaluateObjects(std::vector<AbstractEvolutionObject*>& objects) override;
 	public:
+		/**
+		 * \brief Creates a random hall of fame algorithm.
+		 * \param amountOfCompetitionsPerObject_ Determines the number of competitions per object.
+		 */
 		RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_ = 0);
 	};
 }

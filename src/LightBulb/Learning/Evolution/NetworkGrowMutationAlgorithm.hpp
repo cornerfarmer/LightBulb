@@ -13,15 +13,23 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractEvolutionObject;
-
-	// A algorithm which mutates a given evolution object by executing the corresponding EvolutionStrategy algorithm
+	/**
+	 * \brief A mutation algorithm which adds neurons to the given objects.
+	 */
 	class NetworkGrowMutationAlgorithm : public AbstractMutationAlgorithm
 	{
 	private:
+		/**
+		 * \brief The upper boundary of the allowed neuron count per layer.
+		 */
 		std::vector<unsigned int> maxNeuronsPerLayer;
 	public:
+		/**
+		 * \brief Creates a network grow mutation algorithm.
+		 * \param maxNeuronsPerLayer_ The upper boundary of the allowed neuron count per layer.
+		 */
 		NetworkGrowMutationAlgorithm(const std::vector<unsigned int>& maxNeuronsPerLayer_);
-
+		// Inherited:
 		void execute(AbstractEvolutionObject& object1) override;
 		AbstractCloneable* clone() const override;
 	};

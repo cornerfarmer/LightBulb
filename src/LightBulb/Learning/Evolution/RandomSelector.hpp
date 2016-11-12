@@ -13,28 +13,33 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
-	//
+	/**
+	 * \brief A selector which selects objects with a random function.
+	 */
 	class RandomSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
 	{
 	private:
-		// Holds amount of objects which should be selected
+		/**
+		 * \brief The random function which should be used for selecting objects.
+		 */
 		std::unique_ptr<AbstractRandomFunction> randomFunction;
 	protected:
+		// Inherited:
 		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
 	public:
 		RandomSelector() = default;
-		RandomSelector(AbstractRandomFunction* randomFunction_);
 		RandomSelector(const RandomSelector& other);
 		RandomSelector(RandomSelector&& other) noexcept;
 		RandomSelector& operator=(RandomSelector other);
-
 		friend void swap(RandomSelector& lhs, RandomSelector& rhs) noexcept;
-
+		/**
+		 * \brief Creates a random selector.
+		 * \param randomFunction_ The random function which should be used.
+		 */
+		RandomSelector(AbstractRandomFunction* randomFunction_);
+		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
-
 		AbstractCloneable* clone() const override;
 	};
 }

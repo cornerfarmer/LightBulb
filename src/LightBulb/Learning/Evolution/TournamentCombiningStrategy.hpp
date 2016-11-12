@@ -13,8 +13,6 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
 	class TournamentCombiningStrategy : public AbstractCombiningStrategy
 	{
 	private:

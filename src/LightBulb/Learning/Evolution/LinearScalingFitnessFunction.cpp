@@ -26,6 +26,9 @@ namespace LightBulb
 			{
 				base = std::min(base, entry->first);
 			}
+
+			if (highscore.size() > 0)
+				base *= -1;
 		}
 
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)

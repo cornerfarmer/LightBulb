@@ -8,24 +8,35 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
-	// A condition which matches if the best score only changes under a specified number for a chosen time
+	/**
+	 * \brief A condition which matches if the best score only changes within a tiny interval for a chosen time.
+	 */
 	class RateDifferenceCondition : public AbstractExitCondition
 	{
 	private:
-		// Holds the best score of the last generation
+		/**
+		 * \brief Contains the best score of the last generation.
+		 */
 		double lastBestRate;
-		// Holds the minimum allowed difference
+		/**
+		 * \brief Contains the minimum allowed difference.
+		 */
 		double difference;
-		// Counts how many times the difference was lower than the allowed minimum
+		/**
+		 * \brief Counts how many times the difference was lower than the allowed minimum.
+		 */
 		int counter;
-		// Holds the time for how long the score must be lower than the allow minimum
+		/**
+		 * \brief Contains the time for how long the score must be lower than the allow minimum.
+		 */
 		int count;
 	public:
 		virtual ~RateDifferenceCondition() {}
-		void setCount(int newCount);
-		// Creates a new condition with the minimum difference and the allowed timesteps
+		/**
+		 * \brief Creates a new rate difference condition.
+		 * \param difference_ The minimum allowed difference.
+		 * \param count_ The time for how long the score must be lower than the allow minimum.
+		 */
 		RateDifferenceCondition(double difference_, int count_);
 		// Inherited:
 		bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;
