@@ -109,7 +109,7 @@ namespace LightBulb
 				y += getOptions().discountFactor * q;
 			}
 
-			NeuralNetworkIO<double>* input = new NeuralNetworkIO<double>(steadyNetwork->getNetworkTopology().getOutputSize());
+			TeachingInput<double>* input = new TeachingInput<double>(steadyNetwork->getNetworkTopology().getOutputSize());
 
 			input->set(transitions[r].action, y);
 

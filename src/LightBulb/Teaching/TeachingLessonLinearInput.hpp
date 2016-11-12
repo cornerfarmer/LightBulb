@@ -20,7 +20,7 @@ namespace LightBulb
 		/**
 		 * \brief The values the neural network should return.
 		 */
-		std::unique_ptr<NeuralNetworkIO<double>> teachingInput;
+		std::unique_ptr<TeachingInput<double>> teachingInput;
 		/**
 		 * \brief  The values we will be fed into the neural network.
 		 */
@@ -31,9 +31,9 @@ namespace LightBulb
 		 * \param teachingPattern_ The teaching pattern. (The input values of the network)
 		 * \param teachingInput_ The teaching input. (The values the network should calculate)
 		 */
-		TeachingLessonLinearInput(std::vector<double> teachingPattern_, NeuralNetworkIO<double>* teachingInput_);
+		TeachingLessonLinearInput(std::vector<double> teachingPattern_, TeachingInput<double>* teachingInput_);
 		// Inherited:
-		const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
+		const TeachingInput<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
 		const std::vector<double>& getTeachingPattern() const override;
 	};
 }

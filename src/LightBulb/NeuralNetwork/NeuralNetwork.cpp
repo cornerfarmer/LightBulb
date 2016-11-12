@@ -2,7 +2,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "Teaching/TeachingInput.hpp"
 // Library includes
 #include <exception>
 #include <ctime>

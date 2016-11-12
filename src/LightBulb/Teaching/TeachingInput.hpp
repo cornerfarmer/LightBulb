@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _NEURALNETWORKIO_H_
-#define _NEURALNETWORKIO_H_
+#ifndef _TEACHINGINPUT_H_
+#define _TEACHINGINPUT_H_
 
 // Includes
 #include <vector>
@@ -10,11 +10,11 @@
 namespace LightBulb
 {
 	/**
-	 * \brief This class contains all stuff needed to describe the input and output of a neural network.
+	 * \brief This class contains all stuff needed to describe what a network should return.
 	 * \tparam T The data type which should be used.
 	 */
 	template<typename T>
-	class NeuralNetworkIO : public std::vector<std::pair<bool, T>>
+	class TeachingInput : public std::vector<std::pair<bool, T>>
 	{
 	private:
 		/**
@@ -27,7 +27,7 @@ namespace LightBulb
 		 * \brief Creates a new NeuralNetworkIO
 		 * \param d The dimension which should be equal to the output neurons of the corresponding network.
 		 */
-		NeuralNetworkIO(int d)
+		TeachingInput(int d)
 			: std::vector<std::pair<bool, T>>(d)
 		{
 			dimension = d;

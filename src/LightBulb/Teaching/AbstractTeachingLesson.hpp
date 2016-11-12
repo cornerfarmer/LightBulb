@@ -10,7 +10,7 @@
 #include <memory>
 
 // Includes
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "TeachingInput.hpp"
 
 namespace LightBulb
 {
@@ -40,7 +40,7 @@ namespace LightBulb
 		 * \param activationFunction The activation function the target network uses in the output layer.
 		 * \return The teaching input.
 		 */
-		virtual const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const = 0;
+		virtual const TeachingInput<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const = 0;
 		/**
 		 * \brief Returns the teaching pattern.
 		 * \return The teaching pattern.

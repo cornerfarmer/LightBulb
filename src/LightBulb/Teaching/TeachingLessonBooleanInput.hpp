@@ -22,12 +22,12 @@ namespace LightBulb
 		/**
 		 * \brief The values the neural network should give back as booleans.
 		 */
-		std::unique_ptr<NeuralNetworkIO<bool>> teachingInput;
+		std::unique_ptr<TeachingInput<bool>> teachingInput;
 		/**
 		 * \brief The values the neural network should give back as doubles.
 		 * \details These are calculated dynamically.
 		 */
-		std::unique_ptr<NeuralNetworkIO<double>> teachingInputLinear;
+		std::unique_ptr<TeachingInput<double>> teachingInputLinear;
 		/**
 		 * \brief The values we will put into the neural network
 		 */
@@ -38,10 +38,10 @@ namespace LightBulb
 		 * \param teachingPattern_ The teaching pattern. (The input values of the network)
 		 * \param teachingInput_ The teaching input. (The values the network should calculate)
 		 */
-		TeachingLessonBooleanInput(std::vector<double> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_);
+		TeachingLessonBooleanInput(std::vector<double> teachingPattern_, TeachingInput<bool>* teachingInput_);
 		// Inherited:
-		const NeuralNetworkIO<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
-		NeuralNetworkIO<bool>& getBooleanTeachingInput() const;
+		const TeachingInput<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const override;
+		TeachingInput<bool>& getBooleanTeachingInput() const;
 		const std::vector<double>& getTeachingPattern() const override;
 	};
 }

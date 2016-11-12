@@ -2,7 +2,7 @@
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "TeachingInput.hpp"
 // Library includes
 #include <math.h>
 #include "NeuronDescription/NeuronDescription.hpp"
@@ -34,7 +34,7 @@ namespace LightBulb
 	std::unique_ptr<Eigen::VectorXd> AbstractTeachingLesson::getErrorVectorFromOutputVector(const std::vector<double>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
-		const NeuralNetworkIO<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
+		const TeachingInput<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
 
 		// Create the errorVector
 		std::unique_ptr<Eigen::VectorXd> errorVector(new Eigen::VectorXd(teachingInput.getDimension()));

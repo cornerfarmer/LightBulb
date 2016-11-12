@@ -2,21 +2,21 @@
 #include "Teaching/TeachingLessonBooleanInput.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "TeachingInput.hpp"
 // Library includes
 #include <exception>
 #include "NeuronDescription/NeuronDescription.hpp"
 
 namespace LightBulb
 {
-	TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<double> teachingPattern_, NeuralNetworkIO<bool>* teachingInput_)
+	TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<double> teachingPattern_, TeachingInput<bool>* teachingInput_)
 	{
 		teachingInput.reset(teachingInput_);
 		teachingPattern = teachingPattern_;
-		teachingInputLinear.reset(new NeuralNetworkIO<double>(teachingInput_->getDimension()));
+		teachingInputLinear.reset(new TeachingInput<double>(teachingInput_->getDimension()));
 	}
 
-	const NeuralNetworkIO<double>& TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
+	const TeachingInput<double>& TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
 	{
 		// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
 		if (!activationFunction.hasAMaxAndMinimum())
@@ -40,7 +40,7 @@ namespace LightBulb
 		return *teachingInputLinear.get();
 	}
 
-	NeuralNetworkIO<bool>& TeachingLessonBooleanInput::getBooleanTeachingInput() const
+	TeachingInput<bool>& TeachingLessonBooleanInput::getBooleanTeachingInput() const
 	{
 		return *teachingInput.get();
 	}

@@ -12,7 +12,7 @@
 
 // Include
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "Teaching/TeachingInput.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 

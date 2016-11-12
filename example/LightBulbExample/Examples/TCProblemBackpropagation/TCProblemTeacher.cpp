@@ -88,7 +88,7 @@ TCProblemTeacher::TCProblemTeacher(bool calcStrictError, double weightDecayFac_)
 	for (int i = 0; i < 40; i ++)
 	{
 		std::vector<double> teachingPattern(16);
-		NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
+		TeachingInput<bool>* teachingInput = new TeachingInput<bool>(1);
 		for (int l = 0; l < 16; l += 1)
 		{
 			teachingPattern[l] = lernExamples[i](l % 4, l / 4);

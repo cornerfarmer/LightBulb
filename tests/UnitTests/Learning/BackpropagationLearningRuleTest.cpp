@@ -2,7 +2,7 @@
 #include <Learning/Supervised/GradientDescentLearningRule.hpp>
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
-#include <NeuralNetwork/NeuralNetworkIO.hpp>
+#include <Teaching/TeachingInput.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
@@ -41,7 +41,7 @@ public:
 			for (int l = 0; l < 2; l += 1)
 			{
 				std::vector<double> teachingPattern(2);
-				NeuralNetworkIO<bool>* teachingInput = new NeuralNetworkIO<bool>(1);
+				TeachingInput<bool>* teachingInput = new TeachingInput<bool>(1);
 
 				teachingPattern[0] = i;
 				teachingPattern[1] = l;

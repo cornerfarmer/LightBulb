@@ -1,18 +1,18 @@
 // Includes
 #include "Teaching/TeachingLessonLinearInput.hpp"
-#include "NeuralNetwork/NeuralNetworkIO.hpp"
+#include "TeachingInput.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb
 {
 
-	TeachingLessonLinearInput::TeachingLessonLinearInput(std::vector<double> teachingPattern_, NeuralNetworkIO<double>* teachingInput_)
+	TeachingLessonLinearInput::TeachingLessonLinearInput(std::vector<double> teachingPattern_, TeachingInput<double>* teachingInput_)
 	{
 		teachingInput.reset(teachingInput_);
 		teachingPattern = teachingPattern_;
 	}
 
-	const NeuralNetworkIO<double>& TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
+	const TeachingInput<double>& TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
 	{
 		return *teachingInput.get();
 	}
