@@ -16,4 +16,8 @@ include(${wxWidgets_USE_FILE})
 
 add_library(LightBulbApp STATIC ${SOURCES})
 target_link_libraries(LightBulbApp LightBulb freechart ${wxWidgets_LIBRARIES})
-target_compile_features(LightBulbApp PRIVATE cxx_range_for)
+set_target_properties(LightBulbApp PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)

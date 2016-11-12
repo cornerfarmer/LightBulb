@@ -16,4 +16,8 @@ add_subdirectory(../../extlibs/googletest ${CMAKE_CURRENT_BINARY_DIR}/googletest
 
 add_executable(UnitTests ${SOURCES})
 target_link_libraries(UnitTests LightBulb gmock)
-target_compile_features(UnitTests PRIVATE cxx_range_for)
+set_target_properties(UnitTests PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)
