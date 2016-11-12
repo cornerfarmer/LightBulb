@@ -320,6 +320,7 @@
     <ClInclude Include="Function\InputFunction\WeightedSumFunction.hpp" />
     <ClInclude Include="IO\AbstractEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractGradientDescentAlgorithmIO.hpp" />
+    <ClInclude Include="IO\AbstractRandomGeneratorIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
     <ClInclude Include="IO\BackpropagationIO.hpp" />

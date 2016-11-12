@@ -7,7 +7,6 @@
 // Include
 
 // Library Includes
-#include "IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
@@ -16,6 +15,10 @@ namespace LightBulb
 	 */
 	class AbstractRandomGenerator
 	{
+		template <class Archive>
+		friend void save(Archive& archive, AbstractRandomGenerator const& randomGenerator);
+		template <class Archive>
+		friend void load(Archive& archive, AbstractRandomGenerator& randomGenerator);
 	private:
 	protected:
 		int seed;
@@ -57,7 +60,7 @@ namespace LightBulb
 
 }
 
-EMPTY_SERIALIZATION(LightBulb::AbstractRandomGenerator, LightBulb)
+#include "IO/AbstractRandomGeneratorIO.hpp"
 
 
 #endif

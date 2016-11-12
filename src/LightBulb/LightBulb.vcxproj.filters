@@ -823,5 +823,6 @@
     <ClInclude Include="IO\XorShfGeneratorIO.hpp" />
     <ClInclude Include="IO\AbstractEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="Teaching\TeachingInput.hpp" />
+    <ClInclude Include="IO\AbstractRandomGeneratorIO.hpp" />
   </ItemGroup>
 </Project>

@@ -23,6 +23,7 @@ namespace LightBulb
 	void save(Archive& archive, PreferenceGroup const& preferenceGroup)
 	{
 		archive(cereal::base_class<AbstractPreferenceElement>(&preferenceGroup));
+		archive(cereal::make_nvp("name", preferenceGroup.name));
 		archive(cereal::make_nvp("preferences", preferenceGroup.preferences));
 	}
 
@@ -36,6 +37,7 @@ namespace LightBulb
 	void load(Archive& archive, PreferenceGroup& preferenceGroup)
 	{
 		archive(cereal::base_class<AbstractPreferenceElement>(&preferenceGroup));
+		archive(cereal::make_nvp("name", preferenceGroup.name));
 		archive(cereal::make_nvp("preferences", preferenceGroup.preferences));
 	}
 }
