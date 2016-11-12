@@ -28,7 +28,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding windiw.
 		 */
-		std::unique_ptr<EvolutionAnalyzerWindow> window;
+		EvolutionAnalyzerWindow* window;
 		/**
 		 * \brief The training plan repository.
 		 * \details Used for listing all current training plans.

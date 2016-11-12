@@ -26,7 +26,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding window.
 		 */
-		std::unique_ptr<SimulatorWindow> window;
+		SimulatorWindow* window;
 		/**
 		 * \brief The neural network repository to use.
 		 */

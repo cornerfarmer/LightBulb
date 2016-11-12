@@ -37,7 +37,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding window.
 		 */
-		std::unique_ptr<TrainingWindow> window;
+		TrainingWindow* window;
 		/**
 		 * \brief Contains all currently running sub apps.
 		 */

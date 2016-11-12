@@ -14,7 +14,7 @@ namespace LightBulb
 		trainingPlanRepository = &trainingPlanRepository_;
 		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LoggerController::trainingPlansChanged, *this);
 
-		window.reset(new LoggerWindow(*this, parent));
+		window = new LoggerWindow(*this, parent);
 
 		trainingPlansChanged(*trainingPlanRepository);
 	}
@@ -38,7 +38,7 @@ namespace LightBulb
 
 	LoggerWindow& LoggerController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	void LoggerController::setLogLevel(int level)

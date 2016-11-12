@@ -8,12 +8,12 @@ namespace LightBulb
 		:AbstractSubApp(mainApp)
 	{
 		trainingPlan = &trainingPlan_;
-		window.reset(new PreferencesWindow(*this, parent));
+		window = new PreferencesWindow(*this, parent);
 	}
 
 	PreferencesWindow& PreferencesController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	std::string PreferencesController::getLabel()

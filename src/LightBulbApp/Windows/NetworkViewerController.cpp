@@ -11,14 +11,14 @@ namespace LightBulb
 	{
 		neuralNetworkRepository = &neuralNetworkRepository_;
 		neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &NetworkViewerController::neuralNetworksChanged, *this);
-		window.reset(new NetworkViewerWindow(*this, parent));
+		window = new NetworkViewerWindow(*this, parent);
 		neuralNetworksChanged(*neuralNetworkRepository);
 	}
 
 
 	NetworkViewerWindow& NetworkViewerController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& NetworkViewerController::getNeuralNetworks() const

@@ -25,7 +25,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding window.
 		 */
-		std::unique_ptr<PreferencesWindow> window;
+		PreferencesWindow* window;
 		/**
 		 * \brief The training plan whose preferences should be shown.
 		 */

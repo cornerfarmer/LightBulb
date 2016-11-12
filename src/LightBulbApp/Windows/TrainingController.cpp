@@ -23,7 +23,7 @@ namespace LightBulb
 		neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &TrainingController::neuralNetworksChanged, *this);
 		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &TrainingController::trainingPlansChanged, *this);
 
-		window.reset(new TrainingWindow(*this));;
+		window = new TrainingWindow(*this);
 		saveTrainingPlanAfterPausedIndex = -1;
 		saveTrainingSessionAfterPause = false;
 
@@ -166,7 +166,7 @@ namespace LightBulb
 
 	TrainingWindow& TrainingController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	void TrainingController::addSubAppFactory(AbstractSubAppFactory* newSubAppFactory)
@@ -259,12 +259,12 @@ namespace LightBulb
 
 	void TrainingController::addSubApp(int subAppFactoryIndex)
 	{
-		activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createSupApp(*this, *window.get())));
+		activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(subAppFactories[subAppFactoryIndex]->createSupApp(*this, *window)));
 	}
 
 	void TrainingController::openPreferences(int trainingPlanPatternIndex)
 	{
-		PreferencesController* preferencesController = new PreferencesController(*this, *trainingPlanPatterns[trainingPlanPatternIndex].get(), *window.get());
+		PreferencesController* preferencesController = new PreferencesController(*this, *trainingPlanPatterns[trainingPlanPatternIndex].get(), *window);
 		preferencesController->getWindow().Show();
 		activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
 	}

@@ -25,7 +25,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding window.
 		 */
-		std::unique_ptr<NetworkViewerWindow> window;
+		NetworkViewerWindow* window;
 		/**
 		 * \brief The neural network repository.
 		 */

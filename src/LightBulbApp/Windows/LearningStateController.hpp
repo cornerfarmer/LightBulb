@@ -56,7 +56,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding window.
 		 */
-		std::unique_ptr<LearningStateWindow> window;
+		LearningStateWindow* window;
 		/**
 		 * \brief The training plan repository to get all current training plans.
 		 */

@@ -11,7 +11,7 @@ namespace LightBulb
 	{
 		neuralNetworkRepository = &neuralNetworkRepository_;
 		neuralNetworkRepository->registerObserver(EVT_NN_CHANGED, &SimulatorController::neuralNetworksChanged, *this);
-		window.reset(new SimulatorWindow(*this, parent));
+		window = new SimulatorWindow(*this, parent);
 		neuralNetworksChanged(*neuralNetworkRepository);
 	}
 
@@ -22,7 +22,7 @@ namespace LightBulb
 
 	SimulatorWindow& SimulatorController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& SimulatorController::getNeuralNetworks()

@@ -27,7 +27,7 @@ namespace LightBulb
 		/**
 		 * \brief The corresponding window.
 		 */
-		std::unique_ptr<LoggerWindow> window;
+		LoggerWindow* window;
 		/**
 		 * \brief The training plan repository used to list all current training plans.
 		 */

@@ -22,7 +22,7 @@ namespace LightBulb
 		refreshRate = 100;
 		trainingPlanRepository = &trainingPlanRepository_;
 		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &LearningStateController::trainingPlansChanged, *this);
-		window.reset(new LearningStateWindow(*this, parent));
+		window = new LearningStateWindow(*this, parent);
 		iterationsSinceLearningStateChanged = 0;
 		trainingPlansChanged(*trainingPlanRepository);
 	}
@@ -39,7 +39,7 @@ namespace LightBulb
 
 	LearningStateWindow& LearningStateController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	const std::vector<std::unique_ptr<AbstractTrainingPlan>>& LearningStateController::getTrainingPlans() const

@@ -13,7 +13,7 @@ namespace LightBulb
 		trainingPlanRepository = &trainingPlanRepository_;
 		trainingPlanRepository->registerObserver(EVT_TP_CHANGED, &EvolutionAnalyzerController::trainingPlansChanged, *this);
 
-		window.reset(new EvolutionAnalyzerWindow(*this, parent));
+		window = new EvolutionAnalyzerWindow(*this, parent);
 
 		trainingPlansChanged(*trainingPlanRepository);
 	}
@@ -37,7 +37,7 @@ namespace LightBulb
 
 	EvolutionAnalyzerWindow& EvolutionAnalyzerController::getWindow()
 	{
-		return *window.get();
+		return *window;
 	}
 
 	std::string EvolutionAnalyzerController::getLabel()
