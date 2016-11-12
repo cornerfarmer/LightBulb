@@ -8,11 +8,11 @@ using namespace LightBulb;
 class TeachingLessonBooleanInputTest : public testing::Test {
 public:
 	TeachingLessonBooleanInput* teachingLesson;
-	NeuralNetworkIO<bool>* teachingInput;
+	TeachingInput<bool>* teachingInput;
 	std::vector<double> teachingPattern;
 
 	void SetUp() {
-		teachingInput = new NeuralNetworkIO<bool>(3);
+		teachingInput = new TeachingInput<bool>(3);
 		teachingInput->set(0, true);
 		teachingInput->set(1, false);
 		teachingInput->set(2, false);
@@ -35,7 +35,7 @@ TEST_F(TeachingLessonBooleanInputTest, getTeachingInput)
 	EXPECT_CALL(*activationFunction, getMaximum()).WillRepeatedly(testing::Return(42));
 	EXPECT_CALL(*activationFunction, getMinimum()).WillRepeatedly(testing::Return(-3));
 
-	NeuralNetworkIO<double> expected(teachingInput->getDimension());
+	TeachingInput<double> expected(teachingInput->getDimension());
 	expected.set(0, 42);
 	expected.set(1, -3);
 	expected.set(2, -3);

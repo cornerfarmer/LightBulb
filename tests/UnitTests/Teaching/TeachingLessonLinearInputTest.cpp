@@ -13,7 +13,7 @@ using namespace LightBulb;
 class TeachingLessonLinearInputTest : public testing::Test {
 public:
 	TeachingLessonLinearInput* teachingLesson;
-	NeuralNetworkIO<double>* teachingInput;
+	TeachingInput<double>* teachingInput;
 	std::vector<double> teachingPattern;
 	MockNeuralNetwork* neuralNetwork;
 	MockNetworkTopology* networkTopology;
@@ -31,7 +31,7 @@ public:
 		EXPECT_CALL(*networkTopology, getOutputNeuronDescription()).WillRepeatedly(testing::ReturnRef(*neuronDescription));
 		EXPECT_CALL(*neuronDescription, getActivationFunction()).WillRepeatedly(testing::ReturnRef(*activationFunction));
 
-		teachingInput = new NeuralNetworkIO<double>(3);
+		teachingInput = new TeachingInput<double>(3);
 		teachingInput->set(0, 1);
 		teachingInput->set(1, 2);
 		teachingInput->set(2, 3);

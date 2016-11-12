@@ -76,9 +76,6 @@
     <ClCompile Include="NeuralNetwork\NeuralNetwork.cpp">
       <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClCompile>
-    <ClCompile Include="NeuralNetwork\NeuralNetworkIO.cpp">
-      <Filter>Quelldateien\NeuralNetwork</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
@@ -410,6 +407,7 @@
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.cpp" />
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
     <ClCompile Include="Tools\AbstractCloneable.cpp" />
+    <ClCompile Include="Teaching\TeachingInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -591,9 +589,6 @@
     </ClInclude>
     <ClInclude Include="IO\SynapticExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="NeuralNetwork\NeuralNetworkIO.hpp">
-      <Filter>Quelldateien\NeuralNetwork</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractRecombinationSelector.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
@@ -827,5 +822,6 @@
     <ClInclude Include="IO\ZigguratGeneratorIO.hpp" />
     <ClInclude Include="IO\XorShfGeneratorIO.hpp" />
     <ClInclude Include="IO\AbstractEvolutionLearningRuleIO.hpp" />
+    <ClInclude Include="Teaching\TeachingInput.hpp" />
   </ItemGroup>
 </Project>
