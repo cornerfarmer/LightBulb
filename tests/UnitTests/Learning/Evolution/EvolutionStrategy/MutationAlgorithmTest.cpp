@@ -12,11 +12,11 @@ using namespace LightBulb;
 class MutationAlgorithmTest : public testing::Test {
 public:
 	MutationAlgorithm* mutationAlgorithm;
-	StandardRandomGenerator<> randomGenerator;
+	ZigguratGenerator zigguratGenerator;
 	void SetUp() {
 		mutationAlgorithm = new MutationAlgorithm(1.6);
-		randomGenerator.setSeed(123456789);
-		mutationAlgorithm->setRandomGenerator(randomGenerator);
+		zigguratGenerator.setSeed(123456789);
+		mutationAlgorithm->setZigguratGenerator(zigguratGenerator);
 	}
 
 	virtual ~MutationAlgorithmTest()

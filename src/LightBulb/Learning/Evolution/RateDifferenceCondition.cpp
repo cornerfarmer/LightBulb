@@ -59,8 +59,4 @@ namespace LightBulb
 		count = count_;
 	}
 
-	void RateDifferenceCondition::setCount(int newCount)
-	{
-		count = newCount;
-	}
 }

@@ -58,7 +58,7 @@ namespace LightBulb
 		 * \param notUsedObjects A vector of objects which are not used anymore.
 		 */
 		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
-		void setZigguratGenerator(ZigguratGenerator& generator);
+		virtual void setZigguratGenerator(ZigguratGenerator& generator);
 		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};

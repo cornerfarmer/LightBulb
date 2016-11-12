@@ -68,8 +68,4 @@ namespace LightBulb
 		count = count_;
 	}
 
-	void PerfectObjectFoundCondition::setCount(int newCount)
-	{
-		count = newCount;
-	}
 }
