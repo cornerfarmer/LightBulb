@@ -31,6 +31,7 @@ namespace LightBulb
 		 */
 		NeuralNetworkRepository* neuralNetworkRepository;
 	protected:
+		void prepareClose() override;
 	public:
 		/**
 		 * \brief Creates the network viewer sub app.

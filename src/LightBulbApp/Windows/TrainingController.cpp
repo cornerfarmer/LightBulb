@@ -26,6 +26,7 @@ namespace LightBulb
 		window = new TrainingWindow(*this);
 		saveTrainingPlanAfterPausedIndex = -1;
 		saveTrainingSessionAfterPause = false;
+		closeWindowAfterPause = false;
 
 		for (int i = 0; i < trainingPlanPatterns_.size(); i++)
 		{
@@ -123,11 +124,16 @@ namespace LightBulb
 			window->GetEventHandler()->QueueEvent(evtSave.Clone());
 			saveTrainingPlanAfterPausedIndex = -1;
 		}
+
 		if (saveTrainingSessionAfterPause && allTrainingPlansPaused())
 		{
 			wxThreadEvent evtSave(TW_EVT_SAVE_TS);
 			window->GetEventHandler()->QueueEvent(evtSave.Clone());
 			saveTrainingSessionAfterPause = false;
+		}
+		else if (closeWindowAfterPause && allTrainingPlansPaused())
+		{
+			window->Close();
 		}
 	}
 
@@ -247,6 +253,22 @@ namespace LightBulb
 			wxThreadEvent evt(TW_EVT_SAVE_TS);
 			window->GetEventHandler()->QueueEvent(evt.Clone());
 		}
+	}
+
+
+	bool TrainingController::closeWindow()
+	{
+		if (!allTrainingPlansPaused())
+		{
+			closeWindowAfterPause = true;
+			for (auto trainingPlan = trainingPlanRepository->getTrainingPlans().begin(); trainingPlan != trainingPlanRepository->getTrainingPlans().end(); trainingPlan++)
+			{
+				if (!(*trainingPlan)->isPaused())
+					(*trainingPlan)->pause();
+			}
+		}
+		else
+			return true;
 	}
 
 	void TrainingController::addSubApp(int subAppFactoryIndex)

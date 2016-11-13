@@ -84,6 +84,13 @@ namespace LightBulb
 			return preferenceGroup->createFromGroup<OptionsClass, PreferenceGroupClass>(groupName);
 		}
 	public:
+		virtual ~AbstractTrainingPlan()
+		{
+			if (threadShouldBeJoinedBeforeReuse)
+			{
+				thread.join();
+			}
+		}
 		AbstractTrainingPlan();
 		void start();
 		std::string getName() const;

@@ -32,6 +32,11 @@ namespace LightBulb
 		window->refreshNeuralNetworks();
 	}
 
+	void NetworkViewerController::prepareClose()
+	{
+		neuralNetworkRepository->removeObserver(EVT_NN_CHANGED, &NetworkViewerController::neuralNetworksChanged, *this);
+	}
+
 
 	std::string NetworkViewerController::getLabel()
 	{

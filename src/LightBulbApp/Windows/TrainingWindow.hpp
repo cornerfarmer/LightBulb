@@ -80,7 +80,7 @@ namespace LightBulb
 		/**
 		 * \brief The timer which controls the refreshing rate.
 		 */
-		wxTimer* runTimeRefreshTimer;
+		wxTimer runTimeRefreshTimer;
 		/**
 		 * \brief Is called after an item of the file menu has been selected.
 		 * \param event The event data.

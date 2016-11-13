@@ -43,7 +43,7 @@ namespace LightBulb
 	wxDEFINE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
 
 	TrainingWindow::TrainingWindow(TrainingController& controller_)
-		:AbstractWindow(controller_, "LightBulb")
+		:AbstractWindow(controller_, "LightBulb"), runTimeRefreshTimer(this, wxID_ANY)
 	{
 		controller = &controller_;
 		processTrainingPlanSelection = nullptr;
@@ -56,6 +56,7 @@ namespace LightBulb
 		Bind(TW_EVT_REFRESH_ALL, wxCommandEventFunction(&TrainingWindow::refreshAllData), this);
 		Bind(TW_EVT_SAVE_TP, wxThreadEventFunction(&TrainingWindow::saveTrainingPlan), this);
 		Bind(TW_EVT_SAVE_TS, wxThreadEventFunction(&TrainingWindow::saveTrainingSession), this);
+		Bind(wxEVT_CLOSE_WINDOW, wxCloseEventFunction(&TrainingWindow::close), this);
 
 		createMenuBar();
 
@@ -76,9 +77,8 @@ namespace LightBulb
 		SetSizer(mainSizer);
 		mainSizer->SetSizeHints(this);
 
-		runTimeRefreshTimer = new wxTimer(this, wxID_ANY);
 		Bind(wxEVT_TIMER, wxTimerEventFunction(&TrainingWindow::refreshTrainingPlanRunTimes), this);
-		runTimeRefreshTimer->Start(1000);
+		runTimeRefreshTimer.Start(1000);
 
 		SetSize(1100, 700);
 	}
@@ -511,7 +511,9 @@ namespace LightBulb
 
 	void TrainingWindow::close(wxCloseEvent& event)
 	{
-		event.Skip();
+		bool shouldClose = getController().closeWindow();
+
+		event.Skip(shouldClose);
 	}
 
 	void TrainingWindow::showCustomSubAppsMenuForTrainingPlan(AbstractTrainingPlan& trainingPlan)

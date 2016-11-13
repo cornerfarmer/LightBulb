@@ -63,6 +63,10 @@ namespace LightBulb
 		 */
 		bool saveTrainingSessionAfterPause;
 		/**
+		* \brief True, if the window should be closed after pausing.
+		*/
+		bool closeWindowAfterPause;
+		/**
 		 * \brief Returns if all current training plans are paused.
 		 * \return True, if they are paused.
 		 */
@@ -190,6 +194,11 @@ namespace LightBulb
 		 * \param path The path of the file which should be created.
 		 */
 		void saveTrainingSession(const std::string& path);
+		/**
+		 * \brief 
+		 * \return 
+		 */
+		bool closeWindow();
 		/**
 		 * \brief Initializes saving of the whole training session.
 		 * \details If necessary, all training plans will be paused. After that the save dialog will show up.
