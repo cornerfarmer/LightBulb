@@ -14,6 +14,7 @@ before_script:
   - ../configure --disable-shared --enable-unicode
   - make
   - sudo make install
+  - cd ../..
 script:
   - mkdir build
   - cd build
