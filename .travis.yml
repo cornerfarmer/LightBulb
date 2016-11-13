@@ -21,7 +21,7 @@ before_script:
   - mkdir build-gtk
   - cd build-gtk
   - ../configure --disable-shared --enable-unicode
-  - make
+  - make --silent
   - sudo make install
   - cd ../..
 script:
