@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockmutationSelector.hpp>
+#include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 #include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>

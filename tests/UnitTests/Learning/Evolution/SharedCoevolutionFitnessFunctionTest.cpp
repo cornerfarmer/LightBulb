@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include <Mocks/MockmutationSelector.hpp>
+#include <Mocks/MockMutationSelector.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>

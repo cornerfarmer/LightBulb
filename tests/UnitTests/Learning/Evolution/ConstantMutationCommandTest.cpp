@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "Learning/Evolution/ConstantMutationCommand.hpp"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockmutationAlgorithm.hpp>
-#include <Mocks/MockmutationSelector.hpp>
+#include <Mocks/MockMutationAlgorithm.hpp>
+#include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockEvolutionObject.hpp>
 
 using namespace LightBulb;
