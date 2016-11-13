@@ -93,10 +93,9 @@ namespace LightBulb
 		/**
 		 * \brief Starts the training plan with the given index together with the neural network with the given index.
 		 * \param trainingPlanPatternIndex The index of the training plan to start.
-		 * \param neuralNetworkIndex The index of the network to use.
 		 * \note The neural network index will only be used if the training plan is a AbstractSingleNNTrainingPlan.
 		 */
-		void startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex);
+		void startTrainingPlanPattern(int trainingPlanPatternIndex);
 		/**
 		 * \brief Is called after the neural network repository has been changed.
 		 * \param neuralNetworkRepository The neural network repository.

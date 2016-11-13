@@ -33,9 +33,9 @@ namespace LightBulb
 	};
 
 	BEGIN_EVENT_TABLE(TrainingWindow, wxFrame)
-		END_EVENT_TABLE()
+	END_EVENT_TABLE()
 
-		wxDEFINE_EVENT(TW_EVT_REFRESH_NN, wxCommandEvent);
+	wxDEFINE_EVENT(TW_EVT_REFRESH_NN, wxCommandEvent);
 	wxDEFINE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);
 	wxDEFINE_EVENT(TW_EVT_REFRESH_TP, wxCommandEvent);
 	wxDEFINE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
@@ -59,7 +59,7 @@ namespace LightBulb
 
 		createMenuBar();
 
-		wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+		mainSizer = new wxBoxSizer(wxVERTICAL);
 		wxSplitterWindow* mainSplitterWindow = new wxSplitterWindow(this, -1, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
 		wxSplitterWindow* centerSplitterWindow = new wxSplitterWindow(mainSplitterWindow, -1, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
 		wxSplitterWindow* rightSplitterWindow = new wxSplitterWindow(centerSplitterWindow, -1, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
@@ -70,11 +70,11 @@ namespace LightBulb
 		centerSplitterWindow->SetSashGravity(0.3333);
 
 		mainSplitterWindow->SplitHorizontally(centerSplitterWindow, createDetailsPanel(*mainSplitterWindow));
-		mainSplitterWindow->SetSashGravity(0.5);
+		mainSplitterWindow->SetSashGravity(0.7);
 
-		sizer->Add(mainSplitterWindow, 1, wxEXPAND);
-		SetSizer(sizer);
-		sizer->SetSizeHints(this);
+		mainSizer->Add(mainSplitterWindow, 1, wxEXPAND);
+		SetSizer(mainSizer);
+		mainSizer->SetSizeHints(this);
 
 		runTimeRefreshTimer = new wxTimer(this, wxID_ANY);
 		Bind(wxEVT_TIMER, wxTimerEventFunction(&TrainingWindow::refreshTrainingPlanRunTimes), this);
@@ -208,7 +208,6 @@ namespace LightBulb
 	void TrainingWindow::refreshNeuralNetworks(wxCommandEvent& event)
 	{
 		neuralNetworkList->DeleteAllItems();
-		neuralNetworksChoice->Clear();
 		for (auto network = getController().getNeuralNetworks().begin(); network != getController().getNeuralNetworks().end(); network++)
 		{
 			wxVector<wxVariant> data;
@@ -217,12 +216,9 @@ namespace LightBulb
 			std::time_t creationDate = (*network)->getCreationDate();
 			data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
 			neuralNetworkList->AppendItem(data);
-			neuralNetworksChoice->Append((*network)->getName());
 			if (currentDetailObject == network->get())
 				showDetailsOfNeuralNetwork(*network->get());
 		}
-		neuralNetworksChoice->Append("<Create new>");
-		neuralNetworksChoice->SetSelection(getController().getNeuralNetworks().size());
 	}
 
 	wxPanel* TrainingWindow::createTrainingColumn(wxWindow& parent)
@@ -300,7 +296,7 @@ namespace LightBulb
 			if (processTrainingPlanSelection == trainingPlan->get())
 				showProcessOfTrainingPlan(*trainingPlan->get());
 		}
-
+		
 	}
 
 	void TrainingWindow::refreshAllData(wxCommandEvent& event)
@@ -355,14 +351,9 @@ namespace LightBulb
 		commandSizer->AddStretchSpacer(1);
 
 		wxSizer* processSizer = new wxBoxSizer(wxHORIZONTAL);
-
-		neuralNetworksChoice = new wxChoice(panel, wxID_ANY);
-		neuralNetworksChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&TrainingWindow::processSelecionHasChanged), this);
-		processSizer->Add(neuralNetworksChoice);
-		processSizer->Add(new wxStaticBitmap(panel, wxID_ANY, wxArtProvider::GetBitmap(wxART_GO_FORWARD)), 0, wxALIGN_CENTRE_VERTICAL);
 		trainingPlanPatternsChoice = new wxChoice(panel, wxID_ANY);
 		trainingPlanPatternsChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&TrainingWindow::processSelecionHasChanged), this);
-		processSizer->Add(trainingPlanPatternsChoice);
+		processSizer->Add(trainingPlanPatternsChoice, 1);
 		processSizer->SetSizeHints(panel);
 
 		commandSizer->Add(processSizer, 0, wxEXPAND | wxALL, 20);
@@ -382,7 +373,7 @@ namespace LightBulb
 		toolbar->Realize();
 		commandSizer->Add(toolbar);
 		commandSizer->SetSizeHints(panel);
-		sizer->Add(commandSizer, 0, wxEXPAND | wxTOP, 10);
+		sizer->Add(commandSizer, 1, wxEXPAND | wxTOP, 10);
 		sizer->Add(new wxStaticLine(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVERTICAL), 0, wxEXPAND);
 
 		wxSizer* detailsSizer = new wxBoxSizer(wxVERTICAL);
@@ -390,49 +381,12 @@ namespace LightBulb
 		detailsTextBox = new wxRichTextCtrl(panel, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
 		detailsTextBox->SetMinSize(wxSize(300, 50));
 		detailsSizer->Add(detailsTextBox, 1, wxEXPAND);
-		sizer->Add(detailsSizer, 1, wxEXPAND | wxALL, 10);
+		sizer->Add(detailsSizer, 3, wxEXPAND | wxALL, 10);
 		detailsSizer->SetSizeHints(panel);
 
 		panel->SetSizer(sizer);
 		sizer->SetSizeHints(panel);
 		return panel;
-	}
-
-	void TrainingWindow::validateSelectedProcess()
-	{
-		int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
-		int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-		AbstractSingleNNTrainingPlan* trainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>(getController().getTrainingPlanPatterns()[trainingPlanPatternIndex].get());
-
-		if (trainingPlan && neuralNetworkIndex < getController().getNeuralNetworks().size() && neuralNetworkIndex >= 0 && trainingPlanPatternIndex >= 0)
-		{
-			int requiredInputSize = trainingPlan->getRequiredInputSize();
-			int requiredOutputSize = trainingPlan->getRequiredOutputSize();
-
-			if (getController().getNeuralNetworks()[neuralNetworkIndex]->getNetworkTopology().getNeuronCountsPerLayer().front() != requiredInputSize ||
-				getController().getNeuralNetworks()[neuralNetworkIndex]->getNetworkTopology().getNeuronCountsPerLayer().back() != requiredOutputSize)
-			{
-				processErrorText->SetLabel("The network must have " + std::to_string(requiredInputSize) + " input neurons and " + std::to_string(requiredOutputSize) + " output neurons!");
-				toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
-			}
-			else
-			{
-				if (getController().getNeuralNetworks()[neuralNetworkIndex]->getState() == NN_STATE_TRAINED)
-				{
-					processErrorText->SetLabel("The network gets already trained!");
-					toolbar->EnableTool(TOOLBAR_START_TRAINING, false);
-				}
-				else
-				{
-					processErrorText->SetLabel("");
-				}
-			}
-		}
-		else
-		{
-			processErrorText->SetLabel("");
-		}
-		processErrorText->GetParent()->Layout();
 	}
 
 	void TrainingWindow::createMenuBar()
@@ -462,8 +416,6 @@ namespace LightBulb
 			removeCustomSubAppsMenu();
 			showDetailsOfNeuralNetwork(*getController().getNeuralNetworks()[row].get());
 			restoreDefaultProcessView();
-			neuralNetworksChoice->Select(row);
-			validateSelectedProcess();
 		}
 		else
 		{
@@ -480,7 +432,6 @@ namespace LightBulb
 			showDetailsOfTrainingPlanPattern(*getController().getTrainingPlanPatterns()[row].get());
 			restoreDefaultProcessView();
 			trainingPlanPatternsChoice->Select(row);
-			validateSelectedProcess();
 		}
 		else
 		{
@@ -492,12 +443,7 @@ namespace LightBulb
 	void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan& trainingPlan)
 	{
 		processTrainingPlanSelection = &trainingPlan;
-		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(&trainingPlan))
-		{
-			neuralNetworksChoice->Select(getController().getIndexOfNeuralNetwork(static_cast<AbstractSingleNNTrainingPlan&>(trainingPlan).getNeuralNetwork()));
-		}
 		trainingPlanPatternsChoice->Select(getController().getIndexOfTrainingPlanPattern(trainingPlan.getTrainingPlanPattern()));
-		neuralNetworksChoice->Enable(false);
 		trainingPlanPatternsChoice->Enable(false);
 		toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan.isPaused());
 		toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan.isRunning());
@@ -507,7 +453,6 @@ namespace LightBulb
 
 	void TrainingWindow::restoreDefaultProcessView()
 	{
-		neuralNetworksChoice->Enable(true);
 		trainingPlanPatternsChoice->Enable(true);
 		toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
 		toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, false);
@@ -667,11 +612,10 @@ namespace LightBulb
 	{
 		if (processTrainingPlanSelection == nullptr)
 		{
-			int neuralNetworkIndex = neuralNetworksChoice->GetSelection();
 			int trainingPlanPatternIndex = trainingPlanPatternsChoice->GetSelection();
-			if (neuralNetworkIndex != -1 && trainingPlanPatternIndex != -1)
+			if (trainingPlanPatternIndex != -1)
 			{
-				getController().startTrainingPlanPattern(trainingPlanPatternIndex, neuralNetworkIndex);
+				getController().startTrainingPlanPattern(trainingPlanPatternIndex);
 			}
 		}
 		else
@@ -697,7 +641,6 @@ namespace LightBulb
 	void TrainingWindow::processSelecionHasChanged(wxCommandEvent& event)
 	{
 		toolbar->EnableTool(TOOLBAR_START_TRAINING, true);
-		validateSelectedProcess();
 	}
 
 	void TrainingWindow::addSubApp(wxCommandEvent& event)

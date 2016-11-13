@@ -51,7 +51,7 @@ namespace LightBulb
 		return trainingPlanRepository->getTrainingPlans();
 	}
 
-	void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex, int neuralNetworkIndex)
+	void TrainingController::startTrainingPlanPattern(int trainingPlanPatternIndex)
 	{
 
 		AbstractTrainingPlan* trainingPlan = trainingPlanPatterns[trainingPlanPatternIndex]->getCopyForExecute();
@@ -71,16 +71,8 @@ namespace LightBulb
 		AbstractSingleNNTrainingPlan* singleNNTrainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan);
 		if (singleNNTrainingPlan)
 		{
-			if (getNeuralNetworks().size() <= neuralNetworkIndex)
-			{
-				singleNNTrainingPlan->start();
-				neuralNetworkRepository->Add(&singleNNTrainingPlan->getNeuralNetwork());
-			}
-			else
-			{
-				singleNNTrainingPlan->setNeuralNetwork(*getNeuralNetworks()[neuralNetworkIndex].get());
-				singleNNTrainingPlan->start();
-			}
+			singleNNTrainingPlan->start();
+			neuralNetworkRepository->Add(&singleNNTrainingPlan->getNeuralNetwork());
 		}
 		else
 		{

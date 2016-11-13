@@ -38,6 +38,10 @@ namespace LightBulb
 	{
 	private:
 		/**
+		 * \brief The main sizer.
+		 */
+		wxBoxSizer* mainSizer;
+		/**
 		 * \brief The bottom toolbar which controls training plans.
 		 */
 		wxToolBar* toolbar;
@@ -61,10 +65,6 @@ namespace LightBulb
 		 * \brief The training plan list.
 		 */
 		wxDataViewListCtrl* trainingPlanList;
-		/**
-		 * \brief The choice which selects the network to use.
-		 */
-		wxChoice* neuralNetworksChoice;
 		/**
 		 * \brief The choice which selects the training plan pattern to use.
 		 */
@@ -152,10 +152,6 @@ namespace LightBulb
 		 * \brief Tells if the menu of custom sub apps is visible.
 		 */
 		bool customMenuVisible;
-		/**
-		 * \brief Validates the currently selected process.
-		 */
-		void validateSelectedProcess();
 		/**
 		 * \brief A pointer to the object whose detail are currently shown.
 		 */
