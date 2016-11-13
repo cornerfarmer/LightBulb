@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.6.4)
 project (LightBulbExample)
+include(../../cmake/macros.txt)
 
 file(GLOB_RECURSE SOURCES *.cpp *.hpp)
 include_directories(.)
@@ -15,8 +16,4 @@ include(${wxWidgets_USE_FILE})
 
 add_executable(LightBulbExample ${SOURCES})
 target_link_libraries(LightBulbExample LightBulb LightBulbApp freechart ${wxWidgets_LIBRARIES})
-set_target_properties(LightBulbExample PROPERTIES
-    CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED YES
-    CXX_EXTENSIONS NO
-)
+use_cxx11()
