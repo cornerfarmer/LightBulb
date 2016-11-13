@@ -426,6 +426,7 @@ namespace LightBulb
 
 	void TrainingWindow::selectTrainingPlanPattern(wxDataViewEvent& event)
 	{
+		trainingPlanList->UnselectAll();
 		int row = getRowIndexOfItem(*trainingPlanPatternList, event.GetItem());
 		if (row != -1) {
 			removeCustomSubAppsMenu();
@@ -535,6 +536,7 @@ namespace LightBulb
 
 	void TrainingWindow::selectTrainingPlan(wxDataViewEvent& event)
 	{
+		trainingPlanPatternList->UnselectAll();
 		int row = getRowIndexOfItem(*trainingPlanList, event.GetItem());
 		if (row != -1)
 		{
