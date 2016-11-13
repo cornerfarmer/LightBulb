@@ -19,7 +19,7 @@ namespace LightBulb
 	template <class Archive>
 	void serialize(Archive& archive, AbstractEvolutionLearningRule& evolutionLearning)
 	{
-		archive(cereal::base_class<AbstractEvolutionLearningRule>(&evolutionLearning));
+		archive(cereal::base_class<AbstractLearningRule>(&evolutionLearning));
 		archive(cereal::make_nvp("zigguratGenerator", evolutionLearning.zigguratGenerator));
 	}
 }

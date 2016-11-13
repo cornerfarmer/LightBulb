@@ -49,7 +49,7 @@ namespace LightBulb
 		std::chrono::time_point<std::chrono::system_clock> currentStartTime;
 		std::chrono::duration<double> concludedRunTime;
 		std::thread thread;
-		AbstractTrainingPlan* pattern;
+		std::string patternName;
 		TrainingPlanState state;
 		std::string name;
 		void runThread(bool initial);
@@ -99,7 +99,7 @@ namespace LightBulb
 		virtual std::string getLearningRuleName() const = 0;
 		std::string getStateAsString() const;
 		AbstractTrainingPlan* getCopyForExecute();
-		AbstractTrainingPlan& getTrainingPlanPattern() const;
+		const std::string& getTrainingPlanPatternName() const;
 		void pause();
 		bool isPaused() const;
 		bool isPausing() const;

@@ -122,11 +122,11 @@ namespace LightBulb
 		 */
 		int getIndexOfNeuralNetwork(const AbstractNeuralNetwork& network) const;
 		/**
-		* \brief Returns the index of the given training plan pattern in the internal storage.
-		* \param trainingPlanPattern The training plan pattern.
+		* \brief Returns the index of the training plan pattern with the given name in the internal storage.
+		* \param name The name of the training plan pattern.
 		* \return The index of the training plan pattern.
 		*/
-		int getIndexOfTrainingPlanPattern(const AbstractTrainingPlan& trainingPlanPattern) const;
+		int getIndexOfTrainingPlanPatternWithName(const std::string& name) const;
 		/**
 		 * \brief Is called after a training plan has been paused.
 		 * \param trainingPlan The training plan which has been paused.

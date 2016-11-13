@@ -118,14 +118,14 @@ namespace LightBulb
 	AbstractTrainingPlan* AbstractTrainingPlan::getCopyForExecute()
 	{
 		AbstractTrainingPlan* copy = createNewFromSameType();
-		copy->pattern = this;
+		copy->patternName = getName();
 		copy->preferenceGroup.reset(dynamic_cast<PreferenceGroup*>(preferenceGroup->clone()));
 		return copy;
 	}
 
-	AbstractTrainingPlan& AbstractTrainingPlan::getTrainingPlanPattern() const
+	const std::string& AbstractTrainingPlan::getTrainingPlanPatternName() const
 	{
-		return *pattern;
+		return patternName;
 	}
 
 	void AbstractTrainingPlan::pause()

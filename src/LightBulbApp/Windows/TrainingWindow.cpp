@@ -444,7 +444,7 @@ namespace LightBulb
 	void TrainingWindow::showProcessOfTrainingPlan(AbstractTrainingPlan& trainingPlan)
 	{
 		processTrainingPlanSelection = &trainingPlan;
-		trainingPlanPatternsChoice->Select(getController().getIndexOfTrainingPlanPattern(trainingPlan.getTrainingPlanPattern()));
+		trainingPlanPatternsChoice->Select(getController().getIndexOfTrainingPlanPatternWithName(trainingPlan.getTrainingPlanPatternName()));
 		trainingPlanPatternsChoice->Enable(false);
 		toolbar->EnableTool(TOOLBAR_START_TRAINING, trainingPlan.isPaused());
 		toolbar->EnableTool(TOOLBAR_PAUSE_TRAINING, trainingPlan.isRunning());

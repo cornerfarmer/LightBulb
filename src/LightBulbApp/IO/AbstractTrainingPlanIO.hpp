@@ -26,6 +26,7 @@ namespace LightBulb
 		archive(cereal::make_nvp("name", trainingPlan.name));
 		archive(cereal::make_nvp("preferenceGroup", trainingPlan.preferenceGroup));
 		archive(cereal::make_nvp("concludedRunTime", trainingPlan.concludedRunTime.count()));
+		archive(cereal::make_nvp("patternName", trainingPlan.patternName));
 	}
 
 	/**
@@ -44,6 +45,7 @@ namespace LightBulb
 		double concludedRunTime;
 		archive(cereal::make_nvp("concludedRunTime", concludedRunTime));
 		trainingPlan.concludedRunTime = std::chrono::duration<double>(concludedRunTime);
+		archive(cereal::make_nvp("patternName", trainingPlan.patternName));
 	}
 }
 

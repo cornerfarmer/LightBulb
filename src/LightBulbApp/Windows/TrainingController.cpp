@@ -103,11 +103,11 @@ namespace LightBulb
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
 
-	int TrainingController::getIndexOfTrainingPlanPattern(const AbstractTrainingPlan& trainingPlanPattern) const
+	int TrainingController::getIndexOfTrainingPlanPatternWithName(const std::string& name) const
 	{
 		for (int i = 0; i < trainingPlanPatterns.size(); i++)
 		{
-			if (trainingPlanPatterns[i].get() == &trainingPlanPattern)
+			if (trainingPlanPatterns[i]->getName() == name)
 				return i;
 		}
 		return -1;
