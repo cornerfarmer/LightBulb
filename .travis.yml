@@ -2,7 +2,6 @@
 language: cpp
 compiler:
   - gcc
-  - clang
 install:
 - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
 addons:
@@ -12,7 +11,6 @@ addons:
     packages:
     - gcc-5
     - g++-5
-    - clang
 # Build steps
 before_script:
   - git clone https://github.com/wxWidgets/wxWidgets.git wxwidgets
