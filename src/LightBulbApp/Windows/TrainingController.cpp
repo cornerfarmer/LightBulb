@@ -212,6 +212,9 @@ namespace LightBulb
 	void TrainingController::loadTrainingPlan(const std::string& path)
 	{
 		AbstractTrainingPlan& trainingPlan = trainingPlanRepository->load(path);
+		trainingPlan.registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, *this);
+		trainingPlan.registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, *this);
+
 		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(&trainingPlan))
 		{
 			neuralNetworkRepository->Add(&static_cast<AbstractSingleNNTrainingPlan&>(trainingPlan).getNeuralNetwork());
