@@ -13,7 +13,7 @@ addons:
     - g++-5
 # Build steps
 before_script:
-  - ./build.sh
+  - sudo ./build.sh
 cache:
   directories:
   - wxwidgets-cache
