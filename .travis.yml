@@ -16,9 +16,7 @@ before_script:
   - sudo ./build.sh
 cache:
   directories:
-  - wxwidgets-cache
-before_cache:
-  - cp -r wxwidgets wxwidgets-cache
+  - wxwidgets
 script:
   - mkdir build
   - cd build
