@@ -1,4 +1,4 @@
-if [ -d "wxwidgets-cache/build-gtk" ]; then
+if [ -d wxwidgets-cache/build-gtk ]; then
 	cd wxwidgets-cache/build-gtk
 else
 	git clone https://github.com/wxWidgets/wxWidgets.git wxwidgets
