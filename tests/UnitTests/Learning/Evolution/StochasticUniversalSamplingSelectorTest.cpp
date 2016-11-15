@@ -12,9 +12,8 @@ public:
 	MockSelectionFunction* selectionFunction;
 
 	void SetUp() {
-		stochasticUniversalSamplingSelector = new StochasticUniversalSamplingSelector();
 		selectionFunction = new MockSelectionFunction();
-		stochasticUniversalSamplingSelector->setRandomFunction(selectionFunction);
+		stochasticUniversalSamplingSelector = new StochasticUniversalSamplingSelector(selectionFunction);
 	}
 
 	virtual ~StochasticUniversalSamplingSelectorTest()

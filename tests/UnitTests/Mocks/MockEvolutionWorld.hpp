@@ -19,7 +19,6 @@ public:
 	MOCK_CONST_METHOD1(getScore, double (const LightBulb::AbstractEvolutionObject&));
 	MOCK_CONST_METHOD1(getRealScore, double (const LightBulb::AbstractEvolutionObject&));
 	MOCK_METHOD0(initializeForLearning, void ());
-	MOCK_METHOD0(releaseAllObjects, void ());
 	MOCK_METHOD0(reset, void ());
 	MOCK_CONST_METHOD0(getDataSetLabels, std::vector<std::string> ());
 	MOCK_CONST_METHOD0(getPopulationSize, int ());

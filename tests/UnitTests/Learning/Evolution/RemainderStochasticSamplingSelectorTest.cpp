@@ -12,9 +12,8 @@ public:
 	MockSelectionFunction* selectionFunction;
 
 	void createSelector(bool withReplacement) {
-		remainderStochasticSamplingSelector = new RemainderStochasticSamplingSelector(withReplacement);
 		selectionFunction = new MockSelectionFunction();
-		remainderStochasticSamplingSelector->setRandomFunction(selectionFunction);
+		remainderStochasticSamplingSelector = new RemainderStochasticSamplingSelector(withReplacement, selectionFunction);
 	}
 
 	virtual ~RemainderStochasticSamplingSelectorTest()

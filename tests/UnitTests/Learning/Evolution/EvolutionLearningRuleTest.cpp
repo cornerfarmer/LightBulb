@@ -153,6 +153,8 @@ TEST_F(EvolutionLearningRuleTest, learn)
 
 		EXPECT_CALL(*fitnessFunction, execute(testing::Ref(unseccessfullHighscore))).Times(1);
 		lastIterationExpectation = EXPECT_CALL(*exitCondition, evaluate(testing::Ref(unseccessfullHighscore), testing::Ref(*evolutionLearningRule))).WillOnce(testing::Return(true));
+
+		EXPECT_CALL(*evolutionWorld, clearPopulation()).Times(1);
 	}
 
 	EXPECT_CALL(*evolutionWorld, getHighscoreList()).WillRepeatedly(testing::ReturnRef(emptyHighscore));
@@ -163,6 +165,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 	std::vector<std::pair<double, AbstractEvolutionObject*>> successfullHighscore;
 	successfullHighscore.push_back(std::make_pair(100, new MockEvolutionObject()));
 	EXPECT_CALL(*evolutionWorld, getHighscoreList()).After(lastIterationExpectation).WillRepeatedly(testing::ReturnRef(successfullHighscore));
+
 
 	evolutionLearningRule->start();
 }
