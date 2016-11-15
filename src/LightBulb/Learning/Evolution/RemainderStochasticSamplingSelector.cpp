@@ -48,9 +48,9 @@ namespace LightBulb
 		while ((recombination && getRecombinationSelection().size() < objectCount) || (!recombination && getMutationSelection().size() < objectCount))
 		{
 			if (recombination)
-				addObjectToRecombination(*highscore[randomFunction->execute(secondChance)].second);
+				addObjectToRecombination(*highscore[selectionFunction->execute(secondChance)].second);
 			else
-				addObjectToMutate(*highscore[randomFunction->execute(secondChance)].second);
+				addObjectToMutate(*highscore[selectionFunction->execute(secondChance)].second);
 		}
 	}
 
@@ -65,17 +65,17 @@ namespace LightBulb
 		random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());
 	}
 
-	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_)
+	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(bool withReplacement_, AbstractSelectionFunction* selectionFunction_)
 	{
 		withReplacement = withReplacement_;
-		setRandomFunction(new RouletteWheelSelectionFunction());
+		selectionFunction.reset(selectionFunction_ ? selectionFunction_ : new RouletteWheelSelectionFunction());
 	}
 
 	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(const RemainderStochasticSamplingSelector& other)
 		:AbstractMutationSelector(other), AbstractRecombinationSelector(other)
 	{
 		withReplacement = other.withReplacement;
-		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
+		selectionFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.selectionFunction->clone()));
 	}
 
 	RemainderStochasticSamplingSelector::RemainderStochasticSamplingSelector(RemainderStochasticSamplingSelector&& other) noexcept
@@ -95,19 +95,14 @@ namespace LightBulb
 		using std::swap;
 		swap(static_cast<AbstractMutationSelector&>(lhs), static_cast<AbstractMutationSelector&>(rhs));
 		swap(static_cast<AbstractRecombinationSelector&>(lhs), static_cast<AbstractRecombinationSelector&>(rhs));
-		swap(lhs.randomFunction, rhs.randomFunction);
+		swap(lhs.selectionFunction, rhs.selectionFunction);
 		swap(lhs.withReplacement, rhs.withReplacement);
-	}
-
-	void RemainderStochasticSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
-	{
-		randomFunction.reset(randomFunction_);
 	}
 
 	void RemainderStochasticSamplingSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		randomFunction->setRandomGenerator(randomGenerator_);
+		selectionFunction->setRandomGenerator(randomGenerator_);
 	}
 
 	AbstractCloneable* RemainderStochasticSamplingSelector::clone() const

@@ -16,7 +16,7 @@ namespace LightBulb
 	class AbstractEvolutionObject;
 	/**
 	 * \brief This class is simplification of the AbstractEvolutionWorld class.
-	 * \details/ It decreases the work you have to do for your world, but also decreases your possibilities.
+	 * \details It decreases the work you have to do for your world, but also decreases your possibilities.
 	 * Nevertheless this class can be used in the most of all cases.
 	 * It manages all evolution objects, so all inheriting classes can focus on evaluating those objects.
 	 */
@@ -52,7 +52,6 @@ namespace LightBulb
 		void reset() override;
 		int getPopulationSize() const override;
 		void clearPopulation() override;
-		void releaseAllObjects() override;
 		void addExistingObject(AbstractEvolutionObject* newObject) override;
 	};
 }

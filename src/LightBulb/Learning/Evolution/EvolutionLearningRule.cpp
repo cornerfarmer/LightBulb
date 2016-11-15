@@ -33,7 +33,7 @@ namespace LightBulb
 		{
 			learningResult->bestObjects.push_back(std::unique_ptr<AbstractEvolutionObject>(entry->second));
 		}
-		getOptions().world->releaseAllObjects();
+		getOptions().world->clearPopulation();
 
 		return learningResult;
 	}

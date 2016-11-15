@@ -8,22 +8,16 @@
 
 namespace LightBulb
 {
-	TournamentCombiningStrategy::TournamentCombiningStrategy()
+	TournamentCombiningStrategy::TournamentCombiningStrategy(bool doShuffleBeforeTournament_)
 	{
-		doShuffleBeforeTournament = true;
+		doShuffleBeforeTournament = doShuffleBeforeTournament_;
 		currentLevel.reset(new std::vector<AbstractEvolutionObject*>());
 		nextLevel.reset(new std::vector<AbstractEvolutionObject*>());
-		cachedObjects.reset(new std::vector<AbstractEvolutionObject*>());
 	}
 
 	int TournamentCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
 	{
 		throw std::logic_error("Not yet implemented.");
-	}
-
-	void TournamentCombiningStrategy::setDoShuffleBeforeTournament(bool doShuffleBeforeTournament_)
-	{
-		doShuffleBeforeTournament = doShuffleBeforeTournament_;
 	}
 
 	void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)

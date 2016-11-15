@@ -21,20 +21,35 @@ namespace LightBulb
 #define DATASET_TEACHING_ERROR "Teaching error"
 #define DATASET_WEIGHTDECAY_ERROR "Weigth decay error"
 
-	// Evolution world which can be used to use the EvolutionLearingRule in combination with a Teacher
+	/**
+	 * \brief A world which makes it possible to combine the evolution world with classic superives learning.
+	 * \details Every evolution objects simply tries to minimize the teaching error.
+	 */
 	class TeachingEvolutionWorld : public AbstractSimpleEvolutionWorld
 	{
 	protected:
+		/**
+		 * \brief Contains the given teacher.
+		 */
+		AbstractTeacher* teacher;
+		/**
+		 * \brief Contains the given network options for new evolution objects.
+		 */
+		FeedForwardNetworkTopologyOptions networkOptions;
 		// Inherited
 		AbstractEvolutionObject* createNewObject() override;
-		// Holds the given teacher
-		AbstractTeacher* teacher;
-		// Holds the given network options for new evolution objects
-		FeedForwardNetworkTopologyOptions networkOptions;
 	public:
-		// Creates a new world with the given teacher and the network options
+		/**
+		 * \brief Creates a new teaching evolution world.
+		 * \param teacher_ The teacher which contains the learning goals.
+		 * \param networkOptions_ The network options which should be used.
+		 */
 		TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_);
 		TeachingEvolutionWorld() = default;
+		/**
+		 * \brief Returns teh used teacher.
+		 * \return The teacher which contains the learning goals.
+		 */
 		AbstractTeacher& getTeacher() const;
 		// Inherited:
 		bool doSimulationStep() override;

@@ -34,7 +34,7 @@ TEST_F(TournamentCombiningStrategyTest, executeEmptyWorld)
 
 TEST_F(TournamentCombiningStrategyTest, executeSingleWorld)
 {
-	tournamentCombiningStrategy->setDoShuffleBeforeTournament(false);
+	tournamentCombiningStrategy = new TournamentCombiningStrategy(false);
 
 	std::vector<AbstractEvolutionObject*> objects({ &object1 , &object2, &object3, &object4, &object5, &object6 });
 	EXPECT_CALL(world, getEvolutionObjects()).WillRepeatedly(testing::ReturnRef(objects));

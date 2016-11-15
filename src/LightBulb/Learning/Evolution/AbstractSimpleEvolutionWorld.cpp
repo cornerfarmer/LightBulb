@@ -53,11 +53,6 @@ namespace LightBulb
 		objects.clear();
 	}
 
-	void AbstractSimpleEvolutionWorld::releaseAllObjects()
-	{
-		objects.clear();
-	}
-
 	void AbstractSimpleEvolutionWorld::addExistingObject(AbstractEvolutionObject* newObject)
 	{
 		objects.push_back(newObject);

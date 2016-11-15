@@ -16,7 +16,7 @@ namespace LightBulb
 			probabilities.push_back(entry->first);
 		}
 
-		std::vector<int> selectedIndices = randomFunction->execute(probabilities, objectCount);
+		std::vector<int> selectedIndices = selectionFunction->execute(probabilities, objectCount);
 		int mutationSequenceIndex = 0;
 		for (auto selectedIndex = selectedIndices.begin(); selectedIndex != selectedIndices.end(); selectedIndex++, mutationSequenceIndex++)
 		{
@@ -39,15 +39,15 @@ namespace LightBulb
 	}
 
 
-	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector()
+	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector(AbstractSelectionFunction* selectionFunction_)
 	{
-		setRandomFunction(new RouletteWheelSelectionFunction());
+		selectionFunction.reset(selectionFunction_ ? selectionFunction_ : new RouletteWheelSelectionFunction());
 	}
 
 	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector(const StochasticUniversalSamplingSelector& other)
 		:AbstractMutationSelector(other), AbstractRecombinationSelector(other)
 	{
-		randomFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.randomFunction->clone()));
+		selectionFunction.reset(dynamic_cast<AbstractSelectionFunction*>(other.selectionFunction->clone()));
 	}
 
 	StochasticUniversalSamplingSelector::StochasticUniversalSamplingSelector(StochasticUniversalSamplingSelector&& other) noexcept
@@ -67,19 +67,13 @@ namespace LightBulb
 		using std::swap;
 		swap(static_cast<AbstractMutationSelector&>(lhs), static_cast<AbstractMutationSelector&>(rhs));
 		swap(static_cast<AbstractRecombinationSelector&>(lhs), static_cast<AbstractRecombinationSelector&>(rhs));
-		swap(lhs.randomFunction, rhs.randomFunction);
+		swap(lhs.selectionFunction, rhs.selectionFunction);
 	}
-	
-	void StochasticUniversalSamplingSelector::setRandomFunction(AbstractSelectionFunction* randomFunction_)
-	{
-		randomFunction.reset(randomFunction_);
-	}
-
 
 	void StochasticUniversalSamplingSelector::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		randomFunction->setRandomGenerator(randomGenerator_);
+		selectionFunction->setRandomGenerator(randomGenerator_);
 	}
 
 	AbstractCloneable* StochasticUniversalSamplingSelector::clone() const
