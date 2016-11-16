@@ -9,11 +9,18 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief Describes a class which can be cloned.
+	 */
 	class AbstractCloneable
 	{
 	private:
 	public:
 		virtual ~AbstractCloneable() {}
+		/**
+		 * \brief Clones the object. (Deep clone)
+		 * \return The cloned object.
+		 */
 		virtual AbstractCloneable* clone() const = 0;
 	};
 }

@@ -31,8 +31,4 @@ namespace LightBulb
 		return *parasiteWorld.get();
 	}
 
-	void AbstractCoevolutionTrainingPlan::setParasiteWorld(AbstractEvolutionWorld* world_)
-	{
-		parasiteWorld.reset(world_);
-	}
 }

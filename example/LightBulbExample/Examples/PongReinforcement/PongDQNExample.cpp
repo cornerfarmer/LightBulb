@@ -94,7 +94,7 @@ PongDQNExample::PongDQNExample()
 	addPreference(new BooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS, true));
 }
 
-std::string PongDQNExample::getDefaultName() const
+std::string PongDQNExample::getOriginalName() const
 {
 	return "Pong DQN example";
 }

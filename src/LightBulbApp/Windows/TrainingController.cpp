@@ -10,7 +10,7 @@
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include "PreferencesController.hpp"
-#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
+#include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 
@@ -59,7 +59,7 @@ namespace LightBulb
 		trainingPlan->registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, *this);
 		trainingPlan->registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, *this);
 
-		std::string defaultName = trainingPlan->getDefaultName();
+		std::string defaultName = trainingPlan->getOriginalName();
 		int index = 1;
 		while (trainingPlanRepository->exists(defaultName + " #" + std::to_string(index)))
 		{
@@ -69,7 +69,7 @@ namespace LightBulb
 
 		trainingPlanRepository->Add(trainingPlan);
 
-		AbstractSingleNNTrainingPlan* singleNNTrainingPlan = dynamic_cast<AbstractSingleNNTrainingPlan*>(trainingPlan);
+		AbstractSupervisedTrainingPlan* singleNNTrainingPlan = dynamic_cast<AbstractSupervisedTrainingPlan*>(trainingPlan);
 		if (singleNNTrainingPlan)
 		{
 			singleNNTrainingPlan->start();
@@ -215,9 +215,9 @@ namespace LightBulb
 		trainingPlan.registerObserver(EVT_TP_PAUSED, &TrainingController::trainingPlanPaused, *this);
 		trainingPlan.registerObserver(EVT_TP_FINISHED, &TrainingController::trainingPlanFinished, *this);
 
-		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(&trainingPlan))
+		if (dynamic_cast<AbstractSupervisedTrainingPlan*>(&trainingPlan))
 		{
-			neuralNetworkRepository->Add(&static_cast<AbstractSingleNNTrainingPlan&>(trainingPlan).getNeuralNetwork());
+			neuralNetworkRepository->Add(&static_cast<AbstractSupervisedTrainingPlan&>(trainingPlan).getNeuralNetwork());
 		}
 	}
 

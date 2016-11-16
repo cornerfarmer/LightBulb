@@ -7,28 +7,59 @@
 #include <wx/statline.h>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include "TrainingController.hpp"
-#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
+#include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <wx/timer.h>
 
 namespace LightBulb
 {
-	enum
+	/**
+	* \brief Actions in the command toolbar in the TrainingWindow.
+	*/
+	enum TrainingWindowCommandToolbar
 	{
+		/**
+		 * \brief Starts a training plan.
+		 */
 		TOOLBAR_START_TRAINING,
+		/**
+		 * \brief Pauses a training plan.
+		 */
 		TOOLBAR_PAUSE_TRAINING,
+		/**
+		 * \brief Opens the preferences of a traning plan.
+		 */
 		TOOLBAR_PREFERENCES
 	};
-
-	enum
+	/**
+	* \brief Actions in the network popup menu in the TrainingWindow.
+	*/
+	enum TrainingWindowNetworkPopup
 	{
+		/**
+		 * \brief Saves the network.
+		 */
 		NETWORK_POPUP_SAVE
 	};
-
-	enum
+	/**
+	* \brief Actions in the file menu in the TrainingWindow.
+	*/
+	enum TrainingWindowFileMenu
 	{
+		/**
+		 * \brief Loads a neural network.
+		 */
 		FILE_LOAD_NN,
+		/**
+		 * \brief Loads a training plan.
+		 */
 		FILE_LOAD_TP,
+		/**
+		 * \brief Saves the training session.
+		 */
 		FILE_SAVE_TS,
+		/**
+		 * \brief Loads the training session.
+		 */
 		FILE_LOAD_TS
 	};
 
@@ -575,8 +606,8 @@ namespace LightBulb
 	{
 		clearDetails();
 		detailsTextBox->WriteText("Name: " + trainingPlan.getName() + "\n");
-		if (dynamic_cast<AbstractSingleNNTrainingPlan*>(&trainingPlan))
-			detailsTextBox->WriteText("Network name: " + static_cast<AbstractSingleNNTrainingPlan&>(trainingPlan).getNeuralNetwork().getName() + "\n");
+		if (dynamic_cast<AbstractSupervisedTrainingPlan*>(&trainingPlan))
+			detailsTextBox->WriteText("Network name: " + static_cast<AbstractSupervisedTrainingPlan&>(trainingPlan).getNeuralNetwork().getName() + "\n");
 		detailsTextBox->WriteText("State: " + trainingPlan.getStateAsString() + "\n");
 		detailsTextBox->WriteText("Seed: " + std::to_string(trainingPlan.getSeed()) + "\n");
 		detailsTextBox->WriteText("Preferences:\n");

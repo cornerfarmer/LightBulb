@@ -61,7 +61,7 @@ SimpleReinforcementExample::SimpleReinforcementExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 }
 
-std::string SimpleReinforcementExample::getDefaultName() const
+std::string SimpleReinforcementExample::getOriginalName() const
 {
 	return "Simple reinforcement example";
 }

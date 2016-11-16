@@ -17,7 +17,7 @@ protected:
 	MountainCarWorld* createWorld();
 public:
 	MountainCarDQNExample();
-	std::string getDefaultName() const override;
+	std::string getOriginalName() const override;
 	std::string getDescription() const override;
 	AbstractTrainingPlan* createNewFromSameType() const override;
 	std::string getLearningRuleName() const override;

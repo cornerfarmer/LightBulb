@@ -8,10 +8,10 @@ namespace LightBulb
 	AbstractReinforcementLearningRule::AbstractReinforcementLearningRule(AbstractReinforcementLearningRuleOptions* options_)
 		: AbstractLearningRule(options_)
 	{
-		randomGeneretorHasChanged();
+		randomGeneratorHasChanged();
 	}
 
-	void AbstractReinforcementLearningRule::randomGeneretorHasChanged()
+	void AbstractReinforcementLearningRule::randomGeneratorHasChanged()
 	{
 		if (getOptions().world)
 			getOptions().world->setRandomGenerator(*randomGenerator.get());

@@ -20,7 +20,7 @@ namespace LightBulb
 	void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule)
 	{
 		archive(cereal::base_class<AbstractLearningRule>(&learningRule));
-		learningRule.randomGeneretorHasChanged();
+		learningRule.randomGeneratorHasChanged();
 	}
 }
 

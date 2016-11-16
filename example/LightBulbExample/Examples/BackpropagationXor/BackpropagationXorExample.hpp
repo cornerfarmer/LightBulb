@@ -6,7 +6,7 @@
 
 // Includes
 #include "Teaching/Teacher.hpp"
-#include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
+#include "TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
 #include "IO/UseParentSerialization.hpp"
 
 // Library includes
@@ -14,7 +14,7 @@
 // Forward declarations
 
 // A techer manages many techingLessons
-class BackpropagationXorExample : public LightBulb::AbstractSingleNNTrainingPlan
+class BackpropagationXorExample : public LightBulb::AbstractSupervisedTrainingPlan
 {
 private:
 	std::unique_ptr<LightBulb::Teacher> teacher;
@@ -23,14 +23,12 @@ protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 public:
 	BackpropagationXorExample();
-	std::string getDefaultName() const override;
+	std::string getOriginalName() const override;
 	std::string getDescription() const override;
 	AbstractTrainingPlan* createNewFromSameType() const override;
-	int getRequiredInputSize() const override;
-	int getRequiredOutputSize() const override;
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(BackpropagationXorExample, LightBulb::AbstractSingleNNTrainingPlan, );
+USE_PARENT_SERIALIZATION(BackpropagationXorExample, LightBulb::AbstractSupervisedTrainingPlan, );
 
 #endif

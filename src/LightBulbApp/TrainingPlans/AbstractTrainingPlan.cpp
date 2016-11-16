@@ -93,7 +93,7 @@ namespace LightBulb
 		if (name != "")
 			return name;
 		else
-			return getDefaultName();
+			return getOriginalName();
 	}
 
 	std::string AbstractTrainingPlan::getStateAsString() const

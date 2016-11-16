@@ -77,7 +77,7 @@ PongPolicyGradientExample::PongPolicyGradientExample()
 	addPreference(new DoublePreference(PREFERENCE_VALUE_LEARNING_RATE, 1e-4, 0, 1));
 }
 
-std::string PongPolicyGradientExample::getDefaultName() const
+std::string PongPolicyGradientExample::getOriginalName() const
 {
 	return "Pong policy gradient example";
 }

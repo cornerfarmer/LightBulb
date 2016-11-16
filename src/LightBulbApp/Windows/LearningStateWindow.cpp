@@ -13,8 +13,14 @@
 
 namespace LightBulb
 {
-	enum
+	/**
+	 * \brief Actions in the LearningStateWindow
+	 */
+	enum LearningStateWindowActions
 	{
+		/**
+		 * \brief Removes a dataset.
+		 */
 		DATASET_REMOVE
 	};
 

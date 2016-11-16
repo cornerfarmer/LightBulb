@@ -76,7 +76,7 @@ AbstractEvolutionWorld* NetworkEvolutionExample::createWorld()
 	return new NetworkSimulator(consumers);
 }
 
-std::string NetworkEvolutionExample::getDefaultName() const
+std::string NetworkEvolutionExample::getOriginalName() const
 {
 	return "Network evolution example";
 }

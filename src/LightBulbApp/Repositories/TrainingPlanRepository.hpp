@@ -13,13 +13,16 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief All events the training plan repository can throw.
+	 */
 	enum TrainingPlanRepositoryEvents
 	{
+		/**
+		 * \brief Is thrown if the training plans have been changed.
+		 */
 		EVT_TP_CHANGED
 	};
-
 	/**
 	 * \brief A repository which stores all training plans which are currently executed in the LightBulbApp.
 	 */

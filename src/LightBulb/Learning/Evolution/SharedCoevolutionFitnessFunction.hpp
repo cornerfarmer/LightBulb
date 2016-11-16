@@ -10,12 +10,17 @@
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief A fitness function which rewards objects that win against opponents which are defeated by fewer other objects.
+	 * \details Describes \n\n
+	 * \f$ f_j = \sum{\frac{1}{N_o}} \f$ \n \n
+	 * Where \f$N_o\f$ is the number of objects that can win against opponent \f$o\f$.
+	 */
 	class SharedCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
 	{
 	protected:
 	public:
+		// Inherited:
 		std::map<const AbstractEvolutionObject*, double>* execute(const CombiningStrategyResults& results) override;
 	};
 }

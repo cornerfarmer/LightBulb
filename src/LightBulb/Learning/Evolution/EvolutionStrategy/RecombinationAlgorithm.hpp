@@ -12,16 +12,31 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractEvolutionObject;
-
-	// A algorithm which combines two given evolution objects by executing the corresponding EvolutionStrategy algorithm
+	/**
+	 * \brief A algorithm which combines two given evolution objects by executing the corresponding EvolutionStrategy algorithm.
+	 * \details There are two modes available:\n\n
+	 * 1. The weights of the child are the average values of the parents weights.
+	 * 2. The weights are randomly taken either from the first OR the second parent.
+	 */
 	class RecombinationAlgorithm : public AbstractRecombinationAlgorithm
 	{
 	private:
+		/**
+		 * \brief True, if the average of the parents weights should be used for the child weights.
+		 */
 		bool useAverageForWeight;
+		/**
+		* \brief True, if the average of the parents mutation strengths should be used for the child mutation strengths.
+		*/
 		bool useAverageForMutationStrength;
 	public:
+		/**
+		 * \brief Creates the recombination algorithm
+		 * \param useAverageForWeight_ True, if the average of the parents weights should be used for the child weights.
+		 * \param useAverageForMutationStrength_ True, if the average of the parents mutation strengths should be used for the child mutation strengths.
+		 */
 		RecombinationAlgorithm(bool useAverageForWeight_ = true, bool useAverageForMutationStrength_ = true);
-		// The algorithm calculates a simple average between the two given objects.
+		// Inherited.
 		void execute(AbstractEvolutionObject& object1, AbstractEvolutionObject& object2) override;
 		AbstractCloneable* clone() const override;
 	};

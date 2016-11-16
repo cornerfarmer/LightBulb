@@ -74,7 +74,7 @@ SimpleReinforcementDQNExample::SimpleReinforcementDQNExample()
 	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, false));
 }
 
-std::string SimpleReinforcementDQNExample::getDefaultName() const
+std::string SimpleReinforcementDQNExample::getOriginalName() const
 {
 	return "Simple DQN example";
 }

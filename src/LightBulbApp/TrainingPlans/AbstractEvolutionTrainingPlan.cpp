@@ -24,9 +24,4 @@ namespace LightBulb
 	{
 		return *world.get();
 	}
-
-	void AbstractEvolutionTrainingPlan::setWorld(AbstractEvolutionWorld* world_)
-	{
-		world.reset(world_);
-	}
 }

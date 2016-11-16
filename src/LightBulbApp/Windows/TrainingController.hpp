@@ -97,7 +97,7 @@ namespace LightBulb
 		/**
 		 * \brief Starts the training plan with the given index together with the neural network with the given index.
 		 * \param trainingPlanPatternIndex The index of the training plan to start.
-		 * \note The neural network index will only be used if the training plan is a AbstractSingleNNTrainingPlan.
+		 * \note The neural network index will only be used if the training plan is a AbstractSupervisedTrainingPlan.
 		 */
 		void startTrainingPlanPattern(int trainingPlanPatternIndex);
 		/**

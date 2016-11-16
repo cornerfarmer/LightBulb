@@ -4,7 +4,7 @@
 #define _ABSTRACTSINGLENNTRAININGPLANIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
+#include "TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
 #include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -20,13 +20,13 @@ namespace LightBulb
 	extern bool onlyUseNeuralNetworkIndex;
 
 	/**
-	* \brief Saves an AbstractSingleNNTrainingPlan.
+	* \brief Saves an AbstractSupervisedTrainingPlan.
 	* \tparam Archive The archive type.
 	* \param archive The archive which should be used.
-	* \param trainingPlan The AbstractSingleNNTrainingPlan to save.
+	* \param trainingPlan The AbstractSupervisedTrainingPlan to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, AbstractSingleNNTrainingPlan const& trainingPlan)
+	void save(Archive& archive, AbstractSupervisedTrainingPlan const& trainingPlan)
 	{
 		if (!onlyUseNeuralNetworkIndex)
 		{
@@ -49,13 +49,13 @@ namespace LightBulb
 	}
 
 	/**
-	* \brief Loads an AbstractSingleNNTrainingPlan.
+	* \brief Loads an AbstractSupervisedTrainingPlan.
 	* \tparam Archive The archive type.
 	* \param archive The archive which should be used.
-	* \param trainingPlan The AbstractSingleNNTrainingPlan to load.
+	* \param trainingPlan The AbstractSupervisedTrainingPlan to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractSingleNNTrainingPlan& trainingPlan)
+	void load(Archive& archive, AbstractSupervisedTrainingPlan& trainingPlan)
 	{
 		if (!onlyUseNeuralNetworkIndex)
 		{
@@ -76,6 +76,6 @@ namespace LightBulb
 
 #include "IO/UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(LightBulb::AbstractSingleNNTrainingPlan);
+CEREAL_REGISTER_TYPE(LightBulb::AbstractSupervisedTrainingPlan);
 
 #endif

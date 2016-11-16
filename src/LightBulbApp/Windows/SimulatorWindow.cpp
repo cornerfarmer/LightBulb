@@ -7,9 +7,18 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief IO types in the SimulatorWindow.
+	 */
 	enum IOType
 	{
+		/**
+		 * \brief Boolean IO values.
+		 */
 		TYPE_BOOL,
+		/**
+		 * \brief Floating IO values.
+		 */
 		TYPE_FLOAT
 	};
 

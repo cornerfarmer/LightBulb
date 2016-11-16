@@ -142,7 +142,7 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.00005, 0.003, 0.3));
 }
 
-std::string TicTacToeEvolutionExample::getDefaultName() const
+std::string TicTacToeEvolutionExample::getOriginalName() const
 {
 	return "TicTacToe evolution example";
 }

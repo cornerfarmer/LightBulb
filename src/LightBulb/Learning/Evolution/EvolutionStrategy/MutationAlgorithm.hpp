@@ -14,23 +14,36 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractEvolutionObject;
-
-	// A algorithm which mutates a given evolution object by executing the corresponding EvolutionStrategy algorithm
+	/**
+	 * \brief  A algorithm which mutates a given evolution object by executing the corresponding EvolutionStrategy algorithm.
+	 * \details The algorithm:\n\n
+	 * 1. All mutationStrength values are changed randomly.\n
+	 * 2. The new mutationStrength values are added to their corresponding weights.
+	 */
 	class MutationAlgorithm : public AbstractMutationAlgorithm
 	{
 	private:
-		// This factor influences the change speed of mutationStrengths
+		/**
+		 * \brief This factor influences the change speed of mutationStrengths.
+		 */
 		double mutationStrengthChangeSpeed;
-		// The absolute minimum of a mutationStrength value
+		/**
+		 * \brief The absolute minimum of a mutationStrength value.
+		 */
 		double mutationStrengthMin;
-		// The absolute maximum of a mutationStrength value
+		/**
+		 * \brief The absolute maximum of a mutationStrength value.
+		 */
 		double mutationStrengthMax;
 	public:
+		/**
+		 * \brief Creates the mutation algorithm.
+		 * \param mutationStrengthChangeSpeed_ This factor influences the change speed of mutationStrengths.
+		 * \param mutationStrengthMax_ The absolute maximum of a mutationStrength value.
+		 * \param mutationStrengthMin_ The absolute minimum of a mutationStrength value.
+		 */
 		MutationAlgorithm(double mutationStrengthChangeSpeed_, double mutationStrengthMax_ = 50, double mutationStrengthMin_ = 0.000001f);
-		void setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_);
-		// Mutates the given evolution object:
-		// 1. Changes the mutationStrength values randomly
-		// 2. Adds the new mutationStrength values to their corresponding weights
+		// Inherited:
 		void execute(AbstractEvolutionObject& object1) override;
 		AbstractMutationAlgorithm* clone() const override;
 	};

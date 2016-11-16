@@ -1,22 +1,22 @@
 ﻿// Includes
-#include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
+#include "TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 
 namespace LightBulb
 {
-	void AbstractSingleNNTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions& options) const
+	void AbstractSupervisedTrainingPlan::fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions& options) const
 	{
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
 		options.neuralNetwork = network;
 	}
 
-	AbstractSingleNNTrainingPlan::AbstractSingleNNTrainingPlan()
+	AbstractSupervisedTrainingPlan::AbstractSupervisedTrainingPlan()
 	{
 		network = nullptr;
 	}
 
-	void AbstractSingleNNTrainingPlan::initializeStart()
+	void AbstractSupervisedTrainingPlan::initializeStart()
 	{
 		if (network == nullptr)
 		{
@@ -26,13 +26,9 @@ namespace LightBulb
 		network->setState(NN_STATE_TRAINED);
 	}
 
-	AbstractNeuralNetwork& AbstractSingleNNTrainingPlan::getNeuralNetwork()
+	AbstractNeuralNetwork& AbstractSupervisedTrainingPlan::getNeuralNetwork()
 	{
 		return *network;
 	}
 
-	void AbstractSingleNNTrainingPlan::setNeuralNetwork(AbstractNeuralNetwork& network_)
-	{
-		network = &network_;
-	}
 }

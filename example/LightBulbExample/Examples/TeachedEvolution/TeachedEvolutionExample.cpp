@@ -73,7 +73,7 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	return new TeachingEvolutionWorld(teacher, networkTopologyOptions);
 }
 
-std::string TeachedEvolutionExample::getDefaultName() const
+std::string TeachedEvolutionExample::getOriginalName() const
 {
 	return "Teached evolution example";
 }

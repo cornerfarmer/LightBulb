@@ -4,7 +4,7 @@
 #include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <TrainingPlans/AbstractSingleNNTrainingPlan.hpp>
+#include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 
 namespace LightBulb
 {

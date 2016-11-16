@@ -86,7 +86,7 @@ TCProblemEvolutionExample::TCProblemEvolutionExample()
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.006, 0.003, 0.3));
 }
 
-std::string TCProblemEvolutionExample::getDefaultName() const
+std::string TCProblemEvolutionExample::getOriginalName() const
 {
 	return "TC-problem evolution example";
 }

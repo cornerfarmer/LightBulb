@@ -25,8 +25,4 @@ namespace LightBulb
 		return *world.get();
 	}
 
-	void AbstractReinforcementTrainingPlan::setWorld(AbstractReinforcementWorld* world_)
-	{
-		world.reset(world_);
-	}
 }

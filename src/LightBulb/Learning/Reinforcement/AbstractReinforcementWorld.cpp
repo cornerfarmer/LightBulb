@@ -7,13 +7,11 @@
 
 namespace LightBulb
 {
-	void AbstractReinforcementWorld::doNNCalculation(bool resetInput)
+	void AbstractReinforcementWorld::doNNCalculation()
 	{
-		if (resetInput) {
-			neuralNetwork->getNetworkTopology().resetActivation();
-			// Get the input
-			getNNInput(lastInput);
-		}
+		neuralNetwork->getNetworkTopology().resetActivation();
+		// Get the input
+		getNNInput(lastInput);		
 
 		TopologicalOrder topologicalOrder;
 		// Calculate the output from the the input

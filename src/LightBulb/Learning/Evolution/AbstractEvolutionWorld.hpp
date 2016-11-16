@@ -18,7 +18,9 @@ namespace LightBulb
 	// Forward declarations
 	class EvolutionLearningRule;
 	class AbstractEvolutionObject;
-
+	/**
+	 * \brief Describes a ranked list of all evolution objects depending on their fitness values.
+	 */
 	typedef std::vector<std::pair<double, AbstractEvolutionObject*>> Highscore;
 	/**
 	 * \brief This class describes a world which contains multiple evolution objects.
@@ -62,7 +64,6 @@ namespace LightBulb
 		 * \return The new evolution object.
 		 */
 		virtual AbstractEvolutionObject* addNewObject(bool addToWorld = true) = 0;
-		// After each simulation step the evolution learning rule will execute each evolution command (selection, mutation, recombination...)
 		/**
 		 * \brief Executes one simulation step.
 		 * \details Does a whole new simulation after that new fitness values can be determined.

@@ -17,7 +17,9 @@ namespace LightBulb
 	struct AbstractEvolutionLearningRuleOptions;
 	struct BipartiteEvolutionLearningRuleOptions;
 	struct EvolutionLearningRuleOptions;
-
+	/**
+	* \brief Describes a training plan which uses coevolution learning.
+	*/
 	class AbstractCoevolutionTrainingPlan : public AbstractEvolutionTrainingPlan
 	{
 		template <class Archive>
@@ -25,15 +27,38 @@ namespace LightBulb
 		template <class Archive>
 		friend void load(Archive& archive, AbstractCoevolutionTrainingPlan& trainingPlan);
 	protected:
+		/**
+		* \brief The parasite evolution world which is used.
+		*/
 		std::unique_ptr<AbstractEvolutionWorld> parasiteWorld;
+		/**
+		* \brief Creates the parasite evolution world.
+		* \return The new parasite world.
+		*/
 		virtual AbstractEvolutionWorld* createParasiteWorld() = 0;
+		/**
+		* \brief Fills all learning rule options which are the same for all coevolution learning rule training plans.
+		* \param options The options to fill.
+		*/
 		void fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions& options) const;
+		/**
+		* \brief Fills all learning rule options which are the same for the first evolution learning rule.
+		* \param options The options to fill.
+		*/
 		void fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions& options) const;
+		/**
+		* \brief Fills all learning rule options which are the same for the second evolution learning rule.
+		* \param options The options to fill.
+		*/
 		void fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions& options) const;
 	public:
-		void initializeStart() override;
+		/**
+		 * \brief Returns the parasite evolution world.
+		 * \return The world.
+		 */
 		AbstractEvolutionWorld& getParasiteWorld();
-		void setParasiteWorld(AbstractEvolutionWorld* world_);
+		// Inherited:
+		void initializeStart() override;
 	};
 }
 

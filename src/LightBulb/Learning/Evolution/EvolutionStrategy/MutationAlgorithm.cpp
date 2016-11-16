@@ -52,13 +52,5 @@ namespace LightBulb
 		return new MutationAlgorithm(*this);
 	}
 
-
-
-	void MutationAlgorithm::setMutationStrengthChangeSpeed(double mutationStrengthChangeSpeed_)
-	{
-		mutationStrengthChangeSpeed = mutationStrengthChangeSpeed_;
-	}
-
-
 }
 

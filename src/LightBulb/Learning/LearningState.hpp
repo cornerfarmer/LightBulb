@@ -6,15 +6,28 @@
 
 namespace LightBulb
 {
+	/**
+	 * \brief All events LearningState can throw.
+	 */
 	enum LearningStateEvents
 	{
+		/**
+		 * \brief Is thrown if a dataset has changed.
+		 */
 		EVT_LS_DS_CHANGED
 	};
-
+	/**
+	 * \brief Describes a simple dataset.
+	 */
 	typedef std::vector<double> DataSet;
+	/**
+	 * \brief Contains all datasets of try mapped with their name.
+	 */
 	typedef std::map<std::string, DataSet> DataSetsPerTry;
+	/**
+	 * \brief Contains all datasets.
+	 */
 	typedef std::vector<DataSetsPerTry> DataSets;
-
 	/**
 	 * \brief All information about the current learning process
 	 */

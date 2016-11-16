@@ -126,9 +126,6 @@
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\AbstractSingleNNTrainingPlan.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -172,6 +169,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceElement.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\AbstractSupervisedTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,9 +320,6 @@
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\AbstractSingleNNTrainingPlan.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -372,6 +369,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceElement.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\AbstractSupervisedTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

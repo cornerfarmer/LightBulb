@@ -147,7 +147,7 @@ PongEvolutionExample::PongEvolutionExample()
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0, 0.003, 0.3));
 }
 
-std::string PongEvolutionExample::getDefaultName() const
+std::string PongEvolutionExample::getOriginalName() const
 {
 	return "Pong evolution example";
 }

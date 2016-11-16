@@ -14,7 +14,9 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractNeuralNetwork;
 	struct AbstractReinforcementLearningRuleOptions;
-
+	/**
+	* \brief Describes a training plan which uses reinforcement learning.
+	*/
 	class AbstractReinforcementTrainingPlan : public AbstractLearningRuleTrainingPlan
 	{
 		template <class Archive>
@@ -22,14 +24,32 @@ namespace LightBulb
 		template <class Archive>
 		friend void load(Archive& archive, AbstractReinforcementTrainingPlan& trainingPlan);
 	protected:
+		/**
+		 * \brief The reinforcement world which is used.
+		 */
 		std::unique_ptr<AbstractReinforcementWorld> world;
+		/**
+		 * \brief Creates the reinforcement world.
+		 * \return The new world.
+		 */
 		virtual AbstractReinforcementWorld* createWorld() = 0;
+		/**
+		* \brief Fills all learning rule options which are the same for all reinforcement learning rule training plans.
+		* \param options The options to fill.
+		*/
 		void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions& options) const;
 	public:
+		/**
+		 * \brief Creates the reinforcement training plan.
+		 */
 		AbstractReinforcementTrainingPlan();
-		void initializeStart() override;
+		/**
+		 * \brief Returns the reinforcement world.
+		 * \return The world.
+		 */
 		AbstractReinforcementWorld& getWorld();
-		void setWorld(AbstractReinforcementWorld* network_);
+		// Inherited:
+		void initializeStart() override;
 	};
 }
 

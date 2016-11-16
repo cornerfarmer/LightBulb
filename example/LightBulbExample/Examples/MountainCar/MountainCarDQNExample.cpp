@@ -91,7 +91,7 @@ MountainCarDQNExample::MountainCarDQNExample()
 	addPreference(new BooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS, true));
 }
 
-std::string MountainCarDQNExample::getDefaultName() const
+std::string MountainCarDQNExample::getOriginalName() const
 {
 	return "MountainCar DQN example";
 }

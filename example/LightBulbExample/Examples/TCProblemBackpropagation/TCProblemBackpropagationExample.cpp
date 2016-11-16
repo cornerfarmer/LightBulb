@@ -58,7 +58,7 @@ AbstractNeuralNetwork* TCProblemBackpropagationExample::createNeuralNetwork()
 }
 
 
-std::string TCProblemBackpropagationExample::getDefaultName() const
+std::string TCProblemBackpropagationExample::getOriginalName() const
 {
 	return "TC-problem backpropagation example";
 }
@@ -72,16 +72,6 @@ std::string TCProblemBackpropagationExample::getDescription() const
 AbstractTrainingPlan* TCProblemBackpropagationExample::createNewFromSameType() const
 {
 	return new TCProblemBackpropagationExample();
-}
-
-int TCProblemBackpropagationExample::getRequiredInputSize() const
-{
-	return 16;
-}
-
-int TCProblemBackpropagationExample::getRequiredOutputSize() const
-{
-	return 1;
 }
 
 std::string TCProblemBackpropagationExample::getLearningRuleName() const

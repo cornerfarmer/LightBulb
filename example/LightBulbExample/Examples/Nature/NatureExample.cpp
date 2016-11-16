@@ -47,7 +47,7 @@ NatureExample::NatureExample()
 	addCustomSubApp(new NatureFactory());
 }
 
-std::string NatureExample::getDefaultName() const
+std::string NatureExample::getOriginalName() const
 {
 	return "Nature evolution example";
 }

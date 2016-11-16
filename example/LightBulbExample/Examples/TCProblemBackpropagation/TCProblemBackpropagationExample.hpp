@@ -5,7 +5,7 @@
 
 
 // Includes
-#include "TrainingPlans/AbstractSingleNNTrainingPlan.hpp"
+#include "TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
 #include "TCProblemTeacher.hpp"
 #include "IO/UseParentSerialization.hpp"
 
@@ -14,7 +14,7 @@
 // Forward declarations
 
 // A techer manages many techingLessons
-class TCProblemBackpropagationExample : public LightBulb::AbstractSingleNNTrainingPlan
+class TCProblemBackpropagationExample : public LightBulb::AbstractSupervisedTrainingPlan
 {
 private:
 	std::unique_ptr<TCProblemTeacher> teacher;
@@ -23,14 +23,12 @@ protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 public:
 	TCProblemBackpropagationExample();
-	std::string getDefaultName() const override;
+	std::string getOriginalName() const override;
 	std::string getDescription() const override;
 	AbstractTrainingPlan* createNewFromSameType() const override;
-	int getRequiredInputSize() const override;
-	int getRequiredOutputSize() const override;
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(TCProblemBackpropagationExample, LightBulb::AbstractSingleNNTrainingPlan, );
+USE_PARENT_SERIALIZATION(TCProblemBackpropagationExample, LightBulb::AbstractSupervisedTrainingPlan, );
 
 #endif
