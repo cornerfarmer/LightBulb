@@ -180,7 +180,7 @@
     <ClInclude Include="Mocks\MockActivationFunction.hpp" />
     <ClInclude Include="Mocks\MockActivationOrder.hpp" />
     <ClInclude Include="Mocks\MockCoevolutionFitnessFunction.hpp" />
-    <ClInclude Include="Mocks\MockCoevolutionWorld.hpp" />
+    <ClInclude Include="Mocks\MockCoevolutionEnvironment.hpp" />
     <ClInclude Include="Mocks\MockCombiningStrategy.hpp" />
     <ClInclude Include="Mocks\MockCreationCommand.hpp" />
     <ClInclude Include="Mocks\MockHallOfFameAlgorithm.hpp" />
@@ -189,7 +189,7 @@
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
     <ClInclude Include="Mocks\MockIndividual.hpp" />
-    <ClInclude Include="Mocks\MockEvolutionWorld.hpp" />
+    <ClInclude Include="Mocks\MockEvolutionEnvironment.hpp" />
     <ClInclude Include="Mocks\MockExitCondition.hpp" />
     <ClInclude Include="Mocks\MockFitnessFunction.hpp" />
     <ClInclude Include="Mocks\MockLogger.hpp" />
@@ -210,8 +210,8 @@
     <ClInclude Include="Mocks\MockSelectionFunction.hpp" />
     <ClInclude Include="Mocks\MockTeacher.hpp" />
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
-    <ClInclude Include="Mocks\MockTestableCoevolutionWorld.hpp" />
-    <ClInclude Include="Mocks\MockTestableEvolutionWorld.hpp" />
+    <ClInclude Include="Mocks\MockTestableCoevolutionEnvironment.hpp" />
+    <ClInclude Include="Mocks\MockTestableEvolutionEnvironment.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

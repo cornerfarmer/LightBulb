@@ -63,16 +63,7 @@
     <ClCompile Include="Examples\PongEvolution\PongGame.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\PongEvolution\AbstractPongWorld.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\PongReinforcement\PongDQNExample.cpp">
@@ -82,9 +73,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\MountainCar\MountainCarDQNExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\MountainCar\MountainCarWorld.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\MountainCar\MountainCarFactory.cpp">
@@ -153,6 +141,18 @@
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\MountainCar\MountainCarEnvironment.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\PongEvolution\AbstractPongEnvironment.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\PongReinforcement\PongReinforcementEnvironment.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementEnvironment.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -209,16 +209,7 @@
     <ClInclude Include="Examples\PongEvolution\PongGame.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\PongEvolution\AbstractPongWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\PongReinforcement\PongDQNExample.hpp">
@@ -230,9 +221,6 @@
     <ClInclude Include="Examples\MountainCar\MountainCarDQNExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\MountainCar\MountainCarWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\MountainCar\MountainCarController.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -240,9 +228,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\MountainCar\MountainCarWindow.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\PongReinforcementWorldIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\PongGameIO.hpp">
@@ -303,6 +288,21 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeAI.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\MountainCar\MountainCarEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\PongEvolution\AbstractPongEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\PongReinforcement\PongReinforcementEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\PongReinforcementEnvironmentIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

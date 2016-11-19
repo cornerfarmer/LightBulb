@@ -75,7 +75,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorld.cpp">
+    <ClCompile Include="Learning\Evolution\AbstractCoevolutionEnvironment.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -92,7 +92,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
+    <ClCompile Include="Learning\Evolution\AbstractEvolutionEnvironment.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -135,7 +135,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp">
+    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionEnvironment.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -238,7 +238,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\TeachingEvolutionWorld.cpp">
+    <ClCompile Include="Learning\Evolution\TeachingEvolutionEnvironment.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -248,7 +248,7 @@
     </ClCompile>
     <ClCompile Include="Learning\Evolution\WeightDecayFitnessFunction.cpp" />
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementLearningRule.cpp" />
-    <ClCompile Include="Learning\Reinforcement\AbstractReinforcementWorld.cpp" />
+    <ClCompile Include="Learning\Reinforcement\AbstractReinforcementEnvironment.cpp" />
     <ClCompile Include="Learning\Reinforcement\DQNLearningRule.cpp" />
     <ClCompile Include="Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.cpp">
@@ -322,7 +322,7 @@
     <ClInclude Include="IO\AbstractGradientDescentAlgorithmIO.hpp" />
     <ClInclude Include="IO\AbstractRandomGeneratorIO.hpp" />
     <ClInclude Include="IO\AbstractReinforcementLearningRuleIO.hpp" />
-    <ClInclude Include="IO\AbstractReinforcementWorldIO.hpp" />
+    <ClInclude Include="IO\AbstractReinforcementEnvironmentIO.hpp" />
     <ClInclude Include="IO\BackpropagationIO.hpp" />
     <ClInclude Include="IO\DQNLearningRuleIO.hpp" />
     <ClInclude Include="IO\ResilientLearningRateIO.hpp" />
@@ -335,11 +335,11 @@
     <ClInclude Include="NetworkTopology\AbstractFeedForwardNetworkTopology.hpp" />
     <ClInclude Include="Random\XorShfGenerator.hpp" />
     <ClInclude Include="Random\ZigguratGenerator.hpp" />
-    <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp" />
+    <ClInclude Include="IO\AbstractCoevolutionEnvironmentIO.hpp" />
     <ClInclude Include="IO\AbstractIndividualIO.hpp" />
     <ClInclude Include="IO\AbstractHallOfFameAlgorithmIO.hpp" />
     <ClInclude Include="IO\AbstractDefaultIndividualIO.hpp" />
-    <ClInclude Include="IO\AbstractSimpleEvolutionWorldIO.hpp" />
+    <ClInclude Include="IO\AbstractSimpleEvolutionEnvironmentIO.hpp" />
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
     <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
@@ -392,7 +392,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractCoevolutionWorld.hpp">
+    <ClInclude Include="Learning\Evolution\AbstractCoevolutionEnvironment.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -409,7 +409,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
+    <ClInclude Include="Learning\Evolution\AbstractEvolutionEnvironment.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -452,7 +452,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp">
+    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionEnvironment.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -555,7 +555,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
+    <ClInclude Include="Learning\Evolution\TeachingEvolutionEnvironment.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -569,7 +569,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
-    <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
+    <ClInclude Include="Learning\Reinforcement\AbstractReinforcementEnvironment.hpp" />
     <ClInclude Include="Learning\Reinforcement\DQNLearningRule.hpp" />
     <ClInclude Include="Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
     <ClInclude Include="Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.hpp">

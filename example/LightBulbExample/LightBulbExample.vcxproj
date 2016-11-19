@@ -130,7 +130,7 @@
     <ClCompile Include="Examples\MountainCar\MountainCarDQNExample.cpp" />
     <ClCompile Include="Examples\MountainCar\MountainCarFactory.cpp" />
     <ClCompile Include="Examples\MountainCar\MountainCarWindow.cpp" />
-    <ClCompile Include="Examples\MountainCar\MountainCarWorld.cpp" />
+    <ClCompile Include="Examples\MountainCar\MountainCarEnvironment.cpp" />
     <ClCompile Include="Examples\Nature\AbstractTile.cpp" />
     <ClCompile Include="Examples\Nature\Animal.cpp" />
     <ClCompile Include="Examples\Nature\EarthTile.cpp" />
@@ -143,7 +143,7 @@
     <ClCompile Include="Examples\NetworkEvolution\Network.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkEvolutionExample.cpp" />
     <ClCompile Include="Examples\NetworkEvolution\NetworkSimulator.cpp" />
-    <ClCompile Include="Examples\PongEvolution\AbstractPongWorld.cpp" />
+    <ClCompile Include="Examples\PongEvolution\AbstractPongEnvironment.cpp" />
     <ClCompile Include="Examples\PongEvolution\Pong.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongAI.cpp" />
     <ClCompile Include="Examples\PongEvolution\PongEvolutionExample.cpp" />
@@ -153,11 +153,11 @@
     <ClCompile Include="Examples\PongEvolution\PongGameWindow.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongDQNExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongPolicyGradientExample.cpp" />
-    <ClCompile Include="Examples\PongReinforcement\PongReinforcementWorld.cpp" />
+    <ClCompile Include="Examples\PongReinforcement\PongReinforcementEnvironment.cpp" />
     <ClCompile Include="Examples\FunctionEvolution\Position.cpp" />
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.cpp" />
     <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementExample.cpp" />
-    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.cpp" />
+    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementEnvironment.cpp" />
     <ClCompile Include="Examples\TCProblemBackpropagation\TCProblemBackpropagationExample.cpp" />
     <ClCompile Include="Examples\TCProblemEvolution\TCProblemEvolutionExample.cpp" />
     <ClCompile Include="Examples\TCProblemBackpropagation\TCProblemTeacher.cpp" />
@@ -178,7 +178,7 @@
     <ClInclude Include="Examples\MountainCar\MountainCarDQNExample.hpp" />
     <ClInclude Include="Examples\MountainCar\MountainCarFactory.hpp" />
     <ClInclude Include="Examples\MountainCar\MountainCarWindow.hpp" />
-    <ClInclude Include="Examples\MountainCar\MountainCarWorld.hpp" />
+    <ClInclude Include="Examples\MountainCar\MountainCarEnvironment.hpp" />
     <ClInclude Include="Examples\Nature\AbstractTile.hpp" />
     <ClInclude Include="Examples\Nature\Animal.hpp" />
     <ClInclude Include="Examples\Nature\EarthTile.hpp" />
@@ -191,7 +191,7 @@
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkEvolutionExample.hpp" />
     <ClInclude Include="Examples\NetworkEvolution\NetworkSimulator.hpp" />
-    <ClInclude Include="Examples\PongEvolution\AbstractPongWorld.hpp" />
+    <ClInclude Include="Examples\PongEvolution\AbstractPongEnvironment.hpp" />
     <ClInclude Include="Examples\PongEvolution\Pong.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongAI.hpp" />
     <ClInclude Include="Examples\PongEvolution\PongEvolutionExample.hpp" />
@@ -201,11 +201,11 @@
     <ClInclude Include="Examples\PongEvolution\PongGameWindow.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongDQNExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongPolicyGradientExample.hpp" />
-    <ClInclude Include="Examples\PongReinforcement\PongReinforcementWorld.hpp" />
+    <ClInclude Include="Examples\PongReinforcement\PongReinforcementEnvironment.hpp" />
     <ClInclude Include="Examples\FunctionEvolution\Position.hpp" />
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.hpp" />
     <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementExample.hpp" />
-    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementWorld.hpp" />
+    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementEnvironment.hpp" />
     <ClInclude Include="Examples\TCProblemBackpropagation\TCProblemBackpropagationExample.hpp" />
     <ClInclude Include="Examples\TCProblemEvolution\TCProblemEvolutionExample.hpp" />
     <ClInclude Include="Examples\TCProblemBackpropagation\TCProblemTeacher.hpp" />
@@ -217,7 +217,7 @@
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeAI.hpp" />
     <ClInclude Include="IO\PongGameIO.hpp" />
-    <ClInclude Include="IO\PongReinforcementWorldIO.hpp" />
+    <ClInclude Include="IO\PongReinforcementEnvironmentIO.hpp" />
     <ClInclude Include="IO\PositionIO.hpp" />
     <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />

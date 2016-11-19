@@ -191,9 +191,6 @@
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Mocks\MockEvolutionWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Mocks\MockExitCondition.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -218,9 +215,6 @@
     <ClInclude Include="Mocks\MockLogger.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Mocks\MockCoevolutionWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Mocks\MockCombiningStrategy.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -234,12 +228,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockTestableEvolutionWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockTestableCoevolutionWorld.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockHallOfFameAlgorithm.hpp">
@@ -261,6 +249,18 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockIndividual.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockCoevolutionEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockEvolutionEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockTestableCoevolutionEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockTestableEvolutionEnvironment.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
