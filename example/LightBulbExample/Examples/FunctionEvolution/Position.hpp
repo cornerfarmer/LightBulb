@@ -6,17 +6,17 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
 
 // Forward declarations
 class FunctionSimulator;
 
-class Position : public LightBulb::AbstractSimpleEvolutionObject
+class Position : public LightBulb::AbstractDefaultIndividual
 {
 	template <class Archive>
-	friend void save(Archive& archive, Position const& object);
+	friend void save(Archive& archive, Position const& individual);
 	template <class Archive>
-	friend void load(Archive& archive, Position& object);
+	friend void load(Archive& archive, Position& individual);
 protected:
 	FunctionSimulator* functionSimulator;
 	std::vector<float> position;

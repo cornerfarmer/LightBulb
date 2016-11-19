@@ -8,7 +8,7 @@
 
 using namespace LightBulb;
 
-AbstractEvolutionObject* Nature::createNewObject()
+AbstractIndividual* Nature::createNewIndividual()
 {
 	int posX;
 	int posY;
@@ -48,7 +48,7 @@ bool Nature::doSimulationStep()
 {
 	int deadAnimals = 0;
 
-	while (objects.size() - deadAnimals > 0)
+	while (individuals.size() - deadAnimals > 0)
 	{
 		/*sf::Event event;
 		while (window.pollEvent(event))
@@ -72,7 +72,7 @@ bool Nature::doSimulationStep()
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
 		}
 
-		for (auto animal = objects.begin(); animal != objects.end(); animal++)
+		for (auto animal = individuals.begin(); animal != individuals.end(); animal++)
 		{
 			if (!static_cast<Animal*>(*animal)->isDead())
 			{
@@ -93,14 +93,14 @@ bool Nature::doSimulationStep()
 	return false;
 }
 
-double Nature::getScore(const AbstractEvolutionObject& object) const
+double Nature::getScore(const AbstractIndividual& individual) const
 {
-	return static_cast<const Animal&>(object).getStepsSurvived();
+	return static_cast<const Animal&>(individual).getStepsSurvived();
 }
 
 void Nature::resetWorld()
 {
-	for (auto animal = objects.begin(); animal != objects.end(); animal++)
+	for (auto animal = individuals.begin(); animal != individuals.end(); animal++)
 	{
 		int posX;
 		int posY;
@@ -197,7 +197,7 @@ bool Nature::isTileFree(int posX, int posY)
 	if (posX >= 0 && posY >= 0 && posX < width && posY < height)
 	{
 		bool free = true;
-		for (auto animal = objects.begin(); animal != objects.end(); animal++)
+		for (auto animal = individuals.begin(); animal != individuals.end(); animal++)
 		{
 			if (!static_cast<Animal*>(*animal)->isDead() && static_cast<Animal*>(*animal)->getPosX() == posX && static_cast<Animal*>(*animal)->getPosY() == posY)
 			{

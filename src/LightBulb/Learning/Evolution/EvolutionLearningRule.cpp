@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
 #include "Learning/Evolution/AbstractCreationCommand.hpp"
 #include "Learning/Evolution/AbstractSelectionCommand.hpp"
@@ -31,7 +31,7 @@ namespace LightBulb
 		learningResult->qualityLabel = "Best fitness";
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
-			learningResult->bestObjects.push_back(std::unique_ptr<AbstractEvolutionObject>(entry->second));
+			learningResult->bestIndividuals.push_back(std::unique_ptr<AbstractIndividual>(entry->second));
 		}
 		getOptions().world->clearPopulation();
 
@@ -149,69 +149,69 @@ namespace LightBulb
 		log("------------- Generation " + std::to_string(learningState->iterations) + " -----------------", LL_LOW);
 
 		if (getOptions().world->getPopulationSize() > 0) {
-			// Extract all current objects ordered by their score
+			// Extract all current individuals ordered by their score
 			const Highscore& highscore = getOptions().world->getHighscoreList();
-			// This vector will contain all objects for the next generation
-			std::vector<AbstractEvolutionObject*> newObjectVector;
-			std::map<AbstractEvolutionObject*, int> operationCounter;
+			// This vector will contain all individuals for the next generation
+			std::vector<AbstractIndividual*> newIndividualVector;
+			std::map<AbstractIndividual*, int> operationCounter;
 
-			// 5. Step: Reuse some of the evolution objects directly for the next generation
+			// 5. Step: Reuse some of the individuals directly for the next generation
 			for (auto reuseCommand = getOptions().reuseCommands.begin(); reuseCommand != getOptions().reuseCommands.end(); reuseCommand++)
 			{
 				(*reuseCommand)->select(highscore, operationCounter);
 			}
 
-			// 6. Step: Mutate some of the evolution objects and use them for the next getOptions()
+			// 6. Step: Mutate some of the individuals and use them for the next getOptions()
 			for (auto mutationCommand = getOptions().mutationsCommands.begin(); mutationCommand != getOptions().mutationsCommands.end(); mutationCommand++)
 			{
 				(*mutationCommand)->select(highscore, operationCounter);
 			}
 
-			// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
+			// 7. Step: Combine some pairs of individuals and use the created ones for the next generation
 			for (auto recombinationCommand = getOptions().recombinationCommands.begin(); recombinationCommand != getOptions().recombinationCommands.end(); recombinationCommand++)
 			{
 				(*recombinationCommand)->select(highscore, operationCounter);
 			}
 
-			for (auto object = getOptions().world->getEvolutionObjects().begin(); object != getOptions().world->getEvolutionObjects().end(); object++)
+			for (auto individual = getOptions().world->getIndividuals().begin(); individual != getOptions().world->getIndividuals().end(); individual++)
 			{
-				if (operationCounter[*object] == 0)
-					notUsedObjects.push_back(*object);
+				if (operationCounter[*individual] == 0)
+					notUsedIndividuals.push_back(*individual);
 			}
 
-			// 7. Step: Combine some pairs of evolution objects and use the created ones for the next generation
+			// 7. Step: Combine some pairs of individuals and use the created ones for the next generation
 			for (auto recombinationCommand = getOptions().recombinationCommands.begin(); recombinationCommand != getOptions().recombinationCommands.end(); recombinationCommand++)
 			{
-				(*recombinationCommand)->execute(newObjectVector, operationCounter, notUsedObjects);
+				(*recombinationCommand)->execute(newIndividualVector, operationCounter, notUsedIndividuals);
 			}
 
-			// 6. Step: Mutate some of the evolution objects and use them for the next generation
+			// 6. Step: Mutate some of the individuals and use them for the next generation
 			for (auto mutationCommand = getOptions().mutationsCommands.begin(); mutationCommand != getOptions().mutationsCommands.end(); mutationCommand++)
 			{
-				(*mutationCommand)->execute(newObjectVector, operationCounter, notUsedObjects);
+				(*mutationCommand)->execute(newIndividualVector, operationCounter, notUsedIndividuals);
 			}
 
-			// 5. Step: Reuse some of the evolution objects directly for the next generation
+			// 5. Step: Reuse some of the individuals directly for the next generation
 			for (auto reuseCommand = getOptions().reuseCommands.begin(); reuseCommand != getOptions().reuseCommands.end(); reuseCommand++)
 			{
-				(*reuseCommand)->execute(newObjectVector, operationCounter, notUsedObjects);
+				(*reuseCommand)->execute(newIndividualVector, operationCounter, notUsedIndividuals);
 			}
 
-			// Replace all evolution objects from the last generation with the one from the next generation
-			getOptions().world->setEvolutionObjects(newObjectVector);
+			// Replace all individuals from the last generation with the one from the next generation
+			getOptions().world->setIndividuals(newIndividualVector);
 		}
 
 
-		// 1. Step: Create new evolution objects
+		// 1. Step: Create new individuals
 		for (auto creationCommand = getOptions().creationCommands.begin(); creationCommand != getOptions().creationCommands.end(); creationCommand++)
 		{
-			(*creationCommand)->execute(*getOptions().world, notUsedObjects);
+			(*creationCommand)->execute(*getOptions().world, notUsedIndividuals);
 		}
 
 		// Reset the world for the next generation
 		getOptions().world->reset();
 
-		// 2. Step: Execute the simulation and try to rate the evolution objects
+		// 2. Step: Execute the simulation and try to rate the individuals
 		if (getOptions().world->doSimulationStep()) {
 			log(std::to_string(learningState->iterations) + " generations", LL_HIGH);
 			learningState->iterations = 0;
@@ -219,7 +219,7 @@ namespace LightBulb
 		}
 		getOptions().world->refreshHighscore();
 
-		// Extract all current objects ordered by their score
+		// Extract all current individuals ordered by their score
 		Highscore& highscore = getOptions().world->getHighscoreList();
 
 		// {2,3}.5. Step: Modify the calculated scores
@@ -261,10 +261,10 @@ namespace LightBulb
 
 
 
-		// 4. Step: Select the relevant evolution objects (Other objects will be deleted)
+		// 4. Step: Select the relevant individuals (Other individuals will be deleted)
 		for (auto selectionCommand = getOptions().selectionCommands.begin(); selectionCommand != getOptions().selectionCommands.end(); selectionCommand++)
 		{
-			(*selectionCommand)->execute(highscore, getOptions().world->getEvolutionObjects(), notUsedObjects);
+			(*selectionCommand)->execute(highscore, getOptions().world->getIndividuals(), notUsedIndividuals);
 		}
 
 		// Continue with the next generation

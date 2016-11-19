@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/StandardDeviationFitnessFunction.hpp>
 
 using namespace LightBulb;
@@ -24,10 +24,10 @@ TEST_F(StandardDeviationFitnessFunctionTest, execute)
 {
 	standardDeviationFitnessFunction = new StandardDeviationFitnessFunction(1);
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(10, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(6, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(2, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(10, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(6, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(2, static_cast<AbstractIndividual*>(nullptr)));
 
 	standardDeviationFitnessFunction->execute(highscore);
 	EXPECT_NEAR(7.26599, highscore[0].first, 0.00001);
@@ -41,10 +41,10 @@ TEST_F(StandardDeviationFitnessFunctionTest, executeFails)
 {
 	standardDeviationFitnessFunction = new StandardDeviationFitnessFunction(5);
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(10, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(6, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(2, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(10, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(6, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(2, static_cast<AbstractIndividual*>(nullptr)));
 
 	EXPECT_THROW(standardDeviationFitnessFunction->execute(highscore), std::logic_error);
 }

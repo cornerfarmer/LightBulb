@@ -15,7 +15,7 @@ namespace LightBulb
 		base = base_;
 	}
 
-	void ExponentialFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void ExponentialFitnessFunction::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{

@@ -5,7 +5,7 @@
 
 // Includes
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "IO/IOStorage.hpp"
 
 // Libraray includes
@@ -24,14 +24,14 @@ namespace LightBulb
 	template <class Archive>
 	void save(Archive& archive, AbstractSimpleEvolutionWorld const& world)
 	{
-		std::vector<std::unique_ptr<AbstractEvolutionObject>> objects;
-		for (auto worldObject = world.objects.begin(); worldObject != world.objects.end(); worldObject++)
-			objects.push_back(std::unique_ptr<AbstractEvolutionObject>(*worldObject));
+		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
+		for (auto individual = world.individuals.begin(); individual != world.individuals.end(); individual++)
+			individuals.push_back(std::unique_ptr<AbstractIndividual>(*individual));
 
-		archive(cereal::make_nvp("objects", objects));
+		archive(cereal::make_nvp("individuals", individuals));
 
-		for (auto object = objects.begin(); object != objects.end(); object++)
-			object->release();
+		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
+			individual->release();
 	}
 
 	/**
@@ -43,14 +43,14 @@ namespace LightBulb
 	template <class Archive>
 	void load(Archive& archive, AbstractSimpleEvolutionWorld& world)
 	{
-		std::vector<std::unique_ptr<AbstractEvolutionObject>> objects;
+		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
 		IOStorage<AbstractEvolutionWorld>::push(&world);
-		archive(cereal::make_nvp("objects", objects));
+		archive(cereal::make_nvp("individuals", individuals));
 		IOStorage<AbstractEvolutionWorld>::clear();
 
-		for (auto object = objects.begin(); object != objects.end(); object++)
+		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
 		{
-			world.objects.push_back(object->release());
+			world.individuals.push_back(individual->release());
 		}
 	}
 }

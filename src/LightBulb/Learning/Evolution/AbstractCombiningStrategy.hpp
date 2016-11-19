@@ -15,15 +15,15 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractCoevolutionWorld;
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
 	 * \brief Describes the results of a AbstractCombiningStrategy.
-	 * \details Maps: First object - Second object - round number => True, if first object has won.
+	 * \details Maps: First individual - Second individual - round number => True, if first individual has won.
 	 */
-	typedef std::map<AbstractEvolutionObject*, std::map<AbstractEvolutionObject*, std::map<int, bool>>> CombiningStrategyResults;
+	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
 	/**
-	 * \brief Describes a strategy for combining evolution object from one or two coevolution worlds.
-	 * \details The strategy compares each two evolution objects and stores the results in a CombiningStrategyResults object.
+	 * \brief Describes a strategy for combining individual from one or two coevolution worlds.
+	 * \details The strategy compares each two individuals and stores the results in a CombiningStrategyResults object.
 	 */
 	class AbstractCombiningStrategy : public virtual AbstractRandomGeneratorUser
 	{
@@ -43,12 +43,12 @@ namespace LightBulb
 		AbstractCoevolutionWorld* secondWorld;
 		/**
 		 * \brief Does the combining.
-		 * \param simulationWorld The world which should be used for comparing evolution objects.
-		 * \param firstObjects The first pool of evolution objects.
-		 * \param secondObjects The second pool of evolution objects.
+		 * \param simulationWorld The world which should be used for comparing individuals.
+		 * \param firstIndividuals The first pool of individuals.
+		 * \param secondIndividuals The second pool of individuals.
 		 * \note If only one world is used, the first and second pool will be the same.
 		 */
-		virtual void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) = 0;
+		virtual void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) = 0;
 		/**
 		 * \brief Registers the result of one combination.
 		 * \param firstPlayer The first player which has been used.
@@ -56,21 +56,21 @@ namespace LightBulb
 		 * \param round The round number.
 		 * \param firstPlayerHasWon True, if the first player has won.
 		 */
-		void setResult(AbstractEvolutionObject& firstPlayer, AbstractEvolutionObject& secondPlayer, int round, bool firstPlayerHasWon);
+		void setResult(AbstractIndividual& firstPlayer, AbstractIndividual& secondPlayer, int round, bool firstPlayerHasWon);
 	public:
 		/**
 		 * \brief Creates the combining strategy.
-		 * \param secondWorld_ Optional a second world whose objects should be used beside the objects from the default world.
+		 * \param secondWorld_ Optional a second world whose individuals should be used beside the individuals from the default world.
 		 */
 		AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = nullptr);
 		/**
-		 * \brief Executes combining of objects from the given world.
-		 * \param world The world whose objects should be used.
+		 * \brief Executes combining of individuals from the given world.
+		 * \param world The world whose individuals should be used.
 		 * \return The combining results.
 		 */
 		virtual CombiningStrategyResults& execute(AbstractCoevolutionWorld& world);
 		/**
-		 * \brief Sets a second world whose objects should be used beside the objects from the default world.
+		 * \brief Sets a second world whose individuals should be used beside the individuals from the default world.
 		 * \param newSecondWorld The world to use.
 		 */
 		virtual void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld);

@@ -13,7 +13,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	class AbstractEvolutionWorld;
 	class AbstractCreationCommand;
 	class AbstractSelectionCommand;
@@ -46,11 +46,11 @@ namespace LightBulb
 		 */
 		std::vector<AbstractExitCondition*> exitConditions;
 		/**
-		 * \brief Commands for creating new objects.
+		 * \brief Commands for creating new individuals.
 		 */
 		std::vector<AbstractCreationCommand*> creationCommands;
 		/**
-		 * \brief Commands for selecting objects which should stay.
+		 * \brief Commands for selecting individuals which should stay.
 		 */
 		std::vector<AbstractSelectionCommand*> selectionCommands;
 		/**
@@ -58,15 +58,15 @@ namespace LightBulb
 		 */
 		std::vector<AbstractFitnessFunction*> fitnessFunctions;
 		/**
-		 * \brief Commands for mutating those objects.
+		 * \brief Commands for mutating those individuals.
 		 */
 		std::vector<AbstractMutationCommand*> mutationsCommands;
 		/**
-		 * \brief Commands for combining two objects to a new one
+		 * \brief Commands for combining two individuals to a new one
 		 */
 		std::vector<AbstractRecombinationCommand*> recombinationCommands;
 		/**
-		 * \brief Commands for directly reusing objects.
+		 * \brief Commands for directly reusing individuals.
 		 */
 		std::vector<AbstractReuseCommand*> reuseCommands;
 		/**
@@ -92,9 +92,9 @@ namespace LightBulb
 		friend struct cereal::LoadAndConstruct<EvolutionLearningRule>;
 	protected:
 		/**
-		 * \brief Contains all evolution objects which are currently not in use and can be reused.
+		 * \brief Contains all individuals which are currently not in use and can be reused.
 		 */
-		std::vector<AbstractEvolutionObject*> notUsedObjects;
+		std::vector<AbstractIndividual*> notUsedIndividuals;
 		/**
 		 * \brief True, if the exit condition has been reached.
 		 */

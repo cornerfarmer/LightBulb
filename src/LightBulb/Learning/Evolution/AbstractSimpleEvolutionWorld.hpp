@@ -13,12 +13,12 @@ namespace LightBulb
 {
 	// Forward declarations
 	class EvolutionLearningRule;
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
 	 * \brief This class is simplification of the AbstractEvolutionWorld class.
 	 * \details It decreases the work you have to do for your world, but also decreases your possibilities.
 	 * Nevertheless this class can be used in the most of all cases.
-	 * It manages all evolution objects, so all inheriting classes can focus on evaluating those objects.
+	 * It manages all individuals, so all inheriting classes can focus on evaluating those individuals.
 	 */
 	class AbstractSimpleEvolutionWorld : public AbstractEvolutionWorld
 	{
@@ -28,14 +28,14 @@ namespace LightBulb
 		friend void load(Archive& archive, AbstractSimpleEvolutionWorld& world);
 	protected:
 		/**
-		 * \brief A vector which contains all current evolution objects
+		 * \brief A vector which contains all current individuals.
 		 */
-		std::vector<AbstractEvolutionObject*> objects;
+		std::vector<AbstractIndividual*> individuals;
 		/**
-		 * \brief Creates new evolution object.
-		 * \return The new object.
+		 * \brief Creates new individual.
+		 * \return The new individual.
 		 */
-		virtual AbstractEvolutionObject* createNewObject() = 0;
+		virtual AbstractIndividual* createNewIndividual() = 0;
 		/**
 		 * \brief Resets the world before doing any simulations.
 		 */
@@ -46,13 +46,13 @@ namespace LightBulb
 		 */
 		AbstractSimpleEvolutionWorld();
 		// Inherited:
-		AbstractEvolutionObject* addNewObject(bool addToWorld = true) override;
-		std::vector<AbstractEvolutionObject*>& getEvolutionObjects() override;
-		void setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects) override;
+		AbstractIndividual* addNewIndividual(bool addToWorld = true) override;
+		std::vector<AbstractIndividual*>& getIndividuals() override;
+		void setIndividuals(const std::vector<AbstractIndividual*>& newIndividuals) override;
 		void reset() override;
 		int getPopulationSize() const override;
 		void clearPopulation() override;
-		void addExistingObject(AbstractEvolutionObject* newObject) override;
+		void addExistingIndividual(AbstractIndividual* newIndividual) override;
 	};
 }
 

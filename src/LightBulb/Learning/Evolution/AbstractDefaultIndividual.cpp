@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
@@ -7,7 +7,7 @@
 
 namespace LightBulb
 {
-	void AbstractSimpleEvolutionObject::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
+	void AbstractDefaultIndividual::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
 	{
 		// Create a new network topology from the adjusted options.
 		FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
@@ -23,22 +23,22 @@ namespace LightBulb
 		buildOutputBuffer();
 	}
 
-	void AbstractSimpleEvolutionObject::buildOutputBuffer()
+	void AbstractDefaultIndividual::buildOutputBuffer()
 	{
 		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
 	}
 
-	AbstractSimpleEvolutionObject::AbstractSimpleEvolutionObject(AbstractEvolutionWorld& world_)
+	AbstractDefaultIndividual::AbstractDefaultIndividual(AbstractEvolutionWorld& world_)
 	{
 		world = &world_;
 	}
 
-	AbstractNeuralNetwork& AbstractSimpleEvolutionObject::getNeuralNetwork()
+	AbstractNeuralNetwork& AbstractDefaultIndividual::getNeuralNetwork()
 	{
 		return *neuralNetwork.get();
 	}
 
-	void AbstractSimpleEvolutionObject::doNNCalculation()
+	void AbstractDefaultIndividual::doNNCalculation()
 	{
 		// Get the input
 		getNNInput(lastInput);
@@ -52,20 +52,20 @@ namespace LightBulb
 	}
 
 
-	void AbstractSimpleEvolutionObject::resetNN()
+	void AbstractDefaultIndividual::resetNN()
 	{
 		// Only reset all activations
 		neuralNetwork->getNetworkTopology().resetActivation();
 	}
 
-	AbstractEvolutionObject* AbstractSimpleEvolutionObject::clone(bool addToWorld) const
+	AbstractIndividual* AbstractDefaultIndividual::clone(bool addToWorld) const
 	{
-		// Create a new object
-		AbstractEvolutionObject* newObject = world->addNewObject(addToWorld);
+		// Create a new individual
+		AbstractIndividual* newIndividual = world->addNewIndividual(addToWorld);
 		// Copy all weights
-		newObject->getNeuralNetwork().getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
+		newIndividual->getNeuralNetwork().getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
 		// Copy all mutation strengths
-		newObject->setMutationStrength(getMutationStrength());
-		return newObject;
+		newIndividual->setMutationStrength(getMutationStrength());
+		return newIndividual;
 	}
 }

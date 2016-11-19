@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <Mocks/MockRandomFunction.hpp>
 
@@ -24,12 +24,12 @@ public:
 
 TEST_F(RandomSelectorTest, executeMutationSelection)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(3, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(1, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(0, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(-1, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(3, new MockIndividual()));
+	highscore.push_back(std::make_pair(2, new MockIndividual()));
+	highscore.push_back(std::make_pair(1, new MockIndividual()));
+	highscore.push_back(std::make_pair(0, new MockIndividual()));
+	highscore.push_back(std::make_pair(-1, new MockIndividual()));
 
 	{
 		testing::InSequence s;
@@ -38,14 +38,14 @@ TEST_F(RandomSelectorTest, executeMutationSelection)
 		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(3));
 	}
 
-	std::map<AbstractEvolutionObject*, int> counter;
+	std::map<AbstractIndividual*, int> counter;
 	randomSelector->executeMutationSelection(3, highscore, counter);
-	std::vector<AbstractEvolutionObject*>& selectedObjects = randomSelector->getMutationSelection();
+	std::vector<AbstractIndividual*>& selectedIndividuals = randomSelector->getMutationSelection();
 
-	EXPECT_EQ(3, selectedObjects.size());
-	EXPECT_EQ(highscore[4].second, selectedObjects[0]);
-	EXPECT_EQ(highscore[2].second, selectedObjects[1]);
-	EXPECT_EQ(highscore[3].second, selectedObjects[2]);
+	EXPECT_EQ(3, selectedIndividuals.size());
+	EXPECT_EQ(highscore[4].second, selectedIndividuals[0]);
+	EXPECT_EQ(highscore[2].second, selectedIndividuals[1]);
+	EXPECT_EQ(highscore[3].second, selectedIndividuals[2]);
 
 	EXPECT_EQ(3, counter.size());
 	EXPECT_EQ(1, counter[highscore[4].second]);
@@ -57,12 +57,12 @@ TEST_F(RandomSelectorTest, executeMutationSelection)
 
 TEST_F(RandomSelectorTest, executeRecombinationSelection)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(3, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(1, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(0, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(-1, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(3, new MockIndividual()));
+	highscore.push_back(std::make_pair(2, new MockIndividual()));
+	highscore.push_back(std::make_pair(1, new MockIndividual()));
+	highscore.push_back(std::make_pair(0, new MockIndividual()));
+	highscore.push_back(std::make_pair(-1, new MockIndividual()));
 
 	{
 		testing::InSequence s;
@@ -74,17 +74,17 @@ TEST_F(RandomSelectorTest, executeRecombinationSelection)
 		EXPECT_CALL(*randomFunction, execute(5)).WillOnce(testing::Return(4));
 	}
 
-	std::map<AbstractEvolutionObject*, int> counter;
+	std::map<AbstractIndividual*, int> counter;
 	randomSelector->executeRecombinationSelection(3, highscore, counter);
-	std::vector<AbstractEvolutionObject*>& selectedObjects = randomSelector->getRecombinationSelection();
+	std::vector<AbstractIndividual*>& selectedIndividuals = randomSelector->getRecombinationSelection();
 
-	EXPECT_EQ(6, selectedObjects.size());
-	EXPECT_EQ(highscore[3].second, selectedObjects[0]);
-	EXPECT_EQ(highscore[1].second, selectedObjects[1]);
-	EXPECT_EQ(highscore[2].second, selectedObjects[2]);
-	EXPECT_EQ(highscore[0].second, selectedObjects[3]);
-	EXPECT_EQ(highscore[2].second, selectedObjects[4]);
-	EXPECT_EQ(highscore[4].second, selectedObjects[5]);
+	EXPECT_EQ(6, selectedIndividuals.size());
+	EXPECT_EQ(highscore[3].second, selectedIndividuals[0]);
+	EXPECT_EQ(highscore[1].second, selectedIndividuals[1]);
+	EXPECT_EQ(highscore[2].second, selectedIndividuals[2]);
+	EXPECT_EQ(highscore[0].second, selectedIndividuals[3]);
+	EXPECT_EQ(highscore[2].second, selectedIndividuals[4]);
+	EXPECT_EQ(highscore[4].second, selectedIndividuals[5]);
 
 	EXPECT_EQ(5, counter.size());
 	EXPECT_EQ(1, counter[highscore[3].second]);

@@ -29,8 +29,8 @@ namespace LightBulb
 
 		fitnessValues.reset(fitnessFunction->execute(results));
 
-		AbstractEvolutionObject* bestAI = getHighscoreList().front().second;
-		rateKI(*bestAI);
+		AbstractIndividual* bestAI = getHighscoreList().front().second;
+		rateIndividual(*bestAI);
 
 		if (hallOfFameToAddAlgorithm)
 			hallOfFameToAddAlgorithm->addMember(bestAI);
@@ -41,15 +41,15 @@ namespace LightBulb
 		return false;
 	}
 
-	double AbstractCoevolutionWorld::getScore(const AbstractEvolutionObject& object) const
+	double AbstractCoevolutionWorld::getScore(const AbstractIndividual& individual) const
 	{
-		return (*fitnessValues)[&object];
+		return (*fitnessValues)[&individual];
 	}
 
-	int AbstractCoevolutionWorld::compareObjects(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
+	int AbstractCoevolutionWorld::compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)
 	{
 		comparisons++;
-		return doCompare(obj1, obj2, round);
+		return doCompare(individual1, individual2, round);
 	}
 
 	AbstractCombiningStrategy& AbstractCoevolutionWorld::getCombiningStrategy() const

@@ -3,13 +3,13 @@
 
 namespace LightBulb
 {
-	std::map<const AbstractEvolutionObject*, double>* SharedCoevolutionFitnessFunction::execute(const CombiningStrategyResults& results)
+	std::map<const AbstractIndividual*, double>* SharedCoevolutionFitnessFunction::execute(const CombiningStrategyResults& results)
 	{
-		std::map<AbstractEvolutionObject*, std::map<int, int>> winCounter;
+		std::map<AbstractIndividual*, std::map<int, int>> winCounter;
 
-		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
+		for (auto resultsPerIndividual = results.begin(); resultsPerIndividual != results.end(); resultsPerIndividual++)
 		{
-			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
+			for (auto resultsPerCombination = resultsPerIndividual->second.begin(); resultsPerCombination != resultsPerIndividual->second.end(); resultsPerCombination++)
 			{
 				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
 				{
@@ -19,17 +19,17 @@ namespace LightBulb
 			}
 		}
 
-		std::map<const AbstractEvolutionObject*, double>* fitnessValues = new std::map<const AbstractEvolutionObject*, double>();
+		std::map<const AbstractIndividual*, double>* fitnessValues = new std::map<const AbstractIndividual*, double>();
 
-		for (auto resultsPerObject = results.begin(); resultsPerObject != results.end(); resultsPerObject++)
+		for (auto resultsPerIndividual = results.begin(); resultsPerIndividual != results.end(); resultsPerIndividual++)
 		{
-			for (auto resultsPerCombination = resultsPerObject->second.begin(); resultsPerCombination != resultsPerObject->second.end(); resultsPerCombination++)
+			for (auto resultsPerCombination = resultsPerIndividual->second.begin(); resultsPerCombination != resultsPerIndividual->second.end(); resultsPerCombination++)
 			{
 				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
 				{
 					if (result->second)
 					{
-						(*fitnessValues)[resultsPerObject->first] += 1.0 / winCounter[resultsPerCombination->first][result->first];
+						(*fitnessValues)[resultsPerIndividual->first] += 1.0 / winCounter[resultsPerCombination->first][result->first];
 					}
 				}
 			}

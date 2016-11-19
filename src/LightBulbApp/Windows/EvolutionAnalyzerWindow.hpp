@@ -9,7 +9,7 @@
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"
 #include <Logging/AbstractLogger.hpp>
-#include <Learning/Evolution/AbstractEvolutionObject.hpp>
+#include <Learning/Evolution/AbstractIndividual.hpp>
 
 // Forward declarations
 class wxDataViewListCtrl;

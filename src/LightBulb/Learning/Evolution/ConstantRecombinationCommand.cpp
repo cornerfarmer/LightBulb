@@ -1,21 +1,21 @@
 // Includes
 #include "Learning/Evolution/ConstantRecombinationCommand.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 
 namespace LightBulb
 {
-	ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_)
+	ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int individualCount_)
 		: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_)
 	{
 		recombinationPercentage = 0;
-		objectCount = objectCount_;
+		individualCount = individualCount_;
 	}
 
 	ConstantRecombinationCommand::ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_)
 		: AbstractRecombinationCommand(recombinationAlgorithm_, recombinationSelector_)
 	{
-		objectCount = 0;
+		individualCount = 0;
 		recombinationPercentage = recombinationPercentage_;
 	}
 
@@ -35,17 +35,17 @@ namespace LightBulb
 	{
 		using std::swap;
 		swap(static_cast<AbstractRecombinationCommand&>(lhs), static_cast<AbstractRecombinationCommand&>(rhs));
-		swap(lhs.objectCount, rhs.objectCount);
+		swap(lhs.individualCount, rhs.individualCount);
 		swap(lhs.recombinationPercentage, rhs.recombinationPercentage);
 	}
 
-	void ConstantRecombinationCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void ConstantRecombinationCommand::select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter)
 	{
-		int objectCount = this->objectCount;
-		// Calculate a temporary static object count if the percentage value is used
-		if (objectCount == 0)
-			objectCount = highscore.size() * recombinationPercentage;
-		recombinationSelector->executeRecombinationSelection(objectCount, highscore, counter);
+		int individualCount = this->individualCount;
+		// Calculate a temporary static individual count if the percentage value is used
+		if (individualCount == 0)
+			individualCount = highscore.size() * recombinationPercentage;
+		recombinationSelector->executeRecombinationSelection(individualCount, highscore, counter);
 	}
 
 	AbstractCloneable* ConstantRecombinationCommand::clone() const

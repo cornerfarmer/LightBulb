@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Evolution/BestSelectionCommand.hpp"
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 //Library includes
 #include <iostream>
@@ -10,45 +10,45 @@
 
 namespace LightBulb
 {
-	BestSelectionCommand::BestSelectionCommand(int objectCount_)
+	BestSelectionCommand::BestSelectionCommand(int individualCount_)
 		: AbstractSelectionCommand()
 	{
-		objectCount = objectCount_;
+		individualCount = individualCount_;
 		selectionPercentage = 0;
 	}
 
 	BestSelectionCommand::BestSelectionCommand(double selectionPercentage_)
 		: AbstractSelectionCommand()
 	{
-		objectCount = 0;
+		individualCount = 0;
 		selectionPercentage = selectionPercentage_;
 	}
 
-	void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::vector<AbstractEvolutionObject*>& objects, std::vector<AbstractEvolutionObject*>& notUsedObjects)
+	void BestSelectionCommand::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::vector<AbstractIndividual*>& individuals, std::vector<AbstractIndividual*>& notUsedIndividuals)
 	{
-		int objectCount = this->objectCount;
-		// Calculate a temporary static object count if the percentage value is used
+		int individualCount = this->individualCount;
+		// Calculate a temporary static individual count if the percentage value is used
 		if (selectionPercentage)
-			objectCount = highscore.size() * selectionPercentage;
+			individualCount = highscore.size() * selectionPercentage;
 
-		if (highscore.size() > objectCount)
+		if (highscore.size() > individualCount)
 		{
-			objects.clear();
+			individuals.clear();
 
-			for (auto entry = highscore.begin(); entry != highscore.begin() + objectCount; entry++)
+			for (auto entry = highscore.begin(); entry != highscore.begin() + individualCount; entry++)
 			{
-				objects.push_back(entry->second);
+				individuals.push_back(entry->second);
 			}
 
-			// Go through all not selected objects
-			for (auto entry = highscore.begin() + objectCount; entry != highscore.end(); entry++)
+			// Go through all not selected individuals
+			for (auto entry = highscore.begin() + individualCount; entry != highscore.end(); entry++)
 			{
 				// Recycle them
-				notUsedObjects.push_back(entry->second);
+				notUsedIndividuals.push_back(entry->second);
 			}
 
 			// Resize the vector
-			highscore.resize(objectCount);
+			highscore.resize(individualCount);
 		}
 
 
@@ -57,7 +57,7 @@ namespace LightBulb
 		{
 			totalFitness += entry->first;
 		}
-		log("Selected " + std::to_string(objectCount) + " best ones. Average: " + std::to_string(static_cast<double>(totalFitness) / highscore.size()), LL_LOW);
+		log("Selected " + std::to_string(individualCount) + " best ones. Average: " + std::to_string(static_cast<double>(totalFitness) / highscore.size()), LL_LOW);
 
 	}
 

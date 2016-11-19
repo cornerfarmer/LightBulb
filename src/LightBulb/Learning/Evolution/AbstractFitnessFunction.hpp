@@ -14,7 +14,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
 	 * \brief Describes a function which does some post processing on the calculated fitness values.
 	 */
@@ -26,7 +26,7 @@ namespace LightBulb
 		 * \brief Executes the fitness function.
 		 * \param highscore The current fitness values which should be adjusted.
 		 */
-		virtual void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) = 0;
+		virtual void execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore) = 0;
 	};
 }
 

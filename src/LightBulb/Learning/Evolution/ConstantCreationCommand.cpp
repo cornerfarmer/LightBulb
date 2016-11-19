@@ -1,31 +1,31 @@
 // Includes
 #include "Learning/Evolution/ConstantCreationCommand.hpp"
 #include "Learning/Evolution/AbstractEvolutionWorld.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
 namespace LightBulb
 {
-	ConstantCreationCommand::ConstantCreationCommand(int objectCount_)
+	ConstantCreationCommand::ConstantCreationCommand(int individualCount_)
 		: AbstractCreationCommand()
 	{
-		objectCount = objectCount_;
+		individualCount = individualCount_;
 	}
 
-	void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>& notUsedObjects)
+	void ConstantCreationCommand::execute(AbstractEvolutionWorld& world, std::vector<AbstractIndividual*>& notUsedIndividuals)
 	{
-		// Calculate the amount of objects we have to create
-		int objectsToCreate = objectCount - world.getPopulationSize();
+		// Calculate the amount of individuals we have to create
+		int individualsToCreate = individualCount - world.getPopulationSize();
 		// Create them
-		for (int i = 0; i < objectsToCreate; i++)
+		for (int i = 0; i < individualsToCreate; i++)
 		{
-			std::unique_ptr<AbstractEvolutionObject> newObject(world.addNewObject(false));
+			std::unique_ptr<AbstractIndividual> newIndividual(world.addNewIndividual(false));
 
-			AbstractEvolutionObject* objectToAdd = getUnusedObject(*newObject.get(), notUsedObjects, false);
-			objectToAdd->setEvolutionSource(Creation);
+			AbstractIndividual* individualToAdd = getUnusedIndividual(*newIndividual.get(), notUsedIndividuals, false);
+			individualToAdd->setEvolutionSource(Creation);
 
-			world.addExistingObject(objectToAdd);
+			world.addExistingIndividual(individualToAdd);
 		}
 	}
 

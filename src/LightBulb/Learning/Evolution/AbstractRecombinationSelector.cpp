@@ -3,34 +3,34 @@
 
 namespace LightBulb
 {
-	void AbstractRecombinationSelector::addObjectToRecombination(AbstractEvolutionObject& object)
+	void AbstractRecombinationSelector::addIndividualToRecombination(AbstractIndividual& individual)
 	{
-		selectedObjects.push_back(&object);
-		(*currentCounter)[&object]++;
+		selectedIndividuals.push_back(&individual);
+		(*currentCounter)[&individual]++;
 	}
 
-	void AbstractRecombinationSelector::executeRecombinationSelection(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void AbstractRecombinationSelector::executeRecombinationSelection(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter)
 	{
-		selectedObjects.clear();
+		selectedIndividuals.clear();
 		if (recombinationCount > 0) {
 			currentCounter = &counter;
 
 			selectForRecombination(recombinationCount, highscore);
 		}
 
-		if (selectedObjects.size() != recombinationCount * 2)
+		if (selectedIndividuals.size() != recombinationCount * 2)
 			throw std::logic_error("The recombination selection was not successful");
 	}
 
-	std::vector<AbstractEvolutionObject*>& AbstractRecombinationSelector::getRecombinationSelection()
+	std::vector<AbstractIndividual*>& AbstractRecombinationSelector::getRecombinationSelection()
 	{
-		return selectedObjects;
+		return selectedIndividuals;
 	}
 
 	void swap(AbstractRecombinationSelector& lhs, AbstractRecombinationSelector& rhs) noexcept
 	{
 		using std::swap;
-		swap(lhs.selectedObjects, rhs.selectedObjects);
+		swap(lhs.selectedIndividuals, rhs.selectedIndividuals);
 		swap(lhs.currentCounter, rhs.currentCounter);
 	}
 }

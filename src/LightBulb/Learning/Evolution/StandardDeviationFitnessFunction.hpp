@@ -15,7 +15,7 @@ namespace LightBulb
 	 * \details Describes: \n \n \f$ fit(o) = fit*(o) - (avg - c * \sqrt{\frac{\sum{(fit_i*(o) - avg)^2}}{N}}) \f$ \n 
 	 * \f$avg = \frac{\sum{fit_i*(o)}}{N}\f$ \n 
 	 * \f$c: scale factor\f$ \n 
-	 * \f$N: object count\f$ \n 
+	 * \f$N: individual count\f$ \n 
 	 */
 	class StandardDeviationFitnessFunction : public AbstractFitnessFunction
 	{
@@ -31,7 +31,7 @@ namespace LightBulb
 		 */
 		StandardDeviationFitnessFunction(double deviationFac_ = 0);
 		// Inherited:
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 		AbstractFitnessFunction* clone() const override;
 	};
 }

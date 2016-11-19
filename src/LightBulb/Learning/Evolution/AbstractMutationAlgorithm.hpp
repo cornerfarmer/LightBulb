@@ -15,9 +15,9 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
-	 * \brief Describes an algorithm which mutates objects.
+	 * \brief Describes an algorithm which mutates individuals.
 	 */
 	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
@@ -27,15 +27,15 @@ namespace LightBulb
 		virtual ~AbstractMutationAlgorithm() {}
 		friend void swap(AbstractMutationAlgorithm& lhs, AbstractMutationAlgorithm& rhs) noexcept {	}
 		/**
-		 * \brief Mutates the given object.
-		 * \param object1 The object to mutate.
+		 * \brief Mutates the given individual.
+		 * \param individual1 The individual to mutate.
 		 */
-		virtual void execute(AbstractEvolutionObject& object1) = 0;
+		virtual void execute(AbstractIndividual& individual1) = 0;
 		/**
 		 * \brief Initializes the algorithm.
 		 * \param highscore The current highscore.
 		 */
-		virtual void initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) {};
+		virtual void initialize(const std::vector<std::pair<double, AbstractIndividual*>>& highscore) {};
 		void setZigguratGenerator(ZigguratGenerator& generator);
 	};
 }

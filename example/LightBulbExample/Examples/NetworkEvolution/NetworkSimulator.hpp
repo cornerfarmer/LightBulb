@@ -21,7 +21,7 @@ class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionWorld
 	friend struct cereal::LoadAndConstruct<NetworkSimulator>;
 protected:
 	std::vector<std::vector<float>> consumers;
-	LightBulb::AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractIndividual* createNewIndividual() override;
 	//sf::RenderWindow window;
 	//std::unique_ptr<NetworkDrawer> drawer;
 	double distanceBetweenPositions(const std::vector<float>& pos1, const std::vector<float>& pos2) const;
@@ -29,7 +29,7 @@ public:
 	NetworkSimulator(std::vector<std::vector<float>> consumers_);
 	NetworkSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(const LightBulb::AbstractEvolutionObject& object) const override;
+	double getScore(const LightBulb::AbstractIndividual& individual) const override;
 	std::vector<std::vector<float>>& getConsumers();
 };
 

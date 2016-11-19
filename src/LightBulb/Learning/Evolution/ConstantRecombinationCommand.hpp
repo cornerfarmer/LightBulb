@@ -12,41 +12,41 @@
 namespace LightBulb
 {
 	/**
-	* \brief Recombines a constant amount of objects.
+	* \brief Recombines a constant amount of individuals.
 	*/
 	class ConstantRecombinationCommand : public AbstractRecombinationCommand
 	{
 	private:
 		/**
-		* \brief The amount of objects which should be recombined.
+		* \brief The amount of individuals which should be recombined.
 		*/
-		int objectCount;
+		int individualCount;
 		/**
-		* \brief Alternative: The percentage of objects which should be recombined.
+		* \brief Alternative: The percentage of individuals which should be recombined.
 		*/
 		double recombinationPercentage;
 	public:
 		ConstantRecombinationCommand() = default;
 		ConstantRecombinationCommand(const ConstantRecombinationCommand& other) = default;
 		/**
-		 * \brief Creates a command which combines a static amount of objects.
+		 * \brief Creates a command which combines a static amount of individuals.
 		 * \param recombinationAlgorithm_ The recombination algorithm to use.
 		 * \param recombinationSelector_ The recombination selector to use.
-		 * \param objectCount_ The amount of objects which should be recombined.
+		 * \param individualCount_ The amount of individuals which should be recombined.
 		 */
-		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int objectCount_);
+		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, int individualCount_);
 		/**
-		 * \brief Creates a command which combines a percentage of objects.
+		 * \brief Creates a command which combines a percentage of individuals.
 		 * \param recombinationAlgorithm_ The recombination algorithm to use.
 		 * \param recombinationSelector_ The recombination selector to use.
-		 * \param recombinationPercentage_ The percentage of objects which should be recombined.
+		 * \param recombinationPercentage_ The percentage of individuals which should be recombined.
 		 */
 		ConstantRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_, double recombinationPercentage_);
 		ConstantRecombinationCommand(ConstantRecombinationCommand&& other) noexcept;
 		ConstantRecombinationCommand& operator=(ConstantRecombinationCommand other);
 		friend void swap(ConstantRecombinationCommand& lhs, ConstantRecombinationCommand& rhs) noexcept;
 		// Inherited:
-		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
+		void select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter) override;
 		AbstractCloneable* clone() const override;
 	};
 }

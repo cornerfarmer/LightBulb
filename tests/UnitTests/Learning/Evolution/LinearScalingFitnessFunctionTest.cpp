@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/LinearScalingFitnessFunction.hpp>
 
 using namespace LightBulb;
@@ -23,9 +23,9 @@ TEST_F(LinearScalingFitnessFunctionTest, execute)
 {
 	linearScalingFitnessFunction = new LinearScalingFitnessFunction(2, 5, false);
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(4, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(-3, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(4, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(-3, static_cast<AbstractIndividual*>(nullptr)));
 
 	linearScalingFitnessFunction->execute(highscore);
 	EXPECT_EQ(13, highscore[0].first);
@@ -36,9 +36,9 @@ TEST_F(LinearScalingFitnessFunctionTest, executeDynamic)
 {
 	linearScalingFitnessFunction = new LinearScalingFitnessFunction(2, 5, true);
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(4, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(-3, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(4, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(-3, static_cast<AbstractIndividual*>(nullptr)));
 
 	linearScalingFitnessFunction->execute(highscore);
 	EXPECT_EQ(11, highscore[0].first);

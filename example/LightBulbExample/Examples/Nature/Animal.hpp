@@ -7,12 +7,12 @@
 #include <memory>
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
 
 // Forward declarations
 class Nature;
 
-class Animal : public LightBulb::AbstractSimpleEvolutionObject
+class Animal : public LightBulb::AbstractDefaultIndividual
 {
 protected:
 	Nature* nature;

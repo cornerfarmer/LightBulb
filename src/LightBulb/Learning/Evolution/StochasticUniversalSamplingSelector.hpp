@@ -15,8 +15,8 @@ namespace LightBulb
 {
 	/**
 	 * \brief Executes a roullete wheel selection.
-	 * \details The roullete wheel is divided into different parts (one per object) depending on their fitness values.
-	 * Then all 360/popsize degrees a marker is set. Now the objects on whose parts the marker point are chosen.
+	 * \details The roullete wheel is divided into different parts (one per individual) depending on their fitness values.
+	 * Then all 360/popsize degrees a marker is set. Now the individuals on whose parts the marker point are chosen.
 	 */
 	class StochasticUniversalSamplingSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
 	{
@@ -28,14 +28,14 @@ namespace LightBulb
 		/**
 		* \brief Executes selection.
 		* \param recombine True, if a selection for recombination should be executed.
-		* \param objectCount The amount of objects to select.
+		* \param individualCount The amount of individuals to select.
 		* \param highscore The current highscore.
 		*/
-		void select(bool recombine, int objectCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore);
+		void select(bool recombine, int individualCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore);
 	protected:
 		// Inherited:
-		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
-		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
+		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 	public:
 		StochasticUniversalSamplingSelector() = default;
 		/**

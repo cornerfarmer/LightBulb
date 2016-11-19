@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
@@ -27,7 +27,7 @@ public:
 
 TEST_F(MutationAlgorithmTest, execute)
 {
-	MockEvolutionObject object;
+	MockIndividual individual;
 
 	std::vector<double> mutationStrength;
 	mutationStrength.push_back(2);
@@ -35,10 +35,10 @@ TEST_F(MutationAlgorithmTest, execute)
 	mutationStrength.push_back(0);
 	mutationStrength.push_back(7500000);
 	mutationStrength.push_back(-1000000);
-	EXPECT_CALL(object, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength));
+	EXPECT_CALL(individual, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength));
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
+	EXPECT_CALL(individual, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
@@ -52,7 +52,7 @@ TEST_F(MutationAlgorithmTest, execute)
 	weights.push_back(Eigen::MatrixXd(1, 1));
 	weights[1](0, 0) = 10;
 
-	mutationAlgorithm->execute(object);
+	mutationAlgorithm->execute(individual);
 
 	EXPECT_NEAR(0.231262, mutationStrength[0], 0.00001);
 	EXPECT_NEAR(-8.35703, mutationStrength[1], 0.00001);

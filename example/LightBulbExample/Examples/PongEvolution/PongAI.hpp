@@ -6,13 +6,13 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class Pong;
 
-class PongAI : public LightBulb::AbstractSimpleEvolutionObject
+class PongAI : public LightBulb::AbstractDefaultIndividual
 {
 protected:
 	Pong* currentGame;
@@ -24,6 +24,6 @@ public:
 	void setPong(Pong& currentGame_);
 };
 
-USE_PARENT_SERIALIZATION(PongAI, LightBulb::AbstractSimpleEvolutionObject, );
+USE_PARENT_SERIALIZATION(PongAI, LightBulb::AbstractDefaultIndividual, );
 
 #endif

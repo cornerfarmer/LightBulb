@@ -9,11 +9,11 @@
 
 namespace LightBulb
 {
-	void RemainderStochasticSamplingSelector::select(bool recombination, int objectCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void RemainderStochasticSamplingSelector::select(bool recombination, int individualCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		double totalFitness = 0;
 
-		// Go through all not selected objects
+		// Go through all not selected individuals
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			totalFitness += entry->first;
@@ -23,18 +23,18 @@ namespace LightBulb
 
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
-			int selectionCount = entry->first / totalFitness * objectCount;
+			int selectionCount = entry->first / totalFitness * individualCount;
 			for (int i = 0; i < selectionCount; i++)
 			{
 				if (recombination)
-					addObjectToRecombination(*entry->second);
+					addIndividualToRecombination(*entry->second);
 				else
-					addObjectToMutate(*entry->second);
+					addIndividualToMutate(*entry->second);
 			}
 			if (withReplacement) {
 				if (totalFitness != 0)
 				{
-					secondChance.push_back(entry->first / totalFitness * objectCount - selectionCount);
+					secondChance.push_back(entry->first / totalFitness * individualCount - selectionCount);
 				}
 				else
 				{
@@ -45,21 +45,21 @@ namespace LightBulb
 				secondChance.push_back(entry->first);
 		}
 
-		while ((recombination && getRecombinationSelection().size() < objectCount) || (!recombination && getMutationSelection().size() < objectCount))
+		while ((recombination && getRecombinationSelection().size() < individualCount) || (!recombination && getMutationSelection().size() < individualCount))
 		{
 			if (recombination)
-				addObjectToRecombination(*highscore[selectionFunction->execute(secondChance)].second);
+				addIndividualToRecombination(*highscore[selectionFunction->execute(secondChance)].second);
 			else
-				addObjectToMutate(*highscore[selectionFunction->execute(secondChance)].second);
+				addIndividualToMutate(*highscore[selectionFunction->execute(secondChance)].second);
 		}
 	}
 
-	void RemainderStochasticSamplingSelector::selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void RemainderStochasticSamplingSelector::selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		select(false, mutationCount, highscore);
 	}
 
-	void RemainderStochasticSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void RemainderStochasticSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		select(true, recombinationCount * 2, highscore);
 		random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());

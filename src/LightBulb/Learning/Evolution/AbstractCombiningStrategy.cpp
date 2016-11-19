@@ -10,7 +10,7 @@ namespace LightBulb
 		secondWorld = secondWorld_;
 	}
 
-	void AbstractCombiningStrategy::setResult(AbstractEvolutionObject& firstPlayer, AbstractEvolutionObject& secondPlayer, int round, bool firstPlayerHasWon)
+	void AbstractCombiningStrategy::setResult(AbstractIndividual& firstPlayer, AbstractIndividual& secondPlayer, int round, bool firstPlayerHasWon)
 	{
 		(*results)[&firstPlayer][&secondPlayer][round] = firstPlayerHasWon;
 		(*results)[&secondPlayer][&firstPlayer][round] = !firstPlayerHasWon;
@@ -22,7 +22,7 @@ namespace LightBulb
 		results.reset(new CombiningStrategyResults());
 		firstPlayerWins = 0;
 
-		combine(world, world.getEvolutionObjects(), secondWorld ? secondWorld->getEvolutionObjects() : world.getEvolutionObjects());
+		combine(world, world.getIndividuals(), secondWorld ? secondWorld->getIndividuals() : world.getIndividuals());
 
 		return *results.get();
 	}

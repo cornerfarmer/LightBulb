@@ -13,7 +13,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractCoevolutionWorld;
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
 	 * \brief Describes a function which calculates fitness values from CombiningStrategyResults.
 	 */
@@ -25,9 +25,9 @@ namespace LightBulb
 		/**
 		 * \brief Calculate fitness values from the given CombiningStrategyResults.
 		 * \param results The combining strategy results.
-		 * \return A map which contains fitness values for all evolution objects.
+		 * \return A map which contains fitness values for all individuals.
 		 */
-		virtual std::map<const AbstractEvolutionObject*, double>* execute(const CombiningStrategyResults& results) = 0;
+		virtual std::map<const AbstractIndividual*, double>* execute(const CombiningStrategyResults& results) = 0;
 	};
 }
 

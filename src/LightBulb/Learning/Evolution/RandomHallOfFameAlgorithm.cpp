@@ -6,24 +6,24 @@
 
 namespace LightBulb
 {
-	void RandomHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
+	void RandomHallOfFameAlgorithm::evaluateIndividuals(std::vector<AbstractIndividual*>& individuals)
 	{
 		random_shuffle(members.begin(), members.end());
 
-		for (auto object = objects.begin(); object != objects.end(); object++)
+		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
 		{
-			for (int memberIndex = 0; memberIndex < amountOfCompetitionsPerObject && memberIndex < members.size(); memberIndex++)
+			for (int memberIndex = 0; memberIndex < amountOfCompetitionsPerIndividual && memberIndex < members.size(); memberIndex++)
 			{
 				for (int r = 0; r < currentWorld->getRoundCount(); r++)
 				{
-					simulateAgainstMember(**object, memberIndex, r);
+					simulateAgainstMember(**individual, memberIndex, r);
 				}
 			}
 		}
 	}
 
-	RandomHallOfFameAlgorithm::RandomHallOfFameAlgorithm(int amountOfCompetitionsPerObject_)
+	RandomHallOfFameAlgorithm::RandomHallOfFameAlgorithm(int amountOfCompetitionsPerIndividual_)
 	{
-		amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
+		amountOfCompetitionsPerIndividual = amountOfCompetitionsPerIndividual_;
 	}
 }

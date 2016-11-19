@@ -13,16 +13,16 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
-	 * \brief Selects the N best objects for reusing.
+	 * \brief Selects the N best individuals for reusing.
 	 */
 	class BestReuseSelector : public AbstractReuseSelector
 	{
 	private:
 	protected:
 		// Inherited:
-		void selectForReuse(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void selectForReuse(int reuseCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 	public:
 		// Inherited:
 		AbstractCloneable* clone() const override;

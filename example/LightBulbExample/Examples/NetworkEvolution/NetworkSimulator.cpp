@@ -1,13 +1,13 @@
 // Includes
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 #include "Examples/NetworkEvolution/Network.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iostream>
 
 using namespace LightBulb;
 
-AbstractEvolutionObject* NetworkSimulator::createNewObject()
+AbstractIndividual* NetworkSimulator::createNewIndividual()
 {
 	return new Network(*this);
 }
@@ -31,7 +31,7 @@ NetworkSimulator::NetworkSimulator(std::vector<std::vector<float>> consumers_)
 
 bool NetworkSimulator::doSimulationStep()
 {
-	for (auto position = objects.begin(); position != objects.end(); position++)
+	for (auto position = individuals.begin(); position != individuals.end(); position++)
 	{
 		(*position)->doNNCalculation();
 	}
@@ -46,9 +46,9 @@ bool NetworkSimulator::doSimulationStep()
 	return false;
 }
 
-double NetworkSimulator::getScore(const AbstractEvolutionObject& object) const
+double NetworkSimulator::getScore(const AbstractIndividual& individual) const
 {
-	std::vector<std::vector<float>> pos = static_cast<const Network&>(object).getPositions();
+	std::vector<std::vector<float>> pos = static_cast<const Network&>(individual).getPositions();
 
 	double length = 0;
 	for (int p = 0; p < pos.size(); p++)

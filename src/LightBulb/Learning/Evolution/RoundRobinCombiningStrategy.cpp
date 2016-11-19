@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/RoundRobinCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 //Library includes
 #include <algorithm>
@@ -8,17 +8,17 @@
 
 namespace LightBulb
 {
-	void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)
+	void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
 	{
-		for (auto firstPlayer = firstObjects.begin(); firstPlayer != firstObjects.end(); firstPlayer++)
+		for (auto firstPlayer = firstIndividuals.begin(); firstPlayer != firstIndividuals.end(); firstPlayer++)
 		{
-			for (auto secondPlayer = secondObjects.begin(); secondPlayer != secondObjects.end(); secondPlayer++)
+			for (auto secondPlayer = secondIndividuals.begin(); secondPlayer != secondIndividuals.end(); secondPlayer++)
 			{
 				if (*firstPlayer != *secondPlayer)
 				{
 					for (int r = 0; r < simulationWorld.getRoundCount(); r++)
 					{
-						int result = simulationWorld.compareObjects(**firstPlayer, **secondPlayer, r);
+						int result = simulationWorld.compareIndividuals(**firstPlayer, **secondPlayer, r);
 						if (result != 0)
 							setResult(**firstPlayer, **secondPlayer, r, result > 0);
 					}

@@ -39,7 +39,7 @@ namespace LightBulb
 		 */
 		RateDifferenceCondition(double difference_, int count_);
 		// Inherited:
-		bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;
+		bool evaluate(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, const AbstractEvolutionLearningRule& learningRule) override;
 		AbstractExitCondition* clone() const override;
 	};
 }

@@ -11,7 +11,7 @@ namespace LightBulb
 		constant = constant_;
 	}
 
-	void PositiveMakerFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void PositiveMakerFitnessFunction::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		//double minFitness = highscore->back().first;
 

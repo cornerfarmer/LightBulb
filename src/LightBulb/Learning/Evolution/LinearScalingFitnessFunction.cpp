@@ -15,7 +15,7 @@ namespace LightBulb
 		useDynamicScaling = useDynamicScaling_;
 	}
 
-	void LinearScalingFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void LinearScalingFitnessFunction::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		if (useDynamicScaling)
 		{

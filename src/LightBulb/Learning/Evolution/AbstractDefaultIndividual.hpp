@@ -1,13 +1,13 @@
 #pragma once
 
-#ifndef _ABSTRACTSIMPLEEVOLUTIONOBJECT_H_
-#define _ABSTRACTSIMPLEEVOLUTIONOBJECT_H_
+#ifndef _ABSTRACTDEFAULTINDIVIDUAL_H_
+#define _ABSTRACTDEFAULTINDIVIDUAL_H_
 
 // Library Includes
 #include <memory>
 
 // Includes
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "IO/UseParentSerialization.hpp"
 
@@ -20,17 +20,17 @@ namespace LightBulb
 	class AbstractNeuronDescriptionFactory;
 	struct FeedForwardNetworkTopologyOptions;
 	/**
-	 * \brief This class is simplification of the AbstractEvolutionObject class.
-	 * \details It decreases the work you have to do for your evolutionObject class, but also decreases your possibilities.
+	 * \brief This class is simplification of the AbstractIndividual class.
+	 * \details It decreases the work you have to do for your individual class, but also decreases your possibilities.
 	 * Nevertheless this class can be used in the most of all cases. 
 	 * It manages the neural network, so you only have to set input and interpret output of the network.
 	 */
-	class AbstractSimpleEvolutionObject : public AbstractEvolutionObject
+	class AbstractDefaultIndividual : public AbstractIndividual
 	{
 		template <class Archive>
-		friend void save(Archive& archive, AbstractSimpleEvolutionObject const& object);
+		friend void save(Archive& archive, AbstractDefaultIndividual const& individual);
 		template <class Archive>
-		friend void load(Archive& archive, AbstractSimpleEvolutionObject& object);
+		friend void load(Archive& archive, AbstractDefaultIndividual& individual);
 	private:
 		/**
 		 * \brief Stores the last ouput of the neural network.
@@ -46,11 +46,11 @@ namespace LightBulb
 		void buildOutputBuffer();
 	protected:
 		/**
-		 * \brief The NN of the object
+		 * \brief The NN of the individual
 		 */
 		std::unique_ptr<NeuralNetwork> neuralNetwork;
 		/**
-		 * \brief The world which contains this object
+		 * \brief The world which contains this individual
 		 */
 		AbstractEvolutionWorld* world;
 		/**
@@ -70,19 +70,19 @@ namespace LightBulb
 		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 	public:
 		/**
-		 * \brief Creates a new evolution object in the given world.
-		 * \param world The world which should contain the object.
+		 * \brief Creates a new individual in the given world.
+		 * \param world The world which should contain the individual.
 		 */
-		AbstractSimpleEvolutionObject(AbstractEvolutionWorld& world);
-		AbstractSimpleEvolutionObject() = default;
+		AbstractDefaultIndividual(AbstractEvolutionWorld& world);
+		AbstractDefaultIndividual() = default;
 		// Inherited:
 		void doNNCalculation() override;
 		AbstractNeuralNetwork& getNeuralNetwork() override;
 		void resetNN() override;
-		AbstractEvolutionObject* clone(bool addToWorld = true) const override;
+		AbstractIndividual* clone(bool addToWorld = true) const override;
 	};
 }
 
-#include "IO/AbstractSimpleEvolutionObjectIO.hpp"
+#include "IO/AbstractDefaultIndividualIO.hpp"
 
 #endif

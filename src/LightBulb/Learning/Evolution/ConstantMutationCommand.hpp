@@ -11,17 +11,17 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Mutates a constant amount of objects
+	 * \brief Mutates a constant amount of individuals
 	 */
 	class ConstantMutationCommand : public AbstractMutationCommand
 	{
 	private:
 		/**
-		 * \brief The amount of objects which should be mutated.
+		 * \brief The amount of individuals which should be mutated.
 		 */
-		int objectCount;
+		int individualCount;
 		/**
-		 * \brief Alternative: The percentage of objects which should be mutated.
+		 * \brief Alternative: The percentage of individuals which should be mutated.
 		 */
 		double mutationPercentage;
 	public:
@@ -29,24 +29,24 @@ namespace LightBulb
 		ConstantMutationCommand() = default;
 		ConstantMutationCommand(const ConstantMutationCommand& other) = default;
 		/**
-		 * \brief Creates a command which mutates a static amount of objects.
+		 * \brief Creates a command which mutates a static amount of individuals.
 		 * \param mutationAlgorithm_ The mutation algorithm to use.
 		 * \param mutationSelector_ The mutation selector to use.
-		 * \param objectCount_ The amount of objects which should be mutated.
+		 * \param individualCount_ The amount of individuals which should be mutated.
 		 */
-		ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int objectCount_);
+		ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int individualCount_);
 		/**
-		 * \brief Creates a command which mutates a percentage of objects.
+		 * \brief Creates a command which mutates a percentage of individuals.
 		 * \param mutationAlgorithm_ The mutation algorithm to use.
 		 * \param mutationSelector_ The mutation selector to use.
-		 * \param mutationPercentage_ The percentage of objects which should be mutated.
+		 * \param mutationPercentage_ The percentage of individuals which should be mutated.
 		 */
 		ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_);
 		ConstantMutationCommand(ConstantMutationCommand&& other) noexcept;
 		ConstantMutationCommand& operator=(ConstantMutationCommand other);
 		friend void swap(ConstantMutationCommand& lhs, ConstantMutationCommand& rhs) noexcept;
 		// Inherited:
-		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
+		void select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter) override;
 		AbstractCloneable* clone() const override;
 	};
 }

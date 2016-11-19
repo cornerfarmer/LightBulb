@@ -9,7 +9,7 @@
 #include <Mocks/MockReuseCommand.hpp>
 #include <Mocks/MockEvolutionWorld.hpp>
 #include <Mocks/MockLogger.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 
 using namespace LightBulb;
 
@@ -111,16 +111,16 @@ TEST_F(EvolutionLearningRuleTest, learn)
 {
 	createLearningRule();
 
-	std::vector<AbstractEvolutionObject*> objects;
-	EXPECT_CALL(*evolutionWorld, getEvolutionObjects()).WillRepeatedly(testing::ReturnRef(objects));
+	std::vector<AbstractIndividual*> individuals;
+	EXPECT_CALL(*evolutionWorld, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 	EXPECT_CALL(*evolutionWorld, getPopulationSize()).WillRepeatedly(testing::Return(0));
 	testing::Expectation lastIterationExpectation;
 	testing::Expectation createExpectation;
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> emptyHighscore;
+	std::vector<std::pair<double, AbstractIndividual*>> emptyHighscore;
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> unseccessfullHighscore;
-	unseccessfullHighscore.push_back(std::make_pair(20, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> unseccessfullHighscore;
+	unseccessfullHighscore.push_back(std::make_pair(20, new MockIndividual()));
 
 	{
 		testing::InSequence s;
@@ -136,7 +136,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 
 		EXPECT_CALL(*fitnessFunction, execute(testing::Ref(unseccessfullHighscore))).Times(1);
 		EXPECT_CALL(*exitCondition, evaluate(testing::Ref(unseccessfullHighscore), testing::Ref(*evolutionLearningRule))).WillOnce(testing::Return(false));
-		EXPECT_CALL(*selectionCommand, execute(testing::Ref(unseccessfullHighscore), testing::Ref(objects), testing::_)).Times(1);
+		EXPECT_CALL(*selectionCommand, execute(testing::Ref(unseccessfullHighscore), testing::Ref(individuals), testing::_)).Times(1);
 
 		// iteration 1
 		EXPECT_CALL(*reuseCommand, select(testing::Ref(unseccessfullHighscore), testing::_)).Times(1);
@@ -145,7 +145,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		EXPECT_CALL(*recombinationCommand, execute(testing::_, testing::_, testing::_)).Times(1);
 		EXPECT_CALL(*mutationCommand, execute(testing::_, testing::_, testing::_)).Times(1);
 		EXPECT_CALL(*reuseCommand, execute(testing::_, testing::_, testing::_)).Times(1);
-		EXPECT_CALL(*evolutionWorld, setEvolutionObjects(testing::_)).Times(1);
+		EXPECT_CALL(*evolutionWorld, setIndividuals(testing::_)).Times(1);
 
 		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionWorld), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionWorld, reset()).Times(1);
@@ -162,8 +162,8 @@ TEST_F(EvolutionLearningRuleTest, learn)
 	EXPECT_CALL(*evolutionWorld, getPopulationSize()).After(createExpectation).WillRepeatedly(testing::Return(1));	
 	EXPECT_CALL(*evolutionWorld, getHighscoreList()).After(createExpectation).WillRepeatedly(testing::ReturnRef(unseccessfullHighscore));
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> successfullHighscore;
-	successfullHighscore.push_back(std::make_pair(100, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> successfullHighscore;
+	successfullHighscore.push_back(std::make_pair(100, new MockIndividual()));
 	EXPECT_CALL(*evolutionWorld, getHighscoreList()).After(lastIterationExpectation).WillRepeatedly(testing::ReturnRef(successfullHighscore));
 
 

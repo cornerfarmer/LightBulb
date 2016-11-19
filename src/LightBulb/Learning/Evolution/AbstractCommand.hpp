@@ -14,7 +14,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	class AbstractEvolutionWorld;
 	class EvolutionLearningRule;
 	/**
@@ -24,13 +24,13 @@ namespace LightBulb
 	{
 	protected:
 		/**
-		 * \brief Returns an editable object which is clone of the given used object.
-		 * \param usedObject The object which should be cloned.
-		 * \param notUsedObjects A vector of objects which are not used any more.
-		 * \param addToWorld True if new created objects should be added to the world.
-		 * \return The editable object.
+		 * \brief Returns an editable individual which is clone of the given used individual.
+		 * \param usedIndividual The individual which should be cloned.
+		 * \param notUsedIndividuals A vector of individual which are not used any more.
+		 * \param addToWorld True if new created individual should be added to the world.
+		 * \return The editable individual.
 		 */
-		AbstractEvolutionObject* getUnusedObject(AbstractEvolutionObject& usedObject, std::vector<AbstractEvolutionObject*>& notUsedObjects, bool addToWorld = true) const;
+		AbstractIndividual* getUnusedIndividual(AbstractIndividual& usedIndividual, std::vector<AbstractIndividual*>& notUsedIndividuals, bool addToWorld = true) const;
 
 		friend void swap(AbstractCommand& lhs, AbstractCommand& rhs) noexcept;
 	};

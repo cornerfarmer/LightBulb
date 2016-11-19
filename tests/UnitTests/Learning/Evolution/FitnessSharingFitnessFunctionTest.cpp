@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/FitnessSharingFitnessFunction.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
@@ -25,16 +25,16 @@ TEST_F(FitnessSharingFitnessFunctionTest, execute)
 {
 	fitnessSharingFitnessFunction = new FitnessSharingFitnessFunction(10, 2);
 
-	MockEvolutionObject evolutionObject1, evolutionObject2;
+	MockIndividual individual1, individual2;
 
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(1, &evolutionObject1));
-	highscore.push_back(std::make_pair(3, &evolutionObject2));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(1, &individual1));
+	highscore.push_back(std::make_pair(3, &individual2));
 
 	MockNeuralNetwork neuralNetwork1, neuralNetwork2;
 
-	EXPECT_CALL(evolutionObject1, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork1));
-	EXPECT_CALL(evolutionObject2, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork2));
+	EXPECT_CALL(individual1, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork1));
+	EXPECT_CALL(individual2, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork2));
 
 	MockNetworkTopology networkTopology1, networkTopology2;
 

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/BestSelectionCommand.hpp>
 
 using namespace LightBulb;
@@ -21,25 +21,25 @@ public:
 
 TEST_F(BestSelectionCommandTest, executeReuseSelection)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(3, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(1, new MockEvolutionObject()));
-	MockEvolutionObject* notUsedObject1 = new MockEvolutionObject(), *notUsedObject2 = new MockEvolutionObject();
-	highscore.push_back(std::make_pair(0, notUsedObject1));
-	highscore.push_back(std::make_pair(-1, notUsedObject2));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(3, new MockIndividual()));
+	highscore.push_back(std::make_pair(2, new MockIndividual()));
+	highscore.push_back(std::make_pair(1, new MockIndividual()));
+	MockIndividual* notUsedIndividual1 = new MockIndividual(), *notUsedIndividual2 = new MockIndividual();
+	highscore.push_back(std::make_pair(0, notUsedIndividual1));
+	highscore.push_back(std::make_pair(-1, notUsedIndividual2));
 
-	std::vector<AbstractEvolutionObject*> notUsedObjects;
+	std::vector<AbstractIndividual*> notUsedIndividuals;
 
-	std::vector<AbstractEvolutionObject*> objects;
-	bestSelectionCommand->execute(highscore, objects, notUsedObjects);
+	std::vector<AbstractIndividual*> individuals;
+	bestSelectionCommand->execute(highscore, individuals, notUsedIndividuals);
 
-	EXPECT_EQ(3, objects.size());
-	EXPECT_EQ(highscore[0].second, objects[0]);
-	EXPECT_EQ(highscore[1].second, objects[1]);
-	EXPECT_EQ(highscore[2].second, objects[2]);
+	EXPECT_EQ(3, individuals.size());
+	EXPECT_EQ(highscore[0].second, individuals[0]);
+	EXPECT_EQ(highscore[1].second, individuals[1]);
+	EXPECT_EQ(highscore[2].second, individuals[2]);
 
-	EXPECT_EQ(2, notUsedObjects.size());
-	EXPECT_EQ(notUsedObject1, notUsedObjects[0]);
-	EXPECT_EQ(notUsedObject2, notUsedObjects[1]);
+	EXPECT_EQ(2, notUsedIndividuals.size());
+	EXPECT_EQ(notUsedIndividual1, notUsedIndividuals[0]);
+	EXPECT_EQ(notUsedIndividual2, notUsedIndividuals[1]);
 }

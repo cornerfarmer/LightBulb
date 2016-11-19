@@ -4,15 +4,15 @@
 
 namespace LightBulb
 {
-	void FullHallOfFameAlgorithm::evaluateObjects(std::vector<AbstractEvolutionObject*>& objects)
+	void FullHallOfFameAlgorithm::evaluateIndividuals(std::vector<AbstractIndividual*>& individuals)
 	{
-		for (auto object = objects.begin(); object != objects.end(); object++)
+		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
 		{
 			for (int memberIndex = 0; memberIndex < members.size(); memberIndex++)
 			{
 				for (int r = 0; r < currentWorld->getRoundCount(); r++)
 				{
-					simulateAgainstMember(**object, memberIndex, r);
+					simulateAgainstMember(**individual, memberIndex, r);
 				}
 			}
 		}

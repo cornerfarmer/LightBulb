@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/AbstractMutationCommand.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 
 namespace LightBulb
 {
@@ -25,23 +25,23 @@ namespace LightBulb
 		swap(lhs.mutationSelector, rhs.mutationSelector);
 	}
 
-	void AbstractMutationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
+	void AbstractMutationCommand::execute(std::vector<AbstractIndividual*>& newIndividualVector, std::map<AbstractIndividual*, int>& counter, std::vector<AbstractIndividual*>& notUsedIndividuals)
 	{
-		for (auto object = mutationSelector->getMutationSelection().begin(); object != mutationSelector->getMutationSelection().end(); object++)
+		for (auto individual = mutationSelector->getMutationSelection().begin(); individual != mutationSelector->getMutationSelection().end(); individual++)
 		{
-			if (counter[*object] == 1)
+			if (counter[*individual] == 1)
 			{
-				mutationAlgorithm->execute(**object);
-				newObjectVector.push_back(*object);
+				mutationAlgorithm->execute(**individual);
+				newIndividualVector.push_back(*individual);
 			}
 			else
 			{
-				AbstractEvolutionObject* unusedObject = getUnusedObject(**object, notUsedObjects);
-				mutationAlgorithm->execute(*unusedObject);
-				newObjectVector.push_back(unusedObject);
+				AbstractIndividual* unusedIndividual = getUnusedIndividual(**individual, notUsedIndividuals);
+				mutationAlgorithm->execute(*unusedIndividual);
+				newIndividualVector.push_back(unusedIndividual);
 			}
-			newObjectVector.back()->setEvolutionSource(Mutation);
-			counter[*object]--;
+			newIndividualVector.back()->setEvolutionSource(Mutation);
+			counter[*individual]--;
 		}
 	}
 

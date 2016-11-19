@@ -1,21 +1,21 @@
 // Includes
 #include "Learning/Evolution/ConstantReuseCommand.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 
 namespace LightBulb
 {
-	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_)
+	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int individualCount_)
 		: AbstractReuseCommand(reuseSelector_)
 	{
 		reusePercentage = 0;
-		objectCount = objectCount_;
+		individualCount = individualCount_;
 	}
 
 	ConstantReuseCommand::ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_)
 		: AbstractReuseCommand(reuseSelector_)
 	{
-		objectCount = 0;
+		individualCount = 0;
 		reusePercentage = reusePercentage_;
 	}
 
@@ -35,18 +35,18 @@ namespace LightBulb
 	{
 		using std::swap;
 		swap(static_cast<AbstractReuseCommand&>(lhs), static_cast<AbstractReuseCommand&>(rhs));
-		swap(lhs.objectCount, rhs.objectCount);
+		swap(lhs.individualCount, rhs.individualCount);
 		swap(lhs.reusePercentage, rhs.reusePercentage);
 	}
 
-	void ConstantReuseCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void ConstantReuseCommand::select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter)
 	{
-		int objectCount = this->objectCount;
-		// Calculate a temporary static object count if the percentage value is used
-		if (objectCount == 0)
-			objectCount = highscore.size() * reusePercentage;
+		int individualCount = this->individualCount;
+		// Calculate a temporary static individual count if the percentage value is used
+		if (individualCount == 0)
+			individualCount = highscore.size() * reusePercentage;
 
-		reuseSelector->executeReuseSelection(objectCount, highscore, counter);
+		reuseSelector->executeReuseSelection(individualCount, highscore, counter);
 	}
 
 	AbstractCloneable* ConstantReuseCommand::clone() const

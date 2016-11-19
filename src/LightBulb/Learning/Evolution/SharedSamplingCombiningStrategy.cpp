@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
 //Library includes
 #include <algorithm>
@@ -8,19 +8,19 @@
 
 namespace LightBulb
 {
-	void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects)
+	void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
 	{
 		if (!otherCombiningStrategy)
 			throw std::invalid_argument("SharedSamplingCombiningStrategy only works with two worlds.");
 
-		std::vector<AbstractEvolutionObject*> sample;
-		std::map<AbstractEvolutionObject*, std::map<int, int>> beat;
-		std::map<AbstractEvolutionObject*, double> sampleFitness;
+		std::vector<AbstractIndividual*> sample;
+		std::map<AbstractIndividual*, std::map<int, int>> beat;
+		std::map<AbstractIndividual*, double> sampleFitness;
 		auto prevResults = otherCombiningStrategy->getPrevResults();
-		while (sample.size() < amountOfCompetitionsPerObject)
+		while (sample.size() < amountOfCompetitionsPerIndividual)
 		{
-			AbstractEvolutionObject* bestObject = nullptr;
-			for (auto secondPlayer = secondObjects.begin(); secondPlayer != secondObjects.end(); secondPlayer++)
+			AbstractIndividual* bestIndividual = nullptr;
+			for (auto secondPlayer = secondIndividuals.begin(); secondPlayer != secondIndividuals.end(); secondPlayer++)
 			{
 				if (sampleFitness[*secondPlayer] != -1)
 				{
@@ -33,16 +33,16 @@ namespace LightBulb
 								sampleFitness[*secondPlayer] += 1.0 / (1 + beat[resultsPerSecondPlayer->first][result->first]);
 						}
 					}
-					if (bestObject == nullptr || sampleFitness[bestObject] < sampleFitness[*secondPlayer])
-						bestObject = *secondPlayer;
+					if (bestIndividual == nullptr || sampleFitness[bestIndividual] < sampleFitness[*secondPlayer])
+						bestIndividual = *secondPlayer;
 				}
 			}
-			if (!bestObject)
+			if (!bestIndividual)
 				break;
 
-			sample.push_back(bestObject);
-			sampleFitness[bestObject] = -1;
-			for (auto resultsPerSecondPlayer = prevResults[bestObject].begin(); resultsPerSecondPlayer != prevResults[bestObject].end(); resultsPerSecondPlayer++)
+			sample.push_back(bestIndividual);
+			sampleFitness[bestIndividual] = -1;
+			for (auto resultsPerSecondPlayer = prevResults[bestIndividual].begin(); resultsPerSecondPlayer != prevResults[bestIndividual].end(); resultsPerSecondPlayer++)
 			{
 				for (auto result = resultsPerSecondPlayer->second.begin(); result != resultsPerSecondPlayer->second.end(); result++)
 				{
@@ -52,7 +52,7 @@ namespace LightBulb
 			}
 		}
 
-		for (auto firstPlayer = firstObjects.begin(); firstPlayer != firstObjects.end(); firstPlayer++)
+		for (auto firstPlayer = firstIndividuals.begin(); firstPlayer != firstIndividuals.end(); firstPlayer++)
 		{
 			for (auto secondPlayer = sample.begin(); secondPlayer != sample.end(); secondPlayer++)
 			{
@@ -60,7 +60,7 @@ namespace LightBulb
 				{
 					for (int r = 0; r < simulationWorld.getRoundCount(); r++)
 					{
-						int result = simulationWorld.compareObjects(**firstPlayer, **secondPlayer, r);
+						int result = simulationWorld.compareIndividuals(**firstPlayer, **secondPlayer, r);
 						if (result != 0)
 							setResult(**firstPlayer, **secondPlayer, r, result > 0);
 					}
@@ -75,18 +75,18 @@ namespace LightBulb
 		otherCombiningStrategy = &secondWorld->getCombiningStrategy();
 	}
 
-	SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_, AbstractCoevolutionWorld* secondWorld_)
+	SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerIndividual_, AbstractCoevolutionWorld* secondWorld_)
 		:AbstractCombiningStrategy(secondWorld_)
 	{
 		if (secondWorld)
 			otherCombiningStrategy = &secondWorld->getCombiningStrategy();
-		amountOfCompetitionsPerObject = amountOfCompetitionsPerObject_;
+		amountOfCompetitionsPerIndividual = amountOfCompetitionsPerIndividual_;
 	}
 
 
 	int SharedSamplingCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
 	{
-		return amountOfCompetitionsPerObject * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
+		return amountOfCompetitionsPerIndividual * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
 	}
 
 }

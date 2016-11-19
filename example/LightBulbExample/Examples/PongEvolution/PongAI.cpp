@@ -5,7 +5,7 @@
 using namespace LightBulb;
 
 PongAI::PongAI(FeedForwardNetworkTopologyOptions& options, Pong& pong_)
-	: AbstractSimpleEvolutionObject(pong_)
+	: AbstractDefaultIndividual(pong_)
 {
 	currentGame = &pong_;
 	buildNeuralNetwork(options);

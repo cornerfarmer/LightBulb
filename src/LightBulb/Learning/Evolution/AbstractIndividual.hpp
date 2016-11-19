@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _AbstractEvolutionObject_H_
-#define _AbstractEvolutionObject_H_
+#ifndef _ABSTRACTINDIVIDUAL_H_
+#define _ABSTRACTINDIVIDUAL_H_
 
 // Library includes
 #include <vector>
@@ -14,7 +14,7 @@ namespace LightBulb
 	class EvolutionLearningRule;
 	class AbstractNeuralNetwork;
 	/**
-	 * \brief All evolution methods which can be source of evolution objects.
+	 * \brief All evolution methods which can be source of individuals.
 	 */
 	enum EvolutionSource
 	{
@@ -24,15 +24,15 @@ namespace LightBulb
 		Reuse
 	};
 	/**
-	 * \brief This class describes an abstract object which "lives" inside an evolution world.
-	 * \details The evolution object contains a NN which should calculate the actions from external and internal inputs.
+	 * \brief This class describes an abstract individual which "lives" inside an evolution world.
+	 * \details The individual contains a NN which should calculate the actions from external and internal inputs.
 	 */
-	class AbstractEvolutionObject
+	class AbstractIndividual
 	{
 		template <class Archive>
-		friend void save(Archive& archive, AbstractEvolutionObject const& object);
+		friend void save(Archive& archive, AbstractIndividual const& individual);
 		template <class Archive>
-		friend void load(Archive& archive, AbstractEvolutionObject& object);
+		friend void load(Archive& archive, AbstractIndividual& individual);
 	protected:
 		/**
 		 * \brief This vector describes the mutation strength of every edge in the NN.
@@ -40,7 +40,7 @@ namespace LightBulb
 		 */
 		std::vector<double> mutationStrength;
 		/**
-		 * \brief Contains the evolution method which has been the origin of this object.
+		 * \brief Contains the evolution method which has been the origin of this individual.
 		 */
 		EvolutionSource evolutionSource;
 		/**
@@ -53,13 +53,13 @@ namespace LightBulb
 		 */
 		void randomizeMutationStrength();
 	public:
-		virtual ~AbstractEvolutionObject() {}
+		virtual ~AbstractIndividual() {}
 		/**
-		 * \brief Copies all properties from the given object.
+		 * \brief Copies all properties from the given individual.
 		 * \details Copies the network and the mutation strengths.
-		 * \param notUsedObject The object which should be copied.
+		 * \param notUsedIndividual The individual which should be copied.
 		 */
-		virtual void copyPropertiesFrom(AbstractEvolutionObject& notUsedObject);
+		virtual void copyPropertiesFrom(AbstractIndividual& notUsedIndividual);
 		/**
 		 * \brief Returns the neural network.
 		 * \return The neural network.
@@ -89,19 +89,19 @@ namespace LightBulb
 		 */
 		virtual void resetNN() = 0;
 		/**
-		 * \brief Clones the evolution object.
-		 * \details Creates a new object with a cloned neural network and the same mutation strengths.
-		 * \param addToWorld Set to true, if the new object should be added to the evolution world.
-		 * \return The new object.
+		 * \brief Clones the individual.
+		 * \details Creates a new individual with a cloned neural network and the same mutation strengths.
+		 * \param addToWorld Set to true, if the new individual should be added to the evolution world.
+		 * \return The new individual.
 		 */
-		virtual AbstractEvolutionObject* clone(bool addToWorld = true) const = 0;
+		virtual AbstractIndividual* clone(bool addToWorld = true) const = 0;
 		/**
-		 * \brief Sets the evolution source of the object.
+		 * \brief Sets the evolution source of the individual.
 		 * \param evolutionSource_ The new evolution source.
 		 */
 		virtual void setEvolutionSource(const EvolutionSource& evolutionSource_);
 		/**
-		 * \brief Returns the evolution method which has been the origin of this object.
+		 * \brief Returns the evolution method which has been the origin of this individual.
 		 * \return The evolution source.
 		 */
 		const EvolutionSource& getEvolutionSource() const;
@@ -119,6 +119,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractEvolutionObjectIO.hpp"
+#include "IO/AbstractIndividualIO.hpp"
 
 #endif

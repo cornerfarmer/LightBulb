@@ -28,7 +28,7 @@ typedef double(*Function)(std::vector<float> pos);
 class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionWorld
 {
 protected:
-	LightBulb::AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractIndividual* createNewIndividual() override;
 	//std::unique_ptr<FunctionDrawer> drawer;
 	std::unique_ptr<FunctionSimulatorOptions> options;
 	Function function;
@@ -36,7 +36,7 @@ public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	FunctionSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(const LightBulb::AbstractEvolutionObject& object) const override;
+	double getScore(const LightBulb::AbstractIndividual& individual) const override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld, )

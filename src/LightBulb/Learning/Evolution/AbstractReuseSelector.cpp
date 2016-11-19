@@ -3,25 +3,25 @@
 
 namespace LightBulb
 {
-	void AbstractReuseSelector::addObjectToReuse(AbstractEvolutionObject& object)
+	void AbstractReuseSelector::addIndividualToReuse(AbstractIndividual& individual)
 	{
-		selectedObjects.push_back(&object);
-		(*currentCounter)[&object]++;
+		selectedIndividuals.push_back(&individual);
+		(*currentCounter)[&individual]++;
 	}
 
-	void AbstractReuseSelector::executeReuseSelection(int reuseCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void AbstractReuseSelector::executeReuseSelection(int reuseCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter)
 	{
-		selectedObjects.clear();
+		selectedIndividuals.clear();
 		if (reuseCount > 0) {
 			currentCounter = &counter;
 			selectForReuse(reuseCount, highscore);
 		}
-		if (selectedObjects.size() != reuseCount)
+		if (selectedIndividuals.size() != reuseCount)
 			throw std::logic_error("The reuse selection was not successful");
 	}
 
-	const std::vector<AbstractEvolutionObject*>& AbstractReuseSelector::getReuseSelection() const
+	const std::vector<AbstractIndividual*>& AbstractReuseSelector::getReuseSelection() const
 	{
-		return selectedObjects;
+		return selectedIndividuals;
 	}
 }

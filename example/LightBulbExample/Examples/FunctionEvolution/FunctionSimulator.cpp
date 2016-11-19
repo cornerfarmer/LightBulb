@@ -1,13 +1,13 @@
 // Includes
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "Examples/FunctionEvolution/Position.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iostream>
 
 using namespace LightBulb;
 
-AbstractEvolutionObject* FunctionSimulator::createNewObject()
+AbstractIndividual* FunctionSimulator::createNewIndividual()
 {
 	return new Position(*this);
 }
@@ -41,7 +41,7 @@ FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Functio
 
 bool FunctionSimulator::doSimulationStep()
 {
-	for (auto position = objects.begin(); position != objects.end(); position++)
+	for (auto position = individuals.begin(); position != individuals.end(); position++)
 	{
 		(*position)->doNNCalculation();
 	}
@@ -56,9 +56,9 @@ bool FunctionSimulator::doSimulationStep()
 	return false;
 }
 
-double FunctionSimulator::getScore(const AbstractEvolutionObject& object) const
+double FunctionSimulator::getScore(const AbstractIndividual& individual) const
 {
-	std::vector<float> pos = static_cast<const Position&>(object).getPosition();
+	std::vector<float> pos = static_cast<const Position&>(individual).getPosition();
 	return function(pos);
 }
 

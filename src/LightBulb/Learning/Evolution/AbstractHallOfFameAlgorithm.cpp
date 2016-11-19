@@ -1,28 +1,28 @@
 // Includes
 #include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 #include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include <iostream>
 
 namespace LightBulb
 {
-	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractEvolutionObject& object, int memberID, int round)
+	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractIndividual& individual, int memberID, int round)
 	{
-		bool firstPlayerHasWon = currentWorld->compareObjects(object, *members[memberID].get(), round) > 0;
-		(*currentResults)[&object][members[memberID].get()][round] = firstPlayerHasWon;
-		(*currentResults)[members[memberID].get()][&object][round] = !firstPlayerHasWon;
+		bool firstPlayerHasWon = currentWorld->compareIndividuals(individual, *members[memberID].get(), round) > 0;
+		(*currentResults)[&individual][members[memberID].get()][round] = firstPlayerHasWon;
+		(*currentResults)[members[memberID].get()][&individual][round] = !firstPlayerHasWon;
 	}
 
 	void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld& world, CombiningStrategyResults& prevResults)
 	{
 		currentResults = &prevResults;
 		currentWorld = &world;
-		evaluateObjects(world.getEvolutionObjects());
+		evaluateIndividuals(world.getIndividuals());
 	}
 
-	void AbstractHallOfFameAlgorithm::addMember(AbstractEvolutionObject* newMember)
+	void AbstractHallOfFameAlgorithm::addMember(AbstractIndividual* newMember)
 	{
-		members.push_back(std::unique_ptr<AbstractEvolutionObject>(newMember->clone(false)));
+		members.push_back(std::unique_ptr<AbstractIndividual>(newMember->clone(false)));
 		log("Added " + std::to_string(members.size()) + ". hall of fame member", LL_LOW);
 	}
 }

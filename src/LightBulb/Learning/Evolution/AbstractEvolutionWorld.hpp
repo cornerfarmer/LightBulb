@@ -17,20 +17,20 @@ namespace LightBulb
 {
 	// Forward declarations
 	class EvolutionLearningRule;
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
-	 * \brief Describes a ranked list of all evolution objects depending on their fitness values.
+	 * \brief Describes a ranked list of all individuals depending on their fitness values.
 	 */
-	typedef std::vector<std::pair<double, AbstractEvolutionObject*>> Highscore;
+	typedef std::vector<std::pair<double, AbstractIndividual*>> Highscore;
 	/**
-	 * \brief This class describes a world which contains multiple evolution objects.
-	 * \details The evolution world has to simulate the environment which surrounds its evolution objects.
+	 * \brief This class describes a world which contains multiple individuals.
+	 * \details The evolution world has to simulate the environment which surrounds its individuals.
 	 */
 	class AbstractEvolutionWorld : public AbstractLoggable, public virtual AbstractRandomGeneratorUser
 	{
 	private:
 		/**
-		 * \brief The current highscore which ranks all evolution objects by their current fitness value.
+		 * \brief The current highscore which ranks all individuals by their current fitness value.
 		 */
 		Highscore currentHighscore;
 		/**
@@ -49,21 +49,21 @@ namespace LightBulb
 		 */
 		AbstractEvolutionWorld();
 		/**
-		 * \brief Returns all current evolution objects.
-		 * \return A vector of evolution objects.
+		 * \brief Returns all current individuals.
+		 * \return A vector of individuals.
 		 */
-		virtual std::vector<AbstractEvolutionObject*>& getEvolutionObjects() = 0;
+		virtual std::vector<AbstractIndividual*>& getIndividuals() = 0;
 		/**
-		 * \brief Sets all evolution objects.
-		 * \param newObjects The new vector of evolution objects.
+		 * \brief Sets all individual.
+		 * \param newIndividuals The new vector of individual.
 		 */
-		virtual void setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects) = 0;
+		virtual void setIndividuals(const std::vector<AbstractIndividual*>& newIndividuals) = 0;
 		/**
-		 * \brief This method creates a new evolution object and per default adds it to the world.
-		 * \param addToWorld True, if the new object should be added to this world.
-		 * \return The new evolution object.
+		 * \brief This method creates a new individual and per default adds it to the world.
+		 * \param addToWorld True, if the new individual should be added to this world.
+		 * \return The new individual.
 		 */
-		virtual AbstractEvolutionObject* addNewObject(bool addToWorld = true) = 0;
+		virtual AbstractIndividual* addNewIndividual(bool addToWorld = true) = 0;
 		/**
 		 * \brief Executes one simulation step.
 		 * \details Does a whole new simulation after that new fitness values can be determined.
@@ -71,16 +71,16 @@ namespace LightBulb
 		 */
 		virtual bool doSimulationStep() = 0;
 		/**
-		 * \brief Returns a list of all current evolution objects ordered by their score.
+		 * \brief Returns a list of all current individuals ordered by their score.
 		 * \return The highscroe.
 		 */
 		virtual Highscore& getHighscoreList();
 		/**
-		 * \brief Returns the score of the given object.
-		 * \param object The object to evaluate.
-		 * \return The score of the object.
+		 * \brief Returns the score of the given individual.
+		 * \param individual The individual to evaluate.
+		 * \return The score of the individual.
 		 */
-		virtual double getScore(const AbstractEvolutionObject& object) const = 0;
+		virtual double getScore(const AbstractIndividual& individual) const = 0;
 		/**
 		 * \brief Initializes the world before the learning starts.
 		 */
@@ -101,18 +101,18 @@ namespace LightBulb
 		void setLearningState(LearningState& learningState_);
 		/**
 		 * \brief Returns the current population size.
-		 * \return The amount of objects.
+		 * \return The amount of individuals.
 		 */
 		virtual int getPopulationSize() const = 0;
 		/**
-		* \brief Removes all evolution objects.
+		* \brief Removes all individuals.
 		*/
 		virtual void clearPopulation() = 0;
 		/**
-		 * \brief Adds an existing object to the population.
-		 * \param newObject The object to add.
+		 * \brief Adds an existing individual to the population.
+		 * \param newIndividual The individual to add.
 		 */
-		virtual void addExistingObject(AbstractEvolutionObject* newObject) = 0;
+		virtual void addExistingIndividual(AbstractIndividual* newIndividual) = 0;
 		/**
 		 * \brief Recalculates the highscore.
 		 */

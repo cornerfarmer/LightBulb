@@ -29,7 +29,7 @@ protected:
 	double getViewValueOfPos(int posX, int posY);
 	int missingPlants;	
 	bool displayMode;
-	LightBulb::AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractIndividual* createNewIndividual() override;
 	void resetWorld() override;
 public:
 	Nature();
@@ -41,7 +41,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>& getTiles();
-	double getScore(const LightBulb::AbstractEvolutionObject& object) const override;
+	double getScore(const LightBulb::AbstractIndividual& individual) const override;
 	AbstractTile& getTile(int posX, int posY);
 	void startWatchMode();
 	void stopWatchMode();

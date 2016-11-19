@@ -1,14 +1,14 @@
 // Includes
 #include "Learning/Evolution/TeachingEvolutionWorld.hpp"
-#include "Learning/Evolution/TeachedEvolutionObject.hpp"
+#include "Learning/Evolution/TeachedIndividual.hpp"
 //Library includes
 #include <iostream>
 
 namespace LightBulb
 {
-	AbstractEvolutionObject* TeachingEvolutionWorld::createNewObject()
+	AbstractIndividual* TeachingEvolutionWorld::createNewIndividual()
 	{
-		return new TeachedEvolutionObject(*this, networkOptions);
+		return new TeachedIndividual(*this, networkOptions);
 	}
 
 	TeachingEvolutionWorld::TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_)
@@ -19,19 +19,19 @@ namespace LightBulb
 
 	bool TeachingEvolutionWorld::doSimulationStep()
 	{
-		// Just recalculate the current total error values of all objects
-		for (auto teachedEvolutionObject = objects.begin(); teachedEvolutionObject != objects.end(); teachedEvolutionObject++)
+		// Just recalculate the current total error values of all individuals
+		for (auto teachedIndividual = individuals.begin(); teachedIndividual != individuals.end(); teachedIndividual++)
 		{
-			(*teachedEvolutionObject)->doNNCalculation();
+			(*teachedIndividual)->doNNCalculation();
 		}
 
 		const Highscore& highscore = getHighscoreList();
 
 		if (learningState && !learningState->disabledDatasets[DATASET_TEACHING_ERROR])
-			learningState->addData(DATASET_TEACHING_ERROR, static_cast<TeachedEvolutionObject*>(highscore.front().second)->getCurrentTeachingError());
+			learningState->addData(DATASET_TEACHING_ERROR, static_cast<TeachedIndividual*>(highscore.front().second)->getCurrentTeachingError());
 
 		if (learningState && !learningState->disabledDatasets[DATASET_WEIGHTDECAY_ERROR])
-			learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedEvolutionObject*>(highscore.front().second)->getCurrentWeightDecayError());
+			learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedIndividual*>(highscore.front().second)->getCurrentWeightDecayError());
 
 		return false;
 	}
@@ -44,10 +44,10 @@ namespace LightBulb
 		return labels;
 	}
 
-	double TeachingEvolutionWorld::getScore(const AbstractEvolutionObject& object) const
+	double TeachingEvolutionWorld::getScore(const AbstractIndividual& individual) const
 	{
-		// Just return the total error of the object (negate it, so the error 0 is the maximum)
-		return -static_cast<const TeachedEvolutionObject&>(object).getCurrentTotalError();
+		// Just return the total error of the individual (negate it, so the error 0 is the maximum)
+		return -static_cast<const TeachedIndividual&>(individual).getCurrentTotalError();
 	}
 
 

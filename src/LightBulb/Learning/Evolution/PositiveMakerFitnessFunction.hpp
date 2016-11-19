@@ -29,7 +29,7 @@ namespace LightBulb
 		 */
 		PositiveMakerFitnessFunction(double constant_);
 		// Inherited:
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 		AbstractFitnessFunction* clone() const override;
 	};
 }

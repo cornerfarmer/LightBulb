@@ -12,7 +12,7 @@
 #include <Learning/Evolution/AbstractHallOfFameAlgorithm.hpp>
 #include <Examples/PongEvolution/Pong.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
-#include <Learning/Evolution/PerfectObjectFoundCondition.hpp>
+#include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <fstream>
 #include <Learning/Evolution/BestReuseSelector.hpp>
@@ -38,7 +38,7 @@
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
 #define PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE "Topology mutation percentage"
 #define PREFERENCE_RECOMBINATION_PERCENTAGE "Recombination percentage"
-#define PREFERENCE_COMPETITIONS_SIZE "Competitions per object"
+#define PREFERENCE_COMPETITIONS_SIZE "Competitions per individual"
 #define PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE "Hall of fame competitions"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
@@ -56,7 +56,7 @@ AbstractLearningRule* PongEvolutionExample::createLearningRate()
 	EvolutionLearningRuleOptions options;
 
 	options.creationCommands.push_back(new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATE_UP_TO)));
-	options.exitConditions.push_back(new PerfectObjectFoundCondition(200));
+	options.exitConditions.push_back(new PerfectIndividualFoundCondition(200));
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
 	options.selectionCommands.push_back(new BestSelectionCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(getDoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED)), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));

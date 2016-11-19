@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
@@ -24,10 +24,10 @@ public:
 TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 {
 	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(1, 0, false, false, true);
-	MockEvolutionObject object;
+	MockIndividual individual;
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
+	EXPECT_CALL(individual, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
@@ -46,18 +46,18 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightSum)
 	weights.push_back(Eigen::MatrixXd(1, 1));
 	weights[1](0, 0) = 10;
 
-	EXPECT_CALL(object, removeNeuron(0, 1)).Times(1);
+	EXPECT_CALL(individual, removeNeuron(0, 1)).Times(1);
 
-	magnitudeBasedPruningMutationAlgorithm->execute(object);
+	magnitudeBasedPruningMutationAlgorithm->execute(individual);
 }
 
 TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 {
 	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(1, 0, false, false, false);
-	MockEvolutionObject object;
+	MockIndividual individual;
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
+	EXPECT_CALL(individual, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
@@ -81,19 +81,19 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeNeuronByWeightCount)
 	weights.push_back(Eigen::MatrixXd(1, 1));
 	weights[1](0, 0) = 0;
 
-	EXPECT_CALL(object, removeNeuron(0, 2)).Times(1);
+	EXPECT_CALL(individual, removeNeuron(0, 2)).Times(1);
 
-	magnitudeBasedPruningMutationAlgorithm->execute(object);
+	magnitudeBasedPruningMutationAlgorithm->execute(individual);
 }
 
 
 TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeWeight)
 {
 	magnitudeBasedPruningMutationAlgorithm = new MagnitudeBasedPruningMutationAlgorithm(0, 1);
-	MockEvolutionObject object;
+	MockIndividual individual;
 
 	MockNeuralNetwork neuralNetwork;
-	EXPECT_CALL(object, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
+	EXPECT_CALL(individual, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
 	std::vector<Eigen::MatrixXd> weights;
@@ -116,5 +116,5 @@ TEST_F(MagnitudeBasedPruningMutationAlgorithmTest, removeWeight)
 
 	EXPECT_CALL(networkTopology, removeAfferentWeight(0, 1, 0)).Times(1);
 
-	magnitudeBasedPruningMutationAlgorithm->execute(object);
+	magnitudeBasedPruningMutationAlgorithm->execute(individual);
 }

@@ -6,7 +6,7 @@
 
 namespace LightBulb
 {
-	bool ScoreCondition::evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule)
+	bool ScoreCondition::evaluate(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, const AbstractEvolutionLearningRule& learningRule)
 	{
 		if (highscore.size() > 0)
 		{

@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
@@ -13,10 +13,10 @@ namespace LightBulb
 		useAverageForMutationStrength = useAverageForMutationStrength_;
 	}
 
-	void RecombinationAlgorithm::execute(AbstractEvolutionObject& object1, AbstractEvolutionObject& object2)
+	void RecombinationAlgorithm::execute(AbstractIndividual& individual1, AbstractIndividual& individual2)
 	{
-		std::vector<Eigen::MatrixXd>& weights1 = static_cast<FeedForwardNetworkTopology&>(object1.getNeuralNetwork().getNetworkTopology()).getAllWeights();
-		std::vector<Eigen::MatrixXd>& weights2 = static_cast<FeedForwardNetworkTopology&>(object2.getNeuralNetwork().getNetworkTopology()).getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights1 = static_cast<FeedForwardNetworkTopology&>(individual1.getNeuralNetwork().getNetworkTopology()).getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights2 = static_cast<FeedForwardNetworkTopology&>(individual2.getNeuralNetwork().getNetworkTopology()).getAllWeights();
 
 		auto layer1 = weights1.begin();
 		auto layer2 = weights2.begin();
@@ -30,7 +30,7 @@ namespace LightBulb
 					{
 						if (useAverageForWeight)
 						{
-							// Calculate the weights average and store it inside the first object
+							// Calculate the weights average and store it inside the first individual
 							(*layer1)(i, j) = ((*layer1)(i, j) + (*layer2)(i, j)) / 2;
 						}
 						else
@@ -44,8 +44,8 @@ namespace LightBulb
 		}
 
 
-		std::vector<double>& mutationStrength1 = object1.getMutationStrength();
-		std::vector<double>& mutationStrength2 = object2.getMutationStrength();
+		std::vector<double>& mutationStrength1 = individual1.getMutationStrength();
+		std::vector<double>& mutationStrength2 = individual2.getMutationStrength();
 		for (int i = 0; i < mutationStrength2.size() && i < mutationStrength1.size(); i++)
 		{
 			if (useAverageForMutationStrength)

@@ -4,7 +4,7 @@
 #include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <array>
 
 using namespace LightBulb;
@@ -13,21 +13,21 @@ using testing::Expectation;
 class SharedCoevolutionFitnessFunctionTest : public testing::Test {
 public:
 	SharedCoevolutionFitnessFunction* sharedCoevolutionFitnessFunction;
-	std::array<MockEvolutionObject*, 3> objects;
+	std::array<MockIndividual*, 3> individuals;
 
 	void SetUp() {
 		sharedCoevolutionFitnessFunction = new SharedCoevolutionFitnessFunction();
-		objects[0] = new MockEvolutionObject();
-		objects[1] = new MockEvolutionObject();
-		objects[2] = new MockEvolutionObject();
+		individuals[0] = new MockIndividual();
+		individuals[1] = new MockIndividual();
+		individuals[2] = new MockIndividual();
 	}
 
 	virtual ~SharedCoevolutionFitnessFunctionTest()
 	{
 		delete sharedCoevolutionFitnessFunction;
-		delete objects[0];
-		delete objects[1]; 
-		delete objects[2];
+		delete individuals[0];
+		delete individuals[1]; 
+		delete individuals[2];
 	}
 };
 
@@ -35,18 +35,18 @@ TEST_F(SharedCoevolutionFitnessFunctionTest, start)
 {
 	CombiningStrategyResults results;
 
-	results[objects[0]][objects[1]][0] = true;
-	results[objects[1]][objects[0]][0] = false;
+	results[individuals[0]][individuals[1]][0] = true;
+	results[individuals[1]][individuals[0]][0] = false;
 
-	results[objects[1]][objects[2]][0] = true;
-	results[objects[2]][objects[1]][0] = false;
+	results[individuals[1]][individuals[2]][0] = true;
+	results[individuals[2]][individuals[1]][0] = false;
 
-	results[objects[0]][objects[2]][0] = true;
-	results[objects[2]][objects[0]][0] = false;
+	results[individuals[0]][individuals[2]][0] = true;
+	results[individuals[2]][individuals[0]][0] = false;
 
 	auto fitnessValues = sharedCoevolutionFitnessFunction->execute(results);
 
-	EXPECT_EQ(1.5, (*fitnessValues)[objects[0]]);
-	EXPECT_EQ(0.5, (*fitnessValues)[objects[1]]);
-	EXPECT_EQ(0, (*fitnessValues)[objects[2]]);
+	EXPECT_EQ(1.5, (*fitnessValues)[individuals[0]]);
+	EXPECT_EQ(0.5, (*fitnessValues)[individuals[1]]);
+	EXPECT_EQ(0, (*fitnessValues)[individuals[2]]);
 }

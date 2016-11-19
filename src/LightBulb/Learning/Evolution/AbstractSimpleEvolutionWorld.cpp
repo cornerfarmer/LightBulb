@@ -1,19 +1,19 @@
 // Includes
 #include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {
-	AbstractEvolutionObject* AbstractSimpleEvolutionWorld::addNewObject(bool addToWorld)
+	AbstractIndividual* AbstractSimpleEvolutionWorld::addNewIndividual(bool addToWorld)
 	{
-		// Create a new object
-		AbstractEvolutionObject* newObject = createNewObject();
+		// Create a new individual
+		AbstractIndividual* newIndividual = createNewIndividual();
 
 		// Add it to the vector
 		if (addToWorld)
-			objects.push_back(newObject);
+			individuals.push_back(newIndividual);
 
-		return newObject;
+		return newIndividual;
 	}
 
 	AbstractSimpleEvolutionWorld::AbstractSimpleEvolutionWorld()
@@ -21,22 +21,22 @@ namespace LightBulb
 
 	}
 
-	std::vector<AbstractEvolutionObject*>& AbstractSimpleEvolutionWorld::getEvolutionObjects()
+	std::vector<AbstractIndividual*>& AbstractSimpleEvolutionWorld::getIndividuals()
 	{
-		return objects;
+		return individuals;
 	}
 
-	void AbstractSimpleEvolutionWorld::setEvolutionObjects(const std::vector<AbstractEvolutionObject*>& newObjects)
+	void AbstractSimpleEvolutionWorld::setIndividuals(const std::vector<AbstractIndividual*>& newIndividuals)
 	{
-		objects = newObjects;
+		individuals = newIndividuals;
 	}
 
 	void AbstractSimpleEvolutionWorld::reset()
 	{
-		// Reset all objects
-		for (auto object = objects.begin(); object != objects.end(); object++)
+		// Reset all individuals
+		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
 		{
-			(*object)->resetNN();
+			(*individual)->resetNN();
 		}
 		// Reset the world
 		resetWorld();
@@ -44,17 +44,17 @@ namespace LightBulb
 
 	int AbstractSimpleEvolutionWorld::getPopulationSize() const
 	{
-		return objects.size();
+		return individuals.size();
 	}
 
 
 	void AbstractSimpleEvolutionWorld::clearPopulation()
 	{
-		objects.clear();
+		individuals.clear();
 	}
 
-	void AbstractSimpleEvolutionWorld::addExistingObject(AbstractEvolutionObject* newObject)
+	void AbstractSimpleEvolutionWorld::addExistingIndividual(AbstractIndividual* newIndividual)
 	{
-		objects.push_back(newObject);
+		individuals.push_back(newIndividual);
 	}
 }

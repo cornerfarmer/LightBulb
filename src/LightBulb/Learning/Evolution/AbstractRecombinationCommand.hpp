@@ -17,11 +17,11 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	class AbstractEvolutionWorld;
 	class EvolutionLearningRule;
 	/**
-	 * \brief A command which recombines a few of the given evolution objects.
+	 * \brief A command which recombines a few of the given individuals.
 	 */
 	class AbstractRecombinationCommand : public AbstractCommand
 	{
@@ -31,7 +31,7 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractRecombinationAlgorithm> recombinationAlgorithm;
 		/**
-		 * \brief The algorithm which selects objects for recombination.
+		 * \brief The algorithm which selects individuals for recombination.
 		 */
 		std::unique_ptr<AbstractRecombinationSelector> recombinationSelector;
 	public:
@@ -46,19 +46,19 @@ namespace LightBulb
 		 */
 		AbstractRecombinationCommand(AbstractRecombinationAlgorithm* recombinationAlgorithm_, AbstractRecombinationSelector* recombinationSelector_);
 		/**
-		* \brief Select objects for recombination.
+		* \brief Select individuals for recombination.
 		* \param highscore The current highscore.
-		* \param counter A counter which stores how often an object is used in all commands.
+		* \param counter A counter which stores how often an individual is used in all commands.
 		*/
-		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
+		virtual void select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter) = 0;
 		/**
 		* \brief Executes the recombination.
-		* \details The algorithm will take a few of the old objects, recombine them and insert them into the new object vector
-		* \param newObjectVector A vector where the new/recombinated objects will be stored in.
-		* \param counter A counter of all left operations per object.
-		* \param notUsedObjects A vector of objects which are not used anymore.
+		* \details The algorithm will take a few of the old individuals, recombine them and insert them into the new individual vector
+		* \param newIndividualVector A vector where the new/recombinated individuals will be stored in.
+		* \param counter A counter of all left operations per individual.
+		* \param notUsedIndividuals A vector of individuals which are not used anymore.
 		*/
-		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
+		virtual void execute(std::vector<AbstractIndividual*>& newIndividualVector, std::map<AbstractIndividual*, int>& counter, std::vector<AbstractIndividual*>& notUsedIndividuals);
 		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 	};

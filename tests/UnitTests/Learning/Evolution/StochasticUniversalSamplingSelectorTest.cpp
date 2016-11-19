@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
 #include <Mocks/MockSelectionFunction.hpp>
 
@@ -24,26 +24,26 @@ public:
 
 TEST_F(StochasticUniversalSamplingSelectorTest, executeMutationSelection)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(8, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(8, new MockIndividual()));
+	highscore.push_back(std::make_pair(2, new MockIndividual()));
 
 	std::vector<double> probabilities;
 	std::vector<int> selected({0, 0, 1});
 	EXPECT_CALL(*selectionFunction, execute(testing::_, 3)).WillRepeatedly(DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
 
-	std::map<AbstractEvolutionObject*, int> counter;
+	std::map<AbstractIndividual*, int> counter;
 	stochasticUniversalSamplingSelector->executeMutationSelection(3, highscore, counter);
-	std::vector<AbstractEvolutionObject*>& selectedObjects = stochasticUniversalSamplingSelector->getMutationSelection();
+	std::vector<AbstractIndividual*>& selectedIndividuals = stochasticUniversalSamplingSelector->getMutationSelection();
 
 	EXPECT_EQ(2, probabilities.size());
 	EXPECT_EQ(8, probabilities[0]);
 	EXPECT_EQ(2, probabilities[1]);
 
-	EXPECT_EQ(3, selectedObjects.size());
-	EXPECT_EQ(highscore[0].second, selectedObjects[0]);
-	EXPECT_EQ(highscore[0].second, selectedObjects[1]);
-	EXPECT_EQ(highscore[1].second, selectedObjects[2]);
+	EXPECT_EQ(3, selectedIndividuals.size());
+	EXPECT_EQ(highscore[0].second, selectedIndividuals[0]);
+	EXPECT_EQ(highscore[0].second, selectedIndividuals[1]);
+	EXPECT_EQ(highscore[1].second, selectedIndividuals[2]);
 
 	EXPECT_EQ(2, counter.size());
 	EXPECT_EQ(2, counter[highscore[0].second]);
@@ -53,29 +53,29 @@ TEST_F(StochasticUniversalSamplingSelectorTest, executeMutationSelection)
 
 TEST_F(StochasticUniversalSamplingSelectorTest, executeRecombinationSelection)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(8, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(8, new MockIndividual()));
+	highscore.push_back(std::make_pair(2, new MockIndividual()));
 
 	std::vector<double> probabilities;
 	std::vector<int> selected({ 0, 0, 0, 0, 1, 1 });
 	EXPECT_CALL(*selectionFunction, execute(testing::_, 6)).WillRepeatedly(DoAll(testing::SaveArg<0>(&probabilities), testing::Return(selected)));
 
-	std::map<AbstractEvolutionObject*, int> counter;
+	std::map<AbstractIndividual*, int> counter;
 	stochasticUniversalSamplingSelector->executeRecombinationSelection(3, highscore, counter);
-	std::vector<AbstractEvolutionObject*>& selectedObjects = stochasticUniversalSamplingSelector->getRecombinationSelection();
+	std::vector<AbstractIndividual*>& selectedIndividuals = stochasticUniversalSamplingSelector->getRecombinationSelection();
 
 	EXPECT_EQ(2, probabilities.size());
 	EXPECT_EQ(8, probabilities[0]);
 	EXPECT_EQ(2, probabilities[1]);
 
-	EXPECT_EQ(6, selectedObjects.size());
+	EXPECT_EQ(6, selectedIndividuals.size());
 	int count0 = 0, count1 = 0;
-	for (auto selectedObject = selectedObjects.begin(); selectedObject != selectedObjects.end(); selectedObject++)
+	for (auto selectedIndividual = selectedIndividuals.begin(); selectedIndividual != selectedIndividuals.end(); selectedIndividual++)
 	{
-		if (*selectedObject == highscore[0].second)
+		if (*selectedIndividual == highscore[0].second)
 			count0++;
-		else if (*selectedObject == highscore[1].second)
+		else if (*selectedIndividual == highscore[1].second)
 			count1++;
 	}
 	EXPECT_EQ(4, count0);

@@ -10,7 +10,7 @@
 #include "EvolutionAnalyzerWindow.hpp"
 #include "AbstractSubApp.hpp"
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
-#include <Learning/Evolution/AbstractEvolutionObject.hpp>
+#include <Learning/Evolution/AbstractIndividual.hpp>
 
 namespace LightBulb
 {
@@ -19,8 +19,8 @@ namespace LightBulb
 	class TrainingPlanRepository;
 	class EvolutionLearningRule;
 	/**
-	 * \brief A sub app which describes the source of all current evolution objects.
-	 * \details Lists all evolution objects of a evolution learning rule, shows their source and their score. (Mutation, Recombination, Resuse, Create)
+	 * \brief A sub app which describes the source of all current individuals.
+	 * \details Lists all individuals of a evolution learning rule, shows their source and their score. (Mutation, Recombination, Resuse, Create)
 	 */
 	class EvolutionAnalyzerController : public AbstractSubApp
 	{

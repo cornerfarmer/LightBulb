@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 
 using namespace LightBulb;
@@ -22,21 +22,21 @@ public:
 
 TEST_F(BestReuseSelectorTest, executeReuseSelection)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(3, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(2, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(1, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(0, new MockEvolutionObject()));
-	highscore.push_back(std::make_pair(-1, new MockEvolutionObject()));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(3, new MockIndividual()));
+	highscore.push_back(std::make_pair(2, new MockIndividual()));
+	highscore.push_back(std::make_pair(1, new MockIndividual()));
+	highscore.push_back(std::make_pair(0, new MockIndividual()));
+	highscore.push_back(std::make_pair(-1, new MockIndividual()));
 
-	std::map<AbstractEvolutionObject*, int> counter;
+	std::map<AbstractIndividual*, int> counter;
 	bestReuseSelector->executeReuseSelection(3, highscore, counter);
-	const std::vector<AbstractEvolutionObject*>& selectedObjects = bestReuseSelector->getReuseSelection();
+	const std::vector<AbstractIndividual*>& selectedIndividuals = bestReuseSelector->getReuseSelection();
 
-	EXPECT_EQ(3, selectedObjects.size());
-	EXPECT_EQ(highscore[0].second, selectedObjects[0]);
-	EXPECT_EQ(highscore[1].second, selectedObjects[1]);
-	EXPECT_EQ(highscore[2].second, selectedObjects[2]);
+	EXPECT_EQ(3, selectedIndividuals.size());
+	EXPECT_EQ(highscore[0].second, selectedIndividuals[0]);
+	EXPECT_EQ(highscore[1].second, selectedIndividuals[1]);
+	EXPECT_EQ(highscore[2].second, selectedIndividuals[2]);
 
 	EXPECT_EQ(3, counter.size());
 	EXPECT_EQ(1, counter[highscore[0].second]);

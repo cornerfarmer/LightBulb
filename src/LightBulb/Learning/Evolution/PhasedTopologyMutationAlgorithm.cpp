@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
@@ -53,19 +53,19 @@ namespace LightBulb
 		swap(lhs.pruningThresholdDistance, rhs.pruningThresholdDistance);
 	}
 
-	void PhasedTopologyMutationAlgorithm::execute(AbstractEvolutionObject& object1)
+	void PhasedTopologyMutationAlgorithm::execute(AbstractIndividual& individual1)
 	{
 		if (!pruningPhase)
 		{
-			networkGrowMutationAlgorithm->execute(object1);
+			networkGrowMutationAlgorithm->execute(individual1);
 		}
 		else
 		{
-			magnitudeBasedPruningMutationAlgorithm->execute(object1);
+			magnitudeBasedPruningMutationAlgorithm->execute(individual1);
 		}
 	}
 
-	double PhasedTopologyMutationAlgorithm::calcMPC(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	double PhasedTopologyMutationAlgorithm::calcMPC(const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		double mpc = 0;
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
@@ -76,7 +76,7 @@ namespace LightBulb
 		return mpc / highscore.size();
 	}
 
-	void PhasedTopologyMutationAlgorithm::initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void PhasedTopologyMutationAlgorithm::initialize(const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		if (!pruningPhase)
 		{

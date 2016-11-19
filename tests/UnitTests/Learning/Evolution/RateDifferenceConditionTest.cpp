@@ -23,17 +23,17 @@ public:
 
 TEST_F(RateDifferenceConditionTest, evaluateWithEmptyHighscore)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(0, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(0, static_cast<AbstractIndividual*>(nullptr)));
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
 }
 
 
 TEST_F(RateDifferenceConditionTest, evaluatePositive)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(5, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(3, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(5, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(3, static_cast<AbstractIndividual*>(nullptr)));
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
 	highscore[0].first += 0.05;
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
@@ -44,9 +44,9 @@ TEST_F(RateDifferenceConditionTest, evaluatePositive)
 
 TEST_F(RateDifferenceConditionTest, evaluateReset)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(5, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(3, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(5, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(3, static_cast<AbstractIndividual*>(nullptr)));
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
 	highscore[0].first = 7;
@@ -58,9 +58,9 @@ TEST_F(RateDifferenceConditionTest, evaluateReset)
 
 TEST_F(RateDifferenceConditionTest, evaluateResetWithLowerValue)
 {
-	std::vector<std::pair<double, AbstractEvolutionObject*>> highscore;
-	highscore.push_back(std::make_pair(5, static_cast<AbstractEvolutionObject*>(nullptr)));
-	highscore.push_back(std::make_pair(3, static_cast<AbstractEvolutionObject*>(nullptr)));
+	std::vector<std::pair<double, AbstractIndividual*>> highscore;
+	highscore.push_back(std::make_pair(5, static_cast<AbstractIndividual*>(nullptr)));
+	highscore.push_back(std::make_pair(3, static_cast<AbstractIndividual*>(nullptr)));
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
 	EXPECT_EQ(false, rateDifferenceCondition->evaluate(highscore, *evolutionLearningRule));
 	highscore[0].first -= 0.05;

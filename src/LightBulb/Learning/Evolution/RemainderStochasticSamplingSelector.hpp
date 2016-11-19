@@ -14,8 +14,8 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Selects objects depending on their fitness value.
-	 * \details First: Amount of selections per object:  \n \f$ N = [\frac{fit(c)}{\sum{fit(c_i)}} * popsize]  \f$ \n \n
+	 * \brief Selects individuals depending on their fitness value.
+	 * \details First: Amount of selections per individual:  \n \f$ N = [\frac{fit(c)}{\sum{fit(c_i)}} * popsize]  \f$ \n \n
 	 * Second: Selects the left places by random selection depending on the fitness values.
 	 * \note If replacement is enabled, the probabilities in the second step are decreased depending on N of the first step.
 	 */
@@ -33,14 +33,14 @@ namespace LightBulb
 		/**
 		 * \brief Executes selection.
 		 * \param recombination True, if a selection for recombination should be executed.
-		 * \param objectCount The amount of objects to select.
+		 * \param individualCount The amount of individuals to select.
 		 * \param highscore The current highscore.
 		 */
-		void select(bool recombination, int objectCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore);
+		void select(bool recombination, int individualCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore);
 	protected:
 		// Inherited:
-		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
-		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
+		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 	public:
 		/**
 		 * \brief Creates a new remainder stochastic sampling selector.

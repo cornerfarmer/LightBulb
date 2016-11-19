@@ -96,9 +96,6 @@
     <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunctionTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\PerfectObjectFoundConditionTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunctionTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -156,6 +153,9 @@
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithmTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\PerfectIndividualFoundConditionTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockNetworkTopology.hpp">
@@ -177,9 +177,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockRecombinationAlgorithm.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockEvolutionObject.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockMutationAlgorithm.hpp">
@@ -261,6 +258,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockNeuronDescription.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockIndividual.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

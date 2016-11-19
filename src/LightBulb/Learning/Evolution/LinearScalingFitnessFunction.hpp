@@ -40,7 +40,7 @@ namespace LightBulb
 		 */
 		LinearScalingFitnessFunction(double proportionalScaling_, double base_, bool useDynamicScaling_ = false);
 		// Inherited:
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 		AbstractFitnessFunction* clone() const override;
 	};
 }

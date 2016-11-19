@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/AbstractReuseCommand.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 
 namespace LightBulb
 {
@@ -22,20 +22,20 @@ namespace LightBulb
 		swap(lhs.reuseSelector, rhs.reuseSelector);
 	}
 
-	void AbstractReuseCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
+	void AbstractReuseCommand::execute(std::vector<AbstractIndividual*>& newIndividualVector, std::map<AbstractIndividual*, int>& counter, std::vector<AbstractIndividual*>& notUsedIndividuals)
 	{
-		for (auto object = reuseSelector->getReuseSelection().begin(); object != reuseSelector->getReuseSelection().end(); object++)
+		for (auto individual = reuseSelector->getReuseSelection().begin(); individual != reuseSelector->getReuseSelection().end(); individual++)
 		{
-			if (counter[*object] == 1)
+			if (counter[*individual] == 1)
 			{
-				newObjectVector.push_back(*object);
+				newIndividualVector.push_back(*individual);
 			}
 			else
 			{
-				newObjectVector.push_back(getUnusedObject(**object, notUsedObjects));
+				newIndividualVector.push_back(getUnusedIndividual(**individual, notUsedIndividuals));
 			}
-			newObjectVector.back()->setEvolutionSource(Reuse);
-			counter[*object]--;
+			newIndividualVector.back()->setEvolutionSource(Reuse);
+			counter[*individual]--;
 		}
 	}
 }

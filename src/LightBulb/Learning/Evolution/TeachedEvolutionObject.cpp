@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/TeachedEvolutionObject.hpp"
+#include "Learning/Evolution/TeachedIndividual.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Teaching/Teacher.hpp"
@@ -8,7 +8,7 @@
 
 namespace LightBulb
 {
-	TeachedEvolutionObject::TeachedEvolutionObject(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options)
+	TeachedIndividual::TeachedIndividual(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options)
 	{
 		teachingEvolutionWorld = &teachingEvolutionWorld_;
 		currentTotalError = 0;
@@ -26,12 +26,12 @@ namespace LightBulb
 
 	}
 
-	AbstractNeuralNetwork& TeachedEvolutionObject::getNeuralNetwork()
+	AbstractNeuralNetwork& TeachedIndividual::getNeuralNetwork()
 	{
 		return *neuralNetwork.get();
 	}
 
-	void TeachedEvolutionObject::doNNCalculation()
+	void TeachedIndividual::doNNCalculation()
 	{
 		// Just recalculate the total error
 		TopologicalOrder activationOrder;
@@ -40,35 +40,35 @@ namespace LightBulb
 		currentTotalError = currentTeachingError + currentWeightDecayError;
 	}
 
-	void TeachedEvolutionObject::resetNN()
+	void TeachedIndividual::resetNN()
 	{
 		// Only reset all activations
 		neuralNetwork->getNetworkTopology().resetActivation();
 	}
 
-	AbstractEvolutionObject* TeachedEvolutionObject::clone(bool addToWorld) const
+	AbstractIndividual* TeachedIndividual::clone(bool addToWorld) const
 	{
-		// Create a new object
-		AbstractEvolutionObject* newObject = teachingEvolutionWorld->addNewObject(addToWorld);
+		// Create a new individual
+		AbstractIndividual* newIndividual = teachingEvolutionWorld->addNewIndividual(addToWorld);
 		// Copy all weights
-		newObject->getNeuralNetwork().getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
+		newIndividual->getNeuralNetwork().getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
 		// Copy all mutation strengths
-		newObject->setMutationStrength(getMutationStrength());
-		return newObject;
+		newIndividual->setMutationStrength(getMutationStrength());
+		return newIndividual;
 	}
 
-	double TeachedEvolutionObject::getCurrentTotalError() const
+	double TeachedIndividual::getCurrentTotalError() const
 	{
 		return currentTotalError;
 	}
 
 
-	double TeachedEvolutionObject::getCurrentTeachingError() const
+	double TeachedIndividual::getCurrentTeachingError() const
 	{
 		return currentTeachingError;
 	}
 
-	double TeachedEvolutionObject::getCurrentWeightDecayError() const
+	double TeachedIndividual::getCurrentWeightDecayError() const
 	{
 		return currentWeightDecayError;
 	}

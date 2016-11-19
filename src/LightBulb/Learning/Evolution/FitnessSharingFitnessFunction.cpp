@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 // Library includes
@@ -15,7 +15,7 @@ namespace LightBulb
 		dissimilarityThreshold = dissimilarityThreshold_;
 	}
 
-	void FitnessSharingFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void FitnessSharingFitnessFunction::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		if (dissimilarityThreshold > 0)
 		{

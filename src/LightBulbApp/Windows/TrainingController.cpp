@@ -142,7 +142,7 @@ namespace LightBulb
 		if (dynamic_cast<AbstractEvolutionTrainingPlan*>(&trainingPlan))
 		{
 			const EvolutionLearningResult& learningResult = static_cast<const EvolutionLearningResult&>(static_cast<AbstractEvolutionTrainingPlan&>(trainingPlan).getLearningResult());
-			AbstractNeuralNetwork* clone = learningResult.bestObjects.front()->getNeuralNetwork().clone();
+			AbstractNeuralNetwork* clone = learningResult.bestIndividuals.front()->getNeuralNetwork().clone();
 			clone->setName("Result of " + trainingPlan.getName());
 			neuralNetworkRepository->Add(clone);
 		}

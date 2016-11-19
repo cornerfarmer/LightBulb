@@ -11,7 +11,7 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Decreases fitness values depending on the neuron count of the corresponding objects.
+	 * \brief Decreases fitness values depending on the neuron count of the corresponding individuals.
 	 * \details Describes: \n \n \f$ fit(o) = fit*(o) - a * N \f$ \n \n
 	 * \f$a: scaling factor\f$ \n 
 	 * \f$N: neuron count\f$ \n 
@@ -30,7 +30,7 @@ namespace LightBulb
 		 */
 		NeuronDecayFitnessFunction(double fac_);
 		// Inherited:
-		void execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 		AbstractCloneable* clone() const override;
 	};
 }

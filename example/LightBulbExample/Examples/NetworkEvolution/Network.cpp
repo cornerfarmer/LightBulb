@@ -11,7 +11,7 @@
 using namespace LightBulb;
 
 Network::Network(NetworkSimulator& networkSimulator_)
-	: AbstractSimpleEvolutionObject(networkSimulator_)
+	: AbstractDefaultIndividual(networkSimulator_)
 {
 	positions.resize(4, std::vector<float>(2));
 

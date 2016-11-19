@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/AbstractRecombinationCommand.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 
 namespace LightBulb
 {
@@ -25,47 +25,47 @@ namespace LightBulb
 		swap(lhs.recombinationSelector, rhs.recombinationSelector);
 	}
 
-	void AbstractRecombinationCommand::execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects)
+	void AbstractRecombinationCommand::execute(std::vector<AbstractIndividual*>& newIndividualVector, std::map<AbstractIndividual*, int>& counter, std::vector<AbstractIndividual*>& notUsedIndividuals)
 	{
-		AbstractEvolutionObject* firstParent;
-		AbstractEvolutionObject* secondParent;
-		for (auto object = recombinationSelector->getRecombinationSelection().begin(); object != recombinationSelector->getRecombinationSelection().end(); object++)
+		AbstractIndividual* firstParent;
+		AbstractIndividual* secondParent;
+		for (auto individual = recombinationSelector->getRecombinationSelection().begin(); individual != recombinationSelector->getRecombinationSelection().end(); individual++)
 		{
-			if (counter[*object] == 1)
+			if (counter[*individual] == 1)
 			{
-				firstParent = *object;
-				counter[*object]--;
-				object++;
-				secondParent = *object;
-				counter[*object]--;
-				if (counter[*object] == 0)
+				firstParent = *individual;
+				counter[*individual]--;
+				individual++;
+				secondParent = *individual;
+				counter[*individual]--;
+				if (counter[*individual] == 0)
 				{
-					notUsedObjects.push_back(*object);
+					notUsedIndividuals.push_back(*individual);
 				}
 				recombinationAlgorithm->execute(*firstParent, *secondParent);
-				newObjectVector.push_back(firstParent);
+				newIndividualVector.push_back(firstParent);
 			}
 			else
 			{
-				firstParent = *object;
-				counter[*object]--;
-				object++;
-				if (counter[*object] == 1)
+				firstParent = *individual;
+				counter[*individual]--;
+				individual++;
+				if (counter[*individual] == 1)
 				{
-					secondParent = *object;
-					counter[*object]--;
+					secondParent = *individual;
+					counter[*individual]--;
 					recombinationAlgorithm->execute(*secondParent, *firstParent);
-					newObjectVector.push_back(secondParent);
+					newIndividualVector.push_back(secondParent);
 				}
 				else
 				{
-					secondParent = getUnusedObject(**object, notUsedObjects);
-					counter[*object]--;
+					secondParent = getUnusedIndividual(**individual, notUsedIndividuals);
+					counter[*individual]--;
 					recombinationAlgorithm->execute(*secondParent, *firstParent);
-					newObjectVector.push_back(secondParent);
+					newIndividualVector.push_back(secondParent);
 				}
 			}
-			newObjectVector.back()->setEvolutionSource(Recombination);
+			newIndividualVector.back()->setEvolutionSource(Recombination);
 		}
 	}
 

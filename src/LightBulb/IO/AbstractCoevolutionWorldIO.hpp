@@ -26,11 +26,11 @@ namespace LightBulb
 		archive(cereal::make_nvp("hallOfFameToAddAlgorithm", world.hallOfFameToAddAlgorithm));
 		archive(cereal::make_nvp("hallOfFameToChallengeAlgorithm", world.hallOfFameToChallengeAlgorithm));
 
-		std::vector<double> fitnessValues(world.objects.size());
-		for (int i = 0; i < world.objects.size(); i++)
+		std::vector<double> fitnessValues(world.individuals.size());
+		for (int i = 0; i < world.individuals.size(); i++)
 		{
-			if (world.fitnessValues->count(world.objects[i]))
-				fitnessValues[i] = world.fitnessValues->at(world.objects[i]);
+			if (world.fitnessValues->count(world.individuals[i]))
+				fitnessValues[i] = world.fitnessValues->at(world.individuals[i]);
 		}
 		archive(cereal::make_nvp("fitnessValues", fitnessValues));
 
@@ -66,9 +66,9 @@ namespace LightBulb
 
 		std::vector<double> fitnessValues;
 		archive(cereal::make_nvp("fitnessValues", fitnessValues));
-		world.fitnessValues.reset(new std::map<const AbstractEvolutionObject*, double>());
-		for (int i = 0; i < world.objects.size(); i++)
-			(*world.fitnessValues)[world.objects[i]] = fitnessValues[i];
+		world.fitnessValues.reset(new std::map<const AbstractIndividual*, double>());
+		for (int i = 0; i < world.individuals.size(); i++)
+			(*world.fitnessValues)[world.individuals[i]] = fitnessValues[i];
 
 		archive(cereal::make_nvp("comparisons", world.comparisons));
 	}

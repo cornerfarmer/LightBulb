@@ -6,7 +6,7 @@
 
 namespace LightBulb
 {
-	void StochasticUniversalSamplingSelector::select(bool recombine, int objectCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void StochasticUniversalSamplingSelector::select(bool recombine, int individualCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		std::vector<double> probabilities;
 		probabilities.reserve(highscore.size());
@@ -16,23 +16,23 @@ namespace LightBulb
 			probabilities.push_back(entry->first);
 		}
 
-		std::vector<int> selectedIndices = selectionFunction->execute(probabilities, objectCount);
+		std::vector<int> selectedIndices = selectionFunction->execute(probabilities, individualCount);
 		int mutationSequenceIndex = 0;
 		for (auto selectedIndex = selectedIndices.begin(); selectedIndex != selectedIndices.end(); selectedIndex++, mutationSequenceIndex++)
 		{
 			if (recombine)
-				addObjectToRecombination(*highscore[*selectedIndex].second);
+				addIndividualToRecombination(*highscore[*selectedIndex].second);
 			else
-				addObjectToMutate(*highscore[*selectedIndex].second);
+				addIndividualToMutate(*highscore[*selectedIndex].second);
 		}
 	}
 
-	void StochasticUniversalSamplingSelector::selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void StochasticUniversalSamplingSelector::selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		select(false, mutationCount, highscore);
 	}
 
-	void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void StochasticUniversalSamplingSelector::selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		select(true, recombinationCount * 2, highscore);
 		random_shuffle(getRecombinationSelection().begin(), getRecombinationSelection().end());

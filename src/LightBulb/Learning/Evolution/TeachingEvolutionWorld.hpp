@@ -15,7 +15,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class EvolutionLearningRule;
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	class AbstractTeacher;
 
 #define DATASET_TEACHING_ERROR "Teaching error"
@@ -23,7 +23,7 @@ namespace LightBulb
 
 	/**
 	 * \brief A world which makes it possible to combine the evolution world with classic superives learning.
-	 * \details Every evolution objects simply tries to minimize the teaching error.
+	 * \details Every individuals simply tries to minimize the teaching error.
 	 */
 	class TeachingEvolutionWorld : public AbstractSimpleEvolutionWorld
 	{
@@ -33,11 +33,11 @@ namespace LightBulb
 		 */
 		AbstractTeacher* teacher;
 		/**
-		 * \brief Contains the given network options for new evolution objects.
+		 * \brief Contains the given network options for new individuals.
 		 */
 		FeedForwardNetworkTopologyOptions networkOptions;
 		// Inherited
-		AbstractEvolutionObject* createNewObject() override;
+		AbstractIndividual* createNewIndividual() override;
 	public:
 		/**
 		 * \brief Creates a new teaching evolution world.
@@ -54,7 +54,7 @@ namespace LightBulb
 		// Inherited:
 		bool doSimulationStep() override;
 		std::vector<std::string> getDataSetLabels() const override;
-		double getScore(const AbstractEvolutionObject& object) const override;
+		double getScore(const AbstractIndividual& individual) const override;
 	};
 }
 

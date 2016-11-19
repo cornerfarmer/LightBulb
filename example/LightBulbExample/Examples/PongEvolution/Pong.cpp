@@ -1,7 +1,7 @@
 // Includes
 #include "Examples/PongEvolution/Pong.hpp"
 #include "Examples/PongEvolution/PongAI.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iomanip>
 #include <chrono>
@@ -9,7 +9,7 @@
 
 using namespace LightBulb;
 
-AbstractEvolutionObject* Pong::createNewObject()
+AbstractIndividual* Pong::createNewIndividual()
 {
 	return new PongAI(*options, *this);
 }
@@ -21,7 +21,7 @@ Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, A
 	watchMode = false;
 }
 
-int Pong::doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
+int Pong::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round)
 {
 	if (round == 0)
 		return simulateGame(static_cast<PongAI&>(obj1), static_cast<PongAI&>(obj2));
@@ -93,7 +93,7 @@ void Pong::executeCompareAI()
 }
 
 
-int Pong::rateKI(AbstractEvolutionObject& rateKI)
+int Pong::rateIndividual(AbstractIndividual& rateKI)
 {
 	int wins = 0;
 	int matchCount = 100;

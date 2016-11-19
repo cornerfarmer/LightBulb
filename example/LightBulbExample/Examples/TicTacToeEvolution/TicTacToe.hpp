@@ -33,7 +33,7 @@ private:
 	void initialize();
 protected:
 	std::vector<std::vector<int>> fields;
-	LightBulb::AbstractEvolutionObject* createNewObject() override;
+	LightBulb::AbstractIndividual* createNewIndividual() override;
 	void resetWorld() override;
 	int whoHasWon();
 	int currentPlayer;
@@ -44,7 +44,7 @@ protected:
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
-	int doCompare(LightBulb::AbstractEvolutionObject& obj1, LightBulb::AbstractEvolutionObject& obj2, int round) override;
+	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
 public:
 	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 	TicTacToe();
@@ -52,7 +52,7 @@ public:
 	void setField(int x, int y);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);
-	int rateKI(LightBulb::AbstractEvolutionObject& rateKI) override;
+	int rateIndividual(LightBulb::AbstractIndividual& rateKI) override;
 	void setIllegalMove(bool illegalMove_);
 	void startNewGame(int firstPlayer);
 	void initializeForLearning() override;

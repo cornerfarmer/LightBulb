@@ -154,7 +154,7 @@
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithmTest.cpp" />
     <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithmTest.cpp" />
-    <ClCompile Include="Learning\Evolution\PerfectObjectFoundConditionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\PerfectIndividualFoundConditionTest.cpp" />
     <ClCompile Include="Learning\Evolution\PositiveMakerFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\RandomCombiningStrategyTest.cpp" />
     <ClCompile Include="Learning\Evolution\RandomHallOfFameAlgorithmTest.cpp" />
@@ -188,7 +188,7 @@
     <ClInclude Include="Mocks\MockNeuronDescription.hpp" />
     <ClInclude Include="Mocks\MockNeuronDescriptionFactory.hpp" />
     <ClInclude Include="Mocks\MockEvolutionLearningRule.hpp" />
-    <ClInclude Include="Mocks\MockEvolutionObject.hpp" />
+    <ClInclude Include="Mocks\MockIndividual.hpp" />
     <ClInclude Include="Mocks\MockEvolutionWorld.hpp" />
     <ClInclude Include="Mocks\MockExitCondition.hpp" />
     <ClInclude Include="Mocks\MockFitnessFunction.hpp" />

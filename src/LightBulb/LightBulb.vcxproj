@@ -88,7 +88,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp">
+    <ClCompile Include="Learning\Evolution\AbstractIndividual.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -131,7 +131,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp">
+    <ClCompile Include="Learning\Evolution\AbstractDefaultIndividual.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -187,7 +187,7 @@
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\NetworkGrowMutationAlgorithm.cpp" />
     <ClCompile Include="Learning\Evolution\NeuronDecayFitnessFunction.cpp" />
-    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
+    <ClCompile Include="Learning\Evolution\PerfectIndividualFoundCondition.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -336,16 +336,16 @@
     <ClInclude Include="Random\XorShfGenerator.hpp" />
     <ClInclude Include="Random\ZigguratGenerator.hpp" />
     <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp" />
-    <ClInclude Include="IO\AbstractEvolutionObjectIO.hpp" />
+    <ClInclude Include="IO\AbstractIndividualIO.hpp" />
     <ClInclude Include="IO\AbstractHallOfFameAlgorithmIO.hpp" />
-    <ClInclude Include="IO\AbstractSimpleEvolutionObjectIO.hpp" />
+    <ClInclude Include="IO\AbstractDefaultIndividualIO.hpp" />
     <ClInclude Include="IO\AbstractSimpleEvolutionWorldIO.hpp" />
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
     <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
     <ClInclude Include="IO\EnumSerialization.hpp" />
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
-    <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
+    <ClInclude Include="IO\TeachedIndividualIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
     <ClInclude Include="IO\AbstractExporter.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
@@ -405,7 +405,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp">
+    <ClInclude Include="Learning\Evolution\AbstractIndividual.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -448,7 +448,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp">
+    <ClInclude Include="Learning\Evolution\AbstractDefaultIndividual.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -504,7 +504,7 @@
     <ClInclude Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\NetworkGrowMutationAlgorithm.hpp" />
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
-    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
+    <ClInclude Include="Learning\Evolution\PerfectIndividualFoundCondition.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -551,7 +551,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp">
+    <ClInclude Include="Learning\Evolution\TeachedIndividual.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>

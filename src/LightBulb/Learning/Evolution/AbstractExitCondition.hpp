@@ -13,7 +13,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	class AbstractEvolutionLearningRule;
 	/**
 	 * \brief A condition which determines if the learning process has finished.
@@ -29,7 +29,7 @@ namespace LightBulb
 		 * \param learningRule The learning rule.
 		 * \return True, if the learning process should stop.
 		 */
-		virtual bool evaluate(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, const AbstractEvolutionLearningRule& learningRule) = 0;
+		virtual bool evaluate(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, const AbstractEvolutionLearningRule& learningRule) = 0;
 	};
 }
 

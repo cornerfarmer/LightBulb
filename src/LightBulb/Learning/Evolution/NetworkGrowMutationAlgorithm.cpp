@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/NetworkGrowMutationAlgorithm.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
@@ -11,9 +11,9 @@ namespace LightBulb
 		maxNeuronsPerLayer = maxNeuronsPerLayer_;
 	}
 
-	void NetworkGrowMutationAlgorithm::execute(AbstractEvolutionObject& object1)
+	void NetworkGrowMutationAlgorithm::execute(AbstractIndividual& individual1)
 	{
-		AbstractNetworkTopology& networkTopology = object1.getNeuralNetwork().getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = individual1.getNeuralNetwork().getNetworkTopology();
 		const std::vector<unsigned>& neuronCountsPerLayer = networkTopology.getNeuronCountsPerLayer();
 
 		bool addingNeuronsPossible = false;
@@ -33,7 +33,7 @@ namespace LightBulb
 			{
 				layer = randomGenerator->randInt(0, neuronCountsPerLayer.size() - 1);
 			} while (maxNeuronsPerLayer[layer] <= neuronCountsPerLayer[layer]);
-			object1.addNeuron(layer);
+			individual1.addNeuron(layer);
 		}
 
 	}

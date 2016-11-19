@@ -1,7 +1,7 @@
 // Includes
 #include "Examples/PongEvolution/PongGame.hpp"
 #include "Examples/PongEvolution/PongAI.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iomanip>
 #include <chrono>

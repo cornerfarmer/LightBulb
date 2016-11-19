@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/WeightDecayFitnessFunction.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 
@@ -13,7 +13,7 @@ namespace LightBulb
 		fac = fac_;
 	}
 
-	void WeightDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void WeightDecayFitnessFunction::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
@@ -26,7 +26,7 @@ namespace LightBulb
 
 			entry->first -= fac * weightDecayError;
 		}
-		sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+		sort(highscore.begin(), highscore.end(), std::greater<std::pair<double, AbstractIndividual*>>());
 	}
 
 	AbstractFitnessFunction* WeightDecayFitnessFunction::clone() const

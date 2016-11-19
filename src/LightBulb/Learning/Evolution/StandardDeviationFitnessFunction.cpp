@@ -11,7 +11,7 @@ namespace LightBulb
 		deviationFac = deviationFac_;
 	}
 
-	void StandardDeviationFitnessFunction::execute(std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore)
+	void StandardDeviationFitnessFunction::execute(std::vector<std::pair<double, AbstractIndividual*>>& highscore)
 	{
 		double average = 0;
 

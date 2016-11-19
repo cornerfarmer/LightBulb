@@ -13,7 +13,7 @@
 namespace LightBulb
 {
 	/**
-	 * \brief A combining strategy which tries to find bunch of parasites which represent all different types of objects.
+	 * \brief A combining strategy which tries to find bunch of parasites which represent all different types of individuals.
 	 * \details This makes the lost information when not using all parasites minimal.\n
 	 * The algorithm:\n\n
 	 * 1. Calculate for each parasite \f$p\f$:\n
@@ -30,22 +30,22 @@ namespace LightBulb
 		friend void serialize(Archive& archive, SharedSamplingCombiningStrategy& sharedSamplingCombiningStrategy);
 	private:
 		/**
-		* \brief Determines the number of competitions per object.
+		* \brief Determines the number of competitions per individual.
 		*/
-		int amountOfCompetitionsPerObject;
+		int amountOfCompetitionsPerIndividual;
 		/**
 		 * \brief Contains the combining strategy of the parasite population.
 		 */
 		const AbstractCombiningStrategy* otherCombiningStrategy;
 		// Inherited:
-		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
+		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
 	public:
 		/**
 		 * \brief Creates the shared sampling combining strategy.
-		 * \param amountOfCompetitionsPerObject_ Determines the number of competitions per object.
+		 * \param amountOfCompetitionsPerIndividual_ Determines the number of competitions per individual.
 		 * \param secondWorld_ The other world.
 		 */
-		SharedSamplingCombiningStrategy(int amountOfCompetitionsPerObject_ = 0, AbstractCoevolutionWorld* secondWorld_ = nullptr);
+		SharedSamplingCombiningStrategy(int amountOfCompetitionsPerIndividual_ = 0, AbstractCoevolutionWorld* secondWorld_ = nullptr);
 		// Inherited:
 		void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld) override;
 		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;

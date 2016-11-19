@@ -11,24 +11,24 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Adds objects to the world as long as it contains less objects than wished.
+	 * \brief Adds individuals to the world as long as it contains less individuals than wished.
 	 */
 	class ConstantCreationCommand : public AbstractCreationCommand
 	{
 	private:
 		/**
-		 * \brief Holds the amount of objects up to which they should be created.
+		 * \brief Holds the amount of individuals up to which they should be created.
 		 */
-		int objectCount;
+		int individualCount;
 	public:
 		virtual ~ConstantCreationCommand() {};
 		/**
 		 * \brief Creates the constant creation command.
-		 * \param objectCount_ The amount of objects up to which they should be created.
+		 * \param individualCount_ The amount of individuals up to which they should be created.
 		 */
-		ConstantCreationCommand(int objectCount_);
+		ConstantCreationCommand(int individualCount_);
 		// Inherited:
-		void execute(AbstractEvolutionWorld& world, std::vector<AbstractEvolutionObject*>& notUsedObjects) override;
+		void execute(AbstractEvolutionWorld& world, std::vector<AbstractIndividual*>& notUsedIndividuals) override;
 		AbstractCloneable* clone() const override;
 	};
 }

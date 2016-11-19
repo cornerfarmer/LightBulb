@@ -1,7 +1,7 @@
 // Includes
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 //Library includes
@@ -13,7 +13,7 @@
 
 using namespace LightBulb;
 
-AbstractEvolutionObject* TicTacToe::createNewObject()
+AbstractIndividual* TicTacToe::createNewIndividual()
 {
 	return new TicTacToeAI(*options, *this);
 }
@@ -51,7 +51,7 @@ int TicTacToe::getFieldValue(int x, int y)
 	return fields[x][y];
 }
 
-int TicTacToe::doCompare(AbstractEvolutionObject& obj1, AbstractEvolutionObject& obj2, int round)
+int TicTacToe::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round)
 {
 	return simulateGame(static_cast<TicTacToeAI&>(obj1), static_cast<TicTacToeAI&>(obj2), round == 1);
 }
@@ -170,7 +170,7 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 	illegalMove = illegalMove_;
 }
 
-int TicTacToe::rateKI(AbstractEvolutionObject& rateKI)
+int TicTacToe::rateIndividual(AbstractIndividual& rateKI)
 {
 
 	int wins = 0;

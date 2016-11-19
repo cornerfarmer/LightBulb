@@ -6,13 +6,13 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class TicTacToe;
 
-class TicTacToeAI : public LightBulb::AbstractSimpleEvolutionObject
+class TicTacToeAI : public LightBulb::AbstractDefaultIndividual
 {
 protected:
 	TicTacToe* currentGame;
@@ -25,6 +25,6 @@ public:
 	void setTicTacToe(TicTacToe& newTicTacToe);
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeAI, LightBulb::AbstractSimpleEvolutionObject, );
+USE_PARENT_SERIALIZATION(TicTacToeAI, LightBulb::AbstractDefaultIndividual, );
 
 #endif

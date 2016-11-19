@@ -13,9 +13,9 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
-	 * \brief A mutation algorithm which removes weights and neurons from given objects.
+	 * \brief A mutation algorithm which removes weights and neurons from given individuals.
 	 * \details Removing neurons:\n
 	 * Neurons can be choosen by their total efferent weights or their total number of efferent weights.\n
 	 * If the random function is activated, the neuron is chosed randomly depending on their weights. Otherwise just the neuron with the lowest weightsum or weight count is taken.\n \n
@@ -60,7 +60,7 @@ namespace LightBulb
 		 */
 		MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_ = true, bool ignoreInputLayer_ = false, bool removeNeuronsByTheirTotalWeight_ = false);
 		// Inherited:
-		void execute(AbstractEvolutionObject& object1) override;
+		void execute(AbstractIndividual& individual1) override;
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 		AbstractCloneable* clone() const override;
 	};

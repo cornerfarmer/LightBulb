@@ -6,30 +6,30 @@ namespace LightBulb
 	void swap(AbstractMutationSelector& lhs, AbstractMutationSelector& rhs) noexcept
 	{
 		using std::swap;
-		swap(lhs.selectedObjects, rhs.selectedObjects);
+		swap(lhs.selectedIndividuals, rhs.selectedIndividuals);
 		swap(lhs.currentCounter, rhs.currentCounter);
 	}
 
-	void AbstractMutationSelector::addObjectToMutate(AbstractEvolutionObject& object)
+	void AbstractMutationSelector::addIndividualToMutate(AbstractIndividual& individual)
 	{
-		selectedObjects.push_back(&object);
-		(*currentCounter)[&object]++;
+		selectedIndividuals.push_back(&individual);
+		(*currentCounter)[&individual]++;
 	}
 
-	void AbstractMutationSelector::executeMutationSelection(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void AbstractMutationSelector::executeMutationSelection(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter)
 	{
-		selectedObjects.clear();
+		selectedIndividuals.clear();
 		if (mutationCount > 0) {
 			currentCounter = &counter;
 			selectForMutation(mutationCount, highscore);
 		}
 
-		if (selectedObjects.size() != mutationCount)
+		if (selectedIndividuals.size() != mutationCount)
 			throw std::logic_error("The mutation selection was not successful");
 	}
 
-	std::vector<AbstractEvolutionObject*>& AbstractMutationSelector::getMutationSelection()
+	std::vector<AbstractIndividual*>& AbstractMutationSelector::getMutationSelection()
 	{
-		return selectedObjects;
+		return selectedIndividuals;
 	}
 }

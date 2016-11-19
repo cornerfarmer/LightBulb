@@ -14,19 +14,19 @@
 namespace LightBulb
 {
 	/**
-	 * \brief A selector which selects objects with a random function.
+	 * \brief A selector which selects individuals with a random function.
 	 */
 	class RandomSelector : public AbstractMutationSelector, public AbstractRecombinationSelector
 	{
 	private:
 		/**
-		 * \brief The random function which should be used for selecting objects.
+		 * \brief The random function which should be used for selecting individuals.
 		 */
 		std::unique_ptr<AbstractRandomFunction> randomFunction;
 	protected:
 		// Inherited:
-		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
-		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
+		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 	public:
 		RandomSelector() = default;
 		RandomSelector(const RandomSelector& other);

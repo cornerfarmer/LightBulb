@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
-#include <Mocks/MockEvolutionObject.hpp>
+#include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/TeachingEvolutionWorld.hpp>
-#include <Learning/Evolution/TeachedEvolutionObject.hpp>
+#include <Learning/Evolution/TeachedIndividual.hpp>
 #include <Mocks/MockTeacher.hpp>
 #include <Mocks/MockNeuronDescriptionFactory.hpp>
 #include "Mocks/MockRandomGenerator.hpp"
@@ -34,12 +34,12 @@ public:
 
 TEST_F(TeachedEvolutionTest, doSimulationStep)
 {
-	AbstractEvolutionObject* evolutionObject = teachingEvolutionWorld->addNewObject(true);
+	AbstractIndividual* individual = teachingEvolutionWorld->addNewIndividual(true);
 
-	EXPECT_CALL(teacher, getTeachingError(testing::Ref(evolutionObject->getNeuralNetwork()), testing::_)).WillOnce(testing::Return(5));
-	EXPECT_CALL(teacher, getWeightDecayError(testing::Ref(evolutionObject->getNeuralNetwork()))).WillOnce(testing::Return(3));
+	EXPECT_CALL(teacher, getTeachingError(testing::Ref(individual->getNeuralNetwork()), testing::_)).WillOnce(testing::Return(5));
+	EXPECT_CALL(teacher, getWeightDecayError(testing::Ref(individual->getNeuralNetwork()))).WillOnce(testing::Return(3));
 
 	teachingEvolutionWorld->doSimulationStep();
 
-	EXPECT_EQ(-8, teachingEvolutionWorld->getScore(*evolutionObject));
+	EXPECT_EQ(-8, teachingEvolutionWorld->getScore(*individual));
 }

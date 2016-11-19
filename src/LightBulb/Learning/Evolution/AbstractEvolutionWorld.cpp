@@ -16,17 +16,17 @@ namespace LightBulb
 		if (recalculateHighscore)
 		{
 			currentHighscore.clear();
-			// Go through all evolution objects
-			for (auto object = getEvolutionObjects().begin(); object < getEvolutionObjects().end(); object++)
+			// Go through all individuals
+			for (auto individual = getIndividuals().begin(); individual < getIndividuals().end(); individual++)
 			{
-				double score = getScore(**object);
+				double score = getScore(**individual);
 
-				// Add the objects paired with its score to the list
-				currentHighscore.push_back(std::make_pair(score, *object));
+				// Add the individuals paired with its score to the list
+				currentHighscore.push_back(std::make_pair(score, *individual));
 
 			}
 			// Sort the list
-			sort(currentHighscore.begin(), currentHighscore.end(), std::greater<std::pair<double, AbstractEvolutionObject*>>());
+			sort(currentHighscore.begin(), currentHighscore.end(), std::greater<std::pair<double, AbstractIndividual*>>());
 			recalculateHighscore = false;
 		}
 		return currentHighscore;

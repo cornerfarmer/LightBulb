@@ -11,17 +11,17 @@
 namespace LightBulb
 {
 	/**
-	 * \brief A class to directly reuse the best N evolution objects.
+	 * \brief A class to directly reuse the best N individuals.
 	 */
 	class ConstantReuseCommand : public AbstractReuseCommand
 	{
 	private:
 		/**
-		 * \brief The amount of objects which should be reused.
+		 * \brief The amount of individuals which should be reused.
 		 */
-		int objectCount;
+		int individualCount;
 		/**
-		 * \brief Alternative: Holds the percentage of objects which should be reused.
+		 * \brief Alternative: Holds the percentage of individuals which should be reused.
 		 */
 		double reusePercentage;
 	public:
@@ -29,22 +29,22 @@ namespace LightBulb
 		ConstantReuseCommand() = default;
 		ConstantReuseCommand(const ConstantReuseCommand& other) = default;
 		/**
-		 * \brief Creates a command which reuses a static amount of objects.
+		 * \brief Creates a command which reuses a static amount of individuals.
 		 * \param reuseSelector_ The reuse selector to use.
-		 * \param objectCount_ The amount of objects which should be reused.
+		 * \param individualCount_ The amount of individuals which should be reused.
 		 */
-		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int objectCount_);
+		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, int individualCount_);
 		/**
-		 * \brief Creates a command which reuses a percentage of objects.
+		 * \brief Creates a command which reuses a percentage of individuals.
 		 * \param reuseSelector_ The reuse selector to use.
-		 * \param reusePercentage_ Holds the percentage of objects which should be reused.
+		 * \param reusePercentage_ Holds the percentage of individuals which should be reused.
 		 */
 		ConstantReuseCommand(AbstractReuseSelector* reuseSelector_, double reusePercentage_);
 		ConstantReuseCommand(ConstantReuseCommand&& other) noexcept;
 		ConstantReuseCommand& operator=(ConstantReuseCommand other);
 		friend void swap(ConstantReuseCommand& lhs, ConstantReuseCommand& rhs) noexcept;
 		// Inherited:
-		void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) override;
+		void select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter) override;
 		AbstractCloneable* clone() const override;
 	};
 }

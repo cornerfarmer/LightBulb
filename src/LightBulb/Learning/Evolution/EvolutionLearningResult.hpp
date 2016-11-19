@@ -2,7 +2,7 @@
 #define _EVOLUTIONLEARNINGRESULT_H_
 
 #include "Learning/AbstractLearningResult.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {
@@ -12,9 +12,9 @@ namespace LightBulb
 	struct EvolutionLearningResult : public AbstractLearningResult
 	{
 		/**
-		 * \brief A vector of the best evolution objects that were produced by the evolution learning rule.
+		 * \brief A vector of the best individuals that were produced by the evolution learning rule.
 		 */
-		std::vector<std::unique_ptr<AbstractEvolutionObject>> bestObjects;
+		std::vector<std::unique_ptr<AbstractIndividual>> bestIndividuals;
 	};
 }
 

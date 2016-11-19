@@ -11,7 +11,7 @@
 using namespace LightBulb;
 
 Position::Position(FunctionSimulator& functionSimulator_)
-	: AbstractSimpleEvolutionObject(functionSimulator_)
+	: AbstractDefaultIndividual(functionSimulator_)
 {
 	functionSimulator = &functionSimulator_;
 	position.resize(2);

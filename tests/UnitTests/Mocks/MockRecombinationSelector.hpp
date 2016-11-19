@@ -10,10 +10,10 @@ class MockRecombinationSelector : public LightBulb::AbstractRecombinationSelecto
 {
 public:
 	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
-	MOCK_METHOD1(addObjectToRecombination, void (LightBulb::AbstractEvolutionObject&));
-	MOCK_METHOD2(selectForRecombination, void (int, const std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&));
-	MOCK_METHOD3(executeRecombinationSelection, void (int, const std::vector<std::pair<double, LightBulb::AbstractEvolutionObject*>>&, std::map<LightBulb::AbstractEvolutionObject*, int>&));
-	MOCK_METHOD0(getRecombinationSelection, std::vector<LightBulb::AbstractEvolutionObject*>& ());
+	MOCK_METHOD1(addIndividualToRecombination, void (LightBulb::AbstractIndividual&));
+	MOCK_METHOD2(selectForRecombination, void (int, const std::vector<std::pair<double, LightBulb::AbstractIndividual*>>&));
+	MOCK_METHOD3(executeRecombinationSelection, void (int, const std::vector<std::pair<double, LightBulb::AbstractIndividual*>>&, std::map<LightBulb::AbstractIndividual*, int>&));
+	MOCK_METHOD0(getRecombinationSelection, std::vector<LightBulb::AbstractIndividual*>& ());
 	MOCK_CONST_METHOD0(clone, AbstractCloneable* ());
 };
 

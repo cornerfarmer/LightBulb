@@ -6,7 +6,7 @@
 using namespace LightBulb;
 
 TicTacToeAI::TicTacToeAI(FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_)
-	: AbstractSimpleEvolutionObject(ticTacToe_)
+	: AbstractDefaultIndividual(ticTacToe_)
 {
 	currentGame = &ticTacToe_;
 	buildNeuralNetwork(options);

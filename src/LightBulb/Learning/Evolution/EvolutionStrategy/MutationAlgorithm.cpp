@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include <math.h>
@@ -15,9 +15,9 @@ namespace LightBulb
 		mutationStrengthMin = mutationStrengthMin_;
 	}
 
-	void MutationAlgorithm::execute(AbstractEvolutionObject& object1)
+	void MutationAlgorithm::execute(AbstractIndividual& individual1)
 	{
-		std::vector<double>& mutationStrength = object1.getMutationStrength();
+		std::vector<double>& mutationStrength = individual1.getMutationStrength();
 
 		// Go through all mutationStrength values
 		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
@@ -28,7 +28,7 @@ namespace LightBulb
 			*mutationStrengthValue = (*mutationStrengthValue < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		}
 
-		std::vector<Eigen::MatrixXd>& weights = object1.getNeuralNetwork().getNetworkTopology().getAllWeights();
+		std::vector<Eigen::MatrixXd>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
 		int mutationStrengthIndex = 0;
 		// Go through all edges
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)

@@ -49,7 +49,7 @@ namespace LightBulb
 		 * \brief The threshold which should be added to the mpc to get the new pruneThreshold.
 		 */
 		int pruningThresholdDistance;
-		double calcMPC(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore);
+		double calcMPC(const std::vector<std::pair<double, AbstractIndividual*>>& highscore);
 	public:
 		PhasedTopologyMutationAlgorithm() = default;
 		/**
@@ -64,8 +64,8 @@ namespace LightBulb
 		PhasedTopologyMutationAlgorithm& operator=(PhasedTopologyMutationAlgorithm other);
 		friend void swap(PhasedTopologyMutationAlgorithm& lhs, PhasedTopologyMutationAlgorithm& rhs) noexcept;
 		// Inherited:
-		void execute(AbstractEvolutionObject& object1) override;
-		void initialize(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore) override;
+		void execute(AbstractIndividual& individual1) override;
+		void initialize(const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
 		AbstractCloneable* clone() const override;
 	};

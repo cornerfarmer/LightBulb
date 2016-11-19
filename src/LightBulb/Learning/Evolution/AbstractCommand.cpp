@@ -1,22 +1,22 @@
 // Includes
 #include "Learning/Evolution/AbstractCommand.hpp"
-#include "AbstractEvolutionObject.hpp"
+#include "AbstractIndividual.hpp"
 #include <Logging/AbstractLogger.hpp>
 
 namespace LightBulb
 {
-	AbstractEvolutionObject* AbstractCommand::getUnusedObject(AbstractEvolutionObject& usedObject, std::vector<AbstractEvolutionObject*>& notUsedObjects, bool addToWorld) const
+	AbstractIndividual* AbstractCommand::getUnusedIndividual(AbstractIndividual& usedIndividual, std::vector<AbstractIndividual*>& notUsedIndividuals, bool addToWorld) const
 	{
-		if (notUsedObjects.empty())
+		if (notUsedIndividuals.empty())
 		{
-			return usedObject.clone(addToWorld);
+			return usedIndividual.clone(addToWorld);
 		}
 		else
 		{
-			AbstractEvolutionObject* notUsedObject = notUsedObjects.back();
-			notUsedObjects.pop_back();
-			notUsedObject->copyPropertiesFrom(usedObject);
-			return notUsedObject;
+			AbstractIndividual* notUsedIndividual = notUsedIndividuals.back();
+			notUsedIndividuals.pop_back();
+			notUsedIndividual->copyPropertiesFrom(usedIndividual);
+			return notUsedIndividual;
 		}
 	}
 

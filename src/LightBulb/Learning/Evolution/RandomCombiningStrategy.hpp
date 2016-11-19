@@ -19,17 +19,17 @@ namespace LightBulb
 		friend void serialize(Archive& archive, RandomCombiningStrategy& randomCombiningStrategy);
 	private:
 		/**
-		 * \brief Determines the number of competitions per object.
+		 * \brief Determines the number of competitions per individual.
 		 */
-		int amountOfCompetitionsPerObject;
+		int amountOfCompetitionsPerIndividual;
 		// Inherited:
-		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractEvolutionObject*>& firstObjects, std::vector<AbstractEvolutionObject*>& secondObjects) override;
+		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
 	public:
 		/**
 		 * \brief Creates a random combining strategy.
-		 * \param amountOfCompetitionsPerObject_ Determines the number of competitions per object.
+		 * \param amountOfCompetitionsPerIndividual_ Determines the number of competitions per individual.
 		 */
-		RandomCombiningStrategy(int amountOfCompetitionsPerObject_ = 0);
+		RandomCombiningStrategy(int amountOfCompetitionsPerIndividual_ = 0);
 		// Inherited:
 		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
 	};

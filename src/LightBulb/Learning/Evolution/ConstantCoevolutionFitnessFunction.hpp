@@ -11,14 +11,14 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Calculates the fitness values by simply sum up all victories of an object.
+	 * \brief Calculates the fitness values by simply sum up all victories of an individual.
 	 */
 	class ConstantCoevolutionFitnessFunction : public AbstractCoevolutionFitnessFunction
 	{
 	protected:
 	public:
 		// Inherited:
-		std::map<const AbstractEvolutionObject*, double>* execute(const CombiningStrategyResults& results) override;
+		std::map<const AbstractIndividual*, double>* execute(const CombiningStrategyResults& results) override;
 	};
 }
 

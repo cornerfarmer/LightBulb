@@ -13,17 +13,17 @@
 #include <cereal/types/vector.hpp>
 
 template <class Archive>
-void save(Archive& archive, Network const& object)
+void save(Archive& archive, Network const& individual)
 {
-	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionObject>(&object));
-	archive(cereal::make_nvp("positions", object.positions));
+	archive(cereal::base_class<LightBulb::AbstractDefaultIndividual>(&individual));
+	archive(cereal::make_nvp("positions", individual.positions));
 }
 
 template <class Archive>
-void load(Archive& archive, Network& object)
+void load(Archive& archive, Network& individual)
 {
-	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionObject>(&object));
-	archive(cereal::make_nvp("positions", object.positions));
+	archive(cereal::base_class<LightBulb::AbstractDefaultIndividual>(&individual));
+	archive(cereal::make_nvp("positions", individual.positions));
 }
 
 #include "IO/UsedArchives.hpp"

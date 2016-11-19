@@ -1,21 +1,21 @@
 // Includes
 #include "Learning/Evolution/ConstantMutationCommand.hpp"
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 
 namespace LightBulb
 {
-	ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int objectCount_)
+	ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, int individualCount_)
 		: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_)
 	{
 		mutationPercentage = 0;
-		objectCount = objectCount_;
+		individualCount = individualCount_;
 	}
 
 	ConstantMutationCommand::ConstantMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_, double mutationPercentage_)
 		: AbstractMutationCommand(mutationAlgorithm_, mutationSelector_)
 	{
-		objectCount = 0;
+		individualCount = 0;
 		mutationPercentage = mutationPercentage_;
 	}
 
@@ -35,18 +35,18 @@ namespace LightBulb
 	{
 		using std::swap;
 		swap(static_cast<AbstractMutationCommand&>(lhs), static_cast<AbstractMutationCommand&>(rhs));
-		swap(lhs.objectCount, rhs.objectCount);
+		swap(lhs.individualCount, rhs.individualCount);
 		swap(lhs.mutationPercentage, rhs.mutationPercentage);
 	}
 
-	void ConstantMutationCommand::select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter)
+	void ConstantMutationCommand::select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter)
 	{
-		int objectCount = this->objectCount;
-		// Calculate a temporary static object count if the percentage value is used
-		if (objectCount == 0)
-			objectCount = highscore.size() * mutationPercentage;
+		int individualCount = this->individualCount;
+		// Calculate a temporary static individual count if the percentage value is used
+		if (individualCount == 0)
+			individualCount = highscore.size() * mutationPercentage;
 
-		mutationSelector->executeMutationSelection(objectCount, highscore, counter);
+		mutationSelector->executeMutationSelection(individualCount, highscore, counter);
 
 		mutationAlgorithm->initialize(highscore);
 	}

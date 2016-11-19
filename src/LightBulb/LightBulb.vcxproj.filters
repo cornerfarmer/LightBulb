@@ -115,9 +115,6 @@
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionObject.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractSimpleEvolutionWorld.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -128,9 +125,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\FullHallOfFameAlgorithm.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\PerfectObjectFoundCondition.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\RandomCombiningStrategy.cpp">
@@ -164,9 +158,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\EvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
-    <ClCompile Include="Learning\Evolution\AbstractEvolutionObject.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorld.cpp">
@@ -408,6 +399,15 @@
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
     <ClCompile Include="Tools\AbstractCloneable.cpp" />
     <ClCompile Include="Teaching\TeachingInput.cpp" />
+    <ClCompile Include="Learning\Evolution\AbstractIndividual.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\AbstractDefaultIndividual.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\PerfectIndividualFoundCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -461,9 +461,6 @@
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionObject.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractSimpleEvolutionWorld.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
@@ -474,9 +471,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\FullHallOfFameAlgorithm.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\PerfectObjectFoundCondition.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\RandomCombiningStrategy.hpp">
@@ -512,9 +506,6 @@
     <ClInclude Include="Learning\Evolution\EvolutionLearningRule.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\AbstractEvolutionObject.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractEvolutionWorld.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
@@ -534,9 +525,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\StochasticUniversalSamplingSelector.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\TeachedEvolutionObject.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\TeachingEvolutionWorld.hpp">
@@ -614,9 +602,6 @@
     <ClInclude Include="IO\AbstractCoevolutionWorldIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\AbstractEvolutionObjectIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="IO\AbstractHallOfFameAlgorithmIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -634,9 +619,6 @@
     </ClInclude>
     <ClInclude Include="Event\AbstractObserver.hpp">
       <Filter>Quelldateien\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\AbstractSimpleEvolutionObjectIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractSimpleEvolutionWorldIO.hpp">
       <Filter>Quelldateien\IO</Filter>
@@ -711,7 +693,6 @@
     <ClInclude Include="Learning\Evolution\NeuronDecayFitnessFunction.hpp" />
     <ClInclude Include="Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
-    <ClInclude Include="IO\TeachedEvolutionObjectIO.hpp" />
     <ClInclude Include="IO\EnumSerialization.hpp" />
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementWorld.hpp" />
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
@@ -824,5 +805,24 @@
     <ClInclude Include="IO\AbstractEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="Teaching\TeachingInput.hpp" />
     <ClInclude Include="IO\AbstractRandomGeneratorIO.hpp" />
+    <ClInclude Include="Learning\Evolution\AbstractIndividual.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\AbstractDefaultIndividual.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractDefaultIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\TeachedIndividual.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\TeachedIndividualIO.hpp" />
+    <ClInclude Include="Learning\Evolution\PerfectIndividualFoundCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

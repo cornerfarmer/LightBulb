@@ -16,11 +16,11 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	class AbstractEvolutionWorld;
 	class EvolutionLearningRule;
 	/**
-	 * \brief A command which mutates a few of the given evolution objects.
+	 * \brief A command which mutates a few of the given individuals.
 	 */
 	class AbstractMutationCommand : public AbstractCommand
 	{
@@ -30,7 +30,7 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractMutationAlgorithm> mutationAlgorithm;
 		/**
-		 * \brief The algorithm which selects objects for mutation.
+		 * \brief The algorithm which selects individuals for mutation.
 		 */
 		std::unique_ptr<AbstractMutationSelector> mutationSelector;
 	public:
@@ -45,19 +45,19 @@ namespace LightBulb
 		AbstractMutationCommand(AbstractMutationAlgorithm* mutationAlgorithm_, AbstractMutationSelector* mutationSelector_);
 		friend void swap(AbstractMutationCommand& lhs, AbstractMutationCommand& rhs) noexcept;
 		/**
-		 * \brief Select objects for mutation.
+		 * \brief Select individuals for mutation.
 		 * \param highscore The current highscore.
-		 * \param counter A counter which stores how often an object is used in all commands.
+		 * \param counter A counter which stores how often an individual is used in all commands.
 		 */
-		virtual void select(const std::vector<std::pair<double, AbstractEvolutionObject*>>& highscore, std::map<AbstractEvolutionObject*, int>& counter) = 0;
+		virtual void select(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, std::map<AbstractIndividual*, int>& counter) = 0;
 		/**
 		 * \brief Executes the mutations.
-		 * \details The algorithm will take a few of the old objects, mutate them and insert them into the new object vector
-		 * \param newObjectVector A vector where the new/mutated objects will be stored in.
-		 * \param counter A counter of all left operations per object.
-		 * \param notUsedObjects A vector of objects which are not used anymore.
+		 * \details The algorithm will take a few of the old individuals, mutate them and insert them into the new individual vector
+		 * \param newIndividualVector A vector where the new/mutated individuals will be stored in.
+		 * \param counter A counter of all left operations per individual.
+		 * \param notUsedIndividuals A vector of individuals which are not used anymore.
 		 */
-		virtual void execute(std::vector<AbstractEvolutionObject*>& newObjectVector, std::map<AbstractEvolutionObject*, int>& counter, std::vector<AbstractEvolutionObject*>& notUsedObjects);
+		virtual void execute(std::vector<AbstractIndividual*>& newIndividualVector, std::map<AbstractIndividual*, int>& counter, std::vector<AbstractIndividual*>& notUsedIndividuals);
 		virtual void setZigguratGenerator(ZigguratGenerator& generator);
 		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;

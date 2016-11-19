@@ -6,18 +6,18 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class NetworkSimulator;
 
-class Network : public LightBulb::AbstractSimpleEvolutionObject
+class Network : public LightBulb::AbstractDefaultIndividual
 {
 	template <class Archive>
-	friend void save(Archive& archive, Network const& object);
+	friend void save(Archive& archive, Network const& individual);
 	template <class Archive>
-	friend void load(Archive& archive, Network& object);
+	friend void load(Archive& archive, Network& individual);
 protected:
 	std::vector<std::vector<float>> positions;
 	void getNNInput(std::vector<double>& input) override;

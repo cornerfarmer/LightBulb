@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef _TEACHEDEVOLUTIONOBJECT_H_
-#define _TEACHEDEVOLUTIONOBJECT_H_
+#ifndef _TEACHEDINDIVIDUAL_H_
+#define _TEACHEDINDIVIDUAL_H_
 
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractEvolutionObject.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb
@@ -16,14 +16,14 @@ namespace LightBulb
 	class TeachingEvolutionWorld;
 	class FeedForwardNetworkTopologyOptions;
 	/**
-	 * \brief A evolution object used in the TeachingEvolutionWorld.
+	 * \brief A individual used in the TeachingEvolutionWorld.
 	 */
-	class TeachedEvolutionObject : public AbstractEvolutionObject
+	class TeachedIndividual : public AbstractIndividual
 	{
 		template <class Archive>
-		friend void save(Archive& archive, TeachedEvolutionObject const& object);
+		friend void save(Archive& archive, TeachedIndividual const& individual);
 		template <class Archive>
-		friend void load(Archive& archive, TeachedEvolutionObject& object);
+		friend void load(Archive& archive, TeachedIndividual& individual);
 	protected:
 		/**
 		 * \brief The corresponding world.
@@ -47,12 +47,12 @@ namespace LightBulb
 		double currentWeightDecayError;
 	public:
 		/**
-		 * \brief Create a new evolution object in the given world and with a NN built with the given network options.
-		 * \param teachingEvolutionWorld_ The world which should contain the object.
+		 * \brief Create a new individual in the given world and with a NN built with the given network options.
+		 * \param teachingEvolutionWorld_ The world which should contain the individual.
 		 * \param options The feed forward network options.
 		 */
-		TeachedEvolutionObject(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
-		TeachedEvolutionObject() = default;
+		TeachedIndividual(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
+		TeachedIndividual() = default;
 		/**
 		 * \brief Returns the current total error.
 		 * \return The current total error.
@@ -72,10 +72,10 @@ namespace LightBulb
 		void doNNCalculation() override;
 		void resetNN() override;
 		AbstractNeuralNetwork& getNeuralNetwork() override;
-		AbstractEvolutionObject* clone(bool addToWorld = true) const override;
+		AbstractIndividual* clone(bool addToWorld = true) const override;
 	};
 }
 
-#include "IO/TeachedEvolutionObjectIO.hpp"
+#include "IO/TeachedIndividualIO.hpp"
 
 #endif

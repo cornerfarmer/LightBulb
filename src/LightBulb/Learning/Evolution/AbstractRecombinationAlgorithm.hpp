@@ -12,9 +12,9 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionObject;
+	class AbstractIndividual;
 	/**
-	 * \brief A algorithm that recombines two evolution objects to a new one.
+	 * \brief A algorithm that recombines two individuals to a new one.
 	 */
 	class AbstractRecombinationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
 	{
@@ -22,11 +22,11 @@ namespace LightBulb
 	public:
 		virtual ~AbstractRecombinationAlgorithm() {}
 		/**
-		 * \brief This method combines the two given objects to a new one which will be stored inside the first given object.
-		 * \param object1 The first object which will contain the result of the recombination.
-		 * \param object2 The second object.
+		 * \brief This method combines the two given individuals to a new one which will be stored inside the first given individual.
+		 * \param individual1 The first individual which will contain the result of the recombination.
+		 * \param individual2 The second individual.
 		 */
-		virtual void execute(AbstractEvolutionObject& object1, AbstractEvolutionObject& object2) = 0;
+		virtual void execute(AbstractIndividual& individual1, AbstractIndividual& individual2) = 0;
 	};
 }
 
