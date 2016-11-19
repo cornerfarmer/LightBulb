@@ -165,7 +165,7 @@ namespace LightBulb
 			{
 				totalReward += reward;
 
-				computeGradients(networkTopology, stepsSinceLastReward, reward);
+				computeGradients(stepsSinceLastReward, reward);
 				stepsSinceLastReward = 0;
 				rewardCounter++;
 			}
@@ -220,7 +220,7 @@ namespace LightBulb
 	{
 	}
 
-	void PolicyGradientLearningRule::computeGradients(AbstractNetworkTopology& networkTopology, int stepsSinceLastReward, double reward)
+	void PolicyGradientLearningRule::computeGradients(int stepsSinceLastReward, double reward)
 	{
 		Eigen::VectorXd rewards(stepsSinceLastReward);
 		rewards(stepsSinceLastReward - 1) = reward;
@@ -264,12 +264,5 @@ namespace LightBulb
 
 	}
 
-	void PolicyGradientLearningRule::computeGradientsForError(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector, std::vector<Eigen::VectorXd>& netInputs, std::vector<Eigen::VectorXd>& activations)
-	{
-		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> tmpBlock;
-		for (int j = 0; j < activations.size(); j++)
-			tmpBlock.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations[j].derived(), 0, activations[j].size()));
-		gradientCalculation->calcGradient(networkTopology, netInputs, tmpBlock, errorVector);
-	}
 
 }
