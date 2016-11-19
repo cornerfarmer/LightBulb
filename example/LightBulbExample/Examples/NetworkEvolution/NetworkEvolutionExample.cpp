@@ -50,7 +50,7 @@ AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 	return new EvolutionLearningRule(options);
 }
 
-AbstractEvolutionWorld* NetworkEvolutionExample::createWorld()
+AbstractEvolutionEnvironment* NetworkEvolutionExample::createEnvironment()
 {
 	std::vector<std::vector<float>> consumers(8, std::vector<float>(2));
 	consumers[0][0] = 1;

@@ -1,17 +1,17 @@
 // Includes
 #include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 //Library includes
 #include <algorithm>
 #include <iostream>
 
 namespace LightBulb
 {
-	void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
+	void SharedSamplingCombiningStrategy::combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
 	{
 		if (!otherCombiningStrategy)
-			throw std::invalid_argument("SharedSamplingCombiningStrategy only works with two worlds.");
+			throw std::invalid_argument("SharedSamplingCombiningStrategy only works with two environments.");
 
 		std::vector<AbstractIndividual*> sample;
 		std::map<AbstractIndividual*, std::map<int, int>> beat;
@@ -58,9 +58,9 @@ namespace LightBulb
 			{
 				if (*firstPlayer != *secondPlayer)
 				{
-					for (int r = 0; r < simulationWorld.getRoundCount(); r++)
+					for (int r = 0; r < simulationEnvironment.getRoundCount(); r++)
 					{
-						int result = simulationWorld.compareIndividuals(**firstPlayer, **secondPlayer, r);
+						int result = simulationEnvironment.compareIndividuals(**firstPlayer, **secondPlayer, r);
 						if (result != 0)
 							setResult(**firstPlayer, **secondPlayer, r, result > 0);
 					}
@@ -69,24 +69,24 @@ namespace LightBulb
 		}
 	}
 
-	void SharedSamplingCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld& newSecondWorld)
+	void SharedSamplingCombiningStrategy::setSecondEnvironment(AbstractCoevolutionEnvironment& newSecondEnvironment)
 	{
-		AbstractCombiningStrategy::setSecondWorld(newSecondWorld);
-		otherCombiningStrategy = &secondWorld->getCombiningStrategy();
+		AbstractCombiningStrategy::setSecondEnvironment(newSecondEnvironment);
+		otherCombiningStrategy = &secondEnvironment->getCombiningStrategy();
 	}
 
-	SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerIndividual_, AbstractCoevolutionWorld* secondWorld_)
-		:AbstractCombiningStrategy(secondWorld_)
+	SharedSamplingCombiningStrategy::SharedSamplingCombiningStrategy(int amountOfCompetitionsPerIndividual_, AbstractCoevolutionEnvironment* secondEnvironment_)
+		:AbstractCombiningStrategy(secondEnvironment_)
 	{
-		if (secondWorld)
-			otherCombiningStrategy = &secondWorld->getCombiningStrategy();
+		if (secondEnvironment)
+			otherCombiningStrategy = &secondEnvironment->getCombiningStrategy();
 		amountOfCompetitionsPerIndividual = amountOfCompetitionsPerIndividual_;
 	}
 
 
-	int SharedSamplingCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
+	int SharedSamplingCombiningStrategy::getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const
 	{
-		return amountOfCompetitionsPerIndividual * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
+		return amountOfCompetitionsPerIndividual * simulationEnvironment.getPopulationSize() * simulationEnvironment.getRoundCount();
 	}
 
 }

@@ -1,23 +1,23 @@
 // Includes
-#include "Learning/Evolution/TeachingEvolutionWorld.hpp"
+#include "Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 #include "Learning/Evolution/TeachedIndividual.hpp"
 //Library includes
 #include <iostream>
 
 namespace LightBulb
 {
-	AbstractIndividual* TeachingEvolutionWorld::createNewIndividual()
+	AbstractIndividual* TeachingEvolutionEnvironment::createNewIndividual()
 	{
 		return new TeachedIndividual(*this, networkOptions);
 	}
 
-	TeachingEvolutionWorld::TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_)
+	TeachingEvolutionEnvironment::TeachingEvolutionEnvironment(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_)
 	{
 		teacher = teacher_;
 		networkOptions = networkOptions_;
 	}
 
-	bool TeachingEvolutionWorld::doSimulationStep()
+	bool TeachingEvolutionEnvironment::doSimulationStep()
 	{
 		// Just recalculate the current total error values of all individuals
 		for (auto teachedIndividual = individuals.begin(); teachedIndividual != individuals.end(); teachedIndividual++)
@@ -36,22 +36,22 @@ namespace LightBulb
 		return false;
 	}
 
-	std::vector<std::string> TeachingEvolutionWorld::getDataSetLabels() const
+	std::vector<std::string> TeachingEvolutionEnvironment::getDataSetLabels() const
 	{
-		auto labels = AbstractEvolutionWorld::getDataSetLabels();
+		auto labels = AbstractEvolutionEnvironment::getDataSetLabels();
 		labels.push_back(DATASET_TEACHING_ERROR);
 		labels.push_back(DATASET_WEIGHTDECAY_ERROR);
 		return labels;
 	}
 
-	double TeachingEvolutionWorld::getScore(const AbstractIndividual& individual) const
+	double TeachingEvolutionEnvironment::getScore(const AbstractIndividual& individual) const
 	{
 		// Just return the total error of the individual (negate it, so the error 0 is the maximum)
 		return -static_cast<const TeachedIndividual&>(individual).getCurrentTotalError();
 	}
 
 
-	AbstractTeacher& TeachingEvolutionWorld::getTeacher() const
+	AbstractTeacher& TeachingEvolutionEnvironment::getTeacher() const
 	{
 		return *teacher;
 	}

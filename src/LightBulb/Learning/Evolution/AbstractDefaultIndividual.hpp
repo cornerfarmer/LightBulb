@@ -16,7 +16,7 @@ namespace LightBulb
 	// Forward declarations
 	class EvolutionLearningRule;
 	class RecurrentFeedForwardNetworkTopologyOptions;
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 	class AbstractNeuronDescriptionFactory;
 	struct FeedForwardNetworkTopologyOptions;
 	/**
@@ -50,9 +50,9 @@ namespace LightBulb
 		 */
 		std::unique_ptr<NeuralNetwork> neuralNetwork;
 		/**
-		 * \brief The world which contains this individual
+		 * \brief The environment which contains this individual
 		 */
-		AbstractEvolutionWorld* world;
+		AbstractEvolutionEnvironment* environment;
 		/**
 		 * \brief Returns the input for the neural network.
 		 * \param input A vector where the input should be stored in.
@@ -70,16 +70,16 @@ namespace LightBulb
 		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 	public:
 		/**
-		 * \brief Creates a new individual in the given world.
-		 * \param world The world which should contain the individual.
+		 * \brief Creates a new individual in the given environment.
+		 * \param environment The environment which should contain the individual.
 		 */
-		AbstractDefaultIndividual(AbstractEvolutionWorld& world);
+		AbstractDefaultIndividual(AbstractEvolutionEnvironment& environment);
 		AbstractDefaultIndividual() = default;
 		// Inherited:
 		void doNNCalculation() override;
 		AbstractNeuralNetwork& getNeuralNetwork() override;
 		void resetNN() override;
-		AbstractIndividual* clone(bool addToWorld = true) const override;
+		AbstractIndividual* clone(bool addToEnvironment = true) const override;
 	};
 }
 

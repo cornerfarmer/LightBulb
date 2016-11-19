@@ -23,7 +23,7 @@ namespace LightBulb
 		 */
 		int amountOfCompetitionsPerIndividual;
 		// Inherited:
-		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
+		void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
 	public:
 		/**
 		 * \brief Creates a random combining strategy.
@@ -31,7 +31,7 @@ namespace LightBulb
 		 */
 		RandomCombiningStrategy(int amountOfCompetitionsPerIndividual_ = 0);
 		// Inherited:
-		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
+		int getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const override;
 	};
 }
 

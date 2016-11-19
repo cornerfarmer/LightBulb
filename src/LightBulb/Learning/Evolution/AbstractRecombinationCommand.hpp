@@ -18,7 +18,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 	class EvolutionLearningRule;
 	/**
 	 * \brief A command which recombines a few of the given individuals.

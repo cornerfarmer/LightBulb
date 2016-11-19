@@ -99,21 +99,21 @@ FeedForwardNetworkTopologyOptions TicTacToeEvolutionExample::getNetworkOptions()
 	return options;
 }
 
-AbstractEvolutionWorld* TicTacToeEvolutionExample::createWorld()
+AbstractEvolutionEnvironment* TicTacToeEvolutionExample::createEnvironment()
 {
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	TicTacToe* ticTacToe1 = new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 
-	cs1->setSecondWorld(static_cast<TicTacToe&>(*parasiteWorld.get()));
-	cs2->setSecondWorld(*ticTacToe1);
+	cs1->setSecondEnvironment(static_cast<TicTacToe&>(*parasiteEnvironment.get()));
+	cs2->setSecondEnvironment(*ticTacToe1);
 
 	return ticTacToe1;
 
 }
 
-AbstractEvolutionWorld* TicTacToeEvolutionExample::createParasiteWorld()
+AbstractEvolutionEnvironment* TicTacToeEvolutionExample::createParasiteEnvironment()
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 

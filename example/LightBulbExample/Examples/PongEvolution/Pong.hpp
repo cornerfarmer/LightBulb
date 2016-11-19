@@ -10,11 +10,11 @@
 #include <mutex>
 
 // Include
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include "PongGame.hpp"
-#include "AbstractPongWorld.hpp"
+#include "AbstractPongEnvironment.hpp"
 
 // Forward declarations
 class PongAI;
@@ -22,17 +22,17 @@ class AbstractTile;
 
 #define DATASET_PONG_RATING "Pong rating"
 
-class Pong : public LightBulb::AbstractCoevolutionWorld, public AbstractPongWorld
+class Pong : public LightBulb::AbstractCoevolutionEnvironment, public AbstractPongEnvironment
 {
 private:
 protected:
 	LightBulb::AbstractIndividual* createNewIndividual() override;
-	void resetWorld() override;
+	void resetEnvironment() override;
 	int simulateGame(PongAI& ai1, PongAI& ai2);
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
 	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
 public:
-	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
+	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 	Pong() = default;
 	void getNNInput(std::vector<double>& sight);
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator& randomGenerator_) override;
@@ -44,6 +44,6 @@ public:
 	int getRoundCount() const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(Pong, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld, );
+USE_EXISTING_PARENT_SERIALIZATION(Pong, LightBulb::AbstractCoevolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, );
 
 #endif

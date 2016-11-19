@@ -11,7 +11,7 @@ class NatureExample : public LightBulb::AbstractEvolutionTrainingPlan
 private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
-	LightBulb::AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractEvolutionEnvironment* createEnvironment() override;
 public:
 	NatureExample();
 	std::string getOriginalName() const override;

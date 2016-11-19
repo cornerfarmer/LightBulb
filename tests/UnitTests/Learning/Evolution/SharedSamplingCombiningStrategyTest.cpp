@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
-#include <Mocks/MockCoevolutionWorld.hpp>
+#include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>
 
@@ -10,12 +10,12 @@ class SharedSamplingCombiningStrategyTest : public testing::Test {
 public:
 	SharedSamplingCombiningStrategy* sharedSamplingCombiningStrategy;
 
-	MockCoevolutionWorld world;
+	MockCoevolutionEnvironment environment;
 	MockIndividual individual1, individual2, individual3, individual4, individual5, individual6;
 
 	void SetUp()
 	{
-		EXPECT_CALL(world, getRoundCount()).WillRepeatedly(testing::Return(1));
+		EXPECT_CALL(environment, getRoundCount()).WillRepeatedly(testing::Return(1));
 		sharedSamplingCombiningStrategy = new SharedSamplingCombiningStrategy(2);
 	}
 
@@ -25,63 +25,63 @@ public:
 	}
 };
 
-TEST_F(SharedSamplingCombiningStrategyTest, executeTwoEmptyWorlds)
+TEST_F(SharedSamplingCombiningStrategyTest, executeTwoEmptyEnvironments)
 {
 	std::vector<AbstractIndividual*> individuals;
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 	
-	MockCoevolutionWorld parasiteWorld;
+	MockCoevolutionEnvironment parasiteEnvironment;
 	MockCombiningStrategy otherCombiningStrategy;
-	EXPECT_CALL(parasiteWorld, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(otherCombiningStrategy));
-	sharedSamplingCombiningStrategy->setSecondWorld(parasiteWorld);
+	EXPECT_CALL(parasiteEnvironment, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(otherCombiningStrategy));
+	sharedSamplingCombiningStrategy->setSecondEnvironment(parasiteEnvironment);
 
 	CombiningStrategyResults prevResults;
 	EXPECT_CALL(otherCombiningStrategy, getPrevResults()).WillRepeatedly(testing::ReturnRef(prevResults));
 
 	std::vector<AbstractIndividual*> parasiteIndividuals;
-	EXPECT_CALL(parasiteWorld, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
+	EXPECT_CALL(parasiteEnvironment, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
 
-	auto& result = sharedSamplingCombiningStrategy->execute(world);
+	auto& result = sharedSamplingCombiningStrategy->execute(environment);
 
 	EXPECT_EQ(0, result.size());
 }
 
-TEST_F(SharedSamplingCombiningStrategyTest, executeEmptyParasiteWorld)
+TEST_F(SharedSamplingCombiningStrategyTest, executeEmptyParasiteEnvironment)
 {
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2, &individual3 });
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 
-	MockCoevolutionWorld parasiteWorld;
+	MockCoevolutionEnvironment parasiteEnvironment;
 	MockCombiningStrategy otherCombiningStrategy;
-	EXPECT_CALL(parasiteWorld, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(otherCombiningStrategy));
-	sharedSamplingCombiningStrategy->setSecondWorld(parasiteWorld);
+	EXPECT_CALL(parasiteEnvironment, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(otherCombiningStrategy));
+	sharedSamplingCombiningStrategy->setSecondEnvironment(parasiteEnvironment);
 
 	CombiningStrategyResults prevResults;
 	EXPECT_CALL(otherCombiningStrategy, getPrevResults()).WillRepeatedly(testing::ReturnRef(prevResults));
 
 	std::vector<AbstractIndividual*> parasiteIndividuals;
-	EXPECT_CALL(parasiteWorld, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
+	EXPECT_CALL(parasiteEnvironment, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
 
-	auto& result = sharedSamplingCombiningStrategy->execute(world);
+	auto& result = sharedSamplingCombiningStrategy->execute(environment);
 
 	EXPECT_EQ(0, result.size());
 }
 
 
-TEST_F(SharedSamplingCombiningStrategyTest, executeSingleWorld)
+TEST_F(SharedSamplingCombiningStrategyTest, executeSingleEnvironment)
 {
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2, &individual3 });
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 	
-	EXPECT_THROW(sharedSamplingCombiningStrategy->execute(world), std::invalid_argument);
+	EXPECT_THROW(sharedSamplingCombiningStrategy->execute(environment), std::invalid_argument);
 }
 
-TEST_F(SharedSamplingCombiningStrategyTest, executeTwoWorlds)
+TEST_F(SharedSamplingCombiningStrategyTest, executeTwoEnvironments)
 {
-	MockCoevolutionWorld parasiteWorld;
+	MockCoevolutionEnvironment parasiteEnvironment;
 	MockCombiningStrategy otherCombiningStrategy;
-	EXPECT_CALL(parasiteWorld, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(otherCombiningStrategy));
-	sharedSamplingCombiningStrategy->setSecondWorld(parasiteWorld);
+	EXPECT_CALL(parasiteEnvironment, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(otherCombiningStrategy));
+	sharedSamplingCombiningStrategy->setSecondEnvironment(parasiteEnvironment);
 
 	CombiningStrategyResults prevResults;
 	prevResults[&individual4][&individual1][0] = true;
@@ -93,20 +93,20 @@ TEST_F(SharedSamplingCombiningStrategyTest, executeTwoWorlds)
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2, &individual3 });
 	std::vector<AbstractIndividual*> parasiteIndividuals({ &individual4 , &individual5, &individual6 });
 
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
-	EXPECT_CALL(parasiteWorld, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(parasiteEnvironment, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
 
 	{
 		testing::InSequence s;
-		EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(individual4), 0)).WillOnce(testing::Return(1));
-		EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(individual6), 0)).WillOnce(testing::Return(-1));
-		EXPECT_CALL(world, compareIndividuals(testing::Ref(individual2), testing::Ref(individual4), 0)).WillOnce(testing::Return(-1));
-		EXPECT_CALL(world, compareIndividuals(testing::Ref(individual2), testing::Ref(individual6), 0)).WillOnce(testing::Return(1));
-		EXPECT_CALL(world, compareIndividuals(testing::Ref(individual3), testing::Ref(individual4), 0)).WillOnce(testing::Return(1));
-		EXPECT_CALL(world, compareIndividuals(testing::Ref(individual3), testing::Ref(individual6), 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(individual4), 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(individual6), 0)).WillOnce(testing::Return(-1));
+		EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual2), testing::Ref(individual4), 0)).WillOnce(testing::Return(-1));
+		EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual2), testing::Ref(individual6), 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual3), testing::Ref(individual4), 0)).WillOnce(testing::Return(1));
+		EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual3), testing::Ref(individual6), 0)).WillOnce(testing::Return(1));
 	}
 	
-	auto& result = sharedSamplingCombiningStrategy->execute(world);
+	auto& result = sharedSamplingCombiningStrategy->execute(environment);
 
 	EXPECT_EQ(5, result.size());
 	EXPECT_EQ(2, result[&individual1].size());

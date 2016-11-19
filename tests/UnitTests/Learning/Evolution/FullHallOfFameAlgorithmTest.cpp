@@ -3,7 +3,7 @@
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/FullHallOfFameAlgorithm.hpp>
-#include <Mocks/MockCoevolutionWorld.hpp>
+#include <Mocks/MockCoevolutionEnvironment.hpp>
 
 using namespace LightBulb;
 
@@ -23,7 +23,7 @@ public:
 
 TEST_F(FullHallOfFameAlgorithmTest, execute)
 {
-	MockCoevolutionWorld world;
+	MockCoevolutionEnvironment environment;
 	CombiningStrategyResults results;
 
 	MockIndividual hallOfFameMember1, hallOfFameMember2;
@@ -35,14 +35,14 @@ TEST_F(FullHallOfFameAlgorithmTest, execute)
 
 	MockIndividual individual1, individual2;
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2 });
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
-	EXPECT_CALL(world, getRoundCount()).WillRepeatedly(testing::Return(1));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual2), testing::Ref(*hallOfFameMember1Clone), 0)).WillOnce(testing::Return(1));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(*hallOfFameMember1Clone), 0)).WillOnce(testing::Return(0));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual2), testing::Ref(*hallOfFameMember2Clone), 0)).WillOnce(testing::Return(1));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(*hallOfFameMember2Clone), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, getRoundCount()).WillRepeatedly(testing::Return(1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual2), testing::Ref(*hallOfFameMember1Clone), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(*hallOfFameMember1Clone), 0)).WillOnce(testing::Return(0));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual2), testing::Ref(*hallOfFameMember2Clone), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(*hallOfFameMember2Clone), 0)).WillOnce(testing::Return(1));
 
-	fullHallOfFameAlgorithm->execute(world, results);
+	fullHallOfFameAlgorithm->execute(environment, results);
 
 	EXPECT_EQ(false, results[&individual1][hallOfFameMember1Clone][0]);
 	EXPECT_EQ(true, results[hallOfFameMember1Clone][&individual1][0]);

@@ -5,7 +5,7 @@
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include "AbstractReinforcementWorld.hpp"
+#include "AbstractReinforcementEnvironment.hpp"
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 
@@ -39,21 +39,21 @@ namespace LightBulb
 	{
 		options->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(options->rmsPropOptions);
 		options->gradientDescentOptions.teacher = &teacher;
-		options->gradientDescentOptions.neuralNetwork = &getOptions().world->getNeuralNetwork();
+		options->gradientDescentOptions.neuralNetwork = &getOptions().environment->getNeuralNetwork();
 		options->gradientDescentOptions.logger = nullptr;
 		gradientDescent.reset(new GradientDescentLearningRule(options->gradientDescentOptions));
 
-		steadyNetwork.reset(getOptions().world->getNeuralNetwork().clone());
+		steadyNetwork.reset(getOptions().environment->getNeuralNetwork().clone());
 	}
 
 	void DQNLearningRule::initializeTry()
 	{
-		getOptions().world->setLearningState(*learningState.get());
-		getOptions().world->initializeForLearning();
-		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().world->getNeuralNetwork().getNetworkTopology());
+		getOptions().environment->setLearningState(*learningState.get());
+		getOptions().environment->initializeForLearning();
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		nextTransitionIndex = 0;
 		waitUntilLearningStarts = getOptions().replayStartSize;
-		getOptions().world->setEpsilon(getOptions().initialExploration);
+		getOptions().environment->setEpsilon(getOptions().initialExploration);
 		currentTotalReward = 0;
 	}
 	
@@ -63,15 +63,15 @@ namespace LightBulb
 		auto patternVector = networkTopology->getActivationsPerLayer(0);
 		transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
 
-		if (!getOptions().world->isTerminalState()) {
-			getOptions().world->getNNInput(transition.nextState);
+		if (!getOptions().environment->isTerminalState()) {
+			getOptions().environment->getNNInput(transition.nextState);
 		}
 
 		transition.reward = reward;
 
-		for (int i = 0; i < getOptions().world->getLastBooleanOutput().size(); i++)
+		for (int i = 0; i < getOptions().environment->getLastBooleanOutput().size(); i++)
 		{
-			if (getOptions().world->getLastBooleanOutput().at(i))
+			if (getOptions().environment->getLastBooleanOutput().at(i))
 			{
 				transition.action = i;
 				break;
@@ -116,7 +116,7 @@ namespace LightBulb
 			teacher.addTeachingLesson(new TeachingLessonLinearInput(transitions[r].state, input));
 		}
 
-		//auto gradient = checkGradient(&teacher, getOptions()->world->getNeuralNetwork()->getNetworkTopology());
+		//auto gradient = checkGradient(&teacher, getOptions()->environment->getNeuralNetwork()->getNetworkTopology());
 
 		std::unique_ptr<AbstractLearningResult> result(gradientDescent->start());
 		currentTotalError += result->quality;
@@ -149,22 +149,22 @@ namespace LightBulb
 		bool skipNextTotalReward = currentTotalReward == -1;
 		qAvgSum = 0;
 
-		AbstractNetworkTopology& networkTopology = getOptions().world->getNeuralNetwork().getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
 
 		for (int i = 0; i < getOptions().targetNetworkUpdateFrequency; i++) {
-			double reward = getOptions().world->doSimulationStep();
+			double reward = getOptions().environment->doSimulationStep();
 			currentTotalReward += reward;
 
 			if (nextIsStartingState)
 			{
-				std::vector<double> output(getOptions().world->getNeuralNetwork().getNetworkTopology().getOutputSize());
-				getOptions().world->getNeuralNetwork().getNetworkTopology().getOutput(output);
+				std::vector<double> output(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
+				getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutput(output);
 				totalQ += *max_element(output.begin(), output.end());
 				totalQValues++;
 				nextIsStartingState = false;
 			}
 
-			if (getOptions().world->isTerminalState()) {
+			if (getOptions().environment->isTerminalState()) {
 				nextIsStartingState = true;
 				if (!skipNextTotalReward) {
 					totalEpisodes++;
@@ -184,16 +184,16 @@ namespace LightBulb
 			{
 				doSupervisedLearning();
 
-				double e = getOptions().world->getEpsilon();
+				double e = getOptions().environment->getEpsilon();
 				if (e > getOptions().finalExploration)
-					getOptions().world->setEpsilon(e - (getOptions().initialExploration - getOptions().finalExploration) / getOptions().finalExplorationFrame);
+					getOptions().environment->setEpsilon(e - (getOptions().initialExploration - getOptions().finalExploration) / getOptions().finalExplorationFrame);
 			}
 		}
 
 		if (totalQValues > 0)
 			learningState->addData(DATA_SET_Q_VALUE, totalQ / totalQValues);
 
-		learningState->addData(DATA_SET_EPSILON, getOptions().world->getEpsilon());
+		learningState->addData(DATA_SET_EPSILON, getOptions().environment->getEpsilon());
 		learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions().targetNetworkUpdateFrequency);
 
 		if (totalEpisodes > 0)
@@ -203,12 +203,12 @@ namespace LightBulb
 
 		learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions().targetNetworkUpdateFrequency);
 
-		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().world->getNeuralNetwork().getNetworkTopology());
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 
-		double e = getOptions().world->getEpsilon();
-		getOptions().world->setEpsilon(0);
-		getOptions().world->rateKI();
-		getOptions().world->setEpsilon(e);
+		double e = getOptions().environment->getEpsilon();
+		getOptions().environment->setEpsilon(0);
+		getOptions().environment->rateKI();
+		getOptions().environment->setEpsilon(e);
 
 		return true;
 	}

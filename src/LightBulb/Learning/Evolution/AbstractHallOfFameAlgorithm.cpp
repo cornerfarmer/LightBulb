@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
 #include <iostream>
 
@@ -8,16 +8,16 @@ namespace LightBulb
 {
 	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractIndividual& individual, int memberID, int round)
 	{
-		bool firstPlayerHasWon = currentWorld->compareIndividuals(individual, *members[memberID].get(), round) > 0;
+		bool firstPlayerHasWon = currentEnvironment->compareIndividuals(individual, *members[memberID].get(), round) > 0;
 		(*currentResults)[&individual][members[memberID].get()][round] = firstPlayerHasWon;
 		(*currentResults)[members[memberID].get()][&individual][round] = !firstPlayerHasWon;
 	}
 
-	void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionWorld& world, CombiningStrategyResults& prevResults)
+	void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionEnvironment& environment, CombiningStrategyResults& prevResults)
 	{
 		currentResults = &prevResults;
-		currentWorld = &world;
-		evaluateIndividuals(world.getIndividuals());
+		currentEnvironment = &environment;
+		evaluateIndividuals(environment.getIndividuals());
 	}
 
 	void AbstractHallOfFameAlgorithm::addMember(AbstractIndividual* newMember)

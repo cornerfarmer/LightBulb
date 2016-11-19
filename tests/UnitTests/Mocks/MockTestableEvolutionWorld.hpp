@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef _MOCKTESTABLEEVOLUTIONWORLD_H_
-#define _MOCKTESTABLEEVOLUTIONWORLD_H_
+#ifndef _MOCKTESTABLEEVOLUTIONENVIRONMENT_H_
+#define _MOCKTESTABLEEVOLUTIONENVIRONMENT_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractEvolutionWorld.hpp>
+#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
-class MockTestableEvolutionWorld : public LightBulb::AbstractEvolutionWorld
+class MockTestableEvolutionEnvironment : public LightBulb::AbstractEvolutionEnvironment
 {
 public:
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));

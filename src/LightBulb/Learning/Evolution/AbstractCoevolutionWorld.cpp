@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 //Library includes
@@ -7,9 +7,9 @@
 
 namespace LightBulb
 {
-	AbstractCoevolutionWorld::AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+	AbstractCoevolutionEnvironment::AbstractCoevolutionEnvironment(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
 	{
-		parasiteWorld = isParasiteWorld_;
+		parasiteEnvironment = isParasiteEnvironment_;
 		combiningStrategy.reset(combiningStrategy_);
 		fitnessFunction.reset(fitnessFunction_);
 		hallOfFameToAddAlgorithm.reset(hallOfFameToAddAlgorithm_);
@@ -17,12 +17,12 @@ namespace LightBulb
 		comparisons = 0;
 	}
 
-	bool AbstractCoevolutionWorld::doSimulationStep()
+	bool AbstractCoevolutionEnvironment::doSimulationStep()
 	{
 		CombiningStrategyResults& results = combiningStrategy->execute(*this);
 
-		if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results.size() > 0)
-			learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, static_cast<double>(combiningStrategy->getFirstPlayerWins()) / combiningStrategy->getTotalMatches(*this));
+		if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results.size() > 0)
+			learningState->addData(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, static_cast<double>(combiningStrategy->getFirstPlayerWins()) / combiningStrategy->getTotalMatches(*this));
 
 		if (hallOfFameToChallengeAlgorithm)
 			hallOfFameToChallengeAlgorithm->execute(*this, results);
@@ -41,23 +41,23 @@ namespace LightBulb
 		return false;
 	}
 
-	double AbstractCoevolutionWorld::getScore(const AbstractIndividual& individual) const
+	double AbstractCoevolutionEnvironment::getScore(const AbstractIndividual& individual) const
 	{
 		return (*fitnessValues)[&individual];
 	}
 
-	int AbstractCoevolutionWorld::compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)
+	int AbstractCoevolutionEnvironment::compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)
 	{
 		comparisons++;
 		return doCompare(individual1, individual2, round);
 	}
 
-	AbstractCombiningStrategy& AbstractCoevolutionWorld::getCombiningStrategy() const
+	AbstractCombiningStrategy& AbstractCoevolutionEnvironment::getCombiningStrategy() const
 	{
 		return *combiningStrategy.get();
 	}
 
-	void AbstractCoevolutionWorld::setLogger(AbstractLogger& logger_)
+	void AbstractCoevolutionEnvironment::setLogger(AbstractLogger& logger_)
 	{
 		AbstractLoggable::setLogger(logger_);
 		if (hallOfFameToChallengeAlgorithm)
@@ -66,26 +66,26 @@ namespace LightBulb
 			hallOfFameToAddAlgorithm->setLogger(logger_);
 	}
 
-	std::vector<std::string> AbstractCoevolutionWorld::getDataSetLabels() const
+	std::vector<std::string> AbstractCoevolutionEnvironment::getDataSetLabels() const
 	{
-		auto labels = AbstractEvolutionWorld::getDataSetLabels();
-		labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS);
-		if (!parasiteWorld)
+		auto labels = AbstractEvolutionEnvironment::getDataSetLabels();
+		labels.push_back(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS);
+		if (!parasiteEnvironment)
 			labels.push_back(DATASET_COMP);
 		return labels;
 	}
 
-	bool AbstractCoevolutionWorld::isParasiteWorld() const
+	bool AbstractCoevolutionEnvironment::isParasiteEnvironment() const
 	{
-		return parasiteWorld;
+		return parasiteEnvironment;
 	}
 
-	int AbstractCoevolutionWorld::getRoundCount() const
+	int AbstractCoevolutionEnvironment::getRoundCount() const
 	{
 		return 1;
 	}
 
-	void AbstractCoevolutionWorld::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+	void AbstractCoevolutionEnvironment::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		combiningStrategy->setRandomGenerator(randomGenerator_);

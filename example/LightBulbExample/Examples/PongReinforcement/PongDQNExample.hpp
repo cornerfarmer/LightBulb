@@ -6,14 +6,14 @@
 
 #include "TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
 
-class PongReinforcementWorld;
+class PongReinforcementEnvironment;
 
 class PongDQNExample : public LightBulb::AbstractReinforcementTrainingPlan
 {
 private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
-	LightBulb::AbstractReinforcementWorld* createWorld() override;
+	LightBulb::AbstractReinforcementEnvironment* createEnvironment() override;
 public:
 	PongDQNExample();
 	std::string getOriginalName() const override;

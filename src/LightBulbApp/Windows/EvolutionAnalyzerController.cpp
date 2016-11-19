@@ -56,7 +56,7 @@ namespace LightBulb
 
 	void EvolutionAnalyzerController::evolutionStepCompleted(EvolutionLearningRule& evolutionLearningRule)
 	{
-		auto highscore = evolutionLearningRule.getWorld().getHighscoreList();
+		auto highscore = evolutionLearningRule.getEnvironment().getHighscoreList();
 		currentState.resize(highscore.size());
 
 		int i = 0;

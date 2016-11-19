@@ -5,7 +5,7 @@
 
 // Includes
 #include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include <Learning/Evolution/AbstractEvolutionWorld.hpp>
+#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 // Library includes
 
@@ -25,14 +25,14 @@ namespace LightBulb
 		friend void load(Archive& archive, AbstractEvolutionTrainingPlan& trainingPlan);
 	protected:
 		/**
-		 * \brief The evolution world which is used.
+		 * \brief The evolution environment which is used.
 		 */
-		std::unique_ptr<AbstractEvolutionWorld> world;
+		std::unique_ptr<AbstractEvolutionEnvironment> environment;
 		/**
-		 * \brief Creates the evolution world.
-		 * \return The new world.
+		 * \brief Creates the evolution environment.
+		 * \return The new environment.
 		 */
-		virtual AbstractEvolutionWorld* createWorld() = 0;
+		virtual AbstractEvolutionEnvironment* createEnvironment() = 0;
 		/**
 		* \brief Fills all learning rule options which are the same for all evolution learning rule training plans.
 		* \param options The options to fill.
@@ -44,10 +44,10 @@ namespace LightBulb
 		 */
 		AbstractEvolutionTrainingPlan();
 		/**
-		 * \brief Returns the evolution world.
-		 * \return The world.
+		 * \brief Returns the evolution environment.
+		 * \return The environment.
 		 */
-		AbstractEvolutionWorld& getWorld();
+		AbstractEvolutionEnvironment& getEnvironment();
 		// Inherited:
 		void initializeStart() override;
 	};

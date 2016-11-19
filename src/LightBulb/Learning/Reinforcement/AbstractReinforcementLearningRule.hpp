@@ -11,22 +11,22 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractReinforcementWorld;
+	class AbstractReinforcementEnvironment;
 	/**
 	* \brief All general options which are the same for all reinforcement learning rules.
 	*/
 	struct AbstractReinforcementLearningRuleOptions : public AbstractLearningRuleOptions
 	{
 		/**
-		* \brief The world which is used by this learning rule.
+		* \brief The environment which is used by this learning rule.
 		*/
-		AbstractReinforcementWorld* world;
+		AbstractReinforcementEnvironment* environment;
 		/**
 		* \brief Creates the options and fills them with default options.
 		*/
 		AbstractReinforcementLearningRuleOptions()
 		{
-			world = nullptr;
+			environment = nullptr;
 			maxIterationsPerTry = 10000000000;
 		}
 	};

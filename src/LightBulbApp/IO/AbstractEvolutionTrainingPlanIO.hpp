@@ -5,7 +5,7 @@
 
 // Includes
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
@@ -23,7 +23,7 @@ namespace LightBulb
 	template <class Archive>
 	void save(Archive& archive, AbstractEvolutionTrainingPlan const& trainingPlan)
 	{
-		archive(cereal::make_nvp("world", trainingPlan.world));
+		archive(cereal::make_nvp("environment", trainingPlan.environment));
 		archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 	}
 
@@ -36,13 +36,13 @@ namespace LightBulb
 	template <class Archive>
 	void load(Archive& archive, AbstractEvolutionTrainingPlan& trainingPlan)
 	{
-		IOStorage<AbstractEvolutionWorld>::push(trainingPlan.createWorld());
-		archive(cereal::make_nvp("world", trainingPlan.world));
-		trainingPlan.world.reset(IOStorage<AbstractEvolutionWorld>::pop());
+		IOStorage<AbstractEvolutionEnvironment>::push(trainingPlan.createEnvironment());
+		archive(cereal::make_nvp("environment", trainingPlan.environment));
+		trainingPlan.environment.reset(IOStorage<AbstractEvolutionEnvironment>::pop());
 
 		archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 
-		trainingPlan.world->setLearningState(trainingPlan.getLearningState());
+		trainingPlan.environment->setLearningState(trainingPlan.getLearningState());
 	}
 }
 

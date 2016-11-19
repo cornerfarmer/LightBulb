@@ -22,7 +22,7 @@ namespace LightBulb
 	template <class Archive>
 	void save(Archive& archive, AbstractReinforcementTrainingPlan const& trainingPlan)
 	{
-		archive(cereal::make_nvp("world", trainingPlan.world));
+		archive(cereal::make_nvp("environment", trainingPlan.environment));
 		archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 	}
 
@@ -35,13 +35,13 @@ namespace LightBulb
 	template <class Archive>
 	void load(Archive& archive, AbstractReinforcementTrainingPlan& trainingPlan)
 	{
-		IOStorage<AbstractReinforcementWorld>::push(trainingPlan.createWorld());
-		archive(cereal::make_nvp("world", trainingPlan.world));
-		trainingPlan.world.reset(IOStorage<AbstractReinforcementWorld>::pop());
+		IOStorage<AbstractReinforcementEnvironment>::push(trainingPlan.createEnvironment());
+		archive(cereal::make_nvp("environment", trainingPlan.environment));
+		trainingPlan.environment.reset(IOStorage<AbstractReinforcementEnvironment>::pop());
 
 		archive(cereal::base_class<AbstractLearningRuleTrainingPlan>(&trainingPlan));
 
-		trainingPlan.world->setLearningState(trainingPlan.getLearningState());
+		trainingPlan.environment->setLearningState(trainingPlan.getLearningState());
 	}
 }
 

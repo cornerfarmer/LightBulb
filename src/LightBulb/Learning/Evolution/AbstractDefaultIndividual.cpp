@@ -3,7 +3,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "AbstractEvolutionWorld.hpp"
+#include "AbstractEvolutionEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -15,7 +15,7 @@ namespace LightBulb
 		// Create a neural network from the network topolgy
 		neuralNetwork.reset(new NeuralNetwork(networkTopology));
 		// Randomize all weights
-		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(world->getRandomGenerator());
+		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(environment->getRandomGenerator());
 
 		// Initialize the mutation strength vector
 		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());
@@ -28,9 +28,9 @@ namespace LightBulb
 		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
 	}
 
-	AbstractDefaultIndividual::AbstractDefaultIndividual(AbstractEvolutionWorld& world_)
+	AbstractDefaultIndividual::AbstractDefaultIndividual(AbstractEvolutionEnvironment& environment_)
 	{
-		world = &world_;
+		environment = &environment_;
 	}
 
 	AbstractNeuralNetwork& AbstractDefaultIndividual::getNeuralNetwork()
@@ -58,10 +58,10 @@ namespace LightBulb
 		neuralNetwork->getNetworkTopology().resetActivation();
 	}
 
-	AbstractIndividual* AbstractDefaultIndividual::clone(bool addToWorld) const
+	AbstractIndividual* AbstractDefaultIndividual::clone(bool addToEnvironment) const
 	{
 		// Create a new individual
-		AbstractIndividual* newIndividual = world->addNewIndividual(addToWorld);
+		AbstractIndividual* newIndividual = environment->addNewIndividual(addToEnvironment);
 		// Copy all weights
 		newIndividual->getNeuralNetwork().getNetworkTopology().copyWeightsFrom(neuralNetwork->getNetworkTopology());
 		// Copy all mutation strengths

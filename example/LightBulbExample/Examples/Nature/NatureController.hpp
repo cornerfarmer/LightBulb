@@ -14,7 +14,7 @@ class NatureController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<NatureWindow> window;
-	Nature* world;
+	Nature* environment;
 	std::vector<std::vector<const wxBrush*>> tiles;
 	bool renderingInProgress;
 protected:

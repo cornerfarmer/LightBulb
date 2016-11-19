@@ -7,7 +7,7 @@
 #include <vector>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "Examples/Nature/AbstractTile.hpp"
 
 // Forward declarations
@@ -19,7 +19,7 @@ enum NatureEvents
 	EVT_FIELD_CHANGED
 };
 
-class Nature : public LightBulb::AbstractSimpleEvolutionWorld, public LightBulb::Observable<NatureEvents, Nature>
+class Nature : public LightBulb::AbstractSimpleEvolutionEnvironment, public LightBulb::Observable<NatureEvents, Nature>
 {
 protected:
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>> tiles;
@@ -30,7 +30,7 @@ protected:
 	int missingPlants;	
 	bool displayMode;
 	LightBulb::AbstractIndividual* createNewIndividual() override;
-	void resetWorld() override;
+	void resetEnvironment() override;
 public:
 	Nature();
 	bool doSimulationStep() override;

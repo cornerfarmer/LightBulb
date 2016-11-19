@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _ABSTRACTREINFORCEMENTWORLD_H_
-#define _ABSTRACTREINFORCEMENTWORLD_H_
+#ifndef _ABSTRACTREINFORCEMENTENVIRONMENT_H_
+#define _ABSTRACTREINFORCEMENTENVIRONMENT_H_
 
 // Library Includes
 #include <vector>
@@ -20,10 +20,10 @@ namespace LightBulb
 	/**
 	 * \brief Describes the environment where the reinforcement learning process takes places.
 	 */
-	class AbstractReinforcementWorld : public virtual AbstractRandomGeneratorUser
+	class AbstractReinforcementEnvironment : public virtual AbstractRandomGeneratorUser
 	{
 		template <class Archive>
-		friend void serialize(Archive& archive, AbstractReinforcementWorld& world);
+		friend void serialize(Archive& archive, AbstractReinforcementEnvironment& environment);
 	private:
 		/**
 		 * \brief Contains the last output of the neural network.
@@ -38,7 +38,7 @@ namespace LightBulb
 		*/
 		std::vector<double> lastInput;
 		/**
-		 * \brief True, if the world should act greedly when picking actions.
+		 * \brief True, if the environment should act greedly when picking actions.
 		 */
 		bool epsilonGreedly = false;
 		/**
@@ -82,22 +82,22 @@ namespace LightBulb
 		 * \brief Executes the neural network calculation.
 		 */
 		void doNNCalculation();
-		virtual ~AbstractReinforcementWorld() {}
+		virtual ~AbstractReinforcementEnvironment() {}
 		/**
-		 * \brief Creates the reinforcement world.
+		 * \brief Creates the reinforcement environment.
 		 * \param options The options which describe the network. 
-		 * \param epsilonGreedly True, if the world should act greedly when picking actions.
+		 * \param epsilonGreedly True, if the environment should act greedly when picking actions.
 		 * \param epsilon The epsilon value when acting epsilon greedly.
 		 */
-		AbstractReinforcementWorld(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
-		AbstractReinforcementWorld() = default;
+		AbstractReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
+		AbstractReinforcementEnvironment() = default;
 		/**
 		* \brief Executes one simulation step.
 		* \return Returns the reward gained after that step.
 		*/
 		virtual double doSimulationStep() = 0;
 		/**
-		* \brief Initializes the world before the learning starts.
+		* \brief Initializes the environment before the learning starts.
 		*/
 		virtual void initializeForLearning();
 		/**
@@ -136,8 +136,8 @@ namespace LightBulb
 		 */
 		std::vector<bool>& getLastBooleanOutput();
 		/**
-		 * \brief Returns if the world is in a terminal state.
-		 * \return True, if the world is in a terminal state.
+		 * \brief Returns if the environment is in a terminal state.
+		 * \return True, if the environment is in a terminal state.
 		 */
 		virtual bool isTerminalState() = 0;
 		/**
@@ -148,6 +148,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractReinforcementWorldIO.hpp"
+#include "IO/AbstractReinforcementEnvironmentIO.hpp"
 
 #endif

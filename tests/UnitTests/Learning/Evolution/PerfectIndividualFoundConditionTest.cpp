@@ -2,7 +2,7 @@
 #include "Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockIndividual.hpp>
 #include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
-#include <Mocks/MockCoevolutionWorld.hpp>
+#include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>
 
@@ -11,7 +11,7 @@ using namespace LightBulb;
 class PerfectIndividualFoundConditionTest : public testing::Test {
 public:
 	PerfectIndividualFoundCondition* perfectIndividualFoundCondition;
-	MockCoevolutionWorld* world;
+	MockCoevolutionEnvironment* environment;
 	const MockEvolutionLearningRule* learningRule;
 	MockCombiningStrategy combiningStrategy;
 	MockIndividual individual1, individual2, individual3;
@@ -22,12 +22,12 @@ public:
 		perfectIndividualFoundCondition = new PerfectIndividualFoundCondition(2);
 		AbstractEvolutionLearningRuleOptions options;
 		learningRule = new MockEvolutionLearningRule(options);
-		world = new MockCoevolutionWorld();
+		environment = new MockCoevolutionEnvironment();
 		highscore.push_back(std::make_pair(0, static_cast<AbstractIndividual*>(nullptr)));
 
-		EXPECT_CALL(*learningRule, getWorld()).WillRepeatedly(testing::ReturnRef(*world));
-		EXPECT_CALL(*world, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(combiningStrategy));
-		EXPECT_CALL(*world, isParasiteWorld()).WillRepeatedly(testing::Return(true));
+		EXPECT_CALL(*learningRule, getEnvironment()).WillRepeatedly(testing::ReturnRef(*environment));
+		EXPECT_CALL(*environment, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(combiningStrategy));
+		EXPECT_CALL(*environment, isParasiteEnvironment()).WillRepeatedly(testing::Return(true));
 		
 		results[&individual1][&individual2][0] = true;
 		results[&individual2][&individual1][0] = false;

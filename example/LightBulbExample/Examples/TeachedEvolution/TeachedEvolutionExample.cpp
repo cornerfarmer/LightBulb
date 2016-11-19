@@ -14,7 +14,7 @@
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
-#include <Learning/Evolution/TeachingEvolutionWorld.hpp>
+#include <Learning/Evolution/TeachingEvolutionEnvironment.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
@@ -45,7 +45,7 @@ AbstractLearningRule* TeachedEvolutionExample::createLearningRate()
 	return new EvolutionLearningRule(options);
 }
 
-AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
+AbstractEvolutionEnvironment* TeachedEvolutionExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions networkTopologyOptions;
 	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
@@ -70,7 +70,7 @@ AbstractEvolutionWorld* TeachedEvolutionExample::createWorld()
 	}
 
 
-	return new TeachingEvolutionWorld(teacher, networkTopologyOptions);
+	return new TeachingEvolutionEnvironment(teacher, networkTopologyOptions);
 }
 
 std::string TeachedEvolutionExample::getOriginalName() const

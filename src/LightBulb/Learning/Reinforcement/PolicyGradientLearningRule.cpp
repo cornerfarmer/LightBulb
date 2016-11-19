@@ -10,7 +10,7 @@
 #include <string>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include "AbstractReinforcementWorld.hpp"
+#include "AbstractReinforcementEnvironment.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
@@ -58,11 +58,11 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
 	{
-		gradientDescentAlgorithm->initialize(getOptions().world->getNeuralNetwork().getNetworkTopology());
+		gradientDescentAlgorithm->initialize(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		stateRecord.resize(1000);
 		gradientRecord.resize(1000);
 
-		lastOutput.resize(getOptions().world->getNeuralNetwork().getNetworkTopology().getOutputSize());
+		lastOutput.resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
 		if (getOptions().valueFunctionAsBase)
 		{
 			FeedForwardNetworkTopologyOptions options;
@@ -104,7 +104,7 @@ namespace LightBulb
 		errorVector.resize(lastOutput.size());
 		for (int i = 0; i < lastOutput.size(); i++)
 		{
-			errorVector(i) = getOptions().world->getLastBooleanOutput().at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->world->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
+			errorVector(i) = getOptions().environment->getLastBooleanOutput().at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 		}
 		errorSum += errorVector.cwiseAbs().sum();
 		errorSteps++;
@@ -112,9 +112,9 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initializeTry()
 	{
-		//resilientLearningRateHelper->initialize(*getOptions()->world->getNeuralNetwork());
-		getOptions().world->setLearningState(*learningState.get());
-		getOptions().world->initializeForLearning();
+		//resilientLearningRateHelper->initialize(*getOptions()->environment->getNeuralNetwork());
+		getOptions().environment->setLearningState(*learningState.get());
+		getOptions().environment->initializeForLearning();
 
 		stepsSinceLastReward = 0;
 
@@ -148,20 +148,20 @@ namespace LightBulb
 		valueErrorSum = 0;
 		errorSteps = 0;
 		valueErrorSteps = 0;
-		AbstractNetworkTopology& networkTopology = getOptions().world->getNeuralNetwork().getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
 		gradient.clear();
 		if (getOptions().valueFunctionAsBase)
 			valueFunctionGradientCalculation->initGradient(valueFunctionNetwork->getNetworkTopology());
 
 		while (rewardCounter < getOptions().episodeSize)
 		{
-			double reward = getOptions().world->doSimulationStep();
+			double reward = getOptions().environment->doSimulationStep();
 
 			recordStep(networkTopology);
 
 			stepsSinceLastReward++;
 
-			if (getOptions().world->isTerminalState())
+			if (getOptions().environment->isTerminalState())
 			{
 				totalReward += reward;
 
@@ -184,9 +184,9 @@ namespace LightBulb
 
 		if (learningState->iterations % getOptions().ratingInterval == 0)
 		{
-			getOptions().world->setStochasticActionDecision(false);
-			getOptions().world->rateKI();
-			getOptions().world->setStochasticActionDecision(true);
+			getOptions().environment->setStochasticActionDecision(false);
+			getOptions().environment->rateKI();
+			getOptions().environment->setStochasticActionDecision(true);
 		}
 
 		return true;

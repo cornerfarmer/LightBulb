@@ -19,10 +19,10 @@ namespace LightBulb
 	{
 	private:
 		// Inherited:
-		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
+		void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
 	public:
 		// Inherited:
-		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
+		int getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const override;
 	};
 }
 

@@ -37,7 +37,7 @@ AbstractLearningRule* NatureExample::createLearningRate()
 	return new EvolutionLearningRule(options);
 }
 
-AbstractEvolutionWorld* NatureExample::createWorld()
+AbstractEvolutionEnvironment* NatureExample::createEnvironment()
 {
 	return new Nature();
 }

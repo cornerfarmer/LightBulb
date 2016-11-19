@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractCreationCommand.hpp"
 #include "Learning/Evolution/AbstractSelectionCommand.hpp"
 #include "Learning/Evolution/AbstractFitnessFunction.hpp"
@@ -26,14 +26,14 @@ namespace LightBulb
 	{
 		EvolutionLearningResult* learningResult = new EvolutionLearningResult();
 		fillDefaultResults(*learningResult);
-		const Highscore& highscore = getOptions().world->getHighscoreList();
+		const Highscore& highscore = getOptions().environment->getHighscoreList();
 		learningResult->quality = highscore.front().first;
 		learningResult->qualityLabel = "Best fitness";
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			learningResult->bestIndividuals.push_back(std::unique_ptr<AbstractIndividual>(entry->second));
 		}
-		getOptions().world->clearPopulation();
+		getOptions().environment->clearPopulation();
 
 		return learningResult;
 	}
@@ -60,9 +60,9 @@ namespace LightBulb
 
 	void EvolutionLearningRule::setHelperToUsedObjects()
 	{
-		getOptions().world->setLogger(*options->logger);
-		getOptions().world->setLearningState(*learningState.get());
-		getOptions().world->setRandomGenerator(*randomGenerator.get());
+		getOptions().environment->setLogger(*options->logger);
+		getOptions().environment->setLearningState(*learningState.get());
+		getOptions().environment->setRandomGenerator(*randomGenerator.get());
 
 		for (auto reuseCommand = getOptions().reuseCommands.begin(); reuseCommand != getOptions().reuseCommands.end(); reuseCommand++)
 		{
@@ -114,8 +114,8 @@ namespace LightBulb
 	void EvolutionLearningRule::initializeTry()
 	{
 		// Reset all
-		getOptions().world->clearPopulation();
-		getOptions().world->initializeForLearning();
+		getOptions().environment->clearPopulation();
+		getOptions().environment->initializeForLearning();
 	}
 
 	std::string EvolutionLearningRule::getName()
@@ -129,8 +129,8 @@ namespace LightBulb
 		labels.push_back(getOptions().dataSetsPrefix + DATA_SET_FITNESS);
 		labels.push_back(getOptions().dataSetsPrefix + DATA_AVG_NEURON_COUNT);
 		labels.push_back(getOptions().dataSetsPrefix + DATA_BEST_NEURON_COUNT);
-		std::vector<std::string> worldLabels = getOptions().world->getDataSetLabels();
-		labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
+		std::vector<std::string> environmentLabels = getOptions().environment->getDataSetLabels();
+		labels.insert(labels.end(), environmentLabels.begin(), environmentLabels.end());
 		return labels;
 	}
 
@@ -142,15 +142,15 @@ namespace LightBulb
 
 	bool EvolutionLearningRule::doIteration()
 	{
-		if (!options->disabledDataSets[getOptions().dataSetsPrefix + DATA_SET_FITNESS] && getOptions().world->getPopulationSize() > 0)
-			learningState->addData(getOptions().dataSetsPrefix + DATA_SET_FITNESS, getOptions().world->getHighscoreList().front().first);
+		if (!options->disabledDataSets[getOptions().dataSetsPrefix + DATA_SET_FITNESS] && getOptions().environment->getPopulationSize() > 0)
+			learningState->addData(getOptions().dataSetsPrefix + DATA_SET_FITNESS, getOptions().environment->getHighscoreList().front().first);
 
 
 		log("------------- Generation " + std::to_string(learningState->iterations) + " -----------------", LL_LOW);
 
-		if (getOptions().world->getPopulationSize() > 0) {
+		if (getOptions().environment->getPopulationSize() > 0) {
 			// Extract all current individuals ordered by their score
-			const Highscore& highscore = getOptions().world->getHighscoreList();
+			const Highscore& highscore = getOptions().environment->getHighscoreList();
 			// This vector will contain all individuals for the next generation
 			std::vector<AbstractIndividual*> newIndividualVector;
 			std::map<AbstractIndividual*, int> operationCounter;
@@ -173,7 +173,7 @@ namespace LightBulb
 				(*recombinationCommand)->select(highscore, operationCounter);
 			}
 
-			for (auto individual = getOptions().world->getIndividuals().begin(); individual != getOptions().world->getIndividuals().end(); individual++)
+			for (auto individual = getOptions().environment->getIndividuals().begin(); individual != getOptions().environment->getIndividuals().end(); individual++)
 			{
 				if (operationCounter[*individual] == 0)
 					notUsedIndividuals.push_back(*individual);
@@ -198,29 +198,29 @@ namespace LightBulb
 			}
 
 			// Replace all individuals from the last generation with the one from the next generation
-			getOptions().world->setIndividuals(newIndividualVector);
+			getOptions().environment->setIndividuals(newIndividualVector);
 		}
 
 
 		// 1. Step: Create new individuals
 		for (auto creationCommand = getOptions().creationCommands.begin(); creationCommand != getOptions().creationCommands.end(); creationCommand++)
 		{
-			(*creationCommand)->execute(*getOptions().world, notUsedIndividuals);
+			(*creationCommand)->execute(*getOptions().environment, notUsedIndividuals);
 		}
 
-		// Reset the world for the next generation
-		getOptions().world->reset();
+		// Reset the environment for the next generation
+		getOptions().environment->reset();
 
 		// 2. Step: Execute the simulation and try to rate the individuals
-		if (getOptions().world->doSimulationStep()) {
+		if (getOptions().environment->doSimulationStep()) {
 			log(std::to_string(learningState->iterations) + " generations", LL_HIGH);
 			learningState->iterations = 0;
 			return true;
 		}
-		getOptions().world->refreshHighscore();
+		getOptions().environment->refreshHighscore();
 
 		// Extract all current individuals ordered by their score
-		Highscore& highscore = getOptions().world->getHighscoreList();
+		Highscore& highscore = getOptions().environment->getHighscoreList();
 
 		// {2,3}.5. Step: Modify the calculated scores
 		for (auto fitnessFunction = getOptions().fitnessFunctions.begin(); fitnessFunction != getOptions().fitnessFunctions.end(); fitnessFunction++)
@@ -264,7 +264,7 @@ namespace LightBulb
 		// 4. Step: Select the relevant individuals (Other individuals will be deleted)
 		for (auto selectionCommand = getOptions().selectionCommands.begin(); selectionCommand != getOptions().selectionCommands.end(); selectionCommand++)
 		{
-			(*selectionCommand)->execute(highscore, getOptions().world->getIndividuals(), notUsedIndividuals);
+			(*selectionCommand)->execute(highscore, getOptions().environment->getIndividuals(), notUsedIndividuals);
 		}
 
 		// Continue with the next generation
@@ -280,7 +280,7 @@ namespace LightBulb
 	void EvolutionLearningRule::doCalculationAfterLearningProcess()
 	{
 		if (!options->disabledDataSets[getOptions().dataSetsPrefix + DATA_SET_FITNESS])
-			learningState->addData(getOptions().dataSetsPrefix + DATA_SET_FITNESS, getOptions().world->getHighscoreList().front().first);
+			learningState->addData(getOptions().dataSetsPrefix + DATA_SET_FITNESS, getOptions().environment->getHighscoreList().front().first);
 	}
 
 	EvolutionLearningRuleOptions::~EvolutionLearningRuleOptions()

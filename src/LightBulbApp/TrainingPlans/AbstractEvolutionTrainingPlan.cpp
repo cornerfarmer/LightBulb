@@ -7,21 +7,21 @@ namespace LightBulb
 	void AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions& options) const
 	{
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
-		options.world = world.get();
+		options.environment = environment.get();
 	}
 
 	AbstractEvolutionTrainingPlan::AbstractEvolutionTrainingPlan()
 	{
-		world = nullptr;
+		environment = nullptr;
 	}
 
 	void AbstractEvolutionTrainingPlan::initializeStart()
 	{
-		world.reset(createWorld());
+		environment.reset(createEnvironment());
 	}
 
-	AbstractEvolutionWorld& AbstractEvolutionTrainingPlan::getWorld()
+	AbstractEvolutionEnvironment& AbstractEvolutionTrainingPlan::getEnvironment()
 	{
-		return *world.get();
+		return *environment.get();
 	}
 }

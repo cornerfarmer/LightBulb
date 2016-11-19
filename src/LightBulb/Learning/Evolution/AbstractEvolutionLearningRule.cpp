@@ -32,13 +32,13 @@ namespace LightBulb
 		return AbstractLearningRule::getDataSetLabels();
 	}
 
-	const AbstractEvolutionWorld& AbstractEvolutionLearningRule::getWorld() const
+	const AbstractEvolutionEnvironment& AbstractEvolutionLearningRule::getEnvironment() const
 	{
-		return *static_cast<AbstractEvolutionLearningRuleOptions*>(options.get())->world;
+		return *static_cast<AbstractEvolutionLearningRuleOptions*>(options.get())->environment;
 	}
 
-	AbstractEvolutionWorld& AbstractEvolutionLearningRule::getWorld()
+	AbstractEvolutionEnvironment& AbstractEvolutionLearningRule::getEnvironment()
 	{
-		return *static_cast<AbstractEvolutionLearningRuleOptions*>(options.get())->world;
+		return *static_cast<AbstractEvolutionLearningRuleOptions*>(options.get())->environment;
 	}
 }

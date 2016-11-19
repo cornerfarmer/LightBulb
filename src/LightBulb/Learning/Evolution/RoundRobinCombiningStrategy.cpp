@@ -1,14 +1,14 @@
 // Includes
 #include "Learning/Evolution/RoundRobinCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 //Library includes
 #include <algorithm>
 #include <iostream>
 
 namespace LightBulb
 {
-	void RoundRobinCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
+	void RoundRobinCombiningStrategy::combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
 	{
 		for (auto firstPlayer = firstIndividuals.begin(); firstPlayer != firstIndividuals.end(); firstPlayer++)
 		{
@@ -16,9 +16,9 @@ namespace LightBulb
 			{
 				if (*firstPlayer != *secondPlayer)
 				{
-					for (int r = 0; r < simulationWorld.getRoundCount(); r++)
+					for (int r = 0; r < simulationEnvironment.getRoundCount(); r++)
 					{
-						int result = simulationWorld.compareIndividuals(**firstPlayer, **secondPlayer, r);
+						int result = simulationEnvironment.compareIndividuals(**firstPlayer, **secondPlayer, r);
 						if (result != 0)
 							setResult(**firstPlayer, **secondPlayer, r, result > 0);
 					}
@@ -27,8 +27,8 @@ namespace LightBulb
 		}
 	}
 
-	int RoundRobinCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
+	int RoundRobinCombiningStrategy::getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const
 	{
-		return simulationWorld.getPopulationSize() * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
+		return simulationEnvironment.getPopulationSize() * simulationEnvironment.getPopulationSize() * simulationEnvironment.getRoundCount();
 	}
 }

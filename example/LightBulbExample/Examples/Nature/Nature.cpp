@@ -32,7 +32,7 @@ Nature::Nature()
 	{
 		tiles[x].resize(height);
 	}
-	resetWorld();
+	resetEnvironment();
 
 
 	/*window.create(sf::VideoMode(800, 700), "LightBulb!");
@@ -98,7 +98,7 @@ double Nature::getScore(const AbstractIndividual& individual) const
 	return static_cast<const Animal&>(individual).getStepsSurvived();
 }
 
-void Nature::resetWorld()
+void Nature::resetEnvironment()
 {
 	for (auto animal = individuals.begin(); animal != individuals.end(); animal++)
 	{

@@ -8,7 +8,7 @@
 #include <map>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
@@ -25,7 +25,7 @@ struct FunctionSimulatorOptions
 
 typedef double(*Function)(std::vector<float> pos);
 
-class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionWorld
+class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 {
 protected:
 	LightBulb::AbstractIndividual* createNewIndividual() override;
@@ -39,6 +39,6 @@ public:
 	double getScore(const LightBulb::AbstractIndividual& individual) const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld, )
+USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, )
 
 #endif

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _MOCKEVOLUTIONWORLD_H_
-#define _MOCKEVOLUTIONWORLD_H_
+#ifndef _MOCKEVOLUTIONENVIRONMENT_H_
+#define _MOCKEVOLUTIONENVIRONMENT_H_
 
 #include "gmock/gmock.h"
 #include <Teaching/AbstractTeacher.hpp>

@@ -1,23 +1,23 @@
 // Includes
-#include "Examples/PongEvolution/AbstractPongWorld.hpp"
+#include "Examples/PongEvolution/AbstractPongEnvironment.hpp"
 //Library includes
 
-AbstractPongWorld::AbstractPongWorld()
+AbstractPongEnvironment::AbstractPongEnvironment()
 {
 	watchMode = false;
 }
 
-void AbstractPongWorld::startWatchMode()
+void AbstractPongEnvironment::startWatchMode()
 {
 	watchMode = true;
 }
 
-void AbstractPongWorld::stopWatchMode()
+void AbstractPongEnvironment::stopWatchMode()
 {
 	watchMode = false;
 }
 
-PongGame& AbstractPongWorld::getGame()
+PongGame& AbstractPongEnvironment::getGame()
 {
 	return game;
 }

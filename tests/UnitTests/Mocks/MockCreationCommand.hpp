@@ -5,14 +5,14 @@
 
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractCreationCommand.hpp>
-#include <Learning/Evolution/AbstractEvolutionWorld.hpp>
+#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 class MockCreationCommand : public LightBulb::AbstractCreationCommand
 {
 public:
 	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
-	MOCK_METHOD2(execute, void (LightBulb::AbstractEvolutionWorld&, std::vector<LightBulb::AbstractIndividual*>&));
+	MOCK_METHOD2(execute, void (LightBulb::AbstractEvolutionEnvironment&, std::vector<LightBulb::AbstractIndividual*>&));
 	MOCK_CONST_METHOD0(clone, AbstractCloneable* ());
 };
 

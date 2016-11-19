@@ -9,7 +9,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 	/**
 	 * \brief Describes a command which creates new individuals.
 	 */
@@ -19,11 +19,11 @@ namespace LightBulb
 	public:
 		virtual ~AbstractCreationCommand() {}
 		/**
-		 * \brief Creates new individuals and adds them to the given world.
-		 * \param world The world to use.
+		 * \brief Creates new individuals and adds them to the given environment.
+		 * \param environment The environment to use.
 		 * \param notUsedIndividuals A vector of individuals which are not used anymore.
 		 */
-		virtual void execute(AbstractEvolutionWorld& world, std::vector<AbstractIndividual*>& notUsedIndividuals) = 0;
+		virtual void execute(AbstractEvolutionEnvironment& environment, std::vector<AbstractIndividual*>& notUsedIndividuals) = 0;
 	};
 }
 

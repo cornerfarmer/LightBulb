@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Reinforcement/AbstractReinforcementWorld.hpp"
+#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 
@@ -7,7 +7,7 @@
 
 namespace LightBulb
 {
-	void AbstractReinforcementWorld::doNNCalculation()
+	void AbstractReinforcementEnvironment::doNNCalculation()
 	{
 		neuralNetwork->getNetworkTopology().resetActivation();
 		// Get the input
@@ -49,7 +49,7 @@ namespace LightBulb
 		interpretNNOutput(lastBooleanOutput);
 	}
 
-	AbstractReinforcementWorld::AbstractReinforcementWorld(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
+	AbstractReinforcementEnvironment::AbstractReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
 	{
 		buildNeuralNetwork(options);
 		epsilonGreedly = epsilonGreedly_;
@@ -57,34 +57,34 @@ namespace LightBulb
 		useStochasticActionDecision = true;
 	}
 
-	void AbstractReinforcementWorld::initializeForLearning()
+	void AbstractReinforcementEnvironment::initializeForLearning()
 	{
 		// Randomize all weights
 		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(*randomGenerator);		
 	}
 
-	NeuralNetwork& AbstractReinforcementWorld::getNeuralNetwork()
+	NeuralNetwork& AbstractReinforcementEnvironment::getNeuralNetwork()
 	{
 		return *neuralNetwork.get();
 	}
 
-	double AbstractReinforcementWorld::getEpsilon()
+	double AbstractReinforcementEnvironment::getEpsilon()
 	{
 		return epsilon;
 	}
 
 
-	void AbstractReinforcementWorld::setEpsilon(double newEpsilon)
+	void AbstractReinforcementEnvironment::setEpsilon(double newEpsilon)
 	{
 		epsilon = newEpsilon;
 	}
 
-	void AbstractReinforcementWorld::setLearningState(LearningState& learningState_)
+	void AbstractReinforcementEnvironment::setLearningState(LearningState& learningState_)
 	{
 		learningState = &learningState_;
 	}
 
-	void AbstractReinforcementWorld::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
+	void AbstractReinforcementEnvironment::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
 	{
 		// Create a new network topology from the adjusted options.
 		FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
@@ -97,24 +97,24 @@ namespace LightBulb
 	}
 
 
-	void AbstractReinforcementWorld::buildOutputBuffer()
+	void AbstractReinforcementEnvironment::buildOutputBuffer()
 	{
 		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
 		lastBooleanOutput.resize(lastOutput.size());
 	}
 
-	std::vector<std::string> AbstractReinforcementWorld::getDataSetLabels() const
+	std::vector<std::string> AbstractReinforcementEnvironment::getDataSetLabels() const
 	{
 		std::vector<std::string> labels;
 		return labels;
 	}
 
-	std::vector<bool>& AbstractReinforcementWorld::getLastBooleanOutput()
+	std::vector<bool>& AbstractReinforcementEnvironment::getLastBooleanOutput()
 	{
 		return lastBooleanOutput;
 	}
 
-	void AbstractReinforcementWorld::setStochasticActionDecision(bool useStochasticActionDecision_)
+	void AbstractReinforcementEnvironment::setStochasticActionDecision(bool useStochasticActionDecision_)
 	{
 		useStochasticActionDecision = useStochasticActionDecision_;
 	}

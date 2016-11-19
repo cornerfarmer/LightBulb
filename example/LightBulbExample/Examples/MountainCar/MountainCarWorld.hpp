@@ -1,13 +1,13 @@
 #pragma once
 
-#ifndef _MOUNTAINCARWORLD_H_
-#define _MOUNTAINCARWORLD_H_
+#ifndef _MOUNTAINCARENVIRONMENT_H_
+#define _MOUNTAINCARENVIRONMENT_H_
 
 // Library Includes
 
 // Include
-#include <Learning/Reinforcement/AbstractReinforcementWorld.hpp>
-#include <Examples/PongEvolution/AbstractPongWorld.hpp>
+#include <Learning/Reinforcement/AbstractReinforcementEnvironment.hpp>
+#include <Examples/PongEvolution/AbstractPongEnvironment.hpp>
 #include "MountainCarWindow.hpp"
 
 // Forward declarations
@@ -17,7 +17,7 @@ enum MountainCarEvents
 	EVT_POS_CHANGED
 };
 
-class MountainCarWorld : public LightBulb::AbstractReinforcementWorld, public LightBulb::Observable<MountainCarEvents, MountainCarWorld>
+class MountainCarEnvironment : public LightBulb::AbstractReinforcementEnvironment, public LightBulb::Observable<MountainCarEvents, MountainCarEnvironment>
 {
 private:
 	double pos;
@@ -28,8 +28,8 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<bool>& output) override;
 public:
-	MountainCarWorld(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
-	MountainCarWorld() = default;
+	MountainCarEnvironment(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	MountainCarEnvironment() = default;
 	double doSimulationStep() override;
 	std::vector<std::string> getDataSetLabels() const override;
 	bool isTerminalState() override;

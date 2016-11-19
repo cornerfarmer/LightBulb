@@ -6,22 +6,22 @@
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
-class SimpleReinforcementWorld;
+class SimpleReinforcementEnvironment;
 
 class SimpleReinforcementDQNExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
-	SimpleReinforcementWorld* world;
+	SimpleReinforcementEnvironment* environment;
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
-	SimpleReinforcementWorld* createWorld();
+	SimpleReinforcementEnvironment* createEnvironment();
 public:
 	SimpleReinforcementDQNExample();
 	std::string getOriginalName() const override;
 	std::string getDescription() const override;
 	AbstractTrainingPlan* createNewFromSameType() const override;
 	std::string getLearningRuleName() const override;
-	SimpleReinforcementWorld& getWorld();
+	SimpleReinforcementEnvironment& getEnvironment();
 };
 
 USE_PARENT_SERIALIZATION(SimpleReinforcementDQNExample, LightBulb::AbstractLearningRuleTrainingPlan, );

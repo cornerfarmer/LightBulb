@@ -11,7 +11,7 @@
 #include <condition_variable>
 
 // Include
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "Teaching/TeachingInput.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
@@ -27,14 +27,14 @@ enum TicTacToeEvents
 
 #define DATASET_TICTACTOE_RATING "TicTacToe rating"
 
-class TicTacToe : public LightBulb::AbstractCoevolutionWorld, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
+class TicTacToe : public LightBulb::AbstractCoevolutionEnvironment, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
 {
 private:
 	void initialize();
 protected:
 	std::vector<std::vector<int>> fields;
 	LightBulb::AbstractIndividual* createNewIndividual() override;
-	void resetWorld() override;
+	void resetEnvironment() override;
 	int whoHasWon();
 	int currentPlayer;
 	bool illegalMove;
@@ -46,7 +46,7 @@ protected:
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
 	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
 public:
-	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
+	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
@@ -65,6 +65,6 @@ public:
 	int getRoundCount() const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionWorld, LightBulb::AbstractEvolutionWorld, );
+USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, );
 
 #endif

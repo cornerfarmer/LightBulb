@@ -14,7 +14,7 @@ class PongGameController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<PongGameWindow> window;
-	AbstractPongWorld* world;
+	AbstractPongEnvironment* environment;
 	PongGameState currentState;
 	PongGameProperties properties;
 protected:
@@ -27,7 +27,7 @@ public:
 	static std::string getLabel();
 	PongGameState& getState();
 	PongGameProperties& getProperties();
-	void fieldChanged(AbstractPongWorld& pong);
+	void fieldChanged(AbstractPongEnvironment& pong);
 };
 
 #endif

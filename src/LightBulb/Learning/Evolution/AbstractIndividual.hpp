@@ -24,7 +24,7 @@ namespace LightBulb
 		Reuse
 	};
 	/**
-	 * \brief This class describes an abstract individual which "lives" inside an evolution world.
+	 * \brief This class describes an abstract individual which "lives" inside an evolution environment.
 	 * \details The individual contains a NN which should calculate the actions from external and internal inputs.
 	 */
 	class AbstractIndividual
@@ -91,10 +91,10 @@ namespace LightBulb
 		/**
 		 * \brief Clones the individual.
 		 * \details Creates a new individual with a cloned neural network and the same mutation strengths.
-		 * \param addToWorld Set to true, if the new individual should be added to the evolution world.
+		 * \param addToEnvironment Set to true, if the new individual should be added to the evolution environment.
 		 * \return The new individual.
 		 */
-		virtual AbstractIndividual* clone(bool addToWorld = true) const = 0;
+		virtual AbstractIndividual* clone(bool addToEnvironment = true) const = 0;
 		/**
 		 * \brief Sets the evolution source of the individual.
 		 * \param evolutionSource_ The new evolution source.

@@ -15,7 +15,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractCoevolutionWorld;
+	class AbstractCoevolutionEnvironment;
 	/**
 	 * \brief Describes an algorithm which stores some good individuals of the time to make sure their knowledge will not be lost.
 	 */
@@ -30,9 +30,9 @@ namespace LightBulb
 		CombiningStrategyResults* currentResults;
 	protected:
 		/**
-		 * \brief The current world to use for simulations.
+		 * \brief The current environment to use for simulations.
 		 */
-		AbstractCoevolutionWorld* currentWorld;
+		AbstractCoevolutionEnvironment* currentEnvironment;
 		/**
 		 * \brief All members of the hall of fame.
 		 */
@@ -51,11 +51,11 @@ namespace LightBulb
 		virtual void evaluateIndividuals(std::vector<AbstractIndividual*>& individuals) = 0;
 	public:
 		/**
-		 * \brief Compares individuals from the given world with members of the hall of fame.
-		 * \param world The world to use.
+		 * \brief Compares individuals from the given environment with members of the hall of fame.
+		 * \param environment The environment to use.
 		 * \param prevResults The CombiningStrategyResults where the new results should be stored in.
 		 */
-		virtual void execute(AbstractCoevolutionWorld& world, CombiningStrategyResults& prevResults);
+		virtual void execute(AbstractCoevolutionEnvironment& environment, CombiningStrategyResults& prevResults);
 		/**
 		 * \brief Adds the given individual to the hall of fame.
 		 * \param newMember The new member to add.

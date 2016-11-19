@@ -12,7 +12,7 @@ using namespace LightBulb;
 TicTacToeGameController::TicTacToeGameController(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_, AbstractWindow& parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
-	world = static_cast<TicTacToe*>(&static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getWorld());
+	environment = static_cast<TicTacToe*>(&static_cast<TicTacToeEvolutionExample*>(trainingPlan)->getEnvironment());
 	window.reset(new TicTacToeGameWindow(*this, parent));
 }
 
@@ -28,20 +28,20 @@ TicTacToeGameWindow& TicTacToeGameController::getWindow()
 
 void TicTacToeGameController::stopStepMode()
 {
-	world->stopStepMode();
-	world->removeObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, *this);
+	environment->stopStepMode();
+	environment->removeObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, *this);
 }
 
 
 void TicTacToeGameController::startStepMode()
 {
-	world->startStepMode();
-	world->registerObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, *this);
+	environment->startStepMode();
+	environment->registerObserver(EVT_FIELD_CHANGED, &TicTacToeGameController::fieldsChanged, *this);
 }
 
 void TicTacToeGameController::doStep()
 {
-	world->nextStep();
+	environment->nextStep();
 }
 
 std::string TicTacToeGameController::getLabel()
@@ -51,7 +51,7 @@ std::string TicTacToeGameController::getLabel()
 
 std::vector<std::vector<int>>& TicTacToeGameController::getFields()
 {
-	return world->getFields();
+	return environment->getFields();
 }
 
 void TicTacToeGameController::fieldsChanged(TicTacToe& ticTacToe)

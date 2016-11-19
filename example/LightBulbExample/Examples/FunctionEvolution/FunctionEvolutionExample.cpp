@@ -43,7 +43,7 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	return new EvolutionLearningRule(options);
 }
 
-AbstractEvolutionWorld* FunctionEvolutionExample::createWorld()
+AbstractEvolutionEnvironment* FunctionEvolutionExample::createEnvironment()
 {
 	FunctionSimulatorOptions simulatorOptions;
 	simulatorOptions.enableGraphics = false;

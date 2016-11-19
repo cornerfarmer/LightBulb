@@ -1,59 +1,59 @@
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {
-	AbstractIndividual* AbstractSimpleEvolutionWorld::addNewIndividual(bool addToWorld)
+	AbstractIndividual* AbstractSimpleEvolutionEnvironment::addNewIndividual(bool addToEnvironment)
 	{
 		// Create a new individual
 		AbstractIndividual* newIndividual = createNewIndividual();
 
 		// Add it to the vector
-		if (addToWorld)
+		if (addToEnvironment)
 			individuals.push_back(newIndividual);
 
 		return newIndividual;
 	}
 
-	AbstractSimpleEvolutionWorld::AbstractSimpleEvolutionWorld()
+	AbstractSimpleEvolutionEnvironment::AbstractSimpleEvolutionEnvironment()
 	{
 
 	}
 
-	std::vector<AbstractIndividual*>& AbstractSimpleEvolutionWorld::getIndividuals()
+	std::vector<AbstractIndividual*>& AbstractSimpleEvolutionEnvironment::getIndividuals()
 	{
 		return individuals;
 	}
 
-	void AbstractSimpleEvolutionWorld::setIndividuals(const std::vector<AbstractIndividual*>& newIndividuals)
+	void AbstractSimpleEvolutionEnvironment::setIndividuals(const std::vector<AbstractIndividual*>& newIndividuals)
 	{
 		individuals = newIndividuals;
 	}
 
-	void AbstractSimpleEvolutionWorld::reset()
+	void AbstractSimpleEvolutionEnvironment::reset()
 	{
 		// Reset all individuals
 		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
 		{
 			(*individual)->resetNN();
 		}
-		// Reset the world
-		resetWorld();
+		// Reset the environment
+		resetEnvironment();
 	}
 
-	int AbstractSimpleEvolutionWorld::getPopulationSize() const
+	int AbstractSimpleEvolutionEnvironment::getPopulationSize() const
 	{
 		return individuals.size();
 	}
 
 
-	void AbstractSimpleEvolutionWorld::clearPopulation()
+	void AbstractSimpleEvolutionEnvironment::clearPopulation()
 	{
 		individuals.clear();
 	}
 
-	void AbstractSimpleEvolutionWorld::addExistingIndividual(AbstractIndividual* newIndividual)
+	void AbstractSimpleEvolutionEnvironment::addExistingIndividual(AbstractIndividual* newIndividual)
 	{
 		individuals.push_back(newIndividual);
 	}

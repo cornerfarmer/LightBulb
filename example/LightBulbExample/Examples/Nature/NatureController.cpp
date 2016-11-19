@@ -11,9 +11,9 @@ using namespace LightBulb;
 NatureController::NatureController(AbstractMainApp& mainApp, AbstractTrainingPlan& trainingPlan_, AbstractWindow& parent)
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
-	world = static_cast<Nature*>(&static_cast<NatureExample*>(trainingPlan)->getWorld());
+	environment = static_cast<Nature*>(&static_cast<NatureExample*>(trainingPlan)->getEnvironment());
 	window.reset(new NatureWindow(*this, parent));
-	tiles.resize(world->getWidth(), std::vector<const wxBrush*>(world->getHeight()));
+	tiles.resize(environment->getWidth(), std::vector<const wxBrush*>(environment->getHeight()));
 	renderingInProgress = false;
 }
 
@@ -29,15 +29,15 @@ NatureWindow& NatureController::getWindow()
 
 void NatureController::stopWatchMode()
 {
-	world->stopWatchMode();
-	world->removeObserver(EVT_FIELD_CHANGED, &NatureController::fieldChanged, *this);
+	environment->stopWatchMode();
+	environment->removeObserver(EVT_FIELD_CHANGED, &NatureController::fieldChanged, *this);
 }
 
 
 void NatureController::startWatchMode()
 {
-	world->startWatchMode();
-	world->registerObserver(EVT_FIELD_CHANGED, &NatureController::fieldChanged, *this);
+	environment->startWatchMode();
+	environment->registerObserver(EVT_FIELD_CHANGED, &NatureController::fieldChanged, *this);
 }
 
 

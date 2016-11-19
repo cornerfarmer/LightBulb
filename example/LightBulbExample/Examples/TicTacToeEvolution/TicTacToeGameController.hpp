@@ -14,7 +14,7 @@ class TicTacToeGameController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<TicTacToeGameWindow> window;
-	TicTacToe* world;
+	TicTacToe* environment;
 
 protected:
 	void prepareClose() override;

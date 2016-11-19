@@ -8,16 +8,16 @@
 #include <map>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 
 // Forward declarations
 
-class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionWorld
+class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 {
 	template <class Archive>
-	friend void save(Archive& archive, NetworkSimulator const& world);
+	friend void save(Archive& archive, NetworkSimulator const& environment);
 	template <class Archive>
-	friend void load(Archive& archive, NetworkSimulator& world);
+	friend void load(Archive& archive, NetworkSimulator& environment);
 	friend struct cereal::LoadAndConstruct<NetworkSimulator>;
 protected:
 	std::vector<std::vector<float>> consumers;

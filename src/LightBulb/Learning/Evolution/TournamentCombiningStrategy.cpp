@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Evolution/TournamentCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 //Library includes
 #include <algorithm>
 #include <iostream>
@@ -15,25 +15,25 @@ namespace LightBulb
 		nextLevel.reset(new std::vector<AbstractIndividual*>());
 	}
 
-	int TournamentCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
+	int TournamentCombiningStrategy::getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const
 	{
 		throw std::logic_error("Not yet implemented.");
 	}
 
-	void TournamentCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
+	void TournamentCombiningStrategy::combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
 	{
 		// TODO: Try to make it work with two populations
 		*currentLevel = firstIndividuals;
 		nextLevel->clear();
 
 		while (currentLevel->size() > 1) {
-			processLevel(&simulationWorld);
+			processLevel(&simulationEnvironment);
 			nextLevel.swap(currentLevel);
 		}
 	}
 
 
-	void TournamentCombiningStrategy::processLevel(AbstractCoevolutionWorld* simulationWorld)
+	void TournamentCombiningStrategy::processLevel(AbstractCoevolutionEnvironment* simulationEnvironment)
 	{
 		nextLevel->clear();
 		if (doShuffleBeforeTournament)
@@ -41,7 +41,7 @@ namespace LightBulb
 
 		for (int i = 0; i < currentLevel->size(); i += 2) {
 			if (i < currentLevel->size() - 1) {
-				int result = simulationWorld->compareIndividuals(*currentLevel->at(i), *currentLevel->at(i + 1), 0);
+				int result = simulationEnvironment->compareIndividuals(*currentLevel->at(i), *currentLevel->at(i + 1), 0);
 				if (result == 0) {
 					result = (randomGenerator->randDouble() > 0.5 ? 1 : -1);
 				}

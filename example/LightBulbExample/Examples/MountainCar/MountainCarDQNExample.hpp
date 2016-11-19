@@ -6,22 +6,22 @@
 
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
-class MountainCarWorld;
+class MountainCarEnvironment;
 
 class MountainCarDQNExample : public LightBulb::AbstractLearningRuleTrainingPlan
 {
 private:
-	MountainCarWorld* world;
+	MountainCarEnvironment* environment;
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
-	MountainCarWorld* createWorld();
+	MountainCarEnvironment* createEnvironment();
 public:
 	MountainCarDQNExample();
 	std::string getOriginalName() const override;
 	std::string getDescription() const override;
 	AbstractTrainingPlan* createNewFromSameType() const override;
 	std::string getLearningRuleName() const override;
-	MountainCarWorld& getWorld();
+	MountainCarEnvironment& getEnvironment();
 };
 
 USE_PARENT_SERIALIZATION(MountainCarDQNExample, LightBulb::AbstractLearningRuleTrainingPlan, );

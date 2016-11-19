@@ -6,7 +6,7 @@
 // Includes
 #include <Learning/Evolution/TeachedIndividual.hpp>
 #include "IO/IOStorage.hpp"
-#include "Learning/Evolution/TeachingEvolutionWorld.hpp"
+#include "Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -39,7 +39,7 @@ namespace LightBulb
 	{
 		archive(cereal::base_class<AbstractIndividual>(&individual));
 		archive(cereal::make_nvp("neuralNetwork", individual.neuralNetwork));
-		individual.teachingEvolutionWorld = static_cast<TeachingEvolutionWorld*>(IOStorage<AbstractEvolutionWorld>::get());
+		individual.teachingEvolutionEnvironment = static_cast<TeachingEvolutionEnvironment*>(IOStorage<AbstractEvolutionEnvironment>::get());
 		individual.doNNCalculation();
 	}
 }

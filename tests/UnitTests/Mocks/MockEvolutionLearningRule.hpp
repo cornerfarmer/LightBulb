@@ -5,7 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 #include "Learning/AbstractLearningResult.hpp"
 
 class MockEvolutionLearningRule : public LightBulb::AbstractEvolutionLearningRule
@@ -25,8 +25,8 @@ public:
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
 	MOCK_METHOD0(setHelperToUsedObjects, void ());
 	MOCK_CONST_METHOD0(getDataSetLabels, std::vector<std::string> ());
-	MOCK_CONST_METHOD0(getWorld, const LightBulb::AbstractEvolutionWorld& ());
-	MOCK_METHOD0(getWorld, LightBulb::AbstractEvolutionWorld& ());
+	MOCK_CONST_METHOD0(getEnvironment, const LightBulb::AbstractEvolutionEnvironment& ());
+	MOCK_METHOD0(getEnvironment, LightBulb::AbstractEvolutionEnvironment& ());
 };
 
 #endif

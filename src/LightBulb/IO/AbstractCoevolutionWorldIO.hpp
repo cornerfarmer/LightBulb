@@ -1,10 +1,10 @@
 #pragma once
 
-#ifndef _ABSTRACTCOEVOLUTIONWORLDIO_H_
-#define _ABSTRACTCOEVOLUTIONWORLDIO_H_
+#ifndef _ABSTRACTCOEVOLUTIONENVIRONMENTIO_H_
+#define _ABSTRACTCOEVOLUTIONENVIRONMENTIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -14,69 +14,69 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Saves an AbstractCoevolutionWorld
+	 * \brief Saves an AbstractCoevolutionEnvironment
 	 * \tparam Archive The archive type.
 	 * \param archive The archive which should be used.
-	 * \param world The AbstractCoevolutionWorld to save.
+	 * \param environment The AbstractCoevolutionEnvironment to save.
 	 */
 	template <class Archive>
-	void save(Archive& archive, AbstractCoevolutionWorld const& world)
+	void save(Archive& archive, AbstractCoevolutionEnvironment const& environment)
 	{
-		archive(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
-		archive(cereal::make_nvp("hallOfFameToAddAlgorithm", world.hallOfFameToAddAlgorithm));
-		archive(cereal::make_nvp("hallOfFameToChallengeAlgorithm", world.hallOfFameToChallengeAlgorithm));
+		archive(cereal::base_class<AbstractSimpleEvolutionEnvironment>(&environment));
+		archive(cereal::make_nvp("hallOfFameToAddAlgorithm", environment.hallOfFameToAddAlgorithm));
+		archive(cereal::make_nvp("hallOfFameToChallengeAlgorithm", environment.hallOfFameToChallengeAlgorithm));
 
-		std::vector<double> fitnessValues(world.individuals.size());
-		for (int i = 0; i < world.individuals.size(); i++)
+		std::vector<double> fitnessValues(environment.individuals.size());
+		for (int i = 0; i < environment.individuals.size(); i++)
 		{
-			if (world.fitnessValues->count(world.individuals[i]))
-				fitnessValues[i] = world.fitnessValues->at(world.individuals[i]);
+			if (environment.fitnessValues->count(environment.individuals[i]))
+				fitnessValues[i] = environment.fitnessValues->at(environment.individuals[i]);
 		}
 		archive(cereal::make_nvp("fitnessValues", fitnessValues));
 
-		archive(cereal::make_nvp("comparisons", world.comparisons));
+		archive(cereal::make_nvp("comparisons", environment.comparisons));
 	}
 
 
 	/**
-	* \brief Loads an AbstractCoevolutionWorld
+	* \brief Loads an AbstractCoevolutionEnvironment
 	* \tparam Archive The archive type.
 	* \param archive The archive which should be used.
-	* \param world The AbstractCoevolutionWorld to load.
+	* \param environment The AbstractCoevolutionEnvironment to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractCoevolutionWorld& world)
+	void load(Archive& archive, AbstractCoevolutionEnvironment& environment)
 	{
-		archive(cereal::base_class<AbstractSimpleEvolutionWorld>(&world));
+		archive(cereal::base_class<AbstractSimpleEvolutionEnvironment>(&environment));
 
-		std::shared_ptr<AbstractHallOfFameAlgorithm> tmp(world.hallOfFameToAddAlgorithm);
+		std::shared_ptr<AbstractHallOfFameAlgorithm> tmp(environment.hallOfFameToAddAlgorithm);
 
-		IOStorage<AbstractHallOfFameAlgorithm>::push(world.hallOfFameToAddAlgorithm.get());
-		archive(cereal::make_nvp("hallOfFameToAddAlgorithm", world.hallOfFameToAddAlgorithm));
-		world.hallOfFameToAddAlgorithm = tmp;
+		IOStorage<AbstractHallOfFameAlgorithm>::push(environment.hallOfFameToAddAlgorithm.get());
+		archive(cereal::make_nvp("hallOfFameToAddAlgorithm", environment.hallOfFameToAddAlgorithm));
+		environment.hallOfFameToAddAlgorithm = tmp;
 
-		tmp = world.hallOfFameToChallengeAlgorithm;
+		tmp = environment.hallOfFameToChallengeAlgorithm;
 
-		IOStorage<AbstractHallOfFameAlgorithm>::push(world.hallOfFameToChallengeAlgorithm.get());
-		archive(cereal::make_nvp("hallOfFameToChallengeAlgorithm", world.hallOfFameToChallengeAlgorithm));
-		world.hallOfFameToChallengeAlgorithm = tmp;
+		IOStorage<AbstractHallOfFameAlgorithm>::push(environment.hallOfFameToChallengeAlgorithm.get());
+		archive(cereal::make_nvp("hallOfFameToChallengeAlgorithm", environment.hallOfFameToChallengeAlgorithm));
+		environment.hallOfFameToChallengeAlgorithm = tmp;
 		IOStorage<AbstractHallOfFameAlgorithm>::clear();
 
 		tmp = nullptr;
 
 		std::vector<double> fitnessValues;
 		archive(cereal::make_nvp("fitnessValues", fitnessValues));
-		world.fitnessValues.reset(new std::map<const AbstractIndividual*, double>());
-		for (int i = 0; i < world.individuals.size(); i++)
-			(*world.fitnessValues)[world.individuals[i]] = fitnessValues[i];
+		environment.fitnessValues.reset(new std::map<const AbstractIndividual*, double>());
+		for (int i = 0; i < environment.individuals.size(); i++)
+			(*environment.fitnessValues)[environment.individuals[i]] = fitnessValues[i];
 
-		archive(cereal::make_nvp("comparisons", world.comparisons));
+		archive(cereal::make_nvp("comparisons", environment.comparisons));
 	}
 
 }
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(LightBulb::AbstractCoevolutionWorld);
+CEREAL_REGISTER_TYPE(LightBulb::AbstractCoevolutionEnvironment);
 
 #endif

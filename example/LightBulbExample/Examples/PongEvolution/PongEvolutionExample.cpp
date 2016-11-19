@@ -104,21 +104,21 @@ FeedForwardNetworkTopologyOptions PongEvolutionExample::getNetworkOptions()
 	return options;
 }
 
-AbstractEvolutionWorld* PongEvolutionExample::createWorld()
+AbstractEvolutionEnvironment* PongEvolutionExample::createEnvironment()
 {
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
 	Pong* pong1 = new Pong(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 
-	cs1->setSecondWorld(static_cast<Pong&>(*parasiteWorld.get()));
-	cs2->setSecondWorld(*pong1);
+	cs1->setSecondEnvironment(static_cast<Pong&>(*parasiteEnvironment.get()));
+	cs2->setSecondEnvironment(*pong1);
 
 	return pong1;
 
 }
 
-AbstractEvolutionWorld* PongEvolutionExample::createParasiteWorld()
+AbstractEvolutionEnvironment* PongEvolutionExample::createParasiteEnvironment()
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 

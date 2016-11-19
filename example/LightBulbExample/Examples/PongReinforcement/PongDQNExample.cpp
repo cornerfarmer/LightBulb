@@ -7,7 +7,7 @@
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
-#include "PongReinforcementWorld.hpp"
+#include "PongReinforcementEnvironment.hpp"
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/Preferences/DoublePreference.hpp>
@@ -54,7 +54,7 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 }
 
 
-AbstractReinforcementWorld* PongDQNExample::createWorld()
+AbstractReinforcementEnvironment* PongDQNExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -69,7 +69,7 @@ AbstractReinforcementWorld* PongDQNExample::createWorld()
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
-	return new PongReinforcementWorld(options, true, 1);
+	return new PongReinforcementEnvironment(options, true, 1);
 }
 
 

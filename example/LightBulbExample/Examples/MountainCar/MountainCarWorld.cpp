@@ -1,5 +1,5 @@
 // Includes
-#include "Examples/MountainCar/MountainCarWorld.hpp"
+#include "Examples/MountainCar/MountainCarEnvironment.hpp"
 #include <Learning/LearningState.hpp>
 #include <thread>
 
@@ -7,15 +7,15 @@
 
 using namespace LightBulb;
 
-MountainCarWorld::MountainCarWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
-	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
+MountainCarEnvironment::MountainCarEnvironment(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
+	: AbstractReinforcementEnvironment(options_, epsilonGreedly, epsilon)
 {
 	pos = -0.5;
 	vel = 0;
 	watchMode = false;
 }
 
-double MountainCarWorld::doSimulationStep()
+double MountainCarEnvironment::doSimulationStep()
 {
 	if (isTerminalState())
 	{
@@ -34,7 +34,7 @@ double MountainCarWorld::doSimulationStep()
 	return -1;
 }
 
-void MountainCarWorld::getNNInput(std::vector<double>& input)
+void MountainCarEnvironment::getNNInput(std::vector<double>& input)
 {
 	input.resize(2);
 
@@ -42,7 +42,7 @@ void MountainCarWorld::getNNInput(std::vector<double>& input)
 	input[1] = vel;
 }
 
-void MountainCarWorld::interpretNNOutput(std::vector<bool>& output)
+void MountainCarEnvironment::interpretNNOutput(std::vector<bool>& output)
 {
 	if (output[0])
 		action = -1;
@@ -59,38 +59,38 @@ void MountainCarWorld::interpretNNOutput(std::vector<bool>& output)
 }
 
 
-std::vector<std::string> MountainCarWorld::getDataSetLabels() const
+std::vector<std::string> MountainCarEnvironment::getDataSetLabels() const
 {
-	auto labels = AbstractReinforcementWorld::getDataSetLabels();
+	auto labels = AbstractReinforcementEnvironment::getDataSetLabels();
 	return labels;
 }
 
-bool MountainCarWorld::isTerminalState()
+bool MountainCarEnvironment::isTerminalState()
 {
 	return pos >= 0.6;
 }
 
-double MountainCarWorld::getPosition()
+double MountainCarEnvironment::getPosition()
 {
 	return pos;
 }
 
-double MountainCarWorld::getVelocity()
+double MountainCarEnvironment::getVelocity()
 {
 	return vel;
 }
 
-int MountainCarWorld::getAction()
+int MountainCarEnvironment::getAction()
 {
 	return action;
 }
 
-void MountainCarWorld::startWatchMode()
+void MountainCarEnvironment::startWatchMode()
 {
 	watchMode = true;
 }
 
-void MountainCarWorld::stopWatchMode()
+void MountainCarEnvironment::stopWatchMode()
 {
 	watchMode = false;
 }

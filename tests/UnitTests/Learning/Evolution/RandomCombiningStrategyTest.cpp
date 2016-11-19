@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <Learning/Evolution/RandomCombiningStrategy.hpp>
-#include <Mocks/MockCoevolutionWorld.hpp>
+#include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
 
 using namespace LightBulb;
@@ -8,12 +8,12 @@ using namespace LightBulb;
 class RandomCombiningStrategyTest : public testing::Test {
 public:
 	RandomCombiningStrategy* randomCombiningStrategy;
-	MockCoevolutionWorld world;
+	MockCoevolutionEnvironment environment;
 	MockIndividual individual1, individual2, individual3, individual4, individual5, individual6;
 
 	void SetUp()
 	{
-		EXPECT_CALL(world, getRoundCount()).WillRepeatedly(testing::Return(1));
+		EXPECT_CALL(environment, getRoundCount()).WillRepeatedly(testing::Return(1));
 	}
 
 	virtual ~RandomCombiningStrategyTest()
@@ -22,28 +22,28 @@ public:
 	}
 };
 
-TEST_F(RandomCombiningStrategyTest, executeEmptyWorld)
+TEST_F(RandomCombiningStrategyTest, executeEmptyEnvironment)
 {
 	randomCombiningStrategy = new RandomCombiningStrategy(3);
 
 	std::vector<AbstractIndividual*> individuals;
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 	
-	auto& result = randomCombiningStrategy->execute(world);
+	auto& result = randomCombiningStrategy->execute(environment);
 
 	EXPECT_EQ(0, result.size());
 }
 
-TEST_F(RandomCombiningStrategyTest, executeSingleWorld)
+TEST_F(RandomCombiningStrategyTest, executeSingleEnvironment)
 {
 	srand(1);
 	randomCombiningStrategy = new RandomCombiningStrategy(3);
 
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2, &individual3 });
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
-	EXPECT_CALL(world, compareIndividuals(testing::_, testing::_, 0)).Times(9).WillRepeatedly(testing::Return(1));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, compareIndividuals(testing::_, testing::_, 0)).Times(9).WillRepeatedly(testing::Return(1));
 
-	auto& result = randomCombiningStrategy->execute(world);
+	auto& result = randomCombiningStrategy->execute(environment);
 	
 	EXPECT_EQ(3, result.size());
 	EXPECT_EQ(3, result[&individual1].size());
@@ -51,21 +51,21 @@ TEST_F(RandomCombiningStrategyTest, executeSingleWorld)
 	EXPECT_EQ(3, result[&individual3].size());
 }
 
-TEST_F(RandomCombiningStrategyTest, executeTwoWorlds)
+TEST_F(RandomCombiningStrategyTest, executeTwoEnvironments)
 {
 	randomCombiningStrategy = new RandomCombiningStrategy(2);
 	
-	MockCoevolutionWorld parasiteWorld;
-	randomCombiningStrategy->setSecondWorld(parasiteWorld);
+	MockCoevolutionEnvironment parasiteEnvironment;
+	randomCombiningStrategy->setSecondEnvironment(parasiteEnvironment);
 
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2, &individual3 });
 	std::vector<AbstractIndividual*> parasiteIndividuals({ &individual4 , &individual5, &individual6 });
 
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
-	EXPECT_CALL(parasiteWorld, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
-	EXPECT_CALL(world, compareIndividuals(testing::_, testing::_, 0)).Times(6).WillRepeatedly(testing::Return(1));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(parasiteEnvironment, getIndividuals()).WillRepeatedly(testing::ReturnRef(parasiteIndividuals));
+	EXPECT_CALL(environment, compareIndividuals(testing::_, testing::_, 0)).Times(6).WillRepeatedly(testing::Return(1));
 
-	auto& result = randomCombiningStrategy->execute(world);
+	auto& result = randomCombiningStrategy->execute(environment);
 
 	EXPECT_EQ(5, result.size());
 	EXPECT_EQ(2, result[&individual1].size());

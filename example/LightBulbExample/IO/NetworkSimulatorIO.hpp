@@ -14,28 +14,28 @@
 #include <cereal/types/vector.hpp>
 
 template <class Archive>
-void save(Archive& archive, NetworkSimulator const& world)
+void save(Archive& archive, NetworkSimulator const& environment)
 {
-	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
-	archive(cereal::make_nvp("consumers", world.consumers));
+	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionEnvironment>(&environment));
+	archive(cereal::make_nvp("consumers", environment.consumers));
 }
 
 template <class Archive>
-void load(Archive& archive, NetworkSimulator& world)
+void load(Archive& archive, NetworkSimulator& environment)
 {
-	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
-	archive(cereal::make_nvp("consumers", world.consumers));
+	archive(cereal::base_class<LightBulb::AbstractSimpleEvolutionEnvironment>(&environment));
+	archive(cereal::make_nvp("consumers", environment.consumers));
 }
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(NetworkSimulator, LightBulb::AbstractEvolutionWorld)
+	CONSTRUCT_EXISTING(NetworkSimulator, LightBulb::AbstractEvolutionEnvironment)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, NetworkSimulator& world)
+		static void construct(Archive& ar, NetworkSimulator& environment)
 		{
-			ar(base_class<LightBulb::AbstractSimpleEvolutionWorld>(&world));
-			ar(make_nvp("consumers", world.consumers));
+			ar(base_class<LightBulb::AbstractSimpleEvolutionEnvironment>(&environment));
+			ar(make_nvp("consumers", environment.consumers));
 		}
 	};
 }

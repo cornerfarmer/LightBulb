@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include "EvolutionLearningRule.hpp"
-#include "AbstractCoevolutionWorld.hpp"
+#include "AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -13,8 +13,8 @@ namespace LightBulb
 	{
 		if (highscore.size() > 0)
 		{
-			const AbstractCoevolutionWorld& coevolutionWorld = static_cast<const AbstractCoevolutionWorld&>(static_cast<const EvolutionLearningRule&>(learningRule).getWorld());
-			if (coevolutionWorld.isParasiteWorld() && perfectIndividualExists(coevolutionWorld.getCombiningStrategy()))
+			const AbstractCoevolutionEnvironment& coevolutionEnvironment = static_cast<const AbstractCoevolutionEnvironment&>(static_cast<const EvolutionLearningRule&>(learningRule).getEnvironment());
+			if (coevolutionEnvironment.isParasiteEnvironment() && perfectIndividualExists(coevolutionEnvironment.getCombiningStrategy()))
 			{
 				counter++;
 				if (counter >= count)

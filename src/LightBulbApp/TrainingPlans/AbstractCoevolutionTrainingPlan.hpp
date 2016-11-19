@@ -6,7 +6,7 @@
 // Includes
 #include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 #include "IO/UseParentSerialization.hpp"
-#include <Learning/Evolution/AbstractEvolutionWorld.hpp>
+#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 // Library includes
 
@@ -28,14 +28,14 @@ namespace LightBulb
 		friend void load(Archive& archive, AbstractCoevolutionTrainingPlan& trainingPlan);
 	protected:
 		/**
-		* \brief The parasite evolution world which is used.
+		* \brief The parasite evolution environment which is used.
 		*/
-		std::unique_ptr<AbstractEvolutionWorld> parasiteWorld;
+		std::unique_ptr<AbstractEvolutionEnvironment> parasiteEnvironment;
 		/**
-		* \brief Creates the parasite evolution world.
-		* \return The new parasite world.
+		* \brief Creates the parasite evolution environment.
+		* \return The new parasite environment.
 		*/
-		virtual AbstractEvolutionWorld* createParasiteWorld() = 0;
+		virtual AbstractEvolutionEnvironment* createParasiteEnvironment() = 0;
 		/**
 		* \brief Fills all learning rule options which are the same for all coevolution learning rule training plans.
 		* \param options The options to fill.
@@ -53,10 +53,10 @@ namespace LightBulb
 		void fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions& options) const;
 	public:
 		/**
-		 * \brief Returns the parasite evolution world.
-		 * \return The world.
+		 * \brief Returns the parasite evolution environment.
+		 * \return The environment.
 		 */
-		AbstractEvolutionWorld& getParasiteWorld();
+		AbstractEvolutionEnvironment& getParasiteEnvironment();
 		// Inherited:
 		void initializeStart() override;
 	};

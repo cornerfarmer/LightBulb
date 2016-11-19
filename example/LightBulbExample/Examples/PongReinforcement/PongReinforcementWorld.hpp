@@ -1,32 +1,32 @@
 #pragma once
 
-#ifndef _PONGREINFORCEMENTWORLD_H_
-#define _PONGREINFORCEMENTWORLD_H_
+#ifndef _PONGREINFORCEMENTENVIRONMENT_H_
+#define _PONGREINFORCEMENTENVIRONMENT_H_
 
 // Library Includes
 
 // Include
-#include <Learning/Reinforcement/AbstractReinforcementWorld.hpp>
-#include <Examples/PongEvolution/AbstractPongWorld.hpp>
+#include <Learning/Reinforcement/AbstractReinforcementEnvironment.hpp>
+#include <Examples/PongEvolution/AbstractPongEnvironment.hpp>
 #include "IO/UseParentSerialization.hpp"
 
 // Forward declarations
 
 #define DATASET_PONG_RATING "Pong rating"
 
-class PongReinforcementWorld : public LightBulb::AbstractReinforcementWorld, public AbstractPongWorld
+class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvironment, public AbstractPongEnvironment
 {
 	template <class Archive>
-	friend void serialize(Archive& archive, PongReinforcementWorld& world);
-	friend struct cereal::LoadAndConstruct<PongReinforcementWorld>;
+	friend void serialize(Archive& archive, PongReinforcementEnvironment& environment);
+	friend struct cereal::LoadAndConstruct<PongReinforcementEnvironment>;
 private:
 	int time;
 protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<bool>& output) override;
 public:
-	PongReinforcementWorld(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
-	PongReinforcementWorld() = default;
+	PongReinforcementEnvironment(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	PongReinforcementEnvironment() = default;
 	double doSimulationStep() override;
 	void executeCompareAI();
 	void initializeForLearning() override;
@@ -37,6 +37,6 @@ public:
 };
 
 
-#include "IO/PongReinforcementWorldIO.hpp"
+#include "IO/PongReinforcementEnvironmentIO.hpp"
 
 #endif

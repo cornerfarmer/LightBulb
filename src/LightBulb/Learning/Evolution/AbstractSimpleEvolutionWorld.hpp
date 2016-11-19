@@ -1,13 +1,13 @@
 #pragma once
 
-#ifndef _ABSTRACTSIMPLEEVOLUTIONWORLD_H_
-#define _ABSTRACTSIMPLEEVOLUTIONWORLD_H_
+#ifndef _ABSTRACTSIMPLEEVOLUTIONENVIRONMENT_H_
+#define _ABSTRACTSIMPLEEVOLUTIONENVIRONMENT_H_
 
 // Library Includes
 #include <vector>
 
 // Include
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -15,17 +15,17 @@ namespace LightBulb
 	class EvolutionLearningRule;
 	class AbstractIndividual;
 	/**
-	 * \brief This class is simplification of the AbstractEvolutionWorld class.
-	 * \details It decreases the work you have to do for your world, but also decreases your possibilities.
+	 * \brief This class is simplification of the AbstractEvolutionEnvironment class.
+	 * \details It decreases the work you have to do for your environment, but also decreases your possibilities.
 	 * Nevertheless this class can be used in the most of all cases.
 	 * It manages all individuals, so all inheriting classes can focus on evaluating those individuals.
 	 */
-	class AbstractSimpleEvolutionWorld : public AbstractEvolutionWorld
+	class AbstractSimpleEvolutionEnvironment : public AbstractEvolutionEnvironment
 	{
 		template <class Archive>
-		friend void save(Archive& archive, AbstractSimpleEvolutionWorld const& world);
+		friend void save(Archive& archive, AbstractSimpleEvolutionEnvironment const& environment);
 		template <class Archive>
-		friend void load(Archive& archive, AbstractSimpleEvolutionWorld& world);
+		friend void load(Archive& archive, AbstractSimpleEvolutionEnvironment& environment);
 	protected:
 		/**
 		 * \brief A vector which contains all current individuals.
@@ -37,16 +37,16 @@ namespace LightBulb
 		 */
 		virtual AbstractIndividual* createNewIndividual() = 0;
 		/**
-		 * \brief Resets the world before doing any simulations.
+		 * \brief Resets the environment before doing any simulations.
 		 */
-		virtual void resetWorld() {};
+		virtual void resetEnvironment() {};
 	public:
 		/**
-		 * \brief Creates the simple evolution world.
+		 * \brief Creates the simple evolution environment.
 		 */
-		AbstractSimpleEvolutionWorld();
+		AbstractSimpleEvolutionEnvironment();
 		// Inherited:
-		AbstractIndividual* addNewIndividual(bool addToWorld = true) override;
+		AbstractIndividual* addNewIndividual(bool addToEnvironment = true) override;
 		std::vector<AbstractIndividual*>& getIndividuals() override;
 		void setIndividuals(const std::vector<AbstractIndividual*>& newIndividuals) override;
 		void reset() override;
@@ -56,6 +56,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractSimpleEvolutionWorldIO.hpp"
+#include "IO/AbstractSimpleEvolutionEnvironmentIO.hpp"
 
 #endif

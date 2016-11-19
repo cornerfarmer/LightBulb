@@ -1,19 +1,19 @@
 // Includes
-#include "Examples/SimpleReinforcement/SimpleReinforcementWorld.hpp"
+#include "Examples/SimpleReinforcement/SimpleReinforcementEnvironment.hpp"
 #include <Learning/LearningState.hpp>
 
 //Library includes
 
 using namespace LightBulb;
 
-SimpleReinforcementWorld::SimpleReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
-	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
+SimpleReinforcementEnvironment::SimpleReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
+	: AbstractReinforcementEnvironment(options_, epsilonGreedly, epsilon)
 {
 	posX = 0;
 	posY = 0;
 }
 
-double SimpleReinforcementWorld::doSimulationStep()
+double SimpleReinforcementEnvironment::doSimulationStep()
 {
 	if ((posX == 0 && posY == 0) || (posX == 3 && posY == 3))
 	{
@@ -26,7 +26,7 @@ double SimpleReinforcementWorld::doSimulationStep()
 	return -1;
 }
 
-void SimpleReinforcementWorld::getNNInput(std::vector<double>& input)
+void SimpleReinforcementEnvironment::getNNInput(std::vector<double>& input)
 {
 	input.resize(4);
 	if (posX == 0)
@@ -72,7 +72,7 @@ void SimpleReinforcementWorld::getNNInput(std::vector<double>& input)
 	}
 }
 
-void SimpleReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
+void SimpleReinforcementEnvironment::interpretNNOutput(std::vector<bool>& output)
 {
 	if (output[0])
 		posX -= 1;
@@ -88,13 +88,13 @@ void SimpleReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 }
 
 
-std::vector<std::string> SimpleReinforcementWorld::getDataSetLabels() const
+std::vector<std::string> SimpleReinforcementEnvironment::getDataSetLabels() const
 {
-	auto labels = AbstractReinforcementWorld::getDataSetLabels();
+	auto labels = AbstractReinforcementEnvironment::getDataSetLabels();
 	return labels;
 }
 
-bool SimpleReinforcementWorld::isTerminalState()
+bool SimpleReinforcementEnvironment::isTerminalState()
 {
 	return ((posX == 0 && posY == 0) || (posX == 3 && posY == 3));
 }

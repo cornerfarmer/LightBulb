@@ -1,13 +1,13 @@
 #pragma once
 
-#ifndef _ABSTRACTCOEVOLUTIONWORLD_H_
-#define _ABSTRACTCOEVOLUTIONWORLD_H_
+#ifndef _ABSTRACTCOEVOLUTIONENVIRONMENT_H_
+#define _ABSTRACTCOEVOLUTIONENVIRONMENT_H_
 
 // Library Includes
 #include <map>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 #include "AbstractCoevolutionFitnessFunction.hpp"
@@ -21,14 +21,14 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Describes a coevolution world which evolves through competing with another coevolution world.
+	 * \brief Describes a coevolution environment which evolves through competing with another coevolution environment.
 	 */
-	class AbstractCoevolutionWorld : public AbstractSimpleEvolutionWorld
+	class AbstractCoevolutionEnvironment : public AbstractSimpleEvolutionEnvironment
 	{
 		template <class Archive>
-		friend void save(Archive& archive, AbstractCoevolutionWorld const& world);
+		friend void save(Archive& archive, AbstractCoevolutionEnvironment const& environment);
 		template <class Archive>
-		friend void load(Archive& archive, AbstractCoevolutionWorld& world);
+		friend void load(Archive& archive, AbstractCoevolutionEnvironment& environment);
 	private:
 		/**
 		 * \brief The fitness function which computes the fitness values from the combining results.
@@ -52,9 +52,9 @@ namespace LightBulb
 		std::unique_ptr<std::map<const AbstractIndividual*, double>> fitnessValues;
 	protected:
 		/**
-		 * \brief True, if this world is the parasite world.
+		 * \brief True, if this environment is the parasite environment.
 		 */
-		bool parasiteWorld;
+		bool parasiteEnvironment;
 		/**
 		 * \brief Contains the total amount of comparisons.
 		 */
@@ -69,15 +69,15 @@ namespace LightBulb
 		virtual int doCompare(AbstractIndividual& individual1, AbstractIndividual& individual2, int round) = 0;
 	public:
 		/**
-		 * \brief Creates a coevolution world.
-		 * \param isParasiteWorld_ True, if this world is the parasite world.
+		 * \brief Creates a coevolution environment.
+		 * \param isParasiteEnvironment_ True, if this environment is the parasite environment.
 		 * \param combiningStrategy_ The combining strategy which determines which individuals should compete.
 		 * \param fitnessFunction_ The fitness function which computes the fitness values from the combining results.
 		 * \param hallOfFameToAddAlgorithm_ The algorithm where to add new hall of fame members.
 		 * \param hallOfFameToChallengeAlgorithm_ The algorithm which should be used for challenging.
 		 */
-		AbstractCoevolutionWorld(bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
-		AbstractCoevolutionWorld() = default;
+		AbstractCoevolutionEnvironment(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
+		AbstractCoevolutionEnvironment() = default;
 		/**
 		 * \brief Compares the two given individuals. 
 		 * \param individual1 The first individual.
@@ -98,10 +98,10 @@ namespace LightBulb
 		 */
 		virtual AbstractCombiningStrategy& getCombiningStrategy() const;
 		/**
-		 * \brief Returns, if the world is the parasite world.
-		 * \return True, if this world is the parasite world.
+		 * \brief Returns, if the environment is the parasite environment.
+		 * \return True, if this environment is the parasite environment.
 		 */
-		virtual bool isParasiteWorld() const;
+		virtual bool isParasiteEnvironment() const;
 		/**
 		 * \brief Returns how many rounds each individual pair should compete.
 		 * \return The amount of rounds.
@@ -116,6 +116,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractCoevolutionWorldIO.hpp"
+#include "IO/AbstractCoevolutionEnvironmentIO.hpp"
 
 #endif

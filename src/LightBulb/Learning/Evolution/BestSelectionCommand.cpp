@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/BestSelectionCommand.hpp"
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 //Library includes

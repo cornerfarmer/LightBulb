@@ -38,17 +38,17 @@ namespace LightBulb
 		 */
 		const AbstractCombiningStrategy* otherCombiningStrategy;
 		// Inherited:
-		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
+		void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
 	public:
 		/**
 		 * \brief Creates the shared sampling combining strategy.
 		 * \param amountOfCompetitionsPerIndividual_ Determines the number of competitions per individual.
-		 * \param secondWorld_ The other world.
+		 * \param secondEnvironment_ The other environment.
 		 */
-		SharedSamplingCombiningStrategy(int amountOfCompetitionsPerIndividual_ = 0, AbstractCoevolutionWorld* secondWorld_ = nullptr);
+		SharedSamplingCombiningStrategy(int amountOfCompetitionsPerIndividual_ = 0, AbstractCoevolutionEnvironment* secondEnvironment_ = nullptr);
 		// Inherited:
-		void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld) override;
-		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
+		void setSecondEnvironment(AbstractCoevolutionEnvironment& newSecondEnvironment) override;
+		int getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const override;
 	};
 }
 

@@ -13,10 +13,10 @@ namespace LightBulb
 {
 	// Forward declarations
 	class EvolutionLearningRule;
-	class TeachingEvolutionWorld;
+	class TeachingEvolutionEnvironment;
 	class FeedForwardNetworkTopologyOptions;
 	/**
-	 * \brief A individual used in the TeachingEvolutionWorld.
+	 * \brief A individual used in the TeachingEvolutionEnvironment.
 	 */
 	class TeachedIndividual : public AbstractIndividual
 	{
@@ -26,9 +26,9 @@ namespace LightBulb
 		friend void load(Archive& archive, TeachedIndividual& individual);
 	protected:
 		/**
-		 * \brief The corresponding world.
+		 * \brief The corresponding environment.
 		 */
-		TeachingEvolutionWorld* teachingEvolutionWorld;
+		TeachingEvolutionEnvironment* teachingEvolutionEnvironment;
 		/**
 		 * \brief The used network
 		 */
@@ -47,11 +47,11 @@ namespace LightBulb
 		double currentWeightDecayError;
 	public:
 		/**
-		 * \brief Create a new individual in the given world and with a NN built with the given network options.
-		 * \param teachingEvolutionWorld_ The world which should contain the individual.
+		 * \brief Create a new individual in the given environment and with a NN built with the given network options.
+		 * \param teachingEvolutionEnvironment_ The environment which should contain the individual.
 		 * \param options The feed forward network options.
 		 */
-		TeachedIndividual(TeachingEvolutionWorld& teachingEvolutionWorld_, FeedForwardNetworkTopologyOptions& options);
+		TeachedIndividual(TeachingEvolutionEnvironment& teachingEvolutionEnvironment_, FeedForwardNetworkTopologyOptions& options);
 		TeachedIndividual() = default;
 		/**
 		 * \brief Returns the current total error.
@@ -72,7 +72,7 @@ namespace LightBulb
 		void doNNCalculation() override;
 		void resetNN() override;
 		AbstractNeuralNetwork& getNeuralNetwork() override;
-		AbstractIndividual* clone(bool addToWorld = true) const override;
+		AbstractIndividual* clone(bool addToEnvironment = true) const override;
 	};
 }
 

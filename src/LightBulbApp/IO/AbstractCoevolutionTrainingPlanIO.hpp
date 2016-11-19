@@ -5,7 +5,7 @@
 
 // Includes
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
-#include <Learning/Evolution/AbstractCoevolutionWorld.hpp>
+#include <Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -23,7 +23,7 @@ namespace LightBulb
 	template <class Archive>
 	void save(Archive& archive, AbstractCoevolutionTrainingPlan const& trainingPlan)
 	{
-		archive(cereal::make_nvp("parasiteWorld", trainingPlan.parasiteWorld));
+		archive(cereal::make_nvp("parasiteEnvironment", trainingPlan.parasiteEnvironment));
 		archive(cereal::base_class<AbstractEvolutionTrainingPlan>(&trainingPlan));
 	}
 
@@ -36,15 +36,15 @@ namespace LightBulb
 	template <class Archive>
 	void load(Archive& archive, AbstractCoevolutionTrainingPlan& trainingPlan)
 	{
-		IOStorage<AbstractEvolutionWorld>::push(trainingPlan.createParasiteWorld());
-		archive(cereal::make_nvp("parasiteWorld", trainingPlan.parasiteWorld));
-		trainingPlan.parasiteWorld.reset(IOStorage<AbstractEvolutionWorld>::pop());
+		IOStorage<AbstractEvolutionEnvironment>::push(trainingPlan.createParasiteEnvironment());
+		archive(cereal::make_nvp("parasiteEnvironment", trainingPlan.parasiteEnvironment));
+		trainingPlan.parasiteEnvironment.reset(IOStorage<AbstractEvolutionEnvironment>::pop());
 
 		archive(cereal::base_class<AbstractEvolutionTrainingPlan>(&trainingPlan));
 
-		trainingPlan.parasiteWorld->setLearningState(trainingPlan.getLearningState());
-		static_cast<AbstractCoevolutionWorld*>(trainingPlan.parasiteWorld.get())->getCombiningStrategy().setSecondWorld(static_cast<AbstractCoevolutionWorld&>(*trainingPlan.world.get()));
-		static_cast<AbstractCoevolutionWorld*>(trainingPlan.world.get())->getCombiningStrategy().setSecondWorld(static_cast<AbstractCoevolutionWorld&>(*trainingPlan.parasiteWorld.get()));
+		trainingPlan.parasiteEnvironment->setLearningState(trainingPlan.getLearningState());
+		static_cast<AbstractCoevolutionEnvironment*>(trainingPlan.parasiteEnvironment.get())->getCombiningStrategy().setSecondEnvironment(static_cast<AbstractCoevolutionEnvironment&>(*trainingPlan.environment.get()));
+		static_cast<AbstractCoevolutionEnvironment*>(trainingPlan.environment.get())->getCombiningStrategy().setSecondEnvironment(static_cast<AbstractCoevolutionEnvironment&>(*trainingPlan.parasiteEnvironment.get()));
 	}
 }
 

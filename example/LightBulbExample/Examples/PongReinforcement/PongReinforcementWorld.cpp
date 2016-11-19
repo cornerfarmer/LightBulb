@@ -1,18 +1,18 @@
 // Includes
-#include "Examples/PongReinforcement/PongReinforcementWorld.hpp"
+#include "Examples/PongReinforcement/PongReinforcementEnvironment.hpp"
 #include <Learning/LearningState.hpp>
 #include <thread>
 //Library includes
 
 using namespace LightBulb;
 
-PongReinforcementWorld::PongReinforcementWorld(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
-	: AbstractReinforcementWorld(options_, epsilonGreedly, epsilon)
+PongReinforcementEnvironment::PongReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
+	: AbstractReinforcementEnvironment(options_, epsilonGreedly, epsilon)
 {
 	watchMode = false;
 }
 
-double PongReinforcementWorld::doSimulationStep()
+double PongReinforcementEnvironment::doSimulationStep()
 {
 	if (game.whoHasWon() != 0 || time >= game.getProperties().maxTime || time == -1)
 	{
@@ -38,7 +38,7 @@ double PongReinforcementWorld::doSimulationStep()
 		return game.whoHasWon();
 }
 
-void PongReinforcementWorld::getNNInput(std::vector<double>& input)
+void PongReinforcementEnvironment::getNNInput(std::vector<double>& input)
 {
 	input.resize(6);
 	input[0] = game.getState().ballPosX / game.getProperties().width;
@@ -49,7 +49,7 @@ void PongReinforcementWorld::getNNInput(std::vector<double>& input)
 	input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
 }
 
-void PongReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
+void PongReinforcementEnvironment::interpretNNOutput(std::vector<bool>& output)
 {
 	if (output[0])
 		game.movePaddle(1);
@@ -58,7 +58,7 @@ void PongReinforcementWorld::interpretNNOutput(std::vector<bool>& output)
 }
 
 
-void PongReinforcementWorld::executeCompareAI()
+void PongReinforcementEnvironment::executeCompareAI()
 {
 	if (game.getState().ballPosY > game.getState().paddle2Pos + game.getProperties().paddleHeight / 2)
 		game.movePaddle(1);
@@ -66,14 +66,14 @@ void PongReinforcementWorld::executeCompareAI()
 		game.movePaddle(-1);
 }
 
-void PongReinforcementWorld::initializeForLearning()
+void PongReinforcementEnvironment::initializeForLearning()
 {
-	AbstractReinforcementWorld::initializeForLearning();
+	AbstractReinforcementEnvironment::initializeForLearning();
 	time = -1;
 }
 
 
-int PongReinforcementWorld::rateKI()
+int PongReinforcementEnvironment::rateKI()
 {
 	PongGame tmp = game;
 	int wins = 0;
@@ -105,19 +105,19 @@ int PongReinforcementWorld::rateKI()
 }
 
 
-std::vector<std::string> PongReinforcementWorld::getDataSetLabels() const
+std::vector<std::string> PongReinforcementEnvironment::getDataSetLabels() const
 {
-	auto labels = AbstractReinforcementWorld::getDataSetLabels();
+	auto labels = AbstractReinforcementEnvironment::getDataSetLabels();
 	labels.push_back(DATASET_PONG_RATING);
 	return labels;
 }
 
-bool PongReinforcementWorld::isTerminalState()
+bool PongReinforcementEnvironment::isTerminalState()
 {
 	return game.whoHasWon() != 0 || time >= game.getProperties().maxTime;
 }
 
-void PongReinforcementWorld::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+void PongReinforcementEnvironment::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 {
 	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 	game.setRandomGenerator(randomGenerator_);

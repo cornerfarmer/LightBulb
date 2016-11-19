@@ -5,11 +5,11 @@
 
 namespace LightBulb
 {
-	AbstractIndividual* AbstractCommand::getUnusedIndividual(AbstractIndividual& usedIndividual, std::vector<AbstractIndividual*>& notUsedIndividuals, bool addToWorld) const
+	AbstractIndividual* AbstractCommand::getUnusedIndividual(AbstractIndividual& usedIndividual, std::vector<AbstractIndividual*>& notUsedIndividuals, bool addToEnvironment) const
 	{
 		if (notUsedIndividuals.empty())
 		{
-			return usedIndividual.clone(addToWorld);
+			return usedIndividual.clone(addToEnvironment);
 		}
 		else
 		{

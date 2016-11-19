@@ -2,7 +2,7 @@
 #include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
 // Library includes
 #include <algorithm>
-#include "AbstractCoevolutionWorld.hpp"
+#include "AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -14,7 +14,7 @@ namespace LightBulb
 		{
 			for (int memberIndex = 0; memberIndex < amountOfCompetitionsPerIndividual && memberIndex < members.size(); memberIndex++)
 			{
-				for (int r = 0; r < currentWorld->getRoundCount(); r++)
+				for (int r = 0; r < currentEnvironment->getRoundCount(); r++)
 				{
 					simulateAgainstMember(**individual, memberIndex, r);
 				}

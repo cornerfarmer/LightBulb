@@ -1,19 +1,19 @@
 #pragma once
 
-#ifndef _MOCKEVOLUTIONWORLD_H_
-#define _MOCKEVOLUTIONWORLD_H_
+#ifndef _MOCKEVOLUTIONENVIRONMENT_H_
+#define _MOCKEVOLUTIONENVIRONMENT_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractCoevolutionWorld.hpp>
+#include <Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
 
-class MockCoevolutionWorld : public LightBulb::AbstractCoevolutionWorld
+class MockCoevolutionEnvironment : public LightBulb::AbstractCoevolutionEnvironment
 {
 public:
 	MOCK_METHOD0(getHighscoreList, LightBulb::Highscore& ());
 	MOCK_CONST_METHOD1(getRealScore, double (const LightBulb::AbstractIndividual&));
 	MOCK_METHOD0(initializeForLearning, void ());
 	MOCK_METHOD0(createNewIndividual, LightBulb::AbstractIndividual* ());
-	MOCK_METHOD0(resetWorld, void ());
+	MOCK_METHOD0(resetEnvironment, void ());
 	MOCK_METHOD1(addNewIndividual, LightBulb::AbstractIndividual* (bool));
 	MOCK_METHOD0(getIndividuals, std::vector<LightBulb::AbstractIndividual*>& ());
 	MOCK_METHOD1(setIndividuals, void (const std::vector<LightBulb::AbstractIndividual*>&));
@@ -29,7 +29,7 @@ public:
 	MOCK_CONST_METHOD0(getCombiningStrategy, LightBulb::AbstractCombiningStrategy& ());
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));
 	MOCK_CONST_METHOD0(getDataSetLabels, std::vector<std::string> ());
-	MOCK_CONST_METHOD0(isParasiteWorld, bool ());
+	MOCK_CONST_METHOD0(isParasiteEnvironment, bool ());
 	MOCK_CONST_METHOD0(getRoundCount, int ());
 	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));
 };

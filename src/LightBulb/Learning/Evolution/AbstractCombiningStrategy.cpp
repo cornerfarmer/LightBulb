@@ -1,13 +1,13 @@
 // Includes
 #include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {
-	AbstractCombiningStrategy::AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_)
+	AbstractCombiningStrategy::AbstractCombiningStrategy(AbstractCoevolutionEnvironment* secondEnvironment_)
 	{
 		results.reset(new CombiningStrategyResults());
-		secondWorld = secondWorld_;
+		secondEnvironment = secondEnvironment_;
 	}
 
 	void AbstractCombiningStrategy::setResult(AbstractIndividual& firstPlayer, AbstractIndividual& secondPlayer, int round, bool firstPlayerHasWon)
@@ -17,19 +17,19 @@ namespace LightBulb
 		firstPlayerWins += firstPlayerHasWon;
 	}
 
-	CombiningStrategyResults& AbstractCombiningStrategy::execute(AbstractCoevolutionWorld& world)
+	CombiningStrategyResults& AbstractCombiningStrategy::execute(AbstractCoevolutionEnvironment& environment)
 	{
 		results.reset(new CombiningStrategyResults());
 		firstPlayerWins = 0;
 
-		combine(world, world.getIndividuals(), secondWorld ? secondWorld->getIndividuals() : world.getIndividuals());
+		combine(environment, environment.getIndividuals(), secondEnvironment ? secondEnvironment->getIndividuals() : environment.getIndividuals());
 
 		return *results.get();
 	}
 
-	void AbstractCombiningStrategy::setSecondWorld(AbstractCoevolutionWorld& newSecondWorld)
+	void AbstractCombiningStrategy::setSecondEnvironment(AbstractCoevolutionEnvironment& newSecondEnvironment)
 	{
-		secondWorld = &newSecondWorld;
+		secondEnvironment = &newSecondEnvironment;
 	}
 
 	const CombiningStrategyResults& AbstractCombiningStrategy::getPrevResults() const

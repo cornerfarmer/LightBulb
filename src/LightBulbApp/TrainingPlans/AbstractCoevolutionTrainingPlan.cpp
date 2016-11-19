@@ -12,23 +12,23 @@ namespace LightBulb
 
 	void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule1Options(EvolutionLearningRuleOptions& options) const
 	{
-		options.world = world.get();
+		options.environment = environment.get();
 	}
 
 	void AbstractCoevolutionTrainingPlan::fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions& options) const
 	{
-		options.world = parasiteWorld.get();
+		options.environment = parasiteEnvironment.get();
 	}
 
 	void AbstractCoevolutionTrainingPlan::initializeStart()
 	{
-		parasiteWorld.reset(createParasiteWorld());
+		parasiteEnvironment.reset(createParasiteEnvironment());
 		AbstractEvolutionTrainingPlan::initializeStart();
 	}
 
-	AbstractEvolutionWorld& AbstractCoevolutionTrainingPlan::getParasiteWorld()
+	AbstractEvolutionEnvironment& AbstractCoevolutionTrainingPlan::getParasiteEnvironment()
 	{
-		return *parasiteWorld.get();
+		return *parasiteEnvironment.get();
 	}
 
 }

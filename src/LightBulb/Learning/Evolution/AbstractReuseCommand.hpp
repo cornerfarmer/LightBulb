@@ -16,7 +16,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 	/**
 	 * \brief A command which reuses a few of the given individuals directly.
 	 */

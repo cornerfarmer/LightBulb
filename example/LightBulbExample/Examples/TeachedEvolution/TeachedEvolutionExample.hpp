@@ -11,7 +11,7 @@ class TeachedEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
-	LightBulb::AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractEvolutionEnvironment* createEnvironment() override;
 public:
 	std::string getOriginalName() const override;
 	std::string getDescription() const override;

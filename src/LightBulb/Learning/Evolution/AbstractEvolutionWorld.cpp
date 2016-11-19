@@ -1,17 +1,17 @@
 // Includes
-#include "Learning/Evolution/AbstractEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 //Library include
 #include <algorithm>
 #include <functional>
 
 namespace LightBulb
 {
-	AbstractEvolutionWorld::AbstractEvolutionWorld()
+	AbstractEvolutionEnvironment::AbstractEvolutionEnvironment()
 	{
 		recalculateHighscore = true;
 	}
 
-	Highscore& AbstractEvolutionWorld::getHighscoreList()
+	Highscore& AbstractEvolutionEnvironment::getHighscoreList()
 	{
 		if (recalculateHighscore)
 		{
@@ -32,18 +32,18 @@ namespace LightBulb
 		return currentHighscore;
 	}
 
-	std::vector<std::string> AbstractEvolutionWorld::getDataSetLabels() const
+	std::vector<std::string> AbstractEvolutionEnvironment::getDataSetLabels() const
 	{
 		std::vector<std::string> labels;
 		return labels;
 	}
 
-	void AbstractEvolutionWorld::setLearningState(LearningState& learningState_)
+	void AbstractEvolutionEnvironment::setLearningState(LearningState& learningState_)
 	{
 		learningState = &learningState_;
 	}
 
-	void AbstractEvolutionWorld::refreshHighscore()
+	void AbstractEvolutionEnvironment::refreshHighscore()
 	{
 		recalculateHighscore = true;
 	}

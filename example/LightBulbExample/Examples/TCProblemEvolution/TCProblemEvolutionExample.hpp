@@ -11,7 +11,7 @@ class TCProblemEvolutionExample : public LightBulb::AbstractEvolutionTrainingPla
 private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
-	LightBulb::AbstractEvolutionWorld* createWorld() override;
+	LightBulb::AbstractEvolutionEnvironment* createEnvironment() override;
 public:
 	TCProblemEvolutionExample();
 	std::string getOriginalName() const override;

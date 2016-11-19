@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 // Library includes
-#include "AbstractReinforcementWorld.hpp"
+#include "AbstractReinforcementEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -13,8 +13,8 @@ namespace LightBulb
 
 	void AbstractReinforcementLearningRule::randomGeneratorHasChanged()
 	{
-		if (getOptions().world)
-			getOptions().world->setRandomGenerator(*randomGenerator.get());
+		if (getOptions().environment)
+			getOptions().environment->setRandomGenerator(*randomGenerator.get());
 	}
 
 	bool AbstractReinforcementLearningRule::hasLearningSucceeded()
@@ -26,8 +26,8 @@ namespace LightBulb
 	{
 		std::vector<std::string> labels = AbstractLearningRule::getDataSetLabels();
 		labels.push_back(DATA_SET_REWARD);
-		std::vector<std::string> worldLabels = getOptions().world->getDataSetLabels();
-		labels.insert(labels.end(), worldLabels.begin(), worldLabels.end());
+		std::vector<std::string> environmentLabels = getOptions().environment->getDataSetLabels();
+		labels.insert(labels.end(), environmentLabels.begin(), environmentLabels.end());
 		return labels;
 	}
 

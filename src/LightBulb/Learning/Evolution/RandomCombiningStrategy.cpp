@@ -1,13 +1,13 @@
 // Includes
 #include "Learning/Evolution/RandomCombiningStrategy.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/AbstractCoevolutionWorld.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 //Library includes
 #include <algorithm>
 
 namespace LightBulb
 {
-	void RandomCombiningStrategy::combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
+	void RandomCombiningStrategy::combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals)
 	{
 		std::vector<AbstractIndividual*> randomOpponents = secondIndividuals;
 		random_shuffle(randomOpponents.begin(), randomOpponents.end());
@@ -16,9 +16,9 @@ namespace LightBulb
 		{
 			for (int opponentIndex = 0; opponentIndex < amountOfCompetitionsPerIndividual && opponentIndex < randomOpponents.size(); opponentIndex++)
 			{
-				for (int r = 0; r < simulationWorld.getRoundCount(); r++)
+				for (int r = 0; r < simulationEnvironment.getRoundCount(); r++)
 				{
-					int result = simulationWorld.compareIndividuals(**firstPlayer, *randomOpponents[opponentIndex], r);
+					int result = simulationEnvironment.compareIndividuals(**firstPlayer, *randomOpponents[opponentIndex], r);
 					if (result != 0)
 						setResult(**firstPlayer, *randomOpponents[opponentIndex], r, result > 0);
 				}
@@ -31,8 +31,8 @@ namespace LightBulb
 		amountOfCompetitionsPerIndividual = amountOfCompetitionsPerIndividual_;
 	}
 
-	int RandomCombiningStrategy::getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const
+	int RandomCombiningStrategy::getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const
 	{
-		return amountOfCompetitionsPerIndividual * simulationWorld.getPopulationSize() * simulationWorld.getRoundCount();
+		return amountOfCompetitionsPerIndividual * simulationEnvironment.getPopulationSize() * simulationEnvironment.getRoundCount();
 	}
 }

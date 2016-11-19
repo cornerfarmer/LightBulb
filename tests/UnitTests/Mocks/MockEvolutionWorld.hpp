@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef _MOCKEVOLUTIONWORLD_H_
-#define _MOCKEVOLUTIONWORLD_H_
+#ifndef _MOCKEVOLUTIONENVIRONMENT_H_
+#define _MOCKEVOLUTIONENVIRONMENT_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractEvolutionWorld.hpp>
+#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
-class MockEvolutionWorld : public LightBulb::AbstractEvolutionWorld
+class MockEvolutionEnvironment : public LightBulb::AbstractEvolutionEnvironment
 {
 public:
 	MOCK_METHOD1(setRandomGenerator, void (LightBulb::AbstractRandomGenerator&));

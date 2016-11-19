@@ -14,7 +14,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractCoevolutionWorld;
+	class AbstractCoevolutionEnvironment;
 	class AbstractIndividual;
 	/**
 	 * \brief Describes the results of a AbstractCombiningStrategy.
@@ -22,7 +22,7 @@ namespace LightBulb
 	 */
 	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
 	/**
-	 * \brief Describes a strategy for combining individual from one or two coevolution worlds.
+	 * \brief Describes a strategy for combining individual from one or two coevolution environments.
 	 * \details The strategy compares each two individuals and stores the results in a CombiningStrategyResults object.
 	 */
 	class AbstractCombiningStrategy : public virtual AbstractRandomGeneratorUser
@@ -38,17 +38,17 @@ namespace LightBulb
 		int firstPlayerWins;
 	protected:
 		/**
-		 * \brief Contains a second world, if one is used.
+		 * \brief Contains a second environment, if one is used.
 		 */
-		AbstractCoevolutionWorld* secondWorld;
+		AbstractCoevolutionEnvironment* secondEnvironment;
 		/**
 		 * \brief Does the combining.
-		 * \param simulationWorld The world which should be used for comparing individuals.
+		 * \param simulationEnvironment The environment which should be used for comparing individuals.
 		 * \param firstIndividuals The first pool of individuals.
 		 * \param secondIndividuals The second pool of individuals.
-		 * \note If only one world is used, the first and second pool will be the same.
+		 * \note If only one environment is used, the first and second pool will be the same.
 		 */
-		virtual void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) = 0;
+		virtual void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) = 0;
 		/**
 		 * \brief Registers the result of one combination.
 		 * \param firstPlayer The first player which has been used.
@@ -60,20 +60,20 @@ namespace LightBulb
 	public:
 		/**
 		 * \brief Creates the combining strategy.
-		 * \param secondWorld_ Optional a second world whose individuals should be used beside the individuals from the default world.
+		 * \param secondEnvironment_ Optional a second environment whose individuals should be used beside the individuals from the default environment.
 		 */
-		AbstractCombiningStrategy(AbstractCoevolutionWorld* secondWorld_ = nullptr);
+		AbstractCombiningStrategy(AbstractCoevolutionEnvironment* secondEnvironment_ = nullptr);
 		/**
-		 * \brief Executes combining of individuals from the given world.
-		 * \param world The world whose individuals should be used.
+		 * \brief Executes combining of individuals from the given environment.
+		 * \param environment The environment whose individuals should be used.
 		 * \return The combining results.
 		 */
-		virtual CombiningStrategyResults& execute(AbstractCoevolutionWorld& world);
+		virtual CombiningStrategyResults& execute(AbstractCoevolutionEnvironment& environment);
 		/**
-		 * \brief Sets a second world whose individuals should be used beside the individuals from the default world.
-		 * \param newSecondWorld The world to use.
+		 * \brief Sets a second environment whose individuals should be used beside the individuals from the default environment.
+		 * \param newSecondEnvironment The environment to use.
 		 */
-		virtual void setSecondWorld(AbstractCoevolutionWorld& newSecondWorld);
+		virtual void setSecondEnvironment(AbstractCoevolutionEnvironment& newSecondEnvironment);
 		/**
 		 * \brief Returns the combining results of the last calculation.
 		 * \return The combining results.
@@ -86,10 +86,10 @@ namespace LightBulb
 		virtual int getFirstPlayerWins() const;
 		/**
 		 * \brief Returns the total amount of matches in one calculation.
-		 * \param simulationWorld The world which should be used for calculation.
+		 * \param simulationEnvironment The environment which should be used for calculation.
 		 * \return The total amount of matches.
 		 */
-		virtual int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const = 0;
+		virtual int getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const = 0;
 	};
 }
 

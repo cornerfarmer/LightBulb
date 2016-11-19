@@ -14,8 +14,8 @@ AbstractIndividual* Pong::createNewIndividual()
 	return new PongAI(*options, *this);
 }
 
-Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
-	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
+Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+	: AbstractCoevolutionEnvironment(isParasiteEnvironment_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
 	options.reset(new FeedForwardNetworkTopologyOptions(options_));
 	watchMode = false;
@@ -32,8 +32,8 @@ int Pong::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int roun
 
 std::vector<std::string> Pong::getDataSetLabels() const
 {
-	auto labels = AbstractCoevolutionWorld::getDataSetLabels();
-	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING);
+	auto labels = AbstractCoevolutionEnvironment::getDataSetLabels();
+	labels.push_back(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING);
 	return labels;
 }
 
@@ -75,7 +75,7 @@ int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
 	}
 
 	if (game.whoHasWon() == 0) {
-		if (parasiteWorld)
+		if (parasiteEnvironment)
 			return -1;
 		else
 			return 1;
@@ -124,8 +124,8 @@ int Pong::rateIndividual(AbstractIndividual& rateKI)
 			wins++;
 	}
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(matchCount), LL_MEDIUM);
-	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING])
-		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING, static_cast<double>(wins) / matchCount);
+	if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING])
+		learningState->addData(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING, static_cast<double>(wins) / matchCount);
 
 	return wins;
 }
@@ -133,10 +133,10 @@ int Pong::rateIndividual(AbstractIndividual& rateKI)
 
 void Pong::startNewGame()
 {
-	resetWorld();
+	resetEnvironment();
 }
 
-void Pong::resetWorld()
+void Pong::resetEnvironment()
 {
 	game.reset();
 }

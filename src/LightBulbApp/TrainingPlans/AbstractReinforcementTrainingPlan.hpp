@@ -5,7 +5,7 @@
 
 // Includes
 #include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include "Learning/Reinforcement/AbstractReinforcementWorld.hpp"
+#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
 // Library includes
 
@@ -25,14 +25,14 @@ namespace LightBulb
 		friend void load(Archive& archive, AbstractReinforcementTrainingPlan& trainingPlan);
 	protected:
 		/**
-		 * \brief The reinforcement world which is used.
+		 * \brief The reinforcement environment which is used.
 		 */
-		std::unique_ptr<AbstractReinforcementWorld> world;
+		std::unique_ptr<AbstractReinforcementEnvironment> environment;
 		/**
-		 * \brief Creates the reinforcement world.
-		 * \return The new world.
+		 * \brief Creates the reinforcement environment.
+		 * \return The new environment.
 		 */
-		virtual AbstractReinforcementWorld* createWorld() = 0;
+		virtual AbstractReinforcementEnvironment* createEnvironment() = 0;
 		/**
 		* \brief Fills all learning rule options which are the same for all reinforcement learning rule training plans.
 		* \param options The options to fill.
@@ -44,10 +44,10 @@ namespace LightBulb
 		 */
 		AbstractReinforcementTrainingPlan();
 		/**
-		 * \brief Returns the reinforcement world.
-		 * \return The world.
+		 * \brief Returns the reinforcement environment.
+		 * \return The environment.
 		 */
-		AbstractReinforcementWorld& getWorld();
+		AbstractReinforcementEnvironment& getEnvironment();
 		// Inherited:
 		void initializeStart() override;
 	};

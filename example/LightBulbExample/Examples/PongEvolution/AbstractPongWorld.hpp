@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _ABSTRACTPONGWORLD_H_
-#define _ABSTRACTPONGWORLD_H_
+#ifndef _ABSTRACTPONGENVIRONMENT_H_
+#define _ABSTRACTPONGENVIRONMENT_H_
 
 // Library Includes
 
@@ -17,14 +17,14 @@ enum PongEvents
 	EVT_FIELD_CHANGED
 };
 
-class AbstractPongWorld : public LightBulb::Observable<PongEvents, AbstractPongWorld>
+class AbstractPongEnvironment : public LightBulb::Observable<PongEvents, AbstractPongEnvironment>
 {
 protected:
 	PongGame game;
 	bool watchMode;
 public:
-	AbstractPongWorld();
-	virtual ~AbstractPongWorld() {};
+	AbstractPongEnvironment();
+	virtual ~AbstractPongEnvironment() {};
 	void startWatchMode();
 	void stopWatchMode();
 	PongGame& getGame();

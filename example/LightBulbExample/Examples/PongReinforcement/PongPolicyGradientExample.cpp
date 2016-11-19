@@ -9,7 +9,7 @@
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Learning/Reinforcement/PolicyGradientLearningRule.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
-#include "PongReinforcementWorld.hpp"
+#include "PongReinforcementEnvironment.hpp"
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
 #include "Function/ActivationFunction/RectifierFunction.hpp"
@@ -30,8 +30,8 @@ using namespace LightBulb;
 AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 {
 	PolicyGradientLearningRuleOptions options;
-	world = createWorld();
-	options.world = world;
+	environment = createEnvironment();
+	options.environment = environment;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
 	options.seed = 12345;
@@ -44,7 +44,7 @@ AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 }
 
 
-PongReinforcementWorld* PongPolicyGradientExample::createWorld()
+PongReinforcementEnvironment* PongPolicyGradientExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -59,7 +59,7 @@ PongReinforcementWorld* PongPolicyGradientExample::createWorld()
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
 
-	return new PongReinforcementWorld(options);
+	return new PongReinforcementEnvironment(options);
 }
 
 
@@ -98,7 +98,7 @@ std::string PongPolicyGradientExample::getLearningRuleName() const
 }
 
 
-PongReinforcementWorld& PongPolicyGradientExample::getWorld()
+PongReinforcementEnvironment& PongPolicyGradientExample::getEnvironment()
 {
-	return *world;
+	return *environment;
 }

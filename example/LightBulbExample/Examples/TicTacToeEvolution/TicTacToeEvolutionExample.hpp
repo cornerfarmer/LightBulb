@@ -20,8 +20,8 @@ private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 	LightBulb::FeedForwardNetworkTopologyOptions getNetworkOptions();
-	LightBulb::AbstractEvolutionWorld* createWorld() override;
-	LightBulb::AbstractEvolutionWorld* createParasiteWorld() override;
+	LightBulb::AbstractEvolutionEnvironment* createEnvironment() override;
+	LightBulb::AbstractEvolutionEnvironment* createParasiteEnvironment() override;
 public:
 	TicTacToeEvolutionExample();
 	std::string getOriginalName() const override;

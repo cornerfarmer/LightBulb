@@ -11,7 +11,7 @@
 namespace LightBulb
 {
 	/**
-	 * \brief Adds individuals to the world as long as it contains less individuals than wished.
+	 * \brief Adds individuals to the environment as long as it contains less individuals than wished.
 	 */
 	class ConstantCreationCommand : public AbstractCreationCommand
 	{
@@ -28,7 +28,7 @@ namespace LightBulb
 		 */
 		ConstantCreationCommand(int individualCount_);
 		// Inherited:
-		void execute(AbstractEvolutionWorld& world, std::vector<AbstractIndividual*>& notUsedIndividuals) override;
+		void execute(AbstractEvolutionEnvironment& environment, std::vector<AbstractIndividual*>& notUsedIndividuals) override;
 		AbstractCloneable* clone() const override;
 	};
 }

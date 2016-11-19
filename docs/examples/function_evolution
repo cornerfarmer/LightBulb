@@ -1,0 +1,6 @@
+# Function evolution
+
+*The example is integrated into LightBulbExample and its code can be found in [BackpropagationXor](https://github.com/domin1101/LightBulb/tree/master/example/LightBulbExample/Examples/FunctionEvolution).*
+
+A simple example how to use evolution in LightBulb. Our goal is to find the global minimum of the [six-hump camel-back function](https://www.sfu.ca/~ssurjano/camel6.html).
+

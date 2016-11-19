@@ -14,7 +14,7 @@
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
-#include <Learning/Evolution/TeachingEvolutionWorld.hpp>
+#include <Learning/Evolution/TeachingEvolutionEnvironment.hpp>
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
@@ -63,7 +63,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	return new EvolutionLearningRule(options);
 }
 
-AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
+AbstractEvolutionEnvironment* TCProblemEvolutionExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions networkTopologyOptions;
 	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
@@ -76,7 +76,7 @@ AbstractEvolutionWorld* TCProblemEvolutionExample::createWorld()
 
 	TCProblemTeacher* teacher = new TCProblemTeacher(false, getDoublePreference(PREFERENCE_WEIGHTDECAY_FAC));
 	
-	return new TeachingEvolutionWorld(teacher, networkTopologyOptions);
+	return new TeachingEvolutionEnvironment(teacher, networkTopologyOptions);
 }
 
 TCProblemEvolutionExample::TCProblemEvolutionExample()

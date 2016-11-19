@@ -19,8 +19,8 @@ private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 	LightBulb::FeedForwardNetworkTopologyOptions getNetworkOptions();
-	LightBulb::AbstractEvolutionWorld* createWorld() override;
-	LightBulb::AbstractEvolutionWorld* createParasiteWorld() override;
+	LightBulb::AbstractEvolutionEnvironment* createEnvironment() override;
+	LightBulb::AbstractEvolutionEnvironment* createParasiteEnvironment() override;
 public:
 	PongEvolutionExample();
 	std::string getOriginalName() const override;

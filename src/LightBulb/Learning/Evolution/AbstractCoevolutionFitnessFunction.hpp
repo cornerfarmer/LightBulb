@@ -12,7 +12,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractCoevolutionWorld;
+	class AbstractCoevolutionEnvironment;
 	class AbstractIndividual;
 	/**
 	 * \brief Describes a function which calculates fitness values from CombiningStrategyResults.

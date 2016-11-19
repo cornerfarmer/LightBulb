@@ -1,13 +1,13 @@
 #pragma once
 
-#ifndef _TEACHINGEVOLUTIONWORLD_H_
-#define _TEACHINGEVOLUTIONWORLD_H_
+#ifndef _TEACHINGEVOLUTIONENVIRONMENT_H_
+#define _TEACHINGEVOLUTIONENVIRONMENT_H_
 
 // Library Includes
 #include <vector>
 #include <map>
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "IO/UseParentSerialization.hpp"
 
@@ -22,10 +22,10 @@ namespace LightBulb
 #define DATASET_WEIGHTDECAY_ERROR "Weigth decay error"
 
 	/**
-	 * \brief A world which makes it possible to combine the evolution world with classic superives learning.
+	 * \brief A environment which makes it possible to combine the evolution environment with classic superives learning.
 	 * \details Every individuals simply tries to minimize the teaching error.
 	 */
-	class TeachingEvolutionWorld : public AbstractSimpleEvolutionWorld
+	class TeachingEvolutionEnvironment : public AbstractSimpleEvolutionEnvironment
 	{
 	protected:
 		/**
@@ -40,12 +40,12 @@ namespace LightBulb
 		AbstractIndividual* createNewIndividual() override;
 	public:
 		/**
-		 * \brief Creates a new teaching evolution world.
+		 * \brief Creates a new teaching evolution environment.
 		 * \param teacher_ The teacher which contains the learning goals.
 		 * \param networkOptions_ The network options which should be used.
 		 */
-		TeachingEvolutionWorld(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_);
-		TeachingEvolutionWorld() = default;
+		TeachingEvolutionEnvironment(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_);
+		TeachingEvolutionEnvironment() = default;
 		/**
 		 * \brief Returns teh used teacher.
 		 * \return The teacher which contains the learning goals.
@@ -58,6 +58,6 @@ namespace LightBulb
 	};
 }
 
-USE_EXISTING_PARENT_SERIALIZATION(LightBulb::TeachingEvolutionWorld, LightBulb::AbstractSimpleEvolutionWorld, LightBulb::AbstractEvolutionWorld, LightBulb)
+USE_EXISTING_PARENT_SERIALIZATION(LightBulb::TeachingEvolutionEnvironment, LightBulb::AbstractSimpleEvolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, LightBulb)
 
 #endif

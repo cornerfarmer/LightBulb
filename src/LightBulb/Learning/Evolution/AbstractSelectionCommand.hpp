@@ -13,7 +13,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 	class EvolutionLearningRule;
 	/**
 	 * \brief A command that selects a few of the individuals which will be forwarded to the mutation, recombination and reuse commands.

@@ -7,7 +7,7 @@
 #include "PongEvolutionExample.hpp"
 #include "Pong.hpp"
 #include <Examples/PongReinforcement/PongPolicyGradientExample.hpp>
-#include <Examples/PongReinforcement/PongReinforcementWorld.hpp>
+#include <Examples/PongReinforcement/PongReinforcementEnvironment.hpp>
 
 using namespace LightBulb;
 
@@ -15,10 +15,10 @@ PongGameController::PongGameController(AbstractMainApp& mainApp, AbstractTrainin
 	:AbstractCustomSubApp(mainApp, trainingPlan_)
 {
 	if (dynamic_cast<PongEvolutionExample*>(trainingPlan))
-		world = static_cast<Pong*>(&static_cast<PongEvolutionExample*>(trainingPlan)->getWorld());
+		environment = static_cast<Pong*>(&static_cast<PongEvolutionExample*>(trainingPlan)->getEnvironment());
 	else
-		world = &static_cast<PongPolicyGradientExample*>(trainingPlan)->getWorld();
-	properties = world->getGame().getProperties();
+		environment = &static_cast<PongPolicyGradientExample*>(trainingPlan)->getEnvironment();
+	properties = environment->getGame().getProperties();
 	window.reset(new PongGameWindow(*this, parent));
 }
 
@@ -34,15 +34,15 @@ PongGameWindow& PongGameController::getWindow()
 
 void PongGameController::stopWatchMode()
 {
-	world->stopWatchMode();
-	world->removeObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, *this);
+	environment->stopWatchMode();
+	environment->removeObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, *this);
 }
 
 
 void PongGameController::startWatchMode()
 {
-	world->startWatchMode();
-	world->registerObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, *this);
+	environment->startWatchMode();
+	environment->registerObserver(EVT_FIELD_CHANGED, &PongGameController::fieldChanged, *this);
 }
 
 
@@ -61,7 +61,7 @@ PongGameProperties& PongGameController::getProperties()
 	return properties;
 }
 
-void PongGameController::fieldChanged(AbstractPongWorld& pong)
+void PongGameController::fieldChanged(AbstractPongEnvironment& pong)
 {
 	currentState = pong.getGame().getState();
 	wxThreadEvent evt(PONG_EVT_FIELD_CHANGED);

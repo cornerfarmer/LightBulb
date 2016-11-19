@@ -13,7 +13,7 @@
 namespace LightBulb
 {
 	// Forward declarations
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 
 	/**
 	* \brief All general options which are the same for all evolution learning rules.
@@ -21,15 +21,15 @@ namespace LightBulb
 	struct AbstractEvolutionLearningRuleOptions : public AbstractLearningRuleOptions
 	{
 		/**
-		 * \brief The world which is used by this learning rule.
+		 * \brief The environment which is used by this learning rule.
 		 */
-		AbstractEvolutionWorld* world;
+		AbstractEvolutionEnvironment* environment;
 		/**
 		* \brief Creates the options and fills them with default options.
 		*/
 		AbstractEvolutionLearningRuleOptions()
 		{
-			world = nullptr;
+			environment = nullptr;
 		}
 	};
 	/**
@@ -67,15 +67,15 @@ namespace LightBulb
 		*/
 		AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions* options_);
 		/**
-		 * \brief Returns the corresponding world.
-		 * \return The world which is used by this learning rule.
+		 * \brief Returns the corresponding environment.
+		 * \return The environment which is used by this learning rule.
 		 */
-		virtual const AbstractEvolutionWorld& getWorld() const;
+		virtual const AbstractEvolutionEnvironment& getEnvironment() const;
 		/**
-		* \brief Returns the corresponding world.
-		* \return The world which is used by this learning rule.
+		* \brief Returns the corresponding environment.
+		* \return The environment which is used by this learning rule.
 		*/
-		virtual AbstractEvolutionWorld& getWorld();
+		virtual AbstractEvolutionEnvironment& getEnvironment();
 		// Inherited:
 		std::vector<std::string> getDataSetLabels() const override;
 	};

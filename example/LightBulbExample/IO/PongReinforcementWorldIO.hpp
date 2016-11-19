@@ -1,37 +1,37 @@
 #pragma once
 
-#ifndef _PONGREINFORCEMENTWORLDIO_H_
-#define _PONGREINFORCEMENTWORLDIO_H_
+#ifndef _PONGREINFORCEMENTENVIRONMENTIO_H_
+#define _PONGREINFORCEMENTENVIRONMENTIO_H_
 
 // Libary includes
-#include "Examples/PongReinforcement/PongReinforcementWorld.hpp"
+#include "Examples/PongReinforcement/PongReinforcementEnvironment.hpp"
 #include "IO/ConstructExisting.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 
 template <class Archive>
-void serialize(Archive& archive, PongReinforcementWorld& world)
+void serialize(Archive& archive, PongReinforcementEnvironment& environment)
 {
-	archive(cereal::base_class<LightBulb::AbstractReinforcementWorld>(&world));
-	archive(cereal::make_nvp("time", world.time));
-	archive(cereal::make_nvp("game", world.game));
+	archive(cereal::base_class<LightBulb::AbstractReinforcementEnvironment>(&environment));
+	archive(cereal::make_nvp("time", environment.time));
+	archive(cereal::make_nvp("game", environment.game));
 }
 
 
 namespace cereal
 {
-	CONSTRUCT_EXISTING(PongReinforcementWorld, LightBulb::AbstractReinforcementWorld)
+	CONSTRUCT_EXISTING(PongReinforcementEnvironment, LightBulb::AbstractReinforcementEnvironment)
 	{
 		template <class Archive>
-		static void construct(Archive& ar, PongReinforcementWorld& world)
+		static void construct(Archive& ar, PongReinforcementEnvironment& environment)
 		{
 			using namespace LightBulb;
-			ar(base_class<AbstractReinforcementWorld>(&world));
-			ar(make_nvp("time", world.time));
+			ar(base_class<AbstractReinforcementEnvironment>(&environment));
+			ar(make_nvp("time", environment.time));
 
-			IOStorage<PongGame>::push(&world.game);
-			ar(make_nvp("game", world.game));
+			IOStorage<PongGame>::push(&environment.game);
+			ar(make_nvp("game", environment.game));
 			IOStorage<PongGame>::clear();
 		}
 	};
@@ -39,6 +39,6 @@ namespace cereal
 
 #include "IO/UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(PongReinforcementWorld);
+CEREAL_REGISTER_TYPE(PongReinforcementEnvironment);
 
 #endif

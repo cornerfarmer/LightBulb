@@ -35,11 +35,11 @@ namespace LightBulb
 		std::unique_ptr<std::vector<AbstractIndividual*>> nextLevel;
 		/**
 		 * \brief Processes the next round.
-		 * \param world The world where the individuals should be compared.
+		 * \param environment The environment where the individuals should be compared.
 		 */
-		void processLevel(AbstractCoevolutionWorld* world);
+		void processLevel(AbstractCoevolutionEnvironment* environment);
 		// Inherited:
-		void combine(AbstractCoevolutionWorld& simulationWorld, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
+		void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
 	public:
 		/**
 		 * \brief Creates the tournament combining strategy.
@@ -47,7 +47,7 @@ namespace LightBulb
 		 */
 		TournamentCombiningStrategy(bool doShuffleBeforeTournament_ = true);
 		// Inherited:
-		int getTotalMatches(const AbstractCoevolutionWorld& simulationWorld) const override;
+		int getTotalMatches(const AbstractCoevolutionEnvironment& simulationEnvironment) const override;
 	};
 }
 

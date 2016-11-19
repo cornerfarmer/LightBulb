@@ -18,8 +18,8 @@ AbstractIndividual* TicTacToe::createNewIndividual()
 	return new TicTacToeAI(*options, *this);
 }
 
-TicTacToe::TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteWorld_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
-	: AbstractCoevolutionWorld(isParasiteWorld_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
+TicTacToe::TicTacToe(FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+	: AbstractCoevolutionEnvironment(isParasiteEnvironment_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 {
 	options.reset(new FeedForwardNetworkTopologyOptions(options_));
 	initialize();
@@ -37,7 +37,7 @@ void TicTacToe::initialize()
 	{
 		fields[x].resize(3);
 	}
-	resetWorld();
+	resetEnvironment();
 	stepMode = false;
 }
 
@@ -80,8 +80,8 @@ void TicTacToe::stopStepMode()
 
 std::vector<std::string> TicTacToe::getDataSetLabels() const
 {
-	auto labels = AbstractCoevolutionWorld::getDataSetLabels();
-	labels.push_back(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING);
+	auto labels = AbstractCoevolutionEnvironment::getDataSetLabels();
+	labels.push_back(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING);
 	return labels;
 }
 
@@ -153,7 +153,7 @@ int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlaye
 	{
 		int w = whoHasWon();
 		if (w == 0) {
-			if (parasiteWorld)
+			if (parasiteEnvironment)
 				return -1;
 			else
 				return 1;
@@ -224,8 +224,8 @@ int TicTacToe::rateIndividual(AbstractIndividual& rateKI)
 	}
 
 	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
-	if (!learningState->disabledDatasets[std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING])
-		learningState->addData(std::string(parasiteWorld ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, static_cast<double>(wins) / possibleGames);
+	if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING])
+		learningState->addData(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, static_cast<double>(wins) / possibleGames);
 
 	return wins;
 }
@@ -257,7 +257,7 @@ bool TicTacToe::isFree(int x, int y)
 void TicTacToe::startNewGame(int firstPlayer)
 {
 	illegalMove = false;
-	resetWorld();
+	resetEnvironment();
 	currentPlayer = firstPlayer;
 }
 
@@ -297,7 +297,7 @@ void TicTacToe::setField(int x, int y)
 }
 
 
-void TicTacToe::resetWorld()
+void TicTacToe::resetEnvironment()
 {
 	for (auto column = fields.begin(); column != fields.end(); column++)
 	{

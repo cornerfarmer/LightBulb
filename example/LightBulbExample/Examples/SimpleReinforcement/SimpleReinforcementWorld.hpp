@@ -1,18 +1,18 @@
 #pragma once
 
-#ifndef _SIMPLEREINFORCEMENTWORLD_H_
-#define _SIMPLEREINFORCEMENTWORLD_H_
+#ifndef _SIMPLEREINFORCEMENTENVIRONMENT_H_
+#define _SIMPLEREINFORCEMENTENVIRONMENT_H_
 
 // Library Includes
 
 // Include
-#include <Learning/Reinforcement/AbstractReinforcementWorld.hpp>
-#include <Examples/PongEvolution/AbstractPongWorld.hpp>
+#include <Learning/Reinforcement/AbstractReinforcementEnvironment.hpp>
+#include <Examples/PongEvolution/AbstractPongEnvironment.hpp>
 
 // Forward declarations
 
 
-class SimpleReinforcementWorld : public LightBulb::AbstractReinforcementWorld
+class SimpleReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvironment
 {
 private:
 	int posX;
@@ -21,8 +21,8 @@ protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<bool>& output) override;
 public:
-	SimpleReinforcementWorld(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
-	SimpleReinforcementWorld() = default;
+	SimpleReinforcementEnvironment(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	SimpleReinforcementEnvironment() = default;
 	double doSimulationStep() override;
 	std::vector<std::string> getDataSetLabels() const override;
 	bool isTerminalState() override;

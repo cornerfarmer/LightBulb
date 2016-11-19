@@ -7,14 +7,14 @@
 #include <Windows/AbstractCustomSubApp.hpp>
 #include <memory>
 #include "MountainCarWindow.hpp"
-#include "MountainCarWorld.hpp"
+#include "MountainCarEnvironment.hpp"
 
 
 class MountainCarController : public LightBulb::AbstractCustomSubApp
 {
 private:
 	std::unique_ptr<MountainCarWindow> window;
-	MountainCarWorld* world;
+	MountainCarEnvironment* environment;
 	double position;
 	double velocity;
 	int action;
@@ -29,7 +29,7 @@ public:
 	double getPosition();
 	double getVelocity();
 	int getAction();
-	void posChanged(MountainCarWorld& pong);
+	void posChanged(MountainCarEnvironment& pong);
 };
 
 #endif

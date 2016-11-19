@@ -10,7 +10,7 @@
 #include <Learning/Reinforcement/PolicyGradientLearningRule.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
-#include "SimpleReinforcementWorld.hpp"
+#include "SimpleReinforcementEnvironment.hpp"
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
@@ -23,8 +23,8 @@ using namespace LightBulb;
 AbstractLearningRule* SimpleReinforcementExample::createLearningRate()
 {
 	PolicyGradientLearningRuleOptions options;
-	world = createWorld();
-	options.world = world;
+	environment = createEnvironment();
+	options.environment = environment;
 	options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(options);
@@ -33,7 +33,7 @@ AbstractLearningRule* SimpleReinforcementExample::createLearningRate()
 }
 
 
-SimpleReinforcementWorld* SimpleReinforcementExample::createWorld()
+SimpleReinforcementEnvironment* SimpleReinforcementExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -47,7 +47,7 @@ SimpleReinforcementWorld* SimpleReinforcementExample::createWorld()
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
 
-	return new SimpleReinforcementWorld(options);
+	return new SimpleReinforcementEnvironment(options);
 }
 
 
@@ -82,7 +82,7 @@ std::string SimpleReinforcementExample::getLearningRuleName() const
 }
 
 
-SimpleReinforcementWorld& SimpleReinforcementExample::getWorld()
+SimpleReinforcementEnvironment& SimpleReinforcementExample::getEnvironment()
 {
-	return *world;
+	return *environment;
 }

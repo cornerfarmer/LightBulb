@@ -1,10 +1,10 @@
 #pragma once
 
-#ifndef _ABSTRACTSIMPLEEVOLUTIONWORLDIO_H_
-#define _ABSTRACTSIMPLEEVOLUTIONWORLDIO_H_
+#ifndef _ABSTRACTSIMPLEEVOLUTIONENVIRONMENTIO_H_
+#define _ABSTRACTSIMPLEEVOLUTIONENVIRONMENTIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionWorld.hpp"
+#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "Learning/Evolution/AbstractIndividual.hpp"
 #include "IO/IOStorage.hpp"
 
@@ -16,16 +16,16 @@
 namespace LightBulb
 {
 	/**
-	* \brief Saves an AbstractSimpleEvolutionWorld
+	* \brief Saves an AbstractSimpleEvolutionEnvironment
 	* \tparam Archive The archive type.
 	* \param archive The archive which should be used.
-	* \param world The AbstractSimpleEvolutionWorld to save.
+	* \param environment The AbstractSimpleEvolutionEnvironment to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, AbstractSimpleEvolutionWorld const& world)
+	void save(Archive& archive, AbstractSimpleEvolutionEnvironment const& environment)
 	{
 		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
-		for (auto individual = world.individuals.begin(); individual != world.individuals.end(); individual++)
+		for (auto individual = environment.individuals.begin(); individual != environment.individuals.end(); individual++)
 			individuals.push_back(std::unique_ptr<AbstractIndividual>(*individual));
 
 		archive(cereal::make_nvp("individuals", individuals));
@@ -35,28 +35,28 @@ namespace LightBulb
 	}
 
 	/**
-	* \brief Loads an AbstractSimpleEvolutionWorld
+	* \brief Loads an AbstractSimpleEvolutionEnvironment
 	* \tparam Archive The archive type.
 	* \param archive The archive which should be used.
-	* \param world The AbstractSimpleEvolutionWorld to load.
+	* \param environment The AbstractSimpleEvolutionEnvironment to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractSimpleEvolutionWorld& world)
+	void load(Archive& archive, AbstractSimpleEvolutionEnvironment& environment)
 	{
 		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
-		IOStorage<AbstractEvolutionWorld>::push(&world);
+		IOStorage<AbstractEvolutionEnvironment>::push(&environment);
 		archive(cereal::make_nvp("individuals", individuals));
-		IOStorage<AbstractEvolutionWorld>::clear();
+		IOStorage<AbstractEvolutionEnvironment>::clear();
 
 		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
 		{
-			world.individuals.push_back(individual->release());
+			environment.individuals.push_back(individual->release());
 		}
 	}
 }
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(LightBulb::AbstractSimpleEvolutionWorld);
+CEREAL_REGISTER_TYPE(LightBulb::AbstractSimpleEvolutionEnvironment);
 
 #endif

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <Learning/Evolution/TournamentCombiningStrategy.hpp>
-#include <Mocks/MockCoevolutionWorld.hpp>
+#include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
 
 using namespace LightBulb;
@@ -8,7 +8,7 @@ using namespace LightBulb;
 class TournamentCombiningStrategyTest : public testing::Test {
 public:
 	TournamentCombiningStrategy* tournamentCombiningStrategy;
-	MockCoevolutionWorld world;
+	MockCoevolutionEnvironment environment;
 	MockIndividual individual1, individual2, individual3, individual4, individual5, individual6;
 
 	void SetUp()
@@ -22,31 +22,31 @@ public:
 	}
 };
 
-TEST_F(TournamentCombiningStrategyTest, executeEmptyWorld)
+TEST_F(TournamentCombiningStrategyTest, executeEmptyEnvironment)
 {
 	std::vector<AbstractIndividual*> individuals;
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 	
-	auto result = tournamentCombiningStrategy->execute(world);
+	auto result = tournamentCombiningStrategy->execute(environment);
 
 	EXPECT_EQ(0, result.size());
 }
 
-TEST_F(TournamentCombiningStrategyTest, executeSingleWorld)
+TEST_F(TournamentCombiningStrategyTest, executeSingleEnvironment)
 {
 	tournamentCombiningStrategy = new TournamentCombiningStrategy(false);
 
 	std::vector<AbstractIndividual*> individuals({ &individual1 , &individual2, &individual3, &individual4, &individual5, &individual6 });
-	EXPECT_CALL(world, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(individual2), 0)).WillOnce(testing::Return(1));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual3), testing::Ref(individual4), 0)).WillOnce(testing::Return(-1));
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual5), testing::Ref(individual6), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(environment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(individual2), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual3), testing::Ref(individual4), 0)).WillOnce(testing::Return(-1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual5), testing::Ref(individual6), 0)).WillOnce(testing::Return(1));
 
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(individual4), 0)).WillOnce(testing::Return(1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(individual4), 0)).WillOnce(testing::Return(1));
 
-	EXPECT_CALL(world, compareIndividuals(testing::Ref(individual1), testing::Ref(individual5), 0)).WillOnce(testing::Return(-1));
+	EXPECT_CALL(environment, compareIndividuals(testing::Ref(individual1), testing::Ref(individual5), 0)).WillOnce(testing::Return(-1));
 
-	auto& result = tournamentCombiningStrategy->execute(world);
+	auto& result = tournamentCombiningStrategy->execute(environment);
 	
 	EXPECT_EQ(6, result.size());
 	EXPECT_EQ(3, result[&individual1].size());
@@ -57,7 +57,7 @@ TEST_F(TournamentCombiningStrategyTest, executeSingleWorld)
 	EXPECT_EQ(1, result[&individual6].size());
 }
 
-TEST_F(TournamentCombiningStrategyTest, executeTwoWorlds)
+TEST_F(TournamentCombiningStrategyTest, executeTwoEnvironments)
 {
 	EXPECT_EQ("false", "Implemented");
 }

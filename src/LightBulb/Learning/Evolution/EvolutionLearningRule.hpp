@@ -14,7 +14,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
-	class AbstractEvolutionWorld;
+	class AbstractEvolutionEnvironment;
 	class AbstractCreationCommand;
 	class AbstractSelectionCommand;
 	class AbstractMutationCommand;

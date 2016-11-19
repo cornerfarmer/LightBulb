@@ -6,7 +6,7 @@
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include "SimpleReinforcementWorld.hpp"
+#include "SimpleReinforcementEnvironment.hpp"
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
@@ -28,8 +28,8 @@ using namespace LightBulb;
 AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;
-	world = createWorld();
-	options.world = world;
+	environment = createEnvironment();
+	options.environment = environment;
 	options.rmsPropOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
 	options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
@@ -42,7 +42,7 @@ AbstractLearningRule* SimpleReinforcementDQNExample::createLearningRate()
 }
 
 
-SimpleReinforcementWorld* SimpleReinforcementDQNExample::createWorld()
+SimpleReinforcementEnvironment* SimpleReinforcementDQNExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -56,7 +56,7 @@ SimpleReinforcementWorld* SimpleReinforcementDQNExample::createWorld()
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
-	return new SimpleReinforcementWorld(options, true, 1);
+	return new SimpleReinforcementEnvironment(options, true, 1);
 }
 
 
@@ -95,7 +95,7 @@ std::string SimpleReinforcementDQNExample::getLearningRuleName() const
 }
 
 
-SimpleReinforcementWorld& SimpleReinforcementDQNExample::getWorld()
+SimpleReinforcementEnvironment& SimpleReinforcementDQNExample::getEnvironment()
 {
-	return *world;
+	return *environment;
 }

@@ -6,7 +6,7 @@
 #include <Function/InputFunction/WeightedSumFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include "MountainCarWorld.hpp"
+#include "MountainCarEnvironment.hpp"
 #include <Learning/Reinforcement/DQNLearningRule.hpp>
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/Preferences/DoublePreference.hpp>
@@ -34,8 +34,8 @@ using namespace LightBulb;
 AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 {
 	DQNLearningRuleOptions options;
-	world = createWorld();
-	options.world = world;
+	environment = createEnvironment();
+	options.environment = environment;
 	options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
 	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
 	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
@@ -53,7 +53,7 @@ AbstractLearningRule* MountainCarDQNExample::createLearningRate()
 }
 
 
-MountainCarWorld* MountainCarDQNExample::createWorld()
+MountainCarEnvironment* MountainCarDQNExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -67,7 +67,7 @@ MountainCarWorld* MountainCarDQNExample::createWorld()
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction(0.2)), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
 
-	return new MountainCarWorld(options, true, 1);
+	return new MountainCarEnvironment(options, true, 1);
 }
 
 
@@ -112,7 +112,7 @@ std::string MountainCarDQNExample::getLearningRuleName() const
 }
 
 
-MountainCarWorld& MountainCarDQNExample::getWorld()
+MountainCarEnvironment& MountainCarDQNExample::getEnvironment()
 {
-	return *world;
+	return *environment;
 }
