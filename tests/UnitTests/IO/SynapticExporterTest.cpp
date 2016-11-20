@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "ActivationOrder/TopologicalOrder.hpp"
-#include "IO/SynapticExporter.hpp"
+#include "IO/Exporter/SynapticExporter.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Function/ActivationFunction/FermiFunction.hpp"
@@ -49,6 +49,6 @@ TEST(SynapticExporterTest, exportSimpleFeedForwardNetworkTopology)
 	std::vector<double> output(1);
 	neuralNetwork.calculate(input, output, TopologicalOrder());
 
-	std::string result = exporter.exportToString(&neuralNetwork);
+	std::string result = exporter.exportToString(neuralNetwork);
 	EXPECT_EQ(expected, result);
 }
