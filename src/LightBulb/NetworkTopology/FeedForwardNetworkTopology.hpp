@@ -10,6 +10,7 @@
 
 // Includes
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {
@@ -63,6 +64,8 @@ namespace LightBulb
 		friend void load(Archive& archive, FeedForwardNetworkTopology& feedForwardNetworkTopology);
 		template <class Archive>
 		friend void save(Archive& archive, FeedForwardNetworkTopology const & feedForwardNetworkTopology);
+	private:
+		TopologicalOrder defaultActivationOrder;
 	protected:
 		/**
 		 * \brief The options of the network.
@@ -156,6 +159,7 @@ namespace LightBulb
 		AbstractNetworkTopology* clone() const override;
 		const NeuronDescription& getInnerNeuronDescription() const override;
 		const NeuronDescription& getOutputNeuronDescription() const override;
+		const AbstractActivationOrder& getDefaultActivationOrder() const override;
 	};
 }
 

@@ -43,6 +43,26 @@ namespace LightBulb
 		networkTopology->getOutput(output);
 	}
 
+	std::vector<double> NeuralNetwork::calculate(const std::vector<double>& input, bool resetActivations)
+	{
+		std::vector<double> output(getNetworkTopology().getOutputSize());
+		calculate(input, output, networkTopology->getDefaultActivationOrder(), resetActivations);
+		return output;
+	}
+
+	void NeuralNetwork::calculate(const std::vector<double>& input, std::vector<double>& output, bool resetActivations)
+	{
+		calculate(input, output, networkTopology->getDefaultActivationOrder(), resetActivations);
+	}
+
+	std::vector<double> NeuralNetwork::calculate(const std::vector<double>& input, const AbstractActivationOrder &activationOrder, bool resetActivations)
+	{
+		std::vector<double> output(networkTopology->getOutputSize());
+		calculate(input, output, activationOrder, resetActivations);
+		return output;
+	}
+
+
 	AbstractNetworkTopology& NeuralNetwork::getNetworkTopology() const
 	{
 		return *networkTopology.get();

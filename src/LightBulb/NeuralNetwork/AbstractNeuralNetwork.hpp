@@ -55,6 +55,28 @@ namespace LightBulb
 		 */
 		virtual void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
 		/**
+		* \brief Calculates from the given input and activation order the output of the neural network.
+		* \param input The input.
+		* \param activationOrder The activation order which should be used when calculating.
+		* \param resetActivations Control if the activations should be resetted before calculating.
+		*/
+		virtual std::vector<double> calculate(const std::vector<double>& input, const AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
+		/**
+		* \brief Calculates from the given input the output of the neural network.
+		* \param input The input.
+		* \param output The variable were the output will be stored in.
+		* \param resetActivations Control if the activations should be resetted before calculating.
+		* \note The default activation order of the network topology is taken for the calculation.
+		*/
+		virtual void calculate(const std::vector<double>& input, std::vector<double>& output, bool resetActivations = true) = 0;
+		/**
+		* \brief Calculates from the given input the output of the neural network.
+		* \param input The input.
+		* \param resetActivations Control if the activations should be resetted before calculating.
+		* \note The default activation order of the network topology is taken for the calculation.
+		*/
+		virtual std::vector<double> calculate(const std::vector<double>& input, bool resetActivations = true) = 0;
+		/**
 		 * \brief Returns the network topology of the neural network.
 		 * \return The network topology.
 		 */

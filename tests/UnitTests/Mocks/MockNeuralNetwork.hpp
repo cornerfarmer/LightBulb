@@ -19,6 +19,9 @@ public:
 	MOCK_CONST_METHOD0(getState, const LightBulb::NeuralNetworkState& ());
 	MOCK_METHOD1(setState, void (LightBulb::NeuralNetworkState));
 	MOCK_CONST_METHOD0(getStateAsString, std::string ());
+	MOCK_METHOD3(calculate, std::vector<double> (const std::vector<double>&, const LightBulb::AbstractActivationOrder&, bool));
+	MOCK_METHOD3(calculate, void (const std::vector<double>&, std::vector<double>&, bool));
+	MOCK_METHOD2(calculate, std::vector<double> (const std::vector<double>&, bool));
 };
 
 #endif

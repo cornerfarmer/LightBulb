@@ -50,6 +50,7 @@ public:
 	MOCK_CONST_METHOD0(clone, AbstractNetworkTopology* ());
 	MOCK_CONST_METHOD0(getInnerNeuronDescription, const LightBulb::NeuronDescription& ());
 	MOCK_CONST_METHOD0(getOutputNeuronDescription, const LightBulb::NeuronDescription& ());
+	MOCK_CONST_METHOD0(getDefaultActivationOrder, const LightBulb::AbstractActivationOrder& ());
 };
 
 #endif

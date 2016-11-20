@@ -532,4 +532,9 @@ namespace LightBulb
 	{
 		return *neuronDescriptionsPerLayer.back().get();
 	}
+
+	const AbstractActivationOrder& FeedForwardNetworkTopology::getDefaultActivationOrder() const
+	{
+		return defaultActivationOrder;
+	}
 }

@@ -16,6 +16,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractRandomGenerator;
 	class NeuronDescription;
+	class AbstractActivationOrder;
 
 	/**
 	 * \brief A network topology is used to describe the structure of a neural network
@@ -250,6 +251,11 @@ namespace LightBulb
 		* \return The neuron description
 		*/
 		virtual const NeuronDescription& getOutputNeuronDescription() const = 0;
+		/**
+		 * \brief Returns the default activation order which should be used with this network topology.
+		 * \return The default activation order.
+		 */
+		virtual const AbstractActivationOrder& getDefaultActivationOrder() const = 0;
 	};
 
 }
