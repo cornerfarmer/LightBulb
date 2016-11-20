@@ -13,7 +13,20 @@ elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 endif()
 
+option(EnableLightBulbApp "EnableLightBulbApp" ON)
+option(EnableLightBulbExample "EnableLightBulbExample" ON)
+option(EnableUnitTests "EnableUnitTests" OFF)
+
 add_subdirectory(src/LightBulb)
-add_subdirectory(src/LightBulbApp)
-add_subdirectory(example/LightBulbExample)
-add_subdirectory(tests/UnitTests)
+
+if(EnableLightBulbApp)
+  add_subdirectory(src/LightBulbApp)
+endif()
+
+if(EnableLightBulbApp AND EnableLightBulbExample)
+  add_subdirectory(example/LightBulbExample)
+endif()
+
+if(EnableLightBulbApp AND EnableUnitTests)
+  add_subdirectory(tests/UnitTests)
+endif()

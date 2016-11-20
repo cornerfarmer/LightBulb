@@ -11,6 +11,11 @@ addons:
     packages:
     - gcc-5
     - g++-5
+env:
+  - APP=OFF EXAMPLE=OFF TESTS=OFF
+  - APP=ON EXAMPLE=OFF TESTS=OFF
+  - APP=ON EXAMPLE=ON TESTS=OFF
+  - APP=ON EXAMPLE=OFF TESTS=ON
 # Build steps
 before_script:
   - sudo ./build.sh
@@ -20,5 +25,6 @@ cache:
 script:
   - mkdir build
   - cd build
-  - cmake .. && make
+  - cmake .. -DEnableLightBulbApp=$APP -DEnableLightBulbExample=$EXAMPLE -DEnableUnitTests=$TESTS
+  - make
   - cd ..
