@@ -193,30 +193,6 @@
     <ClCompile Include="Lib\ziggurat.cpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
-    <ClCompile Include="IO\AbstractJSONElement.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\BrainJSExporter.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONArray.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONAttribute.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONNumberElement.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONStringElement.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\JSONObject.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\SynapticExporter.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\AbstractRecombinationSelector.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -405,7 +381,31 @@
     <ClCompile Include="Learning\Evolution\CoevolutionLearningRule.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="IO\AbstractNetworkExporter.cpp">
+    <ClCompile Include="IO\Exporter\BrainJSExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\JSONStringElement.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\JSONObject.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\JSONNumberElement.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\JSONAttribute.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\JSONArray.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\SynapticExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\AbstractJSONElement.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Exporter\AbstractNetworkExporter.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
   </ItemGroup>
@@ -535,30 +535,6 @@
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\AbstractJSONElement.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\BrainJSExporter.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\JSONArray.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\JSONAttribute.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\JSONNumberElement.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\JSONStringElement.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\JSONObject.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\SynapticExporter.hpp">
-      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractRecombinationSelector.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
@@ -821,7 +797,31 @@
     <ClInclude Include="IO\CoevolutionLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="IO\AbstractNetworkExporter.hpp">
+    <ClInclude Include="IO\Exporter\BrainJSExporter.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\JSONStringElement.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\JSONObject.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\JSONNumberElement.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\JSONAttribute.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\JSONArray.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\SynapticExporter.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\AbstractJSONElement.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Exporter\AbstractNetworkExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>

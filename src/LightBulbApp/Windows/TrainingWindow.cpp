@@ -9,7 +9,7 @@
 #include "TrainingController.hpp"
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <wx/timer.h>
-#include "IO/AbstractNetworkExporter.hpp"
+#include "IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {

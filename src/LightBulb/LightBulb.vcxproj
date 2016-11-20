@@ -46,16 +46,16 @@
     <ClCompile Include="NetworkTopology\AbstractFeedForwardNetworkTopology.cpp" />
     <ClCompile Include="Random\XorShfGenerator.cpp" />
     <ClCompile Include="Random\ZigguratGenerator.cpp" />
-    <ClCompile Include="IO\AbstractNetworkExporter.cpp" />
-    <ClCompile Include="IO\AbstractJSONElement.cpp" />
-    <ClCompile Include="IO\BrainJSExporter.cpp" />
-    <ClCompile Include="IO\JSONArray.cpp" />
-    <ClCompile Include="IO\JSONAttribute.cpp" />
-    <ClCompile Include="IO\JSONNumberElement.cpp" />
-    <ClCompile Include="IO\JSONObject.cpp" />
-    <ClCompile Include="IO\JSONStringElement.cpp" />
+    <ClCompile Include="IO\Exporter\AbstractNetworkExporter.cpp" />
+    <ClCompile Include="IO\Exporter\AbstractJSONElement.cpp" />
+    <ClCompile Include="IO\Exporter\BrainJSExporter.cpp" />
+    <ClCompile Include="IO\Exporter\JSONArray.cpp" />
+    <ClCompile Include="IO\Exporter\JSONAttribute.cpp" />
+    <ClCompile Include="IO\Exporter\JSONNumberElement.cpp" />
+    <ClCompile Include="IO\Exporter\JSONObject.cpp" />
+    <ClCompile Include="IO\Exporter\JSONStringElement.cpp" />
     <ClCompile Include="IO\NeuralNetworkIO.hpp" />
-    <ClCompile Include="IO\SynapticExporter.cpp" />
+    <ClCompile Include="IO\Exporter\SynapticExporter.cpp" />
     <ClCompile Include="IO\MatrixIO.hpp" />
     <ClCompile Include="Learning\Evolution\AbstractEvolutionLearningRule.cpp" />
     <ClCompile Include="Learning\AbstractLearningRule.cpp">
@@ -347,7 +347,7 @@
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\TeachedIndividualIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
-    <ClInclude Include="IO\AbstractNetworkExporter.hpp" />
+    <ClInclude Include="IO\Exporter\AbstractNetworkExporter.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
     <ClInclude Include="IO\GradientDescentLearningRuleIO.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -357,20 +357,20 @@
     <ClInclude Include="IO\IOStorage.hpp" />
     <ClInclude Include="IO\LearningStateIO.hpp" />
     <ClInclude Include="IO\StorageLoggerIO.hpp" />
-    <ClInclude Include="IO\AbstractJSONElement.hpp" />
-    <ClInclude Include="IO\BrainJSExporter.hpp" />
+    <ClInclude Include="IO\Exporter\AbstractJSONElement.hpp" />
+    <ClInclude Include="IO\Exporter\BrainJSExporter.hpp" />
     <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp" />
-    <ClInclude Include="IO\JSONArray.hpp" />
-    <ClInclude Include="IO\JSONAttribute.hpp" />
-    <ClInclude Include="IO\JSONNumberElement.hpp" />
-    <ClInclude Include="IO\JSONObject.hpp" />
-    <ClInclude Include="IO\JSONStringElement.hpp" />
+    <ClInclude Include="IO\Exporter\JSONArray.hpp" />
+    <ClInclude Include="IO\Exporter\JSONAttribute.hpp" />
+    <ClInclude Include="IO\Exporter\JSONNumberElement.hpp" />
+    <ClInclude Include="IO\Exporter\JSONObject.hpp" />
+    <ClInclude Include="IO\Exporter\JSONStringElement.hpp" />
     <ClCompile Include="IO\FeedForwardNetworkTopologyIO.hpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
     <ClInclude Include="IO\NeuronDescriptionIO.hpp" />
     <ClInclude Include="IO\SameNeuronDescriptionFactoryIO.hpp" />
-    <ClInclude Include="IO\SynapticExporter.hpp" />
+    <ClInclude Include="IO\Exporter\SynapticExporter.hpp" />
     <ClInclude Include="IO\UsedArchives.hpp" />
     <ClInclude Include="Learning\Evolution\AbstractEvolutionLearningRule.hpp" />
     <ClInclude Include="Learning\AbstractLearningResult.hpp" />

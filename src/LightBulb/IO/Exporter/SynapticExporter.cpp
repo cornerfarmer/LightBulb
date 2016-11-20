@@ -1,11 +1,11 @@
 // Includes
-#include "IO/SynapticExporter.hpp"
+#include "IO/Exporter/SynapticExporter.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "IO/JSONObject.hpp"
-#include "IO/JSONArray.hpp"
-#include "IO/JSONNumberElement.hpp"
-#include "IO/JSONStringElement.hpp"
+#include "IO/Exporter/JSONObject.hpp"
+#include "IO/Exporter/JSONArray.hpp"
+#include "IO/Exporter/JSONNumberElement.hpp"
+#include "IO/Exporter/JSONStringElement.hpp"
 
 namespace LightBulb
 {

@@ -13,10 +13,10 @@
 #include "LoggerController.hpp"
 #include "TrainingWindow.hpp"
 #include "AbstractMainApp.hpp"
+#include "IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
-	class AbstractNetworkExporter;
 	// Forward declarations
 	class NeuralNetworkRepository;
 	class TrainingPlanRepository;

@@ -10,8 +10,8 @@
 #include "Windows/LoggerFactory.hpp"
 #include "Windows/NetworkViewerFactory.hpp"
 #include "Windows/EvolutionAnalyzerFactory.hpp"
-#include "IO/SynapticExporter.hpp"
-#include "IO/BrainJSExporter.hpp"
+#include "IO/Exporter/SynapticExporter.hpp"
+#include "IO/Exporter/BrainJSExporter.hpp"
 
 namespace LightBulb
 {

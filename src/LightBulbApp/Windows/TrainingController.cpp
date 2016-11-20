@@ -13,7 +13,7 @@
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include "IO/AbstractNetworkExporter.hpp"
+#include "IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {

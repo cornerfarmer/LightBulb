@@ -8,7 +8,7 @@
 #include <Eigen/Dense>
 
 // Includes
-#include "IO/AbstractNetworkExporter.hpp"
+#include "IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
@@ -16,8 +16,9 @@ namespace LightBulb
 	class JSONObject;
 	class JSONAttribute;
 	class FeedForwardNetworkTopology;
-
-	// 
+	/**
+	 * \brief Exports a neural network for using in Synaptic.
+	 */
 	class SynapticExporter : public AbstractNetworkExporter
 	{
 	private:
@@ -36,6 +37,7 @@ namespace LightBulb
 		JSONAttribute* getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex);
 		int getTotalIndexOfNeuron(int layerIndex, int neuronIndex);
 	public:
+		// Inherited:
 		std::string exportToString(const AbstractNeuralNetwork& neuralNetwork) override;
 		std::string getName() const override;
 		std::string getFileExtensions() const override;

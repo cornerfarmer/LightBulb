@@ -4,7 +4,7 @@
 #define _JSONSTRINGELEMENT_H_
 
 // Includes
-#include "IO/AbstractJSONElement.hpp"
+#include "IO/Exporter/AbstractJSONElement.hpp"
 
 // Library includes
 #include <string>

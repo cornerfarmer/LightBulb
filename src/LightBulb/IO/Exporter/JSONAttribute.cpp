@@ -1,5 +1,5 @@
 // Includes
-#include "IO/JSONAttribute.hpp"
+#include "IO/Exporter/JSONAttribute.hpp"
 
 namespace LightBulb
 {
