@@ -11,7 +11,7 @@
 #include <Learning/Evolution/ConstantCreationCommand.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/ScoreCondition.hpp>
+#include <Learning/Evolution/FitnessCondition.hpp>
 #include "Nature.hpp"
 #include "NatureFactory.hpp"
 

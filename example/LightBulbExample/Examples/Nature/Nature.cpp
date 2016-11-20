@@ -93,7 +93,7 @@ bool Nature::doSimulationStep()
 	return false;
 }
 
-double Nature::getScore(const AbstractIndividual& individual) const
+double Nature::getFitness(const AbstractIndividual& individual) const
 {
 	return static_cast<const Animal&>(individual).getStepsSurvived();
 }

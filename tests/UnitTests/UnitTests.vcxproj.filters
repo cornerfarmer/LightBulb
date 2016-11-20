@@ -147,13 +147,13 @@
     <ClCompile Include="Learning\Evolution\AbstractCoevolutionWorldTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\ScoreConditionTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\MagnitudeBasedPruningMutationAlgorithmTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\PerfectIndividualFoundConditionTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\FitnessConditionTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

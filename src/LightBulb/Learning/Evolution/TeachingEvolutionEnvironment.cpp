@@ -44,7 +44,7 @@ namespace LightBulb
 		return labels;
 	}
 
-	double TeachingEvolutionEnvironment::getScore(const AbstractIndividual& individual) const
+	double TeachingEvolutionEnvironment::getFitness(const AbstractIndividual& individual) const
 	{
 		// Just return the total error of the individual (negate it, so the error 0 is the maximum)
 		return -static_cast<const TeachedIndividual&>(individual).getCurrentTotalError();

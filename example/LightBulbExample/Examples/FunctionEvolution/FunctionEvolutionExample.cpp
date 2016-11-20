@@ -11,7 +11,7 @@
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Examples/FunctionEvolution/FunctionSimulator.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/ScoreCondition.hpp>
+#include <Learning/Evolution/FitnessCondition.hpp>
 
 using namespace LightBulb;
 
@@ -27,7 +27,7 @@ AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 	EvolutionLearningRuleOptions options;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10);
 	options.exitConditions.push_back(rateDifferenceCondition);
-	options.exitConditions.push_back(new ScoreCondition(1.031627 + 10000));
+	options.exitConditions.push_back(new FitnessCondition(1.031627 + 10000));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));

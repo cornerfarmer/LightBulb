@@ -1,46 +1,46 @@
 #include "gtest/gtest.h"
 #include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
-#include <Learning/Evolution/ScoreCondition.hpp>
+#include <Learning/Evolution/FitnessCondition.hpp>
 #include "Mocks/MockEvolutionLearningRule.hpp"
 
 using namespace LightBulb;
 
-class ScoreConditionTest : public testing::Test {
+class FitnessConditionTest : public testing::Test {
 public:
-	ScoreCondition* scoreCondition;
+	FitnessCondition* fitnessCondition;
 	MockEvolutionLearningRule* evolutionLearningRule;
 	void SetUp() {
-		scoreCondition = new ScoreCondition(50);
+		fitnessCondition = new FitnessCondition(50);
 		AbstractEvolutionLearningRuleOptions options;
 		evolutionLearningRule = new MockEvolutionLearningRule(options);
 	}
 
-	virtual ~ScoreConditionTest()
+	virtual ~FitnessConditionTest()
 	{
-		delete scoreCondition;
+		delete fitnessCondition;
 	}
 };
 
-TEST_F(ScoreConditionTest, evaluateWithEmptyHighscore)
+TEST_F(FitnessConditionTest, evaluateWithEmptyHighscore)
 {
 	std::vector<std::pair<double, AbstractIndividual*>> highscore;
-	EXPECT_EQ(false, scoreCondition->evaluate(highscore, *evolutionLearningRule));
+	EXPECT_EQ(false, fitnessCondition->evaluate(highscore, *evolutionLearningRule));
 }
 
 
-TEST_F(ScoreConditionTest, evaluatePositive)
+TEST_F(FitnessConditionTest, evaluatePositive)
 {
 	std::vector<std::pair<double, AbstractIndividual*>> highscore;
 	highscore.push_back(std::make_pair(100, static_cast<AbstractIndividual*>(nullptr)));
 	highscore.push_back(std::make_pair(42, static_cast<AbstractIndividual*>(nullptr)));
-	EXPECT_EQ(true, scoreCondition->evaluate(highscore, *evolutionLearningRule));
+	EXPECT_EQ(true, fitnessCondition->evaluate(highscore, *evolutionLearningRule));
 }
 
 
-TEST_F(ScoreConditionTest, evaluateNegative)
+TEST_F(FitnessConditionTest, evaluateNegative)
 {
 	std::vector<std::pair<double, AbstractIndividual*>> highscore;
 	highscore.push_back(std::make_pair(42, static_cast<AbstractIndividual*>(nullptr)));
-	EXPECT_EQ(false, scoreCondition->evaluate(highscore, *evolutionLearningRule));
+	EXPECT_EQ(false, fitnessCondition->evaluate(highscore, *evolutionLearningRule));
 }

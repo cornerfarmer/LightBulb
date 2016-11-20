@@ -10,7 +10,6 @@ class MockCoevolutionEnvironment : public LightBulb::AbstractCoevolutionEnvironm
 {
 public:
 	MOCK_METHOD0(getHighscoreList, LightBulb::Highscore& ());
-	MOCK_CONST_METHOD1(getRealScore, double (const LightBulb::AbstractIndividual&));
 	MOCK_METHOD0(initializeForLearning, void ());
 	MOCK_METHOD0(createNewIndividual, LightBulb::AbstractIndividual* ());
 	MOCK_METHOD0(resetEnvironment, void ());
@@ -23,7 +22,7 @@ public:
 	MOCK_METHOD1(addExistingIndividual, void (LightBulb::AbstractIndividual*));
 	MOCK_METHOD3(doCompare, int (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int));
 	MOCK_METHOD0(doSimulationStep, bool ());
-	MOCK_CONST_METHOD1(getScore, double (const LightBulb::AbstractIndividual&));
+	MOCK_CONST_METHOD1(getFitness, double (const LightBulb::AbstractIndividual&));
 	MOCK_METHOD3(compareIndividuals, int (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int));
 	MOCK_METHOD1(rateIndividual, int (LightBulb::AbstractIndividual&));
 	MOCK_CONST_METHOD0(getCombiningStrategy, LightBulb::AbstractCombiningStrategy& ());

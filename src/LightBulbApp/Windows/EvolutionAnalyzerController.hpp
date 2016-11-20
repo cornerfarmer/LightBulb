@@ -20,7 +20,7 @@ namespace LightBulb
 	class EvolutionLearningRule;
 	/**
 	 * \brief A sub app which describes the source of all current individuals.
-	 * \details Lists all individuals of a evolution learning rule, shows their source and their score. (Mutation, Recombination, Resuse, Create)
+	 * \details Lists all individuals of a evolution learning rule, shows their source and their fitness. (Mutation, Recombination, Resuse, Create)
 	 */
 	class EvolutionAnalyzerController : public AbstractSubApp
 	{
@@ -40,7 +40,7 @@ namespace LightBulb
 		AbstractEvolutionTrainingPlan* selectedTrainingPlan;
 		/**
 		 * \brief The current state.
-		 * \details A map: source => score.
+		 * \details A map: source => fitness.
 		 */
 		std::vector<std::pair<EvolutionSource, double>> currentState;
 	protected:
@@ -86,7 +86,7 @@ namespace LightBulb
 		void evolutionStepCompleted(EvolutionLearningRule& evolutionLearningRule);
 		/**
 		 * \brief Returns the current state.
-		 * \return A map with: evolution source => score.
+		 * \return A map with: evolution source => fitness.
 		 */
 		const std::vector<std::pair<EvolutionSource, double>>& getCurrentState() const;
 	};

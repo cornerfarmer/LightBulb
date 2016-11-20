@@ -18,7 +18,7 @@
 #include <Learning/Evolution/RandomSelector.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/ScoreCondition.hpp>
+#include <Learning/Evolution/FitnessCondition.hpp>
 #include <Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp>
 #include <Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>
@@ -39,7 +39,7 @@ AbstractLearningRule* TCProblemEvolutionExample::createLearningRate()
 	options.maxIterationsPerTry = 100000;
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 1000);
 	options.exitConditions.push_back(rateDifferenceCondition);
-	options.exitConditions.push_back(new ScoreCondition(-0.001));
+	options.exitConditions.push_back(new FitnessCondition(-0.001));
 	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATION_COUNT));
 	options.creationCommands.push_back(constantCreationCommand);
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));

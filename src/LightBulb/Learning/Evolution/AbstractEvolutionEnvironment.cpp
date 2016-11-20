@@ -19,10 +19,10 @@ namespace LightBulb
 			// Go through all individuals
 			for (auto individual = getIndividuals().begin(); individual < getIndividuals().end(); individual++)
 			{
-				double score = getScore(**individual);
+				double fitness = getFitness(**individual);
 
-				// Add the individuals paired with its score to the list
-				currentHighscore.push_back(std::make_pair(score, *individual));
+				// Add the individuals paired with its fitness to the list
+				currentHighscore.push_back(std::make_pair(fitness, *individual));
 
 			}
 			// Sort the list

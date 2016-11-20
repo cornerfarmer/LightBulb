@@ -41,7 +41,7 @@ namespace LightBulb
 		return false;
 	}
 
-	double AbstractCoevolutionEnvironment::getScore(const AbstractIndividual& individual) const
+	double AbstractCoevolutionEnvironment::getFitness(const AbstractIndividual& individual) const
 	{
 		return (*fitnessValues)[&individual];
 	}

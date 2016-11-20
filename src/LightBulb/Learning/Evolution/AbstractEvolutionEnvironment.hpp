@@ -71,16 +71,16 @@ namespace LightBulb
 		 */
 		virtual bool doSimulationStep() = 0;
 		/**
-		 * \brief Returns a list of all current individuals ordered by their score.
+		 * \brief Returns a list of all current individuals ordered by their fitness.
 		 * \return The highscroe.
 		 */
 		virtual Highscore& getHighscoreList();
 		/**
-		 * \brief Returns the score of the given individual.
+		 * \brief Returns the fitness of the given individual.
 		 * \param individual The individual to evaluate.
-		 * \return The score of the individual.
+		 * \return The fitness of the individual.
 		 */
-		virtual double getScore(const AbstractIndividual& individual) const = 0;
+		virtual double getFitness(const AbstractIndividual& individual) const = 0;
 		/**
 		 * \brief Initializes the environment before the learning starts.
 		 */

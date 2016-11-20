@@ -271,9 +271,6 @@
     <ClCompile Include="Learning\Evolution\LinearScalingFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\ScoreCondition.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -408,6 +405,9 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Reinforcement\AbstractReinforcementEnvironment.cpp" />
+    <ClCompile Include="Learning\Evolution\FitnessCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -650,9 +650,6 @@
     <ClInclude Include="Learning\Evolution\LinearScalingFitnessFunction.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\ScoreCondition.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
     <ClInclude Include="Event\Observer.hpp">
       <Filter>Quelldateien\Event</Filter>
     </ClInclude>
@@ -824,5 +821,8 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementEnvironment.hpp" />
+    <ClInclude Include="Learning\Evolution\FitnessCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

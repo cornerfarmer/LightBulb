@@ -14,7 +14,6 @@ public:
 	{
 	}
 	MOCK_METHOD0(getHighscoreList, LightBulb::Highscore& ());
-	MOCK_CONST_METHOD1(getRealScore, double (const LightBulb::AbstractIndividual&));
 	MOCK_METHOD0(initializeForLearning, void ());
 	MOCK_METHOD0(createNewIndividual, LightBulb::AbstractIndividual* ());
 	MOCK_METHOD0(resetEnvironment, void ());

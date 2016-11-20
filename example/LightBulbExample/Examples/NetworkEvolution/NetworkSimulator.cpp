@@ -46,7 +46,7 @@ bool NetworkSimulator::doSimulationStep()
 	return false;
 }
 
-double NetworkSimulator::getScore(const AbstractIndividual& individual) const
+double NetworkSimulator::getFitness(const AbstractIndividual& individual) const
 {
 	std::vector<std::vector<float>> pos = static_cast<const Network&>(individual).getPositions();
 

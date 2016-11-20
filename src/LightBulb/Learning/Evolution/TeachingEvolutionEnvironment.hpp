@@ -54,7 +54,7 @@ namespace LightBulb
 		// Inherited:
 		bool doSimulationStep() override;
 		std::vector<std::string> getDataSetLabels() const override;
-		double getScore(const AbstractIndividual& individual) const override;
+		double getFitness(const AbstractIndividual& individual) const override;
 	};
 }
 

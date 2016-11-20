@@ -56,7 +56,7 @@ bool FunctionSimulator::doSimulationStep()
 	return false;
 }
 
-double FunctionSimulator::getScore(const AbstractIndividual& individual) const
+double FunctionSimulator::getFitness(const AbstractIndividual& individual) const
 {
 	std::vector<float> pos = static_cast<const Position&>(individual).getPosition();
 	return function(pos);

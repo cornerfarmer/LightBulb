@@ -41,7 +41,7 @@ public:
 	int getHeight();
 	void addRandomPlant();
 	std::vector<std::vector<std::unique_ptr<AbstractTile>>>& getTiles();
-	double getScore(const LightBulb::AbstractIndividual& individual) const override;
+	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
 	AbstractTile& getTile(int posX, int posY);
 	void startWatchMode();
 	void stopWatchMode();

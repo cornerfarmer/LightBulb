@@ -162,7 +162,7 @@
     <ClCompile Include="Learning\Evolution\RateDifferenceConditionTest.cpp" />
     <ClCompile Include="Learning\Evolution\RemainderStochasticSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\RoundRobinCombiningStrategyTest.cpp" />
-    <ClCompile Include="Learning\Evolution\ScoreConditionTest.cpp" />
+    <ClCompile Include="Learning\Evolution\FitnessConditionTest.cpp" />
     <ClCompile Include="Learning\Evolution\SharedCoevolutionFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\SharedSamplingCombiningStrategyTest.cpp" />
     <ClCompile Include="Learning\Evolution\StandardDeviationFitnessFunctionTest.cpp" />

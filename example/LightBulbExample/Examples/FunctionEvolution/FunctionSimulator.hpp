@@ -36,7 +36,7 @@ public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	FunctionSimulator() = default;
 	bool doSimulationStep() override;
-	double getScore(const LightBulb::AbstractIndividual& individual) const override;
+	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, )

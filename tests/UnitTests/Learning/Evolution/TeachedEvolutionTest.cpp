@@ -41,5 +41,5 @@ TEST_F(TeachedEvolutionTest, doSimulationStep)
 
 	teachingEvolutionEnvironment->doSimulationStep();
 
-	EXPECT_EQ(-8, teachingEvolutionEnvironment->getScore(*individual));
+	EXPECT_EQ(-8, teachingEvolutionEnvironment->getFitness(*individual));
 }

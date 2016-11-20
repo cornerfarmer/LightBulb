@@ -149,7 +149,7 @@ namespace LightBulb
 		log("------------- Generation " + std::to_string(learningState->iterations) + " -----------------", LL_LOW);
 
 		if (getOptions().environment->getPopulationSize() > 0) {
-			// Extract all current individuals ordered by their score
+			// Extract all current individuals ordered by their fitness
 			const Highscore& highscore = getOptions().environment->getHighscoreList();
 			// This vector will contain all individuals for the next generation
 			std::vector<AbstractIndividual*> newIndividualVector;
@@ -219,7 +219,7 @@ namespace LightBulb
 		}
 		getOptions().environment->refreshHighscore();
 
-		// Extract all current individuals ordered by their score
+		// Extract all current individuals ordered by their fitness
 		Highscore& highscore = getOptions().environment->getHighscoreList();
 
 		// {2,3}.5. Step: Modify the calculated scores
