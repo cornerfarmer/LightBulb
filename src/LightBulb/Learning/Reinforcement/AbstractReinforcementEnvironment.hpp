@@ -104,7 +104,7 @@ namespace LightBulb
 		 * \brief Can be used to rate the current AI for debugging purposes.
 		 * \return The rating.
 		 */
-		virtual int rateKI() { return 0; };
+		virtual int rate() { return 0; };
 		/**
 		 * \brief Returns the neural network.
 		 * \return The neural network.

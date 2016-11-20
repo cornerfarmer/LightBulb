@@ -207,7 +207,7 @@ namespace LightBulb
 
 		double e = getOptions().environment->getEpsilon();
 		getOptions().environment->setEpsilon(0);
-		getOptions().environment->rateKI();
+		getOptions().environment->rate();
 		getOptions().environment->setEpsilon(e);
 
 		return true;

@@ -73,7 +73,7 @@ void PongReinforcementEnvironment::initializeForLearning()
 }
 
 
-int PongReinforcementEnvironment::rateKI()
+int PongReinforcementEnvironment::rate()
 {
 	PongGame tmp = game;
 	int wins = 0;

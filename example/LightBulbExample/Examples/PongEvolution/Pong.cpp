@@ -93,13 +93,13 @@ void Pong::executeCompareAI()
 }
 
 
-int Pong::rateIndividual(AbstractIndividual& rateKI)
+int Pong::rateIndividual(AbstractIndividual& individual)
 {
 	int wins = 0;
 	int matchCount = 100;
 	for (int i = 0; i < matchCount; i++)
 	{
-		rateKI.resetNN();
+		individual.resetNN();
 
 		startNewGame();
 
@@ -107,7 +107,7 @@ int Pong::rateIndividual(AbstractIndividual& rateKI)
 		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
 		{
 			game.setPlayer(1);
-			rateKI.doNNCalculation();
+			individual.doNNCalculation();
 			game.setPlayer(-1);
 			executeCompareAI();
 			game.advanceBall(1);
@@ -123,7 +123,7 @@ int Pong::rateIndividual(AbstractIndividual& rateKI)
 		if (game.whoHasWon() == 1 || game.whoHasWon() == 0)
 			wins++;
 	}
-	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(matchCount), LL_MEDIUM);
+	log("Best AI: " + std::to_string(wins) + "/" + std::to_string(matchCount), LL_MEDIUM);
 	if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING])
 		learningState->addData(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING, static_cast<double>(wins) / matchCount);
 

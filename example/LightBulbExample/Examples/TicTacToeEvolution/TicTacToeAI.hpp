@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _TICTACTOEKI_H_
-#define _TICTACTOEKI_H_
+#ifndef _TICTACTOEAI_H_
+#define _TICTACTOEAI_H_
 
 // Library Includes
 

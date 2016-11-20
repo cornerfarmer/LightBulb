@@ -37,7 +37,7 @@ public:
 	void getNNInput(std::vector<double>& sight);
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator& randomGenerator_) override;
 	void executeCompareAI();
-	int rateIndividual(LightBulb::AbstractIndividual& rateKI) override;
+	int rateIndividual(LightBulb::AbstractIndividual& individual) override;
 	void startNewGame();
 	void initializeForLearning() override;
 	std::vector<std::string> getDataSetLabels() const override;

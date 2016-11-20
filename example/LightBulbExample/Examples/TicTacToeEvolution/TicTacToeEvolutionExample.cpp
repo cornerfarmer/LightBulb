@@ -149,7 +149,7 @@ std::string TicTacToeEvolutionExample::getOriginalName() const
 
 std::string TicTacToeEvolutionExample::getDescription() const
 {
-	return "Evolution of a perfect TicTacToe KI with the coevolution learning rule.";
+	return "Evolution of a perfect TicTacToe AI with the coevolution learning rule.";
 }
 
 AbstractTrainingPlan* TicTacToeEvolutionExample::createNewFromSameType() const

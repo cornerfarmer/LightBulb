@@ -185,7 +185,7 @@ namespace LightBulb
 		if (learningState->iterations % getOptions().ratingInterval == 0)
 		{
 			getOptions().environment->setStochasticActionDecision(false);
-			getOptions().environment->rateKI();
+			getOptions().environment->rate();
 			getOptions().environment->setStochasticActionDecision(true);
 		}
 

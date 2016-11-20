@@ -170,7 +170,7 @@ void TicTacToe::setIllegalMove(bool illegalMove_)
 	illegalMove = illegalMove_;
 }
 
-int TicTacToe::rateIndividual(AbstractIndividual& rateKI)
+int TicTacToe::rateIndividual(AbstractIndividual& individual)
 {
 
 	int wins = 0;
@@ -185,7 +185,7 @@ int TicTacToe::rateIndividual(AbstractIndividual& rateKI)
 
 		while (decisionCombinationsLeft)
 		{
-			rateKI.resetNN();
+			individual.resetNN();
 			startNewGame(b == 0 ? -1 : 1);
 
 			int i;
@@ -193,7 +193,7 @@ int TicTacToe::rateIndividual(AbstractIndividual& rateKI)
 			{
 				if (i % 2 == 1 - b)
 				{
-					rateKI.doNNCalculation();
+					individual.doNNCalculation();
 				}
 				else
 				{
@@ -223,7 +223,7 @@ int TicTacToe::rateIndividual(AbstractIndividual& rateKI)
 		}
 	}
 
-	log("Best KI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
+	log("Best AI: " + std::to_string(wins) + "/" + std::to_string(possibleGames), LL_MEDIUM);
 	if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING])
 		learningState->addData(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_TICTACTOE_RATING, static_cast<double>(wins) / possibleGames);
 
