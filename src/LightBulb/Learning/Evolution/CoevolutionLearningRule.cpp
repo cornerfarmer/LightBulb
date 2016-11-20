@@ -77,8 +77,12 @@ namespace LightBulb
 		}
 
 		log("lr2: ", LL_MEDIUM);
-		getOptions().learningRule2->doIteration();
+		successfull = getOptions().learningRule2->doIteration();
 		learningState->iterations--;
+		if (!successfull) {
+			exitConditionReached = true;
+			return false;
+		}
 		return true;
 	}
 

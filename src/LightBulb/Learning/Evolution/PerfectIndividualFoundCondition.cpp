@@ -11,10 +11,10 @@ namespace LightBulb
 {
 	bool PerfectIndividualFoundCondition::evaluate(const std::vector<std::pair<double, AbstractIndividual*>>& highscore, const AbstractEvolutionLearningRule& learningRule)
 	{
-		if (highscore.size() > 0)
+		const AbstractCoevolutionEnvironment& coevolutionEnvironment = static_cast<const AbstractCoevolutionEnvironment&>(static_cast<const EvolutionLearningRule&>(learningRule).getEnvironment());
+		if (highscore.size() > 0 && coevolutionEnvironment.isParasiteEnvironment())
 		{
-			const AbstractCoevolutionEnvironment& coevolutionEnvironment = static_cast<const AbstractCoevolutionEnvironment&>(static_cast<const EvolutionLearningRule&>(learningRule).getEnvironment());
-			if (coevolutionEnvironment.isParasiteEnvironment() && perfectIndividualExists(coevolutionEnvironment.getCombiningStrategy()))
+			if (perfectIndividualExists(coevolutionEnvironment.getCombiningStrategy()))
 			{
 				counter++;
 				if (counter >= count)

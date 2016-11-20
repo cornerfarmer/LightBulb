@@ -56,7 +56,7 @@ AbstractLearningRule* PongEvolutionExample::createLearningRate()
 	EvolutionLearningRuleOptions options;
 
 	options.creationCommands.push_back(new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATE_UP_TO)));
-	options.exitConditions.push_back(new PerfectIndividualFoundCondition(200));
+	options.exitConditions.push_back(new PerfectIndividualFoundCondition(20));
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
 	options.selectionCommands.push_back(new BestSelectionCommand(getIntegerPreference(PREFERENCE_POPULATION_SIZE)));
 	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(getDoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED)), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_MUTATION_PERCENTAGE)));
