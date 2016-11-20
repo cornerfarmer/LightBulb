@@ -1,31 +1,31 @@
 // Includes
-#include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
+#include "Learning/Evolution/CoevolutionLearningRule.hpp"
 // Library includes
 #include <iostream>
 
 namespace LightBulb
 {
-	AbstractLearningResult* BipartiteEvolutionLearningRule::getLearningResult()
+	AbstractLearningResult* CoevolutionLearningRule::getLearningResult()
 	{
 		return getOptions().learningRule1->getLearningResult();
 	}
 
-	BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_)
-		: AbstractEvolutionLearningRule(new BipartiteEvolutionLearningRuleOptions(options_))
+	CoevolutionLearningRule::CoevolutionLearningRule(CoevolutionLearningRuleOptions& options_)
+		: AbstractEvolutionLearningRule(new CoevolutionLearningRuleOptions(options_))
 	{
 	}
 
-	BipartiteEvolutionLearningRule::BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_)
+	CoevolutionLearningRule::CoevolutionLearningRule(CoevolutionLearningRuleOptions* options_)
 		: AbstractEvolutionLearningRule(options_)
 	{
 	}
 
-	std::string BipartiteEvolutionLearningRule::getName()
+	std::string CoevolutionLearningRule::getName()
 	{
-		return "BipartiteEvolutionLearningRule";
+		return "CoevolutionLearningRule";
 	}
 
-	std::vector<std::string> BipartiteEvolutionLearningRule::getDataSetLabels() const
+	std::vector<std::string> CoevolutionLearningRule::getDataSetLabels() const
 	{
 		std::vector<std::string> labels1 = getOptions().learningRule1->getDataSetLabels();
 		std::vector<std::string> labels2 = getOptions().learningRule2->getDataSetLabels();
@@ -33,19 +33,19 @@ namespace LightBulb
 		return labels1;
 	}
 
-	AbstractEvolutionLearningRule& BipartiteEvolutionLearningRule::getFirstLearningRule()
+	AbstractEvolutionLearningRule& CoevolutionLearningRule::getFirstLearningRule()
 	{
 		return *getOptions().learningRule1;
 	}
 
 
-	AbstractEvolutionLearningRule& BipartiteEvolutionLearningRule::getSecondLearningRule()
+	AbstractEvolutionLearningRule& CoevolutionLearningRule::getSecondLearningRule()
 	{
 		return *getOptions().learningRule2;
 	}
 
 
-	void BipartiteEvolutionLearningRule::initializeStartLearningAlgoritm()
+	void CoevolutionLearningRule::initializeStartLearningAlgoritm()
 	{
 		exitConditionReached = false;
 		getOptions().learningRule1->learningState = learningState;
@@ -61,12 +61,12 @@ namespace LightBulb
 		getOptions().learningRule2->options->dataSetsPrefix = "Parasite - ";
 	}
 
-	const BipartiteEvolutionLearningRuleOptions& BipartiteEvolutionLearningRule::getOptions() const
+	const CoevolutionLearningRuleOptions& CoevolutionLearningRule::getOptions() const
 	{
-		return static_cast<BipartiteEvolutionLearningRuleOptions&>(*options.get());
+		return static_cast<CoevolutionLearningRuleOptions&>(*options.get());
 	}
 
-	bool BipartiteEvolutionLearningRule::doIteration()
+	bool CoevolutionLearningRule::doIteration()
 	{
 		log("lr1: ", LL_MEDIUM);
 		bool successfull = getOptions().learningRule1->doIteration();
@@ -82,13 +82,13 @@ namespace LightBulb
 		return true;
 	}
 
-	void BipartiteEvolutionLearningRule::initializeTry()
+	void CoevolutionLearningRule::initializeTry()
 	{
 		getOptions().learningRule1->initializeTry();
 		getOptions().learningRule2->initializeTry();
 	}
 
-	bool BipartiteEvolutionLearningRule::hasLearningSucceeded()
+	bool CoevolutionLearningRule::hasLearningSucceeded()
 	{
 		return exitConditionReached;
 	}

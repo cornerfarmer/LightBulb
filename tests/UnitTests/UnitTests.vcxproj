@@ -140,7 +140,7 @@
     <ClCompile Include="Learning\Evolution\AbstractEvolutionWorldTest.cpp" />
     <ClCompile Include="Learning\Evolution\BestReuseSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\BestSelectionCommandTest.cpp" />
-    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRuleTest.cpp" />
+    <ClCompile Include="Learning\Evolution\CoevolutionLearningRuleTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCreationCommandTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunctionTest.cpp" />
     <ClCompile Include="Learning\Evolution\ConstantMutationCommandTest.cpp" />

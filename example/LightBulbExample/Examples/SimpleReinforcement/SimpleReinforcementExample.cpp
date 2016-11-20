@@ -1,6 +1,6 @@
 #include "SimpleReinforcementExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
+#include <Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>
 #include <TrainingPlans/Preferences/BooleanPreference.hpp>
 #include <NeuronDescription/SameNeuronDescriptionFactory.hpp>

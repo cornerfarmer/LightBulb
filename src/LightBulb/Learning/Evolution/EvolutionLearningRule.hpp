@@ -108,13 +108,13 @@ namespace LightBulb
 		AbstractLearningResult* getLearningResult() override;
 	public:
 		/**
-		* \brief Creates the bipartite evolution learning rule.
-		* \param options_ The options which configure the bipartite evolution learning rule.
+		* \brief Creates the coevolution learning rule.
+		* \param options_ The options which configure the coevolution learning rule.
 		*/
 		EvolutionLearningRule(EvolutionLearningRuleOptions& options_);
 		/**
-		* \brief Creates the bipartite evolution learning rule.
-		* \param options_ The options which configure the bipartite evolution learning rule.
+		* \brief Creates the coevolution learning rule.
+		* \param options_ The options which configure the coevolution learning rule.
 		*/
 		EvolutionLearningRule(EvolutionLearningRuleOptions* options_);
 		EvolutionLearningRule();

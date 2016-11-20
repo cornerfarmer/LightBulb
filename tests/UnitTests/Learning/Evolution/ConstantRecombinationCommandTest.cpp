@@ -131,7 +131,7 @@ TEST_F(ConstantRecombinationCommandTest, executeWithTwoMultipleUsedIndividuals)
 	constantRecombinationCommand->execute(newIndividualVector, counter, notUsedIndividuals);
 
 	EXPECT_EQ(1, newIndividualVector.size());
-	EXPECT_EQ(&clonedIndividual newIndividualVector[0]);
+	EXPECT_EQ(&clonedIndividual, newIndividualVector[0]);
 	EXPECT_EQ(1, counter[selectedIndividuals[0]]);
 	EXPECT_EQ(1, counter[selectedIndividuals[1]]);
 }

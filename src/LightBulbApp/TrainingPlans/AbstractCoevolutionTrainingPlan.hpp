@@ -15,7 +15,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractNeuralNetwork;
 	struct AbstractEvolutionLearningRuleOptions;
-	struct BipartiteEvolutionLearningRuleOptions;
+	struct CoevolutionLearningRuleOptions;
 	struct EvolutionLearningRuleOptions;
 	/**
 	* \brief Describes a training plan which uses coevolution learning.
@@ -40,7 +40,7 @@ namespace LightBulb
 		* \brief Fills all learning rule options which are the same for all coevolution learning rule training plans.
 		* \param options The options to fill.
 		*/
-		void fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions& options) const;
+		void fillDefaultLearningRuleOptions(CoevolutionLearningRuleOptions& options) const;
 		/**
 		* \brief Fills all learning rule options which are the same for the first evolution learning rule.
 		* \param options The options to fill.

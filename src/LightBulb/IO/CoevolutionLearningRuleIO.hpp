@@ -1,10 +1,10 @@
 #pragma once
 
-#ifndef _BIPARTITEEVOLUTIONLEARNINGRULEIO_H_
-#define _BIPARTITEEVOLUTIONLEARNINGRULEIO_H_
+#ifndef _COEVOLUTIONLEARNINGRULEIO_H_
+#define _COEVOLUTIONLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Evolution/BipartiteEvolutionLearningRule.hpp"
+#include "Learning/Evolution/CoevolutionLearningRule.hpp"
 #include "IOStorage.hpp"
 
 // Libraray includes
@@ -15,13 +15,13 @@
 namespace LightBulb
 {
 	/**
-	* \brief Serializes a BipartiteEvolutionLearningRule.
+	* \brief Serializes a CoevolutionLearningRule.
 	* \tparam Archive The archive type.
 	* \param archive The archive which should be used.
-	* \param learningRule The BipartiteEvolutionLearningRule to serialize.
+	* \param learningRule The CoevolutionLearningRule to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule)
+	void serialize(Archive& archive, CoevolutionLearningRule& learningRule)
 	{
 		archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
 
@@ -37,29 +37,29 @@ namespace LightBulb
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<LightBulb::BipartiteEvolutionLearningRule>
+	template <> struct LoadAndConstruct<LightBulb::CoevolutionLearningRule>
 	{
 		/**
-		* \brief Constructs a BipartiteEvolutionLearningRule.
+		* \brief Constructs a CoevolutionLearningRule.
 		* \tparam Archive The archive type.
 		* \param ar The archive which should be used.
-		* \param construct The BipartiteEvolutionLearningRule construct object.
+		* \param construct The CoevolutionLearningRule construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive& ar, construct<LightBulb::BipartiteEvolutionLearningRule>& construct)
+		static void load_and_construct(Archive& ar, construct<LightBulb::CoevolutionLearningRule>& construct)
 		{
 			using namespace LightBulb;
-			BipartiteEvolutionLearningRule* learningRule = static_cast<BipartiteEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			CoevolutionLearningRule* learningRule = static_cast<CoevolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 			ar(base_class<AbstractEvolutionLearningRule>(learningRule));
 
 			IOStorage<AbstractLearningRule>::push(learningRule->getOptions().learningRule1);
 			std::unique_ptr<AbstractLearningRule> learningRuleDummy;
 			ar(make_nvp("learningRule1", learningRuleDummy));
-			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			static_cast<CoevolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
 			IOStorage<AbstractLearningRule>::push(learningRule->getOptions().learningRule2);
 			ar(make_nvp("learningRule2", learningRuleDummy));
-			static_cast<BipartiteEvolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			static_cast<CoevolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
 			IOStorage<AbstractLearningRule>::push(learningRule);
 		}
@@ -68,6 +68,6 @@ namespace cereal
 
 #include "UsedArchives.hpp"
 
-CEREAL_REGISTER_TYPE(LightBulb::BipartiteEvolutionLearningRule);
+CEREAL_REGISTER_TYPE(LightBulb::CoevolutionLearningRule);
 
 #endif

@@ -72,9 +72,6 @@
     <ClCompile Include="Learning\Evolution\BestSelectionCommandTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRuleTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunctionTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\FitnessConditionTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Evolution\CoevolutionLearningRuleTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,7 +13,7 @@
 #include <Examples/PongEvolution/Pong.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
 #include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
-#include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
+#include <Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <fstream>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include "PongGameFactory.hpp"
@@ -80,12 +80,12 @@ AbstractLearningRule* PongEvolutionExample::createLearningRate()
 	fillDefaultEvolutionLearningRule2Options(options);
 	EvolutionLearningRule* learningRule2 = new EvolutionLearningRule(options);
 
-	BipartiteEvolutionLearningRuleOptions bipartiteOptions;
-	bipartiteOptions.learningRule1 = learningRule1;
-	bipartiteOptions.learningRule2 = learningRule2;
-	fillDefaultLearningRuleOptions(bipartiteOptions);
+	CoevolutionLearningRuleOptions coevolutionLearningRuleOptions;
+	coevolutionLearningRuleOptions.learningRule1 = learningRule1;
+	coevolutionLearningRuleOptions.learningRule2 = learningRule2;
+	fillDefaultLearningRuleOptions(coevolutionLearningRuleOptions);
 
-	return new BipartiteEvolutionLearningRule(bipartiteOptions);
+	return new CoevolutionLearningRule(coevolutionLearningRuleOptions);
 }
 
 
@@ -164,6 +164,6 @@ AbstractTrainingPlan* PongEvolutionExample::createNewFromSameType() const
 
 std::string PongEvolutionExample::getLearningRuleName() const
 {
-	return BipartiteEvolutionLearningRule::getName();
+	return CoevolutionLearningRule::getName();
 }
 

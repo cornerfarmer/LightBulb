@@ -1,11 +1,11 @@
 ﻿// Includes
 #include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
-#include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
+#include <Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
 
 namespace LightBulb
 {
-	void AbstractCoevolutionTrainingPlan::fillDefaultLearningRuleOptions(BipartiteEvolutionLearningRuleOptions& options) const
+	void AbstractCoevolutionTrainingPlan::fillDefaultLearningRuleOptions(CoevolutionLearningRuleOptions& options) const
 	{
 		AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(options);
 	}

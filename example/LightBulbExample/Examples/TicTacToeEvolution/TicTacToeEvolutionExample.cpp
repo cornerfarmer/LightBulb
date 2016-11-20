@@ -12,7 +12,7 @@
 #include <Examples/TicTacToeEvolution/TicTacToe.hpp>
 #include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
 #include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
-#include <Learning/Evolution/BipartiteEvolutionLearningRule.hpp>
+#include <Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <fstream>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include "TicTacToeGameFactory.hpp"
@@ -75,12 +75,12 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	fillDefaultEvolutionLearningRule2Options(options);
 	EvolutionLearningRule* learningRule2 = new EvolutionLearningRule(options);
 
-	BipartiteEvolutionLearningRuleOptions bipartiteOptions;
-	bipartiteOptions.learningRule1 = learningRule1;
-	bipartiteOptions.learningRule2 = learningRule2;
-	fillDefaultLearningRuleOptions(bipartiteOptions);
+	CoevolutionLearningRuleOptions coevolutionLearningRuleOptions;
+	coevolutionLearningRuleOptions.learningRule1 = learningRule1;
+	coevolutionLearningRuleOptions.learningRule2 = learningRule2;
+	fillDefaultLearningRuleOptions(coevolutionLearningRuleOptions);
 
-	return new BipartiteEvolutionLearningRule(bipartiteOptions);
+	return new CoevolutionLearningRule(coevolutionLearningRuleOptions);
 }
 
 
@@ -149,7 +149,7 @@ std::string TicTacToeEvolutionExample::getOriginalName() const
 
 std::string TicTacToeEvolutionExample::getDescription() const
 {
-	return "Evolution of a perfect TicTacToe KI with the bipartite evolution learning rule.";
+	return "Evolution of a perfect TicTacToe KI with the coevolution learning rule.";
 }
 
 AbstractTrainingPlan* TicTacToeEvolutionExample::createNewFromSameType() const
@@ -159,6 +159,6 @@ AbstractTrainingPlan* TicTacToeEvolutionExample::createNewFromSameType() const
 
 std::string TicTacToeEvolutionExample::getLearningRuleName() const
 {
-	return BipartiteEvolutionLearningRule::getName();
+	return CoevolutionLearningRule::getName();
 }
 

@@ -37,7 +37,7 @@ namespace LightBulb
 	 */
 	class AbstractEvolutionLearningRule : public AbstractLearningRule
 	{
-		friend class BipartiteEvolutionLearningRule;
+		friend class CoevolutionLearningRule;
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractEvolutionLearningRule& evolutionLearning);
 	private:

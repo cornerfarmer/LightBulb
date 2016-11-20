@@ -148,7 +148,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp">
+    <ClCompile Include="Learning\Evolution\CoevolutionLearningRule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -341,7 +341,7 @@
     <ClInclude Include="IO\AbstractDefaultIndividualIO.hpp" />
     <ClInclude Include="IO\AbstractSimpleEvolutionEnvironmentIO.hpp" />
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp" />
-    <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp" />
+    <ClInclude Include="IO\CoevolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\ConstructExisting.hpp" />
     <ClInclude Include="IO\EnumSerialization.hpp" />
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
@@ -465,7 +465,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp">
+    <ClInclude Include="Learning\Evolution\CoevolutionLearningRule.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>

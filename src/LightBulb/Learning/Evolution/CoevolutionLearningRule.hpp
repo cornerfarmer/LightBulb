@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _BIPARTITEEVOLUTIONLEARNINGRULE_H_
-#define _BIPARTITEEVOLUTIONLEARNINGRULE_H_
+#ifndef _COEVOLUTIONLEARNINGRULE_H_
+#define _COEVOLUTIONLEARNINGRULE_H_
 
 // Includes
 #include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
@@ -11,9 +11,9 @@
 namespace LightBulb
 {
 	/**
-	* \brief All options for the bipartite evolution learning rule.
+	* \brief All options for the coevolution learning rule.
 	*/
-	struct BipartiteEvolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
+	struct CoevolutionLearningRuleOptions : public AbstractEvolutionLearningRuleOptions
 	{
 		/**
 		 * \brief The learning rule which contains the first population.
@@ -26,27 +26,27 @@ namespace LightBulb
 		/**
 		* \brief Creates the options and fills them with default options.
 		*/
-		BipartiteEvolutionLearningRuleOptions()
+		CoevolutionLearningRuleOptions()
 		{
 			learningRule1 = nullptr;
 			learningRule2 = nullptr;
 		}
 	};
 	/**
-	 * \brief Describes an evolution learning rule which contains two separate populations.
+	 * \brief Describes an (competitive) coevolution learning rule which contains two separate populations.
 	 * \details One population (called parasite population) tries to make the other population loose. Having two separate populations makes it easier to learn and to hold learned stuff.
 	 */
-	class BipartiteEvolutionLearningRule : public AbstractEvolutionLearningRule
+	class CoevolutionLearningRule : public AbstractEvolutionLearningRule
 	{
 		template <class Archive>
-		friend void serialize(Archive& archive, BipartiteEvolutionLearningRule& learningRule);
-		friend struct cereal::LoadAndConstruct<BipartiteEvolutionLearningRule>;
+		friend void serialize(Archive& archive, CoevolutionLearningRule& learningRule);
+		friend struct cereal::LoadAndConstruct<CoevolutionLearningRule>;
 	protected:
 		/**
-		* \brief Returns our current options in form of a BipartiteEvolutionLearningRuleOptions object.
-		* \return The BipartiteEvolutionLearningRuleOptions object.
+		* \brief Returns our current options in form of a CoevolutionLearningRuleOptions object.
+		* \return The CoevolutionLearningRuleOptions object.
 		*/
-		const BipartiteEvolutionLearningRuleOptions& getOptions() const;
+		const CoevolutionLearningRuleOptions& getOptions() const;
 		/**
 		 * \brief True, if the exit condition of the first learning rule hase been reached.
 		 */
@@ -59,15 +59,15 @@ namespace LightBulb
 		AbstractLearningResult* getLearningResult() override;
 	public:
 		/**
-		* \brief Creates the bipartite evolution learning rule.
-		* \param options_ The options which configure the bipartite evolution learning rule.
+		* \brief Creates the coevolution learning rule.
+		* \param options_ The options which configure the coevolution learning rule.
 		*/
-		BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions& options_);
+		CoevolutionLearningRule(CoevolutionLearningRuleOptions& options_);
 		/**
-		* \brief Creates the bipartite evolution learning rule.
-		* \param options_ The options which configure the bipartite evolution learning rule.
+		* \brief Creates the coevolution learning rule.
+		* \param options_ The options which configure the coevolution learning rule.
 		*/
-		BipartiteEvolutionLearningRule(BipartiteEvolutionLearningRuleOptions* options_);
+		CoevolutionLearningRule(CoevolutionLearningRuleOptions* options_);
 		/**
 		* \brief Returns the name of the learning rule
 		* \return The name
@@ -88,6 +88,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/BipartiteEvolutionLearningRuleIO.hpp"
+#include "IO/CoevolutionLearningRuleIO.hpp"
 
 #endif

@@ -112,9 +112,6 @@
     <ClCompile Include="Learning\Evolution\AbstractSelectionCommand.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
-    <ClCompile Include="Learning\Evolution\BipartiteEvolutionLearningRule.cpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
@@ -408,6 +405,9 @@
     <ClCompile Include="Learning\Evolution\FitnessCondition.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Evolution\CoevolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -456,9 +456,6 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\AbstractSelectionCommand.hpp">
-      <Filter>Quelldateien\Learning\Evolution</Filter>
-    </ClInclude>
-    <ClInclude Include="Learning\Evolution\BipartiteEvolutionLearningRule.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp">
@@ -606,9 +603,6 @@
       <Filter>Quelldateien\Event</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractSupervisedLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\BipartiteEvolutionLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\DifferentNeuronDescriptionFactoryIO.hpp">
@@ -823,6 +817,12 @@
     <ClInclude Include="Learning\Reinforcement\AbstractReinforcementEnvironment.hpp" />
     <ClInclude Include="Learning\Evolution\FitnessCondition.hpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Learning\Evolution\CoevolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\CoevolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
