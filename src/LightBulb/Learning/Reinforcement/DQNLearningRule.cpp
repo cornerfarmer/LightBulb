@@ -8,6 +8,7 @@
 #include "AbstractReinforcementEnvironment.hpp"
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
+#include "Learning/Supervised/SupervisedLearningResult.hpp"
 
 namespace LightBulb
 {
@@ -118,8 +119,8 @@ namespace LightBulb
 
 		//auto gradient = checkGradient(&teacher, getOptions()->environment->getNeuralNetwork()->getNetworkTopology());
 
-		std::unique_ptr<AbstractLearningResult> result(gradientDescent->start());
-		currentTotalError += result->quality;
+		std::unique_ptr<SupervisedLearningResult> result(static_cast<SupervisedLearningResult*>(gradientDescent->start()));
+		currentTotalError += result->totalError;
 	}
 
 	std::string DQNLearningRule::getName()

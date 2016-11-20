@@ -183,8 +183,7 @@ namespace LightBulb
 	{
 		SupervisedLearningResult* learningResult = new SupervisedLearningResult();
 		fillDefaultResults(*learningResult);
-		learningResult->quality = totalError;
-		learningResult->qualityLabel = "Total error";
+		learningResult->totalError = totalError;
 		learningResult->trainedNetwork = getOptions().neuralNetwork;
 
 		return learningResult;

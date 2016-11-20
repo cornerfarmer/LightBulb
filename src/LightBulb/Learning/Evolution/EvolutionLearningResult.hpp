@@ -15,6 +15,7 @@ namespace LightBulb
 		 * \brief A vector of the best individuals that were produced by the evolution learning rule.
 		 */
 		std::vector<std::unique_ptr<AbstractIndividual>> bestIndividuals;
+		double bestFitness;
 	};
 }
 

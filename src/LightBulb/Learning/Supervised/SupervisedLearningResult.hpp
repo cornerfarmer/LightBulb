@@ -15,6 +15,7 @@ namespace LightBulb
 		 * \brief The network which was trained in the learning rule.
 		 */
 		AbstractNeuralNetwork* trainedNetwork;
+		double totalError;
 	};
 }
 

@@ -27,8 +27,7 @@ namespace LightBulb
 		EvolutionLearningResult* learningResult = new EvolutionLearningResult();
 		fillDefaultResults(*learningResult);
 		const Highscore& highscore = getOptions().environment->getHighscoreList();
-		learningResult->quality = highscore.front().first;
-		learningResult->qualityLabel = "Best fitness";
+		learningResult->bestFitness = highscore.front().first;
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			learningResult->bestIndividuals.push_back(std::unique_ptr<AbstractIndividual>(entry->second));
