@@ -9,6 +9,7 @@
 #include "TrainingController.hpp"
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <wx/timer.h>
+#include "IO/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
@@ -170,14 +171,37 @@ namespace LightBulb
 
 			getController().saveNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow());
 		}
-	}
+		else
+		{
+			AbstractNetworkExporter& exporter = *getController().getNetworkExporters()[event.GetId() - NETWORK_POPUP_SAVE - 1];
 
+			wxFileDialog saveFileDialog(this, exporter.getName() + " exporter", "", getController().getNeuralNetworks()[neuralNetworkList->GetSelectedRow()]->getName(), exporter.getFileExtensions(), wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+			if (saveFileDialog.ShowModal() == wxID_CANCEL)
+				return;
+
+			getController().exportNeuralNetwork(saveFileDialog.GetPath().ToStdString(), neuralNetworkList->GetSelectedRow(), exporter);
+		}
+	}
+	
 	void TrainingWindow::neuralNetworkListRightClick(wxDataViewEvent& event)
 	{
 		if (event.GetItem())
 		{
-			wxMenu* popUpMenu = new wxMenu;
+			bool enabled = getController().getNeuralNetworks()[neuralNetworkList->GetSelectedRow()]->getState() == NN_STATE_READY;
+			wxMenu* popUpMenu = new wxMenu();
 			popUpMenu->Append(new wxMenuItem(popUpMenu, NETWORK_POPUP_SAVE, "Save network"));
+			popUpMenu->Enable(NETWORK_POPUP_SAVE, enabled);
+
+			wxMenu* exportSubMenu = new wxMenu();
+			int i = 1;
+			for (auto exporter = getController().getNetworkExporters().begin(); exporter != getController().getNetworkExporters().end(); exporter++, i++)
+			{
+				exportSubMenu->Append(new wxMenuItem(exportSubMenu, NETWORK_POPUP_SAVE + i, (*exporter)->getName()));
+				exportSubMenu->Enable(NETWORK_POPUP_SAVE + i, enabled);
+			}
+			popUpMenu->AppendSubMenu(exportSubMenu, "Export");
+
 			popUpMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::neuralNetworkPopUpMenuSelected), this);
 			neuralNetworkList->PopupMenu(popUpMenu);
 		}

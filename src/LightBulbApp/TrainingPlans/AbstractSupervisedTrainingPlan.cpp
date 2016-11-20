@@ -11,6 +11,18 @@ namespace LightBulb
 		options.neuralNetwork = network;
 	}
 
+	void AbstractSupervisedTrainingPlan::pausingFinished()
+	{
+		AbstractTrainingPlan::pausingFinished();
+		network->setState(NN_STATE_READY);
+	}
+	
+	void AbstractSupervisedTrainingPlan::finished()
+	{
+		AbstractTrainingPlan::finished();
+		network->setState(NN_STATE_READY);
+	}
+
 	AbstractSupervisedTrainingPlan::AbstractSupervisedTrainingPlan()
 	{
 		network = nullptr;

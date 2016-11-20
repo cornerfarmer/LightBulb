@@ -16,6 +16,7 @@
 
 namespace LightBulb
 {
+	class AbstractNetworkExporter;
 	// Forward declarations
 	class NeuralNetworkRepository;
 	class TrainingPlanRepository;
@@ -34,6 +35,10 @@ namespace LightBulb
 		 * \brief Contains all available training plan patterns.
 		 */
 		std::vector<std::unique_ptr<AbstractTrainingPlan>> trainingPlanPatterns;
+		/**
+		* \brief Contains all available network exporters.
+		*/
+		std::vector<std::unique_ptr<AbstractNetworkExporter>> networkExporters;
 		/**
 		 * \brief The corresponding window.
 		 */
@@ -162,6 +167,7 @@ namespace LightBulb
 		 * \param neuralNetworkIndex The index of the network which should be saved.
 		 */
 		void saveNeuralNetwork(const std::string& path, int neuralNetworkIndex);
+		void exportNeuralNetwork(const std::string& path, int neuralNetworkIndex, AbstractNetworkExporter& exporter);
 		/**
 		 * \brief Loads a network from a file with the given path.
 		 * \param path The path of the file which should be loaded.
@@ -225,6 +231,9 @@ namespace LightBulb
 		 * \param subApp The sub app to remove.
 		 */
 		void removeSubApp(const AbstractSubApp& subApp) override;
+
+		void addNetworkExporter(AbstractNetworkExporter* exporter);
+		const std::vector<std::unique_ptr<AbstractNetworkExporter>>& getNetworkExporters() const;
 	};
 }
 

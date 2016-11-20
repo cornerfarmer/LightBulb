@@ -49,6 +49,6 @@ TEST(BrainJSExporterTest, exportSimpleFeedForwardNetworkTopology)
 	std::vector<double> output(1);
 	neuralNetwork.calculate(input, output, TopologicalOrder());
 
-	std::string result = exporter.execute(&neuralNetwork);
+	std::string result = exporter.exportToString(&neuralNetwork);
 	EXPECT_EQ(expected, result);
 }

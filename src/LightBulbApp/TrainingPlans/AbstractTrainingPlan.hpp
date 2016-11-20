@@ -136,11 +136,11 @@ namespace LightBulb
 		/**
 		 * \brief Called after the pausing has been finished.
 		 */
-		void pausingFinished();
+		virtual void pausingFinished();
 		/**
 		 * \brief Called if the training plan has been finished.
 		 */
-		void finished();
+		virtual void finished();
 		/**
 		 * \brief Initializes the training plan before starting it.
 		 */

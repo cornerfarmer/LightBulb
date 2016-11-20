@@ -193,9 +193,6 @@
     <ClCompile Include="Lib\ziggurat.cpp">
       <Filter>Quelldateien\Lib</Filter>
     </ClCompile>
-    <ClCompile Include="IO\AbstractExporter.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
     <ClCompile Include="IO\AbstractJSONElement.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
@@ -408,6 +405,9 @@
     <ClCompile Include="Learning\Evolution\CoevolutionLearningRule.cpp">
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClCompile>
+    <ClCompile Include="IO\AbstractNetworkExporter.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActivationOrder\AbstractActivationOrder.hpp">
@@ -535,9 +535,6 @@
     </ClInclude>
     <ClInclude Include="Lib\ziggurat.hpp">
       <Filter>Quelldateien\Lib</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\AbstractExporter.hpp">
-      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="IO\AbstractJSONElement.hpp">
       <Filter>Quelldateien\IO</Filter>
@@ -822,6 +819,9 @@
       <Filter>Quelldateien\Learning\Evolution</Filter>
     </ClInclude>
     <ClInclude Include="IO\CoevolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\AbstractNetworkExporter.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>

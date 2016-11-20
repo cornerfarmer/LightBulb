@@ -46,7 +46,7 @@
     <ClCompile Include="NetworkTopology\AbstractFeedForwardNetworkTopology.cpp" />
     <ClCompile Include="Random\XorShfGenerator.cpp" />
     <ClCompile Include="Random\ZigguratGenerator.cpp" />
-    <ClCompile Include="IO\AbstractExporter.cpp" />
+    <ClCompile Include="IO\AbstractNetworkExporter.cpp" />
     <ClCompile Include="IO\AbstractJSONElement.cpp" />
     <ClCompile Include="IO\BrainJSExporter.cpp" />
     <ClCompile Include="IO\JSONArray.cpp" />
@@ -347,7 +347,7 @@
     <ClInclude Include="IO\EvolutionLearningRuleIO.hpp" />
     <ClInclude Include="IO\TeachedIndividualIO.hpp" />
     <ClInclude Include="IO\UseParentSerialization.hpp" />
-    <ClInclude Include="IO\AbstractExporter.hpp" />
+    <ClInclude Include="IO\AbstractNetworkExporter.hpp" />
     <ClInclude Include="IO\AbstractLearningRuleIO.hpp" />
     <ClInclude Include="IO\GradientDescentLearningRuleIO.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

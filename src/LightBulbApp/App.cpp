@@ -10,6 +10,8 @@
 #include "Windows/LoggerFactory.hpp"
 #include "Windows/NetworkViewerFactory.hpp"
 #include "Windows/EvolutionAnalyzerFactory.hpp"
+#include "IO/SynapticExporter.hpp"
+#include "IO/BrainJSExporter.hpp"
 
 namespace LightBulb
 {
@@ -31,6 +33,9 @@ namespace LightBulb
 		trainingController->addSubAppFactory(learningStateFactory);
 		trainingController->addSubAppFactory(networkViewerFactory);
 		trainingController->addSubAppFactory(evolutionAnalyzerFactory);
+
+		trainingController->addNetworkExporter(new BrainJSExporter());
+		trainingController->addNetworkExporter(new SynapticExporter());
 
 		trainingController->show();
 		return true;

@@ -78,6 +78,7 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../src/LightBulb;../../src/LightBulbApp;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_richtext.lib;wxmsw31ud_adv.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;../../extlibs/freechart/lib/vc_lib/msw_wxFreeChart30ud.lib;../../vs/Debug/LightBulbApp.lib;../../vs/Debug/LightBulb.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -100,6 +101,7 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../src/LightBulb;../../src/LightBulbApp;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

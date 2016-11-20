@@ -38,6 +38,9 @@ namespace LightBulb
 		* \param options The options to fill.
 		*/
 		void fillDefaultLearningRuleOptions(AbstractSupervisedLearningRuleOptions& options) const;
+		// Inherited:
+		void pausingFinished() override;
+		void finished() override;
 	public:
 		/**
 		 * \brief Creates the supervised training plan.

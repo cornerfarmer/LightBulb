@@ -5,14 +5,15 @@
 #include "IO/JSONObject.hpp"
 #include "IO/JSONArray.hpp"
 #include "IO/JSONNumberElement.hpp"
+#include <fstream>
 
 namespace LightBulb
 {
-	std::string BrainJSExporter::execute(NeuralNetwork* neuralNetwork)
+	std::string BrainJSExporter::exportToString(const AbstractNeuralNetwork& neuralNetwork)
 	{
 		JSONObject jsonObject;
 		JSONArray* layers = new JSONArray();
-		FeedForwardNetworkTopology& networkTopology = dynamic_cast<FeedForwardNetworkTopology&>(neuralNetwork->getNetworkTopology());
+		FeedForwardNetworkTopology& networkTopology = dynamic_cast<FeedForwardNetworkTopology&>(neuralNetwork.getNetworkTopology());
 
 		int layerCount = networkTopology.getLayerCount();
 		for (int l = 0; l < layerCount; l++)
@@ -41,5 +42,15 @@ namespace LightBulb
 		jsonObject.addAttribute(new JSONAttribute("layers", layers));
 
 		return jsonObject.toString();
+	}
+
+	std::string BrainJSExporter::getFileExtensions() const
+	{
+		return "BrainJS network (*.json)|*.json";
+	}
+
+	std::string BrainJSExporter::getName() const
+	{
+		return "BrainJS";
 	}
 }

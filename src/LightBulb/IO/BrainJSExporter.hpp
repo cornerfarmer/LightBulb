@@ -4,18 +4,20 @@
 #define _BRAINJSEXPORTER_H_
 
 // Includes
-#include "IO/AbstractExporter.hpp"
+#include "IO/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 
 	// 
-	class BrainJSExporter : public AbstractExporter
+	class BrainJSExporter : public AbstractNetworkExporter
 	{
 	private:
 	public:
-		std::string execute(NeuralNetwork* neuralNetwork) override;
+		std::string exportToString(const AbstractNeuralNetwork& neuralNetwork) override;
+		std::string getName() const override;
+		std::string getFileExtensions() const override;
 	};
 }
 

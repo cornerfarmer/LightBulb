@@ -13,6 +13,7 @@
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
+#include "IO/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
@@ -183,6 +184,11 @@ namespace LightBulb
 		neuralNetworkRepository->save(path, neuralNetworkIndex);
 	}
 
+	void TrainingController::exportNeuralNetwork(const std::string& path, int neuralNetworkIndex, AbstractNetworkExporter& exporter)
+	{
+		exporter.exportToFile(path, *neuralNetworkRepository->getNeuralNetworks()[neuralNetworkIndex]);
+	}
+
 	void TrainingController::loadNeuralNetwork(const std::string& path)
 	{
 		neuralNetworkRepository->load(path);
@@ -301,6 +307,16 @@ namespace LightBulb
 				break;
 			}
 		}
+	}
+
+	void TrainingController::addNetworkExporter(AbstractNetworkExporter* exporter)
+	{
+		networkExporters.push_back(std::unique_ptr<AbstractNetworkExporter>(exporter));
+	}
+
+	const std::vector<std::unique_ptr<AbstractNetworkExporter>>& TrainingController::getNetworkExporters() const
+	{
+		return networkExporters;
 	}
 
 	bool TrainingController::allTrainingPlansPaused()

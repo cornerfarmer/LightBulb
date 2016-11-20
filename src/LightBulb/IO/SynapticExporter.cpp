@@ -9,12 +9,23 @@
 
 namespace LightBulb
 {
-	std::string SynapticExporter::execute(NeuralNetwork* neuralNetwork)
+	std::string SynapticExporter::exportToString(const AbstractNeuralNetwork& neuralNetwork)
 	{
-		networkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&neuralNetwork->getNetworkTopology());
+		networkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&neuralNetwork.getNetworkTopology());
 
 		std::unique_ptr<JSONObject> jsonObject(getNetworkJSONObject());
+
 		return jsonObject->toString();
+	}
+
+	std::string SynapticExporter::getFileExtensions() const
+	{
+		return "Synaptic network (*.json)|*.json";;
+	}
+
+	std::string SynapticExporter::getName() const
+	{
+		return "Synaptic";
 	}
 
 	JSONObject* SynapticExporter::getNetworkJSONObject()
