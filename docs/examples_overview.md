@@ -8,3 +8,9 @@ A first basic example how to train a neural network to simulate a xor calculator
 
 [More...](examples/backpropagation_xor.md)
 
+
+## Function evolution:
+
+A simple example how to use evolution in LightBulb. Our goal is to find the global minimum of the [six-hump camel-back function](https://www.sfu.ca/~ssurjano/camel6.html).
+
+[More...](examples/function_evolution.md)
