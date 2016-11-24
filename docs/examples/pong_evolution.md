@@ -259,3 +259,4 @@ Now its up to you to try and test the pong AI.
 
 Of course you could also just click the gif below and try it online. :stuck_out_tongue_winking_eye: 
 
+[![Pong evolution gif](media/pong_evolution.gif | width=200)](http://dw-projects.com/index.php?id=58)
