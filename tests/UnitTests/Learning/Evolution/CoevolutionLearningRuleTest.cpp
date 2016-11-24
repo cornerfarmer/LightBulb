@@ -45,8 +45,6 @@ TEST_F(CoevolutionLearningRuleTest, start)
 	EXPECT_CALL(*learningRule1, doIteration()).WillOnce(testing::Return(true));
 	EXPECT_CALL(*learningRule2, doIteration()).WillOnce(testing::Return(false));
 
-	EXPECT_CALL(*learningRule1, doIteration()).WillOnce(testing::Return(false));
-
 	MockLearningResult learningResult;
 
 	EXPECT_CALL(*learningRule1, getLearningResult()).WillOnce(testing::Return(&learningResult));

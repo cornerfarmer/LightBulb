@@ -98,7 +98,7 @@ namespace LightBulb
 		for (int layerIndex = 1; layerIndex < networkTopology->getLayerCount(); layerIndex++)
 		{
 			weights = &networkTopology->getAllWeights()[layerIndex - 1];
-			for (int sourceNeuronIndex = 0; sourceNeuronIndex < weights->cols() - 1; sourceNeuronIndex++)
+			for (int sourceNeuronIndex = 1; sourceNeuronIndex < weights->cols(); sourceNeuronIndex++)
 			{
 				for (int destinationNeuronIndex = 0; destinationNeuronIndex < weights->rows(); destinationNeuronIndex++)
 				{
@@ -122,7 +122,7 @@ namespace LightBulb
 
 	JSONAttribute* SynapticExporter::getConnectionFromAttribute(int layerIndex, int sourceNeuronIndex)
 	{
-		return new JSONAttribute("from", new JSONNumberElement<int>(getTotalIndexOfNeuron(layerIndex - 1, sourceNeuronIndex)));
+		return new JSONAttribute("from", new JSONNumberElement<int>(getTotalIndexOfNeuron(layerIndex - 1, sourceNeuronIndex - 1)));
 	}
 
 	JSONAttribute* SynapticExporter::getConnectionToAttribute(int layerIndex, int destinationNeuronIndex)

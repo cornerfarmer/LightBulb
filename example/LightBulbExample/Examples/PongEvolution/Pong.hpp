@@ -39,7 +39,6 @@ public:
 	void executeCompareAI();
 	int rateIndividual(LightBulb::AbstractIndividual& individual) override;
 	void startNewGame();
-	void initializeForLearning() override;
 	std::vector<std::string> getDataSetLabels() const override;
 	int getRoundCount() const override;
 };

@@ -23,10 +23,7 @@ Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironme
 
 int Pong::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round)
 {
-	if (round == 0)
-		return simulateGame(static_cast<PongAI&>(obj1), static_cast<PongAI&>(obj2));
-	else
-		return -simulateGame(static_cast<PongAI&>(obj2), static_cast<PongAI&>(obj1));
+	return simulateGame(static_cast<PongAI&>(obj1), static_cast<PongAI&>(obj2));
 }
 
 
@@ -43,9 +40,6 @@ int Pong::getRoundCount() const
 	return 1;
 }
 
-void Pong::initializeForLearning()
-{
-}
 
 int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
 {
@@ -95,6 +89,8 @@ void Pong::executeCompareAI()
 
 int Pong::rateIndividual(AbstractIndividual& individual)
 {
+
+	static_cast<PongAI&>(individual).setPong(*this);
 	int wins = 0;
 	int matchCount = 100;
 	for (int i = 0; i < matchCount; i++)

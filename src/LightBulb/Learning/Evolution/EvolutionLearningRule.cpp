@@ -19,6 +19,7 @@
 #include <map>
 #include <string>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
+#include "AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -27,6 +28,8 @@ namespace LightBulb
 		EvolutionLearningResult* learningResult = new EvolutionLearningResult();
 		fillDefaultResults(*learningResult);
 		const Highscore& highscore = getOptions().environment->getHighscoreList();
+		int erg = static_cast<AbstractCoevolutionEnvironment*>(getOptions().environment)->rateIndividual(*highscore.front().second);
+		getOptions().logger->log(std::to_string(erg), LL_HIGH);
 		learningResult->bestFitness = highscore.front().first;
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{

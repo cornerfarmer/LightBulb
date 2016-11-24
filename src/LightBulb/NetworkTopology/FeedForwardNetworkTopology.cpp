@@ -342,7 +342,7 @@ namespace LightBulb
 	{
 		if (layerNr == 0)
 			throw std::logic_error("The first layer does not have a bias weight.");
-		return weights[layerNr - 1](neuronNr, weights[layerNr - 1].cols() - 1);
+		return weights[layerNr - 1](neuronNr, 0);
 	}
 
 	std::vector<double> FeedForwardNetworkTopology::getAfferentWeightsPerNeuron(int layerNr, int neuronNr, bool withoutBiasWeight) const
