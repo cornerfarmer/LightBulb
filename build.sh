@@ -6,7 +6,11 @@ else
 	git reset --hard v3.1.0
 	mkdir build-gtk
 	cd build-gtk
-	../configure --disable-shared --enable-unicode
+	if [ "$SHARED" = "OFF" ]
+		../configure --disable-shared --enable-unicode
+	else
+		../configure --enable-shared --enable-unicode
+	fi
 	make --silent
 fi
 sudo make install
