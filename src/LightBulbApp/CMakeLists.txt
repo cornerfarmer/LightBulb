@@ -15,6 +15,6 @@ set(wxWidgets_CONFIGURATION mswu)
 find_package(wxWidgets COMPONENTS core base richtext adv html xml REQUIRED)
 include(${wxWidgets_USE_FILE})
 
-add_library(LightBulbApp STATIC ${SOURCES})
+add_library(LightBulbApp ${SOURCES})
 target_link_libraries(LightBulbApp LightBulb freechart ${wxWidgets_LIBRARIES})
 use_cxx11()

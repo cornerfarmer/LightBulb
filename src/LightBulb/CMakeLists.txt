@@ -8,5 +8,5 @@ include_directories(.)
 include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)
 
-add_library(LightBulb STATIC ${SOURCES})
+add_library(LightBulb ${SOURCES})
 use_cxx11()
