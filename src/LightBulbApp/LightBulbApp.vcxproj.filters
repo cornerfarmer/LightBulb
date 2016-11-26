@@ -201,6 +201,12 @@
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -426,6 +432,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

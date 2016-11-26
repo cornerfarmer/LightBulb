@@ -64,6 +64,7 @@ namespace LightBulb
 		int finalExplorationFrame;
 		/**
 		 * \brief After how many iterations the learning process should start.
+		 * \details Default value: 50000
 		 */
 		int replayStartSize;
 		/**

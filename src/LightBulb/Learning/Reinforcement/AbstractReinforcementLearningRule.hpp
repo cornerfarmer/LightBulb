@@ -27,7 +27,7 @@ namespace LightBulb
 		AbstractReinforcementLearningRuleOptions()
 		{
 			environment = nullptr;
-			maxIterationsPerTry = 10000000000;
+			maxIterationsPerTry = 10000000;
 		}
 	};
 

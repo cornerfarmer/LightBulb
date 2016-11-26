@@ -12,6 +12,7 @@
 #include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
 #include <TrainingPlans/Preferences/DoublePreference.hpp>
 #include <Function/ActivationFunction/RectifierFunction.hpp>
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/DQNLearningRulePreferenceGroup.hpp"
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"
@@ -34,19 +35,7 @@ using namespace LightBulb;
 
 AbstractLearningRule* PongDQNExample::createLearningRate()
 {
-	DQNLearningRuleOptions options;
-	options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
-	options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
-	options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
-	options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
-	options.replayStartSize = getIntegerPreference(PREFERENCE_REPLAY_START_SIZE);
-	options.gradientDescentOptions.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
-	options.rmsPropOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
-	options.rmsPropOptions.deltaWeightsMomentum = getDoublePreference(PREFERENCE_MOMENTUM);
-	options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
-	options.replaceStoredTransitions = getBooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS);
-
-
+	DQNLearningRuleOptions options = createOptions<DQNLearningRuleOptions, DQNLearningRulePreferenceGroup>();
 	//options.dataSaveInterval = 100;
 	fillDefaultLearningRuleOptions(options);
 
@@ -81,17 +70,13 @@ PongDQNExample::PongDQNExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER, 256, 1, 30));
 	addPreference(new BooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE, false));
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
-	addPreference(new DoublePreference(PREFERENCE_LEARNING_RATE, 0.0005, 0, 1));
-	addPreference(new IntegerPreference(PREFERENCE_MINIBATCH_SIZE, 32, 1, 1024));
-	addPreference(new IntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY, 10000, 1, 100000));
-	addPreference(new IntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE, 1000000, 1, 10000000));
-	addPreference(new IntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME, 500000, 1, 1000000));
-	addPreference(new BooleanPreference(PREFERENCE_CLIP_ERROR, true));
-	addPreference(new BooleanPreference(PREFERENCE_RMSMPROP_LEARNING_RATE, true));
-	addPreference(new DoublePreference(PREFERENCE_MOMENTUM, 0, 0, 1));
-	addPreference(new IntegerPreference(PREFERENCE_REPLAY_START_SIZE, 50000, 1, 50000));
-	addPreference(new DoublePreference(PREFERENCE_DISCOUNT_FACTOR, 0.99, 0, 1));
-	addPreference(new BooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS, true));
+
+	DQNLearningRuleOptions options;
+	options.rmsPropOptions.learningRate = 0.0005;
+	options.finalExplorationFrame = 500000;
+	options.rmsPropOptions.deltaWeightsMomentum = 0;
+	options.seed = 1234;
+	addPreferenceGroup(new DQNLearningRulePreferenceGroup(options));
 }
 
 std::string PongDQNExample::getOriginalName() const

@@ -22,23 +22,26 @@ namespace LightBulb
 	protected:
 		/**
 		* \brief Initializes the preference group.
+		* \param skipGradientDescentAlgorithm True, if the preference group should not manage the gradient descent algorithm.
 		* \param options The options which contain the default values.
 		* \param simpleGradientDescentOptions The options which contain the default values for the simple gradient descent preference group.
 		* \param resilientLearningRateOptions The options which contain the default values for the resilient learning rule preference group.
 		*/
-		void initialize(const GradientDescentLearningRuleOptions& options, const SimpleGradientDescentOptions& simpleGradientDescentOptions, const ResilientLearningRateOptions& resilientLearningRateOptions);
+		void initialize(bool skipGradientDescentAlgorithm, const GradientDescentLearningRuleOptions& options, const SimpleGradientDescentOptions& simpleGradientDescentOptions, const ResilientLearningRateOptions& resilientLearningRateOptions);
 	public:
 		/**
 		* \brief Creates a gradient descent learning rule preference group with standard default values.
+		* \param skipGradientDescentAlgorithm True, if the preference group should not manage the gradient descent algorithm.
 		* \param name The name.
 		*/
-		GradientDescentLearningRulePreferenceGroup(const std::string& name = "Gradient descent");
+		GradientDescentLearningRulePreferenceGroup(bool skipGradientDescentAlgorithm = false, const std::string& name = "Gradient descent");
 		/**
 		* \brief Creates a gradient descent learning rule preference group.
 		* \param options The options which contain the default values to use.
+		* \param skipGradientDescentAlgorithm True, if the preference group should not manage the gradient descent algorithm.
 		* \param name The name.
 		*/
-		GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, const std::string& name = "Gradient descent");
+		GradientDescentLearningRulePreferenceGroup(const GradientDescentLearningRuleOptions& options, bool skipGradientDescentAlgorithm = false, const std::string& name = "Gradient descent");
 		/**
 		* \brief Creates a gradient descent learning rule preference group.
 		* \param options The options which contain the default values to use.

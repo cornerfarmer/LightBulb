@@ -150,6 +150,8 @@
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractSupervisedTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.cpp" />
@@ -232,6 +234,8 @@
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractSupervisedTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.hpp" />
