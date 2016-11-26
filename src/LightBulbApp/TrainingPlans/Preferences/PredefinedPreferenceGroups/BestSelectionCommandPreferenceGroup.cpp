@@ -1,0 +1,26 @@
+﻿// Includes
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/BestSelectionCommandPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/IntegerPreference.hpp"
+
+
+namespace LightBulb
+{
+	#define PREFERENCE_INDIVIDUAL_COUNT "Individual count"
+
+	BestSelectionCommandPreferenceGroup::BestSelectionCommandPreferenceGroup(const std::string& name)
+		:PreferenceGroup(name)
+	{
+		addPreference(new IntegerPreference(PREFERENCE_INDIVIDUAL_COUNT, 20, 1, 100));
+	}
+
+	BestSelectionCommand* BestSelectionCommandPreferenceGroup::create() const
+	{
+		int flatSpotEliminationFac = getIntegerPreference(PREFERENCE_INDIVIDUAL_COUNT);
+		return new BestSelectionCommand(flatSpotEliminationFac);
+	}
+
+	AbstractCloneable* BestSelectionCommandPreferenceGroup::clone() const
+	{
+		return new BestSelectionCommandPreferenceGroup(*this);
+	}
+}

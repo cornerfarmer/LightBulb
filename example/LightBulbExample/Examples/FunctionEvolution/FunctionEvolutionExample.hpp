@@ -12,6 +12,7 @@ protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 	LightBulb::AbstractEvolutionEnvironment* createEnvironment() override;
 public:
+	FunctionEvolutionExample();
 	std::string getOriginalName() const override;
 	std::string getDescription() const override;
 	AbstractTrainingPlan* createNewFromSameType() const override;

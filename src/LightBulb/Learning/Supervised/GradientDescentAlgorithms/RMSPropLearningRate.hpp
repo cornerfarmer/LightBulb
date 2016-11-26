@@ -18,22 +18,27 @@ namespace LightBulb
 	{
 		/**
 		 * \brief The momentum of the gradient.
+		 * \details Default value: 0.95
 		 */
 		double gradientMomentum;
 		/**
 		 * \brief The momentum of the squared gradient.
+		 * \details Default value: 0.95
 		 */
 		double squaredGradientMomentum;
 		/**
 		 * \brief The momentum of the calculated delta weights.
+		 * \details Default value: 0.9
 		 */
 		double deltaWeightsMomentum;
 		/**
 		 * \brief The learning rate.
+		 * \details Default value: 0.25
 		 */
 		double learningRate;
 		/**
 		 * \brief The basic squared gradient.
+		 * \details Default value: 0.01
 		 */
 		double minSquaredGradient;
 		/**

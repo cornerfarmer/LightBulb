@@ -37,12 +37,11 @@ namespace LightBulb
 		void selectForMutation(int mutationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 		void selectForRecombination(int recombinationCount, const std::vector<std::pair<double, AbstractIndividual*>>& highscore) override;
 	public:
-		StochasticUniversalSamplingSelector() = default;
 		/**
 		 * \brief The stochastic universal sampling selector.
 		 * \param selectionFunction_ The selection function which should be used.
 		 */
-		StochasticUniversalSamplingSelector(AbstractSelectionFunction* selectionFunction_);
+		StochasticUniversalSamplingSelector(AbstractSelectionFunction* selectionFunction_ = nullptr);
 		StochasticUniversalSamplingSelector(const StochasticUniversalSamplingSelector& other);
 		StochasticUniversalSamplingSelector(StochasticUniversalSamplingSelector&& other) noexcept;
 		StochasticUniversalSamplingSelector& operator=(StochasticUniversalSamplingSelector other);

@@ -12,6 +12,7 @@
 #include <Examples/FunctionEvolution/FunctionSimulator.hpp>
 #include <Learning/Evolution/BestReuseSelector.hpp>
 #include <Learning/Evolution/FitnessCondition.hpp>
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/EvolutionLearningRulePreferenceGroup.hpp"
 
 using namespace LightBulb;
 
@@ -22,22 +23,7 @@ static double sixHumpCamelFunction(std::vector<float> pos)
 
 AbstractLearningRule* FunctionEvolutionExample::createLearningRate()
 {
-	
-
-	EvolutionLearningRuleOptions options;
-	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 10);
-	options.exitConditions.push_back(rateDifferenceCondition);
-	options.exitConditions.push_back(new FitnessCondition(1.031627 + 10000));
-	ConstantCreationCommand* constantCreationCommand = new ConstantCreationCommand(20);
-	options.creationCommands.push_back(constantCreationCommand);
-	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 1));
-	BestSelectionCommand* bestSelectionCommand = new BestSelectionCommand(20);
-	options.selectionCommands.push_back(bestSelectionCommand);
-	MutationAlgorithm* mutationAlgorithm = new MutationAlgorithm(1.6);
-	ConstantMutationCommand* constantMutationCommand = new ConstantMutationCommand(mutationAlgorithm, new StochasticUniversalSamplingSelector(), 1.8);
-	options.mutationsCommands.push_back(constantMutationCommand);
-	ConstantRecombinationCommand* constantRecombinationCommand = new ConstantRecombinationCommand(new RecombinationAlgorithm(), new StochasticUniversalSamplingSelector(), 0.3);
-	options.recombinationCommands.push_back(constantRecombinationCommand);
+	EvolutionLearningRuleOptions options = createOptions<EvolutionLearningRuleOptions, EvolutionLearningRulePreferenceGroup>();
 	fillDefaultLearningRuleOptions(options);
 
 	return new EvolutionLearningRule(options);
@@ -49,6 +35,11 @@ AbstractEvolutionEnvironment* FunctionEvolutionExample::createEnvironment()
 	simulatorOptions.enableGraphics = false;
 
 	return new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
+}
+
+FunctionEvolutionExample::FunctionEvolutionExample()
+{
+	addPreferenceGroup(new EvolutionLearningRulePreferenceGroup());
 }
 
 std::string FunctionEvolutionExample::getOriginalName() const

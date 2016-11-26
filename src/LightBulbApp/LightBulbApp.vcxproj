@@ -144,6 +144,7 @@
     <ClCompile Include="TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractPreferenceElement.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\ChoicePreference.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractEvolutionLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractPreference.cpp" />
     <ClCompile Include="TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
@@ -151,7 +152,15 @@
     <ClCompile Include="TrainingPlans\AbstractTrainingPlan.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BackpropagationPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BestSelectionCommandPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantCreationCommandPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantMutationCommandPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantRecombinationCommandPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantReuseCommandPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\EvolutionLearningRulePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\GradientDescentLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RateDifferenceConditionPreferenceGroup.cpp" />
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RMSPropLearningRatePreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\AbstractVariablePreference.cpp" />
     <ClCompile Include="TrainingPlans\Preferences\BooleanPreference.cpp" />
@@ -217,6 +226,7 @@
     <ClInclude Include="TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractPreferenceElement.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\ChoicePreference.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractEvolutionLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractPreference.hpp" />
     <ClInclude Include="TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
@@ -224,7 +234,15 @@
     <ClInclude Include="TrainingPlans\AbstractTrainingPlan.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BackpropagationPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BestSelectionCommandPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantCreationCommandPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantMutationCommandPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantRecombinationCommandPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantReuseCommandPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\EvolutionLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\GradientDescentLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RateDifferenceConditionPreferenceGroup.hpp" />
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RMSPropLearningRatePreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\PreferenceGroup.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\AbstractVariablePreference.hpp" />
     <ClInclude Include="TrainingPlans\Preferences\BooleanPreference.hpp" />
