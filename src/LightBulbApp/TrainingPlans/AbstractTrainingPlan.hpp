@@ -306,6 +306,11 @@ namespace LightBulb
 		 */
 		virtual LearningState& getLearningState() = 0;
 		/**
+		* \brief Returns if there is already a learning state.
+		* \return True, if there is one.
+		*/
+		virtual bool hasLearningState() = 0;
+		/**
 		 * \brief Returns the logger of the training plan.
 		 * \return The logger.
 		 */

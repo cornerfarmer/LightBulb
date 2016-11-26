@@ -40,6 +40,11 @@ namespace LightBulb
 		return learningRule->getLearningState();
 	}
 
+	bool AbstractLearningRuleTrainingPlan::hasLearningState()
+	{
+		return learningRule.get() != nullptr;
+	}
+
 	const AbstractLearningResult& AbstractLearningRuleTrainingPlan::getLearningResult() const
 	{
 		return *learningResult.get();

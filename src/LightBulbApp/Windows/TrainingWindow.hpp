@@ -285,7 +285,7 @@ namespace LightBulb
 		 * \brief Refresh the stats of all training plans.
 		 * \param event The event data.
 		 */
-		void refreshTrainingPlanRunTimes(wxTimerEvent& event);
+		void refreshTrainingPlanState(wxTimerEvent& event);
 		/**
 		 * \brief Converts the given duration to a readable string.
 		 * \param duration The duration.

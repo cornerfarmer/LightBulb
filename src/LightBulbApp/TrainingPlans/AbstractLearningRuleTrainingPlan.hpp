@@ -63,6 +63,7 @@ namespace LightBulb
 		// Inherited:
 		std::vector<std::string> getDataSetLabels() const override;
 		LearningState& getLearningState() override;
+		bool hasLearningState() override;
 		int getSeed() const override;
 	};
 }

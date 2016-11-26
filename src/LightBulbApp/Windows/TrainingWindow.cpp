@@ -109,7 +109,7 @@ namespace LightBulb
 		SetSizer(mainSizer);
 		mainSizer->SetSizeHints(this);
 
-		Bind(wxEVT_TIMER, wxTimerEventFunction(&TrainingWindow::refreshTrainingPlanRunTimes), this);
+		Bind(wxEVT_TIMER, wxTimerEventFunction(&TrainingWindow::refreshTrainingPlanState), this);
 		runTimeRefreshTimer.Start(1000);
 
 		SetSize(1100, 700);
@@ -324,6 +324,7 @@ namespace LightBulb
 		trainingPlanList->AppendTextColumn("Training name", wxDATAVIEW_CELL_EDITABLE)->SetMinWidth(50);
 		trainingPlanList->AppendTextColumn("State")->SetMinWidth(50);
 		trainingPlanList->AppendTextColumn("Runtime")->SetMinWidth(50);
+		trainingPlanList->AppendTextColumn("Iterations")->SetMinWidth(50);
 		trainingPlanList->Bind(wxEVT_DATAVIEW_SELECTION_CHANGED, wxObjectEventFunction(&TrainingWindow::selectTrainingPlan), this);
 		trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_CONTEXT_MENU, wxObjectEventFunction(&TrainingWindow::trainingPlanListRightClick), this);
 		trainingPlanList->Bind(wxEVT_DATAVIEW_ITEM_EDITING_DONE, wxDataViewEventFunction(&TrainingWindow::trainingPlanNameChanged), this);
@@ -345,6 +346,10 @@ namespace LightBulb
 			data.push_back(wxVariant((*trainingPlan)->getStateAsString()));
 			auto duration = (*trainingPlan)->getRunTime();
 			data.push_back(wxVariant(getStringFromDuration(duration)));
+			int iterations = 0;
+			if ((*trainingPlan)->hasLearningState())
+				iterations = (*trainingPlan)->getLearningState().iterations;
+			data.push_back(wxVariant(std::to_string(iterations)));
 			trainingPlanList->AppendItem(data);
 			if (currentDetailObject == trainingPlan->get())
 				showDetailsOfTrainingPlan(*trainingPlan->get());
@@ -526,7 +531,7 @@ namespace LightBulb
 		}
 	}
 
-	void TrainingWindow::refreshTrainingPlanRunTimes(wxTimerEvent& event)
+	void TrainingWindow::refreshTrainingPlanState(wxTimerEvent& event)
 	{
 		int trainingPlanIndex = 0;
 		for (auto trainingPlan = getController().getTrainingPlans().begin(); trainingPlan != getController().getTrainingPlans().end(); trainingPlan++, trainingPlanIndex++)
@@ -534,6 +539,8 @@ namespace LightBulb
 			if (trainingPlanIndex < trainingPlanList->GetItemCount()) {
 				auto duration = (*trainingPlan)->getRunTime();
 				trainingPlanList->SetValue(wxVariant(getStringFromDuration(duration)), trainingPlanIndex, 2);
+				int iterations = (*trainingPlan)->getLearningState().iterations;
+				trainingPlanList->SetValue(wxVariant(std::to_string(iterations)), trainingPlanIndex, 3);
 			}
 		}
 	}
