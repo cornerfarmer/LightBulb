@@ -11,7 +11,7 @@ include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)
 
 set(wxWidgets_CONFIGURATION mswu)
-find_package(wxWidgets COMPONENTS core base richtext adv html xml REQUIRED)
+find_package(wxWidgets COMPONENTS core base richtext adv html xml aui REQUIRED)
 include(${wxWidgets_USE_FILE})
 
 add_executable(LightBulbExample ${SOURCES})
