@@ -4,9 +4,9 @@
 #define _GRADIENTDESCENTLEARNINGRULEPREFERENCEGROUP_H_
 
 // Includes
-#include "AbstractSupervisedLearningRulePreferenceGroup.hpp"
 #include "IO/UseParentSerialization.hpp"
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "AbstractSupervisedLearningRulePreferenceGroup.hpp"
 
 namespace LightBulb
 {

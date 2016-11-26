@@ -1,9 +1,9 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/GradientDescentLearningRulePreferenceGroup.hpp"
-#include "SimpleGradientDescentPreferenceGroup.hpp"
-#include "BackpropagationPreferenceGroup.hpp"
-#include "ResilientLearningRatePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
 #include "TrainingPlans/Preferences/ChoicePreference.hpp"
+#include "GradientDescentAlgorithms/SimpleGradientDescentPreferenceGroup.hpp"
+#include "GradientDescentAlgorithms/ResilientLearningRatePreferenceGroup.hpp"
+#include "GradientCalculation/BackpropagationPreferenceGroup.hpp"
 
 namespace LightBulb
 {

@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/BackpropagationPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientCalculation/BackpropagationPreferenceGroup.hpp"
 #include "TrainingPlans/Preferences/DoublePreference.hpp"
 
 

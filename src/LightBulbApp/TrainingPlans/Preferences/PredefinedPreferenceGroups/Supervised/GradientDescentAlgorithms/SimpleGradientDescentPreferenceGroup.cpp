@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/SimpleGradientDescentPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/SimpleGradientDescentPreferenceGroup.hpp"
 #include "TrainingPlans/Preferences/DoublePreference.hpp"
 
 namespace LightBulb

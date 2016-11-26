@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractEvolutionLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/AbstractEvolutionLearningRulePreferenceGroup.hpp"
 
 namespace LightBulb
 {

@@ -8,7 +8,7 @@
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <NeuronDescription/NeuronDescription.hpp>
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/GradientDescentLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 

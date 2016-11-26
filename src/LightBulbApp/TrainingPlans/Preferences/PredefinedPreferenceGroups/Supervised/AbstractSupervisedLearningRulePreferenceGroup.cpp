@@ -1,6 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractSupervisedLearningRulePreferenceGroup.hpp"
-#include "SimpleGradientDescentPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/AbstractSupervisedLearningRulePreferenceGroup.hpp"
 #include "TrainingPlans/Preferences/DoublePreference.hpp"
 #include "TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "TrainingPlans/Preferences/BooleanPreference.hpp"

@@ -1,18 +1,8 @@
 #include "FunctionEvolutionExample.hpp"
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Learning/Evolution/ConstantCreationCommand.hpp>
-#include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
-#include <Learning/Evolution/ConstantRecombinationCommand.hpp>
-#include <Learning/Evolution/ConstantMutationCommand.hpp>
-#include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
-#include <Learning/Evolution/ConstantReuseCommand.hpp>
-#include <Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Examples/FunctionEvolution/FunctionSimulator.hpp>
-#include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/FitnessCondition.hpp>
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/EvolutionLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
 
 using namespace LightBulb;
 

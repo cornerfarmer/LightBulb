@@ -147,21 +147,6 @@
     <ClCompile Include="TrainingPlans\Preferences\PreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BackpropagationPreferenceGroup.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\GradientDescentLearningRulePreferenceGroup.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ResilientLearningRatePreferenceGroup.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\SimpleGradientDescentPreferenceGroup.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -174,31 +159,46 @@
     <ClCompile Include="TrainingPlans\AbstractSupervisedTrainingPlan.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RMSPropLearningRatePreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\AbstractEvolutionLearningRulePreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractEvolutionLearningRulePreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\EvolutionLearningRulePreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BestSelectionCommandPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantMutationCommandPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantCreationCommandPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantRecombinationCommandPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantMutationCommandPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantReuseCommandPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantRecombinationCommandPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RateDifferenceConditionPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantReuseCommandPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantCreationCommandPreferenceGroup.cpp">
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\EvolutionLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\RateDifferenceConditionPreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\ResilientLearningRatePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\RMSPropLearningRatePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -371,21 +371,6 @@
     <ClInclude Include="IO\PreferenceGroupIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractSupervisedLearningRulePreferenceGroup.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BackpropagationPreferenceGroup.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\GradientDescentLearningRulePreferenceGroup.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ResilientLearningRatePreferenceGroup.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\SimpleGradientDescentPreferenceGroup.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -401,31 +386,46 @@
     <ClInclude Include="TrainingPlans\AbstractSupervisedTrainingPlan.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RMSPropLearningRatePreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\AbstractEvolutionLearningRulePreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractEvolutionLearningRulePreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\EvolutionLearningRulePreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\BestSelectionCommandPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantMutationCommandPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantCreationCommandPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantRecombinationCommandPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantMutationCommandPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantReuseCommandPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantRecombinationCommandPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\RateDifferenceConditionPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantReuseCommandPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\ConstantCreationCommandPreferenceGroup.hpp">
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\EvolutionLearningRulePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\RateDifferenceConditionPreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\ResilientLearningRatePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\RMSPropLearningRatePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

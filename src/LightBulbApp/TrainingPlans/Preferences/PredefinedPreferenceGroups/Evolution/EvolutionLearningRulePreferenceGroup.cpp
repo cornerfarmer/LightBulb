@@ -1,7 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/EvolutionLearningRulePreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
 #include "ConstantCreationCommandPreferenceGroup.hpp"
-#include "BackpropagationPreferenceGroup.hpp"
 #include "ConstantMutationCommandPreferenceGroup.hpp"
 #include "ConstantReuseCommandPreferenceGroup.hpp"
 #include "BestSelectionCommandPreferenceGroup.hpp"
