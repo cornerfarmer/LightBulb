@@ -6,7 +6,7 @@ else
 	git reset --hard v3.1.0
 	mkdir build-gtk
 	cd build-gtk
-	if [ "$SHARED" = "OFF" ] then
+	if [ "$SHARED" = "OFF" ]; then
 		../configure --disable-shared --enable-unicode
 	else
 		../configure --enable-shared --enable-unicode
