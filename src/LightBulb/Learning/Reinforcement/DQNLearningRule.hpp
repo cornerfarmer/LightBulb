@@ -8,6 +8,7 @@
 #include <Teaching/Teacher.hpp>
 #include "Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 // Library Includes
 #include <vector>
