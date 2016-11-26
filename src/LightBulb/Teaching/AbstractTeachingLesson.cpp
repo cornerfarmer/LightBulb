@@ -40,7 +40,7 @@ namespace LightBulb
 		std::unique_ptr<Eigen::VectorXd> errorVector(new Eigen::VectorXd(teachingInput.getDimension()));
 
 		// Calculate the error values (expected value - real value)
-		for (unsigned int i = 0; i < teachingInput.getDimension(); i++)
+		for (int i = 0; i < teachingInput.getDimension(); i++)
 		{
 			if (teachingInput.exists(i))
 			{
@@ -48,6 +48,8 @@ namespace LightBulb
 				if (clipError)
 					(*errorVector)[i] = std::max(-1.0, std::min(1.0, (*errorVector)[i]));
 			}
+			else
+				(*errorVector)[i] = 0;
 		}
 
 		return errorVector;
