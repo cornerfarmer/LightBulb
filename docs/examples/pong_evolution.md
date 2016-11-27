@@ -144,7 +144,7 @@ int Pong::getRoundCount() const
 ```
 
 
-Now lets get to the interesting part: We have to define how individuals should be compared.
+Now let's get to the interesting part: We have to define how individuals should be compared.
 
 ```cpp
 int Pong::doCompare(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)
@@ -153,7 +153,7 @@ int Pong::doCompare(AbstractIndividual& individual1, AbstractIndividual& individ
 }
 ```
 
-The method doCompare should just return 1, if individual1 has been better than individual2 or -1, if its the other way round.
+The method doCompare should just return 1, if individual1 has been better than individual2 or -1, if it's the other way round.
 To make this decision we just simulate one game between those AIs.
 
 
@@ -191,7 +191,7 @@ int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
 }
 ```
 
-The game method "whoHasWon" returns -1, 0, 1 depending on who has won or if its a tie. But as we are not allowed to return 0 (tie) in doCompare(), we always have to determine a winner. Remember: The parasite individual has to make the other individual fail. If its a tie, this has not happened. So we declare the other individual as a winner. 
+The game method "whoHasWon" returns -1, 0, 1 depending on who has won or if it's a tie. But as we are not allowed to return 0 (tie) in doCompare(), we always have to determine a winner. Remember: The parasite individual has to make the other individual fail. If it's a tie, this has not happened. So we declare the other individual as a winner. 
 
 ## Learning
 
@@ -264,3 +264,5 @@ Of course you could also just click the gif below and try it online. :stuck_out_
 <img src="media/pong_evolution.gif" width="200">
 </p>
 </a>
+
+In the [next tutorial]() we also try to learn pong, but this time we use reinforcement learning.
