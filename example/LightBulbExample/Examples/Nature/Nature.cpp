@@ -44,7 +44,7 @@ Nature::Nature()
 	drawer.reset(new NatureDrawer(options));*/
 }
 
-bool Nature::doSimulationStep()
+void Nature::doSimulationStep()
 {
 	int deadAnimals = 0;
 
@@ -90,7 +90,6 @@ bool Nature::doSimulationStep()
 		//sf::sleep(sf::milliseconds(5));
 	}
 	log("Animals ate " + std::to_string(missingPlants) + " plants", LL_HIGH);
-	return false;
 }
 
 double Nature::getFitness(const AbstractIndividual& individual) const

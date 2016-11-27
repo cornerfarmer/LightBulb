@@ -139,7 +139,7 @@ namespace LightBulb
 	}
 
 
-	bool DQNLearningRule::doIteration()
+	void DQNLearningRule::doIteration()
 	{
 		currentTotalError = 0;
 		double totalReward = 0;
@@ -211,7 +211,6 @@ namespace LightBulb
 		getOptions().environment->rate();
 		getOptions().environment->setEpsilon(e);
 
-		return true;
 	}
 
 

@@ -29,7 +29,7 @@ NetworkSimulator::NetworkSimulator(std::vector<std::vector<float>> consumers_)
 	}*/
 }
 
-bool NetworkSimulator::doSimulationStep()
+void NetworkSimulator::doSimulationStep()
 {
 	for (auto position = individuals.begin(); position != individuals.end(); position++)
 	{
@@ -43,7 +43,6 @@ bool NetworkSimulator::doSimulationStep()
 		drawer->draw(window);
 		window.display();
 	}*/
-	return false;
 }
 
 double NetworkSimulator::getFitness(const AbstractIndividual& individual) const

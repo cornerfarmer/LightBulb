@@ -66,24 +66,23 @@ namespace LightBulb
 		return static_cast<CoevolutionLearningRuleOptions&>(*options.get());
 	}
 
-	bool CoevolutionLearningRule::doIteration()
+	void CoevolutionLearningRule::doIteration()
 	{
 		log("lr1: ", LL_MEDIUM);
-		bool successfull = getOptions().learningRule1->doIteration();
+		getOptions().learningRule1->doIteration();
 		learningState->iterations--;
-		if (!successfull) {
+		if (getOptions().learningRule1->hasLearningSucceeded()) {
 			exitConditionReached = true;
-			return false;
+			return;
 		}
 
 		log("lr2: ", LL_MEDIUM);
-		successfull = getOptions().learningRule2->doIteration();
+		getOptions().learningRule2->doIteration();
 		learningState->iterations--;
-		if (!successfull) {
+		if (getOptions().learningRule2->hasLearningSucceeded()) {
 			exitConditionReached = true;
-			return false;
+			return;
 		}
-		return true;
 	}
 
 	void CoevolutionLearningRule::initializeTry()

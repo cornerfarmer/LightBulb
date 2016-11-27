@@ -149,7 +149,7 @@ namespace LightBulb
 		void getErrorVector(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector);
 	protected:
 		// Inherited:
-		bool doIteration() override;
+		void doIteration() override;
 		const PolicyGradientLearningRuleOptions& getOptions() const override;
 		void doCalculationAfterLearningProcess() override;
 		AbstractLearningResult* getLearningResult() override;

@@ -108,7 +108,7 @@ namespace LightBulb
 		 */
 		virtual int getRoundCount() const;
 		// Inherited:
-		bool doSimulationStep() override;
+		void doSimulationStep() override;
 		double getFitness(const AbstractIndividual& individual) const override;
 		void setLogger(AbstractLogger& logger_) override;
 		std::vector<std::string> getDataSetLabels() const override;

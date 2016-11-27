@@ -33,7 +33,7 @@ protected:
 	void resetEnvironment() override;
 public:
 	Nature();
-	bool doSimulationStep() override;
+	void doSimulationStep() override;
 	std::vector<double> getSight(int posX, int posY, int dirX, int dirY);
 	double tryToEat(int posX, int posY);
 	bool isTileFree(int posX, int posY);

@@ -17,7 +17,7 @@ namespace LightBulb
 		comparisons = 0;
 	}
 
-	bool AbstractCoevolutionEnvironment::doSimulationStep()
+	void AbstractCoevolutionEnvironment::doSimulationStep()
 	{
 		CombiningStrategyResults& results = combiningStrategy->execute(*this);
 
@@ -37,8 +37,6 @@ namespace LightBulb
 
 		if (!learningState->disabledDatasets[DATASET_COMP])
 			learningState->addData(DATASET_COMP, comparisons / 1000000.0);
-
-		return false;
 	}
 
 	double AbstractCoevolutionEnvironment::getFitness(const AbstractIndividual& individual) const

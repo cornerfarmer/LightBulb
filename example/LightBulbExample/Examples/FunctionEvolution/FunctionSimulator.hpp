@@ -35,7 +35,7 @@ protected:
 public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	FunctionSimulator() = default;
-	bool doSimulationStep() override;
+	void doSimulationStep() override;
 	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
 };
 

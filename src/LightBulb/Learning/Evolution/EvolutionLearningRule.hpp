@@ -100,7 +100,7 @@ namespace LightBulb
 		 */
 		bool exitConditionReached;
 		// Inherited:
-		bool doIteration() override;
+		void doIteration() override;
 		bool hasLearningSucceeded() override;
 		const EvolutionLearningRuleOptions& getOptions() const;
 		void doCalculationAfterLearningProcess() override;

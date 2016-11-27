@@ -52,7 +52,7 @@ namespace LightBulb
 		 */
 		AbstractTeacher& getTeacher() const;
 		// Inherited:
-		bool doSimulationStep() override;
+		void doSimulationStep() override;
 		std::vector<std::string> getDataSetLabels() const override;
 		double getFitness(const AbstractIndividual& individual) const override;
 	};

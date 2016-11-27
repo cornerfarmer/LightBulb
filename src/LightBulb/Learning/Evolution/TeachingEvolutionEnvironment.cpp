@@ -17,7 +17,7 @@ namespace LightBulb
 		networkOptions = networkOptions_;
 	}
 
-	bool TeachingEvolutionEnvironment::doSimulationStep()
+	void TeachingEvolutionEnvironment::doSimulationStep()
 	{
 		// Just recalculate the current total error values of all individuals
 		for (auto teachedIndividual = individuals.begin(); teachedIndividual != individuals.end(); teachedIndividual++)
@@ -32,8 +32,6 @@ namespace LightBulb
 
 		if (learningState && !learningState->disabledDatasets[DATASET_WEIGHTDECAY_ERROR])
 			learningState->addData(DATASET_WEIGHTDECAY_ERROR, static_cast<TeachedIndividual*>(highscore.front().second)->getCurrentWeightDecayError());
-
-		return false;
 	}
 
 	std::vector<std::string> TeachingEvolutionEnvironment::getDataSetLabels() const

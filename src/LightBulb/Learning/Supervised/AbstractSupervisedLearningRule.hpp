@@ -190,13 +190,14 @@ namespace LightBulb
 		 */
 		AbstractNetworkTopology& getCurrentNetworkTopology();
 		// Inherited:
-		bool doIteration() override;
+		void doIteration() override;
 		void initializeStartLearningAlgoritm() override;
 		void initializeResumeLearningAlgoritm() override;
 		void initializeLearningAlgoritm() override;
 		bool hasLearningSucceeded() override;
 		void rateLearning() override;
 		void doCalculationAfterLearningProcess() override;
+		bool shouldSkipTry() override;
 		AbstractLearningResult* getLearningResult() override;
 	public:
 		/**

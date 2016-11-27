@@ -140,7 +140,7 @@ namespace LightBulb
 	}
 
 
-	bool PolicyGradientLearningRule::doIteration()
+	void PolicyGradientLearningRule::doIteration()
 	{
 		int rewardCounter = 0;
 		double totalReward = 0;
@@ -188,8 +188,6 @@ namespace LightBulb
 			getOptions().environment->rate();
 			getOptions().environment->setStochasticActionDecision(true);
 		}
-
-		return true;
 	}
 
 

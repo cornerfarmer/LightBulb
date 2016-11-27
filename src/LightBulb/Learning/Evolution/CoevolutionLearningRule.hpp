@@ -52,7 +52,7 @@ namespace LightBulb
 		 */
 		bool exitConditionReached;
 		// Inherited:
-		bool doIteration() override;
+		void doIteration() override;
 		void initializeTry() override;
 		bool hasLearningSucceeded() override;
 		void initializeStartLearningAlgoritm() override;

@@ -203,7 +203,7 @@ namespace LightBulb
 		void doSupervisedLearning();
 	protected:
 		// Inherited:
-		bool doIteration() override;
+		void doIteration() override;
 		const DQNLearningRuleOptions& getOptions() const override;
 		AbstractLearningResult* getLearningResult() override;
 	public:

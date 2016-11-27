@@ -69,7 +69,7 @@ namespace LightBulb
 		 * \details Does a whole new simulation after that new fitness values can be determined.
 		 * \return True, if the learning rule should stop.
 		 */
-		virtual bool doSimulationStep() = 0;
+		virtual void doSimulationStep() = 0;
 		/**
 		 * \brief Returns a list of all current individuals ordered by their fitness.
 		 * \return The highscroe.

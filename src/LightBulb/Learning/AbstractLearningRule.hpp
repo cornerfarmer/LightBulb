@@ -67,7 +67,7 @@ namespace LightBulb
 		AbstractLearningRuleOptions()
 		{
 			maxIterationsPerTry = 10000;
-			maxTries = 100;
+			maxTries = 1;
 			logger = nullptr;
 			debugOutputInterval = 1000;
 			dataSaveInterval = 1;
@@ -104,9 +104,8 @@ namespace LightBulb
 		std::shared_ptr<AbstractRandomGenerator> randomGenerator;
 		/**
 		 * \brief Executes one iteration.
-		 * \return Returns true, if the learning process has been successful.
 		 */
-		virtual bool doIteration() = 0;
+		virtual void doIteration() = 0;
 		/**
 		 * \brief This method will be called before starting the learning algorithm.
 		 * \note Is not called when resuming a paused learning process.
@@ -143,6 +142,11 @@ namespace LightBulb
 		 * \return True, if the learning has been successful.
 		 */
 		virtual bool hasLearningSucceeded() = 0;
+		/**
+		* \brief Returns if the try should be skipped.
+		* \return True, if the try should be skipped.
+		*/
+		virtual bool shouldSkipTry() { return false; };
 		/**
 		 * \brief Returns the learning result.
 		 * \return The learning result

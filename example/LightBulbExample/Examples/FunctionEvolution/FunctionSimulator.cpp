@@ -39,7 +39,7 @@ FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Functio
 	//}
 }
 
-bool FunctionSimulator::doSimulationStep()
+void FunctionSimulator::doSimulationStep()
 {
 	for (auto position = individuals.begin(); position != individuals.end(); position++)
 	{
@@ -53,7 +53,6 @@ bool FunctionSimulator::doSimulationStep()
 		drawer->draw(window);
 		window.display();
 	}*/
-	return false;
 }
 
 double FunctionSimulator::getFitness(const AbstractIndividual& individual) const

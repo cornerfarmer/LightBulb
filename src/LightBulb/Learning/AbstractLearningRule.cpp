@@ -65,11 +65,9 @@ namespace LightBulb
 			rateLearning();
 
 			// Do while the totalError is not zero
-			while (!hasLearningSucceeded() && learningState->iterations++ < static_cast<int>(options->maxIterationsPerTry))
+			while (!hasLearningSucceeded() && !shouldSkipTry() && learningState->iterations++ < static_cast<int>(options->maxIterationsPerTry))
 			{
-				bool successful = doIteration();
-				if (!successful)
-					break;
+				doIteration();
 
 				if (pauseRequest)
 				{

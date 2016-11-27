@@ -140,7 +140,7 @@ namespace LightBulb
 		setHelperToUsedObjects();
 	}
 
-	bool EvolutionLearningRule::doIteration()
+	void EvolutionLearningRule::doIteration()
 	{
 		if (!options->disabledDataSets[getOptions().dataSetsPrefix + DATA_SET_FITNESS] && getOptions().environment->getPopulationSize() > 0)
 			learningState->addData(getOptions().dataSetsPrefix + DATA_SET_FITNESS, getOptions().environment->getHighscoreList().front().first);
@@ -212,11 +212,7 @@ namespace LightBulb
 		getOptions().environment->reset();
 
 		// 2. Step: Execute the simulation and try to rate the individuals
-		if (getOptions().environment->doSimulationStep()) {
-			log(std::to_string(learningState->iterations) + " generations", LL_HIGH);
-			learningState->iterations = 0;
-			return true;
-		}
+		getOptions().environment->doSimulationStep();
 		getOptions().environment->refreshHighscore();
 
 		// Extract all current individuals ordered by their fitness
@@ -256,10 +252,8 @@ namespace LightBulb
 		if (exit) {
 			exitConditionReached = true;
 			log("At least one condition is true => exit", LL_HIGH);
-			return false;
+			return;
 		}
-
-
 
 		// 4. Step: Select the relevant individuals (Other individuals will be deleted)
 		for (auto selectionCommand = getOptions().selectionCommands.begin(); selectionCommand != getOptions().selectionCommands.end(); selectionCommand++)
@@ -269,7 +263,6 @@ namespace LightBulb
 
 		// Continue with the next generation
 		learningState->iterations++;
-		return true;
 	}
 
 	const EvolutionLearningRuleOptions& EvolutionLearningRule::getOptions() const

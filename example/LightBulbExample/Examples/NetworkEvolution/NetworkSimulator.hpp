@@ -28,7 +28,7 @@ protected:
 public:
 	NetworkSimulator(std::vector<std::vector<float>> consumers_);
 	NetworkSimulator() = default;
-	bool doSimulationStep() override;
+	void doSimulationStep() override;
 	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
 	std::vector<std::vector<float>>& getConsumers();
 };

@@ -46,26 +46,15 @@ namespace LightBulb
 		totalError = 0;
 	}
 
-	bool AbstractSupervisedLearningRule::doIteration()
+	bool AbstractSupervisedLearningRule::shouldSkipTry()
+	{
+		return (learningState->iterations > 1 && learningHasStopped()) || (learningState->iterations > getOptions().minIterationsPerTry && totalError > getOptions().maxTotalErrorValue);
+	}
+
+	void AbstractSupervisedLearningRule::doIteration()
 	{
 		if (!options->disabledDataSets[options->dataSetsPrefix + DATA_SET_TRAINING_ERROR])
 			learningState->addData(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR, totalError);
-
-		// If its not the first iteration and the learning process has stopped, skip that try
-		if (learningState->iterations > 1 && learningHasStopped())
-		{
-			// If debug is enabled, print a short debug info
-			log("Skip that try (learning has stopped with totalError: " + std::to_string(totalError) + ")", LL_MEDIUM);
-			return false;
-		}
-
-		// If we had more iterations than minIterationsPerTry and the totalError is still greater than the maxTotalErrorValue, skip that try
-		if (learningState->iterations > getOptions().minIterationsPerTry && totalError > getOptions().maxTotalErrorValue)
-		{
-			// If debug is enabled, print a short debug info
-			log("Skip that try (totalError: " + std::to_string(totalError) + " > " + std::to_string(getOptions().maxTotalErrorValue) + ")", LL_MEDIUM);
-			return false;
-		}
 
 		// If debug is enabled, print every n-th iteration a short debug info
 		if (learningState->iterations % options->debugOutputInterval == 0)
@@ -142,8 +131,6 @@ namespace LightBulb
 			// Do some work after all weights were adjusted
 			doCalculationAfterAllWeightAdjustments();
 		}
-
-		return true;
 	}
 
 	void AbstractSupervisedLearningRule::initializeResumeLearningAlgoritm()
