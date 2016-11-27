@@ -74,7 +74,7 @@ void Position::interpretNNOutput(std::vector<double>& output)
 
 We also don't have to interpret the output that much. We only store it into an extra vector, so we can use it later.
 
-Thats all. Thats our individual class.
+That's all. That's our individual class.
 
 
 ## Environment
@@ -130,7 +130,7 @@ double FunctionSimulator::sixHumpCamelFunction(std::vector<float> pos)
 }
 ```
 
-For rating individuals we just extract their position and compute the function value at this position.
+For rating individuals, we just extract their position and compute the function value at this position.
 As we want to find the minimum of the function, we have to negate the function value. So the minimal function value will get the highest fitness value.
 
 
@@ -217,4 +217,5 @@ or
 
 This should be the global minimum of the six-hump camel-back function. We have found it just by calculating a few function values.
 
+In the [next tutorial](pong_evolution.md) we will dig a little bit deeper into evolutionary algorithms.
 
