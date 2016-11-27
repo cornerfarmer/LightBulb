@@ -92,7 +92,11 @@ Now we are ready to start!
 std::unique_ptr<AbstractLearningResult> result(learningRule.start());
 ```
 
-TODO: Check result!
+Check the result:
+```cpp
+if (result->succeeded)
+    std::cout << "Learning has been successful" << std::endl;
+```
 
 Now lets try our trained network:
 ```cpp
@@ -109,6 +113,7 @@ std::cout << "1 and 1 => " <<  std::to_string(output[0]) << std::endl;
 
 When running the program, the output should now look like:
 ```
+Learning has been successful
 0 and 1 => 0.9643
 1 and 1 => 0.0235
 ```
@@ -135,6 +140,6 @@ ResilientLearningRate* resilientLearningRate = new ResilientLearningRate(resilie
 options.gradientDescentAlgorithm = resilientLearningRate;
 ```
 
-TODO: Link to the next one
+Now you are ready for the [next Tutorial](function_evolution.md)!
 
 TODO: List the whole code
