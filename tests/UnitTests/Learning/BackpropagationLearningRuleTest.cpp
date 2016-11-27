@@ -120,6 +120,7 @@ TEST_F(GradientDescentLearningRuleTest, doLearningWithResilientLearningRate)
 
 	GradientDescentLearningRuleOptions options = getDefaultOptions();
 	options.maxIterationsPerTry = 1000;
+	options.maxTries = 100;
 	options.neuralNetwork = neuralNetwork;
 	options.teacher = teacher;
 	options.offlineLearning = true;

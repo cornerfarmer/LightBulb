@@ -12,7 +12,7 @@ class MockEvolutionLearningRule : public LightBulb::AbstractEvolutionLearningRul
 {
 public:
 	MockEvolutionLearningRule(LightBulb::AbstractEvolutionLearningRuleOptions& options_):AbstractEvolutionLearningRule(options_) {};
-	MOCK_METHOD0(doIteration, bool ());
+	MOCK_METHOD0(doIteration, void());
 	MOCK_METHOD0(initializeStartLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeResumeLearningAlgoritm, void ());
 	MOCK_METHOD0(initializeLearningAlgoritm, void ());
@@ -27,6 +27,7 @@ public:
 	MOCK_CONST_METHOD0(getDataSetLabels, std::vector<std::string> ());
 	MOCK_CONST_METHOD0(getEnvironment, const LightBulb::AbstractEvolutionEnvironment& ());
 	MOCK_METHOD0(getEnvironment, LightBulb::AbstractEvolutionEnvironment& ());
+	MOCK_METHOD0(shouldSkipTry, bool ());
 };
 
 #endif

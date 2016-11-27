@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <NeuronDescription/AbstractNeuronDescriptionFactory.hpp>
+#include "Function/InputFunction/AbstractInputFunction.hpp"
 
 class MockNeuronDescriptionFactory : public LightBulb::AbstractNeuronDescriptionFactory
 {

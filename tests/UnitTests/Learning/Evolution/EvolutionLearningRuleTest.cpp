@@ -132,7 +132,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 		// iteration 0
 		createExpectation = EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionEnvironment), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionEnvironment, reset()).Times(1);
-		EXPECT_CALL(*evolutionEnvironment, doSimulationStep()).WillOnce(testing::Return(false));
+		EXPECT_CALL(*evolutionEnvironment, doSimulationStep());
 
 		EXPECT_CALL(*fitnessFunction, execute(testing::Ref(unseccessfullHighscore))).Times(1);
 		EXPECT_CALL(*exitCondition, evaluate(testing::Ref(unseccessfullHighscore), testing::Ref(*evolutionLearningRule))).WillOnce(testing::Return(false));
@@ -149,7 +149,7 @@ TEST_F(EvolutionLearningRuleTest, learn)
 
 		EXPECT_CALL(*creationCommand, execute(testing::Ref(*evolutionEnvironment), testing::_)).Times(1);
 		EXPECT_CALL(*evolutionEnvironment, reset()).Times(1);
-		EXPECT_CALL(*evolutionEnvironment, doSimulationStep()).WillOnce(testing::Return(false));
+		EXPECT_CALL(*evolutionEnvironment, doSimulationStep());
 
 		EXPECT_CALL(*fitnessFunction, execute(testing::Ref(unseccessfullHighscore))).Times(1);
 		lastIterationExpectation = EXPECT_CALL(*exitCondition, evaluate(testing::Ref(unseccessfullHighscore), testing::Ref(*evolutionLearningRule))).WillOnce(testing::Return(true));

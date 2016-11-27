@@ -14,7 +14,7 @@ public:
 	MOCK_METHOD0(getIndividuals, std::vector<LightBulb::AbstractIndividual*>& ());
 	MOCK_METHOD1(setIndividuals, void (const std::vector<LightBulb::AbstractIndividual*>&));
 	MOCK_METHOD1(addNewIndividual, LightBulb::AbstractIndividual* (bool));
-	MOCK_METHOD0(doSimulationStep, bool ());
+	MOCK_METHOD0(doSimulationStep, void());
 	MOCK_METHOD0(getHighscoreList, LightBulb::Highscore& ());
 	MOCK_CONST_METHOD1(getFitness, double (const LightBulb::AbstractIndividual&));
 	MOCK_METHOD0(initializeForLearning, void ());

@@ -21,7 +21,7 @@ public:
 	MOCK_METHOD0(clearPopulation, void ());
 	MOCK_METHOD1(addExistingIndividual, void (LightBulb::AbstractIndividual*));
 	MOCK_METHOD3(doCompare, int (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int));
-	MOCK_METHOD0(doSimulationStep, bool ());
+	MOCK_METHOD0(doSimulationStep, void());
 	MOCK_CONST_METHOD1(getFitness, double (const LightBulb::AbstractIndividual&));
 	MOCK_METHOD3(compareIndividuals, int (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int));
 	MOCK_METHOD1(rateIndividual, int (LightBulb::AbstractIndividual&));
