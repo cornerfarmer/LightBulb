@@ -131,8 +131,8 @@ namespace LightBulb
 		Class createFromGroup(std::string groupName) const
 		{
 			const PreferenceGroup& preferenceGroup = getPreferenceGroup(groupName);
-			if (PreferenceGroupClass* castedPreferenceGroup = dynamic_cast<PreferenceGroupClass&>(preferenceGroup))
-				return castedPreferenceGroup->create();
+			const PreferenceGroupClass& castedPreferenceGroup = dynamic_cast<const PreferenceGroupClass&>(preferenceGroup);
+			return castedPreferenceGroup.create();
 
 			throw std::invalid_argument("The preference group could not be found.");
 		}

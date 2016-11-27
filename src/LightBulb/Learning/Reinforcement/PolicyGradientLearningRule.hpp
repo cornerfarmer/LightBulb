@@ -51,6 +51,7 @@ namespace LightBulb
 			ratingInterval = 10;
 			rmsPropLearningRateOptions.learningRate = 1e-4;
 			valueFunctionAsBase = true;
+			valueRmsPropLearningRateOptions.learningRate = 1e-4;
 		}
 	};
 
