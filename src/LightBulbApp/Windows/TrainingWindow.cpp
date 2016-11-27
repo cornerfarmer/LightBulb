@@ -73,6 +73,7 @@ namespace LightBulb
 	wxDEFINE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
 	wxDEFINE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
 	wxDEFINE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
+	wxDEFINE_EVENT(TW_EVT_LOAD_TS, wxThreadEvent);
 
 	TrainingWindow::TrainingWindow(TrainingController& controller_)
 		:AbstractWindow(controller_, "LightBulb"), runTimeRefreshTimer(this, wxID_ANY)
@@ -88,6 +89,7 @@ namespace LightBulb
 		Bind(TW_EVT_REFRESH_ALL, wxCommandEventFunction(&TrainingWindow::refreshAllData), this);
 		Bind(TW_EVT_SAVE_TP, wxThreadEventFunction(&TrainingWindow::saveTrainingPlan), this);
 		Bind(TW_EVT_SAVE_TS, wxThreadEventFunction(&TrainingWindow::saveTrainingSession), this);
+		Bind(TW_EVT_LOAD_TS, wxThreadEventFunction(&TrainingWindow::loadTrainingSession), this);
 		Bind(wxEVT_CLOSE_WINDOW, wxCloseEventFunction(&TrainingWindow::close), this);
 
 		createMenuBar();
@@ -137,12 +139,9 @@ namespace LightBulb
 		}
 		else if (event.GetId() == FILE_LOAD_TS)
 		{
-			wxFileDialog openFileDialog(this, "Load training session", "", "", "Training session files (*.ts)|*.ts", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
-
-			if (openFileDialog.ShowModal() == wxID_CANCEL)
-				return;
-
-			getController().loadTrainingSession(openFileDialog.GetPath().ToStdString());
+			Enable(false);
+			Refresh();
+			getController().loadTrainingSession();
 		}
 		else if (event.GetId() == FILE_SAVE_TS)
 		{
@@ -393,6 +392,19 @@ namespace LightBulb
 		Refresh();
 	}
 
+	void TrainingWindow::loadTrainingSession(wxThreadEvent& event)
+	{
+
+		wxFileDialog openFileDialog(this, "Load training session", "", "", "Training session files (*.ts)|*.ts", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+
+		if (openFileDialog.ShowModal() == wxID_CANCEL)
+			return;
+
+		getController().loadTrainingSession(openFileDialog.GetPath().ToStdString());
+
+		Enable(true);
+		Refresh();
+	}
 
 	void TrainingWindow::addSubAppFactory(AbstractSubAppFactory& newSubAppFactory)
 	{
@@ -453,13 +465,10 @@ namespace LightBulb
 	{
 		menubar = new wxMenuBar();
 		wxMenu* file = new wxMenu;
-		file->Append(wxID_OPEN);
 		file->Append(new wxMenuItem(file, FILE_SAVE_TS, "Save training session"));
 		file->Append(new wxMenuItem(file, FILE_LOAD_TS, "Load training session"));
 		file->Append(new wxMenuItem(file, FILE_LOAD_NN, "Load a neural network"));
 		file->Append(new wxMenuItem(file, FILE_LOAD_TP, "Load a training plan"));
-		file->Append(wxID_SAVE);
-		file->Append(wxID_EXIT);
 		file->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventFunction(&TrainingWindow::fileMenuSelected), this);
 		menubar->Append(file, "File");
 		windowsMenu = new wxMenu();

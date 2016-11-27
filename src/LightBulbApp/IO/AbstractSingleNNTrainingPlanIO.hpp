@@ -36,7 +36,7 @@ namespace LightBulb
 		}
 		else
 		{
-			auto networks = IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::get();
+			auto networks = IOStorage<const std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::get();
 			int neuralNetworkIndex = 0;
 			for (auto network = networks->begin(); network != networks->end(); network++, neuralNetworkIndex++)
 			{
@@ -65,7 +65,7 @@ namespace LightBulb
 		}
 		else
 		{
-			auto networks = IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::get();
+			auto networks = IOStorage<const std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::get();
 			int neuralNetworkIndex;
 			archive(cereal::make_nvp("neuralNetworkIndex", neuralNetworkIndex));
 			trainingPlan.network = (*networks)[neuralNetworkIndex].get();

@@ -132,6 +132,12 @@ namespace LightBulb
 			window->GetEventHandler()->QueueEvent(evtSave.Clone());
 			saveTrainingSessionAfterPause = false;
 		}
+		else if(loadTrainingSessionAfterPause && allTrainingPlansPaused())
+		{
+			wxThreadEvent evtSave(TW_EVT_LOAD_TS);
+			window->GetEventHandler()->QueueEvent(evtSave.Clone());
+			loadTrainingSessionAfterPause = false;
+		}
 		else if (closeWindowAfterPause && allTrainingPlansPaused())
 		{
 			window->Close();
@@ -264,6 +270,24 @@ namespace LightBulb
 		}
 	}
 
+	void TrainingController::loadTrainingSession()
+	{
+		if (!allTrainingPlansPaused())
+		{
+			loadTrainingSessionAfterPause = true;
+			for (auto trainingPlan = trainingPlanRepository->getTrainingPlans().begin(); trainingPlan != trainingPlanRepository->getTrainingPlans().end(); trainingPlan++)
+			{
+				if (!(*trainingPlan)->isPaused())
+					(*trainingPlan)->pause();
+			}
+		}
+		else
+		{
+			wxThreadEvent evt(TW_EVT_LOAD_TS);
+			window->GetEventHandler()->QueueEvent(evt.Clone());
+		}
+	}
+
 
 	bool TrainingController::closeWindow()
 	{
@@ -324,7 +348,7 @@ namespace LightBulb
 		bool allPaused = true;
 		for (auto trainingPlan = trainingPlanRepository->getTrainingPlans().begin(); trainingPlan != trainingPlanRepository->getTrainingPlans().end(); trainingPlan++)
 		{
-			if (!(*trainingPlan)->isPaused())
+			if ((*trainingPlan)->isRunning())
 				allPaused = false;
 		}
 		return allPaused;

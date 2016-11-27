@@ -63,52 +63,7 @@
     <ClCompile Include="Examples\PongEvolution\PongGame.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\PongReinforcement\PongDQNExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\MountainCar\MountainCarDQNExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\MountainCar\MountainCarFactory.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\MountainCar\MountainCarWindow.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\MountainCar\MountainCarController.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\AbstractTile.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\Animal.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\EarthTile.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\Nature.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\RockTile.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\NatureExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\NatureController.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\NatureFactory.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\Nature\NatureWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\PongReinforcement\PongPolicyGradientExample.cpp">
@@ -126,31 +81,16 @@
     <ClCompile Include="Examples\FunctionEvolution\Position.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\TCProblemEvolution\TCProblemEvolutionExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TCProblemBackpropagation\TCProblemBackpropagationExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TCProblemBackpropagation\TCProblemTeacher.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\TeachedEvolution\TeachedEvolutionExample.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Examples\MountainCar\MountainCarEnvironment.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Examples\PongEvolution\AbstractPongEnvironment.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementEnvironment.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\SimpleReinforcement\SimpleReinforcementEnvironment.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,55 +149,10 @@
     <ClInclude Include="Examples\PongEvolution\PongGame.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\PongReinforcement\PongDQNExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementDQNExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\MountainCar\MountainCarDQNExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\MountainCar\MountainCarController.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\MountainCar\MountainCarFactory.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\MountainCar\MountainCarWindow.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="IO\PongGameIO.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\AbstractTile.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\Animal.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\EarthTile.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\Nature.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\RockTile.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\NatureExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\NatureController.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\NatureFactory.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\Nature\NatureWindow.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\PongReinforcement\PongPolicyGradientExample.hpp">
@@ -275,31 +170,16 @@
     <ClInclude Include="Examples\FunctionEvolution\FunctionSimulator.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\TCProblemEvolution\TCProblemEvolutionExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TCProblemBackpropagation\TCProblemBackpropagationExample.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\TCProblemBackpropagation\TCProblemTeacher.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\TeachedEvolution\TeachedEvolutionExample.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeAI.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\MountainCar\MountainCarEnvironment.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\PongEvolution\AbstractPongEnvironment.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementEnvironment.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Examples\SimpleReinforcement\SimpleReinforcementEnvironment.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="IO\PongReinforcementEnvironmentIO.hpp">

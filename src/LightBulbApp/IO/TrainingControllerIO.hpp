@@ -22,9 +22,9 @@ namespace LightBulb
 	{
 		serialize(archive, *trainingController.neuralNetworkRepository);
 
-		//IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(trainingController.neuralNetworkRepository->getNeuralNetworks());
+		IOStorage<const std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::push(&trainingController.neuralNetworkRepository->getNeuralNetworks());
 		serialize(archive, *trainingController.trainingPlanRepository);
-		//IOStorage<std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
+		IOStorage<const std::vector<std::unique_ptr<AbstractNeuralNetwork>>>::clear();
 	}
 }
 

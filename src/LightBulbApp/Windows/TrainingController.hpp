@@ -68,6 +68,10 @@ namespace LightBulb
 		 */
 		bool saveTrainingSessionAfterPause;
 		/**
+		* \brief True, if a training session should be loaded after all training plans has been paused.
+		*/
+		bool loadTrainingSessionAfterPause;
+		/**
 		* \brief True, if the window should be closed after pausing.
 		*/
 		bool closeWindowAfterPause;
@@ -210,6 +214,11 @@ namespace LightBulb
 		 * \details If necessary, all training plans will be paused. After that the save dialog will show up.
 		 */
 		void saveTrainingSession();
+		/**
+		* \brief Initializes loading of the whole training session.
+		* \details If necessary, all training plans will be paused. After that the save dialog will show up.
+		*/
+		void loadTrainingSession();
 		/**
 		 * \brief Creates and adds a sub app from the factory with the given index.
 		 * \param subAppFactoryIndex The index of the sub app factory which should be used.

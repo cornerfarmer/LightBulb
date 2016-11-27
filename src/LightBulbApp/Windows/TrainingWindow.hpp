@@ -30,6 +30,7 @@ namespace LightBulb
 	wxDECLARE_EVENT(TW_EVT_REFRESH_ALL, wxCommandEvent);
 	wxDECLARE_EVENT(TW_EVT_SAVE_TP, wxThreadEvent);
 	wxDECLARE_EVENT(TW_EVT_SAVE_TS, wxThreadEvent);
+	wxDECLARE_EVENT(TW_EVT_LOAD_TS, wxThreadEvent);
 
 	/**
 	 * \brief The window of the training main app.
@@ -277,6 +278,11 @@ namespace LightBulb
 		* \param event The event data.
 		*/
 		void saveTrainingSession(wxThreadEvent& event);
+		/**
+		* \brief Loads a training session.
+		* \param event The event data.
+		*/
+		void loadTrainingSession(wxThreadEvent& event);
 		/**
 		 * \brief Removes the custom sub app menu.
 		 */
