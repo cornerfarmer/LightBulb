@@ -34,7 +34,17 @@ cmake ..
 ```
 ## Impressions
 
-![](docs/screenshots/Graph.png)
+<img src="docs/screenshots/Graph.png" width="40%">
+
+<img src="docs/screenshots/Logger.png" width="40%">
+
+<img src="docs/screenshots/Main.png" width="40%">
+
+<img src="docs/screenshots/NetworkViewer.png" width="40%">
+
+<img src="docs/screenshots/Preferences.png" width="40%">
+
+<img src="docs/screenshots/Simulator.png" width="40%">
 
 ## Examples & Tutorials
 
