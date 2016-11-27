@@ -6,7 +6,7 @@ A example how to use reinforcement learning in LightBulb. We will try to learn p
 
 ## Introduction
 
-In contrast to the previous example, we now try to achieve the same result with reinforcement learning. RL is very similiar structured like evolution learning. We also have an environment, but only one individual (=actor). Also we do not learn by random guesses, but try to repeat/learn actions which resulted in good rewards. Rewards are the only thing we get as an response from the environment. A good reward means the AI has done something good, a bad reward means the opposite.
+In contrast to the previous example, we now try to achieve the same result with reinforcement learning. RL is very similar structured like evolution learning. We also have an environment, but only one individual (=actor). Also we do not learn by random guesses, but try to repeat/learn actions which resulted in good rewards. Rewards are the only thing we get as an response from the environment. A good reward means the AI has done something good, a bad reward means the opposite.
 
 ## Environment
 
@@ -109,7 +109,7 @@ void PongReinforcementEnvironment::executeCompareAI()
 }
 ```
 
-The method isTerminalState shoul return if the current state marks the end of an epsido. In pong this is always after somebody made a point or the time has run out.
+The method isTerminalState should return if the current state marks the end of an episode. In pong this is always after somebody made a point or the time has run out.
 
 ```cpp
 bool PongReinforcementEnvironment::isTerminalState()
@@ -141,7 +141,7 @@ PongReinforcementEnvironment environment(options, true, 1);
 
 The environment also gets the description of the neural network.
 
-The learning rule is relativly simple:
+The learning rule is relatively simple:
 
 ```cpp
 DQNLearningRuleOptions options;

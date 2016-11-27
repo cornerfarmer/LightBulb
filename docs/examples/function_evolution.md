@@ -45,7 +45,7 @@ Position::Position(FunctionSimulator& functionSimulator_)
 }
 ```
 
-In this case we use just two weights, which represent the coordinates of a point on the six-hump camel-back function. We want to optimize those weights, so that they point on the global minium of the function.
+In this case we use just two weights, which represent the coordinates of a point on the six-hump camel-back function. We want to optimize those weights, so that they point on the global minimum of the function.
 
 The individual class should also describe how the input of the neural network - the brain of the individual - should look like and how its output should be interpreted.
 
@@ -131,7 +131,7 @@ double FunctionSimulator::sixHumpCamelFunction(std::vector<float> pos)
 ```
 
 For rating individuals we just extract their position and compute the function value at this position.
-As we want to find the minium of the function, we have to negate the function value. So the minimal function value will get the highest fitness value.
+As we want to find the minimum of the function, we have to negate the function value. So the minimal function value will get the highest fitness value.
 
 
 ## Learning rule
@@ -195,12 +195,12 @@ Now we are ready to start!
 std::unique_ptr<EvolutionLearningResult> result(static_cast<EvolutionLearningResult*>(learningRule.start()));
 ```
 
-Let's test if the global minium has been found:
+Let's test if the global minimum has been found:
 
 ```cpp
 Position* bestPosition = static_cast<Position*>(result.bestIndividuals[0].get());
 std::vector<float> minimum = bestPosition.getPosition();
-std::cout << minimum[0] << ", " << minium[1] << std::endl;
+std::cout << minimum[0] << ", " << minimum[1] << std::endl;
 ```
 
 You should now see something like:

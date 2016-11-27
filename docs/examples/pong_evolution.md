@@ -50,7 +50,7 @@ void Position::getNNInput(std::vector<double>& input)
 }
 ```
 
-The interpretion of the output is really simple. Either move the paddle up, down or do nothing:
+The interpretation of the output is really simple. Either move the paddle up, down or do nothing:
 
 ```cpp
 void PongAI::interpretNNOutput(std::vector<double>& output)

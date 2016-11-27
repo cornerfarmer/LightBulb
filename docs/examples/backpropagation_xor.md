@@ -107,7 +107,7 @@ output = network.calculate(input);
 std::cout << "1 and 1 => " <<  std::to_string(output[0]) << std::endl;
 ```
 
-When running the programm, the output should now look like:
+When running the program, the output should now look like:
 ```
 0 and 1 => 0.9643
 1 and 1 => 0.0235
@@ -127,7 +127,7 @@ Or disable momentum:
 ```cpp
 simpleGradientDescentOptions.momentum = 0;
 ```
-Or maybe you want to try a completly different gradient descent algorithm like ResilientLearningRate:
+Or maybe you want to try a completely different gradient descent algorithm like ResilientLearningRate:
 ```cpp
 ResilientLearningRateOptions resilientLearningRateOptions;
 ResilientLearningRate* resilientLearningRate = new ResilientLearningRate(resilientLearningRateOptions);
