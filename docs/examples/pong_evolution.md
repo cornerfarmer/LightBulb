@@ -265,4 +265,4 @@ Of course you could also just click the gif below and try it online. :stuck_out_
 </p>
 </a>
 
-In the [next tutorial]() we also try to learn pong, but this time we use reinforcement learning.
+In the [next tutorial](pong_reinforcement.md) we also try to learn pong, but this time we use reinforcement learning.
