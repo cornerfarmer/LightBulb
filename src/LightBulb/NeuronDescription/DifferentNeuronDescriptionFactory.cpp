@@ -68,4 +68,14 @@ namespace LightBulb
 	{
 		return innerNeuronDescription->getActivationFunction();
 	}
+
+	const AbstractInputFunction& DifferentNeuronDescriptionFactory::getOutputInputFunction() const
+	{
+		return outputNeuronDescription->getInputFunction();
+	}
+
+	const AbstractInputFunction& DifferentNeuronDescriptionFactory::getInnerInputFunction() const
+	{
+		return innerNeuronDescription->getInputFunction();
+	}
 }

@@ -11,11 +11,20 @@
 #include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/FeedForwardNetworkTopologyPreferenceGroup.hpp"
 
 using namespace LightBulb;
 
 BackpropagationXorExample::BackpropagationXorExample()
 {
+	FeedForwardNetworkTopologyOptions networkTopologyOptions;
+	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions.neuronsPerLayerCount[0] = 2;
+	networkTopologyOptions.neuronsPerLayerCount[1] = 3;
+	networkTopologyOptions.neuronsPerLayerCount[2] = 1;
+	addPreferenceGroup(new FeedForwardNetworkTopologyPreferenceGroup(networkTopologyOptions));
+
 	GradientDescentLearningRuleOptions options;
 	options.maxTotalErrorValue = 4;
 	options.maxIterationsPerTry = 1000000;
@@ -54,14 +63,8 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 
 AbstractNeuralNetwork* BackpropagationXorExample::createNeuralNetwork()
 {
-	FeedForwardNetworkTopologyOptions networkTopologyOptions;
-	networkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
-	networkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
-	networkTopologyOptions.neuronsPerLayerCount[0] = 2;
-	networkTopologyOptions.neuronsPerLayerCount[1] = 3;
-	networkTopologyOptions.neuronsPerLayerCount[2] = 1;
-
-	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(networkTopologyOptions);
+	FeedForwardNetworkTopologyOptions options = createOptions<FeedForwardNetworkTopologyOptions, FeedForwardNetworkTopologyPreferenceGroup>();
+	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
 
 	return new NeuralNetwork(networkTopology);
 }

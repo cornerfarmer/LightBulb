@@ -49,6 +49,8 @@ namespace LightBulb
 		AbstractCloneable* clone() const override;
 		const AbstractActivationFunction& getOutputActivationFunction() const override;
 		const AbstractActivationFunction& getInnerActivationFunction() const override;
+		const AbstractInputFunction& getOutputInputFunction() const override;
+		const AbstractInputFunction& getInnerInputFunction() const override;
 	};
 }
 

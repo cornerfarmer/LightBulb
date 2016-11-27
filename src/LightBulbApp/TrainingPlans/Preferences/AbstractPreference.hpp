@@ -43,6 +43,7 @@ namespace LightBulb
 		AbstractPreference() = default;
 		// Inherited:
 		const std::string& getName() const override;
+		void setName(std::string newName) override;
 		std::string toString() const override;
 	};
 }

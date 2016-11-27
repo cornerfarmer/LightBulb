@@ -12,6 +12,7 @@ namespace LightBulb
 	// Forward declarations
 	class NeuronDescription;
 	class AbstractActivationFunction;
+	class AbstractInputFunction;
 
 	/**
 	 * \brief Describes a factory which provides neurons descriptions depending on the layer.
@@ -42,6 +43,16 @@ namespace LightBulb
 		* \return The activation function.
 		*/
 		virtual const AbstractActivationFunction& getInnerActivationFunction() const = 0;
+		/**
+		* \brief Returns the input function for output neurons.
+		* \return The activation function.
+		*/
+		virtual const AbstractInputFunction& getOutputInputFunction() const = 0;
+		/**
+		* \brief Returns the input function for inner/hidden neurons.
+		* \return The activation function.
+		*/
+		virtual const AbstractInputFunction& getInnerInputFunction() const = 0;
 	};
 }
 

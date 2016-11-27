@@ -210,6 +210,9 @@
     <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\PolicyGradientLearningRulePreferenceGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\FeedForwardNetworkTopologyPreferenceGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Performance\NetworkPerformanceTests.hpp">
@@ -444,6 +447,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\PolicyGradientLearningRulePreferenceGroup.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingPlans\Preferences\PredefinedPreferenceGroups\FeedForwardNetworkTopologyPreferenceGroup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

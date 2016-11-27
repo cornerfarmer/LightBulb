@@ -57,7 +57,12 @@ namespace LightBulb
 		}
 		return text;
 	}
-	
+
+	void PreferenceGroup::setName(std::string newName)
+	{
+		name = newName;
+	}
+
 	void PreferenceGroup::addPreference(AbstractPreferenceElement* preferenceElement)
 	{
 		preferences.push_back(std::unique_ptr<AbstractPreferenceElement>(preferenceElement));

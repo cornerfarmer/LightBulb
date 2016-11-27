@@ -33,6 +33,11 @@ namespace LightBulb
 		 * \return The name.
 		 */
 		virtual const std::string& getName() const = 0;
+		/**
+		* \brief Sets the name of the element.
+		* \param newName The new name.
+		*/
+		virtual void setName(std::string newName) = 0;
 	};
 }
 

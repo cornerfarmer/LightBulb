@@ -27,7 +27,7 @@ namespace LightBulb
 		 * \brief Creates a FermiFunction
 		 * \param temperatureParameter_ The temperature parameter which describes how fast the function raises
 		 */
-		FermiFunction(double temperatureParameter_);
+		FermiFunction(double temperatureParameter_ = 1);
 		// Inherited
 		double execute(double input) const override;
 		double executeDerivation(double input) const override;
