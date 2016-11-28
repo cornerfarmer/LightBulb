@@ -6,6 +6,12 @@
 #include "IO/Exporter/JSONArray.hpp"
 #include "IO/Exporter/JSONNumberElement.hpp"
 #include "IO/Exporter/JSONStringElement.hpp"
+#include "Function/ActivationFunction/RectifierFunction.hpp"
+#include "Function/ActivationFunction/BinaryFunction.hpp"
+#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "Function/ActivationFunction/HyperbolicTangentFunction.hpp"
+#include "Function/ActivationFunction/IdentityFunction.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
 
 namespace LightBulb
 {
@@ -63,7 +69,24 @@ namespace LightBulb
 
 	JSONAttribute* SynapticExporter::getNeuronSquashAttribute(int layerIndex, int neuronIndex)
 	{
-		return new JSONAttribute("squash", new JSONStringElement("HLIM"));
+		const NeuronDescription* neuronDescription;
+		if (layerIndex < networkTopology->getLayerCount() - 1)
+			neuronDescription = &networkTopology->getInnerNeuronDescription();
+		else
+			neuronDescription = &networkTopology->getOutputNeuronDescription();
+
+		if (dynamic_cast<const RectifierFunction*>(&neuronDescription->getActivationFunction()))
+			return new JSONAttribute("squash", new JSONStringElement("RELU"));
+		else if (dynamic_cast<const BinaryFunction*>(&neuronDescription->getActivationFunction()))
+			return new JSONAttribute("squash", new JSONStringElement("HLIM"));
+		else if (dynamic_cast<const IdentityFunction*>(&neuronDescription->getActivationFunction()))
+			return new JSONAttribute("squash", new JSONStringElement("IDENTITY"));
+		else if (dynamic_cast<const FermiFunction*>(&neuronDescription->getActivationFunction()))
+			return new JSONAttribute("squash", new JSONStringElement("LOGISTIC"));
+		else if (dynamic_cast<const HyperbolicTangentFunction*>(&neuronDescription->getActivationFunction()))
+			return new JSONAttribute("squash", new JSONStringElement("TANH"));
+		else
+			return new JSONAttribute("squash", new JSONStringElement("LOGISTIC"));
 	}
 
 	JSONAttribute* SynapticExporter::getNeuronBiasAttribute(int layerIndex, int neuronIndex)

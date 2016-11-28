@@ -12,6 +12,7 @@
 #include "PreferencesController.hpp"
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
+#include <TrainingPlans/AbstractReinforcementTrainingPlan.hpp>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include "IO/Exporter/AbstractNetworkExporter.hpp"
 
@@ -150,6 +151,12 @@ namespace LightBulb
 		{
 			const EvolutionLearningResult& learningResult = static_cast<const EvolutionLearningResult&>(static_cast<AbstractEvolutionTrainingPlan&>(trainingPlan).getLearningResult());
 			AbstractNeuralNetwork* clone = learningResult.bestIndividuals.front()->getNeuralNetwork().clone();
+			clone->setName("Result of " + trainingPlan.getName());
+			neuralNetworkRepository->Add(clone);
+		}
+		else if (dynamic_cast<AbstractReinforcementTrainingPlan*>(&trainingPlan))
+		{
+			AbstractNeuralNetwork* clone = static_cast<AbstractReinforcementTrainingPlan&>(trainingPlan).getEnvironment().getNeuralNetwork().clone();
 			clone->setName("Result of " + trainingPlan.getName());
 			neuralNetworkRepository->Add(clone);
 		}

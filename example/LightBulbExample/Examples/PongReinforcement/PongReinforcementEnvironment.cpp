@@ -46,7 +46,7 @@ void PongReinforcementEnvironment::getNNInput(std::vector<double>& input)
 	input[2] = game.getState().ballVelX / game.getProperties().maxBallSpeed;
 	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
 	input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
-	input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	input[5] = 0; // game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
 }
 
 void PongReinforcementEnvironment::interpretNNOutput(std::vector<bool>& output)
