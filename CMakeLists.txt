@@ -18,6 +18,12 @@ option(EnableLightBulbApp "EnableLightBulbApp" ON)
 option(EnableLightBulbExample "EnableLightBulbExample" ON)
 option(EnableUnitTests "EnableUnitTests" OFF)
 
+if(BUILD_SHARED_LIBS)
+  set(wxWidgets_USE_STATIC OFF)
+else()
+  set(wxWidgets_USE_STATIC ON)
+endif()
+
 add_subdirectory(src/LightBulb)
 
 if(EnableLightBulbApp)

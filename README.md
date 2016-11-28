@@ -34,6 +34,16 @@ cmake ..
 ```
 ## Impressions
 
+<a href="http://dw-projects.com/index.php?id=58">
+<p >
+<img src="docs/examples/media/pong_evolution.gif" width="30%">
+</p>
+</a>
+
+An AI which learned to play pong.
+
+Screenshots of the LightBulbApp:
+
 <img src="docs/screenshots/Graph.png" width="40%">
 
 <img src="docs/screenshots/Logger.png" width="40%">
