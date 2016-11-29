@@ -188,7 +188,7 @@ namespace LightBulb
 
 	void NetworkViewerWindow::paintNow()
 	{
-		if (panel)
+		if (panel && IsShown())
 		{
 			wxClientDC cdc(panel);
 			wxBufferedDC dc(&cdc, cdc.GetSize());
@@ -198,13 +198,15 @@ namespace LightBulb
 
 	void NetworkViewerWindow::render(wxDC& dc)
 	{
+		dc.SetBackground(*wxWHITE_BRUSH);
+
+		dc.SetBackgroundMode(wxTRANSPARENT);
+		dc.SetFont(*wxSMALL_FONT);
+
+		dc.Clear();
+
 		if (selectedNetwork)
 		{
-			dc.SetBackground(*wxWHITE_BRUSH);
-			dc.SetBackgroundMode(wxTRANSPARENT);
-			dc.SetFont(*wxSMALL_FONT);
-
-			dc.Clear();
 
 			panel->GetVirtualSize(&width, &height);
 			panel->GetScrollPos(0);
