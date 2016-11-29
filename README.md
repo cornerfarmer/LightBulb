@@ -40,7 +40,15 @@ cmake ..
 </p>
 </a>
 
-An AI which learned to play pong.
+An AI which learned to play pong with the help of coevolution.
+
+<a href="http://dw-projects.com/index.php?id=58">
+<p >
+<img src="docs/examples/media/pong_dqn.gif" width="30%">
+</p>
+</a>
+
+An AI which learned to play pong with the help of DQN.
 
 Screenshots of the LightBulbApp:
 

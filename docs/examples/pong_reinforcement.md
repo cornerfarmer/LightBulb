@@ -165,7 +165,17 @@ Thats it. Now we can execute the learning rule.
 ## Run it!
 
 ```cpp
-std::unique_ptr<ReinforcementLearningResult> result(static_cast<ReinforcementLearningResult*>(learningRule.start()));
+learningRule.start();
+AbstractNeuralNetwork* network = environment.getNeuralNetwork();
 ```
 
-TODO: continue...
+Now its up to you to try and test the pong AI. 
+
+Of course you could also just click the gif below and try it online. :stuck_out_tongue_winking_eye: 
+
+<a href="http://dw-projects.com/index.php?id=58" align="center">
+<p align="center">
+<img src="media/pong_dqn.gif" width="200">
+</p>
+</a>
+

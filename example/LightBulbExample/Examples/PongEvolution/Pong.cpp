@@ -140,7 +140,9 @@ void Pong::resetEnvironment()
 void Pong::getNNInput(std::vector<double>& input)
 {
 	input.resize(6);
-	input[0] = game.getPlayer() * game.getState().ballPosX / game.getProperties().width;
+	input[0] = game.getState().ballPosX / game.getProperties().width;
+	if (game.getPlayer() == -1)
+		input[0] = 1 - input[0];
 	input[1] = game.getState().ballPosY / game.getProperties().height;
 	input[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
 	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
