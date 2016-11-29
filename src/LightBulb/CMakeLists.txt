@@ -9,4 +9,4 @@ include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)
 
 add_library(LightBulb ${SOURCES})
-use_cxx11()
+use_cxx11(LightBulb)

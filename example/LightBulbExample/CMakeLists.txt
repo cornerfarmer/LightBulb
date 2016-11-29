@@ -16,4 +16,4 @@ include(${wxWidgets_USE_FILE})
 
 add_executable(LightBulbExample ${SOURCES})
 target_link_libraries(LightBulbExample LightBulb LightBulbApp freechart ${wxWidgets_LIBRARIES})
-use_cxx11()
+use_cxx11(LightBulbExample)
