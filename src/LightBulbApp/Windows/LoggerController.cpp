@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/LoggerController.hpp"
-#include "LoggerWindow.hpp"
+#include "Windows/LoggerWindow.hpp"
 #include <Repositories/TrainingPlanRepository.hpp>
 
 namespace LightBulb

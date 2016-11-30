@@ -13,13 +13,12 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include <Learning/Evolution/EvolutionLearningResult.hpp>
 // Library includes
 #include <iostream>
 #include <algorithm>
 #include <map>
 #include <string>
-#include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include "AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

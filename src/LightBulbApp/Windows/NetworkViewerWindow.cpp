@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/NetworkViewerWindow.hpp"
-#include "NetworkViewerController.hpp"
+#include "Windows/NetworkViewerController.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <wx/dataview.h>

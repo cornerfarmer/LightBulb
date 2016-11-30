@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\IO">
+      <UniqueIdentifier>{80fc1387-08d7-48e6-9e7b-10a5b9d840eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Performance">
+      <UniqueIdentifier>{84be2f9f-7c1f-4489-af4b-88e978aa53a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Repositories">
+      <UniqueIdentifier>{868fcfb0-d36f-49db-a427-ce816ea33e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans">
+      <UniqueIdentifier>{f56f4a8d-4c0f-4944-9d1e-1a906163d634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Windows">
+      <UniqueIdentifier>{6a3a723a-d9a1-4a17-9a79-4a83c1a33913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences">
+      <UniqueIdentifier>{31706f5d-1308-4b94-b98e-21312bddd147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups">
+      <UniqueIdentifier>{e5e2684a-c76e-4f10-9175-f17791d1377a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution">
+      <UniqueIdentifier>{347fdbb7-a201-4e5b-9938-708104f2365a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement">
+      <UniqueIdentifier>{32e491b3-4035-4f00-b4ab-7bdfc3f48559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised">
+      <UniqueIdentifier>{c6b991f4-0916-4f3f-b09b-068a96493134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation">
+      <UniqueIdentifier>{d68b07d7-3e59-475c-85fa-7460e6f7e10a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms">
+      <UniqueIdentifier>{40475167-7e55-4b63-8851-68c80ef4b0ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Performance\NetworkPerformanceTests.cpp">
+      <Filter>Quelldateien\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Repositories\TrainingPlanRepository.cpp">
+      <Filter>Quelldateien\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Repositories\NeuralNetworkRepository.cpp">
+      <Filter>Quelldateien\Repositories</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractEvolutionTrainingPlan.cpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractLearningRuleTrainingPlan.cpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractReinforcementTrainingPlan.cpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractSupervisedTrainingPlan.cpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractTrainingPlan.cpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractCoevolutionTrainingPlan.cpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\AbstractVariablePreference.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\BooleanPreference.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\ChoicePreference.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\DoublePreference.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\IntegerPreference.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\AbstractPreference.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\AbstractPreferenceElement.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\FeedForwardNetworkTopologyPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\RMSPropLearningRatePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\ResilientLearningRatePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantCreationCommandPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantMutationCommandPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantRecombinationCommandPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantReuseCommandPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\EvolutionLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\RateDifferenceConditionPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\AbstractEvolutionLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\PolicyGradientLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.cpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubApp.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubAppFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubAppWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\EvolutionAnalyzerController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\EvolutionAnalyzerFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\EvolutionAnalyzerWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\LearningStateController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\LearningStateFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\LearningStateWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\LoggerController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\LoggerFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\LoggerWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\NetworkViewerController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\NetworkViewerFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\NetworkViewerWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\PreferencesController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\PreferencesWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\SimulatorController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\SimulatorFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\SimulatorWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\TrainingController.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\TrainingWindow.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractApp.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractCustomSubApp.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractCustomSubAppFactory.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractMainApp.cpp">
+      <Filter>Quelldateien\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\App.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\DoublePreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\Performance\NetworkPerformanceTests.hpp">
+      <Filter>Quelldateien\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\Repositories\TrainingPlanRepository.hpp">
+      <Filter>Quelldateien\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\Repositories\NeuralNetworkRepository.hpp">
+      <Filter>Quelldateien\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractEvolutionTrainingPlan.hpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractLearningRuleTrainingPlan.hpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractReinforcementTrainingPlan.hpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractSupervisedTrainingPlan.hpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractTrainingPlan.hpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractCoevolutionTrainingPlan.hpp">
+      <Filter>Quelldateien\TrainingPlans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\AbstractPreference.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\AbstractPreferenceElement.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\AbstractVariablePreference.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\BooleanPreference.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\ChoicePreference.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\DoublePreference.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\IntegerPreference.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\FeedForwardNetworkTopologyPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\ResilientLearningRatePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\RMSPropLearningRatePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantCreationCommandPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantMutationCommandPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantRecombinationCommandPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantReuseCommandPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\EvolutionLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\RateDifferenceConditionPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\AbstractEvolutionLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\PolicyGradientLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.hpp">
+      <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

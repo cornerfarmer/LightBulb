@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.6.4)
 project (LightBulb)
 include(../../cmake/macros.txt)
 
-file(GLOB_RECURSE SOURCES *.cpp *.hpp)
-include_directories(.)
+file(GLOB_RECURSE SOURCES *.cpp)
+include_directories(../../include/LightBulb)
 
 include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)

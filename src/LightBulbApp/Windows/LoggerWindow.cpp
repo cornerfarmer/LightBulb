@@ -1,7 +1,7 @@
 // Includes
 #include "Windows/LoggerWindow.hpp"
 #include <wx/richtext/richtextctrl.h>
-#include "LoggerController.hpp"
+#include "Windows/LoggerController.hpp"
 
 namespace LightBulb
 {

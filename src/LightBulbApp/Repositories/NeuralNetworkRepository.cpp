@@ -1,5 +1,5 @@
 // Includes
-#include "NeuralNetworkRepository.hpp"
+#include "Repositories/NeuralNetworkRepository.hpp"
 #include <fstream>
 #include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>

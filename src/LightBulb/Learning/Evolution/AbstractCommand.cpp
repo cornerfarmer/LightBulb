@@ -1,7 +1,7 @@
 // Includes
 #include "Learning/Evolution/AbstractCommand.hpp"
-#include "AbstractIndividual.hpp"
 #include <Logging/AbstractLogger.hpp>
+#include "Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {

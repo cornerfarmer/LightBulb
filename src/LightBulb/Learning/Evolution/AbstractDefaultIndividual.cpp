@@ -3,7 +3,7 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "ActivationOrder/TopologicalOrder.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "AbstractEvolutionEnvironment.hpp"
+#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 
 namespace LightBulb
 {

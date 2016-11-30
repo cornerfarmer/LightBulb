@@ -10,7 +10,7 @@
 #include <string>
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
 #include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include "AbstractReinforcementEnvironment.hpp"
+#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include "NeuronDescription/NeuronDescription.hpp"
 #include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 #include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"

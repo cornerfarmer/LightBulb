@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/LearningStateWindow.hpp"
-#include "LearningStateController.hpp"
+#include "Windows/LearningStateController.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <TrainingPlans/AbstractTrainingPlan.hpp>

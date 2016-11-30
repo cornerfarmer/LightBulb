@@ -1,4 +1,4 @@
-#include "NetworkPerformanceTests.hpp"
+#include "Performance/NetworkPerformanceTests.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <Function/InputFunction/WeightedSumFunction.hpp>

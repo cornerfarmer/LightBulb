@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/AbstractSubAppWindow.hpp"
-#include "AbstractSubApp.hpp"
+#include "Windows/AbstractSubApp.hpp"
 
 namespace LightBulb
 {

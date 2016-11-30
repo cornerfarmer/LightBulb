@@ -1,6 +1,5 @@
 // Includes
 #include "Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp"
-#include "AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

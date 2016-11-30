@@ -4,8 +4,8 @@
 // Library includes
 #include <iostream>
 #include <iomanip>
-#include "EvolutionLearningRule.hpp"
-#include "AbstractCoevolutionEnvironment.hpp"
+#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

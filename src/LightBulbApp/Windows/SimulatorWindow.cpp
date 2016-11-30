@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/SimulatorWindow.hpp"
-#include "SimulatorController.hpp"
+#include "Windows/SimulatorController.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 #include <wx/valnum.h>

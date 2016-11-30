@@ -1,6 +1,5 @@
 // Includes
 #include "Teaching/TeachingLessonLinearInput.hpp"
-#include "TeachingInput.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb

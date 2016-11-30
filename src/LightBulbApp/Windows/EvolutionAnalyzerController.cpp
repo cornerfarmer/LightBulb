@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/EvolutionAnalyzerController.hpp"
-#include "EvolutionAnalyzerWindow.hpp"
+#include "Windows/EvolutionAnalyzerWindow.hpp"
 #include <Repositories/TrainingPlanRepository.hpp>
 #include "Learning/Evolution/EvolutionLearningRule.hpp"
 

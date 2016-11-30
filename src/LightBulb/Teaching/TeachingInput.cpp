@@ -1,2 +1,2 @@
 // Includes
-#include "TeachingInput.hpp"
+#include "Teaching/TeachingInput.hpp"

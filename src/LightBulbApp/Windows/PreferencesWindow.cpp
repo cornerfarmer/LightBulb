@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/PreferencesWindow.hpp"
-#include "PreferencesController.hpp"
+#include "Windows/PreferencesController.hpp"
 #include "TrainingPlans/Preferences/AbstractPreference.hpp"
 #include <TrainingPlans/Preferences/DoublePreference.hpp>
 #include <TrainingPlans/Preferences/IntegerPreference.hpp>

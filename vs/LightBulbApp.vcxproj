@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\LightBulbApp\App.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Performance\NetworkPerformanceTests.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Repositories\NeuralNetworkRepository.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Repositories\TrainingPlanRepository.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractCoevolutionTrainingPlan.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractEvolutionTrainingPlan.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractLearningRuleTrainingPlan.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractReinforcementTrainingPlan.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractSupervisedTrainingPlan.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\AbstractTrainingPlan.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\AbstractPreference.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\AbstractPreferenceElement.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\AbstractVariablePreference.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\BooleanPreference.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\ChoicePreference.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\DoublePreference.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\IntegerPreference.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\AbstractEvolutionLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantCreationCommandPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantMutationCommandPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantRecombinationCommandPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantReuseCommandPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\EvolutionLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\RateDifferenceConditionPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\FeedForwardNetworkTopologyPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\PolicyGradientLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\ResilientLearningRatePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\RMSPropLearningRatePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\TrainingPlans\Preferences\PreferenceGroup.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractApp.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractCustomSubApp.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractCustomSubAppFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractMainApp.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubApp.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubAppFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubAppWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\AbstractWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\EvolutionAnalyzerController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\EvolutionAnalyzerFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\EvolutionAnalyzerWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\LearningStateController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\LearningStateFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\LearningStateWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\LoggerController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\LoggerFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\LoggerWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\NetworkViewerController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\NetworkViewerFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\NetworkViewerWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\PreferencesController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\PreferencesWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\SimulatorController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\SimulatorFactory.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\SimulatorWindow.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\TrainingController.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\Windows\TrainingWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\DoublePreferenceIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Performance\NetworkPerformanceTests.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Repositories\NeuralNetworkRepository.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Repositories\TrainingPlanRepository.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractCoevolutionTrainingPlan.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractEvolutionTrainingPlan.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractLearningRuleTrainingPlan.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractReinforcementTrainingPlan.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractSupervisedTrainingPlan.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\AbstractTrainingPlan.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\AbstractPreference.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\AbstractPreferenceElement.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\AbstractVariablePreference.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\BooleanPreference.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\ChoicePreference.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\DoublePreference.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\IntegerPreference.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\AbstractLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\AbstractEvolutionLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\BestSelectionCommandPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantCreationCommandPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantMutationCommandPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantRecombinationCommandPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\ConstantReuseCommandPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\EvolutionLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Evolution\RateDifferenceConditionPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\FeedForwardNetworkTopologyPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\DQNLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\PolicyGradientLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\AbstractSupervisedLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientCalculation\BackpropagationPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\ResilientLearningRatePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\RMSPropLearningRatePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PreferenceGroup.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1B0784C5-984A-47B0-AAB5-BDEAC0A12ADB}</ProjectGuid>
+    <RootNamespace>LightBulbApp</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>..\include\LightBulb;..\extlibs\eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;..\include\LightBulbApp;..\extlibs\cereal\include;..\extlibs\freechart\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>../Debug/LightBulb.lib;wxcode_msw28ud_freechart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\lib\vc_lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\lib\vc_lib</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>..\include\LightBulb;..\extlibs\eigen;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\include\msvc;..\include\LightBulbApp;..\extlibs\cereal\include;..\extlibs\freechart\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>wxUSE_EXCEPTIONS</UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>wxcode_msw28u_freechart.lib;../Release/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\wxWidgets-3.1.0\lib\vc_lib;C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\VC\freechart-master\lib\vc_lib</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

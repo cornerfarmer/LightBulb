@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LightBulbApp", "..\src\LightBulbApp\LightBulbApp.vcxproj", "{1B0784C5-984A-47B0-AAB5-BDEAC0A12ADB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LightBulbApp", "LightBulbApp.vcxproj", "{1B0784C5-984A-47B0-AAB5-BDEAC0A12ADB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8FEF3ECA-165D-4337-AF14-CEB70A0DCF76} = {8FEF3ECA-165D-4337-AF14-CEB70A0DCF76}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LightBulb", "..\src\LightBulb\LightBulb.vcxproj", "{8FEF3ECA-165D-4337-AF14-CEB70A0DCF76}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LightBulb", "LightBulb.vcxproj", "{8FEF3ECA-165D-4337-AF14-CEB70A0DCF76}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "LightBulbModeling", "..\docs\LightBulbModeling\LightBulbModeling.modelproj", "{064F388D-4B77-481C-A1CF-BBF57C2D6470}"
 EndProject

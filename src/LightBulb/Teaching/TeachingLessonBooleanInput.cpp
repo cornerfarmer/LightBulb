@@ -2,7 +2,6 @@
 #include "Teaching/TeachingLessonBooleanInput.hpp"
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "Function/ActivationFunction/AbstractActivationFunction.hpp"
-#include "TeachingInput.hpp"
 // Library includes
 #include <exception>
 #include "NeuronDescription/NeuronDescription.hpp"

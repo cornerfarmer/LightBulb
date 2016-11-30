@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/WeightDecayFitnessFunction.hpp"
-#include "AbstractIndividual.hpp"
+#include "Learning/Evolution/AbstractIndividual.hpp"
 #include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
 

@@ -1,0 +1,976 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{1481436c-d90b-4c1d-9df2-dee64ee62729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\ActivationOrder">
+      <UniqueIdentifier>{82bec384-2680-41a3-9faa-67715927326c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Event">
+      <UniqueIdentifier>{56b8f661-43be-4863-a682-2c35fcbd442b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Function">
+      <UniqueIdentifier>{2e1d70ec-3f51-4082-8fc5-5fe6e242421c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Function\ActivationFunction">
+      <UniqueIdentifier>{39969b78-28f6-4e78-8371-6a949a2074e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Function\InputFunction">
+      <UniqueIdentifier>{af1965b5-e680-464d-ac83-b84c80f66982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Function\RandomFunction">
+      <UniqueIdentifier>{667651c6-59c7-467b-93cc-bdb5522cc04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Function\SelectionFunction">
+      <UniqueIdentifier>{aeb46e70-3c6c-4e2c-bef1-e77d4e35f833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Function\ShrinkFunction">
+      <UniqueIdentifier>{f55b6f5c-81b1-43ee-b816-140af34fcd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\IO">
+      <UniqueIdentifier>{cb31c886-c7ac-47cb-adf8-baccdbdf6a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\IO\Exporter">
+      <UniqueIdentifier>{e75aa447-d313-4bcc-a0b6-9d1998a6be00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning">
+      <UniqueIdentifier>{00a2c15f-44a2-47cc-86b3-7671b5485001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Evolution">
+      <UniqueIdentifier>{b7fbc09f-fc06-4411-bb9c-a904e24d4316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Evolution\EvolutionStrategy">
+      <UniqueIdentifier>{58bc92d9-f1f1-473b-9402-c1aa8f07e8c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Reinforcement">
+      <UniqueIdentifier>{5977bdcd-5dc9-4353-988f-4eaecc0540f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Supervised">
+      <UniqueIdentifier>{afe1b596-9fe3-4124-8932-df72e1173b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Supervised\GradientCalculation">
+      <UniqueIdentifier>{2356dea2-9e38-493a-9b94-3a6fc9d265af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Learning\Supervised\GradientDescentAlgorithms">
+      <UniqueIdentifier>{341e765a-df04-46b6-9de8-b91c7e733f14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Lib">
+      <UniqueIdentifier>{c0b3e4f3-1217-4e9e-b4b6-4f8e8b09016c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Logging">
+      <UniqueIdentifier>{fdc91f43-3bdb-439d-ac87-74e68e7569e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\NetworkTopology">
+      <UniqueIdentifier>{1447afa2-52b6-43e2-b602-29be7d700fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\NeuralNetwork">
+      <UniqueIdentifier>{dcebe53c-280d-46cf-8fe7-72316893d0ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\NeuronDescription">
+      <UniqueIdentifier>{a923a440-13e9-4f03-8755-bd1762f92b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Tools">
+      <UniqueIdentifier>{a8ad6b46-f819-4e19-b2d7-6ff5dabb4410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Teaching">
+      <UniqueIdentifier>{4dfa6adc-9647-483a-adc6-4d25ffd6cabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Random">
+      <UniqueIdentifier>{5ecf90ec-4226-4ca4-b77e-37576e58872c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\LightBulb\ActivationOrder\AbstractActivationOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\ActivationOrder\TopologicalOrder.hpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Event\AbstractObserver.hpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Event\Observable.hpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Event\Observer.hpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\FermiFunction.hpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\HyperbolicTangentFunction.hpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\IdentityFunction.hpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\RectifierFunction.hpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\AbstractActivationFunction.hpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\BinaryFunction.hpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\InputFunction\AbstractInputFunction.hpp">
+      <Filter>Quelldateien\Function\InputFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\InputFunction\EuclideanDistance.hpp">
+      <Filter>Quelldateien\Function\InputFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\InputFunction\WeightedSumFunction.hpp">
+      <Filter>Quelldateien\Function\InputFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\RandomFunction\RankBasedRandomFunction.hpp">
+      <Filter>Quelldateien\Function\RandomFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\RandomFunction\AbstractRandomFunction.hpp">
+      <Filter>Quelldateien\Function\RandomFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\RandomFunction\EqualRandomFunction.hpp">
+      <Filter>Quelldateien\Function\RandomFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\SelectionFunction\AbstractSelectionFunction.hpp">
+      <Filter>Quelldateien\Function\SelectionFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\SelectionFunction\RouletteWheelSelectionFunction.hpp">
+      <Filter>Quelldateien\Function\SelectionFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ShrinkFunction\AbstractShrinkFunction.hpp">
+      <Filter>Quelldateien\Function\ShrinkFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Function\ShrinkFunction\ExponentialShrinkFunction.hpp">
+      <Filter>Quelldateien\Function\ShrinkFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\LearningStateIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\NeuronDescriptionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ResilientLearningRateIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\RMSPropLearningRateIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\SimpleGradientDescentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\StandardRandomGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\StorageLoggerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\TeachedIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\UsedArchives.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\UseParentSerialization.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\XorShfGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ZigguratGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractCoevolutionEnvironmentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractDefaultIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractSupervisedLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\BackpropagationIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\CoevolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ConstructExisting.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\DQNLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\FeedForwardNetworkTopologyIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\FermiFunctionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\IOStorage.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\JSONArray.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\JSONAttribute.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\JSONNumberElement.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\JSONObject.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\JSONStringElement.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\SynapticExporter.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\AbstractJSONElement.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\AbstractNetworkExporter.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\Exporter\BrainJSExporter.hpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\AbstractLearningRule.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\LearningState.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\AbstractLearningResult.hpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\RandomCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\RandomHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\RandomSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\RateDifferenceCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\RemainderStochasticSamplingSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\RoundRobinCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\SharedCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\SharedSamplingCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\StandardDeviationFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\StochasticUniversalSamplingSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\TeachedIndividual.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\TeachingEvolutionEnvironment.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\TournamentCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\WeightDecayFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractCoevolutionEnvironment.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractCombiningStrategy.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractCreationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractDefaultIndividual.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractEvolutionEnvironment.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractEvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractExitCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractIndividual.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractMutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractMutationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractMutationSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractRecombinationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractRecombinationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractRecombinationSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractReuseSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractSelectionCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\AbstractSimpleEvolutionEnvironment.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\BestReuseSelector.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\BestSelectionCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\CoevolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\ConstantCoevolutionFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\ConstantCreationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\ConstantMutationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\ConstantRecombinationCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\ConstantReuseCommand.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\EvolutionLearningResult.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\EvolutionLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\ExponentialFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\FitnessCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\FitnessSharingFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\FullHallOfFameAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\LinearScalingFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\NetworkGrowMutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\NeuronDecayFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\PerfectIndividualFoundCondition.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\PhasedTopologyMutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\PositiveMakerFitnessFunction.hpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\EvolutionStrategy\MutationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementEnvironment.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\DQNLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\PolicyGradientLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp">
+      <Filter>Quelldateien\Learning\Supervised</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\AbstractSupervisedLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Supervised</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentLearningRule.hpp">
+      <Filter>Quelldateien\Learning\Supervised</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientCalculation\Backpropagation.hpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientCalculation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientCalculation\AbstractGradientCalculation.hpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientCalculation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.hpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.hpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.hpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.hpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp">
+      <Filter>Quelldateien\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Logging\ConsoleLogger.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Logging\StorageLogger.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Logging\AbstractLoggable.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Logging\AbstractLogger.hpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NetworkTopology\AbstractNetworkTopology.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NetworkTopology\FeedForwardNetworkTopology.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NetworkTopology\AbstractFeedForwardNetworkTopology.hpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NeuralNetwork\AbstractNeuralNetwork.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NeuralNetwork\NeuralNetwork.hpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NeuronDescription\DifferentNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NeuronDescription\NeuronDescription.hpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NeuronDescription\SameNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\NeuronDescription\AbstractNeuronDescriptionFactory.hpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Random\AbstractRandomGeneratorUser.hpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Random\StandardRandomGenerator.hpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Random\XorShfGenerator.hpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Random\ZigguratGenerator.hpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Random\AbstractRandomGenerator.hpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Teaching\AbstractTeachingLesson.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Teaching\Teacher.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Teaching\TeachingInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Teaching\TeachingLessonBooleanInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Teaching\TeachingLessonLinearInput.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Teaching\AbstractTeacher.hpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Tools\AbstractCloneable.hpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\ActivationOrder\TopologicalOrder.cpp">
+      <Filter>Quelldateien\ActivationOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Event\Observable.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Event\Observer.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Event\AbstractObserver.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\FermiFunction.cpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\HyperbolicTangentFunction.cpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\IdentityFunction.cpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\RectifierFunction.cpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\AbstractActivationFunction.cpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\BinaryFunction.cpp">
+      <Filter>Quelldateien\Function\ActivationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\InputFunction\EuclideanDistance.cpp">
+      <Filter>Quelldateien\Function\InputFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\InputFunction\WeightedSumFunction.cpp">
+      <Filter>Quelldateien\Function\InputFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\InputFunction\AbstractInputFunction.cpp">
+      <Filter>Quelldateien\Function\InputFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\RandomFunction\RankBasedRandomFunction.cpp">
+      <Filter>Quelldateien\Function\RandomFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\RandomFunction\AbstractRandomFunction.cpp">
+      <Filter>Quelldateien\Function\RandomFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\RandomFunction\EqualRandomFunction.cpp">
+      <Filter>Quelldateien\Function\RandomFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\SelectionFunction\RouletteWheelSelectionFunction.cpp">
+      <Filter>Quelldateien\Function\SelectionFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\SelectionFunction\AbstractSelectionFunction.cpp">
+      <Filter>Quelldateien\Function\SelectionFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ShrinkFunction\ExponentialShrinkFunction.cpp">
+      <Filter>Quelldateien\Function\ShrinkFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Function\ShrinkFunction\AbstractShrinkFunction.cpp">
+      <Filter>Quelldateien\Function\ShrinkFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\AbstractNetworkExporter.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\BrainJSExporter.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONArray.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONAttribute.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONNumberElement.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONObject.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONStringElement.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\SynapticExporter.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\Exporter\AbstractJSONElement.cpp">
+      <Filter>Quelldateien\IO\Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution\EvolutionStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\RandomSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\RateDifferenceCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\RemainderStochasticSamplingSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\RoundRobinCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\SharedCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\SharedSamplingCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\StandardDeviationFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\StochasticUniversalSamplingSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\TeachedEvolutionObject.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\TeachingEvolutionEnvironment.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\TournamentCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\WeightDecayFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCoevolutionEnvironment.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCreationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractDefaultIndividual.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractEvolutionEnvironment.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractEvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractExitCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractIndividual.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractMutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractMutationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractMutationSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractRecombinationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractRecombinationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractRecombinationSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractReuseSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractSelectionCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractSimpleEvolutionEnvironment.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\BestReuseSelector.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\BestSelectionCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\CoevolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantCoevolutionFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantCreationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantMutationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantRecombinationCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantReuseCommand.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\ExponentialFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\FitnessCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\FitnessSharingFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\FullHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\LinearScalingFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\MagnitudeBasedPruningMutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\NetworkGrowMutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\NeuronDecayFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\PerfectIndividualFoundCondition.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\PhasedTopologyMutationAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\PositiveMakerFitnessFunction.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\RandomCombiningStrategy.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\RandomHallOfFameAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Evolution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementEnvironment.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\DQNLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\PolicyGradientLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientCalculation\Backpropagation.cpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientCalculation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientCalculation\AbstractGradientCalculation.cpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientCalculation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentAlgorithms\ResilientLearningRate.cpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRate.cpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentAlgorithms\AbstractGradientDescentAlgorithm.cpp">
+      <Filter>Quelldateien\Learning\Supervised\GradientDescentAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Supervised</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Supervised\AbstractSupervisedLearningRule.cpp">
+      <Filter>Quelldateien\Learning\Supervised</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\AbstractLearningRule.cpp">
+      <Filter>Quelldateien\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Lib\ziggurat.cpp">
+      <Filter>Quelldateien\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Logging\AbstractLogger.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Logging\ConsoleLogger.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Logging\StorageLogger.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Logging\AbstractLoggable.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NetworkTopology\AbstractNetworkTopology.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NetworkTopology\FeedForwardNetworkTopology.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NetworkTopology\AbstractFeedForwardNetworkTopology.cpp">
+      <Filter>Quelldateien\NetworkTopology</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NeuralNetwork\AbstractNeuralNetwork.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NeuralNetwork\NeuralNetwork.cpp">
+      <Filter>Quelldateien\NeuralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NeuronDescription\AbstractNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NeuronDescription\DifferentNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NeuronDescription\NeuronDescription.cpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\NeuronDescription\SameNeuronDescriptionFactory.cpp">
+      <Filter>Quelldateien\NeuronDescription</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Random\StandardRandomGenerator.cpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Random\XorShfGenerator.cpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Random\ZigguratGenerator.cpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Random\AbstractRandomGenerator.cpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Random\AbstractRandomGeneratorUser.cpp">
+      <Filter>Quelldateien\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Teaching\Teacher.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Teaching\TeachingInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Teaching\TeachingLessonBooleanInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Teaching\TeachingLessonLinearInput.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Teaching\AbstractTeacher.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Teaching\AbstractTeachingLesson.cpp">
+      <Filter>Quelldateien\Teaching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Tools\AbstractCloneable.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

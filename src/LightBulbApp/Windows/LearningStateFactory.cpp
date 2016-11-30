@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/LearningStateFactory.hpp"
-#include "LearningStateController.hpp"
+#include "Windows/LearningStateController.hpp"
 
 namespace LightBulb
 {

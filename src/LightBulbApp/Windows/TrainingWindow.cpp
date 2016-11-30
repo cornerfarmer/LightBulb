@@ -6,7 +6,7 @@
 #include <wx/artprov.h>
 #include <wx/statline.h>
 #include <NetworkTopology/AbstractNetworkTopology.hpp>
-#include "TrainingController.hpp"
+#include "Windows/TrainingController.hpp"
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <wx/timer.h>
 #include "IO/Exporter/AbstractNetworkExporter.hpp"

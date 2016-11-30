@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/SimulatorFactory.hpp"
-#include "SimulatorController.hpp"
+#include "Windows/SimulatorController.hpp"
 
 namespace LightBulb
 {

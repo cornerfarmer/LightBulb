@@ -2,14 +2,14 @@
 #include "Windows/TrainingController.hpp"
 #include <NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <NeuralNetwork/NeuralNetwork.hpp>
-#include "TrainingWindow.hpp"
+#include "Windows/TrainingWindow.hpp"
 #include <Repositories/NeuralNetworkRepository.hpp>
 #include <Repositories/TrainingPlanRepository.hpp>
 #include <fstream>
 #include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include "PreferencesController.hpp"
+#include "Windows/PreferencesController.hpp"
 #include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
 #include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
 #include <TrainingPlans/AbstractReinforcementTrainingPlan.hpp>

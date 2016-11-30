@@ -5,10 +5,10 @@
 #include "NeuralNetwork/NeuralNetwork.hpp"
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
-#include "GradientCalculation/AbstractGradientCalculation.hpp"
-#include "GradientDescentAlgorithms/SimpleGradientDescent.hpp"
-#include "GradientCalculation/Backpropagation.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 
 namespace LightBulb
 {

@@ -5,7 +5,7 @@
 #include "NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include "AbstractReinforcementEnvironment.hpp"
+#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include <Teaching/TeachingLessonLinearInput.hpp>
 #include <ActivationOrder/TopologicalOrder.hpp>
 #include "Learning/Supervised/SupervisedLearningResult.hpp"

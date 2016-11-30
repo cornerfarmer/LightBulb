@@ -1,5 +1,5 @@
 // Includes
-#include "TrainingPlanRepository.hpp"
+#include "Repositories/TrainingPlanRepository.hpp"
 #include <fstream>
 #include "IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>

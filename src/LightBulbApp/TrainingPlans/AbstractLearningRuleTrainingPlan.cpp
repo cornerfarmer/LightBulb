@@ -1,4 +1,4 @@
-#include "AbstractLearningRuleTrainingPlan.hpp"
+#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
 
 namespace LightBulb
 {

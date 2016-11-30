@@ -5,8 +5,8 @@
 #include "Teaching/Teacher.hpp"
 #include "Teaching/AbstractTeachingLesson.hpp"
 #include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "AbstractLearningResult.hpp"
 #include "Random/StandardRandomGenerator.hpp"
+#include "Learning/AbstractLearningResult.hpp"
 // Library includes
 #include <iomanip>
 #include <vector>

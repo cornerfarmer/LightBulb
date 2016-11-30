@@ -1,6 +1,6 @@
 // Includes
 #include "Learning/Evolution/FullHallOfFameAlgorithm.hpp"
-#include "AbstractCoevolutionEnvironment.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

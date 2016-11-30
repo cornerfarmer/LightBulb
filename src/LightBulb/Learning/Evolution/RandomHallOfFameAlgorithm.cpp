@@ -1,8 +1,8 @@
 // Includes
 #include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
+#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 // Library includes
 #include <algorithm>
-#include "AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

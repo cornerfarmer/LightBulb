@@ -1,11 +1,11 @@
 ﻿// Includes
 #include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
-#include "ConstantCreationCommandPreferenceGroup.hpp"
-#include "ConstantMutationCommandPreferenceGroup.hpp"
-#include "ConstantReuseCommandPreferenceGroup.hpp"
-#include "BestSelectionCommandPreferenceGroup.hpp"
-#include "RateDifferenceConditionPreferenceGroup.hpp"
-#include "ConstantRecombinationCommandPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantCreationCommandPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantMutationCommandPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantReuseCommandPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/BestSelectionCommandPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/RateDifferenceConditionPreferenceGroup.hpp"
+#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantRecombinationCommandPreferenceGroup.hpp"
 
 namespace LightBulb
 {

@@ -1,6 +1,6 @@
 // Includes
 #include "Windows/EvolutionAnalyzerWindow.hpp"
-#include "EvolutionAnalyzerController.hpp"
+#include "Windows/EvolutionAnalyzerController.hpp"
 #include <wx/dataview.h>
 
 namespace LightBulb
