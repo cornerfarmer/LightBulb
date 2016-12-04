@@ -31,7 +31,12 @@ Dependencies of LightBulb are:
 mkdir build
 cd build
 cmake ..
+make
+example/LightBulbExample/LightBulbExample
 ```
+
+Read more about [building](docs/build.md).
+
 ## Impressions
 
 <a href="http://dw-projects.com/index.php?id=58">
@@ -63,6 +68,10 @@ Screenshots of the LightBulbApp:
 <img src="docs/screenshots/Preferences.png" width="40%">
 
 <img src="docs/screenshots/Simulator.png" width="40%">
+
+## Getting started
+
+[Getting started](docs/getting_started.md) for developing.
 
 ## Examples & Tutorials
 
