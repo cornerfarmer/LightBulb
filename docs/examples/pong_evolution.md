@@ -23,7 +23,12 @@ protected:
 	void interpretNNOutput(std::vector<double>& output) override;
 public:
 	PongAI(Pong& pong_);
+	void setPong(Pong& pong);
 };
+void PongAI::setPong(Pong& pong)
+{
+	currentGame = &pong;
+}
 ```
 
 The constructor:
@@ -34,9 +39,11 @@ PongAI::PongAI(Pong& pong_)
 {
 	currentGame = &pong_;
 	FeedForwardNetworkTopologyOptions options;
-	options.neuronsPerLayerCount.push_back(1);
+	options.enableShortcuts = true;
+	options.neuronsPerLayerCount.push_back(6);
+	options.neuronsPerLayerCount.push_back(10);
 	options.neuronsPerLayerCount.push_back(2);
-	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
 	buildNeuralNetwork(options);
 }
 ```
@@ -75,12 +82,23 @@ protected:
 	LightBulb::AbstractIndividual* createNewIndividual() override;
 	void resetEnvironment() override;
 	int simulateGame(PongAI& ai1, PongAI& ai2);
+	void setRandomGenerator(AbstractRandomGenerator& randomGenerator_);
 	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
 public:
 	Pong(bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
 	void getNNInput(std::vector<double>& sight);
 	int getRoundCount() const override;
+	PongGame& getGame();
 };
+PongGame& Pong::getGame()
+{
+	return game;
+}
+void Pong::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	game.setRandomGenerator(randomGenerator_);
+}
 ```
 
 In the constructor we just forward the given parameters to our base class. We will come to their meaning later.
@@ -98,7 +116,7 @@ As in a normal environment we have to define how new individuals should be creat
 ```cpp
 AbstractIndividual* Pong::createNewIndividual()
 {
-	return new PongAI(*options, *this);
+	return new PongAI(*this);
 }
 ```
 
@@ -243,6 +261,7 @@ Those learning rules are now combined into one big CoevolutionLearningRule:
 CoevolutionLearningRuleOptions coevolutionLearningRuleOptions;
 coevolutionLearningRuleOptions.learningRule1 = &learningRule1;
 coevolutionLearningRuleOptions.learningRule2 = &learningRule2;
+coevolutionLearningRuleOptions.logger = new ConsoleLogger(LL_LOW);
 
 CoevolutionLearningRule learningRule(coevolutionLearningRuleOptions);
 ```
@@ -252,7 +271,7 @@ CoevolutionLearningRule learningRule(coevolutionLearningRuleOptions);
 Now we are ready to start!
 ```cpp
 std::unique_ptr<EvolutionLearningResult> result(static_cast<EvolutionLearningResult*>(learningRule.start()));
-PongAI* bestAI = static_cast<PongAI*>(result.bestIndividuals[0].get());
+PongAI* bestAI = static_cast<PongAI*>(result->bestIndividuals[0].get());
 ```
 
 Now its up to you to try and test the pong AI. 
@@ -269,36 +288,36 @@ In the [next tutorial](pong_reinforcement.md) we also try to learn pong, but thi
 
 The whole code:
 ```cpp
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "Function/ActivationFunction/BinaryFunction.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
+#include <LightBulb/Function/ActivationFunction/BinaryFunction.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp>
 
-#include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
-#include <Function/RandomFunction/RankBasedRandomFunction.hpp>
-#include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
-#include <Learning/Evolution/ConstantRecombinationCommand.hpp>
-#include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
-#include <Learning/Evolution/ConstantMutationCommand.hpp>
-#include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/ConstantReuseCommand.hpp>
-#include <Learning/Evolution/ConstantCreationCommand.hpp>
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include <Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
-#include <Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
-#include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
-#include <Learning/Evolution/CoevolutionLearningRule.hpp>
-#include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
-#include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
-#include <Learning/Evolution/RandomSelector.hpp>
+#include <LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp>
+#include <LightBulb/Function/RandomFunction/RankBasedRandomFunction.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
+#include <LightBulb/Learning/Evolution/BestSelectionCommand.hpp>
+#include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
+#include <LightBulb/Learning/Evolution/ConstantReuseCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantCreationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningResult.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
+#include <LightBulb/Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/PerfectIndividualFoundCondition.hpp>
+#include <LightBulb/Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
+#include <LightBulb/Learning/Evolution/RandomSelector.hpp>
+#include <LightBulb/Logging/ConsoleLogger.hpp>
 #include "PongGame.hpp"
-#include <Logging/ConsoleLogger.hpp>
 
 using namespace LightBulb;
 

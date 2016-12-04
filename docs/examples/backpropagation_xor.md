@@ -39,16 +39,17 @@ In our case that's just all four xor combinations:
 Teacher teacher;
 for (int i = 0; i < 2; i++)
 {
-    for (int l = 0; l < 2; l++)
-    {
-        std::vector<double> teachingPattern(2);
-        TeachingInput<bool>* teachingInput = new TeachingInput<bool>(1);
+	for (int l = 0; l < 2; l++)
+	{
+		std::vector<double> teachingPattern(2);
+		TeachingInput<bool>* teachingInput = new TeachingInput<bool>(1);
 
-        teachingPattern[0] = i;
-        teachingPattern[1] = l;
-        (*teachingInput).set(0, (i != l));
-        teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
-    }
+		teachingPattern[0] = i;
+		teachingPattern[1] = l;
+		(*teachingInput).set(0, (i != l));
+		teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+	}
+
 }
 ```
 
@@ -83,6 +84,7 @@ options.gradientCalculation = backpropagation;
 options.gradientDescentAlgorithm = simpleGradientDescent;
 options.neuralNetwork = &network;
 options.teacher = &teacher;
+options.logger = new ConsoleLogger(LL_LOW);
 GradientDescentLearningRule learningRule(options);
 ```
 
@@ -109,7 +111,7 @@ std::cout << "0 and 1 => " << std::to_string(output[0]) << std::endl;
 
 input[0] = 1;
 output = network.calculate(input);
-std::cout << "1 and 1 => " <<  std::to_string(output[0]) << std::endl;
+std::cout << "1 and 1 => " << std::to_string(output[0]) << std::endl;
 ```
 
 When running the program, the output should now look like:
@@ -145,25 +147,28 @@ Now you are ready for the [next Tutorial](function_evolution.md)!
 
 The whole code:
 ```cpp
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Teaching/Teacher.hpp"
-#include "Teaching/TeachingLessonBooleanInput.hpp"
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "Function/ActivationFunction/FermiFunction.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
-#include "Learning/AbstractLearningResult.hpp"
-#include "Logging/ConsoleLogger.hpp"
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/Teaching/Teacher.hpp>
+#include <LightBulb/Teaching/TeachingLessonBooleanInput.hpp>
+#include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
+#include <LightBulb/Function/ActivationFunction/FermiFunction.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp>
+#include <LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp>
+#include <LightBulb/Learning/AbstractLearningResult.hpp>
+#include <LightBulb/Logging/ConsoleLogger.hpp>
+#include <LightBulb/Teaching/TeachingInput.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
 
 #include <iostream>
+#include <LightBulb/Logging/AbstractLogger.hpp>
 
 using namespace LightBulb;
 
-int main2()
+int main()
 {
 	FeedForwardNetworkTopologyOptions networkTopologyOptions;
 	networkTopologyOptions.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));

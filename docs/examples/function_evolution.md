@@ -21,10 +21,14 @@ protected:
 	std::vector<float> position;
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<double>& output) override;
-public:	
+public:
 	Position(FunctionSimulator& functionSimulator_);
 	std::vector<float> getPosition() const;
 };
+std::vector<float> Position::getPosition() const
+{
+	return position;
+}
 ```
 
 In the constructor we simply set the corresponding environment (the FunctionSimulator) and create our neural network:
@@ -66,7 +70,7 @@ This is of course not the normal case, but in this very simple example its neces
 void Position::interpretNNOutput(std::vector<double>& output)
 {
 	for (int i = 0; i < 2; i++)
-	{	
+	{
 		position[i] = output[i];
 	}
 }
@@ -86,7 +90,7 @@ class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 {
 protected:
 	LightBulb::AbstractIndividual* createNewIndividual() override;
-    double sixHumpCamelFunction(std::vector<float> pos) const;
+	double sixHumpCamelFunction(std::vector<float> pos) const;
 public:
 	void doSimulationStep() override;
 	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
@@ -220,32 +224,26 @@ In the [next tutorial](pong_evolution.md) we will dig a little bit deeper into e
 The whole code:
 
 ```cpp
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Teaching/Teacher.hpp"
-#include "Teaching/TeachingLessonBooleanInput.hpp"
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "Function/ActivationFunction/FermiFunction.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
-#include "Learning/AbstractLearningResult.hpp"
-#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include "Learning/Evolution/ConstantCreationCommand.hpp"
-#include "Learning/Evolution/ConstantMutationCommand.hpp"
-#include "Learning/Evolution/ConstantRecombinationCommand.hpp"
-#include "Learning/Evolution/ConstantReuseCommand.hpp"
-#include "Learning/Evolution/RateDifferenceCondition.hpp"
-#include "Learning/Evolution/BestSelectionCommand.hpp"
-#include "Learning/Evolution/BestReuseSelector.hpp"
-#include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
-#include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
-#include "Learning/Evolution/EvolutionLearningResult.hpp"
-#include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp>
+#include <LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/ConstantCreationCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantReuseCommand.hpp>
+#include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
+#include <LightBulb/Learning/Evolution/BestSelectionCommand.hpp>
+#include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningResult.hpp>
+#include <LightBulb/Learning/Evolution/StochasticUniversalSamplingSelector.hpp>
 
 #include <iostream>
 

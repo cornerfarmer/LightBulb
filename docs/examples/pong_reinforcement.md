@@ -17,6 +17,7 @@ class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvi
 {
 private:
 	int time;
+	PongGame game;
 protected:
 	void getNNInput(std::vector<double>& input) override;
 	void interpretNNOutput(std::vector<bool>& output) override;
@@ -26,7 +27,13 @@ public:
 	void executeCompareAI();
 	void initializeForLearning() override;
 	bool isTerminalState() override;
+	void setRandomGenerator(AbstractRandomGenerator& randomGenerator_);
 };
+void PongReinforcementEnvironment::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	game.setRandomGenerator(randomGenerator_);
+}
 ```
 
 In the constructor we just forward the given parameters to the parent class.
@@ -124,19 +131,17 @@ bool PongReinforcementEnvironment::isTerminalState()
 First we create the environment:
 
 ```cpp
-FeedForwardNetworkTopologyOptions options;
-options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
-options.useBiasNeuron = getBooleanPreference(PREFERENCE_USE_BIAS_NEURON);
+FeedForwardNetworkTopologyOptions feedForwardNetworkTopologyOptions;
+feedForwardNetworkTopologyOptions.enableShortcuts = false;
+feedForwardNetworkTopologyOptions.useBiasNeuron = true;
 
-options.neuronsPerLayerCount.push_back(6);
-options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_FIRST_LAYER));
-if (getBooleanPreference(PREFERENCE_SECOND_LAYER_ENABLE))
-	options.neuronsPerLayerCount.push_back(getIntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER));
-options.neuronsPerLayerCount.push_back(3);
+feedForwardNetworkTopologyOptions.neuronsPerLayerCount.push_back(6);
+feedForwardNetworkTopologyOptions.neuronsPerLayerCount.push_back(256);
+feedForwardNetworkTopologyOptions.neuronsPerLayerCount.push_back(3);
 
-options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+feedForwardNetworkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 
-PongReinforcementEnvironment environment(options, true, 1);
+PongReinforcementEnvironment environment(feedForwardNetworkTopologyOptions, true, 1);
 ```
 
 The environment also gets the description of the neural network.
@@ -145,16 +150,12 @@ The learning rule is relatively simple:
 
 ```cpp
 DQNLearningRuleOptions options;
-options.minibatchSize = getIntegerPreference(PREFERENCE_MINIBATCH_SIZE);
-options.targetNetworkUpdateFrequency = getIntegerPreference(PREFERENCE_TARGET_NETWORK_UPDATE_FREQUENCY);
-options.replayMemorySize = getIntegerPreference(PREFERENCE_REPLAY_MEMORY_SIZE);
-options.finalExplorationFrame = getIntegerPreference(PREFERENCE_FINAL_EXPLORATION_FRAME);
-options.replayStartSize = getIntegerPreference(PREFERENCE_REPLAY_START_SIZE);
-options.gradientDescentOptions.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
-options.rmsPropOptions.learningRate = getDoublePreference(PREFERENCE_LEARNING_RATE);
-options.rmsPropOptions.deltaWeightsMomentum = getDoublePreference(PREFERENCE_MOMENTUM);
-options.discountFactor = getDoublePreference(PREFERENCE_DISCOUNT_FACTOR);
-options.replaceStoredTransitions = getBooleanPreference(PREFERENCE_REPLACE_STORED_TRANSITIONS);
+options.rmsPropOptions.learningRate = 0.0005;
+options.finalExplorationFrame = 500000;
+options.rmsPropOptions.deltaWeightsMomentum = 0;
+options.environment = &environment;
+options.logger = new ConsoleLogger(LL_LOW);
+options.maxIterationsPerTry = 85;
 
 DQNLearningRule learningRule(options);
 ```
@@ -182,19 +183,19 @@ Of course you could also just click the gif below and try it online. :stuck_out_
 The whole code:
 
 ```cpp
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "Function/ActivationFunction/RectifierFunction.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
-#include "Logging/ConsoleLogger.hpp"
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
-#include "Learning/Reinforcement/DQNLearningRule.hpp"
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
+#include <LightBulb/Function/ActivationFunction/RectifierFunction.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Logging/ConsoleLogger.hpp>
+#include <LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp>
+#include <LightBulb/Learning/Reinforcement/DQNLearningRule.hpp>
 
 #include "PongGame.hpp"
+#include <LightBulb/Logging/AbstractLogger.hpp>
 
 using namespace LightBulb;
 
