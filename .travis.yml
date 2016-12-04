@@ -31,4 +31,5 @@ script:
   - cd build
   - cmake .. -DEnableLightBulbApp=$APP -DEnableLightBulbExample=$EXAMPLE -DEnableUnitTests=$TESTS -DBUILD_SHARED_LIBS=$SHARED
   - make
+  - sudo make install
   - cd ..
