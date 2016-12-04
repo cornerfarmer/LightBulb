@@ -1,4 +1,4 @@
-# Pong evolution
+# Pong reinforcement
 
 *The example is integrated into LightBulbExample and its code can be found in [PongReinforcement](https://github.com/domin1101/LightBulb/tree/master/example/LightBulbExample/Examples/PongReinforcement).*
 
@@ -179,3 +179,141 @@ Of course you could also just click the gif below and try it online. :stuck_out_
 </p>
 </a>
 
+The whole code:
+
+```cpp
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "Function/ActivationFunction/RectifierFunction.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "Logging/ConsoleLogger.hpp"
+#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "Learning/Reinforcement/DQNLearningRule.hpp"
+
+#include "PongGame.hpp"
+
+using namespace LightBulb;
+
+
+class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvironment
+{
+private:
+	int time;
+	PongGame game;
+protected:
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<bool>& output) override;
+public:
+	PongReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
+	double doSimulationStep() override;
+	void executeCompareAI();
+	void initializeForLearning() override;
+	bool isTerminalState() override;
+	void setRandomGenerator(AbstractRandomGenerator& randomGenerator_);
+};
+
+PongReinforcementEnvironment::PongReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
+	: AbstractReinforcementEnvironment(options_, epsilonGreedly, epsilon)
+{
+}
+
+void PongReinforcementEnvironment::getNNInput(std::vector<double>& input)
+{
+	input.resize(6);
+	input[0] = game.getState().ballPosX / game.getProperties().width;
+	input[1] = game.getState().ballPosY / game.getProperties().height;
+	input[2] = game.getState().ballVelX / game.getProperties().maxBallSpeed;
+	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
+	input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+}
+
+void PongReinforcementEnvironment::interpretNNOutput(std::vector<bool>& output)
+{
+	if (output[0])
+		game.movePaddle(1);
+	else if (output[1])
+		game.movePaddle(-1);
+}
+
+void PongReinforcementEnvironment::initializeForLearning()
+{
+	AbstractReinforcementEnvironment::initializeForLearning();
+	time = -1;
+}
+
+double PongReinforcementEnvironment::doSimulationStep()
+{
+	if (game.whoHasWon() != 0 || time >= game.getProperties().maxTime || time == -1)
+	{
+		time = 0;
+		game.reset();
+	}
+
+	game.setPlayer(1);
+	doNNCalculation();
+	game.setPlayer(-1);
+	executeCompareAI();
+	game.advanceBall(1);
+
+	time++;
+	if (time >= game.getProperties().maxTime)
+		return 0;
+	else
+		return game.whoHasWon();
+}
+
+void PongReinforcementEnvironment::executeCompareAI()
+{
+	if (game.getState().ballPosY > game.getState().paddle2Pos + game.getProperties().paddleHeight / 2)
+		game.movePaddle(1);
+	else
+		game.movePaddle(-1);
+}
+
+bool PongReinforcementEnvironment::isTerminalState()
+{
+	return game.whoHasWon() != 0 || time >= game.getProperties().maxTime;
+}
+
+void PongReinforcementEnvironment::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	game.setRandomGenerator(randomGenerator_);
+}
+
+int main()
+{
+	FeedForwardNetworkTopologyOptions feedForwardNetworkTopologyOptions;
+	feedForwardNetworkTopologyOptions.enableShortcuts = false;
+	feedForwardNetworkTopologyOptions.useBiasNeuron = true;
+
+	feedForwardNetworkTopologyOptions.neuronsPerLayerCount.push_back(6);
+	feedForwardNetworkTopologyOptions.neuronsPerLayerCount.push_back(256);
+	feedForwardNetworkTopologyOptions.neuronsPerLayerCount.push_back(3);
+
+	feedForwardNetworkTopologyOptions.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
+
+	PongReinforcementEnvironment environment(feedForwardNetworkTopologyOptions, true, 1);
+
+	DQNLearningRuleOptions options;
+	options.rmsPropOptions.learningRate = 0.0005;
+	options.finalExplorationFrame = 500000;
+	options.rmsPropOptions.deltaWeightsMomentum = 0;
+	options.environment = &environment;
+	options.logger = new ConsoleLogger(LL_LOW);
+	options.maxIterationsPerTry = 85;
+
+	DQNLearningRule learningRule(options);
+
+	learningRule.start();
+
+	getchar();
+
+	return 0;
+}
+```

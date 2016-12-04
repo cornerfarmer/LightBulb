@@ -33,6 +33,7 @@
 #include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 #include <Function/ActivationFunction/FermiFunction.hpp>
 #include <Function/ActivationFunction/HyperbolicTangentFunction.hpp>
+#include "Logging/ConsoleLogger.hpp"
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"
@@ -54,7 +55,7 @@ AbstractLearningRule* PongEvolutionExample::createLearningRate()
 {
 
 	EvolutionLearningRuleOptions options;
-
+	
 	options.creationCommands.push_back(new ConstantCreationCommand(getIntegerPreference(PREFERENCE_CREATE_UP_TO)));
 	options.exitConditions.push_back(new PerfectIndividualFoundCondition(20));
 	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));

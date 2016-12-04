@@ -36,7 +36,7 @@ A trainer is necessary for all kind of supervised learning stuff. It tells the l
 In our case that's just all four xor combinations:
 
 ```cpp
-std::unique_ptr<Teacher> teacher(new Teacher());
+Teacher teacher;
 for (int i = 0; i < 2; i++)
 {
     for (int l = 0; l < 2; l++)
@@ -47,7 +47,7 @@ for (int i = 0; i < 2; i++)
         teachingPattern[0] = i;
         teachingPattern[1] = l;
         (*teachingInput).set(0, (i != l));
-        teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+        teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
     }
 }
 ```
@@ -82,6 +82,7 @@ GradientDescentLearningRuleOptions options;
 options.gradientCalculation = backpropagation;
 options.gradientDescentAlgorithm = simpleGradientDescent;
 options.neuralNetwork = &network;
+options.teacher = &teacher;
 GradientDescentLearningRule learningRule(options);
 ```
 
@@ -142,4 +143,85 @@ options.gradientDescentAlgorithm = resilientLearningRate;
 
 Now you are ready for the [next Tutorial](function_evolution.md)!
 
-TODO: List the whole code
+The whole code:
+```cpp
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Teaching/Teacher.hpp"
+#include "Teaching/TeachingLessonBooleanInput.hpp"
+#include "Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
+#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "Learning/AbstractLearningResult.hpp"
+#include "Logging/ConsoleLogger.hpp"
+
+#include <iostream>
+
+using namespace LightBulb;
+
+int main2()
+{
+	FeedForwardNetworkTopologyOptions networkTopologyOptions;
+	networkTopologyOptions.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
+	networkTopologyOptions.neuronsPerLayerCount = std::vector<unsigned int>(3);
+	networkTopologyOptions.neuronsPerLayerCount[0] = 2;
+	networkTopologyOptions.neuronsPerLayerCount[1] = 3;
+	networkTopologyOptions.neuronsPerLayerCount[2] = 1;
+
+	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(networkTopologyOptions);
+
+	NeuralNetwork network(networkTopology);
+
+	Teacher teacher;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int l = 0; l < 2; l++)
+		{
+			std::vector<double> teachingPattern(2);
+			TeachingInput<bool>* teachingInput = new TeachingInput<bool>(1);
+
+			teachingPattern[0] = i;
+			teachingPattern[1] = l;
+			(*teachingInput).set(0, (i != l));
+			teacher.addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
+		}
+
+	}
+
+	Backpropagation* backpropagation = new Backpropagation();
+	SimpleGradientDescentOptions simpleGradientDescentOptions;
+	SimpleGradientDescent* simpleGradientDescent = new SimpleGradientDescent(simpleGradientDescentOptions);
+
+	GradientDescentLearningRuleOptions options;
+	options.gradientCalculation = backpropagation;
+	options.gradientDescentAlgorithm = simpleGradientDescent;
+	options.neuralNetwork = &network;
+	options.teacher = &teacher;
+	options.logger = new ConsoleLogger(LL_LOW);
+	GradientDescentLearningRule learningRule(options);
+
+
+	std::unique_ptr<AbstractLearningResult> result(learningRule.start());
+
+	if (result->succeeded)
+		std::cout << "Learning has been successful" << std::endl;
+
+	std::vector<double> input(2);
+	input[0] = 0;
+	input[1] = 1;
+	std::vector<double> output = network.calculate(input);
+	std::cout << "0 and 1 => " << std::to_string(output[0]) << std::endl;
+
+	input[0] = 1;
+	output = network.calculate(input);
+	std::cout << "1 and 1 => " << std::to_string(output[0]) << std::endl;
+
+	getchar();
+
+	return 0;
+}
+```

@@ -75,7 +75,6 @@ PongDQNExample::PongDQNExample()
 	options.rmsPropOptions.learningRate = 0.0005;
 	options.finalExplorationFrame = 500000;
 	options.rmsPropOptions.deltaWeightsMomentum = 0;
-	options.seed = 1234;
 	addPreferenceGroup(new DQNLearningRulePreferenceGroup(options));
 }
 

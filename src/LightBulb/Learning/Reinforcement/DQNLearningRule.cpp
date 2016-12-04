@@ -141,6 +141,8 @@ namespace LightBulb
 
 	void DQNLearningRule::doIteration()
 	{
+		log("Iteration " + std::to_string(learningState->iterations), LL_LOW);
+
 		currentTotalError = 0;
 		double totalReward = 0;
 		int totalEpisodes = 0;
@@ -197,8 +199,10 @@ namespace LightBulb
 		learningState->addData(DATA_SET_EPSILON, getOptions().environment->getEpsilon());
 		learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions().targetNetworkUpdateFrequency);
 
-		if (totalEpisodes > 0)
-			learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes);
+		if (totalEpisodes > 0) {
+			learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes); 
+			log("Reward: " + std::to_string(totalReward / totalEpisodes), LL_LOW);
+		}
 		else
 			currentTotalReward = -1;
 

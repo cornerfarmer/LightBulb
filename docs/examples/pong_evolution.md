@@ -44,7 +44,7 @@ PongAI::PongAI(Pong& pong_)
 We get the network input from the environment:
 
 ```cpp
-void Position::getNNInput(std::vector<double>& input)
+void PongAI::getNNInput(std::vector<double>& input)
 {
 	currentGame->getNNInput(input);
 }
@@ -198,11 +198,11 @@ The game method "whoHasWon" returns -1, 0, 1 depending on who has won or if it's
 First we have to create our two environments:
 
 ```cpp
-cs1 = new SharedSamplingCombiningStrategy(25);
-cs2 = new SharedSamplingCombiningStrategy(25);
+SharedSamplingCombiningStrategy* cs1 = new SharedSamplingCombiningStrategy(25);
+SharedSamplingCombiningStrategy* cs2 = new SharedSamplingCombiningStrategy(25);
 
-hof1 = new RandomHallOfFameAlgorithm(5);
-hof2 = new RandomHallOfFameAlgorithm(5);
+RandomHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(5);
+RandomHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(5);
 
 Pong environment(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
 Pong parasiteEnvironment(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
@@ -226,11 +226,11 @@ options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector()
 options.selectionCommands.push_back(new BestSelectionCommand(150));
 options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8));
 options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3));
-options.world = &environment;
+options.environment = &environment;
 
 EvolutionLearningRule learningRule1(options);
 
-options.world = &parasiteEnvironment;
+options.environment = &parasiteEnvironment;
 EvolutionLearningRule learningRule2(options);
 ```
 
@@ -266,3 +266,235 @@ Of course you could also just click the gif below and try it online. :stuck_out_
 </a>
 
 In the [next tutorial](pong_reinforcement.md) we also try to learn pong, but this time we use reinforcement learning.
+
+The whole code:
+```cpp
+#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
+#include "NeuronDescription/NeuronDescription.hpp"
+#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "Function/ActivationFunction/BinaryFunction.hpp"
+#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
+
+#include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
+#include <Function/RandomFunction/RankBasedRandomFunction.hpp>
+#include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
+#include <Learning/Evolution/ConstantRecombinationCommand.hpp>
+#include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <Learning/Evolution/ConstantMutationCommand.hpp>
+#include <Learning/Evolution/BestSelectionCommand.hpp>
+#include <Learning/Evolution/BestReuseSelector.hpp>
+#include <Learning/Evolution/ConstantReuseCommand.hpp>
+#include <Learning/Evolution/ConstantCreationCommand.hpp>
+#include <Learning/Evolution/EvolutionLearningRule.hpp>
+#include <Learning/Evolution/EvolutionLearningResult.hpp>
+#include <Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
+#include <Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
+#include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
+#include <Learning/Evolution/CoevolutionLearningRule.hpp>
+#include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
+#include <Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
+#include <Learning/Evolution/RandomSelector.hpp>
+#include "PongGame.hpp"
+#include <Logging/ConsoleLogger.hpp>
+
+using namespace LightBulb;
+
+class Pong;
+
+class PongAI : public LightBulb::AbstractDefaultIndividual
+{
+protected:
+	Pong* currentGame;
+	void getNNInput(std::vector<double>& input) override;
+	void interpretNNOutput(std::vector<double>& output) override;
+public:
+	PongAI(Pong& pong_);
+	void setPong(Pong& pong);
+};
+
+class Pong : public LightBulb::AbstractCoevolutionEnvironment
+{
+private:
+	PongGame game;
+protected:
+	LightBulb::AbstractIndividual* createNewIndividual() override;
+	void resetEnvironment() override;
+	int simulateGame(PongAI& ai1, PongAI& ai2);
+	void setRandomGenerator(AbstractRandomGenerator& randomGenerator_);
+	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
+public:
+	Pong(bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
+	void getNNInput(std::vector<double>& sight);
+	int getRoundCount() const override;
+	PongGame& getGame();
+};
+
+PongGame& Pong::getGame()
+{
+	return game;
+}
+
+
+PongAI::PongAI(Pong& pong_)
+	: AbstractDefaultIndividual(pong_)
+{
+	currentGame = &pong_;
+	FeedForwardNetworkTopologyOptions options;
+	options.enableShortcuts = true;
+	options.neuronsPerLayerCount.push_back(6);
+	options.neuronsPerLayerCount.push_back(10);
+	options.neuronsPerLayerCount.push_back(2);
+	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
+	buildNeuralNetwork(options);
+}
+
+void PongAI::setPong(Pong& pong)
+{
+	currentGame = &pong;
+}
+
+void PongAI::getNNInput(std::vector<double>& input)
+{
+	currentGame->getNNInput(input);
+}
+
+void PongAI::interpretNNOutput(std::vector<double>& output)
+{
+	if (output[0] > 0.5)
+		currentGame->getGame().movePaddle(1);
+	else if (output[1] > 0.5)
+		currentGame->getGame().movePaddle(-1);
+}
+
+
+Pong::Pong(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+	: AbstractCoevolutionEnvironment(isParasiteEnvironment_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
+{
+
+}
+
+AbstractIndividual* Pong::createNewIndividual()
+{
+	return new PongAI(*this);
+}
+
+void Pong::resetEnvironment()
+{
+	game.reset();
+}
+
+void Pong::getNNInput(std::vector<double>& input)
+{
+	input.resize(6);
+	input[0] = game.getPlayer() * game.getState().ballPosX / game.getProperties().width;
+	input[1] = game.getState().ballPosY / game.getProperties().height;
+	input[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
+	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
+	if (game.getPlayer() == 1)
+	{
+		input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	}
+	else
+	{
+		input[5] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input[4] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	}
+}
+
+int Pong::getRoundCount() const
+{
+	return 1;
+}
+
+int Pong::doCompare(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)
+{
+	return simulateGame(static_cast<PongAI&>(individual1), static_cast<PongAI&>(individual2));
+}
+
+int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
+{
+	ai2.resetNN();
+	ai1.resetNN();
+
+	ai1.setPong(*this);
+	ai2.setPong(*this);
+
+	resetEnvironment();
+
+	double time = 0;
+	while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
+	{
+		game.setPlayer(1);
+		ai1.doNNCalculation();
+		game.setPlayer(-1);
+		ai2.doNNCalculation();
+		game.advanceBall(1);
+
+		time++;
+	}
+
+	if (game.whoHasWon() == 0) {
+		if (parasiteEnvironment)
+			return -1;
+		else
+			return 1;
+	}
+	else
+		return game.whoHasWon();
+}
+
+
+void Pong::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
+{
+	AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
+	game.setRandomGenerator(randomGenerator_);
+}
+
+
+int main()
+{
+	SharedSamplingCombiningStrategy* cs1 = new SharedSamplingCombiningStrategy(25);
+	SharedSamplingCombiningStrategy* cs2 = new SharedSamplingCombiningStrategy(25);
+
+	RandomHallOfFameAlgorithm* hof1 = new RandomHallOfFameAlgorithm(5);
+	RandomHallOfFameAlgorithm* hof2 = new RandomHallOfFameAlgorithm(5);
+
+	Pong environment(false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	Pong parasiteEnvironment(true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+
+	cs1->setSecondEnvironment(parasiteEnvironment);
+	cs2->setSecondEnvironment(environment);
+
+	EvolutionLearningRuleOptions options;
+	options.creationCommands.push_back(new ConstantCreationCommand(250));
+	options.exitConditions.push_back(new PerfectIndividualFoundCondition(20));
+	options.reuseCommands.push_back(new ConstantReuseCommand(new BestReuseSelector(), 16));
+	options.selectionCommands.push_back(new BestSelectionCommand(150));
+	options.mutationsCommands.push_back(new ConstantMutationCommand(new MutationAlgorithm(1.6), new RandomSelector(new RankBasedRandomFunction()), 1.8));
+	options.recombinationCommands.push_back(new ConstantRecombinationCommand(new RecombinationAlgorithm(), new RandomSelector(new RankBasedRandomFunction()), 0.3));
+	options.environment = &environment;
+
+	EvolutionLearningRule learningRule1(options);
+
+	options.environment = &parasiteEnvironment;
+	EvolutionLearningRule learningRule2(options);
+
+	CoevolutionLearningRuleOptions coevolutionLearningRuleOptions;
+	coevolutionLearningRuleOptions.learningRule1 = &learningRule1;
+	coevolutionLearningRuleOptions.learningRule2 = &learningRule2;
+	coevolutionLearningRuleOptions.logger = new ConsoleLogger(LL_LOW);
+
+	CoevolutionLearningRule learningRule(coevolutionLearningRuleOptions);
+
+	std::unique_ptr<EvolutionLearningResult> result(static_cast<EvolutionLearningResult*>(learningRule.start()));
+	PongAI* bestAI = static_cast<PongAI*>(result->bestIndividuals[0].get());
+
+	getchar();
+
+	return 0;
+}
+```
