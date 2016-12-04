@@ -13,7 +13,7 @@ elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 endif()
 
-option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
+option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" OFF)
 option(EnableLightBulbApp "EnableLightBulbApp" ON)
 option(EnableLightBulbExample "EnableLightBulbExample" ON)
 option(EnableUnitTests "EnableUnitTests" OFF)
