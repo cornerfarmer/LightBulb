@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include <NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
 #include "Mocks/MockNetworkTopology.hpp"
 #include "Mocks/MockActivationOrder.hpp"
 

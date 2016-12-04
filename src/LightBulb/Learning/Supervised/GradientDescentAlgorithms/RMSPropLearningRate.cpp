@@ -1,7 +1,7 @@
 // Includes
-#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

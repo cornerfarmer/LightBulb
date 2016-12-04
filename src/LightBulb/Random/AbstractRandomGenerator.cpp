@@ -1,5 +1,5 @@
 // Includes
-#include "Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 #include <chrono>
 
 LightBulb::AbstractRandomGenerator::AbstractRandomGenerator(int seed_)

@@ -4,7 +4,7 @@
 #define _XORSHFGENERATORIO_H_
 
 // Includes
-#include "Random/XorShfGenerator.hpp"
+#include "LightBulb/Random/XorShfGenerator.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -46,7 +46,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::XorShfGenerator)
 

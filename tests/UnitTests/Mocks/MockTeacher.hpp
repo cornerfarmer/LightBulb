@@ -4,9 +4,9 @@
 #define _MOCKTEACHER_H_
 
 #include "gmock/gmock.h"
-#include <Teaching/AbstractTeacher.hpp>
-#include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include <LightBulb/Teaching/AbstractTeacher.hpp>
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 class MockTeacher : public LightBulb::AbstractTeacher
 {

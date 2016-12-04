@@ -5,7 +5,7 @@
 #define _ABSTRACTRANDOMGENERATORUSER_H_
 
 // Include
-#include "AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 // Library Includes
 

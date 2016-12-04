@@ -6,8 +6,8 @@
 // Library Includes
 
 // Include
-#include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

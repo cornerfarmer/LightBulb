@@ -4,9 +4,9 @@
 #define _ABSTRACTCOEVOLUTIONEVOLUTIONTRAININGPLAN_H_
 
 // Includes
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include <LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 // Library includes
 
@@ -62,6 +62,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractCoevolutionTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractCoevolutionTrainingPlanIO.hpp"
 
 #endif

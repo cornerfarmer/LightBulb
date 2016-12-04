@@ -5,7 +5,7 @@
 
 // Libary includes
 #include "Examples/PongReinforcement/PongReinforcementEnvironment.hpp"
-#include "IO/ConstructExisting.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -37,7 +37,7 @@ namespace cereal
 	};
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(PongReinforcementEnvironment);
 

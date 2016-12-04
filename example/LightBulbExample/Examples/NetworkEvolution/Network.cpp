@@ -1,12 +1,12 @@
 // Includes
 #include "Examples/NetworkEvolution/Network.hpp"
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include <NeuronDescription/SameNeuronDescriptionFactory.hpp>
-#include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <Function/ActivationFunction/IdentityFunction.hpp>
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuronDescription/NeuronDescription.hpp>
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include <LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Function/ActivationFunction/IdentityFunction.hpp>
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
 
 using namespace LightBulb;
 

@@ -4,7 +4,7 @@
 #define _MOCKTEACHINGLESSON_H_
 
 #include "gmock/gmock.h"
-#include <Teaching/AbstractTeachingLesson.hpp>
+#include <LightBulb/Teaching/AbstractTeachingLesson.hpp>
 
 class MockTeachingLesson : public LightBulb::AbstractTeachingLesson
 {

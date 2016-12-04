@@ -1,12 +1,12 @@
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "Teaching/Teacher.hpp"
-#include "Teaching/AbstractTeachingLesson.hpp"
-#include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "Random/StandardRandomGenerator.hpp"
-#include "Learning/AbstractLearningResult.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/Random/StandardRandomGenerator.hpp"
+#include "LightBulb/Learning/AbstractLearningResult.hpp"
 // Library includes
 #include <iomanip>
 #include <vector>

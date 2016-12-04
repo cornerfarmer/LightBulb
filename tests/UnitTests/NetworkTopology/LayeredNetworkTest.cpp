@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "Function/ActivationFunction/FermiFunction.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 using namespace LightBulb;
 

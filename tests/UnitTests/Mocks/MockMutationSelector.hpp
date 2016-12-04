@@ -4,8 +4,8 @@
 #define _MOCKMUTATIONSELECTOR_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractMutationSelector.hpp>
-#include <Learning/Evolution/AbstractIndividual.hpp>
+#include <LightBulb/Learning/Evolution/AbstractMutationSelector.hpp>
+#include <LightBulb/Learning/Evolution/AbstractIndividual.hpp>
 
 
 class MockMutationSelector : public LightBulb::AbstractMutationSelector

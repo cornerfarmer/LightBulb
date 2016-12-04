@@ -6,9 +6,9 @@
 // Library Includes
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 namespace LightBulb
 {
@@ -91,7 +91,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractGradientDescentAlgorithmIO.hpp"
+#include "LightBulb/IO/AbstractGradientDescentAlgorithmIO.hpp"
 
 #endif
 

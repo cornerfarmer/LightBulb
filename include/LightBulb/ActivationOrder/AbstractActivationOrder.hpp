@@ -4,7 +4,7 @@
 #define _ABSTRACTACTIVATIONORDER_H_
 
 // Includes
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <map>

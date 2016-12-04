@@ -4,7 +4,7 @@
 #define _ABSTRACTSINGLENNTRAININGPLAN_H_
 
 // Includes
-#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
 
 // Library includes
 
@@ -56,6 +56,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractSingleNNTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
 
 #endif

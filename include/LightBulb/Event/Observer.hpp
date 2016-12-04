@@ -4,7 +4,7 @@
 #define _OBSERVER_H_
 
 // Includes
-#include "AbstractObserver.hpp"
+#include "LightBulb/Event/AbstractObserver.hpp"
 
 //Library includes
 

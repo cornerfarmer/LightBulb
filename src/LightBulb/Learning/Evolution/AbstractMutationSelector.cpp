@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/AbstractMutationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
 
 namespace LightBulb
 {

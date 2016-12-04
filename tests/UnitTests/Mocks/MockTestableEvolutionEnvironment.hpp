@@ -4,7 +4,7 @@
 #define _MOCKTESTABLEEVOLUTIONENVIRONMENT_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 class MockTestableEvolutionEnvironment : public LightBulb::AbstractEvolutionEnvironment
 {

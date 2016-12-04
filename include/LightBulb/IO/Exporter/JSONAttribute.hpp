@@ -4,7 +4,7 @@
 #define _JSONATTRIBUTE_H_
 
 // Includes
-#include "IO/Exporter/AbstractJSONElement.hpp"
+#include "LightBulb/IO/Exporter/AbstractJSONElement.hpp"
 
 // Library includes
 #include <string>

@@ -9,8 +9,8 @@
 #include <memory>
 
 // Includes
-#include "AbstractReuseSelector.hpp"
-#include "AbstractCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractReuseSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCommand.hpp"
 
 namespace LightBulb
 {

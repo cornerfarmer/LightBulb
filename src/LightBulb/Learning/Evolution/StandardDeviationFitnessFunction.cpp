@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/StandardDeviationFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/StandardDeviationFitnessFunction.hpp"
 // Library includes
 #include <stdexcept>
 #include <math.h>

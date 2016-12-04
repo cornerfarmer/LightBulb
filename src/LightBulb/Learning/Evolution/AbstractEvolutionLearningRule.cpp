@@ -1,9 +1,9 @@
 // Includes
-#include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "Teaching/Teacher.hpp"
-#include "Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 // Library includes
 #include <iomanip>
 #include <vector>

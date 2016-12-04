@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/PerfectIndividualFoundCondition.hpp>
+#include <LightBulb/Learning/Evolution/PerfectIndividualFoundCondition.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>

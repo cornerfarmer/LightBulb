@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include <Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
+#include <LightBulb/Learning/Evolution/SharedSamplingCombiningStrategy.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>

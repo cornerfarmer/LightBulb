@@ -4,7 +4,7 @@
 #define _ABSTRACTREINFORCEMENTLEARNINGRULEINGRULE_H_
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
 
 // Library Includes
 
@@ -66,6 +66,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractReinforcementLearningRuleIO.hpp"
+#include "LightBulb/IO/AbstractReinforcementLearningRuleIO.hpp"
 
 #endif

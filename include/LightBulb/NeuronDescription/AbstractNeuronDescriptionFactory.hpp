@@ -4,7 +4,7 @@
 #define _ABSTRACTNEURONDESCRIPTIONFACTORY_H_
 
 // Includes
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 #include <utility>
 
 namespace LightBulb

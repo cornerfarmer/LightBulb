@@ -4,8 +4,8 @@
 #define _ABSTRACTMUTATIONSELECTOR_H_
 
 // Includes
-#include "Random/AbstractRandomGeneratorUser.hpp"
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <vector>

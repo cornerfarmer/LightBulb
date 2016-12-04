@@ -4,9 +4,9 @@
 #define _ABSTRACTMUTATIONALGORITHM_H_
 
 // Includes
-#include "Random/AbstractRandomGeneratorUser.hpp"
-#include "Tools/AbstractCloneable.hpp"
-#include "Random/ZigguratGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 
 // Library Includes
 #include <memory>

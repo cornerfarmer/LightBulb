@@ -1,8 +1,8 @@
 #ifndef _SUPERVISEDLEARNINGRESULT_H_
 #define _SUPERVISEDLEARNINGRESULT_H_
 
-#include "Learning/AbstractLearningResult.hpp"
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
+#include "LightBulb/Learning/AbstractLearningResult.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 namespace LightBulb
 {

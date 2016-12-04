@@ -4,9 +4,9 @@
 #define _ABSTRACTCOMMAND_H_
 
 // Include
-#include "Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
-#include "Logging/AbstractLoggable.hpp"
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
+#include "LightBulb/Logging/AbstractLoggable.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 // Library Includes
 #include <vector>

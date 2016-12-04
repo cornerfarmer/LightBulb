@@ -4,7 +4,7 @@
 #define _MOCKEXITCONDITION_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractExitCondition.hpp>
+#include <LightBulb/Learning/Evolution/AbstractExitCondition.hpp>
 
 class MockExitCondition : public LightBulb::AbstractExitCondition
 {

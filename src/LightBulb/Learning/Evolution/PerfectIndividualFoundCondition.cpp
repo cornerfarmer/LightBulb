@@ -1,11 +1,11 @@
 // Includes
-#include "Learning/Evolution/PerfectIndividualFoundCondition.hpp"
-#include "Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/PerfectIndividualFoundCondition.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 // Library includes
 #include <iostream>
 #include <iomanip>
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

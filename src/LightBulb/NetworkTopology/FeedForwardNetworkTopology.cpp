@@ -1,13 +1,13 @@
 // Includes
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
-#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
-#include "Function/InputFunction/AbstractInputFunction.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
 // Library includes
 #include <exception>
 #include <math.h>
-#include "Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {

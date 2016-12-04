@@ -4,9 +4,9 @@
 #define _MOCKNETWORKTOPOLOGY_H_
 
 #include "gmock/gmock.h"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Random/AbstractRandomGenerator.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 class MockNetworkTopology : public LightBulb::AbstractNetworkTopology
 {

@@ -4,13 +4,13 @@
 #define _FEEDFORWARDNETWORKTOPOLOGY_H_
 
 // Libary includes
-#include "Eigen/Dense"
+#include <Eigen/Dense>
 #include <vector>
 #include <memory>
 
 // Includes
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {
@@ -163,5 +163,5 @@ namespace LightBulb
 	};
 }
 
-#include "IO/FeedForwardNetworkTopologyIO.hpp"
+#include "LightBulb/IO/FeedForwardNetworkTopologyIO.hpp"
 #endif

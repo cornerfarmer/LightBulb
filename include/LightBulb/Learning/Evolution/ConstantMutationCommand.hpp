@@ -6,7 +6,7 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractMutationCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationCommand.hpp"
 
 namespace LightBulb
 {

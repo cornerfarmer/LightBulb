@@ -4,7 +4,7 @@
 #define _ZIGGURATGENERATORIO_H_
 
 // Includes
-#include "Random/ZigguratGenerator.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -48,7 +48,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::ZigguratGenerator)
 

@@ -1,6 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantCreationCommandPreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantCreationCommandPreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 
 
 namespace LightBulb

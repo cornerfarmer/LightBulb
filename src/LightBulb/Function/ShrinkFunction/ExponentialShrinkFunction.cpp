@@ -1,5 +1,5 @@
 // Includes
-#include "Function/ShrinkFunction/ExponentialShrinkFunction.hpp"
+#include "LightBulb/Function/ShrinkFunction/ExponentialShrinkFunction.hpp"
 
 namespace LightBulb
 {

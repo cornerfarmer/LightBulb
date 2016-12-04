@@ -4,8 +4,8 @@
 #define _COEVOLUTIONLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Evolution/CoevolutionLearningRule.hpp"
-#include "IOStorage.hpp"
+#include "LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -66,7 +66,7 @@ namespace cereal
 	};
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::CoevolutionLearningRule);
 

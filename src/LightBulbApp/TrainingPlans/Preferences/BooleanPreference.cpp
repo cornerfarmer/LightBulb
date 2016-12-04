@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 
 namespace LightBulb
 {

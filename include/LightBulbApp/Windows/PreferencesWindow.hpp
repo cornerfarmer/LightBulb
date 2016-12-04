@@ -4,7 +4,7 @@
 #define _PREFERENCESWINDOW_H_
 
 // Includes
-#include "Windows/AbstractSubAppWindow.hpp"
+#include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
 
 // Library include
 #include <map>

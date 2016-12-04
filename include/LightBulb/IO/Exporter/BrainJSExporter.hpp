@@ -4,7 +4,7 @@
 #define _BRAINJSEXPORTER_H_
 
 // Includes
-#include "IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {

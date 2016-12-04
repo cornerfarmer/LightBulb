@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/ExponentialFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/ExponentialFitnessFunction.hpp"
 // Library includes
 #include <stdexcept>
 #include <math.h>

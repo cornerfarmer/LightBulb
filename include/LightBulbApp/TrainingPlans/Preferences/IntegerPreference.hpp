@@ -58,6 +58,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/IntegerPreferenceIO.hpp"
+#include "LightBulbApp/IO/IntegerPreferenceIO.hpp"
 
 #endif

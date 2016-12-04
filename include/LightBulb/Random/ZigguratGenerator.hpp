@@ -4,8 +4,8 @@
 #define _ZIGGURATGENERATOR_H_
 
 // Includes
-#include "Lib/ziggurat.hpp"
-#include "AbstractRandomGenerator.hpp"
+#include "LightBulb/Lib/ziggurat.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {
@@ -28,6 +28,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/ZigguratGeneratorIO.hpp"
+#include "LightBulb/IO/ZigguratGeneratorIO.hpp"
 
 #endif

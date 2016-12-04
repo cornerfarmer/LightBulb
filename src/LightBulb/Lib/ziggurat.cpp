@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#include "Lib/ziggurat.hpp"
+#include "LightBulb/Lib/ziggurat.hpp"
 
 namespace LightBulb
 {

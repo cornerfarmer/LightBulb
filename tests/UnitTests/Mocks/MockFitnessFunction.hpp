@@ -4,7 +4,7 @@
 #define _MOCKFITNESSFUNCTION_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractFitnessFunction.hpp>
+#include <LightBulb/Learning/Evolution/AbstractFitnessFunction.hpp>
 
 class MockFitnessFunction : public LightBulb::AbstractFitnessFunction
 {

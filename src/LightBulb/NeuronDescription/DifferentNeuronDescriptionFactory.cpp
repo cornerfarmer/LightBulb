@@ -1,7 +1,7 @@
 // Includes
-#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
-#include "Function/InputFunction/AbstractInputFunction.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 // Library includes
 
 namespace LightBulb

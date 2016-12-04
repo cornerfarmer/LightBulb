@@ -4,7 +4,7 @@
 #define _DIFFERENTNEURONDESCRIPTIONFACTORYIO_H_
 
 // Libary includes
-#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -51,7 +51,7 @@ namespace cereal
 	};
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::DifferentNeuronDescriptionFactory);
 

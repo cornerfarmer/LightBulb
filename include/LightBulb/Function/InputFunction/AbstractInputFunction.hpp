@@ -4,9 +4,9 @@
 #define _ABSTRACTINPUTFUNCTION_H_
 
 // Includes
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 #include <memory>
-#include "Eigen/Dense"
+#include <Eigen/Dense>
 #include <vector>
 
 // Forward declarations

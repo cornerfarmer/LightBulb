@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include <Learning/Evolution/RateDifferenceCondition.hpp>
+#include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
-#include <Learning/Evolution/FitnessCondition.hpp>
+#include <LightBulb/Learning/Evolution/FitnessCondition.hpp>
 #include "Mocks/MockEvolutionLearningRule.hpp"
 
 using namespace LightBulb;

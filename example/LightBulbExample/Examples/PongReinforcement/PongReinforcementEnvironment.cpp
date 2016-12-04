@@ -1,6 +1,6 @@
 // Includes
 #include "Examples/PongReinforcement/PongReinforcementEnvironment.hpp"
-#include <Learning/LearningState.hpp>
+#include <LightBulb/Learning/LearningState.hpp>
 #include <thread>
 //Library includes
 

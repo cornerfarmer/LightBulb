@@ -4,7 +4,7 @@
 #define _ABSTRACTCOMBININGSTRATEGY_H_
 
 // Include
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 // Library Includes
 #include <vector>

@@ -1,7 +1,7 @@
 // Includes
-#include "Repositories/NeuralNetworkRepository.hpp"
+#include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 #include <fstream>
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
 

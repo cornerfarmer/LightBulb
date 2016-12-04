@@ -1,20 +1,20 @@
 // Includes
-#include "Windows/TrainingController.hpp"
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuralNetwork/NeuralNetwork.hpp>
-#include "Windows/TrainingWindow.hpp"
-#include <Repositories/NeuralNetworkRepository.hpp>
-#include <Repositories/TrainingPlanRepository.hpp>
+#include "LightBulbApp/Windows/TrainingController.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulbApp/Windows/TrainingWindow.hpp"
+#include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include <fstream>
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include "Windows/PreferencesController.hpp"
-#include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
-#include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
-#include <TrainingPlans/AbstractReinforcementTrainingPlan.hpp>
-#include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include "IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulbApp/Windows/PreferencesController.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {

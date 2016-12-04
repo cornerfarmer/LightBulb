@@ -1,6 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 #include <thread>
 
 namespace LightBulb

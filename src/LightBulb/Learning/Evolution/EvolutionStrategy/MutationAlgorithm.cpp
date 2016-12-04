@@ -1,8 +1,8 @@
 // Includes
-#include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <math.h>
 
 namespace LightBulb

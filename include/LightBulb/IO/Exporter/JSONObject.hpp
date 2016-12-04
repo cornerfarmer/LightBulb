@@ -4,8 +4,8 @@
 #define _JSONOBJECT_H_
 
 // Includes
-#include "IO/Exporter/AbstractJSONElement.hpp"
-#include "IO/Exporter/JSONAttribute.hpp"
+#include "LightBulb/IO/Exporter/AbstractJSONElement.hpp"
+#include "LightBulb/IO/Exporter/JSONAttribute.hpp"
 
 // Library includes
 #include <string>

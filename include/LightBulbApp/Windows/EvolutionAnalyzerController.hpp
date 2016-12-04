@@ -9,8 +9,8 @@
 // Includes
 #include "EvolutionAnalyzerWindow.hpp"
 #include "AbstractSubApp.hpp"
-#include <TrainingPlans/AbstractEvolutionTrainingPlan.hpp>
-#include <Learning/Evolution/AbstractIndividual.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {

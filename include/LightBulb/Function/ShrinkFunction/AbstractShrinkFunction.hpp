@@ -4,7 +4,7 @@
 #define _ABSTRACTSHRINKFUNCTION_H_
 
 // Includes
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 namespace LightBulb
 {

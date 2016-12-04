@@ -4,7 +4,7 @@
 #define _STORAGELOGGERIO_H_
 
 // Libary includes
-#include "Logging/StorageLogger.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
 
 #include <cereal/types/vector.hpp>
 #include <cereal/types/utility.hpp>

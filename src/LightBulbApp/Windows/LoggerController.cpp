@@ -1,7 +1,7 @@
 // Includes
-#include "Windows/LoggerController.hpp"
-#include "Windows/LoggerWindow.hpp"
-#include <Repositories/TrainingPlanRepository.hpp>
+#include "LightBulbApp/Windows/LoggerController.hpp"
+#include "LightBulbApp/Windows/LoggerWindow.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 
 namespace LightBulb
 {

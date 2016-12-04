@@ -8,7 +8,7 @@
 #include <Eigen/Dense>
 
 // Includes
-#include "IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {

@@ -7,12 +7,12 @@
 #include <vector>
 #include <map>
 #include <Eigen/Dense>
+#include <cereal/access.hpp>
 
 // Includes
-#include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
-#include <cereal/access.hpp>
-#include "GradientCalculation/AbstractGradientCalculation.hpp"
-#include "GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/Learning/Supervised/AbstractSupervisedLearningRule.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 
 namespace LightBulb
 {
@@ -114,7 +114,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/GradientDescentLearningRuleIO.hpp"
+#include "LightBulb/IO/GradientDescentLearningRuleIO.hpp"
 
 #endif
 

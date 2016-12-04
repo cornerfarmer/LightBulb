@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/TeachingEvolutionEnvironment.hpp>
-#include <Learning/Evolution/TeachedIndividual.hpp>
+#include <LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/TeachedIndividual.hpp>
 #include <Mocks/MockTeacher.hpp>
 #include <Mocks/MockNeuronDescriptionFactory.hpp>
 #include "Mocks/MockRandomGenerator.hpp"

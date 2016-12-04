@@ -6,7 +6,7 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractSelectionCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSelectionCommand.hpp"
 
 namespace LightBulb
 {

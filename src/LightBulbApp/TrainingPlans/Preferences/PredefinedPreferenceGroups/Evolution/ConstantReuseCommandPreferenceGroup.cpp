@@ -1,7 +1,7 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantReuseCommandPreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
-#include "Learning/Evolution/BestReuseSelector.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantReuseCommandPreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulb/Learning/Evolution/BestReuseSelector.hpp"
 
 
 namespace LightBulb

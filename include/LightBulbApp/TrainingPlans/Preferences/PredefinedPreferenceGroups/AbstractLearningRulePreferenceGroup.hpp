@@ -4,9 +4,9 @@
 #define _ABSTRACTLEARNINGRULEPREFERENCEGROUP_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "Learning/AbstractLearningRule.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

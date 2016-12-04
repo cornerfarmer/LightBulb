@@ -4,8 +4,8 @@
 #define _ABSTRACTEXITCONDITION_H_
 
 // Includes
-#include "Logging/AbstractLoggable.hpp"
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Logging/AbstractLoggable.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 // Library Includes
 #include <vector>

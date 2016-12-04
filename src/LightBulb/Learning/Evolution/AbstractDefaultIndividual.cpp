@@ -1,9 +1,9 @@
 // Includes
-#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 
 namespace LightBulb
 {

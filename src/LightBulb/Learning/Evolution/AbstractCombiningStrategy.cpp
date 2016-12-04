@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 namespace LightBulb
 {

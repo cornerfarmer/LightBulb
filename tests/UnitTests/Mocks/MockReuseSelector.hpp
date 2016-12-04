@@ -4,7 +4,7 @@
 #define _MOCKREUSESELECTOR_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractReuseSelector.hpp>
+#include <LightBulb/Learning/Evolution/AbstractReuseSelector.hpp>
 
 class MockReuseSelector : public LightBulb::AbstractReuseSelector
 {

@@ -4,8 +4,8 @@
 #define _MOCKNEURALNETWORK_H_
 
 #include "gmock/gmock.h"
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
-#include <ActivationOrder/AbstractActivationOrder.hpp>
+#include <LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp>
+#include <LightBulb/ActivationOrder/AbstractActivationOrder.hpp>
 
 class MockNeuralNetwork : public LightBulb::AbstractNeuralNetwork
 {

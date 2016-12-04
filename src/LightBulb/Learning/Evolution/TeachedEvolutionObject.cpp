@@ -1,10 +1,10 @@
 // Includes
-#include "Learning/Evolution/TeachedIndividual.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Teaching/Teacher.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
-#include "Learning/Evolution/TeachingEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/TeachedIndividual.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 
 namespace LightBulb
 {

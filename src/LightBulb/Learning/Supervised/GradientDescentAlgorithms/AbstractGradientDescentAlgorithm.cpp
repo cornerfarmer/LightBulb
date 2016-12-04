@@ -1,8 +1,8 @@
 // Includes
-#include "Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

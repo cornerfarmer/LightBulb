@@ -6,7 +6,7 @@
 // Library Includes
 
 // Includes
-#include "AbstractLogger.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 
 namespace LightBulb
 {

@@ -7,7 +7,7 @@
 #include <memory>
 
 // Includes
-#include "NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
+#include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
 
 namespace LightBulb
 {
@@ -51,6 +51,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/SameNeuronDescriptionFactoryIO.hpp"
+#include "LightBulb/IO/SameNeuronDescriptionFactoryIO.hpp"
 
 #endif

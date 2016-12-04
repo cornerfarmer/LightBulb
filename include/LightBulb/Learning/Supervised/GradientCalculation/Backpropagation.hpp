@@ -7,8 +7,8 @@
 #include <vector>
 
 // Includes
-#include "AbstractGradientCalculation.hpp"
-#include "../../../../LightBulbApp/TrainingPlans/Preferences/AbstractPreferenceElement.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/AbstractPreferenceElement.hpp"
 
 namespace LightBulb
 {
@@ -45,7 +45,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/BackpropagationIO.hpp"
+#include "LightBulb/IO/BackpropagationIO.hpp"
 
 #endif
 

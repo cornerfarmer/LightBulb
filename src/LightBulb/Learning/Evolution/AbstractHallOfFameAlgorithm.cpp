@@ -1,7 +1,7 @@
 // Includes
-#include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include <iostream>
 
 namespace LightBulb

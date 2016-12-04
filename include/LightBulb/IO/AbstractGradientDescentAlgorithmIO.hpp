@@ -4,7 +4,7 @@
 #define _ABSTRACTGRADIENTDESCENTALGORITHMIO_H_
 
 // Includes
-#include "Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

@@ -5,9 +5,9 @@
 
 // Library Includes
 #include <string>
-#include <Event/Observable.hpp>
 
 // Includes
+#include "LightBulb/Event/Observable.hpp"
 
 namespace LightBulb
 {

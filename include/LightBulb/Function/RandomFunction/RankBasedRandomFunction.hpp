@@ -7,7 +7,7 @@
 #include <math.h>
 
 // Includes
-#include "Function/RandomFunction/AbstractRandomFunction.hpp"
+#include "LightBulb/Function/RandomFunction/AbstractRandomFunction.hpp"
 
 namespace LightBulb
 {

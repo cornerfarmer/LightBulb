@@ -4,7 +4,7 @@
 #define _PONGGAMEWINDOW_H_
 
 // Includes
-#include <Windows/AbstractSubAppWindow.hpp>
+#include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations
 class PongGameController;

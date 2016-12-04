@@ -1,12 +1,12 @@
 // Includes
 #include "Examples/PongEvolution/PongGame.hpp"
 #include "Examples/PongEvolution/PongAI.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iomanip>
 #include <chrono>
 #include <thread>
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 PongGame::PongGame()
 {

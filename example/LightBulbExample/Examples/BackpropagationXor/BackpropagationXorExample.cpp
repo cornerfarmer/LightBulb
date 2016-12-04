@@ -1,17 +1,17 @@
 #include "BackpropagationXorExample.hpp"
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuralNetwork/NeuralNetwork.hpp>
-#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <Teaching/TeachingLessonBooleanInput.hpp>
-#include <Teaching/Teacher.hpp>
-#include <Function/ActivationFunction/FermiFunction.hpp>
-#include <NeuronDescription/NeuronDescription.hpp>
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/FeedForwardNetworkTopologyPreferenceGroup.hpp"
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Teaching/TeachingLessonBooleanInput.hpp>
+#include <LightBulb/Teaching/Teacher.hpp>
+#include <LightBulb/Function/ActivationFunction/FermiFunction.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/FeedForwardNetworkTopologyPreferenceGroup.hpp"
 
 using namespace LightBulb;
 

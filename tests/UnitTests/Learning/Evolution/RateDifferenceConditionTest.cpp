@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include <Learning/Evolution/RateDifferenceCondition.hpp>
+#include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include "Mocks/MockEvolutionLearningRule.hpp"
 

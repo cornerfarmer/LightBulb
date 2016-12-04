@@ -4,7 +4,7 @@
 #define _ABSTRACTINDIVIDUALIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

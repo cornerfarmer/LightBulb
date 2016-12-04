@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {

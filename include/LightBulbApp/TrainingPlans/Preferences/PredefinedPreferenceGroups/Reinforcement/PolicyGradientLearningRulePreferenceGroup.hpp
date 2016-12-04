@@ -5,8 +5,8 @@
 
 // 
 #include "AbstractReinforcementLearningRulePreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Learning/Reinforcement/PolicyGradientLearningRule.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
 
 namespace LightBulb
 {

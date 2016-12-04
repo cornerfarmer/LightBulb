@@ -6,7 +6,7 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp"
 
 // Forward declarations
 class FunctionSimulator;

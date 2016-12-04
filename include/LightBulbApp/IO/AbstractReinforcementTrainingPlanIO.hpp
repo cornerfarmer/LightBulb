@@ -4,12 +4,12 @@
 #define _ABSTRACTREINFORCEMENTTRAININGPLANIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <IO/IOStorage.hpp>
 
 namespace LightBulb
 {
@@ -45,7 +45,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractReinforcementTrainingPlan);
 

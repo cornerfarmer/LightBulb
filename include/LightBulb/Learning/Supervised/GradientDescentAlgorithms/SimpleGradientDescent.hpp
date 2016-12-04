@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 
 namespace LightBulb
 {
@@ -91,7 +91,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/SimpleGradientDescentIO.hpp"
+#include "LightBulb/IO/SimpleGradientDescentIO.hpp"
 
 #endif
 

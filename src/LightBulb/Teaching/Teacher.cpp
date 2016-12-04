@@ -1,9 +1,9 @@
 ﻿// Includes
-#include "Teaching/Teacher.hpp"
-#include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "Teaching/AbstractTeachingLesson.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

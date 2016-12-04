@@ -5,15 +5,15 @@
 
 // Library includes
 #include <vector>
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 
 // Includes
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
-#include <Logging/AbstractLogger.hpp>
-#include "LoggerController.hpp"
-#include "TrainingWindow.hpp"
-#include "AbstractMainApp.hpp"
-#include "IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulbApp/Windows/LoggerController.hpp"
+#include "LightBulbApp/Windows/TrainingWindow.hpp"
+#include "LightBulbApp/Windows/AbstractMainApp.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
@@ -246,6 +246,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/TrainingControllerIO.hpp"
+#include "LightBulbApp/IO/TrainingControllerIO.hpp"
 
 #endif

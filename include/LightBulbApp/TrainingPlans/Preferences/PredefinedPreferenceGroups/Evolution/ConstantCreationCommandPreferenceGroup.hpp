@@ -4,9 +4,9 @@
 #define _CONSTANTCREATIONCOMMANDPREFERENCEGROUP_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Learning/Evolution/ConstantCreationCommand.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/ConstantCreationCommand.hpp"
 
 namespace LightBulb
 {

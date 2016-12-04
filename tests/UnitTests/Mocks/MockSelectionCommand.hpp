@@ -4,7 +4,7 @@
 #define _MOCKSELECTIONCOMMAND_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractSelectionCommand.hpp>
+#include <LightBulb/Learning/Evolution/AbstractSelectionCommand.hpp>
 
 class MockSelectionCommand : public LightBulb::AbstractSelectionCommand
 {

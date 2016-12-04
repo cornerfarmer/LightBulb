@@ -1,8 +1,8 @@
 #include "FunctionEvolutionExample.hpp"
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Examples/FunctionEvolution/FunctionSimulator.hpp>
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
 
 using namespace LightBulb;
 

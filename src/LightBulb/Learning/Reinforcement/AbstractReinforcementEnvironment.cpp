@@ -1,7 +1,7 @@
 // Includes
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
-#include <ActivationOrder/TopologicalOrder.hpp>
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 //Library include
 

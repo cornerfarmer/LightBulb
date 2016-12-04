@@ -1,10 +1,10 @@
 // Includes
-#include "Repositories/TrainingPlanRepository.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include <fstream>
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <TrainingPlans/AbstractSupervisedTrainingPlan.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
 
 namespace LightBulb
 {

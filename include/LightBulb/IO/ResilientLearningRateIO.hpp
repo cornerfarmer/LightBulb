@@ -4,9 +4,9 @@
 #define _RESILIENTLEARNINGRATEIO_H_
 
 // Libary includes
-#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
-#include "ConstructExisting.hpp"
-#include "IO/MatrixIO.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
+#include "LightBulb/IO/MatrixIO.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -46,7 +46,7 @@ namespace cereal
 	};
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::ResilientLearningRate);
 

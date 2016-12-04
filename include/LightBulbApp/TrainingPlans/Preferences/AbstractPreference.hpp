@@ -48,6 +48,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractPreferenceIO.hpp"
+#include "LightBulbApp/IO/AbstractPreferenceIO.hpp"
 
 #endif

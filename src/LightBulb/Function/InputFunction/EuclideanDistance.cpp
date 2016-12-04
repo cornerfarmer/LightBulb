@@ -1,5 +1,5 @@
 // Includes
-#include "Function/InputFunction/EuclideanDistance.hpp"
+#include "LightBulb/Function/InputFunction/EuclideanDistance.hpp"
 // Library includes
 #include <stdexcept>
 #include <math.h>

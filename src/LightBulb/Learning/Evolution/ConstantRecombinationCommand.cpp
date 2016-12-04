@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Evolution/ConstantRecombinationCommand.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 
 namespace LightBulb

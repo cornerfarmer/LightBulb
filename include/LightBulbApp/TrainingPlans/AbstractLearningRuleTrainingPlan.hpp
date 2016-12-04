@@ -5,9 +5,9 @@
 
 
 // Includes
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
-#include "Learning/AbstractLearningResult.hpp"
-#include "Learning/AbstractLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulb/Learning/AbstractLearningResult.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
 
 // Library includes
 
@@ -68,6 +68,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractLearningRuleTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractLearningRuleTrainingPlanIO.hpp"
 
 #endif

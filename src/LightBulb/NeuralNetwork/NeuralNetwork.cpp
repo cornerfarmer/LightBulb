@@ -1,8 +1,8 @@
 // Includes
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "Teaching/TeachingInput.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/Teaching/TeachingInput.hpp"
 // Library includes
 #include <exception>
 #include <ctime>

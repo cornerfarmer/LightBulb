@@ -4,7 +4,7 @@
 #ifndef _TEACHEDEVOLUTIONEXAMPLE_H_
 #define _TEACHEDEVOLUTIONEXAMPLE_H_
 
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 
 class TeachedEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 {

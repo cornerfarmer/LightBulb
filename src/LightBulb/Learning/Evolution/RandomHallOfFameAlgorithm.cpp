@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/RandomHallOfFameAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 // Library includes
 #include <algorithm>
 

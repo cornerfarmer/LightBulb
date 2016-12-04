@@ -5,12 +5,12 @@
 
 // Library includes
 #include <vector>
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
 
 // Includes
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
-#include "LoggerWindow.hpp"
-#include "AbstractSubApp.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulbApp/Windows/LoggerWindow.hpp"
+#include "LightBulbApp/Windows/AbstractSubApp.hpp"
 
 namespace LightBulb
 {

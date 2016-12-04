@@ -4,7 +4,7 @@
 #ifndef _PONGREINFORCEMENTEXAMPLE_H_
 #define _PONGREINFORCEMENTEXAMPLE_H_
 
-#include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
 
 class PongReinforcementEnvironment;
 

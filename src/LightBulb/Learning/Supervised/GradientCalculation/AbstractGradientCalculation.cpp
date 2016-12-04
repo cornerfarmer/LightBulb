@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

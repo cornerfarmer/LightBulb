@@ -4,9 +4,9 @@
 #define _TEACHEDINDIVIDUALIO_H_
 
 // Includes
-#include <Learning/Evolution/TeachedIndividual.hpp>
-#include "IO/IOStorage.hpp"
-#include "Learning/Evolution/TeachingEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/TeachedIndividual.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
+#include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -44,7 +44,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::TeachedIndividual);
 

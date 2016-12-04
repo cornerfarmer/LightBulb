@@ -1,8 +1,8 @@
 // Includes
-#include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/FitnessSharingFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 // Library includes
 #include <stdexcept>
 #include <math.h>

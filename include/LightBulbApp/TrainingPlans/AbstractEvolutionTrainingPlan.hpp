@@ -4,8 +4,8 @@
 #define _ABSTRACTEVOLUTIONTRAININGPLAN_H_
 
 // Includes
-#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 
 // Library includes
 
@@ -53,6 +53,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractEvolutionTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractEvolutionTrainingPlanIO.hpp"
 
 #endif

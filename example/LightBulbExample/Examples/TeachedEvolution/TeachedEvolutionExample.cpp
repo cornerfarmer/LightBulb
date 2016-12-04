@@ -1,24 +1,24 @@
 #include "TeachedEvolutionExample.hpp"
-#include <Learning/Evolution/RateDifferenceCondition.hpp>
-#include <Learning/Evolution/ConstantMutationCommand.hpp>
-#include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
-#include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Learning/Evolution/ConstantReuseCommand.hpp>
-#include <Learning/Evolution/ConstantRecombinationCommand.hpp>
-#include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
-#include <Learning/Evolution/ConstantCreationCommand.hpp>
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Teaching/TeachingLessonBooleanInput.hpp>
-#include <Teaching/Teacher.hpp>
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <Function/ActivationFunction/FermiFunction.hpp>
-#include <Learning/Evolution/TeachingEvolutionEnvironment.hpp>
-#include <Learning/Evolution/RandomSelector.hpp>
-#include <NeuronDescription/NeuronDescription.hpp>
-#include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/FitnessCondition.hpp>
+#include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
+#include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/BestSelectionCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantReuseCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/ConstantCreationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Teaching/TeachingLessonBooleanInput.hpp>
+#include <LightBulb/Teaching/Teacher.hpp>
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/Function/ActivationFunction/FermiFunction.hpp>
+#include <LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/RandomSelector.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
+#include <LightBulb/Learning/Evolution/FitnessCondition.hpp>
 
 using namespace LightBulb;
 

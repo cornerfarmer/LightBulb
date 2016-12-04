@@ -1,7 +1,7 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/RateDifferenceConditionPreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/RateDifferenceConditionPreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 
 
 namespace LightBulb

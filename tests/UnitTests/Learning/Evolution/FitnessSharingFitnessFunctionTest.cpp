@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/FitnessSharingFitnessFunction.hpp>
+#include <LightBulb/Learning/Evolution/FitnessSharingFitnessFunction.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 

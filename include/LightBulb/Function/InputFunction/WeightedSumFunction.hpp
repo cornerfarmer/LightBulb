@@ -4,8 +4,8 @@
 #define _WEIGHTEDSUMFUNCTION_H_
 
 // Includes
-#include "Function/InputFunction/AbstractInputFunction.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

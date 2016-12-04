@@ -1,32 +1,17 @@
 #include "NetworkEvolutionExample.hpp"
 #include <Examples/NetworkEvolution/NetworkSimulator.hpp>
-#include <Learning/Evolution/RateDifferenceCondition.hpp>
-#include <Learning/Evolution/ConstantMutationCommand.hpp>
-#include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
-#include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
-#include <Learning/Evolution/BestSelectionCommand.hpp>
-#include <Learning/Evolution/ConstantReuseCommand.hpp>
-#include <Learning/Evolution/ConstantRecombinationCommand.hpp>
-#include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
-#include <Learning/Evolution/ConstantCreationCommand.hpp>
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Learning/Evolution/BestReuseSelector.hpp>
-#include <Learning/Evolution/FitnessCondition.hpp>
-
-
-//void doNetworkEvolutionExample()
-//{
-//
-//	LearningRuleAnalyserOptions analyserOptions;
-//	analyserOptions.learningRule = &learningRule;
-//	analyserOptions.changableParameters.push_back(new ChangeableNumber<double, MutationAlgorithm>(mutationAlgorithm, &MutationAlgorithm::setMutationStrengthChangeSpeed, 1.3, 0.1, 2.0, "mcs"));
-//	analyserOptions.changableParameters.push_back(new ChangeableNumber<int, RateDifferenceCondition>(rateDifferenceCondition, &RateDifferenceCondition::setCount, 0, 10, 50, "cnt"));
-//
-//	LearningRuleAnalyser learningRuleAnalyser(analyserOptions);
-//
-//	learningRuleAnalyser.execute();
-//
-//}
+#include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
+#include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
+#include <LightBulb/Learning/Evolution/BestSelectionCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantReuseCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/ConstantCreationCommand.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
+#include <LightBulb/Learning/Evolution/FitnessCondition.hpp>
 
 using namespace LightBulb;
 

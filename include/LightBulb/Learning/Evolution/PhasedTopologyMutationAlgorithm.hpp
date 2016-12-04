@@ -6,9 +6,9 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "MagnitudeBasedPruningMutationAlgorithm.hpp"
-#include "NetworkGrowMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/NetworkGrowMutationAlgorithm.hpp"
 
 namespace LightBulb
 {

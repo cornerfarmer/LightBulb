@@ -1,5 +1,5 @@
 // Includes
-#include "Logging/ConsoleLogger.hpp"
+#include "LightBulb/Logging/ConsoleLogger.hpp"
 #include <iostream>
 
 namespace LightBulb

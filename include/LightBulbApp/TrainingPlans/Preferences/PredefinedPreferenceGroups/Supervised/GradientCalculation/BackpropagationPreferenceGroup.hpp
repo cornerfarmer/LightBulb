@@ -4,9 +4,9 @@
 #define _BACKPROPAGATIONPREFERENCEGROUP_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 
 namespace LightBulb
 {

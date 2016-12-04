@@ -1,5 +1,5 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 
 namespace LightBulb
 {

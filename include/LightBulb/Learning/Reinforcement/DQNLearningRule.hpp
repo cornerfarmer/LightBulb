@@ -4,11 +4,11 @@
 #define _DQNLEARNINGRULE_H_
 
 // Includes
-#include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
-#include <Teaching/Teacher.hpp>
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 // Library Includes
 #include <vector>
@@ -233,7 +233,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/DQNLearningRuleIO.hpp"
+#include "LightBulb/IO/DQNLearningRuleIO.hpp"
 
 
 #endif

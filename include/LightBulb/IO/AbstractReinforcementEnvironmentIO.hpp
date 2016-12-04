@@ -4,7 +4,7 @@
 #define _ABSTRACTREINFORCEMENTENVIRONMENTIO_H_
 
 // Includes
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

@@ -1,2 +1,2 @@
 // Includes
-#include "Function/InputFunction/AbstractInputFunction.hpp"
+#include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"

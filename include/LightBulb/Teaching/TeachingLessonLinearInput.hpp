@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 
 namespace LightBulb
 {

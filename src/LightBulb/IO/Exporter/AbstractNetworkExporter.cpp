@@ -1,5 +1,5 @@
 // Includes
-#include "IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 #include <fstream>
 
 void LightBulb::AbstractNetworkExporter::exportToFile(std::string path, const AbstractNeuralNetwork& neuralNetwork)

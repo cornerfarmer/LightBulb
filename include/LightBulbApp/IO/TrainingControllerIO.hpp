@@ -4,8 +4,8 @@
 #define _TRAININGCONTROLLERIO_H_
 
 // Includes
-#include "Windows/TrainingController.hpp"
-#include "Repositories/NeuralNetworkRepository.hpp"
+#include "LightBulbApp/Windows/TrainingController.hpp"
+#include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

@@ -8,8 +8,8 @@
 #include <memory>
 
 // Includes
-#include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "Learning/AbstractLearningRule.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
 
 namespace LightBulb
 {
@@ -215,7 +215,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractSupervisedLearningRuleIO.hpp"
+#include "LightBulb/IO/AbstractSupervisedLearningRuleIO.hpp"
 
 #endif
 

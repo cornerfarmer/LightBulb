@@ -1,7 +1,7 @@
 // Includes
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "Examples/FunctionEvolution/Position.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iostream>
 

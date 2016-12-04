@@ -354,7 +354,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include\LightBulb;..\extlibs\eigen;..\extlibs\cereal\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -369,7 +369,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include\LightBulb;..\extlibs\eigen;..\extlibs\cereal\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>

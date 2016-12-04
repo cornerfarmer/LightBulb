@@ -11,8 +11,8 @@
 #endif
 
 // Includes
-#include "Windows/AbstractSubAppWindow.hpp"
-#include <Logging/AbstractLogger.hpp>
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations
 class wxRichTextCtrl;

@@ -1,8 +1,8 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantMutationCommandPreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
-#include "Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
-#include "Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantMutationCommandPreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulb/Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
 
 
 namespace LightBulb

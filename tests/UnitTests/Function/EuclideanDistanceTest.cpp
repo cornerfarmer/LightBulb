@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Function/InputFunction/EuclideanDistance.hpp"
+#include "LightBulb/Function/InputFunction/EuclideanDistance.hpp"
 #include <math.h>
 
 using namespace LightBulb;

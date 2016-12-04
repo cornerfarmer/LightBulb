@@ -1,10 +1,10 @@
 // Includes
-#include "Windows/LearningStateController.hpp"
-#include <Repositories/NeuralNetworkRepository.hpp>
-#include <NetworkTopology/AbstractNetworkTopology.hpp>
-#include <ActivationOrder/TopologicalOrder.hpp>
-#include <Repositories/TrainingPlanRepository.hpp>
-#include <Learning/LearningState.hpp>
+#include "LightBulbApp/Windows/LearningStateController.hpp"
+#include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
 
 namespace LightBulb
 {

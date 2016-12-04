@@ -9,8 +9,10 @@
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/types/vector.hpp>
-#include <Learning/LearningState.hpp>
-#include <IO/IOStorage.hpp>
+
+// Includes
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 
 namespace LightBulb
 {

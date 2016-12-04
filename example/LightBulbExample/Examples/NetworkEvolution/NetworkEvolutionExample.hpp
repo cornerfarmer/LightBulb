@@ -3,8 +3,8 @@
 #ifndef _NETWORKEVOLUTIONEXAMPLE_H_
 #define _NETWORKEVOLUTIONEXAMPLE_H_
 
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 class NetworkEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 {

@@ -4,8 +4,8 @@
 #define _MOCKCREATIONCOMMAND_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractCreationCommand.hpp>
-#include <Learning/Evolution/AbstractEvolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCreationCommand.hpp>
+#include <LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 class MockCreationCommand : public LightBulb::AbstractCreationCommand
 {

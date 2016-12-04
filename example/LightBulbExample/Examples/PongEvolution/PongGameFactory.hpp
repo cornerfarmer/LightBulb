@@ -4,7 +4,7 @@
 #define _PONGGAMEFACTORY_H_
 
 // Includes
-#include <Windows/AbstractCustomSubAppFactory.hpp>
+#include "LightBulbApp/Windows/AbstractCustomSubAppFactory.hpp"
 
 // Forward declarations
 

@@ -4,13 +4,13 @@
 #define _ABSTRACTEVOLUTIONTRAININGPLANIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <IO/IOStorage.hpp>
 
 namespace LightBulb
 {
@@ -46,7 +46,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractEvolutionTrainingPlan);
 

@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/PositiveMakerFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/PositiveMakerFitnessFunction.hpp"
 // Library includes
 #include <stdexcept>
 #include <algorithm>

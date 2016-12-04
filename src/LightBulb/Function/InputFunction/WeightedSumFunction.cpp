@@ -1,5 +1,5 @@
 // Includes
-#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
 
 namespace LightBulb
 {

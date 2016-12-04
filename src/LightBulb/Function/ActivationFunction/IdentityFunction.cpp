@@ -1,5 +1,5 @@
 // Includes
-#include "Function/ActivationFunction/IdentityFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>

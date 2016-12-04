@@ -7,9 +7,9 @@
 #include <memory>
 
 // Includes
-#include "Windows/AbstractSubAppWindow.hpp"
-#include <Logging/AbstractLogger.hpp>
-#include <Learning/Evolution/AbstractIndividual.hpp>
+#include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 // Forward declarations
 class wxDataViewListCtrl;

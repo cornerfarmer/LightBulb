@@ -1,2 +1,2 @@
 // Includes
-#include "Teaching/TeachingInput.hpp"
+#include "LightBulb/Teaching/TeachingInput.hpp"

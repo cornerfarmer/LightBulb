@@ -4,7 +4,7 @@
 #define _MOCKRECOMBINATIONALGORITHM_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractRecombinationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp>
 
 class MockRecombinationAlgorithm : public LightBulb::AbstractRecombinationAlgorithm
 {

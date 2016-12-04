@@ -4,9 +4,9 @@
 #define _NEURONDESCRIPTION_H_
 
 // Includes
-#include "Function/InputFunction/AbstractInputFunction.hpp"
-#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <memory>
@@ -68,6 +68,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/NeuronDescriptionIO.hpp"
+#include "LightBulb/IO/NeuronDescriptionIO.hpp"
 
 #endif

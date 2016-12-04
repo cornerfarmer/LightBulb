@@ -1,5 +1,5 @@
 // Includes
-#include "IO/Exporter/JSONStringElement.hpp"
+#include "LightBulb/IO/Exporter/JSONStringElement.hpp"
 
 namespace LightBulb
 {

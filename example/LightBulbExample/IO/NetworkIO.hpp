@@ -26,7 +26,7 @@ void load(Archive& archive, Network& individual)
 	archive(cereal::make_nvp("positions", individual.positions));
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(Network);
 

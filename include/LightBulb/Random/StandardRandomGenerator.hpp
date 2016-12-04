@@ -5,7 +5,7 @@
 #define _STANDARDRANDOMGENERATOR_H_
 
 // Include
-#include "AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 // Library Includes
 #include <random>
@@ -63,6 +63,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/StandardRandomGeneratorIO.hpp"
+#include "LightBulb/IO/StandardRandomGeneratorIO.hpp"
 
 #endif

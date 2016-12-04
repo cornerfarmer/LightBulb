@@ -1,8 +1,8 @@
 // Includes
-#include "Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
-#include <NetworkTopology/AbstractNetworkTopology.hpp>
+#include "LightBulb/Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

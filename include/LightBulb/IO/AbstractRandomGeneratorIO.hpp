@@ -4,7 +4,7 @@
 #define _ABSTRACTRANDOMGENERATORIO_H_
 
 // Includes
-#include "Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

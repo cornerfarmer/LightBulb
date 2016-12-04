@@ -1,8 +1,8 @@
 // Includes
-#include "Windows/NetworkViewerWindow.hpp"
-#include "Windows/NetworkViewerController.hpp"
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
-#include <NetworkTopology/AbstractNetworkTopology.hpp>
+#include "LightBulbApp/Windows/NetworkViewerWindow.hpp"
+#include "LightBulbApp/Windows/NetworkViewerController.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <wx/dataview.h>
 #include <wx/dcbuffer.h>
 

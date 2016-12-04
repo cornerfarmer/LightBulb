@@ -7,7 +7,7 @@
 
 // Include
 #include <Examples/PongEvolution/PongGame.hpp>
-#include <Event/Observable.hpp>
+#include "LightBulb/Event/Observable.hpp"
 
 // Forward declarations
 

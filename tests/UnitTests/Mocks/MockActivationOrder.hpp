@@ -4,8 +4,8 @@
 #define _MOCKACTIVATIONORDER_H_
 
 #include "gmock/gmock.h"
-#include "ActivationOrder/AbstractActivationOrder.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 class MockActivationOrder : public LightBulb::AbstractActivationOrder
 {

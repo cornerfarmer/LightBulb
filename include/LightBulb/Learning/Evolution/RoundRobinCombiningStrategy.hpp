@@ -8,7 +8,7 @@
 #include <vector>
 
 // Include
-#include "Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 
 namespace LightBulb
 {

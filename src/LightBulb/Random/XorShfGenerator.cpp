@@ -1,5 +1,5 @@
 // Includes
-#include "Random/XorShfGenerator.hpp"
+#include "LightBulb/Random/XorShfGenerator.hpp"
 
 namespace LightBulb
 {

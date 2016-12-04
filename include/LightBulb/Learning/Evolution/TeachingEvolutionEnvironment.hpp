@@ -7,9 +7,9 @@
 #include <vector>
 #include <map>
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

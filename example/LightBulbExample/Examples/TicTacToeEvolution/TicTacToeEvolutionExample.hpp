@@ -4,9 +4,10 @@
 #ifndef _TICTACTOEEVOLUTIONEXAMPLE_H_
 #define _TICTACTOEEVOLUTIONEXAMPLE_H_
 
-#include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
-#include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include "LightBulb/Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 
 class TicTacToe;
 

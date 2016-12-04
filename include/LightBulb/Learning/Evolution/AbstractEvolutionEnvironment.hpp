@@ -8,10 +8,10 @@
 #include <memory>
 
 // Includes
-#include <Logging/AbstractLoggable.hpp>
-#include <Learning/LearningState.hpp>
-#include "IO/UseParentSerialization.hpp"
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Logging/AbstractLoggable.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 namespace LightBulb
 {

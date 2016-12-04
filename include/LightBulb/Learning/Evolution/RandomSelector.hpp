@@ -7,9 +7,9 @@
 #include <memory>
 
 // Includes
-#include "Learning/Evolution/AbstractMutationSelector.hpp"
-#include "Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "Function/RandomFunction/AbstractRandomFunction.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
+#include "LightBulb/Function/RandomFunction/AbstractRandomFunction.hpp"
 
 namespace LightBulb
 {

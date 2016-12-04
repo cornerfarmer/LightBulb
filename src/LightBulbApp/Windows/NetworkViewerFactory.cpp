@@ -1,6 +1,6 @@
 // Includes
-#include "Windows/NetworkViewerFactory.hpp"
-#include "Windows/NetworkViewerController.hpp"
+#include "LightBulbApp/Windows/NetworkViewerFactory.hpp"
+#include "LightBulbApp/Windows/NetworkViewerController.hpp"
 
 namespace LightBulb
 {

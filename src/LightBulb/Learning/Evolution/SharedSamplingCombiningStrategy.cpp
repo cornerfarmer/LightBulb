@@ -1,7 +1,7 @@
 // Includes
-#include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 //Library includes
 #include <algorithm>
 #include <iostream>

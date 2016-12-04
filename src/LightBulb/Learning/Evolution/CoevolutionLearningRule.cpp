@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/CoevolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp"
 // Library includes
 #include <iostream>
 

@@ -7,7 +7,7 @@
 #include <random>
 
 // Includes
-#include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
 
 namespace LightBulb
 {

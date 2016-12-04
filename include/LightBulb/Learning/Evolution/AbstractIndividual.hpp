@@ -6,7 +6,7 @@
 // Library includes
 #include <vector>
 #include <algorithm>
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 namespace LightBulb
 {
@@ -119,6 +119,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractIndividualIO.hpp"
+#include "LightBulb/IO/AbstractIndividualIO.hpp"
 
 #endif

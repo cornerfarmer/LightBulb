@@ -1,23 +1,22 @@
 // Includes
-#include "Learning/Reinforcement/PolicyGradientLearningRule.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-// Library includes
+#include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include <iostream>
 #include <algorithm>
 #include <map>
 #include <string>
-#include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
-#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "Function/ActivationFunction/RectifierFunction.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {

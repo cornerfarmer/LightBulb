@@ -4,7 +4,7 @@
 #define _IO_NEURALNETWORKIO_H_
 
 // Includes
-#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -50,7 +50,7 @@ namespace cereal
 	};
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::NeuralNetwork);
 

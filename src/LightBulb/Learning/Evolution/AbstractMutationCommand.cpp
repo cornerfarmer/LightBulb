@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Evolution/AbstractMutationCommand.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {

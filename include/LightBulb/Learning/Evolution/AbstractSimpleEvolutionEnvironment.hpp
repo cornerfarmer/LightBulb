@@ -7,7 +7,7 @@
 #include <vector>
 
 // Include
-#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -56,6 +56,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractSimpleEvolutionEnvironmentIO.hpp"
+#include "LightBulb/IO/AbstractSimpleEvolutionEnvironmentIO.hpp"
 
 #endif

@@ -1,9 +1,9 @@
 // Includes
-#include "Windows/LearningStateWindow.hpp"
-#include "Windows/LearningStateController.hpp"
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
-#include <NetworkTopology/AbstractNetworkTopology.hpp>
-#include <TrainingPlans/AbstractTrainingPlan.hpp>
+#include "LightBulbApp/Windows/LearningStateWindow.hpp"
+#include "LightBulbApp/Windows/LearningStateController.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include <wx/xy/xyplot.h>
 #include <wx/xy/xysimpledataset.h>
 #include <wx/xy/xylinerenderer.h>

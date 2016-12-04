@@ -1,20 +1,20 @@
 #include "gtest/gtest.h"
-#include <Learning/Supervised/GradientDescentLearningRule.hpp>
+#include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
-#include <Teaching/TeachingInput.hpp>
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <Function/ActivationFunction/FermiFunction.hpp>
-#include <Function/InputFunction/WeightedSumFunction.hpp>
-#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <NeuronDescription/NeuronDescription.hpp>
-#include <NeuralNetwork/NeuralNetwork.hpp>
-#include <Teaching/TeachingLessonBooleanInput.hpp>
-#include <Teaching/Teacher.hpp>
-#include <ActivationOrder/TopologicalOrder.hpp>
-#include <Learning/AbstractLearningResult.hpp>
-#include "Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include <LightBulb/Teaching/TeachingInput.hpp>
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/Function/ActivationFunction/FermiFunction.hpp>
+#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
+#include <LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
+#include <LightBulb/Teaching/TeachingLessonBooleanInput.hpp>
+#include <LightBulb/Teaching/Teacher.hpp>
+#include <LightBulb/ActivationOrder/TopologicalOrder.hpp>
+#include <LightBulb/Learning/AbstractLearningResult.hpp>
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 
 using namespace LightBulb;
 

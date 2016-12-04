@@ -1,9 +1,9 @@
 // Includes
-#include "Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 namespace LightBulb
 {

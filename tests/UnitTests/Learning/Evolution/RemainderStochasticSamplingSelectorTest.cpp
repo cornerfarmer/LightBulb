@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
+#include <LightBulb/Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
 #include <Mocks/MockSelectionFunction.hpp>
 
 using namespace LightBulb;

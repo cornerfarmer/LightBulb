@@ -5,7 +5,7 @@
 #define _ABSTRACTLOGGABLE_H_
 
 // Include
-#include "AbstractLogger.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 
 // Library Includes
 #include <string>

@@ -4,7 +4,7 @@
 #define _CONSTRUCTEXISTING_H_
 
 // Includes
-#include "IOStorage.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

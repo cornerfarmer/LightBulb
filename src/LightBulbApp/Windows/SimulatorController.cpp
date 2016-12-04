@@ -1,8 +1,8 @@
 // Includes
-#include "Windows/SimulatorController.hpp"
-#include <Repositories/NeuralNetworkRepository.hpp>
-#include <NetworkTopology/AbstractNetworkTopology.hpp>
-#include <ActivationOrder/TopologicalOrder.hpp>
+#include "LightBulbApp/Windows/SimulatorController.hpp"
+#include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp""
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {

@@ -5,7 +5,7 @@
 
 // Includes
 #include "AbstractPreferenceElement.hpp"
-#include "TrainingPlans/Preferences/AbstractPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/AbstractPreference.hpp"
 
 // Library includes
 #include <memory>
@@ -144,6 +144,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/PreferenceGroupIO.hpp"
+#include "LightBulbApp/IO/PreferenceGroupIO.hpp"
 
 #endif

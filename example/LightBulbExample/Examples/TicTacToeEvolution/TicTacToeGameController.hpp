@@ -4,7 +4,7 @@
 #define _TICTACTOEGAMECONTROLLER_H_
 
 // Includes
-#include <Windows/AbstractCustomSubApp.hpp>
+#include "LightBulbApp/Windows/AbstractCustomSubApp.hpp"
 #include <memory>
 #include "TicTacToeGameWindow.hpp"
 #include "TicTacToe.hpp"

@@ -4,9 +4,9 @@
 #define _MOCKEVOLUTIONLEARNINGRULE_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
-#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
-#include "Learning/AbstractLearningResult.hpp"
+#include <LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp>
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/AbstractLearningResult.hpp"
 
 class MockEvolutionLearningRule : public LightBulb::AbstractEvolutionLearningRule
 {

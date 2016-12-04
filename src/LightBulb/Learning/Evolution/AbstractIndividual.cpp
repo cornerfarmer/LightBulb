@@ -1,9 +1,9 @@
 // Includes
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 // Library includes
 #include <stdlib.h>
-#include <NeuralNetwork/NeuralNetwork.hpp>
-#include <NetworkTopology/AbstractNetworkTopology.hpp>
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

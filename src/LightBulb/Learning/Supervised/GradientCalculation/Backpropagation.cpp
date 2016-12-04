@@ -1,12 +1,12 @@
 // Includes
-#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "Teaching/Teacher.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
-#include "Teaching/AbstractTeachingLesson.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 namespace LightBulb
 {

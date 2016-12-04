@@ -7,11 +7,11 @@
 #include <Eigen/Dense>
 #include <vector>
 #include <memory>
-#include <Logging/AbstractLogger.hpp>
 
 // Includes
-#include "LearningState.hpp"
-#include "Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {
@@ -207,7 +207,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractLearningRuleIO.hpp"
+#include "LightBulb/IO/AbstractLearningRuleIO.hpp"
 
 #endif
 

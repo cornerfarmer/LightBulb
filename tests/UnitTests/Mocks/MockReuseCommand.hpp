@@ -4,7 +4,7 @@
 #define _MOCKREUSECOMMAND_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractReuseCommand.hpp>
+#include <LightBulb/Learning/Evolution/AbstractReuseCommand.hpp>
 
 class MockReuseCommand : public LightBulb::AbstractReuseCommand
 {

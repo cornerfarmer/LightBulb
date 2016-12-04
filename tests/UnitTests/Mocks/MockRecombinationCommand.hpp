@@ -4,7 +4,7 @@
 #define _MOCKRECOMBINATIONCOMMAND_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractRecombinationCommand.hpp>
+#include <LightBulb/Learning/Evolution/AbstractRecombinationCommand.hpp>
 
 class MockRecombinationCommand : public LightBulb::AbstractRecombinationCommand
 {

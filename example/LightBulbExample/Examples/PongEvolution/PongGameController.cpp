@@ -1,13 +1,13 @@
 // Includes
 #include "Examples/PongEvolution/PongGameController.hpp"
-// Library includes
-#include <exception>
-#include <vector>
-#include <TrainingPlans/AbstractTrainingPlan.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include "PongEvolutionExample.hpp"
 #include "Pong.hpp"
 #include <Examples/PongReinforcement/PongPolicyGradientExample.hpp>
 #include <Examples/PongReinforcement/PongReinforcementEnvironment.hpp>
+// Library includes
+#include <exception>
+#include <vector>
 
 using namespace LightBulb;
 

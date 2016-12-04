@@ -1,5 +1,5 @@
 // Includes
-#include "Logging/StorageLogger.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
 
 namespace LightBulb
 {

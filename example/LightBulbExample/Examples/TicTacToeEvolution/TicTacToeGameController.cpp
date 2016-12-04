@@ -3,7 +3,7 @@
 // Library includes
 #include <exception>
 #include <vector>
-#include <TrainingPlans/AbstractTrainingPlan.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include "TicTacToeEvolutionExample.hpp"
 #include "TicTacToe.hpp"
 

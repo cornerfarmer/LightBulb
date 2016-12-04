@@ -4,8 +4,8 @@
 #define _ABSTRACTSELECTIONFUNCTION_H_
 
 // Includes
-#include "Tools/AbstractCloneable.hpp"
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 // Library includes
 #include <vector>

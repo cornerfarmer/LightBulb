@@ -4,7 +4,7 @@
 #define _ROULETTEWHEELSELECTIONFUNCTION_H_
 
 // Includes
-#include "AbstractSelectionFunction.hpp"
+#include "LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp"
 
 // Library includes
 #include <math.h>

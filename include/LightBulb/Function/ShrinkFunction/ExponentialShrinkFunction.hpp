@@ -7,7 +7,7 @@
 #include <math.h>
 
 // Includes
-#include "Function/ShrinkFunction/AbstractShrinkFunction.hpp"
+#include "LightBulb/Function/ShrinkFunction/AbstractShrinkFunction.hpp"
 
 namespace LightBulb
 {

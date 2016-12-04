@@ -5,7 +5,7 @@
 
 // Includes
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
-#include "IO/ConstructExisting.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -40,7 +40,7 @@ namespace cereal
 	};
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(NetworkSimulator);
 

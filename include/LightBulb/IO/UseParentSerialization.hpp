@@ -4,7 +4,7 @@
 #define _USEPARENTSERIALIZATION_H_
 
 // Includes
-#include "IO/ConstructExisting.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -12,7 +12,7 @@
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/types/base_class.hpp>
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 
 /**

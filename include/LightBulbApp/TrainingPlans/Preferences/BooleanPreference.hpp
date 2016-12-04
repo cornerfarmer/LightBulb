@@ -38,6 +38,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/BooleanPreferenceIO.hpp"
+#include "LightBulbApp/IO/BooleanPreferenceIO.hpp"
 
 #endif

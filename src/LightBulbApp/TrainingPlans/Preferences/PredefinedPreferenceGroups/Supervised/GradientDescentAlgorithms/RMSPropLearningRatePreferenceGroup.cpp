@@ -1,6 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/RMSPropLearningRatePreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/RMSPropLearningRatePreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 
 namespace LightBulb
 {

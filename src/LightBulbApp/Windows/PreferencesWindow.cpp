@@ -1,13 +1,13 @@
 // Includes
-#include "Windows/PreferencesWindow.hpp"
-#include "Windows/PreferencesController.hpp"
-#include "TrainingPlans/Preferences/AbstractPreference.hpp"
-#include <TrainingPlans/Preferences/DoublePreference.hpp>
-#include <TrainingPlans/Preferences/IntegerPreference.hpp>
-#include <TrainingPlans/Preferences/BooleanPreference.hpp>
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "Learning/Evolution/FitnessSharingFitnessFunction.hpp"
-#include "TrainingPlans/Preferences/ChoicePreference.hpp"
+#include "LightBulbApp/Windows/PreferencesWindow.hpp"
+#include "LightBulbApp/Windows/PreferencesController.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/AbstractPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/Learning/Evolution/FitnessSharingFitnessFunction.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 
 namespace LightBulb
 {

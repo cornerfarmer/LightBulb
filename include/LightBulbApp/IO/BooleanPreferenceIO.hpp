@@ -4,7 +4,7 @@
 #define _BOOLEANPREFERENCEIO_H_
 
 // Includes
-#include "TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -39,7 +39,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::BooleanPreference);
 

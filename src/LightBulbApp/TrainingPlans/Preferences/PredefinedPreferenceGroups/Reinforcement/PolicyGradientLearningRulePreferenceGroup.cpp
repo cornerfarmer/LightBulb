@@ -1,8 +1,8 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/PolicyGradientLearningRulePreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
-#include "TrainingPlans/Preferences/BooleanPreference.hpp"
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/RMSPropLearningRatePreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/PolicyGradientLearningRulePreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/RMSPropLearningRatePreferenceGroup.hpp"
 
 namespace LightBulb
 {

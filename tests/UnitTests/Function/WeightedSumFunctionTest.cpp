@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
 
 using namespace LightBulb;
 

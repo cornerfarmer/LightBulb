@@ -3,7 +3,7 @@ project (LightBulb)
 include(../../cmake/macros.txt)
 
 file(GLOB_RECURSE SOURCES *.cpp)
-include_directories(../../include/LightBulb)
+include_directories(../../include)
 
 include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)

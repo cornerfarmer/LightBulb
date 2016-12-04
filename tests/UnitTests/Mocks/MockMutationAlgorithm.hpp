@@ -4,7 +4,7 @@
 #define _MOCKMUTATIONALGORITHM_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractMutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp>
 
 class MockMutationAlgorithm : public LightBulb::AbstractMutationAlgorithm
 {

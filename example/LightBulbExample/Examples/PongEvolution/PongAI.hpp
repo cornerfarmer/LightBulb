@@ -6,8 +6,8 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class Pong;

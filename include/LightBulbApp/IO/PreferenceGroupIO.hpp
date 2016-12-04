@@ -4,7 +4,7 @@
 #define _PREFERENCEGROUPIO_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/vector.hpp>
@@ -42,7 +42,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::PreferenceGroup);
 

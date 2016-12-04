@@ -4,14 +4,16 @@
 #define _FEEDFORWARDNETWORKTOPOLOGYIO_H_
 
 // Libary includes
-#include "IO/MatrixIO.hpp"
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <NeuronDescription/AbstractNeuronDescriptionFactory.hpp>
-
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
+
+// Includes
+#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
+
 
 namespace LightBulb
 {
@@ -83,7 +85,7 @@ namespace LightBulb
 
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::FeedForwardNetworkTopology);
 

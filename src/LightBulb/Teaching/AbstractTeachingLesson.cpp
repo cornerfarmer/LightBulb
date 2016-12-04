@@ -1,11 +1,11 @@
 // Includes
-#include "Teaching/AbstractTeachingLesson.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "Teaching/TeachingInput.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Teaching/TeachingInput.hpp"
 // Library includes
 #include <math.h>
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include <Eigen/src/Core/util/ForwardDeclarations.h>
 #include <memory>
 

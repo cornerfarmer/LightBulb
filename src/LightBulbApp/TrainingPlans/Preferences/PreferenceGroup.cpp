@@ -1,9 +1,9 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
-#include "TrainingPlans/Preferences/BooleanPreference.hpp"
-#include "TrainingPlans/Preferences/ChoicePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 
 namespace LightBulb
 {

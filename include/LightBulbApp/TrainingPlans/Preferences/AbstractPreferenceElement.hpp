@@ -4,8 +4,8 @@
 #define _ABSTRACTPREFERENCEELEMENT_H_
 
 // Includes
-#include "IO/UseParentSerialization.hpp"
-#include "Tools/AbstractCloneable.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Tools/AbstractCloneable.hpp"
 
 // Library includes
 #include <string>

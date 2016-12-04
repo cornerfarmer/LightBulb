@@ -1,6 +1,6 @@
 // Includes
-#include "Windows/EvolutionAnalyzerFactory.hpp"
-#include "Windows/EvolutionAnalyzerController.hpp"
+#include "LightBulbApp/Windows/EvolutionAnalyzerFactory.hpp"
+#include "LightBulbApp/Windows/EvolutionAnalyzerController.hpp"
 
 namespace LightBulb
 {

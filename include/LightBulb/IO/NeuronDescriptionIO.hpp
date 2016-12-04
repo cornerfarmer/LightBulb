@@ -4,10 +4,12 @@
 #define _NEURONDESCRIPTIONIO_H_
 
 // Libary includes
-#include <NeuronDescription/NeuronDescription.hpp>
-#include "Function/ActivationFunction/IdentityFunction.hpp"
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
+
+// Includes
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 
 namespace LightBulb
 {

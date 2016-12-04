@@ -1,6 +1,6 @@
 // Includes
-#include "Learning/Evolution/TeachingEvolutionEnvironment.hpp"
-#include "Learning/Evolution/TeachedIndividual.hpp"
+#include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/TeachedIndividual.hpp"
 //Library includes
 #include <iostream>
 

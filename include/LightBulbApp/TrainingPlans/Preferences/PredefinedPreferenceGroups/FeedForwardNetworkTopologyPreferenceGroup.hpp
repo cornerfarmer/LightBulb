@@ -4,10 +4,10 @@
 #define _FEEDFORWARDNETWORKTOPOLOGYPREFERENCEGROUP_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "TrainingPlans/Preferences/ChoicePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 
 namespace LightBulb
 {

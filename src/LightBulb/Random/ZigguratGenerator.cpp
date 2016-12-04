@@ -1,6 +1,6 @@
 // Includes
-#include "Random/ZigguratGenerator.hpp"
-#include "Lib/ziggurat.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
+#include "LightBulb/Lib/ziggurat.hpp"
 
 namespace LightBulb
 {

@@ -10,7 +10,7 @@
 #include <memory>
 
 // Includes
-#include "TeachingInput.hpp"
+#include "LightBulb/Teaching/TeachingInput.hpp"
 
 namespace LightBulb
 {

@@ -1,6 +1,6 @@
 // Includes
-#include "Windows/LoggerFactory.hpp"
-#include "Windows/LoggerController.hpp"
+#include "LightBulbApp/Windows/LoggerFactory.hpp"
+#include "LightBulbApp/Windows/LoggerController.hpp"
 
 namespace LightBulb
 {

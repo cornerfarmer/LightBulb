@@ -9,8 +9,8 @@
 #include <memory>
 
 // Includes
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <cereal/access.hpp>
 
 namespace LightBulb
@@ -63,7 +63,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/NeuralNetworkIO.hpp"
+#include "LightBulb/IO/NeuralNetworkIO.hpp"
 
 #endif
 

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "Mocks/MockFeedForwardNetworkTopology.hpp"
 
 using testing::Return;

@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "AbstractLogger.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 
 namespace LightBulb
 {
@@ -40,7 +40,7 @@ namespace LightBulb
 	};
 }
 
-#include "IO/StorageLoggerIO.hpp"
+#include "LightBulb/IO/StorageLoggerIO.hpp"
 
 #endif
 

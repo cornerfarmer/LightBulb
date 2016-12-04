@@ -1,5 +1,5 @@
 // Includes
-#include "Function/ActivationFunction/RectifierFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
 // Library includes
 
 namespace LightBulb

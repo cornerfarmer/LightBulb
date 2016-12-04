@@ -6,9 +6,9 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractMutationSelector.hpp"
-#include "Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "Function/SelectionFunction/AbstractSelectionFunction.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
+#include "LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp"
 #include <memory>
 
 namespace LightBulb

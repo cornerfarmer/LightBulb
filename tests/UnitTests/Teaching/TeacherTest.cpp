@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include <Teaching/Teacher.hpp>
+#include <LightBulb/Teaching/Teacher.hpp>
 #include <Mocks/MockTeachingLesson.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockActivationOrder.hpp>

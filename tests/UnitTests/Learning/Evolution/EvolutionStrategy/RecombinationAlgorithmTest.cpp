@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 #include "Mocks/MockRandomGenerator.hpp"

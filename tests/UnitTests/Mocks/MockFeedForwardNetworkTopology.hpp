@@ -4,7 +4,7 @@
 #define _MOCKFeedForwardNetworkTopology_H_
 
 #include "gmock/gmock.h"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 class MockFeedForwardNetworkTopology : public LightBulb::FeedForwardNetworkTopology
 {

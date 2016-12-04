@@ -2,7 +2,7 @@
 #define _LEARNINGRESULT_H_
 #include <vector>
 #include <map>
-#include <Event/Observable.hpp>
+#include "LightBulb/Event/Observable.hpp"
 
 namespace LightBulb
 {
@@ -96,6 +96,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/LearningStateIO.hpp"
+#include "LightBulb/IO/LearningStateIO.hpp"
 
 #endif

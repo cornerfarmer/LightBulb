@@ -4,13 +4,14 @@
 #define _ABSTRACTSINGLENNTRAININGPLANIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
+
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <IO/IOStorage.hpp>
 
 namespace LightBulb
 {
@@ -74,7 +75,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractSupervisedTrainingPlan);
 

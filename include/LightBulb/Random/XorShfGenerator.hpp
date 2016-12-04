@@ -4,7 +4,7 @@
 #define _XORSHFGENERATOR_H_
 
 // Includes
-#include "AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {

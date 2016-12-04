@@ -4,7 +4,7 @@ include(../../cmake/macros.txt)
 
 file(GLOB_RECURSE SOURCES *.cpp *.hpp)
 include_directories(.)
-include_directories(../../include/LightBulb)
+include_directories(../../include)
 include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)
 include_directories(../../extlibs/googletest/googletest)

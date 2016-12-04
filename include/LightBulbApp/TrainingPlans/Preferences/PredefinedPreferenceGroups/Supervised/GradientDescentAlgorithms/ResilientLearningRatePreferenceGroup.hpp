@@ -4,9 +4,9 @@
 #define _RESILIENTLEARNINGRATEPREFERENCEGROUP_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 
 namespace LightBulb
 {

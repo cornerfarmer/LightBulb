@@ -4,7 +4,7 @@
 #ifndef _PONGDQNEXAMPLE_H_
 #define _PONGDQNEXAMPLE_H_
 
-#include "TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
 
 class PongReinforcementEnvironment;
 

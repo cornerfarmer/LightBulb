@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/BestReuseSelector.hpp>
+#include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
 
 using namespace LightBulb;
 

@@ -1,10 +1,10 @@
 // Includes
-#include "IO/Exporter/BrainJSExporter.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "IO/Exporter/JSONObject.hpp"
-#include "IO/Exporter/JSONArray.hpp"
-#include "IO/Exporter/JSONNumberElement.hpp"
+#include "LightBulb/IO/Exporter/BrainJSExporter.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/IO/Exporter/JSONObject.hpp"
+#include "LightBulb/IO/Exporter/JSONArray.hpp"
+#include "LightBulb/IO/Exporter/JSONNumberElement.hpp"
 #include <fstream>
 
 namespace LightBulb

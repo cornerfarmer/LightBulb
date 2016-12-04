@@ -8,9 +8,9 @@
 #include <memory>
 
 // Includes
-#include "IO/UseParentSerialization.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 namespace LightBulb
 {
@@ -148,6 +148,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractReinforcementEnvironmentIO.hpp"
+#include "LightBulb/IO/AbstractReinforcementEnvironmentIO.hpp"
 
 #endif

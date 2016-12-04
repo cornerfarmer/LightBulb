@@ -4,7 +4,7 @@
 #define _MOCKNEURONDESCRIPTION_H_
 
 #include "gmock/gmock.h"
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 class MockNeuronDescription : public LightBulb::NeuronDescription
 {

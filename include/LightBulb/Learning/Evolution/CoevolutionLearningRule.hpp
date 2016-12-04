@@ -4,7 +4,7 @@
 #define _COEVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 
 // Library Includes
 
@@ -88,6 +88,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/CoevolutionLearningRuleIO.hpp"
+#include "LightBulb/IO/CoevolutionLearningRuleIO.hpp"
 
 #endif

@@ -4,7 +4,7 @@
 #define _MOCKCOMBININGSTRATEGY_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractCombiningStrategy.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp>
 
 class MockCombiningStrategy : public LightBulb::AbstractCombiningStrategy
 {

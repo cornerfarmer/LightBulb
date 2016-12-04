@@ -4,9 +4,9 @@
 #define _CONSTANTRECOMBINATIONCOMMANDPREFERENCEGROUP_H_
 
 // Includes
-#include "TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
 
 namespace LightBulb
 {

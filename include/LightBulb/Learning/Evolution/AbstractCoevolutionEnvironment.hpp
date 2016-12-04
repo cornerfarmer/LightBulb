@@ -7,10 +7,10 @@
 #include <map>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
-#include "AbstractCoevolutionFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 
 // Forward declarations
 
@@ -116,6 +116,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractCoevolutionEnvironmentIO.hpp"
+#include "LightBulb/IO/AbstractCoevolutionEnvironmentIO.hpp"
 
 #endif

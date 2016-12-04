@@ -4,7 +4,7 @@
 #define _TICTACTOEGAMEWINDOW_H_
 
 // Includes
-#include <Windows/AbstractSubAppWindow.hpp>
+#include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations
 

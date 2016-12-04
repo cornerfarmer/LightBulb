@@ -4,9 +4,9 @@
 #define _ABSTRACTSIMPLEEVOLUTIONENVIRONMENTIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "IO/IOStorage.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -55,7 +55,7 @@ namespace LightBulb
 	}
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractSimpleEvolutionEnvironment);
 

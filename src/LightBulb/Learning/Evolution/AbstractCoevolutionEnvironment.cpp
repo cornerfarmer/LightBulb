@@ -1,7 +1,7 @@
 // Includes
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
-#include "Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include "Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 //Library includes
 #include <iostream>
 

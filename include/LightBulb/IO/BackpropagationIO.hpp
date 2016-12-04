@@ -4,8 +4,8 @@
 #define _BACKPROPAGATIONIO_H_
 
 // Libary includes
-#include "Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "IO/MatrixIO.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
+#include "LightBulb/IO/MatrixIO.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -46,7 +46,7 @@ namespace cereal
 }
 
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::Backpropagation);
 

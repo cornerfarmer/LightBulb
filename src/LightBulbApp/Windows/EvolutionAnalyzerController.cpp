@@ -1,8 +1,8 @@
 // Includes
-#include "Windows/EvolutionAnalyzerController.hpp"
-#include "Windows/EvolutionAnalyzerWindow.hpp"
-#include <Repositories/TrainingPlanRepository.hpp>
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulbApp/Windows/EvolutionAnalyzerController.hpp"
+#include "LightBulbApp/Windows/EvolutionAnalyzerWindow.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 
 namespace LightBulb
 {

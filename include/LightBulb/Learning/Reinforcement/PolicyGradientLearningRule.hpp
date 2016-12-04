@@ -4,10 +4,10 @@
 #define _POLICYGRADIENTLEARNINGRULE_H_
 
 // Includes
-#include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
-#include "Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
-#include "Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 
 // Library Includes
 #include <vector>

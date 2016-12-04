@@ -1,6 +1,6 @@
 // Includes
-#include "Windows/PreferencesController.hpp"
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulbApp/Windows/PreferencesController.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 
 namespace LightBulb
 {

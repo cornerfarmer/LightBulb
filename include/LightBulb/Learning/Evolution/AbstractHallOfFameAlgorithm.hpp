@@ -8,9 +8,9 @@
 #include <map>
 
 // Include
-#include "Logging/AbstractLoggable.hpp"
-#include "AbstractIndividual.hpp"
-#include "AbstractCombiningStrategy.hpp"
+#include "LightBulb/Logging/AbstractLoggable.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 
 namespace LightBulb
 {
@@ -64,6 +64,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractHallOfFameAlgorithmIO.hpp"
+#include "LightBulb/IO/AbstractHallOfFameAlgorithmIO.hpp"
 
 #endif

@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include <Mocks/MockMutationSelector.hpp>
-#include <Learning/Evolution/CoevolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
-#include <Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp>
+#include <LightBulb/Learning/Evolution/ConstantCoevolutionFitnessFunction.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <array>
 

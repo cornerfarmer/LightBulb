@@ -4,7 +4,7 @@
 #define _MOCKLEARNINGRESULT_H_
 
 #include "gmock/gmock.h"
-#include <Learning/AbstractLearningResult.hpp>
+#include <LightBulb/Learning/AbstractLearningResult.hpp>
 
 class MockLearningResult : public LightBulb::AbstractLearningResult
 {

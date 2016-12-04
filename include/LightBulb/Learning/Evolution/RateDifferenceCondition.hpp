@@ -4,7 +4,7 @@
 #define _RATEDIFFERENCECONDITION_H_
 
 // Includes
-#include "Learning/Evolution/AbstractExitCondition.hpp"
+#include "LightBulb/Learning/Evolution/AbstractExitCondition.hpp"
 
 namespace LightBulb
 {

@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
 #include <Mocks/MockCreationCommand.hpp>
 #include <Mocks/MockMutationCommand.hpp>
 #include <Mocks/MockSelectionCommand.hpp>

@@ -4,7 +4,7 @@
 #define _MOCKRANDOMFUNCTION_H_
 
 #include "gmock/gmock.h"
-#include <Function/RandomFunction/AbstractRandomFunction.hpp>
+#include <LightBulb/Function/RandomFunction/AbstractRandomFunction.hpp>
 
 class MockRandomFunction : public LightBulb::AbstractRandomFunction
 {

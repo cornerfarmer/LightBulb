@@ -5,11 +5,11 @@
 
 // Library includes
 #include <vector>
-#include <Event/Observable.hpp>
 #include <memory>
-#include <TrainingPlans/AbstractTrainingPlan.hpp>
 
 // Includes
+#include "LightBulb/Event/Observable.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 
 namespace LightBulb
 {
@@ -85,6 +85,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/TrainingPlanRepositoryIO.hpp"
+#include "LightBulbApp/IO/TrainingPlanRepositoryIO.hpp"
 
 #endif

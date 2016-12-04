@@ -1,8 +1,8 @@
 ﻿// Includes
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/AbstractSupervisedLearningRulePreferenceGroup.hpp"
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
-#include "TrainingPlans/Preferences/IntegerPreference.hpp"
-#include "TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/AbstractSupervisedLearningRulePreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 
 #define PREFERENCE_TOTAL_ERROR_GOAL "Total error goal"
 #define PREFERENCE_MIN_RANDOM "Min random weight value"

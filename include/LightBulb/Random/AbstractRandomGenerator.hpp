@@ -60,7 +60,7 @@ namespace LightBulb
 
 }
 
-#include "IO/AbstractRandomGeneratorIO.hpp"
+#include "LightBulb/IO/AbstractRandomGeneratorIO.hpp"
 
 
 #endif

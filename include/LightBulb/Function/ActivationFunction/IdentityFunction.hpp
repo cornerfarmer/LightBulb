@@ -4,8 +4,8 @@
 #define _IDENTITYFUNCTION_H_
 
 // Includes
-#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

@@ -1,5 +1,5 @@
 // Includes
-#include "Function/ActivationFunction/BinaryFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/BinaryFunction.hpp"
 // Library includes
 #include <stdexcept>
 

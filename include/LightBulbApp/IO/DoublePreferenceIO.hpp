@@ -4,7 +4,7 @@
 #define _DOUBLEPREFERENCEIO_H_
 
 // Includes
-#include "TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -39,7 +39,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::DoublePreference);
 

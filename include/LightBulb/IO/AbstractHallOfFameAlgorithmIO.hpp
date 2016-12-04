@@ -4,7 +4,7 @@
 #define _ABSTRACTHALLOFFAMEALGORITHMIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

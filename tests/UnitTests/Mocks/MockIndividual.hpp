@@ -4,8 +4,8 @@
 #define _MOCKINDIVIDUAL_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractIndividual.hpp>
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include <LightBulb/Learning/Evolution/AbstractIndividual.hpp>
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 class MockIndividual : public LightBulb::AbstractIndividual
 {

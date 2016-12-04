@@ -1,7 +1,7 @@
 // Includes
-#include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 // Library includes
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
 namespace LightBulb
 {

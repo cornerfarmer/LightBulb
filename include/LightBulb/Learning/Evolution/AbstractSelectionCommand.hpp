@@ -7,7 +7,7 @@
 #include <vector>
 
 // Includes
-#include "AbstractCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCommand.hpp"
 
 namespace LightBulb
 {

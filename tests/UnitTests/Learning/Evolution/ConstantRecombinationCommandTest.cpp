@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "Learning/Evolution/ConstantRecombinationCommand.hpp"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockRecombinationAlgorithm.hpp>
 #include <Mocks/MockRecombinationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>

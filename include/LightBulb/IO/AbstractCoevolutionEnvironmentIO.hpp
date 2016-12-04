@@ -4,7 +4,7 @@
 #define _ABSTRACTCOEVOLUTIONENVIRONMENTIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -75,7 +75,7 @@ namespace LightBulb
 
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractCoevolutionEnvironment);
 

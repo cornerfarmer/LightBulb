@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "Learning/Evolution/ConstantMutationCommand.hpp"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationAlgorithm.hpp>
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>

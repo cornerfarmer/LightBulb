@@ -59,6 +59,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/DoublePreferenceIO.hpp"
+#include "LightBulbApp/IO/DoublePreferenceIO.hpp"
 
 #endif

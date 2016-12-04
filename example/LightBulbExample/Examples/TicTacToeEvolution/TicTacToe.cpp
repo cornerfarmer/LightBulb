@@ -1,9 +1,9 @@
 // Includes
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 //Library includes
 #include <iostream>
 #include <iomanip>

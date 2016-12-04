@@ -1,6 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include <Learning/Evolution/AbstractEvolutionLearningRule.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include <LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp>
 
 namespace LightBulb
 {

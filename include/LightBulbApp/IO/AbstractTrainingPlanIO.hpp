@@ -4,7 +4,7 @@
 #define _ABSTRACTTRAININGPLANIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/vector.hpp>

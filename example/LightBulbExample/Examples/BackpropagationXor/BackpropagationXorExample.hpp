@@ -5,9 +5,9 @@
 
 
 // Includes
-#include "Teaching/Teacher.hpp"
-#include "TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Library includes
 

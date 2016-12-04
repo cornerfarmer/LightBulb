@@ -8,7 +8,7 @@
 #include <utility>
 
 // Includes
-#include "AbstractReuseSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractReuseSelector.hpp"
 
 namespace LightBulb
 {

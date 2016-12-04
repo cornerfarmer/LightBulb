@@ -1,11 +1,11 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
-#include "Random/StandardRandomGenerator.hpp"
+#include "LightBulb/Random/StandardRandomGenerator.hpp"
 
 using namespace LightBulb;
 

@@ -6,9 +6,9 @@
 // Library Includes
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Random/ZigguratGenerator.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 
 namespace LightBulb
 {
@@ -82,7 +82,7 @@ namespace LightBulb
 
 }
 
-#include "IO/AbstractEvolutionLearningRuleIO.hpp"
+#include "LightBulb/IO/AbstractEvolutionLearningRuleIO.hpp"
 
 
 #endif

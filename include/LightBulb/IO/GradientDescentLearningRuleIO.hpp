@@ -4,9 +4,9 @@
 #define _GRADIENTDESCENTLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "IO/MatrixIO.hpp"
-#include "ConstructExisting.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -59,7 +59,7 @@ namespace cereal
 }
 
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::GradientDescentLearningRule);
 

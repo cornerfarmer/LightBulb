@@ -7,9 +7,9 @@
 #include <memory>
 
 // Includes
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
@@ -83,6 +83,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractDefaultIndividualIO.hpp"
+#include "LightBulb/IO/AbstractDefaultIndividualIO.hpp"
 
 #endif

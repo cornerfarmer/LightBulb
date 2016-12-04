@@ -1,5 +1,5 @@
 // Includes
-#include "Learning/Evolution/AbstractRecombinationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
 
 namespace LightBulb
 {

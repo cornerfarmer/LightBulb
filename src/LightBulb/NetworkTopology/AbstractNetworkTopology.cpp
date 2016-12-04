@@ -1,4 +1,4 @@
 // Includes
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 // Library includes
 

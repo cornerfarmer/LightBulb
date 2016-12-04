@@ -4,7 +4,7 @@
 #define _MOCKMUTATIONCOMMAND_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractMutationCommand.hpp>
+#include <LightBulb/Learning/Evolution/AbstractMutationCommand.hpp>
 
 class MockMutationCommand : public LightBulb::AbstractMutationCommand
 {

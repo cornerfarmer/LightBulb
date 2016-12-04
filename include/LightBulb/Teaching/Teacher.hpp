@@ -4,8 +4,8 @@
 #define _TEACHER_H_
 
 // Includes
-#include "AbstractTeachingLesson.hpp"
-#include "AbstractTeacher.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/Teaching/AbstractTeacher.hpp"
 
 // Library includes
 

@@ -1,2 +1,2 @@
 // Includes
-#include "Random/StandardRandomGenerator.hpp"
+#include "LightBulb/Random/StandardRandomGenerator.hpp"

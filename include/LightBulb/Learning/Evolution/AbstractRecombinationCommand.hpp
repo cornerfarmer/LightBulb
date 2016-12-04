@@ -4,15 +4,15 @@
 #define _ABSTRACTRECOMBINATIONCOMMAND_H_
 
 // Include
-#include "Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractRecombinationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
 
 // Library Includes
 #include <vector>
 #include <memory>
 
 // Includes
-#include "AbstractCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCommand.hpp"
 
 namespace LightBulb
 {

@@ -10,9 +10,9 @@
 #include <mutex>
 
 // Include
-#include "Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "PongGame.hpp"
 #include "AbstractPongEnvironment.hpp"
 

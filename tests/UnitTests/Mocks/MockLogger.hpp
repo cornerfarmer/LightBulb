@@ -4,7 +4,7 @@
 #define _MOCKLOGGER_H_
 
 #include "gmock/gmock.h"
-#include <Logging/AbstractLogger.hpp>
+#include <LightBulb/Logging/AbstractLogger.hpp>
 
 class MockLogger : public LightBulb::AbstractLogger
 {

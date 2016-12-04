@@ -4,14 +4,14 @@
 #define _ABSTRACTMUTATIONCOMMAND_H_
 
 // Includes
-#include "Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "Learning/Evolution/AbstractMutationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
 
 // Library Includes
 #include <vector>
 
 // Includes
-#include "AbstractCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCommand.hpp"
 
 namespace LightBulb
 {

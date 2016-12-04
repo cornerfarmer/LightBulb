@@ -1,18 +1,18 @@
 #include "PongDQNExample.hpp"
-#include <Learning/Evolution/EvolutionLearningRule.hpp>
-#include <Learning/Evolution/CoevolutionLearningRule.hpp>
-#include <TrainingPlans/Preferences/IntegerPreference.hpp>
-#include <TrainingPlans/Preferences/BooleanPreference.hpp>
-#include <Function/InputFunction//WeightedSumFunction.hpp>
-#include <NeuronDescription/NeuronDescription.hpp>
-#include <NetworkTopology/FeedForwardNetworkTopology.hpp>
+#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
+#include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
+#include <LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp>
+#include <LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp>
+#include <LightBulb/Function/InputFunction//WeightedSumFunction.hpp>
+#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
+#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <Examples/PongEvolution/PongGameFactory.hpp>
 #include "PongReinforcementEnvironment.hpp"
-#include <Learning/Reinforcement/DQNLearningRule.hpp>
-#include <NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <TrainingPlans/Preferences/DoublePreference.hpp>
-#include <Function/ActivationFunction/RectifierFunction.hpp>
-#include "TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/DQNLearningRulePreferenceGroup.hpp"
+#include <LightBulb/Learning/Reinforcement/DQNLearningRule.hpp>
+#include <LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
+#include <LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp>
+#include <LightBulb/Function/ActivationFunction/RectifierFunction.hpp>
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/DQNLearningRulePreferenceGroup.hpp"
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
 #define PREFERENCE_NEURON_COUNT_FIRST_LAYER "Neuron count in 1. layer"

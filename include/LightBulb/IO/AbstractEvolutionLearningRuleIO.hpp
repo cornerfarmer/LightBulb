@@ -4,7 +4,7 @@
 #define _ABSTRACTEVOLUTIONLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

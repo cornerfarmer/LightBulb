@@ -1,6 +1,6 @@
 
 // Includes
-#include "IO/AbstractSingleNNTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
 
 namespace LightBulb
 {

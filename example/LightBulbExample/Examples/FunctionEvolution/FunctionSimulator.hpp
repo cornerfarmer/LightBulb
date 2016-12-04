@@ -8,8 +8,8 @@
 #include <map>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class AbstractTile;

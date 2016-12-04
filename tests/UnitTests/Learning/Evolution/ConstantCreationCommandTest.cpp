@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <Mocks/MockEvolutionEnvironment.hpp>
-#include <Learning/Evolution/ConstantCreationCommand.hpp>
+#include <LightBulb/Learning/Evolution/ConstantCreationCommand.hpp>
 #include <Mocks/MockIndividual.hpp>
 
 using namespace LightBulb;

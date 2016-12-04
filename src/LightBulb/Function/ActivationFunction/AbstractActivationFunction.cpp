@@ -1,5 +1,5 @@
 // Includes
-#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 namespace LightBulb
 {

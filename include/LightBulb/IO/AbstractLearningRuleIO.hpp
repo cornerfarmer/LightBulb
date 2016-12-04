@@ -4,7 +4,7 @@
 #define _ABSTRACTLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/AbstractLearningRule.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

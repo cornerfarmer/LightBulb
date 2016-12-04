@@ -4,11 +4,12 @@
 #define _FERMIFUNCTIONIO_H_
 
 // Libary includes
-#include <Function/ActivationFunction/FermiFunction.hpp>
-
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/polymorphic.hpp>
+
+// Includes
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 
 namespace LightBulb
 {
@@ -46,7 +47,7 @@ namespace cereal
 }
 
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::FermiFunction);
 

@@ -1,8 +1,8 @@
 // Includes
-#include "Learning/Evolution/BestSelectionCommand.hpp"
-#include "Learning/Evolution/AbstractEvolutionEnvironment.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/BestSelectionCommand.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 //Library includes
 #include <iostream>
 #include <iomanip>

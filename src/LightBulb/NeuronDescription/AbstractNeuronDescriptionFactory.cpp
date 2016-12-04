@@ -1,2 +1,2 @@
 // Includes
-#include "NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
+#include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"

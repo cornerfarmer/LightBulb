@@ -1,14 +1,14 @@
 // Includes
-#include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
-#include "NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "Teaching/Teacher.hpp"
-#include "Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/Learning/Supervised/AbstractSupervisedLearningRule.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 // Library includes
 #include <iomanip>
 #include <vector>
-#include "Learning/Supervised/SupervisedLearningResult.hpp"
-#include "ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Learning/Supervised/SupervisedLearningResult.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {

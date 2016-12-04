@@ -1,5 +1,5 @@
 // Includes
-#include "IO/Exporter/JSONObject.hpp"
+#include "LightBulb/IO/Exporter/JSONObject.hpp"
 
 namespace LightBulb
 {

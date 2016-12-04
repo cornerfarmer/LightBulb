@@ -6,7 +6,7 @@
 // Library Includes
 
 // Include
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 // Forward declarations
 

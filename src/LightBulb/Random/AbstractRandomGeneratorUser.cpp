@@ -1,5 +1,5 @@
 // Includes
-#include "Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 namespace LightBulb
 {

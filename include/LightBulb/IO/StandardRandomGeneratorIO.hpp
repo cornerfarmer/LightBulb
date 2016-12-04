@@ -4,7 +4,7 @@
 #define _STANDARDRANDOMGENERATORIO_H_
 
 // Includes
-#include "Random/StandardRandomGenerator.hpp"
+#include "LightBulb/Random/StandardRandomGenerator.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -51,7 +51,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::StandardRandomGenerator<std::default_random_engine>)
 

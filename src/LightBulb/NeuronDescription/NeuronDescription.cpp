@@ -1,5 +1,5 @@
 // Includes
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 namespace LightBulb
 {

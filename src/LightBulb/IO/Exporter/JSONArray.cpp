@@ -1,5 +1,5 @@
 // Includes
-#include "IO/Exporter/JSONArray.hpp"
+#include "LightBulb/IO/Exporter/JSONArray.hpp"
 
 namespace LightBulb
 {

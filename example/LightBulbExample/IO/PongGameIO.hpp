@@ -5,7 +5,7 @@
 
 // Libary includes
 #include "Examples/PongEvolution/PongGame.hpp"
-#include "IO/ConstructExisting.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 #include <cereal/cereal.hpp>
 

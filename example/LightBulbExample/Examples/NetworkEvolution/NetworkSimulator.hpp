@@ -8,7 +8,7 @@
 #include <map>
 
 // Include
-#include "Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 
 // Forward declarations
 

@@ -4,7 +4,7 @@
 #define _PONGGAMECONTROLLER_H_
 
 // Includes
-#include <Windows/AbstractCustomSubApp.hpp>
+#include "LightBulbApp/Windows/AbstractCustomSubApp.hpp"
 #include <memory>
 #include "PongGameWindow.hpp"
 #include "Pong.hpp"

@@ -4,8 +4,8 @@
 #define _ABSTRACTCOEVOLUTIONTRAININGPLANIO_H_
 
 // Includes
-#include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
-#include <Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
+#include "LightBulbApp/TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -48,7 +48,7 @@ namespace LightBulb
 	}
 }
 
-#include "IO/UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractCoevolutionTrainingPlan);
 

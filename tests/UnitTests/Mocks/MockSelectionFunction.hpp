@@ -4,7 +4,7 @@
 #define _MOCKSELECTIONFUNCTION_H_
 
 #include "gmock/gmock.h"
-#include <Function/SelectionFunction/AbstractSelectionFunction.hpp>
+#include <LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp>
 
 class MockSelectionFunction : public LightBulb::AbstractSelectionFunction
 {

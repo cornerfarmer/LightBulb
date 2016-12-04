@@ -6,9 +6,9 @@
 // Library Includes
 
 // Include
-#include <Learning/Reinforcement/AbstractReinforcementEnvironment.hpp>
-#include <Examples/PongEvolution/AbstractPongEnvironment.hpp>
-#include "IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "Examples/PongEvolution/AbstractPongEnvironment.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Forward declarations
 

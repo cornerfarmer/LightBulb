@@ -4,7 +4,7 @@
 #define _MOCKHALLOFFAMEALGORITHM_H_
 
 #include "gmock/gmock.h"
-#include <Learning/Evolution/AbstractHallOfFameAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp>
 
 class MockHallOfFameAlgorithm : public LightBulb::AbstractHallOfFameAlgorithm
 {

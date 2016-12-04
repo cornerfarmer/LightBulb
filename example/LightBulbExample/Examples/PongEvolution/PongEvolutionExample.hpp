@@ -4,9 +4,10 @@
 #ifndef _PONGEVOLUTIONEXAMPLE_H_
 #define _PONGEVOLUTIONEXAMPLE_H_
 
-#include "TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractCoevolutionTrainingPlan.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/SharedSamplingCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 
 
 class PongEvolutionExample : public LightBulb::AbstractCoevolutionTrainingPlan

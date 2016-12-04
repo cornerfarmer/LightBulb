@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
-#include <Learning/Evolution/FullHallOfFameAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/FullHallOfFameAlgorithm.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
-#include <Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
 
 using namespace LightBulb;
 

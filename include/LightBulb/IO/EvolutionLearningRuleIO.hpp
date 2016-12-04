@@ -4,8 +4,8 @@
 #define _EVOLUTIONLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
-#include "ConstructExisting.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -48,7 +48,7 @@ namespace cereal
 	};
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::EvolutionLearningRule);
 

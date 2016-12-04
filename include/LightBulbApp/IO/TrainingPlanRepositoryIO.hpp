@@ -4,8 +4,8 @@
 #define _TRAININGPLANREPOSITORYIO_H_
 
 // Includes
-#include "Repositories/TrainingPlanRepository.hpp"
-#include "IO/AbstractSingleNNTrainingPlanIO.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
+#include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

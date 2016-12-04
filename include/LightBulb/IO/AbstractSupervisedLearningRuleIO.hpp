@@ -4,7 +4,7 @@
 #define _ABSTRACTSUPERVISEDLEARNINGRULEIO_H_
 
 // Includes
-#include "Learning/Supervised/AbstractSupervisedLearningRule.hpp"
+#include "LightBulb/Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -26,7 +26,7 @@ namespace LightBulb
 	}
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractSupervisedLearningRule);
 

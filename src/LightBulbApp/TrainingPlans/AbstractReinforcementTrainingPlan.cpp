@@ -1,6 +1,6 @@
 ﻿// Includes
-#include "TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
-#include "Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 
 namespace LightBulb
 {

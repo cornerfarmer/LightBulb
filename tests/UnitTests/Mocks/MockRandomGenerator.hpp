@@ -4,7 +4,7 @@
 #define _MOCKRANDOMGENERATOR_H_
 
 #include "gmock/gmock.h"
-#include "Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 class MockRandomGenerator : public LightBulb::AbstractRandomGenerator
 {

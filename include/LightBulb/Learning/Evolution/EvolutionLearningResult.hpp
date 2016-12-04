@@ -1,8 +1,8 @@
 #ifndef _EVOLUTIONLEARNINGRESULT_H_
 #define _EVOLUTIONLEARNINGRESULT_H_
 
-#include "Learning/AbstractLearningResult.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/AbstractLearningResult.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {

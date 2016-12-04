@@ -5,8 +5,8 @@
 
 // Includes
 #include "AbstractEvolutionLearningRulePreferenceGroup.hpp"
-#include "IO/UseParentSerialization.hpp"
-#include "Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 
 namespace LightBulb
 {

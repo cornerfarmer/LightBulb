@@ -6,7 +6,7 @@
 // Library Includes
 
 // Include
-#include "Learning/Evolution/AbstractFitnessFunction.hpp"
+#include "LightBulb/Learning/Evolution/AbstractFitnessFunction.hpp"
 
 namespace LightBulb
 {

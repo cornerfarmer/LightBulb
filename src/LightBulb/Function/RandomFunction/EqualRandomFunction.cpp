@@ -1,5 +1,5 @@
 // Includes
-#include "Function/RandomFunction/EqualRandomFunction.hpp"
+#include "LightBulb/Function/RandomFunction/EqualRandomFunction.hpp"
 // Library includes
 #include <random>
 #include <algorithm>

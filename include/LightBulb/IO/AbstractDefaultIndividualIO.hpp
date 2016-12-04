@@ -4,8 +4,8 @@
 #define _ABSTRACTDEFAULTINDIVIDUALIO_H_
 
 // Includes
-#include "Learning/Evolution/AbstractDefaultIndividual.hpp"
-#include "IOStorage.hpp"
+#include "LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp"
+#include "LightBulb/IO/IOStorage.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -43,7 +43,7 @@ namespace LightBulb
 	}
 }
 
-#include "UsedArchives.hpp"
+#include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractDefaultIndividual);
 

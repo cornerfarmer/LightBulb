@@ -4,8 +4,8 @@
 #define _ABSTRACTREINFORCEMENTTRAININGPLAN_H_
 
 // Includes
-#include "TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
 // Library includes
 
@@ -53,6 +53,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractReinforcementTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractReinforcementTrainingPlanIO.hpp"
 
 #endif

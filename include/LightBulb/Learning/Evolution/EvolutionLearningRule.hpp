@@ -4,7 +4,7 @@
 #define _EVOLUTIONLEARNINGRULE_H_
 
 // Includes
-#include "Learning/Evolution/AbstractEvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 
 // Library Includes
 #include <vector>
@@ -130,6 +130,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/EvolutionLearningRuleIO.hpp"
+#include "LightBulb/IO/EvolutionLearningRuleIO.hpp"
 
 #endif

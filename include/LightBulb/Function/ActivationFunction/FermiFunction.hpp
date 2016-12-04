@@ -4,7 +4,7 @@
 #define _FERMIFUNCTION_H_
 
 // Includes
-#include "Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 namespace LightBulb
 {
@@ -38,6 +38,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/FermiFunctionIO.hpp"
+#include "LightBulb/IO/FermiFunctionIO.hpp"
 
 #endif

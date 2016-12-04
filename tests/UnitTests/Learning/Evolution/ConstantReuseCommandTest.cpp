@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "Learning/Evolution/ConstantReuseCommand.hpp"
-#include "Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Learning/Evolution/ConstantReuseCommand.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockReuseSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
 

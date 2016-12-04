@@ -5,11 +5,11 @@
 
 // Library includes
 #include <vector>
-#include <NeuralNetwork/AbstractNeuralNetwork.hpp>
-#include <Event/Observable.hpp>
 #include <memory>
 
 // Includes
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/Event/Observable.hpp"
 
 namespace LightBulb
 {
@@ -73,6 +73,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/NeuralNetworkRepositoryIO.hpp"
+#include "LightBulbApp/IO/NeuralNetworkRepositoryIO.hpp"
 
 #endif

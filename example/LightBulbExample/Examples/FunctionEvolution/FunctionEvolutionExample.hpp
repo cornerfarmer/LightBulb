@@ -3,7 +3,7 @@
 #ifndef _FUNCTIONEVOLUTIONEXAMPLE_H_
 #define _FUNCTIONEVOLUTIONEXAMPLE_H_
 
-#include "TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 
 class FunctionEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 {

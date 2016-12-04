@@ -8,8 +8,8 @@
 #include <chrono>
 #include <map>
 // Includes
-#include "Windows/AbstractWindow.hpp"
-#include "AbstractSubAppFactory.hpp"
+#include "LightBulbApp/Windows/AbstractWindow.hpp"
+#include "LightBulbApp/Windows/AbstractSubAppFactory.hpp"
 
 // Forward declarations
 class wxRichTextCtrl;

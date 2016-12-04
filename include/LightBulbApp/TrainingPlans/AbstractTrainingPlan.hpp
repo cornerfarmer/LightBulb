@@ -4,9 +4,9 @@
 #define _ABSTRACTTRAININGPLAN_H_
 
 // Includes
-#include <Event/Observable.hpp>
-#include <Logging/StorageLogger.hpp>
-#include <Windows/AbstractCustomSubAppFactory.hpp>
+#include "LightBulb/Event/Observable.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
+#include "LightBulbApp/Windows/AbstractCustomSubAppFactory.hpp"
 #include "Preferences/AbstractPreference.hpp"
 #include "Preferences/PreferenceGroup.hpp"
 
@@ -343,6 +343,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/AbstractTrainingPlanIO.hpp"
+#include "LightBulbApp/IO/AbstractTrainingPlanIO.hpp"
 
 #endif

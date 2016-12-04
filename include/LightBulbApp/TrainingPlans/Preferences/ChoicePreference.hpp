@@ -62,6 +62,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/ChoicePreferenceIO.hpp"
+#include "LightBulbApp/IO/ChoicePreferenceIO.hpp"
 
 #endif

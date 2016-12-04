@@ -4,7 +4,7 @@
 #define _TOPOLOGICALORDER_H_
 
 // Includes
-#include "ActivationOrder/AbstractActivationOrder.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
 
 namespace LightBulb
 {

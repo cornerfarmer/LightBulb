@@ -1,14 +1,14 @@
 // Includes
-#include "Learning/Reinforcement/DQNLearningRule.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "NetworkTopology/AbstractNetworkTopology.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/Learning/Reinforcement/DQNLearningRule.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
-#include <Learning/Evolution/EvolutionLearningResult.hpp>
-#include "Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
-#include <Teaching/TeachingLessonLinearInput.hpp>
-#include <ActivationOrder/TopologicalOrder.hpp>
-#include "Learning/Supervised/SupervisedLearningResult.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulb/Teaching/TeachingLessonLinearInput.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Learning/Supervised/SupervisedLearningResult.hpp"
 
 namespace LightBulb
 {

@@ -1,13 +1,13 @@
 #include "gtest/gtest.h"
-#include "ActivationOrder/TopologicalOrder.hpp"
-#include "IO/Exporter/SynapticExporter.hpp"
-#include "NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
-#include "Function/ActivationFunction/BinaryFunction.hpp"
-#include "Function/InputFunction/WeightedSumFunction.hpp"
-#include "Function/ActivationFunction/IdentityFunction.hpp"
-#include "NeuronDescription/SameNeuronDescriptionFactory.hpp"
-#include "NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/IO/Exporter/SynapticExporter.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Function/ActivationFunction/BinaryFunction.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
+#include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 using namespace LightBulb;
 

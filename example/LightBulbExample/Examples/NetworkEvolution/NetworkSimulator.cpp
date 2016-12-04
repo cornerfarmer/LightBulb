@@ -1,7 +1,7 @@
 // Includes
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 #include "Examples/NetworkEvolution/Network.hpp"
-#include "Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iostream>
 

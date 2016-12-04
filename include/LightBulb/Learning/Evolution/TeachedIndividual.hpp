@@ -6,8 +6,8 @@
 // Library Includes
 
 // Includes
-#include "Learning/Evolution/AbstractIndividual.hpp"
-#include "NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb
 {
@@ -76,6 +76,6 @@ namespace LightBulb
 	};
 }
 
-#include "IO/TeachedIndividualIO.hpp"
+#include "LightBulb/IO/TeachedIndividualIO.hpp"
 
 #endif
