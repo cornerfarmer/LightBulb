@@ -17,6 +17,11 @@ option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" OFF)
 option(EnableLightBulbApp "EnableLightBulbApp" ON)
 option(EnableLightBulbExample "EnableLightBulbExample" ON)
 option(EnableUnitTests "EnableUnitTests" OFF)
+option(CMAKE_BUILD_TYPE "CMAKE_BUILD_TYPE" Release)
+
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
 
 if(BUILD_SHARED_LIBS)
   set(wxWidgets_USE_STATIC OFF)
