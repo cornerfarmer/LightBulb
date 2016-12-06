@@ -24,9 +24,9 @@ if(NOT CMAKE_DEBUG_POSTFIX)
 endif()
 
 if(BUILD_SHARED_LIBS)
-  set(wxWidgets_USE_STATIC OFF)
+  set(wxWidgets_CONFIG_OPTIONS --static=no)
 else()
-  set(wxWidgets_USE_STATIC ON)
+  set(wxWidgets_CONFIG_OPTIONS --static=yes)
 endif()
 
 add_subdirectory(src/LightBulb)
