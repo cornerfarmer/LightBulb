@@ -122,6 +122,14 @@ namespace LightBulb
 		 * \brief Is called after new messages had been added to the output.
 		 */
 		void logMessagesAddingFinished();
+		/**
+		* \brief Locks the messages variable of the logger.
+		*/
+		void lockMessages();
+		/**
+		* \brief Unlocks the messages variable of the logger.
+		*/
+		void unlockMessages();
 	};
 }
 

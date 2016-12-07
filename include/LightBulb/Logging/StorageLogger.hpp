@@ -25,6 +25,10 @@ namespace LightBulb
 		 * \details Loglevel and message text of every message.
 		 */
 		std::vector<std::pair<LogLevel, std::string>> messages;
+		/**
+		 * \brief A mutex to make messages thread safe.
+		 */
+		std::mutex messagesMutex;
 	public:
 		/**
 		 * \brief Creates the logger
@@ -35,6 +39,14 @@ namespace LightBulb
 		 * \return All messages.
 		 */
 		const std::vector<std::pair<LogLevel, std::string>>& getMessages() const;
+		/**
+		 * \brief Locks the access to the messages storages.
+		 */
+		void lockMessages();
+		/**
+		 * \brief Unlocks the access to the messages storages.
+		 */
+		void unlockMessages();
 		// Inherited:
 		void log(const std::string& message, const LogLevel& level) override;
 	};

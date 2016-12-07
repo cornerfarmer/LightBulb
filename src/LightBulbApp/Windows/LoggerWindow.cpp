@@ -90,6 +90,7 @@ namespace LightBulb
 
 	void LoggerWindow::addNewLogMessages(wxThreadEvent& event)
 	{
+		getController().lockMessages();
 		auto messages = getController().getMessages();
 		for (int messageIndex = lastLogMessageIndex + 1; messageIndex < messages.size(); messageIndex++)
 		{
@@ -101,6 +102,8 @@ namespace LightBulb
 		{
 			textBox->ScrollIntoView(textBox->GetLastPosition(), WXK_END);
 		}
+		getController().unlockMessages();
+
 		getController().logMessagesAddingFinished();
 	}
 

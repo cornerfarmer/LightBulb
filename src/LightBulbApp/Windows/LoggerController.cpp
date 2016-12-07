@@ -101,4 +101,15 @@ namespace LightBulb
 		wxThreadEvent evt(LW_EVT_RELOAD_LOG);
 		window->GetEventHandler()->QueueEvent(evt.Clone());
 	}
+
+
+	void LoggerController::lockMessages()
+	{
+		selectedTrainingPlan->getLogger().lockMessages();
+	}
+
+	void LoggerController::unlockMessages()
+	{
+		selectedTrainingPlan->getLogger().unlockMessages();
+	}
 }
