@@ -76,3 +76,7 @@ Screenshots of the LightBulbApp:
 ## Examples & Tutorials
 
 There are currently [four examples](docs/examples_overview.md) which cover the basic usage of LightBulb.
+
+## Reference manuals
+
+LightBulb is fully [documented](http://docs.dw-projects.com/LightBulb/namespace_light_bulb.html).
