@@ -589,6 +589,9 @@
     <ClInclude Include="..\include\LightBulb\Tools\AbstractCloneable.hpp">
       <Filter>Quelldateien\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">

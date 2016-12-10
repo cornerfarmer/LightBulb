@@ -17,7 +17,7 @@ PongGameController::PongGameController(AbstractMainApp& mainApp, AbstractTrainin
 	if (dynamic_cast<PongEvolutionExample*>(trainingPlan))
 		environment = static_cast<Pong*>(&static_cast<PongEvolutionExample*>(trainingPlan)->getEnvironment());
 	else
-		environment = &static_cast<PongPolicyGradientExample*>(trainingPlan)->getEnvironment();
+		environment = static_cast<PongReinforcementEnvironment*>(&static_cast<AbstractReinforcementTrainingPlan*>(trainingPlan)->getEnvironment());
 	properties = environment->getGame().getProperties();
 	window.reset(new PongGameWindow(*this, parent));
 }

@@ -31,8 +31,6 @@ using namespace LightBulb;
 AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 {
 	PolicyGradientLearningRuleOptions options = createOptions<PolicyGradientLearningRuleOptions, PolicyGradientLearningRulePreferenceGroup>();
-	environment = createEnvironment();
-	options.environment = environment;
 
 	fillDefaultLearningRuleOptions(options);
 
@@ -40,7 +38,7 @@ AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 }
 
 
-PongReinforcementEnvironment* PongPolicyGradientExample::createEnvironment()
+LightBulb::AbstractReinforcementEnvironment* PongPolicyGradientExample::createEnvironment()
 {
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
@@ -91,8 +89,3 @@ std::string PongPolicyGradientExample::getLearningRuleName() const
 	return PolicyGradientLearningRule::getName();
 }
 
-
-PongReinforcementEnvironment& PongPolicyGradientExample::getEnvironment()
-{
-	return *environment;
-}

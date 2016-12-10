@@ -67,6 +67,7 @@
     <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\NeuronDescriptionIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\ResilientLearningRateIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\RMSPropLearningRateIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.hpp" />

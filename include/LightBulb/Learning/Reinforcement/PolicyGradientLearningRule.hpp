@@ -8,6 +8,7 @@
 #include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 // Library Includes
 #include <vector>
@@ -63,6 +64,9 @@ namespace LightBulb
 	 */
 	class PolicyGradientLearningRule : public AbstractReinforcementLearningRule
 	{
+		template <class Archive>
+		friend void serialize(Archive& archive, PolicyGradientLearningRule& learningRule);
+		friend struct cereal::LoadAndConstruct<PolicyGradientLearningRule>;
 	private:
 		/**
 		 * \brief The state memory.
@@ -95,7 +99,7 @@ namespace LightBulb
 		/**
 		 * \brief The value function network which can act as a base.
 		 */
-		std::unique_ptr<AbstractNeuralNetwork> valueFunctionNetwork;
+		std::unique_ptr<NeuralNetwork> valueFunctionNetwork;
 		/**
 		 * \brief The last output of the neural network.
 		 */
@@ -177,5 +181,6 @@ namespace LightBulb
 	};
 }
 
+#include "LightBulb/IO/PolicyGradientLearningRuleIO.hpp"
 
 #endif

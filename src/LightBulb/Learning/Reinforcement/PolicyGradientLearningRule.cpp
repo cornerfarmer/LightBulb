@@ -48,6 +48,8 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initialize(PolicyGradientLearningRuleOptions& options)
 	{
+		stepsSinceLastReward = 0;
+
 		gradientCalculation.reset(new Backpropagation());
 		gradientDescentAlgorithm.reset(new RMSPropLearningRate(options.rmsPropLearningRateOptions));
 
