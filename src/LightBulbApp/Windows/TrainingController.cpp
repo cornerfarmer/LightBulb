@@ -28,6 +28,7 @@ namespace LightBulb
 		window = new TrainingWindow(*this);
 		saveTrainingPlanAfterPausedIndex = -1;
 		saveTrainingSessionAfterPause = false;
+		loadTrainingSessionAfterPause = false;
 		closeWindowAfterPause = false;
 
 		for (int i = 0; i < trainingPlanPatterns_.size(); i++)
