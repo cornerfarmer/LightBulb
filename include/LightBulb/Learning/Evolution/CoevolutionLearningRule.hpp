@@ -68,6 +68,7 @@ namespace LightBulb
 		* \param options_ The options which configure the coevolution learning rule.
 		*/
 		CoevolutionLearningRule(CoevolutionLearningRuleOptions* options_);
+		CoevolutionLearningRule();
 		/**
 		* \brief Returns the name of the learning rule
 		* \return The name

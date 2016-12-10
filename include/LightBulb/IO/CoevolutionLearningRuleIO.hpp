@@ -6,6 +6,7 @@
 // Includes
 #include "LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp"
 #include "LightBulb/IO/IOStorage.hpp"
+#include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>
@@ -37,31 +38,28 @@ namespace LightBulb
 
 namespace cereal
 {
-	template <> struct LoadAndConstruct<LightBulb::CoevolutionLearningRule>
+	CONSTRUCT_EXISTING(LightBulb::CoevolutionLearningRule, LightBulb::AbstractLearningRule)
 	{
 		/**
-		* \brief Constructs a CoevolutionLearningRule.
+		* \brief Constructs an existing CoevolutionLearningRule.
 		* \tparam Archive The archive type.
 		* \param ar The archive which should be used.
-		* \param construct The CoevolutionLearningRule construct object.
+		* \param learningRule The existing EvolutionLearningRule to construct.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive& ar, construct<LightBulb::CoevolutionLearningRule>& construct)
+		static void construct(Archive& ar, LightBulb::CoevolutionLearningRule& learningRule)
 		{
 			using namespace LightBulb;
-			CoevolutionLearningRule* learningRule = static_cast<CoevolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
-			ar(base_class<AbstractEvolutionLearningRule>(learningRule));
+			ar(base_class<AbstractEvolutionLearningRule>(&learningRule));
 
-			IOStorage<AbstractLearningRule>::push(learningRule->getOptions().learningRule1);
+			IOStorage<AbstractLearningRule>::push(learningRule.getOptions().learningRule1);
 			std::unique_ptr<AbstractLearningRule> learningRuleDummy;
 			ar(make_nvp("learningRule1", learningRuleDummy));
-			static_cast<CoevolutionLearningRuleOptions*>(learningRule->options.get())->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			static_cast<CoevolutionLearningRuleOptions*>(learningRule.options.get())->learningRule1 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 
-			IOStorage<AbstractLearningRule>::push(learningRule->getOptions().learningRule2);
+			IOStorage<AbstractLearningRule>::push(learningRule.getOptions().learningRule2);
 			ar(make_nvp("learningRule2", learningRuleDummy));
-			static_cast<CoevolutionLearningRuleOptions*>(learningRule->options.get())->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
-
-			IOStorage<AbstractLearningRule>::push(learningRule);
+			static_cast<CoevolutionLearningRuleOptions*>(learningRule.options.get())->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
 		}
 	};
 }

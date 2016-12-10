@@ -13,11 +13,19 @@ namespace LightBulb
 	CoevolutionLearningRule::CoevolutionLearningRule(CoevolutionLearningRuleOptions& options_)
 		: AbstractEvolutionLearningRule(new CoevolutionLearningRuleOptions(options_))
 	{
+		exitConditionReached = false;
 	}
 
 	CoevolutionLearningRule::CoevolutionLearningRule(CoevolutionLearningRuleOptions* options_)
 		: AbstractEvolutionLearningRule(options_)
 	{
+		exitConditionReached = false;
+	}
+
+	CoevolutionLearningRule::CoevolutionLearningRule()
+		: AbstractEvolutionLearningRule(new CoevolutionLearningRuleOptions())
+	{
+		exitConditionReached = false;
 	}
 
 	std::string CoevolutionLearningRule::getName()
