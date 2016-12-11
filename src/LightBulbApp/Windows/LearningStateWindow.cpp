@@ -36,12 +36,12 @@ namespace LightBulb
 		sizer = new wxBoxSizer(wxVERTICAL);
 		wxBoxSizer* header = new wxBoxSizer(wxHORIZONTAL);
 
-		header->Add(new wxStaticText(this, wxID_ANY, "Comparison dataset "), 0, wxLEFT | wxALIGN_CENTER_VERTICAL, 5);
+		header->Add(new wxStaticText(this, wxID_ANY, "x-axis "), 0, wxLEFT | wxALIGN_CENTER_VERTICAL, 5);
 		comparisonDatasetChoice = new wxChoice(this, wxID_ANY);
 		comparisonDatasetChoice->Bind(wxEVT_CHOICE, wxCommandEventFunction(&LearningStateWindow::comparisonDatasetChanged), this);
 		header->Add(comparisonDatasetChoice, 0, wxLEFT | wxALIGN_CENTER_VERTICAL, 5);
 
-		header->Add(new wxStaticText(this, wxID_ANY, "Refresh all "), 0, wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
+		header->Add(new wxStaticText(this, wxID_ANY, "Refresh all "), 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, 5);
 		refreshRateChoice = new wxComboBox(this, wxID_ANY);
 		wxIntegerValidator<unsigned int> validator;
 		validator.SetMin(1);
