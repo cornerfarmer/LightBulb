@@ -370,10 +370,8 @@ namespace LightBulb
 		int trainingPlanIndex = event.GetPayload<int>();
 		wxFileDialog saveFileDialog(this, "Save training plan", "", getController().getTrainingPlans().at(trainingPlanIndex)->getName(), "Training plan files (*.tp)|*.tp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
-		if (saveFileDialog.ShowModal() == wxID_CANCEL)
-			return;
-
-		getController().saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
+		if (saveFileDialog.ShowModal() != wxID_CANCEL)
+			getController().saveTrainingPlan(saveFileDialog.GetPath().ToStdString(), trainingPlanIndex);
 
 		Enable(true);
 		Refresh();
@@ -383,10 +381,8 @@ namespace LightBulb
 	{
 		wxFileDialog saveFileDialog(this, "Save training session", "", "", "Training session files (*.ts)|*.ts", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
-		if (saveFileDialog.ShowModal() == wxID_CANCEL)
-			return;
-
-		getController().saveTrainingSession(saveFileDialog.GetPath().ToStdString());
+		if (saveFileDialog.ShowModal() != wxID_CANCEL)
+			getController().saveTrainingSession(saveFileDialog.GetPath().ToStdString());
 
 		Enable(true);
 		Refresh();
@@ -397,10 +393,8 @@ namespace LightBulb
 
 		wxFileDialog openFileDialog(this, "Load training session", "", "", "Training session files (*.ts)|*.ts", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 
-		if (openFileDialog.ShowModal() == wxID_CANCEL)
-			return;
-
-		getController().loadTrainingSession(openFileDialog.GetPath().ToStdString());
+		if (openFileDialog.ShowModal() != wxID_CANCEL)
+			getController().loadTrainingSession(openFileDialog.GetPath().ToStdString());
 
 		Enable(true);
 		Refresh();
