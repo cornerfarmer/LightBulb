@@ -46,7 +46,7 @@ protected:
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
 	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
 public:
-	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_ = nullptr, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_ = nullptr);
+	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_ = nullptr, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_ = nullptr);
 	TicTacToe();
 	void getSight(std::vector<double>& sight);
 	void setField(int x, int y);
@@ -65,6 +65,6 @@ public:
 	int getRoundCount() const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(TicTacToe, LightBulb::AbstractCoevolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, );
+USE_EXISTING_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(TicTacToe, LightBulb::AbstractCoevolutionEnvironment, LightBulb::AbstractEvolutionEnvironment);
 
 #endif

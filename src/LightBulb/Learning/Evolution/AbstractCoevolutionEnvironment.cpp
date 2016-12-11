@@ -7,13 +7,15 @@
 
 namespace LightBulb
 {
-	AbstractCoevolutionEnvironment::AbstractCoevolutionEnvironment(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
-	{
+	AbstractCoevolutionEnvironment::AbstractCoevolutionEnvironment(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_)
+	{ 
 		parasiteEnvironment = isParasiteEnvironment_;
 		combiningStrategy.reset(combiningStrategy_);
 		fitnessFunction.reset(fitnessFunction_);
-		hallOfFameToAddAlgorithm.reset(hallOfFameToAddAlgorithm_);
-		hallOfFameToChallengeAlgorithm.reset(hallOfFameToChallengeAlgorithm_);
+		if (hallOfFameToAddAlgorithm_ && hallOfFameToChallengeAlgorithm_) {
+			hallOfFameToAddAlgorithm = *hallOfFameToAddAlgorithm_;
+			hallOfFameToChallengeAlgorithm = *hallOfFameToChallengeAlgorithm_;
+		}
 		comparisons = 0;
 	}
 

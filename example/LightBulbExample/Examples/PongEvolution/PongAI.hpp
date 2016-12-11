@@ -24,6 +24,6 @@ public:
 	void setPong(Pong& currentGame_);
 };
 
-USE_PARENT_SERIALIZATION(PongAI, LightBulb::AbstractDefaultIndividual, );
+USE_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(PongAI, LightBulb::AbstractDefaultIndividual);
 
 #endif

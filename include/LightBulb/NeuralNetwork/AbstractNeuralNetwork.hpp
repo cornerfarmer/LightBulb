@@ -9,6 +9,7 @@
 #include <ctime>
 
 // Includes
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
@@ -113,5 +114,8 @@ namespace LightBulb
 		virtual std::string getStateAsString() const;
 	};
 }
+
+EMPTY_SINGLE_SERIALIZATION(LightBulb::AbstractNeuralNetwork, LightBulb);
+
 
 #endif

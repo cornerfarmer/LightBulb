@@ -22,6 +22,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(PongPolicyGradientExample, LightBulb::AbstractLearningRuleTrainingPlan, );
+USE_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(PongPolicyGradientExample, LightBulb::AbstractLearningRuleTrainingPlan);
 
 #endif

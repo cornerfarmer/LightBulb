@@ -25,6 +25,6 @@ public:
 	void setTicTacToe(TicTacToe& newTicTacToe);
 };
 
-USE_PARENT_SERIALIZATION(TicTacToeAI, LightBulb::AbstractDefaultIndividual, );
+USE_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(TicTacToeAI, LightBulb::AbstractDefaultIndividual);
 
 #endif

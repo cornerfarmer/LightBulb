@@ -164,7 +164,7 @@ namespace LightBulb
 		 */
 		AbstractLearningResult* learn(bool resume);
 	public:
-		virtual ~AbstractLearningRule() {};
+		virtual ~AbstractLearningRule() {}
 		/**
 		 * \brief Creates the learning rule.
 		 * \param options_ The options which configure the learning rule.
@@ -180,6 +180,11 @@ namespace LightBulb
 		* \return The result of the learning process.
 		*/
 		AbstractLearningResult* resume();
+		/**
+		* \brief Returns if there is already a learning state.
+		* \return True, if there is one.
+		*/
+		bool hasLearningState();
 		/**
 		 * \brief Tell the learning process to pause after the next iteration.
 		 */

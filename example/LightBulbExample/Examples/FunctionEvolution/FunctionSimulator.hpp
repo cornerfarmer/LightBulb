@@ -39,6 +39,6 @@ public:
 	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
 };
 
-USE_EXISTING_PARENT_SERIALIZATION(FunctionSimulator, LightBulb::AbstractSimpleEvolutionEnvironment, LightBulb::AbstractEvolutionEnvironment, )
+USE_EXISTING_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(FunctionSimulator, LightBulb::AbstractSimpleEvolutionEnvironment, LightBulb::AbstractEvolutionEnvironment)
 
 #endif

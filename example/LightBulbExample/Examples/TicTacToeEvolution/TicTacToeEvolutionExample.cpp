@@ -104,7 +104,7 @@ AbstractEvolutionEnvironment* TicTacToeEvolutionExample::createEnvironment()
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
-	TicTacToe* ticTacToe1 = new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	TicTacToe* ticTacToe1 = new TicTacToe(options, false, cs1, new SharedCoevolutionFitnessFunction(), &hof1, &hof2);
 
 	cs1->setSecondEnvironment(static_cast<TicTacToe&>(*parasiteEnvironment.get()));
 	cs2->setSecondEnvironment(*ticTacToe1);
@@ -117,11 +117,11 @@ AbstractEvolutionEnvironment* TicTacToeEvolutionExample::createParasiteEnvironme
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
-	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
+	hof1.reset(new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE)));
+	hof2.reset(new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE)));
 
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
-	return new TicTacToe(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+	return new TicTacToe(options, true, cs2, new SharedCoevolutionFitnessFunction(), &hof2, &hof1);
 }
 
 TicTacToeEvolutionExample::TicTacToeEvolutionExample()

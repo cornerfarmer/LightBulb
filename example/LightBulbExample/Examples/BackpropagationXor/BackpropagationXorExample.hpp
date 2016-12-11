@@ -29,6 +29,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(BackpropagationXorExample, LightBulb::AbstractSupervisedTrainingPlan, );
+USE_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(BackpropagationXorExample, LightBulb::AbstractSupervisedTrainingPlan);
 
 #endif

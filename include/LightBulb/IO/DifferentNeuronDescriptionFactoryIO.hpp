@@ -24,6 +24,7 @@ namespace LightBulb
 	{
 		archive(cereal::make_nvp("innerNeuronDescription", descriptionFactory.innerNeuronDescription));
 		archive(cereal::make_nvp("outputNeuronDescription", descriptionFactory.outputNeuronDescription));
+		archive(cereal::base_class<AbstractNeuronDescriptionFactory>(&descriptionFactory));
 	}
 }
 
@@ -47,6 +48,8 @@ namespace cereal
 			ar(make_nvp("outputNeuronDescription", outputNeuronDescription));
 
 			construct(innerNeuronDescription.release(), outputNeuronDescription.release());
+
+			ar(cereal::base_class<AbstractNeuronDescriptionFactory>(construct.ptr()));
 		}
 	};
 }

@@ -24,6 +24,7 @@ namespace LightBulb
 	template <class Archive>
 	void save(Archive& archive, AbstractSimpleEvolutionEnvironment const& environment)
 	{
+		archive(cereal::base_class<AbstractEvolutionEnvironment>(&environment));
 		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
 		for (auto individual = environment.individuals.begin(); individual != environment.individuals.end(); individual++)
 			individuals.push_back(std::unique_ptr<AbstractIndividual>(*individual));
@@ -43,6 +44,7 @@ namespace LightBulb
 	template <class Archive>
 	void load(Archive& archive, AbstractSimpleEvolutionEnvironment& environment)
 	{
+		archive(cereal::base_class<AbstractEvolutionEnvironment>(&environment));
 		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
 		IOStorage<AbstractEvolutionEnvironment>::push(&environment);
 		archive(cereal::make_nvp("individuals", individuals));

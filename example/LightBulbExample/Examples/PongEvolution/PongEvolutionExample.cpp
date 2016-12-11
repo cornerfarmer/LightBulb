@@ -110,7 +110,7 @@ AbstractEvolutionEnvironment* PongEvolutionExample::createEnvironment()
 	cs1 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
-	Pong* pong1 = new Pong(options, false, cs1, new SharedCoevolutionFitnessFunction(), hof1, hof2);
+	Pong* pong1 = new Pong(options, false, cs1, new SharedCoevolutionFitnessFunction(), &hof1, &hof2);
 
 	cs1->setSecondEnvironment(static_cast<Pong&>(*parasiteEnvironment.get()));
 	cs2->setSecondEnvironment(*pong1);
@@ -123,11 +123,11 @@ AbstractEvolutionEnvironment* PongEvolutionExample::createParasiteEnvironment()
 {
 	cs2 = new SharedSamplingCombiningStrategy(getIntegerPreference(PREFERENCE_COMPETITIONS_SIZE));
 
-	hof1 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
-	hof2 = new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE));
+	hof1.reset(new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE)));
+	hof2.reset(new RandomHallOfFameAlgorithm(getIntegerPreference(PREFERENCE_HALLOFFAME_COMPETITIONS_SIZE)));
 
 	FeedForwardNetworkTopologyOptions options = getNetworkOptions();
-	return new Pong(options, true, cs2, new SharedCoevolutionFitnessFunction(), hof2, hof1);
+	return new Pong(options, true, cs2, new SharedCoevolutionFitnessFunction(), &hof2, &hof1);
 }
 
 PongEvolutionExample::PongEvolutionExample()

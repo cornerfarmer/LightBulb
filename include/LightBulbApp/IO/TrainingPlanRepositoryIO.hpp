@@ -5,7 +5,7 @@
 
 // Includes
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
-#include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

@@ -13,8 +13,8 @@
 class PongEvolutionExample : public LightBulb::AbstractCoevolutionTrainingPlan
 {
 private:
-	LightBulb::AbstractHallOfFameAlgorithm* hof1;
-	LightBulb::AbstractHallOfFameAlgorithm* hof2;
+	std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm> hof1;
+	std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm> hof2;
 	LightBulb::SharedSamplingCombiningStrategy* cs1;
 	LightBulb::SharedSamplingCombiningStrategy* cs2;
 protected:
@@ -30,6 +30,6 @@ public:
 	std::string getLearningRuleName() const override;
 };
 
-USE_PARENT_SERIALIZATION(PongEvolutionExample, LightBulb::AbstractCoevolutionTrainingPlan, );
+USE_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(PongEvolutionExample, LightBulb::AbstractCoevolutionTrainingPlan);
 
 #endif

@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 #include <memory>
 #include <Eigen/Dense>
 #include <vector>
@@ -31,5 +32,7 @@ namespace LightBulb
 		virtual void execute(int layerNr, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs, const std::vector<Eigen::MatrixXd> &weights) const = 0;
 	};
 }
+
+EMPTY_SINGLE_SERIALIZATION(LightBulb::AbstractInputFunction, LightBulb);
 
 #endif

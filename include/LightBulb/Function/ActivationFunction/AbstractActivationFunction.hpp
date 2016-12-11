@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Library includes
 #include <vector>
@@ -66,5 +67,7 @@ namespace LightBulb
 		virtual bool hasAMaxAndMinimum() const = 0;
 	};
 }
+
+EMPTY_SINGLE_SERIALIZATION(LightBulb::AbstractActivationFunction, LightBulb)
 
 #endif

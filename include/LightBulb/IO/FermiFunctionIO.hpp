@@ -23,6 +23,7 @@ namespace LightBulb
 	void serialize(Archive& archive, FermiFunction& fermiFunction)
 	{
 		archive(cereal::make_nvp("temperatureParameter", fermiFunction.temperatureParameter));
+		archive(cereal::base_class<AbstractActivationFunction>(&fermiFunction));
 	}
 }
 
@@ -42,6 +43,7 @@ namespace cereal
 			double temperatureParameter;
 			ar(make_nvp("temperatureParameter", temperatureParameter));
 			construct(temperatureParameter);
+			ar(cereal::base_class<LightBulb::AbstractActivationFunction>(construct.ptr()));
 		}
 	};
 }

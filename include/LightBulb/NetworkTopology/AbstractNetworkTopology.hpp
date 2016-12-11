@@ -4,12 +4,13 @@
 #define _ABSTRACTNETWORKTOPOLOGY_H_
 
 // Includes
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Library includes
 #include <Eigen/Dense>
 #include <vector>
 #include <memory>
-#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 namespace LightBulb
 {
@@ -259,5 +260,7 @@ namespace LightBulb
 	};
 
 }
+
+EMPTY_SERIALIZATION(LightBulb::AbstractNetworkTopology, LightBulb)
 
 #endif

@@ -42,7 +42,7 @@ namespace LightBulb
 
 	bool AbstractLearningRuleTrainingPlan::hasLearningState()
 	{
-		return learningRule.get() != nullptr;
+		return learningRule.get() != nullptr && learningRule->hasLearningState();
 	}
 
 	const AbstractLearningResult& AbstractLearningRuleTrainingPlan::getLearningResult() const

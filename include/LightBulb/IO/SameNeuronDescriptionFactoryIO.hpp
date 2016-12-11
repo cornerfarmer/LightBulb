@@ -23,6 +23,7 @@ namespace LightBulb
 	void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory)
 	{
 		archive(cereal::make_nvp("neuronDescription", descriptionFactory.neuronDescription));
+		archive(cereal::base_class<AbstractNeuronDescriptionFactory>(&descriptionFactory));
 	}
 }
 
@@ -43,6 +44,7 @@ namespace cereal
 			std::unique_ptr<NeuronDescription> neuronDescription;
 			ar(make_nvp("neuronDescription", neuronDescription));
 			construct(neuronDescription.release());
+			ar(cereal::base_class<AbstractNeuronDescriptionFactory>(construct.ptr()));
 		}
 	};
 }

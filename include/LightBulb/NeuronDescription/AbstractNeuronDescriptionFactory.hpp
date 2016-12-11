@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 #include <utility>
 
 namespace LightBulb
@@ -55,5 +56,7 @@ namespace LightBulb
 		virtual const AbstractInputFunction& getInnerInputFunction() const = 0;
 	};
 }
+
+EMPTY_SINGLE_SERIALIZATION(LightBulb::AbstractNeuronDescriptionFactory, LightBulb)
 
 #endif

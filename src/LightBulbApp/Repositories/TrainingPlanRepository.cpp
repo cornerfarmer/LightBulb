@@ -26,8 +26,8 @@ namespace LightBulb
 
 	void TrainingPlanRepository::save(const std::string& path, int trainingPlanIndex) const
 	{
-		std::ofstream os(path, std::ios::binary);
-		cereal::BinaryOutputArchive archive(os);
+		std::ofstream os(path, std::ios::out | std::ios::binary);
+		cereal::PortableBinaryOutputArchive archive(os);
 
 		onlyUseNeuralNetworkIndex = false;
 		archive(trainingPlans[trainingPlanIndex]);
@@ -35,8 +35,8 @@ namespace LightBulb
 
 	AbstractTrainingPlan& TrainingPlanRepository::load(const std::string& path)
 	{
-		std::ifstream is(path, std::ios::binary);
-		cereal::BinaryInputArchive archive(is);
+		std::ifstream is(path, std::ios::in | std::ios::binary);
+		cereal::PortableBinaryInputArchive archive(is);
 
 		trainingPlans.push_back(std::unique_ptr<AbstractTrainingPlan>());
 		archive(trainingPlans.back());
@@ -70,6 +70,11 @@ namespace LightBulb
 				return true;
 		}
 		return false;
+	}
+
+	void TrainingPlanRepository::clear()
+	{
+		trainingPlans.clear();
 	}
 
 	const std::vector<std::unique_ptr<AbstractTrainingPlan>>& TrainingPlanRepository::getTrainingPlans() const

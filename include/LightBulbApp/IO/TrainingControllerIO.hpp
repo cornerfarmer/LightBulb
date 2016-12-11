@@ -6,6 +6,7 @@
 // Includes
 #include "LightBulbApp/Windows/TrainingController.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
+#include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

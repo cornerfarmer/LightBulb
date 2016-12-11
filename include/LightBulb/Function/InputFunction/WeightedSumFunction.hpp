@@ -27,6 +27,6 @@ namespace LightBulb
 	};
 }
 
-EMPTY_CHILD_SERIALIZATION(LightBulb::WeightedSumFunction, LightBulb);
+USE_PARENT_SINGLE_SERIALIZATION(LightBulb::WeightedSumFunction, LightBulb::AbstractInputFunction, LightBulb);
 
 #endif

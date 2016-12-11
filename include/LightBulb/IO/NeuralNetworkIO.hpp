@@ -22,6 +22,7 @@ namespace LightBulb
 	void serialize(Archive& archive, NeuralNetwork& neuralNetwork)
 	{
 		archive(cereal::make_nvp("networkTopology", neuralNetwork.networkTopology));
+		archive(cereal::base_class<AbstractNeuralNetwork>(&neuralNetwork));
 		archive(cereal::make_nvp("state", static_cast<int>(neuralNetwork.state)));
 		archive(cereal::make_nvp("name", neuralNetwork.name));
 	}
@@ -44,6 +45,7 @@ namespace cereal
 			std::unique_ptr<AbstractNetworkTopology> networkTopology;
 			ar(make_nvp("networkTopology", networkTopology));
 			construct(networkTopology.release());
+			ar(cereal::base_class<AbstractNeuralNetwork>(construct.ptr()));
 			ar(make_nvp("state", construct->state));
 			ar(make_nvp("name", construct->name));
 		}

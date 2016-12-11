@@ -89,6 +89,11 @@ namespace LightBulb
 		return getLearningResult();
 	}
 
+	bool AbstractLearningRule::hasLearningState()
+	{
+		return learningState.get() != nullptr;
+	}
+
 	AbstractLearningResult* AbstractLearningRule::resume()
 	{
 		initializeResumeLearningAlgoritm();

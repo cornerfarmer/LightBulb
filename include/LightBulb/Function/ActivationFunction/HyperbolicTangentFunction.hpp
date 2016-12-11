@@ -8,6 +8,7 @@
 
 // Includes
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
@@ -30,4 +31,5 @@ namespace LightBulb
 	};
 }
 
+USE_PARENT_SINGLE_SERIALIZATION(LightBulb::HyperbolicTangentFunction, LightBulb::AbstractActivationFunction, LightBulb);
 #endif

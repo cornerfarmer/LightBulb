@@ -25,6 +25,6 @@ namespace LightBulb
 	};
 }
 
-EMPTY_CHILD_SERIALIZATION(LightBulb::EuclideanDistance, LightBulb);
+USE_PARENT_SINGLE_SERIALIZATION(LightBulb::EuclideanDistance, LightBulb::AbstractInputFunction, LightBulb);
 
 #endif

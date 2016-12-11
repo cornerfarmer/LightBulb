@@ -82,6 +82,7 @@ namespace LightBulb
 		 * \return True, if a training plan with this name exists.
 		 */
 		bool exists(const std::string& name) const;
+		void clear();
 	};
 }
 

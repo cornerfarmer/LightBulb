@@ -36,6 +36,6 @@ namespace LightBulb
 	};
 }
 
-EMPTY_CHILD_SERIALIZATION(LightBulb::BinaryFunction, LightBulb);
+USE_PARENT_SINGLE_SERIALIZATION(LightBulb::BinaryFunction, LightBulb::AbstractActivationFunction, LightBulb);
 
 #endif

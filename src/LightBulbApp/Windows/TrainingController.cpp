@@ -5,16 +5,16 @@
 #include "LightBulbApp/Windows/TrainingWindow.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
-#include <fstream>
-#include "LightBulb/IO/UsedArchives.hpp"
-#include <cereal/types/memory.hpp>
-#include <cereal/types/polymorphic.hpp>
 #include "LightBulbApp/Windows/PreferencesController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
 #include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
+#include <fstream>
+#include "LightBulb/IO/UsedArchives.hpp"
+#include <cereal/types/memory.hpp>
+#include <cereal/types/polymorphic.hpp>
 
 namespace LightBulb
 {
@@ -243,8 +243,8 @@ namespace LightBulb
 
 	void TrainingController::loadTrainingSession(const std::string& path)
 	{
-		std::ifstream is(path);
-		cereal::XMLInputArchive archive(is);
+		std::ifstream is(path, std::ios::in | std::ios::binary);
+		cereal::PortableBinaryInputArchive archive(is);
 
 		archive(*this);
 
@@ -254,8 +254,8 @@ namespace LightBulb
 
 	void TrainingController::saveTrainingSession(const std::string& path)
 	{
-		std::ofstream os(path);
-		cereal::XMLOutputArchive archive(os);
+		std::ofstream os(path, std::ios::out | std::ios::binary);
+		cereal::PortableBinaryOutputArchive archive(os);
 
 		archive(*this);
 	}
