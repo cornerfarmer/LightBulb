@@ -21,6 +21,7 @@ namespace LightBulb
 	class NeuralNetworkRepository;
 	class TrainingPlanRepository;
 	class AbstractSubAppFactory;
+	class PreferencesController;
 
 	/**
 	 * \brief The main app which manages all neural networks an training plans.
@@ -80,6 +81,12 @@ namespace LightBulb
 		 * \return True, if they are paused.
 		 */
 		bool allTrainingPlansPaused();
+		/**
+		* \brief Returns the preference controller for the given training plan, if there is one open.
+		* \param trainingPlan The training plan whose preferences should be searched for.
+		* \return If found, the controller else null.
+		*/
+		PreferencesController* getOpenPreferences(const AbstractTrainingPlan& trainingPlan);
 	public:
 		/**
 		 * \brief Creates the training app.

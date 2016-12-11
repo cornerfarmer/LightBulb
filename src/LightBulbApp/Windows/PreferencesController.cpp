@@ -21,9 +21,13 @@ namespace LightBulb
 		return "Preferences";
 	}
 
-
 	const std::vector<std::unique_ptr<AbstractPreferenceElement>>& PreferencesController::getPreferenceGroups()
 	{
 		return trainingPlan->getPreferenceGroups();
+	}
+
+	const AbstractTrainingPlan& PreferencesController::getTrainingPlan()
+	{
+		return *trainingPlan;
 	}
 }

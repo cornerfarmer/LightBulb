@@ -53,6 +53,11 @@ namespace LightBulb
 		 * \return A vector of all preference elements.
 		 */
 		const std::vector<std::unique_ptr<AbstractPreferenceElement>>& getPreferenceGroups();
+		/**
+		* \brief Returns the training plan whose preferences are managed by this controller.
+		* \return The training plan.
+		*/
+		const AbstractTrainingPlan& getTrainingPlan();
 	};
 }
 

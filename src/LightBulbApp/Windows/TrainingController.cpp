@@ -319,9 +319,31 @@ namespace LightBulb
 
 	void TrainingController::openPreferences(int trainingPlanPatternIndex)
 	{
-		PreferencesController* preferencesController = new PreferencesController(*this, *trainingPlanPatterns[trainingPlanPatternIndex].get(), *window);
-		preferencesController->getWindow().Show();
-		activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
+		if (PreferencesController* preferencesController = getOpenPreferences(*trainingPlanPatterns[trainingPlanPatternIndex].get()))
+		{
+			preferencesController->getWindow().SetFocus();
+		}
+		else
+		{
+			preferencesController = new PreferencesController(*this, *trainingPlanPatterns[trainingPlanPatternIndex].get(), *window);
+			preferencesController->getWindow().Show();
+			activeSubApps.push_back(std::unique_ptr<AbstractSubApp>(preferencesController));
+		}
+	}
+
+	PreferencesController* TrainingController::getOpenPreferences(const AbstractTrainingPlan& trainingPlan)
+	{
+		for (auto activeSubApp = activeSubApps.begin(); activeSubApp != activeSubApps.end(); activeSubApp++)
+		{
+			if (PreferencesController* preferencesController = dynamic_cast<PreferencesController*>(activeSubApp->get()))
+			{
+				if (&preferencesController->getTrainingPlan() == &trainingPlan)
+				{
+					return preferencesController;
+				}
+			}
+		}
+		return nullptr;
 	}
 
 	void TrainingController::setTrainingPlanName(int trainingPlanIndex, const std::string& newName)
