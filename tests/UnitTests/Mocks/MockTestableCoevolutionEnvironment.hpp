@@ -9,7 +9,7 @@
 class MockTestableCoevolutionEnvironment : public LightBulb::AbstractCoevolutionEnvironment
 {
 public:
-	MockTestableCoevolutionEnvironment(bool isParasiteEnvironment_, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToAddAlgorithm_, LightBulb::AbstractHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm_)
+	MockTestableCoevolutionEnvironment(bool isParasiteEnvironment_, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_, std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_)
 		: AbstractCoevolutionEnvironment(isParasiteEnvironment_, combiningStrategy_, fitnessFunction_, hallOfFameToAddAlgorithm_, hallOfFameToChallengeAlgorithm_)
 	{
 	}

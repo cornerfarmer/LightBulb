@@ -13,15 +13,15 @@ public:
 	MockTestableCoevolutionEnvironment* coevolutionEnvironment;
 	MockCombiningStrategy* combiningStrategy;
 	MockCoevolutionFitnessFunction* coevolutionFitnessFunction;
-	MockHallOfFameAlgorithm* hallOfFameToAddAlgorithm;
-	MockHallOfFameAlgorithm* hallOfFameToChallengeAlgorithm;
+	std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToAddAlgorithm;
+	std::shared_ptr<AbstractHallOfFameAlgorithm> hallOfFameToChallengeAlgorithm;
 	
 	void SetUp() {
 		combiningStrategy = new MockCombiningStrategy();
 		coevolutionFitnessFunction = new MockCoevolutionFitnessFunction();
-		hallOfFameToAddAlgorithm = new MockHallOfFameAlgorithm();
-		hallOfFameToChallengeAlgorithm = new MockHallOfFameAlgorithm();
-		coevolutionEnvironment = new MockTestableCoevolutionEnvironment(true, combiningStrategy, coevolutionFitnessFunction, hallOfFameToAddAlgorithm, hallOfFameToChallengeAlgorithm);
+		hallOfFameToAddAlgorithm.reset(new MockHallOfFameAlgorithm());
+		hallOfFameToChallengeAlgorithm.reset(new MockHallOfFameAlgorithm());
+		coevolutionEnvironment = new MockTestableCoevolutionEnvironment(true, combiningStrategy, coevolutionFitnessFunction, &hallOfFameToAddAlgorithm, &hallOfFameToChallengeAlgorithm);
 	}
 
 	virtual ~AbstractCoevolutionEnvironmentTest()
@@ -43,11 +43,11 @@ TEST_F(AbstractCoevolutionEnvironmentTest, doSimulationStep)
 	{
 		testing::InSequence s;
 		EXPECT_CALL(*combiningStrategy, execute(testing::Ref(*coevolutionEnvironment))).WillOnce(testing::ReturnRef(result));
-		EXPECT_CALL(*hallOfFameToChallengeAlgorithm, execute(testing::Ref(*coevolutionEnvironment), testing::Ref(result))).Times(1);
+		EXPECT_CALL(*static_cast<MockHallOfFameAlgorithm*>(hallOfFameToChallengeAlgorithm.get()), execute(testing::Ref(*coevolutionEnvironment), testing::Ref(result))).Times(1);
 		EXPECT_CALL(*coevolutionFitnessFunction, execute(testing::Ref(result))).WillOnce(testing::Return(fitnessValues));
 		EXPECT_CALL(*coevolutionEnvironment, getHighscoreList()).WillOnce(testing::ReturnRef(highscore));
 		EXPECT_CALL(*coevolutionEnvironment, rateIndividual(testing::Ref(bestIndividual))).Times(1);
-		EXPECT_CALL(*hallOfFameToAddAlgorithm, addMember(&bestIndividual)).Times(1);
+		EXPECT_CALL(*static_cast<MockHallOfFameAlgorithm*>(hallOfFameToAddAlgorithm.get()), addMember(&bestIndividual)).Times(1);
 	}
 
 	coevolutionEnvironment->doSimulationStep();
