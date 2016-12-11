@@ -46,6 +46,8 @@ namespace LightBulb
 	 */
 	class AbstractLogger : public Observable<LoggerEvents, AbstractLogger>
 	{
+		template <class Archive>
+		friend void serialize(Archive& archive, AbstractLogger& logger);
 	private:
 	protected:
 		/**
@@ -85,6 +87,8 @@ namespace LightBulb
 		const LogLevel& getLogLevel() const;
 	};
 }
+
+#include "LightBulb/IO/AbstractLoggerIO.hpp"
 
 #endif
 

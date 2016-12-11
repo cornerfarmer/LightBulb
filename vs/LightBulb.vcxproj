@@ -39,6 +39,7 @@
     <ClInclude Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractIndividualIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractLearningRuleIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLoggerIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.hpp" />

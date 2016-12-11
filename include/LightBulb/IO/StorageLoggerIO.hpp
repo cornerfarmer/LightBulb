@@ -9,6 +9,7 @@
 #include <cereal/types/vector.hpp>
 #include <cereal/types/utility.hpp>
 #include <cereal/cereal.hpp>
+#include <cereal/types/polymorphic.hpp>
 
 namespace LightBulb
 {
@@ -21,8 +22,15 @@ namespace LightBulb
 	template <class Archive>
 	void serialize(Archive& archive, StorageLogger& storageLogger)
 	{
+		archive(cereal::base_class<AbstractLogger>(&storageLogger));
 		archive(cereal::make_nvp("messages", storageLogger.messages));
 	}
 }
+
+
+#include "LightBulb/IO/UsedArchives.hpp"
+
+CEREAL_REGISTER_TYPE(LightBulb::StorageLogger);
+
 
 #endif

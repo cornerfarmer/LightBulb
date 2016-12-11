@@ -592,6 +592,9 @@
     <ClInclude Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLoggerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">

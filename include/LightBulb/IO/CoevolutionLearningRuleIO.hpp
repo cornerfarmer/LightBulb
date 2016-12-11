@@ -60,6 +60,9 @@ namespace cereal
 			IOStorage<AbstractLearningRule>::push(learningRule.getOptions().learningRule2);
 			ar(make_nvp("learningRule2", learningRuleDummy));
 			static_cast<CoevolutionLearningRuleOptions*>(learningRule.options.get())->learningRule2 = static_cast<AbstractEvolutionLearningRule*>(IOStorage<AbstractLearningRule>::pop());
+			
+			learningRule.getOptions().learningRule1->setLogger(*learningRule.getOptions().logger);
+			learningRule.getOptions().learningRule2->setLogger(*learningRule.getOptions().logger);
 		}
 	};
 }
