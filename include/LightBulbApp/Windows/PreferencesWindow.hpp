@@ -30,6 +30,9 @@ namespace LightBulb
 	class PreferencesWindow : public AbstractSubAppWindow
 	{
 	private:
+		wxScrolledWindow* sw;
+		wxSizer* scrollWinSizer;
+        bool collapsingActive;
 		/**
 		 * \brief Determines how many discrete steps a double slider should have.
 		 */

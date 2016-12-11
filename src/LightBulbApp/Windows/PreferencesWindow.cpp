@@ -23,9 +23,9 @@ namespace LightBulb
 		:AbstractSubAppWindow(controller_, PreferencesController::getLabel(), parent)
 	{
 		wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-
-		wxScrolledWindow* sw = new wxScrolledWindow(this);
-		wxSizer* scrollWinSizer = new wxBoxSizer(wxVERTICAL);
+        collapsingActive = false;
+		sw = new wxScrolledWindow(this);
+		scrollWinSizer = new wxBoxSizer(wxVERTICAL);
 		bool isFirst = true;
 
 		for (auto preferenceGroup = controller_.getPreferenceGroups().begin(); preferenceGroup != controller_.getPreferenceGroups().end(); preferenceGroup++)
@@ -93,7 +93,25 @@ namespace LightBulb
 
 	void PreferencesWindow::refreshWindow(wxCollapsiblePaneEvent& event)
 	{
-		Layout();
+        if (!collapsingActive) {
+            collapsingActive = true;
+            wxCollapsiblePane *collpane = static_cast<wxCollapsiblePane*>(event.GetEventObject());
+            wxWindow* window = collpane->GetParent();
+
+            int scroll = sw->GetScrollPos(wxVERTICAL);
+            while (window->GetParent()) {
+                if ((collpane = dynamic_cast<wxCollapsiblePane *>(window))) {
+                    collpane->Collapse(true);
+                    collpane->Collapse(false);
+                }
+                if (window->IsTopLevel())
+                    break;
+                window = window->GetParent();
+            }
+            Layout();
+            sw->SetScrollPos(wxVERTICAL, scroll);
+            collapsingActive = false;
+        }
 	}
 
 
