@@ -138,7 +138,7 @@ namespace LightBulb
 		}
 		// Inherited:
 		const std::string& getName() const override;
-		std::string toString() const override;
+		std::string toString(std::string offset = "") const override;
 		void setName(std::string newName) override;
 		AbstractCloneable* clone() const override;
 	};

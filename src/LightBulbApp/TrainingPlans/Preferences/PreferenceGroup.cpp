@@ -48,12 +48,12 @@ namespace LightBulb
 		return name;
 	}
 
-	std::string PreferenceGroup::toString() const
+	std::string PreferenceGroup::toString(std::string offset) const
 	{
 		std::string text = name + ":\n";
 		for (auto preference = preferences.begin(); preference !=preferences.end(); preference++)
 		{
-			text += "    - " + (*preference)->toString();
+			text += offset + " - " + (*preference)->toString(offset + "  ");
 		}
 		return text;
 	}

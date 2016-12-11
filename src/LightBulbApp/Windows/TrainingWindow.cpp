@@ -647,7 +647,7 @@ namespace LightBulb
 		detailsTextBox->WriteText("Preferences:\n");
 		for (auto preferenceGroup = trainingPlan.getPreferenceGroups().begin(); preferenceGroup != trainingPlan.getPreferenceGroups().end(); preferenceGroup++)
 		{
-			detailsTextBox->WriteText(" + " + (*preferenceGroup)->toString() + "\n");
+			detailsTextBox->WriteText(" + " + (*preferenceGroup)->toString("  ") + "\n");
 		}
 
 

@@ -27,7 +27,7 @@ namespace LightBulb
 		 * \brief Generates a string which describes the current state of the element in human readable format.
 		 * \return The string.
 		 */
-		virtual std::string toString() const = 0;
+		virtual std::string toString(std::string offset = "") const = 0;
 		/**
 		 * \brief Returns the name of the element.
 		 * \return The name.
