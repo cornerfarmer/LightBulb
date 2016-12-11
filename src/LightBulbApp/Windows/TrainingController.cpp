@@ -356,7 +356,7 @@ namespace LightBulb
 		bool allPaused = true;
 		for (auto trainingPlan = trainingPlanRepository->getTrainingPlans().begin(); trainingPlan != trainingPlanRepository->getTrainingPlans().end(); trainingPlan++)
 		{
-			if ((*trainingPlan)->isRunning())
+			if ((*trainingPlan)->isRunning() || (*trainingPlan)->isPausing())
 				allPaused = false;
 		}
 		return allPaused;
