@@ -268,7 +268,11 @@ namespace LightBulb
 			data.push_back(wxVariant((*network)->getName()));
 			data.push_back(wxVariant(getNeuralNetworkSizeAsString((*network)->getNetworkTopology().getNeuronCountsPerLayer())));
 			std::time_t creationDate = (*network)->getCreationDate();
-			data.push_back(wxVariant(std::asctime(std::localtime(&creationDate))));
+			std::string time = std::asctime(std::localtime(&creationDate));
+			if (time.back() == '\n') {
+				time = time.substr(0, time.length() - 1);
+			}
+			data.push_back(wxVariant(time));
 			neuralNetworkList->AppendItem(data);
 			if (currentDetailObject == network->get())
 				showDetailsOfNeuralNetwork(*network->get());
