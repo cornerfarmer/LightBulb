@@ -307,6 +307,7 @@ namespace LightBulb
 				if (!(*trainingPlan)->isPaused())
 					(*trainingPlan)->pause();
 			}
+			return false;
 		}
 		else
 			return true;
