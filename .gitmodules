@@ -10,3 +10,6 @@
 [submodule "extlibs/googletest"]
 	path = extlibs/googletest
 	url = https://github.com/google/googletest.git
+[submodule "extlibs/viennacl"]
+	path = extlibs/viennacl
+	url = https://github.com/viennacl/viennacl-dev.git
