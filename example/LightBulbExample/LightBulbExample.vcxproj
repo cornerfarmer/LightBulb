@@ -76,13 +76,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../include;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../include;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_HAVE_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_richtext.lib;wxmsw31ud_adv.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;../../extlibs/freechart/lib/vc_lib/msw_wxFreeChart30ud.lib;../../vs/Debug/LightBulbApp.lib;../../vs/Debug/LightBulb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_richtext.lib;wxmsw31ud_adv.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;../../extlibs/freechart/lib/vc_lib/msw_wxFreeChart30ud.lib;../../vs/Debug/LightBulbApp.lib;../../vs/Debug/LightBulb.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -100,15 +100,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../include;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../include;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_HAVE_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_richtext.lib;wxmsw31u_adv.lib;wxmsw31u_html.lib;wxbase31u_xml.lib;../../extlibs/freechart/lib/vc_lib/wxcode_msw28u_freechart.lib;../../vs/Release/LightBulb.lib;../../vs/Release/LightBulbApp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_richtext.lib;wxmsw31u_adv.lib;wxmsw31u_html.lib;wxbase31u_xml.lib;../../extlibs/freechart/lib/vc_lib/wxcode_msw28u_freechart.lib;../../vs/Release/LightBulb.lib;../../vs/Release/LightBulbApp.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
@@ -153,6 +153,7 @@
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Performance\ViennaCLTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\BackpropagationXor\BackpropagationXorExample.hpp" />
@@ -185,6 +186,10 @@
     <ClInclude Include="IO\PositionIO.hpp" />
     <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
+    <ClInclude Include="Performance\ViennaCLTests.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Performance\test.cl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

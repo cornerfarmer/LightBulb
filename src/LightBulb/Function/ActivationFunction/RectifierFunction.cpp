@@ -1,5 +1,7 @@
 // Includes
 #include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+
 // Library includes
 
 namespace LightBulb
@@ -15,9 +17,9 @@ namespace LightBulb
 		return  std::max(leakyFac * input, input);
 	}
 
-	void RectifierFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const std::vector<Eigen::VectorXd>& netInputs) const
+	void RectifierFunction::execute(int layerNr, std::vector<Vector> &activations, const std::vector<Vector> &netInputs) const
 	{
-		activations[layerNr] = netInputs[layerNr].cwiseMax(0);
+		activations[layerNr].getEigenValueForEditing() = netInputs[layerNr].getEigenValue().cwiseMax(0);
 	}
 
 	double RectifierFunction::executeDerivation(double input) const

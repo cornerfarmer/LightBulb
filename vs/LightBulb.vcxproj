@@ -23,7 +23,6 @@
     <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\IdentityFunction.hpp" />
     <ClInclude Include="..\include\LightBulb\Function\ActivationFunction\RectifierFunction.hpp" />
     <ClInclude Include="..\include\LightBulb\Function\InputFunction\AbstractInputFunction.hpp" />
-    <ClInclude Include="..\include\LightBulb\Function\InputFunction\EuclideanDistance.hpp" />
     <ClInclude Include="..\include\LightBulb\Function\InputFunction\WeightedSumFunction.hpp" />
     <ClInclude Include="..\include\LightBulb\Function\RandomFunction\AbstractRandomFunction.hpp" />
     <ClInclude Include="..\include\LightBulb\Function\RandomFunction\EqualRandomFunction.hpp" />
@@ -39,6 +38,7 @@
     <ClInclude Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractIndividualIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractLearningRuleIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLinearAlgebraObjectIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractLoggerIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.hpp" />
@@ -156,6 +156,9 @@
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Vector.hpp" />
     <ClInclude Include="..\include\LightBulb\Logging\AbstractLoggable.hpp" />
     <ClInclude Include="..\include\LightBulb\Logging\AbstractLogger.hpp" />
     <ClInclude Include="..\include\LightBulb\Logging\ConsoleLogger.hpp" />
@@ -195,7 +198,6 @@
     <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\IdentityFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\RectifierFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\InputFunction\AbstractInputFunction.cpp" />
-    <ClCompile Include="..\src\LightBulb\Function\InputFunction\EuclideanDistance.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\InputFunction\WeightedSumFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\RandomFunction\AbstractRandomFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\RandomFunction\EqualRandomFunction.cpp" />
@@ -285,6 +287,9 @@
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Lib\ziggurat.cpp" />
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.cpp" />
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Matrix.cpp" />
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Vector.cpp" />
     <ClCompile Include="..\src\LightBulb\Logging\AbstractLoggable.cpp" />
     <ClCompile Include="..\src\LightBulb\Logging\AbstractLogger.cpp" />
     <ClCompile Include="..\src\LightBulb\Logging\ConsoleLogger.cpp" />
@@ -355,9 +360,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include;..\extlibs\viennacl</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -371,11 +377,12 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions> _UNICODE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include;..\extlibs\viennacl</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <BrowseInformation>true</BrowseInformation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

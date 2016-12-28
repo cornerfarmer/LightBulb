@@ -62,7 +62,7 @@ namespace LightBulb
 		/**
 		 * \brief Contains all previous deltaWeights (used by the momentum term)
 		 */
-		std::vector<Eigen::MatrixXd> previousDeltaWeights;
+		std::vector<Matrix> previousDeltaWeights;
 		/**
 		* \brief Returns our current options in form of a SimpleGradientDescentOptions object.
 		* \return The SimpleGradientDescentOptions object.
@@ -84,7 +84,7 @@ namespace LightBulb
 		friend void swap(SimpleGradientDescent& lhs, SimpleGradientDescent& rhs) noexcept;
 
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
+		Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

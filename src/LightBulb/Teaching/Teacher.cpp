@@ -4,6 +4,7 @@
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -66,10 +67,10 @@ namespace LightBulb
 		double weightDecayError = 0;
 		if (weightDecayFac > 0)
 		{
-			std::vector<Eigen::MatrixXd>& weights = neuralNetwork.getNetworkTopology().getAllWeights();
+			std::vector<Matrix>& weights = neuralNetwork.getNetworkTopology().getAllWeights();
 			for (auto weightsPerLayer = weights.begin(); weightsPerLayer != weights.end(); weightsPerLayer++)
 			{
-				weightDecayError += 0.5 * weightsPerLayer->squaredNorm();
+				weightDecayError += 0.5 * weightsPerLayer->getEigenValue().squaredNorm();
 			}
 		}
 		return weightDecayFac * weightDecayError;

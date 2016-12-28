@@ -19,9 +19,9 @@ namespace LightBulb
 		return output;
 	}
 
-	std::unique_ptr<Eigen::VectorXd> AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
+	std::unique_ptr<Vector> AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
-		std::unique_ptr<Eigen::VectorXd> errorVector;
+		std::unique_ptr<Vector> errorVector;
 
 		// Try the lesson and extract the output
 		std::vector<double> outputVector = tryLesson(neuralNetwork, activationOrder);
@@ -31,25 +31,25 @@ namespace LightBulb
 	}
 
 
-	std::unique_ptr<Eigen::VectorXd> AbstractTeachingLesson::getErrorVectorFromOutputVector(const std::vector<double>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
+	std::unique_ptr<Vector> AbstractTeachingLesson::getErrorVectorFromOutputVector(const std::vector<double>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
 		const TeachingInput<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
 
 		// Create the errorVector
-		std::unique_ptr<Eigen::VectorXd> errorVector(new Eigen::VectorXd(teachingInput.getDimension()));
+		std::unique_ptr<Vector> errorVector(new Vector(teachingInput.getDimension()));
 
 		// Calculate the error values (expected value - real value)
 		for (int i = 0; i < teachingInput.getDimension(); i++)
 		{
 			if (teachingInput.exists(i))
 			{
-				(*errorVector)[i] = teachingInput.get(i) - outputVector[i];
+				(*errorVector).getEigenValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
 				if (clipError)
-					(*errorVector)[i] = std::max(-1.0, std::min(1.0, (*errorVector)[i]));
+					(*errorVector).getEigenValueForEditing()[i] = std::max(-1.0f, std::min(1.0f, (*errorVector).getEigenValue()[i]));
 			}
 			else
-				(*errorVector)[i] = 0;
+				(*errorVector).getEigenValueForEditing()[i] = 0;
 		}
 
 		return errorVector;
@@ -59,14 +59,14 @@ namespace LightBulb
 	double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
 		// Calculate the errorVector
-		std::unique_ptr<Eigen::VectorXd> errorVector = getErrorVector(neuralNetwork, activationOrder, clipError);
+		std::unique_ptr<Vector> errorVector = getErrorVector(neuralNetwork, activationOrder, clipError);
 
 		double specificError = 0;
 
 		// Add the square of every errorValue in the errorVector
-		for (int i = 0; i < errorVector->rows(); i++)
+		for (int i = 0; i < errorVector->getEigenValue().rows(); i++)
 		{
-			specificError += pow((*errorVector)(i), 2.0);
+			specificError += pow((*errorVector).getEigenValue()(i), 2.0);
 		}		
 
 		// Divide the specific error by two

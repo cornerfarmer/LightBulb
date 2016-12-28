@@ -1,22 +1,23 @@
 // Includes
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {
-	void AbstractActivationFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const std::vector<Eigen::VectorXd>& netInputs) const
+	void AbstractActivationFunction::execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const
 	{
-		for (auto i = 0; i < netInputs[layerNr].rows(); i++)
+		for (auto i = 0; i < netInputs[layerNr].getEigenValue().rows(); i++)
 		{
-			(activations[layerNr])(i) = execute(netInputs[layerNr](i));
+			(activations[layerNr]).getEigenValueForEditing()(i) = execute(netInputs[layerNr].getEigenValue()(i));
 		}
 	}
 
-	Eigen::VectorXd AbstractActivationFunction::executeDerivation(const Eigen::VectorXd& input) const
+	Vector AbstractActivationFunction::executeDerivation(const Vector& input) const
 	{
-		Eigen::VectorXd output(input.rows());
-		for (auto i = 0; i < input.rows(); i++)
+		Vector output(input.getEigenValue().rows());
+		for (auto i = 0; i < input.getEigenValue().rows(); i++)
 		{
-			output(i) = executeDerivation(input(i));
+			output.getEigenValueForEditing()(i) = executeDerivation(input.getEigenValue()(i));
 		}
 		return output;
 	}

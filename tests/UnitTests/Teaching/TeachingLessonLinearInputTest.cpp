@@ -76,10 +76,10 @@ TEST_F(TeachingLessonLinearInputTest, tryLesson)
 TEST_F(TeachingLessonLinearInputTest, getErrormapFromOutputVector)
 {
 	std::vector<double> output(3, 1);
-	Eigen::VectorXd expected(3);
-	expected[0] = 0;
-	expected[1] = 1;
-	expected[2] = 2;
+	Vector expected(3);
+	expected.getEigenValueForEditing()[0] = 0;
+	expected.getEigenValueForEditing()[1] = 1;
+	expected.getEigenValueForEditing()[2] = 2;
 	auto returnedValue = teachingLesson->getErrorVectorFromOutputVector(output, *neuralNetwork);
 	EXPECT_EQ(expected, *returnedValue.get());
 }
@@ -87,14 +87,14 @@ TEST_F(TeachingLessonLinearInputTest, getErrormapFromOutputVector)
 TEST_F(TeachingLessonLinearInputTest, getErrormap)
 {
 	setUpNeuralNetworkCalculateCall();
-	Eigen::VectorXd expected(3);
-	expected[0] = 2;
-	expected[1] = 3;
-	expected[2] = 4;
+	Vector expected(3);
+	expected.getEigenValueForEditing()[0] = 2;
+	expected.getEigenValueForEditing()[1] = 3;
+	expected.getEigenValueForEditing()[2] = 4;
 	auto returnedValue = teachingLesson->getErrorVector(*neuralNetwork, *activationOrder);
-	EXPECT_EQ(expected[0], (*returnedValue.get())[0]);
-	EXPECT_EQ(expected[1], (*returnedValue.get())[1]);
-	EXPECT_EQ(expected[2], (*returnedValue.get())[2]);
+	EXPECT_EQ(expected.getEigenValue()[0], (*returnedValue.get()).getEigenValue()[0]);
+	EXPECT_EQ(expected.getEigenValue()[1], (*returnedValue.get()).getEigenValue()[1]);
+	EXPECT_EQ(expected.getEigenValue()[2], (*returnedValue.get()).getEigenValue()[2]);
 }
 
 TEST_F(TeachingLessonLinearInputTest, getSpecificError)

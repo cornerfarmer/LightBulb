@@ -5,7 +5,6 @@
 
 // Library includes
 #include <vector>
-#include <Eigen/Dense>
 
 // Includes
 #include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
@@ -14,6 +13,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class JSONObject;
+	class Matrix;
 	class JSONAttribute;
 	class FeedForwardNetworkTopology;
 	/**
@@ -23,7 +23,7 @@ namespace LightBulb
 	{
 	private:
 		FeedForwardNetworkTopology* networkTopology;
-		const Eigen::MatrixXd* weights;
+		const Matrix* weights;
 		JSONObject* getNetworkJSONObject();
 		JSONAttribute* getNeuronsAttribute();
 		JSONObject* getNeuronJSONObject(int layer, int neuron);

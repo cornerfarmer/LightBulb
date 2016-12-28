@@ -22,23 +22,23 @@ TEST(SynapticExporterTest, exportSimpleFeedForwardNetworkTopology)
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new BinaryFunction()));
 	FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
 	auto& weights = networkTopology->getAllWeights();
-	weights[0](0, 0) = -5.97730812726829;
-	weights[0](0, 1) = -6.01825421209065;
+	weights[0].getEigenValueForEditing()(0, 0) = -5.97730812726829;
+	weights[0].getEigenValueForEditing()(0, 1) = -6.01825421209065;
 
-	weights[0](1, 0) = -2.36775816488263;
-	weights[0](1, 1) = -2.46654960015039;
+	weights[0].getEigenValueForEditing()(1, 0) = -2.36775816488263;
+	weights[0].getEigenValueForEditing()(1, 1) = -2.46654960015039;
 
-	weights[0](2, 0) = -2.84008772426777;
-	weights[0](2, 1) = -2.75312838822441;
+	weights[0].getEigenValueForEditing()(2, 0) = -2.84008772426777;
+	weights[0].getEigenValueForEditing()(2, 1) = -2.75312838822441;
 
-	weights[1](0, 0) = -8.53883973729034;
-	weights[1](0, 1) = 4.18224867001210;
-	weights[1](0, 2) = 4.96020682361533;
+	weights[1].getEigenValueForEditing()(0, 0) = -8.53883973729034;
+	weights[1].getEigenValueForEditing()(0, 1) = 4.18224867001210;
+	weights[1].getEigenValueForEditing()(0, 2) = 4.96020682361533;
 
-	weights[0](0, 2) = 2.27842384712968;
-	weights[0](1, 2) = 3.34858981861236;
-	weights[0](2, 2) = 3.96418096172299;
-	weights[1](0, 3) = -3.92979671193090;
+	weights[0].getEigenValueForEditing()(0, 2) = 2.27842384712968;
+	weights[0].getEigenValueForEditing()(1, 2) = 3.34858981861236;
+	weights[0].getEigenValueForEditing()(2, 2) = 3.96418096172299;
+	weights[1].getEigenValueForEditing()(0, 3) = -3.92979671193090;
 
 	NeuralNetwork neuralNetwork(networkTopology);
 

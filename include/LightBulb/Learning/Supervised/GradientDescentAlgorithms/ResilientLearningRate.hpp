@@ -8,6 +8,7 @@
 
 // Includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -77,7 +78,7 @@ namespace LightBulb
 		/**
 		 * \brief Remembers the previous learning rates.
 		 */
-		std::vector<Eigen::MatrixXd> previousLearningRates;
+		std::vector<Matrix> previousLearningRates;
 		/**
 		 * \brief Returns our current options in form of a ResilientLearningRateOptions object.
 		 * \return The ResilientLearningRateOptions object.
@@ -98,7 +99,7 @@ namespace LightBulb
 		ResilientLearningRate& operator=(ResilientLearningRate other);
 		friend void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept;
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
+		Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

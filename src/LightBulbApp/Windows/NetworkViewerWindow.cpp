@@ -5,6 +5,7 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <wx/dataview.h>
 #include <wx/dcbuffer.h>
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -122,12 +123,12 @@ namespace LightBulb
 			afferentEdgesList->DeleteAllItems();
 			if (selectedLayerIndex > 0)
 			{
-				for (int n = usesBiasNeuron; n < weights[selectedLayerIndex - 1].cols(); n++)
+				for (int n = usesBiasNeuron; n < weights[selectedLayerIndex - 1].getEigenValue().cols(); n++)
 				{
 					wxVector<wxVariant> data;
 					data.push_back(wxVariant(std::to_string(selectedLayerIndex - 1)));
 					data.push_back(wxVariant(std::to_string(n - usesBiasNeuron)));
-					data.push_back(wxVariant(std::to_string(weights[selectedLayerIndex - 1](selectedNeuronIndex, n))));
+					data.push_back(wxVariant(std::to_string(weights[selectedLayerIndex - 1].getEigenValue()(selectedNeuronIndex, n))));
 					afferentEdgesList->AppendItem(data);
 				}
 			}
@@ -135,12 +136,12 @@ namespace LightBulb
 			efferentEdgesList->DeleteAllItems();
 			if (selectedLayerIndex < weights.size())
 			{
-				for (int n = 0; n < weights[selectedLayerIndex].rows(); n++)
+				for (int n = 0; n < weights[selectedLayerIndex].getEigenValue().rows(); n++)
 				{
 					wxVector<wxVariant> data;
 					data.push_back(wxVariant(std::to_string(selectedLayerIndex + 1)));
 					data.push_back(wxVariant(std::to_string(n)));
-					data.push_back(wxVariant(std::to_string(weights[selectedLayerIndex](n, selectedNeuronIndex + usesBiasNeuron))));
+					data.push_back(wxVariant(std::to_string(weights[selectedLayerIndex].getEigenValue()(n, selectedNeuronIndex + usesBiasNeuron))));
 					efferentEdgesList->AppendItem(data);
 				}
 			}
@@ -228,7 +229,7 @@ namespace LightBulb
 
 					if (usesBiasNeuron && l > 0)
 					{
-						double bias = weights[l - 1](n, 0);
+						double bias = weights[l - 1].getEigenValue()(n, 0);
 						wxCoord textWidth, textHeight;
 						dc.GetTextExtent(std::to_string(bias), &textWidth, &textHeight);
 
@@ -241,9 +242,9 @@ namespace LightBulb
 			{
 				int neuronCount = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer()[l];
 				int neuronCountNextLayer = selectedNetwork->getNetworkTopology().getNeuronCountsPerLayer()[l + 1];
-				for (int tn = 0; tn < weights[l].rows(); tn++)
+				for (int tn = 0; tn < weights[l].getEigenValue().rows(); tn++)
 				{
-					for (int fn = usesBiasNeuron; fn < weights[l].cols(); fn++)
+					for (int fn = usesBiasNeuron; fn < weights[l].getEigenValue().cols(); fn++)
 					{
 						int x1 = getXPos(l);
 						int y1 = getYPos(fn - usesBiasNeuron, neuronCount);
@@ -257,7 +258,7 @@ namespace LightBulb
 						if ((selectedLayerIndex == l && selectedNeuronIndex == fn - usesBiasNeuron) || (selectedLayerIndex == l + 1 && selectedNeuronIndex == tn))
 							dc.SetPen(*wxBLACK_PEN);
 
-						dc.DrawRotatedText(std::to_string(weights[l](tn, fn)), x1 + WEIGHT_SPACE * std::cos(angle), y1 + WEIGHT_SPACE * std::sin(angle), -1 * angle / M_PI * 180);
+						dc.DrawRotatedText(std::to_string(weights[l].getEigenValue()(tn, fn)), x1 + WEIGHT_SPACE * std::cos(angle), y1 + WEIGHT_SPACE * std::sin(angle), -1 * angle / M_PI * 180);
 					}
 				}
 			}

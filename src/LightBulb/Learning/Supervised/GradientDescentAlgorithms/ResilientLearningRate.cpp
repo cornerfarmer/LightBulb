@@ -46,7 +46,7 @@ namespace LightBulb
 		previousLearningRates = networkTopology.getAllWeights();
 		for (int i = 0; i < previousLearningRates.size(); i++)
 		{
-			previousLearningRates[i].setConstant(getOptions().learningRateStart);
+			previousLearningRates[i].getEigenValueForEditing().setConstant(getOptions().learningRateStart);
 		}
 	}
 
@@ -55,28 +55,28 @@ namespace LightBulb
 		return new ResilientLearningRate(*this);
 	}
 
-	Eigen::MatrixXd ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
+	Matrix ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients)
 	{
-		for (int i = 0; i < gradients.rows(); i++)
+		for (int i = 0; i < gradients.getEigenValue().rows(); i++)
 		{
-			for (int j = 0; j < gradients.cols(); j++)
+			for (int j = 0; j < gradients.getEigenValue().cols(); j++)
 			{
-				if (gradients(i, j) != 0)
+				if (gradients.getEigenValue()(i, j) != 0)
 				{
 					// If the sign of the gradient equals the sign of the last learning rate
-					if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) < 0)
-						previousLearningRates[layerIndex - 1](i, j) *= getOptions().learningRateGrowFac; // Increase the new learning rate
-					else if (previousLearningRates[layerIndex - 1](i, j) * gradients(i, j) > 0)
-						previousLearningRates[layerIndex - 1](i, j) *= getOptions().learningRateShrinkFac;	 // Decrease the new learning rate
+					if (previousLearningRates[layerIndex - 1].getEigenValue()(i, j) * gradients.getEigenValue()(i, j) < 0)
+						previousLearningRates[layerIndex - 1].getEigenValueForEditing()(i, j) *= getOptions().learningRateGrowFac; // Increase the new learning rate
+					else if (previousLearningRates[layerIndex - 1].getEigenValue()(i, j) * gradients.getEigenValue()(i, j) > 0)
+						previousLearningRates[layerIndex - 1].getEigenValueForEditing()(i, j) *= getOptions().learningRateShrinkFac;	 // Decrease the new learning rate
 
 					// Make sure the new learningRate is between learningRateMin and learningRateMax
-					previousLearningRates[layerIndex - 1](i, j) = std::max(getOptions().learningRateMin, std::min(getOptions().learningRateMax, std::abs(previousLearningRates[layerIndex - 1](i, j))));
+					previousLearningRates[layerIndex - 1].getEigenValueForEditing()(i, j) = std::max((float)getOptions().learningRateMin, std::min((float)getOptions().learningRateMax, std::abs(previousLearningRates[layerIndex - 1].getEigenValue()(i, j))));
 
 					// Set the sign of the learningRate to the sign of the gradient
-					previousLearningRates[layerIndex - 1](i, j) *= (gradients(i, j) < 0 ? 1 : -1);
+					previousLearningRates[layerIndex - 1].getEigenValueForEditing()(i, j) *= (gradients.getEigenValue()(i, j) < 0 ? 1 : -1);
 				}
 				else
-					previousLearningRates[layerIndex - 1](i, j) = 0;
+					previousLearningRates[layerIndex - 1].getEigenValueForEditing()(i, j) = 0;
 			}
 		}
 
@@ -94,10 +94,10 @@ namespace LightBulb
 			for (auto previousLearningRate = previousLearningRates.begin(); previousLearningRate != previousLearningRates.end(); previousLearningRate++)
 			{
 				// If the learning rate is in the allowed range, continue learning
-				if (abs(previousLearningRate->maxCoeff()) > getOptions().learningRateMin && abs(previousLearningRate->minCoeff()) < getOptions().learningRateMax)
+				if (abs(previousLearningRate->getEigenValue().maxCoeff()) > getOptions().learningRateMin && abs(previousLearningRate->getEigenValue().minCoeff()) < getOptions().learningRateMax)
 					learningHasStopped = false;
 
-				totalLearningRate += previousLearningRate->cwiseAbs().sum();
+				totalLearningRate += previousLearningRate->getEigenValue().cwiseAbs().sum();
 			}
 
 			// If the totalLearningRate is below the minium stop the learning process

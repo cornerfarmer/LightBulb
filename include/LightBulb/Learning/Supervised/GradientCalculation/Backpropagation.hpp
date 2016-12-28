@@ -9,6 +9,7 @@
 // Includes
 #include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/AbstractPreferenceElement.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {
@@ -28,7 +29,7 @@ namespace LightBulb
 		/**
 		 * \brief This vector should keep all delta values
 		 */
-		Eigen::VectorXd lastDeltaVectorOutputLayer;
+		Vector lastDeltaVectorOutputLayer;
 		/**
 		 * \brief Can be used to overcome long plateaus.
 		 */
@@ -40,7 +41,7 @@ namespace LightBulb
 		 */
 		Backpropagation(double flatSpotEliminationFac_ = 0);
 		// Inherited:
-		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const Eigen::VectorXd& errorVector) override;
+		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector) override;
 		AbstractCloneable* clone() const override;
 	};
 }

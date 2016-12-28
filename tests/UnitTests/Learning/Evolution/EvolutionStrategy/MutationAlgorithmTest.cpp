@@ -6,6 +6,7 @@
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 #include "LightBulb/Random/StandardRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 using namespace LightBulb;
 
@@ -41,16 +42,16 @@ TEST_F(MutationAlgorithmTest, execute)
 	EXPECT_CALL(individual, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
-	std::vector<Eigen::MatrixXd> weights;
+	std::vector<Matrix> weights;
 	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
 
-	weights.push_back(Eigen::MatrixXd(2,2));
-	weights[0](0, 0) = 2;
-	weights[0](0, 1) = 1;
-	weights[0](1, 0) = -5;
-	weights[0](1, 1) = 0.1;
-	weights.push_back(Eigen::MatrixXd(1, 1));
-	weights[1](0, 0) = 10;
+	weights.push_back(Matrix(2,2));
+	weights[0].getEigenValueForEditing()(0, 0) = 2;
+	weights[0].getEigenValueForEditing()(0, 1) = 1;
+	weights[0].getEigenValueForEditing()(1, 0) = -5;
+	weights[0].getEigenValueForEditing()(1, 1) = 0.1;
+	weights.push_back(Matrix(1, 1));
+	weights[1].getEigenValueForEditing()(0, 0) = 10;
 
 	mutationAlgorithm->execute(individual);
 
@@ -60,9 +61,9 @@ TEST_F(MutationAlgorithmTest, execute)
 	EXPECT_NEAR(50, mutationStrength[3], 0.00001);
 	EXPECT_NEAR(-50, mutationStrength[4], 0.00001);
 
-	EXPECT_NEAR(1.826609, weights[0](0, 0), 0.00001);
-	EXPECT_NEAR(23.00891, weights[0](0, 1), 0.00001);
-	EXPECT_NEAR(-5.00000, weights[0](1, 0), 0.00001);
-	EXPECT_NEAR(-44.92901, weights[0](1, 1), 0.00001);
-	EXPECT_NEAR(37.36058, weights[1](0, 0), 0.00001);
+	EXPECT_NEAR(1.826609, weights[0].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(23.00891, weights[0].getEigenValue()(0, 1), 0.00001);
+	EXPECT_NEAR(-5.00000, weights[0].getEigenValue()(1, 0), 0.00001);
+	EXPECT_NEAR(-44.92901, weights[0].getEigenValue()(1, 1), 0.00001);
+	EXPECT_NEAR(37.36058, weights[1].getEigenValue()(0, 0), 0.00001);
 }

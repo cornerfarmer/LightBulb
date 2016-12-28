@@ -83,31 +83,31 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology& networkTopology)
 	{
-		Eigen::VectorXd errorVector;
+		Vector errorVector;
 		getErrorVector(networkTopology, errorVector);
 		
 		auto patternVector = networkTopology.getActivationsPerLayer(0);
-		stateRecord[stepsSinceLastReward] = std::vector<double>(patternVector.data() + networkTopology.usesBiasNeuron(), patternVector.data() + patternVector.size());
+		stateRecord[stepsSinceLastReward] = std::vector<double>(patternVector.getEigenValue().data() + networkTopology.usesBiasNeuron(), patternVector.getEigenValue().data() + patternVector.getEigenValue().size());
 		
 		if (gradientRecord[stepsSinceLastReward].empty())
 			gradientRecord[stepsSinceLastReward] = networkTopology.getAllWeights();
 
 		for (int i = 0; i < gradientRecord[stepsSinceLastReward].size(); i++)
-			gradientRecord[stepsSinceLastReward][i].setZero();
+			gradientRecord[stepsSinceLastReward][i].getEigenValueForEditing().setZero();
 		
 		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[stepsSinceLastReward]);
 	}
 
-	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector)
+	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Vector& errorVector)
 	{
 		networkTopology.getOutput(lastOutput);
 
-		errorVector.resize(lastOutput.size());
+		errorVector.getEigenValueForEditing().resize(lastOutput.size());
 		for (int i = 0; i < lastOutput.size(); i++)
 		{
-			errorVector(i) = getOptions().environment->getLastBooleanOutput().at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
+			errorVector.getEigenValueForEditing()(i) = getOptions().environment->getLastBooleanOutput().at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 		}
-		errorSum += errorVector.cwiseAbs().sum();
+		errorSum += errorVector.getEigenValueForEditing().cwiseAbs().sum();
 		errorSteps++;
 	}
 
@@ -196,7 +196,7 @@ namespace LightBulb
 	{
 		for (int l = gradient.size() - 1; l >= 0; l--)
 		{
-			Eigen::MatrixXd newWeights = networkTopology.getAfferentWeightsPerLayer(l + 1) + gradientDescentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradient[l]);
+			Matrix newWeights(networkTopology.getAfferentWeightsPerLayer(l + 1).getEigenValue() + gradientDescentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradient[l]).getEigenValue());
 			networkTopology.setAfferentWeightsPerLayer(l + 1, newWeights);
 		}
 
@@ -204,7 +204,7 @@ namespace LightBulb
 		{
 			for (int l = valueFunctionGradientCalculation->getGradient().size() - 1; l >= 0; l--)
 			{
-				Eigen::MatrixXd newWeights = valueFunctionNetwork->getNetworkTopology().getAfferentWeightsPerLayer(l + 1) + valueFunctionGradientDescentAlgorithm->calcDeltaWeight(valueFunctionNetwork->getNetworkTopology(), l + 1, valueFunctionGradientCalculation->getGradient().at(l));
+				Matrix newWeights(valueFunctionNetwork->getNetworkTopology().getAfferentWeightsPerLayer(l + 1).getEigenValue() + valueFunctionGradientDescentAlgorithm->calcDeltaWeight(valueFunctionNetwork->getNetworkTopology(), l + 1, valueFunctionGradientCalculation->getGradient().at(l)).getEigenValue());
 				valueFunctionNetwork->getNetworkTopology().setAfferentWeightsPerLayer(l + 1, newWeights);
 			}
 		}
@@ -239,10 +239,10 @@ namespace LightBulb
 				std::vector<double> output(1);
 				valueFunctionNetwork->calculate(stateRecord[i], output, TopologicalOrder());
 
-				Eigen::VectorXd errorVector(1);
-				errorVector(0) = rewards(i) - output[0];
+				Vector errorVector(1);
+				errorVector.getEigenValueForEditing()(0) = rewards(i) - output[0];
 				valueFunctionGradientCalculation->calcGradient(valueFunctionNetwork->getNetworkTopology(), errorVector);
-				valueErrorSum += abs(errorVector(0));
+				valueErrorSum += abs(errorVector.getEigenValue()(0));
 				valueErrorSteps++;
 
 				rewards(i) -= output[0];
@@ -251,13 +251,13 @@ namespace LightBulb
 			if (gradient.empty())
 			{
 				for (int j = 0; j < gradientRecord[i].size(); j++)
-					gradientRecord[i][j].noalias() = gradientRecord[i][j] * rewards(i);
+					gradientRecord[i][j].getEigenValueForEditing().noalias() = gradientRecord[i][j].getEigenValue() * rewards(i);
 				gradient = gradientRecord[i];
 			}
 			else
 			{
 				for (int j = 0; j < gradientRecord[i].size(); j++)
-					gradient[j].noalias() = gradient[j] + gradientRecord[i][j] * rewards(i);
+					gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[i][j].getEigenValue() * rewards(i);
 			}
 		}
 

@@ -54,9 +54,6 @@
     <ClCompile Include="Learning\BackpropagationLearningRuleTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Function\EuclideanDistanceTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Learning\Evolution\ConstantRecombinationCommandTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Learning\Evolution\CoevolutionLearningRuleTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearAlgebra\MatrixTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

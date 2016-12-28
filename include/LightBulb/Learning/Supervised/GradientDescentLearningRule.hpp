@@ -89,7 +89,7 @@ namespace LightBulb
 		 * \param lessonIndex The current teaching lesson index.
 		 * \param errorVector The errorVector which represents how well the neural network has done on the current teaching lesson.
 		 */
-		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Eigen::VectorXd& errorVector) override;
+		void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Vector& errorVector) override;
 		void initializeTry() override;
 	public:
 		/**

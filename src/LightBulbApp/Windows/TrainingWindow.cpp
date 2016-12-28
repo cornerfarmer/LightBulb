@@ -538,7 +538,7 @@ namespace LightBulb
 		}
 	}
 
-	void TrainingWindow::refreshTrainingPlanState(wxTimerEvent& event)
+	void TrainingWindow::refreshTrainingPlanState(wxTimerEvent& event)  
 	{
 		int trainingPlanIndex = 0;
 		for (auto trainingPlan = getController().getTrainingPlans().begin(); trainingPlan != getController().getTrainingPlans().end(); trainingPlan++, trainingPlanIndex++)
@@ -546,7 +546,9 @@ namespace LightBulb
 			if (trainingPlanIndex < trainingPlanList->GetItemCount()) {
 				auto duration = (*trainingPlan)->getRunTime();
 				trainingPlanList->SetValue(wxVariant(getStringFromDuration(duration)), trainingPlanIndex, 2);
-				int iterations = (*trainingPlan)->getLearningState().iterations;
+				int iterations = 0;
+				if ((*trainingPlan)->hasLearningState())
+					iterations = (*trainingPlan)->getLearningState().iterations;
 				trainingPlanList->SetValue(wxVariant(std::to_string(iterations)), trainingPlanIndex, 3);
 			}
 		}

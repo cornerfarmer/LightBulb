@@ -78,12 +78,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../include;..\..\extlibs\eigen;../UnitTests;..\..\extlibs\cereal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>../../include;..\..\extlibs\eigen;../UnitTests;..\..\extlibs\cereal\include;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>../../vs/Debug/LightBulb.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../../vs/Debug/LightBulb.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,13 +100,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../include;..\..\extlibs\eigen;../UnitTests;..\..\extlibs\cereal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>../../include;..\..\extlibs\eigen;../UnitTests;..\..\extlibs\cereal\include;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>../../vs/Release/LightBulb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../../vs/Release/LightBulb.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActivationOrder\TopologicalOrderTest.cpp" />
-    <ClCompile Include="Function\EuclideanDistanceTest.cpp" />
     <ClCompile Include="Function\WeightedSumFunctionTest.cpp" />
     <ClCompile Include="IO\BrainJSExporterTest.cpp" />
     <ClCompile Include="IO\SynapticExporterTest.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\TeachedEvolutionTest.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategyTest.cpp" />
+    <ClCompile Include="LinearAlgebra\MatrixTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
     <ClCompile Include="Teaching\TeacherTest.cpp" />

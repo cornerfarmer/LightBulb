@@ -4,7 +4,6 @@
 #define _FEEDFORWARDNETWORKTOPOLOGY_H_
 
 // Libary includes
-#include <Eigen/Dense>
 #include <vector>
 #include <memory>
 
@@ -74,23 +73,15 @@ namespace LightBulb
 		/**
 		 * \brief All net inputs per layer.
 		 */
-		std::vector<Eigen::VectorXd> netInputs;
+		std::vector<Vector> netInputs;
 		/**
 		 * \brief All activations.
 		 */
-		Eigen::VectorXd activations;
-		/**
-		 * \brief The outgoing activations of per layer.
-		 */
-		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerOut;
-		/**
-		 * \brief The ingoing activations of per layer.
-		 */
-		std::vector<Eigen::VectorBlock<Eigen::VectorXd>> activationsPerLayerIn;
+		std::vector<Vector> activations;
 		/**
 		 * \brief The weights per layer
 		 */
-		std::vector<Eigen::MatrixXd> weights;
+		std::vector<Matrix> weights;
 		/**
 		 * \brief The offset of each layer in the activations vector.
 		 */
@@ -107,7 +98,7 @@ namespace LightBulb
 		 * \brief Rebuilds the vector block activations per layer.
 		 * \note This has to be done when the activations vector has been changed.
 		 */
-		void rebuildActivationsPerLayer();
+		//void rebuildActivationsPerLayer();
 	public:
 		virtual ~FeedForwardNetworkTopology();
 		/**
@@ -135,16 +126,16 @@ namespace LightBulb
 		void refreshNetInputsForLayer(int layerNr) override;
 		void refreshActivationsForLayer(int layerNr) override;
 		double calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const override;
-		std::vector<Eigen::MatrixXd>& getAllWeights() override;
-		const std::vector<Eigen::MatrixXd>& getAllWeights() const override;
-		const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& getAllActivations() const override;
-		const std::vector<Eigen::VectorXd>& getAllNetInputs() const override;
-		Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) const override;
-		void setAfferentWeightsPerLayer(int layerIndex, const Eigen::MatrixXd& newWeights) override;
-		Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) const override;
-		Eigen::VectorXd getNetInputsPerLayer(int layerIndex) const override;
-		Eigen::VectorXd getActivationsPerLayer(int layerIndex) const override;
-		Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const override;
+		std::vector<Matrix>& getAllWeights() override;
+		const std::vector<Matrix>& getAllWeights() const override;
+		const std::vector<Vector>& getAllActivations() const override;
+		const std::vector<Vector>& getAllNetInputs() const override;
+		Matrix getAfferentWeightsPerLayer(int layerIndex) const override;
+		void setAfferentWeightsPerLayer(int layerIndex, const Matrix& newWeights) override;
+		Matrix getEfferentWeightsPerLayer(int layerIndex) const override;
+		Vector getNetInputsPerLayer(int layerIndex) const override;
+		Vector getActivationsPerLayer(int layerIndex) const override;
+		Vector getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const override;
 		double getBiasWeightOfNeuron(int layerNr, int neuronNr) const override;
 		std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false) const override;
 		double getWeight(int layerIndex, int neuronIndex, int edgeIndex) const override;

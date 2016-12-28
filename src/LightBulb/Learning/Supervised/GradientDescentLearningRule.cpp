@@ -90,7 +90,7 @@ namespace LightBulb
 	}
 
 
-	void GradientDescentLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Eigen::VectorXd& errorVector)
+	void GradientDescentLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Vector& errorVector)
 	{
 		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errorVector);
 	}
@@ -98,7 +98,7 @@ namespace LightBulb
 
 	void GradientDescentLearningRule::adjustWeights(int layerIndex)
 	{
-		Eigen::MatrixXd newWeights = getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex) + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient().at(layerIndex - 1));
+		Matrix newWeights(getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex).getEigenValue() + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient().at(layerIndex - 1)).getEigenValue());
 		getCurrentNetworkTopology().setAfferentWeightsPerLayer(layerIndex, newWeights);
 	}
 

@@ -93,6 +93,9 @@
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementEnvironment.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Performance\ViennaCLTests.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -185,5 +188,11 @@
     <ClInclude Include="IO\PongReinforcementEnvironmentIO.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Performance\ViennaCLTests.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Performance\test.cl" />
   </ItemGroup>
 </Project>

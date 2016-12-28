@@ -12,6 +12,7 @@
 #include "LightBulb/Function/ActivationFunction/HyperbolicTangentFunction.hpp"
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -121,9 +122,9 @@ namespace LightBulb
 		for (int layerIndex = 1; layerIndex < networkTopology->getLayerCount(); layerIndex++)
 		{
 			weights = &networkTopology->getAllWeights()[layerIndex - 1];
-			for (int sourceNeuronIndex = 1; sourceNeuronIndex < weights->cols(); sourceNeuronIndex++)
+			for (int sourceNeuronIndex = 1; sourceNeuronIndex < weights->getEigenValue().cols(); sourceNeuronIndex++)
 			{
-				for (int destinationNeuronIndex = 0; destinationNeuronIndex < weights->rows(); destinationNeuronIndex++)
+				for (int destinationNeuronIndex = 0; destinationNeuronIndex < weights->getEigenValue().rows(); destinationNeuronIndex++)
 				{
 					connections->addElement(getConnectionJSONObject(layerIndex, sourceNeuronIndex, destinationNeuronIndex));
 				}
@@ -155,7 +156,7 @@ namespace LightBulb
 
 	JSONAttribute* SynapticExporter::getConnectionWeightAttribute(int sourceNeuronIndex, int destNeuronIndex)
 	{
-		return new JSONAttribute("weight", new JSONNumberElement<double>((*weights)(destNeuronIndex, sourceNeuronIndex)));
+		return new JSONAttribute("weight", new JSONNumberElement<double>((*weights).getEigenValue()(destNeuronIndex, sourceNeuronIndex)));
 	}
 
 	int SynapticExporter::getTotalIndexOfNeuron(int layerIndex, int neuronIndex)

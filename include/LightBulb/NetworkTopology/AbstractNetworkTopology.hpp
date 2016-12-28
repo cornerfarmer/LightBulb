@@ -8,7 +8,6 @@
 #include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Library includes
-#include <Eigen/Dense>
 #include <vector>
 #include <memory>
 
@@ -18,6 +17,8 @@ namespace LightBulb
 	class AbstractRandomGenerator;
 	class NeuronDescription;
 	class AbstractActivationOrder;
+	class Matrix;
+	class Vector;
 
 	/**
 	 * \brief A network topology is used to describe the structure of a neural network
@@ -111,55 +112,55 @@ namespace LightBulb
 		 * \brief Returns a pointer to all weights.
 		 * \return A pointer to a vector of all weight matrices per layer.
 		 */
-		virtual std::vector<Eigen::MatrixXd>& getAllWeights() = 0;
-		virtual const std::vector<Eigen::MatrixXd>& getAllWeights() const = 0;
+		virtual std::vector<Matrix>& getAllWeights() = 0;
+		virtual const std::vector<Matrix>& getAllWeights() const = 0;
 		/**
 		 * \brief Returns a pointer to all activations.
 		 * \return A pointer to a vector of all activation vectors per layer.
 		 */
-		virtual const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& getAllActivations() const = 0;
+		virtual const std::vector<Vector>& getAllActivations() const = 0;
 		/**
 		 * \brief Returns a pointer to all net inputs.
 		 * \return  A pointer to a vector of all net input vectors per layer.
 		 */
-		virtual const std::vector<Eigen::VectorXd>& getAllNetInputs() const = 0;
+		virtual const std::vector<Vector>& getAllNetInputs() const = 0;
 		/**
 		 * \brief Returns all afferent weights for a layer.
 		 * \param layerIndex The index of the layer.
 		 * \return A copy of the afferent weights of the layer.
 		 */
-		virtual Eigen::MatrixXd getAfferentWeightsPerLayer(int layerIndex) const = 0;
+		virtual Matrix getAfferentWeightsPerLayer(int layerIndex) const = 0;
 		/**
 		 * \brief Sets the afferent weights of a layer.
 		 * \param layerIndex The index of the layer.
 		 * \param newWeights The new afferent weights.
 		 */
-		virtual void setAfferentWeightsPerLayer(int layerIndex, const Eigen::MatrixXd& newWeights) = 0;
+		virtual void setAfferentWeightsPerLayer(int layerIndex, const Matrix& newWeights) = 0;
 		/**
 		 * \brief Returns all efferent weights for a layer.
 		 * \param layerIndex The index of the layer.
 		 * \return A copy of the efferent weights of the layer.
 		 */
-		virtual Eigen::MatrixXd getEfferentWeightsPerLayer(int layerIndex) const = 0;
+		virtual Matrix getEfferentWeightsPerLayer(int layerIndex) const = 0;
 		/**
 		 * \brief Returns all net inputs for a layer.
 		 * \param layerIndex The index of the layer.
 		 * \return A copy of the net inputs of the layer.
 		 */
-		virtual Eigen::VectorXd getNetInputsPerLayer(int layerIndex) const = 0;
+		virtual Vector getNetInputsPerLayer(int layerIndex) const = 0;
 		/**
 		* \brief Returns all net inputs for a layer.
 		* \param layerIndex The index of the layer.
 		* \return A copy of the net inputs of the layer.
 		*/
-		virtual Eigen::VectorXd getActivationsPerLayer(int layerIndex) const = 0;
+		virtual Vector getActivationsPerLayer(int layerIndex) const = 0;
 		/**
 		 * \brief Returns all efferent weights for a neuron.
 		 * \param layerIndex The layer index of the neuron.
 		 * \param neuronIndex The neuron index inside the layer.
 		 * \return A copy of the efferent weights of the neuron.
 		 */
-		virtual Eigen::VectorXd getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const = 0;
+		virtual Vector getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const = 0;
 		/**
 		 * \brief Returns the bias weight of a neuron.
 		 * \param layerNr The layer index of the neuron.

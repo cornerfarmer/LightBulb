@@ -75,11 +75,11 @@ namespace LightBulb
 		/**
 		* \brief The gradient memory.
 		*/
-		std::vector<std::vector<Eigen::MatrixXd>> gradientRecord;
+		std::vector<std::vector<Matrix>> gradientRecord;
 		/**
 		* \brief The current total gradient.
 		*/
-		std::vector<Eigen::MatrixXd> gradient;
+		std::vector<Matrix> gradient;
 		/**
 		 * \brief The gradient calculation algorithm used for the policy function.
 		 */
@@ -150,7 +150,7 @@ namespace LightBulb
 		 * \param networkTopology The network topology to use.
 		 * \param errorVector The vector where the error vector should be stored.
 		 */
-		void getErrorVector(AbstractNetworkTopology& networkTopology, Eigen::VectorXd& errorVector);
+		void getErrorVector(AbstractNetworkTopology& networkTopology, Vector& errorVector);
 	protected:
 		// Inherited:
 		void doIteration() override;

@@ -7,13 +7,15 @@
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include <memory>
-#include <Eigen/Dense>
 #include <vector>
 
 // Forward declarations
 
 namespace LightBulb
 {
+	class Matrix;
+	class Vector;
+
 	/**
 	 * \brief An InputFunction calculates one input value from the output of all previous connected neurons
 	 */
@@ -29,7 +31,7 @@ namespace LightBulb
 		 * \param netInputs The variable where the calculated inputs will be stored in
 		 * \param weights The weights which will be used to calculate the inputs
 		 */
-		virtual void execute(int layerNr, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>> &activations, std::vector<Eigen::VectorXd> &netInputs, const std::vector<Eigen::MatrixXd> &weights) const = 0;
+		virtual void execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights) const = 0;
 	};
 }
 

@@ -2,6 +2,7 @@
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -48,8 +49,8 @@ namespace LightBulb
 		prevGradient.resize(networkTopology.getAllWeights().size());
 		for (int i = 0; i < prevGradient.size(); i++)
 		{
-			prevGradient[i].resizeLike(networkTopology.getAllWeights().at(i));
-			prevGradient[i].setZero();
+			prevGradient[i].getEigenValueForEditing().resizeLike(networkTopology.getAllWeights().at(i).getEigenValue());
+			prevGradient[i].getEigenValueForEditing().setZero();
 		}
 		prevSquaredGradient = prevGradient;
 		prevDeltaWeights = prevGradient;
@@ -60,12 +61,12 @@ namespace LightBulb
 		return new RMSPropLearningRate(*this);
 	}
 
-	Eigen::MatrixXd RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
+	Matrix RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients)
 	{
-		prevGradient[layerIndex - 1] = getOptions().gradientMomentum * prevGradient[layerIndex - 1] + (1 - getOptions().gradientMomentum) * gradients;
-		prevSquaredGradient[layerIndex - 1] = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1] + (1 - getOptions().squaredGradientMomentum) * gradients.cwiseAbs2();
+		prevGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().gradientMomentum * prevGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().gradientMomentum) * gradients.getEigenValue();
+		prevSquaredGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().squaredGradientMomentum) * gradients.getEigenValue().cwiseAbs2();
 
-		prevDeltaWeights[layerIndex - 1] = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1] - getOptions().learningRate * gradients.cwiseQuotient(((prevSquaredGradient[layerIndex - 1].array() - prevGradient[layerIndex - 1].cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
+		prevDeltaWeights[layerIndex - 1].getEigenValueForEditing() = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1].getEigenValue() - getOptions().learningRate * gradients.getEigenValue().cwiseQuotient(((prevSquaredGradient[layerIndex - 1].getEigenValue().array() - prevGradient[layerIndex - 1].getEigenValue().cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
 
 		return prevDeltaWeights[layerIndex - 1];
 	}

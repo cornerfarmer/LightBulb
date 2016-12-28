@@ -3,6 +3,7 @@
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 // Library includes
 
@@ -18,10 +19,10 @@ namespace LightBulb
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			double weightDecayError = 0;
-			std::vector<Eigen::MatrixXd>& weights = entry->second->getNeuralNetwork().getNetworkTopology().getAllWeights();
+			std::vector<Matrix>& weights = entry->second->getNeuralNetwork().getNetworkTopology().getAllWeights();
 			for (auto weightsPerLayer = weights.begin(); weightsPerLayer != weights.end(); weightsPerLayer++)
 			{
-				weightDecayError += 0.5 * weightsPerLayer->squaredNorm();
+				weightDecayError += 0.5 * weightsPerLayer->getEigenValue().squaredNorm();
 			}
 
 			entry->first -= fac * weightDecayError;

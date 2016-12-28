@@ -8,9 +8,12 @@
 #include "Examples/PongEvolution/PongEvolutionExample.hpp"
 #include "Examples/PongReinforcement/PongPolicyGradientExample.hpp"
 #include "Examples/PongReinforcement/PongDQNExample.hpp"
+#include "Performance/ViennaCLTests.hpp"
 
 int main(int argc, char** argv)
 {
+	//doViennaCLTest();
+
 	LightBulb::App* app = new LightBulb::App();
 	app->addTrainingPlan(new BackpropagationXorExample());
 	app->addTrainingPlan(new FunctionEvolutionExample());

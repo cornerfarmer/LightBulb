@@ -4,10 +4,12 @@
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 // Library includes
 #include <exception>
 #include <math.h>
-#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {
@@ -99,26 +101,28 @@ namespace LightBulb
 		neuronDescriptionsPerLayer.resize(getLayerCount());
 		if (options->enableShortcuts)
 		{
-			activations = Eigen::VectorXd(totalNeuronCount + options->useBiasNeuron);
+			throw std::exception("Shortcuts are not implemented yet.");
+			/*activations = Eigen::VectorXd(totalNeuronCount + options->useBiasNeuron);
 			if (options->useBiasNeuron) {
 				activations(0) = 1;
-			}
+			}*/
 		}
 		else
 		{
-			activations = Eigen::VectorXd(totalNeuronCount + options->useBiasNeuron * getLayerCount());
+			/*activations = std::vector<Vector>(totalNeuronCount + options->useBiasNeuron * getLayerCount());
 			if (options->useBiasNeuron) {
 				for (int l = 0; l < getLayerCount(); l++)
 					activations(l + layerOffsets[l]) = 1;
-			}
+			}*/
 		}
-		rebuildActivationsPerLayer();
+		//rebuildActivationsPerLayer();
 		for (int l = 0; l < getLayerCount(); l++)
 		{
-			netInputs[l] = Eigen::VectorXd(options->neuronsPerLayerCount[l]);
+			netInputs[l] = Vector(options->neuronsPerLayerCount[l]);
+			activations[l] = Vector(options->neuronsPerLayerCount[l] + options->useBiasNeuron);
 			if (l > 0)
 			{
-				weights[l - 1] = Eigen::MatrixXd::Zero(activationsPerLayerIn[l].size(), activationsPerLayerOut[l - 1].size());
+				weights[l - 1] = Matrix(netInputs[l].getEigenValue().size(), activations[l - 1].getEigenValue().size());
 			}
 			if (l == getLayerCount() - 1)
 				neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createOutputNeuronDescription());
@@ -129,54 +133,54 @@ namespace LightBulb
 
 	}
 
-	void FeedForwardNetworkTopology::rebuildActivationsPerLayer()
-	{
-		activationsPerLayerIn.clear();
-		activationsPerLayerOut.clear();
-		for (int layerIndex = 0; layerIndex < getLayerCount(); layerIndex++)
-		{
-			if (options->enableShortcuts)
-			{
-				activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron + layerOffsets[layerIndex], options->neuronsPerLayerCount[layerIndex]));
-				activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, layerOffsets[layerIndex + 1] + options->useBiasNeuron));
-			}
-			else
-			{
-				activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron * (layerIndex + 1) + layerOffsets[layerIndex], options->neuronsPerLayerCount[layerIndex]));
-				activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron * layerIndex + layerOffsets[layerIndex], options->neuronsPerLayerCount[layerIndex] + options->useBiasNeuron));
-			}
-		}
-	}
+	//void FeedForwardNetworkTopology::rebuildActivationsPerLayer()
+	//{
+	//	activationsPerLayerIn.clear();
+	//	activationsPerLayerOut.clear();
+	//	for (int layerIndex = 0; layerIndex < getLayerCount(); layerIndex++)
+	//	{
+	//		if (options->enableShortcuts)
+	//		{
+	//			activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron + layerOffsets[layerIndex], options->neuronsPerLayerCount[layerIndex]));
+	//			activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, layerOffsets[layerIndex + 1] + options->useBiasNeuron));
+	//		}
+	//		else
+	//		{
+	//			activationsPerLayerIn.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron * (layerIndex + 1) + layerOffsets[layerIndex], options->neuronsPerLayerCount[layerIndex]));
+	//			activationsPerLayerOut.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), options->useBiasNeuron * layerIndex + layerOffsets[layerIndex], options->neuronsPerLayerCount[layerIndex] + options->useBiasNeuron));
+	//		}
+	//	}
+	//}
 
-
+	 
 	double FeedForwardNetworkTopology::getNetInput(int layerIndex, int neuronIndex) const
 	{
-		return netInputs[layerIndex](neuronIndex);
+		return netInputs[layerIndex].getEigenValue()(neuronIndex);
 	}
 
-	Eigen::VectorXd FeedForwardNetworkTopology::getNetInputsPerLayer(int layerIndex) const
+	Vector FeedForwardNetworkTopology::getNetInputsPerLayer(int layerIndex) const
 	{
 		return netInputs[layerIndex];
 	}
 
-	Eigen::VectorXd FeedForwardNetworkTopology::getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const
+	Vector FeedForwardNetworkTopology::getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const
 	{
-		return weights[layerIndex].row(neuronIndex);
+		return Vector(weights[layerIndex].getEigenValue().row(neuronIndex));
 	}
 
-	Eigen::VectorXd FeedForwardNetworkTopology::getActivationsPerLayer(int layerIndex) const
+	Vector FeedForwardNetworkTopology::getActivationsPerLayer(int layerIndex) const
 	{
-		return activationsPerLayerOut[layerIndex];
+		return activations[layerIndex];
 	}
 
-	Eigen::MatrixXd FeedForwardNetworkTopology::getAfferentWeightsPerLayer(int layerIndex) const
+	Matrix FeedForwardNetworkTopology::getAfferentWeightsPerLayer(int layerIndex) const
 	{
 		return weights[layerIndex - 1];
 	}
 
-	Eigen::MatrixXd FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
+	Matrix FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
 	{
-		return weights[layerIndex].transpose();
+		return Matrix(weights[layerIndex].getEigenValue().transpose());
 	}
 
 	bool FeedForwardNetworkTopology::usesBiasNeuron() const
@@ -186,7 +190,8 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::removeNeuron(int layerIndex, int neuronIndex)
 	{
-		for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
+		std::exception("Currently not implemented.");
+		/*for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
 			layerOffsets[l]--;
 
 		options->neuronsPerLayerCount[layerIndex]--;
@@ -232,12 +237,13 @@ namespace LightBulb
 					weights[layerIndex].col(n) = weights[layerIndex].col(n + 1);
 				weights[layerIndex].conservativeResize(weights[layerIndex].rows(), weights[layerIndex].cols() - 1);
 			}
-		}
+		}*/
 	}
 
 	void FeedForwardNetworkTopology::addNeuron(int layerIndex)
 	{
-		for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
+		std::exception("Currently not implemented.");
+		/*for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
 			layerOffsets[l]++;
 
 		options->neuronsPerLayerCount[layerIndex]++;
@@ -280,17 +286,20 @@ namespace LightBulb
 		{
 			weights[layerIndex - 1].conservativeResize(weights[layerIndex - 1].rows() + 1, weights[layerIndex - 1].cols());
 			weights[layerIndex - 1].row(weights[layerIndex - 1].rows() - 1).setZero();
-		}
+		}*/
 	}
 
 	void FeedForwardNetworkTopology::removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex)
 	{
-		weights[layerIndex](weightIndex, neuronIndex) = 0;
+		std::exception("Currently not implemented.");
+		//weights[layerIndex].(weightIndex, neuronIndex) = 0;
 	}
 
 	bool FeedForwardNetworkTopology::existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex)
 	{
-		return weights[layerIndex](weightIndex, neuronIndex) != 0;
+		std::exception("Currently not implemented.");
+		return false;
+		//return weights[layerIndex](weightIndex, neuronIndex) != 0;
 	}
 
 	int FeedForwardNetworkTopology::getNeuronCount() const
@@ -313,19 +322,19 @@ namespace LightBulb
 		return clone;
 	}
 
-	void FeedForwardNetworkTopology::setAfferentWeightsPerLayer(int layerIndex, const Eigen::MatrixXd& newWeights)
+	void FeedForwardNetworkTopology::setAfferentWeightsPerLayer(int layerIndex, const Matrix& newWeights)
 	{
 		weights[layerIndex - 1] = newWeights;
 	}
 
 	double FeedForwardNetworkTopology::getWeight(int layerIndex, int neuronIndex, int edgeIndex) const
 	{
-		return weights[layerIndex](neuronIndex, edgeIndex);
+		return weights[layerIndex].getEigenValue()(neuronIndex, edgeIndex);
 	}
 
 	void FeedForwardNetworkTopology::setWeight(int layerIndex, int neuronIndex, int edgeIndex, double weight)
 	{
-		weights[layerIndex](neuronIndex, edgeIndex) = weight;
+		weights[layerIndex].getEigenValueForEditing()(neuronIndex, edgeIndex) = weight;
 	}
 
 	int FeedForwardNetworkTopology::getLayerCount() const
@@ -342,37 +351,37 @@ namespace LightBulb
 	{
 		if (layerNr == 0)
 			throw std::logic_error("The first layer does not have a bias weight.");
-		return weights[layerNr - 1](neuronNr, 0);
+		return weights[layerNr - 1].getEigenValue()(neuronNr, 0);
 	}
 
 	std::vector<double> FeedForwardNetworkTopology::getAfferentWeightsPerNeuron(int layerNr, int neuronNr, bool withoutBiasWeight) const
 	{
 		if (layerNr == 0)
 			throw std::logic_error("The first layer does not have afferent weights.");
-		std::vector<double> afferentWeights(weights[layerNr - 1].cols() - withoutBiasWeight);
+		std::vector<double> afferentWeights(weights[layerNr - 1].getEigenValue().cols() - withoutBiasWeight);
 		for (int i = 0; i < afferentWeights.size(); i++)
 		{
-			afferentWeights[i] = weights[layerNr - 1](neuronNr, i);
+			afferentWeights[i] = weights[layerNr - 1].getEigenValue()(neuronNr, i);
 		}
 		return afferentWeights;
 	}
 
-	std::vector<Eigen::MatrixXd>& FeedForwardNetworkTopology::getAllWeights()
+	std::vector<Matrix>& FeedForwardNetworkTopology::getAllWeights()
 	{
 		return weights;
 	}
 
-	const std::vector<Eigen::MatrixXd>& FeedForwardNetworkTopology::getAllWeights() const
+	const std::vector<Matrix>& FeedForwardNetworkTopology::getAllWeights() const
 	{
 		return weights;
 	}
 
-	const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& FeedForwardNetworkTopology::getAllActivations() const
+	const std::vector<Vector>& FeedForwardNetworkTopology::getAllActivations() const
 	{
-		return activationsPerLayerOut;
+		return activations;
 	}
 	
-	const std::vector<Eigen::VectorXd>& FeedForwardNetworkTopology::getAllNetInputs() const
+	const std::vector<Vector>& FeedForwardNetworkTopology::getAllNetInputs() const
 	{
 		return netInputs;
 	}
@@ -381,13 +390,13 @@ namespace LightBulb
 	{
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)
 		{
-			for (auto i = 0; i < layer->rows(); i++)
+			for (auto i = 0; i < layer->getEigenValue().rows(); i++)
 			{
-				for (auto j = 0; j < layer->cols(); j++)
+				for (auto j = 0; j < layer->getEigenValue().cols(); j++)
 				{
 					do {
-						(*layer)(i, j) = randomGenerator.randDouble(randStart, randEnd);
-					} while ((*layer)(i, j) == 0);
+						(*layer).getEigenValueForEditing()(i, j) = randomGenerator.randDouble(randStart, randEnd);
+					} while ((*layer).getEigenValueForEditing()(i, j) == 0);
 				}
 			}
 		}
@@ -398,15 +407,15 @@ namespace LightBulb
 	{
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)
 		{
-			double stdv = 1 / std::sqrt(layer->cols());
+			double stdv = 1 / std::sqrt(layer->getEigenValue().cols());
 
-			for (auto i = 0; i < layer->rows(); i++)
+			for (auto i = 0; i < layer->getEigenValue().rows(); i++)
 			{
-				for (auto j = 0; j < layer->cols(); j++)
+				for (auto j = 0; j < layer->getEigenValue().cols(); j++)
 				{
 					do {
-						(*layer)(i, j) = randomGenerator.randDouble(-stdv, stdv);
-					} while ((*layer)(i, j) == 0);
+						(*layer).getEigenValueForEditing()(i, j) = randomGenerator.randDouble(-stdv, stdv);
+					} while ((*layer).getEigenValueForEditing()(i, j) == 0);
 				}
 			}
 		}
@@ -417,7 +426,7 @@ namespace LightBulb
 		int edgeCount = 0;
 		for (int layerIndex = 0; layerIndex < weights.size(); layerIndex++)
 		{
-			edgeCount += weights[layerIndex].size();
+			edgeCount += weights[layerIndex].getEigenValue().size();
 		}
 		return edgeCount;
 	}
@@ -426,35 +435,37 @@ namespace LightBulb
 	{
 		if (options->enableShortcuts)
 		{
-			for (int i = options->useBiasNeuron; i < activations.rows(); i++)
+			throw std::exception("Not implemented");
+			/*for (int i = options->useBiasNeuron; i < activations.rows(); i++)
 			{
 				activations(i) = 0;
-			}
+			}*/
 		}
 		else
 		{
-			for (int i = 0; i < activations.rows(); i++)
-			{
-				activations(i) = 0;
-			}
-			if (options->useBiasNeuron)
-			{
-				for (int l = 0; l < getLayerCount(); l++)
-					activations(l + layerOffsets[l]) = 1;
+			for (int l = 0; l < activations.size(); l++) {
+				for (int i = 0; i < activations[l].getEigenValue().rows(); i++)
+				{
+					activations[l].getEigenValueForEditing()(i) = 0;
+				}
+				if (options->useBiasNeuron)
+				{
+					activations[l].getEigenValueForEditing()(activations[l].getEigenValue().rows() - 1) = 1;
+				}
 			}
 		}
 	}
 
 	void FeedForwardNetworkTopology::getOutput(std::vector<double> &outputVector) const
 	{
-		outputVector.assign(activationsPerLayerIn.back().data(), activationsPerLayerIn.back().data() + outputVector.size());
+		outputVector.assign(activations.back().getEigenValue().data(), activations.back().getEigenValue().data() + outputVector.size());
 	}
 
 	void FeedForwardNetworkTopology::setInput(const std::vector<double> &inputVector)
 	{
 		for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
 		{
-			activationsPerLayerIn.front()(i) = (inputVector.size() > i ? inputVector[i] : 0);
+			activations.front().getEigenValueForEditing()(i) = (inputVector.size() > i ? inputVector[i] : 0);
 		}
 	}
 
@@ -472,7 +483,7 @@ namespace LightBulb
 			netInputs = feedForwardNetwork->netInputs;
 			options->neuronsPerLayerCount = feedForwardNetwork->options->neuronsPerLayerCount;
 			layerOffsets = feedForwardNetwork->layerOffsets;
-			rebuildActivationsPerLayer();
+			//rebuildActivationsPerLayer();
 		}
 		else
 			throw std::logic_error("You can not mix topology types when calling copyWeightsFrom on a FeedForwardNetworkTopology");
@@ -481,12 +492,12 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::refreshNetInputsForLayer(int layerNr)
 	{
-		neuronDescriptionsPerLayer[layerNr]->getInputFunction().execute(layerNr, activationsPerLayerOut, netInputs, weights);
+		neuronDescriptionsPerLayer[layerNr]->getInputFunction().execute(layerNr, activations, netInputs, weights);
 	}
 
 	void FeedForwardNetworkTopology::refreshActivationsForLayer(int layerNr)
 	{
-		neuronDescriptionsPerLayer[layerNr]->getActivationFunction().execute(layerNr, activationsPerLayerIn, netInputs);
+		neuronDescriptionsPerLayer[layerNr]->getActivationFunction().execute(layerNr, activations, netInputs);
 	}
 
 
@@ -501,11 +512,11 @@ namespace LightBulb
 		auto layer2 = weights2.begin();
 		for (; layer1 != weights1.end(); layer1++, layer2++)
 		{
-			for (int i = 0; i < layer1->cols(); i++)
+			for (int i = 0; i < layer1->getEigenValue().cols(); i++)
 			{
-				for (int j = 0; j < layer1->rows(); j++)
+				for (int j = 0; j < layer1->getEigenValue().rows(); j++)
 				{
-					distance += abs((*layer1)(i, j) - (*layer2)(i, j));
+					distance += abs((*layer1).getEigenValue()(i, j) - (*layer2).getEigenValue()(i, j));
 				}
 			}
 		}
@@ -520,7 +531,7 @@ namespace LightBulb
 
 	double FeedForwardNetworkTopology::getActivation(int layerIndex, int neuronIndex) const
 	{
-		return (activationsPerLayerOut[layerIndex])(neuronIndex);
+		return activations[layerIndex].getEigenValue()(neuronIndex);
 	}
 
 	const NeuronDescription& FeedForwardNetworkTopology::getInnerNeuronDescription() const

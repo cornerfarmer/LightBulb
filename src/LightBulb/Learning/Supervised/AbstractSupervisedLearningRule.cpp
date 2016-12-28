@@ -94,7 +94,7 @@ namespace LightBulb
 				}
 
 				// Calculate the errorVector and also fill - if needed - the output and netInput values map
-				std::unique_ptr<Eigen::VectorXd> errorVector = (*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError);
+				std::unique_ptr<Vector> errorVector((*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError));
 
 				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, *errorVector.get());
 

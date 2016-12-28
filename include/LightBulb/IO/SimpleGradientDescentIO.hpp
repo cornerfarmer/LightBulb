@@ -7,6 +7,7 @@
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
 #include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

@@ -13,7 +13,8 @@
 #include "LightBulb/IO/MatrixIO.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
-
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {
@@ -82,7 +83,7 @@ namespace LightBulb
 		archive(cereal::make_nvp("netInputs", feedForwardNetworkTopology.netInputs));
 		archive(cereal::make_nvp("activations", feedForwardNetworkTopology.activations));
 		archive(cereal::make_nvp("weights", feedForwardNetworkTopology.weights));
-		feedForwardNetworkTopology.rebuildActivationsPerLayer();
+		//feedForwardNetworkTopology.rebuildActivationsPerLayer();
 	}
 
 }

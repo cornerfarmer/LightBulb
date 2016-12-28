@@ -2,6 +2,7 @@
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -49,7 +50,7 @@ namespace LightBulb
 			previousDeltaWeights = networkTopology.getAllWeights();
 			for (int i = 0; i < previousDeltaWeights.size(); i++)
 			{
-				previousDeltaWeights[i].setZero();
+				previousDeltaWeights[i].getEigenValueForEditing().setZero();
 			}
 		}
 	}
@@ -59,19 +60,19 @@ namespace LightBulb
 		return new SimpleGradientDescent(*this);
 	}
 
-	Eigen::MatrixXd SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients)
+	Matrix SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients)
 	{
-		Eigen::MatrixXd deltaWeight;
+		Matrix deltaWeight;
 
 		// Calc the delta weight
-		deltaWeight = -getOptions().learningRate * gradients;
+		deltaWeight.getEigenValueForEditing() = -getOptions().learningRate * gradients.getEigenValue();
 
 		// Substract the weightDecay term
-		deltaWeight -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex);
+		deltaWeight.getEigenValueForEditing() -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex).getEigenValue();
 
 		if (getOptions().momentum > 0) {
 			// Add the momentum term
-			deltaWeight += getOptions().momentum * previousDeltaWeights[layerIndex - 1];
+			deltaWeight.getEigenValueForEditing() += getOptions().momentum * previousDeltaWeights[layerIndex - 1].getEigenValue();
 
 			// Set this to the delta weight
 			previousDeltaWeights[layerIndex - 1] = deltaWeight;

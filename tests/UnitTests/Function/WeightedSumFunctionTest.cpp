@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 #include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 using namespace LightBulb;
 
@@ -7,36 +9,35 @@ TEST(WeightedSumFunction, computeNetInputs)
 {
 	WeightedSumFunction function;
 	// 2 - 3 - 1 Network:
-	Eigen::VectorXd activations(8);
-	std::vector<Eigen::VectorBlock<Eigen::VectorXd>>  activationsPerLayer;
-	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 0, 3));
-	activationsPerLayer[0] << 1, 2, 1;
-	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 3, 4));
-	activationsPerLayer[1] << 1, 2, 3, 1;
-	activationsPerLayer.push_back(Eigen::VectorBlock<Eigen::VectorXd>(activations.derived(), 7, 1));
+	std::vector<Vector> activations;
+	activations.push_back(Vector(3));
+	activations[0].getEigenValueForEditing() << 1, 2, 1;
+	activations.push_back(Vector(4));
+	activations[1].getEigenValueForEditing() << 1, 2, 3, 1;
+	activations.push_back(Vector(1));
 
-	std::vector<Eigen::VectorXd> netInputs(3);
-	netInputs[0] = Eigen::VectorXd(2);
-	netInputs[1] = Eigen::VectorXd(3);
-	netInputs[2] = Eigen::VectorXd(1);
+	std::vector<Vector> netInputs(3);
+	netInputs[0] = Vector(2);
+	netInputs[1] = Vector(3);
+	netInputs[2] = Vector(1);
 
-	std::vector<Eigen::MatrixXd> weights(2);
-	weights[0] = Eigen::MatrixXd(3, 3);
-	weights[0] << 1, 2, 3,
+	std::vector<Matrix> weights(2);
+	weights[0] = Matrix(3, 3);
+	weights[0].getEigenValueForEditing() << 1, 2, 3,
 				4, 5, 6,
 				7, 8, 9;				
-	weights[1] = Eigen::MatrixXd(1, 4);
-	weights[1] << 1, 2, 3, 4;
+	weights[1] = Matrix(1, 4);
+	weights[1].getEigenValueForEditing() << 1, 2, 3, 4;
 
-	function.execute(1, activationsPerLayer, netInputs, weights);
-	function.execute(2, activationsPerLayer, netInputs, weights);
+	function.execute(1, activations, netInputs, weights);
+	function.execute(2, activations, netInputs, weights);
 
-	std::vector<Eigen::VectorXd> expectedNetInputs(3);
-	expectedNetInputs[1] = Eigen::VectorXd(3);
+	std::vector<Eigen::VectorXf> expectedNetInputs(3);
+	expectedNetInputs[1] = Eigen::VectorXf(3);
 	expectedNetInputs[1] << 8, 20, 32;
-	expectedNetInputs[2] = Eigen::VectorXd(1);
+	expectedNetInputs[2] = Eigen::VectorXf(1);
 	expectedNetInputs[2] << 18;
 
-	ASSERT_TRUE(netInputs[1].isApprox(expectedNetInputs[1]));
-	ASSERT_TRUE(netInputs[2].isApprox(expectedNetInputs[2]));
+	ASSERT_TRUE(netInputs[1].getEigenValue().isApprox(expectedNetInputs[1]));
+	ASSERT_TRUE(netInputs[2].getEigenValue().isApprox(expectedNetInputs[2]));
 }

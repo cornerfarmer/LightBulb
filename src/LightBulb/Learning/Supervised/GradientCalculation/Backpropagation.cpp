@@ -15,7 +15,7 @@ namespace LightBulb
 		flatSpotEliminationFac = flatSpotEliminationFac_;
 	}
 
-	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Eigen::VectorXd>& netInputs, const std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const Eigen::VectorXd& errorVector)
+	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector)
 	{
 		for (int layerIndex = networkTopology.getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
@@ -23,17 +23,17 @@ namespace LightBulb
 			if (layerIndex == networkTopology.getLayerCount() - 1)
 			{
 				// Compute the delta value: activationFunction'(netInput) * errorValue
-				lastDeltaVectorOutputLayer = (networkTopology.getOutputNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * errorVector.array();
+				lastDeltaVectorOutputLayer.getEigenValueForEditing() = (networkTopology.getOutputNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).getEigenValue().array() + flatSpotEliminationFac) * errorVector.getEigenValue().array();
 			}
 			else
 			{
-				Eigen::VectorXd nextLayerErrorValueFactor = networkTopology.getEfferentWeightsPerLayer(layerIndex) * lastDeltaVectorOutputLayer;
+				Vector nextLayerErrorValueFactor(networkTopology.getEfferentWeightsPerLayer(layerIndex).getEigenValue() * lastDeltaVectorOutputLayer.getEigenValue());
 
 				// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
-				lastDeltaVectorOutputLayer = (networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.tail(nextLayerErrorValueFactor.rows() - networkTopology.usesBiasNeuron()).array();
+				lastDeltaVectorOutputLayer.getEigenValueForEditing() = (networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex]).getEigenValue().array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.getEigenValue().head(nextLayerErrorValueFactor.getEigenValue().rows() - networkTopology.usesBiasNeuron()).array();
 			}
 
-			gradientToUse->at(layerIndex - 1).noalias() = gradientToUse->at(layerIndex - 1) + -1 * (lastDeltaVectorOutputLayer * activations[layerIndex - 1].transpose()).matrix();
+			gradientToUse->at(layerIndex - 1).getEigenValueForEditing().noalias() = gradientToUse->at(layerIndex - 1).getEigenValue() + -1 * (lastDeltaVectorOutputLayer.getEigenValue() * activations[layerIndex - 1].getEigenValue().transpose()).matrix();
 		}
 	}
 

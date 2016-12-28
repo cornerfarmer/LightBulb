@@ -4,6 +4,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <math.h>
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -28,18 +29,18 @@ namespace LightBulb
 			*mutationStrengthValue = (*mutationStrengthValue < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
 		}
 
-		std::vector<Eigen::MatrixXd>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
+		std::vector<Matrix>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
 		int mutationStrengthIndex = 0;
 		// Go through all edges
 		for (auto layer = weights.begin(); layer != weights.end(); layer++)
 		{
-			for (int i = 0; i < layer->rows(); i++)
+			for (int i = 0; i < layer->getEigenValue().rows(); i++)
 			{
-				for (int j = 0; j < layer->cols(); j++)
+				for (int j = 0; j < layer->getEigenValue().cols(); j++)
 				{
 					// Simply add the corresponding mutationStrength value to the weight
 					double weightAdd = mutationStrength[mutationStrengthIndex] * zigguratGenerator->randDouble();
-					(*layer)(i, j) += weightAdd;
+					(*layer).getEigenValueForEditing()(i, j) += weightAdd;
 					mutationStrengthIndex++;
 				}
 			}

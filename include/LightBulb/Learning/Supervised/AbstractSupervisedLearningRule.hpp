@@ -18,6 +18,7 @@ namespace LightBulb
 	class Teacher;
 	class AbstractTeachingLesson;
 	class AbstractNetworkTopology;
+	class Vector;
 
 #define DATA_SET_TRAINING_ERROR "Training error"
 
@@ -133,7 +134,7 @@ namespace LightBulb
 		 * \param lessonIndex The current teaching lesson index.
 		 * \param errorVector The errorVector which represents how well the neural network has done on the current teaching lesson.
 		 */
-		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Eigen::VectorXd& errorVector) = 0;
+		virtual void calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Vector& errorVector) = 0;
 		/**
 		 * \brief This method should adjust the weight for the current layer.
 		 * \param layerIndex The index of the layer to change.

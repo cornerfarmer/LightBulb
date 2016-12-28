@@ -83,6 +83,9 @@
     <Filter Include="Quelldateien\Random">
       <UniqueIdentifier>{5ecf90ec-4226-4ca4-b77e-37576e58872c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\LinearAlgebra">
+      <UniqueIdentifier>{6e2a98c2-5c67-42b9-8746-d920bd21971a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\LightBulb\ActivationOrder\AbstractActivationOrder.hpp">
@@ -119,9 +122,6 @@
       <Filter>Quelldateien\Function\ActivationFunction</Filter>
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\Function\InputFunction\AbstractInputFunction.hpp">
-      <Filter>Quelldateien\Function\InputFunction</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\Function\InputFunction\EuclideanDistance.hpp">
       <Filter>Quelldateien\Function\InputFunction</Filter>
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\Function\InputFunction\WeightedSumFunction.hpp">
@@ -595,6 +595,18 @@
     <ClInclude Include="..\include\LightBulb\IO\AbstractLoggerIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Vector.hpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLinearAlgebraObjectIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">
@@ -629,9 +641,6 @@
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\Function\ActivationFunction\BinaryFunction.cpp">
       <Filter>Quelldateien\Function\ActivationFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LightBulb\Function\InputFunction\EuclideanDistance.cpp">
-      <Filter>Quelldateien\Function\InputFunction</Filter>
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\Function\InputFunction\WeightedSumFunction.cpp">
       <Filter>Quelldateien\Function\InputFunction</Filter>
@@ -977,6 +986,15 @@
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\Tools\AbstractCloneable.cpp">
       <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Matrix.cpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.cpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Vector.cpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

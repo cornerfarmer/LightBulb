@@ -79,15 +79,15 @@ namespace LightBulb
 		/**
 		 * \brief Remembers the previous gradient
 		 */
-		std::vector<Eigen::MatrixXd> prevGradient;
+		std::vector<Matrix> prevGradient;
 		/**
 		* \brief Remembers the previous squared gradient
 		*/
-		std::vector<Eigen::MatrixXd> prevSquaredGradient;
+		std::vector<Matrix> prevSquaredGradient;
 		/**
 		* \brief Remembers the previous delta weights
 		*/
-		std::vector<Eigen::MatrixXd> prevDeltaWeights;
+		std::vector<Matrix> prevDeltaWeights;
 		/**
 		* \brief Returns our current options in form of a RMSPropLearningRateOptions object.
 		* \return The RMSPropLearningRateOptions object.
@@ -110,7 +110,7 @@ namespace LightBulb
 		friend void swap(RMSPropLearningRate& lhs, RMSPropLearningRate& rhs) noexcept;
 
 		// Inherited:
-		Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) override;
+		Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

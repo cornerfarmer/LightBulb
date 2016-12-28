@@ -1,5 +1,6 @@
 // Includes
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 // Library includes
 #include <limits>
 #include <stdexcept>
@@ -11,7 +12,7 @@ namespace LightBulb
 		return input;
 	}
 
-	void IdentityFunction::execute(int layerNr, std::vector<Eigen::VectorBlock<Eigen::VectorXd>>& activations, const std::vector<Eigen::VectorXd>& netInputs) const
+	void IdentityFunction::execute(int layerNr, std::vector<Vector> &activations, const std::vector<Vector> &netInputs) const
 	{
 		activations[layerNr] = netInputs[layerNr];
 	}

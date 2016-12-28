@@ -3,6 +3,7 @@
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
@@ -34,7 +35,7 @@ namespace LightBulb
 					{
 						if (networkTopology.getNeuronCountsPerLayer()[layerIndex] > 1)
 						{
-							auto weightSums = layer->cwiseAbs().colwise().sum();
+							auto weightSums = layer->getEigenValue().cwiseAbs().colwise().sum();
 							for (int i = usesBiasNeuron; i < weightSums.cols(); i++)
 							{
 								neuronRanking.push_back(std::make_tuple(weightSums[i], layerIndex, i));
@@ -53,10 +54,10 @@ namespace LightBulb
 					{
 						if (networkTopology.getNeuronCountsPerLayer()[layerIndex] > 1)
 						{
-							for (int i = usesBiasNeuron; i < layer->cols(); i++)
+							for (int i = usesBiasNeuron; i < layer->getEigenValue().cols(); i++)
 							{
 								int weightCount = 0;
-								for (int j = 0; j < layer->rows(); j++)
+								for (int j = 0; j < layer->getEigenValue().rows(); j++)
 								{
 									if (networkTopology.existsAfferentWeight(layerIndex, i, j))
 										weightCount++;
@@ -91,13 +92,13 @@ namespace LightBulb
 			int layerIndex = 0;
 			for (auto layer = weights.begin(); layer != weights.end(); layer++, layerIndex++)
 			{
-				for (int i = 0; i < layer->rows(); i++)
+				for (int i = 0; i < layer->getEigenValue().rows(); i++)
 				{
-					for (int j = 0; j < layer->cols(); j++)
+					for (int j = 0; j < layer->getEigenValue().cols(); j++)
 					{
-						if (networkTopology.existsAfferentWeight(layerIndex, j, i) && (abs((*layer)(i, j)) < minimalWeight || minimalWeight == -1))
+						if (networkTopology.existsAfferentWeight(layerIndex, j, i) && (abs((*layer).getEigenValue()(i, j)) < minimalWeight || minimalWeight == -1))
 						{
-							minimalWeight = abs((*layer)(i, j));
+							minimalWeight = abs((*layer).getEigenValue()(i, j));
 							minimalWeightLayerIndex = layerIndex;
 							minimalWeightIndex = i;
 							minimalWeightNeuronIndex = j;

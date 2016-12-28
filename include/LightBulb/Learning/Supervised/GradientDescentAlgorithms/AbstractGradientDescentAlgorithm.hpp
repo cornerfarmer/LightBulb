@@ -15,6 +15,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractNeuralNetwork;
 	class AbstractNetworkTopology;
+	class Matrix;
 
 	/**
 	 * \brief All general options which are the same for all gradien descent algorithms.
@@ -71,7 +72,7 @@ namespace LightBulb
 		 * \param gradients The calculated gradient of this layer.
 		 * \return The delta weights.
 		 */
-		virtual Eigen::MatrixXd calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Eigen::MatrixXd& gradients) = 0;
+		virtual Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) = 0;
 		/**
 		 * \brief Returns if the learning has stopped.
 		 * \return True if learning has stopped.

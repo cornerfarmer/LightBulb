@@ -6,6 +6,7 @@
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockNetworkTopology.hpp>
 #include "Mocks/MockRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 using namespace LightBulb;
 
@@ -15,7 +16,7 @@ public:
 	MockIndividual individual1;
 	MockIndividual individual2;
 	std::vector<double> mutationStrength1, mutationStrength2;
-	std::vector<Eigen::MatrixXd> weights1, weights2;
+	std::vector<Matrix> weights1, weights2;
 	MockNeuralNetwork neuralNetwork1, neuralNetwork2;
 	MockNetworkTopology networkTopology1, networkTopology2;
 	MockRandomGenerator mockRandomGenerator;
@@ -29,11 +30,11 @@ public:
 		EXPECT_CALL(neuralNetwork1, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology1));
 		EXPECT_CALL(networkTopology1, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights1));
 
-		weights1.push_back(Eigen::MatrixXd(1, 2));
-		weights1[0](0, 0) = 2;
-		weights1[0](0, 1) = -3;
-		weights1.push_back(Eigen::MatrixXd(1, 1));
-		weights1[1](0, 0) = 10;
+		weights1.push_back(Matrix(1, 2));
+		weights1[0].getEigenValueForEditing()(0, 0) = 2;
+		weights1[0].getEigenValueForEditing()(0, 1) = -3;
+		weights1.push_back(Matrix(1, 1));
+		weights1[1].getEigenValueForEditing()(0, 0) = 10;
 
 				
 		mutationStrength2.push_back(0.3);
@@ -44,32 +45,32 @@ public:
 		EXPECT_CALL(neuralNetwork2, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology2));
 		EXPECT_CALL(networkTopology2, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights2));
 
-		weights2.push_back(Eigen::MatrixXd(1, 2));
-		weights2[0](0, 0) = -6;
-		weights2[0](0, 1) = 1;
-		weights2.push_back(Eigen::MatrixXd(1, 1));
-		weights2[1](0, 0) = 3;
+		weights2.push_back(Matrix(1, 2));
+		weights2[0].getEigenValueForEditing()(0, 0) = -6;
+		weights2[0].getEigenValueForEditing()(0, 1) = 1;
+		weights2.push_back(Matrix(1, 1));
+		weights2[1].getEigenValueForEditing()(0, 0) = 3;
 	}
 
 	void addExtraNeuronsForDifferentSizes()
 	{
-		weights1[0] = Eigen::MatrixXd(2, 3);
-		weights1[0](0, 0) = 2;
-		weights1[0](0, 1) = -3;
-		weights1[0](0, 2) = 5;
-		weights1[0](1, 0) = -2;
-		weights1[0](1, 1) = 3;
-		weights1[0](1, 2) = -5;
+		weights1[0] = Matrix(2, 3);
+		weights1[0].getEigenValueForEditing()(0, 0) = 2;
+		weights1[0].getEigenValueForEditing()(0, 1) = -3;
+		weights1[0].getEigenValueForEditing()(0, 2) = 5;
+		weights1[0].getEigenValueForEditing()(1, 0) = -2;
+		weights1[0].getEigenValueForEditing()(1, 1) = 3;
+		weights1[0].getEigenValueForEditing()(1, 2) = -5;
 
-		weights1[1] = Eigen::MatrixXd(1, 2);
-		weights1[1](0, 0) = 10;
-		weights1[1](0, 1) = -1;
+		weights1[1] = Matrix(1, 2);
+		weights1[1].getEigenValueForEditing()(0, 0) = 10;
+		weights1[1].getEigenValueForEditing()(0, 1) = -1;
 
 		mutationStrength1.push_back(0.1);
 
-		weights2[1] = Eigen::MatrixXd(2, 1);
-		weights2[1](0, 0) = 3;
-		weights2[1](1, 0) = 6;
+		weights2[1] = Matrix(2, 1);
+		weights2[1].getEigenValueForEditing()(0, 0) = 3;
+		weights2[1].getEigenValueForEditing()(1, 0) = 6;
 
 	}
 
@@ -87,9 +88,9 @@ TEST_F(RecombinationAlgorithmTest, executeWithAverage)
 	EXPECT_NEAR(1.15, mutationStrength1[0], 0.00001);
 	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
 
-	EXPECT_NEAR(-2, weights1[0](0, 0), 0.00001);
-	EXPECT_NEAR(-1, weights1[0](0, 1), 0.00001);
-	EXPECT_NEAR(6.5, weights1[1](0, 0), 0.00001);
+	EXPECT_NEAR(-2, weights1[0].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[0].getEigenValue()(0, 1), 0.00001);
+	EXPECT_NEAR(6.5, weights1[1].getEigenValue()(0, 0), 0.00001);
 }
 
 
@@ -110,9 +111,9 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
 	EXPECT_NEAR(0.3, mutationStrength1[0], 0.00001);
 	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);
 
-	EXPECT_NEAR(2, weights1[0](0, 0), 0.00001);
-	EXPECT_NEAR(1, weights1[0](0, 1), 0.00001);
-	EXPECT_NEAR(10, weights1[1](0, 0), 0.00001);
+	EXPECT_NEAR(2, weights1[0].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(1, weights1[0].getEigenValue()(0, 1), 0.00001);
+	EXPECT_NEAR(10, weights1[1].getEigenValue()(0, 0), 0.00001);
 }
 
 TEST_F(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
@@ -126,14 +127,14 @@ TEST_F(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
 	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
 	EXPECT_NEAR(0.1, mutationStrength1[2], 0.00001);
 
-	EXPECT_NEAR(-2, weights1[0](0, 0), 0.00001);
-	EXPECT_NEAR(-1, weights1[0](0, 1), 0.00001);
-	EXPECT_NEAR(5, weights1[0](0, 2), 0.00001);
-	EXPECT_NEAR(-2, weights1[0](1, 0), 0.00001);
-	EXPECT_NEAR(3, weights1[0](1, 1), 0.00001);
-	EXPECT_NEAR(-5, weights1[0](1, 2), 0.00001);
-	EXPECT_NEAR(6.5, weights1[1](0, 0), 0.00001);
-	EXPECT_NEAR(-1, weights1[1](0, 1), 0.00001);
+	EXPECT_NEAR(-2, weights1[0].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[0].getEigenValue()(0, 1), 0.00001);
+	EXPECT_NEAR(5, weights1[0].getEigenValue()(0, 2), 0.00001);
+	EXPECT_NEAR(-2, weights1[0].getEigenValue()(1, 0), 0.00001);
+	EXPECT_NEAR(3, weights1[0].getEigenValue()(1, 1), 0.00001);
+	EXPECT_NEAR(-5, weights1[0].getEigenValue()(1, 2), 0.00001);
+	EXPECT_NEAR(6.5, weights1[1].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[1].getEigenValue()(0, 1), 0.00001);
 }
 
 
@@ -158,12 +159,12 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
 	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);
 	EXPECT_NEAR(0.1, mutationStrength1[2], 0.00001);
 
-	EXPECT_NEAR(2, weights1[0](0, 0), 0.00001);
-	EXPECT_NEAR(1, weights1[0](0, 1), 0.00001);
-	EXPECT_NEAR(5, weights1[0](0, 2), 0.00001);
-	EXPECT_NEAR(-2, weights1[0](1, 0), 0.00001);
-	EXPECT_NEAR(3, weights1[0](1, 1), 0.00001);
-	EXPECT_NEAR(-5, weights1[0](1, 2), 0.00001);
-	EXPECT_NEAR(10, weights1[1](0, 0), 0.00001);
-	EXPECT_NEAR(-1, weights1[1](0, 1), 0.00001);
+	EXPECT_NEAR(2, weights1[0].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(1, weights1[0].getEigenValue()(0, 1), 0.00001);
+	EXPECT_NEAR(5, weights1[0].getEigenValue()(0, 2), 0.00001);
+	EXPECT_NEAR(-2, weights1[0].getEigenValue()(1, 0), 0.00001);
+	EXPECT_NEAR(3, weights1[0].getEigenValue()(1, 1), 0.00001);
+	EXPECT_NEAR(-5, weights1[0].getEigenValue()(1, 2), 0.00001);
+	EXPECT_NEAR(10, weights1[1].getEigenValue()(0, 0), 0.00001);
+	EXPECT_NEAR(-1, weights1[1].getEigenValue()(0, 1), 0.00001);
 }

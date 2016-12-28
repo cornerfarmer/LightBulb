@@ -62,7 +62,7 @@ namespace LightBulb
 	{
 		Transition transition;
 		auto patternVector = networkTopology->getActivationsPerLayer(0);
-		transition.state = std::vector<double>(patternVector.data() + networkTopology->usesBiasNeuron(), patternVector.data() + patternVector.size());
+		transition.state = std::vector<double>(patternVector.getEigenValue().data() + networkTopology->usesBiasNeuron(), patternVector.getEigenValue().data() + patternVector.getEigenValue().size());
 
 		if (!getOptions().environment->isTerminalState()) {
 			getOptions().environment->getNNInput(transition.nextState);
