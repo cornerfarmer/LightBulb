@@ -18,7 +18,7 @@ LightBulbExample is a demo project which uses LightBulb to demonstrate some basi
 
 ### Windows:
 
-Just start the correct binary in the "bin" directory.
+Just download the [binary](https://github.com/domin1101/LightBulb/releases/download/v0.1/LightBulb-v0.1-win32.zip) from the v0.1 release.
 
 ### Linux & Other
 
