@@ -10,6 +10,12 @@ namespace LightBulb
 {
 	// Forward declarations
 
+	enum CalculatorType
+	{
+		CT_CPU,
+		CT_GPU
+	};
+
 	template<class EigenType, class ViennaCLType>
 	class AbstractLinearAlgebraObject
 	{
@@ -26,6 +32,7 @@ namespace LightBulb
 		void refreshEigenValue() const
 		{
 			viennacl::backend::finish();
+			checkEigenSizes();
 			viennacl::copy(viennaclValue, eigenValue);
 			viennaclValueIsDirty = false;
 		}
@@ -33,13 +40,17 @@ namespace LightBulb
 		void refreshViennaclValue() const
 		{
 			viennacl::backend::finish();
-			viennacl::copy(eigenValue, viennaclValue);
+			checkViennaClSizes();
+
+			if (eigenValue.size() != 0)
+				viennacl::copy(eigenValue, viennaclValue);
 			eigenValueIsDirty = false;
 		}
 
 		virtual void checkEigenSizes() const = 0;
 
 		virtual void checkViennaClSizes() const = 0;
+
 
 	public:
 		virtual ~AbstractLinearAlgebraObject() {};
@@ -86,6 +97,11 @@ namespace LightBulb
 			if (viennaclValueIsDirty)
 				refreshEigenValue();
 			return eigenValue == linearAlgebraObject.eigenValue;
+		}
+
+		int getCalculatorType() const
+		{
+			return CT_GPU;
 		}
 	};
 }

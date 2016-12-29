@@ -98,8 +98,17 @@ namespace LightBulb
 
 	void GradientDescentLearningRule::adjustWeights(int layerIndex)
 	{
-		Matrix newWeights(getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex).getEigenValue() + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient().at(layerIndex - 1)).getEigenValue());
-		getCurrentNetworkTopology().setAfferentWeightsPerLayer(layerIndex, newWeights);
+		if (getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex).getCalculatorType() == CT_GPU)
+		{
+			Matrix newWeights;
+			newWeights.getViennaclValueForEditing() = getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex).getViennaclValue() + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient().at(layerIndex - 1)).getViennaclValue();
+			getCurrentNetworkTopology().setAfferentWeightsPerLayer(layerIndex, newWeights);
+		}
+		else
+		{
+			Matrix newWeights(getCurrentNetworkTopology().getAfferentWeightsPerLayer(layerIndex).getEigenValue() + gradientDescentAlgorithm->calcDeltaWeight(getCurrentNetworkTopology(), layerIndex, gradientCalculation->getGradient().at(layerIndex - 1)).getEigenValue());
+			getCurrentNetworkTopology().setAfferentWeightsPerLayer(layerIndex, newWeights);
+		}
 	}
 
 	bool GradientDescentLearningRule::learningHasStopped()

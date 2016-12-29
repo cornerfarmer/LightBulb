@@ -180,7 +180,17 @@ namespace LightBulb
 
 	Matrix FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
 	{
-		return Matrix(weights[layerIndex].getEigenValue().transpose());
+		Matrix transWeights;
+		if (transWeights.getCalculatorType() == CT_GPU)
+		{
+			transWeights.getViennaclValueForEditing().resize(weights[layerIndex].getViennaclValue().size2(), weights[layerIndex].getViennaclValue().size1());
+			transWeights.getViennaclValueForEditing() = viennacl::trans(weights[layerIndex].getViennaclValue());
+			return transWeights;
+		}
+		else
+		{
+			return Matrix(weights[layerIndex].getEigenValue().transpose());
+		}
 	}
 
 	bool FeedForwardNetworkTopology::usesBiasNeuron() const
@@ -444,13 +454,25 @@ namespace LightBulb
 		else
 		{
 			for (int l = 0; l < activations.size(); l++) {
-				for (int i = 0; i < activations[l].getEigenValue().rows(); i++)
+				if(activations[l].getCalculatorType() == CT_GPU)
 				{
-					activations[l].getEigenValueForEditing()(i) = 0;
+					activations[l].getViennaclValueForEditing() = viennacl::zero_vector<float>(activations[l].getViennaclValue().size());
+
+					if (options->useBiasNeuron)
+					{
+						activations[l].getViennaclValueForEditing()(activations[l].getViennaclValue().size() - 1) = 1;
+					}
 				}
-				if (options->useBiasNeuron)
+				else
 				{
-					activations[l].getEigenValueForEditing()(activations[l].getEigenValue().rows() - 1) = 1;
+					for (int i = 0; i < activations[l].getEigenValue().rows(); i++)
+					{
+						activations[l].getEigenValueForEditing()(i) = 0;
+					}
+					if (options->useBiasNeuron)
+					{
+						activations[l].getEigenValueForEditing()(activations[l].getEigenValue().rows() - 1) = 1;
+					}
 				}
 			}
 		}
@@ -458,14 +480,22 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::getOutput(std::vector<double> &outputVector) const
 	{
-		outputVector.assign(activations.back().getEigenValue().data(), activations.back().getEigenValue().data() + outputVector.size());
+		if (activations.back().getCalculatorType() == CT_GPU)
+			viennacl::copy(activations.back().getViennaclValue().begin(), activations.back().getViennaclValue().begin() + outputVector.size(), outputVector.begin());
+		else
+			outputVector.assign(activations.back().getEigenValue().data(), activations.back().getEigenValue().data() + outputVector.size());
 	}
 
 	void FeedForwardNetworkTopology::setInput(const std::vector<double> &inputVector)
 	{
-		for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
+		if (activations.back().getCalculatorType() == CT_GPU)
+			viennacl::copy(inputVector.begin(), inputVector.begin() + options->neuronsPerLayerCount.front(), activations.front().getViennaclValueForEditing().begin());
+		else
 		{
-			activations.front().getEigenValueForEditing()(i) = (inputVector.size() > i ? inputVector[i] : 0);
+			for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)
+			{
+				activations.front().getEigenValueForEditing()(i) = (inputVector.size() > i ? inputVector[i] : 0);
+			}
 		}
 	}
 

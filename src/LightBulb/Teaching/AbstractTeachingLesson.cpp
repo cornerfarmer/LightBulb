@@ -40,18 +40,34 @@ namespace LightBulb
 		std::unique_ptr<Vector> errorVector(new Vector(teachingInput.getDimension()));
 
 		// Calculate the error values (expected value - real value)
-		for (int i = 0; i < teachingInput.getDimension(); i++)
+		if (errorVector->getCalculatorType() == CT_GPU)
 		{
-			if (teachingInput.exists(i))
+			for (int i = 0; i < teachingInput.getDimension(); i++)
 			{
-				(*errorVector).getEigenValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
-				if (clipError)
-					(*errorVector).getEigenValueForEditing()[i] = std::max(-1.0f, std::min(1.0f, (*errorVector).getEigenValue()[i]));
+				if (teachingInput.exists(i))
+				{
+					(*errorVector).getViennaclValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
+					if (clipError)
+						throw std::exception("Not implemented yet.");
+				}
+				else
+					(*errorVector).getViennaclValueForEditing()[i] = 0;
 			}
-			else
-				(*errorVector).getEigenValueForEditing()[i] = 0;
 		}
-
+		else
+		{
+			for (int i = 0; i < teachingInput.getDimension(); i++)
+			{
+				if (teachingInput.exists(i))
+				{
+					(*errorVector).getEigenValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
+					if (clipError)
+						(*errorVector).getEigenValueForEditing()[i] = std::max(-1.0f, std::min(1.0f, (*errorVector).getEigenValue()[i]));
+				}
+				else
+					(*errorVector).getEigenValueForEditing()[i] = 0;
+			}
+		}
 		return errorVector;
 	}
 
@@ -63,11 +79,21 @@ namespace LightBulb
 
 		double specificError = 0;
 
-		// Add the square of every errorValue in the errorVector
-		for (int i = 0; i < errorVector->getEigenValue().rows(); i++)
+		if (errorVector->getCalculatorType() == CT_GPU) 
 		{
-			specificError += pow((*errorVector).getEigenValue()(i), 2.0);
-		}		
+			viennacl::scalar<float> sum = 0;
+			viennacl::vector<float> pow = viennacl::scalar_vector<float>((*errorVector).getViennaclValue().size(), 2.0f);
+			viennacl::linalg::sum_impl(viennacl::linalg::element_pow((*errorVector).getViennaclValue(), pow), sum);
+			specificError = sum;
+		}
+		else
+		{
+			// Add the square of every errorValue in the errorVector
+			for (int i = 0; i < errorVector->getEigenValue().rows(); i++)
+			{
+				specificError += pow((*errorVector).getEigenValue()(i), 2.0);
+			}
+		}
 
 		// Divide the specific error by two
 		specificError /= 2;

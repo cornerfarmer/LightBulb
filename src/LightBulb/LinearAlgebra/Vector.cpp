@@ -3,8 +3,18 @@
 
 LightBulb::Vector::Vector(int rows)
 {
-	eigenValue = Eigen::VectorXf(rows);
-	eigenValueIsDirty = true;
+	if (rows > 0) {
+		if (getCalculatorType() == CT_GPU) 
+		{
+			viennaclValue = viennacl::vector<float>(rows);
+			viennaclValueIsDirty = true;
+		} 
+		else
+		{
+			eigenValue = Eigen::VectorXf(rows);
+			eigenValueIsDirty = true;
+		}
+	}
 }
 
 LightBulb::Vector::Vector(const Eigen::VectorXf& eigenVector)

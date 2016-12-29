@@ -64,18 +64,37 @@ namespace LightBulb
 	{
 		Matrix deltaWeight;
 
-		// Calc the delta weight
-		deltaWeight.getEigenValueForEditing() = -getOptions().learningRate * gradients.getEigenValue();
+		if (deltaWeight.getCalculatorType() == CT_GPU)
+		{
+			// Calc the delta weight
+			deltaWeight.getViennaclValueForEditing() = -getOptions().learningRate * gradients.getViennaclValue();
 
-		// Substract the weightDecay term
-		deltaWeight.getEigenValueForEditing() -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex).getEigenValue();
+			// Substract the weightDecay term
+			deltaWeight.getViennaclValueForEditing() -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex).getViennaclValue();
 
-		if (getOptions().momentum > 0) {
-			// Add the momentum term
-			deltaWeight.getEigenValueForEditing() += getOptions().momentum * previousDeltaWeights[layerIndex - 1].getEigenValue();
+			if (getOptions().momentum > 0) {
+				// Add the momentum term
+				deltaWeight.getViennaclValueForEditing() += getOptions().momentum * previousDeltaWeights[layerIndex - 1].getViennaclValue();
 
-			// Set this to the delta weight
-			previousDeltaWeights[layerIndex - 1] = deltaWeight;
+				// Set this to the delta weight
+				previousDeltaWeights[layerIndex - 1] = deltaWeight;
+			}
+		}
+		else
+		{
+			// Calc the delta weight
+			deltaWeight.getEigenValueForEditing() = -getOptions().learningRate * gradients.getEigenValue();
+
+			// Substract the weightDecay term
+			deltaWeight.getEigenValueForEditing() -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex).getEigenValue();
+
+			if (getOptions().momentum > 0) {
+				// Add the momentum term
+				deltaWeight.getEigenValueForEditing() += getOptions().momentum * previousDeltaWeights[layerIndex - 1].getEigenValue();
+
+				// Set this to the delta weight
+				previousDeltaWeights[layerIndex - 1] = deltaWeight;
+			}
 		}
 
 		return deltaWeight;
