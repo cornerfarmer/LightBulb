@@ -11,6 +11,7 @@ addons:
     packages:
     - gcc-5
     - g++-5
+    - ocl-icd-opencl-dev
 env:
   - APP=OFF EXAMPLE=OFF TESTS=OFF SHARED=OFF
   - APP=ON EXAMPLE=OFF TESTS=OFF SHARED=OFF

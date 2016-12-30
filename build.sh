@@ -15,6 +15,5 @@ else
 fi
 sudo make install
 cd ../..
-sudo apt install ocl-icd-opencl-dev
 
 exit 0
