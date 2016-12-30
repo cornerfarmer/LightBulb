@@ -1,10 +1,10 @@
 ﻿// Includes
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/Teaching/Teacher.hpp"
 #include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {

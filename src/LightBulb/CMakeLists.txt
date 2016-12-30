@@ -7,10 +7,16 @@ include_directories(../../include)
 
 include_directories(../../extlibs/eigen)
 include_directories(../../extlibs/cereal/include)
+include_directories(../../extlibs/viennacl)
+add_definitions(-DVIENNACL_WITH_OPENCL -DVIENNACL_WITH_EIGEN)
+
+find_package(OpenCL REQUIRED)
 
 add_library(LightBulb ${SOURCES})
+target_link_libraries(LightBulb ${OpenCL_LIBRARY})
 use_cxx11(LightBulb)
 install(TARGETS LightBulb DESTINATION lib)
 install(DIRECTORY ../../include/LightBulb DESTINATION include)
 install(DIRECTORY ../../extlibs/eigen/Eigen DESTINATION include)
 install(DIRECTORY ../../extlibs/cereal/include/cereal DESTINATION include)
+install(DIRECTORY ../../extlibs/viennacl DESTINATION include)

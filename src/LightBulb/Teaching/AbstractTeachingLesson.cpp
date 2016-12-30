@@ -48,7 +48,7 @@ namespace LightBulb
 				{
 					(*errorVector).getViennaclValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
 					if (clipError)
-						throw std::exception("Not implemented yet.");
+						throw std::logic_error("Not implemented yet.");
 				}
 				else
 					(*errorVector).getViennaclValueForEditing()[i] = 0;

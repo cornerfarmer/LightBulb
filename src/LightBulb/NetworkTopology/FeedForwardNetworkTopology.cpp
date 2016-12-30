@@ -10,6 +10,7 @@
 // Library includes
 #include <exception>
 #include <math.h>
+#include <stdexcept>
 
 namespace LightBulb
 {
@@ -101,7 +102,7 @@ namespace LightBulb
 		neuronDescriptionsPerLayer.resize(getLayerCount());
 		if (options->enableShortcuts)
 		{
-			throw std::exception("Shortcuts are not implemented yet.");
+			throw std::logic_error("Shortcuts are not implemented yet.");
 			/*activations = Eigen::VectorXd(totalNeuronCount + options->useBiasNeuron);
 			if (options->useBiasNeuron) {
 				activations(0) = 1;
@@ -200,7 +201,7 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::removeNeuron(int layerIndex, int neuronIndex)
 	{
-		std::exception("Currently not implemented.");
+		std::logic_error("Currently not implemented.");
 		/*for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
 			layerOffsets[l]--;
 
@@ -252,7 +253,7 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::addNeuron(int layerIndex)
 	{
-		std::exception("Currently not implemented.");
+		std::logic_error("Currently not implemented.");
 		/*for (int l = layerIndex + 1; l < layerOffsets.size(); l++)
 			layerOffsets[l]++;
 
@@ -301,13 +302,13 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::removeAfferentWeight(int layerIndex, int neuronIndex, int weightIndex)
 	{
-		std::exception("Currently not implemented.");
+		std::logic_error("Currently not implemented.");
 		//weights[layerIndex].(weightIndex, neuronIndex) = 0;
 	}
 
 	bool FeedForwardNetworkTopology::existsAfferentWeight(int layerIndex, int neuronIndex, int weightIndex)
 	{
-		std::exception("Currently not implemented.");
+		std::logic_error("Currently not implemented.");
 		return false;
 		//return weights[layerIndex](weightIndex, neuronIndex) != 0;
 	}
@@ -445,7 +446,7 @@ namespace LightBulb
 	{
 		if (options->enableShortcuts)
 		{
-			throw std::exception("Not implemented");
+			throw std::logic_error("Not implemented");
 			/*for (int i = options->useBiasNeuron; i < activations.rows(); i++)
 			{
 				activations(i) = 0;
