@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include <viennacl/vector.hpp>
 
 namespace LightBulb
 {
@@ -22,6 +23,7 @@ namespace LightBulb
 		 * \brief The temperature parameter which describes how fast the function raises
 		 */
 		double temperatureParameter;
+		void internExecute(const viennacl::vector_base<float>& in, viennacl::vector_base<float>& out) const;
 	public:
 		/**
 		 * \brief Creates a FermiFunction
@@ -35,6 +37,8 @@ namespace LightBulb
 		double getMaximum() const override;
 		double getMinimum() const override;
 		bool hasAMaxAndMinimum() const override;
+		void execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const override;
+		Vector executeDerivation(const Vector& input) const override;
 	};
 }
 

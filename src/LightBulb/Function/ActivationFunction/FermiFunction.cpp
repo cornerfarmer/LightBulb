@@ -4,6 +4,8 @@
 #include <math.h>
 #include <limits>
 #include <stdexcept>
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include <viennacl/vector_proxy.hpp>
 
 namespace LightBulb
 {
@@ -43,4 +45,31 @@ namespace LightBulb
 	{
 		return true;
 	}
+
+	void FermiFunction::execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const
+	{
+		viennacl::range r(0, activations[layerNr].getViennaclValue().size() - 1);
+		viennacl::vector_range<viennacl::vector<float>> v_sub(activations[layerNr].getViennaclValueForEditing(), r);
+		internExecute(netInputs[layerNr].getViennaclValue(), v_sub);
+	}
+
+
+	void FermiFunction::internExecute(const viennacl::vector_base<float>& in, viennacl::vector_base<float>& out) const
+	{
+		out = viennacl::linalg::element_exp(-1 * in / temperatureParameter);
+		viennacl::vector<float> ones = viennacl::scalar_vector<float>(out.size(), 1);
+		out += ones;
+		out = viennacl::linalg::element_div(ones, out);
+	}
+
+	Vector FermiFunction::executeDerivation(const Vector& input) const
+	{
+		Vector derivation;
+		viennacl::vector<float> ones = viennacl::scalar_vector<float>(input.getViennaclValue().size(), 1);
+		internExecute(input.getViennaclValue(), derivation.getViennaclValueForEditing());
+		derivation.getViennaclValueForEditing() = viennacl::linalg::element_prod(derivation.getViennaclValue(), ones - derivation.getViennaclValue());
+		return derivation;
+	}
+
+
 }

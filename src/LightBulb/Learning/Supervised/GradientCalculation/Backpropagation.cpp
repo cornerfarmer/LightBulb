@@ -30,7 +30,8 @@ namespace LightBulb
 				}
 				else
 				{
-					Vector nextLayerErrorValueFactor(networkTopology.getEfferentWeightsPerLayer(layerIndex).getViennaclValue().size1());
+					nextLayerErrorValueFactor.getViennaclValueForEditing().resize(networkTopology.getEfferentWeightsPerLayer(layerIndex).getViennaclValue().size1());
+
 					nextLayerErrorValueFactor.getViennaclValueForEditing() = viennacl::linalg::prod(networkTopology.getEfferentWeightsPerLayer(layerIndex).getViennaclValue(), lastDeltaVectorOutputLayer.getViennaclValue());
 
 					if (networkTopology.usesBiasNeuron())

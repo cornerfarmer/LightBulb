@@ -34,6 +34,7 @@ namespace LightBulb
 		 * \brief Can be used to overcome long plateaus.
 		 */
 		double flatSpotEliminationFac;
+		Vector nextLayerErrorValueFactor;
 	public:
 		/**
 		 * \brief Creates Backpropagation
