@@ -1,5 +1,7 @@
 # Enable C++ support
 language: cpp
+sudo: required
+dist: trusty
 compiler:
   - gcc
 install:
