@@ -68,9 +68,7 @@ namespace LightBulb
 	Vector FermiFunction::executeDerivation(const Vector& input) const
 	{
 		Vector derivation(input.getViennaclValue().size());
-		viennacl::vector<float> ones = viennacl::scalar_vector<float>(input.getViennaclValue().size(), 1);
-		internExecute(input.getViennaclValue(), derivation.getViennaclValueForEditing());
-		derivation.getViennaclValueForEditing() = viennacl::linalg::element_prod(derivation.getViennaclValue(), ones - derivation.getViennaclValue());
+		executeVectorAssignKernel(getKernel("fermi", "fermi_deriv_assign", "fermi.cl"), input.getViennaclValue(), derivation.getViennaclValueForEditing());
 		return derivation;
 	}
 
