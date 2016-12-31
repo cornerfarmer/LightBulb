@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include <viennacl/vector_proxy.hpp>
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -53,18 +54,20 @@ namespace LightBulb
 		internExecute(netInputs[layerNr].getViennaclValue(), v_sub);
 	}
 
+	template<typename T>
+	viennacl::vector_expression<const viennacl::vector_base<T>, const viennacl::vector_base<T>, viennacl::op_element_unary<viennacl::op_fermi>> FermiFunction::executeOpenCL(viennacl::vector_base<T> const & v) const
+	{
+		return viennacl::vector_expression<const viennacl::vector_base<T>, const viennacl::vector_base<T>, viennacl::op_element_unary<viennacl::op_fermi>>(v, v);
+	}
 
 	void FermiFunction::internExecute(const viennacl::vector_base<float>& in, viennacl::vector_base<float>& out) const
 	{
-		out = viennacl::linalg::element_exp(-1 * in / temperatureParameter);
-		viennacl::vector<float> ones = viennacl::scalar_vector<float>(out.size(), 1);
-		out += ones;
-		out = viennacl::linalg::element_div(ones, out);
+		executeVectorAssignKernel(getKernel("fermi", "fermi_assign", "fermi.cl"), in, out);
 	}
 
 	Vector FermiFunction::executeDerivation(const Vector& input) const
 	{
-		Vector derivation;
+		Vector derivation(input.getViennaclValue().size());
 		viennacl::vector<float> ones = viennacl::scalar_vector<float>(input.getViennaclValue().size(), 1);
 		internExecute(input.getViennaclValue(), derivation.getViennaclValueForEditing());
 		derivation.getViennaclValueForEditing() = viennacl::linalg::element_prod(derivation.getViennaclValue(), ones - derivation.getViennaclValue());

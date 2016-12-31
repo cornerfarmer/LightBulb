@@ -157,6 +157,7 @@
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Vector.hpp" />
     <ClInclude Include="..\include\LightBulb\Logging\AbstractLoggable.hpp" />

@@ -607,6 +607,9 @@
     <ClInclude Include="..\include\LightBulb\IO\AbstractLinearAlgebraObjectIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">

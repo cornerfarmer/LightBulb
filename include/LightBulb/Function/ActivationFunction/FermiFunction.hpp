@@ -7,8 +7,35 @@
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include <viennacl/vector.hpp>
 
+namespace viennacl
+{
+	struct op_fermi {};
+	namespace linalg
+	{
+		namespace detail
+		{
+			template<>
+			struct op_applier<viennacl::op_element_unary<op_fermi>>
+			{
+				template<typename T>
+				static void apply(T & result, T const & x) { using namespace std; result = x; }
+			};
+		}
+
+		namespace opencl
+		{
+			namespace detail
+			{
+				inline std::string op_to_string(op_fermi) { return "fermi"; }
+			}
+		}
+	}
+}
+
 namespace LightBulb
 {
+	
+
 	/**
 	 * \brief The FermiFunction is a sigmoid function between 0 and 1 which can be adjusted with temperatureParameter.
 	 * \details Describes: \n \n \f$ f(x) = \frac{1}{1 + e^{\frac{-x}{\beta}}} \f$ \n \n
@@ -24,6 +51,10 @@ namespace LightBulb
 		 */
 		double temperatureParameter;
 		void internExecute(const viennacl::vector_base<float>& in, viennacl::vector_base<float>& out) const;
+
+		template<typename T>
+		viennacl::vector_expression<const viennacl::vector_base<T>, const viennacl::vector_base<T>, viennacl::op_element_unary<viennacl::op_fermi>> FermiFunction::executeOpenCL(viennacl::vector_base<T> const & v) const;
+
 	public:
 		/**
 		 * \brief Creates a FermiFunction
