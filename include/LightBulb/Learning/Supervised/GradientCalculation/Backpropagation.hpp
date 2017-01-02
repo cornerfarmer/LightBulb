@@ -34,7 +34,8 @@ namespace LightBulb
 		 * \brief Can be used to overcome long plateaus.
 		 */
 		double flatSpotEliminationFac;
-		Vector nextLayerErrorValueFactor;
+		Vector nextLayerErrorValueFactor; 
+		void backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, const viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G);
 	public:
 		/**
 		 * \brief Creates Backpropagation
