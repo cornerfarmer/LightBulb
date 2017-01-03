@@ -29,13 +29,14 @@ namespace LightBulb
 		/**
 		 * \brief This vector should keep all delta values
 		 */
-		Vector lastDeltaVectorOutputLayer;
+		std::vector<Vector> lastDeltaVectorOutputLayer;
 		/**
 		 * \brief Can be used to overcome long plateaus.
 		 */
 		double flatSpotEliminationFac;
-		Vector nextLayerErrorValueFactor; 
-		void backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, const viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G);
+		Vector nextLayerErrorValueFactor;
+		void backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G);
+		void backpropagateInnerLayer(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, const viennacl::vector_base<float>& lastDeltaVec, viennacl::vector_base<float>& deltaVec, const viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& G);
 	public:
 		/**
 		 * \brief Creates Backpropagation
@@ -45,6 +46,7 @@ namespace LightBulb
 		// Inherited:
 		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector) override;
 		AbstractCloneable* clone() const override;
+		void initGradient(const AbstractNetworkTopology& networkTopology) override;
 	};
 }
 
