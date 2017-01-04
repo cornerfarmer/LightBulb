@@ -55,7 +55,7 @@ namespace LightBulb
 		return new ResilientLearningRate(*this);
 	}
 
-	Matrix ResilientLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients)
+	void ResilientLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
 	{
 		for (int i = 0; i < gradients.getEigenValue().rows(); i++)
 		{
@@ -80,7 +80,7 @@ namespace LightBulb
 			}
 		}
 
-		return previousLearningRates[layerIndex - 1];
+//		return previousLearningRates[layerIndex - 1];
 	}
 
 	bool ResilientLearningRate::learningHasStopped()

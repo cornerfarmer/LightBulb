@@ -72,7 +72,7 @@ namespace LightBulb
 		 * \param gradients The calculated gradient of this layer.
 		 * \return The delta weights.
 		 */
-		virtual Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) = 0;
+		virtual void adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients) = 0;
 		/**
 		 * \brief Returns if the learning has stopped.
 		 * \return True if learning has stopped.

@@ -99,7 +99,7 @@ namespace LightBulb
 		ResilientLearningRate& operator=(ResilientLearningRate other);
 		friend void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept;
 		// Inherited:
-		Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) override;
+		void adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

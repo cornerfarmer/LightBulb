@@ -61,14 +61,14 @@ namespace LightBulb
 		return new RMSPropLearningRate(*this);
 	}
 
-	Matrix RMSPropLearningRate::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients)
+	void RMSPropLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
 	{
 		prevGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().gradientMomentum * prevGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().gradientMomentum) * gradients.getEigenValue();
 		prevSquaredGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().squaredGradientMomentum) * gradients.getEigenValue().cwiseAbs2();
 
 		prevDeltaWeights[layerIndex - 1].getEigenValueForEditing() = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1].getEigenValue() - getOptions().learningRate * gradients.getEigenValue().cwiseQuotient(((prevSquaredGradient[layerIndex - 1].getEigenValue().array() - prevGradient[layerIndex - 1].getEigenValue().cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
 
-		return prevDeltaWeights[layerIndex - 1];
+//		return prevDeltaWeights[layerIndex - 1];
 	}
 
 

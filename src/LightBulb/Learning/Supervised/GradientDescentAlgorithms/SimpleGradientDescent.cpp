@@ -3,6 +3,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -60,28 +61,22 @@ namespace LightBulb
 		return new SimpleGradientDescent(*this);
 	}
 
-	Matrix SimpleGradientDescent::calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients)
+	void SimpleGradientDescent::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
 	{
-		Matrix deltaWeight;
-
-		if (deltaWeight.getCalculatorType() == CT_GPU)
+		if (weights.getCalculatorType() == CT_GPU)
 		{
-			// Calc the delta weight
-			deltaWeight.getViennaclValueForEditing() = -getOptions().learningRate * gradients.getViennaclValue();
-
-			// Substract the weightDecay term
-			deltaWeight.getViennaclValueForEditing() -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex).getViennaclValue();
-
-			if (getOptions().momentum > 0) {
-				// Add the momentum term
-				deltaWeight.getViennaclValueForEditing() += getOptions().momentum * previousDeltaWeights[layerIndex - 1].getViennaclValue();
-
-				// Set this to the delta weight
-				previousDeltaWeights[layerIndex - 1] = deltaWeight;
+			if (getOptions().momentum > 0)
+			{
+				kernelSimpleGradientDescentWithMomentum(weights.getViennaclValueForEditing(), previousDeltaWeights[layerIndex - 1].getViennaclValueForEditing(), gradients.getViennaclValue());
+			} 
+			else
+			{
+				kernelSimpleGradientDescent(weights.getViennaclValueForEditing(), gradients.getViennaclValue());
 			}
 		}
 		else
 		{
+			Matrix deltaWeight;
 			// Calc the delta weight
 			deltaWeight.getEigenValueForEditing() = -getOptions().learningRate * gradients.getEigenValue();
 
@@ -95,9 +90,58 @@ namespace LightBulb
 				// Set this to the delta weight
 				previousDeltaWeights[layerIndex - 1] = deltaWeight;
 			}
-		}
 
-		return deltaWeight;
+			weights.getEigenValueForEditing() += deltaWeight.getEigenValue();
+		}
+	}
+
+	void SimpleGradientDescent::kernelSimpleGradientDescentWithMomentum(viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& M, const viennacl::matrix_base<float>& G)
+	{
+		viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent_with_momentum", "simple_gradient_descent.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			cl_float(getOptions().learningRate),
+			cl_float(getOptions().weightDecayFac),
+			cl_float(getOptions().momentum),
+
+			viennacl::traits::opencl_handle(W),
+			cl_uint(viennacl::traits::start1(W)), cl_uint(viennacl::traits::start2(W)),
+			cl_uint(viennacl::traits::stride1(W)), cl_uint(viennacl::traits::stride2(W)),
+			cl_uint(viennacl::traits::size1(W)), cl_uint(viennacl::traits::size2(W)),
+			cl_uint(viennacl::traits::internal_size1(W)), cl_uint(viennacl::traits::internal_size2(W)),
+
+			viennacl::traits::opencl_handle(M),
+			cl_uint(viennacl::traits::start1(M)), cl_uint(viennacl::traits::start2(M)),
+			cl_uint(viennacl::traits::stride1(M)), cl_uint(viennacl::traits::stride2(M)),
+			cl_uint(viennacl::traits::size1(M)), cl_uint(viennacl::traits::size2(M)),
+			cl_uint(viennacl::traits::internal_size1(M)), cl_uint(viennacl::traits::internal_size2(M)),
+
+			viennacl::traits::opencl_handle(G),
+			cl_uint(viennacl::traits::start1(G)), cl_uint(viennacl::traits::start2(G)),
+			cl_uint(viennacl::traits::stride1(G)), cl_uint(viennacl::traits::stride2(G)),
+			cl_uint(viennacl::traits::internal_size1(G)), cl_uint(viennacl::traits::internal_size2(G))
+		));
+	}
+
+	void SimpleGradientDescent::kernelSimpleGradientDescent(viennacl::matrix_base<float>& W, const viennacl::matrix_base<float>& G)
+	{
+		viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent", "simple_gradient_descent.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			cl_float(getOptions().learningRate),
+			cl_float(getOptions().weightDecayFac),
+
+			viennacl::traits::opencl_handle(W),
+			cl_uint(viennacl::traits::start1(W)), cl_uint(viennacl::traits::start2(W)),
+			cl_uint(viennacl::traits::stride1(W)), cl_uint(viennacl::traits::stride2(W)),
+			cl_uint(viennacl::traits::size1(W)), cl_uint(viennacl::traits::size2(W)),
+			cl_uint(viennacl::traits::internal_size1(W)), cl_uint(viennacl::traits::internal_size2(W)),
+
+			viennacl::traits::opencl_handle(G),
+			cl_uint(viennacl::traits::start1(G)), cl_uint(viennacl::traits::start2(G)),
+			cl_uint(viennacl::traits::stride1(G)), cl_uint(viennacl::traits::stride2(G)),
+			cl_uint(viennacl::traits::internal_size1(G)), cl_uint(viennacl::traits::internal_size2(G))
+		));
 	}
 
 	bool SimpleGradientDescent::learningHasStopped()

@@ -8,6 +8,7 @@
 
 // Includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {
@@ -68,6 +69,8 @@ namespace LightBulb
 		* \return The SimpleGradientDescentOptions object.
 		*/
 		SimpleGradientDescentOptions& getOptions();
+		void kernelSimpleGradientDescent(viennacl::matrix_base<float>& W, const viennacl::matrix_base<float>& G);
+		void kernelSimpleGradientDescentWithMomentum(viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& M, const viennacl::matrix_base<float>& G);
 	public:
 		/**
 		* \brief Creates simple gradient descent.
@@ -84,7 +87,7 @@ namespace LightBulb
 		friend void swap(SimpleGradientDescent& lhs, SimpleGradientDescent& rhs) noexcept;
 
 		// Inherited:
-		Matrix calcDeltaWeight(const AbstractNetworkTopology& networkTopology, int layerIndex, const Matrix& gradients) override;
+		void adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

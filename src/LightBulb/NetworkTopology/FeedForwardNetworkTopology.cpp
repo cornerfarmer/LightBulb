@@ -457,7 +457,7 @@ namespace LightBulb
 			for (int l = 0; l < activations.size(); l++) {
 				if(activations[l].getCalculatorType() == CT_GPU)
 				{
-					activations[l].getViennaclValueForEditing() = viennacl::zero_vector<float>(activations[l].getViennaclValue().size());
+					activations[l].getViennaclValueForEditing().clear();
 
 					if (options->useBiasNeuron)
 					{

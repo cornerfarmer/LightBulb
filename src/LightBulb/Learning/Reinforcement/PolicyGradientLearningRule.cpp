@@ -194,9 +194,9 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::addGradients(AbstractNetworkTopology& networkTopology)
 	{
-		for (int l = gradient.size() - 1; l >= 0; l--)
+		/*for (int l = gradient.size() - 1; l >= 0; l--)
 		{
-			Matrix newWeights(networkTopology.getAfferentWeightsPerLayer(l + 1).getEigenValue() + gradientDescentAlgorithm->calcDeltaWeight(networkTopology, l + 1, gradient[l]).getEigenValue());
+			Matrix newWeights(networkTopology.getAfferentWeightsPerLayer(l + 1).getEigenValue() + gradientDescentAlgorithm->adjustWeights(networkTopology, , l + 1, gradient[l]).getEigenValue());
 			networkTopology.setAfferentWeightsPerLayer(l + 1, newWeights);
 		}
 
@@ -204,10 +204,10 @@ namespace LightBulb
 		{
 			for (int l = valueFunctionGradientCalculation->getGradient().size() - 1; l >= 0; l--)
 			{
-				Matrix newWeights(valueFunctionNetwork->getNetworkTopology().getAfferentWeightsPerLayer(l + 1).getEigenValue() + valueFunctionGradientDescentAlgorithm->calcDeltaWeight(valueFunctionNetwork->getNetworkTopology(), l + 1, valueFunctionGradientCalculation->getGradient().at(l)).getEigenValue());
+				Matrix newWeights(valueFunctionNetwork->getNetworkTopology().getAfferentWeightsPerLayer(l + 1).getEigenValue() + valueFunctionGradientDescentAlgorithm->adjustWeights(valueFunctionNetwork->getNetworkTopology(), , l + 1, valueFunctionGradientCalculation->getGradient().at(l)).getEigenValue());
 				valueFunctionNetwork->getNetworkTopology().setAfferentWeightsPerLayer(l + 1, newWeights);
 			}
-		}
+		}*/
 	}
 
 	const PolicyGradientLearningRuleOptions& PolicyGradientLearningRule::getOptions() const
