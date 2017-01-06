@@ -30,6 +30,7 @@ namespace LightBulb
 		 * \brief This vector should keep all delta values
 		 */
 		std::vector<Vector> lastDeltaVectorOutputLayer;
+		std::vector<Vector> activationFunctionDerivations;
 		/**
 		 * \brief Can be used to overcome long plateaus.
 		 */

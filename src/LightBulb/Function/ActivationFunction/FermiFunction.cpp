@@ -65,11 +65,10 @@ namespace LightBulb
 		executeVectorAssignKernel(getKernel("fermi", "fermi_assign", "fermi.cl"), in, out);
 	}
 
-	Vector FermiFunction::executeDerivation(const Vector& input) const
+	void FermiFunction::executeDerivation(const Vector& input, Vector& derivation) const
 	{
-		Vector derivation(input.getViennaclValue().size());
+		//Vector derivation(input.getViennaclValue().size());
 		executeVectorAssignKernel(getKernel("fermi", "fermi_deriv_assign", "fermi.cl"), input.getViennaclValue(), derivation.getViennaclValueForEditing());
-		return derivation;
 	}
 
 

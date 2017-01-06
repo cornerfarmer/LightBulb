@@ -49,7 +49,7 @@ namespace LightBulb
 		 * \param input One layer of input values
 		 * \return The calculated activation derivations for the whole layer
 		 */
-		virtual Vector executeDerivation(const Vector& input) const;
+		virtual void executeDerivation(const Vector& input, Vector& derivation) const;
 		/**
 		 * \brief Returns the maximum possible output/activation value of this function
 		 * \return The maximum

@@ -22,23 +22,22 @@ namespace LightBulb
 		}
 	}
 
-	Vector AbstractActivationFunction::executeDerivation(const Vector& input) const
+	void AbstractActivationFunction::executeDerivation(const Vector& input, Vector& derivation) const
 	{
-		Vector output(input.getCalculatorType() == CT_GPU ? input.getViennaclValue().size() : input.getEigenValue().rows());
+		//Vector output(input.getCalculatorType() == CT_GPU ? input.getViennaclValue().size() : input.getEigenValue().rows());
 		if (input.getCalculatorType() == CT_GPU)
 		{
 			for (auto i = 0; i < input.getViennaclValue().size(); i++)
 			{
-				output.getViennaclValueForEditing()(i) = executeDerivation(input.getViennaclValue()(i));
+				derivation.getViennaclValueForEditing()(i) = executeDerivation(input.getViennaclValue()(i));
 			}
 		}
 		else
 		{
 			for (auto i = 0; i < input.getEigenValue().rows(); i++)
 			{
-				output.getEigenValueForEditing()(i) = executeDerivation(input.getEigenValue()(i));
+				derivation.getEigenValueForEditing()(i) = executeDerivation(input.getEigenValue()(i));
 			}
 		}
-		return output;
 	}
 }
