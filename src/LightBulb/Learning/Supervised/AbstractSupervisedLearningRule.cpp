@@ -94,9 +94,9 @@ namespace LightBulb
 				}
 
 				// Calculate the errorVector and also fill - if needed - the output and netInput values map
-				std::unique_ptr<Vector> errorVector((*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError));
+				const Vector& errorVector = (*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError);
 
-				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, *errorVector.get());
+				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errorVector);
 
 				// If offline learning is activated, adjust all weights
 				if (!getOptions().offlineLearning)

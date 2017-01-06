@@ -17,6 +17,7 @@ namespace LightBulb
 	class AbstractNetworkTopology;
 	class AbstractActivationOrder;
 	class AbstractNeuron;
+	class Vector;
 
 	/**
 	 * \brief All states which a neural network can be in.
@@ -62,6 +63,13 @@ namespace LightBulb
 		* \param resetActivations Control if the activations should be resetted before calculating.
 		*/
 		virtual std::vector<double> calculate(const std::vector<double>& input, const AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
+		/**
+		* \brief Calculates from the given input and activation order the output of the neural network.
+		* \param input The input.
+		* \param activationOrder The activation order which should be used when calculating.
+		* \param resetActivations Control if the activations should be resetted before calculating.
+		*/
+		virtual const Vector& calculateWithoutOutputCopy(const std::vector<double>& input, const AbstractActivationOrder &activationOrder, bool resetActivations = true) = 0;
 		/**
 		* \brief Calculates from the given input the output of the neural network.
 		* \param input The input.

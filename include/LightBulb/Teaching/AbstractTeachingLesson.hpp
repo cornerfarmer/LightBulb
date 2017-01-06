@@ -12,6 +12,7 @@
 // Includes
 #include "LightBulb/Teaching/TeachingInput.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 namespace LightBulb
 {
@@ -27,6 +28,12 @@ namespace LightBulb
 	 */
 	class AbstractTeachingLesson
 	{
+	private:
+		mutable Vector errorVector;
+		mutable Vector teachingInputVector;
+		mutable Scalar specificErrorScalar;
+		void calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const;
+		void calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const;
 	public:
 		virtual ~AbstractTeachingLesson() {}
 		/**
@@ -35,7 +42,7 @@ namespace LightBulb
 		 * \param activationOrder The activation order to use.
 		 * \return The output values.
 		 */
-		std::vector<double> tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const;
+		const Vector& tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const;
 		/**
 		 * \brief Returns the teaching input as a double vector.
 		 * \param activationFunction The activation function the target network uses in the output layer.
@@ -54,7 +61,7 @@ namespace LightBulb
 		 * \param clipError Determines if the error should be clipped between -1 and 1.
 		 * \return The error vector.
 		 */
-		std::unique_ptr<Vector> getErrorVector(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder, bool clipError = false) const;
+		const Vector& getErrorVector(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder, bool clipError = false) const;
 		/**
 		 * \brief Returns the error vector from the given output vector.
 		 * \param outputVector The output vector from the neural network when using the teaching lessons pattern as input.
@@ -62,7 +69,7 @@ namespace LightBulb
 		 * \param clipError Determines if the error should be clipped between -1 and 1.
 		 * \return The error vector.
 		 */
-		virtual std::unique_ptr<Vector> getErrorVectorFromOutputVector(const std::vector<double>& outputVector, AbstractNeuralNetwork &neuralNetwork, bool clipError = false) const;
+		virtual void getErrorVectorFromOutputVector(const Vector& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError = false) const;
 		/**
 		 * \brief Calculates the specific error of the given network when using this lesson.
 		 * \details \f$ E=0.5*\sum{(t_i-y_i)^2} \f$

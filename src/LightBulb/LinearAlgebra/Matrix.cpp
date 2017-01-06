@@ -23,14 +23,19 @@ LightBulb::Matrix::Matrix(const Eigen::MatrixXf& eigenMatrix)
 	eigenValueIsDirty = true;
 }
 
-void LightBulb::Matrix::checkEigenSizes() const
+void LightBulb::Matrix::copyToEigen() const
 {
 	if (eigenValue.rows() != viennaclValue.size1() || eigenValue.cols() != viennaclValue.size2())
 		eigenValue.resize(viennaclValue.size1(), viennaclValue.size2());
+
+	viennacl::copy(viennaclValue, eigenValue);
 }
 
-void LightBulb::Matrix::checkViennaClSizes() const
+void LightBulb::Matrix::copyToViennaCl() const
 {
 	if (eigenValue.rows() != viennaclValue.size1() || eigenValue.cols() != viennaclValue.size2())
 		viennaclValue.resize(eigenValue.rows(), eigenValue.cols());
+
+	if (eigenValue.size() != 0)
+		viennacl::copy(eigenValue, viennaclValue);
 }

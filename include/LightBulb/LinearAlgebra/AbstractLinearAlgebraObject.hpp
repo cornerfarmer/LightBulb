@@ -32,24 +32,20 @@ namespace LightBulb
 		void refreshEigenValue() const
 		{
 			viennacl::backend::finish();
-			checkEigenSizes();
-			viennacl::copy(viennaclValue, eigenValue);
+			copyToEigen();
 			viennaclValueIsDirty = false;
 		}
 
 		void refreshViennaclValue() const
 		{
 			viennacl::backend::finish();
-			checkViennaClSizes();
-
-			if (eigenValue.size() != 0)
-				viennacl::copy(eigenValue, viennaclValue);
+			copyToViennaCl();
 			eigenValueIsDirty = false;
 		}
 
-		virtual void checkEigenSizes() const = 0;
+		virtual void copyToEigen() const = 0;
 
-		virtual void checkViennaClSizes() const = 0;
+		virtual void copyToViennaCl() const = 0;
 
 
 	public:

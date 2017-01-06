@@ -8,97 +8,129 @@
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include <Eigen/src/Core/util/ForwardDeclarations.h>
 #include <memory>
+#include <viennacl/matrix.hpp>
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
-	std::vector<double> AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
+	const Vector& AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
-		std::vector<double> output(neuralNetwork.getNetworkTopology().getOutputSize());
-		// Let the network calculate
-		neuralNetwork.calculate(getTeachingPattern(), output, activationOrder);
-		return output;
+		return neuralNetwork.calculateWithoutOutputCopy(getTeachingPattern(), activationOrder);
 	}
 
-	std::unique_ptr<Vector> AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
+	const Vector& AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
-		std::unique_ptr<Vector> errorVector;
-
 		// Try the lesson and extract the output
-		std::vector<double> outputVector = tryLesson(neuralNetwork, activationOrder);
-		errorVector = getErrorVectorFromOutputVector(outputVector, neuralNetwork, clipError);
+		const Vector& outputVector = tryLesson(neuralNetwork, activationOrder);
+		getErrorVectorFromOutputVector(outputVector, neuralNetwork, clipError);
 
 		return errorVector;
 	}
 
 
-	std::unique_ptr<Vector> AbstractTeachingLesson::getErrorVectorFromOutputVector(const std::vector<double>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
+	void AbstractTeachingLesson::getErrorVectorFromOutputVector(const Vector& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
 		const TeachingInput<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
 
 		// Create the errorVector
-		std::unique_ptr<Vector> errorVector(new Vector(teachingInput.getDimension()));
+		//std::unique_ptr<Vector> errorVector(new Vector(teachingInput.getDimension()));
 
 		// Calculate the error values (expected value - real value)
-		if (errorVector->getCalculatorType() == CT_GPU)
+		if (errorVector.getCalculatorType() == CT_GPU)
 		{
-			for (int i = 0; i < teachingInput.getDimension(); i++)
-			{
-				if (teachingInput.exists(i))
-				{
-					(*errorVector).getViennaclValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
-					if (clipError)
-						throw std::logic_error("Not implemented yet.");
-				}
-				else
-					(*errorVector).getViennaclValueForEditing()[i] = 0;
+			if (teachingInputVector.getViennaclValue().size() != teachingInput.size()) {
+				teachingInputVector.getViennaclValueForEditing().resize(teachingInput.size());
+				errorVector.getViennaclValueForEditing().resize(teachingInput.size());
 			}
+
+			auto teachingInputRealVector = teachingInput.getRealVector();
+
+			viennacl::copy(teachingInputRealVector.begin(), teachingInputRealVector.end(), teachingInputVector.getViennaclValueForEditing().begin());
+			
+			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInputVector.getViennaclValue(), outputVector.getViennaclValue());
 		}
 		else
 		{
+			std::vector<double> output(neuralNetwork.getNetworkTopology().getOutputSize());
+
+			output.assign(outputVector.getEigenValue().data(), outputVector.getEigenValue().data() + output.size());
+
 			for (int i = 0; i < teachingInput.getDimension(); i++)
 			{
 				if (teachingInput.exists(i))
 				{
-					(*errorVector).getEigenValueForEditing()[i] = teachingInput.get(i) - outputVector[i];
+					errorVector.getEigenValueForEditing()[i] = teachingInput.get(i) - output[i];
 					if (clipError)
-						(*errorVector).getEigenValueForEditing()[i] = std::max(-1.0f, std::min(1.0f, (*errorVector).getEigenValue()[i]));
+						errorVector.getEigenValueForEditing()[i] = std::max(-1.0f, std::min(1.0f, errorVector.getEigenValue()[i]));
 				}
 				else
-					(*errorVector).getEigenValueForEditing()[i] = 0;
+					errorVector.getEigenValueForEditing()[i] = 0;
 			}
 		}
-		return errorVector;
+	}
+
+	void AbstractTeachingLesson::calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const
+	{
+		viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_error_vector", "teaching_lesson.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(errorVector),
+			cl_uint(viennacl::traits::start(errorVector)),
+			cl_uint(viennacl::traits::stride(errorVector)),
+			cl_uint(viennacl::traits::size(errorVector)),
+
+			viennacl::traits::opencl_handle(teachingInput),
+			cl_uint(viennacl::traits::start(teachingInput)),
+			cl_uint(viennacl::traits::stride(teachingInput)),
+
+			viennacl::traits::opencl_handle(outputVector),
+			cl_uint(viennacl::traits::start(outputVector)),
+			cl_uint(viennacl::traits::stride(outputVector))
+		));
 	}
 
 
 	double AbstractTeachingLesson::getSpecificError(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
 		// Calculate the errorVector
-		std::unique_ptr<Vector> errorVector = getErrorVector(neuralNetwork, activationOrder, clipError);
+		getErrorVector(neuralNetwork, activationOrder, clipError);
 
 		double specificError = 0;
 
-		if (errorVector->getCalculatorType() == CT_GPU) 
+		if (errorVector.getCalculatorType() == CT_GPU) 
 		{
-			viennacl::scalar<float> sum = 0;
-			viennacl::vector<float> pow = viennacl::scalar_vector<float>((*errorVector).getViennaclValue().size(), 2.0f);
-			viennacl::linalg::sum_impl(viennacl::linalg::element_pow((*errorVector).getViennaclValue(), pow), sum);
-			specificError = sum;
+			calcSpecificError(specificErrorScalar.getViennaclValueForEditing(), errorVector.getViennaclValueForEditing());
+			specificError = specificErrorScalar.getViennaclValue();
 		}
 		else
 		{
 			// Add the square of every errorValue in the errorVector
-			for (int i = 0; i < errorVector->getEigenValue().rows(); i++)
+			for (int i = 0; i < errorVector.getEigenValue().rows(); i++)
 			{
-				specificError += pow((*errorVector).getEigenValue()(i), 2.0);
+				specificError += pow(errorVector.getEigenValue()(i), 2.0);
 			}
-		}
 
-		// Divide the specific error by two
-		specificError /= 2;
+			// Divide the specific error by two
+			specificError /= 2;
+		}
 
 		return specificError;
 	}
 
+
+
+	void AbstractTeachingLesson::calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const
+	{
+		viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_specific_error", "teaching_lesson.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(errorVector),
+			cl_uint(viennacl::traits::start(errorVector)),
+			cl_uint(viennacl::traits::stride(errorVector)),
+			cl_uint(viennacl::traits::size(errorVector)),
+
+			viennacl::traits::opencl_handle(specificError)
+		));
+	}
 }

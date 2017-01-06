@@ -23,14 +23,19 @@ LightBulb::Vector::Vector(const Eigen::VectorXf& eigenVector)
 	eigenValueIsDirty = true;
 }
 
-void LightBulb::Vector::checkEigenSizes() const
+void LightBulb::Vector::copyToEigen() const
 {
 	if (eigenValue.size() != viennaclValue.size())
 		eigenValue.resize(viennaclValue.size());
+
+	viennacl::copy(viennaclValue, eigenValue);
 }
 
-void LightBulb::Vector::checkViennaClSizes() const
+void LightBulb::Vector::copyToViennaCl() const
 {
 	if (eigenValue.size() != viennaclValue.size())
 		viennaclValue.resize(eigenValue.size());
+
+	if (eigenValue.size() != 0)
+		viennacl::copy(eigenValue, viennaclValue);
 }

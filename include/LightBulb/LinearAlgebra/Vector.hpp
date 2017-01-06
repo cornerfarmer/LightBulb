@@ -16,8 +16,8 @@ namespace LightBulb
 	class Vector : public AbstractLinearAlgebraObject<Eigen::VectorXf, viennacl::vector<float>>
 	{
 	protected:
-		void checkEigenSizes() const override;
-		void checkViennaClSizes() const override;
+		void copyToEigen() const override;
+		void copyToViennaCl() const override;
 	public:
 		Vector(int rows = 0);
 		Vector(const Eigen::VectorXf& eigenVector);

@@ -3,6 +3,7 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
 #include "LightBulb/Teaching/TeachingInput.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 // Library includes
 #include <exception>
 #include <ctime>
@@ -41,6 +42,24 @@ namespace LightBulb
 
 		// Extract the output and save it into the output value
 		networkTopology->getOutput(output);
+	}
+
+	const Vector& NeuralNetwork::calculateWithoutOutputCopy(const std::vector<double>& input, const AbstractActivationOrder &activationOrder, bool resetActivations)
+	{
+		// If the calculation start at time 0
+		if (resetActivations)
+		{
+			// Reset all activations
+			networkTopology->resetActivation();
+		}
+
+		// Set the input into the neural network
+		networkTopology->setInput(input);
+
+		// Pass the work to the activationOrder
+		activationOrder.executeActivation(*networkTopology);
+
+		return networkTopology->getAllActivations().back();
 	}
 
 	std::vector<double> NeuralNetwork::calculate(const std::vector<double>& input, bool resetActivations)

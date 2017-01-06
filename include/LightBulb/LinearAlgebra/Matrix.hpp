@@ -16,8 +16,8 @@ namespace LightBulb
 	class Matrix : public AbstractLinearAlgebraObject<Eigen::MatrixXf, viennacl::matrix<float>>
 	{
 	protected:
-		void checkEigenSizes() const override;
-		void checkViennaClSizes() const override;
+		void copyToEigen() const override;
+		void copyToViennaCl() const override;
 	public:
 		Matrix(int rows = 0, int cols = 0);
 		Matrix(const Eigen::MatrixXf& eigenMatrix);
