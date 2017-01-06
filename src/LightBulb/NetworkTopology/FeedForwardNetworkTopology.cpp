@@ -11,6 +11,7 @@
 #include <exception>
 #include <math.h>
 #include <stdexcept>
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -457,12 +458,16 @@ namespace LightBulb
 			for (int l = 0; l < activations.size(); l++) {
 				if(activations[l].getCalculatorType() == CT_GPU)
 				{
-					activations[l].getViennaclValueForEditing().clear();
+					viennacl::ocl::kernel& kernel = getKernel("neural_network", "reset_activations", "neural_network.cl");
+					
+					viennacl::ocl::enqueue(kernel(
+						cl_uint(options->useBiasNeuron),
+						viennacl::traits::opencl_handle(activations[l].getViennaclValueForEditing()),
 
-					if (options->useBiasNeuron)
-					{
-						activations[l].getViennaclValueForEditing()(activations[l].getViennaclValue().size() - 1) = 1;
-					}
+						cl_uint(viennacl::traits::start(activations[l].getViennaclValue())),
+						cl_uint(viennacl::traits::stride(activations[l].getViennaclValue())),
+						cl_uint(viennacl::traits::size(activations[l].getViennaclValue()))
+					));
 				}
 				else
 				{
