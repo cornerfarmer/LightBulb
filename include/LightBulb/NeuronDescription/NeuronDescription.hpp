@@ -16,7 +16,7 @@ namespace LightBulb
 	/**
 	 * \brief Contains all neuron specific information. 
 	 */
-	class NeuronDescription : public virtual AbstractCloneable
+	class NeuronDescription : public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, NeuronDescription& neuronDescription);
@@ -65,6 +65,7 @@ namespace LightBulb
 		 * \return The activation function.
 		 */
 		virtual const AbstractActivationFunction& getActivationFunction() const;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

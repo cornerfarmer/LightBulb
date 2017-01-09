@@ -49,26 +49,29 @@ namespace LightBulb
 
 	void FermiFunction::execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const
 	{
-		viennacl::range r(0, activations[layerNr].getViennaclValue().size() - 1);
-		viennacl::vector_range<viennacl::vector<float>> v_sub(activations[layerNr].getViennaclValueForEditing(), r);
-		internExecute(netInputs[layerNr].getViennaclValue(), v_sub);
+		if (isCalculatorType(CT_GPU)) 
+		{
+			viennacl::range r(0, activations[layerNr].getViennaclValue().size() - 1);
+			viennacl::vector_range<viennacl::vector<float>> v_sub(activations[layerNr].getViennaclValueForEditing(), r);
+			executeVectorAssignKernel(getKernel("fermi", "fermi_assign", "fermi.cl"), netInputs[layerNr].getViennaclValue(), v_sub);
+		} 
+		else
+		{
+			AbstractActivationFunction::execute(layerNr, activations, netInputs);
+		}
 	}
 
-	template<typename T>
-	viennacl::vector_expression<const viennacl::vector_base<T>, const viennacl::vector_base<T>, viennacl::op_element_unary<viennacl::op_fermi>> FermiFunction::executeOpenCL(viennacl::vector_base<T> const & v) const
-	{
-		return viennacl::vector_expression<const viennacl::vector_base<T>, const viennacl::vector_base<T>, viennacl::op_element_unary<viennacl::op_fermi>>(v, v);
-	}
-
-	void FermiFunction::internExecute(const viennacl::vector_base<float>& in, viennacl::vector_base<float>& out) const
-	{
-		executeVectorAssignKernel(getKernel("fermi", "fermi_assign", "fermi.cl"), in, out);
-	}
 
 	void FermiFunction::executeDerivation(const Vector& input, Vector& derivation) const
 	{
-		//Vector derivation(input.getViennaclValue().size());
-		executeVectorAssignKernel(getKernel("fermi", "fermi_deriv_assign", "fermi.cl"), input.getViennaclValue(), derivation.getViennaclValueForEditing());
+		if (isCalculatorType(CT_GPU))
+		{
+			executeVectorAssignKernel(getKernel("fermi", "fermi_deriv_assign", "fermi.cl"), input.getViennaclValue(), derivation.getViennaclValueForEditing());
+		}
+		else
+		{
+			AbstractActivationFunction::executeDerivation(input, derivation);
+		}
 	}
 
 

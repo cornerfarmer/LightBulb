@@ -74,4 +74,10 @@ namespace LightBulb
 	{
 		return neuronDescription->getInputFunction();
 	}
+
+	void SameNeuronDescriptionFactory::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		neuronDescription->setCalculatorType(calculatorType);
+	}
 }

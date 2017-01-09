@@ -50,11 +50,6 @@ namespace LightBulb
 		 * \brief The temperature parameter which describes how fast the function raises
 		 */
 		double temperatureParameter;
-		void internExecute(const viennacl::vector_base<float>& in, viennacl::vector_base<float>& out) const;
-
-		template<typename T>
-		viennacl::vector_expression<const viennacl::vector_base<T>, const viennacl::vector_base<T>, viennacl::op_element_unary<viennacl::op_fermi>> FermiFunction::executeOpenCL(viennacl::vector_base<T> const & v) const;
-
 	public:
 		/**
 		 * \brief Creates a FermiFunction

@@ -31,7 +31,7 @@ namespace LightBulb
 	{
 		for (int layerIndex = networkTopology.getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
-			if (lastDeltaVectorOutputLayer[layerIndex].getCalculatorType() == CT_GPU)
+			if (isCalculatorType(CT_GPU))
 			{
 				// If its the last layer
 				if (layerIndex == networkTopology.getLayerCount() - 1)

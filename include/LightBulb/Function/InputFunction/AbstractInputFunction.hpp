@@ -6,6 +6,7 @@
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include <memory>
 #include <vector>
 
@@ -19,7 +20,7 @@ namespace LightBulb
 	/**
 	 * \brief An InputFunction calculates one input value from the output of all previous connected neurons
 	 */
-	class AbstractInputFunction : public virtual AbstractCloneable
+	class AbstractInputFunction : public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 	public:

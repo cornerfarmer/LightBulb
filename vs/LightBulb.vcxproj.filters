@@ -613,6 +613,9 @@
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Scalar.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">
@@ -1003,6 +1006,9 @@
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Scalar.cpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.cpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClCompile>
   </ItemGroup>

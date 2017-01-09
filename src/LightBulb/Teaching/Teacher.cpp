@@ -53,9 +53,9 @@ namespace LightBulb
 		}
 
 		// Add every specific error of the testingLessons to the total error
-		for (auto testinggLesson = testingLessons.begin(); testinggLesson != testingLessons.end(); testinggLesson++)
+		for (auto testingLesson = testingLessons.begin(); testingLesson != testingLessons.end(); testingLesson++)
 		{
-			totalError += (*testinggLesson)->getSpecificError(neuralNetwork, activationOrder);
+			totalError += (*testingLesson)->getSpecificError(neuralNetwork, activationOrder);
 		}
 
 		return totalError;
@@ -80,5 +80,19 @@ namespace LightBulb
 	{
 		teachingLessons.clear();
 		testingLessons.clear();
+	}
+
+	void Teacher::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		for (auto teachingLesson = teachingLessons.begin(); teachingLesson != teachingLessons.end(); teachingLesson++)
+		{
+			(*teachingLesson)->setCalculatorType(calculatorType);
+		}
+
+		for (auto testingLesson = testingLessons.begin(); testingLesson != testingLessons.end(); testingLesson++)
+		{
+			(*testingLesson)->setCalculatorType(calculatorType);
+		}
 	}
 }

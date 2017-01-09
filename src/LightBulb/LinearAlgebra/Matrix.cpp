@@ -4,16 +4,8 @@
 LightBulb::Matrix::Matrix(int rows, int cols)
 {
 	if (rows > 0 && cols > 0) {
-		if (getCalculatorType() == CT_GPU)
-		{
-			viennaclValue = viennacl::matrix<float>(rows, cols);
-			viennaclValueIsDirty = true;
-		}
-		else
-		{
-			eigenValue = Eigen::MatrixXf(rows, cols);
-			eigenValueIsDirty = true;
-		}
+		eigenValue = Eigen::MatrixXf(rows, cols);
+		eigenValueIsDirty = true;
 	}
 }
 

@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Library includes
@@ -20,7 +21,7 @@ namespace LightBulb
 	/**
 	 * \brief This abstract class describes a function, which can calculate the activation of a neuron from its input
 	 */
-	class AbstractActivationFunction : public virtual AbstractCloneable
+	class AbstractActivationFunction : public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 	public:

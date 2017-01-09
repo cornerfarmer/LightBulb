@@ -6,6 +6,7 @@
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include <utility>
 
 namespace LightBulb
@@ -18,7 +19,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a factory which provides neurons descriptions depending on the layer.
 	 */
-	class AbstractNeuronDescriptionFactory : public virtual AbstractCloneable
+	class AbstractNeuronDescriptionFactory : public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 	public:

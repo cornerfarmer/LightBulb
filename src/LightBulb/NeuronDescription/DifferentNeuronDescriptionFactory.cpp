@@ -78,4 +78,11 @@ namespace LightBulb
 	{
 		return innerNeuronDescription->getInputFunction();
 	}
+
+	void DifferentNeuronDescriptionFactory::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		innerNeuronDescription->setCalculatorType(calculatorType);
+		outputNeuronDescription->setCalculatorType(calculatorType);
+	}
 }

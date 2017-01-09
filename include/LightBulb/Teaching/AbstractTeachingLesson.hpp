@@ -13,6 +13,7 @@
 #include "LightBulb/Teaching/TeachingInput.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Scalar.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
@@ -26,7 +27,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a teaching lesson which stores an input and the preferred output.
 	 */
-	class AbstractTeachingLesson
+	class AbstractTeachingLesson : public virtual AbstractLinearAlgebraUser
 	{
 	private:
 		mutable Vector errorVector;

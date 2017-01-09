@@ -37,7 +37,7 @@ namespace LightBulb
 		//std::unique_ptr<Vector> errorVector(new Vector(teachingInput.getDimension()));
 
 		// Calculate the error values (expected value - real value)
-		if (errorVector.getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 		{
 			if (teachingInputVector.getViennaclValue().size() != teachingInput.size()) {
 				teachingInputVector.getViennaclValueForEditing().resize(teachingInput.size());
@@ -52,6 +52,10 @@ namespace LightBulb
 		}
 		else
 		{
+			if (errorVector.getEigenValue().size() != teachingInput.size()) {
+				errorVector.getEigenValueForEditing().resize(teachingInput.size());
+			}
+
 			std::vector<double> output(neuralNetwork.getNetworkTopology().getOutputSize());
 
 			output.assign(outputVector.getEigenValue().data(), outputVector.getEigenValue().data() + output.size());
@@ -98,7 +102,7 @@ namespace LightBulb
 
 		double specificError = 0;
 
-		if (errorVector.getCalculatorType() == CT_GPU) 
+		if (isCalculatorType(CT_GPU))
 		{
 			calcSpecificError(specificErrorScalar.getViennaclValueForEditing(), errorVector.getViennaclValueForEditing());
 			specificError = specificErrorScalar.getViennaclValue();

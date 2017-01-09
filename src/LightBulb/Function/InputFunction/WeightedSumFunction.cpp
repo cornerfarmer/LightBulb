@@ -8,7 +8,7 @@ namespace LightBulb
 {
 	void WeightedSumFunction::execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights) const
 	{
-		if (netInputs[layerNr].getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 		{
 			viennacl::ocl::kernel& kernel = getKernel("weight_sum_function", "execute", "weight_sum_function.cl");
 
@@ -33,7 +33,7 @@ namespace LightBulb
 			));
 
 		}
-		else if(netInputs[layerNr].getCalculatorType() == CT_GPU)
+		else
 			netInputs[layerNr].getEigenValueForEditing().noalias() = weights[layerNr - 1].getEigenValue() * activations[layerNr - 1].getEigenValue();
 	}
 

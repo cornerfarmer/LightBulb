@@ -49,4 +49,10 @@ namespace LightBulb
 		return *activationFunction.get();
 	}
 
+	void NeuronDescription::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		activationFunction->setCalculatorType(calculatorType);
+		inputFunction->setCalculatorType(calculatorType);
+	}
 }

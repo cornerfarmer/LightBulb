@@ -51,6 +51,7 @@ namespace LightBulb
 		const AbstractActivationFunction& getInnerActivationFunction() const override;
 		const AbstractInputFunction& getOutputInputFunction() const override;
 		const AbstractInputFunction& getInnerInputFunction() const override;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

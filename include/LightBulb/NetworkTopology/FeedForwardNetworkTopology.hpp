@@ -151,6 +151,7 @@ namespace LightBulb
 		const NeuronDescription& getInnerNeuronDescription() const override;
 		const NeuronDescription& getOutputNeuronDescription() const override;
 		const AbstractActivationOrder& getDefaultActivationOrder() const override;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

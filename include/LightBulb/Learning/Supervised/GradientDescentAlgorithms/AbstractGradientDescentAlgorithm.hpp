@@ -9,6 +9,7 @@
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
@@ -36,7 +37,7 @@ namespace LightBulb
 	 * \brief A algorithm which describes how the gradient descent should be executed.
 	 * \details The algorithm calculates in every step how the weights should change depend on the calculated gradient.
 	 */
-	class AbstractGradientDescentAlgorithm : public virtual AbstractCloneable
+	class AbstractGradientDescentAlgorithm : public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractGradientDescentAlgorithm& gradientDescentAlgorithm);

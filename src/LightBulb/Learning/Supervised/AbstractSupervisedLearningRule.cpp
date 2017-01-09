@@ -29,6 +29,8 @@ namespace LightBulb
 		// Check if all given options are correct
 		if (getOptions().maxTotalErrorValue <= getOptions().totalErrorGoal)
 			throw std::invalid_argument("The maxTotalErrorValue has to be greater than the totalErrorGoal");
+
+		static_cast<AbstractSupervisedLearningRuleOptions&>(*options.get()).teacher->setCalculatorType(options->calculatorType);
 	}
 
 	const AbstractSupervisedLearningRuleOptions& AbstractSupervisedLearningRule::getOptions() const

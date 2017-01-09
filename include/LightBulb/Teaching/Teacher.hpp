@@ -45,6 +45,7 @@ namespace LightBulb
 		double getTeachingError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder) const override;
 		double getWeightDecayError(AbstractNeuralNetwork &neuralNetwork) const override;
 		void clearLessons() override;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

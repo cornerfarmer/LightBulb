@@ -69,6 +69,7 @@ namespace LightBulb
 	{
 
 	}
+
 	void GradientDescentLearningRule::initialize(GradientDescentLearningRuleOptions* options)
 	{
 		if (!getOptions()->gradientDescentAlgorithm)
@@ -82,6 +83,9 @@ namespace LightBulb
 		else
 			gradientCalculation.reset(getOptions()->gradientCalculation);
 		options->gradientCalculation = nullptr;
+
+		gradientDescentAlgorithm->setCalculatorType(getOptions()->calculatorType);
+		gradientCalculation->setCalculatorType(getOptions()->calculatorType);
 	}
 
 	std::string GradientDescentLearningRule::getName()

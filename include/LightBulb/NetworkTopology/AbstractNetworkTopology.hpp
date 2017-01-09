@@ -24,7 +24,7 @@ namespace LightBulb
 	 * \brief A network topology is used to describe the structure of a neural network
 	 * \details It consists of multiple layers with multiple neurons which are connected with each other by weights.
 	 */
-	class AbstractNetworkTopology
+	class AbstractNetworkTopology : public virtual AbstractLinearAlgebraUser
 	{
 	private:
 	public:

@@ -183,7 +183,7 @@ namespace LightBulb
 	Matrix FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
 	{
 		Matrix transWeights;
-		if (transWeights.getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 		{
 			transWeights.getViennaclValueForEditing().resize(weights[layerIndex].getViennaclValue().size2(), weights[layerIndex].getViennaclValue().size1());
 			transWeights.getViennaclValueForEditing() = viennacl::trans(weights[layerIndex].getViennaclValue());
@@ -456,7 +456,7 @@ namespace LightBulb
 		else
 		{
 			for (int l = 0; l < activations.size(); l++) {
-				if(activations[l].getCalculatorType() == CT_GPU)
+				if(isCalculatorType(CT_GPU))
 				{
 					viennacl::ocl::kernel& kernel = getKernel("neural_network", "reset_activations", "neural_network.cl");
 					
@@ -486,7 +486,7 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::getOutput(std::vector<double> &outputVector) const
 	{
-		if (activations.back().getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 			viennacl::copy(activations.back().getViennaclValue().begin(), activations.back().getViennaclValue().begin() + outputVector.size(), outputVector.begin());
 		else
 			outputVector.assign(activations.back().getEigenValue().data(), activations.back().getEigenValue().data() + outputVector.size());
@@ -494,7 +494,7 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::setInput(const std::vector<double> &inputVector)
 	{
-		if (activations.back().getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 			viennacl::copy(inputVector.begin(), inputVector.begin() + options->neuronsPerLayerCount.front(), activations.front().getViennaclValueForEditing().begin());
 		else
 		{
@@ -583,5 +583,13 @@ namespace LightBulb
 	const AbstractActivationOrder& FeedForwardNetworkTopology::getDefaultActivationOrder() const
 	{
 		return defaultActivationOrder;
+	}
+
+	void FeedForwardNetworkTopology::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		if (options->descriptionFactory) 
+		{
+			options->descriptionFactory->setCalculatorType(calculatorType);
+		}
 	}
 }

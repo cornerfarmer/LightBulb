@@ -12,6 +12,7 @@
 #include "LightBulb/Logging/AbstractLogger.hpp"
 #include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraObject.hpp"
 
 namespace LightBulb
 {
@@ -62,6 +63,11 @@ namespace LightBulb
 		 */
 		int seed;
 		/**
+		 * \brief The calculator to use. (GPU or CPU)
+		 * \details Default value: CPU
+		 */
+		CalculatorType calculatorType;
+		/**
 		 * \brief Creates the options and fills them with default options.
 		 */
 		AbstractLearningRuleOptions()
@@ -73,6 +79,7 @@ namespace LightBulb
 			dataSaveInterval = 1;
 			dataSetsPrefix = "";
 			seed = -1;
+			calculatorType = CT_CPU;
 		}
 		virtual ~AbstractLearningRuleOptions() {}
 	};

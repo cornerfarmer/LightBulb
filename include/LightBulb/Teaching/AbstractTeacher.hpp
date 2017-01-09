@@ -4,6 +4,7 @@
 #define _ABSTRACTTEACHER_H_
 
 // Includes
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library includes
 #include <vector>
@@ -20,7 +21,7 @@ namespace LightBulb
 	 * \brief Describes a teacher which provides all information the network should learn.
 	 * \details Contains multiple teaching and testing lessons which determine the values the network should calculate.
 	 */
-	class AbstractTeacher
+	class AbstractTeacher : public virtual AbstractLinearAlgebraUser
 	{
 	private:
 	public:

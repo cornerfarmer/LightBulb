@@ -7,6 +7,7 @@
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
 #include <vector>
@@ -20,7 +21,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes an algorithm which calculates the gradient for an given neural network.
 	 */
-	class AbstractGradientCalculation : public virtual AbstractCloneable
+	class AbstractGradientCalculation : public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 		/**

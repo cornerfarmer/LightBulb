@@ -157,6 +157,7 @@
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Scalar.hpp" />
@@ -290,6 +291,7 @@
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Lib\ziggurat.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.cpp" />
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Matrix.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Scalar.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Vector.cpp" />

@@ -6,7 +6,7 @@ namespace LightBulb
 {
 	void AbstractActivationFunction::execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const
 	{
-		if (netInputs[layerNr].getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 		{
 			for (auto i = 0; i < netInputs[layerNr].getViennaclValue().size(); i++)
 			{
@@ -24,8 +24,7 @@ namespace LightBulb
 
 	void AbstractActivationFunction::executeDerivation(const Vector& input, Vector& derivation) const
 	{
-		//Vector output(input.getCalculatorType() == CT_GPU ? input.getViennaclValue().size() : input.getEigenValue().rows());
-		if (input.getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 		{
 			for (auto i = 0; i < input.getViennaclValue().size(); i++)
 			{

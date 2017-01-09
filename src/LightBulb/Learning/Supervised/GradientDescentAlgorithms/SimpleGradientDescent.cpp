@@ -63,7 +63,7 @@ namespace LightBulb
 
 	void SimpleGradientDescent::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
 	{
-		if (weights.getCalculatorType() == CT_GPU)
+		if (isCalculatorType(CT_GPU))
 		{
 			if (getOptions().momentum > 0)
 			{

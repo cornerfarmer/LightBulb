@@ -26,7 +26,7 @@ namespace LightBulb
 		// Adjust all hidden/output layers except 
 		for (int l = 0; l < gradient.size(); l++)
 		{
-			if (gradient[l].getCalculatorType() == CT_GPU)
+			if (isCalculatorType(CT_GPU))
 				gradient[l].getViennaclValueForEditing().clear();
 			else
 				gradient[l].getEigenValueForEditing().setZero();

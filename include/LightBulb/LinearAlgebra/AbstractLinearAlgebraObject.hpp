@@ -47,7 +47,6 @@ namespace LightBulb
 
 		virtual void copyToViennaCl() const = 0;
 
-
 	public:
 		virtual ~AbstractLinearAlgebraObject() {};
 		AbstractLinearAlgebraObject()
@@ -93,11 +92,6 @@ namespace LightBulb
 			if (viennaclValueIsDirty)
 				refreshEigenValue();
 			return eigenValue == linearAlgebraObject.eigenValue;
-		}
-
-		int getCalculatorType() const
-		{
-			return CT_GPU;
 		}
 	};
 }
