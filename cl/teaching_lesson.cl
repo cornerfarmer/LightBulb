@@ -33,4 +33,5 @@ __kernel void calc_specific_error(
   *specificError = 0;
   for (unsigned int i = 0; i < sizeErr; i++) 
     *specificError += errVec[i*incErr+startErr];
+  *specificError /= 2;
 }

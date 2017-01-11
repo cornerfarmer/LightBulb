@@ -102,7 +102,7 @@ __kernel void backpropagate_last(
   { 
     float tmp = deltaVec[row * sizeDelta._INC_ + sizeDelta._START_];
     for (unsigned int col = col_gid; col < G_size2; col += get_local_size(0)) 
-        G[(row * G_inc1 + G_start1) * G_internal_size1 + col * G_inc2 + G_start2] -= tmp * actVec[col * sizeAct._INC_ + sizeAct._START_]; 
+        G[(row * G_inc1 + G_start1) * G_internal_size2 + col * G_inc2 + G_start2] -= tmp * actVec[col * sizeAct._INC_ + sizeAct._START_]; 
   } 
 }
 
@@ -164,7 +164,7 @@ __kernel void backpropagate_inner(
   { 
     float tmp = deltaVec[row * sizeDelta._INC_ + sizeDelta._START_];
     for (unsigned int col = col_gid; col < G_size2; col += get_local_size(0)) 
-        G[(row * G_inc1 + G_start1) * G_internal_size1 + col * G_inc2 + G_start2] -= tmp * actVec[col * sizeAct._INC_ + sizeAct._START_]; 
+        G[(row * G_inc1 + G_start1) * G_internal_size2 + col * G_inc2 + G_start2] -= tmp * actVec[col * sizeAct._INC_ + sizeAct._START_]; 
   } 
 }
 
