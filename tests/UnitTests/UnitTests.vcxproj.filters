@@ -156,6 +156,15 @@
     <ClCompile Include="LinearAlgebra\MatrixTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescentTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientCalculation\BackpropagationTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetwork\NeuralNetworkCalculationTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockNetworkTopology.hpp">

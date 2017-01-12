@@ -170,8 +170,11 @@
     <ClCompile Include="Learning\Evolution\StochasticUniversalSamplingSelectorTest.cpp" />
     <ClCompile Include="Learning\Evolution\TeachedEvolutionTest.cpp" />
     <ClCompile Include="Learning\Evolution\TournamentCombiningStrategyTest.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientCalculation\BackpropagationTest.cpp" />
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescentTest.cpp" />
     <ClCompile Include="LinearAlgebra\MatrixTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
+    <ClCompile Include="NeuralNetwork\NeuralNetworkCalculationTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
     <ClCompile Include="Teaching\TeacherTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonBooleanInputTest.cpp" />

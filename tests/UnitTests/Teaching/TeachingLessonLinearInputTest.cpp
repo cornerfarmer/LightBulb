@@ -69,19 +69,11 @@ TEST_F(TeachingLessonLinearInputTest, getTeachingPattern)
 TEST_F(TeachingLessonLinearInputTest, tryLesson)
 {
 	setUpNeuralNetworkCalculateCall();
-	auto returnedValue = teachingLesson->tryLesson(*neuralNetwork, *activationOrder);
-	EXPECT_EQ(neuralNetworkOutput, returnedValue);
-}
-
-TEST_F(TeachingLessonLinearInputTest, getErrormapFromOutputVector)
-{
-	std::vector<double> output(3, 1);
-	Vector expected(3);
-	expected.getEigenValueForEditing()[0] = 0;
-	expected.getEigenValueForEditing()[1] = 1;
-	expected.getEigenValueForEditing()[2] = 2;
-	auto returnedValue = teachingLesson->getErrorVectorFromOutputVector(output, *neuralNetwork);
-	EXPECT_EQ(expected, *returnedValue.get());
+	const Vector& returnedValue = teachingLesson->tryLesson(*neuralNetwork, *activationOrder);
+	EXPECT_EQ(neuralNetworkOutput.size(), returnedValue.getEigenValue().size());
+	EXPECT_EQ(neuralNetworkOutput[0], returnedValue.getEigenValue()[0]);
+	EXPECT_EQ(neuralNetworkOutput[1], returnedValue.getEigenValue()[1]);
+	EXPECT_EQ(neuralNetworkOutput[2], returnedValue.getEigenValue()[2]);
 }
 
 TEST_F(TeachingLessonLinearInputTest, getErrormap)
@@ -91,10 +83,10 @@ TEST_F(TeachingLessonLinearInputTest, getErrormap)
 	expected.getEigenValueForEditing()[0] = 2;
 	expected.getEigenValueForEditing()[1] = 3;
 	expected.getEigenValueForEditing()[2] = 4;
-	auto returnedValue = teachingLesson->getErrorVector(*neuralNetwork, *activationOrder);
-	EXPECT_EQ(expected.getEigenValue()[0], (*returnedValue.get()).getEigenValue()[0]);
-	EXPECT_EQ(expected.getEigenValue()[1], (*returnedValue.get()).getEigenValue()[1]);
-	EXPECT_EQ(expected.getEigenValue()[2], (*returnedValue.get()).getEigenValue()[2]);
+	const Vector& returnedValue = teachingLesson->getErrorVector(*neuralNetwork, *activationOrder);
+	EXPECT_EQ(expected.getEigenValue()[0], returnedValue.getEigenValue()[0]);
+	EXPECT_EQ(expected.getEigenValue()[1], returnedValue.getEigenValue()[1]);
+	EXPECT_EQ(expected.getEigenValue()[2], returnedValue.getEigenValue()[2]);
 }
 
 TEST_F(TeachingLessonLinearInputTest, getSpecificError)

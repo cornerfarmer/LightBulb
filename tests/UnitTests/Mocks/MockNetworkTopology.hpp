@@ -7,6 +7,7 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 

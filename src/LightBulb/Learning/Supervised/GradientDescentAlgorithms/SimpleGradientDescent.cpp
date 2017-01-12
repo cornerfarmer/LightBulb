@@ -81,7 +81,7 @@ namespace LightBulb
 			deltaWeight.getEigenValueForEditing() = -getOptions().learningRate * gradients.getEigenValue();
 
 			// Substract the weightDecay term
-			deltaWeight.getEigenValueForEditing() -= getOptions().weightDecayFac * networkTopology.getAfferentWeightsPerLayer(layerIndex).getEigenValue();
+			deltaWeight.getEigenValueForEditing() -= getOptions().weightDecayFac * weights.getEigenValue();
 
 			if (getOptions().momentum > 0) {
 				// Add the momentum term

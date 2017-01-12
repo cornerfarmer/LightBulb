@@ -22,6 +22,7 @@ public:
 	MOCK_METHOD3(calculate, std::vector<double> (const std::vector<double>&, const LightBulb::AbstractActivationOrder&, bool));
 	MOCK_METHOD3(calculate, void (const std::vector<double>&, std::vector<double>&, bool));
 	MOCK_METHOD2(calculate, std::vector<double> (const std::vector<double>&, bool));
+	MOCK_METHOD3(calculateWithoutOutputCopy, const LightBulb::Vector& (const std::vector<double>&, const LightBulb::AbstractActivationOrder&, bool));
 };
 
 #endif
