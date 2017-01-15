@@ -14,6 +14,7 @@ addons:
     - gcc-5
     - g++-5
     - ocl-icd-opencl-dev
+    - gtk2.0
 env:
   - APP=OFF EXAMPLE=OFF TESTS=OFF SHARED=OFF
   - APP=ON EXAMPLE=OFF TESTS=OFF SHARED=OFF
