@@ -10,7 +10,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			viennacl::ocl::kernel& kernel = getKernel("weight_sum_function", "execute", "weight_sum_function.cl");
+			static viennacl::ocl::kernel& kernel = getKernel("weight_sum_function", "execute", "weight_sum_function.cl");
 
 			viennacl::ocl::enqueue(kernel(
 				viennacl::traits::opencl_handle(activations[layerNr - 1].getViennaclValue()),

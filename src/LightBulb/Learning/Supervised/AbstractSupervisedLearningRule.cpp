@@ -55,6 +55,8 @@ namespace LightBulb
 
 	void AbstractSupervisedLearningRule::doIteration()
 	{
+		if (learningState->iterations % 10000 == 0)
+			viennacl::backend::finish();
 		if (!options->disabledDataSets[options->dataSetsPrefix + DATA_SET_TRAINING_ERROR])
 			learningState->addData(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR, totalError);
 

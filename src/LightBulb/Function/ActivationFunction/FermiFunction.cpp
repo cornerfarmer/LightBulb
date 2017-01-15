@@ -53,7 +53,8 @@ namespace LightBulb
 		{
 			viennacl::range r(0, activations[layerNr].getViennaclValue().size() - 1);
 			viennacl::vector_range<viennacl::vector<float>> v_sub(activations[layerNr].getViennaclValueForEditing(), r);
-			executeVectorAssignKernel(getKernel("fermi", "fermi_assign", "fermi.cl"), netInputs[layerNr].getViennaclValue(), v_sub);
+			static viennacl::ocl::kernel& kernel = getKernel("fermi", "fermi_assign", "fermi.cl");
+			executeVectorAssignKernel(kernel, netInputs[layerNr].getViennaclValue(), v_sub);
 		} 
 		else
 		{
@@ -66,7 +67,8 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			executeVectorAssignKernel(getKernel("fermi", "fermi_deriv_assign", "fermi.cl"), input.getViennaclValue(), derivation.getViennaclValueForEditing());
+			static viennacl::ocl::kernel& kernel = getKernel("fermi", "fermi_deriv_assign", "fermi.cl");
+			executeVectorAssignKernel(kernel, input.getViennaclValue(), derivation.getViennaclValueForEditing());
 		}
 		else
 		{

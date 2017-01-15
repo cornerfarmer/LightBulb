@@ -458,7 +458,7 @@ namespace LightBulb
 			for (int l = 0; l < activations.size(); l++) {
 				if(isCalculatorType(CT_GPU))
 				{
-					viennacl::ocl::kernel& kernel = getKernel("neural_network", "reset_activations", "neural_network.cl");
+					static viennacl::ocl::kernel& kernel = getKernel("neural_network", "reset_activations", "neural_network.cl");
 					
 					viennacl::ocl::enqueue(kernel(
 						cl_uint(options->useBiasNeuron),
@@ -494,8 +494,9 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::setInput(const std::vector<double> &inputVector)
 	{
-		if (isCalculatorType(CT_GPU))
+		if (isCalculatorType(CT_GPU)) {
 			viennacl::copy(inputVector.begin(), inputVector.begin() + options->neuronsPerLayerCount.front(), activations.front().getViennaclValueForEditing().begin());
+		}
 		else
 		{
 			for (int i = 0; i < options->neuronsPerLayerCount.front(); i++)

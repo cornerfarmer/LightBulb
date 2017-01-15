@@ -73,7 +73,7 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_last", "backpropagation.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_last", "backpropagation.cl");
 
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
@@ -118,7 +118,7 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateInnerLayer_1(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& lastDeltaVec, const viennacl::matrix_base<float>& W)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_1", "backpropagation.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_1", "backpropagation.cl");
 
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
@@ -148,7 +148,7 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateInnerLayer_2(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, viennacl::vector_base<float>& deltaVec)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_2", "backpropagation.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_2", "backpropagation.cl");
 
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
@@ -180,7 +180,7 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateInnerLayer_3(const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_3", "backpropagation.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_3", "backpropagation.cl");
 
 		viennacl::ocl::packed_cl_uint size_actVec;
 		size_actVec.start = cl_uint(viennacl::traits::start(actVec));

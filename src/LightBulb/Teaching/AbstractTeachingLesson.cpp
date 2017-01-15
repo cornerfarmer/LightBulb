@@ -46,7 +46,7 @@ namespace LightBulb
 
 			auto teachingInputRealVector = teachingInput.getRealVector();
 
-			viennacl::copy(teachingInputRealVector.begin(), teachingInputRealVector.end(), teachingInputVector.getViennaclValueForEditing().begin());
+			//viennacl::copy(teachingInputRealVector.begin(), teachingInputRealVector.end(), teachingInputVector.getViennaclValueForEditing().begin());
 			
 			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInputVector.getViennaclValue(), outputVector.getViennaclValue());
 		}
@@ -76,7 +76,7 @@ namespace LightBulb
 
 	void AbstractTeachingLesson::calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const
 	{
-		viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_error_vector", "teaching_lesson.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_error_vector", "teaching_lesson.cl");
 
 		viennacl::ocl::enqueue(kernel(
 			viennacl::traits::opencl_handle(errorVector),
@@ -105,7 +105,7 @@ namespace LightBulb
 		if (isCalculatorType(CT_GPU))
 		{
 			calcSpecificError(specificErrorScalar.getViennaclValueForEditing(), errorVector.getViennaclValueForEditing());
-			specificError = specificErrorScalar.getViennaclValue();
+			specificError = 1;// specificErrorScalar.getViennaclValue();
 		}
 		else
 		{
@@ -126,7 +126,7 @@ namespace LightBulb
 
 	void AbstractTeachingLesson::calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const
 	{
-		viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_specific_error", "teaching_lesson.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_specific_error", "teaching_lesson.cl");
 
 		viennacl::ocl::enqueue(kernel(
 			viennacl::traits::opencl_handle(errorVector),

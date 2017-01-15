@@ -97,7 +97,7 @@ namespace LightBulb
 
 	void SimpleGradientDescent::kernelSimpleGradientDescentWithMomentum(viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& M, const viennacl::matrix_base<float>& G)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent_with_momentum", "simple_gradient_descent.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent_with_momentum", "simple_gradient_descent.cl");
 
 		viennacl::ocl::enqueue(kernel(
 			cl_float(getOptions().learningRate),
@@ -125,7 +125,7 @@ namespace LightBulb
 
 	void SimpleGradientDescent::kernelSimpleGradientDescent(viennacl::matrix_base<float>& W, const viennacl::matrix_base<float>& G)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent", "simple_gradient_descent.cl");
+		static viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent", "simple_gradient_descent.cl");
 
 		viennacl::ocl::enqueue(kernel(
 			cl_float(getOptions().learningRate),

@@ -5,12 +5,53 @@
 #include "Eigen/Dense"
 #include <ctime>
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 #define SIZE 1024
 #define TESTING 1
 
 void doViennaCLTest()
 {
+	viennacl::matrix<float> testMatrix(SIZE, SIZE);
+
+	auto& test1 = getKernel("test", "test1", "test.cl");
+	clock_t begin = clock();
+	for (int i = 0; i < 100000; i++) {
+		viennacl::ocl::enqueue(test1(cl_uint(1),
+			cl_uint(2),
+			cl_uint(3),
+			cl_uint(4),
+			cl_uint(5),
+			cl_uint(6))
+		);
+	}
+	clock_t end = clock();
+	double time = (double)(end - begin) / CLOCKS_PER_SEC;
+	std::cout << time << ";" << (end - begin) << std::endl;
+
+	auto& test2 = getKernel("test", "test2", "test.cl");
+	begin = clock();
+	for (int i = 0; i < 100000; i++) {
+		viennacl::ocl::enqueue(test2(cl_uint(1))
+		);
+	}
+	end = clock();
+	time = (double)(end - begin) / CLOCKS_PER_SEC;
+	std::cout << time << ";" << (end - begin) << std::endl;
+
+	auto& test3 = getKernel("test", "test3", "test.cl");
+	begin = clock();
+	for (int i = 0; i < 100000; i++) {
+		viennacl::ocl::enqueue(test3(viennacl::traits::opencl_handle(testMatrix))
+		);
+	}
+	end = clock();
+	time = (double)(end - begin) / CLOCKS_PER_SEC;
+	std::cout << time << ";" << (end - begin) << std::endl;
+
+	getchar();
+	return;
+
 	viennacl::matrix<float> m_W1(SIZE, SIZE);
 	viennacl::matrix<float> m_W2(SIZE, SIZE);
 	viennacl::matrix<float> m_W3(SIZE, SIZE);
@@ -82,7 +123,7 @@ void doViennaCLTest()
 	v_o1 = viennacl::linalg::prod(v_W1, v_i);
 	viennacl::backend::finish();
 
-	clock_t begin = clock();
+	begin = clock();
 
 	for (int i = 0;; i++) {
 		if (i%100==0)
@@ -91,8 +132,8 @@ void doViennaCLTest()
 		v_o2 = viennacl::linalg::prod(v_W2, v_o1);
 	}
 	viennacl::backend::finish();
-	clock_t end = clock();
-	double time = (double)(end - begin) / CLOCKS_PER_SEC;
+	end = clock();
+	time = (double)(end - begin) / CLOCKS_PER_SEC;
 
 	std::cout << time << ";" << (end - begin) << std::endl;
 	std::cout << v_o2(0) << ", " << v_o2(1) << std::endl;
