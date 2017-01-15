@@ -86,6 +86,7 @@ namespace LightBulb
 
 		gradientDescentAlgorithm->setCalculatorType(getOptions()->calculatorType);
 		gradientCalculation->setCalculatorType(getOptions()->calculatorType);
+		getOptions()->neuralNetwork->getNetworkTopology().setCalculatorType(getOptions()->calculatorType);
 	}
 
 	std::string GradientDescentLearningRule::getName()

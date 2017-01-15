@@ -587,9 +587,14 @@ namespace LightBulb
 
 	void FeedForwardNetworkTopology::setCalculatorType(const CalculatorType& calculatorType)
 	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
 		if (options->descriptionFactory) 
 		{
 			options->descriptionFactory->setCalculatorType(calculatorType);
+		}
+		for (auto neuronDescription = neuronDescriptionsPerLayer.begin(); neuronDescription != neuronDescriptionsPerLayer.end(); neuronDescription++)
+		{
+			(*neuronDescription)->setCalculatorType(calculatorType);
 		}
 	}
 }

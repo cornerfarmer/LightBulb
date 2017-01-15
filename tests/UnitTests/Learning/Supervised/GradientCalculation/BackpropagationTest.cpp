@@ -180,8 +180,8 @@ TEST_F(BackpropagationTest, calcGradientGPU)
 	gradient[0].getEigenValueForEditing();
 	gradient[1].getEigenValueForEditing();
 
-	ASSERT_TRUE((gradient[0].getEigenValueForEditing() - expectedGradient[0].getEigenValueForEditing()).norm() < 1e-3);
 	ASSERT_TRUE((gradient[1].getEigenValueForEditing() - expectedGradient[1].getEigenValueForEditing()).norm() < 1e-3);
+	ASSERT_TRUE((gradient[0].getEigenValueForEditing() - expectedGradient[0].getEigenValueForEditing()).norm() < 1e-3);
 
 }
 

@@ -76,6 +76,26 @@ __kernel void vec_mul(
 } 
 
 
+__kernel void trans_vec_mul( 
+          __global const float * A, 
+          unsigned int A_row_start, unsigned int A_col_start, 
+          unsigned int A_row_inc, unsigned int A_col_inc, 
+          unsigned int A_row_size, unsigned int A_col_size, 
+          unsigned int A_internal_rows, unsigned int A_internal_cols, 
+          __global const float * v, 
+          unsigned int v_start, unsigned int v_inc, unsigned int v_size, 
+          __global float * result, 
+          unsigned int result_start, unsigned int result_inc, unsigned int result_size, 
+          __local float * work) 
+{ 
+  for (unsigned int row = get_global_id(0); row < A_col_size; row += get_global_size(0)) 
+  { 
+    float dot_prod = 0; 
+    for (unsigned int col = 0; col < A_row_size; ++col) 
+      dot_prod += A[(row * A_col_inc + A_col_start) + (col * A_row_inc + A_row_start) * A_internal_cols] * v[v_start + v_inc * col]; 
+    result[row * result_inc + result_start] = dot_prod; 
+  } 
+} 
 __kernel void backpropagate_last(
     __global const float * errorVec, 
     uint4 sizeErr,
@@ -109,57 +129,60 @@ __kernel void backpropagate_last(
 
 
 
-__kernel void backpropagate_inner(
+__kernel void backpropagate_inner_1(
     __global float * errorVec, 
     uint4 sizeErr,
-    __global const float * derivVec, 
-    uint4 sizeDeriv,
-    __global const float * actVec, 
-    uint4 sizeAct,
-    __global float * lastDeltaVec, 
+    __global const float * lastDeltaVec, 
     uint4 sizeLastDelta,
-    __global float * deltaVec, 
-    uint4 sizeDelta,
    __global const float * W, 
    unsigned int W_start1, unsigned int W_start2, 
    unsigned int W_inc1,   unsigned int W_inc2, 
    unsigned int W_size1,  unsigned int W_size2, 
-   unsigned int W_internal_size1,  unsigned int W_internal_size2,
+   unsigned int W_internal_size1,  unsigned int W_internal_size2) 
+{ 
+
+  for (unsigned int row = get_global_id(0); row < W_size2; row += get_global_size(0)) 
+  { 
+    float dot_prod = 0; 
+    for (unsigned int col = 0; col < W_size1; ++col) 
+      dot_prod += W[(row * W_inc2 + W_start2) + (col * W_inc1 + W_start1) * W_internal_size2] * lastDeltaVec[sizeLastDelta._START_ + sizeLastDelta._INC_ * col]; 
+    errorVec[row * sizeErr._INC_ + sizeErr._START_] = dot_prod; 
+  } 
+}
+
+
+
+
+__kernel void backpropagate_inner_2(
+    __global float * errorVec, 
+    uint4 sizeErr,
+    __global const float * derivVec, 
+    uint4 sizeDeriv,
+    __global float * deltaVec, 
+    uint4 sizeDelta) 
+{ 
+  for (unsigned int i = get_global_id(0); i < sizeDelta._SIZE_; i += get_global_size(0)) 
+    deltaVec[i*sizeDelta._INC_+sizeDelta._START_] = derivVec[i*sizeDeriv._INC_+sizeDeriv._START_] * errorVec[i*sizeErr._INC_+sizeErr._START_]; 
+}
+
+
+
+
+
+
+__kernel void backpropagate_inner_3(
+    __global const float * actVec, 
+    uint4 sizeAct,
+    __global float * deltaVec, 
+    uint4 sizeDelta,
    __global float * G, 
    unsigned int G_start1, unsigned int G_start2, 
    unsigned int G_inc1,   unsigned int G_inc2, 
    unsigned int G_size1,  unsigned int G_size2, 
-   unsigned int G_internal_size1,  unsigned int G_internal_size2,
-    __local float * work) 
+   unsigned int G_internal_size1,  unsigned int G_internal_size2) 
 { 
-
   unsigned int row_gid = get_global_id(0) / get_local_size(0); 
   unsigned int col_gid = get_global_id(0) % get_local_size(0); 
-  unsigned int lid = get_local_id(0); 
-  for (unsigned int row = row_gid; row < W_size2; row += get_num_groups(0)) 
-  { 
-    float dot_prod = 0; 
-    for (unsigned int col = col_gid; col < W_size1; col+=get_local_size(0)) 
-      dot_prod += W[(col * W_inc2 + W_start2) * W_internal_size1 + row * W_inc1 + W_start1] * lastDeltaVec[sizeLastDelta._START_ + sizeLastDelta._INC_ * col]; 
-    work[lid] = dot_prod; 
-    for(unsigned int stride=get_local_size(0)/2 ; stride>0 ; stride>>=1){ 
-      barrier(CLK_LOCAL_MEM_FENCE); 
-      if(lid < stride) 
-        work[lid] += work[lid+stride]; 
-    } 
-    if(lid == 0) 
-      errorVec[row * sizeErr._INC_ + sizeErr._START_] = work[0]; 
-  } 
-
-   barrier(CLK_GLOBAL_MEM_FENCE);
-
-  for (unsigned int i = get_global_id(0); i < sizeDelta._SIZE_; i += get_global_size(0)) 
-    deltaVec[i*sizeDelta._INC_+sizeDelta._START_] = derivVec[i*sizeDeriv._INC_+sizeDeriv._START_] * errorVec[i*sizeErr._INC_+sizeErr._START_]; 
-
-  barrier(CLK_GLOBAL_MEM_FENCE);
-
-  row_gid = get_global_id(0) / get_local_size(0); 
-  col_gid = get_global_id(0) % get_local_size(0); 
   for (unsigned int row = row_gid; row < G_size1; row += get_num_groups(0)) 
   { 
     float tmp = deltaVec[row * sizeDelta._INC_ + sizeDelta._START_];

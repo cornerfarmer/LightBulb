@@ -43,7 +43,9 @@ namespace LightBulb
 				{
 					nextLayerErrorValueFactor.getViennaclValueForEditing().resize(networkTopology.getAllWeights()[layerIndex].getViennaclValue().size2());
 					networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex], activationFunctionDerivations[layerIndex]);
-					backpropagateInnerLayer(nextLayerErrorValueFactor.getViennaclValueForEditing(), activationFunctionDerivations[layerIndex].getViennaclValue(), activations[layerIndex - 1].getViennaclValue(), lastDeltaVectorOutputLayer[layerIndex + 1].getViennaclValue(), lastDeltaVectorOutputLayer[layerIndex].getViennaclValueForEditing(), networkTopology.getAllWeights()[layerIndex].getViennaclValue(), gradientToUse->at(layerIndex - 1).getViennaclValueForEditing());
+					backpropagateInnerLayer_1(nextLayerErrorValueFactor.getViennaclValueForEditing(), lastDeltaVectorOutputLayer[layerIndex + 1].getViennaclValue(), networkTopology.getAllWeights()[layerIndex].getViennaclValue());
+					backpropagateInnerLayer_2(nextLayerErrorValueFactor.getViennaclValueForEditing(), activationFunctionDerivations[layerIndex].getViennaclValue(),  lastDeltaVectorOutputLayer[layerIndex].getViennaclValueForEditing());
+					backpropagateInnerLayer_3(activations[layerIndex - 1].getViennaclValue(), lastDeltaVectorOutputLayer[layerIndex].getViennaclValueForEditing(), gradientToUse->at(layerIndex - 1).getViennaclValueForEditing());
 				}
 			}
 			else
@@ -114,9 +116,39 @@ namespace LightBulb
 
 
 
-	void Backpropagation::backpropagateInnerLayer(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, const viennacl::vector_base<float>& lastDeltaVec, viennacl::vector_base<float>& deltaVec, const viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& G)
+	void Backpropagation::backpropagateInnerLayer_1(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& lastDeltaVec, const viennacl::matrix_base<float>& W)
 	{
-		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner", "backpropagation.cl");
+		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_1", "backpropagation.cl");
+
+		viennacl::ocl::packed_cl_uint size_errorVec;
+		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
+		size_errorVec.stride = cl_uint(viennacl::traits::stride(errorVec));
+		size_errorVec.size = cl_uint(viennacl::traits::size(errorVec));
+		
+		viennacl::ocl::packed_cl_uint size_lastDeltaVec;
+		size_lastDeltaVec.start = cl_uint(viennacl::traits::start(lastDeltaVec));
+		size_lastDeltaVec.stride = cl_uint(viennacl::traits::stride(lastDeltaVec));
+		size_lastDeltaVec.size = cl_uint(viennacl::traits::size(lastDeltaVec));
+
+		viennacl::ocl::enqueue(kernel(viennacl::traits::opencl_handle(errorVec),
+			size_errorVec,
+
+			viennacl::traits::opencl_handle(lastDeltaVec),
+			size_lastDeltaVec,
+
+			viennacl::traits::opencl_handle(W),
+			cl_uint(viennacl::traits::start1(W)), cl_uint(viennacl::traits::start2(W)),
+			cl_uint(viennacl::traits::stride1(W)), cl_uint(viennacl::traits::stride2(W)),
+			cl_uint(viennacl::traits::size1(W)), cl_uint(viennacl::traits::size2(W)),
+			cl_uint(viennacl::traits::internal_size1(W)), cl_uint(viennacl::traits::internal_size2(W))
+		));
+	}
+
+
+
+	void Backpropagation::backpropagateInnerLayer_2(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, viennacl::vector_base<float>& deltaVec)
+	{
+		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_2", "backpropagation.cl");
 
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
@@ -127,16 +159,6 @@ namespace LightBulb
 		size_derivVec.start = cl_uint(viennacl::traits::start(derivVec));
 		size_derivVec.stride = cl_uint(viennacl::traits::stride(derivVec));
 		size_derivVec.size = cl_uint(viennacl::traits::size(derivVec));
-
-		viennacl::ocl::packed_cl_uint size_actVec;
-		size_actVec.start = cl_uint(viennacl::traits::start(actVec));
-		size_actVec.stride = cl_uint(viennacl::traits::stride(actVec));
-		size_actVec.size = cl_uint(viennacl::traits::size(actVec));
-
-		viennacl::ocl::packed_cl_uint size_lastDeltaVec;
-		size_lastDeltaVec.start = cl_uint(viennacl::traits::start(lastDeltaVec));
-		size_lastDeltaVec.stride = cl_uint(viennacl::traits::stride(lastDeltaVec));
-		size_lastDeltaVec.size = cl_uint(viennacl::traits::size(lastDeltaVec));
 
 		viennacl::ocl::packed_cl_uint size_deltaVec;
 		size_deltaVec.start = cl_uint(viennacl::traits::start(deltaVec));
@@ -149,28 +171,39 @@ namespace LightBulb
 			viennacl::traits::opencl_handle(derivVec),
 			size_derivVec,
 
+			viennacl::traits::opencl_handle(deltaVec),
+			size_deltaVec
+		));
+	}
+
+
+
+	void Backpropagation::backpropagateInnerLayer_3(const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G)
+	{
+		viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_3", "backpropagation.cl");
+
+		viennacl::ocl::packed_cl_uint size_actVec;
+		size_actVec.start = cl_uint(viennacl::traits::start(actVec));
+		size_actVec.stride = cl_uint(viennacl::traits::stride(actVec));
+		size_actVec.size = cl_uint(viennacl::traits::size(actVec));
+
+		viennacl::ocl::packed_cl_uint size_deltaVec;
+		size_deltaVec.start = cl_uint(viennacl::traits::start(deltaVec));
+		size_deltaVec.stride = cl_uint(viennacl::traits::stride(deltaVec));
+		size_deltaVec.size = cl_uint(viennacl::traits::size(deltaVec));
+
+		viennacl::ocl::enqueue(kernel(
 			viennacl::traits::opencl_handle(actVec),
 			size_actVec,
 
-			viennacl::traits::opencl_handle(lastDeltaVec),
-			size_lastDeltaVec,
-
 			viennacl::traits::opencl_handle(deltaVec),
 			size_deltaVec,
-
-			viennacl::traits::opencl_handle(W),
-			cl_uint(viennacl::traits::start1(W)), cl_uint(viennacl::traits::start2(W)),
-			cl_uint(viennacl::traits::stride1(W)), cl_uint(viennacl::traits::stride2(W)),
-			cl_uint(viennacl::traits::size1(W)), cl_uint(viennacl::traits::size2(W)),
-			cl_uint(viennacl::traits::internal_size1(W)), cl_uint(viennacl::traits::internal_size2(W)),
 
 			viennacl::traits::opencl_handle(G),
 			cl_uint(viennacl::traits::start1(G)), cl_uint(viennacl::traits::start2(G)),
 			cl_uint(viennacl::traits::stride1(G)), cl_uint(viennacl::traits::stride2(G)),
 			cl_uint(viennacl::traits::size1(G)), cl_uint(viennacl::traits::size2(G)),
-			cl_uint(viennacl::traits::internal_size1(G)), cl_uint(viennacl::traits::internal_size2(G)),
-
-			viennacl::ocl::local_mem(sizeof(float) * kernel.local_work_size())
+			cl_uint(viennacl::traits::internal_size1(G)), cl_uint(viennacl::traits::internal_size2(G))
 		));
 	}
 
