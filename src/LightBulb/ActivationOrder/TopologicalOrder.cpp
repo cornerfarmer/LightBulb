@@ -7,7 +7,7 @@
 
 namespace LightBulb
 {
-	void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology) const
+	void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology, const Vector* alternativeInput) const
 	{
 		// Cast the network as an FeedForwardNetworkTopology
 		FeedForwardNetworkTopology* feedForwardNetworkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&networkTopology);
@@ -17,7 +17,7 @@ namespace LightBulb
 
 		for (int l = 1; l < feedForwardNetworkTopology->getLayerCount(); l++)
 		{
-			feedForwardNetworkTopology->refreshNetInputsForLayer(l);
+			feedForwardNetworkTopology->refreshNetInputsForLayer(l, l == 1 ? alternativeInput : nullptr);
 			feedForwardNetworkTopology->refreshActivationsForLayer(l);
 		}
 	}

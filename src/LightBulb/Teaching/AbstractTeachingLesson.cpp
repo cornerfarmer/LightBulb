@@ -15,7 +15,27 @@ namespace LightBulb
 {
 	const Vector& AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
-		return neuralNetwork.calculateWithoutOutputCopy(getTeachingPattern(), activationOrder);
+		if (isCalculatorType(CT_GPU))
+		{
+			if (teachingPatternVector.getViennaclValue().size() != getTeachingPattern().size()) {
+				teachingPatternVector.getViennaclValueForEditing().resize(getTeachingPattern().size() + neuralNetwork.getNetworkTopology().usesBiasNeuron());
+				viennacl::copy(getTeachingPattern().begin(), getTeachingPattern().end(), teachingPatternVector.getViennaclValueForEditing().begin());
+				if (neuralNetwork.getNetworkTopology().usesBiasNeuron())
+					teachingPatternVector.getViennaclValueForEditing()[getTeachingPattern().size()] = 1;
+			}
+		}
+		else
+		{
+			if (teachingPatternVector.getEigenValue().size() != getTeachingPattern().size()) {
+				teachingPatternVector.getEigenValueForEditing().resize(getTeachingPattern().size() + neuralNetwork.getNetworkTopology().usesBiasNeuron());
+				for (int i = 0; i < getTeachingPattern().size(); i++)
+					teachingPatternVector.getEigenValueForEditing()(i) = getTeachingPattern()[i];
+				if (neuralNetwork.getNetworkTopology().usesBiasNeuron())
+					teachingPatternVector.getEigenValueForEditing()(getTeachingPattern().size()) = 1;
+			}
+		}
+
+		return neuralNetwork.calculateWithoutOutputCopy(teachingPatternVector, activationOrder);
 	}
 
 	const Vector& AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
@@ -42,11 +62,11 @@ namespace LightBulb
 			if (teachingInputVector.getViennaclValue().size() != teachingInput.size()) {
 				teachingInputVector.getViennaclValueForEditing().resize(teachingInput.size());
 				errorVector.getViennaclValueForEditing().resize(teachingInput.size());
+
+				auto teachingInputRealVector = teachingInput.getRealVector();
+				viennacl::copy(teachingInputRealVector.begin(), teachingInputRealVector.end(), teachingInputVector.getViennaclValueForEditing().begin());
 			}
 
-			auto teachingInputRealVector = teachingInput.getRealVector();
-
-			//viennacl::copy(teachingInputRealVector.begin(), teachingInputRealVector.end(), teachingInputVector.getViennaclValueForEditing().begin());
 			
 			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInputVector.getViennaclValue(), outputVector.getViennaclValue());
 		}
@@ -105,7 +125,7 @@ namespace LightBulb
 		if (isCalculatorType(CT_GPU))
 		{
 			calcSpecificError(specificErrorScalar.getViennaclValueForEditing(), errorVector.getViennaclValueForEditing());
-			specificError = 1;// specificErrorScalar.getViennaclValue();
+			specificError = specificErrorScalar.getViennaclValue();
 		}
 		else
 		{
@@ -122,6 +142,10 @@ namespace LightBulb
 		return specificError;
 	}
 
+	const Vector& AbstractTeachingLesson::getTeachingPatternVector() const
+	{
+		return teachingPatternVector;
+	}
 
 
 	void AbstractTeachingLesson::calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const

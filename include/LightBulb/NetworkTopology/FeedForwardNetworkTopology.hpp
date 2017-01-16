@@ -123,7 +123,7 @@ namespace LightBulb
 		void randomizeDependingOnLayerSize(AbstractRandomGenerator& randomGenerator) override;
 		void resetActivation() override;
 		void copyWeightsFrom(const AbstractNetworkTopology& otherNetwork) override;
-		void refreshNetInputsForLayer(int layerNr) override;
+		void refreshNetInputsForLayer(int layerNr, const Vector* alternativeActivation = nullptr) override;
 		void refreshActivationsForLayer(int layerNr) override;
 		double calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const override;
 		std::vector<Matrix>& getAllWeights() override;

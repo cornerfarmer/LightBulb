@@ -79,6 +79,7 @@ namespace LightBulb
 		 * Default value: false
 		 */
 		bool clipError;
+		int totalErrorCalculationInterval;
 		/**
 		* \brief Creates the options and fills them with default options.
 		*/
@@ -94,6 +95,7 @@ namespace LightBulb
 			neuralNetwork = nullptr;
 			teacher = nullptr;
 			clipError = false;
+			totalErrorCalculationInterval = 1000;
 		}
 		virtual ~AbstractSupervisedLearningRuleOptions() {}
 	};

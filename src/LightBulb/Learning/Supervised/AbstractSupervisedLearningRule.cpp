@@ -55,8 +55,6 @@ namespace LightBulb
 
 	void AbstractSupervisedLearningRule::doIteration()
 	{
-		if (learningState->iterations % 10000 == 0)
-			viennacl::backend::finish();
 		if (!options->disabledDataSets[options->dataSetsPrefix + DATA_SET_TRAINING_ERROR])
 			learningState->addData(options->dataSetsPrefix + DATA_SET_TRAINING_ERROR, totalError);
 
@@ -160,7 +158,7 @@ namespace LightBulb
 
 	void AbstractSupervisedLearningRule::rateLearning()
 	{
-		if (getOptions().totalErrorGoal != -1) {
+		if (getOptions().totalErrorGoal != -1 && (getOptions().calculatorType == CT_CPU || learningState->iterations % getOptions().totalErrorCalculationInterval == 0)) {
 			totalError = getOptions().teacher->getTotalError(*getOptions().neuralNetwork, *currentActivationOrder);
 		}
 	}

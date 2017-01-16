@@ -53,7 +53,7 @@ namespace LightBulb
 		std::vector<double> calculate(const std::vector<double>& input, const AbstractActivationOrder& activationOrder, bool resetActivations = true) override;
 		void calculate(const std::vector<double>& input, std::vector<double>& output, bool resetActivations = true) override;
 		std::vector<double> calculate(const std::vector<double>& input, bool resetActivations = true) override;
-		const Vector& calculateWithoutOutputCopy(const std::vector<double>& input, const AbstractActivationOrder &activationOrder, bool resetActivations) override;
+		const Vector& calculateWithoutOutputCopy(const Vector& input, const AbstractActivationOrder &activationOrder, bool resetActivations) override;
 		AbstractNetworkTopology& getNetworkTopology() const override;
 		const std::string& getName() const override;
 		const time_t& getCreationDate() const override;

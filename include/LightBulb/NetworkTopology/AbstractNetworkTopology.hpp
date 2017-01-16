@@ -102,7 +102,7 @@ namespace LightBulb
 		 * \brief Recalculates the net inputs for one layer.
 		 * \param layerNr The index of the layer.
 		 */
-		virtual void refreshNetInputsForLayer(int layerNr) = 0;
+		virtual void refreshNetInputsForLayer(int layerNr, const Vector* alternativeActivation = nullptr) = 0;
 		/**
 		 * \brief Recalculates the activations for one layer.
 		 * \param layerNr The index of the layer.

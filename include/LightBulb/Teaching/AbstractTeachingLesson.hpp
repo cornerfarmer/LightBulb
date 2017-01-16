@@ -31,6 +31,7 @@ namespace LightBulb
 	{
 	private:
 		mutable Vector errorVector;
+		mutable Vector teachingPatternVector;
 		mutable Vector teachingInputVector;
 		mutable Scalar specificErrorScalar;
 		void calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const;
@@ -80,6 +81,7 @@ namespace LightBulb
 		 * \return The specific error.
 		 */
 		virtual double getSpecificError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder, bool clipError = false) const;
+		const Vector& getTeachingPatternVector() const;
 	};
 }
 

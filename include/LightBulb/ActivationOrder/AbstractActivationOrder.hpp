@@ -14,7 +14,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractNetworkTopology;
-	class Edge;
+	class Vector;
 
 	/**
 	 * \brief Describes the order in which neurons should get activated
@@ -28,7 +28,7 @@ namespace LightBulb
 		 * \brief Activates all Neurons in the given topology in a special order
 		 * \param networkTopology The network to activate
 		 */
-		virtual void executeActivation(AbstractNetworkTopology &networkTopology) const = 0;
+		virtual void executeActivation(AbstractNetworkTopology &networkTopology, const Vector* alternativeInput = nullptr) const = 0;
 	};
 
 }

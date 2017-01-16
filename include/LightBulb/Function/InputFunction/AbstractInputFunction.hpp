@@ -32,7 +32,7 @@ namespace LightBulb
 		 * \param netInputs The variable where the calculated inputs will be stored in
 		 * \param weights The weights which will be used to calculate the inputs
 		 */
-		virtual void execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights) const = 0;
+		virtual void execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights, const Vector* alternativeActivation = nullptr) const = 0;
 	};
 }
 

@@ -527,9 +527,9 @@ namespace LightBulb
 	}
 
 
-	void FeedForwardNetworkTopology::refreshNetInputsForLayer(int layerNr)
+	void FeedForwardNetworkTopology::refreshNetInputsForLayer(int layerNr, const Vector* alternativeActivation)
 	{
-		neuronDescriptionsPerLayer[layerNr]->getInputFunction().execute(layerNr, activations, netInputs, weights);
+		neuronDescriptionsPerLayer[layerNr]->getInputFunction().execute(layerNr, activations, netInputs, weights, alternativeActivation);
 	}
 
 	void FeedForwardNetworkTopology::refreshActivationsForLayer(int layerNr)

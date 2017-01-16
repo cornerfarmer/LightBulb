@@ -6,17 +6,18 @@
 
 namespace LightBulb
 {
-	void WeightedSumFunction::execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights) const
+	void WeightedSumFunction::execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights, const Vector* alternativeActivation) const
 	{
+		const Vector* activationToUse = alternativeActivation ? alternativeActivation : &activations[layerNr - 1];
 		if (isCalculatorType(CT_GPU))
 		{
 			static viennacl::ocl::kernel& kernel = getKernel("weight_sum_function", "execute", "weight_sum_function.cl");
 
 			viennacl::ocl::enqueue(kernel(
-				viennacl::traits::opencl_handle(activations[layerNr - 1].getViennaclValue()),
-				cl_uint(viennacl::traits::start(activations[layerNr - 1].getViennaclValue())),
-				cl_uint(viennacl::traits::stride(activations[layerNr - 1].getViennaclValue())),
-				cl_uint(viennacl::traits::size(activations[layerNr - 1].getViennaclValue())),
+				viennacl::traits::opencl_handle(activationToUse->getViennaclValue()),
+				cl_uint(viennacl::traits::start(activationToUse->getViennaclValue())),
+				cl_uint(viennacl::traits::stride(activationToUse->getViennaclValue())),
+				cl_uint(viennacl::traits::size(activationToUse->getViennaclValue())),
 
 				viennacl::traits::opencl_handle(netInputs[layerNr].getViennaclValue()),
 				cl_uint(viennacl::traits::start(netInputs[layerNr].getViennaclValue())),
@@ -34,7 +35,7 @@ namespace LightBulb
 
 		}
 		else
-			netInputs[layerNr].getEigenValueForEditing().noalias() = weights[layerNr - 1].getEigenValue() * activations[layerNr - 1].getEigenValue();
+			netInputs[layerNr].getEigenValueForEditing().noalias() = weights[layerNr - 1].getEigenValue() * activationToUse->getEigenValue();
 	}
 
 	AbstractCloneable* WeightedSumFunction::clone() const

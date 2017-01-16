@@ -97,7 +97,7 @@ namespace LightBulb
 
 	void GradientDescentLearningRule::calculateDeltaWeight(const AbstractTeachingLesson& lesson, int lessonIndex, const Vector& errorVector)
 	{
-		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errorVector);
+		gradientCalculation->calcGradient(getCurrentNetworkTopology(), errorVector, &lesson.getTeachingPatternVector());
 	}
 
 

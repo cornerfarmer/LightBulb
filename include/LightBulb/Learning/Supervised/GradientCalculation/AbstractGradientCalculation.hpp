@@ -51,14 +51,14 @@ namespace LightBulb
 		 * \param networkTopology The network topology whose gradient should be calculated.
 		 * \param errorVector The errorVector which contains the learning information.
 		 */
-		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const Vector& errorVector);
+		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const Vector& errorVector, const Vector* alternativeActivation = nullptr);
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
 		 * \param errorVector The errorVector which contains the learning information.
 		 * \param gradient The variable which should be used for storing the calculated gradient. (Instead of the internal gradient storage)
 		 */
-		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const Vector& errorVector, std::vector<Matrix>& gradient);
+		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const Vector& errorVector, std::vector<Matrix>& gradient, const Vector* alternativeActivation = nullptr);
 		/**
 		 * \brief Calculates the gradient.
 		 * \param networkTopology The network topology whose gradient should be calculated.
@@ -66,7 +66,7 @@ namespace LightBulb
 		 * \param activations The activations which should be used instead of the current ones.
 		 * \param errorVector The errorVector which contains the learning information.
 		 */
-		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector) = 0;
+		virtual void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector, const Vector* alternativeActivation = nullptr) = 0;
 	};
 }
 
