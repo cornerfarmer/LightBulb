@@ -14,6 +14,8 @@ int main(int argc, char** argv)
 {
 	//doViennaCLTest();
 
+	std::cout << viennacl::ocl::current_device().name() << std::endl;
+
 	LightBulb::App* app = new LightBulb::App();
 	app->addTrainingPlan(new BackpropagationXorExample());
 	app->addTrainingPlan(new FunctionEvolutionExample());

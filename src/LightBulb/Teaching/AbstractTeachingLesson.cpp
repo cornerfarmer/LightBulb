@@ -17,7 +17,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			if (teachingPatternVector.getViennaclValue().size() != getTeachingPattern().size()) {
+			if (teachingPatternVector.getViennaclValue().size() != getTeachingPattern().size() + neuralNetwork.getNetworkTopology().usesBiasNeuron()) {
 				teachingPatternVector.getViennaclValueForEditing().resize(getTeachingPattern().size() + neuralNetwork.getNetworkTopology().usesBiasNeuron());
 				viennacl::copy(getTeachingPattern().begin(), getTeachingPattern().end(), teachingPatternVector.getViennaclValueForEditing().begin());
 				if (neuralNetwork.getNetworkTopology().usesBiasNeuron())
@@ -26,7 +26,7 @@ namespace LightBulb
 		}
 		else
 		{
-			if (teachingPatternVector.getEigenValue().size() != getTeachingPattern().size()) {
+			if (teachingPatternVector.getEigenValue().size() != getTeachingPattern().size() + neuralNetwork.getNetworkTopology().usesBiasNeuron()) {
 				teachingPatternVector.getEigenValueForEditing().resize(getTeachingPattern().size() + neuralNetwork.getNetworkTopology().usesBiasNeuron());
 				for (int i = 0; i < getTeachingPattern().size(); i++)
 					teachingPatternVector.getEigenValueForEditing()(i) = getTeachingPattern()[i];

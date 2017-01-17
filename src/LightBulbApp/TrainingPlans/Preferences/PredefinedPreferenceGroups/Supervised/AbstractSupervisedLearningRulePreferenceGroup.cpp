@@ -12,6 +12,7 @@
 #define PREFERENCE_OFFLINE_LEARNING "Offline learning"
 #define PREFERENCE_CHANGE_WEIGHTS_BEFORE_LEARNING "Change weights before learning"
 #define PREFERENCE_CLIP_ERROR "Clip error"
+#define PREFERENCE_TOTAL_ERROR_CALCULATION_INTERVAL "Total error calculation interval"
 
 namespace LightBulb
 {
@@ -32,6 +33,7 @@ namespace LightBulb
 	{
 		AbstractLearningRulePreferenceGroup::initialize(options);
 		addPreference(new DoublePreference(PREFERENCE_TOTAL_ERROR_GOAL, options.totalErrorGoal, 0.0001, 2));
+		addPreference(new IntegerPreference(PREFERENCE_TOTAL_ERROR_CALCULATION_INTERVAL, options.totalErrorCalculationInterval, 1, 30000));
 		addPreference(new DoublePreference(PREFERENCE_MIN_RANDOM, options.minRandomWeightValue, 0, 1));
 		addPreference(new DoublePreference(PREFERENCE_MAX_RANDOM, options.maxRandomWeightValue, 0, 1));
 		addPreference(new IntegerPreference(PREFERENCE_MIN_ITERATIONS_PER_TRY, options.minIterationsPerTry, 0.0001, 2));
@@ -52,5 +54,6 @@ namespace LightBulb
 		options.offlineLearning = getBooleanPreference(PREFERENCE_OFFLINE_LEARNING);
 		options.changeWeightsBeforeLearning = getBooleanPreference(PREFERENCE_CHANGE_WEIGHTS_BEFORE_LEARNING);
 		options.clipError = getBooleanPreference(PREFERENCE_CLIP_ERROR);
+		options.totalErrorCalculationInterval = getIntegerPreference(PREFERENCE_TOTAL_ERROR_CALCULATION_INTERVAL);
 	}
 }
