@@ -32,7 +32,7 @@ TEST_F(NeuralNetworkTest, calculateSimple)
 
 	Expectation resetActivation = EXPECT_CALL(*networkTopology, resetActivation()).Times(1);
 	Expectation setInput = EXPECT_CALL(*networkTopology, setInput(input)).Times(1).After(resetActivation);
-	Expectation executeActivation = EXPECT_CALL(*activationOrder, executeActivation(testing::Ref(*networkTopology))).Times(1).After(setInput);
+	Expectation executeActivation = EXPECT_CALL(*activationOrder, executeActivation(testing::Ref(*networkTopology), nullptr)).Times(1).After(setInput);
 	Expectation getOutput = EXPECT_CALL(*networkTopology, getOutput(output)).Times(1).After(executeActivation);
 
 	neuralNetwork->calculate(input, output, *activationOrder);
@@ -46,7 +46,7 @@ TEST_F(NeuralNetworkTest, calculateSimpleWithoutReset)
 
 	EXPECT_CALL(*networkTopology, resetActivation()).Times(0);
 	Expectation setInput = EXPECT_CALL(*networkTopology, setInput(input)).Times(1);
-	Expectation executeActivation = EXPECT_CALL(*activationOrder, executeActivation(testing::Ref(*networkTopology))).Times(1).After(setInput);
+	Expectation executeActivation = EXPECT_CALL(*activationOrder, executeActivation(testing::Ref(*networkTopology), nullptr)).Times(1).After(setInput);
 	Expectation getOutput = EXPECT_CALL(*networkTopology, getOutput(output)).Times(1).After(executeActivation);
 
 	neuralNetwork->calculate(input, output, *activationOrder, false);

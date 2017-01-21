@@ -27,7 +27,6 @@ public:
 	MOCK_CONST_METHOD0(getLayerCount, int ());
 	MOCK_CONST_METHOD0(getNeuronCountsPerLayer, const std::vector<unsigned>& ());
 	MOCK_METHOD1(randomizeDependingOnLayerSize, void (LightBulb::AbstractRandomGenerator&));
-	MOCK_METHOD1(refreshNetInputsForLayer, void (int));
 	MOCK_METHOD1(refreshActivationsForLayer, void (int));
 	MOCK_METHOD0(getAllWeights, std::vector<LightBulb::Matrix>& ());
 	MOCK_CONST_METHOD0(getAllWeights, const std::vector<LightBulb::Matrix>& ());
@@ -54,6 +53,8 @@ public:
 	MOCK_CONST_METHOD0(getInnerNeuronDescription, const LightBulb::NeuronDescription& ());
 	MOCK_CONST_METHOD0(getOutputNeuronDescription, const LightBulb::NeuronDescription& ());
 	MOCK_CONST_METHOD0(getDefaultActivationOrder, const LightBulb::AbstractActivationOrder& ());
+	MOCK_METHOD1(setCalculatorType, void (const LightBulb::CalculatorType&));
+	MOCK_METHOD2(refreshNetInputsForLayer, void (int, const LightBulb::Vector*));
 };
 
 #endif
