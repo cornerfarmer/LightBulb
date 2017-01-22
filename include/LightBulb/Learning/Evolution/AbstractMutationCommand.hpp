@@ -61,6 +61,7 @@ namespace LightBulb
 		virtual void setZigguratGenerator(ZigguratGenerator& generator);
 		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

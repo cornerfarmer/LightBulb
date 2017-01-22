@@ -10,6 +10,7 @@
 
 // Library Includes
 #include <vector>
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
@@ -20,7 +21,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a command which is executes in the evolution learning process.
 	 */
-	class AbstractCommand : public AbstractLoggable, public virtual AbstractRandomGeneratorUser, public virtual AbstractCloneable
+	class AbstractCommand : public AbstractLoggable, public virtual AbstractRandomGeneratorUser, public virtual AbstractCloneable, public virtual AbstractLinearAlgebraUser
 	{
 	protected:
 		/**

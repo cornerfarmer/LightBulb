@@ -5,6 +5,7 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <math.h>
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -18,34 +19,99 @@ namespace LightBulb
 
 	void MutationAlgorithm::execute(AbstractIndividual& individual1)
 	{
-		std::vector<double>& mutationStrength = individual1.getMutationStrength();
+		Vector& mutationStrength = individual1.getMutationStrength();
 
-		// Go through all mutationStrength values
-		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
+		if (isCalculatorType(CT_GPU))
 		{
-			// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
-			*mutationStrengthValue *= exp(mutationStrengthChangeSpeed * zigguratGenerator->randDouble());
-			// Make sure the values stays inside our boundaries
-			*mutationStrengthValue = (*mutationStrengthValue < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(*mutationStrengthValue)));
+			std::vector<Matrix>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
+			int randNumberCount = mutationStrength.getViennaclValue().size();
+			for (auto layer = weights.begin(); layer != weights.end(); layer++)
+				randNumberCount += layer->getViennaclValue().size1() * layer->getViennaclValue().size2();
+
+			if (randNumbers.getViennaclValue().size() < randNumberCount)
+				randNumbers.getViennaclValueForEditing().resize(randNumberCount);
+
+			for (int i = 0; i < randNumberCount; i++)
+				randNumbers.getEigenValueForEditing()(i) = zigguratGenerator->randDouble();
+
+			mutateMutationStrength(mutationStrength.getViennaclValueForEditing());
+
+			unsigned int mutationStrengthIndex = 0;
+			// Go through all edges
+			for (auto layer = weights.begin(); layer != weights.end(); layer++) {
+				mutateWeights(layer->getViennaclValueForEditing(), mutationStrength.getViennaclValue(), mutationStrengthIndex, mutationStrength.getViennaclValue().size() + mutationStrengthIndex);
+				mutationStrengthIndex += layer->getViennaclValue().size1() * layer->getViennaclValue().size2();
+			}
 		}
-
-		std::vector<Matrix>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
-		int mutationStrengthIndex = 0;
-		// Go through all edges
-		for (auto layer = weights.begin(); layer != weights.end(); layer++)
+		else
 		{
-			for (int i = 0; i < layer->getEigenValue().rows(); i++)
+			// Go through all mutationStrength values
+			for (int i = 0; i < mutationStrength.getEigenValue().size(); i++)
 			{
-				for (int j = 0; j < layer->getEigenValue().cols(); j++)
+				// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
+				mutationStrength.getEigenValueForEditing()(i) *= exp(mutationStrengthChangeSpeed * zigguratGenerator->randDouble());
+				// Make sure the values stays inside our boundaries
+				mutationStrength.getEigenValueForEditing()(i) = (mutationStrength.getEigenValue()(i) < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(mutationStrength.getEigenValue()(i))));
+			}
+
+			std::vector<Matrix>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
+			int mutationStrengthIndex = 0;
+			// Go through all edges
+			for (auto layer = weights.begin(); layer != weights.end(); layer++)
+			{
+				for (int i = 0; i < layer->getEigenValue().rows(); i++)
 				{
-					// Simply add the corresponding mutationStrength value to the weight
-					double weightAdd = mutationStrength[mutationStrengthIndex] * zigguratGenerator->randDouble();
-					(*layer).getEigenValueForEditing()(i, j) += weightAdd;
-					mutationStrengthIndex++;
+					for (int j = 0; j < layer->getEigenValue().cols(); j++)
+					{
+						// Simply add the corresponding mutationStrength value to the weight
+						double weightAdd = mutationStrength.getEigenValue()[mutationStrengthIndex] * zigguratGenerator->randDouble();
+						(*layer).getEigenValueForEditing()(i, j) += weightAdd;
+						mutationStrengthIndex++;
+					}
 				}
 			}
 		}
+	}
 
+	void MutationAlgorithm::mutateMutationStrength(viennacl::vector_base<float>& mutationStrength) const
+	{
+		static viennacl::ocl::kernel& kernel = getKernel("mutation_algorithm", "mutateMutationStrength", "mutation_algorithm.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(mutationStrength),
+			cl_uint(viennacl::traits::start(mutationStrength)),
+			cl_uint(viennacl::traits::stride(mutationStrength)),
+			cl_uint(viennacl::traits::size(mutationStrength)),
+
+			cl_float(mutationStrengthChangeSpeed),
+			cl_float(mutationStrengthMax),
+			cl_float(mutationStrengthMin),
+
+			viennacl::traits::opencl_handle(randNumbers.getViennaclValue())
+		));
+	}
+
+	void MutationAlgorithm::mutateWeights(viennacl::matrix_base<float>& W, const viennacl::vector_base<float>& mutationStrength, unsigned int mutationStrengthOffset, unsigned int randNumbersOffset) const
+	{
+		static viennacl::ocl::kernel& kernel = getKernel("mutation_algorithm", "mutateWeights", "mutation_algorithm.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(W),
+			cl_uint(viennacl::traits::start1(W)), cl_uint(viennacl::traits::start2(W)),
+			cl_uint(viennacl::traits::stride1(W)), cl_uint(viennacl::traits::stride2(W)),
+			cl_uint(viennacl::traits::size1(W)), cl_uint(viennacl::traits::size2(W)),
+			cl_uint(viennacl::traits::internal_size1(W)), cl_uint(viennacl::traits::internal_size2(W)),
+
+			viennacl::traits::opencl_handle(mutationStrength),
+			cl_uint(viennacl::traits::start(mutationStrength)),
+			cl_uint(viennacl::traits::stride(mutationStrength)),
+			cl_uint(viennacl::traits::size(mutationStrength)),
+				
+			cl_uint(mutationStrengthOffset),
+
+			viennacl::traits::opencl_handle(randNumbers.getViennaclValue()),
+			cl_uint(randNumbersOffset)
+		));
 	}
 
 	AbstractMutationAlgorithm* MutationAlgorithm::clone() const

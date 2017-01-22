@@ -61,6 +61,7 @@ namespace LightBulb
 		virtual void execute(std::vector<AbstractIndividual*>& newIndividualVector, std::map<AbstractIndividual*, int>& counter, std::vector<AbstractIndividual*>& notUsedIndividuals);
 		// Inherited:
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

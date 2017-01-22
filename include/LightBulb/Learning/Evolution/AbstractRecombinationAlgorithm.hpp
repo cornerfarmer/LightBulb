@@ -8,6 +8,7 @@
 // Includes
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
@@ -16,7 +17,7 @@ namespace LightBulb
 	/**
 	 * \brief A algorithm that recombines two individuals to a new one.
 	 */
-	class AbstractRecombinationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
+	class AbstractRecombinationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 	public:

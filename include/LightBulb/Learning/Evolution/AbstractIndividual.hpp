@@ -7,6 +7,8 @@
 #include <vector>
 #include <algorithm>
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {
@@ -27,7 +29,7 @@ namespace LightBulb
 	 * \brief This class describes an abstract individual which "lives" inside an evolution environment.
 	 * \details The individual contains a NN which should calculate the actions from external and internal inputs.
 	 */
-	class AbstractIndividual
+	class AbstractIndividual : public virtual AbstractLinearAlgebraUser
 	{
 		template <class Archive>
 		friend void save(Archive& archive, AbstractIndividual const& individual);
@@ -38,7 +40,7 @@ namespace LightBulb
 		 * \brief This vector describes the mutation strength of every edge in the NN.
 		 * \details It is mostly used inside the mutation/recombination algorithms.
 		 */
-		std::vector<double> mutationStrength;
+		Vector mutationStrength;
 		/**
 		 * \brief Contains the evolution method which has been the origin of this individual.
 		 */
@@ -69,17 +71,17 @@ namespace LightBulb
 		 * \brief Returns the mutation strength.
 		 * \return The mutation strength.
 		 */
-		virtual std::vector<double>& getMutationStrength();
+		virtual Vector& getMutationStrength();
 		/**
 		* \brief Returns the mutation strength.
 		* \return The mutation strength.
 		*/
-		const std::vector<double>& getMutationStrength() const;
+		const Vector& getMutationStrength() const;
 		/**
 		 * \brief Sets the mutation strength.
 		 * \param newMutationStrength The new mutation strength to use.
 		 */
-		virtual void setMutationStrength(const std::vector<double>& newMutationStrength);
+		virtual void setMutationStrength(const Vector& newMutationStrength);
 		/**
 		 * \brief Executes one NN calculation. (Mostly: Get input -> let the NN calculate -> react depending on the NN output)
 		 */
@@ -116,6 +118,8 @@ namespace LightBulb
 		 * \param layerIndex The index of the layer where to add the new neuron.
 		 */
 		virtual void addNeuron(int layerIndex);
+		// Inherited:
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

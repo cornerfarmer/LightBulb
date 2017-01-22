@@ -62,11 +62,13 @@ namespace LightBulb
 		getOptions().environment->setLogger(*options->logger);
 		getOptions().environment->setLearningState(*learningState.get());
 		getOptions().environment->setRandomGenerator(*randomGenerator.get());
+		getOptions().environment->setCalculatorType(options->calculatorType);
 
 		for (auto reuseCommand = getOptions().reuseCommands.begin(); reuseCommand != getOptions().reuseCommands.end(); reuseCommand++)
 		{
 			(*reuseCommand)->setLogger(*options->logger);
 			(*reuseCommand)->setRandomGenerator(*randomGenerator.get());
+			(*reuseCommand)->setCalculatorType(options->calculatorType);
 		}
 
 		for (auto mutationCommand = getOptions().mutationsCommands.begin(); mutationCommand != getOptions().mutationsCommands.end(); mutationCommand++)
@@ -74,23 +76,27 @@ namespace LightBulb
 			(*mutationCommand)->setLogger(*options->logger);
 			(*mutationCommand)->setRandomGenerator(*randomGenerator.get());
 			(*mutationCommand)->setZigguratGenerator(*zigguratGenerator.get());
+			(*mutationCommand)->setCalculatorType(options->calculatorType);
 		}
 
 		for (auto recombinationCommand = getOptions().recombinationCommands.begin(); recombinationCommand != getOptions().recombinationCommands.end(); recombinationCommand++)
 		{
 			(*recombinationCommand)->setLogger(*options->logger);
 			(*recombinationCommand)->setRandomGenerator(*randomGenerator.get());
+			(*recombinationCommand)->setCalculatorType(options->calculatorType);
 		}
 
 		for (auto fitnessFunction = getOptions().fitnessFunctions.begin(); fitnessFunction != getOptions().fitnessFunctions.end(); fitnessFunction++)
 		{
 			(*fitnessFunction)->setLogger(*options->logger);
+			(*fitnessFunction)->setCalculatorType(options->calculatorType);
 		}
 
 		for (auto creationCommand = getOptions().creationCommands.begin(); creationCommand != getOptions().creationCommands.end(); creationCommand++)
 		{
 			(*creationCommand)->setLogger(*options->logger);
 			(*creationCommand)->setRandomGenerator(*randomGenerator.get());
+			(*creationCommand)->setCalculatorType(options->calculatorType);
 		}
 
 		for (auto exitCondition = getOptions().exitConditions.begin(); exitCondition != getOptions().exitConditions.end(); exitCondition++)
@@ -102,6 +108,7 @@ namespace LightBulb
 		{
 			(*selectionCommand)->setLogger(*options->logger);
 			(*selectionCommand)->setRandomGenerator(*randomGenerator.get());
+			(*selectionCommand)->setCalculatorType(options->calculatorType);
 		}
 	}
 

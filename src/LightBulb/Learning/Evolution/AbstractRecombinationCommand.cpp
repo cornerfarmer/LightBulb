@@ -76,4 +76,9 @@ namespace LightBulb
 		recombinationSelector->setRandomGenerator(randomGenerator_);
 	}
 
+	void AbstractRecombinationCommand::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		recombinationAlgorithm->setCalculatorType(calculatorType);
+	}
 }

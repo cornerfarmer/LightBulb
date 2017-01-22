@@ -7,6 +7,7 @@
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/Random/ZigguratGenerator.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
 #include <memory>
@@ -19,7 +20,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes an algorithm which mutates individuals.
 	 */
-	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser
+	class AbstractMutationAlgorithm : public virtual AbstractCloneable, public virtual AbstractRandomGeneratorUser, public virtual AbstractLinearAlgebraUser
 	{
 	protected:
 		ZigguratGenerator* zigguratGenerator;

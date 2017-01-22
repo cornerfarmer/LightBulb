@@ -10,12 +10,14 @@
 
 using namespace LightBulb;
 
-class MutationAlgorithmTest : public testing::Test {
+class MutationAlgorithmTest : public testing::TestWithParam<bool> {
 public:
 	MutationAlgorithm* mutationAlgorithm;
 	ZigguratGenerator zigguratGenerator;
 	void SetUp() {
 		mutationAlgorithm = new MutationAlgorithm(1.6);
+		if (GetParam())
+			mutationAlgorithm->setCalculatorType(CT_GPU);
 		zigguratGenerator.setSeed(123456789);
 		mutationAlgorithm->setZigguratGenerator(zigguratGenerator);
 	}
@@ -26,16 +28,14 @@ public:
 	}
 };
 
-TEST_F(MutationAlgorithmTest, execute)
+INSTANTIATE_TEST_CASE_P(MutationAlgorithmTestMultDev, MutationAlgorithmTest, testing::Bool());
+
+TEST_P(MutationAlgorithmTest, execute)
 {
 	MockIndividual individual;
 
-	std::vector<double> mutationStrength;
-	mutationStrength.push_back(2);
-	mutationStrength.push_back(-5);
-	mutationStrength.push_back(0);
-	mutationStrength.push_back(7500000);
-	mutationStrength.push_back(-1000000);
+	Vector mutationStrength(5);
+	mutationStrength.getEigenValueForEditing() << 2, -5, 0, 7500000, -1000000;
 	EXPECT_CALL(individual, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength));
 
 	MockNeuralNetwork neuralNetwork;
@@ -55,11 +55,11 @@ TEST_F(MutationAlgorithmTest, execute)
 
 	mutationAlgorithm->execute(individual);
 
-	EXPECT_NEAR(0.231262, mutationStrength[0], 0.00001);
-	EXPECT_NEAR(-8.35703, mutationStrength[1], 0.00001);
-	EXPECT_NEAR(0.000001f, mutationStrength[2], 0.00001);
-	EXPECT_NEAR(50, mutationStrength[3], 0.00001);
-	EXPECT_NEAR(-50, mutationStrength[4], 0.00001);
+	EXPECT_NEAR(0.231262, mutationStrength.getEigenValue()[0], 0.00001);
+	EXPECT_NEAR(-8.35703, mutationStrength.getEigenValue()[1], 0.00001);
+	EXPECT_NEAR(0.000001f, mutationStrength.getEigenValue()[2], 0.00001);
+	EXPECT_NEAR(50, mutationStrength.getEigenValue()[3], 0.00001);
+	EXPECT_NEAR(-50, mutationStrength.getEigenValue()[4], 0.00001);
 
 	EXPECT_NEAR(1.826609, weights[0].getEigenValue()(0, 0), 0.00001);
 	EXPECT_NEAR(23.00891, weights[0].getEigenValue()(0, 1), 0.00001);

@@ -10,10 +10,10 @@ namespace LightBulb
 	void AbstractIndividual::randomizeMutationStrength()
 	{
 		// Go through all mutation strength values
-		for (auto mutationStrengthValue = mutationStrength.begin(); mutationStrengthValue != mutationStrength.end(); mutationStrengthValue++)
+		for (int i = 0; i < mutationStrength.getEigenValue().size(); i++)
 		{
 			// Set it to a random value
-			*mutationStrengthValue = 0.2; // (float)rand() / RAND_MAX * 0.1;
+			mutationStrength.getEigenValueForEditing()(i) = 0.2; // (float)rand() / RAND_MAX * 0.1;
 		}
 	}
 
@@ -23,17 +23,17 @@ namespace LightBulb
 		setMutationStrength(notUsedIndividual.getMutationStrength());
 	}
 
-	std::vector<double>& AbstractIndividual::getMutationStrength()
+	Vector& AbstractIndividual::getMutationStrength()
 	{
 		return mutationStrength;
 	}
 
-	const std::vector<double>& AbstractIndividual::getMutationStrength() const
+	const Vector& AbstractIndividual::getMutationStrength() const
 	{
 		return mutationStrength;
 	}
 
-	void AbstractIndividual::setMutationStrength(const std::vector<double>& newMutationStrength)
+	void AbstractIndividual::setMutationStrength(const Vector& newMutationStrength)
 	{
 		mutationStrength = newMutationStrength;
 	}
@@ -51,17 +51,23 @@ namespace LightBulb
 	void AbstractIndividual::removeNeuron(int layerIndex, int neuronIndex)
 	{
 		getNeuralNetwork().getNetworkTopology().removeNeuron(layerIndex, neuronIndex);
-		mutationStrength.resize(getNeuralNetwork().getNetworkTopology().getEdgeCount());
+		mutationStrength.getEigenValueForEditing().resize(getNeuralNetwork().getNetworkTopology().getEdgeCount());
 	}
 
 	void AbstractIndividual::addNeuron(int layerIndex)
 	{
 		getNeuralNetwork().getNetworkTopology().addNeuron(layerIndex);
-		mutationStrength.resize(getNeuralNetwork().getNetworkTopology().getEdgeCount(), 0.2);
+		// TODO: Set new values to 0.2
+		mutationStrength.getEigenValueForEditing().resize(getNeuralNetwork().getNetworkTopology().getEdgeCount());
+	}
+
+	void AbstractIndividual::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		getNeuralNetwork().getNetworkTopology().setCalculatorType(calculatorType);
 	}
 
 	void AbstractIndividual::resizeMutationStrength(int newSize)
 	{
-		mutationStrength.resize(newSize);
+		mutationStrength.getEigenValueForEditing().resize(newSize);
 	}
 }

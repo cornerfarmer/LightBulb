@@ -12,6 +12,7 @@
 #include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
@@ -26,7 +27,7 @@ namespace LightBulb
 	 * \brief This class describes a environment which contains multiple individuals.
 	 * \details The evolution environment has to simulate the environment which surrounds its individuals.
 	 */
-	class AbstractEvolutionEnvironment : public AbstractLoggable, public virtual AbstractRandomGeneratorUser
+	class AbstractEvolutionEnvironment : public AbstractLoggable, public virtual AbstractRandomGeneratorUser, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 		/**

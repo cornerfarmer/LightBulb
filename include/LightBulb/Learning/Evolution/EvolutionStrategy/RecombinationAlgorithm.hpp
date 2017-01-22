@@ -29,6 +29,8 @@ namespace LightBulb
 		* \brief True, if the average of the parents mutation strengths should be used for the child mutation strengths.
 		*/
 		bool useAverageForMutationStrength;
+		void recombineWeightsWithAverage(viennacl::matrix_base<float>& W1, const viennacl::matrix_base<float>& W2) const;
+		void recombineMutationStrengthWithAverage(viennacl::vector_base<float>& vec1, const viennacl::vector_base<float>& vec2) const;
 	public:
 		/**
 		 * \brief Creates the recombination algorithm

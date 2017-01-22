@@ -57,4 +57,9 @@ namespace LightBulb
 		mutationSelector->setRandomGenerator(randomGenerator_);
 	}
 
+	void AbstractMutationCommand::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		mutationAlgorithm->setCalculatorType(calculatorType);
+	}
 }

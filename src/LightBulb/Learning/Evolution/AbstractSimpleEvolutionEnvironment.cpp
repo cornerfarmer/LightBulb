@@ -8,6 +8,7 @@ namespace LightBulb
 	{
 		// Create a new individual
 		AbstractIndividual* newIndividual = createNewIndividual();
+		newIndividual->setCalculatorType(calculatorType);
 
 		// Add it to the vector
 		if (addToEnvironment)

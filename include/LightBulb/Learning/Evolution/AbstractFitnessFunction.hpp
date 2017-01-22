@@ -6,6 +6,7 @@
 // Includes
 #include "LightBulb/Logging/AbstractLoggable.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
 #include <vector>
@@ -18,7 +19,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a function which does some post processing on the calculated fitness values.
 	 */
-	class AbstractFitnessFunction : public virtual AbstractCloneable, public AbstractLoggable
+	class AbstractFitnessFunction : public virtual AbstractCloneable, public AbstractLoggable, public virtual AbstractLinearAlgebraUser
 	{
 	public:
 		virtual ~AbstractFitnessFunction() {}

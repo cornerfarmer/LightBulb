@@ -8,6 +8,7 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 
 namespace LightBulb
@@ -30,11 +31,14 @@ namespace LightBulb
 		/**
 		 * \brief The absolute minimum of a mutationStrength value.
 		 */
-		double mutationStrengthMin;
+		float mutationStrengthMin;
 		/**
 		 * \brief The absolute maximum of a mutationStrength value.
 		 */
-		double mutationStrengthMax;
+		float mutationStrengthMax;
+		Vector randNumbers;
+		void mutateMutationStrength(viennacl::vector_base<float>& mutationStrength) const;
+		void mutateWeights(viennacl::matrix_base<float>& W, const viennacl::vector_base<float>& mutationStrength, unsigned mutationStrengthOffset, unsigned randNumbersOffset) const;
 	public:
 		/**
 		 * \brief Creates the mutation algorithm.

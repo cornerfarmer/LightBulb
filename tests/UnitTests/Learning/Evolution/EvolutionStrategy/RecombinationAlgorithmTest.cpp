@@ -10,19 +10,19 @@
 
 using namespace LightBulb;
 
-class RecombinationAlgorithmTest : public testing::Test {
+class RecombinationAlgorithmTest : public testing::TestWithParam<bool> {
 public:
 	RecombinationAlgorithm* recombinationAlgorithm;
 	MockIndividual individual1;
 	MockIndividual individual2;
-	std::vector<double> mutationStrength1, mutationStrength2;
+	Vector mutationStrength1, mutationStrength2;
 	std::vector<Matrix> weights1, weights2;
 	MockNeuralNetwork neuralNetwork1, neuralNetwork2;
 	MockNetworkTopology networkTopology1, networkTopology2;
 	MockRandomGenerator mockRandomGenerator;
 	void SetUp() {
-		mutationStrength1.push_back(2);
-		mutationStrength1.push_back(-5);
+		mutationStrength1.getEigenValueForEditing().resize(2);
+		mutationStrength1.getEigenValueForEditing() << 2, -5;
 		EXPECT_CALL(individual1, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength1));
 		
 		
@@ -36,9 +36,8 @@ public:
 		weights1.push_back(Matrix(1, 1));
 		weights1[1].getEigenValueForEditing()(0, 0) = 10;
 
-				
-		mutationStrength2.push_back(0.3);
-		mutationStrength2.push_back(3);
+		mutationStrength2.getEigenValueForEditing().resize(2);
+		mutationStrength2.getEigenValueForEditing() << 0.3, 3;
 		EXPECT_CALL(individual2, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength2));
 
 		EXPECT_CALL(individual2, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork2));
@@ -66,7 +65,8 @@ public:
 		weights1[1].getEigenValueForEditing()(0, 0) = 10;
 		weights1[1].getEigenValueForEditing()(0, 1) = -1;
 
-		mutationStrength1.push_back(0.1);
+		mutationStrength1.getEigenValueForEditing().conservativeResize(mutationStrength1.getEigenValue().size() + 1);
+		mutationStrength1.getEigenValueForEditing()(mutationStrength1.getEigenValue().size() - 1) = 0.1;
 
 		weights2[1] = Matrix(2, 1);
 		weights2[1].getEigenValueForEditing()(0, 0) = 3;
@@ -80,13 +80,17 @@ public:
 	}
 };
 
-TEST_F(RecombinationAlgorithmTest, executeWithAverage)
+INSTANTIATE_TEST_CASE_P(RecombinationAlgorithmTestMultDev, RecombinationAlgorithmTest, testing::Bool());
+
+TEST_P(RecombinationAlgorithmTest, executeWithAverage)
 {
 	recombinationAlgorithm = new RecombinationAlgorithm(true, true);
+	if (GetParam())
+		recombinationAlgorithm->setCalculatorType(CT_GPU);
 	recombinationAlgorithm->execute(individual1, individual2);
 
-	EXPECT_NEAR(1.15, mutationStrength1[0], 0.00001);
-	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
+	EXPECT_NEAR(1.15, mutationStrength1.getEigenValue()[0], 0.00001);
+	EXPECT_NEAR(-1, mutationStrength1.getEigenValue()[1], 0.00001);
 
 	EXPECT_NEAR(-2, weights1[0].getEigenValue()(0, 0), 0.00001);
 	EXPECT_NEAR(-1, weights1[0].getEigenValue()(0, 1), 0.00001);
@@ -94,10 +98,11 @@ TEST_F(RecombinationAlgorithmTest, executeWithAverage)
 }
 
 
-TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
+TEST_P(RecombinationAlgorithmTest, executeWithoutAverage)
 {
 	recombinationAlgorithm = new RecombinationAlgorithm(false, false);
-
+	if (GetParam())
+		recombinationAlgorithm->setCalculatorType(CT_GPU);
 	recombinationAlgorithm->setRandomGenerator(mockRandomGenerator);
 	testing::InSequence s;
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
@@ -108,24 +113,26 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverage)
 
 	recombinationAlgorithm->execute(individual1, individual2);
 
-	EXPECT_NEAR(0.3, mutationStrength1[0], 0.00001);
-	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);
+	EXPECT_NEAR(0.3, mutationStrength1.getEigenValue()[0], 0.00001);
+	EXPECT_NEAR(3, mutationStrength1.getEigenValue()[1], 0.00001);
 
 	EXPECT_NEAR(2, weights1[0].getEigenValue()(0, 0), 0.00001);
 	EXPECT_NEAR(1, weights1[0].getEigenValue()(0, 1), 0.00001);
 	EXPECT_NEAR(10, weights1[1].getEigenValue()(0, 0), 0.00001);
 }
 
-TEST_F(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
+TEST_P(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
 {
 	addExtraNeuronsForDifferentSizes();
 
 	recombinationAlgorithm = new RecombinationAlgorithm(true, true);
+	if (GetParam())
+		recombinationAlgorithm->setCalculatorType(CT_GPU);
 	recombinationAlgorithm->execute(individual1, individual2);
 
-	EXPECT_NEAR(1.15, mutationStrength1[0], 0.00001);
-	EXPECT_NEAR(-1, mutationStrength1[1], 0.00001);
-	EXPECT_NEAR(0.1, mutationStrength1[2], 0.00001);
+	EXPECT_NEAR(1.15, mutationStrength1.getEigenValue()[0], 0.00001);
+	EXPECT_NEAR(-1, mutationStrength1.getEigenValue()[1], 0.00001);
+	EXPECT_NEAR(0.1, mutationStrength1.getEigenValue()[2], 0.00001);
 
 	EXPECT_NEAR(-2, weights1[0].getEigenValue()(0, 0), 0.00001);
 	EXPECT_NEAR(-1, weights1[0].getEigenValue()(0, 1), 0.00001);
@@ -138,13 +145,14 @@ TEST_F(RecombinationAlgorithmTest, executeWithAverageWithDifferentSizes)
 }
 
 
-TEST_F(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
+TEST_P(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
 {
 	srand(1);
 	addExtraNeuronsForDifferentSizes();
 
 	recombinationAlgorithm = new RecombinationAlgorithm(false, false);
-
+	if (GetParam())
+		recombinationAlgorithm->setCalculatorType(CT_GPU);
 	recombinationAlgorithm->setRandomGenerator(mockRandomGenerator);
 	testing::InSequence s;
 	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
@@ -155,9 +163,9 @@ TEST_F(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
 	
 	recombinationAlgorithm->execute(individual1, individual2);
 	
-	EXPECT_NEAR(0.3, mutationStrength1[0], 0.00001);
-	EXPECT_NEAR(3, mutationStrength1[1], 0.00001);
-	EXPECT_NEAR(0.1, mutationStrength1[2], 0.00001);
+	EXPECT_NEAR(0.3, mutationStrength1.getEigenValue()[0], 0.00001);
+	EXPECT_NEAR(3, mutationStrength1.getEigenValue()[1], 0.00001);
+	EXPECT_NEAR(0.1, mutationStrength1.getEigenValue()[2], 0.00001);
 
 	EXPECT_NEAR(2, weights1[0].getEigenValue()(0, 0), 0.00001);
 	EXPECT_NEAR(1, weights1[0].getEigenValue()(0, 1), 0.00001);
