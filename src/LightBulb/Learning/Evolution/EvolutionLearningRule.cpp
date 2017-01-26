@@ -59,6 +59,8 @@ namespace LightBulb
 
 	void EvolutionLearningRule::setHelperToUsedObjects()
 	{
+		zigguratGenerator->setCalculatorType(options->calculatorType);
+
 		getOptions().environment->setLogger(*options->logger);
 		getOptions().environment->setLearningState(*learningState.get());
 		getOptions().environment->setRandomGenerator(*randomGenerator.get());

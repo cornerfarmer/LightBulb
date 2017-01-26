@@ -5,7 +5,7 @@
 
 // Libary includes
 #include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/EigenMatrixIO.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

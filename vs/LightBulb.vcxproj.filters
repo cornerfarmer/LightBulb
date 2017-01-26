@@ -151,9 +151,6 @@
     <ClInclude Include="..\include\LightBulb\IO\LearningStateIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -615,6 +612,18 @@
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\VectorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\EigenMatrixIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ScalarIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

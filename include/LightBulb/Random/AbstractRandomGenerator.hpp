@@ -5,6 +5,7 @@
 #define _ABSTRACTRANDOMGENERATOR_H_
 
 // Include
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
 
@@ -13,7 +14,7 @@ namespace LightBulb
 	/**
 	 * \brief Describes a generator of random numbers.
 	 */
-	class AbstractRandomGenerator
+	class AbstractRandomGenerator : public virtual AbstractLinearAlgebraUser
 	{
 		template <class Archive>
 		friend void save(Archive& archive, AbstractRandomGenerator const& randomGenerator);

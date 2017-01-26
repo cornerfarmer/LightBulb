@@ -12,7 +12,7 @@ namespace LightBulb
 		return input;
 	}
 
-	void IdentityFunction::execute(int layerNr, std::vector<Vector> &activations, const std::vector<Vector> &netInputs) const
+	void IdentityFunction::execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const
 	{
 		activations[layerNr] = netInputs[layerNr];
 	}

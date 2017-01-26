@@ -27,11 +27,11 @@ namespace LightBulb
 		}
 	}
 
-	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector, const Vector* alternativeActivation)
+	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector<>>& netInputs, const std::vector<Vector<>>& activations, const Vector<>& errorVector, const Vector<>* alternativeActivation)
 	{
 		for (int layerIndex = networkTopology.getLayerCount() - 1; layerIndex > 0; layerIndex--)
 		{
-			const Vector& activationToUse = (layerIndex == 1 && alternativeActivation ? *alternativeActivation : activations[layerIndex - 1]);
+			const Vector<>& activationToUse = (layerIndex == 1 && alternativeActivation ? *alternativeActivation : activations[layerIndex - 1]);
 			if (isCalculatorType(CT_GPU))
 			{
 				// If its the last layer
@@ -60,7 +60,7 @@ namespace LightBulb
 				}
 				else
 				{
-					Vector nextLayerErrorValueFactor(networkTopology.getEfferentWeightsPerLayer(layerIndex).getEigenValue() * lastDeltaVectorOutputLayer[layerIndex + 1].getEigenValue());
+					Vector<> nextLayerErrorValueFactor(networkTopology.getEfferentWeightsPerLayer(layerIndex).getEigenValue() * lastDeltaVectorOutputLayer[layerIndex + 1].getEigenValue());
 
 					// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
 					networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex], activationFunctionDerivations[layerIndex]);

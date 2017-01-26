@@ -44,7 +44,7 @@ namespace LightBulb
 		networkTopology->getOutput(output);
 	}
 
-	const Vector& NeuralNetwork::calculateWithoutOutputCopy(const Vector& input, const AbstractActivationOrder &activationOrder, bool resetActivations)
+	const Vector<>& NeuralNetwork::calculateWithoutOutputCopy(const Vector<>& input, const AbstractActivationOrder &activationOrder, bool resetActivations)
 	{
 		// If the calculation start at time 0
 		if (resetActivations)

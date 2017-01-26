@@ -13,7 +13,7 @@
 
 namespace LightBulb
 {
-	const Vector& AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
+	const Vector<>& AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
 		if (isCalculatorType(CT_GPU))
 		{
@@ -38,17 +38,17 @@ namespace LightBulb
 		return neuralNetwork.calculateWithoutOutputCopy(teachingPatternVector, activationOrder);
 	}
 
-	const Vector& AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
+	const Vector<>& AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
 	{
 		// Try the lesson and extract the output
-		const Vector& outputVector = tryLesson(neuralNetwork, activationOrder);
+		const Vector<>& outputVector = tryLesson(neuralNetwork, activationOrder);
 		getErrorVectorFromOutputVector(outputVector, neuralNetwork, clipError);
 
 		return errorVector;
 	}
 
 
-	void AbstractTeachingLesson::getErrorVectorFromOutputVector(const Vector& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
+	void AbstractTeachingLesson::getErrorVectorFromOutputVector(const Vector<>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
 		const TeachingInput<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
@@ -142,7 +142,7 @@ namespace LightBulb
 		return specificError;
 	}
 
-	const Vector& AbstractTeachingLesson::getTeachingPatternVector() const
+	const Vector<>& AbstractTeachingLesson::getTeachingPatternVector() const
 	{
 		return teachingPatternVector;
 	}

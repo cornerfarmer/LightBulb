@@ -64,9 +64,9 @@ void doViennaCLTest()
 
 
 
-	LightBulb::Matrix A(1024, 1024);
-	LightBulb::Matrix B(1024, 1024);
-	LightBulb::Matrix C(1024, 1024);
+	LightBulb::Matrix<>A(1024, 1024);
+	LightBulb::Matrix<> B(1024, 1024);
+	LightBulb::Matrix<> C(1024, 1024);
 
 	/*for (int r = 0; r < A.getEigenValue().rows(); r++)
 	{

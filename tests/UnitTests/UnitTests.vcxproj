@@ -176,6 +176,7 @@
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkCalculationTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
+    <ClCompile Include="Random\ZigguratGeneratorTest.cpp" />
     <ClCompile Include="Teaching\TeacherTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonBooleanInputTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonLinearInputTest.cpp" />

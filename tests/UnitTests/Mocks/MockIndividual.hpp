@@ -12,8 +12,8 @@ class MockIndividual : public LightBulb::AbstractIndividual
 public:
 	MOCK_METHOD1(copyPropertiesFrom, void (AbstractIndividual&));
 	MOCK_METHOD0(getNeuralNetwork, LightBulb::AbstractNeuralNetwork& ());
-	MOCK_METHOD0(getMutationStrength, LightBulb::Vector& ());
-	MOCK_METHOD1(setMutationStrength, void (const LightBulb::Vector&));
+	MOCK_METHOD0(getMutationStrength, LightBulb::Vector<>& ());
+	MOCK_METHOD1(setMutationStrength, void (const LightBulb::Vector<>&));
 	MOCK_METHOD0(doNNCalculation, void ());
 	MOCK_METHOD0(resetNN, void ());
 	MOCK_CONST_METHOD1(clone, AbstractIndividual* (bool));

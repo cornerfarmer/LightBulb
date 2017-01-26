@@ -61,7 +61,7 @@ namespace LightBulb
 		return new RMSPropLearningRate(*this);
 	}
 
-	void RMSPropLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
+	void RMSPropLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients)
 	{
 		prevGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().gradientMomentum * prevGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().gradientMomentum) * gradients.getEigenValue();
 		prevSquaredGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().squaredGradientMomentum) * gradients.getEigenValue().cwiseAbs2();

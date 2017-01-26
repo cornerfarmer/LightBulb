@@ -12,17 +12,29 @@ namespace LightBulb
 {
 	// Forward declarations
 
-	class Scalar : public AbstractLinearAlgebraObject<float, viennacl::scalar<float>>
+	template<typename DataType = float>
+	class Scalar : public AbstractLinearAlgebraObject<DataType, viennacl::scalar<DataType>>
 	{
 	protected:
-		void copyToEigen() const override;
-		void copyToViennaCl() const override;
+		void copyToEigen() const override
+		{
+			eigenValue = viennaclValue;
+		}
+
+		void copyToViennaCl() const override
+		{
+			viennaclValue = eigenValue;
+		}
 	public:
-		Scalar();
+		Scalar()
+		{
+			eigenValue = 0;
+			viennaclValue = 0;
+		}
+
 	};
 }
 
-#define COMMA ,
-USE_PARENT_SERIALIZATION(LightBulb::Scalar, LightBulb::AbstractLinearAlgebraObject<float COMMA viennacl::scalar<float>>, LightBulb)
+#include "LightBulb/IO/ScalarIO.hpp"
 
 #endif

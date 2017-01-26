@@ -96,7 +96,7 @@ namespace LightBulb
 				}
 
 				// Calculate the errorVector and also fill - if needed - the output and netInput values map
-				const Vector& errorVector = (*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError);
+				const Vector<>& errorVector = (*teachingLesson)->getErrorVector(*getOptions().neuralNetwork, *currentActivationOrder, getOptions().clipError);
 
 				calculateDeltaWeight(*teachingLesson->get(), lessonIndex, errorVector);
 

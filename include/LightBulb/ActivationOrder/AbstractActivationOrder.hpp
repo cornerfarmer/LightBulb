@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 // Library includes
 #include <map>
@@ -14,7 +15,6 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractNetworkTopology;
-	class Vector;
 
 	/**
 	 * \brief Describes the order in which neurons should get activated
@@ -28,7 +28,7 @@ namespace LightBulb
 		 * \brief Activates all Neurons in the given topology in a special order
 		 * \param networkTopology The network to activate
 		 */
-		virtual void executeActivation(AbstractNetworkTopology &networkTopology, const Vector* alternativeInput = nullptr) const = 0;
+		virtual void executeActivation(AbstractNetworkTopology &networkTopology, const Vector<>* alternativeInput = nullptr) const = 0;
 	};
 
 }

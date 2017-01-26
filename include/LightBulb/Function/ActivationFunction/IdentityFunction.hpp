@@ -20,7 +20,7 @@ namespace LightBulb
 	public:
 		// Inherited: 
 		double execute(double input) const override;
-		void execute(int layerNr, std::vector<Vector> &activations, const std::vector<Vector> &netInputs) const override;
+		void execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const override;
 		double executeDerivation(double input) const override;
 		AbstractCloneable* clone() const override;
 		double getMaximum() const override;

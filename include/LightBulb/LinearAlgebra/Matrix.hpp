@@ -7,26 +7,51 @@
 #include <Eigen/Dense>
 #include <viennacl/matrix.hpp>
 #include "AbstractLinearAlgebraObject.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 
-	class Matrix : public AbstractLinearAlgebraObject<Eigen::MatrixXf, viennacl::matrix<float>>
+	template<typename DataType = float>
+	class Matrix : public AbstractLinearAlgebraObject<Eigen::Matrix<DataType, -1, -1>, viennacl::matrix<DataType>>
 	{
 	protected:
-		void copyToEigen() const override;
-		void copyToViennaCl() const override;
+		void copyToEigen() const override
+		{
+			if (eigenValue.rows() != viennaclValue.size1() || eigenValue.cols() != viennaclValue.size2())
+				eigenValue.resize(viennaclValue.size1(), viennaclValue.size2());
+
+			viennacl::copy(viennaclValue, eigenValue);
+		}
+
+		void copyToViennaCl() const override
+		{
+			if (eigenValue.rows() != viennaclValue.size1() || eigenValue.cols() != viennaclValue.size2())
+				viennaclValue.resize(eigenValue.rows(), eigenValue.cols());
+
+			if (eigenValue.size() != 0)
+				viennacl::copy(eigenValue, viennaclValue);
+		}
+
 	public:
-		Matrix(int rows = 0, int cols = 0);
-		Matrix(const Eigen::MatrixXf& eigenMatrix);
+		Matrix(int rows = 0, int cols = 0)
+		{
+			if (rows > 0 && cols > 0) {
+				eigenValue = Eigen::Matrix<DataType, -1, -1>(rows, cols);
+				eigenValueIsDirty = true;
+			}
+		}
+
+		Matrix(const Eigen::Matrix<DataType, -1, -1>& eigenMatrix)
+		{
+			eigenValue = eigenMatrix;
+			eigenValueIsDirty = true;
+		}
 	};
 
 }
 
-#define COMMA ,
-USE_PARENT_SERIALIZATION(LightBulb::Matrix, LightBulb::AbstractLinearAlgebraObject<Eigen::MatrixXf COMMA viennacl::matrix<float>>, LightBulb)
 
+#include "LightBulb/IO/MatrixIO.hpp"
 
 #endif

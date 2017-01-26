@@ -69,7 +69,7 @@ TEST_F(TeachingLessonLinearInputTest, getTeachingPattern)
 TEST_F(TeachingLessonLinearInputTest, tryLesson)
 {
 	setUpNeuralNetworkCalculateCall();
-	const Vector& returnedValue = teachingLesson->tryLesson(*neuralNetwork, *activationOrder);
+	const Vector<>& returnedValue = teachingLesson->tryLesson(*neuralNetwork, *activationOrder);
 	EXPECT_EQ(neuralNetworkOutput.size(), returnedValue.getEigenValue().size());
 	EXPECT_EQ(neuralNetworkOutput[0], returnedValue.getEigenValue()[0]);
 	EXPECT_EQ(neuralNetworkOutput[1], returnedValue.getEigenValue()[1]);
@@ -79,11 +79,11 @@ TEST_F(TeachingLessonLinearInputTest, tryLesson)
 TEST_F(TeachingLessonLinearInputTest, getErrormap)
 {
 	setUpNeuralNetworkCalculateCall();
-	Vector expected(3);
+	Vector<> expected(3);
 	expected.getEigenValueForEditing()[0] = 2;
 	expected.getEigenValueForEditing()[1] = 3;
 	expected.getEigenValueForEditing()[2] = 4;
-	const Vector& returnedValue = teachingLesson->getErrorVector(*neuralNetwork, *activationOrder);
+	const Vector<>& returnedValue = teachingLesson->getErrorVector(*neuralNetwork, *activationOrder);
 	EXPECT_EQ(expected.getEigenValue()[0], returnedValue.getEigenValue()[0]);
 	EXPECT_EQ(expected.getEigenValue()[1], returnedValue.getEigenValue()[1]);
 	EXPECT_EQ(expected.getEigenValue()[2], returnedValue.getEigenValue()[2]);

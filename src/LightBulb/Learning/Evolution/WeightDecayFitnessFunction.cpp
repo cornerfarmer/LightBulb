@@ -19,7 +19,7 @@ namespace LightBulb
 		for (auto entry = highscore.begin(); entry != highscore.end(); entry++)
 		{
 			double weightDecayError = 0;
-			std::vector<Matrix>& weights = entry->second->getNeuralNetwork().getNetworkTopology().getAllWeights();
+			std::vector<Matrix<>>& weights = entry->second->getNeuralNetwork().getNetworkTopology().getAllWeights();
 			for (auto weightsPerLayer = weights.begin(); weightsPerLayer != weights.end(); weightsPerLayer++)
 			{
 				weightDecayError += 0.5 * weightsPerLayer->getEigenValue().squaredNorm();

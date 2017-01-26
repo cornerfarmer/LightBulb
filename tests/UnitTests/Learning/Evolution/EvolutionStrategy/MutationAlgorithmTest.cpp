@@ -34,7 +34,7 @@ TEST_P(MutationAlgorithmTest, execute)
 {
 	MockIndividual individual;
 
-	Vector mutationStrength(5);
+	Vector<> mutationStrength(5);
 	mutationStrength.getEigenValueForEditing() << 2, -5, 0, 7500000, -1000000;
 	EXPECT_CALL(individual, getMutationStrength()).WillRepeatedly(testing::ReturnRef(mutationStrength));
 
@@ -42,15 +42,15 @@ TEST_P(MutationAlgorithmTest, execute)
 	EXPECT_CALL(individual, getNeuralNetwork()).WillRepeatedly(testing::ReturnRef(neuralNetwork));
 	MockNetworkTopology networkTopology;
 	EXPECT_CALL(neuralNetwork, getNetworkTopology()).WillRepeatedly(testing::ReturnRef(networkTopology));
-	std::vector<Matrix> weights;
+	std::vector<Matrix<>> weights;
 	EXPECT_CALL(networkTopology, getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
 
-	weights.push_back(Matrix(2,2));
+	weights.push_back(Matrix<>(2,2));
 	weights[0].getEigenValueForEditing()(0, 0) = 2;
 	weights[0].getEigenValueForEditing()(0, 1) = 1;
 	weights[0].getEigenValueForEditing()(1, 0) = -5;
 	weights[0].getEigenValueForEditing()(1, 1) = 0.1;
-	weights.push_back(Matrix(1, 1));
+	weights.push_back(Matrix<>(1, 1));
 	weights[1].getEigenValueForEditing()(0, 0) = 10;
 
 	mutationAlgorithm->execute(individual);

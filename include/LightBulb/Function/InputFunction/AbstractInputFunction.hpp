@@ -7,6 +7,8 @@
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include <memory>
 #include <vector>
 
@@ -14,8 +16,6 @@
 
 namespace LightBulb
 {
-	class Matrix;
-	class Vector;
 
 	/**
 	 * \brief An InputFunction calculates one input value from the output of all previous connected neurons
@@ -32,7 +32,7 @@ namespace LightBulb
 		 * \param netInputs The variable where the calculated inputs will be stored in
 		 * \param weights The weights which will be used to calculate the inputs
 		 */
-		virtual void execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights, const Vector* alternativeActivation = nullptr) const = 0;
+		virtual void execute(int layerNr, const std::vector<Vector<>> &activations, std::vector<Vector<>> &netInputs, const std::vector<Matrix<>> &weights, const Vector<>* alternativeActivation = nullptr) const = 0;
 	};
 }
 

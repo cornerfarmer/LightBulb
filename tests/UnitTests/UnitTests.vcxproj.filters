@@ -165,6 +165,9 @@
     <ClCompile Include="NeuralNetwork\NeuralNetworkCalculationTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Random\ZigguratGeneratorTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockNetworkTopology.hpp">

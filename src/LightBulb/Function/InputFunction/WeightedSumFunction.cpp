@@ -6,9 +6,9 @@
 
 namespace LightBulb
 {
-	void WeightedSumFunction::execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights, const Vector* alternativeActivation) const
+	void WeightedSumFunction::execute(int layerNr, const std::vector<Vector<>> &activations, std::vector<Vector<>> &netInputs, const std::vector<Matrix<>> &weights, const Vector<>* alternativeActivation) const
 	{
-		const Vector* activationToUse = alternativeActivation ? alternativeActivation : &activations[layerNr - 1];
+		const Vector<>* activationToUse = alternativeActivation ? alternativeActivation : &activations[layerNr - 1];
 		if (isCalculatorType(CT_GPU))
 		{
 			static viennacl::ocl::kernel& kernel = getKernel("weight_sum_function", "execute", "weight_sum_function.cl");

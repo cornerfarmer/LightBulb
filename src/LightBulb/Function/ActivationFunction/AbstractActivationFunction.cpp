@@ -4,7 +4,7 @@
 
 namespace LightBulb
 {
-	void AbstractActivationFunction::execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const
+	void AbstractActivationFunction::execute(int layerNr, std::vector<Vector<>>& activations, const std::vector<Vector<>>& netInputs) const
 	{
 		if (isCalculatorType(CT_GPU))
 		{
@@ -22,7 +22,7 @@ namespace LightBulb
 		}
 	}
 
-	void AbstractActivationFunction::executeDerivation(const Vector& input, Vector& derivation) const
+	void AbstractActivationFunction::executeDerivation(const Vector<>& input, Vector<>& derivation) const
 	{
 		if (isCalculatorType(CT_GPU))
 		{

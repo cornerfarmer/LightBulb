@@ -3,45 +3,41 @@
 #ifndef _MATRIXIO_H_
 #define _MATRIXIO_H_
 
-// Libary includes
-#include <Eigen/Dense>
+// Includes
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
+// Libraray includes
 #include <cereal/cereal.hpp>
-#include <cereal/access.hpp>
-#include <cereal/types/vector.hpp>
+#include <cereal/types/polymorphic.hpp>
 
-namespace cereal
+namespace LightBulb
 {
-	template <class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
-	void save(Archive& archive, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> const & matrix)
+	/**
+	* \brief Saves an AbstractLinearAlgebraObject.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param matrix The Matrix to save.
+	*/
+	template <class Archive, class DataType>
+	void save(Archive& archive, Matrix<DataType> const& matrix)
 	{
-		std::vector<std::vector<double>> vector(matrix.rows(), std::vector<double>(matrix.cols()));
-		for (int i = 0; i < matrix.rows(); i++)
-		{
-			for (int j = 0; j < matrix.cols(); j++)
-			{
-				vector[i][j] = matrix(i, j);
-			}
-		}
-		archive(make_nvp("asVector", vector));
+		archive(cereal::base_class<AbstractLinearAlgebraObject<Eigen::Matrix<DataType, -1, -1>, viennacl::matrix<DataType>>>(&matrix));
 	}
 
-	template <class Archive, typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
-	void load(Archive& archive, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& matrix)
+	/**
+	* \brief Loads an AbstractLinearAlgebraObject.
+	* \tparam Archive The archive type.
+	* \param archive The archive which should be used.
+	* \param matrix The Matrix to load.
+	*/
+	template <class Archive, class DataType>
+	void load(Archive& archive, Matrix<DataType> const matrix)
 	{
-		std::vector<std::vector<double>> vector;
-		archive(make_nvp("asVector", vector));
-		if (vector.size() > 0)
-		{
-			matrix.resize(vector.size(), vector[0].size());
-			for (int i = 0; i < matrix.rows(); i++)
-			{
-				for (int j = 0; j < matrix.cols(); j++)
-				{
-					matrix(i, j) = vector[i][j];
-				}
-			}
-		}
+		archive(cereal::base_class<AbstractLinearAlgebraObject<Eigen::Matrix<DataType, -1, -1>, viennacl::matrix<DataType>>>(&matrix));
 	}
 }
+
+#include "LightBulb/IO/UsedArchives.hpp"
+
+CEREAL_REGISTER_TYPE(LightBulb::Matrix<float>);
 
 #endif

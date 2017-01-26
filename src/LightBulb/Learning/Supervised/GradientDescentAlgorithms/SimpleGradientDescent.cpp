@@ -61,7 +61,7 @@ namespace LightBulb
 		return new SimpleGradientDescent(*this);
 	}
 
-	void SimpleGradientDescent::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
+	void SimpleGradientDescent::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients)
 	{
 		if (isCalculatorType(CT_GPU))
 		{
@@ -76,7 +76,7 @@ namespace LightBulb
 		}
 		else
 		{
-			Matrix deltaWeight;
+			Matrix<> deltaWeight;
 			// Calc the delta weight
 			deltaWeight.getEigenValueForEditing() = -getOptions().learningRate * gradients.getEigenValue();
 

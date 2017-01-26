@@ -6,7 +6,7 @@
 // Libary includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
-#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 #include <cereal/cereal.hpp>

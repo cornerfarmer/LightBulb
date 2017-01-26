@@ -5,7 +5,7 @@
 
 // Includes
 #include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes

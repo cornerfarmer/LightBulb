@@ -19,11 +19,11 @@ namespace LightBulb
 
 	void MutationAlgorithm::execute(AbstractIndividual& individual1)
 	{
-		Vector& mutationStrength = individual1.getMutationStrength();
+		Vector<>& mutationStrength = individual1.getMutationStrength();
 
 		if (isCalculatorType(CT_GPU))
 		{
-			std::vector<Matrix>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
+			std::vector<Matrix<>>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
 			int randNumberCount = mutationStrength.getViennaclValue().size();
 			for (auto layer = weights.begin(); layer != weights.end(); layer++)
 				randNumberCount += layer->getViennaclValue().size1() * layer->getViennaclValue().size2();
@@ -54,7 +54,7 @@ namespace LightBulb
 				mutationStrength.getEigenValueForEditing()(i) = (mutationStrength.getEigenValue()(i) < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(mutationStrength.getEigenValue()(i))));
 			}
 
-			std::vector<Matrix>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
+			std::vector<Matrix<>>& weights = individual1.getNeuralNetwork().getNetworkTopology().getAllWeights();
 			int mutationStrengthIndex = 0;
 			// Go through all edges
 			for (auto layer = weights.begin(); layer != weights.end(); layer++)

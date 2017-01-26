@@ -23,17 +23,17 @@ namespace LightBulb
 		setMutationStrength(notUsedIndividual.getMutationStrength());
 	}
 
-	Vector& AbstractIndividual::getMutationStrength()
+	Vector<>& AbstractIndividual::getMutationStrength()
 	{
 		return mutationStrength;
 	}
 
-	const Vector& AbstractIndividual::getMutationStrength() const
+	const Vector<>& AbstractIndividual::getMutationStrength() const
 	{
 		return mutationStrength;
 	}
 
-	void AbstractIndividual::setMutationStrength(const Vector& newMutationStrength)
+	void AbstractIndividual::setMutationStrength(const Vector<>& newMutationStrength)
 	{
 		mutationStrength = newMutationStrength;
 	}

@@ -22,7 +22,7 @@ namespace LightBulb
 	private:
 	public:
 		// Inherited:
-		void execute(int layerNr, const std::vector<Vector> &activations, std::vector<Vector> &netInputs, const std::vector<Matrix> &weights, const Vector* alternativeActivation = nullptr) const override;
+		void execute(int layerNr, const std::vector<Vector<>> &activations, std::vector<Vector<>> &netInputs, const std::vector<Matrix<>> &weights, const Vector<>* alternativeActivation = nullptr) const override;
 		AbstractCloneable* clone() const override;
 	};
 }

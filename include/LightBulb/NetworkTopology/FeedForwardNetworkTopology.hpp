@@ -73,15 +73,15 @@ namespace LightBulb
 		/**
 		 * \brief All net inputs per layer.
 		 */
-		std::vector<Vector> netInputs;
+		std::vector<Vector<>> netInputs;
 		/**
 		 * \brief All activations.
 		 */
-		std::vector<Vector> activations;
+		std::vector<Vector<>> activations;
 		/**
 		 * \brief The weights per layer
 		 */
-		std::vector<Matrix> weights;
+		std::vector<Matrix<>> weights;
 		/**
 		 * \brief The offset of each layer in the activations vector.
 		 */
@@ -123,19 +123,19 @@ namespace LightBulb
 		void randomizeDependingOnLayerSize(AbstractRandomGenerator& randomGenerator) override;
 		void resetActivation() override;
 		void copyWeightsFrom(const AbstractNetworkTopology& otherNetwork) override;
-		void refreshNetInputsForLayer(int layerNr, const Vector* alternativeActivation = nullptr) override;
+		void refreshNetInputsForLayer(int layerNr, const Vector<>* alternativeActivation = nullptr) override;
 		void refreshActivationsForLayer(int layerNr) override;
 		double calculateEuclideanDistance(const AbstractNetworkTopology& otherNetwork) const override;
-		std::vector<Matrix>& getAllWeights() override;
-		const std::vector<Matrix>& getAllWeights() const override;
-		const std::vector<Vector>& getAllActivations() const override;
-		const std::vector<Vector>& getAllNetInputs() const override;
-		Matrix getAfferentWeightsPerLayer(int layerIndex) const override;
-		void setAfferentWeightsPerLayer(int layerIndex, const Matrix& newWeights) override;
-		Matrix getEfferentWeightsPerLayer(int layerIndex) const override;
-		Vector getNetInputsPerLayer(int layerIndex) const override;
-		Vector getActivationsPerLayer(int layerIndex) const override;
-		Vector getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const override;
+		std::vector<Matrix<>>& getAllWeights() override;
+		const std::vector<Matrix<>>& getAllWeights() const override;
+		const std::vector<Vector<>>& getAllActivations() const override;
+		const std::vector<Vector<>>& getAllNetInputs() const override;
+		Matrix<> getAfferentWeightsPerLayer(int layerIndex) const override;
+		void setAfferentWeightsPerLayer(int layerIndex, const Matrix<>& newWeights) override;
+		Matrix<> getEfferentWeightsPerLayer(int layerIndex) const override;
+		Vector<> getNetInputsPerLayer(int layerIndex) const override;
+		Vector<> getActivationsPerLayer(int layerIndex) const override;
+		Vector<> getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const override;
 		double getBiasWeightOfNeuron(int layerNr, int neuronNr) const override;
 		std::vector<double> getAfferentWeightsPerNeuron(int layerNr, int neuronIndex, bool withoutBiasWeight = false) const override;
 		double getWeight(int layerIndex, int neuronIndex, int edgeIndex) const override;

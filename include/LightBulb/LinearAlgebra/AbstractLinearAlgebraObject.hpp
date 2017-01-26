@@ -16,7 +16,7 @@ namespace LightBulb
 		CT_GPU
 	};
 
-	template<class EigenType, class ViennaCLType>
+	template<typename EigenType, typename ViennaCLType>
 	class AbstractLinearAlgebraObject
 	{
 		template <class Archive, class EigenT, class ViennaCLT>

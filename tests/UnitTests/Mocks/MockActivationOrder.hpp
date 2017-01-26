@@ -11,7 +11,7 @@ class MockActivationOrder : public LightBulb::AbstractActivationOrder
 {
 public:
 	MOCK_CONST_METHOD0(clone, AbstractCloneable* ());
-	MOCK_CONST_METHOD2(executeActivation, void (LightBulb::AbstractNetworkTopology&, const LightBulb::Vector*));
+	MOCK_CONST_METHOD2(executeActivation, void (LightBulb::AbstractNetworkTopology&, const LightBulb::Vector<>*));
 };
 
 #endif

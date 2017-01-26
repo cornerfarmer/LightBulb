@@ -55,7 +55,7 @@ namespace LightBulb
 		return new ResilientLearningRate(*this);
 	}
 
-	void ResilientLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients)
+	void ResilientLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients)
 	{
 		for (int i = 0; i < gradients.getEigenValue().rows(); i++)
 		{

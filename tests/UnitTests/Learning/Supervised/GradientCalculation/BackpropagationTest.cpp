@@ -19,43 +19,43 @@ using namespace LightBulb;
 class BackpropagationTest : public testing::Test {
 public:
 	MockNetworkTopology networkTopology;
-	std::vector<Matrix> weights;
-	std::vector<Matrix> weightsTransp;
-	std::vector<Vector> netInputs;
-	std::vector<Vector> activations;
-	Vector errorVector;
+	std::vector<Matrix<>> weights;
+	std::vector<Matrix<>> weightsTransp;
+	std::vector<Vector<>> netInputs;
+	std::vector<Vector<>> activations;
+	Vector<> errorVector;
 	MockNeuronDescription neuronDescription;
 	FermiFunction fermiFunction;
 
 	void SetUp() {
 		
 		weights.resize(2);
-		weights[0] = Matrix(3, 3);
+		weights[0] = Matrix<>(3, 3);
 		weights[0].getEigenValueForEditing() << 1, -2, 3,
 			-4, 5, -6,
 			7, -8, 9;
-		weights[1] = Matrix(1, 4);
+		weights[1] = Matrix<>(1, 4);
 		weights[1].getEigenValueForEditing() << -1, 2, -3, 4;
 
 		weightsTransp.resize(2);
-		weightsTransp[0] = Matrix(weights[0].getEigenValueForEditing().transpose());
-		weightsTransp[1] = Matrix(weights[1].getEigenValueForEditing().transpose());
+		weightsTransp[0] = Matrix<>(weights[0].getEigenValueForEditing().transpose());
+		weightsTransp[1] = Matrix<>(weights[1].getEigenValueForEditing().transpose());
 
 		activations.resize(3);
-		activations[0] = Vector(3);
+		activations[0] = Vector<>(3);
 		activations[0].getEigenValueForEditing() << 1, 0, 1;
-		activations[1] = Vector(4);
+		activations[1] = Vector<>(4);
 		activations[1].getEigenValueForEditing() << 0.982013762, 4.53978682e-05, 0.999999881, 1;
-		activations[2] = Vector(2);
+		activations[2] = Vector<>(2);
 		activations[2].getEigenValueForEditing() << 0.504519224, 1;
 
 		netInputs.resize(3);
-		netInputs[1] = Vector(3);
+		netInputs[1] = Vector<>(3);
 		netInputs[1].getEigenValueForEditing() << 4, -10, 16;
-		netInputs[2] = Vector(1);
+		netInputs[2] = Vector<>(1);
 		netInputs[2].getEigenValueForEditing() << 0.0180773735;
 
-		errorVector = Vector(1);
+		errorVector = Vector<>(1);
 		errorVector.getEigenValueForEditing() << 1 - 0.504519224;
 
 		EXPECT_CALL(testing::Const(networkTopology), getAllWeights()).WillRepeatedly(testing::ReturnRef(weights));
@@ -139,16 +139,16 @@ TEST_F(BackpropagationTest, calcGradient)
 
 	backpropagation.calcGradient(networkTopology, netInputs, activations, errorVector);
 
-	std::vector<Matrix> expectedGradient;
+	std::vector<Matrix<>> expectedGradient;
 	expectedGradient.resize(2);
-	expectedGradient[0] = Matrix(3, 3);
+	expectedGradient[0] = Matrix<>(3, 3);
 	expectedGradient[0].getEigenValueForEditing() << 0.0021979212760925293, 0, 0.0021979212760925293,
 		0, 0, 0,
 		0, 0, 0;
-	expectedGradient[1] = Matrix(1, 4);
+	expectedGradient[1] = Matrix<>(1, 4);
 	expectedGradient[1].getEigenValueForEditing() << -0.12166798114776611, 0, -0.12371689081192017, -0.12386590242385864;
 
-	std::vector<Matrix>& gradient = backpropagation.getGradient();
+	std::vector<Matrix<>>& gradient = backpropagation.getGradient();
 
 	ASSERT_TRUE((gradient[0].getEigenValueForEditing() - expectedGradient[0].getEigenValueForEditing()).norm() < 1e-3);
 	ASSERT_TRUE((gradient[1].getEigenValueForEditing() - expectedGradient[1].getEigenValueForEditing()).norm() < 1e-3);
@@ -167,16 +167,16 @@ TEST_F(BackpropagationTest, calcGradientGPU)
 
 	backpropagation.calcGradient(networkTopology, netInputs, activations, errorVector);
 
-	std::vector<Matrix> expectedGradient;
+	std::vector<Matrix<>> expectedGradient;
 	expectedGradient.resize(2);
-	expectedGradient[0] = Matrix(3, 3);
+	expectedGradient[0] = Matrix<>(3, 3);
 	expectedGradient[0].getEigenValueForEditing() << 0.0021979212760925293, 0, 0.0021979212760925293,
 		0, 0, 0,
 		0, 0, 0;
-	expectedGradient[1] = Matrix(1, 4);
+	expectedGradient[1] = Matrix<>(1, 4);
 	expectedGradient[1].getEigenValueForEditing() << -0.12166798114776611, 0, -0.12371689081192017, -0.12386590242385864;
 
-	std::vector<Matrix>& gradient = backpropagation.getGradient();
+	std::vector<Matrix<>>& gradient = backpropagation.getGradient();
 	gradient[0].getEigenValueForEditing();
 	gradient[1].getEigenValueForEditing();
 

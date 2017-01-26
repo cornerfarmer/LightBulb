@@ -40,7 +40,7 @@ namespace LightBulb
 		 * \brief This vector describes the mutation strength of every edge in the NN.
 		 * \details It is mostly used inside the mutation/recombination algorithms.
 		 */
-		Vector mutationStrength;
+		Vector<> mutationStrength;
 		/**
 		 * \brief Contains the evolution method which has been the origin of this individual.
 		 */
@@ -71,17 +71,17 @@ namespace LightBulb
 		 * \brief Returns the mutation strength.
 		 * \return The mutation strength.
 		 */
-		virtual Vector& getMutationStrength();
+		virtual Vector<>& getMutationStrength();
 		/**
 		* \brief Returns the mutation strength.
 		* \return The mutation strength.
 		*/
-		const Vector& getMutationStrength() const;
+		const Vector<>& getMutationStrength() const;
 		/**
 		 * \brief Sets the mutation strength.
 		 * \param newMutationStrength The new mutation strength to use.
 		 */
-		virtual void setMutationStrength(const Vector& newMutationStrength);
+		virtual void setMutationStrength(const Vector<>& newMutationStrength);
 		/**
 		 * \brief Executes one NN calculation. (Mostly: Get input -> let the NN calculate -> react depending on the NN output)
 		 */

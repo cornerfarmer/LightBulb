@@ -67,7 +67,7 @@ namespace LightBulb
 		double weightDecayError = 0;
 		if (weightDecayFac > 0)
 		{
-			std::vector<Matrix>& weights = neuralNetwork.getNetworkTopology().getAllWeights();
+			std::vector<Matrix<>>& weights = neuralNetwork.getNetworkTopology().getAllWeights();
 			for (auto weightsPerLayer = weights.begin(); weightsPerLayer != weights.end(); weightsPerLayer++)
 			{
 				weightDecayError += 0.5 * weightsPerLayer->getEigenValue().squaredNorm();

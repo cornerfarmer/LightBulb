@@ -65,6 +65,7 @@
     <ClInclude Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\IOStorage.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\LearningStateIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\EigenMatrixIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\NeuronDescriptionIO.hpp" />
@@ -72,12 +73,14 @@
     <ClInclude Include="..\include\LightBulb\IO\ResilientLearningRateIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\RMSPropLearningRateIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\ScalarIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\SimpleGradientDescentIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\StandardRandomGeneratorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\StorageLoggerIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\TeachedIndividualIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\UsedArchives.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\UseParentSerialization.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\VectorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\XorShfGeneratorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\ZigguratGeneratorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\AbstractLearningResult.hpp" />

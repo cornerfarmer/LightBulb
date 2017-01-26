@@ -8,7 +8,6 @@
 
 namespace LightBulb
 {
-	class Vector;
 
 	/**
 	 * \brief Activates neurons layer by layer. This class is only compatible with a layered network!
@@ -21,7 +20,7 @@ namespace LightBulb
 		 * \brief Activates all neurons in the given layered(!) topology in a topological order.
 		 * \param networkTopology The network to activate
 		 */
-		void executeActivation(AbstractNetworkTopology &networkTopology, const Vector* alternativeInput = nullptr) const override;
+		void executeActivation(AbstractNetworkTopology &networkTopology, const Vector<>* alternativeInput = nullptr) const override;
 		// Inherited:
 		AbstractCloneable* clone() const override;
 	};

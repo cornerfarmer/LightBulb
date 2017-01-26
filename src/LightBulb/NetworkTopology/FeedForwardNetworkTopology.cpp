@@ -120,11 +120,11 @@ namespace LightBulb
 		//rebuildActivationsPerLayer();
 		for (int l = 0; l < getLayerCount(); l++)
 		{
-			netInputs[l] = Vector(options->neuronsPerLayerCount[l]);
-			activations[l] = Vector(options->neuronsPerLayerCount[l] + options->useBiasNeuron);
+			netInputs[l] = Vector<>(options->neuronsPerLayerCount[l]);
+			activations[l] = Vector<>(options->neuronsPerLayerCount[l] + options->useBiasNeuron);
 			if (l > 0)
 			{
-				weights[l - 1] = Matrix(netInputs[l].getEigenValue().size(), activations[l - 1].getEigenValue().size());
+				weights[l - 1] = Matrix<>(netInputs[l].getEigenValue().size(), activations[l - 1].getEigenValue().size());
 			}
 			if (l == getLayerCount() - 1)
 				neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createOutputNeuronDescription());
@@ -160,29 +160,29 @@ namespace LightBulb
 		return netInputs[layerIndex].getEigenValue()(neuronIndex);
 	}
 
-	Vector FeedForwardNetworkTopology::getNetInputsPerLayer(int layerIndex) const
+	Vector<> FeedForwardNetworkTopology::getNetInputsPerLayer(int layerIndex) const
 	{
 		return netInputs[layerIndex];
 	}
 
-	Vector FeedForwardNetworkTopology::getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const
+	Vector<> FeedForwardNetworkTopology::getEfferentWeightsPerNeuron(int layerIndex, int neuronIndex) const
 	{
-		return Vector(weights[layerIndex].getEigenValue().row(neuronIndex));
+		return Vector<>(weights[layerIndex].getEigenValue().row(neuronIndex));
 	}
 
-	Vector FeedForwardNetworkTopology::getActivationsPerLayer(int layerIndex) const
+	Vector<> FeedForwardNetworkTopology::getActivationsPerLayer(int layerIndex) const
 	{
 		return activations[layerIndex];
 	}
 
-	Matrix FeedForwardNetworkTopology::getAfferentWeightsPerLayer(int layerIndex) const
+	Matrix<> FeedForwardNetworkTopology::getAfferentWeightsPerLayer(int layerIndex) const
 	{
 		return weights[layerIndex - 1];
 	}
 
-	Matrix FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
+	Matrix<> FeedForwardNetworkTopology::getEfferentWeightsPerLayer(int layerIndex) const
 	{
-		Matrix transWeights;
+		Matrix<> transWeights;
 		if (isCalculatorType(CT_GPU))
 		{
 			transWeights.getViennaclValueForEditing().resize(weights[layerIndex].getViennaclValue().size2(), weights[layerIndex].getViennaclValue().size1());
@@ -191,7 +191,7 @@ namespace LightBulb
 		}
 		else
 		{
-			return Matrix(weights[layerIndex].getEigenValue().transpose());
+			return Matrix<>(weights[layerIndex].getEigenValue().transpose());
 		}
 	}
 
@@ -334,7 +334,7 @@ namespace LightBulb
 		return clone;
 	}
 
-	void FeedForwardNetworkTopology::setAfferentWeightsPerLayer(int layerIndex, const Matrix& newWeights)
+	void FeedForwardNetworkTopology::setAfferentWeightsPerLayer(int layerIndex, const Matrix<>& newWeights)
 	{
 		weights[layerIndex - 1] = newWeights;
 	}
@@ -378,22 +378,22 @@ namespace LightBulb
 		return afferentWeights;
 	}
 
-	std::vector<Matrix>& FeedForwardNetworkTopology::getAllWeights()
+	std::vector<Matrix<>>& FeedForwardNetworkTopology::getAllWeights()
 	{
 		return weights;
 	}
 
-	const std::vector<Matrix>& FeedForwardNetworkTopology::getAllWeights() const
+	const std::vector<Matrix<>>& FeedForwardNetworkTopology::getAllWeights() const
 	{
 		return weights;
 	}
 
-	const std::vector<Vector>& FeedForwardNetworkTopology::getAllActivations() const
+	const std::vector<Vector<>>& FeedForwardNetworkTopology::getAllActivations() const
 	{
 		return activations;
 	}
 	
-	const std::vector<Vector>& FeedForwardNetworkTopology::getAllNetInputs() const
+	const std::vector<Vector<>>& FeedForwardNetworkTopology::getAllNetInputs() const
 	{
 		return netInputs;
 	}
@@ -527,7 +527,7 @@ namespace LightBulb
 	}
 
 
-	void FeedForwardNetworkTopology::refreshNetInputsForLayer(int layerNr, const Vector* alternativeActivation)
+	void FeedForwardNetworkTopology::refreshNetInputsForLayer(int layerNr, const Vector<>* alternativeActivation)
 	{
 		neuronDescriptionsPerLayer[layerNr]->getInputFunction().execute(layerNr, activations, netInputs, weights, alternativeActivation);
 	}

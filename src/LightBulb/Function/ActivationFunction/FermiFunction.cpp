@@ -47,7 +47,7 @@ namespace LightBulb
 		return true;
 	}
 
-	void FermiFunction::execute(int layerNr, std::vector<Vector>& activations, const std::vector<Vector>& netInputs) const
+	void FermiFunction::execute(int layerNr, std::vector<Vector<>>& activations, const std::vector<Vector<>>& netInputs) const
 	{
 		if (isCalculatorType(CT_GPU)) 
 		{
@@ -63,7 +63,7 @@ namespace LightBulb
 	}
 
 
-	void FermiFunction::executeDerivation(const Vector& input, Vector& derivation) const
+	void FermiFunction::executeDerivation(const Vector<>& input, Vector<>& derivation) const
 	{
 		if (isCalculatorType(CT_GPU))
 		{

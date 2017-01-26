@@ -17,8 +17,8 @@ namespace LightBulb
 
 	void RecombinationAlgorithm::execute(AbstractIndividual& individual1, AbstractIndividual& individual2)
 	{
-		std::vector<Matrix>& weights1 = static_cast<FeedForwardNetworkTopology&>(individual1.getNeuralNetwork().getNetworkTopology()).getAllWeights();
-		std::vector<Matrix>& weights2 = static_cast<FeedForwardNetworkTopology&>(individual2.getNeuralNetwork().getNetworkTopology()).getAllWeights();
+		std::vector<Matrix<>>& weights1 = static_cast<FeedForwardNetworkTopology&>(individual1.getNeuralNetwork().getNetworkTopology()).getAllWeights();
+		std::vector<Matrix<>>& weights2 = static_cast<FeedForwardNetworkTopology&>(individual2.getNeuralNetwork().getNetworkTopology()).getAllWeights();
 
 		if (isCalculatorType(CT_GPU))
 		{
@@ -61,8 +61,8 @@ namespace LightBulb
 			}
 
 
-			Vector& mutationStrength1 = individual1.getMutationStrength();
-			Vector& mutationStrength2 = individual2.getMutationStrength();
+			Vector<>& mutationStrength1 = individual1.getMutationStrength();
+			Vector<>& mutationStrength2 = individual2.getMutationStrength();
 			
 			for (int i = 0; i < mutationStrength2.getEigenValue().size() && i < mutationStrength1.getEigenValue().size(); i++)
 			{

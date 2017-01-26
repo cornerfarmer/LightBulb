@@ -5,7 +5,7 @@
 
 // Includes
 #include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
-#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
 
 // Libraray includes

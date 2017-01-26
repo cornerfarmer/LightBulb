@@ -7,7 +7,7 @@
 
 namespace LightBulb
 {
-	void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology, const Vector* alternativeInput) const
+	void TopologicalOrder::executeActivation(AbstractNetworkTopology &networkTopology, const Vector<>* alternativeInput) const
 	{
 		// Cast the network as an FeedForwardNetworkTopology
 		FeedForwardNetworkTopology* feedForwardNetworkTopology = dynamic_cast<FeedForwardNetworkTopology*>(&networkTopology);

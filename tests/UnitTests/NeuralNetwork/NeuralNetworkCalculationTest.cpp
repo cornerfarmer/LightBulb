@@ -17,8 +17,8 @@ using namespace LightBulb;
 class NeuralNetworkCalculationTest : public testing::Test {
 public:
 	NeuralNetwork* neuralNetwork;
-	std::vector<Vector> expectedAct;
-	std::vector<Vector> expectedNetInput;
+	std::vector<Vector<>> expectedAct;
+	std::vector<Vector<>> expectedNetInput;
 
 	void SetUp() {
 		FeedForwardNetworkTopologyOptions options;
@@ -39,17 +39,17 @@ public:
 		
 
 		expectedAct.resize(3);
-		expectedAct[0] = Vector(3);
+		expectedAct[0] = Vector<>(3);
 		expectedAct[0].getEigenValueForEditing() << 1, 0, 1;
-		expectedAct[1] = Vector(4);
+		expectedAct[1] = Vector<>(4);
 		expectedAct[1].getEigenValueForEditing() << 0.982013762, 4.53978682e-05, 0.999999881, 1;
-		expectedAct[2] = Vector(2);
+		expectedAct[2] = Vector<>(2);
 		expectedAct[2].getEigenValueForEditing() << 0.504519224, 1;
 
 		expectedNetInput.resize(3);
-		expectedNetInput[1] = Vector(3);
+		expectedNetInput[1] = Vector<>(3);
 		expectedNetInput[1].getEigenValueForEditing() << 4, -10, 16;
-		expectedNetInput[2] = Vector(1);
+		expectedNetInput[2] = Vector<>(1);
 		expectedNetInput[2].getEigenValueForEditing() << 0.0180773735;
 	}
 };

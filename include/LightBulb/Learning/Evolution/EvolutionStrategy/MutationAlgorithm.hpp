@@ -36,7 +36,7 @@ namespace LightBulb
 		 * \brief The absolute maximum of a mutationStrength value.
 		 */
 		float mutationStrengthMax;
-		Vector randNumbers;
+		Vector<> randNumbers;
 		void mutateMutationStrength(viennacl::vector_base<float>& mutationStrength) const;
 		void mutateWeights(viennacl::matrix_base<float>& W, const viennacl::vector_base<float>& mutationStrength, unsigned mutationStrengthOffset, unsigned randNumbersOffset) const;
 	public:

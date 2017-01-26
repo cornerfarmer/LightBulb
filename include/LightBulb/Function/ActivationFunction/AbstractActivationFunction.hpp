@@ -7,6 +7,7 @@
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 // Library includes
 #include <vector>
@@ -16,7 +17,6 @@ namespace LightBulb
 {
 	// Forward declaration
 	class AbstractThreshold;
-	class Vector;
 
 	/**
 	 * \brief This abstract class describes a function, which can calculate the activation of a neuron from its input
@@ -32,7 +32,7 @@ namespace LightBulb
 		 * \param activations A layerwise list of all activations which will contain the calculated activations
 		 * \param netInputs A layerwise list of all inputs which will be used for the computation
 		 */
-		virtual void execute(int layerNr, std::vector<Vector> &activations, const std::vector<Vector> &netInputs) const;
+		virtual void execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const;
 		/**
 		 * \brief Calculates the activation for one neuron
 		 * \param input The input of the neuron
@@ -50,7 +50,7 @@ namespace LightBulb
 		 * \param input One layer of input values
 		 * \return The calculated activation derivations for the whole layer
 		 */
-		virtual void executeDerivation(const Vector& input, Vector& derivation) const;
+		virtual void executeDerivation(const Vector<>& input, Vector<>& derivation) const;
 		/**
 		 * \brief Returns the maximum possible output/activation value of this function
 		 * \return The maximum

@@ -83,7 +83,7 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology& networkTopology)
 	{
-		Vector errorVector;
+		Vector<> errorVector;
 		getErrorVector(networkTopology, errorVector);
 		
 		auto patternVector = networkTopology.getActivationsPerLayer(0);
@@ -98,7 +98,7 @@ namespace LightBulb
 		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[stepsSinceLastReward]);
 	}
 
-	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Vector& errorVector)
+	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Vector<>& errorVector)
 	{
 		networkTopology.getOutput(lastOutput);
 
@@ -239,7 +239,7 @@ namespace LightBulb
 				std::vector<double> output(1);
 				valueFunctionNetwork->calculate(stateRecord[i], output, TopologicalOrder());
 
-				Vector errorVector(1);
+				Vector<> errorVector(1);
 				errorVector.getEigenValueForEditing()(0) = rewards(i) - output[0];
 				valueFunctionGradientCalculation->calcGradient(valueFunctionNetwork->getNetworkTopology(), errorVector);
 				valueErrorSum += abs(errorVector.getEigenValue()(0));

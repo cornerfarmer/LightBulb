@@ -78,7 +78,7 @@ namespace LightBulb
 		/**
 		 * \brief Remembers the previous learning rates.
 		 */
-		std::vector<Matrix> previousLearningRates;
+		std::vector<Matrix<>> previousLearningRates;
 		/**
 		 * \brief Returns our current options in form of a ResilientLearningRateOptions object.
 		 * \return The ResilientLearningRateOptions object.
@@ -99,7 +99,7 @@ namespace LightBulb
 		ResilientLearningRate& operator=(ResilientLearningRate other);
 		friend void swap(ResilientLearningRate& lhs, ResilientLearningRate& rhs) noexcept;
 		// Inherited:
-		void adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix& weights, int layerIndex, const Matrix& gradients) override;
+		void adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients) override;
 		bool learningHasStopped() override;
 		void initializeAlgorithm(const AbstractNetworkTopology& networkTopology) override;
 		AbstractCloneable* clone() const override;

@@ -6,9 +6,9 @@ using namespace LightBulb;
 
 TEST(Matrix, basicCompute)
 {
-	Matrix A(1024, 1024);
-	Matrix B(1024, 1024);
-	Matrix C(1024, 1024);
+	Matrix<> A(1024, 1024);
+	Matrix<> B(1024, 1024);
+	Matrix<> C(1024, 1024);
 
 	for (int r = 0; r < A.getEigenValue().rows(); r++)
 	{

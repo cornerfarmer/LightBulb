@@ -5,7 +5,7 @@
 
 // Includes
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraObject.hpp"
-#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/EigenMatrixIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

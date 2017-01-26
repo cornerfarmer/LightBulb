@@ -6,6 +6,8 @@
 // Includes
 #include "LightBulb/Lib/ziggurat.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 namespace LightBulb
 {
@@ -16,10 +18,10 @@ namespace LightBulb
 		template <class Archive>
 		friend void save(Archive& archive, ZigguratGenerator const& zigguratGenerator);
 	private:
-		float fn[128];
-		uint32_t kn[128];
-		float wn[129];
-		uint32_t state;
+		Vector<> fn;
+		Vector<cl_uint> kn;
+		Vector<> wn;
+		Scalar<cl_uint> state;
 	protected:
 		void reset() override;
 	public:

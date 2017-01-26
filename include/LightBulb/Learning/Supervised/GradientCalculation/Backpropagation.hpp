@@ -29,13 +29,13 @@ namespace LightBulb
 		/**
 		 * \brief This vector should keep all delta values
 		 */
-		std::vector<Vector> lastDeltaVectorOutputLayer;
-		std::vector<Vector> activationFunctionDerivations;
+		std::vector<Vector<>> lastDeltaVectorOutputLayer;
+		std::vector<Vector<>> activationFunctionDerivations;
 		/**
 		 * \brief Can be used to overcome long plateaus.
 		 */
 		double flatSpotEliminationFac;
-		Vector nextLayerErrorValueFactor;
+		Vector<> nextLayerErrorValueFactor;
 		void backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G);
 		void backpropagateInnerLayer_1(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& lastDeltaVec, const viennacl::matrix_base<float>& W);
 		void backpropagateInnerLayer_2(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, viennacl::vector_base<float>& deltaVec);
@@ -47,7 +47,7 @@ namespace LightBulb
 		 */
 		Backpropagation(double flatSpotEliminationFac_ = 0);
 		// Inherited:
-		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector>& netInputs, const std::vector<Vector>& activations, const Vector& errorVector, const Vector* alternativeActivation = nullptr) override;
+		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector<>>& netInputs, const std::vector<Vector<>>& activations, const Vector<>& errorVector, const Vector<>* alternativeActivation = nullptr) override;
 		AbstractCloneable* clone() const override;
 		void initGradient(const AbstractNetworkTopology& networkTopology) override;
 	};

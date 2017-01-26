@@ -8,14 +8,15 @@
 
 // Includes
 #include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class JSONObject;
-	class Matrix;
 	class JSONAttribute;
 	class FeedForwardNetworkTopology;
+
 	/**
 	 * \brief Exports a neural network for using in Synaptic.
 	 */
@@ -23,7 +24,7 @@ namespace LightBulb
 	{
 	private:
 		FeedForwardNetworkTopology* networkTopology;
-		const Matrix* weights;
+		const Matrix<>* weights;
 		JSONObject* getNetworkJSONObject();
 		JSONAttribute* getNeuronsAttribute();
 		JSONObject* getNeuronJSONObject(int layer, int neuron);

@@ -10,7 +10,7 @@
 #include <cereal/types/vector.hpp>
 
 // Includes
-#include "LightBulb/IO/MatrixIO.hpp"
+#include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
