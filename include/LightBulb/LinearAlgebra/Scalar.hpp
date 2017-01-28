@@ -18,18 +18,18 @@ namespace LightBulb
 	protected:
 		void copyToEigen() const override
 		{
-			eigenValue = viennaclValue;
+			this->eigenValue = this->viennaclValue;
 		}
 
 		void copyToViennaCl() const override
 		{
-			viennaclValue = eigenValue;
+			this->viennaclValue = this->eigenValue;
 		}
 	public:
 		Scalar()
 		{
-			eigenValue = 0;
-			viennaclValue = 0;
+			this->eigenValue = 0;
+			this->viennaclValue = 0;
 		}
 
 	};

@@ -20,34 +20,34 @@ namespace LightBulb
 	protected:
 		void copyToEigen() const override
 		{
-			if (eigenValue.size() != viennaclValue.size())
-				eigenValue.resize(viennaclValue.size());
+			if (this->eigenValue.size() != this->viennaclValue.size())
+				this->eigenValue.resize(this->viennaclValue.size());
 
-			viennacl::copy(viennaclValue, eigenValue);
+			viennacl::copy(this->viennaclValue, this->eigenValue);
 		}
 
 		void copyToViennaCl() const override
 		{
-			if (eigenValue.size() != viennaclValue.size())
-				viennaclValue.resize(eigenValue.size());
+			if (this->eigenValue.size() != this->viennaclValue.size())
+				this->viennaclValue.resize(this->eigenValue.size());
 
-			if (eigenValue.size() != 0)
-				viennacl::copy(eigenValue, viennaclValue);
+			if (this->eigenValue.size() != 0)
+				viennacl::copy(this->eigenValue, this->viennaclValue);
 		}
 
 	public:
 		Vector(int rows = 0)
 		{
 			if (rows > 0) {
-				eigenValue = Eigen::Matrix<DataType, -1, 1>(rows);
-				eigenValueIsDirty = true;
+				this->eigenValue = Eigen::Matrix<DataType, -1, 1>(rows);
+				this->eigenValueIsDirty = true;
 			}
 		}
 
 		Vector(const Eigen::Matrix<DataType, -1, 1>& eigenVector)
 		{
-			eigenValue = eigenVector;
-			eigenValueIsDirty = true;
+			this->eigenValue = eigenVector;
+			this->eigenValueIsDirty = true;
 		}
 	};
 }
