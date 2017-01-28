@@ -28,18 +28,14 @@ namespace LightBulb
 			for (auto layer = weights.begin(); layer != weights.end(); layer++)
 				randNumberCount += layer->getViennaclValue().size1() * layer->getViennaclValue().size2();
 
-			if (randNumbers.getViennaclValue().size() < randNumberCount)
-				randNumbers.getViennaclValueForEditing().resize(randNumberCount);
+			const Vector<>& randNumbers = zigguratGenerator->randMultipleDouble(randNumberCount);
 
-			for (int i = 0; i < randNumberCount; i++)
-				randNumbers.getEigenValueForEditing()(i) = zigguratGenerator->randDouble();
-
-			mutateMutationStrength(mutationStrength.getViennaclValueForEditing());
+			mutateMutationStrength(mutationStrength.getViennaclValueForEditing(), randNumbers.getViennaclValue());
 
 			unsigned int mutationStrengthIndex = 0;
 			// Go through all edges
 			for (auto layer = weights.begin(); layer != weights.end(); layer++) {
-				mutateWeights(layer->getViennaclValueForEditing(), mutationStrength.getViennaclValue(), mutationStrengthIndex, mutationStrength.getViennaclValue().size() + mutationStrengthIndex);
+				mutateWeights(layer->getViennaclValueForEditing(), mutationStrength.getViennaclValue(), mutationStrengthIndex, mutationStrength.getViennaclValue().size() + mutationStrengthIndex, randNumbers.getViennaclValue());
 				mutationStrengthIndex += layer->getViennaclValue().size1() * layer->getViennaclValue().size2();
 			}
 		}
@@ -73,7 +69,7 @@ namespace LightBulb
 		}
 	}
 
-	void MutationAlgorithm::mutateMutationStrength(viennacl::vector_base<float>& mutationStrength) const
+	void MutationAlgorithm::mutateMutationStrength(viennacl::vector_base<float>& mutationStrength, const viennacl::vector_base<float>& randNumbers) const
 	{
 		static viennacl::ocl::kernel& kernel = getKernel("mutation_algorithm", "mutateMutationStrength", "mutation_algorithm.cl");
 
@@ -87,11 +83,11 @@ namespace LightBulb
 			cl_float(mutationStrengthMax),
 			cl_float(mutationStrengthMin),
 
-			viennacl::traits::opencl_handle(randNumbers.getViennaclValue())
+			viennacl::traits::opencl_handle(randNumbers)
 		));
 	}
 
-	void MutationAlgorithm::mutateWeights(viennacl::matrix_base<float>& W, const viennacl::vector_base<float>& mutationStrength, unsigned int mutationStrengthOffset, unsigned int randNumbersOffset) const
+	void MutationAlgorithm::mutateWeights(viennacl::matrix_base<float>& W, const viennacl::vector_base<float>& mutationStrength, unsigned int mutationStrengthOffset, unsigned int randNumbersOffset, const viennacl::vector_base<float>& randNumbers) const
 	{
 		static viennacl::ocl::kernel& kernel = getKernel("mutation_algorithm", "mutateWeights", "mutation_algorithm.cl");
 
@@ -109,7 +105,7 @@ namespace LightBulb
 				
 			cl_uint(mutationStrengthOffset),
 
-			viennacl::traits::opencl_handle(randNumbers.getViennaclValue()),
+			viennacl::traits::opencl_handle(randNumbers),
 			cl_uint(randNumbersOffset)
 		));
 	}
