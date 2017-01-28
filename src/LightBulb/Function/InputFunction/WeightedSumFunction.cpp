@@ -19,10 +19,10 @@ namespace LightBulb
 				cl_uint(viennacl::traits::stride(activationToUse->getViennaclValue())),
 				cl_uint(viennacl::traits::size(activationToUse->getViennaclValue())),
 
-				viennacl::traits::opencl_handle(netInputs[layerNr].getViennaclValue()),
-				cl_uint(viennacl::traits::start(netInputs[layerNr].getViennaclValue())),
-				cl_uint(viennacl::traits::stride(netInputs[layerNr].getViennaclValue())),
-				cl_uint(viennacl::traits::size(netInputs[layerNr].getViennaclValue())),
+				viennacl::traits::opencl_handle(netInputs[layerNr].getViennaclValueForEditing()),
+				cl_uint(viennacl::traits::start(netInputs[layerNr].getViennaclValueForEditing())),
+				cl_uint(viennacl::traits::stride(netInputs[layerNr].getViennaclValueForEditing())),
+				cl_uint(viennacl::traits::size(netInputs[layerNr].getViennaclValueForEditing())),
 
 				viennacl::traits::opencl_handle(weights[layerNr - 1].getViennaclValue()),
 				cl_uint(viennacl::traits::start1(weights[layerNr - 1].getViennaclValue())), cl_uint(viennacl::traits::start2(weights[layerNr - 1].getViennaclValue())),
