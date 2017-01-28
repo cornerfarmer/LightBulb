@@ -16,8 +16,8 @@ class PongAI : public LightBulb::AbstractDefaultIndividual
 {
 protected:
 	Pong* currentGame;
-	void getNNInput(std::vector<double>& input) override;
-	void interpretNNOutput(std::vector<double>& output) override;
+	void getNNInput(LightBulb::Vector<>& input) override;
+	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:
 	PongAI(LightBulb::FeedForwardNetworkTopologyOptions& options, Pong& pong_);
 	PongAI() = default;

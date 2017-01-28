@@ -38,7 +38,6 @@ namespace LightBulb
 	{
 		archive(cereal::base_class<AbstractIndividual>(&individual));
 		archive(cereal::make_nvp("neuralNetwork", individual.neuralNetwork));
-		individual.buildOutputBuffer();
 		individual.environment = IOStorage<AbstractEvolutionEnvironment>::get();
 	}
 }

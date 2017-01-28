@@ -20,8 +20,8 @@ class Network : public LightBulb::AbstractDefaultIndividual
 	friend void load(Archive& archive, Network& individual);
 protected:
 	std::vector<std::vector<float>> positions;
-	void getNNInput(std::vector<double>& input) override;
-	void interpretNNOutput(std::vector<double>& output) override;
+	void getNNInput(LightBulb::Vector<>& input) override;
+	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:	
 	Network(NetworkSimulator& networkSimulator_);
 	Network() = default;

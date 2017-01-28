@@ -13,18 +13,18 @@ TicTacToeAI::TicTacToeAI(FeedForwardNetworkTopologyOptions& options, TicTacToe& 
 }
 
 
-void TicTacToeAI::getNNInput(std::vector<double>& input)
+void TicTacToeAI::getNNInput(LightBulb::Vector<>& input)
 {
 	currentGame->getSight(input);
 }
 
-void TicTacToeAI::interpretNNOutput(std::vector<double>& output)
+void TicTacToeAI::interpretNNOutput(const LightBulb::Vector<>& output)
 {
 	for (int i = 0; i < 9; i++)
 	{
 		int x = i / 3;
 		int y = i % 3;
-		if (output[i] > 0.5)
+		if (output.getEigenValue()[i] > 0.5)
 		{
 			currentGame->setField(x, y);
 			return;

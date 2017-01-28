@@ -24,17 +24,17 @@ Position::Position(FunctionSimulator& functionSimulator_)
 	buildNeuralNetwork(options);
 }
 
-void Position::getNNInput(std::vector<double>& input)
+void Position::getNNInput(LightBulb::Vector<>& input)
 {
-	input.resize(1);
-	input[0] = 1;
+	input.getEigenValueForEditing().resize(1);
+	input.getEigenValueForEditing()[0] = 1;
 }
 
-void Position::interpretNNOutput(std::vector<double>& output)
+void Position::interpretNNOutput(const LightBulb::Vector<>& output)
 {
 	for (int i = 0; i < 2; i++)
 	{	
-		position[i] = output[i];
+		position[i] = output.getEigenValue()[i];
 	}
 }
 

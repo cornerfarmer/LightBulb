@@ -20,8 +20,8 @@ class Position : public LightBulb::AbstractDefaultIndividual
 protected:
 	FunctionSimulator* functionSimulator;
 	std::vector<float> position;
-	void getNNInput(std::vector<double>& input) override;
-	void interpretNNOutput(std::vector<double>& output) override;
+	void getNNInput(LightBulb::Vector<>& input) override;
+	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:	
 	Position(FunctionSimulator& functionSimulator_);
 	Position() = default;

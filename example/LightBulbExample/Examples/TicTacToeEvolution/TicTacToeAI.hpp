@@ -16,8 +16,8 @@ class TicTacToeAI : public LightBulb::AbstractDefaultIndividual
 {
 protected:
 	TicTacToe* currentGame;
-	void getNNInput(std::vector<double>& input) override;
-	void interpretNNOutput(std::vector<double>& output) override;
+	void getNNInput(LightBulb::Vector<>& input) override;
+	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:
 	TicTacToeAI(LightBulb::FeedForwardNetworkTopologyOptions& options, TicTacToe& ticTacToe_);
 	TicTacToeAI() = default;

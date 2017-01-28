@@ -20,12 +20,6 @@ namespace LightBulb
 		// Initialize the mutation strength vector
 		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());
 		randomizeMutationStrength();
-		buildOutputBuffer();
-	}
-
-	void AbstractDefaultIndividual::buildOutputBuffer()
-	{
-		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
 	}
 
 	AbstractDefaultIndividual::AbstractDefaultIndividual(AbstractEvolutionEnvironment& environment_)
@@ -45,10 +39,10 @@ namespace LightBulb
 
 		TopologicalOrder topologicalOrder;
 		// Calculate the output from the the input
-		neuralNetwork->calculate(lastInput, lastOutput, topologicalOrder, false);
+		const Vector<>& output = neuralNetwork->calculateWithoutOutputCopy(lastInput, topologicalOrder, false);
 
 		// Interpret the output
-		interpretNNOutput(lastOutput);
+		interpretNNOutput(output);
 	}
 
 

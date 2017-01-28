@@ -33,17 +33,9 @@ namespace LightBulb
 		friend void load(Archive& archive, AbstractDefaultIndividual& individual);
 	private:
 		/**
-		 * \brief Stores the last ouput of the neural network.
-		 */
-		std::vector<double> lastOutput;
-		/**
 		* \brief Stores the last input of the neural network.
 		*/
-		std::vector<double> lastInput;
-		/**
-		 * \brief Constructs the lastOutput vector depending on the network sizes.
-		 */
-		void buildOutputBuffer();
+		Vector<> lastInput;
 	protected:
 		/**
 		 * \brief The NN of the individual
@@ -57,12 +49,12 @@ namespace LightBulb
 		 * \brief Returns the input for the neural network.
 		 * \param input A vector where the input should be stored in.
 		 */
-		virtual void getNNInput(std::vector<double>& input) = 0;
+		virtual void getNNInput(Vector<>& input) = 0;
 		/**
 		 * \brief Interprets and acts depending on the given NN output
 		 * \param output The output of the network.
 		 */
-		virtual void interpretNNOutput(std::vector<double>& output) = 0;
+		virtual void interpretNNOutput(const Vector<>& output) = 0;
 		/**
 		 * \brief Builds the neural network from the given options.
 		 * \param options The topology options.

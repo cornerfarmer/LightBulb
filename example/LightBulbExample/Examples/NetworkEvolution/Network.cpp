@@ -23,19 +23,19 @@ Network::Network(NetworkSimulator& networkSimulator_)
 	buildNeuralNetwork(options);
 }
 
-void Network::getNNInput(std::vector<double>& input)
+void Network::getNNInput(LightBulb::Vector<>& input)
 {
-	input.resize(1);
-	input[0] = 1;
+	input.getEigenValueForEditing().resize(1);
+	input.getEigenValueForEditing()[0] = 1;
 }
 
-void Network::interpretNNOutput(std::vector<double>& output)
+void Network::interpretNNOutput(const LightBulb::Vector<>& output)
 {
 	for (int p = 0; p < 4; p++)
 	{	
 		for (int i = 0; i < 2; i++)
 		{
-			positions[p][i] = output[p * 2 + i];
+			positions[p][i] = output.getEigenValue()[p * 2 + i];
 		}
 	}
 }

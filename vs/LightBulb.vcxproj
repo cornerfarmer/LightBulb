@@ -388,7 +388,7 @@
       <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include;..\extlibs\viennacl</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformation>false</BrowseInformation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -400,7 +400,7 @@
       <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\armadillo-5.100.1\lib\release32bit;C:\Program Files %28x86%29\Microsoft Visual Studio 10.0\VC\SFML-2.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
-      <PreserveSBR>true</PreserveSBR>
+      <PreserveSBR>false</PreserveSBR>
     </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

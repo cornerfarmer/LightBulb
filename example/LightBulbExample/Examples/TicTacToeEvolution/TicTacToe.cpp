@@ -310,9 +310,9 @@ void TicTacToe::resetEnvironment()
 }
 
 
- void TicTacToe::getSight(std::vector<double>& sight)
+ void TicTacToe::getSight(LightBulb::Vector<>& sight)
 {
-	sight.resize(18);
+	sight.getEigenValueForEditing().resize(18);
 	int sightIndex = 0;
 	for (auto column = fields.begin(); column != fields.end(); column++)
 	{
@@ -320,13 +320,13 @@ void TicTacToe::resetEnvironment()
 		{
 			int fieldValue = currentPlayer * *field;
 			if (fieldValue == 1)
-				sight[sightIndex++] = 1;
+				sight.getEigenValueForEditing()[sightIndex++] = 1;
 			else
-				sight[sightIndex++] = 0;
+				sight.getEigenValueForEditing()[sightIndex++] = 0;
 			if (fieldValue == -1)
-				sight[sightIndex++] = 1;
+				sight.getEigenValueForEditing()[sightIndex++] = 1;
 			else
-				sight[sightIndex++] = 0;
+				sight.getEigenValueForEditing()[sightIndex++] = 0;
 		}
 	}
 }

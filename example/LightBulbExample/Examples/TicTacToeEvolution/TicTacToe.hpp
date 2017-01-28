@@ -48,7 +48,7 @@ protected:
 public:
 	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_ = nullptr, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_ = nullptr);
 	TicTacToe();
-	void getSight(std::vector<double>& sight);
+	void getSight(LightBulb::Vector<>& sight);
 	void setField(int x, int y);
 	bool isFree(int x, int y);
 	int getFieldValue(int x, int y);

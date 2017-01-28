@@ -34,7 +34,7 @@ protected:
 public:
 	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_ = nullptr, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_ = nullptr);
 	Pong() = default;
-	void getNNInput(std::vector<double>& sight);
+	void getNNInput(LightBulb::Vector<>& sight);
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator& randomGenerator_) override;
 	void executeCompareAI();
 	int rateIndividual(LightBulb::AbstractIndividual& individual) override;

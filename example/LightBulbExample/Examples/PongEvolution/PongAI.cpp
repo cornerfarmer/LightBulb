@@ -12,16 +12,16 @@ PongAI::PongAI(FeedForwardNetworkTopologyOptions& options, Pong& pong_)
 }
 
 
-void PongAI::getNNInput(std::vector<double>& input)
+void PongAI::getNNInput(LightBulb::Vector<>& input)
 {
 	currentGame->getNNInput(input);
 }
 
-void PongAI::interpretNNOutput(std::vector<double>& output)
+void PongAI::interpretNNOutput(const LightBulb::Vector<>& output)
 {
-	if (output[0] > 0.5)
+	if (output.getEigenValue()[0] > 0.5)
 		currentGame->getGame().movePaddle(1);
-	else if (output[1] > 0.5)
+	else if (output.getEigenValue()[1] > 0.5)
 		currentGame->getGame().movePaddle(-1);
 }
 

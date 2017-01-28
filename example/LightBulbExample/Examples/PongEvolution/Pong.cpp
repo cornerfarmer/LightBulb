@@ -137,24 +137,24 @@ void Pong::resetEnvironment()
 	game.reset();
 }
 
-void Pong::getNNInput(std::vector<double>& input)
+void Pong::getNNInput(LightBulb::Vector<>& input)
 {
-	input.resize(6);
-	input[0] = game.getState().ballPosX / game.getProperties().width;
+	input.getEigenValueForEditing().resize(6);
+	input.getEigenValueForEditing()[0] = game.getState().ballPosX / game.getProperties().width;
 	if (game.getPlayer() == -1)
-		input[0] = 1 - input[0];
-	input[1] = game.getState().ballPosY / game.getProperties().height;
-	input[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
-	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
+		input.getEigenValueForEditing()[0] = 1 - input.getEigenValue()[0];
+	input.getEigenValueForEditing()[1] = game.getState().ballPosY / game.getProperties().height;
+	input.getEigenValueForEditing()[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
+	input.getEigenValueForEditing()[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
 	if (game.getPlayer() == 1)
 	{
-		input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
-		input[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
 	}
 	else
 	{
-		input[5] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
-		input[4] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[5] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[4] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
 	}
 }
 
