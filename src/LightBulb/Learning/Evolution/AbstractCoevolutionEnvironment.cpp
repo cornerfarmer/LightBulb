@@ -41,9 +41,9 @@ namespace LightBulb
 			learningState->addData(DATASET_COMP, comparisons / 1000000.0);
 	}
 
-	double AbstractCoevolutionEnvironment::getFitness(const AbstractIndividual& individual) const
+	void AbstractCoevolutionEnvironment::getFitness(const AbstractIndividual& individual, Scalar<>& fitness) const
 	{
-		return (*fitnessValues)[&individual];
+		fitness.getEigenValueForEditing() = (*fitnessValues)[&individual];
 	}
 
 	int AbstractCoevolutionEnvironment::compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)

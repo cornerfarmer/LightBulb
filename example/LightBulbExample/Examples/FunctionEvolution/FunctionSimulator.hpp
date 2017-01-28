@@ -10,6 +10,7 @@
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 // Forward declarations
 class AbstractTile;
@@ -23,7 +24,7 @@ struct FunctionSimulatorOptions
 	}
 };
 
-typedef double(*Function)(std::vector<float> pos);
+typedef void(*Function)(const LightBulb::Vector<>& pos, LightBulb::Scalar<>& value, const LightBulb::CalculatorType& calculatorType);
 
 class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 {
@@ -36,7 +37,7 @@ public:
 	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
 	FunctionSimulator() = default;
 	void doSimulationStep() override;
-	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
+	void getFitness(const LightBulb::AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const override;
 };
 
 USE_EXISTING_PARENT_SERIALIZATION_WITHOUT_NAMESPACE(FunctionSimulator, LightBulb::AbstractSimpleEvolutionEnvironment, LightBulb::AbstractEvolutionEnvironment)

@@ -55,9 +55,9 @@ void FunctionSimulator::doSimulationStep()
 	}*/
 }
 
-double FunctionSimulator::getFitness(const AbstractIndividual& individual) const
+void FunctionSimulator::getFitness(const AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const
 {
-	std::vector<float> pos = static_cast<const Position&>(individual).getPosition();
-	return function(pos);
+	const LightBulb::Vector<>& pos = static_cast<const Position&>(individual).getPosition();
+	function(pos, fitness, calculatorType);
 }
 

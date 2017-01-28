@@ -109,7 +109,7 @@ namespace LightBulb
 		virtual int getRoundCount() const;
 		// Inherited:
 		void doSimulationStep() override;
-		double getFitness(const AbstractIndividual& individual) const override;
+		void getFitness(const AbstractIndividual& individual, Scalar<>& fitness) const override;
 		void setLogger(AbstractLogger& logger_) override;
 		std::vector<std::string> getDataSetLabels() const override;
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;

@@ -45,7 +45,7 @@ void NetworkSimulator::doSimulationStep()
 	}*/
 }
 
-double NetworkSimulator::getFitness(const AbstractIndividual& individual) const
+void NetworkSimulator::getFitness(const AbstractIndividual& individual, Scalar<>& fitness) const
 {
 	std::vector<std::vector<float>> pos = static_cast<const Network&>(individual).getPositions();
 
@@ -58,7 +58,7 @@ double NetworkSimulator::getFitness(const AbstractIndividual& individual) const
 			length += distanceBetweenPositions(pos[p], pos[p + 1]);
 	}
 
-	return -length;
+	fitness.getEigenValueForEditing() = -length;
 }
 
 double NetworkSimulator::distanceBetweenPositions(const std::vector<float>& pos1, const std::vector<float>& pos2) const

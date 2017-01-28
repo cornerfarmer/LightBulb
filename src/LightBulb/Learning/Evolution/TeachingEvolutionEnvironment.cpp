@@ -42,10 +42,10 @@ namespace LightBulb
 		return labels;
 	}
 
-	double TeachingEvolutionEnvironment::getFitness(const AbstractIndividual& individual) const
+	void TeachingEvolutionEnvironment::getFitness(const AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const
 	{
 		// Just return the total error of the individual (negate it, so the error 0 is the maximum)
-		return -static_cast<const TeachedIndividual&>(individual).getCurrentTotalError();
+		fitness.getEigenValueForEditing() = -static_cast<const TeachedIndividual&>(individual).getCurrentTotalError();
 	}
 
 

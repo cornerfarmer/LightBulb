@@ -19,14 +19,14 @@ class Position : public LightBulb::AbstractDefaultIndividual
 	friend void load(Archive& archive, Position& individual);
 protected:
 	FunctionSimulator* functionSimulator;
-	std::vector<float> position;
+	LightBulb::Vector<> position;
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:	
 	Position(FunctionSimulator& functionSimulator_);
 	Position() = default;
 	~Position();
-	std::vector<float> getPosition() const;
+	const LightBulb::Vector<>& getPosition() const;
 };
 
 #include "IO/PositionIO.hpp"

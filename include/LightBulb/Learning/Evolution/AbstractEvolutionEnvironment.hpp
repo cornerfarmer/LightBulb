@@ -13,6 +13,7 @@
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 namespace LightBulb
 {
@@ -79,9 +80,9 @@ namespace LightBulb
 		/**
 		 * \brief Returns the fitness of the given individual.
 		 * \param individual The individual to evaluate.
-		 * \return The fitness of the individual.
+		 * \param fitness The fitness of the individual.
 		 */
-		virtual double getFitness(const AbstractIndividual& individual) const = 0;
+		virtual void getFitness(const AbstractIndividual& individual, Scalar<>& fitness) const = 0;
 		/**
 		 * \brief Initializes the environment before the learning starts.
 		 */

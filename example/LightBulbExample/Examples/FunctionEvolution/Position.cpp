@@ -14,7 +14,6 @@ Position::Position(FunctionSimulator& functionSimulator_)
 	: AbstractDefaultIndividual(functionSimulator_)
 {
 	functionSimulator = &functionSimulator_;
-	position.resize(2);
 
 	FeedForwardNetworkTopologyOptions options;
 	options.useBiasNeuron = false;
@@ -26,19 +25,18 @@ Position::Position(FunctionSimulator& functionSimulator_)
 
 void Position::getNNInput(LightBulb::Vector<>& input)
 {
-	input.getEigenValueForEditing().resize(1);
-	input.getEigenValueForEditing()[0] = 1;
+	if (input.getEigenValue().size() != 1) {
+		input.getEigenValueForEditing().resize(1);
+		input.getEigenValueForEditing()[0] = 1;
+	}
 }
 
 void Position::interpretNNOutput(const LightBulb::Vector<>& output)
 {
-	for (int i = 0; i < 2; i++)
-	{	
-		position[i] = output.getEigenValue()[i];
-	}
+	position = output;
 }
 
-std::vector<float> Position::getPosition() const
+const LightBulb::Vector<>& Position::getPosition() const
 {
 	return position;
 }

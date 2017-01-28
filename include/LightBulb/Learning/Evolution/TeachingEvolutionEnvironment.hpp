@@ -54,7 +54,7 @@ namespace LightBulb
 		// Inherited:
 		void doSimulationStep() override;
 		std::vector<std::string> getDataSetLabels() const override;
-		double getFitness(const AbstractIndividual& individual) const override;
+		void getFitness(const AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const override;
 	};
 }
 

@@ -29,7 +29,7 @@ public:
 	NetworkSimulator(std::vector<std::vector<float>> consumers_);
 	NetworkSimulator() = default;
 	void doSimulationStep() override;
-	double getFitness(const LightBulb::AbstractIndividual& individual) const override;
+	void getFitness(const LightBulb::AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const override;
 	std::vector<std::vector<float>>& getConsumers();
 };
 
