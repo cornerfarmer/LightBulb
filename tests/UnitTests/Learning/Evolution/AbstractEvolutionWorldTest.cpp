@@ -26,10 +26,10 @@ TEST_F(AbstractEvolutionEnvironmentTest, getHighscoreList)
 	std::vector<AbstractIndividual*> individuals({ &individual1, &individual2, &individual3 });
 	EXPECT_CALL(*evolutionEnvironment, getIndividuals()).WillRepeatedly(testing::ReturnRef(individuals));
 
-	EXPECT_CALL(*evolutionEnvironment, getFitness(testing::Ref(individual1))).WillRepeatedly(testing::Return(1));
-	EXPECT_CALL(*evolutionEnvironment, getFitness(testing::Ref(individual2))).WillRepeatedly(testing::Return(5));
-	EXPECT_CALL(*evolutionEnvironment, getFitness(testing::Ref(individual3))).WillRepeatedly(testing::Return(-2));
-
+	EXPECT_CALL(*evolutionEnvironment, getFitness(testing::Ref(individual1), testing::_)).WillRepeatedly(testing::SetArgReferee<1>(Scalar<>(1)));
+	EXPECT_CALL(*evolutionEnvironment, getFitness(testing::Ref(individual2), testing::_)).WillRepeatedly(testing::SetArgReferee<1>(Scalar<>(5.0)));
+	EXPECT_CALL(*evolutionEnvironment, getFitness(testing::Ref(individual3), testing::_)).WillRepeatedly(testing::SetArgReferee<1>(Scalar<>(-2.0)));
+	
 	auto highscore = evolutionEnvironment->getHighscoreList();
 
 	EXPECT_EQ(3, highscore.size());

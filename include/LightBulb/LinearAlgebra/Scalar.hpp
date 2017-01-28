@@ -26,10 +26,10 @@ namespace LightBulb
 			this->viennaclValue = this->eigenValue;
 		}
 	public:
-		Scalar()
+		Scalar(DataType initialValue = 0)
 		{
-			this->eigenValue = 0;
-			this->viennaclValue = 0;
+			this->eigenValue = initialValue;
+			this->viennaclValue = initialValue;
 		}
 
 	};

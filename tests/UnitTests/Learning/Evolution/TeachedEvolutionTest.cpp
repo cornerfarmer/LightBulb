@@ -41,5 +41,7 @@ TEST_F(TeachedEvolutionTest, doSimulationStep)
 
 	teachingEvolutionEnvironment->doSimulationStep();
 
-	EXPECT_EQ(-8, teachingEvolutionEnvironment->getFitness(*individual));
+	Scalar<> result;
+	teachingEvolutionEnvironment->getFitness(*individual, result);
+	EXPECT_EQ(-8, result.getEigenValue());
 }
