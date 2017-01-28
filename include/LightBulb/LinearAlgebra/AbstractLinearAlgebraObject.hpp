@@ -31,14 +31,14 @@ namespace LightBulb
 
 		void refreshEigenValue() const
 		{
-			viennacl::backend::finish();
+			//viennacl::backend::finish();
 			copyToEigen();
 			viennaclValueIsDirty = false;
 		}
 
 		void refreshViennaclValue() const
 		{
-			viennacl::backend::finish();
+			//viennacl::backend::finish();
 			copyToViennaCl();
 			eigenValueIsDirty = false;
 		}

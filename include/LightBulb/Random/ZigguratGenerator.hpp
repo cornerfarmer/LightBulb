@@ -27,6 +27,7 @@ namespace LightBulb
 	public:
 		ZigguratGenerator(int seed = -1);
 		double randDouble() override;
+		const Vector<>& randMultipleDouble(int count) override;
 	};
 }
 

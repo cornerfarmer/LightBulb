@@ -23,7 +23,8 @@ namespace LightBulb
 				viennacl::traits::opencl_handle(kn.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(fn.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(wn.getViennaclValueForEditing()),
-				viennacl::traits::opencl_handle(output.getViennaclValueForEditing())
+				viennacl::traits::opencl_handle(output.getViennaclValueForEditing()),
+				cl_uint(0)
 			));
 
 			return output.getEigenValue();
@@ -34,9 +35,39 @@ namespace LightBulb
 		}
 	}
 
+	const Vector<>& ZigguratGenerator::randMultipleDouble(int count)
+	{
+		if (isCalculatorType(CT_GPU)) 
+		{
+			if (count > randomNumberCache.getViennaclValue().size())
+				randomNumberCache.getViennaclValueForEditing().resize(count);
+
+			static viennacl::ocl::kernel& kernel = getKernel("ziggurat_generator", "r4_nor", "ziggurat_generator.cl");
+
+			for (int i = 0; i < count; i++) {
+				viennacl::ocl::enqueue(kernel(
+					viennacl::traits::opencl_handle(state.getViennaclValueForEditing()),
+					viennacl::traits::opencl_handle(kn.getViennaclValueForEditing()),
+					viennacl::traits::opencl_handle(fn.getViennaclValueForEditing()),
+					viennacl::traits::opencl_handle(wn.getViennaclValueForEditing()),
+					viennacl::traits::opencl_handle(randomNumberCache.getViennaclValueForEditing()),
+					cl_uint(i)
+				));
+			}
+
+			return randomNumberCache;
+		} 
+		else
+		{
+			return AbstractRandomGenerator::randMultipleDouble(count);
+		}
+	}
+
+
 	void ZigguratGenerator::reset()
 	{
-		if (isCalculatorType(CT_GPU)) {
+		if (isCalculatorType(CT_GPU)) 
+		{
 			state.getViennaclValueForEditing() = seed;
 
 			static viennacl::ocl::kernel& kernel = getKernel("ziggurat_generator", "r4_nor_setup", "ziggurat_generator.cl");

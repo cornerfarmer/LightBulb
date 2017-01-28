@@ -6,6 +6,7 @@
 
 // Include
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 // Library Includes
 
@@ -22,6 +23,7 @@ namespace LightBulb
 		friend void load(Archive& archive, AbstractRandomGenerator& randomGenerator);
 	private:
 	protected:
+		Vector<> randomNumberCache;
 		int seed;
 		int getRandomSeed();
 		virtual void reset() = 0;
@@ -33,6 +35,7 @@ namespace LightBulb
 		 * \return The random number.
 		 */
 		virtual double randDouble() = 0;
+		virtual const Vector<>& randMultipleDouble(int count);
 		/**
 		 * \brief Generates a random double between [a, b[.
 		 * \param a The lower boundary.

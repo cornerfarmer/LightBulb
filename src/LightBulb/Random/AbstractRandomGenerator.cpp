@@ -15,6 +15,19 @@ int LightBulb::AbstractRandomGenerator::getRandomSeed()
 	return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
 }
 
+const LightBulb::Vector<>& LightBulb::AbstractRandomGenerator::randMultipleDouble(int count)
+{
+	if (count > randomNumberCache.getEigenValue().size())
+		randomNumberCache.getEigenValueForEditing().resize(count);
+
+	for (int i = 0; i < count; i++)
+	{
+		randomNumberCache.getEigenValueForEditing()[i] = randDouble();
+	}
+
+	return randomNumberCache;
+}
+
 double LightBulb::AbstractRandomGenerator::randDouble(double a, double b)
 {
 	return randDouble() * (b - a) + a;

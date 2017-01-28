@@ -260,7 +260,7 @@ void r4_exp_setup (__global uint* ke,__global float* fe,__global float* we)
 }
 /******************************************************************************/
 
-__kernel void r4_nor (__global uint *jsr, __global uint* kn, __global float* fn, __global float* wn, __global float* value)
+__kernel void r4_nor (__global uint *jsr, __global uint* kn, __global float* fn, __global float* wn, __global float* value, unsigned int offset)
 
 /******************************************************************************/
 /*
@@ -314,65 +314,68 @@ __kernel void r4_nor (__global uint *jsr, __global uint* kn, __global float* fn,
     Output, float R4_NOR, a normally distributed random value.
 */
 {
-  int hz;
-  uint iz;
-  const float r = 3.442620;
-  float x;
-  float y;
+	if (get_global_id(0) == 0) {
+	  int hz;
+	  uint iz;
+	  const float r = 3.442620;
+	  float x;
+	  float y;
 
-  hz = ( int ) shr3_seeded ( jsr );
-  iz = ( hz & 127 );
+	  hz = ( int ) shr3_seeded ( jsr );
+	  iz = ( hz & 127 );
 
-  if ( abs ( hz ) < kn[iz] )
-  {
-    *value = ( float ) ( hz ) * wn[iz];
-  }
-  else
-  {
-    for ( ; ; )
-    {
-      if ( iz == 0 )
-      {
-        for ( ; ; )
-        {
-          x = - 0.2904764 * log ( r4_uni ( jsr ) );
-          y = - log ( r4_uni ( jsr ) );
-          if ( x * x <= y + y )
-          {
-            break;
-          }
-        }
+	  if ( abs ( hz ) < kn[iz] )
+	  {
+		value[offset] = ( float ) ( hz ) * wn[iz];
+	  }
+	  else
+	  {
+		for ( ; ; )
+		{
+		  if ( iz == 0 )
+		  {
+			for ( ; ; )
+			{
+			  x = - 0.2904764 * log ( r4_uni ( jsr ) );
+			  y = - log ( r4_uni ( jsr ) );
+			  if ( x * x <= y + y )
+			  {
+				break;
+			  }
+			}
 
-        if ( hz <= 0 )
-        {
-          *value = - r - x;
-        }
-        else
-        {
-          *value = + r + x;
-        }
-        break;
-      }
+			if ( hz <= 0 )
+			{
+			  value[offset] = - r - x;
+			}
+			else
+			{
+			  value[offset] = + r + x;
+			}
+			break;
+		  }
 
-      x = ( float ) ( hz ) * wn[iz];
+		  x = ( float ) ( hz ) * wn[iz];
 
-      if ( fn[iz] + r4_uni ( jsr ) * ( fn[iz-1] - fn[iz] ) 
-        < exp ( - 0.5 * x * x ) )
-      {
-        *value = x;
-        break;
-      }
+		  if ( fn[iz] + r4_uni ( jsr ) * ( fn[iz-1] - fn[iz] ) 
+			< exp ( - 0.5 * x * x ) )
+		  {
+			value[offset] = x;
+			break;
+		  }
 
-      hz = ( int ) shr3_seeded ( jsr );
-      iz = ( hz & 127 );
+		  hz = ( int ) shr3_seeded ( jsr );
+		  iz = ( hz & 127 );
 
-      if ( abs ( hz ) < kn[iz] )
-      {
-        *value = ( float ) ( hz ) * wn[iz];
-        break;
-      }
-    }
-  }
+		  if ( abs ( hz ) < kn[iz] )
+		  {
+			value[offset] = ( float ) ( hz ) * wn[iz];
+			break;
+		  }
+		}
+	  }
+	}
+	
 }
 /******************************************************************************/
 
