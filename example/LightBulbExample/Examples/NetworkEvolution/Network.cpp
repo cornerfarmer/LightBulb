@@ -13,8 +13,6 @@ using namespace LightBulb;
 Network::Network(NetworkSimulator& networkSimulator_)
 	: AbstractDefaultIndividual(networkSimulator_)
 {
-	positions.resize(4, std::vector<float>(2));
-
 	FeedForwardNetworkTopologyOptions options;
 	options.useBiasNeuron = false;
 	options.neuronsPerLayerCount.push_back(1);
@@ -25,23 +23,19 @@ Network::Network(NetworkSimulator& networkSimulator_)
 
 void Network::getNNInput(LightBulb::Vector<>& input)
 {
-	input.getEigenValueForEditing().resize(1);
-	input.getEigenValueForEditing()[0] = 1;
+	if (input.getEigenValue().size() != 1) {
+		input.getEigenValueForEditing().resize(1);
+		input.getEigenValueForEditing()[0] = 1;
+	}
 }
 
 void Network::interpretNNOutput(const LightBulb::Vector<>& output)
 {
-	for (int p = 0; p < 4; p++)
-	{	
-		for (int i = 0; i < 2; i++)
-		{
-			positions[p][i] = output.getEigenValue()[p * 2 + i];
-		}
-	}
+	positions = output;
 }
 
 
-const std::vector<std::vector<float>>& Network::getPositions() const
+const Vector<>& Network::getPositions() const
 {
 	return positions;
 }

@@ -30,6 +30,27 @@ TEST(Matrix, basicCompute)
 	}
 }
 
+
+TEST(Matrix, assignOperatorTest)
+{
+	Matrix<> A(1024, 1024);
+	Matrix<> B(1024, 1024);
+
+	for (int r = 0; r < A.getEigenValue().rows(); r++)
+	{
+		for (int c = 0; c < A.getEigenValue().cols(); c++)
+		{
+			A.getEigenValueForEditing()(r, c) = 0.5;
+		}
+	}
+
+	B.getViennaclValue();
+
+	A = B;
+
+	EXPECT_EQ(A, B);
+}
+
 TEST(Matrix, performanceTest)
 {
 	viennacl::vector<float> testMatrix(1024);

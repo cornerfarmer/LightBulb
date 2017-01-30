@@ -20,17 +20,17 @@ class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 	friend void load(Archive& archive, NetworkSimulator& environment);
 	friend struct cereal::LoadAndConstruct<NetworkSimulator>;
 protected:
-	std::vector<std::vector<float>> consumers;
+	LightBulb::Vector<> consumers;
 	LightBulb::AbstractIndividual* createNewIndividual() override;
 	//sf::RenderWindow window;
 	//std::unique_ptr<NetworkDrawer> drawer;
-	double distanceBetweenPositions(const std::vector<float>& pos1, const std::vector<float>& pos2) const;
+	double distanceBetweenPositions(float pos1X, float pos1Y, float pos2X, float pos2Y) const;
 public:
-	NetworkSimulator(std::vector<std::vector<float>> consumers_);
+	NetworkSimulator(const LightBulb::Vector<> consumers_);
 	NetworkSimulator() = default;
 	void doSimulationStep() override;
 	void getFitness(const LightBulb::AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const override;
-	std::vector<std::vector<float>>& getConsumers();
+	LightBulb::Vector<>& getConsumers();
 };
 
 #include "IO/NetworkSimulatorIO.hpp"

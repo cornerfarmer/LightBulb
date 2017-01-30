@@ -93,6 +93,23 @@ namespace LightBulb
 				refreshEigenValue();
 			return eigenValue == linearAlgebraObject.eigenValue;
 		}
+
+		AbstractLinearAlgebraObject<EigenType, ViennaCLType>& operator=(const AbstractLinearAlgebraObject<EigenType, ViennaCLType>& linearAlgebraObject)
+		{
+			if (linearAlgebraObject.eigenValueIsDirty)
+			{
+				eigenValue = linearAlgebraObject.eigenValue;
+				eigenValueIsDirty = true;
+				viennaclValueIsDirty = false;
+			}
+			else
+			{
+				viennaclValue = linearAlgebraObject.viennaclValue;
+				viennaclValueIsDirty = true;
+				eigenValueIsDirty = false;
+			}
+			return *this;
+		}
 	};
 }
 

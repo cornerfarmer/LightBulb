@@ -19,14 +19,14 @@ class Network : public LightBulb::AbstractDefaultIndividual
 	template <class Archive>
 	friend void load(Archive& archive, Network& individual);
 protected:
-	std::vector<std::vector<float>> positions;
+	LightBulb::Vector<> positions;
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:	
 	Network(NetworkSimulator& networkSimulator_);
 	Network() = default;
 	~Network();
-	const std::vector<std::vector<float>>& getPositions() const;
+	const LightBulb::Vector<>& getPositions() const;
 };
 
 #include "IO/NetworkIO.hpp"

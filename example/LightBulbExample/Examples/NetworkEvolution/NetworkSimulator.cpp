@@ -4,6 +4,7 @@
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 #include <iostream>
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 using namespace LightBulb;
 
@@ -12,7 +13,7 @@ AbstractIndividual* NetworkSimulator::createNewIndividual()
 	return new Network(*this);
 }
 
-NetworkSimulator::NetworkSimulator(std::vector<std::vector<float>> consumers_)
+NetworkSimulator::NetworkSimulator(const Vector<> consumers_)
 {
 	consumers = consumers_;
 	/*if (enableGraphics)
@@ -47,31 +48,42 @@ void NetworkSimulator::doSimulationStep()
 
 void NetworkSimulator::getFitness(const AbstractIndividual& individual, Scalar<>& fitness) const
 {
-	std::vector<std::vector<float>> pos = static_cast<const Network&>(individual).getPositions();
+	const Vector<>& pos = static_cast<const Network&>(individual).getPositions();
 
-	double length = 0;
-	for (int p = 0; p < pos.size(); p++)
+	if (isCalculatorType(CT_GPU))
 	{
-		length += distanceBetweenPositions(pos[p], consumers[p * 2]);
-		length += distanceBetweenPositions(pos[p], consumers[p * 2 + 1]);
-		if (p < pos.size() - 1)
-			length += distanceBetweenPositions(pos[p], pos[p + 1]);
-	}
+		static viennacl::ocl::kernel& kernel = getKernel("network_evolution_example", "calc_fitness", "network_evolution_example.cl");
 
-	fitness.getEigenValueForEditing() = -length;
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(pos.getViennaclValue()),
+			cl_uint(pos.getViennaclValue().size()),
+			viennacl::traits::opencl_handle(consumers.getViennaclValue()),
+			viennacl::traits::opencl_handle(fitness.getViennaclValueForEditing())
+		));
+	}
+	else
+	{
+		fitness.getEigenValueForEditing() = 0;
+		for (int p = 0; p < pos.getEigenValue().size(); p += 2)
+		{
+			fitness.getEigenValueForEditing() -= distanceBetweenPositions(pos.getEigenValue()[p], pos.getEigenValue()[p + 1], consumers.getEigenValue()[p * 2], consumers.getEigenValue()[p * 2 + 1]);
+			fitness.getEigenValueForEditing() -= distanceBetweenPositions(pos.getEigenValue()[p], pos.getEigenValue()[p + 1], consumers.getEigenValue()[(p + 1) * 2], consumers.getEigenValue()[(p + 1) * 2 + 1]);
+			if (p < pos.getEigenValue().size() - 2)
+				fitness.getEigenValueForEditing() -= distanceBetweenPositions(pos.getEigenValue()[p], pos.getEigenValue()[p + 1], pos.getEigenValue()[p + 2], pos.getEigenValue()[p + 3]);
+		}
+
+	}
 }
 
-double NetworkSimulator::distanceBetweenPositions(const std::vector<float>& pos1, const std::vector<float>& pos2) const
+double NetworkSimulator::distanceBetweenPositions(float pos1X, float pos1Y, float pos2X, float pos2Y) const
 {
 	double distance = 0;
-	for (int c = 0; c < pos1.size(); c++)
-	{
-		distance += pow(pos1[c] - pos2[c], 2);
-	}
+	distance += pow(pos1X - pos2X, 2);
+	distance += pow(pos1Y - pos2Y, 2);
 	return sqrt(distance);
 }
 
-std::vector<std::vector<float>>& NetworkSimulator::getConsumers()
+Vector<>& NetworkSimulator::getConsumers()
 {
 	return consumers;
 }

@@ -51,3 +51,5 @@ Release/LightBulb
 *.tp
 /Experiments/TicTacToe/~$log.xlsx
 /build/
+*.ib_pdb_index
+/vs/PredictedInputCache_Release_Mixed Platforms.dat

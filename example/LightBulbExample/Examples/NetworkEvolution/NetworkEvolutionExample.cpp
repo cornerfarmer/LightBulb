@@ -12,12 +12,23 @@
 #include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
 #include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
 #include <LightBulb/Learning/Evolution/FitnessCondition.hpp>
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractLearningRulePreferenceGroup.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
 
 using namespace LightBulb;
 
 AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 {
-	EvolutionLearningRuleOptions options;
+	EvolutionLearningRuleOptions options = createOptions<EvolutionLearningRuleOptions, EvolutionLearningRulePreferenceGroup>();
+
+	options.exitConditions.clear();
+	options.creationCommands.clear();
+	options.reuseCommands.clear();
+	options.selectionCommands.clear();
+	options.mutationsCommands.clear();
+	options.recombinationCommands.clear();
+
+
 	RateDifferenceCondition* rateDifferenceCondition = new RateDifferenceCondition(0.00001, 20);
 	options.exitConditions.push_back(rateDifferenceCondition);
 	options.exitConditions.push_back(new FitnessCondition(-10.47));
@@ -37,28 +48,33 @@ AbstractLearningRule* NetworkEvolutionExample::createLearningRate()
 
 AbstractEvolutionEnvironment* NetworkEvolutionExample::createEnvironment()
 {
-	std::vector<std::vector<float>> consumers(8, std::vector<float>(2));
-	consumers[0][0] = 1;
-	consumers[0][1] = 1;
-	consumers[1][0] = 1;
-	consumers[1][1] = -1;
+	Vector<> consumers(8 * 2);
+	consumers.getEigenValueForEditing()[0 * 2 + 0] = 1;
+	consumers.getEigenValueForEditing()[0 * 2 + 1] = 1;
+	consumers.getEigenValueForEditing()[1 * 2 + 0] = 1;
+	consumers.getEigenValueForEditing()[1 * 2 + 1] = -1;
 
-	consumers[2][0] = 2;
-	consumers[2][1] = 1;
-	consumers[3][0] = 2;
-	consumers[3][1] = -1;
+	consumers.getEigenValueForEditing()[2 * 2 + 0] = 2;
+	consumers.getEigenValueForEditing()[2 * 2 + 1] = 1;
+	consumers.getEigenValueForEditing()[3 * 2 + 0] = 2;
+	consumers.getEigenValueForEditing()[3 * 2 + 1] = -1;
 
-	consumers[4][0] = 3;
-	consumers[4][1] = 1;
-	consumers[5][0] = 3;
-	consumers[5][1] = -1;
+	consumers.getEigenValueForEditing()[4 * 2 + 0] = 3;
+	consumers.getEigenValueForEditing()[4 * 2 + 1] = 1;
+	consumers.getEigenValueForEditing()[5 * 2 + 0] = 3;
+	consumers.getEigenValueForEditing()[5 * 2 + 1] = -1;
 
-	consumers[6][0] = 4;
-	consumers[6][1] = 1;
-	consumers[7][0] = 4;
-	consumers[7][1] = -1;
+	consumers.getEigenValueForEditing()[6 * 2 + 0] = 4;
+	consumers.getEigenValueForEditing()[6 * 2 + 1] = 1;
+	consumers.getEigenValueForEditing()[7 * 2 + 0] = 4;
+	consumers.getEigenValueForEditing()[7 * 2 + 1] = -1;
 
 	return new NetworkSimulator(consumers);
+}
+
+NetworkEvolutionExample::NetworkEvolutionExample()
+{
+	addPreferenceGroup(new EvolutionLearningRulePreferenceGroup());
 }
 
 std::string NetworkEvolutionExample::getOriginalName() const
