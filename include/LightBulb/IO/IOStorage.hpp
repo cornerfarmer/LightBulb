@@ -4,7 +4,6 @@
 #define _IOSTORAGE_H_
 
 // Libary includes
-#include <cstddef>
 
 namespace LightBulb
 {

@@ -2,7 +2,6 @@
 #include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include <iostream>
 
 namespace LightBulb
 {

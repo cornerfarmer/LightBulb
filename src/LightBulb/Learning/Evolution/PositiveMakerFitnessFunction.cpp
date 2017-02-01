@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/PositiveMakerFitnessFunction.hpp"
 // Library includes
-#include <stdexcept>
 #include <algorithm>
 
 namespace LightBulb

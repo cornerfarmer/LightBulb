@@ -4,9 +4,6 @@
 #define _GRADIENTDESCENTLEARNINGRULE_H_
 
 // Library Includes
-#include <vector>
-#include <map>
-#include <Eigen/Dense>
 #include <cereal/access.hpp>
 
 // Includes

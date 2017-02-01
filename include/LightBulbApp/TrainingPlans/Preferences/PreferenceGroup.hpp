@@ -9,7 +9,6 @@
 
 // Library includes
 #include <memory>
-#include <string>
 
 namespace LightBulb
 {

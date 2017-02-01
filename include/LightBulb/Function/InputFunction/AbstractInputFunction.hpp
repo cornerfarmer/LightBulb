@@ -9,7 +9,6 @@
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
-#include <memory>
 #include <vector>
 
 // Forward declarations

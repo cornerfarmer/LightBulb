@@ -5,7 +5,6 @@
 
 // Library Includes
 #include <vector>
-#include <list>
 
 // Includes
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"

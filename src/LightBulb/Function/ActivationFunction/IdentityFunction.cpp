@@ -2,7 +2,6 @@
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 // Library includes
-#include <limits>
 #include <stdexcept>
 
 namespace LightBulb

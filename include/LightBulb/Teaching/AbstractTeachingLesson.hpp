@@ -4,10 +4,7 @@
 #define _ABSTRACTTEACHINGLESSON_H_
 
 // Library Includes
-#include <Eigen/Dense>
 #include <vector>
-#include <map>
-#include <memory>
 
 // Includes
 #include "LightBulb/Teaching/TeachingInput.hpp"

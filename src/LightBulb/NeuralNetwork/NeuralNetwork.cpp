@@ -5,7 +5,6 @@
 #include "LightBulb/Teaching/TeachingInput.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 // Library includes
-#include <exception>
 #include <ctime>
 
 namespace LightBulb

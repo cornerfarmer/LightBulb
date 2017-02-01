@@ -6,7 +6,6 @@
 // Includes
 #include <viennacl/scalar.hpp>
 #include "AbstractLinearAlgebraObject.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

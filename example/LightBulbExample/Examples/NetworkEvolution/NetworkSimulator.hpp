@@ -4,8 +4,6 @@
 #define _NETWORKSIMULATOR_H_
 
 // Library Includes
-#include <vector>
-#include <map>
 
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"

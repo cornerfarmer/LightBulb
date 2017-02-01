@@ -3,7 +3,6 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 // Library includes
-#include <exception>
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 namespace LightBulb

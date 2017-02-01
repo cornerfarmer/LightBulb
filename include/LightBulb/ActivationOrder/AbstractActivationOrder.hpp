@@ -7,10 +7,6 @@
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 
-// Library includes
-#include <map>
-#include <memory>
-
 namespace LightBulb
 {
 	// Forward declarations

@@ -6,8 +6,6 @@
 #include <Examples/PongReinforcement/PongPolicyGradientExample.hpp>
 #include <Examples/PongReinforcement/PongReinforcementEnvironment.hpp>
 // Library includes
-#include <exception>
-#include <vector>
 
 using namespace LightBulb;
 

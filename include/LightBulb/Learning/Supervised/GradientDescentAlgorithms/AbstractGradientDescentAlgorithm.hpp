@@ -7,7 +7,6 @@
 
 // Includes
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"

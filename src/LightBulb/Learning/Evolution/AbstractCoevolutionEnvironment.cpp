@@ -3,7 +3,6 @@
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 //Library includes
-#include <iostream>
 
 namespace LightBulb
 {

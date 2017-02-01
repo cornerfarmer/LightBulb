@@ -1,8 +1,6 @@
 #ifndef _ABSTRACTLEARNINGRESULT_H_
 #define _ABSTRACTLEARNINGRESULT_H_
 
-#include <string>
-
 namespace LightBulb
 {
 	/**

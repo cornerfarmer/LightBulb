@@ -3,7 +3,6 @@
 #include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp>
 #include <LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp>
-#include <LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp>
 #include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
 #include <LightBulb/NeuronDescription/NeuronDescription.hpp>
 #include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
@@ -13,7 +12,6 @@
 #include <LightBulb/Function/ActivationFunction/FermiFunction.hpp>
 #include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
 #include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
-#include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/PolicyGradientLearningRulePreferenceGroup.hpp"
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"

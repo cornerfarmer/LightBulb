@@ -5,7 +5,6 @@
 
 // Libraray includes
 #include <vector>
-#include <map>
 #include <ctime>
 
 // Includes

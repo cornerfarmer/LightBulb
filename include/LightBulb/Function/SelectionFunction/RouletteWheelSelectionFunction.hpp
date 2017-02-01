@@ -7,7 +7,6 @@
 #include "LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp"
 
 // Library includes
-#include <math.h>
 #include <vector>
 
 namespace LightBulb

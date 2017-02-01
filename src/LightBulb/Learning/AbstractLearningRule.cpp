@@ -2,9 +2,7 @@
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "LightBulb/Teaching/Teacher.hpp"
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
-#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
 #include "LightBulb/Random/StandardRandomGenerator.hpp"
 #include "LightBulb/Learning/AbstractLearningResult.hpp"
 // Library includes

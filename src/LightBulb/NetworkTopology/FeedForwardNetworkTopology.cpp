@@ -9,7 +9,6 @@
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 // Library includes
 #include <exception>
-#include <math.h>
 #include <stdexcept>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 

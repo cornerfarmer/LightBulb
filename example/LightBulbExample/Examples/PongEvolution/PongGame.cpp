@@ -1,10 +1,6 @@
 // Includes
 #include "Examples/PongEvolution/PongGame.hpp"
-#include "Examples/PongEvolution/PongAI.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
-#include <iomanip>
-#include <chrono>
 #include <thread>
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 

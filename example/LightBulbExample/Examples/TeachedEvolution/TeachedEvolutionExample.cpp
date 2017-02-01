@@ -19,6 +19,7 @@
 #include <LightBulb/NeuronDescription/NeuronDescription.hpp>
 #include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
 #include <LightBulb/Learning/Evolution/FitnessCondition.hpp>
+#include "LightBulb/Function/RandomFunction/RankBasedRandomFunction.hpp"
 
 using namespace LightBulb;
 

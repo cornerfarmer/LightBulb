@@ -2,7 +2,6 @@
 #include "LightBulb/Learning/Reinforcement/DQNLearningRule.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"

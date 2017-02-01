@@ -4,7 +4,6 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 // Library includes
-#include <stdexcept>
 #include <math.h>
 
 namespace LightBulb

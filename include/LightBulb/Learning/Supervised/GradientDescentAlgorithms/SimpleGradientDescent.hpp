@@ -8,7 +8,6 @@
 
 // Includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
-#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {

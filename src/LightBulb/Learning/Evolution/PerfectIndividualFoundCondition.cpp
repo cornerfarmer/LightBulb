@@ -2,8 +2,6 @@
 #include "LightBulb/Learning/Evolution/PerfectIndividualFoundCondition.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 // Library includes
-#include <iostream>
-#include <iomanip>
 #include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 

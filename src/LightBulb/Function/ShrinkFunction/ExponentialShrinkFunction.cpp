@@ -1,5 +1,6 @@
 // Includes
 #include "LightBulb/Function/ShrinkFunction/ExponentialShrinkFunction.hpp"
+#include <cmath>
 
 namespace LightBulb
 {

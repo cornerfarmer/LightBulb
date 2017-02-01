@@ -4,7 +4,6 @@
 #define _ABSTRACTLINEARALGEBRAOBJECT_H_
 
 // Includes
-#include <viennacl/backend/memory.hpp>
 
 namespace LightBulb
 {

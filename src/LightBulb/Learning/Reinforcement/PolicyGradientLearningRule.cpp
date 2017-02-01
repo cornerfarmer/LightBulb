@@ -3,12 +3,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include <iostream>
-#include <algorithm>
-#include <map>
-#include <string>
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
-#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"

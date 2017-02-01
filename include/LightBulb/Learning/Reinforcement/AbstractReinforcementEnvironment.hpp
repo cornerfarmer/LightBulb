@@ -8,7 +8,6 @@
 #include <memory>
 
 // Includes
-#include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 

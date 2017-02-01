@@ -4,7 +4,6 @@
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "Mocks/MockNetworkTopology.hpp"
-#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"

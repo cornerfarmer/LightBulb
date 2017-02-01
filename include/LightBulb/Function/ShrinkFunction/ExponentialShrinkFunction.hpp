@@ -4,7 +4,6 @@
 #define _EXPONENTIALSHRINKFUNCTION_H_
 
 // Library includes
-#include <math.h>
 
 // Includes
 #include "LightBulb/Function/ShrinkFunction/AbstractShrinkFunction.hpp"

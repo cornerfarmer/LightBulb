@@ -4,7 +4,6 @@
 #define _RANKBASEDRANDOMFUNCTION_H_
 
 // Library includes
-#include <math.h>
 
 // Includes
 #include "LightBulb/Function/RandomFunction/AbstractRandomFunction.hpp"

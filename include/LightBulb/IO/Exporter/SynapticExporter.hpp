@@ -4,7 +4,6 @@
 #define _SYNAPTICEXPORTER_H_
 
 // Library includes
-#include <vector>
 
 // Includes
 #include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"

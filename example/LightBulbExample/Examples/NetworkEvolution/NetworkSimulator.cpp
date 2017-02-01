@@ -3,7 +3,6 @@
 #include "Examples/NetworkEvolution/Network.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
-#include <iostream>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 using namespace LightBulb;

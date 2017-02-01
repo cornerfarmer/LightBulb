@@ -3,8 +3,6 @@
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 //Library includes
-#include <algorithm>
-#include <iostream>
 
 namespace LightBulb
 {

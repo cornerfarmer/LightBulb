@@ -4,7 +4,6 @@
 #define _TOURNAMENTCOMBININGSTRATEGY_H_
 
 // Library Includes
-#include <map>
 #include <vector>
 #include <memory>
 

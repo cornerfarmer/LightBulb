@@ -5,14 +5,12 @@
 
 // Library Includes
 #include <vector>
-#include <map>
 #include <array>
 #include <mutex>
 #include <condition_variable>
 
 // Include
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
-#include "LightBulb/Teaching/TeachingInput.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 

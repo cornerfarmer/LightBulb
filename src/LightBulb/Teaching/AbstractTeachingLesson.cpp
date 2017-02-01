@@ -4,11 +4,7 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/Teaching/TeachingInput.hpp"
 // Library includes
-#include <math.h>
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
-#include <Eigen/src/Core/util/ForwardDeclarations.h>
-#include <memory>
-#include <viennacl/matrix.hpp>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb

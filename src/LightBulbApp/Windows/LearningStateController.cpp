@@ -2,7 +2,6 @@
 #include "LightBulbApp/Windows/LearningStateController.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include "LightBulb/Learning/LearningState.hpp"
 

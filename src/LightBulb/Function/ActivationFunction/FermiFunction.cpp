@@ -2,8 +2,6 @@
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 // Library includes
 #include <math.h>
-#include <limits>
-#include <stdexcept>
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include <viennacl/vector_proxy.hpp>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"

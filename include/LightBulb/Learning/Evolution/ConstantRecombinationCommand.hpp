@@ -7,7 +7,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractRecombinationCommand.hpp"
-#include "LightBulb/Function/RandomFunction/RankBasedRandomFunction.hpp"
 
 namespace LightBulb
 {

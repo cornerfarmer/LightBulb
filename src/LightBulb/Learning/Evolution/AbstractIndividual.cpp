@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 // Library includes
-#include <stdlib.h>
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 

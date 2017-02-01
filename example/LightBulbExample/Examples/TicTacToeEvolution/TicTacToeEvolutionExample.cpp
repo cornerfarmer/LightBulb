@@ -13,7 +13,6 @@
 #include <LightBulb/Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
 #include <LightBulb/Learning/Evolution/PerfectIndividualFoundCondition.hpp>
 #include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
-#include <fstream>
 #include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
 #include "TicTacToeGameFactory.hpp"
 #include <LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp>
@@ -28,6 +27,7 @@
 #include <LightBulb/Learning/Evolution/NetworkGrowMutationAlgorithm.hpp>
 #include <LightBulb/Learning/Evolution/PhasedTopologyMutationAlgorithm.hpp>
 #include <LightBulb/Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
+#include "LightBulb/Function/RandomFunction/RankBasedRandomFunction.hpp"
 
 #define PREFERENCE_POPULATION_SIZE "Population size"
 #define PREFERENCE_MUTATION_PERCENTAGE "Mutation percentage"

@@ -7,7 +7,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractDefaultIndividual.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 
 // Forward declarations
 class NetworkSimulator;

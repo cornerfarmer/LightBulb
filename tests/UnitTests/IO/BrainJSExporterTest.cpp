@@ -5,7 +5,6 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
-#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"

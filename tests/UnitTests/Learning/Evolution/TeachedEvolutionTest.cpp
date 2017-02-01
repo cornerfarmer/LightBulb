@@ -3,7 +3,6 @@
 #include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp>
-#include <LightBulb/Learning/Evolution/TeachedIndividual.hpp>
 #include <Mocks/MockTeacher.hpp>
 #include <Mocks/MockNeuronDescriptionFactory.hpp>
 #include "Mocks/MockRandomGenerator.hpp"

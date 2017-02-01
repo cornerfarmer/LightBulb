@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/FitnessCondition.hpp"
 // Library includes
-#include <iostream>
 #include <iomanip>
 
 namespace LightBulb

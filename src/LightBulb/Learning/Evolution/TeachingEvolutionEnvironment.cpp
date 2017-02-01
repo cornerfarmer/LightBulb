@@ -2,7 +2,6 @@
 #include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/TeachedIndividual.hpp"
 //Library includes
-#include <iostream>
 
 namespace LightBulb
 {

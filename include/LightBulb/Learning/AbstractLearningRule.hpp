@@ -3,8 +3,7 @@
 #ifndef _ABSTRACTLEARNINGRULE_H_
 #define _ABSTRACTLEARNINGRULE_H_
 
-// Library Includes´
-#include <Eigen/Dense>
+// Library Includes
 #include <vector>
 #include <memory>
 

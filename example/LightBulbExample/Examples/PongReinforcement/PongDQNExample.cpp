@@ -10,7 +10,6 @@
 #include "PongReinforcementEnvironment.hpp"
 #include <LightBulb/Learning/Reinforcement/DQNLearningRule.hpp>
 #include <LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp>
-#include <LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp>
 #include <LightBulb/Function/ActivationFunction/RectifierFunction.hpp>
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/DQNLearningRulePreferenceGroup.hpp"
 

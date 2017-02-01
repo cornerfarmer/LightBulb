@@ -5,7 +5,6 @@
 #include "LightBulb/IO/Exporter/JSONObject.hpp"
 #include "LightBulb/IO/Exporter/JSONArray.hpp"
 #include "LightBulb/IO/Exporter/JSONNumberElement.hpp"
-#include <fstream>
 
 namespace LightBulb
 {

@@ -1,5 +1,6 @@
 #ifndef _LEARNINGRESULT_H_
 #define _LEARNINGRESULT_H_
+
 #include <vector>
 #include <map>
 #include "LightBulb/Event/Observable.hpp"

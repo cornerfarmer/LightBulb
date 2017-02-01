@@ -4,7 +4,6 @@
 #define _NETWORKGROWMUTATIONALGORITHM_H_
 
 // Library Includes
-#include <random>
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"

@@ -1,8 +1,6 @@
 // Includes
 #include "LightBulb/Function/ActivationFunction/HyperbolicTangentFunction.hpp"
 // Library includes
-#include <limits>
-#include <stdexcept>
 
 namespace LightBulb
 {

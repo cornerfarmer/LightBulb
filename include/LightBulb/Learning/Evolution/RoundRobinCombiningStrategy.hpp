@@ -4,7 +4,6 @@
 #define _ROUNDROBINCOMBININGSTRATEGY_H_
 
 // Library Includes
-#include <map>
 #include <vector>
 
 // Include

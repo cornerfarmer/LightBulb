@@ -5,7 +5,6 @@
 #include "LightBulb/Teaching/Teacher.hpp"
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 // Library includes
-#include <iomanip>
 #include <vector>
 #include "LightBulb/Learning/Supervised/SupervisedLearningResult.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"

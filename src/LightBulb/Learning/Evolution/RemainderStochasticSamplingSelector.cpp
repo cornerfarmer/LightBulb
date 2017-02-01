@@ -2,9 +2,6 @@
 #include "LightBulb/Learning/Evolution/RemainderStochasticSamplingSelector.hpp"
 #include "LightBulb/Function/SelectionFunction/RouletteWheelSelectionFunction.hpp"
 //Library includes
-#include <iostream>
-#include <iomanip>
-#include <stdexcept>
 #include <algorithm>
 
 namespace LightBulb

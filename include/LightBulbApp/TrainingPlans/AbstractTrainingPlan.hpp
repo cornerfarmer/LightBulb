@@ -11,10 +11,8 @@
 #include "Preferences/PreferenceGroup.hpp"
 
 // Library includes
-#include <string>
 #include <thread>
 #include <vector>
-#include <cereal/cereal.hpp>
 
 namespace LightBulb
 {
@@ -342,7 +340,5 @@ namespace LightBulb
 		virtual int getSeed() const = 0;
 	};
 }
-
 #include "LightBulbApp/IO/AbstractTrainingPlanIO.hpp"
-
 #endif

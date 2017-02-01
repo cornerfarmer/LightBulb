@@ -1,9 +1,7 @@
 // Includes
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes
-#include <exception>
 
 namespace LightBulb
 {

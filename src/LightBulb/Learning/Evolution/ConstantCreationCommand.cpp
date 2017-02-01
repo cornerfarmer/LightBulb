@@ -2,7 +2,6 @@
 #include "LightBulb/Learning/Evolution/ConstantCreationCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb

@@ -2,14 +2,9 @@
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
-#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 //Library includes
-#include <iostream>
 #include <iomanip>
-#include <algorithm>
 #include <condition_variable>
-#include <stdexcept>
 
 using namespace LightBulb;
 

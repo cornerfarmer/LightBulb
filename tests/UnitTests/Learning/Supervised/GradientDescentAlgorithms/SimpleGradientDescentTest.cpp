@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"

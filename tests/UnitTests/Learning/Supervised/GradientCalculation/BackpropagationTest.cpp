@@ -6,7 +6,6 @@
 #include "Mocks/MockNetworkTopology.hpp"
 #include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 #include "Mocks/MockNeuronDescription.hpp"
-#include "Mocks/MockActivationFunction.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"

@@ -7,7 +7,6 @@
 #include "AbstractPreferenceElement.hpp"
 
 // Library includes
-#include <string>
 
 namespace LightBulb
 {

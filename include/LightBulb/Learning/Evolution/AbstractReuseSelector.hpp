@@ -10,7 +10,6 @@
 #include <vector>
 #include <utility>
 #include <map>
-#include <string>
 
 namespace LightBulb
 {

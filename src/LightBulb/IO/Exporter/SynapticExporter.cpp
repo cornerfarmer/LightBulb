@@ -12,7 +12,6 @@
 #include "LightBulb/Function/ActivationFunction/HyperbolicTangentFunction.hpp"
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
-#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {

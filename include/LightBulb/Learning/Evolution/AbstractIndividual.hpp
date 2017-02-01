@@ -4,9 +4,6 @@
 #define _ABSTRACTINDIVIDUAL_H_
 
 // Library includes
-#include <vector>
-#include <algorithm>
-#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 

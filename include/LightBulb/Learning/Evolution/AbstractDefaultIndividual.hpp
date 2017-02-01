@@ -9,7 +9,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

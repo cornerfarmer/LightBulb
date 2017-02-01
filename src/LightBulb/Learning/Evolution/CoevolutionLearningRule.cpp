@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp"
 // Library includes
-#include <iostream>
 
 namespace LightBulb
 {

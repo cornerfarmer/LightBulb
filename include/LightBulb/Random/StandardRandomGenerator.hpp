@@ -9,7 +9,6 @@
 
 // Library Includes
 #include <random>
-#include <chrono>
 
 namespace LightBulb
 {

@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
-#include <Mocks/MockMutationSelector.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <LightBulb/Learning/Evolution/RandomSelector.hpp>
 #include <Mocks/MockRandomFunction.hpp>

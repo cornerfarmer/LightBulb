@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/RateDifferenceCondition.hpp"
 // Library includes
-#include <iostream>
 #include <iomanip>
 
 namespace LightBulb

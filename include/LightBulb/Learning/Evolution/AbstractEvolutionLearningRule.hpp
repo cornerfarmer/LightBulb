@@ -7,7 +7,6 @@
 
 // Includes
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Random/ZigguratGenerator.hpp"
 
 namespace LightBulb

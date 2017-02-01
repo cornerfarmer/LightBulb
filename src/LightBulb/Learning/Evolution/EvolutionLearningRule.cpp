@@ -15,8 +15,6 @@
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
 // Library includes
-#include <iostream>
-#include <algorithm>
 #include <map>
 #include <string>
 

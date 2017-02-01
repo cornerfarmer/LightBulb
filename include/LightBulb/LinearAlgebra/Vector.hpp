@@ -7,7 +7,6 @@
 #include <Eigen/Dense>
 #include <viennacl/vector.hpp>
 #include "AbstractLinearAlgebraObject.hpp"
-#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {

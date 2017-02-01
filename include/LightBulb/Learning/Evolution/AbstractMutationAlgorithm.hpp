@@ -10,7 +10,6 @@
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
-#include <memory>
 #include <vector>
 
 namespace LightBulb

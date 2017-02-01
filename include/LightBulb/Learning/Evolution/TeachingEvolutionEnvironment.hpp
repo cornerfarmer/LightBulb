@@ -5,7 +5,6 @@
 
 // Library Includes
 #include <vector>
-#include <map>
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"

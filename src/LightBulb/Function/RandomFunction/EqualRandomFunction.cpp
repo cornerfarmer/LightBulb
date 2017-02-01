@@ -2,7 +2,6 @@
 #include "LightBulb/Function/RandomFunction/EqualRandomFunction.hpp"
 // Library includes
 #include <random>
-#include <algorithm>
 
 namespace LightBulb
 {

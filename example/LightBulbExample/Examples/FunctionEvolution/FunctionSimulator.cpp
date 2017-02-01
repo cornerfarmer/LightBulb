@@ -3,7 +3,6 @@
 #include "Examples/FunctionEvolution/Position.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
-#include <iostream>
 
 using namespace LightBulb;
 

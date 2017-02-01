@@ -1,7 +1,5 @@
 // Includes
 #include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "LightBulb/Teaching/Teacher.hpp"
-#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"

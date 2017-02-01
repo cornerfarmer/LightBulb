@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
-#include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <LightBulb/Teaching/TeachingInput.hpp>
 #include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>

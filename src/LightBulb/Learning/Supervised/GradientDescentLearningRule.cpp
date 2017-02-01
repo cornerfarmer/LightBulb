@@ -1,9 +1,7 @@
 // Includes
 #include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
-#include "LightBulb/Teaching/Teacher.hpp"
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 #include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"

@@ -3,7 +3,7 @@
 #ifndef _ABSTRACTSUPERVISEDLEARNINGRULE_H_
 #define _ABSTRACTSUPERVISEDLEARNINGRULE_H_
 
-// Library Includes´
+// Library Includes
 #include <vector>
 #include <memory>
 

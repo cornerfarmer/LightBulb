@@ -4,9 +4,6 @@
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 //Library includes
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
 
 namespace LightBulb
 {

@@ -8,7 +8,6 @@
 
 // Library Includes
 #include <vector>
-#include <memory>
 
 namespace LightBulb
 {
