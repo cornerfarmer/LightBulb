@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/TournamentCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"

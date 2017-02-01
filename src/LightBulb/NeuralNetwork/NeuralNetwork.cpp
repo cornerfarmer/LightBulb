@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"

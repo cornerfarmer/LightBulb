@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes

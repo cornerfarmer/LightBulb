@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include <LightBulb/Teaching/TeachingLessonLinearInput.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>
 #include <Mocks/MockActivationOrder.hpp>

@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include <LightBulb/Teaching/TeachingLessonBooleanInput.hpp>
 #include <Mocks/MockActivationOrder.hpp>
 #include <Mocks/MockActivationFunction.hpp>

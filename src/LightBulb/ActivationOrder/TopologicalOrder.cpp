@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 // Library includes

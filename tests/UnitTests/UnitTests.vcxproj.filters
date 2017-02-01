@@ -168,6 +168,9 @@
     <ClCompile Include="Random\ZigguratGeneratorTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTestsPrec.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockNetworkTopology.hpp">
@@ -273,6 +276,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Mocks\MockTestableEvolutionEnvironment.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTestsPrec.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

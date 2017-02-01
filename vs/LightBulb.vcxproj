@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp" />
     <ClInclude Include="..\include\LightBulb\ActivationOrder\AbstractActivationOrder.hpp" />
     <ClInclude Include="..\include\LightBulb\ActivationOrder\TopologicalOrder.hpp" />
     <ClInclude Include="..\include\LightBulb\Event\AbstractObserver.hpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp" />
+    <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp" />
@@ -293,6 +295,10 @@
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescent.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientDescentLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Lib\ziggurat.cpp" />
+    <ClCompile Include="..\src\LightBulb\LightBulbPrec.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Matrix.cpp" />
@@ -372,6 +378,8 @@
       <AdditionalIncludeDirectories>..\include;..\extlibs\eigen;..\extlibs\cereal\include;..\extlibs\viennacl</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LightBulb/LightBulbPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -391,6 +399,8 @@
       <BrowseInformation>false</BrowseInformation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LightBulb/LightBulbPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

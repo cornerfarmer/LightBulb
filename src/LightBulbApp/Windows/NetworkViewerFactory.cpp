@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/NetworkViewerFactory.hpp"
 #include "LightBulbApp/Windows/NetworkViewerController.hpp"
 

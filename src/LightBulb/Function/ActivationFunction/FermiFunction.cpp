@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 // Library includes
 #include <math.h>

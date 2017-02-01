@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/PositiveMakerFitnessFunction.hpp"
 // Library includes
 #include <algorithm>

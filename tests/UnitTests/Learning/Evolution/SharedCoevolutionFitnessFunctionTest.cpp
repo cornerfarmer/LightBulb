@@ -1,5 +1,4 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include "UnitTestsPrec.hpp"
 #include <Mocks/MockMutationSelector.hpp>
 #include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>

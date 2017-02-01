@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantRecombinationCommandPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 #include "LightBulb/Learning/Evolution/StochasticUniversalSamplingSelector.hpp"

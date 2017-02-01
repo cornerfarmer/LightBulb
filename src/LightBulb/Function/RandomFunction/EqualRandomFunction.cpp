@@ -1,7 +1,7 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/RandomFunction/EqualRandomFunction.hpp"
 // Library includes
-#include <random>
 
 namespace LightBulb
 {

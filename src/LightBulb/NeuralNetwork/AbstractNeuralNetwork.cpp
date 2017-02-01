@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 namespace LightBulb

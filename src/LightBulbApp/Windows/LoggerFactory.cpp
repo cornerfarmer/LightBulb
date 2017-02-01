@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/LoggerFactory.hpp"
 #include "LightBulbApp/Windows/LoggerController.hpp"
 

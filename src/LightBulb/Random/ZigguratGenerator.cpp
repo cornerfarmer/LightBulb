@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Random/ZigguratGenerator.hpp"
 #include "LightBulb/Lib/ziggurat.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"

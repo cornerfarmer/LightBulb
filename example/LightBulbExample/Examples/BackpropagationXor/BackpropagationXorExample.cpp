@@ -1,3 +1,4 @@
+#include "LightBulbExamplePrec.hpp"
 #include "BackpropagationXorExample.hpp"
 #include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
 #include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>

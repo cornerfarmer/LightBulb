@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/LinearScalingFitnessFunction.hpp"
 // Library includes
 #include <stdexcept>

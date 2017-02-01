@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"

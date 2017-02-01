@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/PongGameController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include "PongEvolutionExample.hpp"

@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeGameWindow.hpp"
 #include "TicTacToeGameController.hpp"
 #include <wx/artprov.h>

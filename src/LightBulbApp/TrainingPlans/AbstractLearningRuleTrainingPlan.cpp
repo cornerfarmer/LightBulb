@@ -1,3 +1,4 @@
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
 
 namespace LightBulb

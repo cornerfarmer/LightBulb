@@ -1,3 +1,4 @@
+#include "LightBulbExamplePrec.hpp"
 #include "TeachedEvolutionExample.hpp"
 #include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
 #include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>

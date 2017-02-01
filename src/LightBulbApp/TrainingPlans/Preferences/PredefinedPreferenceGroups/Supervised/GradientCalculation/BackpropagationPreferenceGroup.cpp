@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientCalculation/BackpropagationPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 

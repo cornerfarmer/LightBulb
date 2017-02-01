@@ -1,3 +1,4 @@
+#include "LightBulbExamplePrec.hpp"
 #include "Performance/ViennaCLTests.hpp"
 #include "viennacl/scalar.hpp"
 #include "viennacl/matrix.hpp"

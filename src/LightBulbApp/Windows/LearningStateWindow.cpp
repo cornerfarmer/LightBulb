@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/LearningStateWindow.hpp"
 #include "LightBulbApp/Windows/LearningStateController.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"

@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/DQNLearningRulePreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"

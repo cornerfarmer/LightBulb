@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include <fstream>
 #include "LightBulb/IO/UsedArchives.hpp"

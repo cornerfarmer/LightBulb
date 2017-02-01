@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockRecombinationAlgorithm.hpp>

@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/SimulatorFactory.hpp"
 #include "LightBulbApp/Windows/SimulatorController.hpp"
 

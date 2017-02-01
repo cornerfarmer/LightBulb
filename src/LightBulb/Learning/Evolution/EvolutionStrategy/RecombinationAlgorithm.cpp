@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"

@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 // Library includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"

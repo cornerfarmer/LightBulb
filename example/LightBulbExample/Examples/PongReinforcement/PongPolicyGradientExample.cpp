@@ -1,3 +1,4 @@
+#include "LightBulbExamplePrec.hpp"
 #include "PongPolicyGradientExample.hpp"
 #include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
 #include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>

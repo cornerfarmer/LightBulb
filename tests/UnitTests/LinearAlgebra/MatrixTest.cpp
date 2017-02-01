@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 

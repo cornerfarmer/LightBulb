@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"

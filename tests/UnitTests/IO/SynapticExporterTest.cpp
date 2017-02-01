@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/IO/Exporter/SynapticExporter.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"

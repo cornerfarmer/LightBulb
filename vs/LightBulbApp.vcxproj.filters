@@ -242,6 +242,9 @@
     <ClCompile Include="..\src\LightBulbApp\App.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\LightBulbAppPrec.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.hpp">
@@ -396,6 +399,9 @@
     </ClInclude>
     <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement\AbstractReinforcementLearningRulePreferenceGroup.hpp">
       <Filter>Quelldateien\TrainingPlans\Preferences\PredefinedPreferenceGroups\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp">
+      <Filter>Quelldateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

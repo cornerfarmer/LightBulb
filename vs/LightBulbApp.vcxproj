@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="..\src\LightBulbApp\App.cpp" />
     <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\LightBulbAppPrec.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\src\LightBulbApp\Performance\NetworkPerformanceTests.cpp" />
     <ClCompile Include="..\src\LightBulbApp\Repositories\NeuralNetworkRepository.cpp" />
     <ClCompile Include="..\src\LightBulbApp\Repositories\TrainingPlanRepository.cpp" />
@@ -101,6 +104,7 @@
     <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Repositories\NeuralNetworkRepository.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Repositories\TrainingPlanRepository.hpp" />
@@ -209,6 +213,8 @@
       </UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LightBulbApp/LightBulbAppPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>../Debug/LightBulb.lib;wxcode_msw28ud_freechart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -235,6 +241,8 @@
       <UndefinePreprocessorDefinitions>wxUSE_EXCEPTIONS</UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LightBulbApp/LightBulbAppPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

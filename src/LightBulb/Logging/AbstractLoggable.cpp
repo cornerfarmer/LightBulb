@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Logging/AbstractLoggable.hpp"
 
 namespace LightBulb

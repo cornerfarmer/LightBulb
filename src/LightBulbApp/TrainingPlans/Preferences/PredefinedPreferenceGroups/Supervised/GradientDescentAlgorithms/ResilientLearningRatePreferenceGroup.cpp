@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/ResilientLearningRatePreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 

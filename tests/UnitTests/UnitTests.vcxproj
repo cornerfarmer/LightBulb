@@ -81,6 +81,8 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>../../include;..\..\extlibs\eigen;../UnitTests;..\..\extlibs\cereal\include;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>UnitTestsPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -103,6 +105,8 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>../../include;..\..\extlibs\eigen;../UnitTests;..\..\extlibs\cereal\include;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>UnitTestsPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -180,6 +184,10 @@
     <ClCompile Include="Teaching\TeacherTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonBooleanInputTest.cpp" />
     <ClCompile Include="Teaching\TeachingLessonLinearInputTest.cpp" />
+    <ClCompile Include="UnitTestsPrec.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="UT.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +226,7 @@
     <ClInclude Include="Mocks\MockTeachingLesson.hpp" />
     <ClInclude Include="Mocks\MockTestableCoevolutionEnvironment.hpp" />
     <ClInclude Include="Mocks\MockTestableEvolutionEnvironment.hpp" />
+    <ClInclude Include="UnitTestsPrec.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

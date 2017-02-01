@@ -96,6 +96,9 @@
     <ClCompile Include="Performance\ViennaCLTests.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="LightBulbExamplePrec.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -189,6 +192,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Performance\ViennaCLTests.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="LightBulbExamplePrec.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

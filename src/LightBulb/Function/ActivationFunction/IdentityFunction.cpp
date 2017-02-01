@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 // Library includes

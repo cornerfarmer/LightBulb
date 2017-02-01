@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeGameController.hpp"
 // Library includes
 #include <vector>

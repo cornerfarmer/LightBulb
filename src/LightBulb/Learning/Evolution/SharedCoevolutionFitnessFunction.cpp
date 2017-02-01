@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/SharedCoevolutionFitnessFunction.hpp"
 
 namespace LightBulb

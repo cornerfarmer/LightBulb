@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 namespace LightBulb

@@ -1,3 +1,4 @@
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/App.hpp"
 #include "LightBulbApp/Windows/TrainingController.hpp"
 #include "LightBulbApp/Windows/LoggerController.hpp"

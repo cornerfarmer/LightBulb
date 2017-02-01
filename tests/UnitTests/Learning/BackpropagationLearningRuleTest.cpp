@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include <LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp>
 #include <Mocks/MockActivationFunction.hpp>
 #include <LightBulb/Teaching/TeachingInput.hpp>

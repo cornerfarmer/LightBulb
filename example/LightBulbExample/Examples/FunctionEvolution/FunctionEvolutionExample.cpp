@@ -1,3 +1,4 @@
+#include "LightBulbExamplePrec.hpp"
 #include "FunctionEvolutionExample.hpp"
 #include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
 #include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>

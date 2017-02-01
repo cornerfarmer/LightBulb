@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/AbstractWindow.hpp"
 #include "LightBulbApp/Windows/AbstractSubApp.hpp"
 

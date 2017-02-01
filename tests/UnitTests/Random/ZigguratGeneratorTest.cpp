@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "UnitTestsPrec.hpp"
 #include "LightBulb/Random/ZigguratGenerator.hpp"
 
 using namespace LightBulb;

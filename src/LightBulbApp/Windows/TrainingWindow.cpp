@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/TrainingWindow.hpp"
 #include <wx/dataview.h>
 #include <wx/richtext/richtextctrl.h>

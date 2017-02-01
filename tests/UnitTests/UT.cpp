@@ -1,5 +1,4 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include "UnitTestsPrec.hpp"
 
 int main(int argc, char** argv)
 {

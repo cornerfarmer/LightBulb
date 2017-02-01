@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/BestSelectionCommandPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 

@@ -83,6 +83,8 @@
       <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_HAVE_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LightBulbExamplePrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_richtext.lib;wxmsw31ud_adv.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;../../extlibs/freechart/lib/vc_lib/msw_wxFreeChart30ud.lib;../../vs/Debug/LightBulbApp.lib;../../vs/Debug/LightBulb.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -114,6 +116,8 @@
       <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_HAVE_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LightBulbExamplePrec.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -163,6 +167,10 @@
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp" />
+    <ClCompile Include="LightBulbExamplePrec.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Performance\ViennaCLTests.cpp" />
   </ItemGroup>
@@ -197,6 +205,7 @@
     <ClInclude Include="IO\PositionIO.hpp" />
     <ClInclude Include="IO\NetworkIO.hpp" />
     <ClInclude Include="IO\NetworkSimulatorIO.hpp" />
+    <ClInclude Include="LightBulbExamplePrec.hpp" />
     <ClInclude Include="Performance\ViennaCLTests.hpp" />
   </ItemGroup>
   <ItemGroup>

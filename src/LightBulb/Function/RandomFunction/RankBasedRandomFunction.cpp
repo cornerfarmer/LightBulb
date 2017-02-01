@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/RandomFunction/RankBasedRandomFunction.hpp"
 // Library includes
 #include <random>

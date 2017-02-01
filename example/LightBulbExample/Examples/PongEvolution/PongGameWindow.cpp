@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/PongGameWindow.hpp"
 #include "PongGameController.hpp"
 #include <wx/artprov.h>

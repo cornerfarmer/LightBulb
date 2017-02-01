@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 //Library include
 #include <algorithm>

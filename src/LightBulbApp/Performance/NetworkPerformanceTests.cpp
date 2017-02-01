@@ -1,3 +1,4 @@
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Performance/NetworkPerformanceTests.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"

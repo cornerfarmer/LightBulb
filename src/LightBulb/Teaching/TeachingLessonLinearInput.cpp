@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Teaching/TeachingLessonLinearInput.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 

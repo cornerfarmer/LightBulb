@@ -625,6 +625,12 @@
     <ClInclude Include="..\include\LightBulb\IO\ScalarIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp">
+      <Filter>Ressourcendateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">
@@ -1019,6 +1025,9 @@
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.cpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\LightBulbPrec.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

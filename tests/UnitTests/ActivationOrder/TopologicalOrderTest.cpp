@@ -1,5 +1,4 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include "UnitTestsPrec.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "Mocks/MockFeedForwardNetworkTopology.hpp"
 

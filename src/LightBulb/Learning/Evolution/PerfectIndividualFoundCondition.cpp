@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/PerfectIndividualFoundCondition.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 // Library includes

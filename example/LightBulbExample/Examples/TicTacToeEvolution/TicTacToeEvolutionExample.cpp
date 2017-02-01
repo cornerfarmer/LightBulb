@@ -1,3 +1,4 @@
+#include "LightBulbExamplePrec.hpp"
 #include "TicTacToeEvolutionExample.hpp"
 #include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
 #include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>

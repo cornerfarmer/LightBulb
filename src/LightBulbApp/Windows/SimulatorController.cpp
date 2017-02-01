@@ -1,4 +1,5 @@
 // Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/SimulatorController.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp""
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"

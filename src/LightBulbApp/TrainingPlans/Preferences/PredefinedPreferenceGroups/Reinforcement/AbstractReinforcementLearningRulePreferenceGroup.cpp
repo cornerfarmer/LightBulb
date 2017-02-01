@@ -1,4 +1,5 @@
 ﻿// Includes
+#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/AbstractReinforcementLearningRulePreferenceGroup.hpp"
 
 namespace LightBulb
