@@ -40,8 +40,12 @@ namespace cereal
 		ar(make_nvp("state", construct->state));
 		ar(make_nvp("name", construct->name));
 	}
+
+	DECLARE_LOAD_AND_CONSTRUCT_TEMPLATE(LightBulb::NeuralNetwork);
 }
 
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::NeuralNetwork);
+
+CEREAL_REGISTER_DYNAMIC_INIT(NeuralNetwork)

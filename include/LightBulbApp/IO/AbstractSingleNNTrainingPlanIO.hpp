@@ -32,4 +32,7 @@ namespace LightBulb
 	extern void load(Archive& archive, AbstractSupervisedTrainingPlan& trainingPlan);
 }
 
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(AbstractSupervisedTrainingPlan)
+
 #endif

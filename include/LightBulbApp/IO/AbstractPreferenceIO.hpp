@@ -27,4 +27,8 @@ namespace LightBulb
 	extern void load(Archive& archive, AbstractPreference& preference);
 }
 
+
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(AbstractPreference)
+
 #endif

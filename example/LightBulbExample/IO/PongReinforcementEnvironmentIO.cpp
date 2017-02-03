@@ -34,3 +34,4 @@ namespace cereal
 
 CEREAL_REGISTER_TYPE(PongReinforcementEnvironment);
 
+CEREAL_REGISTER_DYNAMIC_INIT(PongReinforcementEnvironment)

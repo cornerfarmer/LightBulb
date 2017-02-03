@@ -40,3 +40,5 @@ namespace LightBulb
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractPreference);
+
+CEREAL_REGISTER_DYNAMIC_INIT(AbstractPreference)

@@ -53,3 +53,5 @@ namespace cereal
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::GradientDescentLearningRule);
+
+CEREAL_REGISTER_DYNAMIC_INIT(GradientDescentLearningRule)

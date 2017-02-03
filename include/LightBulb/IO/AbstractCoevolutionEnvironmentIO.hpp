@@ -26,8 +26,10 @@ namespace LightBulb
 	*/
 	template <class Archive>
 	extern void load(Archive& archive, AbstractCoevolutionEnvironment& environment);
-
 }
+
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(AbstractCoevolutionEnvironment)
 
 
 #endif

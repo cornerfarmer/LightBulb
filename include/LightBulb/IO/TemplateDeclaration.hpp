@@ -21,4 +21,23 @@ template void load<cereal::XMLInputArchive>(cereal::XMLInputArchive &, T &); \
 template void save<cereal::PortableBinaryOutputArchive>(cereal::PortableBinaryOutputArchive &, T const &); \
 template void load<cereal::PortableBinaryInputArchive>(cereal::PortableBinaryInputArchive &, T &);
 
+
+#define DECLARE_LOAD_AND_CONSTRUCT_TEMPLATE(T) \
+template void LoadAndConstruct<T>::load_and_construct<cereal::JSONInputArchive>(cereal::JSONInputArchive& , construct<T>&); \
+template void LoadAndConstruct<T>::load_and_construct<cereal::XMLInputArchive>(cereal::XMLInputArchive& , construct<T>&); \
+template void LoadAndConstruct<T>::load_and_construct<cereal::PortableBinaryInputArchive>(cereal::PortableBinaryInputArchive& , construct<T>&); 
+
+
+#define CEREAL_FORCE_DYNAMIC_INIT_FIXED(LibName)              \
+  namespace cereal {                                    \
+  namespace detail {                                    \
+    __declspec(dllexport) void dynamic_init_dummy_##LibName();                \
+  } /* end detail */                                    \
+  namespace {                                           \
+    void dynamic_init_##LibName()                       \
+    {                                                   \
+      ::cereal::detail::dynamic_init_dummy_##LibName(); \
+    }                                                   \
+  } } /* end namespaces */
+
 #endif

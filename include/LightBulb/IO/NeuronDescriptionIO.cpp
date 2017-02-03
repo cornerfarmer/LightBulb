@@ -32,4 +32,6 @@ namespace cereal
 		ar(make_nvp("activationFunction", activationFunction));
 		construct(inputFunction.release(), activationFunction.release());
 	}
+
+	DECLARE_LOAD_AND_CONSTRUCT_TEMPLATE(LightBulb::NeuronDescription);
 }

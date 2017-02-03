@@ -41,6 +41,8 @@ namespace cereal
 		construct(temperatureParameter);
 		ar(cereal::base_class<LightBulb::AbstractActivationFunction>(construct.ptr()));
 	}
+
+	DECLARE_LOAD_AND_CONSTRUCT_TEMPLATE(LightBulb::FermiFunction);
 }
 
 
@@ -48,3 +50,4 @@ namespace cereal
 
 CEREAL_REGISTER_TYPE(LightBulb::FermiFunction);
 
+CEREAL_REGISTER_DYNAMIC_INIT(FermiFunction)

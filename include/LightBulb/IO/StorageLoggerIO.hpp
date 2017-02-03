@@ -18,4 +18,8 @@ namespace LightBulb
 	extern void serialize(Archive& archive, StorageLogger& storageLogger);
 }
 
+
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(StorageLogger)
+
 #endif

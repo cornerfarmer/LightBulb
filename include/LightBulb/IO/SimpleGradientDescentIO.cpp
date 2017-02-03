@@ -41,3 +41,4 @@ namespace cereal
 
 CEREAL_REGISTER_TYPE(LightBulb::SimpleGradientDescent);
 
+CEREAL_REGISTER_DYNAMIC_INIT(SimpleGradientDescent)

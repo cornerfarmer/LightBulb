@@ -29,3 +29,4 @@ namespace LightBulb
 
 CEREAL_REGISTER_TYPE(LightBulb::StorageLogger);
 
+CEREAL_REGISTER_DYNAMIC_INIT(StorageLogger)

@@ -19,4 +19,7 @@ namespace cereal
 	};
 }
 
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(PongReinforcementEnvironment)
+
 #endif

@@ -36,3 +36,5 @@ namespace cereal
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(NetworkSimulator);
+
+CEREAL_REGISTER_DYNAMIC_INIT(NetworkSimulator)

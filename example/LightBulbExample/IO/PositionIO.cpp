@@ -26,3 +26,5 @@ DECLARE_SERIALIZATION_TEMPLATE(Position);
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(Position);
+
+CEREAL_REGISTER_DYNAMIC_INIT(Position)

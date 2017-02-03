@@ -46,3 +46,5 @@ namespace LightBulb
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractReinforcementTrainingPlan);
+
+CEREAL_REGISTER_DYNAMIC_INIT(AbstractReinforcementTrainingPlan)

@@ -26,3 +26,5 @@ DECLARE_SERIALIZATION_TEMPLATE(Network);
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(Network);
+
+CEREAL_REGISTER_DYNAMIC_INIT(Network)

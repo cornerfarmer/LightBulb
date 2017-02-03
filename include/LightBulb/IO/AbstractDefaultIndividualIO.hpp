@@ -27,4 +27,7 @@ namespace LightBulb
 	extern void load(Archive& archive, AbstractDefaultIndividual& individual);
 }
 
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(AbstractDefaultIndividual)
+
 #endif

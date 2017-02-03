@@ -49,8 +49,12 @@ namespace cereal
 
 		ar(cereal::base_class<AbstractNeuronDescriptionFactory>(construct.ptr()));
 	}
+
+	DECLARE_LOAD_AND_CONSTRUCT_TEMPLATE(LightBulb::DifferentNeuronDescriptionFactory);
 }
 
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::DifferentNeuronDescriptionFactory);
+
+CEREAL_REGISTER_DYNAMIC_INIT(DifferentNeuronDescriptionFactory)

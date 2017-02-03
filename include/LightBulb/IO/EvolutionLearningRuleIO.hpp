@@ -32,8 +32,9 @@ namespace cereal
 		template <class Archive>
 		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule);
 	};
-
-
 }
+
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(EvolutionLearningRule)
 
 #endif

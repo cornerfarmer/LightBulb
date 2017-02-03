@@ -27,4 +27,7 @@ namespace LightBulb
 	extern void load(Archive& archive, AbstractSimpleEvolutionEnvironment& environment);
 }
 
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(AbstractSimpleEvolutionEnvironment)
+
 #endif

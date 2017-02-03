@@ -18,4 +18,7 @@ namespace LightBulb
 	extern void serialize(Archive& archive, AbstractSupervisedLearningRule& learningRule);
 }
 
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(AbstractSupervisedLearningRule)
+
 #endif

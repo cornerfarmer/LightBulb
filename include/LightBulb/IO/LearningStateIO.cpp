@@ -43,4 +43,6 @@ namespace cereal
 		ar(make_nvp("iterationsNeeded", construct->iterations));
 		ar(make_nvp("tries", construct->tries));
 	}
+
+	DECLARE_LOAD_AND_CONSTRUCT_TEMPLATE(LightBulb::LearningState);
 }

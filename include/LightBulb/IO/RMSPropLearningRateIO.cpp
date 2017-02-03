@@ -46,3 +46,4 @@ namespace cereal
 
 CEREAL_REGISTER_TYPE(LightBulb::RMSPropLearningRate);
 
+CEREAL_REGISTER_DYNAMIC_INIT(RMSPropLearningRate)

@@ -42,3 +42,5 @@ namespace cereal
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::PolicyGradientLearningRule);
+
+CEREAL_REGISTER_DYNAMIC_INIT(PolicyGradientLearningRule)

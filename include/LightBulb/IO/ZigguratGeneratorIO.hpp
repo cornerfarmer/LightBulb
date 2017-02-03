@@ -27,4 +27,7 @@ namespace LightBulb
 	extern void load(Archive& archive, ZigguratGenerator& zigguratGenerator);
 }
 
+#include "LightBulb/IO/TemplateDeclaration.hpp"
+CEREAL_FORCE_DYNAMIC_INIT_FIXED(ZigguratGenerator)
+
 #endif

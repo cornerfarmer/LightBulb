@@ -53,8 +53,11 @@ namespace cereal
 		learningRule.getOptions().learningRule1->setLogger(*learningRule.getOptions().logger);
 		learningRule.getOptions().learningRule2->setLogger(*learningRule.getOptions().logger);
 	}
+
 }
 
 #include "LightBulb/IO/UsedArchives.hpp"
 
 CEREAL_REGISTER_TYPE(LightBulb::CoevolutionLearningRule);
+
+CEREAL_REGISTER_DYNAMIC_INIT(CoevolutionLearningRule)

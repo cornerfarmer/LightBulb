@@ -77,4 +77,5 @@ namespace LightBulb
 
 CEREAL_REGISTER_TYPE(LightBulb::AbstractCoevolutionEnvironment);
 
+CEREAL_REGISTER_DYNAMIC_INIT(AbstractCoevolutionEnvironment)
 
