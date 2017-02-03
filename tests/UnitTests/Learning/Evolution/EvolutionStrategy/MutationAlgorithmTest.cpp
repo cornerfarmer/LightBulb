@@ -7,6 +7,7 @@
 #include <Mocks/MockNetworkTopology.hpp>
 #include "LightBulb/Random/StandardRandomGenerator.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 
 using namespace LightBulb;
 

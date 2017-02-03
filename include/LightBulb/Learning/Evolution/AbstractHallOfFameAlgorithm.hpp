@@ -9,13 +9,17 @@
 
 // Include
 #include "LightBulb/Logging/AbstractLoggable.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class AbstractCoevolutionEnvironment;
+	class AbstractIndividual;
+	/**
+	 * \brief Describes the results of a AbstractCombiningStrategy.
+	 * \details Maps: First individual - Second individual - round number => True, if first individual has won.
+	 */
+	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
 	/**
 	 * \brief Describes an algorithm which stores some good individuals of the time to make sure their knowledge will not be lost.
 	 */
@@ -50,6 +54,8 @@ namespace LightBulb
 		 */
 		virtual void evaluateIndividuals(std::vector<AbstractIndividual*>& individuals) = 0;
 	public:
+		AbstractHallOfFameAlgorithm();
+		~AbstractHallOfFameAlgorithm();
 		/**
 		 * \brief Compares individuals from the given environment with members of the hall of fame.
 		 * \param environment The environment to use.

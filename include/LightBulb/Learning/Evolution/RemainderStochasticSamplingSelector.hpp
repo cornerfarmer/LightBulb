@@ -9,10 +9,10 @@
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
 #include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp"
 
 namespace LightBulb
 {
+	class AbstractSelectionFunction;
 	/**
 	 * \brief Selects individuals depending on their fitness value.
 	 * \details First: Amount of selections per individual:  \n \f$ N = [\frac{fit(c)}{\sum{fit(c_i)}} * popsize]  \f$ \n \n

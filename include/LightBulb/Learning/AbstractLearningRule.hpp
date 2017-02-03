@@ -8,16 +8,19 @@
 #include <memory>
 
 // Includes
-#include "LightBulb/Logging/AbstractLogger.hpp"
+// TODO: Remove
 #include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
-#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraObject.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	struct AbstractLearningResult;
-
+	class AbstractLogger;
+	class LearningState;
+	class AbstractRandomGenerator;
+	enum CalculatorType;
+	enum LogLevel;
 	/**
 	 * \brief All general options which are the same for all learning rules.
 	 */
@@ -69,17 +72,7 @@ namespace LightBulb
 		/**
 		 * \brief Creates the options and fills them with default options.
 		 */
-		AbstractLearningRuleOptions()
-		{
-			maxIterationsPerTry = 10000;
-			maxTries = 1;
-			logger = nullptr;
-			debugOutputInterval = 1000;
-			dataSaveInterval = 1;
-			dataSetsPrefix = "";
-			seed = -1;
-			calculatorType = CT_CPU;
-		}
+		AbstractLearningRuleOptions();
 		virtual ~AbstractLearningRuleOptions() {}
 	};
 

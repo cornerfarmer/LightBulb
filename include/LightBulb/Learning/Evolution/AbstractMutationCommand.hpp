@@ -3,10 +3,6 @@
 #ifndef _ABSTRACTMUTATIONCOMMAND_H_
 #define _ABSTRACTMUTATIONCOMMAND_H_
 
-// Includes
-#include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
-
 // Library Includes
 #include <vector>
 
@@ -19,6 +15,9 @@ namespace LightBulb
 	class AbstractIndividual;
 	class AbstractEvolutionEnvironment;
 	class EvolutionLearningRule;
+	class AbstractMutationAlgorithm;
+	class AbstractMutationSelector;
+	class ZigguratGenerator;
 	/**
 	 * \brief A command which mutates a few of the given individuals.
 	 */
@@ -34,8 +33,8 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractMutationSelector> mutationSelector;
 	public:
-		virtual ~AbstractMutationCommand() {}
-		AbstractMutationCommand() = default;
+		virtual ~AbstractMutationCommand();
+		AbstractMutationCommand();
 		AbstractMutationCommand(const AbstractMutationCommand& other);
 		/**
 		 * \brief Creates a new mutation command.

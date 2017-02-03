@@ -2,6 +2,8 @@
 #include <LightBulb/Learning/Evolution/RandomCombiningStrategy.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
+#include <LightBulb/Logging/AbstractLogger.hpp>
 
 using namespace LightBulb;
 

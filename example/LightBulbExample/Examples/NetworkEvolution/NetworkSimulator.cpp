@@ -2,9 +2,8 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 #include "Examples/NetworkEvolution/Network.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-//Library includes
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+//Library includes
 
 using namespace LightBulb;
 

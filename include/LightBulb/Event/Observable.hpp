@@ -4,7 +4,6 @@
 #define _OBSERVABLE_H_
 
 // Includes
-#include "LightBulb/Event/AbstractObserver.hpp"
 #include "LightBulb/Event/Observer.hpp"
 
 //Library includes

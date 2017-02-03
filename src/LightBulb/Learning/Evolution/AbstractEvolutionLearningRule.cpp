@@ -3,6 +3,7 @@
 #include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 // Library includes
 #include <vector>
 
@@ -12,6 +13,9 @@ namespace LightBulb
 	{
 		return static_cast<AbstractEvolutionLearningRuleOptions&>(*options.get());
 	}
+
+	AbstractEvolutionLearningRule::~AbstractEvolutionLearningRule() = default;
+
 
 	AbstractEvolutionLearningRule::AbstractEvolutionLearningRule(AbstractEvolutionLearningRuleOptions& options_)
 		: AbstractLearningRule(new AbstractEvolutionLearningRuleOptions(options_))

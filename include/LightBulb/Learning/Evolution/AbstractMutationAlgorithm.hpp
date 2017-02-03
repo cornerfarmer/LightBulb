@@ -6,7 +6,6 @@
 // Includes
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
-#include "LightBulb/Random/ZigguratGenerator.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
@@ -16,6 +15,8 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
+	class ZigguratGenerator;
+
 	/**
 	 * \brief Describes an algorithm which mutates individuals.
 	 */

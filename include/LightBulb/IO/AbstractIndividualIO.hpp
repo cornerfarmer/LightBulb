@@ -6,10 +6,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/vector.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -19,10 +15,7 @@ namespace LightBulb
 	 * \param individual The AbstractIndividual to save.
 	 */
 	template <class Archive>
-	void save(Archive& archive, AbstractIndividual const& individual)
-	{
-		archive(cereal::make_nvp("mutationStrength", individual.mutationStrength));
-	}
+	extern void save(Archive& archive, AbstractIndividual const& individual);
 
 	/**
 	* \brief Load an AbstractIndividual
@@ -31,10 +24,7 @@ namespace LightBulb
 	* \param individual The AbstractIndividual to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractIndividual& individual)
-	{
-		archive(cereal::make_nvp("mutationStrength", individual.mutationStrength));
-	}
+	extern void load(Archive& archive, AbstractIndividual& individual);
 }
 
 

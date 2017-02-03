@@ -8,11 +8,14 @@
 
 // Includes
 #include "LightBulb/Learning/Supervised/AbstractSupervisedLearningRule.hpp"
+// TODO: Remove
 #include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 
 namespace LightBulb
 {
+	class AbstractGradientCalculation;
+	class AbstractGradientDescentAlgorithm;
 	/**
 	* \brief All options for the gradient descent learning rule.
 	*/

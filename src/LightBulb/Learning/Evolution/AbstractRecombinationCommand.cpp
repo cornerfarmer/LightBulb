@@ -2,6 +2,8 @@
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/AbstractRecombinationCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
 
 namespace LightBulb
 {
@@ -10,6 +12,10 @@ namespace LightBulb
 		recombinationAlgorithm.reset(recombinationAlgorithm_);
 		recombinationSelector.reset(recombinationSelector_);
 	}
+
+	AbstractRecombinationCommand::~AbstractRecombinationCommand() = default;
+
+	AbstractRecombinationCommand::AbstractRecombinationCommand() = default;
 
 	AbstractRecombinationCommand::AbstractRecombinationCommand(const AbstractRecombinationCommand& other)
 		:AbstractCommand(other)

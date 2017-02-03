@@ -8,7 +8,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb
 {
@@ -18,6 +17,8 @@ namespace LightBulb
 	class AbstractEvolutionEnvironment;
 	class AbstractNeuronDescriptionFactory;
 	struct FeedForwardNetworkTopologyOptions;
+	class NeuralNetwork;
+
 	/**
 	 * \brief This class is simplification of the AbstractIndividual class.
 	 * \details It decreases the work you have to do for your individual class, but also decreases your possibilities.

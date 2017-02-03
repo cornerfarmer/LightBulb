@@ -10,6 +10,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 using namespace LightBulb;
 

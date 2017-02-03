@@ -4,9 +4,10 @@
 #define _ABSTRACTNETWORKTOPOLOGY_H_
 
 // Includes
-#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library includes
 #include <vector>

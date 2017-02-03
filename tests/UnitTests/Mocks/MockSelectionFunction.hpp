@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp>
+#include <LightBulb/Random/AbstractRandomGenerator.hpp>
 
 class MockSelectionFunction : public LightBulb::AbstractSelectionFunction
 {

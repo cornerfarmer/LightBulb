@@ -4,12 +4,12 @@
 #define _ABSTRACTLINEARALGEBRAUSER_H_
 
 // Include
-#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraObject.hpp"
 
 // Library Includes
 
 namespace LightBulb
 {
+	enum CalculatorType;
 
 	class AbstractLinearAlgebraUser
 	{

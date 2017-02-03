@@ -2,11 +2,10 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/Pong.hpp"
 #include "Examples/PongEvolution/PongAI.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 //Library includes
-#include <iomanip>
-#include <chrono>
-#include <thread>
+
 
 using namespace LightBulb;
 

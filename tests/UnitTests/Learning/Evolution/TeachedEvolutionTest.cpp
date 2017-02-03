@@ -6,6 +6,7 @@
 #include <Mocks/MockTeacher.hpp>
 #include <Mocks/MockNeuronDescriptionFactory.hpp>
 #include "Mocks/MockRandomGenerator.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 using namespace LightBulb;
 

@@ -1,8 +1,8 @@
 // Includes
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/RateDifferenceCondition.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 // Library includes
-#include <iomanip>
 
 namespace LightBulb
 {

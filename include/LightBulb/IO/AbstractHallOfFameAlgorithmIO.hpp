@@ -6,9 +6,6 @@
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -18,10 +15,7 @@ namespace LightBulb
 	* \param hallOfFameAlgorithm The AbstractHallOfFameAlgorithm to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm)
-	{
-		archive(cereal::make_nvp("members", hallOfFameAlgorithm.members));
-	}
+	extern void serialize(Archive& archive, AbstractHallOfFameAlgorithm& hallOfFameAlgorithm);
 }
 
 #endif

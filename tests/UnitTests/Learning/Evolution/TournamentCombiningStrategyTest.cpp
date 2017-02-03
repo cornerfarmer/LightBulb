@@ -2,6 +2,7 @@
 #include <LightBulb/Learning/Evolution/TournamentCombiningStrategy.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
 
 using namespace LightBulb;
 

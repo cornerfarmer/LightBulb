@@ -7,6 +7,7 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+// TODO: Remove
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb
@@ -15,6 +16,7 @@ namespace LightBulb
 	class EvolutionLearningRule;
 	class TeachingEvolutionEnvironment;
 	class FeedForwardNetworkTopologyOptions;
+	class NeuralNetwork;
 	/**
 	 * \brief A individual used in the TeachingEvolutionEnvironment.
 	 */
@@ -52,7 +54,8 @@ namespace LightBulb
 		 * \param options The feed forward network options.
 		 */
 		TeachedIndividual(TeachingEvolutionEnvironment& teachingEvolutionEnvironment_, FeedForwardNetworkTopologyOptions& options);
-		TeachedIndividual() = default;
+		TeachedIndividual();
+		~TeachedIndividual();
 		/**
 		 * \brief Returns the current total error.
 		 * \return The current total error.

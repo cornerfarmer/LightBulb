@@ -1,7 +1,6 @@
 ﻿// Includes
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 
 namespace LightBulb

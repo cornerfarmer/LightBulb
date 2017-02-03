@@ -2,6 +2,7 @@
 #include <LightBulb/Learning/Evolution/RoundRobinCombiningStrategy.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockIndividual.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
 
 using namespace LightBulb;
 

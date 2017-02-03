@@ -1,6 +1,9 @@
 // Includes
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+
 // Library includes
 
 namespace LightBulb

@@ -5,6 +5,10 @@
 
 #include "gmock/gmock.h"
 #include <LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp>
+#include <LightBulb/Learning/Evolution/AbstractIndividual.hpp>
+#include <LightBulb/Random/AbstractRandomGenerator.hpp>
+#include <LightBulb/Logging/AbstractLogger.hpp>
 
 class MockCoevolutionEnvironment : public LightBulb::AbstractCoevolutionEnvironment
 {

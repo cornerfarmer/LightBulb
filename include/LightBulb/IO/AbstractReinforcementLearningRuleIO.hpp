@@ -5,8 +5,6 @@
 
 // Includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
-// Libraray includes
-#include <cereal/cereal.hpp>
 
 namespace LightBulb
 {
@@ -17,11 +15,7 @@ namespace LightBulb
 	* \param learningRule The AbstractReinforcementLearningRule to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule)
-	{
-		archive(cereal::base_class<AbstractLearningRule>(&learningRule));
-		learningRule.randomGeneratorHasChanged();
-	}
+	extern void serialize(Archive& archive, AbstractReinforcementLearningRule& learningRule);
 }
 
 #endif

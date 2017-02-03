@@ -6,10 +6,6 @@
 // Libary includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
-#include "LightBulb/IO/EigenMatrixIO.hpp"
-
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
 
 namespace LightBulb
 {
@@ -20,11 +16,7 @@ namespace LightBulb
 	* \param resilientLearningRate The ResilientLearningRate to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, ResilientLearningRate & resilientLearningRate)
-	{
-		archive(cereal::base_class<AbstractGradientDescentAlgorithm>(&resilientLearningRate));
-		archive(cereal::make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
-	}
+	extern void serialize(Archive& archive, ResilientLearningRate & resilientLearningRate);
 }
 
 namespace cereal
@@ -38,16 +30,8 @@ namespace cereal
 		* \param resilientLearningRate The existing ResilientLearningRate to construct.
 		*/
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::ResilientLearningRate & resilientLearningRate)
-		{
-			ar(base_class<LightBulb::AbstractGradientDescentAlgorithm>(&resilientLearningRate));
-			ar(make_nvp("previousLearningRates", resilientLearningRate.previousLearningRates));
-		}
+		static void construct(Archive& ar, LightBulb::ResilientLearningRate & resilientLearningRate);
 	};
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::ResilientLearningRate);
 
 #endif

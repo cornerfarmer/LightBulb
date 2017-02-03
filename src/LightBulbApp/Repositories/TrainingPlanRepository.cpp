@@ -1,10 +1,7 @@
 // Includes
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
-#include <fstream>
-#include "LightBulb/IO/UsedArchives.hpp"
-#include <cereal/types/memory.hpp>
-#include <cereal/types/polymorphic.hpp>
+#include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
 
 namespace LightBulb
 {

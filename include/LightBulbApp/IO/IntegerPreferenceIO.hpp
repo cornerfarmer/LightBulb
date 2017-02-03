@@ -6,10 +6,6 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -19,11 +15,7 @@ namespace LightBulb
 	* \param integerPreference The IntegerPreference to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, IntegerPreference const& integerPreference)
-	{
-		archive(cereal::base_class<AbstractPreference>(&integerPreference));
-		archive(cereal::make_nvp("value", integerPreference.value));
-	}
+	extern void save(Archive& archive, IntegerPreference const& integerPreference);
 
 	/**
 	* \brief Loads an IntegerPreference.
@@ -32,15 +24,7 @@ namespace LightBulb
 	* \param integerPreference The IntegerPreference to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, IntegerPreference& integerPreference)
-	{
-		archive(cereal::base_class<AbstractPreference>(&integerPreference));
-		archive(cereal::make_nvp("value", integerPreference.value));
-	}
+	extern void load(Archive& archive, IntegerPreference& integerPreference);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::IntegerPreference);
 
 #endif

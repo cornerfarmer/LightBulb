@@ -5,6 +5,7 @@
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/Function/RandomFunction/EqualRandomFunction.hpp"
 
 namespace LightBulb
 {
@@ -15,6 +16,47 @@ namespace LightBulb
 		removeNeuronsByTheirTotalWeight = removeNeuronsByTheirTotalWeight_;
 		useRandomFunction = useRandomFunction_;
 		ignoreInputLayer = ignoreInputLayer_;
+	}
+
+	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm() = default;
+
+
+
+	MagnitudeBasedPruningMutationAlgorithm::~MagnitudeBasedPruningMutationAlgorithm() = default;
+
+	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm&& other) noexcept
+		: MagnitudeBasedPruningMutationAlgorithm()
+	{
+		swap(*this, other);
+	}
+
+	MagnitudeBasedPruningMutationAlgorithm& MagnitudeBasedPruningMutationAlgorithm::operator=(MagnitudeBasedPruningMutationAlgorithm other)
+	{
+		swap(*this, other);
+		return *this;
+	}
+
+	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(const MagnitudeBasedPruningMutationAlgorithm& other)
+		: AbstractMutationAlgorithm(other)
+	{
+		randomFunction.reset(dynamic_cast<EqualRandomFunction*>(other.randomFunction->clone()));
+		removeNeuronsPerIteration = other.removeNeuronsPerIteration;
+		removeWeightsPerIteration = other.removeWeightsPerIteration;
+		removeNeuronsByTheirTotalWeight = other.removeNeuronsByTheirTotalWeight;
+		useRandomFunction = other.useRandomFunction;
+		ignoreInputLayer = other.ignoreInputLayer;
+	}
+
+	void swap(MagnitudeBasedPruningMutationAlgorithm& lhs, MagnitudeBasedPruningMutationAlgorithm& rhs) noexcept
+	{
+		using std::swap;
+		swap(static_cast<AbstractMutationAlgorithm&>(lhs), static_cast<AbstractMutationAlgorithm&>(rhs));
+		swap(lhs.randomFunction, rhs.randomFunction);
+		swap(lhs.removeNeuronsPerIteration, rhs.removeNeuronsPerIteration);
+		swap(lhs.removeWeightsPerIteration, rhs.removeWeightsPerIteration);
+		swap(lhs.removeNeuronsByTheirTotalWeight, rhs.removeNeuronsByTheirTotalWeight);
+		swap(lhs.useRandomFunction, rhs.useRandomFunction);
+		swap(lhs.ignoreInputLayer, rhs.ignoreInputLayer);
 	}
 
 	void MagnitudeBasedPruningMutationAlgorithm::execute(AbstractIndividual& individual1)
@@ -76,7 +118,7 @@ namespace LightBulb
 
 				int selectedIndex = 0;
 				if (useRandomFunction)
-					selectedIndex = randomFunction.execute(neuronRanking.size());
+					selectedIndex = randomFunction->execute(neuronRanking.size());
 
 				individual1.removeNeuron(std::get<1>(neuronRanking[selectedIndex]), std::get<2>(neuronRanking[selectedIndex]));
 			}
@@ -118,7 +160,7 @@ namespace LightBulb
 	void MagnitudeBasedPruningMutationAlgorithm::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
-		randomFunction.setRandomGenerator(randomGenerator_);
+		randomFunction->setRandomGenerator(randomGenerator_);
 	}
 
 	AbstractCloneable* MagnitudeBasedPruningMutationAlgorithm::clone() const

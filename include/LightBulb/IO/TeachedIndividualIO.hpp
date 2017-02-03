@@ -5,13 +5,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/TeachedIndividual.hpp"
-#include "LightBulb/IO/IOStorage.hpp"
-#include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
-
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/types/vector.hpp>
 
 namespace LightBulb
 {
@@ -22,11 +15,7 @@ namespace LightBulb
 	* \param individual The TeachedIndividual to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, TeachedIndividual const& individual)
-	{
-		archive(cereal::base_class<AbstractIndividual>(&individual));
-		archive(cereal::make_nvp("neuralNetwork", individual.neuralNetwork));
-	}
+	extern void save(Archive& archive, TeachedIndividual const& individual);
 
 	/**
 	* \brief Loads a TeachedIndividual.
@@ -35,17 +24,7 @@ namespace LightBulb
 	* \param individual The TeachedIndividual to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, TeachedIndividual& individual)
-	{
-		archive(cereal::base_class<AbstractIndividual>(&individual));
-		archive(cereal::make_nvp("neuralNetwork", individual.neuralNetwork));
-		individual.teachingEvolutionEnvironment = static_cast<TeachingEvolutionEnvironment*>(IOStorage<AbstractEvolutionEnvironment>::get());
-		individual.doNNCalculation();
-	}
+	extern void load(Archive& archive, TeachedIndividual& individual);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::TeachedIndividual);
 
 #endif

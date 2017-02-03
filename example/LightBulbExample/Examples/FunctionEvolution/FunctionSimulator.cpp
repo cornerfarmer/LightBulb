@@ -2,7 +2,6 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "Examples/FunctionEvolution/Position.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
 
 using namespace LightBulb;

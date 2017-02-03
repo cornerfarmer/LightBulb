@@ -6,9 +6,6 @@
 // Includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -18,10 +15,7 @@ namespace LightBulb
 	* \param gradientDescentAlgorithm The AbstractGradientDescentAlgorithm to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractGradientDescentAlgorithm& gradientDescentAlgorithm)
-	{
-		archive(cereal::make_nvp("initialized", gradientDescentAlgorithm.initialized));
-	}
+	extern void serialize(Archive& archive, AbstractGradientDescentAlgorithm& gradientDescentAlgorithm);
 }
 
 #endif

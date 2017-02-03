@@ -2,10 +2,7 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 //Library includes
-#include <iomanip>
-#include <condition_variable>
 
 using namespace LightBulb;
 

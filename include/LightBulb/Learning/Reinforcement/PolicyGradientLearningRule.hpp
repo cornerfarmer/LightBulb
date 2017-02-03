@@ -5,10 +5,10 @@
 
 // Includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
-#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+// TODO: Remove
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 
 // Library Includes
 #include <vector>
@@ -17,6 +17,8 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractNetworkTopology;
+	class AbstractGradientCalculation;
+	class NeuralNetwork;
 	/**
 	* \brief All options for the PolicyGradientLearningRule.
 	*/

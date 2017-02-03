@@ -10,6 +10,7 @@
 #include <string>
 #include <memory>
 #include <cmath>
+#include <thread>
 
 #include <Eigen/Dense>
 
@@ -26,3 +27,9 @@
 #include <cereal/archives/xml.hpp>
 #include <cereal/archives/portable_binary.hpp>
 #include <cereal/archives/json.hpp>
+
+#include "IO/UseParentSerialization.hpp"
+#include "IO/TemplateDeclaration.hpp"
+#include "LinearAlgebra/Vector.hpp"
+#include "LinearAlgebra/Matrix.hpp"
+#include "LinearAlgebra/Scalar.hpp"

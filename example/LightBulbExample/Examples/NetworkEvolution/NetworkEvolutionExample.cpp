@@ -1,20 +1,14 @@
 #include "LightBulbExamplePrec.hpp"
 #include "NetworkEvolutionExample.hpp"
-#include <Examples/NetworkEvolution/NetworkSimulator.hpp>
-#include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
-#include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
-#include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>
-#include <LightBulb/Learning/Evolution/RemainderStochasticSamplingSelector.hpp>
-#include <LightBulb/Learning/Evolution/BestSelectionCommand.hpp>
-#include <LightBulb/Learning/Evolution/ConstantReuseCommand.hpp>
-#include <LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp>
-#include <LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp>
-#include <LightBulb/Learning/Evolution/ConstantCreationCommand.hpp>
-#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
-#include <LightBulb/Learning/Evolution/BestReuseSelector.hpp>
-#include <LightBulb/Learning/Evolution/FitnessCondition.hpp>
-#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractLearningRulePreferenceGroup.hpp"
-#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
+#include "Examples/NetworkEvolution/NetworkSimulator.hpp"
+#include "LightBulb/Learning/Evolution/RateDifferenceCondition.hpp"
+#include "LightBulb/Learning/Evolution/FitnessCondition.hpp"
+#include "LightBulb/Learning/Evolution/ConstantCreationCommand.hpp"
+#include "LightBulb/Learning/Evolution/ConstantReuseCommand.hpp"
+#include "LightBulb/Learning/Evolution/BestSelectionCommand.hpp"
+#include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
+#include "LightBulb/Learning/Evolution/RemainderStochasticSamplingSelector.hpp"
+#include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
 
 using namespace LightBulb;
 

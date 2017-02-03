@@ -9,7 +9,6 @@
 #include <memory>
 
 // Includes
-#include "LightBulb/Learning/Evolution/AbstractReuseSelector.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCommand.hpp"
 
 namespace LightBulb
@@ -17,6 +16,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractIndividual;
 	class AbstractEvolutionEnvironment;
+	class AbstractReuseSelector;
 	/**
 	 * \brief A command which reuses a few of the given individuals directly.
 	 */
@@ -28,7 +28,7 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractReuseSelector> reuseSelector;
 	public:
-		virtual ~AbstractReuseCommand() {};
+		virtual ~AbstractReuseCommand();
 		AbstractReuseCommand() = default;
 		AbstractReuseCommand(AbstractReuseSelector* reuseSelector_);
 		AbstractReuseCommand(const AbstractReuseCommand& other);

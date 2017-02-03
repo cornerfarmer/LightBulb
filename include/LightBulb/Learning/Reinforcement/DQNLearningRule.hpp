@@ -5,10 +5,8 @@
 
 // Includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
-#include "LightBulb/Teaching/Teacher.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 // Library Includes
 #include <vector>
@@ -169,7 +167,7 @@ namespace LightBulb
 		/**
 		 * \brief The teacher which is used by the gradient descent part.
 		 */
-		Teacher teacher;
+		std::unique_ptr<Teacher> teacher;
 		/**
 		 * \brief The transition memory store.
 		 */

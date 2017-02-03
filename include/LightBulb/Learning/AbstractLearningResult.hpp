@@ -3,6 +3,7 @@
 
 namespace LightBulb
 {
+	class LearningState;
 	/**
 	 * \brief Contains all results from a learning rule.
 	 */
@@ -17,7 +18,7 @@ namespace LightBulb
 		 */
 		bool succeeded;
 
-		virtual ~AbstractLearningResult() {};
+		virtual ~AbstractLearningResult();
 	};
 }
 

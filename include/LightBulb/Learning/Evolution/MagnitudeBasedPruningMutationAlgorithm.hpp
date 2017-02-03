@@ -7,12 +7,12 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "LightBulb/Function/RandomFunction/EqualRandomFunction.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
+	class EqualRandomFunction;
 	/**
 	 * \brief A mutation algorithm which removes weights and neurons from given individuals.
 	 * \details Removing neurons:\n
@@ -27,7 +27,7 @@ namespace LightBulb
 		/**
 		 * \brief The random function for choosing the weights and neurons to remove.
 		 */
-		EqualRandomFunction randomFunction;
+		std::unique_ptr<EqualRandomFunction> randomFunction;
 		/**
 		 * \brief The amount of neurons to remove.
 		 */
@@ -58,6 +58,14 @@ namespace LightBulb
 		 * \param removeNeuronsByTheirTotalWeight_ True, if neurons should be removed depending on their efferent weights.
 		 */
 		MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_ = true, bool ignoreInputLayer_ = false, bool removeNeuronsByTheirTotalWeight_ = false);
+		MagnitudeBasedPruningMutationAlgorithm();
+		MagnitudeBasedPruningMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm&& other) noexcept;
+		MagnitudeBasedPruningMutationAlgorithm& operator=(MagnitudeBasedPruningMutationAlgorithm other);
+
+		MagnitudeBasedPruningMutationAlgorithm(const MagnitudeBasedPruningMutationAlgorithm& other);
+
+		friend void swap(MagnitudeBasedPruningMutationAlgorithm& lhs, MagnitudeBasedPruningMutationAlgorithm& rhs) noexcept;
+		~MagnitudeBasedPruningMutationAlgorithm();
 		// Inherited:
 		void execute(AbstractIndividual& individual1) override;
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;

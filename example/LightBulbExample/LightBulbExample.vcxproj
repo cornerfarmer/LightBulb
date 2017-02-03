@@ -81,7 +81,7 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../include;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_HAVE_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm300 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbExamplePrec.hpp</PrecompiledHeaderFile>
@@ -114,7 +114,7 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;../../include;../LightBulbExample;..\..\extlibs\cereal\include;..\..\extlibs\freechart\include;..\..\extlibs\eigen;..\..\extlibs\viennacl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> _UNICODE;VIENNACL_WITH_OPENCL;VIENNACL_HAVE_EIGEN;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm300 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbExamplePrec.hpp</PrecompiledHeaderFile>
@@ -167,6 +167,11 @@
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameFactory.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeGameWindow.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeAI.cpp" />
+    <ClCompile Include="IO\NetworkIO.cpp" />
+    <ClCompile Include="IO\NetworkSimulatorIO.cpp" />
+    <ClCompile Include="IO\PongGameIO.cpp" />
+    <ClCompile Include="IO\PongReinforcementEnvironmentIO.cpp" />
+    <ClCompile Include="IO\PositionIO.cpp" />
     <ClCompile Include="LightBulbExamplePrec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

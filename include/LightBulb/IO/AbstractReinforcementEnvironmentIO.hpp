@@ -6,9 +6,6 @@
 // Includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -18,11 +15,7 @@ namespace LightBulb
 	* \param environment The AbstractReinforcementEnvironment to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractReinforcementEnvironment& environment)
-	{
-		archive(cereal::make_nvp("neuralNetwork", environment.neuralNetwork));
-		archive(cereal::make_nvp("epsilon", environment.epsilon));
-	}
+	extern void serialize(Archive& archive, AbstractReinforcementEnvironment& environment);
 }
 
 #endif

@@ -3,15 +3,28 @@
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 #include "LightBulb/Random/StandardRandomGenerator.hpp"
 #include "LightBulb/Learning/AbstractLearningResult.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 // Library includes
-#include <iomanip>
 #include <vector>
 
 namespace LightBulb
 {
+
+	AbstractLearningRuleOptions::AbstractLearningRuleOptions()
+	{
+		maxIterationsPerTry = 10000;
+		maxTries = 1;
+		logger = nullptr;
+		debugOutputInterval = 1000;
+		dataSaveInterval = 1;
+		dataSetsPrefix = "";
+		seed = -1;
+		calculatorType = CT_CPU;
+	}
+
 	AbstractLearningRule::AbstractLearningRule(AbstractLearningRuleOptions* options_)
 	{
 		options.reset(options_);

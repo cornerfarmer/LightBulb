@@ -2,10 +2,10 @@
 #define _SUPERVISEDLEARNINGRESULT_H_
 
 #include "LightBulb/Learning/AbstractLearningResult.hpp"
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 
 namespace LightBulb
 {
+	class AbstractNeuralNetwork;
 	/**
 	 * \brief Contains all results from a supervised learning rule.
 	 */

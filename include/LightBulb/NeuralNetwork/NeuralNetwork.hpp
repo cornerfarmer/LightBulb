@@ -9,15 +9,15 @@
 
 // Includes
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include <cereal/access.hpp>
+// TODO: Remove
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class AbstractActivationOrder;
 	class AbstractNeuron;
-
 	/**
 	* \brief Describes a neural network which is the heart if LightBulb.
 	* \details The neural network is trained by learning rules. After that it can be used to calculated further results.
@@ -47,6 +47,7 @@ namespace LightBulb
 		 * \param networkTopology_ The network topology of the new network.
 		 */
 		NeuralNetwork(AbstractNetworkTopology* networkTopology_);
+		~NeuralNetwork();
 		// Inherited:
 		void calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations = true) override;
 		std::vector<double> calculate(const std::vector<double>& input, const AbstractActivationOrder& activationOrder, bool resetActivations = true) override;

@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <LightBulb/Teaching/AbstractTeachingLesson.hpp>
+#include <LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp>
 
 class MockTeachingLesson : public LightBulb::AbstractTeachingLesson
 {

@@ -7,6 +7,7 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 
 namespace LightBulb
 {

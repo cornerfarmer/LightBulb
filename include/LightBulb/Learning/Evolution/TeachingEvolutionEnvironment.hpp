@@ -7,7 +7,6 @@
 #include <vector>
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
@@ -16,6 +15,7 @@ namespace LightBulb
 	class EvolutionLearningRule;
 	class AbstractIndividual;
 	class AbstractTeacher;
+	struct FeedForwardNetworkTopologyOptions;
 
 #define DATASET_TEACHING_ERROR "Teaching error"
 #define DATASET_WEIGHTDECAY_ERROR "Weigth decay error"
@@ -34,7 +34,7 @@ namespace LightBulb
 		/**
 		 * \brief Contains the given network options for new individuals.
 		 */
-		FeedForwardNetworkTopologyOptions networkOptions;
+		std::unique_ptr<FeedForwardNetworkTopologyOptions> networkOptions;
 		// Inherited
 		AbstractIndividual* createNewIndividual() override;
 	public:
@@ -44,7 +44,8 @@ namespace LightBulb
 		 * \param networkOptions_ The network options which should be used.
 		 */
 		TeachingEvolutionEnvironment(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_);
-		TeachingEvolutionEnvironment() = default;
+		TeachingEvolutionEnvironment();
+		~TeachingEvolutionEnvironment();
 		/**
 		 * \brief Returns teh used teacher.
 		 * \return The teacher which contains the learning goals.

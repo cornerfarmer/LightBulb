@@ -7,7 +7,6 @@
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "LightBulb/Learning/Evolution/FitnessSharingFitnessFunction.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 
 namespace LightBulb

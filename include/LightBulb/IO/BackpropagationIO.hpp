@@ -5,10 +5,6 @@
 
 // Libary includes
 #include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
-#include "LightBulb/IO/EigenMatrixIO.hpp"
-
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
 
 namespace LightBulb
 {
@@ -19,11 +15,7 @@ namespace LightBulb
 	* \param backpropagation The Backpropagation to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, Backpropagation& backpropagation)
-	{
-		archive(cereal::base_class<AbstractGradientCalculation>(&backpropagation));
-		archive(cereal::make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
-	}
+	extern void serialize(Archive& archive, Backpropagation& backpropagation);
 }
 
 namespace cereal
@@ -37,17 +29,8 @@ namespace cereal
 		* \param backpropagation The existing Backpropagation to construct.
 		*/
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::Backpropagation& backpropagation)
-		{
-			ar(base_class<LightBulb::AbstractGradientCalculation>(&backpropagation));
-			ar(make_nvp("lastDeltaVectorOutputLayer", backpropagation.lastDeltaVectorOutputLayer));
-		}
+		static void construct(Archive& ar, LightBulb::Backpropagation& backpropagation);
 	};
 }
-
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::Backpropagation);
 
 #endif

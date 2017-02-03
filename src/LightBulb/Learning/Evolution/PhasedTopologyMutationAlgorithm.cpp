@@ -4,6 +4,8 @@
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include "LightBulb/Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/NetworkGrowMutationAlgorithm.hpp"
 
 namespace LightBulb
 {

@@ -2,11 +2,6 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/NetworkViewerWindow.hpp"
 #include "LightBulbApp/Windows/NetworkViewerController.hpp"
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-#include <wx/dataview.h>
-#include <wx/dcbuffer.h>
-#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 namespace LightBulb
 {

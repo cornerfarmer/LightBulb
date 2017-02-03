@@ -6,11 +6,6 @@
 // Libary includes
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
 
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
-#include <cereal/types/vector.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -20,11 +15,7 @@ namespace LightBulb
 	* \param descriptionFactory The SameNeuronDescriptionFactory to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory)
-	{
-		archive(cereal::make_nvp("neuronDescription", descriptionFactory.neuronDescription));
-		archive(cereal::base_class<AbstractNeuronDescriptionFactory>(&descriptionFactory));
-	}
+	extern void serialize(Archive& archive, SameNeuronDescriptionFactory& descriptionFactory);
 }
 
 namespace cereal
@@ -38,19 +29,8 @@ namespace cereal
 		* \param construct The SameNeuronDescriptionFactory construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive & ar, construct<LightBulb::SameNeuronDescriptionFactory>& construct)
-		{
-			using namespace LightBulb;
-			std::unique_ptr<NeuronDescription> neuronDescription;
-			ar(make_nvp("neuronDescription", neuronDescription));
-			construct(neuronDescription.release());
-			ar(cereal::base_class<AbstractNeuronDescriptionFactory>(construct.ptr()));
-		}
+		static void load_and_construct(Archive & ar, construct<LightBulb::SameNeuronDescriptionFactory>& construct);
 	};
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::SameNeuronDescriptionFactory);
 
 #endif

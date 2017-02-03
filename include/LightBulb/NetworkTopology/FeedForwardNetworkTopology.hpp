@@ -9,14 +9,13 @@
 
 // Includes
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class AbstractNeuronDescriptionFactory;
 	class NeuronDescription;
-
+	class TopologicalOrder;
 	/**
 	 * \brief This struct contains all options needed to build a FeedForwardNetworkTopology
 	 */
@@ -64,7 +63,7 @@ namespace LightBulb
 		template <class Archive>
 		friend void save(Archive& archive, FeedForwardNetworkTopology const & feedForwardNetworkTopology);
 	private:
-		TopologicalOrder defaultActivationOrder;
+		std::unique_ptr<TopologicalOrder> defaultActivationOrder;
 	protected:
 		/**
 		 * \brief The options of the network.

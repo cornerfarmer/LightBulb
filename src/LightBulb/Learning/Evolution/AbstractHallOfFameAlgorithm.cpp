@@ -3,6 +3,7 @@
 #include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 
 namespace LightBulb
 {
@@ -25,5 +26,9 @@ namespace LightBulb
 		members.push_back(std::unique_ptr<AbstractIndividual>(newMember->clone(false)));
 		log("Added " + std::to_string(members.size()) + ". hall of fame member", LL_LOW);
 	}
+	
+	AbstractHallOfFameAlgorithm::AbstractHallOfFameAlgorithm() = default;
+
+	AbstractHallOfFameAlgorithm::~AbstractHallOfFameAlgorithm() = default;
 }
 

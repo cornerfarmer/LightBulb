@@ -6,9 +6,6 @@
 // Includes
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -18,10 +15,7 @@ namespace LightBulb
 	* \param randomGenerator The AbstractRandomGenerator to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, AbstractRandomGenerator const& randomGenerator)
-	{
-		archive(cereal::make_nvp("seed", randomGenerator.seed));
-	}
+	extern void save(Archive& archive, AbstractRandomGenerator const& randomGenerator);
 
 	/**
 	* \brief Loads an AbstractRandomGenerator.
@@ -30,10 +24,7 @@ namespace LightBulb
 	* \param randomGenerator The AbstractRandomGenerator to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractRandomGenerator& randomGenerator)
-	{
-		archive(cereal::make_nvp("seed", randomGenerator.seed));
-	}
+	extern void load(Archive& archive, AbstractRandomGenerator& randomGenerator);
 }
 
 #endif

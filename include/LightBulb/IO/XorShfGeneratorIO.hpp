@@ -6,11 +6,6 @@
 // Includes
 #include "LightBulb/Random/XorShfGenerator.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/types/vector.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -20,14 +15,7 @@ namespace LightBulb
 	* \param xorShfGenerator The XorShfGenerator to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, XorShfGenerator const& xorShfGenerator)
-	{
-		archive(cereal::base_class<AbstractRandomGenerator>(&xorShfGenerator));
-
-		archive(cereal::make_nvp("x", xorShfGenerator.x));
-		archive(cereal::make_nvp("y", xorShfGenerator.y));
-		archive(cereal::make_nvp("z", xorShfGenerator.z));
-	}
+	extern void save(Archive& archive, XorShfGenerator const& xorShfGenerator);
 
 	/**
 	* \brief Loads a XorShfGenerator.
@@ -36,18 +24,7 @@ namespace LightBulb
 	* \param xorShfGenerator The XorShfGenerator to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, XorShfGenerator& xorShfGenerator)
-	{
-		archive(cereal::base_class<AbstractRandomGenerator>(&xorShfGenerator));
-
-		archive(cereal::make_nvp("x", xorShfGenerator.x));
-		archive(cereal::make_nvp("y", xorShfGenerator.y));
-		archive(cereal::make_nvp("z", xorShfGenerator.z));
-	}
+	extern void load(Archive& archive, XorShfGenerator& xorShfGenerator);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::XorShfGenerator)
 
 #endif

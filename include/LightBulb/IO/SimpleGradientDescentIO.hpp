@@ -6,12 +6,6 @@
 // Libary includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
-#include "LightBulb/IO/EigenMatrixIO.hpp"
-#include "LightBulb/LinearAlgebra/Matrix.hpp"
-
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
 
 namespace LightBulb
 {
@@ -22,11 +16,7 @@ namespace LightBulb
 	* \param simpleGradientDescent The SimpleGradientDescent to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent)
-	{
-		archive(cereal::base_class<AbstractGradientDescentAlgorithm>(&simpleGradientDescent));
-		archive(cereal::make_nvp("previousDeltaWeights", simpleGradientDescent.previousDeltaWeights));
-	}
+	void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent);
 }
 
 namespace cereal
@@ -40,17 +30,8 @@ namespace cereal
 		* \param simpleGradientDescent The existing SimpleGradientDescent to construct.
 		*/
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::SimpleGradientDescent& simpleGradientDescent)
-		{
-			using namespace LightBulb;
-			ar(base_class<AbstractGradientDescentAlgorithm>(&simpleGradientDescent));
-			ar(make_nvp("previousDeltaWeights", simpleGradientDescent.previousDeltaWeights));
-		}
+		static void construct(Archive& ar, LightBulb::SimpleGradientDescent& simpleGradientDescent);
 	};
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::SimpleGradientDescent);
 
 #endif

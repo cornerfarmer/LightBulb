@@ -4,13 +4,13 @@
 #define _TEACHER_H_
 
 // Includes
-#include "LightBulb/Teaching/AbstractTeachingLesson.hpp"
 #include "LightBulb/Teaching/AbstractTeacher.hpp"
 
 // Library includes
 
 namespace LightBulb
 {
+	class AbstractTeachingLesson;
 	/**
 	* \brief Describes a teacher which provides all information the network should learn.
 	* \details Contains multiple teaching and testing lessons which determine the values the network should calculate.

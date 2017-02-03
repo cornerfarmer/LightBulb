@@ -3,6 +3,9 @@
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
+
 //Library includes
 
 namespace LightBulb

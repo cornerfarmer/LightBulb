@@ -3,12 +3,16 @@
 #include "LightBulb/Learning/Reinforcement/DQNLearningRule.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-// Library includes
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include "LightBulb/Teaching/TeachingLessonLinearInput.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/Learning/Supervised/SupervisedLearningResult.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/Teaching/Teacher.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+// Library includes
 
 namespace LightBulb
 {
@@ -39,7 +43,7 @@ namespace LightBulb
 	void DQNLearningRule::initialize(DQNLearningRuleOptions* options)
 	{
 		options->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(options->rmsPropOptions);
-		options->gradientDescentOptions.teacher = &teacher;
+		options->gradientDescentOptions.teacher = teacher.get();
 		options->gradientDescentOptions.neuralNetwork = &getOptions().environment->getNeuralNetwork();
 		options->gradientDescentOptions.logger = nullptr;
 		gradientDescent.reset(new GradientDescentLearningRule(options->gradientDescentOptions));
@@ -93,7 +97,7 @@ namespace LightBulb
 
 	void DQNLearningRule::doSupervisedLearning()
 	{
-		teacher.clearLessons();
+		teacher->clearLessons();
 
 		for (int i = 0; i < std::min(static_cast<int>(transitions.size()), getOptions().minibatchSize); i++)
 		{
@@ -114,7 +118,7 @@ namespace LightBulb
 
 			input->set(transitions[r].action, y);
 
-			teacher.addTeachingLesson(new TeachingLessonLinearInput(transitions[r].state, input));
+			teacher->addTeachingLesson(new TeachingLessonLinearInput(transitions[r].state, input));
 		}
 
 		//auto gradient = checkGradient(&teacher, getOptions()->environment->getNeuralNetwork()->getNetworkTopology());

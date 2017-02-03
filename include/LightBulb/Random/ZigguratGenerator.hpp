@@ -4,7 +4,6 @@
 #define _ZIGGURATGENERATOR_H_
 
 // Includes
-#include "LightBulb/Lib/ziggurat.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Scalar.hpp"

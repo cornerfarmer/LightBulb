@@ -3,6 +3,7 @@
 #include "Examples/PongEvolution/PongAI.hpp"
 #include "Examples/PongEvolution/Pong.hpp"
 
+
 using namespace LightBulb;
 
 PongAI::PongAI(FeedForwardNetworkTopologyOptions& options, Pong& pong_)

@@ -7,6 +7,7 @@
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {

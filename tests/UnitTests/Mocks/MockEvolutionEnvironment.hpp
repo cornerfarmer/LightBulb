@@ -5,6 +5,8 @@
 
 #include "gmock/gmock.h"
 #include <LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp>
+#include <LightBulb/Logging/AbstractLogger.hpp>
+#include <LightBulb/Random/AbstractRandomGenerator.hpp>
 
 class MockEvolutionEnvironment : public LightBulb::AbstractEvolutionEnvironment
 {

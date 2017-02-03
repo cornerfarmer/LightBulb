@@ -24,7 +24,12 @@ namespace LightBulb
 
 		creationTime = time(nullptr);
 	}
-	
+
+	NeuralNetwork::~NeuralNetwork()
+	{
+		
+	}
+
 	void NeuralNetwork::calculate(const std::vector<double>& input, std::vector<double>& output, const AbstractActivationOrder &activationOrder, bool resetActivations)
 	{
 		// If the calculation start at time 0

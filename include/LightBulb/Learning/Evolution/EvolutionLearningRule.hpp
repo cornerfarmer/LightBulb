@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
+#include "LightBulb/Event/Observable.hpp"
 
 // Library Includes
 #include <vector>

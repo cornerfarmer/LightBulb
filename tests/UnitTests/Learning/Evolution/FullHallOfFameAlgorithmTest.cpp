@@ -4,6 +4,9 @@
 #include <Mocks/MockIndividual.hpp>
 #include <LightBulb/Learning/Evolution/FullHallOfFameAlgorithm.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
+#include <LightBulb/Logging/AbstractLogger.hpp>
 
 using namespace LightBulb;
 

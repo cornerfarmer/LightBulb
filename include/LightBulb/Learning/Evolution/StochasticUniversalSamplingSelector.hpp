@@ -4,15 +4,15 @@
 #define _STOCHASTICUNIVERSALSAMPLINGSELECTOR_H_
 
 // Library Includes
+#include <memory>
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
 #include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "LightBulb/Function/SelectionFunction/AbstractSelectionFunction.hpp"
-#include <memory>
 
 namespace LightBulb
 {
+	class AbstractSelectionFunction;
 	/**
 	 * \brief Executes a roullete wheel selection.
 	 * \details The roullete wheel is divided into different parts (one per individual) depending on their fitness values.

@@ -6,12 +6,6 @@
 // Libary includes
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
-#include "LightBulb/IO/EigenMatrixIO.hpp"
-#include "LightBulb/LinearAlgebra/Matrix.hpp"
-
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
 
 namespace LightBulb
 {
@@ -22,13 +16,7 @@ namespace LightBulb
 	* \param rmsPropLearningRate The RMSPropLearningRate to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate)
-	{
-		archive(cereal::base_class<AbstractGradientDescentAlgorithm>(&rmsPropLearningRate));
-		archive(cereal::make_nvp("prevDeltaWeights", rmsPropLearningRate.prevDeltaWeights));
-		archive(cereal::make_nvp("prevGradient", rmsPropLearningRate.prevGradient));
-		archive(cereal::make_nvp("prevSquaredGradient", rmsPropLearningRate.prevSquaredGradient));
-	}
+	extern void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate);
 }
 
 namespace cereal
@@ -42,19 +30,8 @@ namespace cereal
 		* \param rmsPropLearningRate The existing RMSPropLearningRate to construct.
 		*/
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::RMSPropLearningRate& rmsPropLearningRate)
-		{
-			using namespace LightBulb;
-			ar(base_class<AbstractGradientDescentAlgorithm>(&rmsPropLearningRate));
-			ar(make_nvp("prevDeltaWeights", rmsPropLearningRate.prevDeltaWeights));
-			ar(make_nvp("prevGradient", rmsPropLearningRate.prevGradient));
-			ar(make_nvp("prevSquaredGradient", rmsPropLearningRate.prevSquaredGradient));
-		}
+		static void construct(Archive& ar, LightBulb::RMSPropLearningRate& rmsPropLearningRate);
 	};
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::RMSPropLearningRate);
 
 #endif

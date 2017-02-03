@@ -7,6 +7,10 @@
 
 namespace LightBulb
 {
+	DifferentNeuronDescriptionFactory::DifferentNeuronDescriptionFactory() = default;
+
+	DifferentNeuronDescriptionFactory::~DifferentNeuronDescriptionFactory() = default;
+
 	DifferentNeuronDescriptionFactory::DifferentNeuronDescriptionFactory(NeuronDescription* innerNeuronDescription_, NeuronDescription* outputNeuronDescription_)
 	{
 		// Check if all given options are correct

@@ -1,6 +1,4 @@
 #include "LightBulbExamplePrec.hpp"
-#include "LightBulbApp/App.hpp"
-#include <wx/wxprec.h>
 #include "Examples/BackpropagationXor/BackpropagationXorExample.hpp"
 #include "Examples/TeachedEvolution/TeachedEvolutionExample.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeEvolutionExample.hpp"

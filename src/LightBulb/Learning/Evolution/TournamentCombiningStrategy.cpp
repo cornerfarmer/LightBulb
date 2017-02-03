@@ -3,6 +3,7 @@
 #include "LightBulb/Learning/Evolution/TournamentCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 //Library includes
 #include <algorithm>
 

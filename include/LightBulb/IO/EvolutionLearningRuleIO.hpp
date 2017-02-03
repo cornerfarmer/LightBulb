@@ -7,11 +7,6 @@
 #include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -21,11 +16,7 @@ namespace LightBulb
 	* \param learningRule The EvolutionLearningRule to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, EvolutionLearningRule& learningRule)
-	{
-		archive(cereal::base_class<AbstractEvolutionLearningRule>(&learningRule));
-		archive(cereal::make_nvp("zigguratGenerator", learningRule.zigguratGenerator));
-	}
+	extern void serialize(Archive& archive, EvolutionLearningRule& learningRule);
 }
 
 namespace cereal
@@ -39,17 +30,10 @@ namespace cereal
 		* \param learningRule The existing EvolutionLearningRule to construct.
 		*/
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule)
-		{
-			ar(base_class<LightBulb::AbstractEvolutionLearningRule>(&learningRule));
-			ar(cereal::make_nvp("zigguratGenerator", learningRule.zigguratGenerator));
-			learningRule.setHelperToUsedObjects();
-		}
+		static void construct(Archive& ar, LightBulb::EvolutionLearningRule& learningRule);
 	};
+
+
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::EvolutionLearningRule);
 
 #endif

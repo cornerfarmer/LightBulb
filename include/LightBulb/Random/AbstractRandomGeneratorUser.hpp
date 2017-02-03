@@ -5,12 +5,13 @@
 #define _ABSTRACTRANDOMGENERATORUSER_H_
 
 // Include
-#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 // Library Includes
 
 namespace LightBulb
 {
+	class AbstractRandomGenerator;
+
 	/**
 	 * \brief Can be used by every class which needs to generate random numbers.
 	 */

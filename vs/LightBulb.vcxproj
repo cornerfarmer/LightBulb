@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp" />
     <ClInclude Include="..\include\LightBulb\ActivationOrder\AbstractActivationOrder.hpp" />
     <ClInclude Include="..\include\LightBulb\ActivationOrder\TopologicalOrder.hpp" />
     <ClInclude Include="..\include\LightBulb\Event\AbstractObserver.hpp" />
@@ -79,6 +78,7 @@
     <ClInclude Include="..\include\LightBulb\IO\StandardRandomGeneratorIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\StorageLoggerIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\TeachedIndividualIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\TemplateDeclaration.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\UsedArchives.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\UseParentSerialization.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\VectorIO.hpp" />
@@ -160,6 +160,7 @@
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp" />
+    <ClInclude Include="..\include\LightBulb\LightBulb.hpp" />
     <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp" />
@@ -194,6 +195,40 @@
     <ClInclude Include="..\include\LightBulb\Tools\AbstractCloneable.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\include\LightBulb\IO\AbstractCoevolutionEnvironmentIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractDefaultIndividualIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractIndividualIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractLoggerIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\AbstractSupervisedLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\BackpropagationIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\CoevolutionLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\DQNLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\FeedForwardNetworkTopologyIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\FermiFunctionIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\LearningStateIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\NeuralNetworkIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\NeuronDescriptionIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\ResilientLearningRateIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\RMSPropLearningRateIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\SimpleGradientDescentIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\StorageLoggerIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\TeachedIndividualIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\XorShfGeneratorIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\IO\ZigguratGeneratorIO.cpp" />
+    <ClCompile Include="..\include\LightBulb\Learning\AbstractLearningResult.cpp" />
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp" />
     <ClCompile Include="..\src\LightBulb\ActivationOrder\TopologicalOrder.cpp" />
     <ClCompile Include="..\src\LightBulb\Event\AbstractObserver.cpp" />
@@ -254,6 +289,7 @@
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantMutationCommand.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantRecombinationCommand.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\ConstantReuseCommand.cpp" />
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionLearningResult.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionStrategy\MutationAlgorithm.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\EvolutionStrategy\RecombinationAlgorithm.cpp" />
@@ -278,7 +314,7 @@
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\SharedSamplingCombiningStrategy.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\StandardDeviationFitnessFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\StochasticUniversalSamplingSelector.cpp" />
-    <ClCompile Include="..\src\LightBulb\Learning\Evolution\TeachedEvolutionObject.cpp" />
+    <ClCompile Include="..\src\LightBulb\Learning\Evolution\TeachedIndividual.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\TeachingEvolutionEnvironment.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\TournamentCombiningStrategy.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\WeightDecayFitnessFunction.cpp" />

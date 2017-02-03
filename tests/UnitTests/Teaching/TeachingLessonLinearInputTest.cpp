@@ -7,6 +7,7 @@
 #include <Mocks/MockActivationFunction.hpp>
 #include <Eigen/Dense>
 #include "Mocks/MockNeuronDescription.hpp"
+#include <LightBulb/Function/InputFunction/AbstractInputFunction.hpp>
 
 using namespace LightBulb;
 

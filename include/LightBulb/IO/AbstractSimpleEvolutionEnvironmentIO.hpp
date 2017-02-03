@@ -5,13 +5,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include "LightBulb/IO/IOStorage.hpp"
-
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
 
 namespace LightBulb
 {
@@ -22,18 +15,7 @@ namespace LightBulb
 	* \param environment The AbstractSimpleEvolutionEnvironment to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, AbstractSimpleEvolutionEnvironment const& environment)
-	{
-		archive(cereal::base_class<AbstractEvolutionEnvironment>(&environment));
-		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
-		for (auto individual = environment.individuals.begin(); individual != environment.individuals.end(); individual++)
-			individuals.push_back(std::unique_ptr<AbstractIndividual>(*individual));
-
-		archive(cereal::make_nvp("individuals", individuals));
-
-		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
-			individual->release();
-	}
+	extern void save(Archive& archive, AbstractSimpleEvolutionEnvironment const& environment);
 
 	/**
 	* \brief Loads an AbstractSimpleEvolutionEnvironment
@@ -42,23 +24,7 @@ namespace LightBulb
 	* \param environment The AbstractSimpleEvolutionEnvironment to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractSimpleEvolutionEnvironment& environment)
-	{
-		archive(cereal::base_class<AbstractEvolutionEnvironment>(&environment));
-		std::vector<std::unique_ptr<AbstractIndividual>> individuals;
-		IOStorage<AbstractEvolutionEnvironment>::push(&environment);
-		archive(cereal::make_nvp("individuals", individuals));
-		IOStorage<AbstractEvolutionEnvironment>::clear();
-
-		for (auto individual = individuals.begin(); individual != individuals.end(); individual++)
-		{
-			environment.individuals.push_back(individual->release());
-		}
-	}
+	extern void load(Archive& archive, AbstractSimpleEvolutionEnvironment& environment);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::AbstractSimpleEvolutionEnvironment);
 
 #endif

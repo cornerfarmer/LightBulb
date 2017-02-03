@@ -8,7 +8,6 @@
 #include <memory>
 
 // Includes
-#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 namespace LightBulb
@@ -16,6 +15,7 @@ namespace LightBulb
 	// Forward declarations
 	struct FeedForwardNetworkTopologyOptions;
 	struct LearningState;
+	class NeuralNetwork;
 	/**
 	 * \brief Describes the environment where the reinforcement learning process takes places.
 	 */
@@ -81,7 +81,7 @@ namespace LightBulb
 		 * \brief Executes the neural network calculation.
 		 */
 		void doNNCalculation();
-		virtual ~AbstractReinforcementEnvironment() {}
+		~AbstractReinforcementEnvironment();
 		/**
 		 * \brief Creates the reinforcement environment.
 		 * \param options The options which describe the network. 
@@ -89,7 +89,7 @@ namespace LightBulb
 		 * \param epsilon The epsilon value when acting epsilon greedly.
 		 */
 		AbstractReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
-		AbstractReinforcementEnvironment() = default;
+		AbstractReinforcementEnvironment();
 		/**
 		* \brief Executes one simulation step.
 		* \return Returns the reward gained after that step.

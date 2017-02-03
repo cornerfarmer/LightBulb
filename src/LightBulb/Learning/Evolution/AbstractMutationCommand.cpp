@@ -2,6 +2,8 @@
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/AbstractMutationCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
+#include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
 
 namespace LightBulb
 {
@@ -10,6 +12,10 @@ namespace LightBulb
 		mutationAlgorithm.reset(mutationAlgorithm_);
 		mutationSelector.reset(mutationSelector_);
 	}
+
+	AbstractMutationCommand::~AbstractMutationCommand() = default;
+
+	AbstractMutationCommand::AbstractMutationCommand() = default;
 
 	AbstractMutationCommand::AbstractMutationCommand(const AbstractMutationCommand& other)
 		:AbstractCommand(other)

@@ -8,7 +8,6 @@
 #include <memory>
 
 // Includes
-#include "LightBulb/ActivationOrder/AbstractActivationOrder.hpp"
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
 
 namespace LightBulb
@@ -18,6 +17,7 @@ namespace LightBulb
 	class Teacher;
 	class AbstractTeachingLesson;
 	class AbstractNetworkTopology;
+	class AbstractActivationOrder;
 
 #define DATA_SET_TRAINING_ERROR "Training error"
 
@@ -212,6 +212,7 @@ namespace LightBulb
 		* \param options_ The options which configure the supervised learning rule.
 		*/
 		AbstractSupervisedLearningRule(AbstractSupervisedLearningRuleOptions* options_);
+		~AbstractSupervisedLearningRule();
 		// Inherited:
 		std::vector<std::string> getDataSetLabels() const override;
 	};

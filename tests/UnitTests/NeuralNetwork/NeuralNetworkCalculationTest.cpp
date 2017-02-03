@@ -8,6 +8,7 @@
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 
 using namespace LightBulb;
 

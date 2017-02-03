@@ -5,13 +5,7 @@
 
 // Includes
 #include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
-#include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
-
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
 
 namespace LightBulb
 {
@@ -22,11 +16,7 @@ namespace LightBulb
 	* \param learningRule The PolicyGradientLearningRule to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, PolicyGradientLearningRule& learningRule)
-	{
-		archive(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
-		archive(cereal::make_nvp("valueFunctionNetwork", learningRule.valueFunctionNetwork));
-	}
+	extern void serialize(Archive& archive, PolicyGradientLearningRule& learningRule);
 }
 
 
@@ -41,18 +31,8 @@ namespace cereal
 		* \param learningRule The existing PolicyGradientLearningRule to construct.
 		*/
 		template <class Archive>
-		static void construct(Archive& ar, LightBulb::PolicyGradientLearningRule& learningRule)
-		{
-			using namespace LightBulb;
-			ar(base_class<AbstractReinforcementLearningRule>(&learningRule));
-			ar(cereal::make_nvp("valueFunctionNetwork", learningRule.valueFunctionNetwork));
-		}
+		static void construct(Archive& ar, LightBulb::PolicyGradientLearningRule& learningRule);
 	};
 }
-
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::PolicyGradientLearningRule);
 
 #endif

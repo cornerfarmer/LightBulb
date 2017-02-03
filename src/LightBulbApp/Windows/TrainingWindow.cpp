@@ -1,16 +1,8 @@
 // Includes
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/TrainingWindow.hpp"
-#include <wx/dataview.h>
-#include <wx/richtext/richtextctrl.h>
-#include <wx/splitter.h>
-#include <wx/artprov.h>
-#include <wx/statline.h>
-#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulbApp/Windows/TrainingController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
-#include <wx/timer.h>
-#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {

@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/PongGameController.hpp"
-#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include "PongEvolutionExample.hpp"
 #include "Pong.hpp"
 #include <Examples/PongReinforcement/PongPolicyGradientExample.hpp>

@@ -19,10 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\DoublePreferenceIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\PreferenceGroupIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\TrainingControllerIO.cpp" />
+    <ClCompile Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.cpp" />
     <ClCompile Include="..\src\LightBulbApp\App.cpp" />
     <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp" />
     <ClCompile Include="..\src\LightBulbApp\LightBulbAppPrec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MultiProcessorCompilation>
     </ClCompile>
     <ClCompile Include="..\src\LightBulbApp\Performance\NetworkPerformanceTests.cpp" />
     <ClCompile Include="..\src\LightBulbApp\Repositories\NeuralNetworkRepository.cpp" />
@@ -104,6 +119,7 @@
     <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\LightBulbAppInclude.hpp" />
     <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Repositories\NeuralNetworkRepository.hpp" />
@@ -212,7 +228,7 @@
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbApp/LightBulbAppPrec.hpp</PrecompiledHeaderFile>
     </ClCompile>

@@ -5,10 +5,6 @@
 
 // Includes
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
-#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
-#include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
-// Libraray includes
-#include <cereal/cereal.hpp>
 
 namespace LightBulb
 {
@@ -19,12 +15,7 @@ namespace LightBulb
 	* \param trainingPlanRepository The TrainingPlanRepository to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository)
-	{
-		onlyUseNeuralNetworkIndex = true;
-		archive(cereal::make_nvp("trainingPlans", trainingPlanRepository.trainingPlans));
-		trainingPlanRepository.throwEvent(EVT_TP_CHANGED, trainingPlanRepository);
-	}
+	extern void serialize(Archive& archive, TrainingPlanRepository& trainingPlanRepository);
 }
 
 #endif

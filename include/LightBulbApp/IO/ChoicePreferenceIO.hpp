@@ -6,10 +6,6 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -19,11 +15,7 @@ namespace LightBulb
 	* \param choicePreference The ChoicePreference to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, ChoicePreference const& choicePreference)
-	{
-		archive(cereal::base_class<AbstractPreference>(&choicePreference));
-		archive(cereal::make_nvp("value", choicePreference.value));
-	}
+	extern void save(Archive& archive, ChoicePreference const& choicePreference);
 
 	/**
 	* \brief Loads an ChoicePreference.
@@ -32,15 +24,7 @@ namespace LightBulb
 	* \param choicePreference The ChoicePreference to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, ChoicePreference& choicePreference)
-	{
-		archive(cereal::base_class<AbstractPreference>(&choicePreference));
-		archive(cereal::make_nvp("value", choicePreference.value));
-	}
+	extern void load(Archive& archive, ChoicePreference& choicePreference);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::ChoicePreference);
 
 #endif

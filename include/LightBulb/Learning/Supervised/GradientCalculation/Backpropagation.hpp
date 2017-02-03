@@ -8,7 +8,6 @@
 
 // Includes
 #include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
-#include "LightBulbApp/TrainingPlans/Preferences/AbstractPreferenceElement.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb

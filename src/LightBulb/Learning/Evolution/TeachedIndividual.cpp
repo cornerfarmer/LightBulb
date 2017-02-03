@@ -58,6 +58,11 @@ namespace LightBulb
 		return newIndividual;
 	}
 
+
+	TeachedIndividual::TeachedIndividual() = default;
+
+	TeachedIndividual::~TeachedIndividual() = default;
+
 	double TeachedIndividual::getCurrentTotalError() const
 	{
 		return currentTotalError;

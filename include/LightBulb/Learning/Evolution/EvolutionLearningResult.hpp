@@ -2,10 +2,12 @@
 #define _EVOLUTIONLEARNINGRESULT_H_
 
 #include "LightBulb/Learning/AbstractLearningResult.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include <vector>
+#include <memory>
 
 namespace LightBulb
 {
+	class AbstractIndividual;
 	/**
 	 * \brief Describes the learning result of an evolution learning rule.
 	 */
@@ -16,6 +18,8 @@ namespace LightBulb
 		 */
 		std::vector<std::unique_ptr<AbstractIndividual>> bestIndividuals;
 		double bestFitness;
+		EvolutionLearningResult();
+		~EvolutionLearningResult();
 	};
 }
 

@@ -13,8 +13,10 @@
 #include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 // Library includes
 #include <map>
 #include <string>

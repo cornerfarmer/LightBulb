@@ -5,13 +5,14 @@
 #define _ABSTRACTLOGGABLE_H_
 
 // Include
-#include "LightBulb/Logging/AbstractLogger.hpp"
 
 // Library Includes
 #include <string>
 
 namespace LightBulb
 {
+	class AbstractLogger;
+	enum LogLevel;
 	/**
 	 * \brief Describes any class which wants to log something.
 	 * \details Before anything can be logged, setLogger() has to be called.

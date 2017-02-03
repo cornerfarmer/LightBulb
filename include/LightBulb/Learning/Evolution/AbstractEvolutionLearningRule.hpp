@@ -7,12 +7,14 @@
 
 // Includes
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
+// TODO:
 #include "LightBulb/Random/ZigguratGenerator.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class AbstractEvolutionEnvironment;
+	class ZigguratGenerator;
 
 	/**
 	* \brief All general options which are the same for all evolution learning rules.
@@ -55,6 +57,7 @@ namespace LightBulb
 		 */
 		virtual void setHelperToUsedObjects() {};
 	public:
+		virtual ~AbstractEvolutionLearningRule();
 		/**
 		* \brief Creates the evolution learning rule.
 		* \param options_ The options which configure the evolution learning rule.

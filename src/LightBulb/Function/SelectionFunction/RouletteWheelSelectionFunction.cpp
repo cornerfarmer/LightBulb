@@ -1,8 +1,8 @@
 // Includes
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/SelectionFunction/RouletteWheelSelectionFunction.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 // Library includes
-#include <random>
 #include <stdexcept>
 
 namespace LightBulb

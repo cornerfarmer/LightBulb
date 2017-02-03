@@ -2,6 +2,8 @@
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/ConstantReuseCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractReuseSelector.hpp"
+
 //Library includes
 
 namespace LightBulb

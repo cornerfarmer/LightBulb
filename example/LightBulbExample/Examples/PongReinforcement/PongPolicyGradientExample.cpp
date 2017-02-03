@@ -1,19 +1,8 @@
 #include "LightBulbExamplePrec.hpp"
 #include "PongPolicyGradientExample.hpp"
-#include <LightBulb/Learning/Evolution/EvolutionLearningRule.hpp>
-#include <LightBulb/Learning/Evolution/CoevolutionLearningRule.hpp>
-#include <LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp>
-#include <LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp>
-#include <LightBulb/Function/InputFunction/WeightedSumFunction.hpp>
-#include <LightBulb/NeuronDescription/NeuronDescription.hpp>
-#include <LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp>
-#include <LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp>
-#include <Examples/PongEvolution/PongGameFactory.hpp>
+#include "Examples/PongEvolution/PongGameFactory.hpp"
 #include "PongReinforcementEnvironment.hpp"
-#include <LightBulb/Function/ActivationFunction/FermiFunction.hpp>
-#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
-#include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
-#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/PolicyGradientLearningRulePreferenceGroup.hpp"
+
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"

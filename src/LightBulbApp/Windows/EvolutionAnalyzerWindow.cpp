@@ -2,7 +2,6 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerWindow.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerController.hpp"
-#include <wx/dataview.h>
 
 namespace LightBulb
 {

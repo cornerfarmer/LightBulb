@@ -3,6 +3,8 @@
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 //Library include
 
@@ -50,6 +52,8 @@ namespace LightBulb
 		interpretNNOutput(lastBooleanOutput);
 	}
 
+	AbstractReinforcementEnvironment::~AbstractReinforcementEnvironment() = default;
+
 	AbstractReinforcementEnvironment::AbstractReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
 	{
 		buildNeuralNetwork(options);
@@ -57,6 +61,8 @@ namespace LightBulb
 		epsilon = epsilon_;
 		useStochasticActionDecision = true;
 	}
+
+	AbstractReinforcementEnvironment::AbstractReinforcementEnvironment() = default;
 
 	void AbstractReinforcementEnvironment::initializeForLearning()
 	{

@@ -5,6 +5,7 @@
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <Mocks/MockEvolutionLearningRule.hpp>
 #include <Mocks/MockCombiningStrategy.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
 
 using namespace LightBulb;
 

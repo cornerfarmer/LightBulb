@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <LightBulb/Function/RandomFunction/AbstractRandomFunction.hpp>
+#include <LightBulb/Random/AbstractRandomGenerator.hpp>
 
 class MockRandomFunction : public LightBulb::AbstractRandomFunction
 {

@@ -4,9 +4,6 @@
 #define _FERMIFUNCTIONIO_H_
 
 // Libary includes
-#include <cereal/cereal.hpp>
-#include <cereal/access.hpp>
-#include <cereal/types/polymorphic.hpp>
 
 // Includes
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
@@ -20,11 +17,7 @@ namespace LightBulb
 	* \param fermiFunction The FermiFunction to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, FermiFunction& fermiFunction)
-	{
-		archive(cereal::make_nvp("temperatureParameter", fermiFunction.temperatureParameter));
-		archive(cereal::base_class<AbstractActivationFunction>(&fermiFunction));
-	}
+	extern void serialize(Archive& archive, FermiFunction& fermiFunction);
 }
 
 namespace cereal
@@ -38,19 +31,8 @@ namespace cereal
 		* \param construct The FermiFunction construct object.
 		*/
 		template <class Archive>
-		static void load_and_construct(Archive & ar, construct<LightBulb::FermiFunction>& construct)
-		{
-			double temperatureParameter;
-			ar(make_nvp("temperatureParameter", temperatureParameter));
-			construct(temperatureParameter);
-			ar(cereal::base_class<LightBulb::AbstractActivationFunction>(construct.ptr()));
-		}
+		static void load_and_construct(Archive & ar, construct<LightBulb::FermiFunction>& construct);
 	};
 }
-
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::FermiFunction);
 
 #endif

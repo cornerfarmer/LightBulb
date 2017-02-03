@@ -5,6 +5,7 @@
 
 #include "gmock/gmock.h"
 #include <LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp>
+#include <LightBulb/Random/AbstractRandomGenerator.hpp>
 
 class MockRecombinationAlgorithm : public LightBulb::AbstractRecombinationAlgorithm
 {

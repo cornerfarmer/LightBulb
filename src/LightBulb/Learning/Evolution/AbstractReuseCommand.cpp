@@ -2,9 +2,12 @@
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/AbstractReuseCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Evolution/AbstractReuseSelector.hpp"
 
 namespace LightBulb
 {
+	AbstractReuseCommand::~AbstractReuseCommand() = default;
+
 	AbstractReuseCommand::AbstractReuseCommand(AbstractReuseSelector* reuseSelector_)
 	{
 		reuseSelector.reset(reuseSelector_);

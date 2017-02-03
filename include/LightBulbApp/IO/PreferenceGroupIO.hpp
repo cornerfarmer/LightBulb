@@ -5,11 +5,6 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/vector.hpp>
-#include <cereal/types/memory.hpp>
-#include <cereal/types/polymorphic.hpp>
 
 namespace LightBulb
 {
@@ -20,12 +15,7 @@ namespace LightBulb
 	* \param preferenceGroup The PreferenceGroup to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, PreferenceGroup const& preferenceGroup)
-	{
-		archive(cereal::base_class<AbstractPreferenceElement>(&preferenceGroup));
-		archive(cereal::make_nvp("name", preferenceGroup.name));
-		archive(cereal::make_nvp("preferences", preferenceGroup.preferences));
-	}
+	extern void save(Archive& archive, PreferenceGroup const& preferenceGroup);
 
 	/**
 	* \brief Loads a PreferenceGroup.
@@ -34,16 +24,7 @@ namespace LightBulb
 	* \param preferenceGroup The PreferenceGroup to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, PreferenceGroup& preferenceGroup)
-	{
-		archive(cereal::base_class<AbstractPreferenceElement>(&preferenceGroup));
-		archive(cereal::make_nvp("name", preferenceGroup.name));
-		archive(cereal::make_nvp("preferences", preferenceGroup.preferences));
-	}
+	extern void load(Archive& archive, PreferenceGroup& preferenceGroup);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::PreferenceGroup);
 
 #endif

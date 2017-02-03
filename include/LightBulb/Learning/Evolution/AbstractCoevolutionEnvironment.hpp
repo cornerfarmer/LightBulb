@@ -8,9 +8,6 @@
 
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
-#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
-#include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
-#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 
 // Forward declarations
 
@@ -20,6 +17,10 @@
 
 namespace LightBulb
 {
+	class AbstractCoevolutionFitnessFunction;
+	class AbstractHallOfFameAlgorithm;
+	class AbstractCombiningStrategy;
+
 	/**
 	 * \brief Describes a coevolution environment which evolves through competing with another coevolution environment.
 	 */

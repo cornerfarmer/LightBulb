@@ -4,13 +4,13 @@
 #define _ABSTRACTCOMMAND_H_
 
 // Include
-#include "LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
 #include "LightBulb/Logging/AbstractLoggable.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 
 // Library Includes
 #include <vector>
-#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {

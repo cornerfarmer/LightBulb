@@ -3,7 +3,7 @@
 #include "LightBulb/Learning/Evolution/BestSelectionCommand.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
 //Library includes
 
 namespace LightBulb

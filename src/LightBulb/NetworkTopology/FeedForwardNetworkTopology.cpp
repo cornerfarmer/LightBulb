@@ -8,6 +8,7 @@
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 // Library includes
 #include <exception>
 #include <stdexcept>
@@ -583,7 +584,7 @@ namespace LightBulb
 
 	const AbstractActivationOrder& FeedForwardNetworkTopology::getDefaultActivationOrder() const
 	{
-		return defaultActivationOrder;
+		return *defaultActivationOrder;
 	}
 
 	void FeedForwardNetworkTopology::setCalculatorType(const CalculatorType& calculatorType)

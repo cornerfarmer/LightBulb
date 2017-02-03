@@ -9,6 +9,8 @@
 #include <vector>
 #include "LightBulb/Learning/Supervised/SupervisedLearningResult.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
 
 namespace LightBulb
 {
@@ -23,6 +25,8 @@ namespace LightBulb
 	{
 		validateOptions();
 	}
+
+	AbstractSupervisedLearningRule::~AbstractSupervisedLearningRule() = default;
 
 	void AbstractSupervisedLearningRule::validateOptions()
 	{

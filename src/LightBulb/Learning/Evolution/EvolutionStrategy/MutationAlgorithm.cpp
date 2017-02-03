@@ -7,6 +7,7 @@
 #include <math.h>
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/Random/ZigguratGenerator.hpp"
 
 namespace LightBulb
 {

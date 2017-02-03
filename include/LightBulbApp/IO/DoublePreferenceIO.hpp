@@ -6,10 +6,6 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -19,11 +15,7 @@ namespace LightBulb
 	* \param doublePreference The DoublePreference to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, DoublePreference const& doublePreference)
-	{
-		archive(cereal::base_class<AbstractPreference>(&doublePreference));
-		archive(cereal::make_nvp("value", doublePreference.value));
-	}
+	extern void save(Archive& archive, DoublePreference const& doublePreference);
 
 	/**
 	* \brief Loads an DoublePreference.
@@ -32,15 +24,7 @@ namespace LightBulb
 	* \param doublePreference The DoublePreference to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, DoublePreference& doublePreference)
-	{
-		archive(cereal::base_class<AbstractPreference>(&doublePreference));
-		archive(cereal::make_nvp("value", doublePreference.value));
-	}
+	extern void load(Archive& archive, DoublePreference& doublePreference);
 }
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::DoublePreference);
 
 #endif

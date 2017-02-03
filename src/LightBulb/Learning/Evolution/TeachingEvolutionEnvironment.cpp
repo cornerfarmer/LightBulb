@@ -2,19 +2,26 @@
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/TeachedIndividual.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+
 //Library includes
 
 namespace LightBulb
 {
+	TeachingEvolutionEnvironment::TeachingEvolutionEnvironment() = default;
+
+	TeachingEvolutionEnvironment::~TeachingEvolutionEnvironment() = default;
+
 	AbstractIndividual* TeachingEvolutionEnvironment::createNewIndividual()
 	{
-		return new TeachedIndividual(*this, networkOptions);
+		return new TeachedIndividual(*this, *networkOptions);
 	}
 
 	TeachingEvolutionEnvironment::TeachingEvolutionEnvironment(AbstractTeacher* teacher_, FeedForwardNetworkTopologyOptions& networkOptions_)
 	{
 		teacher = teacher_;
-		networkOptions = networkOptions_;
+		networkOptions.reset(new FeedForwardNetworkTopologyOptions(networkOptions_));
 	}
 
 	void TeachingEvolutionEnvironment::doSimulationStep()

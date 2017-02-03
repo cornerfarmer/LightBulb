@@ -9,10 +9,10 @@
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationSelector.hpp"
 #include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
-#include "LightBulb/Function/RandomFunction/AbstractRandomFunction.hpp"
 
 namespace LightBulb
 {
+	class AbstractRandomFunction;
 	/**
 	 * \brief A selector which selects individuals with a random function.
 	 */

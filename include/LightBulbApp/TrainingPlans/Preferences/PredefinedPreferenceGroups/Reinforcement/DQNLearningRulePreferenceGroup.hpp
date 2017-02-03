@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _EVOLUTIONLEARNINGRULEPREFERENCEGROUP_H_
-#define _EVOLUTIONLEARNINGRULEPREFERENCEGROUP_H_
+#ifndef _DQNLEARNINGRULEPREFERENCEGROUP_H_
+#define _DQNLEARNINGRULEPREFERENCEGROUP_H_
 
 // 
 #include "AbstractReinforcementLearningRulePreferenceGroup.hpp"

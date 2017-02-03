@@ -5,9 +5,6 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/AbstractPreference.hpp"
-// Libraray includes
-#include <cereal/cereal.hpp>
-#include <cereal/types/polymorphic.hpp>
 
 namespace LightBulb
 {
@@ -18,11 +15,7 @@ namespace LightBulb
 	* \param preference The AbstractPreference to save.
 	*/
 	template <class Archive>
-	void save(Archive& archive, AbstractPreference const& preference)
-	{
-		archive(cereal::base_class<AbstractPreferenceElement>(&preference));
-		archive(cereal::make_nvp("name", preference.name));
-	}
+	extern void save(Archive& archive, AbstractPreference const& preference);
 
 	/**
 	* \brief Loads an AbstractPreference.
@@ -31,16 +24,7 @@ namespace LightBulb
 	* \param preference The AbstractPreference to load.
 	*/
 	template <class Archive>
-	void load(Archive& archive, AbstractPreference& preference)
-	{
-		archive(cereal::base_class<AbstractPreferenceElement>(&preference));
-		archive(cereal::make_nvp("name", preference.name));
-	}
+	extern void load(Archive& archive, AbstractPreference& preference);
 }
-
-
-#include "LightBulb/IO/UsedArchives.hpp"
-
-CEREAL_REGISTER_TYPE(LightBulb::AbstractPreference);
 
 #endif

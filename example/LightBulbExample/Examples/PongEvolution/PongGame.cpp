@@ -2,8 +2,6 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/PongGame.hpp"
 //Library includes
-#include <thread>
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 PongGame::PongGame()
 {

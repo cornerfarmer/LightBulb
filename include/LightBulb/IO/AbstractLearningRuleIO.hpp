@@ -5,8 +5,6 @@
 
 // Includes
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
-// Libraray includes
-#include <cereal/cereal.hpp>
 
 namespace LightBulb
 {
@@ -17,12 +15,7 @@ namespace LightBulb
 	* \param learningRule The AbstractLearningRule to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractLearningRule& learningRule)
-	{
-		IOStorage<std::map<std::string, bool>>::push(&learningRule.options->disabledDataSets);
-		archive(cereal::make_nvp("learningState", learningRule.learningState));
-		archive(cereal::make_nvp("randomGenerator", learningRule.randomGenerator));
-	}
+	extern void serialize(Archive& archive, AbstractLearningRule& learningRule);
 }
 
 #endif

@@ -1,11 +1,6 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Performance/ViennaCLTests.hpp"
-#include "viennacl/scalar.hpp"
-#include "viennacl/matrix.hpp"
-#include "viennacl/linalg/prod.hpp"
 #include "Eigen/Dense"
-#include <ctime>
-#include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 #define SIZE 1024

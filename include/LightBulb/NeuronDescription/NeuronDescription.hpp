@@ -4,15 +4,17 @@
 #define _NEURONDESCRIPTION_H_
 
 // Includes
-#include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
-#include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "LightBulb/Tools/AbstractCloneable.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library includes
 #include <memory>
 
 namespace LightBulb
 {
+	class AbstractInputFunction;
+	class AbstractActivationFunction;
+	enum CalculatorType;
 	/**
 	 * \brief Contains all neuron specific information. 
 	 */

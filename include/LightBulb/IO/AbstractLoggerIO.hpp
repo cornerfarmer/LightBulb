@@ -6,10 +6,6 @@
 // Libary includes
 #include "LightBulb/Logging/AbstractLogger.hpp"
 
-#include <cereal/types/vector.hpp>
-#include <cereal/types/utility.hpp>
-#include <cereal/cereal.hpp>
-
 namespace LightBulb
 {
 	/**
@@ -19,10 +15,7 @@ namespace LightBulb
 	* \param logger The AbstractLogger to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractLogger& logger)
-	{
-		archive(cereal::make_nvp("currentLogLevel", logger.currentLogLevel));
-	}
+	extern void serialize(Archive& archive, AbstractLogger& logger);
 }
 
 #endif

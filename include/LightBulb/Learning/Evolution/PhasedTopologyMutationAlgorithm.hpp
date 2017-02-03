@@ -7,11 +7,11 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
-#include "LightBulb/Learning/Evolution/MagnitudeBasedPruningMutationAlgorithm.hpp"
-#include "LightBulb/Learning/Evolution/NetworkGrowMutationAlgorithm.hpp"
 
 namespace LightBulb
 {
+	class MagnitudeBasedPruningMutationAlgorithm;
+	class NetworkGrowMutationAlgorithm;
 	/**
 	 * \brief The phased topology mutation algorithm which automatically adds and removes neurons depending on the fitness values.
 	 * \details Uses the MPC (average neuron and weight count in the population) to determine if the algorithm should switch between pruning and complexifying.\n

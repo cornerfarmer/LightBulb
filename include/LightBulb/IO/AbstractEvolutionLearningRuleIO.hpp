@@ -5,8 +5,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
-// Libraray includes
-#include <cereal/cereal.hpp>
 
 namespace LightBulb
 {
@@ -17,11 +15,7 @@ namespace LightBulb
 	* \param evolutionLearning The AbstractEvolutionLearningRule to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, AbstractEvolutionLearningRule& evolutionLearning)
-	{
-		archive(cereal::base_class<AbstractLearningRule>(&evolutionLearning));
-		archive(cereal::make_nvp("zigguratGenerator", evolutionLearning.zigguratGenerator));
-	}
+	extern void serialize(Archive& archive, AbstractEvolutionLearningRule& evolutionLearning);
 }
 
 #endif

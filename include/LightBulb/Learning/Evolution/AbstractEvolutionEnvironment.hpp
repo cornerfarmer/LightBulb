@@ -9,17 +9,20 @@
 
 // Includes
 #include "LightBulb/Logging/AbstractLoggable.hpp"
-#include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/LinearAlgebra/Scalar.hpp"
+// TODO: REMOVE
+#include "LightBulb/Learning/LearningState.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class EvolutionLearningRule;
 	class AbstractIndividual;
+	struct LearningState;
+
 	/**
 	 * \brief Describes a ranked list of all individuals depending on their fitness values.
 	 */

@@ -5,6 +5,7 @@
 #include <LightBulb/Learning/Evolution/FullHallOfFameAlgorithm.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include <LightBulb/Learning/Evolution/RandomHallOfFameAlgorithm.hpp>
+#include <LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp>
 
 using namespace LightBulb;
 

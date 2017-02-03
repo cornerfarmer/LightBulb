@@ -2,7 +2,6 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 
 using namespace LightBulb;
 

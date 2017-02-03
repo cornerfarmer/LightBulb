@@ -3,10 +3,6 @@
 #ifndef _ABSTRACTRECOMBINATIONCOMMAND_H_
 #define _ABSTRACTRECOMBINATIONCOMMAND_H_
 
-// Include
-#include "LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
-#include "LightBulb/Learning/Evolution/AbstractRecombinationSelector.hpp"
-
 // Library Includes
 #include <vector>
 #include <memory>
@@ -20,6 +16,8 @@ namespace LightBulb
 	class AbstractIndividual;
 	class AbstractEvolutionEnvironment;
 	class EvolutionLearningRule;
+	class AbstractRecombinationAlgorithm;
+	class AbstractRecombinationSelector;
 	/**
 	 * \brief A command which recombines a few of the given individuals.
 	 */
@@ -35,8 +33,8 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractRecombinationSelector> recombinationSelector;
 	public:
-		virtual ~AbstractRecombinationCommand() {}
-		AbstractRecombinationCommand() = default;
+		~AbstractRecombinationCommand();
+		AbstractRecombinationCommand();
 		AbstractRecombinationCommand(const AbstractRecombinationCommand& other);
 		friend void swap(AbstractRecombinationCommand& lhs, AbstractRecombinationCommand& rhs) noexcept;
 		/**

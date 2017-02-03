@@ -13,6 +13,8 @@
 #include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
 #include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 
 namespace LightBulb
 {

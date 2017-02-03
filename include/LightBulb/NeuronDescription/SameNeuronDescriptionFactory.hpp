@@ -26,7 +26,8 @@ namespace LightBulb
 		 */
 		std::unique_ptr<NeuronDescription> neuronDescription;
 	public:
-		SameNeuronDescriptionFactory() = default;
+		SameNeuronDescriptionFactory();
+		~SameNeuronDescriptionFactory();
 		/**
 		 * \brief Creates a new SameNeuronDescriptionFactory.
 		 * \param neuronDescription_ The neuron description for all neurons.
