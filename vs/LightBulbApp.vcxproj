@@ -38,6 +38,7 @@
     <ClCompile Include="..\src\LightBulbApp\LightBulbAppPrec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MultiProcessorCompilation>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\LightBulbApp\Performance\NetworkPerformanceTests.cpp" />
     <ClCompile Include="..\src\LightBulbApp\Repositories\NeuralNetworkRepository.cpp" />
