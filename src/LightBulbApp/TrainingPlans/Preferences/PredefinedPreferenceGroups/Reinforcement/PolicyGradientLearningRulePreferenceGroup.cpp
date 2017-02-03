@@ -4,6 +4,7 @@
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/RMSPropLearningRatePreferenceGroup.hpp"
+#include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
 
 namespace LightBulb
 {

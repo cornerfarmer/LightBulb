@@ -7,8 +7,6 @@
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-// TODO: Remove
-#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 namespace LightBulb
 {

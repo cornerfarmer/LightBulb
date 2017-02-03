@@ -6,13 +6,14 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
-#include "LightBulb/Learning/AbstractLearningResult.hpp"
-#include "LightBulb/Learning/AbstractLearningRule.hpp"
 
 // Library includes
 
 namespace LightBulb
 {
+	class AbstractLearningResult;
+	class AbstractLearningRule;
+	struct AbstractLearningRuleOptions;
 	/**
 	 * \brief Describes a learning rule which uses a learning rule.
 	 */
@@ -50,6 +51,8 @@ namespace LightBulb
 		void run(bool initial) override;
 		void tryToPause() override;
 	public:
+		AbstractLearningRuleTrainingPlan();
+		~AbstractLearningRuleTrainingPlan();
 		/**
 		 * \brief Returns the learning result.
 		 * \return The learning result.

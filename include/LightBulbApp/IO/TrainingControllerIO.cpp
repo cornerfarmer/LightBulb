@@ -2,6 +2,7 @@
 #include "LightBulbApp/IO/TrainingControllerIO.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

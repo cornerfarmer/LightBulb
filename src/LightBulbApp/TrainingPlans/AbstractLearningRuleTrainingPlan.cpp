@@ -1,8 +1,15 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
+#include "LightBulb/Learning/AbstractLearningResult.hpp"
 
 namespace LightBulb
 {
+	AbstractLearningRuleTrainingPlan::AbstractLearningRuleTrainingPlan() = default;
+
+	AbstractLearningRuleTrainingPlan::~AbstractLearningRuleTrainingPlan() = default;
+
 	void AbstractLearningRuleTrainingPlan::run(bool initial)
 	{
 		if (initial)

@@ -4,6 +4,8 @@
 #include "PongGameController.hpp"
 #include <wx/artprov.h>
 #include <Examples/TicTacToeEvolution/TicTacToeGameWindow.hpp>
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 
 BEGIN_EVENT_TABLE(PongGameWindow, wxFrame)
 EVT_PAINT(PongGameWindow::paintEvent)

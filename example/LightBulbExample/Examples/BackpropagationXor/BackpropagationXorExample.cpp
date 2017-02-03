@@ -4,6 +4,15 @@
 #include "LightBulb/Teaching/TeachingInput.hpp"
 #include "LightBulb/Teaching/TeachingLessonBooleanInput.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/FeedForwardNetworkTopologyPreferenceGroup.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 using namespace LightBulb;
 

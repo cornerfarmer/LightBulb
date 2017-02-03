@@ -9,6 +9,11 @@
 #include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
 #include "LightBulb/Learning/Evolution/RemainderStochasticSamplingSelector.hpp"
 #include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
+#include "LightBulb/Learning/Evolution/BestReuseSelector.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
 
 using namespace LightBulb;
 

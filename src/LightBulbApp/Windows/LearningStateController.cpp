@@ -3,6 +3,9 @@
 #include "LightBulbApp/Windows/LearningStateController.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulbApp/Windows/LearningStateWindow.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
 
 namespace LightBulb
 {

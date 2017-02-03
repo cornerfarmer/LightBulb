@@ -3,6 +3,7 @@
 #include "LightBulb/IO/TeachedIndividualIO.hpp"
 #include "LightBulb/IO/IOStorage.hpp"
 #include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

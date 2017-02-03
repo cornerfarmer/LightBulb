@@ -4,6 +4,7 @@
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulb/Learning/Supervised/AbstractSupervisedLearningRule.hpp"
 
 #define PREFERENCE_TOTAL_ERROR_GOAL "Total error goal"
 #define PREFERENCE_MIN_RANDOM "Min random weight value"

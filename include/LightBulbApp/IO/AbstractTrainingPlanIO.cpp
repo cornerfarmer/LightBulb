@@ -1,5 +1,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractTrainingPlanIO.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/vector.hpp>

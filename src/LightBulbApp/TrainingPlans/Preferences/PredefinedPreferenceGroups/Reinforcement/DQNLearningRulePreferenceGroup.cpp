@@ -6,6 +6,7 @@
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentLearningRulePreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/RMSPropLearningRatePreferenceGroup.hpp"
+#include "LightBulb/Learning/Reinforcement/DQNLearningRule.hpp"
 
 namespace LightBulb
 {

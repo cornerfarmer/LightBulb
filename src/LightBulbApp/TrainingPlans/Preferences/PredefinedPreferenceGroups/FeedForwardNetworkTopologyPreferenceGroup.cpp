@@ -5,6 +5,15 @@
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/HyperbolicTangentFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/BinaryFunction.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
 
 namespace LightBulb
 {

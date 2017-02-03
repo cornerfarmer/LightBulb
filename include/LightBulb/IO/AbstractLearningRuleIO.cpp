@@ -1,6 +1,8 @@
 // Includes
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/AbstractLearningRuleIO.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

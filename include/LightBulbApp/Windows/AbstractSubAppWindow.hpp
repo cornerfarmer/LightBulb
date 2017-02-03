@@ -4,8 +4,6 @@
 #define _ABSTRACTSUBAPPWINDOW_H_
 
 // Includes
-#include <list>
-#include <wx/wxprec.h>
 #include "AbstractWindow.hpp"
 
 namespace LightBulb

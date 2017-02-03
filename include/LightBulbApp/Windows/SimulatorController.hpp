@@ -7,7 +7,6 @@
 #include <vector>
 
 // Includes
-#include "SimulatorWindow.hpp"
 #include "AbstractSubApp.hpp"
 
 namespace LightBulb
@@ -17,7 +16,10 @@ namespace LightBulb
 	class TrainingController;
 	class NeuralNetworkRepository;
 	class AbstractNeuralNetwork;
+	class SimulatorWindow;
+	class AbstractWindow;
 	/**
+	 *
 	 * \brief A sub app which can simulate calculations on a neural network.
 	 */
 	class SimulatorController : public AbstractSubApp

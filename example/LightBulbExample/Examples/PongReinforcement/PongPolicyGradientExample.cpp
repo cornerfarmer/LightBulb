@@ -2,6 +2,16 @@
 #include "PongPolicyGradientExample.hpp"
 #include "Examples/PongEvolution/PongGameFactory.hpp"
 #include "PongReinforcementEnvironment.hpp"
+#include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/PolicyGradientLearningRulePreferenceGroup.hpp"
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"

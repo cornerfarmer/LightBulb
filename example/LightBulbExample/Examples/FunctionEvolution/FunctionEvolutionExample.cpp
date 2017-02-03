@@ -2,6 +2,8 @@
 #include "FunctionEvolutionExample.hpp"
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/EvolutionLearningRulePreferenceGroup.hpp"
 
 using namespace LightBulb;
 

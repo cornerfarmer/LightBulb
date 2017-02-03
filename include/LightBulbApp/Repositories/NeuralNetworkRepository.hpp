@@ -8,12 +8,12 @@
 #include <memory>
 
 // Includes
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/Event/Observable.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
+	class AbstractNeuralNetwork;
 
 	/**
 	* \brief All observable events of NeuralNetworkRepository.

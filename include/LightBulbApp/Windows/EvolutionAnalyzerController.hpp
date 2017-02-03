@@ -7,10 +7,7 @@
 #include <vector>
 
 // Includes
-#include "EvolutionAnalyzerWindow.hpp"
 #include "AbstractSubApp.hpp"
-#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {
@@ -18,6 +15,11 @@ namespace LightBulb
 	class TrainingWindow;
 	class TrainingPlanRepository;
 	class EvolutionLearningRule;
+	class EvolutionAnalyzerWindow;
+	class AbstractEvolutionTrainingPlan;
+	enum EvolutionSource;
+	class AbstractWindow;
+	class AbstractTrainingPlan;
 	/**
 	 * \brief A sub app which describes the source of all current individuals.
 	 * \details Lists all individuals of a evolution learning rule, shows their source and their fitness. (Mutation, Recombination, Resuse, Create)

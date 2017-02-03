@@ -3,6 +3,12 @@
 #include "LightBulbApp/Windows/TrainingWindow.hpp"
 #include "LightBulbApp/Windows/TrainingController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
+#include "LightBulbApp/Windows/AbstractCustomSubAppFactory.hpp"
+#include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/AbstractPreferenceElement.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

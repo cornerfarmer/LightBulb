@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 
 namespace LightBulb
 {
+	struct SimpleGradientDescentOptions;
 	/**
 	* \brief Describes a predefined preference group for simple gradient descent.
 	*/

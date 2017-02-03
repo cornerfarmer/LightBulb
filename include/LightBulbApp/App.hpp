@@ -4,9 +4,6 @@
 #define _APP_H_
 
 // Includes
-#include "Repositories/NeuralNetworkRepository.hpp"
-#include "Repositories/TrainingPlanRepository.hpp"
-#include "Windows/TrainingController.hpp"
 
 // Library includes
 #include <wx/wxprec.h>
@@ -15,7 +12,9 @@
 namespace LightBulb
 {
 	class AbstractTrainingPlan;
-
+	class NeuralNetworkRepository;
+	class TrainingPlanRepository;
+	class TrainingController;
 	/**
 	 * \brief The LightBulbApp.
 	 */
@@ -30,6 +29,8 @@ namespace LightBulb
 		std::unique_ptr<TrainingPlanRepository> trainingPlanRepository;		
 		std::unique_ptr<TrainingController> trainingController;		
 	public:
+		~App();
+		App();
 		/**
 		* \brief Adds a new training plan which should be available in the app.
 		* \param trainingPlan The new trianing plan.

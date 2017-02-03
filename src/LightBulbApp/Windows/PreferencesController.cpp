@@ -2,6 +2,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/PreferencesController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulbApp/Windows/PreferencesWindow.hpp"
 
 namespace LightBulb
 {

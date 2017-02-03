@@ -104,6 +104,7 @@
     <ClCompile Include="..\src\LightBulbApp\Windows\TrainingWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\LightBulbApp\App.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.hpp" />
@@ -119,7 +120,6 @@
     <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp" />
     <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp" />
-    <ClInclude Include="..\include\LightBulbApp\LightBulbAppInclude.hpp" />
     <ClInclude Include="..\include\LightBulbApp\LightBulbAppPrec.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Performance\NetworkPerformanceTests.hpp" />
     <ClInclude Include="..\include\LightBulbApp\Repositories\NeuralNetworkRepository.hpp" />
@@ -157,6 +157,33 @@
     <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentAlgorithms\SimpleGradientDescentPreferenceGroup.hpp" />
     <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PredefinedPreferenceGroups\Supervised\GradientDescentLearningRulePreferenceGroup.hpp" />
     <ClInclude Include="..\include\LightBulbApp\TrainingPlans\Preferences\PreferenceGroup.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractApp.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractCustomSubApp.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractCustomSubAppFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractMainApp.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractSubApp.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractSubAppFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractSubAppWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\AbstractWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\EvolutionAnalyzerController.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\EvolutionAnalyzerFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\EvolutionAnalyzerWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\LearningstateController.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\LearningStateFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\LearningstateWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\LoggerController.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\LoggerFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\LoggerWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\NetworkViewerController.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\NetworkViewerFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\NetworkViewerWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\PreferencesController.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\PreferencesWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\SimulatorController.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\SimulatorFactory.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\SimulatorWindow.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\trainingcontroller.hpp" />
+    <ClInclude Include="..\include\LightBulbApp\Windows\TrainingWindow.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1B0784C5-984A-47B0-AAB5-BDEAC0A12ADB}</ProjectGuid>

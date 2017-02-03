@@ -5,10 +5,6 @@
 
 // Includes
 #include "LightBulb/Event/Observable.hpp"
-#include "LightBulb/Logging/StorageLogger.hpp"
-#include "LightBulbApp/Windows/AbstractCustomSubAppFactory.hpp"
-#include "Preferences/AbstractPreference.hpp"
-#include "Preferences/PreferenceGroup.hpp"
 
 // Library includes
 #include <thread>
@@ -19,6 +15,11 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractLogger;
 	struct LearningState;
+	class AbstractCustomSubAppFactory;
+	class StorageLogger;
+	class PreferenceGroup;
+	class AbstractPreference;
+	class AbstractPreferenceElement;
 	/**
 	 * \brief All possible training plan states.
 	 */
@@ -224,13 +225,7 @@ namespace LightBulb
 			return preferenceGroup->createFromGroup<OptionsClass, PreferenceGroupClass>(groupName);
 		}
 	public:
-		virtual ~AbstractTrainingPlan()
-		{
-			if (threadShouldBeJoinedBeforeReuse)
-			{
-				thread.join();
-			}
-		}
+		virtual ~AbstractTrainingPlan();
 		/**
 		 * \brief Creates the training plan.
 		 */

@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Evolution/RateDifferenceCondition.hpp"
 
 namespace LightBulb
 {
+	class RateDifferenceCondition;
 	/**
 	* \brief Describes a predefined preference group for a rate difference condition.
 	*/

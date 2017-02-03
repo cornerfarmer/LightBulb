@@ -7,13 +7,7 @@
 #include <vector>
 
 // Includes
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
-#include "LightBulb/Logging/AbstractLogger.hpp"
-#include "LightBulbApp/Windows/LoggerController.hpp"
-#include "LightBulbApp/Windows/TrainingWindow.hpp"
 #include "LightBulbApp/Windows/AbstractMainApp.hpp"
-#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
@@ -22,7 +16,10 @@ namespace LightBulb
 	class TrainingPlanRepository;
 	class AbstractSubAppFactory;
 	class PreferencesController;
-
+	class TrainingWindow;
+	class AbstractTrainingPlan;
+	class AbstractNetworkExporter;
+	class AbstractNeuralNetwork;
 	/**
 	 * \brief The main app which manages all neural networks an training plans.
 	 * \details The app lists all networks and training plans, shows detail information and adds the possibility to start, pause, save and load training plans.
@@ -88,6 +85,7 @@ namespace LightBulb
 		*/
 		PreferencesController* getOpenPreferences(const AbstractTrainingPlan& trainingPlan);
 	public:
+		~TrainingController();
 		/**
 		 * \brief Creates the training app.
 		 * \param neuralNetworkRepository_ The neural network repository to use.

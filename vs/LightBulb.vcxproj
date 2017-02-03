@@ -160,7 +160,6 @@
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientDescentLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\SupervisedLearningResult.hpp" />
     <ClInclude Include="..\include\LightBulb\Lib\ziggurat.hpp" />
-    <ClInclude Include="..\include\LightBulb\LightBulb.hpp" />
     <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp" />

@@ -8,8 +8,6 @@
 
 // Includes
 #include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
-#include "LightBulb/Logging/AbstractLogger.hpp"
-#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 // Forward declarations
 class wxDataViewListCtrl;
@@ -20,6 +18,7 @@ namespace LightBulb
 
 	// Forward declarations
 	class EvolutionAnalyzerController;
+	enum EvolutionSource;
 	/**
 	 * \brief The window of the evolution analyzer sub app.
 	 */

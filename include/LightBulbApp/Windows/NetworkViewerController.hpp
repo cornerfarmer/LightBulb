@@ -7,7 +7,6 @@
 #include <vector>
 
 // Includes
-#include "NetworkViewerWindow.hpp"
 #include "AbstractSubApp.hpp"
 
 namespace LightBulb
@@ -15,6 +14,8 @@ namespace LightBulb
 	// Forward declarations
 	class NeuralNetworkRepository;
 	class AbstractNeuralNetwork;
+	class NetworkViewerWindow;
+	class AbstractWindow;
 	/**
 	 * \brief A sub app which visualizes a neural network.
 	 * \details Draws neurons, their weights and their thresholds.

@@ -5,7 +5,6 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
 // Library includes
 
@@ -14,6 +13,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractNeuralNetwork;
 	struct AbstractReinforcementLearningRuleOptions;
+	class AbstractReinforcementEnvironment;
 	/**
 	* \brief Describes a training plan which uses reinforcement learning.
 	*/
@@ -39,6 +39,7 @@ namespace LightBulb
 		*/
 		void fillDefaultLearningRuleOptions(AbstractReinforcementLearningRuleOptions& options) const;
 	public:
+		~AbstractReinforcementTrainingPlan();
 		/**
 		 * \brief Creates the reinforcement training plan.
 		 */

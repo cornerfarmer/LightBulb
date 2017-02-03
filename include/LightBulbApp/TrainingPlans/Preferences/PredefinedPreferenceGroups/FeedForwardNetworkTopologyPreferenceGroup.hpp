@@ -6,13 +6,13 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
-#include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 
 namespace LightBulb
 {
 	class AbstractActivationFunction;
 	class AbstractInputFunction;
+	class ChoicePreference;
+	struct FeedForwardNetworkTopologyOptions;
 	/**
 	* \brief Describes a predefined preference group for a feed forward network topology.
 	*/

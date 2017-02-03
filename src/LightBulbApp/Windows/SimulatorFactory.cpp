@@ -2,6 +2,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/SimulatorFactory.hpp"
 #include "LightBulbApp/Windows/SimulatorController.hpp"
+#include "LightBulbApp/Windows/SimulatorWindow.hpp"
 
 namespace LightBulb
 {

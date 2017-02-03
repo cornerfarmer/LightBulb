@@ -625,9 +625,6 @@
     <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\LightBulb.hpp">
-      <Filter>Quelldateien</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulb\IO\EigenMatrixIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>

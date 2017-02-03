@@ -4,6 +4,8 @@
 #include "Examples/PongEvolution/PongAI.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 //Library includes
 
 

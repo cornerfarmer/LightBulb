@@ -2,6 +2,9 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
+#include "LightBulbApp/Windows/AbstractCustomSubAppFactory.hpp"
 
 namespace LightBulb
 {
@@ -54,6 +57,14 @@ namespace LightBulb
 	std::chrono::duration<double> AbstractTrainingPlan::getRunTime() const
 	{
 		return (isRunning() || isPausing() ? std::chrono::system_clock::now() - currentStartTime : std::chrono::duration<double>::zero()) + concludedRunTime;
+	}
+
+	AbstractTrainingPlan::~AbstractTrainingPlan()
+	{
+		if (threadShouldBeJoinedBeforeReuse)
+		{
+			thread.join();
+		}
 	}
 
 	AbstractTrainingPlan::AbstractTrainingPlan()

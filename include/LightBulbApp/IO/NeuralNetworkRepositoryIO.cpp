@@ -1,5 +1,6 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/NeuralNetworkRepositoryIO.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

@@ -2,6 +2,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerFactory.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerController.hpp"
+#include "LightBulbApp/Windows/EvolutionAnalyzerWindow.hpp"
 
 namespace LightBulb
 {

@@ -2,6 +2,10 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 //Library includes
 
 using namespace LightBulb;

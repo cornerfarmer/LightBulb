@@ -6,10 +6,10 @@
 // 
 #include "AbstractReinforcementLearningRulePreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Reinforcement/DQNLearningRule.hpp"
 
 namespace LightBulb
 {
+	class DQNLearningRuleOptions;
 	/**
 	* \brief Describes a predefined preference group for a dqn learning rule.
 	*/

@@ -1,7 +1,6 @@
 // Includes
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/FeedForwardNetworkTopologyIO.hpp"
-#include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
@@ -9,7 +8,6 @@
 // Libary includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
-#include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
 
 namespace LightBulb

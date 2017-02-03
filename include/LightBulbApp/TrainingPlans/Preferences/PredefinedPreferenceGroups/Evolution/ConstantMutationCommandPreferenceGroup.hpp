@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
 
 namespace LightBulb
 {
+	class ConstantMutationCommand;
 	/**
 	* \brief Describes a predefined preference group for a constant mutation command.
 	*/

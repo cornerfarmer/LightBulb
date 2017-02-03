@@ -3,6 +3,9 @@
 #include "LightBulbApp/Windows/LoggerController.hpp"
 #include "LightBulbApp/Windows/LoggerWindow.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Logging/StorageLogger.hpp"
 
 namespace LightBulb
 {

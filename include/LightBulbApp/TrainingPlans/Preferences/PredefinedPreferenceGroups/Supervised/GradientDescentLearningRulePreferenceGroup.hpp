@@ -5,14 +5,14 @@
 
 // Includes
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "AbstractSupervisedLearningRulePreferenceGroup.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
-	class SimpleGradientDescentOptions;
-	class ResilientLearningRateOptions;
+	struct SimpleGradientDescentOptions;
+	struct ResilientLearningRateOptions;
+	struct GradientDescentLearningRuleOptions;
 
 	/**
 	* \brief Describes a predefined preference group for a gradient descent learning rule.

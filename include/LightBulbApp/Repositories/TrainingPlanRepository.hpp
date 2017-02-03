@@ -9,10 +9,10 @@
 
 // Includes
 #include "LightBulb/Event/Observable.hpp"
-#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 
 namespace LightBulb
 {
+	class AbstractTrainingPlan;
 	/**
 	 * \brief All events the training plan repository can throw.
 	 */

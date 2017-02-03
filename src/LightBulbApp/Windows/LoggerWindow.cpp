@@ -2,6 +2,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/LoggerWindow.hpp"
 #include "LightBulbApp/Windows/LoggerController.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 
 namespace LightBulb
 {

@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 
 namespace LightBulb
 {
+	class RMSPropLearningRateOptions;
 	/**
 	* \brief Describes a predefined preference group for the RMSProp learning rate.
 	*/

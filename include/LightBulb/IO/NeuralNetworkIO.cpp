@@ -1,6 +1,7 @@
 // Includes
 #include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/NeuralNetworkIO.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

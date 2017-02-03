@@ -1,6 +1,7 @@
 ﻿// Includes
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/AbstractEvolutionLearningRulePreferenceGroup.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 
 namespace LightBulb
 {

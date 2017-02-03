@@ -2,6 +2,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 
 namespace LightBulb
 {
@@ -10,6 +11,8 @@ namespace LightBulb
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
 		options.environment = environment.get();
 	}
+
+	AbstractReinforcementTrainingPlan::~AbstractReinforcementTrainingPlan() = default;
 
 	AbstractReinforcementTrainingPlan::AbstractReinforcementTrainingPlan()
 	{

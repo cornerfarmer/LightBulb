@@ -2,6 +2,9 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantRecombinationCommandPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/DoublePreference.hpp"
+#include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionStrategy/RecombinationAlgorithm.hpp"
+#include "LightBulb/Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 
 namespace LightBulb
 {

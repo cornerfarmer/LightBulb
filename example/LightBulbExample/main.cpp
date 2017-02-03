@@ -8,6 +8,7 @@
 #include "Examples/PongReinforcement/PongPolicyGradientExample.hpp"
 #include "Examples/PongReinforcement/PongDQNExample.hpp"
 #include "Performance/ViennaCLTests.hpp"
+#include "LightBulbApp/App.hpp"
 
 int main(int argc, char** argv)
 {

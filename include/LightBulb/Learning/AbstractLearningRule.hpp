@@ -8,9 +8,6 @@
 #include <memory>
 
 // Includes
-// TODO: Remove
-#include "LightBulb/Learning/LearningState.hpp"
-#include "LightBulb/Random/AbstractRandomGenerator.hpp"
 
 namespace LightBulb
 {

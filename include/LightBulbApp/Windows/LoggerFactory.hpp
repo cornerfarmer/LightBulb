@@ -4,7 +4,6 @@
 #define _LOGGERFACTORY_H_
 
 // Includes
-#include "AbstractWindow.hpp"
 #include "AbstractSubAppFactory.hpp"
 
 namespace LightBulb

@@ -5,10 +5,7 @@
 
 // Includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
-// TODO: Remove
-#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
-#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 
 // Library Includes
 #include <vector>

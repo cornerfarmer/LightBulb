@@ -2,7 +2,9 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/PongAI.hpp"
 #include "Examples/PongEvolution/Pong.hpp"
-
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 
 using namespace LightBulb;
 

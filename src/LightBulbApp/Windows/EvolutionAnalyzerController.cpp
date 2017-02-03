@@ -4,6 +4,9 @@
 #include "LightBulbApp/Windows/EvolutionAnalyzerWindow.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+#include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 
 namespace LightBulb
 {

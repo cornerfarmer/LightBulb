@@ -1,7 +1,6 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/App.hpp"
 #include "LightBulbApp/Windows/TrainingController.hpp"
-#include "LightBulbApp/Windows/SimulatorController.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include "LightBulbApp/Windows/LearningStateFactory.hpp"
@@ -9,6 +8,9 @@
 #include "LightBulbApp/Windows/LoggerFactory.hpp"
 #include "LightBulbApp/Windows/NetworkViewerFactory.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerFactory.hpp"
+#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include "LightBulb/IO/Exporter/BrainJSExporter.hpp"
+#include "LightBulb/IO/Exporter/SynapticExporter.hpp"
 
 namespace LightBulb
 {
@@ -47,6 +49,10 @@ namespace LightBulb
 	{
 		throw;
 	}
+
+	App::~App() = default;
+	
+	App::App() = default;
 
 	void App::addTrainingPlan(AbstractTrainingPlan* trainingPlan)
 	{

@@ -2,6 +2,16 @@
 #include "PongDQNExample.hpp"
 #include "Examples/PongEvolution/PongGameFactory.hpp"
 #include "PongReinforcementEnvironment.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Reinforcement/DQNLearningRulePreferenceGroup.hpp"
+#include "LightBulb/Learning/Reinforcement/DQNLearningRule.hpp"
+#include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
+#include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
+#include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
+#include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
+#include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"

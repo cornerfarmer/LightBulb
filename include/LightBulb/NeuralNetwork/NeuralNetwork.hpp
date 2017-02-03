@@ -6,12 +6,10 @@
 // Libraray includes
 #include <vector>
 #include <memory>
+#include <cereal/access.hpp>
 
 // Includes
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include <cereal/access.hpp>
-// TODO: Remove
-#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

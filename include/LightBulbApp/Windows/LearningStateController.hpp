@@ -8,9 +8,7 @@
 #include <map>
 
 // Includes
-#include "LearningStateWindow.hpp"
 #include "AbstractSubApp.hpp"
-#include "LightBulb/Learning/LearningState.hpp"
 
 #define DEFAULT_COMP_DS "Iterations"
 
@@ -21,7 +19,13 @@ namespace LightBulb
 	class TrainingController;
 	class TrainingPlanRepository;
 	class AbstractTrainingPlan;
-
+	class LearningStateWindow;
+	class AbstractWindow;
+	class LearningState;
+	/**
+	* \brief Describes a simple dataset.
+	*/
+	typedef std::vector<double> DataSet;
 	/**
 	 * \brief Describes a selected data set in the LearningStateController.
 	 */

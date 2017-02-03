@@ -5,11 +5,11 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
-#include "LightBulb/Learning/AbstractLearningRule.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
+	class AbstractLearningRuleOptions;
 	/**
 	 * \brief Describes a predefined preference group for a learning rule.
 	 */

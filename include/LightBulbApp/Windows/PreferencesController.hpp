@@ -8,7 +8,6 @@
 #include <memory>
 
 // Includes
-#include "PreferencesWindow.hpp"
 #include "AbstractSubApp.hpp"
 
 namespace LightBulb
@@ -16,6 +15,8 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractTrainingPlan;
 	class AbstractPreferenceElement;
+	class PreferencesWindow;
+	class AbstractWindow;
 	/**
 	 * \brief A sub app which makes it possible to manage learning rule preferences.
 	 */

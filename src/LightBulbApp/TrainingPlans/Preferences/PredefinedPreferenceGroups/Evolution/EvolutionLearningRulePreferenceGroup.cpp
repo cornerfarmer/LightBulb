@@ -7,6 +7,13 @@
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/BestSelectionCommandPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/RateDifferenceConditionPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Evolution/ConstantRecombinationCommandPreferenceGroup.hpp"
+#include "LightBulb/Learning/Evolution/EvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/ConstantCreationCommand.hpp"
+#include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
+#include "LightBulb/Learning/Evolution/ConstantRecombinationCommand.hpp"
+#include "LightBulb/Learning/Evolution/ConstantReuseCommand.hpp"
+#include "LightBulb/Learning/Evolution/BestSelectionCommand.hpp"
+#include "LightBulb/Learning/Evolution/RateDifferenceCondition.hpp"
 
 namespace LightBulb
 {

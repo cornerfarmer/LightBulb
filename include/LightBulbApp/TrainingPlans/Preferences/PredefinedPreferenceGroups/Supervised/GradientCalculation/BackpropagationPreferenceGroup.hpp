@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 
 namespace LightBulb
 {
+	class Backpropagation;
 	/**
 	* \brief Describes a predefined preference group for backpropagation.
 	*/

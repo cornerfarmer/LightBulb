@@ -3,6 +3,8 @@
 #include "LightBulb/IO/GradientDescentLearningRuleIO.hpp"
 #include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/AbstractGradientDescentAlgorithm.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

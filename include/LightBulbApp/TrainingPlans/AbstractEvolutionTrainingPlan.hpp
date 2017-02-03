@@ -5,7 +5,6 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
-#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 
 // Library includes
 
@@ -14,6 +13,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractNeuralNetwork;
 	struct AbstractEvolutionLearningRuleOptions;
+	class AbstractEvolutionEnvironment;
 	/**
 	* \brief Describes a training plan which uses evolution learning.
 	*/
@@ -39,6 +39,7 @@ namespace LightBulb
 		*/
 		void fillDefaultLearningRuleOptions(AbstractEvolutionLearningRuleOptions& options) const;
 	public:
+		~AbstractEvolutionTrainingPlan();
 		/**
 		 * \brief Creates the evolution training plan.
 		 */

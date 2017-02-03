@@ -4,7 +4,6 @@
 #define _LEARNINGSTATEFACTORY_H_
 
 // Includes
-#include "AbstractWindow.hpp"
 #include "AbstractSubAppFactory.hpp"
 
 namespace LightBulb

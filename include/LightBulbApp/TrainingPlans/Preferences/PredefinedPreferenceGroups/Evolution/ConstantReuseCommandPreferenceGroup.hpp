@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Evolution/ConstantReuseCommand.hpp"
 
 namespace LightBulb
 {
+	class ConstantReuseCommand;
 	/**
 	* \brief Describes a predefined preference group for a constant reuse command.
 	*/

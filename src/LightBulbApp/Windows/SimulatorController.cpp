@@ -2,6 +2,10 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/SimulatorController.hpp"
 #include "LightBulbApp/Repositories/NeuralNetworkRepository.hpp""
+#include "LightBulbApp/Windows/SimulatorWindow.hpp"
+#include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 
 namespace LightBulb
 {

@@ -9,7 +9,6 @@
 #include <map>
 // Includes
 #include "LightBulbApp/Windows/AbstractWindow.hpp"
-#include "LightBulbApp/Windows/AbstractSubAppFactory.hpp"
 
 // Forward declarations
 class wxRichTextCtrl;
@@ -23,6 +22,7 @@ namespace LightBulb
 	class TrainingController;
 	class AbstractTrainingPlan;
 	class AbstractNeuralNetwork;
+	class AbstractSubAppFactory;
 
 	wxDECLARE_EVENT(TW_EVT_REFRESH_NN, wxCommandEvent);
 	wxDECLARE_EVENT(TW_EVT_REFRESH_TPP, wxCommandEvent);

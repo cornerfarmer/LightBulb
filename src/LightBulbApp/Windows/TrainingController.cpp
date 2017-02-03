@@ -10,6 +10,12 @@
 #include "LightBulbApp/TrainingPlans/AbstractReinforcementTrainingPlan.hpp"
 #include "LightBulb/Learning/Evolution/EvolutionLearningResult.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulbApp/Windows/AbstractSubAppFactory.hpp"
+#include "LightBulbApp/Windows/PreferencesWindow.hpp"
+#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 
 namespace LightBulb
 {
@@ -341,6 +347,8 @@ namespace LightBulb
 		}
 		return nullptr;
 	}
+
+	TrainingController::~TrainingController() = default;
 
 	void TrainingController::setTrainingPlanName(int trainingPlanIndex, const std::string& newName)
 	{

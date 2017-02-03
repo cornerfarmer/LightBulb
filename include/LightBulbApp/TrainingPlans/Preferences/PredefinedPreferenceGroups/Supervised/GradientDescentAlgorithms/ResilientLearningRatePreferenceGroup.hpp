@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
 
 namespace LightBulb
 {
+	struct ResilientLearningRateOptions;
 	/**
 	* \brief Describes a predefined preference group for the resilient learning rate.
 	*/

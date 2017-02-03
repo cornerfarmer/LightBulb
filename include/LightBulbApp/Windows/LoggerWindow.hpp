@@ -11,7 +11,6 @@
 #endif
 
 // Includes
-#include "LightBulb/Logging/AbstractLogger.hpp"
 #include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
 
 // Forward declarations

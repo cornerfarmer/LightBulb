@@ -2,6 +2,7 @@
 #include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
+#include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 
 using namespace LightBulb;
 

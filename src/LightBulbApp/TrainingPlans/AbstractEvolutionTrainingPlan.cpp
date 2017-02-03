@@ -2,6 +2,8 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
+#include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
+
 
 namespace LightBulb
 {
@@ -10,6 +12,8 @@ namespace LightBulb
 		AbstractLearningRuleTrainingPlan::fillDefaultLearningRuleOptions(options);
 		options.environment = environment.get();
 	}
+
+	AbstractEvolutionTrainingPlan::~AbstractEvolutionTrainingPlan() = default;
 
 	AbstractEvolutionTrainingPlan::AbstractEvolutionTrainingPlan()
 	{

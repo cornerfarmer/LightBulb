@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Evolution/BestSelectionCommand.hpp"
 
 namespace LightBulb
 {
+	class BestSelectionCommand;
 	/**
 	* \brief Describes a predefined preference group for a best selection command.
 	*/

@@ -4,7 +4,6 @@
 #define _NETWORKVIEWERFACTORY_H_
 
 // Includes
-#include "AbstractWindow.hpp"
 #include "AbstractSubAppFactory.hpp"
 
 namespace LightBulb

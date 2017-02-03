@@ -6,10 +6,10 @@
 // 
 #include "AbstractReinforcementLearningRulePreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Reinforcement/PolicyGradientLearningRule.hpp"
 
 namespace LightBulb
 {
+	class PolicyGradientLearningRuleOptions;
 	/**
 	* \brief Describes a predefined preference group for a policy gradient learning rule.
 	*/

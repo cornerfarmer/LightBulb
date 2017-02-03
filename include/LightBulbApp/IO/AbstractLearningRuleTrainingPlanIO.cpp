@@ -1,6 +1,7 @@
 #include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractLearningRuleTrainingPlanIO.hpp"
 #include "LightBulb/IO/IOStorage.hpp"
+#include "LightBulb/Learning/AbstractLearningRule.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

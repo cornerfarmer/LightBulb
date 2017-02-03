@@ -5,6 +5,8 @@
 #include "Pong.hpp"
 #include <Examples/PongReinforcement/PongPolicyGradientExample.hpp>
 #include <Examples/PongReinforcement/PongReinforcementEnvironment.hpp>
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 // Library includes
 
 using namespace LightBulb;

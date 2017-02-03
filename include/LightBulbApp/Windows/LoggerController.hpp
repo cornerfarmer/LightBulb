@@ -7,9 +7,6 @@
 #include <vector>
 
 // Includes
-#include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
-#include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
-#include "LightBulbApp/Windows/LoggerWindow.hpp"
 #include "LightBulbApp/Windows/AbstractSubApp.hpp"
 
 namespace LightBulb
@@ -17,6 +14,11 @@ namespace LightBulb
 	// Forward declarations
 	class TrainingWindow;
 	class TrainingPlanRepository;
+	class LoggerWindow;
+	class AbstractTrainingPlan;
+	class AbstractWindow;
+	enum LogLevel;
+	class AbstractLogger;
 	/**
 	 * \brief A sup app which acts as logger.
 	 * \details The app shows log messages depending on the selected LogLevel. The app uses the StorageLogger. 

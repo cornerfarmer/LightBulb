@@ -6,10 +6,10 @@
 // Includes
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
-#include "LightBulb/Learning/Evolution/ConstantCreationCommand.hpp"
 
 namespace LightBulb
 {
+	class ConstantCreationCommand;
 	/**
 	* \brief Describes a predefined preference group for a constant creation command.
 	*/

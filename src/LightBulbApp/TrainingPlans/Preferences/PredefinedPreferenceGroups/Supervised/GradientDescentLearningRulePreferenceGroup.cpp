@@ -5,6 +5,10 @@
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/SimpleGradientDescentPreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientDescentAlgorithms/ResilientLearningRatePreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/Supervised/GradientCalculation/BackpropagationPreferenceGroup.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
+#include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/ResilientLearningRate.hpp"
+#include "LightBulb/Learning/Supervised/GradientCalculation/Backpropagation.hpp"
 
 namespace LightBulb
 {

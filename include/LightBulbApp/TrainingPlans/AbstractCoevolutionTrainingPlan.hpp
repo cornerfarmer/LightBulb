@@ -5,7 +5,6 @@
 
 // Includes
 #include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
-#include <LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp>
 
 // Library includes
 
