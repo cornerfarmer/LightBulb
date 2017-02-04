@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/Learning/LearningState.hpp"
+#include <cereal/access.hpp>
 
 namespace LightBulb
 {

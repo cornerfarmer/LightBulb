@@ -1,8 +1,9 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/StorageLoggerIO.hpp"
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 
 #include <cereal/types/vector.hpp>
+#include <cereal/types/utility.hpp>
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 

@@ -1,9 +1,9 @@
 ﻿// Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PredefinedPreferenceGroups/AbstractLearningRulePreferenceGroup.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraObject.hpp"
 
 #define PREFERENCE_MAX_ITERATIONS_PER_TRY "Max iterations per try"
 #define PREFERENCE_MAX_TRIES "Max tries"

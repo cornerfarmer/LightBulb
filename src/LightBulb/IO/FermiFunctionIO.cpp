@@ -1,7 +1,6 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/FermiFunctionIO.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libary includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>

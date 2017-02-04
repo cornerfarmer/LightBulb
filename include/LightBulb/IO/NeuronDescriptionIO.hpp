@@ -5,6 +5,7 @@
 
 // Includes
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "cereal/access.hpp"
 
 namespace LightBulb
 {

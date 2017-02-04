@@ -1,5 +1,4 @@
 ﻿// Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionLearningRule.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"

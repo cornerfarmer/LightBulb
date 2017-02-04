@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractEvolutionTrainingPlanIO.hpp"
 #include "LightBulb/Learning/Evolution/AbstractEvolutionEnvironment.hpp"
 #include "LightBulb/IO/IOStorage.hpp"

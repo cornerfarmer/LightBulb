@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\DoublePreferenceIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\PreferenceGroupIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\TrainingControllerIO.cpp" />
-    <ClCompile Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.cpp" />
     <ClCompile Include="..\src\LightBulbApp\App.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractPreferenceIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.cpp" />
     <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractTrainingPlanIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\BooleanPreferenceIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\ChoicePreferenceIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\DoublePreferenceIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\IntegerPreferenceIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\NeuralNetworkRepositoryIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\PreferenceGroupIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\TrainingControllerIO.cpp" />
+    <ClCompile Include="..\src\LightBulbApp\IO\TrainingPlanRepositoryIO.cpp" />
     <ClCompile Include="..\src\LightBulbApp\LightBulbAppPrec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MultiProcessorCompilation>
@@ -259,6 +259,7 @@
       <AdditionalOptions>/bigobj /Zm200 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbApp/LightBulbAppPrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>LightBulbApp/LightBulbAppPrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <AdditionalDependencies>../Debug/LightBulb.lib;wxcode_msw28ud_freechart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -287,6 +288,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbApp/LightBulbAppPrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>LightBulbApp/LightBulbAppPrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

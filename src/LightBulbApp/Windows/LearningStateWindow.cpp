@@ -1,8 +1,12 @@
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/LearningStateWindow.hpp"
 #include "LightBulbApp/Windows/LearningStateController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
+#include <wx/xy/xyplot.h>
+#include <wx/xy/xysimpledataset.h>
+#include <wx/xy/xylinerenderer.h>
+#include <wx/valnum.h>
+#include <wx/dataview.h>
 
 namespace LightBulb
 {

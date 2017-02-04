@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/AbstractCoevolutionEnvironmentIO.hpp"
 #include "LightBulb/Learning/Evolution/AbstractHallOfFameAlgorithm.hpp"
 

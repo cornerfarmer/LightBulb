@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/PongGame.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 //Library includes

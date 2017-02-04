@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Logging/AbstractLoggable.hpp"
 #include "LightBulb/Logging/AbstractLogger.hpp"
 

@@ -47,9 +47,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\LightBulbApp\Performance\NetworkPerformanceTests.cpp">
       <Filter>Quelldateien\Performance</Filter>
     </ClCompile>
@@ -164,48 +161,6 @@
     <ClCompile Include="..\src\LightBulbApp\LightBulbAppPrec.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\DoublePreferenceIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\PreferenceGroupIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\TrainingControllerIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\LightBulbApp\Windows\AbstractSubApp.cpp">
       <Filter>Quelldateien\Windows</Filter>
     </ClCompile>
@@ -287,53 +242,53 @@
     <ClCompile Include="..\src\LightBulbApp\Windows\AbstractMainApp.cpp">
       <Filter>Quelldateien\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\BooleanPreferenceIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\ChoicePreferenceIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\DoublePreferenceIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\IntegerPreferenceIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\NeuralNetworkRepositoryIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\PreferenceGroupIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\TrainingControllerIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\TrainingPlanRepositoryIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractPreferenceIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\DoublePreferenceIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulbApp\Performance\NetworkPerformanceTests.hpp">
       <Filter>Quelldateien\Performance</Filter>
     </ClInclude>
@@ -528,6 +483,51 @@
     </ClInclude>
     <ClInclude Include="..\include\LightBulbApp\Windows\AbstractCustomSubAppFactory.hpp">
       <Filter>Quelldateien\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractPreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractReinforcementTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractSingleNNTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\BooleanPreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\ChoicePreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\DoublePreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\IntegerPreferenceIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\NeuralNetworkRepositoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\PreferenceGroupIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\TrainingControllerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\TrainingPlanRepositoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractCoevolutionTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractEvolutionTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulbApp\IO\AbstractLearningRuleTrainingPlanIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

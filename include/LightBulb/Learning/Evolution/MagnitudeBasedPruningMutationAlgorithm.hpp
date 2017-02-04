@@ -3,10 +3,11 @@
 #ifndef _MAGNITUDEBASEDPRUNINGMUTATIONALGORITHM_H_
 #define _MAGNITUDEBASEDPRUNINGMUTATIONALGORITHM_H_
 
-// Library Includes
-
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractMutationAlgorithm.hpp"
+
+// Library Includes
+#include <memory>
 
 namespace LightBulb
 {

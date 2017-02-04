@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/AbstractIndividualIO.hpp"
 #include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libraray includes

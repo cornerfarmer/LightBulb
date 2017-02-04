@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 

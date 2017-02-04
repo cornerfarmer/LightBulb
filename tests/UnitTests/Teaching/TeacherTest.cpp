@@ -1,4 +1,3 @@
-#include "UnitTestsPrec.hpp"
 #include <LightBulb/Teaching/Teacher.hpp>
 #include <Mocks/MockTeachingLesson.hpp>
 #include <Mocks/MockNeuralNetwork.hpp>

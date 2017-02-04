@@ -1,6 +1,5 @@
 
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/IO/IOStorage.hpp"

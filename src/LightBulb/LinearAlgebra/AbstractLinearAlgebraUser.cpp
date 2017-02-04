@@ -1,6 +1,6 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraObject.hpp"
 
 namespace LightBulb
 {

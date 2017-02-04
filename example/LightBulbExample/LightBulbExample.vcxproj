@@ -85,6 +85,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbExamplePrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>LightBulbExamplePrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_richtext.lib;wxmsw31ud_adv.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;../../extlibs/freechart/lib/vc_lib/msw_wxFreeChart30ud.lib;../../vs/Debug/LightBulbApp.lib;../../vs/Debug/LightBulb.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -117,6 +118,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulbExamplePrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>LightBulbExamplePrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

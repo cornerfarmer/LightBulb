@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/StochasticUniversalSamplingSelector.hpp"
 #include "LightBulb/Function/SelectionFunction/RouletteWheelSelectionFunction.hpp"
 //Library includes

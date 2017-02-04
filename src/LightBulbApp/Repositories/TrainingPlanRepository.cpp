@@ -1,7 +1,7 @@
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"
 #include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
+#include <fstream>
 
 namespace LightBulb
 {

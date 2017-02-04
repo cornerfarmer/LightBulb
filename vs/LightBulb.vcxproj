@@ -50,6 +50,7 @@
     <ClInclude Include="..\include\LightBulb\IO\ConstructExisting.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\DQNLearningRuleIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\EigenMatrixIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\Exporter\AbstractJSONElement.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\Exporter\AbstractNetworkExporter.hpp" />
@@ -65,7 +66,6 @@
     <ClInclude Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\IOStorage.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\LearningStateIO.hpp" />
-    <ClInclude Include="..\include\LightBulb\IO\EigenMatrixIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\NeuronDescriptionIO.hpp" />
@@ -194,39 +194,6 @@
     <ClInclude Include="..\include\LightBulb\Tools\AbstractCloneable.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractCoevolutionEnvironmentIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractDefaultIndividualIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractIndividualIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractLoggerIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\AbstractSupervisedLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\BackpropagationIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\CoevolutionLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\DQNLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\FeedForwardNetworkTopologyIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\FermiFunctionIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\LearningStateIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\NeuralNetworkIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\NeuronDescriptionIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\ResilientLearningRateIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\RMSPropLearningRateIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\SimpleGradientDescentIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\StorageLoggerIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\TeachedIndividualIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\XorShfGeneratorIO.cpp" />
-    <ClCompile Include="..\include\LightBulb\IO\ZigguratGeneratorIO.cpp" />
     <ClCompile Include="..\include\LightBulb\Learning\AbstractLearningResult.cpp" />
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp" />
     <ClCompile Include="..\src\LightBulb\ActivationOrder\TopologicalOrder.cpp" />
@@ -248,6 +215,24 @@
     <ClCompile Include="..\src\LightBulb\Function\SelectionFunction\RouletteWheelSelectionFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\ShrinkFunction\AbstractShrinkFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Function\ShrinkFunction\ExponentialShrinkFunction.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractCoevolutionEnvironmentIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractDefaultIndividualIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractEvolutionLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractGradientDescentAlgorithmIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractHallOfFameAlgorithmIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractIndividualIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractLoggerIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractRandomGeneratorIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractReinforcementEnvironmentIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractReinforcementLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractSupervisedLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\BackpropagationIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\CoevolutionLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\DQNLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\EvolutionLearningRuleIO.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\Exporter\AbstractJSONElement.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\Exporter\AbstractNetworkExporter.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\Exporter\BrainJSExporter.cpp" />
@@ -257,6 +242,21 @@
     <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONObject.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\Exporter\JSONStringElement.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\Exporter\SynapticExporter.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\FeedForwardNetworkTopologyIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\FermiFunctionIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\GradientDescentLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\LearningStateIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\NeuralNetworkIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\NeuronDescriptionIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\PolicyGradientLearningRuleIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\ResilientLearningRateIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\RMSPropLearningRateIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\SameNeuronDescriptionFactoryIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\SimpleGradientDescentIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\StorageLoggerIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\TeachedIndividualIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\XorShfGeneratorIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\ZigguratGeneratorIO.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\AbstractLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCoevolutionEnvironment.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\AbstractCoevolutionFitnessFunction.cpp" />
@@ -415,6 +415,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulb/LightBulbPrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>LightBulb/LightBulbPrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -436,6 +437,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>LightBulb/LightBulbPrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>LightBulb/LightBulbPrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

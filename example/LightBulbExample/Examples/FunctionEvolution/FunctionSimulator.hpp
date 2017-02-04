@@ -11,6 +11,7 @@
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/LinearAlgebra/Scalar.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 // Forward declarations
 class AbstractTile;

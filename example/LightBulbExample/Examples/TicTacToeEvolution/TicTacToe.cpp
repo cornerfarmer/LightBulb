@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToe.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeAI.hpp"
 #include "LightBulb/Logging/AbstractLogger.hpp"

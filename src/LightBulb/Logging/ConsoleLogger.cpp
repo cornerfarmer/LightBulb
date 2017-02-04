@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Logging/ConsoleLogger.hpp"
 #include <iostream>
 

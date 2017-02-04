@@ -1,4 +1,3 @@
-#include "UnitTestsPrec.hpp"
 #include "LightBulb/Learning/Evolution/ConstantMutationCommand.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include <Mocks/MockMutationAlgorithm.hpp>

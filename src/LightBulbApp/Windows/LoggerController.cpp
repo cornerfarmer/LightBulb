@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/LoggerController.hpp"
 #include "LightBulbApp/Windows/LoggerWindow.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"

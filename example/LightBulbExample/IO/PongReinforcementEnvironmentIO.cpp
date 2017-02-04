@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "IO/PongReinforcementEnvironmentIO.hpp"
 
 // Libary includes

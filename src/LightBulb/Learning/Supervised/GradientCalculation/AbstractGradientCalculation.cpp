@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Supervised/GradientCalculation/AbstractGradientCalculation.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 

@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractTrainingPlanIO.hpp"
 #include "LightBulb/Logging/StorageLogger.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"

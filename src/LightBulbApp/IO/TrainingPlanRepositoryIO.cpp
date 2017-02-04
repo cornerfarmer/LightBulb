@@ -1,9 +1,9 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/TrainingPlanRepositoryIO.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractTrainingPlan.hpp"
 #include "LightBulbApp/IO/AbstractSingleNNTrainingPlanIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
+#include <cereal/types/vector.hpp>
 
 namespace LightBulb
 {

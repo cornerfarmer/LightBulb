@@ -9,6 +9,7 @@
 
 // Includes
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {

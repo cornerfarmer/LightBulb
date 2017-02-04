@@ -7,6 +7,7 @@
 
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 // Forward declarations
 

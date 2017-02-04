@@ -3,10 +3,11 @@
 #ifndef _RECOMBINATIONALGORITHM_H_
 #define _RECOMBINATIONALGORITHM_H_
 
-// Library Includes
-
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractRecombinationAlgorithm.hpp"
+
+// Library Includes
+#include <viennacl/matrix.hpp>
 
 namespace LightBulb
 {

@@ -1,8 +1,7 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/AbstractHallOfFameAlgorithmIO.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

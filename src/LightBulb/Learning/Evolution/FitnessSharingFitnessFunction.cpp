@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/FitnessSharingFitnessFunction.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"

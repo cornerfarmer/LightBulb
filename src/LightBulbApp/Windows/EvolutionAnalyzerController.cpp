@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerController.hpp"
 #include "LightBulbApp/Windows/EvolutionAnalyzerWindow.hpp"
 #include "LightBulbApp/Repositories/TrainingPlanRepository.hpp"

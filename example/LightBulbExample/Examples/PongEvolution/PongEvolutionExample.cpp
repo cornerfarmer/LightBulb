@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "PongEvolutionExample.hpp"
 #include <LightBulb/Learning/Evolution/ConstantMutationCommand.hpp>
 #include <LightBulb/Learning/Evolution/EvolutionStrategy/MutationAlgorithm.hpp>

@@ -1,7 +1,7 @@
-#include "UnitTestsPrec.hpp"
 #include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "gtest/gtest.h"
 
 using namespace LightBulb;
 

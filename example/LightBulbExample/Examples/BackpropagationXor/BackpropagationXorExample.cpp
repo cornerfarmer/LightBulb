@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "BackpropagationXorExample.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/SimpleGradientDescent.hpp"
 #include "LightBulb/Teaching/TeachingInput.hpp"

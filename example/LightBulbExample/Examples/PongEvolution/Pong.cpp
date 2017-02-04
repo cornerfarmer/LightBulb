@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/PongEvolution/Pong.hpp"
 #include "Examples/PongEvolution/PongAI.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"

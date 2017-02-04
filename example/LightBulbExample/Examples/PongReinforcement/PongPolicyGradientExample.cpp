@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "PongPolicyGradientExample.hpp"
 #include "Examples/PongEvolution/PongGameFactory.hpp"
 #include "PongReinforcementEnvironment.hpp"

@@ -1,4 +1,3 @@
-#include "UnitTestsPrec.hpp"
 #include <LightBulb/NeuralNetwork/NeuralNetwork.hpp>
 #include "Mocks/MockNetworkTopology.hpp"
 #include "Mocks/MockActivationOrder.hpp"

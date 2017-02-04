@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 

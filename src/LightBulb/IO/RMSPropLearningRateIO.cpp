@@ -1,9 +1,9 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/RMSPropLearningRateIO.hpp"
 #include "LightBulb/IO/ConstructExisting.hpp"
 #include "LightBulb/IO/EigenMatrixIO.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractReinforcementTrainingPlanIO.hpp"
 #include "LightBulb/IO/IOStorage.hpp"
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"

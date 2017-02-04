@@ -1,13 +1,14 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/LearningStateIO.hpp"
 #include "LightBulb/IO/IOStorage.hpp"
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 
 // Libary includes
 #include <cereal/types/map.hpp>
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>
 #include <cereal/types/vector.hpp>
+#include <cereal/types/string.hpp>
 
 namespace LightBulb
 {

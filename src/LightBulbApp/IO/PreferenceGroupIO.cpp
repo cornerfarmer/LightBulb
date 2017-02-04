@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/PreferenceGroupIO.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>

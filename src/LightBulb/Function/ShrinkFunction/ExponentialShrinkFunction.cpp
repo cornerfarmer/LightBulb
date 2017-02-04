@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Function/ShrinkFunction/ExponentialShrinkFunction.hpp"
 #include <cmath>
 

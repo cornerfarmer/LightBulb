@@ -1,9 +1,8 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/NeuronDescriptionIO.hpp"
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
 #include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libary includes
 #include <cereal/cereal.hpp>
 #include <cereal/access.hpp>

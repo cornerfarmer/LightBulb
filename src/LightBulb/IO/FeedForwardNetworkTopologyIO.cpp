@@ -1,10 +1,9 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/FeedForwardNetworkTopologyIO.hpp"
 #include "LightBulb/NeuronDescription/AbstractNeuronDescriptionFactory.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libary includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

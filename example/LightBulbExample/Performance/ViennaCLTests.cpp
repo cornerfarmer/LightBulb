@@ -1,7 +1,7 @@
-#include "LightBulbExamplePrec.hpp"
 #include "Performance/ViennaCLTests.hpp"
 #include "Eigen/Dense"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 
 #define SIZE 1024
 #define TESTING 1

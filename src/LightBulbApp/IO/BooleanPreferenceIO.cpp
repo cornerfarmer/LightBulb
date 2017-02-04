@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/BooleanPreferenceIO.hpp"
 
 // Libraray includes

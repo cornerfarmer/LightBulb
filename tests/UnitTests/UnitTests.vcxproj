@@ -83,6 +83,7 @@
       <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>UnitTestsPrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>UnitTestsPrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -107,6 +108,7 @@
       <PreprocessorDefinitions>_MBCS;VIENNACL_WITH_OPENCL;VIENNACL_WITH_EIGEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>UnitTestsPrec.hpp</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>UnitTestsPrec.hpp</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -1,8 +1,7 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/SameNeuronDescriptionFactoryIO.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Library includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

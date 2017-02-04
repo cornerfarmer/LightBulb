@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/TrainingWindow.hpp"
 #include "LightBulbApp/Windows/TrainingController.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractSupervisedTrainingPlan.hpp"
@@ -9,6 +8,11 @@
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include <wx/dataview.h>
+#include <wx/richtext/richtextctrl.h>
+#include <wx/splitter.h>
+#include <wx/artprov.h>
+#include <wx/statline.h>
 
 namespace LightBulb
 {

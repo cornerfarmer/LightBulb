@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/TrainingPlans/AbstractLearningRuleTrainingPlan.hpp"
 #include "LightBulb/Learning/AbstractLearningRule.hpp"
 #include "LightBulb/Logging/StorageLogger.hpp"

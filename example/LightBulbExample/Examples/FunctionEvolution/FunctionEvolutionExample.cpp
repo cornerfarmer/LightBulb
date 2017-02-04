@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "FunctionEvolutionExample.hpp"
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"

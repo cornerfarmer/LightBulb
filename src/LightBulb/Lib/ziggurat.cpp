@@ -1,4 +1,3 @@
-#include "LightBulb/LightBulbPrec.hpp"
 # include <cstdlib>
 # include <iostream>
 # include <iomanip>

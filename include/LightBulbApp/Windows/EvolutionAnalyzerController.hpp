@@ -5,6 +5,7 @@
 
 // Library includes
 #include <vector>
+#include <memory>
 
 // Includes
 #include "AbstractSubApp.hpp"

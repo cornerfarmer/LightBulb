@@ -1,7 +1,6 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/ResilientLearningRateIO.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>
 

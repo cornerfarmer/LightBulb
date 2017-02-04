@@ -1,4 +1,3 @@
-#include "UnitTestsPrec.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include "LightBulb/Function/InputFunction/WeightedSumFunction.hpp"
@@ -6,6 +5,7 @@
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "gtest/gtest.h"
 
 using namespace LightBulb;
 

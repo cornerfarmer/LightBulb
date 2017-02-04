@@ -1,5 +1,5 @@
-#include "UnitTestsPrec.hpp"
 #include "LightBulb/Random/ZigguratGenerator.hpp"
+#include "gtest/gtest.h"
 
 using namespace LightBulb;
 

@@ -1,11 +1,11 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeGameWindow.hpp"
 #include "TicTacToeGameController.hpp"
+#include <wx/artprov.h>
 
 BEGIN_EVENT_TABLE(TicTacToeGameWindow, wxFrame)
-EVT_PAINT(TicTacToeGameWindow::paintEvent)
-EVT_SIZE(TicTacToeGameWindow::resize)
+	EVT_PAINT(TicTacToeGameWindow::paintEvent)
+	EVT_SIZE(TicTacToeGameWindow::resize)
 END_EVENT_TABLE()
 
 wxDEFINE_EVENT(TTT_EVT_FIELD_CHANGED, wxThreadEvent);

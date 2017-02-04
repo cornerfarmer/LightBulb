@@ -3,10 +3,11 @@
 #ifndef _CONSTANTRECOMBINATIONCOMMAND_H_
 #define _CONSTANTRECOMBINATIONCOMMAND_H_
 
-// Library Includes
-
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractRecombinationCommand.hpp"
+
+// Library Includes
+#include <map>
 
 namespace LightBulb
 {

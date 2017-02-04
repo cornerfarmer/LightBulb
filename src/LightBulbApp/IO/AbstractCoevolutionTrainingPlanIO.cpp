@@ -1,4 +1,3 @@
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/IO/AbstractCoevolutionTrainingPlanIO.hpp"
 #include <LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp>
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"

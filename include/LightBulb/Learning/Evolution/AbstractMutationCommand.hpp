@@ -5,6 +5,8 @@
 
 // Library Includes
 #include <vector>
+#include <memory>
+#include <map>
 
 // Includes
 #include "LightBulb/Learning/Evolution/AbstractCommand.hpp"

@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "IO/PositionIO.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 

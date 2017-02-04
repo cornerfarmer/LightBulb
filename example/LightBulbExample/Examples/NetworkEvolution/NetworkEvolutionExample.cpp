@@ -1,4 +1,3 @@
-#include "LightBulbExamplePrec.hpp"
 #include "NetworkEvolutionExample.hpp"
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 #include "LightBulb/Learning/Evolution/RateDifferenceCondition.hpp"

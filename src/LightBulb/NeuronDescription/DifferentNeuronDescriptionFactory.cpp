@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/NeuronDescription/DifferentNeuronDescriptionFactory.hpp"
 #include "LightBulb/Function/InputFunction/AbstractInputFunction.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"

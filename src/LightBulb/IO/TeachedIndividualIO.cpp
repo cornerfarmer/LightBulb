@@ -1,9 +1,9 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/TeachedIndividualIO.hpp"
 #include "LightBulb/IO/IOStorage.hpp"
 #include "LightBulb/Learning/Evolution/TeachingEvolutionEnvironment.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 
 // Libraray includes
 #include <cereal/cereal.hpp>

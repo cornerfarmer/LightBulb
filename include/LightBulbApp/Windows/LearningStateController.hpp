@@ -6,6 +6,7 @@
 // Library includes
 #include <vector>
 #include <map>
+#include <memory>
 
 // Includes
 #include "AbstractSubApp.hpp"

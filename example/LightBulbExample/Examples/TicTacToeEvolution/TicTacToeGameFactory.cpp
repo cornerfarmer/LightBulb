@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/TicTacToeEvolution/TicTacToeGameFactory.hpp"
 #include "TicTacToeGameController.hpp"
 

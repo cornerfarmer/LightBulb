@@ -1,8 +1,7 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/PolicyGradientLearningRuleIO.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
-
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 #include <cereal/types/polymorphic.hpp>

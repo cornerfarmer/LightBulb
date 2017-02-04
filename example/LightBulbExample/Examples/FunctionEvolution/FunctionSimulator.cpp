@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "Examples/FunctionEvolution/Position.hpp"
 //Library includes

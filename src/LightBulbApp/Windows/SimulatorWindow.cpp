@@ -1,9 +1,9 @@
 // Includes
-#include "LightBulbApp/LightBulbAppPrec.hpp"
 #include "LightBulbApp/Windows/SimulatorWindow.hpp"
 #include "LightBulbApp/Windows/SimulatorController.hpp"
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
+#include <wx/valnum.h>
 
 namespace LightBulb
 {

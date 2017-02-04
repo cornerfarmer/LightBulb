@@ -4,6 +4,7 @@
 #define _PONGGAME_H_
 
 // Library Includes
+#include "cereal/access.hpp"
 
 // Include
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"

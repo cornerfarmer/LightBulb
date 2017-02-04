@@ -148,114 +148,6 @@
     <ClInclude Include="..\include\LightBulb\Function\ShrinkFunction\ExponentialShrinkFunction.hpp">
       <Filter>Quelldateien\Function\ShrinkFunction</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\LearningStateIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\NeuronDescriptionIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\ResilientLearningRateIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\RMSPropLearningRateIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\SimpleGradientDescentIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\StandardRandomGeneratorIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\StorageLoggerIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\TeachedIndividualIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\UsedArchives.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\UseParentSerialization.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\XorShfGeneratorIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\ZigguratGeneratorIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractCoevolutionEnvironmentIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractDefaultIndividualIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractIndividualIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractSupervisedLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\BackpropagationIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\CoevolutionLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\ConstructExisting.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\DQNLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\FeedForwardNetworkTopologyIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\FermiFunctionIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\IOStorage.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulb\IO\Exporter\JSONArray.hpp">
       <Filter>Quelldateien\IO\Exporter</Filter>
     </ClInclude>
@@ -586,12 +478,6 @@
     <ClInclude Include="..\include\LightBulb\Tools\AbstractCloneable.hpp">
       <Filter>Quelldateien\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractLoggerIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClInclude>
@@ -600,9 +486,6 @@
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Vector.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractLinearAlgebraObjectIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
@@ -613,22 +496,139 @@
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\VectorIO.hpp">
+    <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ResilientLearningRateIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp">
+    <ClInclude Include="..\include\LightBulb\IO\RMSPropLearningRateIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\IO\ScalarIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp">
-      <Filter>Quelldateien</Filter>
+    <ClInclude Include="..\include\LightBulb\IO\SimpleGradientDescentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\StandardRandomGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\StorageLoggerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\TeachedIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\TemplateDeclaration.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\UsedArchives.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\UseParentSerialization.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\VectorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\XorShfGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ZigguratGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractCoevolutionEnvironmentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractDefaultIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLinearAlgebraObjectIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractLoggerIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractSupervisedLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\BackpropagationIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\CoevolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\ConstructExisting.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\DQNLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\IO\EigenMatrixIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\TemplateDeclaration.hpp">
+    <ClInclude Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\FeedForwardNetworkTopologyIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\FermiFunctionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\IOStorage.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\LearningStateIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\MatrixIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\NeuralNetworkIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\NeuronDescriptionIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1035,103 +1035,103 @@
     <ClCompile Include="..\include\LightBulb\Learning\AbstractLearningResult.cpp">
       <Filter>Quelldateien\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\NeuronDescriptionIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractCoevolutionEnvironmentIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\FermiFunctionIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractDefaultIndividualIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractCoevolutionEnvironmentIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractEvolutionLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractDefaultIndividualIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractGradientDescentAlgorithmIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractHallOfFameAlgorithmIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractIndividualIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractIndividualIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractLoggerIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractRandomGeneratorIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractLoggerIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractReinforcementEnvironmentIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractReinforcementLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\AbstractSupervisedLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractSimpleEvolutionEnvironmentIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\BackpropagationIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\AbstractSupervisedLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\CoevolutionLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\BackpropagationIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\CoevolutionLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\DQNLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\DifferentNeuronDescriptionFactoryIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\EvolutionLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\DQNLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\FeedForwardNetworkTopologyIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\EvolutionLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\FermiFunctionIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\FeedForwardNetworkTopologyIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\GradientDescentLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\GradientDescentLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\LearningStateIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\LearningStateIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\NeuralNetworkIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\NeuralNetworkIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\NeuronDescriptionIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\PolicyGradientLearningRuleIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\PolicyGradientLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\ResilientLearningRateIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\ResilientLearningRateIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\RMSPropLearningRateIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\RMSPropLearningRateIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\SameNeuronDescriptionFactoryIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\SameNeuronDescriptionFactoryIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\SimpleGradientDescentIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\SimpleGradientDescentIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\StorageLoggerIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\StorageLoggerIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\TeachedIndividualIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\TeachedIndividualIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\XorShfGeneratorIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\XorShfGeneratorIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\LightBulb\IO\ZigguratGeneratorIO.cpp">
+    <ClCompile Include="..\src\LightBulb\IO\ZigguratGeneratorIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
   </ItemGroup>

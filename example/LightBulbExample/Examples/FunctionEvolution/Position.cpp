@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/FunctionEvolution/Position.hpp"
 #include "Examples/FunctionEvolution/FunctionSimulator.hpp"
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"

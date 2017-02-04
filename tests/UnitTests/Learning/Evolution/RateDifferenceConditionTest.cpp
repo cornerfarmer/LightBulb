@@ -1,4 +1,3 @@
-#include "UnitTestsPrec.hpp"
 #include <LightBulb/Learning/Evolution/RateDifferenceCondition.hpp>
 #include <Mocks/MockCoevolutionEnvironment.hpp>
 #include "Mocks/MockEvolutionLearningRule.hpp"

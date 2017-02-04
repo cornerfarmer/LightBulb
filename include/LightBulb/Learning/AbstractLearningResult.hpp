@@ -1,6 +1,8 @@
 #ifndef _ABSTRACTLEARNINGRESULT_H_
 #define _ABSTRACTLEARNINGRESULT_H_
 
+#include <memory>
+
 namespace LightBulb
 {
 	class LearningState;

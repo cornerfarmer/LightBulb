@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulbExamplePrec.hpp"
 #include "Examples/NetworkEvolution/NetworkSimulator.hpp"
 #include "Examples/NetworkEvolution/Network.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"

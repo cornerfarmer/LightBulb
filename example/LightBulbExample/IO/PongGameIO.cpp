@@ -1,5 +1,5 @@
-#include "LightBulbExamplePrec.hpp"
 #include "IO/PongGameIO.hpp"
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 
 #include <cereal/cereal.hpp>
 

@@ -1,6 +1,6 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/IO/AbstractEvolutionLearningRuleIO.hpp"
+#include "LightBulb/IO/TemplateDeclaration.hpp"
 // Libraray includes
 #include <cereal/cereal.hpp>
 

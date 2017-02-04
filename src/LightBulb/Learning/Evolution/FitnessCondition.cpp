@@ -1,5 +1,4 @@
 // Includes
-#include "LightBulb/LightBulbPrec.hpp"
 #include "LightBulb/Learning/Evolution/FitnessCondition.hpp"
 // Library includes
 #include <iomanip>
