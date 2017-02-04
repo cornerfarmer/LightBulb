@@ -18,7 +18,7 @@ namespace LightBulb
 
 	// Forward declarations
 	class EvolutionAnalyzerController;
-	enum EvolutionSource;
+	enum EvolutionSource : unsigned int;
 	/**
 	 * \brief The window of the evolution analyzer sub app.
 	 */

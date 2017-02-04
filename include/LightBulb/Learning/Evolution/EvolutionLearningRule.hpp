@@ -29,7 +29,7 @@ namespace LightBulb
 	/**
 	 * \brief All events the EvolutionLearningRule can throw.
 	 */
-	enum EvolutionLearningEvents
+	enum EvolutionLearningEvents : unsigned int
 	{
 		/**
 		 * \brief Is thrown after every evolution step.

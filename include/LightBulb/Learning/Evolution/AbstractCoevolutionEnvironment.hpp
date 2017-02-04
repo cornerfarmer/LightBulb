@@ -78,7 +78,8 @@ namespace LightBulb
 		 * \param hallOfFameToChallengeAlgorithm_ The algorithm which should be used for challenging.
 		 */
 		AbstractCoevolutionEnvironment(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_ = nullptr, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_ = nullptr);
-		AbstractCoevolutionEnvironment() = default;
+		AbstractCoevolutionEnvironment();
+        ~AbstractCoevolutionEnvironment();
 		/**
 		 * \brief Compares the two given individuals. 
 		 * \param individual1 The first individual.

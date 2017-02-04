@@ -10,6 +10,8 @@ namespace LightBulb
 
 	}
 
+	NeuralNetworkRepository::~NeuralNetworkRepository() = default;
+
 	const std::vector<std::unique_ptr<AbstractNeuralNetwork>>& NeuralNetworkRepository::getNeuralNetworks() const
 	{
 		return neuralNetworks;

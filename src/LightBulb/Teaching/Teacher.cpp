@@ -9,6 +9,8 @@
 
 namespace LightBulb
 {
+	Teacher::~Teacher() = default;
+
 	void Teacher::addTestingLesson(AbstractTeachingLesson* newTestingLesson)
 	{
 		// Add the newTeachingLesson to the list

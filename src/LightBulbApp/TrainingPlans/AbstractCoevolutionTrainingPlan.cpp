@@ -7,6 +7,10 @@
 
 namespace LightBulb
 {
+	AbstractCoevolutionTrainingPlan::AbstractCoevolutionTrainingPlan() = default;
+
+	AbstractCoevolutionTrainingPlan::~AbstractCoevolutionTrainingPlan() = default;
+
 	void AbstractCoevolutionTrainingPlan::fillDefaultLearningRuleOptions(CoevolutionLearningRuleOptions& options) const
 	{
 		AbstractEvolutionTrainingPlan::fillDefaultLearningRuleOptions(options);
@@ -34,3 +38,4 @@ namespace LightBulb
 	}
 
 }
+

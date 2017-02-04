@@ -15,7 +15,7 @@ namespace LightBulb
 	/**
 	* \brief Actions in the command toolbar in the TrainingWindow.
 	*/
-	enum TrainingWindowCommandToolbar
+	enum TrainingWindowCommandToolbar : unsigned int
 	{
 		/**
 		 * \brief Starts a training plan.
@@ -33,7 +33,7 @@ namespace LightBulb
 	/**
 	* \brief Actions in the network popup menu in the TrainingWindow.
 	*/
-	enum TrainingWindowNetworkPopup
+	enum TrainingWindowNetworkPopup : unsigned int
 	{
 		/**
 		 * \brief Saves the network.
@@ -43,7 +43,7 @@ namespace LightBulb
 	/**
 	* \brief Actions in the file menu in the TrainingWindow.
 	*/
-	enum TrainingWindowFileMenu
+	enum TrainingWindowFileMenu : unsigned int
 	{
 		/**
 		 * \brief Loads a neural network.

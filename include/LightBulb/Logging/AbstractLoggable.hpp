@@ -12,7 +12,7 @@
 namespace LightBulb
 {
 	class AbstractLogger;
-	enum LogLevel;
+	enum LogLevel : unsigned int;
 	/**
 	 * \brief Describes any class which wants to log something.
 	 * \details Before anything can be logged, setLogger() has to be called.

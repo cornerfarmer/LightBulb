@@ -27,11 +27,16 @@ template void LoadAndConstruct<T>::load_and_construct<cereal::JSONInputArchive>(
 template void LoadAndConstruct<T>::load_and_construct<cereal::XMLInputArchive>(cereal::XMLInputArchive& , construct<T>&); \
 template void LoadAndConstruct<T>::load_and_construct<cereal::PortableBinaryInputArchive>(cereal::PortableBinaryInputArchive& , construct<T>&); 
 
+#ifdef _MSC_VER
+#   define CEREAL_DLL_IMPORT __declspec(dllexport)
+#else // clang or gcc
+#   define CEREAL_DLL_IMPORT
+#endif
 
 #define CEREAL_FORCE_DYNAMIC_INIT_FIXED(LibName)              \
   namespace cereal {                                    \
   namespace detail {                                    \
-    __declspec(dllexport) void dynamic_init_dummy_##LibName();                \
+    CEREAL_DLL_IMPORT void dynamic_init_dummy_##LibName();                \
   } /* end detail */                                    \
   namespace {                                           \
     void dynamic_init_##LibName()                       \

@@ -16,8 +16,8 @@ namespace LightBulb
 	class AbstractLogger;
 	class LearningState;
 	class AbstractRandomGenerator;
-	enum CalculatorType;
-	enum LogLevel;
+	enum CalculatorType : unsigned int;
+	enum LogLevel : unsigned int;
 	/**
 	 * \brief All general options which are the same for all learning rules.
 	 */

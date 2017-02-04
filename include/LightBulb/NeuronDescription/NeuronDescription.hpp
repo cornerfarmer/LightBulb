@@ -14,7 +14,7 @@ namespace LightBulb
 {
 	class AbstractInputFunction;
 	class AbstractActivationFunction;
-	enum CalculatorType;
+	enum CalculatorType : unsigned int;
 	/**
 	 * \brief Contains all neuron specific information. 
 	 */
@@ -45,7 +45,7 @@ namespace LightBulb
 		NeuronDescription(const NeuronDescription& other);
 		NeuronDescription(NeuronDescription&& other) noexcept;
 		NeuronDescription& operator=(NeuronDescription other);
-
+		~NeuronDescription();
 		friend void swap(NeuronDescription& lhs, NeuronDescription& rhs) noexcept;
 
 		/**

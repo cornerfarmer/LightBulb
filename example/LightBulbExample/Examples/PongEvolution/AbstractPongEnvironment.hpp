@@ -12,7 +12,7 @@
 // Forward declarations
 
 
-enum PongEvents
+enum PongEvents : unsigned int
 {
 	EVT_FIELD_CHANGED
 };

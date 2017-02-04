@@ -10,6 +10,10 @@
 
 namespace LightBulb
 {
+	AbstractCoevolutionEnvironment::AbstractCoevolutionEnvironment() = default;
+
+	AbstractCoevolutionEnvironment::~AbstractCoevolutionEnvironment() = default;
+
 	AbstractCoevolutionEnvironment::AbstractCoevolutionEnvironment(bool isParasiteEnvironment_, AbstractCombiningStrategy* combiningStrategy_, AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_)
 	{ 
 		parasiteEnvironment = isParasiteEnvironment_;

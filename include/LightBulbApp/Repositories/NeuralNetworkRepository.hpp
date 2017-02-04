@@ -18,7 +18,7 @@ namespace LightBulb
 	/**
 	* \brief All observable events of NeuralNetworkRepository.
 	*/
-	enum NeuralNetworkRepositoryEvents
+	enum NeuralNetworkRepositoryEvents : unsigned int
 	{
 		/**
 		* \brief Is thrown when a new network has been added or an existing network has been removed.
@@ -43,6 +43,7 @@ namespace LightBulb
 		 * \brief Creates a new neural network repository.
 		 */
 		NeuralNetworkRepository();
+		~NeuralNetworkRepository();
 		/**
 		 * \brief Returns all neural network.
 		 * \return A vector of all neural networks.

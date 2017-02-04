@@ -16,7 +16,7 @@ namespace LightBulb
 	/**
 	 * \brief All events the training plan repository can throw.
 	 */
-	enum TrainingPlanRepositoryEvents
+	enum TrainingPlanRepositoryEvents : unsigned int
 	{
 		/**
 		 * \brief Is thrown if the training plans have been changed.

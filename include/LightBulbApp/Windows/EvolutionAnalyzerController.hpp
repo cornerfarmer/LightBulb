@@ -17,7 +17,7 @@ namespace LightBulb
 	class EvolutionLearningRule;
 	class EvolutionAnalyzerWindow;
 	class AbstractEvolutionTrainingPlan;
-	enum EvolutionSource;
+	enum EvolutionSource : unsigned int;
 	class AbstractWindow;
 	class AbstractTrainingPlan;
 	/**

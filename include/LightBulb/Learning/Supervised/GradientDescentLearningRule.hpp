@@ -103,6 +103,7 @@ namespace LightBulb
 		* \brief Creates the gradient descent learning rule with default options.
 		*/
 		GradientDescentLearningRule();
+		~GradientDescentLearningRule();
 		/**
 		 * \brief Returns the name of the learning rule
 		 * \return The name

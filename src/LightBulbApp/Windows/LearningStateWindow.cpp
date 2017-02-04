@@ -9,7 +9,7 @@ namespace LightBulb
 	/**
 	 * \brief Actions in the LearningStateWindow
 	 */
-	enum LearningStateWindowActions
+	enum LearningStateWindowActions : unsigned int
 	{
 		/**
 		 * \brief Removes a dataset.

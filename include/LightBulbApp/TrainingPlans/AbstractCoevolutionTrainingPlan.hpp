@@ -50,6 +50,8 @@ namespace LightBulb
 		*/
 		void fillDefaultEvolutionLearningRule2Options(EvolutionLearningRuleOptions& options) const;
 	public:
+		AbstractCoevolutionTrainingPlan();
+		~AbstractCoevolutionTrainingPlan();
 		/**
 		 * \brief Returns the parasite evolution environment.
 		 * \return The environment.

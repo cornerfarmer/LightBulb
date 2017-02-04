@@ -17,6 +17,8 @@ namespace LightBulb
 		delete(gradientDescentAlgorithm);
 	}
 
+
+
 	GradientDescentLearningRuleOptions::GradientDescentLearningRuleOptions(const GradientDescentLearningRuleOptions& other)
 		:AbstractSupervisedLearningRuleOptions(other)
 	{
@@ -68,6 +70,8 @@ namespace LightBulb
 	{
 
 	}
+
+	GradientDescentLearningRule::~GradientDescentLearningRule() = default;
 
 	void GradientDescentLearningRule::initialize(GradientDescentLearningRuleOptions* options)
 	{

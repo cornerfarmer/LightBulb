@@ -24,6 +24,8 @@ namespace LightBulb
 		swap(*this, other);
 	}
 
+	NeuronDescription::~NeuronDescription() = default;
+
 	NeuronDescription& NeuronDescription::operator=(NeuronDescription other)
 	{
 		swap(*this, other);

@@ -9,7 +9,7 @@ namespace LightBulb
 {
 	// Forward declarations
 
-	enum CalculatorType
+	enum CalculatorType : unsigned int
 	{
 		CT_CPU,
 		CT_GPU

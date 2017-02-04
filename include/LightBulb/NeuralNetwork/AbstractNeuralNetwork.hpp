@@ -21,7 +21,7 @@ namespace LightBulb
 	/**
 	 * \brief All states which a neural network can be in.
 	 */
-	enum NeuralNetworkState
+	enum NeuralNetworkState : unsigned int
 	{
 		/**
 		 * \brief The neural network is ready for training.

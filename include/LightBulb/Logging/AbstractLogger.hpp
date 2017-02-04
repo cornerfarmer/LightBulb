@@ -14,7 +14,7 @@ namespace LightBulb
 	/**
 	 * \brief All choosable log levels.
 	 */
-	enum LogLevel
+	enum LogLevel : unsigned int
 	{
 		/**
 		 * \brief High priority.
@@ -33,7 +33,7 @@ namespace LightBulb
 	/**
 	 * \brief All observable events of AbstractLogger.
 	 */
-	enum LoggerEvents
+	enum LoggerEvents : unsigned int
 	{
 		/**
 		 * \brief Is thrown when a new log message has been added.

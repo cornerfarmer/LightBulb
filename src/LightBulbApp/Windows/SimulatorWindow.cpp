@@ -10,7 +10,7 @@ namespace LightBulb
 	/**
 	 * \brief IO types in the SimulatorWindow.
 	 */
-	enum IOType
+	enum IOType : unsigned int
 	{
 		/**
 		 * \brief Boolean IO values.

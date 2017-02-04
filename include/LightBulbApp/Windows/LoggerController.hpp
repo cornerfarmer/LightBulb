@@ -17,7 +17,7 @@ namespace LightBulb
 	class LoggerWindow;
 	class AbstractTrainingPlan;
 	class AbstractWindow;
-	enum LogLevel;
+	enum LogLevel : unsigned int;
 	class AbstractLogger;
 	/**
 	 * \brief A sup app which acts as logger.

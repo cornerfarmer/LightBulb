@@ -5,7 +5,7 @@
 
 // Includes
 #include "LightBulb/Event/Observable.hpp"
-
+#include "LightBulbApp/TrainingPlans/Preferences/PreferenceGroup.hpp"
 // Library includes
 #include <thread>
 #include <vector>
@@ -17,13 +17,12 @@ namespace LightBulb
 	struct LearningState;
 	class AbstractCustomSubAppFactory;
 	class StorageLogger;
-	class PreferenceGroup;
 	class AbstractPreference;
 	class AbstractPreferenceElement;
 	/**
 	 * \brief All possible training plan states.
 	 */
-	enum TrainingPlanState
+	enum TrainingPlanState : unsigned int
 	{
 		/**
 		 * \brief The training plan is running.
@@ -49,7 +48,7 @@ namespace LightBulb
 	/**
 	* \brief All events the TrainingPlanEvents can throw.
 	*/
-	enum TrainingPlanEvents
+	enum TrainingPlanEvents : unsigned int
 	{
 		/**
 		 * \brief Thrown, if the training plan has been paused.

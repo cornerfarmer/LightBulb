@@ -18,7 +18,7 @@
 class TicTacToeAI;
 class AbstractTile;
 
-enum TicTacToeEvents
+enum TicTacToeEvents : unsigned int
 {
 	EVT_FIELD_CHANGED
 };

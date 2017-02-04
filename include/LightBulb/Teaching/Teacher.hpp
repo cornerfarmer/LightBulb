@@ -36,6 +36,7 @@ namespace LightBulb
 		 * \param weightDecayFac_ The weight decay factor to use.
 		 */
 		Teacher(double weightDecayFac_ = 0);
+		~Teacher();
 		// Inherited:
 		void addTeachingLesson(AbstractTeachingLesson* newTeachingLesson) override;
 		void addTestingLesson(AbstractTeachingLesson* newTestingLesson) override;

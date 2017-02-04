@@ -15,7 +15,7 @@ namespace LightBulb
 	/**
 	 * \brief All evolution methods which can be source of individuals.
 	 */
-	enum EvolutionSource
+	enum EvolutionSource : unsigned int
 	{
 		Creation,
 		Mutation,

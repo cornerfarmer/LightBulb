@@ -82,7 +82,7 @@ std::string BackpropagationXorExample::getDescription() const
 }
 
 
-AbstractTrainingPlan* BackpropagationXorExample::createNewFromSameType() const
+LightBulb::AbstractTrainingPlan* BackpropagationXorExample::createNewFromSameType() const
 {
 	return new BackpropagationXorExample();
 }

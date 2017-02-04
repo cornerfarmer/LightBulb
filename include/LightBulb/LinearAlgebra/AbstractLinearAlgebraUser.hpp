@@ -9,7 +9,7 @@
 
 namespace LightBulb
 {
-	enum CalculatorType;
+	enum CalculatorType : unsigned int;
 
 	class AbstractLinearAlgebraUser
 	{
