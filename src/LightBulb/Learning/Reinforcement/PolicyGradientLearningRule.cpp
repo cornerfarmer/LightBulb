@@ -44,6 +44,8 @@ namespace LightBulb
 		initialize(static_cast<PolicyGradientLearningRuleOptions&>(*options.get()));
 	}
 
+	PolicyGradientLearningRule::~PolicyGradientLearningRule() = default;
+
 	void PolicyGradientLearningRule::initialize(PolicyGradientLearningRuleOptions& options)
 	{
 		stepsSinceLastReward = 0;

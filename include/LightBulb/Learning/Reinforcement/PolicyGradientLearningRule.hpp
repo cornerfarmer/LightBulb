@@ -169,6 +169,7 @@ namespace LightBulb
 		*/
 		PolicyGradientLearningRule(PolicyGradientLearningRuleOptions* options_);
 		PolicyGradientLearningRule();
+		~PolicyGradientLearningRule();
 		/**
 		* \brief Returns the name of the learning rule.
 		* \return The name.

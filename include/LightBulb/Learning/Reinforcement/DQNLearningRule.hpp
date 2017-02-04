@@ -216,6 +216,7 @@ namespace LightBulb
 		*/
 		DQNLearningRule(DQNLearningRuleOptions* options_);
 		DQNLearningRule();
+		~DQNLearningRule();
 		/**
 		 * \brief Returns the name of the learning rule.
 		 * \return The name.

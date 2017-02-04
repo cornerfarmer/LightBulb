@@ -16,7 +16,7 @@ namespace LightBulb
 	* \param simpleGradientDescent The SimpleGradientDescent to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent);
+	extern void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent);
 }
 
 namespace cereal

@@ -18,7 +18,7 @@ namespace LightBulb
 		 */
 		bool succeeded;
 
-		virtual ~AbstractLearningResult();
+		virtual ~AbstractLearningResult() {};
 	};
 }
 

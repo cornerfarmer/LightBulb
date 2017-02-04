@@ -39,6 +39,8 @@ namespace LightBulb
 		: AbstractReinforcementLearningRule(new DQNLearningRuleOptions())
 	{
 	}
+
+	DQNLearningRule::~DQNLearningRule() = default;
 	
 	void DQNLearningRule::initialize(DQNLearningRuleOptions* options)
 	{
