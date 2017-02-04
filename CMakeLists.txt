@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 2.6.4)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/cotire)
+include(cotire)
 project (LightBulb)
 
 if(MSVC)

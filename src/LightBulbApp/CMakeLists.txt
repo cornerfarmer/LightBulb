@@ -23,3 +23,5 @@ target_link_libraries(LightBulbApp ${OpenCL_LIBRARY} LightBulb freechart ${wxWid
 use_cxx11(LightBulbApp)
 install(TARGETS LightBulbApp DESTINATION lib)
 install(DIRECTORY ../../include/LightBulbApp DESTINATION include)
+set_target_properties(LightBulbApp PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "../../include/LightBulbApp/LightBulbAppPrec.hpp")
+cotire(LightBulbApp)
