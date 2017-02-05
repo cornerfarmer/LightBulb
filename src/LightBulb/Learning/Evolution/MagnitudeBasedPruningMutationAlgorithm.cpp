@@ -10,6 +10,7 @@ namespace LightBulb
 {
 	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(int removeNeuronsPerIteration_, int removeWeightsPerIteration_, bool useRandomFunction_, bool ignoreInputLayer_, bool removeNeuronsByTheirTotalWeight_)
 	{
+		randomFunction.reset(new EqualRandomFunction());
 		removeNeuronsPerIteration = removeNeuronsPerIteration_;
 		removeWeightsPerIteration = removeWeightsPerIteration_;
 		removeNeuronsByTheirTotalWeight = removeNeuronsByTheirTotalWeight_;
@@ -17,10 +18,11 @@ namespace LightBulb
 		ignoreInputLayer = ignoreInputLayer_;
 	}
 
-	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm() = default;
-
-
-
+	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm()
+	{
+		randomFunction.reset(new EqualRandomFunction());
+	}
+	
 	MagnitudeBasedPruningMutationAlgorithm::~MagnitudeBasedPruningMutationAlgorithm() = default;
 
 	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(MagnitudeBasedPruningMutationAlgorithm&& other) noexcept
@@ -38,7 +40,8 @@ namespace LightBulb
 	MagnitudeBasedPruningMutationAlgorithm::MagnitudeBasedPruningMutationAlgorithm(const MagnitudeBasedPruningMutationAlgorithm& other)
 		: AbstractMutationAlgorithm(other)
 	{
-		randomFunction.reset(dynamic_cast<EqualRandomFunction*>(other.randomFunction->clone()));
+		if (other.randomFunction.get())
+			randomFunction.reset(dynamic_cast<EqualRandomFunction*>(other.randomFunction->clone()));
 		removeNeuronsPerIteration = other.removeNeuronsPerIteration;
 		removeWeightsPerIteration = other.removeWeightsPerIteration;
 		removeNeuronsByTheirTotalWeight = other.removeNeuronsByTheirTotalWeight;

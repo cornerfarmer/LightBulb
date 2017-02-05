@@ -20,17 +20,14 @@ void TicTacToeAI::getNNInput(LightBulb::Vector<>& input)
 
 void TicTacToeAI::interpretNNOutput(const LightBulb::Vector<>& output)
 {
-	for (int i = 0; i < 9; i++)
+	if (isCalculatorType(CT_GPU))
 	{
-		int x = i / 3;
-		int y = i % 3;
-		if (output.getEigenValue()[i] > 0.5)
-		{
-			currentGame->setField(x, y);
-			return;
-		}
+		
 	}
-	currentGame->setIllegalMove(true);
+	else
+	{
+		currentGame->setFieldsFromOutput(output);
+	}
 }
 
 TicTacToeAI::~TicTacToeAI()

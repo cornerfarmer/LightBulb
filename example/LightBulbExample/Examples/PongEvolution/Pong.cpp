@@ -140,7 +140,6 @@ void Pong::resetEnvironment()
 
 void Pong::getNNInput(LightBulb::Vector<>& input)
 {
-	input.getEigenValueForEditing().resize(6);
 	input.getEigenValueForEditing()[0] = game.getState().ballPosX / game.getProperties().width;
 	if (game.getPlayer() == -1)
 		input.getEigenValueForEditing()[0] = 1 - input.getEigenValue()[0];

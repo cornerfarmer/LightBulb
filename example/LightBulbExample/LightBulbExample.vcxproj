@@ -126,7 +126,6 @@
       <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_richtext.lib;wxmsw31u_adv.lib;wxmsw31u_html.lib;wxbase31u_xml.lib;../../extlibs/freechart/lib/vc_lib/wxcode_msw28u_freechart.lib;../../vs/Release/LightBulb.lib;../../vs/Release/LightBulbApp.lib;C:\Program Files (x86)\AMD APP SDK\3.0\lib\x86\OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -25,7 +25,7 @@ public:
 	void startStepMode();
 	void doStep();
 	static std::string getLabel();
-	std::vector<std::vector<int>>& getFields();
+	LightBulb::Matrix<int>& getFields();
 	void fieldsChanged(TicTacToe& ticTacToe);
 };
 

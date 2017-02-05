@@ -20,6 +20,7 @@ class Position : public LightBulb::AbstractDefaultIndividual
 protected:
 	FunctionSimulator* functionSimulator;
 	LightBulb::Vector<> position;
+	bool inputIsSet;
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:	

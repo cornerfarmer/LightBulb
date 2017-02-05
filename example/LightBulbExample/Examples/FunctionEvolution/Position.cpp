@@ -21,13 +21,14 @@ Position::Position(FunctionSimulator& functionSimulator_)
 	options.neuronsPerLayerCount.push_back(2);
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	buildNeuralNetwork(options);
+	inputIsSet = false;
 }
 
 void Position::getNNInput(LightBulb::Vector<>& input)
 {
-	if (input.getEigenValue().size() != 1) {
-		input.getEigenValueForEditing().resize(1);
+	if (!inputIsSet) {
 		input.getEigenValueForEditing()[0] = 1;
+		inputIsSet = true;
 	}
 }
 

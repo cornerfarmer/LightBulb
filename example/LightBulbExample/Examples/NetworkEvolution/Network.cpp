@@ -19,13 +19,14 @@ Network::Network(NetworkSimulator& networkSimulator_)
 	options.neuronsPerLayerCount.push_back(8);
 	options.descriptionFactory = new SameNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	buildNeuralNetwork(options);
+	inputIsSet = false;
 }
 
 void Network::getNNInput(LightBulb::Vector<>& input)
 {
-	if (input.getEigenValue().size() != 1) {
+	if (!inputIsSet) {
 		input.getEigenValueForEditing().resize(1);
-		input.getEigenValueForEditing()[0] = 1;
+		inputIsSet = true;
 	}
 }
 

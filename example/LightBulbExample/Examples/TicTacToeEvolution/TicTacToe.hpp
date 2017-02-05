@@ -30,12 +30,13 @@ class TicTacToe : public LightBulb::AbstractCoevolutionEnvironment, public Light
 private:
 	void initialize();
 protected:
-	std::vector<std::vector<int>> fields;
+	LightBulb::Matrix<int> fields;
+	LightBulb::Scalar<int> whoHasWon;
 	LightBulb::AbstractIndividual* createNewIndividual() override;
 	void resetEnvironment() override;
-	int whoHasWon();
+	void calcWhoHasWon();
 	int currentPlayer;
-	bool illegalMove;
+	LightBulb::Scalar<bool> illegalMove;
 	bool nextDecisionCombination(std::vector<int>& decisionNr, int b, int level = 0);
 	int simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts);
 	bool stepMode;
@@ -48,14 +49,13 @@ public:
 	TicTacToe();
 	void getSight(LightBulb::Vector<>& sight);
 	void setField(int x, int y);
+	void setFieldsFromOutput(const LightBulb::Vector<>& output);
 	bool isFree(int x, int y);
-	int getFieldValue(int x, int y);
 	int rateIndividual(LightBulb::AbstractIndividual& rateKI) override;
-	void setIllegalMove(bool illegalMove_);
 	void startNewGame(int firstPlayer);
 	void initializeForLearning() override;
 	bool hasGameFinished();
-	std::vector<std::vector<int>>& getFields();
+	LightBulb::Matrix<int>& getFields();
 	void startStepMode();
 	void stopStepMode();
 	std::vector<std::string> getDataSetLabels() const override;

@@ -45,7 +45,7 @@ std::string TicTacToeGameController::getLabel()
 	return "TicTacToeGame";
 }
 
-std::vector<std::vector<int>>& TicTacToeGameController::getFields()
+LightBulb::Matrix<int>& TicTacToeGameController::getFields()
 {
 	return environment->getFields();
 }

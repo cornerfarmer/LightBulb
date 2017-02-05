@@ -15,7 +15,7 @@ wxDECLARE_EVENT(TTT_EVT_FIELD_CHANGED, wxThreadEvent);
 class TicTacToeGameWindow : public LightBulb::AbstractSubAppWindow
 {
 private:
-	std::vector<std::vector<int>> currentFields;
+	LightBulb::Matrix<int> currentFields;
 	wxPanel* panel;
 	wxToolBar* toolbar;
 	TicTacToeGameController& getController();

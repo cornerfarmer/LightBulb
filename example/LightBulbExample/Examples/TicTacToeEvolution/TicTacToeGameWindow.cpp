@@ -78,7 +78,7 @@ void TicTacToeGameWindow::toolBarClicked(wxCommandEvent& evt)
 		getController().stopStepMode();
 		toolbar->EnableTool(TOOLBAR_START_STEPMODE, true);
 
-		currentFields.clear();
+		currentFields.getEigenValueForEditing().setZero();
 		paintNow();
 	}
 	else if (evt.GetId() == TOOLBAR_START_STEPMODE)
@@ -114,16 +114,16 @@ void TicTacToeGameWindow::render(wxDC& dc)
 	dc.DrawLine(0, height / 3, width, height / 3);
 	dc.DrawLine(0, height / 3 * 2, width, height / 3 * 2);
 
-	for (int x = 0; x < currentFields.size(); x++)
+	for (int x = 0; x < currentFields.getEigenValue().rows(); x++)
 	{
-		for (int y = 0; y < currentFields[x].size(); y++)
+		for (int y = 0; y < currentFields.getEigenValue().cols(); y++)
 		{
-			if (currentFields[x][y] == 1)
+			if (currentFields.getEigenValue()(x, y) == 1)
 			{
 				dc.DrawLine(x * width / 3, y * height / 3, (x + 1) * width / 3, (y + 1) * height / 3);
 				dc.DrawLine((x + 1) * width / 3, y * height / 3, x * width / 3, (y + 1) * height / 3);
 			}
-			else if (currentFields[x][y] == -1)
+			else if (currentFields.getEigenValue()(x, y) == -1)
 			{
 				dc.DrawEllipse(x * width / 3, y * height / 3, width / 3, height / 3);
 			}

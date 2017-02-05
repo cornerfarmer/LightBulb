@@ -19,6 +19,7 @@ class Network : public LightBulb::AbstractDefaultIndividual
 	friend void load(Archive& archive, Network& individual);
 protected:
 	LightBulb::Vector<> positions;
+	bool inputIsSet;
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(const LightBulb::Vector<>& output) override;
 public:	

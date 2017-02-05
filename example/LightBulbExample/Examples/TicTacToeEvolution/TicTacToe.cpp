@@ -28,31 +28,24 @@ TicTacToe::TicTacToe()
 
 void TicTacToe::initialize()
 {
-	fields.resize(3);
-	for (int x = 0; x < fields.size(); x++)
-	{
-		fields[x].resize(3);
-	}
+	fields.getEigenValueForEditing().resize(3, 3);
 	resetEnvironment();
 	stepMode = false;
 }
 
 bool TicTacToe::hasGameFinished()
 {
-	return (illegalMove || whoHasWon() != 0);
+	calcWhoHasWon();
+	return (illegalMove.getEigenValue() || whoHasWon.getEigenValue() != 0);
 }
 
-int TicTacToe::getFieldValue(int x, int y)
-{
-	return fields[x][y];
-}
 
 int TicTacToe::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round)
 {
 	return simulateGame(static_cast<TicTacToeAI&>(obj1), static_cast<TicTacToeAI&>(obj2), round == 1);
 }
 
-std::vector<std::vector<int>>& TicTacToe::getFields()
+LightBulb::Matrix<int>& TicTacToe::getFields()
 {
 	return fields;
 }
@@ -100,8 +93,6 @@ void TicTacToe::initializeForLearning()
 
 int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts)
 {
-	int pointsAI1 = 0;
-	int pointsAI2 = 0;
 	ai2.resetNN();
 	ai1.resetNN();
 
@@ -124,21 +115,17 @@ int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlaye
 		if (i % 2 == secondPlayerStarts)
 		{
 			ai1.doNNCalculation();
-			if (!illegalMove)
-				pointsAI1++;
 		}
 		else
 		{
 			ai2.doNNCalculation();
-			if (!illegalMove)
-				pointsAI2++;
 		}
 
 		if (hasGameFinished())
 			break;
 	}
 
-	if (illegalMove)
+	if (illegalMove.getEigenValue())
 	{
 		if (currentPlayer == 1)
 			return -1;
@@ -147,7 +134,7 @@ int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlaye
 	}
 	else
 	{
-		int w = whoHasWon();
+		int w = whoHasWon.getEigenValue();
 		if (w == 0) {
 			if (parasiteEnvironment)
 				return -1;
@@ -161,10 +148,7 @@ int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlaye
 	}
 }
 
-void TicTacToe::setIllegalMove(bool illegalMove_)
-{
-	illegalMove = illegalMove_;
-}
+
 
 int TicTacToe::rateIndividual(AbstractIndividual& individual)
 {
@@ -212,7 +196,8 @@ int TicTacToe::rateIndividual(AbstractIndividual& individual)
 					break;
 			}
 
-			if ((currentPlayer == -1 && illegalMove) || (whoHasWon() == 1) || i>8)
+			calcWhoHasWon();
+			if ((currentPlayer == -1 && illegalMove.getEigenValue()) || (whoHasWon.getEigenValue() == 1) || i>8)
 				wins++;
 
 			decisionCombinationsLeft = !nextDecisionCombination(decisionNr, b);
@@ -247,60 +232,91 @@ bool TicTacToe::nextDecisionCombination(std::vector<int>& decisionNr, int b, int
 
 bool TicTacToe::isFree(int x, int y)
 {
-	return fields[x][y] == 0;
+	return fields.getEigenValue()(x, y) == 0;
 }
 
 void TicTacToe::startNewGame(int firstPlayer)
 {
-	illegalMove = false;
+	illegalMove.getEigenValueForEditing() = false;
 	resetEnvironment();
 	currentPlayer = firstPlayer;
 }
 
-int TicTacToe::whoHasWon()
+void TicTacToe::calcWhoHasWon()
 {
-	if (fields[0][0] != 0 && fields[0][0] == fields[0][1] && fields[0][1] == fields[0][2])
-		return fields[0][0];
-	else if (fields[1][0] != 0 && fields[1][0] == fields[1][1] && fields[1][1] == fields[1][2])
-		return fields[1][0];
-	else if (fields[2][0] != 0 && fields[2][0] == fields[2][1] && fields[2][1] == fields[2][2])
-		return fields[2][0];
-
-	else if (fields[0][0] != 0 && fields[0][0] == fields[1][0] && fields[1][0] == fields[2][0])
-		return fields[0][0];
-	else if (fields[0][1] != 0 && fields[0][1] == fields[1][1] && fields[1][1] == fields[2][1])
-		return fields[0][1];
-	else if (fields[0][2] != 0 && fields[0][2] == fields[1][2] && fields[1][2] == fields[2][2])
-		return fields[0][2];
-
-	else if (fields[0][0] != 0 && fields[0][0] == fields[1][1] && fields[1][1] == fields[2][2])
-		return fields[0][0];
-	else if (fields[2][0] != 0 && fields[2][0] == fields[1][1] && fields[1][1] == fields[0][2])
-		return fields[2][0];
+	if (isCalculatorType(CT_GPU))
+	{
+		
+	}
 	else
-		return 0;
+	{
+		if (fields.getEigenValue()(0,0) != 0 && fields.getEigenValue()(0,0) == fields.getEigenValue()(0,1) && fields.getEigenValue()(0,1) == fields.getEigenValue()(0,2))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(0,0);
+		else if (fields.getEigenValue()(1,0) != 0 && fields.getEigenValue()(1,0) == fields.getEigenValue()(1,1) && fields.getEigenValue()(1,1) == fields.getEigenValue()(1,2))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(1,0);
+		else if (fields.getEigenValue()(2,0) != 0 && fields.getEigenValue()(2,0) == fields.getEigenValue()(2,1) && fields.getEigenValue()(2,1) == fields.getEigenValue()(2,2))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(2,0);
+
+		else if (fields.getEigenValue()(0,0) != 0 && fields.getEigenValue()(0,0) == fields.getEigenValue()(1,0) && fields.getEigenValue()(1,0) == fields.getEigenValue()(2,0))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(0,0);
+		else if (fields.getEigenValue()(0,1) != 0 && fields.getEigenValue()(0,1) == fields.getEigenValue()(1,1) && fields.getEigenValue()(1,1) == fields.getEigenValue()(2,1))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(0,1);
+		else if (fields.getEigenValue()(0,2) != 0 && fields.getEigenValue()(0,2) == fields.getEigenValue()(1,2) && fields.getEigenValue()(1,2) == fields.getEigenValue()(2,2))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(0,2);
+
+		else if (fields.getEigenValue()(0,0) != 0 && fields.getEigenValue()(0,0) == fields.getEigenValue()(1,1) && fields.getEigenValue()(1,1) == fields.getEigenValue()(2,2))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(0,0);
+		else if (fields.getEigenValue()(2,0) != 0 && fields.getEigenValue()(2,0) == fields.getEigenValue()(1,1) && fields.getEigenValue()(1,1) == fields.getEigenValue()(0,2))
+			whoHasWon.getEigenValueForEditing() = fields.getEigenValue()(2,0);
+		else
+			whoHasWon.getEigenValueForEditing() = 0;
+	}
 }
 
 void TicTacToe::setField(int x, int y)
 {
 	if (!isFree(x, y))
-		illegalMove = true;
+		illegalMove.getEigenValueForEditing() = true;
 	else {
-		fields[x][y] = currentPlayer;
+		fields.getEigenValueForEditing()(x, y) = currentPlayer;
 		currentPlayer *= -1;
 		throwEvent(EVT_FIELD_CHANGED, *this);
 	}
 }
 
+void TicTacToe::setFieldsFromOutput(const LightBulb::Vector<>& output)
+{
+	if (isCalculatorType(CT_GPU))
+	{
+		
+	}
+	else
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			int x = i / 3;
+			int y = i % 3;
+			if (output.getEigenValue()[i] > 0.5)
+			{
+				setField(x, y);
+				return;
+			}
+		}
+		illegalMove.getEigenValueForEditing() = true;
+	}
+}
+
+
 
 void TicTacToe::resetEnvironment()
 {
-	for (auto column = fields.begin(); column != fields.end(); column++)
+	if (isCalculatorType(CT_GPU))
 	{
-		for (auto field = column->begin(); field != column->end(); field++)
-		{
-			*field = 0;
-		}
+		
+	}
+	else
+	{
+		fields.getEigenValueForEditing().setZero();
 	}
 	throwEvent(EVT_FIELD_CHANGED, *this);
 }
@@ -308,21 +324,27 @@ void TicTacToe::resetEnvironment()
 
  void TicTacToe::getSight(LightBulb::Vector<>& sight)
 {
-	sight.getEigenValueForEditing().resize(18);
-	int sightIndex = 0;
-	for (auto column = fields.begin(); column != fields.end(); column++)
+	if (isCalculatorType(CT_GPU))
 	{
-		for (auto field = column->begin(); field != column->end(); field++)
+
+	}
+	else
+	{
+		int sightIndex = 0;
+		for (int x = 0; x < fields.getEigenValue().rows(); x++)
 		{
-			int fieldValue = currentPlayer * *field;
-			if (fieldValue == 1)
-				sight.getEigenValueForEditing()[sightIndex++] = 1;
-			else
-				sight.getEigenValueForEditing()[sightIndex++] = 0;
-			if (fieldValue == -1)
-				sight.getEigenValueForEditing()[sightIndex++] = 1;
-			else
-				sight.getEigenValueForEditing()[sightIndex++] = 0;
+			for (int y = 0; y < fields.getEigenValue().cols(); y++)
+			{
+				int fieldValue = currentPlayer * fields.getEigenValueForEditing()(x, y);
+				if (fieldValue == 1)
+					sight.getEigenValueForEditing()[sightIndex++] = 1;
+				else
+					sight.getEigenValueForEditing()[sightIndex++] = 0;
+				if (fieldValue == -1)
+					sight.getEigenValueForEditing()[sightIndex++] = 1;
+				else
+					sight.getEigenValueForEditing()[sightIndex++] = 0;
+			}
 		}
 	}
 }

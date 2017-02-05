@@ -42,6 +42,7 @@
 #define PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED "Mutationstrength changespeed"
 #define PREFERENCE_WEIGHTDECAY_FAC "Weight decay fac"
 #define PREFERENCE_CREATE_UP_TO "Create up to"
+#define PREFERENCE_GPU_ENABLE "Enable gpu"
 
 using namespace LightBulb;
 
@@ -78,6 +79,8 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	CoevolutionLearningRuleOptions coevolutionLearningRuleOptions;
 	coevolutionLearningRuleOptions.learningRule1 = learningRule1;
 	coevolutionLearningRuleOptions.learningRule2 = learningRule2;
+	if (getBooleanPreference(PREFERENCE_GPU_ENABLE))
+		coevolutionLearningRuleOptions.calculatorType = CT_GPU;
 	fillDefaultLearningRuleOptions(coevolutionLearningRuleOptions);
 
 	return new CoevolutionLearningRule(coevolutionLearningRuleOptions);
@@ -140,6 +143,7 @@ TicTacToeEvolutionExample::TicTacToeEvolutionExample()
 	addPreference(new IntegerPreference(PREFERENCE_NEURON_COUNT_SECOND_LAYER, 1, 1, 30));
 	addPreference(new DoublePreference(PREFERENCE_MUTATIONSTRENGTH_CHANGESPEED, 0.001, 0, 2));
 	addPreference(new DoublePreference(PREFERENCE_WEIGHTDECAY_FAC, 0.00005, 0.003, 0.3));
+	addPreference(new BooleanPreference(PREFERENCE_GPU_ENABLE, false));
 }
 
 std::string TicTacToeEvolutionExample::getOriginalName() const

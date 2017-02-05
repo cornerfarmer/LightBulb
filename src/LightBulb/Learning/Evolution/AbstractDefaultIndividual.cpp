@@ -17,6 +17,10 @@ namespace LightBulb
 		// Randomize all weights
 		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(environment->getRandomGenerator());
 
+		lastInput.getEigenValueForEditing().resize(networkTopology->getInputSize() + networkTopology->usesBiasNeuron());
+		if (networkTopology->usesBiasNeuron())
+			lastInput.getEigenValueForEditing()[networkTopology->getInputSize()] = 1;
+
 		// Initialize the mutation strength vector
 		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());
 		randomizeMutationStrength();
