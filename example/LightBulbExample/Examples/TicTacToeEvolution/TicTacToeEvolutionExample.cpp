@@ -64,7 +64,7 @@ AbstractLearningRule* TicTacToeEvolutionExample::createLearningRate()
 	maxNeuronsPerLayer[1] = 100;
 	maxNeuronsPerLayer[2] = 100;
 	maxNeuronsPerLayer[3] = 9;
-	options.mutationsCommands.push_back(new ConstantMutationCommand(new PhasedTopologyMutationAlgorithm(new MagnitudeBasedPruningMutationAlgorithm(1, 0, true, true), new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), 70), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE)));
+	//options.mutationsCommands.push_back(new ConstantMutationCommand(new PhasedTopologyMutationAlgorithm(new MagnitudeBasedPruningMutationAlgorithm(1, 0, true, true), new NetworkGrowMutationAlgorithm(maxNeuronsPerLayer), 70), new RandomSelector(new RankBasedRandomFunction()), getDoublePreference(PREFERENCE_TOPOLOGY_MUTATION_PERCENTAGE)));
 
 	//options.fitnessFunctions.push_back(new FitnessSharingFitnessFunction(150));
 

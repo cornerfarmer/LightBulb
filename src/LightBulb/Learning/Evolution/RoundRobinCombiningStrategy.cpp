@@ -16,9 +16,8 @@ namespace LightBulb
 				{
 					for (int r = 0; r < simulationEnvironment.getRoundCount(); r++)
 					{
-						int result = simulationEnvironment.compareIndividuals(**firstPlayer, **secondPlayer, r);
-						if (result != 0)
-							setResult(**firstPlayer, **secondPlayer, r, result > 0);
+						simulationEnvironment.compareIndividuals(**firstPlayer, **secondPlayer, r, firstPlayerHasWon);
+						setResult(**firstPlayer, **secondPlayer, r, firstPlayerHasWon);
 					}
 				}
 			}

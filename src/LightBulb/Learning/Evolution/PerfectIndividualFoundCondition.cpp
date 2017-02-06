@@ -40,13 +40,13 @@ namespace LightBulb
 		auto results = combiningStrategy.getPrevResults();
 		std::map<AbstractIndividual*, bool> defeatedIndividuals;
 
-		for (auto resultsPerIndividual = results.begin(); resultsPerIndividual != results.end(); resultsPerIndividual++)
+		for (auto resultsPerIndividual = results.matchIndices.begin(); resultsPerIndividual != results.matchIndices.end(); resultsPerIndividual++)
 		{
 			for (auto resultsPerCombination = resultsPerIndividual->second.begin(); resultsPerCombination != resultsPerIndividual->second.end(); resultsPerCombination++)
 			{
 				for (auto result = resultsPerCombination->second.begin(); result != resultsPerCombination->second.end(); result++)
 				{
-					defeatedIndividuals[resultsPerCombination->first] |= result->second;
+					defeatedIndividuals[resultsPerCombination->first] |= results.resultVector.getEigenValue()[result->second];
 				}
 			}
 		}

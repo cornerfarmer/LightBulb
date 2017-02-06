@@ -23,11 +23,11 @@ namespace LightBulb
 				if (sampleFitness[*secondPlayer] != -1)
 				{
 					sampleFitness[*secondPlayer] = 0;
-					for (auto resultsPerSecondPlayer = prevResults[*secondPlayer].begin(); resultsPerSecondPlayer != prevResults[*secondPlayer].end(); resultsPerSecondPlayer++)
+					for (auto resultsPerSecondPlayer = prevResults.matchIndices[*secondPlayer].begin(); resultsPerSecondPlayer != prevResults.matchIndices[*secondPlayer].end(); resultsPerSecondPlayer++)
 					{
 						for (auto result = resultsPerSecondPlayer->second.begin(); result != resultsPerSecondPlayer->second.end(); result++)
 						{
-							if (result->second)
+							if (prevResults.resultVector.getEigenValue()(result->second))
 								sampleFitness[*secondPlayer] += 1.0 / (1 + beat[resultsPerSecondPlayer->first][result->first]);
 						}
 					}
@@ -40,11 +40,11 @@ namespace LightBulb
 
 			sample.push_back(bestIndividual);
 			sampleFitness[bestIndividual] = -1;
-			for (auto resultsPerSecondPlayer = prevResults[bestIndividual].begin(); resultsPerSecondPlayer != prevResults[bestIndividual].end(); resultsPerSecondPlayer++)
+			for (auto resultsPerSecondPlayer = prevResults.matchIndices[bestIndividual].begin(); resultsPerSecondPlayer != prevResults.matchIndices[bestIndividual].end(); resultsPerSecondPlayer++)
 			{
 				for (auto result = resultsPerSecondPlayer->second.begin(); result != resultsPerSecondPlayer->second.end(); result++)
 				{
-					if (result->second)
+					if (prevResults.resultVector.getEigenValue()(result->second))
 						beat[resultsPerSecondPlayer->first][result->first]++;
 				}
 			}
@@ -58,9 +58,8 @@ namespace LightBulb
 				{
 					for (int r = 0; r < simulationEnvironment.getRoundCount(); r++)
 					{
-						int result = simulationEnvironment.compareIndividuals(**firstPlayer, **secondPlayer, r);
-						if (result != 0)
-							setResult(**firstPlayer, **secondPlayer, r, result > 0);
+						simulationEnvironment.compareIndividuals(**firstPlayer, **secondPlayer, r, firstPlayerHasWon);
+						setResult(**firstPlayer, **secondPlayer, r, firstPlayerHasWon);
 					}
 				}
 			}

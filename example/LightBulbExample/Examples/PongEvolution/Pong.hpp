@@ -27,9 +27,9 @@ private:
 protected:
 	LightBulb::AbstractIndividual* createNewIndividual() override;
 	void resetEnvironment() override;
-	int simulateGame(PongAI& ai1, PongAI& ai2);
+	void simulateGame(PongAI& ai1, PongAI& ai2, LightBulb::Scalar<bool>& firstPlayerHasWon);
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
-	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
+	void doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round, LightBulb::Scalar<bool>& firstPlayerHasWon) override;
 public:
 	Pong(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_ = nullptr, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_ = nullptr);
 	Pong() = default;

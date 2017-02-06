@@ -5,6 +5,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 //Library includes
 
 using namespace LightBulb;
@@ -40,9 +41,9 @@ bool TicTacToe::hasGameFinished()
 }
 
 
-int TicTacToe::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round)
+void TicTacToe::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round, LightBulb::Scalar<bool>& firstPlayerHasWon)
 {
-	return simulateGame(static_cast<TicTacToeAI&>(obj1), static_cast<TicTacToeAI&>(obj2), round == 1);
+	simulateGame(static_cast<TicTacToeAI&>(obj1), static_cast<TicTacToeAI&>(obj2), round == 1, firstPlayerHasWon);
 }
 
 LightBulb::Matrix<int>& TicTacToe::getFields()
@@ -91,7 +92,7 @@ void TicTacToe::initializeForLearning()
 {
 }
 
-int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts)
+void TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts, LightBulb::Scalar<bool>& firstPlayerHasWon)
 {
 	ai2.resetNN();
 	ai1.resetNN();
@@ -121,29 +122,46 @@ int TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlaye
 			ai2.doNNCalculation();
 		}
 
-		if (hasGameFinished())
-			break;
+		//if (isCalculatorType(CT_CPU) && hasGameFinished())
+			//break;
 	}
 
-	if (illegalMove.getEigenValue())
+	if (isCalculatorType(CT_GPU))
 	{
-		if (currentPlayer == 1)
-			return -1;
-		else
-			return 1;
+		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "set_winner", "tictactoe_evolution_example.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(firstPlayerHasWon.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(whoHasWon.getViennaclValue()),
+			viennacl::traits::opencl_handle(illegalMove.getViennaclValue()),
+			cl_uint(currentPlayer),
+			cl_char(parasiteEnvironment)
+		));
 	}
 	else
 	{
-		int w = whoHasWon.getEigenValue();
-		if (w == 0) {
-			if (parasiteEnvironment)
-				return -1;
+		if (illegalMove.getEigenValue())
+		{
+			if (currentPlayer == -1)
+				firstPlayerHasWon.getEigenValueForEditing() = false;
 			else
-				return 1;
-		} else if (w == 1) {
-			return 1;
-		} else if (w == -1) {
-			return -1;
+				firstPlayerHasWon.getEigenValueForEditing() = true;
+		}
+		else
+		{
+			int w = whoHasWon.getEigenValue();
+			if (w == 0) {
+				if (parasiteEnvironment)
+					firstPlayerHasWon.getEigenValueForEditing() = false;
+				else
+					firstPlayerHasWon.getEigenValueForEditing() = true;
+			}
+			else if (w == 1) {
+				firstPlayerHasWon.getEigenValueForEditing() = true;
+			}
+			else if (w == -1) {
+				firstPlayerHasWon.getEigenValueForEditing() = false;
+			}
 		}
 	}
 }
@@ -191,13 +209,14 @@ int TicTacToe::rateIndividual(AbstractIndividual& individual)
 					}
 				setField:
 					setField(x, y);
+					currentPlayer *= -1;
 				}
-				if (hasGameFinished())
+				if ( hasGameFinished())
 					break;
 			}
 
 			calcWhoHasWon();
-			if ((currentPlayer == -1 && illegalMove.getEigenValue()) || (whoHasWon.getEigenValue() == 1) || i>8)
+			if ((currentPlayer == 1 && illegalMove.getEigenValue()) || (whoHasWon.getEigenValue() == 1) || i>8)
 				wins++;
 
 			decisionCombinationsLeft = !nextDecisionCombination(decisionNr, b);
@@ -237,7 +256,6 @@ bool TicTacToe::isFree(int x, int y)
 
 void TicTacToe::startNewGame(int firstPlayer)
 {
-	illegalMove.getEigenValueForEditing() = false;
 	resetEnvironment();
 	currentPlayer = firstPlayer;
 }
@@ -246,7 +264,13 @@ void TicTacToe::calcWhoHasWon()
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		
+		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "calc_who_has_won", "tictactoe_evolution_example.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(whoHasWon.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(fields.getViennaclValue()),
+			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue()))
+		));
 	}
 	else
 	{
@@ -279,7 +303,6 @@ void TicTacToe::setField(int x, int y)
 		illegalMove.getEigenValueForEditing() = true;
 	else {
 		fields.getEigenValueForEditing()(x, y) = currentPlayer;
-		currentPlayer *= -1;
 		throwEvent(EVT_FIELD_CHANGED, *this);
 	}
 }
@@ -288,7 +311,18 @@ void TicTacToe::setFieldsFromOutput(const LightBulb::Vector<>& output)
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		
+		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "set_fields_from_output", "tictactoe_evolution_example.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(output.getViennaclValue()),
+			viennacl::traits::opencl_handle(fields.getViennaclValueForEditing()),
+			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue())),
+			viennacl::traits::opencl_handle(illegalMove.getViennaclValueForEditing()),
+			cl_int(currentPlayer)
+		));
+
+		currentPlayer *= -1;
+		throwEvent(EVT_FIELD_CHANGED, *this);
 	}
 	else
 	{
@@ -299,11 +333,14 @@ void TicTacToe::setFieldsFromOutput(const LightBulb::Vector<>& output)
 			if (output.getEigenValue()[i] > 0.5)
 			{
 				setField(x, y);
+				currentPlayer *= -1;
 				return;
 			}
 		}
 		illegalMove.getEigenValueForEditing() = true;
+		currentPlayer *= -1;
 	}
+
 }
 
 
@@ -312,10 +349,17 @@ void TicTacToe::resetEnvironment()
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		
+		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "reset_environment", "tictactoe_evolution_example.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(fields.getViennaclValueForEditing()),
+			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue())),
+			viennacl::traits::opencl_handle(illegalMove.getViennaclValueForEditing())
+		));
 	}
 	else
 	{
+		illegalMove.getEigenValueForEditing() = false;
 		fields.getEigenValueForEditing().setZero();
 	}
 	throwEvent(EVT_FIELD_CHANGED, *this);
@@ -326,7 +370,14 @@ void TicTacToe::resetEnvironment()
 {
 	if (isCalculatorType(CT_GPU))
 	{
+		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "get_sight", "tictactoe_evolution_example.cl");
 
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(sight.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(fields.getViennaclValue()),
+			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue())),
+			cl_int(currentPlayer)
+		));
 	}
 	else
 	{

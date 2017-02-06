@@ -10,22 +10,26 @@
 #include <vector>
 #include <memory>
 #include <map>
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
 	// Forward declarations
 	class AbstractCoevolutionEnvironment;
 	class AbstractIndividual;
-	/**
-	 * \brief Describes the results of a AbstractCombiningStrategy.
-	 * \details Maps: First individual - Second individual - round number => True, if first individual has won.
-	 */
-	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
+	struct CombiningStrategyResults
+	{
+		Vector<char> resultVector;
+		std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, int>>> matchIndices;
+		int nextResultIndex;
+
+		void reset(int totalMatches);
+	};
 	/**
 	 * \brief Describes a strategy for combining individual from one or two coevolution environments.
 	 * \details The strategy compares each two individuals and stores the results in a CombiningStrategyResults object.
 	 */
-	class AbstractCombiningStrategy : public virtual AbstractRandomGeneratorUser
+	class AbstractCombiningStrategy : public virtual AbstractRandomGeneratorUser, public virtual AbstractLinearAlgebraUser
 	{
 	private:
 		/**
@@ -37,6 +41,7 @@ namespace LightBulb
 		 */
 		int firstPlayerWins;
 	protected:
+		Scalar<bool> firstPlayerHasWon;
 		/**
 		 * \brief Contains a second environment, if one is used.
 		 */
@@ -56,7 +61,7 @@ namespace LightBulb
 		 * \param round The round number.
 		 * \param firstPlayerHasWon True, if the first player has won.
 		 */
-		void setResult(AbstractIndividual& firstPlayer, AbstractIndividual& secondPlayer, int round, bool firstPlayerHasWon);
+		void setResult(AbstractIndividual& firstPlayer, AbstractIndividual& secondPlayer, int round, const Scalar<bool>& firstPlayerHasWon);
 	public:
 		/**
 		 * \brief Creates the combining strategy.

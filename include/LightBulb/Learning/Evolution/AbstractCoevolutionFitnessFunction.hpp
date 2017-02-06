@@ -13,11 +13,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractCoevolutionEnvironment;
 	class AbstractIndividual;
-	/**
-	* \brief Describes the results of a AbstractCombiningStrategy.
-	* \details Maps: First individual - Second individual - round number => True, if first individual has won.
-	*/
-	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
+	struct CombiningStrategyResults;
 	/**
 	 * \brief Describes a function which calculates fitness values from CombiningStrategyResults.
 	 */

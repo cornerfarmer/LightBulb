@@ -3,14 +3,19 @@
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "LightBulb/Learning/Evolution/AbstractIndividual.hpp"
 #include "LightBulb/Logging/AbstractLogger.hpp"
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 
 namespace LightBulb
 {
 	void AbstractHallOfFameAlgorithm::simulateAgainstMember(AbstractIndividual& individual, int memberID, int round)
 	{
-		bool firstPlayerHasWon = currentEnvironment->compareIndividuals(individual, *members[memberID].get(), round) > 0;
-		(*currentResults)[&individual][members[memberID].get()][round] = firstPlayerHasWon;
-		(*currentResults)[members[memberID].get()][&individual][round] = !firstPlayerHasWon;
+		currentEnvironment->compareIndividuals(individual, *members[memberID].get(), round, firstPlayerHasWon);
+
+		currentResults->resultVector.getEigenValueForEditing()(currentResults->nextResultIndex) = firstPlayerHasWon.getEigenValue();
+		currentResults->resultVector.getEigenValueForEditing()(currentResults->nextResultIndex + 1) = !firstPlayerHasWon.getEigenValue();
+
+		currentResults->matchIndices[&individual][members[memberID].get()][round] = currentResults->nextResultIndex++;
+		currentResults->matchIndices[members[memberID].get()][&individual][round] = currentResults->nextResultIndex++;
 	}
 
 	void AbstractHallOfFameAlgorithm::execute(AbstractCoevolutionEnvironment& environment, CombiningStrategyResults& prevResults)

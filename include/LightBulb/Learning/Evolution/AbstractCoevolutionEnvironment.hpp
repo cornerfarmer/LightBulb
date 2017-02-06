@@ -67,7 +67,7 @@ namespace LightBulb
 		 * \param round The round number.
 		 * \return Return 1 if individual1 has won, -1 if individual2 has won.
 		 */
-		virtual int doCompare(AbstractIndividual& individual1, AbstractIndividual& individual2, int round) = 0;
+		virtual void doCompare(AbstractIndividual& individual1, AbstractIndividual& individual2, int round, Scalar<bool>& firstPlayerHasWon) = 0;
 	public:
 		/**
 		 * \brief Creates a coevolution environment.
@@ -87,7 +87,7 @@ namespace LightBulb
 		 * \param round The round number.
 		 * \return Return 1 if individual1 has won, -1 if individual2 has won.
 		 */
-		virtual int compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round);
+		virtual void compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round, Scalar<bool>& firstPlayerHasWon);
 		/**
 		 * \brief Rates the given individual. (For debugging purposes)
 		 * \param individual The individual to rate.
@@ -115,6 +115,7 @@ namespace LightBulb
 		void setLogger(AbstractLogger& logger_) override;
 		std::vector<std::string> getDataSetLabels() const override;
 		void setRandomGenerator(AbstractRandomGenerator& randomGenerator_) override;
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

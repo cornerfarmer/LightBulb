@@ -21,6 +21,8 @@ namespace LightBulb
 		if (networkTopology->usesBiasNeuron())
 			lastInput.getEigenValueForEditing()[networkTopology->getInputSize()] = 1;
 
+		lastInput.getViennaclValue();
+
 		// Initialize the mutation strength vector
 		resizeMutationStrength(neuralNetwork->getNetworkTopology().getEdgeCount());
 		randomizeMutationStrength();

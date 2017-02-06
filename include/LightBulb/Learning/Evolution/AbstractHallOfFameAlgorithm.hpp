@@ -16,11 +16,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractCoevolutionEnvironment;
 	class AbstractIndividual;
-	/**
-	 * \brief Describes the results of a AbstractCombiningStrategy.
-	 * \details Maps: First individual - Second individual - round number => True, if first individual has won.
-	 */
-	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
+	struct CombiningStrategyResults;
 	/**
 	 * \brief Describes an algorithm which stores some good individuals of the time to make sure their knowledge will not be lost.
 	 */
@@ -33,6 +29,7 @@ namespace LightBulb
 		 * \brief Stores the current CombiningStrategyResults.
 		 */
 		CombiningStrategyResults* currentResults;
+		Scalar<bool> firstPlayerHasWon;
 	protected:
 		/**
 		 * \brief The current environment to use for simulations.

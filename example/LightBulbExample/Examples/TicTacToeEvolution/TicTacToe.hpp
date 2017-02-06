@@ -38,12 +38,12 @@ protected:
 	int currentPlayer;
 	LightBulb::Scalar<bool> illegalMove;
 	bool nextDecisionCombination(std::vector<int>& decisionNr, int b, int level = 0);
-	int simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts);
+	void simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlayerStarts, LightBulb::Scalar<bool>& firstPlayerHasWon);
 	bool stepMode;
 	std::condition_variable doNextStep;
 	std::mutex doNextStepMutex;
 	std::unique_ptr<LightBulb::FeedForwardNetworkTopologyOptions> options;
-	int doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round) override;
+	void doCompare(LightBulb::AbstractIndividual& obj1, LightBulb::AbstractIndividual& obj2, int round, LightBulb::Scalar<bool>& firstPlayerHasWon) override;
 public:
 	TicTacToe(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironment, LightBulb::AbstractCombiningStrategy* combiningStrategy_, LightBulb::AbstractCoevolutionFitnessFunction* fitnessFunction_, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToAddAlgorithm_ = nullptr, const std::shared_ptr<LightBulb::AbstractHallOfFameAlgorithm>* hallOfFameToChallengeAlgorithm_ = nullptr);
 	TicTacToe();

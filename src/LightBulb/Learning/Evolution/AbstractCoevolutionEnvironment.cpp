@@ -29,7 +29,7 @@ namespace LightBulb
 	{
 		CombiningStrategyResults& results = combiningStrategy->execute(*this);
 
-		if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results.size() > 0)
+		if (!learningState->disabledDatasets[std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS] && results.matchIndices.size() > 0)
 			learningState->addData(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_AVG_WINS, static_cast<double>(combiningStrategy->getFirstPlayerWins()) / combiningStrategy->getTotalMatches(*this));
 
 		if (hallOfFameToChallengeAlgorithm)
@@ -38,10 +38,10 @@ namespace LightBulb
 		fitnessValues.reset(fitnessFunction->execute(results));
 
 		AbstractIndividual* bestAI = getHighscoreList().front().second;
-		rateIndividual(*bestAI);
+		//rateIndividual(*bestAI);
 
 		if (hallOfFameToAddAlgorithm)
-			hallOfFameToAddAlgorithm->addMember(bestAI);
+		//	hallOfFameToAddAlgorithm->addMember(bestAI);
 
 		if (!learningState->disabledDatasets[DATASET_COMP])
 			learningState->addData(DATASET_COMP, comparisons / 1000000.0);
@@ -52,10 +52,10 @@ namespace LightBulb
 		fitness.getEigenValueForEditing() = (*fitnessValues)[&individual];
 	}
 
-	int AbstractCoevolutionEnvironment::compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round)
+	void AbstractCoevolutionEnvironment::compareIndividuals(AbstractIndividual& individual1, AbstractIndividual& individual2, int round, Scalar<bool>& firstPlayerHasWon)
 	{
 		comparisons++;
-		return doCompare(individual1, individual2, round);
+		doCompare(individual1, individual2, round, firstPlayerHasWon);
 	}
 
 	AbstractCombiningStrategy& AbstractCoevolutionEnvironment::getCombiningStrategy() const
@@ -95,5 +95,12 @@ namespace LightBulb
 	{
 		AbstractRandomGeneratorUser::setRandomGenerator(randomGenerator_);
 		combiningStrategy->setRandomGenerator(randomGenerator_);
+	}
+
+
+	void AbstractCoevolutionEnvironment::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		combiningStrategy->setCalculatorType(calculatorType);
 	}
 }

@@ -41,18 +41,18 @@ namespace LightBulb
 
 		for (int i = 0; i < currentLevel->size(); i += 2) {
 			if (i < currentLevel->size() - 1) {
-				int result = simulationEnvironment->compareIndividuals(*currentLevel->at(i), *currentLevel->at(i + 1), 0);
-				if (result == 0) {
-					result = (randomGenerator->randDouble() > 0.5 ? 1 : -1);
-				}
-				//			setResult(currentLevel->at(i), currentLevel->at(i + 1), result >= 0);
+				//int result = simulationEnvironment->compareIndividuals(*currentLevel->at(i), *currentLevel->at(i + 1), 0);
+				//if (result == 0) {
+				//	result = (randomGenerator->randDouble() > 0.5 ? 1 : -1);
+				//}
+				////			setResult(currentLevel->at(i), currentLevel->at(i + 1), result >= 0);
 
-				if (result < 0) {
-					nextLevel->push_back(currentLevel->at(i + 1));
-				}
-				else {
-					nextLevel->push_back(currentLevel->at(i));
-				}
+				//if (result < 0) {
+				//	nextLevel->push_back(currentLevel->at(i + 1));
+				//}
+				//else {
+				//	nextLevel->push_back(currentLevel->at(i));
+				//}
 			}
 			else {
 				nextLevel->push_back(currentLevel->at(i));

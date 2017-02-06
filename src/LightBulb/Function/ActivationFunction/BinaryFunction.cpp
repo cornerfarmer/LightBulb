@@ -2,6 +2,7 @@
 #include "LightBulb/Function/ActivationFunction/BinaryFunction.hpp"
 // Library includes
 #include <stdexcept>
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -45,4 +46,19 @@ namespace LightBulb
 	{
 		return true;
 	}
+
+
+	void BinaryFunction::execute(int layerNr, std::vector<Vector<>>& activations, const std::vector<Vector<>>& netInputs) const
+	{
+		if (isCalculatorType(CT_GPU))
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("binary_function", "binary_assign", "binary_function.cl");
+			executeVectorAssignKernel(kernel, netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
+		}
+		else
+		{
+			AbstractActivationFunction::execute(layerNr, activations, netInputs);
+		}
+	}
+
 }

@@ -22,9 +22,9 @@ Pong::Pong(FeedForwardNetworkTopologyOptions& options_, bool isParasiteEnvironme
 	watchMode = false;
 }
 
-int Pong::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round)
+void Pong::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int round, Scalar<bool>& firstPlayerHasWon)
 {
-	return simulateGame(static_cast<PongAI&>(obj1), static_cast<PongAI&>(obj2));
+	return simulateGame(static_cast<PongAI&>(obj1), static_cast<PongAI&>(obj2), firstPlayerHasWon);
 }
 
 
@@ -42,7 +42,7 @@ int Pong::getRoundCount() const
 }
 
 
-int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
+void Pong::simulateGame(PongAI& ai1, PongAI& ai2, Scalar<bool>& firstPlayerHasWon)
 {
 	ai2.resetNN();
 	ai1.resetNN();
@@ -71,12 +71,12 @@ int Pong::simulateGame(PongAI& ai1, PongAI& ai2)
 
 	if (game.whoHasWon() == 0) {
 		if (parasiteEnvironment)
-			return -1;
+			firstPlayerHasWon.getEigenValueForEditing() = false;
 		else
-			return 1;
+			firstPlayerHasWon.getEigenValueForEditing() = true;
 	}
 	else
-		return game.whoHasWon();
+		firstPlayerHasWon.getEigenValueForEditing() = game.whoHasWon() > 0;
 }
 
 void Pong::executeCompareAI()

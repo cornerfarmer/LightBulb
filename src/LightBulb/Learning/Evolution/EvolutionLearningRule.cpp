@@ -216,6 +216,20 @@ namespace LightBulb
 			(*creationCommand)->execute(*getOptions().environment, notUsedIndividuals);
 		}
 
+		if (getOptions().calculatorType == CT_GPU)
+		{
+			for (auto individual = getOptions().environment->getIndividuals().begin(); individual != getOptions().environment->getIndividuals().end(); individual++)
+			{
+				for (auto activations = (*individual)->getNeuralNetwork().getNetworkTopology().getAllActivations().begin(); activations != (*individual)->getNeuralNetwork().getNetworkTopology().getAllActivations().end(); activations++)
+					activations->getViennaclValue();
+				for (auto netInputs = (*individual)->getNeuralNetwork().getNetworkTopology().getAllNetInputs().begin(); netInputs != (*individual)->getNeuralNetwork().getNetworkTopology().getAllNetInputs().end(); netInputs++)
+					netInputs->getViennaclValue();
+				for (auto weights = (*individual)->getNeuralNetwork().getNetworkTopology().getAllWeights().begin(); weights != (*individual)->getNeuralNetwork().getNetworkTopology().getAllWeights().end(); weights++)
+					weights->getViennaclValue();
+				(*individual)->getMutationStrength().getViennaclValue();
+			}
+		}
+
 		// Reset the environment for the next generation
 		getOptions().environment->reset();
 
