@@ -119,19 +119,19 @@ namespace LightBulb
 		/**
 		 * \brief The initial state.
 		 */
-		std::vector<double> state;
+		Vector<> state;
 		/**
 		 * \brief The taken action.
 		 */
-		int action;
+		Scalar<int> action;
 		/**
 		 * \brief The following state.
 		 */
-		std::vector<double> nextState;
+		Vector<> nextState;
 		/**
 		 * \brief The gained reward.
 		 */
-		double reward;
+		Scalar<> reward;
 	};
 
 	/**
@@ -180,6 +180,7 @@ namespace LightBulb
 		 * \brief The steady/target network.
 		 */
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
+		Scalar<> reward;
 		/**
 		 * \brief The current total sum of all average q values in this iteration.
 		 */
@@ -194,7 +195,7 @@ namespace LightBulb
 		 * \param networkTopology The network topology which was used.
 		 * \param reward The reward that was gained through this transition.
 		 */
-		void storeTransition(const AbstractNetworkTopology* networkTopology, double reward);
+		void storeTransition(const AbstractNetworkTopology* networkTopology, const Scalar<>& reward);
 		/**
 		 * \brief Executes a mini batch learning iteration.
 		 */

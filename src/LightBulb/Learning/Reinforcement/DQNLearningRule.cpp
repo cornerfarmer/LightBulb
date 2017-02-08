@@ -64,24 +64,36 @@ namespace LightBulb
 		currentTotalReward = 0;
 	}
 	
-	void DQNLearningRule::storeTransition(const AbstractNetworkTopology* networkTopology, double reward)
+	void DQNLearningRule::storeTransition(const AbstractNetworkTopology* networkTopology, const Scalar<>& reward)
 	{
 		Transition transition;
-		auto patternVector = networkTopology->getActivationsPerLayer(0);
-		transition.state = std::vector<double>(patternVector.getEigenValue().data() , patternVector.getEigenValue().data() + patternVector.getEigenValue().size() - networkTopology->usesBiasNeuron());
+		transition.state = getOptions().environment->getLastInput();
 
 		if (!getOptions().environment->isTerminalState()) {
+			if (getOptions().calculatorType == CT_GPU)
+				transition.nextState.getViennaclValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize() + getOptions().environment->getNeuralNetwork().getNetworkTopology().usesBiasNeuron());
+			else
+				transition.nextState.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize() + getOptions().environment->getNeuralNetwork().getNetworkTopology().usesBiasNeuron());
 			getOptions().environment->getNNInput(transition.nextState);
+
+			transition.nextState.getEigenValueForEditing()(transition.nextState.getEigenValue().size() - 1) = 1;
 		}
 
 		transition.reward = reward;
 
-		for (int i = 0; i < getOptions().environment->getLastBooleanOutput().size(); i++)
+		if (getOptions().calculatorType == CT_GPU)
 		{
-			if (getOptions().environment->getLastBooleanOutput().at(i))
+			
+		}
+		else
+		{
+			for (int i = 0; i < getOptions().environment->getLastBooleanOutput().getEigenValue().size(); i++)
 			{
-				transition.action = i;
-				break;
+				if (getOptions().environment->getLastBooleanOutput().getEigenValue()[i])
+				{
+					transition.action = i;
+					break;
+				}
 			}
 		}
 
@@ -105,22 +117,32 @@ namespace LightBulb
 		{
 			int r = randomGenerator->randInt(0, transitions.size() - 1);
 
-			double y = transitions[r].reward;
-
-			if (!transitions[r].nextState.empty())
+			if (getOptions().calculatorType == CT_GPU)
 			{
-				std::vector<double> output(steadyNetwork->getNetworkTopology().getOutputSize());
-				steadyNetwork->calculate(transitions[r].nextState, output, TopologicalOrder());
-				double q = *max_element(output.begin(), output.end());
-				qAvgSum += q;
-				y += getOptions().discountFactor * q;
+			}
+			else
+			{
+				double y = transitions[r].reward.getEigenValue();
+
+				if (transitions[r].nextState.getEigenValue().size() > 0)
+				{
+					const Vector<>& output = steadyNetwork->calculateWithoutOutputCopy(transitions[r].nextState, TopologicalOrder());
+
+					double q = output.getEigenValue().maxCoeff();
+					qAvgSum += q;
+					y += getOptions().discountFactor * q;
+				}
+
+				TeachingInput<double>* input = new TeachingInput<double>(steadyNetwork->getNetworkTopology().getOutputSize());
+
+				input->set(transitions[r].action.getEigenValue(), y);
+				std::vector<double> state(transitions[r].state.getEigenValue().size() - steadyNetwork->getNetworkTopology().usesBiasNeuron());
+				for (int l = 0; l < state.size(); l++)
+					state[l] = transitions[r].state.getEigenValue()(l);
+
+				teacher->addTeachingLesson(new TeachingLessonLinearInput(state, input));
 			}
 
-			TeachingInput<double>* input = new TeachingInput<double>(steadyNetwork->getNetworkTopology().getOutputSize());
-
-			input->set(transitions[r].action, y);
-
-			teacher->addTeachingLesson(new TeachingLessonLinearInput(transitions[r].state, input));
 		}
 
 		//auto gradient = checkGradient(&teacher, getOptions()->environment->getNeuralNetwork()->getNetworkTopology());
@@ -161,8 +183,8 @@ namespace LightBulb
 		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
 
 		for (int i = 0; i < getOptions().targetNetworkUpdateFrequency; i++) {
-			double reward = getOptions().environment->doSimulationStep();
-			currentTotalReward += reward;
+			getOptions().environment->doSimulationStep(reward);
+			currentTotalReward += reward.getEigenValue();
 
 			if (nextIsStartingState)
 			{

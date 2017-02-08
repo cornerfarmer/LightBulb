@@ -17,33 +17,47 @@ namespace LightBulb
 
 		TopologicalOrder topologicalOrder;
 		// Calculate the output from the the input
-		neuralNetwork->calculate(lastInput, lastOutput, topologicalOrder, false);
+		const Vector<>& lastOutput = neuralNetwork->calculateWithoutOutputCopy(lastInput, topologicalOrder, false);
 
 		if (!epsilonGreedly) {
-			for (int i = 0; i < lastOutput.size(); i++)
+			if (isCalculatorType(CT_GPU))
 			{
-				if (useStochasticActionDecision)
-					lastBooleanOutput[i] = (randomGenerator->randDouble() < lastOutput[i]);
-				else
-					lastBooleanOutput[i] = (0.5 < lastOutput[i]);
+
+			}
+			else
+			{
+				for (int i = 0; i < lastOutput.getEigenValue().size(); i++)
+				{
+					if (useStochasticActionDecision)
+						lastBooleanOutput.getEigenValueForEditing()[i] = (randomGenerator->randDouble() < lastOutput.getEigenValue()[i]);
+					else
+						lastBooleanOutput.getEigenValueForEditing()[i] = (0.5 < lastOutput.getEigenValue()[i]);
+				}
 			}
 		}
 		else
 		{
-			lastBooleanOutput = std::vector<bool>(lastBooleanOutput.size(), false);
-			if (randomGenerator->randDouble() < epsilon)
+			if (isCalculatorType(CT_GPU))
 			{
-				lastBooleanOutput[randomGenerator->randInt(0, lastBooleanOutput.size() - 1)] = true;
+				
 			}
 			else
 			{
-				int bestOutput = 0;
-				for (int i = 1; i < lastOutput.size(); i++)
+				lastBooleanOutput.getEigenValueForEditing().setZero();
+				if (randomGenerator->randDouble() < epsilon)
 				{
-					if (lastOutput[bestOutput] <= lastOutput[i])
-						bestOutput = i;
+					lastBooleanOutput.getEigenValueForEditing()[randomGenerator->randInt(0, lastBooleanOutput.getEigenValue().size() - 1)] = true;
 				}
-				lastBooleanOutput[bestOutput] = true;
+				else
+				{
+					int bestOutput = 0;
+					for (int i = 1; i < lastOutput.getEigenValue().size(); i++)
+					{
+						if (lastOutput.getEigenValue()[bestOutput] <= lastOutput.getEigenValue()[i])
+							bestOutput = i;
+					}
+					lastBooleanOutput.getEigenValueForEditing()[bestOutput] = true;
+				}
 			}
 		}
 
@@ -98,6 +112,10 @@ namespace LightBulb
 		// Create a neural network from the network topolgy
 		neuralNetwork.reset(new NeuralNetwork(networkTopology));
 
+		lastInput.getEigenValueForEditing().resize(networkTopology->getInputSize() + networkTopology->usesBiasNeuron());
+		if (networkTopology->usesBiasNeuron())
+			lastInput.getEigenValueForEditing()[networkTopology->getInputSize()] = 1;
+
 		// Initialize the mutation strength vector
 		buildOutputBuffer();
 	}
@@ -105,8 +123,7 @@ namespace LightBulb
 
 	void AbstractReinforcementEnvironment::buildOutputBuffer()
 	{
-		lastOutput.resize(neuralNetwork->getNetworkTopology().getOutputSize());
-		lastBooleanOutput.resize(lastOutput.size());
+		lastBooleanOutput.getEigenValueForEditing().resize(neuralNetwork->getNetworkTopology().getOutputSize());
 	}
 
 	std::vector<std::string> AbstractReinforcementEnvironment::getDataSetLabels() const
@@ -115,9 +132,14 @@ namespace LightBulb
 		return labels;
 	}
 
-	std::vector<bool>& AbstractReinforcementEnvironment::getLastBooleanOutput()
+	const Vector<char>& AbstractReinforcementEnvironment::getLastBooleanOutput() const
 	{
 		return lastBooleanOutput;
+	}
+
+	const Vector<>& AbstractReinforcementEnvironment::getLastInput() const
+	{
+		return lastInput;
 	}
 
 	void AbstractReinforcementEnvironment::setStochasticActionDecision(bool useStochasticActionDecision_)

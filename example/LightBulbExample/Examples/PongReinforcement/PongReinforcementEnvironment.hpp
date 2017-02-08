@@ -22,12 +22,12 @@ class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvi
 private:
 	int time;
 protected:
-	void getNNInput(std::vector<double>& input) override;
-	void interpretNNOutput(std::vector<bool>& output) override;
+	void getNNInput(LightBulb::Vector<>& input) override;
+	void interpretNNOutput(LightBulb::Vector<char>& output) override;
 public:
 	PongReinforcementEnvironment(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	PongReinforcementEnvironment() = default;
-	double doSimulationStep() override;
+	void doSimulationStep(LightBulb::Scalar<>& reward) override;
 	void executeCompareAI();
 	void initializeForLearning() override;
 	int rate() override;

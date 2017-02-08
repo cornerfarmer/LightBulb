@@ -9,6 +9,7 @@
 
 // Includes
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {
@@ -19,23 +20,19 @@ namespace LightBulb
 	/**
 	 * \brief Describes the environment where the reinforcement learning process takes places.
 	 */
-	class AbstractReinforcementEnvironment : public virtual AbstractRandomGeneratorUser
+	class AbstractReinforcementEnvironment : public virtual AbstractRandomGeneratorUser, public virtual AbstractLinearAlgebraUser
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractReinforcementEnvironment& environment);
 	private:
 		/**
-		 * \brief Contains the last output of the neural network.
-		 */
-		std::vector<double> lastOutput;
-		/**
 		* \brief Contains which actions where taken after the last output.
 		*/
-		std::vector<bool> lastBooleanOutput;
+		Vector<char> lastBooleanOutput;
 		/**
 		* \brief Contains the last input of the neural network.
 		*/
-		std::vector<double> lastInput;
+		Vector<> lastInput;
 		/**
 		 * \brief True, if the environment should act greedly when picking actions.
 		 */
@@ -70,13 +67,13 @@ namespace LightBulb
 		 * \brief Interprets the given neural network output and acts depending on it.
 		 * \param output The actions which were taken by the network.
 		 */
-		virtual void interpretNNOutput(std::vector<bool>& output) = 0;
+		virtual void interpretNNOutput(Vector<char>& output) = 0;
 	public:
 		/**
 		 * \brief Returns the new input for the neural network.
 		 * \param input The vector were the input should be stored in.
 		 */
-		virtual void getNNInput(std::vector<double>& input) = 0;
+		virtual void getNNInput(Vector<>& input) = 0;
 		/**
 		 * \brief Executes the neural network calculation.
 		 */
@@ -94,7 +91,7 @@ namespace LightBulb
 		* \brief Executes one simulation step.
 		* \return Returns the reward gained after that step.
 		*/
-		virtual double doSimulationStep() = 0;
+		virtual void doSimulationStep(Scalar<>& reward) = 0;
 		/**
 		* \brief Initializes the environment before the learning starts.
 		*/
@@ -133,7 +130,8 @@ namespace LightBulb
 		 * \brief Returns the last chosen actions of the network.
 		 * \return A vector of bools which tell per actions if they were taken.
 		 */
-		std::vector<bool>& getLastBooleanOutput();
+		const Vector<char>& getLastBooleanOutput() const;
+		const Vector<>& getLastInput() const;
 		/**
 		 * \brief Returns if the environment is in a terminal state.
 		 * \return True, if the environment is in a terminal state.

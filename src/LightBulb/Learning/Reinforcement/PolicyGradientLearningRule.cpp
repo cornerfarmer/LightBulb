@@ -104,7 +104,7 @@ namespace LightBulb
 		errorVector.getEigenValueForEditing().resize(lastOutput.size());
 		for (int i = 0; i < lastOutput.size(); i++)
 		{
-			errorVector.getEigenValueForEditing()(i) = getOptions().environment->getLastBooleanOutput().at(i) - lastOutput[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
+			errorVector.getEigenValueForEditing()(i) = getOptions().environment->getLastBooleanOutput().getEigenValue()(i) - lastOutput[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 		}
 		errorSum += errorVector.getEigenValueForEditing().cwiseAbs().sum();
 		errorSteps++;
@@ -155,7 +155,8 @@ namespace LightBulb
 
 		while (rewardCounter < getOptions().episodeSize)
 		{
-			double reward = getOptions().environment->doSimulationStep();
+			Scalar<> reward;
+			getOptions().environment->doSimulationStep(reward);
 
 			recordStep(networkTopology);
 
@@ -163,9 +164,9 @@ namespace LightBulb
 
 			if (getOptions().environment->isTerminalState())
 			{
-				totalReward += reward;
+				totalReward += reward.getEigenValue();
 
-				computeGradients(stepsSinceLastReward, reward);
+				computeGradients(stepsSinceLastReward, reward.getEigenValue());
 				stepsSinceLastReward = 0;
 				rewardCounter++;
 			}

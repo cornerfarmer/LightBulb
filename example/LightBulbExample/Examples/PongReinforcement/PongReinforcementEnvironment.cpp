@@ -11,7 +11,7 @@ PongReinforcementEnvironment::PongReinforcementEnvironment(FeedForwardNetworkTop
 	watchMode = false;
 }
 
-double PongReinforcementEnvironment::doSimulationStep()
+void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 {
 	if (game.whoHasWon() != 0 || time >= game.getProperties().maxTime || time == -1)
 	{
@@ -32,28 +32,41 @@ double PongReinforcementEnvironment::doSimulationStep()
 	}
 	time++;
 	if (time >= game.getProperties().maxTime)
-		return 0;
+		reward = 0;
 	else
-		return game.whoHasWon();
+		reward = game.whoHasWon();
 }
 
-void PongReinforcementEnvironment::getNNInput(std::vector<double>& input)
+void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 {
-	input.resize(6);
-	input[0] = game.getState().ballPosX / game.getProperties().width;
-	input[1] = game.getState().ballPosY / game.getProperties().height;
-	input[2] = game.getState().ballVelX / game.getProperties().maxBallSpeed;
-	input[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
-	input[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
-	input[5] = 0; // game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	if (isCalculatorType(CT_GPU))
+	{
+		
+	}
+	else
+	{
+		input.getEigenValueForEditing()[0] = game.getState().ballPosX / game.getProperties().width;
+		input.getEigenValueForEditing()[1] = game.getState().ballPosY / game.getProperties().height;
+		input.getEigenValueForEditing()[2] = game.getState().ballVelX / game.getProperties().maxBallSpeed;
+		input.getEigenValueForEditing()[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
+		input.getEigenValueForEditing()[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[5] = 0; // game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+	}
 }
 
-void PongReinforcementEnvironment::interpretNNOutput(std::vector<bool>& output)
+void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& output)
 {
-	if (output[0])
-		game.movePaddle(1);
-	else if ((output.size() > 1 && output[1]) || (output.size() == 1 && !output[0]))
-		game.movePaddle(-1);
+	if (isCalculatorType(CT_GPU))
+	{
+
+	}
+	else
+	{
+		if (output.getEigenValue()[0])
+			game.movePaddle(1);
+		else if ((output.getEigenValue().size() > 1 && output.getEigenValue()[1]) || (output.getEigenValue().size() == 1 && !output.getEigenValue()[0]))
+			game.movePaddle(-1);
+	}
 }
 
 
