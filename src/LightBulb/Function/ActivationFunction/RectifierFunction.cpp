@@ -19,7 +19,7 @@ namespace LightBulb
 
 	void RectifierFunction::execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const
 	{
-		activations[layerNr].getEigenValueForEditing() = netInputs[layerNr].getEigenValue().cwiseMax(0);
+		activations[layerNr].getEigenValueForEditing().topRows(netInputs[layerNr].getEigenValue().size()) = netInputs[layerNr].getEigenValue().cwiseMax(0);
 	}
 
 	double RectifierFunction::executeDerivation(double input) const

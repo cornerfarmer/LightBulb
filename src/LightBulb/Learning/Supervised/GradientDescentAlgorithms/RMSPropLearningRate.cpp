@@ -68,7 +68,7 @@ namespace LightBulb
 
 		prevDeltaWeights[layerIndex - 1].getEigenValueForEditing() = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1].getEigenValue() - getOptions().learningRate * gradients.getEigenValue().cwiseQuotient(((prevSquaredGradient[layerIndex - 1].getEigenValue().array() - prevGradient[layerIndex - 1].getEigenValue().cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
 
-//		return prevDeltaWeights[layerIndex - 1];
+		weights.getEigenValueForEditing() += prevDeltaWeights[layerIndex - 1].getEigenValue();
 	}
 
 

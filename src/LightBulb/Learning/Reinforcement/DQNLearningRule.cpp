@@ -43,6 +43,7 @@ namespace LightBulb
 	
 	void DQNLearningRule::initialize(DQNLearningRuleOptions* options)
 	{
+		teacher.reset(new Teacher());
 		options->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(options->rmsPropOptions);
 		options->gradientDescentOptions.teacher = teacher.get();
 		options->gradientDescentOptions.neuralNetwork = &getOptions().environment->getNeuralNetwork();
@@ -67,7 +68,7 @@ namespace LightBulb
 	{
 		Transition transition;
 		auto patternVector = networkTopology->getActivationsPerLayer(0);
-		transition.state = std::vector<double>(patternVector.getEigenValue().data() + networkTopology->usesBiasNeuron(), patternVector.getEigenValue().data() + patternVector.getEigenValue().size());
+		transition.state = std::vector<double>(patternVector.getEigenValue().data() , patternVector.getEigenValue().data() + patternVector.getEigenValue().size() - networkTopology->usesBiasNeuron());
 
 		if (!getOptions().environment->isTerminalState()) {
 			getOptions().environment->getNNInput(transition.nextState);
