@@ -29,12 +29,12 @@ public:
 		EXPECT_CALL(*environment, getCombiningStrategy()).WillRepeatedly(testing::ReturnRef(combiningStrategy));
 		EXPECT_CALL(*environment, isParasiteEnvironment()).WillRepeatedly(testing::Return(true));
 		
-		results[&individual1][&individual2][0] = true;
-		results[&individual2][&individual1][0] = false;
-		results[&individual1][&individual3][0] = false;
-		results[&individual3][&individual1][0] = true;
-		results[&individual2][&individual3][0] = true;
-		results[&individual3][&individual2][0] = false;
+		//results[&individual1][&individual2][0] = true;
+		//results[&individual2][&individual1][0] = false;
+		//results[&individual1][&individual3][0] = false;
+		//results[&individual3][&individual1][0] = true;
+		//results[&individual2][&individual3][0] = true;
+		//results[&individual3][&individual2][0] = false;
 		EXPECT_CALL(combiningStrategy, getPrevResults()).WillRepeatedly(testing::ReturnRef(results));
 
 	}
@@ -59,8 +59,8 @@ TEST_F(PerfectIndividualFoundConditionTest, evaluateNegative)
 
 TEST_F(PerfectIndividualFoundConditionTest, evaluatePositive)
 {
-	results[&individual1][&individual3][0] = true;
-	results[&individual3][&individual1][0] = false;
+	//results[&individual1][&individual3][0] = true;
+	//results[&individual3][&individual1][0] = false;
 
 	EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
 	EXPECT_EQ(true, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
@@ -69,21 +69,21 @@ TEST_F(PerfectIndividualFoundConditionTest, evaluatePositive)
 
 TEST_F(PerfectIndividualFoundConditionTest, evaluateWithReset)
 {
-	results[&individual1][&individual3][0] = true;
-	results[&individual3][&individual1][0] = false;
+	//results[&individual1][&individual3][0] = true;
+	//results[&individual3][&individual1][0] = false;
 
-	EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
+	//EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
 
-	results[&individual1][&individual3][0] = false;
-	results[&individual3][&individual1][0] = true;
+	//results[&individual1][&individual3][0] = false;
+	//results[&individual3][&individual1][0] = true;
 
-	EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
+	//EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
 
 
 
-	results[&individual1][&individual3][0] = true;
-	results[&individual3][&individual1][0] = false;
+	//results[&individual1][&individual3][0] = true;
+	//results[&individual3][&individual1][0] = false;
 
-	EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
-	EXPECT_EQ(true, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
+	//EXPECT_EQ(false, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
+	//EXPECT_EQ(true, perfectIndividualFoundCondition->evaluate(highscore, *learningRule));
 }

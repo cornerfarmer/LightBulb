@@ -24,10 +24,9 @@ public:
 	MOCK_CONST_METHOD0(getPopulationSize, int ());
 	MOCK_METHOD0(clearPopulation, void ());
 	MOCK_METHOD1(addExistingIndividual, void (LightBulb::AbstractIndividual*));
-	MOCK_METHOD3(doCompare, int (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int));
-
+	MOCK_METHOD4(doCompare, void (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int, LightBulb::Scalar<bool>&));
 	MOCK_CONST_METHOD1(getScore, double (const LightBulb::AbstractIndividual&));
-	MOCK_METHOD3(compareIndividuals, int (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int));
+	MOCK_METHOD4(compareIndividuals, void (LightBulb::AbstractIndividual&, LightBulb::AbstractIndividual&, int, LightBulb::Scalar<bool>&));
 	MOCK_METHOD1(rateIndividual, int (LightBulb::AbstractIndividual&));
 	MOCK_CONST_METHOD0(getCombiningStrategy, LightBulb::AbstractCombiningStrategy& ());
 	MOCK_METHOD1(setLogger, void (LightBulb::AbstractLogger&));

@@ -4,6 +4,7 @@
 #include <LightBulb/Learning/Evolution/SharedCoevolutionFitnessFunction.hpp>
 #include <Mocks/MockIndividual.hpp>
 #include <array>
+#include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 
 using namespace LightBulb;
 using testing::Expectation;
@@ -33,14 +34,14 @@ TEST_F(SharedCoevolutionFitnessFunctionTest, start)
 {
 	CombiningStrategyResults results;
 
-	results[individuals[0]][individuals[1]][0] = true;
-	results[individuals[1]][individuals[0]][0] = false;
+	//results[individuals[0]][individuals[1]][0] = true;
+	//results[individuals[1]][individuals[0]][0] = false;
 
-	results[individuals[1]][individuals[2]][0] = true;
-	results[individuals[2]][individuals[1]][0] = false;
+	//results[individuals[1]][individuals[2]][0] = true;
+	//results[individuals[2]][individuals[1]][0] = false;
 
-	results[individuals[0]][individuals[2]][0] = true;
-	results[individuals[2]][individuals[0]][0] = false;
+	//results[individuals[0]][individuals[2]][0] = true;
+	//results[individuals[2]][individuals[0]][0] = false;
 
 	auto fitnessValues = sharedCoevolutionFitnessFunction->execute(results);
 

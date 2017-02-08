@@ -13,12 +13,7 @@ __kernel void test1(
 __kernel void test2(
 	unsigned int t1
 		) {
-	t1 = t1 + 5;
-	t1 = t1 + 5;
-	t1 = t1 + 5;
-	t1 = t1 + 5;
-	t1 = t1 + 5;
-	t1 = t1 + 5;
+
 }
 
 __kernel void test3(
@@ -27,6 +22,20 @@ __kernel void test3(
 		) {
 	for (uint i = 0; i < 1024; i++)
 		*sum += v[i];
+}
+
+
+__kernel void testSum(
+	__global float* v,
+	unsigned int size,
+	__global float* sum
+	) {
+
+	float sum2 = 0;
+	for (uint i = get_global_id(0); i < size; i+=get_global_size(0))
+		sum2 += v[i];
+	*sum += sum2;
+
 }
 
 

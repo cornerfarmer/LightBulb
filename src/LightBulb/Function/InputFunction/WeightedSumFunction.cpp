@@ -13,6 +13,10 @@ namespace LightBulb
 		{
 			static viennacl::ocl::kernel& kernel = getKernel("weight_sum_function", "execute", "weight_sum_function.cl");
 
+			/*kernel.global_work_size(0, activationToUse->getViennaclValue().size());
+			kernel.global_work_size(1, 32);
+			kernel.local_work_size(0, 8);
+			kernel.local_work_size(1, 32);*/
 			viennacl::ocl::enqueue(kernel(
 				viennacl::traits::opencl_handle(activationToUse->getViennaclValue()),
 				cl_uint(viennacl::traits::start(activationToUse->getViennaclValue())),
@@ -30,7 +34,7 @@ namespace LightBulb
 				cl_uint(viennacl::traits::size1(weights[layerNr - 1].getViennaclValue())), cl_uint(viennacl::traits::size2(weights[layerNr - 1].getViennaclValue())),
 				cl_uint(viennacl::traits::internal_size1(weights[layerNr - 1].getViennaclValue())), cl_uint(viennacl::traits::internal_size2(weights[layerNr - 1].getViennaclValue())),
 
-				viennacl::ocl::local_mem(sizeof(float) * kernel.local_work_size())
+				viennacl::ocl::local_mem(sizeof(float) * kernel.local_work_size(0) )
 			));
 
 		}
