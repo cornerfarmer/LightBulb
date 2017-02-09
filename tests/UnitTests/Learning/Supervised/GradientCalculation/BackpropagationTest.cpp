@@ -41,12 +41,12 @@ public:
 		weightsTransp[1] = Matrix<>(weights[1].getEigenValueForEditing().transpose());
 
 		activations.resize(3);
-		activations[0] = Vector<>(3);
-		activations[0].getEigenValueForEditing() << 1, 0, 1;
-		activations[1] = Vector<>(4);
-		activations[1].getEigenValueForEditing() << 0.982013762, 4.53978682e-05, 0.999999881, 1;
-		activations[2] = Vector<>(2);
-		activations[2].getEigenValueForEditing() << 0.504519224, 1;
+		activations[0] = Vector<>(2);
+		activations[0].getEigenValueForEditing() << 1, 0;
+		activations[1] = Vector<>(3);
+		activations[1].getEigenValueForEditing() << 0.982013762, 4.53978682e-05, 0.999999881;
+		activations[2] = Vector<>(1);
+		activations[2].getEigenValueForEditing() << 0.504519224;
 
 		netInputs.resize(3);
 		netInputs[1] = Vector<>(3);

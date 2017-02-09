@@ -41,7 +41,7 @@ namespace LightBulb
 				}
 				else
 				{
-					nextLayerErrorValueFactor.getViennaclValueForEditing().resize(networkTopology.getAllWeights()[layerIndex].getViennaclValue().size2());
+					nextLayerErrorValueFactor.getViennaclValueForEditing().resize(networkTopology.getAllWeights()[layerIndex].getViennaclValue().size2() - networkTopology.usesBiasNeuron());
 					networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex], activationFunctionDerivations[layerIndex]);
 					backpropagateInnerLayer_1(nextLayerErrorValueFactor.getViennaclValueForEditing(), lastDeltaVectorOutputLayer[layerIndex + 1].getViennaclValue(), networkTopology.getAllWeights()[layerIndex].getViennaclValue());
 					backpropagateInnerLayer_2(nextLayerErrorValueFactor.getViennaclValueForEditing(), activationFunctionDerivations[layerIndex].getViennaclValue(),  lastDeltaVectorOutputLayer[layerIndex].getViennaclValueForEditing());
@@ -59,14 +59,16 @@ namespace LightBulb
 				}
 				else
 				{
-					Vector<> nextLayerErrorValueFactor(networkTopology.getEfferentWeightsPerLayer(layerIndex).getEigenValue() * lastDeltaVectorOutputLayer[layerIndex + 1].getEigenValue());
+					Vector<> nextLayerErrorValueFactor(networkTopology.getEfferentWeightsPerLayer(layerIndex).getEigenValue().topRows(networkTopology.getEfferentWeightsPerLayer(layerIndex).getEigenValue().rows() - networkTopology.usesBiasNeuron()) * lastDeltaVectorOutputLayer[layerIndex + 1].getEigenValue());
 
 					// Compute the delta value:  activationFunction'(netInput) * nextLayerErrorValueFactor
 					networkTopology.getInnerNeuronDescription().getActivationFunction().executeDerivation(netInputs[layerIndex], activationFunctionDerivations[layerIndex]);
-					lastDeltaVectorOutputLayer[layerIndex].getEigenValueForEditing() = (activationFunctionDerivations[layerIndex].getEigenValue().array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.getEigenValue().head(nextLayerErrorValueFactor.getEigenValue().rows() - networkTopology.usesBiasNeuron()).array();
+					lastDeltaVectorOutputLayer[layerIndex].getEigenValueForEditing() = (activationFunctionDerivations[layerIndex].getEigenValue().array() + flatSpotEliminationFac) * nextLayerErrorValueFactor.getEigenValue().array();
 				}
 
-				gradientToUse->at(layerIndex - 1).getEigenValueForEditing().noalias() = gradientToUse->at(layerIndex - 1).getEigenValue() + -1 * (lastDeltaVectorOutputLayer[layerIndex].getEigenValue() * activationToUse.getEigenValue().transpose()).matrix();
+				gradientToUse->at(layerIndex - 1).getEigenValueForEditing().leftCols(activationToUse.getEigenValue().rows()).noalias() += -1 * (lastDeltaVectorOutputLayer[layerIndex].getEigenValue() * activationToUse.getEigenValue().transpose()).matrix();
+				if (networkTopology.usesBiasNeuron())
+					gradientToUse->at(layerIndex - 1).getEigenValueForEditing().col(activationToUse.getEigenValue().rows()).noalias() -= lastDeltaVectorOutputLayer[layerIndex].getEigenValue();
 			}
 		}
 	}

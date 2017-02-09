@@ -86,7 +86,7 @@ namespace LightBulb
 		getErrorVector(networkTopology, errorVector);
 		
 		auto patternVector = networkTopology.getActivationsPerLayer(0);
-		stateRecord[stepsSinceLastReward] = std::vector<double>(patternVector.getEigenValue().data() + networkTopology.usesBiasNeuron(), patternVector.getEigenValue().data() + patternVector.getEigenValue().size());
+		stateRecord[stepsSinceLastReward] = std::vector<double>(patternVector.getEigenValue().data(), patternVector.getEigenValue().data() + patternVector.getEigenValue().size());
 		
 		if (gradientRecord[stepsSinceLastReward].empty())
 			gradientRecord[stepsSinceLastReward] = networkTopology.getAllWeights();

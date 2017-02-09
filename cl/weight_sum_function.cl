@@ -17,7 +17,7 @@ __kernel void execute(
   { 
     float dot_prod = 0; 
     for (unsigned int col = col_gid; col < W_col_size; col+=get_local_size(0)) 
-      dot_prod += W[(row * W_row_inc + W_row_start) * W_internal_cols + col * W_col_inc + W_col_start] * actVec[startAct + incAct * col]; 
+      dot_prod += W[(row * W_row_inc + W_row_start) * W_internal_cols + col * W_col_inc + W_col_start] * (col < sizeAct ? actVec[startAct + incAct * col] : 1); 
     work[lid] = dot_prod; 
     for(unsigned int stride=get_local_size(0)/2 ; stride>0 ; stride>>=1){ 
       barrier(CLK_LOCAL_MEM_FENCE); 

@@ -121,10 +121,10 @@ namespace LightBulb
 		for (int l = 0; l < getLayerCount(); l++)
 		{
 			netInputs[l] = Vector<>(options->neuronsPerLayerCount[l]);
-			activations[l] = Vector<>(options->neuronsPerLayerCount[l] + options->useBiasNeuron);
+			activations[l] = Vector<>(options->neuronsPerLayerCount[l]);
 			if (l > 0)
 			{
-				weights[l - 1] = Matrix<>(netInputs[l].getEigenValue().size(), activations[l - 1].getEigenValue().size());
+				weights[l - 1] = Matrix<>(netInputs[l].getEigenValue().size(), activations[l - 1].getEigenValue().size() + options->useBiasNeuron);
 			}
 			if (l == getLayerCount() - 1)
 				neuronDescriptionsPerLayer[l].reset(options->descriptionFactory->createOutputNeuronDescription());
@@ -461,7 +461,6 @@ namespace LightBulb
 					static viennacl::ocl::kernel& kernel = getKernel("neural_network", "reset_activations", "neural_network.cl");
 					
 					viennacl::ocl::enqueue(kernel(
-						cl_uint(options->useBiasNeuron),
 						viennacl::traits::opencl_handle(activations[l].getViennaclValueForEditing()),
 
 						cl_uint(viennacl::traits::start(activations[l].getViennaclValue())),
@@ -474,10 +473,6 @@ namespace LightBulb
 					for (int i = 0; i < activations[l].getEigenValue().rows(); i++)
 					{
 						activations[l].getEigenValueForEditing()(i) = 0;
-					}
-					if (options->useBiasNeuron)
-					{
-						activations[l].getEigenValueForEditing()(activations[l].getEigenValue().rows() - 1) = 1;
 					}
 				}
 			}

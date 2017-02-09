@@ -38,12 +38,12 @@ public:
 		
 
 		expectedAct.resize(3);
-		expectedAct[0] = Vector<>(3);
-		expectedAct[0].getEigenValueForEditing() << 1, 0, 1;
-		expectedAct[1] = Vector<>(4);
-		expectedAct[1].getEigenValueForEditing() << 0.982013762, 4.53978682e-05, 0.999999881, 1;
-		expectedAct[2] = Vector<>(2);
-		expectedAct[2].getEigenValueForEditing() << 0.504519224, 1;
+		expectedAct[0] = Vector<>(2);
+		expectedAct[0].getEigenValueForEditing() << 1, 0;
+		expectedAct[1] = Vector<>(3);
+		expectedAct[1].getEigenValueForEditing() << 0.982013762, 4.53978682e-05, 0.999999881;
+		expectedAct[2] = Vector<>(1);
+		expectedAct[2].getEigenValueForEditing() << 0.504519224;
 
 		expectedNetInput.resize(3);
 		expectedNetInput[1] = Vector<>(3);
@@ -86,7 +86,12 @@ TEST_F(NeuralNetworkCalculationTest, adjustWeightsGPU)
 	neuralNetwork->getNetworkTopology().setCalculatorType(CT_GPU);
 	std::vector<double> output = neuralNetwork->calculate(input, topologicalOrder, true);
 
-	ASSERT_EQ(0.50451922416687012, output[0]);
+	//ASSERT_EQ(0.50451922416687012, output[0]);
+
+	neuralNetwork->getNetworkTopology().getAllNetInputs()[1].getEigenValue();
+	neuralNetwork->getNetworkTopology().getAllActivations()[1].getEigenValue();
+	neuralNetwork->getNetworkTopology().getAllNetInputs()[2].getEigenValue();
+
 	ASSERT_EQ(expectedAct[0].getEigenValue(), neuralNetwork->getNetworkTopology().getAllActivations()[0].getEigenValue());
 	ASSERT_EQ(expectedAct[1].getEigenValue(), neuralNetwork->getNetworkTopology().getAllActivations()[1].getEigenValue());
 	ASSERT_EQ(expectedAct[2].getEigenValue(), neuralNetwork->getNetworkTopology().getAllActivations()[2].getEigenValue());

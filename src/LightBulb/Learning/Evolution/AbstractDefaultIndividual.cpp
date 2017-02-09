@@ -17,9 +17,7 @@ namespace LightBulb
 		// Randomize all weights
 		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(environment->getRandomGenerator());
 
-		lastInput.getEigenValueForEditing().resize(networkTopology->getInputSize() + networkTopology->usesBiasNeuron());
-		if (networkTopology->usesBiasNeuron())
-			lastInput.getEigenValueForEditing()[networkTopology->getInputSize()] = 1;
+		lastInput.getEigenValueForEditing().resize(networkTopology->getInputSize());
 
 		lastInput.getViennaclValue();
 

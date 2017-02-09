@@ -71,9 +71,9 @@ namespace LightBulb
 
 		if (!getOptions().environment->isTerminalState()) {
 			if (getOptions().calculatorType == CT_GPU)
-				transition.nextState.getViennaclValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize() + getOptions().environment->getNeuralNetwork().getNetworkTopology().usesBiasNeuron());
+				transition.nextState.getViennaclValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
 			else
-				transition.nextState.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize() + getOptions().environment->getNeuralNetwork().getNetworkTopology().usesBiasNeuron());
+				transition.nextState.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
 			getOptions().environment->getNNInput(transition.nextState);
 
 			transition.nextState.getEigenValueForEditing()(transition.nextState.getEigenValue().size() - 1) = 1;
@@ -136,7 +136,7 @@ namespace LightBulb
 				TeachingInput<double>* input = new TeachingInput<double>(steadyNetwork->getNetworkTopology().getOutputSize());
 
 				input->set(transitions[r].action.getEigenValue(), y);
-				std::vector<double> state(transitions[r].state.getEigenValue().size() - steadyNetwork->getNetworkTopology().usesBiasNeuron());
+				std::vector<double> state(transitions[r].state.getEigenValue().size());
 				for (int l = 0; l < state.size(); l++)
 					state[l] = transitions[r].state.getEigenValue()(l);
 

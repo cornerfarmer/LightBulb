@@ -112,9 +112,7 @@ namespace LightBulb
 		// Create a neural network from the network topolgy
 		neuralNetwork.reset(new NeuralNetwork(networkTopology));
 
-		lastInput.getEigenValueForEditing().resize(networkTopology->getInputSize() + networkTopology->usesBiasNeuron());
-		if (networkTopology->usesBiasNeuron())
-			lastInput.getEigenValueForEditing()[networkTopology->getInputSize()] = 1;
+		lastInput.getEigenValueForEditing().resize(networkTopology->getInputSize());
 
 		// Initialize the mutation strength vector
 		buildOutputBuffer();

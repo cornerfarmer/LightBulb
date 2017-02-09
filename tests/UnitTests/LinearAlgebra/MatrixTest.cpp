@@ -123,7 +123,7 @@ TEST(Matrix, performanceTestWSum)
 	std::vector<Vector<>> activations;
 	activations.push_back(Vector<>(128));
 	activations[0].getEigenValueForEditing().setRandom();
-	activations.push_back(Vector<>(21));
+	activations.push_back(Vector<>(129));
 	activations[1].getEigenValueForEditing().setRandom();
 	activations.push_back(Vector<>(10));
 
@@ -133,32 +133,44 @@ TEST(Matrix, performanceTestWSum)
 	netInputs[2] = Vector<>(9);
 
 	std::vector<Matrix<>> weights(2);
-	weights[0] = Matrix<>(128, 128);
+	weights[0] = Matrix<>(128, 129);
 	weights[0].getEigenValueForEditing().setRandom();
-	weights[1] = Matrix<>(9, 21);
+	weights[1] = Matrix<>(128, 129);
 	weights[1].getEigenValueForEditing().setRandom();
 
 	
-	clock_t begin = clock();
-	for (int i = 0; i < 100000; i++) {
-		function.execute(1, activations, netInputs, weights);
+	for (int j = 0; j < 1000; j++)
+	{
+		clock_t begin = clock();
+		for (int i = 0; i < 100000; i++) {
+			netInputs[1].getEigenValueForEditing().noalias() = weights[1 - 1].getEigenValue().leftCols(128) * activations[1 - 1].getEigenValue();
+			netInputs[1].getEigenValueForEditing().noalias() += weights[1 - 1].getEigenValue().col(128);
+		}
+		clock_t end = clock();
+		double time = (double)(end - begin) / CLOCKS_PER_SEC;
+		std::cout << time << ";A" << (end - begin) << std::endl;
+
+		begin = clock();
+		for (int i = 0; i < 100000; i++) {
+			netInputs[1].getEigenValueForEditing().noalias() = weights[1].getEigenValue() * activations[1].getEigenValue();
+		}
+		end = clock();
+		time = (double)(end - begin) / CLOCKS_PER_SEC;
+		std::cout << time << ";B" << (end - begin) << std::endl;
 	}
-	clock_t end = clock();
-	double time = (double)(end - begin) / CLOCKS_PER_SEC;
-	std::cout << time << ";" << (end - begin) << std::endl;
 
 	Eigen::VectorXf expect = netInputs[1].getEigenValue();
 	function.setCalculatorType(CT_GPU);
 	function.execute(1, activations, netInputs, weights);
 	viennacl::backend::finish();
 
-	begin = clock();
+	clock_t begin = clock();
 	for (int i = 0; i < 100000; i++) {
 		function.execute(1, activations, netInputs, weights);
 	}
 	viennacl::backend::finish();
-	end = clock();
-	time = (double)(end - begin) / CLOCKS_PER_SEC;
+	clock_t end = clock();
+	double time = (double)(end - begin) / CLOCKS_PER_SEC;
 	std::cout << time << ";" << (end - begin) << std::endl;
 
 

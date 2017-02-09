@@ -34,12 +34,20 @@ namespace LightBulb
 				cl_uint(viennacl::traits::size1(weights[layerNr - 1].getViennaclValue())), cl_uint(viennacl::traits::size2(weights[layerNr - 1].getViennaclValue())),
 				cl_uint(viennacl::traits::internal_size1(weights[layerNr - 1].getViennaclValue())), cl_uint(viennacl::traits::internal_size2(weights[layerNr - 1].getViennaclValue())),
 
-				viennacl::ocl::local_mem(sizeof(float) * kernel.local_work_size(0) )
+				viennacl::ocl::local_mem(sizeof(float) * kernel.local_work_size(0))
 			));
 
 		}
 		else
-			netInputs[layerNr].getEigenValueForEditing().noalias() = weights[layerNr - 1].getEigenValue() * activationToUse->getEigenValue();
+		{
+			if (activationToUse->getEigenValue().rows() != weights[layerNr - 1].getEigenValue().cols())
+			{
+				netInputs[layerNr].getEigenValueForEditing().noalias() = weights[layerNr - 1].getEigenValue().leftCols(activationToUse->getEigenValue().rows()) * activationToUse->getEigenValue();
+				netInputs[layerNr].getEigenValueForEditing().noalias() += weights[layerNr - 1].getEigenValue().col(activationToUse->getEigenValue().rows());
+			}
+			else
+				netInputs[layerNr].getEigenValueForEditing().noalias() = weights[layerNr - 1].getEigenValue() * activationToUse->getEigenValue();
+		}
 	}
 
 	AbstractCloneable* WeightedSumFunction::clone() const
