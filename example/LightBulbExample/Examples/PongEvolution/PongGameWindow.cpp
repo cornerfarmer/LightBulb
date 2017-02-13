@@ -37,7 +37,7 @@ PongGameWindow::PongGameWindow(PongGameController& controller_, AbstractWindow& 
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	panel = new wxPanel(this);
-	panel->SetMinSize(wxSize(getController().getProperties().width + getController().getProperties().paddleWidth * 2, getController().getProperties().height));
+	panel->SetMinSize(wxSize(getController().getProperties().width.getEigenValue() + getController().getProperties().paddleWidth.getEigenValue() * 2, getController().getProperties().height.getEigenValue()));
 	
 	sizer->Add(panel, 1, wxEXPAND);
 	SetSizerAndFit(sizer);
@@ -102,10 +102,10 @@ void PongGameWindow::render(wxDC& dc)
 	PongGameState& state = getController().getState();
 	panel->GetClientSize(&width, &height);
 
-	dc.DrawRectangle(0, state.paddle2Pos, properties.paddleWidth, properties.paddleHeight);
-	dc.DrawRectangle(properties.width + properties.paddleWidth, state.paddle1Pos, properties.paddleWidth, properties.paddleHeight);
+	dc.DrawRectangle(0, state.paddle2Pos.getEigenValue(), properties.paddleWidth.getEigenValue(), properties.paddleHeight.getEigenValue());
+	dc.DrawRectangle(properties.width.getEigenValue() + properties.paddleWidth.getEigenValue(), state.paddle1Pos.getEigenValue(), properties.paddleWidth.getEigenValue(), properties.paddleHeight.getEigenValue());
 
-	dc.DrawCircle(state.ballPosX + properties.paddleWidth + properties.ballRad / 2, state.ballPosY + properties.ballRad / 2, properties.ballRad / 2);
+	dc.DrawCircle(state.ballPosX.getEigenValue() + properties.paddleWidth.getEigenValue() + properties.ballRad.getEigenValue() / 2, state.ballPosY.getEigenValue() + properties.ballRad.getEigenValue() / 2, properties.ballRad.getEigenValue() / 2);
 }
 
 std::string PongGameWindow::getLabel()

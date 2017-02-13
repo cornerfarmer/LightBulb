@@ -16,15 +16,15 @@ namespace LightBulb
 	* \param transition The Transition to serialize.
 	*/
 	template <class Archive>
-	void serialize(Archive& archive, Transition& transition)
+	void serialize(Archive& archive, TransitionStorage& transition)
 	{
-		archive(cereal::make_nvp("state", transition.state));
+		/*archive(cereal::make_nvp("state", transition.state));
 		archive(cereal::make_nvp("nextState", transition.nextState));
 		archive(cereal::make_nvp("action", transition.action));
-		archive(cereal::make_nvp("reward", transition.reward));
+		archive(cereal::make_nvp("reward", transition.reward));*/
 	}
 
-	DECLARE_SINGLE_SERIALIZATION_TEMPLATE(Transition);
+	DECLARE_SINGLE_SERIALIZATION_TEMPLATE(TransitionStorage);
 
 	/**
 	* \brief Serializes a DQNLearningRule.
@@ -38,7 +38,7 @@ namespace LightBulb
 		archive(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
 		archive(cereal::make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
 		archive(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
-		archive(cereal::make_nvp("transitions", learningRule.transitions));
+		archive(cereal::make_nvp("transitionStorage", learningRule.transitionStorage));
 		archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
 		archive(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
 		archive(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
@@ -58,7 +58,7 @@ namespace cereal
 		ar(base_class<AbstractReinforcementLearningRule>(&learningRule));
 		ar(make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
 		ar(make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
-		ar(make_nvp("transitions", learningRule.transitions));
+		ar(make_nvp("transitions", learningRule.transitionStorage));
 		ar(make_nvp("currentTotalError", learningRule.currentTotalError));
 		ar(make_nvp("currentTotalReward", learningRule.currentTotalReward));
 		ar(make_nvp("qAvgSum", learningRule.qAvgSum));

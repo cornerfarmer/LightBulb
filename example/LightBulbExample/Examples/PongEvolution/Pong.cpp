@@ -53,7 +53,7 @@ void Pong::simulateGame(PongAI& ai1, PongAI& ai2, Scalar<bool>& firstPlayerHasWo
 	startNewGame();
 
 	double time = 0;
-	while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
+	while (game.whoHasWon() == 0 && time < game.getProperties().maxTime.getEigenValue())
 	{
 		game.setPlayer(1);
 		ai1.doNNCalculation();
@@ -81,7 +81,7 @@ void Pong::simulateGame(PongAI& ai1, PongAI& ai2, Scalar<bool>& firstPlayerHasWo
 
 void Pong::executeCompareAI()
 {
-	if (game.getState().ballPosY > game.getState().paddle2Pos + game.getProperties().paddleHeight / 2)
+	if (game.getState().ballPosY.getEigenValue() > game.getState().paddle2Pos.getEigenValue() + game.getProperties().paddleHeight.getEigenValue() / 2)
 		game.movePaddle(1);
 	else
 		game.movePaddle(-1);
@@ -101,7 +101,7 @@ int Pong::rateIndividual(AbstractIndividual& individual)
 		startNewGame();
 
 		double time = 0;
-		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime)
+		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime.getEigenValue())
 		{
 			game.setPlayer(1);
 			individual.doNNCalculation();
@@ -140,21 +140,21 @@ void Pong::resetEnvironment()
 
 void Pong::getNNInput(LightBulb::Vector<>& input)
 {
-	input.getEigenValueForEditing()[0] = game.getState().ballPosX / game.getProperties().width;
+	input.getEigenValueForEditing()[0] = game.getState().ballPosX.getEigenValue() / game.getProperties().width.getEigenValue();
 	if (game.getPlayer() == -1)
 		input.getEigenValueForEditing()[0] = 1 - input.getEigenValue()[0];
-	input.getEigenValueForEditing()[1] = game.getState().ballPosY / game.getProperties().height;
-	input.getEigenValueForEditing()[2] = game.getPlayer() * game.getState().ballVelX / game.getProperties().maxBallSpeed;
-	input.getEigenValueForEditing()[3] = game.getState().ballVelY / game.getProperties().maxBallSpeed;
+	input.getEigenValueForEditing()[1] = game.getState().ballPosY.getEigenValue() / game.getProperties().height.getEigenValue();
+	input.getEigenValueForEditing()[2] = game.getPlayer() * game.getState().ballVelX.getEigenValue() / game.getProperties().maxBallSpeed.getEigenValue();
+	input.getEigenValueForEditing()[3] = game.getState().ballVelY.getEigenValue() / game.getProperties().maxBallSpeed.getEigenValue();
 	if (game.getPlayer() == 1)
 	{
-		input.getEigenValueForEditing()[4] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
-		input.getEigenValueForEditing()[5] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[4] = game.getState().paddle1Pos.getEigenValue() / (game.getProperties().height.getEigenValue() - game.getProperties().paddleHeight.getEigenValue());
+		input.getEigenValueForEditing()[5] = game.getState().paddle2Pos.getEigenValue() / (game.getProperties().height.getEigenValue() - game.getProperties().paddleHeight.getEigenValue());
 	}
 	else
 	{
-		input.getEigenValueForEditing()[5] = game.getState().paddle1Pos / (game.getProperties().height - game.getProperties().paddleHeight);
-		input.getEigenValueForEditing()[4] = game.getState().paddle2Pos / (game.getProperties().height - game.getProperties().paddleHeight);
+		input.getEigenValueForEditing()[5] = game.getState().paddle1Pos.getEigenValue() / (game.getProperties().height.getEigenValue() - game.getProperties().paddleHeight.getEigenValue());
+		input.getEigenValueForEditing()[4] = game.getState().paddle2Pos.getEigenValue() / (game.getProperties().height.getEigenValue() - game.getProperties().paddleHeight.getEigenValue());
 	}
 }
 

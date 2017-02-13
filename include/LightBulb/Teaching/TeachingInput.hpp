@@ -13,14 +13,12 @@ namespace LightBulb
 	 * \brief This class contains all stuff needed to describe what a network should return.
 	 * \tparam T The data type which should be used.
 	 */
-	template<typename T>
-	class TeachingInput : public std::vector<std::pair<bool, T>>
+	template<typename T = float>
+	class TeachingInput
 	{
 	private:
-		/**
-		 * \brief Contains the dimension (amount of neurons the NeuralNetworkIO can describe)
-		 */
-		int dimension;
+		Vector<T> values;
+		Vector<char> enabled;
 	public:
 
 		/**
@@ -28,9 +26,9 @@ namespace LightBulb
 		 * \param d The dimension which should be equal to the output neurons of the corresponding network.
 		 */
 		TeachingInput(int d)
-			: std::vector<std::pair<bool, T>>(d)
+			: values(d), enabled(d)
 		{
-			dimension = d;
+			enabled.getEigenValueForEditing().setZero();
 		}
 
 		/**
@@ -41,8 +39,8 @@ namespace LightBulb
 		const T& get(int index) const
 		{
 			// Make sure the value is valid
-			if ((*this)[index].first)
-				return (*this)[index].second;
+			if (enabled.getEigenValue()[index])
+				return values.getEigenValue()[index];
 			else
 				throw std::logic_error("There is no valid value in the given index.");
 		}
@@ -55,10 +53,10 @@ namespace LightBulb
 		void set(int index, T value)
 		{
 			// Make sure the index is set to valid
-			if (!(*this)[index].first)
-				(*this)[index].first = true;
+			if (!enabled.getEigenValue()[index])
+				enabled.getEigenValueForEditing()[index] = true;
 			// Finally set the value
-			(*this)[index].second = value;
+			values.getEigenValueForEditing()[index] = value;
 		}
 
 		/**
@@ -68,33 +66,47 @@ namespace LightBulb
 		 */
 		bool exists(int index) const
 		{
-			return ((*this)[index].first);
+			return enabled.getEigenValue()[index];
 		}
 
-		/**
-		 * \brief Converts the values into a vector (invalid values get the value 0)
-		 * \return The vector of values.
-		 */
-		std::vector<T> getRealVector() const
+		void clear()
 		{
-			std::vector<T> realVector(dimension);
-			auto pair = (*this).begin();
-			for (auto value = realVector.begin(); value != realVector.end() && pair != (*this).end(); value++, pair++)
-			{
-				*value = pair->second;
-			}
-			return realVector;
+			enabled.getEigenValueForEditing().setZero();
+		}
+
+		Vector<T>& getValues()
+		{
+			return values;
+		}
+
+		Vector<char>& getEnabled()
+		{
+			return enabled;
+		}
+
+		const Vector<T>& getValues() const
+		{
+			return values;
+		}
+
+		const Vector<char>& getEnabled() const
+		{
+			return enabled;
 		}
 
 		/**
-		 * \brief Returns the dimension of this NeuralNetworkIO.
-		 * \return The dimension.
-		 */
+		* \brief Returns the dimension of this NeuralNetworkIO.
+		* \return The dimension.
+		*/
 		int getDimension() const
 		{
-			return dimension;
+			return values.getEigenValue().size();
 		}
 
+		bool operator==(const TeachingInput<T>& other) const
+		{
+			return values == other.values && enabled == other.enabled;
+		}
 	};
 }
 

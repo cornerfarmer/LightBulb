@@ -7,6 +7,7 @@
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentLearningRule.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
+#include "LightBulb/Teaching/TeachingInput.hpp"
 
 // Library Includes
 #include <vector>
@@ -114,24 +115,26 @@ namespace LightBulb
 	/**
 	 * \brief Describes a transition used in the reinforcement learning process.
 	 */
-	struct Transition
+	struct TransitionStorage
 	{
 		/**
 		 * \brief The initial state.
 		 */
-		Vector<> state;
+		Matrix<> states;
 		/**
 		 * \brief The taken action.
 		 */
-		Scalar<int> action;
+		Vector<int> actions;
+		Vector<char> isTerminalState;
 		/**
 		 * \brief The following state.
 		 */
-		Vector<> nextState;
+		Matrix<> nextStates;
 		/**
 		 * \brief The gained reward.
 		 */
-		Scalar<> reward;
+		Vector<> rewards;
+		void reset(int maxRecordNumber, int networkInputSize);
 	};
 
 	/**
@@ -152,6 +155,7 @@ namespace LightBulb
 		 * \brief Index of the transition slot that should be used for the next new transition.
 		 */
 		int nextTransitionIndex;
+		int transitionCounter;
 		/**
 		 * \brief The number of iterations until learning will start.
 		 */
@@ -171,7 +175,7 @@ namespace LightBulb
 		/**
 		 * \brief The transition memory store.
 		 */
-		std::vector<Transition> transitions;
+		TransitionStorage transitionStorage;
 		/**
 		 * \brief The gradient descent learning rule.
 		 */
@@ -181,6 +185,9 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 		Scalar<> reward;
+		Vector<> tmp;
+		std::vector<TeachingInput<>*> teachingLessonsInputs;
+		std::vector<Vector<>*> teachingLessonsPatterns;
 		/**
 		 * \brief The current total sum of all average q values in this iteration.
 		 */

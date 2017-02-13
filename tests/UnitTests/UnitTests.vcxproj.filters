@@ -171,6 +171,9 @@
     <ClCompile Include="UnitTestsPrec.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRateTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mocks\MockNetworkTopology.hpp">

@@ -142,6 +142,7 @@ namespace LightBulb
 		 * \param useStochasticActionDecision_ True, if actions should be taken randomly. 
 		 */
 		void setStochasticActionDecision(bool useStochasticActionDecision_);
+		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 

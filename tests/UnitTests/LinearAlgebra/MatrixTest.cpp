@@ -397,3 +397,9 @@ TEST(Matrix, performanceFermi)
 	std::cout << time << ";" << (end - begin) << std::endl;
 
 }
+
+TEST(Matrix, memoryTest)
+{
+	for (int i = 0; i < 100000; i++)
+		(new Vector<>(1000000))->getViennaclValue();
+}

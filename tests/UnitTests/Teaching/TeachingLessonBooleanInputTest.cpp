@@ -7,17 +7,17 @@ using namespace LightBulb;
 class TeachingLessonBooleanInputTest : public testing::Test {
 public:
 	TeachingLessonBooleanInput* teachingLesson;
-	TeachingInput<bool>* teachingInput;
-	std::vector<double> teachingPattern;
+	TeachingInput<char>* teachingInput;
+	Vector<>* teachingPattern;
 
 	void SetUp() {
-		teachingInput = new TeachingInput<bool>(3);
+		teachingInput = new TeachingInput<char>(3);
 		teachingInput->set(0, true);
 		teachingInput->set(1, false);
 		teachingInput->set(2, false);
-		teachingPattern.resize(2);
-		teachingPattern[0] = 9;
-		teachingPattern[1] = 8;
+		teachingPattern = new Vector<>(2);
+		teachingPattern->getEigenValueForEditing()[0] = 9;
+		teachingPattern->getEigenValueForEditing()[1] = 8;
 		teachingLesson = new TeachingLessonBooleanInput(teachingPattern, teachingInput);
 	}
 
@@ -34,7 +34,7 @@ TEST_F(TeachingLessonBooleanInputTest, getTeachingInput)
 	EXPECT_CALL(*activationFunction, getMaximum()).WillRepeatedly(testing::Return(42));
 	EXPECT_CALL(*activationFunction, getMinimum()).WillRepeatedly(testing::Return(-3));
 
-	TeachingInput<double> expected(teachingInput->getDimension());
+	TeachingInput<> expected(teachingInput->getDimension());
 	expected.set(0, 42);
 	expected.set(1, -3);
 	expected.set(2, -3);
@@ -43,5 +43,5 @@ TEST_F(TeachingLessonBooleanInputTest, getTeachingInput)
 
 TEST_F(TeachingLessonBooleanInputTest, getTeachingPattern)
 {
-	EXPECT_EQ(teachingPattern, teachingLesson->getTeachingPattern());
+	EXPECT_EQ(*teachingPattern, teachingLesson->getTeachingPattern());
 }

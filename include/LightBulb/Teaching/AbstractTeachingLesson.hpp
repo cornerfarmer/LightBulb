@@ -28,8 +28,6 @@ namespace LightBulb
 	{
 	private:
 		mutable Vector<> errorVector;
-		mutable Vector<> teachingPatternVector;
-		mutable Vector<> teachingInputVector;
 		mutable Scalar<> specificErrorScalar;
 		void calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const;
 		void calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const;
@@ -47,12 +45,12 @@ namespace LightBulb
 		 * \param activationFunction The activation function the target network uses in the output layer.
 		 * \return The teaching input.
 		 */
-		virtual const TeachingInput<double>& getTeachingInput(const AbstractActivationFunction& activationFunction) const = 0;
+		virtual const TeachingInput<>& getTeachingInput(const AbstractActivationFunction& activationFunction) const = 0;
 		/**
 		 * \brief Returns the teaching pattern.
 		 * \return The teaching pattern.
 		 */
-		virtual const std::vector<double>& getTeachingPattern() const = 0;
+		virtual const Vector<>& getTeachingPattern() const = 0;
 		/**
 		 * \brief Calculates the error vector, which contains the error (target - current) for every output neuron.
 		 * \param neuralNetwork The neural network to evaluate.
@@ -78,7 +76,6 @@ namespace LightBulb
 		 * \return The specific error.
 		 */
 		virtual double getSpecificError(AbstractNeuralNetwork &neuralNetwork, const AbstractActivationOrder &activationOrder, bool clipError = false) const;
-		const Vector<>& getTeachingPatternVector() const;
 	};
 }
 

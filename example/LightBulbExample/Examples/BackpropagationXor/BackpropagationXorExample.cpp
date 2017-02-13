@@ -43,11 +43,11 @@ AbstractLearningRule* BackpropagationXorExample::createLearningRate()
 	{
 		for (int l = 0; l < 2; l += 1)
 		{
-			std::vector<double> teachingPattern(2);
-			TeachingInput<bool>* teachingInput = new TeachingInput<bool>(1);
+			Vector<>* teachingPattern = new Vector<>(2);
+			TeachingInput<char>* teachingInput = new TeachingInput<char>(1);
 
-			teachingPattern[0] = i;
-			teachingPattern[1] = l;
+			teachingPattern->getEigenValueForEditing()[0] = i;
+			teachingPattern->getEigenValueForEditing()[1] = l;
 			(*teachingInput).set(0, (i != l));
 			teacher->addTeachingLesson(new TeachingLessonBooleanInput(teachingPattern, teachingInput));
 		}

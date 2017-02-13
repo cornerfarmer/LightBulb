@@ -5,20 +5,26 @@
 namespace LightBulb
 {
 
-	TeachingLessonLinearInput::TeachingLessonLinearInput(std::vector<double> teachingPattern_, TeachingInput<double>* teachingInput_)
+	TeachingLessonLinearInput::TeachingLessonLinearInput(Vector<>* teachingPattern_, TeachingInput<>* teachingInput_)
 	{
 		teachingInput.reset(teachingInput_);
-		teachingPattern = teachingPattern_;
+		teachingPattern.reset(teachingPattern_);
 	}
 
-	const TeachingInput<double>& TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
+	TeachingLessonLinearInput::TeachingLessonLinearInput(const std::shared_ptr<Vector<>>& teachingPattern_, const std::shared_ptr<TeachingInput<>>& teachingInput_)
+	{
+		teachingPattern = teachingPattern_;
+		teachingInput = teachingInput_;
+	}
+
+	const TeachingInput<>& TeachingLessonLinearInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
 	{
 		return *teachingInput.get();
 	}
 
-	const std::vector<double>& TeachingLessonLinearInput::getTeachingPattern() const
+	const Vector<>& TeachingLessonLinearInput::getTeachingPattern() const
 	{
-		return teachingPattern;
+		return *teachingPattern.get();
 	}
 
 }

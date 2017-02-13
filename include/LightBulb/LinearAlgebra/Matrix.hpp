@@ -47,6 +47,14 @@ namespace LightBulb
 			this->eigenValue = eigenMatrix;
 			this->eigenValueIsDirty = true;
 		}
+
+		Matrix(const Matrix& other)
+			: AbstractLinearAlgebraObject<Eigen::Matrix<DataType, -1, -1>, viennacl::matrix<DataType>>()
+		{
+			if (!((other.eigenValueIsDirty && other.eigenValue.size() == 0) || (other.viennaclValueIsDirty && other.viennaclValue.size1() == 0 && other.viennaclValue.size2() == 0) || (other.eigenValue.size() == 0 && other.viennaclValue.size1() == 0 && other.viennaclValue.size2() == 0)))
+				copyAllFrom(other);
+		}
+
 	};
 
 }

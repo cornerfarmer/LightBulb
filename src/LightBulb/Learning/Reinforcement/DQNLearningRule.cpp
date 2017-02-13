@@ -11,10 +11,22 @@
 #include "LightBulb/Teaching/Teacher.hpp"
 #include "LightBulb/Logging/AbstractLogger.hpp"
 #include "LightBulb/Learning/LearningState.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+
 // Library includes
 
 namespace LightBulb
 {
+
+	void TransitionStorage::reset(int maxRecordNumber, int networkInputSize)
+	{
+		states.getEigenValueForEditing().resize(networkInputSize, maxRecordNumber);
+		nextStates.getEigenValueForEditing().resize(networkInputSize, maxRecordNumber);
+		actions.getEigenValueForEditing().resize(maxRecordNumber);
+		isTerminalState.getEigenValueForEditing().resize(maxRecordNumber);
+		rewards.getEigenValueForEditing().resize(maxRecordNumber);
+	}
+
 	AbstractLearningResult* DQNLearningRule::getLearningResult()
 	{
 		EvolutionLearningResult* learningResult = new EvolutionLearningResult();
@@ -40,7 +52,8 @@ namespace LightBulb
 	}
 
 	DQNLearningRule::~DQNLearningRule() = default;
-	
+
+
 	void DQNLearningRule::initialize(DQNLearningRuleOptions* options)
 	{
 		teacher.reset(new Teacher());
@@ -48,103 +61,142 @@ namespace LightBulb
 		options->gradientDescentOptions.teacher = teacher.get();
 		options->gradientDescentOptions.neuralNetwork = &getOptions().environment->getNeuralNetwork();
 		options->gradientDescentOptions.logger = nullptr;
+		options->gradientDescentOptions.calculatorType = getOptions().calculatorType;
 		gradientDescent.reset(new GradientDescentLearningRule(options->gradientDescentOptions));
 
+		getOptions().environment->setCalculatorType(getOptions().calculatorType);
 		steadyNetwork.reset(getOptions().environment->getNeuralNetwork().clone());
 	}
 
 	void DQNLearningRule::initializeTry()
 	{
+		transitionStorage.reset(getOptions().replayMemorySize, getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
+		nextTransitionIndex = 0;
+		transitionCounter = 0;
+		tmp.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
+
 		getOptions().environment->setLearningState(*learningState.get());
 		getOptions().environment->initializeForLearning();
 		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().environment->getNeuralNetwork().getNetworkTopology());
-		nextTransitionIndex = 0;
+		
 		waitUntilLearningStarts = getOptions().replayStartSize;
 		getOptions().environment->setEpsilon(getOptions().initialExploration);
 		currentTotalReward = 0;
 	}
 	
 	void DQNLearningRule::storeTransition(const AbstractNetworkTopology* networkTopology, const Scalar<>& reward)
-	{
-		Transition transition;
-		transition.state = getOptions().environment->getLastInput();
+	{		
+		if (transitionCounter < getOptions().replayMemorySize || getOptions().replaceStoredTransitions)
+		{
+			int index = nextTransitionIndex++;
+			nextTransitionIndex %= getOptions().replayMemorySize;
+			if (transitionCounter < getOptions().replayMemorySize)
+				transitionCounter++;
 
-		if (!getOptions().environment->isTerminalState()) {
 			if (getOptions().calculatorType == CT_GPU)
-				transition.nextState.getViennaclValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
-			else
-				transition.nextState.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
-			getOptions().environment->getNNInput(transition.nextState);
-
-			transition.nextState.getEigenValueForEditing()(transition.nextState.getEigenValue().size() - 1) = 1;
-		}
-
-		transition.reward = reward;
-
-		if (getOptions().calculatorType == CT_GPU)
-		{
-			
-		}
-		else
-		{
-			for (int i = 0; i < getOptions().environment->getLastBooleanOutput().getEigenValue().size(); i++)
 			{
-				if (getOptions().environment->getLastBooleanOutput().getEigenValue()[i])
+				viennacl::vector<float> state = viennacl::column(transitionStorage.states.getViennaclValueForEditing(), index);
+				state = getOptions().environment->getLastInput().getViennaclValue();
+
+				transitionStorage.isTerminalState.getViennaclValueForEditing()[index] = getOptions().environment->isTerminalState();
+				if (!getOptions().environment->isTerminalState()) {
+					getOptions().environment->getNNInput(tmp);
+					viennacl::vector<float> nextState = viennacl::column(transitionStorage.nextStates.getViennaclValueForEditing(), index);
+					state = tmp.getViennaclValue();
+				}
+
+				transitionStorage.rewards.getViennaclValueForEditing()[index] = reward.getEigenValue();
+
+				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "determine_action", "dqn_learning_rule.cl");
+
+				viennacl::ocl::enqueue(kernel(
+					viennacl::traits::opencl_handle(getOptions().environment->getLastBooleanOutput().getViennaclValue()),
+					viennacl::traits::opencl_handle(transitionStorage.actions.getViennaclValueForEditing()),
+					cl_uint(viennacl::traits::size(getOptions().environment->getLastBooleanOutput().getViennaclValue())),
+					cl_uint(index)
+				));
+
+			}
+			else
+			{
+				transitionStorage.states.getEigenValueForEditing().col(index) = getOptions().environment->getLastInput().getEigenValue();
+
+				transitionStorage.isTerminalState.getEigenValueForEditing()[index] = getOptions().environment->isTerminalState();
+				if (!getOptions().environment->isTerminalState()) {
+					getOptions().environment->getNNInput(tmp);
+					transitionStorage.nextStates.getEigenValueForEditing().col(index) = tmp.getEigenValue();
+				}
+
+				transitionStorage.rewards.getEigenValueForEditing()(index) = reward.getEigenValue();
+			
+				for (int i = 0; i < getOptions().environment->getLastBooleanOutput().getEigenValue().size(); i++)
 				{
-					transition.action = i;
-					break;
+					if (getOptions().environment->getLastBooleanOutput().getEigenValue()[i])
+					{
+						transitionStorage.actions.getEigenValueForEditing()(index) = i;
+						break;
+					}
 				}
 			}
 		}
-
-		if (transitions.size() < getOptions().replayMemorySize)
-		{
-			transitions.push_back(transition);
-		}
-		else if (getOptions().replaceStoredTransitions)
-		{
-			transitions[nextTransitionIndex++] = transition;
-			nextTransitionIndex %= transitions.size();
-		}
-
 	}
 
 	void DQNLearningRule::doSupervisedLearning()
 	{
-		teacher->clearLessons();
-
-		for (int i = 0; i < std::min(static_cast<int>(transitions.size()), getOptions().minibatchSize); i++)
+		while (teachingLessonsInputs.size() < std::min(static_cast<int>(transitionCounter), getOptions().minibatchSize))
 		{
-			int r = randomGenerator->randInt(0, transitions.size() - 1);
+			teachingLessonsInputs.push_back(new TeachingInput<>(steadyNetwork->getNetworkTopology().getOutputSize()));
+			teachingLessonsPatterns.push_back(new Vector<>(steadyNetwork->getNetworkTopology().getInputSize()));
+			teacher->addTeachingLesson(new TeachingLessonLinearInput(teachingLessonsPatterns.back(), teachingLessonsInputs.back()));
+		}
+
+		for (int i = 0; i < std::min(static_cast<int>(transitionCounter), getOptions().minibatchSize); i++)
+		{
+			int r = randomGenerator->randInt(0, transitionCounter - 1);
 
 			if (getOptions().calculatorType == CT_GPU)
 			{
+				tmp.getViennaclValueForEditing() = viennacl::column(transitionStorage.nextStates.getViennaclValueForEditing(), r);
+				const Vector<>& output = steadyNetwork->calculateWithoutOutputCopy(tmp, TopologicalOrder());
+
+				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "set_teaching_input", "dqn_learning_rule.cl");
+				
+				viennacl::ocl::enqueue(kernel(
+					viennacl::traits::opencl_handle(output.getViennaclValue()),
+					viennacl::traits::opencl_handle(teachingLessonsInputs[i]->getValues().getViennaclValueForEditing()),
+					viennacl::traits::opencl_handle(teachingLessonsInputs[i]->getEnabled().getViennaclValueForEditing()),
+					viennacl::traits::opencl_handle(transitionStorage.rewards.getViennaclValue()),
+					viennacl::traits::opencl_handle(transitionStorage.actions.getViennaclValue()),
+					viennacl::traits::opencl_handle(transitionStorage.isTerminalState.getViennaclValue()),
+					cl_uint(viennacl::traits::size(output.getViennaclValue())),
+					cl_uint(r),
+					cl_float(getOptions().discountFactor)
+				));
+
+				teachingLessonsPatterns[i]->getViennaclValueForEditing() = viennacl::column(transitionStorage.states.getViennaclValue(), r);
 			}
 			else
 			{
-				double y = transitions[r].reward.getEigenValue();
+				double y = transitionStorage.rewards.getEigenValue()[r];
 
-				if (transitions[r].nextState.getEigenValue().size() > 0)
+				if (!transitionStorage.isTerminalState.getEigenValue()[r])
 				{
-					const Vector<>& output = steadyNetwork->calculateWithoutOutputCopy(transitions[r].nextState, TopologicalOrder());
+					tmp.getEigenValueForEditing() = transitionStorage.nextStates.getEigenValue().col(r);
+					const Vector<>& output = steadyNetwork->calculateWithoutOutputCopy(tmp, TopologicalOrder());
 
 					double q = output.getEigenValue().maxCoeff();
 					qAvgSum += q;
 					y += getOptions().discountFactor * q;
 				}
 
-				TeachingInput<double>* input = new TeachingInput<double>(steadyNetwork->getNetworkTopology().getOutputSize());
+				teachingLessonsInputs[i]->clear();
+				teachingLessonsInputs[i]->set(transitionStorage.actions.getEigenValue()[r], y);
 
-				input->set(transitions[r].action.getEigenValue(), y);
-				std::vector<double> state(transitions[r].state.getEigenValue().size());
-				for (int l = 0; l < state.size(); l++)
-					state[l] = transitions[r].state.getEigenValue()(l);
-
-				teacher->addTeachingLesson(new TeachingLessonLinearInput(state, input));
+				teachingLessonsPatterns[i]->getEigenValueForEditing() = transitionStorage.states.getEigenValue().col(r);
 			}
 
 		}
-
+		teacher->setCalculatorType(getOptions().calculatorType);
 		//auto gradient = checkGradient(&teacher, getOptions()->environment->getNeuralNetwork()->getNetworkTopology());
 
 		std::unique_ptr<SupervisedLearningResult> result(static_cast<SupervisedLearningResult*>(gradientDescent->start()));

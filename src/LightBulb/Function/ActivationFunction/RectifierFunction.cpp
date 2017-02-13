@@ -1,6 +1,7 @@
 // Includes
 #include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 // Library includes
 
@@ -19,8 +20,30 @@ namespace LightBulb
 
 	void RectifierFunction::execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const
 	{
-		activations[layerNr].getEigenValueForEditing().topRows(netInputs[layerNr].getEigenValue().size()) = netInputs[layerNr].getEigenValue().cwiseMax(0);
+		if (isCalculatorType(CT_GPU))
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("rectifier_function", "rectifier_assign", "rectifier_function.cl");
+			executeVectorAssignKernel(kernel, netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
+		}
+		else
+		{
+			activations[layerNr].getEigenValueForEditing().topRows(netInputs[layerNr].getEigenValue().size()) = netInputs[layerNr].getEigenValue().cwiseMax(0);
+		}
 	}
+
+	void RectifierFunction::executeDerivation(const Vector<>& input, Vector<>& derivation) const
+	{
+		if (isCalculatorType(CT_GPU))
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("rectifier_function", "rectifier_deriv_assign", "rectifier_function.cl");
+			executeVectorAssignKernel(kernel, input.getViennaclValue(), derivation.getViennaclValueForEditing());
+		}
+		else
+		{
+			AbstractActivationFunction::executeDerivation(input, derivation);
+		}
+	}
+
 
 	double RectifierFunction::executeDerivation(double input) const
 	{

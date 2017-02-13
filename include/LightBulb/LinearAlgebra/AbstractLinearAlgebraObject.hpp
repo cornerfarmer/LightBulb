@@ -46,12 +46,33 @@ namespace LightBulb
 
 		virtual void copyToViennaCl() const = 0;
 
+		void copyAllFrom(const AbstractLinearAlgebraObject<EigenType, ViennaCLType>& other)
+		{
+			if (other.eigenValueIsDirty)
+			{
+				eigenValue = other.eigenValue;
+				eigenValueIsDirty = true;
+				viennaclValueIsDirty = false;
+			}
+			else
+			{
+				viennaclValue = other.viennaclValue;
+				viennaclValueIsDirty = true;
+				eigenValueIsDirty = false;
+			}
+		}
 	public:
 		virtual ~AbstractLinearAlgebraObject() {};
 		AbstractLinearAlgebraObject()
 		{
 			eigenValueIsDirty = false;
 			viennaclValueIsDirty = false;
+		}
+
+
+		AbstractLinearAlgebraObject(const AbstractLinearAlgebraObject<EigenType, ViennaCLType>& other)
+		{
+			copyAllFrom(other);
 		}
 
 		const EigenType& getEigenValue() const

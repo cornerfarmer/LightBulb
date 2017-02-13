@@ -3,6 +3,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -63,12 +64,39 @@ namespace LightBulb
 
 	void RMSPropLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients)
 	{
-		prevGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().gradientMomentum * prevGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().gradientMomentum) * gradients.getEigenValue();
-		prevSquaredGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().squaredGradientMomentum) * gradients.getEigenValue().cwiseAbs2();
+		if (isCalculatorType(CT_GPU))
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("rms_prop_learning_rate", "rms_prop_learning_rate", "rms_prop_learning_rate.cl");
 
-		prevDeltaWeights[layerIndex - 1].getEigenValueForEditing() = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1].getEigenValue() - getOptions().learningRate * gradients.getEigenValue().cwiseQuotient(((prevSquaredGradient[layerIndex - 1].getEigenValue().array() - prevGradient[layerIndex - 1].getEigenValue().cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
+			viennacl::ocl::enqueue(kernel(
+				viennacl::traits::opencl_handle(prevSquaredGradient[layerIndex - 1].getViennaclValueForEditing()),
+				cl_uint(viennacl::traits::internal_size2(prevSquaredGradient[layerIndex - 1].getViennaclValue())),
+				viennacl::traits::opencl_handle(prevDeltaWeights[layerIndex - 1].getViennaclValueForEditing()),
+				cl_uint(viennacl::traits::internal_size2(prevDeltaWeights[layerIndex - 1].getViennaclValue())),
+				viennacl::traits::opencl_handle(prevGradient[layerIndex - 1].getViennaclValueForEditing()),
+				cl_uint(viennacl::traits::internal_size2(prevGradient[layerIndex - 1].getViennaclValue())),
+				viennacl::traits::opencl_handle(weights.getViennaclValueForEditing()),
+				cl_uint(viennacl::traits::internal_size2(weights.getViennaclValue())),
+				viennacl::traits::opencl_handle(gradients.getViennaclValue()),
+				cl_uint(viennacl::traits::internal_size2(gradients.getViennaclValue())),
+				cl_uint(viennacl::traits::size1(weights.getViennaclValue())),
+				cl_uint(viennacl::traits::size2(weights.getViennaclValue())),
+				cl_float(getOptions().gradientMomentum),
+				cl_float(getOptions().deltaWeightsMomentum),
+				cl_float(getOptions().squaredGradientMomentum),
+				cl_float(getOptions().learningRate),
+				cl_float(getOptions().minSquaredGradient)
+			));
+		}
+		else
+		{
+			prevGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().gradientMomentum * prevGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().gradientMomentum) * gradients.getEigenValue();
+			prevSquaredGradient[layerIndex - 1].getEigenValueForEditing() = getOptions().squaredGradientMomentum * prevSquaredGradient[layerIndex - 1].getEigenValue() + (1 - getOptions().squaredGradientMomentum) * gradients.getEigenValue().cwiseAbs2();
 
-		weights.getEigenValueForEditing() += prevDeltaWeights[layerIndex - 1].getEigenValue();
+			prevDeltaWeights[layerIndex - 1].getEigenValueForEditing() = getOptions().deltaWeightsMomentum * prevDeltaWeights[layerIndex - 1].getEigenValue() - getOptions().learningRate * gradients.getEigenValue().cwiseQuotient(((prevSquaredGradient[layerIndex - 1].getEigenValue().array() - prevGradient[layerIndex - 1].getEigenValue().cwiseAbs2().array() + getOptions().minSquaredGradient).cwiseSqrt()).matrix());
+
+			weights.getEigenValueForEditing() += prevDeltaWeights[layerIndex - 1].getEigenValue();
+		}
 	}
 
 

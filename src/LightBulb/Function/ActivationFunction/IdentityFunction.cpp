@@ -3,6 +3,7 @@
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 // Library includes
 #include <stdexcept>
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 namespace LightBulb
 {
@@ -15,6 +16,21 @@ namespace LightBulb
 	{
 		activations[layerNr] = netInputs[layerNr];
 	}
+
+
+	void IdentityFunction::executeDerivation(const Vector<>& input, Vector<>& derivation) const
+	{
+		if (isCalculatorType(CT_GPU))
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("identity_function", "identity_deriv_assign", "identity_function.cl");
+			executeVectorAssignKernel(kernel, input.getViennaclValue(), derivation.getViennaclValueForEditing());
+		}
+		else
+		{
+			AbstractActivationFunction::executeDerivation(input, derivation);
+		}
+	}
+
 
 	double IdentityFunction::executeDerivation(double input) const
 	{

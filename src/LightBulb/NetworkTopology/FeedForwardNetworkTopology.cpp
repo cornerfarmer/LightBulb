@@ -331,6 +331,7 @@ namespace LightBulb
 	{
 		FeedForwardNetworkTopology* clone = new FeedForwardNetworkTopology(*options);
 		clone->copyWeightsFrom(*this);
+		clone->setCalculatorType(calculatorType);
 		return clone;
 	}
 

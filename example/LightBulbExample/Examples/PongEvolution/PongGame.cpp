@@ -6,16 +6,23 @@
 PongGame::PongGame()
 {
 	watchMode = false;
-	properties.minBallSpeed = 2;
-	properties.width = 210;
-	properties.height = 160;
-	properties.ballRad = 5;
-	properties.paddleSpeed = 5;
-	properties.paddleHeight = 30;
-	properties.paddleWidth = 10;
-	properties.maxTime = 1000; // 1000
-	properties.speedIncreaseFac = 1; // 1.2
-	properties.maxBallSpeed = 3;// properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
+	properties.minBallSpeed.getEigenValueForEditing() = 2;
+	properties.width.getEigenValueForEditing() = 210;
+	properties.height.getEigenValueForEditing() = 160;
+	properties.ballRad.getEigenValueForEditing() = 5;
+	properties.paddleSpeed.getEigenValueForEditing() = 5;
+	properties.paddleHeight.getEigenValueForEditing() = 30;
+	properties.paddleWidth.getEigenValueForEditing() = 10;
+	properties.maxTime.getEigenValueForEditing() = 1000; // 1000
+	properties.speedIncreaseFac.getEigenValueForEditing() = 1; // 1.2
+	properties.maxBallSpeed.getEigenValueForEditing() = 3;// properties.width / ((double)(properties.height - properties.paddleHeight) / properties.paddleSpeed);
+
+	state.ballPosX.getEigenValueForEditing() = 0;
+	state.ballPosY.getEigenValueForEditing() = 0;
+	state.ballVelX.getEigenValueForEditing() = 0;
+	state.ballVelY.getEigenValueForEditing() = 0;
+	state.paddle1Pos.getEigenValueForEditing() = 0;
+	state.paddle2Pos.getEigenValueForEditing() = 0;
 }
 
 
@@ -24,27 +31,27 @@ void PongGame::movePaddle(int dir)
 	if (currentPlayer == 1)
 	{
 		if (dir == 1)
-			state.paddle1Pos += properties.paddleSpeed;
+			state.paddle1Pos.getEigenValueForEditing() += properties.paddleSpeed.getEigenValue();
 		else if(dir == -1)
-			state.paddle1Pos -= properties.paddleSpeed;
-		state.paddle1Pos = std::max(0.0, std::min(static_cast<double>(properties.height - properties.paddleHeight), state.paddle1Pos));
+			state.paddle1Pos.getEigenValueForEditing() -= properties.paddleSpeed.getEigenValue();
+		state.paddle1Pos.getEigenValueForEditing() = std::max(0.0f, std::min(static_cast<float>(properties.height.getEigenValue() - properties.paddleHeight.getEigenValue()), state.paddle1Pos.getEigenValue()));
 	}
 	else
 	{
 		if (dir == 1)
-			state.paddle2Pos += properties.paddleSpeed;
+			state.paddle2Pos.getEigenValueForEditing() += properties.paddleSpeed.getEigenValue();
 		else if (dir == -1)
-			state.paddle2Pos -= properties.paddleSpeed;
-		state.paddle2Pos = std::max(0.0, std::min(static_cast<double>(properties.height - properties.paddleHeight), state.paddle2Pos));
+			state.paddle2Pos.getEigenValueForEditing() -= properties.paddleSpeed.getEigenValue();
+		state.paddle2Pos.getEigenValueForEditing() = std::max(0.0f, std::min(static_cast<float>(properties.height.getEigenValue() - properties.paddleHeight.getEigenValue()), state.paddle2Pos.getEigenValue()));
 	}
 }
 
-PongGameState PongGame::getState()
+PongGameState& PongGame::getState()
 {
 	return state;
 }
 
-PongGameProperties PongGame::getProperties()
+PongGameProperties& PongGame::getProperties()
 {
 	return properties;
 }
@@ -52,7 +59,7 @@ PongGameProperties PongGame::getProperties()
 
 void PongGame::executeCompareAI()
 {
-	if (state.ballPosY > state.paddle2Pos + properties.paddleHeight / 2)
+	if (state.ballPosY.getEigenValue() > state.paddle2Pos.getEigenValue() + properties.paddleHeight.getEigenValue() / 2)
 		movePaddle(1);
 	else
 		movePaddle(-1);
@@ -60,9 +67,9 @@ void PongGame::executeCompareAI()
 
 int PongGame::whoHasWon()
 {
-	if (state.ballPosX + properties.ballRad >= properties.width)
+	if (state.ballPosX.getEigenValue() + properties.ballRad.getEigenValue() >= properties.width.getEigenValue())
 		return -1;
-	else if (state.ballPosX <= 0)
+	else if (state.ballPosX.getEigenValue() <= 0)
 		return 1;
 	else
 		return 0;
@@ -70,40 +77,35 @@ int PongGame::whoHasWon()
 
 void PongGame::advanceBall(double fac)
 {
-	if (fac == 1)
-		state.ballCollidedWithPaddle = false;
-
-	double nextBallPosX = state.ballPosX + state.ballVelX * fac;
-	double nextBallPosY = state.ballPosY + state.ballVelY * fac;
+	float nextBallPosX = state.ballPosX.getEigenValue() + state.ballVelX.getEigenValue() * fac;
+	float nextBallPosY = state.ballPosY.getEigenValue() + state.ballVelY.getEigenValue() * fac;
 
 	double colTimeX = 0, colTimeY = 0;
 
 	if (nextBallPosY <= 0)
-		colTimeY = state.ballPosY / -state.ballVelY;
+		colTimeY = state.ballPosY.getEigenValue() / -state.ballVelY.getEigenValue();
 
-	if (nextBallPosY + properties.ballRad >= properties.height)
-		colTimeY = (properties.height - (state.ballPosY + properties.ballRad)) / state.ballVelY;
+	if (nextBallPosY + properties.ballRad.getEigenValue() >= properties.height.getEigenValue())
+		colTimeY = (properties.height.getEigenValue() - (state.ballPosY.getEigenValue() + properties.ballRad.getEigenValue())) / state.ballVelY.getEigenValue();
 
 	if (nextBallPosX <= 0)
-		colTimeX = state.ballPosX / -state.ballVelX;
+		colTimeX = state.ballPosX.getEigenValue() / -state.ballVelX.getEigenValue();
 
-	if (nextBallPosX + properties.ballRad >= properties.width)
-		colTimeX = (properties.width - (state.ballPosX + properties.ballRad)) / state.ballVelX;
+	if (nextBallPosX + properties.ballRad.getEigenValue() >= properties.width.getEigenValue())
+		colTimeX = (properties.width.getEigenValue() - (state.ballPosX.getEigenValue() + properties.ballRad.getEigenValue())) / state.ballVelX.getEigenValue();
 
 
 	if (colTimeX > 0 && (colTimeY == 0 || colTimeX <= colTimeY))
 	{
 		advanceBallWithoutCollision(colTimeX);
-		if ((state.ballVelX > 0 && state.ballPosY + properties.ballRad >= state.paddle1Pos && state.ballPosY <= state.paddle1Pos + properties.paddleHeight) ||
-			(state.ballVelX < 0 && state.ballPosY + properties.ballRad >= state.paddle2Pos && state.ballPosY <= state.paddle2Pos + properties.paddleHeight))
+		if ((state.ballVelX.getEigenValue() > 0 && state.ballPosY.getEigenValue() + properties.ballRad.getEigenValue() >= state.paddle1Pos.getEigenValue() && state.ballPosY.getEigenValue() <= state.paddle1Pos.getEigenValue() + properties.paddleHeight.getEigenValue()) ||
+			(state.ballVelX.getEigenValue() < 0 && state.ballPosY.getEigenValue() + properties.ballRad.getEigenValue() >= state.paddle2Pos.getEigenValue() && state.ballPosY.getEigenValue() <= state.paddle2Pos.getEigenValue() + properties.paddleHeight.getEigenValue()))
 		{
-			if (state.ballVelX > 0)
-				state.ballCollidedWithPaddle = true;
-			state.ballVelX *= -1;
+			state.ballVelX.getEigenValueForEditing() *= -1;
 			advanceBall(fac - colTimeX);
-			if (std::abs(state.ballVelX * properties.speedIncreaseFac) < properties.maxBallSpeed && std::abs(state.ballVelY * properties.speedIncreaseFac) < properties.maxBallSpeed) {
-				state.ballVelX *= properties.speedIncreaseFac;
-				state.ballVelY *= properties.speedIncreaseFac;
+			if (std::abs(state.ballVelX.getEigenValue() * properties.speedIncreaseFac.getEigenValue()) < properties.maxBallSpeed.getEigenValue() && std::abs(state.ballVelY.getEigenValue() * properties.speedIncreaseFac.getEigenValue()) < properties.maxBallSpeed.getEigenValue()) {
+				state.ballVelX.getEigenValueForEditing() *= properties.speedIncreaseFac.getEigenValue();
+				state.ballVelY.getEigenValueForEditing() *= properties.speedIncreaseFac.getEigenValue();
 			}
 		}
 		else
@@ -114,7 +116,7 @@ void PongGame::advanceBall(double fac)
 	else if (colTimeY > 0)
 	{
 		advanceBallWithoutCollision(colTimeY);
-		state.ballVelY *= -1;
+		state.ballVelY.getEigenValueForEditing() *= -1;
 		advanceBall(fac - colTimeY);
 	}
 	else
@@ -123,8 +125,8 @@ void PongGame::advanceBall(double fac)
 
 void PongGame::advanceBallWithoutCollision(double fac)
 {
-	state.ballPosX += state.ballVelX * fac;
-	state.ballPosY += state.ballVelY * fac;
+	state.ballPosX.getEigenValueForEditing() += state.ballVelX.getEigenValue() * fac;
+	state.ballPosY.getEigenValueForEditing() += state.ballVelY.getEigenValue() * fac;
 }
 
 void PongGame::setPlayer(int i)
@@ -139,19 +141,19 @@ int PongGame::getPlayer()
 
 void PongGame::reset()
 {
-	state.ballPosX = properties.width / 2;
-	state.ballPosY = properties.height / 2;
+	state.ballPosX.getEigenValueForEditing() = properties.width.getEigenValue() / 2;
+	state.ballPosY.getEigenValueForEditing() = properties.height.getEigenValue() / 2;
 	
-	state.ballVelX = randomGenerator->randDouble() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (randomGenerator->randDouble() > 0.5)
-		state.ballVelX *= -1;
-	state.ballVelY = randomGenerator->randDouble() * (properties.maxBallSpeed - properties.minBallSpeed) / 8.0 + properties.minBallSpeed;
-	if (randomGenerator->randDouble() > 0.5)
-		state.ballVelY *= -1;
+	state.ballVelX.getEigenValueForEditing() = randomGenerator->randDouble() * (properties.maxBallSpeed.getEigenValue() - properties.minBallSpeed.getEigenValue()) / 8.0f + properties.minBallSpeed.getEigenValue();
+	if (randomGenerator->randDouble() > 0.5f)
+		state.ballVelX.getEigenValueForEditing() *= -1;
+	state.ballVelY.getEigenValueForEditing() = randomGenerator->randDouble() * (properties.maxBallSpeed.getEigenValue() - properties.minBallSpeed.getEigenValue()) / 8.0f + properties.minBallSpeed.getEigenValue();
+	if (randomGenerator->randDouble() > 0.5f)
+		state.ballVelY.getEigenValueForEditing() *= -1;
 
 	//state.ballVelX = 3;
 	//state.ballVelY = 3;
 
-	state.paddle1Pos = properties.height / 2;
-	state.paddle2Pos = properties.height / 2;
+	state.paddle1Pos.getEigenValueForEditing() = properties.height.getEigenValue() / 2;
+	state.paddle2Pos.getEigenValueForEditing() = properties.height.getEigenValue() / 2;
 }

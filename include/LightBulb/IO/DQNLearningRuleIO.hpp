@@ -16,7 +16,7 @@ namespace LightBulb
 	* \param transition The Transition to serialize.
 	*/
 	template <class Archive>
-	extern void serialize(Archive& archive, Transition& transition);
+	extern void serialize(Archive& archive, TransitionStorage& transition);
 
 	/**
 	* \brief Serializes a DQNLearningRule.

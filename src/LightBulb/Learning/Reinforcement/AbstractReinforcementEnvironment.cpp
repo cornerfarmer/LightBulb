@@ -4,6 +4,7 @@
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 
 //Library include
 
@@ -22,7 +23,7 @@ namespace LightBulb
 		if (!epsilonGreedly) {
 			if (isCalculatorType(CT_GPU))
 			{
-
+				throw std::logic_error("Not implemented");
 			}
 			else
 			{
@@ -37,19 +38,39 @@ namespace LightBulb
 		}
 		else
 		{
-			if (isCalculatorType(CT_GPU))
+			if (randomGenerator->randDouble() < epsilon)
 			{
-				
-			}
-			else
-			{
-				lastBooleanOutput.getEigenValueForEditing().setZero();
-				if (randomGenerator->randDouble() < epsilon)
+				if (isCalculatorType(CT_GPU))
 				{
-					lastBooleanOutput.getEigenValueForEditing()[randomGenerator->randInt(0, lastBooleanOutput.getEigenValue().size() - 1)] = true;
+					static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_rand", "reinforcement_environment.cl");
+
+					viennacl::ocl::enqueue(kernel(
+						viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
+						cl_uint(viennacl::traits::size(lastBooleanOutput.getViennaclValue())),
+						cl_uint(randomGenerator->randInt(0, lastBooleanOutput.getViennaclValue().size() - 1))
+					));
 				}
 				else
 				{
+					lastBooleanOutput.getEigenValueForEditing().setZero();
+					lastBooleanOutput.getEigenValueForEditing()[randomGenerator->randInt(0, lastBooleanOutput.getEigenValue().size() - 1)] = true;
+				}
+			}
+			else
+			{
+				if (isCalculatorType(CT_GPU))
+				{
+					static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_best", "reinforcement_environment.cl");
+
+					viennacl::ocl::enqueue(kernel(
+						viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
+						viennacl::traits::opencl_handle(lastOutput.getViennaclValue()),
+						cl_uint(viennacl::traits::size(lastBooleanOutput.getViennaclValue()))
+					));
+				}
+				else
+				{
+					lastBooleanOutput.getEigenValueForEditing().setZero();
 					int bestOutput = 0;
 					for (int i = 1; i < lastOutput.getEigenValue().size(); i++)
 					{
@@ -143,5 +164,11 @@ namespace LightBulb
 	void AbstractReinforcementEnvironment::setStochasticActionDecision(bool useStochasticActionDecision_)
 	{
 		useStochasticActionDecision = useStochasticActionDecision_;
+	}
+
+	void AbstractReinforcementEnvironment::setCalculatorType(const CalculatorType& calculatorType)
+	{
+		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
+		neuralNetwork->getNetworkTopology().setCalculatorType(calculatorType);
 	}
 }

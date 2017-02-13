@@ -59,11 +59,11 @@ AbstractEvolutionEnvironment* TeachedEvolutionExample::createEnvironment()
 	Teacher* teacher = new Teacher();
 	for (int i = 0; i<8; i += 1)
 	{
-		std::vector<double> teachingPattern(8);
-		TeachingInput<bool>* teachingInput = new TeachingInput<bool>(8);
+		Vector<>* teachingPattern = new Vector<>(8);
+		TeachingInput<char>* teachingInput = new TeachingInput<char>(8);
 		for (int l = 0; l<8; l += 1)
 		{
-			teachingPattern[l] = i == l;
+			teachingPattern->getEigenValueForEditing()[l] = i == l;
 			(*teachingInput).set(l, i == l);
 		}
 

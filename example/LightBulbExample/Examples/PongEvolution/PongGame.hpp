@@ -13,27 +13,26 @@
 
 struct PongGameState
 {
-	double ballVelX;
-	double ballVelY; 
-	double ballPosX; 
-	double ballPosY;
-	double paddle1Pos;
-	double paddle2Pos;
-	bool ballCollidedWithPaddle;
+	LightBulb::Scalar<> ballVelX;
+	LightBulb::Scalar<> ballVelY;
+	LightBulb::Scalar<> ballPosX;
+	LightBulb::Scalar<> ballPosY;
+	LightBulb::Scalar<> paddle1Pos;
+	LightBulb::Scalar<> paddle2Pos;
 };
 
 struct PongGameProperties
 {
-	int width;
-	int height; 
-	int ballRad;
-	int paddleHeight;
-	int paddleWidth; 
-	int paddleSpeed; 
-	int maxBallSpeed;
-	int minBallSpeed;
-	int maxTime;
-	double speedIncreaseFac;
+	LightBulb::Scalar<int> width;
+	LightBulb::Scalar<int> height;
+	LightBulb::Scalar<int> ballRad;
+	LightBulb::Scalar<int> paddleHeight;
+	LightBulb::Scalar<int> paddleWidth;
+	LightBulb::Scalar<int> paddleSpeed;
+	LightBulb::Scalar<int> maxBallSpeed;
+	LightBulb::Scalar<int> minBallSpeed;
+	LightBulb::Scalar<int> maxTime;
+	LightBulb::Scalar<> speedIncreaseFac;
 };
 
 class PongGame : public LightBulb::AbstractRandomGeneratorUser
@@ -50,8 +49,8 @@ public:
 	PongGame();
 	void executeCompareAI();
 	void movePaddle(int dir);
-	PongGameState getState();
-	PongGameProperties getProperties();
+	PongGameState& getState();
+	PongGameProperties& getProperties();
 	void reset();
 	int whoHasWon();
 	void advanceBall(double fac);

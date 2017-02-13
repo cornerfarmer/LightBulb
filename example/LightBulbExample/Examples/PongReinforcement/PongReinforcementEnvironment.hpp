@@ -20,7 +20,7 @@ class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvi
 	friend void serialize(Archive& archive, PongReinforcementEnvironment& environment);
 	friend struct cereal::LoadAndConstruct<PongReinforcementEnvironment>;
 private:
-	int time;
+	LightBulb::Scalar<int> time;
 protected:
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(LightBulb::Vector<char>& output) override;

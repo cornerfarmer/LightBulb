@@ -25,7 +25,7 @@ namespace LightBulb
 			this->viennaclValue = this->eigenValue;
 		}
 	public:
-		Scalar(DataType initialValue = 0)
+		explicit Scalar(DataType initialValue = 0)
 		{
 			this->eigenValue = initialValue;
 			this->eigenValueIsDirty = true;

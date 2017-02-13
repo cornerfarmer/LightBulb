@@ -7,14 +7,14 @@
 
 namespace LightBulb
 {
-	TeachingLessonBooleanInput::TeachingLessonBooleanInput(std::vector<double> teachingPattern_, TeachingInput<bool>* teachingInput_)
+	TeachingLessonBooleanInput::TeachingLessonBooleanInput(Vector<>* teachingPattern_, TeachingInput<char>* teachingInput_)
 	{
 		teachingInput.reset(teachingInput_);
-		teachingPattern = teachingPattern_;
-		teachingInputLinear.reset(new TeachingInput<double>(teachingInput_->getDimension()));
+		teachingPattern.reset(teachingPattern_);
+		teachingInputLinear.reset(new TeachingInput<>(teachingInput_->getValues().getEigenValue().size()));
 	}
 
-	const TeachingInput<double>& TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
+	const TeachingInput<>& TeachingLessonBooleanInput::getTeachingInput(const AbstractActivationFunction& activationFunction) const
 	{
 		// Check if the neuralNetwork has a boolean acitvationFunction in all outputNeurons
 		if (!activationFunction.hasAMaxAndMinimum())
@@ -22,7 +22,7 @@ namespace LightBulb
 
 
 		// Go through all  teaching input values
-		for (unsigned int i = 0; i < teachingInput->getDimension(); i++)
+		for (unsigned int i = 0; i < teachingInput->getValues().getEigenValue().size(); i++)
 		{
 			if (teachingInput->exists(i))
 			{
@@ -38,14 +38,14 @@ namespace LightBulb
 		return *teachingInputLinear.get();
 	}
 
-	TeachingInput<bool>& TeachingLessonBooleanInput::getBooleanTeachingInput() const
+	TeachingInput<char>& TeachingLessonBooleanInput::getBooleanTeachingInput() const
 	{
 		return *teachingInput.get();
 	}
 
-	const std::vector<double>& TeachingLessonBooleanInput::getTeachingPattern() const
+	const Vector<>& TeachingLessonBooleanInput::getTeachingPattern() const
 	{
-		return teachingPattern;
+		return *teachingPattern.get();
 	}
 	
 }

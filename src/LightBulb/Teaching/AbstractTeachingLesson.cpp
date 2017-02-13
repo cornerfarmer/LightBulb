@@ -11,23 +11,7 @@ namespace LightBulb
 {
 	const Vector<>& AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
-		if (isCalculatorType(CT_GPU))
-		{
-			if (teachingPatternVector.getViennaclValue().size() != getTeachingPattern().size()) {
-				teachingPatternVector.getViennaclValueForEditing().resize(getTeachingPattern().size());
-				viennacl::copy(getTeachingPattern().begin(), getTeachingPattern().end(), teachingPatternVector.getViennaclValueForEditing().begin());
-			}
-		}
-		else
-		{
-			if (teachingPatternVector.getEigenValue().size() != getTeachingPattern().size()) {
-				teachingPatternVector.getEigenValueForEditing().resize(getTeachingPattern().size());
-				for (int i = 0; i < getTeachingPattern().size(); i++)
-					teachingPatternVector.getEigenValueForEditing()(i) = getTeachingPattern()[i];
-			}
-		}
-
-		return neuralNetwork.calculateWithoutOutputCopy(teachingPatternVector, activationOrder);
+		return neuralNetwork.calculateWithoutOutputCopy(getTeachingPattern(), activationOrder);
 	}
 
 	const Vector<>& AbstractTeachingLesson::getErrorVector(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder, bool clipError) const
@@ -43,7 +27,7 @@ namespace LightBulb
 	void AbstractTeachingLesson::getErrorVectorFromOutputVector(const Vector<>& outputVector, AbstractNeuralNetwork& neuralNetwork, bool clipError) const
 	{
 		// Get the teachingInput
-		const TeachingInput<double>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
+		const TeachingInput<>& teachingInput = getTeachingInput(neuralNetwork.getNetworkTopology().getOutputNeuronDescription().getActivationFunction());
 
 		// Create the errorVector
 		//std::unique_ptr<Vector> errorVector(new Vector(teachingInput.getDimension()));
@@ -51,21 +35,16 @@ namespace LightBulb
 		// Calculate the error values (expected value - real value)
 		if (isCalculatorType(CT_GPU))
 		{
-			if (teachingInputVector.getViennaclValue().size() != teachingInput.size()) {
-				teachingInputVector.getViennaclValueForEditing().resize(teachingInput.size());
-				errorVector.getViennaclValueForEditing().resize(teachingInput.size());
-
-				auto teachingInputRealVector = teachingInput.getRealVector();
-				viennacl::copy(teachingInputRealVector.begin(), teachingInputRealVector.end(), teachingInputVector.getViennaclValueForEditing().begin());
+			if (errorVector.getViennaclValue().size() != teachingInput.getValues().getViennaclValue().size()) {
+				errorVector.getViennaclValueForEditing().resize(teachingInput.getValues().getViennaclValue().size());
 			}
-
 			
-			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInputVector.getViennaclValue(), outputVector.getViennaclValue());
+			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInput.getValues().getViennaclValue(), outputVector.getViennaclValue());
 		}
 		else
 		{
-			if (errorVector.getEigenValue().size() != teachingInput.size()) {
-				errorVector.getEigenValueForEditing().resize(teachingInput.size());
+			if (errorVector.getEigenValue().size() != teachingInput.getValues().getEigenValue().size()) {
+				errorVector.getEigenValueForEditing().resize(teachingInput.getValues().getEigenValue().size());
 			}
 
 			std::vector<double> output(neuralNetwork.getNetworkTopology().getOutputSize());
@@ -132,11 +111,6 @@ namespace LightBulb
 		}
 
 		return specificError;
-	}
-
-	const Vector<>& AbstractTeachingLesson::getTeachingPatternVector() const
-	{
-		return teachingPatternVector;
 	}
 
 

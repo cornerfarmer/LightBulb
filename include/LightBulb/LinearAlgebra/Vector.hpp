@@ -33,7 +33,6 @@ namespace LightBulb
 			if (this->eigenValue.size() != 0)
 				viennacl::copy(this->eigenValue, this->viennaclValue);
 		}
-
 	public:
 		Vector(int rows = 0)
 		{
@@ -42,6 +41,15 @@ namespace LightBulb
 				this->eigenValueIsDirty = true;
 			}
 		}
+
+
+		Vector(const Vector& other)
+			: AbstractLinearAlgebraObject<Eigen::Matrix<DataType, -1, 1>, viennacl::vector<DataType>>()
+		{
+			if (!((other.eigenValueIsDirty && other.eigenValue.size() == 0) || (other.viennaclValueIsDirty && other.viennaclValue.empty()) || (other.eigenValue.size() == 0 && other.viennaclValue.empty())))
+				copyAllFrom(other);
+		}
+
 
 		Vector(const Eigen::Matrix<DataType, -1, 1>& eigenVector)
 		{

@@ -35,6 +35,7 @@ namespace LightBulb
 		double getMinimum() const override;
 		bool hasAMaxAndMinimum() const override;
 		void execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const override;
+		void executeDerivation(const Vector<>& input, Vector<>& derivation) const;
 	};
 }
 
