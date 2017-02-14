@@ -141,12 +141,12 @@ void Pong::resetEnvironment()
 void Pong::getNNInput(LightBulb::Vector<>& input)
 {
 	input.getEigenValueForEditing()[0] = game.getState().ballPosX.getEigenValue() / game.getProperties().width.getEigenValue();
-	if (game.getPlayer() == -1)
+	if (game.getPlayer().getEigenValue() == -1)
 		input.getEigenValueForEditing()[0] = 1 - input.getEigenValue()[0];
 	input.getEigenValueForEditing()[1] = game.getState().ballPosY.getEigenValue() / game.getProperties().height.getEigenValue();
-	input.getEigenValueForEditing()[2] = game.getPlayer() * game.getState().ballVelX.getEigenValue() / game.getProperties().maxBallSpeed.getEigenValue();
+	input.getEigenValueForEditing()[2] = game.getPlayer().getEigenValue() * game.getState().ballVelX.getEigenValue() / game.getProperties().maxBallSpeed.getEigenValue();
 	input.getEigenValueForEditing()[3] = game.getState().ballVelY.getEigenValue() / game.getProperties().maxBallSpeed.getEigenValue();
-	if (game.getPlayer() == 1)
+	if (game.getPlayer().getEigenValue() == 1)
 	{
 		input.getEigenValueForEditing()[4] = game.getState().paddle1Pos.getEigenValue() / (game.getProperties().height.getEigenValue() - game.getProperties().paddleHeight.getEigenValue());
 		input.getEigenValueForEditing()[5] = game.getState().paddle2Pos.getEigenValue() / (game.getProperties().height.getEigenValue() - game.getProperties().paddleHeight.getEigenValue());

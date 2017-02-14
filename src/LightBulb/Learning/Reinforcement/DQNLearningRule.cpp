@@ -95,17 +95,16 @@ namespace LightBulb
 
 			if (getOptions().calculatorType == CT_GPU)
 			{
-				viennacl::vector<float> state = viennacl::column(transitionStorage.states.getViennaclValueForEditing(), index);
-				state = getOptions().environment->getLastInput().getViennaclValue();
+				copyVectorToMatrixCol(transitionStorage.states.getViennaclValueForEditing(), getOptions().environment->getLastInput().getViennaclValue(), index);
 
-				transitionStorage.isTerminalState.getViennaclValueForEditing()[index] = getOptions().environment->isTerminalState();
+				//transitionStorage.isTerminalState.getViennaclValueForEditing()[index] = getOptions().environment->isTerminalState();
+
 				if (!getOptions().environment->isTerminalState()) {
 					getOptions().environment->getNNInput(tmp);
-					viennacl::vector<float> nextState = viennacl::column(transitionStorage.nextStates.getViennaclValueForEditing(), index);
-					state = tmp.getViennaclValue();
+					copyVectorToMatrixCol(transitionStorage.nextStates.getViennaclValueForEditing(), tmp.getViennaclValue(), index);
 				}
 
-				transitionStorage.rewards.getViennaclValueForEditing()[index] = reward.getEigenValue();
+				copyScalarToVectorElement(transitionStorage.rewards.getViennaclValueForEditing(), reward.getEigenValue(), index);
 
 				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "determine_action", "dqn_learning_rule.cl");
 
@@ -201,6 +200,7 @@ namespace LightBulb
 
 		std::unique_ptr<SupervisedLearningResult> result(static_cast<SupervisedLearningResult*>(gradientDescent->start()));
 		currentTotalError += result->totalError;
+		viennacl::backend::finish();
 	}
 
 	std::string DQNLearningRule::getName()
@@ -292,7 +292,7 @@ namespace LightBulb
 
 		double e = getOptions().environment->getEpsilon();
 		getOptions().environment->setEpsilon(0);
-		getOptions().environment->rate();
+		//getOptions().environment->rate();
 		getOptions().environment->setEpsilon(e);
 
 	}

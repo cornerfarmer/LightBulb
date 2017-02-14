@@ -43,7 +43,7 @@ class PongGame : public LightBulb::AbstractRandomGeneratorUser
 private:
 	PongGameState state;
 	PongGameProperties properties;
-	int currentPlayer;
+	LightBulb::Scalar<int> currentPlayer;
 	bool watchMode;
 public:
 	PongGame();
@@ -56,7 +56,7 @@ public:
 	void advanceBall(double fac);
 	void advanceBallWithoutCollision(double fac);
 	void setPlayer(int i);
-	int getPlayer();
+	LightBulb::Scalar<int>& getPlayer();
 };
 
 #include "IO/PongGameIO.hpp"

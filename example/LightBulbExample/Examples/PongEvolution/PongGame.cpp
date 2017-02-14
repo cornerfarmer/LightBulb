@@ -28,7 +28,7 @@ PongGame::PongGame()
 
 void PongGame::movePaddle(int dir)
 {
-	if (currentPlayer == 1)
+	if (currentPlayer.getEigenValue() == 1)
 	{
 		if (dir == 1)
 			state.paddle1Pos.getEigenValueForEditing() += properties.paddleSpeed.getEigenValue();
@@ -131,10 +131,10 @@ void PongGame::advanceBallWithoutCollision(double fac)
 
 void PongGame::setPlayer(int i)
 {
-	currentPlayer = i;
+	currentPlayer.getEigenValueForEditing() = i;
 }
 
-int PongGame::getPlayer()
+LightBulb::Scalar<int>& PongGame::getPlayer()
 {
 	return currentPlayer;
 }

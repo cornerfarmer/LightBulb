@@ -26,20 +26,24 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 	}
 
 	doNNCalculation();
-	game.setPlayer(-1);
-	executeCompareAI();
-	game.advanceBall(1);
+	if (isCalculatorType(CT_CPU))
+	{
+		game.setPlayer(-1);
+		executeCompareAI();
+		game.advanceBall(1);
+	}
 
 	if (watchMode)
 	{
 		throwEvent(EVT_FIELD_CHANGED, *this);
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
-	time.getEigenValueForEditing()++;
-	if (time.getEigenValue() >= game.getProperties().maxTime.getEigenValue())
-		reward.getEigenValueForEditing() = 0;
-	else
+
+	if (isCalculatorType(CT_CPU))
+	{
+		time.getEigenValueForEditing()++;
 		reward.getEigenValueForEditing() = game.whoHasWon();
+	}
 }
 
 void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
@@ -67,11 +71,9 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 			cl_float((float)randomGenerator->randDouble()),
 			cl_float((float)randomGenerator->randDouble()),
 			cl_float((float)randomGenerator->randDouble()),
-			viennacl::traits::opencl_handle(input.getViennaclValueForEditing())
+			viennacl::traits::opencl_handle(input.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing())
 		));
-
-		game.getState().ballPosX.getEigenValue();
-		game.getState().ballPosY.getEigenValue();
 	}
 	else
 	{
@@ -88,7 +90,27 @@ void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& ou
 {
 	if (isCalculatorType(CT_GPU))
 	{
+		static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "interpret_nn_output", "pong_reinforcement_example.cl");
 
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().ballPosY.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().ballVelY.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getProperties().ballRad.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().height.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().maxBallSpeed.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getState().paddle1Pos.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().paddle2Pos.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getProperties().paddleSpeed.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().paddleHeight.getViennaclValue()),
+			viennacl::traits::opencl_handle(output.getViennaclValue()),
+			cl_uint(output.getViennaclValue().size()),
+			viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getProperties().speedIncreaseFac.getViennaclValue())
+		));
 	}
 	else
 	{
@@ -102,17 +124,10 @@ void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& ou
 
 void PongReinforcementEnvironment::executeCompareAI()
 {
-	if (isCalculatorType(CT_GPU))
-	{
-
-	}
+	if (game.getState().ballPosY.getEigenValue() > game.getState().paddle2Pos.getEigenValue() + game.getProperties().paddleHeight.getEigenValue() / 2)
+		game.movePaddle(1);
 	else
-	{
-		if (game.getState().ballPosY.getEigenValue() > game.getState().paddle2Pos.getEigenValue() + game.getProperties().paddleHeight.getEigenValue() / 2)
-			game.movePaddle(1);
-		else
-			game.movePaddle(-1);
-	}
+		game.movePaddle(-1);
 }
 
 void PongReinforcementEnvironment::initializeForLearning()
@@ -163,7 +178,8 @@ std::vector<std::string> PongReinforcementEnvironment::getDataSetLabels() const
 
 bool PongReinforcementEnvironment::isTerminalState()
 {
-	return game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue();
+	//return game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue();
+	return false;
 }
 
 void PongReinforcementEnvironment::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)
