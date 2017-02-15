@@ -1,10 +1,11 @@
 int whoHasWon(
-		__global float* ballPosX,
+		__global const float* ballPosX,
 		__global const int* ballRad,
-		__global const int* width) {
-	if (*ballPosX + *ballRad >= *width)
+		__global const int* width,
+		__global const float* ballVelX) {
+	if (*ballPosX + *ballRad >= *width && *ballVelX > 0)
 		return -1;
-	else if (*ballPosX <= 0)
+	else if (*ballPosX <= 0 && *ballVelX < 0)
 		return 1;
 	else
 		return 0;
@@ -64,7 +65,7 @@ __kernel void get_nn_input(
 	__global int* currentPlayer) {
 	if (get_global_id(0) == 0) 
 	{
-		if (whoHasWon(ballPosX, ballRad, width) != 0 || *time >= *maxTime || *time == -1)
+		if (whoHasWon(ballPosX, ballRad, width, ballVelX) != 0 || *time >= *maxTime || *time == -1)
 		{
 			*time = 0;
 			reset(ballPosX, ballPosY, ballVelX, ballVelY, ballRad, width, height, maxBallSpeed, minBallSpeed, paddle1Pos, paddle2Pos, rand1, rand2, rand3, rand4);
@@ -80,6 +81,28 @@ __kernel void get_nn_input(
 	}
 }
 
+__kernel void get_nn_input_only(
+		__global const float* ballPosX,
+		__global const float* ballPosY,
+		__global const float* ballVelX,
+		__global const float* ballVelY,
+		__global const int* width,
+		__global const int* height,
+		__global const int* maxBallSpeed,
+		__global const float* paddle1Pos,
+		__global const float* paddle2Pos,
+		__global const int* paddleHeight,
+		__global float* input) {
+	if (get_global_id(0) == 0) 
+	{
+		input[0] = *ballPosX / *width;
+		input[1] = *ballPosY / *height;
+		input[2] = *ballVelX / *maxBallSpeed;
+		input[3] = *ballVelY / *maxBallSpeed;
+		input[4] = *paddle1Pos / (*height - *paddleHeight);
+		input[5] = 0;
+	}
+}
 
 
 void movePaddle(
@@ -160,16 +183,16 @@ void advanceBall(
 
 	float colTimeX = 0, colTimeY = 0;
 
-	if (nextBallPosY <= 0)
+	if (nextBallPosY <= 0 && *ballVelY < 0)
 		colTimeY = *ballPosY / -*ballVelY;
 
-	if (nextBallPosY + *ballRad >= *height)
+	if (nextBallPosY + *ballRad >= *height && *ballVelY > 0)
 		colTimeY = (*height - (*ballPosY + *ballRad)) / *ballVelY;
 
-	if (nextBallPosX <= 0)
+	if (nextBallPosX <= 0 && *ballVelX < 0)
 		colTimeX = *ballPosX / -*ballVelX;
 
-	if (nextBallPosX + *ballRad >= *width)
+	if (nextBallPosX + *ballRad >= *width && *ballVelX > 0)
 		colTimeX = (*width - (*ballPosX + *ballRad)) / *ballVelX;
 
 
@@ -220,7 +243,8 @@ __kernel void interpret_nn_output(
 	__global const float* output,
 	unsigned int output_size,
 	__global int* currentPlayer,
-	__global const float* speedIncreaseFac
+	__global const float* speedIncreaseFac,
+	__global float* reward
 ) {
 	if (get_global_id(0) == 0)
 	{
@@ -234,6 +258,19 @@ __kernel void interpret_nn_output(
 		advanceBall(1, ballPosX, ballPosY, ballVelX, ballVelY, ballRad, width, height, maxBallSpeed, paddle1Pos, paddle2Pos, speedIncreaseFac, paddleHeight);
 		
 		*time++;
-		//*reward = whoHasWon();
+		*reward = whoHasWon(ballPosX, ballRad, width, ballVelX);
 	}
+}
+
+
+__kernel void is_terminal_state(
+		__global const int* time,
+		__global const int* maxTime,
+		__global const float* ballPosX,
+		__global const int* ballRad,
+		__global const int* width,
+		__global const float* ballVelX,
+		__global int* result
+) {
+		*result = whoHasWon(ballPosX, ballRad, width, ballVelX) != 0 || *time >= *maxTime;
 }

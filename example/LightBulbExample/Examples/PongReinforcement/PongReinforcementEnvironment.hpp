@@ -21,6 +21,8 @@ class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvi
 	friend struct cereal::LoadAndConstruct<PongReinforcementEnvironment>;
 private:
 	LightBulb::Scalar<int> time;
+	LightBulb::Scalar<>* rewardTmp;
+	bool inSimulationPhase;
 protected:
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(LightBulb::Vector<char>& output) override;
@@ -30,9 +32,8 @@ public:
 	void doSimulationStep(LightBulb::Scalar<>& reward) override;
 	void executeCompareAI();
 	void initializeForLearning() override;
-	int rate() override;
 	std::vector<std::string> getDataSetLabels() const override;
-	bool isTerminalState() override;
+	void isTerminalState(LightBulb::Scalar<char>& isTerminalState) override;
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator& randomGenerator_) override;
 };
 

@@ -165,10 +165,6 @@ namespace LightBulb
 		 */
 		double currentTotalError;
 		/**
-		 * \brief The current total sum of all rewards in this iteration.
-		 */
-		double currentTotalReward;
-		/**
 		 * \brief The teacher which is used by the gradient descent part.
 		 */
 		std::unique_ptr<Teacher> teacher;
@@ -185,6 +181,8 @@ namespace LightBulb
 		 */
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
 		Scalar<> reward;
+		Scalar<> totalReward;
+		Scalar<char> isTerminalState;
 		Vector<> tmp;
 		std::vector<TeachingInput<>*> teachingLessonsInputs;
 		std::vector<Vector<>*> teachingLessonsPatterns;

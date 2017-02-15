@@ -19,3 +19,12 @@ __kernel void copy_scalar_to_vector_elem(
 	if (get_global_id(0) == 0)
 		vec[element] = *scalar;
 }
+
+__kernel void copy_scalar_to_vector_elem_char(
+	__global char * vec,
+	__global const char * scalar,
+	unsigned int element)
+{
+	if (get_global_id(0) == 0)
+		vec[element] = *scalar;
+}

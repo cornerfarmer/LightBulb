@@ -40,7 +40,6 @@ namespace LightBulb
 		archive(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
 		archive(cereal::make_nvp("transitionStorage", learningRule.transitionStorage));
 		archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
-		archive(cereal::make_nvp("currentTotalReward", learningRule.currentTotalReward));
 		archive(cereal::make_nvp("qAvgSum", learningRule.qAvgSum));
 		archive(cereal::make_nvp("gradientDescent", learningRule.gradientDescent));
 	}
@@ -60,7 +59,6 @@ namespace cereal
 		ar(make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
 		ar(make_nvp("transitions", learningRule.transitionStorage));
 		ar(make_nvp("currentTotalError", learningRule.currentTotalError));
-		ar(make_nvp("currentTotalReward", learningRule.currentTotalReward));
 		ar(make_nvp("qAvgSum", learningRule.qAvgSum));
 
 		IOStorage<AbstractLearningRule>::push(learningRule.gradientDescent.release());

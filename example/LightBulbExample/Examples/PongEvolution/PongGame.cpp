@@ -67,9 +67,9 @@ void PongGame::executeCompareAI()
 
 int PongGame::whoHasWon()
 {
-	if (state.ballPosX.getEigenValue() + properties.ballRad.getEigenValue() >= properties.width.getEigenValue())
+	if (state.ballPosX.getEigenValue() + properties.ballRad.getEigenValue() >= properties.width.getEigenValue() && state.ballVelX.getEigenValue() > 0)
 		return -1;
-	else if (state.ballPosX.getEigenValue() <= 0)
+	else if (state.ballPosX.getEigenValue() <= 0 && state.ballVelX.getEigenValue() < 0)
 		return 1;
 	else
 		return 0;
@@ -82,16 +82,16 @@ void PongGame::advanceBall(double fac)
 
 	double colTimeX = 0, colTimeY = 0;
 
-	if (nextBallPosY <= 0)
+	if (nextBallPosY <= 0 && state.ballVelY.getEigenValue() < 0)
 		colTimeY = state.ballPosY.getEigenValue() / -state.ballVelY.getEigenValue();
 
-	if (nextBallPosY + properties.ballRad.getEigenValue() >= properties.height.getEigenValue())
+	if (nextBallPosY + properties.ballRad.getEigenValue() >= properties.height.getEigenValue() && state.ballVelY.getEigenValue() > 0)
 		colTimeY = (properties.height.getEigenValue() - (state.ballPosY.getEigenValue() + properties.ballRad.getEigenValue())) / state.ballVelY.getEigenValue();
 
-	if (nextBallPosX <= 0)
+	if (nextBallPosX <= 0 && state.ballVelX.getEigenValue() < 0)
 		colTimeX = state.ballPosX.getEigenValue() / -state.ballVelX.getEigenValue();
 
-	if (nextBallPosX + properties.ballRad.getEigenValue() >= properties.width.getEigenValue())
+	if (nextBallPosX + properties.ballRad.getEigenValue() >= properties.width.getEigenValue() && state.ballVelX.getEigenValue() > 0)
 		colTimeX = (properties.width.getEigenValue() - (state.ballPosX.getEigenValue() + properties.ballRad.getEigenValue())) / state.ballVelX.getEigenValue();
 
 
@@ -102,7 +102,7 @@ void PongGame::advanceBall(double fac)
 			(state.ballVelX.getEigenValue() < 0 && state.ballPosY.getEigenValue() + properties.ballRad.getEigenValue() >= state.paddle2Pos.getEigenValue() && state.ballPosY.getEigenValue() <= state.paddle2Pos.getEigenValue() + properties.paddleHeight.getEigenValue()))
 		{
 			state.ballVelX.getEigenValueForEditing() *= -1;
-			advanceBall(fac - colTimeX);
+			//advanceBall(fac - colTimeX);
 			if (std::abs(state.ballVelX.getEigenValue() * properties.speedIncreaseFac.getEigenValue()) < properties.maxBallSpeed.getEigenValue() && std::abs(state.ballVelY.getEigenValue() * properties.speedIncreaseFac.getEigenValue()) < properties.maxBallSpeed.getEigenValue()) {
 				state.ballVelX.getEigenValueForEditing() *= properties.speedIncreaseFac.getEigenValue();
 				state.ballVelY.getEigenValueForEditing() *= properties.speedIncreaseFac.getEigenValue();
@@ -117,7 +117,7 @@ void PongGame::advanceBall(double fac)
 	{
 		advanceBallWithoutCollision(colTimeY);
 		state.ballVelY.getEigenValueForEditing() *= -1;
-		advanceBall(fac - colTimeY);
+		//advanceBall(fac - colTimeY);
 	}
 	else
 		advanceBallWithoutCollision(fac);

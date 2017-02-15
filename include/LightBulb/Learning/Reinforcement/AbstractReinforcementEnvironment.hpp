@@ -136,7 +136,7 @@ namespace LightBulb
 		 * \brief Returns if the environment is in a terminal state.
 		 * \return True, if the environment is in a terminal state.
 		 */
-		virtual bool isTerminalState() = 0;
+		virtual void isTerminalState(LightBulb::Scalar<char>& isTerminalState) = 0;
 		/**
 		 * \brief Sets, if actions should be taken randomly. 
 		 * \param useStochasticActionDecision_ True, if actions should be taken randomly. 

@@ -59,10 +59,20 @@ inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const vi
 	);
 }
 
-
 inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, const viennacl::scalar<float>& scalar, int element)
 {
 	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem", "standard_operations.cl");
+
+	viennacl::ocl::enqueue(kernel(
+		viennacl::traits::opencl_handle(vector),
+		viennacl::traits::opencl_handle(scalar),
+		cl_uint(element))
+	);
+}
+
+inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const viennacl::scalar<char>& scalar, int element)
+{
+	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem_char", "standard_operations.cl");
 
 	viennacl::ocl::enqueue(kernel(
 		viennacl::traits::opencl_handle(vector),

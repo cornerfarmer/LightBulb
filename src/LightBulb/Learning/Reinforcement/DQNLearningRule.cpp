@@ -81,7 +81,6 @@ namespace LightBulb
 		
 		waitUntilLearningStarts = getOptions().replayStartSize;
 		getOptions().environment->setEpsilon(getOptions().initialExploration);
-		currentTotalReward = 0;
 	}
 	
 	void DQNLearningRule::storeTransition(const AbstractNetworkTopology* networkTopology, const Scalar<>& reward)
@@ -96,15 +95,14 @@ namespace LightBulb
 			if (getOptions().calculatorType == CT_GPU)
 			{
 				copyVectorToMatrixCol(transitionStorage.states.getViennaclValueForEditing(), getOptions().environment->getLastInput().getViennaclValue(), index);
+				
+				getOptions().environment->isTerminalState(isTerminalState);
+				copyScalarToVectorElement(transitionStorage.isTerminalState.getViennaclValueForEditing(), isTerminalState.getViennaclValue(), index);
 
-				//transitionStorage.isTerminalState.getViennaclValueForEditing()[index] = getOptions().environment->isTerminalState();
+				getOptions().environment->getNNInput(tmp);
+				copyVectorToMatrixCol(transitionStorage.nextStates.getViennaclValueForEditing(), tmp.getViennaclValue(), index);
 
-				if (!getOptions().environment->isTerminalState()) {
-					getOptions().environment->getNNInput(tmp);
-					copyVectorToMatrixCol(transitionStorage.nextStates.getViennaclValueForEditing(), tmp.getViennaclValue(), index);
-				}
-
-				copyScalarToVectorElement(transitionStorage.rewards.getViennaclValueForEditing(), reward.getEigenValue(), index);
+				copyScalarToVectorElement(transitionStorage.rewards.getViennaclValueForEditing(), reward.getViennaclValue(), index);
 
 				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "determine_action", "dqn_learning_rule.cl");
 
@@ -120,8 +118,10 @@ namespace LightBulb
 			{
 				transitionStorage.states.getEigenValueForEditing().col(index) = getOptions().environment->getLastInput().getEigenValue();
 
-				transitionStorage.isTerminalState.getEigenValueForEditing()[index] = getOptions().environment->isTerminalState();
-				if (!getOptions().environment->isTerminalState()) {
+				getOptions().environment->isTerminalState(isTerminalState);
+				transitionStorage.isTerminalState.getEigenValueForEditing()[index] = isTerminalState.getEigenValue();
+
+				if (!isTerminalState.getEigenValue()) {
 					getOptions().environment->getNNInput(tmp);
 					transitionStorage.nextStates.getEigenValueForEditing().col(index) = tmp.getEigenValue();
 				}
@@ -200,7 +200,13 @@ namespace LightBulb
 
 		std::unique_ptr<SupervisedLearningResult> result(static_cast<SupervisedLearningResult*>(gradientDescent->start()));
 		currentTotalError += result->totalError;
-		viennacl::backend::finish();
+		static int i = 0;
+		if (i++ >= 2000)
+		{
+			viennacl::backend::finish();
+			i = 0;
+		}
+		
 	}
 
 	std::string DQNLearningRule::getName()
@@ -224,19 +230,20 @@ namespace LightBulb
 		log("Iteration " + std::to_string(learningState->iterations), LL_LOW);
 
 		currentTotalError = 0;
-		double totalReward = 0;
-		int totalEpisodes = 0;
+		totalReward.getEigenValueForEditing() = 0;
 		bool nextIsStartingState = true;
 		double totalQ = 0;
 		int totalQValues = 0;
-		bool skipNextTotalReward = currentTotalReward == -1;
 		qAvgSum = 0;
 
 		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
 
 		for (int i = 0; i < getOptions().targetNetworkUpdateFrequency; i++) {
 			getOptions().environment->doSimulationStep(reward);
-			currentTotalReward += reward.getEigenValue();
+			if (getOptions().calculatorType == CT_GPU)
+				totalReward.getViennaclValueForEditing() += reward.getViennaclValue();
+			else
+				totalReward.getEigenValueForEditing() += reward.getEigenValue();
 
 			if (nextIsStartingState)
 			{
@@ -247,19 +254,11 @@ namespace LightBulb
 				nextIsStartingState = false;
 			}
 
-			if (getOptions().environment->isTerminalState()) {
-				nextIsStartingState = true;
-				if (!skipNextTotalReward) {
-					totalEpisodes++;
-					totalReward += currentTotalReward;
-				}
-				else
-					skipNextTotalReward = false;
-
-				currentTotalReward = 0;
-			}
-
 			storeTransition(&networkTopology, reward);
+
+			if (getOptions().calculatorType == CT_CPU && isTerminalState.getEigenValue()) {
+				nextIsStartingState = true;
+			}
 
 			if (waitUntilLearningStarts > 0)
 				waitUntilLearningStarts--;
@@ -279,12 +278,8 @@ namespace LightBulb
 		learningState->addData(DATA_SET_EPSILON, getOptions().environment->getEpsilon());
 		learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions().targetNetworkUpdateFrequency);
 
-		if (totalEpisodes > 0) {
-			learningState->addData(DATA_SET_REWARD, totalReward / totalEpisodes); 
-			log("Reward: " + std::to_string(totalReward / totalEpisodes), LL_LOW);
-		}
-		else
-			currentTotalReward = -1;
+		learningState->addData(DATA_SET_REWARD, totalReward.getEigenValue()); 
+		log("Reward: " + std::to_string(totalReward.getEigenValue()), LL_LOW);
 
 		learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions().targetNetworkUpdateFrequency);
 
@@ -292,7 +287,7 @@ namespace LightBulb
 
 		double e = getOptions().environment->getEpsilon();
 		getOptions().environment->setEpsilon(0);
-		//getOptions().environment->rate();
+		getOptions().environment->rate();
 		getOptions().environment->setEpsilon(e);
 
 	}

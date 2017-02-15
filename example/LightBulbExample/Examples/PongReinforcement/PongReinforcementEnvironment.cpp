@@ -11,10 +11,13 @@ PongReinforcementEnvironment::PongReinforcementEnvironment(FeedForwardNetworkTop
 	: AbstractReinforcementEnvironment(options_, epsilonGreedly, epsilon)
 {
 	watchMode = false;
+	inSimulationPhase = false;
 }
 
 void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 {
+	inSimulationPhase = true;
+	rewardTmp = &reward;
 	if (isCalculatorType(CT_CPU))
 	{
 		if (game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue() || time.getEigenValue() == -1)
@@ -44,36 +47,58 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 		time.getEigenValueForEditing()++;
 		reward.getEigenValueForEditing() = game.whoHasWon();
 	}
+	inSimulationPhase = true;
 }
 
 void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input", "pong_reinforcement_example.cl");
+		if (inSimulationPhase)
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input", "pong_reinforcement_example.cl");
 
-		viennacl::ocl::enqueue(kernel(
-			viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getState().ballPosY.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getState().ballVelY.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getProperties().ballRad.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getProperties().height.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getProperties().maxBallSpeed.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getProperties().minBallSpeed.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getState().paddle1Pos.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getState().paddle2Pos.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getProperties().paddleHeight.getViennaclValue()),
-			cl_float((float)randomGenerator->randDouble()),
-			cl_float((float)randomGenerator->randDouble()),
-			cl_float((float)randomGenerator->randDouble()),
-			cl_float((float)randomGenerator->randDouble()),
-			viennacl::traits::opencl_handle(input.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing())
-		));
+			viennacl::ocl::enqueue(kernel(
+				viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getState().ballPosY.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getState().ballVelY.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getProperties().ballRad.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().height.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().maxBallSpeed.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().minBallSpeed.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().paddle1Pos.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getState().paddle2Pos.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getProperties().paddleHeight.getViennaclValue()),
+				cl_float((float)randomGenerator->randDouble()),
+				cl_float((float)randomGenerator->randDouble()),
+				cl_float((float)randomGenerator->randDouble()),
+				cl_float((float)randomGenerator->randDouble()),
+				viennacl::traits::opencl_handle(input.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing())
+			));
+		}
+		else
+		{
+			static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input_only", "pong_reinforcement_example.cl");
+
+			viennacl::ocl::enqueue(kernel(
+				viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().ballPosY.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().ballVelY.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().height.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().maxBallSpeed.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().paddle1Pos.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getState().paddle2Pos.getViennaclValue()),
+				viennacl::traits::opencl_handle(game.getProperties().paddleHeight.getViennaclValue()),
+				viennacl::traits::opencl_handle(input.getViennaclValueForEditing())
+			));
+		}
 	}
 	else
 	{
@@ -109,7 +134,8 @@ void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& ou
 			viennacl::traits::opencl_handle(output.getViennaclValue()),
 			cl_uint(output.getViennaclValue().size()),
 			viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getProperties().speedIncreaseFac.getViennaclValue())
+			viennacl::traits::opencl_handle(game.getProperties().speedIncreaseFac.getViennaclValue()),
+			viennacl::traits::opencl_handle(rewardTmp->getViennaclValueForEditing())
 		));
 	}
 	else
@@ -137,38 +163,6 @@ void PongReinforcementEnvironment::initializeForLearning()
 }
 
 
-int PongReinforcementEnvironment::rate()
-{
-	PongGame tmp = game;
-	int wins = 0;
-	int matchCount = 100;
-	for (int i = 0; i < matchCount; i++)
-	{
-		game.reset();
-
-		double time = 0;
-		while (game.whoHasWon() == 0 && time < game.getProperties().maxTime.getEigenValue())
-		{
-			game.setPlayer(1);
-			doNNCalculation();
-			game.setPlayer(-1);
-			executeCompareAI();
-			game.advanceBall(1);
-
-			time++;
-		}
-
-		if (game.whoHasWon() == 1 || game.whoHasWon() == 0)
-			wins++;
-	}
-
-	if (!learningState->disabledDatasets[DATASET_PONG_RATING])
-		learningState->addData(DATASET_PONG_RATING, static_cast<double>(wins) / matchCount);
-	game = tmp;
-	return wins;
-}
-
-
 std::vector<std::string> PongReinforcementEnvironment::getDataSetLabels() const
 {
 	auto labels = AbstractReinforcementEnvironment::getDataSetLabels();
@@ -176,10 +170,26 @@ std::vector<std::string> PongReinforcementEnvironment::getDataSetLabels() const
 	return labels;
 }
 
-bool PongReinforcementEnvironment::isTerminalState()
+void PongReinforcementEnvironment::isTerminalState(Scalar<char>& isTerminalState)
 {
-	//return game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue();
-	return false;
+	if (isCalculatorType(CT_GPU)) 
+	{
+		static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "is_terminal_state", "pong_reinforcement_example.cl");
+
+		viennacl::ocl::enqueue(kernel(
+			viennacl::traits::opencl_handle(time.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getProperties().ballRad.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(isTerminalState.getViennaclValueForEditing())
+		));
+	}
+	else
+	{
+		isTerminalState.getEigenValueForEditing() = game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue();
+	}
 }
 
 void PongReinforcementEnvironment::setRandomGenerator(AbstractRandomGenerator& randomGenerator_)

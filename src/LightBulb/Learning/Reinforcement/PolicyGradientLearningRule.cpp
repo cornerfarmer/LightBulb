@@ -162,14 +162,14 @@ namespace LightBulb
 
 			stepsSinceLastReward++;
 
-			if (getOptions().environment->isTerminalState())
+		/*	if (getOptions().environment->isTerminalState())
 			{
 				totalReward += reward.getEigenValue();
 
 				computeGradients(stepsSinceLastReward, reward.getEigenValue());
 				stepsSinceLastReward = 0;
 				rewardCounter++;
-			}
+			}*/
 		}
 
 		learningState->addData(DATA_SET_REWARD, totalReward);
