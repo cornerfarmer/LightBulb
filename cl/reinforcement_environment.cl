@@ -1,5 +1,5 @@
 __kernel void set_boolean_output_rand(
-		__global float * last_boolean_output,
+		__global char * last_boolean_output,
 		uint size,
 		uint rand) {
 	for (unsigned int i = get_global_id(0); i < size; i += get_global_size(0))
@@ -8,7 +8,7 @@ __kernel void set_boolean_output_rand(
 
 
 __kernel void set_boolean_output_best(
-	__global float * last_boolean_output,
+	__global char * last_boolean_output,
 	__global const float * last_output,
 	uint size) {
 	int bestOutput = 0;

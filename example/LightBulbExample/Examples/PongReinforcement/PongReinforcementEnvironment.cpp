@@ -58,6 +58,11 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 		{
 			static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input", "pong_reinforcement_example.cl");
 
+			float rand1 = randomGenerator->randDouble();
+			float rand2 = randomGenerator->randDouble();
+			float rand3 = randomGenerator->randDouble();
+			float rand4 = randomGenerator->randDouble();
+
 			viennacl::ocl::enqueue(kernel(
 				viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
@@ -73,13 +78,15 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 				viennacl::traits::opencl_handle(game.getState().paddle1Pos.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getState().paddle2Pos.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getProperties().paddleHeight.getViennaclValue()),
-				cl_float((float)randomGenerator->randDouble()),
-				cl_float((float)randomGenerator->randDouble()),
-				cl_float((float)randomGenerator->randDouble()),
-				cl_float((float)randomGenerator->randDouble()),
+				cl_float(rand1),
+				cl_float(rand2),
+				cl_float(rand3),
+				cl_float(rand4),
 				viennacl::traits::opencl_handle(input.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing())
 			));
+			input.getEigenValue();
+			game.getState().ballVelX.getEigenValue();
 		}
 		else
 		{
@@ -137,6 +144,9 @@ void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& ou
 			viennacl::traits::opencl_handle(game.getProperties().speedIncreaseFac.getViennaclValue()),
 			viennacl::traits::opencl_handle(rewardTmp->getViennaclValueForEditing())
 		));
+		output.getEigenValue();
+		game.getState().paddle1Pos.getEigenValue();
+		game.getState().paddle2Pos.getEigenValue();
 	}
 	else
 	{

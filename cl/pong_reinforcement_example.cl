@@ -33,6 +33,7 @@ void reset(
 	*ballVelX = rand1 * (*maxBallSpeed - *minBallSpeed) / 8.0f + *minBallSpeed;
 	if (rand2 > 0.5f)
 		*ballVelX *= -1;
+
 	*ballVelY = rand3 * (*maxBallSpeed - *minBallSpeed) / 8.0f + *minBallSpeed;
 	if (rand4 > 0.5f)
 		*ballVelY *= -1;
@@ -240,7 +241,7 @@ __kernel void interpret_nn_output(
 	__global float* paddle2Pos,
 	__global const float* paddleSpeed,
 	__global const int* paddleHeight,
-	__global const float* output,
+	__global const char* output,
 	unsigned int output_size,
 	__global int* currentPlayer,
 	__global const float* speedIncreaseFac,
