@@ -81,7 +81,6 @@ namespace LightBulb
 				}
 			}
 		}
-		lastOutput.getEigenValue();
 
 		// Interpret the output
 		interpretNNOutput(lastBooleanOutput);

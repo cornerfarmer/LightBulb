@@ -179,7 +179,6 @@ void PongReinforcementEnvironment::initializeForLearning()
 std::vector<std::string> PongReinforcementEnvironment::getDataSetLabels() const
 {
 	auto labels = AbstractReinforcementEnvironment::getDataSetLabels();
-	labels.push_back(DATASET_PONG_RATING);
 	return labels;
 }
 

@@ -31,7 +31,7 @@ void Pong::doCompare(AbstractIndividual& obj1, AbstractIndividual& obj2, int rou
 std::vector<std::string> Pong::getDataSetLabels() const
 {
 	auto labels = AbstractCoevolutionEnvironment::getDataSetLabels();
-	labels.push_back(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING);
+	labels.push_back(std::string(parasiteEnvironment ? DATASET_PARASITE_PREFIX : "") + DATASET_PONG_RATING); 
 	return labels;
 }
 

@@ -12,8 +12,6 @@
 
 // Forward declarations
 
-#define DATASET_PONG_RATING "Pong rating"
-
 class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvironment, public AbstractPongEnvironment
 {
 	template <class Archive>
