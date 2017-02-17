@@ -10,12 +10,20 @@ __kernel void calc_error_vector(
     __global const float * teachingInpVec, 
     unsigned int startTeachingInp, 
     unsigned int incTeachingInp, 
+	__global const char * teachingInpEnabledVec,
+	unsigned int startTeachingEnabledInp,
+	unsigned int incTeachingEnabledInp,
     __global const float * outputVec, 
    unsigned int startOutputVec, 
    unsigned int incOutputVec) 
 { 
-  for (unsigned int i = get_global_id(0); i < sizeErr; i += get_global_size(0)) 
-    errVec[i*incErr+startErr] = teachingInpVec[i*incTeachingInp+startTeachingInp] - outputVec[i*incOutputVec+startOutputVec]; 
+	for (unsigned int i = get_global_id(0); i < sizeErr; i += get_global_size(0))
+	{
+		if (teachingInpEnabledVec[i*incTeachingEnabledInp + startTeachingEnabledInp])
+			errVec[i*incErr + startErr] = teachingInpVec[i*incTeachingInp + startTeachingInp] - outputVec[i*incOutputVec + startOutputVec];
+		else
+			errVec[i*incErr + startErr] = 0;
+	}
 }
 
 __kernel void calc_specific_error(

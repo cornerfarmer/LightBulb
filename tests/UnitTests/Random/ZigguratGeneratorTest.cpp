@@ -16,16 +16,16 @@ TEST_P(ZigguratGeneratorTest, randDouble)
 	if (GetParam())
 		zigguratGenerator.setCalculatorType(CT_GPU);
 	
-	EXPECT_NEAR(0.00946542, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(-1.22748, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(-0.596595168, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(-0.124876395, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(-0.262766212, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(1.19164324, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(0.310975045, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(0.481335849, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(0.905268431, zigguratGenerator.randDouble(), 0.00001);
-	EXPECT_NEAR(-0.0836875141, zigguratGenerator.randDouble(), 0.00001);
+	EXPECT_NEAR(0.00946542, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(-1.22748, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(-0.596595168, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(-0.124876395, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(-0.262766212, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(1.19164324, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(0.310975045, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(0.481335849, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(0.905268431, zigguratGenerator.randFloat(), 0.00001);
+	EXPECT_NEAR(-0.0836875141, zigguratGenerator.randFloat(), 0.00001);
 }
 
 TEST_P(ZigguratGeneratorTest, randMultipleDouble)

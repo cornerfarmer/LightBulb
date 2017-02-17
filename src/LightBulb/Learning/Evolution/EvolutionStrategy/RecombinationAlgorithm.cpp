@@ -53,7 +53,7 @@ namespace LightBulb
 							}
 							else
 							{
-								if (randomGenerator->randDouble() > 0.5)
+								if (randomGenerator->randFloat() > 0.5)
 									(*layer1).getEigenValueForEditing()(i, j) = (*layer2).getEigenValue()(i, j);
 							}
 						}
@@ -73,7 +73,7 @@ namespace LightBulb
 				}
 				else
 				{
-					if (randomGenerator->randDouble() > 0.5)
+					if (randomGenerator->randFloat() > 0.5)
 						mutationStrength1.getEigenValueForEditing()[i] = mutationStrength2.getEigenValue()[i];
 				}
 			}

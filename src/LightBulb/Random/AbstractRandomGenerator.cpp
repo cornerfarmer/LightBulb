@@ -22,20 +22,20 @@ const LightBulb::Vector<>& LightBulb::AbstractRandomGenerator::randMultipleDoubl
 
 	for (int i = 0; i < count; i++)
 	{
-		randomNumberCache.getEigenValueForEditing()[i] = randDouble();
+		randomNumberCache.getEigenValueForEditing()[i] = randFloat();
 	}
 
 	return randomNumberCache;
 }
 
-double LightBulb::AbstractRandomGenerator::randDouble(double a, double b)
+float LightBulb::AbstractRandomGenerator::randFloat(float a, float b)
 {
-	return randDouble() * (b - a) + a;
+	return randFloat() * (b - a) + a;
 }
 
 int LightBulb::AbstractRandomGenerator::randInt(int a, int b)
 {
-	return randDouble() * (b - a + 1) + a;
+	return randFloat() * (b - a + 1) + a;
 }
 
 

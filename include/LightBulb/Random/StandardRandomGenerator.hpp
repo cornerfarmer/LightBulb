@@ -49,7 +49,7 @@ namespace LightBulb
 		}
 
 		// Inherited:
-		double randDouble() override
+		float randFloat() override
 		{
 			return uniformDistribution(generator);
 		}

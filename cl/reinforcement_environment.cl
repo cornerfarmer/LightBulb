@@ -12,11 +12,14 @@ __kernel void set_boolean_output_best(
 	__global const float * last_output,
 	uint size) {
 	int bestOutput = 0;
-	for (unsigned int i = 1; i < size; i++)
+	if (get_global_id(0) == 0)
 	{
-		if (last_output[bestOutput] <= last_output[i])
-			bestOutput = i;
+		for (unsigned int i = 1; i < size; i++)
+		{
+			if (last_output[bestOutput] <= last_output[i])
+				bestOutput = i;
+		}
+		for (unsigned int i = 0; i < size; i++)
+			last_boolean_output[i] = (i == bestOutput);
 	}
-	for (unsigned int i = 0; i < size; i++)
-		last_boolean_output[i] = (i == bestOutput);
 }

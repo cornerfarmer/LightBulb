@@ -408,7 +408,7 @@ namespace LightBulb
 				for (auto j = 0; j < layer->getEigenValue().cols(); j++)
 				{
 					do {
-						(*layer).getEigenValueForEditing()(i, j) = randomGenerator.randDouble(randStart, randEnd);
+						(*layer).getEigenValueForEditing()(i, j) = randomGenerator.randFloat(randStart, randEnd);
 					} while ((*layer).getEigenValueForEditing()(i, j) == 0);
 				}
 			}
@@ -427,7 +427,7 @@ namespace LightBulb
 				for (auto j = 0; j < layer->getEigenValue().cols(); j++)
 				{
 					do {
-						(*layer).getEigenValueForEditing()(i, j) = randomGenerator.randDouble(-stdv, stdv);
+						(*layer).getEigenValueForEditing()(i, j) = randomGenerator.randFloat(-stdv, stdv);
 					} while ((*layer).getEigenValueForEditing()(i, j) == 0);
 				}
 			}

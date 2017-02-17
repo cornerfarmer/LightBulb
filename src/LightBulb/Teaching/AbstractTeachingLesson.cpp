@@ -39,7 +39,7 @@ namespace LightBulb
 				errorVector.getViennaclValueForEditing().resize(teachingInput.getValues().getViennaclValue().size());
 			}
 			
-			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInput.getValues().getViennaclValue(), outputVector.getViennaclValue());
+			calcErrorVector(errorVector.getViennaclValueForEditing(), teachingInput.getValues().getViennaclValue(), teachingInput.getEnabled().getViennaclValue(), outputVector.getViennaclValue());
 		}
 		else
 		{
@@ -65,7 +65,7 @@ namespace LightBulb
 		}
 	}
 
-	void AbstractTeachingLesson::calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const
+	void AbstractTeachingLesson::calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<char>& teachingInputEnabled, const viennacl::vector<float>& outputVector) const
 	{
 		static viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_error_vector", "teaching_lesson.cl");
 
@@ -78,6 +78,10 @@ namespace LightBulb
 			viennacl::traits::opencl_handle(teachingInput),
 			cl_uint(viennacl::traits::start(teachingInput)),
 			cl_uint(viennacl::traits::stride(teachingInput)),
+
+			viennacl::traits::opencl_handle(teachingInputEnabled),
+			cl_uint(viennacl::traits::start(teachingInputEnabled)),
+			cl_uint(viennacl::traits::stride(teachingInputEnabled)),
 
 			viennacl::traits::opencl_handle(outputVector),
 			cl_uint(viennacl::traits::start(outputVector)),

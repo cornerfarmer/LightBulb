@@ -15,8 +15,8 @@ public:
 		
 	}
 
-	MOCK_METHOD0(randDouble, double ());
-	MOCK_METHOD2(randDouble, double (double, double));
+	MOCK_METHOD0(randFloat, float ());
+	MOCK_METHOD2(randFloat, float (float, float));
 	MOCK_METHOD2(randInt, int (int, int));
 	MOCK_METHOD0(reset, void ());
 	MOCK_CONST_METHOD0(getSeed, int ());

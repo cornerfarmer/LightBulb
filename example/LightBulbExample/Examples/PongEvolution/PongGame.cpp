@@ -144,11 +144,11 @@ void PongGame::reset()
 	state.ballPosX.getEigenValueForEditing() = properties.width.getEigenValue() / 2;
 	state.ballPosY.getEigenValueForEditing() = properties.height.getEigenValue() / 2;
 	
-	state.ballVelX.getEigenValueForEditing() = randomGenerator->randDouble() * (properties.maxBallSpeed.getEigenValue() - properties.minBallSpeed.getEigenValue()) / 8.0f + properties.minBallSpeed.getEigenValue();
-	if (randomGenerator->randDouble() > 0.5f)
+	state.ballVelX.getEigenValueForEditing() = randomGenerator->randFloat() * (properties.maxBallSpeed.getEigenValue() - properties.minBallSpeed.getEigenValue()) / 8.0f + properties.minBallSpeed.getEigenValue();
+	if (randomGenerator->randFloat() > 0.5f)
 		state.ballVelX.getEigenValueForEditing() *= -1;
-	state.ballVelY.getEigenValueForEditing() = randomGenerator->randDouble() * (properties.maxBallSpeed.getEigenValue() - properties.minBallSpeed.getEigenValue()) / 8.0f + properties.minBallSpeed.getEigenValue();
-	if (randomGenerator->randDouble() > 0.5f)
+	state.ballVelY.getEigenValueForEditing() = randomGenerator->randFloat() * (properties.maxBallSpeed.getEigenValue() - properties.minBallSpeed.getEigenValue()) / 8.0f + properties.minBallSpeed.getEigenValue();
+	if (randomGenerator->randFloat() > 0.5f)
 		state.ballVelY.getEigenValueForEditing() *= -1;
 
 	//state.ballVelX = 3;

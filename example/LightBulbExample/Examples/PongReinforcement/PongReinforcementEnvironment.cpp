@@ -25,6 +25,12 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 			time.getEigenValueForEditing() = 0;
 			game.reset();
 		}
+		else
+		{
+			// Keep random numbers synced between cpu and gpu computation
+			for (int i = 0; i < 4; i++)
+				randomGenerator->randFloat();
+		}
 		game.setPlayer(1);
 	}
 
@@ -47,7 +53,7 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 		time.getEigenValueForEditing()++;
 		reward.getEigenValueForEditing() = game.whoHasWon();
 	}
-	inSimulationPhase = true;
+	inSimulationPhase = false;
 }
 
 void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
@@ -58,10 +64,10 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 		{
 			static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input", "pong_reinforcement_example.cl");
 
-			float rand1 = randomGenerator->randDouble();
-			float rand2 = randomGenerator->randDouble();
-			float rand3 = randomGenerator->randDouble();
-			float rand4 = randomGenerator->randDouble();
+			float rand1 = randomGenerator->randFloat();
+			float rand2 = randomGenerator->randFloat();
+			float rand3 = randomGenerator->randFloat();
+			float rand4 = randomGenerator->randFloat();
 
 			viennacl::ocl::enqueue(kernel(
 				viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
@@ -85,8 +91,7 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 				viennacl::traits::opencl_handle(input.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing())
 			));
-			input.getEigenValue();
-			game.getState().ballVelX.getEigenValue();
+		
 		}
 		else
 		{
@@ -144,9 +149,7 @@ void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& ou
 			viennacl::traits::opencl_handle(game.getProperties().speedIncreaseFac.getViennaclValue()),
 			viennacl::traits::opencl_handle(rewardTmp->getViennaclValueForEditing())
 		));
-		output.getEigenValue();
-		game.getState().paddle1Pos.getEigenValue();
-		game.getState().paddle2Pos.getEigenValue();
+		
 	}
 	else
 	{

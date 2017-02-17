@@ -25,7 +25,7 @@ namespace LightBulb
 		void reset() override;
 	public:
 		ZigguratGenerator(int seed = -1);
-		double randDouble() override;
+		float randFloat() override;
 		const Vector<>& randMultipleDouble(int count) override;
 	};
 }

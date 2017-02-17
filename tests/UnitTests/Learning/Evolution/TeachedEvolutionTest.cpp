@@ -22,7 +22,7 @@ public:
 		options.neuronsPerLayerCount.push_back(1);
 		teachingEvolutionEnvironment = new TeachingEvolutionEnvironment(&teacher, options);
 		teachingEvolutionEnvironment->setRandomGenerator(randomGenerator);
-		EXPECT_CALL(randomGenerator, randDouble(testing::_, testing::_)).WillRepeatedly(testing::Return(0.1));
+		EXPECT_CALL(randomGenerator, randFloat(testing::_, testing::_)).WillRepeatedly(testing::Return(0.1));
 	}
 
 	virtual ~TeachedEvolutionTest()

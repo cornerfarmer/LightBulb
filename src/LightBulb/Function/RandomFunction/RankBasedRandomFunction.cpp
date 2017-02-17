@@ -14,7 +14,7 @@ namespace LightBulb
 			probabilitySum += 1 + (selectivePressure - 1) * exp(-1.0 * (selectivePressure - 1) * i / elementCount);
 		}
 
-		double randomLine = randomGenerator->randDouble() * probabilitySum;
+		double randomLine = randomGenerator->randFloat() * probabilitySum;
 		double partialSum = 0;
 		for (int i = 1; i <= elementCount; i++)
 		{

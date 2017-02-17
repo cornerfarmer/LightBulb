@@ -1,5 +1,5 @@
 __kernel void determine_action(
-	__global const float * last_boolean_output,
+	__global const char * last_boolean_output,
 	__global int * actions,
 	uint size,
 	uint index) {
@@ -25,21 +25,21 @@ __kernel void set_teaching_input(
 	{
 		if (i != inputIndex) 
 		{
-			enabled[inputIndex] = 0;
+			enabled[i] = 0;
 		} 
 		else 
 		{
-			enabled[inputIndex] = 1;
-			values[inputIndex] = rewards[index];
+			enabled[i] = 1;
+			values[i] = rewards[index];
 
-			if (isTerminalStates[index]) {
+			if (!isTerminalStates[index]) {
 				int bestOutput = 0;
 				for (unsigned int j = 1; j < size; j++)
 				{
 					if (output[bestOutput] <= output[j])
 						bestOutput = j;
 				}
-				values[inputIndex] += discountFactor * output[bestOutput];
+				values[i] += discountFactor * output[bestOutput];
 			}
 		}
 	}

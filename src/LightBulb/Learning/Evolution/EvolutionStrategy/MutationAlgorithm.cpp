@@ -46,7 +46,7 @@ namespace LightBulb
 			for (int i = 0; i < mutationStrength.getEigenValue().size(); i++)
 			{
 				// Shrink or grow the mutationStrength randomly: *= exp(changeSpeed * random);
-				mutationStrength.getEigenValueForEditing()(i) *= exp(mutationStrengthChangeSpeed * zigguratGenerator->randDouble());
+				mutationStrength.getEigenValueForEditing()(i) *= exp(mutationStrengthChangeSpeed * zigguratGenerator->randFloat());
 				// Make sure the values stays inside our boundaries
 				mutationStrength.getEigenValueForEditing()(i) = (mutationStrength.getEigenValue()(i) < 0 ? -1 : 1) * std::min(mutationStrengthMax, std::max(mutationStrengthMin, std::abs(mutationStrength.getEigenValue()(i))));
 			}
@@ -61,7 +61,7 @@ namespace LightBulb
 					for (int j = 0; j < layer->getEigenValue().cols(); j++)
 					{
 						// Simply add the corresponding mutationStrength value to the weight
-						double weightAdd = mutationStrength.getEigenValue()[mutationStrengthIndex] * zigguratGenerator->randDouble();
+						double weightAdd = mutationStrength.getEigenValue()[mutationStrengthIndex] * zigguratGenerator->randFloat();
 						(*layer).getEigenValueForEditing()(i, j) += weightAdd;
 						mutationStrengthIndex++;
 					}

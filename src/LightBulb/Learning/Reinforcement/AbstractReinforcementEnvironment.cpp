@@ -30,7 +30,7 @@ namespace LightBulb
 				for (int i = 0; i < lastOutput.getEigenValue().size(); i++)
 				{
 					if (useStochasticActionDecision)
-						lastBooleanOutput.getEigenValueForEditing()[i] = (randomGenerator->randDouble() < lastOutput.getEigenValue()[i]);
+						lastBooleanOutput.getEigenValueForEditing()[i] = (randomGenerator->randFloat() < lastOutput.getEigenValue()[i]);
 					else
 						lastBooleanOutput.getEigenValueForEditing()[i] = (0.5 < lastOutput.getEigenValue()[i]);
 				}
@@ -38,7 +38,7 @@ namespace LightBulb
 		}
 		else
 		{
-			if (randomGenerator->randDouble() < epsilon)
+			if (randomGenerator->randFloat() < epsilon)
 			{
 				if (isCalculatorType(CT_GPU))
 				{
@@ -81,6 +81,7 @@ namespace LightBulb
 				}
 			}
 		}
+		lastOutput.getEigenValue();
 
 		// Interpret the output
 		interpretNNOutput(lastBooleanOutput);

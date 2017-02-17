@@ -26,7 +26,7 @@ namespace LightBulb
 
 		result_type operator()();
 
-		double randDouble() override;
+		float randFloat() override;
 
 		void reset() override;
 	};

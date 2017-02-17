@@ -104,11 +104,11 @@ TEST_P(RecombinationAlgorithmTest, executeWithoutAverage)
 		recombinationAlgorithm->setCalculatorType(CT_GPU);
 	recombinationAlgorithm->setRandomGenerator(mockRandomGenerator);
 	testing::InSequence s;
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(0));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(1));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(0));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(1));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(1));
 
 	recombinationAlgorithm->execute(individual1, individual2);
 
@@ -154,11 +154,11 @@ TEST_P(RecombinationAlgorithmTest, executeWithoutAverageWithDifferentSizes)
 		recombinationAlgorithm->setCalculatorType(CT_GPU);
 	recombinationAlgorithm->setRandomGenerator(mockRandomGenerator);
 	testing::InSequence s;
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(0));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
-	EXPECT_CALL(mockRandomGenerator, randDouble()).WillOnce(testing::Return(1));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(0));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(1));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(0));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(1));
+	EXPECT_CALL(mockRandomGenerator, randFloat()).WillOnce(testing::Return(1));
 	
 	recombinationAlgorithm->execute(individual1, individual2);
 	

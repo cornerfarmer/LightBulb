@@ -157,7 +157,7 @@ namespace LightBulb
 			{
 				tmp.getViennaclValueForEditing() = viennacl::column(transitionStorage.nextStates.getViennaclValueForEditing(), r);
 				const Vector<>& output = steadyNetwork->calculateWithoutOutputCopy(tmp, TopologicalOrder());
-
+				
 				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "set_teaching_input", "dqn_learning_rule.cl");
 				
 				viennacl::ocl::enqueue(kernel(

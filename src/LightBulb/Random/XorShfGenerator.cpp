@@ -33,9 +33,9 @@ namespace LightBulb
 		return z;
 	}
 
-	double XorShfGenerator::randDouble()
+	float XorShfGenerator::randFloat()
 	{
-		return static_cast<double>((*this)() - min()) / max();
+		return static_cast<float>((*this)() - min()) / max();
 	}
 
 	void XorShfGenerator::reset()

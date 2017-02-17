@@ -34,7 +34,7 @@ namespace LightBulb
 		 * \brief Generates a random double between [0, 1[.
 		 * \return The random number.
 		 */
-		virtual double randDouble() = 0;
+		virtual float randFloat() = 0;
 		virtual const Vector<>& randMultipleDouble(int count);
 		/**
 		 * \brief Generates a random double between [a, b[.
@@ -42,7 +42,7 @@ namespace LightBulb
 		 * \param b The upper boundary.
 		 * \return The random number.
 		 */
-		virtual double randDouble(double a, double b);
+		virtual float randFloat(float a, float b);
 		/**
 		* \brief Generates a random int between [a, b].
 		* \param a The lower boundary.

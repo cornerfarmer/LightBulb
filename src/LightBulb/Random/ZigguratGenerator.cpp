@@ -11,7 +11,7 @@ namespace LightBulb
 		ZigguratGenerator::reset();
 	}
 
-	double ZigguratGenerator::randDouble()
+	float ZigguratGenerator::randFloat()
 	{
 		if (isCalculatorType(CT_GPU)) {
 			static viennacl::ocl::kernel& kernel = getKernel("ziggurat_generator", "r4_nor", "ziggurat_generator.cl");

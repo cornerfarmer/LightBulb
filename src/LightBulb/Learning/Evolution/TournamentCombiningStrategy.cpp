@@ -43,7 +43,7 @@ namespace LightBulb
 			if (i < currentLevel->size() - 1) {
 				//int result = simulationEnvironment->compareIndividuals(*currentLevel->at(i), *currentLevel->at(i + 1), 0);
 				//if (result == 0) {
-				//	result = (randomGenerator->randDouble() > 0.5 ? 1 : -1);
+				//	result = (randomGenerator->randFloat() > 0.5 ? 1 : -1);
 				//}
 				////			setResult(currentLevel->at(i), currentLevel->at(i + 1), result >= 0);
 

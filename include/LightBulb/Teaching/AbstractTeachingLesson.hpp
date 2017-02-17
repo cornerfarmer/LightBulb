@@ -29,7 +29,7 @@ namespace LightBulb
 	private:
 		mutable Vector<> errorVector;
 		mutable Scalar<> specificErrorScalar;
-		void calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<float>& outputVector) const;
+		void calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<char>& teachingInputEnabled, const viennacl::vector<float>& outputVector) const;
 		void calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const;
 	public:
 		virtual ~AbstractTeachingLesson() {}

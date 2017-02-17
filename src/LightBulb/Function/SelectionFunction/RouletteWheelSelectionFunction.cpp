@@ -14,7 +14,7 @@ namespace LightBulb
 			probabilitySum += *probability;
 		}
 
-		double randomLine = randomGenerator->randDouble() * probabilitySum;
+		double randomLine = randomGenerator->randFloat() * probabilitySum;
 		double partialSum = 0;
 		int index = 0;
 		for (auto probability = probabilities.begin(); probability != probabilities.end(); probability++, index++)
