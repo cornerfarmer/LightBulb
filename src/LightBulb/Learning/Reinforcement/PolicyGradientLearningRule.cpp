@@ -59,6 +59,7 @@ namespace LightBulb
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
 	{
 		gradientDescentAlgorithm->initialize(getOptions().environment->getNeuralNetwork().getNetworkTopology());
+		gradientCalculation->initWithExternalGradient(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		stateRecord.resize(1000);
 		gradientRecord.resize(1000);
 
@@ -85,8 +86,7 @@ namespace LightBulb
 		Vector<> errorVector;
 		getErrorVector(networkTopology, errorVector);
 		
-		auto patternVector = networkTopology.getActivationsPerLayer(0);
-		stateRecord[stepsSinceLastReward] = std::vector<double>(patternVector.getEigenValue().data(), patternVector.getEigenValue().data() + patternVector.getEigenValue().size());
+		stateRecord[stepsSinceLastReward] = std::vector<double>(getOptions().environment->getLastInput().getEigenValue().data(), getOptions().environment->getLastInput().getEigenValue().data() + getOptions().environment->getLastInput().getEigenValue().size());
 		
 		if (gradientRecord[stepsSinceLastReward].empty())
 			gradientRecord[stepsSinceLastReward] = networkTopology.getAllWeights();
@@ -94,7 +94,7 @@ namespace LightBulb
 		for (int i = 0; i < gradientRecord[stepsSinceLastReward].size(); i++)
 			gradientRecord[stepsSinceLastReward][i].getEigenValueForEditing().setZero();
 		
-		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[stepsSinceLastReward]);
+		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[stepsSinceLastReward], &getOptions().environment->getLastInput());
 	}
 
 	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Vector<>& errorVector)
@@ -162,14 +162,16 @@ namespace LightBulb
 
 			stepsSinceLastReward++;
 
-		/*	if (getOptions().environment->isTerminalState())
+			Scalar<char> isTerminalState;
+			getOptions().environment->isTerminalState(isTerminalState);
+			if (isTerminalState.getEigenValue())
 			{
 				totalReward += reward.getEigenValue();
 
 				computeGradients(stepsSinceLastReward, reward.getEigenValue());
 				stepsSinceLastReward = 0;
 				rewardCounter++;
-			}*/
+			}
 		}
 
 		learningState->addData(DATA_SET_REWARD, totalReward);
@@ -194,20 +196,18 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::addGradients(AbstractNetworkTopology& networkTopology)
 	{
-		/*for (int l = gradient.size() - 1; l >= 0; l--)
+		for (int l = gradient.size() - 1; l >= 0; l--)
 		{
-			Matrix newWeights(networkTopology.getAfferentWeightsPerLayer(l + 1).getEigenValue() + gradientDescentAlgorithm->adjustWeights(networkTopology, , l + 1, gradient[l]).getEigenValue());
-			networkTopology.setAfferentWeightsPerLayer(l + 1, newWeights);
+			gradientDescentAlgorithm->adjustWeights(networkTopology, networkTopology.getAllWeights()[l], l + 1, gradient[l]);
 		}
 
 		if (getOptions().valueFunctionAsBase)
 		{
 			for (int l = valueFunctionGradientCalculation->getGradient().size() - 1; l >= 0; l--)
 			{
-				Matrix newWeights(valueFunctionNetwork->getNetworkTopology().getAfferentWeightsPerLayer(l + 1).getEigenValue() + valueFunctionGradientDescentAlgorithm->adjustWeights(valueFunctionNetwork->getNetworkTopology(), , l + 1, valueFunctionGradientCalculation->getGradient().at(l)).getEigenValue());
-				valueFunctionNetwork->getNetworkTopology().setAfferentWeightsPerLayer(l + 1, newWeights);
+				valueFunctionGradientDescentAlgorithm->adjustWeights(valueFunctionNetwork->getNetworkTopology(), valueFunctionNetwork->getNetworkTopology().getAllWeights()[l], l + 1, valueFunctionGradientCalculation->getGradient().at(l));
 			}
-		}*/
+		}
 	}
 
 	const PolicyGradientLearningRuleOptions& PolicyGradientLearningRule::getOptions() const

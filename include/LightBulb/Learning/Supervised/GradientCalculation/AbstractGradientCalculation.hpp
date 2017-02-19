@@ -42,6 +42,11 @@ namespace LightBulb
 		 */
 		virtual void initGradient(const AbstractNetworkTopology& networkTopology);
 		/**
+		* \brief Initializes and/or resets the internal gradient.
+		* \param networkTopology The network topology whose gradient should be calculated.
+		*/
+		virtual void initWithExternalGradient(const AbstractNetworkTopology& networkTopology) {};
+		/**
 		 * \brief Returns the current internal gradient.
 		 * \return The internal gradient.
 		 */

@@ -26,6 +26,16 @@ namespace LightBulb
 		}
 	}
 
+	void Backpropagation::initWithExternalGradient(const AbstractNetworkTopology& networkTopology)
+	{
+		if (lastDeltaVectorOutputLayer.empty()) {
+			lastDeltaVectorOutputLayer = networkTopology.getAllNetInputs();
+		}
+		if (activationFunctionDerivations.empty()) {
+			activationFunctionDerivations = networkTopology.getAllNetInputs();
+		}
+	}
+
 	void Backpropagation::calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector<>>& netInputs, const std::vector<Vector<>>& activations, const Vector<>& errorVector, const Vector<>* alternativeActivation)
 	{
 		for (int layerIndex = networkTopology.getLayerCount() - 1; layerIndex > 0; layerIndex--)

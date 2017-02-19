@@ -49,6 +49,7 @@ namespace LightBulb
 		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector<>>& netInputs, const std::vector<Vector<>>& activations, const Vector<>& errorVector, const Vector<>* alternativeActivation = nullptr) override;
 		AbstractCloneable* clone() const override;
 		void initGradient(const AbstractNetworkTopology& networkTopology) override;
+		void initWithExternalGradient(const AbstractNetworkTopology& networkTopology);
 	};
 }
 
