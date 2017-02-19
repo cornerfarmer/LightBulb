@@ -48,7 +48,7 @@ namespace LightBulb
 		RMSPropLearningRateOptions valueRmsPropLearningRateOptions;
 		PolicyGradientLearningRuleOptions()
 		{
-			episodeSize = 10;
+			episodeSize = 10000;
 			ratingInterval = 10;
 			rmsPropLearningRateOptions.learningRate = 1e-4;
 			valueFunctionAsBase = true;
@@ -71,7 +71,9 @@ namespace LightBulb
 		/**
 		 * \brief The state memory.
 		 */
-		std::vector<std::vector<double>> stateRecord;
+		std::vector<Vector<>> stateRecord;
+		std::vector<Scalar<char>> isTerminalStateRecord;
+		std::vector<Scalar<>> rewardRecord;
 		/**
 		* \brief The gradient memory.
 		*/
@@ -112,10 +114,8 @@ namespace LightBulb
 		* \brief The current sum of all error values of the value function learning process.
 		*/
 		double valueErrorSum;
-		/**
-		 * \brief The amount of steps since the last reward.
-		 */
-		int stepsSinceLastReward;
+		int recordStart;
+		int nextRecordIndex;
 		/**
 		 * \brief A step counter used for calculating the average error with errorSum.
 		 */
@@ -134,7 +134,7 @@ namespace LightBulb
 		 * \param stepsSinceLastReward The steps in the episode.
 		 * \param reward The gained reward.
 		 */
-		void computeGradients(int stepsSinceLastReward, double reward);
+		void computeGradients();
 		/**
 		* \brief Initializes the learning rule.
 		* \param options The options to use.
@@ -144,7 +144,7 @@ namespace LightBulb
 		 * \brief Records the current step.
 		 * \param networkTopology The network topology which was used.
 		 */
-		void recordStep(AbstractNetworkTopology& networkTopology);
+		void recordStep(AbstractNetworkTopology& networkTopology, Scalar<> reward);
 		/**
 		 * \brief Calculates the error vector.
 		 * \param networkTopology The network topology to use.

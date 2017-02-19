@@ -47,7 +47,8 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initialize(PolicyGradientLearningRuleOptions& options)
 	{
-		stepsSinceLastReward = 0;
+		recordStart = 0;
+		nextRecordIndex = 0;
 
 		gradientCalculation.reset(new Backpropagation());
 		gradientDescentAlgorithm.reset(new RMSPropLearningRate(options.rmsPropLearningRateOptions));
@@ -60,8 +61,10 @@ namespace LightBulb
 	{
 		gradientDescentAlgorithm->initialize(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		gradientCalculation->initWithExternalGradient(getOptions().environment->getNeuralNetwork().getNetworkTopology());
-		stateRecord.resize(1000);
-		gradientRecord.resize(1000);
+		stateRecord.resize(getOptions().episodeSize);
+		gradientRecord.resize(getOptions().episodeSize);
+		rewardRecord.resize(getOptions().episodeSize);
+		isTerminalStateRecord.resize(getOptions().episodeSize);
 
 		lastOutput.resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
 		if (getOptions().valueFunctionAsBase)
@@ -81,20 +84,27 @@ namespace LightBulb
 		}
 	}
 
-	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology& networkTopology)
+	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology& networkTopology, Scalar<> reward)
 	{
 		Vector<> errorVector;
 		getErrorVector(networkTopology, errorVector);
 		
-		stateRecord[stepsSinceLastReward] = std::vector<double>(getOptions().environment->getLastInput().getEigenValue().data(), getOptions().environment->getLastInput().getEigenValue().data() + getOptions().environment->getLastInput().getEigenValue().size());
-		
-		if (gradientRecord[stepsSinceLastReward].empty())
-			gradientRecord[stepsSinceLastReward] = networkTopology.getAllWeights();
+		stateRecord[nextRecordIndex] = getOptions().environment->getLastInput();
 
-		for (int i = 0; i < gradientRecord[stepsSinceLastReward].size(); i++)
-			gradientRecord[stepsSinceLastReward][i].getEigenValueForEditing().setZero();
+		rewardRecord[nextRecordIndex] = reward;
+
+		getOptions().environment->isTerminalState(isTerminalStateRecord[nextRecordIndex]);
 		
-		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[stepsSinceLastReward], &getOptions().environment->getLastInput());
+		if (gradientRecord[nextRecordIndex].empty())
+			gradientRecord[nextRecordIndex] = networkTopology.getAllWeights();
+
+		for (int i = 0; i < gradientRecord[nextRecordIndex].size(); i++)
+			gradientRecord[nextRecordIndex][i].getEigenValueForEditing().setZero();
+		
+		gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[nextRecordIndex], &getOptions().environment->getLastInput());
+
+		nextRecordIndex++;
+		nextRecordIndex %= getOptions().episodeSize;
 	}
 
 	void PolicyGradientLearningRule::getErrorVector(AbstractNetworkTopology& networkTopology, Vector<>& errorVector)
@@ -116,7 +126,8 @@ namespace LightBulb
 		getOptions().environment->setLearningState(*learningState.get());
 		getOptions().environment->initializeForLearning();
 
-		stepsSinceLastReward = 0;
+		recordStart = 0;
+		nextRecordIndex = 0;
 
 		if (getOptions().valueFunctionAsBase)
 		{
@@ -142,7 +153,6 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::doIteration()
 	{
-		int rewardCounter = 0;
 		double totalReward = 0;
 		errorSum = 0;
 		valueErrorSum = 0;
@@ -153,33 +163,23 @@ namespace LightBulb
 		if (getOptions().valueFunctionAsBase)
 			valueFunctionGradientCalculation->initGradient(valueFunctionNetwork->getNetworkTopology());
 
-		while (rewardCounter < getOptions().episodeSize)
+		do
 		{
 			Scalar<> reward;
 			getOptions().environment->doSimulationStep(reward);
 
-			recordStep(networkTopology);
+			recordStep(networkTopology, reward);
 
-			stepsSinceLastReward++;
-
-			Scalar<char> isTerminalState;
-			getOptions().environment->isTerminalState(isTerminalState);
-			if (isTerminalState.getEigenValue())
-			{
-				totalReward += reward.getEigenValue();
-
-				computeGradients(stepsSinceLastReward, reward.getEigenValue());
-				stepsSinceLastReward = 0;
-				rewardCounter++;
-			}
-		}
-
+			totalReward += reward.getEigenValue();
+		} while (nextRecordIndex != recordStart);
+		
 		learningState->addData(DATA_SET_REWARD, totalReward);
 
 		learningState->addData(DATA_SET_ERROR_AVG, errorSum / errorSteps);
 		if (getOptions().valueFunctionAsBase)
 			learningState->addData(DATA_SET_VALUE_ERROR_AVG, valueErrorSum / valueErrorSteps);
 
+		computeGradients();
 		addGradients(networkTopology);
 
 		// Continue with the next generation
@@ -219,22 +219,35 @@ namespace LightBulb
 	{
 	}
 
-	void PolicyGradientLearningRule::computeGradients(int stepsSinceLastReward, double reward)
+	void PolicyGradientLearningRule::computeGradients()
 	{
-		Eigen::VectorXd rewards(stepsSinceLastReward);
-		rewards(stepsSinceLastReward - 1) = reward;
-		for (int i = stepsSinceLastReward - 2; i >= 0; i--)
+		int lastRelevantIndex = -1;
+		int i = nextRecordIndex - 1;
+		do
 		{
-			rewards(i) = rewards(i + 1) * 0.99;
-		}
+			if (i < 0)
+				i = getOptions().episodeSize - 1;
+
+			if (lastRelevantIndex == -1 && isTerminalStateRecord[i].getEigenValue())
+				lastRelevantIndex = i;
+			if (lastRelevantIndex != -1) 
+			{
+				if (!isTerminalStateRecord[i].getEigenValue())
+					rewardRecord[i].getEigenValueForEditing() += rewardRecord[(i + 1) % getOptions().episodeSize].getEigenValue() * 0.99;
+			}
+			i--;
+		} while (i != recordStart - 1);
+
+		if (lastRelevantIndex == -1)
+			throw std::logic_error("There has been no terminal states in the last " + std::to_string(getOptions().episodeSize) + " steps.");
 
 	/*	rewards = rewards.array() - rewards.mean();
 		double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
 		rewards = rewards.array() / stddev;*/
 
-		for (int i = 0; i < stepsSinceLastReward; i++)
+		for (i = recordStart; i != (lastRelevantIndex + 1) % getOptions().episodeSize; i++, i %= getOptions().episodeSize)
 		{
-			if (getOptions().valueFunctionAsBase)
+			/*if (getOptions().valueFunctionAsBase)
 			{
 				std::vector<double> output(1);
 				valueFunctionNetwork->calculate(stateRecord[i], output, TopologicalOrder());
@@ -246,21 +259,22 @@ namespace LightBulb
 				valueErrorSteps++;
 
 				rewards(i) -= output[0];
-			}
+			}*/
 			
 			if (gradient.empty())
 			{
 				for (int j = 0; j < gradientRecord[i].size(); j++)
-					gradientRecord[i][j].getEigenValueForEditing().noalias() = gradientRecord[i][j].getEigenValue() * rewards(i);
+					gradientRecord[i][j].getEigenValueForEditing().noalias() = gradientRecord[i][j].getEigenValue() * rewardRecord[i].getEigenValue();
 				gradient = gradientRecord[i];
 			}
 			else
 			{
 				for (int j = 0; j < gradientRecord[i].size(); j++)
-					gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[i][j].getEigenValue() * rewards(i);
+					gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[i][j].getEigenValue() * rewardRecord[i].getEigenValue();
 			}
 		}
 
+		recordStart = (lastRelevantIndex + 1) % getOptions().episodeSize;
 	}
 
 
