@@ -71,9 +71,11 @@ namespace LightBulb
 		/**
 		 * \brief The state memory.
 		 */
-		std::vector<Vector<>> stateRecord;
-		std::vector<Scalar<char>> isTerminalStateRecord;
-		std::vector<Scalar<>> rewardRecord;
+		Matrix<> stateRecord;
+		Vector<char> isTerminalStateRecord;
+		Vector<> rewardRecord;
+		Scalar<char> isTerminalState;
+		Vector<> tmp;
 		/**
 		* \brief The gradient memory.
 		*/

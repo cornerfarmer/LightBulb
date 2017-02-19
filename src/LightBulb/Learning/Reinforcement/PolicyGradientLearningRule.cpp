@@ -61,10 +61,10 @@ namespace LightBulb
 	{
 		gradientDescentAlgorithm->initialize(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		gradientCalculation->initWithExternalGradient(getOptions().environment->getNeuralNetwork().getNetworkTopology());
-		stateRecord.resize(getOptions().episodeSize);
+		stateRecord.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize(), getOptions().episodeSize);
 		gradientRecord.resize(getOptions().episodeSize);
-		rewardRecord.resize(getOptions().episodeSize);
-		isTerminalStateRecord.resize(getOptions().episodeSize);
+		rewardRecord.getEigenValueForEditing().resize(getOptions().episodeSize);
+		isTerminalStateRecord.getEigenValueForEditing().resize(getOptions().episodeSize);
 
 		lastOutput.resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
 		if (getOptions().valueFunctionAsBase)
@@ -89,12 +89,13 @@ namespace LightBulb
 		Vector<> errorVector;
 		getErrorVector(networkTopology, errorVector);
 		
-		stateRecord[nextRecordIndex] = getOptions().environment->getLastInput();
+		stateRecord.getEigenValueForEditing().col(nextRecordIndex) = getOptions().environment->getLastInput().getEigenValue();
 
-		rewardRecord[nextRecordIndex] = reward;
+		rewardRecord.getEigenValueForEditing()[nextRecordIndex] = reward.getEigenValue();
 
-		getOptions().environment->isTerminalState(isTerminalStateRecord[nextRecordIndex]);
-		
+		getOptions().environment->isTerminalState(isTerminalState);
+		isTerminalStateRecord.getEigenValueForEditing()[nextRecordIndex] = isTerminalState.getEigenValue();
+
 		if (gradientRecord[nextRecordIndex].empty())
 			gradientRecord[nextRecordIndex] = networkTopology.getAllWeights();
 
@@ -228,12 +229,12 @@ namespace LightBulb
 			if (i < 0)
 				i = getOptions().episodeSize - 1;
 
-			if (lastRelevantIndex == -1 && isTerminalStateRecord[i].getEigenValue())
+			if (lastRelevantIndex == -1 && isTerminalStateRecord.getEigenValue()[i])
 				lastRelevantIndex = i;
 			if (lastRelevantIndex != -1) 
 			{
-				if (!isTerminalStateRecord[i].getEigenValue())
-					rewardRecord[i].getEigenValueForEditing() += rewardRecord[(i + 1) % getOptions().episodeSize].getEigenValue() * 0.99;
+				if (!isTerminalStateRecord.getEigenValue()[i])
+					rewardRecord.getEigenValueForEditing()[i] += rewardRecord.getEigenValue()[(i + 1) % getOptions().episodeSize] * 0.99;
 			}
 			i--;
 		} while (i != recordStart - 1);
@@ -247,30 +248,30 @@ namespace LightBulb
 
 		for (i = recordStart; i != (lastRelevantIndex + 1) % getOptions().episodeSize; i++, i %= getOptions().episodeSize)
 		{
-			/*if (getOptions().valueFunctionAsBase)
+			if (getOptions().valueFunctionAsBase)
 			{
-				std::vector<double> output(1);
-				valueFunctionNetwork->calculate(stateRecord[i], output, TopologicalOrder());
+				tmp.getEigenValueForEditing() = stateRecord.getEigenValue().col(i);
+				Vector<> output = valueFunctionNetwork->calculateWithoutOutputCopy(tmp, TopologicalOrder());
 
 				Vector<> errorVector(1);
-				errorVector.getEigenValueForEditing()(0) = rewards(i) - output[0];
+				errorVector.getEigenValueForEditing()(0) = rewardRecord.getEigenValue()[i] - output.getEigenValue()[0];
 				valueFunctionGradientCalculation->calcGradient(valueFunctionNetwork->getNetworkTopology(), errorVector);
 				valueErrorSum += abs(errorVector.getEigenValue()(0));
 				valueErrorSteps++;
 
-				rewards(i) -= output[0];
-			}*/
+				rewardRecord.getEigenValueForEditing()[i] -= output.getEigenValue()[0];
+			}
 			
 			if (gradient.empty())
 			{
 				for (int j = 0; j < gradientRecord[i].size(); j++)
-					gradientRecord[i][j].getEigenValueForEditing().noalias() = gradientRecord[i][j].getEigenValue() * rewardRecord[i].getEigenValue();
+					gradientRecord[i][j].getEigenValueForEditing().noalias() = gradientRecord[i][j].getEigenValue() * rewardRecord.getEigenValue()[i];
 				gradient = gradientRecord[i];
 			}
 			else
 			{
 				for (int j = 0; j < gradientRecord[i].size(); j++)
-					gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[i][j].getEigenValue() * rewardRecord[i].getEigenValue();
+					gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[i][j].getEigenValue() * rewardRecord.getEigenValue()[i];
 			}
 		}
 
