@@ -46,6 +46,37 @@ inline void executeVectorAssignKernel(viennacl::ocl::kernel& kernel, const vienn
 	);
 }
 
+inline void copyMatrixToTensorArea(viennacl::matrix_base<float>& tensor, const viennacl::matrix_base<float>& matrix, int area)
+{
+	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_matrix_to_tensor_area", "standard_operations.cl");
+
+	viennacl::ocl::enqueue(kernel(
+		viennacl::traits::opencl_handle(matrix),
+		viennacl::traits::size1(matrix),
+		viennacl::traits::size2(matrix),
+		viennacl::traits::internal_size2(matrix),
+		viennacl::traits::opencl_handle(tensor),
+		viennacl::traits::internal_size2(tensor),
+		cl_uint(area)
+	));
+}
+
+inline void copyMatrixToTensorArea(viennacl::matrix_base<float>& tensor, const viennacl::matrix_base<float>& matrix, const viennacl::scalar<int>& area)
+{
+	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_matrix_to_tensor_area_scalar", "standard_operations.cl");
+
+	viennacl::ocl::enqueue(kernel(
+		viennacl::traits::opencl_handle(matrix),
+		viennacl::traits::size1(matrix),
+		viennacl::traits::size2(matrix),
+		viennacl::traits::internal_size2(matrix),
+		viennacl::traits::opencl_handle(tensor),
+		viennacl::traits::internal_size2(tensor),
+		viennacl::traits::opencl_handle(area)
+	));
+}
+
+
 inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const viennacl::vector_base<float>& vector, int column)
 {
 	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_vector_to_matrix_col", "standard_operations.cl");

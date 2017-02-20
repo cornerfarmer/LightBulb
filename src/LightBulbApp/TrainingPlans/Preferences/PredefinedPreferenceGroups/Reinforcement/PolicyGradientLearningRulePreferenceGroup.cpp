@@ -9,6 +9,7 @@ namespace LightBulb
 {
 	#define PREFERENCE_EPISODE_SIZE "Episode size"
 	#define PREFERENCE_RATING_INTERVAL "Rating interval"
+	#define PREFERENCE_LOG_INTERVAL "Log interval"
 	#define PREFERENCE_VALUE_FUNCTION_BASE "Enable value function as base"
 	#define PREFERENCE_VALUE_FUNCTION_BASE_RMS_PROP "Value function RMSProp"
 
@@ -31,6 +32,7 @@ namespace LightBulb
 
 		addPreference(new IntegerPreference(PREFERENCE_EPISODE_SIZE, options.episodeSize, 1, 100));
 		addPreference(new IntegerPreference(PREFERENCE_RATING_INTERVAL, options.ratingInterval, 1, 100));
+		addPreference(new IntegerPreference(PREFERENCE_LOG_INTERVAL, options.logInterval, 1, 100));
 
 		addPreference(new RMSPropLearningRatePreferenceGroup(options.rmsPropLearningRateOptions));
 		addPreference(new BooleanPreference(PREFERENCE_VALUE_FUNCTION_BASE, options.valueFunctionAsBase));
@@ -45,6 +47,7 @@ namespace LightBulb
 		options.episodeSize = getIntegerPreference(PREFERENCE_EPISODE_SIZE);
 		options.ratingInterval = getIntegerPreference(PREFERENCE_RATING_INTERVAL);
 		options.valueFunctionAsBase = getBooleanPreference(PREFERENCE_VALUE_FUNCTION_BASE);
+		options.logInterval = getIntegerPreference(PREFERENCE_LOG_INTERVAL);
 
 		options.rmsPropLearningRateOptions = createFromGroup<RMSPropLearningRateOptions, RMSPropLearningRatePreferenceGroup>();
 		options.valueRmsPropLearningRateOptions = createFromGroup<RMSPropLearningRateOptions, RMSPropLearningRatePreferenceGroup>(PREFERENCE_VALUE_FUNCTION_BASE_RMS_PROP);

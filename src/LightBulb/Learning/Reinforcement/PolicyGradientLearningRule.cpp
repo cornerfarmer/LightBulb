@@ -52,10 +52,14 @@ namespace LightBulb
 		nextRecordIndex.getEigenValueForEditing() = 0;
 
 		gradientCalculation.reset(new Backpropagation());
+		gradientCalculation->setCalculatorType(getOptions().calculatorType);
 		gradientDescentAlgorithm.reset(new RMSPropLearningRate(options.rmsPropLearningRateOptions));
+		gradientDescentAlgorithm->setCalculatorType(getOptions().calculatorType);
 
 		valueFunctionGradientCalculation.reset(new Backpropagation());
 		valueFunctionGradientDescentAlgorithm.reset(new RMSPropLearningRate(options.valueRmsPropLearningRateOptions));
+
+		getOptions().environment->setCalculatorType(getOptions().calculatorType);
 	}
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
@@ -63,10 +67,15 @@ namespace LightBulb
 		gradientDescentAlgorithm->initialize(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		gradientCalculation->initWithExternalGradient(getOptions().environment->getNeuralNetwork().getNetworkTopology());
 		stateRecord.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize(), getBufferSize());
-		gradientRecord.resize(getBufferSize());
 		rewardRecord.getEigenValueForEditing().resize(getBufferSize());
 		isTerminalStateRecord.getEigenValueForEditing().resize(getBufferSize());
 		errorVector.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
+		tmpGradient = getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights();
+		gradient = getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights();
+
+		gradientRecord.clear();
+		for (auto layer = getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights().begin(); layer != getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights().end(); layer++)
+			gradientRecord.push_back(Tensor<>(getBufferSize(), layer->getEigenValue().rows(), layer->getEigenValue().cols()));
 
 		if (getOptions().valueFunctionAsBase)
 		{
@@ -85,7 +94,7 @@ namespace LightBulb
 		}
 	}
 
-	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology& networkTopology, Scalar<> reward)
+	void PolicyGradientLearningRule::recordStep(AbstractNetworkTopology& networkTopology, Scalar<>& reward)
 	{
 		getErrorVector(networkTopology, errorVector);
 		
@@ -98,16 +107,22 @@ namespace LightBulb
 			getOptions().environment->isTerminalState(isTerminalState);
 			copyScalarToVectorElement(isTerminalStateRecord.getViennaclValueForEditing(), isTerminalState.getViennaclValue(), nextRecordIndex.getViennaclValue());
 
-			/*if (gradientRecord[nextRecordIndex].empty())
-				gradientRecord[nextRecordIndex] = networkTopology.getAllWeights();
+			for (int i = 0; i < tmpGradient.size(); i++)
+				tmpGradient[i].getViennaclValueForEditing().clear();
 
-			for (int i = 0; i < gradientRecord[nextRecordIndex].size(); i++)
-				gradientRecord[nextRecordIndex][i].getViennaclValueForEditing().clear();
+			gradientCalculation->calcGradient(networkTopology, errorVector, tmpGradient, &getOptions().environment->getLastInput());
 
-			gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[nextRecordIndex], &getOptions().environment->getLastInput());
+			for (int i = 0; i < tmpGradient.size(); i++)
+				copyMatrixToTensorArea(gradientRecord[i].getViennaclValueForEditing(), tmpGradient[i].getViennaclValue(), nextRecordIndex.getViennaclValue());
 
-			nextRecordIndex++;
-			nextRecordIndex %= getBufferSize();*/
+
+			static viennacl::ocl::kernel& kernel3 = getKernel("policy_gradient_learning_rule", "compute_next_record_index", "policy_gradient_learning_rule.cl");
+
+			viennacl::ocl::enqueue(kernel3(
+				viennacl::traits::opencl_handle(nextRecordIndex.getViennaclValueForEditing()),
+				cl_uint(getBufferSize())
+			));
+			
 		}
 		else
 		{
@@ -118,14 +133,14 @@ namespace LightBulb
 			getOptions().environment->isTerminalState(isTerminalState);
 			isTerminalStateRecord.getEigenValueForEditing()[nextRecordIndex.getEigenValue()] = isTerminalState.getEigenValue();
 
-			if (gradientRecord[nextRecordIndex.getEigenValue()].empty())
-				gradientRecord[nextRecordIndex.getEigenValue()] = networkTopology.getAllWeights();
-
-			for (int i = 0; i < gradientRecord[nextRecordIndex.getEigenValue()].size(); i++)
-				gradientRecord[nextRecordIndex.getEigenValue()][i].getEigenValueForEditing().setZero();
-
-			gradientCalculation->calcGradient(networkTopology, errorVector, gradientRecord[nextRecordIndex.getEigenValue()], &getOptions().environment->getLastInput());
+			for (int i = 0; i < tmpGradient.size(); i++)
+				tmpGradient[i].getEigenValueForEditing().setZero();
 			
+			gradientCalculation->calcGradient(networkTopology, errorVector, tmpGradient, &getOptions().environment->getLastInput());
+
+			for (int i = 0; i < tmpGradient.size(); i++)
+				gradientRecord[i].getEigenValueForEditing()[nextRecordIndex.getEigenValue()] = tmpGradient[i].getEigenValue();
+
 			nextRecordIndex.getEigenValueForEditing()++;
 			nextRecordIndex.getEigenValueForEditing() %= getBufferSize();
 		}
@@ -193,30 +208,47 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::doIteration()
 	{
-		double totalReward = 0;
+		 ;
 		errorSum = 0;
 		valueErrorSum = 0;
 		errorSteps = 0;
 		valueErrorSteps = 0;
 		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
-		gradient.clear();
+		
+		if (getOptions().calculatorType == CT_GPU)
+		{
+			totalReward.getViennaclValueForEditing() -= totalReward.getViennaclValue();
+			for (int i = 0; i < gradient.size(); i++)
+				gradient[i].getViennaclValueForEditing().clear();
+		}
+		else
+		{
+			totalReward.getEigenValueForEditing() = 0;
+			for (int i = 0; i < gradient.size(); i++)
+				gradient[i].getEigenValueForEditing().setZero();
+		}
+
+
 		if (getOptions().valueFunctionAsBase)
 			valueFunctionGradientCalculation->initGradient(valueFunctionNetwork->getNetworkTopology());
 
 		for (int i = 0; i < getOptions().episodeSize; i++)
 		{
-			Scalar<> reward;
 			getOptions().environment->doSimulationStep(reward);
 
 			recordStep(networkTopology, reward);
 
-			totalReward += reward.getEigenValue();
+			if (getOptions().calculatorType == CT_GPU)
+				totalReward.getViennaclValueForEditing() += reward.getViennaclValue();
+			else
+				totalReward.getEigenValueForEditing() += reward.getEigenValue();
 
-			if (nextRecordIndex == recordStart)
+			if (getOptions().calculatorType == CT_CPU && nextRecordIndex.getEigenValue() == recordStart.getEigenValue())
 				throw std::logic_error("An epsiode has been longer then the configured maxEpisodeLength.");
 		}
 		
-		learningState->addData(DATA_SET_REWARD, totalReward);
+		if (getOptions().calculatorType == CT_CPU || learningState->iterations % getOptions().logInterval == 0)
+			learningState->addData(DATA_SET_REWARD, totalReward.getEigenValue());
 
 		learningState->addData(DATA_SET_ERROR_AVG, errorSum / errorSteps);
 		if (getOptions().valueFunctionAsBase)
@@ -224,9 +256,6 @@ namespace LightBulb
 
 		computeGradients();
 		addGradients(networkTopology);
-
-		// Continue with the next generation
-		learningState->iterations++;
 
 		if (learningState->iterations % getOptions().ratingInterval == 0)
 		{
@@ -271,21 +300,52 @@ namespace LightBulb
 			viennacl::ocl::enqueue(kernel(
 				viennacl::traits::opencl_handle(rewardRecord.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(isTerminalStateRecord.getViennaclValue()),
+				viennacl::traits::opencl_handle(recordStart.getViennaclValue()),
+				viennacl::traits::opencl_handle(nextRecordIndex.getViennaclValue()),
+				viennacl::traits::opencl_handle(lastRelevantIndex.getViennaclValueForEditing()),
 				cl_uint(getBufferSize())
 			));
+
+			static viennacl::ocl::kernel& kernel2 = getKernel("policy_gradient_learning_rule", "compute_gradients", "policy_gradient_learning_rule.cl");
+
+			for (int j = 0; j < gradientRecord.size(); j++)
+			{
+				viennacl::ocl::enqueue(kernel2(
+					viennacl::traits::opencl_handle(gradient[j].getViennaclValue()),
+					cl_uint(viennacl::traits::size1(gradient[j].getViennaclValue())),
+					cl_uint(viennacl::traits::size2(gradient[j].getViennaclValue())),
+					cl_uint(viennacl::traits::internal_size2(gradient[j].getViennaclValue())),
+					viennacl::traits::opencl_handle(gradientRecord[j].getViennaclValue()),
+					cl_uint(viennacl::traits::internal_size2(gradientRecord[j].getViennaclValue())),
+					viennacl::traits::opencl_handle(rewardRecord.getViennaclValue()),
+					viennacl::traits::opencl_handle(recordStart.getViennaclValue()),
+					viennacl::traits::opencl_handle(nextRecordIndex.getViennaclValue()),
+					viennacl::traits::opencl_handle(lastRelevantIndex.getViennaclValueForEditing()),
+					cl_uint(getBufferSize())
+				));
+			}
+
+			static viennacl::ocl::kernel& kernel3 = getKernel("policy_gradient_learning_rule", "compute_next_record_start", "policy_gradient_learning_rule.cl");
+
+			viennacl::ocl::enqueue(kernel3(
+				viennacl::traits::opencl_handle(recordStart.getViennaclValueForEditing()),
+				viennacl::traits::opencl_handle(lastRelevantIndex.getViennaclValue()),
+				cl_uint(getBufferSize())
+			));
+			
 		}
 		else
 		{
-			int lastRelevantIndex = -1;
+			lastRelevantIndex.getEigenValueForEditing() = -1;
 			int i = nextRecordIndex.getEigenValue() - 1;
 			do
 			{
 				if (i < 0)
 					i = getBufferSize() - 1;
 
-				if (lastRelevantIndex == -1 && isTerminalStateRecord.getEigenValue()[i])
-					lastRelevantIndex = i;
-				if (lastRelevantIndex != -1)
+				if (lastRelevantIndex.getEigenValue() == -1 && isTerminalStateRecord.getEigenValue()[i])
+					lastRelevantIndex.getEigenValueForEditing() = i;
+				if (lastRelevantIndex.getEigenValue() != -1)
 				{
 					if (!isTerminalStateRecord.getEigenValue()[i])
 						rewardRecord.getEigenValueForEditing()[i] += rewardRecord.getEigenValue()[(i + 1) % getBufferSize()] * 0.99;
@@ -293,14 +353,14 @@ namespace LightBulb
 				i--;
 			} while (i != recordStart.getEigenValue() - 1);
 
-			if (lastRelevantIndex == -1)
+			if (lastRelevantIndex.getEigenValue() == -1)
 				throw std::logic_error("There has been no terminal states in the last " + std::to_string(getBufferSize()) + " steps.");
 
 			/*	rewards = rewards.array() - rewards.mean();
 				double stddev = std::sqrt(rewards.cwiseAbs2().sum() / stepsSinceLastReward);
 				rewards = rewards.array() / stddev;*/
 
-			for (i = recordStart.getEigenValue(); i != (lastRelevantIndex + 1) % getBufferSize(); i++, i %= getBufferSize())
+			for (i = recordStart.getEigenValue(); i != (lastRelevantIndex.getEigenValue() + 1) % getBufferSize(); i++, i %= getBufferSize())
 			{
 				if (getOptions().valueFunctionAsBase)
 				{
@@ -316,20 +376,11 @@ namespace LightBulb
 					rewardRecord.getEigenValueForEditing()[i] -= output.getEigenValue()[0];
 				}
 
-				if (gradient.empty())
-				{
-					for (int j = 0; j < gradientRecord[i].size(); j++)
-						gradientRecord[i][j].getEigenValueForEditing().noalias() = gradientRecord[i][j].getEigenValue() * rewardRecord.getEigenValue()[i];
-					gradient = gradientRecord[i];
-				}
-				else
-				{
-					for (int j = 0; j < gradientRecord[i].size(); j++)
-						gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[i][j].getEigenValue() * rewardRecord.getEigenValue()[i];
-				}
+				for (int j = 0; j < gradientRecord.size(); j++)
+					gradient[j].getEigenValueForEditing().noalias() = gradient[j].getEigenValue() + gradientRecord[j].getEigenValue()[i] * rewardRecord.getEigenValue()[i];
 			}
 
-			recordStart.getEigenValueForEditing() = (lastRelevantIndex + 1) % getBufferSize();
+			recordStart.getEigenValueForEditing() = (lastRelevantIndex.getEigenValue() + 1) % getBufferSize();
 		}
 	}
 

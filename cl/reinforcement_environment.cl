@@ -23,3 +23,26 @@ __kernel void set_boolean_output_best(
 			last_boolean_output[i] = (i == bestOutput);
 	}
 }
+
+
+__kernel void set_boolean_output_non_greedy_stochastic(
+	__global char * last_boolean_output,
+	__global const float * last_output,
+	uint index,
+	float rand) {
+	if (get_global_id(0) == 0)
+	{
+		last_boolean_output[index] = (rand < last_output[index]);
+	}
+}
+
+
+__kernel void set_boolean_output_non_greedy(
+	__global char * last_boolean_output,
+	__global const float * last_output,
+	uint index) {
+	if (get_global_id(0) == 0)
+	{
+		last_boolean_output[index] = (0.5f < last_output[index]);
+	}
+}

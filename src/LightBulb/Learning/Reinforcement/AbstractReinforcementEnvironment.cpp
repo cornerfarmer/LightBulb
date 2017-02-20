@@ -23,7 +23,30 @@ namespace LightBulb
 		if (!epsilonGreedly) {
 			if (isCalculatorType(CT_GPU))
 			{
-				throw std::logic_error("Not implemented");
+				for (int i = 0; i < lastOutput.getViennaclValue().size(); i++)
+				{
+					if (useStochasticActionDecision)
+					{
+						static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_non_greedy_stochastic", "reinforcement_environment.cl");
+
+						viennacl::ocl::enqueue(kernel(
+							viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
+							viennacl::traits::opencl_handle(lastOutput.getViennaclValue()),
+							cl_uint(i),
+							cl_float(randomGenerator->randFloat())
+						));
+					}
+					else
+					{
+						static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_non_greedy", "reinforcement_environment.cl");
+
+						viennacl::ocl::enqueue(kernel(
+							viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
+							viennacl::traits::opencl_handle(lastOutput.getViennaclValue()),
+							cl_uint(i)
+						));
+					}
+				}
 			}
 			else
 			{

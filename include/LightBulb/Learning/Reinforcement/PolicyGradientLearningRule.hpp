@@ -10,6 +10,7 @@
 
 // Library Includes
 #include <vector>
+#include "LightBulb/LinearAlgebra/Tensor.hpp"
 
 namespace LightBulb
 {
@@ -32,6 +33,8 @@ namespace LightBulb
 		 * \details Default value: 10
 		 */
 		int ratingInterval;
+
+		int logInterval;
 		/**
 		 * \brief The rmsprop options used in the gradient descent algorithm
 		 * \details Default values:
@@ -52,6 +55,7 @@ namespace LightBulb
 			episodeSize = 10000;
 			maxEpisodeLength = 1000;
 			ratingInterval = 10;
+			logInterval = 15;
 			rmsPropLearningRateOptions.learningRate = 1e-4;
 			valueFunctionAsBase = true;
 			valueRmsPropLearningRateOptions.learningRate = 1e-4;
@@ -79,10 +83,16 @@ namespace LightBulb
 		Scalar<char> isTerminalState;
 		Vector<> tmp;
 		Vector<> errorVector;
+		Scalar<> reward;
+		Scalar<> totalReward;
 		/**
 		* \brief The gradient memory.
 		*/
-		std::vector<std::vector<Matrix<>>> gradientRecord;
+		std::vector<Tensor<>> gradientRecord;
+		/**
+		* \brief The current total gradient.
+		*/
+		std::vector<Matrix<>> tmpGradient;
 		/**
 		* \brief The current total gradient.
 		*/
@@ -117,6 +127,7 @@ namespace LightBulb
 		double valueErrorSum;
 		Scalar<int> recordStart;
 		Scalar<int> nextRecordIndex;
+		Scalar<int> lastRelevantIndex;
 		/**
 		 * \brief A step counter used for calculating the average error with errorSum.
 		 */
@@ -145,7 +156,7 @@ namespace LightBulb
 		 * \brief Records the current step.
 		 * \param networkTopology The network topology which was used.
 		 */
-		void recordStep(AbstractNetworkTopology& networkTopology, Scalar<> reward);
+		void recordStep(AbstractNetworkTopology& networkTopology, Scalar<>& reward);
 		int getBufferSize();
 		/**
 		 * \brief Calculates the error vector.

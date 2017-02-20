@@ -7,13 +7,13 @@ TEST(Tensor, basicDataStorage)
 {
 	Tensor<> A(16, 16, 16);
 
-	for (int m = 0; m < A.getEigenValue().dimension(0); m++)
+	for (int m = 0; m < A.getEigenValue().size(); m++)
 	{
-		for (int r = 0; r < A.getEigenValue().dimension(1); r++)
+		for (int r = 0; r < A.getEigenValue()[m].rows(); r++)
 		{
-			for (int c = 0; c < A.getEigenValue().dimension(2); c++)
+			for (int c = 0; c < A.getEigenValue()[m].cols(); c++)
 			{
-				A.getEigenValueForEditing()(m, r, c) = m + r + c;
+				A.getEigenValueForEditing()[m](r, c) = m + r + c;
 			}
 		}
 	}
