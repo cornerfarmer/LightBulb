@@ -26,6 +26,7 @@ namespace LightBulb
 		* \details Default value: 10
 		*/
 		int episodeSize;
+		int maxEpisodeLength;
 		/**
 		 * \brief Determines after how many episodes the network should be rated (for debugging purposes).
 		 * \details Default value: 10
@@ -49,6 +50,7 @@ namespace LightBulb
 		PolicyGradientLearningRuleOptions()
 		{
 			episodeSize = 10000;
+			maxEpisodeLength = 1000;
 			ratingInterval = 10;
 			rmsPropLearningRateOptions.learningRate = 1e-4;
 			valueFunctionAsBase = true;
@@ -76,6 +78,7 @@ namespace LightBulb
 		Vector<> rewardRecord;
 		Scalar<char> isTerminalState;
 		Vector<> tmp;
+		Vector<> errorVector;
 		/**
 		* \brief The gradient memory.
 		*/
@@ -105,10 +108,6 @@ namespace LightBulb
 		 */
 		std::unique_ptr<NeuralNetwork> valueFunctionNetwork;
 		/**
-		 * \brief The last output of the neural network.
-		 */
-		std::vector<double> lastOutput;
-		/**
 		 * \brief The current sum of all error values.
 		 */
 		double errorSum;
@@ -116,8 +115,8 @@ namespace LightBulb
 		* \brief The current sum of all error values of the value function learning process.
 		*/
 		double valueErrorSum;
-		int recordStart;
-		int nextRecordIndex;
+		Scalar<int> recordStart;
+		Scalar<int> nextRecordIndex;
 		/**
 		 * \brief A step counter used for calculating the average error with errorSum.
 		 */
@@ -147,6 +146,7 @@ namespace LightBulb
 		 * \param networkTopology The network topology which was used.
 		 */
 		void recordStep(AbstractNetworkTopology& networkTopology, Scalar<> reward);
+		int getBufferSize();
 		/**
 		 * \brief Calculates the error vector.
 		 * \param networkTopology The network topology to use.

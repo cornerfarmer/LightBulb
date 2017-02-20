@@ -166,6 +166,7 @@
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Scalar.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Tensor.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Vector.hpp" />
     <ClInclude Include="..\include\LightBulb\Logging\AbstractLoggable.hpp" />
     <ClInclude Include="..\include\LightBulb\Logging\AbstractLogger.hpp" />
@@ -338,6 +339,7 @@
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Matrix.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Scalar.cpp" />
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Tensor.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Vector.cpp" />
     <ClCompile Include="..\src\LightBulb\Logging\AbstractLoggable.cpp" />
     <ClCompile Include="..\src\LightBulb\Logging\AbstractLogger.cpp" />

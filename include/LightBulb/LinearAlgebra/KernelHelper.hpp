@@ -55,8 +55,21 @@ inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const vi
 		viennacl::traits::size(vector),
 		viennacl::traits::opencl_handle(matrix),
 		viennacl::traits::internal_size2(matrix),
-		cl_uint(column))
-	);
+		cl_uint(column)
+	));
+}
+
+inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const viennacl::vector_base<float>& vector, const viennacl::scalar<int>& column)
+{
+	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_vector_to_matrix_col_scalar", "standard_operations.cl");
+
+	viennacl::ocl::enqueue(kernel(
+		viennacl::traits::opencl_handle(vector),
+		viennacl::traits::size(vector),
+		viennacl::traits::opencl_handle(matrix),
+		viennacl::traits::internal_size2(matrix),
+		viennacl::traits::opencl_handle(column)
+	));
 }
 
 inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, const viennacl::scalar<float>& scalar, int element)
@@ -66,9 +79,21 @@ inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, cons
 	viennacl::ocl::enqueue(kernel(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::opencl_handle(scalar),
-		cl_uint(element))
-	);
+		cl_uint(element)
+	));
 }
+
+inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, const viennacl::scalar<float>& scalar, const viennacl::scalar<int>& element)
+{
+	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem_scalar", "standard_operations.cl");
+
+	viennacl::ocl::enqueue(kernel(
+		viennacl::traits::opencl_handle(vector),
+		viennacl::traits::opencl_handle(scalar),
+		viennacl::traits::opencl_handle(element)
+	));
+}
+
 
 inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const viennacl::scalar<char>& scalar, int element)
 {
@@ -77,8 +102,19 @@ inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const
 	viennacl::ocl::enqueue(kernel(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::opencl_handle(scalar),
-		cl_uint(element))
-	);
+		cl_uint(element)
+	));
+}
+
+inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const viennacl::scalar<char>& scalar, const viennacl::scalar<int>& element)
+{
+	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem_char_scalar", "standard_operations.cl");
+
+	viennacl::ocl::enqueue(kernel(
+		viennacl::traits::opencl_handle(vector),
+		viennacl::traits::opencl_handle(scalar),
+		viennacl::traits::opencl_handle(element)
+	));
 }
 
 #endif

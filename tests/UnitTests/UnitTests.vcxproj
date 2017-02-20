@@ -180,6 +180,7 @@
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\RMSPropLearningRateTest.cpp" />
     <ClCompile Include="Learning\Supervised\GradientDescentAlgorithms\SimpleGradientDescentTest.cpp" />
     <ClCompile Include="LinearAlgebra\MatrixTest.cpp" />
+    <ClCompile Include="LinearAlgebra\TensorTest.cpp" />
     <ClCompile Include="NetworkTopology\LayeredNetworkTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkCalculationTest.cpp" />
     <ClCompile Include="NeuralNetwork\NeuralNetworkTest.cpp" />
