@@ -47,7 +47,7 @@ namespace LightBulb
 			: AbstractLinearAlgebraObject<Eigen::Matrix<DataType, -1, 1>, viennacl::vector<DataType>>()
 		{
 			if (!((other.eigenValueIsDirty && other.eigenValue.size() == 0) || (other.viennaclValueIsDirty && other.viennaclValue.empty()) || (other.eigenValue.size() == 0 && other.viennaclValue.empty())))
-				copyAllFrom(other);
+				this->copyAllFrom(other);
 		}
 
 
