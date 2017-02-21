@@ -24,13 +24,13 @@ namespace LightBulb
 				JSONObject* neuron = new JSONObject();
 				if (l > 0)
 				{
-					neuron->addAttribute(new JSONAttribute("bias", new JSONNumberElement<double>(networkTopology.getBiasWeightOfNeuron(l, n))));
+					neuron->addAttribute(new JSONAttribute("bias", new JSONNumberElement<float>(networkTopology.getBiasWeightOfNeuron(l, n))));
 
 					JSONObject* weights = new JSONObject();
 					std::vector<double> afferentWeights = networkTopology.getAfferentWeightsPerNeuron(l, n, true);
 					for (int afferentWeightIndex = 0; afferentWeightIndex < afferentWeights.size(); afferentWeightIndex++)
 					{
-						weights->addAttribute(new JSONAttribute(std::to_string(afferentWeightIndex), new JSONNumberElement<double>(afferentWeights[afferentWeightIndex])));
+						weights->addAttribute(new JSONAttribute(std::to_string(afferentWeightIndex), new JSONNumberElement<float>(afferentWeights[afferentWeightIndex])));
 					}
 					neuron->addAttribute(new JSONAttribute("weights", weights));
 				}

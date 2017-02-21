@@ -29,7 +29,7 @@ namespace LightBulb
 		std::string toString() override
 		{
 			std::ostringstream convert;
-			convert << std::fixed << std::setprecision(14) << number;
+			convert << std::fixed << std::setprecision(8) << number;
 			return convert.str();
 		}
 	};

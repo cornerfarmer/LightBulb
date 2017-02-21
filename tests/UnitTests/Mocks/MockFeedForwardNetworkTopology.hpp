@@ -9,8 +9,8 @@
 class MockFeedForwardNetworkTopology : public LightBulb::FeedForwardNetworkTopology
 {
 public:
-	MOCK_METHOD1(refreshNetInputsForLayer, void(int layerNr));
-	MOCK_METHOD1(refreshActivationsForLayer, void(int layerNr));
+	MOCK_METHOD2(refreshNetInputsForLayer, void (int, const LightBulb::Vector<>*));
+	MOCK_METHOD1(refreshActivationsForLayer, void (int));
 	MOCK_CONST_METHOD0(getLayerCount, int());
 };
 

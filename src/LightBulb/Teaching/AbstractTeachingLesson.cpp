@@ -47,15 +47,11 @@ namespace LightBulb
 				errorVector.getEigenValueForEditing().resize(teachingInput.getValues().getEigenValue().size());
 			}
 
-			std::vector<double> output(neuralNetwork.getNetworkTopology().getOutputSize());
-
-			output.assign(outputVector.getEigenValue().data(), outputVector.getEigenValue().data() + output.size());
-
 			for (int i = 0; i < teachingInput.getDimension(); i++)
 			{
 				if (teachingInput.exists(i))
 				{
-					errorVector.getEigenValueForEditing()[i] = teachingInput.get(i) - output[i];
+					errorVector.getEigenValueForEditing()[i] = teachingInput.get(i) - outputVector.getEigenValue()[i];
 					if (clipError)
 						errorVector.getEigenValueForEditing()[i] = std::max(-1.0f, std::min(1.0f, errorVector.getEigenValue()[i]));
 				}

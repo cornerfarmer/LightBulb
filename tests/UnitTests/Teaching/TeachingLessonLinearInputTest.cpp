@@ -20,7 +20,7 @@ public:
 	MockActivationOrder* activationOrder;
 	MockActivationFunction* activationFunction;
 	MockNeuronDescription* neuronDescription;
-	std::vector<double> neuralNetworkOutput;
+	Vector<> neuralNetworkOutput;
 	void SetUp() {
 		neuralNetwork = new MockNeuralNetwork();
 		networkTopology = new MockNetworkTopology();
@@ -43,8 +43,11 @@ public:
 
 	void setUpNeuralNetworkCalculateCall()
 	{
-		neuralNetworkOutput.resize(3, -1);
-		//EXPECT_CALL(*neuralNetwork, calculate(teachingPattern, testing::_, testing::Ref(*activationOrder), true)).WillOnce(testing::SetArgReferee<1>(neuralNetworkOutput));
+		neuralNetworkOutput.getEigenValueForEditing().resize(3);
+		neuralNetworkOutput.getEigenValueForEditing()(0) = -1;
+		neuralNetworkOutput.getEigenValueForEditing()(1) = -1;
+		neuralNetworkOutput.getEigenValueForEditing()(2) = -1;
+		EXPECT_CALL(*neuralNetwork, calculateWithoutOutputCopy(testing::Ref(*teachingPattern), testing::Ref(*activationOrder), true)).WillOnce(testing::ReturnRef(neuralNetworkOutput));
 	}
 
 	virtual ~TeachingLessonLinearInputTest()
@@ -70,10 +73,10 @@ TEST_F(TeachingLessonLinearInputTest, tryLesson)
 {
 	setUpNeuralNetworkCalculateCall();
 	const Vector<>& returnedValue = teachingLesson->tryLesson(*neuralNetwork, *activationOrder);
-	EXPECT_EQ(neuralNetworkOutput.size(), returnedValue.getEigenValue().size());
-	EXPECT_EQ(neuralNetworkOutput[0], returnedValue.getEigenValue()[0]);
-	EXPECT_EQ(neuralNetworkOutput[1], returnedValue.getEigenValue()[1]);
-	EXPECT_EQ(neuralNetworkOutput[2], returnedValue.getEigenValue()[2]);
+	EXPECT_EQ(neuralNetworkOutput.getEigenValue().size(), returnedValue.getEigenValue().size());
+	EXPECT_EQ(neuralNetworkOutput.getEigenValue()[0], returnedValue.getEigenValue()[0]);
+	EXPECT_EQ(neuralNetworkOutput.getEigenValue()[1], returnedValue.getEigenValue()[1]);
+	EXPECT_EQ(neuralNetworkOutput.getEigenValue()[2], returnedValue.getEigenValue()[2]);
 }
 
 TEST_F(TeachingLessonLinearInputTest, getErrormap)
