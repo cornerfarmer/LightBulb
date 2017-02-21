@@ -10,9 +10,11 @@ if(MSVC)
   else()
     add_definitions(/W0)
   endif()
+  option(EnablePCH "EnablePCH" ON)
 elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   # Update if necessary
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+  option(EnablePCH "EnablePCH" OFF)
 endif()
 
 option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" OFF)

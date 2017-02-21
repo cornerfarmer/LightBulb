@@ -6,6 +6,7 @@
 // Includes
 #include <vector>
 #include <map>
+#include "LightBulb/LinearAlgebra/Vector.hpp"
 
 namespace LightBulb
 {

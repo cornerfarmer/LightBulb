@@ -7,6 +7,7 @@
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 #include "LightBulb/Learning/Supervised/GradientDescentAlgorithms/RMSPropLearningRate.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 // Library Includes
 #include <vector>

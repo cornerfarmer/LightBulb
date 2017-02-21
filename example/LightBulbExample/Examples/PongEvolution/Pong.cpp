@@ -6,7 +6,7 @@
 #include "LightBulb/Logging/AbstractLogger.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 //Library includes
-
+#include <thread>
 
 using namespace LightBulb;
 

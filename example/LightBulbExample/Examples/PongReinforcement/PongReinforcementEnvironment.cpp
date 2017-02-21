@@ -4,6 +4,7 @@
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 //Library includes
+#include <thread>
 
 using namespace LightBulb;
 

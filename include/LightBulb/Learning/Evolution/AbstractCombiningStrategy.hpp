@@ -5,12 +5,14 @@
 
 // Include
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
+#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 // Library Includes
 #include <vector>
 #include <memory>
 #include <map>
-#include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 
 namespace LightBulb
 {

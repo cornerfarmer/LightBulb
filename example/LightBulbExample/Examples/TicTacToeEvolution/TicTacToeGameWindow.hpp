@@ -5,7 +5,7 @@
 
 // Includes
 #include "LightBulbApp/Windows/AbstractSubAppWindow.hpp"
-
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
 // Forward declarations
 
 class TicTacToeGameController;

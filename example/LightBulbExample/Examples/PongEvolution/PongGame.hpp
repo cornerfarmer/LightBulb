@@ -8,6 +8,7 @@
 
 // Include
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 // Forward declarations
 

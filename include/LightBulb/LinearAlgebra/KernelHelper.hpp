@@ -9,6 +9,7 @@
 #include <viennacl/traits/stride.hpp>
 #include <viennacl/traits/size.hpp>
 #include <viennacl/traits/handle.hpp>
+#include <viennacl/matrix.hpp>
 
 inline viennacl::ocl::kernel& getKernel(std::string programName, std::string kernelName, std::string fileName)
 {

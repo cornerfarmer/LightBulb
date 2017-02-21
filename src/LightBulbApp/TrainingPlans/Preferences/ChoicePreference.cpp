@@ -1,5 +1,6 @@
 ﻿// Includes
 #include "LightBulbApp/TrainingPlans/Preferences/ChoicePreference.hpp"
+#include <algorithm>
 
 namespace LightBulb
 {

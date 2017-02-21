@@ -10,6 +10,7 @@
 
 // Include
 #include "LightBulb/Logging/AbstractLoggable.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 namespace LightBulb
 {
