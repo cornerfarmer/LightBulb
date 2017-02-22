@@ -10,7 +10,10 @@
 namespace LightBulb
 {
 	enum CalculatorType : unsigned int;
-
+	/**
+	 * \brief Describes a class which uses linear algebra objects.
+	 * \details This class helps to set determine the current calculator type.
+	 */
 	class AbstractLinearAlgebraUser
 	{
 	protected:

@@ -55,12 +55,18 @@ namespace viennacl
 
 namespace LightBulb
 {
-	// Forward declarations
-
+	/**
+	 * \brief Describes a three dimensional linear algebra data structure, also called tensor.
+	 * \details Internally they are just stored as an array of matrices (cpu) and as one big matrix which contains all those smaller matrices (gpu).
+	 * \tparam DataType The data type which should be stored in the data structure.
+	 */
 	template<typename DataType = float>
 	class Tensor : public AbstractLinearAlgebraObject<std::vector<Eigen::Matrix<DataType, -1, -1>>, viennacl::matrix<DataType>>
 	{
 	private:
+		/**
+		 * \brief 
+		 */
 		mutable int viennaclMatrices;
 	protected:
 		void copyToEigen() const override
@@ -70,7 +76,6 @@ namespace LightBulb
 
 			viennacl::copy(this->viennaclValue, this->eigenValue);
 		}
-
 		void copyToViennaCl() const override
 		{
 			if (this->eigenValue.size() != viennaclMatrices || this->eigenValue.size() > 0 && (this->eigenValue[0].rows() != this->viennaclValue.size1() || this->eigenValue[0].cols() != this->viennaclValue.size2()))
@@ -82,8 +87,13 @@ namespace LightBulb
 			if (this->eigenValue.size() != 0)
 				viennacl::copy(this->eigenValue, this->viennaclValue);
 		}
-
 	public:
+		/**
+		 * \brief Creates a new tensor with a specific size.
+		 * \param matrices The amount of matrices.
+		 * \param rows The amount of rows.
+		 * \param cols The amount of cols.
+		 */
 		Tensor(int matrices = 0, int rows = 0, int cols = 0)
 		{
 			viennaclMatrices = 0;
