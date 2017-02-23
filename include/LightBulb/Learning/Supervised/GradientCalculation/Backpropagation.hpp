@@ -29,12 +29,19 @@ namespace LightBulb
 		 * \brief This vector should keep all delta values
 		 */
 		std::vector<Vector<>> lastDeltaVectorOutputLayer;
+		/**
+		 * \brief Temporary storage for derivations.
+		 */
 		std::vector<Vector<>> activationFunctionDerivations;
 		/**
 		 * \brief Can be used to overcome long plateaus.
 		 */
 		double flatSpotEliminationFac;
+		/**
+		 * \brief Temporary storage for the next layer error value factor.
+		 */
 		Vector<> nextLayerErrorValueFactor;
+		// GPU Code
 		void backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G);
 		void backpropagateInnerLayer_1(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& lastDeltaVec, const viennacl::matrix_base<float>& W);
 		void backpropagateInnerLayer_2(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, viennacl::vector_base<float>& deltaVec);

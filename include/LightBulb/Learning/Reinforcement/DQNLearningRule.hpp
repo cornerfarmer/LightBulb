@@ -126,6 +126,9 @@ namespace LightBulb
 		 * \brief The taken action.
 		 */
 		Vector<int> actions;
+		/**
+		 * \brief True, if transition ends in terminal state.
+		 */
 		Vector<char> isTerminalState;
 		/**
 		 * \brief The following state.
@@ -135,6 +138,11 @@ namespace LightBulb
 		 * \brief The gained reward.
 		 */
 		Vector<> rewards;
+		/**
+		 * \brief Resets and resizes data structures.
+		 * \param maxRecordNumber The maximum number of records.
+		 * \param networkInputSize The input size.
+		 */
 		void reset(int maxRecordNumber, int networkInputSize);
 	};
 
@@ -156,6 +164,9 @@ namespace LightBulb
 		 * \brief Index of the transition slot that should be used for the next new transition.
 		 */
 		int nextTransitionIndex;
+		/**
+		 * \brief The current amount of stored transitions.
+		 */
 		int transitionCounter;
 		/**
 		 * \brief The number of iterations until learning will start.
@@ -181,11 +192,29 @@ namespace LightBulb
 		 * \brief The steady/target network.
 		 */
 		std::unique_ptr<AbstractNeuralNetwork> steadyNetwork;
+		/**
+		 * \brief Temporarily stores the current reward. 
+		 */
 		Scalar<> reward;
+		/**
+		 * \brief The current reward sum.
+		 */
 		Scalar<> totalReward;
+		/**
+		 * \brief Temporarily stores the current terminal state.
+		 */
 		Scalar<char> isTerminalState;
+		/**
+		* \brief Temporarily stores an input vector.
+		*/
 		Vector<> tmp;
+		/**
+		* \brief Contains all currently selected teaching lesson inputs.
+		*/
 		std::vector<TeachingInput<>*> teachingLessonsInputs;
+		/**
+		* \brief Contains all currently selected teaching lesson patterns.
+		*/
 		std::vector<Vector<>*> teachingLessonsPatterns;
 		/**
 		 * \brief The current total sum of all average q values in this iteration.

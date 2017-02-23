@@ -28,13 +28,20 @@ namespace LightBulb
 		* \details Default value: 10
 		*/
 		int episodeSize;
+		/**
+		 * \brief Determines the maximum length of an episode.
+		 * \details Default value: 1000
+		 */
 		int maxEpisodeLength;
 		/**
 		 * \brief Determines after how many episodes the network should be rated (for debugging purposes).
 		 * \details Default value: 10
 		 */
 		int ratingInterval;
-
+		/**
+		* \brief Determines after how many iterations the total reward should be logged.
+		* \details Default value: 15
+		*/
 		int logInterval;
 		/**
 		 * \brief The rmsprop options used in the gradient descent algorithm
@@ -79,12 +86,33 @@ namespace LightBulb
 		 * \brief The state memory.
 		 */
 		Matrix<> stateRecord;
+		/**
+		 * \brief The terminal state memory.
+		 */
 		Vector<char> isTerminalStateRecord;
+		/**
+		 * \brief The reward memory.
+		 */
 		Vector<> rewardRecord;
+		/**
+		 * \brief Temporarily stores isTerminalState.
+		 */
 		Scalar<char> isTerminalState;
+		/**
+		 * \brief Temporarily stores an input vector.
+		 */
 		Vector<> tmp;
+		/**
+		* \brief Temporarily stores an error vector.
+		*/
 		Vector<> errorVector;
+		/**
+		* \brief Temporarily stores the reward.
+		*/
 		Scalar<> reward;
+		/**
+		* \brief Temporarily stores the total reward.
+		*/
 		Scalar<> totalReward;
 		/**
 		* \brief The gradient memory.
@@ -126,8 +154,17 @@ namespace LightBulb
 		* \brief The current sum of all error values of the value function learning process.
 		*/
 		double valueErrorSum;
+		/**
+		 * \brief The index where the record starts.
+		 */
 		Scalar<int> recordStart;
+		/**
+		* \brief The index where the next record should be stored.
+		*/
 		Scalar<int> nextRecordIndex;
+		/**
+		* \brief Temporarily stores the last relevant index.
+		*/
 		Scalar<int> lastRelevantIndex;
 		/**
 		 * \brief A step counter used for calculating the average error with errorSum.
@@ -144,8 +181,6 @@ namespace LightBulb
 		void addGradients(AbstractNetworkTopology& networkTopology);
 		/**
 		 * \brief Computes the gradient for the last episode and adds it to the total gradient sum.
-		 * \param stepsSinceLastReward The steps in the episode.
-		 * \param reward The gained reward.
 		 */
 		void computeGradients();
 		/**
@@ -158,6 +193,10 @@ namespace LightBulb
 		 * \param networkTopology The network topology which was used.
 		 */
 		void recordStep(AbstractNetworkTopology& networkTopology, Scalar<>& reward);
+		/**
+		 * \brief Returns the total buffer size.
+		 * \return The total buffer size.
+		 */
 		int getBufferSize();
 		/**
 		 * \brief Calculates the error vector.
