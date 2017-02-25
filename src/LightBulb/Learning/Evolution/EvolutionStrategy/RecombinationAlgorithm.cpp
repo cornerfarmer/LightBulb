@@ -7,6 +7,7 @@
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -14,6 +15,8 @@ namespace LightBulb
 	{
 		useAverageForWeight = useAverageForWeight_;
 		useAverageForMutationStrength = useAverageForMutationStrength_;
+		recombineWeightsWithAverageKernel.reset(new Kernel("recombination_algorithm", "recombineWeightsWithAverage"));
+		recombineMutationStrengthWithAverageKernel.reset(new Kernel("recombination_algorithm", "recombineMutationStrengthWithAverage"));
 	}
 
 	void RecombinationAlgorithm::execute(AbstractIndividual& individual1, AbstractIndividual& individual2)
@@ -82,9 +85,7 @@ namespace LightBulb
 
 	void RecombinationAlgorithm::recombineWeightsWithAverage(viennacl::matrix_base<float>& W1, const viennacl::matrix_base<float>& W2) const
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("recombination_algorithm", "recombineWeightsWithAverage", "recombination_algorithm.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(recombineWeightsWithAverageKernel->use()(
 			viennacl::traits::opencl_handle(W1),
 			cl_uint(viennacl::traits::start1(W1)), cl_uint(viennacl::traits::start2(W1)),
 			cl_uint(viennacl::traits::stride1(W1)), cl_uint(viennacl::traits::stride2(W1)),
@@ -101,9 +102,7 @@ namespace LightBulb
 
 	void RecombinationAlgorithm::recombineMutationStrengthWithAverage(viennacl::vector_base<float>& vec1, const viennacl::vector_base<float>& vec2) const
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("recombination_algorithm", "recombineMutationStrengthWithAverage", "recombination_algorithm.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(recombineMutationStrengthWithAverageKernel->use()(
 			viennacl::traits::opencl_handle(vec1),
 			cl_uint(viennacl::traits::start(vec1)),
 			cl_uint(viennacl::traits::stride(vec1)),
@@ -118,6 +117,6 @@ namespace LightBulb
 
 	AbstractCloneable* RecombinationAlgorithm::clone() const
 	{
-		return new RecombinationAlgorithm(*this);
+		return new RecombinationAlgorithm(useAverageForWeight, useAverageForMutationStrength);
 	}
 }

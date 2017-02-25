@@ -3,6 +3,7 @@
 // Library includes
 #include <stdexcept>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -10,6 +11,7 @@ namespace LightBulb
 	{
 		minValue = minValue_;
 		maxValue = maxValue_;
+		binaryAssignKernel.reset(new Kernel("binary_function", "binary_assign"));
 	}
 
 	double BinaryFunction::execute(double input) const
@@ -29,7 +31,7 @@ namespace LightBulb
 
 	AbstractCloneable* BinaryFunction::clone() const
 	{
-		return new BinaryFunction(*this);
+		return new BinaryFunction(minValue, maxValue);
 	}
 
 	double BinaryFunction::getMaximum() const
@@ -52,8 +54,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("binary_function", "binary_assign", "binary_function.cl");
-			executeVectorAssignKernel(kernel, netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
+			executeVectorAssignKernel(binaryAssignKernel->use(), netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
 		}
 		else
 		{

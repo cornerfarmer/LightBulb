@@ -16,6 +16,7 @@ namespace LightBulb
 	class AbstractNeuronDescriptionFactory;
 	class NeuronDescription;
 	class TopologicalOrder;
+	class Kernel;
 	/**
 	 * \brief This struct contains all options needed to build a FeedForwardNetworkTopology
 	 */
@@ -64,6 +65,7 @@ namespace LightBulb
 		friend void save(Archive& archive, FeedForwardNetworkTopology const & feedForwardNetworkTopology);
 	private:
 		std::unique_ptr<TopologicalOrder> defaultActivationOrder;
+		std::unique_ptr<Kernel> resetActivationsKernel;
 	protected:
 		/**
 		 * \brief The options of the network.

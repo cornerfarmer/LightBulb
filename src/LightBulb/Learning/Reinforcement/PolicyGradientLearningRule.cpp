@@ -15,6 +15,7 @@
 #include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -48,6 +49,12 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initialize(PolicyGradientLearningRuleOptions& options)
 	{
+		getErrorVectorKernel.reset(new Kernel("policy_gradient_learning_rule", "get_error_vector"));
+		computeNextRecordIndexKernel.reset(new Kernel("policy_gradient_learning_rule", "compute_next_record_index"));
+		computeRewardsKernel.reset(new Kernel("policy_gradient_learning_rule", "compute_rewards"));
+		computeNextRecordStartKernel.reset(new Kernel("policy_gradient_learning_rule", "compute_next_record_start"));
+		computeGradientsKernel.reset(new Kernel("policy_gradient_learning_rule", "compute_gradients"));
+
 		recordStart.getEigenValueForEditing() = 0;
 		nextRecordIndex.getEigenValueForEditing() = 0;
 
@@ -116,9 +123,7 @@ namespace LightBulb
 				copyMatrixToTensorArea(gradientRecord[i].getViennaclValueForEditing(), tmpGradient[i].getViennaclValue(), nextRecordIndex.getViennaclValue());
 
 
-			static viennacl::ocl::kernel& kernel3 = getKernel("policy_gradient_learning_rule", "compute_next_record_index", "policy_gradient_learning_rule.cl");
-
-			viennacl::ocl::enqueue(kernel3(
+			viennacl::ocl::enqueue(computeNextRecordIndexKernel->use()(
 				viennacl::traits::opencl_handle(nextRecordIndex.getViennaclValueForEditing()),
 				cl_uint(getBufferSize())
 			));
@@ -155,9 +160,7 @@ namespace LightBulb
 	{
 		if (getOptions().calculatorType == CT_GPU)
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("policy_gradient_learning_rule", "get_error_vector", "policy_gradient_learning_rule.cl");
-
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(getErrorVectorKernel->use()(
 				viennacl::traits::opencl_handle(errorVector.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(getOptions().environment->getLastBooleanOutput().getViennaclValue()),
 				viennacl::traits::opencl_handle(networkTopology.getAllActivations().back().getViennaclValue()),
@@ -295,9 +298,7 @@ namespace LightBulb
 	{
 		if (getOptions().calculatorType == CT_GPU)
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("policy_gradient_learning_rule", "compute_rewards", "policy_gradient_learning_rule.cl");
-
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(computeRewardsKernel->use()(
 				viennacl::traits::opencl_handle(rewardRecord.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(isTerminalStateRecord.getViennaclValue()),
 				viennacl::traits::opencl_handle(recordStart.getViennaclValue()),
@@ -306,11 +307,9 @@ namespace LightBulb
 				cl_uint(getBufferSize())
 			));
 
-			static viennacl::ocl::kernel& kernel2 = getKernel("policy_gradient_learning_rule", "compute_gradients", "policy_gradient_learning_rule.cl");
-
 			for (int j = 0; j < gradientRecord.size(); j++)
 			{
-				viennacl::ocl::enqueue(kernel2(
+				viennacl::ocl::enqueue(computeGradientsKernel->use()(
 					viennacl::traits::opencl_handle(gradient[j].getViennaclValue()),
 					cl_uint(viennacl::traits::size1(gradient[j].getViennaclValue())),
 					cl_uint(viennacl::traits::size2(gradient[j].getViennaclValue())),
@@ -325,9 +324,7 @@ namespace LightBulb
 				));
 			}
 
-			static viennacl::ocl::kernel& kernel3 = getKernel("policy_gradient_learning_rule", "compute_next_record_start", "policy_gradient_learning_rule.cl");
-
-			viennacl::ocl::enqueue(kernel3(
+			viennacl::ocl::enqueue(computeNextRecordIndexKernel->use()(
 				viennacl::traits::opencl_handle(recordStart.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(lastRelevantIndex.getViennaclValue()),
 				cl_uint(getBufferSize())

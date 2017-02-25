@@ -10,6 +10,8 @@
 
 namespace LightBulb
 {
+	class Kernel;
+
 	class ZigguratGenerator : public AbstractRandomGenerator
 	{
 		template <class Archive>
@@ -17,6 +19,8 @@ namespace LightBulb
 		template <class Archive>
 		friend void save(Archive& archive, ZigguratGenerator const& zigguratGenerator);
 	private:
+		std::unique_ptr<Kernel> r4NorKernel;
+		std::unique_ptr<Kernel> r4NorSetupKernel;
 		Vector<> fn;
 		Vector<cl_uint> kn;
 		Vector<> wn;
@@ -25,6 +29,7 @@ namespace LightBulb
 		void reset() override;
 	public:
 		ZigguratGenerator(int seed = -1);
+		~ZigguratGenerator();
 		float randFloat() override;
 		const Vector<>& randMultipleDouble(int count) override;
 	};

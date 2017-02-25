@@ -15,6 +15,7 @@
 
 // Forward declarations
 class AbstractTile;
+class FunctionEvolutionExample;
 
 struct FunctionSimulatorOptions
 {
@@ -25,7 +26,7 @@ struct FunctionSimulatorOptions
 	}
 };
 
-typedef void(*Function)(const LightBulb::Vector<>& pos, LightBulb::Scalar<>& value, const LightBulb::CalculatorType& calculatorType);
+typedef void(FunctionEvolutionExample::*Function)(const LightBulb::Vector<>& pos, LightBulb::Scalar<>& value, const LightBulb::CalculatorType& calculatorType);
 
 class FunctionSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 {
@@ -34,8 +35,9 @@ protected:
 	//std::unique_ptr<FunctionDrawer> drawer;
 	std::unique_ptr<FunctionSimulatorOptions> options;
 	Function function;
+	FunctionEvolutionExample* functionEvolutionExample;
 public:
-	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_);
+	FunctionSimulator(FunctionSimulatorOptions &options_, Function function_, FunctionEvolutionExample* functionEvolutionExample_);
 	FunctionSimulator() = default;
 	void doSimulationStep() override;
 	void getFitness(const LightBulb::AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const override;

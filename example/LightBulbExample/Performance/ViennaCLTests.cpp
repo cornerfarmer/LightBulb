@@ -9,6 +9,7 @@
 #include "LightBulb/NeuronDescription/SameNeuronDescriptionFactory.hpp"
 #include "LightBulb/Function/ActivationFunction/FermiFunction.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 #define SIZE 1024
 #define TESTING 1
@@ -91,11 +92,11 @@ void doViennaCLTest()
 	function.execute(1, activations, netInputs, weights);
 	viennacl::backend::finish();
 
-	auto& test5 = getKernel("test", "test2", "test.cl");
+	LightBulb::Kernel test5("test", "test2");
 	begin = clock();
 	for (int i = 0; i < 100; i++) {
 		//function.execute(1, activations, netInputs, weights);
-		viennacl::ocl::enqueue(test5(cl_uint(1))
+		viennacl::ocl::enqueue(test5.use()(cl_uint(1))
 		);
 	}
 	viennacl::backend::finish();
@@ -108,10 +109,10 @@ void doViennaCLTest()
 
 	viennacl::matrix<float> testMatrix(SIZE, SIZE);
 
-	auto& test1 = getKernel("test", "test1", "test.cl");
+	LightBulb::Kernel test1("test", "test1");
 	begin = clock();
 	for (int i = 0; i < 100000; i++) {
-		viennacl::ocl::enqueue(test1(cl_uint(1),
+		viennacl::ocl::enqueue(test1.use()(cl_uint(1),
 			cl_uint(2),
 			cl_uint(3),
 			cl_uint(4),
@@ -123,20 +124,20 @@ void doViennaCLTest()
 	time = (double)(end - begin) / CLOCKS_PER_SEC;
 	std::cout << time << ";" << (end - begin) << std::endl;
 
-	auto& test2 = getKernel("test", "test2", "test.cl");
+	LightBulb::Kernel test2("test", "test2");
 	begin = clock();
 	for (int i = 0; i < 100000; i++) {
-		viennacl::ocl::enqueue(test2(cl_uint(1))
+		viennacl::ocl::enqueue(test2.use()(cl_uint(1))
 		);
 	}
 	end = clock();
 	time = (double)(end - begin) / CLOCKS_PER_SEC;
 	std::cout << time << ";" << (end - begin) << std::endl;
 
-	auto& test3 = getKernel("test", "test3", "test.cl");
+	LightBulb::Kernel test3("test", "test3");
 	begin = clock();
 	for (int i = 0; i < 100000; i++) {
-		viennacl::ocl::enqueue(test3(viennacl::traits::opencl_handle(testMatrix))
+		viennacl::ocl::enqueue(test3.use()(viennacl::traits::opencl_handle(testMatrix))
 		);
 	}
 	end = clock();

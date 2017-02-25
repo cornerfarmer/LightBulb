@@ -17,6 +17,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractNetworkTopology;
+	class Kernel;
 
 #define DATA_SET_TRAINING_ERROR "Training error"
 #define DATA_SET_EPSILON "Epsilon"
@@ -160,6 +161,8 @@ namespace LightBulb
 		friend void serialize(Archive& archive, DQNLearningRule& learningRule);
 		friend struct cereal::LoadAndConstruct<DQNLearningRule>;
 	private:
+		std::unique_ptr<Kernel> determineActionKernel;
+		std::unique_ptr<Kernel> setTeachingInputKernel;
 		/**
 		 * \brief Index of the transition slot that should be used for the next new transition.
 		 */

@@ -19,6 +19,7 @@ namespace LightBulb
 	class AbstractNetworkTopology;
 	class AbstractGradientCalculation;
 	class NeuralNetwork;
+	class Kernel;
 	/**
 	* \brief All options for the PolicyGradientLearningRule.
 	*/
@@ -82,6 +83,11 @@ namespace LightBulb
 		friend void serialize(Archive& archive, PolicyGradientLearningRule& learningRule);
 		friend struct cereal::LoadAndConstruct<PolicyGradientLearningRule>;
 	private:
+		std::unique_ptr<Kernel> getErrorVectorKernel;
+		std::unique_ptr<Kernel> computeNextRecordIndexKernel;
+		std::unique_ptr<Kernel> computeRewardsKernel;
+		std::unique_ptr<Kernel> computeNextRecordStartKernel;
+		std::unique_ptr<Kernel> computeGradientsKernel;
 		/**
 		 * \brief The state memory.
 		 */

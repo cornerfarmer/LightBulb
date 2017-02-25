@@ -10,8 +10,7 @@
 namespace LightBulb
 {
 	//Forward declarations
-	class Edge;
-
+	class Kernel;
 	// 
 	/**
 	 * \brief The WeightedSumFunction uses the weighted sum to calculate the input ;)
@@ -20,7 +19,10 @@ namespace LightBulb
 	class WeightedSumFunction : public AbstractInputFunction
 	{
 	private:
+		std::unique_ptr<Kernel> executeKernel;
 	public:
+		WeightedSumFunction();
+		~WeightedSumFunction();
 		// Inherited:
 		void execute(int layerNr, const std::vector<Vector<>> &activations, std::vector<Vector<>> &netInputs, const std::vector<Matrix<>> &weights, const Vector<>* alternativeActivation = nullptr) const override;
 		AbstractCloneable* clone() const override;

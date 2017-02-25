@@ -26,6 +26,12 @@ NetworkSimulator::NetworkSimulator(const Vector<> consumers_)
 
 		drawer.reset(new NetworkDrawer(options));
 	}*/
+	calcFitnessKernel.reset(new Kernel("network_evolution_example", "calc_fitness"));
+}
+
+NetworkSimulator::NetworkSimulator()
+{
+	calcFitnessKernel.reset(new Kernel("network_evolution_example", "calc_fitness"));
 }
 
 void NetworkSimulator::doSimulationStep()
@@ -50,9 +56,7 @@ void NetworkSimulator::getFitness(const AbstractIndividual& individual, Scalar<>
 
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("network_evolution_example", "calc_fitness", "network_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(calcFitnessKernel->use()(
 			viennacl::traits::opencl_handle(pos.getViennaclValue()),
 			cl_uint(pos.getViennaclValue().size()),
 			viennacl::traits::opencl_handle(consumers.getViennaclValue()),

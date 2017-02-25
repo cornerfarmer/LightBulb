@@ -12,6 +12,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 	/**
 	 * \brief Computes the gradient by backpropagating the error.
 	 * \details Calculates: \n \n 
@@ -25,6 +26,10 @@ namespace LightBulb
 		friend void serialize(Archive& archive, Backpropagation& backpropagation);
 		friend struct cereal::LoadAndConstruct<Backpropagation>;
 	private:
+		std::unique_ptr<Kernel> backpropagateLastKernel;
+		std::unique_ptr<Kernel> backpropagateInner1Kernel;
+		std::unique_ptr<Kernel> backpropagateInner2Kernel;
+		std::unique_ptr<Kernel> backpropagateInner3Kernel;
 		/**
 		 * \brief This vector should keep all delta values
 		 */
@@ -52,6 +57,7 @@ namespace LightBulb
 		 * \param flatSpotEliminationFac_ Can be used to overcome long plateaus.
 		 */
 		Backpropagation(double flatSpotEliminationFac_ = 0);
+		~Backpropagation();
 		// Inherited:
 		void calcGradient(const AbstractNetworkTopology& networkTopology, const std::vector<Vector<>>& netInputs, const std::vector<Vector<>>& activations, const Vector<>& errorVector, const Vector<>* alternativeActivation = nullptr) override;
 		AbstractCloneable* clone() const override;

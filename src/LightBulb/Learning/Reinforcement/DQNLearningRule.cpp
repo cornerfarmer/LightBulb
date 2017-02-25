@@ -12,6 +12,7 @@
 #include "LightBulb/Logging/AbstractLogger.hpp"
 #include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 // Library includes
 
@@ -66,6 +67,9 @@ namespace LightBulb
 
 		getOptions().environment->setCalculatorType(getOptions().calculatorType);
 		steadyNetwork.reset(getOptions().environment->getNeuralNetwork().clone());
+
+		setTeachingInputKernel.reset(new Kernel("dqn_learning_rule", "set_teaching_input"));
+		determineActionKernel.reset(new Kernel("dqn_learning_rule", "determine_action"));
 	}
 
 	void DQNLearningRule::initializeTry()
@@ -104,9 +108,7 @@ namespace LightBulb
 
 				copyScalarToVectorElement(transitionStorage.rewards.getViennaclValueForEditing(), reward.getViennaclValue(), index);
 
-				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "determine_action", "dqn_learning_rule.cl");
-
-				viennacl::ocl::enqueue(kernel(
+				viennacl::ocl::enqueue(determineActionKernel->use()(
 					viennacl::traits::opencl_handle(getOptions().environment->getLastBooleanOutput().getViennaclValue()),
 					viennacl::traits::opencl_handle(transitionStorage.actions.getViennaclValueForEditing()),
 					cl_uint(viennacl::traits::size(getOptions().environment->getLastBooleanOutput().getViennaclValue())),
@@ -158,9 +160,7 @@ namespace LightBulb
 				tmp.getViennaclValueForEditing() = viennacl::column(transitionStorage.nextStates.getViennaclValueForEditing(), r);
 				const Vector<>& output = steadyNetwork->calculateWithoutOutputCopy(tmp, TopologicalOrder());
 				
-				static viennacl::ocl::kernel& kernel = getKernel("dqn_learning_rule", "set_teaching_input", "dqn_learning_rule.cl");
-				
-				viennacl::ocl::enqueue(kernel(
+				viennacl::ocl::enqueue(setTeachingInputKernel->use()(
 					viennacl::traits::opencl_handle(output.getViennaclValue()),
 					viennacl::traits::opencl_handle(teachingLessonsInputs[i]->getValues().getViennaclValueForEditing()),
 					viennacl::traits::opencl_handle(teachingLessonsInputs[i]->getEnabled().getViennaclValueForEditing()),

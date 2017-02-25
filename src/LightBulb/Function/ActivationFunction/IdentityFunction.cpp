@@ -4,9 +4,15 @@
 // Library includes
 #include <stdexcept>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
+	IdentityFunction::IdentityFunction()
+	{
+		identityDerivAssignKernel.reset(new Kernel("identity_function", "identity_deriv_assign"));
+	}
+
 	double IdentityFunction::execute(double input) const
 	{
 		return input;
@@ -22,8 +28,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("identity_function", "identity_deriv_assign", "identity_function.cl");
-			executeVectorAssignKernel(kernel, input.getViennaclValue(), derivation.getViennaclValueForEditing());
+			executeVectorAssignKernel(identityDerivAssignKernel->use(), input.getViennaclValue(), derivation.getViennaclValueForEditing());
 		}
 		else
 		{
@@ -39,7 +44,7 @@ namespace LightBulb
 
 	AbstractCloneable* IdentityFunction::clone() const
 	{
-		return new IdentityFunction(*this);
+		return new IdentityFunction();
 	}
 
 

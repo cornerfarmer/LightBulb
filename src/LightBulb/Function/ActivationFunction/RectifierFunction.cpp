@@ -2,6 +2,7 @@
 #include "LightBulb/Function/ActivationFunction/RectifierFunction.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 // Library includes
 
@@ -10,6 +11,8 @@ namespace LightBulb
 	RectifierFunction::RectifierFunction(double leakyFac_)
 	{
 		leakyFac = leakyFac_;
+		rectifierAssignKernel.reset(new Kernel("rectifier_function", "rectifier_assign"));
+		rectifierDerivAssignKernel.reset(new Kernel("rectifier_function", "rectifier_deriv_assign"));
 	}
 
 	double RectifierFunction::execute(double input) const
@@ -22,8 +25,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("rectifier_function", "rectifier_assign", "rectifier_function.cl");
-			executeVectorAssignKernel(kernel, netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
+			executeVectorAssignKernel(rectifierAssignKernel->use(), netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
 		}
 		else
 		{
@@ -35,8 +37,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("rectifier_function", "rectifier_deriv_assign", "rectifier_function.cl");
-			executeVectorAssignKernel(kernel, input.getViennaclValue(), derivation.getViennaclValueForEditing());
+			executeVectorAssignKernel(rectifierDerivAssignKernel->use(), input.getViennaclValue(), derivation.getViennaclValueForEditing());
 		}
 		else
 		{
@@ -53,7 +54,7 @@ namespace LightBulb
 
 	AbstractCloneable* RectifierFunction::clone() const
 	{
-		return new RectifierFunction(*this);
+		return new RectifierFunction(leakyFac);
 	}
 
 	double RectifierFunction::getMaximum() const

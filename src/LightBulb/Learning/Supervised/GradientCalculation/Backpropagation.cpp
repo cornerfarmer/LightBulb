@@ -7,14 +7,21 @@
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 #include "LightBulb/Function/ActivationFunction/AbstractActivationFunction.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
 	Backpropagation::Backpropagation(double flatSpotEliminationFac_)
 	{
 		flatSpotEliminationFac = flatSpotEliminationFac_;
+		backpropagateLastKernel.reset(new Kernel("backpropagation", "backpropagate_last"));
+		backpropagateInner1Kernel.reset(new Kernel("backpropagation", "backpropagate_inner_1"));
+		backpropagateInner2Kernel.reset(new Kernel("backpropagation", "backpropagate_inner_2"));
+		backpropagateInner3Kernel.reset(new Kernel("backpropagation", "backpropagate_inner_3"));
 	}
-	
+
+	Backpropagation::~Backpropagation() = default;
+
 	void Backpropagation::initGradient(const AbstractNetworkTopology& networkTopology)
 	{
 		AbstractGradientCalculation::initGradient(networkTopology);
@@ -85,8 +92,6 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateLastLayer(const viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_last", "backpropagation.cl");
-
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
 		size_errorVec.stride = cl_uint(viennacl::traits::stride(errorVec));
@@ -107,7 +112,7 @@ namespace LightBulb
 		size_deltaVec.stride = cl_uint(viennacl::traits::stride(deltaVec));
 		size_deltaVec.size = cl_uint(viennacl::traits::size(deltaVec));
 
-		viennacl::ocl::enqueue(kernel(viennacl::traits::opencl_handle(errorVec),
+		viennacl::ocl::enqueue(backpropagateLastKernel->use()(viennacl::traits::opencl_handle(errorVec),
 			size_errorVec,
 
 			viennacl::traits::opencl_handle(derivVec),
@@ -130,8 +135,6 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateInnerLayer_1(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& lastDeltaVec, const viennacl::matrix_base<float>& W)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_1", "backpropagation.cl");
-
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
 		size_errorVec.stride = cl_uint(viennacl::traits::stride(errorVec));
@@ -142,7 +145,7 @@ namespace LightBulb
 		size_lastDeltaVec.stride = cl_uint(viennacl::traits::stride(lastDeltaVec));
 		size_lastDeltaVec.size = cl_uint(viennacl::traits::size(lastDeltaVec));
 
-		viennacl::ocl::enqueue(kernel(viennacl::traits::opencl_handle(errorVec),
+		viennacl::ocl::enqueue(backpropagateInner1Kernel->use()(viennacl::traits::opencl_handle(errorVec),
 			size_errorVec,
 
 			viennacl::traits::opencl_handle(lastDeltaVec),
@@ -160,8 +163,6 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateInnerLayer_2(viennacl::vector_base<float>& errorVec, const viennacl::vector_base<float>& derivVec, viennacl::vector_base<float>& deltaVec)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_2", "backpropagation.cl");
-
 		viennacl::ocl::packed_cl_uint size_errorVec;
 		size_errorVec.start = cl_uint(viennacl::traits::start(errorVec));
 		size_errorVec.stride = cl_uint(viennacl::traits::stride(errorVec));
@@ -177,7 +178,7 @@ namespace LightBulb
 		size_deltaVec.stride = cl_uint(viennacl::traits::stride(deltaVec));
 		size_deltaVec.size = cl_uint(viennacl::traits::size(deltaVec));
 
-		viennacl::ocl::enqueue(kernel(viennacl::traits::opencl_handle(errorVec),
+		viennacl::ocl::enqueue(backpropagateInner2Kernel->use()(viennacl::traits::opencl_handle(errorVec),
 			size_errorVec,
 
 			viennacl::traits::opencl_handle(derivVec),
@@ -192,8 +193,6 @@ namespace LightBulb
 
 	void Backpropagation::backpropagateInnerLayer_3(const viennacl::vector_base<float>& actVec, viennacl::vector_base<float>& deltaVec, viennacl::matrix_base<float>& G)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("backpropagation", "backpropagate_inner_3", "backpropagation.cl");
-
 		viennacl::ocl::packed_cl_uint size_actVec;
 		size_actVec.start = cl_uint(viennacl::traits::start(actVec));
 		size_actVec.stride = cl_uint(viennacl::traits::stride(actVec));
@@ -204,7 +203,7 @@ namespace LightBulb
 		size_deltaVec.stride = cl_uint(viennacl::traits::stride(deltaVec));
 		size_deltaVec.size = cl_uint(viennacl::traits::size(deltaVec));
 
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(backpropagateInner3Kernel->use()(
 			viennacl::traits::opencl_handle(actVec),
 			size_actVec,
 
@@ -221,6 +220,6 @@ namespace LightBulb
 
 	AbstractCloneable* Backpropagation::clone() const
 	{
-		return new Backpropagation(*this);
+		return new Backpropagation(flatSpotEliminationFac);
 	}
 }

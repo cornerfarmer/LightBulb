@@ -10,9 +10,10 @@ AbstractIndividual* FunctionSimulator::createNewIndividual()
 	return new Position(*this);
 }
 
-FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Function function_)
+FunctionSimulator::FunctionSimulator(FunctionSimulatorOptions &options_, Function function_, FunctionEvolutionExample* functionEvolutionExample_)
 {
 	function = function_;
+	functionEvolutionExample = functionEvolutionExample_;
 
 	options.reset(new FunctionSimulatorOptions(options_));
 
@@ -56,6 +57,6 @@ void FunctionSimulator::doSimulationStep()
 void FunctionSimulator::getFitness(const AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const
 {
 	const LightBulb::Vector<>& pos = static_cast<const Position&>(individual).getPosition();
-	function(pos, fitness, calculatorType);
+	(*functionEvolutionExample.*function)(pos, fitness, calculatorType);
 }
 

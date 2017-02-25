@@ -6,13 +6,11 @@
 
 using namespace LightBulb;
 
-static void sixHumpCamelFunction(const LightBulb::Vector<>& pos, LightBulb::Scalar<>& value, const CalculatorType& calculatorType)
+void FunctionEvolutionExample::sixHumpCamelFunction(const LightBulb::Vector<>& pos, LightBulb::Scalar<>& value, const CalculatorType& calculatorType)
 {
 	if (calculatorType == CT_GPU)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("function_evolution_example", "six_hump_camel_function", "function_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(sixHumpCamelFunctionKernel->use()(
 			viennacl::traits::opencl_handle(pos.getViennaclValue()),
 			viennacl::traits::opencl_handle(value.getViennaclValueForEditing())
 		));
@@ -37,12 +35,13 @@ AbstractEvolutionEnvironment* FunctionEvolutionExample::createEnvironment()
 	FunctionSimulatorOptions simulatorOptions;
 	simulatorOptions.enableGraphics = false;
 
-	return new FunctionSimulator(simulatorOptions, sixHumpCamelFunction);
+	return new FunctionSimulator(simulatorOptions, &FunctionEvolutionExample::sixHumpCamelFunction, this);
 }
 
 FunctionEvolutionExample::FunctionEvolutionExample()
 {
 	addPreferenceGroup(new EvolutionLearningRulePreferenceGroup());
+	sixHumpCamelFunctionKernel.reset(new Kernel("function_evolution_example", "six_hump_camel_function"));
 }
 
 std::string FunctionEvolutionExample::getOriginalName() const

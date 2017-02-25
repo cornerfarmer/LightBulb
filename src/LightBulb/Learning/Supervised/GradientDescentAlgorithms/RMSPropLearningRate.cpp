@@ -4,18 +4,24 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
-	RMSPropLearningRate::RMSPropLearningRate(RMSPropLearningRateOptions& options_)
+	RMSPropLearningRate::RMSPropLearningRate(const RMSPropLearningRateOptions& options_)
 		: AbstractGradientDescentAlgorithm(new RMSPropLearningRateOptions(options_))
 	{
+		rmsPropLearningRateKernel.reset(new Kernel("rms_prop_learning_rate", "rms_prop_learning_rate"));
 	}
 
 	RMSPropLearningRate::RMSPropLearningRate()
 		: AbstractGradientDescentAlgorithm(new RMSPropLearningRateOptions())
 	{
+		rmsPropLearningRateKernel.reset(new Kernel("rms_prop_learning_rate", "rms_prop_learning_rate"));
 	}
+
+
+	RMSPropLearningRate::~RMSPropLearningRate() = default;
 
 	RMSPropLearningRate::RMSPropLearningRate(RMSPropLearningRate&& other) noexcept
 		: RMSPropLearningRate()
@@ -37,6 +43,7 @@ namespace LightBulb
 		swap(lhs.prevGradient, rhs.prevGradient);
 		swap(lhs.prevSquaredGradient, rhs.prevSquaredGradient);
 		swap(lhs.prevDeltaWeights, rhs.prevDeltaWeights);
+		swap(lhs.rmsPropLearningRateKernel, rhs.rmsPropLearningRateKernel);
 	}
 
 	RMSPropLearningRateOptions& RMSPropLearningRate::getOptions()
@@ -59,16 +66,14 @@ namespace LightBulb
 
 	AbstractCloneable* RMSPropLearningRate::clone() const
 	{
-		return new RMSPropLearningRate(*this);
+		return new RMSPropLearningRate(static_cast<RMSPropLearningRateOptions&>(*options.get()));
 	}
 
 	void RMSPropLearningRate::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients)
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("rms_prop_learning_rate", "rms_prop_learning_rate", "rms_prop_learning_rate.cl");
-
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(rmsPropLearningRateKernel->use()(
 				viennacl::traits::opencl_handle(prevSquaredGradient[layerIndex - 1].getViennaclValueForEditing()),
 				cl_uint(viennacl::traits::internal_size2(prevSquaredGradient[layerIndex - 1].getViennaclValue())),
 				viennacl::traits::opencl_handle(prevDeltaWeights[layerIndex - 1].getViennaclValueForEditing()),

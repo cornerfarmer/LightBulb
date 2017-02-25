@@ -6,9 +6,18 @@
 // Library includes
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
+	AbstractTeachingLesson::AbstractTeachingLesson()
+	{
+		calcErrorVectorKernel.reset(new Kernel("teaching_lesson", "calc_error_vector"));
+		calcSpecificErrorKernel.reset(new Kernel("teaching_lesson", "calc_specific_error"));
+	}
+
+	AbstractTeachingLesson::~AbstractTeachingLesson() = default;
+
 	const Vector<>& AbstractTeachingLesson::tryLesson(AbstractNeuralNetwork& neuralNetwork, const AbstractActivationOrder& activationOrder) const
 	{
 		return neuralNetwork.calculateWithoutOutputCopy(getTeachingPattern(), activationOrder);
@@ -63,9 +72,7 @@ namespace LightBulb
 
 	void AbstractTeachingLesson::calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<char>& teachingInputEnabled, const viennacl::vector<float>& outputVector) const
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_error_vector", "teaching_lesson.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(calcErrorVectorKernel->use()(
 			viennacl::traits::opencl_handle(errorVector),
 			cl_uint(viennacl::traits::start(errorVector)),
 			cl_uint(viennacl::traits::stride(errorVector)),
@@ -116,9 +123,7 @@ namespace LightBulb
 
 	void AbstractTeachingLesson::calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("teaching_lesson", "calc_specific_error", "teaching_lesson.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(calcSpecificErrorKernel->use()(
 			viennacl::traits::opencl_handle(errorVector),
 			cl_uint(viennacl::traits::start(errorVector)),
 			cl_uint(viennacl::traits::stride(errorVector)),

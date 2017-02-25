@@ -9,6 +9,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 	/**
 	 * \brief Returns the input if it is greater than 0, otherwise it returns 0.
 	 * \details Describes: \n \n \f$ f(x)={\begin{cases}x&{\mbox{if }}x>0\\ \alpha*x&{\mbox{otherwise}}\end{cases}} \f$ \n \n
@@ -17,6 +18,8 @@ namespace LightBulb
 	class RectifierFunction : public AbstractActivationFunction
 	{
 	private:
+		std::unique_ptr<Kernel> rectifierAssignKernel;
+		std::unique_ptr<Kernel> rectifierDerivAssignKernel;
 		/**
 		 * \brief The alpha factor which influnces the output for negative input
 		 */

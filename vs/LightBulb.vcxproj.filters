@@ -634,6 +634,9 @@
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Tensor.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Kernel.hpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">
@@ -1138,6 +1141,9 @@
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Tensor.cpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Kernel.cpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClCompile>
   </ItemGroup>

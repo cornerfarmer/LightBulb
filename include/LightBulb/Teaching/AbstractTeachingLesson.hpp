@@ -20,6 +20,7 @@ namespace LightBulb
 	class AbstractActivationFunction;
 	class AbstractNeuron;
 	class StandardNeuron;
+	class Kernel;
 
 	/**
 	 * \brief Describes a teaching lesson which stores an input and the preferred output.
@@ -27,12 +28,15 @@ namespace LightBulb
 	class AbstractTeachingLesson : public virtual AbstractLinearAlgebraUser
 	{
 	private:
+		std::unique_ptr<Kernel> calcErrorVectorKernel;
+		std::unique_ptr<Kernel> calcSpecificErrorKernel;
 		mutable Vector<> errorVector;
 		mutable Scalar<> specificErrorScalar;
 		void calcErrorVector(viennacl::vector<float>& errorVector, const viennacl::vector<float>& teachingInput, const viennacl::vector<char>& teachingInputEnabled, const viennacl::vector<float>& outputVector) const;
 		void calcSpecificError(viennacl::scalar<float>& specificError, viennacl::vector<float>& errorVector) const;
 	public:
-		virtual ~AbstractTeachingLesson() {}
+		~AbstractTeachingLesson();
+		AbstractTeachingLesson();
 		/**
 		 * \brief Put the teachingPattern into the neuralNetwork and refreshes the network.
 		 * \param neuralNetwork The neural network to evaluate.

@@ -2,6 +2,7 @@
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -16,16 +17,17 @@ namespace LightBulb
 	AbstractCombiningStrategy::AbstractCombiningStrategy(AbstractCoevolutionEnvironment* secondEnvironment_)
 	{
 		results.reset(new CombiningStrategyResults());
+		setResultsKernel.reset(new Kernel("combining_strategy", "set_results"));
 		secondEnvironment = secondEnvironment_;
 	}
+
+	AbstractCombiningStrategy::~AbstractCombiningStrategy() = default;
 
 	void AbstractCombiningStrategy::setResult(AbstractIndividual& firstPlayer, AbstractIndividual& secondPlayer, int round, const Scalar<bool>& firstPlayerHasWon)
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("combining_strategy", "set_results", "combining_strategy.cl");
-
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(setResultsKernel->use()(
 				viennacl::traits::opencl_handle(results->resultVector.getViennaclValueForEditing()),
 				cl_uint(results->nextResultIndex),
 				viennacl::traits::opencl_handle(firstPlayerHasWon.getViennaclValue())

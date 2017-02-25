@@ -10,28 +10,8 @@
 #include <viennacl/traits/size.hpp>
 #include <viennacl/traits/handle.hpp>
 #include <viennacl/matrix.hpp>
+#include "Kernel.hpp"
 
-/**
- * \brief Returns the kernel with the given name.
- * \detail If it does not exist yet, it will be compiled from the file with the given path.
- * \param programName The name of the program which contains the kernel.
- * \param kernelName The name of the kernel.
- * \param fileName The path of the file which contains the program/kernel code.
- * \return The kernel.
- */
-inline viennacl::ocl::kernel& getKernel(std::string programName, std::string kernelName, std::string fileName)
-{
-	static std::map<std::string, bool> init;
-	if (!init[programName]) {
-		std::ifstream ifs("cl/" + fileName);
-		std::string code((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-
-		viennacl::ocl::current_context().add_program(code, programName);
-		init[programName] = true;
-	}
-
-	return viennacl::ocl::current_context().get_program(programName).get_kernel(kernelName);
-}
 /**
  * \brief Executes an abstract vector cell wise assign kernel.
  * \param kernel The kernel to use.
@@ -66,9 +46,9 @@ inline void executeVectorAssignKernel(viennacl::ocl::kernel& kernel, const vienn
  */
 inline void copyMatrixToTensorArea(viennacl::matrix_base<float>& tensor, const viennacl::matrix_base<float>& matrix, int area)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_matrix_to_tensor_area", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_matrix_to_tensor_area");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(matrix),
 		viennacl::traits::size1(matrix),
 		viennacl::traits::size2(matrix),
@@ -86,9 +66,9 @@ inline void copyMatrixToTensorArea(viennacl::matrix_base<float>& tensor, const v
 */
 inline void copyMatrixToTensorArea(viennacl::matrix_base<float>& tensor, const viennacl::matrix_base<float>& matrix, const viennacl::scalar<int>& area)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_matrix_to_tensor_area_scalar", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_matrix_to_tensor_area_scalar");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(matrix),
 		viennacl::traits::size1(matrix),
 		viennacl::traits::size2(matrix),
@@ -106,9 +86,9 @@ inline void copyMatrixToTensorArea(viennacl::matrix_base<float>& tensor, const v
 */
 inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const viennacl::vector_base<float>& vector, int column)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_vector_to_matrix_col", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_vector_to_matrix_col");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::size(vector),
 		viennacl::traits::opencl_handle(matrix),
@@ -124,9 +104,9 @@ inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const vi
 */
 inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const viennacl::vector_base<float>& vector, const viennacl::scalar<int>& column)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_vector_to_matrix_col_scalar", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_vector_to_matrix_col_scalar");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::size(vector),
 		viennacl::traits::opencl_handle(matrix),
@@ -142,9 +122,9 @@ inline void copyVectorToMatrixCol(viennacl::matrix_base<float>& matrix, const vi
 */
 inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, const viennacl::scalar<float>& scalar, int element)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_scalar_to_vector_elem");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::opencl_handle(scalar),
 		cl_uint(element)
@@ -158,9 +138,9 @@ inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, cons
 */
 inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, const viennacl::scalar<float>& scalar, const viennacl::scalar<int>& element)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem_scalar", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_scalar_to_vector_elem_scalar");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::opencl_handle(scalar),
 		viennacl::traits::opencl_handle(element)
@@ -174,9 +154,9 @@ inline void copyScalarToVectorElement(viennacl::vector_base<float>& vector, cons
 */
 inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const viennacl::scalar<char>& scalar, int element)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem_char", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_scalar_to_vector_elem_char");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::opencl_handle(scalar),
 		cl_uint(element)
@@ -190,9 +170,9 @@ inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const
 */
 inline void copyScalarToVectorElement(viennacl::vector_base<char>& vector, const viennacl::scalar<char>& scalar, const viennacl::scalar<int>& element)
 {
-	static viennacl::ocl::kernel& kernel = getKernel("standard_operations", "copy_scalar_to_vector_elem_char_scalar", "standard_operations.cl");
+	static LightBulb::Kernel kernel("standard_operations", "copy_scalar_to_vector_elem_char_scalar");
 
-	viennacl::ocl::enqueue(kernel(
+	viennacl::ocl::enqueue(kernel.use()(
 		viennacl::traits::opencl_handle(vector),
 		viennacl::traits::opencl_handle(scalar),
 		viennacl::traits::opencl_handle(element)

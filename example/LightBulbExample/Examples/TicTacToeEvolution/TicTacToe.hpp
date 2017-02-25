@@ -28,6 +28,11 @@ enum TicTacToeEvents : unsigned int
 class TicTacToe : public LightBulb::AbstractCoevolutionEnvironment, public LightBulb::Observable<TicTacToeEvents, TicTacToe>
 {
 private:
+	std::unique_ptr<LightBulb::Kernel> setWinnerKernel;
+	std::unique_ptr<LightBulb::Kernel> calcWhoHasWonKernel;
+	std::unique_ptr<LightBulb::Kernel> setFieldsFromOutputKernel;
+	std::unique_ptr<LightBulb::Kernel> resetEnvironmentKernel;
+	std::unique_ptr<LightBulb::Kernel> getSightKernel;
 	void initialize();
 protected:
 	LightBulb::Matrix<int> fields;

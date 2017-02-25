@@ -9,6 +9,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 	/**
 	 * \brief A binary function can decide between two values
 	 * \details The function returns maxValue if the input > 0, otherwise it will return minValue.
@@ -16,6 +17,7 @@ namespace LightBulb
 	class BinaryFunction : public AbstractActivationFunction
 	{
 	private:
+		std::unique_ptr<Kernel> binaryAssignKernel;
 		/**
 		 * \brief The minimum value
 		 */

@@ -13,6 +13,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
+	class Kernel;
 	/**
 	 * \brief A algorithm which combines two given individuals by executing the corresponding EvolutionStrategy algorithm.
 	 * \details There are two modes available:\n\n
@@ -22,6 +23,8 @@ namespace LightBulb
 	class RecombinationAlgorithm : public AbstractRecombinationAlgorithm
 	{
 	private:
+		std::unique_ptr<Kernel> recombineWeightsWithAverageKernel;
+		std::unique_ptr<Kernel> recombineMutationStrengthWithAverageKernel;
 		/**
 		 * \brief True, if the average of the parents weights should be used for the child weights.
 		 */

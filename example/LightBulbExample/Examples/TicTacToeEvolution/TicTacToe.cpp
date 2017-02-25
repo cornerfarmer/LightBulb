@@ -6,6 +6,7 @@
 #include "LightBulb/Learning/Evolution/AbstractCombiningStrategy.hpp"
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionFitnessFunction.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 //Library includes
 
 using namespace LightBulb;
@@ -32,6 +33,11 @@ void TicTacToe::initialize()
 	fields.getEigenValueForEditing().resize(3, 3);
 	resetEnvironment();
 	stepMode = false;
+	setWinnerKernel.reset(new Kernel("tictactoe_evolution_example", "set_winner"));
+	calcWhoHasWonKernel.reset(new Kernel("tictactoe_evolution_example", "calc_who_has_won"));
+	setFieldsFromOutputKernel.reset(new Kernel("tictactoe_evolution_example", "set_fields_from_output"));
+	resetEnvironmentKernel.reset(new Kernel("tictactoe_evolution_example", "reset_environment"));
+	getSightKernel.reset(new Kernel("tictactoe_evolution_example", "get_sight"));
 }
 
 bool TicTacToe::hasGameFinished()
@@ -128,9 +134,7 @@ void TicTacToe::simulateGame(TicTacToeAI& ai1, TicTacToeAI& ai2, bool secondPlay
 
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "set_winner", "tictactoe_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(setWinnerKernel->use()(
 			viennacl::traits::opencl_handle(firstPlayerHasWon.getViennaclValueForEditing()),
 			viennacl::traits::opencl_handle(whoHasWon.getViennaclValue()),
 			viennacl::traits::opencl_handle(illegalMove.getViennaclValue()),
@@ -264,9 +268,7 @@ void TicTacToe::calcWhoHasWon()
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "calc_who_has_won", "tictactoe_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(calcWhoHasWonKernel->use()(
 			viennacl::traits::opencl_handle(whoHasWon.getViennaclValueForEditing()),
 			viennacl::traits::opencl_handle(fields.getViennaclValue()),
 			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue()))
@@ -311,9 +313,7 @@ void TicTacToe::setFieldsFromOutput(const LightBulb::Vector<>& output)
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "set_fields_from_output", "tictactoe_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(setFieldsFromOutputKernel->use()(
 			viennacl::traits::opencl_handle(output.getViennaclValue()),
 			viennacl::traits::opencl_handle(fields.getViennaclValueForEditing()),
 			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue())),
@@ -349,9 +349,7 @@ void TicTacToe::resetEnvironment()
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "reset_environment", "tictactoe_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(resetEnvironmentKernel->use()(
 			viennacl::traits::opencl_handle(fields.getViennaclValueForEditing()),
 			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue())),
 			viennacl::traits::opencl_handle(illegalMove.getViennaclValueForEditing())
@@ -370,9 +368,7 @@ void TicTacToe::resetEnvironment()
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("tictactoe_evolution_example", "get_sight", "tictactoe_evolution_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(getSightKernel->use()(
 			viennacl::traits::opencl_handle(sight.getViennaclValueForEditing()),
 			viennacl::traits::opencl_handle(fields.getViennaclValue()),
 			cl_uint(viennacl::traits::internal_size2(fields.getViennaclValue())),

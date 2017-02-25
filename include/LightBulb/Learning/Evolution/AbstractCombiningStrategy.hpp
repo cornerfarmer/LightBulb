@@ -19,6 +19,7 @@ namespace LightBulb
 	// Forward declarations
 	class AbstractCoevolutionEnvironment;
 	class AbstractIndividual;
+	class Kernel;
 	struct CombiningStrategyResults
 	{
 		Vector<char> resultVector;
@@ -38,6 +39,7 @@ namespace LightBulb
 		 * \brief Stores the current combining results.
 		 */
 		std::unique_ptr<CombiningStrategyResults> results;
+		std::unique_ptr<Kernel> setResultsKernel;
 		/**
 		 * \brief Counts how often the first player has won.
 		 */
@@ -70,6 +72,7 @@ namespace LightBulb
 		 * \param secondEnvironment_ Optional a second environment whose individuals should be used beside the individuals from the default environment.
 		 */
 		AbstractCombiningStrategy(AbstractCoevolutionEnvironment* secondEnvironment_ = nullptr);
+		~AbstractCombiningStrategy();
 		/**
 		 * \brief Executes combining of individuals from the given environment.
 		 * \param environment The environment whose individuals should be used.

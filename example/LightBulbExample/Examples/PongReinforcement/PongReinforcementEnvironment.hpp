@@ -18,15 +18,20 @@ class PongReinforcementEnvironment : public LightBulb::AbstractReinforcementEnvi
 	friend void serialize(Archive& archive, PongReinforcementEnvironment& environment);
 	friend struct cereal::LoadAndConstruct<PongReinforcementEnvironment>;
 private:
+	std::unique_ptr<LightBulb::Kernel> getNnInputKernel;
+	std::unique_ptr<LightBulb::Kernel> getNnInputOnlyKernel;
+	std::unique_ptr<LightBulb::Kernel> interpretNnOutputKernel;
+	std::unique_ptr<LightBulb::Kernel> isTerminalStateKernel;
 	LightBulb::Scalar<int> time;
 	LightBulb::Scalar<>* rewardTmp;
 	bool inSimulationPhase;
+	void initializeKernels();
 protected:
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(LightBulb::Vector<char>& output) override;
 public:
 	PongReinforcementEnvironment(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
-	PongReinforcementEnvironment() = default;
+	PongReinforcementEnvironment();
 	void doSimulationStep(LightBulb::Scalar<>& reward) override;
 	void executeCompareAI();
 	void initializeForLearning() override;

@@ -12,6 +12,7 @@
 #include <exception>
 #include <stdexcept>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -64,11 +65,13 @@ namespace LightBulb
 
 	FeedForwardNetworkTopology::FeedForwardNetworkTopology()
 	{
-
+		resetActivationsKernel.reset(new Kernel("neural_network", "reset_activations"));
 	}
 
 	FeedForwardNetworkTopology::FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_)
 	{
+		resetActivationsKernel.reset(new Kernel("neural_network", "reset_activations"));
+
 		// Copy all options
 		options.reset(new FeedForwardNetworkTopologyOptions(options_));
 
@@ -459,9 +462,7 @@ namespace LightBulb
 			for (int l = 0; l < activations.size(); l++) {
 				if(isCalculatorType(CT_GPU))
 				{
-					static viennacl::ocl::kernel& kernel = getKernel("neural_network", "reset_activations", "neural_network.cl");
-					
-					viennacl::ocl::enqueue(kernel(
+					viennacl::ocl::enqueue(resetActivationsKernel->use()(
 						viennacl::traits::opencl_handle(activations[l].getViennaclValueForEditing()),
 
 						cl_uint(viennacl::traits::start(activations[l].getViennaclValue())),

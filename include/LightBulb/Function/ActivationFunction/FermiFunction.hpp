@@ -9,6 +9,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 	/**
 	 * \brief The FermiFunction is a sigmoid function between 0 and 1 which can be adjusted with temperatureParameter.
 	 * \details Describes: \n \n \f$ f(x) = \frac{1}{1 + e^{\frac{-x}{\beta}}} \f$ \n \n
@@ -19,6 +20,8 @@ namespace LightBulb
 		template <class Archive>
 		friend void serialize(Archive& archive, FermiFunction& fermiFunction);
 	private:
+		std::unique_ptr<Kernel> fermiAssignKernel;
+		std::unique_ptr<Kernel> fermiDerivAssignKernel;
 		/**
 		 * \brief The temperature parameter which describes how fast the function raises
 		 */
@@ -29,6 +32,7 @@ namespace LightBulb
 		 * \param temperatureParameter_ The temperature parameter which describes how fast the function raises
 		 */
 		FermiFunction(double temperatureParameter_ = 1);
+		~FermiFunction();
 		// Inherited
 		double execute(double input) const override;
 		double executeDerivation(double input) const override;

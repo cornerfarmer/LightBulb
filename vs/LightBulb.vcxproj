@@ -163,6 +163,7 @@
     <ClInclude Include="..\include\LightBulb\LightBulbPrec.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.hpp" />
+    <ClInclude Include="..\include\LightBulb\LinearAlgebra\Kernel.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\KernelHelper.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Matrix.hpp" />
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Scalar.hpp" />
@@ -337,6 +338,7 @@
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraObject.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\AbstractLinearAlgebraUser.cpp" />
+    <ClCompile Include="..\src\LightBulb\LinearAlgebra\Kernel.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Matrix.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Scalar.cpp" />
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Tensor.cpp" />

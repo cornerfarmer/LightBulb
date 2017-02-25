@@ -4,18 +4,28 @@
 #include "LightBulb/NetworkTopology/AbstractNetworkTopology.hpp"
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
 	SimpleGradientDescent::SimpleGradientDescent(SimpleGradientDescentOptions& options_)
 		:AbstractGradientDescentAlgorithm(new SimpleGradientDescentOptions(options_))
 	{
-
+		initializeKernels();
 	}
 
 	SimpleGradientDescent::SimpleGradientDescent()
 		: AbstractGradientDescentAlgorithm(new SimpleGradientDescentOptions())
 	{
+		initializeKernels();
+	}
+
+	SimpleGradientDescent::~SimpleGradientDescent() = default;
+
+	void SimpleGradientDescent::initializeKernels()
+	{
+		simpleGradientDescentKernel.reset(new Kernel("simple_gradient_descent", "simple_gradient_descent"));
+		simpleGradientDescentWithMomentumKernel.reset(new Kernel("simple_gradient_descent", "simple_gradient_descent_with_momentum"));
 	}
 
 	SimpleGradientDescent::SimpleGradientDescent(SimpleGradientDescent&& other) noexcept
@@ -35,6 +45,8 @@ namespace LightBulb
 		using std::swap;
 		swap(static_cast<AbstractGradientDescentAlgorithm&>(lhs), static_cast<AbstractGradientDescentAlgorithm&>(rhs));
 		swap(lhs.previousDeltaWeights, rhs.previousDeltaWeights);
+		swap(lhs.simpleGradientDescentKernel, rhs.simpleGradientDescentKernel);
+		swap(lhs.simpleGradientDescentWithMomentumKernel, rhs.simpleGradientDescentWithMomentumKernel);
 	}
 
 	SimpleGradientDescentOptions& SimpleGradientDescent::getOptions()
@@ -58,7 +70,7 @@ namespace LightBulb
 
 	AbstractCloneable* SimpleGradientDescent::clone() const
 	{
-		return new SimpleGradientDescent(*this);
+		return new SimpleGradientDescent(static_cast<SimpleGradientDescentOptions&>(*options.get()));
 	}
 
 	void SimpleGradientDescent::adjustWeights(const AbstractNetworkTopology& networkTopology, Matrix<>& weights, int layerIndex, const Matrix<>& gradients)
@@ -97,9 +109,7 @@ namespace LightBulb
 
 	void SimpleGradientDescent::kernelSimpleGradientDescentWithMomentum(viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& M, const viennacl::matrix_base<float>& G)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent_with_momentum", "simple_gradient_descent.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(simpleGradientDescentWithMomentumKernel->use()(
 			cl_float(getOptions().learningRate),
 			cl_float(getOptions().weightDecayFac),
 			cl_float(getOptions().momentum),
@@ -125,9 +135,7 @@ namespace LightBulb
 
 	void SimpleGradientDescent::kernelSimpleGradientDescent(viennacl::matrix_base<float>& W, const viennacl::matrix_base<float>& G)
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("simple_gradient_descent", "simple_gradient_descent", "simple_gradient_descent.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(simpleGradientDescentKernel->use()(
 			cl_float(getOptions().learningRate),
 			cl_float(getOptions().weightDecayFac),
 

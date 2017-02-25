@@ -9,6 +9,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 	/**
 	 * \brief The IdentityFunction just returns the input without calculating anything
 	 * \details Describes: \n \n \f$f(x)=x\f$ \n \n
@@ -17,7 +18,9 @@ namespace LightBulb
 	class IdentityFunction : public AbstractActivationFunction
 	{
 	private:
+		std::unique_ptr<Kernel> identityDerivAssignKernel;
 	public:
+		IdentityFunction();
 		// Inherited: 
 		double execute(double input) const override;
 		void execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const override;

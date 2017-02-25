@@ -11,6 +11,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 
 	/**
 	* \brief All options for simple gradient descent.
@@ -59,6 +60,8 @@ namespace LightBulb
 		friend void serialize(Archive& archive, SimpleGradientDescent& simpleGradientDescent);
 		friend struct cereal::LoadAndConstruct<SimpleGradientDescent>;
 	private:
+		std::unique_ptr<Kernel> simpleGradientDescentKernel;
+		std::unique_ptr<Kernel> simpleGradientDescentWithMomentumKernel;
 		/**
 		 * \brief Contains all previous deltaWeights (used by the momentum term)
 		 */
@@ -70,6 +73,7 @@ namespace LightBulb
 		SimpleGradientDescentOptions& getOptions();
 		void kernelSimpleGradientDescent(viennacl::matrix_base<float>& W, const viennacl::matrix_base<float>& G);
 		void kernelSimpleGradientDescentWithMomentum(viennacl::matrix_base<float>& W, viennacl::matrix_base<float>& M, const viennacl::matrix_base<float>& G);
+		void initializeKernels();
 	public:
 		/**
 		* \brief Creates simple gradient descent.
@@ -80,6 +84,7 @@ namespace LightBulb
 		 * \brief Creates simple gradient descent.
 		 */
 		SimpleGradientDescent();
+		~SimpleGradientDescent();
 		SimpleGradientDescent(const SimpleGradientDescent& other) = default;
 		SimpleGradientDescent(SimpleGradientDescent&& other) noexcept;
 		SimpleGradientDescent& operator=(SimpleGradientDescent other);

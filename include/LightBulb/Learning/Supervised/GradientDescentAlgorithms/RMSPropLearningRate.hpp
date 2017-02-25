@@ -11,6 +11,7 @@
 
 namespace LightBulb
 {
+	class Kernel;
 	/**
 	* \brief All options for the RMSprop learning rate.
 	*/
@@ -76,6 +77,7 @@ namespace LightBulb
 		friend void serialize(Archive& archive, RMSPropLearningRate& rmsPropLearningRate);
 		friend struct cereal::LoadAndConstruct<RMSPropLearningRate>;
 	private:
+		std::unique_ptr<Kernel> rmsPropLearningRateKernel;
 		/**
 		 * \brief Remembers the previous gradient
 		 */
@@ -98,11 +100,12 @@ namespace LightBulb
 		* \brief Creates the RMSprop learning rate.
 		* \param options_ The options which configure the RMSprop learning rate.
 		*/
-		RMSPropLearningRate(RMSPropLearningRateOptions& options_);
+		RMSPropLearningRate(const RMSPropLearningRateOptions& options_);
 		/**
 		 * \brief Creates the RMSprop learning rate with default options.
 		 */
 		RMSPropLearningRate();
+		~RMSPropLearningRate();
 		RMSPropLearningRate(RMSPropLearningRate&& other) noexcept;
 		RMSPropLearningRate(const RMSPropLearningRate& other) = default;
 		RMSPropLearningRate& operator=(RMSPropLearningRate other);

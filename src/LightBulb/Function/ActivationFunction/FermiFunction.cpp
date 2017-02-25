@@ -3,15 +3,19 @@
 // Library includes
 #include <math.h>
 #include "LightBulb/LinearAlgebra/Vector.hpp"
-#include <viennacl/vector_proxy.hpp>
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
 	FermiFunction::FermiFunction(double temperatureParameter_)
 	{
 		temperatureParameter = temperatureParameter_;
+		fermiAssignKernel.reset(new Kernel("fermi", "fermi_assign"));
+		fermiDerivAssignKernel.reset(new Kernel("fermi", "fermi_deriv_assign"));
 	}
+
+	FermiFunction::~FermiFunction() = default;
 
 	double FermiFunction::execute(double input) const
 	{
@@ -27,7 +31,7 @@ namespace LightBulb
 
 	AbstractCloneable* FermiFunction::clone() const
 	{
-		return new FermiFunction(*this);
+		return new FermiFunction(temperatureParameter);
 	}
 
 	double FermiFunction::getMaximum() const
@@ -49,8 +53,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU)) 
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("fermi", "fermi_assign", "fermi.cl");
-			executeVectorAssignKernel(kernel, netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
+			executeVectorAssignKernel(fermiAssignKernel->use(), netInputs[layerNr].getViennaclValue(), activations[layerNr].getViennaclValueForEditing());
 		} 
 		else
 		{
@@ -63,8 +66,7 @@ namespace LightBulb
 	{
 		if (isCalculatorType(CT_GPU))
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("fermi", "fermi_deriv_assign", "fermi.cl");
-			executeVectorAssignKernel(kernel, input.getViennaclValue(), derivation.getViennaclValueForEditing());
+			executeVectorAssignKernel(fermiDerivAssignKernel->use(), input.getViennaclValue(), derivation.getViennaclValueForEditing());
 		}
 		else
 		{

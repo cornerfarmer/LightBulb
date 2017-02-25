@@ -2,6 +2,7 @@
 #include "LightBulb/Random/ZigguratGenerator.hpp"
 #include "LightBulb/Lib/ziggurat.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -9,16 +10,19 @@ namespace LightBulb
 		:AbstractRandomGenerator(seed), fn(128), kn(128), wn(129)
 	{
 		ZigguratGenerator::reset();
+		r4NorKernel.reset(new Kernel("ziggurat_generator", "r4_nor"));
+		r4NorSetupKernel.reset(new Kernel("ziggurat_generator", "r4_nor_setup"));
 	}
+
+	ZigguratGenerator::~ZigguratGenerator() = default;
 
 	float ZigguratGenerator::randFloat()
 	{
 		if (isCalculatorType(CT_GPU)) {
-			static viennacl::ocl::kernel& kernel = getKernel("ziggurat_generator", "r4_nor", "ziggurat_generator.cl");
 			Scalar<> output;
 			output.getViennaclValueForEditing() = 0;
 
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(r4NorKernel->use()(
 				viennacl::traits::opencl_handle(state.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(kn.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(fn.getViennaclValueForEditing()),
@@ -42,10 +46,8 @@ namespace LightBulb
 			if (count > randomNumberCache.getViennaclValue().size())
 				randomNumberCache.getViennaclValueForEditing().resize(count);
 
-			static viennacl::ocl::kernel& kernel = getKernel("ziggurat_generator", "r4_nor", "ziggurat_generator.cl");
-
 			for (int i = 0; i < count; i++) {
-				viennacl::ocl::enqueue(kernel(
+				viennacl::ocl::enqueue(r4NorKernel->use()(
 					viennacl::traits::opencl_handle(state.getViennaclValueForEditing()),
 					viennacl::traits::opencl_handle(kn.getViennaclValueForEditing()),
 					viennacl::traits::opencl_handle(fn.getViennaclValueForEditing()),
@@ -70,9 +72,7 @@ namespace LightBulb
 		{
 			state.getViennaclValueForEditing() = seed;
 
-			static viennacl::ocl::kernel& kernel = getKernel("ziggurat_generator", "r4_nor_setup", "ziggurat_generator.cl");
-
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(r4NorSetupKernel->use()(
 				viennacl::traits::opencl_handle(kn.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(fn.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(wn.getViennaclValueForEditing())

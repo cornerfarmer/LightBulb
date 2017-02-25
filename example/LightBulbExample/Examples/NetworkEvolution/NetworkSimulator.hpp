@@ -8,6 +8,7 @@
 // Include
 #include "LightBulb/Learning/Evolution/AbstractSimpleEvolutionEnvironment.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 // Forward declarations
 
@@ -19,6 +20,7 @@ class NetworkSimulator : public LightBulb::AbstractSimpleEvolutionEnvironment
 	friend void load(Archive& archive, NetworkSimulator& environment);
 	friend struct cereal::LoadAndConstruct<NetworkSimulator>;
 protected:
+	std::unique_ptr<LightBulb::Kernel> calcFitnessKernel;
 	LightBulb::Vector<> consumers;
 	LightBulb::AbstractIndividual* createNewIndividual() override;
 	//sf::RenderWindow window;
@@ -26,7 +28,7 @@ protected:
 	double distanceBetweenPositions(float pos1X, float pos1Y, float pos2X, float pos2Y) const;
 public:
 	NetworkSimulator(const LightBulb::Vector<> consumers_);
-	NetworkSimulator() = default;
+	NetworkSimulator();
 	void doSimulationStep() override;
 	void getFitness(const LightBulb::AbstractIndividual& individual, LightBulb::Scalar<>& fitness) const override;
 	LightBulb::Vector<>& getConsumers();

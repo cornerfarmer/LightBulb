@@ -7,6 +7,7 @@
 #include "LightBulb/LinearAlgebra/Matrix.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 #include "LightBulb/Random/ZigguratGenerator.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 namespace LightBulb
 {
@@ -16,6 +17,8 @@ namespace LightBulb
 		// Initialize the mutation strength boundaries
 		mutationStrengthMax = mutationStrengthMax_;
 		mutationStrengthMin = mutationStrengthMin_;
+		mutateMutationStrengthKernel.reset(new Kernel("mutation_algorithm", "mutateMutationStrength"));
+		mutateWeightsKernel.reset(new Kernel("mutation_algorithm", "mutateWeights"));
 	}
 
 	void MutationAlgorithm::execute(AbstractIndividual& individual1)
@@ -72,9 +75,7 @@ namespace LightBulb
 
 	void MutationAlgorithm::mutateMutationStrength(viennacl::vector_base<float>& mutationStrength, const viennacl::vector_base<float>& randNumbers) const
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("mutation_algorithm", "mutateMutationStrength", "mutation_algorithm.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(mutateMutationStrengthKernel->use()(
 			viennacl::traits::opencl_handle(mutationStrength),
 			cl_uint(viennacl::traits::start(mutationStrength)),
 			cl_uint(viennacl::traits::stride(mutationStrength)),
@@ -90,9 +91,7 @@ namespace LightBulb
 
 	void MutationAlgorithm::mutateWeights(viennacl::matrix_base<float>& W, const viennacl::vector_base<float>& mutationStrength, unsigned int mutationStrengthOffset, unsigned int randNumbersOffset, const viennacl::vector_base<float>& randNumbers) const
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("mutation_algorithm", "mutateWeights", "mutation_algorithm.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(mutateWeightsKernel->use()(
 			viennacl::traits::opencl_handle(W),
 			cl_uint(viennacl::traits::start1(W)), cl_uint(viennacl::traits::start2(W)),
 			cl_uint(viennacl::traits::stride1(W)), cl_uint(viennacl::traits::stride2(W)),
@@ -113,7 +112,7 @@ namespace LightBulb
 
 	AbstractMutationAlgorithm* MutationAlgorithm::clone() const
 	{
-		return new MutationAlgorithm(*this);
+		return new MutationAlgorithm(mutationStrengthChangeSpeed, mutationStrengthMax, mutationStrengthMin);
 	}
 
 }

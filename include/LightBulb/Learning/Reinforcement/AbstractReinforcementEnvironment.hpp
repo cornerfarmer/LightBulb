@@ -19,6 +19,7 @@ namespace LightBulb
 	struct FeedForwardNetworkTopologyOptions;
 	struct LearningState;
 	class NeuralNetwork;
+	class Kernel;
 	/**
 	 * \brief Describes the environment where the reinforcement learning process takes places.
 	 */
@@ -27,6 +28,10 @@ namespace LightBulb
 		template <class Archive>
 		friend void serialize(Archive& archive, AbstractReinforcementEnvironment& environment);
 	private:
+		std::unique_ptr<Kernel> setBooleanOutputNonGreedyStochasticKernel;
+		std::unique_ptr<Kernel> setBooleanOutputNonGreedyKernel;
+		std::unique_ptr<Kernel> setBooleanOutputRandKernel;
+		std::unique_ptr<Kernel> setBooleanOutputBestKernel;
 		/**
 		* \brief Contains which actions where taken after the last output.
 		*/
@@ -89,6 +94,7 @@ namespace LightBulb
 		 */
 		AbstractReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
 		AbstractReinforcementEnvironment();
+		void initializeKernels();
 		/**
 		* \brief Executes one simulation step.
 		* \return Returns the reward gained after that step.

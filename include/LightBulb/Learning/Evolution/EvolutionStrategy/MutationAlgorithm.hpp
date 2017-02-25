@@ -14,6 +14,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractIndividual;
+	class Kernel;
 	/**
 	 * \brief  A algorithm which mutates a given individual by executing the corresponding EvolutionStrategy algorithm.
 	 * \details The algorithm:\n\n
@@ -23,6 +24,8 @@ namespace LightBulb
 	class MutationAlgorithm : public AbstractMutationAlgorithm
 	{
 	private:
+		std::unique_ptr<Kernel> mutateMutationStrengthKernel;
+		std::unique_ptr<Kernel> mutateWeightsKernel;
 		/**
 		 * \brief This factor influences the change speed of mutationStrengths.
 		 */

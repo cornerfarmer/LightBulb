@@ -5,6 +5,7 @@
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 //Library includes
 #include <thread>
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 using namespace LightBulb;
 
@@ -13,6 +14,20 @@ PongReinforcementEnvironment::PongReinforcementEnvironment(FeedForwardNetworkTop
 {
 	watchMode = false;
 	inSimulationPhase = false;
+	initializeKernels();
+}
+
+PongReinforcementEnvironment::PongReinforcementEnvironment()
+{
+	initializeKernels();
+}
+
+void PongReinforcementEnvironment::initializeKernels()
+{
+	getNnInputKernel.reset(new Kernel("pong_reinforcement_example", "get_nn_input"));
+	getNnInputOnlyKernel.reset(new Kernel("pong_reinforcement_example", "get_nn_input_only"));
+	interpretNnOutputKernel.reset(new Kernel("pong_reinforcement_example", "interpret_nn_output"));
+	isTerminalStateKernel.reset(new Kernel("pong_reinforcement_example", "is_terminal_state"));
 }
 
 void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
@@ -63,14 +78,12 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 	{
 		if (inSimulationPhase)
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input", "pong_reinforcement_example.cl");
-
 			float rand1 = randomGenerator->randFloat();
 			float rand2 = randomGenerator->randFloat();
 			float rand3 = randomGenerator->randFloat();
 			float rand4 = randomGenerator->randFloat();
 
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(getNnInputKernel->use()(
 				viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
 				viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
@@ -96,9 +109,7 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 		}
 		else
 		{
-			static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "get_nn_input_only", "pong_reinforcement_example.cl");
-
-			viennacl::ocl::enqueue(kernel(
+			viennacl::ocl::enqueue(getNnInputOnlyKernel->use()(
 				viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValue()),
 				viennacl::traits::opencl_handle(game.getState().ballPosY.getViennaclValue()),
 				viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValue()),
@@ -128,9 +139,7 @@ void PongReinforcementEnvironment::interpretNNOutput(LightBulb::Vector<char>& ou
 {
 	if (isCalculatorType(CT_GPU))
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "interpret_nn_output", "pong_reinforcement_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(interpretNnOutputKernel->use()(
 			viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
 			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
 			viennacl::traits::opencl_handle(game.getState().ballPosY.getViennaclValueForEditing()),
@@ -187,9 +196,7 @@ void PongReinforcementEnvironment::isTerminalState(Scalar<char>& isTerminalState
 {
 	if (isCalculatorType(CT_GPU)) 
 	{
-		static viennacl::ocl::kernel& kernel = getKernel("pong_reinforcement_example", "is_terminal_state", "pong_reinforcement_example.cl");
-
-		viennacl::ocl::enqueue(kernel(
+		viennacl::ocl::enqueue(isTerminalStateKernel->use()(
 			viennacl::traits::opencl_handle(time.getViennaclValue()),
 			viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
 			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),

@@ -5,6 +5,7 @@
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/Random/AbstractRandomGenerator.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 //Library include
 
@@ -27,9 +28,7 @@ namespace LightBulb
 				{
 					if (useStochasticActionDecision)
 					{
-						static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_non_greedy_stochastic", "reinforcement_environment.cl");
-
-						viennacl::ocl::enqueue(kernel(
+						viennacl::ocl::enqueue(setBooleanOutputNonGreedyStochasticKernel->use()(
 							viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
 							viennacl::traits::opencl_handle(lastOutput.getViennaclValue()),
 							cl_uint(i),
@@ -38,9 +37,7 @@ namespace LightBulb
 					}
 					else
 					{
-						static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_non_greedy", "reinforcement_environment.cl");
-
-						viennacl::ocl::enqueue(kernel(
+						viennacl::ocl::enqueue(setBooleanOutputNonGreedyKernel->use()(
 							viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
 							viennacl::traits::opencl_handle(lastOutput.getViennaclValue()),
 							cl_uint(i)
@@ -65,9 +62,7 @@ namespace LightBulb
 			{
 				if (isCalculatorType(CT_GPU))
 				{
-					static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_rand", "reinforcement_environment.cl");
-
-					viennacl::ocl::enqueue(kernel(
+					viennacl::ocl::enqueue(setBooleanOutputRandKernel->use()(
 						viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
 						cl_uint(viennacl::traits::size(lastBooleanOutput.getViennaclValue())),
 						cl_uint(randomGenerator->randInt(0, lastBooleanOutput.getViennaclValue().size() - 1))
@@ -83,9 +78,7 @@ namespace LightBulb
 			{
 				if (isCalculatorType(CT_GPU))
 				{
-					static viennacl::ocl::kernel& kernel = getKernel("reinforcement_environment", "set_boolean_output_best", "reinforcement_environment.cl");
-
-					viennacl::ocl::enqueue(kernel(
+					viennacl::ocl::enqueue(setBooleanOutputBestKernel->use()(
 						viennacl::traits::opencl_handle(lastBooleanOutput.getViennaclValueForEditing()),
 						viennacl::traits::opencl_handle(lastOutput.getViennaclValue()),
 						cl_uint(viennacl::traits::size(lastBooleanOutput.getViennaclValue()))
@@ -117,9 +110,21 @@ namespace LightBulb
 		epsilonGreedly = epsilonGreedly_;
 		epsilon = epsilon_;
 		useStochasticActionDecision = true;
+		initializeKernels();
 	}
 
-	AbstractReinforcementEnvironment::AbstractReinforcementEnvironment() = default;
+	AbstractReinforcementEnvironment::AbstractReinforcementEnvironment()
+	{
+		initializeKernels();
+	}
+
+	void AbstractReinforcementEnvironment::initializeKernels()
+	{
+		setBooleanOutputNonGreedyKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_non_greedy"));
+		setBooleanOutputNonGreedyStochasticKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_non_greedy_stochastic"));
+		setBooleanOutputRandKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_rand"));
+		setBooleanOutputBestKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_best"));
+	}
 
 	void AbstractReinforcementEnvironment::initializeForLearning()
 	{
