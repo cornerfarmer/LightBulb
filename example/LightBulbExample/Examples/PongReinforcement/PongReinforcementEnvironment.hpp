@@ -9,6 +9,7 @@
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
 #include "Examples/PongEvolution/AbstractPongEnvironment.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 // Forward declarations
 

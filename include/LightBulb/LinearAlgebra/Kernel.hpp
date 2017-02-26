@@ -4,6 +4,13 @@
 #define _KERNEL_H_
 
 // Includes
+#include <string>
+
+namespace viennacl {
+	namespace ocl {
+		class kernel;
+	}
+}
 
 namespace LightBulb
 {

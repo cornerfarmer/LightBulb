@@ -28,6 +28,7 @@ namespace LightBulb
 		double maxValue;
 	public:
 		BinaryFunction(double minValue_ = 0, double maxValue_ = 1);
+		~BinaryFunction();
 		// Inherited:
 		double execute(double input) const override;
 		double executeDerivation(double input) const override;

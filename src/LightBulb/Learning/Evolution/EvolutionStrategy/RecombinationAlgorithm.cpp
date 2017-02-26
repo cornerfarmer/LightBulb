@@ -19,6 +19,8 @@ namespace LightBulb
 		recombineMutationStrengthWithAverageKernel.reset(new Kernel("recombination_algorithm", "recombineMutationStrengthWithAverage"));
 	}
 
+	RecombinationAlgorithm::~RecombinationAlgorithm() = default;
+
 	void RecombinationAlgorithm::execute(AbstractIndividual& individual1, AbstractIndividual& individual2)
 	{
 		std::vector<Matrix<>>& weights1 = static_cast<FeedForwardNetworkTopology&>(individual1.getNeuralNetwork().getNetworkTopology()).getAllWeights();

@@ -21,6 +21,8 @@ namespace LightBulb
 		mutateWeightsKernel.reset(new Kernel("mutation_algorithm", "mutateWeights"));
 	}
 
+	MutationAlgorithm::~MutationAlgorithm() = default;
+
 	void MutationAlgorithm::execute(AbstractIndividual& individual1)
 	{
 		Vector<>& mutationStrength = individual1.getMutationStrength();

@@ -13,6 +13,8 @@ namespace LightBulb
 		identityDerivAssignKernel.reset(new Kernel("identity_function", "identity_deriv_assign"));
 	}
 
+	IdentityFunction::~IdentityFunction() = default;
+
 	double IdentityFunction::execute(double input) const
 	{
 		return input;

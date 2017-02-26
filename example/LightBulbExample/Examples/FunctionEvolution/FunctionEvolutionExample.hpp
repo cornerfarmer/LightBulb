@@ -5,6 +5,8 @@
 
 #include "LightBulbApp/TrainingPlans/AbstractEvolutionTrainingPlan.hpp"
 #include "LightBulb/LinearAlgebra/Kernel.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 class FunctionEvolutionExample : public LightBulb::AbstractEvolutionTrainingPlan
 {
@@ -18,7 +20,7 @@ public:
 	void sixHumpCamelFunction(const LightBulb::Vector<>& pos, LightBulb::Scalar<>& value, const LightBulb::CalculatorType& calculatorType);
 	std::string getOriginalName() const override;
 	std::string getDescription() const override;
-	AbstractTrainingPlan* createNewFromSameType() const override;
+	LightBulb::AbstractTrainingPlan* createNewFromSameType() const override;
 	std::string getLearningRuleName() const override;
 };
 
