@@ -11,6 +11,7 @@
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
+#include "LightBulb/Learning/Reinforcement/DefaultReinforcementIndividual.hpp"
 
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
@@ -37,6 +38,11 @@ AbstractLearningRule* PongPolicyGradientExample::createLearningRate()
 
 LightBulb::AbstractReinforcementEnvironment* PongPolicyGradientExample::createEnvironment()
 {
+	return new PongReinforcementEnvironment();
+}
+
+LightBulb::AbstractReinforcementIndividual* PongPolicyGradientExample::createIndividual()
+{
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 	options.useBiasNeuron = getBooleanPreference(PREFERENCE_BIAS_NEURON);
@@ -49,8 +55,7 @@ LightBulb::AbstractReinforcementEnvironment* PongPolicyGradientExample::createEn
 
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
-
-	return new PongReinforcementEnvironment(options);
+	return new DefaultReinforcementIndividual(&getEnvironment(), options);
 }
 
 

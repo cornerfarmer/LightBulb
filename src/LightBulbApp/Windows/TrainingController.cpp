@@ -15,6 +15,7 @@
 #include "LightBulb/NeuralNetwork/AbstractNeuralNetwork.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
 #include "LightBulb/IO/Exporter/AbstractNetworkExporter.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementIndividual.hpp"
 
 namespace LightBulb
 {
@@ -157,7 +158,7 @@ namespace LightBulb
 		}
 		else if (dynamic_cast<AbstractReinforcementTrainingPlan*>(&trainingPlan))
 		{
-			AbstractNeuralNetwork* clone = static_cast<AbstractReinforcementTrainingPlan&>(trainingPlan).getEnvironment().getNeuralNetwork().clone();
+			AbstractNeuralNetwork* clone = static_cast<AbstractReinforcementTrainingPlan&>(trainingPlan).getIndividual().getNeuralNetwork().clone();
 			clone->setName("Result of " + trainingPlan.getName());
 			neuralNetworkRepository->Add(clone);
 		}

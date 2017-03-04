@@ -13,6 +13,7 @@
 #include "LightBulb/Learning/LearningState.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 #include "LightBulb/LinearAlgebra/Kernel.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementIndividual.hpp"
 
 // Library includes
 
@@ -60,13 +61,13 @@ namespace LightBulb
 		teacher.reset(new Teacher());
 		options->gradientDescentOptions.gradientDescentAlgorithm = new RMSPropLearningRate(options->rmsPropOptions);
 		options->gradientDescentOptions.teacher = teacher.get();
-		options->gradientDescentOptions.neuralNetwork = &getOptions().environment->getNeuralNetwork();
+		options->gradientDescentOptions.neuralNetwork = &getOptions().individual->getNeuralNetwork();
 		options->gradientDescentOptions.logger = nullptr;
 		options->gradientDescentOptions.calculatorType = getOptions().calculatorType;
 		gradientDescent.reset(new GradientDescentLearningRule(options->gradientDescentOptions));
 
 		getOptions().environment->setCalculatorType(getOptions().calculatorType);
-		steadyNetwork.reset(getOptions().environment->getNeuralNetwork().clone());
+		steadyNetwork.reset(getOptions().individual->getNeuralNetwork().clone());
 
 		setTeachingInputKernel.reset(new Kernel("dqn_learning_rule", "set_teaching_input"));
 		determineActionKernel.reset(new Kernel("dqn_learning_rule", "determine_action"));
@@ -74,17 +75,18 @@ namespace LightBulb
 
 	void DQNLearningRule::initializeTry()
 	{
-		transitionStorage.reset(getOptions().replayMemorySize, getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
+		transitionStorage.reset(getOptions().replayMemorySize, getOptions().individual->getNeuralNetwork().getNetworkTopology().getInputSize());
 		nextTransitionIndex = 0;
 		transitionCounter = 0;
-		tmp.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize());
+		tmp.getEigenValueForEditing().resize(getOptions().individual->getNeuralNetwork().getNetworkTopology().getInputSize());
 
 		getOptions().environment->setLearningState(*learningState.get());
 		getOptions().environment->initializeForLearning();
-		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().environment->getNeuralNetwork().getNetworkTopology());
+		getOptions().individual->initializeForLearning();
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().individual->getNeuralNetwork().getNetworkTopology());
 		
 		waitUntilLearningStarts = getOptions().replayStartSize;
-		getOptions().environment->setEpsilon(getOptions().initialExploration);
+		getOptions().individual->setEpsilon(getOptions().initialExploration);
 	}
 	
 	void DQNLearningRule::storeTransition(const AbstractNetworkTopology* networkTopology, const Scalar<>& reward)
@@ -98,7 +100,7 @@ namespace LightBulb
 
 			if (getOptions().calculatorType == CT_GPU)
 			{
-				copyVectorToMatrixCol(transitionStorage.states.getViennaclValueForEditing(), getOptions().environment->getLastInput().getViennaclValue(), index);
+				copyVectorToMatrixCol(transitionStorage.states.getViennaclValueForEditing(), getOptions().individual->getLastInput().getViennaclValue(), index);
 				
 				getOptions().environment->isTerminalState(isTerminalState);
 				copyScalarToVectorElement(transitionStorage.isTerminalState.getViennaclValueForEditing(), isTerminalState.getViennaclValue(), index);
@@ -109,16 +111,16 @@ namespace LightBulb
 				copyScalarToVectorElement(transitionStorage.rewards.getViennaclValueForEditing(), reward.getViennaclValue(), index);
 
 				viennacl::ocl::enqueue(determineActionKernel->use()(
-					viennacl::traits::opencl_handle(getOptions().environment->getLastBooleanOutput().getViennaclValue()),
+					viennacl::traits::opencl_handle(getOptions().individual->getLastBooleanOutput().getViennaclValue()),
 					viennacl::traits::opencl_handle(transitionStorage.actions.getViennaclValueForEditing()),
-					cl_uint(viennacl::traits::size(getOptions().environment->getLastBooleanOutput().getViennaclValue())),
+					cl_uint(viennacl::traits::size(getOptions().individual->getLastBooleanOutput().getViennaclValue())),
 					cl_uint(index)
 				));
 
 			}
 			else
 			{
-				transitionStorage.states.getEigenValueForEditing().col(index) = getOptions().environment->getLastInput().getEigenValue();
+				transitionStorage.states.getEigenValueForEditing().col(index) = getOptions().individual->getLastInput().getEigenValue();
 
 				getOptions().environment->isTerminalState(isTerminalState);
 				transitionStorage.isTerminalState.getEigenValueForEditing()[index] = isTerminalState.getEigenValue();
@@ -130,9 +132,9 @@ namespace LightBulb
 
 				transitionStorage.rewards.getEigenValueForEditing()(index) = reward.getEigenValue();
 			
-				for (int i = 0; i < getOptions().environment->getLastBooleanOutput().getEigenValue().size(); i++)
+				for (int i = 0; i < getOptions().individual->getLastBooleanOutput().getEigenValue().size(); i++)
 				{
-					if (getOptions().environment->getLastBooleanOutput().getEigenValue()[i])
+					if (getOptions().individual->getLastBooleanOutput().getEigenValue()[i])
 					{
 						transitionStorage.actions.getEigenValueForEditing()(index) = i;
 						break;
@@ -236,10 +238,12 @@ namespace LightBulb
 		int totalQValues = 0;
 		qAvgSum = 0;
 
-		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = getOptions().individual->getNeuralNetwork().getNetworkTopology();
 
 		for (int i = 0; i < getOptions().targetNetworkUpdateFrequency; i++) {
+			getOptions().individual->doSimulationStep();
 			getOptions().environment->doSimulationStep(reward);
+
 			if (getOptions().calculatorType == CT_GPU)
 				totalReward.getViennaclValueForEditing() += reward.getViennaclValue();
 			else
@@ -247,8 +251,8 @@ namespace LightBulb
 
 			if (nextIsStartingState)
 			{
-				std::vector<double> output(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
-				getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutput(output);
+				std::vector<double> output(getOptions().individual->getNeuralNetwork().getNetworkTopology().getOutputSize());
+				getOptions().individual->getNeuralNetwork().getNetworkTopology().getOutput(output);
 				totalQ += *max_element(output.begin(), output.end());
 				totalQValues++;
 				nextIsStartingState = false;
@@ -266,16 +270,16 @@ namespace LightBulb
 			{
 				doSupervisedLearning();
 
-				double e = getOptions().environment->getEpsilon();
+				double e = getOptions().individual->getEpsilon();
 				if (e > getOptions().finalExploration)
-					getOptions().environment->setEpsilon(e - (getOptions().initialExploration - getOptions().finalExploration) / getOptions().finalExplorationFrame);
+					getOptions().individual->setEpsilon(e - (getOptions().initialExploration - getOptions().finalExploration) / getOptions().finalExplorationFrame);
 			}
 		}
 
 		if (totalQValues > 0)
 			learningState->addData(DATA_SET_Q_VALUE, totalQ / totalQValues);
 
-		learningState->addData(DATA_SET_EPSILON, getOptions().environment->getEpsilon());
+		learningState->addData(DATA_SET_EPSILON, getOptions().individual->getEpsilon());
 		learningState->addData(DATA_SET_AVG_Q_VALUE, qAvgSum / getOptions().targetNetworkUpdateFrequency);
 
 		learningState->addData(DATA_SET_REWARD, totalReward.getEigenValue()); 
@@ -283,12 +287,12 @@ namespace LightBulb
 
 		learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions().targetNetworkUpdateFrequency);
 
-		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().environment->getNeuralNetwork().getNetworkTopology());
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().individual->getNeuralNetwork().getNetworkTopology());
 
-		double e = getOptions().environment->getEpsilon();
-		getOptions().environment->setEpsilon(0);
-		getOptions().environment->rate();
-		getOptions().environment->setEpsilon(e);
+		double e = getOptions().individual->getEpsilon();
+		getOptions().individual->setEpsilon(0);
+		getOptions().individual->rate();
+		getOptions().individual->setEpsilon(e);
 
 	}
 

@@ -14,6 +14,7 @@ private:
 protected:
 	LightBulb::AbstractLearningRule* createLearningRate() override;
 	LightBulb::AbstractReinforcementEnvironment* createEnvironment() override;
+	LightBulb::AbstractReinforcementIndividual* createIndividual() override;
 public:
 	PongDQNExample();
 	std::string getOriginalName() const override;

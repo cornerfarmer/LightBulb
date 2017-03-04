@@ -26,11 +26,11 @@ private:
 	LightBulb::Scalar<>* rewardTmp;
 	bool inSimulationPhase;
 	void initializeKernels();
+	void reset();
 protected:
 	void getNNInput(LightBulb::Vector<>& input) override;
 	void interpretNNOutput(LightBulb::Vector<char>& output) override;
 public:
-	PongReinforcementEnvironment(LightBulb::FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly = false, double epsilon = 0.1);
 	PongReinforcementEnvironment();
 	void doSimulationStep(LightBulb::Scalar<>& reward) override;
 	void executeCompareAI();

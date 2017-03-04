@@ -25,56 +25,12 @@ namespace LightBulb
 	 */
 	class AbstractReinforcementEnvironment : public virtual AbstractRandomGeneratorUser, public virtual AbstractLinearAlgebraUser
 	{
-		template <class Archive>
-		friend void serialize(Archive& archive, AbstractReinforcementEnvironment& environment);
 	private:
-		std::unique_ptr<Kernel> setBooleanOutputNonGreedyStochasticKernel;
-		std::unique_ptr<Kernel> setBooleanOutputNonGreedyKernel;
-		std::unique_ptr<Kernel> setBooleanOutputRandKernel;
-		std::unique_ptr<Kernel> setBooleanOutputBestKernel;
-		/**
-		* \brief Contains which actions where taken after the last output.
-		*/
-		Vector<char> lastBooleanOutput;
-		/**
-		* \brief Contains the last input of the neural network.
-		*/
-		Vector<> lastInput;
-		/**
-		 * \brief True, if the environment should act greedly when picking actions.
-		 */
-		bool epsilonGreedly = false;
-		/**
-		 * \brief The epsilon value when acting epsilon greedly.
-		 */
-		double epsilon;
-		/**
-		 * \brief True, if actions should be taken randomly.
-		 */
-		bool useStochasticActionDecision;
-		/**
-		 * \brief Builds the output buffer depending on the current network.
-		 */
-		void buildOutputBuffer();
-		/**
-		 * \brief Builds the neural network.
-		 * \param options The options which describe the network.
-		 */
-		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
 	protected:
 		/**
 		 * \brief Points to the learning state of the learning rule.
 		 */
 		LearningState* learningState;
-		/**
-		 * \brief The neural network which should be trained.
-		 */
-		std::unique_ptr<NeuralNetwork> neuralNetwork;
-		/**
-		 * \brief Interprets the given neural network output and acts depending on it.
-		 * \param output The actions which were taken by the network.
-		 */
-		virtual void interpretNNOutput(Vector<char>& output) = 0;
 	public:
 		/**
 		 * \brief Returns the new input for the neural network.
@@ -82,19 +38,11 @@ namespace LightBulb
 		 */
 		virtual void getNNInput(Vector<>& input) = 0;
 		/**
-		 * \brief Executes the neural network calculation.
-		 */
-		void doNNCalculation();
+		* \brief Interprets the given neural network output and acts depending on it.
+		* \param output The actions which were taken by the network.
+		*/
+		virtual void interpretNNOutput(Vector<char>& output) = 0;
 		~AbstractReinforcementEnvironment();
-		/**
-		 * \brief Creates the reinforcement environment.
-		 * \param options The options which describe the network. 
-		 * \param epsilonGreedly True, if the environment should act greedly when picking actions.
-		 * \param epsilon The epsilon value when acting epsilon greedly.
-		 */
-		AbstractReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
-		AbstractReinforcementEnvironment();
-		void initializeKernels();
 		/**
 		* \brief Executes one simulation step.
 		* \return Returns the reward gained after that step.
@@ -104,26 +52,6 @@ namespace LightBulb
 		* \brief Initializes the environment before the learning starts.
 		*/
 		virtual void initializeForLearning();
-		/**
-		 * \brief Can be used to rate the current AI for debugging purposes.
-		 * \return The rating.
-		 */
-		virtual int rate() { return 0; };
-		/**
-		 * \brief Returns the neural network.
-		 * \return The neural network.
-		 */
-		NeuralNetwork& getNeuralNetwork();
-		/**
-		 * \brief Sets a new epsilon value.
-		 * \param newEpsilon The new epsilon value.
-		 */
-		void setEpsilon(double newEpsilon);
-		/**
-		 * \brief Returns the epsilon value.
-		 * \return The epsilon value.
-		 */
-		double getEpsilon();
 		/**
 		 * \brief Sets the learning state.
 		 * \param learningState_ The learning state.
@@ -135,25 +63,13 @@ namespace LightBulb
 		*/
 		virtual std::vector<std::string> getDataSetLabels() const;
 		/**
-		 * \brief Returns the last chosen actions of the network.
-		 * \return A vector of bools which tell per actions if they were taken.
-		 */
-		const Vector<char>& getLastBooleanOutput() const;
-		const Vector<>& getLastInput() const;
-		/**
 		 * \brief Returns if the environment is in a terminal state.
 		 * \return True, if the environment is in a terminal state.
 		 */
 		virtual void isTerminalState(LightBulb::Scalar<char>& isTerminalState) = 0;
-		/**
-		 * \brief Sets, if actions should be taken randomly. 
-		 * \param useStochasticActionDecision_ True, if actions should be taken randomly. 
-		 */
-		void setStochasticActionDecision(bool useStochasticActionDecision_);
-		void setCalculatorType(const CalculatorType& calculatorType) override;
 	};
 }
 
-#include "LightBulb/IO/AbstractReinforcementEnvironmentIO.hpp"
+EMPTY_SINGLE_SERIALIZATION(LightBulb::AbstractReinforcementEnvironment, LightBulb);
 
 #endif

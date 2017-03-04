@@ -11,6 +11,7 @@
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
+#include "LightBulb/Learning/Reinforcement/DefaultReinforcementIndividual.hpp"
 
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
@@ -44,6 +45,11 @@ AbstractLearningRule* PongDQNExample::createLearningRate()
 
 AbstractReinforcementEnvironment* PongDQNExample::createEnvironment()
 {
+	return new PongReinforcementEnvironment();
+}
+
+LightBulb::AbstractReinforcementIndividual* PongDQNExample::createIndividual()
+{
 	FeedForwardNetworkTopologyOptions options;
 	options.enableShortcuts = getBooleanPreference(PREFERENCE_SHORTCUT_ENABLE);
 	options.useBiasNeuron = getBooleanPreference(PREFERENCE_USE_BIAS_NEURON);
@@ -56,8 +62,7 @@ AbstractReinforcementEnvironment* PongDQNExample::createEnvironment()
 
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
-
-	return new PongReinforcementEnvironment(options, true, 1);
+	return new DefaultReinforcementIndividual(&getEnvironment(), options, true, 1);
 }
 
 

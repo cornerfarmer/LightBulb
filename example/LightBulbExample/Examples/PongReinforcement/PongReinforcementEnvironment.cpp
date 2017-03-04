@@ -9,16 +9,10 @@
 
 using namespace LightBulb;
 
-PongReinforcementEnvironment::PongReinforcementEnvironment(FeedForwardNetworkTopologyOptions& options_, bool epsilonGreedly, double epsilon)
-	: AbstractReinforcementEnvironment(options_, epsilonGreedly, epsilon)
+PongReinforcementEnvironment::PongReinforcementEnvironment()
 {
 	watchMode = false;
 	inSimulationPhase = false;
-	initializeKernels();
-}
-
-PongReinforcementEnvironment::PongReinforcementEnvironment()
-{
 	initializeKernels();
 }
 
@@ -30,10 +24,8 @@ void PongReinforcementEnvironment::initializeKernels()
 	isTerminalStateKernel.reset(new Kernel("pong_reinforcement_example", "is_terminal_state"));
 }
 
-void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
+void PongReinforcementEnvironment::reset()
 {
-	inSimulationPhase = true;
-	rewardTmp = &reward;
 	if (isCalculatorType(CT_CPU))
 	{
 		if (game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue() || time.getEigenValue() == -1)
@@ -49,8 +41,13 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 		}
 		game.setPlayer(1);
 	}
+}
 
-	doNNCalculation();
+void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
+{
+	inSimulationPhase = true;
+	rewardTmp = &reward;
+
 	if (isCalculatorType(CT_CPU))
 	{
 		game.setPlayer(-1);
@@ -69,6 +66,8 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 		time.getEigenValueForEditing()++;
 		reward.getEigenValueForEditing() = game.whoHasWon();
 	}
+
+	reset();
 	inSimulationPhase = false;
 }
 
@@ -183,6 +182,7 @@ void PongReinforcementEnvironment::initializeForLearning()
 {
 	AbstractReinforcementEnvironment::initializeForLearning();
 	time.getEigenValueForEditing() = -1;
+	reset();
 }
 
 
@@ -208,7 +208,7 @@ void PongReinforcementEnvironment::isTerminalState(Scalar<char>& isTerminalState
 	}
 	else
 	{
-		isTerminalState.getEigenValueForEditing() = game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue();
+		isTerminalState.getEigenValueForEditing() = time.getEigenValue() == 0;
 	}
 }
 

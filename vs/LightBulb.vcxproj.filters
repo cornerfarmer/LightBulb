@@ -571,9 +571,6 @@
     <ClInclude Include="..\include\LightBulb\IO\AbstractRandomGeneratorIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementEnvironmentIO.hpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulb\IO\AbstractReinforcementLearningRuleIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
@@ -636,6 +633,15 @@
     </ClInclude>
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Kernel.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\DefaultReinforcementIndividual.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementIndividual.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\DefaultReinforcementIndividualIO.hpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1068,9 +1074,6 @@
     <ClCompile Include="..\src\LightBulb\IO\AbstractRandomGeneratorIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\LightBulb\IO\AbstractReinforcementEnvironmentIO.cpp">
-      <Filter>Quelldateien\IO</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\LightBulb\IO\AbstractReinforcementLearningRuleIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
@@ -1145,6 +1148,15 @@
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Kernel.cpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\DefaultReinforcementIndividual.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementIndividual.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\DefaultReinforcementIndividualIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

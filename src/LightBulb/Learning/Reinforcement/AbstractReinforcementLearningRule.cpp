@@ -2,6 +2,7 @@
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementLearningRule.hpp"
 // Library includes
 #include "LightBulb/Learning/Reinforcement/AbstractReinforcementEnvironment.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementIndividual.hpp"
 
 namespace LightBulb
 {
@@ -15,6 +16,8 @@ namespace LightBulb
 	{
 		if (getOptions().environment)
 			getOptions().environment->setRandomGenerator(*randomGenerator.get());
+		if (getOptions().individual)
+			getOptions().individual->setRandomGenerator(*randomGenerator.get());
 	}
 
 	bool AbstractReinforcementLearningRule::hasLearningSucceeded()

@@ -14,6 +14,7 @@ namespace LightBulb
 	class AbstractNeuralNetwork;
 	struct AbstractReinforcementLearningRuleOptions;
 	class AbstractReinforcementEnvironment;
+	class AbstractReinforcementIndividual;
 	/**
 	* \brief Describes a training plan which uses reinforcement learning.
 	*/
@@ -28,11 +29,13 @@ namespace LightBulb
 		 * \brief The reinforcement environment which is used.
 		 */
 		std::unique_ptr<AbstractReinforcementEnvironment> environment;
+		std::unique_ptr<AbstractReinforcementIndividual> individual;
 		/**
 		 * \brief Creates the reinforcement environment.
 		 * \return The new environment.
 		 */
 		virtual AbstractReinforcementEnvironment* createEnvironment() = 0;
+		virtual AbstractReinforcementIndividual* createIndividual() = 0;
 		/**
 		* \brief Fills all learning rule options which are the same for all reinforcement learning rule training plans.
 		* \param options The options to fill.
@@ -49,6 +52,7 @@ namespace LightBulb
 		 * \return The environment.
 		 */
 		AbstractReinforcementEnvironment& getEnvironment();
+		AbstractReinforcementIndividual& getIndividual();
 		// Inherited:
 		void initializeStart() override;
 	};

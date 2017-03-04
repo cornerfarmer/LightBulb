@@ -12,6 +12,7 @@ namespace LightBulb
 {
 	// Forward declarations
 	class AbstractReinforcementEnvironment;
+	class AbstractReinforcementIndividual;
 	/**
 	* \brief All general options which are the same for all reinforcement learning rules.
 	*/
@@ -21,12 +22,14 @@ namespace LightBulb
 		* \brief The environment which is used by this learning rule.
 		*/
 		AbstractReinforcementEnvironment* environment;
+		AbstractReinforcementIndividual* individual;
 		/**
 		* \brief Creates the options and fills them with default options.
 		*/
 		AbstractReinforcementLearningRuleOptions()
 		{
 			environment = nullptr;
+			individual = nullptr;
 			maxIterationsPerTry = 10000000;
 		}
 	};

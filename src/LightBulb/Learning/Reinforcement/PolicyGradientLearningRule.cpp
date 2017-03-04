@@ -16,6 +16,7 @@
 #include "LightBulb/Function/ActivationFunction/IdentityFunction.hpp"
 #include "LightBulb/LinearAlgebra/KernelHelper.hpp"
 #include "LightBulb/LinearAlgebra/Kernel.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractReinforcementIndividual.hpp"
 
 namespace LightBulb
 {
@@ -71,17 +72,17 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::initializeLearningAlgoritm()
 	{
-		gradientDescentAlgorithm->initialize(getOptions().environment->getNeuralNetwork().getNetworkTopology());
-		gradientCalculation->initWithExternalGradient(getOptions().environment->getNeuralNetwork().getNetworkTopology());
-		stateRecord.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getInputSize(), getBufferSize());
+		gradientDescentAlgorithm->initialize(getOptions().individual->getNeuralNetwork().getNetworkTopology());
+		gradientCalculation->initWithExternalGradient(getOptions().individual->getNeuralNetwork().getNetworkTopology());
+		stateRecord.getEigenValueForEditing().resize(getOptions().individual->getNeuralNetwork().getNetworkTopology().getInputSize(), getBufferSize());
 		rewardRecord.getEigenValueForEditing().resize(getBufferSize());
 		isTerminalStateRecord.getEigenValueForEditing().resize(getBufferSize());
-		errorVector.getEigenValueForEditing().resize(getOptions().environment->getNeuralNetwork().getNetworkTopology().getOutputSize());
-		tmpGradient = getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights();
-		gradient = getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights();
+		errorVector.getEigenValueForEditing().resize(getOptions().individual->getNeuralNetwork().getNetworkTopology().getOutputSize());
+		tmpGradient = getOptions().individual->getNeuralNetwork().getNetworkTopology().getAllWeights();
+		gradient = getOptions().individual->getNeuralNetwork().getNetworkTopology().getAllWeights();
 
 		gradientRecord.clear();
-		for (auto layer = getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights().begin(); layer != getOptions().environment->getNeuralNetwork().getNetworkTopology().getAllWeights().end(); layer++)
+		for (auto layer = getOptions().individual->getNeuralNetwork().getNetworkTopology().getAllWeights().begin(); layer != getOptions().individual->getNeuralNetwork().getNetworkTopology().getAllWeights().end(); layer++)
 			gradientRecord.push_back(Tensor<>(getBufferSize(), layer->getEigenValue().rows(), layer->getEigenValue().cols()));
 
 		if (getOptions().valueFunctionAsBase)
@@ -107,7 +108,7 @@ namespace LightBulb
 		
 		if (getOptions().calculatorType == CT_GPU) 
 		{
-			copyVectorToMatrixCol(stateRecord.getViennaclValueForEditing(), getOptions().environment->getLastInput().getViennaclValue(), nextRecordIndex.getViennaclValue());
+			copyVectorToMatrixCol(stateRecord.getViennaclValueForEditing(), getOptions().individual->getLastInput().getViennaclValue(), nextRecordIndex.getViennaclValue());
 
 			copyScalarToVectorElement(rewardRecord.getViennaclValueForEditing(), reward.getViennaclValue(), nextRecordIndex.getViennaclValue());
 
@@ -117,7 +118,7 @@ namespace LightBulb
 			for (int i = 0; i < tmpGradient.size(); i++)
 				tmpGradient[i].getViennaclValueForEditing().clear();
 
-			gradientCalculation->calcGradient(networkTopology, errorVector, tmpGradient, &getOptions().environment->getLastInput());
+			gradientCalculation->calcGradient(networkTopology, errorVector, tmpGradient, &getOptions().individual->getLastInput());
 
 			for (int i = 0; i < tmpGradient.size(); i++)
 				copyMatrixToTensorArea(gradientRecord[i].getViennaclValueForEditing(), tmpGradient[i].getViennaclValue(), nextRecordIndex.getViennaclValue());
@@ -131,7 +132,7 @@ namespace LightBulb
 		}
 		else
 		{
-			stateRecord.getEigenValueForEditing().col(nextRecordIndex.getEigenValue()) = getOptions().environment->getLastInput().getEigenValue();
+			stateRecord.getEigenValueForEditing().col(nextRecordIndex.getEigenValue()) = getOptions().individual->getLastInput().getEigenValue();
 
 			rewardRecord.getEigenValueForEditing()[nextRecordIndex.getEigenValue()] = reward.getEigenValue();
 
@@ -141,7 +142,7 @@ namespace LightBulb
 			for (int i = 0; i < tmpGradient.size(); i++)
 				tmpGradient[i].getEigenValueForEditing().setZero();
 			
-			gradientCalculation->calcGradient(networkTopology, errorVector, tmpGradient, &getOptions().environment->getLastInput());
+			gradientCalculation->calcGradient(networkTopology, errorVector, tmpGradient, &getOptions().individual->getLastInput());
 
 			for (int i = 0; i < tmpGradient.size(); i++)
 				gradientRecord[i].getEigenValueForEditing()[nextRecordIndex.getEigenValue()] = tmpGradient[i].getEigenValue();
@@ -162,7 +163,7 @@ namespace LightBulb
 		{
 			viennacl::ocl::enqueue(getErrorVectorKernel->use()(
 				viennacl::traits::opencl_handle(errorVector.getViennaclValueForEditing()),
-				viennacl::traits::opencl_handle(getOptions().environment->getLastBooleanOutput().getViennaclValue()),
+				viennacl::traits::opencl_handle(getOptions().individual->getLastBooleanOutput().getViennaclValue()),
 				viennacl::traits::opencl_handle(networkTopology.getAllActivations().back().getViennaclValue()),
 				cl_uint(viennacl::traits::size(networkTopology.getAllActivations().back().getViennaclValue()))
 			));
@@ -171,7 +172,7 @@ namespace LightBulb
 		{
 			for (int i = 0; i < networkTopology.getAllActivations().back().getEigenValue().size(); i++)
 			{
-				errorVector.getEigenValueForEditing()(i) = getOptions().environment->getLastBooleanOutput().getEigenValue()(i) - networkTopology.getAllActivations().back().getEigenValue()[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
+				errorVector.getEigenValueForEditing()(i) = getOptions().individual->getLastBooleanOutput().getEigenValue()(i) - networkTopology.getAllActivations().back().getEigenValue()[i];//-2 * std::signbit(getOptions()->environment->getLastBooleanOutput()[i] - lastOutput[i]) + 1;
 			}
 			errorSum += errorVector.getEigenValueForEditing().cwiseAbs().sum();
 		}
@@ -216,7 +217,7 @@ namespace LightBulb
 		valueErrorSum = 0;
 		errorSteps = 0;
 		valueErrorSteps = 0;
-		AbstractNetworkTopology& networkTopology = getOptions().environment->getNeuralNetwork().getNetworkTopology();
+		AbstractNetworkTopology& networkTopology = getOptions().individual->getNeuralNetwork().getNetworkTopology();
 		
 		if (getOptions().calculatorType == CT_GPU)
 		{
@@ -262,9 +263,9 @@ namespace LightBulb
 
 		if (learningState->iterations % getOptions().ratingInterval == 0)
 		{
-			getOptions().environment->setStochasticActionDecision(false);
-			getOptions().environment->rate();
-			getOptions().environment->setStochasticActionDecision(true);
+			getOptions().individual->setStochasticActionDecision(false);
+			getOptions().individual->rate();
+			getOptions().individual->setStochasticActionDecision(true);
 		}
 	}
 
