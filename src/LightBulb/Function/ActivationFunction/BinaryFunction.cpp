@@ -14,6 +14,8 @@ namespace LightBulb
 		binaryAssignKernel.reset(new Kernel("binary_function", "binary_assign"));
 	}
 
+	BinaryFunction::~BinaryFunction() = default;
+
 	double BinaryFunction::execute(double input) const
 	{
 		// If the input is greater than the threshold return 1 else 0

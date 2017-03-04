@@ -15,6 +15,8 @@ namespace LightBulb
 		rectifierDerivAssignKernel.reset(new Kernel("rectifier_function", "rectifier_deriv_assign"));
 	}
 
+	RectifierFunction::~RectifierFunction() = default;
+
 	double RectifierFunction::execute(double input) const
 	{
 		// Execture the fermi function

@@ -48,6 +48,7 @@ namespace LightBulb
 		 * \param mutationStrengthMin_ The absolute minimum of a mutationStrength value.
 		 */
 		MutationAlgorithm(double mutationStrengthChangeSpeed_, double mutationStrengthMax_ = 50, double mutationStrengthMin_ = 0.000001f);
+		~MutationAlgorithm();
 		// Inherited:
 		void execute(AbstractIndividual& individual1) override;
 		AbstractMutationAlgorithm* clone() const override;

@@ -30,6 +30,7 @@ namespace LightBulb
 		 * \param leakyFac_ The alpha factor which influnces the output for negative input
 		 */
 		RectifierFunction(double leakyFac_ = 0);
+		~RectifierFunction();
 		// Inherited
 		double execute(double input) const override;
 		double executeDerivation(double input) const override;

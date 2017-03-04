@@ -13,6 +13,7 @@
 #include "LightBulb/Learning/Evolution/AbstractCoevolutionEnvironment.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
+#include "LightBulb/LinearAlgebra/Kernel.hpp"
 
 // Forward declarations
 class TicTacToeAI;

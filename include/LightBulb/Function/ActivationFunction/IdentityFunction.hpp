@@ -21,6 +21,7 @@ namespace LightBulb
 		std::unique_ptr<Kernel> identityDerivAssignKernel;
 	public:
 		IdentityFunction();
+		~IdentityFunction();
 		// Inherited: 
 		double execute(double input) const override;
 		void execute(int layerNr, std::vector<Vector<>> &activations, const std::vector<Vector<>> &netInputs) const override;

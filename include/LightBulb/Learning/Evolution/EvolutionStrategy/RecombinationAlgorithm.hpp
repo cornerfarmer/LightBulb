@@ -42,6 +42,7 @@ namespace LightBulb
 		 * \param useAverageForMutationStrength_ True, if the average of the parents mutation strengths should be used for the child mutation strengths.
 		 */
 		RecombinationAlgorithm(bool useAverageForWeight_ = true, bool useAverageForMutationStrength_ = true);
+		~RecombinationAlgorithm();
 		// Inherited.
 		void execute(AbstractIndividual& individual1, AbstractIndividual& individual2) override;
 		AbstractCloneable* clone() const override;

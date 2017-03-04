@@ -1,5 +1,8 @@
 // Includes
 #include "LightBulb/LinearAlgebra/Kernel.hpp"
+#include <viennacl/ocl/kernel.hpp>
+#include <viennacl/ocl/context.hpp>
+#include <viennacl/ocl/backend.hpp>
 
 LightBulb::Kernel::Kernel(std::string programName_, std::string kernelName_)
 {
