@@ -221,6 +221,7 @@ namespace LightBulb
 		* \return The name
 		*/
 		std::vector<std::string> getDataSetLabels() const override;
+		void refreshSteadyNetwork();
 	};
 }
 

@@ -166,6 +166,11 @@ namespace LightBulb
 	}
 
 
+	void DQNLearningRule::refreshSteadyNetwork()
+	{
+		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().individual->getNeuralNetwork().getNetworkTopology());
+	}
+
 	void DQNLearningRule::doIteration()
 	{
 		log("Iteration " + std::to_string(learningState->iterations), LL_LOW);
@@ -228,7 +233,7 @@ namespace LightBulb
 
 		learningState->addData(DATA_SET_TRAINING_ERROR, currentTotalError / getOptions().targetNetworkUpdateFrequency);
 
-		steadyNetwork->getNetworkTopology().copyWeightsFrom(getOptions().individual->getNeuralNetwork().getNetworkTopology());
+		refreshSteadyNetwork();
 
 		double e = getOptions().individual->getEpsilon();
 		getOptions().individual->setEpsilon(0);
