@@ -36,7 +36,7 @@
     <ClInclude Include="..\include\LightBulb\IO\AbstractEvolutionLearningRuleIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractGradientDescentAlgorithmIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractHallOfFameAlgorithmIO.hpp" />
-    <ClInclude Include="..\include\LightBulb\IO\DefaultReinforcementIndividualIO.hpp" />
+    <ClInclude Include="..\include\LightBulb\IO\AbstractDefaultReinforcementIndividualIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractIndividualIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractLearningRuleIO.hpp" />
     <ClInclude Include="..\include\LightBulb\IO\AbstractLinearAlgebraObjectIO.hpp" />
@@ -148,7 +148,7 @@
     <ClInclude Include="..\include\LightBulb\Learning\LearningState.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementEnvironment.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementIndividual.hpp" />
-    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\DefaultReinforcementIndividual.hpp" />
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractDefaultReinforcementIndividual.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\DQNLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
@@ -225,7 +225,7 @@
     <ClCompile Include="..\src\LightBulb\IO\AbstractEvolutionLearningRuleIO.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\AbstractGradientDescentAlgorithmIO.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\AbstractHallOfFameAlgorithmIO.cpp" />
-    <ClCompile Include="..\src\LightBulb\IO\DefaultReinforcementIndividualIO.cpp" />
+    <ClCompile Include="..\src\LightBulb\IO\AbstractDefaultReinforcementIndividualIO.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\AbstractIndividualIO.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\AbstractLearningRuleIO.cpp" />
     <ClCompile Include="..\src\LightBulb\IO\AbstractLoggerIO.cpp" />
@@ -324,7 +324,7 @@
     <ClCompile Include="..\src\LightBulb\Learning\Evolution\WeightDecayFitnessFunction.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementEnvironment.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementIndividual.cpp" />
-    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\DefaultReinforcementIndividual.cpp" />
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractDefaultReinforcementIndividual.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\DQNLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\PolicyGradientLearningRule.cpp" />

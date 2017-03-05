@@ -11,7 +11,7 @@
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
-#include "LightBulb/Learning/Reinforcement/DefaultReinforcementIndividual.hpp"
+#include "PongReinforcementIndividual.hpp"
 
 
 #define PREFERENCE_EPISODE_SIZE "Episode size"
@@ -55,7 +55,7 @@ LightBulb::AbstractReinforcementIndividual* PongPolicyGradientExample::createInd
 
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new FermiFunction(1)));
 	
-	return new DefaultReinforcementIndividual(&getEnvironment(), options);
+	return new PongReinforcementIndividual(&getEnvironment(), options);
 }
 
 

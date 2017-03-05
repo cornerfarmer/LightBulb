@@ -42,10 +42,10 @@ namespace LightBulb
 			{
 				copyVectorToMatrixCol(states.getViennaclValueForEditing(), individual.getLastInput().getViennaclValue(), index);
 
-				environment.isTerminalState(isTerminalStateTmp);
+				individual.isTerminalState(isTerminalStateTmp);
 				copyScalarToVectorElement(isTerminalState.getViennaclValueForEditing(), isTerminalStateTmp.getViennaclValue(), index);
 
-				environment.getNNInput(inputTemp);
+				individual.getNNInput(inputTemp);
 				copyVectorToMatrixCol(nextStates.getViennaclValueForEditing(), inputTemp.getViennaclValue(), index);
 
 				copyScalarToVectorElement(rewards.getViennaclValueForEditing(), reward.getViennaclValue(), index);
@@ -62,11 +62,11 @@ namespace LightBulb
 			{
 				states.getEigenValueForEditing().col(index) = individual.getLastInput().getEigenValue();
 
-				environment.isTerminalState(isTerminalStateTmp);
+				individual.isTerminalState(isTerminalStateTmp);
 				isTerminalState.getEigenValueForEditing()[index] = isTerminalStateTmp.getEigenValue();
 
 				if (!isTerminalStateTmp.getEigenValue()) {
-					environment.getNNInput(inputTemp);
+					individual.getNNInput(inputTemp);
 					nextStates.getEigenValueForEditing().col(index) = inputTemp.getEigenValue();
 				}
 

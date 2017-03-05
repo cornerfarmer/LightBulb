@@ -1,5 +1,5 @@
 // Includes
-#include "LightBulb/Learning/Reinforcement/DefaultReinforcementIndividual.hpp"
+#include "LightBulb/Learning/Reinforcement/AbstractDefaultReinforcementIndividual.hpp"
 #include "LightBulb/ActivationOrder/TopologicalOrder.hpp"
 #include "LightBulb/NetworkTopology/FeedForwardNetworkTopology.hpp"
 #include "LightBulb/NeuralNetwork/NeuralNetwork.hpp"
@@ -13,7 +13,7 @@
 namespace LightBulb
 {
 
-	void DefaultReinforcementIndividual::doNNCalculation()
+	void AbstractDefaultReinforcementIndividual::doNNCalculation()
 	{
 		neuralNetwork->getNetworkTopology().resetActivation();
 		// Get the input
@@ -103,20 +103,10 @@ namespace LightBulb
 		// Interpret the output
 		interpretNNOutput(lastBooleanOutput);
 	}
-
-	void DefaultReinforcementIndividual::interpretNNOutput(Vector<char>& output)
-	{
-		environment->interpretNNOutput(output);
-	}
 	
-	void DefaultReinforcementIndividual::getNNInput(Vector<>& input)
-	{
-		environment->getNNInput(input);
-	}
+	AbstractDefaultReinforcementIndividual::~AbstractDefaultReinforcementIndividual() = default;
 
-	DefaultReinforcementIndividual::~DefaultReinforcementIndividual() = default;
-
-	DefaultReinforcementIndividual::DefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
+	AbstractDefaultReinforcementIndividual::AbstractDefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
 	{
 		environment = environment_;
 		buildNeuralNetwork(options);
@@ -126,12 +116,12 @@ namespace LightBulb
 		initializeKernels();
 	}
 
-	DefaultReinforcementIndividual::DefaultReinforcementIndividual()
+	AbstractDefaultReinforcementIndividual::AbstractDefaultReinforcementIndividual()
 	{
 		initializeKernels();
 	}
 
-	void DefaultReinforcementIndividual::initializeKernels()
+	void AbstractDefaultReinforcementIndividual::initializeKernels()
 	{
 		setBooleanOutputNonGreedyKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_non_greedy"));
 		setBooleanOutputNonGreedyStochasticKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_non_greedy_stochastic"));
@@ -139,29 +129,29 @@ namespace LightBulb
 		setBooleanOutputBestKernel.reset(new Kernel("reinforcement_environment", "set_boolean_output_best"));
 	}
 
-	void DefaultReinforcementIndividual::initializeForLearning()
+	void AbstractDefaultReinforcementIndividual::initializeForLearning()
 	{
 		// Randomize all weights
 		neuralNetwork->getNetworkTopology().randomizeDependingOnLayerSize(*randomGenerator);		
 	}
 
-	NeuralNetwork& DefaultReinforcementIndividual::getNeuralNetwork()
+	NeuralNetwork& AbstractDefaultReinforcementIndividual::getNeuralNetwork()
 	{
 		return *neuralNetwork.get();
 	}
 
-	double DefaultReinforcementIndividual::getEpsilon()
+	double AbstractDefaultReinforcementIndividual::getEpsilon()
 	{
 		return epsilon;
 	}
 
 
-	void DefaultReinforcementIndividual::setEpsilon(double newEpsilon)
+	void AbstractDefaultReinforcementIndividual::setEpsilon(double newEpsilon)
 	{
 		epsilon = newEpsilon;
 	}
 	
-	void DefaultReinforcementIndividual::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
+	void AbstractDefaultReinforcementIndividual::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
 	{
 		// Create a new network topology from the adjusted options.
 		FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);
@@ -176,28 +166,28 @@ namespace LightBulb
 	}
 
 
-	void DefaultReinforcementIndividual::buildOutputBuffer()
+	void AbstractDefaultReinforcementIndividual::buildOutputBuffer()
 	{
 		lastBooleanOutput.getEigenValueForEditing().resize(neuralNetwork->getNetworkTopology().getOutputSize());
 	}
 
 
-	const Vector<char>& DefaultReinforcementIndividual::getLastBooleanOutput() const
+	const Vector<char>& AbstractDefaultReinforcementIndividual::getLastBooleanOutput() const
 	{
 		return lastBooleanOutput;
 	}
 
-	const Vector<>& DefaultReinforcementIndividual::getLastInput() const
+	const Vector<>& AbstractDefaultReinforcementIndividual::getLastInput() const
 	{
 		return lastInput;
 	}
 
-	void DefaultReinforcementIndividual::setStochasticActionDecision(bool useStochasticActionDecision_)
+	void AbstractDefaultReinforcementIndividual::setStochasticActionDecision(bool useStochasticActionDecision_)
 	{
 		useStochasticActionDecision = useStochasticActionDecision_;
 	}
 
-	void DefaultReinforcementIndividual::setCalculatorType(const CalculatorType& calculatorType)
+	void AbstractDefaultReinforcementIndividual::setCalculatorType(const CalculatorType& calculatorType)
 	{
 		AbstractLinearAlgebraUser::setCalculatorType(calculatorType);
 		neuralNetwork->getNetworkTopology().setCalculatorType(calculatorType);

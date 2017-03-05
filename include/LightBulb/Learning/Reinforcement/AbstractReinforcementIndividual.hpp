@@ -26,6 +26,11 @@ namespace LightBulb
 		* \brief Executes the neural network calculation.
 		*/
 		virtual void doNNCalculation() = 0;
+		/**
+		* \brief Interprets the given neural network output and acts depending on it.
+		* \param output The actions which were taken by the network.
+		*/
+		virtual void interpretNNOutput(Vector<char>& output) = 0;
 	public:
 		virtual void initializeKernels() = 0;
 		/**
@@ -68,6 +73,16 @@ namespace LightBulb
 		 * \param useStochasticActionDecision_ True, if actions should be taken randomly. 
 		 */
 		virtual void setStochasticActionDecision(bool useStochasticActionDecision_) = 0;
+		/**
+		* \brief Returns if the environment is in a terminal state.
+		* \return True, if the environment is in a terminal state.
+		*/
+		virtual void isTerminalState(LightBulb::Scalar<char>& isTerminalState) const = 0;
+		/**
+		* \brief Returns the new input for the neural network.
+		* \param input The vector were the input should be stored in.
+		*/
+		virtual void getNNInput(Vector<>& input) const = 0;
 	};
 }
 

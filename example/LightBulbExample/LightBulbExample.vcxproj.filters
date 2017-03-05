@@ -114,6 +114,9 @@
     <ClCompile Include="IO\PositionIO.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\PongReinforcement\PongReinforcementIndividual.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\NetworkEvolution\Network.hpp">
@@ -210,6 +213,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="LightBulbExamplePrec.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\PongReinforcement\PongReinforcementIndividual.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

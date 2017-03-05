@@ -28,16 +28,15 @@ private:
 	bool inSimulationPhase;
 	void initializeKernels();
 	void reset();
-protected:
-	void getNNInput(LightBulb::Vector<>& input) const override;
-	void interpretNNOutput(LightBulb::Vector<char>& output) override;
 public:
 	PongReinforcementEnvironment();
 	void doSimulationStep(LightBulb::Scalar<>& reward) override;
 	void executeCompareAI();
 	void initializeForLearning() override;
 	std::vector<std::string> getDataSetLabels() const override;
-	void isTerminalState(LightBulb::Scalar<char>& isTerminalState) const override;
+	void isTerminalState(LightBulb::Scalar<char>& isTerminalState) const;
+	void getNNInput(LightBulb::Vector<>& input) const;
+	void interpretNNOutput(LightBulb::Vector<char>& output);
 	void setRandomGenerator(LightBulb::AbstractRandomGenerator& randomGenerator_) override;
 };
 

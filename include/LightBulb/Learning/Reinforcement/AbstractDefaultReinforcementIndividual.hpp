@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _DEFAULTREINFORCEMENTINDIVIDUAL_H_
-#define _DEFAULTREINFORCEMENTINDIVIDUAL_H_
+#ifndef _AbstractDefaultReinforcementIndividual_H_
+#define _AbstractDefaultReinforcementIndividual_H_
 
 // Library Includes
 #include <vector>
@@ -20,13 +20,11 @@ namespace LightBulb
 	class NeuralNetwork;
 	class Kernel;
 	class AbstractReinforcementEnvironment;
-	/**
-	 * \brief Describes the environment where the reinforcement learning process takes places.
-	 */
-	class DefaultReinforcementIndividual : public AbstractReinforcementIndividual
+
+	class AbstractDefaultReinforcementIndividual : public AbstractReinforcementIndividual
 	{
 		template <class Archive>
-		friend void serialize(Archive& archive, DefaultReinforcementIndividual& individual);
+		friend void serialize(Archive& archive, AbstractDefaultReinforcementIndividual& individual);
 	private:
 		std::unique_ptr<Kernel> setBooleanOutputNonGreedyStochasticKernel;
 		std::unique_ptr<Kernel> setBooleanOutputNonGreedyKernel;
@@ -67,28 +65,18 @@ namespace LightBulb
 		 * \brief The neural network which should be trained.
 		 */
 		std::unique_ptr<NeuralNetwork> neuralNetwork;
-		/**
-		 * \brief Interprets the given neural network output and acts depending on it.
-		 * \param output The actions which were taken by the network.
-		 */
-		virtual void interpretNNOutput(Vector<char>& output);
 		// Inherited:
 		void doNNCalculation() override;
 	public:
-		/**
-		 * \brief Returns the new input for the neural network.
-		 * \param input The vector were the input should be stored in.
-		 */
-		virtual void getNNInput(Vector<>& input);
-		~DefaultReinforcementIndividual();
+		~AbstractDefaultReinforcementIndividual();
 		/**
 		 * \brief Creates the reinforcement environment.
 		 * \param options The options which describe the network. 
 		 * \param epsilonGreedly True, if the environment should act greedly when picking actions.
 		 * \param epsilon The epsilon value when acting epsilon greedly.
 		 */
-		DefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
-		DefaultReinforcementIndividual();
+		AbstractDefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
+		AbstractDefaultReinforcementIndividual();
 		// Inherited:
 		void initializeKernels() override;
 		void initializeForLearning() override;
@@ -103,6 +91,6 @@ namespace LightBulb
 	};
 }
 
-#include "LightBulb/IO/DefaultReinforcementIndividualIO.hpp"
+#include "LightBulb/IO/AbstractDefaultReinforcementIndividualIO.hpp"
 
 #endif

@@ -634,16 +634,16 @@
     <ClInclude Include="..\include\LightBulb\LinearAlgebra\Kernel.hpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\DefaultReinforcementIndividual.hpp">
-      <Filter>Quelldateien\Learning\Reinforcement</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementIndividual.hpp">
       <Filter>Quelldateien\Learning\Reinforcement</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\IO\DefaultReinforcementIndividualIO.hpp">
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\TransitionStorage.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightBulb\IO\AbstractDefaultReinforcementIndividualIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\TransitionStorage.hpp">
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractDefaultReinforcementIndividual.hpp">
       <Filter>Quelldateien\Learning\Reinforcement</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1152,16 +1152,16 @@
     <ClCompile Include="..\src\LightBulb\LinearAlgebra\Kernel.cpp">
       <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\DefaultReinforcementIndividual.cpp">
-      <Filter>Quelldateien\Learning\Reinforcement</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementIndividual.cpp">
       <Filter>Quelldateien\Learning\Reinforcement</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\LightBulb\IO\DefaultReinforcementIndividualIO.cpp">
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\TransitionStorage.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\IO\AbstractDefaultReinforcementIndividualIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\TransitionStorage.cpp">
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractDefaultReinforcementIndividual.cpp">
       <Filter>Quelldateien\Learning\Reinforcement</Filter>
     </ClCompile>
   </ItemGroup>

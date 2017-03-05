@@ -112,7 +112,7 @@ namespace LightBulb
 
 			copyScalarToVectorElement(rewardRecord.getViennaclValueForEditing(), reward.getViennaclValue(), nextRecordIndex.getViennaclValue());
 
-			getOptions().environment->isTerminalState(isTerminalState);
+			getOptions().individual->isTerminalState(isTerminalState);
 			copyScalarToVectorElement(isTerminalStateRecord.getViennaclValueForEditing(), isTerminalState.getViennaclValue(), nextRecordIndex.getViennaclValue());
 
 			for (int i = 0; i < tmpGradient.size(); i++)
@@ -136,7 +136,7 @@ namespace LightBulb
 
 			rewardRecord.getEigenValueForEditing()[nextRecordIndex.getEigenValue()] = reward.getEigenValue();
 
-			getOptions().environment->isTerminalState(isTerminalState);
+			getOptions().individual->isTerminalState(isTerminalState);
 			isTerminalStateRecord.getEigenValueForEditing()[nextRecordIndex.getEigenValue()] = isTerminalState.getEigenValue();
 
 			for (int i = 0; i < tmpGradient.size(); i++)

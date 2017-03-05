@@ -162,6 +162,7 @@
     <ClCompile Include="Examples\PongReinforcement\PongPolicyGradientExample.cpp" />
     <ClCompile Include="Examples\PongReinforcement\PongReinforcementEnvironment.cpp" />
     <ClCompile Include="Examples\FunctionEvolution\Position.cpp" />
+    <ClCompile Include="Examples\PongReinforcement\PongReinforcementIndividual.cpp" />
     <ClCompile Include="Examples\TeachedEvolution\TeachedEvolutionExample.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToe.cpp" />
     <ClCompile Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Examples\PongReinforcement\PongPolicyGradientExample.hpp" />
     <ClInclude Include="Examples\PongReinforcement\PongReinforcementEnvironment.hpp" />
     <ClInclude Include="Examples\FunctionEvolution\Position.hpp" />
+    <ClInclude Include="Examples\PongReinforcement\PongReinforcementIndividual.hpp" />
     <ClInclude Include="Examples\TeachedEvolution\TeachedEvolutionExample.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToe.hpp" />
     <ClInclude Include="Examples\TicTacToeEvolution\TicTacToeEvolutionExample.hpp" />

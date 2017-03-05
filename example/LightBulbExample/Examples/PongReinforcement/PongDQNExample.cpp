@@ -11,7 +11,7 @@
 #include "LightBulb/NeuronDescription/NeuronDescription.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/BooleanPreference.hpp"
 #include "LightBulbApp/TrainingPlans/Preferences/IntegerPreference.hpp"
-#include "LightBulb/Learning/Reinforcement/DefaultReinforcementIndividual.hpp"
+#include "PongReinforcementIndividual.hpp"
 
 
 #define PREFERENCE_SHORTCUT_ENABLE "Enable shortcut connections"
@@ -62,7 +62,7 @@ LightBulb::AbstractReinforcementIndividual* PongDQNExample::createIndividual()
 
 	options.descriptionFactory = new DifferentNeuronDescriptionFactory(new NeuronDescription(new WeightedSumFunction(), new RectifierFunction()), new NeuronDescription(new WeightedSumFunction(), new IdentityFunction()));
 	
-	return new DefaultReinforcementIndividual(&getEnvironment(), options, true, 1);
+	return new PongReinforcementIndividual(&getEnvironment(), options, true, 1);
 }
 
 
