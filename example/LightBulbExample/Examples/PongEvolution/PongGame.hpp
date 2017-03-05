@@ -52,6 +52,8 @@ public:
 	void movePaddle(int dir);
 	PongGameState& getState();
 	PongGameProperties& getProperties();
+	const PongGameState& getState() const;
+	const PongGameProperties& getProperties() const;
 	void reset();
 	int whoHasWon();
 	void advanceBall(double fac);

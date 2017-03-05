@@ -36,7 +36,7 @@ namespace LightBulb
 		 * \brief Returns the new input for the neural network.
 		 * \param input The vector were the input should be stored in.
 		 */
-		virtual void getNNInput(Vector<>& input) = 0;
+		virtual void getNNInput(Vector<>& input) const = 0;
 		/**
 		* \brief Interprets the given neural network output and acts depending on it.
 		* \param output The actions which were taken by the network.
@@ -66,7 +66,7 @@ namespace LightBulb
 		 * \brief Returns if the environment is in a terminal state.
 		 * \return True, if the environment is in a terminal state.
 		 */
-		virtual void isTerminalState(LightBulb::Scalar<char>& isTerminalState) = 0;
+		virtual void isTerminalState(LightBulb::Scalar<char>& isTerminalState) const = 0;
 	};
 }
 

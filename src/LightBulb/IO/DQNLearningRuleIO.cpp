@@ -36,7 +36,6 @@ namespace LightBulb
 	void serialize(Archive& archive, DQNLearningRule& learningRule)
 	{
 		archive(cereal::base_class<AbstractReinforcementLearningRule>(&learningRule));
-		archive(cereal::make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
 		archive(cereal::make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
 		archive(cereal::make_nvp("transitionStorage", learningRule.transitionStorage));
 		archive(cereal::make_nvp("currentTotalError", learningRule.currentTotalError));
@@ -55,7 +54,6 @@ namespace cereal
 	{
 		using namespace LightBulb;
 		ar(base_class<AbstractReinforcementLearningRule>(&learningRule));
-		ar(make_nvp("nextTransitionIndex", learningRule.nextTransitionIndex));
 		ar(make_nvp("waitUntilLearningStarts", learningRule.waitUntilLearningStarts));
 		ar(make_nvp("transitions", learningRule.transitionStorage));
 		ar(make_nvp("currentTotalError", learningRule.currentTotalError));

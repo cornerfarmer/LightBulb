@@ -184,6 +184,7 @@ namespace LightBulb
 		//resilientLearningRateHelper->initialize(*getOptions()->environment->getNeuralNetwork());
 		getOptions().environment->setLearningState(*learningState.get());
 		getOptions().environment->initializeForLearning();
+		getOptions().individual->initializeForLearning();
 
 		recordStart.getEigenValueForEditing() = 0;
 		nextRecordIndex.getEigenValueForEditing() = 0;
@@ -212,7 +213,6 @@ namespace LightBulb
 
 	void PolicyGradientLearningRule::doIteration()
 	{
-		 ;
 		errorSum = 0;
 		valueErrorSum = 0;
 		errorSteps = 0;
@@ -238,6 +238,7 @@ namespace LightBulb
 
 		for (int i = 0; i < getOptions().episodeSize; i++)
 		{
+			getOptions().individual->doSimulationStep();
 			getOptions().environment->doSimulationStep(reward);
 
 			recordStep(networkTopology, reward);

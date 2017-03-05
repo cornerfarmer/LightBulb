@@ -71,7 +71,7 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 	inSimulationPhase = false;
 }
 
-void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
+void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input) const
 {
 	if (isCalculatorType(CT_GPU))
 	{
@@ -82,7 +82,9 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 			float rand3 = randomGenerator->randFloat();
 			float rand4 = randomGenerator->randFloat();
 
-			viennacl::ocl::enqueue(getNnInputKernel->use()(
+			throw std::logic_error("Currently not working");
+
+			/*viennacl::ocl::enqueue(getNnInputKernel->use()(
 				viennacl::traits::opencl_handle(time.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
 				viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
@@ -104,7 +106,7 @@ void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input)
 				viennacl::traits::opencl_handle(input.getViennaclValueForEditing()),
 				viennacl::traits::opencl_handle(game.getPlayer().getViennaclValueForEditing())
 			));
-		
+		*/
 		}
 		else
 		{
@@ -192,17 +194,17 @@ std::vector<std::string> PongReinforcementEnvironment::getDataSetLabels() const
 	return labels;
 }
 
-void PongReinforcementEnvironment::isTerminalState(Scalar<char>& isTerminalState)
+void PongReinforcementEnvironment::isTerminalState(Scalar<char>& isTerminalState) const
 {
 	if (isCalculatorType(CT_GPU)) 
 	{
 		viennacl::ocl::enqueue(isTerminalStateKernel->use()(
 			viennacl::traits::opencl_handle(time.getViennaclValue()),
 			viennacl::traits::opencl_handle(game.getProperties().maxTime.getViennaclValue()),
-			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getProperties().ballRad.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValueForEditing()),
-			viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValueForEditing()),
+			viennacl::traits::opencl_handle(game.getState().ballPosX.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().ballRad.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getProperties().width.getViennaclValue()),
+			viennacl::traits::opencl_handle(game.getState().ballVelX.getViennaclValue()),
 			viennacl::traits::opencl_handle(isTerminalState.getViennaclValueForEditing())
 		));
 	}

@@ -56,6 +56,16 @@ PongGameProperties& PongGame::getProperties()
 	return properties;
 }
 
+const PongGameState& PongGame::getState() const
+{
+	return state;
+}
+
+const PongGameProperties& PongGame::getProperties() const
+{
+	return properties;
+}
+
 
 void PongGame::executeCompareAI()
 {

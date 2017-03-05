@@ -643,6 +643,9 @@
     <ClInclude Include="..\include\LightBulb\IO\DefaultReinforcementIndividualIO.hpp">
       <Filter>Quelldateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\TransitionStorage.hpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LightBulb\ActivationOrder\AbstractActivationOrder.cpp">
@@ -1157,6 +1160,9 @@
     </ClCompile>
     <ClCompile Include="..\src\LightBulb\IO\DefaultReinforcementIndividualIO.cpp">
       <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\TransitionStorage.cpp">
+      <Filter>Quelldateien\Learning\Reinforcement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@
 
 // Library Includes
 #include <vector>
+#include "TransitionStorage.hpp"
 
 namespace LightBulb
 {
@@ -113,40 +114,7 @@ namespace LightBulb
 			rmsPropOptions.learningRate = 0.00025;
 		}
 	};
-
-	/**
-	 * \brief Describes a transition used in the reinforcement learning process.
-	 */
-	struct TransitionStorage
-	{
-		/**
-		 * \brief The initial state.
-		 */
-		Matrix<> states;
-		/**
-		 * \brief The taken action.
-		 */
-		Vector<int> actions;
-		/**
-		 * \brief True, if transition ends in terminal state.
-		 */
-		Vector<char> isTerminalState;
-		/**
-		 * \brief The following state.
-		 */
-		Matrix<> nextStates;
-		/**
-		 * \brief The gained reward.
-		 */
-		Vector<> rewards;
-		/**
-		 * \brief Resets and resizes data structures.
-		 * \param maxRecordNumber The maximum number of records.
-		 * \param networkInputSize The input size.
-		 */
-		void reset(int maxRecordNumber, int networkInputSize);
-	};
-
+	
 	/**
 	 * \brief Deep Q-Network learning combines deep neural networks with reinforcement learning.
 	 * \details To make the learning process work with non linear function approximators the following methods are used:
@@ -161,16 +129,9 @@ namespace LightBulb
 		friend void serialize(Archive& archive, DQNLearningRule& learningRule);
 		friend struct cereal::LoadAndConstruct<DQNLearningRule>;
 	private:
-		std::unique_ptr<Kernel> determineActionKernel;
+		
 		std::unique_ptr<Kernel> setTeachingInputKernel;
-		/**
-		 * \brief Index of the transition slot that should be used for the next new transition.
-		 */
-		int nextTransitionIndex;
-		/**
-		 * \brief The current amount of stored transitions.
-		 */
-		int transitionCounter;
+		
 		/**
 		 * \brief The number of iterations until learning will start.
 		 */
@@ -186,7 +147,7 @@ namespace LightBulb
 		/**
 		 * \brief The transition memory store.
 		 */
-		TransitionStorage transitionStorage;
+		std::shared_ptr<TransitionStorage> transitionStorage;
 		/**
 		 * \brief The gradient descent learning rule.
 		 */
@@ -203,10 +164,6 @@ namespace LightBulb
 		 * \brief The current reward sum.
 		 */
 		Scalar<> totalReward;
-		/**
-		 * \brief Temporarily stores the current terminal state.
-		 */
-		Scalar<char> isTerminalState;
 		/**
 		* \brief Temporarily stores an input vector.
 		*/
@@ -228,12 +185,6 @@ namespace LightBulb
 		 * \param options The options to use.
 		 */
 		void initialize(DQNLearningRuleOptions* options);
-		/**
-		 * \brief Stores the last transition into the replay memory.
-		 * \param networkTopology The network topology which was used.
-		 * \param reward The reward that was gained through this transition.
-		 */
-		void storeTransition(const AbstractNetworkTopology* networkTopology, const Scalar<>& reward);
 		/**
 		 * \brief Executes a mini batch learning iteration.
 		 */
@@ -261,6 +212,7 @@ namespace LightBulb
 		 * \return The name.
 		 */
 		static std::string getName();
+		void setTransitionStorage(const std::shared_ptr<TransitionStorage>& transitionStorage);
 		// Inherited:
 		void initializeTry() override;
 		/**

@@ -152,6 +152,7 @@
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\AbstractReinforcementLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\DQNLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\PolicyGradientLearningRule.hpp" />
+    <ClInclude Include="..\include\LightBulb\Learning\Reinforcement\TransitionStorage.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\AbstractSupervisedLearningRule.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientCalculation\AbstractGradientCalculation.hpp" />
     <ClInclude Include="..\include\LightBulb\Learning\Supervised\GradientCalculation\Backpropagation.hpp" />
@@ -327,6 +328,7 @@
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\AbstractReinforcementLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\DQNLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\PolicyGradientLearningRule.cpp" />
+    <ClCompile Include="..\src\LightBulb\Learning\Reinforcement\TransitionStorage.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\AbstractSupervisedLearningRule.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientCalculation\AbstractGradientCalculation.cpp" />
     <ClCompile Include="..\src\LightBulb\Learning\Supervised\GradientCalculation\Backpropagation.cpp" />
