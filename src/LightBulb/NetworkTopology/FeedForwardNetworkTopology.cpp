@@ -68,7 +68,7 @@ namespace LightBulb
 		resetActivationsKernel.reset(new Kernel("neural_network", "reset_activations"));
 	}
 
-	FeedForwardNetworkTopology::FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_)
+	FeedForwardNetworkTopology::FeedForwardNetworkTopology(const FeedForwardNetworkTopologyOptions &options_)
 	{
 		resetActivationsKernel.reset(new Kernel("neural_network", "reset_activations"));
 

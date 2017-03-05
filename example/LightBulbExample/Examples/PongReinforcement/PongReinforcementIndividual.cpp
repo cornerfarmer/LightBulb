@@ -26,3 +26,8 @@ void PongReinforcementIndividual::getNNInput(LightBulb::Vector<>& input) const
 {
 	static_cast<PongReinforcementEnvironment*>(environment)->getNNInput(input);
 }
+
+void PongReinforcementIndividual::getReward(LightBulb::Scalar<>& reward) const
+{
+	reward.getEigenValueForEditing() = static_cast<PongReinforcementEnvironment*>(environment)->getGame().whoHasWon();
+}

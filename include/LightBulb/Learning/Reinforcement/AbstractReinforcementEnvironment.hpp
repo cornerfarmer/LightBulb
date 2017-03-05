@@ -12,6 +12,7 @@
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/LinearAlgebra/Vector.hpp"
 #include "LightBulb/LinearAlgebra/Scalar.hpp"
+#include "LightBulb/IO/UseParentSerialization.hpp"
 
 namespace LightBulb
 {
@@ -37,7 +38,8 @@ namespace LightBulb
 		* \brief Executes one simulation step.
 		* \return Returns the reward gained after that step.
 		*/
-		virtual void doSimulationStep(Scalar<>& reward) = 0;
+		virtual void doSimulationStep() = 0;
+		virtual void prepareSimulationStep() {};
 		/**
 		* \brief Initializes the environment before the learning starts.
 		*/

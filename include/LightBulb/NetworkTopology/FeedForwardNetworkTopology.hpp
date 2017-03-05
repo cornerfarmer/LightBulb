@@ -106,7 +106,7 @@ namespace LightBulb
 		* \brief Creates the feed forward network.
 		* \param options_ The options which configure the network.
 		*/
-		FeedForwardNetworkTopology(FeedForwardNetworkTopologyOptions &options_);
+		FeedForwardNetworkTopology(const FeedForwardNetworkTopologyOptions &options_);
 		/**
 		* \brief Creates a new feed forward network with default options.
 		*/

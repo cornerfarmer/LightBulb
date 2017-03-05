@@ -239,7 +239,8 @@ namespace LightBulb
 		for (int i = 0; i < getOptions().episodeSize; i++)
 		{
 			getOptions().individual->doSimulationStep();
-			getOptions().environment->doSimulationStep(reward);
+			getOptions().environment->doSimulationStep();
+			getOptions().individual->getReward(reward);
 
 			recordStep(networkTopology, reward);
 

@@ -21,6 +21,7 @@ public:
 	PongReinforcementIndividual();
 	void isTerminalState(LightBulb::Scalar<char>& isTerminalState) const override;
 	void getNNInput(LightBulb::Vector<>& input) const override;
+	void getReward(LightBulb::Scalar<>& reward) const override;
 };
 
 

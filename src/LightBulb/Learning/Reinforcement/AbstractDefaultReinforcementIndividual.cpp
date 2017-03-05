@@ -106,7 +106,7 @@ namespace LightBulb
 	
 	AbstractDefaultReinforcementIndividual::~AbstractDefaultReinforcementIndividual() = default;
 
-	AbstractDefaultReinforcementIndividual::AbstractDefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
+	AbstractDefaultReinforcementIndividual::AbstractDefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, const FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly_, double epsilon_)
 	{
 		environment = environment_;
 		buildNeuralNetwork(options);
@@ -151,7 +151,7 @@ namespace LightBulb
 		epsilon = newEpsilon;
 	}
 	
-	void AbstractDefaultReinforcementIndividual::buildNeuralNetwork(FeedForwardNetworkTopologyOptions& options)
+	void AbstractDefaultReinforcementIndividual::buildNeuralNetwork(const FeedForwardNetworkTopologyOptions& options)
 	{
 		// Create a new network topology from the adjusted options.
 		FeedForwardNetworkTopology* networkTopology = new FeedForwardNetworkTopology(options);

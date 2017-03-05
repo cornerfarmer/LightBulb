@@ -30,7 +30,8 @@ private:
 	void reset();
 public:
 	PongReinforcementEnvironment();
-	void doSimulationStep(LightBulb::Scalar<>& reward) override;
+	void prepareSimulationStep() override;
+	void doSimulationStep() override;
 	void executeCompareAI();
 	void initializeForLearning() override;
 	std::vector<std::string> getDataSetLabels() const override;

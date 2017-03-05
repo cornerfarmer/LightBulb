@@ -75,7 +75,7 @@ void PongGame::executeCompareAI()
 		movePaddle(-1);
 }
 
-int PongGame::whoHasWon()
+int PongGame::whoHasWon() const
 {
 	if (state.ballPosX.getEigenValue() + properties.ballRad.getEigenValue() >= properties.width.getEigenValue() && state.ballVelX.getEigenValue() > 0)
 		return -1;

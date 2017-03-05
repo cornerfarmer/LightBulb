@@ -58,7 +58,7 @@ namespace LightBulb
 		 * \brief Builds the neural network.
 		 * \param options The options which describe the network.
 		 */
-		void buildNeuralNetwork(FeedForwardNetworkTopologyOptions &options);
+		void buildNeuralNetwork(const FeedForwardNetworkTopologyOptions &options);
 	protected:
 		AbstractReinforcementEnvironment* environment;
 		/**
@@ -75,7 +75,7 @@ namespace LightBulb
 		 * \param epsilonGreedly True, if the environment should act greedly when picking actions.
 		 * \param epsilon The epsilon value when acting epsilon greedly.
 		 */
-		AbstractDefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
+		AbstractDefaultReinforcementIndividual(AbstractReinforcementEnvironment* environment_, const FeedForwardNetworkTopologyOptions& options, bool epsilonGreedly = false, double epsilon = 0.1);
 		AbstractDefaultReinforcementIndividual();
 		// Inherited:
 		void initializeKernels() override;

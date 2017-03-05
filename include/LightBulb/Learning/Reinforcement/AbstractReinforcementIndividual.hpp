@@ -83,6 +83,7 @@ namespace LightBulb
 		* \param input The vector were the input should be stored in.
 		*/
 		virtual void getNNInput(Vector<>& input) const = 0;
+		virtual void getReward(LightBulb::Scalar<>& reward) const = 0;
 	};
 }
 

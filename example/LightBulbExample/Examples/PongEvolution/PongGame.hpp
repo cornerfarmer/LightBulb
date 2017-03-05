@@ -55,7 +55,7 @@ public:
 	const PongGameState& getState() const;
 	const PongGameProperties& getProperties() const;
 	void reset();
-	int whoHasWon();
+	int whoHasWon() const;
 	void advanceBall(double fac);
 	void advanceBallWithoutCollision(double fac);
 	void setPlayer(int i);

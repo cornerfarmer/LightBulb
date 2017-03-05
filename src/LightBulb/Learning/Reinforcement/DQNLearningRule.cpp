@@ -180,8 +180,10 @@ namespace LightBulb
 		AbstractNetworkTopology& networkTopology = getOptions().individual->getNeuralNetwork().getNetworkTopology();
 
 		for (int i = 0; i < getOptions().targetNetworkUpdateFrequency; i++) {
+			getOptions().environment->prepareSimulationStep();
 			getOptions().individual->doSimulationStep();
-			getOptions().environment->doSimulationStep(reward);
+			getOptions().environment->doSimulationStep();
+			getOptions().individual->getReward(reward);
 
 			if (getOptions().calculatorType == CT_GPU)
 				totalReward.getViennaclValueForEditing() += reward.getViennaclValue();

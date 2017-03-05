@@ -185,6 +185,7 @@ namespace LightBulb
 		 * \param options The options to use.
 		 */
 		void initialize(DQNLearningRuleOptions* options);
+	public:
 		/**
 		 * \brief Executes a mini batch learning iteration.
 		 */

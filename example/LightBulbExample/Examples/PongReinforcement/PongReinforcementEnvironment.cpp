@@ -16,6 +16,7 @@ PongReinforcementEnvironment::PongReinforcementEnvironment()
 	initializeKernels();
 }
 
+
 void PongReinforcementEnvironment::initializeKernels()
 {
 	getNnInputKernel.reset(new Kernel("pong_reinforcement_example", "get_nn_input"));
@@ -43,10 +44,14 @@ void PongReinforcementEnvironment::reset()
 	}
 }
 
-void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
+void PongReinforcementEnvironment::prepareSimulationStep()
+{
+	reset();
+}
+
+void PongReinforcementEnvironment::doSimulationStep()
 {
 	inSimulationPhase = true;
-	rewardTmp = &reward;
 
 	if (isCalculatorType(CT_CPU))
 	{
@@ -64,15 +69,13 @@ void PongReinforcementEnvironment::doSimulationStep(Scalar<>& reward)
 	if (isCalculatorType(CT_CPU))
 	{
 		time.getEigenValueForEditing()++;
-		reward.getEigenValueForEditing() = game.whoHasWon();
 	}
 
-	reset();
 	inSimulationPhase = false;
 }
 
 void PongReinforcementEnvironment::getNNInput(LightBulb::Vector<>& input) const
-{
+{	
 	if (isCalculatorType(CT_GPU))
 	{
 		if (inSimulationPhase)
@@ -210,7 +213,7 @@ void PongReinforcementEnvironment::isTerminalState(Scalar<char>& isTerminalState
 	}
 	else
 	{
-		isTerminalState.getEigenValueForEditing() = time.getEigenValue() == 0;
+		isTerminalState.getEigenValueForEditing() = game.whoHasWon() != 0 || time.getEigenValue() >= game.getProperties().maxTime.getEigenValue();
 	}
 }
 
