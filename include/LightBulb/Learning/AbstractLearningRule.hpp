@@ -167,6 +167,7 @@ namespace LightBulb
 		 * \param options_ The options which configure the learning rule.
 		 */
 		AbstractLearningRule(AbstractLearningRuleOptions* options_);
+		void initializeBeforeStart();
 		/**
 		 * \brief Starts the learning from the scratch.
 		 * \return The result of the learning process.

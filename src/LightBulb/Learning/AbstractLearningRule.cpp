@@ -33,7 +33,7 @@ namespace LightBulb
 		pauseRequest = false;
 	}
 
-	AbstractLearningResult* AbstractLearningRule::start()
+	void AbstractLearningRule::initializeBeforeStart()
 	{
 		learningState.reset(new LearningState(options->disabledDataSets, options->dataSaveInterval));
 
@@ -42,6 +42,11 @@ namespace LightBulb
 
 		// Reset all counter
 		learningState->tries = 0;
+	}
+
+	AbstractLearningResult* AbstractLearningRule::start()
+	{
+		initializeBeforeStart();
 
 		return learn(false);
 	}

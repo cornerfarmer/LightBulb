@@ -28,6 +28,7 @@ namespace LightBulb
 		 * \brief True, if a pause has been requested.
 		 */
 		bool pauseRequested;
+	protected:
 		/**
 		 * \brief The result of the learning rule.
 		 */
@@ -36,7 +37,6 @@ namespace LightBulb
 		 * \brief The learning rule.
 		 */
 		std::unique_ptr<AbstractLearningRule> learningRule;
-	protected:
 		/**
 		 * \brief Creates the learning rule.
 		 * \return The new learning rule.
