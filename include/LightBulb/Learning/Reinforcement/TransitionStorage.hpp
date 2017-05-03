@@ -7,7 +7,11 @@
 
 // Library Includes
 #include <vector>
+#include <memory>
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
+#include "LightBulb/LinearAlgebra/Matrix.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 namespace LightBulb
 {

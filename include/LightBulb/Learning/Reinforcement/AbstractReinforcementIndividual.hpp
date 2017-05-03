@@ -10,6 +10,8 @@
 #include "LightBulb/Random/AbstractRandomGeneratorUser.hpp"
 #include "LightBulb/LinearAlgebra/AbstractLinearAlgebraUser.hpp"
 #include "LightBulb/IO/UseParentSerialization.hpp"
+#include "LightBulb/LinearAlgebra/Vector.hpp"
+#include "LightBulb/LinearAlgebra/Scalar.hpp"
 
 namespace LightBulb
 {
