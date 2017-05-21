@@ -11,6 +11,10 @@ namespace LightBulb
 		recalculateHighscore = true;
 	}
 
+	bool AbstractEvolutionEnvironment::pairCompare(const std::pair<double, AbstractIndividual*>& firstElem, const std::pair<double, AbstractIndividual*>& secondElem) {
+		return firstElem.first > secondElem.first;
+	}
+
 	Highscore& AbstractEvolutionEnvironment::getHighscoreList()
 	{
 		if (recalculateHighscore)
@@ -26,6 +30,8 @@ namespace LightBulb
 
 			}
 			// Sort the list
+			//std::random_shuffle(currentHighscore.begin(), currentHighscore.end());
+			//std::stable_sort(currentHighscore.begin(), currentHighscore.end(), pairCompare);
 			sort(currentHighscore.begin(), currentHighscore.end(), std::greater<std::pair<double, AbstractIndividual*>>());
 			recalculateHighscore = false;
 		}

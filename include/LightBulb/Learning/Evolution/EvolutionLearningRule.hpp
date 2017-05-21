@@ -106,6 +106,7 @@ namespace LightBulb
 		void doCalculationAfterLearningProcess() override;
 		void setHelperToUsedObjects() override;
 		AbstractLearningResult* getLearningResult() override;
+		void initializeStartLearningAlgoritm() override;
 	public:
 		/**
 		* \brief Creates the coevolution learning rule.

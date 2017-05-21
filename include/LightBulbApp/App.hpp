@@ -15,6 +15,7 @@
 namespace LightBulb
 {
 	class AbstractTrainingPlan;
+	class AbstractNetworkExporter;
 
 	/**
 	 * \brief The LightBulbApp.
@@ -26,6 +27,7 @@ namespace LightBulb
 		 * \brief Contains all available training plans.
 		 */
 		std::vector<AbstractTrainingPlan*> trainingPlans;
+		std::vector<AbstractNetworkExporter*> exporters;
 		std::unique_ptr<NeuralNetworkRepository> neuralNetworkRepository;
 		std::unique_ptr<TrainingPlanRepository> trainingPlanRepository;		
 		std::unique_ptr<TrainingController> trainingController;		
@@ -35,6 +37,7 @@ namespace LightBulb
 		* \param trainingPlan The new trianing plan.
 		*/
 		void addTrainingPlan(AbstractTrainingPlan* trainingPlan);
+		void addExporter(AbstractNetworkExporter* exporter);
 		// Inherited:
 		bool OnInit() override;
 		void OnUnhandledException() override;

@@ -37,6 +37,7 @@ namespace LightBulb
 		 * \brief True, if the highscore should be recalculated.
 		 */
 		bool recalculateHighscore;
+		static bool pairCompare(const std::pair<double, AbstractIndividual*>& firstElem, const std::pair<double, AbstractIndividual*>& secondElem);
 	protected:
 		/**
 		 * \brief A pointer to the learning state used by the corresponding learning rule.

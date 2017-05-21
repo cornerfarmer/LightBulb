@@ -57,6 +57,11 @@ namespace LightBulb
 
 	}
 
+	void EvolutionLearningRule::initializeStartLearningAlgoritm()
+	{
+		EvolutionLearningRule::setHelperToUsedObjects();
+	}
+
 	void EvolutionLearningRule::setHelperToUsedObjects()
 	{
 		getOptions().environment->setLogger(*options->logger);

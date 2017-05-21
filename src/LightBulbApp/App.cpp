@@ -36,6 +36,8 @@ namespace LightBulb
 
 		trainingController->addNetworkExporter(new BrainJSExporter());
 		trainingController->addNetworkExporter(new SynapticExporter());
+		for (auto exporter = exporters.begin(); exporter != exporters.end(); exporter++)
+			trainingController->addNetworkExporter(*exporter);
 
 		trainingController->show();
 		return true;
@@ -54,5 +56,10 @@ namespace LightBulb
 	void App::addTrainingPlan(AbstractTrainingPlan* trainingPlan)
 	{
 		trainingPlans.push_back(trainingPlan);
+	}
+
+	void App::addExporter(AbstractNetworkExporter* exporter)
+	{
+		exporters.push_back(exporter);
 	}
 }

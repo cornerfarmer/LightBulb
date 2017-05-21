@@ -28,7 +28,7 @@ namespace LightBulb
 	{
 		template <class Archive>
 		friend void serialize(Archive& archive, SharedSamplingCombiningStrategy& sharedSamplingCombiningStrategy);
-	private:
+	protected:
 		/**
 		* \brief Determines the number of competitions per individual.
 		*/
@@ -37,8 +37,15 @@ namespace LightBulb
 		 * \brief Contains the combining strategy of the parasite population.
 		 */
 		const AbstractCombiningStrategy* otherCombiningStrategy;
+		/**
+		 * \brief Combines every individual from the given pool with every individual from the given sample.
+		 * \param simulationEnvironment The environment which should be used for comparing individuals.
+		 * \param firstIndividuals The pool of individuals.
+		 * \param sample The sample.
+		 */
+		virtual void executeSample(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& sample);
 		// Inherited:
-		void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;
+		void combine(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& secondIndividuals) override;		
 	public:
 		/**
 		 * \brief Creates the shared sampling combining strategy.

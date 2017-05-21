@@ -20,7 +20,10 @@ namespace LightBulb
 	 * \brief Describes the results of a AbstractCombiningStrategy.
 	 * \details Maps: First individual - Second individual - round number => True, if first individual has won.
 	 */
-	typedef std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>> CombiningStrategyResults;
+	struct CombiningStrategyResults : std::map<AbstractIndividual*, std::map<AbstractIndividual*, std::map<int, bool>>>
+	{
+		virtual ~CombiningStrategyResults() {  };
+	};
 	/**
 	 * \brief Describes a strategy for combining individual from one or two coevolution environments.
 	 * \details The strategy compares each two individuals and stores the results in a CombiningStrategyResults object.
@@ -32,11 +35,11 @@ namespace LightBulb
 		 * \brief Stores the current combining results.
 		 */
 		std::unique_ptr<CombiningStrategyResults> results;
-		/**
-		 * \brief Counts how often the first player has won.
-		 */
-		int firstPlayerWins;
 	protected:
+		/**
+		* \brief Counts how often the first player has won.
+		*/
+		int firstPlayerWins;
 		/**
 		 * \brief Contains a second environment, if one is used.
 		 */

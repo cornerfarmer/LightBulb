@@ -52,6 +52,11 @@ namespace LightBulb
 			}
 		}
 
+		executeSample(simulationEnvironment, firstIndividuals, sample);
+	}
+
+	void SharedSamplingCombiningStrategy::executeSample(AbstractCoevolutionEnvironment& simulationEnvironment, std::vector<AbstractIndividual*>& firstIndividuals, std::vector<AbstractIndividual*>& sample)
+	{
 		for (auto firstPlayer = firstIndividuals.begin(); firstPlayer != firstIndividuals.end(); firstPlayer++)
 		{
 			for (auto secondPlayer = sample.begin(); secondPlayer != sample.end(); secondPlayer++)
